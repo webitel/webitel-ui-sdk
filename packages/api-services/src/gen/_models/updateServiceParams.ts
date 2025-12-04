@@ -6,5 +6,5 @@
  */
 
 export type UpdateServiceParams = {
-	fields?: string[];
+fields?: string[];
 };

@@ -7,6 +7,6 @@
 import type { EngineAgentInTeam } from './engineAgentInTeam';
 
 export interface EngineListAgentInTeam {
-	items?: EngineAgentInTeam[];
-	next?: boolean;
+  items?: EngineAgentInTeam[];
+  next?: boolean;
 }

@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface UsersLogoutUserBody {
-	[key: string]: unknown;
-}
+export interface UsersLogoutUserBody { [key: string]: unknown }

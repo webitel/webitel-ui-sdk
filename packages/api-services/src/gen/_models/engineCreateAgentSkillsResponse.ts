@@ -6,5 +6,5 @@
  */
 
 export interface EngineCreateAgentSkillsResponse {
-	ids?: string[];
+  ids?: string[];
 }

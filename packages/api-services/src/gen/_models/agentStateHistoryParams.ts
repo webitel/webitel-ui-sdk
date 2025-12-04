@@ -6,10 +6,10 @@
  */
 
 export type AgentStateHistoryParams = {
-	page?: number;
-	size?: number;
-	timeFrom?: string;
-	timeTo?: string;
-	q?: string;
-	domainId?: string;
+page?: number;
+size?: number;
+timeFrom?: string;
+timeTo?: string;
+q?: string;
+domainId?: string;
 };

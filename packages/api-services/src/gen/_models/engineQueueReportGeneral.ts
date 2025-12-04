@@ -4,27 +4,26 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineLookup } from './engineLookup';
 import type { EngineQueueReportGeneralAgentStatus } from './engineQueueReportGeneralAgentStatus';
+import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueReportGeneral {
-	abandoned?: number;
-	agentStatus?: EngineQueueReportGeneralAgentStatus;
-	attempts?: number;
-	avgAhtSec?: number;
-	avgAsaSec?: number;
-	avgAwtSec?: number;
-	avgWrapSec?: number;
-	bridged?: number;
-	count?: string;
-	missed?: number;
-	processed?: number;
-	queue?: EngineLookup;
-	sl20?: number;
-	sl30?: number;
-	sumBillSec?: number;
-	team?: EngineLookup;
-	transferred?: number;
-	waiting?: number;
+  abandoned?: number;
+  agentStatus?: EngineQueueReportGeneralAgentStatus;
+  attempts?: number;
+  avgAhtSec?: number;
+  avgAsaSec?: number;
+  avgAwtSec?: number;
+  avgWrapSec?: number;
+  bridged?: number;
+  count?: string;
+  missed?: number;
+  processed?: number;
+  queue?: EngineLookup;
+  sl20?: number;
+  sl30?: number;
+  sumBillSec?: number;
+  team?: EngineLookup;
+  transferred?: number;
+  waiting?: number;
 }

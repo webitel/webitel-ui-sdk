@@ -6,5 +6,5 @@
  */
 
 export type DeleteListParams = {
-	domainId?: string;
+domainId?: string;
 };

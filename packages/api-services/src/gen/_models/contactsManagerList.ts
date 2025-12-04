@@ -10,9 +10,9 @@ import type { ContactsManager } from './contactsManager';
  * Manager dataset.
  */
 export interface ContactsManagerList {
-	/** Manager dataset page. */
-	data?: ContactsManager[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+  /** Manager dataset page. */
+  data?: ContactsManager[];
+  next?: boolean;
+  /** The page number of the partial result. */
+  page?: number;
 }

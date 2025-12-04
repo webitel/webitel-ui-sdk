@@ -6,31 +6,31 @@
  */
 
 export type SearchClassesParams = {
-	/**
-	 * TO BE REMOVED // bound to session.domain.id
-	 */
-	domain?: string;
-	/**
-	 * [filter]: like '%class%'
-	 */
-	class?: string;
-	/**
+/**
+ * TO BE REMOVED // bound to session.domain.id
+ */
+domain?: string;
+/**
+ * [filter]: like '%class%'
+ */
+class?: string;
+/**
  * int64 id = 3;  // [filter]: obj.id = id
 controls
 
 output
  */
-	fields?: string[];
-	/**
-	 * sort: "field" asc; "!field" desc
-	 */
-	sort?: string[];
-	/**
-	 * page number
-	 */
-	page?: number;
-	/**
-	 * page size
-	 */
-	size?: number;
+fields?: string[];
+/**
+ * sort: "field" asc; "!field" desc
+ */
+sort?: string[];
+/**
+ * page number
+ */
+page?: number;
+/**
+ * page size
+ */
+size?: number;
 };

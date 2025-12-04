@@ -6,30 +6,30 @@
  */
 
 export interface EngineActivityWorkspaceWidgetResponse {
-	available?: number;
-	avgHoldSec?: number;
-	avgTalkSec?: number;
-	callAbandoned?: number;
-	callDialerQueue?: number;
-	callHandled?: number;
-	callInbound?: number;
-	callInboundQueue?: number;
-	callManual?: number;
-	callMissed?: number;
-	callQueueMissed?: number;
-	chatAccepts?: number;
-	chatAht?: number;
-	occupancy?: number;
-	online?: number;
-	processing?: number;
-	queueTalkSec?: number;
-	scoreCount?: string;
-	scoreOptionalAvg?: number;
-	scoreOptionalSum?: number;
-	scoreRequiredAvg?: number;
-	scoreRequiredSum?: number;
-	sumTalkSec?: string;
-	taskAccepts?: number;
-	utilization?: number;
-	voiceMail?: number;
+  available?: number;
+  avgHoldSec?: number;
+  avgTalkSec?: number;
+  callAbandoned?: number;
+  callDialerQueue?: number;
+  callHandled?: number;
+  callInbound?: number;
+  callInboundQueue?: number;
+  callManual?: number;
+  callMissed?: number;
+  callQueueMissed?: number;
+  chatAccepts?: number;
+  chatAht?: number;
+  occupancy?: number;
+  online?: number;
+  processing?: number;
+  queueTalkSec?: number;
+  scoreCount?: string;
+  scoreOptionalAvg?: number;
+  scoreOptionalSum?: number;
+  scoreRequiredAvg?: number;
+  scoreRequiredSum?: number;
+  sumTalkSec?: string;
+  taskAccepts?: number;
+  utilization?: number;
+  voiceMail?: number;
 }

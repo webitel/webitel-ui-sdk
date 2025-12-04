@@ -6,39 +6,44 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ApiSearchPermissionResponse,
-	GetPermissionsParams,
+  ApiSearchPermissionResponse,
+  GetPermissionsParams
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getPermissions =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary GetPermissions list available from application
-			 */
-			const getPermissions = <
-				TData = AxiosResponse<ApiSearchPermissionResponse>,
-			>(
-				params?: GetPermissionsParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/permissions', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
 
-			// --- footer start
-			return { getPermissions };
-		};
-export type GetPermissionsResult = AxiosResponse<ApiSearchPermissionResponse>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getPermissions
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary GetPermissions list available from application
+ */
+const getPermissions = <TData = AxiosResponse<ApiSearchPermissionResponse>>(
+    params?: GetPermissionsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/permissions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {getPermissions}};
+export type GetPermissionsResult = AxiosResponse<ApiSearchPermissionResponse>
+
+            // --- footer end
+          

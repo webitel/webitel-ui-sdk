@@ -6,5 +6,5 @@
  */
 
 export interface EngineAttemptResultResponse {
-	status?: string;
+  status?: string;
 }

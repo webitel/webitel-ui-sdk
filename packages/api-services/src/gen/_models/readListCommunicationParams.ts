@@ -6,5 +6,5 @@
  */
 
 export type ReadListCommunicationParams = {
-	domainId?: string;
+domainId?: string;
 };

@@ -6,6 +6,6 @@
  */
 
 export type DeleteAgentSkillsParams = {
-	id?: string[];
-	skillId?: string[];
+id?: string[];
+skillId?: string[];
 };

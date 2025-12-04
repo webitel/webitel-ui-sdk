@@ -6,8 +6,8 @@
  */
 
 export type UpdateRelatedCase2Params = {
-	/**
-	 * Fields to include in the response.
-	 */
-	fields?: string[];
+/**
+ * Fields to include in the response.
+ */
+fields?: string[];
 };

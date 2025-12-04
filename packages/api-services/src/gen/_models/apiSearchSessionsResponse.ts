@@ -7,7 +7,7 @@
 import type { ApiSession } from './apiSession';
 
 export interface ApiSearchSessionsResponse {
-	items?: ApiSession[];
-	next?: boolean;
-	page?: number;
+  items?: ApiSession[];
+  next?: boolean;
+  page?: number;
 }

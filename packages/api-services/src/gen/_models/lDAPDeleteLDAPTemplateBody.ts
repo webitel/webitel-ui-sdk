@@ -6,16 +6,16 @@
  */
 
 export interface LDAPDeleteLDAPTemplateBody {
-	baseDn?: string;
-	disabled?: boolean;
-	enabled?: boolean;
-	fields?: string[];
-	id?: string[];
-	name?: string;
-	objclass?: string;
-	/** default: 1 */
-	page?: number;
-	q?: string;
-	size?: number;
-	sort?: string[];
+  baseDn?: string;
+  disabled?: boolean;
+  enabled?: boolean;
+  fields?: string[];
+  id?: string[];
+  name?: string;
+  objclass?: string;
+  /** default: 1 */
+  page?: number;
+  q?: string;
+  size?: number;
+  sort?: string[];
 }

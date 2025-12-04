@@ -7,5 +7,5 @@
 import type { StorageStartFileTranscriptResponseTranscriptJob } from './storageStartFileTranscriptResponseTranscriptJob';
 
 export interface StorageStartFileTranscriptResponse {
-	items?: StorageStartFileTranscriptResponseTranscriptJob[];
+  items?: StorageStartFileTranscriptResponseTranscriptJob[];
 }

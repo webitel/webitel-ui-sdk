@@ -6,6 +6,6 @@
  */
 
 export interface EngineListSkillAgentListSkillAgg {
-	enabled?: boolean;
-	potentialRows?: number;
+  enabled?: boolean;
+  potentialRows?: number;
 }

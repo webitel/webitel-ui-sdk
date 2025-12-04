@@ -10,10 +10,10 @@ import type { ContactsDynamicGroup } from './contactsDynamicGroup';
  * A list of Dynamic Groups.
  */
 export interface ContactsDynamicGroupList {
-	/** List of dynamic groups. */
-	items?: ContactsDynamicGroup[];
-	/** Have more records. */
-	next?: boolean;
-	/** Page number of the partial result. */
-	page?: number;
+  /** List of dynamic groups. */
+  items?: ContactsDynamicGroup[];
+  /** Have more records. */
+  next?: boolean;
+  /** Page number of the partial result. */
+  page?: number;
 }

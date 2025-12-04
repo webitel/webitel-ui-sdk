@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WebitelMediaExporterPdfChannel =
-	(typeof WebitelMediaExporterPdfChannel)[keyof typeof WebitelMediaExporterPdfChannel];
+export type WebitelMediaExporterPdfChannel = typeof WebitelMediaExporterPdfChannel[keyof typeof WebitelMediaExporterPdfChannel];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelMediaExporterPdfChannel = {
-	Call: 'CALL',
-	Screenrecording: 'SCREENRECORDING',
+  Call: 'CALL',
+  Screenrecording: 'SCREENRECORDING',
 } as const;

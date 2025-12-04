@@ -6,5 +6,5 @@
  */
 
 export type ReadSkillParams = {
-	domainId?: string;
+domainId?: string;
 };

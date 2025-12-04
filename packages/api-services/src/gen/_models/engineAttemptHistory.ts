@@ -4,33 +4,32 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineAttemptHistoryVariables } from './engineAttemptHistoryVariables';
 import type { EngineLookup } from './engineLookup';
 import type { EngineMemberCommunication } from './engineMemberCommunication';
+import type { EngineAttemptHistoryVariables } from './engineAttemptHistoryVariables';
 
 export interface EngineAttemptHistory {
-	agent?: EngineLookup;
-	agentCallId?: string;
-	amdResult?: string;
-	attempts?: number;
-	bridgedAt?: string;
-	bucket?: EngineLookup;
-	channel?: string;
-	destination?: EngineMemberCommunication;
-	display?: string;
-	id?: string;
-	joinedAt?: string;
-	leavingAt?: string;
-	list?: EngineLookup;
-	member?: EngineLookup;
-	memberCallId?: string;
-	offeredAgents?: EngineLookup[];
-	offeringAt?: string;
-	position?: number;
-	queue?: EngineLookup;
-	reportingAt?: string;
-	resource?: EngineLookup;
-	result?: string;
-	variables?: EngineAttemptHistoryVariables;
+  agent?: EngineLookup;
+  agentCallId?: string;
+  amdResult?: string;
+  attempts?: number;
+  bridgedAt?: string;
+  bucket?: EngineLookup;
+  channel?: string;
+  destination?: EngineMemberCommunication;
+  display?: string;
+  id?: string;
+  joinedAt?: string;
+  leavingAt?: string;
+  list?: EngineLookup;
+  member?: EngineLookup;
+  memberCallId?: string;
+  offeredAgents?: EngineLookup[];
+  offeringAt?: string;
+  position?: number;
+  queue?: EngineLookup;
+  reportingAt?: string;
+  resource?: EngineLookup;
+  result?: string;
+  variables?: EngineAttemptHistoryVariables;
 }

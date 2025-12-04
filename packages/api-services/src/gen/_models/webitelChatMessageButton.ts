@@ -7,12 +7,12 @@
 import type { WebitelChatMessageButtonRequest } from './webitelChatMessageButtonRequest';
 
 export interface WebitelChatMessageButton {
-	/** Postback/Callback data. */
-	code?: string;
-	/** Request to share contact info. */
-	share?: WebitelChatMessageButtonRequest;
-	/** Caption to display. */
-	text?: string;
-	/** URL to navigate to .. */
-	url?: string;
+  /** Postback/Callback data. */
+  code?: string;
+  /** Request to share contact info. */
+  share?: WebitelChatMessageButtonRequest;
+  /** Caption to display. */
+  text?: string;
+  /** URL to navigate to .. */
+  url?: string;
 }

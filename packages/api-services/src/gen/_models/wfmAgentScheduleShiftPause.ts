@@ -7,13 +7,13 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmAgentScheduleShiftPause {
-	cause?: WfmLookupEntity;
-	createdAt?: string;
-	createdBy?: WfmLookupEntity;
-	domainId?: string;
-	end?: string;
-	id?: string;
-	start?: string;
-	updatedAt?: string;
-	updatedBy?: WfmLookupEntity;
+  cause?: WfmLookupEntity;
+  createdAt?: string;
+  createdBy?: WfmLookupEntity;
+  domainId?: string;
+  end?: string;
+  id?: string;
+  start?: string;
+  updatedAt?: string;
+  updatedBy?: WfmLookupEntity;
 }

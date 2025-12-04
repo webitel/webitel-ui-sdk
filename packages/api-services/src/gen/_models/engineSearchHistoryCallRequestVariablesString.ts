@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineSearchHistoryCallRequestVariablesString = {
-	[key: string]: string;
-};
+export type EngineSearchHistoryCallRequestVariablesString = {[key: string]: string};

@@ -6,5 +6,5 @@
  */
 
 export interface ApiServerInfoResponse {
-	key?: string;
+  key?: string;
 }

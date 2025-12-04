@@ -6,10 +6,10 @@
  */
 
 export type ListLinksParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	ids?: string[];
-	sort?: string;
-	fields?: string[];
+page?: number;
+size?: number;
+q?: string;
+ids?: string[];
+sort?: string;
+fields?: string[];
 };

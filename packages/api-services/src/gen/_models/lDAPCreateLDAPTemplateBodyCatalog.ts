@@ -6,5 +6,5 @@
  */
 
 export type LDAPCreateLDAPTemplateBodyCatalog = {
-	name?: string;
+  name?: string;
 };

@@ -6,228 +6,218 @@
  */
 import * as zod from 'zod/v4';
 
-export const deleteDomainQueryParams = zod.object({
-	domain: zod.string().optional(),
-	dc: zod.string().optional(),
-});
 
-export const deleteDomainResponse = zod.object({});
+export const deleteDomainQueryParams = zod.object({
+  "domain": zod.string().optional(),
+  "dc": zod.string().optional()
+})
+
+export const deleteDomainResponse = zod.object({
+
+})
 
 export const readDomainQueryParams = zod.object({
-	domain: zod.string().optional(),
-	dc: zod.string().optional(),
-});
+  "domain": zod.string().optional(),
+  "dc": zod.string().optional()
+})
 
 export const readDomainResponse = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			dc: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
 
 export const searchDomainsQueryParams = zod.object({
-	domain: zod.string().optional().describe('like'),
-	fields: zod.array(zod.string()).optional().describe('attrs'),
-	sort: zod.array(zod.string()).optional(),
-	page: zod.string().optional(),
-	size: zod.string().optional(),
-});
+  "domain": zod.string().optional().describe('like'),
+  "fields": zod.array(zod.string()).optional().describe('attrs'),
+  "sort": zod.array(zod.string()).optional(),
+  "page": zod.string().optional(),
+  "size": zod.string().optional()
+})
 
 export const searchDomainsResponse = zod.object({
-	domains: zod
-		.array(
-			zod.object({
-				country: zod.string().optional(),
-				createdAt: zod.string().optional(),
-				createdBy: zod.string().optional(),
-				dc: zod.string().optional(),
-				domain: zod.string().optional(),
-				email: zod.string().optional(),
-				locality: zod.string().optional(),
-				organization: zod.string().optional(),
-				postalAddress: zod.string().optional(),
-				postalCode: zod.string().optional(),
-				stateOrProvince: zod.string().optional(),
-				streetAddress: zod.string().optional(),
-				telephoneNumber: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod.string().optional(),
-			}),
-		)
-		.optional(),
-});
+  "domains": zod.array(zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+})).optional()
+})
 
 export const createDomainBody = zod.object({
-	organization: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			dc: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-	password: zod.string().optional(),
-	superuser: zod.string().optional(),
-});
+  "organization": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional(),
+  "password": zod.string().optional(),
+  "superuser": zod.string().optional()
+})
 
-export const createDomainResponse = zod.object({});
+export const createDomainResponse = zod.object({
+
+})
 
 export const deleteDomain2Params = zod.object({
-	dc: zod.string(),
-});
+  "dc": zod.string()
+})
 
 export const deleteDomain2QueryParams = zod.object({
-	domain: zod.string().optional(),
-});
+  "domain": zod.string().optional()
+})
 
-export const deleteDomain2Response = zod.object({});
+export const deleteDomain2Response = zod.object({
+
+})
 
 export const readDomain2Params = zod.object({
-	dc: zod.string(),
-});
+  "dc": zod.string()
+})
 
 export const readDomain2QueryParams = zod.object({
-	domain: zod.string().optional(),
-});
+  "domain": zod.string().optional()
+})
 
 export const readDomain2Response = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			dc: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
 
 export const updateDomain2Params = zod.object({
-	'domain.dc': zod.string().describe('component'),
-});
+  "domain.dc": zod.string().describe('component')
+})
 
 export const updateDomain2Body = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
 
 export const updateDomain2Response = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			dc: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
 
 export const updateDomainParams = zod.object({
-	'domain.dc': zod.string().describe('component'),
-});
+  "domain.dc": zod.string().describe('component')
+})
 
 export const updateDomainBody = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
 
 export const updateDomainResponse = zod.object({
-	domain: zod
-		.object({
-			country: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod.string().optional(),
-			dc: zod.string().optional(),
-			domain: zod.string().optional(),
-			email: zod.string().optional(),
-			locality: zod.string().optional(),
-			organization: zod.string().optional(),
-			postalAddress: zod.string().optional(),
-			postalCode: zod.string().optional(),
-			stateOrProvince: zod.string().optional(),
-			streetAddress: zod.string().optional(),
-			telephoneNumber: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod.string().optional(),
-		})
-		.optional(),
-});
+  "domain": zod.object({
+  "country": zod.string().optional(),
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.string().optional(),
+  "dc": zod.string().optional(),
+  "domain": zod.string().optional(),
+  "email": zod.string().optional(),
+  "locality": zod.string().optional(),
+  "organization": zod.string().optional(),
+  "postalAddress": zod.string().optional(),
+  "postalCode": zod.string().optional(),
+  "stateOrProvince": zod.string().optional(),
+  "streetAddress": zod.string().optional(),
+  "telephoneNumber": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.string().optional()
+}).optional()
+})
+

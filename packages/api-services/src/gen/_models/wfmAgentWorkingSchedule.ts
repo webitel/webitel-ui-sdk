@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WfmAgentSchedule } from './wfmAgentSchedule';
 import type { WfmLookupEntity } from './wfmLookupEntity';
+import type { WfmAgentSchedule } from './wfmAgentSchedule';
 
 export interface WfmAgentWorkingSchedule {
-	agent?: WfmLookupEntity;
-	schedule?: WfmAgentSchedule[];
+  agent?: WfmLookupEntity;
+  schedule?: WfmAgentSchedule[];
 }

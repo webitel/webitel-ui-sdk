@@ -6,46 +6,38 @@
  */
 import * as zod from 'zod/v4';
 
+
 /**
  * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
  */
 export const getUserTfaKeyParams = zod.object({
-	user_id: zod.string(),
-});
+  "user_id": zod.string()
+})
 
 export const getUserTfaKeyResponse = zod.object({
-	totp: zod
-		.object({
-			url: zod.string().optional(),
-			user: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional()
-				.describe('UserId lookup value.'),
-		})
-		.optional(),
-});
+  "totp": zod.object({
+  "url": zod.string().optional(),
+  "user": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional().describe('UserId lookup value.')
+}).optional()
+})
 
 /**
  * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
  */
 export const generateUserTfaKeyParams = zod.object({
-	user_id: zod.string(),
-});
+  "user_id": zod.string()
+})
 
 export const generateUserTfaKeyResponse = zod.object({
-	totp: zod
-		.object({
-			url: zod.string().optional(),
-			user: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional()
-				.describe('UserId lookup value.'),
-		})
-		.optional(),
-});
+  "totp": zod.object({
+  "url": zod.string().optional(),
+  "user": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional().describe('UserId lookup value.')
+}).optional()
+})
+

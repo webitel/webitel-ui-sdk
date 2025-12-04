@@ -6,8 +6,8 @@
  */
 
 export type DeleteLDAPCatalogParams = {
-	/**
-	 * WITH objects bound to ?
-	 */
-	relatedObjects?: boolean;
+/**
+ * WITH objects bound to ?
+ */
+relatedObjects?: boolean;
 };

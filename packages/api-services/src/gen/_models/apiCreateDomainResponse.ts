@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface ApiCreateDomainResponse {
-	[key: string]: unknown;
-}
+export interface ApiCreateDomainResponse { [key: string]: unknown }

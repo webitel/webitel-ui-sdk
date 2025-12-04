@@ -6,5 +6,5 @@
  */
 
 export interface EngineMemberBulkResponse {
-	ids?: string[];
+  ids?: string[];
 }

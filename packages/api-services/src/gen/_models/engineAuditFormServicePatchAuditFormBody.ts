@@ -4,15 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineLookup } from './engineLookup';
 import type { EngineQuestion } from './engineQuestion';
+import type { EngineLookup } from './engineLookup';
 
 export interface EngineAuditFormServicePatchAuditFormBody {
-	description?: string;
-	enabled?: boolean;
-	fields?: string[];
-	name?: string;
-	questions?: EngineQuestion[];
-	teams?: EngineLookup[];
+  description?: string;
+  enabled?: boolean;
+  fields?: string[];
+  name?: string;
+  questions?: EngineQuestion[];
+  teams?: EngineLookup[];
 }

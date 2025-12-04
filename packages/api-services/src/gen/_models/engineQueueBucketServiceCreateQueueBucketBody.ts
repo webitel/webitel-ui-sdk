@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueBucketServiceCreateQueueBucketBody {
-	bucket?: EngineLookup;
-	disabled?: boolean;
-	priority?: number;
-	ratio?: number;
+  bucket?: EngineLookup;
+  disabled?: boolean;
+  priority?: number;
+  ratio?: number;
 }

@@ -7,16 +7,16 @@
 import type { SearchScreenRecordingsType } from './searchScreenRecordingsType';
 
 export type SearchScreenRecordingsParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	uploadedAtFrom?: string;
-	uploadedAtTo?: string;
-	referenceId?: string[];
-	retentionUntilFrom?: string;
-	retentionUntilTo?: string;
-	type?: SearchScreenRecordingsType;
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: string[];
+uploadedAtFrom?: string;
+uploadedAtTo?: string;
+referenceId?: string[];
+retentionUntilFrom?: string;
+retentionUntilTo?: string;
+type?: SearchScreenRecordingsType;
 };

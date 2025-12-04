@@ -6,5 +6,5 @@
  */
 
 export type CreateStatusConditionParams = {
-	fields?: string[];
+fields?: string[];
 };

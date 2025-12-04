@@ -10,12 +10,12 @@ import type { WebitelMediaExporterPdfChannel } from './webitelMediaExporterPdfCh
  * Request for generating a PDF export.
  */
 export interface WebitelMediaExporterPdfServiceGeneratePdfExportBody {
-	/** Channel type (e.g., "screenshot"). */
-	channel?: WebitelMediaExporterPdfChannel;
-	/** Optional list of specific file IDs to include. */
-	fileIds?: string[];
-	/** Start timestamp (Unix millis). */
-	from?: string;
-	/** End timestamp (Unix millis). */
-	to?: string;
+  /** Channel type (e.g., "screenshot"). */
+  channel?: WebitelMediaExporterPdfChannel;
+  /** Optional list of specific file IDs to include. */
+  fileIds?: string[];
+  /** Start timestamp (Unix millis). */
+  from?: string;
+  /** End timestamp (Unix millis). */
+  to?: string;
 }

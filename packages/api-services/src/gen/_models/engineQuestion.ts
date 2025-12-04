@@ -4,17 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineAuditQuestionType } from './engineAuditQuestionType';
 import type { EngineQuestionOption } from './engineQuestionOption';
+import type { EngineAuditQuestionType } from './engineAuditQuestionType';
 
 export interface EngineQuestion {
-	criticalViolation?: boolean;
-	description?: string;
-	max?: number;
-	min?: number;
-	options?: EngineQuestionOption[];
-	question?: string;
-	required?: boolean;
-	type?: EngineAuditQuestionType;
+  criticalViolation?: boolean;
+  description?: string;
+  max?: number;
+  min?: number;
+  options?: EngineQuestionOption[];
+  question?: string;
+  required?: boolean;
+  type?: EngineAuditQuestionType;
 }

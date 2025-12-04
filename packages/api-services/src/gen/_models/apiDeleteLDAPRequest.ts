@@ -6,6 +6,6 @@
  */
 
 export interface ApiDeleteLDAPRequest {
-	id?: string;
-	relatedObjects?: boolean;
+  id?: string;
+  relatedObjects?: boolean;
 }

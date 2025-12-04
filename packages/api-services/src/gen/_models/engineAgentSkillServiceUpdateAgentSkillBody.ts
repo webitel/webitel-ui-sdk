@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentSkillServiceUpdateAgentSkillBody {
-	capacity?: number;
-	domainId?: string;
-	enabled?: boolean;
-	skill?: EngineLookup;
+  capacity?: number;
+  domainId?: string;
+  enabled?: boolean;
+  skill?: EngineLookup;
 }

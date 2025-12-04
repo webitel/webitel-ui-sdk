@@ -7,16 +7,16 @@
 import type { EngineMemberServiceAttemptResultBodyVariables } from './engineMemberServiceAttemptResultBodyVariables';
 
 export interface EngineMemberServiceAttemptResultBody {
-	agentId?: number;
-	description?: string;
-	display?: boolean;
-	excludeCurrentCommunication?: boolean;
-	expireAt?: string;
-	minOfferingAt?: string;
-	nextMemberId?: string;
-	onlyCurrentCommunication?: boolean;
-	status?: string;
-	transferQueueId?: string;
-	variables?: EngineMemberServiceAttemptResultBodyVariables;
-	waitBetweenRetries?: number;
+  agentId?: number;
+  description?: string;
+  display?: boolean;
+  excludeCurrentCommunication?: boolean;
+  expireAt?: string;
+  minOfferingAt?: string;
+  nextMemberId?: string;
+  onlyCurrentCommunication?: boolean;
+  status?: string;
+  transferQueueId?: string;
+  variables?: EngineMemberServiceAttemptResultBodyVariables;
+  waitBetweenRetries?: number;
 }

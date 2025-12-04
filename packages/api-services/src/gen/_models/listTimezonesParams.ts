@@ -6,34 +6,34 @@
  */
 
 export type ListTimezonesParams = {
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
+/**
+ * Page number of result dataset records. offset = (page*size)
+ */
+page?: number;
+/**
+ * Size count of records on result page. limit = (size++)
+ */
+size?: number;
+/**
  * Search term: location name;
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-	q?: string;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Record(s) with unique ID only.
-	 */
-	id?: string[];
-	/**
-	 * Primary timezone only.
-	 */
-	primary?: boolean;
+q?: string;
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
+ * Fields to be retrieved as a result.
+ */
+fields?: string[];
+/**
+ * Record(s) with unique ID only.
+ */
+id?: string[];
+/**
+ * Primary timezone only.
+ */
+primary?: boolean;
 };

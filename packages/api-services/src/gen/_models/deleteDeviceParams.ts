@@ -6,9 +6,9 @@
  */
 
 export type DeleteDeviceParams = {
-	permanent?: boolean;
-	/**
-	 * bulk
-	 */
-	ids?: string[];
+permanent?: boolean;
+/**
+ * bulk
+ */
+ids?: string[];
 };

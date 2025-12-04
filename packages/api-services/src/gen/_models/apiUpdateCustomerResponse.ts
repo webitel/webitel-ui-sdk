@@ -7,5 +7,5 @@
 import type { ApiCustomer } from './apiCustomer';
 
 export interface ApiUpdateCustomerResponse {
-	customer?: ApiCustomer;
+  customer?: ApiCustomer;
 }

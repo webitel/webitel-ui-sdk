@@ -9,6 +9,6 @@
  * Response message after unlinking a communication from a case.
  */
 export interface WebitelCasesUnlinkCommunicationResponse {
-	/** Affected rows. */
-	affected?: string;
+  /** Affected rows. */
+  affected?: string;
 }

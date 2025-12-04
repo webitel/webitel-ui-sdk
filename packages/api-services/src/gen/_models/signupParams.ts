@@ -6,28 +6,28 @@
  */
 
 export type SignupParams = {
-	/**
-	 * domain name
-	 */
-	domain?: string;
-	/**
-	 * username
-	 */
-	username?: string;
-	/**
-	 * user password
-	 */
-	password?: string;
-	/**
-	 * scope request control
-	 */
-	scope?: string[];
-	/**
-	 * license/certificate
-	 */
-	certificate?: string;
-	/**
-	 * OPTIONAL. Mobile device /login request ?
-	 */
-	mobile?: boolean;
+/**
+ * domain name
+ */
+domain?: string;
+/**
+ * username
+ */
+username?: string;
+/**
+ * user password
+ */
+password?: string;
+/**
+ * scope request control
+ */
+scope?: string[];
+/**
+ * license/certificate
+ */
+certificate?: string;
+/**
+ * OPTIONAL. Mobile device /login request ?
+ */
+mobile?: boolean;
 };

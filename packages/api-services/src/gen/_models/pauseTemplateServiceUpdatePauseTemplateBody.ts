@@ -7,5 +7,5 @@
 import type { PauseTemplateServiceUpdatePauseTemplateBodyItem } from './pauseTemplateServiceUpdatePauseTemplateBodyItem';
 
 export type PauseTemplateServiceUpdatePauseTemplateBody = {
-	item?: PauseTemplateServiceUpdatePauseTemplateBodyItem;
+  item?: PauseTemplateServiceUpdatePauseTemplateBodyItem;
 };

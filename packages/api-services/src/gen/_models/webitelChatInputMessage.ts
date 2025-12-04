@@ -8,7 +8,7 @@ import type { WebitelChatInputFile } from './webitelChatInputFile';
 import type { WebitelChatInputKeyboard } from './webitelChatInputKeyboard';
 
 export interface WebitelChatInputMessage {
-	file?: WebitelChatInputFile;
-	keyboard?: WebitelChatInputKeyboard;
-	text?: string;
+  file?: WebitelChatInputFile;
+  keyboard?: WebitelChatInputKeyboard;
+  text?: string;
 }

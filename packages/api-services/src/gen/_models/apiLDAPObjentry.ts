@@ -8,11 +8,11 @@ import type { ApiLDAPObjentryEntry } from './apiLDAPObjentryEntry';
 import type { ApiLDAPObjentryObject } from './apiLDAPObjentryObject';
 
 export interface ApiLDAPObjentry {
-	class?: string;
-	/** map<string, string> entry = 1; */
-	entry?: ApiLDAPObjentryEntry;
-	errs?: string[];
-	object?: ApiLDAPObjentryObject;
-	proc?: string;
-	warn?: string[];
+  class?: string;
+  /** map<string, string> entry = 1; */
+  entry?: ApiLDAPObjentryEntry;
+  errs?: string[];
+  object?: ApiLDAPObjentryObject;
+  proc?: string;
+  warn?: string[];
 }

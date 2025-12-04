@@ -6,26 +6,26 @@
  */
 
 export type LicenseUsersParams = {
-	/**
+/**
  * ----- Search Options ----- //
 
 default: 16
  */
-	size?: number;
-	/**
-	 * default: 1
-	 */
-	page?: number;
-	/**
-	 * set of output fields
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * filter: term of search (username)
-	 */
-	q?: string;
+size?: number;
+/**
+ * default: 1
+ */
+page?: number;
+/**
+ * set of output fields
+ */
+fields?: string[];
+/**
+ * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+ */
+sort?: string[];
+/**
+ * filter: term of search (username)
+ */
+q?: string;
 };

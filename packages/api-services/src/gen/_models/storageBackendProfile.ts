@@ -8,19 +8,19 @@ import type { EngineLookup } from './engineLookup';
 import type { StorageBackendProfileProperties } from './storageBackendProfileProperties';
 
 export interface StorageBackendProfile {
-	createdAt?: string;
-	createdBy?: EngineLookup;
-	dataCount?: string;
-	dataSize?: string;
-	description?: string;
-	disabled?: boolean;
-	expireDays?: number;
-	id?: string;
-	maxSize?: string;
-	name?: string;
-	priority?: number;
-	properties?: StorageBackendProfileProperties;
-	type?: string;
-	updatedAt?: string;
-	updatedBy?: EngineLookup;
+  createdAt?: string;
+  createdBy?: EngineLookup;
+  dataCount?: string;
+  dataSize?: string;
+  description?: string;
+  disabled?: boolean;
+  expireDays?: number;
+  id?: string;
+  maxSize?: string;
+  name?: string;
+  priority?: number;
+  properties?: StorageBackendProfileProperties;
+  type?: string;
+  updatedAt?: string;
+  updatedBy?: EngineLookup;
 }

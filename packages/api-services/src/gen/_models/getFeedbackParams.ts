@@ -6,5 +6,5 @@
  */
 
 export type GetFeedbackParams = {
-	key?: string;
+key?: string;
 };

@@ -6,8 +6,8 @@
  */
 
 export type ClassesUpdateClassBodyClass = {
-	abac?: boolean;
-	class?: string;
-	obac?: boolean;
-	rbac?: boolean;
+  abac?: boolean;
+  class?: string;
+  obac?: boolean;
+  rbac?: boolean;
 };

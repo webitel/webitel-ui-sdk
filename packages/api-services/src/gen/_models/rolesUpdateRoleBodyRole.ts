@@ -4,24 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiObjectId } from './apiObjectId';
-import type { ApiPermission } from './apiPermission';
 import type { ApiUserId } from './apiUserId';
+import type { ApiObjectId } from './apiObjectId';
 import type { RolesUpdateRoleBodyRoleMetadata } from './rolesUpdateRoleBodyRoleMetadata';
+import type { ApiPermission } from './apiPermission';
 
 export type RolesUpdateRoleBodyRole = {
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
-	description?: string;
-	/** users/roles */
-	members?: ApiObjectId[];
-	metadata?: RolesUpdateRoleBodyRoleMetadata;
-	name?: string;
-	permissions?: ApiPermission[];
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: boolean;
+  createdAt?: string;
+  createdBy?: ApiUserId;
+  deletedAt?: string;
+  deletedBy?: ApiUserId;
+  description?: string;
+  /** users/roles */
+  members?: ApiObjectId[];
+  metadata?: RolesUpdateRoleBodyRoleMetadata;
+  name?: string;
+  permissions?: ApiPermission[];
+  updatedAt?: string;
+  updatedBy?: ApiUserId;
+  user?: boolean;
 };

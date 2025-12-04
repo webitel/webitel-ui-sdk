@@ -7,6 +7,6 @@
 import type { EnginePresetQuery } from './enginePresetQuery';
 
 export interface EngineListPresetQuery {
-	items?: EnginePresetQuery[];
-	next?: boolean;
+  items?: EnginePresetQuery[];
+  next?: boolean;
 }

@@ -6,5 +6,5 @@
  */
 
 export interface EngineRoutingOutboundCallServiceMovePositionRoutingOutboundCallBody {
-	domainId?: string;
+  domainId?: string;
 }

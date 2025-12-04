@@ -7,5 +7,5 @@
 import type { ApiSession } from './apiSession';
 
 export interface ApiReadSessionResponse {
-	session?: ApiSession;
+  session?: ApiSession;
 }

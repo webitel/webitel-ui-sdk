@@ -4,17 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WfmLookupEntity } from './wfmLookupEntity';
 import type { WfmPauseTemplateCause } from './wfmPauseTemplateCause';
+import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export type PauseTemplateServiceUpdatePauseTemplateBodyItem = {
-	causes?: WfmPauseTemplateCause[];
-	createdAt?: string;
-	createdBy?: WfmLookupEntity;
-	description?: string;
-	domainId?: string;
-	name?: string;
-	updatedAt?: string;
-	updatedBy?: WfmLookupEntity;
+  causes?: WfmPauseTemplateCause[];
+  createdAt?: string;
+  createdBy?: WfmLookupEntity;
+  description?: string;
+  domainId?: string;
+  name?: string;
+  updatedAt?: string;
+  updatedBy?: WfmLookupEntity;
 };

@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiUserId } from './apiUserId';
 import type { LDAPUpdateLDAPTemplateBodyTemplateAgent } from './lDAPUpdateLDAPTemplateBodyTemplateAgent';
 import type { LDAPUpdateLDAPTemplateBodyTemplateCatalog } from './lDAPUpdateLDAPTemplateBodyTemplateCatalog';
+import type { ApiUserId } from './apiUserId';
 import type { LDAPUpdateLDAPTemplateBodyTemplateDevice } from './lDAPUpdateLDAPTemplateBodyTemplateDevice';
 import type { LDAPUpdateLDAPTemplateBodyTemplateRole } from './lDAPUpdateLDAPTemplateBodyTemplateRole';
 import type { LDAPUpdateLDAPTemplateBodyTemplateUser } from './lDAPUpdateLDAPTemplateBodyTemplateUser';
@@ -16,18 +15,18 @@ import type { LDAPUpdateLDAPTemplateBodyTemplateUser } from './lDAPUpdateLDAPTem
  * Template changes.
  */
 export type LDAPUpdateLDAPTemplateBodyTemplate = {
-	agent?: LDAPUpdateLDAPTemplateBodyTemplateAgent;
-	baseDn?: string;
-	catalog?: LDAPUpdateLDAPTemplateBodyTemplateCatalog;
-	/** unix */
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	device?: LDAPUpdateLDAPTemplateBodyTemplateDevice;
-	enabled?: boolean;
-	name?: string;
-	role?: LDAPUpdateLDAPTemplateBodyTemplateRole;
-	search?: string;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: LDAPUpdateLDAPTemplateBodyTemplateUser;
+  agent?: LDAPUpdateLDAPTemplateBodyTemplateAgent;
+  baseDn?: string;
+  catalog?: LDAPUpdateLDAPTemplateBodyTemplateCatalog;
+  /** unix */
+  createdAt?: string;
+  createdBy?: ApiUserId;
+  device?: LDAPUpdateLDAPTemplateBodyTemplateDevice;
+  enabled?: boolean;
+  name?: string;
+  role?: LDAPUpdateLDAPTemplateBodyTemplateRole;
+  search?: string;
+  updatedAt?: string;
+  updatedBy?: ApiUserId;
+  user?: LDAPUpdateLDAPTemplateBodyTemplateUser;
 };

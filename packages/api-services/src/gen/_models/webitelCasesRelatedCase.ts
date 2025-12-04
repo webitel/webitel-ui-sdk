@@ -12,24 +12,24 @@ import type { WebitelCasesRelationType } from './webitelCasesRelationType';
  * Represents a related case with its relationship details.
  */
 export interface WebitelCasesRelatedCase {
-	/** Timestamp (in milliseconds) of when the relation was created. */
-	createdAt?: string;
-	/** User who created the relation. */
-	createdBy?: GeneralLookup;
-	/** Etag for the related case entity. */
-	etag?: string;
-	/** Unique identifier for the related case. */
-	id?: string;
-	/** Primary case details. */
-	primaryCase?: WebitelCasesRelatedCaseLookup;
-	/** Related case details. */
-	relatedCase?: WebitelCasesRelatedCaseLookup;
-	/** Relation type between cases. */
-	relationType?: WebitelCasesRelationType;
-	/** Timestamp (in milliseconds) of the last update. */
-	updatedAt?: string;
-	/** User who last updated the relation. */
-	updatedBy?: GeneralLookup;
-	/** Version number of the related case, used for concurrency control. */
-	ver?: number;
+  /** Timestamp (in milliseconds) of when the relation was created. */
+  createdAt?: string;
+  /** User who created the relation. */
+  createdBy?: GeneralLookup;
+  /** Etag for the related case entity. */
+  etag?: string;
+  /** Unique identifier for the related case. */
+  id?: string;
+  /** Primary case details. */
+  primaryCase?: WebitelCasesRelatedCaseLookup;
+  /** Related case details. */
+  relatedCase?: WebitelCasesRelatedCaseLookup;
+  /** Relation type between cases. */
+  relationType?: WebitelCasesRelationType;
+  /** Timestamp (in milliseconds) of the last update. */
+  updatedAt?: string;
+  /** User who last updated the relation. */
+  updatedBy?: GeneralLookup;
+  /** Version number of the related case, used for concurrency control. */
+  ver?: number;
 }

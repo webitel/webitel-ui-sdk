@@ -7,14 +7,14 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesInputCatalog {
-	closeReasonGroup?: GeneralLookup;
-	code?: string;
-	description?: string;
-	name?: string;
-	prefix?: string;
-	skills?: GeneralLookup[];
-	sla?: GeneralLookup;
-	state?: boolean;
-	status?: GeneralLookup;
-	teams?: GeneralLookup[];
+  closeReasonGroup?: GeneralLookup;
+  code?: string;
+  description?: string;
+  name?: string;
+  prefix?: string;
+  skills?: GeneralLookup[];
+  sla?: GeneralLookup;
+  state?: boolean;
+  status?: GeneralLookup;
+  teams?: GeneralLookup[];
 }

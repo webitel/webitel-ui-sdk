@@ -6,5 +6,5 @@
  */
 
 export interface OAuth2FederationDeleteOAuthServiceBody {
-	permanent?: boolean;
+  permanent?: boolean;
 }

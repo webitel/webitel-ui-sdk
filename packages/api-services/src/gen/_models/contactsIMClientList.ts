@@ -7,9 +7,9 @@
 import type { ContactsIMClient } from './contactsIMClient';
 
 export interface ContactsIMClientList {
-	/** IMClient dataset page. */
-	data?: ContactsIMClient[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+  /** IMClient dataset page. */
+  data?: ContactsIMClient[];
+  next?: boolean;
+  /** The page number of the partial result. */
+  page?: number;
 }

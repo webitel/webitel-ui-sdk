@@ -6,12 +6,12 @@
  */
 
 export type SearchQueueHookParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	schemaId?: number[];
-	event?: string[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: number[];
+schemaId?: number[];
+event?: string[];
 };

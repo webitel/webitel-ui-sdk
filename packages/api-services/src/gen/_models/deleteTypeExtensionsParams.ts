@@ -6,5 +6,5 @@
  */
 
 export type DeleteTypeExtensionsParams = {
-	fields?: string[];
+fields?: string[];
 };

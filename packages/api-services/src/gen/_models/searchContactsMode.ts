@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchContactsMode =
-	(typeof SearchContactsMode)[keyof typeof SearchContactsMode];
+export type SearchContactsMode = typeof SearchContactsMode[keyof typeof SearchContactsMode];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchContactsMode = {
-	READ: 'READ',
-	WRITE: 'WRITE',
-	DELETE: 'DELETE',
+  READ: 'READ',
+  WRITE: 'WRITE',
+  DELETE: 'DELETE',
 } as const;

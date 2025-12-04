@@ -7,5 +7,5 @@
 import type { EngineEmailProfileParamsOAuth2 } from './engineEmailProfileParamsOAuth2';
 
 export interface EngineEmailProfileParams {
-	oauth2?: EngineEmailProfileParamsOAuth2;
+  oauth2?: EngineEmailProfileParamsOAuth2;
 }

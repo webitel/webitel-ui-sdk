@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeleteForecastCalculationResponse {
-	id?: string;
+  id?: string;
 }

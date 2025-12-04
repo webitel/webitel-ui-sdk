@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueSkillServiceUpdateQueueSkillBody {
-	buckets?: EngineLookup[];
-	enabled?: boolean;
-	lvl?: number;
-	maxCapacity?: number;
-	minCapacity?: number;
-	skill?: EngineLookup;
+  buckets?: EngineLookup[];
+  enabled?: boolean;
+  lvl?: number;
+  maxCapacity?: number;
+  minCapacity?: number;
+  skill?: EngineLookup;
 }

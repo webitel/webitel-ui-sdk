@@ -6,11 +6,11 @@
  */
 
 export type SearchPresetQueryParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	section?: string[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: number[];
+section?: string[];
 };

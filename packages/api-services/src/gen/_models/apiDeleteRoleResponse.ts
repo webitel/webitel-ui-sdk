@@ -7,5 +7,5 @@
 import type { ApiRole } from './apiRole';
 
 export interface ApiDeleteRoleResponse {
-	deleted?: ApiRole;
+  deleted?: ApiRole;
 }

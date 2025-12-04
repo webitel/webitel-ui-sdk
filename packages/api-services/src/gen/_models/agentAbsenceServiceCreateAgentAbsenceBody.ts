@@ -7,5 +7,5 @@
 import type { WfmAbsence } from './wfmAbsence';
 
 export type AgentAbsenceServiceCreateAgentAbsenceBody = {
-	item?: WfmAbsence;
+  item?: WfmAbsence;
 };

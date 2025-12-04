@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface ApiRevokeCertificateResponse {
-	[key: string]: unknown;
-}
+export interface ApiRevokeCertificateResponse { [key: string]: unknown }

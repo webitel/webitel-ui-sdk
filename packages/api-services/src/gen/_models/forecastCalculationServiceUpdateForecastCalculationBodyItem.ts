@@ -7,13 +7,13 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export type ForecastCalculationServiceUpdateForecastCalculationBodyItem = {
-	args?: string[];
-	createdAt?: string;
-	createdBy?: WfmLookupEntity;
-	description?: string;
-	domainId?: string;
-	name?: string;
-	procedure?: string;
-	updatedAt?: string;
-	updatedBy?: WfmLookupEntity;
+  args?: string[];
+  createdAt?: string;
+  createdBy?: WfmLookupEntity;
+  description?: string;
+  domainId?: string;
+  name?: string;
+  procedure?: string;
+  updatedAt?: string;
+  updatedBy?: WfmLookupEntity;
 };

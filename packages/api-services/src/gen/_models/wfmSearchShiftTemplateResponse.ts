@@ -7,6 +7,6 @@
 import type { WfmShiftTemplate } from './wfmShiftTemplate';
 
 export interface WfmSearchShiftTemplateResponse {
-	items?: WfmShiftTemplate[];
-	next?: boolean;
+  items?: WfmShiftTemplate[];
+  next?: boolean;
 }

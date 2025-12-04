@@ -6,8 +6,8 @@
  */
 
 export type DeleteCaseParams = {
-	/**
-	 * List of fields to include in the deleted case response.
-	 */
-	fields?: string[];
+/**
+ * List of fields to include in the deleted case response.
+ */
+fields?: string[];
 };

@@ -7,5 +7,5 @@
 import type { WfmForecastCalculation } from './wfmForecastCalculation';
 
 export interface WfmCreateForecastCalculationResponse {
-	item?: WfmForecastCalculation;
+  item?: WfmForecastCalculation;
 }

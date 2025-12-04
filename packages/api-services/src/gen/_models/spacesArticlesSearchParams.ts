@@ -6,30 +6,30 @@
  */
 
 export type SpacesArticlesSearchParams = {
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
+/**
+ * Size count of records on result page. limit = (size++)
+ */
+size?: number;
+/**
+ * Page number of result dataset records. offset = (page*size)
+ */
+page?: number;
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
  * Search term: location name;
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-	q?: string;
-	/**
-	 * Active Article only.
-	 */
-	state?: boolean;
-	/**
-	 * Tags associated with the article.
-	 */
-	tags?: string[];
+q?: string;
+/**
+ * Active Article only.
+ */
+state?: boolean;
+/**
+ * Tags associated with the article.
+ */
+tags?: string[];
 };

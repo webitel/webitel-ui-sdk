@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface FormatItalic {
-	[key: string]: unknown;
-}
+export interface FormatItalic { [key: string]: unknown }

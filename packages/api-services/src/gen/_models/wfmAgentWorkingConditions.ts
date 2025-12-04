@@ -7,6 +7,6 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmAgentWorkingConditions {
-	pauseTemplate?: WfmLookupEntity;
-	workingCondition?: WfmLookupEntity;
+  pauseTemplate?: WfmLookupEntity;
+  workingCondition?: WfmLookupEntity;
 }

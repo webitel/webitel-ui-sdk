@@ -6,19 +6,19 @@
  */
 
 export type UpdateArticleBody = {
-	/** Tags associated with the article. */
-	tags?: string[];
-	/** The parent article ID. */
-	parentArticle?: string;
-	/** Indicates that the article is pinned on the top of list. */
-	pinned?: boolean;
-	/** [VALUE]: --------------------------------------
+  /** Tags associated with the article. */
+  tags?: string[];
+  /** The parent article ID. */
+  parentArticle?: string;
+  /** Indicates that the article is pinned on the top of list. */
+  pinned?: boolean;
+  /** [VALUE]: --------------------------------------
 Space ID associated with. */
-	spaceId?: string;
-	/** Indicates if article is active and actual. */
-	state?: boolean;
-	/** The text content of the article. */
-	text?: string;
-	/** The title of the article. */
-	title?: string;
+  spaceId?: string;
+  /** Indicates if article is active and actual. */
+  state?: boolean;
+  /** The text content of the article. */
+  text?: string;
+  /** The title of the article. */
+  title?: string;
 };

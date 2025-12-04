@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchTeamHookEventItem =
-	(typeof SearchTeamHookEventItem)[keyof typeof SearchTeamHookEventItem];
+export type SearchTeamHookEventItem = typeof SearchTeamHookEventItem[keyof typeof SearchTeamHookEventItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchTeamHookEventItem = {
-	teamHookEventUndefined: 'teamHookEventUndefined',
-	agent_status: 'agent_status',
+  teamHookEventUndefined: 'teamHookEventUndefined',
+  agent_status: 'agent_status',
 } as const;

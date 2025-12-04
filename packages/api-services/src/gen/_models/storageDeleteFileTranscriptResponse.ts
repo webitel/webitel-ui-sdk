@@ -6,5 +6,5 @@
  */
 
 export interface StorageDeleteFileTranscriptResponse {
-	items?: string[];
+  items?: string[];
 }

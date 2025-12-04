@@ -9,6 +9,6 @@
  * CallerId display value.
  */
 export interface ApiCallerId {
-	name?: string;
-	number?: string;
+  name?: string;
+  number?: string;
 }

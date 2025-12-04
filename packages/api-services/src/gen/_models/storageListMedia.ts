@@ -7,6 +7,6 @@
 import type { StorageMediaFile } from './storageMediaFile';
 
 export interface StorageListMedia {
-	items?: StorageMediaFile[];
-	next?: boolean;
+  items?: StorageMediaFile[];
+  next?: boolean;
 }

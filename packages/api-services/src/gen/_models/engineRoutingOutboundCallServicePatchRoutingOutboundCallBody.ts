@@ -7,11 +7,11 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRoutingOutboundCallServicePatchRoutingOutboundCallBody {
-	description?: string;
-	disabled?: boolean;
-	domainId?: string;
-	fields?: string[];
-	name?: string;
-	pattern?: string;
-	schema?: EngineLookup;
+  description?: string;
+  disabled?: boolean;
+  domainId?: string;
+  fields?: string[];
+  name?: string;
+  pattern?: string;
+  schema?: EngineLookup;
 }

@@ -6,10 +6,10 @@
  */
 
 export interface EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody {
-	allowAdmin?: boolean;
-	allowAgent?: boolean;
-	allowSupervisor?: boolean;
-	description?: string;
-	limitMin?: number;
-	name?: string;
+  allowAdmin?: boolean;
+  allowAgent?: boolean;
+  allowSupervisor?: boolean;
+  description?: string;
+  limitMin?: number;
+  name?: string;
 }

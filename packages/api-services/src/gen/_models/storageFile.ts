@@ -4,25 +4,24 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineLookup } from './engineLookup';
+import type { StorageUploadFileChannel } from './storageUploadFileChannel';
 import type { StorageCustomFileProperties } from './storageCustomFileProperties';
 import type { StorageThumbnail } from './storageThumbnail';
-import type { StorageUploadFileChannel } from './storageUploadFileChannel';
+import type { EngineLookup } from './engineLookup';
 
 export interface StorageFile {
-	channel?: StorageUploadFileChannel;
-	id?: string;
-	mimeType?: string;
-	name?: string;
-	properties?: StorageCustomFileProperties;
-	referenceId?: string;
-	retentionUntil?: string;
-	sha256Sum?: string;
-	size?: string;
-	thumbnail?: StorageThumbnail;
-	uploadedAt?: string;
-	uploadedBy?: EngineLookup;
-	uuid?: string;
-	viewName?: string;
+  channel?: StorageUploadFileChannel;
+  id?: string;
+  mimeType?: string;
+  name?: string;
+  properties?: StorageCustomFileProperties;
+  referenceId?: string;
+  retentionUntil?: string;
+  sha256Sum?: string;
+  size?: string;
+  thumbnail?: StorageThumbnail;
+  uploadedAt?: string;
+  uploadedBy?: EngineLookup;
+  uuid?: string;
+  viewName?: string;
 }

@@ -16,16 +16,16 @@
  - API: API source type.
  - MANUAL: Manual source type.
  */
-export type WebitelCasesSourceType =
-	(typeof WebitelCasesSourceType)[keyof typeof WebitelCasesSourceType];
+export type WebitelCasesSourceType = typeof WebitelCasesSourceType[keyof typeof WebitelCasesSourceType];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelCasesSourceType = {
-	TypeUnspecified: 'TYPE_UNSPECIFIED',
-	Call: 'CALL',
-	Chat: 'CHAT',
-	SocialMedia: 'SOCIAL_MEDIA',
-	Email: 'EMAIL',
-	Api: 'API',
-	Manual: 'MANUAL',
+  TypeUnspecified: 'TYPE_UNSPECIFIED',
+  Call: 'CALL',
+  Chat: 'CHAT',
+  SocialMedia: 'SOCIAL_MEDIA',
+  Email: 'EMAIL',
+  Api: 'API',
+  Manual: 'MANUAL',
 } as const;

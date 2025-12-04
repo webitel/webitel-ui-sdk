@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRegion {
-	description?: string;
-	id?: string;
-	name?: string;
-	timezone?: EngineLookup;
+  description?: string;
+  id?: string;
+  name?: string;
+  timezone?: EngineLookup;
 }

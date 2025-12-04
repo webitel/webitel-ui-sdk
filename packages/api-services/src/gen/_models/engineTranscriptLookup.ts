@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineTranscriptLookup {
-	file?: EngineLookup;
-	fileId?: string;
-	id?: string;
-	locale?: string;
+  file?: EngineLookup;
+  fileId?: string;
+  id?: string;
+  locale?: string;
 }

@@ -6,5 +6,5 @@
  */
 
 export type ReadMediaFileParams = {
-	domainId?: string;
+domainId?: string;
 };

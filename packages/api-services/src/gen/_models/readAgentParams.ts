@@ -6,5 +6,5 @@
  */
 
 export type ReadAgentParams = {
-	domainId?: string;
+domainId?: string;
 };

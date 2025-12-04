@@ -4,16 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WfmAbsenceType } from './wfmAbsenceType';
 import type { WfmLookupEntity } from './wfmLookupEntity';
+import type { WfmAbsenceType } from './wfmAbsenceType';
 
 export type AgentAbsenceServiceUpdateAgentAbsenceBodyItem = {
-	absentAt?: string;
-	createdAt?: string;
-	createdBy?: WfmLookupEntity;
-	domainId?: string;
-	typeId?: WfmAbsenceType;
-	updatedAt?: string;
-	updatedBy?: WfmLookupEntity;
+  absentAt?: string;
+  createdAt?: string;
+  createdBy?: WfmLookupEntity;
+  domainId?: string;
+  typeId?: WfmAbsenceType;
+  updatedAt?: string;
+  updatedBy?: WfmLookupEntity;
 };

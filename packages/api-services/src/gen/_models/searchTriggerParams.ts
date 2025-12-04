@@ -6,11 +6,11 @@
  */
 
 export type SearchTriggerParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	schemaId?: number[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: number[];
+schemaId?: number[];
 };

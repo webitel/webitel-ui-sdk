@@ -7,8 +7,8 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesInputSLACondition {
-	name?: string;
-	priorities?: GeneralLookup[];
-	reactionTime?: string;
-	resolutionTime?: string;
+  name?: string;
+  priorities?: GeneralLookup[];
+  reactionTime?: string;
+  resolutionTime?: string;
 }

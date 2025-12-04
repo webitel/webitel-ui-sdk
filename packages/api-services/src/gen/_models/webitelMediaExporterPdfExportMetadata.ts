@@ -9,14 +9,14 @@
  * Metadata about a PDF export task.
  */
 export interface WebitelMediaExporterPdfExportMetadata {
-	/** File name of the export. */
-	fileName?: string;
-	/** MIME type, e.g., "application/pdf". */
-	mimeType?: string;
-	/** File size in bytes (0 if not ready). */
-	size?: string;
-	/** Task status: pending | processing | done | failed. */
-	status?: string;
-	/** Unique identifier of the task. */
-	taskId?: string;
+  /** File name of the export. */
+  fileName?: string;
+  /** MIME type, e.g., "application/pdf". */
+  mimeType?: string;
+  /** File size in bytes (0 if not ready). */
+  size?: string;
+  /** Task status: pending | processing | done | failed. */
+  status?: string;
+  /** Unique identifier of the task. */
+  taskId?: string;
 }

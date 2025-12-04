@@ -8,6 +8,6 @@ import type { GoogleRpcStatus } from './googleRpcStatus';
 import type { WebitelMediaExporterPdfExportChunk } from './webitelMediaExporterPdfExportChunk';
 
 export type DownloadPdfExport200 = {
-	error?: GoogleRpcStatus;
-	result?: WebitelMediaExporterPdfExportChunk;
+  error?: GoogleRpcStatus;
+  result?: WebitelMediaExporterPdfExportChunk;
 };

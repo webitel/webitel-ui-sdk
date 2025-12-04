@@ -6,20 +6,20 @@
  */
 
 export interface EngineAgentCallStatistics {
-	abandoned?: number;
-	avgHoldSec?: number;
-	avgTalkSec?: number;
-	chatAccepts?: number;
-	chatAht?: number;
-	count?: number;
-	handles?: number;
-	maxHoldSec?: number;
-	maxTalkSec?: number;
-	minHoldSec?: number;
-	minTalkSec?: number;
-	name?: string;
-	occupancy?: number;
-	sumHoldSec?: number;
-	sumTalkSec?: number;
-	utilization?: number;
+  abandoned?: number;
+  avgHoldSec?: number;
+  avgTalkSec?: number;
+  chatAccepts?: number;
+  chatAht?: number;
+  count?: number;
+  handles?: number;
+  maxHoldSec?: number;
+  maxTalkSec?: number;
+  minHoldSec?: number;
+  minTalkSec?: number;
+  name?: string;
+  occupancy?: number;
+  sumHoldSec?: number;
+  sumTalkSec?: number;
+  utilization?: number;
 }

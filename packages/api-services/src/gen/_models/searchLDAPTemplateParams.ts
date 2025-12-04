@@ -6,36 +6,36 @@
  */
 
 export type SearchLDAPTemplateParams = {
-	/**
+/**
  * ----- Select Options -------------------------
 
 default: 1
  */
-	page?: number;
-	/**
-	 * default: 16
-	 */
-	size?: number;
-	/**
-	 * attributes list
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
+page?: number;
+/**
+ * default: 16
+ */
+size?: number;
+/**
+ * attributes list
+ */
+fields?: string[];
+/**
+ * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+ */
+sort?: string[];
+/**
  * ----- Search Basic Filters ---------------------------
 OPTIONAL. Search templates by .id
  */
-	id?: string[];
-	/**
-	 * OPTIONAL. Filter(s) SET
-	 */
-	q?: string;
-	name?: string;
-	baseDn?: string;
-	objclass?: string;
-	enabled?: boolean;
-	disabled?: boolean;
+id?: string[];
+/**
+ * OPTIONAL. Filter(s) SET
+ */
+q?: string;
+name?: string;
+baseDn?: string;
+objclass?: string;
+enabled?: boolean;
+disabled?: boolean;
 };

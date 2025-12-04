@@ -10,10 +10,10 @@ import type { GeneralLookup } from './generalLookup';
  * Input structure for creating or updating a case comment.
  */
 export interface WebitelCasesInputCaseComment {
-	/** Identifier for the comment. */
-	etag?: string;
-	/** Content of the comment. */
-	text?: string;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userId?: GeneralLookup;
+  /** Identifier for the comment. */
+  etag?: string;
+  /** Content of the comment. */
+  text?: string;
+  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+  userId?: GeneralLookup;
 }

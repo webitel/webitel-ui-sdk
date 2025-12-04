@@ -7,5 +7,5 @@
 import type { AccessGrant } from './accessGrant';
 
 export interface ApiListAccessResponse {
-	list?: AccessGrant[];
+  list?: AccessGrant[];
 }

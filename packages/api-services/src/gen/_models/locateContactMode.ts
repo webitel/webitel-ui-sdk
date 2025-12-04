@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LocateContactMode =
-	(typeof LocateContactMode)[keyof typeof LocateContactMode];
+export type LocateContactMode = typeof LocateContactMode[keyof typeof LocateContactMode];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const LocateContactMode = {
-	READ: 'READ',
-	WRITE: 'WRITE',
-	DELETE: 'DELETE',
+  READ: 'READ',
+  WRITE: 'WRITE',
+  DELETE: 'DELETE',
 } as const;

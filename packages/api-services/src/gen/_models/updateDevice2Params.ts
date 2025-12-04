@@ -6,8 +6,8 @@
  */
 
 export type UpdateDevice2Params = {
-	/**
-	 * PATCH: partial update
-	 */
-	fields?: string[];
+/**
+ * PATCH: partial update
+ */
+fields?: string[];
 };

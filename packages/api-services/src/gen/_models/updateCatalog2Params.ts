@@ -6,5 +6,5 @@
  */
 
 export type UpdateCatalog2Params = {
-	fields?: string[];
+fields?: string[];
 };

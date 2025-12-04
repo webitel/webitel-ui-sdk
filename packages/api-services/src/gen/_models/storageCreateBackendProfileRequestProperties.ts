@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageCreateBackendProfileRequestProperties = {
-	[key: string]: string;
-};
+export type StorageCreateBackendProfileRequestProperties = {[key: string]: string};

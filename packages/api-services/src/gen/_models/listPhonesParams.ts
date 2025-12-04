@@ -6,50 +6,50 @@
  */
 
 export type ListPhonesParams = {
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
+/**
+ * Page number of result dataset records. offset = (page*size)
+ */
+page?: number;
+/**
+ * Size count of records on result page. limit = (size++)
+ */
+size?: number;
+/**
  * Search term: phone number.
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-	q?: string;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Fields to be retrieved into result.
-	 */
-	fields?: string[];
-	/**
-	 * Link(s) with unique ID only.
-	 */
-	id?: string[];
-	/**
-	 * Primary phone  only.
-	 */
-	primary?: boolean;
-	/**
-	 * Verified phone only.
-	 */
-	verified?: boolean;
-	/**
-	 * Reference Object unique ID.
-	 */
-	typeId?: string;
-	/**
-	 * Reference Object well-known type.
-	 */
-	typeType?: string;
-	/**
-	 * Reference Object display name.
-	 */
-	typeName?: string;
+q?: string;
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
+ * Fields to be retrieved into result.
+ */
+fields?: string[];
+/**
+ * Link(s) with unique ID only.
+ */
+id?: string[];
+/**
+ * Primary phone  only.
+ */
+primary?: boolean;
+/**
+ * Verified phone only.
+ */
+verified?: boolean;
+/**
+ * Reference Object unique ID.
+ */
+typeId?: string;
+/**
+ * Reference Object well-known type.
+ */
+typeType?: string;
+/**
+ * Reference Object display name.
+ */
+typeName?: string;
 };

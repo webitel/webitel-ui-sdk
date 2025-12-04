@@ -4,18 +4,17 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { GeneralLookup } from './generalLookup';
 import type { UpdateRelatedCaseInputBodyPrimaryCase } from './updateRelatedCaseInputBodyPrimaryCase';
+import type { GeneralLookup } from './generalLookup';
 import type { WebitelCasesRelationType } from './webitelCasesRelationType';
 
 export type UpdateRelatedCaseInputBody = {
-	/** Primary case details. */
-	primary_case?: UpdateRelatedCaseInputBodyPrimaryCase;
-	/** Related case details. */
-	related_case?: GeneralLookup;
-	/** Relation type. */
-	relation_type?: WebitelCasesRelationType;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userID?: GeneralLookup;
+  /** Primary case details. */
+  primary_case?: UpdateRelatedCaseInputBodyPrimaryCase;
+  /** Related case details. */
+  related_case?: GeneralLookup;
+  /** Relation type. */
+  relation_type?: WebitelCasesRelationType;
+  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+  userID?: GeneralLookup;
 };

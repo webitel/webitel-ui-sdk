@@ -4,612 +4,146 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
+
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
 import type {
-	ApiCreateDomainResponse,
-	ApiDeleteDomainResponse,
-	ApiReadDomainResponse,
-	ApiSearchDomainsResponse,
-	ApiUpdateDomainResponse,
+  ApiCreateDomainResponse,
+  ApiDeleteDomainResponse,
+  ApiReadDomainResponse,
+  ApiSearchDomainsResponse,
+  ApiUpdateDomainResponse
 } from '.././_models';
 
-export const getDeleteDomainResponseMock = (): ApiDeleteDomainResponse => ({});
 
-export const getReadDomainResponseMock = (
-	overrideResponse: Partial<ApiReadDomainResponse> = {},
-): ApiReadDomainResponse => ({
-	domain: faker.helpers.arrayElement([
-		{
-			country: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			dc: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			domain: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			email: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			locality: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			organization: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalCode: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			stateOrProvince: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			streetAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			telephoneNumber: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getDeleteDomainResponseMock = (): ApiDeleteDomainResponse => ({})
 
-export const getSearchDomainsResponseMock = (
-	overrideResponse: Partial<ApiSearchDomainsResponse> = {},
-): ApiSearchDomainsResponse => ({
-	domains: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			country: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			dc: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			domain: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			email: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			locality: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			organization: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalCode: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			stateOrProvince: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			streetAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			telephoneNumber: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getReadDomainResponseMock = (overrideResponse: Partial< ApiReadDomainResponse > = {}): ApiReadDomainResponse => ({domain: faker.helpers.arrayElement([{country: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dc: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), locality: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), organization: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalCode: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), stateOrProvince: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), streetAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), telephoneNumber: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
 
-export const getCreateDomainResponseMock = (): ApiCreateDomainResponse => ({});
+export const getSearchDomainsResponseMock = (overrideResponse: Partial< ApiSearchDomainsResponse > = {}): ApiSearchDomainsResponse => ({domains: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({country: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dc: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), locality: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), organization: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalCode: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), stateOrProvince: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), streetAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), telephoneNumber: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), ...overrideResponse})
 
-export const getDeleteDomain2ResponseMock = (): ApiDeleteDomainResponse => ({});
+export const getCreateDomainResponseMock = (): ApiCreateDomainResponse => ({})
 
-export const getReadDomain2ResponseMock = (
-	overrideResponse: Partial<ApiReadDomainResponse> = {},
-): ApiReadDomainResponse => ({
-	domain: faker.helpers.arrayElement([
-		{
-			country: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			dc: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			domain: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			email: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			locality: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			organization: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalCode: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			stateOrProvince: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			streetAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			telephoneNumber: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getDeleteDomain2ResponseMock = (): ApiDeleteDomainResponse => ({})
 
-export const getUpdateDomain2ResponseMock = (
-	overrideResponse: Partial<ApiUpdateDomainResponse> = {},
-): ApiUpdateDomainResponse => ({
-	domain: faker.helpers.arrayElement([
-		{
-			country: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			dc: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			domain: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			email: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			locality: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			organization: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalCode: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			stateOrProvince: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			streetAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			telephoneNumber: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getReadDomain2ResponseMock = (overrideResponse: Partial< ApiReadDomainResponse > = {}): ApiReadDomainResponse => ({domain: faker.helpers.arrayElement([{country: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dc: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), locality: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), organization: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalCode: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), stateOrProvince: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), streetAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), telephoneNumber: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
 
-export const getUpdateDomainResponseMock = (
-	overrideResponse: Partial<ApiUpdateDomainResponse> = {},
-): ApiUpdateDomainResponse => ({
-	domain: faker.helpers.arrayElement([
-		{
-			country: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			dc: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			domain: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			email: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			locality: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			organization: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			postalCode: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			stateOrProvince: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			streetAddress: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			telephoneNumber: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getUpdateDomain2ResponseMock = (overrideResponse: Partial< ApiUpdateDomainResponse > = {}): ApiUpdateDomainResponse => ({domain: faker.helpers.arrayElement([{country: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dc: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), locality: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), organization: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalCode: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), stateOrProvince: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), streetAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), telephoneNumber: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
 
-export const getDeleteDomainMockHandler = (
-	overrideResponse?:
-		| ApiDeleteDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<ApiDeleteDomainResponse> | ApiDeleteDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/domain',
-		async (info) => {
-			await delay(1000);
+export const getUpdateDomainResponseMock = (overrideResponse: Partial< ApiUpdateDomainResponse > = {}): ApiUpdateDomainResponse => ({domain: faker.helpers.arrayElement([{country: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dc: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), locality: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), organization: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), postalCode: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), stateOrProvince: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), streetAddress: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), telephoneNumber: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteDomainResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
 
-export const getReadDomainMockHandler = (
-	overrideResponse?:
-		| ApiReadDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ApiReadDomainResponse> | ApiReadDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/domain',
-		async (info) => {
-			await delay(1000);
+export const getDeleteDomainMockHandler = (overrideResponse?: ApiDeleteDomainResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ApiDeleteDomainResponse> | ApiDeleteDomainResponse), options?: RequestHandlerOptions) => {
+  return http.delete('*/domain', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteDomainResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getReadDomainResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getReadDomainMockHandler = (overrideResponse?: ApiReadDomainResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiReadDomainResponse> | ApiReadDomainResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/domain', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getReadDomainResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getSearchDomainsMockHandler = (
-	overrideResponse?:
-		| ApiSearchDomainsResponse
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ApiSearchDomainsResponse> | ApiSearchDomainsResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/domains',
-		async (info) => {
-			await delay(1000);
+export const getSearchDomainsMockHandler = (overrideResponse?: ApiSearchDomainsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiSearchDomainsResponse> | ApiSearchDomainsResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/domains', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getSearchDomainsResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getSearchDomainsResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getCreateDomainMockHandler = (overrideResponse?: ApiCreateDomainResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiCreateDomainResponse> | ApiCreateDomainResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/domains', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getCreateDomainResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getCreateDomainMockHandler = (
-	overrideResponse?:
-		| ApiCreateDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<ApiCreateDomainResponse> | ApiCreateDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.post(
-		'*/domains',
-		async (info) => {
-			await delay(1000);
+export const getDeleteDomain2MockHandler = (overrideResponse?: ApiDeleteDomainResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ApiDeleteDomainResponse> | ApiDeleteDomainResponse), options?: RequestHandlerOptions) => {
+  return http.delete('*/domains/:dc', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteDomain2ResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getCreateDomainResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getReadDomain2MockHandler = (overrideResponse?: ApiReadDomainResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiReadDomainResponse> | ApiReadDomainResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/domains/:dc', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getReadDomain2ResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getDeleteDomain2MockHandler = (
-	overrideResponse?:
-		| ApiDeleteDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<ApiDeleteDomainResponse> | ApiDeleteDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/domains/:dc',
-		async (info) => {
-			await delay(1000);
+export const getUpdateDomain2MockHandler = (overrideResponse?: ApiUpdateDomainResponse | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ApiUpdateDomainResponse> | ApiUpdateDomainResponse), options?: RequestHandlerOptions) => {
+  return http.patch('*/domains/domain.dc}', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateDomain2ResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteDomain2ResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getReadDomain2MockHandler = (
-	overrideResponse?:
-		| ApiReadDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ApiReadDomainResponse> | ApiReadDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/domains/:dc',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getReadDomain2ResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getUpdateDomain2MockHandler = (
-	overrideResponse?:
-		| ApiUpdateDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<ApiUpdateDomainResponse> | ApiUpdateDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.patch(
-		'*/domains/domain.dc}',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateDomain2ResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getUpdateDomainMockHandler = (
-	overrideResponse?:
-		| ApiUpdateDomainResponse
-		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<ApiUpdateDomainResponse> | ApiUpdateDomainResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.put(
-		'*/domains/domain.dc}',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateDomainResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getUpdateDomainMockHandler = (overrideResponse?: ApiUpdateDomainResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ApiUpdateDomainResponse> | ApiUpdateDomainResponse), options?: RequestHandlerOptions) => {
+  return http.put('*/domains/domain.dc}', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateDomainResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getDomainsMock = () => [
-	getDeleteDomainMockHandler(),
-	getReadDomainMockHandler(),
-	getSearchDomainsMockHandler(),
-	getCreateDomainMockHandler(),
-	getDeleteDomain2MockHandler(),
-	getReadDomain2MockHandler(),
-	getUpdateDomain2MockHandler(),
-	getUpdateDomainMockHandler(),
-];
+  getDeleteDomainMockHandler(),
+  getReadDomainMockHandler(),
+  getSearchDomainsMockHandler(),
+  getCreateDomainMockHandler(),
+  getDeleteDomain2MockHandler(),
+  getReadDomain2MockHandler(),
+  getUpdateDomain2MockHandler(),
+  getUpdateDomainMockHandler()]

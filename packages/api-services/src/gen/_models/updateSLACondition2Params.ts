@@ -6,5 +6,5 @@
  */
 
 export type UpdateSLACondition2Params = {
-	fields?: string[];
+fields?: string[];
 };

@@ -6,5 +6,5 @@
  */
 
 export type LocateLinkParams = {
-	fields?: string[];
+fields?: string[];
 };

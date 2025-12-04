@@ -4,16 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineLookup } from './engineLookup';
 import type { StorageImportTemplateServiceUpdateImportTemplateBodyParameters } from './storageImportTemplateServiceUpdateImportTemplateBodyParameters';
+import type { EngineLookup } from './engineLookup';
 
 /**
  * Update import template for CSV
  */
 export interface StorageImportTemplateServiceUpdateImportTemplateBody {
-	parameters?: StorageImportTemplateServiceUpdateImportTemplateBodyParameters;
-	description?: string;
-	name: string;
-	source?: EngineLookup;
+  parameters?: StorageImportTemplateServiceUpdateImportTemplateBodyParameters;
+  description?: string;
+  name: string;
+  source?: EngineLookup;
 }

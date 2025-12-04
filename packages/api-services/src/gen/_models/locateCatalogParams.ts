@@ -6,16 +6,16 @@
  */
 
 export type LocateCatalogParams = {
-	/**
+/**
  * Fields to be retrieved as a result.
 If the user passes "-" as the value for fields,
 it will retrieve all available fields for each catalog.
  */
-	fields?: string[];
-	/**
+fields?: string[];
+/**
  * Fields to be retrieved as a result for [SUBSERVICES].
 If the user passes "-" as the value for fields,
 it will retrieve all available fields for each catalog subservices.
  */
-	subFields?: string[];
+subFields?: string[];
 };

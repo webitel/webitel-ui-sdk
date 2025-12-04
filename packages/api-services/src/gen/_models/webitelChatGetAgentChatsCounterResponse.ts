@@ -6,5 +6,5 @@
  */
 
 export interface WebitelChatGetAgentChatsCounterResponse {
-	count?: number;
+  count?: number;
 }

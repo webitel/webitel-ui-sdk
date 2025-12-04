@@ -6,11 +6,11 @@
  */
 
 export interface EngineDefaultDeviceConfigResponseWebRTCDeviceConfig {
-	authorizationUser?: string;
-	displayName?: string;
-	extension?: string;
-	ha1?: string;
-	realm?: string;
-	server?: string;
-	uri?: string;
+  authorizationUser?: string;
+  displayName?: string;
+  extension?: string;
+  ha1?: string;
+  realm?: string;
+  server?: string;
+  uri?: string;
 }

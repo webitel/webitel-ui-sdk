@@ -6,7 +6,7 @@
  */
 
 export interface EngineEmailProfileParamsOAuth2 {
-	clientId?: string;
-	clientSecret?: string;
-	redirectUrl?: string;
+  clientId?: string;
+  clientSecret?: string;
+  redirectUrl?: string;
 }

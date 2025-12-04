@@ -6,7 +6,7 @@
  */
 
 export type LocateDataParams = {
-	/**
+/**
  * Fields [Q]uery to build result dataset record.
 ```
 fields ::= field [ *( "," field ) ]
@@ -21,5 +21,5 @@ DIGIT    = %x30-39            ; "0"-"9"
 USCORE   = %x5F ; underscore  ; "_"
 ```
  */
-	fields?: string[];
+fields?: string[];
 };

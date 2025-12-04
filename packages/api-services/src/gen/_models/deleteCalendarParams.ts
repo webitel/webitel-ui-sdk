@@ -6,5 +6,5 @@
  */
 
 export type DeleteCalendarParams = {
-	domainId?: string;
+domainId?: string;
 };

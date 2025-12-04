@@ -6,33 +6,33 @@
  */
 
 export type ListUserAccessTokenParams = {
-	/**
-	 * display name
-	 */
-	userName?: string;
-	/**
+/**
+ * display name
+ */
+userName?: string;
+/**
  * int32 page = 2;
 int64 size = 3;
 
 .usage ILIKE :q
  */
-	q?: string;
-	/**
+q?: string;
+/**
  * ----- Search Options -------------------------
 
 select: output (fields,...)
  */
-	fields?: string[];
-	/**
-	 * select: order by (fields,...)
-	 */
-	sort?: string[];
-	/**
-	 * select: offset {page}
-	 */
-	page?: number;
-	/**
-	 * select: limit {size}
-	 */
-	size?: number;
+fields?: string[];
+/**
+ * select: order by (fields,...)
+ */
+sort?: string[];
+/**
+ * select: offset {page}
+ */
+page?: number;
+/**
+ * select: limit {size}
+ */
+size?: number;
 };

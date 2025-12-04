@@ -6,12 +6,12 @@
  */
 
 export type SearchChatPlanParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	name?: string;
-	enabled?: boolean;
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: number[];
+name?: string;
+enabled?: boolean;
 };

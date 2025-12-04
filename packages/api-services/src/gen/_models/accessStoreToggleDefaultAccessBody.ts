@@ -4,14 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { AccessStoreToggleDefaultAccessBodyObject } from './accessStoreToggleDefaultAccessBodyObject';
 import type { ApiGrantAccessRequestV1 } from './apiGrantAccessRequestV1';
+import type { AccessStoreToggleDefaultAccessBodyObject } from './accessStoreToggleDefaultAccessBodyObject';
 
 export interface AccessStoreToggleDefaultAccessBody {
-	/** list of changes ...
+  /** list of changes ...
 
 [TO] (GRANT/REVOKE) */
-	list?: ApiGrantAccessRequestV1[];
-	object?: AccessStoreToggleDefaultAccessBodyObject;
+  list?: ApiGrantAccessRequestV1[];
+  object?: AccessStoreToggleDefaultAccessBodyObject;
 }

@@ -7,5 +7,5 @@
 import type { ApiPasswordExpiryWarning } from './apiPasswordExpiryWarning';
 
 export interface ApiWarningData {
-	passwordExpiry?: ApiPasswordExpiryWarning;
+  passwordExpiry?: ApiPasswordExpiryWarning;
 }

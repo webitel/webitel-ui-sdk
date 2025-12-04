@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineSkillServiceCreateSkillAgentBody {
-	agent?: EngineLookup[];
-	capacity?: number;
-	enabled?: boolean;
+  agent?: EngineLookup[];
+  capacity?: number;
+  enabled?: boolean;
 }

@@ -7,46 +7,46 @@
 import type { ListGroupsType } from './listGroupsType';
 
 export type ListGroupsParams = {
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Filter by unique IDs.
-	 */
-	id?: string[];
-	/**
+/**
+ * Page number of result dataset records. offset = (page*size)
+ */
+page?: number;
+/**
+ * Size count of records on result page. limit = (size++)
+ */
+size?: number;
+/**
+ * Fields to be retrieved as a result.
+ */
+fields?: string[];
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
+ * Filter by unique IDs.
+ */
+id?: string[];
+/**
  * Search term: group name;
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-	q?: string;
-	/**
-	 * Filter by group name.
-	 */
-	name?: string;
-	/**
+q?: string;
+/**
+ * Filter by group name.
+ */
+name?: string;
+/**
  * Filter by group type.
 
  - GROUP_TYPE_UNSPECIFIED: Default value
  - STATIC: Static group
  - DYNAMIC: Dynamic group
  */
-	type?: ListGroupsType;
-	/**
-	 * Filter by only enabled group
-	 */
-	enabled?: boolean;
+type?: ListGroupsType;
+/**
+ * Filter by only enabled group
+ */
+enabled?: boolean;
 };

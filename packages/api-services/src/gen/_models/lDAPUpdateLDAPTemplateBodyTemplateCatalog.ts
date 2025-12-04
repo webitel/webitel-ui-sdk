@@ -6,5 +6,5 @@
  */
 
 export type LDAPUpdateLDAPTemplateBodyTemplateCatalog = {
-	name?: string;
+  name?: string;
 };

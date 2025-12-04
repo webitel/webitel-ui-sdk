@@ -6,7 +6,7 @@
  */
 
 export interface StorageThumbnail {
-	mimeType?: string;
-	scale?: string;
-	size?: string;
+  mimeType?: string;
+  scale?: string;
+  size?: string;
 }

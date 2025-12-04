@@ -7,6 +7,6 @@
 import type { EngineAgentStatsStatistic } from './engineAgentStatsStatistic';
 
 export interface EngineListAgentStatsStatistic {
-	items?: EngineAgentStatsStatistic[];
-	next?: boolean;
+  items?: EngineAgentStatsStatistic[];
+  next?: boolean;
 }

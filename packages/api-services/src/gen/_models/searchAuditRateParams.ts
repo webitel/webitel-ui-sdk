@@ -6,14 +6,14 @@
  */
 
 export type SearchAuditRateParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	createdAtFrom?: string;
-	createdAtTo?: string;
-	id?: number[];
-	callId?: string[];
-	ratedUser?: string[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+createdAtFrom?: string;
+createdAtTo?: string;
+id?: number[];
+callId?: string[];
+ratedUser?: string[];
 };

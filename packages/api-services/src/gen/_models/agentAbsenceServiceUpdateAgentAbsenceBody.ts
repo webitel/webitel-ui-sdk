@@ -7,5 +7,5 @@
 import type { AgentAbsenceServiceUpdateAgentAbsenceBodyItem } from './agentAbsenceServiceUpdateAgentAbsenceBodyItem';
 
 export type AgentAbsenceServiceUpdateAgentAbsenceBody = {
-	item?: AgentAbsenceServiceUpdateAgentAbsenceBodyItem;
+  item?: AgentAbsenceServiceUpdateAgentAbsenceBodyItem;
 };

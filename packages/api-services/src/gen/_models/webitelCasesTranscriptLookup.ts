@@ -7,7 +7,7 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesTranscriptLookup {
-	file?: GeneralLookup;
-	id?: string;
-	locale?: string;
+  file?: GeneralLookup;
+  id?: string;
+  locale?: string;
 }

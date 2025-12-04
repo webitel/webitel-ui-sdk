@@ -7,10 +7,10 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsInputManager {
-	/** Unique ID of the latest version of an existing resource. */
-	etag: string;
-	/** Indicates whether this association must be default among others. */
-	primary?: boolean;
-	/** Responsible User. */
-	user?: WebitelcontactsLookup;
+  /** Unique ID of the latest version of an existing resource. */
+  etag: string;
+  /** Indicates whether this association must be default among others. */
+  primary?: boolean;
+  /** Responsible User. */
+  user?: WebitelcontactsLookup;
 }

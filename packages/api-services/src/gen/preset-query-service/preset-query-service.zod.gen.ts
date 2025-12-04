@@ -6,108 +6,106 @@
  */
 import * as zod from 'zod/v4';
 
+
 export const searchPresetQueryQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-	q: zod.string().optional(),
-	sort: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
-	id: zod.array(zod.number()).optional(),
-	section: zod.array(zod.string()).optional(),
-});
+  "page": zod.number().optional(),
+  "size": zod.number().optional(),
+  "q": zod.string().optional(),
+  "sort": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "id": zod.array(zod.number()).optional(),
+  "section": zod.array(zod.string()).optional()
+})
 
 export const searchPresetQueryResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				createdAt: zod.string().optional(),
-				description: zod.string().optional(),
-				id: zod.number().optional(),
-				name: zod.string().optional(),
-				section: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-});
+  "items": zod.array(zod.object({
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})).optional(),
+  "next": zod.boolean().optional()
+})
 
 export const createPresetQueryBody = zod.object({
-	description: zod.string().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-});
+  "description": zod.string().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional()
+})
 
 export const createPresetQueryResponse = zod.object({
-	createdAt: zod.string().optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-});
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})
 
 export const deletePresetQueryParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const deletePresetQueryResponse = zod.object({
-	createdAt: zod.string().optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-});
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})
 
 export const readPresetQueryParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const readPresetQueryResponse = zod.object({
-	createdAt: zod.string().optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-});
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})
 
 export const patchPresetQueryParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const patchPresetQueryBody = zod.object({
-	description: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-});
+  "description": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional()
+})
 
 export const patchPresetQueryResponse = zod.object({
-	createdAt: zod.string().optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-});
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})
 
 export const updatePresetQueryParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const updatePresetQueryBody = zod.object({
-	description: zod.string().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-});
+  "description": zod.string().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional()
+})
 
 export const updatePresetQueryResponse = zod.object({
-	createdAt: zod.string().optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	section: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-});
+  "createdAt": zod.string().optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "section": zod.string().optional(),
+  "updatedAt": zod.string().optional()
+})
+

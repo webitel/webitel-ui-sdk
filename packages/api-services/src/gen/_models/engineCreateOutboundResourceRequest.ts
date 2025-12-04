@@ -4,24 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineCreateOutboundResourceRequestVariables } from './engineCreateOutboundResourceRequestVariables';
-import type { EngineLookup } from './engineLookup';
 import type { EngineOutboundResourceParameters } from './engineOutboundResourceParameters';
+import type { EngineLookup } from './engineLookup';
+import type { EngineCreateOutboundResourceRequestVariables } from './engineCreateOutboundResourceRequestVariables';
 
 export interface EngineCreateOutboundResourceRequest {
-	parameters?: EngineOutboundResourceParameters;
-	description?: string;
-	enabled?: boolean;
-	errorIds?: string[];
-	failureDialDelay?: number;
-	gateway?: EngineLookup;
-	limit?: number;
-	maxSuccessivelyErrors?: number;
-	name?: string;
-	number?: string;
-	patterns?: string[];
-	reserve?: boolean;
-	rps?: number;
-	variables?: EngineCreateOutboundResourceRequestVariables;
+  parameters?: EngineOutboundResourceParameters;
+  description?: string;
+  enabled?: boolean;
+  errorIds?: string[];
+  failureDialDelay?: number;
+  gateway?: EngineLookup;
+  limit?: number;
+  maxSuccessivelyErrors?: number;
+  name?: string;
+  number?: string;
+  patterns?: string[];
+  reserve?: boolean;
+  rps?: number;
+  variables?: EngineCreateOutboundResourceRequestVariables;
 }

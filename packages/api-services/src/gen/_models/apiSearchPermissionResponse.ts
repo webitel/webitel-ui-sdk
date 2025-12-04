@@ -7,8 +7,8 @@
 import type { ApiPermission } from './apiPermission';
 
 export interface ApiSearchPermissionResponse {
-	items?: ApiPermission[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+  items?: ApiPermission[];
+  next?: boolean;
+  page?: number;
+  size?: number;
 }

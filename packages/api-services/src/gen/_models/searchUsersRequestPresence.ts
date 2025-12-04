@@ -6,6 +6,6 @@
  */
 
 export interface SearchUsersRequestPresence {
-	note?: string;
-	status?: string;
+  note?: string;
+  status?: string;
 }

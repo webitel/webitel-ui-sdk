@@ -6,5 +6,5 @@
  */
 
 export interface StorageRestoreFilesRequest {
-	id?: string[];
+  id?: string[];
 }

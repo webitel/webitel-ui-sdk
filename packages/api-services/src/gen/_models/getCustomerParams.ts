@@ -6,29 +6,29 @@
  */
 
 export type GetCustomerParams = {
-	/**
+/**
  * Available Filters
 
 show by customer id; serial number (uuid)
  */
-	id?: string;
-	/**
-	 * show if valid only!
-	 */
-	valid?: boolean;
-	/**
-	 * identifier
-	 */
-	domainId?: string;
-	/**
-	 * display name
-	 */
-	domainName?: string;
-	/**
+id?: string;
+/**
+ * show if valid only!
+ */
+valid?: boolean;
+/**
+ * identifier
+ */
+domainId?: string;
+/**
+ * display name
+ */
+domainName?: string;
+/**
  * Request Controls
 
 serial,
  */
-	fields?: string[];
-	sort?: string[];
+fields?: string[];
+sort?: string[];
 };

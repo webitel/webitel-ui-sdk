@@ -5,16 +5,16 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ListSourcesTypeItem =
-	(typeof ListSourcesTypeItem)[keyof typeof ListSourcesTypeItem];
+export type ListSourcesTypeItem = typeof ListSourcesTypeItem[keyof typeof ListSourcesTypeItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ListSourcesTypeItem = {
-	TYPE_UNSPECIFIED: 'TYPE_UNSPECIFIED',
-	CALL: 'CALL',
-	CHAT: 'CHAT',
-	SOCIAL_MEDIA: 'SOCIAL_MEDIA',
-	EMAIL: 'EMAIL',
-	API: 'API',
-	MANUAL: 'MANUAL',
+  TYPE_UNSPECIFIED: 'TYPE_UNSPECIFIED',
+  CALL: 'CALL',
+  CHAT: 'CHAT',
+  SOCIAL_MEDIA: 'SOCIAL_MEDIA',
+  EMAIL: 'EMAIL',
+  API: 'API',
+  MANUAL: 'MANUAL',
 } as const;

@@ -6,6 +6,6 @@
  */
 
 export interface WfmShiftTemplateTime {
-	end?: number;
-	start?: number;
+  end?: number;
+  start?: number;
 }

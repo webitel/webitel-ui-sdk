@@ -7,5 +7,5 @@
 import type { ApiOrganization } from './apiOrganization';
 
 export interface ApiUpdateDomainResponse {
-	domain?: ApiOrganization;
+  domain?: ApiOrganization;
 }

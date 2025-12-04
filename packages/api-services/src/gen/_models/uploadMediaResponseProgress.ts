@@ -6,5 +6,5 @@
  */
 
 export interface UploadMediaResponseProgress {
-	percent?: number;
+  percent?: number;
 }

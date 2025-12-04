@@ -6,85 +6,83 @@
  */
 import * as zod from 'zod/v4';
 
+
 export const searchSchemaVariableQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-	q: zod.string().optional(),
-	sort: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
-});
+  "page": zod.number().optional(),
+  "size": zod.number().optional(),
+  "q": zod.string().optional(),
+  "sort": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional()
+})
 
 export const searchSchemaVariableResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				encrypt: zod.boolean().optional(),
-				id: zod.number().optional(),
-				name: zod.string().optional(),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-});
+  "items": zod.array(zod.object({
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})).optional(),
+  "next": zod.boolean().optional()
+})
 
 export const createSchemaVariableBody = zod.object({
-	encrypt: zod.boolean().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "name": zod.string().optional()
+})
 
 export const createSchemaVariableResponse = zod.object({
-	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})
 
 export const deleteSchemaVariableParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const deleteSchemaVariableResponse = zod.object({
-	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})
 
 export const readSchemaVariableParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const readSchemaVariableResponse = zod.object({
-	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})
 
 export const patchSchemaVariableParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const patchSchemaVariableBody = zod.object({
-	encrypt: zod.boolean().optional(),
-	fields: zod.array(zod.string()).optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "name": zod.string().optional()
+})
 
 export const patchSchemaVariableResponse = zod.object({
-	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})
 
 export const updateSchemaVariableParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
 export const updateSchemaVariableBody = zod.object({
-	encrypt: zod.boolean().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "name": zod.string().optional()
+})
 
 export const updateSchemaVariableResponse = zod.object({
-	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-});
+  "encrypt": zod.boolean().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional()
+})
+

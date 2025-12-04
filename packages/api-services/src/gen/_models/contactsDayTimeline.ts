@@ -7,9 +7,9 @@
 import type { ContactsEvent } from './contactsEvent';
 
 export interface ContactsDayTimeline {
-	callsCount?: string;
-	chatsCount?: string;
-	dayTimestamp?: string;
-	emailsCount?: string;
-	items?: ContactsEvent[];
+  callsCount?: string;
+  chatsCount?: string;
+  dayTimestamp?: string;
+  emailsCount?: string;
+  items?: ContactsEvent[];
 }

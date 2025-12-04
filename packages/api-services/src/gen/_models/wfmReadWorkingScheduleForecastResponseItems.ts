@@ -6,6 +6,4 @@
  */
 import type { WfmWorkingScheduleForecast } from './wfmWorkingScheduleForecast';
 
-export type WfmReadWorkingScheduleForecastResponseItems = {
-	[key: string]: WfmWorkingScheduleForecast;
-};
+export type WfmReadWorkingScheduleForecastResponseItems = {[key: string]: WfmWorkingScheduleForecast};

@@ -10,10 +10,10 @@ import type { WebitelMediaExporterPdfHistoryRecord } from './webitelMediaExporte
  * Response containing a page of export history.
  */
 export interface WebitelMediaExporterPdfHistoryResponse {
-	/** List of export history records. */
-	data?: WebitelMediaExporterPdfHistoryRecord[];
-	/** True if there is a next page. */
-	next?: boolean;
-	/** Current page number. */
-	page?: number;
+  /** List of export history records. */
+  data?: WebitelMediaExporterPdfHistoryRecord[];
+  /** True if there is a next page. */
+  next?: boolean;
+  /** Current page number. */
+  page?: number;
 }

@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueResourceGroup {
-	communication?: EngineLookup;
-	id?: string;
-	resourceGroup?: EngineLookup;
+  communication?: EngineLookup;
+  id?: string;
+  resourceGroup?: EngineLookup;
 }

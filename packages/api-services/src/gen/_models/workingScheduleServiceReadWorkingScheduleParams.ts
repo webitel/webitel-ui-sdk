@@ -6,5 +6,5 @@
  */
 
 export type WorkingScheduleServiceReadWorkingScheduleParams = {
-	fields?: string[];
+fields?: string[];
 };

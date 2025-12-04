@@ -6,50 +6,58 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ListFilesParams,
-	WebitelCasesCaseFileList,
-	WebitelCasesFile,
+  ListFilesParams,
+  WebitelCasesCaseFileList,
+  WebitelCasesFile
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getCaseFiles =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary Retrieve a list of files associated with a case
-			 */
-			const listFiles = <TData = AxiosResponse<WebitelCasesCaseFileList>>(
-				caseEtag: string,
-				params?: ListFilesParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/cases/${caseEtag}/files`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Delete a file
-			 */
-			const deleteFile = <TData = AxiosResponse<WebitelCasesFile>>(
-				caseEtag: string,
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/cases/${caseEtag}/files/${id}`, options);
-			};
 
-			// --- footer start
-			return { listFiles, deleteFile };
-		};
-export type ListFilesResult = AxiosResponse<WebitelCasesCaseFileList>;
-export type DeleteFileResult = AxiosResponse<WebitelCasesFile>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getCaseFiles
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary Retrieve a list of files associated with a case
+ */
+const listFiles = <TData = AxiosResponse<WebitelCasesCaseFileList>>(
+    caseEtag: string,
+    params?: ListFilesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/files`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Delete a file
+ */
+const deleteFile = <TData = AxiosResponse<WebitelCasesFile>>(
+    caseEtag: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/${caseEtag}/files/${id}`,options
+    );
+  }
+
+            // --- footer start
+            return {listFiles,deleteFile}};
+export type ListFilesResult = AxiosResponse<WebitelCasesCaseFileList>
+export type DeleteFileResult = AxiosResponse<WebitelCasesFile>
+
+            // --- footer end
+          

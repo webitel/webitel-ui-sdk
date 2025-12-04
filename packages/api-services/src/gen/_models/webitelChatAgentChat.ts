@@ -4,19 +4,18 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WebitelChatMessage } from './webitelChatMessage';
 import type { WebitelChatPeer } from './webitelChatPeer';
+import type { WebitelChatMessage } from './webitelChatMessage';
 
 export interface WebitelChatAgentChat {
-	closeReason?: string;
-	closedAt?: string;
-	contact?: WebitelChatPeer;
-	gateway?: WebitelChatPeer;
-	id?: string;
-	lastMessage?: WebitelChatMessage;
-	queue?: WebitelChatPeer;
-	startedAt?: string;
-	title?: string;
-	unprocessedClose?: boolean;
+  closeReason?: string;
+  closedAt?: string;
+  contact?: WebitelChatPeer;
+  gateway?: WebitelChatPeer;
+  id?: string;
+  lastMessage?: WebitelChatMessage;
+  queue?: WebitelChatPeer;
+  startedAt?: string;
+  title?: string;
+  unprocessedClose?: boolean;
 }

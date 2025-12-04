@@ -7,7 +7,7 @@
 import type { LoggerConfig } from './loggerConfig';
 
 export interface LoggerConfigs {
-	items?: LoggerConfig[];
-	next?: boolean;
-	page?: number;
+  items?: LoggerConfig[];
+  next?: boolean;
+  page?: number;
 }

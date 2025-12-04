@@ -7,7 +7,7 @@
 import type { ApiLDAPTemplate } from './apiLDAPTemplate';
 
 export interface ApiLDAPTemplateResponse {
-	items?: ApiLDAPTemplate[];
-	next?: boolean;
-	page?: number;
+  items?: ApiLDAPTemplate[];
+  next?: boolean;
+  page?: number;
 }

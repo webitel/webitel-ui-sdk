@@ -6,6 +6,6 @@
  */
 
 export type DeleteDevice2Params = {
-	id?: string;
-	permanent?: boolean;
+id?: string;
+permanent?: boolean;
 };

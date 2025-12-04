@@ -6,6 +6,6 @@
  */
 
 export type GetFileTranscriptPhrasesParams = {
-	page?: number;
-	size?: number;
+page?: number;
+size?: number;
 };

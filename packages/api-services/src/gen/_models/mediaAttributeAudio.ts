@@ -6,9 +6,9 @@
  */
 
 export interface MediaAttributeAudio {
-	duration?: number;
-	performer?: string;
-	title?: string;
-	/** Waveform: consists in a series of bitpacked 5-bit values. */
-	waveform?: string;
+  duration?: number;
+  performer?: string;
+  title?: string;
+  /** Waveform: consists in a series of bitpacked 5-bit values. */
+  waveform?: string;
 }

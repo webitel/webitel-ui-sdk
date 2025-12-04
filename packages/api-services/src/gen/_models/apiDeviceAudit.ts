@@ -8,9 +8,9 @@ import type { ApiDeviceId } from './apiDeviceId';
 import type { ApiUserId } from './apiUserId';
 
 export interface ApiDeviceAudit {
-	device?: ApiDeviceId;
-	hotdesk?: string;
-	loggedIn?: string;
-	loggedOut?: string;
-	user?: ApiUserId;
+  device?: ApiDeviceId;
+  hotdesk?: string;
+  loggedIn?: string;
+  loggedOut?: string;
+  user?: ApiUserId;
 }

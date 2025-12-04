@@ -6,5 +6,5 @@
  */
 
 export interface EngineGenerateFeedbackResponse {
-	key?: string;
+  key?: string;
 }

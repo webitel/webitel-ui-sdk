@@ -6,12 +6,12 @@
  */
 
 export type DeleteLabelsParams = {
-	/**
-	 * Fields to be retrieved into result.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique label(s).etag identifiers.
-	 */
-	etag: string[];
+/**
+ * Fields to be retrieved into result.
+ */
+fields?: string[];
+/**
+ * Set of unique label(s).etag identifiers.
+ */
+etag: string[];
 };

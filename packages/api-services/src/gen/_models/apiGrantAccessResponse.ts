@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface ApiGrantAccessResponse {
-	[key: string]: unknown;
-}
+export interface ApiGrantAccessResponse { [key: string]: unknown }

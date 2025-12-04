@@ -7,6 +7,6 @@
 import type { ApiRole } from './apiRole';
 
 export interface ApiCreateRoleRequest {
-	copyId?: string;
-	role?: ApiRole;
+  copyId?: string;
+  role?: ApiRole;
 }

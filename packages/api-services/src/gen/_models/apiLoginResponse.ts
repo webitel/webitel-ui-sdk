@@ -8,6 +8,6 @@ import type { ApiAccessToken } from './apiAccessToken';
 import type { ApiUserWarning } from './apiUserWarning';
 
 export interface ApiLoginResponse {
-	authorization?: ApiAccessToken;
-	warnings?: ApiUserWarning[];
+  authorization?: ApiAccessToken;
+  warnings?: ApiUserWarning[];
 }

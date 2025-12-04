@@ -6,6 +6,6 @@
  */
 
 export type DeleteMemberParams = {
-	domainId?: string;
-	force?: boolean;
+domainId?: string;
+force?: boolean;
 };

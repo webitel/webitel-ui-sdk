@@ -5,4 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type TypeTextViolation = { [key: string]: string };
+export type TypeTextViolation = {[key: string]: string};

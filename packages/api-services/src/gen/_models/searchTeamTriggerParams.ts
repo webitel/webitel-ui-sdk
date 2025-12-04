@@ -6,12 +6,12 @@
  */
 
 export type SearchTeamTriggerParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	enabled?: boolean;
-	id?: number[];
-	schemaId?: number[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+enabled?: boolean;
+id?: number[];
+schemaId?: number[];
 };

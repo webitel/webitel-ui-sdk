@@ -7,6 +7,6 @@
 import type { EngineAgentInQueue } from './engineAgentInQueue';
 
 export interface EngineListAgentInQueue {
-	items?: EngineAgentInQueue[];
-	next?: boolean;
+  items?: EngineAgentInQueue[];
+  next?: boolean;
 }

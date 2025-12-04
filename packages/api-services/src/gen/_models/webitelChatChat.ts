@@ -13,27 +13,27 @@ import type { WebitelChatPeer } from './webitelChatPeer';
 Alias: participant, subscriber, member, peer, leg.
  */
 export interface WebitelChatChat {
-	/** Context. Variables. */
-	context?: WebitelChatChatContext;
-	/** [D]omain[C]omponent primary ID. */
-	dc?: string;
-	/** Unique identifier for this chat.
+  /** Context. Variables. */
+  context?: WebitelChatChatContext;
+  /** [D]omain[C]omponent primary ID. */
+  dc?: string;
+  /** Unique identifier for this chat.
 [FROM] Member / Channel ID.
 
 // [TO] Group. Conversation ID.
  string chat_id = 2; */
-	id?: string;
-	/** OPTIONAL. Invite[d] BY member info. */
-	invite?: WebitelChatChatInvite;
-	/** OPTIONAL. A non-zero value indicates that
+  id?: string;
+  /** OPTIONAL. Invite[d] BY member info. */
+  invite?: WebitelChatChatInvite;
+  /** OPTIONAL. A non-zero value indicates that
 the participant has joined the chat. */
-	join?: string;
-	left?: string;
-	/** [FROM]: User identity. Seed. */
-	peer?: WebitelChatPeer;
-	queue?: WebitelChatPeer;
-	/** [TO]: Chat title. */
-	title?: string;
-	/** [FROM] VIA text gateway profile. */
-	via?: WebitelChatPeer;
+  join?: string;
+  left?: string;
+  /** [FROM]: User identity. Seed. */
+  peer?: WebitelChatPeer;
+  queue?: WebitelChatPeer;
+  /** [TO]: Chat title. */
+  title?: string;
+  /** [FROM] VIA text gateway profile. */
+  via?: WebitelChatPeer;
 }

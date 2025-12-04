@@ -6,5 +6,5 @@
  */
 
 export interface WebitelChatServerJoinConversationResponse {
-	channelId?: string;
+  channelId?: string;
 }

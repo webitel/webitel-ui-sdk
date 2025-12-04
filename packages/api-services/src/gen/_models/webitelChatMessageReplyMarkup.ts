@@ -7,8 +7,8 @@
 import type { WebitelChatMessageButtonRow } from './webitelChatMessageButtonRow';
 
 export interface WebitelChatMessageReplyMarkup {
-	buttons?: WebitelChatMessageButtonRow[];
-	/** An option used to block input to force
+  buttons?: WebitelChatMessageButtonRow[];
+  /** An option used to block input to force
 the user to respond with one of the buttons. */
-	noInput?: boolean;
+  noInput?: boolean;
 }

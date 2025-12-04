@@ -6,31 +6,31 @@
  */
 
 export type LocateLDAPTemplateParams = {
-	/**
+/**
  * ----- Select Options -------------------------
 
 default: 1
  */
-	page?: number;
-	/**
-	 * default: 16
-	 */
-	size?: number;
-	/**
-	 * attributes list
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * OPTIONAL. Filter(s) SET
-	 */
-	q?: string;
-	name?: string;
-	baseDn?: string;
-	objclass?: string;
-	enabled?: boolean;
-	disabled?: boolean;
+page?: number;
+/**
+ * default: 16
+ */
+size?: number;
+/**
+ * attributes list
+ */
+fields?: string[];
+/**
+ * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+ */
+sort?: string[];
+/**
+ * OPTIONAL. Filter(s) SET
+ */
+q?: string;
+name?: string;
+baseDn?: string;
+objclass?: string;
+enabled?: boolean;
+disabled?: boolean;
 };

@@ -13,10 +13,10 @@ The JSON representation for `NullValue` is JSON `null`.
 
  - NULL_VALUE: Null value.
  */
-export type GoogleProtobufNullValue =
-	(typeof GoogleProtobufNullValue)[keyof typeof GoogleProtobufNullValue];
+export type GoogleProtobufNullValue = typeof GoogleProtobufNullValue[keyof typeof GoogleProtobufNullValue];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GoogleProtobufNullValue = {
-	NullValue: 'NULL_VALUE',
+  NullValue: 'NULL_VALUE',
 } as const;

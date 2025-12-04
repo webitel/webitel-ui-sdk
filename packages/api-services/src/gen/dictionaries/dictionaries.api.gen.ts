@@ -6,247 +6,242 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	CreateData200,
-	CreateDataBody,
-	DataDataset,
-	DataInputDictionary,
-	DataStructList,
-	DeleteData2Params,
-	DeleteDataParams,
-	DeleteTypeParams,
-	DictionariesImportCSVBody,
-	LocateData200,
-	LocateDataParams,
-	ProtodataStruct,
-	SearchDataParams,
-	SearchTypeParams,
-	UpdateData2Body,
-	UpdateData2Params,
-	UpdateData200,
-	UpdateData2200,
-	UpdateDataBody,
-	UpdateDataParams,
-	UpdateTypeParams,
+  CreateData200,
+  CreateDataBody,
+  DataDataset,
+  DataInputDictionary,
+  DataStructList,
+  DeleteData2Params,
+  DeleteDataParams,
+  DeleteTypeParams,
+  DictionariesImportCSVBody,
+  LocateData200,
+  LocateDataParams,
+  ProtodataStruct,
+  SearchDataParams,
+  SearchTypeParams,
+  UpdateData200,
+  UpdateData2200,
+  UpdateData2Body,
+  UpdateData2Params,
+  UpdateDataBody,
+  UpdateDataParams,
+  UpdateTypeParams
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getDictionaries =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary Delete a dictionary records.
-			 */
-			const deleteData = <TData = AxiosResponse<DataDataset>>(
-				repo: string,
-				params: DeleteDataParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/dictionaries/${repo}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Lookup a dictionary dataset.
-			 */
-			const searchData = <TData = AxiosResponse<DataDataset>>(
-				repo: string,
-				params?: SearchDataParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/dictionaries/${repo}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (Record) {
-			 * @summary Create a dictionary record.
-			 */
-			const createData = <TData = AxiosResponse<CreateData200>>(
-				repo: string,
-				createDataBody: CreateDataBody,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(`/dictionaries/${repo}`, createDataBody, options);
-			};
-			/**
-			 * @summary Import dataset from CSV file.
-			 */
-			const importCSV = <TData = AxiosResponse<DataDataset>>(
-				repo: string,
-				dictionariesImportCSVBody: DictionariesImportCSVBody,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(
-					`/dictionaries/${repo}/csv`,
-					dictionariesImportCSVBody,
-					options,
-				);
-			};
-			/**
-			 * @summary Delete a dictionary records.
-			 */
-			const deleteData2 = <TData = AxiosResponse<DataDataset>>(
-				repo: string,
-				id: string[],
-				params?: DeleteData2Params,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/dictionaries/${repo}/${id}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (Record) {
-			 * @summary Locate a dictionary record.
-			 */
-			const locateData = <TData = AxiosResponse<LocateData200>>(
-				repo: string,
-				id: string,
-				params?: LocateDataParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/dictionaries/${repo}/${id}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (Record) {
-			 * @summary Update a dictionary record.
-			 */
-			const updateData = <TData = AxiosResponse<UpdateData200>>(
-				repo: string,
-				id: string,
-				updateDataBody: UpdateDataBody,
-				params?: UpdateDataParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.patch(`/dictionaries/${repo}/${id}`, updateDataBody, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (Record) {
-			 * @summary Update a dictionary record.
-			 */
-			const updateData2 = <TData = AxiosResponse<UpdateData2200>>(
-				repo: string,
-				id: string,
-				updateData2Body: UpdateData2Body,
-				params?: UpdateData2Params,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.put(`/dictionaries/${repo}/${id}`, updateData2Body, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (DictionaryList) {
-			 * @summary Delete custom dictionaries.
-			 */
-			const deleteType = <TData = AxiosResponse<DataStructList>>(
-				params: DeleteTypeParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete('/types/dictionaries', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Lookup dictionaries data types.
-			 */
-			const searchType = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/types/dictionaries', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * (Dictionary) {
-			 * @summary Locate the dictionary type.
-			 */
-			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
-				repo: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/types/dictionaries/${repo}`, options);
-			};
-			/**
-			 * (Dictionary) {
-			 * @summary Create custom dictionary.
-			 */
-			const createType = <TData = AxiosResponse<ProtodataStruct>>(
-				repo: string,
-				dataInputDictionary: DataInputDictionary,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(
-					`/types/dictionaries/${repo}`,
-					dataInputDictionary,
-					options,
-				);
-			};
-			/**
-			 * (Dictionary) {
-			 * @summary Update custom dictionary.
-			 */
-			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
-				repo: string,
-				dataInputDictionary: DataInputDictionary,
-				params?: UpdateTypeParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.put(`/types/dictionaries/${repo}`, dataInputDictionary, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
 
-			// --- footer start
-			return {
-				deleteData,
-				searchData,
-				createData,
-				importCSV,
-				deleteData2,
-				locateData,
-				updateData,
-				updateData2,
-				deleteType,
-				searchType,
-				locateType,
-				createType,
-				updateType,
-			};
-		};
-export type DeleteDataResult = AxiosResponse<DataDataset>;
-export type SearchDataResult = AxiosResponse<DataDataset>;
-export type CreateDataResult = AxiosResponse<CreateData200>;
-export type ImportCSVResult = AxiosResponse<DataDataset>;
-export type DeleteData2Result = AxiosResponse<DataDataset>;
-export type LocateDataResult = AxiosResponse<LocateData200>;
-export type UpdateDataResult = AxiosResponse<UpdateData200>;
-export type UpdateData2Result = AxiosResponse<UpdateData2200>;
-export type DeleteTypeResult = AxiosResponse<DataStructList>;
-export type SearchTypeResult = AxiosResponse<DataStructList>;
-export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
-export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
-export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getDictionaries
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary Delete a dictionary records.
+ */
+const deleteData = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    params: DeleteDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/dictionaries/${repo}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Lookup a dictionary dataset.
+ */
+const searchData = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    params?: SearchDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/dictionaries/${repo}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (Record) {
+ * @summary Create a dictionary record.
+ */
+const createData = <TData = AxiosResponse<CreateData200>>(
+    repo: string,
+    createDataBody: CreateDataBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/dictionaries/${repo}`,
+      createDataBody,options
+    );
+  }
+/**
+ * @summary Import dataset from CSV file.
+ */
+const importCSV = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    dictionariesImportCSVBody: DictionariesImportCSVBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/dictionaries/${repo}/csv`,
+      dictionariesImportCSVBody,options
+    );
+  }
+/**
+ * @summary Delete a dictionary records.
+ */
+const deleteData2 = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    id: string[],
+    params?: DeleteData2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/dictionaries/${repo}/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (Record) {
+ * @summary Locate a dictionary record.
+ */
+const locateData = <TData = AxiosResponse<LocateData200>>(
+    repo: string,
+    id: string,
+    params?: LocateDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/dictionaries/${repo}/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (Record) {
+ * @summary Update a dictionary record.
+ */
+const updateData = <TData = AxiosResponse<UpdateData200>>(
+    repo: string,
+    id: string,
+    updateDataBody: UpdateDataBody,
+    params?: UpdateDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/dictionaries/${repo}/${id}`,
+      updateDataBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (Record) {
+ * @summary Update a dictionary record.
+ */
+const updateData2 = <TData = AxiosResponse<UpdateData2200>>(
+    repo: string,
+    id: string,
+    updateData2Body: UpdateData2Body,
+    params?: UpdateData2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/dictionaries/${repo}/${id}`,
+      updateData2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (DictionaryList) {
+ * @summary Delete custom dictionaries.
+ */
+const deleteType = <TData = AxiosResponse<DataStructList>>(
+    params: DeleteTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/types/dictionaries`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Lookup dictionaries data types.
+ */
+const searchType = <TData = AxiosResponse<DataStructList>>(
+    params?: SearchTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/types/dictionaries`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * (Dictionary) {
+ * @summary Locate the dictionary type.
+ */
+const locateType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/types/dictionaries/${repo}`,options
+    );
+  }
+/**
+ * (Dictionary) {
+ * @summary Create custom dictionary.
+ */
+const createType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string,
+    dataInputDictionary: DataInputDictionary, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/types/dictionaries/${repo}`,
+      dataInputDictionary,options
+    );
+  }
+/**
+ * (Dictionary) {
+ * @summary Update custom dictionary.
+ */
+const updateType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string,
+    dataInputDictionary: DataInputDictionary,
+    params?: UpdateTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/types/dictionaries/${repo}`,
+      dataInputDictionary,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {deleteData,searchData,createData,importCSV,deleteData2,locateData,updateData,updateData2,deleteType,searchType,locateType,createType,updateType}};
+export type DeleteDataResult = AxiosResponse<DataDataset>
+export type SearchDataResult = AxiosResponse<DataDataset>
+export type CreateDataResult = AxiosResponse<CreateData200>
+export type ImportCSVResult = AxiosResponse<DataDataset>
+export type DeleteData2Result = AxiosResponse<DataDataset>
+export type LocateDataResult = AxiosResponse<LocateData200>
+export type UpdateDataResult = AxiosResponse<UpdateData200>
+export type UpdateData2Result = AxiosResponse<UpdateData2200>
+export type DeleteTypeResult = AxiosResponse<DataStructList>
+export type SearchTypeResult = AxiosResponse<DataStructList>
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>
+
+            // --- footer end
+          

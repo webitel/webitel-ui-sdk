@@ -10,14 +10,14 @@ import type { ApiObjectId } from './apiObjectId';
  * UserId lookup value.
  */
 export interface ApiUserAccessToken {
-	createdAt?: string;
-	createdBy?: ApiObjectId;
-	deletedAt?: string;
-	deletedBy?: ApiObjectId;
-	id?: string;
-	token?: string;
-	updatedAt?: string;
-	updatedBy?: ApiObjectId;
-	usage?: string;
-	user?: ApiObjectId;
+  createdAt?: string;
+  createdBy?: ApiObjectId;
+  deletedAt?: string;
+  deletedBy?: ApiObjectId;
+  id?: string;
+  token?: string;
+  updatedAt?: string;
+  updatedBy?: ApiObjectId;
+  usage?: string;
+  user?: ApiObjectId;
 }

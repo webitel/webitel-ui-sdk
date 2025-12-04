@@ -6,5 +6,5 @@
  */
 
 export interface StorageMovePositionFilePolicyResponse {
-	success?: boolean;
+  success?: boolean;
 }

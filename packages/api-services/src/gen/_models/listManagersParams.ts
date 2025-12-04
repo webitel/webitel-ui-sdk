@@ -6,30 +6,30 @@
  */
 
 export type ListManagersParams = {
-	/**
-	 * Page number of result. offset = ((page-1)*size)
-	 */
-	page?: number;
-	/**
-	 * Size of result page. limit = (size++)
-	 */
-	size?: number;
-	/**
+/**
+ * Page number of result. offset = ((page-1)*size)
+ */
+page?: number;
+/**
+ * Size of result page. limit = (size++)
+ */
+size?: number;
+/**
  * Search term: user name;
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-	q?: string;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Record(s) with unique ID only.
-	 */
-	id?: string[];
+q?: string;
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
+ * Fields to be retrieved as a result.
+ */
+fields?: string[];
+/**
+ * Record(s) with unique ID only.
+ */
+id?: string[];
 };

@@ -8,10 +8,10 @@ import type { EngineHistoryFileJobHistoryFileJobAction } from './engineHistoryFi
 import type { EngineHistoryFileJobHistoryFileJobState } from './engineHistoryFileJobHistoryFileJobState';
 
 export interface EngineHistoryFileJob {
-	action?: EngineHistoryFileJobHistoryFileJobAction;
-	createdAt?: string;
-	errorDetail?: string;
-	fileId?: string;
-	id?: string;
-	state?: EngineHistoryFileJobHistoryFileJobState;
+  action?: EngineHistoryFileJobHistoryFileJobAction;
+  createdAt?: string;
+  errorDetail?: string;
+  fileId?: string;
+  id?: string;
+  state?: EngineHistoryFileJobHistoryFileJobState;
 }

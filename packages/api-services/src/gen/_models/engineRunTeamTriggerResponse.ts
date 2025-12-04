@@ -6,5 +6,5 @@
  */
 
 export interface EngineRunTeamTriggerResponse {
-	jobId?: string;
+  jobId?: string;
 }

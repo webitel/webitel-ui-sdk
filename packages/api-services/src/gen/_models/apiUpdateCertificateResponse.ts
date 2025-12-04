@@ -7,5 +7,5 @@
 import type { ApiCertificate } from './apiCertificate';
 
 export interface ApiUpdateCertificateResponse {
-	certificate?: ApiCertificate;
+  certificate?: ApiCertificate;
 }

@@ -9,7 +9,7 @@
  * InputPeer identity.
  */
 export interface WebitelChatInputPeer {
-	id?: string;
-	type?: string;
-	via?: string;
+  id?: string;
+  type?: string;
+  via?: string;
 }

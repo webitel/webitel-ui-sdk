@@ -8,10 +8,10 @@ import type { DictionariesImportCSVBodyFields } from './dictionariesImportCSVBod
 import type { ImportCSVRequestaction } from './importCSVRequestaction';
 
 export interface DictionariesImportCSVBody {
-	data?: string;
-	fields?: DictionariesImportCSVBodyFields;
-	lineBegin?: number;
-	lineEnd?: number;
-	onDataError?: ImportCSVRequestaction;
-	onEmptyLine?: ImportCSVRequestaction;
+  data?: string;
+  fields?: DictionariesImportCSVBodyFields;
+  lineBegin?: number;
+  lineEnd?: number;
+  onDataError?: ImportCSVRequestaction;
+  onEmptyLine?: ImportCSVRequestaction;
 }

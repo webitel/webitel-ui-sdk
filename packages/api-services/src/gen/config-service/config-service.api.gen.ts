@@ -6,107 +6,103 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ConfigServicePatchConfigBody,
-	ConfigServiceReadSystemObjectsParams,
-	ConfigServiceSearchConfigParams,
-	ConfigServiceUpdateConfigBody,
-	LoggerConfig,
-	LoggerConfigs,
-	LoggerCreateConfigRequest,
-	LoggerEmpty,
-	LoggerSystemObjects,
+  ConfigServicePatchConfigBody,
+  ConfigServiceReadSystemObjectsParams,
+  ConfigServiceSearchConfigParams,
+  ConfigServiceUpdateConfigBody,
+  LoggerConfig,
+  LoggerConfigs,
+  LoggerCreateConfigRequest,
+  LoggerEmpty,
+  LoggerSystemObjects
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getConfigService =
-		// --- title end
-		() => {
-			// --- header end
-			const configServiceReadSystemObjects = <
-				TData = AxiosResponse<LoggerSystemObjects>,
-			>(
-				params?: ConfigServiceReadSystemObjectsParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/logger/available_objects', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			const configServiceSearchConfig = <TData = AxiosResponse<LoggerConfigs>>(
-				params?: ConfigServiceSearchConfigParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/logger/config', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			const configServiceCreateConfig = <TData = AxiosResponse<LoggerConfig>>(
-				loggerCreateConfigRequest: LoggerCreateConfigRequest,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post('/logger/config', loggerCreateConfigRequest, options);
-			};
-			const configServiceDeleteConfig = <TData = AxiosResponse<LoggerEmpty>>(
-				configId: number,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/logger/config/${configId}`, options);
-			};
-			const configServiceReadConfig = <TData = AxiosResponse<LoggerConfig>>(
-				configId: number,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/logger/config/${configId}`, options);
-			};
-			const configServicePatchConfig = <TData = AxiosResponse<LoggerConfig>>(
-				configId: number,
-				configServicePatchConfigBody: ConfigServicePatchConfigBody,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.patch(
-					`/logger/config/${configId}`,
-					configServicePatchConfigBody,
-					options,
-				);
-			};
-			const configServiceUpdateConfig = <TData = AxiosResponse<LoggerConfig>>(
-				configId: number,
-				configServiceUpdateConfigBody: ConfigServiceUpdateConfigBody,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.put(
-					`/logger/config/${configId}`,
-					configServiceUpdateConfigBody,
-					options,
-				);
-			};
 
-			// --- footer start
-			return {
-				configServiceReadSystemObjects,
-				configServiceSearchConfig,
-				configServiceCreateConfig,
-				configServiceDeleteConfig,
-				configServiceReadConfig,
-				configServicePatchConfig,
-				configServiceUpdateConfig,
-			};
-		};
-export type ConfigServiceReadSystemObjectsResult =
-	AxiosResponse<LoggerSystemObjects>;
-export type ConfigServiceSearchConfigResult = AxiosResponse<LoggerConfigs>;
-export type ConfigServiceCreateConfigResult = AxiosResponse<LoggerConfig>;
-export type ConfigServiceDeleteConfigResult = AxiosResponse<LoggerEmpty>;
-export type ConfigServiceReadConfigResult = AxiosResponse<LoggerConfig>;
-export type ConfigServicePatchConfigResult = AxiosResponse<LoggerConfig>;
-export type ConfigServiceUpdateConfigResult = AxiosResponse<LoggerConfig>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getConfigService
+            // --- title end
+           = () => {
+
+            // --- header end
+          const configServiceReadSystemObjects = <TData = AxiosResponse<LoggerSystemObjects>>(
+    params?: ConfigServiceReadSystemObjectsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/available_objects`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const configServiceSearchConfig = <TData = AxiosResponse<LoggerConfigs>>(
+    params?: ConfigServiceSearchConfigParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/config`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const configServiceCreateConfig = <TData = AxiosResponse<LoggerConfig>>(
+    loggerCreateConfigRequest: LoggerCreateConfigRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/logger/config`,
+      loggerCreateConfigRequest,options
+    );
+  }
+const configServiceDeleteConfig = <TData = AxiosResponse<LoggerEmpty>>(
+    configId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/logger/config/${configId}`,options
+    );
+  }
+const configServiceReadConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/config/${configId}`,options
+    );
+  }
+const configServicePatchConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number,
+    configServicePatchConfigBody: ConfigServicePatchConfigBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/logger/config/${configId}`,
+      configServicePatchConfigBody,options
+    );
+  }
+const configServiceUpdateConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number,
+    configServiceUpdateConfigBody: ConfigServiceUpdateConfigBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/logger/config/${configId}`,
+      configServiceUpdateConfigBody,options
+    );
+  }
+
+            // --- footer start
+            return {configServiceReadSystemObjects,configServiceSearchConfig,configServiceCreateConfig,configServiceDeleteConfig,configServiceReadConfig,configServicePatchConfig,configServiceUpdateConfig}};
+export type ConfigServiceReadSystemObjectsResult = AxiosResponse<LoggerSystemObjects>
+export type ConfigServiceSearchConfigResult = AxiosResponse<LoggerConfigs>
+export type ConfigServiceCreateConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServiceDeleteConfigResult = AxiosResponse<LoggerEmpty>
+export type ConfigServiceReadConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServicePatchConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServiceUpdateConfigResult = AxiosResponse<LoggerConfig>
+
+            // --- footer end
+          

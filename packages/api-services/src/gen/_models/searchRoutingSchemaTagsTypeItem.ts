@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchRoutingSchemaTagsTypeItem =
-	(typeof SearchRoutingSchemaTagsTypeItem)[keyof typeof SearchRoutingSchemaTagsTypeItem];
+export type SearchRoutingSchemaTagsTypeItem = typeof SearchRoutingSchemaTagsTypeItem[keyof typeof SearchRoutingSchemaTagsTypeItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchRoutingSchemaTagsTypeItem = {
-	default: 'default',
-	voice: 'voice',
-	chat: 'chat',
-	processing: 'processing',
-	service: 'service',
+  default: 'default',
+  voice: 'voice',
+  chat: 'chat',
+  processing: 'processing',
+  service: 'service',
 } as const;

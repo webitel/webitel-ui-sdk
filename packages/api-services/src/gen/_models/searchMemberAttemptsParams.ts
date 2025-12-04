@@ -6,5 +6,5 @@
  */
 
 export type SearchMemberAttemptsParams = {
-	domainId?: string;
+domainId?: string;
 };

@@ -9,6 +9,6 @@
  * UserId lookup value.
  */
 export interface ApiUserId {
-	id?: string;
-	name?: string;
+  id?: string;
+  name?: string;
 }

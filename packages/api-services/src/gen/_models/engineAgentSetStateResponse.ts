@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface EngineAgentSetStateResponse {
-	[key: string]: unknown;
-}
+export interface EngineAgentSetStateResponse { [key: string]: unknown }

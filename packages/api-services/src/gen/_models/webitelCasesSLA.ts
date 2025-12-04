@@ -7,16 +7,16 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesSLA {
-	calendar?: GeneralLookup;
-	createdAt?: string;
-	createdBy?: GeneralLookup;
-	description?: string;
-	id?: string;
-	name?: string;
-	reactionTime?: string;
-	resolutionTime?: string;
-	updatedAt?: string;
-	updatedBy?: GeneralLookup;
-	validFrom?: string;
-	validTo?: string;
+  calendar?: GeneralLookup;
+  createdAt?: string;
+  createdBy?: GeneralLookup;
+  description?: string;
+  id?: string;
+  name?: string;
+  reactionTime?: string;
+  resolutionTime?: string;
+  updatedAt?: string;
+  updatedBy?: GeneralLookup;
+  validFrom?: string;
+  validTo?: string;
 }

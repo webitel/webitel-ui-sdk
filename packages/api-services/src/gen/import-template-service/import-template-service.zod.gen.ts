@@ -6,195 +6,171 @@
  */
 import * as zod from 'zod/v4';
 
-export const searchImportTemplateQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-	q: zod.string().optional(),
-	sort: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
-	id: zod.array(zod.number()).optional(),
-});
 
-export const searchImportTemplateResponseItemsItemSourceTypeDefault =
-	'DefaultSourceType';
+export const searchImportTemplateQueryParams = zod.object({
+  "page": zod.number().optional(),
+  "size": zod.number().optional(),
+  "q": zod.string().optional(),
+  "sort": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "id": zod.array(zod.number()).optional()
+})
+
+export const searchImportTemplateResponseItemsItemSourceTypeDefault = "DefaultSourceType";
 
 export const searchImportTemplateResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				parameters: zod.object({}).optional(),
-				description: zod.string().optional(),
-				id: zod.number().optional(),
-				name: zod.string().optional(),
-				source: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				sourceId: zod.string().optional(),
-				sourceType: zod
-					.enum(['DefaultSourceType', 'Dialer'])
-					.default(searchImportTemplateResponseItemsItemSourceTypeDefault),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-});
+  "items": zod.array(zod.object({
+  "parameters": zod.object({
 
-export const createImportTemplateBodySourceTypeDefault = 'DefaultSourceType';
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(searchImportTemplateResponseItemsItemSourceTypeDefault)
+})).optional(),
+  "next": zod.boolean().optional()
+})
 
-export const createImportTemplateBody = zod
-	.object({
-		parameters: zod.object({}),
-		description: zod.string().optional(),
-		name: zod.string(),
-		source: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		sourceId: zod.string(),
-		sourceType: zod
-			.enum(['DefaultSourceType', 'Dialer'])
-			.default(createImportTemplateBodySourceTypeDefault),
-	})
-	.describe('Create import template for CSV');
+export const createImportTemplateBodySourceTypeDefault = "DefaultSourceType";
 
-export const createImportTemplateResponseSourceTypeDefault =
-	'DefaultSourceType';
+export const createImportTemplateBody = zod.object({
+  "parameters": zod.object({
+
+}),
+  "description": zod.string().optional(),
+  "name": zod.string(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(createImportTemplateBodySourceTypeDefault)
+}).describe('Create import template for CSV')
+
+export const createImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
 
 export const createImportTemplateResponse = zod.object({
-	parameters: zod.object({}).optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	source: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	sourceId: zod.string().optional(),
-	sourceType: zod
-		.enum(['DefaultSourceType', 'Dialer'])
-		.default(createImportTemplateResponseSourceTypeDefault),
-});
+  "parameters": zod.object({
+
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(createImportTemplateResponseSourceTypeDefault)
+})
 
 export const deleteImportTemplateParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
-export const deleteImportTemplateResponseSourceTypeDefault =
-	'DefaultSourceType';
+export const deleteImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
 
 export const deleteImportTemplateResponse = zod.object({
-	parameters: zod.object({}).optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	source: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	sourceId: zod.string().optional(),
-	sourceType: zod
-		.enum(['DefaultSourceType', 'Dialer'])
-		.default(deleteImportTemplateResponseSourceTypeDefault),
-});
+  "parameters": zod.object({
+
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(deleteImportTemplateResponseSourceTypeDefault)
+})
 
 export const readImportTemplateParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
-export const readImportTemplateResponseSourceTypeDefault = 'DefaultSourceType';
+export const readImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
 
 export const readImportTemplateResponse = zod.object({
-	parameters: zod.object({}).optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	source: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	sourceId: zod.string().optional(),
-	sourceType: zod
-		.enum(['DefaultSourceType', 'Dialer'])
-		.default(readImportTemplateResponseSourceTypeDefault),
-});
+  "parameters": zod.object({
+
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(readImportTemplateResponseSourceTypeDefault)
+})
 
 export const patchImportTemplateParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
-export const patchImportTemplateBody = zod
-	.object({
-		parameters: zod.object({}).optional(),
-		description: zod.string().optional(),
-		fields: zod.array(zod.string()).optional(),
-		name: zod.string().optional(),
-	})
-	.describe('Patch import template for CSV');
+export const patchImportTemplateBody = zod.object({
+  "parameters": zod.object({
 
-export const patchImportTemplateResponseSourceTypeDefault = 'DefaultSourceType';
+}).optional(),
+  "description": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "name": zod.string().optional()
+}).describe('Patch import template for CSV')
+
+export const patchImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
 
 export const patchImportTemplateResponse = zod.object({
-	parameters: zod.object({}).optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	source: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	sourceId: zod.string().optional(),
-	sourceType: zod
-		.enum(['DefaultSourceType', 'Dialer'])
-		.default(patchImportTemplateResponseSourceTypeDefault),
-});
+  "parameters": zod.object({
+
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(patchImportTemplateResponseSourceTypeDefault)
+})
 
 export const updateImportTemplateParams = zod.object({
-	id: zod.number(),
-});
+  "id": zod.number()
+})
 
-export const updateImportTemplateBody = zod
-	.object({
-		parameters: zod.object({}).optional(),
-		description: zod.string().optional(),
-		name: zod.string(),
-		source: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-	})
-	.describe('Update import template for CSV');
+export const updateImportTemplateBody = zod.object({
+  "parameters": zod.object({
 
-export const updateImportTemplateResponseSourceTypeDefault =
-	'DefaultSourceType';
+}).optional(),
+  "description": zod.string().optional(),
+  "name": zod.string(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional()
+}).describe('Update import template for CSV')
+
+export const updateImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
 
 export const updateImportTemplateResponse = zod.object({
-	parameters: zod.object({}).optional(),
-	description: zod.string().optional(),
-	id: zod.number().optional(),
-	name: zod.string().optional(),
-	source: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	sourceId: zod.string().optional(),
-	sourceType: zod
-		.enum(['DefaultSourceType', 'Dialer'])
-		.default(updateImportTemplateResponseSourceTypeDefault),
-});
+  "parameters": zod.object({
+
+}).optional(),
+  "description": zod.string().optional(),
+  "id": zod.number().optional(),
+  "name": zod.string().optional(),
+  "source": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "sourceId": zod.string().optional(),
+  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(updateImportTemplateResponseSourceTypeDefault)
+})
+

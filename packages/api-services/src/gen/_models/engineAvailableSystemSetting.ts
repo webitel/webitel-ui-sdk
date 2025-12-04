@@ -6,5 +6,5 @@
  */
 
 export interface EngineAvailableSystemSetting {
-	name?: string;
+  name?: string;
 }

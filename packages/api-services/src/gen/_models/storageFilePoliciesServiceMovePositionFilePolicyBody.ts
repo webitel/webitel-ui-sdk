@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface StorageFilePoliciesServiceMovePositionFilePolicyBody {
-	[key: string]: unknown;
-}
+export interface StorageFilePoliciesServiceMovePositionFilePolicyBody { [key: string]: unknown }

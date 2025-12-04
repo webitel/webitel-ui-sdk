@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ContactsMediaFile } from './contactsMediaFile';
 import type { UploadMediaResponseProgress } from './uploadMediaResponseProgress';
+import type { ContactsMediaFile } from './contactsMediaFile';
 
 export interface ContactsUploadMediaResponse {
-	data?: UploadMediaResponseProgress;
-	file?: ContactsMediaFile;
+  data?: UploadMediaResponseProgress;
+  file?: ContactsMediaFile;
 }

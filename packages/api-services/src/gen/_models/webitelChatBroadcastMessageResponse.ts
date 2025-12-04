@@ -8,6 +8,6 @@ import type { WebitelChatBroadcastError } from './webitelChatBroadcastError';
 import type { WebitelChatBroadcastMessageResponseVariables } from './webitelChatBroadcastMessageResponseVariables';
 
 export interface WebitelChatBroadcastMessageResponse {
-	failure?: WebitelChatBroadcastError[];
-	variables?: WebitelChatBroadcastMessageResponseVariables;
+  failure?: WebitelChatBroadcastError[];
+  variables?: WebitelChatBroadcastMessageResponseVariables;
 }

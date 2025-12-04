@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface EngineBlindTransferCallResponse {
-	[key: string]: unknown;
-}
+export interface EngineBlindTransferCallResponse { [key: string]: unknown }

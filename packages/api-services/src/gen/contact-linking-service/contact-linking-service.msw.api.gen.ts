@@ -4,85 +4,53 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
 
-import type { WebitelChatEmptyResponse, WebitelChatLookup } from '.././_models';
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
-export const getContactLinkingServiceCreateContactFromConversationResponseMock =
-	(overrideResponse: Partial<WebitelChatLookup> = {}): WebitelChatLookup => ({
-		id: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		name: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		...overrideResponse,
-	});
+import type {
+  WebitelChatEmptyResponse,
+  WebitelChatLookup
+} from '.././_models';
 
-export const getContactLinkingServiceLinkContactToClientResponseMock =
-	(): WebitelChatEmptyResponse => ({});
 
-export const getContactLinkingServiceCreateContactFromConversationMockHandler =
-	(
-		overrideResponse?:
-			| WebitelChatLookup
-			| ((
-					info: Parameters<Parameters<typeof http.post>[1]>[0],
-			  ) => Promise<WebitelChatLookup> | WebitelChatLookup),
-		options?: RequestHandlerOptions,
-	) => {
-		return http.post(
-			'*/chat/:conversationId/contact',
-			async (info) => {
-				await delay(1000);
+export const getContactLinkingServiceCreateContactFromConversationResponseMock = (overrideResponse: Partial< WebitelChatLookup > = {}): WebitelChatLookup => ({id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-				return new HttpResponse(
-					JSON.stringify(
-						overrideResponse !== undefined
-							? typeof overrideResponse === 'function'
-								? await overrideResponse(info)
-								: overrideResponse
-							: getContactLinkingServiceCreateContactFromConversationResponseMock(),
-					),
-					{ status: 200, headers: { 'Content-Type': 'application/json' } },
-				);
-			},
-			options,
-		);
-	};
+export const getContactLinkingServiceLinkContactToClientResponseMock = (): WebitelChatEmptyResponse => ({})
 
-export const getContactLinkingServiceLinkContactToClientMockHandler = (
-	overrideResponse?:
-		| WebitelChatEmptyResponse
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelChatEmptyResponse> | WebitelChatEmptyResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.post(
-		'*/chat/:conversationId/link',
-		async (info) => {
-			await delay(1000);
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getContactLinkingServiceLinkContactToClientResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getContactLinkingServiceCreateContactFromConversationMockHandler = (overrideResponse?: WebitelChatLookup | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelChatLookup> | WebitelChatLookup), options?: RequestHandlerOptions) => {
+  return http.post('*/chat/:conversationId/contact', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getContactLinkingServiceCreateContactFromConversationResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
+
+export const getContactLinkingServiceLinkContactToClientMockHandler = (overrideResponse?: WebitelChatEmptyResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelChatEmptyResponse> | WebitelChatEmptyResponse), options?: RequestHandlerOptions) => {
+  return http.post('*/chat/:conversationId/link', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getContactLinkingServiceLinkContactToClientResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getContactLinkingServiceMock = () => [
-	getContactLinkingServiceCreateContactFromConversationMockHandler(),
-	getContactLinkingServiceLinkContactToClientMockHandler(),
-];
+  getContactLinkingServiceCreateContactFromConversationMockHandler(),
+  getContactLinkingServiceLinkContactToClientMockHandler()]

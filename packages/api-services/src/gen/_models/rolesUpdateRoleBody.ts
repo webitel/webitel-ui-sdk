@@ -7,6 +7,6 @@
 import type { RolesUpdateRoleBodyRole } from './rolesUpdateRoleBodyRole';
 
 export interface RolesUpdateRoleBody {
-	fields?: string[];
-	role?: RolesUpdateRoleBodyRole;
+  fields?: string[];
+  role?: RolesUpdateRoleBodyRole;
 }

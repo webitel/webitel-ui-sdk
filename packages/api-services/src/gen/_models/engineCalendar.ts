@@ -5,22 +5,22 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { EngineAcceptOfDay } from './engineAcceptOfDay';
-import type { EngineExceptDate } from './engineExceptDate';
 import type { EngineLookup } from './engineLookup';
+import type { EngineExceptDate } from './engineExceptDate';
 
 export interface EngineCalendar {
-	accepts?: EngineAcceptOfDay[];
-	createdAt?: string;
-	createdBy?: EngineLookup;
-	description?: string;
-	domainId?: string;
-	endAt?: string;
-	excepts?: EngineExceptDate[];
-	id?: string;
-	name?: string;
-	specials?: EngineAcceptOfDay[];
-	startAt?: string;
-	timezone?: EngineLookup;
-	updatedAt?: string;
-	updatedBy?: EngineLookup;
+  accepts?: EngineAcceptOfDay[];
+  createdAt?: string;
+  createdBy?: EngineLookup;
+  description?: string;
+  domainId?: string;
+  endAt?: string;
+  excepts?: EngineExceptDate[];
+  id?: string;
+  name?: string;
+  specials?: EngineAcceptOfDay[];
+  startAt?: string;
+  timezone?: EngineLookup;
+  updatedAt?: string;
+  updatedBy?: EngineLookup;
 }

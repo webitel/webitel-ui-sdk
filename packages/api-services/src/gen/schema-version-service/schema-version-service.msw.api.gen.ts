@@ -4,89 +4,37 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
 
-import type { EngineSearchSchemaVersionResponse } from '.././_models';
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
-export const getSearchSchemaVersionResponseMock = (
-	overrideResponse: Partial<EngineSearchSchemaVersionResponse> = {},
-): EngineSearchSchemaVersionResponse => ({
-	items: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			note: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			schemaId: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			version: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	...overrideResponse,
-});
+import type {
+  EngineSearchSchemaVersionResponse
+} from '.././_models';
 
-export const getSearchSchemaVersionMockHandler = (
-	overrideResponse?:
-		| EngineSearchSchemaVersionResponse
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<EngineSearchSchemaVersionResponse>
-				| EngineSearchSchemaVersionResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/routing/schema/:schemaId/versions',
-		async (info) => {
-			await delay(1000);
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getSearchSchemaVersionResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getSearchSchemaVersionResponseMock = (overrideResponse: Partial< EngineSearchSchemaVersionResponse > = {}): EngineSearchSchemaVersionResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), note: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), schemaId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), version: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})
+
+
+export const getSearchSchemaVersionMockHandler = (overrideResponse?: EngineSearchSchemaVersionResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EngineSearchSchemaVersionResponse> | EngineSearchSchemaVersionResponse), options?: RequestHandlerOptions) => {
+  return http.get('*/routing/schema/:schemaId/versions', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getSearchSchemaVersionResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getSchemaVersionServiceMock = () => [
-	getSearchSchemaVersionMockHandler(),
-];
+  getSearchSchemaVersionMockHandler()]

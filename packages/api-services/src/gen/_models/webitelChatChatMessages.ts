@@ -9,11 +9,11 @@ import type { WebitelChatMessage } from './webitelChatMessage';
 import type { WebitelChatPeer } from './webitelChatPeer';
 
 export interface WebitelChatChatMessages {
-	chats?: WebitelChatChat[];
-	/** Dataset page of messages. */
-	messages?: WebitelChatMessage[];
-	next?: boolean;
-	/** Dataset page number. */
-	page?: number;
-	peers?: WebitelChatPeer[];
+  chats?: WebitelChatChat[];
+  /** Dataset page of messages. */
+  messages?: WebitelChatMessage[];
+  next?: boolean;
+  /** Dataset page number. */
+  page?: number;
+  peers?: WebitelChatPeer[];
 }

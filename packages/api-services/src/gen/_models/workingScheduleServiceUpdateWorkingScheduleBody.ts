@@ -7,5 +7,5 @@
 import type { WorkingScheduleServiceUpdateWorkingScheduleBodyItem } from './workingScheduleServiceUpdateWorkingScheduleBodyItem';
 
 export type WorkingScheduleServiceUpdateWorkingScheduleBody = {
-	item?: WorkingScheduleServiceUpdateWorkingScheduleBodyItem;
+  item?: WorkingScheduleServiceUpdateWorkingScheduleBodyItem;
 };

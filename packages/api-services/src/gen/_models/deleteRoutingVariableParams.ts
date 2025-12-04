@@ -6,5 +6,5 @@
  */
 
 export type DeleteRoutingVariableParams = {
-	domainId?: string;
+domainId?: string;
 };

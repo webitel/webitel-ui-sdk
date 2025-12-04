@@ -6,8 +6,8 @@
  */
 
 export type CreateSpaceParams = {
-	/**
-	 * Source Fields to return into result.
-	 */
-	fields?: string[];
+/**
+ * Source Fields to return into result.
+ */
+fields?: string[];
 };

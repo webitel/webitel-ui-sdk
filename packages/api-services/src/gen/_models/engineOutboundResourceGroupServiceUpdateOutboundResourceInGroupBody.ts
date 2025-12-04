@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody {
-	priority?: number;
-	reserveResource?: EngineLookup;
-	resource?: EngineLookup;
+  priority?: number;
+  reserveResource?: EngineLookup;
+  resource?: EngineLookup;
 }

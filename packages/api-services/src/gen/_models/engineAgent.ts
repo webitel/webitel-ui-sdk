@@ -4,33 +4,32 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
+import type { EngineLookup } from './engineLookup';
 import type { EngineAgentChannel } from './engineAgentChannel';
 import type { EngineAgentUserPresence } from './engineAgentUserPresence';
-import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgent {
-	allowChannels?: string[];
-	allowSetScreenControl?: boolean;
-	auditor?: EngineLookup[];
-	channel?: EngineAgentChannel[];
-	chatCount?: number;
-	description?: string;
-	extension?: string;
-	greetingMedia?: EngineLookup;
-	id?: string;
-	isSupervisor?: boolean;
-	lastStatusChange?: string;
-	name?: string;
-	progressiveCount?: number;
-	region?: EngineLookup;
-	screenControl?: boolean;
-	skills?: EngineLookup[];
-	status?: string;
-	statusDuration?: string;
-	supervisor?: EngineLookup[];
-	taskCount?: number;
-	team?: EngineLookup;
-	user?: EngineLookup;
-	userPresenceStatus?: EngineAgentUserPresence;
+  allowChannels?: string[];
+  allowSetScreenControl?: boolean;
+  auditor?: EngineLookup[];
+  channel?: EngineAgentChannel[];
+  chatCount?: number;
+  description?: string;
+  extension?: string;
+  greetingMedia?: EngineLookup;
+  id?: string;
+  isSupervisor?: boolean;
+  lastStatusChange?: string;
+  name?: string;
+  progressiveCount?: number;
+  region?: EngineLookup;
+  screenControl?: boolean;
+  skills?: EngineLookup[];
+  status?: string;
+  statusDuration?: string;
+  supervisor?: EngineLookup[];
+  taskCount?: number;
+  team?: EngineLookup;
+  user?: EngineLookup;
+  userPresenceStatus?: EngineAgentUserPresence;
 }

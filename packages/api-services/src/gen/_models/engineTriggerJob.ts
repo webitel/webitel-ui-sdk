@@ -4,16 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineLookup } from './engineLookup';
 import type { EngineTriggerJobState } from './engineTriggerJobState';
+import type { EngineLookup } from './engineLookup';
 
 export interface EngineTriggerJob {
-	createdAt?: string;
-	error?: string;
-	id?: string;
-	startedAt?: string;
-	state?: EngineTriggerJobState;
-	stoppedAt?: string;
-	trigger?: EngineLookup;
+  createdAt?: string;
+  error?: string;
+  id?: string;
+  startedAt?: string;
+  state?: EngineTriggerJobState;
+  stoppedAt?: string;
+  trigger?: EngineLookup;
 }

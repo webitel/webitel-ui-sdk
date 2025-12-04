@@ -6,12 +6,12 @@
  */
 
 export type DeleteTimezonesParams = {
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique ID(s) to remove.
-	 */
-	etag: string[];
+/**
+ * Fields to be retrieved as a result.
+ */
+fields?: string[];
+/**
+ * Set of unique ID(s) to remove.
+ */
+etag: string[];
 };

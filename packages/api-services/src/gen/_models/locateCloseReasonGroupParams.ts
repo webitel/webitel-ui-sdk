@@ -6,5 +6,5 @@
  */
 
 export type LocateCloseReasonGroupParams = {
-	fields?: string[];
+fields?: string[];
 };

@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueBucket {
-	bucket?: EngineLookup;
-	disabled?: boolean;
-	id?: string;
-	priority?: number;
-	ratio?: number;
+  bucket?: EngineLookup;
+  disabled?: boolean;
+  id?: string;
+  priority?: number;
+  ratio?: number;
 }

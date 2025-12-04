@@ -9,9 +9,9 @@
  * Media File.
  */
 export interface WebitelChatMessageFile {
-	id?: string;
-	name?: string;
-	size?: string;
-	type?: string;
-	url?: string;
+  id?: string;
+  name?: string;
+  size?: string;
+  type?: string;
+  url?: string;
 }

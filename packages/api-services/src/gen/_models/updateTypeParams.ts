@@ -6,8 +6,8 @@
  */
 
 export type UpdateTypeParams = {
-	/**
-	 * Fields to return into result.
-	 */
-	fields?: string[];
+/**
+ * Fields to return into result.
+ */
+fields?: string[];
 };

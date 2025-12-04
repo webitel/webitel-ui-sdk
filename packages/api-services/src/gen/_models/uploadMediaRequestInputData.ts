@@ -7,7 +7,7 @@
 import type { RpcStatus } from './rpcStatus';
 
 export interface UploadMediaRequestInputData {
-	binary?: string;
-	cancel?: RpcStatus;
-	offset?: number;
+  binary?: string;
+  cancel?: RpcStatus;
+  offset?: number;
 }

@@ -6,5 +6,5 @@
  */
 
 export type DeleteRoutingSchemaParams = {
-	domainId?: string;
+domainId?: string;
 };

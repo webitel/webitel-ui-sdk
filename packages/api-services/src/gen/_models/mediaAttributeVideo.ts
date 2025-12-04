@@ -6,7 +6,7 @@
  */
 
 export interface MediaAttributeVideo {
-	duration?: number;
-	height?: number;
-	width?: number;
+  duration?: number;
+  height?: number;
+  width?: number;
 }

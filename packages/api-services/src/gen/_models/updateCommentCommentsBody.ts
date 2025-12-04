@@ -7,8 +7,8 @@
 import type { CommentFormat } from './commentFormat';
 
 export type UpdateCommentCommentsBody = {
-	/** NEW Text components styling format. */
-	format?: CommentFormat[];
-	/** NEW Text of the comment. */
-	text: string;
+  /** NEW Text components styling format. */
+  format?: CommentFormat[];
+  /** NEW Text of the comment. */
+  text: string;
 };

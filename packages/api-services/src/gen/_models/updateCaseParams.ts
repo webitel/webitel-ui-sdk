@@ -6,20 +6,20 @@
  */
 
 export type UpdateCaseParams = {
-	/**
-	 * List of JSON fields to update.
-	 */
-	xJsonMask?: string[];
-	/**
-	 * List of fields to include in the response.
-	 */
-	fields?: string[];
-	/**
+/**
+ * List of JSON fields to update.
+ */
+xJsonMask?: string[];
+/**
+ * List of fields to include in the response.
+ */
+fields?: string[];
+/**
  * Indicates whether to disable the trigger after the application execution.
 Default is false (trigger **will** be executed).
 Set to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).
 
 [WTEL-7055]
  */
-	disableTrigger?: boolean;
+disableTrigger?: boolean;
 };

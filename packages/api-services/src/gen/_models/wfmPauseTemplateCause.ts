@@ -7,6 +7,6 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmPauseTemplateCause {
-	cause?: WfmLookupEntity;
-	duration?: string;
+  cause?: WfmLookupEntity;
+  duration?: string;
 }

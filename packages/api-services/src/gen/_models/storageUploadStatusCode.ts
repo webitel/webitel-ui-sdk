@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageUploadStatusCode =
-	(typeof StorageUploadStatusCode)[keyof typeof StorageUploadStatusCode];
+export type StorageUploadStatusCode = typeof StorageUploadStatusCode[keyof typeof StorageUploadStatusCode];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StorageUploadStatusCode = {
-	Unknown: 'Unknown',
-	Ok: 'Ok',
-	Failed: 'Failed',
+  Unknown: 'Unknown',
+  Ok: 'Ok',
+  Failed: 'Failed',
 } as const;

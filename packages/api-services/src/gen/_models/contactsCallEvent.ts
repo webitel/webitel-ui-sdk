@@ -5,21 +5,21 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ContactsCallFile } from './contactsCallFile';
-import type { ContactsTranscriptLookup } from './contactsTranscriptLookup';
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { ContactsTranscriptLookup } from './contactsTranscriptLookup';
 
 export interface ContactsCallEvent {
-	closedAt?: string;
-	duration?: string;
-	files?: ContactsCallFile[];
-	flowScheme?: WebitelcontactsLookup;
-	gateway?: WebitelcontactsLookup;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	isMissed?: boolean;
-	participants?: WebitelcontactsLookup[];
-	queue?: WebitelcontactsLookup;
-	totalDuration?: string;
-	transcripts?: ContactsTranscriptLookup[];
+  closedAt?: string;
+  duration?: string;
+  files?: ContactsCallFile[];
+  flowScheme?: WebitelcontactsLookup;
+  gateway?: WebitelcontactsLookup;
+  id?: string;
+  isDetailed?: boolean;
+  isInbound?: boolean;
+  isMissed?: boolean;
+  participants?: WebitelcontactsLookup[];
+  queue?: WebitelcontactsLookup;
+  totalDuration?: string;
+  transcripts?: ContactsTranscriptLookup[];
 }

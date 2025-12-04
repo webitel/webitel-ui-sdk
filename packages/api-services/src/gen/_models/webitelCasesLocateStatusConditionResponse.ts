@@ -7,5 +7,5 @@
 import type { WebitelCasesStatusCondition } from './webitelCasesStatusCondition';
 
 export interface WebitelCasesLocateStatusConditionResponse {
-	status?: WebitelCasesStatusCondition;
+  status?: WebitelCasesStatusCondition;
 }

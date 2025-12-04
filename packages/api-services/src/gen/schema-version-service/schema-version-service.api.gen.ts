@@ -6,38 +6,42 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	EngineSearchSchemaVersionResponse,
-	SearchSchemaVersionParams,
+  EngineSearchSchemaVersionResponse,
+  SearchSchemaVersionParams
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getSchemaVersionService =
-		// --- title end
-		() => {
-			// --- header end
-			const searchSchemaVersion = <
-				TData = AxiosResponse<EngineSearchSchemaVersionResponse>,
-			>(
-				schemaId: string,
-				params?: SearchSchemaVersionParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/routing/schema/${schemaId}/versions`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
 
-			// --- footer start
-			return { searchSchemaVersion };
-		};
-export type SearchSchemaVersionResult =
-	AxiosResponse<EngineSearchSchemaVersionResponse>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getSchemaVersionService
+            // --- title end
+           = () => {
+
+            // --- header end
+          const searchSchemaVersion = <TData = AxiosResponse<EngineSearchSchemaVersionResponse>>(
+    schemaId: string,
+    params?: SearchSchemaVersionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/${schemaId}/versions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {searchSchemaVersion}};
+export type SearchSchemaVersionResult = AxiosResponse<EngineSearchSchemaVersionResponse>
+
+            // --- footer end
+          

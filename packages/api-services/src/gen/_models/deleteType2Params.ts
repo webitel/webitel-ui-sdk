@@ -6,9 +6,9 @@
  */
 
 export type DeleteType2Params = {
-	fields?: string[];
-	/**
-	 * `type.repo`
-	 */
-	repo?: string[];
+fields?: string[];
+/**
+ * `type.repo`
+ */
+repo?: string[];
 };

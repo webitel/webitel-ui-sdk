@@ -6,22 +6,20 @@
  */
 import * as zod from 'zod/v4';
 
+
 /**
  * @summary List of the all Articles's Tag(s).
  */
 export const listTagsQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-});
+  "page": zod.number().optional(),
+  "size": zod.number().optional()
+})
 
 export const listTagsResponse = zod.object({
-	data: zod
-		.array(
-			zod.object({
-				name: zod.string().optional().describe('The name of the tag.'),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-	page: zod.number().optional(),
-});
+  "data": zod.array(zod.object({
+  "name": zod.string().optional().describe('The name of the tag.')
+})).optional(),
+  "next": zod.boolean().optional(),
+  "page": zod.number().optional()
+})
+

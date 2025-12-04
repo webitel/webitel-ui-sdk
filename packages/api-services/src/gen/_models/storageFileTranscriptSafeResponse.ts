@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface StorageFileTranscriptSafeResponse {
-	createdAt?: string;
-	file?: EngineLookup;
-	id?: string;
-	locale?: string;
-	profile?: EngineLookup;
-	transcript?: string;
+  createdAt?: string;
+  file?: EngineLookup;
+  id?: string;
+  locale?: string;
+  profile?: EngineLookup;
+  transcript?: string;
 }

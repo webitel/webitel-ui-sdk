@@ -11,9 +11,9 @@ import type { WebitelcontactsLookup } from './webitelcontactsLookup';
  * LabelTags dataset list of label's info.
  */
 export interface ContactsLabelTags {
-	labels?: ContactsLabelInfo[];
-	next?: boolean;
-	/** Page number of partial result. */
-	page?: number;
-	sources?: WebitelcontactsLookup[];
+  labels?: ContactsLabelInfo[];
+  next?: boolean;
+  /** Page number of partial result. */
+  page?: number;
+  sources?: WebitelcontactsLookup[];
 }

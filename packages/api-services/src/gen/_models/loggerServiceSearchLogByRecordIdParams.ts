@@ -7,17 +7,17 @@
 import type { LoggerServiceSearchLogByRecordIdActionItem } from './loggerServiceSearchLogByRecordIdActionItem';
 
 export type LoggerServiceSearchLogByRecordIdParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	/**
-	 * GENERAL filters
-	 */
-	action?: LoggerServiceSearchLogByRecordIdActionItem[];
-	userId?: string[];
-	userIp?: string;
-	dateFrom?: string;
-	dateTo?: string;
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+/**
+ * GENERAL filters
+ */
+action?: LoggerServiceSearchLogByRecordIdActionItem[];
+userId?: string[];
+userIp?: string;
+dateFrom?: string;
+dateTo?: string;
 };

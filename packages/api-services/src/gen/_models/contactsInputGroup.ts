@@ -6,10 +6,10 @@
  */
 
 export interface ContactsInputGroup {
-	/** The new description of the group. */
-	description?: string;
-	/** The new enabled status of the group. */
-	enabled?: boolean;
-	/** The new name of the group. */
-	name?: string;
+  /** The new description of the group. */
+  description?: string;
+  /** The new enabled status of the group. */
+  enabled?: boolean;
+  /** The new name of the group. */
+  name?: string;
 }

@@ -7,7 +7,7 @@
 import type { LoggerLog } from './loggerLog';
 
 export interface LoggerLogs {
-	items?: LoggerLog[];
-	next?: boolean;
-	page?: number;
+  items?: LoggerLog[];
+  next?: boolean;
+  page?: number;
 }

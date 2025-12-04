@@ -5,22 +5,22 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ApiLicenseUser } from './apiLicenseUser';
-import type { ApiObjclass } from './apiObjclass';
-import type { ApiObjectId } from './apiObjectId';
 import type { ApiPermission } from './apiPermission';
+import type { ApiObjectId } from './apiObjectId';
+import type { ApiObjclass } from './apiObjclass';
 
 export interface ApiUserinfo {
-	dc?: string;
-	domain?: string;
-	expiresAt?: string;
-	extension?: string;
-	license?: ApiLicenseUser[];
-	name?: string;
-	permissions?: ApiPermission[];
-	preferredUsername?: string;
-	roles?: ApiObjectId[];
-	scope?: ApiObjclass[];
-	updatedAt?: string;
-	userId?: string;
-	username?: string;
+  dc?: string;
+  domain?: string;
+  expiresAt?: string;
+  extension?: string;
+  license?: ApiLicenseUser[];
+  name?: string;
+  permissions?: ApiPermission[];
+  preferredUsername?: string;
+  roles?: ApiObjectId[];
+  scope?: ApiObjclass[];
+  updatedAt?: string;
+  userId?: string;
+  username?: string;
 }

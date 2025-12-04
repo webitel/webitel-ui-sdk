@@ -5,18 +5,18 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsByAgentChannel =
-	(typeof SearchScreenRecordingsByAgentChannel)[keyof typeof SearchScreenRecordingsByAgentChannel];
+export type SearchScreenRecordingsByAgentChannel = typeof SearchScreenRecordingsByAgentChannel[keyof typeof SearchScreenRecordingsByAgentChannel];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchScreenRecordingsByAgentChannel = {
-	UnknownChannel: 'UnknownChannel',
-	ChatChannel: 'ChatChannel',
-	MailChannel: 'MailChannel',
-	CallChannel: 'CallChannel',
-	LogChannel: 'LogChannel',
-	MediaChannel: 'MediaChannel',
-	KnowledgebaseChannel: 'KnowledgebaseChannel',
-	CasesChannel: 'CasesChannel',
-	ScreenRecordingChannel: 'ScreenRecordingChannel',
+  UnknownChannel: 'UnknownChannel',
+  ChatChannel: 'ChatChannel',
+  MailChannel: 'MailChannel',
+  CallChannel: 'CallChannel',
+  LogChannel: 'LogChannel',
+  MediaChannel: 'MediaChannel',
+  KnowledgebaseChannel: 'KnowledgebaseChannel',
+  CasesChannel: 'CasesChannel',
+  ScreenRecordingChannel: 'ScreenRecordingChannel',
 } as const;

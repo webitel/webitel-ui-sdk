@@ -6,5 +6,5 @@
  */
 
 export type CreateServiceParams = {
-	fields?: string[];
+fields?: string[];
 };

@@ -6,68 +6,75 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	DeleteMediaFileParams,
-	ReadMediaFileParams,
-	SearchMediaFileParams,
-	StorageListMedia,
-	StorageMediaFile,
+  DeleteMediaFileParams,
+  ReadMediaFileParams,
+  SearchMediaFileParams,
+  StorageListMedia,
+  StorageMediaFile
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getMediaFileService =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary Search MediaFile
-			 */
-			const searchMediaFile = <TData = AxiosResponse<StorageListMedia>>(
-				params?: SearchMediaFileParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/storage/media', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Remove MediaFile
-			 */
-			const deleteMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
-				id: string,
-				params?: DeleteMediaFileParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/storage/media/${id}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary MediaFile item
-			 */
-			const readMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
-				id: string,
-				params?: ReadMediaFileParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/storage/media/${id}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
 
-			// --- footer start
-			return { searchMediaFile, deleteMediaFile, readMediaFile };
-		};
-export type SearchMediaFileResult = AxiosResponse<StorageListMedia>;
-export type DeleteMediaFileResult = AxiosResponse<StorageMediaFile>;
-export type ReadMediaFileResult = AxiosResponse<StorageMediaFile>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getMediaFileService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary Search MediaFile
+ */
+const searchMediaFile = <TData = AxiosResponse<StorageListMedia>>(
+    params?: SearchMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/media`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Remove MediaFile
+ */
+const deleteMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
+    id: string,
+    params?: DeleteMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/media/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary MediaFile item
+ */
+const readMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
+    id: string,
+    params?: ReadMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/media/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {searchMediaFile,deleteMediaFile,readMediaFile}};
+export type SearchMediaFileResult = AxiosResponse<StorageListMedia>
+export type DeleteMediaFileResult = AxiosResponse<StorageMediaFile>
+export type ReadMediaFileResult = AxiosResponse<StorageMediaFile>
+
+            // --- footer end
+          

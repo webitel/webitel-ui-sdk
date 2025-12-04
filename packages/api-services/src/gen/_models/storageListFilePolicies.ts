@@ -7,6 +7,6 @@
 import type { StorageFilePolicy } from './storageFilePolicy';
 
 export interface StorageListFilePolicies {
-	items?: StorageFilePolicy[];
-	next?: boolean;
+  items?: StorageFilePolicy[];
+  next?: boolean;
 }

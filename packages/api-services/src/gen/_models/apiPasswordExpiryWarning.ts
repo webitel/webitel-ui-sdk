@@ -6,6 +6,6 @@
  */
 
 export interface ApiPasswordExpiryWarning {
-	daysRemaining?: string;
-	expiresAt?: string;
+  daysRemaining?: string;
+  expiresAt?: string;
 }

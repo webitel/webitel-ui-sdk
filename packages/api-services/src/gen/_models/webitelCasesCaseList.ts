@@ -10,10 +10,10 @@ import type { WebitelCasesCase } from './webitelCasesCase';
  * Response message containing a list of cases.
  */
 export interface WebitelCasesCaseList {
-	/** List of cases. */
-	items?: WebitelCasesCase[];
-	/** Flag indicating if there are more pages. */
-	next?: boolean;
-	/** Current page number. */
-	page?: string;
+  /** List of cases. */
+  items?: WebitelCasesCase[];
+  /** Flag indicating if there are more pages. */
+  next?: boolean;
+  /** Current page number. */
+  page?: string;
 }

@@ -7,14 +7,14 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsChatEvent {
-	closedAt?: string;
-	duration?: string;
-	flowScheme?: WebitelcontactsLookup;
-	gateway?: WebitelcontactsLookup;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	isMissed?: boolean;
-	participants?: WebitelcontactsLookup[];
-	queue?: WebitelcontactsLookup;
+  closedAt?: string;
+  duration?: string;
+  flowScheme?: WebitelcontactsLookup;
+  gateway?: WebitelcontactsLookup;
+  id?: string;
+  isDetailed?: boolean;
+  isInbound?: boolean;
+  isMissed?: boolean;
+  participants?: WebitelcontactsLookup[];
+  queue?: WebitelcontactsLookup;
 }

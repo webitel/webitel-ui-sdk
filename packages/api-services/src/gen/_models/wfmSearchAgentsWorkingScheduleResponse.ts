@@ -4,12 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WfmAgentWorkingSchedule } from './wfmAgentWorkingSchedule';
 import type { WfmHoliday } from './wfmHoliday';
+import type { WfmAgentWorkingSchedule } from './wfmAgentWorkingSchedule';
 
 export interface WfmSearchAgentsWorkingScheduleResponse {
-	holidays?: WfmHoliday[];
-	items?: WfmAgentWorkingSchedule[];
-	total?: string;
+  holidays?: WfmHoliday[];
+  items?: WfmAgentWorkingSchedule[];
+  total?: string;
 }

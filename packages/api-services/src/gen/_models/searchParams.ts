@@ -6,10 +6,10 @@
  */
 
 export type SearchParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	objectName?: string[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+objectName?: string[];
 };

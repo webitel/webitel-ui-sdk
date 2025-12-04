@@ -6,5 +6,5 @@
  */
 
 export type ReadOutboundResourceDisplayParams = {
-	domainId?: string;
+domainId?: string;
 };

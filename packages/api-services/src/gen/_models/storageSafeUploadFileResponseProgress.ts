@@ -6,5 +6,5 @@
  */
 
 export interface StorageSafeUploadFileResponseProgress {
-	uploaded?: string;
+  uploaded?: string;
 }

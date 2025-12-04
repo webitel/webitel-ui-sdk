@@ -7,5 +7,5 @@
 import type { ApiCertificate } from './apiCertificate';
 
 export interface ApiSearchCertificatesResponse {
-	certificates?: ApiCertificate[];
+  certificates?: ApiCertificate[];
 }

@@ -7,5 +7,5 @@
 import type { ApiTfaUrl } from './apiTfaUrl';
 
 export interface ApiGetUserTfaKeyResponse {
-	totp?: ApiTfaUrl;
+  totp?: ApiTfaUrl;
 }

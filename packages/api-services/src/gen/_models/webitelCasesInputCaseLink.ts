@@ -7,9 +7,9 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesInputCaseLink {
-	etag?: string;
-	name?: string;
-	url?: string;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userId?: GeneralLookup;
+  etag?: string;
+  name?: string;
+  url?: string;
+  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+  userId?: GeneralLookup;
 }

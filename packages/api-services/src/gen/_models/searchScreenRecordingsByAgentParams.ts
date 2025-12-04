@@ -7,19 +7,19 @@
 import type { SearchScreenRecordingsByAgentChannel } from './searchScreenRecordingsByAgentChannel';
 
 export type SearchScreenRecordingsByAgentParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	uploadedAtFrom?: string;
-	uploadedAtTo?: string;
-	referenceId?: string[];
-	retentionUntilFrom?: string;
-	retentionUntilTo?: string;
-	/**
-	 *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
-	 */
-	channel?: SearchScreenRecordingsByAgentChannel;
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: string[];
+uploadedAtFrom?: string;
+uploadedAtTo?: string;
+referenceId?: string[];
+retentionUntilFrom?: string;
+retentionUntilTo?: string;
+/**
+ *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
+ */
+channel?: SearchScreenRecordingsByAgentChannel;
 };
