@@ -7,7 +7,7 @@ export const useChatScroll = (
   element: Ref<HTMLElement | null> = null,
   chatMessages: ChatMessageType[] = [],
 ) => {
-  const { arrivedState } = useScroll(element);
+  const { arrivedState } = useScroll(element.value);
 
   const newUnseenMessages = ref<number>(0);
   const showScrollToBottomBtn = ref<boolean>(false);
