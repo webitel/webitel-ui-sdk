@@ -83,8 +83,8 @@ import {computed } from 'vue';
 import {WtIcon} from "../../../../components";
 import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
 import {ComponentSize} from "../../../../enums";
-import {ScreenshotStatus} from '../../types';
 import { ResultCallbacks } from '../../../../types';
+import {ScreenshotStatus} from '../../types';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = defineProps<{
