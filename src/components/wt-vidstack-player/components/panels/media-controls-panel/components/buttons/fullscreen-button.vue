@@ -1,8 +1,8 @@
 <template>
   <media-fullscreen-button
     class="fullscreen-button"
-    @media-enter-fullscreen-request="emit('toggle', true)"
-    @media-exit-fullscreen-request="emit('toggle', false)"
+    @media-enter-fullscreen-request="toggleFullScreenRequest(true)"
+    @media-exit-fullscreen-request="toggleFullScreenRequest(false)"
   >
     <wt-icon-btn
       icon="player-enter-fullscreen"
@@ -26,6 +26,9 @@ const emit = defineEmits<{
   'toggle': [value: boolean];
 }>();
 
+const toggleFullScreenRequest = (val: boolean) => {
+  emit('toggle', val)
+}
 </script>
 
 <style scoped>
