@@ -54,6 +54,7 @@
   import { ComponentSize } from '@webitel/ui-sdk/enums';
   import {computed, defineEmits, defineProps, inject} from 'vue';
 
+  import { ChatMessageType } from "../../../types/ChatMessage.types";
   import { useChatMessageFile } from '../composables/useChatMessageFile'
   import MessageAvatar from './details/chat-message-avatar.vue';
   import MessageBlockedError from './details/chat-message-blocked-error.vue';
@@ -64,7 +65,7 @@
   import MessageTime from './details/chat-message-time.vue';
 
   const props = withDefaults(defineProps<{
-    message: object,
+    message: ChatMessageType
     showAvatar?: boolean,
     username?: string,
   }>(), {
