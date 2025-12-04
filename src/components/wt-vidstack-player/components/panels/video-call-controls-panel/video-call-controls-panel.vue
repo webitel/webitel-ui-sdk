@@ -85,9 +85,9 @@
 import {computed, inject, ref} from 'vue';
 
 import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
-import {ScreenshotStatus} from '../../../../../modules/CallSession/types';
 import { ComponentSize } from '../../../../../enums';
 import { VideoCallAction } from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
+import {ScreenshotStatus} from '../../../../../modules/CallSession/types';
 import { ResultCallbacks } from '../../../../../types';
 
 const props = defineProps<{
