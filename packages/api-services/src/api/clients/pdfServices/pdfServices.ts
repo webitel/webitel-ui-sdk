@@ -46,11 +46,11 @@ const getPdfExportHistory = async (params: any) => {
 			page,
 			size,
 		});
-		const { items, next } = applyTransform(response.data, [
+		const { data, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(data, [snakeToCamel()]),
 			next,
 		};
 	} catch (err) {
@@ -58,18 +58,21 @@ const getPdfExportHistory = async (params: any) => {
 	}
 };
 
-const downloadPdfExport = async (params: any) => {
+const downloadPdfExport = async ({fileId, params}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		downloadPdfExportQueryParams,
 	);
+  console.log(params);
+  console.log(fileId);
 
 	const { domainId } = applyTransform(params, [
 		sanitize(fieldsToSend),
-		camelToSnake(),
 	]);
 
+  console.log(domainId);
+
 	try {
-		const response = await getPdfService().downloadPdfExport(params.fileId, {
+		const response = await getPdfService().downloadPdfExport(fileId, {
 			domainId,
 		});
 		return response.data;
