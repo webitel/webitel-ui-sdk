@@ -29,6 +29,7 @@
       contains-icon
       variant="outlined"
       color="secondary"
+      :disabled="!props['mic:accessed']"
       :size="size"
       :icon="microphoneIcon"
       @click="emit(VideoCallAction.Mic)"
@@ -40,6 +41,7 @@
       contains-icon
       variant="outlined"
       color="secondary"
+      :disabled="!props['video:accessed']"
       :size="size"
       :icon="videoCamIcon"
       @click="emit(VideoCallAction.Video)"
