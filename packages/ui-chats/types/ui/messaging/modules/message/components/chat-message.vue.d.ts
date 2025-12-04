@@ -1,13 +1,14 @@
+import { ChatMessageType } from "../../../types/ChatMessage.types";
 type __VLS_Props = {
-    message: object;
+    message: ChatMessageType;
     showAvatar?: boolean;
     username?: string;
 };
-declare var __VLS_1: {}, __VLS_44: {};
+declare var __VLS_1: {}, __VLS_40: {};
 type __VLS_Slots = {} & {
     'before-message'?: (props: typeof __VLS_1) => any;
 } & {
-    'after-message'?: (props: typeof __VLS_44) => any;
+    'after-message'?: (props: typeof __VLS_40) => any;
 };
 declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     "open-image": () => any;
