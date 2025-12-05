@@ -6,6 +6,8 @@ import {
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
+import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
+
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -16,7 +18,7 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const getFilesList = async (params: any) => {
+const getFilesList = async (params: SearchFilesByCallParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		searchFilesQueryParams,
 	);
@@ -212,6 +214,42 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	}
 };
 
+const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: string }) => {
+  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+    searchFilesQueryParams,
+  );
+
+  const requestParams = applyTransform(params, [
+    merge(getDefaultGetParams()),
+    sanitize(fieldsToSend),
+    camelToSnake(),
+    (param) => ({
+      ...param,
+      q: param.q ?? param.search,
+      'uploaded_at.from': param.uploaded_at_from,
+      'uploaded_at.to': param.uploaded_at_to,
+    }),
+  ]);
+
+  try {
+    const response = await getFileService().searchFilesByCall(
+      params.callId,
+      requestParams,
+    );
+
+    const { items, next } = applyTransform(response.data, [
+      merge(getDefaultGetListResponse()),
+    ]);
+
+    return {
+      items,
+      next,
+    };
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
 export const FileServicesAPI = {
 	getList: getFilesList,
 	delete: deleteFiles,
@@ -219,4 +257,5 @@ export const FileServicesAPI = {
 	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
 	deleteScreenRecordingsByAgent,
+  getListByCall: getFilesListByCall,
 };
