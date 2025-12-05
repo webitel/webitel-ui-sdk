@@ -7,5 +7,5 @@
 import type { WebitelCasesPriority } from './webitelCasesPriority';
 
 export interface WebitelCasesLocatePriorityResponse {
-	priority?: WebitelCasesPriority;
+  priority?: WebitelCasesPriority;
 }

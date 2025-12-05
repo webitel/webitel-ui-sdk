@@ -8,6 +8,6 @@ import type { DataField } from './dataField';
 import type { DataInputExtensionIndices } from './dataInputExtensionIndices';
 
 export interface DataInputExtension {
-	fields?: DataField[];
-	indices?: DataInputExtensionIndices;
+  fields?: DataField[];
+  indices?: DataInputExtensionIndices;
 }

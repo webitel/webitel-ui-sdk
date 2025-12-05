@@ -6,5 +6,5 @@
  */
 
 export type ReadMemberParams = {
-	domainId?: string;
+domainId?: string;
 };

@@ -6,7 +6,7 @@
  */
 
 export interface EngineSchemaVariablesServicePatchSchemaVariableBody {
-	encrypt?: boolean;
-	fields?: string[];
-	name?: string;
+  encrypt?: boolean;
+  fields?: string[];
+  name?: string;
 }

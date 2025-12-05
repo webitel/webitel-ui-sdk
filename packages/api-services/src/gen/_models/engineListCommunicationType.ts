@@ -7,6 +7,6 @@
 import type { EngineCommunicationType } from './engineCommunicationType';
 
 export interface EngineListCommunicationType {
-	items?: EngineCommunicationType[];
-	next?: boolean;
+  items?: EngineCommunicationType[];
+  next?: boolean;
 }

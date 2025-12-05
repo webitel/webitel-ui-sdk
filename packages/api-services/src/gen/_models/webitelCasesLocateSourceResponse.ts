@@ -10,6 +10,6 @@ import type { WebitelCasesSource } from './webitelCasesSource';
  * Response message for locating a source.
  */
 export interface WebitelCasesLocateSourceResponse {
-	/** The located source. */
-	source?: WebitelCasesSource;
+  /** The located source. */
+  source?: WebitelCasesSource;
 }

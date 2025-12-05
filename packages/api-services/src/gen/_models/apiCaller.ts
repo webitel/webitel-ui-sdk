@@ -4,33 +4,32 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiCaller as __ApiCaller } from './apiCaller';
 import type { ApiCallerId } from './apiCallerId';
+import type { ApiCaller as __ApiCaller } from './apiCaller';
 
 export interface ApiCaller {
-	ani?: string;
-	answeredAt?: string;
-	bridgedAt?: string;
-	callee?: ApiCallerId;
-	caller?: ApiCallerId;
-	/** [optional] 'originator' | 'originatee' FIXME: 'bridge' ? */
-	commutation?: string;
-	/** [required] ! */
-	createdAt?: string;
-	destination?: string;
-	/** [required] inbound | outbound */
-	direction?: string;
-	hangupAt?: string;
-	onholdAt?: string;
-	onholdMs?: string;
-	/** [optional] [From]: source */
-	origin?: ApiCallerId;
-	originatee?: __ApiCaller;
-	originator?: __ApiCaller;
-	progressAt?: string;
-	progressMediaAt?: string;
-	proto?: string;
-	transferred?: string;
-	uuid?: string;
+  ani?: string;
+  answeredAt?: string;
+  bridgedAt?: string;
+  callee?: ApiCallerId;
+  caller?: ApiCallerId;
+  /** [optional] 'originator' | 'originatee' FIXME: 'bridge' ? */
+  commutation?: string;
+  /** [required] ! */
+  createdAt?: string;
+  destination?: string;
+  /** [required] inbound | outbound */
+  direction?: string;
+  hangupAt?: string;
+  onholdAt?: string;
+  onholdMs?: string;
+  /** [optional] [From]: source */
+  origin?: ApiCallerId;
+  originatee?: __ApiCaller;
+  originator?: __ApiCaller;
+  progressAt?: string;
+  progressMediaAt?: string;
+  proto?: string;
+  transferred?: string;
+  uuid?: string;
 }

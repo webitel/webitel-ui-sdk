@@ -9,10 +9,10 @@
  * Postback. Reply Button Click[ed].
  */
 export interface WebitelChatServerPostback {
-	/** Button's callback data associated. */
-	code?: string;
-	/** Message ID of the button. */
-	mid?: string;
-	/** Button's caption. Text to display. */
-	text?: string;
+  /** Button's callback data associated. */
+  code?: string;
+  /** Message ID of the button. */
+  mid?: string;
+  /** Button's caption. Text to display. */
+  text?: string;
 }

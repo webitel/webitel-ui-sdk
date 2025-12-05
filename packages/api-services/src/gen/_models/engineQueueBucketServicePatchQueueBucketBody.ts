@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueBucketServicePatchQueueBucketBody {
-	bucket?: EngineLookup;
-	disabled?: boolean;
-	fields?: string[];
-	priority?: number;
-	ratio?: number;
+  bucket?: EngineLookup;
+  disabled?: boolean;
+  fields?: string[];
+  priority?: number;
+  ratio?: number;
 }

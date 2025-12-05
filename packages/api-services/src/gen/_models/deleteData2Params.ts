@@ -6,8 +6,8 @@
  */
 
 export type DeleteData2Params = {
-	/**
-	 * Fields to be retrieved into result dataset.
-	 */
-	fields?: string[];
+/**
+ * Fields to be retrieved into result dataset.
+ */
+fields?: string[];
 };

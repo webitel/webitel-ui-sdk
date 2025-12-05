@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type GetTimelineTimelineTypeItem =
-	(typeof GetTimelineTimelineTypeItem)[keyof typeof GetTimelineTimelineTypeItem];
+export type GetTimelineTimelineTypeItem = typeof GetTimelineTimelineTypeItem[keyof typeof GetTimelineTimelineTypeItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetTimelineTimelineTypeItem = {
-	chat: 'chat',
-	call: 'call',
-	email: 'email',
+  chat: 'chat',
+  call: 'call',
+  email: 'email',
 } as const;

@@ -6,9 +6,9 @@
  */
 
 export interface EngineQueueReportGeneralAgentStatus {
-	free?: number;
-	offline?: number;
-	online?: number;
-	pause?: number;
-	total?: number;
+  free?: number;
+  offline?: number;
+  online?: number;
+  pause?: number;
+  total?: number;
 }

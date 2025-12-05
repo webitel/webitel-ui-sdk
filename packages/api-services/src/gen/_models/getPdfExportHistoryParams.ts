@@ -6,12 +6,12 @@
  */
 
 export type GetPdfExportHistoryParams = {
-	/**
-	 * Page number (starting from 1).
-	 */
-	page?: number;
-	/**
-	 * Page size (number of records per page).
-	 */
-	size?: number;
+/**
+ * Page number (starting from 1).
+ */
+page?: number;
+/**
+ * Page size (number of records per page).
+ */
+size?: number;
 };

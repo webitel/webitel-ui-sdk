@@ -6,5 +6,4 @@
  */
 import type { OAuth2FederationUpdateOAuthServiceBody } from './oAuth2FederationUpdateOAuthServiceBody';
 
-export type OAuth2FederationUpdateOAuthServiceBodyBody =
-	OAuth2FederationUpdateOAuthServiceBody;
+export type OAuth2FederationUpdateOAuthServiceBodyBody = OAuth2FederationUpdateOAuthServiceBody;

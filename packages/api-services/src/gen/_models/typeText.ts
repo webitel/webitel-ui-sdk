@@ -7,8 +7,8 @@
 import type { TypeTextViolation } from './typeTextViolation';
 
 export interface TypeText {
-	maxBytes?: number;
-	maxChars?: number;
-	multiline?: boolean;
-	violation?: TypeTextViolation;
+  maxBytes?: number;
+  maxChars?: number;
+  multiline?: boolean;
+  violation?: TypeTextViolation;
 }

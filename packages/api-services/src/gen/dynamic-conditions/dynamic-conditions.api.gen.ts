@@ -6,122 +6,114 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ContactsCondition,
-	ContactsConditionList,
-	ContactsInputCondition,
-	ContactsLocateConditionResponse,
-	DynamicConditionsCreateConditionBody,
-	ListConditionsParams,
-	LocateConditionParams,
+  ContactsCondition,
+  ContactsConditionList,
+  ContactsInputCondition,
+  ContactsLocateConditionResponse,
+  DynamicConditionsCreateConditionBody,
+  ListConditionsParams,
+  LocateConditionParams
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getDynamicConditions =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary Delete a condition
-			 */
-			const deleteCondition = <TData = AxiosResponse<ContactsCondition>>(
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/contacts/groups/conditions/${id}`, options);
-			};
-			/**
-			 * @summary Locate a condition by ID
-			 */
-			const locateCondition = <
-				TData = AxiosResponse<ContactsLocateConditionResponse>,
-			>(
-				id: string,
-				params?: LocateConditionParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/contacts/groups/conditions/${id}`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Update an existing condition
-			 */
-			const updateCondition2 = <TData = AxiosResponse<ContactsCondition>>(
-				id: string,
-				contactsInputCondition: ContactsInputCondition,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.patch(
-					`/contacts/groups/conditions/${id}`,
-					contactsInputCondition,
-					options,
-				);
-			};
-			/**
-			 * @summary Update an existing condition
-			 */
-			const updateCondition = <TData = AxiosResponse<ContactsCondition>>(
-				id: string,
-				contactsInputCondition: ContactsInputCondition,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.put(
-					`/contacts/groups/conditions/${id}`,
-					contactsInputCondition,
-					options,
-				);
-			};
-			/**
-			 * @summary Retrieve a list of conditions
-			 */
-			const listConditions = <TData = AxiosResponse<ContactsConditionList>>(
-				groupId: string,
-				params?: ListConditionsParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/contacts/groups/${groupId}/conditions`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Create a new condition
-			 */
-			const createCondition = <TData = AxiosResponse<ContactsCondition>>(
-				groupId: string,
-				dynamicConditionsCreateConditionBody: DynamicConditionsCreateConditionBody,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(
-					`/contacts/groups/${groupId}/conditions`,
-					dynamicConditionsCreateConditionBody,
-					options,
-				);
-			};
 
-			// --- footer start
-			return {
-				deleteCondition,
-				locateCondition,
-				updateCondition2,
-				updateCondition,
-				listConditions,
-				createCondition,
-			};
-		};
-export type DeleteConditionResult = AxiosResponse<ContactsCondition>;
-export type LocateConditionResult =
-	AxiosResponse<ContactsLocateConditionResponse>;
-export type UpdateCondition2Result = AxiosResponse<ContactsCondition>;
-export type UpdateConditionResult = AxiosResponse<ContactsCondition>;
-export type ListConditionsResult = AxiosResponse<ContactsConditionList>;
-export type CreateConditionResult = AxiosResponse<ContactsCondition>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getDynamicConditions
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary Delete a condition
+ */
+const deleteCondition = <TData = AxiosResponse<ContactsCondition>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/groups/conditions/${id}`,options
+    );
+  }
+/**
+ * @summary Locate a condition by ID
+ */
+const locateCondition = <TData = AxiosResponse<ContactsLocateConditionResponse>>(
+    id: string,
+    params?: LocateConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/groups/conditions/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Update an existing condition
+ */
+const updateCondition2 = <TData = AxiosResponse<ContactsCondition>>(
+    id: string,
+    contactsInputCondition: ContactsInputCondition, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/groups/conditions/${id}`,
+      contactsInputCondition,options
+    );
+  }
+/**
+ * @summary Update an existing condition
+ */
+const updateCondition = <TData = AxiosResponse<ContactsCondition>>(
+    id: string,
+    contactsInputCondition: ContactsInputCondition, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/groups/conditions/${id}`,
+      contactsInputCondition,options
+    );
+  }
+/**
+ * @summary Retrieve a list of conditions
+ */
+const listConditions = <TData = AxiosResponse<ContactsConditionList>>(
+    groupId: string,
+    params?: ListConditionsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/groups/${groupId}/conditions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+/**
+ * @summary Create a new condition
+ */
+const createCondition = <TData = AxiosResponse<ContactsCondition>>(
+    groupId: string,
+    dynamicConditionsCreateConditionBody: DynamicConditionsCreateConditionBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/groups/${groupId}/conditions`,
+      dynamicConditionsCreateConditionBody,options
+    );
+  }
+
+            // --- footer start
+            return {deleteCondition,locateCondition,updateCondition2,updateCondition,listConditions,createCondition}};
+export type DeleteConditionResult = AxiosResponse<ContactsCondition>
+export type LocateConditionResult = AxiosResponse<ContactsLocateConditionResponse>
+export type UpdateCondition2Result = AxiosResponse<ContactsCondition>
+export type UpdateConditionResult = AxiosResponse<ContactsCondition>
+export type ListConditionsResult = AxiosResponse<ContactsConditionList>
+export type CreateConditionResult = AxiosResponse<ContactsCondition>
+
+            // --- footer end
+          

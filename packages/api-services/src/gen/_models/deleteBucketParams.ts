@@ -6,5 +6,5 @@
  */
 
 export type DeleteBucketParams = {
-	domainId?: string;
+domainId?: string;
 };

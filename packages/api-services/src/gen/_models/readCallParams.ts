@@ -6,5 +6,5 @@
  */
 
 export type ReadCallParams = {
-	domainId?: string;
+domainId?: string;
 };

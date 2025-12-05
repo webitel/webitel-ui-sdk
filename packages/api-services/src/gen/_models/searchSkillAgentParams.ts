@@ -6,11 +6,11 @@
  */
 
 export type SearchSkillAgentParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	agentId?: string[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: string[];
+agentId?: string[];
 };

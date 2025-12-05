@@ -6,8 +6,8 @@
  */
 
 export interface ContactsTimeRange {
-	/** Since timestamp(milli). Not before. */
-	since?: string;
-	/** Until timestamp(milli). Not after. */
-	until?: string;
+  /** Since timestamp(milli). Not before. */
+  since?: string;
+  /** Until timestamp(milli). Not after. */
+  until?: string;
 }

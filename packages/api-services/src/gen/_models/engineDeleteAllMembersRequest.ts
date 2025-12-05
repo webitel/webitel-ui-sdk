@@ -4,26 +4,25 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineDeleteAllMembersRequestVariables } from './engineDeleteAllMembersRequestVariables';
 import type { EngineFilterBetween } from './engineFilterBetween';
+import type { EngineDeleteAllMembersRequestVariables } from './engineDeleteAllMembersRequestVariables';
 
 export interface EngineDeleteAllMembersRequest {
-	agentId?: number[];
-	attempts?: EngineFilterBetween;
-	bucketId?: number[];
-	createdAt?: EngineFilterBetween;
-	destination?: string;
-	id?: string[];
-	name?: string;
-	numbers?: string[];
-	offeringAt?: EngineFilterBetween;
-	priority?: EngineFilterBetween;
-	q?: string;
-	queueId?: string[];
-	size?: number;
-	sort?: string;
-	stopCause?: string[];
-	variables?: EngineDeleteAllMembersRequestVariables;
-	withoutMembers?: boolean;
+  agentId?: number[];
+  attempts?: EngineFilterBetween;
+  bucketId?: number[];
+  createdAt?: EngineFilterBetween;
+  destination?: string;
+  id?: string[];
+  name?: string;
+  numbers?: string[];
+  offeringAt?: EngineFilterBetween;
+  priority?: EngineFilterBetween;
+  q?: string;
+  queueId?: string[];
+  size?: number;
+  sort?: string;
+  stopCause?: string[];
+  variables?: EngineDeleteAllMembersRequestVariables;
+  withoutMembers?: boolean;
 }

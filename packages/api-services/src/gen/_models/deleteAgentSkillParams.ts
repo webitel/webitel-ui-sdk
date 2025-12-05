@@ -6,5 +6,5 @@
  */
 
 export type DeleteAgentSkillParams = {
-	domainId?: string;
+domainId?: string;
 };

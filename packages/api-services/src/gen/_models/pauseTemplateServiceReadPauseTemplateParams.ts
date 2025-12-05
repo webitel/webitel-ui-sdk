@@ -6,5 +6,5 @@
  */
 
 export type PauseTemplateServiceReadPauseTemplateParams = {
-	fields?: string[];
+fields?: string[];
 };

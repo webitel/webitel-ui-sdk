@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WfmAbsenceType =
-	(typeof WfmAbsenceType)[keyof typeof WfmAbsenceType];
+export type WfmAbsenceType = typeof WfmAbsenceType[keyof typeof WfmAbsenceType];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WfmAbsenceType = {
-	AbsenceTypeUnspecified: 'ABSENCE_TYPE_UNSPECIFIED',
-	AbsenceTypeDayoff: 'ABSENCE_TYPE_DAYOFF',
-	AbsenceTypeVacation: 'ABSENCE_TYPE_VACATION',
-	AbsenceTypeSickday: 'ABSENCE_TYPE_SICKDAY',
+  AbsenceTypeUnspecified: 'ABSENCE_TYPE_UNSPECIFIED',
+  AbsenceTypeDayoff: 'ABSENCE_TYPE_DAYOFF',
+  AbsenceTypeVacation: 'ABSENCE_TYPE_VACATION',
+  AbsenceTypeSickday: 'ABSENCE_TYPE_SICKDAY',
 } as const;

@@ -6,10 +6,10 @@
  */
 
 export interface WebitelCasesCallFile {
-	id?: string;
-	mimeType?: string;
-	name?: string;
-	size?: string;
-	startAt?: string;
-	stopAt?: string;
+  id?: string;
+  mimeType?: string;
+  name?: string;
+  size?: string;
+  startAt?: string;
+  stopAt?: string;
 }

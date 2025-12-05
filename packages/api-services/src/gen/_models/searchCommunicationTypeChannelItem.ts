@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchCommunicationTypeChannelItem =
-	(typeof SearchCommunicationTypeChannelItem)[keyof typeof SearchCommunicationTypeChannelItem];
+export type SearchCommunicationTypeChannelItem = typeof SearchCommunicationTypeChannelItem[keyof typeof SearchCommunicationTypeChannelItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchCommunicationTypeChannelItem = {
-	Undefined: 'Undefined',
-	Phone: 'Phone',
-	Email: 'Email',
-	Messaging: 'Messaging',
+  Undefined: 'Undefined',
+  Phone: 'Phone',
+  Email: 'Email',
+  Messaging: 'Messaging',
 } as const;

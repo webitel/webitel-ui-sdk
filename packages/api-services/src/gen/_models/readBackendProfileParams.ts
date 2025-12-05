@@ -6,5 +6,5 @@
  */
 
 export type ReadBackendProfileParams = {
-	domainId?: string;
+domainId?: string;
 };

@@ -6,8 +6,8 @@
  */
 
 export type LocatePhoneParams = {
-	/**
-	 * Fields [Q]uery to build result record.
-	 */
-	fields?: string[];
+/**
+ * Fields [Q]uery to build result record.
+ */
+fields?: string[];
 };

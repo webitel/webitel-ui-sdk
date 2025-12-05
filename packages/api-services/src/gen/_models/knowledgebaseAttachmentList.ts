@@ -7,9 +7,9 @@
 import type { WebitelknowledgebaseAttachment } from './webitelknowledgebaseAttachment';
 
 export interface KnowledgebaseAttachmentList {
-	/** Attachment dataset page. */
-	data?: WebitelknowledgebaseAttachment[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+  /** Attachment dataset page. */
+  data?: WebitelknowledgebaseAttachment[];
+  next?: boolean;
+  /** The page number of the partial result. */
+  page?: number;
 }

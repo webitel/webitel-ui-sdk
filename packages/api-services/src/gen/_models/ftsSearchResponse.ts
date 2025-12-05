@@ -7,6 +7,6 @@
 import type { FtsSearchData } from './ftsSearchData';
 
 export interface FtsSearchResponse {
-	items?: FtsSearchData[];
-	next?: boolean;
+  items?: FtsSearchData[];
+  next?: boolean;
 }

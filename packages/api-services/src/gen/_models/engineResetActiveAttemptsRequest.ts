@@ -6,7 +6,7 @@
  */
 
 export interface EngineResetActiveAttemptsRequest {
-	attemptType?: string[];
-	idleForMinutes?: string;
-	result?: string;
+  attemptType?: string[];
+  idleForMinutes?: string;
+  result?: string;
 }

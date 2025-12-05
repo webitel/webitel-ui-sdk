@@ -9,10 +9,10 @@
  * An input of the Contact's language.
  */
 export interface ContactsInputLanguage {
-	/** Unique ID of the latest version of an existing association. */
-	etag: string;
-	/** Indicates whether this association must be default
+  /** Unique ID of the latest version of an existing association. */
+  etag: string;
+  /** Indicates whether this association must be default
 among others of the same type. */
-	primary?: boolean;
-	tag?: string;
+  primary?: boolean;
+  tag?: string;
 }

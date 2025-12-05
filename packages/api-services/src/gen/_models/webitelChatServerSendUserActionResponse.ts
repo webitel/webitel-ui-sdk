@@ -6,5 +6,5 @@
  */
 
 export interface WebitelChatServerSendUserActionResponse {
-	ok?: boolean;
+  ok?: boolean;
 }

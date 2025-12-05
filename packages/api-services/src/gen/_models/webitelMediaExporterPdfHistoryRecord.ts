@@ -10,22 +10,22 @@ import type { WebitelMediaExporterPdfExportStatus } from './webitelMediaExporter
  * Represents a single PDF export record.
  */
 export interface WebitelMediaExporterPdfHistoryRecord {
-	/** Creation timestamp (Unix millis). */
-	createdAt?: string;
-	/** User ID who created the export. */
-	createdBy?: string;
-	/** Related file ID. */
-	fileId?: string;
-	/** Export ID. */
-	id?: string;
-	/** MIME type of the export. */
-	mimeType?: string;
-	/** Export name. */
-	name?: string;
-	/** Current export status. */
-	status?: WebitelMediaExporterPdfExportStatus;
-	/** Update timestamp (Unix millis). */
-	updatedAt?: string;
-	/** User ID who last updated the export. */
-	updatedBy?: string;
+  /** Creation timestamp (Unix millis). */
+  createdAt?: string;
+  /** User ID who created the export. */
+  createdBy?: string;
+  /** Related file ID. */
+  fileId?: string;
+  /** Export ID. */
+  id?: string;
+  /** MIME type of the export. */
+  mimeType?: string;
+  /** Export name. */
+  name?: string;
+  /** Current export status. */
+  status?: WebitelMediaExporterPdfExportStatus;
+  /** Update timestamp (Unix millis). */
+  updatedAt?: string;
+  /** User ID who last updated the export. */
+  updatedBy?: string;
 }

@@ -7,7 +7,7 @@
 import type { WebitelCasesDayTimeline } from './webitelCasesDayTimeline';
 
 export interface WebitelCasesGetTimelineResponse {
-	days?: WebitelCasesDayTimeline[];
-	next?: boolean;
-	page?: number;
+  days?: WebitelCasesDayTimeline[];
+  next?: boolean;
+  page?: number;
 }

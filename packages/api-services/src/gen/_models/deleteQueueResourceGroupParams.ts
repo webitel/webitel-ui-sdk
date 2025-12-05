@@ -6,5 +6,5 @@
  */
 
 export type DeleteQueueResourceGroupParams = {
-	domainId?: string;
+domainId?: string;
 };

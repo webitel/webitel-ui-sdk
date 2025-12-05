@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelChatMarkChatProcessedResponse {
-	[key: string]: unknown;
-}
+export interface WebitelChatMarkChatProcessedResponse { [key: string]: unknown }

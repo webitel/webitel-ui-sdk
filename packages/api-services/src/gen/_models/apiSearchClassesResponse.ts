@@ -7,8 +7,8 @@
 import type { ApiObjectClass } from './apiObjectClass';
 
 export interface ApiSearchClassesResponse {
-	items?: ApiObjectClass[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+  items?: ApiObjectClass[];
+  next?: boolean;
+  page?: number;
+  size?: number;
 }

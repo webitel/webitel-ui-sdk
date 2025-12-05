@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCreateQuickReplyRequest {
-	article?: EngineLookup;
-	name?: string;
-	queues?: EngineLookup[];
-	teams?: EngineLookup[];
-	text?: string;
+  article?: EngineLookup;
+  name?: string;
+  queues?: EngineLookup[];
+  teams?: EngineLookup[];
+  text?: string;
 }

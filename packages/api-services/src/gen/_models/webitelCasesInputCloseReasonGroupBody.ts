@@ -6,5 +6,4 @@
  */
 import type { WebitelCasesInputCloseReasonGroup } from './webitelCasesInputCloseReasonGroup';
 
-export type WebitelCasesInputCloseReasonGroupBody =
-	WebitelCasesInputCloseReasonGroup;
+export type WebitelCasesInputCloseReasonGroupBody = WebitelCasesInputCloseReasonGroup;

@@ -4,14 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { EngineCreateCallRequestCallSettings } from './engineCreateCallRequestCallSettings';
 import type { EngineCreateCallRequestEndpointRequest } from './engineCreateCallRequestEndpointRequest';
+import type { EngineCreateCallRequestCallSettings } from './engineCreateCallRequestCallSettings';
 
 export interface EngineCreateCallRequest {
-	destination?: string;
-	domainId?: string;
-	from?: EngineCreateCallRequestEndpointRequest;
-	params?: EngineCreateCallRequestCallSettings;
-	to?: EngineCreateCallRequestEndpointRequest;
+  destination?: string;
+  domainId?: string;
+  from?: EngineCreateCallRequestEndpointRequest;
+  params?: EngineCreateCallRequestCallSettings;
+  to?: EngineCreateCallRequestEndpointRequest;
 }

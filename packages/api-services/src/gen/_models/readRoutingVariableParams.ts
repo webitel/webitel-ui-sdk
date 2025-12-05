@@ -6,5 +6,5 @@
  */
 
 export type ReadRoutingVariableParams = {
-	domainId?: string;
+domainId?: string;
 };

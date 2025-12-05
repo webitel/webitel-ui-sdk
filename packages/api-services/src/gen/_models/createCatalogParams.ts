@@ -6,5 +6,5 @@
  */
 
 export type CreateCatalogParams = {
-	fields?: string[];
+fields?: string[];
 };

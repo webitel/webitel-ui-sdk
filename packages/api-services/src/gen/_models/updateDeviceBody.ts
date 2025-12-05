@@ -8,27 +8,27 @@ import type { ApiUserId } from './apiUserId';
 import type { UpdateDeviceBodyProvision } from './updateDeviceBodyProvision';
 
 export type UpdateDeviceBody = {
-	/** username */
-	account?: string;
-	/** vendor brand name */
-	brand?: string;
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
-	/** act as a hotdesk */
-	hotdesk?: boolean;
-	hotdesks?: string[];
-	ip?: string;
-	loggedIn?: string;
-	mac?: string;
-	model?: string;
-	/** display name */
-	name?: string;
-	password?: string;
-	provision?: UpdateDeviceBodyProvision;
-	reged?: boolean;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: ApiUserId;
+  /** username */
+  account?: string;
+  /** vendor brand name */
+  brand?: string;
+  createdAt?: string;
+  createdBy?: ApiUserId;
+  deletedAt?: string;
+  deletedBy?: ApiUserId;
+  /** act as a hotdesk */
+  hotdesk?: boolean;
+  hotdesks?: string[];
+  ip?: string;
+  loggedIn?: string;
+  mac?: string;
+  model?: string;
+  /** display name */
+  name?: string;
+  password?: string;
+  provision?: UpdateDeviceBodyProvision;
+  reged?: boolean;
+  updatedAt?: string;
+  updatedBy?: ApiUserId;
+  user?: ApiUserId;
 };

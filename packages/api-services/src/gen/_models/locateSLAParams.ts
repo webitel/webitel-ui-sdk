@@ -6,5 +6,5 @@
  */
 
 export type LocateSLAParams = {
-	fields?: string[];
+fields?: string[];
 };

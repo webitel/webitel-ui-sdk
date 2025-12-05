@@ -6,11 +6,11 @@
  */
 
 export type UpdateSpaceBody = {
-	/** BIO. Short description about the space.
+  /** BIO. Short description about the space.
 OPTIONAL. Multi-lined text. */
-	homePage?: string;
-	/** Represents the name of the knowledge base space. */
-	name?: string;
-	/** The state of the space. */
-	state?: boolean;
+  homePage?: string;
+  /** Represents the name of the knowledge base space. */
+  name?: string;
+  /** The state of the space. */
+  state?: boolean;
 };

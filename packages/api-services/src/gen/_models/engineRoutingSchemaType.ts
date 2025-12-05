@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineRoutingSchemaType =
-	(typeof EngineRoutingSchemaType)[keyof typeof EngineRoutingSchemaType];
+export type EngineRoutingSchemaType = typeof EngineRoutingSchemaType[keyof typeof EngineRoutingSchemaType];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineRoutingSchemaType = {
-	Default: 'default',
-	Voice: 'voice',
-	Chat: 'chat',
-	Processing: 'processing',
-	Service: 'service',
+  Default: 'default',
+  Voice: 'voice',
+  Chat: 'chat',
+  Processing: 'processing',
+  Service: 'service',
 } as const;

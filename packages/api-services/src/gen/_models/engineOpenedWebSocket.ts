@@ -6,13 +6,13 @@
  */
 
 export interface EngineOpenedWebSocket {
-	applicationName?: string;
-	createdAt?: string;
-	duration?: string;
-	id?: string;
-	ip?: string;
-	pong?: string;
-	updatedAt?: string;
-	userAgent?: string;
-	ver?: string;
+  applicationName?: string;
+  createdAt?: string;
+  duration?: string;
+  id?: string;
+  ip?: string;
+  pong?: string;
+  updatedAt?: string;
+  userAgent?: string;
+  ver?: string;
 }

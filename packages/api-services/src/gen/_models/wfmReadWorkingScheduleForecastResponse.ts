@@ -7,5 +7,5 @@
 import type { WfmReadWorkingScheduleForecastResponseItems } from './wfmReadWorkingScheduleForecastResponseItems';
 
 export interface WfmReadWorkingScheduleForecastResponse {
-	items?: WfmReadWorkingScheduleForecastResponseItems;
+  items?: WfmReadWorkingScheduleForecastResponseItems;
 }

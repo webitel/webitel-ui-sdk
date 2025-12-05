@@ -7,7 +7,7 @@
 import type { LDAPUpdateLDAPCatalogBodyCatalog } from './lDAPUpdateLDAPCatalogBodyCatalog';
 
 export interface LDAPUpdateLDAPCatalogBody {
-	/** LDAP Catalog changes. */
-	catalog?: LDAPUpdateLDAPCatalogBodyCatalog;
-	fields?: string[];
+  /** LDAP Catalog changes. */
+  catalog?: LDAPUpdateLDAPCatalogBodyCatalog;
+  fields?: string[];
 }

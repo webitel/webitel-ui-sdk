@@ -10,9 +10,9 @@ import type { ContactsEmailEvent } from './contactsEmailEvent';
 import type { ContactsTimelineEventType } from './contactsTimelineEventType';
 
 export interface ContactsEvent {
-	call?: ContactsCallEvent;
-	chat?: ContactsChatEvent;
-	createdAt?: string;
-	email?: ContactsEmailEvent;
-	type?: ContactsTimelineEventType;
+  call?: ContactsCallEvent;
+  chat?: ContactsChatEvent;
+  createdAt?: string;
+  email?: ContactsEmailEvent;
+  type?: ContactsTimelineEventType;
 }

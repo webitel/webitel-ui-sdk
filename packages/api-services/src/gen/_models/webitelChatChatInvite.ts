@@ -6,6 +6,6 @@
  */
 
 export interface WebitelChatChatInvite {
-	date?: string;
-	from?: string;
+  date?: string;
+  from?: string;
 }

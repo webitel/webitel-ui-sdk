@@ -6,31 +6,31 @@
  */
 
 export type ListIMClientsParams = {
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
+/**
+ * Page number of result dataset records. offset = (page*size)
+ */
+page?: number;
+/**
+ * Size count of records on result page. limit = (size++)
+ */
+size?: number;
+/**
  * Search term: IMClient.
 `?` - matches any one character
 `*` - matches 0 or more characters
 Search fields: {user,app}
  */
-	q?: string;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Fields to be retrieved into result.
-	 */
-	fields?: string[];
-	/**
-	 * Link(s) with unique ID only.
-	 */
-	id?: string[];
+q?: string;
+/**
+ * Sort the result according to fields.
+ */
+sort?: string[];
+/**
+ * Fields to be retrieved into result.
+ */
+fields?: string[];
+/**
+ * Link(s) with unique ID only.
+ */
+id?: string[];
 };

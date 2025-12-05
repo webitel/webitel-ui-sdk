@@ -8,21 +8,21 @@ import type { DataField } from './dataField';
 import type { DataInputDictionaryIndexes } from './dataInputDictionaryIndexes';
 
 export interface DataInputDictionary {
-	about?: string;
-	administered?: boolean;
-	/** Required. Display [fields.id] key.
+  about?: string;
+  administered?: boolean;
+  /** Required. Display [fields.id] key.
 Used as [lookup].name setting for this [struct] type. */
-	display?: string;
-	fields?: DataField[];
-	/** INDEX fields. */
-	indexes?: DataInputDictionaryIndexes;
-	/** A User-friendly [type.id] name ; lang: specific. */
-	name?: string;
-	/** Required. Primary [fields.id] key.
+  display?: string;
+  fields?: DataField[];
+  /** INDEX fields. */
+  indexes?: DataInputDictionaryIndexes;
+  /** A User-friendly [type.id] name ; lang: specific. */
+  name?: string;
+  /** Required. Primary [fields.id] key.
 Used as [lookup].id setting for this [struct] type. */
-	primary?: string;
-	/** string id = 1; // The [type] name (singular form), e.g.: `country`.
+  primary?: string;
+  /** string id = 1; // The [type] name (singular form), e.g.: `country`.
 
 Repository (dataset) name (plural form), e.g.: `countries`. */
-	repo?: string;
+  repo?: string;
 }

@@ -7,5 +7,5 @@
 import type { EngineTriggerServiceCreateTriggerJobBodyVariables } from './engineTriggerServiceCreateTriggerJobBodyVariables';
 
 export interface EngineTriggerServiceCreateTriggerJobBody {
-	variables?: EngineTriggerServiceCreateTriggerJobBodyVariables;
+  variables?: EngineTriggerServiceCreateTriggerJobBodyVariables;
 }

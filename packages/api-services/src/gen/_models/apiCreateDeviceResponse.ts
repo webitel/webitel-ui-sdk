@@ -7,5 +7,5 @@
 import type { ApiDevice } from './apiDevice';
 
 export interface ApiCreateDeviceResponse {
-	device?: ApiDevice;
+  device?: ApiDevice;
 }

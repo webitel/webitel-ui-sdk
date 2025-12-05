@@ -6,5 +6,5 @@
  */
 
 export type ReadRoutingSchemaParams = {
-	domainId?: string;
+domainId?: string;
 };

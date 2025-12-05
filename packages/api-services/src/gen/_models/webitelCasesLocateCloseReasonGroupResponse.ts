@@ -7,5 +7,5 @@
 import type { WebitelCasesCloseReasonGroup } from './webitelCasesCloseReasonGroup';
 
 export interface WebitelCasesLocateCloseReasonGroupResponse {
-	closeReasonGroup?: WebitelCasesCloseReasonGroup;
+  closeReasonGroup?: WebitelCasesCloseReasonGroup;
 }

@@ -7,6 +7,6 @@
 import type { EngineAgentPauseCause } from './engineAgentPauseCause';
 
 export interface EngineListAgentPauseCause {
-	items?: EngineAgentPauseCause[];
-	next?: boolean;
+  items?: EngineAgentPauseCause[];
+  next?: boolean;
 }

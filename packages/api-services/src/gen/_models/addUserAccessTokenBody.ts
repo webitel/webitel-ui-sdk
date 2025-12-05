@@ -4,19 +4,18 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { AddUserAccessTokenBodyUser } from './addUserAccessTokenBodyUser';
 import type { ApiObjectId } from './apiObjectId';
+import type { AddUserAccessTokenBodyUser } from './addUserAccessTokenBodyUser';
 
 export type AddUserAccessTokenBody = {
-	createdAt?: string;
-	createdBy?: ApiObjectId;
-	deletedAt?: string;
-	deletedBy?: ApiObjectId;
-	id?: string;
-	token?: string;
-	updatedAt?: string;
-	updatedBy?: ApiObjectId;
-	usage?: string;
-	user?: AddUserAccessTokenBodyUser;
+  createdAt?: string;
+  createdBy?: ApiObjectId;
+  deletedAt?: string;
+  deletedBy?: ApiObjectId;
+  id?: string;
+  token?: string;
+  updatedAt?: string;
+  updatedBy?: ApiObjectId;
+  usage?: string;
+  user?: AddUserAccessTokenBodyUser;
 };

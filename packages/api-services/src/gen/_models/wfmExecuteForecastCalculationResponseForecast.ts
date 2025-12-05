@@ -6,6 +6,6 @@
  */
 
 export interface WfmExecuteForecastCalculationResponseForecast {
-	agents?: string;
-	timestamp?: string;
+  agents?: string;
+  timestamp?: string;
 }

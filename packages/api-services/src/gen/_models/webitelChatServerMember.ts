@@ -7,12 +7,12 @@
 import type { WebitelChatServerGateway } from './webitelChatServerGateway';
 
 export interface WebitelChatServerMember {
-	channelId?: string;
-	externalId?: string;
-	internal?: boolean;
-	type?: string;
-	updatedAt?: string;
-	userId?: string;
-	username?: string;
-	via?: WebitelChatServerGateway;
+  channelId?: string;
+  externalId?: string;
+  internal?: boolean;
+  type?: string;
+  updatedAt?: string;
+  userId?: string;
+  username?: string;
+  via?: WebitelChatServerGateway;
 }

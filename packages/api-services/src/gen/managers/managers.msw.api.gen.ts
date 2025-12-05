@@ -4,947 +4,143 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
 
-import type { ContactsManager, ContactsManagerList } from '.././_models';
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
-export const getDeleteManagersResponseMock = (): ContactsManager[] =>
-	Array.from(
-		{ length: faker.number.int({ min: 1, max: 10 }) },
-		(_, i) => i + 1,
-	).map(() => ({
-		createdAt: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		createdBy: faker.helpers.arrayElement([
-			{
-				id: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				name: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				type: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-			},
-			undefined,
-		]),
-		etag: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		id: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-		updatedAt: faker.helpers.arrayElement([
-			faker.string.alpha({ length: { min: 10, max: 20 } }),
-			undefined,
-		]),
-		updatedBy: faker.helpers.arrayElement([
-			{
-				id: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				name: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				type: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-			},
-			undefined,
-		]),
-		user: faker.helpers.arrayElement([
-			{
-				id: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				name: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				type: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-			},
-			undefined,
-		]),
-		ver: faker.helpers.arrayElement([
-			faker.number.int({ min: undefined, max: undefined }),
-			undefined,
-		]),
-	}));
+import type {
+  ContactsManager,
+  ContactsManagerList
+} from '.././_models';
 
-export const getListManagersResponseMock = (
-	overrideResponse: Partial<ContactsManagerList> = {},
-): ContactsManagerList => ({
-	data: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
 
-export const getMergeManagersResponseMock = (
-	overrideResponse: Partial<ContactsManagerList> = {},
-): ContactsManagerList => ({
-	data: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getDeleteManagersResponseMock = (): ContactsManager[] => (Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})))
 
-export const getResetManagersResponseMock = (
-	overrideResponse: Partial<ContactsManagerList> = {},
-): ContactsManagerList => ({
-	data: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getListManagersResponseMock = (overrideResponse: Partial< ContactsManagerList > = {}): ContactsManagerList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getDeleteManagerResponseMock = (
-	overrideResponse: Partial<ContactsManager> = {},
-): ContactsManager => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	user: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getMergeManagersResponseMock = (overrideResponse: Partial< ContactsManagerList > = {}): ContactsManagerList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getLocateManagerResponseMock = (
-	overrideResponse: Partial<ContactsManager> = {},
-): ContactsManager => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	user: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getResetManagersResponseMock = (overrideResponse: Partial< ContactsManagerList > = {}): ContactsManagerList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getUpdateManager2ResponseMock = (
-	overrideResponse: Partial<ContactsManagerList> = {},
-): ContactsManagerList => ({
-	data: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getDeleteManagerResponseMock = (overrideResponse: Partial< ContactsManager > = {}): ContactsManager => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getUpdateManagerResponseMock = (
-	overrideResponse: Partial<ContactsManagerList> = {},
-): ContactsManagerList => ({
-	data: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getLocateManagerResponseMock = (overrideResponse: Partial< ContactsManager > = {}): ContactsManager => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getDeleteManagersMockHandler = (
-	overrideResponse?:
-		| ContactsManager[]
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<ContactsManager[]> | ContactsManager[]),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/contacts/:contactId/managers',
-		async (info) => {
-			await delay(1000);
+export const getUpdateManager2ResponseMock = (overrideResponse: Partial< ContactsManagerList > = {}): ContactsManagerList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteManagersResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getUpdateManagerResponseMock = (overrideResponse: Partial< ContactsManagerList > = {}): ContactsManagerList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getListManagersMockHandler = (
-	overrideResponse?:
-		| ContactsManagerList
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ContactsManagerList> | ContactsManagerList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/contacts/:contactId/managers',
-		async (info) => {
-			await delay(1000);
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getListManagersResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getDeleteManagersMockHandler = (overrideResponse?: ContactsManager[] | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ContactsManager[]> | ContactsManager[]), options?: RequestHandlerOptions) => {
+  return http.delete('*/contacts/:contactId/managers', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteManagersResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getMergeManagersMockHandler = (
-	overrideResponse?:
-		| ContactsManagerList
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<ContactsManagerList> | ContactsManagerList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.post(
-		'*/contacts/:contactId/managers',
-		async (info) => {
-			await delay(1000);
+export const getListManagersMockHandler = (overrideResponse?: ContactsManagerList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ContactsManagerList> | ContactsManagerList), options?: RequestHandlerOptions) => {
+  return http.get('*/contacts/:contactId/managers', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getListManagersResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getMergeManagersResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getMergeManagersMockHandler = (overrideResponse?: ContactsManagerList | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ContactsManagerList> | ContactsManagerList), options?: RequestHandlerOptions) => {
+  return http.post('*/contacts/:contactId/managers', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getMergeManagersResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getResetManagersMockHandler = (
-	overrideResponse?:
-		| ContactsManagerList
-		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<ContactsManagerList> | ContactsManagerList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.put(
-		'*/contacts/:contactId/managers',
-		async (info) => {
-			await delay(1000);
+export const getResetManagersMockHandler = (overrideResponse?: ContactsManagerList | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ContactsManagerList> | ContactsManagerList), options?: RequestHandlerOptions) => {
+  return http.put('*/contacts/:contactId/managers', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getResetManagersResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getResetManagersResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getDeleteManagerMockHandler = (overrideResponse?: ContactsManager | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ContactsManager> | ContactsManager), options?: RequestHandlerOptions) => {
+  return http.delete('*/contacts/:contactId/managers/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteManagerResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getDeleteManagerMockHandler = (
-	overrideResponse?:
-		| ContactsManager
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<ContactsManager> | ContactsManager),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/contacts/:contactId/managers/:etag',
-		async (info) => {
-			await delay(1000);
+export const getLocateManagerMockHandler = (overrideResponse?: ContactsManager | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ContactsManager> | ContactsManager), options?: RequestHandlerOptions) => {
+  return http.get('*/contacts/:contactId/managers/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getLocateManagerResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteManagerResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getUpdateManager2MockHandler = (overrideResponse?: ContactsManagerList | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ContactsManagerList> | ContactsManagerList), options?: RequestHandlerOptions) => {
+  return http.patch('*/contacts/:contactId/managers/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateManager2ResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getLocateManagerMockHandler = (
-	overrideResponse?:
-		| ContactsManager
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ContactsManager> | ContactsManager),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/contacts/:contactId/managers/:etag',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getLocateManagerResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getUpdateManager2MockHandler = (
-	overrideResponse?:
-		| ContactsManagerList
-		| ((
-				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<ContactsManagerList> | ContactsManagerList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.patch(
-		'*/contacts/:contactId/managers/:etag',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateManager2ResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getUpdateManagerMockHandler = (
-	overrideResponse?:
-		| ContactsManagerList
-		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<ContactsManagerList> | ContactsManagerList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.put(
-		'*/contacts/:contactId/managers/:etag',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateManagerResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getUpdateManagerMockHandler = (overrideResponse?: ContactsManagerList | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ContactsManagerList> | ContactsManagerList), options?: RequestHandlerOptions) => {
+  return http.put('*/contacts/:contactId/managers/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateManagerResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getManagersMock = () => [
-	getDeleteManagersMockHandler(),
-	getListManagersMockHandler(),
-	getMergeManagersMockHandler(),
-	getResetManagersMockHandler(),
-	getDeleteManagerMockHandler(),
-	getLocateManagerMockHandler(),
-	getUpdateManager2MockHandler(),
-	getUpdateManagerMockHandler(),
-];
+  getDeleteManagersMockHandler(),
+  getListManagersMockHandler(),
+  getMergeManagersMockHandler(),
+  getResetManagersMockHandler(),
+  getDeleteManagerMockHandler(),
+  getLocateManagerMockHandler(),
+  getUpdateManager2MockHandler(),
+  getUpdateManagerMockHandler()]

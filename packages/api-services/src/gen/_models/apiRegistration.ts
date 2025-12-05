@@ -8,15 +8,15 @@ import type { ApiDeviceId } from './apiDeviceId';
 import type { ApiUserId } from './apiUserId';
 
 export interface ApiRegistration {
-	callid?: string;
-	contact?: string;
-	device?: ApiDeviceId;
-	expiresAt?: string;
-	id?: string;
-	instance?: string;
-	received?: string;
-	registerAt?: string;
-	socket?: string;
-	user?: ApiUserId;
-	userAgent?: string;
+  callid?: string;
+  contact?: string;
+  device?: ApiDeviceId;
+  expiresAt?: string;
+  id?: string;
+  instance?: string;
+  received?: string;
+  registerAt?: string;
+  socket?: string;
+  user?: ApiUserId;
+  userAgent?: string;
 }

@@ -6,31 +6,31 @@
  */
 
 export type ContactsChatCatalogGetContactChatHistoryParams = {
-	/**
-	 * Messages ONLY starting from the specified message ID
-	 */
-	offsetId?: string;
-	/**
-	 * Messages ONLY been sent before the specified epochtime(milli).
-	 */
-	offsetDate?: string;
-	/**
-	 * Number of messages to return.
-	 */
-	size?: number;
-	page?: number;
-	/**
-	 * Search term: message.text
-	 */
-	q?: string;
-	/**
-	 * Fields to return into result.
-	 */
-	fields?: string[];
-	/**
+/**
+ * Messages ONLY starting from the specified message ID
+ */
+offsetId?: string;
+/**
+ * Messages ONLY been sent before the specified epochtime(milli).
+ */
+offsetDate?: string;
+/**
+ * Number of messages to return.
+ */
+size?: number;
+page?: number;
+/**
+ * Search term: message.text
+ */
+q?: string;
+/**
+ * Fields to return into result.
+ */
+fields?: string[];
+/**
  * Includes the history of ONLY those dialogs
 whose member channel(s) contain
 a specified set of variables.
  */
-	groupString?: string;
+groupString?: string;
 };

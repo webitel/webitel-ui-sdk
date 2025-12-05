@@ -4,21 +4,20 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ContactsImageSize } from './contactsImageSize';
-import type { ContactsMediaAttribute } from './contactsMediaAttribute';
 import type { ContactsMediaFileHash } from './contactsMediaFileHash';
+import type { ContactsMediaAttribute } from './contactsMediaAttribute';
+import type { ContactsImageSize } from './contactsImageSize';
 import type { ContactsVideoSize } from './contactsVideoSize';
 
 export interface ContactsMediaFile {
-	data?: string;
-	date?: string;
-	/** md5, sha256, .. */
-	hash?: ContactsMediaFileHash;
-	id?: string;
-	meta?: ContactsMediaAttribute[];
-	size?: number;
-	thumb?: ContactsImageSize[];
-	type?: string;
-	videoThumb?: ContactsVideoSize[];
+  data?: string;
+  date?: string;
+  /** md5, sha256, .. */
+  hash?: ContactsMediaFileHash;
+  id?: string;
+  meta?: ContactsMediaAttribute[];
+  size?: number;
+  thumb?: ContactsImageSize[];
+  type?: string;
+  videoThumb?: ContactsVideoSize[];
 }

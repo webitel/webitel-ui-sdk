@@ -6,9 +6,9 @@
  */
 
 export type WorkingScheduleServiceSearchWorkingScheduleParams = {
-	q?: string;
-	page?: number;
-	size?: number;
-	sort?: string;
-	fields?: string[];
+q?: string;
+page?: number;
+size?: number;
+sort?: string;
+fields?: string[];
 };

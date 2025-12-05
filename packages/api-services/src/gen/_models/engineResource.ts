@@ -6,5 +6,5 @@
  */
 
 export interface EngineResource {
-	name?: string;
+  name?: string;
 }

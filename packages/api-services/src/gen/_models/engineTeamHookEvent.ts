@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTeamHookEvent =
-	(typeof EngineTeamHookEvent)[keyof typeof EngineTeamHookEvent];
+export type EngineTeamHookEvent = typeof EngineTeamHookEvent[keyof typeof EngineTeamHookEvent];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTeamHookEvent = {
-	TeamHookEventUndefined: 'teamHookEventUndefined',
-	AgentStatus: 'agent_status',
+  TeamHookEventUndefined: 'teamHookEventUndefined',
+  AgentStatus: 'agent_status',
 } as const;

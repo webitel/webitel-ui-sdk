@@ -4,13 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiAccessToken } from './apiAccessToken';
 import type { ApiAuthorizationCode } from './apiAuthorizationCode';
 import type { ApiErrorResponse } from './apiErrorResponse';
+import type { ApiAccessToken } from './apiAccessToken';
 
 export interface ApiAuthorizationResponse {
-	code?: ApiAuthorizationCode;
-	error?: ApiErrorResponse;
-	token?: ApiAccessToken;
+  code?: ApiAuthorizationCode;
+  error?: ApiErrorResponse;
+  token?: ApiAccessToken;
 }

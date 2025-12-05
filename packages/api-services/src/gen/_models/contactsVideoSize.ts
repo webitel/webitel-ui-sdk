@@ -6,8 +6,8 @@
  */
 
 export interface ContactsVideoSize {
-	height?: number;
-	size?: number;
-	startTs?: number;
-	width?: number;
+  height?: number;
+  size?: number;
+  startTs?: number;
+  width?: number;
 }

@@ -6,8 +6,8 @@
  */
 
 export type DownloadPdfExportParams = {
-	/**
-	 * Domain ID for authorization.
-	 */
-	domainId?: string;
+/**
+ * Domain ID for authorization.
+ */
+domainId?: string;
 };

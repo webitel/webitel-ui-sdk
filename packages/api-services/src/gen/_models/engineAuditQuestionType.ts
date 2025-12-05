@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineAuditQuestionType =
-	(typeof EngineAuditQuestionType)[keyof typeof EngineAuditQuestionType];
+export type EngineAuditQuestionType = typeof EngineAuditQuestionType[keyof typeof EngineAuditQuestionType];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineAuditQuestionType = {
-	QuestionDefault: 'question_default',
-	QuestionScore: 'question_score',
-	QuestionOption: 'question_option',
-	QuestionYes: 'question_yes',
+  QuestionDefault: 'question_default',
+  QuestionScore: 'question_score',
+  QuestionOption: 'question_option',
+  QuestionYes: 'question_yes',
 } as const;

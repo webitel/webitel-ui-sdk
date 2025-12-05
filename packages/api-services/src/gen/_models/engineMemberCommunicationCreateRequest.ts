@@ -7,12 +7,12 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineMemberCommunicationCreateRequest {
-	description?: string;
-	destination?: string;
-	display?: string;
-	dtmf?: string;
-	priority?: number;
-	resource?: EngineLookup;
-	stopAt?: string;
-	type?: EngineLookup;
+  description?: string;
+  destination?: string;
+  display?: string;
+  dtmf?: string;
+  priority?: number;
+  resource?: EngineLookup;
+  stopAt?: string;
+  type?: EngineLookup;
 }

@@ -7,5 +7,5 @@
 import type { ApiCall } from './apiCall';
 
 export interface ApiSearchCallsResponse {
-	list?: ApiCall[];
+  list?: ApiCall[];
 }

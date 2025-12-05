@@ -6,5 +6,5 @@
  */
 
 export type ReadQueueParams = {
-	domainId?: string;
+domainId?: string;
 };

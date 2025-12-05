@@ -9,10 +9,10 @@
  * Request message for creating a new group.
  */
 export interface ContactsCreateGroupRequest {
-	/** The description of the group. */
-	description?: string;
-	/** The enabled status of the group. */
-	enabled?: boolean;
-	/** The name of the group. */
-	name: string;
+  /** The description of the group. */
+  description?: string;
+  /** The enabled status of the group. */
+  enabled?: boolean;
+  /** The name of the group. */
+  name: string;
 }

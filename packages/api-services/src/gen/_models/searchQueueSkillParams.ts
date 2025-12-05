@@ -6,16 +6,16 @@
  */
 
 export type SearchQueueSkillParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	skillId?: number[];
-	bucketId?: number[];
-	lvl?: number[];
-	minCapacity?: number[];
-	maxCapacity?: number[];
-	enabled?: boolean;
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+id?: number[];
+skillId?: number[];
+bucketId?: number[];
+lvl?: number[];
+minCapacity?: number[];
+maxCapacity?: number[];
+enabled?: boolean;
 };

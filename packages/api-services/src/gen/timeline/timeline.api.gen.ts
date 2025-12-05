@@ -6,49 +6,51 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ContactsGetTimelineCounterResponse,
-	ContactsGetTimelineResponse,
-	GetTimelineTimelineParams,
+  ContactsGetTimelineCounterResponse,
+  ContactsGetTimelineResponse,
+  GetTimelineTimelineParams
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getTimeline =
-		// --- title end
-		() => {
-			// --- header end
-			const getTimelineTimeline = <
-				TData = AxiosResponse<ContactsGetTimelineResponse>,
-			>(
-				contactId: string,
-				params?: GetTimelineTimelineParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/contacts/${contactId}/timeline`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			const getTimelineCounterTimeline = <
-				TData = AxiosResponse<ContactsGetTimelineCounterResponse>,
-			>(
-				contactId: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/contacts/${contactId}/timeline/counter`, options);
-			};
 
-			// --- footer start
-			return { getTimelineTimeline, getTimelineCounterTimeline };
-		};
-export type GetTimelineTimelineResult =
-	AxiosResponse<ContactsGetTimelineResponse>;
-export type GetTimelineCounterTimelineResult =
-	AxiosResponse<ContactsGetTimelineCounterResponse>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getTimeline
+            // --- title end
+           = () => {
+
+            // --- header end
+          const getTimelineTimeline = <TData = AxiosResponse<ContactsGetTimelineResponse>>(
+    contactId: string,
+    params?: GetTimelineTimelineParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/timeline`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const getTimelineCounterTimeline = <TData = AxiosResponse<ContactsGetTimelineCounterResponse>>(
+    contactId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/timeline/counter`,options
+    );
+  }
+
+            // --- footer start
+            return {getTimelineTimeline,getTimelineCounterTimeline}};
+export type GetTimelineTimelineResult = AxiosResponse<ContactsGetTimelineResponse>
+export type GetTimelineCounterTimelineResult = AxiosResponse<ContactsGetTimelineCounterResponse>
+
+            // --- footer end
+          

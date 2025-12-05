@@ -6,67 +6,62 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	AgentChatServiceGetAgentChatsCounterParams,
-	AgentChatServiceGetAgentChatsParams,
-	WebitelChatGetAgentChatsCounterResponse,
-	WebitelChatGetAgentChatsResponse,
-	WebitelChatMarkChatProcessedResponse,
+  AgentChatServiceGetAgentChatsCounterParams,
+  AgentChatServiceGetAgentChatsParams,
+  WebitelChatGetAgentChatsCounterResponse,
+  WebitelChatGetAgentChatsResponse,
+  WebitelChatMarkChatProcessedResponse
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getAgentChatService =
-		// --- title end
-		() => {
-			// --- header end
-			const agentChatServiceGetAgentChats = <
-				TData = AxiosResponse<WebitelChatGetAgentChatsResponse>,
-			>(
-				params?: AgentChatServiceGetAgentChatsParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/agent/chats', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			const agentChatServiceGetAgentChatsCounter = <
-				TData = AxiosResponse<WebitelChatGetAgentChatsCounterResponse>,
-			>(
-				params?: AgentChatServiceGetAgentChatsCounterParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get('/agent/chats/counter', {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			const agentChatServiceMarkChatProcessed = <
-				TData = AxiosResponse<WebitelChatMarkChatProcessedResponse>,
-			>(
-				chatId: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.patch(`/agent/chats/${chatId}`, undefined, options);
-			};
 
-			// --- footer start
-			return {
-				agentChatServiceGetAgentChats,
-				agentChatServiceGetAgentChatsCounter,
-				agentChatServiceMarkChatProcessed,
-			};
-		};
-export type AgentChatServiceGetAgentChatsResult =
-	AxiosResponse<WebitelChatGetAgentChatsResponse>;
-export type AgentChatServiceGetAgentChatsCounterResult =
-	AxiosResponse<WebitelChatGetAgentChatsCounterResponse>;
-export type AgentChatServiceMarkChatProcessedResult =
-	AxiosResponse<WebitelChatMarkChatProcessedResponse>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getAgentChatService
+            // --- title end
+           = () => {
+
+            // --- header end
+          const agentChatServiceGetAgentChats = <TData = AxiosResponse<WebitelChatGetAgentChatsResponse>>(
+    params?: AgentChatServiceGetAgentChatsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/agent/chats`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const agentChatServiceGetAgentChatsCounter = <TData = AxiosResponse<WebitelChatGetAgentChatsCounterResponse>>(
+    params?: AgentChatServiceGetAgentChatsCounterParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/agent/chats/counter`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const agentChatServiceMarkChatProcessed = <TData = AxiosResponse<WebitelChatMarkChatProcessedResponse>>(
+    chatId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/agent/chats/${chatId}`,undefined,options
+    );
+  }
+
+            // --- footer start
+            return {agentChatServiceGetAgentChats,agentChatServiceGetAgentChatsCounter,agentChatServiceMarkChatProcessed}};
+export type AgentChatServiceGetAgentChatsResult = AxiosResponse<WebitelChatGetAgentChatsResponse>
+export type AgentChatServiceGetAgentChatsCounterResult = AxiosResponse<WebitelChatGetAgentChatsCounterResponse>
+export type AgentChatServiceMarkChatProcessedResult = AxiosResponse<WebitelChatMarkChatProcessedResponse>
+
+            // --- footer end
+          

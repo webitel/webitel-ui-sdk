@@ -6,5 +6,5 @@
  */
 
 export interface FormatCodeblock {
-	language?: string;
+  language?: string;
 }

@@ -6,7 +6,7 @@
  */
 
 export interface EngineCallServiceDtmfCallBody {
-	appId?: string;
-	digit?: string;
-	domainId?: string;
+  appId?: string;
+  digit?: string;
+  domainId?: string;
 }

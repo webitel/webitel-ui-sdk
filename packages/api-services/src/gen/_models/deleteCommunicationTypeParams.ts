@@ -6,5 +6,5 @@
  */
 
 export type DeleteCommunicationTypeParams = {
-	domainId?: string;
+domainId?: string;
 };

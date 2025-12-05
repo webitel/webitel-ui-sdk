@@ -6,5 +6,5 @@
  */
 
 export interface EngineSendPushResponse {
-	send?: number;
+  send?: number;
 }

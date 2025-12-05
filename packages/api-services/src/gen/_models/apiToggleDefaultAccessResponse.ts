@@ -7,6 +7,6 @@
 import type { ApiAccessRule } from './apiAccessRule';
 
 export interface ApiToggleDefaultAccessResponse {
-	granted?: ApiAccessRule[];
-	revoked?: ApiAccessRule[];
+  granted?: ApiAccessRule[];
+  revoked?: ApiAccessRule[];
 }

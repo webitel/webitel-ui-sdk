@@ -9,24 +9,24 @@ import type { UpdateCase2BodyCustom } from './updateCase2BodyCustom';
 import type { WebitelCasesStatusCondition } from './webitelCasesStatusCondition';
 
 export type UpdateCase2Body = {
-	assignee?: GeneralLookup;
-	closeReason?: GeneralLookup;
-	closeResult?: string;
-	contactInfo?: string;
-	/** Custom data extension fields .. */
-	custom?: UpdateCase2BodyCustom;
-	description?: string;
-	group?: GeneralLookup;
-	impacted?: GeneralLookup;
-	priority?: GeneralLookup;
-	rating?: string;
-	ratingComment?: string;
-	reporter?: GeneralLookup;
-	service?: GeneralLookup;
-	source?: GeneralLookup;
-	status?: GeneralLookup;
-	statusCondition?: WebitelCasesStatusCondition;
-	subject?: string;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userId?: GeneralLookup;
+  assignee?: GeneralLookup;
+  closeReason?: GeneralLookup;
+  closeResult?: string;
+  contactInfo?: string;
+  /** Custom data extension fields .. */
+  custom?: UpdateCase2BodyCustom;
+  description?: string;
+  group?: GeneralLookup;
+  impacted?: GeneralLookup;
+  priority?: GeneralLookup;
+  rating?: string;
+  ratingComment?: string;
+  reporter?: GeneralLookup;
+  service?: GeneralLookup;
+  source?: GeneralLookup;
+  status?: GeneralLookup;
+  statusCondition?: WebitelCasesStatusCondition;
+  subject?: string;
+  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+  userId?: GeneralLookup;
 };

@@ -10,12 +10,12 @@ import type { WebitelcontactsLookup } from './webitelcontactsLookup';
  * Input message for creating/updating a dynamic group.
  */
 export interface ContactsDynamicGroupInput {
-	/** Default static group to assign if no conditions are met. */
-	defaultGroup?: WebitelcontactsLookup;
-	/** The description of the dynamic group. */
-	description?: string;
-	/** Enabled status of the dynamic group: active/inactive. */
-	enabled?: boolean;
-	/** The name of the dynamic group. */
-	name?: string;
+  /** Default static group to assign if no conditions are met. */
+  defaultGroup?: WebitelcontactsLookup;
+  /** The description of the dynamic group. */
+  description?: string;
+  /** Enabled status of the dynamic group: active/inactive. */
+  enabled?: boolean;
+  /** The name of the dynamic group. */
+  name?: string;
 }

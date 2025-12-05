@@ -7,5 +7,5 @@
 import type { WebitelChatServerConversation } from './webitelChatServerConversation';
 
 export interface WebitelChatServerGetConversationByIDResponse {
-	item?: WebitelChatServerConversation;
+  item?: WebitelChatServerConversation;
 }

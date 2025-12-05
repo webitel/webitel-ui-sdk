@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface EngineCallServiceRedialCallBody {
-	[key: string]: unknown;
-}
+export interface EngineCallServiceRedialCallBody { [key: string]: unknown }

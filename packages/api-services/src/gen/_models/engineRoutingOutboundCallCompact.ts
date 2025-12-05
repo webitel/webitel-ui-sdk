@@ -7,12 +7,12 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRoutingOutboundCallCompact {
-	description?: string;
-	disabled?: boolean;
-	domainId?: string;
-	id?: string;
-	name?: string;
-	pattern?: string;
-	position?: number;
-	schema?: EngineLookup;
+  description?: string;
+  disabled?: boolean;
+  domainId?: string;
+  id?: string;
+  name?: string;
+  pattern?: string;
+  position?: number;
+  schema?: EngineLookup;
 }

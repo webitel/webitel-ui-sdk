@@ -7,7 +7,7 @@
 import type { WebitelChatServerMessage } from './webitelChatServerMessage';
 
 export interface WebitelChatServerStartConversationResponse {
-	channelId?: string;
-	conversationId?: string;
-	message?: WebitelChatServerMessage;
+  channelId?: string;
+  conversationId?: string;
+  message?: WebitelChatServerMessage;
 }

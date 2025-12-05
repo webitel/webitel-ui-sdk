@@ -6,11 +6,11 @@
  */
 
 export interface ContactsLabelInfo {
-	/** Label tag.
+  /** Label tag.
 
 Count of sources.
 int32 count = 2;
  Sources of Contacts assigned.
 repeated string sources = 3; */
-	label?: string;
+  label?: string;
 }

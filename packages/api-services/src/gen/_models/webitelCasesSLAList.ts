@@ -7,7 +7,7 @@
 import type { WebitelCasesSLA } from './webitelCasesSLA';
 
 export interface WebitelCasesSLAList {
-	items?: WebitelCasesSLA[];
-	next?: boolean;
-	page?: number;
+  items?: WebitelCasesSLA[];
+  next?: boolean;
+  page?: number;
 }

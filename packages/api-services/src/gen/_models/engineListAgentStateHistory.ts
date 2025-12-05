@@ -7,6 +7,6 @@
 import type { EngineAgentState } from './engineAgentState';
 
 export interface EngineListAgentStateHistory {
-	items?: EngineAgentState[];
-	next?: boolean;
+  items?: EngineAgentState[];
+  next?: boolean;
 }

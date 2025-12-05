@@ -7,6 +7,6 @@
 import type { EngineMemberAttempt } from './engineMemberAttempt';
 
 export interface EngineListMemberAttempt {
-	items?: EngineMemberAttempt[];
-	next?: boolean;
+  items?: EngineMemberAttempt[];
+  next?: boolean;
 }

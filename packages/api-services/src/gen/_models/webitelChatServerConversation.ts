@@ -4,17 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { WebitelChatServerHistoryMessage } from './webitelChatServerHistoryMessage';
 import type { WebitelChatServerMember } from './webitelChatServerMember';
+import type { WebitelChatServerHistoryMessage } from './webitelChatServerHistoryMessage';
 
 export interface WebitelChatServerConversation {
-	closedAt?: string;
-	createdAt?: string;
-	domainId?: string;
-	id?: string;
-	members?: WebitelChatServerMember[];
-	messages?: WebitelChatServerHistoryMessage[];
-	title?: string;
-	updatedAt?: string;
+  closedAt?: string;
+  createdAt?: string;
+  domainId?: string;
+  id?: string;
+  members?: WebitelChatServerMember[];
+  messages?: WebitelChatServerHistoryMessage[];
+  title?: string;
+  updatedAt?: string;
 }

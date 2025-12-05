@@ -6,5 +6,5 @@
  */
 
 export type ReadOutboundResourceInGroupParams = {
-	domainId?: string;
+domainId?: string;
 };

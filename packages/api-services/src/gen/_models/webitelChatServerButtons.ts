@@ -7,5 +7,5 @@
 import type { WebitelChatServerButton } from './webitelChatServerButton';
 
 export interface WebitelChatServerButtons {
-	button?: WebitelChatServerButton[];
+  button?: WebitelChatServerButton[];
 }

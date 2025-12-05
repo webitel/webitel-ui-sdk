@@ -6,5 +6,5 @@
  */
 
 export type UpdateUserAccessTokenUpdateBodyUser = {
-	name?: string;
+  name?: string;
 };

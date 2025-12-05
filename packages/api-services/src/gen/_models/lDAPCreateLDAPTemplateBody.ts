@@ -4,28 +4,27 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiUserId } from './apiUserId';
 import type { LDAPCreateLDAPTemplateBodyAgent } from './lDAPCreateLDAPTemplateBodyAgent';
 import type { LDAPCreateLDAPTemplateBodyCatalog } from './lDAPCreateLDAPTemplateBodyCatalog';
+import type { ApiUserId } from './apiUserId';
 import type { LDAPCreateLDAPTemplateBodyDevice } from './lDAPCreateLDAPTemplateBodyDevice';
 import type { LDAPCreateLDAPTemplateBodyRole } from './lDAPCreateLDAPTemplateBodyRole';
 import type { LDAPCreateLDAPTemplateBodyUser } from './lDAPCreateLDAPTemplateBodyUser';
 
 export interface LDAPCreateLDAPTemplateBody {
-	agent?: LDAPCreateLDAPTemplateBodyAgent;
-	baseDn?: string;
-	catalog?: LDAPCreateLDAPTemplateBodyCatalog;
-	/** unix */
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	device?: LDAPCreateLDAPTemplateBodyDevice;
-	enabled?: boolean;
-	id?: string;
-	name?: string;
-	role?: LDAPCreateLDAPTemplateBodyRole;
-	search?: string;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: LDAPCreateLDAPTemplateBodyUser;
+  agent?: LDAPCreateLDAPTemplateBodyAgent;
+  baseDn?: string;
+  catalog?: LDAPCreateLDAPTemplateBodyCatalog;
+  /** unix */
+  createdAt?: string;
+  createdBy?: ApiUserId;
+  device?: LDAPCreateLDAPTemplateBodyDevice;
+  enabled?: boolean;
+  id?: string;
+  name?: string;
+  role?: LDAPCreateLDAPTemplateBodyRole;
+  search?: string;
+  updatedAt?: string;
+  updatedBy?: ApiUserId;
+  user?: LDAPCreateLDAPTemplateBodyUser;
 }

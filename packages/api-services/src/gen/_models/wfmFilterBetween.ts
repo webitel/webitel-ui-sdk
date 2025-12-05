@@ -6,6 +6,6 @@
  */
 
 export interface WfmFilterBetween {
-	from?: string;
-	to?: string;
+  from?: string;
+  to?: string;
 }

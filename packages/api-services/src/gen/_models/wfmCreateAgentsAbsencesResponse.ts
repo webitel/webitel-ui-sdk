@@ -7,5 +7,5 @@
 import type { WfmAgentAbsences } from './wfmAgentAbsences';
 
 export interface WfmCreateAgentsAbsencesResponse {
-	items?: WfmAgentAbsences[];
+  items?: WfmAgentAbsences[];
 }

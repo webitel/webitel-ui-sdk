@@ -4,183 +4,53 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
 
-import type { WebitelCasesCaseFileList, WebitelCasesFile } from '.././_models';
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
-export const getListFilesResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseFileList> = {},
-): WebitelCasesCaseFileList => ({
-	items: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			mime: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			size: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			source: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			url: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+import type {
+  WebitelCasesCaseFileList,
+  WebitelCasesFile
+} from '.././_models';
 
-export const getDeleteFileResponseMock = (
-	overrideResponse: Partial<WebitelCasesFile> = {},
-): WebitelCasesFile => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	mime: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	name: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	size: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	source: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	url: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	...overrideResponse,
-});
 
-export const getListFilesMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseFileList
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelCasesCaseFileList> | WebitelCasesCaseFileList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/cases/:caseEtag/files',
-		async (info) => {
-			await delay(1000);
+export const getListFilesResponseMock = (overrideResponse: Partial< WebitelCasesCaseFileList > = {}): WebitelCasesCaseFileList => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), mime: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), size: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), source: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getListFilesResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getDeleteFileResponseMock = (overrideResponse: Partial< WebitelCasesFile > = {}): WebitelCasesFile => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), mime: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), size: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), source: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getDeleteFileMockHandler = (
-	overrideResponse?:
-		| WebitelCasesFile
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelCasesFile> | WebitelCasesFile),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/cases/:caseEtag/files/:id',
-		async (info) => {
-			await delay(1000);
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteFileResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getListFilesMockHandler = (overrideResponse?: WebitelCasesCaseFileList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseFileList> | WebitelCasesCaseFileList), options?: RequestHandlerOptions) => {
+  return http.get('*/cases/:caseEtag/files', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getListFilesResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
+
+export const getDeleteFileMockHandler = (overrideResponse?: WebitelCasesFile | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesFile> | WebitelCasesFile), options?: RequestHandlerOptions) => {
+  return http.delete('*/cases/:caseEtag/files/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteFileResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getCaseFilesMock = () => [
-	getListFilesMockHandler(),
-	getDeleteFileMockHandler(),
-];
+  getListFilesMockHandler(),
+  getDeleteFileMockHandler()]

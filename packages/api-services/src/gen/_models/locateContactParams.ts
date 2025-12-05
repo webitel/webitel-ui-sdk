@@ -7,16 +7,16 @@
 import type { LocateContactMode } from './locateContactMode';
 
 export type LocateContactParams = {
-	/**
-	 * Source Fields to return into result.
-	 */
-	fields?: string[];
-	/**
+/**
+ * Source Fields to return into result.
+ */
+fields?: string[];
+/**
  * The requirement of a special access mode to the Source.
 
  - READ: Can `fetch` record. [GET]
  - WRITE: Can `update` record. [PUT|PATCH]
  - DELETE: Can `delete` record. [DELETE]
  */
-	mode?: LocateContactMode;
+mode?: LocateContactMode;
 };

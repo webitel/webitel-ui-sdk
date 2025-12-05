@@ -7,6 +7,6 @@
 import type { EngineOutboundResourceViewGroup } from './engineOutboundResourceViewGroup';
 
 export interface EngineListOutboundResourceGroup {
-	items?: EngineOutboundResourceViewGroup[];
-	next?: boolean;
+  items?: EngineOutboundResourceViewGroup[];
+  next?: boolean;
 }

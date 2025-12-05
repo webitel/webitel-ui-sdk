@@ -7,7 +7,7 @@
 import type { ApiWarningData } from './apiWarningData';
 
 export interface ApiUserWarning {
-	detail?: string;
-	id?: string;
-	warningData?: ApiWarningData;
+  detail?: string;
+  id?: string;
+  warningData?: ApiWarningData;
 }

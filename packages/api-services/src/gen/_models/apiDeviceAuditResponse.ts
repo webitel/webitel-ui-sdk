@@ -7,8 +7,8 @@
 import type { ApiDeviceAudit } from './apiDeviceAudit';
 
 export interface ApiDeviceAuditResponse {
-	items?: ApiDeviceAudit[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+  items?: ApiDeviceAudit[];
+  next?: boolean;
+  page?: number;
+  size?: number;
 }

@@ -7,6 +7,6 @@
 import type { WebitelChatServerMessage } from './webitelChatServerMessage';
 
 export interface WebitelChatServerWaitMessageResponse {
-	messages?: WebitelChatServerMessage[];
-	timeoutSec?: string;
+  messages?: WebitelChatServerMessage[];
+  timeoutSec?: string;
 }

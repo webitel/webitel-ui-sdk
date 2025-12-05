@@ -6,5 +6,5 @@
  */
 
 export type AgentTodayStatisticsParams = {
-	fields?: string[];
+fields?: string[];
 };

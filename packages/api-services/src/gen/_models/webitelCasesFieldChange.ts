@@ -6,7 +6,7 @@
  */
 
 export interface WebitelCasesFieldChange {
-	field?: string;
-	newValue?: unknown;
-	oldValue?: unknown;
+  field?: string;
+  newValue?: unknown;
+  oldValue?: unknown;
 }

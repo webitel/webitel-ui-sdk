@@ -7,11 +7,11 @@
 import type { ApiCaller } from './apiCaller';
 
 export interface ApiChannel {
-	active?: string;
-	direction?: string;
-	hangup?: string;
-	profile?: ApiCaller;
-	proto?: string;
-	state?: string;
-	uuid?: string;
+  active?: string;
+  direction?: string;
+  hangup?: string;
+  profile?: ApiCaller;
+  proto?: string;
+  state?: string;
+  uuid?: string;
 }

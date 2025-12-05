@@ -6,106 +6,92 @@
  */
 import * as zod from 'zod/v4';
 
+
 /**
  * @summary Search MediaFile
  */
 export const searchMediaFileQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-	q: zod.string().optional(),
-	sort: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
-	id: zod.array(zod.number()).optional(),
-});
+  "page": zod.number().optional(),
+  "size": zod.number().optional(),
+  "q": zod.string().optional(),
+  "sort": zod.string().optional(),
+  "fields": zod.array(zod.string()).optional(),
+  "id": zod.array(zod.number()).optional()
+})
 
 export const searchMediaFileResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				id: zod.string().optional(),
-				mimeType: zod.string().optional(),
-				name: zod.string().optional(),
-				size: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-});
+  "items": zod.array(zod.object({
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "id": zod.string().optional(),
+  "mimeType": zod.string().optional(),
+  "name": zod.string().optional(),
+  "size": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional()
+})).optional(),
+  "next": zod.boolean().optional()
+})
 
 /**
  * @summary Remove MediaFile
  */
 export const deleteMediaFileParams = zod.object({
-	id: zod.string(),
-});
+  "id": zod.string()
+})
 
 export const deleteMediaFileQueryParams = zod.object({
-	domainId: zod.string().optional(),
-});
+  "domainId": zod.string().optional()
+})
 
 export const deleteMediaFileResponse = zod.object({
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	id: zod.string().optional(),
-	mimeType: zod.string().optional(),
-	name: zod.string().optional(),
-	size: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-});
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "id": zod.string().optional(),
+  "mimeType": zod.string().optional(),
+  "name": zod.string().optional(),
+  "size": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional()
+})
 
 /**
  * @summary MediaFile item
  */
 export const readMediaFileParams = zod.object({
-	id: zod.string(),
-});
+  "id": zod.string()
+})
 
 export const readMediaFileQueryParams = zod.object({
-	domainId: zod.string().optional(),
-});
+  "domainId": zod.string().optional()
+})
 
 export const readMediaFileResponse = zod.object({
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	id: zod.string().optional(),
-	mimeType: zod.string().optional(),
-	name: zod.string().optional(),
-	size: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-});
+  "createdAt": zod.string().optional(),
+  "createdBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional(),
+  "id": zod.string().optional(),
+  "mimeType": zod.string().optional(),
+  "name": zod.string().optional(),
+  "size": zod.string().optional(),
+  "updatedAt": zod.string().optional(),
+  "updatedBy": zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string().optional()
+}).optional()
+})
+

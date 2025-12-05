@@ -6,8 +6,8 @@
  */
 
 export type UpdatePriority2Params = {
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
+/**
+ * Fields to be retrieved as a result.
+ */
+fields?: string[];
 };

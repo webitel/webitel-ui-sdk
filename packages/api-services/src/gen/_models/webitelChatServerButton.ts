@@ -6,9 +6,9 @@
  */
 
 export interface WebitelChatServerButton {
-	caption?: string;
-	code?: string;
-	text?: string;
-	type?: string;
-	url?: string;
+  caption?: string;
+  code?: string;
+  text?: string;
+  type?: string;
+  url?: string;
 }

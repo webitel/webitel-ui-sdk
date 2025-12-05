@@ -6,8 +6,8 @@
  */
 
 export interface ApiLDAPCatalogTLSConfig {
-	ca?: string;
-	/** PEM: base64 */
-	cert?: string;
-	key?: string;
+  ca?: string;
+  /** PEM: base64 */
+  cert?: string;
+  key?: string;
 }

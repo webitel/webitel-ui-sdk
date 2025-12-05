@@ -7,5 +7,5 @@
 import type { LoggerLookup } from './loggerLookup';
 
 export interface LoggerSystemObjects {
-	items?: LoggerLookup[];
+  items?: LoggerLookup[];
 }

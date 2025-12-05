@@ -7,7 +7,7 @@
 import type { ClassesUpdateClassBodyClass } from './classesUpdateClassBodyClass';
 
 export interface ClassesUpdateClassBody {
-	class?: ClassesUpdateClassBodyClass;
-	domain?: string;
-	fields?: string[];
+  class?: ClassesUpdateClassBodyClass;
+  domain?: string;
+  fields?: string[];
 }

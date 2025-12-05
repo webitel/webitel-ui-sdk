@@ -6,13 +6,13 @@
  */
 
 export type SearchAgentCallStatisticsParams = {
-	page?: number;
-	size?: number;
-	timeFrom?: string;
-	timeTo?: string;
-	agentId?: number[];
-	domainId?: string;
-	q?: string;
-	fields?: string[];
-	sort?: string;
+page?: number;
+size?: number;
+timeFrom?: string;
+timeTo?: string;
+agentId?: number[];
+domainId?: string;
+q?: string;
+fields?: string[];
+sort?: string;
 };

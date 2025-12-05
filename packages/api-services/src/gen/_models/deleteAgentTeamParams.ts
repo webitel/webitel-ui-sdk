@@ -6,5 +6,5 @@
  */
 
 export type DeleteAgentTeamParams = {
-	domainId?: string;
+domainId?: string;
 };

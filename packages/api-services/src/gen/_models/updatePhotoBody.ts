@@ -6,8 +6,8 @@
  */
 
 export type UpdatePhotoBody = {
-	photoId?: string;
-	photoUrl?: string;
-	/** True if the photo is a default photo; false if the photo is a user-provided photo. */
-	primary?: boolean;
+  photoId?: string;
+  photoUrl?: string;
+  /** True if the photo is a default photo; false if the photo is a user-provided photo. */
+  primary?: boolean;
 };

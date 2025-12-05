@@ -7,5 +7,5 @@
 import type { WebitelChatServerMessage } from './webitelChatServerMessage';
 
 export interface WebitelChatServerSendMessageResponse {
-	message?: WebitelChatServerMessage;
+  message?: WebitelChatServerMessage;
 }

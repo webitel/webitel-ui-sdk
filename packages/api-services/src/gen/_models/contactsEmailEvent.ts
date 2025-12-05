@@ -8,17 +8,17 @@ import type { WebitelcontactsAttachment } from './webitelcontactsAttachment';
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsEmailEvent {
-	attachments?: WebitelcontactsAttachment[];
-	body?: string;
-	cc?: string[];
-	from?: string[];
-	html?: string;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	owner?: WebitelcontactsLookup;
-	profile?: WebitelcontactsLookup;
-	sender?: string[];
-	subject?: string;
-	to?: string[];
+  attachments?: WebitelcontactsAttachment[];
+  body?: string;
+  cc?: string[];
+  from?: string[];
+  html?: string;
+  id?: string;
+  isDetailed?: boolean;
+  isInbound?: boolean;
+  owner?: WebitelcontactsLookup;
+  profile?: WebitelcontactsLookup;
+  sender?: string[];
+  subject?: string;
+  to?: string[];
 }

@@ -9,21 +9,21 @@ import type { EngineMemberCommunication } from './engineMemberCommunication';
 import type { EngineMemberInQueueVariables } from './engineMemberInQueueVariables';
 
 export interface EngineMemberInQueue {
-	agent?: EngineLookup;
-	attempts?: number;
-	bucket?: EngineLookup;
-	communications?: EngineMemberCommunication[];
-	createdAt?: string;
-	expireAt?: string;
-	id?: string;
-	lastActivityAt?: string;
-	minOfferingAt?: string;
-	name?: string;
-	priority?: number;
-	queue?: EngineLookup;
-	reserved?: boolean;
-	skill?: EngineLookup;
-	stopCause?: string;
-	timezone?: EngineLookup;
-	variables?: EngineMemberInQueueVariables;
+  agent?: EngineLookup;
+  attempts?: number;
+  bucket?: EngineLookup;
+  communications?: EngineMemberCommunication[];
+  createdAt?: string;
+  expireAt?: string;
+  id?: string;
+  lastActivityAt?: string;
+  minOfferingAt?: string;
+  name?: string;
+  priority?: number;
+  queue?: EngineLookup;
+  reserved?: boolean;
+  skill?: EngineLookup;
+  stopCause?: string;
+  timezone?: EngineLookup;
+  variables?: EngineMemberInQueueVariables;
 }

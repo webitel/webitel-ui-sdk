@@ -6,57 +6,57 @@
  */
 
 export type LicenseUsage3Params = {
-	/**
+/**
  * ----- Search Options ----- //
 
 default: 16
  */
-	size?: number;
-	/**
-	 * default: 1
-	 */
-	page?: number;
-	/**
-	 * set of output fields
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * identifier
-	 */
-	userId?: string;
-	/**
-	 * display name
-	 */
-	userName?: string;
-	/**
-	 * identifier
-	 */
-	domainId?: string;
-	/**
-	 * display name
-	 */
-	domainName?: string;
-	customerId?: string;
-	/**
-	 * by serial number(s)
-	 */
-	id?: string[];
-	/**
-	 * by product name(s)
-	 */
-	product?: string[];
-	/**
+size?: number;
+/**
+ * default: 1
+ */
+page?: number;
+/**
+ * set of output fields
+ */
+fields?: string[];
+/**
+ * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+ */
+sort?: string[];
+/**
+ * identifier
+ */
+userId?: string;
+/**
+ * display name
+ */
+userName?: string;
+/**
+ * identifier
+ */
+domainId?: string;
+/**
+ * display name
+ */
+domainName?: string;
+customerId?: string;
+/**
+ * by serial number(s)
+ */
+id?: string[];
+/**
+ * by product name(s)
+ */
+product?: string[];
+/**
  * view: all|valid|grantable
 
 show: available to be granted
  */
-	valid?: boolean;
-	/**
-	 * filter: term of search
-	 */
-	q?: string;
+valid?: boolean;
+/**
+ * filter: term of search
+ */
+q?: string;
 };

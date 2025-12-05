@@ -6,5 +6,5 @@
  */
 
 export type WorkingConditionServiceReadWorkingConditionParams = {
-	fields?: string[];
+fields?: string[];
 };

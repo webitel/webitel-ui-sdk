@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineAggregateHistoryCallRequestVariables = {
-	[key: string]: string;
-};
+export type EngineAggregateHistoryCallRequestVariables = {[key: string]: string};

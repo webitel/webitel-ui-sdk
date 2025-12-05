@@ -9,13 +9,13 @@ import type { EngineExceptDate } from './engineExceptDate';
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCalendarServiceUpdateCalendarBody {
-	accepts?: EngineAcceptOfDay[];
-	description?: string;
-	domainId?: string;
-	endAt?: string;
-	excepts?: EngineExceptDate[];
-	name?: string;
-	specials?: EngineAcceptOfDay[];
-	startAt?: string;
-	timezone?: EngineLookup;
+  accepts?: EngineAcceptOfDay[];
+  description?: string;
+  domainId?: string;
+  endAt?: string;
+  excepts?: EngineExceptDate[];
+  name?: string;
+  specials?: EngineAcceptOfDay[];
+  startAt?: string;
+  timezone?: EngineLookup;
 }

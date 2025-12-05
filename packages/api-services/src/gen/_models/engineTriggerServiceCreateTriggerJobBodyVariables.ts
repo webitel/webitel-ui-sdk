@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerServiceCreateTriggerJobBodyVariables = {
-	[key: string]: string;
-};
+export type EngineTriggerServiceCreateTriggerJobBodyVariables = {[key: string]: string};

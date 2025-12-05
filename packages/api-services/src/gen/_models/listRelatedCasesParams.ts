@@ -6,28 +6,28 @@
  */
 
 export type ListRelatedCasesParams = {
-	/**
-	 * Page number for pagination.
-	 */
-	page?: number;
-	/**
-	 * Number of related cases per page.
-	 */
-	size?: number;
-	/**
-	 * Query string for search.
-	 */
-	q?: string;
-	/**
-	 * Sorting order.
-	 */
-	sort?: string;
-	/**
-	 * Fields to return for each related case.
-	 */
-	fields?: string[];
-	/**
-	 * Filter by ids
-	 */
-	ids?: string[];
+/**
+ * Page number for pagination.
+ */
+page?: number;
+/**
+ * Number of related cases per page.
+ */
+size?: number;
+/**
+ * Query string for search.
+ */
+q?: string;
+/**
+ * Sorting order.
+ */
+sort?: string;
+/**
+ * Fields to return for each related case.
+ */
+fields?: string[];
+/**
+ * Filter by ids
+ */
+ids?: string[];
 };

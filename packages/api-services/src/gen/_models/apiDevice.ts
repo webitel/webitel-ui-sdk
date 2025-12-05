@@ -4,33 +4,32 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiDeviceProvision } from './apiDeviceProvision';
 import type { ApiUserId } from './apiUserId';
+import type { ApiDeviceProvision } from './apiDeviceProvision';
 
 export interface ApiDevice {
-	/** username */
-	account?: string;
-	/** vendor brand name */
-	brand?: string;
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
-	/** act as a hotdesk */
-	hotdesk?: boolean;
-	hotdesks?: string[];
-	id?: string;
-	ip?: string;
-	loggedIn?: string;
-	mac?: string;
-	model?: string;
-	/** display name */
-	name?: string;
-	password?: string;
-	provision?: ApiDeviceProvision;
-	reged?: boolean;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: ApiUserId;
+  /** username */
+  account?: string;
+  /** vendor brand name */
+  brand?: string;
+  createdAt?: string;
+  createdBy?: ApiUserId;
+  deletedAt?: string;
+  deletedBy?: ApiUserId;
+  /** act as a hotdesk */
+  hotdesk?: boolean;
+  hotdesks?: string[];
+  id?: string;
+  ip?: string;
+  loggedIn?: string;
+  mac?: string;
+  model?: string;
+  /** display name */
+  name?: string;
+  password?: string;
+  provision?: ApiDeviceProvision;
+  reged?: boolean;
+  updatedAt?: string;
+  updatedBy?: ApiUserId;
+  user?: ApiUserId;
 }

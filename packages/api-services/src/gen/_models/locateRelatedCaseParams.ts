@@ -6,8 +6,8 @@
  */
 
 export type LocateRelatedCaseParams = {
-	/**
-	 * Fields to return in the response.
-	 */
-	fields?: string[];
+/**
+ * Fields to return in the response.
+ */
+fields?: string[];
 };

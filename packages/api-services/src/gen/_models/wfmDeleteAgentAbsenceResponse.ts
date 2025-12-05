@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeleteAgentAbsenceResponse {
-	id?: string;
+  id?: string;
 }

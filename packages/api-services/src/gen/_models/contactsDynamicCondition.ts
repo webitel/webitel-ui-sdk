@@ -7,12 +7,12 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsDynamicCondition {
-	/** The ID of the assignee that should be assigned if the condition is met (optional). */
-	assignee?: WebitelcontactsLookup;
-	/** The query or condition expression used to evaluate the group. */
-	expression?: string;
-	/** The ID of the static group that should be assigned if the condition is met. */
-	group?: WebitelcontactsLookup;
-	/** The unique ID of the condition. */
-	id?: string;
+  /** The ID of the assignee that should be assigned if the condition is met (optional). */
+  assignee?: WebitelcontactsLookup;
+  /** The query or condition expression used to evaluate the group. */
+  expression?: string;
+  /** The ID of the static group that should be assigned if the condition is met. */
+  group?: WebitelcontactsLookup;
+  /** The unique ID of the condition. */
+  id?: string;
 }

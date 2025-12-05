@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeleteShiftTemplateResponse {
-	id?: string;
+  id?: string;
 }

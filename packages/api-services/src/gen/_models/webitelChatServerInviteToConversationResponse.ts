@@ -6,5 +6,5 @@
  */
 
 export interface WebitelChatServerInviteToConversationResponse {
-	inviteId?: string;
+  inviteId?: string;
 }

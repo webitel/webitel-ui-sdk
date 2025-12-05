@@ -7,15 +7,15 @@
 import type { StorageUploadFileChannel } from './storageUploadFileChannel';
 
 export interface StorageFilePoliciesServicePatchFilePolicyBody {
-	channels?: StorageUploadFileChannel[];
-	description?: string;
-	enabled?: boolean;
-	encrypt?: boolean;
-	fields?: string[];
-	maxUploadSize?: string;
-	mimeTypes?: string[];
-	name?: string;
-	retentionDays?: number;
-	speedDownload?: string;
-	speedUpload?: string;
+  channels?: StorageUploadFileChannel[];
+  description?: string;
+  enabled?: boolean;
+  encrypt?: boolean;
+  fields?: string[];
+  maxUploadSize?: string;
+  mimeTypes?: string[];
+  name?: string;
+  retentionDays?: number;
+  speedDownload?: string;
+  speedUpload?: string;
 }

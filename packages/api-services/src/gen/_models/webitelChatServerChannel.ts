@@ -6,13 +6,13 @@
  */
 
 export interface WebitelChatServerChannel {
-	closedAt?: string;
-	connection?: string;
-	createdAt?: string;
-	domainId?: string;
-	id?: string;
-	internal?: boolean;
-	props?: string;
-	type?: string;
-	userId?: string;
+  closedAt?: string;
+  connection?: string;
+  createdAt?: string;
+  domainId?: string;
+  id?: string;
+  internal?: boolean;
+  props?: string;
+  type?: string;
+  userId?: string;
 }

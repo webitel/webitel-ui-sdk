@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchCognitiveProfileServiceItem =
-	(typeof SearchCognitiveProfileServiceItem)[keyof typeof SearchCognitiveProfileServiceItem];
+export type SearchCognitiveProfileServiceItem = typeof SearchCognitiveProfileServiceItem[keyof typeof SearchCognitiveProfileServiceItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchCognitiveProfileServiceItem = {
-	DefaultService: 'DefaultService',
-	STT: 'STT',
-	TTS: 'TTS',
+  DefaultService: 'DefaultService',
+  STT: 'STT',
+  TTS: 'TTS',
 } as const;

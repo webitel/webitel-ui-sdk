@@ -10,10 +10,10 @@ import type { WebitelCasesFile } from './webitelCasesFile';
  * Contains a list of case files with pagination.
  */
 export interface WebitelCasesCaseFileList {
-	/** List of case files. */
-	items?: WebitelCasesFile[];
-	/** Indicator if there is a next page. */
-	next?: boolean;
-	/** Current page number. */
-	page?: string;
+  /** List of case files. */
+  items?: WebitelCasesFile[];
+  /** Indicator if there is a next page. */
+  next?: boolean;
+  /** Current page number. */
+  page?: string;
 }

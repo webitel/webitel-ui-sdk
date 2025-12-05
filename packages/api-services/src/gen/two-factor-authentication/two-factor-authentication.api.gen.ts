@@ -6,47 +6,53 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
 import type {
-	ApiGenerateUserTfaKeyResponse,
-	ApiGetUserTfaKeyResponse,
+  ApiGenerateUserTfaKeyResponse,
+  ApiGetUserTfaKeyResponse
 } from '.././_models';
 
-// --- header start
-//
 
-export const // --- title start
-	getTwoFactorAuthentication =
-		// --- title end
-		() => {
-			// --- header end
-			/**
-			 * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
-			 */
-			const getUserTfaKey = <TData = AxiosResponse<ApiGetUserTfaKeyResponse>>(
-				userId: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.get(`/users/${userId}/2fa`, options);
-			};
-			/**
-			 * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
-			 */
-			const generateUserTfaKey = <
-				TData = AxiosResponse<ApiGenerateUserTfaKeyResponse>,
-			>(
-				userId: string,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(`/users/${userId}/2fa`, undefined, options);
-			};
 
-			// --- footer start
-			return { getUserTfaKey, generateUserTfaKey };
-		};
-export type GetUserTfaKeyResult = AxiosResponse<ApiGetUserTfaKeyResponse>;
-export type GenerateUserTfaKeyResult =
-	AxiosResponse<ApiGenerateUserTfaKeyResponse>;
+            // --- header start
+            // 
 
-// --- footer end
+  export const 
+            // --- title start
+            getTwoFactorAuthentication
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
+ */
+const getUserTfaKey = <TData = AxiosResponse<ApiGetUserTfaKeyResponse>>(
+    userId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/${userId}/2fa`,options
+    );
+  }
+/**
+ * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
+ */
+const generateUserTfaKey = <TData = AxiosResponse<ApiGenerateUserTfaKeyResponse>>(
+    userId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users/${userId}/2fa`,undefined,options
+    );
+  }
+
+            // --- footer start
+            return {getUserTfaKey,generateUserTfaKey}};
+export type GetUserTfaKeyResult = AxiosResponse<ApiGetUserTfaKeyResponse>
+export type GenerateUserTfaKeyResult = AxiosResponse<ApiGenerateUserTfaKeyResponse>
+
+            // --- footer end
+          

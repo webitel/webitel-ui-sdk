@@ -7,5 +7,5 @@
 import type { StorageCognitiveProfileVoice } from './storageCognitiveProfileVoice';
 
 export interface StorageListCognitiveProfileVoices {
-	items?: StorageCognitiveProfileVoice[];
+  items?: StorageCognitiveProfileVoice[];
 }

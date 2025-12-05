@@ -6,6 +6,6 @@
  */
 
 export interface ApiClaim {
-	type?: string;
-	value?: string;
+  type?: string;
+  value?: string;
 }

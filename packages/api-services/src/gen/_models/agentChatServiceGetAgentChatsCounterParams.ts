@@ -6,6 +6,6 @@
  */
 
 export type AgentChatServiceGetAgentChatsCounterParams = {
-	onlyClosed?: boolean;
-	onlyUnprocessed?: boolean;
+onlyClosed?: boolean;
+onlyUnprocessed?: boolean;
 };

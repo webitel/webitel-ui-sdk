@@ -6,6 +6,6 @@
  */
 
 export interface StorageCognitiveProfileVoice {
-	id?: string;
-	name?: string;
+  id?: string;
+  name?: string;
 }

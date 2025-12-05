@@ -6,8 +6,8 @@
  */
 
 export type UpdateVariable2Params = {
-	/**
-	 * Fields to be retrieved into result of changes.
-	 */
-	fields?: string[];
+/**
+ * Fields to be retrieved into result of changes.
+ */
+fields?: string[];
 };

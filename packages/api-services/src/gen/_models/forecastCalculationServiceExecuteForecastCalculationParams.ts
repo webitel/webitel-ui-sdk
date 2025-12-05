@@ -6,7 +6,7 @@
  */
 
 export type ForecastCalculationServiceExecuteForecastCalculationParams = {
-	teamId?: string;
-	forecastDataFrom?: string;
-	forecastDataTo?: string;
+teamId?: string;
+forecastDataFrom?: string;
+forecastDataTo?: string;
 };

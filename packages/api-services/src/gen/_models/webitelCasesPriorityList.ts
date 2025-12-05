@@ -7,7 +7,7 @@
 import type { WebitelCasesPriority } from './webitelCasesPriority';
 
 export interface WebitelCasesPriorityList {
-	items?: WebitelCasesPriority[];
-	next?: boolean;
-	page?: number;
+  items?: WebitelCasesPriority[];
+  next?: boolean;
+  page?: number;
 }

@@ -6,5 +6,5 @@
  */
 
 export type ReadBucketParams = {
-	domainId?: string;
+domainId?: string;
 };

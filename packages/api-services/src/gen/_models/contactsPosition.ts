@@ -9,6 +9,6 @@
  * Position details for conditions in the group.
  */
 export interface ContactsPosition {
-	condDown?: string;
-	condUp?: string;
+  condDown?: string;
+  condUp?: string;
 }

@@ -7,8 +7,8 @@
 import type { ApiRoleId } from './apiRoleId';
 
 export interface AccessGrant {
-	grantable?: string[];
-	grantee?: ApiRoleId;
-	grantor?: ApiRoleId;
-	privileges?: string[];
+  grantable?: string[];
+  grantee?: ApiRoleId;
+  grantor?: ApiRoleId;
+  privileges?: string[];
 }

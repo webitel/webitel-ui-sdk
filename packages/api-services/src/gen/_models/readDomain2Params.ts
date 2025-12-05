@@ -6,5 +6,5 @@
  */
 
 export type ReadDomain2Params = {
-	domain?: string;
+domain?: string;
 };

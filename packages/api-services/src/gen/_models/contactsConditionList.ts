@@ -10,10 +10,10 @@ import type { ContactsCondition } from './contactsCondition';
  * A list of Conditions.
  */
 export interface ContactsConditionList {
-	/** List of conditions. */
-	items?: ContactsCondition[];
-	/** Have more records. */
-	next?: boolean;
-	/** Page number of the partial result. */
-	page?: number;
+  /** List of conditions. */
+  items?: ContactsCondition[];
+  /** Have more records. */
+  next?: boolean;
+  /** Page number of the partial result. */
+  page?: number;
 }

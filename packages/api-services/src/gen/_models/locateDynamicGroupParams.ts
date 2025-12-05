@@ -6,5 +6,5 @@
  */
 
 export type LocateDynamicGroupParams = {
-	fields?: string[];
+fields?: string[];
 };

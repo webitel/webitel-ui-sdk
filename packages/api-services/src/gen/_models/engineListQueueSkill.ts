@@ -7,6 +7,6 @@
 import type { EngineQueueSkill } from './engineQueueSkill';
 
 export interface EngineListQueueSkill {
-	items?: EngineQueueSkill[];
-	next?: boolean;
+  items?: EngineQueueSkill[];
+  next?: boolean;
 }

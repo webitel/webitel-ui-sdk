@@ -6,6 +6,6 @@
  */
 
 export interface EngineQuestionOption {
-	name?: string;
-	score?: number;
+  name?: string;
+  score?: number;
 }

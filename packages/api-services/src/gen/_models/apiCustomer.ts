@@ -4,31 +4,30 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { ApiCustomerLimit } from './apiCustomerLimit';
-import type { ApiLicenseV1 } from './apiLicenseV1';
 import type { ApiObjectId } from './apiObjectId';
+import type { ApiLicenseV1 } from './apiLicenseV1';
+import type { ApiCustomerLimit } from './apiCustomerLimit';
 import type { ApiVerification } from './apiVerification';
 
 export interface ApiCustomer {
-	/** local created ms */
-	createdAt?: string;
-	dnsrv?: ApiObjectId[];
-	id?: string;
-	/** [required] issuer(CA) created at */
-	issuedAt?: string;
-	/** grants issued */
-	license?: ApiLicenseV1[];
-	/** defines map[class]limit usage */
-	limit?: ApiCustomerLimit;
-	nextUpdate?: string;
-	notAfter?: string;
-	notBefore?: string;
-	organization?: string;
-	revokedAt?: string;
-	/** [optional]: issuer(CA) signed at */
-	thisUpdate?: string;
-	updatedAt?: string;
-	/** [optional] validation results */
-	verify?: ApiVerification;
+  /** local created ms */
+  createdAt?: string;
+  dnsrv?: ApiObjectId[];
+  id?: string;
+  /** [required] issuer(CA) created at */
+  issuedAt?: string;
+  /** grants issued */
+  license?: ApiLicenseV1[];
+  /** defines map[class]limit usage */
+  limit?: ApiCustomerLimit;
+  nextUpdate?: string;
+  notAfter?: string;
+  notBefore?: string;
+  organization?: string;
+  revokedAt?: string;
+  /** [optional]: issuer(CA) signed at */
+  thisUpdate?: string;
+  updatedAt?: string;
+  /** [optional] validation results */
+  verify?: ApiVerification;
 }

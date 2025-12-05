@@ -6,10 +6,10 @@
  */
 
 export interface EnginePresetQuery {
-	createdAt?: string;
-	description?: string;
-	id?: number;
-	name?: string;
-	section?: string;
-	updatedAt?: string;
+  createdAt?: string;
+  description?: string;
+  id?: number;
+  name?: string;
+  section?: string;
+  updatedAt?: string;
 }

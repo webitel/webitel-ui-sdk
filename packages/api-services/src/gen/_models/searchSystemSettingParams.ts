@@ -7,13 +7,13 @@
 import type { SearchSystemSettingNameItem } from './searchSystemSettingNameItem';
 
 export type SearchSystemSettingParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	/**
-	 * Filter by setting names
-	 */
-	name?: SearchSystemSettingNameItem[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+/**
+ * Filter by setting names
+ */
+name?: SearchSystemSettingNameItem[];
 };

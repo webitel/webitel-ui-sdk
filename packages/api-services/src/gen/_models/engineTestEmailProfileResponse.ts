@@ -6,5 +6,5 @@
  */
 
 export interface EngineTestEmailProfileResponse {
-	error?: string;
+  error?: string;
 }

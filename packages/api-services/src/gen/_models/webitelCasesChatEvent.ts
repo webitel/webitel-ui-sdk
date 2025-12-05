@@ -4,19 +4,18 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
-import type { GeneralExtendedLookup } from './generalExtendedLookup';
 import type { GeneralLookup } from './generalLookup';
+import type { GeneralExtendedLookup } from './generalExtendedLookup';
 
 export interface WebitelCasesChatEvent {
-	closedAt?: string;
-	duration?: string;
-	flowScheme?: GeneralLookup;
-	gateway?: GeneralExtendedLookup;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	isMissed?: boolean;
-	participants?: GeneralLookup[];
-	queue?: GeneralLookup;
+  closedAt?: string;
+  duration?: string;
+  flowScheme?: GeneralLookup;
+  gateway?: GeneralExtendedLookup;
+  id?: string;
+  isDetailed?: boolean;
+  isInbound?: boolean;
+  isMissed?: boolean;
+  participants?: GeneralLookup[];
+  queue?: GeneralLookup;
 }

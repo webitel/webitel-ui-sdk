@@ -6,5 +6,5 @@
  */
 
 export type DeleteOutboundResourceDisplaysParams = {
-	items?: string[];
+items?: string[];
 };

@@ -7,13 +7,13 @@
 import type { ConfigServiceSearchConfigObjectItem } from './configServiceSearchConfigObjectItem';
 
 export type ConfigServiceSearchConfigParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	/**
-	 * NOT USED
-	 */
-	object?: ConfigServiceSearchConfigObjectItem[];
+page?: number;
+size?: number;
+q?: string;
+sort?: string;
+fields?: string[];
+/**
+ * NOT USED
+ */
+object?: ConfigServiceSearchConfigObjectItem[];
 };

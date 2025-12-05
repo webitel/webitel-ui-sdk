@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineOutboundResourceViewGroup {
-	communication?: EngineLookup;
-	description?: string;
-	id?: string;
-	name?: string;
-	strategy?: string;
+  communication?: EngineLookup;
+  description?: string;
+  id?: string;
+  name?: string;
+  strategy?: string;
 }

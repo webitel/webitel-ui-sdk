@@ -6,5 +6,5 @@
  */
 
 export type DeleteListCommunicationParams = {
-	domainId?: string;
+domainId?: string;
 };

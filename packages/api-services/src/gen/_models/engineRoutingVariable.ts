@@ -6,8 +6,8 @@
  */
 
 export interface EngineRoutingVariable {
-	domainId?: string;
-	id?: string;
-	key?: string;
-	value?: string;
+  domainId?: string;
+  id?: string;
+  key?: string;
+  value?: string;
 }

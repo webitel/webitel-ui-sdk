@@ -4,695 +4,113 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
-import { delay, HttpResponse, http } from 'msw';
+import {
+  faker
+} from '@faker-js/faker';
+
+import {
+  HttpResponse,
+  delay,
+  http
+} from 'msw';
+import type {
+  RequestHandlerOptions
+} from 'msw';
 
 import type {
-	WebitelCasesCaseComment,
-	WebitelCasesCaseCommentList,
+  WebitelCasesCaseComment,
+  WebitelCasesCaseCommentList
 } from '.././_models';
 
-export const getDeleteCommentResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseComment> = {},
-): WebitelCasesCaseComment => ({
-	author: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	caseId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	roleIds: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
 
-export const getLocateCommentResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseComment> = {},
-): WebitelCasesCaseComment => ({
-	author: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	caseId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	roleIds: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getDeleteCommentResponseMock = (overrideResponse: Partial< WebitelCasesCaseComment > = {}): WebitelCasesCaseComment => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getUpdateComment2ResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseComment> = {},
-): WebitelCasesCaseComment => ({
-	author: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	caseId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	roleIds: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getLocateCommentResponseMock = (overrideResponse: Partial< WebitelCasesCaseComment > = {}): WebitelCasesCaseComment => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getUpdateCommentResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseComment> = {},
-): WebitelCasesCaseComment => ({
-	author: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	caseId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	roleIds: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getUpdateComment2ResponseMock = (overrideResponse: Partial< WebitelCasesCaseComment > = {}): WebitelCasesCaseComment => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getListCommentsResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseCommentList> = {},
-): WebitelCasesCaseCommentList => ({
-	items: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			author: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			canEdit: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			caseId: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			roleIds: faker.helpers.arrayElement([
-				Array.from(
-					{ length: faker.number.int({ min: 1, max: 10 }) },
-					(_, i) => i + 1,
-				).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-				undefined,
-			]),
-			text: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
-	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	page: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getUpdateCommentResponseMock = (overrideResponse: Partial< WebitelCasesCaseComment > = {}): WebitelCasesCaseComment => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-export const getPublishCommentResponseMock = (
-	overrideResponse: Partial<WebitelCasesCaseComment> = {},
-): WebitelCasesCaseComment => ({
-	author: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	caseId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	roleIds: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getListCommentsResponseMock = (overrideResponse: Partial< WebitelCasesCaseCommentList > = {}): WebitelCasesCaseCommentList => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
-export const getDeleteCommentMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseComment
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/cases/comments/:etag',
-		async (info) => {
-			await delay(1000);
+export const getPublishCommentResponseMock = (overrideResponse: Partial< WebitelCasesCaseComment > = {}): WebitelCasesCaseComment => ({author: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), canEdit: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), caseId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), edited: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), roleIds: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), text: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getDeleteCommentResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
 
-export const getLocateCommentMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseComment
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/cases/comments/:etag',
-		async (info) => {
-			await delay(1000);
+export const getDeleteCommentMockHandler = (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment), options?: RequestHandlerOptions) => {
+  return http.delete('*/cases/comments/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeleteCommentResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getLocateCommentResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getLocateCommentMockHandler = (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment), options?: RequestHandlerOptions) => {
+  return http.get('*/cases/comments/:etag', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getLocateCommentResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getUpdateComment2MockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseComment
-		| ((
-				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment),
-	options?: RequestHandlerOptions,
-) => {
-	return http.patch(
-		'*/cases/comments/input.etag}',
-		async (info) => {
-			await delay(1000);
+export const getUpdateComment2MockHandler = (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment), options?: RequestHandlerOptions) => {
+  return http.patch('*/cases/comments/input.etag}', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateComment2ResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateComment2ResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getUpdateCommentMockHandler = (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment), options?: RequestHandlerOptions) => {
+  return http.put('*/cases/comments/input.etag}', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getUpdateCommentResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-export const getUpdateCommentMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseComment
-		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment),
-	options?: RequestHandlerOptions,
-) => {
-	return http.put(
-		'*/cases/comments/input.etag}',
-		async (info) => {
-			await delay(1000);
+export const getListCommentsMockHandler = (overrideResponse?: WebitelCasesCaseCommentList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseCommentList> | WebitelCasesCaseCommentList), options?: RequestHandlerOptions) => {
+  return http.get('*/cases/:caseEtag/comments', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getListCommentsResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getUpdateCommentResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getListCommentsMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseCommentList
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelCasesCaseCommentList> | WebitelCasesCaseCommentList),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/cases/:caseEtag/comments',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getListCommentsResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
-
-export const getPublishCommentMockHandler = (
-	overrideResponse?:
-		| WebitelCasesCaseComment
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment),
-	options?: RequestHandlerOptions,
-) => {
-	return http.post(
-		'*/cases/:caseEtag/comments',
-		async (info) => {
-			await delay(1000);
-
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getPublishCommentResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		},
-		options,
-	);
-};
+export const getPublishCommentMockHandler = (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment), options?: RequestHandlerOptions) => {
+  return http.post('*/cases/:caseEtag/comments', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getPublishCommentResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 export const getCaseCommentsMock = () => [
-	getDeleteCommentMockHandler(),
-	getLocateCommentMockHandler(),
-	getUpdateComment2MockHandler(),
-	getUpdateCommentMockHandler(),
-	getListCommentsMockHandler(),
-	getPublishCommentMockHandler(),
-];
+  getDeleteCommentMockHandler(),
+  getLocateCommentMockHandler(),
+  getUpdateComment2MockHandler(),
+  getUpdateCommentMockHandler(),
+  getListCommentsMockHandler(),
+  getPublishCommentMockHandler()]

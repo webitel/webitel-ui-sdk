@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineMemberServiceDeleteMembersBodyVariables = {
-	[key: string]: string;
-};
+export type EngineMemberServiceDeleteMembersBodyVariables = {[key: string]: string};

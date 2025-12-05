@@ -1,5 +1,6 @@
+import { ChatMessageType } from "../../../types/ChatMessage.types";
 type __VLS_Props = {
-    message: object;
+    message: ChatMessageType;
     showAvatar?: boolean;
     username?: string;
 };

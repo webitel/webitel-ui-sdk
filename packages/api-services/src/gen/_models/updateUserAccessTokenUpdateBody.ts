@@ -8,13 +8,13 @@ import type { ApiObjectId } from './apiObjectId';
 import type { UpdateUserAccessTokenUpdateBodyUser } from './updateUserAccessTokenUpdateBodyUser';
 
 export type UpdateUserAccessTokenUpdateBody = {
-	created_at?: string;
-	created_by?: ApiObjectId;
-	deleted_at?: string;
-	deleted_by?: ApiObjectId;
-	token?: string;
-	updated_at?: string;
-	updated_by?: ApiObjectId;
-	usage?: string;
-	user?: UpdateUserAccessTokenUpdateBodyUser;
+  created_at?: string;
+  created_by?: ApiObjectId;
+  deleted_at?: string;
+  deleted_by?: ApiObjectId;
+  token?: string;
+  updated_at?: string;
+  updated_by?: ApiObjectId;
+  usage?: string;
+  user?: UpdateUserAccessTokenUpdateBodyUser;
 };

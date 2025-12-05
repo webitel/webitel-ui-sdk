@@ -6,7 +6,7 @@
  */
 
 export interface EngineRoutingVariableServiceUpdateRoutingVariableBody {
-	domainId?: string;
-	key?: string;
-	value?: string;
+  domainId?: string;
+  key?: string;
+  value?: string;
 }

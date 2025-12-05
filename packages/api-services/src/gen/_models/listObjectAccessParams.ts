@@ -6,42 +6,42 @@
  */
 
 export type ListObjectAccessParams = {
-	/**
+/**
  * --- filters ---
 
 [optional] [FROM] each rule owner is any of role(s) id; user -or- role
  */
-	grantor?: string[];
-	/**
-	 * [optional] [TO] subject role(s) id; user -or- role
-	 */
-	grantee?: string[];
-	/**
-	 * [xrwdxrwd] [R]ecord-[b]ased-[A]ccess-[C]ontrol level check(!)
-	 */
-	granted?: string[];
-	/**
-	 * [optional] [TO] subject.name ILIKE ?q=; user -or- role
-	 */
-	q?: string;
-	/**
+grantor?: string[];
+/**
+ * [optional] [TO] subject role(s) id; user -or- role
+ */
+grantee?: string[];
+/**
+ * [xrwdxrwd] [R]ecord-[b]ased-[A]ccess-[C]ontrol level check(!)
+ */
+granted?: string[];
+/**
+ * [optional] [TO] subject.name ILIKE ?q=; user -or- role
+ */
+q?: string;
+/**
  * ----- Select Options -------------------------
 
 attributes list
  */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
+fields?: string[];
+/**
+ * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+ */
+sort?: string[];
+/**
  * pagedResultsControl
 
 default: 16
  */
-	size?: number;
-	/**
-	 * default: 1
-	 */
-	page?: number;
+size?: number;
+/**
+ * default: 1
+ */
+page?: number;
 };
