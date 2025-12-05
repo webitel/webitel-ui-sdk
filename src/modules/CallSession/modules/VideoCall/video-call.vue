@@ -1,11 +1,14 @@
 <template>
   <wt-vidstack-player
     :stream="mainStream"
-    :static-position="props.position === 'static'"
-    :component-size="props.size"
+    :static="props.static"
+    :size="props.size"
+    :class="`video-call-position--${props.position}`"
     class="video-call"
+    hide-background
     autoplay
     muted
+    @change-size="(payload) => emit('change-size', payload)"
   >
     <template #content="{ size: innerSize }">
       <div
@@ -22,7 +25,12 @@
         </template>
 
         <div class="video-call-content-wrapper">
-          <screenshot-box src="https://picsum.photos/200" :size="innerSize" />
+          <screenshot-box
+            :src="props['screenshot:src']"
+            :size="innerSize"
+            @zoom="emit(`action:${VideoCallAction.ZoomScreenshot}`)"
+            @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
+          />
 
           <template v-if="!props['receiver:stream'] && !props['receiver:video:enabled']">
             <div
@@ -83,14 +91,18 @@
 
 <script setup lang="ts">
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {computed } from 'vue';
+import {computed} from 'vue';
 
 import {WtIcon} from "../../../../components";
-import {RecordingIndicator, ScreenshotBox, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {
+  RecordingIndicator,
+  ScreenshotBox,
+  VideoCallControlsPanel
+} from "../../../../components/wt-vidstack-player/components";
 import {ComponentSize} from "../../../../enums";
-import { ResultCallbacks } from '../../../../types';
+import {ResultCallbacks} from '../../../../types';
 import {ScreenshotStatus} from '../../types';
-import { VideoCallAction } from './enums/VideoCallAction.enum';
+import {VideoCallAction} from './enums/VideoCallAction.enum';
 
 const props = defineProps<{
   'sender:stream'?: MediaStream | null;
@@ -107,11 +119,13 @@ const props = defineProps<{
 
   'screenshot:status'?: ScreenshotStatus | null;
   'screenshot:loading'?: boolean;
+  'screenshot:src'?: string;
 
   recordings?: boolean;
 
-  position?: 'static' | 'left' | 'right';
-  size?: keyof typeof ComponentSize
+  static?: boolean;
+  position?: 'left' | 'right' | 'left-bottom' | 'right-bottom' | 'center';
+  size?: ComponentSize
 
   actions: VideoCallAction[];
 }>();
@@ -126,8 +140,8 @@ const emit = defineEmits<{
   (e: `action:${typeof VideoCallAction.Hangup}`, payload?: unknown, options?: ResultCallbacks): void;
   (e: `action:${typeof VideoCallAction.ZoomScreenshot}`): void;
   (e: `action:${typeof VideoCallAction.CloseScreenshot}`): void;
+  (e: `change-size`, size: ComponentSize): void;
 }>()
-
 
 const mainStream = computed(() => {
   if (!props['sender:video:enabled']) return null;
@@ -143,14 +157,39 @@ const receiverVideoMutedIconSizes = {
 
 const senderVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
-  [ComponentSize.MD]: ComponentSize['4L'],
-  [ComponentSize.LG]: ComponentSize['8L'],
+  [ComponentSize.MD]: ComponentSize['4XL'],
+  [ComponentSize.LG]: ComponentSize['8XL'],
 }
-
 </script>
 
 <style lang="scss" scoped>
 .video-call {
+
+  &-position {
+    &--left {
+      .wt-vidstack-player--md {
+        left: var(--spacing-sm);
+        bottom: var(--spacing-sm);
+      }
+    }
+
+    &--left-bottom {
+      &.wt-vidstack-player {
+        &--sm {
+          left: var(--spacing-sm);
+          bottom: var(--spacing-sm);
+          top: unset;
+        }
+        &--md {
+          top: unset;
+          left: var(--spacing-sm);
+          bottom: var(--spacing-sm);
+          max-width: var(--p-player-wrapper-md-width);
+          max-height: var(--p-player-wrapper-md-height);
+        }
+      }
+    }
+  }
 
   &-content {
     height: 100%;

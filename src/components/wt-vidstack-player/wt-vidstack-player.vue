@@ -1,8 +1,11 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player--${size}`]: props.resizable,
-      'wt-vidstack-player--static': props.staticPosition}"
+    :class="[
+      props.resizable && `wt-vidstack-player--${size}`,
+      props.static && 'wt-vidstack-player--static',
+      props.hideBackground && 'wt-vidstack-player--hide-background'
+    ]"
   >
     <media-player
       ref="player"
@@ -60,10 +63,11 @@ interface Props {
   username?: string;
   closable?: boolean;
   resizable?: boolean;
-  staticPosition?: boolean;
+  static?: boolean;
   stream?: MediaStream
-  componentSize?: keyof typeof ComponentSize
+  size?: ComponentSize
   hideDisplayPanel?: boolean
+  hideBackground?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,16 +77,17 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
-  staticPosition: false,
+  static: false,
   resizable: true,
 });
 
 const emit = defineEmits<{
   'close': [],
+  'change-size': [ComponentSize],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(props.componentSize || ComponentSize.SM);
+const size = ref(props.size || ComponentSize.SM);
 
 const changeSize = (value) => {
   size.value = value;
@@ -112,7 +117,7 @@ const normalizedSrc = computed(() => {
   }
 
   if (typeof props.src === 'string') {
-    return { src: props.src, type: normalizedType.value };
+    return {src: props.src, type: normalizedType.value};
   }
 
   return {
@@ -168,6 +173,7 @@ const normalizedSrc = computed(() => {
         position: relative;
         display: block;
         max-width: var(--p-player-wrapper-md-width);
+        max-height: var(--p-player-wrapper-md-height);
         padding: 0;
         margin: 0;
         border-radius: var(--p-player-wrapper-md-border-radius);
@@ -208,6 +214,14 @@ const normalizedSrc = computed(() => {
       margin: 0;
       width: 100%;
       height: 100%;
+    }
+  }
+
+  &--hide-background {
+    &.wt-vidstack-player {
+      &--md {
+        background: none;
+      }
     }
   }
 }
