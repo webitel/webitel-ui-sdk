@@ -124,7 +124,7 @@ const props = defineProps<{
   recordings?: boolean;
 
   static?: boolean;
-  position?: 'left' | 'right' | 'left-bottom' | 'right-bottom' | 'center';
+  position?: 'left-bottom';
   size?: ComponentSize
 
   actions: VideoCallAction[];
@@ -166,13 +166,6 @@ const senderVideoMutedIconSizes = {
 .video-call {
 
   &-position {
-    &--left {
-      .wt-vidstack-player--md {
-        left: var(--spacing-sm);
-        bottom: var(--spacing-sm);
-      }
-    }
-
     &--left-bottom {
       &.wt-vidstack-player {
         &--sm {
