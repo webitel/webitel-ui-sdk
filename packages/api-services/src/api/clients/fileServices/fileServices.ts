@@ -214,7 +214,7 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	}
 };
 
-const getFilesListByCall = async (params: SearchFilesByCallParams) => {
+const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: string }) => {
   const fieldsToSend = getShallowFieldsToSendFromZodSchema(
     searchFilesQueryParams,
   );
