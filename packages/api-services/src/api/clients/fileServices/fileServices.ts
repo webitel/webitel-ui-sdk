@@ -214,7 +214,7 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	}
 };
 
-const getFilesListByCall = async (params: any) => {
+const getFilesListByCall = async (params: SearchFilesByCallParams) => {
   const fieldsToSend = getShallowFieldsToSendFromZodSchema(
     searchFilesQueryParams,
   );
@@ -223,11 +223,11 @@ const getFilesListByCall = async (params: any) => {
     merge(getDefaultGetParams()),
     sanitize(fieldsToSend),
     camelToSnake(),
-    (p) => ({
-      ...p,
-      q: p.q ?? p.search,
-      'uploaded_at.from': p.uploaded_at_from,
-      'uploaded_at.to': p.uploaded_at_to,
+    (param) => ({
+      ...param,
+      q: param.q ?? param.search,
+      'uploaded_at.from': param.uploaded_at_from,
+      'uploaded_at.to': param.uploaded_at_to,
     }),
   ]);
 
