@@ -1,8 +1,11 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player--${size}`]: props.resizable,
-      'wt-vidstack-player--static': props.staticPosition}"
+    :class="[
+      props.resizable && `wt-vidstack-player--${size}`,
+      props.static && 'wt-vidstack-player--static',
+      props.hideBackground && 'wt-vidstack-player--hide-background'
+    ]"
   >
     <media-player
       ref="player"
@@ -46,7 +49,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide, ref, useTemplateRef} from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -60,10 +63,11 @@ interface Props {
   username?: string;
   closable?: boolean;
   resizable?: boolean;
-  staticPosition?: boolean;
+  static?: boolean;
   stream?: MediaStream
-  componentSize?: keyof typeof ComponentSize
+  size?: ComponentSize
   hideDisplayPanel?: boolean
+  hideBackground?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,16 +77,17 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
-  staticPosition: false,
+  static: false,
   resizable: true,
 });
 
 const emit = defineEmits<{
   'close': [],
+  'change-size': [ComponentSize],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(props.componentSize || ComponentSize.SM);
+const size = ref(props.size || ComponentSize.SM);
 
 const changeSize = (value) => {
   size.value = value;
@@ -96,7 +101,7 @@ provide('size', {size, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
-  
+
   if (typeof props.src === 'string') {
     if (props.src.includes('media')) return 'audio/mp3';
     if (props.src.includes('mp3')) return 'audio/mp3';
@@ -112,7 +117,7 @@ const normalizedSrc = computed(() => {
   }
 
   if (typeof props.src === 'string') {
-    return { src: props.src, type: normalizedType.value };
+    return {src: props.src, type: normalizedType.value};
   }
 
   return {
@@ -156,25 +161,29 @@ const normalizedSrc = computed(() => {
   }
 
   &--md {
-    &--md:not(.wt-vidstack-player--static) {
+    &:not(.wt-vidstack-player--static) {
       @include popup-wrapper;
+
+      /** @author liza-pohranichna
+      * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
       .wt-vidstack-player__player {
         @include popup-container;
+
+        position: relative;
+        display: block;
+        max-width: var(--p-player-wrapper-md-width);
+        max-height: var(--p-player-wrapper-md-height);
+        padding: 0;
+        margin: 0;
+        border-radius: var(--p-player-wrapper-md-border-radius);
+        overflow: hidden;
+        box-shadow: var(--elevation-10);
       }
     }
 
-    /** @author liza-pohranichna
-    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
-
     .wt-vidstack-player__player {
-      position: relative;
-      display: block;
-      max-width: var(--p-player-wrapper-md-width);
-      padding: 0;
-      border-radius: var(--p-player-wrapper-md-border-radius);
-      overflow: hidden;
-      box-shadow: var(--elevation-10);
+      width: 100%;
     }
   }
 
@@ -205,6 +214,14 @@ const normalizedSrc = computed(() => {
       margin: 0;
       width: 100%;
       height: 100%;
+    }
+  }
+
+  &--hide-background {
+    &.wt-vidstack-player {
+      &--md {
+        background: none;
+      }
     }
   }
 }

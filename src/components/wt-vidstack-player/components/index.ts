@@ -4,3 +4,4 @@ export { default as MediaControlsPanel } from './panels/media-controls-panel/med
 export { default as ScreenSharingControlsPanel } from './panels/screen-sharing-controls-panel/screen-sharing-controls-panel.vue';
 export { default as VideoCallControlsPanel } from './panels/video-call-controls-panel/video-call-controls-panel.vue';
 export { default as RecordingIndicator } from './recording-indicator/recording-indicator.vue';
+export { default as ScreenshotBox } from './screenshot-box/screenshot-box.vue';
