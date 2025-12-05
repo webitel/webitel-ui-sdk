@@ -104,7 +104,7 @@ import {ResultCallbacks} from '../../../../types';
 import {ScreenshotStatus} from '../../types';
 import {VideoCallAction} from './enums/VideoCallAction.enum';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   'sender:stream'?: MediaStream | null;
 
   'sender:mic:enabled'?: boolean;
@@ -124,11 +124,13 @@ const props = defineProps<{
   recordings?: boolean;
 
   static?: boolean;
-  position?: 'left-bottom';
+  position?: 'left-bottom' | 'right-bottom';
   size?: ComponentSize
 
   actions: VideoCallAction[];
-}>();
+}>(), {
+  position: 'right-bottom',
+});
 
 const emit = defineEmits<{
   (e: `action:${typeof VideoCallAction.Screenshot}`, payload?: unknown, options?: ResultCallbacks): void;
@@ -164,7 +166,6 @@ const senderVideoMutedIconSizes = {
 
 <style lang="scss" scoped>
 .video-call {
-
   &-position {
     &--left-bottom {
       &.wt-vidstack-player {
@@ -176,6 +177,23 @@ const senderVideoMutedIconSizes = {
         &--md {
           top: unset;
           left: var(--spacing-sm);
+          bottom: var(--spacing-sm);
+          max-width: var(--p-player-wrapper-md-width);
+          max-height: var(--p-player-wrapper-md-height);
+        }
+      }
+    }
+
+    &--right-bottom {
+      &.wt-vidstack-player {
+        &--sm {
+          top: unset;
+          right: var(--spacing-sm);
+          bottom: var(--spacing-sm);
+        }
+        &--md {
+          top: unset;
+          right: var(--spacing-sm);
           bottom: var(--spacing-sm);
           max-width: var(--p-player-wrapper-md-width);
           max-height: var(--p-player-wrapper-md-height);
