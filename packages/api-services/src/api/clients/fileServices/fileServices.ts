@@ -214,6 +214,42 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	}
 };
 
+const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: string }) => {
+  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+    searchFilesQueryParams,
+  );
+
+  const requestParams = applyTransform(params, [
+    merge(getDefaultGetParams()),
+    sanitize(fieldsToSend),
+    camelToSnake(),
+    (param) => ({
+      ...param,
+      q: param.q ?? param.search,
+      'uploaded_at.from': param.uploaded_at_from,
+      'uploaded_at.to': param.uploaded_at_to,
+    }),
+  ]);
+
+  try {
+    const response = await getFileService().searchFilesByCall(
+      params.callId,
+      requestParams,
+    );
+
+    const { items, next } = applyTransform(response.data, [
+      merge(getDefaultGetListResponse()),
+    ]);
+
+    return {
+      items,
+      next,
+    };
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
 export const FileServicesAPI = {
 	getList: getFilesList,
 	delete: deleteFiles,
@@ -221,4 +257,5 @@ export const FileServicesAPI = {
 	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
 	deleteScreenRecordingsByAgent,
+  getListByCall: getFilesListByCall,
 };
