@@ -1,9 +1,9 @@
 export default {
-  '@webitel/ui-chats': {
-    ui: {
-      messaging: {
-        chatsFileBlocked: 'TODO',
-      },
-    },
-  },
+	"@webitel/ui-chats": {
+		ui: {
+			messaging: {
+				chatsFileBlocked: "TODO",
+			},
+		},
+	},
 };

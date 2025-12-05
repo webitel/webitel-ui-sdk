@@ -17,52 +17,49 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
+import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { computed, inject } from "vue";
+import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
+import AttachFilesAction from "./actions/attach-files-action.vue";
+import EmojiPickerAction from "./actions/emoji-picker-action.vue";
+import SendMessageAction from "./actions/send-message-action.vue";
 
-import { ChatAction } from '../types/ChatAction.types'; 
-import SendMessageAction from './actions/send-message-action.vue';
-import AttachFilesAction from './actions/attach-files-action.vue';
-import EmojiPickerAction from './actions/emoji-picker-action.vue';
-import { SharedActionSlots } from '../types/ChatAction.types';
-
-const size = inject<ComponentSize>('size');
+const _size = inject<ComponentSize>("size");
 
 const props = defineProps<{
-  actions: ChatAction[];
+	actions: ChatAction[];
 }>();
 
-const emit = defineEmits<{
-  (e: typeof ChatAction.SendMessage): void;
-  (e: typeof ChatAction.AttachFiles, files: File[]): void;
+const _emit = defineEmits<{
+	(e: typeof ChatAction.SendMessage): void;
+	(e: typeof ChatAction.AttachFiles, files: File[]): void;
 }>();
 
-const slots = defineSlots<SharedActionSlots>();
+const _slots = defineSlots<SharedActionSlots>();
 
-const ShownActionComponentsList = computed(() => {
-  /**
-   * note! actions order is declared here and cannot be changed from outside
-   */
-  return [
-    {
-      action: ChatAction.AttachFiles,
-      component: AttachFilesAction,
-    },
-    {
-      action: ChatAction.EmojiPicker,
-      component: EmojiPickerAction,
-    },
-    {
-      action: ChatAction.QuickReplies,
-      component: null, // has no component inside lib, should be provided by pkg-client application
-    },
-    {
-      action: ChatAction.SendMessage,
-      component: SendMessageAction,
-    },
-  ].filter(({ action }) => props.actions.includes(action));
+const _ShownActionComponentsList = computed(() => {
+	/**
+	 * note! actions order is declared here and cannot be changed from outside
+	 */
+	return [
+		{
+			action: ChatAction.AttachFiles,
+			component: AttachFilesAction,
+		},
+		{
+			action: ChatAction.EmojiPicker,
+			component: EmojiPickerAction,
+		},
+		{
+			action: ChatAction.QuickReplies,
+			component: null, // has no component inside lib, should be provided by pkg-client application
+		},
+		{
+			action: ChatAction.SendMessage,
+			component: SendMessageAction,
+		},
+	].filter(({ action }) => props.actions.includes(action));
 });
-
 </script>
 
 <style scoped>

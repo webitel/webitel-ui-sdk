@@ -9,11 +9,11 @@
 </template>
 
 <script setup lang="ts">
-import { ChatMessageType } from '../types/ChatMessage.types';
+import type { ChatMessageType } from "../types/ChatMessage.types";
+
 // import ChatMessageComponent from '../modules/message/components/chat-message.vue';
 
-
-const props = defineProps<{
-    messages: ChatMessageType[];
+const _props = defineProps<{
+	messages: ChatMessageType[];
 }>();
 </script>
