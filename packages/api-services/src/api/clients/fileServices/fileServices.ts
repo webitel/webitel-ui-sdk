@@ -6,6 +6,8 @@ import {
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
+import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
+
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -16,7 +18,7 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const getFilesList = async (params: any) => {
+const getFilesList = async (params: SearchFilesByCallParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		searchFilesQueryParams,
 	);

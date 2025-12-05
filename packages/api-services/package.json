@@ -67,7 +67,7 @@
       "import": "./src/gen/index.ts"
     },
     "./gen/models": {
-      "types": "./types/gen/_models/index.d.ts",
+      "types": "./src/gen/_models/index.ts",
       "import": "./src/gen/_models/index.ts"
     },
     "./utils": {
