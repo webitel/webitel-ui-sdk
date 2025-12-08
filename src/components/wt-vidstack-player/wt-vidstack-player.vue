@@ -23,15 +23,15 @@
       ></media-provider>
 
       <video-layout
-        v-if="props.resizable"
         :hide-display-panel="props.hideDisplayPanel"
+        :hide-controls-panel="props.hideControlsPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
         @close-player="emit('close')"
       >
-        <template #controls-panel>
+        <template  #controls-panel>
           <slot name="controls-panel" :size="size" />
         </template>
 
@@ -67,6 +67,7 @@ interface Props {
   stream?: MediaStream
   size?: ComponentSize
   hideDisplayPanel?: boolean
+  hideControlsPanel?: boolean
   hideBackground?: boolean
 }
 

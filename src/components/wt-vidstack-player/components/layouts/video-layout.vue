@@ -15,7 +15,7 @@
       <slot name="content" />
     </media-controls-group>
 
-    <slot name="controls-panel">
+    <slot v-if="!props.hideControlsPanel" name="controls-panel">
       <media-controls-panel />
     </slot>
   </media-controls>
@@ -34,6 +34,7 @@ const props = defineProps<{
   username?: string;
   closable?: boolean;
   hideDisplayPanel?: boolean
+  hideControlsPanel?: boolean
 }>();
 
 const emit = defineEmits<{
