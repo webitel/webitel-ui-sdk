@@ -1,4 +1,5 @@
 import FilesExport from '../FilesExport.js';
+import { EngineCallFileType } from '@webitel/api-services/gen/models';
 
 export default {
   data: () => ({
@@ -32,7 +33,7 @@ export default {
         files = this.selectedItems.reduce(
           (filesAccumulator, next) =>
             next.files
-              ? [...filesAccumulator, ...next.files]
+              ? [...filesAccumulator, ...next.files[EngineCallFileType.FileTypeAudio]]
               : filesAccumulator,
           [],
         );
