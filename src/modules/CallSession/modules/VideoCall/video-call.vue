@@ -4,6 +4,7 @@
     :static="props.static"
     :size="props.size"
     :class="`video-call-position--${props.position}`"
+    :username="props.username"
     class="video-call"
     hide-background
     autoplay
@@ -128,6 +129,7 @@ const props = withDefaults(defineProps<{
   size?: ComponentSize
 
   actions: VideoCallAction[];
+  username: string;
 }>(), {
   position: 'right-bottom',
 });
