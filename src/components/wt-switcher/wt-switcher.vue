@@ -13,7 +13,6 @@
     <wt-label
       v-if="hasLabel"
       :disabled="disabled"
-      :for="switcherId"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
@@ -102,12 +101,10 @@ const handleSwitcherClick = () => {
 
 .wt-label {
   @extend %typo-subtitle-2;
-  margin-left: var(--spacing-xs);
 }
 
 .wt-switcher__label {
   @extend %typo-subtitle-2;
-  cursor: pointer;
   user-select: none;
   transition: var(--transition);
 
