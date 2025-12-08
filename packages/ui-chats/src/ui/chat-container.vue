@@ -17,8 +17,8 @@
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
-              <template 
-              v-for="action in slottedChatActions" 
+              <template
+              v-for="action in slottedChatActions"
               :key="action"
               #[action]="{ size }"
               >
