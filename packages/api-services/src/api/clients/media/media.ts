@@ -79,7 +79,7 @@ export const downloadFile = (id) => {
 	document.body.removeChild(link);
 };
 
-export const getCallMediaUrl = (id, { download = false }) => {
+export const getCallMediaUrl = (id, { download = false } = {}) => {
 	const accessToken = localStorage.getItem('access-token');
   return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
 }
