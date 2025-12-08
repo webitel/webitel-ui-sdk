@@ -15,7 +15,7 @@
         :class="`video-call-content--${innerSize}`"
         class="video-call-content"
       >
-        <template v-if="!props['receiver:stream'] && !props['sender:video:enabled']">
+        <template v-if="props['receiver:stream'] && !props['sender:video:enabled']">
           <div
             :class="`video-call-sender--${innerSize}`"
             class="video-call-sender video-call-sender--muted"
@@ -32,7 +32,7 @@
             @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
           />
 
-          <template v-if="!props['receiver:stream'] && !props['receiver:video:enabled']">
+          <template v-if="props['receiver:stream'] && !props['receiver:video:enabled']">
             <div
               :class="`video-call-receiver--${innerSize}`"
               class="video-call-receiver video-call-receiver--muted"
@@ -47,7 +47,7 @@
               :resizable="false"
               :class="`video-call-receiver--${innerSize}`"
               hide-display-panel
-              static-position
+              static
               autoplay
               muted
               class="video-call-receiver"
@@ -234,6 +234,7 @@ const senderVideoMutedIconSizes = {
     align-items: center;
     justify-content: center;
     z-index: -1;
+    background: var(--p-player-wrapper-background);
 
     &--sm {
       &.video-call-sender--muted {
