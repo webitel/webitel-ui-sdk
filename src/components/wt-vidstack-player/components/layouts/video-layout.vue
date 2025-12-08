@@ -11,9 +11,9 @@
       @close="emit('close-player')"
     />
 
-    <wt-loader size="sm" color="on-dark" />
-
-    <slot name="content" />
+    <media-controls-group>
+      <slot name="content" />
+    </media-controls-group>
 
     <slot name="controls-panel">
       <media-controls-panel />
@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import {defineEmits, inject} from "vue";
 
-import WtLoader from "../../../wt-loader/wt-loader.vue";
 import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
@@ -47,6 +46,7 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .video-layout {
+  background: var(--p-player-wrapper-background);
   position: relative;
 
   .video-display-panel {
@@ -72,20 +72,11 @@ const emit = defineEmits<{
   transition: all var(--transition) ease-out;
 }
 
-.wt-loader {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.video-layout:not([data-buffering]) .wt-loader {
-  display: none;
-}
-
 media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
   .video-display-panel {
     background: var(--p-player-head-line-hover-background);
     opacity: 1;
+    z-index: 10;
   }
 }
 </style>
