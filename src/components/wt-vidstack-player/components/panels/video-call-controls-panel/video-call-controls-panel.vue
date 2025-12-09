@@ -25,13 +25,16 @@
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Mic]"
+      :disabled="!props['mic:accessed']"
+      :size="size"
+      :icon="microphoneIcon"
+      badge="!"
+      badge-severity="danger"
+      badge-absolute-position
       rounded
       contains-icon
       variant="outlined"
       color="secondary"
-      :disabled="!props['mic:accessed']"
-      :size="size"
-      :icon="microphoneIcon"
       @click="emit(VideoCallAction.Mic)"
     />
 

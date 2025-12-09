@@ -12,6 +12,9 @@
     :severity="color"
     :size="primevueSizeMap[size]"
     :variant="variant"
+    :badge="props.badge"
+    :badge-severity="props.badgeSeverity"
+    :badge-class="badgeClass"
     class="wt-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
@@ -60,6 +63,9 @@ interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   widthByContent?: boolean;
   icon?: string;
   iconPrefix?: string;
+  badge?: string;
+  badgeSeverity?: string;
+  badgeAbsolutePosition?: boolean;
   variant?: ButtonVariant;
 }
 
@@ -74,12 +80,18 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
   iconPrefix: '',
   variant: ButtonVariant.ACTIVE,
 });
+console.log(props, ' props')
 
 const emit = defineEmits(['click']);
 
 const attrs = useAttrs();
 
 const showLoader = ref(false);
+
+
+const badgeClass = computed(() => {
+  return [{'custom-class': props.badgeAbsolutePosition}]
+})
 
 // @Ler24
 // Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
