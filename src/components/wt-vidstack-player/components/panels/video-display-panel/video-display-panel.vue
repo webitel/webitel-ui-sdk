@@ -45,7 +45,7 @@ import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
 import FullscreenButton from "../../buttons/fullscreen-button.vue";
 import ToggleButton from "../../toggle-button.vue";
 
-const { size, changeSize } = inject('size');
+const { size, fullscreen, changeSize } = inject('size');
 
 const props = defineProps<{
   title?: string;
@@ -69,10 +69,12 @@ const emit = defineEmits<{
 const handleFullscreen = (value: boolean) => {
   if (value) {
     if (size.value !== ComponentSize.LG) {
+      fullscreen.value = true
       changeSize(ComponentSize.LG)
     }
   } else if (size.value === ComponentSize.LG) {
     exitFullscreen()
+    fullscreen.value = false
     changeSize(ComponentSize.SM)
   }
 }
@@ -84,6 +86,7 @@ const handlePlayerSize = () => {
     changeSize(ComponentSize.SM)
   } else if (size.value === ComponentSize.LG) {
     exitFullscreen()
+    fullscreen.value = false
     changeSize(ComponentSize.MD)
   }
 }

@@ -2,7 +2,8 @@
   <div
     class="wt-vidstack-player"
     :class="[
-      props.resizable && `wt-vidstack-player--${size}`,
+      `wt-vidstack-player--${size}`,
+      fullscreen && `wt-vidstack-player--fullscreen`,
       props.static && 'wt-vidstack-player--static',
       props.hideBackground && 'wt-vidstack-player--hide-background'
     ]"
@@ -89,6 +90,7 @@ const emit = defineEmits<{
 
 const player = useTemplateRef<MediaPlayerElement>('player');
 const size = ref(props.size || ComponentSize.SM);
+const fullscreen = ref(false)
 
 const changeSize = (value) => {
   size.value = value;
@@ -96,9 +98,8 @@ const changeSize = (value) => {
 
 /** @author liza-pohranichna
  * options: [sm, md, lg]
- * lg-size is fullscreen
  */
-provide('size', {size, changeSize});
+provide('size', {size, fullscreen, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
@@ -135,6 +136,8 @@ const normalizedSrc = computed(() => {
 .wt-vidstack-player {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   transition: var(--transition);
 
   &__player {
@@ -162,8 +165,17 @@ const normalizedSrc = computed(() => {
   }
 
   &--md {
+    border-radius: var(--p-player-wrapper-md-border-radius);
+    overflow: hidden;
+    max-width: var(--p-player-wrapper-md-width);
+    max-height: var(--p-player-wrapper-md-height);
+    flex: 0 0 auto;
+
     &:not(.wt-vidstack-player--static) {
       @include popup-wrapper;
+      border-radius: 0;
+      max-width: 100%;
+      max-height: 100%;
 
       /** @author liza-pohranichna
       * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
@@ -189,6 +201,9 @@ const normalizedSrc = computed(() => {
   }
 
   &--lg {
+    border-radius: var(--p-player-wrapper-lg-border-radius);
+    overflow: hidden;
+
     .wt-vidstack-player {
       &__player {
         display: flex;
@@ -200,6 +215,10 @@ const normalizedSrc = computed(() => {
         min-width: 0;
       }
     }
+  }
+
+  &--fullscreen {
+    border-radius: 0;
   }
 
   &--static {
