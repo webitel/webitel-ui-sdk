@@ -86,6 +86,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Editado';
     },
+    check: 'Comprobar',
   },
   vocabulary: {
     apply: 'Aplicar',
@@ -129,6 +130,7 @@ export default {
     expireAt: 'Expira en',
     destination: 'Destino',
     utilizationProgress: 'Progreso de utilización',
+    settings: 'Configuración',
   },
   date: {
     sec: 'Seg',

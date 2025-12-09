@@ -87,6 +87,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Редаговано';
     },
+    check: 'Перевірити',
   },
   vocabulary: {
     apply: 'Застосувати',
@@ -130,6 +131,7 @@ export default {
     expireAt: 'Термін дії',
     destination: 'Призначення',
     utilizationProgress: 'Прогрес використання',
+    settings: 'Налаштування',
   },
   // date-related texts
   date: {
