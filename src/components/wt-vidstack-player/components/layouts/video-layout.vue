@@ -46,7 +46,6 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .video-layout {
-  background: var(--p-player-wrapper-background);
   position: relative;
 
   .video-display-panel {

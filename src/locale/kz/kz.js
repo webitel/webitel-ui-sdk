@@ -87,6 +87,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Өңделген';
     },
+    check: 'Тексеру',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -131,6 +132,7 @@ export default {
     expireAt: 'Мерзімі',
     destination: 'Мақсат',
     utilizationProgress: 'Пайдалану прогресі',
+    settings: 'Параметрлер',
   },
   // date-related texts
   date: {
