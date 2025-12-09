@@ -1,6 +1,6 @@
 export interface ChatMessageType {
 	id: number;
-	date: number;
+	date?: number;
 	file?: ChatMessageFile;
 	member: ChatMember;
 	peer?: ChatMember;

@@ -34,7 +34,7 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 		uploaded_at_to: uploadedAtTo,
 		uploadedBy,
 		referenceId,
-		channel,
+		type,
 		retentionUntilFrom,
 		retentionUntilTo,
 	} = applyTransform(params, [
@@ -55,7 +55,7 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 			'uploaded_at.to': uploadedAtTo,
 			uploadedBy,
 			referenceId,
-			channel,
+			type,
 			retentionUntilFrom,
 			retentionUntilTo,
 		});
@@ -97,7 +97,7 @@ const getScreenRecordingsByUser = async (params: any) => {
 		referenceId,
 		retentionUntilFrom,
 		retentionUntilTo,
-		channel,
+		type,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
@@ -119,7 +119,7 @@ const getScreenRecordingsByUser = async (params: any) => {
 				referenceId,
 				retentionUntilFrom,
 				retentionUntilTo,
-				channel,
+				type,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -164,7 +164,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 		referenceId,
 		retentionUntilFrom,
 		retentionUntilTo,
-		channel,
+		type,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
@@ -186,7 +186,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				referenceId,
 				retentionUntilFrom,
 				retentionUntilTo,
-				channel,
+				type,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
