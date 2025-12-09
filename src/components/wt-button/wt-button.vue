@@ -12,9 +12,6 @@
     :severity="color"
     :size="primevueSizeMap[size]"
     :variant="variant"
-    :badge="props.badge"
-    :badge-severity="props.badgeSeverity"
-    :badge-class="badgeClass"
     class="wt-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
@@ -26,8 +23,17 @@
     />
     <div class="wt-button__contents">
       <slot v-if="!icon"> no content provided</slot>
+
+      <wt-badge
+        v-if="props.badge"
+        :severity="props.badgeSeverity"
+        :class="badgeClass"
+      >
+        {{ props.badge }}
+      </wt-badge>
+
       <wt-icon
-        v-else
+        v-if="icon"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -40,7 +46,9 @@
 import type { ButtonProps } from 'primevue';
 import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
-import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
+import {WtBadge, WtIcon} from "../../components";
+import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
+// import WtIcon from "../wt-icon/wt-icon.vue";
 
 const primevueSizeMap = {
   [ComponentSize.XS]: 'extra-small',
@@ -88,10 +96,9 @@ const attrs = useAttrs();
 
 const showLoader = ref(false);
 
-
-const badgeClass = computed(() => {
-  return [{'custom-class': props.badgeAbsolutePosition}]
-})
+const badgeClass = computed(() => ({
+  'wt-badge--absolute': props.badgeAbsolutePosition
+}));
 
 // @Ler24
 // Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
@@ -151,7 +158,20 @@ watch(
 </script>
 
 <style lang="scss">
-.wt-button__contents {
-  display: contents;
+.wt-button {
+  position: relative;
+
+  &__contents {
+    display: contents;
+  }
+
+  .wt-badge {
+    &--absolute {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+  }
 }
+
 </style>
