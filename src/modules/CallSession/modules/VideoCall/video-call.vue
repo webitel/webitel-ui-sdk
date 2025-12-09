@@ -162,6 +162,8 @@ const senderVideoMutedIconSizes = {
 
 <style lang="scss" scoped>
 .video-call {
+  flex: 0 0 auto;
+
   &-position {
     &--left-bottom {
       &.wt-vidstack-player {
