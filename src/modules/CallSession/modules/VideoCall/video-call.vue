@@ -6,7 +6,7 @@
     :class="`video-call-position--${props.position}`"
     :username="props.username"
     :resizable="props.resizable"
-    :hide-display-panel="props.hideDisplayPanel"
+    :hide-header="props.hideHeader"
     class="video-call"
     hide-background
     autoplay
@@ -49,7 +49,7 @@
               :stream="props['receiver:stream']"
               :resizable="false"
               :class="`video-call-receiver--${innerSize}`"
-              hide-display-panel
+              hide-header
               hide-controls-panel
               static
               autoplay
@@ -130,7 +130,7 @@ const props = withDefaults(defineProps<{
   static?: boolean;
   position?: 'left-bottom' | 'right-bottom';
   size?: ComponentSize
-  hideDisplayPanel?: boolean
+  hideHeader?: boolean
   resizable?: boolean;
 
   actions: VideoCallAction[];

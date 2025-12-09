@@ -4,7 +4,7 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
-      :class="{'video-display-panel--hidden': props.hideDisplayPanel}"
+      :class="{'video-display-panel--hidden': props.hideHeader}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
@@ -33,7 +33,7 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideDisplayPanel?: boolean
+  hideHeader?: boolean
   hideControlsPanel?: boolean
 }>();
 
