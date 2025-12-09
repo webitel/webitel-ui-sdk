@@ -4,7 +4,7 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
-      :class="{'video-display-panel--hidden': props.hideDisplayPanel}"
+      :class="{'video-display-panel--hidden': props.hideHeader}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
@@ -15,7 +15,7 @@
       <slot name="content" />
     </media-controls-group>
 
-    <slot name="controls-panel">
+    <slot v-if="!props.hideControlsPanel" name="controls-panel">
       <media-controls-panel />
     </slot>
   </media-controls>
@@ -33,7 +33,8 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideDisplayPanel?: boolean
+  hideHeader?: boolean
+  hideControlsPanel?: boolean
 }>();
 
 const emit = defineEmits<{
