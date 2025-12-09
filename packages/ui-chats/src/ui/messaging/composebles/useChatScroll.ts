@@ -8,7 +8,7 @@ export const useChatScroll = (
   chatMessages: ChatMessageType[] = [],
 ) => {
   const defaultThreshold = 136;
-  const { arrivedState } = useScroll(element);
+  const { arrivedState } = useScroll(element.value);
 
   const newUnseenMessages = ref<number>(0);
   const showScrollToBottomBtn = ref<boolean>(false);
