@@ -176,6 +176,7 @@ const normalizedSrc = computed(() => {
       border-radius: 0;
       max-width: 100%;
       max-height: 100%;
+      overflow: visible;
 
       /** @author liza-pohranichna
       * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */

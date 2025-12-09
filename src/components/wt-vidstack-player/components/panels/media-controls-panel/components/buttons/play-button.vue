@@ -27,7 +27,9 @@
 <script setup lang="ts">
 import {inject} from "vue";
 
-const {size} = inject('size');
+import {WtSizeProvider} from "../../../../../types/WtSizeProvider";
+
+const {size} = inject<WtSizeProvider>('size');
 </script>
 
 <style scoped>

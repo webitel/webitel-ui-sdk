@@ -24,10 +24,11 @@
 <script setup lang="ts">
 import {defineEmits, inject} from "vue";
 
+import {WtSizeProvider} from "../../types/WtSizeProvider";
 import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
-const {size} = inject('size');
+const {size} = inject<WtSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;
