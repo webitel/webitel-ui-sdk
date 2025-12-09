@@ -8,7 +8,7 @@ export const useChatScroll = (
   chatMessages: ChatMessageType[] = [],
 ) => {
   const defaultThreshold = 136;
-  const { arrivedState } = useScroll(element.value);
+  const { arrivedState } = useScroll(element);
 
   const newUnseenMessages = ref<number>(0);
   const showScrollToBottomBtn = ref<boolean>(false);
@@ -77,8 +77,8 @@ export const useChatScroll = (
   };
 
   const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
-    element.value?.scrollTo({
-      top: element.value?.scrollHeight,
+    element?.value.scrollTo({
+      top: element?.value.scrollHeight,
       behavior: behavior === 'instant' ? 'auto' : behavior,
     });
 
