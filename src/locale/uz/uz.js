@@ -87,6 +87,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Tahrirlangan';
     },
+    check: 'Tekshirish',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -131,6 +132,7 @@ export default {
     expireAt: 'Muddati',
     destination: 'Manzil',
     utilizationProgress: 'Foydalanish bosqichi',
+    settings: 'Sozlamalar',
   },
   // date-related texts
   date: {
