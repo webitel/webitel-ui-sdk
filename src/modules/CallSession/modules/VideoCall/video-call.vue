@@ -176,8 +176,6 @@ const senderVideoMutedIconSizes = {
           top: unset;
           left: var(--spacing-sm);
           bottom: var(--spacing-sm);
-          max-width: var(--p-player-wrapper-md-width);
-          max-height: var(--p-player-wrapper-md-height);
         }
       }
     }
@@ -193,25 +191,17 @@ const senderVideoMutedIconSizes = {
           top: unset;
           right: var(--spacing-sm);
           bottom: var(--spacing-sm);
-          max-width: var(--p-player-wrapper-md-width);
-          max-height: var(--p-player-wrapper-md-height);
         }
       }
     }
 
     &--center {
       &.wt-vidstack-player {
-        &--sm,
-        &--md,
-        &--lg {
-          top: 50%;
-          left: 50%;
-          right: unset;
-          bottom: unset;
-          transform: translate(-50%, -50%);
-          max-width: var(--p-player-wrapper-md-width);
-          max-height: var(--p-player-wrapper-md-height);
-        }
+        top: 50%;
+        left: 50%;
+        right: unset;
+        bottom: unset;
+        transform: translate(-50%, -50%);
       }
     }
   }
