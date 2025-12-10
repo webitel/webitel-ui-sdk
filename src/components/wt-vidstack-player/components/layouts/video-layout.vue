@@ -4,7 +4,7 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
-      :class="{'video-display-panel--hidden': props.hideDisplayPanel}"
+      :class="{'video-display-panel--hidden': props.hideHeader}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
@@ -15,7 +15,7 @@
       <slot name="content" />
     </media-controls-group>
 
-    <slot name="controls-panel">
+    <slot v-if="!props.hideControlsPanel" name="controls-panel">
       <media-controls-panel />
     </slot>
   </media-controls>
@@ -24,16 +24,18 @@
 <script setup lang="ts">
 import {defineEmits, inject} from "vue";
 
+import {WtVidstackPlayerSizeProvider} from "../../types/WtVidstackPlayerSizeProvider";
 import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
-const {size} = inject('size');
+const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideDisplayPanel?: boolean
+  hideHeader?: boolean
+  hideControlsPanel?: boolean
 }>();
 
 const emit = defineEmits<{

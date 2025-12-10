@@ -42,10 +42,11 @@ import {defineEmits, defineProps, inject, onBeforeUnmount, onMounted} from 'vue'
 import {ComponentSize} from "../../../../../enums";
 import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
 import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
+import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
 import FullscreenButton from "../../buttons/fullscreen-button.vue";
 import ToggleButton from "../../toggle-button.vue";
 
-const { size, changeSize } = inject('size');
+const { size, fullscreen, changeSize } = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;
@@ -57,22 +58,15 @@ const emit = defineEmits<{
   'close': [],
 }>();
 
-/**
- * @author: Oleksandr Palonnyi
- *
- *  [WTEL-7993](https://webitel.atlassian.net/browse/WTEL-7993)
- *
- * For the future: implement fullscreen state to separate it from LG size.
- *
- * Link with discussions - https://github.com/webitel/webitel-ui-sdk/pull/873#discussion_r2478239881
- * */
 const handleFullscreen = (value: boolean) => {
   if (value) {
     if (size.value !== ComponentSize.LG) {
+      fullscreen.value = true
       changeSize(ComponentSize.LG)
     }
   } else if (size.value === ComponentSize.LG) {
     exitFullscreen()
+    fullscreen.value = false
     changeSize(ComponentSize.SM)
   }
 }
@@ -84,6 +78,7 @@ const handlePlayerSize = () => {
     changeSize(ComponentSize.SM)
   } else if (size.value === ComponentSize.LG) {
     exitFullscreen()
+    fullscreen.value = false
     changeSize(ComponentSize.MD)
   }
 }
