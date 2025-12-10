@@ -17,4 +17,8 @@ import TimeGroup from "./components/time-group.vue";
 </script>
 
 <style scoped lang="scss">
+.media-control-panel {
+  width: 100%;
+  max-width: 100%;
+}
 </style>
