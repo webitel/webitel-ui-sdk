@@ -63,7 +63,6 @@ interface Props {
   title?: string;
   username?: string;
   closable?: boolean;
-  resizable?: boolean;
   static?: boolean;
   stream?: MediaStream
   size?: ComponentSize
@@ -80,7 +79,6 @@ const props = withDefaults(defineProps<Props>(), {
   username: '',
   closable: false,
   static: false,
-  resizable: true,
 });
 
 const emit = defineEmits<{
@@ -167,15 +165,23 @@ const normalizedSrc = computed(() => {
   &--md {
     border-radius: var(--p-player-wrapper-md-border-radius);
     overflow: hidden;
-    max-width: var(--p-player-wrapper-md-width);
-    max-height: var(--p-player-wrapper-md-height);
+    //max-width: var(--p-player-wrapper-md-width);
+    //max-height: var(--p-player-wrapper-md-height);
     flex: 0 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+
+    .wt-vidstack-player__player {
+      width: 100%;
+      height: 100%;
+      max-width: var(--p-player-wrapper-md-width);
+      max-height: var(--p-player-wrapper-md-height);
+      box-shadow: var(--elevation-10);
+    }
 
     &:not(.wt-vidstack-player--static) {
       @include popup-wrapper;
       border-radius: 0;
-      max-width: 100%;
-      max-height: 100%;
       overflow: visible;
 
       /** @author liza-pohranichna
@@ -186,13 +192,11 @@ const normalizedSrc = computed(() => {
 
         position: relative;
         display: block;
-        max-width: var(--p-player-wrapper-md-width);
-        max-height: var(--p-player-wrapper-md-height);
         padding: 0;
         margin: 0;
+        max-height: var(--p-player-wrapper-md-height);
         border-radius: var(--p-player-wrapper-md-border-radius);
         overflow: hidden;
-        box-shadow: var(--elevation-10);
       }
     }
 
@@ -204,6 +208,7 @@ const normalizedSrc = computed(() => {
   &--lg {
     border-radius: var(--p-player-wrapper-lg-border-radius);
     overflow: hidden;
+    z-index: 100;
 
     .wt-vidstack-player {
       &__player {
@@ -226,6 +231,7 @@ const normalizedSrc = computed(() => {
     position: relative;
     right: unset;
     bottom: unset;
+    z-index: 1;
 
     .wt-vidstack-player__provider {
       padding: 0;
