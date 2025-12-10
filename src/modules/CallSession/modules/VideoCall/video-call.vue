@@ -127,7 +127,7 @@ const props = withDefaults(defineProps<{
   resizable?: boolean;
 
   actions: VideoCallAction[];
-  username: string;
+  username?: string;
 }>(), {
   position: 'right-bottom',
 });
