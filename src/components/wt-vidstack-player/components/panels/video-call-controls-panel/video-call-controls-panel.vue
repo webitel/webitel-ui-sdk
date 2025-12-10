@@ -162,7 +162,7 @@ const isScreenshotLoading = ref(false);
 
 const onScreenshotClick = () => {
   isScreenshotLoading.value = true;
-  emit(VideoCallAction.Screenshot, null, {
+  emit(VideoCallAction.Screenshot, {}, {
     onComplete: () => {
       isScreenshotLoading.value = false;
     },

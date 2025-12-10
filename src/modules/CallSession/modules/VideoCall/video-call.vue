@@ -5,7 +5,6 @@
     :size="props.size"
     :class="[!props.static && `video-call-position--${props.position}`]"
     :username="props.username"
-    :resizable="props.resizable"
     :hide-header="props.hideHeader"
     class="video-call"
     hide-background
@@ -43,7 +42,6 @@
         <template v-else-if="props['receiver:stream']">
           <wt-vidstack-player
             :stream="props['receiver:stream']"
-            :resizable="false"
             :class="`video-call-receiver--${innerSize}`"
             hide-header
             hide-controls-panel
@@ -197,6 +195,7 @@ const senderVideoMutedIconSizes = {
 
     &--center {
       &.wt-vidstack-player {
+        position: absolute;
         top: 50%;
         left: 50%;
         right: unset;
