@@ -1,5 +1,6 @@
 import PAutoComplete from 'primevue/autocomplete';
 import PAvatar from 'primevue/avatar';
+import PBadge from 'primevue/badge';
 import PBreadcrumb from 'primevue/breadcrumb';
 import PButton from 'primevue/button';
 import PCheckbox from 'primevue/checkbox';
@@ -57,6 +58,7 @@ const initPrimevue = (app) => {
   app.component('PDivider', changeComponentCompatMode(PDivider));
   app.component('PImage', changeComponentCompatMode(PImage));
   app.component('PGalleria', changeComponentCompatMode(PGalleria));
+  app.component('PBadge', changeComponentCompatMode(PBadge));
 
   app.directive('tooltip', Tooltip);
 };

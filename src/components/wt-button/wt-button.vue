@@ -24,13 +24,14 @@
     <div class="wt-button__contents">
       <slot v-if="!icon"> no content provided</slot>
 
-      <wt-badge
+      <wt-badge-new
         v-if="props.badge"
+        :value="props.badge"
         :severity="props.badgeSeverity"
         :class="badgeClass"
       >
         {{ props.badge }}
-      </wt-badge>
+      </wt-badge-new>
 
       <wt-icon
         v-if="icon"
@@ -88,7 +89,6 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
   iconPrefix: '',
   variant: ButtonVariant.ACTIVE,
 });
-console.log(props, ' props')
 
 const emit = defineEmits(['click']);
 
