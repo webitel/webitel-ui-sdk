@@ -212,7 +212,7 @@ const senderVideoMutedIconSizes = {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 0;
+    z-index: -1;
     background: var(--p-player-wrapper-background);
   }
 
