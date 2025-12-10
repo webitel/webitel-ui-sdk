@@ -123,7 +123,7 @@ const props = withDefaults(defineProps<{
   recordings?: boolean;
 
   static?: boolean;
-  position?: 'left-bottom' | 'right-bottom';
+  position?: 'left-bottom' | 'right-bottom' | 'center';
   size?: ComponentSize
   hideHeader?: boolean
   resizable?: boolean;
@@ -176,8 +176,6 @@ const senderVideoMutedIconSizes = {
           top: unset;
           left: var(--spacing-sm);
           bottom: var(--spacing-sm);
-          max-width: var(--p-player-wrapper-md-width);
-          max-height: var(--p-player-wrapper-md-height);
         }
       }
     }
@@ -193,9 +191,17 @@ const senderVideoMutedIconSizes = {
           top: unset;
           right: var(--spacing-sm);
           bottom: var(--spacing-sm);
-          max-width: var(--p-player-wrapper-md-width);
-          max-height: var(--p-player-wrapper-md-height);
         }
+      }
+    }
+
+    &--center {
+      &.wt-vidstack-player {
+        top: 50%;
+        left: 50%;
+        right: unset;
+        bottom: unset;
+        transform: translate(-50%, -50%);
       }
     }
   }
