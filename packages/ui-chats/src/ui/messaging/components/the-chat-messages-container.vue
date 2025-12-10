@@ -29,18 +29,18 @@
 </template>
 
 <script setup lang="ts">
-import {inject, useTemplateRef} from "vue";
+import type { Emitter } from "mitt";
+import { inject, useTemplateRef } from "vue";
 
+import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composebles/useChatScroll";
 import ChatMessageComponent from '../modules/message/components/chat-message.vue';
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
-import ChatDate from "./chat-date.vue";
+import ChatDate from "./chat-date-divider.vue";
 import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
-const messagesContainer = useTemplateRef('messages-container');
-
-const eventBus = inject('$eventBus');
+const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 const props = withDefaults(
   defineProps<{
@@ -48,7 +48,10 @@ const props = withDefaults(
   hideAvatars?: boolean;
 }>(), {
     hideAvatars: false,
-  });
+  }
+);
+
+const messagesContainer = useTemplateRef('messages-container');
 
 const {
   showAvatar,
@@ -65,7 +68,7 @@ const {
 
 
 function focusOnInput() {
-  eventBus.$emit('chat-input-focus');
+  uiChatsEmitter?.on("focusOnTextField", focus);
 }
 
 

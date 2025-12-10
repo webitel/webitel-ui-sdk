@@ -16,16 +16,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-const props = defineProps({
-  newMessageCount: {
-    type: Number,
-    default: 0,
-  },
-})
+import {defineEmits} from "vue";
 
-const emit = defineEmits(['scroll']);
+const props = withDefaults(
+  defineProps<{
+    newMessageCount?: number;
+  }>(), {
+    newMessageCount: 0,
+  });
+
+const emit = defineEmits<{
+  "scroll": [];
+}>();
 
 </script>
 

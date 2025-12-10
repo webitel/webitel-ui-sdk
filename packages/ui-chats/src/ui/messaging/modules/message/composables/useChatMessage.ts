@@ -1,30 +1,24 @@
+import { FormatDateMode } from '@webitel/ui-sdk/enums';
+import { formatDate } from '@webitel/ui-sdk/utils';
 import { Ref, ref } from 'vue';
 
 import { ChatMessageType } from '../../../types/ChatMessage.types';
-import prettifyDate from '../script/prettifyDate';
 
 interface GetMessageResult {
-  prevMessage?: ChatMessageType | undefined;
-  message?: ChatMessageType | undefined;
-  nextMessage?: ChatMessageType | undefined;
+  prevMessage?: ChatMessageType;
+  message?: ChatMessageType;
+  nextMessage?: ChatMessageType;
 }
 
-export interface UseChatMessagesReturn {
-  showAvatar: (index: number) => boolean;
-  getMessage: (index: number) => GetMessageResult;
-  showChatDate: (index: number) => boolean;
-}
-
-export const useChatMessages = (
-  chatMessages: ChatMessageType[],
-): UseChatMessagesReturn => {
+export const useChatMessages = (chatMessages: ChatMessageType[]) => {
   const messages: Ref<ChatMessageType[]> = ref(chatMessages);
 
   function showChatDate(index: number): boolean {
     const { prevMessage, message } = getMessage(index);
     return (
       !!prevMessage &&
-      prettifyDate(prevMessage?.createdAt) !== prettifyDate(message?.createdAt)
+      formatDate(+prevMessage?.createdAt, FormatDateMode.DATE) !==
+        formatDate(+message?.createdAt, FormatDateMode.DATE)
     );
   }
 

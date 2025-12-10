@@ -1,7 +1,7 @@
 <template>
     <wt-textarea
-        v-model="textModel"
         ref="chatTextFieldInput"
+        v-model="textModel"
         :size="size"
         autoresize
     />
@@ -16,11 +16,11 @@ import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
-const _textModel = defineModel<MaybeRef<string>>("text", {
+const textModel = defineModel<MaybeRef<string>>("text", {
 	required: true,
 });
 
-const _size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>("size");
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 uiChatsEmitter?.on("insertAtCursor", ({ text }) => insertAtCursor(text));

@@ -9,8 +9,8 @@
       <component
        :is="actionComponent"
        :size="size"
-       @sendMessage="emit(ChatAction.SendMessage)"
-       @attachFiles="emit(ChatAction.AttachFiles, $event)"
+       @send-message="emit(ChatAction.SendMessage)"
+       @attach-files="emit(ChatAction.AttachFiles, $event)"
       />
     </slot>
   </section>
@@ -19,25 +19,26 @@
 <script setup lang="ts">
 import type { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, inject } from "vue";
+
 import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
 import AttachFilesAction from "./actions/attach-files-action.vue";
 import EmojiPickerAction from "./actions/emoji-picker-action.vue";
 import SendMessageAction from "./actions/send-message-action.vue";
 
-const _size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>("size");
 
 const props = defineProps<{
 	actions: ChatAction[];
 }>();
 
-const _emit = defineEmits<{
+const emit = defineEmits<{
 	(e: typeof ChatAction.SendMessage): void;
 	(e: typeof ChatAction.AttachFiles, files: File[]): void;
 }>();
 
-const _slots = defineSlots<SharedActionSlots>();
+const slots = defineSlots<SharedActionSlots>();
 
-const _ShownActionComponentsList = computed(() => {
+const ShownActionComponentsList = computed(() => {
 	/**
 	 * note! actions order is declared here and cannot be changed from outside
 	 */
