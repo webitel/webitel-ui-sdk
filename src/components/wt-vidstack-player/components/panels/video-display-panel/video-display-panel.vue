@@ -42,11 +42,11 @@ import {defineEmits, defineProps, inject, onBeforeUnmount, onMounted} from 'vue'
 import {ComponentSize} from "../../../../../enums";
 import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
 import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
-import {WtSizeProvider} from "../../../types/WtSizeProvider";
+import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
 import FullscreenButton from "../../buttons/fullscreen-button.vue";
 import ToggleButton from "../../toggle-button.vue";
 
-const { size, fullscreen, changeSize } = inject<WtSizeProvider>('size');
+const { size, fullscreen, changeSize } = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;

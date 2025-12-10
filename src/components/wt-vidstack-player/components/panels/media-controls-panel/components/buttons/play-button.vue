@@ -27,9 +27,9 @@
 <script setup lang="ts">
 import {inject} from "vue";
 
-import {WtSizeProvider} from "../../../../../types/WtSizeProvider";
+import {WtVidstackPlayerSizeProvider} from "../../../../../types/WtVidstackPlayerSizeProvider";
 
-const {size} = inject<WtSizeProvider>('size');
+const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 </script>
 
 <style scoped>

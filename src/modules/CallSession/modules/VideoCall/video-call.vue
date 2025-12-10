@@ -201,7 +201,9 @@ const senderVideoMutedIconSizes = {
 
     &--center {
       &.wt-vidstack-player {
-        &--md {
+        &--sm,
+        &--md,
+        &--lg {
           top: 50%;
           left: 50%;
           right: unset;

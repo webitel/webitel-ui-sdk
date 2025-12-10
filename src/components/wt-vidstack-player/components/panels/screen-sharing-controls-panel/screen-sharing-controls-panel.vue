@@ -39,7 +39,7 @@ import {computed, defineEmits, inject} from 'vue';
 
 import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
 import {ScreenSharingSession, ScreenshotStatus} from "../../../../../modules/CallSession/types";
-import {WtSizeProvider} from "../../../types/WtSizeProvider";
+import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
 
 interface Props {
   session: ScreenSharingSession
@@ -55,7 +55,7 @@ const emit = defineEmits<{
   'toggle-record': [],
 }>()
 
-const {size} = inject<WtSizeProvider>('size');
+const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 
 const recordIcon = computed(() => (props.session.recordings ? 'record-stop' : 'record-start'));
 
