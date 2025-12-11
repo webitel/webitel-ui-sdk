@@ -15,7 +15,7 @@
     <template #content="{ size: innerSize }">
       <slot name="content" :size="innerSize" />
 
-      <slot name="overlay" :size="innerSize">
+      <slot v-if="!mainStream" name="overlay" :size="innerSize">
         <div class="video-call-overlay"></div>
       </slot>
 
