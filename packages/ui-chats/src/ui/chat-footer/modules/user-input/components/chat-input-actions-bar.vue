@@ -9,8 +9,8 @@
       <component
        :is="actionComponent"
        :size="size"
-       @sendMessage="emit(ChatAction.SendMessage)"
-       @attachFiles="emit(ChatAction.AttachFiles, $event)"
+       @send-message="emit(ChatAction.SendMessage)"
+       @attach-files="emit(ChatAction.AttachFiles, $event)"
       />
     </slot>
   </section>
@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import type { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, inject } from "vue";
+
 import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
 import AttachFilesAction from "./actions/attach-files-action.vue";
 import EmojiPickerAction from "./actions/emoji-picker-action.vue";

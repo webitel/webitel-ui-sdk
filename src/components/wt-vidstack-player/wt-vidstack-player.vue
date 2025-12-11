@@ -4,6 +4,7 @@
     :class="[
       `wt-vidstack-player--${size}`,
       fullscreen && `wt-vidstack-player--fullscreen`,
+      stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
       props.hideBackground && 'wt-vidstack-player--hide-background'
     ]"
@@ -30,6 +31,7 @@
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
+        :hide-expand="props.hideExpand"
         @close-player="emit('close')"
       >
         <template  #controls-panel>
@@ -69,6 +71,8 @@ interface Props {
   hideHeader?: boolean
   hideControlsPanel?: boolean
   hideBackground?: boolean
+  hideExpand?: boolean
+  stretch?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -137,6 +141,7 @@ const normalizedSrc = computed(() => {
   max-width: 100%;
   max-height: 100%;
   transition: var(--transition);
+  box-shadow: var(--elevation-10);
 
   &__player {
     padding: 0;
@@ -152,7 +157,6 @@ const normalizedSrc = computed(() => {
     z-index: 100;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
-    box-shadow: var(--elevation-10);
     height: var(--p-player-wrapper-sm-height);
 
     .wt-vidstack-player__provider {
@@ -165,18 +169,20 @@ const normalizedSrc = computed(() => {
   &--md {
     border-radius: var(--p-player-wrapper-md-border-radius);
     overflow: hidden;
-    //max-width: var(--p-player-wrapper-md-width);
-    //max-height: var(--p-player-wrapper-md-height);
     flex: 0 0 auto;
     max-width: 100%;
     max-height: 100%;
+
+    &.wt-vidstack-player--static {
+      max-width: var(--p-player-wrapper-md-width);
+      max-height: var(--p-player-wrapper-md-height);
+    }
 
     .wt-vidstack-player__player {
       width: 100%;
       height: 100%;
       max-width: var(--p-player-wrapper-md-width);
       max-height: var(--p-player-wrapper-md-height);
-      box-shadow: var(--elevation-10);
     }
 
     &:not(.wt-vidstack-player--static) {
@@ -232,6 +238,7 @@ const normalizedSrc = computed(() => {
     right: unset;
     bottom: unset;
     z-index: 1;
+    flex: 0 0 auto;
 
     .wt-vidstack-player__provider {
       padding: 0;
@@ -242,6 +249,13 @@ const normalizedSrc = computed(() => {
       width: 100%;
       height: 100%;
     }
+  }
+
+  &--stretch {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   &--hide-background {

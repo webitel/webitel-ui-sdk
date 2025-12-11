@@ -1,7 +1,7 @@
 <template>
     <wt-textarea
-        v-model="textModel"
         ref="chatTextFieldInput"
+        v-model="textModel"
         :size="size"
         autoresize
     />

@@ -4,7 +4,10 @@
             header goes here
         </slot> -->
         <slot name="main">
-            <chat-messages-container :messages="messages" />
+            <chat-messages-container
+              :messages="props.messages"
+              :hide-avatars="props.hideAvatars"
+            />
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
@@ -17,10 +20,10 @@
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
-              <template 
-              v-for="action in slottedChatActions" 
-              :key="action"
-              #[action]="{ size }"
+              <template
+                v-for="action in slottedChatActions"
+                :key="action"
+                #[action]="{ size }"
               >
                 <slot
                   :name="`action:${action}`"
@@ -37,6 +40,7 @@
 <script setup lang="ts">
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, provide, ref } from "vue";
+
 import {
 	ChatAction,
 	type SharedActionSlots,
@@ -50,9 +54,11 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
+		hideAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
+		hideAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -107,5 +113,6 @@ function _sendFile(files: File[]) {
 .chat-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 </style>

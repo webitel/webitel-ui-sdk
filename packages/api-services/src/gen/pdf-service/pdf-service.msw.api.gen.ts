@@ -22,10 +22,13 @@ import {
 } from '.././_models';
 import type {
   DownloadPdfExport200,
+  WebitelMediaExporterDeletePdfExportRecordResponse,
   WebitelMediaExporterPdfExportMetadata,
   WebitelMediaExporterPdfHistoryResponse
 } from '.././_models';
 
+
+export const getDeletePdfExportRecordResponseMock = (overrideResponse: Partial< WebitelMediaExporterDeletePdfExportRecordResponse > = {}): WebitelMediaExporterDeletePdfExportRecordResponse => ({id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
 export const getGeneratePdfExportResponseMock = (overrideResponse: Partial< WebitelMediaExporterPdfExportMetadata > = {}): WebitelMediaExporterPdfExportMetadata => ({fileName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), mimeType: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), size: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), status: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), taskId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
@@ -33,6 +36,18 @@ export const getGetPdfExportHistoryResponseMock = (overrideResponse: Partial< We
 
 export const getDownloadPdfExportResponseMock = (overrideResponse: Partial< DownloadPdfExport200 > = {}): DownloadPdfExport200 => ({error: faker.helpers.arrayElement([{code: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), details: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({'@type': faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), result: faker.helpers.arrayElement([{data: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
 
+
+export const getDeletePdfExportRecordMockHandler = (overrideResponse?: WebitelMediaExporterDeletePdfExportRecordResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelMediaExporterDeletePdfExportRecordResponse> | WebitelMediaExporterDeletePdfExportRecordResponse), options?: RequestHandlerOptions) => {
+  return http.delete('*/export/pdf/history/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getDeletePdfExportRecordResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
 
 export const getGeneratePdfExportMockHandler = (overrideResponse?: WebitelMediaExporterPdfExportMetadata | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelMediaExporterPdfExportMetadata> | WebitelMediaExporterPdfExportMetadata), options?: RequestHandlerOptions) => {
   return http.post('*/export/pdf/:agentId', async (info) => {await delay(1000);
@@ -70,6 +85,7 @@ export const getDownloadPdfExportMockHandler = (overrideResponse?: DownloadPdfEx
   }, options)
 }
 export const getPdfServiceMock = () => [
+  getDeletePdfExportRecordMockHandler(),
   getGeneratePdfExportMockHandler(),
   getGetPdfExportHistoryMockHandler(),
   getDownloadPdfExportMockHandler()]

@@ -15,7 +15,7 @@
     <template #content="{ size: innerSize }">
       <slot name="content" :size="innerSize" />
 
-      <slot name="overlay" :size="innerSize">
+      <slot v-if="!mainStream" name="overlay" :size="innerSize">
         <div class="video-call-overlay"></div>
       </slot>
 
@@ -74,6 +74,8 @@
         :screenshot:loading="props['screenshot:loading']"
         :recordings="props.recordings"
         :actions="props.actions"
+        :actions:settings:pressed="props['actions:settings:pressed']"
+        :actions:chat:pressed="props['actions:chat:pressed']"
         @[VideoCallAction.Screenshot]="([payload, options] = []) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
         @[VideoCallAction.Recordings]="([payload, options] = []) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
         @[VideoCallAction.Mic]="([payload, options] = []) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
@@ -127,7 +129,10 @@ const props = withDefaults(defineProps<{
   resizable?: boolean;
 
   actions: VideoCallAction[];
-  username: string;
+  username?: string;
+
+  'actions:settings:pressed'?: boolean;
+  'actions:chat:pressed'?: boolean;
 }>(), {
   position: 'right-bottom',
 });
@@ -212,7 +217,7 @@ const senderVideoMutedIconSizes = {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 0;
+    z-index: -1;
     background: var(--p-player-wrapper-background);
   }
 
