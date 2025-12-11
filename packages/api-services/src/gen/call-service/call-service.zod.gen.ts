@@ -454,6 +454,7 @@ export const searchHistoryCallResponse = zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()
 }).optional(),
+  "conversationId": zod.string().optional(),
   "createdAt": zod.string().optional(),
   "destination": zod.string().optional(),
   "destinationName": zod.string().optional(),
@@ -708,6 +709,7 @@ export const searchHistoryCallPostResponse = zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()
 }).optional(),
+  "conversationId": zod.string().optional(),
   "createdAt": zod.string().optional(),
   "destination": zod.string().optional(),
   "destinationName": zod.string().optional(),
@@ -1060,6 +1062,7 @@ export const patchHistoryCallResponse = zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()
 }).optional(),
+  "conversationId": zod.string().optional(),
   "createdAt": zod.string().optional(),
   "destination": zod.string().optional(),
   "destinationName": zod.string().optional(),
