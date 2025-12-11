@@ -16,11 +16,11 @@ import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
-const textModel = defineModel<MaybeRef<string>>("text", {
+const _textModel = defineModel<MaybeRef<string>>("text", {
 	required: true,
 });
 
-const size = inject<ComponentSize>("size");
+const _size = inject<ComponentSize>("size");
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 uiChatsEmitter?.on("insertAtCursor", ({ text }) => insertAtCursor(text));

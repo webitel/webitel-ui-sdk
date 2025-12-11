@@ -15,7 +15,7 @@ import { inject } from "vue";
 
 import type { ChatAction } from "../../types/ChatAction.types";
 
-const size = inject<ComponentSize>("size");
+const _size = inject<ComponentSize>("size");
 
-const emit = defineEmits<(e: typeof ChatAction.SendMessage) => void>();
+const _emit = defineEmits<(e: typeof ChatAction.SendMessage) => void>();
 </script>

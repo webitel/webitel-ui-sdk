@@ -25,20 +25,20 @@ import AttachFilesAction from "./actions/attach-files-action.vue";
 import EmojiPickerAction from "./actions/emoji-picker-action.vue";
 import SendMessageAction from "./actions/send-message-action.vue";
 
-const size = inject<ComponentSize>("size");
+const _size = inject<ComponentSize>("size");
 
 const props = defineProps<{
 	actions: ChatAction[];
 }>();
 
-const emit = defineEmits<{
+const _emit = defineEmits<{
 	(e: typeof ChatAction.SendMessage): void;
 	(e: typeof ChatAction.AttachFiles, files: File[]): void;
 }>();
 
-const slots = defineSlots<SharedActionSlots>();
+const _slots = defineSlots<SharedActionSlots>();
 
-const ShownActionComponentsList = computed(() => {
+const _ShownActionComponentsList = computed(() => {
 	/**
 	 * note! actions order is declared here and cannot be changed from outside
 	 */

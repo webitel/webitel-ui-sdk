@@ -15,7 +15,7 @@ import { defineEmits, defineProps } from "vue";
 
 import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
 
-const props = defineProps<{
+const _props = defineProps<{
 	file: ChatMessageFile;
 }>();
 const _emit = defineEmits<{

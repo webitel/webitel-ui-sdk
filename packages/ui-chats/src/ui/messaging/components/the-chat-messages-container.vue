@@ -34,44 +34,36 @@ import { inject, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composebles/useChatScroll";
-import ChatMessageComponent from '../modules/message/components/chat-message.vue';
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
-import ChatDate from "./chat-date-divider.vue";
-import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 const props = withDefaults(
-  defineProps<{
-	messages: ChatMessageType[];
-  hideAvatars?: boolean;
-}>(), {
-    hideAvatars: false,
-  }
+	defineProps<{
+		messages: ChatMessageType[];
+		hideAvatars?: boolean;
+	}>(),
+	{
+		hideAvatars: false,
+	},
 );
 
-const messagesContainer = useTemplateRef('messages-container');
+const messagesContainer = useTemplateRef("messages-container");
+
+const { showAvatar, showChatDate } = useChatMessages(props.messages);
 
 const {
-  showAvatar,
-  showChatDate,
-} = useChatMessages(props.messages);
-
-const {
-  showScrollToBottomBtn,
-  newUnseenMessages,
-  scrollToBottom,
-  handleChatScroll,
-  handleChatResize
+	showScrollToBottomBtn,
+	newUnseenMessages,
+	scrollToBottom,
+	handleChatScroll,
+	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
 
-
-function focusOnInput() {
-  uiChatsEmitter?.on("focusOnTextField", focus);
+function _focusOnInput() {
+	uiChatsEmitter?.on("focusOnTextField", focus);
 }
-
-
 </script>
 
 <style scoped lang="scss">

@@ -5,25 +5,23 @@
 </template>
 
 <script setup lang="ts">
-import { FormatDateMode } from '@webitel/ui-sdk/enums';
-import { formatDate } from '@webitel/ui-sdk/utils';
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { FormatDateMode } from "@webitel/ui-sdk/enums";
+import { formatDate } from "@webitel/ui-sdk/utils";
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps<{
-  date: number | string;
+	date: number | string;
 }>();
 
 const { t } = useI18n();
 
-const formattedDate = computed<Date>(() => {
+const _formattedDate = computed<Date>(() => {
+	const chatDate = formatDate(+props.date, FormatDateMode.DATE);
+	const today = formatDate(Date.now(), FormatDateMode.DATE);
 
-  const chatDate = formatDate(+props.date, FormatDateMode.DATE);
-  const today = formatDate(Date.now(), FormatDateMode.DATE);
-
-  return chatDate === today ? t('reusable.today') : chatDate;
+	return chatDate === today ? t("reusable.today") : chatDate;
 });
-
 </script>
 
 <style lang="scss" scoped>

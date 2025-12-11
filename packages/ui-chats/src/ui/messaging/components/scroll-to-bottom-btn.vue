@@ -17,20 +17,20 @@
 </template>
 
 <script setup lang="ts">
+import { defineEmits } from "vue";
 
-import {defineEmits} from "vue";
+const _props = withDefaults(
+	defineProps<{
+		newMessageCount?: number;
+	}>(),
+	{
+		newMessageCount: 0,
+	},
+);
 
-const props = withDefaults(
-  defineProps<{
-    newMessageCount?: number;
-  }>(), {
-    newMessageCount: 0,
-  });
-
-const emit = defineEmits<{
-  "scroll": [];
+const _emit = defineEmits<{
+	scroll: [];
 }>();
-
 </script>
 
 <style lang="scss" scoped>

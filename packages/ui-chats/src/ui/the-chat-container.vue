@@ -39,13 +39,12 @@
 
 <script setup lang="ts">
 import { ComponentSize } from "@webitel/ui-sdk/enums";
-import {computed, onMounted, provide, ref} from "vue";
+import { computed, provide, ref } from "vue";
 
 import {
 	ChatAction,
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/types/ChatAction.types";
-import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -55,11 +54,11 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
-    hideAvatars?: boolean;
+		hideAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
-    hideAvatars: false,
+		hideAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -93,22 +92,21 @@ provide("uiChatsEmitter", uiChatsEmitter);
 
 const draft = ref<string>("");
 
-const slottedChatActions = computed(() => {
+const _slottedChatActions = computed(() => {
 	return Object.keys(slots)
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
 
-function sendMessage() {
+function _sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
 		onSuccess: () => (draft.value = ""),
 	});
 }
 
-function sendFile(files: File[]) {
+function _sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
-
 </script>
 
 <style scoped>

@@ -33,7 +33,7 @@ const props = withDefaults(
 		selfSide: false,
 	},
 );
-const documentSize = computed(() => {
+const _documentSize = computed(() => {
 	if (!props.file) return "";
 	return prettifyFileSize(props.file.size);
 });
