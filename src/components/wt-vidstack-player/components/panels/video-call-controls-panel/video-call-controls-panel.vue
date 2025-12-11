@@ -125,7 +125,7 @@ const shownActionsMap = computed(() => {
 });
 
 const microphoneIcon = computed(() => {
-  if (props['mic:accessed']) {
+  if (!props['mic:accessed']) {
     return 'mic'; // todo
   }
 
