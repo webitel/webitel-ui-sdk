@@ -1,102 +1,105 @@
-import { useScroll } from "@vueuse/core";
-import { computed, type Ref, ref, watch } from "vue";
+import { useScroll } from '@vueuse/core';
+import { computed, type Ref, ref, watch } from 'vue';
 
-import type { ChatMessageType } from "../types/ChatMessage.types";
+import type { ChatMessageType } from '../types/ChatMessage.types';
 
 export const useChatScroll = (
-	element: Ref<HTMLElement | null> = null,
-	chatMessages: ChatMessageType[] = [],
+  element: Ref<HTMLElement | null> = null,
+  chatMessages: ChatMessageType[] = [],
 ) => {
-	const defaultThreshold = 136;
-	const { arrivedState } = useScroll(element.value);
+  const defaultThreshold = 136;
+  const { arrivedState } = useScroll(element.value);
 
-	const newUnseenMessages = ref<number>(0);
-	const showScrollToBottomBtn = ref<boolean>(false);
-	/* @author ye.pohranichna
+  const newUnseenMessages = ref<number>(0);
+  const showScrollToBottomBtn = ref<boolean>(false);
+  /* @author ye.pohranichna
     the distance where the scrollToBottomBtn must be shown/hide.
     why defaultThreshold=136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
-	const threshold = ref<number>(defaultThreshold);
-	const messages = ref<ChatMessageType[]>(chatMessages);
+  const threshold = ref<number>(defaultThreshold);
+  const messages = ref<ChatMessageType[]>(chatMessages);
 
-	const lastMessage = computed<ChatMessageType>(
-		() => messages.value[messages.value?.length - 1],
-	);
+  const lastMessage = computed<ChatMessageType>(
+    () => messages.value[messages.value?.length - 1],
+  );
 
-	const isLastMessageIsMy = computed<boolean>(() =>
-		Boolean(lastMessage.value?.member?.self),
-	);
+  const isLastMessageIsMy = computed<boolean>(() =>
+    Boolean(lastMessage.value?.member?.self),
+  );
 
-	const scrollToBottom = (behavior: ScrollBehavior = "instant") => {
-		element.value?.scrollTo({
-			top: element.value?.scrollHeight,
-			behavior: behavior === "instant" ? "auto" : behavior,
-		});
+  const handleChatScroll = () => {
+    const wrapper = element.value;
+    if (!wrapper) return;
 
-		newUnseenMessages.value = 0;
-		showScrollToBottomBtn.value = false;
-	};
+    handleShowScrollToBottomBtn(wrapper);
+  };
 
-	const handleShowScrollToBottomBtn = (el: HTMLElement) => {
-		if (arrivedState.bottom && newUnseenMessages.value) {
-			/* @author ye.pohranichna
-       hide the btn and reset new messages count, when we scroll to the bottom without btn */
-			newUnseenMessages.value = 0;
-			showScrollToBottomBtn.value = false;
-			/* @author ye.pohranichna
-        quit the function because we are already at the bottom */
-			return;
-		}
+  const handleChatResize = () => {
+    const wrapper = element.value;
+    if (!wrapper) return;
 
-		const { scrollTop, scrollHeight, clientHeight } = el;
-		const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
-		showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
-	};
+    updateThreshold(wrapper);
+    handleShowScrollToBottomBtn(wrapper);
+  };
 
-	const updateThreshold = (el: HTMLElement) => {
-		/* @author ye.pohranichna
-      need to update if clientHeight was changed
-      https://webitel.atlassian.net/browse/WTEL-7136 */
-		threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
-	};
+  const handleShowScrollToBottomBtn = (el: HTMLElement) => {
+    resetScrollToBottomBtn();
 
-	const scrollToBottomAfterNewMessage = () => {
-		if (arrivedState.bottom || isLastMessageIsMy.value) {
-			scrollToBottom("smooth");
-		} else {
-			newUnseenMessages.value += 1;
-		}
-	};
-	const handleChatScroll = () => {
-		const wrapper = element.value;
-		if (!wrapper) return;
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
+    showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
+  };
 
-		handleShowScrollToBottomBtn(wrapper);
-	};
+  const updateThreshold = (el: HTMLElement) => {
+    /* @author ye.pohranichna
+         need to update if clientHeight was changed
+         https://webitel.atlassian.net/browse/WTEL-7136 */
+    threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
+  };
 
-	const handleChatResize = () => {
-		const wrapper = element.value;
-		if (!wrapper) return;
+  const resetScrollToBottomBtn = (): void => {
+    if (arrivedState.bottom && newUnseenMessages.value) {
+      /* @author ye.pohranichna
+			hide the btn and reset new messages count, when we scroll to the bottom without btn */
+      newUnseenMessages.value = 0;
+      showScrollToBottomBtn.value = false;
+      /* @author ye.pohranichna
+			quit the function because we are already at the bottom */
+      return;
+    }
+  };
 
-		updateThreshold(wrapper);
-		handleShowScrollToBottomBtn(wrapper);
-	};
+  const scrollToBottomAfterNewMessage = () => {
+    if (arrivedState.bottom || isLastMessageIsMy.value) {
+      scrollToBottom('smooth');
+    } else {
+      newUnseenMessages.value += 1;
+    }
+  };
 
-	watch(
-		() => messages.value?.length,
-		(newValue, oldValue) => {
-			const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message @author ye.pohranichna
-			if (newMessageReceived) scrollToBottomAfterNewMessage();
-		},
-		{
-			flush: "post",
-		},
-	);
+  const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
+    element?.value.scrollTo({
+      top: element?.value.scrollHeight,
+      behavior: behavior === 'instant' ? 'auto' : behavior,
+    });
 
-	return {
-		showScrollToBottomBtn,
-		newUnseenMessages,
-		scrollToBottom,
-		handleChatScroll,
-		handleChatResize,
-	};
+    newUnseenMessages.value = 0;
+    showScrollToBottomBtn.value = false;
+  };
+
+  watch(
+    () => messages.value?.length,
+    (newValue, oldValue) => {
+      const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message @author ye.pohranichna
+      if (newMessageReceived) scrollToBottomAfterNewMessage();
+    },
+    { flush: 'post' },
+  );
+
+  return {
+    showScrollToBottomBtn,
+    newUnseenMessages,
+    scrollToBottom,
+    handleChatScroll,
+    handleChatResize,
+  };
 };
