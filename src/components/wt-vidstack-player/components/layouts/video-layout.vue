@@ -8,6 +8,7 @@
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
+      :hide-expand="props.hideExpand"
       @close="emit('close-player')"
     />
 
@@ -36,6 +37,7 @@ const props = defineProps<{
   closable?: boolean;
   hideHeader?: boolean
   hideControlsPanel?: boolean
+  hideExpand?: boolean
 }>();
 
 const emit = defineEmits<{
