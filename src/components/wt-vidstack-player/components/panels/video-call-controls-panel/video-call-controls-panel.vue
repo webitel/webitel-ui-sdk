@@ -53,9 +53,9 @@
       icon="settings"
       variant="outlined"
       color="secondary"
-      rounded
+      :rounded="!props['actions:settings:pressed']"
       contains-icon
-      @click="emit(VideoCallAction.Settings)"
+       @click="emit(VideoCallAction.Settings)"
     />
 
     <wt-button
@@ -64,7 +64,7 @@
       icon="chat"
       variant="outlined"
       color="secondary"
-      rounded
+      :rounded="!props['actions:chat:pressed']"
       contains-icon
       @click="emit(VideoCallAction.Chat)"
     />
@@ -100,6 +100,9 @@ const props = defineProps<{
   'screenshot:status': ScreenshotStatus | null;
   'screenshot:loading': boolean;
   'recordings': boolean;
+
+  'actions:settings:pressed': boolean;
+  'actions:chat:pressed': boolean;
 }>();
 
 const emit = defineEmits<{

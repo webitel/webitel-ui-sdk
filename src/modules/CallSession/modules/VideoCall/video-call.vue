@@ -74,6 +74,8 @@
         :screenshot:loading="props['screenshot:loading']"
         :recordings="props.recordings"
         :actions="props.actions"
+        :actions:settings:pressed="props['actions:settings:pressed']"
+        :actions:chat:pressed="props['actions:chat:pressed']"
         @[VideoCallAction.Screenshot]="([payload, options] = []) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
         @[VideoCallAction.Recordings]="([payload, options] = []) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
         @[VideoCallAction.Mic]="([payload, options] = []) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
@@ -128,6 +130,9 @@ const props = withDefaults(defineProps<{
 
   actions: VideoCallAction[];
   username?: string;
+
+  'actions:settings:pressed'?: boolean;
+  'actions:chat:pressed'?: boolean;
 }>(), {
   position: 'right-bottom',
 });
