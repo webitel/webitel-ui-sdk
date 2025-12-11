@@ -4,6 +4,7 @@
     :class="[
       `wt-vidstack-player--${size}`,
       fullscreen && `wt-vidstack-player--fullscreen`,
+      stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
       props.hideBackground && 'wt-vidstack-player--hide-background'
     ]"
@@ -30,6 +31,7 @@
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
+        :hide-expand="props.hideExpand"
         @close-player="emit('close')"
       >
         <template  #controls-panel>
@@ -69,6 +71,8 @@ interface Props {
   hideHeader?: boolean
   hideControlsPanel?: boolean
   hideBackground?: boolean
+  hideExpand?: boolean
+  stretch?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -245,6 +249,13 @@ const normalizedSrc = computed(() => {
       width: 100%;
       height: 100%;
     }
+  }
+
+  &--stretch {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   &--hide-background {
