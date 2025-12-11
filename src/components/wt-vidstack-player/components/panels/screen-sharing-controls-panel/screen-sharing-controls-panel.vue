@@ -6,7 +6,7 @@
       variant="outlined"
       color="secondary"
       :loading="props.screenshotIsLoading"
-      :size="size"
+      :size="buttonSizeMap[size]"
       :icon="screenShotIcon"
       @click="makeScreenshot"
     />
@@ -16,7 +16,7 @@
       contains-icon
       variant="outlined"
       color="secondary"
-      :size="size"
+      :size="buttonSizeMap[size]"
       :icon="recordIcon"
       @click="emit('toggle-record')"
     />
@@ -26,7 +26,7 @@
       class="screen-sharing-control-panel__sharing-end"
       color="error"
       variant="outlined"
-      :size="size"
+      :size="buttonSizeMap[size]"
       rounded
       contains-icon
       @click="closeSession"
@@ -38,6 +38,7 @@
 import {computed, defineEmits, inject} from 'vue';
 
 import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
+import {ComponentSize} from "../../../../../enums";
 import {ScreenSharingSession, ScreenshotStatus} from "../../../../../modules/CallSession/types";
 import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
 
@@ -77,6 +78,12 @@ const closeSession = () => {
 const makeScreenshot = () => {
   emit('make-screenshot')
 };
+
+const buttonSizeMap = {
+  [ComponentSize.SM]: ComponentSize.SM,
+  [ComponentSize.MD]: ComponentSize.MD,
+  [ComponentSize.LG]: ComponentSize.MD,
+}
 </script>
 
 <style scoped lang="scss">
