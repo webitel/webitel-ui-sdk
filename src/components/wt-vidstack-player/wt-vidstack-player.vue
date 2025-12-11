@@ -272,7 +272,7 @@ const normalizedSrc = computed(() => {
 .wt-vidstack-player {
   video {
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     min-width: 0;
   }
