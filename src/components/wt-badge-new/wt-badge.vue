@@ -4,7 +4,9 @@
     :value="props.value"
     :severity="props.severity"
     class="wt-badge"
-  />
+  >
+    <slot />
+  </p-badge>
 </template>
 
 <script setup lang="ts">
