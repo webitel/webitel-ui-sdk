@@ -51,9 +51,9 @@
       v-if="shownActionsMap[VideoCallAction.Settings]"
       :size="size"
       icon="settings"
-      variant="outlined"
+      :variant="props['actions:settings:pressed'] ? 'active' : 'outlined'"
       color="secondary"
-      :rounded="!props['actions:settings:pressed']"
+      rounded
       contains-icon
        @click="emit(VideoCallAction.Settings)"
     />
@@ -62,9 +62,9 @@
       v-if="shownActionsMap[VideoCallAction.Chat]"
       :size="size"
       icon="chat"
-      variant="outlined"
+      :variant="props['actions:chat:pressed'] ? 'active' : 'outlined'"
       color="secondary"
-      :rounded="!props['actions:chat:pressed']"
+      rounded
       contains-icon
       @click="emit(VideoCallAction.Chat)"
     />
