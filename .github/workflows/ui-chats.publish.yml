@@ -21,9 +21,9 @@ jobs:
 
       - name: Publish release
         id: publish_release
-   # npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+   
         run: |
-       
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}    
           cd packages/ui-chats
           npm ci
           npm run make-all
