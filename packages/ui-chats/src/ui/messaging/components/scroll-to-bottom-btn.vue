@@ -34,6 +34,7 @@ const emit = defineEmits<{
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 
 .scroll-to-bottom-btn {
   position: absolute;

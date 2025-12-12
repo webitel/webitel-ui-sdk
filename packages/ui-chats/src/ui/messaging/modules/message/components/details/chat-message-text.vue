@@ -25,6 +25,7 @@ const text = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 
 .chat-message-text {
   @extend %typo-body-1;
