@@ -1,5 +1,6 @@
 import autocomplete from './autocomplete/autocomplete.js';
 import avatar from './avatar/avatar.js';
+import badge from './badge/badge.js';
 import breadcrumb from './breadcrumb/breadcrumb.js';
 import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
@@ -22,6 +23,7 @@ const components = {
   avatar,
   breadcrumb,
   button,
+  badge,
   chip,
   checkbox,
   textarea,

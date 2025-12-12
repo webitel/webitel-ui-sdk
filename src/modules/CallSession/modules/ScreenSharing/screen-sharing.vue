@@ -60,15 +60,13 @@ const attrs = useAttrs();
 
   &__indicator {
     position: absolute;
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: end;
     justify-content: flex-end;
-    padding: var(--p-player-counter-position-padding-sm);
 
     &--sm {
-      position: relative;
+      right: var(--p-player-counter-position-padding-sm);
+      bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
     }
 
     &--md {

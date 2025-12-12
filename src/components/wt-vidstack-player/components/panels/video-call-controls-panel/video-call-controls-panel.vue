@@ -28,8 +28,11 @@
       :disabled="!props['mic:accessed']"
       :size="buttonSizeMap[size]"
       :icon="microphoneIcon"
+      :badge="micBadge"
+      badge-severity="error"
       variant="outlined"
       color="secondary"
+      badge-absolute-position
       rounded
       contains-icon
       @click="emit(VideoCallAction.Mic)"
@@ -40,8 +43,11 @@
       :disabled="!props['video:accessed']"
       :size="buttonSizeMap[size]"
       :icon="videoCamIcon"
+      :badge="videoBadge"
+      badge-severity="error"
       variant="outlined"
       color="secondary"
+      badge-absolute-position
       rounded
       contains-icon
       @click="emit(VideoCallAction.Video)"
@@ -136,6 +142,8 @@ const microphoneIcon = computed(() => {
   return 'mic';
 });
 
+const micBadge = computed(() => !props['mic:accessed'] ? '!' : null)
+
 const videoCamIcon = computed(() => {
   if (!props['video:accessed']) {
     return 'video-cam'; // todo
@@ -147,6 +155,8 @@ const videoCamIcon = computed(() => {
 
   return 'video-cam';
 });
+
+const videoBadge = computed(() => !props['video:accessed'] ? '!' : null)
 
 const recordIcon = computed(() => (props.recordings ? 'record-stop' : 'record-start'));
 

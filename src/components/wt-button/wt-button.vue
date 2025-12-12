@@ -3,6 +3,7 @@
     :class="{
         'p-button--width-by-content': widthByContent || icon,
         'p-button--wide': wide,
+        'p-button--with-badge': props.badge,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
@@ -23,8 +24,23 @@
     />
     <div class="wt-button__contents">
       <slot v-if="!icon"> no content provided</slot>
+
+      <wt-badge
+        v-if="props.badge"
+        :value="props.badge"
+        :severity="props.badgeSeverity"
+        :class="badgeClass"
+        :size="ComponentSize.MD"
+      >
+        <template #default>
+          <slot name="badge">
+            {{ props.badge }}
+          </slot>
+        </template>
+      </wt-badge>
+
       <wt-icon
-        v-else
+        v-if="icon"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -37,7 +53,9 @@
 import type { ButtonProps } from 'primevue';
 import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
-import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
+import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
+import WtBadge from "../wt-badge-new/wt-badge.vue";
+import WtIcon from "../wt-icon/wt-icon.vue";
 
 const primevueSizeMap = {
   [ComponentSize.XS]: 'extra-small',
@@ -60,6 +78,9 @@ interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   widthByContent?: boolean;
   icon?: string;
   iconPrefix?: string;
+  badge?: string;
+  badgeSeverity?: string;
+  badgeAbsolutePosition?: boolean;
   variant?: ButtonVariant;
 }
 
@@ -80,6 +101,10 @@ const emit = defineEmits(['click']);
 const attrs = useAttrs();
 
 const showLoader = ref(false);
+
+const badgeClass = computed(() => ({
+  'wt-badge--absolute': props.badgeAbsolutePosition
+}));
 
 // @Ler24
 // Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
@@ -139,7 +164,26 @@ watch(
 </script>
 
 <style lang="scss">
-.wt-button__contents {
-  display: contents;
+.wt-button {
+  position: relative;
+
+  &.p-button {
+    &--with-badge {
+      overflow: visible;
+    }
+  }
+
+  &__contents {
+    display: contents;
+  }
+
+  .wt-badge {
+    &--absolute {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 }
+
 </style>

@@ -76,13 +76,13 @@
         :actions="props.actions"
         :actions:settings:pressed="props['actions:settings:pressed']"
         :actions:chat:pressed="props['actions:chat:pressed']"
-        @[VideoCallAction.Screenshot]="([payload, options] = []) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
-        @[VideoCallAction.Recordings]="([payload, options] = []) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
-        @[VideoCallAction.Mic]="([payload, options] = []) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
-        @[VideoCallAction.Video]="([payload, options] = []) => emit(`action:${VideoCallAction.Video}`, payload, options)"
-        @[VideoCallAction.Settings]="([payload, options] = []) => emit(`action:${VideoCallAction.Settings}`, payload, options)"
-        @[VideoCallAction.Chat]="([payload, options] = []) => emit(`action:${VideoCallAction.Chat}`, payload, options)"
-        @[VideoCallAction.Hangup]="([payload, options] = []) => emit(`action:${VideoCallAction.Hangup}`, payload, options)"
+        @[VideoCallAction.Screenshot]="(payload, options) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
+        @[VideoCallAction.Recordings]="(payload, options) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
+        @[VideoCallAction.Mic]="(payload, options) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
+        @[VideoCallAction.Video]="(payload, options) => emit(`action:${VideoCallAction.Video}`, payload, options)"
+        @[VideoCallAction.Settings]="(payload, options) => emit(`action:${VideoCallAction.Settings}`, payload, options)"
+        @[VideoCallAction.Chat]="(payload, options) => emit(`action:${VideoCallAction.Chat}`, payload, options)"
+        @[VideoCallAction.Hangup]="(payload, options) => emit(`action:${VideoCallAction.Hangup}`, payload, options)"
       />
     </template>
   </wt-vidstack-player>
