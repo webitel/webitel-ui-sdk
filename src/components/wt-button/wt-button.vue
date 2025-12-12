@@ -25,7 +25,7 @@
     <div class="wt-button__contents">
       <slot v-if="!icon"> no content provided</slot>
 
-      <wt-badge-new
+      <wt-badge
         v-if="props.badge"
         :value="props.badge"
         :severity="props.badgeSeverity"
@@ -37,7 +37,7 @@
             {{ props.badge }}
           </slot>
         </template>
-      </wt-badge-new>
+      </wt-badge>
 
       <wt-icon
         v-if="icon"
@@ -53,9 +53,9 @@
 import type { ButtonProps } from 'primevue';
 import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
-import {WtBadgeNew, WtIcon} from "../../components";
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
-// import WtIcon from "../wt-icon/wt-icon.vue";
+import WtBadge from "../wt-badge-new/wt-badge.vue";
+import WtIcon from "../wt-icon/wt-icon.vue";
 
 const primevueSizeMap = {
   [ComponentSize.XS]: 'extra-small',
