@@ -70,6 +70,8 @@ function focusOnInput() {
 </script>
 
 <style scoped lang="scss">
+@use '@webitel/styleguide/scroll' as *;
+
 .the-chat-messages-container {
   position: relative;
   display: flex;

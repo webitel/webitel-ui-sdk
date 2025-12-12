@@ -27,6 +27,8 @@ const emit = defineEmits<{
 
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .chat-message-image {
   cursor: pointer;
 

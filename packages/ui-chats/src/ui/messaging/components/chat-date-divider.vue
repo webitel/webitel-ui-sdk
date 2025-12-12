@@ -25,6 +25,8 @@ const formattedDate = computed<Date>(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
   .chat-date-divider {
     @extend %typo-subtitle-1;
     width: 100%;

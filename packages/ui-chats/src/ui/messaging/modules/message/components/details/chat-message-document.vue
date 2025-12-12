@@ -49,6 +49,8 @@ function downloadDocument() {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .chat-message-document {
   display: flex;
   align-items: flex-start;
