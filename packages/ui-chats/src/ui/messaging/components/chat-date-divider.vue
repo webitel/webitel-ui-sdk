@@ -16,7 +16,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const _formattedDate = computed<Date>(() => {
+const formattedDate = computed<Date>(() => {
 	const chatDate = formatDate(+props.date, FormatDateMode.DATE);
 	const today = formatDate(Date.now(), FormatDateMode.DATE);
 

@@ -41,10 +41,14 @@
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, provide, ref } from "vue";
 
+import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
+import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
+import ChatTextField from "./chat-footer/modules/user-input/components/chat-text-field.vue";
 import {
 	ChatAction,
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/types/ChatAction.types";
+import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -59,20 +63,6 @@ const props = withDefaults(
 	{
 		size: ComponentSize.MD,
 		hideAvatars: false,
-		chatActions: () => [
-			ChatAction.SendMessage,
-		],
-	},
-);
-
-const props = withDefaults(
-	defineProps<{
-		messages: ChatMessageType[];
-		chatActions?: ChatAction[];
-		size?: ComponentSize;
-	}>(),
-	{
-		size: ComponentSize.MD,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],

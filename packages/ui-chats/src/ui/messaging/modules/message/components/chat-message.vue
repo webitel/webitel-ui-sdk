@@ -50,7 +50,7 @@
 </template>
 
   <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, defineEmits, defineProps, inject } from "vue";
 
 import type { ChatMessageType } from "../../../types/ChatMessage.types";
@@ -86,19 +86,19 @@ const size = inject<ComponentSize>("size");
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
-const isSelfMessage = computed(
+const isSelfMessage = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === "webitel",
 );
 
-const isBot = computed(
+const isBot = computed<boolean>(
 	() =>
 		props.message.member?.type === "bot" ||
 		(!props.message.member?.type && !props.message.channelId),
 );
 
-const isSelfSide = computed(() => isSelfMessage.value || isBot.value);
+const isSelfSide = computed<boolean>(() => isSelfMessage.value || isBot.value);
 
-const getClientUsername = computed(() => {
+const getClientUsername = computed<string>(() => {
 	return !isSelfSide.value ? props.username : ""; // need to show username avatar only for client
 });
 
