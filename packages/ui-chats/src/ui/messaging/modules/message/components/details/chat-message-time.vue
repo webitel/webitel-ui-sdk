@@ -20,7 +20,7 @@ const props = withDefaults(
 	},
 );
 
-const _time = computed(() => prettifyTime(props.date));
+const time = computed(() => prettifyTime(props.date));
 </script>
 
 <style lang="scss" scoped>

@@ -15,10 +15,10 @@ import { defineEmits, defineProps } from "vue";
 
 import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
 
-const _props = defineProps<{
+const props = defineProps<{
 	file: ChatMessageFile;
 }>();
-const _emit = defineEmits<{
+const emit = defineEmits<{
 	open: [
 		ChatMessageFile,
 	];

@@ -1,13 +1,13 @@
 <template>
-  <section class="chat-container">
+  <section class="the-chat-container">
     <!-- <slot name="header">
             header goes here
         </slot> -->
         <slot name="main">
-            <chat-messages-container
-              :messages="props.messages"
-              :hide-avatars="props.hideAvatars"
-            />
+          <chat-messages-container
+            :messages="props.messages"
+            :hide-avatars="props.hideAvatars"
+          />
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
@@ -110,7 +110,7 @@ function _sendFile(files: File[]) {
 </script>
 
 <style scoped>
-.chat-container {
+.the-chat-container {
   display: flex;
   flex-direction: column;
   height: 100%;

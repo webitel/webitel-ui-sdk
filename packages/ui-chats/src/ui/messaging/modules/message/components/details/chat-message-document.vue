@@ -33,12 +33,12 @@ const props = withDefaults(
 		selfSide: false,
 	},
 );
-const _documentSize = computed(() => {
+const documentSize = computed(() => {
 	if (!props.file) return "";
 	return prettifyFileSize(props.file.size);
 });
 
-function _downloadDocument() {
+function downloadDocument() {
 	if (!props.file) return;
 	const a = document.createElement("a");
 	a.href = props.file.url;
