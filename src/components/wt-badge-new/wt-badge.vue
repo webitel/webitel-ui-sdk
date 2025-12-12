@@ -1,8 +1,10 @@
 <template>
   <p-badge
-    :size="badgeSizes[props.size]"
     :value="props.value"
-    :severity="props.severity"
+    :class="[
+      props.size && `p-badge--${props.size}`,
+      props.severity && `p-badge--${props.severity}`
+    ]"
     class="wt-badge"
   >
     <slot />
@@ -16,23 +18,32 @@ import {ComponentSize} from "../../enums";
 
 interface Props {
   value: string | number
-  severity?: null | "secondary" | "info" | "success" | "warn" | "danger" | "contrast"
-  size?: null | "small" | "large" | "xlarge"
+  severity?:
+    "secondary" |
+    "info" |
+    "success" |
+    "warn" |
+    "error" |
+    "online" |
+    "dnd" |
+    "busy" |
+    "pause" |
+    "onlineCc" |
+    "offline"
+  size?: ComponentSize
 }
 
 const props = withDefaults(defineProps<Props>(), {
   value: '',
   severity: null,
-  size: ComponentSize.SM,
+  size: ComponentSize.MD,
 })
-
-const badgeSizes = {
-  [ComponentSize.SM]: 'small',
-  [ComponentSize.LG]: 'large',
-  [ComponentSize.XL]: 'xlarge',
-}
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 
+.wt-badge {
+  @extend %typo-caption;
+}
 </style>

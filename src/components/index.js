@@ -159,6 +159,7 @@ export {
   WtAppNavigator,
   WtAvatar,
   WtBadge,
+  WtBadgeNew,
   WtBreadcrumb,
   WtButton,
   WtButtonSelect,

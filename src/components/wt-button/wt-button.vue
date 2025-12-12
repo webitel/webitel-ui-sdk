@@ -3,6 +3,7 @@
     :class="{
         'p-button--width-by-content': widthByContent || icon,
         'p-button--wide': wide,
+        'p-button--with-badge': props.badge,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
@@ -29,8 +30,13 @@
         :value="props.badge"
         :severity="props.badgeSeverity"
         :class="badgeClass"
+        :size="ComponentSize.MD"
       >
-        {{ props.badge }}
+        <template #default>
+          <slot name="badge">
+            {{ props.badge }}
+          </slot>
+        </template>
       </wt-badge-new>
 
       <wt-icon
@@ -47,7 +53,7 @@
 import type { ButtonProps } from 'primevue';
 import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
-import {WtBadge, WtIcon} from "../../components";
+import {WtBadgeNew, WtIcon} from "../../components";
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
 // import WtIcon from "../wt-icon/wt-icon.vue";
 
@@ -161,6 +167,12 @@ watch(
 .wt-button {
   position: relative;
 
+  &.p-button {
+    &--with-badge {
+      overflow: visible;
+    }
+  }
+
   &__contents {
     display: contents;
   }
@@ -168,7 +180,7 @@ watch(
   .wt-badge {
     &--absolute {
       position: absolute;
-      left: 0;
+      top: 0;
       right: 0;
     }
   }
