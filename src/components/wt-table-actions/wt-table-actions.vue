@@ -37,50 +37,45 @@
       @click="$emit('input', 'refresh')"
     />
 
-    <wt-icon-btn
-      v-if="isSettings"
-      v-tooltip="$t('webitelUI.tableActions.expandFilters')"
-      :class="{ active: isSettingsActive }"
-      icon="filter"
-      @click="$emit('input', 'settings')"
-    />
+    <wt-badge 
+      :hidden="!isSettingsBadge"
+    >
+      <wt-icon-btn
+        v-if="isSettings"
+        v-tooltip="$t('webitelUI.tableActions.expandFilters')"
+        :class="{ active: isSettingsActive }"
+        icon="filter"
+        @click="$emit('input', 'settings')"
+      />
+    </wt-badge>
   </aside>
 </template>
 
-<script>
-export default {
-  name: 'WtTableActions',
-  props: {
-    icons: {
-      type: Array,
-      default: () => ['refresh'],
-    },
-    isSettingsActive: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    isImport() {
-      return this.icons.indexOf('import') !== -1;
-    },
-    isExport() {
-      return this.icons.indexOf('export') !== -1;
-    },
-    isFilterReset() {
-      return this.icons.indexOf('filter-reset') !== -1;
-    },
-    isColumnSelect() {
-      return this.icons.indexOf('column-select') !== -1;
-    },
-    isRefresh() {
-      return this.icons.indexOf('refresh') !== -1;
-    },
-    isSettings() {
-      return this.icons.indexOf('settings') !== -1;
-    },
-  },
-};
+<script setup lang="ts">
+import { computed } from 'vue';
+
+interface Props {
+  icons?: string[];
+  isSettingsActive?: boolean;
+  isSettingsBadge?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  icons: () => ['refresh'],
+  isSettingsActive: false,
+  isSettingsBadge: false,
+});
+
+defineEmits<{
+  input: [value: string];
+}>();
+
+const isImport = computed(() => props.icons.indexOf('import') !== -1);
+const isExport = computed(() => props.icons.indexOf('export') !== -1);
+const isFilterReset = computed(() => props.icons.indexOf('filter-reset') !== -1);
+const isColumnSelect = computed(() => props.icons.indexOf('column-select') !== -1);
+const isRefresh = computed(() => props.icons.indexOf('refresh') !== -1);
+const isSettings = computed(() => props.icons.indexOf('settings') !== -1);
 </script>
 
 <style lang="scss">
