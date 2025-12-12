@@ -1,6 +1,6 @@
-import { type MaybeRef } from "vue";
+import { MaybeRef } from 'vue';
 type __VLS_ModelProps = {
-    "text": MaybeRef<string>;
+    'text': MaybeRef<string>;
 };
 declare const __VLS_export: import("vue").DefineComponent<__VLS_ModelProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     "update:text": (value: MaybeRef<string>) => any;

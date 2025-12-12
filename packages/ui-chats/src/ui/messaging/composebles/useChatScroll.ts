@@ -1,30 +1,30 @@
-import { useScroll } from "@vueuse/core";
-import { computed, type Ref, ref, watch } from "vue";
+import { useScroll } from '@vueuse/core';
+import { computed, type ComputedRef, type Ref, ref, watch } from 'vue';
 
-import type { ChatMessageType } from "../types/ChatMessage.types";
+import { ChatMessageType } from '../types/ChatMessage.types';
 
 export const useChatScroll = (
-	element: Ref<HTMLElement | null> = null,
-	chatMessages: ChatMessageType[] = [],
+  element: Ref<HTMLElement | null> = null,
+  chatMessages: ChatMessageType[] = [],
 ) => {
-	const defaultThreshold = 136;
-	const { arrivedState } = useScroll(element.value);
+  const defaultThreshold = 136;
+  const { arrivedState } = useScroll(element.value);
 
-	const newUnseenMessages = ref<number>(0);
-	const showScrollToBottomBtn = ref<boolean>(false);
-	/* @author ye.pohranichna
+  const newUnseenMessages = ref<number>(0);
+  const showScrollToBottomBtn = ref<boolean>(false);
+  /* @author ye.pohranichna
     the distance where the scrollToBottomBtn must be shown/hide.
     why defaultThreshold=136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
-	const threshold = ref<number>(defaultThreshold);
-	const messages = ref<ChatMessageType[]>(chatMessages);
+  const threshold = ref<number>(defaultThreshold);
+  const messages = ref<ChatMessageType[]>(chatMessages);
 
-	const lastMessage = computed<ChatMessageType>(
-		() => messages.value[messages.value?.length - 1],
-	);
+  const lastMessage = computed<ChatMessageType>(
+    () => messages.value[messages.value?.length - 1],
+  );
 
-	const isLastMessageIsMy = computed<boolean>(() =>
-		Boolean(lastMessage.value?.member?.self),
-	);
+  const isLastMessageIsMy = computed<boolean>(() =>
+    Boolean(lastMessage.value?.member?.self),
+  );
 
 	const handleChatScroll = () => {
 		const wrapper = element.value;
@@ -44,10 +44,10 @@ export const useChatScroll = (
 	const handleShowScrollToBottomBtn = (el: HTMLElement) => {
 		resetScrollToBottomBtn();
 
-		const { scrollTop, scrollHeight, clientHeight } = el;
-		const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
-		showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
-	};
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
+    showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
+  };
 
 	const updateThreshold = (el: HTMLElement) => {
 		/* @author ye.pohranichna
@@ -86,22 +86,20 @@ export const useChatScroll = (
 		showScrollToBottomBtn.value = false;
 	};
 
-	watch(
-		() => messages.value?.length,
-		(newValue, oldValue) => {
-			const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message @author ye.pohranichna
-			if (newMessageReceived) scrollToBottomAfterNewMessage();
-		},
-		{
-			flush: "post",
-		},
-	);
+  watch(
+    () => messages.value?.length,
+    (newValue, oldValue) => {
+      const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message @author ye.pohranichna
+      if (newMessageReceived) scrollToBottomAfterNewMessage();
+    },
+    { flush: 'post' },
+  );
 
-	return {
-		showScrollToBottomBtn,
-		newUnseenMessages,
-		scrollToBottom,
-		handleChatScroll,
-		handleChatResize,
-	};
+  return {
+    showScrollToBottomBtn,
+    newUnseenMessages,
+    scrollToBottom,
+    handleChatScroll,
+    handleChatResize,
+  };
 };

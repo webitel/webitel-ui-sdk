@@ -1,5 +1,5 @@
 declare const _default: {
-    "@webitel/ui-chats": {
+    '@webitel/ui-chats': {
         ui: {
             messaging: {
                 chatsFileBlocked: string;

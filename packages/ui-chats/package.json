@@ -11,7 +11,7 @@
 		"make-all": "npm version patch --git-tag-version false && (npm run lint:biome || true) && (npm run build:types || true) && npm run utils:publish",
 		"build": "(npm run build:types || true)",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
-		"lint:biome": "biome check --write --unsafe",
+		"lint:biome": "biome check --write",
 		"utils:publish": "npm publish --access public"
 	},
 	"dependencies": {

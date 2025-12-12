@@ -5,9 +5,11 @@
 </template>
 
 <script setup lang="ts">
-const _slots = defineSlots<{
-	default: () => any;
+
+const slots = defineSlots<{
+  default: () => any;
 }>();
+
 </script>
 
 <style scoped>

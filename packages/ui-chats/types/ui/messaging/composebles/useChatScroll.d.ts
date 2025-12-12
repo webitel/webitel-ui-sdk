@@ -1,5 +1,5 @@
-import { type Ref } from "vue";
-import type { ChatMessageType } from "../types/ChatMessage.types";
+import { type Ref } from 'vue';
+import { ChatMessageType } from '../types/ChatMessage.types';
 export declare const useChatScroll: (element?: Ref<HTMLElement | null>, chatMessages?: ChatMessageType[]) => {
     showScrollToBottomBtn: Ref<boolean, boolean>;
     newUnseenMessages: Ref<number, number>;

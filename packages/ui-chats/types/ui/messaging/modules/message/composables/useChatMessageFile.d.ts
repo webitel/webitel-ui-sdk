@@ -1,5 +1,5 @@
-import { type Ref } from "vue";
-import type { ChatMessageFile } from "../../../types/ChatMessage.types";
+import { type Ref } from 'vue';
+import { ChatMessageFile } from '../../../types/ChatMessage.types';
 export declare function useChatMessageFile(file: ChatMessageFile | Ref<ChatMessageFile>): {
     image: import("vue").ComputedRef<ChatMessageFile>;
     media: import("vue").ComputedRef<ChatMessageFile | {
