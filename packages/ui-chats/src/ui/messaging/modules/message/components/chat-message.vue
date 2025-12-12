@@ -50,7 +50,7 @@
 </template>
 
   <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, defineEmits, defineProps, inject } from "vue";
 
 import type { ChatMessageType } from "../../../types/ChatMessage.types";
