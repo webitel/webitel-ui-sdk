@@ -65,51 +65,62 @@ const props = withDefaults(
 	},
 );
 
-const props = withDefaults(defineProps<{
-  messages: ChatMessageType[];
-  chatActions?: ChatAction[];
-  size?: ComponentSize;
-}>(), {
-  size: ComponentSize.MD,
-  chatActions: () => [ChatAction.SendMessage],
-});
+const props = withDefaults(
+	defineProps<{
+		messages: ChatMessageType[];
+		chatActions?: ChatAction[];
+		size?: ComponentSize;
+	}>(),
+	{
+		size: ComponentSize.MD,
+		chatActions: () => [
+			ChatAction.SendMessage,
+		],
+	},
+);
 
 const emit = defineEmits<{
-  (e: `action:${typeof ChatAction.SendMessage}`, text: string, options: ResultCallbacks): void;
-  (e: `action:${typeof ChatAction.AttachFiles}`, files: File[], options: ResultCallbacks): void;
+	(
+		e: `action:${typeof ChatAction.SendMessage}`,
+		text: string,
+		options: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof ChatAction.AttachFiles}`,
+		files: File[],
+		options: ResultCallbacks,
+	): void;
 }>();
 
-const slots = defineSlots<{
-  main: () => any;
-  footer: () => any;
-} & SharedActionSlots>();
+const slots = defineSlots<
+	{
+		main: () => any;
+		footer: () => any;
+	} & SharedActionSlots
+>();
 
 const uiChatsEmitter = createUiChatsEmitter();
 
-provide('size', props.size);
-provide('uiChatsEmitter', uiChatsEmitter);
+provide("size", props.size);
+provide("uiChatsEmitter", uiChatsEmitter);
 
-const draft = ref<string>('');
+const draft = ref<string>("");
 
 const slottedChatActions = computed(() => {
-  return Object.keys(slots)
-  .filter((key) => key.startsWith('action:'))
-  .map((key) => key.replace('action:', ''));
+	return Object.keys(slots)
+		.filter((key) => key.startsWith("action:"))
+		.map((key) => key.replace("action:", ""));
 });
 
 function sendMessage() {
-  emit(`action:${ChatAction.SendMessage}`, 
-    draft.value, 
-    {
-    onSuccess: () => draft.value = '',
-  });
+	emit(`action:${ChatAction.SendMessage}`, draft.value, {
+		onSuccess: () => (draft.value = ""),
+	});
 }
 
 function sendFile(files: File[]) {
-  emit(`action:${ChatAction.AttachFiles}`, files, {
-  });
+	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
-
 </script>
 
 <style scoped>

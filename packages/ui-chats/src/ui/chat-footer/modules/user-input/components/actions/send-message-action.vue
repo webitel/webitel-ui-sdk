@@ -10,14 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { ChatAction } from '../../types/ChatAction.types';
+import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { inject } from "vue";
+import type { ChatAction } from "../../types/ChatAction.types";
 
-const size = inject<ComponentSize>('size');
+const size = inject<ComponentSize>("size");
 
-const emit = defineEmits<{
-  (e: typeof ChatAction.SendMessage): void;
-}>();
-
+const emit = defineEmits<(e: typeof ChatAction.SendMessage) => void>();
 </script>

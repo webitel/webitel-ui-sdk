@@ -8,32 +8,37 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, useTemplateRef, MaybeRef } from 'vue';
-import { WtTextarea } from '@webitel/ui-sdk/components';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
-import insertTextAtCursor from 'insert-text-at-cursor';
-import type { Emitter } from 'mitt';
+import type { WtTextarea } from "@webitel/ui-sdk/components";
+import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import insertTextAtCursor from "insert-text-at-cursor";
+import type { Emitter } from "mitt";
+import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
 
-import type { UiChatsEmitterEvents } from '../../../../utils/emitter';
+import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
-const textModel = defineModel<MaybeRef<string>>('text', { required: true });
+const textModel = defineModel<MaybeRef<string>>("text", {
+	required: true,
+});
 
-const size = inject<ComponentSize>('size');
-const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
+const size = inject<ComponentSize>("size");
+const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
-uiChatsEmitter!.on('insertAtCursor', ({ text }) => insertAtCursor(text));
-uiChatsEmitter!.on('focusOnTextField', focus);
+uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
+uiChatsEmitter!.on("focusOnTextField", focus);
 
-const chatTextFieldInputRef = useTemplateRef<typeof WtTextarea>('chatTextFieldInput');
+const chatTextFieldInputRef =
+	useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
 
-const textareaEl = computed(() => chatTextFieldInputRef.value?.$el.querySelector('textarea'));
+const textareaEl = computed(() =>
+	chatTextFieldInputRef.value?.$el.querySelector("textarea"),
+);
 
 function focus() {
-  textareaEl.value!.focus();
-};
+	textareaEl.value!.focus();
+}
 
 function insertAtCursor(text: string) {
-  focus();
-  insertTextAtCursor(textareaEl.value!, text);
+	focus();
+	insertTextAtCursor(textareaEl.value!, text);
 }
 </script>

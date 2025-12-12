@@ -16,26 +16,28 @@
 </template>
 
 <script setup lang="ts">
+import { computed, defineEmits, defineProps } from "vue";
 
-import { computed, defineEmits, defineProps } from 'vue';
-
-import { ChatMessageFile } from '../../../../types/ChatMessage.types';
+import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
 
 const props = defineProps<{
-  file:  ChatMessageFile,
-  type: string,
+	file: ChatMessageFile;
+	type: string;
 }>();
 const emit = defineEmits<{
-  open: [ChatMessageFile],
-  initialized: [object],
+	open: [
+		ChatMessageFile,
+	];
+	initialized: [
+		object,
+	];
 }>();
 
 const mediaUrl = computed(() => props.file.streamUrl || props.file.url);
 
 function handlePlayerInitialize(player) {
-  emit('initialized', player);
-};
-
+	emit("initialized", player);
+}
 </script>
 
 <style lang="scss" scoped>

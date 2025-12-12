@@ -11,18 +11,18 @@
 
 
 <script setup lang="ts">
+import { defineEmits, defineProps } from "vue";
 
-import { defineEmits, defineProps } from 'vue';
-
-import { ChatMessageFile } from '../../../../types/ChatMessage.types';
+import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
 
 const props = defineProps<{
-  file: ChatMessageFile,
+	file: ChatMessageFile;
 }>();
 const emit = defineEmits<{
-  open: [ChatMessageFile],
+	open: [
+		ChatMessageFile,
+	];
 }>();
-
 </script>
 
 

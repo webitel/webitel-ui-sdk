@@ -19,29 +19,32 @@
 </template>
 
 <script setup lang="ts">
-import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
-import { computed, defineProps } from 'vue';
+import { prettifyFileSize } from "@webitel/ui-sdk/scripts";
+import { computed, defineProps } from "vue";
 
-import { ChatMessageFile } from '../../../../types/ChatMessage.types';
+import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
 
-const props = withDefaults(defineProps<{
-  file: ChatMessageFile;
-  selfSide?: boolean;
-}>(),{
-  selfSide: false,
-});
+const props = withDefaults(
+	defineProps<{
+		file: ChatMessageFile;
+		selfSide?: boolean;
+	}>(),
+	{
+		selfSide: false,
+	},
+);
 const documentSize = computed(() => {
-  if (!props.file) return '';
-  return prettifyFileSize(props.file.size);
+	if (!props.file) return "";
+	return prettifyFileSize(props.file.size);
 });
 
 function downloadDocument() {
-  if (!props.file) return;
-  const a = document.createElement('a');
-  a.href = props.file.url;
-  a.target = '_blank';
-  a.download = props.file.name;
-  a.click();
+	if (!props.file) return;
+	const a = document.createElement("a");
+	a.href = props.file.url;
+	a.target = "_blank";
+	a.download = props.file.name;
+	a.click();
 }
 </script>
 

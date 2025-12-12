@@ -8,15 +8,17 @@
 
 
 <script setup lang="ts">
-import { prettifyTime } from '@webitel/ui-sdk/scripts';
-import { computed, defineProps } from 'vue';
+import { prettifyTime } from "@webitel/ui-sdk/scripts";
+import { computed, defineProps } from "vue";
 
-
-const props = withDefaults(defineProps<{
-  date?: string | number // timestamp
-}>(), {
-  date: '',
-});
+const props = withDefaults(
+	defineProps<{
+		date?: string | number; // timestamp
+	}>(),
+	{
+		date: "",
+	},
+);
 
 const time = computed(() => prettifyTime(props.date));
 </script>

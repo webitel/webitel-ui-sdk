@@ -50,63 +50,64 @@
 </template>
 
   <script setup lang="ts">
+import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { computed, defineEmits, defineProps, inject } from "vue";
 
-  import { ComponentSize } from '@webitel/ui-sdk/enums';
-  import {computed, defineEmits, defineProps, inject} from 'vue';
+import type { ChatMessageType } from "../../../types/ChatMessage.types";
+import { useChatMessageFile } from "../composables/useChatMessageFile";
+import MessageAvatar from "./details/chat-message-avatar.vue";
+import MessageBlockedError from "./details/chat-message-blocked-error.vue";
+import MessageDocument from "./details/chat-message-document.vue";
+import MessageImage from "./details/chat-message-image.vue";
+import MessagePlayer from "./details/chat-message-player.vue";
+import MessageText from "./details/chat-message-text.vue";
+import MessageTime from "./details/chat-message-time.vue";
 
-  import { ChatMessageType } from "../../../types/ChatMessage.types";
-  import { useChatMessageFile } from '../composables/useChatMessageFile'
-  import MessageAvatar from './details/chat-message-avatar.vue';
-  import MessageBlockedError from './details/chat-message-blocked-error.vue';
-  import MessageDocument from './details/chat-message-document.vue';
-  import MessageImage from './details/chat-message-image.vue';
-  import MessagePlayer from './details/chat-message-player.vue';
-  import MessageText from './details/chat-message-text.vue';
-  import MessageTime from './details/chat-message-time.vue';
+const props = withDefaults(
+	defineProps<{
+		message: ChatMessageType;
+		showAvatar?: boolean;
+		username?: string;
+	}>(),
+	{
+		showAvatar: false,
+		username: "",
+	},
+);
 
-  const props = withDefaults(defineProps<{
-    message: ChatMessageType
-    showAvatar?: boolean,
-    username?: string,
-  }>(), {
-    showAvatar: false,
-    username: '',
-  });
+const emit = defineEmits<{
+	"open-image": [];
+	"initialized-player": [
+		object,
+	];
+}>();
 
-  const emit = defineEmits<{
-    'open-image': [],
-    'initialized-player': [object]
-  }>();
+const size = inject<ComponentSize>("size");
 
-  const size = inject<ComponentSize>('size');
+const { image, media, document } = useChatMessageFile(props.message.file);
 
-  const {
-    image,
-    media,
-    document,
-  } = useChatMessageFile(props.message.file);
+const isSelfMessage = computed(
+	() => props.message.member?.self || props.message.member?.type === "webitel",
+);
 
-  const isSelfMessage = computed(() =>
-    props.message.member?.self
-    || props.message.member?.type === 'webitel'
-  );
+const isBot = computed(
+	() =>
+		props.message.member?.type === "bot" ||
+		(!props.message.member?.type && !props.message.channelId),
+);
 
-  const isBot = computed(() =>
-    props.message.member?.type === 'bot'
-    || (!props.message.member?.type && !props.message.channelId)
-  );
+const isSelfSide = computed(() => isSelfMessage.value || isBot.value);
 
-  const isSelfSide = computed(() => isSelfMessage.value || isBot.value);
+const getClientUsername = computed(() => {
+	return !isSelfSide.value ? props.username : ""; // need to show username avatar only for client
+});
 
-  const getClientUsername = computed(() => {
-    return !isSelfSide.value ? props.username : ''; // need to show username avatar only for client
-  });
-
-  function handlePlayerInitialize(player) {
-    emit('initialized-player', { player });
-  };
-
-  </script>
+function handlePlayerInitialize(player) {
+	emit("initialized-player", {
+		player,
+	});
+}
+</script>
 
 <style scoped>
 

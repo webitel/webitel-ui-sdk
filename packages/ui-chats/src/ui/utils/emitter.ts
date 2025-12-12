@@ -1,12 +1,14 @@
 import mitt from "mitt";
 
 export type UiChatsEmitterEvents = {
-    insertAtCursor: { text: string };
-    focusOnTextField: undefined;
+	insertAtCursor: {
+		text: string;
+	};
+	focusOnTextField: undefined;
 };
 
 export const createUiChatsEmitter = () => {
-    const uiChatsEmitter = mitt<UiChatsEmitterEvents>();
+	const uiChatsEmitter = mitt<UiChatsEmitterEvents>();
 
-    return uiChatsEmitter;
+	return uiChatsEmitter;
 };
