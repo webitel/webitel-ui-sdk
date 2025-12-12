@@ -6,19 +6,19 @@
         @scroll="handleChatScroll"
         @resize="handleChatResize"
       >
-        <chat-message-component
+        <chat-message
           v-for="(message, index) of props.messages"
           :key="message.id"
           :message="message"
           :show-avatar="!props.hideAvatars && showAvatar(index)"
         >
           <template #before-message>
-            <chat-date
+            <chat-date-divider
               v-if="showChatDate(index)"
               :date="message.createdAt"
             />
           </template>
-        </chat-message-component>
+        </chat-message>
       </div>
       <scroll-to-bottom-btn
         v-if="showScrollToBottomBtn"
@@ -34,8 +34,11 @@ import { inject, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composebles/useChatScroll";
+import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
+import ChatDateDivider from "./chat-date-divider.vue";
+import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
@@ -61,7 +64,7 @@ const {
 	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
 
-function _focusOnInput() {
+function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }
 </script>
