@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { defineEmits } from "vue";
 
-const _props = withDefaults(
+const props = withDefaults(
 	defineProps<{
 		newMessageCount?: number;
 	}>(),
@@ -28,7 +28,7 @@ const _props = withDefaults(
 	},
 );
 
-const _emit = defineEmits<{
+const emit = defineEmits<{
 	scroll: [];
 }>();
 </script>

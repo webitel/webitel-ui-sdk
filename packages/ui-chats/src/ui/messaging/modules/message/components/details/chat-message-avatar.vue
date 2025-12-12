@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { WtAvatar } from "@webitel/ui-sdk/components";
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, defineProps, inject } from "vue";
 
@@ -29,11 +30,11 @@ const props = withDefaults(
 
 const injectedSize = inject<ComponentSize>("size");
 
-const _size = computed(() => {
+const size = computed(() => {
 	return ComponentSize.SM || injectedSize; // todo: should injected size be considered?
 });
 
-const _src = computed(() => props.bot && botIcon);
+const src = computed(() => props.bot && botIcon);
 </script>
 
 <style lang="scss" scoped>

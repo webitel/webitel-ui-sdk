@@ -1,5 +1,5 @@
 import { useScroll } from "@vueuse/core";
-import { computed, type Ref, ref, watch } from "vue";
+import { type ComputedRef, computed, type Ref, ref, watch } from "vue";
 
 import type { ChatMessageType } from "../types/ChatMessage.types";
 
