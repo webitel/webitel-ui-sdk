@@ -1,3 +1,3 @@
-export type { ChatAction } from './chat-footer/modules/user-input/types/ChatAction.types';
-export type { ChatMessageType } from './messaging/types/ChatMessage.types';
-export { default as ChatContainer } from './the-chat-container.vue';
+export type { ChatAction } from "./chat-footer/modules/user-input/types/ChatAction.types";
+export type { ChatMessageType } from "./messaging/types/ChatMessage.types";
+export { default as ChatContainer } from "./the-chat-container.vue";
