@@ -33,9 +33,9 @@ const emit = defineEmits<{
 	];
 }>();
 
-const mediaUrl = computed(() => props.file.streamUrl || props.file.url);
+const _mediaUrl = computed(() => props.file.streamUrl || props.file.url);
 
-function handlePlayerInitialize(player) {
+function _handlePlayerInitialize(player) {
 	emit("initialized", player);
 }
 </script>

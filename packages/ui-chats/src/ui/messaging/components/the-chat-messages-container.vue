@@ -34,11 +34,8 @@ import { inject, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composebles/useChatScroll";
-import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
-import ChatDateDivider from "./chat-date-divider.vue";
-import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
@@ -64,7 +61,7 @@ const {
 	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
 
-function focusOnInput() {
+function _focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }
 </script>
