@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-chats",
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"description": "Reusable Webitel Frontend Code for Chats UI",
 	"workspaces": [
 		"../../",
