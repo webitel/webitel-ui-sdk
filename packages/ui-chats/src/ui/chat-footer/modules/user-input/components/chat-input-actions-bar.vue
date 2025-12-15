@@ -17,8 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, inject } from "vue";
+
 import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
 import AttachFilesAction from "./actions/attach-files-action.vue";
 import EmojiPickerAction from "./actions/emoji-picker-action.vue";

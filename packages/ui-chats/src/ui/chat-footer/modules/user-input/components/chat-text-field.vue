@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import type { WtTextarea } from "@webitel/ui-sdk/components";
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import insertTextAtCursor from "insert-text-at-cursor";
 import type { Emitter } from "mitt";
 import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
