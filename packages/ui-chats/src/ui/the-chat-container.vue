@@ -47,7 +47,7 @@ import ChatTextField from "./chat-footer/modules/user-input/components/chat-text
 import {
 	ChatAction,
 	type SharedActionSlots,
-} from "./chat-footer/modules/user-input/types/ChatAction.types";
+} from "./chat-footer/modules/user-input/enums/ChatAction.enum";
 import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
