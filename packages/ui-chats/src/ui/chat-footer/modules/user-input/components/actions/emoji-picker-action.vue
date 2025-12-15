@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { WtChatEmoji } from "@webitel/ui-sdk/components";
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import type { Emitter } from "mitt";
 import { inject } from "vue";
 

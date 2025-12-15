@@ -10,9 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { inject } from "vue";
-import type { ChatAction } from "../../types/ChatAction.types";
+
+import { ChatAction } from "../../types/ChatAction.types";
 
 const size = inject<ComponentSize>("size");
 
