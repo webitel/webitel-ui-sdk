@@ -125,7 +125,7 @@ const normalizedSrc = computed(() => {
   }
 
   return {
-    src: props.src?.src || '',
+    src: props.src?.src || null,
     type: props.src?.type || normalizedType.value
   };
 });

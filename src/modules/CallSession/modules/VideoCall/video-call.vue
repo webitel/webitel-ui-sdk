@@ -153,7 +153,7 @@ const emit = defineEmits<{
 const mainStream = computed(() => {
   if (!props['sender:video:enabled']) return null;
 
-  return props['receiver:stream'] || props['sender:stream'];
+  return props['sender:stream'] || props['receiver:stream'];
 })
 
 const senderVideoMutedIconSizes = {
