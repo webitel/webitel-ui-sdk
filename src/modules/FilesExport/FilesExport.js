@@ -1,10 +1,11 @@
+import { getCallMediaUrl } from '@webitel/api-services/api';
+import { EngineCallFileType } from '@webitel/api-services/gen/models';
 import { saveAs } from 'file-saver-es';
 import JSZip from 'jszip';
 import jszipUtils from 'jszip-utils';
 import path from 'path-browserify';
 
 import { _wtUiLog } from '../../scripts/logger.js';
-import generateMediaURL from './scripts/generateMediaURL.js';
 
 export default class FilesExport {
   filename = 'files';
@@ -19,7 +20,7 @@ export default class FilesExport {
 
   zippingProgress = { percent: 0 };
 
-  filesURL = generateMediaURL;
+  filesURL = getCallMediaUrl;
 
   constructor({ fetchMethod, filename, filesURL, skipFilesWithError = false }) {
     if (fetchMethod) this.fetchMethod = fetchMethod;
@@ -49,8 +50,11 @@ export default class FilesExport {
   async _addFilesToZip(items, zip) {
     for (const item of items) {
       if (item.files) {
-        await this._addFilesToZip(item.files, zip);
-      } else {
+        if (item.files?.[EngineCallFileType.FileTypeAudio]) {
+          await this._addFilesToZip(item.files[EngineCallFileType.FileTypeAudio], zip);
+        } else continue;
+      }
+       else {
         try {
           const binary = await this._fetchFileBinary(item.id);
           const ext = item.mimeType.split('/').pop();

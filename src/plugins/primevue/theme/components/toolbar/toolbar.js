@@ -1,7 +1,7 @@
 import { ToolbarScheme } from '@webitel/styleguide/component-schemes';
 
 const toolbar = {
-  ...ToolbarScheme.sizes,
+  root: ToolbarScheme.sizes,
   colorScheme: ToolbarScheme.colorScheme,
 };
 

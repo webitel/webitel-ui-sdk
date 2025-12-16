@@ -31,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import { FormatDateMode } from '@webitel/ui-sdk/enums'
+import { formatDate } from '@webitel/ui-sdk/utils'
 import {computed, ref, useTemplateRef } from "vue";
 import { useI18n } from 'vue-i18n';
 import {EngineQuestionAnswer} from "webitel-sdk";
@@ -53,7 +55,7 @@ const { t } = useI18n();
 const initialComment = props.answer.comment; /* prevent editing-info change if comment is changing  */
 
 const updateTime = computed(() => {
-  return new Date(+props.answer.updatedAt).toLocaleString();
+  return formatDate(parseInt(props.answer.updatedAt), FormatDateMode.DATETIME);
 });
 
 const isCommentClamped = props.collapsible && computed(() => {

@@ -15,7 +15,17 @@
         :multiple="multiple"
         :allow-parent="allowParent"
         @update:model-value="emit('update:modelValue', $event)"
-      />
+      >
+        <template
+          v-if="$slots['item-prefix']"
+          #item-prefix="slotProps"
+        >
+          <slot
+            name="item-prefix"
+            v-bind="slotProps"
+          />
+        </template>
+      </wt-tree-line>
     </div>
     <div
       v-if="mode === WtTreeMode.List"

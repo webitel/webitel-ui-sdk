@@ -94,7 +94,7 @@ const generateCustomOutlinedColorCss = ({ colorName, dt }) => `
 `
 
 const button = {
-  ...ButtonScheme.sizes,
+  root: ButtonScheme.sizes,
   colorScheme: ButtonScheme.colorScheme,
 
   extend: {

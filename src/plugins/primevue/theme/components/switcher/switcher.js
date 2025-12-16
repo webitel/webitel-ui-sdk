@@ -1,7 +1,7 @@
 import { SwitcherScheme } from '@webitel/styleguide/component-schemes';
 
 const switcher = {
-  ...SwitcherScheme.sizes,
+  root: SwitcherScheme.sizes,
   colorScheme: SwitcherScheme.colorScheme,
 
   css: ({ dt }) => `

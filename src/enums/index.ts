@@ -9,6 +9,7 @@ import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
 import { EmptyCause } from './EmptyCause/EmptyCause';
+import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { MessageColor } from './MessageColor/MessageColor';
@@ -40,6 +41,7 @@ export {
   CrmSections,
   CrudAction,
   EmptyCause,
+  FormatDateMode,
   IconAction,
   IconColor,
   MessageColor,

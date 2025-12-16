@@ -1,5 +1,6 @@
 import PAutoComplete from 'primevue/autocomplete';
 import PAvatar from 'primevue/avatar';
+import PBadge from 'primevue/badge';
 import PBreadcrumb from 'primevue/breadcrumb';
 import PButton from 'primevue/button';
 import PCheckbox from 'primevue/checkbox';
@@ -19,7 +20,8 @@ import PMessage from 'primevue/message';
 import PPassword from 'primevue/password';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
-import PSlider from 'primevue/slider'
+import PSlider from 'primevue/slider';
+import PTextarea from 'primevue/textarea';
 import PToggleSwitch from 'primevue/toggleswitch';
 import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
@@ -54,12 +56,14 @@ const initPrimevue = (app) => {
   app.component('PColumn', changeComponentCompatMode(PColumn));
   app.component('PRadio', changeComponentCompatMode(PRadio));
   app.component('PChip', changeComponentCompatMode(PChip));
+  app.component('PTextarea', changeComponentCompatMode(PTextarea));
   app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
   app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
   app.component('PSlider', changeComponentCompatMode(PSlider));
   app.component('PDivider', changeComponentCompatMode(PDivider));
   app.component('PImage', changeComponentCompatMode(PImage));
   app.component('PGalleria', changeComponentCompatMode(PGalleria));
+  app.component('PBadge', changeComponentCompatMode(PBadge));
   app.component('PInputGroup', changeComponentCompatMode(PInputGroup));
   app.component('PInputNumber', changeComponentCompatMode(PInputNumber));
   app.component('PPassword', changeComponentCompatMode(PPassword));

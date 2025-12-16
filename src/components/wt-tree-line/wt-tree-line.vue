@@ -18,6 +18,16 @@
         @click="collapsed = !collapsed"
       />
     </div>
+    <slot
+      name="item-prefix"
+      class="mr-1"
+      :data="data"
+      :root-data="rootData || data"
+      :nested-level="nestedLevel"
+      :active="displayActiveState"
+      :has-children="!!(data[childrenProp] && data[childrenProp].length)"
+      :selected-parent="selectedParent"
+    />
     <div
       :class="{
       active: displayActiveState,
@@ -55,7 +65,17 @@
         :root-data="rootData || data"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
-      />
+      >
+        <template
+          v-if="$slots['item-prefix']"
+          #item-prefix="slotProps"
+        >
+          <slot
+            name="item-prefix"
+            v-bind="slotProps"
+          />
+        </template>
+      </wt-tree-line>
     </div>
   </wt-expand-transition>
 </template>

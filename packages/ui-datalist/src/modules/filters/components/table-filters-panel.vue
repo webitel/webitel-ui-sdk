@@ -199,7 +199,7 @@ const handleResetFilters = () => {
   width: 100%;
 
   .dynamic-filter-panel-wrapper {
-    align-items: center;
+    align-items: start;
   }
   .dynamic-filter-panel-wrapper__filters {
     display: grid;

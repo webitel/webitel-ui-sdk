@@ -1,7 +1,7 @@
 import { TooltipScheme } from '@webitel/styleguide/component-schemes';
 
 const tooltip = {
-  ...TooltipScheme.sizes,
+  root: TooltipScheme.sizes,
   colorScheme: TooltipScheme.colorScheme,
 
   css: ({ dt }) => `

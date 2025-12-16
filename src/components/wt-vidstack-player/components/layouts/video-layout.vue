@@ -4,52 +4,40 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
+      :class="{'video-display-panel--hidden': props.hideHeader}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
+      :hide-expand="props.hideExpand"
       @close="emit('close-player')"
     />
 
-    <wt-loader size="sm" color="on-dark"/>
+    <media-controls-group>
+      <slot name="content" />
+    </media-controls-group>
 
-    <template v-if="props.mode === 'media'">
-      <media-control-panel />
-    </template>
-
-    <template v-if="props.mode === 'stream'">
-      <screen-sharing-control-panel
-        :session="props.session"
-        :screenshot-status="props.screenshotStatus"
-        :screenshot-is-loading="screenshotIsLoading"
-        @close-session="emit('close-session')"
-        @make-screenshot="emit('make-screenshot')"
-        @toggle-record="emit('toggle-record')"
-      />
-    </template>
+    <slot v-if="!props.hideControlsPanel" name="controls-panel">
+      <media-controls-panel />
+    </slot>
   </media-controls>
 </template>
 
 <script setup lang="ts">
 import {defineEmits, inject} from "vue";
 
-import WtLoader from "../../../wt-loader/wt-loader.vue";
-import {ScreenshotStatus} from "../../types/ScreenshotStatus";
-import {WtVidstakPlayerControlsMode} from "../../types/WtVidstackPlayerControlsMode";
-import {WtVidstackPlayerSession} from "../../types/WtVidstackPlayerSession";
-import MediaControlPanel from "../panels/media-control-panel/media-control-panel.vue";
-import ScreenSharingControlPanel from "../panels/screen-sharing-control-panel/screen-sharing-control-panel.vue";
+import {WtVidstackPlayerSizeProvider} from "../../types/WtVidstackPlayerSizeProvider";
+import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
-const { size } = inject('size');
+const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  mode: WtVidstakPlayerControlsMode;
-  session: WtVidstackPlayerSession
-  screenshotStatus: ScreenshotStatus
-  screenshotIsLoading: boolean
+  hideHeader?: boolean
+  hideControlsPanel?: boolean
+  hideExpand?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -62,14 +50,16 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .video-layout {
-  &--sm {
-    border-radius: var(--p-player-wrapper-sm-border-radius);
+  position: relative;
+
+  .video-display-panel {
+    &--hidden {
+      visibility: hidden;
+    }
   }
 
-  &--md {
-    .media-control-panel {
-      border-radius: var(--p-player-control-bar-md-border-radius);
-    }
+  &--sm {
+    border-radius: var(--p-player-wrapper-sm-border-radius);
   }
 }
 
@@ -85,26 +75,11 @@ const emit = defineEmits<{
   transition: all var(--transition) ease-out;
 }
 
-.controls-group {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.wt-loader {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.video-layout:not([data-buffering]) .wt-loader {
-  display: none;
-}
-
 media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
   .video-display-panel {
     background: var(--p-player-head-line-hover-background);
     opacity: 1;
+    z-index: 10;
   }
 }
 </style>

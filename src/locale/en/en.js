@@ -90,6 +90,7 @@ export default deepmerge(
       updatedBy: (/*{ named }*/) => {
         return 'Edited';
       },
+      check: 'Check',
     },
     // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
     vocabulary: {
@@ -134,6 +135,7 @@ export default deepmerge(
       expireAt: 'Expire at',
       destination: 'Destination',
       utilizationProgress: 'Utilization progress',
+      settings: 'Settings',
     },
     // date-related texts
     date: {

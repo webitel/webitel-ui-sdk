@@ -75,6 +75,9 @@
 </template>
 
 <script>
+import { FormatDateMode } from '@webitel/ui-sdk/enums';
+import { formatDate } from '@webitel/ui-sdk/utils';
+
 export default {
   name: 'WtHeaderActions',
   props: {
@@ -107,7 +110,7 @@ export default {
       let buildString = '';
       buildString = `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
       if (this.buildInfo.timestamp) {
-        buildString += `, ${new Date(this.buildInfo.timestamp).toLocaleString()}`;
+        buildString += `, ${formatDate(this.buildInfo.timestamp, FormatDateMode.DATETIME)}`;
       }
       return buildString;
     },
