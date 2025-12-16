@@ -63,12 +63,12 @@ const ShownActionComponentsList = computed(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chat-input-actions-bar {
   display: flex;
   gap: var(--spacing-2xs);
 
-  > * {
+  & > * {
     flex: 1;
   }
 }

@@ -4,9 +4,16 @@
             header goes here
         </slot> -->
         <slot name="main">
+          <dropzone
+            v-if="!isDropzoneDisabled && isDropzoneVisible"
+            @dragenter.prevent
+            @dragleave.prevent="handleDragLeave"
+            @drop="sendFile"
+          />
           <chat-messages-container
             :messages="props.messages"
-            :hide-avatars="props.hideAvatars"
+            :without-avatars="props.withoutAvatars"
+            @[ChatAction.AttachFiles]="sendFile"
           />
         </slot>
         <slot name="footer">
@@ -16,7 +23,7 @@
                   v-model:text="draft"
               />
               <chat-input-actions-bar
-                :actions="chatActions"
+                :actions="props.chatActions"
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
@@ -48,7 +55,9 @@ import {
 	ChatAction,
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/enums/ChatAction.enum";
+import Dropzone from './messaging/components/dropzone.vue';
 import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
+import {useDropzoneHandlers} from "./messaging/composables/useDropzoneHandlers";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -58,11 +67,11 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
-		hideAvatars?: boolean;
+    withoutAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
-		hideAvatars: false,
+    withoutAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -94,6 +103,11 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
+const {
+  isDropzoneVisible,
+  handleDragLeave
+} = useDropzoneHandlers();
+
 const draft = ref<string>("");
 
 const slottedChatActions = computed(() => {
@@ -101,6 +115,10 @@ const slottedChatActions = computed(() => {
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
+const isDropzoneDisabled = computed(() =>
+  !props.chatActions.includes(ChatAction.AttachFiles)
+)
+
 
 function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {

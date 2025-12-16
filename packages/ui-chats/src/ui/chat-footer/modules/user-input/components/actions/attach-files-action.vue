@@ -21,7 +21,7 @@ import { WtRoundedAction } from "@webitel/ui-sdk/components";
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { inject, useTemplateRef } from "vue";
 
-import { ChatAction } from "../../types/ChatAction.types";
+import { ChatAction } from "../../enums/ChatAction.enum";
 
 const size = inject<ComponentSize>("size");
 
