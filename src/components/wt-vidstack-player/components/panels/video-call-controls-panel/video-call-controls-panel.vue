@@ -2,56 +2,62 @@
   <controls-group class="video-call-controls-panel">
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Screenshot]"
-      rounded
-      contains-icon
+      :loading="isScreenshotLoading"
+      :size="buttonSizeMap[size]"
+      :icon="screenShotIcon"
       variant="outlined"
       color="secondary"
-      :loading="isScreenshotLoading"
-      :size="size"
-      :icon="screenShotIcon"
+      rounded
+      contains-icon
       @click="onScreenshotClick"
     />
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Recordings]"
-      rounded
-      contains-icon
+      :size="buttonSizeMap[size]"
+      :icon="recordIcon"
       variant="outlined"
       color="secondary"
-      :size="size"
-      :icon="recordIcon"
+      rounded
+      contains-icon
       @click="emit(VideoCallAction.Recordings)"
     />
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Mic]"
-      rounded
-      contains-icon
+      :disabled="!props['mic:accessed']"
+      :size="buttonSizeMap[size]"
+      :icon="microphoneIcon"
+      :badge="micBadge"
+      badge-severity="error"
       variant="outlined"
       color="secondary"
-      :disabled="!props['mic:accessed']"
-      :size="size"
-      :icon="microphoneIcon"
+      badge-absolute-position
+      rounded
+      contains-icon
       @click="emit(VideoCallAction.Mic)"
     />
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Video]"
-      rounded
-      contains-icon
+      :disabled="!props['video:accessed']"
+      :size="buttonSizeMap[size]"
+      :icon="videoCamIcon"
+      :badge="videoBadge"
+      badge-severity="error"
       variant="outlined"
       color="secondary"
-      :disabled="!props['video:accessed']"
-      :size="size"
-      :icon="videoCamIcon"
+      badge-absolute-position
+      rounded
+      contains-icon
       @click="emit(VideoCallAction.Video)"
     />
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Settings]"
-      :size="size"
+      :size="buttonSizeMap[size]"
+      :variant="props['actions:settings:pressed'] ? 'active' : 'outlined'"
       icon="settings"
-      variant="outlined"
       color="secondary"
       rounded
       contains-icon
@@ -60,9 +66,9 @@
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Chat]"
-      :size="size"
+      :size="buttonSizeMap[size]"
+      :variant="props['actions:chat:pressed'] ? 'active' : 'outlined'"
       icon="chat"
-      variant="outlined"
       color="secondary"
       rounded
       contains-icon
@@ -71,7 +77,7 @@
 
     <wt-button
       v-if="shownActionsMap[VideoCallAction.Hangup]"
-      :size="size"
+      :size="buttonSizeMap[size]"
       icon="call-end--filled"
       color="error"
       rounded
@@ -85,10 +91,10 @@
 import {computed, inject, ref} from 'vue';
 
 import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
-import { ComponentSize } from '../../../../../enums';
-import { VideoCallAction } from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
+import {ComponentSize} from '../../../../../enums';
+import {VideoCallAction} from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
 import {ScreenshotStatus} from '../../../../../modules/CallSession/types';
-import { ResultCallbacks } from '../../../../../types';
+import {ResultCallbacks} from '../../../../../types';
 
 const props = defineProps<{
   'actions': VideoCallAction[];
@@ -100,6 +106,9 @@ const props = defineProps<{
   'screenshot:status': ScreenshotStatus | null;
   'screenshot:loading': boolean;
   'recordings': boolean;
+
+  'actions:settings:pressed': boolean;
+  'actions:chat:pressed': boolean;
 }>();
 
 const emit = defineEmits<{
@@ -112,7 +121,7 @@ const emit = defineEmits<{
   (e: typeof VideoCallAction.Hangup, payload?: unknown, options?: ResultCallbacks): void;
 }>();
 
-const { size } = inject('size') as { size: ComponentSize };
+const {size} = inject('size') as { size: ComponentSize };
 
 const shownActionsMap = computed(() => {
   return props.actions.reduce<Record<VideoCallAction, boolean>>((acc, action) => {
@@ -122,7 +131,7 @@ const shownActionsMap = computed(() => {
 });
 
 const microphoneIcon = computed(() => {
-  if (props['mic:accessed']) {
+  if (!props['mic:accessed']) {
     return 'mic'; // todo
   }
 
@@ -132,6 +141,8 @@ const microphoneIcon = computed(() => {
 
   return 'mic';
 });
+
+const micBadge = computed(() => !props['mic:accessed'] ? '!' : null)
 
 const videoCamIcon = computed(() => {
   if (!props['video:accessed']) {
@@ -144,6 +155,8 @@ const videoCamIcon = computed(() => {
 
   return 'video-cam';
 });
+
+const videoBadge = computed(() => !props['video:accessed'] ? '!' : null)
 
 const recordIcon = computed(() => (props.recordings ? 'record-stop' : 'record-start'));
 
@@ -162,17 +175,24 @@ const isScreenshotLoading = ref(false);
 
 const onScreenshotClick = () => {
   isScreenshotLoading.value = true;
-  emit(VideoCallAction.Screenshot, null, {
+  emit(VideoCallAction.Screenshot, {}, {
     onComplete: () => {
       isScreenshotLoading.value = false;
     },
   });
 };
+
+const buttonSizeMap = {
+  [ComponentSize.SM]: ComponentSize.SM,
+  [ComponentSize.MD]: ComponentSize.MD,
+  [ComponentSize.LG]: ComponentSize.MD,
+}
 </script>
 
 <style scoped lang="scss">
 .video-call-controls-panel {
   position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
 }

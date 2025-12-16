@@ -31,14 +31,14 @@
           v-show="!isImageOnLoad"
           class="wt-galleria__image" 
           :class="{ 'wt-galleria__image--fullscreen': fullScreen }"
-          :src="item.src" 
-          :alt="item.title" 
+          :src="item?.src" 
+          :alt="item?.title" 
           @load="onImageLoad"
         />
       </div>
     </template>
     <template #thumbnail="{item}: {item: WtGalleriaItem}">
-        <img :src="item.thumbnailSrc" :alt="item.title" class="wt-galleria__thumbnail" />
+        <img :src="item?.thumbnailSrc" :alt="item?.title" class="wt-galleria__thumbnail" />
     </template>
     <template #closeicon>
       <wt-icon 

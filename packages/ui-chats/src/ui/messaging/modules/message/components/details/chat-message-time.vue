@@ -20,10 +20,11 @@ const props = withDefaults(
 	},
 );
 
-const _time = computed(() => prettifyTime(props.date));
+const time = computed(() => prettifyTime(props.date));
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 .chat-message-time {
   display: flex;
   flex-direction: column;

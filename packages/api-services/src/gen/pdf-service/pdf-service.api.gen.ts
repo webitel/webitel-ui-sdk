@@ -15,6 +15,7 @@ import type {
   DownloadPdfExport200,
   DownloadPdfExportParams,
   GetPdfExportHistoryParams,
+  WebitelMediaExporterDeletePdfExportRecordResponse,
   WebitelMediaExporterPdfExportMetadata,
   WebitelMediaExporterPdfHistoryResponse,
   WebitelMediaExporterPdfServiceGeneratePdfExportBody
@@ -32,7 +33,14 @@ import type {
            = () => {
 
             // --- header end
-          /**
+          const deletePdfExportRecord = <TData = AxiosResponse<WebitelMediaExporterDeletePdfExportRecordResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/export/pdf/history/${id}`,options
+    );
+  }
+/**
  * @summary Generate a new PDF export asynchronously.
 Returns metadata about the created export task.
  */
@@ -73,7 +81,8 @@ const downloadPdfExport = <TData = AxiosResponse<DownloadPdfExport200>>(
   }
 
             // --- footer start
-            return {generatePdfExport,getPdfExportHistory,downloadPdfExport}};
+            return {deletePdfExportRecord,generatePdfExport,getPdfExportHistory,downloadPdfExport}};
+export type DeletePdfExportRecordResult = AxiosResponse<WebitelMediaExporterDeletePdfExportRecordResponse>
 export type GeneratePdfExportResult = AxiosResponse<WebitelMediaExporterPdfExportMetadata>
 export type GetPdfExportHistoryResult = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>
 export type DownloadPdfExportResult = AxiosResponse<DownloadPdfExport200>

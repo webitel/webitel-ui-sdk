@@ -1,10 +1,13 @@
 <template>
-  <section class="chat-container">
+  <section class="the-chat-container">
     <!-- <slot name="header">
             header goes here
         </slot> -->
         <slot name="main">
-            <chat-messages-container :messages="messages" />
+          <chat-messages-container
+            :messages="props.messages"
+            :hide-avatars="props.hideAvatars"
+          />
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
@@ -17,10 +20,10 @@
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
-              <template 
-              v-for="action in slottedChatActions" 
-              :key="action"
-              #[action]="{ size }"
+              <template
+                v-for="action in slottedChatActions"
+                :key="action"
+                #[action]="{ size }"
               >
                 <slot
                   :name="`action:${action}`"
@@ -37,10 +40,15 @@
 <script setup lang="ts">
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, provide, ref } from "vue";
+
+import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
+import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
+import ChatTextField from "./chat-footer/modules/user-input/components/chat-text-field.vue";
 import {
 	ChatAction,
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/types/ChatAction.types";
+import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -50,9 +58,11 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
+		hideAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
+		hideAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -86,26 +96,27 @@ provide("uiChatsEmitter", uiChatsEmitter);
 
 const draft = ref<string>("");
 
-const _slottedChatActions = computed(() => {
+const slottedChatActions = computed(() => {
 	return Object.keys(slots)
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
 
-function _sendMessage() {
+function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
 		onSuccess: () => (draft.value = ""),
 	});
 }
 
-function _sendFile(files: File[]) {
+function sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
 </script>
 
 <style scoped>
-.chat-container {
+.the-chat-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 </style>

@@ -7,6 +7,14 @@
 import * as zod from 'zod/v4';
 
 
+export const deletePdfExportRecordParams = zod.object({
+  "id": zod.string()
+})
+
+export const deletePdfExportRecordResponse = zod.object({
+  "id": zod.string().optional()
+})
+
 /**
  * @summary Generate a new PDF export asynchronously.
 Returns metadata about the created export task.

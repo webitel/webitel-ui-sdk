@@ -4,18 +4,19 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
-      :class="{'video-display-panel--hidden': props.hideDisplayPanel}"
+      :class="{'video-display-panel--hidden': props.hideHeader}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
+      :hide-expand="props.hideExpand"
       @close="emit('close-player')"
     />
 
-    <wt-loader size="sm" color="on-dark" />
+    <media-controls-group>
+      <slot name="content" />
+    </media-controls-group>
 
-    <slot name="content" />
-
-    <slot name="controls-panel">
+    <slot v-if="!props.hideControlsPanel" name="controls-panel">
       <media-controls-panel />
     </slot>
   </media-controls>
@@ -24,17 +25,19 @@
 <script setup lang="ts">
 import {defineEmits, inject} from "vue";
 
-import WtLoader from "../../../wt-loader/wt-loader.vue";
+import {WtVidstackPlayerSizeProvider} from "../../types/WtVidstackPlayerSizeProvider";
 import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
-const {size} = inject('size');
+const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideDisplayPanel?: boolean
+  hideHeader?: boolean
+  hideControlsPanel?: boolean
+  hideExpand?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -72,20 +75,11 @@ const emit = defineEmits<{
   transition: all var(--transition) ease-out;
 }
 
-.wt-loader {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.video-layout:not([data-buffering]) .wt-loader {
-  display: none;
-}
-
 media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
   .video-display-panel {
     background: var(--p-player-head-line-hover-background);
     opacity: 1;
+    z-index: 10;
   }
 }
 </style>

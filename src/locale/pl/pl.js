@@ -87,6 +87,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Edytowane';
     },
+    check: 'Sprawdź',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -131,6 +132,7 @@ export default {
     expireAt: 'Wygasa',
     destination: 'Cel',
     utilizationProgress: 'Postęp wykorzystania',
+    settings: 'Ustawienia',
   },
   // date-related texts
   date: {

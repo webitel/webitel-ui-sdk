@@ -1,8 +1,13 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player--${size}`]: props.resizable,
-      'wt-vidstack-player--static': props.staticPosition}"
+    :class="[
+      `wt-vidstack-player--${size}`,
+      fullscreen && `wt-vidstack-player--fullscreen`,
+      stretch && `wt-vidstack-player--stretch`,
+      props.static && 'wt-vidstack-player--static',
+      props.hideBackground && 'wt-vidstack-player--hide-background'
+    ]"
   >
     <media-player
       ref="player"
@@ -20,15 +25,16 @@
       ></media-provider>
 
       <video-layout
-        v-if="props.resizable"
-        :hide-display-panel="props.hideDisplayPanel"
+        :hide-header="props.hideHeader"
+        :hide-controls-panel="props.hideControlsPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
+        :hide-expand="props.hideExpand"
         @close-player="emit('close')"
       >
-        <template #controls-panel>
+        <template  #controls-panel>
           <slot name="controls-panel" :size="size" />
         </template>
 
@@ -46,7 +52,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide, ref, useTemplateRef} from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -59,11 +65,14 @@ interface Props {
   title?: string;
   username?: string;
   closable?: boolean;
-  resizable?: boolean;
-  staticPosition?: boolean;
+  static?: boolean;
   stream?: MediaStream
-  componentSize?: keyof typeof ComponentSize
-  hideDisplayPanel?: boolean
+  size?: ComponentSize
+  hideHeader?: boolean
+  hideControlsPanel?: boolean
+  hideBackground?: boolean
+  hideExpand?: boolean
+  stretch?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,16 +82,17 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
-  staticPosition: false,
-  resizable: true,
+  static: false,
 });
 
 const emit = defineEmits<{
   'close': [],
+  'change-size': [ComponentSize],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(props.componentSize || ComponentSize.SM);
+const size = ref(props.size || ComponentSize.SM);
+const fullscreen = ref(false)
 
 const changeSize = (value) => {
   size.value = value;
@@ -90,13 +100,12 @@ const changeSize = (value) => {
 
 /** @author liza-pohranichna
  * options: [sm, md, lg]
- * lg-size is fullscreen
  */
-provide('size', {size, changeSize});
+provide('size', {size, fullscreen, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
-  
+
   if (typeof props.src === 'string') {
     if (props.src.includes('media')) return 'audio/mp3';
     if (props.src.includes('mp3')) return 'audio/mp3';
@@ -112,11 +121,11 @@ const normalizedSrc = computed(() => {
   }
 
   if (typeof props.src === 'string') {
-    return { src: props.src, type: normalizedType.value };
+    return {src: props.src, type: normalizedType.value};
   }
 
   return {
-    src: props.src?.src || '',
+    src: props.src?.src || null,
     type: props.src?.type || normalizedType.value
   };
 });
@@ -129,7 +138,10 @@ const normalizedSrc = computed(() => {
 .wt-vidstack-player {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   transition: var(--transition);
+  box-shadow: var(--elevation-10);
 
   &__player {
     padding: 0;
@@ -145,7 +157,6 @@ const normalizedSrc = computed(() => {
     z-index: 100;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
-    box-shadow: var(--elevation-10);
     height: var(--p-player-wrapper-sm-height);
 
     .wt-vidstack-player__provider {
@@ -156,29 +167,55 @@ const normalizedSrc = computed(() => {
   }
 
   &--md {
-    &--md:not(.wt-vidstack-player--static) {
+    border-radius: var(--p-player-wrapper-md-border-radius);
+    overflow: hidden;
+    flex: 0 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+
+    &.wt-vidstack-player--static {
+      max-width: var(--p-player-wrapper-md-width);
+      max-height: var(--p-player-wrapper-md-height);
+    }
+
+    .wt-vidstack-player__player {
+      width: 100%;
+      height: 100%;
+      max-width: var(--p-player-wrapper-md-width);
+      max-height: var(--p-player-wrapper-md-height);
+    }
+
+    &:not(.wt-vidstack-player--static) {
       @include popup-wrapper;
+      border-radius: 0;
+      overflow: visible;
+
+      /** @author liza-pohranichna
+      * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
       .wt-vidstack-player__player {
         @include popup-container;
+
+        position: relative;
+        display: block;
+        padding: 0;
+        margin: 0;
+        max-height: var(--p-player-wrapper-md-height);
+        border-radius: var(--p-player-wrapper-md-border-radius);
+        overflow: hidden;
       }
     }
 
-    /** @author liza-pohranichna
-    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
-
     .wt-vidstack-player__player {
-      position: relative;
-      display: block;
-      max-width: var(--p-player-wrapper-md-width);
-      padding: 0;
-      border-radius: var(--p-player-wrapper-md-border-radius);
-      overflow: hidden;
-      box-shadow: var(--elevation-10);
+      width: 100%;
     }
   }
 
   &--lg {
+    border-radius: var(--p-player-wrapper-lg-border-radius);
+    overflow: hidden;
+    z-index: 100;
+
     .wt-vidstack-player {
       &__player {
         display: flex;
@@ -192,10 +229,16 @@ const normalizedSrc = computed(() => {
     }
   }
 
+  &--fullscreen {
+    border-radius: 0;
+  }
+
   &--static {
     position: relative;
     right: unset;
     bottom: unset;
+    z-index: 1;
+    flex: 0 0 auto;
 
     .wt-vidstack-player__provider {
       padding: 0;
@@ -207,6 +250,21 @@ const normalizedSrc = computed(() => {
       height: 100%;
     }
   }
+
+  &--stretch {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &--hide-background {
+    &.wt-vidstack-player {
+      &--md {
+        background: none;
+      }
+    }
+  }
 }
 </style>
 
@@ -214,7 +272,7 @@ const normalizedSrc = computed(() => {
 .wt-vidstack-player {
   video {
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     min-width: 0;
   }

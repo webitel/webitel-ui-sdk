@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { SearchScreenRecordingsByAgentChannel } from './searchScreenRecordingsByAgentChannel';
+import type { SearchScreenRecordingsByAgentType } from './searchScreenRecordingsByAgentType';
 
 export type SearchScreenRecordingsByAgentParams = {
 page?: number;
@@ -18,8 +18,5 @@ uploadedAtTo?: string;
 referenceId?: string[];
 retentionUntilFrom?: string;
 retentionUntilTo?: string;
-/**
- *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
- */
-channel?: SearchScreenRecordingsByAgentChannel;
+type?: SearchScreenRecordingsByAgentType;
 };

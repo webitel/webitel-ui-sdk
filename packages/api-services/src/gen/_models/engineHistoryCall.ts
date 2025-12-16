@@ -34,6 +34,7 @@ export interface EngineHistoryCall {
   bridgedId?: string;
   cause?: string;
   contact?: EngineLookup;
+  conversationId?: string;
   createdAt?: string;
   destination?: string;
   destinationName?: string;

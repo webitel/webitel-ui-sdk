@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-chats",
-	"version": "0.0.3",
+	"version": "0.0.14",
 	"description": "Reusable Webitel Frontend Code for Chats UI",
 	"workspaces": [
 		"../../",
@@ -11,7 +11,7 @@
 		"make-all": "npm version patch --git-tag-version false && (npm run lint:biome || true) && (npm run build:types || true) && npm run utils:publish",
 		"build": "(npm run build:types || true)",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
-		"lint:biome": "biome check --write --unsafe",
+		"lint:biome": "biome check --write",
 		"utils:publish": "npm publish --access public"
 	},
 	"dependencies": {
@@ -25,7 +25,7 @@
 		"@types/node": "^24.10.0",
 		"@vitejs/plugin-vue": "^6.0.1",
 		"@vue/tsconfig": "^0.8.1",
-		"@webitel/styleguide": "^24.12.61",
+		"@webitel/styleguide": "^24.12.95",
 		"@webitel/ui-sdk": "~25.12",
 		"typescript": "~5.9.3",
 		"vite": "npm:rolldown-vite@7.2.2",

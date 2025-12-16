@@ -13,7 +13,7 @@ const props = defineProps<{
 	text: string;
 }>();
 
-const _text = computed(() => {
+const text = computed(() => {
 	// ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
 	// https://my.webitel.com/browse/DEV-2848
 	return Autolinker.link(props.text, {
@@ -25,6 +25,7 @@ const _text = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 
 .chat-message-text {
   @extend %typo-body-1;

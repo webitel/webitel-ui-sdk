@@ -64,7 +64,7 @@ export const searchScreenRecordingsByAgentParams = zod.object({
   "agent_id": zod.string()
 })
 
-export const searchScreenRecordingsByAgentQueryChannelDefault = "UnknownChannel";
+export const searchScreenRecordingsByAgentQueryTypeDefault = "PDF";
 
 export const searchScreenRecordingsByAgentQueryParams = zod.object({
   "page": zod.number().optional(),
@@ -78,7 +78,7 @@ export const searchScreenRecordingsByAgentQueryParams = zod.object({
   "referenceId": zod.array(zod.string()).optional(),
   "retentionUntilFrom": zod.string().optional(),
   "retentionUntilTo": zod.string().optional(),
-  "channel": zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel']).default(searchScreenRecordingsByAgentQueryChannelDefault).describe(' - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated')
+  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsByAgentQueryTypeDefault)
 })
 
 export const searchScreenRecordingsByAgentResponseItemsItemChannelDefault = "UnknownChannel";

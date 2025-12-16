@@ -6,6 +6,7 @@
       `wt-icon--color-${color}`,
       { 'wt-icon--disabled': disabled },
     ]"
+    @click="emit('click')"
   >
     <use :href="iconName" />
   </svg>
@@ -38,6 +39,8 @@ const props = withDefaults(defineProps<Props>(), {
   iconPrefix: '',
   disabled: false,
 });
+
+const emit = defineEmits(['click']);
 
 const iconName = computed(() => {
   let name = '#';

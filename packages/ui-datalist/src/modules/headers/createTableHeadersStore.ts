@@ -229,7 +229,10 @@ export const tableHeadersStoreBody = ({
     isReorderingColumn.value = true;
 
     const reordered = setHeaderOrder(orderedFields);
-    updateShownHeaders(reordered);
+    const uniqueHeaders = headers.value.filter(
+      (merged) => !reordered.some((r) => r.field === merged.field),
+    );
+    updateShownHeaders([...reordered, ...uniqueHeaders]);
 
     nextTick(() => {
       isReorderingColumn.value = false;

@@ -87,6 +87,7 @@ export default {
     updatedBy: (/*{ named }*/) => {
       return 'Đã sửa';
     },
+    check: 'Kiểm tra',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -131,6 +132,7 @@ export default {
     expireAt: 'Hết hạn',
     destination: 'Điểm đến',
     utilizationProgress: 'Tiến độ sử dụng',
+    settings: 'Cài đặt',
   },
   // date-related texts
   date: {
