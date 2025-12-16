@@ -2,7 +2,7 @@
   <p-message
     :severity="color"
     :variant="variant"
-    :size="primevuqeSizeMap[size]"
+    :size="primevueSizeMap[size]"
     v-bind="$attrs"
   >
     <slot />
@@ -25,7 +25,7 @@ withDefaults(defineProps<WtMessageProps>(), {
   size: ComponentSize.MD,
 });
 
-const primevuqeSizeMap = {
+const primevueSizeMap = {
   [ComponentSize.SM]: 'small',
   [ComponentSize.MD]: 'normal',
   [ComponentSize.LG]: 'large',

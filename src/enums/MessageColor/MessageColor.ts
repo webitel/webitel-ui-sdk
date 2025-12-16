@@ -1,7 +1,7 @@
 export const MessageColor = {
   SECONDARY: 'secondary',
   SUCCESS: 'success',
-  DANGER: 'danger',
+  ERROR: 'error',
   WARN: 'warn',
   INFO: 'info',
   CONTRAST: 'contrast',

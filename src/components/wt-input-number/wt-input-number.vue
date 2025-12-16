@@ -82,7 +82,6 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
-  invalid?: boolean;
   min?: number;
   max?: number;
   step?: number;
@@ -99,7 +98,6 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
   placeholder: '',
   disabled: false,
   required: false,
-  invalid: false,
   min: undefined,
   max: undefined,
   step: 1,
@@ -145,7 +143,7 @@ const requiredLabel = computed(() => {
 });
 
 const getMessageColor = computed(() => {
-  return invalid.value ? MessageColor.DANGER : MessageColor.SECONDARY;
+  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 defineExpose({

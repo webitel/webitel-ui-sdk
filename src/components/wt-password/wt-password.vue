@@ -60,7 +60,6 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
-  invalid?: boolean;
   toggleMask?: boolean;
   v?: Record<string, unknown>;
   regleValidation?: RegleFieldStatus<string>;
@@ -72,7 +71,6 @@ const props = withDefaults(defineProps<WtPasswordProps>(), {
   placeholder: '',
   disabled: false,
   required: false,
-  invalid: false,
   toggleMask: true,
   v: null,
   regleValidation: null,
@@ -123,7 +121,7 @@ const inputType = computed(() => {
 });
 
 const getMessageColor = computed(() => {
-  return invalid.value ? MessageColor.DANGER : MessageColor.SECONDARY;
+  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 const togglePassword = () => {

@@ -39,12 +39,13 @@
         <slot name="suffix" />
       </p-input-group-addon>
     </p-input-group>
-    <wt-input-info
+    <wt-message
       v-if="isValidation"
-      :invalid="invalid"
+      :color="getMessageColor"
+      :variant="MessageVariant.SIMPLE"
     >
       {{ validationText }}
-    </wt-input-info>
+    </wt-message>
   </div>
 </template>
 
@@ -53,6 +54,7 @@ import type { InputTextProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { MessageVariant, MessageColor } from '../../enums';
 import { useInputControl } from '../../composables';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
@@ -60,7 +62,6 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
-  invalid?: boolean;
   preventTrim?: boolean;
   v?: Record<string, unknown>;
   regleValidation?: RegleFieldStatus<string>;
@@ -72,7 +73,6 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
   placeholder: '',
   disabled: false,
   required: false,
-  invalid: false,
   preventTrim: false,
   v: null,
   regleValidation: null,
@@ -120,6 +120,10 @@ const inputHandler = (value) => {
     : value.trim();
   emit('update:modelValue', handledValue);
 }
+
+const getMessageColor = computed(() => {
+  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
+});
 
 defineExpose({
   focus,

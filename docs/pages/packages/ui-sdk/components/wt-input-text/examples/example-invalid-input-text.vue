@@ -1,7 +1,7 @@
 <template>
   <wt-input-text
     v-model="value"
-    :v="v$"
+    :v="v$.value"
     label="Invalid input"
     name="invalid-input"
   />
