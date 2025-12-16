@@ -12,7 +12,10 @@
           />
           <chat-messages-container
             :messages="props.messages"
+            :next="props.canLoadNextMessages"
+            :is-loading="props.isLoading"
             :without-avatars="props.withoutAvatars"
+            @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
             @[ChatAction.AttachFiles]="sendFile"
           />
         </slot>
@@ -67,6 +70,8 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
+    canLoadNextMessages?: boolean; // 'next'
+    isLoading?: boolean;
     withoutAvatars?: boolean;
 	}>(),
 	{
@@ -75,6 +80,8 @@ const props = withDefaults(
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
+    canLoadNextMessages: false,
+    isLoading: false,
 	},
 );
 
@@ -87,6 +94,10 @@ const emit = defineEmits<{
 	(
 		e: `action:${typeof ChatAction.AttachFiles}`,
 		files: File[],
+		options: ResultCallbacks,
+	): void;
+	(
+		e: typeof ChatAction.LoadNextMessages,
 		options: ResultCallbacks,
 	): void;
 }>();
