@@ -55,7 +55,7 @@ const { t } = useI18n();
 const initialComment = props.answer.comment; /* prevent editing-info change if comment is changing  */
 
 const updateTime = computed(() => {
-  return formatDate(props.answer.updatedAt, FormatDateMode.DATETIME);
+  return formatDate(parseInt(props.answer.updatedAt), FormatDateMode.DATETIME);
 });
 
 const isCommentClamped = props.collapsible && computed(() => {
