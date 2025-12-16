@@ -143,17 +143,8 @@
 import { defineEmits, defineProps, ref, toRefs, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import useUploadCsv from '../composables/useUploadCsv';
-import HandlingCSVMode from '../enums/HandlingCSVMode.enum.js';
-
-interface MappingField {
-  name?: string;
-  locale: string;
-  tooltip?: string;
-  required?: boolean;
-  multiple?: boolean;
-  csv?: string | string[];
-}
+import useUploadCsv from '../composable/useUploadCsv';
+import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
 
 interface CharsetOption {
   name: string;
@@ -162,7 +153,7 @@ interface CharsetOption {
 
 interface Props {
   file: File | null;
-  mappingFields: MappingField[];
+  mappingFields: unknown[];
   addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
   handlingMode?: string;
   fileUploadHandler?: () => unknown | Promise<unknown>;
@@ -175,7 +166,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'changeMappingFields', value: MappingField[]): void;
+  (e: 'changeMappingFields', value: unknown[]): void;
   (e: 'save'): void;
   (e: 'close'): void;
 }>();
@@ -208,6 +199,70 @@ const {
 });
 </script>
 
-<style lang="scss" scoped>
-@use '../css/upload-popup';
+<style lang="scss">
+@use '../../../../../src/css/main' as *;
+
+.upload-popup {
+  .object-input-grid {
+    grid-auto-rows: minmax(40px, auto); // override default
+  }
+
+  :deep(.wt-popup__popup) {
+    min-height: 40vh; // to place loader in the center, till file is parsed
+  }
+
+  .upload-popup__reading-file-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .upload-popup-form__form {
+    @extend .object-input-grid;
+    margin: var(--spacing-sm) 0;
+  }
+
+  .upload-popup__parsing-preview-loader {
+    margin: auto;
+  }
+
+  .upload-popup-form__file-preview .wt-table {
+    overflow: auto;
+    max-width: 60vw;
+  }
+
+  .upload-popup-mapping {
+    .upload-popup-mapping-item {
+      @extend .object-input-grid;
+      margin-bottom: var(--spacing-sm);
+
+      &__field {
+        @extend %typo-body-1;
+        align-self: center;
+
+        &.upload-popup-mapping-item__field--title {
+          @extend %typo-subtitle-1;
+        }
+      }
+
+      &__select :deep(.wt-label),
+      &__select :deep(.wt-input-info) {
+        display: none;
+      }
+    }
+  }
+
+  .upload-popup-form__error-stack-trace {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    color: var(--error-color);
+    border-radius: var(--border-radius);
+    background: var(--secondary-color);
+  }
+
+  .upload-tooltip {
+    @extend %typo-caption;
+  }
+}
 </style>

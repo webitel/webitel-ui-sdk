@@ -1,13 +1,11 @@
-// src/composables/useUploadCsv.js
-import debounce from '@webitel/ui-sdk/src/scripts/debounce';
-import isEmpty from '@webitel/ui-sdk/src/scripts/isEmpty';
-import { computed, ref, watch } from 'vue';
+import { computed, defineEmits, ref, watch } from 'vue';
 
-import HandlingCSVMode from '../enums/HandlingCSVMode.enum.js';
+import { debounce, isEmpty } from '../../../../scripts';
 import normalizeCSVData from '../scripts/normalizeCSVData';
 import parseCSV from '../scripts/parseCSV';
 import processFile from '../scripts/processFile';
 import splitAndSaveData from '../scripts/splitAndSaveData';
+import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
 
 /**
  * @param {Object} params
@@ -16,13 +14,15 @@ import splitAndSaveData from '../scripts/splitAndSaveData';
  * @param {import('vue').Ref<boolean>} params.skipHeaders
  * @param {import('vue').Ref<string>} params.separator
  */
-export default function useUploadCsv({ props, emit, skipHeaders, separator }) {
+const useUploadCsv = ({ props, emit, skipHeaders, separator }) => {
   const isReadingFile = ref(false);
   const isParsingCSV = ref(false);
   const parsedFile = ref(null);
   const isParsingPreview = ref(false);
   const parseErrorStackTrace = ref('');
   const csvPreview = ref([[]]);
+
+  console.log('emit', emit);
 
   const csvValues = computed(() =>
     (props.mappingFields || [])
@@ -197,3 +197,5 @@ export default function useUploadCsv({ props, emit, skipHeaders, separator }) {
     close,
   };
 }
+
+export default useUploadCsv;
