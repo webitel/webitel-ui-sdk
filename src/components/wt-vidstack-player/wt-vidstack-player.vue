@@ -154,7 +154,7 @@ const normalizedSrc = computed(() => {
     bottom: var(--spacing-md);
     max-width: var(--p-player-wrapper-sm-width);
     max-height: var(--p-player-wrapper-sm-height);
-    z-index: 100;
+    z-index: 10;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
     height: var(--p-player-wrapper-sm-height);
@@ -214,7 +214,7 @@ const normalizedSrc = computed(() => {
   &--lg {
     border-radius: var(--p-player-wrapper-lg-border-radius);
     overflow: hidden;
-    z-index: 100;
+    z-index: 10;
 
     .wt-vidstack-player {
       &__player {
