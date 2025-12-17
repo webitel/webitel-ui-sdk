@@ -56,6 +56,7 @@ export default {
     to: 'Đến',
     tts: 'Chuyển văn bản thành giọng nói',
     state: 'Trạng thái',
+    status: 'Trạng thái',
     refresh: 'Làm mới',
     retry: 'Thử lại',
     downloadAll: 'Tải xuống tất cả',
@@ -238,6 +239,16 @@ export default {
     },
     screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
     screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Xem trước',
+      status: {
+        pending: 'Đang chờ',
+        processing: 'Đang xử lý',
+        completed: 'Hoàn thành',
+        failed: 'Thất bại',
+      },
+    },
   },
   channel: {
     state: {

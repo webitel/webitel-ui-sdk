@@ -56,6 +56,7 @@ export default {
     to: 'Până la',
     tts: 'Text-to-Speech',
     state: 'Stare',
+    status: 'Status',
     refresh: 'Reîmprospătează',
     retry: 'Reîncearcă',
     downloadAll: 'Descarcă tot',
@@ -238,6 +239,16 @@ export default {
     },
     screenRecordings: 'Înregistrarea ecranului | Înregistrări ecran',
     screenshots: 'Captură de ecran | Capturi de ecran',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Previzualizare',
+      status: {
+        pending: 'În așteptare',
+        processing: 'Procesare',
+        completed: 'Finalizat',
+        failed: 'Eșuat',
+      },
+    },
   },
   channel: {
     state: {

@@ -77,8 +77,18 @@ const downloadPdfExport = async ({fileId, params}) => {
 	}
 };
 
+const deletePdfExportRecord = async (id: string) => {
+	try {
+		const response = await getPdfService().deletePdfExportRecord(id);
+		return applyTransform(response.data, [snakeToCamel()]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
 export const PdfServicesAPI = {
 	generatePdfExport,
 	getList: getPdfExportHistory,
-	download: downloadPdfExport,
+  delete: deletePdfExportRecord,
+  download: downloadPdfExport,
 };

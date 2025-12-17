@@ -59,6 +59,7 @@ export default deepmerge(
       to: 'To',
       tts: 'Text-to-Speech',
       state: 'State',
+      status: 'Status',
       refresh: 'Refresh',
       retry: 'Retry',
       downloadAll: 'Download all',
@@ -241,6 +242,16 @@ export default deepmerge(
       },
       screenRecordings: 'Screen recording | Screen recordings',
       screenshots: 'Screenshot | Screenshots',
+      agentPdfs: {
+        pdfs: 'PDF | PDFs',
+        preview: 'Preview',
+        status: {
+          pending: 'Pending',
+          processing: 'Processing',
+          completed: 'Completed',
+          failed: 'Failed',
+        },
+      },
     },
     channel: {
       state: {

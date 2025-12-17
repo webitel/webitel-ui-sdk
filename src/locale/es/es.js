@@ -55,6 +55,7 @@ export default {
     to: 'Hasta',
     tts: 'Texto a Voz',
     state: 'Estado',
+    status: 'Estado',
     refresh: 'Actualizar',
     retry: 'Reintentar',
     downloadAll: 'Descargar todo',
@@ -233,6 +234,16 @@ export default {
     },
     screenRecordings: 'Grabación de pantalla | Grabaciones de pantalla',
     screenshots: 'Captura de pantalla | Capturas de pantalla',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      preview: 'Vista previa',
+      status: {
+        pending: 'Pendiente',
+        processing: 'Procesando',
+        completed: 'Completado',
+        failed: 'Fallido',
+      },
+    },
   },
   channel: {
     state: {

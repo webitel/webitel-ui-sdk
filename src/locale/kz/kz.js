@@ -56,6 +56,7 @@ export default {
     to: 'Дейін',
     tts: 'Мәтін-дауыс',
     state: 'Күй',
+    status: 'Күй',
     refresh: 'Жаңарту',
     retry: 'Қайталау',
     downloadAll: 'Барлығын жүктеу',
@@ -238,6 +239,16 @@ export default {
     },
     screenRecordings: 'Экран жазбасы | Экран жазбалары',
     screenshots: 'Экран суреті | Экран суреттері',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Алдын ала қарау',
+      status: {
+        pending: 'Күтуде',
+        processing: 'Өңделуде',
+        completed: 'Аяқталды',
+        failed: 'Қате',
+      },
+    },
   },
   channel: {
     state: {

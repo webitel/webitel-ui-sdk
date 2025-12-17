@@ -56,6 +56,7 @@ export default {
     to: 'До',
     tts: 'Text-to-Speech',
     state: 'Состояние',
+    status: 'Статус',
     refresh: 'Обновить',
     retry: 'Повторить',
     downloadAll: 'Скачать всё',
@@ -238,6 +239,16 @@ export default {
     },
     screenRecordings: 'Запись экрана | Записи экрана',
     screenshots: 'Снимок экрана | Снимки экрана',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Предпросмотр',
+      status: {
+        pending: 'Ожидание',
+        processing: 'Обработка',
+        completed: 'Завершено',
+        failed: 'Ошибка',
+      },
+    },
   },
   channel: {
     state: {

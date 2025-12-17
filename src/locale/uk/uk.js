@@ -56,6 +56,7 @@ export default {
     to: 'До',
     tts: 'Text-to-Speech',
     state: 'Стан',
+    status: 'Статус',
     refresh: 'Оновити',
     retry: 'Повторити',
     downloadAll: 'Завантажити все',
@@ -237,6 +238,16 @@ export default {
     },
     screenRecordings: 'Запис екрану | Записи екрану',
     screenshots: 'Знімок екрана | Знімки екрана',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Попередній перегляд',
+      status: {
+        pending: 'Очікування',
+        processing: 'Обробка',
+        completed: 'Завершено',
+        failed: 'Помилка',
+      },
+    },
   },
   channel: {
     state: {

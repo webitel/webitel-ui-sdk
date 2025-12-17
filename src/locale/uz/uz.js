@@ -56,6 +56,7 @@ export default {
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',
     state: 'Holat',
+    status: 'Holat',
     refresh: 'Yangilash',
     retry: 'Qayta urinish',
     downloadAll: 'Hammasini yuklab olish',
@@ -238,6 +239,16 @@ export default {
     },
     screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
     screenshots: 'Ekran rasmi | Ekran rasmlari',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Ko\'rib chiqish',
+      status: {
+        pending: 'Kutilmoqda',
+        processing: 'Ishlanmoqda',
+        completed: 'Tugallandi',
+        failed: 'Xatolik',
+      },
+    },
   },
   channel: {
     state: {
