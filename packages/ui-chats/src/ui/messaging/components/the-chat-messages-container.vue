@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import { inject, useTemplateRef} from "vue";
+import { inject, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
@@ -49,10 +49,10 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 const props = withDefaults(
 	defineProps<{
 		messages: ChatMessageType[];
-    withoutAvatars?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
-    withoutAvatars: false,
+		withoutAvatars: false,
 	},
 );
 
@@ -67,7 +67,6 @@ const {
 	handleChatScroll,
 	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
-
 
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);

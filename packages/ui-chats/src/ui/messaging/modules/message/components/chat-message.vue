@@ -70,12 +70,12 @@ const props = withDefaults(
 	defineProps<{
 		message: ChatMessageType;
 		showAvatar?: boolean;
-    withoutAvatars?: boolean;
+		withoutAvatars?: boolean;
 		username?: string;
 	}>(),
 	{
 		showAvatar: false,
-    withoutAvatars: false,
+		withoutAvatars: false,
 		username: "",
 	},
 );
