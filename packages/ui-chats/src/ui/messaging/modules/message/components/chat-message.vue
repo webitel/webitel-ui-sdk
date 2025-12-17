@@ -9,7 +9,10 @@
     <slot name="before-message" />
 
     <div class="chat-message__content">
-      <div class="chat-message__avatar-wrapper">
+      <div
+        v-if="withoutAvatars"
+        class="chat-message__avatar-wrapper"
+      >
         <message-avatar
           v-if="props.showAvatar"
           :bot="isBot"
@@ -67,10 +70,12 @@ const props = withDefaults(
 	defineProps<{
 		message: ChatMessageType;
 		showAvatar?: boolean;
+    withoutAvatars?: boolean;
 		username?: string;
 	}>(),
 	{
 		showAvatar: false,
+    withoutAvatars: false,
 		username: "",
 	},
 );
