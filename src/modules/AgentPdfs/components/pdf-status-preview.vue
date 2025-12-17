@@ -4,10 +4,6 @@
     :alt="status"
     width="48"
     :overlay-icon="overlayIcon"
-    :class="[
-      'pdf-status-preview__icon',
-      { 'pdf-status-preview__icon--clickable': clickable }
-    ]"
     @click="handleClick"
   />
 </template>
