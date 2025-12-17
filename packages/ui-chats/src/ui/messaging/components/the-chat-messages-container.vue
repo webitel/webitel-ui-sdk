@@ -88,7 +88,6 @@ const {
 	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
 
-
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }

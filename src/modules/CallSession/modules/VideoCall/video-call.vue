@@ -30,25 +30,25 @@
           @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
         />
 
-        <template v-if="props['receiver:stream'] && !props['receiver:video:enabled']">
+        <template v-if="props['sender:stream'] && !props['sender:video:enabled']">
           <div
-            :class="`video-call-receiver--${innerSize}`"
-            class="video-call-receiver video-call-receiver--muted"
+            :class="`video-call-sender--${innerSize}`"
+            class="video-call-sender video-call-sender--muted"
           >
             <wt-icon :size="senderVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
           </div>
         </template>
 
-        <template v-else-if="props['receiver:stream']">
+        <template v-else-if="props['sender:stream']">
           <wt-vidstack-player
-            :stream="props['receiver:stream']"
-            :class="`video-call-receiver--${innerSize}`"
+            :stream="props['sender:stream']"
+            :class="`video-call-sender--${innerSize}`"
             hide-header
             hide-controls-panel
             static
             autoplay
             muted
-            class="video-call-receiver"
+            class="video-call-sender"
           />
         </template>
       </div>
@@ -151,9 +151,9 @@ const emit = defineEmits<{
 }>()
 
 const mainStream = computed(() => {
-  if (!props['sender:video:enabled']) return null;
+  if (!props['receiver:video:enabled']) return null;
 
-  return props['sender:stream'] || props['receiver:stream'];
+  return props['receiver:stream'] || props['sender:stream'];
 })
 
 const senderVideoMutedIconSizes = {
@@ -259,7 +259,7 @@ const senderVideoMutedIconSizes = {
     }
   }
 
-  &-receiver {
+  &-sender {
     flex: 0 0 auto;
 
     &--muted {
@@ -277,11 +277,11 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-sm-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-sm-border-radius);
       }
 
-      &.video-call-sender--muted {
+      &.video-call-receiver--muted {
         padding-bottom: var(--p-player-control-bar-sm-height);
       }
 
@@ -297,7 +297,7 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-md-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-md-border-radius);
       }
 
@@ -313,7 +313,7 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-lg-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-lg-border-radius);
       }
 

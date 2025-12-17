@@ -58,9 +58,9 @@ import {
 	ChatAction,
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/enums/ChatAction.enum";
-import Dropzone from './messaging/components/dropzone.vue';
+import Dropzone from "./messaging/components/dropzone.vue";
 import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
-import {useDropzoneHandlers} from "./messaging/composables/useDropzoneHandlers";
+import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -76,7 +76,7 @@ const props = withDefaults(
 	}>(),
 	{
 		size: ComponentSize.MD,
-    withoutAvatars: false,
+		withoutAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -114,10 +114,7 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
-const {
-  isDropzoneVisible,
-  handleDragLeave
-} = useDropzoneHandlers();
+const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
 const draft = ref<string>("");
 
@@ -126,10 +123,9 @@ const slottedChatActions = computed(() => {
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
-const isDropzoneDisabled = computed(() =>
-  !props.chatActions.includes(ChatAction.AttachFiles)
-)
-
+const isDropzoneDisabled = computed(
+	() => !props.chatActions.includes(ChatAction.AttachFiles),
+);
 
 function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
