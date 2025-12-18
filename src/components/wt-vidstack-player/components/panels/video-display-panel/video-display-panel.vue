@@ -21,6 +21,7 @@
         @toggle="handleFullscreen"
       />
       <toggle-button
+        v-if="!props.hideExpand"
         primary-icon="expand"
         secondary-icon="collapse"
         color="on-dark"
@@ -52,6 +53,7 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
+  hideExpand?: boolean
 }>();
 
 const emit = defineEmits<{

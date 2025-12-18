@@ -2,13 +2,14 @@ import type { ChatMessageType } from "../../../types/ChatMessage.types";
 type __VLS_Props = {
     message: ChatMessageType;
     showAvatar?: boolean;
+    withoutAvatars?: boolean;
     username?: string;
 };
-declare var __VLS_1: {}, __VLS_51: {};
+declare var __VLS_1: {}, __VLS_44: {};
 type __VLS_Slots = {} & {
     'before-message'?: (props: typeof __VLS_1) => any;
 } & {
-    'after-message'?: (props: typeof __VLS_51) => any;
+    'after-message'?: (props: typeof __VLS_44) => any;
 };
 declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     "open-image": () => any;
@@ -17,8 +18,9 @@ declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {},
     "onOpen-image"?: () => any;
     "onInitialized-player"?: (args_0: object) => any;
 }>, {
-    showAvatar: boolean;
     username: string;
+    showAvatar: boolean;
+    withoutAvatars: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>;
 declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
 declare const _default: typeof __VLS_export;

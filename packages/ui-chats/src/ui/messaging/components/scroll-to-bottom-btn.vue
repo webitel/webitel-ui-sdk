@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { defineEmits } from "vue";
 
-const _props = withDefaults(
+const props = withDefaults(
 	defineProps<{
 		newMessageCount?: number;
 	}>(),
@@ -28,12 +28,13 @@ const _props = withDefaults(
 	},
 );
 
-const _emit = defineEmits<{
+const emit = defineEmits<{
 	scroll: [];
 }>();
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
 
 .scroll-to-bottom-btn {
   position: absolute;

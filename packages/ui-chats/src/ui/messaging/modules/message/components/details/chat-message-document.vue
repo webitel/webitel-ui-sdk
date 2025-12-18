@@ -33,12 +33,12 @@ const props = withDefaults(
 		selfSide: false,
 	},
 );
-const _documentSize = computed(() => {
+const documentSize = computed(() => {
 	if (!props.file) return "";
 	return prettifyFileSize(props.file.size);
 });
 
-function _downloadDocument() {
+function downloadDocument() {
 	if (!props.file) return;
 	const a = document.createElement("a");
 	a.href = props.file.url;
@@ -49,6 +49,8 @@ function _downloadDocument() {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .chat-message-document {
   display: flex;
   align-items: flex-start;

@@ -17,7 +17,11 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 </script>
 
+<script setup lang="ts">
+</script>
 <style scoped lang="scss">
+@use '@webitel/styleguide/typography' as *;
+
 .chat-message-blocked-error {
   @extend %typo-body-1;
   background: var(--p-error-highlight-color);
@@ -34,5 +38,3 @@ const { t } = useI18n();
   max-width: 132px;
 }
 </style>
-<script setup lang="ts">
-</script>

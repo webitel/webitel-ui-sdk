@@ -4,14 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelMediaExporterPdfChannel } from './webitelMediaExporterPdfChannel';
 
-/**
- * Request for generating a PDF export.
- */
-export interface WebitelMediaExporterPdfServiceGeneratePdfExportBody {
-  /** Channel type (e.g., "screenshot"). */
-  channel?: WebitelMediaExporterPdfChannel;
+export interface WebitelMediaExporterPdfServiceGenerateCallPdfExportBody {
   /** Optional list of specific file IDs to include. */
   fileIds?: string[];
   /** Start timestamp (Unix millis). */

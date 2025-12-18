@@ -9,7 +9,10 @@
     <slot name="before-message" />
 
     <div class="chat-message__content">
-      <div class="chat-message__avatar-wrapper">
+      <div
+        v-if="withoutAvatars"
+        class="chat-message__avatar-wrapper"
+      >
         <message-avatar
           v-if="props.showAvatar"
           :bot="isBot"
@@ -50,20 +53,29 @@
 </template>
 
   <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, defineEmits, defineProps, inject } from "vue";
 
 import type { ChatMessageType } from "../../../types/ChatMessage.types";
 import { useChatMessageFile } from "../composables/useChatMessageFile";
+import MessageAvatar from "./details/chat-message-avatar.vue";
+import MessageBlockedError from "./details/chat-message-blocked-error.vue";
+import MessageDocument from "./details/chat-message-document.vue";
+import MessageImage from "./details/chat-message-image.vue";
+import MessagePlayer from "./details/chat-message-player.vue";
+import MessageText from "./details/chat-message-text.vue";
+import MessageTime from "./details/chat-message-time.vue";
 
 const props = withDefaults(
 	defineProps<{
 		message: ChatMessageType;
 		showAvatar?: boolean;
+		withoutAvatars?: boolean;
 		username?: string;
 	}>(),
 	{
 		showAvatar: false,
+		withoutAvatars: false,
 		username: "",
 	},
 );
@@ -75,27 +87,27 @@ const emit = defineEmits<{
 	];
 }>();
 
-const _size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>("size");
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
-const isSelfMessage = computed(
+const isSelfMessage = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === "webitel",
 );
 
-const isBot = computed(
+const isBot = computed<boolean>(
 	() =>
 		props.message.member?.type === "bot" ||
 		(!props.message.member?.type && !props.message.channelId),
 );
 
-const isSelfSide = computed(() => isSelfMessage.value || isBot.value);
+const isSelfSide = computed<boolean>(() => isSelfMessage.value || isBot.value);
 
-const _getClientUsername = computed(() => {
+const getClientUsername = computed<string>(() => {
 	return !isSelfSide.value ? props.username : ""; // need to show username avatar only for client
 });
 
-function _handlePlayerInitialize(player) {
+function handlePlayerInitialize(player) {
 	emit("initialized-player", {
 		player,
 	});

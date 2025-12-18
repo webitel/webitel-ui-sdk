@@ -4,6 +4,7 @@
     :class="[
       `wt-vidstack-player--${size}`,
       fullscreen && `wt-vidstack-player--fullscreen`,
+      stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
       props.hideBackground && 'wt-vidstack-player--hide-background'
     ]"
@@ -30,6 +31,7 @@
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
+        :hide-expand="props.hideExpand"
         @close-player="emit('close')"
       >
         <template  #controls-panel>
@@ -69,6 +71,8 @@ interface Props {
   hideHeader?: boolean
   hideControlsPanel?: boolean
   hideBackground?: boolean
+  hideExpand?: boolean
+  stretch?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -121,7 +125,7 @@ const normalizedSrc = computed(() => {
   }
 
   return {
-    src: props.src?.src || '',
+    src: props.src?.src || null,
     type: props.src?.type || normalizedType.value
   };
 });
@@ -150,7 +154,7 @@ const normalizedSrc = computed(() => {
     bottom: var(--spacing-md);
     max-width: var(--p-player-wrapper-sm-width);
     max-height: var(--p-player-wrapper-sm-height);
-    z-index: 100;
+    z-index: 10;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
     height: var(--p-player-wrapper-sm-height);
@@ -210,7 +214,7 @@ const normalizedSrc = computed(() => {
   &--lg {
     border-radius: var(--p-player-wrapper-lg-border-radius);
     overflow: hidden;
-    z-index: 100;
+    z-index: 10;
 
     .wt-vidstack-player {
       &__player {
@@ -247,6 +251,13 @@ const normalizedSrc = computed(() => {
     }
   }
 
+  &--stretch {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
   &--hide-background {
     &.wt-vidstack-player {
       &--md {
@@ -261,7 +272,7 @@ const normalizedSrc = computed(() => {
 .wt-vidstack-player {
   video {
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     min-width: 0;
   }

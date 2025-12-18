@@ -1,24 +1,28 @@
 <template>
-    <section class="the-chat-messages-container" @click="focusOnInput">
+    <section
+      class="the-chat-messages-container"
+      @click="focusOnInput"
+    >
       <div
         ref="messages-container"
         class="the-chat-messages-container__wrapper"
         @scroll="handleChatScroll"
         @resize="handleChatResize"
       >
-        <chat-message-component
+        <chat-message
           v-for="(message, index) of props.messages"
           :key="message.id"
           :message="message"
-          :show-avatar="!props.hideAvatars && showAvatar(index)"
+          :show-avatar="showAvatar(index)"
+          :without-avatars="props.withoutAvatars"
         >
           <template #before-message>
-            <chat-date
+            <chat-date-divider
               v-if="showChatDate(index)"
               :date="message.createdAt"
             />
           </template>
-        </chat-message-component>
+        </chat-message>
       </div>
       <scroll-to-bottom-btn
         v-if="showScrollToBottomBtn"
@@ -33,19 +37,22 @@ import type { Emitter } from "mitt";
 import { inject, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
-import { useChatScroll } from "../composebles/useChatScroll";
+import { useChatScroll } from "../composables/useChatScroll";
+import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
+import ChatDateDivider from "./chat-date-divider.vue";
+import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 const props = withDefaults(
 	defineProps<{
 		messages: ChatMessageType[];
-		hideAvatars?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
-		hideAvatars: false,
+		withoutAvatars: false,
 	},
 );
 
@@ -61,12 +68,14 @@ const {
 	handleChatResize,
 } = useChatScroll(messagesContainer, props.messages);
 
-function _focusOnInput() {
+function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }
 </script>
 
 <style scoped lang="scss">
+@use '@webitel/styleguide/scroll' as *;
+
 .the-chat-messages-container {
   position: relative;
   display: flex;

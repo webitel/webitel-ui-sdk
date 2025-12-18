@@ -6,12 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { WtChatEmoji } from "@webitel/ui-sdk/components";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import type { Emitter } from "mitt";
 import { inject } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../../../../utils/emitter";
 
-const _size = inject<ComponentSize>("size");
-const _uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
+const size = inject<ComponentSize>("size");
+const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 </script>

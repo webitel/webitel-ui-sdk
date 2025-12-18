@@ -1,13 +1,20 @@
 <template>
-  <section class="chat-container">
+  <section class="the-chat-container">
     <!-- <slot name="header">
             header goes here
         </slot> -->
         <slot name="main">
-            <chat-messages-container
-              :messages="props.messages"
-              :hide-avatars="props.hideAvatars"
-            />
+          <dropzone
+            v-if="!isDropzoneDisabled && isDropzoneVisible"
+            @dragenter.prevent
+            @dragleave.prevent="handleDragLeave"
+            @drop="sendFile"
+          />
+          <chat-messages-container
+            :messages="props.messages"
+            :without-avatars="props.withoutAvatars"
+            @[ChatAction.AttachFiles]="sendFile"
+          />
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
@@ -16,7 +23,7 @@
                   v-model:text="draft"
               />
               <chat-input-actions-bar
-                :actions="chatActions"
+                :actions="props.chatActions"
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
@@ -41,10 +48,16 @@
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, provide, ref } from "vue";
 
+import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
+import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
+import ChatTextField from "./chat-footer/modules/user-input/components/chat-text-field.vue";
 import {
 	ChatAction,
 	type SharedActionSlots,
-} from "./chat-footer/modules/user-input/types/ChatAction.types";
+} from "./chat-footer/modules/user-input/enums/ChatAction.enum";
+import Dropzone from "./messaging/components/dropzone.vue";
+import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
+import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -54,11 +67,11 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
-		hideAvatars?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
-		hideAvatars: false,
+		withoutAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
@@ -90,27 +103,32 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
+const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
+
 const draft = ref<string>("");
 
-const _slottedChatActions = computed(() => {
+const slottedChatActions = computed(() => {
 	return Object.keys(slots)
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
+const isDropzoneDisabled = computed(
+	() => !props.chatActions.includes(ChatAction.AttachFiles),
+);
 
-function _sendMessage() {
+function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
 		onSuccess: () => (draft.value = ""),
 	});
 }
 
-function _sendFile(files: File[]) {
+function sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
 </script>
 
 <style scoped>
-.chat-container {
+.the-chat-container {
   display: flex;
   flex-direction: column;
   height: 100%;

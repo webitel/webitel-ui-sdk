@@ -17,28 +17,28 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { computed, inject } from "vue";
 
-import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
+import { ChatAction, type SharedActionSlots } from "../enums/ChatAction.enum";
 import AttachFilesAction from "./actions/attach-files-action.vue";
 import EmojiPickerAction from "./actions/emoji-picker-action.vue";
 import SendMessageAction from "./actions/send-message-action.vue";
 
-const _size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>("size");
 
 const props = defineProps<{
 	actions: ChatAction[];
 }>();
 
-const _emit = defineEmits<{
+const emit = defineEmits<{
 	(e: typeof ChatAction.SendMessage): void;
 	(e: typeof ChatAction.AttachFiles, files: File[]): void;
 }>();
 
-const _slots = defineSlots<SharedActionSlots>();
+const slots = defineSlots<SharedActionSlots>();
 
-const _ShownActionComponentsList = computed(() => {
+const ShownActionComponentsList = computed(() => {
 	/**
 	 * note! actions order is declared here and cannot be changed from outside
 	 */
@@ -63,12 +63,12 @@ const _ShownActionComponentsList = computed(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chat-input-actions-bar {
   display: flex;
   gap: var(--spacing-2xs);
 
-  > * {
+  & > * {
     flex: 1;
   }
 }

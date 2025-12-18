@@ -17,18 +17,20 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from "@webitel/ui-sdk/enums";
+import { WtRoundedAction } from "@webitel/ui-sdk/components";
+import { ComponentSize } from "@webitel/ui-sdk/enums";
 import { inject, useTemplateRef } from "vue";
-import { ChatAction } from "../../types/ChatAction.types";
 
-const _size = inject<ComponentSize>("size");
+import { ChatAction } from "../../enums/ChatAction.enum";
+
+const size = inject<ComponentSize>("size");
 
 const emit =
 	defineEmits<(e: typeof ChatAction.AttachFiles, files: File[]) => void>();
 
-const _attachFilesInputRef = useTemplateRef("attachFilesInput");
+const attachFilesInputRef = useTemplateRef("attachFilesInput");
 
-const _handleAttachmentInputChange = (event: Event) => {
+const handleAttachmentInputChange = (event: Event) => {
 	const files = (event.target as HTMLInputElement).files;
 	if (!files) return;
 	emit(ChatAction.AttachFiles, Array.from(files) as File[]);

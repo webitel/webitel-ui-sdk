@@ -16,7 +16,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const _formattedDate = computed<Date>(() => {
+const formattedDate = computed<Date>(() => {
 	const chatDate = formatDate(+props.date, FormatDateMode.DATE);
 	const today = formatDate(Date.now(), FormatDateMode.DATE);
 
@@ -25,6 +25,8 @@ const _formattedDate = computed<Date>(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
   .chat-date-divider {
     @extend %typo-subtitle-1;
     width: 100%;
