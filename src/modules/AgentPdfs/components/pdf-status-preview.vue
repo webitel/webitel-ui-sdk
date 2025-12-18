@@ -10,14 +10,14 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { WebitelMediaExporterPdfExportStatus } from '@webitel/api-services/gen/models';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import pendingImage from '../assets/pdf-pending.png';
 import processingImage from '../assets/pdf-processing.png';
 import doneImage from '../assets/pdf-done.png';
 import errorImage from '../assets/pdf-error.png';
 
-export type PdfExportStatusType = typeof WebitelMediaExporterPdfExportStatus[keyof typeof WebitelMediaExporterPdfExportStatus];
+export type PdfExportStatusType = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
 
 const props = defineProps<{
   status: PdfExportStatusType | string;
@@ -29,10 +29,10 @@ const emit = defineEmits<{
 }>();
 
 const statusImageMap: Record<string, string> = {
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusPending]: pendingImage,
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusProcessing]: processingImage,
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusDone]: doneImage,
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusFailed]: errorImage,
+  [WebitelMediaExporterExportStatus.Pending]: pendingImage,
+  [WebitelMediaExporterExportStatus.Processing]: processingImage,
+  [WebitelMediaExporterExportStatus.Done]: doneImage,
+  [WebitelMediaExporterExportStatus.Failed]: errorImage,
 };
 
 const statusImage = computed(() =>
@@ -40,7 +40,7 @@ const statusImage = computed(() =>
 );
 
 const overlayIcon = computed(() => {
-  return props.status === WebitelMediaExporterPdfExportStatus.PdfExportStatusDone && 'zoom-in';
+  return props.status === WebitelMediaExporterExportStatus.Done && 'zoom-in';
 });
 
 const handleClick = () => {

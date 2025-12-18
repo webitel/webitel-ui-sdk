@@ -7,9 +7,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WebitelMediaExporterPdfExportStatus } from '@webitel/api-services/gen/models';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
-export type PdfExportStatusType = typeof WebitelMediaExporterPdfExportStatus[keyof typeof WebitelMediaExporterPdfExportStatus];
+export type PdfExportStatusType = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
 
 interface Props {
   status: PdfExportStatusType;
@@ -19,19 +19,19 @@ const props = defineProps<Props>();
 const { t } = useI18n();
 
 const STATUS_MAP = {
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusPending]: {
+  [WebitelMediaExporterExportStatus.Pending]: {
     text: 'objects.agentPdfs.status.pending',
     color: 'main',
   },
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusProcessing]: {
+  [WebitelMediaExporterExportStatus.Processing]: {
     text: 'objects.agentPdfs.status.processing',
     color: 'warning',
   },
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusDone]: {
+  [WebitelMediaExporterExportStatus.Done]: {
     text: 'objects.agentPdfs.status.completed',
     color: 'success',
   },
-  [WebitelMediaExporterPdfExportStatus.PdfExportStatusFailed]: {
+  [WebitelMediaExporterExportStatus.Failed]: {
     text: 'objects.agentPdfs.status.failed',
     color: 'error',
   },

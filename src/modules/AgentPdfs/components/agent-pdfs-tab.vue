@@ -54,7 +54,7 @@
         <template #preview="{ item }">
           <pdf-status-preview
             :status="item.status"
-            :clickable="item.status === WebitelMediaExporterPdfExportStatus.PdfExportStatusDone"
+            :clickable="item.status === WebitelMediaExporterExportStatus.Done"
             @click="openPdfInNewWindow(item.fileId)"
           />
         </template>
@@ -82,7 +82,7 @@
         <template #actions="{ item }">
           <wt-icon-action
             action="download"
-            :disabled="item.status !== WebitelMediaExporterPdfExportStatus.PdfExportStatusDone"
+            :disabled="item.status !== WebitelMediaExporterExportStatus.Done"
             @click="downloadPdf(item.fileId)"
           />
           <wt-icon-action
@@ -123,7 +123,7 @@ import { storeToRefs } from 'pinia';
 import { computed, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getStartOfDay, getEndOfDay } from '@webitel/ui-sdk/scripts';
-import { WebitelMediaExporterPdfExportStatus } from '@webitel/api-services/gen/models';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import { downloadFile } from '@webitel/api-services/api';
 
 import { useRoute } from 'vue-router';
@@ -226,7 +226,7 @@ const {
 const handleDelete = async (items: []) => {
   const deleteEl = (el) => {
     // If status is failed, use deletePdfExportRecord with the export id
-    if (el.status === WebitelMediaExporterPdfExportStatus.PdfExportStatusFailed) {
+    if (el.status === WebitelMediaExporterExportStatus.Failed) {
       return PdfServicesAPI.delete(el.id);
     }
     // Otherwise, use the existing delete method with fileId
