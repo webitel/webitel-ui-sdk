@@ -58,7 +58,7 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 const props = withDefaults(
 	defineProps<{
 		messages: ChatMessageType[];
-    next?: boolean; // 'next'
+    next?: boolean;
     isLoading?: boolean;
     withoutAvatars?: boolean;
 	}>(),
@@ -72,7 +72,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   (
     e: typeof ChatAction.LoadNextMessages,
-    options: ResultCallbacks,
   ): void;
 }>();
 
@@ -116,9 +115,11 @@ function focusOnInput() {
   gap: var(--spacing-xs);
 }
 
+// @author ye.pohranichna
 // reserve height for the loader to avoid unnecessary chat height changes https://webitel.atlassian.net/browse/WTEL-5366
 .chat-history__observer-wrapper {
   min-height: calc(var(--spacing-lg)*2 + var(--icon-md-size)); // observer loader height
+  // @author ye.pohranichna
   // to place observer at the bottom of observer wrapper (closer to messages)
   display: flex;
   align-items: flex-end;

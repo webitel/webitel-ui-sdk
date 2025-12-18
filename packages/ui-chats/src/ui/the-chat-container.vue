@@ -98,7 +98,6 @@ const emit = defineEmits<{
 	): void;
 	(
 		e: typeof ChatAction.LoadNextMessages,
-		options: ResultCallbacks,
 	): void;
 }>();
 
