@@ -517,6 +517,7 @@ export const searchHistoryCallResponse = zod.object({
   "id": zod.string().optional(),
   "joinedAt": zod.string().optional(),
   "leavingAt": zod.string().optional(),
+  "meetingId": zod.string().optional(),
   "member": zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()
@@ -772,6 +773,7 @@ export const searchHistoryCallPostResponse = zod.object({
   "id": zod.string().optional(),
   "joinedAt": zod.string().optional(),
   "leavingAt": zod.string().optional(),
+  "meetingId": zod.string().optional(),
   "member": zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()
@@ -1125,6 +1127,7 @@ export const patchHistoryCallResponse = zod.object({
   "id": zod.string().optional(),
   "joinedAt": zod.string().optional(),
   "leavingAt": zod.string().optional(),
+  "meetingId": zod.string().optional(),
   "member": zod.object({
   "id": zod.string().optional(),
   "name": zod.string().optional()

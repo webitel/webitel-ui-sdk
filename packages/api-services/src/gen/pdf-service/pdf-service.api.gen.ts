@@ -14,11 +14,13 @@ import type {
 import type {
   DownloadPdfExport200,
   DownloadPdfExportParams,
-  GetPdfExportHistoryParams,
+  GetCallPdfHistoryParams,
+  GetScreenrecordingPdfExportHistoryParams,
   WebitelMediaExporterDeletePdfExportRecordResponse,
   WebitelMediaExporterPdfExportMetadata,
   WebitelMediaExporterPdfHistoryResponse,
-  WebitelMediaExporterPdfServiceGeneratePdfExportBody
+  WebitelMediaExporterPdfServiceGenerateCallPdfExportBody,
+  WebitelMediaExporterPdfServiceGenerateScreenrecordingPdfExportBody
 } from '.././_models';
 
 
@@ -33,7 +35,32 @@ import type {
            = () => {
 
             // --- header end
-          const deletePdfExportRecord = <TData = AxiosResponse<WebitelMediaExporterDeletePdfExportRecordResponse>>(
+          /**
+ * @summary Generate a new PDF export asynchronously by Call ID.
+ */
+const generateCallPdfExport = <TData = AxiosResponse<WebitelMediaExporterPdfExportMetadata>>(
+    callId: string,
+    webitelMediaExporterPdfServiceGenerateCallPdfExportBody: WebitelMediaExporterPdfServiceGenerateCallPdfExportBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/export/pdf/call/${callId}`,
+      webitelMediaExporterPdfServiceGenerateCallPdfExportBody,options
+    );
+  }
+/**
+ * @summary Get history of PDF exports for a specific Call.
+ */
+const getCallPdfHistory = <TData = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>>(
+    callId: string,
+    params?: GetCallPdfHistoryParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/export/pdf/call/${callId}/history`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deletePdfExportRecord = <TData = AxiosResponse<WebitelMediaExporterDeletePdfExportRecordResponse>>(
     id: string, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.delete(
@@ -44,21 +71,21 @@ import type {
  * @summary Generate a new PDF export asynchronously.
 Returns metadata about the created export task.
  */
-const generatePdfExport = <TData = AxiosResponse<WebitelMediaExporterPdfExportMetadata>>(
+const generateScreenrecordingPdfExport = <TData = AxiosResponse<WebitelMediaExporterPdfExportMetadata>>(
     agentId: string,
-    webitelMediaExporterPdfServiceGeneratePdfExportBody: WebitelMediaExporterPdfServiceGeneratePdfExportBody, options?: AxiosRequestConfig
+    webitelMediaExporterPdfServiceGenerateScreenrecordingPdfExportBody: WebitelMediaExporterPdfServiceGenerateScreenrecordingPdfExportBody, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
       `/export/pdf/${agentId}`,
-      webitelMediaExporterPdfServiceGeneratePdfExportBody,options
+      webitelMediaExporterPdfServiceGenerateScreenrecordingPdfExportBody,options
     );
   }
 /**
  * @summary Get paginated history of PDF exports for a given agent.
  */
-const getPdfExportHistory = <TData = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>>(
+const getScreenrecordingPdfExportHistory = <TData = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>>(
     agentId: string,
-    params?: GetPdfExportHistoryParams, options?: AxiosRequestConfig
+    params?: GetScreenrecordingPdfExportHistoryParams, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.get(
       `/export/pdf/${agentId}/history`,{
@@ -81,10 +108,12 @@ const downloadPdfExport = <TData = AxiosResponse<DownloadPdfExport200>>(
   }
 
             // --- footer start
-            return {deletePdfExportRecord,generatePdfExport,getPdfExportHistory,downloadPdfExport}};
+            return {generateCallPdfExport,getCallPdfHistory,deletePdfExportRecord,generateScreenrecordingPdfExport,getScreenrecordingPdfExportHistory,downloadPdfExport}};
+export type GenerateCallPdfExportResult = AxiosResponse<WebitelMediaExporterPdfExportMetadata>
+export type GetCallPdfHistoryResult = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>
 export type DeletePdfExportRecordResult = AxiosResponse<WebitelMediaExporterDeletePdfExportRecordResponse>
-export type GeneratePdfExportResult = AxiosResponse<WebitelMediaExporterPdfExportMetadata>
-export type GetPdfExportHistoryResult = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>
+export type GenerateScreenrecordingPdfExportResult = AxiosResponse<WebitelMediaExporterPdfExportMetadata>
+export type GetScreenrecordingPdfExportHistoryResult = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>
 export type DownloadPdfExportResult = AxiosResponse<DownloadPdfExport200>
 
             // --- footer end

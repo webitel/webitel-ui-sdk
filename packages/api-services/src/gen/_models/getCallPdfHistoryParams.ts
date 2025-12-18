@@ -5,13 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type GetPdfExportHistoryParams = {
-/**
- * Page number (starting from 1).
- */
+export type GetCallPdfHistoryParams = {
 page?: number;
-/**
- * Page size (number of records per page).
- */
 size?: number;
 };
