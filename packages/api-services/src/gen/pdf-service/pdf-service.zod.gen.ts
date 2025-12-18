@@ -8,140 +8,121 @@ import * as zod from 'zod/v4';
 
 
 /**
- * @summary Generate a new PDF export asynchronously by Call ID.
+ * @summary Lists the history of PDF exports for a specific agent.
  */
-export const generateCallPdfExportParams = zod.object({
+export const listScreenrecordingExportsParams = zod.object({
+  "agent_id": zod.string()
+})
+
+export const listScreenrecordingExportsQueryParams = zod.object({
+  "page": zod.number().optional().describe('Page number (1-based).'),
+  "size": zod.number().optional().describe('Number of items per page.')
+})
+
+export const listScreenrecordingExportsResponseItemsItemStatusDefault = "EXPORT_STATUS_UNSPECIFIED";
+
+export const listScreenrecordingExportsResponse = zod.object({
+  "items": zod.array(zod.object({
+  "createdAt": zod.string().optional().describe('Creation timestamp (Unix millis).'),
+  "createdBy": zod.string().optional().describe('User ID who initiated the export.'),
+  "fileId": zod.string().optional().describe('Reference to the file in the storage system.'),
+  "id": zod.string().optional().describe('Internal database record ID.'),
+  "mimeType": zod.string().optional().describe('MIME type of the generated file.'),
+  "name": zod.string().optional().describe('Display name of the export.'),
+  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(listScreenrecordingExportsResponseItemsItemStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
+  "updatedAt": zod.string().optional().describe('Last update timestamp (Unix millis).'),
+  "updatedBy": zod.string().optional().describe('User ID who last modified the record.')
+}).describe('Represents a persisted record of a PDF export.')).optional().describe('List of export records.'),
+  "next": zod.boolean().optional().describe('Indicates if there are more records available.'),
+  "page": zod.number().optional().describe('Current page number.')
+}).describe('Response containing a page of export history records.')
+
+/**
+ * @summary Creates a new task to generate a PDF export for an agent's screen recordings.
+This operation is asynchronous and returns a task metadata.
+ */
+export const createScreenrecordingExportParams = zod.object({
+  "agent_id": zod.string().describe('Unique identifier of the agent.')
+})
+
+export const createScreenrecordingExportBody = zod.object({
+  "fileIds": zod.array(zod.string()).optional().describe('Optional: specific file IDs to include in the PDF.'),
+  "from": zod.string().optional().describe('Start timestamp of the range (Unix millis).'),
+  "to": zod.string().optional().describe('End timestamp of the range (Unix millis).')
+}).describe('Request for generating a screen recording PDF.')
+
+export const createScreenrecordingExportResponseStatusDefault = "EXPORT_STATUS_UNSPECIFIED";
+
+export const createScreenrecordingExportResponse = zod.object({
+  "fileName": zod.string().optional().describe('Target name of the PDF file.'),
+  "mimeType": zod.string().optional().describe('MIME type (usually application/pdf).'),
+  "size": zod.string().optional().describe('File size in bytes (0 if not yet generated).'),
+  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(createScreenrecordingExportResponseStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
+  "taskId": zod.string().optional().describe('Unique ID to track the background task.')
+}).describe('Metadata about an export task immediately after creation.')
+
+/**
+ * @summary Lists the history of PDF exports for a specific call ID.
+ */
+export const listCallExportsParams = zod.object({
   "call_id": zod.string()
 })
 
-export const generateCallPdfExportBody = zod.object({
-  "fileIds": zod.array(zod.string()).optional().describe('Optional list of specific file IDs to include.'),
-  "from": zod.string().optional().describe('Start timestamp (Unix millis).'),
-  "to": zod.string().optional().describe('End timestamp (Unix millis).')
+export const listCallExportsQueryParams = zod.object({
+  "page": zod.number().optional().describe('Page number (1-based).'),
+  "size": zod.number().optional().describe('Number of items per page.')
 })
 
-export const generateCallPdfExportResponse = zod.object({
-  "fileName": zod.string().optional().describe('File name of the export.'),
-  "mimeType": zod.string().optional().describe('MIME type, e.g., \"application/pdf\".'),
-  "size": zod.string().optional().describe('File size in bytes (0 if not ready).'),
-  "status": zod.string().optional().describe('Task status: pending | processing | done | failed.'),
-  "taskId": zod.string().optional().describe('Unique identifier of the task.')
-}).describe('Metadata about a PDF export task.')
+export const listCallExportsResponseItemsItemStatusDefault = "EXPORT_STATUS_UNSPECIFIED";
 
-/**
- * @summary Get history of PDF exports for a specific Call.
- */
-export const getCallPdfHistoryParams = zod.object({
-  "call_id": zod.string()
-})
-
-export const getCallPdfHistoryQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const getCallPdfHistoryResponseDataItemStatusDefault = "PDF_EXPORT_STATUS_UNSPECIFIED";
-
-export const getCallPdfHistoryResponse = zod.object({
-  "data": zod.array(zod.object({
+export const listCallExportsResponse = zod.object({
+  "items": zod.array(zod.object({
   "createdAt": zod.string().optional().describe('Creation timestamp (Unix millis).'),
-  "createdBy": zod.string().optional().describe('User ID who created the export.'),
-  "fileId": zod.string().optional().describe('Related file ID.'),
-  "id": zod.string().optional().describe('Export ID.'),
-  "mimeType": zod.string().optional().describe('MIME type of the export.'),
-  "name": zod.string().optional().describe('Export name.'),
-  "status": zod.enum(['PDF_EXPORT_STATUS_UNSPECIFIED', 'PDF_EXPORT_STATUS_PENDING', 'PDF_EXPORT_STATUS_PROCESSING', 'PDF_EXPORT_STATUS_DONE', 'PDF_EXPORT_STATUS_FAILED']).default(getCallPdfHistoryResponseDataItemStatusDefault).describe('Status of the PDF export process.\n\n - PDF_EXPORT_STATUS_UNSPECIFIED: Default value.\n - PDF_EXPORT_STATUS_PENDING: Task is waiting to start.\n - PDF_EXPORT_STATUS_PROCESSING: Task is in progress.\n - PDF_EXPORT_STATUS_DONE: Task is completed successfully.\n - PDF_EXPORT_STATUS_FAILED: Task failed.'),
-  "updatedAt": zod.string().optional().describe('Update timestamp (Unix millis).'),
-  "updatedBy": zod.string().optional().describe('User ID who last updated the export.')
-}).describe('Represents a single PDF export record.')).optional().describe('List of export history records.'),
-  "next": zod.boolean().optional().describe('True if there is a next page.'),
+  "createdBy": zod.string().optional().describe('User ID who initiated the export.'),
+  "fileId": zod.string().optional().describe('Reference to the file in the storage system.'),
+  "id": zod.string().optional().describe('Internal database record ID.'),
+  "mimeType": zod.string().optional().describe('MIME type of the generated file.'),
+  "name": zod.string().optional().describe('Display name of the export.'),
+  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(listCallExportsResponseItemsItemStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
+  "updatedAt": zod.string().optional().describe('Last update timestamp (Unix millis).'),
+  "updatedBy": zod.string().optional().describe('User ID who last modified the record.')
+}).describe('Represents a persisted record of a PDF export.')).optional().describe('List of export records.'),
+  "next": zod.boolean().optional().describe('Indicates if there are more records available.'),
   "page": zod.number().optional().describe('Current page number.')
-}).describe('Response containing a page of export history.')
-
-export const deletePdfExportRecordParams = zod.object({
-  "id": zod.string()
-})
-
-export const deletePdfExportRecordResponse = zod.object({
-  "id": zod.string().optional()
-})
+}).describe('Response containing a page of export history records.')
 
 /**
- * @summary Generate a new PDF export asynchronously.
-Returns metadata about the created export task.
+ * @summary Creates a new task to generate a PDF export for a specific call.
+Useful for documenting call transcripts or associated media.
  */
-export const generateScreenrecordingPdfExportParams = zod.object({
-  "agent_id": zod.string().describe('Agent ID for which the export is generated.')
+export const createCallExportParams = zod.object({
+  "call_id": zod.string().describe('Unique identifier of the call.')
 })
 
-export const generateScreenrecordingPdfExportBodyChannelDefault = "CALL";
+export const createCallExportBody = zod.object({
+  "fileIds": zod.array(zod.string()).optional().describe('Optional: specific file IDs to include in the PDF.'),
+  "from": zod.string().optional().describe('Start timestamp of the range (Unix millis).'),
+  "to": zod.string().optional().describe('End timestamp of the range (Unix millis).')
+}).describe('Request for generating a call media PDF.')
 
-export const generateScreenrecordingPdfExportBody = zod.object({
-  "channel": zod.enum(['CALL', 'SCREENRECORDING']).default(generateScreenrecordingPdfExportBodyChannelDefault),
-  "fileIds": zod.array(zod.string()).optional().describe('Optional list of specific file IDs to include.'),
-  "from": zod.string().optional().describe('Start timestamp (Unix millis).'),
-  "to": zod.string().optional().describe('End timestamp (Unix millis).')
-}).describe('Request for generating a PDF export.')
+export const createCallExportResponseStatusDefault = "EXPORT_STATUS_UNSPECIFIED";
 
-export const generateScreenrecordingPdfExportResponse = zod.object({
-  "fileName": zod.string().optional().describe('File name of the export.'),
-  "mimeType": zod.string().optional().describe('MIME type, e.g., \"application/pdf\".'),
-  "size": zod.string().optional().describe('File size in bytes (0 if not ready).'),
-  "status": zod.string().optional().describe('Task status: pending | processing | done | failed.'),
-  "taskId": zod.string().optional().describe('Unique identifier of the task.')
-}).describe('Metadata about a PDF export task.')
+export const createCallExportResponse = zod.object({
+  "fileName": zod.string().optional().describe('Target name of the PDF file.'),
+  "mimeType": zod.string().optional().describe('MIME type (usually application/pdf).'),
+  "size": zod.string().optional().describe('File size in bytes (0 if not yet generated).'),
+  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(createCallExportResponseStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
+  "taskId": zod.string().optional().describe('Unique ID to track the background task.')
+}).describe('Metadata about an export task immediately after creation.')
 
 /**
- * @summary Get paginated history of PDF exports for a given agent.
+ * @summary Deletes a specific export record from the history.
  */
-export const getScreenrecordingPdfExportHistoryParams = zod.object({
-  "agent_id": zod.string().describe('Agent ID.')
+export const deleteExportParams = zod.object({
+  "id": zod.string().describe('ID of the record to remove.')
 })
 
-export const getScreenrecordingPdfExportHistoryQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number (starting from 1).'),
-  "size": zod.number().optional().describe('Page size (number of records per page).')
-})
-
-export const getScreenrecordingPdfExportHistoryResponseDataItemStatusDefault = "PDF_EXPORT_STATUS_UNSPECIFIED";
-
-export const getScreenrecordingPdfExportHistoryResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('Creation timestamp (Unix millis).'),
-  "createdBy": zod.string().optional().describe('User ID who created the export.'),
-  "fileId": zod.string().optional().describe('Related file ID.'),
-  "id": zod.string().optional().describe('Export ID.'),
-  "mimeType": zod.string().optional().describe('MIME type of the export.'),
-  "name": zod.string().optional().describe('Export name.'),
-  "status": zod.enum(['PDF_EXPORT_STATUS_UNSPECIFIED', 'PDF_EXPORT_STATUS_PENDING', 'PDF_EXPORT_STATUS_PROCESSING', 'PDF_EXPORT_STATUS_DONE', 'PDF_EXPORT_STATUS_FAILED']).default(getScreenrecordingPdfExportHistoryResponseDataItemStatusDefault).describe('Status of the PDF export process.\n\n - PDF_EXPORT_STATUS_UNSPECIFIED: Default value.\n - PDF_EXPORT_STATUS_PENDING: Task is waiting to start.\n - PDF_EXPORT_STATUS_PROCESSING: Task is in progress.\n - PDF_EXPORT_STATUS_DONE: Task is completed successfully.\n - PDF_EXPORT_STATUS_FAILED: Task failed.'),
-  "updatedAt": zod.string().optional().describe('Update timestamp (Unix millis).'),
-  "updatedBy": zod.string().optional().describe('User ID who last updated the export.')
-}).describe('Represents a single PDF export record.')).optional().describe('List of export history records.'),
-  "next": zod.boolean().optional().describe('True if there is a next page.'),
-  "page": zod.number().optional().describe('Current page number.')
-}).describe('Response containing a page of export history.')
-
-/**
- * @summary Download a previously generated PDF by export ID.
- */
-export const downloadPdfExportParams = zod.object({
-  "file_id": zod.string().describe('Unique export identifier.')
-})
-
-export const downloadPdfExportQueryParams = zod.object({
-  "domainId": zod.string().optional().describe('Domain ID for authorization.')
-})
-
-export const downloadPdfExportResponse = zod.object({
-  "error": zod.object({
-  "code": zod.number().optional(),
-  "details": zod.array(zod.object({
-  "@type": zod.string().optional()
-})).optional(),
-  "message": zod.string().optional()
-}).optional(),
-  "result": zod.object({
-  "data": zod.string().optional().describe('Raw PDF file bytes (chunked).')
-}).optional().describe('Chunked response with PDF binary data.')
-})
+export const deleteExportResponse = zod.object({
+  "id": zod.string().optional().describe('ID of the deleted record.')
+}).describe('Response confirming the deletion of a record.')
 

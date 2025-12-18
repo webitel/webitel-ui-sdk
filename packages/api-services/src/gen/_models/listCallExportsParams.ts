@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type GetScreenrecordingPdfExportHistoryParams = {
+export type ListCallExportsParams = {
 /**
- * Page number (starting from 1).
+ * Page number (1-based).
  */
 page?: number;
 /**
- * Page size (number of records per page).
+ * Number of items per page.
  */
 size?: number;
 };
