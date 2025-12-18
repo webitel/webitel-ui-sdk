@@ -75,6 +75,7 @@
         :recordings="props.recordings"
         :actions="props.actions"
         :actions:settings:pressed="props['actions:settings:pressed']"
+        :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:chat:pressed="props['actions:chat:pressed']"
         @[VideoCallAction.Screenshot]="(payload, options) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
         @[VideoCallAction.Recordings]="(payload, options) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
@@ -132,6 +133,7 @@ const props = withDefaults(defineProps<{
   username?: string;
 
   'actions:settings:pressed'?: boolean;
+  'actions:settings:disabled'?: boolean;
   'actions:chat:pressed'?: boolean;
 }>(), {
   position: 'right-bottom',
