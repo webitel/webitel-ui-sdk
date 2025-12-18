@@ -4,26 +4,13 @@
       <h3 class="table-title__title">
         {{ t('objects.agentPdfs.pdfs', 2) }}
       </h3>
-      <wt-action-bar
-        :include="[IconAction.FILTERS, IconAction.REFRESH, IconAction.DELETE]"
-        :disabled:delete="!selected.length"
-        @click:refresh="loadDataList"
-        @click:delete="
-          askDeleteConfirmation({
-            deleted: selected,
-            callback: () => handleDelete(selected),
-          })
-        "
-      >
-        <template #filters>
-          <wt-badge>
-            <wt-icon-action
-              action="filters"
-              @click="emit('toggle-filter')"
-            />
-          </wt-badge>
-        </template>
-      </wt-action-bar>
+      <slot
+        name="action-bar"
+        :selected="selected"
+        :load-data-list="loadDataList"
+        :ask-delete-confirmation="askDeleteConfirmation"
+        :handle-delete="handleDelete"
+      />
     </header>
 
     <delete-confirmation-popup
@@ -112,7 +99,6 @@
 
 <script lang="ts" setup>
 import { WtEmpty } from '@webitel/ui-sdk/components';
-import { IconAction } from '@webitel/ui-sdk/enums';
 import DeleteConfirmationPopup
   from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import {
@@ -120,33 +106,32 @@ import {
 } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
-import { computed, defineEmits } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getStartOfDay, getEndOfDay } from '@webitel/ui-sdk/scripts';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
-import { downloadFile } from '@webitel/api-services/api';
+import { downloadFile, getMediaUrl } from '@webitel/api-services/api';
 
-import { useRoute } from 'vue-router';
 import PdfStatusPreview from './pdf-status-preview.vue';
 import PdfStatus from './pdf-status.vue';
 import { FileServicesAPI, PdfServicesAPI } from '@webitel/api-services/api';
+import { WebitelMediaExporterExportRecord } from '@webitel/api-services/gen/models';
 
 interface Props {
-  agentId?: string | number;
   store?: any;
+  entityIdKey?: string;
+  entityIdValue?: string | number;
+  onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  agentId: undefined,
   store: undefined,
+  entityIdKey: undefined,
+  entityIdValue: undefined,
+  onDeleteItem: undefined,
 });
 
 const { t } = useI18n();
-
-const emit = defineEmits(['toggle-filter']);
-
-const router = useRoute();
-const agentId = router.params.id;
 
 const tableStore = props.store;
 
@@ -176,10 +161,12 @@ const {
 initialize();
 
 const initializeDefaultFilters = () => {
-  addFilter({
-    name: 'agentId',
-    value: agentId,
-  });
+  if (props.entityIdKey && props.entityIdValue) {
+    addFilter({
+      name: props.entityIdKey,
+      value: props.entityIdValue,
+    });
+  }
 
   if (!hasFilter('createdAtFrom')) {
     addFilter({
@@ -229,10 +216,14 @@ const handleDelete = async (items: []) => {
     if (el.status === WebitelMediaExporterExportStatus.Failed) {
       return PdfServicesAPI.delete(el.id);
     }
-    // Otherwise, use the existing delete method with fileId
+    // Otherwise, use custom delete function if provided
+    if (props.onDeleteItem) {
+      return props.onDeleteItem(el);
+    }
+    // Fallback to default implementation
     return FileServicesAPI.deleteScreenRecordingsByAgent({
       id: el.fileId,
-      agentId: agentId,
+      agentId: props.entityIdValue,
     });
   };
 
@@ -252,15 +243,9 @@ const downloadPdf = async (id: string) => {
   await downloadFile(id);
 };
 
-const getPdfUrl = (fileId: string): string => {
-  const token = localStorage.getItem('access-token');
-  const BASE_URL = import.meta.env.VITE_API_URL;
-  return `${BASE_URL}/storage/file/${fileId}/stream?access_token=${token}`;
-};
-
 const openPdfInNewWindow = (fileId: string) => {
   try {
-    const pdfUrl = getPdfUrl(fileId);
+    const pdfUrl = getMediaUrl(fileId);
     window.open(pdfUrl, '_blank');
   } catch (error) {
     console.error('Error opening PDF:', error);
