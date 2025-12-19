@@ -20,19 +20,19 @@ const { t } = useI18n();
 
 const STATUS_MAP = {
   [WebitelMediaExporterExportStatus.Pending]: {
-    text: 'objects.agentPdfs.status.pending',
+    text: `objects.agentPdfs.status.${WebitelMediaExporterExportStatus.Pending}`,
     color: 'main',
   },
   [WebitelMediaExporterExportStatus.Processing]: {
-    text: 'objects.agentPdfs.status.processing',
+    text: `objects.agentPdfs.status.${WebitelMediaExporterExportStatus.Processing}`,
     color: 'warning',
   },
   [WebitelMediaExporterExportStatus.Done]: {
-    text: 'objects.agentPdfs.status.completed',
+    text: `objects.agentPdfs.status.${WebitelMediaExporterExportStatus.Done}`,
     color: 'success',
   },
   [WebitelMediaExporterExportStatus.Failed]: {
-    text: 'objects.agentPdfs.status.failed',
+    text: `objects.agentPdfs.status.${WebitelMediaExporterExportStatus.Failed}`,
     color: 'error',
   },
 } as const;

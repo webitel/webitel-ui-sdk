@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -243,10 +244,10 @@ export default {
       pdfs: 'PDF | PDF',
       preview: 'Previzualizare',
       status: {
-        pending: 'În așteptare',
-        processing: 'Procesare',
-        completed: 'Finalizat',
-        failed: 'Eșuat',
+        [WebitelMediaExporterExportStatus.Pending]: 'În așteptare',
+        [WebitelMediaExporterExportStatus.Processing]: 'Procesare',
+        [WebitelMediaExporterExportStatus.Done]: 'Finalizat',
+        [WebitelMediaExporterExportStatus.Failed]: 'Eșuat',
       },
     },
   },

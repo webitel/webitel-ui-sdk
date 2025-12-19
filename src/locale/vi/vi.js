@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -243,10 +244,10 @@ export default {
       pdfs: 'PDF | PDF',
       preview: 'Xem trước',
       status: {
-        pending: 'Đang chờ',
-        processing: 'Đang xử lý',
-        completed: 'Hoàn thành',
-        failed: 'Thất bại',
+        [WebitelMediaExporterExportStatus.Pending]: 'Đang chờ',
+        [WebitelMediaExporterExportStatus.Processing]: 'Đang xử lý',
+        [WebitelMediaExporterExportStatus.Done]: 'Hoàn thành',
+        [WebitelMediaExporterExportStatus.Failed]: 'Thất bại',
       },
     },
   },

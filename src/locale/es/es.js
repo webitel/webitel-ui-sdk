@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -238,10 +239,10 @@ export default {
       pdfs: 'PDF | PDFs',
       preview: 'Vista previa',
       status: {
-        pending: 'Pendiente',
-        processing: 'Procesando',
-        completed: 'Completado',
-        failed: 'Fallido',
+        [WebitelMediaExporterExportStatus.Pending]: 'Pendiente',
+        [WebitelMediaExporterExportStatus.Processing]: 'Procesando',
+        [WebitelMediaExporterExportStatus.Done]: 'Completado',
+        [WebitelMediaExporterExportStatus.Failed]: 'Fallido',
       },
     },
   },

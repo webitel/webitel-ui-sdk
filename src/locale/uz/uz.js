@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -243,10 +244,10 @@ export default {
       pdfs: 'PDF | PDF',
       preview: 'Ko\'rib chiqish',
       status: {
-        pending: 'Kutilmoqda',
-        processing: 'Ishlanmoqda',
-        completed: 'Tugallandi',
-        failed: 'Xatolik',
+        [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
+        [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
+        [WebitelMediaExporterExportStatus.Done]: 'Tugallandi',
+        [WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
       },
     },
   },
