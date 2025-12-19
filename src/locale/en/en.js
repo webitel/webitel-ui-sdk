@@ -6,6 +6,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -59,6 +60,7 @@ export default deepmerge(
       to: 'To',
       tts: 'Text-to-Speech',
       state: 'State',
+      status: 'Status',
       refresh: 'Refresh',
       retry: 'Retry',
       downloadAll: 'Download all',
@@ -241,6 +243,16 @@ export default deepmerge(
       },
       screenRecordings: 'Screen recording | Screen recordings',
       screenshots: 'Screenshot | Screenshots',
+      agentPdfs: {
+        pdfs: 'PDF | PDFs',
+        preview: 'Preview',
+        status: {
+          [WebitelMediaExporterExportStatus.Pending]: 'Pending',
+          [WebitelMediaExporterExportStatus.Processing]: 'Processing',
+          [WebitelMediaExporterExportStatus.Done]: 'Completed',
+          [WebitelMediaExporterExportStatus.Failed]: 'Failed',
+        },
+      },
     },
     channel: {
       state: {

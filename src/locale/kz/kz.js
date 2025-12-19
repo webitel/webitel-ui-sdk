@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -56,6 +57,7 @@ export default {
     to: 'Дейін',
     tts: 'Мәтін-дауыс',
     state: 'Күй',
+    status: 'Күй',
     refresh: 'Жаңарту',
     retry: 'Қайталау',
     downloadAll: 'Барлығын жүктеу',
@@ -238,6 +240,16 @@ export default {
     },
     screenRecordings: 'Экран жазбасы | Экран жазбалары',
     screenshots: 'Экран суреті | Экран суреттері',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Алдын ала қарау',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Күтуде',
+        [WebitelMediaExporterExportStatus.Processing]: 'Өңделуде',
+        [WebitelMediaExporterExportStatus.Done]: 'Аяқталды',
+        [WebitelMediaExporterExportStatus.Failed]: 'Қате',
+      },
+    },
   },
   channel: {
     state: {

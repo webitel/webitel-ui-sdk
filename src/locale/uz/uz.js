@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -56,6 +57,7 @@ export default {
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',
     state: 'Holat',
+    status: 'Holat',
     refresh: 'Yangilash',
     retry: 'Qayta urinish',
     downloadAll: 'Hammasini yuklab olish',
@@ -238,6 +240,16 @@ export default {
     },
     screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
     screenshots: 'Ekran rasmi | Ekran rasmlari',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Ko\'rib chiqish',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
+        [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
+        [WebitelMediaExporterExportStatus.Done]: 'Tugallandi',
+        [WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
+      },
+    },
   },
   channel: {
     state: {

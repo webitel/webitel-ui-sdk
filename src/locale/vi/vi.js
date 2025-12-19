@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 import {
   AdminSections,
@@ -56,6 +57,7 @@ export default {
     to: 'Đến',
     tts: 'Chuyển văn bản thành giọng nói',
     state: 'Trạng thái',
+    status: 'Trạng thái',
     refresh: 'Làm mới',
     retry: 'Thử lại',
     downloadAll: 'Tải xuống tất cả',
@@ -238,6 +240,16 @@ export default {
     },
     screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
     screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
+    agentPdfs: {
+      pdfs: 'PDF | PDF',
+      preview: 'Xem trước',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Đang chờ',
+        [WebitelMediaExporterExportStatus.Processing]: 'Đang xử lý',
+        [WebitelMediaExporterExportStatus.Done]: 'Hoàn thành',
+        [WebitelMediaExporterExportStatus.Failed]: 'Thất bại',
+      },
+    },
   },
   channel: {
     state: {
