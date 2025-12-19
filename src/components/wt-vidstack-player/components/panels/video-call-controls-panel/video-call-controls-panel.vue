@@ -57,6 +57,7 @@
       v-if="shownActionsMap[VideoCallAction.Settings]"
       :size="buttonSizeMap[size]"
       :variant="props['actions:settings:pressed'] ? 'active' : 'outlined'"
+      :disabled="props['actions:settings:disabled']"
       icon="settings"
       color="secondary"
       rounded
@@ -108,6 +109,7 @@ const props = defineProps<{
   'recordings': boolean;
 
   'actions:settings:pressed': boolean;
+  'actions:settings:disabled': boolean;
   'actions:chat:pressed': boolean;
 }>();
 
