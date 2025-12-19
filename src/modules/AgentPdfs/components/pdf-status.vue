@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 
 export type PdfExportStatusType = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
 

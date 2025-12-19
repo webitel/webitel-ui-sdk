@@ -9,13 +9,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import { computed } from 'vue';
 
-import pendingImage from '../assets/pdf-pending.png';
-import processingImage from '../assets/pdf-processing.png';
 import doneImage from '../assets/pdf-done.png';
 import errorImage from '../assets/pdf-error.png';
+import pendingImage from '../assets/pdf-pending.png';
+import processingImage from '../assets/pdf-processing.png';
 
 export type PdfExportStatusType = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
 
