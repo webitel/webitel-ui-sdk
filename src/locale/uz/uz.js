@@ -241,12 +241,11 @@ export default {
     screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
     screenshots: 'Ekran rasmi | Ekran rasmlari',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Ko\'rib chiqish',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
         [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
-        [WebitelMediaExporterExportStatus.Done]: 'Tugallandi',
+        [WebitelMediaExporterExportStatus.Done]: 'Tayyor',
         [WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
       },
     },

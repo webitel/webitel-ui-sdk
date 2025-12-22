@@ -245,12 +245,11 @@ export default deepmerge(
       screenshots: 'Screenshot | Screenshots',
       agentPdfs: {
         pdfs: 'PDF | PDFs',
-        preview: 'Preview',
         status: {
           [WebitelMediaExporterExportStatus.Pending]: 'Pending',
           [WebitelMediaExporterExportStatus.Processing]: 'Processing',
-          [WebitelMediaExporterExportStatus.Done]: 'Completed',
-          [WebitelMediaExporterExportStatus.Failed]: 'Failed',
+          [WebitelMediaExporterExportStatus.Done]: 'Done',
+          [WebitelMediaExporterExportStatus.Failed]: 'Error',
         },
       },
     },

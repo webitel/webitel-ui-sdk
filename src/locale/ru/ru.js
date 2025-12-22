@@ -241,8 +241,7 @@ export default {
     screenRecordings: 'Запись экрана | Записи экрана',
     screenshots: 'Снимок экрана | Снимки экрана',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Предпросмотр',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Ожидание',
         [WebitelMediaExporterExportStatus.Processing]: 'Обработка',
