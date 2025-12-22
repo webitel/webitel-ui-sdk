@@ -237,12 +237,11 @@ export default {
     screenshots: 'Captura de pantalla | Capturas de pantalla',
     agentPdfs: {
       pdfs: 'PDF | PDFs',
-      preview: 'Vista previa',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Pendiente',
         [WebitelMediaExporterExportStatus.Processing]: 'Procesando',
-        [WebitelMediaExporterExportStatus.Done]: 'Completado',
-        [WebitelMediaExporterExportStatus.Failed]: 'Fallido',
+        [WebitelMediaExporterExportStatus.Done]: 'Hecho',
+        [WebitelMediaExporterExportStatus.Failed]: 'Error',
       },
     },
   },

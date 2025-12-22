@@ -241,13 +241,12 @@ export default {
     screenRecordings: 'Înregistrarea ecranului | Înregistrări ecran',
     screenshots: 'Captură de ecran | Capturi de ecran',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Previzualizare',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'În așteptare',
         [WebitelMediaExporterExportStatus.Processing]: 'Procesare',
-        [WebitelMediaExporterExportStatus.Done]: 'Finalizat',
-        [WebitelMediaExporterExportStatus.Failed]: 'Eșuat',
+        [WebitelMediaExporterExportStatus.Done]: 'Gata',
+        [WebitelMediaExporterExportStatus.Failed]: 'Eroare',
       },
     },
   },
