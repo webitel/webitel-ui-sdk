@@ -6,7 +6,7 @@
       fullscreen && `wt-vidstack-player--fullscreen`,
       stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
-      props.hideBackground && 'wt-vidstack-player--hide-background',
+      props.hideBackground && 'wt-vidstack-player--hide-background'
     ]"
   >
     <media-player
@@ -83,7 +83,6 @@ const props = withDefaults(defineProps<Props>(), {
   username: '',
   closable: false,
   static: false,
-  overlay: true,
 });
 
 const emit = defineEmits<{
