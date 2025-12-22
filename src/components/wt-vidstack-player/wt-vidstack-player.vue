@@ -7,7 +7,6 @@
       stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
       props.hideBackground && 'wt-vidstack-player--hide-background',
-      !props.overlay && 'wt-vidstack-player--no-overlay'
     ]"
   >
     <media-player
@@ -74,7 +73,6 @@ interface Props {
   hideBackground?: boolean
   hideExpand?: boolean
   stretch?: boolean
-  overlay?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -193,11 +191,6 @@ const normalizedSrc = computed(() => {
       border-radius: 0;
       overflow: visible;
 
-      &.wt-vidstack-player--no-overlay {
-        pointer-events: none;
-        z-index: calc(var(--p-galleria-mask-z-index) - 1);
-      }
-
       /** @author liza-pohranichna
       * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
@@ -270,6 +263,8 @@ const normalizedSrc = computed(() => {
     &.wt-vidstack-player {
       &--md {
         background: none;
+        pointer-events: none;
+        z-index: calc(var(--p-galleria-mask-z-index) - 1);
       }
     }
   }

@@ -6,7 +6,6 @@
     :class="[!props.static && `video-call-position--${props.position}`]"
     :username="props.username"
     :hide-header="props.hideHeader"
-    :overlay="overlay"
     class="video-call"
     hide-background
     autoplay
@@ -128,7 +127,6 @@ const props = withDefaults(defineProps<{
   size?: ComponentSize
   hideHeader?: boolean
   resizable?: boolean;
-  overlay?: boolean;
 
   actions: VideoCallAction[];
   username?: string;
