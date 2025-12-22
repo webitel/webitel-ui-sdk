@@ -64,7 +64,7 @@ export const searchScreenRecordingsByAgentParams = zod.object({
   "agent_id": zod.string()
 })
 
-export const searchScreenRecordingsByAgentQueryTypeDefault = "PDF";
+export const searchScreenRecordingsByAgentQueryTypeDefault = "PDF";export const searchScreenRecordingsByAgentQueryChannelDefault = "SCREENRECORDING";
 
 export const searchScreenRecordingsByAgentQueryParams = zod.object({
   "page": zod.number().optional(),
@@ -78,7 +78,8 @@ export const searchScreenRecordingsByAgentQueryParams = zod.object({
   "referenceId": zod.array(zod.string()).optional(),
   "retentionUntilFrom": zod.string().optional(),
   "retentionUntilTo": zod.string().optional(),
-  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsByAgentQueryTypeDefault)
+  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsByAgentQueryTypeDefault),
+  "channel": zod.enum(['SCREENRECORDING', 'CALL']).default(searchScreenRecordingsByAgentQueryChannelDefault)
 })
 
 export const searchScreenRecordingsByAgentResponseItemsItemChannelDefault = "UnknownChannel";
@@ -209,7 +210,7 @@ export const searchScreenRecordingsParams = zod.object({
   "user_id": zod.string()
 })
 
-export const searchScreenRecordingsQueryTypeDefault = "PDF";
+export const searchScreenRecordingsQueryTypeDefault = "PDF";export const searchScreenRecordingsQueryChannelDefault = "SCREENRECORDING";
 
 export const searchScreenRecordingsQueryParams = zod.object({
   "page": zod.number().optional(),
@@ -223,7 +224,8 @@ export const searchScreenRecordingsQueryParams = zod.object({
   "referenceId": zod.array(zod.string()).optional(),
   "retentionUntilFrom": zod.string().optional(),
   "retentionUntilTo": zod.string().optional(),
-  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsQueryTypeDefault)
+  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsQueryTypeDefault),
+  "channel": zod.enum(['SCREENRECORDING', 'CALL']).default(searchScreenRecordingsQueryChannelDefault)
 })
 
 export const searchScreenRecordingsResponseItemsItemChannelDefault = "UnknownChannel";
