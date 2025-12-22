@@ -262,6 +262,8 @@ const normalizedSrc = computed(() => {
     &.wt-vidstack-player {
       &--md {
         background: none;
+        pointer-events: none;
+        z-index: calc(var(--p-galleria-mask-z-index) - 1);
       }
     }
   }
