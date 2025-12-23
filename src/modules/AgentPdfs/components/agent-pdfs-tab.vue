@@ -1,17 +1,12 @@
 <template>
   <section class="table-wrapper table-page table-wrapper--tab-table">
-    <header class="table-title">
-      <h3 class="table-title__title">
-        {{ t('objects.agentPdfs.pdfs', 2) }}
-      </h3>
-      <slot
-        name="action-bar"
-        :selected="selected"
-        :load-data-list="loadDataList"
-        :ask-delete-confirmation="askDeleteConfirmation"
-        :handle-delete="handleDelete"
-      />
-    </header>
+    <slot
+      name="header"
+      :selected="selected"
+      :load-data-list="loadDataList"
+      :ask-delete-confirmation="askDeleteConfirmation"
+      :handle-delete="handleDelete"
+    />
 
     <delete-confirmation-popup
       :shown="isDeleteConfirmationPopup"
@@ -69,11 +64,12 @@
         <template #actions="{ item }">
           <wt-icon-action
             action="download"
-            :disabled="item.status !== WebitelMediaExporterExportStatus.Done"
+            :disabled="isDownloadDisabled(item)"
             @click="downloadPdf(item.fileId)"
           />
           <wt-icon-action
             action="delete"
+            :disabled="isDeleteDisabled(item)"
             @click="
               askDeleteConfirmation({
                 deleted: [item],
@@ -112,7 +108,6 @@ import {
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
@@ -130,8 +125,6 @@ const props = withDefaults(defineProps<Props>(), {
   entityIdValue: undefined,
   onDeleteItem: undefined,
 });
-
-const { t } = useI18n();
 
 const tableStore = props.store;
 
@@ -188,6 +181,14 @@ initializeDefaultFilters();
 const prettifyTimestamp = (timestamp: string | number) => {
   if (!timestamp) return '';
   return new Date(+timestamp).toLocaleString();
+};
+
+const isDownloadDisabled = (item: WebitelMediaExporterExportRecord) => {
+  return item.status !== WebitelMediaExporterExportStatus.Done;
+};
+
+const isDeleteDisabled = (item: WebitelMediaExporterExportRecord) => {
+  return item.status !== WebitelMediaExporterExportStatus.Done && item.status !== WebitelMediaExporterExportStatus.Failed;
 };
 
 const {
