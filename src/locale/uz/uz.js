@@ -242,6 +242,7 @@ export default {
     screenshots: 'Ekran rasmi | Ekran rasmlari',
     agentPdfs: {
       pdfs: 'PDF | PDFs',
+      preview: "Ko'rib chiqish",
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
         [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
@@ -392,6 +393,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera o‘chirilgan',
+    },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",

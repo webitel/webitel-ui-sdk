@@ -391,6 +391,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Camera este oprită',
+    },
   },
   validation: {
     required: 'Câmpul este obligatoriu',

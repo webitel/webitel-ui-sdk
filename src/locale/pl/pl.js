@@ -389,6 +389,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera jest wyłączona',
+    },
   },
   validation: {
     required: 'Pole jest wymagane',
