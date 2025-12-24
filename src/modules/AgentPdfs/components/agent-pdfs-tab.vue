@@ -20,7 +20,7 @@
     <wt-empty
       v-show="showEmpty"
       :image="imageEmpty"
-      :text="textEmpty"
+      :headline="textEmpty"
     />
 
     <div v-show="!isLoading" class="table-loading-wrapper">
