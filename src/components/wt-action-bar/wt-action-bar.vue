@@ -33,8 +33,8 @@
 <script setup>
 import { computed } from 'vue';
 
-import { kebabToCamel } from '../../scripts/caseConverters.js';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { kebabToCamel } from '../../scripts/caseConverters.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
   sectionActionsOrder,
