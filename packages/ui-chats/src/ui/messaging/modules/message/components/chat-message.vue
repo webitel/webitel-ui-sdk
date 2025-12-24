@@ -10,7 +10,7 @@
 
     <div class="chat-message__content">
       <div
-        v-if="withoutAvatars"
+        v-if="!props.withoutAvatars"
         class="chat-message__avatar-wrapper"
       >
         <message-avatar

@@ -2,7 +2,9 @@
     <wt-textarea
         ref="chatTextFieldInput"
         v-model="textModel"
+        class="chat-text-field"
         :size="size"
+        :rows="1"
         autoresize
     />
 </template>
@@ -42,3 +44,11 @@ function insertAtCursor(text: string) {
 	insertTextAtCursor(textareaEl.value!, text);
 }
 </script>
+
+<style scoped>
+.chat-text-field :deep(textarea) {
+  max-height: 100%;
+  min-height: auto;
+  overflow: auto !important;
+}
+</style>
