@@ -393,6 +393,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Camera đã được tắt',
+    },
   },
   validation: {
     required: 'Trường bắt buộc',

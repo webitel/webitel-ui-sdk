@@ -386,6 +386,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'La cámara está apagada',
+    },
   },
   validation: {
     required: 'Campo requerido',
