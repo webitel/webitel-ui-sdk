@@ -164,10 +164,14 @@ watch(
 </script>
 
 <style lang="scss">
+@use '@webitel/styleguide/typography' as *;
+
 .wt-button {
   position: relative;
 
   &.p-button {
+    @extend %typo-button;
+
     &--with-badge {
       overflow: visible;
     }
