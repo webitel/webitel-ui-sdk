@@ -137,7 +137,7 @@ const search = computed({
 
 const handleSearchInput = (value: string) => {
   // Update search immediately when cleared to bypass debounce
-  if (value === '') {
+  if (!value) {
     lastSetSearchValue.value = value;
     filtersManager.value.addFilter({ name: 'search', value });
   }
