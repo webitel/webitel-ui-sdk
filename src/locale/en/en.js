@@ -393,6 +393,9 @@ export default deepmerge(
         },
       },
       [WebitelApplications.WFM]: { name: 'WFM' },
+      [WebitelApplications.MEET]: {
+        theCameraIsTurnedOff: 'The camera is turned off',
+      },
     },
     validation: {
       required: 'Field is required',

@@ -2,6 +2,7 @@ import {
   createCallExportBody,
   createScreenrecordingExportBody,
   listScreenrecordingExportsQueryParams,
+	listCallExportsQueryParams,
   getPdfService,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
@@ -58,20 +59,43 @@ const listScreenrecordingExports = async (params: any) => {
 	}
 };
 
-const createCallExport = async ({fileId, params}) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    createCallExportBody,
-	);
-
-	const { domainId } = applyTransform(params, [
-		sanitize(fieldsToSend),
+const createCallExport = async ({ callId, itemInstance }) => {
+	const item = applyTransform(itemInstance, [
+		sanitize(getShallowFieldsToSendFromZodSchema(createCallExportBody)),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await getPdfService().createCallExport(fileId, {
-			domainId,
+		const response = await getPdfService().createCallExport(callId, item);
+		return applyTransform(response.data, [snakeToCamel()]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const listCallExports = async (params: any) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+    listCallExportsQueryParams,
+	);
+
+	const { page, size } = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getPdfService().listCallExports(params.callId, {
+			page,
+			size,
 		});
-		return response.data;
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [snakeToCamel()]),
+			next,
+		};
 	} catch (err) {
 		throw applyTransform(err, [notify]);
 	}
@@ -89,6 +113,7 @@ const deleteExport = async (id: string) => {
 export const PdfServicesAPI = {
   createScreenrecordingExport,
 	getList: listScreenrecordingExports,
+  createCallExport,
+	listCallExports,
   delete: deleteExport,
-  download: createCallExport,
 };
