@@ -167,6 +167,7 @@ onMounted(() => {
   @extend %wt-scrollbar;
   @include wt-placeholder;
 
+  display: block;
   box-sizing: border-box;
   width: 100%;
   resize: none;
