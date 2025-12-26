@@ -18,7 +18,7 @@ import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
 const textModel = defineModel<MaybeRef<string>>("text", {
-  required: true,
+	required: true,
 });
 
 const size = inject<ComponentSize>("size");
@@ -28,23 +28,23 @@ uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
 uiChatsEmitter!.on("focusOnTextField", focus);
 
 const chatTextFieldInputRef =
-  useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
+	useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
 
 const textareaEl = computed(() =>
-  chatTextFieldInputRef.value?.$el.querySelector("textarea"),
+	chatTextFieldInputRef.value?.$el.querySelector("textarea"),
 );
 
 function send(text: string) {
-  textModel.value = text;
+	textModel.value = text;
 }
 
 function focus() {
-  textareaEl.value!.focus();
+	textareaEl.value!.focus();
 }
 
 function insertAtCursor(text: string) {
-  focus();
-  insertTextAtCursor(textareaEl.value!, text);
+	focus();
+	insertTextAtCursor(textareaEl.value!, text);
 }
 </script>
 
