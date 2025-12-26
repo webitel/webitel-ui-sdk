@@ -12,6 +12,7 @@ import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { MimeTypes } from './MimeTypes/MimeTypes.enum';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
@@ -42,6 +43,7 @@ export {
   FormatDateMode,
   IconAction,
   IconColor,
+  MimeTypes,
   ProcessingTableColumnType,
   ProviderIconType,
   QueueType,

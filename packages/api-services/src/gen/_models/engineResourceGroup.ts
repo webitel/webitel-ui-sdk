@@ -6,5 +6,6 @@
  */
 
 export interface EngineResourceGroup {
+  id?: string;
   name?: string;
 }

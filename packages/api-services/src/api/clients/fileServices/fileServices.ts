@@ -98,7 +98,8 @@ const getScreenRecordingsByUser = async (params: any) => {
 		retentionUntilFrom,
 		retentionUntilTo,
 		type,
-	} = applyTransform(params, [
+    channel,
+  } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -120,7 +121,8 @@ const getScreenRecordingsByUser = async (params: any) => {
 				retentionUntilFrom,
 				retentionUntilTo,
 				type,
-			},
+        channel,
+      },
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -165,6 +167,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 		retentionUntilFrom,
 		retentionUntilTo,
 		type,
+    channel,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
@@ -187,7 +190,8 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				retentionUntilFrom,
 				retentionUntilTo,
 				type,
-			},
+        channel,
+      },
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),

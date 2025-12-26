@@ -6,5 +6,6 @@ export const WtApplication = {
   Audit: 'audit',
   Analytics: 'grafana',
   Crm: 'crm',
-  Wfm: 'wfm'
+  Wfm: 'wfm',
+  Meet: 'meet',
 };

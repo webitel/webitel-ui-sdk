@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'Đến',
     tts: 'Chuyển văn bản thành giọng nói',
     state: 'Trạng thái',
+    status: 'Trạng thái',
     refresh: 'Làm mới',
     retry: 'Thử lại',
     downloadAll: 'Tải xuống tất cả',
@@ -238,6 +240,15 @@ export default {
     },
     screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
     screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Đang chờ',
+        [WebitelMediaExporterExportStatus.Processing]: 'Đang xử lý',
+        [WebitelMediaExporterExportStatus.Done]: 'Xong',
+        [WebitelMediaExporterExportStatus.Failed]: 'Lỗi',
+      },
+    },
   },
   channel: {
     state: {
@@ -382,6 +393,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Camera đã được tắt',
+    },
   },
   validation: {
     required: 'Trường bắt buộc',

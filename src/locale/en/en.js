@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import deepmerge from 'deepmerge';
 import {
   AgentStatus,
@@ -59,6 +60,7 @@ export default deepmerge(
       to: 'To',
       tts: 'Text-to-Speech',
       state: 'State',
+      status: 'Status',
       refresh: 'Refresh',
       retry: 'Retry',
       downloadAll: 'Download all',
@@ -241,6 +243,15 @@ export default deepmerge(
       },
       screenRecordings: 'Screen recording | Screen recordings',
       screenshots: 'Screenshot | Screenshots',
+      agentPdfs: {
+        pdfs: 'PDF | PDFs',
+        status: {
+          [WebitelMediaExporterExportStatus.Pending]: 'Pending',
+          [WebitelMediaExporterExportStatus.Processing]: 'Processing',
+          [WebitelMediaExporterExportStatus.Done]: 'Done',
+          [WebitelMediaExporterExportStatus.Failed]: 'Error',
+        },
+      },
     },
     channel: {
       state: {
@@ -382,6 +393,9 @@ export default deepmerge(
         },
       },
       [WebitelApplications.WFM]: { name: 'WFM' },
+      [WebitelApplications.MEET]: {
+        theCameraIsTurnedOff: 'The camera is turned off',
+      },
     },
     validation: {
       required: 'Field is required',

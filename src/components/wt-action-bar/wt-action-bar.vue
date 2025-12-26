@@ -23,7 +23,7 @@
     >
       <wt-icon-action
         :action="action"
-        :disabled="props[`disabled:${action}`]"
+        :disabled="props[`disabled:${kebabToCamel(action)}`]"
         @click="handleActionClick(action)"
       />
     </slot>
@@ -34,6 +34,7 @@
 import { computed } from 'vue';
 
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { kebabToCamel } from '../../scripts/caseConverters.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
   sectionActionsOrder,

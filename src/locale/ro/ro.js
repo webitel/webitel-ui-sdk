@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'Până la',
     tts: 'Text-to-Speech',
     state: 'Stare',
+    status: 'Status',
     refresh: 'Reîmprospătează',
     retry: 'Reîncearcă',
     downloadAll: 'Descarcă tot',
@@ -238,6 +240,15 @@ export default {
     },
     screenRecordings: 'Înregistrarea ecranului | Înregistrări ecran',
     screenshots: 'Captură de ecran | Capturi de ecran',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'În așteptare',
+        [WebitelMediaExporterExportStatus.Processing]: 'Procesare',
+        [WebitelMediaExporterExportStatus.Done]: 'Gata',
+        [WebitelMediaExporterExportStatus.Failed]: 'Eroare',
+      },
+    },
   },
   channel: {
     state: {
@@ -380,6 +391,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Camera este oprită',
+    },
   },
   validation: {
     required: 'Câmpul este obligatoriu',

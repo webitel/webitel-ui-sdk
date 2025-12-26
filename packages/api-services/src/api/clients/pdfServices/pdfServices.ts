@@ -1,8 +1,9 @@
 import {
-	downloadPdfExportQueryParams,
-	generatePdfExportBody,
-	getPdfExportHistoryQueryParams,
-	getPdfService,
+  createCallExportBody,
+  createScreenrecordingExportBody,
+  listScreenrecordingExportsQueryParams,
+	listCallExportsQueryParams,
+  getPdfService,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -16,23 +17,23 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const generatePdfExport = async ({ agentId, itemInstance }) => {
+const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(generatePdfExportBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(createScreenrecordingExportBody)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getPdfService().generatePdfExport(agentId, item);
+		const response = await getPdfService().createScreenrecordingExport(agentId, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
 	}
 };
 
-const getPdfExportHistory = async (params: any) => {
+const listScreenrecordingExports = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		getPdfExportHistoryQueryParams,
+    listScreenrecordingExportsQueryParams,
 	);
 
 	const { page, size } = applyTransform(params, [
@@ -42,15 +43,15 @@ const getPdfExportHistory = async (params: any) => {
 	]);
 
 	try {
-		const response = await getPdfService().getPdfExportHistory(params.agentId, {
+		const response = await getPdfService().listScreenrecordingExports(params.agentId, {
 			page,
 			size,
 		});
-		const { data, next } = applyTransform(response.data, [
+		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(data, [snakeToCamel()]),
+			items: applyTransform(items, [snakeToCamel()]),
 			next,
 		};
 	} catch (err) {
@@ -58,27 +59,61 @@ const getPdfExportHistory = async (params: any) => {
 	}
 };
 
-const downloadPdfExport = async ({fileId, params}) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		downloadPdfExportQueryParams,
-	);
-
-	const { domainId } = applyTransform(params, [
-		sanitize(fieldsToSend),
+const createCallExport = async ({ callId, itemInstance }) => {
+	const item = applyTransform(itemInstance, [
+		sanitize(getShallowFieldsToSendFromZodSchema(createCallExportBody)),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await getPdfService().downloadPdfExport(fileId, {
-			domainId,
+		const response = await getPdfService().createCallExport(callId, item);
+		return applyTransform(response.data, [snakeToCamel()]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const listCallExports = async (params: any) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+    listCallExportsQueryParams,
+	);
+
+	const { page, size } = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getPdfService().listCallExports(params.callId, {
+			page,
+			size,
 		});
-		return response.data;
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [snakeToCamel()]),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const deleteExport = async (id: string) => {
+	try {
+		const response = await getPdfService().deleteExport(id);
+		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
 	}
 };
 
 export const PdfServicesAPI = {
-	generatePdfExport,
-	getList: getPdfExportHistory,
-	download: downloadPdfExport,
+  createScreenrecordingExport,
+	getList: listScreenrecordingExports,
+  createCallExport,
+	listCallExports,
+  delete: deleteExport,
 };

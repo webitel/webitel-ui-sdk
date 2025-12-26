@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'До',
     tts: 'Text-to-Speech',
     state: 'Состояние',
+    status: 'Статус',
     refresh: 'Обновить',
     retry: 'Повторить',
     downloadAll: 'Скачать всё',
@@ -238,6 +240,15 @@ export default {
     },
     screenRecordings: 'Запись экрана | Записи экрана',
     screenshots: 'Снимок экрана | Снимки экрана',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Ожидание',
+        [WebitelMediaExporterExportStatus.Processing]: 'Обработка',
+        [WebitelMediaExporterExportStatus.Done]: 'Завершено',
+        [WebitelMediaExporterExportStatus.Failed]: 'Ошибка',
+      },
+    },
   },
   channel: {
     state: {
@@ -379,6 +390,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Камера выключена',
+    },
   },
   validation: {
     required: 'Обязательное поле',
