@@ -1,14 +1,15 @@
 <template>
-    <wt-textarea
-        ref="chatTextFieldInput"
-        v-model="textModel"
-        :size="size"
-        autoresize
-    />
+  <wt-textarea
+    ref="chatTextFieldInput"
+    :model-value="textModel"
+    :size="size"
+    autoresize
+    @update:model-value="send"
+  />
 </template>
 
 <script setup lang="ts">
-import type { WtTextarea } from "@webitel/ui-sdk/components";
+import { WtTextarea } from "@webitel/ui-sdk/components";
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import insertTextAtCursor from "insert-text-at-cursor";
 import type { Emitter } from "mitt";
@@ -17,7 +18,7 @@ import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
 const textModel = defineModel<MaybeRef<string>>("text", {
-	required: true,
+  required: true,
 });
 
 const size = inject<ComponentSize>("size");
@@ -27,18 +28,23 @@ uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
 uiChatsEmitter!.on("focusOnTextField", focus);
 
 const chatTextFieldInputRef =
-	useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
+  useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
 
 const textareaEl = computed(() =>
-	chatTextFieldInputRef.value?.$el.querySelector("textarea"),
+  chatTextFieldInputRef.value?.$el.querySelector("textarea"),
 );
 
+function send(text: string) {
+  textModel.value = text;
+}
+
 function focus() {
-	textareaEl.value!.focus();
+  textareaEl.value!.focus();
 }
 
 function insertAtCursor(text: string) {
-	focus();
-	insertTextAtCursor(textareaEl.value!, text);
+  focus();
+  insertTextAtCursor(textareaEl.value!, text);
 }
 </script>
+
