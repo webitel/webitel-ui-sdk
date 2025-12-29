@@ -7,22 +7,21 @@ export const useChatScroll = (
   element: Ref<HTMLElement | null> = null,
   messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>,
 ) => {
+  /* @author ye.pohranichna
+  why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
   const defaultThreshold = 136;
   const { arrivedState } = useScroll(element);
 
-  const newUnseenMessages = ref<number>(0);
+  const newUnseenMessagesCount = ref<number>(0);
   const showScrollToBottomBtn = ref<boolean>(false);
   /* @author ye.pohranichna
-    the distance where the scrollToBottomBtn must be shown/hide.
-    why defaultThreshold=136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
+    the distance where the scrollToBottomBtn must be shown/hide. */
   const threshold = ref<number>(defaultThreshold);
 
-  const isLastMessageIsMy = computed<boolean>(() =>
-    Boolean(lastMessage.value?.member?.self),
+  const isLastMessageIsMy = computed<boolean>(
+    () => lastMessage.value?.member?.self,
   );
-  const lastMessage = computed<ChatMessageType>(
-    () => messages.value[messages.value?.length - 1],
-  );
+  const lastMessage = computed<ChatMessageType>(() => messages.value?.at(-1));
   const handleChatScroll = () => {
     const wrapper = element.value;
     if (!wrapper) return;
@@ -39,11 +38,21 @@ export const useChatScroll = (
   };
 
   const handleShowScrollToBottomBtn = (el: HTMLElement) => {
-    resetScrollToBottomBtn();
+    if (arrivedState.bottom) {
+      resetScrollToBottomBtn();
+      return;
+      /* @author ye.pohranichna
+          quit the function because we are already at the bottom */
+    }
 
     const { scrollTop, scrollHeight, clientHeight } = el;
     const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
     showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
+  };
+
+  const resetScrollToBottomBtn = (): void => {
+    newUnseenMessagesCount.value = 0;
+    showScrollToBottomBtn.value = false;
   };
 
   const updateThreshold = (el: HTMLElement) => {
@@ -53,23 +62,11 @@ export const useChatScroll = (
     threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
   };
 
-  const resetScrollToBottomBtn = (): void => {
-    if (arrivedState.bottom && newUnseenMessages.value) {
-      /* @author ye.pohranichna
-			hide the btn and reset new messages count, when we scroll to the bottom without btn */
-      newUnseenMessages.value = 0;
-      showScrollToBottomBtn.value = false;
-      /* @author ye.pohranichna
-			quit the function because we are already at the bottom */
-      return;
-    }
-  };
-
-  const scrollToBottomAfterNewMessage = () => {
+  const handleBtnAfterNewMessage = () => {
     if (arrivedState.bottom || isLastMessageIsMy.value) {
       scrollToBottom('smooth');
     } else {
-      newUnseenMessages.value += 1;
+      newUnseenMessagesCount.value += 1;
     }
   };
 
@@ -79,7 +76,7 @@ export const useChatScroll = (
       behavior: behavior === 'instant' ? 'auto' : behavior,
     });
 
-    newUnseenMessages.value = 0;
+    newUnseenMessagesCount.value = 0;
     showScrollToBottomBtn.value = false;
   };
 
@@ -87,7 +84,7 @@ export const useChatScroll = (
     () => messages.value?.length,
     (newValue, oldValue) => {
       const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message @author ye.pohranichna
-      if (newMessageReceived) scrollToBottomAfterNewMessage();
+      if (newMessageReceived) handleBtnAfterNewMessage();
     },
     {
       flush: 'post',
@@ -96,7 +93,7 @@ export const useChatScroll = (
 
   return {
     showScrollToBottomBtn,
-    newUnseenMessages,
+    newUnseenMessagesCount,
     scrollToBottom,
     handleChatScroll,
     handleChatResize,

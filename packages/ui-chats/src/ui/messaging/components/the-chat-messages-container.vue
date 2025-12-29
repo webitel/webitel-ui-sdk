@@ -26,7 +26,7 @@
       </div>
       <scroll-to-bottom-btn
         v-if="showScrollToBottomBtn"
-        :new-message-count="newUnseenMessages"
+        :new-message-count="newUnseenMessagesCount"
         @scroll="scrollToBottom('smooth')"
       />
     </section>
@@ -62,7 +62,7 @@ const { showAvatar, showChatDate } = useChatMessages(props.messages);
 
 const {
 	showScrollToBottomBtn,
-	newUnseenMessages,
+  newUnseenMessagesCount,
 	scrollToBottom,
 	handleChatScroll,
 	handleChatResize,
