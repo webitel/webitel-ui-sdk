@@ -278,7 +278,7 @@ interface Props extends DataTableProps{
   loading?: boolean;
   itemSize?: number | undefined;
 
-  trackSelectedRowBy: (item: unknown) => item
+  trackSelectedRowBy: (item: Entity) => Entity
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -378,12 +378,10 @@ const isColSortable = ({ sort }) => {
   return props.sortable && sort !== undefined;
 }
 
-const isCheckboxSelected = (row: unknown) => {
-  return _selected.value.includes(trackSelectedBy(row))
-}
+const isCheckboxSelected = (row: unknown) => _selected.value.includes(trackSelectedBy(row))
 
 const trackSelectedBy = (item: unknown) => {
-  return props.trackSelectedRowBy(item) ?? item.id
+  return props.trackSelectedRowBy ? props.trackSelectedRowBy(item) : item.id
 }
 
 const selectAll = () => {

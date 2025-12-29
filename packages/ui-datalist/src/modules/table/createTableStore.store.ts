@@ -134,7 +134,9 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       ? items
           .map(trackSelectedRowBy)
           .filter((item) => selected.value.some((sel) => item === sel))
-      : items.filter((item) => selected.value.includes(item));
+      : items
+          .map((item) => item.id)
+          .filter((id) => selected.value.includes(id));
   }
 
   const appendToDataList = async () => {
