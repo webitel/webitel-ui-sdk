@@ -33,7 +33,7 @@
       </div>
       <scroll-to-bottom-btn
         v-if="showScrollToBottomBtn"
-        :new-message-count="newUnseenMessages"
+        :new-message-count="newUnseenMessagesCount"
         @scroll="scrollToBottom('smooth')"
       />
     </section>
@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import { inject, useTemplateRef } from "vue";
+import { computed, inject, nextTick,onMounted, useTemplateRef } from "vue";
 
 import type {ResultCallbacks} from "../../../../../../src/types";
 import {ChatAction} from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
@@ -81,15 +81,21 @@ const { showAvatar, showChatDate } = useChatMessages(props.messages);
 
 const {
 	showScrollToBottomBtn,
-	newUnseenMessages,
+  newUnseenMessagesCount,
 	scrollToBottom,
 	handleChatScroll,
 	handleChatResize,
-} = useChatScroll(messagesContainer, props.messages);
+} = useChatScroll(messagesContainer, computed(() => props.messages));
 
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }
+
+onMounted(() => {
+  nextTick(() => {
+    scrollToBottom();
+  });
+})
 </script>
 
 <style scoped lang="scss">
