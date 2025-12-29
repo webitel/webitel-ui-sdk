@@ -241,12 +241,12 @@ export default {
     screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
     screenshots: 'Ekran rasmi | Ekran rasmlari',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Ko\'rib chiqish',
+      pdfs: 'PDF | PDFs',
+      preview: "Ko'rib chiqish",
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
         [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
-        [WebitelMediaExporterExportStatus.Done]: 'Tugallandi',
+        [WebitelMediaExporterExportStatus.Done]: 'Tayyor',
         [WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
       },
     },
@@ -393,6 +393,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera o‘chirilgan',
+    },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",

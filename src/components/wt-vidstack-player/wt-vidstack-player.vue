@@ -18,7 +18,6 @@
       cross-origin
       plays-inline
       @close="emit('close')"
-      @change-size="changeSize"
     >
       <media-provider
         class="wt-vidstack-player__provider"
@@ -52,7 +51,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
+import { computed, defineEmits, defineProps, provide, ref, useTemplateRef } from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -96,6 +95,7 @@ const fullscreen = ref(false)
 
 const changeSize = (value) => {
   size.value = value;
+  emit('change-size', value)
 }
 
 /** @author liza-pohranichna
@@ -262,6 +262,8 @@ const normalizedSrc = computed(() => {
     &.wt-vidstack-player {
       &--md {
         background: none;
+        pointer-events: none;
+        z-index: calc(var(--p-galleria-mask-z-index) - 1);
       }
     }
   }
@@ -275,6 +277,7 @@ const normalizedSrc = computed(() => {
     object-fit: cover;
     width: 100%;
     min-width: 0;
+    background: var(--p-player-wrapper-background);
   }
 }
 </style>

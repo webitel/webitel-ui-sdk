@@ -241,12 +241,11 @@ export default {
     screenRecordings: 'Экран жазбасы | Экран жазбалары',
     screenshots: 'Экран суреті | Экран суреттері',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Алдын ала қарау',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Күтуде',
         [WebitelMediaExporterExportStatus.Processing]: 'Өңделуде',
-        [WebitelMediaExporterExportStatus.Done]: 'Аяқталды',
+        [WebitelMediaExporterExportStatus.Done]: 'Дайын',
         [WebitelMediaExporterExportStatus.Failed]: 'Қате',
       },
     },
@@ -390,6 +389,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Камера өшірілген',
+    },
   },
   validation: {
     required: 'Өріс міндетті',

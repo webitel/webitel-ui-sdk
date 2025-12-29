@@ -3,14 +3,14 @@ import { ButtonScheme } from '@webitel/styleguide/component-schemes';
 import { ComponentSize } from '../../../../../enums';
 
 const colors = [
-    'primary',
-    'secondary',
-    'success',
-    'warn',
-    'error',
-    'transfer',
-    'job',
-    'info'
+  'primary',
+  'secondary',
+  'success',
+  'warn',
+  'error',
+  'transfer',
+  'job',
+  'info',
 ];
 
 const generateCustomColorCss = ({ colorName, dt }) => `
@@ -73,7 +73,7 @@ const generateCustomActiveIconColorCss = ({ colorName, dt }) => `
         .p-button--icon-active.p-button-${colorName}:not(:disabled):active svg {
             fill: ${dt(`button.${colorName}.activeColor`)};
         }
-`
+`;
 
 const generateCustomOutlinedColorCss = ({ colorName, dt }) => `
         .p-button-outlined.p-button-${colorName} {
@@ -91,7 +91,7 @@ const generateCustomOutlinedColorCss = ({ colorName, dt }) => `
         .p-button-outlined.p-button-${colorName} svg {
             fill: ${dt(`button.outlined.${colorName}.color`)};
         }
-`
+`;
 
 const button = {
   root: ButtonScheme.sizes,
@@ -133,11 +133,6 @@ const button = {
         }
         .p-button {
             min-width: 90px;
-            font-weight: 600;
-            font-size: 12px;
-            line-height: 24px;
-            font-family: "Montserrat", monospace;
-            text-transform: uppercase;
             border: none !important;
         }
         .p-button:hover {

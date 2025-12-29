@@ -241,13 +241,12 @@ export default {
     screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
     screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Xem trước',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Đang chờ',
         [WebitelMediaExporterExportStatus.Processing]: 'Đang xử lý',
-        [WebitelMediaExporterExportStatus.Done]: 'Hoàn thành',
-        [WebitelMediaExporterExportStatus.Failed]: 'Thất bại',
+        [WebitelMediaExporterExportStatus.Done]: 'Xong',
+        [WebitelMediaExporterExportStatus.Failed]: 'Lỗi',
       },
     },
   },
@@ -394,6 +393,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Camera đã được tắt',
+    },
   },
   validation: {
     required: 'Trường bắt buộc',
