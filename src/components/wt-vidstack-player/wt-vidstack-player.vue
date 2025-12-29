@@ -277,6 +277,7 @@ const normalizedSrc = computed(() => {
     object-fit: cover;
     width: 100%;
     min-width: 0;
+    background: var(--p-player-wrapper-background);
   }
 }
 </style>
