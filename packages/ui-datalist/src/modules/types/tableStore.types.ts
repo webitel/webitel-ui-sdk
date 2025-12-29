@@ -5,12 +5,15 @@ import { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTa
 import { IFiltersManager } from '../filters';
 import { DatalistStoreProviderType } from './StoreProvider';
 
+export type TrackSelectedRowBy<T> = (row: T) => T;
+
 export interface useTableStoreConfig<Entity> {
   apiModule: ApiModule<Entity>;
   headers: WtTableHeader[];
   disablePersistence?: boolean | [];
   storeType?: DatalistStoreProviderType;
   isAppendDataList?: boolean;
+  trackSelectedRowBy?: TrackSelectedRowBy<Entity>;
   // etagMode: boolean;
 }
 

@@ -379,13 +379,10 @@ const isColSortable = ({ sort }) => {
 }
 
 const isCheckboxSelected = (row: unknown) => {
-  console.log(_selected.value, ' _selected.value');
   return _selected.value.includes(trackSelectedBy(row))
 }
-console.log(props, ' props');
+
 const trackSelectedBy = (item: unknown) => {
-  console.log(item, ' item');
-  console.log(props.trackSelectedRowBy(item), ' props.trackSelectedRowBy(item)');
   return props.trackSelectedRowBy(item) ?? item.id
 }
 

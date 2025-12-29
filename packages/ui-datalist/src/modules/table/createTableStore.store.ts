@@ -23,6 +23,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     disablePersistence,
     storeType,
     isAppendDataList,
+    trackSelectedRowBy,
   } = config;
   const usePaginationStore = createTablePaginationStore(namespace, config);
   const useHeadersStore = createTableHeadersStore(namespace, config, {
@@ -117,11 +118,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
       dataList.value = items;
 
-      const filteredSelection = items
-        .map((item) => item.id)
-        .filter((id) => selected.value.includes(id));
-
-      updateSelected(filteredSelection);
+      updateSelected(filterSelected(items));
 
       $patchPaginationStore({ next });
     } catch (err) {
@@ -131,6 +128,14 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       isLoading.value = false;
     }
   };
+
+  function filterSelected(items: Entity[]): Entity[] {
+    return trackSelectedRowBy
+      ? items
+          .map(trackSelectedRowBy)
+          .filter((item) => selected.value.some((sel) => item === sel))
+      : items.filter((item) => selected.value.includes(item));
+  }
 
   const appendToDataList = async () => {
     isLoading.value = true;
