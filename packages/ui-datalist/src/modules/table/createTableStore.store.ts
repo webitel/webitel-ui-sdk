@@ -46,9 +46,14 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = paginationStore;
 
   const headersStore = useHeadersStore();
-  const { headers, shownHeaders, fields, sort, columnWidths, isReorderingColumn } = makeThisToRefs<
-    typeof headersStore
-  >(headersStore, storeType);
+  const {
+    headers,
+    shownHeaders,
+    fields,
+    sort,
+    columnWidths,
+    isReorderingColumn,
+  } = makeThisToRefs<typeof headersStore>(headersStore, storeType);
   const {
     updateSort,
     columnResize,
@@ -58,9 +63,11 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = headersStore;
 
   const filtersStore = useFiltersStore();
-  const { filtersManager, isRestoring: isFiltersRestoring, searchMode } = makeThisToRefs<
-    typeof filtersStore
-  >(filtersStore, storeType);
+  const {
+    filtersManager,
+    isRestoring: isFiltersRestoring,
+    searchMode,
+  } = makeThisToRefs<typeof filtersStore>(filtersStore, storeType);
   const {
     hasFilter,
     addFilter,
@@ -109,7 +116,13 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       const { items, next } = await apiModule.getList(params);
 
       dataList.value = items;
-      updateSelected([]);
+
+      const filteredSelection = items
+        .map((item) => item.id)
+        .filter((id) => selected.value.includes(id));
+
+      updateSelected(filteredSelection);
+
       $patchPaginationStore({ next });
     } catch (err) {
       error.value = err;
@@ -203,9 +216,9 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       [() => filtersManager.value.getAllValues(), sort, fields, size],
       async () => {
         /*
-        * @author @Lera24
-        * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
-        * */
+         * @author @Lera24
+         * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
+         * */
         if (isReorderingColumn.value) {
           return;
         }
