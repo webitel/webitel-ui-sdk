@@ -27,6 +27,7 @@
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
+    "vue-i18n": "^11.0.0",
     "zod": "^3.25.55"
   },
   "devDependencies": {
@@ -97,6 +98,10 @@
     "./enums": {
       "types": "./types/enums/index.d.ts",
       "import": "./src/enums/index.ts"
+    },
+    "./locale": {
+      "types": "./src/locale/locale.ts",
+      "import": "./src/locale/locale.ts"
     }
   }
 }

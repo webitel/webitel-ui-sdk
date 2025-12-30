@@ -25,12 +25,15 @@ const notifyTransformer = (notificationObject) => {
 		};
 	}
 	if (notificationObject instanceof Error) {
+		const errorText =
+			notificationObject.response?.data?.locale ||
+			notificationObject.response?.data?.detail ||
+			notificationObject.response?.data?.message ||
+			notificationObject;
+
 		apiServicesConfig.eventBus?.$emit('notification', {
 			type: 'error',
-			text:
-				notificationObject.response?.data?.detail ||
-				notificationObject.response?.data?.message ||
-				notificationObject,
+			text: errorText,
 		});
 	}
 	return notificationObject;

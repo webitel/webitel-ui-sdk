@@ -12,7 +12,8 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+  localizeError,
+  sanitize,
 	snakeToCamel,
 } from '../../transformers';
 
@@ -26,8 +27,8 @@ const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
 		const response = await getPdfService().createScreenrecordingExport(agentId, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+    throw applyTransform(err, [localizeError, notify]);
+  }
 };
 
 const listScreenrecordingExports = async (params: any) => {
