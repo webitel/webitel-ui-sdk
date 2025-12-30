@@ -50,7 +50,6 @@ const load = () => {
   <div class="flex gap-2 mt-2">
     <wt-button
       v-for="color in colors"
-      disabled
       :key="color"
       :color="color"
       :loading="loading"
@@ -75,7 +74,6 @@ const load = () => {
   </div>
   <div class="flex gap-2 mt-2">
     <wt-button
-    disabled
       v-for="color in colors"
       :key="color"
       :color="color"
