@@ -13,7 +13,7 @@
           <chat-messages-container
             :messages="props.messages"
             :next="props.canLoadNextMessages"
-            :is-loading="props.isLoading"
+            :is-loading="props.isNextMessagesLoading"
             :without-avatars="props.withoutAvatars"
             @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
             @[ChatAction.AttachFiles]="sendFile"
@@ -71,7 +71,7 @@ const props = withDefaults(
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
     canLoadNextMessages?: boolean; // 'next'
-    isLoading?: boolean;
+    isNextMessagesLoading?: boolean;
     withoutAvatars?: boolean;
 	}>(),
 	{
@@ -81,7 +81,7 @@ const props = withDefaults(
 			ChatAction.SendMessage,
 		],
     canLoadNextMessages: false,
-    isLoading: false,
+    isNextMessagesLoading: false,
 	},
 );
 

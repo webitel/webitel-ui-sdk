@@ -43,7 +43,6 @@
 import type { Emitter } from "mitt";
 import { computed, inject, nextTick,onMounted, useTemplateRef } from "vue";
 
-import type {ResultCallbacks} from "../../../../../../src/types";
 import {ChatAction} from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
