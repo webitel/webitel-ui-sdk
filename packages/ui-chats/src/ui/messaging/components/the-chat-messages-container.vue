@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import { computed, inject, nextTick,onMounted, useTemplateRef } from "vue";
+import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
@@ -62,21 +62,24 @@ const { showAvatar, showChatDate } = useChatMessages(props.messages);
 
 const {
 	showScrollToBottomBtn,
-  newUnseenMessagesCount,
+	newUnseenMessagesCount,
 	scrollToBottom,
 	handleChatScroll,
 	handleChatResize,
-} = useChatScroll(messagesContainer, computed(() => props.messages));
+} = useChatScroll(
+	messagesContainer,
+	computed(() => props.messages),
+);
 
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
 }
 
 onMounted(() => {
-  nextTick(() => {
-    scrollToBottom();
-  });
-})
+	nextTick(() => {
+		scrollToBottom();
+	});
+});
 </script>
 
 <style scoped lang="scss">
