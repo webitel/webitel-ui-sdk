@@ -15,6 +15,7 @@
           :message="message"
           :show-avatar="showAvatar(index)"
           :without-avatars="props.withoutAvatars"
+          @[MessageAction.OpenImage]="openImage(message)"
         >
           <template #before-message>
             <chat-date-divider
@@ -34,17 +35,19 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
+import {computed, inject, nextTick, onMounted, useTemplateRef} from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
 import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
+import { MessageAction } from "../modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "../types/ChatMessage.types";
 import ChatDateDivider from "./chat-date-divider.vue";
 import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
+const openImage = inject('openChatMessageImage');
 
 const props = withDefaults(
 	defineProps<{

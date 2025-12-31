@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { computed, provide, ref } from "vue";
+import {computed, provide, ref} from "vue";
 
 import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
 import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
@@ -58,6 +58,7 @@ import {
 import Dropzone from "./messaging/components/dropzone.vue";
 import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
+import { MessageAction } from "./messaging/modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -89,6 +90,10 @@ const emit = defineEmits<{
 		files: File[],
 		options: ResultCallbacks,
 	): void;
+  (
+    e: typeof MessageAction.OpenImage,
+    message: ChatMessageType,
+  ): void;
 }>();
 
 const slots = defineSlots<
@@ -102,7 +107,7 @@ const uiChatsEmitter = createUiChatsEmitter();
 
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
-
+provide('openChatMessageImage', openChatMessageImage);
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
 const draft = ref<string>("");
@@ -124,6 +129,10 @@ function sendMessage() {
 
 function sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
+}
+
+function openChatMessageImage(message: ChatMessageType) {
+  emit(MessageAction.OpenImage, message);
 }
 </script>
 
