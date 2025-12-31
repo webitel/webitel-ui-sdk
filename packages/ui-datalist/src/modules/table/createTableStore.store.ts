@@ -130,13 +130,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   };
 
   function filterSelected(items: Entity[]): Entity[] {
-    return trackSelectedRowBy
-      ? items
-          .map(trackSelectedRowBy)
-          .filter((item) => selected.value.some((sel) => item === sel))
-      : items
-          .map((item) => item.id)
-          .filter((id) => selected.value.includes(id));
+    const trackBy = trackSelectedRowBy ?? ((item) => item.id);
+    return items.map(trackBy).filter((key) => selected.value.includes(key));
   }
 
   const appendToDataList = async () => {
