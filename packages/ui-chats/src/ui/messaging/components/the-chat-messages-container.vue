@@ -38,7 +38,7 @@ import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
-// import ChatMessage from "../modules/message/components/chat-message.vue";
+import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
 import ChatDateDivider from "./chat-date-divider.vue";
