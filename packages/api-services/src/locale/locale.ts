@@ -1,1 +1,1 @@
-export { setupErrorLocalization, getMessages, getCurrentLocale } from './localeRegistry';
+export * from './index';

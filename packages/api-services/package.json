@@ -27,7 +27,6 @@
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
-    "vue-i18n": "^11.0.0",
     "zod": "^3.25.55"
   },
   "devDependencies": {
@@ -45,6 +44,7 @@
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
+    "vue-i18n": "^11.2.7",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
   },
