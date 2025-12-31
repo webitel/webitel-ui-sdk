@@ -49,7 +49,7 @@
           </div>
         </template>
 
-        <template v-else-if="props['sender:stream']">
+        <template v-else-if="props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
             :stream="props['sender:stream']"
             :class="`video-call-sender--${innerSize}`"
@@ -166,7 +166,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const mainStream = computed(() => {
-  if (!props['receiver:video:enabled']) return null;
+  if (!props['receiver:video:enabled']) return props['sender:stream'];
 
   return props['receiver:stream'] || props['sender:stream'];
 })
