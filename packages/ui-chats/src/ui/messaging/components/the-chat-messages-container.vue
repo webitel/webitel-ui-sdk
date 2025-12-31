@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import {computed, inject, nextTick, onMounted, useTemplateRef} from "vue";
+import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
 
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
@@ -78,7 +78,7 @@ function focusOnInput() {
 }
 
 function clickOnImage(message: ChatMessageType) {
-  uiChatsEmitter!.emit('clickChatMessageImage', message)
+	uiChatsEmitter!.emit("clickChatMessageImage", message);
 }
 
 onMounted(() => {

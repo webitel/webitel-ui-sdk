@@ -82,13 +82,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (
-    e: typeof MessageAction.ClickOnImage,
-  ): void;
-  (
-    e: typeof MessageAction.InitializedPlayer,
-    player: object,
-  ): void;
+	(e: typeof MessageAction.ClickOnImage): void;
+	(e: typeof MessageAction.InitializedPlayer, player: object): void;
 }>();
 
 const size = inject<ComponentSize>("size");

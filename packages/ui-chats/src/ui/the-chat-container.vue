@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ComponentSize } from "@webitel/ui-sdk/enums";
-import {computed, provide, ref} from "vue";
+import { computed, provide, ref } from "vue";
 
 import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
 import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
@@ -90,10 +90,7 @@ const emit = defineEmits<{
 		files: File[],
 		options: ResultCallbacks,
 	): void;
-  (
-    e: typeof MessageAction.ClickOnImage,
-    message: ChatMessageType,
-  ): void;
+	(e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
 }>();
 
 const slots = defineSlots<
@@ -108,8 +105,8 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
-uiChatsEmitter?.on('clickChatMessageImage', message => {
-  emit(MessageAction.ClickOnImage, message);
+uiChatsEmitter?.on("clickChatMessageImage", (message) => {
+	emit(MessageAction.ClickOnImage, message);
 });
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
@@ -133,7 +130,6 @@ function sendMessage() {
 function sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
-
 </script>
 
 <style scoped>
