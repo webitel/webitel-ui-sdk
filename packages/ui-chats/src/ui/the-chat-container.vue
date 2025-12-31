@@ -109,7 +109,6 @@ provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
 uiChatsEmitter?.on('clickChatMessageImage', message => {
-  console.log('uiChatsEmitter.on:', message);
   emit(MessageAction.ClickOnImage, message);
 });
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
