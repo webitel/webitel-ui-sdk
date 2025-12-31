@@ -77,7 +77,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
-  muted: false,
+  muted: true,
   title: '',
   username: '',
   closable: false,
@@ -148,6 +148,10 @@ const normalizedSrc = computed(() => {
     margin: 0;
   }
 
+  &__provider {
+     height: 100%;
+   }
+
   &--sm {
     position: fixed;
     right: var(--spacing-md);
@@ -161,7 +165,6 @@ const normalizedSrc = computed(() => {
 
     .wt-vidstack-player__provider {
       display: block;
-      height: 100%;
       padding-bottom: var(--p-player-control-bar-sm-height);
     }
   }
