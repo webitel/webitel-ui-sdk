@@ -1,5 +1,5 @@
 export const MessageAction = {
-  OpenImage: 'openImage',
+  ClickOnImage: 'clickOnImage',
   InitializedPlayer: 'initializedPlayer',
 } as const;
 

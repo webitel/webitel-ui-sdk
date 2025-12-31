@@ -15,7 +15,7 @@
           :message="message"
           :show-avatar="showAvatar(index)"
           :without-avatars="props.withoutAvatars"
-          @[MessageAction.OpenImage]="openImage(message)"
+          @[MessageAction.ClickOnImage]="clickOnImage(message)"
         >
           <template #before-message>
             <chat-date-divider
@@ -47,7 +47,6 @@ import ChatDateDivider from "./chat-date-divider.vue";
 import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
-const openImage = inject('openChatMessageImage');
 
 const props = withDefaults(
 	defineProps<{
@@ -76,6 +75,10 @@ const {
 
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
+}
+
+function clickOnImage(message: ChatMessageType) {
+  uiChatsEmitter!.emit('clickChatMessageImage', message)
 }
 
 onMounted(() => {

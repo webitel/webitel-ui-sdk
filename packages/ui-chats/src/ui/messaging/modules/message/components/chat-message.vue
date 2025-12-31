@@ -32,7 +32,7 @@
         <message-image
           v-else-if="image"
           :file="image"
-          @open="emit(MessageAction.OpenImage)"
+          @open="emit(MessageAction.ClickOnImage)"
         />
         <message-document
           v-else-if="document"
@@ -83,7 +83,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   (
-    e: typeof MessageAction.OpenImage,
+    e: typeof MessageAction.ClickOnImage,
   ): void;
   (
     e: typeof MessageAction.InitializedPlayer,

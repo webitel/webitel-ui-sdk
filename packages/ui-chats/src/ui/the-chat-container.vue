@@ -91,7 +91,7 @@ const emit = defineEmits<{
 		options: ResultCallbacks,
 	): void;
   (
-    e: typeof MessageAction.OpenImage,
+    e: typeof MessageAction.ClickOnImage,
     message: ChatMessageType,
   ): void;
 }>();
@@ -107,7 +107,11 @@ const uiChatsEmitter = createUiChatsEmitter();
 
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
-provide('openChatMessageImage', openChatMessageImage);
+
+uiChatsEmitter?.on('clickChatMessageImage', message => {
+  console.log('uiChatsEmitter.on:', message);
+  emit(MessageAction.ClickOnImage, message);
+});
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
 const draft = ref<string>("");
@@ -131,9 +135,6 @@ function sendFile(files: File[]) {
 	emit(`action:${ChatAction.AttachFiles}`, files, {});
 }
 
-function openChatMessageImage(message: ChatMessageType) {
-  emit(MessageAction.OpenImage, message);
-}
 </script>
 
 <style scoped>
