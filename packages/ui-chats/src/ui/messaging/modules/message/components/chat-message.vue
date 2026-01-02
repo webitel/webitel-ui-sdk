@@ -32,7 +32,7 @@
         <message-image
           v-else-if="image"
           :file="image"
-          @open="emit('open-image')"
+          @open="emit(MessageAction.ClickOnImage)"
         />
         <message-document
           v-else-if="document"
@@ -58,6 +58,7 @@ import { computed, defineEmits, defineProps, inject } from "vue";
 
 import type { ChatMessageType } from "../../../types/ChatMessage.types";
 import { useChatMessageFile } from "../composables/useChatMessageFile";
+import { MessageAction } from "../enums/MessageAction.enum";
 import MessageAvatar from "./details/chat-message-avatar.vue";
 import MessageBlockedError from "./details/chat-message-blocked-error.vue";
 import MessageDocument from "./details/chat-message-document.vue";
@@ -81,10 +82,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-	"open-image": [];
-	"initialized-player": [
-		object,
-	];
+	(e: typeof MessageAction.ClickOnImage): void;
+	(e: typeof MessageAction.InitializedPlayer, player: object): void;
 }>();
 
 const size = inject<ComponentSize>("size");
@@ -108,7 +107,7 @@ const getClientUsername = computed<string>(() => {
 });
 
 function handlePlayerInitialize(player) {
-	emit("initialized-player", {
+	emit(MessageAction.InitializedPlayer, {
 		player,
 	});
 }

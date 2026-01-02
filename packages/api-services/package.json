@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.104",
+  "version": "0.0.105",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
@@ -44,6 +44,7 @@
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
+    "vue-i18n": "^11.2.8",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
   },
@@ -97,6 +98,10 @@
     "./enums": {
       "types": "./types/enums/index.d.ts",
       "import": "./src/enums/index.ts"
+    },
+    "./locale": {
+      "types": "./src/locale/locale.ts",
+      "import": "./src/locale/locale.ts"
     }
   }
 }

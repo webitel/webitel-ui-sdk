@@ -21,6 +21,7 @@
           :message="message"
           :show-avatar="showAvatar(index)"
           :without-avatars="props.withoutAvatars"
+          @[MessageAction.ClickOnImage]="clickOnImage(message)"
         >
           <template #before-message>
             <chat-date-divider
@@ -47,6 +48,7 @@ import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
 import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
+import { MessageAction } from "../modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "../types/ChatMessage.types";
 import ChatDateDivider from "./chat-date-divider.vue";
 import ChatObserver from "./chat-observer.vue";
@@ -91,6 +93,10 @@ const {
 
 function focusOnInput() {
 	uiChatsEmitter?.on("focusOnTextField", focus);
+}
+
+function clickOnImage(message: ChatMessageType) {
+	uiChatsEmitter!.emit("clickChatMessageImage", message);
 }
 
 onMounted(() => {
