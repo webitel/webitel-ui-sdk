@@ -26,7 +26,7 @@ const notifyTransformer = (notificationObject) => {
 	}
 	if (notificationObject instanceof Error) {
 		const errorText =
-			notificationObject.response?.data?.locale ||
+			notificationObject.response?.data?.translation ||
 			notificationObject.response?.data?.detail ||
 			notificationObject.response?.data?.message ||
 			notificationObject;

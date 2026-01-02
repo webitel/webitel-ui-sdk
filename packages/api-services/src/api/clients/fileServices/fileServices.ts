@@ -12,7 +12,6 @@ import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
-	localizeError,
 	merge,
 	notify,
 	sanitize,
@@ -68,7 +67,7 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -77,7 +76,7 @@ const deleteFiles = async (id) => {
 		const response = await getFileService().deleteFiles({ id });
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -133,7 +132,7 @@ const getScreenRecordingsByUser = async (params: any) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -146,7 +145,7 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 		);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -202,7 +201,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -215,7 +214,7 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 		);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [notify]);
 	}
 };
 
@@ -251,7 +250,7 @@ const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: st
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [localizeError, notify]);
+    throw applyTransform(err, [notify]);
   }
 };
 

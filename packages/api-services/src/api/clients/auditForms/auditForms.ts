@@ -14,7 +14,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-  localizeError,
+	translateError,
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
@@ -69,7 +69,7 @@ const getAuditFormsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
@@ -78,7 +78,7 @@ const getAuditForm = async ({ itemId: id }) => {
 		const response = await getAuditFormService().readAuditForm(id);
 		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
@@ -100,7 +100,7 @@ const createAuditForm = async ({ itemInstance }) => {
 		const response = await getAuditFormService().createAuditForm(item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
@@ -116,7 +116,7 @@ const updateAuditForm = async ({ itemInstance, itemId: id }) => {
 		const response = await getAuditFormService().updateAuditForm(id, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
@@ -132,7 +132,7 @@ const patchAuditForm = async ({ changes, id }) => {
 		const response = await getAuditFormService().patchAuditForm(id, body);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
@@ -141,7 +141,7 @@ const deleteAuditForm = async ({ itemId: id }) => {
 		const response = await getAuditFormService().deleteAuditForm(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [localizeError, notify]);
+		throw applyTransform(err, [translateError, notify]);
 	}
 };
 
