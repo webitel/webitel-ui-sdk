@@ -1,13 +1,13 @@
 export const ChatAction = {
-  SendMessage: 'sendMessage',
-  AttachFiles: 'attachFiles',
-  EmojiPicker: 'emojiPicker',
-  QuickReplies: 'quickReplies',
-  LoadNextMessages: 'loadNextMessages',
+	SendMessage: "sendMessage",
+	AttachFiles: "attachFiles",
+	EmojiPicker: "emojiPicker",
+	QuickReplies: "quickReplies",
+	LoadNextMessages: "loadNextMessages",
 } as const;
 
 export type ChatAction = (typeof ChatAction)[keyof typeof ChatAction];
 
 export type SharedActionSlots = {
-  [key in `action:${ChatAction}`]?: () => any;
+	[key in `action:${ChatAction}`]?: () => any;
 };

@@ -71,9 +71,9 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
-    canLoadNextMessages?: boolean; // 'next'
-    isNextMessagesLoading?: boolean;
-    withoutAvatars?: boolean;
+		canLoadNextMessages?: boolean; // 'next'
+		isNextMessagesLoading?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
@@ -81,8 +81,8 @@ const props = withDefaults(
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
-    canLoadNextMessages: false,
-    isNextMessagesLoading: false,
+		canLoadNextMessages: false,
+		isNextMessagesLoading: false,
 	},
 );
 
@@ -97,10 +97,8 @@ const emit = defineEmits<{
 		files: File[],
 		options: ResultCallbacks,
 	): void;
-	(
-		e: typeof ChatAction.LoadNextMessages,
-	): void;
-  (e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
+	(e: typeof ChatAction.LoadNextMessages): void;
+	(e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
 }>();
 
 const slots = defineSlots<

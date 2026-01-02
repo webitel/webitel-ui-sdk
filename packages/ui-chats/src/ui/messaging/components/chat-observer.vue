@@ -11,23 +11,18 @@
 <script setup lang="ts">
 import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 
-
 const props = withDefaults(
-  defineProps<{
-    next?: boolean;
-    isLoading?: boolean;
-  }>(),
-  {
-    next: false,
-    isLoading: false,
-  },
+	defineProps<{
+		next?: boolean;
+		isLoading?: boolean;
+	}>(),
+	{
+		next: false,
+		isLoading: false,
+	},
 );
 
-const emit = defineEmits<{
-  (
-    e: typeof ChatAction.LoadNextMessages,
-  ): void;
-}>();
+const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
 </script>
 
 <style scoped>
