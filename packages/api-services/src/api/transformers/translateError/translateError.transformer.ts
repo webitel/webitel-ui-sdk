@@ -1,6 +1,5 @@
-import { get } from 'lodash-es';
 import { snakeToCamel } from '@webitel/api-services/utils';
-import { getCurrentLocale, getMessages } from '../../../locale/localeRegistry';
+import { config } from '../../../config/config';
 
 const BACKEND_ERRORS_PREFIX = 'backendErrors';
 
@@ -12,17 +11,17 @@ const translateError = (err) => {
   const errorId = err?.response?.data?.id;
   if (!errorId) return err;
 
-  const messages = getMessages(getCurrentLocale());
-  if (!messages) return err;
+  const i18n = config.i18n;
+  if (!i18n?.global) return err;
 
   // Convert snake_case error ID to camelCase and build full key path
   const fullKey = `${BACKEND_ERRORS_PREFIX}.${snakeToCamel(errorId)}`;
 
-  // Navigate nested message object: backendErrors.camelCaseErrorId
-  const translation = get(messages, fullKey);
+  // Use i18n.t() to translate the error message
+  const translation = i18n.global.t(fullKey, {}, { missingWarn: false, fallbackWarn: false });
 
-  // Add translation to error response if found
-  if (translation && err.response?.data) {
+  // Add translation to error response if found (i18n.t returns the key if translation is missing)
+  if (translation && translation !== fullKey && err.response?.data) {
     err.response.data.translation = translation;
   }
 
