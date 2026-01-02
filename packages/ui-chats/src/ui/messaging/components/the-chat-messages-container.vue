@@ -9,6 +9,12 @@
         @scroll="handleChatScroll"
         @resize="handleChatResize"
       >
+        <chat-observer
+          v-if="props.next"
+          :next="props.next"
+          :loading="props.isLoading"
+          @next="emit(ChatAction.LoadNextMessages)"
+          />
         <chat-message
           v-for="(message, index) of props.messages"
           :key="message.id"
@@ -37,6 +43,7 @@
 import type { Emitter } from "mitt";
 import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
 
+import {ChatAction} from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
 import ChatMessage from "../modules/message/components/chat-message.vue";
@@ -44,6 +51,7 @@ import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import { MessageAction } from "../modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "../types/ChatMessage.types";
 import ChatDateDivider from "./chat-date-divider.vue";
+import ChatObserver from "./chat-observer.vue";
 import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
@@ -51,12 +59,22 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 const props = withDefaults(
 	defineProps<{
 		messages: ChatMessageType[];
-		withoutAvatars?: boolean;
+    next?: boolean;
+    isLoading?: boolean;
+    withoutAvatars?: boolean;
 	}>(),
 	{
-		withoutAvatars: false,
+    next: false,
+    isLoading: false,
+    withoutAvatars: false,
 	},
 );
+
+const emit = defineEmits<{
+  (
+    e: typeof ChatAction.LoadNextMessages,
+  ): void;
+}>();
 
 const messagesContainer = useTemplateRef("messages-container");
 
@@ -110,4 +128,5 @@ onMounted(() => {
   scrollbar-gutter: stable both-edges;
   gap: var(--spacing-xs);
 }
+
 </style>

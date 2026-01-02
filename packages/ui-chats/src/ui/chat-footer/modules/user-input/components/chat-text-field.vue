@@ -1,6 +1,7 @@
 <template>
   <wt-textarea
     ref="chatTextFieldInput"
+    class="chat-text-field"
     :model-value="textModel"
     :size="size"
     autoresize
@@ -48,3 +49,12 @@ function insertAtCursor(text: string) {
 }
 </script>
 
+<style scoped>
+.chat-text-field :deep(textarea) {
+  /* https://webitel.atlassian.net/browse/WTEL-7388
+   fixed styles after component migrated on vuetify */
+  max-height: 100%;
+  min-height: auto;
+  overflow: auto !important;
+}
+</style>
