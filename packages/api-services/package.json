@@ -44,6 +44,7 @@
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
+    "vue-i18n": "^11.2.7",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
   },
@@ -97,6 +98,10 @@
     "./enums": {
       "types": "./types/enums/index.d.ts",
       "import": "./src/enums/index.ts"
+    },
+    "./locale": {
+      "types": "./src/locale/locale.ts",
+      "import": "./src/locale/locale.ts"
     }
   }
 }
