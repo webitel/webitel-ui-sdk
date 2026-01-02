@@ -11,12 +11,12 @@ type __VLS_Slots = {} & {
 } & {
     'after-message'?: (props: typeof __VLS_44) => any;
 };
-declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    "open-image": () => any;
-    "initialized-player": (args_0: object) => any;
+declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+    clickOnImage: () => any;
+    initializedPlayer: (player: object) => any;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    "onOpen-image"?: () => any;
-    "onInitialized-player"?: (args_0: object) => any;
+    onClickOnImage?: () => any;
+    onInitializedPlayer?: (player: object) => any;
 }>, {
     username: string;
     showAvatar: boolean;

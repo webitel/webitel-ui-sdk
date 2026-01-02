@@ -20,7 +20,7 @@
     <wt-empty
       v-show="showEmpty"
       :image="imageEmpty"
-      :text="textEmpty"
+      :headline="textEmpty"
     />
 
     <div v-show="!isLoading" class="table-loading-wrapper">
@@ -64,11 +64,12 @@
         <template #actions="{ item }">
           <wt-icon-action
             action="download"
-            :disabled="item.status !== WebitelMediaExporterExportStatus.Done"
+            :disabled="isDownloadDisabled(item)"
             @click="downloadPdf(item.fileId)"
           />
           <wt-icon-action
             action="delete"
+            :disabled="isDeleteDisabled(item)"
             @click="
               askDeleteConfirmation({
                 deleted: [item],
@@ -180,6 +181,14 @@ initializeDefaultFilters();
 const prettifyTimestamp = (timestamp: string | number) => {
   if (!timestamp) return '';
   return new Date(+timestamp).toLocaleString();
+};
+
+const isDownloadDisabled = (item: WebitelMediaExporterExportRecord) => {
+  return item.status !== WebitelMediaExporterExportStatus.Done;
+};
+
+const isDeleteDisabled = (item: WebitelMediaExporterExportRecord) => {
+  return item.status !== WebitelMediaExporterExportStatus.Done && item.status !== WebitelMediaExporterExportStatus.Failed;
 };
 
 const {

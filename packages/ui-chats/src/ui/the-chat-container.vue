@@ -58,6 +58,7 @@ import {
 import Dropzone from "./messaging/components/dropzone.vue";
 import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
 import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
+import { MessageAction } from "./messaging/modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -89,6 +90,7 @@ const emit = defineEmits<{
 		files: File[],
 		options: ResultCallbacks,
 	): void;
+	(e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
 }>();
 
 const slots = defineSlots<
@@ -103,6 +105,9 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
+uiChatsEmitter?.on("clickChatMessageImage", (message) => {
+	emit(MessageAction.ClickOnImage, message);
+});
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
 const draft = ref<string>("");
@@ -132,5 +137,6 @@ function sendFile(files: File[]) {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 </style>

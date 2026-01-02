@@ -16,7 +16,17 @@
       <slot name="content" :size="innerSize" />
 
       <slot v-if="!mainStream" name="overlay" :size="innerSize">
-        <div class="video-call-overlay"></div>
+        <div class="video-call-overlay">
+          <div
+            v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
+            :class="`video-call-receiver--${innerSize}`"
+            class="video-call-receiver video-call-receiver--muted"
+          >
+            <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
+
+            <span class="video-call-receiver-text">{{ t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`) }}</span>
+          </div>
+        </div>
       </slot>
 
       <div
@@ -39,7 +49,7 @@
           </div>
         </template>
 
-        <template v-else-if="props['sender:stream']">
+        <template v-else-if="props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
             :stream="props['sender:stream']"
             :class="`video-call-sender--${innerSize}`"
@@ -90,19 +100,20 @@
 </template>
 
 <script setup lang="ts">
-import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {computed} from 'vue';
+import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import {WtIcon} from "../../../../components";
+import { WtIcon } from '../../../../components';
 import {
   RecordingIndicator,
   ScreenshotBox,
-  VideoCallControlsPanel
-} from "../../../../components/wt-vidstack-player/components";
-import {ComponentSize} from "../../../../enums";
-import {ResultCallbacks} from '../../../../types';
-import {ScreenshotStatus} from '../../types';
-import {VideoCallAction} from './enums/VideoCallAction.enum';
+  VideoCallControlsPanel,
+} from '../../../../components/wt-vidstack-player/components';
+import { ComponentSize, WebitelApplications } from '../../../../enums';
+import { ResultCallbacks } from '../../../../types';
+import { ScreenshotStatus } from '../../types';
+import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(defineProps<{
   'sender:stream'?: MediaStream | null;
@@ -152,11 +163,19 @@ const emit = defineEmits<{
   (e: `change-size`, size: ComponentSize): void;
 }>()
 
+const { t } = useI18n();
+
 const mainStream = computed(() => {
-  if (!props['receiver:video:enabled']) return null;
+  if (!props['receiver:video:enabled']) return props['sender:stream'];
 
   return props['receiver:stream'] || props['sender:stream'];
 })
+
+const receiverVideoMutedIconSizes = {
+  [ComponentSize.SM]: ComponentSize.MD,
+  [ComponentSize.MD]: ComponentSize.LG,
+  [ComponentSize.LG]: ComponentSize.XXL,
+}
 
 const senderVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
@@ -166,6 +185,8 @@ const senderVideoMutedIconSizes = {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .video-call {
   flex: 0 0 auto;
 
@@ -177,6 +198,7 @@ const senderVideoMutedIconSizes = {
           bottom: var(--spacing-sm);
           top: unset;
         }
+
         &--md {
           top: unset;
           left: var(--spacing-sm);
@@ -192,6 +214,7 @@ const senderVideoMutedIconSizes = {
           right: var(--spacing-sm);
           bottom: var(--spacing-sm);
         }
+
         &--md {
           top: unset;
           right: var(--spacing-sm);
@@ -258,6 +281,32 @@ const senderVideoMutedIconSizes = {
         left: var(--p-player-counter-position-padding-lg);
         bottom: var(--p-player-counter-position-padding-lg);
       }
+    }
+  }
+
+  &-receiver {
+    color: var(--p-player-wrapper-muted-color);
+
+    &--sm {
+      @extend %typo-body-2;
+
+      .video-call-receiver-text {
+        max-width: 73px;
+      }
+    }
+
+    &--md, &--lg {
+      @extend %typo-body-1;
+    }
+
+    &--muted {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      align-items: center;
+      justify-content: center;
     }
   }
 

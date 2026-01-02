@@ -1,14 +1,15 @@
 <template>
-    <wt-textarea
-        ref="chatTextFieldInput"
-        v-model="textModel"
-        :size="size"
-        autoresize
-    />
+  <wt-textarea
+    ref="chatTextFieldInput"
+    :model-value="textModel"
+    :size="size"
+    autoresize
+    @update:model-value="send"
+  />
 </template>
 
 <script setup lang="ts">
-import type { WtTextarea } from "@webitel/ui-sdk/components";
+import { WtTextarea } from "@webitel/ui-sdk/components";
 import { ComponentSize } from "@webitel/ui-sdk/enums";
 import insertTextAtCursor from "insert-text-at-cursor";
 import type { Emitter } from "mitt";
@@ -33,6 +34,10 @@ const textareaEl = computed(() =>
 	chatTextFieldInputRef.value?.$el.querySelector("textarea"),
 );
 
+function send(text: string) {
+	textModel.value = text;
+}
+
 function focus() {
 	textareaEl.value!.focus();
 }
@@ -42,3 +47,4 @@ function insertAtCursor(text: string) {
 	insertTextAtCursor(textareaEl.value!, text);
 }
 </script>
+

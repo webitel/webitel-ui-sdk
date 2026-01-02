@@ -241,13 +241,12 @@ export default {
     screenRecordings: 'Nagranie ekranu | Nagrania ekranu',
     screenshots: 'Zrzut ekranu | Zrzuty ekranu',
     agentPdfs: {
-      pdfs: 'PDF | PDF',
-      preview: 'Podgląd',
+      pdfs: 'PDF | PDFs',
       status: {
         [WebitelMediaExporterExportStatus.Pending]: 'Oczekujące',
         [WebitelMediaExporterExportStatus.Processing]: 'Przetwarzanie',
-        [WebitelMediaExporterExportStatus.Done]: 'Zakończone',
-        [WebitelMediaExporterExportStatus.Failed]: 'Niepowodzenie',
+        [WebitelMediaExporterExportStatus.Done]: 'Gotowe',
+        [WebitelMediaExporterExportStatus.Failed]: 'Błąd',
       },
     },
   },
@@ -390,6 +389,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera jest wyłączona',
+    },
   },
   validation: {
     required: 'Pole jest wymagane',

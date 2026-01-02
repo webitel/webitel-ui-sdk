@@ -18,7 +18,6 @@
       cross-origin
       plays-inline
       @close="emit('close')"
-      @change-size="changeSize"
     >
       <media-provider
         class="wt-vidstack-player__provider"
@@ -52,7 +51,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
+import { computed, defineEmits, defineProps, provide, ref, useTemplateRef } from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -78,7 +77,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
-  muted: false,
+  muted: true,
   title: '',
   username: '',
   closable: false,
@@ -96,6 +95,7 @@ const fullscreen = ref(false)
 
 const changeSize = (value) => {
   size.value = value;
+  emit('change-size', value)
 }
 
 /** @author liza-pohranichna
@@ -148,6 +148,10 @@ const normalizedSrc = computed(() => {
     margin: 0;
   }
 
+  &__provider {
+     height: 100%;
+   }
+
   &--sm {
     position: fixed;
     right: var(--spacing-md);
@@ -161,7 +165,6 @@ const normalizedSrc = computed(() => {
 
     .wt-vidstack-player__provider {
       display: block;
-      height: 100%;
       padding-bottom: var(--p-player-control-bar-sm-height);
     }
   }
@@ -277,6 +280,7 @@ const normalizedSrc = computed(() => {
     object-fit: cover;
     width: 100%;
     min-width: 0;
+    background: var(--p-player-wrapper-background);
   }
 }
 </style>

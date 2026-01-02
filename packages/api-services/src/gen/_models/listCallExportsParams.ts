@@ -14,4 +14,8 @@ page?: number;
  * Number of items per page.
  */
 size?: number;
+/**
+ * sorting criteria, e.g. "+created_at" or "-name"
+ */
+sort?: string;
 };
