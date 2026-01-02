@@ -16,7 +16,8 @@ export const listScreenrecordingExportsParams = zod.object({
 
 export const listScreenrecordingExportsQueryParams = zod.object({
   "page": zod.number().optional().describe('Page number (1-based).'),
-  "size": zod.number().optional().describe('Number of items per page.')
+  "size": zod.number().optional().describe('Number of items per page.'),
+  "sort": zod.string().optional().describe('sorting criteria, e.g. \"+created_at\" or \"-name\"')
 })
 
 export const listScreenrecordingExportsResponseItemsItemStatusDefault = "EXPORT_STATUS_UNSPECIFIED";
@@ -70,7 +71,8 @@ export const listCallExportsParams = zod.object({
 
 export const listCallExportsQueryParams = zod.object({
   "page": zod.number().optional().describe('Page number (1-based).'),
-  "size": zod.number().optional().describe('Number of items per page.')
+  "size": zod.number().optional().describe('Number of items per page.'),
+  "sort": zod.string().optional().describe('sorting criteria, e.g. \"+created_at\" or \"-name\"')
 })
 
 export const listCallExportsResponseItemsItemStatusDefault = "EXPORT_STATUS_UNSPECIFIED";

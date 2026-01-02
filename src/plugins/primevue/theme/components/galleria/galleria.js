@@ -16,8 +16,8 @@ const galleria = {
     }
 
     .wt-galleria__image--fullscreen {
-      max-height: ${dt('galleria.fullscreenImage.maxHeight')};
-      max-width: ${dt('galleria.fullscreenImage.maxWidth')};
+      height: ${dt('galleria.fullscreenImage.maxHeight')};
+      width: ${dt('galleria.fullscreenImage.maxWidth')};
     }
 
     .wt-galleria__thumbnail {

@@ -78,7 +78,7 @@ const listCallExports = async (params: any) => {
     listCallExportsQueryParams,
 	);
 
-	const { page, size } = applyTransform(params, [
+	const { page, size, sort } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -88,6 +88,7 @@ const listCallExports = async (params: any) => {
 		const response = await getPdfService().listCallExports(params.callId, {
 			page,
 			size,
+			sort
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
