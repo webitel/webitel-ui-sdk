@@ -6,6 +6,7 @@ import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
 import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
 import ExampleIconButton from './examples/example-icon-button.vue'
+import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.vue'
 </script>
 
 # WtButton
@@ -76,4 +77,14 @@ import ExampleIconButton from './examples/example-icon-button.vue'
 
 ::: details Code
 <<< ./examples/example-icon-button.vue{js}
+:::
+
+## Icon button disabled
+
+::: raw
+<ExampleIconButtonDisabled />
+:::
+
+::: details Code
+<<< ./examples/example-icon-button-disabled.vue{js}
 :::
