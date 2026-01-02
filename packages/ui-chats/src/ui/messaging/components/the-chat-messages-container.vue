@@ -9,13 +9,12 @@
         @scroll="handleChatScroll"
         @resize="handleChatResize"
       >
-        <div v-if="props.next" class="the-chat-messages-container__observer-wrapper">
-          <wt-intersection-observer
-            :can-load-more="props.next"
-            :loading="props.isLoading"
-            @next="emit(ChatAction.LoadNextMessages)"
+        <chat-observer
+          v-if="props.next"
+          :next="props.next"
+          :loading="props.isLoading"
+          @next="emit(ChatAction.LoadNextMessages)"
           />
-        </div>
         <chat-message
           v-for="(message, index) of props.messages"
           :key="message.id"
@@ -50,6 +49,7 @@ import ChatMessage from "../modules/message/components/chat-message.vue";
 import { useChatMessages } from "../modules/message/composables/useChatMessage";
 import type { ChatMessageType } from "../types/ChatMessage.types";
 import ChatDateDivider from "./chat-date-divider.vue";
+import ChatObserver from "./chat-observer.vue";
 import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
@@ -121,16 +121,6 @@ onMounted(() => {
   padding-right: var(--scrollbar-width); // scrollbar offset
   scrollbar-gutter: stable both-edges;
   gap: var(--spacing-xs);
-}
-
-// @author ye.pohranichna
-// reserve height for the loader to avoid unnecessary chat height changes https://webitel.atlassian.net/browse/WTEL-5366
-.chat-history__observer-wrapper {
-  min-height: calc(var(--spacing-lg)*2 + var(--icon-md-size)); // observer loader height
-  // @author ye.pohranichna
-  // to place observer at the bottom of observer wrapper (closer to messages)
-  display: flex;
-  align-items: flex-end;
 }
 
 </style>
