@@ -44,7 +44,7 @@
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
-    "vue-i18n": "^11.2.7",
+    "vue-i18n": "^11.2.8",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
   },
