@@ -3,6 +3,7 @@
     class="wt-vidstack-player"
     :class="[
       `wt-vidstack-player--${size}`,
+      `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
       fullscreen && `wt-vidstack-player--fullscreen`,
       stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
@@ -16,8 +17,9 @@
       :muted="props.muted"
       class="wt-vidstack-player__player"
       cross-origin
-      plays-inline
+      playsinline
       @close="emit('close')"
+      @can-play="onCanPlay"
     >
       <media-provider
         class="wt-vidstack-player__provider"
@@ -51,7 +53,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import { computed, defineEmits, defineProps, provide, ref, useTemplateRef } from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef, watch} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -72,6 +74,7 @@ interface Props {
   hideBackground?: boolean
   hideExpand?: boolean
   stretch?: boolean
+  videoObjectFit?: 'cover' | 'contain'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -82,6 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
   username: '',
   closable: false,
   static: false,
+  videoObjectFit: 'contain',
 });
 
 const emit = defineEmits<{
@@ -130,6 +134,9 @@ const normalizedSrc = computed(() => {
   };
 });
 
+const onCanPlay = (ev: unknown) => {
+  ev?.srcElement?.play()
+}
 </script>
 
 <style scoped lang="scss">
@@ -276,11 +283,20 @@ const normalizedSrc = computed(() => {
 <style lang="scss">
 .wt-vidstack-player {
   video {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
     min-width: 0;
+    width: 100%;
+    height: 100%;
     background: var(--p-player-wrapper-background);
+  }
+
+  &-video-object-fit {
+    &--cover {
+      object-fit: cover;
+    }
+
+    &--contain {
+      object-fit: contain;
+    }
   }
 }
 </style>

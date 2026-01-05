@@ -9,7 +9,6 @@
     class="video-call"
     hide-background
     autoplay
-    muted
     @change-size="(payload) => emit('change-size', payload)"
   >
     <template #content="{ size: innerSize }">
@@ -57,7 +56,6 @@
             hide-controls-panel
             static
             autoplay
-            muted
             class="video-call-sender"
           />
         </template>
