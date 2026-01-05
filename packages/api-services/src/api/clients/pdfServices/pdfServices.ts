@@ -13,7 +13,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+  sanitize,
 	snakeToCamel,
 } from '../../transformers';
 
@@ -27,8 +27,8 @@ const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
 		const response = await getPdfService().createScreenrecordingExport(agentId, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const listScreenrecordingExports = async (params: any) => {

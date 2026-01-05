@@ -3,6 +3,7 @@ export const ChatAction = {
 	AttachFiles: "attachFiles",
 	EmojiPicker: "emojiPicker",
 	QuickReplies: "quickReplies",
+	LoadNextMessages: "loadNextMessages",
 } as const;
 
 export type ChatAction = (typeof ChatAction)[keyof typeof ChatAction];
