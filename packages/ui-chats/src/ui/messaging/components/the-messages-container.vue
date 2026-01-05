@@ -96,11 +96,11 @@ function clickOnImage(message: ChatMessageType) {
 }
 
 onMounted(async () => {
-  /* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
-  await nextTick();
-  setTimeout(() => {
-    scrollToBottom();
-  }, 500);
+	/* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
+	await nextTick();
+	setTimeout(() => {
+		scrollToBottom();
+	}, 500);
 });
 </script>
 
