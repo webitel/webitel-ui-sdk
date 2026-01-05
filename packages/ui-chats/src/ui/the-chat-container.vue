@@ -10,7 +10,7 @@
             @dragleave.prevent="handleDragLeave"
             @drop="sendFile"
           />
-          <chat-messages-container
+          <messages-container
             :messages="props.messages"
             :next="props.canLoadNextMessages"
             :is-loading="props.isNextMessagesLoading"
@@ -59,7 +59,7 @@ import {
 	type SharedActionSlots,
 } from "./chat-footer/modules/user-input/enums/ChatAction.enum";
 import Dropzone from "./messaging/components/dropzone.vue";
-import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
+import MessagesContainer from "./messaging/components/the-messages-container.vue";
 import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
 import { MessageAction } from "./messaging/modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
