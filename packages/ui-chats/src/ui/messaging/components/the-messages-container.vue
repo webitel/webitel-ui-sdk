@@ -13,7 +13,7 @@
           v-if="props.next"
           :next="props.next"
           :loading="props.isLoading"
-          @next="emit(ChatAction.LoadNextMessages)"
+          @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
           />
         <chat-message
           v-for="(message, index) of props.messages"
@@ -95,10 +95,12 @@ function clickOnImage(message: ChatMessageType) {
 	uiChatsEmitter!.emit("clickChatMessageImage", message);
 }
 
-onMounted(() => {
-	nextTick(() => {
-		scrollToBottom();
-	});
+onMounted(async () => {
+  /* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
+  await nextTick();
+  setTimeout(() => {
+    scrollToBottom();
+  }, 500);
 });
 </script>
 
