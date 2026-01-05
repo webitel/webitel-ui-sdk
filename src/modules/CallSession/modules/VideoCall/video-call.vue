@@ -6,6 +6,7 @@
     :class="[!props.static && `video-call-position--${props.position}`]"
     :username="props.username"
     :hide-header="props.hideHeader"
+    video-object-fit="cover"
     class="video-call"
     hide-background
     autoplay
@@ -52,6 +53,7 @@
           <wt-vidstack-player
             :stream="props['sender:stream']"
             :class="`video-call-sender--${innerSize}`"
+            video-object-fit="cover"
             hide-header
             hide-controls-panel
             static
