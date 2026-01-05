@@ -43,7 +43,7 @@
 import type { Emitter } from "mitt";
 import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
 
-import {ChatAction} from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
+import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
 import { useChatScroll } from "../composables/useChatScroll";
 import ChatMessage from "../modules/message/components/chat-message.vue";
@@ -59,22 +59,18 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 const props = withDefaults(
 	defineProps<{
 		messages: ChatMessageType[];
-    next?: boolean;
-    isLoading?: boolean;
-    withoutAvatars?: boolean;
+		next?: boolean;
+		isLoading?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
-    next: false,
-    isLoading: false,
-    withoutAvatars: false,
+		next: false,
+		isLoading: false,
+		withoutAvatars: false,
 	},
 );
 
-const emit = defineEmits<{
-  (
-    e: typeof ChatAction.LoadNextMessages,
-  ): void;
-}>();
+const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
 
 const messagesContainer = useTemplateRef("messages-container");
 
