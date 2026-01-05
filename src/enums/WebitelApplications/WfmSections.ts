@@ -1,5 +1,5 @@
 export const WfmSections = {
-  MySchedules: 'mySchedules',
+  MySchedules: 'my-schedules',
   Agents: 'agents',
   Schedules: 'schedules',
 } as const;
