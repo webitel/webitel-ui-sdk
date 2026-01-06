@@ -1,7 +1,7 @@
 <template>
   <media-controls-group
-    class="video-display-panel controls-group"
     :class="`video-display-panel--${size}`"
+    class="video-display-panel controls-group"
   >
     <div class="video-display-panel__head">
       <wt-avatar
