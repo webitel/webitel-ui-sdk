@@ -53,7 +53,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, provide, ref, useTemplateRef, watch} from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -291,11 +291,15 @@ const onCanPlay = (ev: unknown) => {
 
   &-video-object-fit {
     &--cover {
-      object-fit: cover;
+      video {
+        object-fit: cover;
+      }
     }
 
     &--contain {
-      object-fit: contain;
+      video {
+        object-fit: contain;
+      }
     }
   }
 }
