@@ -90,7 +90,7 @@
         <!-- check if row exists to prevent rendering errors -->
         <wt-checkbox
           v-if="row"
-          :selected="isCheckboxSelected(row)"
+          :selected="_selected.includes(row)"
           @update:selected="handleSelection(row, $event)"
         />
       </template>
@@ -277,8 +277,6 @@ interface Props extends DataTableProps{
   onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
   loading?: boolean;
   itemSize?: number | undefined;
-
-  trackSelectedRowBy: (item: Entity) => Entity
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -378,18 +376,12 @@ const isColSortable = ({ sort }) => {
   return props.sortable && sort !== undefined;
 }
 
-const isCheckboxSelected = (row: unknown) => _selected.value.includes(trackSelectedBy(row))
-
-const trackSelectedBy = (item: unknown) => {
-  return props.trackSelectedRowBy ? props.trackSelectedRowBy(item) : item.id
-}
-
 const selectAll = () => {
   if (props.selected) {
     if (isAllSelected.value) {
       emit('update:selected', []);
     } else {
-      emit('update:selected', [...props.data.map((item) => trackSelectedBy(item))]);
+      emit('update:selected', [...props.data]);
     }
   } else {
     // for backwards compatibility
@@ -413,11 +405,11 @@ const selectAll = () => {
 const handleSelection = (row, select) => {
   if (props.selected) {
     if (select) {
-      emit('update:selected', [..._selected.value, trackSelectedBy(row)]);
+      emit('update:selected', [..._selected.value, row]);
     } else {
       emit(
         'update:selected',
-        _selected.value.filter((item) => item !== trackSelectedBy(row)),
+        _selected.value.filter((item) => item !== row),
       );
     }
   } else {
