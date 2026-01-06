@@ -93,9 +93,10 @@ const { image, media, document } = useChatMessageFile(props.message.file);
 const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === "webitel",
 );
-const isBot = computed<boolean>(() =>
-  props.message.member?.type === "bot"
-  || (!props.message.member?.type && !props.message.channelId)
+const isBot = computed<boolean>(
+	() =>
+		props.message.member?.type === "bot" ||
+		(!props.message.member?.type && !props.message.channelId),
 );
 
 const getClientUsername = computed<string>(() => {
