@@ -5,7 +5,7 @@
   >
     <div class="video-display-panel-wrapper">
       <video-display-panel
-        v-if="!props.hideHeader"
+        v-if="!props.hideVideoDisplayPanel"
         :title="props.title"
         :username="props.username"
         :closable="props.closable"
@@ -39,7 +39,7 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideHeader?: boolean
+  hideVideoDisplayPanel?: boolean
   hideControlsPanel?: boolean
   hideExpand?: boolean
 }>();
