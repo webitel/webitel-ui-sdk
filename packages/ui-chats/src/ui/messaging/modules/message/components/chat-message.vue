@@ -93,10 +93,7 @@ const { image, media, document } = useChatMessageFile(props.message.file);
 const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === "webitel",
 );
-const isBot = computed<boolean>(
-	() =>
-		props.message.member?.type === "bot"
-);
+const isBot = computed<boolean>(() => props.message.member?.type === "bot");
 
 const getClientUsername = computed<string>(() => {
 	return !isSelfSide.value ? props.username : ""; // need to show username avatar only for client
