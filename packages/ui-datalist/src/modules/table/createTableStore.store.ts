@@ -138,10 +138,10 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
   function filterSelected(items: Entity[]): Entity[] {
     const selectedToRaw = selected.value.map(toRaw);
-    return items.filter((item) => {
-      const index = selectedToRaw.findIndex((s) => deepEqual(s, item));
-      return index !== -1;
-    });
+
+    return items.filter((item) =>
+      selectedToRaw.some((s) => deepEqual(s, item)),
+    );
   }
 
   const appendToDataList = async () => {
