@@ -159,7 +159,7 @@ function handleInput(value) {
 
 function handleKeyup(event) {
   if (event.key === 'Enter') {
-    search(props.value);
+    search(event.target.value);
     event.preventDefault();
   } else if (event.key === 'Esc') {
     handleInput('');

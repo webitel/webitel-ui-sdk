@@ -1,5 +1,6 @@
+import deepEqual from 'deep-equal';
 import set from 'lodash/fp/set';
-import { type Ref, ref, watch } from 'vue';
+import { type Ref, ref, toRaw, watch } from 'vue';
 
 import {
   createDatalistStore,
@@ -23,7 +24,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     disablePersistence,
     storeType,
     isAppendDataList,
-    trackSelectedRowBy,
   } = config;
   const usePaginationStore = createTablePaginationStore(namespace, config);
   const useHeadersStore = createTableHeadersStore(namespace, config, {
@@ -118,6 +118,13 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
       dataList.value = items;
 
+      /**
+       * @author: @Oleksandr Palonnyi
+       *
+       * [WTEL-8571](https://webitel.atlassian.net/browse/WTEL-8571)
+       *
+       * link to refactor task - https://webitel.atlassian.net/browse/WTEL-8599
+       * */
       updateSelected(filterSelected(items));
 
       $patchPaginationStore({ next });
@@ -130,8 +137,11 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   };
 
   function filterSelected(items: Entity[]): Entity[] {
-    const trackBy = trackSelectedRowBy ?? ((item) => item.id);
-    return items.map(trackBy).filter((key) => selected.value.includes(key));
+    const selectedToRaw = selected.value.map(toRaw);
+
+    return items.filter((item) =>
+      selectedToRaw.some((s) => deepEqual(s, item)),
+    );
   }
 
   const appendToDataList = async () => {
