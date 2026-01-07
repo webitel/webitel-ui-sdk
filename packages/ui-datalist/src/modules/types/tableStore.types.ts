@@ -13,7 +13,6 @@ export interface useTableStoreConfig<Entity> {
   disablePersistence?: boolean | [];
   storeType?: DatalistStoreProviderType;
   isAppendDataList?: boolean;
-  trackSelectedRowBy?: TrackSelectedRowBy<Entity>;
   // etagMode: boolean;
 }
 
