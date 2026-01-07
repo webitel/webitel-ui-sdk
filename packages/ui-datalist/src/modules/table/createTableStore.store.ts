@@ -118,6 +118,13 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
       dataList.value = items;
 
+      /**
+       * @author: @Opelsandr Palonnyi
+       *
+       * [WTEL-8571](https://webitel.atlassian.net/browse/WTEL-8571)
+       *
+       * link to refactor task - https://webitel.atlassian.net/browse/WTEL-8599
+       * */
       updateSelected(filterSelected(items));
 
       $patchPaginationStore({ next });
