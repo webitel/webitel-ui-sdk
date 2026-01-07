@@ -95,8 +95,7 @@ const isSelfSide = computed<boolean>(
 );
 const isBot = computed<boolean>(
 	() =>
-		props.message.member?.type === "bot" ||
-		(!props.message.member?.type && !props.message.channelId),
+		props.message.member?.type === "bot"
 );
 
 const getClientUsername = computed<string>(() => {
