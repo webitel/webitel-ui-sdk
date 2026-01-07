@@ -12,12 +12,16 @@ export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
       const storedTimezone = localStorage.getItem(TIMEZONE_STORAGE_KEY);
       if (storedTimezone) {
         timezone.value = storedTimezone;
-      } else {
-        try {
-          const { timezone: userTimezone } = await UserSettingsAPI.getUserTimezone();
+      }
+
+      try {
+        const { timezone: userTimezone } = await UserSettingsAPI.getUserTimezone();
+        if (userTimezone && userTimezone !== timezone.value) {
           timezone.value = userTimezone;
           localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
-        } catch {
+        }
+      } catch {
+        if (!timezone.value) {
           const systemTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
           timezone.value = systemTimezone;
           localStorage.setItem(TIMEZONE_STORAGE_KEY, systemTimezone);
