@@ -26,7 +26,7 @@
       ></media-provider>
 
       <video-layout
-        :hide-header="props.hideHeader"
+        :hide-video-display-panel="props.hideVideoDisplayPanel"
         :hide-controls-panel="props.hideControlsPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
@@ -69,7 +69,7 @@ interface Props {
   static?: boolean;
   stream?: MediaStream
   size?: ComponentSize
-  hideHeader?: boolean
+  hideVideoDisplayPanel?: boolean
   hideControlsPanel?: boolean
   hideBackground?: boolean
   hideExpand?: boolean
