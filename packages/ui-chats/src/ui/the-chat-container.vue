@@ -23,24 +23,24 @@
           <chat-footer-wrapper>
             <template #default>
               <chat-text-field
-                  v-model:text="draft"
+                v-model:text="draft"
               />
               <chat-input-actions-bar
                 :actions="props.chatActions"
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
-              <template
-                v-for="action in slottedChatActions"
-                :key="action"
-                #[action]="{ size }"
-              >
-                <slot
-                  :name="`action:${action}`"
-                  v-bind="{ size }"
-                />
-              </template>
-            </chat-input-actions-bar>
+                <template
+                  v-for="action in slottedChatActions"
+                  :key="action"
+                  #[action]="{ size }"
+                >
+                  <slot
+                    :name="`action:${action}`"
+                    v-bind="{ size }"
+                  />
+                </template>
+              </chat-input-actions-bar>
             </template>
           </chat-footer-wrapper>
         </slot>
