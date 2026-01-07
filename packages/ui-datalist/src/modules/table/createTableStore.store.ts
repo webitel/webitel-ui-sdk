@@ -119,7 +119,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       dataList.value = items;
 
       /**
-       * @author: @Opelsandr Palonnyi
+       * @author: @Oleksandr Palonnyi
        *
        * [WTEL-8571](https://webitel.atlassian.net/browse/WTEL-8571)
        *
