@@ -17,6 +17,7 @@ import {
 	translateError,
 	sanitize,
 	snakeToCamel,
+  starToSearch,
 } from '../../transformers';
 
 const itemResponseHandler = (response) => ({
@@ -52,7 +53,9 @@ const getAuditFormsList = async (params) => {
 
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+    (params) => ({ ...params, q: params?.q || params?.search }),
+    starToSearch('q'),
+    starToSearch('question'),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
