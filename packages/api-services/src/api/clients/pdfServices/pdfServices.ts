@@ -36,7 +36,7 @@ const listScreenrecordingExports = async (params: any) => {
     listScreenrecordingExportsQueryParams,
 	);
 
-	const { page, size } = applyTransform(params, [
+	const { page, size, sort } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -46,6 +46,7 @@ const listScreenrecordingExports = async (params: any) => {
 		const response = await getPdfService().listScreenrecordingExports(params.agentId, {
 			page,
 			size,
+			sort
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
