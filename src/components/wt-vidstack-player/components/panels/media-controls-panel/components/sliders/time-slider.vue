@@ -14,6 +14,7 @@ import WtSlider from "../../../../../../../components/wt-slider/wt-slider.vue";
   display: inline-flex;
   align-items: center;
   width: 100%;
+  padding: 10px 0;
 
   &__slider {
     width: 100%;
@@ -28,4 +29,19 @@ import WtSlider from "../../../../../../../components/wt-slider/wt-slider.vue";
   }
 }
 
+</style>
+
+<style lang="scss">
+.time-slider {
+  .p-slider-handle {
+    transition: transform ease var(--transition);
+  }
+
+  &:hover {
+    cursor: pointer;
+    .p-slider-handle {
+      transform: scale(1.5);
+    }
+  }
+}
 </style>
