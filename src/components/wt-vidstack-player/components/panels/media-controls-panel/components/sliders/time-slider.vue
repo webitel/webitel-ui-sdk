@@ -14,6 +14,15 @@ import WtSlider from "../../../../../../../components/wt-slider/wt-slider.vue";
   display: inline-flex;
   align-items: center;
   width: 100%;
+  padding: 10px 0;
+
+  &:hover {
+    cursor: pointer;
+
+    &:deep(.p-slider-handle) {
+      transform: scale(1.5);
+    }
+  }
 
   &__slider {
     width: 100%;
@@ -25,6 +34,7 @@ import WtSlider from "../../../../../../../components/wt-slider/wt-slider.vue";
 
   &:deep(.p-slider-handle) { /*set vidstach slider variable to primeview component @author liza-pohrsnichna */
     inset-inline-start: var(--slider-fill, 0%) !important;
+    transition: transform ease var(--transition);
   }
 }
 
