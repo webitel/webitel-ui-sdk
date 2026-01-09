@@ -25,18 +25,13 @@ export default (/*{ mode }*/) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue', 'primevue', '@aliasedDeps/api-services/axios'],
+        external: ['vue', 'primevue', '@aliasedDeps/api-services/axios', 'lodash-es', 'zod', 'clipboard-copy'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps
           globals: {
             vue: 'Vue',
             primevue: 'PrimeVue',
-          },
-          // https://github.com/vitejs/vite/issues/4863#issuecomment-1005451468
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name === 'style.css') return 'ui-sdk.css';
-            return assetInfo.name;
           },
         },
       },
