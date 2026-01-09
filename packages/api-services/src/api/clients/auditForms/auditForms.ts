@@ -143,7 +143,7 @@ const patchAuditForm = async ({ changes, id }) => {
 	}
 };
 
-const deleteAuditForm = async ({ itemId: id }) => {
+const deleteAuditForm = async ({ id }) => {
 	try {
 		const response = await getAuditFormService().deleteAuditForm(id);
 		return applyTransform(response.data, []);
