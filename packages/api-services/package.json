@@ -23,11 +23,17 @@
     "Readme.md",
     "CHANGELOG.md"
   ],
+  "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "msw": "^2.8.2",
+    "qs-esm": "^7.0.2"
+  },
   "peerDependencies": {
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
-    "zod": "^3.25.55"
+    "zod": "^4.x",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.4",
@@ -47,12 +53,6 @@
     "vue-i18n": "^11.2.8",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
-  },
-  "dependencies": {
-    "@faker-js/faker": "^9.7.0",
-    "lodash-es": "^4.17.21",
-    "msw": "^2.8.2",
-    "qs-esm": "^7.0.2"
   },
   "engines": {
     "npm": "11",
