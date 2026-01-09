@@ -3,7 +3,6 @@
     class="wt-vidstack-player"
     :class="[
       `wt-vidstack-player--${size}`,
-      `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
       fullscreen && `wt-vidstack-player--fullscreen`,
       stretch && `wt-vidstack-player--stretch`,
       props.static && 'wt-vidstack-player--static',
@@ -74,7 +73,6 @@ interface Props {
   hideBackground?: boolean
   hideExpand?: boolean
   stretch?: boolean
-  videoObjectFit?: 'cover' | 'contain'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -85,7 +83,6 @@ const props = withDefaults(defineProps<Props>(), {
   username: '',
   closable: false,
   static: false,
-  videoObjectFit: 'contain',
 });
 
 const emit = defineEmits<{
@@ -286,21 +283,8 @@ const onCanPlay = (ev: unknown) => {
     min-width: 0;
     width: 100%;
     height: 100%;
+    object-fit: contain;
     background: var(--p-player-wrapper-background);
-  }
-
-  &-video-object-fit {
-    &--cover {
-      video {
-        object-fit: cover;
-      }
-    }
-
-    &--contain {
-      video {
-        object-fit: contain;
-      }
-    }
   }
 }
 </style>
