@@ -56,6 +56,10 @@ const getAuditFormsList = async (params) => {
     (params) => ({ ...params, q: params?.q || params?.search }),
     starToSearch('q'),
     starToSearch('question'),
+    (params) => ({
+      ...params,
+      fields: ['id', 'editable', ...(params?.fields || [])],
+    }),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
