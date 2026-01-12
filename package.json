@@ -8,7 +8,7 @@
     "build": "vite build",
     "test:unit": "vitest",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "publish-lib": " npm publish --access public",
+    "publish-lib": " npm publish --access public --tag latest",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
