@@ -4,12 +4,9 @@ import vue from '@vitejs/plugin-vue';
 import { globbySync } from 'globby';
 import { resolve } from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
-import { vite as vidstack } from 'vidstack/plugins';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 
 // https://vitejs.dev/config/
 export default (/*{ mode }*/) => {
@@ -63,14 +60,14 @@ export default (/*{ mode }*/) => {
           },
         },
       }),
-      viteStaticCopy({
-        targets: [
-          {
-            src: 'src/assets/icons/sprite/',
-            dest: 'img',
-          },
-        ],
-      }),
+      // viteStaticCopy({
+      //   targets: [
+      //     {
+      //       src: 'src/assets/icons/sprite/',
+      //       dest: 'img',
+      //     },
+      //   ],
+      // }),
       // https://www.npmjs.com/package/vite-plugin-node-polyfills
       nodePolyfills({
         // are needed for csv-parse
@@ -78,9 +75,6 @@ export default (/*{ mode }*/) => {
         globals: {
           Buffer: true, // can also be 'build', 'dev', or false
         },
-      }),
-      createSvgSpritePlugin({
-        include: '**/sprite/*.svg',
       }),
       checker({
         typescript: false,

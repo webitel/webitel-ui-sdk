@@ -4,13 +4,17 @@ import 'plyr/plyr.scss';
 import 'vidstack/bundle';
 import './css/main.scss';
 import './css/tailwind.css';
-import './assets/icons/sprite/index.js';
+import { fillIconsRepository } from './components/wt-icon/utils/iconsRepository';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
 
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin.js';
+
+export { 
+  fillIconsRepository,
+ };
 
 export default {
   install(app, { eventBus, router, globals = {} }) {

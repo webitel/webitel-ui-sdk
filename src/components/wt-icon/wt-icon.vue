@@ -1,21 +1,21 @@
 <template>
-  <svg
+  <span
     :class="[
       'wt-icon',
       `wt-icon--size-${size}`,
       `wt-icon--color-${color}`,
       { 'wt-icon--disabled': disabled },
     ]"
+    v-html="iconSvg"
     @click="emit('click')"
-  >
-    <use :href="iconName" />
-  </svg>
+  />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 
 import { ComponentSize, IconColor } from '../../enums';
+import { getIconFromRepository } from './utils/iconsRepository';
 
 interface Props {
   /**
@@ -25,27 +25,21 @@ interface Props {
   icon: string;
   size?: ComponentSize;
   color?: IconColor;
-  /**
-   * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
-   * Useful for library icons extension with project-level icons with this prefix in name
-   */
-  iconPrefix?: string;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: ComponentSize.MD,
   color: IconColor.DEFAULT,
-  iconPrefix: '',
   disabled: false,
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits<{
+  click: MouseEvent[];
+}>();
 
-const iconName = computed(() => {
-  let name = '#';
-  if (props.iconPrefix) name += `${props.iconPrefix}-`;
-  return `${name}${props.icon}`;
+const iconSvg = computed(() => {
+  return getIconFromRepository(props.icon) || props.icon;
 });
 </script>
 
