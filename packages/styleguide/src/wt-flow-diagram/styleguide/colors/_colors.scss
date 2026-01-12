@@ -1,0 +1,234 @@
+#wt-flow-diagram {
+  --flow-light-level-12: 90%;
+
+  //  TEXT colors
+  --flow-on-dark-text-color: var(--grey-lighten-5);
+  --flow-on-light-text-color: var(--grey-darken-3);
+
+  //  SOCKET colors
+  --flow-conection-point-color: var(--dp-22-surface-color);
+  --flow-conection-point-border-color: var(--dp-16-surface-color);
+
+  // GENERAL APPS
+  // Calendar
+  --flow-calendar-header-bg-color: var(--cyan-lighten-3);
+
+  // Execute
+  --flow-execute-header-bg-color: var(--orange-lighten-2);
+
+  // Function
+  --flow-function-header-bg-color: var(--orange-lighten-2);
+
+  // Goto
+  --flow-goto-header-bg-color: var(--red-darken-1);
+
+  //  If
+  --flow-if-header-bg-color: var(--pink-lighten-2);
+
+  //  IFrame
+  --flow-i-frame-header-bg-color: var(--blue-lighten-1);
+
+  //  Script
+  --flow-js-header-bg-color: var(--amber-accent-3);
+
+  // Math
+  --flow-math-header-bg-color: var(--deep-orange-accent-2);
+
+  // String
+  --flow-string-header-bg-color: var(--light-green-darken-3);
+
+  // MarkIVR
+  --flow-mark-ivr-header-bg-color: var(--pink-accent-2);
+
+  // softSleep
+  --flow-soft-sleep-header-bg-color: var(--light-blue-lighten-1);
+
+  // setGrantee
+  --flow-set-grantee-header-bg-color: var(--yellow-darken-2);
+
+  // schema
+  --flow-schema-header-bg-color: var(--deep-orange-lighten-3);
+
+  // log
+  --flow-log-header-bg-color: var(--amber-lighten-1);
+
+  // Start
+  --flow-start-header-bg-color: var(--green-darken-3);
+
+  // Switch
+  --flow-switch-header-bg-color: var(--purple-lighten-1);
+
+  // Trigger
+  --flow-trigger-header-bg-color: var(--red-lighten-1);
+
+  // HttpRequest
+  --flow-http-header-bg-color: var(--pink-lighten-2);
+
+  //  Custom code
+  --flow-custom-code-header-bg-color: var(--grey-lighten-4);
+
+  //  Export variables code
+  --flow-export-var-header-bg-color: var(--indigo-lighten-3);
+
+  //  Set variables code
+  --flow-set-var-header-bg-color: var(--amber-lighten-1);
+
+  //  Un set variables code
+  --flow-un-set-var-header-bg-color: var(--orange-lighten-3);
+
+  //  List code
+  --flow-list-header-bg-color: var(--light-blue-darken-3);
+
+  //  List Add code
+  --flow-list-add-header-bg-color: var(--light-blue-darken-1);
+
+  // Get Email
+  --flow-get-email-header-bg-color: var(--cyan-darken-4);
+
+  // CALL APPS
+  // playback
+  --flow-playback-header-bg-color: var(--orange-lighten-1);
+
+  //  Ring ready
+  --flow-ring-ready-header-bg-color: var(--green-darken-3);
+
+  //  Pre answer
+  --flow-pre-answer-header-bg-color: var(--green-darken-3);
+
+  //  Answer
+  --flow-answer-header-bg-color: var(--green-darken-3);
+
+  //  Hangup
+  --flow-hangup-header-bg-color: var(--deep-orange-darken-2);
+
+  //  Sip redirect
+  --flow-sip-redirect-header-bg-color: var(--amber-lighten-3);
+
+  //  Ringback
+  --flow-ringback-header-bg-color: var(--green-darken-3);
+
+  //  Bridge
+  --flow-bridge-header-bg-color: var(--orange-lighten-2);
+
+  //  Conference
+  --flow-conference-header-bg-color: var(--cyan-lighten-3);
+
+  //  Generate link
+  --flow-generate-link-header-bg-color: var(--indigo-accent-2);
+
+  //  In Band DTMF
+  --flow-in-band-dtmf-header-bg-color: var(--yellow-lighten-2);
+
+  // Flush DTMF
+  --flow-flush-dtmf-header-bg-color: var(--pink-lighten-2);
+
+  //  Update Cid
+  --flow-update-cid-header-bg-color: var(--orange-lighten-2);
+
+  //  Park
+  --flow-park-header-bg-color: var(--cyan-lighten-3);
+
+  //  Join Queue
+  --flow-join-queue-header-bg-color: var(--deep-orange-lighten-1);
+
+  //  Record File
+  --flow-record-file-header-bg-color: var(--green-lighten-3);
+
+  //  Record Session
+  --flow-record-session-header-bg-color: var(--green-lighten-2);
+
+  // TTS
+  --flow-tts-header-bg-color: var(--purple-darken-1);
+
+  // CHAT APPS
+  // Recv Message
+  --flow-recv-message-header-bg-color: var(--blue-accent-4);
+
+  //  Send Text
+  --flow-send-text-header-bg-color: var(--orange-accent-3);
+
+  //  Send TTS
+  --flow-send-tts-header-bg-color: var(--purple-darken-1);
+
+  //  Send File
+  --flow-send-file-header-bg-color: var(--purple-accent-3);
+
+  //  STT
+  --flow-stt-header-bg-color: var(--orange-lighten-1);
+
+  //  Send Email
+  --flow-send-email-header-bg-color: var(--deep-orange-accent-2);
+
+  //  Send Message
+  --flow-send-message-header-bg-color: var(--blue-darken-1);
+
+  //  Broadcast Chat Message
+  --flow-broadcast-chat-message-header-bg-color: var(--blue-darken-2);
+
+  //  Classifier
+  --flow-classifier-header-bg-color: var(--deep-purple-lighten-2);
+
+  //  Menu
+  --flow-menu-header-bg-color: var(--amber-lighten-3);
+
+  // Plata by mono
+  --flow-plata-by-mono-header-bg-color: var(--deep-purple-darken-1);
+
+  //  User Info
+  --flow-user-info-header-bg-color: var(--green-accent-2);
+
+  // Member info
+  --flow-member-info-header-bg-color: var(--purple-lighten-1);
+
+  // Get queue agents
+  --flow-get-queue-agents-header-bg-color: var(--indigo-lighten-2);
+
+  // Join Agent
+  --flow-join-agent-header-bg-color: var(--deep-purple-lighten-2);
+
+  // Callback queue
+  --flow-callback-queue-header-bg-color: var(--lime-darken-2);
+
+  // Patch members
+  --flow-patch-members-header-bg-color: var(--purple-lighten-1);
+
+  // PROCESSING
+  // Form textfield
+  --flow-form-textfield-header-bg-color: var(--light-blue-accent-4);
+
+  // Form text
+  --flow-form-text-header-bg-color: var(--light-blue-lighten-3);
+
+  // Form select
+  --flow-form-select-header-bg-color: var(--light-blue-lighten-1);
+
+  // Form datetime picker
+  --flow-form-datetime-picker-header-bg-color: var(--blue-lighten-2);
+
+  // Form rich text editor
+  --flow-form-rich-text-editor-header-bg-color: var(--light-blue-darken-4);
+
+  // Generate form
+  --flow-generate-form-header-bg-color: var(--blue-accent-4);
+
+  // Attempt result
+  --flow-attempt-result-header-bg-color: var(--red-lighten-2);
+
+  // Form file
+  --flow-form-file-header-bg-color: var(--blue-lighten-2);
+
+  // Chat history
+  --flow-chat-history-header-bg-color: var(--amber-accent-2);
+
+  // Chat history
+  --flow-while-header-bg-color: var(--deep-purple-darken-4);
+
+  // ChatAI
+  --flow-chat-ai-header-bg-color: var(--lime-darken-3);
+
+  // Notification
+  --flow-notification-header-bg-color: var(--pink-lighten-1);
+
+  // Custom module
+  --flow-custom-module-header-bg-color: var(--deep-purple-darken-3);
+}

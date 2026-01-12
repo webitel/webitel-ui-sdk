@@ -1,0 +1,56 @@
+{
+  "name": "@webitel/styleguide",
+  "version": "26.2.0",
+  "main": "",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "publish-styleguide": "npm run build && npm publish --access public",
+    "build": "tsc -p ./tsconfig.build.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.x"
+  },
+  "exports": {
+    ".": "./src/lib/main.scss",
+    "./typography": "./src/lib/styleguide/typography/_typography.scss",
+    "./_typography": "./src/lib/styleguide/typography/_typography.scss",
+    "./scroll": "./src/lib/styleguide/scroll.scss",
+    "./_scroll": "./src/lib/styleguide/scroll.scss",
+    "./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
+    "./_viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
+    "./auditor": "./src/auditor/main.scss",
+    "./_auditor": "./src/auditor/main.scss",
+    "./client": "./src/client/main.scss",
+    "./_client": "./src/client/main.scss",
+    "./crm": "./src/crm/main.scss",
+    "./_crm": "./src/crm/main.scss",
+    "./history": "./src/history/main.scss",
+    "./_history": "./src/history/main.scss",
+    "./supervisor": "./src/supervisor/main.scss",
+    "./_supervisor": "./src/supervisor/main.scss",
+    "./workspaces": "./src/workspaces/main.scss",
+    "./_workspaces": "./src/workspaces/main.scss",
+    "./wt-flow-diagram": "./src/wt-flow-diagram/main.scss",
+    "./_wt-flow-diagram": "./src/wt-flow-diagram/main.scss",
+    "./fonts": "./src/lib/styleguide/fonts/_fonts.scss",
+    "./_fonts": "./src/lib/styleguide/fonts/_fonts.scss",
+    "./component-schemes": {
+      "types": "./types/lib/primevue/components/index.d.ts",
+      "import": "./src/lib/primevue/components/index.ts"
+    },
+    "./semantic": {
+      "types": "./types/lib/primevue/semantic/index.d.ts",
+      "import": "./src/lib/primevue/semantic/index.ts"
+    },
+    "./extend": {
+      "types": "./types/lib/primevue/extend/extend.d.ts",
+      "import": "./src/lib/primevue/extend/extend.ts"
+    },
+    "./primitive": {
+      "types": "./types/lib/primevue/primitive/index.d.ts",
+      "import": "./src/lib/primevue/primitive/index.ts"
+    }
+  }
+}

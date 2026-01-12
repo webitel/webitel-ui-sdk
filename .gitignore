@@ -9,6 +9,9 @@
 /packages/api-services/types
 /packages/api-services/src/gen/_docs
 
+# styleguide pckg
+/packages/styleguide/types
+
 /types
 
 # misc

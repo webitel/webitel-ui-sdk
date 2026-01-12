@@ -1,6 +1,6 @@
 // .vitepress/theme/index.js
 import 'prismjs/themes/prism.min.css';
-import '__lib__/assets/icons/sprite';
+import '__lib__/assets/icons/sprite/_index';
 import './main.scss';
 
 import WebitelUI from '__lib__/install.ts';

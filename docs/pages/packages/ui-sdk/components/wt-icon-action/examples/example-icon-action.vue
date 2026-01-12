@@ -1,6 +1,6 @@
 <script setup>
-import { WtIconActionIconMappings } from '__lib__/components/wt-icon-action/iconMappings.js';
-import { IconAction } from '__lib__/enums/index.js';
+import { WtIconActionIconMappings } from '__lib__/components/wt-icon-action/iconMappings';
+import { IconAction } from '__lib__/enums';
 
 const IAMap = Object.entries(IconAction).reduce((acc, [key, value]) => {
   acc[value] = key;

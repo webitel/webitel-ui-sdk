@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import icons from '__lib__/assets/icons/sprite/index.js';
+import icons from '__lib__/assets/icons/sprite/_index';
 import { ref } from 'vue';
 
 const headers = [

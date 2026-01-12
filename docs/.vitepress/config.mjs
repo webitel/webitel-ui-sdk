@@ -1,7 +1,6 @@
 import { globbySync } from 'globby';
 import path from 'path';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
@@ -26,6 +25,11 @@ export default defineConfig({
   ],
   lastUpdated: true,
   vite: {
+    build: {
+      rollupOptions: {
+        external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
+      },
+    },
     resolve: {
       alias: {
         '__lib__': path.resolve(__dirname, '../../src'),
@@ -47,9 +51,6 @@ export default defineConfig({
         globals: {
           process: true,
         },
-      }),
-      createSvgSpritePlugin({
-        include: '**/sprite/*.svg',
       }),
       tailwindcss(),
       (() => {
