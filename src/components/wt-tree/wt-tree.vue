@@ -135,59 +135,55 @@ const compareSelectElement = (item: any) => {
 };
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/scroll' as *;
-
-.wt-tree {
-  border-radius: var(--border-radius);
+<style >.wt-tree {
+border-radius: var(--border-radius);
   background: var(--content-wrapper-color);
   padding: var(--spacing-sm);
   overflow: auto;
+}
 
-  &__content {
-    @extend %wt-scrollbar;
-
-    display: flex;
+.wt-tree .wt-tree__content {
+display: flex;
     flex-direction: column;
     padding-right: var(--spacing-2xs);
     height: 100%;
     overflow: auto;
-  }
+}
 
-  &__list-content {
-    @extend %wt-scrollbar;
-
-    display: flex;
+.wt-tree .wt-tree__list-content {
+display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-xs);
     padding-right: var(--spacing-2xs);
     height: 100%;
     overflow: auto;
-  }
+}
 
-  &__label-wrapper {
-    display: flex;
+.wt-tree .wt-tree__label-wrapper {
+display: flex;
+
     align-items: center;
     transition: var(--transition);
     cursor: pointer;
     border-radius: var(--border-radius);
     padding: 0 var(--spacing-2xs);
     color: var(--wt-tree-item-on);
+}
 
-    &:hover {
+.wt-tree:hover {
       background: var(--wt-tree-item-hover);
       color: var(--wt-tree-item-hover-on);
-    }
-
-    &.active {
-      background: var(--wt-tree-item-active);
-      color: var(--wt-tree-item-active-on);
-    }
-  }
-
-  &__label-icon {
-    flex-shrink: 0;
-  }
 }
-</style>
+
+.wt-tree .wt-tree.active {
+background: var(--wt-tree-item-active);
+      color: var(--wt-tree-item-active-on);
+}
+
+}
+
+.wt-tree__label-icon {
+flex-shrink: 0;
+}
+}</style>

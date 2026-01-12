@@ -1,5 +1,5 @@
 <template>
-  <footer class="wt-pagination">
+  <footer class="wt-pagination typo-body-1">
     <div class="wt-pagination__size">
       <div class="wt-pagination__size-text">
         {{ $t('webitelUI.pagination.sizeText') }}
@@ -99,45 +99,37 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-pagination {
-  @extend %typo-body-1;
-
   display: inline-flex;
   align-items: center;
   margin-left: auto;
 }
 
 .wt-pagination__size {
-  display: flex;
+display: flex;
   align-items: center;
   margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-text {
-  margin-right: var(--pagination-gap);
+margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-input {
-  width: var(--pagination-size-input-width);
+width: var(--pagination-size-input-width);
 }
 
 .wt-pagination__page-controls {
-  display: flex;
+display: flex;
   align-items: center;
 }
 
 .wt-pagination__page-control {
-  margin-left: var(--pagination-gap);
+margin-left: var(--pagination-gap);
+}
 
-  &:first-child {
-    margin-left: 0;
-  }
+.wt-pagination__page-control .wt-pagination:first-child {
+margin-left: 0;
 }
 </style>

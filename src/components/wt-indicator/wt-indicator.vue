@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[`wt-indicator--size-${size}`]"
+    :class="[`wt-indicator--size-${size}`] typo-body-1"
     class="wt-indicator"
   >
     <span
@@ -9,7 +9,7 @@
     />
     <div
       v-if="isText"
-      class="wt-indicator__text"
+      class="wt-indicator__text typo-caption"
     >
       {{ text }}
     </div>
@@ -71,97 +71,94 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-indicator {
-  display: flex;
+display: flex;
   align-items: center;
 }
 
 .wt-indicator__text {
-  @extend %typo-body-1;
-  margin-left: var(--wt-indicator-text-margin);
+margin-left: var(--wt-indicator-text-margin);
   color: var(--wt-indicator-text-color);
 }
 
 .wt-indicator__indicator {
-  margin: var(--wt-indicator-dot-offset);
+margin: var(--wt-indicator-dot-offset);
   border-radius: 50%;
   background: var(--wt-indicator-disabled-color);
   min-width: var(--wt-indicator-dot-size);
   height: var(--wt-indicator-dot-size);
-
-  &--primary {
-    background: var(--wt-indicator-primary-color);
-  }
-
-  &--secondary {
-    background: var(--wt-indicator-secondary-color);
-  }
-
-  &--disabled {
-    background: var(--wt-indicator-disabled-color);
-  }
-
-  &--success {
-    background: var(--wt-indicator-success-color);
-  }
-
-  &--error {
-    background: var(--wt-indicator-error-color);
-  }
-
-  &--transfer {
-    background: var(--wt-indicator-transfer-color);
-  }
-
-  &--break-out {
-    background: var(--wt-indicator-break-out-color);
-  }
-
-  &--info {
-    background: var(--wt-indicator-info-color);
-  }
-
-  &--final-status {
-    background: var(--wt-indicator-final-status-color);
-  }
-
-  &--other-status {
-    background: var(--wt-indicator-other-status-color);
-  }
-
-  &--initial-status {
-    background: var(--wt-indicator-initial-status-color);
-  }
 }
 
-.wt-indicator--size {
-  &-sm {
-    .wt-indicator__indicator {
+.wt-indicator__indicator .wt-indicator--primary {
+background: var(--wt-indicator-primary-color);
+}
+
+.wt-indicator__indicator .wt-indicator--secondary {
+background: var(--wt-indicator-secondary-color);
+}
+
+.wt-indicator__indicator .wt-indicator--disabled {
+background: var(--wt-indicator-disabled-color);
+}
+
+.wt-indicator__indicator .wt-indicator--success {
+background: var(--wt-indicator-success-color);
+}
+
+.wt-indicator__indicator .wt-indicator--error {
+background: var(--wt-indicator-error-color);
+}
+
+.wt-indicator__indicator .wt-indicator--transfer {
+background: var(--wt-indicator-transfer-color);
+}
+
+.wt-indicator__indicator .wt-indicator--break-out {
+background: var(--wt-indicator-break-out-color);
+}
+
+.wt-indicator__indicator .wt-indicator--info {
+background: var(--wt-indicator-info-color);
+}
+
+.wt-indicator__indicator .wt-indicator--final-status {
+background: var(--wt-indicator-final-status-color);
+}
+
+.wt-indicator__indicator .wt-indicator--other-status {
+background: var(--wt-indicator-other-status-color);
+}
+
+.wt-indicator__indicator .wt-indicator--initial-status {
+background: var(--wt-indicator-initial-status-color);
+}
+
+.wt-indicator--size .wt-indicator--size-sm {
+.wt-indicator__indicator {
       min-width: var(--wt-indicator-dot-size--size-sm);
       height: var(--wt-indicator-dot-size--size-sm);
-    }
+}
 
-    .wt-indicator__text {
-      @extend %typo-caption;
-    }
-  }
+.wt-indicator--size .wt-indicator__text {
+font-family: 'Montserrat', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 16px;
+  text-transform: none;
+}
 
-  &-md {
-    .wt-indicator__indicator {
-      min-width: var(--wt-indicator-dot-size--size-md);
+  .wt-indicator--size-md .wt-indicator__indicator {
+min-width: var(--wt-indicator-dot-size--size-md);
       height: var(--wt-indicator-dot-size--size-md);
-    }
+}
 
-    .wt-indicator__text {
-      @extend %typo-body-1;
-    }
-  }
+.wt-indicator--size-md .wt-indicator__text {
+font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
+}
 }
 </style>

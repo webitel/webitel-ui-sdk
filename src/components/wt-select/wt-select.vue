@@ -344,15 +344,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 @use './multiselect.scss' as *;
 
 .wt-select {
-  width: 100%;
+width: 100%;
   min-width: 0;
 }
 
@@ -364,124 +360,130 @@ export default {
  * added pointer-events: auto; to have access to multiselect__limit when select is disabled.
 */
 .multiselect__limit {
-  pointer-events: auto;
+pointer-events: auto;
 }
 
 :deep(.multiselect) {
-  .multiselect__custom-tag,
-  .multiselect__single-label {
-    // text overflow 3 dots
-    @extend %typo-body-1;
+.multiselect__custom-tag,
+}
+
+.multiselect) .multiselect__single-label {
+// text overflow 3 dots
+      font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
     display: block;
     overflow: hidden;
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+}
 
-  .multiselect__option {
-    white-space: normal; // https://webitel.atlassian.net/browse/WTEL-7400
+.multiselect) .multiselect__option {
+white-space: normal; // https://webitel.atlassian.net/browse/WTEL-7400
     word-break: break-all;
-  }
+}
 
-  .multiselect__content {
-    width: 100%; // https://webitel.atlassian.net/browse/WTEL-7400
-  }
+.multiselect) .multiselect__content {
+width: 100%; // https://webitel.atlassian.net/browse/WTEL-7400
 }
 
 :deep(.multiselect--active) {
-  .multiselect__tags-wrap,
-  .multiselect__strong {
-    display: none;
-  }
+.multiselect__tags-wrap,
+}
+
+.multiselect--active) .multiselect__strong {
+display: none;
 }
 
 // right padding setup
 
 // default case
 .wt-select {
-  // all is fine
-  :deep(.multiselect) {
-    .multiselect__tags {
+// all is fine
+}
+
+.wt-select :deep(.multiselect) {
+.multiselect__tags {
       padding: var(--input-padding) calc(
         var(--input-padding) + var(--icon-md-size) +
         var(--select-caret-right-pos)
       ) var(--input-padding) var(--input-padding);
-    }
-  }
+}
 }
 
 // only chip
-.wt-select.wt-select--multiple:not(.wt-select--clearable) {
-  :deep(.multiselect) {
-    $multiselect-limit-right-pos: calc(
+.wt-select.wt-select--multiple:not(.wt-select--clearable) :deep(.multiselect) {
+$multiselect-limit-right-pos: calc(
+
       var(--select-caret-right-pos)// caret offet from border
       + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+}
 
-    .multiselect__tags {
+.multiselect__tags {
       padding-right: calc(
         $multiselect-limit-right-pos + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
-    }
+}
 
-    .multiselect__limit {
-      right: $multiselect-limit-right-pos;
-    }
-  }
+.wt-select.wt-select--multiple:not(.wt-select--clearable) .multiselect__limit {
+right: $multiselect-limit-right-pos;
+}
 }
 
 // only clearable
-.wt-select.wt-select--clearable:not(.wt-select--multiple) {
-  :deep(.multiselect) {
-    $multiselect-clear-right-pos: calc(
+.wt-select.wt-select--clearable:not(.wt-select--multiple) :deep(.multiselect) {
+$multiselect-clear-right-pos: calc(
+
       var(--select-caret-right-pos)// caret offset from border
       + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+}
 
-    .multiselect__tags {
+.multiselect__tags {
       padding-right: calc(
         $multiselect-clear-right-pos + var(--icon-md-size)// clear
         + var(--input-padding) // clear-to-content offset
       );
-    }
+}
 
-    .multiselect__clear {
-      right: $multiselect-clear-right-pos;
-    }
-  }
+.wt-select.wt-select--clearable:not(.wt-select--multiple) .multiselect__clear {
+right: $multiselect-clear-right-pos;
+}
 }
 
 // clearable and chip
-.wt-select.wt-select--multiple.wt-select--clearable {
-  :deep(.multiselect) {
-    $multiselect-clear-right-pos: calc(
+.wt-select.wt-select--multiple.wt-select--clearable :deep(.multiselect) {
+$multiselect-clear-right-pos: calc(
+
       var(--select-caret-right-pos)// caret offet from border
       + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
-
     $multiselect-limit-right-pos: calc(
       $multiselect-clear-right-pos + /* clear offet from border */var(--icon-md-size)/* clear size */ + var(--input-padding) /* cleat-to-chip offset */
     );
+}
 
-    .multiselect__tags {
+.multiselect__tags {
       padding-right: calc(
         $multiselect-limit-right-pos + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
-    }
+}
 
-    .multiselect__clear {
-      right: $multiselect-clear-right-pos;
-    }
+.wt-select.wt-select--multiple.wt-select--clearable .multiselect__clear {
+right: $multiselect-clear-right-pos;
+}
 
-    .multiselect__limit {
-      right: $multiselect-limit-right-pos;
-    }
-  }
+.wt-select.wt-select--multiple.wt-select--clearable .multiselect__limit {
+right: $multiselect-limit-right-pos;
+}
 }
 </style>

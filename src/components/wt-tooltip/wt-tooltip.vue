@@ -21,7 +21,7 @@
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
-      class="wt-tooltip__floating"
+      class="wt-tooltip__floating typo-body-2"
       @hide="hideTooltip"
       @show="showTooltip"
     >
@@ -161,23 +161,17 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-tooltip {
-  display: inline-block;
+display: inline-block;
   height: fit-content;
+}
 
-  &__activator {
-    line-height: 0;
-  }
+.wt-tooltip .wt-tooltip__activator {
+line-height: 0;
+}
 
-  .wt-tooltip-floating {
-    @extend %typo-body-2;
+.wt-tooltip .wt-tooltip-floating {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
@@ -187,6 +181,5 @@ onBeforeUnmount(() => {
     background: var(--wt-tooltip-background-color);
     padding: var(--spacing-2xs) var(--spacing-xs);
     color: var(--wt-tooltip-text-color);
-  }
 }
 </style>

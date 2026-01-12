@@ -4,7 +4,7 @@
   --table-head-sort-arrow-margin: var(--spacing-xs);
   --table-head-border: 1px solid;
 
-  --table-min-height: 24px; // 24px icon size or body-1 lh
+  --table-min-height: 24px; /* 24px icon size or body-1 lh */
   --table-column-gap: var(--spacing-xs);
   --table-row-padding: var(--spacing-xs);
 

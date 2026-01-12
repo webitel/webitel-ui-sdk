@@ -59,37 +59,29 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-
+<style  scoped>
 .wt-notifications-bar {
-  @extend %wt-scrollbar;
-
-  position: fixed;
+position: fixed;
   top: var(--notifications-bar-corner-margin);
   right: var(--notifications-bar-corner-margin);
   z-index: var(--notifications-bar-z-index);
   max-height: var(--notifications-bar-max-height);
   overflow-x: hidden;
   overflow-y: auto;
+}
 
-  .wt-notification {
-    margin: var(--notifications-bar-notifications-margin);
-  }
+.wt-notifications-bar .wt-notification {
+margin: var(--notifications-bar-notifications-margin);
 }
 
 .wt-notifications-transition-enter-active,
 .wt-notifications-transition-leave-active {
-  transition: all var(--transition);
+transition: all var(--transition);
 }
 
 .wt-notifications-transition-enter,
 .wt-notifications-transition-leave-to {
-  transform: translateX(60px);
+transform: translateX(60px);
   opacity: 0;
 }
 </style>

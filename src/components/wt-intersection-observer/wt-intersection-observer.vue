@@ -36,7 +36,7 @@ onMounted(() => {
   const { stop } = useIntersectionObserver(
     intersectionTarget.value,
     ([{ isIntersecting }]) => {
-      if (isIntersecting && props.canLoadMore) {
+      if (isIntersecting  props.canLoadMore) {
         emit('next');
       }
     },
@@ -50,8 +50,6 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.wt-loader {
-  margin: var(--spacing-lg) auto;
-}
-</style>
+<style scoped >.wt-loader {
+margin: var(--spacing-lg) auto;
+}</style>

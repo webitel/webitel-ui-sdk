@@ -18,17 +18,17 @@
           v-if="isHeader"
           class="wt-header-actions__header"
         >
-          <h3 class="wt-header-actions__name">
+          <h3 class="wt-header-actions__name typo-subtitle-1">
             {{ userName }}
           </h3>
-          <p class="wt-header-actions__account">
+          <p class="wt-header-actions__account typo-body-1">
             {{ userAccount }}
           </p>
         </header>
         <ul class="wt-header-actions__actions-wrapper">
           <li class="wt-header-actions__action">
             <a
-              class="wt-header-actions__action__link"
+              class="wt-header-actions__action__link typo-body-1"
               href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform"
               target="_blank"
               @click="close"
@@ -39,7 +39,7 @@
           </li>
           <li class="wt-header-actions__action">
             <a
-              class="wt-header-actions__action__link"
+              class="wt-header-actions__action__link typo-body-1"
               @click.prevent="settings"
             >
               <wt-icon icon="settings" />
@@ -50,7 +50,7 @@
             class="wt-header-actions__action wt-header-actions__action--logout"
           >
             <a
-              class="wt-header-actions__action__link"
+              class="wt-header-actions__action__link typo-body-1"
               @click.prevent="logout"
             >
               <wt-icon
@@ -65,7 +65,7 @@
           v-if="isFooter"
           class="wt-header-actions__footer"
         >
-          <p class="wt-header-actions__build__version">
+          <p class="wt-header-actions__build__version typo-caption">
             {{ buildVersion }}
           </p>
         </footer>
@@ -134,18 +134,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
-.wt-header-actions {
-  display: flex;
+<style  scoped>.wt-header-actions {
+display: flex;
   position: relative;
   align-items: center;
   z-index: var(--wt-app-header-content-z-index);
 }
 
 .wt-header-actions__panel-wrapper {
-  display: flex;
+display: flex;
   position: absolute;
   top: 100%; // icon
   right: 0;
@@ -161,27 +158,25 @@ export default {
 }
 
 .wt-header-actions__name {
-  @extend %typo-subtitle-1;
   color: var(--text-main-color);
   white-space: nowrap;
 }
 
 .wt-header-actions__account {
-  @extend %typo-body-1;
   color: var(--text-main-color);
   white-space: nowrap;
 }
 
 .wt-header-actions__action {
-  display: flex;
+display: flex;
   transition: var(--transition);
+}
 
-  &:hover {
-    background: var(--wt-header-actions-action-bg-color--hover);
-  }
+.wt-header-actions__action .wt-header-actions:hover {
+background: var(--wt-header-actions-action-bg-color--hover);
+}
 
-  .wt-header-actions__action__link {
-    @extend %typo-body-1;
+.wt-header-actions__action .wt-header-actions__action__link {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -191,17 +186,14 @@ export default {
 
     .wt-icon {
       margin-right: var(--wt-header-actions-action-link-padding);
-    }
-  }
+}
 
-  &--logout .wt-header-actions__action__link {
-    color: var(--error-color);
-  }
+  .wt-icon--logout .wt-header-actions__action__link {
+color: var(--error-color);
+}
 }
 
 .wt-header-actions__build__version {
-  @extend %typo-caption;
   color: var(--text-main-color);
   white-space: nowrap;
-}
-</style>
+}</style>

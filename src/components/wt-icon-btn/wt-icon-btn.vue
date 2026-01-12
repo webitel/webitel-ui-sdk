@@ -27,24 +27,20 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-icon-btn {
-  display: block;
+display: block;
   position: relative;
   width: fit-content;
   line-height: 0;
   cursor: pointer;
 
-  &:hover .wt-icon--color-default {
+  .wt-icon-btn:hover .wt-icon--color-default {
     fill: var(--icon-btn-hover-color);
   }
+}
 
-  &--disabled {
-    pointer-events: none;
-  }
+.wt-icon-btn .wt-icon-btn--disabled {
+pointer-events: none;
 }
 </style>

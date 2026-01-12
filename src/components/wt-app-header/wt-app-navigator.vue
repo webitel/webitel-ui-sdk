@@ -16,7 +16,7 @@
         v-show="isOpened"
         class="wt-app-navigator__nav-wrapper"
       >
-        <h3 class="wt-app-navigator__nav-title">
+        <h3 class="wt-app-navigator__nav-title typo-subtitle-1">
           {{ $t('webitelUI.appNavigator.title') }}
         </h3>
         <ul class="wt-app-navigator__nav">
@@ -37,7 +37,7 @@
                 :src="app.img"
                 class="wt-app-navigator__card__img"
               />
-              <p class="wt-app-navigator__card__title">
+              <p class="wt-app-navigator__card__title typo-overline">
                 {{ $t(`webitelUI.appNavigator.${app.name}`) }}
               </p>
             </a>
@@ -145,12 +145,8 @@ function close() {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-@use '@webitel/styleguide/typography' as *;
-
-.wt-app-navigator {
-  display: flex;
+<style  scoped>.wt-app-navigator {
+display: flex;
   position: relative;
   align-items: center;
   z-index: var(--wt-app-header-content-z-index);
@@ -158,8 +154,7 @@ function close() {
 
 // dropdown part
 .wt-app-navigator__nav-wrapper {
-  @extend %wt-scrollbar;
-  position: absolute;
+position: absolute;
   top: 100%; // icon
   right: 0;
   transition: var(--transition);
@@ -173,7 +168,6 @@ function close() {
 }
 
 .wt-app-navigator__nav-title {
-  @extend %typo-subtitle-1;
   margin-bottom: var(--wt-app-header-content-gap);
   text-align: center;
   text-transform: uppercase;
@@ -181,29 +175,30 @@ function close() {
 
 // ul with li apps
 .wt-app-navigator__nav {
-  display: grid;
+display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--wt-app-navigator-item-gap);
 }
 
 .wt-app-navigator__card {
-  transition: var(--transition);
+transition: var(--transition);
+
   box-sizing: border-box;
   border: var(--wt-app-navigator-item-border);
   border-color: var(--wt-app-navigator-item-border-color);
   border-radius: var(--border-radius);
   width: var(--wt-app-navigator-item-width);
   height: var(--wt-app-navigator-item-height);
+  .wt-app-navigator.active,
+}
 
-  &.active,
-  &:hover {
-    border-color: var(--wt-app-navigator-item-border-color--hover);
-  }
+.wt-app-navigator__card .wt-app-navigator:hover {
+border-color: var(--wt-app-navigator-item-border-color--hover);
 }
 
 // a tag
 .wt-app-navigator__card__link {
-  display: inline-flex;
+display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
@@ -215,15 +210,13 @@ function close() {
 
 // img inside a
 .wt-app-navigator__card__img {
-  margin: auto;
+margin: auto;
   width: var(--wt-app-navigator-item-pic-size);
   height: var(--wt-app-navigator-item-pic-size);
 }
 
 // app title
 .wt-app-navigator__card__title {
-  @extend %typo-overline;
-  color: var(--text-main-color);
+color: var(--text-main-color);
   text-align: center;
-}
-</style>
+}</style>

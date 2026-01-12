@@ -69,27 +69,23 @@ const to = computed(
 );
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-item-link {
-  display: flex;
+display: flex;
   align-items: center;
+}
 
-  :not(&--invisible) {
-    transition: var(--transition);
+.wt-item-link :not(.wt-item-link--invisible) {
+transition: var(--transition);
     cursor: pointer;
     color: var(--wt-item-link-text-color);
 
-    &:hover {
+    .wt-item-link:hover {
       text-decoration: underline;
-    }
-  }
+}
 
-  &--disabled {
-    pointer-events: none;
-  }
+  .wt-item-link--disabled {
+pointer-events: none;
+}
 }
 </style>

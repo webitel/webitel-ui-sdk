@@ -45,10 +45,7 @@ const setToggleState = () => {
 
 </script>
 
-<style lang="scss" scoped>
-
-.toggle-button[data-pressed] .toggle-button__primary,
+<style  scoped>.toggle-button[data-pressed] .toggle-button__primary,
 .toggle-button:not([data-pressed]) .toggle-button__secondary {
-  display: none;
-}
-</style>
+display: none;
+}</style>

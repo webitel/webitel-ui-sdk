@@ -1,10 +1,8 @@
-@use '@webitel/styleguide/viewport-breakpoints' as *;
-
 .d-none {
   display: none;
 }
 
-@media (#{$media} and #{$media-width-sm}) {
+@media (only screen and max-width: 960px) {
   .d-none-sm {
     display: none;
   }
@@ -13,7 +11,7 @@
   }
 }
 
-@media (#{$media} and #{$media-width-xs}) {
+@media (only screen and max-width: 600px) {
   .d-none-xs {
     display: none;
   }
@@ -21,3 +19,4 @@
     display: block;
   }
 }
+

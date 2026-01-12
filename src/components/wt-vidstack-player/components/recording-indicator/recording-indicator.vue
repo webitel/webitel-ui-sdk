@@ -41,11 +41,8 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-
-.recording-indicator {
-  background: var(--content-wrapper-color);
+<style >.recording-indicator {
+background: var(--content-wrapper-color);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -56,9 +53,12 @@ onMounted(() => {
 
   // Agreed with @Evgeniy Trahtenberg
   width: 100px;
-
-  &__time {
-    @extend %typo-body-1;
-  }
 }
-</style>
+
+.recording-indicator .recording-indicator__time {
+font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
+}</style>

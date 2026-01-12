@@ -27,7 +27,7 @@
               :icon="option.icon"
               size="sm"
             />
-            <h4 class="wt-selection-popup__item-header">
+            <h4 class="wt-selection-popup__item-header typo-subtitle-2">
               {{ option.title }}
             </h4>
             <p
@@ -114,18 +114,14 @@ function selectOption(option) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
-.wt-selection-popup {
-  &__options {
-    display: flex;
+<style  scoped>.wt-selection-popup .wt-selection-popup__options {
+display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
-  }
+}
 
-  &__item-wrapper {
-    display: flex;
+.wt-selection-popup .wt-selection-popup__item-wrapper {
+display: flex;
     position: relative;
     align-items: center;
     transition: var(--transition);
@@ -134,22 +130,20 @@ function selectOption(option) {
     border-radius: var(--border-radius);
     padding: var(--spacing-xs);
 
-    &:hover,
-    &.active {
+    .wt-selection-popup:hover,
+    .wt-selection-popup.active {
       border: 1px solid var(--primary-color);
-    }
-
-    .wt-icon {
-      margin-right: var(--spacing-xs);
-    }
-
-    .wt-tooltip {
-      margin-left: auto;
-    }
-  }
-
-  &__item-header {
-    @extend %typo-subtitle-2;
-  }
 }
-</style>
+
+.wt-selection-popup .wt-icon {
+margin-right: var(--spacing-xs);
+}
+
+.wt-selection-popup .wt-tooltip {
+margin-left: auto;
+}
+
+  .wt-tooltip__item-header {
+    /* Typography handled by typo-subtitle-2 class in template */
+}
+}</style>

@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     shownColLabel({ text, locale }) {
-      if (!text && locale) {
+      if (!text  locale) {
         return typeof locale === 'string'
           ? this.$t(locale)
           : this.$t(...locale);
@@ -127,10 +127,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-
-$list-height: 400px;
+<style  scoped>$list-height: 400px;
 $list-width-sm: calc(
   500px - var(--spacing-xl)
 ); // all popup width - (paddings + overflow-padding)
@@ -139,20 +136,17 @@ $list-width-md: calc(
 ); // all popup width - (paddings + overflow-padding)
 
 .wt-table-column-select {
-  line-height: 0; // prevent 24x28 icon height :/
+line-height: 0; // prevent 24x28 icon height :/
 }
 
 .wt-table-column-select {
-  &__heading {
-    text-align: center;
-  }
+text-align: center;
+}
 
-  &__popup-list-wrap {
     max-height: $list-height;
   }
 
-  &__popup-list {
-    @extend %wt-scrollbar;
+    
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -161,27 +155,58 @@ $list-width-md: calc(
     overflow-x: hidden;
 
     // for 10-30 items
-    &--md {
+
       display: block;
       column-count: 2;
       width: $list-width-md;
     }
 
     // for 30+ items
-    &--lg {
+
       display: block;
       column-count: 3;
       width: $list-width-md;
       max-height: none;
       overflow-y: auto;
     }
-  }
+}
 
-  &__popup-item {
-    display: flex;
+.wt-table-column-select .wt-table-column-select__heading {
+text-align: center;
+}
+
+.wt-table-column-select .wt-table-column-select__popup-list-wrap {
+max-height: $list-height;
+}
+
+.wt-table-column-select .wt-table-column-select__popup-list {
+display: flex;
+
+    // for 10-30 items
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: $list-width-sm;
+    max-height: $list-height;
+    overflow-x: hidden;
+.wt-table-column-select .wt-table-column-select--lg {
+display: block;
+      column-count: 3;
+      width: $list-width-md;
+      max-height: none;
+      overflow-y: auto;
+}
+}
+
+.wt-table-column-select__popup-list .wt-table-column-select--md {
+display: block;
+      column-count: 2;
+      width: $list-width-md;
+}
+
+.wt-table-column-select__popup-list .wt-table-column-select__popup-item {
+display: flex;
     align-items: center;
     margin-right: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
-  }
-}
-</style>
+}</style>

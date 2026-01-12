@@ -13,7 +13,7 @@
               `wt-tree-table-th--sort-${col.sort}`,
             ]"
             :style="col.width ? `min-width:${col.width}` : ''"
-            class="wt-tree-table-th"
+            class="wt-tree-table-th typo-body-1"
             @click="sort(col, key)"
           >
             <div class="wt-tree-table-th__content">
@@ -261,93 +261,94 @@ const handleSelection = (row, select) => {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/scroll' as *;
-
+<style  scoped>
 .wt-tree-table {
-  @extend %wt-scrollbar;
-  max-height: 100%;
+max-height: 100%;
   overflow: auto;
+}
 
-  &-head {
-    border: var(--wt-tree-table-head-border);
+.wt-tree-table .wt-tree-table-head {
+border: var(--wt-tree-table-head-border);
     border-color: var(--wt-tree-table-head-border-color);
     border-radius: var(--border-radius);
     background: var(--wt-tree-table-head-background-color);
-  }
 }
 
 .wt-tree-table-wrapper {
-  border-collapse: collapse;
+border-collapse: collapse;
   width: 100%;
+}
 
-  .wt-tree-table-tr-wrapper {
-    background: var(--wt-tree-table-primary-color);
+.wt-tree-table-wrapper .wt-tree-table-tr-wrapper {
+background: var(--wt-tree-table-primary-color);
 
-    &:nth-child(2n) {
+}
+
+.wt-tree-table-tr-wrapper:nth-child(2n) {
       background: var(--wt-tree-table-zebra-color);
-    }
-  }
+}
 }
 
 .wt-tree-table-th,
 .wt-tree-table-td {
-  @extend %typo-body-1;
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   word-break: break-all;
   overflow-wrap: break-word;
+}
 
-  &__actions {
-    display: flex;
+.wt-tree-table-td .wt-tree-table-td__actions {
+display: flex;
     justify-content: flex-end;
     align-items: flex-start;
     gap: var(--spacing-xs);
-  }
+}
 
-  &__content {
-    display: flex;
+.wt-tree-table-td .wt-tree-table-td__content {
+display: flex;
     align-items: center;
-  }
+}
 
-  &__text {
-    text-wrap: nowrap;
-  }
+.wt-tree-table-td .wt-tree-table-td__text {
+text-wrap: nowrap;
 }
 
 .wt-tree-table-th {
-  font-weight: normal;
+font-weight: normal;
+}
 
-  &--sortable {
-    cursor: pointer;
+.wt-tree-table-th .wt-tree-table-th--sortable {
+cursor: pointer;
 
-    &:hover :deep .wt-icon {
+}
+
+.wt-tree-table-th:hover :deep .wt-icon {
       fill: var(--icon-active-color);
-    }
-  }
+}
 
-  .wt-tree-table-th-sort-arrow {
-    display: none;
+}
+
+.wt-tree-table-th-sort-arrow {
+display: none;
     margin-left: var(--wt-tree-table-head-sort-arrow-margin);
-  }
+}
 
-  &--sort-asc .wt-tree-table-th-sort-arrow--asc {
-    display: block;
-  }
+}
 
-  &--sort-desc .wt-tree-table-th-sort-arrow--desc {
-    display: block;
-  }
+.wt-tree-table-th-sort-arrow--sort-asc .wt-tree-table-th-sort-arrow--asc {
+display: block;
+}
+
+}
+
+.wt-tree-table-th-sort-arrow--sort-desc .wt-tree-table-th-sort-arrow--desc {
+display: block;
+}
 }
 
 .wt-tree-table-foot {
-  border-color: var(--wt-tree-table-head-border-color);
+border-color: var(--wt-tree-table-head-border-color);
   border-top: var(--wt-tree-table-head-border-color);
 }
 </style>

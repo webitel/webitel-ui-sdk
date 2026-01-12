@@ -128,29 +128,25 @@ const badgeColorVar = computed(() => {
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-avatar {
-  position: relative;
+position: relative;
   user-select: none;
+}
 
-  &__letters {
-    display: flex;
+.wt-avatar .wt-avatar__letters {
+display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     height: 100%;
     width: 100%;
     color: var(--wt-avatar-text-color);
-  }
+}
 
-  &__img {
-    border-radius: 50%;
+.wt-avatar .wt-avatar__img {
+border-radius: 50%;
     width: 100%;
     height: 100%;
-  }
 }
 </style>

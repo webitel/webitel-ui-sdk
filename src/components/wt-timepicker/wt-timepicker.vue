@@ -249,26 +249,22 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-timepicker {
-  display: flex;
+display: flex;
   flex-direction: column;
 }
 
 .wt-timepicker__wrapper {
-  display: flex;
+display: flex;
 }
 
 .wt-time-input {
-  width: var(--timepicker-input-width);
+width: var(--timepicker-input-width);
   margin-right: var(--timepicker-input-margin);
+}
 
-  &:last-child {
-    margin-right: 0;
-  }
+.wt-time-input .wt-time-input:last-child {
+margin-right: 0;
 }
 </style>

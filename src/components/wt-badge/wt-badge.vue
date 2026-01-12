@@ -73,39 +73,33 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-badge {
-  position: relative;
+position: relative;
   line-height: 0;
+}
 
-  &:not(.wt-badge--compat-mode) {
-    width: fit-content;
+.wt-badge .wt-badge:not(.wt-badge--compat-mode) {
+width: fit-content;
     height: fit-content;
-  }
+}
 
-  .wt-badge-indicator {
-    position: absolute;
+.wt-badge .wt-badge-indicator {
+position: absolute;
     top: 0;
     right: 0;
     border-radius: 50%;
     width: var(--wt-badge-size);
     height: var(--wt-badge-size);
 
-    &__pic {
+    .wt-badge-indicator__pic {
       position: absolute;
       width: var(--wt-badge-size);
       height: var(--wt-badge-size);
-    }
-  }
+}
 
-  &--outside {
-    .wt-badge-indicator {
-      transform: translate(100%, -100%);
-    }
-  }
+  .wt-badge-indicator--outside .wt-badge-indicator {
+transform: translate(100%, -100%);
+}
 }
 </style>

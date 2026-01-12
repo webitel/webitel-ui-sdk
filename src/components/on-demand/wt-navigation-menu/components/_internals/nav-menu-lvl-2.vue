@@ -27,21 +27,21 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/nav-menu';
-@use '@webitel/styleguide/scroll' as *;
+<style  scoped>@use '../../css/nav-menu';
 
 .nav-menu-lvl-2 {
-  @extend %wt-scrollbar;
-  overflow-y: auto;
+overflow-y: auto;
+}
 
-  .nav-menu-lvl-2__indicator {
-    display: block;
+.nav-menu-lvl-2 .nav-menu-lvl-2__indicator {
+display: block;
+
     position: relative;
     width: var(--spacing-md);
     height: var(--spacing-md);
+}
 
-    &:after {
+:after {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -51,17 +51,19 @@ const props = defineProps({
       width: var(--spacing-2xs);
       height: var(--spacing-2xs);
       content: '';
-    }
-  }
+}
 
-  &__link {
+}
+
+__link {
+
     color: var(--text-main-color);
     overflow-wrap: anywhere;
+    :hover,
+}
 
-    &:hover,
-    &:active {
+:active {
       text-decoration: underline;
     }
-  }
 }
-</style>
+}</style>

@@ -4,6 +4,7 @@
     class="wt-expansion-panel"
   >
     <div
+      :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']"
       class="wt-expansion-panel-header"
       tabindex="0"
       @click="toggle"
@@ -80,19 +81,13 @@ watch(
 );
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-expansion-panel {
-  display: flex;
+display: flex;
   flex-direction: column;
+}
 
-  .wt-expansion-panel-header {
-    @extend %typo-subtitle-1;
+.wt-expansion-panel .wt-expansion-panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,30 +96,27 @@ watch(
     background-color: var(--wt-expansion-panel-header-background-color);
     padding: var(--spacing-2xs) var(--spacing-xs);
     color: var(--wt-expansion-panel-header-title-color);
-  }
+}
 
-  .wt-expansion-panel-body {
-    background-color: var(--wt-expansion-panel-content-background-color);
+.wt-expansion-panel .wt-expansion-panel-body {
+background-color: var(--wt-expansion-panel-content-background-color);
     color: var(--wt-expansion-panel-content-text-color);
-  }
+}
 
-  .wt-expansion-panel-actions {
-    display: flex;
+.wt-expansion-panel .wt-expansion-panel-actions {
+display: flex;
     gap: var(--spacing-xs);
-  }
+}
 
-  .wt-expansion-panel-arrow {
-    transition: var(--transition);
+.wt-expansion-panel .wt-expansion-panel-arrow {
+transition: var(--transition);
 
-    &--opened {
+    .wt-expansion-panel-arrow--opened {
       transform: rotate(90deg);
-    }
-  }
+}
 
-  &--sm {
-    .wt-expansion-panel-header {
-      @extend %typo-subtitle-2;
-    }
-  }
+  .wt-expansion-panel-arrow--sm .wt-expansion-panel-header {
+    /* Typography handled by conditional typo-subtitle-2 class in template */
+}
 }
 </style>

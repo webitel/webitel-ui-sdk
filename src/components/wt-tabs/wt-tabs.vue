@@ -12,7 +12,7 @@
         'wt-tab--highlight': tab.value === current.value,
       }"
       :value="tab.text"
-      class="wt-tab"
+      class="wt-tab typo-body-1-bold"
       type="button"
       @click="open(tab)"
     >
@@ -82,29 +82,22 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-tabs {
-  display: flex;
+display: flex;
   position: relative;
   flex-wrap: nowrap;
   gap: var(--tab-gap);
+}
 
-  &--wide {
-    .wt-tab {
+.wt-tabs .wt-tabs--wide {
+.wt-tab {
       display: block;
       width: 100%;
-    }
-  }
+}
 }
 
 .wt-tab {
-  @extend %typo-body-1-bold;
   display: inline-block;
   position: relative;
   z-index: var(--tab-z-index);
@@ -118,25 +111,27 @@ export default {
   padding-bottom: var(--tab-padding);
   color: var(--wt-tabs-text-color);
 
-  &:hover,
-  &:focus {
-    border-bottom-color: var(--wt-tabs-underline-active-color);
-    color: var(--wt-tabs-text-hover-color);
-  }
-
-  &.wt-tab--highlight {
-    border-bottom-color: var(--wt-tabs-underline-active-color);
-    color: var(--wt-tabs-text-active-color);
-  }
+  .wt-tab:hover,
 
   //// disables bold font resize on hover
-  &:after {
-    display: block;
+}
+
+.wt-tab .wt-tab:focus {
+border-bottom-color: var(--wt-tabs-underline-active-color);
+    color: var(--wt-tabs-text-hover-color);
+}
+
+.wt-tab .wt-tab.wt-tab--highlight {
+border-bottom-color: var(--wt-tabs-underline-active-color);
+    color: var(--wt-tabs-text-active-color);
+}
+
+.wt-tab .wt-tab:after {
+display: block;
     visibility: hidden;
     height: 0;
     overflow: hidden;
     content: attr(value);
     font-weight: bold;
-  }
 }
 </style>

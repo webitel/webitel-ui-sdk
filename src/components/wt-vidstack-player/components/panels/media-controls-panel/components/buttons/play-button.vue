@@ -32,13 +32,11 @@ import {WtVidstackPlayerSizeProvider} from "../../../../../types/WtVidstackPlaye
 const {size} = inject<WtVidstackPlayerSizeProvider>('size');
 </script>
 
-<style scoped>
-.play-button {
-  cursor: pointer;
+<style scoped>.play-button {
+cursor: pointer;
 }
 
 .play-button[data-paused] .play-button__pause-icon,
 .play-button:not([data-paused]) .play-button__play-icon {
-  display: none;
-}
-</style>
+display: none;
+}</style>

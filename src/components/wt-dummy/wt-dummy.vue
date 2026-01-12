@@ -10,7 +10,7 @@
     </div>
     <p
       v-if="!hiddenText"
-      class="wt-dummy__text"
+      class="wt-dummy__text typo-body-1"
     >
       {{ text || $t('webitelUI.dummy.text') }}
     </p>
@@ -62,29 +62,22 @@ const emits = defineEmits(['create']);
 const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-dummy {
-  display: flex;
+display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-sm);
   text-align: center;
+}
 
-  &__img {
-    width: 200px;
+.wt-dummy .wt-dummy__img {
+width: 200px;
     height: 200px;
-  }
+}
 
-  &__text {
-    @extend %typo-body-1;
+.wt-dummy .wt-dummy__text {
     color: var(--wt-dummy-text-color);
-  }
 }
 </style>

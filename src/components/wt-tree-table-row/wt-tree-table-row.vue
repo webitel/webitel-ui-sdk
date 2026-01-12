@@ -6,7 +6,7 @@
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="headerKey"
-      class="wt-tree-table-td"
+      class="wt-tree-table-td typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <div
@@ -46,7 +46,7 @@
 
     <td
       v-if="gridActions"
-      class="wt-tree-table-td__actions"
+      class="wt-tree-table-td__actions typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <slot
@@ -165,7 +165,7 @@ const openCollapse = () => {
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
+  if (data[props.searchedProp]  nestedLevel) {
     return true;
   }
 
@@ -185,54 +185,54 @@ const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
 };
 
 onMounted(() => {
-  if (props.searchedProp && hasSearchedElement(props.data)) {
+  if (props.searchedProp  hasSearchedElement(props.data)) {
     openCollapse();
   }
 });
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
-.wt-tree-table-td {
-  @extend %typo-body-1;
+<style  scoped>.wt-tree-table-td {
+font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   word-break: break-all;
   overflow-wrap: break-word;
+}
 
-  &__actions {
-    .wt-tree-table-td__content {
+.wt-tree-table-td .wt-tree-table-td__actions {
+.wt-tree-table-td__content {
       display: flex;
       align-items: center;
       gap: var(--spacing-xs);
-    }
-  }
+}
 
-  &__icon-wrapper {
-    display: flex;
+  .wt-tree-table-td__icon-wrapper {
+display: flex;
     align-items: flex-start;
     margin-right: var(--spacing-xs);
-  }
+}
 
-  &__content {
-    display: flex;
+  .wt-tree-table-td__content {
+display: flex;
     align-items: flex-start;
     text-wrap: nowrap;
-  }
+}
 }
 
 .wt-tree-table-row {
-  background: var(--wt-tree-table-primary-color);
-
-  &__tree-space {
-    width: var(--icon-md-size);
-    height: var(--icon-md-size);
-  }
-
-  &--alternate {
-    background: var(--wt-tree-table-zebra-color);
-  }
+background: var(--wt-tree-table-primary-color);
 }
-</style>
+
+.wt-tree-table-row .wt-tree-table-row__tree-space {
+width: var(--icon-md-size);
+    height: var(--icon-md-size);
+}
+
+.wt-tree-table-row .wt-tree-table-row--alternate {
+background: var(--wt-tree-table-zebra-color);
+}</style>

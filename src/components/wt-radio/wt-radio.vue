@@ -64,13 +64,9 @@ const isChecked = computed(() => {
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-radio {
-  box-sizing: border-box;
+box-sizing: border-box;
   width: fit-content;
   display: flex;
   position: relative;
@@ -79,7 +75,7 @@ const isChecked = computed(() => {
 }
 
 .wt-radio__label {
-  transition: var(--transition);
+transition: var(--transition);
   cursor: pointer;
 }
 </style>

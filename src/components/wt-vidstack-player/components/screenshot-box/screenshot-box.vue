@@ -38,15 +38,14 @@ const onClose = () => emit('close');
 const onZoom = () => emit('zoom');
 </script>
 
-<style scoped lang="scss">
-.screenshot-box {
-  display: flex;
+<style scoped >.screenshot-box {
+display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .preview-wrapper {
-  position: relative;
+position: relative;
 
   width: 100%;
   height: 100%;
@@ -54,7 +53,7 @@ const onZoom = () => emit('zoom');
 }
 
 .preview-img {
-  overflow: hidden;
+overflow: hidden;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -64,7 +63,7 @@ const onZoom = () => emit('zoom');
 }
 
 .close-btn {
-  position: absolute;
+position: absolute;
 
   display: flex;
   align-items: center;
@@ -73,5 +72,4 @@ const onZoom = () => emit('zoom');
   cursor: pointer;
   padding: 0;
   z-index: 3;
-}
-</style>
+}</style>

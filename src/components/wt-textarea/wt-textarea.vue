@@ -31,7 +31,7 @@
         :rows="rows"
         :auto-resize="autoresize"
         :readonly="readonly"
-        class="wt-textarea__textarea"
+        class="wt-textarea__textarea typo-body-1"
         @paste="emit('paste', $event)"
         @keydown="handleKeypress"
         @input="handleInput"
@@ -117,7 +117,7 @@ const handleKeypress = (event: KeyboardEvent) => {
   emit('keydown', event);
   if (!props.autoresize) return;
 
-  if (event.key === 'Enter' && !event.shiftKey) {
+  if (event.key === 'Enter'  !event.shiftKey) {
     emit('enter');
     event.preventDefault();
   }
@@ -151,22 +151,14 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
-
+<style  scoped>
 .wt-textarea__wrapper {
-  height: 100%;
+height: 100%;
 }
 
 .wt-textarea__textarea {
-  @extend %typo-body-1;
-  @extend %wt-scrollbar;
-  @include wt-placeholder;
-
+    transition: var(--transition);
+  color: var(--wt-text-field-placeholder-color);
   display: block;
   box-sizing: border-box;
   width: 100%;

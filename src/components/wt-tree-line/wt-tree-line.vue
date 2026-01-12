@@ -36,7 +36,7 @@
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
-      <p class="wt-tree-line__label">
+      <p class="wt-tree-line__label typo-body-1">
         {{ label }}
       </p>
       <wt-icon
@@ -176,7 +176,6 @@ const displayActiveState = computed(() => {
   return isSelected.value || props.selectedParent;
 });
 
-
 const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unknown[]) => {
   const value = props.itemData ? node[props.itemData] : node;
 
@@ -191,7 +190,7 @@ const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unk
     }
   }
 
-  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) {
+  if (node  Array.isArray(node[props.childrenProp])  node[props.childrenProp].length) {
     for (const child of node[props.childrenProp]) {
       toggleSelectionWithChildren(child, select, result);
     }
@@ -211,7 +210,7 @@ const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
       return true;
     }
 
-    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) {
+    if (current  Array.isArray(current[props.childrenProp])  current[props.childrenProp].length) {
       for (const child of current[props.childrenProp]) {
         if (findAndDeselect(child, current)) {
           return true;
@@ -274,7 +273,7 @@ const selectElement = () => {
     return;
   }
 
-  if (props.allowParent && !props.data[props.childrenProp]) {
+  if (props.allowParent  !props.data[props.childrenProp]) {
     return emit(
       'update:modelValue',
       props.itemData ? props.data[props.itemData] : props.data,
@@ -306,7 +305,7 @@ const onOpenParent = () => {
 
 const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
+  if (data[props.searchedProp]  nestedLevel) {
     return true;
   }
 
@@ -345,20 +344,18 @@ watch(
 );
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-@use './variables.scss' as *;
-
+<style >
 .wt-tree-line {
-  display: flex;
+display: flex;
   align-items: flex-start;
+}
 
-  &__icon-wrapper {
-    display: flex;
-  }
+.wt-tree-line .wt-tree-line__icon-wrapper {
+display: flex;
+}
 
-  &__label-wrapper {
-    display: flex;
+.wt-tree-line .wt-tree-line__label-wrapper {
+display: flex;
     align-items: center;
     transition: var(--transition);
     cursor: pointer;
@@ -366,25 +363,23 @@ watch(
     padding: 0 var(--spacing-2xs);
     color: var(--wt-tree-item-on);
 
-    &:hover {
+    .wt-tree-line:hover {
       background: var(--wt-tree-item-hover);
       color: var(--wt-tree-item-hover-on);
-    }
+}
 
-    &.searched:not(.active) {
-      background: var(--wt-tree-item-searched);
+.wt-tree-line .wt-tree-line.searched:not(.active) {
+background: var(--wt-tree-item-searched);
       color: var(--wt-tree-item-searched-on);
-    }
+}
 
-    &.active {
-      background: var(--wt-tree-item-active);
+.wt-tree-line .wt-tree-line.active {
+background: var(--wt-tree-item-active);
       color: var(--wt-tree-item-active-on);
-    }
-  }
+}
 
-  &__label {
-    @extend %typo-body-1;
+  .wt-tree-line__label {
     text-wrap: nowrap;
-  }
+}
 }
 </style>

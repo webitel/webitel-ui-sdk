@@ -192,46 +192,43 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-
-.wt-galleria__image-container {
-  max-width: 100%; 
+<style >.wt-galleria__image-container {
+max-width: 100%; 
   display: flex;
   align-items: center;
   background: transparent;
 }
 
 .wt-galleria__content--fullscreen {
-  flex: 1 1 0;
+flex: 1 1 0;
   justify-content: center;
 }
 
 .wt-galleria__image {
-  width: 100%;
+width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
 .wt-galleria__thumbnails {
-  position: absolute;
+position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
 }
 
 .wt-galleria__thumbnail {
-  object-fit: cover;
+object-fit: cover;
 }
 
 .wt-galleria__footer {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .wt-galleria__footer-info {
-  display: flex;
+display: flex;
   gap: 0.5rem;
   @extend %typo-body-2
 }
@@ -241,8 +238,7 @@ onUnmounted(() => {
 }
 
 .wt-galleria__footer-actions {
-  margin-left: auto;
+margin-left: auto;
   display: flex;
   gap: 0.5rem;
-}
-</style>
+}</style>

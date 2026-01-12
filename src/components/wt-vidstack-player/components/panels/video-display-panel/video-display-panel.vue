@@ -110,11 +110,8 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
-.video-display-panel {
-  display: flex;
+<style  scoped>.video-display-panel {
+display: flex;
   justify-content: space-between;
   padding: var(--p-player-headline-sm-padding);
   background: var(--p-player-head-line-background);
@@ -122,44 +119,46 @@ onMounted(() => {
   transition: all var(--transition) ease-in-out;
   backdrop-filter: blur(var(--p-player-head-line-blur));
   opacity: 0;
+}
 
-  &__head {
-    @extend %typo-body-1-bold;
+.video-display-panel .video-display-panel__head {
+font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: none;
     display: flex;
     align-items: center;
     gap: var(--p-player-headline-sm-gap);
     min-width: 0;
-  }
+}
 
-  &__title {
-    white-space: nowrap;
+.video-display-panel .video-display-panel__title {
+white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-  }
+}
 
-  &__controls {
-    display: flex;
+.video-display-panel .video-display-panel__controls {
+display: flex;
     align-items: center;
     gap: var(--p-player-headline-sm-gap);
-  }
+}
 
-  &--sm {
-    gap: var(--p-player-headline-sm-gap);
-  }
+.video-display-panel .video-display-panel--sm {
+gap: var(--p-player-headline-sm-gap);
+}
 
-  &--md {
-    padding: var(--p-player-headline-md-padding);
+.video-display-panel .video-display-panel--md {
+padding: var(--p-player-headline-md-padding);
     gap: var(--p-player-headline-md-gap);
 
     .video-display-panel__controls {
       gap: var(--p-player-headline-md-gap);
-    }
-  }
-
-  &--lg {
-    gap: var(--p-player-headline-lg-gap);
-  }
 }
 
-</style>
+  .video-display-panel--lg {
+gap: var(--p-player-headline-lg-gap);
+}
+}</style>

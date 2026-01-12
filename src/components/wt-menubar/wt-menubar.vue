@@ -21,8 +21,6 @@ import { useSlots } from 'vue'
 const slots = useSlots()
 </script>
 
-<style lang="scss">
-</style>
 
-<style lang="scss" scoped>
-</style>
+
+

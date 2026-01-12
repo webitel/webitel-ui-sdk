@@ -19,7 +19,7 @@
   --wt-popup-header-background-color: var(--dp-18-surface-color);
   --wt-popup-header-text-color: var(--text-main-color);
 
-  --popup-main-section-padding-right: var(--spacing-xs); // scroll offset
+  --popup-main-section-padding-right: var(--spacing-xs); /* scroll offset */
 
   --popup-actions-padding: var(--spacing-xs);
 }

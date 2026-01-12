@@ -2,8 +2,7 @@
   --btn-min-width: 90px;
   --btn-padding: var(--spacing-xs) var(--spacing-sm);
   --btn-padding--size-sm: var(--spacing-2xs) var(--spacing-xs);
-
-  // COLORS
+  /* COLORS */
   --btn-primary-color: var(--primary-color);
   --btn-primary-hover-color: var(--primary-hover-color);
   --btn-primary-text-color: var(--primary-on-color);

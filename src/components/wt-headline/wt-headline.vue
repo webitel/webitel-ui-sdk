@@ -2,7 +2,7 @@
   <header class="wt-headline">
     <slot>
       <slot name="title-wrapper">
-        <h1 class="wt-headline__title">
+        <h1 class="wt-headline__title typo-heading-2">
           <slot name="title" />
         </h1>
       </slot>
@@ -20,13 +20,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-headline {
   display: flex;
   justify-content: space-between;
@@ -39,7 +33,6 @@ export default {
 }
 
 .wt-headline__title {
-  @extend %typo-heading-2;
   margin-right: var(--headline-title-margin);
 }
 

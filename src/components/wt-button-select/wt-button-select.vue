@@ -105,24 +105,21 @@ const toggleContextMenu = (toggle, e) => {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-button-select {
-  display: inline-flex;
+display: inline-flex;
   position: relative;
   align-items: center;
   gap: var(--button-select-buttons-gap);
+}
 
-  .wt-button-select__button {
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
+.wt-button-select .wt-button-select__button {
+border-radius: var(--border-radius) 0 0 var(--border-radius);
     padding: var(--button-select-button-padding);
-  }
+}
 
-  .wt-button-select__select-btn {
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+.wt-button-select .wt-button-select__select-btn {
+border-radius: 0 var(--border-radius) var(--border-radius) 0;
     padding: var(--button-select-icon-button-padding);
     min-width: auto;
 
@@ -131,10 +128,9 @@ const toggleContextMenu = (toggle, e) => {
       display: flex;
       transform: rotate(0);
 
-      &--active {
+      .wt-button-select--active {
         transform: rotate(180deg);
-      }
-    }
+}
   }
 }
 </style>

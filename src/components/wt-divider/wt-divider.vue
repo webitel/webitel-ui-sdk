@@ -17,20 +17,17 @@ withDefaults(defineProps<Props>(), {
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-divider {
-  display: block;
+display: block;
   box-sizing: border-box;
   margin: 0;
   border-color: var(--divider-border-color);
   padding: 0;
+}
 
-  &-vertical {
-    display: flex;
+.wt-divider .wt-divider-vertical {
+display: flex;
     position: relative;
     justify-content: center;
     border-top: 0;
@@ -40,10 +37,10 @@ withDefaults(defineProps<Props>(), {
     padding: var(--spacing-md) 0 0;
     width: 1px;
     min-height: 100%;
-  }
+}
 
-  &-horizontal {
-    border-top: var(--divider-border-color) solid 1px;
+.wt-divider .wt-divider-horizontal {
+border-top: var(--divider-border-color) solid 1px;
     border-right: 0;
     border-bottom: 0;
     border-left: 0;
@@ -52,6 +49,5 @@ withDefaults(defineProps<Props>(), {
     max-width: 100%;
     height: 0;
     max-height: 0;
-  }
 }
 </style>

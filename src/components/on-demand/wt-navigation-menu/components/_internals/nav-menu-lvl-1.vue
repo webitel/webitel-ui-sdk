@@ -50,26 +50,28 @@ function select(category) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/nav-menu';
+<style  scoped>@use '../../css/nav-menu';
 
 .nav-menu__item {
-  &--active {
+--active {
     background: var(--secondary-color);
+}
 
-    &:hover {
-      background: var(--secondary-hover-color);
-    }
-  }
+.nav-menu__item :hover {
+background: var(--secondary-hover-color);
+}
 
-  &--selected {
+}
+
+--selected {
+
     background: var(--primary-color);
     color: var(--primary-on-color);
+}
 
-    &:hover {
+:hover {
       background: var(--primary-color);
       color: var(--primary-on-color);
     }
-  }
 }
-</style>
+}</style>

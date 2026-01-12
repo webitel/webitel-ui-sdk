@@ -26,7 +26,7 @@
         :max="maxValue"
         :min="0"
         :value="value"
-        class="wt-time-input__input"
+        class="wt-time-input__input typo-body-1"
         type="number"
         v-on="listeners"
       />
@@ -116,20 +116,34 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
+<style  scoped>.wt-time-input {
+display: inline-block;
 
-.wt-time-input {
-  display: inline-block;
   cursor: text;
+  .wt-time-input.wt-time-input--invalid .wt-time-input__input,
+}
 
-  &--disabled {
-    pointer-events: none;
+.wt-time-input.wt-time-input--invalid:hover .wt-time-input__input {
+    outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
+    @include wt-placeholder('error');
   }
 
-  .wt-time-input__input {
-    @extend %typo-body-1;
+}
 
+.wt-time-input.wt-time-input--disabled .wt-time-input__input {
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
+    @include wt-placeholder('disabled');
+  }
+}
+
+.wt-time-input .wt-time-input--disabled {
+pointer-events: none;
+}
+
+.wt-time-input .wt-time-input__input {
     display: block;
     transition: var(--transition);
     box-sizing: border-box;
@@ -140,28 +154,12 @@ export default {
     padding: var(--input-padding);
     width: 100%;
     color: var(--wt-text-field-text-color);
-  }
-
-  &.wt-time-input--invalid .wt-time-input__input,
-  &.wt-time-input--invalid:hover .wt-time-input__input {
-    outline: none; // prevent outline overlapping false color
-    border-color: var(--wt-text-field-input-border-error-color);
-    color: var(--wt-text-field-error-text-color);
-    @include wt-placeholder('error');
-  }
-
-  &.wt-time-input--disabled .wt-time-input__input {
-    border-color: var(--wt-text-field-input-border-disabled-color);
-    background: var(--wt-text-field-input-background-disabled-color);
-    @include wt-placeholder('disabled');
-  }
 }
 
 .wt-time-input__wrapper {
-  position: relative;
+position: relative;
 }
 
 .wt-label {
-  text-align: center;
-}
-</style>
+text-align: center;
+}</style>

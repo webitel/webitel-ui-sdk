@@ -103,31 +103,28 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-status-select.wt-select {
-  box-shadow: var(--elevation-5);
+box-shadow: var(--elevation-5);
+}
 
-  :deep(.multiselect) {
-    min-height: 0;
+.wt-status-select.wt-select :deep(.multiselect) {
+min-height: 0;
 
     .multiselect__tags {
       border: none;
       background: var(--wt-status-select-background-color);
       padding: var(--wt-status-select-padding);
       min-height: 0;
-    }
+}
 
-    .multiselect__select {
-      top: 0;
+.wt-status-select.wt-select .multiselect__select {
+top: 0;
       right: 0;
-    }
+}
 
-    .multiselect__content-wrapper {
-      border: none;
+.wt-status-select.wt-select .multiselect__content-wrapper {
+border: none;
       background: transparent;
 
       .multiselect__option {
@@ -135,16 +132,15 @@ export default {
         padding: 0;
         min-height: 0;
         color: var(--wt-status-select-option-text-color);
-      }
+}
 
-      .multiselect__option--highlight {
-        background: var(--wt-status-select-option-background-hover-color);
-      }
+.wt-status-select.wt-select .multiselect__option--highlight {
+background: var(--wt-status-select-option-background-hover-color);
+}
 
-      .multiselect__option--selected {
-        //background: var(--wt-status-select-option-background-selected-color);
-      }
-    }
+.wt-status-select.wt-select .multiselect__option--selected {
+//background: var(--wt-status-select-option-background-selected-color);
+}
   }
 }
 </style>

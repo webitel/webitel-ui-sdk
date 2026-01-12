@@ -163,31 +163,22 @@ watch(
 );
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-
-.wt-button {
-  position: relative;
-
-  &.p-button {
-    @extend %typo-button;
-
-    &--with-badge {
-      overflow: visible;
-    }
-  }
-
-  &__contents {
-    display: contents;
-  }
-
-  .wt-badge {
-    &--absolute {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-  }
+<style >.wt-button {
+position: relative;
 }
 
-</style>
+.wt-button .wt-button.p-button {
+.wt-button--with-badge {
+      overflow: visible;
+}
+
+  .wt-button__contents {
+display: contents;
+}
+
+  .wt-badge .wt-badge--absolute {
+position: absolute;
+      top: 0;
+      right: 0;
+}
+}</style>

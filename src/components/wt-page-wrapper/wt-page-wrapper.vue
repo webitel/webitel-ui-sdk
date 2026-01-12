@@ -31,13 +31,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-page-wrapper {
-  display: flex;
+display: flex;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 100%;
@@ -50,14 +46,14 @@ export default {
 .wt-page-wrapper__header,
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
-  box-sizing: border-box;
+box-sizing: border-box;
   padding: var(--page-wrapper-section-padding);
   border-radius: var(--border-radius);
   background: var(--wt-page-wrapper-content-wrapper-color);
 }
 
 .wt-page-wrapper__main {
-  display: flex;
+display: flex;
   flex: 1;
   width: 100%;
 }

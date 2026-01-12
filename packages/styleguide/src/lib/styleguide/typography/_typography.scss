@@ -1,146 +1,54 @@
-/*
-NOTE:   text-transform: none; is set explicitly cause t-t is inherited from parent
- */
+@import './typography.css';
 
+// SCSS placeholders that extend CSS utility classes - no code duplication
 %typo-heading-1 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 32px;
-    weight: 600;
-  }
-  line-height: 48px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-heading-1;
 }
 
 %typo-heading-2 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 24px;
-    weight: 600;
-  }
-  line-height: 40px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-heading-2;
 }
 
 %typo-heading-3 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 20px;
-    weight: 600;
-  }
-  line-height: 32px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-heading-3;
 }
 
 %typo-heading-4 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 16px;
-    weight: 600;
-  }
-  line-height: 24px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-heading-4;
 }
 
 %typo-subtitle-1 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 14px;
-    weight: 500;
-  }
-  line-height: 24px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-subtitle-1;
 }
 
 %typo-subtitle-2 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 12px;
-    weight: 500;
-  }
-  line-height: 20px;
-  text-transform: none;
-  //letter-spacing: 0.28px; // 0.02em
+  @extend .typo-subtitle-2;
 }
 
 %typo-body-1 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 14px;
-    weight: 400;
-  }
-  line-height: 24px;
-  text-transform: none;
-  //letter-spacing: 0.56px; // 0.04em
+  @extend .typo-body-1;
 }
 
 %typo-body-1-bold {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 14px;
-    weight: 700;
-  }
-  line-height: 24px;
-  text-transform: none;
-  //letter-spacing: 0.56px; // 0.04em
+  @extend .typo-body-1-bold;
 }
 
 %typo-body-2 {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 12px;
-    weight: 400;
-  }
-  line-height: 16px;
-  text-transform: none;
-  //letter-spacing: 0.16px; // 0.01em
+  @extend .typo-body-2;
 }
 
 %typo-body-2-bold {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 12px;
-    weight: 700;
-  }
-  line-height: 16px;
-  text-transform: none;
-  //letter-spacing: 0.16px; // 0.01em
+  @extend .typo-body-2-bold;
 }
 
 %typo-button {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 12px;
-    weight: 500;
-  }
-  line-height: 24px;
-  text-transform: uppercase;
-  //letter-spacing: 0.96px; // 0.06em
+  @extend .typo-button;
 }
 
 %typo-caption {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 10px;
-    weight: 400;
-  }
-  line-height: 16px;
-  text-transform: none;
-  //letter-spacing: 0.48px; // 0.03em
+  @extend .typo-caption;
 }
 
 %typo-overline {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 12px;
-    weight: 500;
-  }
-  line-height: 20px;
-  text-transform: uppercase;
-  //letter-spacing: 2.56px; // 0.16em
+  @extend .typo-overline;
 }

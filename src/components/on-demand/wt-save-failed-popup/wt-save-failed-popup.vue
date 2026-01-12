@@ -54,15 +54,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.flow-save-filed-popup__wrapper {
-  display: flex;
+<style  scoped>.flow-save-filed-popup__wrapper {
+display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-  .wt-icon {
-    margin-bottom: var(--spacing-sm);
-  }
 }
-</style>
+
+.flow-save-filed-popup__wrapper .wt-icon {
+margin-bottom: var(--spacing-sm);
+}</style>

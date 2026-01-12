@@ -1,3 +1,4 @@
+@import '../../css/styleguide/styleguide.css';
 @use '../../css/styleguide/styleguide' as *;
 
 :deep(.multiselect) {
@@ -105,6 +106,7 @@
 
 :deep(.multiselect--active) {
   z-index: calc(var(--p-galleria-mask-z-index) - 2); // // lowered z-index to prevent overlapping the gallery and video container
+
   .multiselect__select.multiselect__arrow .wt-icon {
     fill: var(--icon-active-color);
   }
@@ -187,6 +189,7 @@
 .wt-tags-input--invalid {
   :deep(.multiselect) {
     .multiselect__tags {
+
       .multiselect__custom-tag,
       .multiselect__single-label {
         color: var(--wt-chip-main-text-color);

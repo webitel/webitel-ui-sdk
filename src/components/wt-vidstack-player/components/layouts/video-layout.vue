@@ -52,9 +52,8 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style scoped lang="scss">
-.video-layout {
-  position: absolute;
+<style scoped >.video-layout {
+position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -66,37 +65,36 @@ const emit = defineEmits<{
   align-items: center;
   justify-content: space-between;
   transition: all var(--transition) ease-out;
+}
 
-  &-content {
-    grid-area: content;
-  }
+.video-layout .video-layout-content {
+grid-area: content;
+}
 
-  &-controls {
-    grid-area: controls;
+.video-layout .video-layout-controls {
+grid-area: controls;
     align-self: flex-end;
     justify-self: center;
     width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-  }
+}
 
-  .video-display-panel-wrapper {
-    grid-area: head;
+.video-layout .video-display-panel-wrapper {
+grid-area: head;
     min-width: 0;
     align-self: flex-start;
-  }
+}
 
-  &--sm {
-    border-radius: var(--p-player-wrapper-sm-border-radius);
-  }
+.video-layout .video-display-panel-wrapper--sm {
+border-radius: var(--p-player-wrapper-sm-border-radius);
 }
 
 media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
   .video-display-panel {
-    background: var(--p-player-head-line-hover-background);
+background: var(--p-player-head-line-hover-background);
     opacity: 1;
     z-index: 10;
-  }
 }
-</style>
+}</style>

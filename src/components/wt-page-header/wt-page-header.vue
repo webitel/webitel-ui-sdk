@@ -70,14 +70,17 @@ const emptySecondary = computed(
 );
 </script>
 
-<style lang="scss" scoped>
-.wt-headline {
-  .wt-button {
-    margin-left: var(--spacing-sm);
+<style  scoped>.wt-headline {
+margin-left: var(--spacing-sm);
 
-    &:first-child {
       margin-left: 0;
-    }
-  }
 }
-</style>
+}
+
+.wt-headline .wt-button {
+margin-left: var(--spacing-sm);
+}
+
+.wt-button .wt-button:first-child {
+margin-left: 0;
+}</style>

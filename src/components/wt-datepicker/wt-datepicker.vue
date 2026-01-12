@@ -201,121 +201,131 @@ watch(winFocused, (focused) => {
 
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-datepicker :deep(.dp__main) {
-  .dp__input_icon {
-    left: var(--spacing-xs);
-    line-height: 0;
-  }
-
-  .dp__clear_icon {
-    right: var(--spacing-xs);
-    line-height: 0;
-  }
-
-  .dp__input {
-    @extend %typo-body-1;
-  }
-
-  .dp__arrow_top {
-    display: none;
-  }
-
-  /*
+/*
   don't know why but month or year selection doesn't work
   suppose its related to compatibility build
    */
-  .dp__month_year_wrap {
-    pointer-events: none;
-  }
 
   .dp__month_year_select,
-  .dp__cell_inner {
-    @extend %typo-body-2;
-  }
 
   // reset right/left arrow hover
-  .dp__inner_nav:hover {
-    background: inherit;
-  }
 
-  .dp__menu {
-    box-sizing: border-box;
+  .dp__calendar_header,
+
+  // switch to time view
+
+  .dp__selection_preview,
+}
+
+.dp__main) .dp__input_icon {
+left: var(--spacing-xs);
+    line-height: 0;
+}
+
+.dp__main) .dp__clear_icon {
+right: var(--spacing-xs);
+    line-height: 0;
+}
+
+.dp__main) .dp__input {
+font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
+}
+
+.dp__main) .dp__arrow_top {
+display: none;
+}
+
+.dp__main) .dp__month_year_wrap {
+pointer-events: none;
+}
+
+.dp__main) .dp__cell_inner {
+font-family: 'Montserrat', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  text-transform: none;
+}
+
+.dp__main) .dp__inner_nav:hover {
+background: inherit;
+}
+
+.dp__main) .dp__menu {
+box-sizing: border-box;
     box-shadow: var(--elevation-10);
     border-radius: var(--border-radius);
     padding: var(--spacing-xs);
     width: 196px;
     min-width: 196px;
-  }
-
-  .dp__calendar_wrap {
-    gap: var(--spacing-2xs);
-  }
-
-  .dp__calendar_header_item {
-    @extend %typo-subtitle-2;
-  }
-
-  .dp__calendar_header_separator {
-    background: var(--secondary-color);
-  }
-
-  .dp__calendar_header,
-  .dp__calendar_row {
-    gap: var(--spacing-3xs);
-  }
-
-  // switch to time view
-  .dp__button {
-    display: none;
-  }
-
-  .dp__action_row {
-    flex-direction: column;
-    gap: var(--spacing-xs);
-  }
-
-  .dp__selection_preview,
-  .dp__action_buttons {
-    width: 100%;
-  }
-
-  .dp__selection_preview {
-    text-align: center;
-  }
-
-  .dp__action_buttons {
-    display: flex;
-    gap: var(--spacing-xs);
-  }
 }
 
-.wt-datepicker--invalid :deep(.dp__main) {
-  .dp__input {
-    outline: none; // prevent outline overlapping false color
+.dp__main) .dp__calendar_wrap {
+gap: var(--spacing-2xs);
+}
+
+.dp__main) .dp__calendar_header_item {
+font-family: 'Montserrat', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: none;
+}
+
+.dp__main) .dp__calendar_header_separator {
+background: var(--secondary-color);
+}
+
+.dp__main) .dp__calendar_row {
+gap: var(--spacing-3xs);
+}
+
+.dp__main) .dp__button {
+display: none;
+}
+
+.dp__main) .dp__action_row {
+flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.dp__main) .dp__action_buttons {
+width: 100%;
+}
+
+.dp__main) .dp__selection_preview {
+text-align: center;
+}
+
+.dp__main) .dp__action_buttons {
+display: flex;
+    gap: var(--spacing-xs);
+}
+
+.wt-datepicker--invalid :deep(.dp__main) .dp__input {
+outline: none; // prevent outline overlapping false color
     border-color: var(--wt-text-field-input-border-error-color);
     color: var(--wt-text-field-error-text-color);
-  }
+}
 
-  .dp__input_icon {
-    --icon-color: var(--wt-text-field-input-border-error-color);
-  }
+.dp__main) .dp__input_icon {
+--icon-color: var(--wt-text-field-input-border-error-color);
 }
 
 .datepicker__timepicker {
-  display: flex;
+display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-xs);
+}
 
-  .wt-time-input {
-    flex-grow: 1;
-  }
+.datepicker__timepicker .wt-time-input {
+flex-grow: 1;
 }
 </style>

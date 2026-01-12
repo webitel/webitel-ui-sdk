@@ -70,9 +70,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.wt-error-page {
-  display: flex;
+<style  scoped>.wt-error-page {
+display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -80,29 +79,28 @@ export default {
   padding: 90px;
   min-width: 100vw;
   min-height: 100vh;
+}
 
-  &__wrapper {
-    color: var(--wt-error-page-text-color);
+.wt-error-page .wt-error-page__wrapper {
+color: var(--wt-error-page-text-color);
     text-align: center;
-  }
+}
 
-  &__img {
-    width: 778px;
+.wt-error-page .wt-error-page__img {
+width: 778px;
     max-width: 65vw;
     user-select: none;
-  }
-
-  &__title {
-    margin-top: 69px;
-    text-transform: uppercase;
-  }
-
-  &__text {
-    margin-top: 21px;
-  }
-
-  &__action {
-    margin-top: 40px;
-  }
 }
-</style>
+
+.wt-error-page .wt-error-page__title {
+margin-top: 69px;
+    text-transform: uppercase;
+}
+
+.wt-error-page .wt-error-page__text {
+margin-top: 21px;
+}
+
+.wt-error-page .wt-error-page__action {
+margin-top: 40px;
+}</style>

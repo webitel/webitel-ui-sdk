@@ -28,7 +28,7 @@
     >
       <h2
         v-if="showHeadline"
-        class="wt-empty__headline"
+        class="wt-empty__headline typo-heading-4"
       >
         <!--         @slot for custom headline, replaces headline
                   @scope `{ headline }`
@@ -43,7 +43,7 @@
 
       <h3
         v-if="showTitle"
-        class="wt-empty__title"
+        class="wt-empty__title typo-subtitle-1"
       >
         <!--         @slot for custom title, replaces title
                   @scope `{ title }`
@@ -58,7 +58,7 @@
 
       <p
         v-if="showText"
-        class="wt-empty__text"
+        class="wt-empty__text typo-body-1"
       >
         <!--         @slot for custom text, replaces text
                   @scope `{ text }`
@@ -264,15 +264,9 @@ const onPrimaryClick = onClick('primary');
 const onSecondaryClick = onClick('secondary');
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-empty {
-  display: flex;
+display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
@@ -286,87 +280,136 @@ const onSecondaryClick = onClick('secondary');
   max-width: var(--wt-empty-max-width);
   text-align: center;
 
-  &__info {
-    display: flex;
+  .wt-empty__headline,
+  .wt-empty__title,
+}
+
+.wt-empty .wt-empty__info {
+display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
-  }
+}
 
-  &__headline,
-  &__title,
-  &__text {
-    text-align: center;
-  }
+.wt-empty .wt-empty__text {
+text-align: center;
+}
 
-  &__headline {
-    @extend %typo-heading-4;
-  }
+.wt-empty .wt-empty__headline {
 
-  &__title {
-    @extend %typo-subtitle-1;
-  }
+  
+  
+  
+  
+}
 
-  &__text {
-    @extend %typo-body-1;
-  }
+.wt-empty .wt-empty__title {
 
-  &__actions {
-    display: flex;
+  
+  
+  
+  
+}
+
+.wt-empty .wt-empty__text {
+
+  
+  
+  
+  
+}
+
+.wt-empty .wt-empty__actions {
+display: flex;
     gap: var(--spacing-sm);
-  }
+}
 
-  &--size {
-    &-sm.wt-empty {
+.wt-empty .wt-empty--size {
+.wt-empty-sm.wt-empty {
       gap: var(--spacing-sm);
       padding: var(--spacing-sm);
 
-      &__headline {
-        @extend %typo-heading-4;
-      }
+      .wt-empty__headline {
+          
+  
+  
+  
+  
+}
 
-      &__title {
-        @extend %typo-subtitle-2;
-      }
+.wt-empty .wt-empty__title {
 
-      &__text {
-        @extend %typo-body-2;
-      }
-    }
+  
+  
+  
+  
+}
 
-    &-md.wt-empty {
-      gap: var(--spacing-md);
+.wt-empty .wt-empty__text {
+
+  
+  
+  
+  
+}
+
+    .wt-empty-md.wt-empty {
+gap: var(--spacing-md);
       padding: var(--spacing-md);
+}
 
-      &__headline {
-        @extend %typo-heading-4;
-      }
+.wt-empty-md.wt-empty .wt-empty__headline {
 
-      &__title {
-        @extend %typo-subtitle-1;
-      }
+  
+  
+  
+  
+}
 
-      &__text {
-        @extend %typo-body-1;
-      }
-    }
+.wt-empty-md.wt-empty .wt-empty__title {
 
-    &-lg.wt-empty {
-      gap: var(--spacing-lg);
+  
+  
+  
+  
+}
+
+.wt-empty-md.wt-empty .wt-empty__text {
+
+  
+  
+  
+  
+}
+
+    .wt-empty-lg.wt-empty {
+gap: var(--spacing-lg);
       padding: var(--spacing-lg);
+}
 
-      &__headline {
-        @extend %typo-heading-4;
-      }
+.wt-empty-lg.wt-empty .wt-empty__headline {
 
-      &__title {
-        @extend %typo-subtitle-1;
-      }
+  
+  
+  
+  
+}
 
-      &__text {
-        @extend %typo-body-1;
-      }
-    }
+.wt-empty-lg.wt-empty .wt-empty__title {
+
+  
+  
+  
+  
+}
+
+.wt-empty-lg.wt-empty .wt-empty__text {
+
+  
+  
+  
+  
+}
   }
 }
 </style>

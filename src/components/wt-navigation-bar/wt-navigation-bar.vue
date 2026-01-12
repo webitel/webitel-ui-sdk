@@ -49,7 +49,7 @@
                       currentNav.nav === navItem.value,
                   }"
                   :to="navItem.route"
-                  class="wt-navigation-bar__nav-item-link"
+                  class="wt-navigation-bar__nav-item-link typo-body-1"
                   @click="close"
                 >
                   {{ navItem.name || navItem.value }}
@@ -68,7 +68,7 @@
                 type="button"
                 @click="expand(navItem)"
               >
-                <span class="wt-navigation-bar__nav-expansion-name">{{
+                <span class="wt-navigation-bar__nav-expansion-name typo-subtitle-1">{{
                   navItem.name || navItem.value
                 }}</span>
                 <wt-icon
@@ -229,22 +229,16 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/scroll' as *;
-
+<style  scoped>
 .wt-navigation-bar__menu-btn {
-  display: block;
+display: block;
   width: fit-content;
 }
 
 .wt-navigation-bar__nav {
-  @extend %wt-scrollbar;
-  position: fixed;
+position: fixed;
+
+  // expand animation optimization
   top: 0;
   bottom: 0;
   left: 0;
@@ -255,9 +249,9 @@ export default {
   padding: var(--wt-navigation-bar-padding);
   width: var(--wt-navigation-bar-width);
   overflow: auto;
+}
 
-  // expand animation optimization
-  * {
+* {
     transform: translateZ(0);
     perspective: 1000px;
     backface-visibility: hidden;
@@ -266,37 +260,41 @@ export default {
 }
 
 .wt-navigation-bar__nav-header {
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--wt-navigation-bar-header-padding);
 }
 
 .wt-navigation-bar__app-pic {
-  width: auto;
+width: auto;
   height: var(--wt-navigation-bar-app-pic-height);
 }
 
 .wt-navigation-bar__nav-item-link {
-  @extend %typo-body-1;
-  display: block;
+display: block;
   transition: var(--transition);
   padding: var(--wt-navigation-bar-link-padding);
   word-wrap: break-word;
   color: var(--wt-navigation-bar-option-text-color);
+}
 
-  &:hover {
-    background: var(--wt-navigation-bar-option-background-hover-color);
-  }
+.wt-navigation-bar__nav-item-link :hover {
+background: var(--wt-navigation-bar-option-background-hover-color);
+}
 
-  &.wt-navigation-bar__nav-item-link--active {
-    background: var(--wt-navigation-bar-option-background-active-color);
+.wt-navigation-bar__nav-item-link .wt-navigation-bar__nav-item-link--active {
+background: var(--wt-navigation-bar-option-background-active-color);
     color: var(--wt-navigation-bar-option-text-active-color);
-  }
 }
 
 .wt-navigation-bar__nav-expansion {
-  @extend %typo-subtitle-1;
+font-family: 'Montserrat', monospace;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: none;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -305,9 +303,22 @@ export default {
   padding: var(--wt-navigation-bar-link-padding);
   width: 100%;
   color: var(--wt-navigation-bar-option-text-color);
+  --expanded:before,
+}
 
-  &:before {
-    position: absolute;
+--active:before {
+    opacity: 1;
+  }
+
+}
+
+--expanded .wt-navigation-bar__expansion-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+.wt-navigation-bar__nav-expansion :before {
+position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
@@ -317,29 +328,19 @@ export default {
     background: var(--wt-navigation-bar-expansion-ribbon-color);
     width: var(--wt-navigation-bar-active-expansion-flag-width);
     content: '';
-  }
+}
 
-  .wt-navigation-bar__expansion-arrow {
-    transition: var(--transition);
-  }
-
-  &--expanded:before,
-  &--active:before {
-    opacity: 1;
-  }
-
-  &--expanded .wt-navigation-bar__expansion-arrow {
-    transform: rotate(90deg);
-  }
+.wt-navigation-bar__nav-expansion .wt-navigation-bar__expansion-arrow {
+transition: var(--transition);
 }
 
 .wt-navigation-bar__nav-expansion-name {
-  display: block;
+display: block;
   max-width: var(--wt-navigation-bar-active-expansion-name-max-width);
   word-wrap: break-word;
 }
 
 .wt-navigation-bar__nav-item-link--subnav {
-  padding-left: var(--wt-navigation-bar-subnav-padding-left);
+padding-left: var(--wt-navigation-bar-subnav-padding-left);
 }
 </style>

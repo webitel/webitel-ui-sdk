@@ -47,7 +47,7 @@ const initPicker = async () => {
 };
 
 const appendPicker = () => {
-  if (emojiPickerWrapper.value && picker.value) {
+  if (emojiPickerWrapper.value  picker.value) {
     emojiPickerWrapper.value.appendChild(picker.value);
   }
 };
@@ -60,7 +60,7 @@ const emitEmojiClickEvent = (event) => {
 
 const closePicker = () => {
   isOpened.value = false;
-  if (picker.value && emojiPickerWrapper.value) {
+  if (picker.value  emojiPickerWrapper.value) {
     picker.value.removeEventListener('emoji-click', emitEmojiClickEvent);
     emojiPickerWrapper.value.removeChild(picker.value);
     picker.value = null;
@@ -82,14 +82,12 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-.wt-chat-emoji {
-  position: relative;
+<style  scoped>.wt-chat-emoji {
+position: relative;
   width: 100%;
 
   :deep() emoji-picker {
     --background: var(--content-wrapper-color);
     --border-color: var(--secondary-color);
   }
-}
-</style>
+}</style>

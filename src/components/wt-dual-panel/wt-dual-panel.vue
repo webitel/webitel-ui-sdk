@@ -67,16 +67,12 @@ const sidePanelSize = computed(() =>
 );
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
+<style  scoped>
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {
-  display: flex;
+display: flex;
+
   flex-direction: column;
   gap: var(--wt-dual-panel-section-gap);
   box-sizing: border-box;
@@ -84,37 +80,38 @@ $side-panel-md-width: 320px;
   padding: var(--wt-dual-panel-padding);
   max-width: 100%;
   height: 100%;
+  .wt-dual-panel__header,
+  .wt-dual-panel__actions-panel,
+  .wt-dual-panel__header,
+}
 
-  &__header,
-  &__actions-panel,
-  &__main {
-    box-sizing: border-box;
+.wt-dual-panel .wt-dual-panel__main {
+box-sizing: border-box;
     border-radius: var(--border-radius);
     background: var(--wt-dual-panel-content-wrapper-color);
     padding: var(--wt-dual-panel-section-padding);
-  }
+}
 
-  &__main {
-    @extend %wt-scrollbar;
-    flex: 1 1 auto;
+.wt-dual-panel .wt-dual-panel__main {
+flex: 1 1 auto;
     overflow-x: auto;
-  }
+}
 
-  &__header,
-  &__actions-panel {
-    flex: 0 0 auto;
-  }
+.wt-dual-panel .wt-dual-panel__actions-panel {
+flex: 0 0 auto;
+}
 
-  &__content {
-    display: flex;
+.wt-dual-panel .wt-dual-panel__content {
+display: flex;
     flex-grow: 1;
     gap: var(--spacing-sm);
     min-height: 0;
-  }
+}
 
-  &__side-panel {
-    @extend %wt-scrollbar;
-    display: flex;
+.wt-dual-panel .wt-dual-panel__side-panel {
+display: flex;
+    // overflow: auto;
+
     flex-direction: column;
     gap: var(--wt-dual-panel-section-gap);
     transition: var(--transition);
@@ -122,20 +119,21 @@ $side-panel-md-width: 320px;
     background: var(--wt-dual-panel-content-wrapper-color);
     padding: var(--wt-dual-panel-section-padding);
     min-width: 0;
-    // overflow: auto;
+}
 
-    &--md {
+.wt-dual-panel--md {
       flex: 0 0 $side-panel-md-width;
-    }
+}
 
-    &--sm {
-      flex: 0 0 min-content;
-    }
-  }
+.wt-dual-panel .wt-dual-panel--sm {
+flex: 0 0 min-content;
+}
 
-  &__icon-action {
-    width: fit-content;
+}
+
+.wt-dual-panel__icon-action {
+width: fit-content;
     line-height: 0;
-  }
+}
 }
 </style>

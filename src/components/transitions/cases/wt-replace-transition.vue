@@ -41,4 +41,4 @@ const props = defineProps({
 const transitionName = computed(() => `fade-${props.pattern}`);
 </script>
 
-<style lang="scss" scoped></style>
+

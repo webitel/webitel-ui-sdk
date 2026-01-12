@@ -1,5 +1,5 @@
 :root {
-  --input-padding: calc(var(--spacing-xs) - 1px); // - border
+  --input-padding: calc(var(--spacing-xs) - 1px); /* - border */
   --input-border: 1px solid;
   --input-icon-margin: var(--spacing-xs);
 

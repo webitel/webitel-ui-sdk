@@ -55,43 +55,39 @@ const stepWithCompleted = computed(() =>
 );
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-stepper {
-  width: 100%;
+width: 100%;
 }
 
 .wt-stepper-header {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
 }
 
 .wt-stepper-steps {
-  display: flex;
+display: flex;
   align-items: center;
+}
 
-  &__wrapper {
-    display: contents;
-  }
+.wt-stepper-steps .wt-stepper-steps__wrapper {
+display: contents;
+}
 
-  &__divider {
-    flex: 1 1 auto;
+.wt-stepper-steps .wt-stepper-steps__divider {
+flex: 1 1 auto;
     background: var(--wt-stepper-divider-background-color);
     height: 1px;
 
-    &--completed {
+    .wt-stepper-steps--completed {
       background-color: var(--wt-stepper-divider-background-completed-color);
-    }
-  }
+}
 }
 
 .wt-stepper-description {
-  margin-bottom: var(--spacing-lg);
+margin-bottom: var(--spacing-lg);
   text-align: center;
 }
 </style>

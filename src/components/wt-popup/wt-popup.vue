@@ -23,7 +23,7 @@
         v-if="wrapperShown"
         class="wt-popup__popup"
       >
-        <header class="wt-popup__header">
+        <header class="wt-popup__header typo-subtitle-1">
           <slot name="header">
             <h3 class="wt-popup__title">
               <slot name="title" />
@@ -38,7 +38,7 @@
         </header>
         <section
           v-if="$slots.main"
-          class="wt-popup__main"
+          class="wt-popup__main typo-body-1"
         >
           <slot name="main" />
         </section>
@@ -170,53 +170,45 @@ watch(wrapperShown, (value) => {
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/scroll' as *;
+<style  scoped>
 @use 'mixins' as *;
 .wt-popup {
-  /** @author liza-pohranichna
+/** @author liza-pohranichna
   * need to reuse popup-wrapper styles in player component https://webitel.atlassian.net/browse/WTEL-7723
   */
   @include popup-wrapper;
+}
 
-  &--size {
-    &-xs {
-      .wt-popup__popup {
+.wt-popup .wt-popup--size {
+.wt-popup__popup {
         width: var(--wt-popup-size-xs);
-      }
-    }
+}
 
-    &-sm {
-      .wt-popup__popup {
-        width: var(--wt-popup-size-sm);
-      }
-    }
+}
 
-    &-md {
-      .wt-popup__popup {
-        width: var(--wt-popup-size-md);
-      }
-    }
+.wt-popup-sm .wt-popup__popup {
+width: var(--wt-popup-size-sm);
+}
 
-    &-lg {
-      .wt-popup__popup {
-        width: var(--wt-popup-size-lg);
-      }
-    }
-  }
+}
+
+.wt-popup-md .wt-popup__popup {
+width: var(--wt-popup-size-md);
+}
+
+}
+
+.wt-popup-lg .wt-popup__popup {
+width: var(--wt-popup-size-lg);
+}
+}
 }
 
 .wt-popup__popup {
-  @include popup-container;
+@include popup-container;
 }
 
 .wt-popup__header {
-  @extend %typo-subtitle-1;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -226,20 +218,18 @@ watch(wrapperShown, (value) => {
   background: var(--wt-popup-header-background-color);
   padding: var(--popup-header-padding);
   color: var(--wt-popup-header-text-color);
+}
 
-  .wt-popup__title {
-    flex-grow: 1;
+.wt-popup__header .wt-popup__title {
+flex-grow: 1;
     font: inherit;
-  }
+}
 
-  .wt-popup__close-btn {
-    flex: 0 0 var(--icon-md-size);
-  }
+.wt-popup__header .wt-popup__close-btn {
+flex: 0 0 var(--icon-md-size);
 }
 
 .wt-popup__main {
-  @extend %wt-scrollbar;
-  @extend %typo-body-1;
   flex-grow: 1;
   padding-right: var(--popup-main-section-padding-right);
   min-height: 0;
@@ -247,22 +237,20 @@ watch(wrapperShown, (value) => {
 }
 
 .wt-popup__actions {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--popup-actions-padding);
   padding: var(--popup-actions-padding);
 }
 
-.wt-popup--overflow {
-  .wt-popup__popup {
-    overflow: visible;
-  }
+.wt-popup--overflow .wt-popup__popup {
+overflow: visible;
+}
 
-  .wt-popup__main {
-    padding-right: 0;
+.wt-popup--overflow .wt-popup__main {
+padding-right: 0;
     overflow: visible;
-  }
 }
 </style>
 

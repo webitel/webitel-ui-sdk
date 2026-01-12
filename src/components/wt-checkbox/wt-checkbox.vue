@@ -85,24 +85,20 @@ const iconColor = computed(() => {
 })
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-checkbox {
-  position: relative;
+position: relative;
   display: flex;
   align-items: center;
   user-select: none;
 }
 
 .wt-checkbox__checkmark {
-  display: inline-flex;
+display: inline-flex;
 }
 
 .wt-checkbox__label {
-  cursor: pointer;
+cursor: pointer;
   transition: var(--transition);
 }
 </style>

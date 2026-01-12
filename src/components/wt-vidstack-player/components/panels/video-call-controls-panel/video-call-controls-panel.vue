@@ -191,13 +191,10 @@ const buttonSizeMap = {
 }
 </script>
 
-<style scoped lang="scss">
-.video-call-controls-panel {
-  position: relative;
+<style scoped >.video-call-controls-panel {
+position: relative;
   z-index: 1;
   display: flex;
   justify-content: center;
-}
-</style>
-
+}</style>
 

@@ -28,10 +28,7 @@ const emit = defineEmits<{
 
 </script>
 
-<style scoped>
-.fullscreen-button[data-active] .fullscreen-button__enter,
+<style scoped>.fullscreen-button[data-active] .fullscreen-button__enter,
 .fullscreen-button:not([data-active]) .fullscreen-button__exit {
-  display: none;
-}
-
-</style>
+display: none;
+}</style>

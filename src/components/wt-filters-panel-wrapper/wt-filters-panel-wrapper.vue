@@ -56,26 +56,25 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$actions-width: calc((var(--icon-md-size) + var(--table-actions-icon-gap)));
+<style  scoped>$actions-width: calc((var(--icon-md-size) + var(--table-actions-icon-gap)));
 
 .filters-panel-wrapper {
-  display: flex;
+display: flex;
+}
 
-  .filters-wrap {
-    flex: 1;
-  }
+.filters-panel-wrapper .filters-wrap {
+flex: 1;
+}
 
-  .actions-wrap {
-    display: flex;
+.filters-panel-wrapper .actions-wrap {
+display: flex;
     flex: 0 0 $actions-width;
     margin-top: 24px;
     margin-left: auto;
 
     .wt-table-actions {
       height: fit-content;
-    }
-  }
+}
 }
 
 // 30px*2 outer paddings, 30px*2 inner paddings, table actions var value
@@ -90,73 +89,72 @@ $filter-gap: 10px; // var(--spacing-xs)
 }
 
 .filters-wrap {
-  display: grid;
+display: grid;
   flex-wrap: wrap;
   grid-gap: var(--spacing-xs);
 
-  .filters-panel-wrapper & > * {
+  .filters-panel-wrapper .filters-wrap > * {
   }
+}
 
-  & {
-    grid-template-columns: repeat(6, 1fr);
+.filters-wrap .filters-wrap {
+grid-template-columns: repeat(6, 1fr);
 
     > *:nth-child(n + 7) {
       display: none;
-    }
-  }
+}
 
   @media (max-width: filters-width(6)) {
-    & {
-      grid-template-columns: repeat(5, 1fr);
+    .filters-wrap {
+grid-template-columns: repeat(5, 1fr);
 
       :deep(> *:nth-child(n + 6)) {
         display: none;
       }
-    }
+}
   }
 
   @media (max-width: filters-width(5)) {
-    & {
-      grid-template-columns: repeat(4, 1fr);
+    .filters-wrap {
+grid-template-columns: repeat(4, 1fr);
 
       :deep(> *:nth-child(n + 5)) {
         display: none;
       }
-    }
+}
   }
 
   @media (max-width: filters-width(4)) {
-    & {
-      grid-template-columns: repeat(3, 1fr);
+    .filters-wrap {
+grid-template-columns: repeat(3, 1fr);
 
       :deep(> *:nth-child(n + 4)) {
         display: none;
       }
-    }
+}
   }
 
   @media (max-width: filters-width(3)) {
-    & {
-      grid-template-columns: repeat(2, 1fr);
+    .filters-wrap {
+grid-template-columns: repeat(2, 1fr);
 
       :deep(> *:nth-child(n + 3)) {
         display: none;
       }
-    }
+}
   }
 
   @media (max-width: filters-width(2)) {
-    & {
-      grid-template-columns: repeat(1, 1fr);
+    .filters-wrap {
+grid-template-columns: repeat(1, 1fr);
 
       :deep(> *:nth-child(n + 2)) {
         display: none;
       }
-    }
+}
   }
 }
 
 .filters-panel-wrapper--opened .filters-wrap :deep(> *) {
   display: block;
-}
-</style>
+}</style>

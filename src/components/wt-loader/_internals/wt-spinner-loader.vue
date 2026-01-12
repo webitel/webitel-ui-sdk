@@ -35,19 +35,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.wt-spinner-loader {
-  &--xs {
-    width: var(--icon-sm-size);
-    height: var(--icon-sm-size);
-  }
-
-  &--sm {
-    width: var(--icon-md-size);
-    height: var(--icon-md-size);
-  }
-
-  svg {
+<style  scoped>.wt-spinner-loader {
+svg {
     animation: rotate 1.5s linear infinite;
     width: 100%;
     height: 100%;
@@ -64,21 +53,31 @@ export default {
     stroke-width: 3;
   }
 
-  &--main circle {
+  .wt-spinner-loader--main circle {
     stroke: var(--wt-loader-sm-path-main-color);
   }
 
-  &--icon circle {
+  .wt-spinner-loader--icon circle {
     stroke: var(--wt-loader-sm-path-icon-color);
   }
 
-  &--on-light circle {
+  .wt-spinner-loader--on-light circle {
     stroke: var(--wt-loader-sm-path-on-light-color);
   }
 
-  &--on-dark circle {
+  .wt-spinner-loader--on-dark circle {
     stroke: var(--wt-loader-sm-path-on-dark-color);
   }
+}
+
+.wt-spinner-loader .wt-spinner-loader--xs {
+width: var(--icon-sm-size);
+    height: var(--icon-sm-size);
+}
+
+.wt-spinner-loader .wt-spinner-loader--sm {
+width: var(--icon-md-size);
+    height: var(--icon-md-size);
 }
 
 @keyframes rotate {
@@ -101,5 +100,4 @@ export default {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124;
   }
-}
-</style>
+}</style>

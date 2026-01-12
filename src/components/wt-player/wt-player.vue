@@ -1,7 +1,7 @@
 <template>
   <aside
     :class="[`wt-player--position-${position}`]"
-    class="wt-player"
+    class="wt-player typo-body-2"
   >
     <component
       :is="playerType"
@@ -173,35 +173,28 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-player {
-  @extend %typo-body-2;
   bottom: 60px;
+}
 
-  &--position {
-    &-sticky {
+.wt-player .wt-player--position {
+.wt-player-sticky {
       position: sticky;
       z-index: 2;
-    }
+}
 
-    &-relative {
-      position: relative;
+.wt-player .wt-player-relative {
+position: relative;
       bottom: unset;
-    }
+}
 
-    &-static {
-      position: static;
-    }
-  }
+.wt-player .wt-player-static {
+position: static;
+}
 
   :deep(.plyr) {
-    box-shadow: var(--elevation-10);
+box-shadow: var(--elevation-10);
     border-radius: var(--border-radius);
     max-width: 100%; // prevents <video> container overflow
 
@@ -220,28 +213,29 @@ export default {
       left: 0; // reset plyr style for video "play" button icon
     }
 
-    .plyr__progress__buffer {
-      background: var(--wt-player-audio-progress-background);
-    }
-
     .plyr__progress input,
     .plyr__volume input {
       cursor: pointer;
+}
 
-      &::-webkit-slider-thumb {
-        -webkit-appearance: none;
+.plyr) .plyr__progress__buffer {
+background: var(--wt-player-audio-progress-background);
+}
+
+.plyr) .wt-player::-webkit-slider-thumb {
+-webkit-appearance: none;
         transition: var(--transition);
         border: var(--wt-slider-border);
         border-radius: var(--wt-slider-pointer-radius);
         background: var(--wt-slider-pointer-background-color);
-      }
+}
 
-      &::-webkit-slider-runnable-track {
-        -webkit-appearance: none;
-      }
+.plyr) .wt-player::-webkit-slider-runnable-track {
+-webkit-appearance: none;
+}
 
-      &::-moz-range-thumb {
-        -moz-appearance: none;
+.plyr) .wt-player::-moz-range-thumb {
+-moz-appearance: none;
         transition: var(--transition);
         border: var(--wt-slider-border);
         border-color: var(--wt-slider-pointer-border-color);
@@ -249,20 +243,19 @@ export default {
         background: var(--wt-slider-pointer-background-color);
         width: var(--wt-slider-pointer-size);
         height: var(--wt-slider-pointer-size);
-      }
+}
 
-      &::-moz-range-track {
-        -moz-appearance: none;
-      }
+.plyr) .wt-player::-moz-range-track {
+-moz-appearance: none;
+}
 
-      &::-ms-thumb {
-        appearance: none;
-      }
+.plyr) .wt-player::-ms-thumb {
+appearance: none;
+}
 
-      &::-ms-track {
-        appearance: none;
-      }
-    }
+.plyr) .wt-player::-ms-track {
+appearance: none;
+}
   }
 }
 </style>

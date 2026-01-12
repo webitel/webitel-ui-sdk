@@ -1,40 +1,18 @@
 <template>
   <div class="wt-context-menu">
-    <wt-popover
-      :visible="visible"
-      :disabled="disabled"
-      :pt="pt"
-      unstyled
-      placement="bottom-end"
-      class="wt-context-menu__floating-wrapper"
-    >
+    <wt-popover :visible="visible" :disabled="disabled" :pt="pt" unstyled placement="bottom-end"
+      class="wt-context-menu__floating-wrapper">
       <template #activator="{ toggle, show }">
-        <slot
-          name="activator"
-          v-bind="{ toggle, show }"
-        />
+        <slot name="activator" v-bind="{ toggle, show }" />
       </template>
 
       <template #default="{ hide }">
-        <ul
-          :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
-          class="wt-context-menu__menu"
-        >
-          <li
-            v-for="(option, index) of options"
-            :key="index"
-            class="wt-context-menu__option-wrapper"
-          >
-            <a
-              :class="[{ 'wt-context-menu__option--disabled': option.disabled }]"
-              class="wt-context-menu__option"
-              href="#"
-              @click.prevent="handleOptionClick({ option, index, hide })"
-            >
-              <slot
-                name="option"
-                v-bind="option"
-              >
+        <ul :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
+          class="wt-context-menu__menu typo-body-2">
+          <li v-for="(option, index) of options" :key="index" class="wt-context-menu__option-wrapper">
+            <a :class="[{ 'wt-context-menu__option--disabled': option.disabled }]" class="wt-context-menu__option"
+              href="#" @click.prevent="handleOptionClick({ option, index, hide })">
+              <slot name="option" v-bind="option">
                 {{ option.text || option }}
               </slot>
             </a>
@@ -90,23 +68,16 @@ function handleOptionClick({ option, index, hide }) {
 }
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-context-menu {
   line-height: 0;
+}
 
-  &.wt-tooltip :deep(.wt-context-menu__floating-wrapper) {
-    padding: 0;
-  }
+.wt-context-menu.wt-tooltip :deep(.wt-context-menu__floating-wrapper) {
+  padding: 0;
 }
 
 .wt-context-menu__menu {
-  @extend %typo-body-2;
   z-index: 1;
   transition: var(--transition);
   box-shadow: var(--box-shadow);
@@ -114,18 +85,16 @@ function handleOptionClick({ option, index, hide }) {
   background-color: var(--wt-context-menu-background-color);
 }
 
-.wt-context-menu__option-wrapper {
-  &:first-of-type {
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-  }
+.wt-context-menu__option-wrapper:first-of-type {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
 
-  &:last-of-type {
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-  }
+.wt-context-menu__option-wrapper:last-of-type {
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
 
-  &:only-of-type {
-    border-radius: var(--border-radius);
-  }
+.wt-context-menu__option-wrapper:only-of-type {
+  border-radius: var(--border-radius);
 }
 
 .wt-context-menu__option {
@@ -134,15 +103,15 @@ function handleOptionClick({ option, index, hide }) {
   cursor: pointer;
   padding: var(--wt-context-menu-option-padding);
   color: var(--wt-context-menu-option-text-color);
+}
 
-  &:hover {
-    background-color: var(--wt-context-menu-option-background-hover-color);
-  }
+.wt-context-menu__option:hover {
+  background-color: var(--wt-context-menu-option-background-hover-color);
+}
 
-  &--disabled {
-    background-color: var(--wt-context-menu-option-background-disabled-color);
-    pointer-events: none;
-    color: var(--wt-context-menu-option-text-disabled-color);
-  }
+.wt-context-menu__option--disabled {
+  background-color: var(--wt-context-menu-option-background-disabled-color);
+  pointer-events: none;
+  color: var(--wt-context-menu-option-text-disabled-color);
 }
 </style>

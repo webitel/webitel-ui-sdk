@@ -93,15 +93,13 @@ async function confirm() {
 }
 </script>
 
-<style scoped>
-.wt-confirm-dialog__content {
-  display: flex;
+<style scoped>.wt-confirm-dialog__content {
+display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
 .wt-confirm-dialog__message {
-  text-align: center;
-}
-</style>
+text-align: center;
+}</style>

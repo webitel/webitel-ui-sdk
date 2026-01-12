@@ -1,135 +1,67 @@
 <template>
-  <p-table
-    :key="tableKey"
-    ref="table"
-    :expanded-rows="expandedRows"
-    :reorderable-columns="reorderableColumns"
-    :resizable-columns="resizableColumns"
-    :row-class="rowClass"
-    :row-style="rowStyle"
-    :show-headers="!headless"
-    :value="data"
-    class="wt-table"
-    column-resize-mode="expand"
-    lazy
-    scroll-height="flex"
-    scrollable
-    :virtual-scroller-options="virtualScroll"
-    @sort="sort"
-    @update:expanded-rows="expandedRows = $event"
-    @column-resize-end="columnResize"
-    @column-reorder="columnReorder"
-    @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
-  >
-    <p-column
-      v-if="rowExpansion"
-      :pt="{
-        columnresizer: {
-            class: {
-                'hidden': true
-            }
+  <p-table :key="tableKey" ref="table" :expanded-rows="expandedRows" :reorderable-columns="reorderableColumns"
+    :resizable-columns="resizableColumns" :row-class="rowClass" :row-style="rowStyle" :show-headers="!headless"
+    :value="data" class="wt-table" column-resize-mode="expand" lazy scroll-height="flex" scrollable
+    :virtual-scroller-options="virtualScroll" @sort="sort" @update:expanded-rows="expandedRows = $event"
+    @column-resize-end="columnResize" @column-reorder="columnReorder"
+    @row-reorder="({ dragIndex, dropIndex }) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })">
+    <p-column v-if="rowExpansion" :pt="{
+      columnresizer: {
+        class: {
+          'hidden': true
         }
-      }"
-      body-style="width: 1%;"
-      column-key="row-expander"
-      header-style="width: 1%;"
-    >
+      }
+    }" body-style="width: 1%;" column-key="row-expander" header-style="width: 1%;">
       <template #body="{ data: row }">
-        <wt-icon-btn
-          :disabled="props.rowExpansionDisabled(row)"
-          :icon="isRowExpanded(row) ? 'arrow-down' : 'arrow-right'"
-          @click.stop="toggleRow(row)"
-        />
+        <wt-icon-btn :disabled="props.rowExpansionDisabled(row)"
+          :icon="isRowExpanded(row) ? 'arrow-down' : 'arrow-right'" @click.stop="toggleRow(row)" />
       </template>
     </p-column>
-    <p-column
-      v-if="rowReorder"
-      :pt="{
-        columnresizer: {
-            class: {
-                'hidden': true
-            }
+    <p-column v-if="rowReorder" :pt="{
+      columnresizer: {
+        class: {
+          'hidden': true
         }
-      }"
-      :reorderable-column="false"
-      body-style="width: 1%;"
-      column-key="row-reorder"
-      header-style="width: 1%;"
-      row-reorder
-    >
+      }
+    }" :reorderable-column="false" body-style="width: 1%;" column-key="row-reorder" header-style="width: 1%;"
+      row-reorder>
       <template #body="{ data: row }">
-        <wt-icon
-          v-if="!isRowReorderDisabled(row)"
-          data-pc-section="reorderablerowhandle"
-          icon="move"
-        />
+        <wt-icon v-if="!isRowReorderDisabled(row)" data-pc-section="reorderablerowhandle" icon="move" />
       </template>
     </p-column>
-    <p-column
-      v-if="selectable"
-      :pt="{
-        columnresizer: {
-            class: {
-                'hidden': true
-            }
+    <p-column v-if="selectable" :pt="{
+      columnresizer: {
+        class: {
+          'hidden': true
         }
-      }"
-      :reorderable-column="false"
-      body-style="width: 1%;"
-      column-key="row-select"
-      header-style="width: 1%;"
-    >
+      }
+    }" :reorderable-column="false" body-style="width: 1%;" column-key="row-select" header-style="width: 1%;">
       <template #header>
-        <wt-checkbox
-          :selected="isAllSelected"
-          @update:selected="selectAll"
-        />
+        <wt-checkbox :selected="isAllSelected" @update:selected="selectAll" />
       </template>
 
       <template #body="{ data: row }">
         <!-- check if row exists to prevent rendering errors -->
-        <wt-checkbox
-          v-if="row"
-          :selected="_selected.includes(row)"
-          @update:selected="handleSelection(row, $event)"
-        />
+        <wt-checkbox v-if="row" :selected="_selected.includes(row)" @update:selected="handleSelection(row, $event)" />
       </template>
     </p-column>
-    <p-column
-      v-for="(col, idx) of dataHeaders"
-      :key="col.value"
-      :column-key="col.field"
-      :field="col.field"
-      :hidden="isColumnHidden(col)"
-      :pt="{
+    <p-column v-for="(col, idx) of dataHeaders" :key="col.value" :column-key="col.field" :field="col.field"
+      :hidden="isColumnHidden(col)" :pt="{
         root: {
           'data-column-field': col.field      // required for column-resizer to get column field
         }
-      }"
-      :sortable="isColSortable(col)"
-    >
+      }" :sortable="isColSortable(col)">
       <template #header>
-        <slot
-          :index="idx"
-          :header="col"
-          :name="`header-${col.value}`"
-        >
-          <div class="wt-table__th__content">
-            <span v-tooltip="col.text">
-              {{ col.text }}
+        <slot :index="idx" :header="col" :name="`header-${col.value}`">
+          <div class="wt-table__th__content typo-body-1-bold">
+            <span v-tooltip="col.text"> {
+              { col.text }
+              }
             </span>
-            <wt-icon
-              v-if="col.sort === 'asc'"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-else-if="col.sort === 'desc'"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
+            <wt-icon v-if="col.sort === 'asc'" class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+              icon="sort-arrow-up" size="sm" />
+            <wt-icon v-else-if="col.sort === 'desc'" class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+              icon="sort-arrow-down" size="sm" />
           </div>
         </slot>
       </template>
@@ -139,27 +71,16 @@
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
-        <div
-          :style="columnStyle(col)"
-          class="wt-table__td__content"
-        >
+        <div :style="columnStyle(col)" class="wt-table__td__content typo-body-1">
           <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading)
                this guard prevents rendering errors and keeps the table stable -->
-          <slot
-            v-if="row"
-            :index="index"
-            :item="row"
-            :name="col.value"
-          >{{ row[col.value] }}</slot>
+          <slot v-if="row" :index="index" :item="row" :name="col.value">{{ row[col.value] }}</slot>
         </div>
       </template>
       <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header -->
       <template #sorticon>
       </template>
-      <template
-        v-if="isTableColumnFooters"
-        #footer
-      >
+      <template v-if="isTableColumnFooters" #footer>
         <!--
         @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
         @scope [ { "name": "header", "description": "header object" } ]
@@ -167,30 +88,20 @@
         <slot :name="`${col.value}-footer`" />
       </template>
     </p-column>
-    <p-column
-      v-if="gridActions"
-      :frozen="fixedActions"
-      align-frozen="right"
-      column-key="row-actions"
-      style="width: 112px;"
-    >
+    <p-column v-if="gridActions" :frozen="fixedActions" align-frozen="right" column-key="row-actions"
+      style="width: 112px;">
       <template #header>
         <!--    @slot Table head actions row slot -->
         <slot name="actions-header" />
       </template>
-      <template #body="{data: actionsData, index}">
+      <template #body="{ data: actionsData, index }">
         <!--
         @slot Table body actions row slot
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
         <div class="wt-table__td__actions">
           <!-- check if row exists to prevent rendering errors -->
-          <slot
-            v-if="actionsData"
-            :index="index"
-            :item="actionsData"
-            name="actions"
-          />
+          <slot v-if="actionsData" :index="index" :item="actionsData" name="actions" />
         </div>
       </template>
     </p-column>
@@ -199,10 +110,7 @@
         <slot :item="row" name="expansion"></slot>
       </div>
     </template>
-    <template
-      v-if="isTableFooter"
-      #footer
-    >
+    <template v-if="isTableFooter" #footer>
       <slot name="footer" />
     </template>
   </p-table>
@@ -227,7 +135,7 @@ import type { WtTableHeader } from './types/WtTable';
 const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
 const DEFAULT_ITEM_SIZE = 40;
 
-interface Props extends DataTableProps{
+interface Props extends DataTableProps {
   /**
    * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
    */
@@ -327,14 +235,14 @@ const _selected = computed(() => {
 const dataHeaders = computed(() => {
   return props.headers
     .map(header => {
-      if (!header.text && header.locale) {
-        return {
-          ...header,
-          text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
-        };
-      }
-      return header;
-    });
+      if (!header.text  header.locale) {
+    return {
+
+      text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
+    };
+  }
+  return header;
+});
 });
 
 const isColumnHidden = (col) => {
@@ -361,7 +269,7 @@ const isAllSelected = computed(() => {
   return _selected.value.length === props.data.length && props.data.length > 0;
 })
 
-const sort = ({sortField}) => {
+const sort = ({ sortField }) => {
   const col = dataHeaders.value.find(header => header.field === sortField)
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
@@ -418,7 +326,7 @@ const handleSelection = (row, select) => {
   }
 }
 
-const columnResize = ({element}) => {
+const columnResize = ({ element }) => {
   // getting column name by custom attribute due Primevue does not provide it
   const field = element.getAttribute('data-column-field')
 
@@ -476,53 +384,34 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-table {
-  @extend %wt-scrollbar;
   overflow: auto;
 }
 
-.wt-table :deep(.p-datatable-table-container) {
-  @extend %wt-scrollbar;
-}
+.wt-table :deep( //style for virtual scroller
 
-//style for virtual scroller
-.wt-table :deep(.p-virtualscroller) {
-  @extend %wt-scrollbar;
-}
+  .wt-table :deep(.wt-table__th__content {
+      width: 0;
+      white-space: nowrap;
+    }
 
-.wt-table__th__content {
-  @extend %typo-body-1-bold;
-  width: 0;
-  white-space: nowrap;
-}
+    .wt-table__td__content {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
 
-.wt-table__td__content {
-  @extend %typo-body-1;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+    .wt-table__td__actions {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: var(--spacing-xs);
+    }
 
-.wt-table__td__actions {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: var(--spacing-xs);
-}
-
-.wt-table__th__sort-arrow {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>
+    .wt-table__th__sort-arrow {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+    }</style>

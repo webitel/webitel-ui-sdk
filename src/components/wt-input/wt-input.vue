@@ -32,7 +32,7 @@
         :max="numberMax"
         :min="numberMin"
         :placeholder="placeholder || label"
-        class="wt-input__input"
+        class="wt-input__input typo-body-1"
         :type="inputType"
         :value="inputValue"
         v-bind="$attrs"
@@ -219,31 +219,23 @@ defineExpose({
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
-
+<style  scoped>
 .wt-input {
-  cursor: text;
+cursor: text;
+}
 
-  &--disabled {
-    pointer-events: none;
-  }
+.wt-input .wt-input--disabled {
+pointer-events: none;
 }
 
 .wt-input__wrapper {
-  position: relative;
+position: relative;
 }
 
 .wt-input__input {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-
-  display: block;
   transition: var(--transition);
+  color: var(--wt-text-field-placeholder-color);
+  display: block;
   box-sizing: border-box;
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
@@ -252,16 +244,18 @@ defineExpose({
   padding: var(--input-padding);
   width: 100%;
   color: var(--wt-text-field-text-color);
+}
 
-  .wt-input--invalid &,
-  .wt-input--invalid:hover & {
+.wt-input--invalid:hover .wt-input {
     outline: none; // prevent outline overlapping false color
     border-color: var(--wt-text-field-input-border-error-color);
     color: var(--wt-text-field-error-text-color);
     @include wt-placeholder('error');
   }
 
-  .wt-input--disabled & {
+}
+
+.wt-input--disabled .wt-input {
     border-color: var(--wt-text-field-input-border-disabled-color);
     background: var(--wt-text-field-input-background-disabled-color);
     @include wt-placeholder('disabled');
@@ -269,7 +263,7 @@ defineExpose({
 }
 
 .wt-input__after-wrapper {
-  display: flex;
+display: flex;
   position: absolute;
   top: 50%;
   right: var(--input-icon-margin);

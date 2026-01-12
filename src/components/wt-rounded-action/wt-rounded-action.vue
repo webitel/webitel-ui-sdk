@@ -108,13 +108,9 @@ watch(() => props.loading, (value) => {
 
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-rounded-action {
-  display: block;
+display: block;
   transition: var(--transition);
   border: var(--rounded-action-border-size) solid;
   border-color: var(--rounded-action-bg-color);
@@ -124,42 +120,35 @@ watch(() => props.loading, (value) => {
   width: fit-content;
   line-height: 0;
   cursor: pointer;
-
-  &:hover {
-    border-color: var(--rounded-action-bg-hover-color);
-    background: var(--rounded-action-bg-hover-color);
-  }
-
-  &--loading {
-    pointer-events: none;
-  }
-
-  &--wide {
-    width: 100%;
-  }
-
-  &--rounded {
-    border-radius: var(--rounded-action-rounded-border-radius);
-  }
-
-  &--active {
-    border-color: var(--rounded-action-active-color);
-
-    &:hover {
-      border-color: var(--rounded-action-active-color);
-    }
-  }
-
-  &.wt-rounded-action--disabled {
-    pointer-events: none;
-  }
-
-  &--size {
-    &-sm {
-    }
-
-    &-md {
-    }
-  }
 }
+
+.wt-rounded-action .wt-rounded-action:hover {
+border-color: var(--rounded-action-bg-hover-color);
+    background: var(--rounded-action-bg-hover-color);
+}
+
+.wt-rounded-action .wt-rounded-action--loading {
+pointer-events: none;
+}
+
+.wt-rounded-action .wt-rounded-action--wide {
+width: 100%;
+}
+
+.wt-rounded-action .wt-rounded-action--rounded {
+border-radius: var(--rounded-action-rounded-border-radius);
+}
+
+.wt-rounded-action .wt-rounded-action--active {
+border-color: var(--rounded-action-active-color);
+
+    .wt-rounded-action:hover {
+      border-color: var(--rounded-action-active-color);
+}
+
+  .wt-rounded-action.wt-rounded-action--disabled {
+pointer-events: none;
+}
+
+  .wt-rounded-action--size .wt-rounded-action--size }
 </style>

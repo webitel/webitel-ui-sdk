@@ -93,21 +93,16 @@ function select(category) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/viewport-breakpoints' as *;
-@use '@webitel/styleguide/scroll' as *;
+<style  scoped>.wt-navigation-menu {
+display: flex;
 
-.wt-navigation-menu {
-  display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
   height: 100%;
-
   --button-min-height: 60px;
   --wrapper-width: 60%;
   --wrapper-height: calc(var(--spacing-sm) * 2 + var(--button-min-height) * 7 + var(--spacing-2xs) * 6);
-
   @media only screen and (max-width: $viewport-sm) {
     --wrapper-width: 80%;
   }
@@ -116,10 +111,11 @@ function select(category) {
     --wrapper-width: 100%;
     --wrapper-height: 100%;
   }
+}
 
-  &__wrapper {
-    @extend %wt-scrollbar;
-    display: grid;
+.wt-navigation-menu .wt-navigation-menu__wrapper {
+display: grid;
+
     grid-template-columns: repeat(2, 1fr);
     box-sizing: border-box;
     margin: auto;
@@ -129,24 +125,21 @@ function select(category) {
     width: var(--wrapper-width);
     height: var(--wrapper-height);
     grid-gap: var(--spacing-sm);
-
     @media only screen and (max-width: $viewport-xs) {
       grid-template-columns: 1fr;
-    }
-  }
+}
 
-  &__categories--display {
-    display: none;
+  .wt-navigation-menu__categories--display {
+display: none;
 
     @media only screen and (max-width: $viewport-xs) {
       display: block;
     }
-  }
+}
 
-  &__categories--hidden {
-    @media only screen and (max-width: $viewport-xs) {
+  .wt-navigation-menu__categories--hidden {
+@media only screen and (max-width: $viewport-xs) {
       display: none;
     }
-  }
 }
-</style>
+}</style>

@@ -86,12 +86,9 @@ const buttonSizeMap = {
 }
 </script>
 
-<style scoped lang="scss">
-.screen-sharing-controls-panel {
-  position: relative;
+<style scoped >.screen-sharing-controls-panel {
+position: relative;
   display: flex;
   justify-content: center;
-}
-</style>
-
+}</style>
 

@@ -6,13 +6,9 @@
 
 <script setup></script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style  scoped>
 .wt-app-header {
-  display: flex;
+display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: var(--wt-app-header-content-gap);

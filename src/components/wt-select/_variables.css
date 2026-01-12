@@ -6,7 +6,7 @@
 
   --select-tags-border: var(
     --input-border
-  ); // right pos = 10px spacing + clear icon size + clear offset
+  ); /* right pos = 10px spacing + clear icon size + clear offset */
 
   --select-options-padding: var(--input-padding);
 }
