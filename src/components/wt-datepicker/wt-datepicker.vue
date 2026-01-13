@@ -59,10 +59,16 @@ const props = defineProps({
 	mode: {
 		type: String,
 		default: 'date',
-		options: ['date', 'datetime'],
+		options: [
+			'date',
+			'datetime',
+		],
 	},
 	value: {
-		type: [String, Number],
+		type: [
+			String,
+			Number,
+		],
 		default: 'Date.now()',
 	},
 	/**
@@ -115,7 +121,9 @@ const props = defineProps({
 		default: false,
 	},
 });
-const emit = defineEmits(['input']);
+const emit = defineEmits([
+	'input',
+]);
 
 const isOpened = ref(false);
 const datepicker = ref(null); // template ref

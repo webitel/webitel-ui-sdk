@@ -151,7 +151,9 @@ const emit = defineEmits<{
 	): void;
 }>();
 
-const { size } = inject('size') as { size: ComponentSize };
+const { size } = inject('size') as {
+	size: ComponentSize;
+};
 
 const shownActionsMap = computed(() => {
 	return props.actions.reduce<Record<VideoCallAction, boolean>>(

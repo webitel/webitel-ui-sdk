@@ -20,7 +20,9 @@ export default class CSVExport {
 
 	fetchMethod = null;
 
-	downloadProgress = { count: 0 };
+	downloadProgress = {
+		count: 0,
+	};
 
 	constructor(fetchMethod, { filename, delimiter }) {
 		if (!fetchMethod) throw new Error('fetch method should be specified!');
@@ -46,15 +48,26 @@ export default class CSVExport {
 	}
 
 	resetProgress() {
-		this.downloadProgress = { count: 0 };
-		this.zippingProgress = { percent: 0 };
+		this.downloadProgress = {
+			count: 0,
+		};
+		this.zippingProgress = {
+			percent: 0,
+		};
 	}
 
 	save(csv) {
 		// Prepending '\uFEFF' (the BOM) forces these applications to treat the file as UTF-8,
 		// ensuring that non-ASCII characters, such as Cyrillic, are displayed correctly.
 		const bom = '\uFEFF';
-		const blob = new Blob([bom + csv], { type: 'data:text/csv;charset=utf-8' });
+		const blob = new Blob(
+			[
+				bom + csv,
+			],
+			{
+				type: 'data:text/csv;charset=utf-8',
+			},
+		);
 		saveAs(blob, `${this.filename}.csv`);
 	}
 

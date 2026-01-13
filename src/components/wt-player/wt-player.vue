@@ -45,7 +45,11 @@ export default {
 			default: false,
 		},
 		download: {
-			type: [String, Function, Boolean],
+			type: [
+				String,
+				Function,
+				Boolean,
+			],
 			default: () => (url) => url.replace('/stream', '/download'),
 		},
 		mime: {
@@ -75,7 +79,10 @@ export default {
 			default: 'sticky',
 		},
 	},
-	emits: ['initialized', 'close'],
+	emits: [
+		'initialized',
+		'close',
+	],
 	data: () => ({
 		player: null,
 	}),

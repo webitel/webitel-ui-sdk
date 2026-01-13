@@ -20,7 +20,9 @@ const notifyTransformer = (notificationObject) => {
     calling passed arg function with callback, and returning actual notify payload
      */
 		return (payload) => {
-			notificationObject({ callback });
+			notificationObject({
+				callback,
+			});
 			return payload;
 		};
 	}

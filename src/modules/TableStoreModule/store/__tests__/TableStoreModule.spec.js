@@ -9,12 +9,23 @@ import TableStoreModule from '../TableStoreModule.js';
 describe('TableStoreModule', () => {
 	it('correctly computes FIELDS getter', () => {
 		const headers = [
-			{ show: true, field: 'id' },
-			{ show: false, field: 'name' },
-			{ show: true, field: 'age' },
+			{
+				show: true,
+				field: 'id',
+			},
+			{
+				show: false,
+				field: 'name',
+			},
+			{
+				show: true,
+				field: 'age',
+			},
 		];
 
-		const state = { headers };
+		const state = {
+			headers,
+		};
 
 		expect(new TableStoreModule({}).getters.FIELDS(state)).toEqual([
 			'id',
@@ -35,22 +46,32 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 				name: 'vi',
 				value: 23,
 				defaultValue: 23,
-				get: ['value'],
-				set: ['value'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+				],
 				restore: () => 'vivi',
 			})
 			.getModule();
 
 		const table = new TableStoreModule({}).getModule({
-			modules: { filters },
+			modules: {
+				filters,
+			},
 		});
 
 		const mock = vi.fn();
 		vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(mock);
 
 		const store = createStore({
-			state: { router },
-			modules: { table },
+			state: {
+				router,
+			},
+			modules: {
+				table,
+			},
 		});
 
 		await store.dispatch('table/filters/SUBSCRIBE', {
@@ -71,22 +92,32 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 				name: 'vi',
 				value: 23,
 				defaultValue: 23,
-				get: ['value'],
-				set: ['value'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+				],
 				restore: () => {},
 			})
 			.getModule();
 
 		const table = new TableStoreModule({}).getModule({
-			modules: { filters },
+			modules: {
+				filters,
+			},
 		});
 
 		const mock = vi.fn();
 		vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(mock);
 
 		const store = createStore({
-			state: { router },
-			modules: { table },
+			state: {
+				router,
+			},
+			modules: {
+				table,
+			},
 		});
 
 		await store.dispatch('table/filters/SUBSCRIBE', {
@@ -113,30 +144,44 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 					name: 'vi',
 					value: 23,
 					defaultValue: 23,
-					get: ['value'],
-					set: ['value'],
+					get: [
+						'value',
+					],
+					set: [
+						'value',
+					],
 					restore: () => {},
 				},
 				{
 					name: 'page',
 					value: 12,
 					defaultValue: 12,
-					get: ['value'],
-					set: ['value'],
+					get: [
+						'value',
+					],
+					set: [
+						'value',
+					],
 					restore: () => {},
 				},
 			])
 			.getModule();
 
 		const table = new TableStoreModule({}).getModule({
-			modules: { filters },
+			modules: {
+				filters,
+			},
 		});
 
 		vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
 		const store = createStore({
-			state: { router },
-			modules: { table },
+			state: {
+				router,
+			},
+			modules: {
+				table,
+			},
 		});
 
 		await store.dispatch('table/filters/SUBSCRIBE', {
@@ -161,23 +206,41 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 			.addFilter({
 				name: 'sort',
 				value: '',
-				get: ['value'],
-				set: ['value'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+				],
 				restore: () => {},
 			})
 			.getModule();
 
-		const headers = [{ value: 'id', field: 'sort_me', sort: SortSymbols.NONE }];
+		const headers = [
+			{
+				value: 'id',
+				field: 'sort_me',
+				sort: SortSymbols.NONE,
+			},
+		];
 
-		const table = new TableStoreModule({ headers }).getModule({
-			modules: { filters },
+		const table = new TableStoreModule({
+			headers,
+		}).getModule({
+			modules: {
+				filters,
+			},
 		});
 
 		vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
 		const store = createStore({
-			state: { router },
-			modules: { table },
+			state: {
+				router,
+			},
+			modules: {
+				table,
+			},
 		});
 
 		await store.dispatch('table/filters/SUBSCRIBE', {
@@ -202,26 +265,46 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 			.addFilter({
 				name: 'fields',
 				value: [],
-				get: ['value'],
-				set: ['value'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+				],
 				restore: () => {},
 			})
 			.getModule();
 
 		const headers = [
-			{ value: 'surname', field: 'included', show: false },
-			{ value: 'name', field: 'excluded', show: true },
+			{
+				value: 'surname',
+				field: 'included',
+				show: false,
+			},
+			{
+				value: 'name',
+				field: 'excluded',
+				show: true,
+			},
 		];
 
-		const table = new TableStoreModule({ headers }).getModule({
-			modules: { filters },
+		const table = new TableStoreModule({
+			headers,
+		}).getModule({
+			modules: {
+				filters,
+			},
 		});
 
 		vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
 		const store = createStore({
-			state: { router },
-			modules: { table },
+			state: {
+				router,
+			},
+			modules: {
+				table,
+			},
 		});
 
 		await store.dispatch('table/filters/SUBSCRIBE', {
@@ -231,14 +314,19 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
 		await store.dispatch('table/filters/SET_FILTER', {
 			name: 'fields',
-			value: ['surname'],
+			value: [
+				'surname',
+			],
 		});
 
 		expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual([
 			'surname',
 		]);
 
-		expect(store.getters['table/FIELDS']).toEqual(['id', 'included']);
+		expect(store.getters['table/FIELDS']).toEqual([
+			'id',
+			'included',
+		]);
 
 		await store.dispatch('table/filters/FLUSH_SUBSCRIBERS');
 	});

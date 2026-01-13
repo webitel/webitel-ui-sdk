@@ -24,7 +24,9 @@ const configuration = getDefaultOpenAPIConfig();
 
 const queueService = new QueueServiceApiFactory(configuration, '', instance);
 
-const doNotConvertKeys = ['variables'];
+const doNotConvertKeys = [
+	'variables',
+];
 
 const fieldsToSend = [
 	'name',
@@ -55,7 +57,10 @@ const preRequestHandler = (item) => {
 	const copy = deepCopy(item);
 	copy.variables = copy.variables.reduce((variables, variable) => {
 		if (!variable.key) return variables;
-		return { ...variables, [variable.key]: variable.value };
+		return {
+			...variables,
+			[variable.key]: variable.value,
+		};
 	}, {});
 	return copy;
 };
@@ -92,11 +97,15 @@ const getQueuesList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -137,7 +146,9 @@ const getQueue = async ({ itemId: id }) => {
 			responseHandler,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -149,9 +160,13 @@ const addQueue = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await queueService.createQueue(item);
-		return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
+		return applyTransform(response.data, [
+			snakeToCamel(doNotConvertKeys),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -163,9 +178,13 @@ const updateQueue = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await queueService.updateQueue(id, item);
-		return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
+		return applyTransform(response.data, [
+			snakeToCamel(doNotConvertKeys),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -176,9 +195,13 @@ const patchQueue = async ({ id, changes }) => {
 	]);
 	try {
 		const response = await queueService.patchQueue(id, item);
-		return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
+		return applyTransform(response.data, [
+			snakeToCamel(doNotConvertKeys),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -187,14 +210,20 @@ const deleteQueue = async ({ id }) => {
 		const response = await queueService.deleteQueue(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getQueuesLookup = (params) =>
 	getQueuesList({
 		...params,
-		fields: params.fields || ['id', 'name', 'type'],
+		fields: params.fields || [
+			'id',
+			'name',
+			'type',
+		],
 	});
 
 const getQueuesTags = async (params) => {
@@ -220,7 +249,9 @@ const getQueuesTags = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

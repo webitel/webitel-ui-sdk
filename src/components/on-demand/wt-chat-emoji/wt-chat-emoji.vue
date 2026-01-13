@@ -31,7 +31,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['insert-emoji']);
+const emit = defineEmits([
+	'insert-emoji',
+]);
 
 const emojiPickerWrapper = ref(null);
 const isOpened = ref(false);
@@ -82,12 +84,14 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>.wt-chat-emoji {
-position: relative;
+<style scoped>
+.wt-chat-emoji {
+  position: relative;
   width: 100%;
 
   :deep() emoji-picker {
     --background: var(--content-wrapper-color);
     --border-color: var(--secondary-color);
   }
-}</style>
+}
+</style>

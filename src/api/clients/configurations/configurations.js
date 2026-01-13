@@ -48,20 +48,30 @@ const getList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const get = async ({ itemId: id }) => {
 	try {
 		const response = await configurationService.readSystemSetting(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['id', 'name', 'value'];
+const fieldsToSend = [
+	'id',
+	'name',
+	'value',
+];
 
 const add = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -70,9 +80,13 @@ const add = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await configurationService.createSystemSetting(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -83,16 +97,22 @@ const update = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await configurationService.updateSystemSetting(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getList({
 		...params,
-		fields: params.fields || ['name'],
+		fields: params.fields || [
+			'name',
+		],
 	});
 
 const deleteItem = async ({ id }) => {
@@ -100,7 +120,9 @@ const deleteItem = async ({ id }) => {
 		const response = await configurationService.deleteSystemSetting(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -127,7 +149,9 @@ const getObjectsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

@@ -46,8 +46,9 @@ const open = () => {
 };
 </script>
 
-<style scoped>.start-page-card {
-display: flex;
+<style scoped>
+.start-page-card {
+  display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
   border-radius: var(--border-radius);
@@ -71,4 +72,5 @@ display: flex;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-}</style>
+}
+</style>

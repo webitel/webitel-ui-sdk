@@ -12,7 +12,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['changedMode']);
+const emit = defineEmits([
+	'changedMode',
+]);
 
 const store = useStore();
 

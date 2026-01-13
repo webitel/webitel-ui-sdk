@@ -23,7 +23,9 @@ import { defineEmits } from 'vue';
 import WtIconBtn from '../../../wt-icon-btn/wt-icon-btn.vue';
 
 const emit = defineEmits<{
-	toggle: [value: boolean];
+	toggle: [
+		value: boolean,
+	];
 }>();
 </script>
 

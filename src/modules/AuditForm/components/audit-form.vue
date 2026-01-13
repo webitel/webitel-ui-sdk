@@ -91,7 +91,10 @@ const emit = defineEmits([
 const v$ = useVuelidate();
 
 const auditQuestions = useTemplateRef('auditQuestions');
-const isQuestionAdded = reactive({ value: false, index: null });
+const isQuestionAdded = reactive({
+	value: false,
+	index: null,
+});
 
 const isAnswersTouched = ref(false);
 
@@ -101,7 +104,9 @@ provide('mode', props.mode);
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 async function addQuestion({ index, question } = {}) {
-	const questions = [...(props.questions || [])];
+	const questions = [
+		...(props.questions || []),
+	];
 	const newQuestion = question || generateQuestionSchema();
 	if (index != null) questions.splice(index, 0, newQuestion);
 	else questions.push(newQuestion);
@@ -111,33 +116,43 @@ async function addQuestion({ index, question } = {}) {
 }
 
 function handleQuestionUpdate({ key, value }) {
-	const questions = [...props.questions];
+	const questions = [
+		...props.questions,
+	];
 	questions[key] = value;
 	emit('update:questions', questions);
 }
 
 function copyQuestion({ question, key }) {
-	const questions = [...props.questions];
+	const questions = [
+		...props.questions,
+	];
 	questions.splice(key + 1, 0, cloneDeep(question));
 	emit('update:questions', questions);
 }
 
 function deleteQuestion({ key }) {
-	const questions = [...props.questions];
+	const questions = [
+		...props.questions,
+	];
 	questions.splice(key, 1);
 	emit('update:questions', questions);
 }
 
 function changeQuestionsOrder({ oldIndex, newIndex }) {
 	if (newIndex === 0) return;
-	const questions = [...props.questions];
+	const questions = [
+		...props.questions,
+	];
 	const [el] = questions.splice(oldIndex, 1);
 	questions.splice(newIndex, 0, el);
 	emit('update:questions', questions);
 }
 
 function handleAnswerUpdate({ key, value }) {
-	const answer = [...answersModel.value];
+	const answer = [
+		...answersModel.value,
+	];
 	answer[key] = value;
 	answersModel.value = answer;
 
@@ -152,7 +167,11 @@ function initAnswers() {
 
 function initQuestions() {
 	if (!props.questions?.length) {
-		addQuestion({ question: generateQuestionSchema({ required: true }) });
+		addQuestion({
+			question: generateQuestionSchema({
+				required: true,
+			}),
+		});
 	} else if (props.questions.length)
 		auditQuestions.value.at(0).activateQuestion();
 }
@@ -193,12 +212,18 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 	filter: '.audit-form-question--sort-ignore',
 	onEnd: ({ newIndex, oldIndex }) => {
 		if (newIndex === oldIndex) return;
-		changeQuestionsOrder({ oldIndex, newIndex });
+		changeQuestionsOrder({
+			oldIndex,
+			newIndex,
+		});
 	},
 });
 
 watch(v$, () =>
-	emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }),
+	emit('update:validation', {
+		invalid: isInvalidForm.value,
+		v$: v$.value,
+	}),
 );
 
 watch(

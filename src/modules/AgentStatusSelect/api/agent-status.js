@@ -16,7 +16,9 @@ const AgentStatusAPIFactory = ({ instance, OpenAPIConfig }) => {
 				payload: pauseCause,
 				status_comment: statusComment,
 			});
-			return { success: !!res };
+			return {
+				success: !!res,
+			};
 		} catch (err) {
 			throw err;
 		}

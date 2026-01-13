@@ -95,7 +95,9 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 			if (context.state.unreadCount === 0) return;
 			const count = 0;
 			context.dispatch('_SET_UNREAD_COUNT', count);
-			context.state.broadcastChannel.postMessage({ count });
+			context.state.broadcastChannel.postMessage({
+				count,
+			});
 		},
 
 		_SET_TAB_TITLE: (context) => {
@@ -139,7 +141,9 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 					() => {
 						context.dispatch('STOP_SOUND');
 					},
-					{ once: true },
+					{
+						once: true,
+					},
 				);
 
 				if (action === CallActions.Ringing) audio.loop = true;
@@ -167,14 +171,19 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 				interval = NOTIFICATION_VISIBLE_INTERVAL,
 			},
 		) => {
-			const notification = new Notification(text, { icon, silent: true });
+			const notification = new Notification(text, {
+				icon,
+				silent: true,
+			});
 
 			notification.addEventListener(
 				'click',
 				() => {
 					window.focus();
 				},
-				{ once: true },
+				{
+					once: true,
+				},
 			);
 
 			setTimeout(() => {
@@ -185,7 +194,9 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 		INCREMENT_UNREAD_COUNT: (context) => {
 			const count = context.state.unreadCount + 1;
 			context.dispatch('_SET_UNREAD_COUNT', count);
-			context.state.broadcastChannel.postMessage({ count });
+			context.state.broadcastChannel.postMessage({
+				count,
+			});
 		},
 	};
 

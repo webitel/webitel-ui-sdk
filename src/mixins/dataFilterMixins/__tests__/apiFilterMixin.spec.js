@@ -5,15 +5,25 @@ import apiFilterMixin from '../apiFilterMixin.js';
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
-const team = ['1', '2'];
+const team = [
+	'1',
+	'2',
+];
 
 describe('API filter mixin', () => {
 	let wrapper;
 	const Component = {
 		render() {},
-		mixins: [apiFilterMixin],
+		mixins: [
+			apiFilterMixin,
+		],
 		data: () => ({
 			filterQuery: 'team',
 		}),
@@ -21,13 +31,23 @@ describe('API filter mixin', () => {
 
 	beforeEach(() => {
 		if (Object.keys(router.currentRoute.value.query).length)
-			router.replace({ query: null });
+			router.replace({
+				query: null,
+			});
 	});
 
 	it('Correctly sets value from $route query', async () => {
-		await router.replace({ query: { team } });
+		await router.replace({
+			query: {
+				team,
+			},
+		});
 		wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 		});
 		await wrapper.vm.$nextTick();
 		expect(wrapper.vm.value).toEqual(team);
@@ -35,7 +55,11 @@ describe('API filter mixin', () => {
 
 	it('Sets empty array value if $route query is empty', async () => {
 		wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 			data: () => ({
 				filterQuery: 'queue',
 			}),
@@ -44,13 +68,23 @@ describe('API filter mixin', () => {
 	});
 
 	it('Resets value after $route query reset', async () => {
-		await router.replace({ query: { team } });
+		await router.replace({
+			query: {
+				team,
+			},
+		});
 		wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 		});
 		await wrapper.vm.$nextTick();
 		expect(wrapper.vm.value).toEqual(team);
-		await wrapper.vm.$router.replace({ query: null });
+		await wrapper.vm.$router.replace({
+			query: null,
+		});
 		await wrapper.vm.$nextTick();
 		expect(wrapper.vm.value).toEqual([]);
 	});

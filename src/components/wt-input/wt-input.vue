@@ -75,7 +75,11 @@ const props = withDefaults(
 	},
 );
 
-const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
+const emit = defineEmits([
+	'update:modelValue',
+	'input',
+	'keyup',
+]);
 
 const slots = useSlots();
 

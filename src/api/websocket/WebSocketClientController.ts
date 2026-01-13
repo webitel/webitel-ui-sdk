@@ -12,7 +12,9 @@ class WebSocketClientController {
 
 	_config = getConfig();
 	_on = {
-		[WebSocketClientEvent.ERROR]: [websocketErrorEventHandler],
+		[WebSocketClientEvent.ERROR]: [
+			websocketErrorEventHandler,
+		],
 		[WebSocketClientEvent.AFTER_AUTH]: [],
 	};
 

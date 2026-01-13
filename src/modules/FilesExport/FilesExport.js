@@ -16,9 +16,13 @@ export default class FilesExport {
 
 	skipFilesWithError = false;
 
-	downloadProgress = { count: 0 };
+	downloadProgress = {
+		count: 0,
+	};
 
-	zippingProgress = { percent: 0 };
+	zippingProgress = {
+		percent: 0,
+	};
 
 	filesURL = getCallMediaUrl;
 
@@ -43,8 +47,12 @@ export default class FilesExport {
 	}
 
 	resetProgress() {
-		this.downloadProgress = { count: 0 };
-		this.zippingProgress = { percent: 0 };
+		this.downloadProgress = {
+			count: 0,
+		};
+		this.zippingProgress = {
+			percent: 0,
+		};
 	}
 
 	async _addFilesToZip(items, zip) {
@@ -65,10 +73,10 @@ export default class FilesExport {
 					zip.file(`${itemName}.${ext}`, binary);
 					this.downloadProgress.count += 1;
 				} catch (err) {
-					_wtUiLog.warn({ entity: 'script', module: 'FilesExport' })(
-						`An error occurred while downloading a file id=${item.id}`,
-						err,
-					);
+					_wtUiLog.warn({
+						entity: 'script',
+						module: 'FilesExport',
+					})(`An error occurred while downloading a file id=${item.id}`, err);
 					if (!this.skipFilesWithError) {
 						throw err;
 					}
@@ -79,9 +87,14 @@ export default class FilesExport {
 
 	async _generateZip(zip) {
 		try {
-			return await zip.generateAsync({ type: 'blob' }, (progress) => {
-				this.zippingProgress = progress;
-			});
+			return await zip.generateAsync(
+				{
+					type: 'blob',
+				},
+				(progress) => {
+					this.zippingProgress = progress;
+				},
+			);
 		} catch (err) {
 			throw new Error('Failed to generate zip file');
 		}
@@ -99,14 +112,19 @@ export default class FilesExport {
 		const params = {
 			from: 0,
 			size: 5000,
-			fields: ['files'],
+			fields: [
+				'files',
+			],
 			...requestParams,
 		};
 
 		let page = 1;
 		let isNext = false;
 		do {
-			const { items, next } = await this.fetchMethod({ ...params, page });
+			const { items, next } = await this.fetchMethod({
+				...params,
+				page,
+			});
 			await this._addFilesToZip(items, zip);
 
 			isNext = next;

@@ -19,14 +19,27 @@ const configuration = getDefaultOpenAPIConfig();
 
 const statusesService = new StatusesApiFactory(configuration, '', instance);
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const getStatusesList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -47,7 +60,9 @@ const getStatusesList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -58,9 +73,14 @@ const getStatus = async ({ itemId: id }) => {
 
 	try {
 		const response = await statusesService.locateStatus(id, fieldsToSend);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -72,9 +92,13 @@ const addStatus = async ({ itemInstance }) => {
 
 	try {
 		const response = await statusesService.createStatus(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -86,9 +110,13 @@ const updateStatus = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await statusesService.updateStatus(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -97,14 +125,19 @@ const deleteStatus = async ({ id }) => {
 		const response = await statusesService.deleteStatus(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getStatusesLookup = async (params) =>
 	getStatusesList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const CaseStatusesApi = {

@@ -19,7 +19,9 @@ describe('WtInput', () => {
 			stubs: {
 				WtLabel,
 			},
-			props: { label },
+			props: {
+				label,
+			},
 		});
 		expect(wrapper.find('.wt-label').text()).toBe(label);
 	});

@@ -29,7 +29,11 @@ export default {
 		replace: 'Thay thế',
 		download: 'Tải xuống',
 		history: 'Lịch sử',
-		filter: ({ plural }) => plural(['Bộ lọc', 'Các bộ lọc']),
+		filter: ({ plural }) =>
+			plural([
+				'Bộ lọc',
+				'Các bộ lọc',
+			]),
 		total: 'Tổng cộng',
 		ok: 'Đồng ý',
 		object: 'Đối tượng',
@@ -339,8 +343,12 @@ export default {
 				[CrmSections.ContactGroups]: 'Nhóm liên hệ',
 			},
 		},
-		[WebitelApplications.HISTORY]: { name: 'Lịch sử cuộc gọi' },
-		[WebitelApplications.ANALYTICS]: { name: 'Công cụ trực quan hóa dữ liệu' },
+		[WebitelApplications.HISTORY]: {
+			name: 'Lịch sử cuộc gọi',
+		},
+		[WebitelApplications.ANALYTICS]: {
+			name: 'Công cụ trực quan hóa dữ liệu',
+		},
 		[WebitelApplications.SUPERVISOR]: {
 			name: 'Không gian làm việc của giám sát viên',
 			sections: {
@@ -392,7 +400,9 @@ export default {
 				[AdminSections.QuickReplies]: 'Trả lời nhanh',
 			},
 		},
-		[WebitelApplications.WFM]: { name: 'WFM' },
+		[WebitelApplications.WFM]: {
+			name: 'WFM',
+		},
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Camera đã được tắt',
 		},

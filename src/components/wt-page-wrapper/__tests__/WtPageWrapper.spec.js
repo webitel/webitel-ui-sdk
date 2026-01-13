@@ -11,7 +11,9 @@ describe('WtPageWrapper', () => {
 	it('renders page wrapper header via header slot', () => {
 		const content = 'Page Wrapper header';
 		const wrapper = shallowMount(WtPageWrapper, {
-			slots: { header: content },
+			slots: {
+				header: content,
+			},
 		});
 		expect(wrapper.find('.wt-page-wrapper__header').text()).toBe(content);
 	});
@@ -19,7 +21,9 @@ describe('WtPageWrapper', () => {
 	it('renders page wrapper actions panel via actions panel slot', () => {
 		const content = 'Page Wrapper actions panel content';
 		const wrapper = shallowMount(WtPageWrapper, {
-			slots: { 'actions-panel': content },
+			slots: {
+				'actions-panel': content,
+			},
 		});
 		expect(wrapper.find('.wt-page-wrapper__actions-panel').text()).toBe(
 			content,
@@ -29,7 +33,9 @@ describe('WtPageWrapper', () => {
 	it('renders page wrapper main content via main slot', () => {
 		const content = 'Page Wrapper main';
 		const wrapper = shallowMount(WtPageWrapper, {
-			slots: { main: content },
+			slots: {
+				main: content,
+			},
 		});
 		expect(wrapper.find('.wt-page-wrapper__main').text()).toBe(content);
 	});

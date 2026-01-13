@@ -81,8 +81,12 @@ const v$ = useVuelidate(
 			},
 		},
 	})),
-	{ question: questionModel },
-	{ $autoDirty: true },
+	{
+		question: questionModel,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 const scoreRange = computed(() => {
@@ -102,11 +106,17 @@ function updateAnswer(score) {
 				...answerModel.value,
 				score,
 			}
-		: { score };
+		: {
+				score,
+			};
 }
 
 function updateQuestion({ path, value }) {
-	questionModel.value = updateObject({ obj: questionModel.value, path, value });
+	questionModel.value = updateObject({
+		obj: questionModel.value,
+		path,
+		value,
+	});
 }
 
 // init validation

@@ -49,7 +49,9 @@ export default {
 			if (!this.FilesExport) throw new Error('FilesExport is not initialized');
 			const exportFiles = files || this.getSelectedFiles();
 			try {
-				await this.FilesExport.exportFiles(exportFiles, { reqParams });
+				await this.FilesExport.exportFiles(exportFiles, {
+					reqParams,
+				});
 			} catch (err) {
 				throw err;
 			}

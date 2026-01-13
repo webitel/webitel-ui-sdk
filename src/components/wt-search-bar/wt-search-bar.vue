@@ -108,7 +108,10 @@ const props = defineProps({
 		description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
 	},
 	searchMode: {
-		type: [String, Object],
+		type: [
+			String,
+			Object,
+		],
 	},
 	searchModeOptions: {
 		type: Array,
@@ -120,29 +123,42 @@ const emit = defineEmits<{
 	/**
 	 * @param value - search-bar value
 	 */
-	input: [string];
+	input: [
+		string,
+	];
 	/**
 	 * @param value - search-bar value
 	 */
-	search: [string];
+	search: [
+		string,
+	];
 	/**
 	 * @param value - search-bar value
 	 */
-	enter: [string];
+	enter: [
+		string,
+	];
 	/**
 	 * @param option - selected search mode
 	 */
-	'update:search-mode': [string | object];
+	'update:search-mode': [
+		string | object,
+	];
 	/**
 	 * @deprecated
 	 * @param option - selected search mode
 	 */
-	'change:search-mode': [string | object];
+	'change:search-mode': [
+		string | object,
+	];
 }>();
 
 const { v, customValidators } = toRefs(props);
 
-const { invalid } = useValidation({ v, customValidators });
+const { invalid } = useValidation({
+	v,
+	customValidators,
+});
 
 const invalidColorProvider = computed(() =>
 	invalid.value ? 'error' : 'default',

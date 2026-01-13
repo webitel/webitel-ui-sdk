@@ -25,7 +25,11 @@ describe('WtTableColumnSelect', () => {
 				headers: [],
 			},
 		});
-		wrapper.findComponent({ name: 'wt-icon-btn' }).vm.$emit('click');
+		wrapper
+			.findComponent({
+				name: 'wt-icon-btn',
+			})
+			.vm.$emit('click');
 		await wrapper.vm.$nextTick();
 		expect(wrapper.find('.wt-popup').exists()).toBe(true);
 	});

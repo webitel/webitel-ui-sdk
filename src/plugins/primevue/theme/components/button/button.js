@@ -109,13 +109,36 @@ const button = {
 	// Rewrite the default button styles in the theme here:
 	// For customize the button styles you need write css styles for classes
 	css: ({ dt }) => `
-        ${generateCustomColorCss({ colorName: 'transfer', dt })}
-        ${generateCustomColorCss({ colorName: 'error', dt })}
-        ${generateCustomColorCss({ colorName: 'job', dt })}
+        ${generateCustomColorCss({
+					colorName: 'transfer',
+					dt,
+				})}
+        ${generateCustomColorCss({
+					colorName: 'error',
+					dt,
+				})}
+        ${generateCustomColorCss({
+					colorName: 'job',
+					dt,
+				})}
 
-        ${colors.map((color) => generateCustomActiveIconColorCss({ colorName: color, dt })).join('')}
+        ${colors
+					.map((color) =>
+						generateCustomActiveIconColorCss({
+							colorName: color,
+							dt,
+						}),
+					)
+					.join('')}
 
-        ${colors.map((color) => generateCustomOutlinedColorCss({ colorName: color, dt })).join('')}
+        ${colors
+					.map((color) =>
+						generateCustomOutlinedColorCss({
+							colorName: color,
+							dt,
+						}),
+					)
+					.join('')}
 
         .p-button:disabled {
           background: ${dt('button.disabled.background')};

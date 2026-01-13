@@ -45,8 +45,22 @@ describe('Case converters', () => {
 	});
 
 	it('Camel-Snake Objects', () => {
-		const camelObj = { camelToSnake: { camelToSnake: null, arr: [10] } };
-		const snakeObj = { camel_to_snake: { camel_to_snake: null, arr: [10] } };
+		const camelObj = {
+			camelToSnake: {
+				camelToSnake: null,
+				arr: [
+					10,
+				],
+			},
+		};
+		const snakeObj = {
+			camel_to_snake: {
+				camel_to_snake: null,
+				arr: [
+					10,
+				],
+			},
+		};
 		expect(objCamelToSnake(camelObj)).toEqual(snakeObj);
 		expect(objSnakeToCamel(snakeObj)).toEqual(camelObj);
 	});
@@ -59,26 +73,53 @@ describe('Case converters', () => {
 	});
 
 	it('Camel-Snake Arrays', () => {
-		const camelArr = ['camelToSnake', { camelToSnake: { camelToSnake: null } }];
+		const camelArr = [
+			'camelToSnake',
+			{
+				camelToSnake: {
+					camelToSnake: null,
+				},
+			},
+		];
 		const snakeArr = [
 			'camel_to_snake',
-			{ camel_to_snake: { camel_to_snake: null } },
+			{
+				camel_to_snake: {
+					camel_to_snake: null,
+				},
+			},
 		];
 		expect(objCamelToSnake(camelArr)).toEqual(snakeArr);
 		expect(objSnakeToCamel(snakeArr)).toEqual(camelArr);
 	});
 
 	it('Camel-to-Snake Object skips passed keys', () => {
-		const skippedKeys = ['skippedKey'];
-		const camelArr = { camelToSnake: null, skippedKey: null };
-		const snakeArr = { camel_to_snake: null, skippedKey: null };
+		const skippedKeys = [
+			'skippedKey',
+		];
+		const camelArr = {
+			camelToSnake: null,
+			skippedKey: null,
+		};
+		const snakeArr = {
+			camel_to_snake: null,
+			skippedKey: null,
+		};
 		expect(objCamelToSnake(camelArr, skippedKeys)).toEqual(snakeArr);
 	});
 
 	it('Snake-to-Camel Object skips passed keys', () => {
-		const skippedKeys = ['skipped_key'];
-		const camelArr = { camelToSnake: null, skipped_key: null };
-		const snakeArr = { camel_to_snake: null, skipped_key: null };
+		const skippedKeys = [
+			'skipped_key',
+		];
+		const camelArr = {
+			camelToSnake: null,
+			skipped_key: null,
+		};
+		const snakeArr = {
+			camel_to_snake: null,
+			skipped_key: null,
+		};
 		expect(objSnakeToCamel(snakeArr, skippedKeys)).toEqual(camelArr);
 	});
 });

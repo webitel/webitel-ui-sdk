@@ -23,14 +23,27 @@ const statusConditionsService = new StatusConditionsApiFactory(
 	instance,
 );
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const getStatusConditionsList = async ({ parentId, ...rest }) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -49,11 +62,15 @@ const getStatusConditionsList = async ({ parentId, ...rest }) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -68,9 +85,14 @@ const getStatusCondition = async ({ parentId, itemId: id }) => {
 			id,
 			fieldsToSend,
 		);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -90,9 +112,13 @@ const updateStatusCondition = async ({
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -107,14 +133,23 @@ const addStatusCondition = async ({ itemInstance, parentId }) => {
 			parentId,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchStatusCondition = async ({ id, parentId, changes }) => {
-	const fieldsToSend = ['name', 'description', 'initial', 'final'];
+	const fieldsToSend = [
+		'name',
+		'description',
+		'initial',
+		'final',
+	];
 	const input = applyTransform(changes, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -128,7 +163,9 @@ const patchStatusCondition = async ({ id, parentId, changes }) => {
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -140,7 +177,9 @@ const deleteStatusCondition = async ({ id, parentId }) => {
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -149,7 +188,10 @@ const getStatusesLookup = (params) =>
 		...params,
 		parentId: params.parentId,
 		id: params.id,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const CaseStatusConditionsAPI = {

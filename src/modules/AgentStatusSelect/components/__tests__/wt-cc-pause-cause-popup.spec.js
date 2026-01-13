@@ -10,9 +10,19 @@ describe('Pause cause popup', () => {
 	it('at option input event, sets "selected" its value', () => {
 		const value = 'jest';
 		const wrapper = mount(WtCcPauseCausePopup, {
-			props: { options: [{ value }] },
+			props: {
+				options: [
+					{
+						value,
+					},
+				],
+			},
 		});
-		wrapper.findComponent({ name: 'wt-radio' }).vm.$emit('input');
+		wrapper
+			.findComponent({
+				name: 'wt-radio',
+			})
+			.vm.$emit('input');
 		expect(wrapper.vm.selected.value).toEqual(value);
 	});
 });

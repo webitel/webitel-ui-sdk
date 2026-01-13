@@ -32,7 +32,9 @@ describe('WtSelectButton', () => {
 			},
 		});
 		const arrowBtn = wrapper
-			.findAllComponents({ name: 'wt-button' })
+			.findAllComponents({
+				name: 'wt-button',
+			})
 			.find((component) =>
 				component.classes().includes('wt-button-select__select-btn'),
 			);

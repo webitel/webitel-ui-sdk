@@ -78,7 +78,10 @@ defineProps({
 	},
 });
 
-const emit = defineEmits(['copy', 'delete']);
+const emit = defineEmits([
+	'copy',
+	'delete',
+]);
 
 const { t } = useI18n();
 
@@ -106,7 +109,11 @@ const QuestionTypeComponent = computed(() => {
 });
 
 function updateQuestion({ path, value }) {
-	questionModel.value = updateObject({ obj: questionModel.value, path, value });
+	questionModel.value = updateObject({
+		obj: questionModel.value,
+		path,
+		value,
+	});
 }
 
 function handleQuestionTypeChange(type) {
@@ -123,7 +130,10 @@ function handleQuestionTypeChange(type) {
 			...generateQuestionOptionsSchema(),
 		};
 	} else if (type === EngineAuditQuestionType.Score) {
-		questionModel.value = { ...commonFields, ...generateQuestionScoreSchema() };
+		questionModel.value = {
+			...commonFields,
+			...generateQuestionScoreSchema(),
+		};
 	}
 }
 </script>

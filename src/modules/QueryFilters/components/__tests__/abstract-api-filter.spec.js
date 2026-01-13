@@ -14,10 +14,14 @@ describe('Abstract Api Filter', () => {
 	const namespace = 'jest';
 	const filterQuery = 'jest';
 	const filterSchema = new ApiFilterSchema({
-		locale: { label: '' },
+		locale: {
+			label: '',
+		},
 	});
 	const searchMock = vi.fn();
-	const fetchSelectedMock = vi.fn(() => ({ items: [] }));
+	const fetchSelectedMock = vi.fn(() => ({
+		items: [],
+	}));
 	vi.spyOn(filterSchema, 'search').mockImplementation(searchMock);
 	vi.spyOn(filterSchema, 'fetchSelected').mockImplementation(fetchSelectedMock);
 	const store = createStore({
@@ -32,7 +36,12 @@ describe('Abstract Api Filter', () => {
 	});
 
 	const mountOptions = {
-		global: { plugins: [store, router] },
+		global: {
+			plugins: [
+				store,
+				router,
+			],
+		},
 		props: {
 			namespace,
 			filterQuery,

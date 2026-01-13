@@ -4,11 +4,19 @@ import { createRouter, createWebHistory } from 'vue-router';
 import WtNavigationBar from '../wt-navigation-bar.vue';
 
 const nav = [
-	{ value: '1', route: '/1' },
+	{
+		value: '1',
+		route: '/1',
+	},
 	{
 		value: '2',
 		route: '/2',
-		subNav: [{ value: '3', route: '3' }],
+		subNav: [
+			{
+				value: '3',
+				route: '3',
+			},
+		],
 	},
 ];
 
@@ -26,9 +34,13 @@ describe('WtNavigationBar', () => {
 	it('renders navigation links', () => {
 		const wrapper = shallowMount(WtNavigationBar, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
-			props: { nav },
+			props: {
+				nav,
+			},
 		});
 		const navLinksLen = nav.filter((nav) => !nav.subNav).length;
 		expect(wrapper.findAll('.wt-navigation-bar__nav-item-link').length).toBe(
@@ -39,9 +51,13 @@ describe('WtNavigationBar', () => {
 	it('renders navigation expansions with subNav inside it', async () => {
 		const wrapper = mount(WtNavigationBar, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
-			props: { nav },
+			props: {
+				nav,
+			},
 		});
 		wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
 		await wrapper.vm.$nextTick();
@@ -54,9 +70,13 @@ describe('WtNavigationBar', () => {
 	it('correctly computes subNav nested routes', async () => {
 		const wrapper = mount(WtNavigationBar, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
-			props: { nav },
+			props: {
+				nav,
+			},
 		});
 		await wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
 		await wrapper.vm.$nextTick();

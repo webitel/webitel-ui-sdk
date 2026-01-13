@@ -4,9 +4,18 @@ import WebitelApplications from '../../../enums/WebitelApplications/WebitelAppli
 import WtAppNavigator from '../wt-app-navigator.vue';
 
 const apps = [
-	{ name: WebitelApplications.ADMIN, href: '' },
-	{ name: WebitelApplications.HISTORY, href: '' },
-	{ name: WebitelApplications.SUPERVISOR, href: '' },
+	{
+		name: WebitelApplications.ADMIN,
+		href: '',
+	},
+	{
+		name: WebitelApplications.HISTORY,
+		href: '',
+	},
+	{
+		name: WebitelApplications.SUPERVISOR,
+		href: '',
+	},
 ];
 describe('WtAppNavigator', () => {
 	it('renders a component', () => {

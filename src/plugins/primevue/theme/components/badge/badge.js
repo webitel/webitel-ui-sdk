@@ -33,11 +33,27 @@ const badge = {
 	colorScheme: BadgeScheme.colorScheme,
 
 	css: ({ dt }) => `
-    ${generateCustomSizeCss({ size: 'sm', dt })}
-    ${generateCustomSizeCss({ size: 'md', dt })}
-    ${generateCustomSizeCss({ size: 'lg', dt })}
+    ${generateCustomSizeCss({
+			size: 'sm',
+			dt,
+		})}
+    ${generateCustomSizeCss({
+			size: 'md',
+			dt,
+		})}
+    ${generateCustomSizeCss({
+			size: 'lg',
+			dt,
+		})}
     
-    ${colors.map((color) => generateCustomColorCss({ colorName: color, dt })).join('')}
+    ${colors
+			.map((color) =>
+				generateCustomColorCss({
+					colorName: color,
+					dt,
+				}),
+			)
+			.join('')}
   `,
 };
 

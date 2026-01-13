@@ -2,8 +2,16 @@ import isEmpty from '../isEmpty.js';
 
 describe('isEmpty', () => {
 	it('falsy cases (not empty)', () => {
-		expect(isEmpty(['jest'])).toBeFalsy();
-		expect(isEmpty({ jest: 'jest' })).toBeFalsy();
+		expect(
+			isEmpty([
+				'jest',
+			]),
+		).toBeFalsy();
+		expect(
+			isEmpty({
+				jest: 'jest',
+			}),
+		).toBeFalsy();
 		expect(isEmpty(1)).toBeFalsy();
 		expect(isEmpty('jest')).toBeFalsy();
 	});

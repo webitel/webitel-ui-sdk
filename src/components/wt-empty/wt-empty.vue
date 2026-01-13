@@ -89,7 +89,10 @@ import WtImage from '../wt-image/wt-image.vue';
 
 const props = defineProps({
 	image: {
-		type: [Object, null],
+		type: [
+			Object,
+			null,
+		],
 	},
 	/**
 	 * @values 'sm', 'md', 'lg'
@@ -98,41 +101,60 @@ const props = defineProps({
 		type: String,
 		default: ComponentSize.MD,
 		validator: (v) =>
-			[ComponentSize.SM, ComponentSize.MD, ComponentSize.LG].includes(v),
+			[
+				ComponentSize.SM,
+				ComponentSize.MD,
+				ComponentSize.LG,
+			].includes(v),
 	},
 	/**
 	 * shown only if prop or slot is provided
 	 */
 	headline: {
-		type: [String, null],
+		type: [
+			String,
+			null,
+		],
 		default: '',
 	},
 	/**
 	 * shown only if prop or slot is provided
 	 */
 	title: {
-		type: [String, null],
+		type: [
+			String,
+			null,
+		],
 		default: '',
 	},
 	/**
 	 * shown only if prop or slot is provided
 	 */
 	text: {
-		type: [String, null],
+		type: [
+			String,
+			null,
+		],
 		default: '',
 	},
 	/**
 	 * primary action is shown only if prop or slot is provided
 	 */
 	primaryActionText: {
-		type: [String, null],
+		type: [
+			String,
+			null,
+		],
 		default: '',
 	},
 	/**
 	 * secondary action shown only if prop or slot is provided
 	 */
 	secondaryActionText: {
-		type: [String, null],
+		type: [
+			String,
+			null,
+		],
 		default: '',
 	},
 

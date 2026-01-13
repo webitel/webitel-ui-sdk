@@ -14,8 +14,14 @@ const menubar = {
 	colorScheme: MenubarScheme.colorScheme,
 
 	css: ({ dt }) => `
-        ${generateCustomSlotCss({ slot: 'start', dt })}
-        ${generateCustomSlotCss({ slot: 'end', dt })}
+        ${generateCustomSlotCss({
+					slot: 'start',
+					dt,
+				})}
+        ${generateCustomSlotCss({
+					slot: 'end',
+					dt,
+				})}
   `,
 };
 

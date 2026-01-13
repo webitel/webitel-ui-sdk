@@ -14,7 +14,9 @@ describe('WtHeaderActions', () => {
 			account: 'acc@ou.nt',
 		};
 		const wrapper = shallowMount(WtHeaderActions, {
-			props: { user },
+			props: {
+				user,
+			},
 		});
 		expect(wrapper.find('.wt-header-actions__name').text()).toBe(user.name);
 		expect(wrapper.find('.wt-header-actions__account').text()).toBe(

@@ -33,7 +33,10 @@ const props = defineProps({
 		default: false,
 	},
 	size: {
-		type: [String, Number],
+		type: [
+			String,
+			Number,
+		],
 		default: 200,
 	},
 	hiddenText: {
@@ -46,7 +49,9 @@ const props = defineProps({
 	},
 });
 
-const emits = defineEmits(['create']);
+const emits = defineEmits([
+	'create',
+]);
 
 const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </script>

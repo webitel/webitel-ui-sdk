@@ -45,7 +45,9 @@ import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
 	name: 'WtTimeInput',
-	mixins: [validationMixin],
+	mixins: [
+		validationMixin,
+	],
 	props: {
 		/**
 		 * Current input value (`v-model`)

@@ -23,7 +23,12 @@ const configuration = getDefaultOpenAPIConfig();
 
 const rolesApiFactory = RolesApiFactory(configuration, '', instance);
 
-const fieldsToSend = ['name', 'description', 'permissions', 'metadata'];
+const fieldsToSend = [
+	'name',
+	'description',
+	'permissions',
+	'metadata',
+];
 
 const preRequestHandler = (item) => {
 	const copy = deepCopy(item);
@@ -32,7 +37,14 @@ const preRequestHandler = (item) => {
 };
 
 const getRoleList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, q, sort, name, fields, id, userId, userName } =
 		applyTransform(params, [
@@ -40,7 +52,10 @@ const getRoleList = async (params) => {
 			starToSearch('search'),
 			(params) => {
 				params.ids = params.ids || params.id; // accept either ids or id as param
-				return { ...params, q: params.search };
+				return {
+					...params,
+					q: params.search,
+				};
 			},
 			sanitize(fieldsToSend),
 			camelToSnake(),
@@ -48,7 +63,9 @@ const getRoleList = async (params) => {
 
 	try {
 		const response = await rolesApiFactory.searchRoles(
-			[id],
+			[
+				id,
+			],
 			name,
 			userId,
 			userName,
@@ -67,7 +84,9 @@ const getRoleList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -95,7 +114,9 @@ const getRole = async ({ itemId: id }) => {
 			itemResponseHandler,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -112,7 +133,9 @@ const addRole = async ({ itemInstance }) => {
 			// snakeToCamel(), // prevent role "access" custom lookups from being converted to camelCase
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -130,7 +153,9 @@ const updateRole = async ({ itemInstance, itemId: id }) => {
 			// snakeToCamel(), // prevent role "access" custom lookups from being converted to camelCase
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -139,24 +164,39 @@ const deleteRole = async ({ id }) => {
 		const response = await rolesApiFactory.deleteRole(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getRolesLookup = (params) =>
 	getRoleList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const PERMISSIONS_LIST_URL = '/permissions';
 
 const getPermissionsOptions = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl(PERMISSIONS_LIST_URL),
@@ -172,7 +212,9 @@ const getPermissionsOptions = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

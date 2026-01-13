@@ -6,8 +6,12 @@ export const useClose = (name) => {
 
 	function close() {
 		if (window.history.length === 1) window.close();
-		return router.push({ name });
+		return router.push({
+			name,
+		});
 	}
 
-	return { close };
+	return {
+		close,
+	};
 };

@@ -18,5 +18,7 @@ export const useCachedInterval = ({
 		callback();
 		interval = setInterval(preventHiddenPageCallsDecorator(callback), _timeout);
 	};
-	return { subscribe };
+	return {
+		subscribe,
+	};
 };

@@ -71,7 +71,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['close', 'confirm']);
+const emit = defineEmits([
+	'close',
+	'confirm',
+]);
 
 const attrs = useAttrs();
 

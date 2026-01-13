@@ -16,11 +16,17 @@ export default {
 	name: 'WtLoadBar',
 	props: {
 		max: {
-			type: [Number, String],
+			type: [
+				Number,
+				String,
+			],
 			default: 100,
 		},
 		value: {
-			type: [Number, String],
+			type: [
+				Number,
+				String,
+			],
 			default: 0,
 		},
 		color: {

@@ -44,7 +44,10 @@ export default {
 	},
 	props: {
 		size: {
-			type: [String, Number],
+			type: [
+				String,
+				Number,
+			],
 		},
 		next: {
 			type: Boolean,
@@ -63,7 +66,12 @@ export default {
 			default: 1000,
 		},
 	},
-	emits: ['change', 'input', 'prev', 'next'],
+	emits: [
+		'change',
+		'input',
+		'prev',
+		'next',
+	],
 
 	data: () => ({
 		defaultSize: '10',

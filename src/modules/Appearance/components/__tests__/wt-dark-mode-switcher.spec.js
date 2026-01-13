@@ -11,7 +11,9 @@ describe('WtDarkModeSwitcher', () => {
 
 	const wrapper = shallowMount(WtDarkModeSwitcher, {
 		global: {
-			plugins: [store],
+			plugins: [
+				store,
+			],
 		},
 	});
 
@@ -23,7 +25,11 @@ describe('WtDarkModeSwitcher', () => {
 		expect(
 			window.document.documentElement.classList.contains('theme--dark'),
 		).toBe(false);
-		await wrapper.findComponent({ name: 'wt-switcher' }).trigger('change');
+		await wrapper
+			.findComponent({
+				name: 'wt-switcher',
+			})
+			.trigger('change');
 		expect(
 			window.document.documentElement.classList.contains('theme--dark'),
 		).toBe(true);

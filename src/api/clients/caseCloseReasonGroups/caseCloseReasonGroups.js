@@ -23,14 +23,27 @@ const closeReasonGroupsService = new CloseReasonGroupsApiFactory(
 	instance,
 );
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const getCloseReasonGroupsList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -51,7 +64,9 @@ const getCloseReasonGroupsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -65,9 +80,14 @@ const getCloseReasonGroups = async ({ itemId: id }) => {
 			id,
 			fieldsToSend,
 		);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -79,9 +99,13 @@ const addCloseReasonGroups = async ({ itemInstance }) => {
 	try {
 		const response =
 			await closeReasonGroupsService.createCloseReasonGroup(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -95,9 +119,13 @@ const updateCloseReasonGroups = async ({ itemInstance, itemId: id }) => {
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -106,14 +134,19 @@ const deleteCloseReasonGroups = async ({ id }) => {
 		const response = await closeReasonGroupsService.deleteCloseReasonGroup(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCloseReasonGroupsLookup = async (params) =>
 	getCloseReasonGroupsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const CaseCloseReasonGroupsAPI = {

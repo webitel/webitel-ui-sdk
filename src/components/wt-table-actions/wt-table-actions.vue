@@ -61,13 +61,17 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	icons: () => ['refresh'],
+	icons: () => [
+		'refresh',
+	],
 	isSettingsActive: false,
 	isSettingsBadge: false,
 });
 
 defineEmits<{
-	input: [value: string];
+	input: [
+		value: string,
+	];
 }>();
 
 const isImport = computed(() => props.icons.indexOf('import') !== -1);

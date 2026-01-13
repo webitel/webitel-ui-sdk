@@ -27,14 +27,14 @@ const props = defineProps({
   overflow-y: auto;
 }
 
-.nav-menu-lvl-2 .nav-menu-lvl-2__indicator {
+.nav-menu-lvl-2__indicator {
   display: block;
   position: relative;
   width: var(--spacing-md);
   height: var(--spacing-md);
 }
 
-.nav-menu-lvl-2 .nav-menu-lvl-2__indicator:after {
+.nav-menu-lvl-2__indicator:after {
   position: absolute;
   top: 50%;
   left: 50%;

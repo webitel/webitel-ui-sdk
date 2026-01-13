@@ -43,7 +43,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['select']);
+const emit = defineEmits([
+	'select',
+]);
 
 function select(category) {
 	emit('select', category);
@@ -69,6 +71,5 @@ function select(category) {
 .nav-menu__item--selected:hover {
   background: var(--primary-color);
   color: var(--primary-on-color);
-}
 }
 </style>

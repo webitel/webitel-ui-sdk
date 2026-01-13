@@ -20,7 +20,14 @@ const configuration = getDefaultOpenAPIConfig();
 const service = new LabelsApiFactory(configuration, '', instance);
 
 const getList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'search', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'search',
+		'sort',
+		'fields',
+		'id',
+	];
 	const { page, size, search } = applyTransform(params, [
 		sanitize(fieldsToSend),
 		merge(getDefaultGetParams()),
@@ -31,21 +38,29 @@ const getList = async (params) => {
 		const response = await service.getLabels(page, size, search);
 		const { labels, next } = applyTransform(response.data, [
 			snakeToCamel(),
-			merge({ labels: [], next: false }),
+			merge({
+				labels: [],
+				next: false,
+			}),
 		]);
 		return {
 			items: labels,
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLabelsLookup = (params) =>
 	getList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export default {

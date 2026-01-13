@@ -39,7 +39,11 @@
 <script>
 export default {
 	name: 'FlowSaveFailedPopup',
-	emits: ['close-popup', 'save', 'download'],
+	emits: [
+		'close-popup',
+		'save',
+		'download',
+	],
 	methods: {
 		closePopup() {
 			this.$emit('close-popup');
@@ -54,13 +58,15 @@ export default {
 };
 </script>
 
-<style scoped>.flow-save-filed-popup__wrapper {
-display: flex;
+<style scoped>
+.flow-save-filed-popup__wrapper {
+  display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
 .flow-save-filed-popup__wrapper .wt-icon {
-margin-bottom: var(--spacing-sm);
-}</style>
+  margin-bottom: var(--spacing-sm);
+}
+</style>

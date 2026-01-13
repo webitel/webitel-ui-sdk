@@ -5,7 +5,11 @@ import {
 import objectPermissionsStoreModule from '../modules/objectPermissionsStoreModule.js';
 
 export const createObjectPermissionsStoreModule = (modules) => {
-	const modulesArr = Array.isArray(modules) ? modules : [modules];
+	const modulesArr = Array.isArray(modules)
+		? modules
+		: [
+				modules,
+			];
 
 	const tableSubmodule = createTableStoreModule([
 		objectPermissionsStoreModule(),

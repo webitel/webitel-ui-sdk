@@ -38,15 +38,21 @@ const props = defineProps({
 		default: false,
 	},
 	width: {
-		type: [String],
+		type: [
+			String,
+		],
 		default: 'auto',
 	},
 	minWidth: {
-		type: [String],
+		type: [
+			String,
+		],
 		default: '160px',
 	},
 	maxWidth: {
-		type: [String],
+		type: [
+			String,
+		],
 		default: '300px',
 	},
 	disabled: {
@@ -59,14 +65,23 @@ const props = defineProps({
 	},
 	tooltipTriggers: {
 		type: Array,
-		default: () => ['click', 'touch'],
+		default: () => [
+			'click',
+			'touch',
+		],
 	},
 });
 
-const emit = defineEmits(['click', 'update:visible']);
+const emit = defineEmits([
+	'click',
+	'update:visible',
+]);
 
 function handleOptionClick({ option, index, hide }) {
-	emit('click', { option, index });
+	emit('click', {
+		option,
+		index,
+	});
 	hide();
 }
 </script>

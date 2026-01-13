@@ -107,7 +107,9 @@ const optionsWithCustomValues = computed(() => {
 		? props.value
 		: isEmpty(props.value)
 			? []
-			: [props.value]; //do not add empty values
+			: [
+					props.value,
+				]; //do not add empty values
 	const optionsWithoutValues = selectOptions.value.filter((opt) => {
 		const optKey = props.trackBy ? opt[props.trackBy] : opt;
 		return !customValuesToOptions.some((customValue) => {
@@ -117,12 +119,18 @@ const optionsWithCustomValues = computed(() => {
 			return customValueKey === optKey;
 		});
 	});
-	return [...customValuesToOptions, ...optionsWithoutValues];
+	return [
+		...customValuesToOptions,
+		...optionsWithoutValues,
+	];
 });
 
 const fetchOptions = async ({ search, page }) => {
 	if (!isApiMode.value) return [];
-	const { items, next } = await this.searchMethod({ search, page });
+	const { items, next } = await this.searchMethod({
+		search,
+		page,
+	});
 	searchHasNext.value = next;
 	return items;
 };
@@ -132,7 +140,9 @@ const search = async (event) => {
 	console.log('event.query', event);
 
 	if (!isApiMode.value) {
-		return (suggestions.value = [...props.options]);
+		return (suggestions.value = [
+			...props.options,
+		]);
 	}
 
 	const fetchedOptions = await fetchOptions({
@@ -140,7 +150,10 @@ const search = async (event) => {
 		page: 1,
 	});
 
-	suggestions.value = [...suggestions.value, ...fetchedOptions];
+	suggestions.value = [
+		...suggestions.value,
+		...fetchedOptions,
+	];
 };
 </script>
 

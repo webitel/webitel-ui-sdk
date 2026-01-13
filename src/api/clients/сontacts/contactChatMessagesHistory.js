@@ -39,13 +39,25 @@ const getChat = async ({ contactId, chatId }) => {
 			contactId,
 			chatId,
 		);
-		const { messages, peers } = applyTransform(response.data, [snakeToCamel()]);
+		const { messages, peers } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 		return {
-			items: applyTransform({ messages, peers }, [mergeChatMessagesData]),
+			items: applyTransform(
+				{
+					messages,
+					peers,
+				},
+				[
+					mergeChatMessagesData,
+				],
+			),
 			peers,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -77,7 +89,16 @@ const getAllMessages = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform({ messages, peers, chats }, [mergeMessagesData]),
+			items: applyTransform(
+				{
+					messages,
+					peers,
+					chats,
+				},
+				[
+					mergeMessagesData,
+				],
+			),
 			next,
 		};
 	} catch (err) {

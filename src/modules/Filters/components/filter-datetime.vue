@@ -35,7 +35,10 @@ const value = computed(
 );
 
 const setValue = (value) => {
-	const payload = { value, name: props.filterQuery };
+	const payload = {
+		value,
+		name: props.filterQuery,
+	};
 	return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
 };
 </script>

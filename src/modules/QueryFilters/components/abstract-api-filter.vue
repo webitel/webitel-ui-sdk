@@ -30,7 +30,9 @@ import apiFilterMixin from '../mixins/apiFilterMixin.js';
 
 export default {
 	name: 'AbstractApiFilter',
-	mixins: [apiFilterMixin],
+	mixins: [
+		apiFilterMixin,
+	],
 	props: {
 		filterQuery: {
 			type: String,

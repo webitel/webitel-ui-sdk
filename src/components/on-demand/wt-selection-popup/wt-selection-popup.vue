@@ -97,7 +97,11 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['change', 'add', 'close']);
+const emit = defineEmits([
+	'change',
+	'add',
+	'close',
+]);
 
 const { t } = useI18n();
 
@@ -114,14 +118,15 @@ function selectOption(option) {
 }
 </script>
 
-<style scoped>.wt-selection-popup__options {
-display: flex;
+<style scoped>
+.wt-selection-popup__options {
+    display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
 }
 
 .wt-selection-popup__item-wrapper {
-display: flex;
+    display: flex;
     position: relative;
     align-items: center;
     transition: var(--transition);
@@ -136,11 +141,11 @@ display: flex;
 }
 
 .wt-selection-popup .wt-icon {
-margin-right: var(--spacing-xs);
+  margin-right: var(--spacing-xs);
 }
 
 .wt-selection-popup .wt-tooltip {
-margin-left: auto;
+  margin-left: auto;
 }
 
 }

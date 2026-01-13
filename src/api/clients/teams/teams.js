@@ -60,7 +60,9 @@ const getTeamsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -87,7 +89,9 @@ const getTeam = async ({ itemId: id }) => {
 			merge(defaultObject),
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -98,9 +102,13 @@ const addTeam = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await teamService.createAgentTeam(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -111,9 +119,13 @@ const updateTeam = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await teamService.updateAgentTeam(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -122,14 +134,19 @@ const deleteTeam = async ({ id }) => {
 		const response = await teamService.deleteAgentTeam(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getTeamsLookup = (params) =>
 	getTeamsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const TeamsAPI = {

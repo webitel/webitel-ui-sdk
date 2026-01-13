@@ -54,7 +54,10 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 		priority_id: priorityId,
 	} = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -75,11 +78,15 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -94,9 +101,14 @@ const getCondition = async ({ parentId, itemId: id }) => {
 			id,
 			fieldsToSend,
 		);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -112,9 +124,13 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -129,9 +145,13 @@ const addCondition = async ({ itemInstance, parentId }) => {
 			parentId,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -143,14 +163,19 @@ const deleteCondition = async ({ id, parentId }) => {
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = async (params) =>
 	getConditionsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const SLAConditionsAPI = {

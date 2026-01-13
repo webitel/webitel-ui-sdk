@@ -41,8 +41,14 @@ const STATUS_MAP = {
 const statusConfig = computed(() => {
 	const config = STATUS_MAP[props.status as keyof typeof STATUS_MAP];
 	return config
-		? { text: t(config.text), color: config.color }
-		: { text: props.status, color: 'main' };
+		? {
+				text: t(config.text),
+				color: config.color,
+			}
+		: {
+				text: props.status,
+				color: 'main',
+			};
 });
 </script>
 

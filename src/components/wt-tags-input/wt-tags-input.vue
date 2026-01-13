@@ -139,7 +139,12 @@ export default {
     `,
 		},
 	},
-	emits: ['input', 'tag', 'search-change', 'closed'],
+	emits: [
+		'input',
+		'tag',
+		'search-change',
+		'closed',
+	],
 	data: () => ({
 		defaultOptionLabel: 'label',
 
@@ -159,7 +164,10 @@ export default {
       Multiselect creates new tags with "label" property by default, so we need to handle
       it as well
        */
-			const label = this.getOptionLabel({ optionLabel, option });
+			const label = this.getOptionLabel({
+				optionLabel,
+				option,
+			});
 			return typeof label === 'object' ? option.label : label;
 		},
 		initializeOptions() {

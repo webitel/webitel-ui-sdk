@@ -39,7 +39,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update:side-panel-size']);
+const emit = defineEmits([
+	'update:side-panel-size',
+]);
 
 const sidePanelCollapsed = ref(false);
 

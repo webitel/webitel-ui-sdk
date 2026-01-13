@@ -57,5 +57,7 @@ export function useDestroyableSortable(elRef, options) {
 		destroySortable();
 	});
 
-	return { reloadSortable };
+	return {
+		reloadSortable,
+	};
 }

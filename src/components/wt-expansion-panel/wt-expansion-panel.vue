@@ -33,7 +33,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['opened', 'closed']);
+const emit = defineEmits([
+	'opened',
+	'closed',
+]);
 
 const opened = ref(!props.collapsed);
 

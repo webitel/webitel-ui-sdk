@@ -29,11 +29,15 @@ const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
 				merge(getDefaultGetListResponse()),
 			]);
 			return {
-				items: applyTransform(items, [mergeEach(defaultObject)]),
+				items: applyTransform(items, [
+					mergeEach(defaultObject),
+				]),
 				next,
 			};
 		} catch (err) {
-			throw applyTransform(err, [notify]);
+			throw applyTransform(err, [
+				notify,
+			]);
 		}
 	};
 

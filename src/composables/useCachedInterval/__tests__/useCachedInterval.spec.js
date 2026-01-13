@@ -3,7 +3,9 @@ import { useCachedInterval } from '../useCachedInterval.js';
 describe('useCachedInterval', () => {
 	it.skip('subscribe', async () => {
 		const callback = vi.fn();
-		const { subscribe } = useCachedInterval({ timeout: 10 });
+		const { subscribe } = useCachedInterval({
+			timeout: 10,
+		});
 		subscribe(callback);
 		expect(callback).toHaveBeenCalledTimes(1);
 		return await new Promise((resolve, reject) =>

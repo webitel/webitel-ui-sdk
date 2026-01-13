@@ -47,24 +47,35 @@ const getBlacklistList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getBlacklist = async ({ itemId: id }) => {
 	try {
 		const response = await listService.readList(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const addBlacklist = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -73,9 +84,13 @@ const addBlacklist = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await listService.createList(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -86,9 +101,13 @@ const updateBlacklist = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await listService.updateList(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -97,13 +116,18 @@ const deleteBlacklist = async ({ id }) => {
 		const response = await listService.deleteList(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 const getBlacklistsLookup = (params) =>
 	getBlacklistList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const BlacklistsAPI = {

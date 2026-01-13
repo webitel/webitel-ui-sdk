@@ -24,7 +24,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		_STATE_FILTER_NAMES: (state) => {
 			return Object.values(state).reduce(
 				(names, prop) =>
-					prop.value || prop.name ? [...names, prop.name] : names,
+					prop.value || prop.name
+						? [
+								...names,
+								prop.name,
+							]
+						: names,
 				[],
 			);
 		},
@@ -103,7 +108,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		RESTORE_FILTERS: async (context) => {
 			await Promise.allSettled(
 				context.getters._STATE_FILTER_NAMES.map((name) => {
-					return context.dispatch('RESTORE_FILTER', { name });
+					return context.dispatch('RESTORE_FILTER', {
+						name,
+					});
 				}),
 			);
 
@@ -126,7 +133,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		RESET_FILTERS: async (context) => {
 			await Promise.allSettled(
 				context.getters._STATE_FILTER_NAMES.map((name) => {
-					return context.dispatch('RESET_FILTER', { name });
+					return context.dispatch('RESET_FILTER', {
+						name,
+					});
 				}),
 			);
 
@@ -137,7 +146,10 @@ export default class FiltersStoreModule extends BaseStoreModule {
 					if (context.state[qKey]) {
 						return filteredQuery;
 					}
-					return { ...filteredQuery, [qKey]: qValue };
+					return {
+						...filteredQuery,
+						[qKey]: qValue,
+					};
 				},
 				{},
 			);
@@ -178,7 +190,10 @@ export default class FiltersStoreModule extends BaseStoreModule {
 			}
 
 			for (const listener of listeners) {
-				await listener({ event, payload });
+				await listener({
+					event,
+					payload,
+				});
 			}
 		},
 	};

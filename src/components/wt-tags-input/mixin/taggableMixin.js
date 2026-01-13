@@ -26,7 +26,12 @@ export default {
 
 			this.options.unshift(tag);
 			if (!this.manualTagging) {
-				const value = this.multiple ? [...this.value, tag] : tag;
+				const value = this.multiple
+					? [
+							...this.value,
+							tag,
+						]
+					: tag;
 				this.input(value);
 			}
 		},

@@ -51,7 +51,9 @@ const props = defineProps<{
 	overlayIconPrefix?: string;
 }>();
 
-const emit = defineEmits(['click']);
+const emit = defineEmits([
+	'click',
+]);
 
 const width = computed(() => {
 	const width = props.size ? sizeToUnits[props.size] : props.width;

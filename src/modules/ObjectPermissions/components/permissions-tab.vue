@@ -192,7 +192,11 @@ const {
 	showEmpty,
 	image: imageEmpty,
 	text: textEmpty,
-} = useTableEmpty({ dataList, error, isLoading });
+} = useTableEmpty({
+	dataList,
+	error,
+	isLoading,
+});
 
 const accessOptions = computed(() => {
 	return Object.values(AccessMode).map((mode) => ({

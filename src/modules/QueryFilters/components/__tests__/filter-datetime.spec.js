@@ -8,7 +8,12 @@ import DatetimeFilter from '../filter-datetime.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
 describe('DatetimeFilter Filter', () => {
@@ -28,7 +33,10 @@ describe('DatetimeFilter Filter', () => {
 
 	const mountOptions = {
 		global: {
-			plugins: [router, store],
+			plugins: [
+				router,
+				store,
+			],
 		},
 		props: {
 			namespace,
@@ -41,12 +49,19 @@ describe('DatetimeFilter Filter', () => {
 	});
 	it('initial restoreValue() triggers setValue() method', async () => {
 		const value = Date.now();
-		await router.replace({ query: { [filterQuery]: value } });
+		await router.replace({
+			query: {
+				[filterQuery]: value,
+			},
+		});
 		const setValueMock = vi.fn();
 		vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(
 			setValueMock,
 		);
 		shallowMount(DatetimeFilter, mountOptions);
-		expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value });
+		expect(setValueMock).toHaveBeenCalledWith({
+			filter: filterQuery,
+			value,
+		});
 	});
 });

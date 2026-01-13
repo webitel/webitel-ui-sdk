@@ -58,7 +58,9 @@ export default {
 			default: false,
 		},
 	},
-	emits: ['change'],
+	emits: [
+		'change',
+	],
 	data: () => ({
 		activeLineWidth: 0,
 		activeLineOffset: 0,

@@ -12,8 +12,12 @@ describe('WtTagsInput', () => {
 	it('renders label text when passed', () => {
 		const label = 'Hello there';
 		const wrapper = mount(WtTagsInput, {
-			stubs: { WtLabel },
-			props: { label },
+			stubs: {
+				WtLabel,
+			},
+			props: {
+				label,
+			},
 		});
 		expect(wrapper.find('.wt-label').text()).toBe(label);
 	});
@@ -25,24 +29,45 @@ describe('WtTagsInput', () => {
 				value: [],
 			},
 		});
-		wrapper.findComponent({ name: 'vue-multiselect' }).vm.$emit('tag', tag);
-		expect(wrapper.emitted().input[0][0]).toEqual([tag]);
+		wrapper
+			.findComponent({
+				name: 'vue-multiselect',
+			})
+			.vm.$emit('tag', tag);
+		expect(wrapper.emitted().input[0][0]).toEqual([
+			tag,
+		]);
 	});
 
 	it('by default when input taggable initialize options should set from value', () => {
 		const wrapper = mount(WtTagsInput, {
 			props: {
 				value: [
-					{ label: 'Vue.js', text: 'JavaScript' },
-					{ label: 'Vue2.js', text: 'JavaScript' },
-					{ label: 'Vue3.js', text: 'JavaScript' },
+					{
+						label: 'Vue.js',
+						text: 'JavaScript',
+					},
+					{
+						label: 'Vue2.js',
+						text: 'JavaScript',
+					},
+					{
+						label: 'Vue3.js',
+						text: 'JavaScript',
+					},
 				],
-				options: [{ label: 'Vue.js', text: 'JavaScript' }],
+				options: [
+					{
+						label: 'Vue.js',
+						text: 'JavaScript',
+					},
+				],
 			},
 		});
 		expect(
-			wrapper.findComponent({ name: 'vue-multiselect' }).vm.$props.options
-				.length,
+			wrapper.findComponent({
+				name: 'vue-multiselect',
+			}).vm.$props.options.length,
 		).toEqual(3);
 	});
 
@@ -54,7 +79,11 @@ describe('WtTagsInput', () => {
 				manualTagging: true,
 			},
 		});
-		wrapper.findComponent({ name: 'vue-multiselect' }).vm.$emit('tag', tag);
+		wrapper
+			.findComponent({
+				name: 'vue-multiselect',
+			})
+			.vm.$emit('tag', tag);
 		expect(wrapper.emitted().input).toBeFalsy();
 	});
 });

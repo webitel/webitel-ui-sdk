@@ -66,7 +66,10 @@ const getCatalogsList = async (params) => {
 		[
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
-			(params) => ({ ...params, q: params.search }),
+			(params) => ({
+				...params,
+				q: params.search,
+			}),
 			sanitize(fieldsToSend),
 			camelToSnake(),
 		],
@@ -75,7 +78,10 @@ const getCatalogsList = async (params) => {
 		const response = await catalogsService.listCatalogs(
 			page,
 			size,
-			[...fields, 'services'],
+			[
+				...fields,
+				'services',
+			],
 			sort,
 			id,
 			q,
@@ -88,11 +94,15 @@ const getCatalogsList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -107,9 +117,14 @@ const getCatalog = async ({ itemId: id }) => {
 			fieldsToSend,
 			servicesFieldsToSend,
 		);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -132,9 +147,13 @@ const addCatalog = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await catalogsService.createCatalog(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -157,23 +176,35 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await catalogsService.updateCatalog(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchCatalog = async ({ itemInstance, itemId: id }) => {
-	const fieldsToSend = ['name', 'description', 'state'];
+	const fieldsToSend = [
+		'name',
+		'description',
+		'state',
+	];
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await catalogsService.updateCatalog2(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -182,7 +213,9 @@ const deleteCatalog = async ({ id }) => {
 		const response = await catalogsService.deleteCatalog(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

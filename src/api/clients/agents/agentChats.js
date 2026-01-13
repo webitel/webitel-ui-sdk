@@ -39,13 +39,17 @@ const getChatsList = async (params) => {
 			onlyClosed,
 			onlyUnprocessed,
 		);
-		const { items, next } = applyTransform(response.data, [snakeToCamel()]);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 		return {
 			items,
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -53,7 +57,9 @@ const markChatProcessed = async (chatId) => {
 	// add to chat unprocessedClose: true
 	try {
 		const response = await agentChatsService.markChatProcessed(chatId);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify(({ callback }) =>

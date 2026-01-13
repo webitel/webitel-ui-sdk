@@ -1,7 +1,9 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	props: {
 		// for more detail, see allowCustomValues wt-select component prop
 		allowCustomValues: {
@@ -65,7 +67,10 @@ export default {
 										(option) => val === option[this.storedProp],
 									),
 							)
-							.map((val) => ({ [this.storedProp]: val, name: val })),
+							.map((val) => ({
+								[this.storedProp]: val,
+								name: val,
+							})),
 					);
 				}
 			} else {
@@ -76,10 +81,16 @@ export default {
 					(option) => value === option[this.storedProp],
 				);
 				if (this.allowCustomValues) {
-					newValue = newValue || { [this.storedProp]: value, name: value };
+					newValue = newValue || {
+						[this.storedProp]: value,
+						name: value,
+					};
 				}
 			}
-			this.setValue({ filter: this.filterQuery, value: newValue });
+			this.setValue({
+				filter: this.filterQuery,
+				value: newValue,
+			});
 		},
 	},
 };

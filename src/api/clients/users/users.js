@@ -38,7 +38,14 @@ const fieldsToSend = [
 ];
 
 const getUsersList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const defaultObject = {
 		name: '',
@@ -49,7 +56,10 @@ const getUsersList = async (params) => {
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl(baseUrl),
@@ -57,15 +67,21 @@ const getUsersList = async (params) => {
 	try {
 		const response = await instance.get(url);
 		const { items, next } = applyTransform(response.data, [
-			snakeToCamel(['profile']),
+			snakeToCamel([
+				'profile',
+			]),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -75,7 +91,12 @@ const getUser = async ({ itemId: id }) => {
 		license: [],
 		devices: [],
 		device: {},
-		variables: [{ key: '', value: '' }],
+		variables: [
+			{
+				key: '',
+				value: '',
+			},
+		],
 	};
 
 	const itemResponseHandler = (item) => {
@@ -91,7 +112,12 @@ const getUser = async ({ itemId: id }) => {
 				value: copy.profile[key],
 			}));
 		} else {
-			copy.variables = [{ key: '', value: '' }];
+			copy.variables = [
+				{
+					key: '',
+					value: '',
+				},
+			];
 		}
 		return copy;
 	};
@@ -101,12 +127,16 @@ const getUser = async ({ itemId: id }) => {
 	try {
 		const response = await instance.get(url);
 		return applyTransform(response.data, [
-			snakeToCamel(['profile']),
+			snakeToCamel([
+				'profile',
+			]),
 			merge(defaultObject),
 			itemResponseHandler,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -118,7 +148,9 @@ const preRequestHandler = (item) => {
 
 	if (copy.devices) copy.devices.forEach((copy) => delete copy.text);
 	if (copy.license) {
-		copy.license = copy.license.map((copy) => ({ id: copy.id }));
+		copy.license = copy.license.map((copy) => ({
+			id: copy.id,
+		}));
 	}
 	copy.profile = {};
 	if (copy.variables) {
@@ -133,13 +165,21 @@ const addUser = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
-		camelToSnake(['profile']),
+		camelToSnake([
+			'profile',
+		]),
 	]);
 	try {
 		const response = await instance.post(baseUrl, item);
-		return applyTransform(response.data, [snakeToCamel(['profile'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'profile',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -147,43 +187,67 @@ const updateUser = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
-		camelToSnake(['profile']),
+		camelToSnake([
+			'profile',
+		]),
 	]);
 
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.put(url, item);
-		return applyTransform(response.data, [snakeToCamel(['profile'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'profile',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchUser = async ({ changes, id }) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
-		camelToSnake(['profile']),
+		camelToSnake([
+			'profile',
+		]),
 	]);
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.patch(url, body);
-		return applyTransform(response.data, [snakeToCamel(['profile'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'profile',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchUserPresence = async ({ changes, id }) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
-		camelToSnake(['profile']),
+		camelToSnake([
+			'profile',
+		]),
 	]);
 	const url = `${baseUrl}/${id}/presence`;
 	try {
 		const response = await instance.patch(url, body);
-		return applyTransform(response.data, [snakeToCamel(['profile'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'profile',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -194,14 +258,19 @@ const deleteUser = async ({ id }) => {
 		const response = await instance.delete(url);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getUsersLookup = (params) =>
 	getUsersList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const logoutUser = async ({ id }) => {
@@ -210,7 +279,9 @@ const logoutUser = async ({ id }) => {
 		const response = await instance.post(url, {});
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

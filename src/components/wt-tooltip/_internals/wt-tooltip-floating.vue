@@ -28,7 +28,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['show', 'hide']);
+const emit = defineEmits([
+	'show',
+	'hide',
+]);
 
 const floating = ref(null);
 

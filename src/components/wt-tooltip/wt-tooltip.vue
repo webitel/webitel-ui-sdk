@@ -61,7 +61,11 @@ const props = defineProps({
 	},
 	triggers: {
 		type: Array,
-		default: () => ['hover', 'focus', 'touch'],
+		default: () => [
+			'hover',
+			'focus',
+			'touch',
+		],
 	},
 	popperClass: {
 		type: String,
@@ -77,7 +81,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update:visible']);
+const emit = defineEmits([
+	'update:visible',
+]);
 
 const activator = useTemplateRef('activator');
 const floating = useTemplateRef('floating');

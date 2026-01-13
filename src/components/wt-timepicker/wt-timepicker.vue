@@ -80,7 +80,9 @@ const SEC_IN_MIN = 60;
 
 export default {
 	name: 'WtTimepicker',
-	mixins: [validationMixin],
+	mixins: [
+		validationMixin,
+	],
 	model: {
 		prop: 'value',
 		event: 'input',
@@ -90,7 +92,10 @@ export default {
 		 * Time value in seconds (not milliseconds!)
 		 */
 		value: {
-			type: [String, Number],
+			type: [
+				String,
+				Number,
+			],
 			default: 0,
 		},
 

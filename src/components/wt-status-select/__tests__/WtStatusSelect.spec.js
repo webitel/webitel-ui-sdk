@@ -6,14 +6,18 @@ import WtStatusSelect from '../wt-status-select.vue';
 describe('WtStatusSelect', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtStatusSelect, {
-			stubs: { WtSelect },
+			stubs: {
+				WtSelect,
+			},
 		});
 		expect(wrapper.classes('wt-status-select')).toBe(true);
 	});
 
 	it('correctly represents duration', () => {
 		const wrapper = shallowMount(WtStatusSelect, {
-			stubs: { WtSelect },
+			stubs: {
+				WtSelect,
+			},
 		});
 		expect(wrapper.vm.duration).toBe('00:00:00');
 

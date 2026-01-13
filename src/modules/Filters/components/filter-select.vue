@@ -70,7 +70,9 @@ const search =
 		if (trackBy.value === 'id') {
 			params.ids = Array.isArray(rawValue.value)
 				? rawValue.value
-				: [rawValue.value];
+				: [
+						rawValue.value,
+					];
 		}
 
 		const { items, ...rest } = await filterSchema.value.search(params);

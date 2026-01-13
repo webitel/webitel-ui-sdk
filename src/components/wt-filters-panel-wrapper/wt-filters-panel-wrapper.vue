@@ -15,7 +15,10 @@ export default {
 	props: {
 		tableActionIcons: {
 			type: Array,
-			default: () => ['filter-reset', 'settings'],
+			default: () => [
+				'filter-reset',
+				'settings',
+			],
 		},
 		isOpened: {
 			type: Boolean,

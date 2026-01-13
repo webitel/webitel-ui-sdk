@@ -278,7 +278,9 @@ export default {
 				? this.value
 				: isEmpty(this.value)
 					? []
-					: [this.value]; //do not add empty values
+					: [
+							this.value,
+						]; //do not add empty values
 			const optionsWithoutValues = this.selectOptions.filter((opt) => {
 				const optKey = this.trackBy ? opt[this.trackBy] : opt;
 				return !customValuesToOptions.some((customValue) => {
@@ -288,7 +290,10 @@ export default {
 					return customValueKey === optKey;
 				});
 			});
-			return [...customValuesToOptions, ...optionsWithoutValues];
+			return [
+				...customValuesToOptions,
+				...optionsWithoutValues,
+			];
 		},
 	},
 	methods: {
@@ -299,7 +304,9 @@ export default {
 		},
 		async search(event) {
 			console.log('event.query', event.query);
-			this.items = [...this.optionsWithCustomValues];
+			this.items = [
+				...this.optionsWithCustomValues,
+			];
 		},
 		// for taggableMixin functionality
 		async handleCustomValueArrowInput(toggle) {

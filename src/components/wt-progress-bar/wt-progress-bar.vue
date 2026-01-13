@@ -20,17 +20,28 @@ export default {
 	name: 'WtProgressBar',
 	props: {
 		max: {
-			type: [Number, String],
+			type: [
+				Number,
+				String,
+			],
 			default: 100,
 		},
 		value: {
-			type: [Number, String],
+			type: [
+				Number,
+				String,
+			],
 			default: 0,
 		},
 		color: {
 			type: String,
 			default: 'primary',
-			options: ['primary', 'secondary', 'success', 'error'],
+			options: [
+				'primary',
+				'secondary',
+				'success',
+				'error',
+			],
 		},
 	},
 	computed: {

@@ -14,7 +14,11 @@ const configuration = getDefaultOpenAPIConfig();
 
 const typeExtensionsService = ExtensionsApiFactory(configuration, '', instance);
 
-const fieldsToSend = ['fields', 'repo', 'path'];
+const fieldsToSend = [
+	'fields',
+	'repo',
+	'path',
+];
 
 const generateIdsFromRepos = (item: WebitelProtoDataStruct) => ({
 	...item,
@@ -66,7 +70,9 @@ const addTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 			generateIdsFromRepos,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -74,7 +80,9 @@ const deleteTypeExtension = async ({ itemId: typeRepo }) => {
 	try {
 		await typeExtensionsService.deleteType(typeRepo);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -83,11 +91,16 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 		return itemInstance;
 	}
 	if (itemInstance.isNew) {
-		return addTypeExtension({ itemInstance, itemId: typeRepo });
+		return addTypeExtension({
+			itemInstance,
+			itemId: typeRepo,
+		});
 	}
 
 	if (!itemInstance.fields.length && !itemInstance.isNew) {
-		return deleteTypeExtension({ itemId: typeRepo });
+		return deleteTypeExtension({
+			itemId: typeRepo,
+		});
 	}
 
 	const item = applyTransform(itemInstance, [
@@ -102,7 +115,9 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 			generateIdsFromRepos,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

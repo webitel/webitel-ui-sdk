@@ -50,7 +50,9 @@ describe('AccessStore', () => {
 			access: {},
 		});
 
-		await router.push({ name: 'users' });
+		await router.push({
+			name: 'users',
+		});
 
 		/* because guard should not allow to navigate
     there since we pass empty permissions */
@@ -62,12 +64,18 @@ describe('AccessStore', () => {
 		router.beforeEach(routeAccessGuard);
 
 		initialize({
-			permissions: [{ id: CrudGlobalAction.Read }],
+			permissions: [
+				{
+					id: CrudGlobalAction.Read,
+				},
+			],
 			scope: [],
 			access: {},
 		});
 
-		await router.push({ name: 'users' });
+		await router.push({
+			name: 'users',
+		});
 		expect(router.currentRoute.value.name).toBe('users');
 	});
 
@@ -77,7 +85,12 @@ describe('AccessStore', () => {
 
 		initialize({
 			permissions: [],
-			scope: [{ class: 'users', access: 'r' }],
+			scope: [
+				{
+					class: 'users',
+					access: 'r',
+				},
+			],
 			access: {
 				[WtApplication.Admin]: {
 					_enabled: true,
@@ -88,7 +101,9 @@ describe('AccessStore', () => {
 			},
 		});
 
-		await router.push({ name: 'users' });
+		await router.push({
+			name: 'users',
+		});
 		expect(router.currentRoute.value.name).toBe('users');
 	});
 
@@ -98,7 +113,12 @@ describe('AccessStore', () => {
 
 		initialize({
 			permissions: [],
-			scope: [{ class: 'users', access: 'r' }],
+			scope: [
+				{
+					class: 'users',
+					access: 'r',
+				},
+			],
 			access: {
 				[WtApplication.Admin]: {
 					_enabled: true,
@@ -109,7 +129,9 @@ describe('AccessStore', () => {
 			},
 		});
 
-		await router.push({ name: 'users' });
+		await router.push({
+			name: 'users',
+		});
 		expect(router.currentRoute.value.name).not.toBe('users');
 	});
 
@@ -119,7 +141,12 @@ describe('AccessStore', () => {
 
 		initialize({
 			permissions: [],
-			scope: [{ class: 'users', access: 'r' }],
+			scope: [
+				{
+					class: 'users',
+					access: 'r',
+				},
+			],
 			access: {
 				[WtApplication.Admin]: {
 					_enabled: false,
@@ -130,7 +157,9 @@ describe('AccessStore', () => {
 			},
 		});
 
-		await router.push({ name: 'users' });
+		await router.push({
+			name: 'users',
+		});
 		expect(router.currentRoute.value.name).not.toBe('users');
 	});
 });

@@ -27,9 +27,14 @@ describe('WtPagination', () => {
 
 	it('changes pages at icon btn click', async () => {
 		const wrapper = mount(WtPagination, {
-			props: { isNext: true, page: 2 },
+			props: {
+				isNext: true,
+				page: 2,
+			},
 		});
-		const pageControls = wrapper.findAllComponents({ name: 'wt-icon-btn' });
+		const pageControls = wrapper.findAllComponents({
+			name: 'wt-icon-btn',
+		});
 		pageControls.at(0).vm.$emit('click');
 		pageControls.at(1).vm.$emit('click');
 		console.info(wrapper.emitted());

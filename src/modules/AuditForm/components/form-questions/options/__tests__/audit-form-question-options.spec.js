@@ -14,7 +14,11 @@ describe('AuditFormQuestionOptions', () => {
 	it('adds new question option at "add" button click', () => {
 		const wrapper = shallowMount(AuditFormQuestionOptions, {
 			props: {
-				question: { options: [{}] },
+				question: {
+					options: [
+						{},
+					],
+				},
 				mode: 'write',
 			},
 		});
@@ -26,7 +30,11 @@ describe('AuditFormQuestionOptions', () => {
 	it('deletes existing question option at "delete" icon-btn click', () => {
 		const wrapper = mount(AuditFormQuestionOptions, {
 			props: {
-				question: { options: [{}] },
+				question: {
+					options: [
+						{},
+					],
+				},
 				mode: 'write',
 			},
 		});
@@ -40,11 +48,25 @@ describe('AuditFormQuestionOptions', () => {
 		const score = 11;
 		const wrapper = shallowMount(AuditFormQuestionOptions, {
 			props: {
-				question: { options: [{ score }] },
+				question: {
+					options: [
+						{
+							score,
+						},
+					],
+				},
 				mode: 'read',
 			},
 		});
-		wrapper.findComponent({ name: 'wt-radio' }).vm.$emit('input', { score });
-		expect(wrapper.emitted()['change:result'][0][0]).toEqual({ score });
+		wrapper
+			.findComponent({
+				name: 'wt-radio',
+			})
+			.vm.$emit('input', {
+				score,
+			});
+		expect(wrapper.emitted()['change:result'][0][0]).toEqual({
+			score,
+		});
 	});
 });

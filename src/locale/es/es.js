@@ -28,7 +28,11 @@ export default {
 		replace: 'Reemplazar',
 		download: 'Descargar',
 		history: 'Historial',
-		filter: ({ plural }) => plural(['Filtro', 'Filtros']),
+		filter: ({ plural }) =>
+			plural([
+				'Filtro',
+				'Filtros',
+			]),
 		total: 'Total',
 		ok: 'Aceptar',
 		object: 'Objeto',
@@ -309,7 +313,9 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: { name: 'Espacio de trabajo del agente' },
+		[WebitelApplications.AGENT]: {
+			name: 'Espacio de trabajo del agente',
+		},
 		[WebitelApplications.AUDIT]: {
 			name: 'Auditoría',
 			sections: {
@@ -330,7 +336,9 @@ export default {
 				[CrmSections.ContactGroups]: 'Grupos de contactos',
 			},
 		},
-		[WebitelApplications.HISTORY]: { name: 'Historial de llamadas' },
+		[WebitelApplications.HISTORY]: {
+			name: 'Historial de llamadas',
+		},
 		[WebitelApplications.ANALYTICS]: {
 			name: 'Herramienta de visualización de datos',
 		},
@@ -385,7 +393,9 @@ export default {
 				[AdminSections.QuickReplies]: 'Respuestas rápidas',
 			},
 		},
-		[WebitelApplications.WFM]: { name: 'WFM' },
+		[WebitelApplications.WFM]: {
+			name: 'WFM',
+		},
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'La cámara está apagada',
 		},

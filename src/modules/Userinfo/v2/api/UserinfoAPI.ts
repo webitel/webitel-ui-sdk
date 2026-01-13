@@ -37,7 +37,9 @@ const getSession = async (): Promise<{
 			snakeToCamel(),
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -49,7 +51,9 @@ const getUiVisibilityAccess = async (): Promise<VisibilityAccess> => {
 			// snakeToCamel(),  // https://webitel.atlassian.net/browse/WTEL-7643
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -58,7 +62,9 @@ const logout = async () => {
 	try {
 		return await instance.post(url, {});
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

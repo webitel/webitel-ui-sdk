@@ -1,6 +1,9 @@
 const PAGE = 1;
 const SIZE = 20;
-const FIELDS = ['id', 'name'];
+const FIELDS = [
+	'id',
+	'name',
+];
 
 export const defaultParams = {
 	page: PAGE,

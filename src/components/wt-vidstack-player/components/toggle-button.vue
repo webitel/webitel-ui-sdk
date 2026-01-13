@@ -35,7 +35,9 @@ const props = defineProps<{
 const toggleButton = useTemplateRef('toggleButton') as Ref<HTMLElement>;
 
 const emit = defineEmits<{
-	toggle: [value: boolean];
+	toggle: [
+		value: boolean,
+	];
 }>();
 
 const setToggleState = () => {

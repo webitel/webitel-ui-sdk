@@ -45,7 +45,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update:option', 'delete']);
+const emit = defineEmits([
+	'update:option',
+	'delete',
+]);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
@@ -53,7 +56,9 @@ const { option } = toRefs(props);
 const v$ = useVuelidate(
 	computed(() => ({
 		option: {
-			name: { required },
+			name: {
+				required,
+			},
 			score: {
 				required,
 				minValue: minValue(0),
@@ -62,8 +67,12 @@ const v$ = useVuelidate(
 			},
 		},
 	})),
-	{ option },
-	{ $autoDirty: true },
+	{
+		option,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 // init validation

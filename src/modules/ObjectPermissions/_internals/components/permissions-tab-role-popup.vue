@@ -75,7 +75,10 @@ const add = () => {
 		query,
 		hash,
 		name,
-		params: { ...params, permissionId: 'new' },
+		params: {
+			...params,
+			permissionId: 'new',
+		},
 	});
 };
 
@@ -94,7 +97,11 @@ const close = () => {
 };
 
 const loadGrantees = (params) => {
-	const fields = ['name', 'id', 'user'];
+	const fields = [
+		'name',
+		'id',
+		'user',
+	];
 	return RolesAPI.getList({
 		...params,
 		fields,

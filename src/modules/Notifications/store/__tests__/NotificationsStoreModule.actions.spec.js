@@ -22,12 +22,16 @@ describe('features/notifications store: actions', () => {
 			IS_SOUND_ALLOWED: () => true,
 		},
 		rootGetters: {
-			'workspace/TASK_ON_WORKSPACE': { channelId: 'id' },
+			'workspace/TASK_ON_WORKSPACE': {
+				channelId: 'id',
+			},
 		},
 	};
 
 	beforeEach(() => {
-		context.state = { ...state };
+		context.state = {
+			...state,
+		};
 		context.dispatch.mockClear();
 		context.commit.mockClear();
 	});
@@ -82,7 +86,9 @@ describe('features/notifications store: actions', () => {
 
 	it('PLAY_SOUND action commits SET_CURRENTLY_PLAYING mutation with sound', async () => {
 		const sound = {};
-		await notificationsModule.actions.PLAY_SOUND(context, { sound });
+		await notificationsModule.actions.PLAY_SOUND(context, {
+			sound,
+		});
 		expect(context.commit.mock.calls[0][0]).toBe('SET_CURRENTLY_PLAYING');
 	});
 
@@ -124,7 +130,9 @@ describe('features/notifications store: actions', () => {
 
 	it('PLAY_SOUND action sets localStorage wtIsPlaying to true', () => {
 		const sound = new Audio(audio);
-		notificationsModule.actions.PLAY_SOUND(context, { sound });
+		notificationsModule.actions.PLAY_SOUND(context, {
+			sound,
+		});
 		expect(localStorage.getItem('wtIsPlaying')).toBeTruthy();
 	});
 

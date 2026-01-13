@@ -70,20 +70,36 @@ const v$ =
 				},
 			};
 		}),
-		{ localValue },
-		{ $autoDirty: true },
+		{
+			localValue,
+		},
+		{
+			$autoDirty: true,
+		},
 	);
 
 if (v$) v$.value.$touch();
 
 async function changeMode({ value }, { clearValue = true } = {}) {
-	if (clearValue) await setValue({ name: filterName.value, value: '' });
+	if (clearValue)
+		await setValue({
+			name: filterName.value,
+			value: '',
+		});
 	filterName.value = value;
 }
 
 function restoreSearchMode() {
 	const mode = props.searchModeOpts.find(({ value }) => !!getValue(value));
-	if (mode) changeMode({ value: mode.value }, { clearValue: false });
+	if (mode)
+		changeMode(
+			{
+				value: mode.value,
+			},
+			{
+				clearValue: false,
+			},
+		);
 }
 
 function subscribe(payload) {

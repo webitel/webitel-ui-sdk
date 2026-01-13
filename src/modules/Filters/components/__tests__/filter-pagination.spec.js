@@ -8,15 +8,23 @@ const filtersSchema = [
 	{
 		name: 'page',
 		value: 1,
-		get: ['value'],
-		set: ['value'],
+		get: [
+			'value',
+		],
+		set: [
+			'value',
+		],
 		restore: () => {},
 	},
 	{
 		name: 'size',
 		value: 11,
-		get: ['value'],
-		set: ['value'],
+		get: [
+			'value',
+		],
+		set: [
+			'value',
+		],
 		restore: () => {},
 	},
 ];
@@ -34,7 +42,9 @@ describe('FilterPagination', () => {
 				namespace: 'filters',
 			},
 			global: {
-				plugins: [store],
+				plugins: [
+					store,
+				],
 			},
 		});
 		expect(wrapper.exists()).toBe(true);
@@ -53,7 +63,9 @@ describe('FilterPagination', () => {
 				namespace: 'filters',
 			},
 			global: {
-				plugins: [store],
+				plugins: [
+					store,
+				],
 				stubs: {
 					WtPagination: false,
 				},
@@ -80,7 +92,9 @@ describe('FilterPagination', () => {
 				namespace: 'filters',
 			},
 			global: {
-				plugins: [store],
+				plugins: [
+					store,
+				],
 				stubs: {
 					WtPagination: false,
 				},

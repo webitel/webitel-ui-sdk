@@ -52,7 +52,9 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits([
+	'close',
+]);
 
 const attrs = useAttrs();
 
@@ -66,7 +68,9 @@ const deleteMessage = computed(() => {
 	}
 	return t(
 		'webitelUI.deleteConfirmationPopup.tableAskingAlert',
-		{ count: props.deleteCount },
+		{
+			count: props.deleteCount,
+		},
 		null,
 	);
 });

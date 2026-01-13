@@ -15,12 +15,23 @@ import applyTransform, {
 const instance = getDefaultInstance();
 
 const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'ids'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+		'ids',
+	];
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		(params) => ({
 			...params,
 			ids: params.id /* https://webitel.atlassian.net/browse/WTEL-6788 */,
@@ -44,14 +55,19 @@ const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getSysTypeRecordsLookup = (params) =>
 	getSysTypeRecordsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const SysTypesApi = {

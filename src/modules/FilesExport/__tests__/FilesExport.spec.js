@@ -14,16 +14,36 @@ vi.mock('file-saver-es', () => ({
 }));
 
 const dataList = [
-	{ files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] },
+	{
+		files: [
+			{
+				name: 'jest',
+				id: '1',
+				mimeType: 'mime/type',
+			},
+		],
+	},
 ];
 const selectedDataList = [
 	{
 		_isSelected: true,
-		files: [{ name: 'jest1', id: '1', mimeType: 'mime/type' }],
+		files: [
+			{
+				name: 'jest1',
+				id: '1',
+				mimeType: 'mime/type',
+			},
+		],
 	},
 	{
 		_isSelected: true,
-		files: [{ name: 'jest2', id: '2', mimeType: 'mime/type' }],
+		files: [
+			{
+				name: 'jest2',
+				id: '2',
+				mimeType: 'mime/type',
+			},
+		],
 	},
 ];
 
@@ -34,14 +54,20 @@ describe('File Export', () => {
 	let wrapper;
 	const Component = {
 		render() {},
-		mixins: [FilesExportMixin],
+		mixins: [
+			FilesExportMixin,
+		],
 		created() {
 			this.initFilesExport({
-				fetchMethod: () => ({ items: dataList }),
+				fetchMethod: () => ({
+					items: dataList,
+				}),
 				filename: 'jest',
 			});
 		},
-		data: () => ({ dataList }),
+		data: () => ({
+			dataList,
+		}),
 	};
 
 	it('goes through all important steps to save file', async () => {

@@ -3,9 +3,14 @@ import BaseFilterSchema from './BaseFilterSchema.js';
 export default class ApiFilterSchema extends BaseFilterSchema {
 	constructor(params = {}) {
 		const { value = [], defaultValue = [] } = params;
-		super({ value, defaultValue });
+		super({
+			value,
+			defaultValue,
+		});
 		const {
-			locale = { label: 'filter' },
+			locale = {
+				label: 'filter',
+			},
 			storedProp = 'id',
 			multiple = true,
 			closeOnSelect = false,
@@ -23,7 +28,10 @@ export default class ApiFilterSchema extends BaseFilterSchema {
 	}
 
 	fetchSelected(idsList) {
-		const params = { size: idsList.length, id: idsList };
+		const params = {
+			size: idsList.length,
+			id: idsList,
+		};
 		return this.API(params);
 	}
 }

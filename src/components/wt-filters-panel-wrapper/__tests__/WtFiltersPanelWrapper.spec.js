@@ -10,7 +10,9 @@ describe('Filters Panel Wrapper', () => {
 	it('emits "reset" event at wt-table-actions "filterReset" event', () => {
 		const wrapper = shallowMount(FiltersPanelWrapper);
 		wrapper
-			.findComponent({ name: 'wt-table-actions' })
+			.findComponent({
+				name: 'wt-table-actions',
+			})
 			.vm.$emit('input', 'filterReset');
 		expect(wrapper.emitted().reset).toBeTruthy();
 	});
@@ -21,7 +23,9 @@ describe('Filters Panel Wrapper', () => {
 			false,
 		);
 		wrapper
-			.findComponent({ name: 'wt-table-actions' })
+			.findComponent({
+				name: 'wt-table-actions',
+			})
 			.vm.$emit('input', 'settings');
 		await wrapper.vm.$nextTick();
 		expect(wrapper.classes().includes('filters-panel-wrapper--opened')).toBe(

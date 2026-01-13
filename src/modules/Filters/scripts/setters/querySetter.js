@@ -26,11 +26,19 @@ const querySetter =
 		let value = '';
 
 		if (Array.isArray(rawValue)) {
-			value = handleArray({ value: rawValue, storedProp });
+			value = handleArray({
+				value: rawValue,
+				storedProp,
+			});
 		} else if (isObject(rawValue)) {
-			value = handleObject({ value: rawValue, storedProp });
+			value = handleObject({
+				value: rawValue,
+				storedProp,
+			});
 		} else {
-			value = handlePrimitive({ value: rawValue });
+			value = handlePrimitive({
+				value: rawValue,
+			});
 		}
 
 		await changeRouteQuery(router)({

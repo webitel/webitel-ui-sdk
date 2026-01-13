@@ -16,31 +16,50 @@ const options = [
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
 describe('Enum filter mixin', () => {
 	const setValue = vi.fn();
 	const Component = {
 		render() {},
-		mixins: [enumFilterMixin],
+		mixins: [
+			enumFilterMixin,
+		],
 		data: () => ({
 			filterQuery: 'direction',
 			storedProp: 'value',
 			options,
 		}),
-		methods: { setValue },
+		methods: {
+			setValue,
+		},
 	};
 
 	beforeEach(async () => {
 		setValue.mockClear();
-		await router.replace({ query: null });
+		await router.replace({
+			query: null,
+		});
 	});
 
 	it('Correctly sets value from $route query', async () => {
-		await router.replace({ query: { direction: options[0].value } });
+		await router.replace({
+			query: {
+				direction: options[0].value,
+			},
+		});
 		const wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 		});
 		await wrapper.vm.$nextTick();
 		expect(setValue).toHaveBeenCalledWith({
@@ -51,7 +70,11 @@ describe('Enum filter mixin', () => {
 
 	it('Sets empty array value if $route query is empty', async () => {
 		shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 		});
 		expect(setValue).not.toHaveBeenCalled();
 	});
@@ -69,8 +92,14 @@ describe('Enum filter mixin', () => {
 			},
 		];
 		const wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
-			data: () => ({ options }),
+			global: {
+				plugins: [
+					router,
+				],
+			},
+			data: () => ({
+				options,
+			}),
 		});
 		expect(wrapper.vm.localizedOptions).toEqual(expectedOptions);
 	});

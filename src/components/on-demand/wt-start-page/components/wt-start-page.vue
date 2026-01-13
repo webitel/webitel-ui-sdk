@@ -61,12 +61,14 @@ const navCards = computed(() => {
 });
 </script>
 
-<style scoped>.wt-start-page__wrapper {
-display: grid;
+<style scoped>
+.wt-start-page__wrapper {
+  display: grid;
   grid-template-columns: repeat(auto-fit, 264px);
   justify-content: center;
   box-sizing: border-box;
   padding: var(--spacing-sm);
   min-width: 264px;
   grid-gap: var(--spacing-sm);
-}</style>
+}
+</style>

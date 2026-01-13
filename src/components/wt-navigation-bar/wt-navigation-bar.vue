@@ -160,7 +160,9 @@ const appLogo = {
 
 export default {
 	name: 'WtNavigationBar',
-	components: { ExpandTransition },
+	components: {
+		ExpandTransition,
+	},
 	props: {
 		currentApp: {
 			type: String,
@@ -192,9 +194,19 @@ export default {
 		currentNav() {
 			const pathSegments = this.$route.path.split('/').filter(Boolean);
 
-			const flatNav = this.nav.flatMap((item) => item.subNav ?? [item]);
+			const flatNav = this.nav.flatMap(
+				(item) =>
+					item.subNav ?? [
+						item,
+					],
+			);
 
-			const navMap = new Map(flatNav.map((item) => [item.value, item]));
+			const navMap = new Map(
+				flatNav.map((item) => [
+					item.value,
+					item,
+				]),
+			);
 
 			const matchingSegment = pathSegments.find((segment) =>
 				navMap.has(segment),

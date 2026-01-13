@@ -67,7 +67,9 @@ const v$ = useVuelidate(
 		mode === 'create'
 			? {
 					question: {
-						question: { required },
+						question: {
+							required,
+						},
 					},
 				}
 			: {
@@ -83,8 +85,13 @@ const v$ = useVuelidate(
 					},
 				},
 	),
-	{ question: questionModel, answer: answerModel },
-	{ $autoDirty: true },
+	{
+		question: questionModel,
+		answer: answerModel,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 const component = computed(() => {
@@ -107,7 +114,9 @@ function activateQuestion() {
 	state.value = QuestionState.EDIT;
 }
 
-defineExpose({ activateQuestion });
+defineExpose({
+	activateQuestion,
+});
 
 // initialize validations
 onMounted(() => {

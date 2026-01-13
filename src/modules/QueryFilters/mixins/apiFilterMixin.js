@@ -1,7 +1,9 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	computed: {
 		locale() {
 			return this.filterSchema?.locale;
@@ -26,17 +28,31 @@ export default {
 			if (id?.length) {
 				let newValue;
 				if (this.multiple) {
-					const idsArr = Array.isArray(id) ? id : [id];
+					const idsArr = Array.isArray(id)
+						? id
+						: [
+								id,
+							];
 					this.setValue({
 						filter: this.filterQuery,
-						value: idsArr.map((id) => ({ id })),
+						value: idsArr.map((id) => ({
+							id,
+						})),
 					});
 					newValue = await this.fetchSelected(idsArr);
 				} else {
-					this.setValue({ filter: this.filterQuery, value: { id } });
+					this.setValue({
+						filter: this.filterQuery,
+						value: {
+							id,
+						},
+					});
 					newValue = await this.fetchSelected(id);
 				}
-				this.setValue({ filter: this.filterQuery, value: newValue });
+				this.setValue({
+					filter: this.filterQuery,
+					value: newValue,
+				});
 			}
 		},
 		fetchSelected() {},

@@ -112,7 +112,9 @@ export const createUserAccessStore = ({
 
 			if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
 				// return false;
-				return { path: '/access-denied' };
+				return {
+					path: '/access-denied',
+				};
 			}
 
 			return true;

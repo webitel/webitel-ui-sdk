@@ -52,7 +52,9 @@ const getSourcesList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -61,9 +63,14 @@ const getSource = async ({ itemId: id }) => {
 
 	try {
 		const response = await sourceService.locateSource(id);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -74,9 +81,13 @@ const addSource = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await sourceService.createSource(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -88,9 +99,13 @@ const updateSource = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await sourceService.updateSource(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -99,14 +114,20 @@ const deleteSource = async ({ id }) => {
 		const response = await sourceService.deleteSource(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getSourcesList({
 		...params,
-		fields: params.fields || ['id', 'name', 'type'],
+		fields: params.fields || [
+			'id',
+			'name',
+			'type',
+		],
 	});
 
 const CaseSourcesAPI = {

@@ -18,7 +18,9 @@ describe('WtTimepicker', () => {
 			stubs: {
 				WtTimeInput,
 			},
-			props: { format: 'mm' },
+			props: {
+				format: 'mm',
+			},
 		});
 		expect(wrapper.findAllComponents(WtTimeInput).length).toBe(1);
 	});
@@ -29,10 +31,14 @@ describe('WtTimepicker', () => {
 			// stubs: {
 			//   WtTimeInput,
 			// },
-			props: { value },
+			props: {
+				value,
+			},
 		});
 		wrapper.findAllComponents(WtTimeInput).at(0).vm.$emit('input', 21);
-		expect(wrapper.emitted().input[0]).toEqual([21 * 60 * 60]);
+		expect(wrapper.emitted().input[0]).toEqual([
+			21 * 60 * 60,
+		]);
 	});
 
 	it('Correctly converts value from HOUR time-input to output', () => {
@@ -41,10 +47,14 @@ describe('WtTimepicker', () => {
 			stubs: {
 				WtTimeInput,
 			},
-			props: { value },
+			props: {
+				value,
+			},
 		});
 		wrapper.findAllComponents(WtTimeInput).at(1).vm.$emit('input', 21);
-		expect(wrapper.emitted().input[0]).toEqual([21 * 60]);
+		expect(wrapper.emitted().input[0]).toEqual([
+			21 * 60,
+		]);
 	});
 
 	it('Correctly converts value from SEC time-input to output', () => {
@@ -53,9 +63,13 @@ describe('WtTimepicker', () => {
 			stubs: {
 				WtTimeInput,
 			},
-			props: { value },
+			props: {
+				value,
+			},
 		});
 		wrapper.findAllComponents(WtTimeInput).at(2).vm.$emit('input', 21);
-		expect(wrapper.emitted().input[0]).toEqual([21]);
+		expect(wrapper.emitted().input[0]).toEqual([
+			21,
+		]);
 	});
 });

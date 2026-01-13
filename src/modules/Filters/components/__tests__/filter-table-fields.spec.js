@@ -6,9 +6,15 @@ import FilterTableFields from '../filter-table-fields.vue';
 
 const filterSchema = {
 	name: 'fields',
-	value: ['field2'],
-	get: ['value'],
-	set: ['value'],
+	value: [
+		'field2',
+	],
+	get: [
+		'value',
+	],
+	set: [
+		'value',
+	],
 	restore: () => {},
 };
 
@@ -21,8 +27,16 @@ describe('FilterTableFields', () => {
 		});
 
 		const headers = [
-			{ value: 'f1', field: 'field1', show: false },
-			{ value: 'f2', field: 'field2', show: true },
+			{
+				value: 'f1',
+				field: 'field1',
+				show: false,
+			},
+			{
+				value: 'f2',
+				field: 'field2',
+				show: true,
+			},
 		];
 
 		const wrapper = mount(FilterTableFields, {
@@ -31,7 +45,9 @@ describe('FilterTableFields', () => {
 				headers,
 			},
 			global: {
-				plugins: [store],
+				plugins: [
+					store,
+				],
 			},
 		});
 		expect(wrapper.exists()).toBe(true);
@@ -45,8 +61,16 @@ describe('FilterTableFields', () => {
 		});
 
 		const headers = [
-			{ value: 'f1', field: 'field1', show: false },
-			{ value: 'f2', field: 'field2', show: true },
+			{
+				value: 'f1',
+				field: 'field1',
+				show: false,
+			},
+			{
+				value: 'f2',
+				field: 'field2',
+				show: true,
+			},
 		];
 
 		const wrapper = mount(FilterTableFields, {
@@ -56,17 +80,33 @@ describe('FilterTableFields', () => {
 				headers,
 			},
 			global: {
-				plugins: [store],
+				plugins: [
+					store,
+				],
 			},
 		});
 
-		wrapper.findComponent({ name: 'WtTableColumnSelect' }).vm.$emit('change', [
-			{ value: 'f1', field: 'field1', show: true },
-			{ value: 'f2', field: 'field2', show: false },
-		]);
+		wrapper
+			.findComponent({
+				name: 'WtTableColumnSelect',
+			})
+			.vm.$emit('change', [
+				{
+					value: 'f1',
+					field: 'field1',
+					show: true,
+				},
+				{
+					value: 'f2',
+					field: 'field2',
+					show: false,
+				},
+			]);
 
 		await wrapper.vm.$nextTick();
 
-		expect(store.getters['filters/GET_FILTER']('fields')).toEqual(['f1']);
+		expect(store.getters['filters/GET_FILTER']('fields')).toEqual([
+			'f1',
+		]);
 	});
 });

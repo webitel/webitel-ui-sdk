@@ -16,14 +16,21 @@ const options = [
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
 describe('Enum filter mixin', () => {
 	let wrapper;
 	const Component = {
 		render() {},
-		mixins: [enumFilterMixin],
+		mixins: [
+			enumFilterMixin,
+		],
 		data: () => ({
 			filterQuery: 'type',
 			options,
@@ -31,41 +38,73 @@ describe('Enum filter mixin', () => {
 	};
 
 	beforeEach(() => {
-		router.replace({ query: null });
+		router.replace({
+			query: null,
+		});
 	});
 
 	it('Correctly sets value from $route query', async () => {
-		await router.replace({ query: { type: [options[0].value] } });
+		await router.replace({
+			query: {
+				type: [
+					options[0].value,
+				],
+			},
+		});
 		wrapper = shallowMount(Component, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
 		});
 		await wrapper.vm.$nextTick();
-		expect(wrapper.vm.value).toEqual([options[0]]);
+		expect(wrapper.vm.value).toEqual([
+			options[0],
+		]);
 	});
 
 	it('Correctly sets single value from $route query', async () => {
-		await router.replace({ query: { type: options[0].value } });
+		await router.replace({
+			query: {
+				type: options[0].value,
+			},
+		});
 		wrapper = shallowMount(Component, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
 		});
 		await wrapper.vm.$nextTick();
-		expect(wrapper.vm.value).toEqual([options[0]]);
+		expect(wrapper.vm.value).toEqual([
+			options[0],
+		]);
 	});
 
 	it('Resets value after $route query reset', async () => {
-		await router.replace({ query: { type: [options[0].value] } });
+		await router.replace({
+			query: {
+				type: [
+					options[0].value,
+				],
+			},
+		});
 		wrapper = shallowMount(Component, {
 			global: {
-				plugins: [router],
+				plugins: [
+					router,
+				],
 			},
 		});
 		await wrapper.vm.$nextTick();
-		expect(wrapper.vm.value).toEqual([options[0]]);
-		await wrapper.vm.$router.replace({ query: null });
+		expect(wrapper.vm.value).toEqual([
+			options[0],
+		]);
+		await wrapper.vm.$router.replace({
+			query: null,
+		});
 		await wrapper.vm.$nextTick();
 		expect(wrapper.vm.value).toEqual([]);
 	});

@@ -15,7 +15,9 @@ const WebitelTheme = definePreset(Aura, {
 	extend,
 
 	css: ({ dt }) => `
-    ${playerCss({ dt })}
+    ${playerCss({
+			dt,
+		})}
   `,
 
 	primitive,

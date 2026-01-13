@@ -37,7 +37,9 @@ const convertRelativeDatetimeToTimestamp = (
 			case RelativeDatetimeValue.Today:
 				return endOfToday().getTime();
 			case RelativeDatetimeValue.ThisWeek:
-				return endOfWeek(Date.now(), { weekStartsOn: 1 }).getTime();
+				return endOfWeek(Date.now(), {
+					weekStartsOn: 1,
+				}).getTime();
 			case RelativeDatetimeValue.ThisMonth:
 				return endOfMonth(Date.now()).getTime();
 			default:
@@ -48,7 +50,9 @@ const convertRelativeDatetimeToTimestamp = (
 		case RelativeDatetimeValue.Today:
 			return startOfToday().getTime();
 		case RelativeDatetimeValue.ThisWeek:
-			return startOfWeek(Date.now(), { weekStartsOn: 1 }).getTime();
+			return startOfWeek(Date.now(), {
+				weekStartsOn: 1,
+			}).getTime();
 		case RelativeDatetimeValue.ThisMonth:
 			return startOfMonth(Date.now()).getTime();
 		default:

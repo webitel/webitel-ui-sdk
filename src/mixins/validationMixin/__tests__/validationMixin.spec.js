@@ -6,7 +6,9 @@ describe('Validation mixin', () => {
 	let wrapper;
 	const Component = {
 		render() {},
-		mixins: [validationMixin],
+		mixins: [
+			validationMixin,
+		],
 	};
 
 	it('detects validation prop', () => {
@@ -26,7 +28,9 @@ describe('Validation mixin', () => {
 			props: {
 				v: {
 					$error: true,
-					email: { $invalid: true },
+					email: {
+						$invalid: true,
+					},
 				},
 			},
 		});
@@ -38,7 +42,9 @@ describe('Validation mixin', () => {
 			props: {
 				v: {
 					$error: true,
-					required: { $invalid: true },
+					required: {
+						$invalid: true,
+					},
 				},
 			},
 		});

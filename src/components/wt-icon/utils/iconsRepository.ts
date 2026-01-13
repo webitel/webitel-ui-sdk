@@ -13,7 +13,10 @@ const iconsRepository = new Map<
 >();
 
 fillIconsRepository({
-	icons: Object.entries(icons).map(([iconName, svg]) => ({ iconName, svg })),
+	icons: Object.entries(icons).map(([iconName, svg]) => ({
+		iconName,
+		svg,
+	})),
 });
 
 export function getIconFromRepository(iconName: string) {

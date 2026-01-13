@@ -25,7 +25,9 @@ describe('features/notifications store: mutations', () => {
 	});
 
 	it('SET_BROADCAST_CHANNEL sets broadcastChannel to state', () => {
-		const state = { broadcastChannel: null };
+		const state = {
+			broadcastChannel: null,
+		};
 		const channel = new BroadcastChannel('test channel');
 		notificationsModule.mutations.SET_BROADCAST_CHANNEL(state, channel);
 		expect(state.broadcastChannel).toEqual(channel);

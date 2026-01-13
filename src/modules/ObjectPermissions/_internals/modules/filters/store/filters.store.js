@@ -11,7 +11,9 @@ const filtersList = [
 		name: 'size',
 		value: 10,
 	},
-	{ name: 'sort' },
+	{
+		name: 'sort',
+	},
 ];
 
 export default () => {

@@ -261,7 +261,11 @@ const applicationsAccess = (value = true) => ({
  */
 export default class ApplicationsAccess {
 	// value param could be passed to set same value for all options
-	constructor({ access, value } = { value: true }) {
+	constructor(
+		{ access, value } = {
+			value: true,
+		},
+	) {
 		/* if access, deeply merge with falsy values schema
      if no access, "not configured => full permissions" */
 		this.access = access

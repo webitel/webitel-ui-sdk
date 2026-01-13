@@ -14,8 +14,12 @@ describe('FiltersStoreModule', () => {
 					name: 'vi',
 					value: 1,
 					defaultValue: 1,
-					get: ['value'],
-					set: ['value'],
+					get: [
+						'value',
+					],
+					set: [
+						'value',
+					],
 					restore: [],
 				},
 			])
@@ -48,9 +52,16 @@ describe('FiltersStoreModule', () => {
 				name: 'vi',
 				value: 1,
 				localStorageKey,
-				get: ['value'],
-				set: ['value', 'localStorage'],
-				restore: ['localStorage'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+					'localStorage',
+				],
+				restore: [
+					'localStorage',
+				],
 			})
 			.getModule();
 
@@ -70,7 +81,9 @@ describe('FiltersStoreModule', () => {
 
 		expect(localStorage.getItem(localStorageKey)).toBe('2');
 
-		await store.dispatch('filters/RESTORE_FILTER', { name: 'vi' });
+		await store.dispatch('filters/RESTORE_FILTER', {
+			name: 'vi',
+		});
 
 		expect(store.getters['filters/GET_FILTER']('vi')).toBe('2');
 	});
@@ -87,7 +100,9 @@ describe('FiltersStoreModule', () => {
 			],
 		});
 
-		await router.push({ name: 'home' });
+		await router.push({
+			name: 'home',
+		});
 
 		const filters = new FiltersStoreModule()
 			.addFilter({
@@ -126,7 +141,9 @@ describe('FiltersStoreModule', () => {
 			value: '2',
 		});
 
-		await store.dispatch('filters/RESTORE_FILTER', { name: 'vi' });
+		await store.dispatch('filters/RESTORE_FILTER', {
+			name: 'vi',
+		});
 
 		expect(store.getters['filters/GET_FILTER']('vi')).toBe('2');
 	});
@@ -143,15 +160,24 @@ describe('FiltersStoreModule', () => {
 			],
 		});
 
-		await router.push({ name: 'home' });
+		await router.push({
+			name: 'home',
+		});
 
 		const filters = new FiltersStoreModule()
 			.addFilter({
 				name: 'vi',
 				value: 1,
-				get: ['value'],
-				set: ['value', 'query'],
-				restore: ['query'],
+				get: [
+					'value',
+				],
+				set: [
+					'value',
+					'query',
+				],
+				restore: [
+					'query',
+				],
 				router,
 			})
 			.getModule();
@@ -170,7 +196,9 @@ describe('FiltersStoreModule', () => {
 			value: '2',
 		});
 
-		await store.dispatch('filters/RESTORE_FILTER', { name: 'vi' });
+		await store.dispatch('filters/RESTORE_FILTER', {
+			name: 'vi',
+		});
 
 		expect(store.getters['filters/GET_FILTER']('vi')).toBe('2');
 	});

@@ -36,8 +36,12 @@ const linkComponent = props.disabled
 const linkAttrs = props.disabled
 	? {}
 	: props.logoRoute
-		? { to: props.logoRoute }
-		: { href: href.value };
+		? {
+				to: props.logoRoute,
+			}
+		: {
+				href: href.value,
+			};
 </script>
 
 <template>

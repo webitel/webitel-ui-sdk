@@ -133,7 +133,6 @@ function close() {
 .wt-app-navigator__nav-wrappe {
   position: absolute;
   top: 100%;
-  /* icon */
   right: 0;
   transition: var(--transition);
   margin-top: var(--wt-app-header-content-panel-margin);

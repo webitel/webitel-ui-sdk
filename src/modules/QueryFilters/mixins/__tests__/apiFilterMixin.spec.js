@@ -6,17 +6,27 @@ import apiFilterMixin from '../apiFilterMixin.js';
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
-const team = ['1', '2'];
+const team = [
+	'1',
+	'2',
+];
 const filterSchema = new ApiFilterSchema();
 
 describe('API filter mixin', () => {
 	const setValue = vi.fn();
 	const Component = {
 		render() {},
-		mixins: [apiFilterMixin],
+		mixins: [
+			apiFilterMixin,
+		],
 		data: () => ({
 			filterQuery: 'team',
 		}),
@@ -25,29 +35,54 @@ describe('API filter mixin', () => {
 				return filterSchema;
 			},
 		},
-		methods: { setValue },
+		methods: {
+			setValue,
+		},
 	};
 
 	beforeEach(async () => {
 		setValue.mockClear();
-		await router.replace({ query: null });
+		await router.replace({
+			query: null,
+		});
 	});
 
 	it('Correctly sets value from $route query', async () => {
-		await router.replace({ query: { team } });
+		await router.replace({
+			query: {
+				team,
+			},
+		});
 		const wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
+			global: {
+				plugins: [
+					router,
+				],
+			},
 		});
 		expect(setValue).toHaveBeenCalledWith({
 			filter: 'team',
-			value: [{ id: team[0] }, { id: team[1] }],
+			value: [
+				{
+					id: team[0],
+				},
+				{
+					id: team[1],
+				},
+			],
 		});
 	});
 
 	it('Sets empty array value if $route query is empty', async () => {
 		const wrapper = shallowMount(Component, {
-			global: { plugins: [router] },
-			data: () => ({ filterQuery: 'queue' }),
+			global: {
+				plugins: [
+					router,
+				],
+			},
+			data: () => ({
+				filterQuery: 'queue',
+			}),
 		});
 		expect(setValue).not.toHaveBeenCalled();
 	});

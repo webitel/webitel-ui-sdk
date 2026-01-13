@@ -25,16 +25,25 @@ export default {
 		type: {
 			type: String,
 			required: true,
-			options: ['403', '404'],
+			options: [
+				'403',
+				'404',
+			],
 		},
 	},
 	computed: {
 		errorPic() {
 			switch (this.type) {
 				case '403':
-					return { src: pic403, alt: 'Forbidden pic' };
+					return {
+						src: pic403,
+						alt: 'Forbidden pic',
+					};
 				case '404':
-					return { src: pic404, alt: 'Not found pic' };
+					return {
+						src: pic404,
+						alt: 'Not found pic',
+					};
 				default:
 					return '';
 			}

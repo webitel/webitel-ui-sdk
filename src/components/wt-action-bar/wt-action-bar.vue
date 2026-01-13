@@ -48,7 +48,11 @@ const props = defineProps({
 	mode: {
 		type: String,
 		default: 'table',
-		validator: (v) => ['table', 'section'].includes(v),
+		validator: (v) =>
+			[
+				'table',
+				'section',
+			].includes(v),
 	},
 
 	/**
@@ -89,7 +93,10 @@ const props = defineProps({
 	},
 
 	...Object.values(IconAction).reduce((acc, action) => {
-		acc[`disabled:${action}`] = { type: Boolean, default: false };
+		acc[`disabled:${action}`] = {
+			type: Boolean,
+			default: false,
+		};
 		return acc;
 	}, {}),
 });

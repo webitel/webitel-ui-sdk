@@ -27,10 +27,19 @@ describe('Base Store Module', () => {
 		expect(_module.actions.DELETE_ITEM).toBeTruthy();
 	});
 	it('generated GET_LIST correctly gets passed params', () => {
-		const state = { jest: 'jest' };
-		const params = { jest2: 'jest1' };
-		const context = { state };
-		const expectedParams = { jest: 'jest', jest2: 'jest1' };
+		const state = {
+			jest: 'jest',
+		};
+		const params = {
+			jest2: 'jest1',
+		};
+		const context = {
+			state,
+		};
+		const expectedParams = {
+			jest: 'jest',
+			jest2: 'jest1',
+		};
 		const _module = module
 			.attachAPIModule(APIModule)
 			.generateAPIActions()
@@ -39,10 +48,19 @@ describe('Base Store Module', () => {
 		expect(APIModule.getList).toHaveBeenCalledWith(expectedParams);
 	});
 	it('generated GET_ITEM correctly gets passed params', () => {
-		const state = { jest: 'jest' };
-		const params = { jest2: 'jest1' };
-		const context = { state };
-		const expectedParams = { jest: 'jest', jest2: 'jest1' };
+		const state = {
+			jest: 'jest',
+		};
+		const params = {
+			jest2: 'jest1',
+		};
+		const context = {
+			state,
+		};
+		const expectedParams = {
+			jest: 'jest',
+			jest2: 'jest1',
+		};
 		const _module = module
 			.attachAPIModule(APIModule)
 			.generateAPIActions()
@@ -51,9 +69,15 @@ describe('Base Store Module', () => {
 		expect(APIModule.get).toHaveBeenCalledWith(expectedParams);
 	});
 	it('generated POST_ITEM correctly gets passed params', () => {
-		const state = { jest: 'jest' };
-		const context = { state };
-		const expectedParams = { jest: 'jest' };
+		const state = {
+			jest: 'jest',
+		};
+		const context = {
+			state,
+		};
+		const expectedParams = {
+			jest: 'jest',
+		};
 		const _module = module
 			.attachAPIModule(APIModule)
 			.generateAPIActions()
@@ -62,13 +86,24 @@ describe('Base Store Module', () => {
 		expect(APIModule.add).toHaveBeenCalledWith(expectedParams);
 	});
 	it('generated PATCH_ITEM correctly gets passed params', () => {
-		const state = { jest: 'jest' };
-		const params = { id: '1', changes: { jest: 'my change!' } };
-		const context = { state };
+		const state = {
+			jest: 'jest',
+		};
+		const params = {
+			id: '1',
+			changes: {
+				jest: 'my change!',
+			},
+		};
+		const context = {
+			state,
+		};
 		const expectedParams = {
 			jest: 'jest',
 			id: '1',
-			changes: { jest: 'my change!' },
+			changes: {
+				jest: 'my change!',
+			},
 		};
 		const _module = module
 			.attachAPIModule(APIModule)
@@ -78,9 +113,15 @@ describe('Base Store Module', () => {
 		expect(APIModule.patch).toHaveBeenCalledWith(expectedParams);
 	});
 	it('generated UPD_ITEM correctly gets passed params', () => {
-		const state = { jest: 'jest' };
-		const context = { state };
-		const expectedParams = { jest: 'jest' };
+		const state = {
+			jest: 'jest',
+		};
+		const context = {
+			state,
+		};
+		const expectedParams = {
+			jest: 'jest',
+		};
 		const _module = module
 			.attachAPIModule(APIModule)
 			.generateAPIActions()
@@ -89,10 +130,17 @@ describe('Base Store Module', () => {
 		expect(APIModule.update).toHaveBeenCalledWith(expectedParams);
 	});
 	it('generated DELETE_ITEM correctly gets passed params', () => {
-		const state = { jest: 'jest' };
+		const state = {
+			jest: 'jest',
+		};
 		const params = '1';
-		const context = { state };
-		const expectedParams = { jest: 'jest', id: '1' };
+		const context = {
+			state,
+		};
+		const expectedParams = {
+			jest: 'jest',
+			id: '1',
+		};
 		const _module = module
 			.attachAPIModule(APIModule)
 			.generateAPIActions()
@@ -101,8 +149,16 @@ describe('Base Store Module', () => {
 		expect(APIModule.delete).toHaveBeenCalledWith(expectedParams);
 	});
 	it('sets child modules', () => {
-		const jest = { state: 'jest' };
-		const _module = module.setChildModules({ jest }).getModule();
-		expect(_module.modules).toEqual({ jest });
+		const jest = {
+			state: 'jest',
+		};
+		const _module = module
+			.setChildModules({
+				jest,
+			})
+			.getModule();
+		expect(_module.modules).toEqual({
+			jest,
+		});
 	});
 });

@@ -125,9 +125,14 @@ interface Props extends GalleriaProps {
 
 const props = defineProps<Props>();
 
-const emit = defineEmits(['download', 'delete']);
+const emit = defineEmits([
+	'download',
+	'delete',
+]);
 
-const visible = defineModel<boolean>('visible', { required: true });
+const visible = defineModel<boolean>('visible', {
+	required: true,
+});
 const activeIndex = defineModel<number>('activeIndex', {
 	default: 0,
 	required: false,
@@ -173,7 +178,9 @@ watch(
 		if (oldValue?.src == newValue?.src) return;
 		isImageOnLoad.value = true;
 	},
-	{ deep: true },
+	{
+		deep: true,
+	},
 );
 
 watch(

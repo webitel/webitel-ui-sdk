@@ -7,8 +7,12 @@ import isEmpty from '../../../scripts/isEmpty.js';
 import labelUsageMixin from '../../wt-label/mixins/labelUsageMixin.js';
 
 export default {
-	mixins: [labelUsageMixin],
-	directives: { ObserveVisibility },
+	mixins: [
+		labelUsageMixin,
+	],
+	directives: {
+		ObserveVisibility,
+	},
 	components: {
 		VueMultiselect,
 	},
@@ -97,7 +101,9 @@ export default {
 				console.warn(
 					'wt-select: value prop should be an array when using multiple mode',
 				);
-				returnedValue = [returnedValue];
+				returnedValue = [
+					returnedValue,
+				];
 			}
 
 			if (this.useValueFromOptionsByProp) {
@@ -166,7 +172,10 @@ export default {
 
 		async fetchOptions({ search, page } = this.searchParams) {
 			if (!this.isApiMode) return;
-			const { items, next } = await this.searchMethod({ search, page });
+			const { items, next } = await this.searchMethod({
+				search,
+				page,
+			});
 			this.apiOptions =
 				this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
 			this.searchHasNext = next;
@@ -225,7 +234,9 @@ export default {
 				if (this.useValueFromOptionsByProp && this.isApiMode) {
 					const valuesArr = Array.isArray(this.value)
 						? this.value
-						: [this.value];
+						: [
+								this.value,
+							];
 					const uncachedValues = valuesArr.filter(() => {
 						return !this.cachedOptionsMap[this.value];
 					});

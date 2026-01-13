@@ -8,7 +8,9 @@ const queryGetter = (context) => (router) => () => {
 	const value = query[context.name];
 
 	if (value && context?.multiple && !Array.isArray(value)) {
-		return [value];
+		return [
+			value,
+		];
 	}
 
 	return value;

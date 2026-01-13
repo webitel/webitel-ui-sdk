@@ -41,7 +41,10 @@ export default {
 			default: AgentStatus.OFFLINE,
 		},
 		statusDuration: {
-			type: [String, Number],
+			type: [
+				String,
+				Number,
+			],
 			default: 0,
 		},
 		options: {
@@ -53,7 +56,10 @@ export default {
 		//   options: ['sm', 'md'],
 		// },
 	},
-	emits: ['change', 'closed'],
+	emits: [
+		'change',
+		'closed',
+	],
 	computed: {
 		selectedOption() {
 			return this.statusOptions.find((option) => option.value === this.status);
@@ -76,7 +82,10 @@ export default {
 					// skip breakout option
 					return options;
 				}
-				return [...options, opt];
+				return [
+					...options,
+					opt,
+				];
 			}, []);
 		},
 		duration() {

@@ -66,7 +66,12 @@ import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
 
 interface Props {
-	src?: string | { src: string; type?: string };
+	src?:
+		| string
+		| {
+				src: string;
+				type?: string;
+		  };
 	mime?: string;
 	autoplay?: boolean;
 	muted?: boolean;
@@ -97,7 +102,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
 	close: [];
-	'change-size': [ComponentSize];
+	'change-size': [
+		ComponentSize,
+	];
 }>();
 
 const player = useTemplateRef<MediaPlayerElement>('player');
@@ -112,7 +119,11 @@ const changeSize = (value) => {
 /** @author liza-pohranichna
  * options: [sm, md, lg]
  */
-provide('size', { size, fullscreen, changeSize });
+provide('size', {
+	size,
+	fullscreen,
+	changeSize,
+});
 
 const normalizedType = computed(() => {
 	// https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
@@ -130,11 +141,17 @@ const normalizedType = computed(() => {
 
 const normalizedSrc = computed(() => {
 	if (props.stream) {
-		return { src: props.stream, type: 'video/object' };
+		return {
+			src: props.stream,
+			type: 'video/object',
+		};
 	}
 
 	if (typeof props.src === 'string') {
-		return { src: props.src, type: normalizedType.value };
+		return {
+			src: props.src,
+			type: normalizedType.value,
+		};
 	}
 
 	return {

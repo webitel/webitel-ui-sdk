@@ -8,7 +8,12 @@ import FilterFromTo from '../filter-from-to.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
 describe('FilterFromTo Filter', () => {
@@ -27,7 +32,12 @@ describe('FilterFromTo Filter', () => {
 	});
 
 	const mountOptions = {
-		global: { plugins: [store, router] },
+		global: {
+			plugins: [
+				store,
+				router,
+			],
+		},
 		props: {
 			namespace,
 			filterQuery,
@@ -39,7 +49,11 @@ describe('FilterFromTo Filter', () => {
 	});
 	it('initial restoreValue() triggers setValue() method: From case', async () => {
 		const value = 10;
-		await router.replace({ query: { [`${filterQuery}From`]: value } });
+		await router.replace({
+			query: {
+				[`${filterQuery}From`]: value,
+			},
+		});
 		const setValueMock = vi.fn();
 		vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementation(
 			setValueMock,
@@ -47,12 +61,19 @@ describe('FilterFromTo Filter', () => {
 		shallowMount(FilterFromTo, mountOptions);
 		expect(setValueMock).toHaveBeenNthCalledWith(1, {
 			filter: filterQuery,
-			value: { to: undefined, from: value },
+			value: {
+				to: undefined,
+				from: value,
+			},
 		});
 	});
 	it('initial restoreValue() triggers setValue() method: To case', async () => {
 		const value = 10;
-		await router.replace({ query: { [`${filterQuery}To`]: value } });
+		await router.replace({
+			query: {
+				[`${filterQuery}To`]: value,
+			},
+		});
 		const setValueMock = vi.fn();
 		vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementation(
 			setValueMock,
@@ -60,7 +81,10 @@ describe('FilterFromTo Filter', () => {
 		shallowMount(FilterFromTo, mountOptions);
 		expect(setValueMock).toHaveBeenNthCalledWith(2, {
 			filter: filterQuery,
-			value: { to: value, from: undefined },
+			value: {
+				to: value,
+				from: undefined,
+			},
 		});
 	});
 });

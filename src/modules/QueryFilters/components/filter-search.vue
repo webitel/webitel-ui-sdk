@@ -13,7 +13,9 @@ import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
 	name: 'FilterSearch',
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	props: {
 		filterQuery: {
 			type: String,
@@ -22,7 +24,10 @@ export default {
 	},
 	methods: {
 		restoreValue(value) {
-			this.setValue({ filter: this.filterQuery, value });
+			this.setValue({
+				filter: this.filterQuery,
+				value,
+			});
 		},
 	},
 };

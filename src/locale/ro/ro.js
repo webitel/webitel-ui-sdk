@@ -29,7 +29,11 @@ export default {
 		replace: 'Înlocuiește',
 		download: 'Descarcă',
 		history: 'Istoric',
-		filter: ({ plural }) => plural(['Filtru', 'Filtre']),
+		filter: ({ plural }) =>
+			plural([
+				'Filtru',
+				'Filtre',
+			]),
 		total: 'Total',
 		ok: 'Ok',
 		object: 'Obiect',
@@ -316,7 +320,9 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: { name: 'Spațiu Agent' },
+		[WebitelApplications.AGENT]: {
+			name: 'Spațiu Agent',
+		},
 		[WebitelApplications.AUDIT]: {
 			name: 'Audit',
 			sections: {
@@ -337,8 +343,12 @@ export default {
 				[CrmSections.ContactGroups]: 'Grupuri contacte',
 			},
 		},
-		[WebitelApplications.HISTORY]: { name: 'Istoric apeluri' },
-		[WebitelApplications.ANALYTICS]: { name: 'Instrument vizualizare date' },
+		[WebitelApplications.HISTORY]: {
+			name: 'Istoric apeluri',
+		},
+		[WebitelApplications.ANALYTICS]: {
+			name: 'Instrument vizualizare date',
+		},
 		[WebitelApplications.SUPERVISOR]: {
 			name: 'Spațiu Supervizor',
 			sections: {
@@ -390,7 +400,9 @@ export default {
 				[AdminSections.QuickReplies]: 'Răspunsuri rapide',
 			},
 		},
-		[WebitelApplications.WFM]: { name: 'WFM' },
+		[WebitelApplications.WFM]: {
+			name: 'WFM',
+		},
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Camera este oprită',
 		},

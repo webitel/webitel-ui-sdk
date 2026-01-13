@@ -8,7 +8,12 @@ import SearchFilter from '../filter-search.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: [{ path: '/', name: 'jest' }],
+	routes: [
+		{
+			path: '/',
+			name: 'jest',
+		},
+	],
 });
 
 describe('Search Filter', () => {
@@ -27,7 +32,12 @@ describe('Search Filter', () => {
 	});
 
 	const mountOptions = {
-		global: { plugins: [store, router] },
+		global: {
+			plugins: [
+				store,
+				router,
+			],
+		},
 		props: {
 			namespace,
 			filterQuery,
@@ -39,7 +49,11 @@ describe('Search Filter', () => {
 	});
 	it('initial restoreValue() triggers setValue() method', async () => {
 		const search = 'jest';
-		await router.replace({ query: { [filterQuery]: search } });
+		await router.replace({
+			query: {
+				[filterQuery]: search,
+			},
+		});
 		const setValueMock = vi.fn();
 		vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(
 			setValueMock,

@@ -1,7 +1,9 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 
 	props: {
 		isNext: {
@@ -42,12 +44,18 @@ export default {
 
 		restorePage() {
 			const page = '1';
-			this.page = this.getValueFromQuery({ filterQuery: 'page' }) || page;
+			this.page =
+				this.getValueFromQuery({
+					filterQuery: 'page',
+				}) || page;
 		},
 
 		restoreSize() {
 			const size = '10';
-			this.size = this.getValueFromQuery({ filterQuery: 'size' }) || size;
+			this.size =
+				this.getValueFromQuery({
+					filterQuery: 'size',
+				}) || size;
 		},
 
 		next() {

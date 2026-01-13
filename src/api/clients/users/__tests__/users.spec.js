@@ -23,7 +23,11 @@ describe('UsersAPI', () => {
 		const UsersAPI = (await import('../users.js')).default;
 
 		const inputParams = {
-			fields: ['id', 'name', 'vitest'],
+			fields: [
+				'id',
+				'name',
+				'vitest',
+			],
 		};
 		const url = '/users?fields=id&fields=name&fields=vitest&page=1&size=10';
 		await UsersAPI.getList(inputParams);
@@ -47,7 +51,12 @@ describe('UsersAPI', () => {
 
 		const response = {
 			data: {
-				items: [{ id: 1, should_case_convert: '' }],
+				items: [
+					{
+						id: 1,
+						should_case_convert: '',
+					},
+				],
 				next: true,
 			},
 		};
@@ -158,7 +167,11 @@ describe('UsersAPI', () => {
 
 		const UsersAPI = (await import('../users.js')).default;
 
-		expect(await UsersAPI.add({ itemInstance: {} })).toEqual(output);
+		expect(
+			await UsersAPI.add({
+				itemInstance: {},
+			}),
+		).toEqual(output);
 	});
 
 	it('correctly computes "update" method api call', async () => {
@@ -209,9 +222,12 @@ describe('UsersAPI', () => {
 
 		const UsersAPI = (await import('../users.js')).default;
 
-		expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 })).toEqual(
-			output,
-		);
+		expect(
+			await UsersAPI.update({
+				itemInstance: {},
+				itemId: 1,
+			}),
+		).toEqual(output);
 	});
 
 	it('correctly computes "patch" method api call', async () => {

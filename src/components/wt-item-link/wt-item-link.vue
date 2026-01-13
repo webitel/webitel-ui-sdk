@@ -17,7 +17,10 @@ import { computed } from 'vue';
 
 const props = defineProps({
 	link: {
-		type: [String, Object],
+		type: [
+			String,
+			Object,
+		],
 		default: '',
 	},
 
@@ -42,7 +45,10 @@ const props = defineProps({
 	 * @deprecated
 	 */
 	id: {
-		type: [String, Number],
+		type: [
+			String,
+			Number,
+		],
 		default: '',
 	},
 
@@ -64,7 +70,9 @@ const to = computed(
 	() =>
 		props.link || {
 			name: `${props.routeName}-edit`,
-			params: { id: props.id },
+			params: {
+				id: props.id,
+			},
 		},
 );
 </script>

@@ -53,7 +53,9 @@ export function useCSVExport({ selected }: { selected: Ref<number[]> }) {
 		try {
 			await CSVExportInstance.value?.export(params);
 		} catch (err) {
-			throw applyTransform(err, [notify]);
+			throw applyTransform(err, [
+				notify,
+			]);
 		}
 	}
 

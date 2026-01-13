@@ -49,20 +49,15 @@ export default {
 };
 </script>
 
-<style >.expand-enter-active,
+<style>
+.expand-enter-active,
 .expand-leave-active {
-transition: height var(--transition);
+  transition: height var(--transition);
   overflow: hidden;
 }
 
 .expand-enter,
 .expand-leave-to {
-height: 0;
+  height: 0;
 }
-
-/*
-  // expand animation optimization
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
- */</style>
+ </style>

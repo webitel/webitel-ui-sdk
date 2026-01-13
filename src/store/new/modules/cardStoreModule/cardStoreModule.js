@@ -17,30 +17,42 @@ const actions = {
 	},
 	LOAD_ITEM: async (context) => {
 		if (context.state.itemId) {
-			const item = await context.dispatch('api/GET_ITEM', { context });
+			const item = await context.dispatch('api/GET_ITEM', {
+				context,
+			});
 			context.commit('SET_ITEM', item);
 		}
 	},
 	ADD_ITEM: async (context) => {
 		if (!context.state.itemId) {
-			const { id } = await context.dispatch('api/POST_ITEM', { context });
+			const { id } = await context.dispatch('api/POST_ITEM', {
+				context,
+			});
 			await context.dispatch('SET_ITEM_ID', id);
 			context.dispatch('LOAD_ITEM');
 		}
 	},
 	UPDATE_ITEM: async (context) => {
-		await context.dispatch('api/UPD_ITEM', { context });
+		await context.dispatch('api/UPD_ITEM', {
+			context,
+		});
 		context.dispatch('LOAD_ITEM');
 	},
 	SET_ITEM_PROPERTY: (context, payload) => {
 		context.commit('SET_ITEM_PROPERTY', payload);
-		context.commit('SET_ITEM_PROPERTY', { path: '_dirty', value: true });
+		context.commit('SET_ITEM_PROPERTY', {
+			path: '_dirty',
+			value: true,
+		});
 	},
 	RESET_ITEM_STATE: async (context) => {
 		context.commit('RESET_ITEM_STATE');
 	},
 	DELETE_ITEM: async (context, { id }) => {
-		await context.dispatch('api/DELETE_ITEM', { context, id });
+		await context.dispatch('api/DELETE_ITEM', {
+			context,
+			id,
+		});
 	},
 };
 

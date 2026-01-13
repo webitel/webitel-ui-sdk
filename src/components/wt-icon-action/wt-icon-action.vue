@@ -51,7 +51,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['click', 'mousedown']);
+const emit = defineEmits([
+	'click',
+	'mousedown',
+]);
 
 const { t } = useI18n();
 
@@ -62,7 +65,10 @@ const iconAction = computed(() => {
 		console.error(
 			`Unknown action for wt-icon-action component: ${props.action}`,
 		);
-		return { icon: 'edit', hint: props.action };
+		return {
+			icon: 'edit',
+			hint: props.action,
+		};
 	}
 
 	return {

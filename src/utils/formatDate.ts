@@ -25,5 +25,7 @@ export function formatDate(
 		datetimeShort: 'Pp', // dd.MM.yyyy, HH:mm (13.11.2025, 15:53)
 	};
 
-	return formatInTimeZone(date, timeZone, formatStringMap[to], { locale: uk });
+	return formatInTimeZone(date, timeZone, formatStringMap[to], {
+		locale: uk,
+	});
 }

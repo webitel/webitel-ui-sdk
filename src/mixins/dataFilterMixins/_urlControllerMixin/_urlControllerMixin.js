@@ -3,7 +3,9 @@ import deepEqual from 'deep-equal';
 export default {
 	methods: {
 		changeRouteQuery({ filterQuery, value }) {
-			const query = { ...this.$route.query };
+			const query = {
+				...this.$route.query,
+			};
 			query[filterQuery] = value;
 			return this.$router.replace({
 				name: this.$router.currentRoute.name,

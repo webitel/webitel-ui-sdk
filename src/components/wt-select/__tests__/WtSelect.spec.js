@@ -21,7 +21,9 @@ describe('WtSelect', () => {
 				WtLabel,
 				WtIcon: true,
 			},
-			props: { label },
+			props: {
+				label,
+			},
 		});
 		expect(wrapper.find('.wt-label').text()).toBe(label);
 	});

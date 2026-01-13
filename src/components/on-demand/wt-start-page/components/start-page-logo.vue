@@ -13,9 +13,11 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>.start-page-logo {
-display: flex;
+<style scoped>
+.start-page-logo {
+  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 200px;
-}</style>
+}
+</style>

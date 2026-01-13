@@ -39,7 +39,10 @@ export default {
 		 * @example '<wt-indicator text="Sample Text"></wt-indicator>'
 		 */
 		text: {
-			type: [String, Number],
+			type: [
+				String,
+				Number,
+			],
 		},
 		/**
 		 * The size of the component
@@ -50,7 +53,10 @@ export default {
 		size: {
 			type: String,
 			default: 'md',
-			options: ['sm', 'md'],
+			options: [
+				'sm',
+				'md',
+			],
 		},
 	},
 

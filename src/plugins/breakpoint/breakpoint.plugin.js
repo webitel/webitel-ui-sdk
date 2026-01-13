@@ -123,7 +123,9 @@ const onResize = () => {
 };
 
 const install = (app) => {
-	window.addEventListener('resize', debounce(onResize), { passive: true });
+	window.addEventListener('resize', debounce(onResize), {
+		passive: true,
+	});
 
 	onResize();
 

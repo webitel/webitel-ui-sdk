@@ -14,7 +14,9 @@ describe('Abstract Enum Filter', () => {
 	const namespace = 'jest';
 	const filterQuery = 'jest';
 	const filterSchema = new EnumFilterSchema({
-		locale: { label: '' },
+		locale: {
+			label: '',
+		},
 	});
 	const store = createStore({
 		modules: {
@@ -28,7 +30,12 @@ describe('Abstract Enum Filter', () => {
 	});
 
 	const mountOptions = {
-		global: { plugins: [store, router] },
+		global: {
+			plugins: [
+				store,
+				router,
+			],
+		},
 		props: {
 			namespace,
 			filterQuery,

@@ -33,7 +33,13 @@ const props = defineProps({
 	 */
 	color: {
 		type: String,
-		options: ['primary', 'secondary', 'success', 'error', 'transfer'],
+		options: [
+			'primary',
+			'secondary',
+			'success',
+			'error',
+			'transfer',
+		],
 		default: 'secondary',
 	},
 	/**
@@ -67,7 +73,9 @@ const props = defineProps({
 		default: false,
 	},
 });
-const emit = defineEmits(['click']);
+const emit = defineEmits([
+	'click',
+]);
 const showLoader = ref(false);
 
 const loaderSize = computed(() => (props.size === 'sm' ? 'xs' : 'sm')); // for matching wt-loader sizes with wt-rounded-action sizes
@@ -92,7 +100,9 @@ watch(
 			}, 1000); // why 1s? https://ux.stackexchange.com/a/104782
 		}
 	},
-	{ immediate: true },
+	{
+		immediate: true,
+	},
 );
 </script>
 

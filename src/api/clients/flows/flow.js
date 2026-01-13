@@ -32,9 +32,18 @@ const flowService = new RoutingSchemaServiceApiFactory(
 CONVERT "SCHEMA" FIELD TO JSON TO PREVENT ITS CHANGE
 BY CAMEL-SNAKE TRANSFORMERS
  */
-const doNotConvertKeys = ['schema'];
+const doNotConvertKeys = [
+	'schema',
+];
 
-const fieldsToSend = ['name', 'schema', 'type', 'payload', 'editor', 'tags'];
+const fieldsToSend = [
+	'name',
+	'schema',
+	'type',
+	'payload',
+	'editor',
+	'tags',
+];
 
 const getFlowList = async (params) => {
 	const defaultObject = {
@@ -49,7 +58,9 @@ const getFlowList = async (params) => {
 	if (paramsCopy.type) {
 		const _type = Array.isArray(paramsCopy.type)
 			? paramsCopy.type
-			: [paramsCopy.type];
+			: [
+					paramsCopy.type,
+				];
 		if (!paramsCopy.type.includes(EngineRoutingSchemaType.Default)) {
 			_type.push(EngineRoutingSchemaType.Default);
 		}
@@ -81,11 +92,15 @@ const getFlowList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 const getFlow = async ({ itemId: id }) => {
@@ -112,7 +127,9 @@ const getFlow = async ({ itemId: id }) => {
 			itemResponseHandler,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -142,7 +159,9 @@ const addFlow = async ({ itemInstance }) => {
 			}),
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 const updateFlow = async ({ itemInstance, itemId: id }) => {
@@ -165,7 +184,9 @@ const updateFlow = async ({ itemInstance, itemId: id }) => {
 			}),
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -174,14 +195,20 @@ const deleteFlow = async ({ id }) => {
 		const response = await flowService.deleteRoutingSchema(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getFlowsLookup = (params) =>
 	getFlowList({
 		...params,
-		fields: params.fields || ['id', 'name', 'type'],
+		fields: params.fields || [
+			'id',
+			'name',
+			'type',
+		],
 	});
 
 const getFlowTags = async (params) => {
@@ -208,7 +235,9 @@ const getFlowTags = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

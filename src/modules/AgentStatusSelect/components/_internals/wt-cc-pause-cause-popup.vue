@@ -76,7 +76,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['change', 'close']);
+const emit = defineEmits([
+	'change',
+	'close',
+]);
 
 const options = toRef(props, 'options');
 

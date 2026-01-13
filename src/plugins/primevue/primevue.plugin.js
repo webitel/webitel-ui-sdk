@@ -24,7 +24,9 @@ import Tooltip from 'primevue/tooltip';
 import WebitelTheme from './theme/webitel-theme.js';
 
 const changeComponentCompatMode = (component) => {
-	component.compatConfig = { MODE: 3 };
+	component.compatConfig = {
+		MODE: 3,
+	};
 
 	return component;
 };

@@ -53,14 +53,19 @@ const decodeSortQuery = ({ value }) => {
 };
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	data: () => ({
 		filterQuery: 'sort',
 	}),
 	methods: {
 		sort(column) {
 			const order = getNextSortOrder(column.sort);
-			return this.setValue({ column, order });
+			return this.setValue({
+				column,
+				order,
+			});
 		},
 
 		setValue({ column, order }) {
@@ -71,7 +76,10 @@ export default {
 					sort: col === column ? order : sortFieldValue,
 				};
 			});
-			const value = encodeSortQuery({ column, order });
+			const value = encodeSortQuery({
+				column,
+				order,
+			});
 			this.setHeaders(headers);
 			return this.setValueToQuery({
 				value,
@@ -80,7 +88,9 @@ export default {
 		},
 
 		restoreValue(value) {
-			const sortedColumns = decodeSortQuery({ value });
+			const sortedColumns = decodeSortQuery({
+				value,
+			});
 			const headers = this.headers.map((header) => ({
 				...header,
 				sort: sortedColumns[header.field] || null,

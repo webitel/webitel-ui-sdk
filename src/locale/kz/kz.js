@@ -29,7 +29,11 @@ export default {
 		replace: 'Ауыстыру',
 		download: 'Жүктеу',
 		history: 'Тарих',
-		filter: ({ plural }) => plural(['Сүзгі', 'Сүзгілер']),
+		filter: ({ plural }) =>
+			plural([
+				'Сүзгі',
+				'Сүзгілер',
+			]),
 		total: 'Барлығы',
 		ok: 'Жарайды',
 		object: 'Объект',
@@ -314,7 +318,9 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: { name: 'Оператор жұмыс орны' },
+		[WebitelApplications.AGENT]: {
+			name: 'Оператор жұмыс орны',
+		},
 		[WebitelApplications.AUDIT]: {
 			name: 'Аудит',
 			sections: {
@@ -335,8 +341,12 @@ export default {
 				[CrmSections.ContactGroups]: 'Байланыс топтары',
 			},
 		},
-		[WebitelApplications.HISTORY]: { name: 'Қоңырау тарихы' },
-		[WebitelApplications.ANALYTICS]: { name: 'Деректерді көрсету құралы' },
+		[WebitelApplications.HISTORY]: {
+			name: 'Қоңырау тарихы',
+		},
+		[WebitelApplications.ANALYTICS]: {
+			name: 'Деректерді көрсету құралы',
+		},
 		[WebitelApplications.SUPERVISOR]: {
 			name: 'Супервайзер жұмыс орны',
 			sections: {
@@ -388,7 +398,9 @@ export default {
 				[AdminSections.QuickReplies]: 'Жылдам жауаптар',
 			},
 		},
-		[WebitelApplications.WFM]: { name: 'WFM' },
+		[WebitelApplications.WFM]: {
+			name: 'WFM',
+		},
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Камера өшірілген',
 		},

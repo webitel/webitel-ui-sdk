@@ -104,7 +104,9 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
 	variant: ButtonVariant.ACTIVE,
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits([
+	'click',
+]);
 
 const attrs = useAttrs();
 

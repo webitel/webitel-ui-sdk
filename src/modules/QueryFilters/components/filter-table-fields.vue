@@ -11,7 +11,9 @@ import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
 	name: 'FilterTableFields',
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 
 	model: {
 		prop: 'headers',
@@ -43,8 +45,12 @@ export default {
 
 		// overrides baseFilterMixin method
 		restore({ filterQuery }) {
-			const queryValue = this.getValueFromQuery({ filterQuery });
-			const storageValue = this.getFromLocalStorage({ filterQuery });
+			const queryValue = this.getValueFromQuery({
+				filterQuery,
+			});
+			const storageValue = this.getFromLocalStorage({
+				filterQuery,
+			});
 			if (!queryValue && storageValue) {
 				this.setValueToQuery({
 					filterQuery,

@@ -65,14 +65,25 @@ function updateQuestion({ path, value }) {
 }
 
 function addQuestionOption() {
-	const options = [...questionModel.value.options, generateOption()];
-	return updateQuestion({ path: 'options', value: options });
+	const options = [
+		...questionModel.value.options,
+		generateOption(),
+	];
+	return updateQuestion({
+		path: 'options',
+		value: options,
+	});
 }
 
 function deleteQuestionOption({ key }) {
-	const options = [...questionModel.value.options];
+	const options = [
+		...questionModel.value.options,
+	];
 	options.splice(key, 1);
-	return updateQuestion({ path: 'options', value: options });
+	return updateQuestion({
+		path: 'options',
+		value: options,
+	});
 }
 
 function updateAnswer(score) {
@@ -81,7 +92,9 @@ function updateAnswer(score) {
 				...answerModel.value,
 				score,
 			}
-		: { score };
+		: {
+				score,
+			};
 }
 </script>
 

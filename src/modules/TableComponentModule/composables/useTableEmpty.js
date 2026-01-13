@@ -83,7 +83,12 @@ export const useTableEmpty = (
 
 		if (error.value) return EmptyCause.ERROR;
 		if (filters?.value) {
-			const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
+			const uncheckedFilters = [
+				'page',
+				'size',
+				'sort',
+				'fields',
+			];
 			const filtersApplied = Object.entries(filters.value).some(
 				([filterName, filterValue]) =>
 					!isEmpty(filterValue) && !uncheckedFilters.includes(filterName),

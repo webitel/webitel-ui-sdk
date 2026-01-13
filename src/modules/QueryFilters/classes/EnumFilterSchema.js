@@ -3,9 +3,14 @@ import BaseFilterSchema from './BaseFilterSchema.js';
 export default class EnumFilterSchema extends BaseFilterSchema {
 	constructor(params = {}) {
 		const { value = [], defaultValue = [] } = params;
-		super({ value, defaultValue });
+		super({
+			value,
+			defaultValue,
+		});
 		const {
-			locale = { label: 'filter' },
+			locale = {
+				label: 'filter',
+			},
 			storedProp = 'value',
 			multiple = true,
 			closeOnSelect = false,

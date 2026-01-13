@@ -33,7 +33,10 @@ import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup
 
 const props = defineProps({
 	agentId: {
-		type: [String, Number],
+		type: [
+			String,
+			Number,
+		],
 		required: true,
 	},
 	status: {
@@ -41,12 +44,17 @@ const props = defineProps({
 		default: AgentStatus.OFFLINE,
 	},
 	statusDuration: {
-		type: [Number, String],
+		type: [
+			Number,
+			String,
+		],
 		default: 0,
 	},
 });
 
-const emit = defineEmits(['changed']);
+const emit = defineEmits([
+	'changed',
+]);
 
 const { api } = useStore().state;
 const AgentStatusAPI = AgentStatusAPIFactory(api);
@@ -66,12 +74,19 @@ function closePauseCausePopup() {
 }
 
 async function loadPauseCauses() {
-	const response = await PauseCauseAPI.getList({ agentId: props.agentId });
+	const response = await PauseCauseAPI.getList({
+		agentId: props.agentId,
+	});
 	pauseCauses.value = response.items;
 }
 
 async function updateStatus({ agentId, status, pauseCause, statusComment }) {
-	return AgentStatusAPI.patch({ agentId, status, pauseCause, statusComment });
+	return AgentStatusAPI.patch({
+		agentId,
+		status,
+		pauseCause,
+		statusComment,
+	});
 }
 
 async function changeStatus({ status, pauseCause, statusComment }) {
@@ -99,7 +114,9 @@ async function handleStatus(status) {
 		}
 	}
 	if (status === props.status) return;
-	await changeStatus({ status });
+	await changeStatus({
+		status,
+	});
 }
 
 function handleSelectInput(newStatus) {
@@ -124,7 +141,11 @@ function handleClosed(event) {
 
 function handlePauseCauseInput({ pauseCause, statusComment }) {
 	const status = AgentStatus.PAUSE;
-	return changeStatus({ status, pauseCause, statusComment });
+	return changeStatus({
+		status,
+		pauseCause,
+		statusComment,
+	});
 }
 </script>
 

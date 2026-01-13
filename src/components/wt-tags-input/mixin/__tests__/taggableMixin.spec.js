@@ -5,7 +5,9 @@ import taggableMixin from '../taggableMixin.js';
 describe('taggableMixin', () => {
 	const Component = {
 		render() {},
-		mixins: [taggableMixin],
+		mixins: [
+			taggableMixin,
+		],
 	};
 
 	it('renders a component', () => {

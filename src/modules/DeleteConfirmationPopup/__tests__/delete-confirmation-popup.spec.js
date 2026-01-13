@@ -32,7 +32,9 @@ describe('DeleteConfirmationPopup', () => {
 			},
 		});
 		const button = wrapper
-			.findAllComponents({ name: 'wt-button' })
+			.findAllComponents({
+				name: 'wt-button',
+			})
 			.find((btn) => btn.text().includes('Yes'));
 		expect(button.text()).toContain('Yes');
 		await button.trigger('click');
@@ -61,7 +63,9 @@ describe('DeleteConfirmationPopup', () => {
 			},
 		});
 		const button = wrapper
-			.findAllComponents({ name: 'wt-button' })
+			.findAllComponents({
+				name: 'wt-button',
+			})
 			.find((btn) => btn.text().includes('Yes'));
 		await button.vm.$emit('close');
 		await wrapper.vm.$nextTick();
@@ -76,7 +80,9 @@ describe('DeleteConfirmationPopup', () => {
 			},
 		});
 		const button = wrapper
-			.findAllComponents({ name: 'wt-button' })
+			.findAllComponents({
+				name: 'wt-button',
+			})
 			.find((btn) => btn.text().includes('No'));
 		await button.vm.$emit('close');
 		await wrapper.vm.$nextTick();

@@ -44,7 +44,14 @@ export const generatePermissionsApi = (baseUrl) => {
 	const instance = getDefaultInstance();
 
 	const getList = async ({ parentId, ...params }) => {
-		const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+		const fieldsToSend = [
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		];
 
 		const defaultObject = {
 			user: false,
@@ -75,18 +82,26 @@ export const generatePermissionsApi = (baseUrl) => {
 				next,
 			};
 		} catch (err) {
-			throw applyTransform(err, [notify]);
+			throw applyTransform(err, [
+				notify,
+			]);
 		}
 	};
 
 	const patch = async ({ changes, id }) => {
-		const body = applyTransform(changes, [camelToSnake()]);
+		const body = applyTransform(changes, [
+			camelToSnake(),
+		]);
 		const url = `${baseUrl}/${id}/${permissionsUrl}`;
 		try {
 			const response = await instance.patch(url, body);
-			return applyTransform(response.data, [snakeToCamel()]);
+			return applyTransform(response.data, [
+				snakeToCamel(),
+			]);
 		} catch (err) {
-			throw applyTransform(err, [notify]);
+			throw applyTransform(err, [
+				notify,
+			]);
 		}
 	};
 

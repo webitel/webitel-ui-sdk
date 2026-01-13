@@ -67,7 +67,9 @@ const props = withDefaults(defineProps<Props>(), {
 const model = defineModel<boolean>();
 const switcherKey = ref(0);
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([
+	'update:modelValue',
+]);
 
 const slots = useSlots();
 

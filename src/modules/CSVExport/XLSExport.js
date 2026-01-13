@@ -9,7 +9,9 @@ export default class XLSExport {
 
 	fetchMethod = null;
 
-	downloadProgress = { count: 0 };
+	downloadProgress = {
+		count: 0,
+	};
 
 	constructor(fetchMethod, { filename }) {
 		if (!fetchMethod) throw new Error('fetch method should be specified!');
@@ -18,7 +20,9 @@ export default class XLSExport {
 	}
 
 	resetProgress() {
-		this.downloadProgress = { count: 0 };
+		this.downloadProgress = {
+			count: 0,
+		};
 	}
 
 	// NOTE: if the value is an object with a name property, extract the name to display it in the EXEL file
@@ -42,13 +46,17 @@ export default class XLSExport {
 				const value = item[column] || '';
 				return Math.max(max, value.toString().length);
 			}, column.length);
-			return { wch: maxLength + 2 }; // Adding some padding
+			return {
+				wch: maxLength + 2,
+			}; // Adding some padding
 		});
 	}
 
 	save(data, columns) {
 		const transformedData = data.map(({ variables, ...item }) => {
-			const flatVariables = flatten({ variables });
+			const flatVariables = flatten({
+				variables,
+			});
 
 			return columns.reduce((acc, column) => {
 				return {
@@ -66,8 +74,18 @@ export default class XLSExport {
 		ws['!cols'] = columnWidths;
 		const wb = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-		const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-		const blob = new Blob([wbout], { type: 'application/octet-stream' });
+		const wbout = XLSX.write(wb, {
+			bookType: 'xlsx',
+			type: 'array',
+		});
+		const blob = new Blob(
+			[
+				wbout,
+			],
+			{
+				type: 'application/octet-stream',
+			},
+		);
 		saveAs(blob, `${this.filename}.xlsx`);
 	}
 
@@ -90,7 +108,10 @@ export default class XLSExport {
 			isNext = next;
 			page += 1;
 		} while (isNext);
-		return { data, columns };
+		return {
+			data,
+			columns,
+		};
 	}
 
 	async export(params) {

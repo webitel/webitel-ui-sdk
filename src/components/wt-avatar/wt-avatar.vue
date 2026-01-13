@@ -22,7 +22,15 @@ const props = defineProps({
 	size: {
 		type: String,
 		default: 'md',
-		options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+		options: [
+			'xs',
+			'sm',
+			'md',
+			'lg',
+			'xl',
+			'2xl',
+			'3xl',
+		],
 	},
 	badge: {
 		type: Boolean,
@@ -40,7 +48,10 @@ const props = defineProps({
 	shape: {
 		type: String,
 		default: 'circle',
-		options: ['circle', 'square'],
+		options: [
+			'circle',
+			'square',
+		],
 	},
 });
 
@@ -63,19 +74,58 @@ const avatarLettersBackground = computed(() => {
 	}
 	// en.concat(uk)
 	const letterList = [
-		{ letters: 'AB'.concat('АБВ'), color: '--p-avatar-letters-p1-color' },
-		{ letters: 'CD'.concat('ГҐД'), color: '--p-avatar-letters-p2-color' },
-		{ letters: 'EF'.concat('ЕЄЖ'), color: '--p-avatar-letters-p3-color' },
-		{ letters: 'GH'.concat('ЗИІ'), color: '--p-avatar-letters-p4-color' },
-		{ letters: 'IJ'.concat('ЇЙК'), color: '--p-avatar-letters-p5-color' },
-		{ letters: 'KL'.concat('ЛМН'), color: '--p-avatar-letters-p6-color' },
-		{ letters: 'MN'.concat('ОПР'), color: '--p-avatar-letters-p7-color' },
-		{ letters: 'OP'.concat('СТУ'), color: '--p-avatar-letters-p8-color' },
-		{ letters: 'QR'.concat('ФХЦ'), color: '--p-avatar-letters-p9-color' },
-		{ letters: 'ST'.concat('ЧШЩ'), color: '--p-avatar-letters-p10-color' },
-		{ letters: 'UV'.concat('ЬЮЯ'), color: '--p-avatar-letters-p11-color' },
-		{ letters: 'WX'.concat(''), color: '--p-avatar-letters-p12-color' },
-		{ letters: 'YZ'.concat(''), color: '--p-avatar-letters-p13-color' },
+		{
+			letters: 'AB'.concat('АБВ'),
+			color: '--p-avatar-letters-p1-color',
+		},
+		{
+			letters: 'CD'.concat('ГҐД'),
+			color: '--p-avatar-letters-p2-color',
+		},
+		{
+			letters: 'EF'.concat('ЕЄЖ'),
+			color: '--p-avatar-letters-p3-color',
+		},
+		{
+			letters: 'GH'.concat('ЗИІ'),
+			color: '--p-avatar-letters-p4-color',
+		},
+		{
+			letters: 'IJ'.concat('ЇЙК'),
+			color: '--p-avatar-letters-p5-color',
+		},
+		{
+			letters: 'KL'.concat('ЛМН'),
+			color: '--p-avatar-letters-p6-color',
+		},
+		{
+			letters: 'MN'.concat('ОПР'),
+			color: '--p-avatar-letters-p7-color',
+		},
+		{
+			letters: 'OP'.concat('СТУ'),
+			color: '--p-avatar-letters-p8-color',
+		},
+		{
+			letters: 'QR'.concat('ФХЦ'),
+			color: '--p-avatar-letters-p9-color',
+		},
+		{
+			letters: 'ST'.concat('ЧШЩ'),
+			color: '--p-avatar-letters-p10-color',
+		},
+		{
+			letters: 'UV'.concat('ЬЮЯ'),
+			color: '--p-avatar-letters-p11-color',
+		},
+		{
+			letters: 'WX'.concat(''),
+			color: '--p-avatar-letters-p12-color',
+		},
+		{
+			letters: 'YZ'.concat(''),
+			color: '--p-avatar-letters-p13-color',
+		},
 	];
 	const searchedLetter = letterList.find(({ letters }) =>
 		letters.includes(avatarLetters.value.at(0).toUpperCase()),

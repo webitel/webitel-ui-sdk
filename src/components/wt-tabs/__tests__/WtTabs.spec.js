@@ -2,7 +2,12 @@ import { shallowMount } from '@vue/test-utils';
 
 import WtTabs from '../wt-tabs.vue';
 
-const tabs = [{ value: 'tab1', text: 'default' }];
+const tabs = [
+	{
+		value: 'tab1',
+		text: 'default',
+	},
+];
 describe('WtTabs', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtTabs);
@@ -11,15 +16,21 @@ describe('WtTabs', () => {
 
 	it('component emits change at tab click', () => {
 		const wrapper = shallowMount(WtTabs, {
-			props: { tabs },
+			props: {
+				tabs,
+			},
 		});
 		wrapper.find('.wt-tab').trigger('click');
-		expect(wrapper.emitted().change.pop()).toEqual([tabs[0]]);
+		expect(wrapper.emitted().change.pop()).toEqual([
+			tabs[0],
+		]);
 	});
 
 	it('renders tab default content', () => {
 		const wrapper = shallowMount(WtTabs, {
-			props: { tabs },
+			props: {
+				tabs,
+			},
 		});
 		expect(wrapper.find('.wt-tab').text()).toBe(tabs[0].text);
 	});
@@ -27,7 +38,9 @@ describe('WtTabs', () => {
 	it('renders tab custom content via default slot', () => {
 		const custom = 'custom name';
 		const wrapper = shallowMount(WtTabs, {
-			props: { tabs },
+			props: {
+				tabs,
+			},
 			slots: {
 				tab1: custom,
 			},

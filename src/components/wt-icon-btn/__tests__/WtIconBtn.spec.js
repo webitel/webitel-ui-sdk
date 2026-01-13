@@ -9,7 +9,9 @@ describe('WtIconBtn', () => {
 			stubs: {
 				WtIcon,
 			},
-			props: { icon: 'bucket' },
+			props: {
+				icon: 'bucket',
+			},
 		});
 		expect(wrapper.classes('wt-icon-btn')).toBe(true);
 	});

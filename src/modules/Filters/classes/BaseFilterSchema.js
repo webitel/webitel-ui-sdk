@@ -14,7 +14,11 @@ import {
 } from '../scripts/setters/index.js';
 
 const convertGetterArray = (context) => (getters) => {
-	const availableGetters = ['value', 'query', 'localStorage'];
+	const availableGetters = [
+		'value',
+		'query',
+		'localStorage',
+	];
 
 	getters.forEach((getter) => {
 		if (!availableGetters.includes(getter))
@@ -44,7 +48,11 @@ const convertGetterArray = (context) => (getters) => {
 };
 
 const convertSetterArray = (context) => (setters) => {
-	const availableSetters = ['value', 'query', 'localStorage'];
+	const availableSetters = [
+		'value',
+		'query',
+		'localStorage',
+	];
 	setters.forEach((setter) => {
 		if (!availableSetters.includes(setter))
 			throw new Error(`Unknown setter: ${setter}`);
@@ -62,7 +70,10 @@ const convertSetterArray = (context) => (setters) => {
 };
 
 const convertRestoreArray = (context) => (restores) => {
-	const availableRestores = ['query', 'localStorage'];
+	const availableRestores = [
+		'query',
+		'localStorage',
+	];
 
 	restores.forEach((restore) => {
 		if (!availableRestores.includes(restore))
@@ -89,9 +100,17 @@ export default class BaseFilterSchema {
 		name,
 		value = '',
 		defaultValue = '',
-		get = ['value', 'query'],
-		set = ['value', 'query'],
-		restore = ['query'],
+		get = [
+			'value',
+			'query',
+		],
+		set = [
+			'value',
+			'query',
+		],
+		restore = [
+			'query',
+		],
 		multiple = false,
 		...rest
 	} = {}) {

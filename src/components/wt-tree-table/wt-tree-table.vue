@@ -141,7 +141,10 @@ const props = withDefaults(
 	},
 );
 
-const emit = defineEmits(['sort', 'update:selected']);
+const emit = defineEmits([
+	'sort',
+	'update:selected',
+]);
 
 const checkHasChildItems = (item: Record<string, any>) => {
 	return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
@@ -152,7 +155,9 @@ const getSelectedValue = (items: Record<string, any>[]) => {
 
 	const pushSelectedElement = (item: Record<string, any>) => {
 		if (item._isSelected) {
-			return [item];
+			return [
+				item,
+			];
 		}
 
 		if (checkHasChildItems(item)) {
@@ -227,7 +232,11 @@ const selectAll = () => {
 	if (props.selected) {
 		emit(
 			'update:selected',
-			isAllSelected.value ? [] : [...getAllNestedElements(props.data)],
+			isAllSelected.value
+				? []
+				: [
+						...getAllNestedElements(props.data),
+					],
 		);
 	} else {
 		// for backwards compatibility
@@ -247,7 +256,10 @@ const selectAll = () => {
 const handleSelection = (row, select) => {
 	if (props.selected) {
 		if (select) {
-			emit('update:selected', [...selectedElements.value, row]);
+			emit('update:selected', [
+				...selectedElements.value,
+				row,
+			]);
 		} else {
 			emit(
 				'update:selected',

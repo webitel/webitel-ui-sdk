@@ -26,10 +26,16 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
 			const { multiple, defaultValue } = context.state[filter];
 			let newValue = value;
 			if (newValue) {
-				if (multiple && !Array.isArray(newValue)) newValue = [newValue];
+				if (multiple && !Array.isArray(newValue))
+					newValue = [
+						newValue,
+					];
 			} else if (newValue === null || newValue === undefined)
 				newValue = defaultValue;
-			context.commit('SET_FILTER', { filter, value: newValue });
+			context.commit('SET_FILTER', {
+				filter,
+				value: newValue,
+			});
 		},
 		RESET_FILTERS: (context, payload) => {
 			context.commit('RESET_FILTERS', payload);
@@ -54,9 +60,21 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
 	/* FIXME REMOVE COMPLETELY AND USE GET_MODULE() INSERTION*/
 	constructor({ state = {}, getters = {}, actions = {}, mutations = {} } = {}) {
 		super();
-		this.state = { ...this.state, ...state };
-		this.getters = { ...this.getters, ...getters };
-		this.actions = { ...this.actions, ...actions };
-		this.mutations = { ...this.mutations, ...mutations };
+		this.state = {
+			...this.state,
+			...state,
+		};
+		this.getters = {
+			...this.getters,
+			...getters,
+		};
+		this.actions = {
+			...this.actions,
+			...actions,
+		};
+		this.mutations = {
+			...this.mutations,
+			...mutations,
+		};
 	}
 }

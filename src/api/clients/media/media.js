@@ -50,7 +50,9 @@ const getMediaList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -59,7 +61,9 @@ const getMedia = async ({ itemId }) => {
 	try {
 		return await instance.get(url);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -68,7 +72,9 @@ export const downloadMedia = async (id) => {
 	try {
 		return await instance.get(url);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -86,11 +92,16 @@ const addMedia = async (params) => {
 	try {
 		const response = await addMediaInstance.post(url, formData);
 		applyTransform(response, [
-			notify(() => ({ type: 'success', text: 'Successfully added' })),
+			notify(() => ({
+				type: 'success',
+				text: 'Successfully added',
+			})),
 		]);
 		return response;
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -99,14 +110,19 @@ const deleteMedia = async ({ id }) => {
 		const response = await mediaService.deleteMediaFile(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getMediaLookup = (params) =>
 	getMediaList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const MediaAPI = {

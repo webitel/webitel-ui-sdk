@@ -61,10 +61,9 @@ export const makeScopeAccessMap = (
 		const scopeClassObjects = mapScopeClassToWtObjects[scopeClass];
 
 		if (!scopeClassObjects) {
-			wtlog.error({ module: 'modules/userinfo' })(
-				'Unknown scope class to convert to WtObject:',
-				scopeClass,
-			);
+			wtlog.error({
+				module: 'modules/userinfo',
+			})('Unknown scope class to convert to WtObject:', scopeClass);
 			map.set(scopeClass, access);
 		} else {
 			scopeClassObjects.forEach((object) => {

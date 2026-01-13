@@ -1,7 +1,9 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 
 	data: () => ({
 		value: [],

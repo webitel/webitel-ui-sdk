@@ -46,7 +46,9 @@ import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
 	name: 'FilterFromTo',
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	props: {
 		filterQuery: {
 			type: String,
@@ -74,22 +76,40 @@ export default {
 			const from = 0;
 			const queryValue = this.$route.query[`${this.filterQuery}From`];
 			// this.value.from = +queryValue || from;
-			const value = { from: +queryValue || from, to: this.value.to };
-			return this.setValue({ filter: this.filterQuery, value });
+			const value = {
+				from: +queryValue || from,
+				to: this.value.to,
+			};
+			return this.setValue({
+				filter: this.filterQuery,
+				value,
+			});
 		},
 
 		restoreTo() {
 			const to = null;
 			const queryValue = this.$route.query[`${this.filterQuery}To`];
 			// this.value.to = +queryValue || to;
-			const value = { from: this.value.from, to: +queryValue || to };
-			return this.setValue({ filter: this.filterQuery, value });
+			const value = {
+				from: this.value.from,
+				to: +queryValue || to,
+			};
+			return this.setValue({
+				filter: this.filterQuery,
+				value,
+			});
 		},
 
 		async setFrom(value) {
 			const from = value ? value : null; // if value is empty, set it to null
-			const filterValue = { from, to: this.value.to };
-			await this.setValue({ filter: this.filterQuery, value: filterValue });
+			const filterValue = {
+				from,
+				to: this.value.to,
+			};
+			await this.setValue({
+				filter: this.filterQuery,
+				value: filterValue,
+			});
 			await this.setValueToQuery({
 				filterQuery: `${this.filterQuery}From`,
 				value,
@@ -98,8 +118,14 @@ export default {
 
 		async setTo(value) {
 			const to = value ? value : null; // if value is empty, set it to null
-			const filterValue = { from: this.value.from, to };
-			await this.setValue({ filter: this.filterQuery, value: filterValue });
+			const filterValue = {
+				from: this.value.from,
+				to,
+			};
+			await this.setValue({
+				filter: this.filterQuery,
+				value: filterValue,
+			});
 			await this.setValueToQuery({
 				filterQuery: `${this.filterQuery}To`,
 				value,

@@ -116,7 +116,6 @@ export default {
   display: flex;
   position: absolute;
   top: 100%;
-  /* icon */
   right: 0;
   flex-direction: column;
   gap: var(--wt-header-actions-content-sections-gap);

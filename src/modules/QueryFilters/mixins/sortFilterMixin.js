@@ -48,14 +48,19 @@ const changeHeadersSort = ({ headers, sortedHeader, order }) => {
 };
 
 export default {
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	data: () => ({
 		filterQuery: 'sort',
 	}),
 	methods: {
 		sort(column) {
 			const order = getNextSortOrder(column.sort);
-			this.setValue({ column, order });
+			this.setValue({
+				column,
+				order,
+			});
 		},
 
 		setValue({ column, order }) {
@@ -65,7 +70,10 @@ export default {
 				order,
 			});
 
-			const value = encodeSortQuery({ column, order });
+			const value = encodeSortQuery({
+				column,
+				order,
+			});
 			this.setHeaders(headers);
 			this.setValueToQuery({
 				value,
@@ -74,12 +82,16 @@ export default {
 		},
 
 		restoreValue(value) {
-			const sortedColumns = decodeSortQuery({ value });
+			const sortedColumns = decodeSortQuery({
+				value,
+			});
 			const [field, order] = Object.entries(sortedColumns)[0];
 
 			const headers = changeHeadersSort({
 				headers: this.headers,
-				sortedHeader: { field },
+				sortedHeader: {
+					field,
+				},
 				order,
 			});
 

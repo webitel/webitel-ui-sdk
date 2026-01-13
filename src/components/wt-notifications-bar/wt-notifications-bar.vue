@@ -22,7 +22,9 @@ import { _wtUiLog as loggr } from '../../scripts/logger.js';
 
 export default {
 	name: 'WtNotificationsBar',
-	inject: ['$eventBus'],
+	inject: [
+		'$eventBus',
+	],
 	data: () => ({
 		notificationDuration: 4000,
 		notifications: [],
@@ -33,7 +35,10 @@ export default {
 		if (this.$eventBus) {
 			this.eventBus = this.$eventBus;
 		} else {
-			loggr.warn({ entity: 'component', module: 'wt-notification-bar' })(
+			loggr.warn({
+				entity: 'component',
+				module: 'wt-notification-bar',
+			})(
 				'no globally provided $eventBus found, using default webitel-ui eventBus',
 			);
 		}

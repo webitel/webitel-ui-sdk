@@ -45,12 +45,18 @@ function setFilter(payload) {
 }
 
 function setPage(value) {
-	return setFilter({ value, name: pageFilterName });
+	return setFilter({
+		value,
+		name: pageFilterName,
+	});
 }
 
 function setSize(value) {
 	if (value === size.value) return;
-	return setFilter({ value, name: sizeFilterName });
+	return setFilter({
+		value,
+		name: sizeFilterName,
+	});
 }
 
 watch(
@@ -58,7 +64,9 @@ watch(
 	() => {
 		localSize.value = size.value;
 	},
-	{ immediate: true },
+	{
+		immediate: true,
+	},
 );
 </script>
 

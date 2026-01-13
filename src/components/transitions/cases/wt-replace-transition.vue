@@ -22,7 +22,10 @@ const props = defineProps({
 	pattern: {
 		type: String,
 		default: 'opacity',
-		options: ['opacity', 'slide-up'],
+		options: [
+			'opacity',
+			'slide-up',
+		],
 	},
 	duration: {
 		type: String,

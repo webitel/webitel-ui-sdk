@@ -12,7 +12,9 @@ import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
 	name: 'FilterFrom',
-	mixins: [baseFilterMixin],
+	mixins: [
+		baseFilterMixin,
+	],
 	props: {
 		filterQuery: {
 			type: String,
@@ -25,11 +27,20 @@ export default {
 
 	methods: {
 		handleChange(value) {
-			this.setValue({ filter: this.filterQuery, value });
-			this.setValueToQuery({ filterQuery: this.filterQuery, value });
+			this.setValue({
+				filter: this.filterQuery,
+				value,
+			});
+			this.setValueToQuery({
+				filterQuery: this.filterQuery,
+				value,
+			});
 		},
 		restoreValue(value) {
-			this.setValue({ filter: this.filterQuery, value: +value });
+			this.setValue({
+				filter: this.filterQuery,
+				value: +value,
+			});
 		},
 	},
 };

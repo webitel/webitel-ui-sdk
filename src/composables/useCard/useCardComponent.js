@@ -40,7 +40,9 @@ export const useCardComponent = (params) => {
 	const redirectToEdit = () => {
 		return router.replace({
 			...route,
-			params: { id: id?.value },
+			params: {
+				id: id?.value,
+			},
 		});
 	};
 

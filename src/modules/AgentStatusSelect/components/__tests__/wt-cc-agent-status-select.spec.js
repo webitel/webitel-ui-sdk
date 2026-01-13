@@ -6,8 +6,17 @@ import * as AgentStatusAPIFactory from '../../api/agent-status.js';
 import * as PauseCauseAPIFactory from '../../api/pause-cause.js';
 import WtCcAgentStatusSelect from '../wt-cc-agent-status-select.vue';
 
-const pauseCauses = [{ name: 'jest1' }, { name: 'jest2' }];
-const getAgentPauseCausesMock = vi.fn(() => ({ items: pauseCauses }));
+const pauseCauses = [
+	{
+		name: 'jest1',
+	},
+	{
+		name: 'jest2',
+	},
+];
+const getAgentPauseCausesMock = vi.fn(() => ({
+	items: pauseCauses,
+}));
 // https://stackoverflow.com/a/63727813
 vi.spyOn(PauseCauseAPIFactory, 'default').mockImplementation(() => ({
 	getList: getAgentPauseCausesMock,
@@ -30,7 +39,9 @@ const mountOptions = {
 		status: agent.status,
 	},
 	global: {
-		plugins: [createStore({})],
+		plugins: [
+			createStore({}),
+		],
 	},
 	shallow: true,
 };
@@ -47,7 +58,9 @@ describe('Wt Cc Agent Status Select', () => {
    with "online" status`, () => {
 		const wrapper = shallowMount(WtCcAgentStatusSelect, mountOptions);
 		wrapper
-			.findComponent({ name: 'wt-status-select' })
+			.findComponent({
+				name: 'wt-status-select',
+			})
 			.vm.$emit('change', AgentStatus.ONLINE);
 		const reqPayload = {
 			status: AgentStatus.ONLINE,
@@ -59,7 +72,9 @@ describe('Wt Cc Agent Status Select', () => {
 	it('at wt-status-select "change" to "pause" event, pause causes are loaded', async () => {
 		const wrapper = shallowMount(WtCcAgentStatusSelect, mountOptions);
 		wrapper
-			.findComponent({ name: 'wt-status-select' })
+			.findComponent({
+				name: 'wt-status-select',
+			})
 			.vm.$emit('change', AgentStatus.PAUSE);
 		await wrapper.vm.$nextTick();
 		expect(getAgentPauseCausesMock).toHaveBeenCalled();
@@ -68,13 +83,19 @@ describe('Wt Cc Agent Status Select', () => {
    pause-cause-popup appears`, async () => {
 		const wrapper = mount(WtCcAgentStatusSelect, mountOptions);
 		wrapper
-			.findComponent({ name: 'wt-status-select' })
+			.findComponent({
+				name: 'wt-status-select',
+			})
 			.vm.$emit('change', AgentStatus.PAUSE);
 		await wrapper.vm.$nextTick(); // load pause causes
 		await wrapper.vm.$nextTick();
 		await wrapper.vm.$nextTick(); // render popup
 		expect(
-			wrapper.findComponent({ name: 'pause-cause-popup' }).isVisible(),
+			wrapper
+				.findComponent({
+					name: 'pause-cause-popup',
+				})
+				.isVisible(),
 		).toBe(true);
 	});
 	it(`at pause-cause-popup "change" event, triggers patch agent status
@@ -85,7 +106,9 @@ describe('Wt Cc Agent Status Select', () => {
 		await wrapper.vm.$nextTick();
 		await wrapper.vm.$nextTick();
 		wrapper
-			.findComponent({ name: 'pause-cause-popup' })
+			.findComponent({
+				name: 'pause-cause-popup',
+			})
 			.vm.$emit('change', pauseCause);
 		const reqPayload = {
 			status: AgentStatus.PAUSE,

@@ -20,15 +20,26 @@ const getters = {
 	// FIXME: maybe move to filters module?
 	FILTERS: (state, getters) => () => getters['filters/GET_FILTERS'](),
 
-	REQUIRED_FIELDS: () => ['id'], // override me
+	REQUIRED_FIELDS: () => [
+		'id',
+	], // override me
 
 	FIELDS: (state, getters) => {
 		const fields = state.headers.reduce((fields, { show, field }) => {
-			if (show || show === undefined) return [...fields, field];
+			if (show || show === undefined)
+				return [
+					...fields,
+					field,
+				];
 			return fields;
 		}, []);
 
-		return [...new Set([...getters.REQUIRED_FIELDS, ...fields])];
+		return [
+			...new Set([
+				...getters.REQUIRED_FIELDS,
+				...fields,
+			]),
+		];
 	},
 
 	GET_LIST_PARAMS: (state, getters) => (overrides) => {
@@ -66,17 +77,27 @@ const actions = {
 
 	// FIXME: maybe move to filters module?
 	HANDLE_FILTERS_RESTORE: async (context, { fields, sort }) => {
-		if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
+		if (sort)
+			await context.dispatch('HANDLE_SORT_CHANGE', {
+				value: sort,
+			});
 		if (fields?.length)
-			await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+			await context.dispatch('HANDLE_FIELDS_CHANGE', {
+				value: fields,
+			});
 		return context.dispatch('LOAD_DATA_LIST');
 	},
 
 	// FIXME: maybe move to filters module?
 	HANDLE_FILTER_RESET: async (context, { fields, sort }) => {
-		if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
+		if (sort)
+			await context.dispatch('HANDLE_SORT_CHANGE', {
+				value: sort,
+			});
 		if (fields?.length)
-			await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+			await context.dispatch('HANDLE_FIELDS_CHANGE', {
+				value: fields,
+			});
 		return context.dispatch('LOAD_DATA_LIST');
 	},
 
@@ -106,7 +127,10 @@ const actions = {
 			show: value.includes(header.value),
 		}));
 
-		context.commit('SET', { path: 'headers', value: headers });
+		context.commit('SET', {
+			path: 'headers',
+			value: headers,
+		});
 	},
 
 	// FIXME: maybe move to filters module?
@@ -126,16 +150,28 @@ const actions = {
 					sort = nextSort; // null
 				}
 
-				return { ...header, sort };
+				return {
+					...header,
+					sort,
+				};
 			},
 		);
 
-		context.commit('SET', { path: 'headers', value: headers });
+		context.commit('SET', {
+			path: 'headers',
+			value: headers,
+		});
 	},
 
 	LOAD_DATA_LIST: async (context, query) => {
-		context.commit('SET', { path: 'isLoading', value: true });
-		context.commit('SET', { path: 'isNextPage', value: false }); // [WTEL-3560]
+		context.commit('SET', {
+			path: 'isLoading',
+			value: true,
+		});
+		context.commit('SET', {
+			path: 'isNextPage',
+			value: false,
+		}); // [WTEL-3560]
 
 		const params = context.getters.GET_LIST_PARAMS(query);
 		try {
@@ -147,15 +183,30 @@ const actions = {
 				},
 			);
 
-			context.commit('SET', { path: 'dataList', value: items });
-			context.commit('SET', { path: 'isNextPage', value: next });
-			context.commit('SET', { path: 'selected', value: [] });
+			context.commit('SET', {
+				path: 'dataList',
+				value: items,
+			});
+			context.commit('SET', {
+				path: 'isNextPage',
+				value: next,
+			});
+			context.commit('SET', {
+				path: 'selected',
+				value: [],
+			});
 		} catch (err) {
-			context.commit('SET', { path: 'error', value: err });
+			context.commit('SET', {
+				path: 'error',
+				value: err,
+			});
 			throw err;
 		} finally {
 			setTimeout(() => {
-				context.commit('SET', { path: 'isLoading', value: false });
+				context.commit('SET', {
+					path: 'isLoading',
+					value: false,
+				});
 			}, 100); // why 1s? https://ux.stackexchange.com/a/104782
 		}
 	},
@@ -181,7 +232,9 @@ const actions = {
 			value,
 		});
 
-		const changes = { [prop]: value };
+		const changes = {
+			[prop]: value,
+		};
 
 		try {
 			await context.dispatch('PATCH_ITEM_API', {
@@ -225,7 +278,11 @@ const actions = {
 
 	DELETE_SINGLE: async (context, { id, etag }) => {
 		try {
-			await context.dispatch('DELETE_ITEM_API', { context, id, etag });
+			await context.dispatch('DELETE_ITEM_API', {
+				context,
+				id,
+				etag,
+			});
 		} catch (err) {
 			throw err;
 		}
@@ -248,7 +305,10 @@ const actions = {
 	},
 
 	SET_SELECTED: (context, selected) => {
-		context.commit('SET', { path: 'selected', value: selected });
+		context.commit('SET', {
+			path: 'selected',
+			value: selected,
+		});
 	},
 
 	GET_LIST_API: (context, payload) => context.dispatch('api/GET_LIST', payload),

@@ -7,5 +7,7 @@ export const generateOption = () => ({
 
 export const generateQuestionOptionsSchema = () => ({
 	type: EngineAuditQuestionType.Option,
-	options: [generateOption()],
+	options: [
+		generateOption(),
+	],
 });

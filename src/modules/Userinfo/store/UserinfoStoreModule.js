@@ -120,7 +120,9 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 			const access = await userinfo.getUiVisibilityAccess();
 			await context.dispatch(
 				'SET_APPLICATIONS_ACCESS',
-				new ApplicationsAccess({ access }).getAccess(),
+				new ApplicationsAccess({
+					access,
+				}).getAccess(),
 			);
 			await context.dispatch('AFTER_OPEN_SESSION_HOOK');
 		},
@@ -136,7 +138,10 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 
 			try {
 				await context.dispatch('RESET_STATE');
-				const session = { ...defaultSession, ..._session };
+				const session = {
+					...defaultSession,
+					..._session,
+				};
 				const scope = await context.dispatch(
 					'CONVERT_USER_SCOPE',
 					session.scope,
@@ -145,7 +150,11 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 					'CONVERT_USER_PERMISSIONS',
 					session.permissions,
 				);
-				context.commit('SET_SESSION', { ...session, scope, permissions });
+				context.commit('SET_SESSION', {
+					...session,
+					scope,
+					permissions,
+				});
 				await context.dispatch('SET_LOADING', false);
 			} catch (err) {
 				throw err;
