@@ -26,27 +26,27 @@
 </template>
 
 <script setup>
-import { defineEmits,defineProps } from 'vue';
+import { defineEmits, defineProps } from 'vue';
 
 const props = defineProps({
-  categories: {
-    type: Array,
-    default: () => [],
-  },
-  selected: {
-    type: Object,
-    default: () => ({}),
-  },
-  icons: {
-    type: Array,
-    default: () => [],
-  },
+	categories: {
+		type: Array,
+		default: () => [],
+	},
+	selected: {
+		type: Object,
+		default: () => ({}),
+	},
+	icons: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const emit = defineEmits(['select']);
 
 function select(category) {
-  emit('select', category);
+	emit('select', category);
 }
 </script>
 

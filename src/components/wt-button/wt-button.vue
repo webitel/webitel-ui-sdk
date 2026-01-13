@@ -51,49 +51,57 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
+import {
+	computed,
+	defineEmits,
+	defineProps,
+	inject,
+	ref,
+	useAttrs,
+	watch,
+} from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
-import WtBadge from "../wt-badge-new/wt-badge.vue";
-import WtIcon from "../wt-icon/wt-icon.vue";
+import WtBadge from '../wt-badge-new/wt-badge.vue';
+import WtIcon from '../wt-icon/wt-icon.vue';
 
 const primevueSizeMap = {
-  [ComponentSize.XS]: 'extra-small',
-  [ComponentSize.SM]: 'small',
-  [ComponentSize.MD]: 'medium',
-}
+	[ComponentSize.XS]: 'extra-small',
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.MD]: 'medium',
+};
 
 const iconButtonSizeMap = {
-  [ComponentSize.XS]: 'sm',
-  [ComponentSize.SM]: 'sm',
-  [ComponentSize.MD]: 'md',
-}
+	[ComponentSize.XS]: 'sm',
+	[ComponentSize.SM]: 'sm',
+	[ComponentSize.MD]: 'md',
+};
 
-interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
-  color?: ButtonColor;
-  disabled?: boolean;
-  loading?: boolean;
-  size?: ComponentSize;
-  wide?: boolean;
-  widthByContent?: boolean;
-  icon?: string;
-  iconPrefix?: string;
-  badge?: string;
-  badgeSeverity?: string;
-  badgeAbsolutePosition?: boolean;
-  variant?: ButtonVariant;
+interface WtButtonProps extends /* @vue-ignore */ ButtonProps {
+	color?: ButtonColor;
+	disabled?: boolean;
+	loading?: boolean;
+	size?: ComponentSize;
+	wide?: boolean;
+	widthByContent?: boolean;
+	icon?: string;
+	iconPrefix?: string;
+	badge?: string;
+	badgeSeverity?: string;
+	badgeAbsolutePosition?: boolean;
+	variant?: ButtonVariant;
 }
 
 const props = withDefaults(defineProps<WtButtonProps>(), {
-  color: ButtonColor.PRIMARY,
-  disabled: false,
-  loading: false,
-  size: ComponentSize.MD,
-  wide: false,
-  widthByContent: false,
-  icon: '',
-  iconPrefix: '',
-  variant: ButtonVariant.ACTIVE,
+	color: ButtonColor.PRIMARY,
+	disabled: false,
+	loading: false,
+	size: ComponentSize.MD,
+	wide: false,
+	widthByContent: false,
+	icon: '',
+	iconPrefix: '',
+	variant: ButtonVariant.ACTIVE,
 });
 
 const emit = defineEmits(['click']);
@@ -103,7 +111,7 @@ const attrs = useAttrs();
 const showLoader = ref(false);
 
 const badgeClass = computed(() => ({
-  'wt-badge--absolute': props.badgeAbsolutePosition
+	'wt-badge--absolute': props.badgeAbsolutePosition,
 }));
 
 // @Ler24
@@ -111,27 +119,27 @@ const badgeClass = computed(() => ({
 const store = ref(null);
 
 const initStore = async () => {
-  try {
-    const vuex = await import('vuex');
-    store.value = vuex.useStore();
-  } catch (e) {
-    store.value = null;
-  }
-}
+	try {
+		const vuex = await import('vuex');
+		store.value = vuex.useStore();
+	} catch (e) {
+		store.value = null;
+	}
+};
 initStore();
 
 const injectDarkMode = inject('darkMode');
 
 const darkMode = computed(() => {
-  if (injectDarkMode?.value) {
-    return injectDarkMode.value;
-  }
+	if (injectDarkMode?.value) {
+		return injectDarkMode.value;
+	}
 
-  if (store?.value?.getters) {
-    return store?.value?.getters['appearance/DARK_MODE'] ?? false;
-  }
+	if (store?.value?.getters) {
+		return store?.value?.getters['appearance/DARK_MODE'] ?? false;
+	}
 
-  return false;
+	return false;
 });
 
 /**
@@ -142,24 +150,25 @@ const darkMode = computed(() => {
  * link to comment - https://webitel.atlassian.net/browse/WTEL-7992?focusedCommentId=705256
  * */
 const loaderColor = computed(() => {
-  return darkMode.value ? 'on-dark' : 'on-light';
-  // if (['success', 'transfer', 'error', 'job'].includes(props.color)) return 'on-dark';
-  // return 'on-light';
+	return darkMode.value ? 'on-dark' : 'on-light';
+	// if (['success', 'transfer', 'error', 'job'].includes(props.color)) return 'on-dark';
+	// return 'on-light';
 });
 
 watch(
-  () => props.loading,
-  (value) => {
-    if (value) {
-      showLoader.value = true;
-    } else {
-      setTimeout(() => {
-        showLoader.value = value;
-      }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
-    }
-  }, {
-    immediate: true,
-  },
+	() => props.loading,
+	(value) => {
+		if (value) {
+			showLoader.value = true;
+		} else {
+			setTimeout(() => {
+				showLoader.value = value;
+			}, 1000); // why 1s? https://ux.stackexchange.com/a/104782
+		}
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

@@ -16,80 +16,80 @@ import NavMenuLvl1 from './_internals/nav-menu-lvl-1.vue';
 import NavMenuLvl2 from './_internals/nav-menu-lvl-2.vue';
 
 const props = defineProps({
-  /** entire navigation hierarchy. Value: `{ value: string, name: string, subNav: [{ value: string, route: string, name: string}] }`
-   **/
+	/** entire navigation hierarchy. Value: `{ value: string, name: string, subNav: [{ value: string, route: string, name: string}] }`
+	 **/
 
-  nav: {
-    type: Array,
-    required: true,
-  },
+	nav: {
+		type: Array,
+		required: true,
+	},
 
-  /** array icons to display in 1 level menu
-   */
+	/** array icons to display in 1 level menu
+	 */
 
-  icons: {
-    type: Array,
-    default: () => [],
-  },
+	icons: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const selectedId = ref('');
 
 // Create a map of categories by their value/id
 const categories = computed(() => {
-  const categoryMap = new Map();
-  props.nav.forEach((navItem) => {
-    categoryMap.set(navItem.value, {
-      ...navItem,
-      name: navItem.name,
-    });
-  });
-  return categoryMap;
+	const categoryMap = new Map();
+	props.nav.forEach((navItem) => {
+		categoryMap.set(navItem.value, {
+			...navItem,
+			name: navItem.name,
+		});
+	});
+	return categoryMap;
 });
 
 // Create a map of subcategories by parent category id
 const subcategories = computed(() => {
-  const subcategoryMap = new Map();
-  props.nav.forEach((navItem) => {
-    if (navItem.subNav) {
-      const subNavWithRoutes = navItem.subNav.map((subNav) => {
-        const route = navItem.route
-          ? `${navItem.route}/${subNav.route}`
-          : subNav.route;
-        return {
-          ...subNav,
-          name: subNav.name,
-          route,
-        };
-      });
-      subcategoryMap.set(navItem.value, subNavWithRoutes);
-    } else {
-      subcategoryMap.set(navItem.value, []);
-    }
-  });
-  return subcategoryMap;
+	const subcategoryMap = new Map();
+	props.nav.forEach((navItem) => {
+		if (navItem.subNav) {
+			const subNavWithRoutes = navItem.subNav.map((subNav) => {
+				const route = navItem.route
+					? `${navItem.route}/${subNav.route}`
+					: subNav.route;
+				return {
+					...subNav,
+					name: subNav.name,
+					route,
+				};
+			});
+			subcategoryMap.set(navItem.value, subNavWithRoutes);
+		} else {
+			subcategoryMap.set(navItem.value, []);
+		}
+	});
+	return subcategoryMap;
 });
 
 // Array of categories for the lvl-1 component (filtered to exclude empty categories)
 const categoriesArray = computed(() => {
-  return Array.from(categories.value.values()).filter((category) => {
-    const subcats = subcategories.value.get(category.value);
-    return subcats && subcats.length > 0;
-  });
+	return Array.from(categories.value.values()).filter((category) => {
+		const subcats = subcategories.value.get(category.value);
+		return subcats && subcats.length > 0;
+	});
 });
 
 // Active subcategories based on selectedId
 const activeSubcategories = computed(() => {
-  return subcategories.value.get(selected.value?.value) || [];
+	return subcategories.value.get(selected.value?.value) || [];
 });
 
 // Selected category based on selectedId
 const selected = computed(() => {
-  return categories.value.get(selectedId.value) || categoriesArray.value[0];
+	return categories.value.get(selectedId.value) || categoriesArray.value[0];
 });
 
 function select(category) {
-  selectedId.value = category.value;
+	selectedId.value = category.value;
 }
 </script>
 

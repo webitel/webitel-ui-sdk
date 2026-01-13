@@ -17,38 +17,38 @@ import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import { WtIconActionIconMappings } from './iconMappings.js';
 
 const props = defineProps({
-  /**
-   * `IconAction` enum value
-   */
-  action: {
-    type: String,
-    required: true,
-    validator: (v) =>
-      Object.values([
-        IconAction.DELETE,
-        IconAction.EDIT,
-        IconAction.ADD,
-        IconAction.HISTORY,
-        IconAction.DOWNLOAD,
-        IconAction.REFRESH,
-        IconAction.SAVE,
-        IconAction.CANCEL,
-        IconAction.SAVE_PRESET,
-        IconAction.APPLY_PRESET,
-        IconAction.ADD_CONTACT,
-        IconAction.DOWNLOAD_PDF,
-        IconAction.CHAT
-      ]).includes(v),
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  size: {
-    type: String,
-    default: 'md',
-    required: false,
-  },
+	/**
+	 * `IconAction` enum value
+	 */
+	action: {
+		type: String,
+		required: true,
+		validator: (v) =>
+			Object.values([
+				IconAction.DELETE,
+				IconAction.EDIT,
+				IconAction.ADD,
+				IconAction.HISTORY,
+				IconAction.DOWNLOAD,
+				IconAction.REFRESH,
+				IconAction.SAVE,
+				IconAction.CANCEL,
+				IconAction.SAVE_PRESET,
+				IconAction.APPLY_PRESET,
+				IconAction.ADD_CONTACT,
+				IconAction.DOWNLOAD_PDF,
+				IconAction.CHAT,
+			]).includes(v),
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
+	size: {
+		type: String,
+		default: 'md',
+		required: false,
+	},
 });
 
 const emit = defineEmits(['click', 'mousedown']);
@@ -56,19 +56,19 @@ const emit = defineEmits(['click', 'mousedown']);
 const { t } = useI18n();
 
 const iconAction = computed(() => {
-  const icon = WtIconActionIconMappings[props.action];
+	const icon = WtIconActionIconMappings[props.action];
 
-  if (!icon) {
-    console.error(
-      `Unknown action for wt-icon-action component: ${props.action}`,
-    );
-    return { icon: 'edit', hint: props.action };
-  }
+	if (!icon) {
+		console.error(
+			`Unknown action for wt-icon-action component: ${props.action}`,
+		);
+		return { icon: 'edit', hint: props.action };
+	}
 
-  return {
-    icon,
-    hint: `webitelUI.iconAction.hints.${props.action}`,
-  };
+	return {
+		icon,
+		hint: `webitelUI.iconAction.hints.${props.action}`,
+	};
 });
 </script>
 

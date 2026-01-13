@@ -70,10 +70,10 @@ import { useI18n } from 'vue-i18n';
 import { useRepresentableAgentPauseCause } from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause.js';
 
 const props = defineProps({
-  options: {
-    type: Array,
-    default: () => [],
-  },
+	options: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const emit = defineEmits(['change', 'close']);
@@ -87,33 +87,33 @@ const { t } = useI18n();
 const { representablePauseCause } = useRepresentableAgentPauseCause(options);
 
 const pauseCause = computed(() =>
-  representablePauseCause.value.map((cause) => ({
-    ...cause,
-    duration: cause.isOverflow
-      ? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-      : `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
-    limit: cause.limitMin
-      ? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-      : t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
-    statusComment: '',
-  })),
+	representablePauseCause.value.map((cause) => ({
+		...cause,
+		duration: cause.isOverflow
+			? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+			: `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
+		limit: cause.limitMin
+			? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+			: t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
+		statusComment: '',
+	})),
 );
 
 function select(option) {
-  selected.value = option;
+	selected.value = option;
 }
 
 function close() {
-  emit('close');
+	emit('close');
 }
 
 function setPause() {
-  const payload = {
-    pauseCause: selected.value.name,
-    statusComment: selected.value?.statusComment || ''
-  }
-  emit('change', payload);
-  close();
+	const payload = {
+		pauseCause: selected.value.name,
+		statusComment: selected.value?.statusComment || '',
+	};
+	emit('change', payload);
+	close();
 }
 </script>
 

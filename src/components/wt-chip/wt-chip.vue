@@ -12,17 +12,17 @@
 
 <script setup lang="ts">
 import type { ChipProps } from 'primevue/chip';
-import { defineProps, withDefaults  } from 'vue';
+import { defineProps, withDefaults } from 'vue';
 
-import { ChipColor } from '../../enums'
+import { ChipColor } from '../../enums';
 
 interface WtProps extends ChipProps {
-  color?: ChipColor;
+	color?: ChipColor;
 }
 
 withDefaults(defineProps<WtProps>(), {
-  color: ChipColor.MAIN,
-  removable: false,
+	color: ChipColor.MAIN,
+	removable: false,
 });
 </script>
 

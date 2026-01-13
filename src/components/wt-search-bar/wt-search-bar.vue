@@ -83,61 +83,61 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
 import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({
-  v: {
-    type: Object,
-  },
-  customValidators: {
-    type: Array,
-    default: () => [],
-  },
-  /**
-   * Current search-bar value (`v-model`)
-   */
-  value: {
-    type: String,
-    default: '',
-  },
-  /**
-   * search-bar placeholder
-   */
-  placeholder: {
-    type: String,
-  },
-  hint: {
-    type: String,
-    description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
-  },
-  searchMode: {
-    type: [String, Object],
-  },
-  searchModeOptions: {
-    type: Array,
-    default: () => [],
-  },
+	v: {
+		type: Object,
+	},
+	customValidators: {
+		type: Array,
+		default: () => [],
+	},
+	/**
+	 * Current search-bar value (`v-model`)
+	 */
+	value: {
+		type: String,
+		default: '',
+	},
+	/**
+	 * search-bar placeholder
+	 */
+	placeholder: {
+		type: String,
+	},
+	hint: {
+		type: String,
+		description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
+	},
+	searchMode: {
+		type: [String, Object],
+	},
+	searchModeOptions: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const emit = defineEmits<{
-  /**
-   * @param value - search-bar value
-   */
-  input: [string];
-  /**
-   * @param value - search-bar value
-   */
-  search: [string];
-  /**
-   * @param value - search-bar value
-   */
-  enter: [string];
-  /**
-   * @param option - selected search mode
-   */
-  'update:search-mode': [string | object];
-  /**
-   * @deprecated
-   * @param option - selected search mode
-   */
-  'change:search-mode': [string | object];
+	/**
+	 * @param value - search-bar value
+	 */
+	input: [string];
+	/**
+	 * @param value - search-bar value
+	 */
+	search: [string];
+	/**
+	 * @param value - search-bar value
+	 */
+	enter: [string];
+	/**
+	 * @param option - selected search mode
+	 */
+	'update:search-mode': [string | object];
+	/**
+	 * @deprecated
+	 * @param option - selected search mode
+	 */
+	'change:search-mode': [string | object];
 }>();
 
 const { v, customValidators } = toRefs(props);
@@ -145,31 +145,31 @@ const { v, customValidators } = toRefs(props);
 const { invalid } = useValidation({ v, customValidators });
 
 const invalidColorProvider = computed(() =>
-  invalid.value ? 'error' : 'default',
+	invalid.value ? 'error' : 'default',
 );
 
 const search = debounce((value) => {
-  emit('search', value);
+	emit('search', value);
 }, 1000);
 
 function handleInput(value) {
-  emit('input', value);
-  search(value);
+	emit('input', value);
+	search(value);
 }
 
 function handleKeyup(event) {
-  if (event.key === 'Enter') {
-    search(event.target.value);
-    event.preventDefault();
-  } else if (event.key === 'Esc') {
-    handleInput('');
-    event.preventDefault();
-  }
+	if (event.key === 'Enter') {
+		search(event.target.value);
+		event.preventDefault();
+	} else if (event.key === 'Esc') {
+		handleInput('');
+		event.preventDefault();
+	}
 }
 
 function updateSearchMode({ option }) {
-  emit('update:search-mode', option);
-  emit('change:search-mode', option);
+	emit('update:search-mode', option);
+	emit('change:search-mode', option);
 }
 </script>
 

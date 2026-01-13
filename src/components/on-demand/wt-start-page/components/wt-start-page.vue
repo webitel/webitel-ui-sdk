@@ -22,39 +22,42 @@ import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 
 interface NavCard {
-  value: string;
-  route: string;
-  name: string;
-  text: string;
-  disabled: boolean;
-  images: {
-    light: string;
-    dark: string;
-  };
+	value: string;
+	route: string;
+	name: string;
+	text: string;
+	disabled: boolean;
+	images: {
+		light: string;
+		dark: string;
+	};
 }
 
 interface AppLogo {
-  light: string;
-  dark: string;
+	light: string;
+	dark: string;
 }
 
-const props = withDefaults(defineProps<{
-  nav: NavCard[];
-  appLogo: AppLogo;
-  darkMode?: boolean;
-}>(), {
-  darkMode: false,
-});
+const props = withDefaults(
+	defineProps<{
+		nav: NavCard[];
+		appLogo: AppLogo;
+		darkMode?: boolean;
+	}>(),
+	{
+		darkMode: false,
+	},
+);
 
 const logo = computed(() => {
-  return props.darkMode ? props.appLogo.dark : props.appLogo.light;
+	return props.darkMode ? props.appLogo.dark : props.appLogo.light;
 });
 
 const navCards = computed(() => {
-  return props.nav.map((navItem) => ({
-    ...navItem,
-    image: props.darkMode ? navItem.images.dark : navItem.images.light,
-  }));
+	return props.nav.map((navItem) => ({
+		...navItem,
+		image: props.darkMode ? navItem.images.dark : navItem.images.light,
+	}));
 });
 </script>
 

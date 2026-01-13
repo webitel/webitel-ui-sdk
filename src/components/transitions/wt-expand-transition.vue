@@ -12,40 +12,40 @@
 <script>
 // https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/
 export default {
-  name: 'WtExpandTransition',
-  methods: {
-    afterEnter(element) {
-      element.style.height = 'auto';
-    },
-    enter(element) {
-      const { width } = getComputedStyle(element);
-      element.style.width = width;
-      element.style.position = 'absolute';
-      element.style.visibility = 'hidden';
-      element.style.height = 'auto';
+	name: 'WtExpandTransition',
+	methods: {
+		afterEnter(element) {
+			element.style.height = 'auto';
+		},
+		enter(element) {
+			const { width } = getComputedStyle(element);
+			element.style.width = width;
+			element.style.position = 'absolute';
+			element.style.visibility = 'hidden';
+			element.style.height = 'auto';
 
-      const { height } = getComputedStyle(element);
-      element.style.width = null;
-      element.style.position = null;
-      element.style.visibility = null;
-      element.style.height = 0;
+			const { height } = getComputedStyle(element);
+			element.style.width = null;
+			element.style.position = null;
+			element.style.visibility = null;
+			element.style.height = 0;
 
-      // Force repaint to make sure the
-      // animation is triggered correctly.
+			// Force repaint to make sure the
+			// animation is triggered correctly.
 
-      getComputedStyle(element).height;
+			getComputedStyle(element).height;
 
-      requestAnimationFrame(() => (element.style.height = height));
-    },
-    leave(element) {
-      const { height } = getComputedStyle(element);
-      element.style.height = height;
+			requestAnimationFrame(() => (element.style.height = height));
+		},
+		leave(element) {
+			const { height } = getComputedStyle(element);
+			element.style.height = height;
 
-      getComputedStyle(element).height;
+			getComputedStyle(element).height;
 
-      requestAnimationFrame(() => (element.style.height = 0));
-    },
-  },
+			requestAnimationFrame(() => (element.style.height = 0));
+		},
+	},
 };
 </script>
 

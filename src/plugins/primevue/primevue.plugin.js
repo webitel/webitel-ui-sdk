@@ -24,43 +24,43 @@ import Tooltip from 'primevue/tooltip';
 import WebitelTheme from './theme/webitel-theme.js';
 
 const changeComponentCompatMode = (component) => {
-  component.compatConfig = { MODE: 3 };
+	component.compatConfig = { MODE: 3 };
 
-  return component;
+	return component;
 };
 
 const initPrimevue = (app) => {
-  app.use(PrimeVue, {
-    theme: {
-      preset: WebitelTheme,
-      options: {
-        darkModeSelector: '.theme--dark',
-      },
-    },
-  });
+	app.use(PrimeVue, {
+		theme: {
+			preset: WebitelTheme,
+			options: {
+				darkModeSelector: '.theme--dark',
+			},
+		},
+	});
 
-  app.component('PButton', changeComponentCompatMode(PButton));
-  app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
-  app.component('PInputText', changeComponentCompatMode(PInputText));
-  app.component('PPopover', changeComponentCompatMode(PPopover));
-  app.component('PMenubar', changeComponentCompatMode(PMenubar));
-  app.component('PToolbar', changeComponentCompatMode(PToolbar));
-  app.component('PAvatar', changeComponentCompatMode(PAvatar));
-  app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
-  app.component('PTable', changeComponentCompatMode(PTable));
-  app.component('PColumn', changeComponentCompatMode(PColumn));
-  app.component('PRadio', changeComponentCompatMode(PRadio));
-  app.component('PChip', changeComponentCompatMode(PChip));
-  app.component('PTextarea', changeComponentCompatMode(PTextarea));
-  app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
-  app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
-  app.component('PSlider', changeComponentCompatMode(PSlider));
-  app.component('PDivider', changeComponentCompatMode(PDivider));
-  app.component('PImage', changeComponentCompatMode(PImage));
-  app.component('PGalleria', changeComponentCompatMode(PGalleria));
-  app.component('PBadge', changeComponentCompatMode(PBadge));
+	app.component('PButton', changeComponentCompatMode(PButton));
+	app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
+	app.component('PInputText', changeComponentCompatMode(PInputText));
+	app.component('PPopover', changeComponentCompatMode(PPopover));
+	app.component('PMenubar', changeComponentCompatMode(PMenubar));
+	app.component('PToolbar', changeComponentCompatMode(PToolbar));
+	app.component('PAvatar', changeComponentCompatMode(PAvatar));
+	app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
+	app.component('PTable', changeComponentCompatMode(PTable));
+	app.component('PColumn', changeComponentCompatMode(PColumn));
+	app.component('PRadio', changeComponentCompatMode(PRadio));
+	app.component('PChip', changeComponentCompatMode(PChip));
+	app.component('PTextarea', changeComponentCompatMode(PTextarea));
+	app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
+	app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
+	app.component('PSlider', changeComponentCompatMode(PSlider));
+	app.component('PDivider', changeComponentCompatMode(PDivider));
+	app.component('PImage', changeComponentCompatMode(PImage));
+	app.component('PGalleria', changeComponentCompatMode(PGalleria));
+	app.component('PBadge', changeComponentCompatMode(PBadge));
 
-  app.directive('tooltip', Tooltip);
+	app.directive('tooltip', Tooltip);
 };
 
 export default initPrimevue;

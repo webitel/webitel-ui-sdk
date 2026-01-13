@@ -20,18 +20,18 @@
 
 <script>
 export default {
-  props: {
-    color: {
-      type: String,
-      default: 'main',
-      description: '["main", "icon", "on-dark", "on-light"]',
-    },
-    size: {
-      type: String,
-      default: 'sm',
-      description: '["xs", "sm"]',
-    }
-  },
+	props: {
+		color: {
+			type: String,
+			default: 'main',
+			description: '["main", "icon", "on-dark", "on-light"]',
+		},
+		size: {
+			type: String,
+			default: 'sm',
+			description: '["xs", "sm"]',
+		},
+	},
 };
 </script>
 

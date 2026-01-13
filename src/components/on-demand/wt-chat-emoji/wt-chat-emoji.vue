@@ -22,13 +22,13 @@
 <script setup>
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
-import { nextTick,onBeforeUnmount, ref } from 'vue';
+import { nextTick, onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
-  size: {
-    type: String,
-    default: ComponentSize.MD,
-  },
+	size: {
+		type: String,
+		default: ComponentSize.MD,
+	},
 });
 
 const emit = defineEmits(['insert-emoji']);
@@ -38,47 +38,47 @@ const isOpened = ref(false);
 const picker = ref(null);
 
 const initPicker = async () => {
-  if (picker.value) return;
+	if (picker.value) return;
 
-  picker.value = document.createElement('emoji-picker');
+	picker.value = document.createElement('emoji-picker');
 
-  appendPicker();
-  picker.value.addEventListener('emoji-click', emitEmojiClickEvent);
+	appendPicker();
+	picker.value.addEventListener('emoji-click', emitEmojiClickEvent);
 };
 
 const appendPicker = () => {
-  if (emojiPickerWrapper.value && picker.value) {
-    emojiPickerWrapper.value.appendChild(picker.value);
-  }
+	if (emojiPickerWrapper.value && picker.value) {
+		emojiPickerWrapper.value.appendChild(picker.value);
+	}
 };
 
 const emitEmojiClickEvent = (event) => {
-  const { unicode } = event.detail;
-  emit('insert-emoji', unicode);
-  closePicker();
+	const { unicode } = event.detail;
+	emit('insert-emoji', unicode);
+	closePicker();
 };
 
 const closePicker = () => {
-  isOpened.value = false;
-  if (picker.value && emojiPickerWrapper.value) {
-    picker.value.removeEventListener('emoji-click', emitEmojiClickEvent);
-    emojiPickerWrapper.value.removeChild(picker.value);
-    picker.value = null;
-  }
+	isOpened.value = false;
+	if (picker.value && emojiPickerWrapper.value) {
+		picker.value.removeEventListener('emoji-click', emitEmojiClickEvent);
+		emojiPickerWrapper.value.removeChild(picker.value);
+		picker.value = null;
+	}
 };
 
 const togglePicker = async () => {
-  isOpened.value = !isOpened.value;
-  if (isOpened.value) {
-    await nextTick();
-    await initPicker();
-  } else {
-    closePicker();
-  }
+	isOpened.value = !isOpened.value;
+	if (isOpened.value) {
+		await nextTick();
+		await initPicker();
+	} else {
+		closePicker();
+	}
 };
 
 onBeforeUnmount(() => {
-  closePicker();
+	closePicker();
 });
 </script>
 

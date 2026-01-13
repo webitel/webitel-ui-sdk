@@ -9,10 +9,10 @@ const generateCustomSizeCss = ({ size, dt }) => `
 `;
 
 const avatar = {
-  ...AvatarScheme.sizes,
-  colorScheme: AvatarScheme.colorScheme,
+	...AvatarScheme.sizes,
+	colorScheme: AvatarScheme.colorScheme,
 
-  css: ({ dt }) => `
+	css: ({ dt }) => `
         ${generateCustomSizeCss({ size: '2xs', dt })}
         ${generateCustomSizeCss({ size: 'xs', dt })}
         ${generateCustomSizeCss({ size: 'sm', dt })}

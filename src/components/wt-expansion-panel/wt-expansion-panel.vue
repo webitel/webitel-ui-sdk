@@ -23,14 +23,14 @@ import { ref, watch } from 'vue';
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 const props = defineProps({
-  size: {
-    type: String,
-    default: 'md',
-  },
-  collapsed: {
-    type: Boolean,
-    default: false,
-  },
+	size: {
+		type: String,
+		default: 'md',
+	},
+	collapsed: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits(['opened', 'closed']);
@@ -38,32 +38,32 @@ const emit = defineEmits(['opened', 'closed']);
 const opened = ref(!props.collapsed);
 
 function open() {
-  if (!opened.value) {
-    opened.value = true;
-    emit('opened');
-  }
+	if (!opened.value) {
+		opened.value = true;
+		emit('opened');
+	}
 }
 
 function close() {
-  if (opened.value) {
-    opened.value = false;
-    emit('closed');
-  }
+	if (opened.value) {
+		opened.value = false;
+		emit('closed');
+	}
 }
 
 function toggle() {
-  return opened.value ? close() : open();
+	return opened.value ? close() : open();
 }
 
 watch(
-  () => props.collapsed,
-  (newVal) => {
-    if (newVal) {
-      close();
-    } else {
-      open();
-    }
-  },
+	() => props.collapsed,
+	(newVal) => {
+		if (newVal) {
+			close();
+		} else {
+			open();
+		}
+	},
 );
 </script>
 

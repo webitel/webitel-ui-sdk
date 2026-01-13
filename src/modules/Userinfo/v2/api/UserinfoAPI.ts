@@ -1,70 +1,65 @@
 import { getDefaultInstance } from '@webitel/api-services/api/defaults';
 import {
-  applyTransform,
-  merge,
-  notify,
-  snakeToCamel,
+	applyTransform,
+	merge,
+	notify,
+	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
 import type { AxiosInstance } from 'axios';
 
 import type {
-  GlobalAccessApiResponseItem,
-  ScopeAccessApiResponseItem,
-  VisibilityAccess,
+	GlobalAccessApiResponseItem,
+	ScopeAccessApiResponseItem,
+	VisibilityAccess,
 } from '../types/UserAccess';
 
 let instance = getDefaultInstance();
 
 const setInstance = (newInstance: AxiosInstance) => {
-  instance = newInstance;
+	instance = newInstance;
 };
 
 const getSession = async (): Promise<{
-  scope: ScopeAccessApiResponseItem[];
-  permissions: GlobalAccessApiResponseItem[];
-  userId: string;
+	scope: ScopeAccessApiResponseItem[];
+	permissions: GlobalAccessApiResponseItem[];
+	userId: string;
 }> => {
-  const url = '/userinfo';
-  try {
-    const defaultObject = () => ({
-      scope: [],
-      permissions: [],
-    });
+	const url = '/userinfo';
+	try {
+		const defaultObject = () => ({
+			scope: [],
+			permissions: [],
+		});
 
-    const response = await instance.get(url);
-    return applyTransform(response.data, [
-      merge(defaultObject()),
-      snakeToCamel(),
-    ]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+		const response = await instance.get(url);
+		return applyTransform(response.data, [
+			merge(defaultObject()),
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
 };
 
 const getUiVisibilityAccess = async (): Promise<VisibilityAccess> => {
-  const url = 'role/metadata/access';
-  try {
-    const response = await instance.get(url);
-    return applyTransform(response.data, [
-      // snakeToCamel(),  // https://webitel.atlassian.net/browse/WTEL-7643
-    ]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+	const url = 'role/metadata/access';
+	try {
+		const response = await instance.get(url);
+		return applyTransform(response.data, [
+			// snakeToCamel(),  // https://webitel.atlassian.net/browse/WTEL-7643
+		]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
 };
 
 const logout = async () => {
-  const url = '/logout';
-  try {
-    return await instance.post(url, {});
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+	const url = '/logout';
+	try {
+		return await instance.post(url, {});
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
 };
 
-export {
-  getSession,
-  getUiVisibilityAccess,
-  logout,
-  setInstance,
-};
+export { getSession, getUiVisibilityAccess, logout, setInstance };

@@ -1,7 +1,7 @@
 :root {
-  --input-padding: calc(var(--spacing-xs) - 1px); /* - border */
-  --input-border: 1px solid;
-  --input-icon-margin: var(--spacing-xs);
+	--input-padding: calc(var(--spacing-xs) - 1px); /* - border */
+	--input-border: 1px solid;
+	--input-icon-margin: var(--spacing-xs);
 
-  --input-after-wrapper-gap: var(--spacing-2xs);
+	--input-after-wrapper-gap: var(--spacing-2xs);
 }

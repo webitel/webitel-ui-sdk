@@ -18,14 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits} from "vue";
+import { defineEmits } from 'vue';
 
 import WtIconBtn from '../../../wt-icon-btn/wt-icon-btn.vue';
 
 const emit = defineEmits<{
-  'toggle': [value: boolean];
+	toggle: [value: boolean];
 }>();
-
 </script>
 
 <style scoped>.fullscreen-button[data-active] .fullscreen-button__enter,

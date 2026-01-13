@@ -104,13 +104,23 @@
 <script setup lang="ts">
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import type { GalleriaProps } from 'primevue';
-import { computed, defineModel, defineProps, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import {
+	computed,
+	defineModel,
+	defineProps,
+	nextTick,
+	onMounted,
+	onUnmounted,
+	ref,
+	watch,
+} from 'vue';
 
-import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables'
+import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables';
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
-interface Props extends GalleriaProps{
-  value: WtGalleriaItem[];
+
+interface Props extends GalleriaProps {
+	value: WtGalleriaItem[];
 }
 
 const props = defineProps<Props>();
@@ -118,78 +128,86 @@ const props = defineProps<Props>();
 const emit = defineEmits(['download', 'delete']);
 
 const visible = defineModel<boolean>('visible', { required: true });
-const activeIndex = defineModel<number>('activeIndex', { default: 0, required: false });
+const activeIndex = defineModel<number>('activeIndex', {
+	default: 0,
+	required: false,
+});
 const currentImage = computed(() => props.value[activeIndex.value]);
-const isImageOnLoad = ref(true)
+const isImageOnLoad = ref(true);
 
 const showThumbnails = ref(true);
 
-const { 
-  fullScreen,
-  toggleFullScreen
-} = useGalleriaFullscreen()
+const { fullScreen, toggleFullScreen } = useGalleriaFullscreen();
+
+const { listenMaskElementClick, removeMaskElementClick } =
+	useGalleriaMaskClick(visible);
 
 const {
-  listenMaskElementClick,
-  removeMaskElementClick
-} = useGalleriaMaskClick(visible)
+	isVisible: isDeleteConfirmationPopup,
+	deleteCount,
+	deleteCallback,
 
-const {
-  isVisible: isDeleteConfirmationPopup,
-  deleteCount,
-  deleteCallback,
-
-  askDeleteConfirmation,
-  closeDelete,
+	askDeleteConfirmation,
+	closeDelete,
 } = useDeleteConfirmationPopup();
 
 const toggleThumbnails = () => {
-  showThumbnails.value = !showThumbnails.value
-}
+	showThumbnails.value = !showThumbnails.value;
+};
 
 const onImageLoad = () => {
-  isImageOnLoad.value = false
-}
+	isImageOnLoad.value = false;
+};
 
 const handleDelete = () => {
-  if (fullScreen.value) toggleFullScreen()
-  askDeleteConfirmation({
-    deleteCount: 1,
-    callback: () => emit('delete', activeIndex)
-  })
-}
+	if (fullScreen.value) toggleFullScreen();
+	askDeleteConfirmation({
+		deleteCount: 1,
+		callback: () => emit('delete', activeIndex),
+	});
+};
 
-watch(() => currentImage.value, (oldValue, newValue) => {
-  if(oldValue?.src == newValue?.src) return
-  isImageOnLoad.value = true
-}, { deep: true })
+watch(
+	() => currentImage.value,
+	(oldValue, newValue) => {
+		if (oldValue?.src == newValue?.src) return;
+		isImageOnLoad.value = true;
+	},
+	{ deep: true },
+);
 
-watch(() => visible.value, () => {
-  if (!visible.value) {
-    activeIndex.value = 0
-    removeMaskElementClick()
-  } else {
-    nextTick(() => {
-      listenMaskElementClick()
-    })
-  }
-})
+watch(
+	() => visible.value,
+	() => {
+		if (!visible.value) {
+			activeIndex.value = 0;
+			removeMaskElementClick();
+		} else {
+			nextTick(() => {
+				listenMaskElementClick();
+			});
+		}
+	},
+);
 
-watch(() => props.value, () => {
-  if (!props.value.length) { 
-    visible.value = false
-  }
-})
+watch(
+	() => props.value,
+	() => {
+		if (!props.value.length) {
+			visible.value = false;
+		}
+	},
+);
 
 onMounted(() => {
-  if (visible.value) {
-    listenMaskElementClick()
-  }
-})
+	if (visible.value) {
+		listenMaskElementClick();
+	}
+});
 
 onUnmounted(() => {
-  removeMaskElementClick()
-})
+	removeMaskElementClick();
+});
 </script>
 
 <style >.wt-galleria__image-container {

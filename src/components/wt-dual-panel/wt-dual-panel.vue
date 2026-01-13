@@ -25,18 +25,18 @@ import { computed, defineEmits, ref } from 'vue';
 import { ComponentSize, IconAction } from '../../enums';
 
 const props = defineProps({
-  hideHeader: {
-    type: Boolean,
-    default: false,
-  },
-  actionsPanel: {
-    type: Boolean,
-    default: true,
-  },
-  disableResize: {
-    type: Boolean,
-    default: false,
-  },
+	hideHeader: {
+		type: Boolean,
+		default: false,
+	},
+	actionsPanel: {
+		type: Boolean,
+		default: true,
+	},
+	disableResize: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits(['update:side-panel-size']);
@@ -44,12 +44,12 @@ const emit = defineEmits(['update:side-panel-size']);
 const sidePanelCollapsed = ref(false);
 
 const toggleSidePanel = () => {
-  sidePanelCollapsed.value = !sidePanelCollapsed.value;
-  emit('update:side-panel-size', sidePanelSize.value);
+	sidePanelCollapsed.value = !sidePanelCollapsed.value;
+	emit('update:side-panel-size', sidePanelSize.value);
 };
 
 const sidePanelSize = computed(() =>
-  sidePanelCollapsed.value ? ComponentSize.SM : ComponentSize.MD,
+	sidePanelCollapsed.value ? ComponentSize.SM : ComponentSize.MD,
 );
 </script>
 

@@ -31,16 +31,16 @@
 
 <script setup>
 const props = defineProps({
-  error: {
-    type: Object,
-    required: true,
-  },
+	error: {
+		type: Object,
+		required: true,
+	},
 });
 
 const emit = defineEmits(['close']);
 
 function close() {
-  emit('close');
+	emit('close');
 }
 </script>
 

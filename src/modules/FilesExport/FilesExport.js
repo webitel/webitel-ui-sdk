@@ -8,125 +8,127 @@ import path from 'path-browserify';
 import { _wtUiLog } from '../../scripts/logger.js';
 
 export default class FilesExport {
-  filename = 'files';
+	filename = 'files';
 
-  fetchMethod = null;
+	fetchMethod = null;
 
-  isLoading = false;
+	isLoading = false;
 
-  skipFilesWithError = false;
+	skipFilesWithError = false;
 
-  downloadProgress = { count: 0 };
+	downloadProgress = { count: 0 };
 
-  zippingProgress = { percent: 0 };
+	zippingProgress = { percent: 0 };
 
-  filesURL = getCallMediaUrl;
+	filesURL = getCallMediaUrl;
 
-  constructor({ fetchMethod, filename, filesURL, skipFilesWithError = false }) {
-    if (fetchMethod) this.fetchMethod = fetchMethod;
-    if (filename) this.filename = filename;
-    if (filesURL) this.filesURL = filesURL;
-    this.skipFilesWithError = skipFilesWithError;
-  }
+	constructor({ fetchMethod, filename, filesURL, skipFilesWithError = false }) {
+		if (fetchMethod) this.fetchMethod = fetchMethod;
+		if (filename) this.filename = filename;
+		if (filesURL) this.filesURL = filesURL;
+		this.skipFilesWithError = skipFilesWithError;
+	}
 
-  _fetchFileBinary(fileId) {
-    const url = this.filesURL(fileId);
-    return new Promise((resolve, reject) =>
-      jszipUtils.getBinaryContent(url, (err, data) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      }),
-    );
-  }
+	_fetchFileBinary(fileId) {
+		const url = this.filesURL(fileId);
+		return new Promise((resolve, reject) =>
+			jszipUtils.getBinaryContent(url, (err, data) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(data);
+				}
+			}),
+		);
+	}
 
-  resetProgress() {
-    this.downloadProgress = { count: 0 };
-    this.zippingProgress = { percent: 0 };
-  }
+	resetProgress() {
+		this.downloadProgress = { count: 0 };
+		this.zippingProgress = { percent: 0 };
+	}
 
-  async _addFilesToZip(items, zip) {
-    for (const item of items) {
-      if (item.files) {
-        if (item.files?.[EngineCallFileType.FileTypeAudio]) {
-          await this._addFilesToZip(item.files[EngineCallFileType.FileTypeAudio], zip);
-        } else continue;
-      }
-       else {
-        try {
-          const binary = await this._fetchFileBinary(item.id);
-          const ext = item.mimeType.split('/').pop();
-          // itemName needed to remove extension from item.name https://stackoverflow.com/a/31615711
-          const itemName = path.parse(item.name).name;
-          zip.file(`${itemName}.${ext}`, binary);
-          this.downloadProgress.count += 1;
-        } catch (err) {
-          _wtUiLog.warn({ entity: 'script', module: 'FilesExport' })(
-            `An error occurred while downloading a file id=${item.id}`,
-            err,
-          );
-          if (!this.skipFilesWithError) {
-            throw err;
-          }
-        }
-      }
-    }
-  }
+	async _addFilesToZip(items, zip) {
+		for (const item of items) {
+			if (item.files) {
+				if (item.files?.[EngineCallFileType.FileTypeAudio]) {
+					await this._addFilesToZip(
+						item.files[EngineCallFileType.FileTypeAudio],
+						zip,
+					);
+				} else continue;
+			} else {
+				try {
+					const binary = await this._fetchFileBinary(item.id);
+					const ext = item.mimeType.split('/').pop();
+					// itemName needed to remove extension from item.name https://stackoverflow.com/a/31615711
+					const itemName = path.parse(item.name).name;
+					zip.file(`${itemName}.${ext}`, binary);
+					this.downloadProgress.count += 1;
+				} catch (err) {
+					_wtUiLog.warn({ entity: 'script', module: 'FilesExport' })(
+						`An error occurred while downloading a file id=${item.id}`,
+						err,
+					);
+					if (!this.skipFilesWithError) {
+						throw err;
+					}
+				}
+			}
+		}
+	}
 
-  async _generateZip(zip) {
-    try {
-      return await zip.generateAsync({ type: 'blob' }, (progress) => {
-        this.zippingProgress = progress;
-      });
-    } catch (err) {
-      throw new Error('Failed to generate zip file');
-    }
-  }
+	async _generateZip(zip) {
+		try {
+			return await zip.generateAsync({ type: 'blob' }, (progress) => {
+				this.zippingProgress = progress;
+			});
+		} catch (err) {
+			throw new Error('Failed to generate zip file');
+		}
+	}
 
-  async _saveZip(file) {
-    try {
-      saveAs(file, `${this.filename}.zip`);
-    } catch (err) {
-      throw new Error('Failed to save a file');
-    }
-  }
+	async _saveZip(file) {
+		try {
+			saveAs(file, `${this.filename}.zip`);
+		} catch (err) {
+			throw new Error('Failed to save a file');
+		}
+	}
 
-  async _fetchAndZip(zip, requestParams) {
-    const params = {
-      from: 0,
-      size: 5000,
-      fields: ['files'],
-      ...requestParams,
-    };
+	async _fetchAndZip(zip, requestParams) {
+		const params = {
+			from: 0,
+			size: 5000,
+			fields: ['files'],
+			...requestParams,
+		};
 
-    let page = 1;
-    let isNext = false;
-    do {
-      const { items, next } = await this.fetchMethod({ ...params, page });
-      await this._addFilesToZip(items, zip);
+		let page = 1;
+		let isNext = false;
+		do {
+			const { items, next } = await this.fetchMethod({ ...params, page });
+			await this._addFilesToZip(items, zip);
 
-      isNext = next;
-      page += 1;
-    } while (isNext);
-  }
+			isNext = next;
+			page += 1;
+		} while (isNext);
+	}
 
-  async exportFiles(files, { reqParams }) {
-    try {
-      this.isLoading = true;
-      const zip = new JSZip();
-      if (files?.length) await this._addFilesToZip(files, zip);
-      else {
-        await this._fetchAndZip(zip, reqParams);
-      }
-      const file = await this._generateZip(zip);
-      await this._saveZip(file);
-      this.resetProgress();
-    } catch (err) {
-      throw err;
-    } finally {
-      this.isLoading = false;
-    }
-  }
+	async exportFiles(files, { reqParams }) {
+		try {
+			this.isLoading = true;
+			const zip = new JSZip();
+			if (files?.length) await this._addFilesToZip(files, zip);
+			else {
+				await this._fetchAndZip(zip, reqParams);
+			}
+			const file = await this._generateZip(zip);
+			await this._saveZip(file);
+			this.resetProgress();
+		} catch (err) {
+			throw err;
+		} finally {
+			this.isLoading = false;
+		}
+	}
 }

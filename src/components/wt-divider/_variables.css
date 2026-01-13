@@ -1,8 +1,8 @@
 :root {
-  --divider-border: 1px solid;
-  --divider-border-color: var(--grey-lighten-4);
+	--divider-border: 1px solid;
+	--divider-border-color: var(--grey-lighten-4);
 }
 
 :root.theme--dark {
-  --divider-border-color: var(--grey-darken-2);
+	--divider-border-color: var(--grey-darken-2);
 }

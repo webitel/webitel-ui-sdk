@@ -16,14 +16,14 @@ import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 const props = defineProps({
-  namespace: {
-    type: String,
-    required: true,
-  },
-  isNext: {
-    type: Boolean,
-    default: false,
-  },
+	namespace: {
+		type: String,
+		required: true,
+	},
+	isNext: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const pageFilterName = 'page';
@@ -34,31 +34,31 @@ const store = useStore();
 const localSize = ref(0);
 
 const page = computed(() =>
-  store.getters[`${props.namespace}/GET_FILTER`](pageFilterName),
+	store.getters[`${props.namespace}/GET_FILTER`](pageFilterName),
 );
 const size = computed(() =>
-  store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName),
+	store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName),
 );
 
 function setFilter(payload) {
-  return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
+	return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
 }
 
 function setPage(value) {
-  return setFilter({ value, name: pageFilterName });
+	return setFilter({ value, name: pageFilterName });
 }
 
 function setSize(value) {
-  if (value === size.value) return;
-  return setFilter({ value, name: sizeFilterName });
+	if (value === size.value) return;
+	return setFilter({ value, name: sizeFilterName });
 }
 
 watch(
-  size,
-  () => {
-    localSize.value = size.value;
-  },
-  { immediate: true },
+	size,
+	() => {
+		localSize.value = size.value;
+	},
+	{ immediate: true },
 );
 </script>
 

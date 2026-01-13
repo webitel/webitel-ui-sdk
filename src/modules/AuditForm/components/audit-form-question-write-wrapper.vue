@@ -53,14 +53,14 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { EngineAuditQuestionType, EngineQuestion } from 'webitel-sdk';
+import { EngineAuditQuestionType, type EngineQuestion } from 'webitel-sdk';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
-import {updateObject} from '../../../scripts';
+import { updateObject } from '../../../scripts';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema.js';
 import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema.js';
 import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
@@ -69,13 +69,13 @@ import AuditFormQuestionScore from './form-questions/score/audit-form-question-s
 const questionModel = defineModel<EngineQuestion>('question');
 
 defineProps({
-  first: {
-    type: Boolean,
-    default: false,
-  },
-  v: {
-    type: Object,
-  },
+	first: {
+		type: Boolean,
+		default: false,
+	},
+	v: {
+		type: Object,
+	},
 });
 
 const emit = defineEmits(['copy', 'delete']);
@@ -83,45 +83,48 @@ const emit = defineEmits(['copy', 'delete']);
 const { t } = useI18n();
 
 const QuestionType = [
-  {
-    value: EngineAuditQuestionType.Option,
-    locale: 'webitelUI.auditForm.type.options',
-  },
-  {
-    value: EngineAuditQuestionType.Score,
-    locale: 'webitelUI.auditForm.type.score',
-  },
+	{
+		value: EngineAuditQuestionType.Option,
+		locale: 'webitelUI.auditForm.type.options',
+	},
+	{
+		value: EngineAuditQuestionType.Score,
+		locale: 'webitelUI.auditForm.type.score',
+	},
 ];
 
 const prettifiedQuestionType = computed(() =>
-  QuestionType.find(({ value }) => value === questionModel.value.type),
+	QuestionType.find(({ value }) => value === questionModel.value.type),
 );
 
 const QuestionTypeComponent = computed(() => {
-  if (questionModel.value.type === EngineAuditQuestionType.Option)
-    return AuditFormQuestionOptions;
-  if (questionModel.value.type === EngineAuditQuestionType.Score)
-    return AuditFormQuestionScore;
-  return null;
+	if (questionModel.value.type === EngineAuditQuestionType.Option)
+		return AuditFormQuestionOptions;
+	if (questionModel.value.type === EngineAuditQuestionType.Score)
+		return AuditFormQuestionScore;
+	return null;
 });
 
 function updateQuestion({ path, value }) {
-  questionModel.value = updateObject({ obj: questionModel.value, path, value });
+	questionModel.value = updateObject({ obj: questionModel.value, path, value });
 }
 
 function handleQuestionTypeChange(type) {
-  const commonFields = {
-    question: questionModel.value.question,
-    required: questionModel.value.required,
-    description: questionModel.value.description,
-    criticalViolation: questionModel.value.criticalViolation,
-  };
+	const commonFields = {
+		question: questionModel.value.question,
+		required: questionModel.value.required,
+		description: questionModel.value.description,
+		criticalViolation: questionModel.value.criticalViolation,
+	};
 
-  if (type === EngineAuditQuestionType.Option) {
-    questionModel.value = { ...commonFields, ...generateQuestionOptionsSchema() };
-  } else if (type === EngineAuditQuestionType.Score) {
-    questionModel.value = { ...commonFields, ...generateQuestionScoreSchema() };
-  }
+	if (type === EngineAuditQuestionType.Option) {
+		questionModel.value = {
+			...commonFields,
+			...generateQuestionOptionsSchema(),
+		};
+	} else if (type === EngineAuditQuestionType.Score) {
+		questionModel.value = { ...commonFields, ...generateQuestionScoreSchema() };
+	}
 }
 </script>
 

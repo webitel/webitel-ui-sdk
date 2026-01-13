@@ -17,33 +17,33 @@
 
 <script>
 export default {
-  name: 'WtProgressBar',
-  props: {
-    max: {
-      type: [Number, String],
-      default: 100,
-    },
-    value: {
-      type: [Number, String],
-      default: 0,
-    },
-    color: {
-      type: String,
-      default: 'primary',
-      options: ['primary', 'secondary', 'success', 'error'],
-    },
-  },
-  computed: {
-    progress() {
-      return (this.value * 100) / this.max;
-    },
-    isOverflow() {
-      return this.progress >= 100;
-    },
-    progressWidth() {
-      return this.isOverflow ? 100 : this.progress;
-    },
-  },
+	name: 'WtProgressBar',
+	props: {
+		max: {
+			type: [Number, String],
+			default: 100,
+		},
+		value: {
+			type: [Number, String],
+			default: 0,
+		},
+		color: {
+			type: String,
+			default: 'primary',
+			options: ['primary', 'secondary', 'success', 'error'],
+		},
+	},
+	computed: {
+		progress() {
+			return (this.value * 100) / this.max;
+		},
+		isOverflow() {
+			return this.progress >= 100;
+		},
+		progressWidth() {
+			return this.isOverflow ? 100 : this.progress;
+		},
+	},
 };
 </script>
 

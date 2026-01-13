@@ -1,14 +1,14 @@
 import { TooltipScheme } from '@webitel/styleguide/component-schemes';
 
 const tooltip = {
-  root: TooltipScheme.sizes,
-  colorScheme: TooltipScheme.colorScheme,
+	root: TooltipScheme.sizes,
+	colorScheme: TooltipScheme.colorScheme,
 
-  css: ({ dt }) => `
+	css: ({ dt }) => `
       .p-tooltip-text {
           white-space: pre-line;
           word-break: normal;
-          background: ${dt(`tooltip.background`)};
+          background: ${dt('tooltip.background')};
           color: ${dt('tooltip.color')};
           padding: ${dt('tooltip.padding')};
           box-shadow: ${dt('tooltip.shadow')};

@@ -35,38 +35,38 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  hidePrimary: {
-    type: Boolean,
-    default: false,
-  },
-  hideSecondary: {
-    type: Boolean,
-    default: false,
-  },
-  primaryText: {
-    type: String,
-  },
-  primaryAction: {
-    type: Function,
-  },
-  primaryDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  secondaryDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  secondaryText: {
-    type: String,
-  },
-  secondaryAction: {
-    type: Function,
-  },
+	hidePrimary: {
+		type: Boolean,
+		default: false,
+	},
+	hideSecondary: {
+		type: Boolean,
+		default: false,
+	},
+	primaryText: {
+		type: String,
+	},
+	primaryAction: {
+		type: Function,
+	},
+	primaryDisabled: {
+		type: Boolean,
+		default: false,
+	},
+	secondaryDisabled: {
+		type: Boolean,
+		default: false,
+	},
+	secondaryText: {
+		type: String,
+	},
+	secondaryAction: {
+		type: Function,
+	},
 });
 
 const emptySecondary = computed(
-  () => !(props.secondaryAction || props.secondaryText),
+	() => !(props.secondaryAction || props.secondaryText),
 );
 </script>
 

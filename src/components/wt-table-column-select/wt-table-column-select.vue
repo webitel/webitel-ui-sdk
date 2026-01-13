@@ -103,11 +103,10 @@ export default {
   },
   methods: {
     shownColLabel({ text, locale }) {
-      if (!text  locale) {
+      if (!text  locale) 
         return typeof locale === 'string'
           ? this.$t(locale)
           : this.$t(...locale);
-      }
       return text;
     },
     openPopup() {

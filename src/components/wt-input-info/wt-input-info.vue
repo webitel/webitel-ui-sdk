@@ -11,13 +11,13 @@
 
 <script>
 export default {
-  name: 'WtInputInfo',
-  props: {
-    invalid: {
-      type: Boolean,
-      default: false,
-    },
-  },
+	name: 'WtInputInfo',
+	props: {
+		invalid: {
+			type: Boolean,
+			default: false,
+		},
+	},
 };
 </script>
 

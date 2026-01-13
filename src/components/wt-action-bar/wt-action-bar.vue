@@ -37,84 +37,84 @@ import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import { kebabToCamel } from '../../scripts/caseConverters.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
-  sectionActionsOrder,
-  tableActionsOrder,
+	sectionActionsOrder,
+	tableActionsOrder,
 } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
-  /**
-   * [`'table'`, `'section'`]
-   * */
-  mode: {
-    type: String,
-    default: 'table',
-    validator: (v) => ['table', 'section'].includes(v),
-  },
+	/**
+	 * [`'table'`, `'section'`]
+	 * */
+	mode: {
+		type: String,
+		default: 'table',
+		validator: (v) => ['table', 'section'].includes(v),
+	},
 
-  /**
-   * Not implemented
-   */
-  size: {
-    type: String,
-    // default: 'md',
-    // validator: (v) => ['sm', 'md', 'lg'].includes(v),
-  },
+	/**
+	 * Not implemented
+	 */
+	size: {
+		type: String,
+		// default: 'md',
+		// validator: (v) => ['sm', 'md', 'lg'].includes(v),
+	},
 
-  /**
-   * Leave the default value for the mode only listed in includes prop
-   */
+	/**
+	 * Leave the default value for the mode only listed in includes prop
+	 */
 
-  include: {
-    type: Array,
-    default: () => [],
-  },
+	include: {
+		type: Array,
+		default: () => [],
+	},
 
-  /**
-   * Leave the default values for the mode, except for those in exclude prop
-   */
+	/**
+	 * Leave the default values for the mode, except for those in exclude prop
+	 */
 
-  exclude: {
-    type: Array,
-    default: () => [],
-  },
+	exclude: {
+		type: Array,
+		default: () => [],
+	},
 
-  /**
-   * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
-   */
+	/**
+	 * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
+	 */
 
-  disabled: {
-    // Not implemented, but can be used to disable all actions
-    type: Boolean,
-    default: false,
-  },
+	disabled: {
+		// Not implemented, but can be used to disable all actions
+		type: Boolean,
+		default: false,
+	},
 
-  ...Object.values(IconAction).reduce((acc, action) => {
-    acc[`disabled:${action}`] = { type: Boolean, default: false };
-    return acc;
-  }, {}),
+	...Object.values(IconAction).reduce((acc, action) => {
+		acc[`disabled:${action}`] = { type: Boolean, default: false };
+		return acc;
+	}, {}),
 });
 const emit = defineEmits([
-  /**
-   * click:IconAction
-   */
-  ...Object.values(IconAction).map((action) => `click:${action}`),
+	/**
+	 * click:IconAction
+	 */
+	...Object.values(IconAction).map((action) => `click:${action}`),
 ]);
 
 const shownActions = computed(() => {
-  const actionsOrder =
-    props.mode === 'section' ? sectionActionsOrder : tableActionsOrder;
+	const actionsOrder =
+		props.mode === 'section' ? sectionActionsOrder : tableActionsOrder;
 
-  if (props.include.length)
-    return actionsOrder.filter((action) => props.include.includes(action));
+	if (props.include.length)
+		return actionsOrder.filter((action) => props.include.includes(action));
 
-  if (props.exclude.length)
-    return actionsOrder.filter((action) => !props.exclude.includes(action));
+	if (props.exclude.length)
+		return actionsOrder.filter((action) => !props.exclude.includes(action));
 
-  return actionsOrder;
+	return actionsOrder;
 });
 
 const handleActionClick = (action) => {
-  emit(`click:${action}`);
+	emit(`click:${action}`);
 };
 </script>
 

@@ -9,56 +9,56 @@
 
 <script>
 export default {
-  name: 'WtIndicator',
-  props: {
-    /**
-     * The color variant for the component
-     * @values 'primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out', 'info', 'final-status', 'other-status', 'initial-status'
-     * @example '<wt-indicator color="primary"></wt-indicator>'
-     */
-    color: {
-      type: String,
-      default: 'secondary',
-      options: [
-        'primary',
-        'secondary',
-        'disabled',
-        'success',
-        'error',
-        'transfer',
-        'break-out',
-        'info',
-        'final-status',
-        'other-status',
-        'initial-status',
-      ],
-    },
-    /**
-     * The text content for the component
-     * Can be a string or a number
-     * @example '<wt-indicator text="Sample Text"></wt-indicator>'
-     */
-    text: {
-      type: [String, Number],
-    },
-    /**
-     * The size of the component
-     * @values 'sm', 'md'
-     * @default 'md'
-     * @example '<wt-indicator size="sm"></wt-indicator>'
-     */
-    size: {
-      type: String,
-      default: 'md',
-      options: ['sm', 'md'],
-    },
-  },
+	name: 'WtIndicator',
+	props: {
+		/**
+		 * The color variant for the component
+		 * @values 'primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out', 'info', 'final-status', 'other-status', 'initial-status'
+		 * @example '<wt-indicator color="primary"></wt-indicator>'
+		 */
+		color: {
+			type: String,
+			default: 'secondary',
+			options: [
+				'primary',
+				'secondary',
+				'disabled',
+				'success',
+				'error',
+				'transfer',
+				'break-out',
+				'info',
+				'final-status',
+				'other-status',
+				'initial-status',
+			],
+		},
+		/**
+		 * The text content for the component
+		 * Can be a string or a number
+		 * @example '<wt-indicator text="Sample Text"></wt-indicator>'
+		 */
+		text: {
+			type: [String, Number],
+		},
+		/**
+		 * The size of the component
+		 * @values 'sm', 'md'
+		 * @default 'md'
+		 * @example '<wt-indicator size="sm"></wt-indicator>'
+		 */
+		size: {
+			type: String,
+			default: 'md',
+			options: ['sm', 'md'],
+		},
+	},
 
-  computed: {
-    isText() {
-      return this.text !== undefined && this.text !== null && this.text !== '';
-    },
-  },
+	computed: {
+		isText() {
+			return this.text !== undefined && this.text !== null && this.text !== '';
+		},
+	},
 };
 </script>
 

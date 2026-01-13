@@ -88,81 +88,81 @@ import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize';
 import WtImage from '../wt-image/wt-image.vue';
 
 const props = defineProps({
-  image: {
-    type: [Object, null],
-  },
-  /**
-   * @values 'sm', 'md', 'lg'
-   */
-  size: {
-    type: String,
-    default: ComponentSize.MD,
-    validator: (v) =>
-      [ComponentSize.SM, ComponentSize.MD, ComponentSize.LG].includes(v),
-  },
-  /**
-   * shown only if prop or slot is provided
-   */
-  headline: {
-    type: [String, null],
-    default: '',
-  },
-  /**
-   * shown only if prop or slot is provided
-   */
-  title: {
-    type: [String, null],
-    default: '',
-  },
-  /**
-   * shown only if prop or slot is provided
-   */
-  text: {
-    type: [String, null],
-    default: '',
-  },
-  /**
-   * primary action is shown only if prop or slot is provided
-   */
-  primaryActionText: {
-    type: [String, null],
-    default: '',
-  },
-  /**
-   * secondary action shown only if prop or slot is provided
-   */
-  secondaryActionText: {
-    type: [String, null],
-    default: '',
-  },
+	image: {
+		type: [Object, null],
+	},
+	/**
+	 * @values 'sm', 'md', 'lg'
+	 */
+	size: {
+		type: String,
+		default: ComponentSize.MD,
+		validator: (v) =>
+			[ComponentSize.SM, ComponentSize.MD, ComponentSize.LG].includes(v),
+	},
+	/**
+	 * shown only if prop or slot is provided
+	 */
+	headline: {
+		type: [String, null],
+		default: '',
+	},
+	/**
+	 * shown only if prop or slot is provided
+	 */
+	title: {
+		type: [String, null],
+		default: '',
+	},
+	/**
+	 * shown only if prop or slot is provided
+	 */
+	text: {
+		type: [String, null],
+		default: '',
+	},
+	/**
+	 * primary action is shown only if prop or slot is provided
+	 */
+	primaryActionText: {
+		type: [String, null],
+		default: '',
+	},
+	/**
+	 * secondary action shown only if prop or slot is provided
+	 */
+	secondaryActionText: {
+		type: [String, null],
+		default: '',
+	},
 
-  /**
-   * disable primary action button while still showing its text. useful for access control
-   */
-  disabledPrimaryAction: {
-    type: Boolean,
-    default: false,
-  },
+	/**
+	 * disable primary action button while still showing its text. useful for access control
+	 */
+	disabledPrimaryAction: {
+		type: Boolean,
+		default: false,
+	},
 
-  /**
-   * disable primary action button while still showing its text. useful for access control
-   */
-  disabledSecondaryAction: {
-    type: Boolean,
-    default: false,
-  },
+	/**
+	 * disable primary action button while still showing its text. useful for access control
+	 */
+	disabledSecondaryAction: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits([
-  /**
-   * emitted without a parameter, but could accept one, if used in a slot
-   */
-  'click:primary',
+	/**
+	 * emitted without a parameter, but could accept one, if used in a slot
+	 */
+	'click:primary',
 
-  /**
-   * emitted without a parameter, but could accept one, if used in a slot
-   */
-  'click:secondary',
+	/**
+	 * emitted without a parameter, but could accept one, if used in a slot
+	 */
+	'click:secondary',
 ]);
 
 const slots = useSlots();
@@ -176,37 +176,37 @@ const showTitle = computed(() => props.title || slots.title);
 const showText = computed(() => props.text || slots.text);
 
 const showActions = computed(() => {
-  return [
-    props.primaryActionText,
-    props.secondaryActionText,
-    slots.actions,
-    slots['primary-action'],
-    slots['secondary-action'],
-  ].some((v) => v);
+	return [
+		props.primaryActionText,
+		props.secondaryActionText,
+		slots.actions,
+		slots['primary-action'],
+		slots['secondary-action'],
+	].some((v) => v);
 });
 
 const mediaSize = computed(() => {
-  if (smallerOrEqual(props.size, ComponentSize.SM)) {
-    return ComponentSize.XXS;
-  }
+	if (smallerOrEqual(props.size, ComponentSize.SM)) {
+		return ComponentSize.XXS;
+	}
 
-  if (greaterOrEqual(props.size, ComponentSize.LG)) {
-    return ComponentSize.MD;
-  }
+	if (greaterOrEqual(props.size, ComponentSize.LG)) {
+		return ComponentSize.MD;
+	}
 
-  return ComponentSize.SM;
+	return ComponentSize.SM;
 });
 
 const buttonSize = computed(() => {
-  if (smallerOrEqual(props.size, ComponentSize.SM)) {
-    return ComponentSize.SM;
-  }
+	if (smallerOrEqual(props.size, ComponentSize.SM)) {
+		return ComponentSize.SM;
+	}
 
-  return ComponentSize.MD;
+	return ComponentSize.MD;
 });
 
 const onClick = (action) => (params) => {
-  emit(`click:${action}`, params);
+	emit(`click:${action}`, params);
 };
 
 const onPrimaryClick = onClick('primary');

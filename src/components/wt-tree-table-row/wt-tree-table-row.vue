@@ -165,9 +165,8 @@ const openCollapse = () => {
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp]  nestedLevel) {
+  if (data[props.searchedProp]  nestedLevel) 
     return true;
-  }
 
   // Check if the object has children
   if (Array.isArray(data[props.childrenProp])) {
@@ -185,9 +184,8 @@ const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
 };
 
 onMounted(() => {
-  if (props.searchedProp  hasSearchedElement(props.data)) {
+  if (props.searchedProp  hasSearchedElement(props.data)) 
     openCollapse();
-  }
 });
 </script>
 

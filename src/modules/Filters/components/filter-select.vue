@@ -20,14 +20,14 @@ import isEmpty from '../../../scripts/isEmpty.js';
 import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
 const props = defineProps({
-  namespace: {
-    type: String,
-    required: true,
-  },
-  filterQuery: {
-    type: String,
-    required: true,
-  },
+	namespace: {
+		type: String,
+		required: true,
+	},
+	filterQuery: {
+		type: String,
+		required: true,
+	},
 });
 
 const attrs = useAttrs();
@@ -35,93 +35,93 @@ const store = useStore();
 const { t } = useI18n();
 
 const filterSchema = computed(
-  () => getNamespacedState(store.state, props.namespace)[props.filterQuery],
+	() => getNamespacedState(store.state, props.namespace)[props.filterQuery],
 );
 
 const trackBy = computed(() => {
-  if (filterSchema.value.storedProp !== undefined) {
-    return filterSchema.value.storedProp;
-  }
+	if (filterSchema.value.storedProp !== undefined) {
+		return filterSchema.value.storedProp;
+	}
 
-  if (filterSchema.value.search) {
-    return 'id';
-  }
+	if (filterSchema.value.search) {
+		return 'id';
+	}
 
-  if (filterSchema.value.options) {
-    return 'value';
-  }
+	if (filterSchema.value.options) {
+		return 'value';
+	}
 
-  return 'id';
+	return 'id';
 });
 
 const rawValue = computed(
-  () => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`],
+	() => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`],
 );
 
 const cachedSearchOpts = reactive({});
 
 const search =
-  filterSchema.value.search &&
-  (async (selectParams) => {
-    const params = {
-      ...selectParams,
-    };
+	filterSchema.value.search &&
+	(async (selectParams) => {
+		const params = {
+			...selectParams,
+		};
 
-    if (trackBy.value === 'id') {
-      params.ids = Array.isArray(rawValue.value)
-        ? rawValue.value
-        : [rawValue.value];
-    }
+		if (trackBy.value === 'id') {
+			params.ids = Array.isArray(rawValue.value)
+				? rawValue.value
+				: [rawValue.value];
+		}
 
-    const { items, ...rest } = await filterSchema.value.search(params);
+		const { items, ...rest } = await filterSchema.value.search(params);
 
-    items.forEach((item) => {
-      cachedSearchOpts[item.id] = item;
-    });
+		items.forEach((item) => {
+			cachedSearchOpts[item.id] = item;
+		});
 
-    return {
-      items,
-      ...rest,
-    };
-  });
+		return {
+			items,
+			...rest,
+		};
+	});
 
 const options = computed(() => {
-  const options = filterSchema.value.options;
+	const options = filterSchema.value.options;
 
-  return options;
+	return options;
 });
 
 const value = computed(() => {
-  if (options.value) {
-    if (filterSchema.value.multiple) {
-      return options.value.filter((option) =>
-        rawValue.value.includes(option[trackBy.value]),
-      );
-    }
+	if (options.value) {
+		if (filterSchema.value.multiple) {
+			return options.value.filter((option) =>
+				rawValue.value.includes(option[trackBy.value]),
+			);
+		}
 
-    return options.value.find(
-      (option) => option[trackBy.value] === rawValue.value,
-    );
-  }
+		return options.value.find(
+			(option) => option[trackBy.value] === rawValue.value,
+		);
+	}
 
-  if (filterSchema.value.search) {
-    if (filterSchema.value.multiple) {
-      return rawValue.value.map((value) => cachedSearchOpts[value]);
-    }
+	if (filterSchema.value.search) {
+		if (filterSchema.value.multiple) {
+			return rawValue.value.map((value) => cachedSearchOpts[value]);
+		}
 
-    return cachedSearchOpts[rawValue.value];
-  }
+		return cachedSearchOpts[rawValue.value];
+	}
 
-  return rawValue.value;
+	return rawValue.value;
 });
 
 const setValue = (value) => {
-  const payload = {
-    value: isEmpty(value) ? value : value[trackBy.value],
-    name: props.filterQuery,
-  };
+	const payload = {
+		value: isEmpty(value) ? value : value[trackBy.value],
+		name: props.filterQuery,
+	};
 
-  return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
+	return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
 };
 </script>
 

@@ -34,24 +34,24 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  steps: {
-    type: Object,
-  },
-  activeStep: {
-    type: Number,
-    default: 1,
-  },
+	steps: {
+		type: Object,
+	},
+	activeStep: {
+		type: Number,
+		default: 1,
+	},
 });
 
 const description = computed(
-  () => props.steps[props.activeStep - 1].description,
+	() => props.steps[props.activeStep - 1].description,
 );
 
 const stepWithCompleted = computed(() =>
-  props.steps.map((item, idx) => ({
-    ...item,
-    completed: props.activeStep > idx,
-  })),
+	props.steps.map((item, idx) => ({
+		...item,
+		completed: props.activeStep > idx,
+	})),
 );
 </script>
 

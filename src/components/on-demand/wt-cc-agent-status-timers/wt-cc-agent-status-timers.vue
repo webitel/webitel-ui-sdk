@@ -20,22 +20,22 @@
 
 <script setup>
 const props = defineProps({
-  /**
-   * @description Status object
-   * @type {Object}
-   * @property {String} offline
-   * @property {String} online
-   * @property {String} pause
-   */
-  status: {
-    type: Object,
-    required: true,
-  },
-  size: {
-    type: String,
-    default: 'md',
-    options: ['sm', 'md'],
-  },
+	/**
+	 * @description Status object
+	 * @type {Object}
+	 * @property {String} offline
+	 * @property {String} online
+	 * @property {String} pause
+	 */
+	status: {
+		type: Object,
+		required: true,
+	},
+	size: {
+		type: String,
+		default: 'md',
+		options: ['sm', 'md'],
+	},
 });
 </script>
 

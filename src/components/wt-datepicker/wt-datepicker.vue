@@ -45,118 +45,116 @@
 import '@vuepic/vue-datepicker/dist/main.css';
 
 import VueDatepicker from '@vuepic/vue-datepicker';
-import { useWindowFocus } from '@vueuse/core'
-import { watch } from 'vue'
-import { computed, ref, toRefs } from 'vue';
+import { useWindowFocus } from '@vueuse/core';
+import { computed, ref, toRefs, watch } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import WtInputInfo from '../wt-input-info/wt-input-info.vue';
 
 const props = defineProps({
-  /**
-   * [`'date'`, `'datetime'`]
-   * */
+	/**
+	 * [`'date'`, `'datetime'`]
+	 * */
 
-  mode: {
-    type: String,
-    default: 'date',
-    options: ['date', 'datetime'],
-  },
-  value: {
-    type: [String, Number],
-    default: 'Date.now()',
-  },
-  /**
-   * label above calendar input
-   */
-  label: {
-    type: String,
-    default: '',
-  },
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  disabledDates: {
-    type: Object,
-  },
-  lang: {
-    type: String,
-    default: 'en',
-  },
+	mode: {
+		type: String,
+		default: 'date',
+		options: ['date', 'datetime'],
+	},
+	value: {
+		type: [String, Number],
+		default: 'Date.now()',
+	},
+	/**
+	 * label above calendar input
+	 */
+	label: {
+		type: String,
+		default: '',
+	},
+	placeholder: {
+		type: String,
+		default: '',
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
+	disabledDates: {
+		type: Object,
+	},
+	lang: {
+		type: String,
+		default: 'en',
+	},
 
-  /**
-   * Object with props, passed down to wt-label as props
-   */
+	/**
+	 * Object with props, passed down to wt-label as props
+	 */
 
-  labelProps: {
-    type: Object,
-  },
+	labelProps: {
+		type: Object,
+	},
 
-  /**
-   * Native input required attribute
-   */
+	/**
+	 * Native input required attribute
+	 */
 
-  required: {
-    type: Boolean,
-    default: false,
-  },
+	required: {
+		type: Boolean,
+		default: false,
+	},
 
-  // validation rules
-  // TODO: move to separate file to make it reusable
-  v: {
-    type: Object,
-  },
-  clearable: {
-    type: Boolean,
-    default: false,
-  },
+	// validation rules
+	// TODO: move to separate file to make it reusable
+	v: {
+		type: Object,
+	},
+	clearable: {
+		type: Boolean,
+		default: false,
+	},
 });
 const emit = defineEmits(['input']);
 
 const isOpened = ref(false);
 const datepicker = ref(null); // template ref
 
-const winFocused = useWindowFocus()
+const winFocused = useWindowFocus();
 
 const isDateTime = props.mode === 'datetime';
 
 const requiredLabel = computed(() => {
-  return props.required ? `${props.label}*` : props.label;
+	return props.required ? `${props.label}*` : props.label;
 });
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
 const { v, customValidators } = toRefs(props);
 
 const { isValidation, invalid, validationText } = useValidation({
-  v,
-  customValidators,
+	v,
+	customValidators,
 });
 
 const clearValue = () => {
-  emit('input', null);
+	emit('input', null);
 
-  closePicker()
+	closePicker();
 };
 
 const closePicker = () => {
-  if (isOpened.value) {
-    datepicker?.value.closeMenu();
-  }
+	if (isOpened.value) {
+		datepicker?.value.closeMenu();
+	}
 
-  isOpened.value = false;
-}
+	isOpened.value = false;
+};
 
 // close picker when window loses focus(when clicking to iframe)
 // https://webitel.atlassian.net/browse/WTEL-5794
 watch(winFocused, (focused) => {
-  if (!focused && isOpened.value) closePicker()
-})
-
+	if (!focused && isOpened.value) closePicker();
+});
 </script>
 
 <style scoped>

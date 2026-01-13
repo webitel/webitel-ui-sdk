@@ -6,57 +6,57 @@ import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 
 const props = defineProps({
-  namespace: {
-    type: String,
-    default: 'appearance',
-  },
+	namespace: {
+		type: String,
+		default: 'appearance',
+	},
 });
 
-const emit = defineEmits(['changedMode'])
+const emit = defineEmits(['changedMode']);
 
 const store = useStore();
 
 const mode = ref('light');
 
 const setThemeToStore = (theme) => {
-  // @author @stanislav-kozak
-  // when vuex store is not initialize and we use pinia
-  if (!store) {
-    return
-  }
+	// @author @stanislav-kozak
+	// when vuex store is not initialize and we use pinia
+	if (!store) {
+		return;
+	}
 
-  store.dispatch(`${props.namespace}/SET_THEME`, theme);
+	store.dispatch(`${props.namespace}/SET_THEME`, theme);
 };
 
 const setMode = (value) => {
-  if (value === 'dark') {
-    mode.value = 'dark';
-    document.documentElement.classList.add('theme--dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    mode.value = 'light';
-    document.documentElement.classList.remove('theme--dark');
-    localStorage.setItem('theme', 'light');
-  }
-  emit('changedMode', value)
-  setThemeToStore(mode.value);
+	if (value === 'dark') {
+		mode.value = 'dark';
+		document.documentElement.classList.add('theme--dark');
+		localStorage.setItem('theme', 'dark');
+	} else {
+		mode.value = 'light';
+		document.documentElement.classList.remove('theme--dark');
+		localStorage.setItem('theme', 'light');
+	}
+	emit('changedMode', value);
+	setThemeToStore(mode.value);
 };
 
 const toggleDarkMode = () => {
-  if (mode.value === 'light') {
-    setMode('dark');
-  } else {
-    setMode('light');
-  }
-  setThemeToStore(mode.value);
+	if (mode.value === 'light') {
+		setMode('dark');
+	} else {
+		setMode('light');
+	}
+	setThemeToStore(mode.value);
 };
 
 const cachedTheme = localStorage.getItem('theme');
 
 if (cachedTheme) {
-  setMode(cachedTheme);
+	setMode(cachedTheme);
 } else {
-  setMode('light');
+	setMode('light');
 }
 </script>
 

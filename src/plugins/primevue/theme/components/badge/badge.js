@@ -1,17 +1,17 @@
 import { BadgeScheme } from '@webitel/styleguide/component-schemes';
 
 const colors = [
-  'secondary',
-  'info',
-  'success',
-  'warn',
-  'error',
-  'online',
-  'dnd',
-  'busy',
-  'pause',
-  'onlineCc',
-  'offline',
+	'secondary',
+	'info',
+	'success',
+	'warn',
+	'error',
+	'online',
+	'dnd',
+	'busy',
+	'pause',
+	'onlineCc',
+	'offline',
 ];
 
 const generateCustomColorCss = ({ colorName, dt }) => `
@@ -29,10 +29,10 @@ const generateCustomSizeCss = ({ size, dt }) => `
 `;
 
 const badge = {
-  root: BadgeScheme.sizes,
-  colorScheme: BadgeScheme.colorScheme,
+	root: BadgeScheme.sizes,
+	colorScheme: BadgeScheme.colorScheme,
 
-  css: ({ dt }) => `
+	css: ({ dt }) => `
     ${generateCustomSizeCss({ size: 'sm', dt })}
     ${generateCustomSizeCss({ size: 'md', dt })}
     ${generateCustomSizeCss({ size: 'lg', dt })}

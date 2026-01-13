@@ -1,10 +1,10 @@
-import { CheckboxScheme } from "@webitel/styleguide/component-schemes";
+import { CheckboxScheme } from '@webitel/styleguide/component-schemes';
 
 const checkbox = {
-  root: CheckboxScheme.sizes,
-  colorScheme: CheckboxScheme.colorScheme,
+	root: CheckboxScheme.sizes,
+	colorScheme: CheckboxScheme.colorScheme,
 
-  css: ({ dt }) => `
+	css: ({ dt }) => `
         .p-checkbox {
           width: ${dt('checkbox.root.wrapperWidth')};
           height: ${dt('checkbox.root.wrapperHeight')};

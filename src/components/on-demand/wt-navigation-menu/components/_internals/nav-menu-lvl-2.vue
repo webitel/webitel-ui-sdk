@@ -13,10 +13,10 @@
 import { defineProps } from 'vue';
 
 const props = defineProps({
-  categories: {
-    type: Array,
-    default: () => [],
-  },
+	categories: {
+		type: Array,
+		default: () => [],
+	},
 });
 </script>
 

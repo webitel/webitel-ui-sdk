@@ -45,7 +45,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted } from 'vue';
-import {EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
+import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
 
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
@@ -55,54 +55,58 @@ const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 
 defineProps({
-  mode: {
-    // options: ['read', 'write']
-    type: String,
-    default: 'read',
-  },
+	mode: {
+		// options: ['read', 'write']
+		type: String,
+		default: 'read',
+	},
 });
 
 const v$ = useVuelidate(
-  computed(() => ({
-    question: {
-      min: {
-        minValue: minValue(0),
-        maxValue: maxValue(9),
-        required,
-        integer,
-      },
-      max: {
-        minValue: minValue(questionModel.value.min ? questionModel.value.min : 1),
-        maxValue: maxValue(10),
-        required,
-        integer,
-      },
-    },
-  })),
-  { question: questionModel },
-  { $autoDirty: true },
+	computed(() => ({
+		question: {
+			min: {
+				minValue: minValue(0),
+				maxValue: maxValue(9),
+				required,
+				integer,
+			},
+			max: {
+				minValue: minValue(
+					questionModel.value.min ? questionModel.value.min : 1,
+				),
+				maxValue: maxValue(10),
+				required,
+				integer,
+			},
+		},
+	})),
+	{ question: questionModel },
+	{ $autoDirty: true },
 );
 
 const scoreRange = computed(() => {
-  if (questionModel.value.min > questionModel.value.max) return [];
-  const result = [];
-  let i = +questionModel.value.min;
-  do {
-    result.push(i);
-    i += 1;
-  } while (i <= questionModel.value.max);
-  return result;
+	if (questionModel.value.min > questionModel.value.max) return [];
+	const result = [];
+	let i = +questionModel.value.min;
+	do {
+		result.push(i);
+		i += 1;
+	} while (i <= questionModel.value.max);
+	return result;
 });
 
 function updateAnswer(score) {
-  answerModel.value = answerModel.value ? {
-    ...answerModel.value,
-    score,
-  } : { score };
+	answerModel.value = answerModel.value
+		? {
+				...answerModel.value,
+				score,
+			}
+		: { score };
 }
 
 function updateQuestion({ path, value }) {
-  questionModel.value = updateObject({ obj: questionModel.value, path, value });
+	questionModel.value = updateObject({ obj: questionModel.value, path, value });
 }
 
 // init validation

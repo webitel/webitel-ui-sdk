@@ -55,25 +55,29 @@
 import { computed } from 'vue';
 
 interface Props {
-  icons?: string[];
-  isSettingsActive?: boolean;
-  isSettingsBadge?: boolean;
+	icons?: string[];
+	isSettingsActive?: boolean;
+	isSettingsBadge?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  icons: () => ['refresh'],
-  isSettingsActive: false,
-  isSettingsBadge: false,
+	icons: () => ['refresh'],
+	isSettingsActive: false,
+	isSettingsBadge: false,
 });
 
 defineEmits<{
-  input: [value: string];
+	input: [value: string];
 }>();
 
 const isImport = computed(() => props.icons.indexOf('import') !== -1);
 const isExport = computed(() => props.icons.indexOf('export') !== -1);
-const isFilterReset = computed(() => props.icons.indexOf('filter-reset') !== -1);
-const isColumnSelect = computed(() => props.icons.indexOf('column-select') !== -1);
+const isFilterReset = computed(
+	() => props.icons.indexOf('filter-reset') !== -1,
+);
+const isColumnSelect = computed(
+	() => props.icons.indexOf('column-select') !== -1,
+);
 const isRefresh = computed(() => props.icons.indexOf('refresh') !== -1);
 const isSettings = computed(() => props.icons.indexOf('settings') !== -1);
 </script>

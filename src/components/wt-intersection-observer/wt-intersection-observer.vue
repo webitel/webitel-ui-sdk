@@ -36,9 +36,8 @@ onMounted(() => {
   const { stop } = useIntersectionObserver(
     intersectionTarget.value,
     ([{ isIntersecting }]) => {
-      if (isIntersecting  props.canLoadMore) {
+      if (isIntersecting  props.canLoadMore) 
         emit('next');
-      }
     },
   );
 

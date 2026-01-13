@@ -44,75 +44,75 @@
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
-  name: 'WtTimeInput',
-  mixins: [validationMixin],
-  props: {
-    /**
-     * Current input value (`v-model`)
-     */
-    value: {
-      type: Number,
-      default: 0,
-    },
-    /**
-     * Form input label
-     */
-    label: {
-      type: String,
-      default: '',
-    },
-    /**
-     * Time type: day, minute, second
-     */
-    maxValue: {
-      type: Number,
-    },
-    /**
-     * Native input required attribute
-     */
-    required: {
-      type: Boolean,
-      default: false,
-      description: 'Native input required attribute',
-    },
-    /**
-     * Native input disabled attribute
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
-      description: 'Native input disabled attribute',
-    },
-    labelProps: {
-      type: Object,
-      description: 'Object with props, passed down to wt-label as props',
-    },
-    hideInputInfo: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: [
-    /**
-     * Emits on input value change
-     * @param {string} value
-     */
-    'input',
-  ],
-  computed: {
-    hasLabel() {
-      return !!(this.label || this.$slots.label);
-    },
-    showInfo() {
-      return this.isValidation && !this.hideInputInfo;
-    },
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: (event) => this.$emit('input', event.target.value),
-      };
-    },
-  },
+	name: 'WtTimeInput',
+	mixins: [validationMixin],
+	props: {
+		/**
+		 * Current input value (`v-model`)
+		 */
+		value: {
+			type: Number,
+			default: 0,
+		},
+		/**
+		 * Form input label
+		 */
+		label: {
+			type: String,
+			default: '',
+		},
+		/**
+		 * Time type: day, minute, second
+		 */
+		maxValue: {
+			type: Number,
+		},
+		/**
+		 * Native input required attribute
+		 */
+		required: {
+			type: Boolean,
+			default: false,
+			description: 'Native input required attribute',
+		},
+		/**
+		 * Native input disabled attribute
+		 */
+		disabled: {
+			type: Boolean,
+			default: false,
+			description: 'Native input disabled attribute',
+		},
+		labelProps: {
+			type: Object,
+			description: 'Object with props, passed down to wt-label as props',
+		},
+		hideInputInfo: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	emits: [
+		/**
+		 * Emits on input value change
+		 * @param {string} value
+		 */
+		'input',
+	],
+	computed: {
+		hasLabel() {
+			return !!(this.label || this.$slots.label);
+		},
+		showInfo() {
+			return this.isValidation && !this.hideInputInfo;
+		},
+		listeners() {
+			return {
+				...this.$listeners,
+				input: (event) => this.$emit('input', event.target.value),
+			};
+		},
+	},
 };
 </script>
 

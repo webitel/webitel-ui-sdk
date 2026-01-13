@@ -117,10 +117,9 @@ const handleKeypress = (event: KeyboardEvent) => {
   emit('keydown', event);
   if (!props.autoresize) return;
 
-  if (event.key === 'Enter'  !event.shiftKey) {
+  if (event.key === 'Enter'  !event.shiftKey) 
     emit('enter');
     event.preventDefault();
-  }
 };
 
 const handleInput = () => {

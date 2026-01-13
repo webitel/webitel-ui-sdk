@@ -30,76 +30,76 @@ import convertDuration from '../../scripts/convertDuration.js';
 import StatusOptions from './_internals/StatusOptions.lookup.js';
 
 export default {
-  name: 'WtStatusSelect',
-  model: {
-    prop: 'status',
-    event: 'change',
-  },
-  props: {
-    status: {
-      type: String,
-      default: AgentStatus.OFFLINE,
-    },
-    statusDuration: {
-      type: [String, Number],
-      default: 0,
-    },
-    options: {
-      type: Array,
-    },
-    // size: {
-    //   type: String,
-    //   default: 'md',
-    //   options: ['sm', 'md'],
-    // },
-  },
-  emits: ['change', 'closed'],
-  computed: {
-    selectedOption() {
-      return this.statusOptions.find((option) => option.value === this.status);
-    },
-    statusOptions() {
-      return this.options
-        ? this.options
-        : StatusOptions.map((opt) => ({
-            ...opt,
-            text: this.$t(opt.locale),
-          }));
-    },
-    availableOptions() {
-      return this.statusOptions.reduce((options, opt) => {
-        // PAUSE option is always passed
-        if (
-          (this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
-          opt.value === AgentStatus.BREAK_OUT
-        ) {
-          // skip breakout option
-          return options;
-        }
-        return [...options, opt];
-      }, []);
-    },
-    duration() {
-      /* The check commented below limits the display of time in the status to 8 characters.
+	name: 'WtStatusSelect',
+	model: {
+		prop: 'status',
+		event: 'change',
+	},
+	props: {
+		status: {
+			type: String,
+			default: AgentStatus.OFFLINE,
+		},
+		statusDuration: {
+			type: [String, Number],
+			default: 0,
+		},
+		options: {
+			type: Array,
+		},
+		// size: {
+		//   type: String,
+		//   default: 'md',
+		//   options: ['sm', 'md'],
+		// },
+	},
+	emits: ['change', 'closed'],
+	computed: {
+		selectedOption() {
+			return this.statusOptions.find((option) => option.value === this.status);
+		},
+		statusOptions() {
+			return this.options
+				? this.options
+				: StatusOptions.map((opt) => ({
+						...opt,
+						text: this.$t(opt.locale),
+					}));
+		},
+		availableOptions() {
+			return this.statusOptions.reduce((options, opt) => {
+				// PAUSE option is always passed
+				if (
+					(this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
+					opt.value === AgentStatus.BREAK_OUT
+				) {
+					// skip breakout option
+					return options;
+				}
+				return [...options, opt];
+			}, []);
+		},
+		duration() {
+			/* The check commented below limits the display of time in the status to 8 characters.
       Accordingly, if the agent is in the status of 100 hours (100: 00: 00),
       then this time will be displayed as NaN:NaN:NaN */
 
-      // if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
-      if (typeof this.statusDuration === 'string') return this.statusDuration;
-      if (this.statusDuration !== undefined) {
-        return convertDuration(this.statusDuration);
-      }
-      return this.selectedOption.text;
-    },
-  },
-  methods: {
-    inputHandler(value) {
-      this.$emit('change', value.value);
-    },
-    closedHandler(event) {
-      this.$emit('closed', event);
-    },
-  },
+			// if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+			if (typeof this.statusDuration === 'string') return this.statusDuration;
+			if (this.statusDuration !== undefined) {
+				return convertDuration(this.statusDuration);
+			}
+			return this.selectedOption.text;
+		},
+	},
+	methods: {
+		inputHandler(value) {
+			this.$emit('change', value.value);
+		},
+		closedHandler(event) {
+			this.$emit('closed', event);
+		},
+	},
 };
 </script>
 

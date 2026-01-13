@@ -21,41 +21,41 @@ import { nextTick, onMounted, onUnmounted, ref } from 'vue';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useDestroyableSortable(elRef, options) {
-  let sortable = null;
+	let sortable = null;
 
-  const reloadSortable = ref(false);
+	const reloadSortable = ref(false);
 
-  function destroySortable() {
-    return sortable.destroy();
-  }
+	function destroySortable() {
+		return sortable.destroy();
+	}
 
-  function initSortable() {
-    const replaceSortable = async () => {
-      if (!sortable) return;
-      destroySortable();
-      reloadSortable.value = true;
-      await nextTick();
-      reloadSortable.value = false;
-      await nextTick();
-      initSortable();
-    };
+	function initSortable() {
+		const replaceSortable = async () => {
+			if (!sortable) return;
+			destroySortable();
+			reloadSortable.value = true;
+			await nextTick();
+			reloadSortable.value = false;
+			await nextTick();
+			initSortable();
+		};
 
-    sortable = Sortable.create(elRef.value, {
-      ...options,
-      onEnd: async (e) => {
-        if (options.onEnd) options.onEnd(e);
-        await replaceSortable();
-      },
-    });
-  }
+		sortable = Sortable.create(elRef.value, {
+			...options,
+			onEnd: async (e) => {
+				if (options.onEnd) options.onEnd(e);
+				await replaceSortable();
+			},
+		});
+	}
 
-  onMounted(() => {
-    initSortable();
-  });
+	onMounted(() => {
+		initSortable();
+	});
 
-  onUnmounted(() => {
-    destroySortable();
-  });
+	onUnmounted(() => {
+		destroySortable();
+	});
 
-  return { reloadSortable };
+	return { reloadSortable };
 }

@@ -18,27 +18,29 @@
 import type { SliderProps } from 'primevue/slider';
 import { computed, defineModel } from 'vue';
 
-interface Props extends SliderProps{
-  disabled?: boolean;
-  vertical?: boolean;
-  min?: number;
-  max?: number;
-  step?: number;
-  height?: number;
-  width?: number;
+interface Props extends SliderProps {
+	disabled?: boolean;
+	vertical?: boolean;
+	min?: number;
+	max?: number;
+	step?: number;
+	height?: number;
+	width?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  disabled: false,
-  vertical: false,
-  min: 0,
-  max: 100,
-  step: 1,
-  height: 100,
-  width: undefined,
+	disabled: false,
+	vertical: false,
+	min: 0,
+	max: 100,
+	step: 1,
+	height: 100,
+	width: undefined,
 });
 
 const model = defineModel<number>();
 
-const orientation = computed(() => (props.vertical ? 'vertical' : 'horizontal'));
+const orientation = computed(() =>
+	props.vertical ? 'vertical' : 'horizontal',
+);
 </script>

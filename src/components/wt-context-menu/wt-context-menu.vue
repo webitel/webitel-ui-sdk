@@ -28,46 +28,46 @@
 
 <script setup>
 const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-    description: '[{ text, disabled, ... anything you need }]',
-  },
-  visible: {
-    type: Boolean,
-    default: false,
-  },
-  width: {
-    type: [String],
-    default: 'auto',
-  },
-  minWidth: {
-    type: [String],
-    default: '160px',
-  },
-  maxWidth: {
-    type: [String],
-    default: '300px',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  pt: {
-    type: Object,
-    default: () => null,
-  },
-  tooltipTriggers: {
-    type: Array,
-    default: () => ['click', 'touch'],
-  },
+	options: {
+		type: Array,
+		required: true,
+		description: '[{ text, disabled, ... anything you need }]',
+	},
+	visible: {
+		type: Boolean,
+		default: false,
+	},
+	width: {
+		type: [String],
+		default: 'auto',
+	},
+	minWidth: {
+		type: [String],
+		default: '160px',
+	},
+	maxWidth: {
+		type: [String],
+		default: '300px',
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
+	pt: {
+		type: Object,
+		default: () => null,
+	},
+	tooltipTriggers: {
+		type: Array,
+		default: () => ['click', 'touch'],
+	},
 });
 
 const emit = defineEmits(['click', 'update:visible']);
 
 function handleOptionClick({ option, index, hide }) {
-  emit('click', { option, index });
-  hide();
+	emit('click', { option, index });
+	hide();
 }
 </script>
 

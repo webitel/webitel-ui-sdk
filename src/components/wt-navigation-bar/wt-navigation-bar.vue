@@ -128,104 +128,106 @@ import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo = {
-  [WebitelApplications.SUPERVISOR]: {
-    dark: SupervisorDark,
-    light: SupervisorLight,
-  },
-  [WebitelApplications.ADMIN]: {
-    dark: AdminDark,
-    light: AdminLight,
-  },
-  [WebitelApplications.AGENT]: {
-    dark: WorkspaceDark,
-    light: WorkspaceLight,
-  },
-  [WebitelApplications.AUDIT]: {
-    dark: AuditDark,
-    light: AuditLight,
-  },
-  [WebitelApplications.HISTORY]: {
-    dark: HistoryDark,
-    light: HistoryLight,
-  },
-  [WebitelApplications.CRM]: {
-    dark: CrmDark,
-    light: CrmLight,
-  },
-  [WebitelApplications.WFM]: {
-    dark: WfmDark,
-    light: WfmLight,
-  },
+	[WebitelApplications.SUPERVISOR]: {
+		dark: SupervisorDark,
+		light: SupervisorLight,
+	},
+	[WebitelApplications.ADMIN]: {
+		dark: AdminDark,
+		light: AdminLight,
+	},
+	[WebitelApplications.AGENT]: {
+		dark: WorkspaceDark,
+		light: WorkspaceLight,
+	},
+	[WebitelApplications.AUDIT]: {
+		dark: AuditDark,
+		light: AuditLight,
+	},
+	[WebitelApplications.HISTORY]: {
+		dark: HistoryDark,
+		light: HistoryLight,
+	},
+	[WebitelApplications.CRM]: {
+		dark: CrmDark,
+		light: CrmLight,
+	},
+	[WebitelApplications.WFM]: {
+		dark: WfmDark,
+		light: WfmLight,
+	},
 };
 
 export default {
-  name: 'WtNavigationBar',
-  components: { ExpandTransition },
-  props: {
-    currentApp: {
-      type: String,
-      default: 'admin',
-    },
-    /**
-     * @type {WtNavigationBarNavItem[]}
-     */
-    nav: {
-      type: Array,
-      default: () => [],
-    },
-    darkMode: {
-      type: Boolean,
-      default: false,
-    },
-    logoRoute: {
-      type: String,
-      default: '',
-    },
-  },
-  data: () => ({
-    isOpened: false,
-    expandedName: '',
-    appLogo,
-  }),
+	name: 'WtNavigationBar',
+	components: { ExpandTransition },
+	props: {
+		currentApp: {
+			type: String,
+			default: 'admin',
+		},
+		/**
+		 * @type {WtNavigationBarNavItem[]}
+		 */
+		nav: {
+			type: Array,
+			default: () => [],
+		},
+		darkMode: {
+			type: Boolean,
+			default: false,
+		},
+		logoRoute: {
+			type: String,
+			default: '',
+		},
+	},
+	data: () => ({
+		isOpened: false,
+		expandedName: '',
+		appLogo,
+	}),
 
-  computed: {
-    currentNav() {
-      const pathSegments = this.$route.path.split('/').filter(Boolean);
+	computed: {
+		currentNav() {
+			const pathSegments = this.$route.path.split('/').filter(Boolean);
 
-      const flatNav = this.nav.flatMap(item => item.subNav ?? [item]);
+			const flatNav = this.nav.flatMap((item) => item.subNav ?? [item]);
 
-      const navMap = new Map(flatNav.map(item => [item.value, item]));
+			const navMap = new Map(flatNav.map((item) => [item.value, item]));
 
-      const matchingSegment = pathSegments.find(segment => navMap.has(segment));
-      const currentNav = navMap.get(matchingSegment);
+			const matchingSegment = pathSegments.find((segment) =>
+				navMap.has(segment),
+			);
+			const currentNav = navMap.get(matchingSegment);
 
-      const currentExpansion = this.nav.find(nav =>
-        nav.subNav?.includes(currentNav)
-      );
+			const currentExpansion = this.nav.find((nav) =>
+				nav.subNav?.includes(currentNav),
+			);
 
-      return {
-        nav: currentNav?.value,
-        expansion: currentExpansion?.value,
-      };
-    }
-  },
-  methods: {
-    nestedRoute(subNavItem, navItem) {
-      return navItem.route
-        ? `${navItem.route}/${subNavItem.route}`
-        : subNavItem.route;
-    },
-    expand(navItem) {
-      this.expandedName =
-        this.expandedName !== navItem.value ? navItem.value : '';
-    },
-    isExpanded(navItem) {
-      return this.expandedName === navItem.value;
-    },
-    close() {
-      this.isOpened = false;
-    },
-  },
+			return {
+				nav: currentNav?.value,
+				expansion: currentExpansion?.value,
+			};
+		},
+	},
+	methods: {
+		nestedRoute(subNavItem, navItem) {
+			return navItem.route
+				? `${navItem.route}/${subNavItem.route}`
+				: subNavItem.route;
+		},
+		expand(navItem) {
+			this.expandedName =
+				this.expandedName !== navItem.value ? navItem.value : '';
+		},
+		isExpanded(navItem) {
+			return this.expandedName === navItem.value;
+		},
+		close() {
+			this.isOpened = false;
+		},
+	},
 };
 </script>
 

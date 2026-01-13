@@ -32,7 +32,7 @@ import type { BreadcrumbProps } from 'primevue';
 import { computed } from 'vue';
 
 interface Props extends BreadcrumbProps {
-  path?: Array<{ name: string; route?: string | object }>;
+	path?: Array<{ name: string; route?: string | object }>;
 }
 
 const props = defineProps<Props>();

@@ -10,12 +10,12 @@
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 const { disabled = false } = defineProps<{
-  disabled?: boolean;
+	disabled?: boolean;
 }>();
 
 const emit = defineEmits<{
-  click: MouseEvent[];
-  mousedown: MouseEvent[];
+	click: MouseEvent[];
+	mousedown: MouseEvent[];
 }>();
 </script>
 

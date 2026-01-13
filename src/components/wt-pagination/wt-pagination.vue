@@ -37,65 +37,65 @@
 import debounce from '../../scripts/debounce.js';
 
 export default {
-  name: 'WtPagination',
-  model: {
-    prop: 'size',
-    event: 'change',
-  },
-  props: {
-    size: {
-      type: [String, Number],
-    },
-    next: {
-      type: Boolean,
-      default: false,
-    },
-    prev: {
-      type: Boolean,
-      default: false,
-    },
-    debounce: {
-      type: Boolean,
-      default: false,
-    },
-    debounceDelay: {
-      type: Number,
-      default: 1000,
-    },
-  },
-  emits: ['change', 'input', 'prev', 'next'],
+	name: 'WtPagination',
+	model: {
+		prop: 'size',
+		event: 'change',
+	},
+	props: {
+		size: {
+			type: [String, Number],
+		},
+		next: {
+			type: Boolean,
+			default: false,
+		},
+		prev: {
+			type: Boolean,
+			default: false,
+		},
+		debounce: {
+			type: Boolean,
+			default: false,
+		},
+		debounceDelay: {
+			type: Number,
+			default: 1000,
+		},
+	},
+	emits: ['change', 'input', 'prev', 'next'],
 
-  data: () => ({
-    defaultSize: '10',
-  }),
+	data: () => ({
+		defaultSize: '10',
+	}),
 
-  watch: {
-    size(value) {
-      this.changeSize(value);
-    },
-  },
+	watch: {
+		size(value) {
+			this.changeSize(value);
+		},
+	},
 
-  created() {
-    if (this.debounce)
-      this.changeSize = debounce(this.changeSize, this.debounceDelay);
-  },
+	created() {
+		if (this.debounce)
+			this.changeSize = debounce(this.changeSize, this.debounceDelay);
+	},
 
-  methods: {
-    inputHandler(value) {
-      const size = value >= 0 && value <= 1000 ? value : this.defaultSize;
-      this.$emit('input', size);
-      this.changeSize(size);
-    },
-    changeSize(value) {
-      this.$emit('change', value);
-    },
-    goNext() {
-      this.$emit('next');
-    },
-    goPrev() {
-      this.$emit('prev');
-    },
-  },
+	methods: {
+		inputHandler(value) {
+			const size = value >= 0 && value <= 1000 ? value : this.defaultSize;
+			this.$emit('input', size);
+			this.changeSize(size);
+		},
+		changeSize(value) {
+			this.$emit('change', value);
+		},
+		goNext() {
+			this.$emit('next');
+		},
+		goPrev() {
+			this.$emit('prev');
+		},
+	},
 };
 </script>
 

@@ -11,42 +11,42 @@
 
 <script>
 export default {
-  name: 'FiltersPanelWrapper',
-  props: {
-    tableActionIcons: {
-      type: Array,
-      default: () => ['filter-reset', 'settings'],
-    },
-    isOpened: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  data() {
-    return {
-      localIsOpened: this.isOpened,
-      filtersCount: 0,
-    }
-  },
-  methods: {
-    tableActionsHandler(eventName) {
-      switch (eventName) {
-        case 'filterReset':
-          this.resetFilters();
-          break;
-        case 'settings':
-          this.toggleFiltersExpansion();
-          break;
-        default:
-      }
-    },
-    toggleFiltersExpansion() {
-      this.localIsOpened = !this.localIsOpened;
-    },
-    resetFilters() {
-      this.$emit('reset');
-    },
-  },
+	name: 'FiltersPanelWrapper',
+	props: {
+		tableActionIcons: {
+			type: Array,
+			default: () => ['filter-reset', 'settings'],
+		},
+		isOpened: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	data() {
+		return {
+			localIsOpened: this.isOpened,
+			filtersCount: 0,
+		};
+	},
+	methods: {
+		tableActionsHandler(eventName) {
+			switch (eventName) {
+				case 'filterReset':
+					this.resetFilters();
+					break;
+				case 'settings':
+					this.toggleFiltersExpansion();
+					break;
+				default:
+			}
+		},
+		toggleFiltersExpansion() {
+			this.localIsOpened = !this.localIsOpened;
+		},
+		resetFilters() {
+			this.$emit('reset');
+		},
+	},
 };
 </script>
 

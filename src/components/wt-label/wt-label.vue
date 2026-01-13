@@ -15,10 +15,10 @@
 
 <script lang="ts" setup>
 defineProps<{
-  disabled?: boolean;
-  invalid?: boolean;
-  required?: boolean;
-  hint?: string;
+	disabled?: boolean;
+	invalid?: boolean;
+	required?: boolean;
+	hint?: string;
 }>();
 </script>
 

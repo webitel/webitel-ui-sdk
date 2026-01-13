@@ -32,18 +32,18 @@ import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
 import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup.vue';
 
 const props = defineProps({
-  agentId: {
-    type: [String, Number],
-    required: true,
-  },
-  status: {
-    // can be undefined, is agent wasn't loaded yet
-    default: AgentStatus.OFFLINE,
-  },
-  statusDuration: {
-    type: [Number, String],
-    default: 0,
-  },
+	agentId: {
+		type: [String, Number],
+		required: true,
+	},
+	status: {
+		// can be undefined, is agent wasn't loaded yet
+		default: AgentStatus.OFFLINE,
+	},
+	statusDuration: {
+		type: [Number, String],
+		default: 0,
+	},
 });
 
 const emit = defineEmits(['changed']);
@@ -58,68 +58,73 @@ const error = ref(null);
 const chosenStatus = ref('');
 
 function openPauseCausePopup() {
-  isPauseCausePopup.value = true;
+	isPauseCausePopup.value = true;
 }
 
 function closePauseCausePopup() {
-  isPauseCausePopup.value = false;
+	isPauseCausePopup.value = false;
 }
 
 async function loadPauseCauses() {
-  const response = await PauseCauseAPI.getList({ agentId: props.agentId });
-  pauseCauses.value = response.items;
+	const response = await PauseCauseAPI.getList({ agentId: props.agentId });
+	pauseCauses.value = response.items;
 }
 
 async function updateStatus({ agentId, status, pauseCause, statusComment }) {
-  return AgentStatusAPI.patch({ agentId, status, pauseCause, statusComment });
+	return AgentStatusAPI.patch({ agentId, status, pauseCause, statusComment });
 }
 
 async function changeStatus({ status, pauseCause, statusComment }) {
-  try {
-    const statusPayload = { agentId: props.agentId, status, pauseCause, statusComment };
-    await updateStatus(statusPayload);
-    emit('changed', statusPayload);
-  } catch (err) {
-    if (err.response.data.id === PauseNotAllowedError.id) error.value = err;
-    throw err;
-  }
+	try {
+		const statusPayload = {
+			agentId: props.agentId,
+			status,
+			pauseCause,
+			statusComment,
+		};
+		await updateStatus(statusPayload);
+		emit('changed', statusPayload);
+	} catch (err) {
+		if (err.response.data.id === PauseNotAllowedError.id) error.value = err;
+		throw err;
+	}
 }
 
 async function handleStatus(status) {
-  if (status === AgentStatus.PAUSE) {
-    await loadPauseCauses();
-    if (pauseCauses.value.length) {
-      openPauseCausePopup();
-      return;
-    }
-  }
-  if (status === props.status) return;
-  await changeStatus({ status });
+	if (status === AgentStatus.PAUSE) {
+		await loadPauseCauses();
+		if (pauseCauses.value.length) {
+			openPauseCausePopup();
+			return;
+		}
+	}
+	if (status === props.status) return;
+	await changeStatus({ status });
 }
 
 function handleSelectInput(newStatus) {
-  handleStatus(newStatus);
-  chosenStatus.value = newStatus;
-  // we need to save changes which come from input, because sometimes we want
-  // to choose 'pause' repeatedly and have to check the previous status
+	handleStatus(newStatus);
+	chosenStatus.value = newStatus;
+	// we need to save changes which come from input, because sometimes we want
+	// to choose 'pause' repeatedly and have to check the previous status
 }
 
 function handleClosed(event) {
-  // sometimes we want to choose 'pause' repeatedly
-  // but 'change' event from wt-status-select can't give us the same value,
-  // in this case we have to use value from 'closed' event to choose 'pause' status
-  if (
-    (event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
-    event.value === AgentStatus.PAUSE
-  ) {
-    // and only for 'pause' status
-    handleStatus(event.value);
-  }
+	// sometimes we want to choose 'pause' repeatedly
+	// but 'change' event from wt-status-select can't give us the same value,
+	// in this case we have to use value from 'closed' event to choose 'pause' status
+	if (
+		(event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
+		event.value === AgentStatus.PAUSE
+	) {
+		// and only for 'pause' status
+		handleStatus(event.value);
+	}
 }
 
 function handlePauseCauseInput({ pauseCause, statusComment }) {
-  const status = AgentStatus.PAUSE;
-  return changeStatus({ status, pauseCause, statusComment });
+	const status = AgentStatus.PAUSE;
+	return changeStatus({ status, pauseCause, statusComment });
 }
 </script>
 

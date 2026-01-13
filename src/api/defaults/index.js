@@ -4,8 +4,8 @@ import getDefaultInstance from './getDefaultInstance/getDefaultInstance.js';
 import getDefaultOpenAPIConfig from './getDefaultOpenAPIConfig/getDefaultOpenAPIConfig.js';
 
 export {
-  getDefaultGetListResponse,
-  getDefaultGetParams,
-  getDefaultInstance,
-  getDefaultOpenAPIConfig,
+	getDefaultGetListResponse,
+	getDefaultGetParams,
+	getDefaultInstance,
+	getDefaultOpenAPIConfig,
 };

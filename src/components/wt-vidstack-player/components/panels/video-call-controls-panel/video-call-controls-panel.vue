@@ -89,106 +89,143 @@
 </template>
 
 <script setup lang="ts">
-import {computed, inject, ref} from 'vue';
+import { computed, inject, ref } from 'vue';
 
-import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
-import {ComponentSize} from '../../../../../enums';
-import {VideoCallAction} from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
-import {ScreenshotStatus} from '../../../../../modules/CallSession/types';
-import {ResultCallbacks} from '../../../../../types';
+import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
+import { ComponentSize } from '../../../../../enums';
+import { VideoCallAction } from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
+import type { ScreenshotStatus } from '../../../../../modules/CallSession/types';
+import type { ResultCallbacks } from '../../../../../types';
 
 const props = defineProps<{
-  'actions': VideoCallAction[];
+	actions: VideoCallAction[];
 
-  'mic:enabled': boolean;
-  'mic:accessed': boolean;
-  'video:enabled': boolean;
-  'video:accessed': boolean;
-  'screenshot:status': ScreenshotStatus | null;
-  'screenshot:loading': boolean;
-  'recordings': boolean;
+	'mic:enabled': boolean;
+	'mic:accessed': boolean;
+	'video:enabled': boolean;
+	'video:accessed': boolean;
+	'screenshot:status': ScreenshotStatus | null;
+	'screenshot:loading': boolean;
+	recordings: boolean;
 
-  'actions:settings:pressed': boolean;
-  'actions:settings:disabled': boolean;
-  'actions:chat:pressed': boolean;
+	'actions:settings:pressed': boolean;
+	'actions:settings:disabled': boolean;
+	'actions:chat:pressed': boolean;
 }>();
 
 const emit = defineEmits<{
-  (e: typeof VideoCallAction.Screenshot, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Recordings, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Mic, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Video, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Settings, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Chat, payload?: unknown, options?: ResultCallbacks): void;
-  (e: typeof VideoCallAction.Hangup, payload?: unknown, options?: ResultCallbacks): void;
+	(
+		e: typeof VideoCallAction.Screenshot,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Recordings,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Mic,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Video,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Settings,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Chat,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.Hangup,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
 }>();
 
-const {size} = inject('size') as { size: ComponentSize };
+const { size } = inject('size') as { size: ComponentSize };
 
 const shownActionsMap = computed(() => {
-  return props.actions.reduce<Record<VideoCallAction, boolean>>((acc, action) => {
-    acc[action] = true;
-    return acc;
-  }, {} as Record<VideoCallAction, boolean>);
+	return props.actions.reduce<Record<VideoCallAction, boolean>>(
+		(acc, action) => {
+			acc[action] = true;
+			return acc;
+		},
+		{} as Record<VideoCallAction, boolean>,
+	);
 });
 
 const microphoneIcon = computed(() => {
-  if (!props['mic:accessed']) {
-    return 'mic'; // todo
-  }
+	if (!props['mic:accessed']) {
+		return 'mic'; // todo
+	}
 
-  if (!props['mic:enabled']) {
-    return 'mic-muted';
-  }
+	if (!props['mic:enabled']) {
+		return 'mic-muted';
+	}
 
-  return 'mic';
+	return 'mic';
 });
 
-const micBadge = computed(() => !props['mic:accessed'] ? '!' : null)
+const micBadge = computed(() => (!props['mic:accessed'] ? '!' : null));
 
 const videoCamIcon = computed(() => {
-  if (!props['video:accessed']) {
-    return 'video-cam'; // todo
-  }
+	if (!props['video:accessed']) {
+		return 'video-cam'; // todo
+	}
 
-  if (!props['video:enabled']) {
-    return 'video-cam-off';
-  }
+	if (!props['video:enabled']) {
+		return 'video-cam-off';
+	}
 
-  return 'video-cam';
+	return 'video-cam';
 });
 
-const videoBadge = computed(() => !props['video:accessed'] ? '!' : null)
+const videoBadge = computed(() => (!props['video:accessed'] ? '!' : null));
 
-const recordIcon = computed(() => (props.recordings ? 'record-stop' : 'record-start'));
+const recordIcon = computed(() =>
+	props.recordings ? 'record-stop' : 'record-start',
+);
 
 const screenShotIcon = computed(() => {
-  switch (props['screenshot:status']) {
-    case 'done':
-      return 'screenshot-done';
-    case 'error':
-      return 'screenshot-false';
-    default:
-      return 'screenshot';
-  }
+	switch (props['screenshot:status']) {
+		case 'done':
+			return 'screenshot-done';
+		case 'error':
+			return 'screenshot-false';
+		default:
+			return 'screenshot';
+	}
 });
 
 const isScreenshotLoading = ref(false);
 
 const onScreenshotClick = () => {
-  isScreenshotLoading.value = true;
-  emit(VideoCallAction.Screenshot, {}, {
-    onComplete: () => {
-      isScreenshotLoading.value = false;
-    },
-  });
+	isScreenshotLoading.value = true;
+	emit(
+		VideoCallAction.Screenshot,
+		{},
+		{
+			onComplete: () => {
+				isScreenshotLoading.value = false;
+			},
+		},
+	);
 };
 
 const buttonSizeMap = {
-  [ComponentSize.SM]: ComponentSize.SM,
-  [ComponentSize.MD]: ComponentSize.MD,
-  [ComponentSize.LG]: ComponentSize.MD,
-}
+	[ComponentSize.SM]: ComponentSize.SM,
+	[ComponentSize.MD]: ComponentSize.MD,
+	[ComponentSize.LG]: ComponentSize.MD,
+};
 </script>
 
 <style scoped >.video-call-controls-panel {

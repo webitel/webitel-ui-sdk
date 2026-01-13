@@ -3,17 +3,16 @@
    (e.g. vue-multiselect .multiselect__placeholder which is technically a span)
 */
 .wt-placeholder {
-  transition: var(--transition);
-  color: var(--wt-text-field-placeholder-color);
+	transition: var(--transition);
+	color: var(--wt-text-field-placeholder-color);
 }
 
 .wt-placeholder--disabled {
-  transition: var(--transition);
-  color: var(--wt-text-field-placeholder-disabled-color);
+	transition: var(--transition);
+	color: var(--wt-text-field-placeholder-disabled-color);
 }
 
 .wt-placeholder--error {
-  transition: var(--transition);
-  color: var(--wt-text-field-placeholder-error-color);
+	transition: var(--transition);
+	color: var(--wt-text-field-placeholder-error-color);
 }
-

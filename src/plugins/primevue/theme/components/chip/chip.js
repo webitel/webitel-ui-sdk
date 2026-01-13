@@ -1,4 +1,5 @@
 import { ChipScheme } from '@webitel/styleguide/component-schemes';
+
 const generateCustomColorCss = ({ colorName, dt }) => `
         .p-chip-${colorName} {
             background: ${dt(`chip.${colorName}.background`)};
@@ -15,12 +16,12 @@ const generateCustomColorCss = ({ colorName, dt }) => `
 `;
 
 const chip = {
-  root: ChipScheme.sizes,
-  colorScheme: ChipScheme.colorScheme,
+	root: ChipScheme.sizes,
+	colorScheme: ChipScheme.colorScheme,
 
-  // Rewrite the default chip styles in the theme here:
-  // For customize the chip styles you need write css styles for classes
-  css: ({ dt }) => `
+	// Rewrite the default chip styles in the theme here:
+	// For customize the chip styles you need write css styles for classes
+	css: ({ dt }) => `
         ${generateCustomColorCss({ colorName: 'main', dt })}
         ${generateCustomColorCss({ colorName: 'primary', dt })}
         ${generateCustomColorCss({ colorName: 'secondary', dt })}
@@ -36,8 +37,8 @@ const chip = {
         }
 
         .p-chip .wt-icon {
-            width: ${dt(`chip.removeIcon.size`)};
-            height: ${dt(`chip.removeIcon.size`)};
+            width: ${dt('chip.removeIcon.size')};
+            height: ${dt('chip.removeIcon.size')};
         }
         `,
 };

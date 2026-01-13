@@ -1,81 +1,81 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
-  mixins: [baseFilterMixin],
+	mixins: [baseFilterMixin],
 
-  props: {
-    isNext: {
-      type: Boolean,
-      default: true,
-    },
-  },
+	props: {
+		isNext: {
+			type: Boolean,
+			default: true,
+		},
+	},
 
-  data: () => ({
-    page: '1',
-    size: '10',
-  }),
+	data: () => ({
+		page: '1',
+		size: '10',
+	}),
 
-  watch: {
-    '$route.query': {
-      handler(newValue, oldValue) {
-        if (
-          newValue.page !== oldValue.page ||
-          newValue.size !== oldValue.size
-        ) {
-          this.restore();
-        }
-      },
-    },
-  },
+	watch: {
+		'$route.query': {
+			handler(newValue, oldValue) {
+				if (
+					newValue.page !== oldValue.page ||
+					newValue.size !== oldValue.size
+				) {
+					this.restore();
+				}
+			},
+		},
+	},
 
-  computed: {
-    isPrev() {
-      return +this.page > 1;
-    },
-  },
+	computed: {
+		isPrev() {
+			return +this.page > 1;
+		},
+	},
 
-  methods: {
-    restore() {
-      this.restorePage();
-      this.restoreSize();
-    },
+	methods: {
+		restore() {
+			this.restorePage();
+			this.restoreSize();
+		},
 
-    restorePage() {
-      const page = '1';
-      this.page = this.getValueFromQuery({ filterQuery: 'page' }) || page;
-    },
+		restorePage() {
+			const page = '1';
+			this.page = this.getValueFromQuery({ filterQuery: 'page' }) || page;
+		},
 
-    restoreSize() {
-      const size = '10';
-      this.size = this.getValueFromQuery({ filterQuery: 'size' }) || size;
-    },
+		restoreSize() {
+			const size = '10';
+			this.size = this.getValueFromQuery({ filterQuery: 'size' }) || size;
+		},
 
-    next() {
-      this.$emit('input');
-      const value = `${+this.page + 1}`;
-      this.page = value;
-      return this.setValueToQuery({
-        filterQuery: 'page',
-        value,
-      });
-    },
+		next() {
+			this.$emit('input');
+			const value = `${+this.page + 1}`;
+			this.page = value;
+			return this.setValueToQuery({
+				filterQuery: 'page',
+				value,
+			});
+		},
 
-    prev() {
-      this.$emit('input');
-      const value = `${+this.page - 1}`;
-      this.page = value;
-      return this.setValueToQuery({
-        filterQuery: 'page',
-        value,
-      });
-    },
+		prev() {
+			this.$emit('input');
+			const value = `${+this.page - 1}`;
+			this.page = value;
+			return this.setValueToQuery({
+				filterQuery: 'page',
+				value,
+			});
+		},
 
-    sizeChange(value) {
-      this.$emit('input');
-      return this.setValueToQuery({
-        filterQuery: 'size',
-        value,
-      });
-    },
-  },
+		sizeChange(value) {
+			this.$emit('input');
+			return this.setValueToQuery({
+				filterQuery: 'size',
+				value,
+			});
+		},
+	},
 };

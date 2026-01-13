@@ -8,17 +8,17 @@ import components from './components/components';
 import { playerCss } from './extend/player/player.js';
 
 const WebitelTheme = definePreset(Aura, {
-  semantic,
+	semantic,
 
-  components,
+	components,
 
-  extend,
+	extend,
 
-  css: ({ dt }) => `
+	css: ({ dt }) => `
     ${playerCss({ dt })}
   `,
 
-  primitive,
+	primitive,
 });
 
 export default WebitelTheme;

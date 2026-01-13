@@ -6,11 +6,11 @@
 import type { DividerProps } from 'primevue';
 
 interface Props extends DividerProps {
-  variant?: 'horizontal' | 'vertical';
+	variant?: 'horizontal' | 'vertical';
 }
 
 withDefaults(defineProps<Props>(), {
-  variant: 'horizontal',
+	variant: 'horizontal',
 });
 </script>
 

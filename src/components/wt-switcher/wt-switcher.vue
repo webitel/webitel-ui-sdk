@@ -32,28 +32,36 @@
 </template>
 
 <script setup lang="ts">
-import { ToggleSwitchProps } from 'primevue/toggleswitch';
-import { computed, defineEmits, defineModel, defineProps,
-          nextTick, ref, useSlots, withDefaults } from 'vue';
+import type { ToggleSwitchProps } from 'primevue/toggleswitch';
+import {
+	computed,
+	defineEmits,
+	defineModel,
+	defineProps,
+	nextTick,
+	ref,
+	useSlots,
+	withDefaults,
+} from 'vue';
 
 interface LabelProps {
-  [key: string]: any;
+	[key: string]: any;
 }
 
 interface Props extends ToggleSwitchProps {
-  label?: string;
-  labelLeft?: boolean;
-  disabled?: boolean;
-  labelProps?: LabelProps;
-  controlled?: boolean;  // for controlled mode, when need to sync visual state with model
+	label?: string;
+	labelLeft?: boolean;
+	disabled?: boolean;
+	labelProps?: LabelProps;
+	controlled?: boolean; // for controlled mode, when need to sync visual state with model
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
-  labelLeft: false,
-  disabled: false,
-  labelProps: () => ({}),
-  controlled: false
+	label: '',
+	labelLeft: false,
+	disabled: false,
+	labelProps: () => ({}),
+	controlled: false,
 });
 
 const model = defineModel<boolean>();
@@ -64,19 +72,19 @@ const emit = defineEmits(['update:modelValue']);
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
 
 const handleSwitcherClick = () => {
-  if (props.controlled) {
-    nextTick(() => {
-      switcherKey.value++
-    })
-  }
-  emit('update:modelValue', !model.value);
-}
+	if (props.controlled) {
+		nextTick(() => {
+			switcherKey.value++;
+		});
+	}
+	emit('update:modelValue', !model.value);
+};
 </script>
 
 <style  scoped>

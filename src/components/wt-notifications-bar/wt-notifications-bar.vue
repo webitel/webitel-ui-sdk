@@ -21,41 +21,41 @@ import defaultEventBus from '../../scripts/eventBus.js';
 import { _wtUiLog as loggr } from '../../scripts/logger.js';
 
 export default {
-  name: 'WtNotificationsBar',
-  inject: ['$eventBus'],
-  data: () => ({
-    notificationDuration: 4000,
-    notifications: [],
+	name: 'WtNotificationsBar',
+	inject: ['$eventBus'],
+	data: () => ({
+		notificationDuration: 4000,
+		notifications: [],
 
-    eventBus: defaultEventBus,
-  }),
-  created() {
-    if (this.$eventBus) {
-      this.eventBus = this.$eventBus;
-    } else {
-      loggr.warn({ entity: 'component', module: 'wt-notification-bar' })(
-        'no globally provided $eventBus found, using default webitel-ui eventBus',
-      );
-    }
+		eventBus: defaultEventBus,
+	}),
+	created() {
+		if (this.$eventBus) {
+			this.eventBus = this.$eventBus;
+		} else {
+			loggr.warn({ entity: 'component', module: 'wt-notification-bar' })(
+				'no globally provided $eventBus found, using default webitel-ui eventBus',
+			);
+		}
 
-    this.eventBus.$on('notification', this.showNotification);
-  },
-  unmounted() {
-    this.eventBus.$off('notification', this.showNotification);
-  },
-  methods: {
-    showNotification(notification) {
-      this.notifications.unshift(notification);
-      setTimeout(
-        () => this.closeNotification(notification),
-        notification.timeout * 1000 || this.notificationDuration,
-      );
-    },
-    closeNotification(notification) {
-      const index = this.notifications.indexOf(notification);
-      this.notifications.splice(index, 1);
-    },
-  },
+		this.eventBus.$on('notification', this.showNotification);
+	},
+	unmounted() {
+		this.eventBus.$off('notification', this.showNotification);
+	},
+	methods: {
+		showNotification(notification) {
+			this.notifications.unshift(notification);
+			setTimeout(
+				() => this.closeNotification(notification),
+				notification.timeout * 1000 || this.notificationDuration,
+			);
+		},
+		closeNotification(notification) {
+			const index = this.notifications.indexOf(notification);
+			this.notifications.splice(index, 1);
+		},
+	},
 };
 </script>
 

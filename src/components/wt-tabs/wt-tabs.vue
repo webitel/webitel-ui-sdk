@@ -38,47 +38,47 @@
 
 <script>
 export default {
-  name: 'WtTabs',
+	name: 'WtTabs',
 
-  model: {
-    prop: 'current',
-    event: 'change',
-  },
-  props: {
-    current: {
-      type: Object,
-      default: () => ({}),
-    },
-    tabs: {
-      type: Array,
-      default: () => [],
-    },
-    wide: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['change'],
-  data: () => ({
-    activeLineWidth: 0,
-    activeLineOffset: 0,
-  }),
+	model: {
+		prop: 'current',
+		event: 'change',
+	},
+	props: {
+		current: {
+			type: Object,
+			default: () => ({}),
+		},
+		tabs: {
+			type: Array,
+			default: () => [],
+		},
+		wide: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	emits: ['change'],
+	data: () => ({
+		activeLineWidth: 0,
+		activeLineOffset: 0,
+	}),
 
-  methods: {
-    open(value) {
-      this.$emit('change', value);
-      this.moveActiveLine(value);
-    },
+	methods: {
+		open(value) {
+			this.$emit('change', value);
+			this.moveActiveLine(value);
+		},
 
-    moveActiveLine(newValue) {
-      if (!this.current) return;
-      if (!this.$refs || !this.$refs[newValue] || !this.$refs[newValue][0])
-        return;
-      const element = this.$refs[newValue][0];
-      this.activeLineWidth = element.clientWidth;
-      this.activeLineOffset = element.offsetLeft;
-    },
-  },
+		moveActiveLine(newValue) {
+			if (!this.current) return;
+			if (!this.$refs || !this.$refs[newValue] || !this.$refs[newValue][0])
+				return;
+			const element = this.$refs[newValue][0];
+			this.activeLineWidth = element.clientWidth;
+			this.activeLineOffset = element.offsetLeft;
+		},
+	},
 };
 </script>
 

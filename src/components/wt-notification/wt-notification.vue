@@ -10,32 +10,32 @@
 
 <script>
 export default {
-  name: 'WtNotification',
-  props: {
-    type: {
-      type: String,
-      default: 'success',
-    },
-  },
-  computed: {
-    notificationIcon() {
-      switch (this.type) {
-        case 'info':
-          return 'rounded-info';
-        case 'error':
-          return 'attention';
-        case 'warning':
-          return 'attention';
-        case 'success':
-          return 'done';
-        default:
-          return '';
-      }
-    },
-    notificationIconColor() {
-      return this.type || '';
-    },
-  },
+	name: 'WtNotification',
+	props: {
+		type: {
+			type: String,
+			default: 'success',
+		},
+	},
+	computed: {
+		notificationIcon() {
+			switch (this.type) {
+				case 'info':
+					return 'rounded-info';
+				case 'error':
+					return 'attention';
+				case 'warning':
+					return 'attention';
+				case 'success':
+					return 'done';
+				default:
+					return '';
+			}
+		},
+		notificationIconColor() {
+			return this.type || '';
+		},
+	},
 };
 </script>
 

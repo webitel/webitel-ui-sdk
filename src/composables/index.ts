@@ -8,6 +8,6 @@ export * from './useDestroyableSortable/useDestroyableSortable';
 export * from './useGalleriaFullscreen/useGalleriaFullscreen';
 export * from './useGalleriaMaskClick/useGalleriaMaskClick';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
-export * from './useTableColumnDrag/useTableColumnDrag'
+export * from './useTableColumnDrag/useTableColumnDrag';
 export * from './useValidate/useValidate';
 export * from './useWtTable/useWtTable';

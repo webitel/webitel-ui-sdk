@@ -1,35 +1,35 @@
 :root {
-  --icon-8xl-size: 96px;
-  --icon-7xl-size: 88px;
-  --icon-6xl-size: 80px;
-  --icon-5xl-size: 72px;
-  --icon-4xl-size: 64px;
-  --icon-3xl-size: 56px;
-  --icon-2xl-size: 48px;
-  --icon-xl-size: 40px;
-  --icon-lg-size: 32px;
-  --icon-md-size: 24px;
-  --icon-sm-size: 16px;
-  --icon-xs-size: 8px;
+	--icon-8xl-size: 96px;
+	--icon-7xl-size: 88px;
+	--icon-6xl-size: 80px;
+	--icon-5xl-size: 72px;
+	--icon-4xl-size: 64px;
+	--icon-3xl-size: 56px;
+	--icon-2xl-size: 48px;
+	--icon-xl-size: 40px;
+	--icon-lg-size: 32px;
+	--icon-md-size: 24px;
+	--icon-sm-size: 16px;
+	--icon-xs-size: 8px;
 
-  --icon-color: var(--grey-darken-2);
-  --icon-active-color: var(--grey-darken-4);
-  --icon-primary-color: var(--p-primary-color);
-  --icon-error-color: var(--p-error-color);
-  --icon-success-color: var(--p-success-color);
-  --icon-warning-color: var(--p-warn-color);
-  --icon-on-dark-color: var(--white);
-  --icon-on-light-color: var(--grey-darken-3);
-  --icon-on-primary-color: var(--primary-on-color);
-  --icon-info-color: var(--p-info-color);
-  --icon-chat-color: var(--p-chat-color);
-  --icon-transfer-color: var(--p-transfer-color);
-  --icon-job-color: var(--p-task-color);
-  --icon-disabled-color: var(--grey-lighten-4);
+	--icon-color: var(--grey-darken-2);
+	--icon-active-color: var(--grey-darken-4);
+	--icon-primary-color: var(--p-primary-color);
+	--icon-error-color: var(--p-error-color);
+	--icon-success-color: var(--p-success-color);
+	--icon-warning-color: var(--p-warn-color);
+	--icon-on-dark-color: var(--white);
+	--icon-on-light-color: var(--grey-darken-3);
+	--icon-on-primary-color: var(--primary-on-color);
+	--icon-info-color: var(--p-info-color);
+	--icon-chat-color: var(--p-chat-color);
+	--icon-transfer-color: var(--p-transfer-color);
+	--icon-job-color: var(--p-task-color);
+	--icon-disabled-color: var(--grey-lighten-4);
 }
 
 :root.theme--dark {
-  --icon-color: var(--grey-lighten-2);
-  --icon-active-color: var(--grey-lighten-4);
-  --icon-disabled-color: var(--grey-darken-2);
+	--icon-color: var(--grey-lighten-2);
+	--icon-active-color: var(--grey-lighten-4);
+	--icon-disabled-color: var(--grey-darken-2);
 }

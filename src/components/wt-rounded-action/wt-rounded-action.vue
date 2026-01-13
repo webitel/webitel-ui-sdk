@@ -16,81 +16,84 @@
 import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
-  icon: {
-    type: String,
-    required: true,
-  },
-  /**
-   * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
-   * Useful for library icons extension with project-level icons with this prefix in name
-   */
-  iconPrefix: {
-    type: String,
-    default: '',
-  },
-  /**
-   * @values 'primary', 'secondary', 'success', 'error', 'transfer'
-   */
-  color: {
-    type: String,
-    options: ['primary', 'secondary', 'success', 'error', 'transfer'],
-    default: 'secondary',
-  },
-  /**
-   * @values 'sm', 'md'
-   */
-  size: {
-    type: String,
-    default: 'md',
-  },
-  active: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  rounded: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * Stretches button to all available width
-   */
-  wide: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+	icon: {
+		type: String,
+		required: true,
+	},
+	/**
+	 * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
+	 * Useful for library icons extension with project-level icons with this prefix in name
+	 */
+	iconPrefix: {
+		type: String,
+		default: '',
+	},
+	/**
+	 * @values 'primary', 'secondary', 'success', 'error', 'transfer'
+	 */
+	color: {
+		type: String,
+		options: ['primary', 'secondary', 'success', 'error', 'transfer'],
+		default: 'secondary',
+	},
+	/**
+	 * @values 'sm', 'md'
+	 */
+	size: {
+		type: String,
+		default: 'md',
+	},
+	active: {
+		type: Boolean,
+		default: false,
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
+	rounded: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Stretches button to all available width
+	 */
+	wide: {
+		type: Boolean,
+		default: false,
+	},
+	loading: {
+		type: Boolean,
+		default: false,
+	},
 });
 const emit = defineEmits(['click']);
 const showLoader = ref(false);
 
-const loaderSize = computed(() => props.size === 'sm' ? 'xs' : 'sm'); // for matching wt-loader sizes with wt-rounded-action sizes
+const loaderSize = computed(() => (props.size === 'sm' ? 'xs' : 'sm')); // for matching wt-loader sizes with wt-rounded-action sizes
 const iColor = computed(() => {
-  if (props.disabled) return 'disabled';
-  switch (props.color) {
-    case 'secondary':
-      return 'default';
-    default:
-      return props.color;
-  }
+	if (props.disabled) return 'disabled';
+	switch (props.color) {
+		case 'secondary':
+			return 'default';
+		default:
+			return props.color;
+	}
 });
 
-watch(() => props.loading, (value) => {
-  if (value) {
-    showLoader.value = true;
-  } else {
-    setTimeout(() => {
-      showLoader.value = value;
-    }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
-  }
-}, { immediate: true });
-
+watch(
+	() => props.loading,
+	(value) => {
+		if (value) {
+			showLoader.value = true;
+		} else {
+			setTimeout(() => {
+				showLoader.value = value;
+			}, 1000); // why 1s? https://ux.stackexchange.com/a/104782
+		}
+	},
+	{ immediate: true },
+);
 </script>
 
 <style scoped>

@@ -34,33 +34,35 @@ import type { RadioButtonProps } from 'primevue/radiobutton';
 import { computed, defineModel, defineProps, useSlots } from 'vue';
 
 interface Props extends RadioButtonProps {
-  // value, set by radio
-  value: string | number | boolean | object;
-  label?: string;
-  required?: boolean;
-  disabled?: boolean;
-  outline?: boolean;
+	// value, set by radio
+	value: string | number | boolean | object;
+	label?: string;
+	required?: boolean;
+	disabled?: boolean;
+	outline?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
-  required: false,
-  disabled: false,
-  outline: false,
+	label: '',
+	required: false,
+	disabled: false,
+	outline: false,
 });
 
-const model = defineModel<string | number | boolean | object>('selected', {required: true});
+const model = defineModel<string | number | boolean | object>('selected', {
+	required: true,
+});
 
 const radioId = `radio-${Math.random().toString(36).slice(2, 11)}`;
 
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const isChecked = computed(() => {
-  return props.value === model.value;
+	return props.value === model.value;
 });
 </script>
 

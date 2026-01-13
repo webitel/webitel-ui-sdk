@@ -38,76 +38,83 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, inject, onBeforeUnmount, onMounted} from 'vue';
+import {
+	defineEmits,
+	defineProps,
+	inject,
+	onBeforeUnmount,
+	onMounted,
+} from 'vue';
 
-import {ComponentSize} from "../../../../../enums";
-import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
-import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
-import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
-import FullscreenButton from "../../buttons/fullscreen-button.vue";
-import ToggleButton from "../../toggle-button.vue";
+import { ComponentSize } from '../../../../../enums';
+import WtAvatar from '../../../../wt-avatar/wt-avatar.vue';
+import WtIconBtn from '../../../../wt-icon-btn/wt-icon-btn.vue';
+import type { WtVidstackPlayerSizeProvider } from '../../../types/WtVidstackPlayerSizeProvider';
+import FullscreenButton from '../../buttons/fullscreen-button.vue';
+import ToggleButton from '../../toggle-button.vue';
 
-const { size, fullscreen, changeSize } = inject<WtVidstackPlayerSizeProvider>('size');
+const { size, fullscreen, changeSize } =
+	inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
-  title?: string;
-  username?: string;
-  closable?: boolean;
-  hideExpand?: boolean
+	title?: string;
+	username?: string;
+	closable?: boolean;
+	hideExpand?: boolean;
 }>();
 
 const emit = defineEmits<{
-  'close': [],
+	close: [];
 }>();
 
 const handleFullscreen = (value: boolean) => {
-  if (value) {
-    if (size.value !== ComponentSize.LG) {
-      fullscreen.value = true
-      changeSize(ComponentSize.LG)
-    }
-  } else if (size.value === ComponentSize.LG) {
-    exitFullscreen()
-    fullscreen.value = false
-    changeSize(ComponentSize.SM)
-  }
-}
+	if (value) {
+		if (size.value !== ComponentSize.LG) {
+			fullscreen.value = true;
+			changeSize(ComponentSize.LG);
+		}
+	} else if (size.value === ComponentSize.LG) {
+		exitFullscreen();
+		fullscreen.value = false;
+		changeSize(ComponentSize.SM);
+	}
+};
 
 const handlePlayerSize = () => {
-  if (size.value === ComponentSize.SM) {
-    changeSize(ComponentSize.MD)
-  } else if (size.value === ComponentSize.MD) {
-    changeSize(ComponentSize.SM)
-  } else if (size.value === ComponentSize.LG) {
-    exitFullscreen()
-    fullscreen.value = false
-    changeSize(ComponentSize.MD)
-  }
-}
+	if (size.value === ComponentSize.SM) {
+		changeSize(ComponentSize.MD);
+	} else if (size.value === ComponentSize.MD) {
+		changeSize(ComponentSize.SM);
+	} else if (size.value === ComponentSize.LG) {
+		exitFullscreen();
+		fullscreen.value = false;
+		changeSize(ComponentSize.MD);
+	}
+};
 
 const exitFullscreen = () => {
-  if (document.fullscreenElement) {
-    document.exitFullscreen()
-  }
-}
+	if (document.fullscreenElement) {
+		document.exitFullscreen();
+	}
+};
 
 const handleKeyUp = (event) => {
-  if (event.key === 'Escape') {
-    handleFullscreen(false)
-  }
-}
+	if (event.key === 'Escape') {
+		handleFullscreen(false);
+	}
+};
 
 onMounted(() => {
-  document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) {
-      handleFullscreen(false)
-    }
-  })
+	document.addEventListener('fullscreenchange', () => {
+		if (!document.fullscreenElement) {
+			handleFullscreen(false);
+		}
+	});
 
-  onBeforeUnmount(() => {
-    document.removeEventListener('keyup', handleKeyUp)
-  })
-})
+	onBeforeUnmount(() => {
+		document.removeEventListener('keyup', handleKeyUp);
+	});
+});
 </script>
 
 <style  scoped>.video-display-panel {

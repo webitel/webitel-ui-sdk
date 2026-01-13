@@ -109,73 +109,73 @@ import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
 
 export default {
-  name: 'WtTagsInput',
-  mixins: [
-    validationMixin,
-    multiselectMixin,
-    // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
-    taggableMixin,
-  ],
-  props: {
-    value: {
-      type: Array,
-    },
-    trackBy: {
-      type: String,
-      default: null,
-    },
-    taggable: {
-      type: Boolean,
-      default: false,
-    },
-    manualTagging: {
-      type: Boolean,
-      default: false,
-      description: `
+	name: 'WtTagsInput',
+	mixins: [
+		validationMixin,
+		multiselectMixin,
+		// taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
+		taggableMixin,
+	],
+	props: {
+		value: {
+			type: Array,
+		},
+		trackBy: {
+			type: String,
+			default: null,
+		},
+		taggable: {
+			type: Boolean,
+			default: false,
+		},
+		manualTagging: {
+			type: Boolean,
+			default: false,
+			description: `
       False: "tag" method automatically pushes { optionLabel | "name", trackBy } object to value
       array and $emits "input" event.
 
       True: "tag" method only $emits "tag" event. Tag addition is responsibility of client side.
     `,
-    },
-  },
-  emits: ['input', 'tag', 'search-change', 'closed'],
-  data: () => ({
-    defaultOptionLabel: 'label',
+		},
+	},
+	emits: ['input', 'tag', 'search-change', 'closed'],
+	data: () => ({
+		defaultOptionLabel: 'label',
 
-    // [https://webitel.atlassian.net/browse/WTEL-4310]
-    // Multiple value is needed in TaggableMixin mixin to correctly add custom values
+		// [https://webitel.atlassian.net/browse/WTEL-4310]
+		// Multiple value is needed in TaggableMixin mixin to correctly add custom values
 
-    multiple: true,
-  }),
-  created() {
-    if (!this.isApiMode) {
-      this.initializeOptions();
-    }
-  },
-  methods: {
-    getTagOptionLabel({ optionLabel, option }) {
-      /*
+		multiple: true,
+	}),
+	created() {
+		if (!this.isApiMode) {
+			this.initializeOptions();
+		}
+	},
+	methods: {
+		getTagOptionLabel({ optionLabel, option }) {
+			/*
       Multiselect creates new tags with "label" property by default, so we need to handle
       it as well
        */
-      const label = this.getOptionLabel({ optionLabel, option });
-      return typeof label === 'object' ? option.label : label;
-    },
-    initializeOptions() {
-      if (!this.value) {
-        return [];
-      }
+			const label = this.getOptionLabel({ optionLabel, option });
+			return typeof label === 'object' ? option.label : label;
+		},
+		initializeOptions() {
+			if (!this.value) {
+				return [];
+			}
 
-      const newOptions = this.value.filter((valObj) => {
-        return !this.options.find((option) => {
-          return deepEqual(option, valObj);
-        });
-      });
+			const newOptions = this.value.filter((valObj) => {
+				return !this.options.find((option) => {
+					return deepEqual(option, valObj);
+				});
+			});
 
-      this.options.unshift(...newOptions);
-    },
-  },
+			this.options.unshift(...newOptions);
+		},
+	},
 };
 </script>
 

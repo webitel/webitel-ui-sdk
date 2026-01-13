@@ -23,61 +23,61 @@
 import { ref, useTemplateRef } from 'vue';
 
 const props = defineProps({
-  /**
-   * See context-menu component docs
-   */
-  options: {
-    type: Array,
-    required: true,
-  },
-  /**
-   * @values 'primary', 'secondary'
-   * @example <wt-button color="secondary"></wt-button>
-   */
-  color: {
-    type: String,
-    default: 'primary',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+	/**
+	 * See context-menu component docs
+	 */
+	options: {
+		type: Array,
+		required: true,
+	},
+	/**
+	 * @values 'primary', 'secondary'
+	 * @example <wt-button color="secondary"></wt-button>
+	 */
+	color: {
+		type: String,
+		default: 'primary',
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits([
-  /**
-   * @event click
-   */
-  'click',
-  /**
-   * Click on option in context-menu
-   *
-   * @event click:option
-   *
-   * @property {object} option clicked option object
-   * @property {index} index clicked option index in options list
-   */
-  'click:option',
+	/**
+	 * @event click
+	 */
+	'click',
+	/**
+	 * Click on option in context-menu
+	 *
+	 * @event click:option
+	 *
+	 * @property {object} option clicked option object
+	 * @property {index} index clicked option index in options list
+	 */
+	'click:option',
 ]);
 
 const isOpened = ref(false);
 const buttonSelect = useTemplateRef('buttonSelect');
 
 const selectOption = ({ option, index }) => {
-  emit('click:option', option, index);
-  isOpened.value = false;
+	emit('click:option', option, index);
+	isOpened.value = false;
 };
 
 const atClickaway = () => {
-  isOpened.value = false;
+	isOpened.value = false;
 };
 
 const toggleContextMenu = (toggle, e) => {
-  isOpened.value = !isOpened.value;
-  // The menu is positioned relative to `buttonSelect` (reference button).
-  // If not provided, it defaults to centering on the trigger button (`e`).
-  // https://webitel.atlassian.net/browse/WTEL-7349
-  toggle(e, buttonSelect.value)
+	isOpened.value = !isOpened.value;
+	// The menu is positioned relative to `buttonSelect` (reference button).
+	// If not provided, it defaults to centering on the trigger button (`e`).
+	// https://webitel.atlassian.net/browse/WTEL-7349
+	toggle(e, buttonSelect.value);
 };
 </script>
 

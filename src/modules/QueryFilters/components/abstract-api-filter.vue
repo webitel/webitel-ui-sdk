@@ -29,23 +29,23 @@
 import apiFilterMixin from '../mixins/apiFilterMixin.js';
 
 export default {
-  name: 'AbstractApiFilter',
-  mixins: [apiFilterMixin],
-  props: {
-    filterQuery: {
-      type: String,
-      required: true,
-    },
-  },
-  methods: {
-    search(params) {
-      return this.filterSchema.search(params);
-    },
-    async fetchSelected(...args) {
-      const { items = [] } = await this.filterSchema.fetchSelected(...args);
-      return items;
-    },
-  },
+	name: 'AbstractApiFilter',
+	mixins: [apiFilterMixin],
+	props: {
+		filterQuery: {
+			type: String,
+			required: true,
+		},
+	},
+	methods: {
+		search(params) {
+			return this.filterSchema.search(params);
+		},
+		async fetchSelected(...args) {
+			const { items = [] } = await this.filterSchema.fetchSelected(...args);
+			return items;
+		},
+	},
 };
 </script>
 

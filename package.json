@@ -7,6 +7,7 @@
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
+    "biome:format:all": "npx biome check --write ./src",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "publish-lib": " npm publish --access public --tag latest",
     "docs:dev": "vitepress dev docs --port 8080",
@@ -113,6 +114,7 @@
     }
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.11",
     "@eslint/js": "^9.22.0",
     "@regle/core": "^1.16.2",
     "@tsconfig/node22": "^22.0.0",

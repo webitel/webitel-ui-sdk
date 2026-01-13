@@ -15,28 +15,28 @@ import { ComponentSize, IconColor } from '../../enums';
 import { getIconFromRepository } from './utils/iconsRepository';
 
 interface Props {
-  /**
-   * Icon name
-   * @example '<wt-icon icon="close"></wt-icon>'
-   */
-  icon: string;
-  size?: ComponentSize;
-  color?: IconColor;
-  disabled?: boolean;
+	/**
+	 * Icon name
+	 * @example '<wt-icon icon="close"></wt-icon>'
+	 */
+	icon: string;
+	size?: ComponentSize;
+	color?: IconColor;
+	disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: ComponentSize.MD,
-  color: IconColor.DEFAULT,
-  disabled: false,
+	size: ComponentSize.MD,
+	color: IconColor.DEFAULT,
+	disabled: false,
 });
 
 const emit = defineEmits<{
-  click: MouseEvent[];
+	click: MouseEvent[];
 }>();
 
 const iconSvg = computed(() => {
-  return getIconFromRepository(props.icon) || props.icon;
+	return getIconFromRepository(props.icon) || props.icon;
 });
 </script>
 

@@ -14,17 +14,17 @@
 
 <script>
 export default {
-  name: 'WtPageWrapper',
-  props: {
-    hideHeader: {
-      type: Boolean,
-      default: false,
-    },
-    actionsPanel: {
-      type: Boolean,
-      default: true,
-    },
-  },
+	name: 'WtPageWrapper',
+	props: {
+		hideHeader: {
+			type: Boolean,
+			default: false,
+		},
+		actionsPanel: {
+			type: Boolean,
+			default: true,
+		},
+	},
 };
 </script>
 

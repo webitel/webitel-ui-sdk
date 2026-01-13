@@ -48,10 +48,10 @@ import getNamespacedState from '../../../../store/helpers/getNamespacedState.js'
 import PermissionsRoleSelect from './permissions-role-select.vue';
 
 const props = defineProps({
-  namespace: {
-    type: String,
-    required: true,
-  },
+	namespace: {
+		type: String,
+		required: true,
+	},
 });
 
 const attrs = useAttrs();
@@ -63,61 +63,61 @@ const route = useRoute();
 const grantee = ref(null);
 
 const existingGranteesList = computed(
-  () => getNamespacedState(store.state, props.namespace).dataList,
+	() => getNamespacedState(store.state, props.namespace).dataList,
 );
 
 const shown = computed(() => !!route.params.permissionId);
 
 const add = () => {
-  const { params, query, hash, name } = route;
+	const { params, query, hash, name } = route;
 
-  router.push({
-    query,
-    hash,
-    name,
-    params: { ...params, permissionId: 'new' },
-  });
+	router.push({
+		query,
+		hash,
+		name,
+		params: { ...params, permissionId: 'new' },
+	});
 };
 
 const close = () => {
-  const { query, hash, name } = route;
-  const { permissionId, ...params } = route.params;
+	const { query, hash, name } = route;
+	const { permissionId, ...params } = route.params;
 
-  grantee.value = null;
+	grantee.value = null;
 
-  return router.push({
-    query,
-    hash,
-    name,
-    params,
-  });
+	return router.push({
+		query,
+		hash,
+		name,
+		params,
+	});
 };
 
 const loadGrantees = (params) => {
-  const fields = ['name', 'id', 'user'];
-  return RolesAPI.getList({
-    ...params,
-    fields,
-  });
+	const fields = ['name', 'id', 'user'];
+	return RolesAPI.getList({
+		...params,
+		fields,
+	});
 };
 
 // filter already existing roles
 const getAvailableGrantees = async (params) => {
-  const { items, ...rest } = await loadGrantees(params);
-  return {
-    items: items.filter(
-      (role) =>
-        !existingGranteesList.value.some(
-          (usedRoles) => role.id === usedRoles.grantee.id,
-        ),
-    ),
-    ...rest,
-  };
+	const { items, ...rest } = await loadGrantees(params);
+	return {
+		items: items.filter(
+			(role) =>
+				!existingGranteesList.value.some(
+					(usedRoles) => role.id === usedRoles.grantee.id,
+				),
+		),
+		...rest,
+	};
 };
 
 const save = async (grantee) => {
-  await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, grantee);
-  return close();
+	await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, grantee);
+	return close();
 };
 </script>
 

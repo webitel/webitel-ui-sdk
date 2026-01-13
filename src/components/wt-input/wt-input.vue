@@ -35,44 +35,45 @@
 import type { RegleFieldStatus } from '@regle/core';
 import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
 
-import {
-  useValidation
-} from '../../mixins/validationMixin/useValidation';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /*
  * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
  * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
  * */
-const props = withDefaults(defineProps<{
-  value?: string | number;
-  modelValue?: string | number;
-  label?: string;
-  placeholder?: string;
-  name?: string;
-  type?: string;
-  required?: boolean;
-  disabled?: boolean;
-  hasShowPassword?: boolean;
-  numberMin?: number;
-  numberMax?: number;
-  labelProps?: Record<string, unknown>;
-  preventTrim?: boolean;
-  v?: Record<string, unknown>;
-  regleValidation?: RegleFieldStatus<string>;
-  customValidators?: unknown[];
-}>(), {
-  label: '',
-  name: '',
-  type: 'text',
-  required: false,
-  disabled: false,
-  hasShowPassword: false,
-  numberMin: 0,
-  preventTrim: false,
-  v: null,
-  regleValidation: null,
-  customValidators: () => [],
-});
+const props = withDefaults(
+	defineProps<{
+		value?: string | number;
+		modelValue?: string | number;
+		label?: string;
+		placeholder?: string;
+		name?: string;
+		type?: string;
+		required?: boolean;
+		disabled?: boolean;
+		hasShowPassword?: boolean;
+		numberMin?: number;
+		numberMax?: number;
+		labelProps?: Record<string, unknown>;
+		preventTrim?: boolean;
+		v?: Record<string, unknown>;
+		regleValidation?: RegleFieldStatus<string>;
+		customValidators?: unknown[];
+	}>(),
+	{
+		label: '',
+		name: '',
+		type: 'text',
+		required: false,
+		disabled: false,
+		hasShowPassword: false,
+		numberMin: 0,
+		preventTrim: false,
+		v: null,
+		regleValidation: null,
+		customValidators: () => [],
+	},
+);
 
 const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
 
@@ -81,14 +82,10 @@ const slots = useSlots();
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const {
-  isValidation,
-  invalid,
-  validationText,
-} = useValidation({
-  v,
-  customValidators,
-  regleValidation,
+const { isValidation, invalid, validationText } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
 });
 
 // toggles password <-> text at showPassword
@@ -125,59 +122,59 @@ const isPasswordVisible = ref(false);
 // },
 
 const inputValue = computed(() => {
-  return props.value !== undefined ? props.value : props.modelValue;
+	return props.value !== undefined ? props.value : props.modelValue;
 });
 
 const hasLabel = computed(() => {
-  return !!(props.label || slots.label);
+	return !!(props.label || slots.label);
 });
 
 const requiredLabel = computed(() => {
-  return props.required ? `${props.label}*` : props.label;
+	return props.required ? `${props.label}*` : props.label;
 });
 
 const isPassword = computed(() => {
-  return props.type === 'password' && props.hasShowPassword;
+	return props.type === 'password' && props.hasShowPassword;
 });
 
 const showPasswordIcon = computed(() => {
-  return isPasswordVisible.value ? 'eye--closed' : 'eye--opened';
+	return isPasswordVisible.value ? 'eye--closed' : 'eye--opened';
 });
 
 function inputHandler(event) {
-  const value = props.preventTrim
-    ? event.target.value
-    : event.target.value.trim();
-  emit('update:modelValue', value);
-  emit('input', value);
+	const value = props.preventTrim
+		? event.target.value
+		: event.target.value.trim();
+	emit('update:modelValue', value);
+	emit('input', value);
 }
 
 function switchVisibilityPassword() {
-  isPasswordVisible.value = !isPasswordVisible.value;
-  inputType.value = isPasswordVisible.value ? 'text' : 'password';
+	isPasswordVisible.value = !isPasswordVisible.value;
+	inputType.value = isPasswordVisible.value ? 'text' : 'password';
 }
 
 function updateInputPaddings() {
-  // cant test this thing cause vue test utils doesnt render elements width :/
-  const afterWrapperWidth = AfterWrapper.value.offsetWidth;
-  const inputEl = WtInput.value;
-  const defaultInputPadding = getComputedStyle(
-    document.documentElement,
-  ).getPropertyValue('--input-padding');
-  if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
-  inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
+	// cant test this thing cause vue test utils doesnt render elements width :/
+	const afterWrapperWidth = AfterWrapper.value.offsetWidth;
+	const inputEl = WtInput.value;
+	const defaultInputPadding = getComputedStyle(
+		document.documentElement,
+	).getPropertyValue('--input-padding');
+	if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
+	inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
 }
 
 function focus() {
-  WtInput.value.focus();
+	WtInput.value.focus();
 }
 
 onMounted(() => {
-  updateInputPaddings();
+	updateInputPaddings();
 });
 
 defineExpose({
-  focus,
+	focus,
 });
 </script>
 

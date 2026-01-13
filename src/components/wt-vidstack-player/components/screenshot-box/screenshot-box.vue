@@ -20,18 +20,18 @@
 </template>
 
 <script setup lang="ts">
-import {WtIcon,WtImage} from '@webitel/ui-sdk/components';
+import { WtIcon, WtImage } from '@webitel/ui-sdk/components';
 
-import {ComponentSize} from "../../../../enums";
+import type { ComponentSize } from '../../../../enums';
 
 const props = defineProps<{
-  src?: string;
-  size: ComponentSize
+	src?: string;
+	size: ComponentSize;
 }>();
 
 const emit = defineEmits<{
-  'close': [];
-  'zoom': [];
+	close: [];
+	zoom: [];
 }>();
 
 const onClose = () => emit('close');

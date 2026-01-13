@@ -1,12 +1,12 @@
 :root {
-  --wt-progress-bar-height: 12px;
-  --wt-progress-bar-padding: var(--spacing-3xs);
-  --wt-progress-bar-border-radius: var(--wt-progress-bar-padding);
+	--wt-progress-bar-height: 12px;
+	--wt-progress-bar-padding: var(--spacing-3xs);
+	--wt-progress-bar-border-radius: var(--wt-progress-bar-padding);
 
-  --wt-progress-bar-background-color: var(--dp-1-surface-color);
-  --wt-progress-bar-background-primary-color: var(--primary-color);
-  --wt-progress-bar-background-secondary-color: var(--dp-20-surface-color);
-  --wt-progress-bar-background-success-color: var(--success-color);
-  --wt-progress-bar-background-error-color: var(--error-color);
-  --wt-progress-bar-background-warning-color: var(--warning-color);
+	--wt-progress-bar-background-color: var(--dp-1-surface-color);
+	--wt-progress-bar-background-primary-color: var(--primary-color);
+	--wt-progress-bar-background-secondary-color: var(--dp-20-surface-color);
+	--wt-progress-bar-background-success-color: var(--success-color);
+	--wt-progress-bar-background-error-color: var(--error-color);
+	--wt-progress-bar-background-warning-color: var(--warning-color);
 }

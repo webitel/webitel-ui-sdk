@@ -31,20 +31,23 @@
 </template>
 
 <script setup lang="ts">
-import { FormatDateMode } from '@webitel/ui-sdk/enums'
-import { formatDate } from '@webitel/ui-sdk/utils'
-import {computed, ref, useTemplateRef } from "vue";
+import { FormatDateMode } from '@webitel/ui-sdk/enums';
+import { formatDate } from '@webitel/ui-sdk/utils';
+import { computed, ref, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import {EngineQuestionAnswer} from "webitel-sdk";
+import type { EngineQuestionAnswer } from 'webitel-sdk';
 
-const props = withDefaults(defineProps<{
-  answer: EngineQuestionAnswer;
-  collapsible?: boolean;
-  hideComment?: boolean;
-}>(), {
-  collapsible: false,
-  hideComment: false,
-});
+const props = withDefaults(
+	defineProps<{
+		answer: EngineQuestionAnswer;
+		collapsible?: boolean;
+		hideComment?: boolean;
+	}>(),
+	{
+		collapsible: false,
+		hideComment: false,
+	},
+);
 
 const commentElRef = useTemplateRef('answer-editing-comment');
 
@@ -52,17 +55,25 @@ const collapsed = ref(props.collapsible);
 
 const { t } = useI18n();
 
-const initialComment = props.answer.comment; /* prevent editing-info change if comment is changing  */
+const initialComment =
+	props.answer
+		.comment; /* prevent editing-info change if comment is changing  */
 
 const updateTime = computed(() => {
-  return formatDate(parseInt(props.answer.updatedAt), FormatDateMode.DATETIME);
+	return formatDate(
+		Number.parseInt(props.answer.updatedAt),
+		FormatDateMode.DATETIME,
+	);
 });
 
-const isCommentClamped = props.collapsible && computed(() => {
-  // https://stackoverflow.com/a/67455839
-  return commentElRef.value?.clientHeight !== commentElRef.value?.scrollHeight;
-});
-
+const isCommentClamped =
+	props.collapsible &&
+	computed(() => {
+		// https://stackoverflow.com/a/67455839
+		return (
+			commentElRef.value?.clientHeight !== commentElRef.value?.scrollHeight
+		);
+	});
 </script>
 
 <style scoped lang="scss">

@@ -22,10 +22,10 @@ import { ref } from 'vue';
 import { useTooltipTriggerSubscriptions } from './useTooltipTriggerSubscriptions.js';
 
 const props = defineProps({
-  triggers: {
-    type: Array,
-    default: () => [],
-  },
+	triggers: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const emit = defineEmits(['show', 'hide']);
@@ -33,10 +33,10 @@ const emit = defineEmits(['show', 'hide']);
 const floating = ref(null);
 
 useTooltipTriggerSubscriptions({
-  target: floating,
-  triggers: props.triggers,
-  show: () => emit('show'),
-  hide: () => emit('hide'),
+	target: floating,
+	triggers: props.triggers,
+	show: () => emit('show'),
+	hide: () => emit('hide'),
 });
 </script>
 

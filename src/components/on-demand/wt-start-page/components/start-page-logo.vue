@@ -6,10 +6,10 @@
 
 <script setup>
 const props = defineProps({
-  logo: {
-    type: String,
-    required: true,
-  },
+	logo: {
+		type: String,
+		required: true,
+	},
 });
 </script>
 

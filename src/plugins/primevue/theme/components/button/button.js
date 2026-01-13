@@ -3,14 +3,14 @@ import { ButtonScheme } from '@webitel/styleguide/component-schemes';
 import { ComponentSize } from '../../../../../enums';
 
 const colors = [
-  'primary',
-  'secondary',
-  'success',
-  'warn',
-  'error',
-  'transfer',
-  'job',
-  'info',
+	'primary',
+	'secondary',
+	'success',
+	'warn',
+	'error',
+	'transfer',
+	'job',
+	'info',
 ];
 
 const generateCustomColorCss = ({ colorName, dt }) => `
@@ -94,21 +94,21 @@ const generateCustomOutlinedColorCss = ({ colorName, dt }) => `
 `;
 
 const button = {
-  root: ButtonScheme.sizes,
-  colorScheme: ButtonScheme.colorScheme,
+	root: ButtonScheme.sizes,
+	colorScheme: ButtonScheme.colorScheme,
 
-  extend: {
-    transfer: {
-      background: '{black}',
-      hoverBackground: '{black}',
-      color: '{black}',
-      hoverColor: '{black}',
-    },
-  },
+	extend: {
+		transfer: {
+			background: '{black}',
+			hoverBackground: '{black}',
+			color: '{black}',
+			hoverColor: '{black}',
+		},
+	},
 
-  // Rewrite the default button styles in the theme here:
-  // For customize the button styles you need write css styles for classes
-  css: ({ dt }) => `
+	// Rewrite the default button styles in the theme here:
+	// For customize the button styles you need write css styles for classes
+	css: ({ dt }) => `
         ${generateCustomColorCss({ colorName: 'transfer', dt })}
         ${generateCustomColorCss({ colorName: 'error', dt })}
         ${generateCustomColorCss({ colorName: 'job', dt })}
@@ -118,8 +118,8 @@ const button = {
         ${colors.map((color) => generateCustomOutlinedColorCss({ colorName: color, dt })).join('')}
 
         .p-button:disabled {
-          background: ${dt(`button.disabled.background`)};
-          color: ${dt(`button.disabled.color`)};
+          background: ${dt('button.disabled.background')};
+          color: ${dt('button.disabled.color')};
           opacity: 1;
         }
         .p-button-loading .wt-button__contents {
@@ -151,31 +151,31 @@ const button = {
             background: transparent;
         }
         .p-button--icon-${ComponentSize.XS} {
-            padding: ${dt(`button.icon.xs.padding`)};
+            padding: ${dt('button.icon.xs.padding')};
         }
         .p-button--icon-${ComponentSize.SM} {
-            padding: ${dt(`button.icon.sm.padding`)};
+            padding: ${dt('button.icon.sm.padding')};
         }
         .p-button--icon-${ComponentSize.MD} {
-            padding: ${dt(`button.icon.md.padding`)};
+            padding: ${dt('button.icon.md.padding')};
         }
         .p-button--icon-active:disabled svg {
-            fill: ${dt(`button.disabled.color`)};
+            fill: ${dt('button.disabled.color')};
         }
         .p-button-outlined:disabled {
-            outline: 1px solid ${dt(`button.outlined.disabled.borderColor`)};
+            outline: 1px solid ${dt('button.outlined.disabled.borderColor')};
         }
         .p-button-outlined:disabled:hover {
-            outline-color: ${dt(`button.outlined.disabled.borderColor`)};
-            background: ${dt(`button.outlined.disabled.hoverBackground`)};
+            outline-color: ${dt('button.outlined.disabled.borderColor')};
+            background: ${dt('button.outlined.disabled.hoverBackground')};
         }
         .p-button-outlined:disabled:active {
-            outline-color: ${dt(`button.outlined.disabled.borderColor`)};
-            background: ${dt(`button.outlined.disabled.activeBackground`)};
+            outline-color: ${dt('button.outlined.disabled.borderColor')};
+            background: ${dt('button.outlined.disabled.activeBackground')};
         }
 
         .p-button-outlined:disabled svg {
-            fill: ${dt(`button.outlined.disabled.color`)};
+            fill: ${dt('button.outlined.disabled.color')};
         }
         `,
 };

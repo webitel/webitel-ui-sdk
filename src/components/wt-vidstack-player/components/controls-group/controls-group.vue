@@ -10,12 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import {inject} from "vue";
+import { inject } from 'vue';
 
-import {WtVidstackPlayerSizeProvider} from "../../types/WtVidstackPlayerSizeProvider";
+import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
 
 const { size } = inject<WtVidstackPlayerSizeProvider>('size');
-
 </script>
 
 <style scoped >.controls-group {

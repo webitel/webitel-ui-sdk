@@ -13,36 +13,37 @@
 import { IconColor } from '../../enums';
 
 export default {
-  name: 'WtLoadBar',
-  props: {
-    max: {
-      type: [Number, String],
-      default: 100,
-    },
-    value: {
-      type: [Number, String],
-      default: 0,
-    },
-    color: {
-      type: String,
-      default: IconColor.PRIMARY,
-      validator: (value) =>
-        [IconColor.PRIMARY,
-          IconColor.ERROR,
-          IconColor.WARNING,
-          IconColor.SUCCESS,
-          IconColor.INFO
-        ].includes(value),
-    },
-  },
-  computed: {
-    progress() {
-      return (this.value * 100) / this.max;
-    },
-    progressWidth() {
-      return this.isOverflow ? 100 : this.progress;
-    },
-  },
+	name: 'WtLoadBar',
+	props: {
+		max: {
+			type: [Number, String],
+			default: 100,
+		},
+		value: {
+			type: [Number, String],
+			default: 0,
+		},
+		color: {
+			type: String,
+			default: IconColor.PRIMARY,
+			validator: (value) =>
+				[
+					IconColor.PRIMARY,
+					IconColor.ERROR,
+					IconColor.WARNING,
+					IconColor.SUCCESS,
+					IconColor.INFO,
+				].includes(value),
+		},
+	},
+	computed: {
+		progress() {
+			return (this.value * 100) / this.max;
+		},
+		progressWidth() {
+			return this.isOverflow ? 100 : this.progress;
+		},
+	},
 };
 </script>
 

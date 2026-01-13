@@ -5,95 +5,97 @@ import * as XLSX from 'xlsx';
 import { objSnakeToCamel } from '../../scripts/caseConverters.js';
 
 export default class XLSExport {
-  filename = 'export';
+	filename = 'export';
 
-  fetchMethod = null;
+	fetchMethod = null;
 
-  downloadProgress = { count: 0 };
+	downloadProgress = { count: 0 };
 
-  constructor(fetchMethod, { filename }) {
-    if (!fetchMethod) throw new Error('fetch method should be specified!');
-    this.fetchMethod = fetchMethod;
-    this.filename = filename;
-  }
+	constructor(fetchMethod, { filename }) {
+		if (!fetchMethod) throw new Error('fetch method should be specified!');
+		this.fetchMethod = fetchMethod;
+		this.filename = filename;
+	}
 
-  resetProgress() {
-    this.downloadProgress = { count: 0 };
-  }
+	resetProgress() {
+		this.downloadProgress = { count: 0 };
+	}
 
-  // NOTE: if the value is an object with a name property, extract the name to display it in the EXEL file
-  // If no name property exists, stringify the object to show full structure
-  extractNameFromObject(value) {
-    if (value && typeof value === 'object') {
-      if (Array.isArray(value)) {
-        return value.map((item) => this.extractNameFromObject(item)).join(' | ');
-      }
-      return value.name || JSON.stringify(value);
-    }
-    return value;
-  }
+	// NOTE: if the value is an object with a name property, extract the name to display it in the EXEL file
+	// If no name property exists, stringify the object to show full structure
+	extractNameFromObject(value) {
+		if (value && typeof value === 'object') {
+			if (Array.isArray(value)) {
+				return value
+					.map((item) => this.extractNameFromObject(item))
+					.join(' | ');
+			}
+			return value.name || JSON.stringify(value);
+		}
+		return value;
+	}
 
-  // NOTE: calculates the width of the columns based on the data to display it in the EXEL file
-  calculateColumnWidths(data, columns) {
-    return columns.map((column) => {
-      const maxLength = data.reduce((max, item) => {
-        const value = item[column] || '';
-        return Math.max(max, value.toString().length);
-      }, column.length);
-      return { wch: maxLength + 2 }; // Adding some padding
-    });
-  }
+	// NOTE: calculates the width of the columns based on the data to display it in the EXEL file
+	calculateColumnWidths(data, columns) {
+		return columns.map((column) => {
+			const maxLength = data.reduce((max, item) => {
+				const value = item[column] || '';
+				return Math.max(max, value.toString().length);
+			}, column.length);
+			return { wch: maxLength + 2 }; // Adding some padding
+		});
+	}
 
-  save(data, columns) {
-    const transformedData = data.map(({ variables, ...item }) => {
-      const flatVariables = flatten({ variables });
+	save(data, columns) {
+		const transformedData = data.map(({ variables, ...item }) => {
+			const flatVariables = flatten({ variables });
 
-      return columns.reduce((acc, column) => {
-        return {
-          ...acc,
-          [column]:
-            this.extractNameFromObject(item[column]) ||
-            flatVariables[column] ||
-            '',
-        };
-      }, {});
-    });
+			return columns.reduce((acc, column) => {
+				return {
+					...acc,
+					[column]:
+						this.extractNameFromObject(item[column]) ||
+						flatVariables[column] ||
+						'',
+				};
+			}, {});
+		});
 
-    const ws = XLSX.utils.json_to_sheet(transformedData);
-    const columnWidths = this.calculateColumnWidths(transformedData, columns);
-    ws['!cols'] = columnWidths;
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([wbout], { type: 'application/octet-stream' });
-    saveAs(blob, `${this.filename}.xlsx`);
-  }
+		const ws = XLSX.utils.json_to_sheet(transformedData);
+		const columnWidths = this.calculateColumnWidths(transformedData, columns);
+		ws['!cols'] = columnWidths;
+		const wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+		const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+		const blob = new Blob([wbout], { type: 'application/octet-stream' });
+		saveAs(blob, `${this.filename}.xlsx`);
+	}
 
-  async fetchAndPrepareData(params) {
-    let data = [];
-    let isNext = false;
-    let page = 1;
-    const columns =
-      params._columns ||
-      (params?.fields ? objSnakeToCamel(params?.fields) : []);
+	async fetchAndPrepareData(params) {
+		let data = [];
+		let isNext = false;
+		let page = 1;
+		const columns =
+			params._columns ||
+			(params?.fields ? objSnakeToCamel(params?.fields) : []);
 
-    do {
-      const { items, next } = await this.fetchMethod({
-        ...params,
-        page,
-      });
-      data = data.concat(items);
-      this.downloadProgress.count += items.length;
+		do {
+			const { items, next } = await this.fetchMethod({
+				...params,
+				page,
+			});
+			data = data.concat(items);
+			this.downloadProgress.count += items.length;
 
-      isNext = next;
-      page += 1;
-    } while (isNext);
-    return { data, columns };
-  }
+			isNext = next;
+			page += 1;
+		} while (isNext);
+		return { data, columns };
+	}
 
-  async export(params) {
-    const { data, columns } = await this.fetchAndPrepareData(params);
-    this.save(data, columns);
-    this.resetProgress();
-  }
+	async export(params) {
+		const { data, columns } = await this.fetchAndPrepareData(params);
+		this.save(data, columns);
+		this.resetProgress();
+	}
 }

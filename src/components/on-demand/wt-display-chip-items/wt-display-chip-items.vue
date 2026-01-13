@@ -32,30 +32,30 @@
 </template>
 
 <script setup lang="ts">
-import { WtChip,WtPopover } from '@webitel/ui-sdk/components';
+import { WtChip, WtPopover } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 
 import { displayText, EMPTY_SYMBOL } from '../../../utils';
 
 interface Props {
-  hideFirstItem?: boolean
-  useEmptySymbol?: boolean
-  title?: string
-  items: unknown[]
+	hideFirstItem?: boolean;
+	useEmptySymbol?: boolean;
+	title?: string;
+	items: unknown[];
 }
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const firstItemName = computed(() => {
-  if(!props.items?.length) return props.useEmptySymbol ? EMPTY_SYMBOL : '';
+	if (!props.items?.length) return props.useEmptySymbol ? EMPTY_SYMBOL : '';
 
-  return props.items[0]?.name
+	return props.items[0]?.name;
 });
 
 const displayList = computed(() => {
-  if(!props.items?.length) return [];
+	if (!props.items?.length) return [];
 
-  return !props.hideFirstItem ? props.items.slice(1) : props.items
-})
+	return !props.hideFirstItem ? props.items.slice(1) : props.items;
+});
 </script>
 
 <style scoped>.wt-display-chip-items {

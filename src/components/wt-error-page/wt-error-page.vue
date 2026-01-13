@@ -20,46 +20,46 @@ import pic403 from '../../assets/components/organisms/wt-error-page/403.svg';
 import pic404 from '../../assets/components/organisms/wt-error-page/404.svg';
 
 export default {
-  name: 'WtErrorPage',
-  props: {
-    type: {
-      type: String,
-      required: true,
-      options: ['403', '404'],
-    },
-  },
-  computed: {
-    errorPic() {
-      switch (this.type) {
-        case '403':
-          return { src: pic403, alt: 'Forbidden pic' };
-        case '404':
-          return { src: pic404, alt: 'Not found pic' };
-        default:
-          return '';
-      }
-    },
-    errorTitle() {
-      switch (this.type) {
-        case '403':
-          return this.$t('webitelUI.errorPages.page403.title');
-        case '404':
-          return this.$t('webitelUI.errorPages.page404.title');
-        default:
-          return '';
-      }
-    },
-    errorText() {
-      switch (this.type) {
-        case '403':
-          return this.$t('webitelUI.errorPages.page403.text');
-        case '404':
-          return this.$t('webitelUI.errorPages.page404.text');
-        default:
-          return '';
-      }
-    },
-  },
+	name: 'WtErrorPage',
+	props: {
+		type: {
+			type: String,
+			required: true,
+			options: ['403', '404'],
+		},
+	},
+	computed: {
+		errorPic() {
+			switch (this.type) {
+				case '403':
+					return { src: pic403, alt: 'Forbidden pic' };
+				case '404':
+					return { src: pic404, alt: 'Not found pic' };
+				default:
+					return '';
+			}
+		},
+		errorTitle() {
+			switch (this.type) {
+				case '403':
+					return this.$t('webitelUI.errorPages.page403.title');
+				case '404':
+					return this.$t('webitelUI.errorPages.page404.title');
+				default:
+					return '';
+			}
+		},
+		errorText() {
+			switch (this.type) {
+				case '403':
+					return this.$t('webitelUI.errorPages.page403.text');
+				case '404':
+					return this.$t('webitelUI.errorPages.page404.text');
+				default:
+					return '';
+			}
+		},
+	},
 };
 </script>
 

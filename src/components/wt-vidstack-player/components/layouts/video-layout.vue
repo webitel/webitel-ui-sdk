@@ -27,28 +27,28 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, inject} from "vue";
+import { defineEmits, inject } from 'vue';
 
-import {WtVidstackPlayerSizeProvider} from "../../types/WtVidstackPlayerSizeProvider";
-import {MediaControlsPanel} from "../index";
-import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
+import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
+import { MediaControlsPanel } from '../index';
+import VideoDisplayPanel from '../panels/video-display-panel/video-display-panel.vue';
 
-const {size} = inject<WtVidstackPlayerSizeProvider>('size');
+const { size } = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
-  title?: string;
-  username?: string;
-  closable?: boolean;
-  hideVideoDisplayPanel?: boolean
-  hideControlsPanel?: boolean
-  hideExpand?: boolean
+	title?: string;
+	username?: string;
+	closable?: boolean;
+	hideVideoDisplayPanel?: boolean;
+	hideControlsPanel?: boolean;
+	hideExpand?: boolean;
 }>();
 
 const emit = defineEmits<{
-  'close-player': [],
-  'close-session': [],
-  'make-screenshot': [],
-  'toggle-record': [],
+	'close-player': [];
+	'close-session': [];
+	'make-screenshot': [];
+	'toggle-record': [];
 }>();
 </script>
 

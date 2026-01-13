@@ -19,31 +19,31 @@ import dummyDark from '../../assets/components/molecules/wt-dummy/dummyDark.svg'
 import dummyLight from '../../assets/components/molecules/wt-dummy/dummyLight.svg';
 
 const props = defineProps({
-  src: {
-    type: String,
-  },
-  text: {
-    type: String,
-  },
-  buttonText: {
-    type: String,
-  },
-  showAction: {
-    type: Boolean,
-    default: false,
-  },
-  size: {
-    type: [String, Number],
-    default: 200,
-  },
-  hiddenText: {
-    type: Boolean,
-    default: false,
-  },
-  darkMode: {
-    type: Boolean,
-    default: false,
-  },
+	src: {
+		type: String,
+	},
+	text: {
+		type: String,
+	},
+	buttonText: {
+		type: String,
+	},
+	showAction: {
+		type: Boolean,
+		default: false,
+	},
+	size: {
+		type: [String, Number],
+		default: 200,
+	},
+	hiddenText: {
+		type: Boolean,
+		default: false,
+	},
+	darkMode: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emits = defineEmits(['create']);

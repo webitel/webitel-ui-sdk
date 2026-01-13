@@ -52,91 +52,100 @@
 import 'vidstack/player';
 import 'vidstack/player/ui';
 
-import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
+import type { MediaPlayerElement } from 'vidstack/elements';
+import {
+	computed,
+	defineEmits,
+	defineProps,
+	provide,
+	ref,
+	useTemplateRef,
+} from 'vue';
 
-import {ComponentSize} from '../../enums';
-import {VideoLayout} from "./components";
+import { ComponentSize } from '../../enums';
+import { VideoLayout } from './components';
 
 interface Props {
-  src?: string | { src: string; type?: string };
-  mime?: string;
-  autoplay?: boolean;
-  muted?: boolean;
-  title?: string;
-  username?: string;
-  closable?: boolean;
-  static?: boolean;
-  stream?: MediaStream
-  size?: ComponentSize
-  hideVideoDisplayPanel?: boolean
-  hideControlsPanel?: boolean
-  hideBackground?: boolean
-  hideExpand?: boolean
-  stretch?: boolean
-  videoObjectFit?: 'cover' | 'contain'
+	src?: string | { src: string; type?: string };
+	mime?: string;
+	autoplay?: boolean;
+	muted?: boolean;
+	title?: string;
+	username?: string;
+	closable?: boolean;
+	static?: boolean;
+	stream?: MediaStream;
+	size?: ComponentSize;
+	hideVideoDisplayPanel?: boolean;
+	hideControlsPanel?: boolean;
+	hideBackground?: boolean;
+	hideExpand?: boolean;
+	stretch?: boolean;
+	videoObjectFit?: 'cover' | 'contain';
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  mime: 'video/mp4',
-  autoplay: false,
-  muted: true,
-  title: '',
-  username: '',
-  closable: false,
-  static: false,
-  videoObjectFit: 'contain',
+	mime: 'video/mp4',
+	autoplay: false,
+	muted: true,
+	title: '',
+	username: '',
+	closable: false,
+	static: false,
+	videoObjectFit: 'contain',
 });
 
 const emit = defineEmits<{
-  'close': [],
-  'change-size': [ComponentSize],
-}>()
+	close: [];
+	'change-size': [ComponentSize];
+}>();
 
 const player = useTemplateRef<MediaPlayerElement>('player');
 const size = ref(props.size || ComponentSize.SM);
-const fullscreen = ref(false)
+const fullscreen = ref(false);
 
 const changeSize = (value) => {
-  size.value = value;
-  emit('change-size', value)
-}
+	size.value = value;
+	emit('change-size', value);
+};
 
 /** @author liza-pohranichna
  * options: [sm, md, lg]
  */
-provide('size', {size, fullscreen, changeSize});
+provide('size', { size, fullscreen, changeSize });
 
-const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
-  if (props.mime) return props.mime;
+const normalizedType = computed(() => {
+	// https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
+	if (props.mime) return props.mime;
 
-  if (typeof props.src === 'string') {
-    if (props.src.includes('media')) return 'audio/mp3';
-    if (props.src.includes('mp3')) return 'audio/mp3';
-    if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
-  }
+	if (typeof props.src === 'string') {
+		if (props.src.includes('media')) return 'audio/mp3';
+		if (props.src.includes('mp3')) return 'audio/mp3';
+		if (props.src.includes('ogg') || props.src.includes('oga'))
+			return 'audio/ogg';
+	}
 
-  return 'video/mp4';
+	return 'video/mp4';
 });
 
 const normalizedSrc = computed(() => {
-  if (props.stream) {
-    return {src: props.stream, type: 'video/object'};
-  }
+	if (props.stream) {
+		return { src: props.stream, type: 'video/object' };
+	}
 
-  if (typeof props.src === 'string') {
-    return {src: props.src, type: normalizedType.value};
-  }
+	if (typeof props.src === 'string') {
+		return { src: props.src, type: normalizedType.value };
+	}
 
-  return {
-    src: props.src?.src || null,
-    type: props.src?.type || normalizedType.value
-  };
+	return {
+		src: props.src?.src || null,
+		type: props.src?.type || normalizedType.value,
+	};
 });
 
 const onCanPlay = (ev: unknown) => {
-  ev?.srcElement?.play()
-}
+	ev?.srcElement?.play();
+};
 </script>
 
 <style scoped >@use '../wt-popup/mixins.scss' as *;

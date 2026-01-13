@@ -13,13 +13,13 @@
 
 <script>
 export default {
-  name: 'WtHint',
-  props: {
-    iconColor: {
-      type: String,
-      default: 'info',
-    },
-  },
+	name: 'WtHint',
+	props: {
+		iconColor: {
+			type: String,
+			default: 'info',
+		},
+	},
 };
 </script>
 

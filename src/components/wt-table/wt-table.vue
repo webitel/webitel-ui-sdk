@@ -118,7 +118,7 @@
 
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
-import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
+import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -235,12 +235,11 @@ const _selected = computed(() => {
 const dataHeaders = computed(() => {
   return props.headers
     .map(header => {
-      if (!header.text  header.locale) {
+      if (!header.text  header.locale) 
     return {
 
       text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
     };
-  }
   return header;
 });
 });
@@ -331,8 +330,8 @@ const columnResize = ({ element }) => {
   const field = element.getAttribute('data-column-field')
 
   const computedStyle = getComputedStyle(element);
-  const paddingLeft = parseFloat(computedStyle.paddingLeft);
-  const paddingRight = parseFloat(computedStyle.paddingRight);
+  const paddingLeft = Number.parseFloat(computedStyle.paddingLeft);
+  const paddingRight = Number.parseFloat(computedStyle.paddingRight);
 
   const columnWidth = element.offsetWidth - paddingLeft - paddingRight
 

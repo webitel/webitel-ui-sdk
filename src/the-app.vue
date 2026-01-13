@@ -8,10 +8,10 @@
 import Playground from './playground.vue';
 
 export default {
-  name: 'TheApp',
-  components: {
-    Playground,
-  },
+	name: 'TheApp',
+	components: {
+		Playground,
+	},
 };
 </script>
 

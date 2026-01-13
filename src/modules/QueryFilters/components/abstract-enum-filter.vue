@@ -29,14 +29,14 @@
 import enumFilterMixin from '../mixins/enumFilterMixin.js';
 
 export default {
-  name: 'AbstractEnumFilter',
-  mixins: [enumFilterMixin],
-  props: {
-    filterQuery: {
-      type: String,
-      required: true,
-    },
-  },
+	name: 'AbstractEnumFilter',
+	mixins: [enumFilterMixin],
+	props: {
+		filterQuery: {
+			type: String,
+			required: true,
+		},
+	},
 };
 </script>
 

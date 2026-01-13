@@ -29,147 +29,147 @@
 // import 'plyr/src/sass/plyr.scss';
 
 export default {
-  name: 'WtPlayer',
-  props: {
-    src: {},
-    autoplay: {
-      type: Boolean,
-      default: true,
-    },
-    loop: {
-      type: Boolean,
-      default: false,
-    },
-    hideDuration: {
-      type: Boolean,
-      default: false,
-    },
-    download: {
-      type: [String, Function, Boolean],
-      default: () => (url) => url.replace('/stream', '/download'),
-    },
-    mime: {
-      type: String,
-      default: 'audio',
-    },
-    // plyr-specific options
-    resetOnEnd: {
-      type: Boolean,
-      default: false,
-    },
-    invertTime: {
-      type: Boolean,
-      default: true,
-    },
-    // plyr is caching volume settings so we should reset them at init
-    resetVolume: {
-      type: Boolean,
-      default: false,
-    },
-    closable: {
-      type: Boolean,
-      default: true,
-    },
-    position: {
-      type: String,
-      default: 'sticky',
-    },
-  },
-  emits: ['initialized', 'close'],
-  data: () => ({
-    player: null,
-  }),
+	name: 'WtPlayer',
+	props: {
+		src: {},
+		autoplay: {
+			type: Boolean,
+			default: true,
+		},
+		loop: {
+			type: Boolean,
+			default: false,
+		},
+		hideDuration: {
+			type: Boolean,
+			default: false,
+		},
+		download: {
+			type: [String, Function, Boolean],
+			default: () => (url) => url.replace('/stream', '/download'),
+		},
+		mime: {
+			type: String,
+			default: 'audio',
+		},
+		// plyr-specific options
+		resetOnEnd: {
+			type: Boolean,
+			default: false,
+		},
+		invertTime: {
+			type: Boolean,
+			default: true,
+		},
+		// plyr is caching volume settings so we should reset them at init
+		resetVolume: {
+			type: Boolean,
+			default: false,
+		},
+		closable: {
+			type: Boolean,
+			default: true,
+		},
+		position: {
+			type: String,
+			default: 'sticky',
+		},
+	},
+	emits: ['initialized', 'close'],
+	data: () => ({
+		player: null,
+	}),
 
-  computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-      };
-    },
-    playerType() {
-      return this.mime.includes('video') ? 'video' : 'audio';
-    },
-  },
+	computed: {
+		listeners() {
+			return {
+				...this.$listeners,
+			};
+		},
+		playerType() {
+			return this.mime.includes('video') ? 'video' : 'audio';
+		},
+	},
 
-  watch: {
-    src() {
-      this.setupDownload();
-    },
-    download() {
-      this.setupDownload();
-    },
-  },
+	watch: {
+		src() {
+			this.setupDownload();
+		},
+		download() {
+			this.setupDownload();
+		},
+	},
 
-  mounted() {
-    this.setupPlayer();
-  },
+	mounted() {
+		this.setupPlayer();
+	},
 
-  methods: {
-    async setupPlayer() {
-      await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
-      if (this.player) this.player.destroy();
+	methods: {
+		async setupPlayer() {
+			await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
+			if (this.player) this.player.destroy();
 
-      const defaultControls = [
-        'play-large',
-        'play',
-        'progress',
-        'current-time',
-        'duration',
-        'mute',
-        'volume',
-        'captions',
-        'settings',
-        'pip',
-        'airplay',
-        'fullscreen',
-      ];
+			const defaultControls = [
+				'play-large',
+				'play',
+				'progress',
+				'current-time',
+				'duration',
+				'mute',
+				'volume',
+				'captions',
+				'settings',
+				'pip',
+				'airplay',
+				'fullscreen',
+			];
 
-      const controls = this.hideDuration
-        ? defaultControls.filter((control) => control !== 'duration')
-        : defaultControls;
+			const controls = this.hideDuration
+				? defaultControls.filter((control) => control !== 'duration')
+				: defaultControls;
 
-      if (this.download) controls.push('download');
+			if (this.download) controls.push('download');
 
-      const Plyr = (await import('plyr')).default; // https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
-      this.player = new Plyr(this.$refs.player, {
-        autoplay: this.autoplay,
-        loadSprite: false,
-        resetOnEnd: this.resetOnEnd,
-        invertTime: this.invertTime,
-        iconUrl: '',
-        controls,
-        loop: {
-          active: this.loop,
-        },
-      });
+			const Plyr = (await import('plyr')).default; // https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
+			this.player = new Plyr(this.$refs.player, {
+				autoplay: this.autoplay,
+				loadSprite: false,
+				resetOnEnd: this.resetOnEnd,
+				invertTime: this.invertTime,
+				iconUrl: '',
+				controls,
+				loop: {
+					active: this.loop,
+				},
+			});
 
-      if (this.resetVolume) this.makeVolumeReset();
-      if (this.download) this.setupDownload();
+			if (this.resetVolume) this.makeVolumeReset();
+			if (this.download) this.setupDownload();
 
-      if (this.closable) this.appendCloseIcon();
-      this.$emit('initialized', this.player);
-    },
-    makeVolumeReset() {
-      this.player.volume = 1;
-      this.player.muted = false;
-    },
-    setupDownload() {
-      if (!this.download) {
-        this.setupPlayer();
-      } else if (typeof this.download === 'string') {
-        this.player.download = this.download;
-      } else if (typeof this.download === 'function') {
-        this.player.download = this.download(this.src);
-      }
-    },
-    appendCloseIcon() {
-      const plyrControls = this.$refs.player.plyr?.elements?.controls;
-      const closeIcon = this.$refs['close-icon'].$el;
-      if (plyrControls) {
-        plyrControls.append(closeIcon);
-      }
-    },
-  },
+			if (this.closable) this.appendCloseIcon();
+			this.$emit('initialized', this.player);
+		},
+		makeVolumeReset() {
+			this.player.volume = 1;
+			this.player.muted = false;
+		},
+		setupDownload() {
+			if (!this.download) {
+				this.setupPlayer();
+			} else if (typeof this.download === 'string') {
+				this.player.download = this.download;
+			} else if (typeof this.download === 'function') {
+				this.player.download = this.download(this.src);
+			}
+		},
+		appendCloseIcon() {
+			const plyrControls = this.$refs.player.plyr?.elements?.controls;
+			const closeIcon = this.$refs['close-icon'].$el;
+			if (plyrControls) {
+				plyrControls.append(closeIcon);
+			}
+		},
+	},
 };
 </script>
 

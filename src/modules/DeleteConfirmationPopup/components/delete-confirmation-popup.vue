@@ -42,14 +42,14 @@ import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-  deleteCount: {
-    type: Number,
-    required: true,
-  },
-  callback: {
-    type: Function,
-    required: true,
-  },
+	deleteCount: {
+		type: Number,
+		required: true,
+	},
+	callback: {
+		type: Function,
+		required: true,
+	},
 });
 
 const emit = defineEmits(['close']);
@@ -59,16 +59,16 @@ const attrs = useAttrs();
 const { t } = useI18n();
 
 const deleteMessage = computed(() => {
-  if (props.deleteCount === 0) {
-    return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', 2, null, {
-      count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
-    });
-  }
-  return t(
-    'webitelUI.deleteConfirmationPopup.tableAskingAlert',
-    { count: props.deleteCount },
-    null,
-  );
+	if (props.deleteCount === 0) {
+		return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', 2, null, {
+			count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
+		});
+	}
+	return t(
+		'webitelUI.deleteConfirmationPopup.tableAskingAlert',
+		{ count: props.deleteCount },
+		null,
+	);
 });
 </script>
 

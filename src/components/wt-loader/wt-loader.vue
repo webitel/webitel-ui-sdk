@@ -17,23 +17,23 @@ import WtBrandLoader from './_internals/wt-brand-loader.vue';
 import WtSpinnerLoader from './_internals/wt-spinner-loader.vue';
 
 export default {
-  name: 'WtLoader',
-  components: {
-    WtBrandLoader,
-    WtSpinnerLoader,
-  },
-  props: {
-    size: {
-      type: String,
-      default: 'md',
-      description: '["xs", "sm", "md"]',
-    },
-    color: {
-      type: String,
-      default: 'main',
-      description: '["main", "icon", "on-dark", "on-light"]',
-    },
-  },
+	name: 'WtLoader',
+	components: {
+		WtBrandLoader,
+		WtSpinnerLoader,
+	},
+	props: {
+		size: {
+			type: String,
+			default: 'md',
+			description: '["xs", "sm", "md"]',
+		},
+		color: {
+			type: String,
+			default: 'main',
+			description: '["main", "icon", "on-dark", "on-light"]',
+		},
+	},
 };
 </script>
 

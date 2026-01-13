@@ -1,7 +1,7 @@
 :root {
-  --button-select-button-padding: var(--spacing-xs) var(--spacing-sm);
+	--button-select-button-padding: var(--spacing-xs) var(--spacing-sm);
 
-  --button-select-icon-button-padding: var(--spacing-xs);
+	--button-select-icon-button-padding: var(--spacing-xs);
 
-  --button-select-buttons-gap: 1px;
+	--button-select-buttons-gap: 1px;
 }

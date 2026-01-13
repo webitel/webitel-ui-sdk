@@ -2,7 +2,7 @@ import { TranslationLocale } from '../_enums/TranslationLocale.enum';
 
 /**
  * @author @dlohvinov
- * 
+ *
  * @description
  * These keys should not be translated to different langs,
  * but moved to separate file to avoid main lang file lines
@@ -11,17 +11,17 @@ import { TranslationLocale } from '../_enums/TranslationLocale.enum';
  */
 
 export default {
-    reusable: {
-    lang: {
-        [TranslationLocale.en]: 'English',
-        [TranslationLocale.es]: 'Español',
-        [TranslationLocale.ru]: 'Русский',
-        [TranslationLocale.uk]: 'Українська',
-        [TranslationLocale.kz]: 'Қазақ',
-        [TranslationLocale.vi]: 'Tiếng Việt',
-        [TranslationLocale.pl]: 'Polski',
-        [TranslationLocale.ro]: 'Română',
-        [TranslationLocale.uz]: "O'zbek",
-      },
-    },
+	reusable: {
+		lang: {
+			[TranslationLocale.en]: 'English',
+			[TranslationLocale.es]: 'Español',
+			[TranslationLocale.ru]: 'Русский',
+			[TranslationLocale.uk]: 'Українська',
+			[TranslationLocale.kz]: 'Қазақ',
+			[TranslationLocale.vi]: 'Tiếng Việt',
+			[TranslationLocale.pl]: 'Polski',
+			[TranslationLocale.ro]: 'Română',
+			[TranslationLocale.uz]: "O'zbek",
+		},
+	},
 };
