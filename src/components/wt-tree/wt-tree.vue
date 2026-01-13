@@ -29,77 +29,77 @@ import WtTreeLine from '../wt-tree-line/wt-tree-line.vue';
 import { WtTreeMode } from './types/WtTreeMode';
 
 const props = withDefaults(
-  defineProps<{
-    /**
-     * Selected element, it can be an object or a string, related to itemData props
-     */
-    modelValue?: null | any;
-    /**
-     * You need to pass an array of objects that will be displayed in the tree
-     */
-    data: any[];
-    /**
-     * You can pass the name of the property that will be used as the label of the selected item
-     */
-    itemLabel?: string;
-    /**
-     * You can pass the name of the property that will be used as the value of the selected item
-     */
-    itemData?: string;
-    /**
-     * Select mode for display tree data
-     * @example 'tree', 'list'
-     */
-    mode?: string;
-    /**
-     * You can pass the name of the property that will be used for getting children elements
-     */
-    childrenProp?: string;
-    multiple?: boolean;
-    allowParent?: boolean;
-  }>(),
-  {
-    childrenProp: 'children',
-    mode: WtTreeMode.Tree,
-    allowParent: false,
-  },
+	defineProps<{
+		/**
+		 * Selected element, it can be an object or a string, related to itemData props
+		 */
+		modelValue?: null | any;
+		/**
+		 * You need to pass an array of objects that will be displayed in the tree
+		 */
+		data: any[];
+		/**
+		 * You can pass the name of the property that will be used as the label of the selected item
+		 */
+		itemLabel?: string;
+		/**
+		 * You can pass the name of the property that will be used as the value of the selected item
+		 */
+		itemData?: string;
+		/**
+		 * Select mode for display tree data
+		 * @example 'tree', 'list'
+		 */
+		mode?: string;
+		/**
+		 * You can pass the name of the property that will be used for getting children elements
+		 */
+		childrenProp?: string;
+		multiple?: boolean;
+		allowParent?: boolean;
+	}>(),
+	{
+		childrenProp: 'children',
+		mode: WtTreeMode.Tree,
+		allowParent: false,
+	},
 );
 
 const emit = defineEmits<{
-  (e: 'select', data: any): void;
-  (e: 'update:modelValue', value: any): void;
+	(e: 'select', data: any): void;
+	(e: 'update:modelValue', value: any): void;
 }>();
 
 const allData = computed(() => {
-  const result = [];
+	const result = [];
 
-  const getNestedItems = (item: any) => {
-    result.push(item);
+	const getNestedItems = (item: any) => {
+		result.push(item);
 
-    if (item[props.childrenProp]) {
-      item[props.childrenProp].forEach((child: any) => {
-        getNestedItems(child);
-      });
-    }
-  };
+		if (item[props.childrenProp]) {
+			item[props.childrenProp].forEach((child: any) => {
+				getNestedItems(child);
+			});
+		}
+	};
 
-  props.data.forEach((item) => {
-    getNestedItems(item);
-  });
+	props.data.forEach((item) => {
+		getNestedItems(item);
+	});
 
-  return result;
+	return result;
 });
 
 const selectElement = (item: any) => {
-  emit('update:modelValue', props.itemData ? item[props.itemData] : item);
+	emit('update:modelValue', props.itemData ? item[props.itemData] : item);
 };
 
 const compareSelectElement = (item: any) => {
-  if (props.itemData) {
-    return item[props.itemData] === props.modelValue;
-  }
+	if (props.itemData) {
+		return item[props.itemData] === props.modelValue;
+	}
 
-  return deepEqual(props.modelValue, item);
+	return deepEqual(props.modelValue, item);
 };
 </script>
 

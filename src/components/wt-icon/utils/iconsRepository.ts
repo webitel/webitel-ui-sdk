@@ -25,9 +25,12 @@ export function getIconFromRepository(iconName: string) {
 
 /* export */ function addIconToRepository({
 	iconName,
-	svg,
+	svg: rawSvg,
 }: IconRepositoryEntry) {
-	iconsRepository.set(iconName, dompurify.sanitize(svg));
+	// should check for ssr coz dompurify is not available in ssr, and vitepress is ssr
+	// https://github.com/vercel/next.js/issues/46893
+	const svg = import.meta.env.SSR ? rawSvg : dompurify.sanitize(rawSvg);
+	iconsRepository.set(iconName, svg);
 }
 
 export function fillIconsRepository({

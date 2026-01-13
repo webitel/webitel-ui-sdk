@@ -8,6 +8,10 @@ import { nav, sidebar } from './routes/routes.ts';
 import { Window } from 'happy-dom';
 
 global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't have localStorage
+global.requestAnimationFrame = new Window().requestAnimationFrame;
+global.Element = new Window().Element;
+global.HTMLElement = new Window().HTMLElement;
+global.customElements = new Window().customElements;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -27,7 +31,7 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
+        // external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
       },
     },
     resolve: {

@@ -190,7 +190,7 @@ const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unk
     }
   }
 
-  if (node  Array.isArray(node[props.childrenProp])  node[props.childrenProp].length) 
+  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) 
     for (const child of node[props.childrenProp]) {
       toggleSelectionWithChildren(child, select, result);
     }
@@ -209,7 +209,7 @@ const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
       return true;
     }
 
-    if (current  Array.isArray(current[props.childrenProp])  current[props.childrenProp].length) 
+    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) 
       for (const child of current[props.childrenProp]) {
         if (findAndDeselect(child, current)) {
           return true;
@@ -271,7 +271,7 @@ const selectElement = () => {
     return;
   }
 
-  if (props.allowParent  !props.data[props.childrenProp]) 
+  if (props.allowParent && !props.data[props.childrenProp]) 
     return emit(
       'update:modelValue',
       props.itemData ? props.data[props.itemData] : props.data,
@@ -302,7 +302,7 @@ const onOpenParent = () => {
 
 const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp]  nestedLevel) 
+  if (data[props.searchedProp] && nestedLevel) 
     return true;
 
   // Check if the object has children
@@ -325,7 +325,7 @@ onMounted(() => {
     openParent();
   }
 
-  if (props.data[props.searchedProp]) {
+  if (props.searchedProp && props.data[props.searchedProp]) {
     openParent();
   }
 });

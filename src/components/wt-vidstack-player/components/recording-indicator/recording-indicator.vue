@@ -41,8 +41,9 @@ onMounted(() => {
 });
 </script>
 
-<style >.recording-indicator {
-background: var(--content-wrapper-color);
+<style>
+.recording-indicator {
+  background: var(--content-wrapper-color);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -51,14 +52,15 @@ background: var(--content-wrapper-color);
   border-radius: var(--p-player-counter-border-radius);
   box-shadow: var(--elevation-10);
 
-  // Agreed with @Evgeniy Trahtenberg
+  /* Agreed with @Evgeniy Trahtenberg */
   width: 100px;
 }
 
 .recording-indicator .recording-indicator__time {
-font-family: 'Montserrat', monospace;
+  font-family: 'Montserrat', monospace;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   text-transform: none;
-}</style>
+}
+</style>

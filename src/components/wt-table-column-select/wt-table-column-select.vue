@@ -59,70 +59,72 @@
 import deepCopy from 'deep-copy';
 
 export default {
-  name: 'WtTableColumnSelect',
+	name: 'WtTableColumnSelect',
 
-  model: {
-    prop: 'headers',
-    event: 'change',
-  },
-  props: {
-    headers: {
-      type: Array,
-      required: true,
-      description:
-        'Each header should have following schema: { value: String, show: Boolean, text: String }',
-    },
-    staticHeaders: {
-      type: Array,
-      default: () => [],
-      description: 'Header values to exclude from selection',
-    },
-  },
-  emits: ['change'],
-  data: () => ({
-    draft: [], // headers draft
-    isColumnSelectPopup: false,
-  }),
-  computed: {
-    changeableDraft() {
-      return this.draft
-        .filter((header) => !this.staticHeaders.includes(header.value))
-        .sort((a, b) => {
-          return this.shownColLabel(a)?.localeCompare(this.shownColLabel(b));
-          // sorting headers for alphabet just in popup
-        });
-    },
-  },
+	model: {
+		prop: 'headers',
+		event: 'change',
+	},
+	props: {
+		headers: {
+			type: Array,
+			required: true,
+			description:
+				'Each header should have following schema: { value: String, show: Boolean, text: String }',
+		},
+		staticHeaders: {
+			type: Array,
+			default: () => [],
+			description: 'Header values to exclude from selection',
+		},
+	},
+	emits: [
+		'change',
+	],
+	data: () => ({
+		draft: [], // headers draft
+		isColumnSelectPopup: false,
+	}),
+	computed: {
+		changeableDraft() {
+			return this.draft
+				.filter((header) => !this.staticHeaders.includes(header.value))
+				.sort((a, b) => {
+					return this.shownColLabel(a)?.localeCompare(this.shownColLabel(b));
+					// sorting headers for alphabet just in popup
+				});
+		},
+	},
 
-  watch: {
-    isColumnSelectPopup: {
-      handler() {
-        this.fillHeadersDraft();
-      },
-    },
-  },
-  methods: {
-    shownColLabel({ text, locale }) {
-      if (!text && locale) 
-        return typeof locale === 'string'
-          ? this.$t(locale)
-          : this.$t(...locale);
-      return text;
-    },
-    openPopup() {
-      this.isColumnSelectPopup = true;
-    },
-    close() {
-      this.isColumnSelectPopup = false;
-    },
-    fillHeadersDraft() {
-      this.draft = deepCopy(this.headers);
-    },
-    setShownColumns() {
-      this.$emit('change', this.draft);
-      this.close();
-    },
-  },
+	watch: {
+		isColumnSelectPopup: {
+			handler() {
+				this.fillHeadersDraft();
+			},
+		},
+	},
+	methods: {
+		shownColLabel({ text, locale }) {
+			if (!text && locale)
+				return typeof locale === 'string'
+					? this.$t(locale)
+					: this.$t(...locale);
+			return text;
+		},
+		openPopup() {
+			this.isColumnSelectPopup = true;
+		},
+		close() {
+			this.isColumnSelectPopup = false;
+		},
+		fillHeadersDraft() {
+			this.draft = deepCopy(this.headers);
+		},
+		setShownColumns() {
+			this.$emit('change', this.draft);
+			this.close();
+		},
+	},
 };
 </script>
 

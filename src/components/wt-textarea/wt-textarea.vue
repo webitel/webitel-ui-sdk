@@ -49,105 +49,115 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import { defineModel, onMounted, ref,useTemplateRef } from 'vue';
+import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface Props extends /* @vue-ignore */ TextareaProps {
-  /**
-   * textarea label
-   */
-  label?: string;
-  /**
-   * textarea placeholder
-   */
-  placeholder?: string;
-  /**
-   * Native textarea readonly attribute
-   */
-  readonly?: boolean;
-  /**
-   * Native textarea disabled attribute
-   */
-  disabled?: boolean;
-  required?: boolean;
-  /**
-   * textarea name
-   */
-  name?: string;
-  /**
-   * Number of rows in textarea
-   */
-  rows?: number;
-  labelProps?: Record<string, any>;
-  autoresize?: boolean;
-  // validation rules
-  v?: any;
-  customValidators?: Array<{ name: string; text: string }>;
+	/**
+	 * textarea label
+	 */
+	label?: string;
+	/**
+	 * textarea placeholder
+	 */
+	placeholder?: string;
+	/**
+	 * Native textarea readonly attribute
+	 */
+	readonly?: boolean;
+	/**
+	 * Native textarea disabled attribute
+	 */
+	disabled?: boolean;
+	required?: boolean;
+	/**
+	 * textarea name
+	 */
+	name?: string;
+	/**
+	 * Number of rows in textarea
+	 */
+	rows?: number;
+	labelProps?: Record<string, any>;
+	autoresize?: boolean;
+	// validation rules
+	v?: any;
+	customValidators?: Array<{
+		name: string;
+		text: string;
+	}>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
-  placeholder: undefined,
-  readonly: false,
-  disabled: false,
-  required: false,
-  name: '',
-  rows: 1,
-  labelProps: undefined,
-  autoresize: false,
-  v: undefined,
-  customValidators: () => [],
+	label: '',
+	placeholder: undefined,
+	readonly: false,
+	disabled: false,
+	required: false,
+	name: '',
+	rows: 1,
+	labelProps: undefined,
+	autoresize: false,
+	v: undefined,
+	customValidators: () => [],
 });
 
 const model = defineModel<string>();
 
 const textareaWrapperRef = useTemplateRef('textarea-wrapper');
 
-const emit = defineEmits(['enter', 'paste', 'blur', 'keydown']);
+const emit = defineEmits([
+	'enter',
+	'paste',
+	'blur',
+	'keydown',
+]);
 
 const isScrollHidden = ref(false);
 
 const { isValidation, invalid, validationText } = useValidation({
-  v: props.v,
-  customValidators: props.customValidators,
+	v: props.v,
+	customValidators: props.customValidators,
 } as any);
 
 const handleKeypress = (event: KeyboardEvent) => {
-  emit('keydown', event);
-  if (!props.autoresize) return;
+	emit('keydown', event);
+	if (!props.autoresize) return;
 
-  if (event.key === 'Enter' && !event.shiftKey) 
-    emit('enter');
-    event.preventDefault();
+	if (event.key === 'Enter' && !event.shiftKey) emit('enter');
+	event.preventDefault();
 };
 
 const handleInput = () => {
-  checkTextareaHeight();
+	checkTextareaHeight();
 };
 
 /**
  * @author YeHlukhov
- * 
+ *
  * Primevue by default shows scrollbar for autoresize textarea with overflow: auto,
  * so this function checks textarea height and adds/removes wt-hidden-scrollbar class
  */
 const checkTextareaHeight = async () => {
-  if (!props.autoresize) return;
+	if (!props.autoresize) return;
 
-  const textareaEl = textareaWrapperRef.value?.$el;
+	const textareaEl = textareaWrapperRef.value?.$el;
 
-  // firstly textarea renders widths are equal, then clientHeight changes for 2px by primevue extra space
-  if (textareaEl?.scrollHeight === textareaEl?.clientHeight || textareaEl?.scrollHeight === (textareaEl?.clientHeight + 2)) {
-    isScrollHidden.value = true;
-  } else {
-    isScrollHidden.value = false;
-  }
+	// firstly textarea renders widths are equal, then clientHeight changes for 2px by primevue extra space
+	if (
+		textareaEl?.scrollHeight === textareaEl?.clientHeight ||
+		textareaEl?.scrollHeight === textareaEl?.clientHeight + 2
+	) {
+		isScrollHidden.value = true;
+	} else {
+		isScrollHidden.value = false;
+	}
 };
 
 onMounted(() => {
-  checkTextareaHeight()
-})
+	checkTextareaHeight();
+});
 </script>
 
 <style scoped>

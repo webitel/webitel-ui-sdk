@@ -14,6 +14,7 @@
   },
   "exports": {
     ".": "./src/lib/main.scss",
+    "./src/lib/main.css": "./src/lib/main.css",
     "./typography": "./src/lib/styleguide/typography/_typography.scss",
     "./_typography": "./src/lib/styleguide/typography/_typography.scss",
     "./scroll": "./src/lib/styleguide/scroll.scss",

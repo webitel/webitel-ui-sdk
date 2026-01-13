@@ -11,41 +11,42 @@ import { useIntersectionObserver } from '@vueuse/core';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps({
-  canLoadMore: {
-    type: Boolean,
-    default: true
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+	canLoadMore: {
+		type: Boolean,
+		default: true,
+	},
+	loading: {
+		type: Boolean,
+		default: false,
+	},
 });
 
-const emit = defineEmits(['next']);
+const emit = defineEmits([
+	'next',
+]);
 
 const intersectionTarget = ref(null);
 
 let stopObs;
 
 onMounted(() => {
-  /**
-   *
-   * Note, observer triggers at init, so it should be used also as init function
-   * however, current filters module version is initializing list by itself, so we need to refactor filters ASAP
-   */
-  const { stop } = useIntersectionObserver(
-    intersectionTarget.value,
-    ([{ isIntersecting }]) => {
-      if (isIntersecting && props.canLoadMore) 
-        emit('next');
-    },
-  );
+	/**
+	 *
+	 * Note, observer triggers at init, so it should be used also as init function
+	 * however, current filters module version is initializing list by itself, so we need to refactor filters ASAP
+	 */
+	const { stop } = useIntersectionObserver(
+		intersectionTarget.value,
+		([{ isIntersecting }]) => {
+			if (isIntersecting && props.canLoadMore) emit('next');
+		},
+	);
 
-  stopObs = stop;
+	stopObs = stop;
 });
 
 onUnmounted(() => {
-  stopObs();
+	stopObs();
 });
 </script>
 
