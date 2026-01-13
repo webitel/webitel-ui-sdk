@@ -47,9 +47,9 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-progress-bar {
-position: relative;
+  position: relative;
   box-sizing: border-box;
   box-shadow: var(--elevation-1);
   border-radius: var(--border-radius);
@@ -60,36 +60,35 @@ position: relative;
 }
 
 .wt-progress-bar__progress {
-display: inline-block;
+  display: inline-block;
   transition: var(--transition);
   will-change: width;
-  border-radius: var(--wt-progress-bar-border-radius) 0 0
-    var(--wt-progress-bar-border-radius);
+  border-radius: var(--wt-progress-bar-border-radius) 0 0 var(--wt-progress-bar-border-radius);
   background: var(--wt-progress-bar-background-primary-color);
   height: var(--wt-progress-bar-height);
 }
 
 .wt-progress-bar--primary .wt-progress-bar__progress {
-background: var(--wt-progress-bar-background-primary-color);
+  background: var(--wt-progress-bar-background-primary-color);
 }
 
 .wt-progress-bar--secondary .wt-progress-bar__progress {
-background: var(--wt-progress-bar-background-secondary-color);
+  background: var(--wt-progress-bar-background-secondary-color);
 }
 
 .wt-progress-bar--success .wt-progress-bar__progress {
-background: var(--wt-progress-bar-background-success-color);
+  background: var(--wt-progress-bar-background-success-color);
 }
 
 .wt-progress-bar--error .wt-progress-bar__progress {
-background: var(--wt-progress-bar-background-error-color);
+  background: var(--wt-progress-bar-background-error-color);
 }
 
 .wt-progress-bar--warning .wt-progress-bar__progress {
-background: var(--wt-progress-bar-background-warning-color);
+  background: var(--wt-progress-bar-background-warning-color);
 }
 
 .wt-progress-bar--overflow .wt-progress-bar__progress {
-border-radius: var(--wt-progress-bar-border-radius);
+  border-radius: var(--wt-progress-bar-border-radius);
 }
 </style>

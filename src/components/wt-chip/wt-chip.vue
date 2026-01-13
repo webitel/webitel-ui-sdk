@@ -26,6 +26,8 @@ withDefaults(defineProps<WtProps>(), {
 });
 </script>
 
-<style >.wt-chip__close-icon {
-cursor: pointer;
-}</style>
+<style scoped>
+.wt-chip__close-icon {
+  cursor: pointer;
+}
+</style>

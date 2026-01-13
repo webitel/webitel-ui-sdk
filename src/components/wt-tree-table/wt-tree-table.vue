@@ -261,32 +261,30 @@ const handleSelection = (row, select) => {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-tree-table {
-max-height: 100%;
+  max-height: 100%;
   overflow: auto;
 }
 
-.wt-tree-table .wt-tree-table-head {
-border: var(--wt-tree-table-head-border);
-    border-color: var(--wt-tree-table-head-border-color);
-    border-radius: var(--border-radius);
-    background: var(--wt-tree-table-head-background-color);
+.wt-tree-table-head {
+  border: var(--wt-tree-table-head-border);
+  border-color: var(--wt-tree-table-head-border-color);
+  border-radius: var(--border-radius);
+  background: var(--wt-tree-table-head-background-color);
 }
 
 .wt-tree-table-wrapper {
-border-collapse: collapse;
+  border-collapse: collapse;
   width: 100%;
 }
 
-.wt-tree-table-wrapper .wt-tree-table-tr-wrapper {
-background: var(--wt-tree-table-primary-color);
-
+.wt-tree-table-tr-wrapper {
+  background: var(--wt-tree-table-primary-color);
 }
 
 .wt-tree-table-tr-wrapper:nth-child(2n) {
-      background: var(--wt-tree-table-zebra-color);
-}
+  background: var(--wt-tree-table-zebra-color);
 }
 
 .wt-tree-table-th,
@@ -298,57 +296,49 @@ background: var(--wt-tree-table-primary-color);
   overflow-wrap: break-word;
 }
 
-.wt-tree-table-td .wt-tree-table-td__actions {
-display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
+.wt-tree-table-td__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
 }
 
-.wt-tree-table-td .wt-tree-table-td__content {
-display: flex;
-    align-items: center;
+.wt-tree-table-td__content {
+  display: flex;
+  align-items: center;
 }
 
-.wt-tree-table-td .wt-tree-table-td__text {
-text-wrap: nowrap;
+.wt-tree-table-td__text {
+  text-wrap: nowrap;
 }
 
 .wt-tree-table-th {
-font-weight: normal;
+  font-weight: normal;
 }
 
-.wt-tree-table-th .wt-tree-table-th--sortable {
-cursor: pointer;
-
+.wt-tree-table-th--sortable {
+  cursor: pointer;
 }
 
-.wt-tree-table-th:hover :deep .wt-icon {
-      fill: var(--icon-active-color);
-}
-
+.wt-tree-table-th:hover :deep(.wt-icon) {
+  fill: var(--icon-active-color);
 }
 
 .wt-tree-table-th-sort-arrow {
-display: none;
-    margin-left: var(--wt-tree-table-head-sort-arrow-margin);
-}
-
+  display: none;
+  margin-left: var(--wt-tree-table-head-sort-arrow-margin);
 }
 
 .wt-tree-table-th-sort-arrow--sort-asc .wt-tree-table-th-sort-arrow--asc {
-display: block;
-}
-
+  display: block;
 }
 
 .wt-tree-table-th-sort-arrow--sort-desc .wt-tree-table-th-sort-arrow--desc {
-display: block;
-}
+  display: block;
 }
 
 .wt-tree-table-foot {
-border-color: var(--wt-tree-table-head-border-color);
+  border-color: var(--wt-tree-table-head-border-color);
   border-top: var(--wt-tree-table-head-border-color);
 }
 </style>

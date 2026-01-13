@@ -1,53 +1,25 @@
 <template>
-  <div
-    :class="{
-      'wt-datepicker--disabled': disabled,
-      'wt-datepicker--invalid': invalid,
-    }"
-    class="wt-datepicker"
-  >
-    <wt-label
-      :disabled="disabled"
-      v-bind="labelProps"
-      :invalid="invalid"
-    >
+  <div :class="{
+    'wt-datepicker--disabled': disabled,
+    'wt-datepicker--invalid': invalid,
+  }" class="wt-datepicker">
+    <wt-label :disabled="disabled" v-bind="labelProps" :invalid="invalid">
       <!-- @slot Custom input label -->
-      <slot
-        name="label"
-        v-bind="{ label }"
-      >
+      <slot name="label" v-bind="{ label }">
         {{ requiredLabel }}
       </slot>
     </wt-label>
-    <vue-datepicker
-      ref="datepicker"
-      :close-on-auto-apply="false"
-      :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
-      :locale="$i18n.locale"
-      :model-value="+value"
-      :placeholder="
-        placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
-      "
-      auto-apply
-      class="wt-datepicker__datepicker"
-      v-bind="{ ...$attrs, ...$props }"
-      @closed="isOpened = false"
-      @open="isOpened = true"
-      @update:model-value="emit('input', $event.getTime())"
-    >
+    <vue-datepicker ref="datepicker" :close-on-auto-apply="false"
+      :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'" :locale="$i18n.locale" :model-value="+value"
+      :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
+        " auto-apply class="wt-datepicker__datepicker" v-bind="{ ...$attrs, ...$props }" @closed="isOpened = false"
+      @open="isOpened = true" @update:model-value="emit('input', $event.getTime())">
       <template #input-icon>
-        <wt-icon
-          :color="disabled ? 'disabled' : 'default'"
-          icon="calendar"
-        />
+        <wt-icon :color="disabled ? 'disabled' : 'default'" icon="calendar" />
       </template>
       <template #clear-icon>
-        <wt-icon-btn
-          v-if="clearable && value"
-          :color="disabled ? 'disabled' : 'default'"
-          icon="close"
-          @click.stop="clearValue"
-        />
+        <wt-icon-btn v-if="clearable && value" :color="disabled ? 'disabled' : 'default'" icon="close"
+          @click.stop="clearValue" />
       </template>
       <template #arrow-left>
         <wt-icon-btn icon="arrow-left" />
@@ -55,29 +27,15 @@
       <template #arrow-right>
         <wt-icon-btn icon="arrow-right" />
       </template>
-      <template
-        v-if="isDateTime"
-        #time-picker="{ time, updateTime }"
-      >
+      <template v-if="isDateTime" #time-picker="{ time, updateTime }">
         <div class="datepicker__timepicker">
-          <wt-time-input
-            :value="time.hours"
-            max-value="23"
-            @input="updateTime"
-          />
+          <wt-time-input :value="time.hours" max-value="23" @input="updateTime" />
           :
-          <wt-time-input
-            :value="time.minutes"
-            max-value="59"
-            @input="updateTime($event, false)"
-          />
+          <wt-time-input :value="time.minutes" max-value="59" @input="updateTime($event, false)" />
         </div>
       </template>
     </vue-datepicker>
-    <wt-input-info
-      v-if="isValidation"
-      :invalid="invalid"
-    >
+    <wt-input-info v-if="isValidation" :invalid="invalid">
       {{ validationText }}
     </wt-input-info>
   </div>
@@ -201,131 +159,125 @@ watch(winFocused, (focused) => {
 
 </script>
 
-<style  scoped>
-.wt-datepicker :deep(.dp__main) {
-/*
-  don't know why but month or year selection doesn't work
-  suppose its related to compatibility build
-   */
-
-  .dp__month_year_select,
-
-  // reset right/left arrow hover
-
-  .dp__calendar_header,
-
-  // switch to time view
-
-  .dp__selection_preview,
+<style scoped>
+.wt-datepicker :deep(.dp__main) .dp__input_icon {
+  left: var(--spacing-xs);
+  line-height: 0;
 }
 
-.dp__main) .dp__input_icon {
-left: var(--spacing-xs);
-    line-height: 0;
+.wt-datepicker :deep(.dp__main) .dp__clear_icon {
+  right: var(--spacing-xs);
+  line-height: 0;
 }
 
-.dp__main) .dp__clear_icon {
-right: var(--spacing-xs);
-    line-height: 0;
-}
-
-.dp__main) .dp__input {
-font-family: 'Montserrat', monospace;
+.wt-datepicker :deep(.dp__main) .dp__input {
+  /* Typography: typo-body-1 (14px/400/24px) - cannot add utility class to third-party component */
+  font-family: 'Montserrat', monospace;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   text-transform: none;
 }
 
-.dp__main) .dp__arrow_top {
-display: none;
+.wt-datepicker :deep(.dp__main) .dp__arrow_top {
+  display: none;
 }
 
-.dp__main) .dp__month_year_wrap {
-pointer-events: none;
+/* don't know why but month or year selection doesn't work
+   suppose its related to compatibility build */
+.wt-datepicker :deep(.dp__main) .dp__month_year_wrap {
+  pointer-events: none;
 }
 
-.dp__main) .dp__cell_inner {
-font-family: 'Montserrat', monospace;
+.wt-datepicker :deep(.dp__main) .dp__month_year_select,
+.wt-datepicker :deep(.dp__main) .dp__cell_inner {
+  /* Typography: typo-body-2 (12px/400/16px) - cannot add utility class to third-party component */
+  font-family: 'Montserrat', monospace;
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
   text-transform: none;
 }
 
-.dp__main) .dp__inner_nav:hover {
-background: inherit;
+/* reset right/left arrow hover */
+.wt-datepicker :deep(.dp__main) .dp__inner_nav:hover {
+  background: inherit;
 }
 
-.dp__main) .dp__menu {
-box-sizing: border-box;
-    box-shadow: var(--elevation-10);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs);
-    width: 196px;
-    min-width: 196px;
+.wt-datepicker :deep(.dp__main) .dp__menu {
+  box-sizing: border-box;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs);
+  width: 196px;
+  min-width: 196px;
 }
 
-.dp__main) .dp__calendar_wrap {
-gap: var(--spacing-2xs);
+.wt-datepicker :deep(.dp__main) .dp__calendar_wrap {
+  gap: var(--spacing-2xs);
 }
 
-.dp__main) .dp__calendar_header_item {
-font-family: 'Montserrat', monospace;
+.wt-datepicker :deep(.dp__main) .dp__calendar_header_item {
+  /* Typography: typo-subtitle-2 (12px/500/20px) - cannot add utility class to third-party component */
+  font-family: 'Montserrat', monospace;
   font-size: 12px;
   font-weight: 500;
   line-height: 20px;
   text-transform: none;
 }
 
-.dp__main) .dp__calendar_header_separator {
-background: var(--secondary-color);
+.wt-datepicker :deep(.dp__main) .dp__calendar_header_separator {
+  background: var(--secondary-color);
 }
 
-.dp__main) .dp__calendar_row {
-gap: var(--spacing-3xs);
+.wt-datepicker :deep(.dp__main) .dp__calendar_header,
+.wt-datepicker :deep(.dp__main) .dp__calendar_row {
+  gap: var(--spacing-3xs);
 }
 
-.dp__main) .dp__button {
-display: none;
+/* switch to time view */
+.wt-datepicker :deep(.dp__main) .dp__button {
+  display: none;
 }
 
-.dp__main) .dp__action_row {
-flex-direction: column;
-    gap: var(--spacing-xs);
+.wt-datepicker :deep(.dp__main) .dp__action_row {
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
-.dp__main) .dp__action_buttons {
-width: 100%;
+.wt-datepicker :deep(.dp__main) .dp__selection_preview,
+.wt-datepicker :deep(.dp__main) .dp__action_buttons {
+  width: 100%;
 }
 
-.dp__main) .dp__selection_preview {
-text-align: center;
+.wt-datepicker :deep(.dp__main) .dp__selection_preview {
+  text-align: center;
 }
 
-.dp__main) .dp__action_buttons {
-display: flex;
-    gap: var(--spacing-xs);
+.wt-datepicker :deep(.dp__main) .dp__action_buttons {
+  display: flex;
+  gap: var(--spacing-xs);
 }
 
 .wt-datepicker--invalid :deep(.dp__main) .dp__input {
-outline: none; // prevent outline overlapping false color
-    border-color: var(--wt-text-field-input-border-error-color);
-    color: var(--wt-text-field-error-text-color);
+  /* prevent outline overlapping false color */
+  outline: none;
+  border-color: var(--wt-text-field-input-border-error-color);
+  color: var(--wt-text-field-error-text-color);
 }
 
-.dp__main) .dp__input_icon {
---icon-color: var(--wt-text-field-input-border-error-color);
+.wt-datepicker--invalid :deep(.dp__main) .dp__input_icon {
+  --icon-color: var(--wt-text-field-input-border-error-color);
 }
 
 .datepicker__timepicker {
-display: flex;
+  display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-xs);
 }
 
 .datepicker__timepicker .wt-time-input {
-flex-grow: 1;
+  flex-grow: 1;
 }
 </style>

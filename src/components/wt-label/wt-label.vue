@@ -22,7 +22,7 @@ defineProps<{
 }>();
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-label {
   display: flex;
   align-items: center;
@@ -32,21 +32,19 @@ defineProps<{
   padding: var(--wt-label-padding);
 }
 
-.wt-label .wt-label--invalid {
-color: var(--wt-label-error-color);
+.wt-label--invalid {
+  color: var(--wt-label-error-color);
 }
 
-.wt-label .wt-label--disabled {
-color: var(--wt-label-disabled-color);
+.wt-label--disabled {
+  color: var(--wt-label-disabled-color);
 }
 
-.wt-label .wt-label--required {
-.wt-label::after {
-      content: '*';
-}
+.wt-label--required::after {
+  content: '*';
 }
 
 .wt-hint {
-margin-left: var(--spacing-2xs);
+  margin-left: var(--spacing-2xs);
 }
 </style>

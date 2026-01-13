@@ -1,22 +1,10 @@
 <template>
-  <div
-    :class="{
-      'wt-badge--outside': outside,
-      'wt-badge--compat-mode': !hasSlot,
-    }"
-    class="wt-badge"
-  >
-    <span
-      v-show="!hidden"
-      :style="{ background: `var(--${colorVariable})` }"
-      class="wt-badge-indicator"
-    >
-      <img
-        v-if="iconBadgePic"
-        :alt="iconBadge"
-        :src="iconBadgePic"
-        class="wt-badge-indicator__pic"
-      />
+  <div :class="{
+    'wt-badge--outside': outside,
+    'wt-badge--compat-mode': !hasSlot,
+  }" class="wt-badge">
+    <span v-show="!hidden" :style="{ background: `var(--${colorVariable})` }" class="wt-badge-indicator">
+      <img v-if="iconBadgePic" :alt="iconBadge" :src="iconBadgePic" class="wt-badge-indicator__pic" />
     </span>
 
     <slot />
@@ -73,33 +61,33 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-badge {
-position: relative;
+  position: relative;
   line-height: 0;
 }
 
-.wt-badge .wt-badge:not(.wt-badge--compat-mode) {
-width: fit-content;
-    height: fit-content;
+.wt-badge:not(.wt-badge--compat-mode) {
+  width: fit-content;
+  height: fit-content;
 }
 
-.wt-badge .wt-badge-indicator {
-position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 50%;
-    width: var(--wt-badge-size);
-    height: var(--wt-badge-size);
-
-    .wt-badge-indicator__pic {
-      position: absolute;
-      width: var(--wt-badge-size);
-      height: var(--wt-badge-size);
+.wt-badge-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  width: var(--wt-badge-size);
+  height: var(--wt-badge-size);
 }
 
-  .wt-badge-indicator--outside .wt-badge-indicator {
-transform: translate(100%, -100%);
+.wt-badge-indicator__pic {
+  position: absolute;
+  width: var(--wt-badge-size);
+  height: var(--wt-badge-size);
 }
+
+.wt-badge--outside .wt-badge-indicator {
+  transform: translate(100%, -100%);
 }
 </style>

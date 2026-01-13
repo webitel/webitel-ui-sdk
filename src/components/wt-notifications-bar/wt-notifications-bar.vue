@@ -59,9 +59,9 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-notifications-bar {
-position: fixed;
+  position: fixed;
   top: var(--notifications-bar-corner-margin);
   right: var(--notifications-bar-corner-margin);
   z-index: var(--notifications-bar-z-index);
@@ -70,18 +70,18 @@ position: fixed;
   overflow-y: auto;
 }
 
-.wt-notifications-bar .wt-notification {
-margin: var(--notifications-bar-notifications-margin);
+.wt-notifications-bar > * {
+  margin: var(--notifications-bar-notifications-margin);
 }
 
 .wt-notifications-transition-enter-active,
 .wt-notifications-transition-leave-active {
-transition: all var(--transition);
+  transition: all var(--transition);
 }
 
 .wt-notifications-transition-enter,
 .wt-notifications-transition-leave-to {
-transform: translateX(60px);
+  transform: translateX(60px);
   opacity: 0;
 }
 </style>

@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-input-info {
   margin-top: var(--input-info-margin);
   min-height: var(--input-info-min-height);
@@ -29,7 +29,7 @@ export default {
   padding: var(--wt-label-padding);
 }
 
-.wt-input-info .wt-input-info--invalid {
-color: var(--wt-helper-text-invalid-color);
+.wt-input-info--invalid {
+  color: var(--wt-helper-text-invalid-color);
 }
 </style>

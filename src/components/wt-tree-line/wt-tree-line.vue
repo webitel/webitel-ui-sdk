@@ -344,42 +344,42 @@ watch(
 );
 </script>
 
-<style >
+<style scoped>
 .wt-tree-line {
-display: flex;
+  display: flex;
   align-items: flex-start;
 }
 
-.wt-tree-line .wt-tree-line__icon-wrapper {
-display: flex;
+.wt-tree-line__icon-wrapper {
+  display: flex;
 }
 
-.wt-tree-line .wt-tree-line__label-wrapper {
-display: flex;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    padding: 0 var(--spacing-2xs);
-    color: var(--wt-tree-item-on);
-
-    .wt-tree-line:hover {
-      background: var(--wt-tree-item-hover);
-      color: var(--wt-tree-item-hover-on);
+.wt-tree-line__label-wrapper {
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 0 var(--spacing-2xs);
+  color: var(--wt-tree-item-on);
 }
 
-.wt-tree-line .wt-tree-line.searched:not(.active) {
-background: var(--wt-tree-item-searched);
-      color: var(--wt-tree-item-searched-on);
+.wt-tree-line__label-wrapper:hover {
+  background: var(--wt-tree-item-hover);
+  color: var(--wt-tree-item-hover-on);
 }
 
-.wt-tree-line .wt-tree-line.active {
-background: var(--wt-tree-item-active);
-      color: var(--wt-tree-item-active-on);
+.wt-tree-line__label-wrapper.searched:not(.active) {
+  background: var(--wt-tree-item-searched);
+  color: var(--wt-tree-item-searched-on);
 }
 
-  .wt-tree-line__label {
-    text-wrap: nowrap;
+.wt-tree-line__label-wrapper.active {
+  background: var(--wt-tree-item-active);
+  color: var(--wt-tree-item-active-on);
 }
+
+.wt-tree-line__label {
+  text-wrap: nowrap;
 }
 </style>

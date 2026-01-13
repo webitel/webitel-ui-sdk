@@ -161,25 +161,25 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-tooltip {
-display: inline-block;
+  display: inline-block;
   height: fit-content;
 }
 
-.wt-tooltip .wt-tooltip__activator {
-line-height: 0;
+.wt-tooltip__activator {
+  line-height: 0;
 }
 
-.wt-tooltip .wt-tooltip-floating {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    z-index: 1000;
-    box-shadow: var(--elevation-10);
-    border-radius: var(--border-radius);
-    background: var(--wt-tooltip-background-color);
-    padding: var(--spacing-2xs) var(--spacing-xs);
-    color: var(--wt-tooltip-text-color);
+.wt-tooltip__floating {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  z-index: 1000;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  background: var(--wt-tooltip-background-color);
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  color: var(--wt-tooltip-text-color);
 }
 </style>

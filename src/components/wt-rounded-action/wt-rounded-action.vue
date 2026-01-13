@@ -1,29 +1,14 @@
 <template>
-  <button
-    :class="[
-      `wt-rounded-action--size-${size}`,
-      { 'wt-rounded-action--active': active },
-      { 'wt-rounded-action--disabled': disabled },
-      { 'wt-rounded-action--rounded': rounded },
-      { 'wt-rounded-action--wide': wide },
-      { 'wt-button--loading': showLoader },
-    ]"
-    class="wt-rounded-action"
-    type="button"
-    @click="emit('click', $event)"
-  >
-    <wt-loader
-      v-if="showLoader"
-      color="main"
-      :size="loaderSize"
-    />
-    <wt-icon
-      v-else
-      :color="iColor"
-      :icon="icon"
-      :icon-prefix="iconPrefix"
-      :size="size"
-    />
+  <button :class="[
+    `wt-rounded-action--size-${size}`,
+    { 'wt-rounded-action--active': active },
+    { 'wt-rounded-action--disabled': disabled },
+    { 'wt-rounded-action--rounded': rounded },
+    { 'wt-rounded-action--wide': wide },
+    { 'wt-button--loading': showLoader },
+  ]" class="wt-rounded-action" type="button" @click="emit('click', $event)">
+    <wt-loader v-if="showLoader" color="main" :size="loaderSize" />
+    <wt-icon v-else :color="iColor" :icon="icon" :icon-prefix="iconPrefix" :size="size" />
   </button>
 </template>
 
@@ -108,9 +93,9 @@ watch(() => props.loading, (value) => {
 
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-rounded-action {
-display: block;
+  display: block;
   transition: var(--transition);
   border: var(--rounded-action-border-size) solid;
   border-color: var(--rounded-action-bg-color);
@@ -122,33 +107,32 @@ display: block;
   cursor: pointer;
 }
 
-.wt-rounded-action .wt-rounded-action:hover {
-border-color: var(--rounded-action-bg-hover-color);
-    background: var(--rounded-action-bg-hover-color);
+.wt-rounded-action:hover {
+  border-color: var(--rounded-action-bg-hover-color);
+  background: var(--rounded-action-bg-hover-color);
 }
 
-.wt-rounded-action .wt-rounded-action--loading {
-pointer-events: none;
+.wt-rounded-action--loading {
+  pointer-events: none;
 }
 
-.wt-rounded-action .wt-rounded-action--wide {
-width: 100%;
+.wt-rounded-action--wide {
+  width: 100%;
 }
 
-.wt-rounded-action .wt-rounded-action--rounded {
-border-radius: var(--rounded-action-rounded-border-radius);
+.wt-rounded-action--rounded {
+  border-radius: var(--rounded-action-rounded-border-radius);
 }
 
-.wt-rounded-action .wt-rounded-action--active {
-border-color: var(--rounded-action-active-color);
-
-    .wt-rounded-action:hover {
-      border-color: var(--rounded-action-active-color);
+.wt-rounded-action--active {
+  border-color: var(--rounded-action-active-color);
 }
 
-  .wt-rounded-action.wt-rounded-action--disabled {
-pointer-events: none;
+.wt-rounded-action--active:hover {
+  border-color: var(--rounded-action-active-color);
 }
 
-  .wt-rounded-action--size .wt-rounded-action--size }
+.wt-rounded-action--disabled {
+  pointer-events: none;
+}
 </style>

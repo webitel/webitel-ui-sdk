@@ -46,9 +46,9 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-load-bar {
-position: relative;
+  position: relative;
   box-sizing: border-box;
   border: 1px solid;
   border-radius: var(--border-radius);
@@ -57,49 +57,48 @@ position: relative;
   line-height: 0;
 }
 
-.wt-load-bar .wt-load-bar--color-primary {
-border-color: var(--wt-load-bar-primary-color);
-
-    .wt-load-bar__progress {
-      background: var(--wt-load-bar-primary-color);
+.wt-load-bar--color-primary {
+  border-color: var(--wt-load-bar-primary-color);
 }
 
-  .wt-load-bar--color-error {
-border-color: var(--wt-load-bar-error-color);
+.wt-load-bar--color-primary .wt-load-bar__progress {
+  background: var(--wt-load-bar-primary-color);
+}
+
+.wt-load-bar--color-error {
+  border-color: var(--wt-load-bar-error-color);
 }
 
 .wt-load-bar--color-error .wt-load-bar__progress {
-background: var(--wt-load-bar-error-color);
+  background: var(--wt-load-bar-error-color);
 }
 
-  .wt-load-bar--color-warning {
-border-color: var(--wt-load-bar-warning-color);
+.wt-load-bar--color-warning {
+  border-color: var(--wt-load-bar-warning-color);
 }
 
 .wt-load-bar--color-warning .wt-load-bar__progress {
-background: var(--wt-load-bar-warning-color);
+  background: var(--wt-load-bar-warning-color);
 }
 
-  .wt-load-bar--color-success {
-border-color: var(--wt-load-bar-success-color);
+.wt-load-bar--color-success {
+  border-color: var(--wt-load-bar-success-color);
 }
 
 .wt-load-bar--color-success .wt-load-bar__progress {
-background: var(--wt-load-bar-success-color);
+  background: var(--wt-load-bar-success-color);
 }
 
-  .wt-load-bar--color-info {
-border-color: var(--wt-load-bar-info-color);
+.wt-load-bar--color-info {
+  border-color: var(--wt-load-bar-info-color);
 }
 
 .wt-load-bar--color-info .wt-load-bar__progress {
-background: var(--wt-load-bar-info-color);
-}
-
+  background: var(--wt-load-bar-info-color);
 }
 
 .wt-load-bar__progress {
-display: inline-block;
+  display: inline-block;
   transition: var(--transition);
   will-change: width;
   border-radius: var(--load-bar-border-radius);

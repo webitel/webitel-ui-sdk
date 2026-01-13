@@ -1,72 +1,44 @@
 <template>
-  <section
-    :class="[`wt-empty--size-${size}`]"
-    class="wt-empty"
-  >
-    <div
-      v-if="showMedia"
-      class="wt-empty__media"
-    >
+  <section :class="[`wt-empty--size-${size}`]" class="wt-empty">
+    <div v-if="showMedia" class="wt-empty__media">
       <!--         @slot for custom media, replaces image
                   @scope `{ size: mediaSize }`
        -->
-      <slot
-        name="media"
-        v-bind="{ size: mediaSize }"
-      >
-        <wt-image
-          :size="mediaSize"
-          :src="image"
-          alt="empty-state"
-        />
+      <slot name="media" v-bind="{ size: mediaSize }">
+        <wt-image :size="mediaSize" :src="image" alt="empty-state" />
       </slot>
     </div>
 
-    <div
-      v-if="showHeadline || showTitle || showText"
-      class="wt-empty__info"
-    >
-      <h2
-        v-if="showHeadline"
-        class="wt-empty__headline typo-heading-4"
-      >
+    <div v-if="showHeadline || showTitle || showText" class="wt-empty__info">
+      <h2 v-if="showHeadline" class="wt-empty__headline typo-heading-4">
         <!--         @slot for custom headline, replaces headline
                   @scope `{ headline }`
        -->
-        <slot
-          name="headline"
-          v-bind="{ headline }"
-        >
+        <slot name="headline" v-bind="{ headline }">
           {{ headline }}
         </slot>
       </h2>
 
-      <h3
-        v-if="showTitle"
-        class="wt-empty__title typo-subtitle-1"
-      >
+      <h3 v-if="showTitle" :class="[
+        'wt-empty__title',
+        size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1'
+      ]">
         <!--         @slot for custom title, replaces title
                   @scope `{ title }`
        -->
-        <slot
-          name="title"
-          v-bind="{ title }"
-        >
+        <slot name="title" v-bind="{ title }">
           {{ title }}
         </slot>
       </h3>
 
-      <p
-        v-if="showText"
-        class="wt-empty__text typo-body-1"
-      >
+      <p v-if="showText" :class="[
+        'wt-empty__text',
+        size === 'sm' ? 'typo-body-2' : 'typo-body-1'
+      ]">
         <!--         @slot for custom text, replaces text
                   @scope `{ text }`
        -->
-        <slot
-          name="text"
-          v-bind="{ text }"
-        >
+        <slot name="text" v-bind="{ text }">
           {{ text }}
         </slot>
       </p>
@@ -77,31 +49,17 @@
      -->
     <slot v-bind="{ size }" />
 
-    <div
-      v-if="showActions"
-      class="wt-empty__actions"
-    >
+    <div v-if="showActions" class="wt-empty__actions">
       <!--         @slot for custom actions, replaces primary and secondary actions
                   @scope `{ onPrimaryClick, onSecondaryClick }`
        -->
-      <slot
-        name="actions"
-        v-bind="{ onPrimaryClick, onSecondaryClick }"
-      >
+      <slot name="actions" v-bind="{ onPrimaryClick, onSecondaryClick }">
         <!--         @slot for custom primary action, replaces primaryAction
                     @scope `{ onPrimaryClick }`
          -->
-        <slot
-          name="primary-action"
-          v-bind="{ onPrimaryClick }"
-        >
-          <wt-button
-            v-if="primaryActionText"
-            :size="buttonSize"
-            :disabled="disabledPrimaryAction"
-            color="primary"
-            @click="() => onPrimaryClick()"
-          >
+        <slot name="primary-action" v-bind="{ onPrimaryClick }">
+          <wt-button v-if="primaryActionText" :size="buttonSize" :disabled="disabledPrimaryAction" color="primary"
+            @click="() => onPrimaryClick()">
             {{ primaryActionText }}
           </wt-button>
         </slot>
@@ -109,17 +67,9 @@
         <!--         @slot for custom secondary action, replaces secondaryAction
                     @scope `{ onSecondaryClick }`
          -->
-        <slot
-          name="secondary-action"
-          v-bind="{ onSecondaryClick }"
-        >
-          <wt-button
-            v-if="secondaryActionText"
-            :size="buttonSize"
-            :disabled="disabledSecondaryAction"
-            color="secondary"
-            @click="() => onSecondaryClick()"
-          >
+        <slot name="secondary-action" v-bind="{ onSecondaryClick }">
+          <wt-button v-if="secondaryActionText" :size="buttonSize" :disabled="disabledSecondaryAction" color="secondary"
+            @click="() => onSecondaryClick()">
             {{ secondaryActionText }}
           </wt-button>
         </slot>
@@ -264,9 +214,9 @@ const onPrimaryClick = onClick('primary');
 const onSecondaryClick = onClick('secondary');
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-empty {
-display: flex;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
@@ -279,137 +229,38 @@ display: flex;
   min-width: var(--wt-empty-min-width);
   max-width: var(--wt-empty-max-width);
   text-align: center;
-
-  .wt-empty__headline,
-  .wt-empty__title,
 }
 
-.wt-empty .wt-empty__info {
-display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+.wt-empty__info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
-.wt-empty .wt-empty__text {
-text-align: center;
+.wt-empty__headline,
+.wt-empty__title,
+.wt-empty__text {
+  text-align: center;
 }
 
-.wt-empty .wt-empty__headline {
-
-  
-  
-  
-  
+.wt-empty__actions {
+  display: flex;
+  gap: var(--spacing-sm);
 }
 
-.wt-empty .wt-empty__title {
-
-  
-  
-  
-  
+.wt-empty--size-sm.wt-empty {
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
 }
 
-.wt-empty .wt-empty__text {
-
-  
-  
-  
-  
+.wt-empty--size-md.wt-empty {
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
 }
 
-.wt-empty .wt-empty__actions {
-display: flex;
-    gap: var(--spacing-sm);
-}
-
-.wt-empty .wt-empty--size {
-.wt-empty-sm.wt-empty {
-      gap: var(--spacing-sm);
-      padding: var(--spacing-sm);
-
-      .wt-empty__headline {
-          
-  
-  
-  
-  
-}
-
-.wt-empty .wt-empty__title {
-
-  
-  
-  
-  
-}
-
-.wt-empty .wt-empty__text {
-
-  
-  
-  
-  
-}
-
-    .wt-empty-md.wt-empty {
-gap: var(--spacing-md);
-      padding: var(--spacing-md);
-}
-
-.wt-empty-md.wt-empty .wt-empty__headline {
-
-  
-  
-  
-  
-}
-
-.wt-empty-md.wt-empty .wt-empty__title {
-
-  
-  
-  
-  
-}
-
-.wt-empty-md.wt-empty .wt-empty__text {
-
-  
-  
-  
-  
-}
-
-    .wt-empty-lg.wt-empty {
-gap: var(--spacing-lg);
-      padding: var(--spacing-lg);
-}
-
-.wt-empty-lg.wt-empty .wt-empty__headline {
-
-  
-  
-  
-  
-}
-
-.wt-empty-lg.wt-empty .wt-empty__title {
-
-  
-  
-  
-  
-}
-
-.wt-empty-lg.wt-empty .wt-empty__text {
-
-  
-  
-  
-  
-}
-  }
+.wt-empty--size-lg.wt-empty {
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <p-badge :value="props.value" :class="[
+  <p-badge
+:value="props.value" :class="[
     props.size`p-badge--${props.size}`,
     props.severity`p-badge--${props.severity}`
   ]" class="wt-badge typo-caption">
@@ -8,8 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
-
 import { ComponentSize } from "../../enums";
 
 interface Props {
@@ -37,7 +36,5 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style scoped>
-.wt-badge {
-  /* Typography handled by typo-caption class in template */
-}
+
 </style>

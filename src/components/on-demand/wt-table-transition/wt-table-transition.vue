@@ -18,6 +18,6 @@
 import { TransitionSlide } from '@morev/vue-transitions';
 </script>
 
-<style  scoped>.wt-table-transition {
+<style scoped>.wt-table-transition {
 display: contents;
 }</style>

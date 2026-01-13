@@ -116,50 +116,62 @@ export default {
 };
 </script>
 
-<style  scoped>.wt-time-input {
-display: inline-block;
-
+<style scoped>
+.wt-time-input {
+  display: inline-block;
   cursor: text;
-  .wt-time-input.wt-time-input--invalid .wt-time-input__input,
 }
 
-.wt-time-input.wt-time-input--invalid:hover .wt-time-input__input {
-    outline: none; // prevent outline overlapping false color
-    border-color: var(--wt-text-field-input-border-error-color);
-    color: var(--wt-text-field-error-text-color);
-    @include wt-placeholder('error');
-  }
-
+.wt-time-input--disabled {
+  pointer-events: none;
 }
 
-.wt-time-input.wt-time-input--disabled .wt-time-input__input {
-    border-color: var(--wt-text-field-input-border-disabled-color);
-    background: var(--wt-text-field-input-background-disabled-color);
-    @include wt-placeholder('disabled');
-  }
+.wt-time-input__input {
+  display: block;
+  transition: var(--transition);
+  box-sizing: border-box;
+  border: var(--input-border);
+  border-color: var(--wt-text-field-input-border-color);
+  border-radius: var(--border-radius);
+  background: transparent;
+  padding: var(--input-padding);
+  width: 100%;
+  color: var(--wt-text-field-text-color);
 }
 
-.wt-time-input .wt-time-input--disabled {
-pointer-events: none;
+.wt-time-input--invalid .wt-time-input__input,
+.wt-time-input--invalid:hover .wt-time-input__input {
+  outline: none; /* prevent outline overlapping false color */
+  border-color: var(--wt-text-field-input-border-error-color);
+  color: var(--wt-text-field-error-text-color);
 }
 
-.wt-time-input .wt-time-input__input {
-    display: block;
-    transition: var(--transition);
-    box-sizing: border-box;
-    border: var(--input-border);
-    border-color: var(--wt-text-field-input-border-color);
-    border-radius: var(--border-radius);
-    background: transparent;
-    padding: var(--input-padding);
-    width: 100%;
-    color: var(--wt-text-field-text-color);
+.wt-time-input--invalid .wt-time-input__input::placeholder,
+.wt-time-input--invalid .wt-time-input__input::-webkit-input-placeholder,
+.wt-time-input--invalid .wt-time-input__input::-moz-placeholder,
+.wt-time-input--invalid .wt-time-input__input:-moz-placeholder,
+.wt-time-input--invalid .wt-time-input__input:-ms-input-placeholder {
+  color: var(--wt-text-field-placeholder-error-color);
+}
+
+.wt-time-input--disabled .wt-time-input__input {
+  border-color: var(--wt-text-field-input-border-disabled-color);
+  background: var(--wt-text-field-input-background-disabled-color);
+}
+
+.wt-time-input--disabled .wt-time-input__input::placeholder,
+.wt-time-input--disabled .wt-time-input__input::-webkit-input-placeholder,
+.wt-time-input--disabled .wt-time-input__input::-moz-placeholder,
+.wt-time-input--disabled .wt-time-input__input:-moz-placeholder,
+.wt-time-input--disabled .wt-time-input__input:-ms-input-placeholder {
+  color: var(--wt-text-field-placeholder-disabled-color);
 }
 
 .wt-time-input__wrapper {
-position: relative;
+  position: relative;
 }
 
-.wt-label {
-text-align: center;
-}</style>
+.wt-time-input .wt-label {
+  text-align: center;
+}
+</style>

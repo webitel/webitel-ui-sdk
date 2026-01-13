@@ -127,86 +127,45 @@ export default {
 };
 </script>
 
-<style  scoped>$list-height: 400px;
-$list-width-sm: calc(
-  500px - var(--spacing-xl)
-); // all popup width - (paddings + overflow-padding)
-$list-width-md: calc(
-  800px - var(--spacing-xl)
-); // all popup width - (paddings + overflow-padding)
-
+<style scoped>
 .wt-table-column-select {
-line-height: 0; // prevent 24x28 icon height :/
+  line-height: 0; /* prevent 24x28 icon height :/ */
+  text-align: center;
 }
 
-.wt-table-column-select {
-text-align: center;
+.wt-table-column-select__popup-list-wrap {
+  max-height: 400px;
 }
 
-    max-height: $list-height;
-  }
-
-    
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: $list-width-sm;
-    max-height: $list-height;
-    overflow-x: hidden;
-
-    // for 10-30 items
-
-      display: block;
-      column-count: 2;
-      width: $list-width-md;
-    }
-
-    // for 30+ items
-
-      display: block;
-      column-count: 3;
-      width: $list-width-md;
-      max-height: none;
-      overflow-y: auto;
-    }
+.wt-table-column-select__popup-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: calc(500px - var(--spacing-xl)); /* all popup width - (paddings + overflow-padding) */
+  max-height: 400px;
+  overflow-x: hidden;
 }
 
-.wt-table-column-select .wt-table-column-select__heading {
-text-align: center;
+/* for 10-30 items */
+.wt-table-column-select__popup-list--md {
+  display: block;
+  column-count: 2;
+  width: calc(800px - var(--spacing-xl)); /* all popup width - (paddings + overflow-padding) */
 }
 
-.wt-table-column-select .wt-table-column-select__popup-list-wrap {
-max-height: $list-height;
+/* for 30+ items */
+.wt-table-column-select__popup-list--lg {
+  display: block;
+  column-count: 3;
+  width: calc(800px - var(--spacing-xl)); /* all popup width - (paddings + overflow-padding) */
+  max-height: none;
+  overflow-y: auto;
 }
 
-.wt-table-column-select .wt-table-column-select__popup-list {
-display: flex;
-
-    // for 10-30 items
-
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: $list-width-sm;
-    max-height: $list-height;
-    overflow-x: hidden;
-.wt-table-column-select .wt-table-column-select--lg {
-display: block;
-      column-count: 3;
-      width: $list-width-md;
-      max-height: none;
-      overflow-y: auto;
+.wt-table-column-select__popup-item {
+  display: flex;
+  align-items: center;
+  margin-right: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
-}
-
-.wt-table-column-select__popup-list .wt-table-column-select--md {
-display: block;
-      column-count: 2;
-      width: $list-width-md;
-}
-
-.wt-table-column-select__popup-list .wt-table-column-select__popup-item {
-display: flex;
-    align-items: center;
-    margin-right: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-}</style>
+</style>

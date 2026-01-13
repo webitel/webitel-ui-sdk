@@ -118,9 +118,11 @@ const handleActionClick = (action) => {
 };
 </script>
 
-<style  scoped>.wt-action-bar {
-display: flex;
+<style scoped>
+.wt-action-bar {
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-xs);
-}</style>
+}
+</style>

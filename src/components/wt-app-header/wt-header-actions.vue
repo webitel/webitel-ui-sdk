@@ -1,23 +1,11 @@
 <template>
   <div class="wt-header-actions">
-    <wt-icon-btn
-      v-clickaway="close"
-      v-tooltip="$t('webitelUI.headerActions.account')"
-      :class="{ active: isOpened }"
-      class="wt-header-actions__btn"
-      icon="account"
-      @click="isOpened = !isOpened"
-    />
+    <wt-icon-btn v-clickaway="close" v-tooltip="$t('webitelUI.headerActions.account')" :class="{ active: isOpened }"
+      class="wt-header-actions__btn" icon="account" @click="isOpened = !isOpened" />
 
     <transition name="fade">
-      <section
-        v-show="isOpened"
-        class="wt-header-actions__panel-wrapper"
-      >
-        <header
-          v-if="isHeader"
-          class="wt-header-actions__header"
-        >
+      <section v-show="isOpened" class="wt-header-actions__panel-wrapper">
+        <header v-if="isHeader" class="wt-header-actions__header">
           <h3 class="wt-header-actions__name typo-subtitle-1">
             {{ userName }}
           </h3>
@@ -27,44 +15,26 @@
         </header>
         <ul class="wt-header-actions__actions-wrapper">
           <li class="wt-header-actions__action">
-            <a
-              class="wt-header-actions__action__link typo-body-1"
-              href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform"
-              target="_blank"
-              @click="close"
-            >
+            <a class="wt-header-actions__action__link typo-body-1"
+              href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform" target="_blank" @click="close">
               <wt-icon icon="docs" />
               <span>{{ $t('webitelUI.headerActions.docs') }}</span>
             </a>
           </li>
           <li class="wt-header-actions__action">
-            <a
-              class="wt-header-actions__action__link typo-body-1"
-              @click.prevent="settings"
-            >
+            <a class="wt-header-actions__action__link typo-body-1" @click.prevent="settings">
               <wt-icon icon="settings" />
               <span>{{ $t('webitelUI.headerActions.settings') }}</span>
             </a>
           </li>
-          <li
-            class="wt-header-actions__action wt-header-actions__action--logout"
-          >
-            <a
-              class="wt-header-actions__action__link typo-body-1"
-              @click.prevent="logout"
-            >
-              <wt-icon
-                color="error"
-                icon="logout"
-              />
+          <li class="wt-header-actions__action wt-header-actions__action--logout">
+            <a class="wt-header-actions__action__link typo-body-1" @click.prevent="logout">
+              <wt-icon color="error" icon="logout" />
               <span>{{ $t('webitelUI.headerActions.logout') }}</span>
             </a>
           </li>
         </ul>
-        <footer
-          v-if="isFooter"
-          class="wt-header-actions__footer"
-        >
+        <footer v-if="isFooter" class="wt-header-actions__footer">
           <p class="wt-header-actions__build__version typo-caption">
             {{ buildVersion }}
           </p>
@@ -134,17 +104,19 @@ export default {
 };
 </script>
 
-<style  scoped>.wt-header-actions {
-display: flex;
+<style scoped>
+.wt-header-actions {
+  display: flex;
   position: relative;
   align-items: center;
   z-index: var(--wt-app-header-content-z-index);
 }
 
 .wt-header-actions__panel-wrapper {
-display: flex;
+  display: flex;
   position: absolute;
-  top: 100%; // icon
+  top: 100%;
+  /* icon */
   right: 0;
   flex-direction: column;
   gap: var(--wt-header-actions-content-sections-gap);
@@ -168,32 +140,33 @@ display: flex;
 }
 
 .wt-header-actions__action {
-display: flex;
+  display: flex;
   transition: var(--transition);
 }
 
-.wt-header-actions__action .wt-header-actions:hover {
-background: var(--wt-header-actions-action-bg-color--hover);
+.wt-header-actions__action:hover {
+  background: var(--wt-header-actions-action-bg-color--hover);
 }
 
-.wt-header-actions__action .wt-header-actions__action__link {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: var(--wt-header-actions-action-link-padding);
-    width: 100%;
-    color: var(--text-main-color);
-
-    .wt-icon {
-      margin-right: var(--wt-header-actions-action-link-padding);
+.wt-header-actions__action__link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: var(--wt-header-actions-action-link-padding);
+  width: 100%;
+  color: var(--text-main-color);
 }
 
-  .wt-icon--logout .wt-header-actions__action__link {
-color: var(--error-color);
+.wt-header-actions__action__link .wt-icon {
+  margin-right: var(--wt-header-actions-action-link-padding);
 }
+
+.wt-header-actions__action--logout .wt-header-actions__action__link {
+  color: var(--error-color);
 }
 
 .wt-header-actions__build__version {
   color: var(--text-main-color);
   white-space: nowrap;
-}</style>
+}
+</style>

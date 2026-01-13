@@ -151,21 +151,20 @@ onMounted(() => {
 })
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-textarea__wrapper {
-height: 100%;
+  height: 100%;
 }
 
 .wt-textarea__textarea {
-    transition: var(--transition);
-  color: var(--wt-text-field-placeholder-color);
+  transition: var(--transition);
   display: block;
   box-sizing: border-box;
   width: 100%;
   resize: none;
 }
 
-.wt-textarea--hidden-scrollbar textarea::-webkit-scrollbar {
+.wt-textarea--hidden-scrollbar :deep(textarea)::-webkit-scrollbar {
   display: none;
 }
 </style>

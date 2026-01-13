@@ -53,9 +53,9 @@ const linkAttrs = props.disabled
   </component>
 </template>
 
-<style  scoped>
+<style scoped>
 .wt-logo {
-display: block;
+  display: block;
   width: var(--wt-logo-width);
   height: var(--wt-logo-height);
 }

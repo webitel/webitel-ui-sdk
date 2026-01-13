@@ -1,42 +1,19 @@
 <template>
-  <div
-    v-clickaway="close"
-    class="wt-app-navigator"
-  >
-    <wt-icon-btn
-      v-tooltip="$t('webitelUI.appNavigator.title')"
-      :class="{ active: isOpened }"
-      class="wt-app-navigator__btn"
-      icon="app-navigator"
-      @click="isOpened = !isOpened"
-    />
+  <div v-clickaway="close" class="wt-app-navigator">
+    <wt-icon-btn v-tooltip="$t('webitelUI.appNavigator.title')" :class="{ active: isOpened }"
+      class="wt-app-navigator__btn" icon="app-navigator" @click="isOpened = !isOpened" />
 
     <transition name="fade">
-      <nav
-        v-show="isOpened"
-        class="wt-app-navigator__nav-wrapper"
-      >
+      <nav v-show="isOpened" class="wt-app-navigator__nav-wrappe wt-scrollbar">
         <h3 class="wt-app-navigator__nav-title typo-subtitle-1">
           {{ $t('webitelUI.appNavigator.title') }}
         </h3>
         <ul class="wt-app-navigator__nav">
-          <li
-            v-for="app of formattedApps"
-            :key="app.name"
-            :class="{ active: app.currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="app.href"
-              :title="$t(`webitelUI.appNavigator.${app.name}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${app.name}-pic`"
-                :src="app.img"
-                class="wt-app-navigator__card__img"
-              />
+          <li v-for="app of formattedApps" :key="app.name" :class="{ active: app.currentApp }"
+            class="wt-app-navigator__card">
+            <a :href="app.href" :title="$t(`webitelUI.appNavigator.${app.name}`)" class="wt-app-navigator__card__link"
+              target="_blank">
+              <img :alt="`${app.name}-pic`" :src="app.img" class="wt-app-navigator__card__img" />
               <p class="wt-app-navigator__card__title typo-overline">
                 {{ $t(`webitelUI.appNavigator.${app.name}`) }}
               </p>
@@ -145,17 +122,18 @@ function close() {
 }
 </script>
 
-<style  scoped>.wt-app-navigator {
-display: flex;
+<style scoped>
+.wt-app-navigator {
+  display: flex;
   position: relative;
   align-items: center;
   z-index: var(--wt-app-header-content-z-index);
 }
 
-// dropdown part
-.wt-app-navigator__nav-wrapper {
-position: absolute;
-  top: 100%; // icon
+.wt-app-navigator__nav-wrappe {
+  position: absolute;
+  top: 100%;
+  /* icon */
   right: 0;
   transition: var(--transition);
   margin-top: var(--wt-app-header-content-panel-margin);
@@ -173,32 +151,29 @@ position: absolute;
   text-transform: uppercase;
 }
 
-// ul with li apps
 .wt-app-navigator__nav {
-display: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--wt-app-navigator-item-gap);
 }
 
 .wt-app-navigator__card {
-transition: var(--transition);
-
+  transition: var(--transition);
   box-sizing: border-box;
   border: var(--wt-app-navigator-item-border);
   border-color: var(--wt-app-navigator-item-border-color);
   border-radius: var(--border-radius);
   width: var(--wt-app-navigator-item-width);
   height: var(--wt-app-navigator-item-height);
-  .wt-app-navigator.active,
 }
 
-.wt-app-navigator__card .wt-app-navigator:hover {
-border-color: var(--wt-app-navigator-item-border-color--hover);
+.wt-app-navigator__card.active,
+.wt-app-navigator__card:hover {
+  border-color: var(--wt-app-navigator-item-border-color--hover);
 }
 
-// a tag
 .wt-app-navigator__card__link {
-display: inline-flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
@@ -208,15 +183,14 @@ display: inline-flex;
   height: 100%;
 }
 
-// img inside a
 .wt-app-navigator__card__img {
-margin: auto;
+  margin: auto;
   width: var(--wt-app-navigator-item-pic-size);
   height: var(--wt-app-navigator-item-pic-size);
 }
 
-// app title
 .wt-app-navigator__card__title {
-color: var(--text-main-color);
+  color: var(--text-main-color);
   text-align: center;
-}</style>
+}
+</style>

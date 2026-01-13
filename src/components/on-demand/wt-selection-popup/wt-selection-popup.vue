@@ -114,13 +114,13 @@ function selectOption(option) {
 }
 </script>
 
-<style  scoped>.wt-selection-popup .wt-selection-popup__options {
+<style scoped>.wt-selection-popup__options {
 display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
 }
 
-.wt-selection-popup .wt-selection-popup__item-wrapper {
+.wt-selection-popup__item-wrapper {
 display: flex;
     position: relative;
     align-items: center;
@@ -143,7 +143,5 @@ margin-right: var(--spacing-xs);
 margin-left: auto;
 }
 
-  .wt-tooltip__item-header {
-    /* Typography handled by typo-subtitle-2 class in template */
 }
-}</style>
+</style>

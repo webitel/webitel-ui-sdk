@@ -1,16 +1,19 @@
 <template>
   <div class="wt-context-menu">
-    <wt-popover :visible="visible" :disabled="disabled" :pt="pt" unstyled placement="bottom-end"
+    <wt-popover
+:visible="visible" :disabled="disabled" :pt="pt" unstyled placement="bottom-end"
       class="wt-context-menu__floating-wrapper">
       <template #activator="{ toggle, show }">
         <slot name="activator" v-bind="{ toggle, show }" />
       </template>
 
       <template #default="{ hide }">
-        <ul :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
+        <ul
+:style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
           class="wt-context-menu__menu typo-body-2">
           <li v-for="(option, index) of options" :key="index" class="wt-context-menu__option-wrapper">
-            <a :class="[{ 'wt-context-menu__option--disabled': option.disabled }]" class="wt-context-menu__option"
+            <a
+:class="[{ 'wt-context-menu__option--disabled': option.disabled }]" class="wt-context-menu__option"
               href="#" @click.prevent="handleOptionClick({ option, index, hide })">
               <slot name="option" v-bind="option">
                 {{ option.text || option }}

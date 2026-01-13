@@ -78,9 +78,9 @@ const isRefresh = computed(() => props.icons.indexOf('refresh') !== -1);
 const isSettings = computed(() => props.icons.indexOf('settings') !== -1);
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-table-actions {
-display: flex;
+  display: flex;
   align-items: center;
   gap: var(--table-actions-icon-gap);
   padding: var(--table-actions-padding);

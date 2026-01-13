@@ -82,19 +82,17 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-tabs {
-display: flex;
+  display: flex;
   position: relative;
   flex-wrap: nowrap;
   gap: var(--tab-gap);
 }
 
-.wt-tabs .wt-tabs--wide {
-.wt-tab {
-      display: block;
-      width: 100%;
-}
+.wt-tabs--wide .wt-tab {
+  display: block;
+  width: 100%;
 }
 
 .wt-tab {
@@ -110,28 +108,28 @@ display: flex;
   background: transparent;
   padding-bottom: var(--tab-padding);
   color: var(--wt-tabs-text-color);
-
-  .wt-tab:hover,
-
-  //// disables bold font resize on hover
 }
 
-.wt-tab .wt-tab:focus {
-border-bottom-color: var(--wt-tabs-underline-active-color);
-    color: var(--wt-tabs-text-hover-color);
+.wt-tab:hover {
+  /* disables bold font resize on hover */
 }
 
-.wt-tab .wt-tab.wt-tab--highlight {
-border-bottom-color: var(--wt-tabs-underline-active-color);
-    color: var(--wt-tabs-text-active-color);
+.wt-tab:focus {
+  border-bottom-color: var(--wt-tabs-underline-active-color);
+  color: var(--wt-tabs-text-hover-color);
 }
 
-.wt-tab .wt-tab:after {
-display: block;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-    content: attr(value);
-    font-weight: bold;
+.wt-tab--highlight {
+  border-bottom-color: var(--wt-tabs-underline-active-color);
+  color: var(--wt-tabs-text-active-color);
+}
+
+.wt-tab::after {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  content: attr(value);
+  font-weight: bold;
 }
 </style>

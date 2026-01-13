@@ -179,44 +179,40 @@ export default {
 };
 </script>
 
-<style  scoped>@use '../wt-select/multiselect.scss';
+<style scoped>
+@import '../wt-select/multiselect.css';
 
 .wt-tags-input {
-width: 100%;
+  width: 100%;
 }
 
 .wt-tags-input--disabled .wt-tags-input__tags-input {
-width: 100%;
-    max-width: 100%; // reset default
+  width: 100%;
+  max-width: 100%; /* reset default */
 }
 
-// paddings recalc
+/* paddings recalc */
 .wt-tags-input :deep(.multiselect) .multiselect__tags {
-padding-right: calc(
-
-      var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos)
-    );
-    padding-bottom: 0;
+  padding-right: calc(var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos));
+  padding-bottom: 0;
 }
 
 .multiselect__tags-wrap {
-      display: flex;
-      flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.multiselect) .multiselect__custom-tag {
-display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap: var(--spacing-xs);
-      margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
-      max-width: 100%;
-      word-break: break-all;
-}
-
+.wt-tags-input :deep(.multiselect__custom-tag) {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; /* border bottom */
+  max-width: 100%;
+  word-break: break-all;
 }
 
 .multiselect__input {
-margin-bottom: calc(var(--spacing-xs) - 1px); // border
+  margin-bottom: calc(var(--spacing-xs) - 1px); /* border */
 }
-}</style>
+</style>

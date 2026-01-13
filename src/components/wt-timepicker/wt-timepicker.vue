@@ -249,22 +249,22 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-timepicker {
-display: flex;
+  display: flex;
   flex-direction: column;
 }
 
 .wt-timepicker__wrapper {
-display: flex;
+  display: flex;
 }
 
-.wt-time-input {
-width: var(--timepicker-input-width);
+.wt-timepicker__wrapper > * {
+  width: var(--timepicker-input-width);
   margin-right: var(--timepicker-input-margin);
 }
 
-.wt-time-input .wt-time-input:last-child {
-margin-right: 0;
+.wt-timepicker__wrapper > *:last-child {
+  margin-right: 0;
 }
 </style>

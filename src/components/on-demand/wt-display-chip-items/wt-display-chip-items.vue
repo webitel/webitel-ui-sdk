@@ -58,7 +58,7 @@ const displayList = computed(() => {
 })
 </script>
 
-<style  scoped>.wt-display-chip-items {
+<style scoped>.wt-display-chip-items {
 display: flex;
   align-items: start;
   gap: var(--spacing-xs);

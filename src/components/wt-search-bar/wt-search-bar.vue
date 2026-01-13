@@ -173,98 +173,83 @@ function updateSearchMode({ option }) {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-search-bar {
-cursor: text;
+  cursor: text;
 }
 
-.wt-search-bar .wt-search-bar.wt-search-bar--invalid {
+.wt-search-bar--invalid .wt-search-bar__wrapper {
+  outline: none; /* prevent outline overlapping false color */
+  border-color: var(--wt-text-field-input-border-error-color);
+}
+
+.wt-search-bar--invalid .wt-search-bar__input::placeholder,
+.wt-search-bar--invalid .wt-search-bar__input::-webkit-input-placeholder,
+.wt-search-bar--invalid .wt-search-bar__input::-moz-placeholder,
+.wt-search-bar--invalid .wt-search-bar__input:-moz-placeholder,
+.wt-search-bar--invalid .wt-search-bar__input:-ms-input-placeholder {
+  color: var(--wt-text-field-placeholder-error-color);
+}
+
+.wt-search-bar--invalid .wt-search-bar__input {
+  color: var(--wt-text-field-error-text-color);
+}
+
 .wt-search-bar__wrapper {
-      outline: none; // prevent outline overlapping false color
-      border-color: var(--wt-text-field-input-border-error-color);
-}
-
-.wt-search-bar .wt-search-bar__input {
-@include wt-placeholder('error');
-      color: var(--wt-text-field-error-text-color);
-}
-
-}
-
-.wt-search-bar__wrapper {
-display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    border: var(--input-border);
-    border-color: var(--wt-text-field-input-border-color);
-    border-radius: var(--border-radius);
-    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
-}
-
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  border: var(--input-border);
+  border-color: var(--wt-text-field-input-border-color);
+  border-radius: var(--border-radius);
+  padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
 }
 
 .wt-search-bar__search-icon {
-display: flex;
+  display: flex;
 }
 
-}
-
-.wt-search-bar__reset-icon-btn {
-.wt-search-bar:not(:focus-within) .wt-search-bar {
-      opacity: 0;
-      pointer-events: none;
-    }
-}
-
+.wt-search-bar:not(:focus-within) .wt-search-bar__reset-icon-btn {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .wt-search-bar__input {
-      transition: var(--transition);
-  color: var(--wt-text-field-placeholder-color);
-    display: block;
-    transition: var(--transition);
-    box-sizing: border-box;
-    outline: none;
-    border: none;
-    background: transparent;
-    padding: 0;
-    width: 100%;
-    color: var(--wt-text-field-text-color);
+  transition: var(--transition);
+  display: block;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  color: var(--wt-text-field-text-color);
 }
 
-  /* clears the 'X' from Internet Explorer */
-}
-
+/* clears the 'X' from Internet Explorer */
 .wt-search-bar__input::-ms-clear {
-display: none;
-    width: 0;
-    height: 0;
-}
-
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .wt-search-bar__input::-ms-reveal {
-display: none;
-    width: 0;
-    height: 0;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
-  /* clears the 'X' from Chrome */
-  .wt-search-bar__input::-webkit-search-decoration,
-  .wt-search-bar__input::-webkit-search-cancel-button,
-  .wt-search-bar__input::-webkit-search-results-button,
-}
-
+/* clears the 'X' from Chrome */
+.wt-search-bar__input::-webkit-search-decoration,
+.wt-search-bar__input::-webkit-search-cancel-button,
+.wt-search-bar__input::-webkit-search-results-button,
 .wt-search-bar__input::-webkit-search-results-decoration {
-display: none;
-}
-
+  display: none;
 }
 
 .wt-search-bar__icon-controls {
-display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 </style>

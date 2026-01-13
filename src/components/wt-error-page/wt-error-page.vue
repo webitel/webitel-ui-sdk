@@ -1,21 +1,14 @@
 <template>
   <section class="wt-error-page">
     <article class="wt-error-page__wrapper">
-      <img
-        :alt="errorPic.alt"
-        :src="errorPic.src"
-        class="wt-error-page__img"
-      />
+      <img :alt="errorPic.alt" :src="errorPic.src" class="wt-error-page__img" />
       <h2 class="wt-error-page__title">
         {{ errorTitle }}
       </h2>
       <p class="wt-error-page__text">
         {{ errorText }}
       </p>
-      <wt-button
-        class="wt-error-page__action"
-        @click="$emit('back')"
-      >
+      <wt-button class="wt-error-page__action" @click="$emit('back')">
         {{ $t('webitelUI.errorPages.goBack') }}
       </wt-button>
     </article>
@@ -70,8 +63,9 @@ export default {
 };
 </script>
 
-<style  scoped>.wt-error-page {
-display: flex;
+<style scoped>
+.wt-error-page {
+  display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -81,26 +75,27 @@ display: flex;
   min-height: 100vh;
 }
 
-.wt-error-page .wt-error-page__wrapper {
-color: var(--wt-error-page-text-color);
-    text-align: center;
+.wt-error-page__wrapper {
+  color: var(--wt-error-page-text-color);
+  text-align: center;
 }
 
-.wt-error-page .wt-error-page__img {
-width: 778px;
-    max-width: 65vw;
-    user-select: none;
+.wt-error-page__img {
+  width: 778px;
+  max-width: 65vw;
+  user-select: none;
 }
 
-.wt-error-page .wt-error-page__title {
-margin-top: 69px;
-    text-transform: uppercase;
+.wt-error-page__title {
+  margin-top: 69px;
+  text-transform: uppercase;
 }
 
-.wt-error-page .wt-error-page__text {
-margin-top: 21px;
+.wt-error-page__text {
+  margin-top: 21px;
 }
 
-.wt-error-page .wt-error-page__action {
-margin-top: 40px;
-}</style>
+.wt-error-page__action {
+  margin-top: 40px;
+}
+</style>

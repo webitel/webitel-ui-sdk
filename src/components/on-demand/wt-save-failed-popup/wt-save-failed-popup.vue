@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style  scoped>.flow-save-filed-popup__wrapper {
+<style scoped>.flow-save-filed-popup__wrapper {
 display: flex;
   flex-direction: column;
   align-items: center;

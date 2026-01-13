@@ -1,23 +1,12 @@
 <template>
   <div class="wt-dummy">
     <div class="wt-dummy__img">
-      <img
-        :height="size"
-        :src="src || dummy"
-        :width="size"
-        alt="dummy-picture"
-      />
+      <img :height="size" :src="src || dummy" :width="size" alt="dummy-picture" />
     </div>
-    <p
-      v-if="!hiddenText"
-      class="wt-dummy__text typo-body-1"
-    >
+    <p v-if="!hiddenText" class="wt-dummy__text typo-body-1">
       {{ text || $t('webitelUI.dummy.text') }}
     </p>
-    <wt-button
-      v-if="showAction"
-      @click="emits('create')"
-    >
+    <wt-button v-if="showAction" @click="emits('create')">
       {{ buttonText || $t('reusable.add') }}
     </wt-button>
   </div>
@@ -62,9 +51,9 @@ const emits = defineEmits(['create']);
 const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-dummy {
-display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -72,12 +61,12 @@ display: flex;
   text-align: center;
 }
 
-.wt-dummy .wt-dummy__img {
-width: 200px;
-    height: 200px;
+.wt-dummy__img {
+  width: 200px;
+  height: 200px;
 }
 
-.wt-dummy .wt-dummy__text {
-    color: var(--wt-dummy-text-color);
+.wt-dummy__text {
+  color: var(--wt-dummy-text-color);
 }
 </style>

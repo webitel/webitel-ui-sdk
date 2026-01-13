@@ -4,11 +4,11 @@ import 'plyr/plyr.scss';
 import 'vidstack/bundle';
 import './css/main.scss';
 import './css/tailwind.css';
-import { fillIconsRepository } from './components/wt-icon/utils/iconsRepository';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
 
 import Components from './components/index.js'; // init all components
+import { fillIconsRepository } from './components/wt-icon/utils/iconsRepository';
 import Directives from './directives/index.js'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin.js';
 

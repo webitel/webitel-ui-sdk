@@ -1,10 +1,11 @@
 <template>
-  <span :class="[
+  <span
+:class="[
     'wt-icon',
     `wt-icon--size-${size}`,
     `wt-icon--color-${color}`,
     { 'wt-icon--disabled': disabled },
-  ]" v-html="iconSvg" @click="emit('click')" />
+  ]" @click="emit('click')" v-html="iconSvg" />
 </template>
 
 <script setup lang="ts">

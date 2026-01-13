@@ -1,6 +1,6 @@
 <template>
   <article class="start-page-card">
-    <header class="start-page-card__header">
+    <header class="typo-heading-4 start-page-card__header">
       <wt-icon
         v-if="card.disabled"
         icon="lock"
@@ -12,7 +12,7 @@
         :alt="card.name"
         :src="card.image"
       />
-      <p class="start-page-card__description">
+      <p class="typo-body-1 start-page-card__description">
         {{ card.text }}
       </p>
     </section>
@@ -46,7 +46,7 @@ const open = () => {
 };
 </script>
 
-<style  scoped>.start-page-card {
+<style scoped>.start-page-card {
 display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
@@ -57,23 +57,13 @@ display: flex;
   color: var(--text-main-color);
 }
 
-.start-page-card .start-page-card__header {
-font-family: 'Montserrat', monospace;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  text-transform: none;
+.start-page-card__header {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.start-page-card .start-page-card__description {
-font-family: 'Montserrat', monospace;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-  text-transform: none;
+.start-page-card__description {
     display: -webkit-box;
     height: 78px; //in order to cut text after 3rd line:
     overflow: hidden;

@@ -39,7 +39,7 @@ const props = defineProps({
 });
 </script>
 
-<style  scoped>.wt-cc-agent-status-timers {
+<style scoped>.wt-cc-agent-status-timers {
 display: flex;
   align-items: center;
   gap: var(--spacing-sm);

@@ -103,44 +103,44 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-status-select.wt-select {
-box-shadow: var(--elevation-5);
+  box-shadow: var(--elevation-5);
 }
 
 .wt-status-select.wt-select :deep(.multiselect) {
-min-height: 0;
-
-    .multiselect__tags {
-      border: none;
-      background: var(--wt-status-select-background-color);
-      padding: var(--wt-status-select-padding);
-      min-height: 0;
+  min-height: 0;
 }
 
-.wt-status-select.wt-select .multiselect__select {
-top: 0;
-      right: 0;
+.wt-status-select.wt-select :deep(.multiselect__tags) {
+  border: none;
+  background: var(--wt-status-select-background-color);
+  padding: var(--wt-status-select-padding);
+  min-height: 0;
 }
 
-.wt-status-select.wt-select .multiselect__content-wrapper {
-border: none;
-      background: transparent;
-
-      .multiselect__option {
-        background: var(--wt-status-select-option-background-color);
-        padding: 0;
-        min-height: 0;
-        color: var(--wt-status-select-option-text-color);
+.wt-status-select.wt-select :deep(.multiselect__select) {
+  top: 0;
+  right: 0;
 }
 
-.wt-status-select.wt-select .multiselect__option--highlight {
-background: var(--wt-status-select-option-background-hover-color);
+.wt-status-select.wt-select :deep(.multiselect__content-wrapper) {
+  border: none;
+  background: transparent;
 }
 
-.wt-status-select.wt-select .multiselect__option--selected {
-//background: var(--wt-status-select-option-background-selected-color);
+.wt-status-select.wt-select :deep(.multiselect__option) {
+  background: var(--wt-status-select-option-background-color);
+  padding: 0;
+  min-height: 0;
+  color: var(--wt-status-select-option-text-color);
 }
-  }
+
+.wt-status-select.wt-select :deep(.multiselect__option--highlight) {
+  background: var(--wt-status-select-option-background-hover-color);
+}
+
+.wt-status-select.wt-select :deep(.multiselect__option--selected) {
+  /* background: var(--wt-status-select-option-background-selected-color); */
 }
 </style>

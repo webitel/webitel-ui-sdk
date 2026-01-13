@@ -8,11 +8,6 @@
 }
 
 .nav-menu__item {
-  font-family: 'Montserrat', monospace;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-  text-transform: none;
   display: flex;
   align-items: center;
   transition: var(--transition);
@@ -28,4 +23,3 @@
 .nav-menu__item .wt-icon {
   margin-right: var(--spacing-xs);
 }
-

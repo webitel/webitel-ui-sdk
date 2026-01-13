@@ -1,24 +1,10 @@
 <template>
-  <PAvatar
-    :class="[ `p-avatar-${props.size}` ]"
-    :shape="props.shape"
-    :label="avatarLetters"
-    :style="{ background: `var(${avatarLettersBackground})` }"
-    class="wt-avatar"
-  >
+  <PAvatar :class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
+    :style="{ background: `var(${avatarLettersBackground})` }" class="wt-avatar">
     <template #default>
-      <wt-badge
-        v-if="badge"
-        :color-variable="badgeColorVar"
-        :icon-badge="isBadge ? props.status : null"
-      />
+      <wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
 
-      <img
-        v-if="!isLetterAvatar"
-        :src="imgSrc"
-        alt="avatar"
-        class="wt-avatar__img"
-      />
+      <img v-if="!isLetterAvatar" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
     </template>
   </PAvatar>
 </template>
@@ -128,25 +114,25 @@ const badgeColorVar = computed(() => {
 });
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-avatar {
-position: relative;
+  position: relative;
   user-select: none;
 }
 
-.wt-avatar .wt-avatar__letters {
-display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    color: var(--wt-avatar-text-color);
+.wt-avatar__letters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  color: var(--wt-avatar-text-color);
 }
 
-.wt-avatar .wt-avatar__img {
-border-radius: 50%;
-    width: 100%;
-    height: 100%;
+.wt-avatar__img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -3,10 +3,7 @@
     <div v-if="!hideHeader" class="wt-page-wrapper__header">
       <slot name="header" />
     </div>
-    <div
-      v-if="actionsPanel"
-      class="wt-page-wrapper__actions-panel"
-    >
+    <div v-if="actionsPanel" class="wt-page-wrapper__actions-panel">
       <slot name="actions-panel" />
     </div>
     <div class="wt-page-wrapper__main">
@@ -31,9 +28,9 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-page-wrapper {
-display: flex;
+  display: flex;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 100%;
@@ -46,14 +43,14 @@ display: flex;
 .wt-page-wrapper__header,
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
-box-sizing: border-box;
+  box-sizing: border-box;
   padding: var(--page-wrapper-section-padding);
   border-radius: var(--border-radius);
   background: var(--wt-page-wrapper-content-wrapper-color);
 }
 
 .wt-page-wrapper__main {
-display: flex;
+  display: flex;
   flex: 1;
   width: 100%;
 }

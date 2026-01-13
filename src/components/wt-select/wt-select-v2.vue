@@ -144,11 +144,11 @@ const search = async (event) => {
 };
 </script>
 
-<style  scoped>
-@use './multiselect.scss' as *;
+<style scoped>
+@import './multiselect.scss';
 
 .wt-select {
-width: 100%;
+  width: 100%;
   min-width: 0;
 }
 
@@ -160,121 +160,71 @@ width: 100%;
  * added pointer-events: auto; to have access to multiselect__limit when select is disabled.
 */
 .multiselect__limit {
-pointer-events: auto;
+  pointer-events: auto;
 }
 
-:deep(.multiselect) {
-.multiselect__custom-tag,
-}
-
-.multiselect) .multiselect__single-label {
-// text overflow 3 dots
-      font-family: 'Montserrat', monospace;
+.wt-select :deep(.multiselect__single-label) {
+  /* text overflow 3 dots */
+  font-family: 'Montserrat', monospace;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   text-transform: none;
-    display: block;
-    overflow: hidden;
-    max-width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-:deep(.multiselect--active) {
-.multiselect__tags-wrap,
+.wt-select :deep(.multiselect--active .multiselect__strong) {
+  display: none;
 }
 
-.multiselect--active) .multiselect__strong {
-display: none;
+/* right padding setup */
+
+/* default case */
+.wt-select :deep(.multiselect) .multiselect__tags {
+  padding: var(--input-padding) calc(
+    var(--input-padding) + var(--icon-md-size) +
+    var(--select-caret-right-pos)
+  ) var(--input-padding) var(--input-padding);
 }
 
-// right padding setup
-
-// default case
-.wt-select {
-// all is fine
-}
-
-.wt-select :deep(.multiselect) {
-.multiselect__tags {
-      padding: var(--input-padding) calc(
-        var(--input-padding) + var(--icon-md-size) +
-        var(--select-caret-right-pos)
-      ) var(--input-padding) var(--input-padding);
-}
-}
-
-// only chip
-.wt-select.wt-select--multiple:not(.wt-select--clearable) :deep(.multiselect) {
-$multiselect-limit-right-pos: calc(
-
-      var(--select-caret-right-pos)// caret offet from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
-}
-
-.multiselect__tags {
-      padding-right: calc(
-        $multiselect-limit-right-pos + 50px// chip
-        + var(--input-padding) // chip-to-content offset
-      );
+/* only chip */
+.wt-select.wt-select--multiple:not(.wt-select--clearable) :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(
+    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding)
+  );
 }
 
 .wt-select.wt-select--multiple:not(.wt-select--clearable) .multiselect__limit {
-right: $multiselect-limit-right-pos;
-}
-}
-
-// only clearable
-.wt-select.wt-select--clearable:not(.wt-select--multiple) :deep(.multiselect) {
-$multiselect-clear-right-pos: calc(
-
-      var(--select-caret-right-pos)// caret offset from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
 }
 
-.multiselect__tags {
-      padding-right: calc(
-        $multiselect-clear-right-pos + var(--icon-md-size)// clear
-        + var(--input-padding) // clear-to-content offset
-      );
+/* only clearable */
+.wt-select.wt-select--clearable:not(.wt-select--multiple) :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(
+    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding)
+  );
 }
 
 .wt-select.wt-select--clearable:not(.wt-select--multiple) .multiselect__clear {
-right: $multiselect-clear-right-pos;
-}
-}
-
-// clearable and chip
-.wt-select.wt-select--multiple.wt-select--clearable :deep(.multiselect) {
-$multiselect-clear-right-pos: calc(
-
-      var(--select-caret-right-pos)// caret offet from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
-    $multiselect-limit-right-pos: calc(
-      $multiselect-clear-right-pos + /* clear offet from border */var(--icon-md-size)/* clear size */ + var(--input-padding) /* cleat-to-chip offset */
-    );
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
 }
 
-.multiselect__tags {
-      padding-right: calc(
-        $multiselect-limit-right-pos + 50px// chip
-        + var(--input-padding) // chip-to-content offset
-      );
+/* clearable and chip */
+.wt-select.wt-select--multiple.wt-select--clearable :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(
+    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding)
+  );
 }
 
 .wt-select.wt-select--multiple.wt-select--clearable .multiselect__clear {
-right: $multiselect-clear-right-pos;
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
 }
 
 .wt-select.wt-select--multiple.wt-select--clearable .multiselect__limit {
-right: $multiselect-limit-right-pos;
-}
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding));
 }
 </style>

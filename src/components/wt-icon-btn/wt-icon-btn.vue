@@ -1,16 +1,8 @@
 <template>
-  <button
-    :class="{ 'wt-icon-btn--disabled': disabled }"
-    class="wt-icon-btn"
-    type="button"
-    @click="emit('click', $event)"
-    @mousedown="emit('mousedown', $event)"
-  >
+  <button :class="{ 'wt-icon-btn--disabled': disabled }" class="wt-icon-btn" type="button"
+    @click="emit('click', $event)" @mousedown="emit('mousedown', $event)">
     <!--    prevent icon-btn classes to fall to wt-icon -->
-    <wt-icon
-      :disabled="disabled"
-      v-bind="{ ...$attrs, class: '' }"
-    />
+    <wt-icon :disabled="disabled" v-bind="{ ...$attrs, class: '' }" />
   </button>
 </template>
 
@@ -27,20 +19,20 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-icon-btn {
-display: block;
+  display: block;
   position: relative;
   width: fit-content;
   line-height: 0;
   cursor: pointer;
-
-  .wt-icon-btn:hover .wt-icon--color-default {
-    fill: var(--icon-btn-hover-color);
-  }
 }
 
-.wt-icon-btn .wt-icon-btn--disabled {
-pointer-events: none;
+.wt-icon-btn:hover .wt-icon--color-default {
+  fill: var(--icon-btn-hover-color);
+}
+
+.wt-icon-btn--disabled {
+  pointer-events: none;
 }
 </style>

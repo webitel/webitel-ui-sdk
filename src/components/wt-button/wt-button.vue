@@ -13,7 +13,7 @@
     :severity="color"
     :size="primevueSizeMap[size]"
     :variant="variant"
-    class="wt-button"
+    class="wt-button typo-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
   >
@@ -163,7 +163,8 @@ watch(
 );
 </script>
 
-<style >.wt-button {
+<style>
+.wt-button {
 position: relative;
 }
 

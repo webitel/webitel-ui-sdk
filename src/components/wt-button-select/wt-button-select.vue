@@ -1,42 +1,18 @@
 <template>
-  <div
-    ref="buttonSelect"
-    v-clickaway="atClickaway"
-    class="wt-button-select"
-  >
-    <wt-button
-      :color="color"
-      :disabled="disabled"
-      class="wt-button-select__button"
-      v-bind="$attrs"
-      @click="$emit('click', $event)"
-    >
+  <div ref="buttonSelect" v-clickaway="atClickaway" class="wt-button-select">
+    <wt-button :color="color" :disabled="disabled" class="wt-button-select__button" v-bind="$attrs"
+      @click="$emit('click', $event)">
       <slot />
     </wt-button>
 
-    <wt-context-menu
-      :disabled="disabled"
-      :options="options"
-      :visible="isOpened"
-      :tooltip-triggers="[]"
-      @click="selectOption"
-    >
+    <wt-context-menu :disabled="disabled" :options="options" :visible="isOpened" :tooltip-triggers="[]"
+      @click="selectOption">
       <template #activator="{ toggle, show }">
-        <wt-button
-          :color="color"
-          :disabled="disabled"
-          :loading="false"
-          class="wt-button-select__select-btn"
-          v-bind="$attrs"
-          @click="toggleContextMenu(toggle, $event)"
-        >
-          <wt-icon
-            :class="{ 'wt-button-select__select-arrow--active': isOpened }"
-            :color="color === 'primary' ? 'on-primary' : 'default'"
-            :disabled="disabled"
-            class="wt-button-select__select-arrow"
-            icon="arrow-down"
-          />
+        <wt-button :color="color" :disabled="disabled" :loading="false" class="wt-button-select__select-btn"
+          v-bind="$attrs" @click="toggleContextMenu(toggle, $event)">
+          <wt-icon :class="{ 'wt-button-select__select-arrow--active': isOpened }"
+            :color="color === 'primary' ? 'on-primary' : 'default'" :disabled="disabled"
+            class="wt-button-select__select-arrow" icon="arrow-down" />
         </wt-button>
       </template>
     </wt-context-menu>
@@ -105,32 +81,32 @@ const toggleContextMenu = (toggle, e) => {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-button-select {
-display: inline-flex;
+  display: inline-flex;
   position: relative;
   align-items: center;
   gap: var(--button-select-buttons-gap);
 }
 
-.wt-button-select .wt-button-select__button {
-border-radius: var(--border-radius) 0 0 var(--border-radius);
-    padding: var(--button-select-button-padding);
+.wt-button-select__button {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  padding: var(--button-select-button-padding);
 }
 
-.wt-button-select .wt-button-select__select-btn {
-border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    padding: var(--button-select-icon-button-padding);
-    min-width: auto;
-
-    // OPEN AND SHUT ARROW
-    .wt-button-select__select-arrow {
-      display: flex;
-      transform: rotate(0);
-
-      .wt-button-select--active {
-        transform: rotate(180deg);
+.wt-button-select__select-btn {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  padding: var(--button-select-icon-button-padding);
+  min-width: auto;
 }
-  }
+
+.wt-button-select__select-arrow {
+  display: flex;
+  transform: rotate(0);
+  transition: var(--transition);
+}
+
+.wt-button-select__select-arrow--active {
+  transform: rotate(180deg);
 }
 </style>

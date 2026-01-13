@@ -1,77 +1,39 @@
 <template>
-  <div
-    class="wt-input"
-    :class="{
-      'wt-input--disabled': disabled,
-      'wt-input--invalid': invalid,
-    }"
-  >
-    <wt-label
-      v-if="hasLabel"
-      :disabled="disabled"
-      :for="name"
-      :invalid="invalid"
-      v-bind="labelProps"
-    >
+  <div class="wt-input" :class="{
+    'wt-input--disabled': disabled,
+    'wt-input--invalid': invalid,
+  }">
+    <wt-label v-if="hasLabel" :disabled="disabled" :for="name" :invalid="invalid" v-bind="labelProps">
       <!-- @slot Custom input label -->
-      <slot
-        name="label"
-        v-bind="{ label }"
-      >
+      <slot name="label" v-bind="{ label }">
         {{ requiredLabel }}
       </slot>
     </wt-label>
     <div class="wt-input__wrapper">
-      <input
-        :id="name"
-        ref="WtInput"
-        :class="{
-          'wt-input--is-password': isPassword,
-        }"
-        :disabled="disabled"
-        :max="numberMax"
-        :min="numberMin"
-        :placeholder="placeholder || label"
-        class="wt-input__input typo-body-1"
-        :type="inputType"
-        :value="inputValue"
-        v-bind="$attrs"
-        @input="inputHandler"
-        @keyup="$emit('keyup', $event)"
-      />
-      <div
-        ref="AfterWrapper"
-        class="wt-input__after-wrapper"
-      >
-        <slot name="after-input"/>
-        <slot
-          v-if="isPassword"
-          name="show-password"
-          v-bind="{
-            isPasswordVisible,
-            switchVisibilityPassword,
-          }"
-        >
-          <wt-icon-btn
-            :disabled="disabled"
-            :icon="showPasswordIcon"
-            @click="switchVisibilityPassword"
-          />
+      <input :id="name" ref="WtInput" :class="{
+        'wt-input--is-password': isPassword,
+      }" :disabled="disabled" :max="numberMax" :min="numberMin" :placeholder="placeholder || label"
+        class="wt-input__input typo-body-1" :type="inputType" :value="inputValue" v-bind="$attrs" @input="inputHandler"
+        @keyup="$emit('keyup', $event)" />
+      <div ref="AfterWrapper" class="wt-input__after-wrapper">
+        <slot name="after-input" />
+        <slot v-if="isPassword" name="show-password" v-bind="{
+          isPasswordVisible,
+          switchVisibilityPassword,
+        }">
+          <wt-icon-btn :disabled="disabled" :icon="showPasswordIcon" @click="switchVisibilityPassword" />
         </slot>
       </div>
     </div>
-    <wt-input-info
-      v-if="isValidation"
-      :invalid="invalid"
-    >
+    <wt-input-info v-if="isValidation" :invalid="invalid">
       {{ validationText }}
     </wt-input-info>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {RegleFieldStatus} from '@regle/core';
-import {computed, onMounted, ref, toRefs, useSlots} from 'vue';
+import type { RegleFieldStatus } from '@regle/core';
+import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
 
 import {
   useValidation
@@ -117,7 +79,7 @@ const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
 const slots = useSlots();
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-const {v, customValidators, regleValidation } = toRefs(props);
+const { v, customValidators, regleValidation } = toRefs(props);
 
 const {
   isValidation,
@@ -219,23 +181,22 @@ defineExpose({
 });
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-input {
-cursor: text;
+  cursor: text;
 }
 
-.wt-input .wt-input--disabled {
-pointer-events: none;
+.wt-input--disabled {
+  pointer-events: none;
 }
 
 .wt-input__wrapper {
-position: relative;
+  position: relative;
 }
 
 .wt-input__input {
-  transition: var(--transition);
-  color: var(--wt-text-field-placeholder-color);
   display: block;
+  transition: var(--transition);
   box-sizing: border-box;
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
@@ -246,30 +207,54 @@ position: relative;
   color: var(--wt-text-field-text-color);
 }
 
-.wt-input--invalid:hover .wt-input {
-    outline: none; // prevent outline overlapping false color
-    border-color: var(--wt-text-field-input-border-error-color);
-    color: var(--wt-text-field-error-text-color);
-    @include wt-placeholder('error');
-  }
-
+.wt-input__input::placeholder,
+.wt-input__input::-webkit-input-placeholder,
+.wt-input__input::-moz-placeholder,
+.wt-input__input:-moz-placeholder,
+.wt-input__input:-ms-input-placeholder {
+  font: inherit;
+  transition: var(--transition);
+  color: var(--wt-text-field-placeholder-color);
 }
 
-.wt-input--disabled .wt-input {
-    border-color: var(--wt-text-field-input-border-disabled-color);
-    background: var(--wt-text-field-input-background-disabled-color);
-    @include wt-placeholder('disabled');
-  }
+.wt-input--invalid .wt-input__input,
+.wt-input--invalid:hover .wt-input__input {
+  outline: none;
+  /* prevent outline overlapping false color */
+  border-color: var(--wt-text-field-input-border-error-color);
+  color: var(--wt-text-field-error-text-color);
+}
+
+.wt-input--invalid .wt-input__input::placeholder,
+.wt-input--invalid .wt-input__input::-webkit-input-placeholder,
+.wt-input--invalid .wt-input__input::-moz-placeholder,
+.wt-input--invalid .wt-input__input:-moz-placeholder,
+.wt-input--invalid .wt-input__input:-ms-input-placeholder {
+  color: var(--wt-text-field-placeholder-error-color);
+}
+
+.wt-input--disabled .wt-input__input {
+  border-color: var(--wt-text-field-input-border-disabled-color);
+  background: var(--wt-text-field-input-background-disabled-color);
+}
+
+.wt-input--disabled .wt-input__input::placeholder,
+.wt-input--disabled .wt-input__input::-webkit-input-placeholder,
+.wt-input--disabled .wt-input__input::-moz-placeholder,
+.wt-input--disabled .wt-input__input:-moz-placeholder,
+.wt-input--disabled .wt-input__input:-ms-input-placeholder {
+  color: var(--wt-text-field-placeholder-disabled-color);
 }
 
 .wt-input__after-wrapper {
-display: flex;
+  display: flex;
   position: absolute;
   top: 50%;
   right: var(--input-icon-margin);
   align-items: center;
   gap: var(--input-after-wrapper-gap);
   transform: translateY(-50%);
-  pointer-events: auto; // override --disabled p-events none
+  pointer-events: auto;
+  /* override --disabled p-events none */
 }
 </style>
