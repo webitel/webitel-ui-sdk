@@ -1,27 +1,12 @@
 <template>
-  <aside
-    :class="[`wt-player--position-${position}`]"
-    class="wt-player typo-body-2"
-  >
-    <component
-      :is="playerType"
-      ref="player"
-      :autoplay="autoplay"
-      :src="src"
-      class="wt-player__player"
-      controls
-      v-on="listeners"
-    />
+	<aside :class="[`wt-player--position-${position}`]" class="wt-player typo-body-2">
+		<component :is="playerType" ref="player" :autoplay="autoplay" :src="src" class="wt-player__player" controls
+			v-on="listeners" />
 
-    <!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
-    <wt-icon-btn
-      v-if="closable"
-      ref="close-icon"
-      class="wt-player__close-icon"
-      icon="close"
-      @click="$emit('close')"
-    />
-  </aside>
+		<!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
+		<wt-icon-btn v-if="closable" ref="close-icon" class="wt-player__close-icon" icon="close"
+			@click="$emit('close')" />
+	</aside>
 </template>
 
 <script>
@@ -180,89 +165,94 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .wt-player {
-  bottom: 60px;
+	bottom: 60px;
 }
 
-.wt-player .wt-player--position {
-.wt-player-sticky {
-      position: sticky;
-      z-index: 2;
+.wt-player--position-sticky {
+	position: sticky;
+	z-index: 2;
 }
 
-.wt-player .wt-player-relative {
-position: relative;
-      bottom: unset;
+.wt-player--position-relative {
+	position: relative;
+	bottom: unset;
 }
 
-.wt-player .wt-player-static {
-position: static;
+.wt-player--position-static {
+	position: static;
 }
 
-  :deep(.plyr) {
-box-shadow: var(--elevation-10);
-    border-radius: var(--border-radius);
-    max-width: 100%; // prevents <video> container overflow
-
-    .plyr__controls > .plyr__control,
-    .plyr__controls > .plyr__controls__item > .plyr__control {
-      padding: var(--plyr-controls-icon-padding);
-    }
-
-    .plyr__controls > .plyr__control > svg,
-    .plyr__controls > .plyr__controls__item > .plyr__control > svg {
-      width: var(--plyr-controls-icon-size);
-      height: var(--plyr-controls-icon-size);
-    }
-
-    .plyr__control--overlaid svg {
-      left: 0; // reset plyr style for video "play" button icon
-    }
-
-    .plyr__progress input,
-    .plyr__volume input {
-      cursor: pointer;
+.wt-player :deep(.plyr) {
+	box-shadow: var(--elevation-10);
+	border-radius: var(--border-radius);
+	max-width: 100%;
 }
 
-.plyr) .plyr__progress__buffer {
-background: var(--wt-player-audio-progress-background);
+.wt-player :deep(.plyr__controls > .plyr__control),
+.wt-player :deep(.plyr__controls > .plyr__controls__item > .plyr__control) {
+	padding: var(--plyr-controls-icon-padding);
 }
 
-.plyr) .wt-player::-webkit-slider-thumb {
--webkit-appearance: none;
-        transition: var(--transition);
-        border: var(--wt-slider-border);
-        border-radius: var(--wt-slider-pointer-radius);
-        background: var(--wt-slider-pointer-background-color);
+.wt-player :deep(.plyr__controls > .plyr__control > svg),
+.wt-player :deep(.plyr__controls > .plyr__controls__item > .plyr__control > svg) {
+	width: var(--plyr-controls-icon-size);
+	height: var(--plyr-controls-icon-size);
 }
 
-.plyr) .wt-player::-webkit-slider-runnable-track {
--webkit-appearance: none;
+.wt-player :deep(.plyr__control--overlaid svg) {
+	left: 0;
+	/* reset plyr style for video "play" button icon */
 }
 
-.plyr) .wt-player::-moz-range-thumb {
--moz-appearance: none;
-        transition: var(--transition);
-        border: var(--wt-slider-border);
-        border-color: var(--wt-slider-pointer-border-color);
-        border-radius: var(--wt-slider-pointer-radius);
-        background: var(--wt-slider-pointer-background-color);
-        width: var(--wt-slider-pointer-size);
-        height: var(--wt-slider-pointer-size);
+.wt-player :deep(.plyr__progress input),
+.wt-player :deep(.plyr__volume input) {
+	cursor: pointer;
 }
 
-.plyr) .wt-player::-moz-range-track {
--moz-appearance: none;
+.wt-player :deep(.plyr__progress__buffer) {
+	background: var(--wt-player-audio-progress-background);
 }
 
-.plyr) .wt-player::-ms-thumb {
-appearance: none;
+.wt-player :deep(.plyr__progress input)::-webkit-slider-thumb,
+.wt-player :deep(.plyr__volume input)::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	transition: var(--transition);
+	border: var(--wt-slider-border);
+	border-radius: var(--wt-slider-pointer-radius);
+	background: var(--wt-slider-pointer-background-color);
 }
 
-.plyr) .wt-player::-ms-track {
-appearance: none;
+.wt-player :deep(.plyr__progress input)::-webkit-slider-runnable-track,
+.wt-player :deep(.plyr__volume input)::-webkit-slider-runnable-track {
+	-webkit-appearance: none;
 }
-  }
+
+.wt-player :deep(.plyr__progress input)::-moz-range-thumb,
+.wt-player :deep(.plyr__volume input)::-moz-range-thumb {
+	-moz-appearance: none;
+	transition: var(--transition);
+	border: var(--wt-slider-border);
+	border-color: var(--wt-slider-pointer-border-color);
+	border-radius: var(--wt-slider-pointer-radius);
+	background: var(--wt-slider-pointer-background-color);
+	width: var(--wt-slider-pointer-size);
+	height: var(--wt-slider-pointer-size);
+}
+
+.wt-player :deep(.plyr__progress input)::-moz-range-track,
+.wt-player :deep(.plyr__volume input)::-moz-range-track {
+	-moz-appearance: none;
+}
+
+.wt-player :deep(.plyr__progress input)::-ms-thumb,
+.wt-player :deep(.plyr__volume input)::-ms-thumb {
+	appearance: none;
+}
+
+.wt-player :deep(.plyr__progress input)::-ms-track,
+.wt-player :deep(.plyr__volume input)::-ms-track {
+	appearance: none;
 }
 </style>

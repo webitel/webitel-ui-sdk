@@ -158,7 +158,7 @@ const search = async (event) => {
 </script>
 
 <style scoped>
-@import './multiselect.scss';
+/* @import './multiselect.css';  */
 
 .wt-select {
   width: 100%;

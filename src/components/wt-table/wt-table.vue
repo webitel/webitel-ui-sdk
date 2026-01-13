@@ -235,13 +235,13 @@ const _selected = computed(() => {
 const dataHeaders = computed(() => {
   return props.headers
     .map(header => {
-      if (!header.text  header.locale) 
-    return {
+      if (!header.text && header.locale)
+        return {
 
-      text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
-    };
-  return header;
-});
+          text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
+        };
+      return header;
+    });
 });
 
 const isColumnHidden = (col) => {
@@ -388,29 +388,29 @@ onUnmounted(() => {
   overflow: auto;
 }
 
-.wt-table :deep( //style for virtual scroller
+/* style for virtual scroller */
+.wt-table :deep(.wt-table__th__content) {
+  width: 0;
+  white-space: nowrap;
+}
 
-  .wt-table :deep(.wt-table__th__content {
-      width: 0;
-      white-space: nowrap;
-    }
+.wt-table :deep(.wt-table__td__content) {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-    .wt-table__td__content {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
+.wt-table :deep(.wt-table__td__actions) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--spacing-xs);
+}
 
-    .wt-table__td__actions {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      gap: var(--spacing-xs);
-    }
-
-    .wt-table__th__sort-arrow {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      transform: translateY(-50%);
-    }</style>
+.wt-table :deep(.wt-table__th__sort-arrow) {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>

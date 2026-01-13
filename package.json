@@ -21,7 +21,8 @@
     "utils:i": "npm install"
   },
   "workspaces": [
-    "./packages/api-services"
+    "./packages/api-services",
+    "./packages/styleguide"
   ],
   "main": "./dist/ui-sdk.js",
   "type": "module",
