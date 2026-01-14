@@ -57,7 +57,7 @@
   /*Timing on menu appear animation*/
   --dp-transition-timing: ease-out;
   /*Timing on slide animations*/
-}
+
 
 .dp__theme_light {
   --dp-background-color: var(--content-wrapper-color);
@@ -79,4 +79,5 @@
   /* --dp-scroll-bar-color: #959595; */
   /* --dp-success-color-disabled: #a3d9b1; */
   /* --dp-highlight-color: rgba(25, 118, 210, 0.1); */
+  }
 }

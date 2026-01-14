@@ -1,6 +1,7 @@
 <template>
   <p-chip
-    :class="`wt-chip p-chip-${color}`"
+	class="wt-chip typo-caption"
+    :class="`p-chip-${color}`"
     :removable="removable"
   >
     <slot />
@@ -12,7 +13,6 @@
 
 <script setup lang="ts">
 import type { ChipProps } from 'primevue/chip';
-import { defineProps, withDefaults } from 'vue';
 
 import { ChipColor } from '../../enums';
 

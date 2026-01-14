@@ -22,51 +22,72 @@ import { ref, watch } from 'vue';
 
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
+/**
+ * @emits {void} opened - Emitted when the expansion panel is opened
+ * @emits {void} closed - Emitted when the expansion panel is closed
+ * 
+ * @slot default - Content of the expansion panel
+ * @slot title - Title of the expansion panel
+ * @slot actions - Actions of the expansion panel
+ * @slot-scope {function} open - Function to open the panel
+ * @slot-scope {boolean} opened - Whether the panel is currently opened
+ */
 const props = defineProps({
-	size: {
-		type: String,
-		default: 'md',
-	},
-	collapsed: {
-		type: Boolean,
-		default: false,
-	},
+  /**
+   * Size of the expansion panel
+   * @type {string}
+   * @default 'md'
+   * @options ['sm', 'md']
+   */
+  size: {
+    type: String,
+    default: 'md',
+  },
+  /**
+   * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
+   * @type {boolean}
+   * @default false
+   */
+  collapsed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
-	'opened',
-	'closed',
+  'opened',
+  'closed',
 ]);
 
 const opened = ref(!props.collapsed);
 
 function open() {
-	if (!opened.value) {
-		opened.value = true;
-		emit('opened');
-	}
+  if (!opened.value) {
+    opened.value = true;
+    emit('opened');
+  }
 }
 
 function close() {
-	if (opened.value) {
-		opened.value = false;
-		emit('closed');
-	}
+  if (opened.value) {
+    opened.value = false;
+    emit('closed');
+  }
 }
 
 function toggle() {
-	return opened.value ? close() : open();
+  return opened.value ? close() : open();
 }
 
 watch(
-	() => props.collapsed,
-	(newVal) => {
-		if (newVal) {
-			close();
-		} else {
-			open();
-		}
-	},
+  () => props.collapsed,
+  (newVal) => {
+    if (newVal) {
+      close();
+    } else {
+      open();
+    }
+  },
 );
 </script>
 

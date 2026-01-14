@@ -13,7 +13,7 @@
     :severity="color"
     :size="primevueSizeMap[size]"
     :variant="variant"
-    class="wt-button typo-button"
+    class="wt-button typo-button typo-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
   >
@@ -53,8 +53,6 @@
 import type { ButtonProps } from 'primevue';
 import {
 	computed,
-	defineEmits,
-	defineProps,
 	inject,
 	ref,
 	useAttrs,
@@ -176,21 +174,22 @@ watch(
 
 <style>
 .wt-button {
-position: relative;
+	position: relative;
 }
 
-.wt-button .wt-button.p-button {
+.wt-button.p-button {
 .wt-button--with-badge {
       overflow: visible;
-}
+  }
 
   .wt-button__contents {
-display: contents;
-}
+	display: contents;
+  }
 
   .wt-badge .wt-badge--absolute {
-position: absolute;
-      top: 0;
-      right: 0;
+	position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
-}</style>
+</style>

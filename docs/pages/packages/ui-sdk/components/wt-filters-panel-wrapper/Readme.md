@@ -9,12 +9,12 @@ import ExampleFiltersPanelWrapper from './examples/example-filters-panel-wrapper
 
 <Specs />
 
-## Example Table Actions
+## Example Filters Panel Wrapper
 
 ::: raw
-<ExampleTableActions/>
+<ExampleFiltersPanelWrapper/>
 :::
 
 ::: details Code
-<<< ./examples/example-table-actions.vue
+<<< ./examples/example-filters-panel-wrapper.vue
 :::

@@ -1,11 +1,6 @@
 <template>
-  <wt-icon-btn
-    v-tooltip="copied ? copiedTooltip : copyTooltip"
-    :icon="copied ? 'done' : 'copy'"
-    class="copy-action"
-    v-bind="$attrs"
-    @click="copy"
-  />
+	<wt-icon-btn v-tooltip="copied ? copiedTooltip : copyTooltip" :icon="copied ? 'done' : 'copy'" class="copy-action"
+		v-bind="$attrs" @click="copy" />
 </template>
 
 <script>
@@ -15,10 +10,23 @@ let copiedIdTimeout = null;
 
 export default {
 	name: 'WtCopyAction',
+	/**
+	 * @emits {Event} click - Fires when copy button is clicked
+	 */
 	props: {
+		/**
+		 * Value to be copied
+		 * @type {string}
+		 * @required
+		 */
 		value: {
 			type: String,
 		},
+		/**
+		 * Value for tooltips before/after copying. Should have "copy" and "copied" properties
+		 * @type {Object}
+		 * @default {}
+		 */
 		tooltips: {
 			type: Object,
 			default: () => ({}),
@@ -47,5 +55,3 @@ export default {
 	},
 };
 </script>
-
-
