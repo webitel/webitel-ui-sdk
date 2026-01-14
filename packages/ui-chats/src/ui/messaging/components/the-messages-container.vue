@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import type { Emitter } from "mitt";
-import { computed, inject, nextTick, onMounted, useTemplateRef } from "vue";
+import {computed, defineProps,inject, nextTick, onMounted, useTemplateRef} from "vue";
 
 import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
@@ -74,7 +74,7 @@ const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
 
 const messagesContainer = useTemplateRef("messages-container");
 
-const { showAvatar, showChatDate } = useChatMessages(props.messages);
+const { showAvatar, showChatDate } = useChatMessages(computed(() => props.messages)); // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 
 const {
 	showScrollToBottomBtn,
@@ -84,7 +84,7 @@ const {
 	handleChatResize,
 } = useChatScroll(
 	messagesContainer,
-	computed(() => props.messages),
+  computed(() => props.messages), // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 );
 
 function focusOnInput() {
