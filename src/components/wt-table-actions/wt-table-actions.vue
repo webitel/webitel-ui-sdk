@@ -54,9 +54,28 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+/**
+ * @emits {string} input - Fires when action button is clicked. Emits button name: [import, export, filter-reset, column-select, refresh, settings]
+ */
 interface Props {
+	/**
+	 * Array of icon names to display
+	 * @type {string[]}
+	 * @default ['refresh']
+	 * @options ['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']
+	 */
 	icons?: string[];
+	/**
+	 * Marks settings button as active
+	 * @type {boolean}
+	 * @default false
+	 */
 	isSettingsActive?: boolean;
+	/**
+	 * Shows badge on settings button
+	 * @type {boolean}
+	 * @default false
+	 */
 	isSettingsBadge?: boolean;
 }
 

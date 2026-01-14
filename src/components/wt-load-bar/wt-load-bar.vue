@@ -15,6 +15,11 @@ import { IconColor } from '../../enums';
 export default {
 	name: 'WtLoadBar',
 	props: {
+		/**
+		 * Max load bar value
+		 * @type {number | string}
+		 * @default 100
+		 */
 		max: {
 			type: [
 				Number,
@@ -22,6 +27,11 @@ export default {
 			],
 			default: 100,
 		},
+		/**
+		 * Current load bar value
+		 * @type {number | string}
+		 * @default 0
+		 */
 		value: {
 			type: [
 				Number,
@@ -29,6 +39,11 @@ export default {
 			],
 			default: 0,
 		},
+		/**
+		 * Load bar color
+		 * @type {string}
+		 * @default IconColor.PRIMARY
+		 */
 		color: {
 			type: String,
 			default: IconColor.PRIMARY,

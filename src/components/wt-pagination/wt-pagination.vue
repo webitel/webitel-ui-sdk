@@ -42,25 +42,56 @@ export default {
 		prop: 'size',
 		event: 'change',
 	},
+	/**
+	 * @emits {string | number} change - Fires when size changes. The same as input, but if "debounce" is true, event is debounced
+	 * @emits {string | number} input - Fires when size changes. SIZE CHANGE IS DEBOUNCED
+	 * @emits {void} next - Event is triggered on "next" arrow click
+	 * @emits {void} prev - Event is triggered on "prev" arrow click
+	 */
 	props: {
+		/**
+		 * SIZE CHANGE IS DEBOUNCED
+		 * @type {string | number}
+		 * @model size
+		 */
 		size: {
 			type: [
 				String,
 				Number,
 			],
 		},
+		/**
+		 * Is false, disables paging arrow
+		 * @type {boolean}
+		 * @default false
+		 */
 		next: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Is false, disables paging arrow
+		 * @type {boolean}
+		 * @default false
+		 */
 		prev: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * If true, @change event is delayed for debounceDelay from last change
+		 * @type {boolean}
+		 * @default false
+		 */
 		debounce: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Debounce delay in milliseconds
+		 * @type {number}
+		 * @default 1000
+		 */
 		debounceDelay: {
 			type: Number,
 			default: 1000,

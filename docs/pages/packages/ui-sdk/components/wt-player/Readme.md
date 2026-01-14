@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-player-docs.vue';
+import Specs from './component-specs.vue';
 import ExamplePlayer from './examples/example-player.vue';
 </script>
 
-# WtPlayer
+# `wt-player.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Player
 

@@ -1,13 +1,18 @@
 <template>
   <header class="wt-headline">
+    <!-- @slot headline direct child -->
     <slot>
+      <!-- @slot headline direct child slot, but with search and actions slots available -->
       <slot name="title-wrapper">
         <h1 class="wt-headline__title typo-heading-2">
+          <!-- @slot Title slot -->
           <slot name="title" />
         </h1>
       </slot>
       <div class="wt-headline__actions-wrapper">
+        <!-- @slot Search slot -->
         <slot name="search" />
+        <!-- @slot Action buttons slot -->
         <slot name="actions" />
       </div>
     </slot>

@@ -53,36 +53,78 @@ import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
+/**
+ * @emits {string} input - Fires when textarea value changes. Emits value
+ * @emits {void} enter - Fires at enter key press if autoresize is on
+ * @emits {Event} paste - Fires on paste event
+ * @emits {void} blur - Fires on blur event
+ * @emits {KeyboardEvent} keydown - Fires on keydown event
+ * @emits {Event} * - Plus all native textarea events
+ */
 interface Props extends /* @vue-ignore */ TextareaProps {
 	/**
-	 * textarea label
+	 * Textarea label
+	 * @type {string}
+	 * @default ''
 	 */
 	label?: string;
 	/**
-	 * textarea placeholder
+	 * Textarea placeholder
+	 * @type {string}
+	 * @default label value
 	 */
 	placeholder?: string;
 	/**
 	 * Native textarea readonly attribute
+	 * @type {boolean}
+	 * @default false
 	 */
 	readonly?: boolean;
 	/**
 	 * Native textarea disabled attribute
+	 * @type {boolean}
+	 * @default false
 	 */
 	disabled?: boolean;
+	/**
+	 * Marks textarea as required
+	 * @type {boolean}
+	 * @default false
+	 */
 	required?: boolean;
 	/**
-	 * textarea name
+	 * Input id name for label association
+	 * @type {string}
+	 * @default ''
 	 */
 	name?: string;
 	/**
 	 * Number of rows in textarea
+	 * @type {number}
+	 * @default 1
 	 */
 	rows?: number;
+	/**
+	 * Object with props, passed down to wt-label as props
+	 * @type {Object}
+	 */
 	labelProps?: Record<string, any>;
+	/**
+	 * Enables auto-resize. If passed, "Enter" key press emits "enter" event, new line is shift+enter
+	 * @type {boolean}
+	 * @default false
+	 */
 	autoresize?: boolean;
-	// validation rules
+	/**
+	 * Validation rules
+	 * @type {any}
+	 */
 	v?: any;
+	/**
+	 * Custom validators array
+	 * @type {Array<{name: string, text: string}>}
+	 * @default []
+	 */
 	customValidators?: Array<{
 		name: string;
 		text: string;
@@ -103,6 +145,10 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
+/**
+ * [V-MODEL] Textarea value
+ * @model modelValue
+ */
 const model = defineModel<string>();
 
 const textareaWrapperRef = useTemplateRef('textarea-wrapper');

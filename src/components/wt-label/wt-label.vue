@@ -15,9 +15,28 @@
 
 <script lang="ts" setup>
 defineProps<{
+	/**
+	 * Disables the label
+	 * @type {boolean}
+	 * @default false
+	 */
 	disabled?: boolean;
+	/**
+	 * Changes label visual style to invalid (red)
+	 * @type {boolean}
+	 * @default false
+	 */
 	invalid?: boolean;
+	/**
+	 * Marks the label as required
+	 * @type {boolean}
+	 * @default false
+	 */
 	required?: boolean;
+	/**
+	 * Adds wt-icon-btn with tooltip value, passed as prop
+	 * @type {string}
+	 */
 	hint?: string;
 }>();
 </script>

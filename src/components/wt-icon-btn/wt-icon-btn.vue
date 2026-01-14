@@ -9,7 +9,19 @@
 <script setup lang="ts">
 import WtIcon from '../wt-icon/wt-icon.vue';
 
+/**
+ * @emits {MouseEvent} click - Fires when button is clicked
+ * @emits {MouseEvent} mousedown - Fires when button is mousedown
+ * 
+ * Note: All other props (icon, icon-prefix, size, color, tooltip, tooltip-position) are passed to wt-icon via $attrs.
+ * For more information check "Icons" docs.
+ */
 const { disabled = false } = defineProps<{
+	/**
+	 * Disables btn
+	 * @type {boolean}
+	 * @default false
+	 */
 	disabled?: boolean;
 }>();
 

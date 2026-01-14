@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-stepper-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleStepper from './examples/example-stepper.vue';
 </script>
 
-# WtStepper
+# `wt-stepper.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Stepper
 

@@ -13,6 +13,11 @@
 export default {
 	name: 'WtInputInfo',
 	props: {
+		/**
+		 * Changes input info visual style to invalid (red)
+		 * @type {boolean}
+		 * @default false
+		 */
 		invalid: {
 			type: Boolean,
 			default: false,

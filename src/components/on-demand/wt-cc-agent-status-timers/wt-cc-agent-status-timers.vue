@@ -21,16 +21,23 @@
 <script setup>
 const props = defineProps({
 	/**
-	 * @description Status object
+	 * Object should have "online", "offline" and "pause" properties for representation
 	 * @type {Object}
-	 * @property {String} offline
-	 * @property {String} online
-	 * @property {String} pause
+	 * @property {string} offline - Offline status timer value
+	 * @property {string} online - Online status timer value
+	 * @property {string} pause - Pause status timer value
+	 * @required
 	 */
 	status: {
 		type: Object,
 		required: true,
 	},
+	/**
+	 * Size of component
+	 * @type {string}
+	 * @default 'md'
+	 * @options ['sm', 'md']
+	 */
 	size: {
 		type: String,
 		default: 'md',

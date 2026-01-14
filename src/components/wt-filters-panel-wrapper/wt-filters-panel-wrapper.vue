@@ -12,7 +12,15 @@
 <script>
 export default {
 	name: 'FiltersPanelWrapper',
+	/**
+	 * @emits {void} reset - Filters reset click event
+	 */
 	props: {
+		/**
+		 * Array of table action icons to display
+		 * @type {Array}
+		 * @default ['filter-reset', 'settings']
+		 */
 		tableActionIcons: {
 			type: Array,
 			default: () => [
@@ -20,6 +28,11 @@ export default {
 				'settings',
 			],
 		},
+		/**
+		 * Controls filters panel expansion state
+		 * @type {boolean}
+		 * @default false
+		 */
 		isOpened: {
 			type: Boolean,
 			default: false,

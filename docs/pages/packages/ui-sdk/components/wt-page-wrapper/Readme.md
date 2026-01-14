@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-page-wrapper-docs.vue';
+import Specs from './component-specs.vue';
 import ExamplePageWrapper from './examples/example-page-wrapper.vue';
 </script>
 
-# WtPageWrapper
+# `wt-page-wrapper.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Page Wrapper
 

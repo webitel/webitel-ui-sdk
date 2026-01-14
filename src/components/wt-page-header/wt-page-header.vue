@@ -35,31 +35,67 @@
 import { computed } from 'vue';
 
 const props = defineProps({
+	/**
+	 * Hides primary button
+	 * @type {boolean}
+	 * @default false
+	 */
 	hidePrimary: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Hides secondary button
+	 * @type {boolean}
+	 * @default false
+	 */
 	hideSecondary: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Text for primary button. If empty - the title "ADD"
+	 * @type {string}
+	 */
 	primaryText: {
 		type: String,
 	},
+	/**
+	 * Primary button click handler
+	 * @type {Function}
+	 */
 	primaryAction: {
 		type: Function,
 	},
+	/**
+	 * Disables primary button
+	 * @type {boolean}
+	 * @default false
+	 */
 	primaryDisabled: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Disables secondary button
+	 * @type {boolean}
+	 * @default false
+	 */
 	secondaryDisabled: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Text for secondary button. If empty - the title "CLOSE"
+	 * @type {string}
+	 */
 	secondaryText: {
 		type: String,
 	},
+	/**
+	 * Secondary button click handler
+	 * @type {Function}
+	 */
 	secondaryAction: {
 		type: Function,
 	},

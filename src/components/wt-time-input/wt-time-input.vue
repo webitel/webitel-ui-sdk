@@ -48,9 +48,16 @@ export default {
 	mixins: [
 		validationMixin,
 	],
+	/**
+	 * @emits {number} input - Fires when input value changes. Emits value
+	 * @emits {Event} * - Plus all native input events
+	 */
 	props: {
 		/**
-		 * Current input value (`v-model`)
+		 * Current input value (v-model)
+		 * @type {number}
+		 * @default 0
+		 * @model value
 		 */
 		value: {
 			type: Number,
@@ -58,19 +65,33 @@ export default {
 		},
 		/**
 		 * Form input label
+		 * @type {string}
+		 * @default ''
 		 */
 		label: {
 			type: String,
 			default: '',
 		},
 		/**
+		 * Input id name for label association
+		 * @type {string}
+		 * @default ''
+		 */
+		name: {
+			type: String,
+			default: '',
+		},
+		/**
 		 * Time type: day, minute, second
+		 * @type {number}
 		 */
 		maxValue: {
 			type: Number,
 		},
 		/**
 		 * Native input required attribute
+		 * @type {boolean}
+		 * @default false
 		 */
 		required: {
 			type: Boolean,
@@ -79,26 +100,33 @@ export default {
 		},
 		/**
 		 * Native input disabled attribute
+		 * @type {boolean}
+		 * @default false
 		 */
 		disabled: {
 			type: Boolean,
 			default: false,
 			description: 'Native input disabled attribute',
 		},
+		/**
+		 * Object with props, passed down to wt-label as props
+		 * @type {Object}
+		 */
 		labelProps: {
 			type: Object,
 			description: 'Object with props, passed down to wt-label as props',
 		},
+		/**
+		 * Hides input info section
+		 * @type {boolean}
+		 * @default false
+		 */
 		hideInputInfo: {
 			type: Boolean,
 			default: false,
 		},
 	},
 	emits: [
-		/**
-		 * Emits on input value change
-		 * @param {string} value
-		 */
 		'input',
 	],
 	computed: {

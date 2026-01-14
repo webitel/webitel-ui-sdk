@@ -18,20 +18,47 @@ import { computed } from 'vue';
 import dummyDark from '../../assets/components/molecules/wt-dummy/dummyDark.svg';
 import dummyLight from '../../assets/components/molecules/wt-dummy/dummyLight.svg';
 
+/**
+ * @emits {void} create - Fires when create button is clicked
+ */
 const props = defineProps({
+	/**
+	 * Image source URL
+	 * @type {string}
+	 */
 	src: {
 		type: String,
 	},
+	/**
+	 * Dummy text content
+	 * @type {string}
+	 * @default 'There are no records yet'
+	 */
 	text: {
 		type: String,
 	},
+	/**
+	 * Button text
+	 * @type {string}
+	 * @default localized "ADD"
+	 */
 	buttonText: {
 		type: String,
 	},
+	/**
+	 * The prop controls the display of the button for adding new items
+	 * @type {boolean}
+	 * @default false
+	 */
 	showAction: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Image size
+	 * @type {string | number}
+	 * @default 200
+	 */
 	size: {
 		type: [
 			String,
@@ -39,10 +66,20 @@ const props = defineProps({
 		],
 		default: 200,
 	},
+	/**
+	 * If value is true - hides in markup "text"
+	 * @type {boolean}
+	 * @default false
+	 */
 	hiddenText: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Dark mode flag
+	 * @type {boolean}
+	 * @default false
+	 */
 	darkMode: {
 		type: Boolean,
 		default: false,

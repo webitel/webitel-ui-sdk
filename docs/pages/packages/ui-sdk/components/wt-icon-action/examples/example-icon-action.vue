@@ -11,31 +11,21 @@ const availableActions = Object.keys(WtIconActionIconMappings);
 </script>
 
 <template>
-  <wt-table
-    :data="
-      availableActions.map((action) => ({
-        icon: action,
-        action: IAMap[action],
-      }))
-    "
-    :headers="[
+  <wt-table :data="availableActions.map((action) => ({
+    icon: action,
+    action: IAMap[action],
+  }))
+    " :headers="[
       { value: 'icon', width: '80px' },
       { value: 'action', text: 'IconAction enum key' },
-    ]"
-    :selectable="false"
-  >
+    ]" :selectable="false">
     <template #icon="{ item }">
       <wt-icon-action :action="item.icon" />
     </template>
 
     <template #action="{ item }">
-      <wt-copy-action
-        :text="`IconAction.${item.action}`"
-        style="margin-right: var(--spacing-2xs)"
-      />
+      <wt-copy-action :text="`IconAction.${item.action}`" style="margin-right: var(--spacing-2xs)" />
       <code>IconAction.{{ item.action }}</code>
     </template>
   </wt-table>
 </template>
-
-<style lang="scss" scoped></style>

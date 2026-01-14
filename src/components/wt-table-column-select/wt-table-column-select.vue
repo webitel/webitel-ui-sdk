@@ -65,13 +65,27 @@ export default {
 		prop: 'headers',
 		event: 'change',
 	},
+	/**
+	 * @emits {Array} change - Fires when headers are changed. Emits mutated headers
+	 */
 	props: {
+		/**
+		 * Each header should have following schema: { value: String, show: Boolean, text: String }
+		 * @type {Array}
+		 * @required
+		 * @model headers
+		 */
 		headers: {
 			type: Array,
 			required: true,
 			description:
 				'Each header should have following schema: { value: String, show: Boolean, text: String }',
 		},
+		/**
+		 * Header values to exclude from selection
+		 * @type {Array}
+		 * @default []
+		 */
 		staticHeaders: {
 			type: Array,
 			default: () => [],

@@ -3,11 +3,7 @@
     <article class="docs-text">
       <h2>Props:</h2>
     </article>
-    <wt-table
-      :headers="headers"
-      :data="properties"
-      :selectable="false"
-    >
+    <wt-table :headers="headers" :data="properties" :selectable="false">
       <template #value="{ item }">
         <code>{{ item.value }}</code>
       </template>
@@ -22,10 +18,7 @@
       </template>
       <template #description="{ item }">
         <div>
-          <md-component
-            v-if="item.description"
-            :value="item.description"
-          />
+          <md-component v-if="item.description" :value="item.description" />
           <p v-if="item.options">
             Options: <code>{{ item.options }}</code>
           </p>
@@ -60,5 +53,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-table-actions-docs.vue';
-import ExampleTableActions from './examples/example-table-actions.vue';
+import Specs from './component-specs.vue';
+import ExampleFiltersPanelWrapper from './examples/example-filters-panel-wrapper.vue';
 </script>
 
-# WtTableActions
+# `wt-filters-panel-wrapper.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Table Actions
 

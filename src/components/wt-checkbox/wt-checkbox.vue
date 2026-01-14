@@ -1,37 +1,16 @@
 <template>
-  <div
-    class="wt-checkbox"
-  >
-    <p-checkbox
-      v-model="model"
-      :binary="isSingle"
-      :disabled="disabled"
-      :input-id="checkboxId"
-      :value="value"
-    >
+  <div class="wt-checkbox">
+    <p-checkbox v-model="model" :binary="isSingle" :disabled="disabled" :input-id="checkboxId" :value="value">
       <template #icon>
         <span class="wt-checkbox__checkmark">
-          <wt-icon
-            :color="iconColor"
-            :icon="checkboxIcon"
-          />
+          <wt-icon :color="iconColor" :icon="checkboxIcon" />
         </span>
       </template>
     </p-checkbox>
-    <wt-label
-      v-if="hasLabel"
-      :disabled="disabled"
-      :for="checkboxId"
-    >
+    <wt-label v-if="hasLabel" :disabled="disabled" :for="checkboxId">
       <!-- @slot Custom label markup -->
-      <slot
-        name="label"
-        v-bind="{ label, isChecked, disabled }"
-      >
-        <div
-          v-if="label"
-          class="wt-checkbox__label"
-        >
+      <slot name="label" v-bind="{ label, isChecked, disabled }">
+        <div v-if="label" class="wt-checkbox__label">
           {{ label }}
         </div>
       </slot>
@@ -43,20 +22,42 @@
 import type { CheckboxProps } from 'primevue/checkbox';
 import { computed, defineModel, defineProps, useSlots } from 'vue';
 
+/**
+ * @emits {boolean | string[]} change - Fires when checkbox value changes. Emits selected value (Boolean or Array)
+ */
 interface WtCheckboxProps extends CheckboxProps {
-	value?: string | boolean;
-	label?: string;
-	disabled?: boolean;
+  /**
+   * Checkbox value, which should be present in checked list, if checked
+   * @type {string | boolean}
+   * @default ''
+   */
+  value?: string | boolean;
+  /**
+   * Checkbox label text
+   * @type {string}
+   * @default ''
+   */
+  label?: string;
+  /**
+   * Disables the checkbox
+   * @type {boolean}
+   * @default false
+   */
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<WtCheckboxProps>(), {
-	value: '',
-	label: '',
-	disabled: false,
+  value: '',
+  label: '',
+  disabled: false,
 });
 
+/**
+ * [V-MODEL] Variable-accumulator, which contains checkbox value (or values, if array)
+ * @model selected
+ */
 const model = defineModel<boolean | string[]>('selected', {
-	required: true,
+  required: true,
 });
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
@@ -64,26 +65,26 @@ const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-	return props.label || slots.label;
+  return props.label || slots.label;
 });
 
 const isSingle = computed(() => !Array.isArray(model.value));
 
 const isChecked = computed(() => {
-	if (isSingle.value) {
-		return model.value;
-	}
-	return model.value.includes(props.value);
+  if (isSingle.value) {
+    return model.value;
+  }
+  return model.value.includes(props.value);
 });
 
 const checkboxIcon = computed(() => {
-	return isChecked.value ? 'checkbox-tick' : '';
+  return isChecked.value ? 'checkbox-tick' : '';
 });
 
 const iconColor = computed(() => {
-	if (props.disabled) return 'disabled';
-	if (isChecked.value) return 'active';
-	return null;
+  if (props.disabled) return 'disabled';
+  if (isChecked.value) return 'active';
+  return null;
 });
 </script>
 

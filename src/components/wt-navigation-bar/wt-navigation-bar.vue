@@ -164,21 +164,42 @@ export default {
 		ExpandTransition,
 	},
 	props: {
+		/**
+		 * Currently opened app
+		 * @type {string}
+		 * @default 'admin'
+		 */
 		currentApp: {
 			type: String,
 			default: 'admin',
 		},
 		/**
-		 * @type {WtNavigationBarNavItem[]}
+		 * Should receive array of nav objects. All objects should have following properties:
+		 * "value" -- main inner logic property, should be unique. "name" -- display name. If none,
+		 * displays "value" property. "route" -- relative path, used for :to attr in router-link component.
+		 * "subNav": array of objects, with properties, described above.
+		 * If expansion has route, and subNav has route, subNav route computes like nav.route + / + subnav.route
+		 * @type {Array}
+		 * @default []
 		 */
 		nav: {
 			type: Array,
 			default: () => [],
 		},
+		/**
+		 * Dark mode flag
+		 * @type {boolean}
+		 * @default false
+		 */
 		darkMode: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Logo route path
+		 * @type {string}
+		 * @default ''
+		 */
 		logoRoute: {
 			type: String,
 			default: '',

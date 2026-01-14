@@ -15,20 +15,49 @@
 
 export default {
 	name: 'WtPlayer',
+	/**
+	 * @emits {Plyr} initialized - Fires when player is initialized. Emits Plyr instance
+	 * @emits {void} close - Fires when close button is clicked
+	 * @emits {Event} * - All native <audio> and <video> events
+	 */
 	props: {
+		/**
+		 * Media source URL
+		 * @type {string}
+		 */
 		src: {},
+		/**
+		 * Autoplay media on load
+		 * @type {boolean}
+		 * @default true
+		 */
 		autoplay: {
 			type: Boolean,
 			default: true,
 		},
+		/**
+		 * Loop media playback
+		 * @type {boolean}
+		 * @default false
+		 */
 		loop: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Hides duration display
+		 * @type {boolean}
+		 * @default false
+		 */
 		hideDuration: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Download button configuration. If false, no download button will be shown
+		 * @type {string | Function | boolean}
+		 * @default (url) => url.replace('/stream', '/download')
+		 */
 		download: {
 			type: [
 				String,
@@ -37,28 +66,56 @@ export default {
 			],
 			default: () => (url) => url.replace('/stream', '/download'),
 		},
+		/**
+		 * On mime type depends, wt-player will draw a video or audio component
+		 * @type {string}
+		 * @default 'audio'
+		 */
 		mime: {
 			type: String,
 			default: 'audio',
 		},
-		// plyr-specific options
+		/**
+		 * Plyr-specific prop. Resets player position to start on file end.
+		 * @type {boolean}
+		 * @default false
+		 */
 		resetOnEnd: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Plyr-specific prop
+		 * @type {boolean}
+		 * @default true
+		 */
 		invertTime: {
 			type: Boolean,
 			default: true,
 		},
-		// plyr is caching volume settings so we should reset them at init
+		/**
+		 * Plyr is caching volume settings ("muted" too) so we could reset them at init
+		 * @type {boolean}
+		 * @default false
+		 */
 		resetVolume: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Shows close button
+		 * @type {boolean}
+		 * @default true
+		 */
 		closable: {
 			type: Boolean,
 			default: true,
 		},
+		/**
+		 * Player position
+		 * @type {string}
+		 * @default 'sticky'
+		 */
 		position: {
 			type: String,
 			default: 'sticky',

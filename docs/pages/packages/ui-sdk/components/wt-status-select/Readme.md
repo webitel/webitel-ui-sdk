@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-status-select-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleStatusSelect from './examples/example-status-select.vue';
 </script>
 
-# WtStatusSelect
+# `wt-status-select.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Status Select
 

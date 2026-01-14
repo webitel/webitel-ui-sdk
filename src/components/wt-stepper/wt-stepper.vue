@@ -34,9 +34,19 @@
 import { computed } from 'vue';
 
 const props = defineProps({
+	/**
+	 * An array of displayed steps. May include "name", "description", "completed"
+	 * @type {Array}
+	 */
 	steps: {
-		type: Object,
+		type: Array,
+		required: true,
 	},
+	/**
+	 * All past and active steps are marked with "accent-secondary-color"
+	 * @type {number}
+	 * @default 1
+	 */
 	activeStep: {
 		type: Number,
 		default: 1,

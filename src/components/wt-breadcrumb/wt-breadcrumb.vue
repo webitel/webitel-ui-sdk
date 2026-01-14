@@ -1,28 +1,16 @@
 <template>
-  <p-breadcrumb
-    :model="path"
-  >
+  <p-breadcrumb :model="path">
     <template #item="{ item }">
-      <router-link
-        v-if="item?.route"
-        :to="item?.route"
-        class="wt-breadcrumb__text"
-        :class="{ 'wt-breadcrumb__text--last': item == lastItem }"
-      >
+      <router-link v-if="item?.route" :to="item?.route" class="wt-breadcrumb__text"
+        :class="{ 'wt-breadcrumb__text--last': item == lastItem }">
         {{ item?.name }}
       </router-link>
-      <span
-        v-else
-        class="wt-breadcrumb__text"
-        :class="{ 'wt-breadcrumb__text--last': item == lastItem }"
-      >
+      <span v-else class="wt-breadcrumb__text" :class="{ 'wt-breadcrumb__text--last': item == lastItem }">
         {{ item?.name }}
       </span>
     </template>
     <template #separator>
-      <wt-icon
-        icon="bread-crumbs"
-      />
+      <wt-icon icon="bread-crumbs" />
     </template>
   </p-breadcrumb>
 </template>
@@ -32,10 +20,18 @@ import type { BreadcrumbProps } from 'primevue';
 import { computed } from 'vue';
 
 interface Props extends BreadcrumbProps {
-	path?: Array<{
-		name: string;
-		route?: string | object;
-	}>;
+  /**
+   * Breadcrumb path array. Each item should have a name and optionally a route.
+   * @required
+   * 
+   * 
+   * @example
+   *[{ name: 'directory' }, { name: 'users', route: '/directory/users' }, { name: 'adm', route: '/directory/users/3' }],
+   */
+  path?: Array<{
+    name: string;
+    route?: string | object;
+  }>;
 }
 
 const props = defineProps<Props>();

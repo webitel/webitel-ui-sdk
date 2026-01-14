@@ -21,7 +21,16 @@ import pic404 from '../../assets/components/organisms/wt-error-page/404.svg';
 
 export default {
 	name: 'WtErrorPage',
+	/**
+	 * @emits {void} back - "back" button click event
+	 */
 	props: {
+		/**
+		 * Error type
+		 * @type {string}
+		 * @required
+		 * @options ['404', '403']
+		 */
 		type: {
 			type: String,
 			required: true,

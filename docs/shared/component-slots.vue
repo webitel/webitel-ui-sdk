@@ -3,11 +3,7 @@
     <article class="docs-text">
       <h2>Slots:</h2>
     </article>
-    <wt-table
-      :data="slots"
-      :headers="headers"
-      :selectable="false"
-    >
+    <wt-table :data="slots" :headers="headers" :selectable="false">
       <template #name="{ item }">
         <code>{{ item.name }}</code>
       </template>
@@ -15,10 +11,7 @@
         <code>{{ item.scope }}</code>
       </template>
       <template #description="{ item }">
-        <p
-          v-if="item.description"
-          v-html="md.render(item.description)"
-        />
+        <p v-if="item.description" v-html="md.render(item.description)" />
       </template>
     </wt-table>
   </article>
@@ -54,5 +47,3 @@ export default {
   }),
 };
 </script>
-
-<style lang="scss" scoped></style>

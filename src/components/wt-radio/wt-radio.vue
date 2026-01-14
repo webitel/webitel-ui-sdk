@@ -33,12 +33,38 @@
 import type { RadioButtonProps } from 'primevue/radiobutton';
 import { computed, defineModel, defineProps, useSlots } from 'vue';
 
+/**
+ * @emits {string | number | boolean | object} input - Fires when radio is selected. Emits the "value" prop
+ */
 interface Props extends RadioButtonProps {
-	// value, set by radio
+	/**
+	 * Value, set by radio
+	 * @type {string | number | boolean | object}
+	 */
 	value: string | number | boolean | object;
+	/**
+	 * Radio label text
+	 * @type {string}
+	 * @default ''
+	 */
 	label?: string;
+	/**
+	 * Marks the radio as required
+	 * @type {boolean}
+	 * @default false
+	 */
 	required?: boolean;
+	/**
+	 * Disables the radio
+	 * @type {boolean}
+	 * @default false
+	 */
 	disabled?: boolean;
+	/**
+	 * Changes visual style to outlined
+	 * @type {boolean}
+	 * @default false
+	 */
 	outline?: boolean;
 }
 
@@ -49,6 +75,10 @@ const props = withDefaults(defineProps<Props>(), {
 	outline: false,
 });
 
+/**
+ * [V-MODEL] currently selected value
+ * @model selected
+ */
 const model = defineModel<string | number | boolean | object>('selected', {
 	required: true,
 });

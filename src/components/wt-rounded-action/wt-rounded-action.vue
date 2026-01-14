@@ -15,7 +15,15 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 
+/**
+ * @emits {Event} click - Fires when button is clicked
+ */
 const props = defineProps({
+	/**
+	 * Icon name (required)
+	 * @type {string}
+	 * @required
+	 */
 	icon: {
 		type: String,
 		required: true,
@@ -29,7 +37,10 @@ const props = defineProps({
 		default: '',
 	},
 	/**
-	 * @values 'primary', 'secondary', 'success', 'error', 'transfer'
+	 * Button color
+	 * @type {string}
+	 * @default 'secondary'
+	 * @options ['primary', 'secondary', 'success', 'error', 'transfer']
 	 */
 	color: {
 		type: String,
@@ -43,31 +54,56 @@ const props = defineProps({
 		default: 'secondary',
 	},
 	/**
-	 * @values 'sm', 'md'
+	 * Controls button size
+	 * @type {string}
+	 * @default 'md'
+	 * @options ['sm', 'md']
 	 */
 	size: {
 		type: String,
 		default: 'md',
 	},
+	/**
+	 * Marks button as active
+	 * @type {boolean}
+	 * @default false
+	 */
 	active: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Disables the button
+	 * @type {boolean}
+	 * @default false
+	 */
 	disabled: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Makes button rounded
+	 * @type {boolean}
+	 * @default false
+	 */
 	rounded: {
 		type: Boolean,
 		default: false,
 	},
 	/**
 	 * Stretches button to all available width
+	 * @type {boolean}
+	 * @default false
 	 */
 	wide: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Shows loading state
+	 * @type {boolean}
+	 * @default false
+	 */
 	loading: {
 		type: Boolean,
 		default: false,

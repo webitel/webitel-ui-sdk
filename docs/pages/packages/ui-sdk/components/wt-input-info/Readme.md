@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-input-info-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleInputInfo from './examples/example-input-info.vue';
 import ExampleInvalidInputInfo from './examples/example-invalid-input-info.vue';
 </script>
 
-# WtInputInfo
+# `wt-input-info.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Input Info
 

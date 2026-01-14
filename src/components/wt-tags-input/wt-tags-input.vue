@@ -69,18 +69,57 @@ export default {
     // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
     taggableMixin,
   ],
+  /**
+   * @emits {Array} input - Fires when tags value changes. Emits value array
+   * @emits {string} tag - Fires when tag is added (if manualTagging is true). Emits vue-multiselect "tag" value
+   * @emits {string} search-change - Fires when search query changes
+   * @emits {void} closed - Fires when dropdown is closed
+   * 
+   * Note: This component inherits props from multiselectMixin (options, placeholder, optionLabel, searchMethod, disabled, required, allowEmpty, useValueFromOptionsByProp) 
+   * and validationMixin (v, customValidators). Also inherits label-related props from labelUsageMixin (label, labelProps).
+   */
   props: {
+    /**
+     * Current tags value (v-model). Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).
+     * @type {Array}
+     * @model value
+     */
     value: {
       type: Array,
     },
+    /**
+     * Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).
+     * @type {string}
+     * @default null
+     */
     trackBy: {
       type: String,
       default: null,
     },
+    /**
+     * If true, user can add tags by himself
+     * @type {boolean}
+     * @default false
+     */
     taggable: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Represented property of select object. REQUIRED IN OBJECT-DATA TAG-INPUTS TO PREVENT OPTION DUPLICATION.
+     * @type {string}
+     * @default null
+     */
+    optionLabel: {
+      type: String,
+      default: null,
+    },
+    /**
+     * False: "tag" method automatically pushes { optionLabel | "name", trackBy } object to value array and $emits "input" event.
+     * True: "tag" method only $emits "tag" event. Tag addition is responsibility of client side.
+     * @type {boolean}
+     * @default false
+     */
     manualTagging: {
       type: Boolean,
       default: false,

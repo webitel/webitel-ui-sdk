@@ -119,7 +119,16 @@ import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables';
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
 
+/**
+ * @emits {number} download - Fires when download button is clicked. Emits index of the image to download
+ * @emits {number} delete - Fires when delete button is clicked. Emits index of the image to delete
+ */
 interface Props extends GalleriaProps {
+	/**
+	 * Array of image objects. Each object should have: src (string), thumbnailSrc (string), title (string), description (string, optional)
+	 * @type {WtGalleriaItem[]}
+	 * @default []
+	 */
 	value: WtGalleriaItem[];
 }
 
@@ -130,9 +139,17 @@ const emit = defineEmits([
 	'delete',
 ]);
 
+/**
+ * [V-MODEL] Controls the visibility of the gallery modal. Use v-model:visible for two-way binding
+ * @model visible
+ */
 const visible = defineModel<boolean>('visible', {
 	required: true,
 });
+/**
+ * [V-MODEL] Index of the currently displayed image. Use v-model:active-index for two-way binding
+ * @model activeIndex
+ */
 const activeIndex = defineModel<number>('activeIndex', {
 	default: 0,
 	required: false,

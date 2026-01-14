@@ -35,11 +35,25 @@ export default {
 		prop: 'status',
 		event: 'change',
 	},
+	/**
+	 * @emits {string} change - Fires when status changes. Emits changed status value
+	 * @emits {Event} closed - Fires when dropdown is closed
+	 */
 	props: {
+		/**
+		 * Component is looking for value from AgentStatus enum
+		 * @type {string}
+		 * @default AgentStatus.OFFLINE
+		 */
 		status: {
 			type: String,
 			default: AgentStatus.OFFLINE,
 		},
+		/**
+		 * If seconds number, converts to hh:mm:ss format
+		 * @type {string | number}
+		 * @default 0
+		 */
 		statusDuration: {
 			type: [
 				String,
@@ -47,6 +61,10 @@ export default {
 			],
 			default: 0,
 		},
+		/**
+		 * If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"
+		 * @type {Array}
+		 */
 		options: {
 			type: Array,
 		},

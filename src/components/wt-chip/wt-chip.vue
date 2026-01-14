@@ -17,7 +17,19 @@ import { defineProps, withDefaults } from 'vue';
 import { ChipColor } from '../../enums';
 
 interface WtProps extends ChipProps {
+	/**
+	 * Chip color. "main" and "outline" are chip-specific colors
+	 * @type {ChipColor}
+	 * @default ChipColor.MAIN
+	 * @options ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer']
+	 */
 	color?: ChipColor;
+	/**
+	 * Makes the chip removable
+	 * @type {boolean}
+	 * @default false
+	 */
+	removable?: boolean;
 }
 
 withDefaults(defineProps<WtProps>(), {

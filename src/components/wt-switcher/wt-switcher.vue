@@ -48,12 +48,40 @@ interface LabelProps {
 	[key: string]: any;
 }
 
+/**
+ * @emits {boolean} update:modelValue - Fires when switcher value changes. Returns inverted value
+ */
 interface Props extends ToggleSwitchProps {
+	/**
+	 * Switcher label text
+	 * @type {string}
+	 * @default ''
+	 */
 	label?: string;
+	/**
+	 * Positions label to the left of the switcher
+	 * @type {boolean}
+	 * @default false
+	 */
 	labelLeft?: boolean;
+	/**
+	 * Disables the switcher
+	 * @type {boolean}
+	 * @default false
+	 */
 	disabled?: boolean;
+	/**
+	 * Object with props, passed down to wt-label as props
+	 * @type {Object}
+	 * @default {}
+	 */
 	labelProps?: LabelProps;
-	controlled?: boolean; // for controlled mode, when need to sync visual state with model
+	/**
+	 * For controlled mode, when need to sync visual state with model
+	 * @type {boolean}
+	 * @default false
+	 */
+	controlled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

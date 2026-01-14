@@ -23,11 +23,23 @@ export default {
 		WtSpinnerLoader,
 	},
 	props: {
+		/**
+		 * Loader size
+		 * @type {string}
+		 * @default 'md'
+		 * @options ['sm', 'md']
+		 */
 		size: {
 			type: String,
 			default: 'md',
 			description: '["xs", "sm", "md"]',
 		},
+		/**
+		 * Loader color. Works only for sm loader
+		 * @type {string}
+		 * @default 'main'
+		 * @options ['main', 'contrast', 'icon']
+		 */
 		color: {
 			type: String,
 			default: 'main',

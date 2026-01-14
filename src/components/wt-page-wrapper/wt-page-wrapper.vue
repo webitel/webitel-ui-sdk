@@ -16,10 +16,20 @@
 export default {
 	name: 'WtPageWrapper',
 	props: {
+		/**
+		 * Hides header section
+		 * @type {boolean}
+		 * @default false
+		 */
 		hideHeader: {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Controls actions panel visibility
+		 * @type {boolean}
+		 * @default true
+		 */
 		actionsPanel: {
 			type: Boolean,
 			default: true,

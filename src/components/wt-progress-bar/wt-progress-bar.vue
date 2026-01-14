@@ -19,6 +19,11 @@
 export default {
 	name: 'WtProgressBar',
 	props: {
+		/**
+		 * Max progress bar value
+		 * @type {number | string}
+		 * @default 100
+		 */
 		max: {
 			type: [
 				Number,
@@ -26,6 +31,11 @@ export default {
 			],
 			default: 100,
 		},
+		/**
+		 * Current progress bar value
+		 * @type {number | string}
+		 * @default 0
+		 */
 		value: {
 			type: [
 				Number,
@@ -33,6 +43,12 @@ export default {
 			],
 			default: 0,
 		},
+		/**
+		 * Progress color
+		 * @type {string}
+		 * @default 'primary'
+		 * @options ['primary', 'secondary', 'success', 'error']
+		 */
 		color: {
 			type: String,
 			default: 'primary',

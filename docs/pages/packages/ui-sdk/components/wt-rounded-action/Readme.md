@@ -1,5 +1,5 @@
 <script setup>
-import Docs from './wt-rounded-action-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleActiveRoundedAction from './examples/example-active-rounded-action.vue';
 import ExampleLoadingStateRoundedAction from './examples/example-loading-state-rounded-action.vue';
 import ExampleWideRoundedAction from './examples/example-wide-rounded-action.vue';
@@ -8,13 +8,11 @@ import ExampleRoundedRoundedAction from './examples/example-rounded-rounded-acti
 import ExampleSmallRoundedAction from './examples/example-small-rounded-action.vue';
 </script>
 
-# WtRoundedAction
+# `wt-rounded-action.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Different colors
 

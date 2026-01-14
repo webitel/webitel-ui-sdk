@@ -37,27 +37,109 @@ import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
-/*
+/**
+ * @emits {string | number} input - Fires when input value changes. Emits input value (depends on input type)
+ * @emits {string | number} update:modelValue - Fires when input value changes (Vue 3 v-model)
+ * @emits {KeyboardEvent} keyup - Fires on keyup event
+ * @emits {Event} * - Plus all native input events
+ * 
  * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
  * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
- * */
+ */
 const props = withDefaults(
 	defineProps<{
+		/**
+		 * Input value (Vue 2 v-model)
+		 * @type {string | number}
+		 * @default ''
+		 */
 		value?: string | number;
+		/**
+		 * Input value (Vue 3 v-model)
+		 * @type {string | number}
+		 * @default ''
+		 * @model modelValue
+		 */
 		modelValue?: string | number;
+		/**
+		 * Input label
+		 * @type {string}
+		 * @default ''
+		 */
 		label?: string;
+		/**
+		 * Input placeholder
+		 * @type {string}
+		 * @default label value
+		 */
 		placeholder?: string;
+		/**
+		 * Input id name for label association
+		 * @type {string}
+		 * @default ''
+		 */
 		name?: string;
+		/**
+		 * Input type
+		 * @type {string}
+		 * @default 'text'
+		 */
 		type?: string;
+		/**
+		 * Marks input as required
+		 * @type {boolean}
+		 * @default false
+		 */
 		required?: boolean;
+		/**
+		 * Disables the input
+		 * @type {boolean}
+		 * @default false
+		 */
 		disabled?: boolean;
+		/**
+		 * If type=password and this, shows eye icon
+		 * @type {boolean}
+		 * @default false
+		 */
 		hasShowPassword?: boolean;
+		/**
+		 * Native number input restrictions
+		 * @type {number}
+		 * @default 0
+		 */
 		numberMin?: number;
+		/**
+		 * Native number input restrictions
+		 * @type {number}
+		 */
 		numberMax?: number;
+		/**
+		 * Object with props, passed down to wt-label as props
+		 * @type {Object}
+		 */
 		labelProps?: Record<string, unknown>;
+		/**
+		 * Prevents trimming input value
+		 * @type {boolean}
+		 * @default false
+		 */
 		preventTrim?: boolean;
+		/**
+		 * Validation rules
+		 * @type {Object}
+		 */
 		v?: Record<string, unknown>;
+		/**
+		 * Regle validation status
+		 * @type {RegleFieldStatus}
+		 */
 		regleValidation?: RegleFieldStatus<string>;
+		/**
+		 * Custom validators array
+		 * @type {Array}
+		 * @default []
+		 */
 		customValidators?: unknown[];
 	}>(),
 	{
