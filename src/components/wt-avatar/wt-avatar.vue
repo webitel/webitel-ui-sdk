@@ -1,12 +1,12 @@
 <template>
-  <PAvatar :class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
-    :style="{ background: `var(${avatarLettersBackground})` }" class="wt-avatar">
-    <template #default>
-      <wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
+	<PAvatar :class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
+		:style="{ background: `var(${avatarLettersBackground})` }" class="wt-avatar">
+		<template #default>
+			<wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
 
-      <img v-if="!isLetterAvatar" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
-    </template>
-  </PAvatar>
+			<img v-if="!isLetterAvatar" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
+		</template>
+	</PAvatar>
 </template>
 
 <script setup>
@@ -16,9 +16,19 @@ import defaultAvatar from '../../assets/components/atoms/wt-avatar/default-avata
 import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 const props = defineProps({
+	/**
+	 * Avatar pic. IMPORTANT: if this pic is stored locally in project, pass to this prop only pic, imported and passed to data as property
+	 * @type {String}
+	 */
 	src: {
 		type: String,
 	},
+	/**
+	 * Avatar size
+	 * @type {String}
+	 * @default 'md'
+	 * @options ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+	 */
 	size: {
 		type: String,
 		default: 'md',
@@ -32,19 +42,39 @@ const props = defineProps({
 			'3xl',
 		],
 	},
+	/**
+	 * Draw status badge
+	 * @type {Boolean}
+	 * @default false
+	 */
 	badge: {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * If passed, avatar is letter-based (if not passed src)
+	 * @type {String}
+	 */
 	username: {
 		type: String,
 		description: 'If passed, avatar is letter-based (if not passed src)',
 	},
+	/**
+	 * Color of the badge
+	 * @type {String<AbstractUserStatus>}
+	 * @default AbstractUserStatus.OFFLINE
+	 */
 	status: {
 		type: String,
 		options: AbstractUserStatus,
 		default: AbstractUserStatus.OFFLINE,
 	},
+	/**
+	 * Shape of the element.
+	 * @type {String}
+	 * @default 'circle'
+	 * @options ['circle', 'square']
+	 */
 	shape: {
 		type: String,
 		default: 'circle',
@@ -166,23 +196,23 @@ const badgeColorVar = computed(() => {
 
 <style scoped>
 .wt-avatar {
-  position: relative;
-  user-select: none;
+	position: relative;
+	user-select: none;
 }
 
 .wt-avatar__letters {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-  color: var(--wt-avatar-text-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+	color: var(--wt-avatar-text-color);
 }
 
 .wt-avatar__img {
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
+	border-radius: 50%;
+	width: 100%;
+	height: 100%;
 }
 </style>

@@ -1,5 +1,4 @@
 <script setup>
-import Docs from './wt-app-header-docs.vue';
 import WtAppHeaderSpecs from './wt-app-header-component-specs.vue';
 import WtAppNavigatorSpecs from './wt-app-navigator-component-specs.vue';
 import WtHeaderActionsSpecs from './wt-header-actions-component-specs.vue';
