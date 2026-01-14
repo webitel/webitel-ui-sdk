@@ -153,6 +153,10 @@ const props = defineProps({
   v: {
     type: Object,
   },
+  customValidators: {
+    type: Array,
+    default: () => [],
+  },
   clearable: {
     type: Boolean,
     default: false,
