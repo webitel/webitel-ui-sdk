@@ -12,7 +12,7 @@
     <transition name="fade">
       <nav
         v-show="isOpened"
-        class="wt-navigation-bar__nav"
+        class="wt-navigation-bar__nav wt-scrollbar"
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
