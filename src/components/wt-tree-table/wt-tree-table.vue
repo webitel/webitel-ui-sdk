@@ -1,6 +1,8 @@
 <template>
-  <div class="wt-tree-table">
-    <table class="wt-tree-table-wrapper">
+  <div class="wt-tree-table wt-scrollbar">
+    <table
+      class="wt-tree-table-wrapper"
+    >
       <thead class="wt-tree-table-head">
         <tr class="wt-tree-table-tr wt-tree-table-tr-head">
           <th
@@ -93,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef, withDefaults } from 'vue';
+import { computed, toRef } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
@@ -102,174 +104,174 @@ import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(
-	defineProps<{
-		/**
-		 * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
-		 */
-		headers: WtTableHeader[];
-		/**
-		 * 'List of data, represented by table. '
-		 */
-		data: Record<string, any>[];
-		/**
-		 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
-		 */
-		sortable?: boolean;
-		/**
-		 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
-		 */
-		selectable?: boolean;
-		selected: any[];
-		/**
-		 * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
-		 */
-		gridActions?: boolean;
-		/**
-		 * 'It's a key in data object, which contains children array. '
-		 */
-		childrenProp: string;
-		/**
-		 * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
-		 */
-		searchedProp?: string;
-	}>(),
-	{
-		sortable: false,
-		selectable: true,
-		gridActions: true,
-		searchedProp: 'searched',
-	},
+  defineProps<{
+    /**
+     * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
+     */
+    headers: WtTableHeader[];
+    /**
+     * 'List of data, represented by table. '
+     */
+    data: Record<string, any>[];
+    /**
+     * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
+     */
+    sortable?: boolean;
+    /**
+     * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
+     */
+    selectable?: boolean;
+    selected: any[];
+    /**
+     * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
+     */
+    gridActions?: boolean;
+    /**
+     * 'It's a key in data object, which contains children array. '
+     */
+    childrenProp: string;
+    /**
+     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+     */
+    searchedProp?: string;
+  }>(),
+  {
+    sortable: false,
+    selectable: true,
+    gridActions: true,
+    searchedProp: 'searched',
+  },
 );
 
 const emit = defineEmits([
-	'sort',
-	'update:selected',
+  'sort',
+  'update:selected',
 ]);
 
 const checkHasChildItems = (item: Record<string, any>) => {
-	return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
+  return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
 };
 
 const getSelectedValue = (items: Record<string, any>[]) => {
-	const selected = [];
+  const selected = [];
 
-	const pushSelectedElement = (item: Record<string, any>) => {
-		if (item._isSelected) {
-			return [
-				item,
-			];
-		}
+  const pushSelectedElement = (item: Record<string, any>) => {
+    if (item._isSelected) {
+      return [
+        item,
+      ];
+    }
 
-		if (checkHasChildItems(item)) {
-			item[props.childrenProp].forEach(pushSelectedElement);
-		}
-	};
+    if (checkHasChildItems(item)) {
+      item[props.childrenProp].forEach(pushSelectedElement);
+    }
+  };
 
-	items.forEach(pushSelectedElement);
+  items.forEach(pushSelectedElement);
 
-	return selected;
+  return selected;
 };
 
 const getAllNestedElements = (item: Record<string, any>) => {
-	const nested = [];
+  const nested = [];
 
-	const pushElement = (item: Record<string, any>) => {
-		nested.push(item);
+  const pushElement = (item: Record<string, any>) => {
+    nested.push(item);
 
-		if (checkHasChildItems(item)) {
-			item[props.childrenProp].forEach(pushElement);
-		}
-	};
+    if (checkHasChildItems(item)) {
+      item[props.childrenProp].forEach(pushElement);
+    }
+  };
 
-	item.forEach(pushElement);
+  item.forEach(pushElement);
 
-	return nested;
+  return nested;
 };
 
 const selectedElements = computed<Record<string, any>[]>(() => {
-	// _isSelected for backwards compatibility
-	return props.selected || getSelectedValue(props.data);
+  // _isSelected for backwards compatibility
+  return props.selected || getSelectedValue(props.data);
 });
 
 const isAllSelected = computed(() => {
-	return (
-		selectedElements.value.length === getAllNestedElements(props.data).length &&
-		getAllNestedElements(props.data).length > 0
-	);
+  return (
+    selectedElements.value.length === getAllNestedElements(props.data).length &&
+    getAllNestedElements(props.data).length > 0
+  );
 });
 
 const { tableHeaders: dataHeaders } = useWtTable({
-	headers: toRef(props, 'headers'),
+  headers: toRef(props, 'headers'),
 });
 
 const isColSortable = ({ sort }: WtTableHeader) => {
-	/*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
+  /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
         strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
         so we need to check if this property is present
 */
-	return props.sortable && sort !== undefined;
+  return props.sortable && sort !== undefined;
 };
 
 const sort = (col: WtTableHeader) => {
-	if (!isColSortable(col)) return;
-	const nextSort = getNextSortOrder(col.sort);
+  if (!isColSortable(col)) return;
+  const nextSort = getNextSortOrder(col.sort);
 
-	emit('sort', col, nextSort);
+  emit('sort', col, nextSort);
 };
 
 const changeSelectItem = (items: Record<string, any>[], selected: boolean) => {
-	items.forEach((item) => {
-		item._isSelected = selected;
+  items.forEach((item) => {
+    item._isSelected = selected;
 
-		if (checkHasChildItems(item)) {
-			// Change selected for all nested elements
-			changeSelectItem(item[props.childrenProp], selected);
-		}
-	});
+    if (checkHasChildItems(item)) {
+      // Change selected for all nested elements
+      changeSelectItem(item[props.childrenProp], selected);
+    }
+  });
 };
 
 const selectAll = () => {
-	if (props.selected) {
-		emit(
-			'update:selected',
-			isAllSelected.value
-				? []
-				: [
-						...getAllNestedElements(props.data),
-					],
-		);
-	} else {
-		// for backwards compatibility
+  if (props.selected) {
+    emit(
+      'update:selected',
+      isAllSelected.value
+        ? []
+        : [
+          ...getAllNestedElements(props.data),
+        ],
+    );
+  } else {
+    // for backwards compatibility
 
-		// https://webitel.atlassian.net/browse/WTEL-4634
-		// Value for _isSelected must be assigned explicitly.
-		// Because allSelected recomputes after each change
+    // https://webitel.atlassian.net/browse/WTEL-4634
+    // Value for _isSelected must be assigned explicitly.
+    // Because allSelected recomputes after each change
 
-		if (isAllSelected.value) {
-			changeSelectItem(props.data, false);
-		} else {
-			changeSelectItem(props.data, true);
-		}
-	}
+    if (isAllSelected.value) {
+      changeSelectItem(props.data, false);
+    } else {
+      changeSelectItem(props.data, true);
+    }
+  }
 };
 
 const handleSelection = (row, select) => {
-	if (props.selected) {
-		if (select) {
-			emit('update:selected', [
-				...selectedElements.value,
-				row,
-			]);
-		} else {
-			emit(
-				'update:selected',
-				selectedElements.value.filter((item) => item !== row),
-			);
-		}
-	} else {
-		// for backwards compatibility
-		row._isSelected = !row._isSelected;
-	}
+  if (props.selected) {
+    if (select) {
+      emit('update:selected', [
+        ...selectedElements.value,
+        row,
+      ]);
+    } else {
+      emit(
+        'update:selected',
+        selectedElements.value.filter((item) => item !== row),
+      );
+    }
+  } else {
+    // for backwards compatibility
+    row._isSelected = !row._isSelected;
+  }
 };
 </script>
 

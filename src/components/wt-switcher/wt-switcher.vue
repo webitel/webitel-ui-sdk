@@ -35,13 +35,9 @@
 import type { ToggleSwitchProps } from 'primevue/toggleswitch';
 import {
 	computed,
-	defineEmits,
-	defineModel,
-	defineProps,
 	nextTick,
 	ref,
 	useSlots,
-	withDefaults,
 } from 'vue';
 
 interface LabelProps {
@@ -127,7 +123,7 @@ position: relative;
   cursor: pointer;
 }
 
-.wt-switcher .wt-switcher.wt-switcher--label-left {
+.wt-switcher.wt-switcher--label-left {
 flex-direction: row-reverse;
 }
 

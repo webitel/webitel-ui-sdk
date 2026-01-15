@@ -165,7 +165,7 @@ const openCollapse = () => {
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) 
+  if (data[props.searchedProp] && nestedLevel)
     return true;
 
   // Check if the object has children
@@ -184,16 +184,13 @@ const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
 };
 
 onMounted(() => {
-  if (props.searchedProp && hasSearchedElement(props.data)) 
+  if (props.searchedProp && hasSearchedElement(props.data))
     openCollapse();
 });
 </script>
 
-<style  scoped>.wt-tree-table-td {
-font-family: 'Montserrat', monospace;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
+<style scoped>
+.wt-tree-table-td {
   text-transform: none;
   padding: var(--spacing-xs);
   height: fit-content;
@@ -202,35 +199,35 @@ font-family: 'Montserrat', monospace;
   overflow-wrap: break-word;
 }
 
-.wt-tree-table-td .wt-tree-table-td__actions {
+.wt-tree-table-td__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
+
 .wt-tree-table-td__content {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
-  .wt-tree-table-td__icon-wrapper {
-display: flex;
-    align-items: flex-start;
-    margin-right: var(--spacing-xs);
-}
-
-  .wt-tree-table-td__content {
-display: flex;
-    align-items: flex-start;
-    text-wrap: nowrap;
-}
+.wt-tree-table-td__icon-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-right: var(--spacing-xs);
 }
 
 .wt-tree-table-row {
-background: var(--wt-tree-table-primary-color);
+  background: var(--wt-tree-table-primary-color);
 }
 
-.wt-tree-table-row .wt-tree-table-row__tree-space {
-width: var(--icon-md-size);
-    height: var(--icon-md-size);
+.wt-tree-table-row--alternate {
+  background: var(--wt-tree-table-zebra-color);
 }
 
-.wt-tree-table-row .wt-tree-table-row--alternate {
-background: var(--wt-tree-table-zebra-color);
-}</style>
+.wt-tree-table-row__tree-space {
+  width: var(--icon-md-size);
+  height: var(--icon-md-size);
+}
+</style>

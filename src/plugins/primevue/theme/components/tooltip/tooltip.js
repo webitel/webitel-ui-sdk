@@ -11,7 +11,7 @@ const tooltip = {
       .p-tooltip-text {
         ${generateWtTypographyCustomCss({
           dt,
-          typo: WtTypography.Caption,
+          typo: WtTypography.Body2,
         })}
           white-space: pre-line;
           word-break: normal;

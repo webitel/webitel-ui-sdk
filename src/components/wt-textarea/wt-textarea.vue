@@ -31,7 +31,7 @@
         :rows="rows"
         :auto-resize="autoresize"
         :readonly="readonly"
-        class="wt-textarea__textarea typo-body-1"
+        class="wt-textarea__textarea"
         @paste="emit('paste', $event)"
         @keydown="handleKeypress"
         @input="handleInput"
