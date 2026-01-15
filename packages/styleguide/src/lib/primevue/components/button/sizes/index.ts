@@ -4,7 +4,6 @@ const sizes = {
   gap: '0.5rem',
   paddingX: '1rem',
   paddingY: '0.5rem',
-  fontSize: '{form.field.font.size}',
   iconOnlyWidth: '3rem',
   sm: {
     fontSize: '{form.field.sm.font.size}',

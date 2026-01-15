@@ -4,6 +4,7 @@ import navigation from './navigation'
 import overlay from './overlay'
 import focusRing from './focus-ring'
 import player from './player'
+import typography from './typography'
 
 export default {
   transitionDuration: '0.2s',
@@ -22,4 +23,5 @@ export default {
   overlay,
   focusRing,
   player,
+  typography,
 }

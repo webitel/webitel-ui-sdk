@@ -1,6 +1,8 @@
 import { ButtonScheme } from '@webitel/styleguide/component-schemes';
+import { WtTypography } from '@webitel/styleguide/enums';
 
 import { ComponentSize } from '../../../../../enums';
+import { generateWtTypographyCustomCss } from '../../_shared/generators/generateWtTypographyCustomCss';
 
 const colors = [
 	'primary',
@@ -140,6 +142,12 @@ const button = {
 					)
 					.join('')}
 
+        .p-button {
+            ${generateWtTypographyCustomCss({
+                dt,
+                typo: WtTypography.Button,
+            })}
+        }
         .p-button:disabled {
           background: ${dt('button.disabled.background')};
           color: ${dt('button.disabled.color')};

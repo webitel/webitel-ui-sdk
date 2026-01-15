@@ -13,30 +13,19 @@
     "typescript": "^5.9.x"
   },
   "exports": {
-    ".": "./src/lib/main.scss",
+    ".": "./src/lib/main.css",
     "./src/lib/main.css": "./src/lib/main.css",
-    "./typography": "./src/lib/styleguide/typography/_typography.scss",
-    "./_typography": "./src/lib/styleguide/typography/_typography.scss",
-    "./scroll": "./src/lib/styleguide/scroll.scss",
-    "./_scroll": "./src/lib/styleguide/scroll.scss",
+    "./typography": "./src/lib/styleguide/typography/typography.css",
+    "./scroll": "./src/lib/styleguide/scroll.css",
     "./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
-    "./_viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
-    "./auditor": "./src/auditor/main.scss",
-    "./_auditor": "./src/auditor/main.scss",
-    "./client": "./src/client/main.scss",
-    "./_client": "./src/client/main.scss",
-    "./crm": "./src/crm/main.scss",
-    "./_crm": "./src/crm/main.scss",
-    "./history": "./src/history/main.scss",
-    "./_history": "./src/history/main.scss",
-    "./supervisor": "./src/supervisor/main.scss",
-    "./_supervisor": "./src/supervisor/main.scss",
-    "./workspaces": "./src/workspaces/main.scss",
-    "./_workspaces": "./src/workspaces/main.scss",
-    "./wt-flow-diagram": "./src/wt-flow-diagram/main.scss",
-    "./_wt-flow-diagram": "./src/wt-flow-diagram/main.scss",
-    "./fonts": "./src/lib/styleguide/fonts/_fonts.scss",
-    "./_fonts": "./src/lib/styleguide/fonts/_fonts.scss",
+    "./fonts": "./src/lib/styleguide/fonts/fonts.css",
+    "./applications/auditor": "./src/applications/auditor/main.scss",
+    "./applications/client": "./src/applications/client/main.scss",
+    "./applications/crm": "./src/applications/crm/main.scss",
+    "./applications/history": "./src/applications/history/main.scss",
+    "./applications/supervisor": "./src/applications/supervisor/main.scss",
+    "./applications/workspaces": "./src/applications/workspaces/main.scss",
+    "./applications/wt-flow-diagram": "./src/applications/wt-flow-diagram/main.scss",
     "./component-schemes": {
       "types": "./types/lib/primevue/components/index.d.ts",
       "import": "./src/lib/primevue/components/index.ts"
@@ -52,6 +41,10 @@
     "./primitive": {
       "types": "./types/lib/primevue/primitive/index.d.ts",
       "import": "./src/lib/primevue/primitive/index.ts"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
     }
   }
 }
