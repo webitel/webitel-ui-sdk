@@ -1,225 +1,205 @@
 <template>
-	<aside :class="[`wt-player--position-${position}`]" class="wt-player typo-body-2">
-		<component :is="playerType" ref="player" :autoplay="autoplay" :src="src" class="wt-player__player" controls
-			v-on="listeners" />
-
-		<!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
-		<wt-icon-btn v-if="closable" ref="close-icon" class="wt-player__close-icon" icon="close"
-			@click="$emit('close')" />
-	</aside>
+	<media-player 
+		ref="player"
+		class="wt-player" 
+		:src="src" 
+		:loop="loop" 
+		:autoplay="autoplay"
+	>
+		<media-provider></media-provider>
+		<media-plyr-layout
+			ref="player"
+			:controls="controls"
+			:download="download"
+			custom-icons
+		>
+			<wt-icon slot="airplay-icon" icon="plyr-airplay" />
+			<wt-icon slot="captions-off-icon" icon="plyr-captions-off" />
+			<wt-icon slot="captions-on-icon" icon="plyr-captions-on" />
+			<wt-icon slot="download-icon" icon="plyr-download" />
+			<wt-icon slot="enter-fullscreen-icon" icon="plyr-enter-fullscreen" />
+			<wt-icon slot="enter-pip-icon" icon="plyr-pip" />
+			<wt-icon slot="exit-fullscreen-icon" icon="plyr-exit-fullscreen" />
+			<wt-icon slot="exit-pip-icon" icon="plyr-pip" />
+			<wt-icon slot="fast-forward-icon" icon="plyr-fast-forward" />
+			<wt-icon slot="muted-icon" icon="plyr-muted" />
+			<wt-icon slot="pause-icon" icon="plyr-pause" />
+			<wt-icon slot="play-icon" icon="plyr-play" />
+			<wt-icon slot="restart-icon" icon="plyr-restart" />
+			<wt-icon slot="rewind-icon" icon="plyr-rewind" />
+			<wt-icon slot="settings-icon" icon="plyr-settings" />
+			<wt-icon slot="volume-icon" icon="plyr-volume" />
+		</media-plyr-layout>
+	</media-player>
 </template>
 
-<script>
-// import Plyr from 'plyr'; // breaks vitepress build, https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
-// import 'plyr/src/sass/plyr.scss';
+<script setup lang="ts">
+import 'vidstack/bundle';
+import { PlyrControl } from 'vidstack';
+import {
+	computed,
+	nextTick,
+	onMounted,
+	ref,
+	watch,
+} from 'vue';
 
-export default {
-	name: 'WtPlayer',
+import WtIcon from '../wt-icon/wt-icon.vue';
+
+interface Props {
 	/**
-	 * @emits {Plyr} initialized - Fires when player is initialized. Emits Plyr instance
-	 * @emits {void} close - Fires when close button is clicked
-	 * @emits {Event} * - All native <audio> and <video> events
+	 * Media source URL
+	 * @type {string}
 	 */
-	props: {
-		/**
-		 * Media source URL
-		 * @type {string}
-		 */
-		src: {},
-		/**
-		 * Autoplay media on load
-		 * @type {boolean}
-		 * @default true
-		 */
-		autoplay: {
-			type: Boolean,
-			default: true,
-		},
-		/**
-		 * Loop media playback
-		 * @type {boolean}
-		 * @default false
-		 */
-		loop: {
-			type: Boolean,
-			default: false,
-		},
-		/**
-		 * Hides duration display
-		 * @type {boolean}
-		 * @default false
-		 */
-		hideDuration: {
-			type: Boolean,
-			default: false,
-		},
-		/**
-		 * Download button configuration. If false, no download button will be shown
-		 * @type {string | Function | boolean}
-		 * @default (url) => url.replace('/stream', '/download')
-		 */
-		download: {
-			type: [
-				String,
-				Function,
-				Boolean,
-			],
-			default: () => (url) => url.replace('/stream', '/download'),
-		},
-		/**
-		 * On mime type depends, wt-player will draw a video or audio component
-		 * @type {string}
-		 * @default 'audio'
-		 */
-		mime: {
-			type: String,
-			default: 'audio',
-		},
-		/**
-		 * Plyr-specific prop. Resets player position to start on file end.
-		 * @type {boolean}
-		 * @default false
-		 */
-		resetOnEnd: {
-			type: Boolean,
-			default: false,
-		},
-		/**
-		 * Plyr-specific prop
-		 * @type {boolean}
-		 * @default true
-		 */
-		invertTime: {
-			type: Boolean,
-			default: true,
-		},
-		/**
-		 * Plyr is caching volume settings ("muted" too) so we could reset them at init
-		 * @type {boolean}
-		 * @default false
-		 */
-		resetVolume: {
-			type: Boolean,
-			default: false,
-		},
-		/**
-		 * Shows close button
-		 * @type {boolean}
-		 * @default true
-		 */
-		closable: {
-			type: Boolean,
-			default: true,
-		},
-		/**
-		 * Player position
-		 * @type {string}
-		 * @default 'sticky'
-		 */
-		position: {
-			type: String,
-			default: 'sticky',
-		},
+	src?: string;
+	/**
+	 * Autoplay media on load
+	 * @type {boolean}
+	 * @default true
+	 */
+	autoplay?: boolean;
+	/**
+	 * Loop media playback
+	 * @type {boolean}
+	 * @default false
+	 */
+	loop?: boolean;
+	/**
+	 * Hides duration display
+	 * @type {boolean}
+	 * @default false
+	 */
+	hideDuration?: boolean;
+	/**
+	 * Download button configuration. If false, no download button will be shown
+	 * @type {string | Function | boolean}
+	 * @default (url) => url.replace('/stream', '/download')
+	 */
+	download?: string | ((url: string) => string) | boolean;
+	/**
+	 * Plyr-specific prop. Resets player position to start on file end.
+	 * @type {boolean}
+	 * @default false
+	 */
+	resetOnEnd?: boolean; // todo??
+	/**
+	 * Plyr-specific prop
+	 * @type {boolean}
+	 * @default true
+	 */
+	invertTime?: boolean; // todo
+	/**
+	 * Plyr is caching volume settings ("muted" too) so we could reset them at init
+	 * @type {boolean}
+	 * @default false
+	 */
+	resetVolume?: boolean; // todo??
+	/**
+	 * Shows close button
+	 * @type {boolean}
+	 * @default true
+	 */
+	closable?: boolean; // todo??
+	/**
+	 * Player position
+	 * @type {string}
+	 * @default 'sticky'
+	 */
+	position?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	autoplay: true,
+	loop: false,
+	hideDuration: false,
+	download: () => (url: string) => url.replace('/stream', '/download'),
+	resetOnEnd: false,
+	invertTime: true,
+	resetVolume: false,
+	closable: true,
+	position: 'sticky',
+});
+
+const emit = defineEmits<{
+	initialized: []; // todo
+	close: []; // todo
+}>();
+
+const controls = computed<PlyrControl[]>(() => {
+	/**
+	 * order matters!
+	 */
+	let baseControls: PlyrControl[] = [
+		'play',
+		'progress',
+		'mute+volume',
+		'download',
+		'fullscreen',
+		'settings',
+	];
+	if (props.hideDuration) {
+		baseControls = baseControls.filter((control) => control !== 'duration');
+	}
+	if (!props.download) {
+		baseControls = baseControls.filter((control) => control !== 'download');
+	}
+	return baseControls;
+});
+
+// todo??
+watch(
+	() => props.src,
+	() => {
+		setupDownload();
 	},
-	emits: [
-		'initialized',
-		'close',
-	],
-	data: () => ({
-		player: null,
-	}),
-
-	computed: {
-		listeners() {
-			return {
-				...this.$listeners,
-			};
-		},
-		playerType() {
-			return this.mime.includes('video') ? 'video' : 'audio';
-		},
+);
+// todo??
+watch(
+	() => props.download,
+	() => {
+		setupDownload();
 	},
+);
 
-	watch: {
-		src() {
-			this.setupDownload();
-		},
-		download() {
-			this.setupDownload();
-		},
-	},
+onMounted(() => {
+	// this.setupPlayer();
+});
 
-	mounted() {
-		this.setupPlayer();
-	},
+async function setupPlayer() {
+	if (props.resetVolume) makeVolumeReset();
+	if (props.download) setupDownload();
 
-	methods: {
-		async setupPlayer() {
-			await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
-			if (this.player) this.player.destroy();
+	if (props.closable) appendCloseIcon();
+	emit('initialized', player.value);
+}
 
-			const defaultControls = [
-				'play-large',
-				'play',
-				'progress',
-				'current-time',
-				'duration',
-				'mute',
-				'volume',
-				'captions',
-				'settings',
-				'pip',
-				'airplay',
-				'fullscreen',
-			];
+function makeVolumeReset() {
+	if (player.value) {
+		player.value.volume = 1;
+		player.value.muted = false;
+	}
+}
 
-			const controls = this.hideDuration
-				? defaultControls.filter((control) => control !== 'duration')
-				: defaultControls;
+function setupDownload() {
+	if (!props.download) {
+		setupPlayer();
+	} else if (player.value) {
+		if (typeof props.download === 'string') {
+			player.value.download = props.download;
+		} else if (typeof props.download === 'function') {
+			player.value.download = props.download(props.src || '');
+		}
+	}
+}
 
-			if (this.download) controls.push('download');
-
-			const Plyr = (await import('plyr')).default; // https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
-			this.player = new Plyr(this.$refs.player, {
-				autoplay: this.autoplay,
-				loadSprite: false,
-				resetOnEnd: this.resetOnEnd,
-				invertTime: this.invertTime,
-				iconUrl: '',
-				controls,
-				loop: {
-					active: this.loop,
-				},
-			});
-
-			if (this.resetVolume) this.makeVolumeReset();
-			if (this.download) this.setupDownload();
-
-			if (this.closable) this.appendCloseIcon();
-			this.$emit('initialized', this.player);
-		},
-		makeVolumeReset() {
-			this.player.volume = 1;
-			this.player.muted = false;
-		},
-		setupDownload() {
-			if (!this.download) {
-				this.setupPlayer();
-			} else if (typeof this.download === 'string') {
-				this.player.download = this.download;
-			} else if (typeof this.download === 'function') {
-				this.player.download = this.download(this.src);
-			}
-		},
-		appendCloseIcon() {
-			const plyrControls = this.$refs.player.plyr?.elements?.controls;
-			const closeIcon = this.$refs['close-icon'].$el;
-			if (plyrControls) {
-				plyrControls.append(closeIcon);
-			}
-		},
-	},
-};
+function appendCloseIcon() {
+	// Note: $refs would need to be accessed via template refs in Composition API
+	// const plyrControls = playerRef.value?.plyr?.elements?.controls;
+	// const closeIcon = closeIconRef.value?.$el;
+	// if (plyrControls) {
+	// 	plyrControls.append(closeIcon);
+	// }
+}
 </script>
 
 <style scoped>
