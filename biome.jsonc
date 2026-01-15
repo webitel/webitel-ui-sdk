@@ -14,7 +14,8 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
-		"expand": "always"
+		"expand": "always",
+		"attributePosition": "multiline"
 	},
 	"linter": {
 		"enabled": true,

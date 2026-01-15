@@ -1,10 +1,21 @@
 <template>
   <section class="wt-navigation-menu">
     <article class="wt-navigation-menu__wrapper">
-      <nav-menu-lvl-1 :categories="categoriesArray" :icons="icons" :selected="selected" @select="select">
-        <nav-menu-lvl-2 :categories="activeSubcategories" class="wt-navigation-menu__categories--display" />
+      <nav-menu-lvl-1
+        :categories="categoriesArray"
+        :icons="icons"
+        :selected="selected"
+        @select="select"
+      >
+        <nav-menu-lvl-2
+          :categories="activeSubcategories"
+          class="wt-navigation-menu__categories--display"
+        />
       </nav-menu-lvl-1>
-      <nav-menu-lvl-2 :categories="activeSubcategories" class="wt-navigation-menu__categories--hidden" />
+      <nav-menu-lvl-2
+        :categories="activeSubcategories"
+        class="wt-navigation-menu__categories--hidden"
+      />
     </article>
   </section>
 </template>

@@ -36,7 +36,6 @@
             >
               {{ option.description }}
             </p>
-
             <wt-icon-btn
               v-if="option.description"
               v-tooltip="option.description"
@@ -49,7 +48,6 @@
       <!--Slot for displaying specific template styling-->
       <slot name="after-section" />
     </template>
-
     <template #actions>
       <wt-button
         :disabled="!selected"
@@ -71,82 +69,81 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-	/**
-	 * Popup title
-	 */
+  /**
+   * Popup title
+   */
 
-	title: {
-		type: String,
-	},
+  title: {
+    type: String,
+  },
 
-	/**
-	 * Selected value. The scheme repeats attribute `option` from `options`
-	 */
+  /**
+   * Selected value. The scheme repeats attribute `option` from `options`
+   */
 
-	selected: {
-		type: Object,
-	},
+  selected: {
+    type: Object,
+  },
 
-	/**
-	 * All displayed values. Should have following schema: `{ value: '', title: '', description: '', icon: ''}`
-	 */
+  /**
+   * All displayed values. Should have following schema: `{ value: '', title: '', description: '', icon: ''}`
+   */
 
-	options: {
-		type: Array,
-		default: () => [],
-	},
+  options: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 const emit = defineEmits([
-	'change',
-	'add',
-	'close',
+  'change',
+  'add',
+  'close',
 ]);
 
 const { t } = useI18n();
 
 function add() {
-	emit('add', props.selected);
+  emit('add', props.selected);
 }
 
 function close() {
-	emit('close');
+  emit('close');
 }
 
 function selectOption(option) {
-	emit('change', option);
+  emit('change', option);
 }
 </script>
 
 <style scoped>
 .wt-selection-popup__options {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
 .wt-selection-popup__item-wrapper {
-    display: flex;
-    position: relative;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border: 1px solid var(--text-main-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs);
-
-    .wt-selection-popup:hover,
-    .wt-selection-popup.active {
-      border: 1px solid var(--primary-color);
+  display: flex;
+  position: relative;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid var(--text-main-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs);
 }
 
-.wt-selection-popup .wt-icon {
+.wt-selection-popup__item-wrapper:hover,
+.wt-selection-popup__item-wrapper.active {
+  border: 1px solid var(--primary-color);
+}
+
+.wt-selection-popup__item-wrapper :deep(.wt-icon) {
   margin-right: var(--spacing-xs);
 }
 
-.wt-selection-popup .wt-tooltip {
+.wt-selection-popup__item-wrapper :deep(.wt-tooltip) {
   margin-left: auto;
-}
-
 }
 </style>

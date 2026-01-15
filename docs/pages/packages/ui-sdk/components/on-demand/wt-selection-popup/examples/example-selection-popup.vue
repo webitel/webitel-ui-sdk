@@ -1,8 +1,20 @@
 <template>
   <div>
-    <wt-button @click="isShownPopup = true"> Open popup </wt-button>
-    <wt-selection-popup :options="options" :selected="selected" :shown="isShownPopup" title="Add group" v-bind="$attrs"
-      @add="create" @change="change" @close="close" />
+    <wt-button
+      @click="isShownPopup = true"
+    >
+      Open popup
+    </wt-button>
+    <wt-selection-popup
+      :options="options"
+      :selected="selected"
+      :shown="isShownPopup"
+      title="Add group"
+      v-bind="$attrs"
+      @add="create"
+      @change="change"
+      @close="close"
+    />
   </div>
 </template>
 
@@ -16,7 +28,7 @@ const isShownPopup = ref(false);
 const options = computed(() => {
   return [
     { value: 'static', title: 'static' },
-    { value: 'dinamyc', title: 'dinamyc' },
+    { value: 'dynamic', title: 'dynamic' },
   ];
 });
 
