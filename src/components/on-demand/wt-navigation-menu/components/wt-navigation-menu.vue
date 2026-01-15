@@ -104,63 +104,58 @@ function select(category) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '@webitel/styleguide/viewport-breakpoints' as *;
+
 .wt-navigation-menu {
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
   height: 100%;
+
   --button-min-height: 60px;
   --wrapper-width: 60%;
   --wrapper-height: calc(var(--spacing-sm) * 2 + var(--button-min-height) * 7 + var(--spacing-2xs) * 6);
-  /* Reuse global viewport breakpoints from main.css */
-  --viewport-sm-value: var(--viewport-sm);
-  /* 960px from main.css */
-  --viewport-xs-value: var(--viewport-xs);
-  /* 600px from main.css */
-}
 
-/* Using --viewport-sm-value which references --viewport-sm from main.css - CSS custom properties cannot be used in media queries */
-@media only screen and (max-width: var(--viewport-sm)) {
-  .wt-navigation-menu {
+  @media only screen and (max-width: $viewport-sm) {
     --wrapper-width: 80%;
   }
-}
 
-/* Using --viewport-xs-value which references --viewport-xs from main.css - CSS custom properties cannot be used in media queries */
-@media only screen and (max-width: var(--viewport-xs)) {
-  .wt-navigation-menu {
+  @media only screen and (max-width: $viewport-xs) {
     --wrapper-width: 100%;
     --wrapper-height: 100%;
   }
 }
 
-.wt-navigation-menu .wt-navigation-menu__wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  box-sizing: border-box;
-  margin: auto;
-  border-radius: var(--spacing-xs);
-  background: var(--content-wrapper-color);
-  padding: var(--spacing-sm);
-  width: var(--wrapper-width);
-  height: var(--wrapper-height);
-  grid-gap: var(--spacing-sm);
-}
+  .wt-navigation-menu__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    box-sizing: border-box;
+    margin: auto;
+    border-radius: var(--spacing-xs);
+    background: var(--content-wrapper-color);
+    padding: var(--spacing-sm);
+    width: var(--wrapper-width);
+    height: var(--wrapper-height);
+    grid-gap: var(--spacing-sm);
 
-/* Using --viewport-xs-value which references --viewport-xs from main.css - CSS custom properties cannot be used in media queries */
-@media only screen and (max-width: var(--viewport-xs)) {
-  .wt-navigation-menu .wt-navigation-menu__wrapper {
-    grid-template-columns: 1fr;
+    @media only screen and (max-width: $viewport-xs) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .wt-navigation-menu__categories--display {
-    display: block;
+    display: none;
+
+    @media only screen and (max-width: $viewport-xs) {
+      display: block;
+    }
   }
 
   .wt-navigation-menu__categories--hidden {
-    display: none;
+    @media only screen and (max-width: $viewport-xs) {
+      display: none;
+    }
   }
-}
 </style>
