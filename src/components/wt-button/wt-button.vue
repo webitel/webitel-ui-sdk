@@ -177,11 +177,11 @@ watch(
 	position: relative;
 }
 
-.wt-button.p-button {
 .wt-button--with-badge {
       overflow: visible;
-  }
+}
 
+.wt-button.p-button {
   .wt-button__contents {
 	display: contents;
   }
