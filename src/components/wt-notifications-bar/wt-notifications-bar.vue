@@ -1,6 +1,7 @@
 <template>
-  <aside class="wt-notifications-bar">
+  <aside class="wt-notifications-bar wt-scrollbar">
     <transition-group
+	class="wt-notifications-bar__wrapper"
       name="wt-notifications-transition"
       tag="div"
     >
@@ -75,8 +76,11 @@ export default {
   overflow-y: auto;
 }
 
-.wt-notifications-bar > * {
-  margin: var(--notifications-bar-notifications-margin);
+.wt-notifications-bar__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-height: 0;
 }
 
 .wt-notifications-transition-enter-active,

@@ -1,4 +1,7 @@
 import { TooltipScheme } from '@webitel/styleguide/component-schemes';
+import { WtTypography } from '@webitel/styleguide/enums';
+
+import { generateWtTypographyCustomCss } from '../../_shared/generators/generateWtTypographyCustomCss';
 
 const tooltip = {
 	root: TooltipScheme.sizes,
@@ -6,6 +9,10 @@ const tooltip = {
 
 	css: ({ dt }) => `
       .p-tooltip-text {
+        ${generateWtTypographyCustomCss({
+          dt,
+          typo: WtTypography.Caption,
+        })}
           white-space: pre-line;
           word-break: normal;
           background: ${dt('tooltip.background')};
