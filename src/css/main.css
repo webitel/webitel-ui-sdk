@@ -1,7 +1,7 @@
-@import "styleguide/styleguide.css";
-@import "components-variables.css";
-@import "pages/table-page.css";
-@import "pages/card-page.css";
+@import "./styleguide/styleguide.css";
+@import "./components-variables.css";
+@import "./pages/table-page.css";
+@import "./pages/card-page.css";
 
 :root {
 	--transition: 0.2s;

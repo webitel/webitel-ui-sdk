@@ -1,6 +1,5 @@
 <script setup>
 import Specs from './component-specs.vue';
-import Docs from './wt-avatar-docs.vue';
 import ExampleAvatarLetters from './examples/example-avatar-letters.vue';
 import ExampleAvatarWithStatus from './examples/example-avatar-with-status.vue';
 </script>
