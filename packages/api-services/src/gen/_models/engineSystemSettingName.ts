@@ -41,7 +41,7 @@ export const EngineSystemSettingName = {
   PasswordExpiryDays: 'password_expiry_days',
   PasswordMinLength: 'password_min_length',
   PasswordCategories: 'password_categories',
-  PasswordContainsUsername: 'password_contains_username',
+  PasswordContainsLogin: 'password_contains_login',
   PasswordWarningDays: 'password_warning_days',
   DefaultPassword: 'default_password',
 } as const;
