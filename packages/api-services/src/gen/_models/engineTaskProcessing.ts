@@ -8,9 +8,9 @@ import type { EngineLookup } from './engineLookup';
 import type { EngineTaskProcessingProlongationOptions } from './engineTaskProcessingProlongationOptions';
 
 export interface EngineTaskProcessing {
-  enabled?: boolean;
-  formSchema?: EngineLookup;
-  prolongationOptions?: EngineTaskProcessingProlongationOptions;
-  renewalSec?: number;
-  sec?: number;
+	enabled?: boolean;
+	formSchema?: EngineLookup;
+	prolongationOptions?: EngineTaskProcessingProlongationOptions;
+	renewalSec?: number;
+	sec?: number;
 }

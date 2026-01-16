@@ -9,12 +9,12 @@ import type { ApiLicense } from './apiLicense';
 import type { ApiValidity } from './apiValidity';
 
 export interface ApiCertificate {
-  domains?: ApiCertificateDomains;
-  license?: ApiLicense[];
-  nextUpdate?: string;
-  serial?: string;
-  thisUpdate?: string;
-  valid?: boolean;
-  validity?: ApiValidity;
-  version?: string;
+	domains?: ApiCertificateDomains;
+	license?: ApiLicense[];
+	nextUpdate?: string;
+	serial?: string;
+	thisUpdate?: string;
+	valid?: boolean;
+	validity?: ApiValidity;
+	version?: string;
 }

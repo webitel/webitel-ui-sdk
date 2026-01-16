@@ -6,6 +6,6 @@
  */
 
 export interface UpdateAccessRequestChanges {
-  access?: string;
-  granteeId?: string;
+	access?: string;
+	granteeId?: string;
 }

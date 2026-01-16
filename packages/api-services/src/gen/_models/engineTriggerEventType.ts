@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerEventType = typeof EngineTriggerEventType[keyof typeof EngineTriggerEventType];
-
+export type EngineTriggerEventType =
+	(typeof EngineTriggerEventType)[keyof typeof EngineTriggerEventType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerEventType = {
-  EmptyTriggerEvent: 'empty_trigger_event',
-  Create: 'create',
-  Update: 'update',
-  Remove: 'remove',
-  ResolutionTime: 'resolution_time',
+	EmptyTriggerEvent: 'empty_trigger_event',
+	Create: 'create',
+	Update: 'update',
+	Remove: 'remove',
+	ResolutionTime: 'resolution_time',
 } as const;

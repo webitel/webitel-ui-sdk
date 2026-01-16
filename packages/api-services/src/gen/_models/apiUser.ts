@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiObjectId } from './apiObjectId';
-import type { ApiUserId } from './apiUserId';
+
 import type { ApiLicenseUser } from './apiLicenseUser';
+import type { ApiObjectId } from './apiObjectId';
 import type { ApiPermission } from './apiPermission';
+import type { ApiUserId } from './apiUserId';
 import type { ApiUserPresence } from './apiUserPresence';
 import type { ApiUserProfile } from './apiUserProfile';
 
@@ -15,35 +16,35 @@ import type { ApiUserProfile } from './apiUserProfile';
  * User profile.
  */
 export interface ApiUser {
-  /** The "chat_name" field is used to store the name displayed externally on the platform.
+	/** The "chat_name" field is used to store the name displayed externally on the platform.
 For example, "chat_name" is shown when an agent connects to chats with clients. */
-  chatName?: string;
-  /** [optional] contact connected to this user */
-  contact?: ApiObjectId;
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  deletedAt?: string;
-  deletedBy?: ApiUserId;
-  device?: ApiObjectId;
-  /** [editable] list of unique `regular` devices, attached to this user */
-  devices?: ApiObjectId[];
-  email?: string;
-  extension?: string;
-  /** When set to true, the user will be required to change their password on next login. */
-  forcePasswordChange?: boolean;
-  hotdesks?: ApiObjectId[];
-  id?: string;
-  license?: ApiLicenseUser[];
-  name?: string;
-  password?: string;
-  permissions?: ApiPermission[];
-  /** string presence = 7; // unique set of <user> presentity <status:basic> tuples open[ed]
+	chatName?: string;
+	/** [optional] contact connected to this user */
+	contact?: ApiObjectId;
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	deletedAt?: string;
+	deletedBy?: ApiUserId;
+	device?: ApiObjectId;
+	/** [editable] list of unique `regular` devices, attached to this user */
+	devices?: ApiObjectId[];
+	email?: string;
+	extension?: string;
+	/** When set to true, the user will be required to change their password on next login. */
+	forcePasswordChange?: boolean;
+	hotdesks?: ApiObjectId[];
+	id?: string;
+	license?: ApiLicenseUser[];
+	name?: string;
+	password?: string;
+	permissions?: ApiPermission[];
+	/** string presence = 7; // unique set of <user> presentity <status:basic> tuples open[ed]
  string status = 8; // short display status (short description) */
-  presence?: ApiUserPresence;
-  profile?: ApiUserProfile;
-  roles?: ApiObjectId[];
-  totpUrl?: string;
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  username?: string;
+	presence?: ApiUserPresence;
+	profile?: ApiUserProfile;
+	roles?: ApiObjectId[];
+	totpUrl?: string;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	username?: string;
 }

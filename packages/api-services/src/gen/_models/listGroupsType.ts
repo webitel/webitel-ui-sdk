@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ListGroupsType = typeof ListGroupsType[keyof typeof ListGroupsType];
-
+export type ListGroupsType =
+	(typeof ListGroupsType)[keyof typeof ListGroupsType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ListGroupsType = {
-  GROUP_TYPE_UNSPECIFIED: 'GROUP_TYPE_UNSPECIFIED',
-  STATIC: 'STATIC',
-  DYNAMIC: 'DYNAMIC',
+	GROUP_TYPE_UNSPECIFIED: 'GROUP_TYPE_UNSPECIFIED',
+	STATIC: 'STATIC',
+	DYNAMIC: 'DYNAMIC',
 } as const;

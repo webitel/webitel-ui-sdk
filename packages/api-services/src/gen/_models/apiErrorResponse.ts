@@ -6,8 +6,8 @@
  */
 
 export interface ApiErrorResponse {
-  error?: string;
-  errorDescription?: string;
-  errorUri?: string;
-  state?: string;
+	error?: string;
+	errorDescription?: string;
+	errorUri?: string;
+	state?: string;
 }

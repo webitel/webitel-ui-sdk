@@ -4,18 +4,19 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { StorageUploadFileChannel } from './storageUploadFileChannel';
+
 import type { StorageCustomFileProperties } from './storageCustomFileProperties';
+import type { StorageUploadFileChannel } from './storageUploadFileChannel';
 
 export interface StorageSafeUploadFileRequestMetadata {
-  channel?: StorageUploadFileChannel;
-  domainId?: string;
-  generateThumbnail?: boolean;
-  mimeType?: string;
-  name?: string;
-  profileId?: string;
-  progress?: boolean;
-  properties?: StorageCustomFileProperties;
-  streamResponse?: boolean;
-  uuid?: string;
+	channel?: StorageUploadFileChannel;
+	domainId?: string;
+	generateThumbnail?: boolean;
+	mimeType?: string;
+	name?: string;
+	profileId?: string;
+	progress?: boolean;
+	properties?: StorageCustomFileProperties;
+	streamResponse?: boolean;
+	uuid?: string;
 }

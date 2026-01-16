@@ -8,4 +8,4 @@
 /**
  * map[:role]:oid
  */
-export type ApiAuthorizationRoles = {[key: string]: string};
+export type ApiAuthorizationRoles = { [key: string]: string };

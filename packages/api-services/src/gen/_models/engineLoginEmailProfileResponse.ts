@@ -8,7 +8,7 @@ import type { EngineEmailAuthType } from './engineEmailAuthType';
 import type { EngineLoginEmailProfileResponseCookie } from './engineLoginEmailProfileResponseCookie';
 
 export interface EngineLoginEmailProfileResponse {
-  authType?: EngineEmailAuthType;
-  cookie?: EngineLoginEmailProfileResponseCookie;
-  redirectUrl?: string;
+	authType?: EngineEmailAuthType;
+	cookie?: EngineLoginEmailProfileResponseCookie;
+	redirectUrl?: string;
 }

@@ -6,8 +6,8 @@
  */
 
 export type SetContactLanguageInputBody = {
-  /** Indicates whether this association must be default
+	/** Indicates whether this association must be default
 among others of the same type. */
-  primary?: boolean;
-  tag?: string;
+	primary?: boolean;
+	tag?: string;
 };

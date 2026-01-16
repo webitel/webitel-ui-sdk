@@ -7,10 +7,10 @@
 import type { ApiObjectId } from './apiObjectId';
 
 export interface ApiLicenseUser {
-  expiresAt?: string;
-  id?: string;
-  issuedAt?: string;
-  prod?: string;
-  scope?: string[];
-  user?: ApiObjectId;
+	expiresAt?: string;
+	id?: string;
+	issuedAt?: string;
+	prod?: string;
+	scope?: string[];
+	user?: ApiObjectId;
 }

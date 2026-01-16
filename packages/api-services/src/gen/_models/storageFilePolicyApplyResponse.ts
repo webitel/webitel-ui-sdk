@@ -6,5 +6,5 @@
  */
 
 export interface StorageFilePolicyApplyResponse {
-  count?: string;
+	count?: string;
 }

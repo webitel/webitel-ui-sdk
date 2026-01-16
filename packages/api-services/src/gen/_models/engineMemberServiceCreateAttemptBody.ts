@@ -6,6 +6,6 @@
  */
 
 export interface EngineMemberServiceCreateAttemptBody {
-  agentId?: string;
-  domainId?: string;
+	agentId?: string;
+	domainId?: string;
 }

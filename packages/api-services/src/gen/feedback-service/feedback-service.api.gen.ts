@@ -6,52 +6,45 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CreateFeedbackParams,
-  EngineFeedback,
-  GetFeedbackParams
+	CreateFeedbackParams,
+	EngineFeedback,
+	GetFeedbackParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getFeedbackService =
+		// --- title end
+		() => {
+			// --- header end
+			const getFeedback = <TData = AxiosResponse<EngineFeedback>>(
+				params?: GetFeedbackParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/feedback', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const createFeedback = <TData = AxiosResponse<EngineFeedback>>(
+				params?: CreateFeedbackParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post('/feedback', undefined, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return { getFeedback, createFeedback };
+		};
+export type GetFeedbackResult = AxiosResponse<EngineFeedback>;
+export type CreateFeedbackResult = AxiosResponse<EngineFeedback>;
 
-  export const 
-            // --- title start
-            getFeedbackService
-            // --- title end
-           = () => {
-
-            // --- header end
-          const getFeedback = <TData = AxiosResponse<EngineFeedback>>(
-    params?: GetFeedbackParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/feedback`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createFeedback = <TData = AxiosResponse<EngineFeedback>>(
-    params?: CreateFeedbackParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.post(
-      `/feedback`,undefined,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {getFeedback,createFeedback}};
-export type GetFeedbackResult = AxiosResponse<EngineFeedback>
-export type CreateFeedbackResult = AxiosResponse<EngineFeedback>
-
-            // --- footer end
-          
+// --- footer end

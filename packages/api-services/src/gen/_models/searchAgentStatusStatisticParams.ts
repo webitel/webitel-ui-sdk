@@ -6,22 +6,22 @@
  */
 
 export type SearchAgentStatusStatisticParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-agentId?: string[];
-timeFrom?: string;
-timeTo?: string;
-status?: string[];
-queueId?: number[];
-teamId?: number[];
-utilizationFrom?: string;
-utilizationTo?: string;
-hasCall?: boolean;
-skillId?: number[];
-regionId?: number[];
-supervisorId?: number[];
-auditorId?: string[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	agentId?: string[];
+	timeFrom?: string;
+	timeTo?: string;
+	status?: string[];
+	queueId?: number[];
+	teamId?: number[];
+	utilizationFrom?: string;
+	utilizationTo?: string;
+	hasCall?: boolean;
+	skillId?: number[];
+	regionId?: number[];
+	supervisorId?: number[];
+	auditorId?: string[];
 };

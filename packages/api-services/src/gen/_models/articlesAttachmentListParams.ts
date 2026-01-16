@@ -6,16 +6,16 @@
  */
 
 export type ArticlesAttachmentListParams = {
-/**
- * Page number of result dataset records. offset = (page*size)
- */
-page?: number;
-/**
- * Size count of records on result page. limit = (size++)
- */
-size?: number;
-/**
- * Sort the result according to fields.
- */
-sort?: string[];
+	/**
+	 * Page number of result dataset records. offset = (page*size)
+	 */
+	page?: number;
+	/**
+	 * Size count of records on result page. limit = (size++)
+	 */
+	size?: number;
+	/**
+	 * Sort the result according to fields.
+	 */
+	sort?: string[];
 };

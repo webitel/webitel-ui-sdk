@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentInQueueStatisticsAgentInQueueStatisticsItem {
-  bucket?: EngineLookup;
-  memberWaiting?: number;
-  skill?: EngineLookup;
+	bucket?: EngineLookup;
+	memberWaiting?: number;
+	skill?: EngineLookup;
 }

@@ -10,9 +10,9 @@ import type { ContactsPhoto } from './contactsPhoto';
  * Photo dataset.
  */
 export interface ContactsPhotoList {
-  /** Photo dataset page. */
-  data?: ContactsPhoto[];
-  next?: boolean;
-  /** The page number of the partial result. */
-  page?: number;
+	/** Photo dataset page. */
+	data?: ContactsPhoto[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

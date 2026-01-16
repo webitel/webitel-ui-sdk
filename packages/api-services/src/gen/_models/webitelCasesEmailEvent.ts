@@ -4,21 +4,22 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelCasesAttachment } from './webitelCasesAttachment';
+
 import type { GeneralLookup } from './generalLookup';
+import type { WebitelCasesAttachment } from './webitelCasesAttachment';
 
 export interface WebitelCasesEmailEvent {
-  attachments?: WebitelCasesAttachment[];
-  body?: string;
-  cc?: string[];
-  from?: string[];
-  html?: string;
-  id?: string;
-  isDetailed?: boolean;
-  isInbound?: boolean;
-  owner?: GeneralLookup;
-  profile?: GeneralLookup;
-  sender?: string[];
-  subject?: string;
-  to?: string[];
+	attachments?: WebitelCasesAttachment[];
+	body?: string;
+	cc?: string[];
+	from?: string[];
+	html?: string;
+	id?: string;
+	isDetailed?: boolean;
+	isInbound?: boolean;
+	owner?: GeneralLookup;
+	profile?: GeneralLookup;
+	sender?: string[];
+	subject?: string;
+	to?: string[];
 }

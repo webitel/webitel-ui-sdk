@@ -6,8 +6,8 @@
  */
 
 export type UserInfo2Params = {
-/**
- * string id_token = 2;
- */
-accessToken?: string;
+	/**
+	 * string id_token = 2;
+	 */
+	accessToken?: string;
 };

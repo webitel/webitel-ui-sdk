@@ -10,11 +10,11 @@
 Output purpose only.
  */
 export interface ContactsInputLabel {
-  /** Unique ID of the latest version of an existing resorce. */
-  etag?: string;
-  /** REQUIRED. Hashtag value;
+	/** Unique ID of the latest version of an existing resorce. */
+	etag?: string;
+	/** REQUIRED. Hashtag value;
 NOTE: Keep in mind, hashtags are not case-sensitive,
 but adding capital letters does make them easier to read:
 #MakeAWish vs. #makeawish. */
-  label?: string;
+	label?: string;
 }

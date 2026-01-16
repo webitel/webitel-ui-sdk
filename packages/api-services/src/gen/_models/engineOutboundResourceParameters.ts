@@ -6,6 +6,6 @@
  */
 
 export interface EngineOutboundResourceParameters {
-  cidType?: string;
-  ignoreEarlyMedia?: string;
+	cidType?: string;
+	ignoreEarlyMedia?: string;
 }

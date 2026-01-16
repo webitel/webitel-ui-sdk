@@ -6,5 +6,5 @@
  */
 
 export type DeleteSkillParams = {
-domainId?: string;
+	domainId?: string;
 };

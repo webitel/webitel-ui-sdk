@@ -6,8 +6,8 @@
  */
 
 export type Update2Params = {
-/**
- * Source Fields to return into result.
- */
-fields?: string[];
+	/**
+	 * Source Fields to return into result.
+	 */
+	fields?: string[];
 };

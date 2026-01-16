@@ -6,6 +6,6 @@
  */
 
 export interface StorageDeleteFileTranscriptRequest {
-  id?: string[];
-  uuid?: string[];
+	id?: string[];
+	uuid?: string[];
 }

@@ -6,16 +6,16 @@
  */
 
 export type ListRegistrationsParams = {
-/**
- * Object ID
- */
-userId?: string;
-/**
- * Display Name
- */
-userName?: string;
-/**
- * Display Name
- */
-deviceName?: string;
+	/**
+	 * Object ID
+	 */
+	userId?: string;
+	/**
+	 * Display Name
+	 */
+	userName?: string;
+	/**
+	 * Display Name
+	 */
+	deviceName?: string;
 };

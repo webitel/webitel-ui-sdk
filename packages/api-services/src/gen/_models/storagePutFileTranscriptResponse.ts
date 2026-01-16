@@ -6,5 +6,5 @@
  */
 
 export interface StoragePutFileTranscriptResponse {
-  id?: string;
+	id?: string;
 }

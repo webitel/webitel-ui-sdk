@@ -9,18 +9,18 @@ import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommu
 import type { EngineMemberServicePatchMemberBodyVariables } from './engineMemberServicePatchMemberBodyVariables';
 
 export interface EngineMemberServicePatchMemberBody {
-  agent?: EngineLookup;
-  attempts?: number;
-  bucket?: EngineLookup;
-  communications?: EngineMemberCommunicationCreateRequest[];
-  domainId?: string;
-  expireAt?: string;
-  fields?: string[];
-  minOfferingAt?: string;
-  name?: string;
-  priority?: number;
-  skill?: EngineLookup;
-  stopCause?: string;
-  timezone?: EngineLookup;
-  variables?: EngineMemberServicePatchMemberBodyVariables;
+	agent?: EngineLookup;
+	attempts?: number;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	domainId?: string;
+	expireAt?: string;
+	fields?: string[];
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	stopCause?: string;
+	timezone?: EngineLookup;
+	variables?: EngineMemberServicePatchMemberBodyVariables;
 }

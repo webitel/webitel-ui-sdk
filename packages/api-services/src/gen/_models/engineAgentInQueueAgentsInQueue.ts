@@ -6,10 +6,10 @@
  */
 
 export interface EngineAgentInQueueAgentsInQueue {
-  allowPause?: number;
-  free?: number;
-  offline?: number;
-  online?: number;
-  pause?: number;
-  total?: number;
+	allowPause?: number;
+	free?: number;
+	offline?: number;
+	online?: number;
+	pause?: number;
+	total?: number;
 }

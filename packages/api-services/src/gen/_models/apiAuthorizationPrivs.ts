@@ -8,4 +8,4 @@
 /**
  * map[:priv]:uuid { "sysadmin":1, "CALL_MANAGER":712342168, "CALL_CENTER":32435456 }
  */
-export type ApiAuthorizationPrivs = {[key: string]: string};
+export type ApiAuthorizationPrivs = { [key: string]: string };

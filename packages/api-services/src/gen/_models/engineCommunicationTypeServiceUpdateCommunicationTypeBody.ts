@@ -7,9 +7,9 @@
 import type { EngineCommunicationChannels } from './engineCommunicationChannels';
 
 export interface EngineCommunicationTypeServiceUpdateCommunicationTypeBody {
-  channel?: EngineCommunicationChannels;
-  code?: string;
-  default?: boolean;
-  description?: string;
-  name?: string;
+	channel?: EngineCommunicationChannels;
+	code?: string;
+	default?: boolean;
+	description?: string;
+	name?: string;
 }

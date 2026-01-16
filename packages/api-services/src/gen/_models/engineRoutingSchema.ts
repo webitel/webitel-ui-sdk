@@ -4,20 +4,21 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { EngineSchemaTag } from './engineSchemaTag';
+
 import type { EngineLookup } from './engineLookup';
 import type { EngineRoutingSchemaType } from './engineRoutingSchemaType';
+import type { EngineSchemaTag } from './engineSchemaTag';
 
 export interface EngineRoutingSchema {
-  tags?: EngineSchemaTag[];
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  debug?: boolean;
-  description?: string;
-  editor?: boolean;
-  id?: string;
-  name?: string;
-  type?: EngineRoutingSchemaType;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	tags?: EngineSchemaTag[];
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	debug?: boolean;
+	description?: string;
+	editor?: boolean;
+	id?: string;
+	name?: string;
+	type?: EngineRoutingSchemaType;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

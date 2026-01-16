@@ -6,8 +6,8 @@
  */
 
 export interface EnginePresetQueryServicePatchPresetQueryBody {
-  description?: string;
-  fields?: string[];
-  name?: string;
-  section?: string;
+	description?: string;
+	fields?: string[];
+	name?: string;
+	section?: string;
 }

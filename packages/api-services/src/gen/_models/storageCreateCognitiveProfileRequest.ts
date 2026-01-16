@@ -11,10 +11,10 @@ import type { StorageServiceType } from './storageServiceType';
  * Create cognitive profile request body for TTS and TTS
  */
 export interface StorageCreateCognitiveProfileRequest {
-  default?: boolean;
-  description?: string;
-  enabled?: boolean;
-  name: string;
-  provider: StorageProviderType;
-  service: StorageServiceType;
+	default?: boolean;
+	description?: string;
+	enabled?: boolean;
+	name: string;
+	provider: StorageProviderType;
+	service: StorageServiceType;
 }

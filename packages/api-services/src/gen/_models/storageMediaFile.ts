@@ -7,12 +7,12 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface StorageMediaFile {
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  id?: string;
-  mimeType?: string;
-  name?: string;
-  size?: string;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	size?: string;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

@@ -6,9 +6,9 @@
  */
 
 export type SearchQueueTagsParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
 };

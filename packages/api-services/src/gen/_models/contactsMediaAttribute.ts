@@ -9,8 +9,8 @@ import type { MediaAttributeImage } from './mediaAttributeImage';
 import type { MediaAttributeVideo } from './mediaAttributeVideo';
 
 export interface ContactsMediaAttribute {
-  audio?: MediaAttributeAudio;
-  filename?: string;
-  image?: MediaAttributeImage;
-  video?: MediaAttributeVideo;
+	audio?: MediaAttributeAudio;
+	filename?: string;
+	image?: MediaAttributeImage;
+	video?: MediaAttributeVideo;
 }

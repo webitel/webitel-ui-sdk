@@ -6,17 +6,17 @@
  */
 
 export type UpdateCustomerParams = {
-/**
- * [optional] e.g.: Example Org.
- */
-organization?: string;
-/**
- * [optional] logo source image
- */
-logoPicture?: string;
-/**
- * [optional] raw bytes protobuf::base64.RawStdEncoding != certificate::base64.StdEncoding
- */
-certificate?: string;
-revoke?: boolean;
+	/**
+	 * [optional] e.g.: Example Org.
+	 */
+	organization?: string;
+	/**
+	 * [optional] logo source image
+	 */
+	logoPicture?: string;
+	/**
+	 * [optional] raw bytes protobuf::base64.RawStdEncoding != certificate::base64.StdEncoding
+	 */
+	certificate?: string;
+	revoke?: boolean;
 };

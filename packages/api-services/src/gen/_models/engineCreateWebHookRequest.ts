@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCreateWebHookRequest {
-  authorization?: string;
-  description?: string;
-  enabled?: boolean;
-  name?: string;
-  origin?: string[];
-  schema?: EngineLookup;
+	authorization?: string;
+	description?: string;
+	enabled?: boolean;
+	name?: string;
+	origin?: string[];
+	schema?: EngineLookup;
 }

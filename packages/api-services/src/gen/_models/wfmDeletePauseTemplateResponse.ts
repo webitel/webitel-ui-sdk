@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeletePauseTemplateResponse {
-  id?: string;
+	id?: string;
 }

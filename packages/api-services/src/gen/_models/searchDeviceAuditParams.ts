@@ -6,33 +6,33 @@
  */
 
 export type SearchDeviceAuditParams = {
-/**
- * Object ID
- */
-userId?: string;
-/**
- * Display Name
- */
-userName?: string;
-/**
- * Display Name
- */
-deviceName?: string;
-/**
+	/**
+	 * Object ID
+	 */
+	userId?: string;
+	/**
+	 * Display Name
+	 */
+	userName?: string;
+	/**
+	 * Display Name
+	 */
+	deviceName?: string;
+	/**
  * Filter: timing range (optional)
 
 unix milliseconds
  */
-timeFrom?: string;
-/**
- * unix milliseconds
- */
-timeTill?: string;
-/**
- * Search Options
- */
-fields?: string[];
-sort?: string[];
-size?: number;
-page?: number;
+	timeFrom?: string;
+	/**
+	 * unix milliseconds
+	 */
+	timeTill?: string;
+	/**
+	 * Search Options
+	 */
+	fields?: string[];
+	sort?: string[];
+	size?: number;
+	page?: number;
 };

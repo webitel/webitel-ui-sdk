@@ -7,5 +7,5 @@
 import type { ApiUser } from './apiUser';
 
 export interface ApiDeleteUsersResponse {
-  deleted?: ApiUser[];
+	deleted?: ApiUser[];
 }

@@ -6,6 +6,6 @@
  */
 
 export interface WfmHoliday {
-  date?: string;
-  name?: string;
+	date?: string;
+	name?: string;
 }

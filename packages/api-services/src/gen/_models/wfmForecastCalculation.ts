@@ -7,14 +7,14 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmForecastCalculation {
-  args?: string[];
-  createdAt?: string;
-  createdBy?: WfmLookupEntity;
-  description?: string;
-  domainId?: string;
-  id?: string;
-  name?: string;
-  procedure?: string;
-  updatedAt?: string;
-  updatedBy?: WfmLookupEntity;
+	args?: string[];
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	description?: string;
+	domainId?: string;
+	id?: string;
+	name?: string;
+	procedure?: string;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 }

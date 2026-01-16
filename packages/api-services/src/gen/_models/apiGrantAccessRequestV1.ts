@@ -7,7 +7,7 @@
 import type { ApiObjectId } from './apiObjectId';
 
 export interface ApiGrantAccessRequestV1 {
-  grantee?: string;
-  grants?: string;
-  object?: ApiObjectId;
+	grantee?: string;
+	grants?: string;
+	object?: ApiObjectId;
 }

@@ -6,7 +6,7 @@
  */
 
 export type SearchRoutingVariableParams = {
-page?: number;
-size?: number;
-domainId?: string;
+	page?: number;
+	size?: number;
+	domainId?: string;
 };

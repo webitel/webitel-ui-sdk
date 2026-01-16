@@ -7,6 +7,6 @@
 import type { EngineOpenedWebSocket } from './engineOpenedWebSocket';
 
 export interface EngineListOpenedWebSocket {
-  items?: EngineOpenedWebSocket[];
-  next?: boolean;
+	items?: EngineOpenedWebSocket[];
+	next?: boolean;
 }

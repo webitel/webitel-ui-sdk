@@ -6,8 +6,8 @@
  */
 
 export type UpdateLinkParams = {
-/**
- * on return
- */
-fields?: string[];
+	/**
+	 * on return
+	 */
+	fields?: string[];
 };

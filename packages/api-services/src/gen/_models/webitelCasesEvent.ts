@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelCasesCallEvent } from './webitelCasesCallEvent';
+import type { WebitelCasesCaseTimelineEventType } from './webitelCasesCaseTimelineEventType';
 import type { WebitelCasesChatEvent } from './webitelCasesChatEvent';
 import type { WebitelCasesEmailEvent } from './webitelCasesEmailEvent';
-import type { WebitelCasesCaseTimelineEventType } from './webitelCasesCaseTimelineEventType';
 
 export interface WebitelCasesEvent {
-  call?: WebitelCasesCallEvent;
-  chat?: WebitelCasesChatEvent;
-  createdAt?: string;
-  email?: WebitelCasesEmailEvent;
-  type?: WebitelCasesCaseTimelineEventType;
+	call?: WebitelCasesCallEvent;
+	chat?: WebitelCasesChatEvent;
+	createdAt?: string;
+	email?: WebitelCasesEmailEvent;
+	type?: WebitelCasesCaseTimelineEventType;
 }

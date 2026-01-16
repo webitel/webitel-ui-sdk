@@ -7,6 +7,6 @@
 import type { EngineResourceDisplay } from './engineResourceDisplay';
 
 export interface EngineListOutboundResourceDisplay {
-  items?: EngineResourceDisplay[];
-  next?: boolean;
+	items?: EngineResourceDisplay[];
+	next?: boolean;
 }

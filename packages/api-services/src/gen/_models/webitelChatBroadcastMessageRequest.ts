@@ -4,13 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+
+import type { WebitelChatBroadcastMessageRequestVariables } from './webitelChatBroadcastMessageRequestVariables';
 import type { WebitelChatInputMessage } from './webitelChatInputMessage';
 import type { WebitelChatInputPeer } from './webitelChatInputPeer';
-import type { WebitelChatBroadcastMessageRequestVariables } from './webitelChatBroadcastMessageRequestVariables';
 
 export interface WebitelChatBroadcastMessageRequest {
-  message?: WebitelChatInputMessage;
-  peers?: WebitelChatInputPeer[];
-  timeout?: string;
-  variables?: WebitelChatBroadcastMessageRequestVariables;
+	message?: WebitelChatInputMessage;
+	peers?: WebitelChatInputPeer[];
+	timeout?: string;
+	variables?: WebitelChatBroadcastMessageRequestVariables;
 }

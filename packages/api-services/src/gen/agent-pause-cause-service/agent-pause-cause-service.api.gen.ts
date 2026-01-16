@@ -6,90 +6,107 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineAgentPauseCause,
-  EngineAgentPauseCauseServicePatchAgentPauseCauseBody,
-  EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody,
-  EngineCreateAgentPauseCauseRequest,
-  EngineListAgentPauseCause,
-  SearchAgentPauseCauseParams
+	EngineAgentPauseCause,
+	EngineAgentPauseCauseServicePatchAgentPauseCauseBody,
+	EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody,
+	EngineCreateAgentPauseCauseRequest,
+	EngineListAgentPauseCause,
+	SearchAgentPauseCauseParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getAgentPauseCauseService =
+		// --- title end
+		() => {
+			// --- header end
+			const searchAgentPauseCause = <
+				TData = AxiosResponse<EngineListAgentPauseCause>,
+			>(
+				params?: SearchAgentPauseCauseParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/call_center/pause_causes', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const createAgentPauseCause = <
+				TData = AxiosResponse<EngineAgentPauseCause>,
+			>(
+				engineCreateAgentPauseCauseRequest: EngineCreateAgentPauseCauseRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post(
+					'/call_center/pause_causes',
+					engineCreateAgentPauseCauseRequest,
+					options,
+				);
+			};
+			const deleteAgentPauseCause = <
+				TData = AxiosResponse<EngineAgentPauseCause>,
+			>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/call_center/pause_causes/${id}`, options);
+			};
+			const readAgentPauseCause = <
+				TData = AxiosResponse<EngineAgentPauseCause>,
+			>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/call_center/pause_causes/${id}`, options);
+			};
+			const patchAgentPauseCause = <
+				TData = AxiosResponse<EngineAgentPauseCause>,
+			>(
+				id: number,
+				engineAgentPauseCauseServicePatchAgentPauseCauseBody: EngineAgentPauseCauseServicePatchAgentPauseCauseBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.patch(
+					`/call_center/pause_causes/${id}`,
+					engineAgentPauseCauseServicePatchAgentPauseCauseBody,
+					options,
+				);
+			};
+			const updateAgentPauseCause = <
+				TData = AxiosResponse<EngineAgentPauseCause>,
+			>(
+				id: number,
+				engineAgentPauseCauseServiceUpdateAgentPauseCauseBody: EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.put(
+					`/call_center/pause_causes/${id}`,
+					engineAgentPauseCauseServiceUpdateAgentPauseCauseBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchAgentPauseCause,
+				createAgentPauseCause,
+				deleteAgentPauseCause,
+				readAgentPauseCause,
+				patchAgentPauseCause,
+				updateAgentPauseCause,
+			};
+		};
+export type SearchAgentPauseCauseResult =
+	AxiosResponse<EngineListAgentPauseCause>;
+export type CreateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>;
+export type DeleteAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>;
+export type ReadAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>;
+export type PatchAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>;
+export type UpdateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>;
 
-  export const 
-            // --- title start
-            getAgentPauseCauseService
-            // --- title end
-           = () => {
-
-            // --- header end
-          const searchAgentPauseCause = <TData = AxiosResponse<EngineListAgentPauseCause>>(
-    params?: SearchAgentPauseCauseParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/call_center/pause_causes`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
-    engineCreateAgentPauseCauseRequest: EngineCreateAgentPauseCauseRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.post(
-      `/call_center/pause_causes`,
-      engineCreateAgentPauseCauseRequest,options
-    );
-  }
-const deleteAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/call_center/pause_causes/${id}`,options
-    );
-  }
-const readAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/call_center/pause_causes/${id}`,options
-    );
-  }
-const patchAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
-    id: number,
-    engineAgentPauseCauseServicePatchAgentPauseCauseBody: EngineAgentPauseCauseServicePatchAgentPauseCauseBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.patch(
-      `/call_center/pause_causes/${id}`,
-      engineAgentPauseCauseServicePatchAgentPauseCauseBody,options
-    );
-  }
-const updateAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
-    id: number,
-    engineAgentPauseCauseServiceUpdateAgentPauseCauseBody: EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.put(
-      `/call_center/pause_causes/${id}`,
-      engineAgentPauseCauseServiceUpdateAgentPauseCauseBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchAgentPauseCause,createAgentPauseCause,deleteAgentPauseCause,readAgentPauseCause,patchAgentPauseCause,updateAgentPauseCause}};
-export type SearchAgentPauseCauseResult = AxiosResponse<EngineListAgentPauseCause>
-export type CreateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
-export type DeleteAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
-export type ReadAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
-export type PatchAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
-export type UpdateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
-
-            // --- footer end
-          
+// --- footer end

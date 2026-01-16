@@ -6,16 +6,16 @@
  */
 
 export interface ApiSession {
-  accessedAt?: string;
-  createdAt?: string;
-  dc?: string;
-  domain?: string;
-  expiresAt?: string;
-  id?: string;
-  networkIp?: string;
-  roles?: string[];
-  scope?: string[];
-  userAgent?: string;
-  userId?: string;
-  username?: string;
+	accessedAt?: string;
+	createdAt?: string;
+	dc?: string;
+	domain?: string;
+	expiresAt?: string;
+	id?: string;
+	networkIp?: string;
+	roles?: string[];
+	scope?: string[];
+	userAgent?: string;
+	userId?: string;
+	username?: string;
 }

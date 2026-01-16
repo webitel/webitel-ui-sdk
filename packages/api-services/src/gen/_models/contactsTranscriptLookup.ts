@@ -7,7 +7,7 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsTranscriptLookup {
-  file?: WebitelcontactsLookup;
-  id?: string;
-  locale?: string;
+	file?: WebitelcontactsLookup;
+	id?: string;
+	locale?: string;
 }

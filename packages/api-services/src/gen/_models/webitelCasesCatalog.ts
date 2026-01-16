@@ -8,21 +8,21 @@ import type { GeneralLookup } from './generalLookup';
 import type { WebitelCasesService } from './webitelCasesService';
 
 export interface WebitelCasesCatalog {
-  closeReasonGroup?: GeneralLookup;
-  code?: string;
-  createdAt?: string;
-  createdBy?: GeneralLookup;
-  description?: string;
-  id?: string;
-  name?: string;
-  prefix?: string;
-  searched?: boolean;
-  service?: WebitelCasesService[];
-  skills?: GeneralLookup[];
-  sla?: GeneralLookup;
-  state?: boolean;
-  status?: GeneralLookup;
-  teams?: GeneralLookup[];
-  updatedAt?: string;
-  updatedBy?: GeneralLookup;
+	closeReasonGroup?: GeneralLookup;
+	code?: string;
+	createdAt?: string;
+	createdBy?: GeneralLookup;
+	description?: string;
+	id?: string;
+	name?: string;
+	prefix?: string;
+	searched?: boolean;
+	service?: WebitelCasesService[];
+	skills?: GeneralLookup[];
+	sla?: GeneralLookup;
+	state?: boolean;
+	status?: GeneralLookup;
+	teams?: GeneralLookup[];
+	updatedAt?: string;
+	updatedBy?: GeneralLookup;
 }

@@ -10,28 +10,28 @@ import type { GeneralLookup } from './generalLookup';
  * Represents a comment associated with a case.
  */
 export interface WebitelCasesCaseComment {
-  /** Contact-author of the comment. */
-  author?: GeneralLookup;
-  /** Indicates if the comment can be edited by current user. */
-  canEdit?: boolean;
-  /** Optional relation to the associated case. */
-  caseId?: string;
-  /** Timestamp (in milliseconds) of when the comment was created. */
-  createdAt?: string;
-  /** User who created the comment. */
-  createdBy?: GeneralLookup;
-  /** Indicates if the comment was edited; true if created_at < updated_at. */
-  edited?: boolean;
-  etag?: string;
-  /** Main identifier for read, update, and delete operations. */
-  id?: string;
-  roleIds?: string[];
-  /** The content of the comment. */
-  text?: string;
-  /** Timestamp (in milliseconds) of the last update. */
-  updatedAt?: string;
-  /** User who last updated the comment. */
-  updatedBy?: GeneralLookup;
-  /** Version number of the comment, used for concurrency control. */
-  ver?: number;
+	/** Contact-author of the comment. */
+	author?: GeneralLookup;
+	/** Indicates if the comment can be edited by current user. */
+	canEdit?: boolean;
+	/** Optional relation to the associated case. */
+	caseId?: string;
+	/** Timestamp (in milliseconds) of when the comment was created. */
+	createdAt?: string;
+	/** User who created the comment. */
+	createdBy?: GeneralLookup;
+	/** Indicates if the comment was edited; true if created_at < updated_at. */
+	edited?: boolean;
+	etag?: string;
+	/** Main identifier for read, update, and delete operations. */
+	id?: string;
+	roleIds?: string[];
+	/** The content of the comment. */
+	text?: string;
+	/** Timestamp (in milliseconds) of the last update. */
+	updatedAt?: string;
+	/** User who last updated the comment. */
+	updatedBy?: GeneralLookup;
+	/** Version number of the comment, used for concurrency control. */
+	ver?: number;
 }

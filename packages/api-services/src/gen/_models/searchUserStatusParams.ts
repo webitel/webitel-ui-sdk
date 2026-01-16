@@ -6,10 +6,10 @@
  */
 
 export type SearchUserStatusParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-notUserId?: string[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	notUserId?: string[];
 };

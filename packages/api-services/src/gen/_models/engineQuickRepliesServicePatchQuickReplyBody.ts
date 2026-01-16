@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQuickRepliesServicePatchQuickReplyBody {
-  article?: EngineLookup;
-  fields?: string[];
-  name?: string;
-  queues?: EngineLookup[];
-  teams?: EngineLookup[];
-  text?: string;
+	article?: EngineLookup;
+	fields?: string[];
+	name?: string;
+	queues?: EngineLookup[];
+	teams?: EngineLookup[];
+	text?: string;
 }

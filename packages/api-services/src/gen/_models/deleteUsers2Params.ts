@@ -6,9 +6,9 @@
  */
 
 export type DeleteUsers2Params = {
-/**
- * ONE /users/{id}
- */
-id?: string;
-permanent?: boolean;
+	/**
+	 * ONE /users/{id}
+	 */
+	id?: string;
+	permanent?: boolean;
 };

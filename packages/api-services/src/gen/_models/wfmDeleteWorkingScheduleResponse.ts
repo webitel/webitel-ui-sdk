@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeleteWorkingScheduleResponse {
-  id?: string;
+	id?: string;
 }

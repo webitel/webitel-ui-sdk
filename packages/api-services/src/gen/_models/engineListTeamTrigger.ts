@@ -7,6 +7,6 @@
 import type { EngineTeamTrigger } from './engineTeamTrigger';
 
 export interface EngineListTeamTrigger {
-  items?: EngineTeamTrigger[];
-  next?: boolean;
+	items?: EngineTeamTrigger[];
+	next?: boolean;
 }

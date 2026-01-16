@@ -9,6 +9,6 @@
  * Response confirming the deletion of a record.
  */
 export interface WebitelMediaExporterDeleteExportResponse {
-  /** ID of the deleted record. */
-  id?: string;
+	/** ID of the deleted record. */
+	id?: string;
 }

@@ -6,41 +6,40 @@
  */
 import * as zod from 'zod/v4';
 
-
 /**
  * @summary CreateContactFromConversation creates new contact from the data existing in the conversation and after that links this contact to the external user.
  */
-export const contactLinkingServiceCreateContactFromConversationParams = zod.object({
-  "conversation_id": zod.string()
-})
+export const contactLinkingServiceCreateContactFromConversationParams =
+	zod.object({
+		conversation_id: zod.string(),
+	});
 
-export const contactLinkingServiceCreateContactFromConversationQueryParams = zod.object({
-  "timezoneId": zod.string().optional(),
-  "timezoneName": zod.string().optional(),
-  "ownerId": zod.string().optional(),
-  "ownerName": zod.string().optional(),
-  "label": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "description": zod.string().optional()
-})
+export const contactLinkingServiceCreateContactFromConversationQueryParams =
+	zod.object({
+		timezoneId: zod.string().optional(),
+		timezoneName: zod.string().optional(),
+		ownerId: zod.string().optional(),
+		ownerName: zod.string().optional(),
+		label: zod.array(zod.string()).optional(),
+		name: zod.string().optional(),
+		description: zod.string().optional(),
+	});
 
-export const contactLinkingServiceCreateContactFromConversationResponse = zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+export const contactLinkingServiceCreateContactFromConversationResponse =
+	zod.object({
+		id: zod.string().optional(),
+		name: zod.string().optional(),
+	});
 
 /**
  * @summary LinkContactToClient creates connection between existing internal contact and external client.
  */
 export const contactLinkingServiceLinkContactToClientParams = zod.object({
-  "conversation_id": zod.string()
-})
+	conversation_id: zod.string(),
+});
 
 export const contactLinkingServiceLinkContactToClientQueryParams = zod.object({
-  "contactId": zod.string().optional()
-})
+	contactId: zod.string().optional(),
+});
 
-export const contactLinkingServiceLinkContactToClientResponse = zod.object({
-
-})
-
+export const contactLinkingServiceLinkContactToClientResponse = zod.object({});

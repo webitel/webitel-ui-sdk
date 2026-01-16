@@ -6,8 +6,8 @@
  */
 
 export type LocateCommentParams = {
-/**
- * Specific fields to return for the comment.
- */
-fields?: string[];
+	/**
+	 * Specific fields to return for the comment.
+	 */
+	fields?: string[];
 };
