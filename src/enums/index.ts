@@ -16,6 +16,7 @@ import { MimeTypes } from './MimeTypes/MimeTypes.enum';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
+import { RingtoneType } from './RingtoneType/RingtoneType.js';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
 import { AuditorSections } from './WebitelApplications/AuditorSections';
@@ -26,7 +27,6 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
-import { RingtoneType } from './RingtoneType/RingtoneType.js';
 
 export {
   AbstractUserStatus,
