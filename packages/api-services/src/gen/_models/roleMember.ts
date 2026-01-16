@@ -6,11 +6,11 @@
  */
 
 export interface RoleMember {
-  admin?: boolean;
-  createdAt?: string;
-  createdBy?: string;
-  id?: string;
-  name?: string;
-  updatedAt?: string;
-  updatedBy?: string;
+	admin?: boolean;
+	createdAt?: string;
+	createdBy?: string;
+	id?: string;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: string;
 }

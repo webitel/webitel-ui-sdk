@@ -6,12 +6,12 @@
  */
 
 export interface ApiAccessScope {
-  /** [A]ttribute-[b]ased;  not implemented; next releases ... */
-  abac?: boolean;
-  access?: number;
-  class?: string;
-  /** class: object id */
-  id?: string;
-  obac?: boolean;
-  rbac?: boolean;
+	/** [A]ttribute-[b]ased;  not implemented; next releases ... */
+	abac?: boolean;
+	access?: number;
+	class?: string;
+	/** class: object id */
+	id?: string;
+	obac?: boolean;
+	rbac?: boolean;
 }

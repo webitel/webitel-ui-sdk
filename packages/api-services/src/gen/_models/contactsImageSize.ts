@@ -6,7 +6,7 @@
  */
 
 export interface ContactsImageSize {
-  height?: number;
-  size?: number;
-  width?: number;
+	height?: number;
+	size?: number;
+	width?: number;
 }

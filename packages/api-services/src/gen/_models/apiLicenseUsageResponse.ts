@@ -7,8 +7,8 @@
 import type { ApiLicenseV1 } from './apiLicenseV1';
 
 export interface ApiLicenseUsageResponse {
-  items?: ApiLicenseV1[];
-  next?: boolean;
-  /** this page number ! */
-  page?: number;
+	items?: ApiLicenseV1[];
+	next?: boolean;
+	/** this page number ! */
+	page?: number;
 }

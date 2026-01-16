@@ -4,18 +4,19 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { StorageCreateImportTemplateRequestParameters } from './storageCreateImportTemplateRequestParameters';
+
 import type { EngineLookup } from './engineLookup';
+import type { StorageCreateImportTemplateRequestParameters } from './storageCreateImportTemplateRequestParameters';
 import type { StorageImportSourceType } from './storageImportSourceType';
 
 /**
  * Create import template for CSV
  */
 export interface StorageCreateImportTemplateRequest {
-  parameters: StorageCreateImportTemplateRequestParameters;
-  description?: string;
-  name: string;
-  source?: EngineLookup;
-  sourceId: string;
-  sourceType?: StorageImportSourceType;
+	parameters: StorageCreateImportTemplateRequestParameters;
+	description?: string;
+	name: string;
+	source?: EngineLookup;
+	sourceId: string;
+	sourceType?: StorageImportSourceType;
 }

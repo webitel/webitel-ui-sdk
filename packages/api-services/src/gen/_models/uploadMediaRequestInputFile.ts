@@ -7,7 +7,7 @@
 import type { ContactsMediaAttribute } from './contactsMediaAttribute';
 
 export interface UploadMediaRequestInputFile {
-  meta?: ContactsMediaAttribute[];
-  size?: number;
-  type?: string;
+	meta?: ContactsMediaAttribute[];
+	size?: number;
+	type?: string;
 }

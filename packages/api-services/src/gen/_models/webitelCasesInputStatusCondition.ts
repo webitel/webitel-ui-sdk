@@ -6,8 +6,8 @@
  */
 
 export interface WebitelCasesInputStatusCondition {
-  description?: string;
-  final?: boolean;
-  initial?: boolean;
-  name?: string;
+	description?: string;
+	final?: boolean;
+	initial?: boolean;
+	name?: string;
 }

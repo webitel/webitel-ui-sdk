@@ -4,17 +4,18 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiRoleId } from './apiRoleId';
-import type { ApiLDAProcessOptions } from './apiLDAProcessOptions';
+
 import type { ApiLDAPObjentry } from './apiLDAPObjentry';
+import type { ApiLDAProcessOptions } from './apiLDAProcessOptions';
+import type { ApiRoleId } from './apiRoleId';
 
 export interface ApiLDAProcess {
-  /** Optional. If not <zero> indicates that this process is completed. */
-  completeAt?: string;
-  executeAt?: string;
-  executeBy?: ApiRoleId;
-  id?: string;
-  options?: ApiLDAProcessOptions;
-  progress?: ApiLDAPObjentry[];
-  status?: string;
+	/** Optional. If not <zero> indicates that this process is completed. */
+	completeAt?: string;
+	executeAt?: string;
+	executeBy?: ApiRoleId;
+	id?: string;
+	options?: ApiLDAProcessOptions;
+	progress?: ApiLDAPObjentry[];
+	status?: string;
 }

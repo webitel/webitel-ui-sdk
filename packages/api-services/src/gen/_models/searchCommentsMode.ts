@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchCommentsMode = typeof SearchCommentsMode[keyof typeof SearchCommentsMode];
-
+export type SearchCommentsMode =
+	(typeof SearchCommentsMode)[keyof typeof SearchCommentsMode];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchCommentsMode = {
-  READ: 'READ',
-  WRITE: 'WRITE',
-  DELETE: 'DELETE',
+	READ: 'READ',
+	WRITE: 'WRITE',
+	DELETE: 'DELETE',
 } as const;

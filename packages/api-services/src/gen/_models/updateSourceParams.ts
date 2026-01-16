@@ -6,5 +6,5 @@
  */
 
 export type UpdateSourceParams = {
-fields?: string[];
+	fields?: string[];
 };

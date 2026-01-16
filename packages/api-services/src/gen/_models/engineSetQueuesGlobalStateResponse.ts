@@ -6,5 +6,5 @@
  */
 
 export interface EngineSetQueuesGlobalStateResponse {
-  count?: number;
+	count?: number;
 }

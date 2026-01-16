@@ -6,50 +6,53 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,
-  WfmReadAgentWorkingConditionsResponse,
-  WfmUpdateAgentWorkingConditionsResponse
+	AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,
+	WfmReadAgentWorkingConditionsResponse,
+	WfmUpdateAgentWorkingConditionsResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getAgentWorkingConditionsService =
+		// --- title end
+		() => {
+			// --- header end
+			const agentWorkingConditionsServiceReadAgentWorkingConditions = <
+				TData = AxiosResponse<WfmReadAgentWorkingConditionsResponse>,
+			>(
+				agentId: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/wfm/agents/${agentId}/conditions`, options);
+			};
+			const agentWorkingConditionsServiceUpdateAgentWorkingConditions = <
+				TData = AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>,
+			>(
+				agentId: string,
+				agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody: AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.put(
+					`/wfm/agents/${agentId}/conditions`,
+					agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				agentWorkingConditionsServiceReadAgentWorkingConditions,
+				agentWorkingConditionsServiceUpdateAgentWorkingConditions,
+			};
+		};
+export type AgentWorkingConditionsServiceReadAgentWorkingConditionsResult =
+	AxiosResponse<WfmReadAgentWorkingConditionsResponse>;
+export type AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResult =
+	AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>;
 
-  export const 
-            // --- title start
-            getAgentWorkingConditionsService
-            // --- title end
-           = () => {
-
-            // --- header end
-          const agentWorkingConditionsServiceReadAgentWorkingConditions = <TData = AxiosResponse<WfmReadAgentWorkingConditionsResponse>>(
-    agentId: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/wfm/agents/${agentId}/conditions`,options
-    );
-  }
-const agentWorkingConditionsServiceUpdateAgentWorkingConditions = <TData = AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>>(
-    agentId: string,
-    agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody: AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.put(
-      `/wfm/agents/${agentId}/conditions`,
-      agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,options
-    );
-  }
-
-            // --- footer start
-            return {agentWorkingConditionsServiceReadAgentWorkingConditions,agentWorkingConditionsServiceUpdateAgentWorkingConditions}};
-export type AgentWorkingConditionsServiceReadAgentWorkingConditionsResult = AxiosResponse<WfmReadAgentWorkingConditionsResponse>
-export type AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResult = AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>
-
-            // --- footer end
-          
+// --- footer end

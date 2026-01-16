@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { EngineLookup } from './engineLookup';
+
 import type { EngineAgentInQueueStatisticsAgentInQueueStatisticsItem } from './engineAgentInQueueStatisticsAgentInQueueStatisticsItem';
+import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentInQueueStatistics {
-  queue?: EngineLookup;
-  statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
+	queue?: EngineLookup;
+	statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
 }

@@ -6,6 +6,6 @@
  */
 
 export interface ApiValidity {
-  notAfter?: string;
-  notBefore?: string;
+	notAfter?: string;
+	notBefore?: string;
 }

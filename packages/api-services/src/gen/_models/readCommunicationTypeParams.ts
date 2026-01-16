@@ -6,5 +6,5 @@
  */
 
 export type ReadCommunicationTypeParams = {
-domainId?: string;
+	domainId?: string;
 };

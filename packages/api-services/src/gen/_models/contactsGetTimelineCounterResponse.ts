@@ -6,9 +6,9 @@
  */
 
 export interface ContactsGetTimelineCounterResponse {
-  callsCount?: string;
-  chatsCount?: string;
-  dateFrom?: string;
-  dateTo?: string;
-  emailsCount?: string;
+	callsCount?: string;
+	chatsCount?: string;
+	dateFrom?: string;
+	dateTo?: string;
+	emailsCount?: string;
 }

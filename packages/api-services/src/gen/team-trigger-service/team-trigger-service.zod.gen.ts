@@ -6,181 +6,207 @@
  */
 import * as zod from 'zod/v4';
 
-
 export const searchAgentTriggerQueryParams = zod.object({
-  "teamId": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional()
-})
+	teamId: zod.string().optional(),
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.array(zod.number()).optional(),
+	schemaId: zod.array(zod.number()).optional(),
+});
 
 export const searchAgentTriggerResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				description: zod.string().optional(),
+				enabled: zod.boolean().optional(),
+				id: zod.number().optional(),
+				name: zod.string().optional(),
+				schema: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 export const runTeamTriggerParams = zod.object({
-  "trigger_id": zod.number()
-})
+	trigger_id: zod.number(),
+});
 
 export const runTeamTriggerBody = zod.object({
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
 
 export const runTeamTriggerResponse = zod.object({
-  "jobId": zod.string().optional()
-})
+	jobId: zod.string().optional(),
+});
 
 export const searchTeamTriggerParams = zod.object({
-  "team_id": zod.string()
-})
+	team_id: zod.string(),
+});
 
 export const searchTeamTriggerQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.array(zod.number()).optional(),
+	schemaId: zod.array(zod.number()).optional(),
+});
 
 export const searchTeamTriggerResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				description: zod.string().optional(),
+				enabled: zod.boolean().optional(),
+				id: zod.number().optional(),
+				name: zod.string().optional(),
+				schema: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 export const createTeamTriggerParams = zod.object({
-  "team_id": zod.string()
-})
+	team_id: zod.string(),
+});
 
 export const createTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const createTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const deleteTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
+	team_id: zod.string(),
+	id: zod.number(),
+});
 
 export const deleteTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const readTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
+	team_id: zod.string(),
+	id: zod.number(),
+});
 
 export const readTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const patchTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
+	team_id: zod.string(),
+	id: zod.number(),
+});
 
 export const patchTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fields: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const patchTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const updateTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
+	team_id: zod.string(),
+	id: zod.number(),
+});
 
 export const updateTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const updateTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	name: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

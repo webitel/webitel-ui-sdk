@@ -7,9 +7,9 @@
 import type { EngineCommunicationChannels } from './engineCommunicationChannels';
 
 export interface EngineCommunicationTypeRequest {
-  channel?: EngineCommunicationChannels;
-  code?: string;
-  default?: boolean;
-  description?: string;
-  name?: string;
+	channel?: EngineCommunicationChannels;
+	code?: string;
+	default?: boolean;
+	description?: string;
+	name?: string;
 }

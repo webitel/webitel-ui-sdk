@@ -6,5 +6,5 @@
  */
 
 export interface WebMeetingBackendMeetingServiceSatisfactionMeetingBody {
-  satisfaction?: string;
+	satisfaction?: string;
 }

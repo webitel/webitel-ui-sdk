@@ -4,53 +4,153 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
-
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
 import type {
-  WfmReadAgentWorkingConditionsResponse,
-  WfmUpdateAgentWorkingConditionsResponse
+	WfmReadAgentWorkingConditionsResponse,
+	WfmUpdateAgentWorkingConditionsResponse,
 } from '.././_models';
 
+export const getAgentWorkingConditionsServiceReadAgentWorkingConditionsResponseMock =
+	(
+		overrideResponse: Partial<WfmReadAgentWorkingConditionsResponse> = {},
+	): WfmReadAgentWorkingConditionsResponse => ({
+		item: faker.helpers.arrayElement([
+			{
+				pauseTemplate: faker.helpers.arrayElement([
+					{
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+				workingCondition: faker.helpers.arrayElement([
+					{
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		...overrideResponse,
+	});
 
-export const getAgentWorkingConditionsServiceReadAgentWorkingConditionsResponseMock = (overrideResponse: Partial< WfmReadAgentWorkingConditionsResponse > = {}): WfmReadAgentWorkingConditionsResponse => ({item: faker.helpers.arrayElement([{pauseTemplate: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), workingCondition: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponseMock =
+	(
+		overrideResponse: Partial<WfmUpdateAgentWorkingConditionsResponse> = {},
+	): WfmUpdateAgentWorkingConditionsResponse => ({
+		item: faker.helpers.arrayElement([
+			{
+				pauseTemplate: faker.helpers.arrayElement([
+					{
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+				workingCondition: faker.helpers.arrayElement([
+					{
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({ length: { min: 10, max: 20 } }),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		...overrideResponse,
+	});
 
-export const getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponseMock = (overrideResponse: Partial< WfmUpdateAgentWorkingConditionsResponse > = {}): WfmUpdateAgentWorkingConditionsResponse => ({item: faker.helpers.arrayElement([{pauseTemplate: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), workingCondition: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getAgentWorkingConditionsServiceReadAgentWorkingConditionsMockHandler =
+	(
+		overrideResponse?:
+			| WfmReadAgentWorkingConditionsResponse
+			| ((
+					info: Parameters<Parameters<typeof http.get>[1]>[0],
+			  ) =>
+					| Promise<WfmReadAgentWorkingConditionsResponse>
+					| WfmReadAgentWorkingConditionsResponse),
+		options?: RequestHandlerOptions,
+	) => {
+		return http.get(
+			'*/wfm/agents/:agentId/conditions',
+			async (info) => {
+				await delay(1000);
 
+				return new HttpResponse(
+					JSON.stringify(
+						overrideResponse !== undefined
+							? typeof overrideResponse === 'function'
+								? await overrideResponse(info)
+								: overrideResponse
+							: getAgentWorkingConditionsServiceReadAgentWorkingConditionsResponseMock(),
+					),
+					{ status: 200, headers: { 'Content-Type': 'application/json' } },
+				);
+			},
+			options,
+		);
+	};
 
-export const getAgentWorkingConditionsServiceReadAgentWorkingConditionsMockHandler = (overrideResponse?: WfmReadAgentWorkingConditionsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WfmReadAgentWorkingConditionsResponse> | WfmReadAgentWorkingConditionsResponse), options?: RequestHandlerOptions) => {
-  return http.get('*/wfm/agents/:agentId/conditions', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getAgentWorkingConditionsServiceReadAgentWorkingConditionsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsMockHandler =
+	(
+		overrideResponse?:
+			| WfmUpdateAgentWorkingConditionsResponse
+			| ((
+					info: Parameters<Parameters<typeof http.put>[1]>[0],
+			  ) =>
+					| Promise<WfmUpdateAgentWorkingConditionsResponse>
+					| WfmUpdateAgentWorkingConditionsResponse),
+		options?: RequestHandlerOptions,
+	) => {
+		return http.put(
+			'*/wfm/agents/:agentId/conditions',
+			async (info) => {
+				await delay(1000);
 
-export const getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsMockHandler = (overrideResponse?: WfmUpdateAgentWorkingConditionsResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WfmUpdateAgentWorkingConditionsResponse> | WfmUpdateAgentWorkingConditionsResponse), options?: RequestHandlerOptions) => {
-  return http.put('*/wfm/agents/:agentId/conditions', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+				return new HttpResponse(
+					JSON.stringify(
+						overrideResponse !== undefined
+							? typeof overrideResponse === 'function'
+								? await overrideResponse(info)
+								: overrideResponse
+							: getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponseMock(),
+					),
+					{ status: 200, headers: { 'Content-Type': 'application/json' } },
+				);
+			},
+			options,
+		);
+	};
 export const getAgentWorkingConditionsServiceMock = () => [
-  getAgentWorkingConditionsServiceReadAgentWorkingConditionsMockHandler(),
-  getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsMockHandler()]
+	getAgentWorkingConditionsServiceReadAgentWorkingConditionsMockHandler(),
+	getAgentWorkingConditionsServiceUpdateAgentWorkingConditionsMockHandler(),
+];

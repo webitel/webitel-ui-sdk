@@ -10,10 +10,10 @@
 Simplified search filter to uniquely identify related object.
  */
 export interface WebitelknowledgebaseLookup {
-  /** Reference Object unique ID. */
-  id?: string;
-  /** Reference Object display name. */
-  name?: string;
-  /** Reference Object well-known type. */
-  type?: string;
+	/** Reference Object unique ID. */
+	id?: string;
+	/** Reference Object display name. */
+	name?: string;
+	/** Reference Object well-known type. */
+	type?: string;
 }

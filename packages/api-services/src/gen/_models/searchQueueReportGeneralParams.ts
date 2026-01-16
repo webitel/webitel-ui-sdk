@@ -6,15 +6,15 @@
  */
 
 export type SearchQueueReportGeneralParams = {
-page?: number;
-size?: number;
-joinedAtFrom?: string;
-joinedAtTo?: string;
-domainId?: string;
-fields?: string[];
-sort?: string;
-q?: string;
-queueId?: number[];
-teamId?: number[];
-type?: number[];
+	page?: number;
+	size?: number;
+	joinedAtFrom?: string;
+	joinedAtTo?: string;
+	domainId?: string;
+	fields?: string[];
+	sort?: string;
+	q?: string;
+	queueId?: number[];
+	teamId?: number[];
+	type?: number[];
 };

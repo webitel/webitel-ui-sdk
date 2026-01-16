@@ -6,10 +6,10 @@
  */
 
 export type ListCloseReasonGroupsParams = {
-page?: number;
-size?: number;
-fields?: string[];
-sort?: string;
-id?: string[];
-q?: string;
+	page?: number;
+	size?: number;
+	fields?: string[];
+	sort?: string;
+	id?: string[];
+	q?: string;
 };

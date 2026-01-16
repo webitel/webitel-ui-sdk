@@ -8,4 +8,4 @@
 /**
  * md5, sha256, ..
  */
-export type ContactsMediaFileHash = {[key: string]: string};
+export type ContactsMediaFileHash = { [key: string]: string };

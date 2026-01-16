@@ -6,6 +6,6 @@
  */
 
 export interface ApiRoleMetadataResponse {
-  key?: string;
-  value?: unknown;
+	key?: string;
+	value?: unknown;
 }

@@ -7,22 +7,22 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineMemberAttempt {
-  active?: boolean;
-  agent?: EngineLookup;
-  answeredAt?: string;
-  attempts?: number;
-  bridgedAt?: string;
-  bucket?: EngineLookup;
-  createdAt?: string;
-  destination?: string;
-  hangupAt?: string;
-  id?: string;
-  legAId?: string;
-  legBId?: string;
-  member?: EngineLookup;
-  node?: string;
-  originateAt?: string;
-  resource?: EngineLookup;
-  result?: string;
-  weight?: number;
+	active?: boolean;
+	agent?: EngineLookup;
+	answeredAt?: string;
+	attempts?: number;
+	bridgedAt?: string;
+	bucket?: EngineLookup;
+	createdAt?: string;
+	destination?: string;
+	hangupAt?: string;
+	id?: string;
+	legAId?: string;
+	legBId?: string;
+	member?: EngineLookup;
+	node?: string;
+	originateAt?: string;
+	resource?: EngineLookup;
+	result?: string;
+	weight?: number;
 }

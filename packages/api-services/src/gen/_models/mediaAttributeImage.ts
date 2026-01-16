@@ -6,7 +6,7 @@
  */
 
 export interface MediaAttributeImage {
-  animated?: boolean;
-  height?: number;
-  width?: number;
+	animated?: boolean;
+	height?: number;
+	width?: number;
 }

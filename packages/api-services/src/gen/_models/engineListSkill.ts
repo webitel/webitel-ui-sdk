@@ -7,6 +7,6 @@
 import type { EngineSkill } from './engineSkill';
 
 export interface EngineListSkill {
-  items?: EngineSkill[];
-  next?: boolean;
+	items?: EngineSkill[];
+	next?: boolean;
 }

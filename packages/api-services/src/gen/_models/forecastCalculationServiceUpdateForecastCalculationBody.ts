@@ -7,5 +7,5 @@
 import type { ForecastCalculationServiceUpdateForecastCalculationBodyItem } from './forecastCalculationServiceUpdateForecastCalculationBodyItem';
 
 export type ForecastCalculationServiceUpdateForecastCalculationBody = {
-  item?: ForecastCalculationServiceUpdateForecastCalculationBodyItem;
+	item?: ForecastCalculationServiceUpdateForecastCalculationBodyItem;
 };

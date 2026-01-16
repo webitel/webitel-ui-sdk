@@ -7,7 +7,7 @@
 import type { WfmAbsenceType } from './wfmAbsenceType';
 
 export interface CreateAgentsAbsencesRequestabsentType {
-  dateFrom?: string;
-  dateTo?: string;
-  typeId?: WfmAbsenceType;
+	dateFrom?: string;
+	dateTo?: string;
+	typeId?: WfmAbsenceType;
 }

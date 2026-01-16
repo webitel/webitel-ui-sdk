@@ -6,6 +6,6 @@
  */
 
 export interface LoggerLookup {
-  id?: number;
-  name?: string;
+	id?: number;
+	name?: string;
 }

@@ -6,6 +6,6 @@
  */
 
 export interface EngineUpdateQuestionAnswerRequest {
-  comment?: string;
-  score?: number;
+	comment?: string;
+	score?: number;
 }

@@ -7,6 +7,6 @@
 import type { EngineEmailProfile } from './engineEmailProfile';
 
 export interface EngineListEmailProfile {
-  items?: EngineEmailProfile[];
-  next?: boolean;
+	items?: EngineEmailProfile[];
+	next?: boolean;
 }

@@ -6,10 +6,10 @@
  */
 
 export type ConfigServiceReadSystemObjectsParams = {
-includeExisting?: boolean;
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
+	includeExisting?: boolean;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
 };

@@ -10,8 +10,8 @@ import type { WebitelcontactsLookup } from './webitelcontactsLookup';
  * An input of the Contact's groups.
  */
 export interface ContactsInputContactGroup {
-  /** Unique ID of the latest version of an existing resource. */
-  etag: string;
-  /** Group of contacts associated. */
-  group?: WebitelcontactsLookup;
+	/** Unique ID of the latest version of an existing resource. */
+	etag: string;
+	/** Group of contacts associated. */
+	group?: WebitelcontactsLookup;
 }

@@ -7,6 +7,6 @@
 import type { StorageImportTemplate } from './storageImportTemplate';
 
 export interface StorageListImportTemplate {
-  items?: StorageImportTemplate[];
-  next?: boolean;
+	items?: StorageImportTemplate[];
+	next?: boolean;
 }

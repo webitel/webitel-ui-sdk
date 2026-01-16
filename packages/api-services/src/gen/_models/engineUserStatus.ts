@@ -7,9 +7,9 @@
 import type { EngineUserStatusUserPresence } from './engineUserStatusUserPresence';
 
 export interface EngineUserStatus {
-  extension?: string;
-  id?: string;
-  name?: string;
-  presence?: EngineUserStatusUserPresence;
-  status?: string;
+	extension?: string;
+	id?: string;
+	name?: string;
+	presence?: EngineUserStatusUserPresence;
+	status?: string;
 }

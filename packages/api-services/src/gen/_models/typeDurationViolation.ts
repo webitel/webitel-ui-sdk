@@ -5,4 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type TypeDurationViolation = {[key: string]: string};
+export type TypeDurationViolation = { [key: string]: string };

@@ -4,56 +4,120 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import type { EngineFeedback } from '.././_models';
 
-import type {
-  EngineFeedback
-} from '.././_models';
+export const getGetFeedbackResponseMock = (
+	overrideResponse: Partial<EngineFeedback> = {},
+): EngineFeedback => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	payload: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: faker.string.alpha({
+				length: { min: 10, max: 20 },
+			}),
+		},
+		undefined,
+	]),
+	rating: faker.helpers.arrayElement([
+		faker.number.float({ min: undefined, max: undefined, fractionDigits: 2 }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
+export const getCreateFeedbackResponseMock = (
+	overrideResponse: Partial<EngineFeedback> = {},
+): EngineFeedback => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	payload: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: faker.string.alpha({
+				length: { min: 10, max: 20 },
+			}),
+		},
+		undefined,
+	]),
+	rating: faker.helpers.arrayElement([
+		faker.number.float({ min: undefined, max: undefined, fractionDigits: 2 }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getGetFeedbackResponseMock = (overrideResponse: Partial< EngineFeedback > = {}): EngineFeedback => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), payload: faker.helpers.arrayElement([{
-        [faker.string.alphanumeric(5)]: faker.string.alpha({length: {min: 10, max: 20}})
-      }, undefined]), rating: faker.helpers.arrayElement([faker.number.float({min: undefined, max: undefined, fractionDigits: 2}), undefined]), ...overrideResponse})
+export const getGetFeedbackMockHandler = (
+	overrideResponse?:
+		| EngineFeedback
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EngineFeedback> | EngineFeedback),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/feedback',
+		async (info) => {
+			await delay(1000);
 
-export const getCreateFeedbackResponseMock = (overrideResponse: Partial< EngineFeedback > = {}): EngineFeedback => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), payload: faker.helpers.arrayElement([{
-        [faker.string.alphanumeric(5)]: faker.string.alpha({length: {min: 10, max: 20}})
-      }, undefined]), rating: faker.helpers.arrayElement([faker.number.float({min: undefined, max: undefined, fractionDigits: 2}), undefined]), ...overrideResponse})
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getGetFeedbackResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
+export const getCreateFeedbackMockHandler = (
+	overrideResponse?:
+		| EngineFeedback
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<EngineFeedback> | EngineFeedback),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/feedback',
+		async (info) => {
+			await delay(1000);
 
-export const getGetFeedbackMockHandler = (overrideResponse?: EngineFeedback | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EngineFeedback> | EngineFeedback), options?: RequestHandlerOptions) => {
-  return http.get('*/feedback', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getGetFeedbackResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
-
-export const getCreateFeedbackMockHandler = (overrideResponse?: EngineFeedback | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<EngineFeedback> | EngineFeedback), options?: RequestHandlerOptions) => {
-  return http.post('*/feedback', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getCreateFeedbackResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getCreateFeedbackResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 export const getFeedbackServiceMock = () => [
-  getGetFeedbackMockHandler(),
-  getCreateFeedbackMockHandler()]
+	getGetFeedbackMockHandler(),
+	getCreateFeedbackMockHandler(),
+];

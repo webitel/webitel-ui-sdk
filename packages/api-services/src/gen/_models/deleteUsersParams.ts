@@ -6,9 +6,9 @@
  */
 
 export type DeleteUsersParams = {
-/**
- * MANY /users .ids=[id,...]
- */
-selection?: string[];
-permanent?: boolean;
+	/**
+	 * MANY /users .ids=[id,...]
+	 */
+	selection?: string[];
+	permanent?: boolean;
 };

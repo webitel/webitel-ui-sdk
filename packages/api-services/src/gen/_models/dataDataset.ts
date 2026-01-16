@@ -11,11 +11,11 @@ import type { ProtodataStruct } from './protodataStruct';
  * Dataset records page view.
  */
 export interface DataDataset {
-  /** List of the dataset page records. */
-  data?: DataDatasetDataItem[];
-  next?: boolean;
-  /** Current page number. */
-  page?: number;
-  /** Type of the dataset record. */
-  type?: ProtodataStruct;
+	/** List of the dataset page records. */
+	data?: DataDatasetDataItem[];
+	next?: boolean;
+	/** Current page number. */
+	page?: number;
+	/** Type of the dataset record. */
+	type?: ProtodataStruct;
 }

@@ -7,7 +7,7 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmAgentScheduleShiftSkill {
-  capacity?: string;
-  enabled?: boolean;
-  skill?: WfmLookupEntity;
+	capacity?: string;
+	enabled?: boolean;
+	skill?: WfmLookupEntity;
 }

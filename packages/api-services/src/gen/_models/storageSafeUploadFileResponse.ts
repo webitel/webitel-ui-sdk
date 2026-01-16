@@ -9,7 +9,7 @@ import type { StorageSafeUploadFileResponsePart } from './storageSafeUploadFileR
 import type { StorageSafeUploadFileResponseProgress } from './storageSafeUploadFileResponseProgress';
 
 export interface StorageSafeUploadFileResponse {
-  metadata?: StorageSafeUploadFileResponseMetadata;
-  part?: StorageSafeUploadFileResponsePart;
-  progress?: StorageSafeUploadFileResponseProgress;
+	metadata?: StorageSafeUploadFileResponseMetadata;
+	part?: StorageSafeUploadFileResponsePart;
+	progress?: StorageSafeUploadFileResponseProgress;
 }

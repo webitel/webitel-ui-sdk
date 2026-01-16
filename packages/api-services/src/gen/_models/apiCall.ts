@@ -7,6 +7,6 @@
 import type { ApiChannel } from './apiChannel';
 
 export interface ApiCall {
-  channel?: ApiChannel;
-  uuid?: string;
+	channel?: ApiChannel;
+	uuid?: string;
 }

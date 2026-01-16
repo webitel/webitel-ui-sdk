@@ -6,5 +6,5 @@
  */
 
 export type DeleteBackendProfileParams = {
-domainId?: string;
+	domainId?: string;
 };

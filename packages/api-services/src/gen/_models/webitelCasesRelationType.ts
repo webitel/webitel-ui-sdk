@@ -8,19 +8,19 @@
 /**
  * Enum for relation types between cases.
  */
-export type WebitelCasesRelationType = typeof WebitelCasesRelationType[keyof typeof WebitelCasesRelationType];
-
+export type WebitelCasesRelationType =
+	(typeof WebitelCasesRelationType)[keyof typeof WebitelCasesRelationType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelCasesRelationType = {
-  RelationTypeUnspecified: 'RELATION_TYPE_UNSPECIFIED',
-  Duplicates: 'DUPLICATES',
-  IsDuplicatedBy: 'IS_DUPLICATED_BY',
-  Blocks: 'BLOCKS',
-  IsBlockedBy: 'IS_BLOCKED_BY',
-  Causes: 'CAUSES',
-  IsCausedBy: 'IS_CAUSED_BY',
-  IsChildOf: 'IS_CHILD_OF',
-  IsParentOf: 'IS_PARENT_OF',
-  RelatesTo: 'RELATES_TO',
+	RelationTypeUnspecified: 'RELATION_TYPE_UNSPECIFIED',
+	Duplicates: 'DUPLICATES',
+	IsDuplicatedBy: 'IS_DUPLICATED_BY',
+	Blocks: 'BLOCKS',
+	IsBlockedBy: 'IS_BLOCKED_BY',
+	Causes: 'CAUSES',
+	IsCausedBy: 'IS_CAUSED_BY',
+	IsChildOf: 'IS_CHILD_OF',
+	IsParentOf: 'IS_PARENT_OF',
+	RelatesTo: 'RELATES_TO',
 } as const;

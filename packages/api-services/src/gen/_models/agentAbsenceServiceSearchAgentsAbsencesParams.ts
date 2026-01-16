@@ -6,13 +6,13 @@
  */
 
 export type AgentAbsenceServiceSearchAgentsAbsencesParams = {
-/**
- * Searches by agent name.
- */
-q?: string;
-page?: number;
-size?: number;
-sort?: string;
-fields?: string[];
-filters?: string[];
+	/**
+	 * Searches by agent name.
+	 */
+	q?: string;
+	page?: number;
+	size?: number;
+	sort?: string;
+	fields?: string[];
+	filters?: string[];
 };

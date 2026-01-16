@@ -8,6 +8,6 @@ import type { WfmAbsence } from './wfmAbsence';
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmAgentAbsences {
-  absences?: WfmAbsence[];
-  agent?: WfmLookupEntity;
+	absences?: WfmAbsence[];
+	agent?: WfmLookupEntity;
 }

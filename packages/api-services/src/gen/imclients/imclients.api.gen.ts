@@ -6,55 +6,47 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ContactsEmptyResponse,
-  ContactsIMClientList,
-  ListIMClientsParams
+	ContactsEmptyResponse,
+	ContactsIMClientList,
+	ListIMClientsParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getImclients =
+		// --- title end
+		() => {
+			// --- header end
+			/**
+			 * @summary Search IM client links
+			 */
+			const listIMClients = <TData = AxiosResponse<ContactsIMClientList>>(
+				contactId: string,
+				params?: ListIMClientsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/contacts/${contactId}/imclients`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteIMClient = <TData = AxiosResponse<ContactsEmptyResponse>>(
+				contactId: string,
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/contacts/${contactId}/imclients/${id}`, options);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return { listIMClients, deleteIMClient };
+		};
+export type ListIMClientsResult = AxiosResponse<ContactsIMClientList>;
+export type DeleteIMClientResult = AxiosResponse<ContactsEmptyResponse>;
 
-  export const 
-            // --- title start
-            getImclients
-            // --- title end
-           = () => {
-
-            // --- header end
-          /**
- * @summary Search IM client links
- */
-const listIMClients = <TData = AxiosResponse<ContactsIMClientList>>(
-    contactId: string,
-    params?: ListIMClientsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/contacts/${contactId}/imclients`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const deleteIMClient = <TData = AxiosResponse<ContactsEmptyResponse>>(
-    contactId: string,
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/contacts/${contactId}/imclients/${id}`,options
-    );
-  }
-
-            // --- footer start
-            return {listIMClients,deleteIMClient}};
-export type ListIMClientsResult = AxiosResponse<ContactsIMClientList>
-export type DeleteIMClientResult = AxiosResponse<ContactsEmptyResponse>
-
-            // --- footer end
-          
+// --- footer end

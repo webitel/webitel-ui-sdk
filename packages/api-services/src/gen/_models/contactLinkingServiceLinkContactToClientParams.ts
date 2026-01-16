@@ -6,5 +6,5 @@
  */
 
 export type ContactLinkingServiceLinkContactToClientParams = {
-contactId?: string;
+	contactId?: string;
 };

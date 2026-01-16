@@ -4,17 +4,18 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { StorageUploadStatusCode } from './storageUploadStatusCode';
+
 import type { StorageFileMalwareScan } from './storageFileMalwareScan';
 import type { StorageThumbnail } from './storageThumbnail';
+import type { StorageUploadStatusCode } from './storageUploadStatusCode';
 
 export interface StorageUploadFileResponse {
-  code?: StorageUploadStatusCode;
-  fileId?: string;
-  fileUrl?: string;
-  malware?: StorageFileMalwareScan;
-  server?: string;
-  sha256Sum?: string;
-  size?: string;
-  thumbnail?: StorageThumbnail;
+	code?: StorageUploadStatusCode;
+	fileId?: string;
+	fileUrl?: string;
+	malware?: StorageFileMalwareScan;
+	server?: string;
+	sha256Sum?: string;
+	size?: string;
+	thumbnail?: StorageThumbnail;
 }

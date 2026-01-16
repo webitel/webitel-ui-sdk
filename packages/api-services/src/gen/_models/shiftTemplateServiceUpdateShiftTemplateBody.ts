@@ -7,5 +7,5 @@
 import type { ShiftTemplateServiceUpdateShiftTemplateBodyItem } from './shiftTemplateServiceUpdateShiftTemplateBodyItem';
 
 export type ShiftTemplateServiceUpdateShiftTemplateBody = {
-  item?: ShiftTemplateServiceUpdateShiftTemplateBodyItem;
+	item?: ShiftTemplateServiceUpdateShiftTemplateBodyItem;
 };

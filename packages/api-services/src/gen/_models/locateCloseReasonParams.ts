@@ -6,5 +6,5 @@
  */
 
 export type LocateCloseReasonParams = {
-fields?: string[];
+	fields?: string[];
 };

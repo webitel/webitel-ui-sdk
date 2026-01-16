@@ -6,5 +6,5 @@
  */
 
 export interface EngineSchemaTag {
-  name?: string;
+	name?: string;
 }

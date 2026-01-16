@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsByAgentType = typeof SearchScreenRecordingsByAgentType[keyof typeof SearchScreenRecordingsByAgentType];
-
+export type SearchScreenRecordingsByAgentType =
+	(typeof SearchScreenRecordingsByAgentType)[keyof typeof SearchScreenRecordingsByAgentType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchScreenRecordingsByAgentType = {
-  PDF: 'PDF',
-  SCREENSHOT: 'SCREENSHOT',
-  SCREENSHARING: 'SCREENSHARING',
+	PDF: 'PDF',
+	SCREENSHOT: 'SCREENSHOT',
+	SCREENSHARING: 'SCREENSHARING',
 } as const;

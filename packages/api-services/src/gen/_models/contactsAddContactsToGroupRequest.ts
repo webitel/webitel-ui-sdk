@@ -9,8 +9,8 @@
  * Request message for adding contacts to a group.
  */
 export interface ContactsAddContactsToGroupRequest {
-  /** List of contact IDs to add to the group. */
-  contactIds?: string[];
-  /** The unique ID of the group. */
-  groupIds?: string[];
+	/** List of contact IDs to add to the group. */
+	contactIds?: string[];
+	/** The unique ID of the group. */
+	groupIds?: string[];
 }

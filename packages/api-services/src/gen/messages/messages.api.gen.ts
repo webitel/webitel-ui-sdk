@@ -6,119 +6,130 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CatalogGetCustomersParams,
-  CatalogGetDialogsParams,
-  CatalogGetHistory2Params,
-  CatalogGetHistoryParams,
-  CatalogGetMembersParams,
-  WebitelChatBroadcastMessageRequest,
-  WebitelChatBroadcastMessageResponse,
-  WebitelChatChatCustomers,
-  WebitelChatChatDialogs,
-  WebitelChatChatMembers,
-  WebitelChatChatMessages
+	CatalogGetCustomersParams,
+	CatalogGetDialogsParams,
+	CatalogGetHistory2Params,
+	CatalogGetHistoryParams,
+	CatalogGetMembersParams,
+	WebitelChatBroadcastMessageRequest,
+	WebitelChatBroadcastMessageResponse,
+	WebitelChatChatCustomers,
+	WebitelChatChatDialogs,
+	WebitelChatChatMembers,
+	WebitelChatChatMessages,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getMessages =
+		// --- title end
+		() => {
+			// --- header end
+			/**
+			 * @summary Broadcast message send message from via to peer recipients.
+			 */
+			const messagesServiceBroadcastMessage = <
+				TData = AxiosResponse<WebitelChatBroadcastMessageResponse>,
+			>(
+				webitelChatBroadcastMessageRequest: WebitelChatBroadcastMessageRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post(
+					'/chat/broadcast',
+					webitelChatBroadcastMessageRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary Query of external chat customers
+			 */
+			const catalogGetCustomers = <
+				TData = AxiosResponse<WebitelChatChatCustomers>,
+			>(
+				params?: CatalogGetCustomersParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/chat/customers', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			/**
+			 * @summary Query of chat conversations
+			 */
+			const catalogGetDialogs = <TData = AxiosResponse<WebitelChatChatDialogs>>(
+				params?: CatalogGetDialogsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/chat/dialogs', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			/**
+			 * @summary Query of chat participants
+			 */
+			const catalogGetMembers = <TData = AxiosResponse<WebitelChatChatMembers>>(
+				chatId: string,
+				params?: CatalogGetMembersParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/chat/dialogs/${chatId}/members`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			/**
+			 * @summary Query of the chat history
+			 */
+			const catalogGetHistory = <
+				TData = AxiosResponse<WebitelChatChatMessages>,
+			>(
+				chatId: string,
+				params?: CatalogGetHistoryParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/chat/dialogs/${chatId}/messages`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			/**
+			 * @summary Query of the chat history
+			 */
+			const catalogGetHistory2 = <
+				TData = AxiosResponse<WebitelChatChatMessages>,
+			>(
+				params?: CatalogGetHistory2Params,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/chat/peer.type}/peer.id}/messages', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				messagesServiceBroadcastMessage,
+				catalogGetCustomers,
+				catalogGetDialogs,
+				catalogGetMembers,
+				catalogGetHistory,
+				catalogGetHistory2,
+			};
+		};
+export type MessagesServiceBroadcastMessageResult =
+	AxiosResponse<WebitelChatBroadcastMessageResponse>;
+export type CatalogGetCustomersResult = AxiosResponse<WebitelChatChatCustomers>;
+export type CatalogGetDialogsResult = AxiosResponse<WebitelChatChatDialogs>;
+export type CatalogGetMembersResult = AxiosResponse<WebitelChatChatMembers>;
+export type CatalogGetHistoryResult = AxiosResponse<WebitelChatChatMessages>;
+export type CatalogGetHistory2Result = AxiosResponse<WebitelChatChatMessages>;
 
-  export const 
-            // --- title start
-            getMessages
-            // --- title end
-           = () => {
-
-            // --- header end
-          /**
- * @summary Broadcast message send message from via to peer recipients.
- */
-const messagesServiceBroadcastMessage = <TData = AxiosResponse<WebitelChatBroadcastMessageResponse>>(
-    webitelChatBroadcastMessageRequest: WebitelChatBroadcastMessageRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.post(
-      `/chat/broadcast`,
-      webitelChatBroadcastMessageRequest,options
-    );
-  }
-/**
- * @summary Query of external chat customers
- */
-const catalogGetCustomers = <TData = AxiosResponse<WebitelChatChatCustomers>>(
-    params?: CatalogGetCustomersParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/chat/customers`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Query of chat conversations
- */
-const catalogGetDialogs = <TData = AxiosResponse<WebitelChatChatDialogs>>(
-    params?: CatalogGetDialogsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/chat/dialogs`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Query of chat participants
- */
-const catalogGetMembers = <TData = AxiosResponse<WebitelChatChatMembers>>(
-    chatId: string,
-    params?: CatalogGetMembersParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/chat/dialogs/${chatId}/members`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Query of the chat history
- */
-const catalogGetHistory = <TData = AxiosResponse<WebitelChatChatMessages>>(
-    chatId: string,
-    params?: CatalogGetHistoryParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/chat/dialogs/${chatId}/messages`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Query of the chat history
- */
-const catalogGetHistory2 = <TData = AxiosResponse<WebitelChatChatMessages>>(
-    params?: CatalogGetHistory2Params, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/chat/peer.type}/peer.id}/messages`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {messagesServiceBroadcastMessage,catalogGetCustomers,catalogGetDialogs,catalogGetMembers,catalogGetHistory,catalogGetHistory2}};
-export type MessagesServiceBroadcastMessageResult = AxiosResponse<WebitelChatBroadcastMessageResponse>
-export type CatalogGetCustomersResult = AxiosResponse<WebitelChatChatCustomers>
-export type CatalogGetDialogsResult = AxiosResponse<WebitelChatChatDialogs>
-export type CatalogGetMembersResult = AxiosResponse<WebitelChatChatMembers>
-export type CatalogGetHistoryResult = AxiosResponse<WebitelChatChatMessages>
-export type CatalogGetHistory2Result = AxiosResponse<WebitelChatChatMessages>
-
-            // --- footer end
-          
+// --- footer end

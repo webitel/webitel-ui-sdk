@@ -8,14 +8,14 @@ import type { EngineAgentInQueueAgentsInQueue } from './engineAgentInQueueAgents
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentInQueue {
-  activeMembers?: number;
-  agents?: EngineAgentInQueueAgentsInQueue;
-  countMembers?: number;
-  enabled?: boolean;
-  maxMemberLimit?: number;
-  priority?: number;
-  queue?: EngineLookup;
-  strategy?: string;
-  type?: number;
-  waitingMembers?: number;
+	activeMembers?: number;
+	agents?: EngineAgentInQueueAgentsInQueue;
+	countMembers?: number;
+	enabled?: boolean;
+	maxMemberLimit?: number;
+	priority?: number;
+	queue?: EngineLookup;
+	strategy?: string;
+	type?: number;
+	waitingMembers?: number;
 }

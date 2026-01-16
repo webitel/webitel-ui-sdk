@@ -6,9 +6,9 @@
  */
 
 export interface ApiObjectClass {
-  abac?: boolean;
-  class?: string;
-  id?: string;
-  obac?: boolean;
-  rbac?: boolean;
+	abac?: boolean;
+	class?: string;
+	id?: string;
+	obac?: boolean;
+	rbac?: boolean;
 }

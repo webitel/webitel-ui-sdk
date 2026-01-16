@@ -8,10 +8,10 @@ import type { ApiLicenseUsers } from './apiLicenseUsers';
 import type { ApiValidity } from './apiValidity';
 
 export interface ApiLicense {
-  competitive?: boolean;
-  limit?: number;
-  scope?: string;
-  serial?: string;
-  users?: ApiLicenseUsers;
-  validity?: ApiValidity;
+	competitive?: boolean;
+	limit?: number;
+	scope?: string;
+	serial?: string;
+	users?: ApiLicenseUsers;
+	validity?: ApiValidity;
 }

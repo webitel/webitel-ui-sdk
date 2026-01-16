@@ -6,5 +6,5 @@
  */
 
 export interface ApiGenerateTfaKeysForNecessaryUsersResponse {
-  affected?: string;
+	affected?: string;
 }

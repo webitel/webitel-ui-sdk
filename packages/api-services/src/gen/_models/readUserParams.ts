@@ -6,8 +6,8 @@
  */
 
 export type ReadUserParams = {
-/**
- * partial output
- */
-fields?: string[];
+	/**
+	 * partial output
+	 */
+	fields?: string[];
 };

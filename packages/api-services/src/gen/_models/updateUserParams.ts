@@ -6,8 +6,8 @@
  */
 
 export type UpdateUserParams = {
-/**
- * PATCH: partial update
- */
-fields?: string[];
+	/**
+	 * PATCH: partial update
+	 */
+	fields?: string[];
 };

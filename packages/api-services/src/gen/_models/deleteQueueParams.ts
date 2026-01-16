@@ -6,5 +6,5 @@
  */
 
 export type DeleteQueueParams = {
-domainId?: string;
+	domainId?: string;
 };
