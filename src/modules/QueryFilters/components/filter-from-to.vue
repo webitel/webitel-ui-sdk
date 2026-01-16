@@ -1,43 +1,23 @@
 <template>
-  <div class="filter-from-to">
-    <wt-label>{{ label }}</wt-label>
-    <div class="filter-from-to__inputs-wrapper">
-      <div class="filter-from-to__input-wrapper">
-        <wt-label
-          class="filter-from-to__input-label"
-          for="filter-from-to-from"
-        >
-          {{ $t('reusable.from') }}
-        </wt-label>
-        <wt-input
-          :number-max="numberMax"
-          :number-min="0"
-          :value="filterSchema.value.from"
-          class="filter-from-to-input"
-          name="filter-from-to-from"
-          type="number"
-          @input="setFrom"
-        />
-      </div>
-      <div class="filter-from-to__input-wrapper">
-        <wt-label
-          class="filter-from-to__input-label"
-          for="filter-from-to-to"
-        >
-          {{ $t('reusable.to') }}
-        </wt-label>
-        <wt-input
-          :number-max="numberMax"
-          :number-min="0"
-          :value="filterSchema.value.to"
-          class="filter-from-to-input"
-          name="filter-from-to-to"
-          type="number"
-          @input="setTo"
-        />
-      </div>
-    </div>
-  </div>
+	<div class="filter-from-to">
+		<wt-label>{{ label }}</wt-label>
+		<div class="filter-from-to__inputs-wrapper">
+			<div class="filter-from-to__input-wrapper">
+				<wt-label class="filter-from-to__input-label typo-subtitle-1" for="filter-from-to-from">
+					{{ $t('reusable.from') }}
+				</wt-label>
+				<wt-input :number-max="numberMax" :number-min="0" :value="filterSchema.value.from"
+					class="filter-from-to-input" name="filter-from-to-from" type="number" @input="setFrom" />
+			</div>
+			<div class="filter-from-to__input-wrapper">
+				<wt-label class="filter-from-to__input-label typo-subtitle-1" for="filter-from-to-to">
+					{{ $t('reusable.to') }}
+				</wt-label>
+				<wt-input :number-max="numberMax" :number-min="0" :value="filterSchema.value.to"
+					class="filter-from-to-input" name="filter-from-to-to" type="number" @input="setTo" />
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -139,37 +119,36 @@ export default {
 @use '@webitel/styleguide/typography' as *;
 
 .filter-from-to {
-  &:hover > .wt-label {
-    color: var(--form-label--hover-color);
-  }
+	&:hover>.wt-label {
+		color: var(--form-label--hover-color);
+	}
 
-  &:focus-within > .wt-label {
-    color: var(--form-label--active-color);
-  }
+	&:focus-within>.wt-label {
+		color: var(--form-label--active-color);
+	}
 }
 
 .filter-from-to__inputs-wrapper,
 .filter-from-to__input-wrapper {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .filter-from-to__input-label {
-  @extend %typo-subtitle-1;
-  margin-right: 5px;
+	margin-right: 5px;
 }
 
 .filter-from-to__input-wrapper {
-  &:focus-within .wt-label {
-    color: var(--form-label--active-color);
-  }
+	&:focus-within .wt-label {
+		color: var(--form-label--active-color);
+	}
 
-  .filter-from-to-input {
-    width: 70px;
-  }
+	.filter-from-to-input {
+		width: 70px;
+	}
 
-  &:first-child {
-    margin-right: 10px;
-  }
+	&:first-child {
+		margin-right: 10px;
+	}
 }
 </style>

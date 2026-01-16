@@ -29,11 +29,12 @@
                       'wt-cc-pause-cause-popup-option__duration--overflow':
                         option.isOverflow,
                     }"
+                    class="typo-caption"
                   >
                     {{ option.duration }}
                   </span>
                   /
-                  <span>{{ option.limit }}</span>
+                  <span class="typo-caption">{{ option.limit }}</span>
                 </div>
               </div>
               <div v-if="selected && option.id === selected?.id" class="wt-cc-pause-cause-popup-option__comment">
@@ -141,7 +142,6 @@ function setPause() {
 
 .wt-cc-pause-cause-popup-option__limits-wrapper {
   & > span {
-    @extend %typo-caption;
     padding: 6px 10px;
   }
 
