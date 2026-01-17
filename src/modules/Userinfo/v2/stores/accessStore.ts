@@ -45,12 +45,13 @@ export const createUserAccessStore = ({
       action: CrudAction | SpecialGlobalAction,
       object?: WtObject,
     ) => {
-      const allowGlobalAccess = globalAccess.value.get(action);
-      if (allowGlobalAccess) return true;
 
       const allowScopeAccess =
         object && scopeAccess.value.get(object)?.get(action as CrudAction);
       if (allowScopeAccess) return true;
+
+      const allowGlobalAccess = globalAccess.value.get(action);
+      if (allowScopeAccess == null && allowGlobalAccess) return true;
 
       return false;
     };
