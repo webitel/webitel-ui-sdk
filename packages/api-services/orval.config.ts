@@ -49,6 +49,27 @@ const inputOverrideTransformer = (openApi /*: OpenAPIObject*/) => {
     }
   }
 
+  // Fix duplicate operationIds
+  const operationIds = new Map();
+  for (const [path, pathItem] of Object.entries(openApi.paths ?? {})) {
+    for (const [method, operation] of Object.entries(pathItem)) {
+      if (['get', 'post', 'put', 'delete', 'patch'].includes(method)) {
+        const operationId = operation.operationId;
+        if (operationId) {
+          if (operationIds.has(operationId)) {
+            // Generate unique operationId based on path and method
+            const pathSegments = path.split('/').filter(Boolean).map(s =>
+              s.startsWith('{') ? 'By' + pascal(s.slice(1, -1)) : pascal(s)
+            );
+            operation.operationId = method + pathSegments.join('');
+          } else {
+            operationIds.set(operationId, { path, method });
+          }
+        }
+      }
+    }
+  }
+
   return openApi;
 };
 
