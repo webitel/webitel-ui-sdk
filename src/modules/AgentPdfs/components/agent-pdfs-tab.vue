@@ -109,8 +109,11 @@ import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 
+import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode'
+import { formatDate } from '../../../utils/formatDate'
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
+import { DatetimeFormat } from 'vue-i18n';
 
 interface Props {
   store?: any;
@@ -180,7 +183,7 @@ initializeDefaultFilters();
 
 const prettifyTimestamp = (timestamp: string | number) => {
   if (!timestamp) return '';
-  return new Date(+timestamp).toLocaleString();
+  return formatDate(+timestamp, FormatDateMode.DATETIME)
 };
 
 const isDownloadDisabled = (item: WebitelMediaExporterExportRecord) => {
