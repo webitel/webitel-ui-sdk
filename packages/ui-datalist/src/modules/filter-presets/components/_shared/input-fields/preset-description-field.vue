@@ -10,7 +10,7 @@
 
   <wt-textarea
     v-if="!props.previewMode"
-    v-model="model"
+    v-model:model-value="model"
     :label="t('vocabulary.description')"
   />
 </template>
