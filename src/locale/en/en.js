@@ -272,6 +272,7 @@ export default deepmerge(
         [ChannelType.Email]: 'Email',
         [ChannelType.Chat]: 'Chat',
         [ChannelType.Job]: 'Task',
+        [ChannelType.OutCall]: 'Outbound call',
       },
     },
     calls: {

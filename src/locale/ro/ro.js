@@ -269,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Chat',
       [ChannelType.Job]: 'Sarcină',
+      [ChannelType.OutCall]: 'Apel ieșire',
     },
   },
   calls: {
