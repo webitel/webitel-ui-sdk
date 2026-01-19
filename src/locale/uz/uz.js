@@ -270,6 +270,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Chat',
       [ChannelType.Job]: 'Vazifa',
+      [ChannelType.OutCall]: "Chiqish qo'ng'irog'i",
     },
   },
   calls: {
