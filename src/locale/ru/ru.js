@@ -269,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Почта',
       [ChannelType.Chat]: 'Чат',
       [ChannelType.Job]: 'Задача',
+      [ChannelType.OutCall]: 'Исходящий звонок',
     },
   },
   cases: {

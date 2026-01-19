@@ -269,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Чат',
       [ChannelType.Job]: 'Тапсырма',
+      [ChannelType.OutCall]: 'Шығыс қоңырау',
     },
   },
   calls: {
