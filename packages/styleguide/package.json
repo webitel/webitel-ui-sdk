@@ -13,8 +13,12 @@
     "typescript": "^5.9.x"
   },
   "exports": {
-    ".": "./src/lib/main.css",
-    "./src/lib/main.css": "./src/lib/main.css",
+    ".": {
+      "style": "./src/lib/main.css"
+    },
+    "./src/lib/main.css": {
+    "style": "./src/lib/main.css"
+    },
     "./typography": "./src/lib/styleguide/typography/typography.css",
     "./scroll": "./src/lib/styleguide/scroll.css",
     "./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
