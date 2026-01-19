@@ -43,6 +43,7 @@
       v-if="isValidation"
       :color="getMessageColor"
       :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
     >
       {{ validationText }}
     </wt-message>
@@ -54,7 +55,7 @@ import type { InputTextProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { MessageVariant, MessageColor } from '../../enums';
+import { MessageVariant, MessageColor, ComponentSize } from '../../enums';
 import { useInputControl } from '../../composables';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {

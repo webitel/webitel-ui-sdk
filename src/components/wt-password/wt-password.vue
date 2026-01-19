@@ -41,6 +41,7 @@
       v-if="isValidation"
       :color="getMessageColor"
       :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
     >
       {{ validationText }}
     </wt-message>
@@ -52,7 +53,7 @@ import type { PasswordProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
 import { computed, defineModel, ref, useTemplateRef, toRefs, useSlots } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { MessageColor, MessageVariant } from '../../enums';
+import { MessageColor, MessageVariant, ComponentSize } from '../../enums';
 import { useInputControl } from '../../composables';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {

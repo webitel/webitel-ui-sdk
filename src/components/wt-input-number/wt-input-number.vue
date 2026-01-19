@@ -63,6 +63,7 @@
       v-if="isValidation"
       :color="getMessageColor"
       :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
     >
       {{ validationText }}
     </wt-message>
