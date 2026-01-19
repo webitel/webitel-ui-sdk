@@ -23,6 +23,7 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { nextTick,onBeforeUnmount, ref } from 'vue';
+
 import { eventBus } from '../../../scripts';
 
 const props = defineProps({
