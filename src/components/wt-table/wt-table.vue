@@ -9,6 +9,7 @@
     :row-style="rowStyle"
     :show-headers="!headless"
     :value="data"
+    :data-key="props.dataKey"
     class="wt-table"
     column-resize-mode="expand"
     lazy
@@ -262,6 +263,12 @@ interface Props extends DataTableProps{
    */
   rowReorder?: boolean;
   /**
+   * Unique field name used to identify a row.
+   * Required for selection, expansion, and virtual scrolling to work correctly.
+   * The value must be stable and unique across all rows.
+   */
+  dataKey?: string;
+  /**
    * 'If true, restrict sprecific row reorder.'
    */
   isRowReorderDisabled?: (row) => boolean;
@@ -296,7 +303,8 @@ const props = withDefaults(defineProps<Props>(), {
   reorderableColumns: false,
   rowExpansionDisabled: () => false,
   lazy: false,
-  itemSize: DEFAULT_ITEM_SIZE
+  itemSize: DEFAULT_ITEM_SIZE,
+  dataKey: '',
 });
 
 const { t } = useI18n();
