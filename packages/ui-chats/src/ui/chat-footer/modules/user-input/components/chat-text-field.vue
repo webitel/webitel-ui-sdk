@@ -6,6 +6,7 @@
     :size="size"
     autoresize
     @update:model-value="send"
+    @enter="emit('enter')"
   />
 </template>
 
@@ -27,6 +28,10 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
 uiChatsEmitter!.on("focusOnTextField", focus);
+
+const emit = defineEmits<{
+  enter: [];
+}>();
 
 const chatTextFieldInputRef =
 	useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
