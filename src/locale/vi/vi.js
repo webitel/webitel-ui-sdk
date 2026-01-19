@@ -269,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Chat',
       [ChannelType.Job]: 'Tác vụ',
+      [ChannelType.OutCall]: 'Cuộc gọi đi',
     },
   },
   calls: {

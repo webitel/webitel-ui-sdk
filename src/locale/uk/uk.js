@@ -268,6 +268,7 @@ export default {
       [ChannelType.Email]: 'Пошта',
       [ChannelType.Chat]: 'Чат',
       [ChannelType.Job]: 'Задача',
+      [ChannelType.OutCall]: 'Вихідний дзвінок',
     },
   },
   calls: {
