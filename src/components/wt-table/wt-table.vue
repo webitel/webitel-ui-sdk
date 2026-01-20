@@ -263,6 +263,10 @@ interface Props extends DataTableProps{
    */
   rowReorder?: boolean;
   /**
+   * @author @Oleksandr Palonnyi
+   *
+   * [WTEL-8629](https://webitel.atlassian.net/browse/WTEL-8629)
+   *
    * Unique field name used to identify a row.
    * Required for selection, expansion, and virtual scrolling to work correctly.
    * The value must be stable and unique across all rows.
