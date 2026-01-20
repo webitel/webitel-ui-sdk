@@ -13,6 +13,7 @@
         "name": "typescript-plugin-css-modules"
       }
     ],
+    "types": ["vidstack/vue"],
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "moduleDetection": "force",

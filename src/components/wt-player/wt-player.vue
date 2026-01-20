@@ -1,7 +1,8 @@
 <template>
 	<media-player 
 		ref="player"
-		class="wt-player" 
+		class="wt-player"
+		:class="`wt-player--position-${position}`"
 		:src="src" 
 		:loop="loop" 
 		:autoplay="autoplay"
@@ -38,9 +39,7 @@ import 'vidstack/bundle';
 import { PlyrControl } from 'vidstack';
 import {
 	computed,
-	nextTick,
 	onMounted,
-	ref,
 	watch,
 } from 'vue';
 
