@@ -6,27 +6,51 @@
     @change="currentVariant = $event"
   />
   <div class="example-container">
-    <wt-message :severity="MessageColor.INFO" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.INFO" 
+      :variant="currentVariant.value" 
+      closable
+    >
       This is an info message
     </wt-message>
 
-    <wt-message :severity="MessageColor.SUCCESS" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.SUCCESS" 
+      :variant="currentVariant.value" 
+      closable
+    >
       Operation completed successfully
     </wt-message>
 
-    <wt-message :severity="MessageColor.WARN" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.WARN" 
+      :variant="currentVariant.value" 
+      closable
+    >
       Warning: Please review your input
     </wt-message>
 
-    <wt-message :severity="MessageColor.ERROR" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.ERROR" 
+      :variant="currentVariant.value" 
+      closable
+    >
       An error occurred while processing
     </wt-message>
 
-    <wt-message :severity="MessageColor.CONTRAST" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.CONTRAST" 
+      :variant="currentVariant.value" 
+      closable
+    >
       This is an contrast message
     </wt-message>
 
-    <wt-message :severity="MessageColor.SECONDARY" :variant="currentVariant.value">
+    <wt-message 
+      :severity="MessageColor.SECONDARY" 
+      :variant="currentVariant.value" 
+      closable
+    >
       This is an secondary message
     </wt-message>
   </div>

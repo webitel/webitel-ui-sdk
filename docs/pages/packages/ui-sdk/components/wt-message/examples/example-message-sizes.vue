@@ -2,21 +2,32 @@
   <div class="example-container">
     <div>
       <h4>Small</h4>
-      <wt-message severity="info" :size="ComponentSize.SM">
+      <wt-message 
+        severity="info" 
+        :size="ComponentSize.SM" 
+        closable
+      >
         Small size message
       </wt-message>
     </div>
 
     <div>
       <h4>Default (medium)</h4>
-      <wt-message severity="success">
+      <wt-message 
+        severity="success" 
+        closable
+      >
         Default size message
       </wt-message>
     </div>
 
     <div>
       <h4>Large</h4>
-      <wt-message severity="warn" :size="ComponentSize.LG">
+      <wt-message 
+        severity="warn" 
+        :size="ComponentSize.LG" 
+        closable
+      >
         Large size message
       </wt-message>
     </div>

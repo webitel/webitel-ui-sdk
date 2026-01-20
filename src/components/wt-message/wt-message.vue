@@ -6,6 +6,12 @@
     v-bind="$attrs"
   >
     <slot />
+    <template #closeicon>
+      <wt-icon 
+        icon="close"
+        :size="ComponentSize.SM"
+      />
+    </template>
   </p-message>
 </template>
 

@@ -40,7 +40,7 @@
       </p-input-group-addon>
     </p-input-group>
     <wt-message
-      v-if="isValidation"
+      v-if="isValidation && validationText"
       :color="getMessageColor"
       :variant="MessageVariant.SIMPLE"
       :size="ComponentSize.SM"

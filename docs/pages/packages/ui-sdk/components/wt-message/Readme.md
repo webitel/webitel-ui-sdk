@@ -1,7 +1,6 @@
 <script setup>
 import Docs from './wt-message-docs.vue';
 import ExampleMessage from './examples/example-message.vue';
-import ExampleMessageClosable from './examples/example-message-closable.vue';
 import ExampleMessageSizes from './examples/example-message-sizes.vue';
 </script>
 
@@ -19,15 +18,6 @@ import ExampleMessageSizes from './examples/example-message-sizes.vue';
 
 ::: details Code
 <<< ./examples/example-message.vue{vue}
-:::
-
-## Closable Messages
-::: raw
-<ExampleMessageClosable />
-:::
-
-::: details Code
-<<< ./examples/example-message-closable.vue{vue}
 :::
 
 ## Message Sizes
