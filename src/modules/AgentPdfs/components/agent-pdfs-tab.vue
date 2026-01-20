@@ -108,12 +108,12 @@ import {
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { DatetimeFormat } from 'vue-i18n';
 
 import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode'
 import { formatDate } from '../../../utils/formatDate'
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
-import { DatetimeFormat } from 'vue-i18n';
 
 interface Props {
   store?: any;
