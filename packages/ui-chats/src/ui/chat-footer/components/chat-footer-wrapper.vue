@@ -15,5 +15,7 @@ const slots = defineSlots<{
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xs);
+  max-height: 50%;
+  position: relative;
 }
 </style>

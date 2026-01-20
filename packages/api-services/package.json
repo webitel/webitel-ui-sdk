@@ -1,11 +1,11 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.91",
+  "version": "0.0.113",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
-    "publish-lib": "npm publish --access public",
+    "publish-lib": "npm publish --access public --tag latest",
     "gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
     "gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
     "gen:api:typedoc": "npx typedoc",
@@ -44,6 +44,7 @@
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
+    "vue-i18n": "^11.2.8",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
   },
@@ -97,6 +98,10 @@
     "./enums": {
       "types": "./types/enums/index.d.ts",
       "import": "./src/enums/index.ts"
+    },
+    "./locale": {
+      "types": "./src/locale/locale.ts",
+      "import": "./src/locale/locale.ts"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { ChatAction, type SharedActionSlots } from "../types/ChatAction.types";
+import { ChatAction, type SharedActionSlots } from "../enums/ChatAction.enum";
 type __VLS_Props = {
     actions: ChatAction[];
 };

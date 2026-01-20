@@ -41,7 +41,7 @@ export const SearchSystemSettingNameItem = {
   password_expiry_days: 'password_expiry_days',
   password_min_length: 'password_min_length',
   password_categories: 'password_categories',
-  password_contains_username: 'password_contains_username',
+  password_contains_login: 'password_contains_login',
   password_warning_days: 'password_warning_days',
   default_password: 'default_password',
 } as const;

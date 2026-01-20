@@ -3,22 +3,26 @@
     class="video-layout controls"
     :class="`video-layout--${size}`"
   >
-    <video-display-panel
-      :class="{'video-display-panel--hidden': props.hideHeader}"
-      :title="props.title"
-      :username="props.username"
-      :closable="props.closable"
-      :hide-expand="props.hideExpand"
-      @close="emit('close-player')"
-    />
+    <div class="video-display-panel-wrapper">
+      <video-display-panel
+        v-if="!props.hideVideoDisplayPanel"
+        :title="props.title"
+        :username="props.username"
+        :closable="props.closable"
+        :hide-expand="props.hideExpand"
+        @close="emit('close-player')"
+      />
+    </div>
 
-    <media-controls-group>
+    <media-controls-group class="video-layout-content">
       <slot name="content" />
     </media-controls-group>
 
-    <slot v-if="!props.hideControlsPanel" name="controls-panel">
-      <media-controls-panel />
-    </slot>
+    <div class="video-layout-controls">
+      <slot v-if="!props.hideControlsPanel" name="controls-panel">
+          <media-controls-panel />
+      </slot>
+    </div>
   </media-controls>
 </template>
 
@@ -35,7 +39,7 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
-  hideHeader?: boolean
+  hideVideoDisplayPanel?: boolean
   hideControlsPanel?: boolean
   hideExpand?: boolean
 }>();
@@ -50,29 +54,42 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .video-layout {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'head' 'content' 'controls';
+  grid-template-rows: repeat(3, 1fr);
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition) ease-out;
 
-  .video-display-panel {
-    &--hidden {
-      visibility: hidden;
-    }
+  &-content {
+    grid-area: content;
+  }
+
+  &-controls {
+    grid-area: controls;
+    align-self: flex-end;
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .video-display-panel-wrapper {
+    grid-area: head;
+    min-width: 0;
+    align-self: flex-start;
   }
 
   &--sm {
     border-radius: var(--p-player-wrapper-sm-border-radius);
   }
-}
-
-.controls {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  justify-content: space-between;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  transition: all var(--transition) ease-out;
 }
 
 media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs

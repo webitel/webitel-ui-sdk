@@ -1,7 +1,7 @@
 export const SupervisorSections = {
   Queues: 'queues',
   Agents: 'agents',
-  ActiveCalls: 'activeCalls',
+  ActiveCalls: 'active-calls',
 } as const;
 
 export type SupervisorSections =

@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'Дейін',
     tts: 'Мәтін-дауыс',
     state: 'Күй',
+    status: 'Күй',
     refresh: 'Жаңарту',
     retry: 'Қайталау',
     downloadAll: 'Барлығын жүктеу',
@@ -238,6 +240,15 @@ export default {
     },
     screenRecordings: 'Экран жазбасы | Экран жазбалары',
     screenshots: 'Экран суреті | Экран суреттері',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Күтуде',
+        [WebitelMediaExporterExportStatus.Processing]: 'Өңделуде',
+        [WebitelMediaExporterExportStatus.Done]: 'Дайын',
+        [WebitelMediaExporterExportStatus.Failed]: 'Қате',
+      },
+    },
   },
   channel: {
     state: {
@@ -258,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Чат',
       [ChannelType.Job]: 'Тапсырма',
+      [ChannelType.OutCall]: 'Шығыс қоңырау',
     },
   },
   calls: {
@@ -378,6 +390,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Камера өшірілген',
+    },
   },
   validation: {
     required: 'Өріс міндетті',

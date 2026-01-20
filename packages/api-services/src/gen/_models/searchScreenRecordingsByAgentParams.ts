@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { SearchScreenRecordingsByAgentType } from './searchScreenRecordingsByAgentType';
+import type { SearchScreenRecordingsByAgentChannel } from './searchScreenRecordingsByAgentChannel';
 
 export type SearchScreenRecordingsByAgentParams = {
 page?: number;
@@ -19,4 +20,5 @@ referenceId?: string[];
 retentionUntilFrom?: string;
 retentionUntilTo?: string;
 type?: SearchScreenRecordingsByAgentType;
+channel?: SearchScreenRecordingsByAgentChannel;
 };

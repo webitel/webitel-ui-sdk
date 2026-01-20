@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'Do',
     tts: 'Tekst na mowę',
     state: 'Stan',
+    status: 'Status',
     refresh: 'Odśwież',
     retry: 'Ponów',
     downloadAll: 'Pobierz wszystko',
@@ -238,6 +240,15 @@ export default {
     },
     screenRecordings: 'Nagranie ekranu | Nagrania ekranu',
     screenshots: 'Zrzut ekranu | Zrzuty ekranu',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Oczekujące',
+        [WebitelMediaExporterExportStatus.Processing]: 'Przetwarzanie',
+        [WebitelMediaExporterExportStatus.Done]: 'Gotowe',
+        [WebitelMediaExporterExportStatus.Failed]: 'Błąd',
+      },
+    },
   },
   channel: {
     state: {
@@ -258,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Czat',
       [ChannelType.Job]: 'Zadanie',
+      [ChannelType.OutCall]: 'Połączenie wychodzące',
     },
   },
   calls: {
@@ -378,6 +390,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera jest wyłączona',
+    },
   },
   validation: {
     required: 'Pole jest wymagane',

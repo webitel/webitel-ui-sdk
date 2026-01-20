@@ -4,33 +4,43 @@
             header goes here
         </slot> -->
         <slot name="main">
-          <chat-messages-container
+          <dropzone
+            v-if="!isDropzoneDisabled && isDropzoneVisible"
+            @dragenter.prevent
+            @dragleave.prevent="handleDragLeave"
+            @drop="sendFile"
+          />
+          <messages-container
             :messages="props.messages"
-            :hide-avatars="props.hideAvatars"
+            :next="props.canLoadNextMessages"
+            :is-loading="props.isNextMessagesLoading"
+            :without-avatars="props.withoutAvatars"
+            @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
+            @[ChatAction.AttachFiles]="sendFile"
           />
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
             <template #default>
               <chat-text-field
-                  v-model:text="draft"
+                v-model:text="draft"
               />
               <chat-input-actions-bar
-                :actions="chatActions"
+                :actions="props.chatActions"
                 @[ChatAction.SendMessage]="sendMessage"
                 @[ChatAction.AttachFiles]="sendFile"
               >
-              <template
-                v-for="action in slottedChatActions"
-                :key="action"
-                #[action]="{ size }"
-              >
-                <slot
-                  :name="`action:${action}`"
-                  v-bind="{ size }"
-                />
-              </template>
-            </chat-input-actions-bar>
+                <template
+                  v-for="action in slottedChatActions"
+                  :key="action"
+                  #[action]="{ size }"
+                >
+                  <slot
+                    :name="`action:${action}`"
+                    v-bind="{ size }"
+                  />
+                </template>
+              </chat-input-actions-bar>
             </template>
           </chat-footer-wrapper>
         </slot>
@@ -47,8 +57,11 @@ import ChatTextField from "./chat-footer/modules/user-input/components/chat-text
 import {
 	ChatAction,
 	type SharedActionSlots,
-} from "./chat-footer/modules/user-input/types/ChatAction.types";
-import ChatMessagesContainer from "./messaging/components/the-chat-messages-container.vue";
+} from "./chat-footer/modules/user-input/enums/ChatAction.enum";
+import Dropzone from "./messaging/components/dropzone.vue";
+import MessagesContainer from "./messaging/components/the-messages-container.vue";
+import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
+import { MessageAction } from "./messaging/modules/message/enums/MessageAction.enum";
 import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
 import { createUiChatsEmitter } from "./utils/emitter";
 import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
@@ -58,14 +71,18 @@ const props = withDefaults(
 		messages: ChatMessageType[];
 		chatActions?: ChatAction[];
 		size?: ComponentSize;
-		hideAvatars?: boolean;
+		canLoadNextMessages?: boolean; // 'next'
+		isNextMessagesLoading?: boolean;
+		withoutAvatars?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
-		hideAvatars: false,
+		withoutAvatars: false,
 		chatActions: () => [
 			ChatAction.SendMessage,
 		],
+		canLoadNextMessages: false,
+		isNextMessagesLoading: false,
 	},
 );
 
@@ -80,6 +97,8 @@ const emit = defineEmits<{
 		files: File[],
 		options: ResultCallbacks,
 	): void;
+	(e: typeof ChatAction.LoadNextMessages): void;
+	(e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
 }>();
 
 const slots = defineSlots<
@@ -94,6 +113,11 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide("size", props.size);
 provide("uiChatsEmitter", uiChatsEmitter);
 
+uiChatsEmitter?.on("clickChatMessageImage", (message) => {
+	emit(MessageAction.ClickOnImage, message);
+});
+const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
+
 const draft = ref<string>("");
 
 const slottedChatActions = computed(() => {
@@ -101,6 +125,9 @@ const slottedChatActions = computed(() => {
 		.filter((key) => key.startsWith("action:"))
 		.map((key) => key.replace("action:", ""));
 });
+const isDropzoneDisabled = computed(
+	() => !props.chatActions.includes(ChatAction.AttachFiles),
+);
 
 function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
@@ -118,5 +145,6 @@ function sendFile(files: File[]) {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 </style>

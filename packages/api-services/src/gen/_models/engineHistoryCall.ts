@@ -59,6 +59,7 @@ export interface EngineHistoryCall {
   id?: string;
   joinedAt?: string;
   leavingAt?: string;
+  meetingId?: string;
   member?: EngineLookup;
   memberId?: string;
   parentId?: string;

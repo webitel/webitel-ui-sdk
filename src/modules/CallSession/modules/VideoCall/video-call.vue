@@ -5,18 +5,27 @@
     :size="props.size"
     :class="[!props.static && `video-call-position--${props.position}`]"
     :username="props.username"
-    :hide-header="props.hideHeader"
+    :hide-video-display-panel="props.hideVideoDisplayPanel"
     class="video-call"
     hide-background
     autoplay
-    muted
     @change-size="(payload) => emit('change-size', payload)"
   >
     <template #content="{ size: innerSize }">
       <slot name="content" :size="innerSize" />
 
       <slot v-if="!mainStream" name="overlay" :size="innerSize">
-        <div class="video-call-overlay"></div>
+        <div class="video-call-overlay">
+          <div
+            v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
+            :class="`video-call-receiver--${innerSize}`"
+            class="video-call-receiver video-call-receiver--muted"
+          >
+            <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
+
+            <span class="video-call-receiver-text">{{ t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`) }}</span>
+          </div>
+        </div>
       </slot>
 
       <div
@@ -30,25 +39,24 @@
           @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
         />
 
-        <template v-if="props['receiver:stream'] && !props['receiver:video:enabled']">
+        <template v-if="props['sender:stream'] && !props['sender:video:enabled']">
           <div
-            :class="`video-call-receiver--${innerSize}`"
-            class="video-call-receiver video-call-receiver--muted"
+            :class="`video-call-sender--${innerSize}`"
+            class="video-call-sender video-call-sender--muted"
           >
             <wt-icon :size="senderVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
           </div>
         </template>
 
-        <template v-else-if="props['receiver:stream']">
+        <template v-else-if="props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
-            :stream="props['receiver:stream']"
-            :class="`video-call-receiver--${innerSize}`"
-            hide-header
+            :stream="props['sender:stream']"
+            :class="`video-call-sender--${innerSize}`"
+            hide-video-display-panel
             hide-controls-panel
             static
             autoplay
-            muted
-            class="video-call-receiver"
+            class="video-call-sender"
           />
         </template>
       </div>
@@ -75,6 +83,7 @@
         :recordings="props.recordings"
         :actions="props.actions"
         :actions:settings:pressed="props['actions:settings:pressed']"
+        :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:chat:pressed="props['actions:chat:pressed']"
         @[VideoCallAction.Screenshot]="(payload, options) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
         @[VideoCallAction.Recordings]="(payload, options) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
@@ -89,19 +98,20 @@
 </template>
 
 <script setup lang="ts">
-import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {computed} from 'vue';
+import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import {WtIcon} from "../../../../components";
+import { WtIcon } from '../../../../components';
 import {
   RecordingIndicator,
   ScreenshotBox,
-  VideoCallControlsPanel
-} from "../../../../components/wt-vidstack-player/components";
-import {ComponentSize} from "../../../../enums";
-import {ResultCallbacks} from '../../../../types';
-import {ScreenshotStatus} from '../../types';
-import {VideoCallAction} from './enums/VideoCallAction.enum';
+  VideoCallControlsPanel,
+} from '../../../../components/wt-vidstack-player/components';
+import { ComponentSize, WebitelApplications } from '../../../../enums';
+import { ResultCallbacks } from '../../../../types';
+import { ScreenshotStatus } from '../../types';
+import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(defineProps<{
   'sender:stream'?: MediaStream | null;
@@ -125,13 +135,14 @@ const props = withDefaults(defineProps<{
   static?: boolean;
   position?: 'left-bottom' | 'right-bottom' | 'center';
   size?: ComponentSize
-  hideHeader?: boolean
+  hideVideoDisplayPanel?: boolean
   resizable?: boolean;
 
   actions: VideoCallAction[];
   username?: string;
 
   'actions:settings:pressed'?: boolean;
+  'actions:settings:disabled'?: boolean;
   'actions:chat:pressed'?: boolean;
 }>(), {
   position: 'right-bottom',
@@ -150,11 +161,19 @@ const emit = defineEmits<{
   (e: `change-size`, size: ComponentSize): void;
 }>()
 
-const mainStream = computed(() => {
-  if (!props['sender:video:enabled']) return null;
+const { t } = useI18n();
 
-  return props['sender:stream'] || props['receiver:stream'];
+const mainStream = computed(() => {
+  if (!props['receiver:video:enabled']) return props['sender:stream'];
+
+  return props['receiver:stream'] || props['sender:stream'];
 })
+
+const receiverVideoMutedIconSizes = {
+  [ComponentSize.SM]: ComponentSize.MD,
+  [ComponentSize.MD]: ComponentSize.LG,
+  [ComponentSize.LG]: ComponentSize.XXL,
+}
 
 const senderVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
@@ -164,6 +183,8 @@ const senderVideoMutedIconSizes = {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .video-call {
   flex: 0 0 auto;
 
@@ -175,6 +196,7 @@ const senderVideoMutedIconSizes = {
           bottom: var(--spacing-sm);
           top: unset;
         }
+
         &--md {
           top: unset;
           left: var(--spacing-sm);
@@ -190,6 +212,7 @@ const senderVideoMutedIconSizes = {
           right: var(--spacing-sm);
           bottom: var(--spacing-sm);
         }
+
         &--md {
           top: unset;
           right: var(--spacing-sm);
@@ -260,6 +283,32 @@ const senderVideoMutedIconSizes = {
   }
 
   &-receiver {
+    color: var(--p-player-wrapper-muted-color);
+
+    &--sm {
+      @extend %typo-body-2;
+
+      .video-call-receiver-text {
+        max-width: 73px;
+      }
+    }
+
+    &--md, &--lg {
+      @extend %typo-body-1;
+    }
+
+    &--muted {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &-sender {
     flex: 0 0 auto;
 
     &--muted {
@@ -277,11 +326,11 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-sm-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-sm-border-radius);
       }
 
-      &.video-call-sender--muted {
+      &.video-call-receiver--muted {
         padding-bottom: var(--p-player-control-bar-sm-height);
       }
 
@@ -297,7 +346,7 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-md-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-md-border-radius);
       }
 
@@ -313,7 +362,7 @@ const senderVideoMutedIconSizes = {
         border-radius: var(--p-player-cam-preview-lg-border-radius);
       }
 
-      &.video-call-receiver--muted {
+      &.video-call-sender--muted {
         border-radius: var(--p-player-cam-preview-lg-border-radius);
       }
 

@@ -16,16 +16,16 @@
       :muted="props.muted"
       class="wt-vidstack-player__player"
       cross-origin
-      plays-inline
+      playsinline
       @close="emit('close')"
-      @change-size="changeSize"
+      @can-play="onCanPlay"
     >
       <media-provider
         class="wt-vidstack-player__provider"
       ></media-provider>
 
       <video-layout
-        :hide-header="props.hideHeader"
+        :hide-video-display-panel="props.hideVideoDisplayPanel"
         :hide-controls-panel="props.hideControlsPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
@@ -68,7 +68,7 @@ interface Props {
   static?: boolean;
   stream?: MediaStream
   size?: ComponentSize
-  hideHeader?: boolean
+  hideVideoDisplayPanel?: boolean
   hideControlsPanel?: boolean
   hideBackground?: boolean
   hideExpand?: boolean
@@ -78,7 +78,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
-  muted: false,
+  muted: true,
   title: '',
   username: '',
   closable: false,
@@ -96,6 +96,7 @@ const fullscreen = ref(false)
 
 const changeSize = (value) => {
   size.value = value;
+  emit('change-size', value)
 }
 
 /** @author liza-pohranichna
@@ -130,6 +131,9 @@ const normalizedSrc = computed(() => {
   };
 });
 
+const onCanPlay = (ev: unknown) => {
+  ev?.srcElement?.play()
+}
 </script>
 
 <style scoped lang="scss">
@@ -148,20 +152,23 @@ const normalizedSrc = computed(() => {
     margin: 0;
   }
 
+  &__provider {
+     height: 100%;
+   }
+
   &--sm {
     position: fixed;
     right: var(--spacing-md);
     bottom: var(--spacing-md);
     max-width: var(--p-player-wrapper-sm-width);
     max-height: var(--p-player-wrapper-sm-height);
-    z-index: 100;
+    z-index: 10;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
     height: var(--p-player-wrapper-sm-height);
 
     .wt-vidstack-player__provider {
       display: block;
-      height: 100%;
       padding-bottom: var(--p-player-control-bar-sm-height);
     }
   }
@@ -214,7 +221,7 @@ const normalizedSrc = computed(() => {
   &--lg {
     border-radius: var(--p-player-wrapper-lg-border-radius);
     overflow: hidden;
-    z-index: 100;
+    z-index: 10;
 
     .wt-vidstack-player {
       &__player {
@@ -262,6 +269,8 @@ const normalizedSrc = computed(() => {
     &.wt-vidstack-player {
       &--md {
         background: none;
+        pointer-events: none;
+        z-index: calc(var(--p-galleria-mask-z-index) - 1);
       }
     }
   }
@@ -271,10 +280,11 @@ const normalizedSrc = computed(() => {
 <style lang="scss">
 .wt-vidstack-player {
   video {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
     min-width: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: var(--p-player-wrapper-background);
   }
 }
 </style>

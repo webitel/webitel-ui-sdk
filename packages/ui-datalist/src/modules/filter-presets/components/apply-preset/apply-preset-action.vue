@@ -19,6 +19,7 @@
         <section class="apply-preset-main-content">
           <wt-search-bar
             :value="search"
+            @input="handleSearchInput"
             @search="search = $event"
           />
 
@@ -118,14 +119,29 @@ filtersManager.value.addFilter({
   value: props.namespace,
 });
 
+const lastSetSearchValue = ref<string | null>(null);
+
 const search = computed({
   get: () => {
     return filtersManager.value.getFilter('search')?.value || '';
   },
   set: (value) => {
+    // Skip if this value was already set via handleSearchInput
+    if (lastSetSearchValue.value === value) {
+      lastSetSearchValue.value = null;
+      return;
+    }
     filtersManager.value.addFilter({ name: 'search', value });
   },
 });
+
+const handleSearchInput = (value: string) => {
+  // Update search immediately when cleared to bypass debounce
+  if (!value) {
+    lastSetSearchValue.value = value;
+    filtersManager.value.addFilter({ name: 'search', value });
+  }
+};
 
 const {
   showEmpty,

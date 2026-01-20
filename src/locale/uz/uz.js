@@ -1,3 +1,4 @@
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
   AgentStatus,
   CallDirection,
@@ -56,6 +57,7 @@ export default {
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',
     state: 'Holat',
+    status: 'Holat',
     refresh: 'Yangilash',
     retry: 'Qayta urinish',
     downloadAll: 'Hammasini yuklab olish',
@@ -238,6 +240,16 @@ export default {
     },
     screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
     screenshots: 'Ekran rasmi | Ekran rasmlari',
+    agentPdfs: {
+      pdfs: 'PDF | PDFs',
+      preview: "Ko'rib chiqish",
+      status: {
+        [WebitelMediaExporterExportStatus.Pending]: 'Kutilmoqda',
+        [WebitelMediaExporterExportStatus.Processing]: 'Ishlanmoqda',
+        [WebitelMediaExporterExportStatus.Done]: 'Tayyor',
+        [WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
+      },
+    },
   },
   channel: {
     state: {
@@ -258,6 +270,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Chat',
       [ChannelType.Job]: 'Vazifa',
+      [ChannelType.OutCall]: "Chiqish qo'ng'irog'i",
     },
   },
   calls: {
@@ -381,6 +394,9 @@ export default {
       },
     },
     [WebitelApplications.WFM]: { name: 'WFM' },
+    [WebitelApplications.MEET]: {
+      theCameraIsTurnedOff: 'Kamera o‘chirilgan',
+    },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",

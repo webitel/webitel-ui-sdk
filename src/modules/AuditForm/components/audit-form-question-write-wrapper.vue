@@ -51,7 +51,6 @@
 </template>
 
 <script lang="ts" setup>
-import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EngineAuditQuestionType, EngineQuestion } from 'webitel-sdk';
@@ -111,13 +110,18 @@ function updateQuestion({ path, value }) {
 }
 
 function handleQuestionTypeChange(type) {
-  const question = cloneDeep(questionModel.value);
+  const commonFields = {
+    question: questionModel.value.question,
+    required: questionModel.value.required,
+    description: questionModel.value.description,
+    criticalViolation: questionModel.value.criticalViolation,
+  };
+
   if (type === EngineAuditQuestionType.Option) {
-    Object.assign(question, generateQuestionOptionsSchema());
+    questionModel.value = { ...commonFields, ...generateQuestionOptionsSchema() };
   } else if (type === EngineAuditQuestionType.Score) {
-    Object.assign(question, generateQuestionScoreSchema());
+    questionModel.value = { ...commonFields, ...generateQuestionScoreSchema() };
   }
-  questionModel.value = question;
 }
 </script>
 

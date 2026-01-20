@@ -1,5 +1,6 @@
+import deepEqual from 'deep-equal';
 import set from 'lodash/fp/set';
-import { type Ref, ref, watch } from 'vue';
+import { type Ref, ref, toRaw, watch } from 'vue';
 
 import {
   createDatalistStore,
@@ -46,9 +47,14 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = paginationStore;
 
   const headersStore = useHeadersStore();
-  const { headers, shownHeaders, fields, sort, columnWidths, isReorderingColumn } = makeThisToRefs<
-    typeof headersStore
-  >(headersStore, storeType);
+  const {
+    headers,
+    shownHeaders,
+    fields,
+    sort,
+    columnWidths,
+    isReorderingColumn,
+  } = makeThisToRefs<typeof headersStore>(headersStore, storeType);
   const {
     updateSort,
     columnResize,
@@ -58,9 +64,11 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = headersStore;
 
   const filtersStore = useFiltersStore();
-  const { filtersManager, isRestoring: isFiltersRestoring, searchMode } = makeThisToRefs<
-    typeof filtersStore
-  >(filtersStore, storeType);
+  const {
+    filtersManager,
+    isRestoring: isFiltersRestoring,
+    searchMode,
+  } = makeThisToRefs<typeof filtersStore>(filtersStore, storeType);
   const {
     hasFilter,
     addFilter,
@@ -109,7 +117,16 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       const { items, next } = await apiModule.getList(params);
 
       dataList.value = items;
-      updateSelected([]);
+
+      /**
+       * @author: @Oleksandr Palonnyi
+       *
+       * [WTEL-8571](https://webitel.atlassian.net/browse/WTEL-8571)
+       *
+       * link to refactor task - https://webitel.atlassian.net/browse/WTEL-8599
+       * */
+      updateSelected(filterSelected(items));
+
       $patchPaginationStore({ next });
     } catch (err) {
       error.value = err;
@@ -118,6 +135,14 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       isLoading.value = false;
     }
   };
+
+  function filterSelected(items: Entity[]): Entity[] {
+    const selectedToRaw = selected.value.map(toRaw);
+
+    return items.filter((item) =>
+      selectedToRaw.some((s) => deepEqual(s, item)),
+    );
+  }
 
   const appendToDataList = async () => {
     isLoading.value = true;
@@ -203,9 +228,9 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       [() => filtersManager.value.getAllValues(), sort, fields, size],
       async () => {
         /*
-        * @author @Lera24
-        * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
-        * */
+         * @author @Lera24
+         * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
+         * */
         if (isReorderingColumn.value) {
           return;
         }
