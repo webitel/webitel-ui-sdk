@@ -350,6 +350,7 @@ const dataHeaders = computed(() => {
 	return props.headers.map((header) => {
 		if (!header.text && header.locale)
 			return {
+      ...header,
 				text:
 					typeof header.locale === 'string'
 						? t(header.locale)
