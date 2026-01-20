@@ -61,7 +61,7 @@
       </div>
     </div>
     <wt-input-info
-      v-if="isValidation"
+      v-if="isValidation && validationText"
       :invalid="invalid"
     >
       {{ validationText }}
