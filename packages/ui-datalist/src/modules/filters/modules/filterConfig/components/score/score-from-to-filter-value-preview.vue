@@ -1,7 +1,7 @@
 <template>
   <div class="score-from-to-filter-value-preview">
     <div v-if="props.value.from">
-      <p class="score-from-to-filter-value-preview__title">
+      <p class="score-from-to-filter-value-preview__title typo-subtitle-1">
         {{ t('reusable.from') }}
       </p>
 
@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="props.value.to">
-      <p class="score-from-to-filter-value-preview__title">
+      <p class="score-from-to-filter-value-preview__title typo-subtitle-1">
         {{ t('reusable.to') }}
       </p>
 
@@ -32,8 +32,5 @@ const { t } = useI18n();
 @use '@webitel/styleguide/typography' as *;
 
 .score-from-to-filter-value-preview {
-  &__title {
-    @extend %typo-subtitle-1;
-  }
 }
 </style>
