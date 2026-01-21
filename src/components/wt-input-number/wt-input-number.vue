@@ -104,7 +104,7 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
   step: 1,
   minFractionDigits: undefined,
   maxFractionDigits: undefined,
-  showButtons: false,
+  showButtons: true,
   v: null,
   regleValidation: null,
   customValidators: () => [],

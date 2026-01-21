@@ -11,7 +11,11 @@ const generateCustomColorCss = ({ colorName, dt }) => `
     fill: ${dt(`message.${colorName}.outlined.color`)};
   }
 
-.p-message-${colorName}.p-message-simple .p-message-close-button svg {
+  .p-message-${colorName}.p-message-outlined .p-message-close-button:hover {
+    background: ${dt(`message.${colorName}.outlined.closeButton.hoverBackground`)};
+  }
+
+  .p-message-${colorName}.p-message-simple .p-message-close-button svg {
     fill: ${dt(`message.${colorName}.simple.color`)};
   }
 `
