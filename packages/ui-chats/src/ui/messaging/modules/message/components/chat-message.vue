@@ -152,10 +152,4 @@ function handlePlayerInitialize(player) {
   place-self: flex-end;
 }
 
-.chat-message--right .chat-message-document {
-  background: var(--secondary-light-color);
-  color: var(--secondary-on-color);
-  place-self: flex-end;
-}
-
 </style>
