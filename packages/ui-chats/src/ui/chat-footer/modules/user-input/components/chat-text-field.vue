@@ -30,7 +30,7 @@ uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
 uiChatsEmitter!.on("focusOnTextField", focus);
 
 const emit = defineEmits<{
-  enter: [];
+	enter: [];
 }>();
 
 const chatTextFieldInputRef =
