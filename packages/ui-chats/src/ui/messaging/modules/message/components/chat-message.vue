@@ -37,6 +37,7 @@
         <message-document
           v-else-if="document"
           :file="document"
+          :self-side="isSelfSide"
         />
         <message-text
           v-if="props.message?.text"
@@ -146,6 +147,12 @@ function handlePlayerInitialize(player) {
 }
 
 .chat-message--right .chat-message-text {
+  background: var(--secondary-light-color);
+  color: var(--secondary-on-color);
+  place-self: flex-end;
+}
+
+.chat-message--right .chat-message-document {
   background: var(--secondary-light-color);
   color: var(--secondary-on-color);
   place-self: flex-end;
