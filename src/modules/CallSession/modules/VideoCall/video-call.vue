@@ -19,7 +19,7 @@
         <div class="video-call-overlay">
           <div
             v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
-            :class="`video-call-receiver--${innerSize}`"
+            :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
             <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
@@ -319,15 +319,9 @@ const senderVideoMutedIconSizes = {
     color: var(--p-player-wrapper-muted-color);
 
     &--sm {
-      @extend %typo-body-2;
-
       .video-call-receiver-text {
         max-width: 73px;
       }
-    }
-
-    &--md, &--lg {
-      @extend %typo-body-1;
     }
 
     &--muted {
