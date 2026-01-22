@@ -264,6 +264,7 @@ export default {
       [ChannelType.Email]: 'Correo electrónico',
       [ChannelType.Chat]: 'Chat',
       [ChannelType.Job]: 'Tarea',
+      [ChannelType.OutCall]: 'Llamada saliente',
     },
   },
   calls: {

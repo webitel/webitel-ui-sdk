@@ -11,8 +11,13 @@ import PTable from 'primevue/datatable';
 import PDivider from 'primevue/divider';
 import PGalleria from 'primevue/galleria';
 import PImage from 'primevue/image';
+import PInputGroup from 'primevue/inputgroup';
+import PInputGroupAddon from 'primevue/inputgroupaddon';
+import PInputNumber from 'primevue/inputnumber';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
+import PMessage from 'primevue/message';
+import PPassword from 'primevue/password';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
 import PSlider from 'primevue/slider';
@@ -59,6 +64,11 @@ const initPrimevue = (app) => {
   app.component('PImage', changeComponentCompatMode(PImage));
   app.component('PGalleria', changeComponentCompatMode(PGalleria));
   app.component('PBadge', changeComponentCompatMode(PBadge));
+  app.component('PInputGroup', changeComponentCompatMode(PInputGroup));
+  app.component('PInputNumber', changeComponentCompatMode(PInputNumber));
+  app.component('PPassword', changeComponentCompatMode(PPassword));
+  app.component('PInputGroupAddon', changeComponentCompatMode(PInputGroupAddon));
+  app.component('PMessage', changeComponentCompatMode(PMessage));
 
   app.directive('tooltip', Tooltip);
 };

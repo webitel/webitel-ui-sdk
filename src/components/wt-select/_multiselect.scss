@@ -76,7 +76,6 @@
     border-color: var(--wt-text-field-select-option-wrapper-border-color);
     border-radius: var(--border-radius);
     background: transparent;
-    z-index: calc(var(--p-galleria-mask-z-index) - 2);
   }
 
   // select options
@@ -104,7 +103,6 @@
 }
 
 :deep(.multiselect--active) {
-  z-index: calc(var(--p-galleria-mask-z-index) - 2); // // lowered z-index to prevent overlapping the gallery and video container
   .multiselect__select.multiselect__arrow .wt-icon {
     fill: var(--icon-active-color);
   }

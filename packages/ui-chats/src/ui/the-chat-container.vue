@@ -24,6 +24,7 @@
             <template #default>
               <chat-text-field
                 v-model:text="draft"
+                @enter="sendMessage"
               />
               <chat-input-actions-bar
                 :actions="props.chatActions"

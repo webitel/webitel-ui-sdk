@@ -269,6 +269,7 @@ export default {
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Czat',
       [ChannelType.Job]: 'Zadanie',
+      [ChannelType.OutCall]: 'Połączenie wychodzące',
     },
   },
   calls: {

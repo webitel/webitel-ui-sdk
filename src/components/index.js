@@ -38,18 +38,22 @@ import WtImage from './wt-image/wt-image.vue';
 import WtIndicator from './wt-indicator/wt-indicator.vue';
 import WtInput from './wt-input/wt-input.vue';
 import WtInputInfo from './wt-input-info/wt-input-info.vue';
+import WtInputNumber from './wt-input-number/wt-input-number.vue';
+import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
 import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
+import WtMessage from './wt-message/wt-message.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotification from './wt-notification/wt-notification.vue';
 import WtNotificationsBar from './wt-notifications-bar/wt-notifications-bar.vue';
 import WtPageHeader from './wt-page-header/wt-page-header.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPagination from './wt-pagination/wt-pagination.vue';
+import WtPassword from './wt-password/wt-password.vue';
 import WtPlayer from './wt-player/wt-player.vue';
 import WtPopover from './wt-popover/wt-popover.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -86,6 +90,10 @@ const Components = {
   WtIcon,
   WtIndicator,
   WtInputInfo,
+  WtInputNumber,
+  WtInputText,
+  WtPassword,
+  WtMessage,
   WtButton,
   WtChip,
   WtConfirmDialog,
@@ -189,12 +197,15 @@ export {
   WtIndicator,
   WtInput,
   WtInputInfo,
+  WtInputNumber,
+  WtInputText,
   WtIntersectionObserver,
   WtItemLink,
   WtLabel,
   WtLoadBar,
   WtLoader,
   WtLogo,
+  WtMessage,
   WtNavigationBar,
   WtNavigationMenu,
   WtNotification,
@@ -202,6 +213,7 @@ export {
   WtPageHeader,
   WtPageWrapper,
   WtPagination,
+  WtPassword,
   WtPlayer,
   WtPopover,
   WtPopup,
