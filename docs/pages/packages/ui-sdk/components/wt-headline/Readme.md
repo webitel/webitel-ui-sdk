@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-headline-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleHeadline from './examples/example-headline.vue';
 </script>
 
-# WtHeadline
+# `wt-headline.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Headline
 

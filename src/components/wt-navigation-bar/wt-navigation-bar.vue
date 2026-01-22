@@ -12,7 +12,7 @@
     <transition name="fade">
       <nav
         v-show="isOpened"
-        class="wt-navigation-bar__nav"
+        class="wt-navigation-bar__nav wt-scrollbar"
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
@@ -49,7 +49,7 @@
                       currentNav.nav === navItem.value,
                   }"
                   :to="navItem.route"
-                  class="wt-navigation-bar__nav-item-link"
+                  class="wt-navigation-bar__nav-item-link typo-body-1"
                   @click="close"
                 >
                   {{ navItem.name || navItem.value }}
@@ -68,7 +68,7 @@
                 type="button"
                 @click="expand(navItem)"
               >
-                <span class="wt-navigation-bar__nav-expansion-name">{{
+                <span class="wt-navigation-bar__nav-expansion-name typo-subtitle-1">{{
                   navItem.name || navItem.value
                 }}</span>
                 <wt-icon
@@ -128,123 +128,151 @@ import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo = {
-  [WebitelApplications.SUPERVISOR]: {
-    dark: SupervisorDark,
-    light: SupervisorLight,
-  },
-  [WebitelApplications.ADMIN]: {
-    dark: AdminDark,
-    light: AdminLight,
-  },
-  [WebitelApplications.AGENT]: {
-    dark: WorkspaceDark,
-    light: WorkspaceLight,
-  },
-  [WebitelApplications.AUDIT]: {
-    dark: AuditDark,
-    light: AuditLight,
-  },
-  [WebitelApplications.HISTORY]: {
-    dark: HistoryDark,
-    light: HistoryLight,
-  },
-  [WebitelApplications.CRM]: {
-    dark: CrmDark,
-    light: CrmLight,
-  },
-  [WebitelApplications.WFM]: {
-    dark: WfmDark,
-    light: WfmLight,
-  },
+	[WebitelApplications.SUPERVISOR]: {
+		dark: SupervisorDark,
+		light: SupervisorLight,
+	},
+	[WebitelApplications.ADMIN]: {
+		dark: AdminDark,
+		light: AdminLight,
+	},
+	[WebitelApplications.AGENT]: {
+		dark: WorkspaceDark,
+		light: WorkspaceLight,
+	},
+	[WebitelApplications.AUDIT]: {
+		dark: AuditDark,
+		light: AuditLight,
+	},
+	[WebitelApplications.HISTORY]: {
+		dark: HistoryDark,
+		light: HistoryLight,
+	},
+	[WebitelApplications.CRM]: {
+		dark: CrmDark,
+		light: CrmLight,
+	},
+	[WebitelApplications.WFM]: {
+		dark: WfmDark,
+		light: WfmLight,
+	},
 };
 
 export default {
-  name: 'WtNavigationBar',
-  components: { ExpandTransition },
-  props: {
-    currentApp: {
-      type: String,
-      default: 'admin',
-    },
-    /**
-     * @type {WtNavigationBarNavItem[]}
-     */
-    nav: {
-      type: Array,
-      default: () => [],
-    },
-    darkMode: {
-      type: Boolean,
-      default: false,
-    },
-    logoRoute: {
-      type: String,
-      default: '',
-    },
-  },
-  data: () => ({
-    isOpened: false,
-    expandedName: '',
-    appLogo,
-  }),
+	name: 'WtNavigationBar',
+	components: {
+		ExpandTransition,
+	},
+	props: {
+		/**
+		 * Currently opened app
+		 * @type {string}
+		 * @default 'admin'
+		 */
+		currentApp: {
+			type: String,
+			default: 'admin',
+		},
+		/**
+		 * Should receive array of nav objects. All objects should have following properties:
+		 * "value" -- main inner logic property, should be unique. "name" -- display name. If none,
+		 * displays "value" property. "route" -- relative path, used for :to attr in router-link component.
+		 * "subNav": array of objects, with properties, described above.
+		 * If expansion has route, and subNav has route, subNav route computes like nav.route + / + subnav.route
+		 * @type {Array}
+		 * @default []
+		 */
+		nav: {
+			type: Array,
+			default: () => [],
+		},
+		/**
+		 * Dark mode flag
+		 * @type {boolean}
+		 * @default false
+		 */
+		darkMode: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Logo route path
+		 * @type {string}
+		 * @default ''
+		 */
+		logoRoute: {
+			type: String,
+			default: '',
+		},
+	},
+	data: () => ({
+		isOpened: false,
+		expandedName: '',
+		appLogo,
+	}),
 
-  computed: {
-    currentNav() {
-      const pathSegments = this.$route.path.split('/').filter(Boolean);
+	computed: {
+		currentNav() {
+			const pathSegments = this.$route.path.split('/').filter(Boolean);
 
-      const flatNav = this.nav.flatMap(item => item.subNav ?? [item]);
+			const flatNav = this.nav.flatMap(
+				(item) =>
+					item.subNav ?? [
+						item,
+					],
+			);
 
-      const navMap = new Map(flatNav.map(item => [item.value, item]));
+			const navMap = new Map(
+				flatNav.map((item) => [
+					item.value,
+					item,
+				]),
+			);
 
-      const matchingSegment = pathSegments.find(segment => navMap.has(segment));
-      const currentNav = navMap.get(matchingSegment);
+			const matchingSegment = pathSegments.find((segment) =>
+				navMap.has(segment),
+			);
+			const currentNav = navMap.get(matchingSegment);
 
-      const currentExpansion = this.nav.find(nav =>
-        nav.subNav?.includes(currentNav)
-      );
+			const currentExpansion = this.nav.find((nav) =>
+				nav.subNav?.includes(currentNav),
+			);
 
-      return {
-        nav: currentNav?.value,
-        expansion: currentExpansion?.value,
-      };
-    }
-  },
-  methods: {
-    nestedRoute(subNavItem, navItem) {
-      return navItem.route
-        ? `${navItem.route}/${subNavItem.route}`
-        : subNavItem.route;
-    },
-    expand(navItem) {
-      this.expandedName =
-        this.expandedName !== navItem.value ? navItem.value : '';
-    },
-    isExpanded(navItem) {
-      return this.expandedName === navItem.value;
-    },
-    close() {
-      this.isOpened = false;
-    },
-  },
+			return {
+				nav: currentNav?.value,
+				expansion: currentExpansion?.value,
+			};
+		},
+	},
+	methods: {
+		nestedRoute(subNavItem, navItem) {
+			return navItem.route
+				? `${navItem.route}/${subNavItem.route}`
+				: subNavItem.route;
+		},
+		expand(navItem) {
+			this.expandedName =
+				this.expandedName !== navItem.value ? navItem.value : '';
+		},
+		isExpanded(navItem) {
+			return this.expandedName === navItem.value;
+		},
+		close() {
+			this.isOpened = false;
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/scroll' as *;
-
+<style scoped>
 .wt-navigation-bar__menu-btn {
   display: block;
   width: fit-content;
 }
 
 .wt-navigation-bar__nav {
-  @extend %wt-scrollbar;
   position: fixed;
+  /* expand animation optimization */
   top: 0;
   bottom: 0;
   left: 0;
@@ -255,14 +283,13 @@ export default {
   padding: var(--wt-navigation-bar-padding);
   width: var(--wt-navigation-bar-width);
   overflow: auto;
+}
 
-  // expand animation optimization
-  * {
-    transform: translateZ(0);
-    perspective: 1000px;
-    backface-visibility: hidden;
-    will-change: height;
-  }
+.wt-navigation-bar__nav * {
+  transform: translateZ(0);
+  perspective: 1000px;
+  backface-visibility: hidden;
+  will-change: height;
 }
 
 .wt-navigation-bar__nav-header {
@@ -278,25 +305,28 @@ export default {
 }
 
 .wt-navigation-bar__nav-item-link {
-  @extend %typo-body-1;
   display: block;
   transition: var(--transition);
   padding: var(--wt-navigation-bar-link-padding);
   word-wrap: break-word;
   color: var(--wt-navigation-bar-option-text-color);
+}
 
-  &:hover {
-    background: var(--wt-navigation-bar-option-background-hover-color);
-  }
+.wt-navigation-bar__nav-item-link:hover {
+  background: var(--wt-navigation-bar-option-background-hover-color);
+}
 
-  &.wt-navigation-bar__nav-item-link--active {
-    background: var(--wt-navigation-bar-option-background-active-color);
-    color: var(--wt-navigation-bar-option-text-active-color);
-  }
+.wt-navigation-bar__nav-item-link--active {
+  background: var(--wt-navigation-bar-option-background-active-color);
+  color: var(--wt-navigation-bar-option-text-active-color);
 }
 
 .wt-navigation-bar__nav-expansion {
-  @extend %typo-subtitle-1;
+  font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: none;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -305,32 +335,32 @@ export default {
   padding: var(--wt-navigation-bar-link-padding);
   width: 100%;
   color: var(--wt-navigation-bar-option-text-color);
+}
 
-  &:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    transition: var(--transition);
-    border-radius: var(--border-radius);
-    background: var(--wt-navigation-bar-expansion-ribbon-color);
-    width: var(--wt-navigation-bar-active-expansion-flag-width);
-    content: '';
-  }
+.wt-navigation-bar__nav-expansion::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  background: var(--wt-navigation-bar-expansion-ribbon-color);
+  width: var(--wt-navigation-bar-active-expansion-flag-width);
+  content: '';
+}
 
-  .wt-navigation-bar__expansion-arrow {
-    transition: var(--transition);
-  }
+.wt-navigation-bar__nav-expansion--expanded::before,
+.wt-navigation-bar__nav-expansion--active::before {
+  opacity: 1;
+}
 
-  &--expanded:before,
-  &--active:before {
-    opacity: 1;
-  }
+.wt-navigation-bar__nav-expansion--expanded .wt-navigation-bar__expansion-arrow {
+  transform: rotate(90deg);
+}
 
-  &--expanded .wt-navigation-bar__expansion-arrow {
-    transform: rotate(90deg);
-  }
+.wt-navigation-bar__nav-expansion .wt-navigation-bar__expansion-arrow {
+  transition: var(--transition);
 }
 
 .wt-navigation-bar__nav-expansion-name {

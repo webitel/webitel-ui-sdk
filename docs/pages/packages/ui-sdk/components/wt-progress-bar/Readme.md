@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-progress-bar-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleProgressBarDifferentColors from './examples/example-progress-bar-different-colors.vue';
 </script>
 
-# WtProgressBar
+# `wt-progress-bar.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example ProgressBar Different Colors
 

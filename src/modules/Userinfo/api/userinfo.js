@@ -1,8 +1,8 @@
 import {
-  getSession,
-  getUiVisibilityAccess,
-  logout,
-  setInstance,
+	getSession,
+	getUiVisibilityAccess,
+	logout,
+	setInstance,
 } from '../v2/api/UserinfoAPI';
 
 /**
@@ -11,15 +11,15 @@ import {
  * backward compat
  * */
 const userinfo = (instance) => {
-  if (instance) {
-    setInstance(instance);
-  }
+	if (instance) {
+		setInstance(instance);
+	}
 
-  return {
-    getSession,
-    logout,
-    getUiVisibilityAccess,
-  };
+	return {
+		getSession,
+		logout,
+		getUiVisibilityAccess,
+	};
 };
 
 export default userinfo;

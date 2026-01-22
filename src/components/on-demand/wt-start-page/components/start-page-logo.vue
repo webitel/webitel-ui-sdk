@@ -6,14 +6,14 @@
 
 <script setup>
 const props = defineProps({
-  logo: {
-    type: String,
-    required: true,
-  },
+	logo: {
+		type: String,
+		required: true,
+	},
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .start-page-logo {
   display: flex;
   justify-content: center;

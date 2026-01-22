@@ -94,163 +94,172 @@
 </template>
 
 <script lang="ts" setup>
-import { downloadFile, getMediaUrl } from '@webitel/api-services/api';
-import { FileServicesAPI, PdfServicesAPI } from '@webitel/api-services/api';
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
-import { WebitelMediaExporterExportRecord } from '@webitel/api-services/gen/models';
-import { WtEmpty } from '@webitel/ui-sdk/components';
-import { getEndOfDay,getStartOfDay } from '@webitel/ui-sdk/scripts';
-import DeleteConfirmationPopup
-  from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import {
-  useDeleteConfirmationPopup,
-} from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
+	downloadFile,
+	FileServicesAPI,
+	getMediaUrl,
+	PdfServicesAPI,
+} from '@webitel/api-services/api';
+import {
+	type WebitelMediaExporterExportRecord,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
+import { WtEmpty } from '@webitel/ui-sdk/components';
+import { getEndOfDay, getStartOfDay } from '@webitel/ui-sdk/scripts';
+import DeleteConfirmationPopup from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
+import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { DatetimeFormat } from 'vue-i18n';
 
+import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode';
+import { formatDate } from '../../../utils/formatDate';
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
 
 interface Props {
-  store?: any;
-  entityIdKey?: string;
-  entityIdValue?: string | number;
-  onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
+	store?: any;
+	entityIdKey?: string;
+	entityIdValue?: string | number;
+	onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  store: undefined,
-  entityIdKey: undefined,
-  entityIdValue: undefined,
-  onDeleteItem: undefined,
+	store: undefined,
+	entityIdKey: undefined,
+	entityIdValue: undefined,
+	onDeleteItem: undefined,
 });
 
 const tableStore = props.store;
 
 const {
-  dataList,
-  selected,
-  error,
-  isLoading,
-  page,
-  size,
-  next,
-  shownHeaders,
-  filtersManager,
+	dataList,
+	selected,
+	error,
+	isLoading,
+	page,
+	size,
+	next,
+	shownHeaders,
+	filtersManager,
 } = storeToRefs(tableStore);
 
 const {
-  initialize,
-  loadDataList,
-  updateSelected,
-  updatePage,
-  updateSize,
-  updateSort,
-  hasFilter,
-  addFilter,
+	initialize,
+	loadDataList,
+	updateSelected,
+	updatePage,
+	updateSize,
+	updateSort,
+	hasFilter,
+	addFilter,
 } = tableStore;
 
 initialize();
 
 const initializeDefaultFilters = () => {
-  if (props.entityIdKey && props.entityIdValue) {
-    addFilter({
-      name: props.entityIdKey,
-      value: props.entityIdValue,
-    });
-  }
+	if (props.entityIdKey && props.entityIdValue) {
+		addFilter({
+			name: props.entityIdKey,
+			value: props.entityIdValue,
+		});
+	}
 
-  if (!hasFilter('createdAtFrom')) {
-    addFilter({
-      name: 'createdAtFrom',
-      value: getStartOfDay(),
-    });
-  }
+	if (!hasFilter('createdAtFrom')) {
+		addFilter({
+			name: 'createdAtFrom',
+			value: getStartOfDay(),
+		});
+	}
 
-  if (!hasFilter('createdAtTo')) {
-    addFilter({
-      name: 'createdAtTo',
-      value: getEndOfDay(),
-    });
-  }
+	if (!hasFilter('createdAtTo')) {
+		addFilter({
+			name: 'createdAtTo',
+			value: getEndOfDay(),
+		});
+	}
 };
 
 initializeDefaultFilters();
 
 const prettifyTimestamp = (timestamp: string | number) => {
-  if (!timestamp) return '';
-  return new Date(+timestamp).toLocaleString();
+	if (!timestamp) return '';
+	return formatDate(+timestamp, FormatDateMode.DATETIME);
 };
 
 const isDownloadDisabled = (item: WebitelMediaExporterExportRecord) => {
-  return item.status !== WebitelMediaExporterExportStatus.Done;
+	return item.status !== WebitelMediaExporterExportStatus.Done;
 };
 
 const isDeleteDisabled = (item: WebitelMediaExporterExportRecord) => {
-  return item.status !== WebitelMediaExporterExportStatus.Done && item.status !== WebitelMediaExporterExportStatus.Failed;
+	return (
+		item.status !== WebitelMediaExporterExportStatus.Done &&
+		item.status !== WebitelMediaExporterExportStatus.Failed
+	);
 };
 
 const {
-  isVisible: isDeleteConfirmationPopup,
-  deleteCount,
-  deleteCallback,
+	isVisible: isDeleteConfirmationPopup,
+	deleteCount,
+	deleteCallback,
 
-  askDeleteConfirmation,
-  closeDelete,
+	askDeleteConfirmation,
+	closeDelete,
 } = useDeleteConfirmationPopup();
 
 const {
-  showEmpty,
-  image: imageEmpty,
-  text: textEmpty,
+	showEmpty,
+	image: imageEmpty,
+	text: textEmpty,
 } = useTableEmpty({
-  dataList,
-  error,
-  filters: computed(() => filtersManager.value.getAllValues()),
-  isLoading,
+	dataList,
+	error,
+	filters: computed(() => filtersManager.value.getAllValues()),
+	isLoading,
 });
 
 const handleDelete = async (items: []) => {
-  const deleteEl = (el) => {
-    // If status is failed, use deletePdfExportRecord with the export id
-    if (el.status === WebitelMediaExporterExportStatus.Failed) {
-      return PdfServicesAPI.delete(el.id);
-    }
-    // Otherwise, use custom delete function if provided
-    if (props.onDeleteItem) {
-      return props.onDeleteItem(el);
-    }
-    // Fallback to default implementation
-    return FileServicesAPI.deleteScreenRecordingsByAgent({
-      id: el.fileId,
-      agentId: props.entityIdValue,
-    });
-  };
+	const deleteEl = (el) => {
+		// If status is failed, use deletePdfExportRecord with the export id
+		if (el.status === WebitelMediaExporterExportStatus.Failed) {
+			return PdfServicesAPI.delete(el.id);
+		}
+		// Otherwise, use custom delete function if provided
+		if (props.onDeleteItem) {
+			return props.onDeleteItem(el);
+		}
+		// Fallback to default implementation
+		return FileServicesAPI.deleteScreenRecordingsByAgent({
+			id: el.fileId,
+			agentId: props.entityIdValue,
+		});
+	};
 
-  try {
-    await Promise.all(items.map(deleteEl));
-  } finally {
-    // If we're deleting all items from the current page, and we're not on the first page,
-    // we should go to the previous page
-    if (items.length === dataList.value.length && page.value > 1) {
-      updatePage(page.value - 1);
-    }
-    await loadDataList();
-  }
+	try {
+		await Promise.all(items.map(deleteEl));
+	} finally {
+		// If we're deleting all items from the current page, and we're not on the first page,
+		// we should go to the previous page
+		if (items.length === dataList.value.length && page.value > 1) {
+			updatePage(page.value - 1);
+		}
+		await loadDataList();
+	}
 };
 
 const downloadPdf = async (id: string) => {
-  await downloadFile(id);
+	await downloadFile(id);
 };
 
 const openPdfInNewWindow = (fileId: string) => {
-  try {
-    const pdfUrl = getMediaUrl(fileId);
-    window.open(pdfUrl, '_blank');
-  } catch (error) {
-    console.error('Error opening PDF:', error);
-  }
+	try {
+		const pdfUrl = getMediaUrl(fileId);
+		window.open(pdfUrl, '_blank');
+	} catch (error) {
+		console.error('Error opening PDF:', error);
+	}
 };
 </script>
 

@@ -74,43 +74,48 @@
 </template>
 
 <script lang="ts" setup>
-import { SysTypesAPI } from "@webitel/api-services/api";
-import { WtDatepicker, WtInput,WtSelect, WtSwitcher } from '@webitel/ui-sdk/components';
+import { SysTypesAPI } from '@webitel/api-services/api';
+import {
+	WtDatepicker,
+	WtInput,
+	WtSelect,
+	WtSwitcher,
+} from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WebitelProtoDataField } from 'webitel-sdk';
+import type { WebitelProtoDataField } from 'webitel-sdk';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 
 const model = defineModel<unknown>();
 
 const props = defineProps<{
-  field: WebitelProtoDataField;
-  required?: boolean;
-  /**
-   * TODO: implement validation
-   */
-  v?: object;
+	field: WebitelProtoDataField;
+	required?: boolean;
+	/**
+	 * TODO: implement validation
+	 */
+	v?: object;
 }>();
 
 const { t } = useI18n();
 
 const label = computed(() => {
-  return t(props.field?.name || 'vocabulary.labels');
+	return t(props.field?.name || 'vocabulary.labels');
 });
 
 const isRequired = computed(() => {
-  return props.required || props.field.required;
+	return props.required || props.field.required;
 });
 
 const value = computed(() => {
-  return model.value;
+	return model.value;
 });
 
 const sharedChildrenProps = computed(() => ({
-  label: label.value,
-  required: isRequired.value,
-  v: props.v,
+	label: label.value,
+	required: isRequired.value,
+	v: props.v,
 }));
 
 /**
@@ -120,48 +125,48 @@ const sharedChildrenProps = computed(() => ({
  * to slot and to default in-slot component
  */
 const selectProps = computed(() => ({
-  clearable: true,
-  trackBy: 'id',
-  searchMethod: () => loadLookupList(props.field.lookup),
+	clearable: true,
+	trackBy: 'id',
+	searchMethod: () => loadLookupList(props.field.lookup),
 }));
 
 const multiselectProps = computed(() => ({
-  ...selectProps.value,
-  multiple: true,
+	...selectProps.value,
+	multiple: true,
 }));
 
 const setValue = (value) => {
-  model.value = value;
+	model.value = value;
 };
 
 const loadLookupList = ({ path, display, primary }) => {
-  return (params) => {
-    return SysTypesAPI.getSysTypeRecordsLookup({
-      ...params,
-      path,
-      display,
-      primary,
-    });
-  };
+	return (params) => {
+		return SysTypesAPI.getSysTypeRecordsLookup({
+			...params,
+			path,
+			display,
+			primary,
+		});
+	};
 };
 
 const selectElement = (value) => {
-  if (Object.values(value).length === 0) {
-    return setValue(null);
-  }
+	if (Object.values(value).length === 0) {
+		return setValue(null);
+	}
 
-  setValue({
-    id: value.id,
-    name: value.name,
-  });
+	setValue({
+		id: value.id,
+		name: value.name,
+	});
 };
 
 const selectElements = (value) => {
-  setValue(
-    value.map((item) => ({
-      id: item.id,
-      name: item.name,
-    })),
-  );
+	setValue(
+		value.map((item) => ({
+			id: item.id,
+			name: item.name,
+		})),
+	);
 };
 </script>

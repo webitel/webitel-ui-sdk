@@ -5,5 +5,3 @@ import Component from '__lib__/components/wt-datepicker/wt-datepicker.vue';
 <template>
   <component-info :info="Component.docs" />
 </template>
-
-<style lang="scss" scoped></style>

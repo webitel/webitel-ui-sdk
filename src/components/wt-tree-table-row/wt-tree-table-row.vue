@@ -6,7 +6,7 @@
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="headerKey"
-      class="wt-tree-table-td"
+      class="wt-tree-table-td typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <div
@@ -46,7 +46,7 @@
 
     <td
       v-if="gridActions"
-      class="wt-tree-table-td__actions"
+      class="wt-tree-table-td__actions typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <slot
@@ -110,129 +110,125 @@ import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 
 const props = withDefaults(
-  defineProps<{
-    /**
-     * 'It's a data what pass to display row.
-     */
-    data: Record<string, unknown>;
-    /**
-     * 'It's a number of position row in table.
-     */
-    rowPosition: number;
-    /**
-     * 'It's a key in data object, which contains children array. '
-     */
-    childrenProp: string;
-    selectable?: boolean;
-    selectedElements: Record<string, any>[];
-    dataHeaders: WtTableHeader[];
-    gridActions?: boolean;
-    /**
-     * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
-     */
-    nestingLevel?: number;
-    /**
-     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
-     */
-    searchedProp?: string;
-  }>(),
-  {
-    selectable: false,
-    gridActions: true,
-    nestingLevel: 0,
-    searchedProp: 'searched',
-  },
+	defineProps<{
+		/**
+		 * 'It's a data what pass to display row.
+		 */
+		data: Record<string, unknown>;
+		/**
+		 * 'It's a number of position row in table.
+		 */
+		rowPosition: number;
+		/**
+		 * 'It's a key in data object, which contains children array. '
+		 */
+		childrenProp: string;
+		selectable?: boolean;
+		selectedElements: Record<string, any>[];
+		dataHeaders: WtTableHeader[];
+		gridActions?: boolean;
+		/**
+		 * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
+		 */
+		nestingLevel?: number;
+		/**
+		 * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+		 */
+		searchedProp?: string;
+	}>(),
+	{
+		selectable: false,
+		gridActions: true,
+		nestingLevel: 0,
+		searchedProp: 'searched',
+	},
 );
 
-const emit = defineEmits(['update:selected', 'expanded-collapse']);
+const emit = defineEmits([
+	'update:selected',
+	'expanded-collapse',
+]);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
-  return props.nestingLevel;
+	return props.nestingLevel;
 });
 const childLevel = computed(() => {
-  return props.nestingLevel + 1;
+	return props.nestingLevel + 1;
 });
 
 const isSelectedRow = computed(() => {
-  return props.selectedElements.includes(props.data);
+	return props.selectedElements.includes(props.data);
 });
 
 const openCollapse = () => {
-  collapsed.value = false;
-  emit('expanded-collapse');
+	collapsed.value = false;
+	emit('expanded-collapse');
 };
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
-  // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
-    return true;
-  }
+	// Check if the object itself has searched
+	if (data[props.searchedProp] && nestedLevel) return true;
 
-  // Check if the object has children
-  if (Array.isArray(data[props.childrenProp])) {
-    // Iterate through the array
-    for (const child of data[props.childrenProp]) {
-      // Recursively check nested objects
-      if (hasSearchedElement(child, nestedLevel + 1)) {
-        return true;
-      }
-    }
-  }
+	// Check if the object has children
+	if (Array.isArray(data[props.childrenProp])) {
+		// Iterate through the array
+		for (const child of data[props.childrenProp]) {
+			// Recursively check nested objects
+			if (hasSearchedElement(child, nestedLevel + 1)) {
+				return true;
+			}
+		}
+	}
 
-  // If no match is found, return false
-  return false;
+	// If no match is found, return false
+	return false;
 };
 
 onMounted(() => {
-  if (props.searchedProp && hasSearchedElement(props.data)) {
-    openCollapse();
-  }
+	if (props.searchedProp && hasSearchedElement(props.data)) openCollapse();
 });
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-tree-table-td {
-  @extend %typo-body-1;
+  text-transform: none;
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   word-break: break-all;
   overflow-wrap: break-word;
+}
 
-  &__actions {
-    .wt-tree-table-td__content {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-    }
-  }
+.wt-tree-table-td__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
 
-  &__icon-wrapper {
-    display: flex;
-    align-items: flex-start;
-    margin-right: var(--spacing-xs);
-  }
+.wt-tree-table-td__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
 
-  &__content {
-    display: flex;
-    align-items: flex-start;
-    text-wrap: nowrap;
-  }
+.wt-tree-table-td__icon-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-right: var(--spacing-xs);
 }
 
 .wt-tree-table-row {
   background: var(--wt-tree-table-primary-color);
+}
 
-  &__tree-space {
-    width: var(--icon-md-size);
-    height: var(--icon-md-size);
-  }
+.wt-tree-table-row--alternate {
+  background: var(--wt-tree-table-zebra-color);
+}
 
-  &--alternate {
-    background: var(--wt-tree-table-zebra-color);
-  }
+.wt-tree-table-row__tree-space {
+  width: var(--icon-md-size);
+  height: var(--icon-md-size);
 }
 </style>

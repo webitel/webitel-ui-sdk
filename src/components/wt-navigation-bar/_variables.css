@@ -1,0 +1,30 @@
+:root {
+	--wt-navigation-bar-width: 340px;
+	--wt-navigation-bar-z-index: 10;
+	--wt-navigation-bar-padding: var(--spacing-sm);
+
+	--wt-navigation-bar-header-padding: var(--spacing-xs);
+	--wt-navigation-bar-app-pic-height: 24px;
+
+	--wt-navigation-bar-list-padding: var(--wt-navigation-bar-padding);
+	--wt-navigation-bar-link-padding: var(--wt-navigation-bar-padding);
+	--wt-navigation-bar-subnav-padding-left: var(--spacing-lg);
+	--wt-navigation-bar-active-expansion-flag-width: 5px;
+	--wt-navigation-bar-active-expansion-name-max-width: calc(
+		100% -
+		var(--icon-md-size) -
+		var(--spacing-xs)
+	);
+
+	--wt-navigation-bar-background-color: var(--dp-18-surface-color);
+	--wt-navigation-bar-option-text-color: var(--text-main-color);
+	--wt-navigation-bar-option-text-active-color: var(--primary-on-color);
+	--wt-navigation-bar-option-background-color: var(
+		--wt-navigation-bar-background-color
+	);
+	--wt-navigation-bar-option-background-hover-color: var(--dp-20-surface-color);
+	--wt-navigation-bar-option-background-active-color: var(
+		--primary-light-color
+	);
+	--wt-navigation-bar-expansion-ribbon-color: var(--primary-color);
+}

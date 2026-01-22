@@ -1,0 +1,235 @@
+:deep(.multiselect) {
+    position: relative;
+    cursor: pointer;
+}
+
+:deep(.multiselect) .multiselect__select {
+    position: absolute;
+    top: var(--select-icon-top-pos);
+    right: var(--select-caret-right-pos);
+    transition: var(--transition);
+    background: transparent;
+    padding: 0;
+    /* reset default */
+    width: fit-content;
+    /* reset default */
+    height: fit-content;
+    /* reset default */
+}
+
+:deep(.multiselect) .multiselect__select::before {
+    display: none;
+    /* reset default */
+}
+
+:deep(.multiselect) .multiselect__limit {
+    position: absolute;
+    top: var(--select-chip-top-pos);
+}
+
+:deep(.multiselect) .multiselect__clear {
+    position: absolute;
+    top: var(--select-icon-top-pos);
+    z-index: 1;
+}
+
+/* visible select input wrapper */
+:deep(.multiselect) .multiselect__tags {
+    border: var(--select-tags-border);
+    border-color: var(--wt-text-field-input-border-color);
+    border-radius: var(--border-radius);
+    background: transparent;
+    padding: calc(var(--spacing-xs) - 1px);
+    /* borders */
+}
+
+:deep(.multiselect) .multiselect__input,
+:deep(.multiselect) .multiselect__single,
+:deep(.multiselect) .multiselect__placeholder {
+    /* typo-body-1 */
+    font-family: 'Montserrat', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: none;
+    margin: 0;
+    /* reset default */
+    background: transparent;
+    padding: 0;
+    /* reset default */
+    color: var(--wt-text-field-text-color);
+}
+
+:deep(.multiselect) .multiselect__input::placeholder,
+:deep(.multiselect) .multiselect__input::-webkit-input-placeholder,
+:deep(.multiselect) .multiselect__input::-moz-placeholder,
+:deep(.multiselect) .multiselect__input:-moz-placeholder,
+:deep(.multiselect) .multiselect__input:-ms-input-placeholder {
+    font: inherit;
+    transition: var(--transition);
+    color: var(--wt-text-field-placeholder-color);
+}
+
+:deep(.multiselect) .multiselect__custom-tag,
+:deep(.multiselect) .multiselect__single-label {
+    color: var(--wt-text-field-text-color);
+}
+
+:deep(.multiselect) .multiselect__placeholder {
+    /* wt-placeholder */
+    transition: var(--transition);
+    color: var(--wt-text-field-placeholder-color);
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* text overflow 3 dots */
+    white-space: nowrap;
+}
+
+/* select options wrapper */
+:deep(.multiselect) .multiselect__content-wrapper {
+    /* wt-distant-scrollbar */
+    transition: var(--transition);
+    box-shadow: var(--elevation-10);
+    border: var(--select-tags-border);
+    border-color: var(--wt-text-field-select-option-wrapper-border-color);
+    border-radius: var(--border-radius);
+    background: transparent;
+    z-index: calc(var(--p-galleria-mask-z-index) - 2);
+}
+
+:deep(.multiselect) .multiselect__content-wrapper::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+    background-color: var(--scrollbar-bg-color);
+}
+
+:deep(.multiselect) .multiselect__content-wrapper::-webkit-scrollbar-thumb {
+    height: 2px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    border-radius: var(--scrollbar-border-radius);
+    background-color: var(--scrollbar-thumb-color);
+    background-clip: padding-box;
+}
+
+/* select options */
+:deep(.multiselect) .multiselect__option {
+    /* typo-body-1 */
+    font-family: 'Montserrat', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-transform: none;
+    background: var(--wt-text-field-select-option-background-color);
+    padding: var(--select-options-padding);
+    color: var(--wt-text-field-select-option-text-color);
+}
+
+:deep(.multiselect) .multiselect__option::after {
+    display: none;
+}
+
+:deep(.multiselect) .multiselect__option--highlight {
+    background: var(--wt-text-field-select-option-background-hover-color);
+    color: var(--wt-text-field-select-option-text-hover-color);
+}
+
+:deep(.multiselect) .multiselect__option--selected {
+    background: var(--wt-text-field-select-option-background-selected-color);
+    color: var(--wt-text-field-select-option-text-selected-color);
+    font-weight: normal;
+    /* reset */
+}
+
+:deep(.multiselect--active) {
+    z-index: calc(var(--p-galleria-mask-z-index) - 2);
+    /* lowered z-index to prevent overlapping the gallery and video container */
+}
+
+:deep(.multiselect--active) .multiselect__select.multiselect__arrow .wt-icon {
+    fill: var(--icon-active-color);
+}
+
+:deep(.multiselect--active) .multiselect__select.multiselect__custom-value {
+    transform: none;
+}
+
+.wt-select--loading :deep(.multiselect) .multiselect__content-wrapper,
+.wt-tags-input--loading :deep(.multiselect) .multiselect__content-wrapper {
+    overflow-y: hidden;
+}
+
+.wt-select--loading :deep(.multiselect) .multiselect__loading-wrapper,
+.wt-tags-input--loading :deep(.multiselect) .multiselect__loading-wrapper {
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    height: 300px;
+    /* max dropdown panel height */
+}
+
+.wt-select.wt-select--invalid :deep(.multiselect) .multiselect__tags,
+.wt-tags-input.wt-tags-input--invalid :deep(.multiselect) .multiselect__tags {
+    outline: none;
+    /* prevent outline overlapping false color */
+    border-color: var(--wt-text-field-input-border-error-color);
+}
+
+.wt-select.wt-select--invalid :deep(.multiselect) .multiselect__custom-tag,
+.wt-select.wt-select--invalid :deep(.multiselect) .multiselect__single-label,
+.wt-tags-input.wt-tags-input--invalid :deep(.multiselect) .multiselect__custom-tag,
+.wt-tags-input.wt-tags-input--invalid :deep(.multiselect) .multiselect__single-label {
+    color: var(--wt-text-field-placeholder-error-color);
+}
+
+.wt-select.wt-select--invalid :deep(.multiselect) .multiselect__placeholder,
+.wt-tags-input.wt-tags-input--invalid :deep(.multiselect) .multiselect__placeholder {
+    /* wt-placeholder--error */
+    transition: var(--transition);
+    color: var(--wt-text-field-placeholder-error-color);
+}
+
+.wt-select--disabled,
+.wt-tags-input--disabled {
+    pointer-events: none;
+}
+
+.wt-select--disabled .multiselect--disabled,
+.wt-tags-input--disabled .multiselect--disabled {
+    opacity: 1;
+    background: none;
+}
+
+.wt-select--disabled .multiselect__select,
+.wt-tags-input--disabled .multiselect__select {
+    background: transparent;
+    /* reset default */
+}
+
+.wt-select--disabled :deep(.multiselect) .multiselect__tags,
+.wt-tags-input--disabled :deep(.multiselect) .multiselect__tags {
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
+}
+
+.wt-select--disabled :deep(.multiselect) .multiselect__placeholder,
+.wt-tags-input--disabled :deep(.multiselect) .multiselect__placeholder {
+    /* wt-placeholder--disabled */
+    transition: var(--transition);
+    color: var(--wt-text-field-placeholder-disabled-color);
+}
+
+/* override .wt-select colors on chips */
+.wt-tags-input :deep(.multiselect) .multiselect__tags .multiselect__custom-tag,
+.wt-tags-input :deep(.multiselect) .multiselect__tags .multiselect__single-label,
+.wt-tags-input--invalid :deep(.multiselect) .multiselect__tags .multiselect__custom-tag,
+.wt-tags-input--invalid :deep(.multiselect) .multiselect__tags .multiselect__single-label {
+    color: var(--wt-chip-main-text-color);
+}

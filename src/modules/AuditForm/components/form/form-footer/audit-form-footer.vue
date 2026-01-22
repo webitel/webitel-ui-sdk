@@ -30,27 +30,26 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from "vue";
-import { useI18n } from "vue-i18n";
+import { inject } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import WtButton from "../../../../../components/wt-button/wt-button.vue";
+import WtButton from '../../../../../components/wt-button/wt-button.vue';
 
 const mode = inject('mode');
 const readonly = inject('readonly');
 
 const props = defineProps<{
-  invalid: boolean;
-  disabledSave?: boolean;
+	invalid: boolean;
+	disabledSave?: boolean;
 }>();
 
 const emit = defineEmits<{
-  'fill:save': [];
-  'fill:cancel': [];
-  'create:add': [];
+	'fill:save': [];
+	'fill:cancel': [];
+	'create:add': [];
 }>();
 
 const { t } = useI18n();
-
 </script>
 
 <style scoped lang="scss">

@@ -18,7 +18,7 @@
         <div class="video-call-overlay">
           <div
             v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
-            :class="`video-call-receiver--${innerSize}`"
+            :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
             <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
@@ -104,82 +104,113 @@ import { useI18n } from 'vue-i18n';
 
 import { WtIcon } from '../../../../components';
 import {
-  RecordingIndicator,
-  ScreenshotBox,
-  VideoCallControlsPanel,
+	RecordingIndicator,
+	ScreenshotBox,
+	VideoCallControlsPanel,
 } from '../../../../components/wt-vidstack-player/components';
 import { ComponentSize, WebitelApplications } from '../../../../enums';
-import { ResultCallbacks } from '../../../../types';
-import { ScreenshotStatus } from '../../types';
-import { VideoCallAction } from './enums/VideoCallAction.enum';
+import type { ResultCallbacks } from '../../../../types';
+import type { ScreenshotStatus } from '../../types';
+import type { VideoCallAction } from './enums/VideoCallAction.enum';
 
-const props = withDefaults(defineProps<{
-  'sender:stream'?: MediaStream | null;
+const props = withDefaults(
+	defineProps<{
+		'sender:stream'?: MediaStream | null;
 
-  'sender:mic:enabled'?: boolean;
-  'sender:mic:accessed'?: boolean;
+		'sender:mic:enabled'?: boolean;
+		'sender:mic:accessed'?: boolean;
 
-  'sender:video:enabled'?: boolean;
-  'sender:video:accessed'?: boolean;
+		'sender:video:enabled'?: boolean;
+		'sender:video:accessed'?: boolean;
 
-  'receiver:stream'?: MediaStream | null;
-  'receiver:mic:enabled'?: boolean;
-  'receiver:video:enabled'?: boolean;
+		'receiver:stream'?: MediaStream | null;
+		'receiver:mic:enabled'?: boolean;
+		'receiver:video:enabled'?: boolean;
 
-  'screenshot:status'?: ScreenshotStatus | null;
-  'screenshot:loading'?: boolean;
-  'screenshot:src'?: string;
+		'screenshot:status'?: ScreenshotStatus | null;
+		'screenshot:loading'?: boolean;
+		'screenshot:src'?: string;
 
-  recordings?: boolean;
+		recordings?: boolean;
 
-  static?: boolean;
-  position?: 'left-bottom' | 'right-bottom' | 'center';
-  size?: ComponentSize
-  hideVideoDisplayPanel?: boolean
-  resizable?: boolean;
+		static?: boolean;
+		position?: 'left-bottom' | 'right-bottom' | 'center';
+		size?: ComponentSize;
+		hideVideoDisplayPanel?: boolean;
+		resizable?: boolean;
 
-  actions: VideoCallAction[];
-  username?: string;
+		actions: VideoCallAction[];
+		username?: string;
 
-  'actions:settings:pressed'?: boolean;
-  'actions:settings:disabled'?: boolean;
-  'actions:chat:pressed'?: boolean;
-}>(), {
-  position: 'right-bottom',
-});
+		'actions:settings:pressed'?: boolean;
+		'actions:settings:disabled'?: boolean;
+		'actions:chat:pressed'?: boolean;
+	}>(),
+	{
+		position: 'right-bottom',
+	},
+);
 
 const emit = defineEmits<{
-  (e: `action:${typeof VideoCallAction.Screenshot}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Recordings}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Mic}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Video}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Settings}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Chat}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.Hangup}`, payload?: unknown, options?: ResultCallbacks): void;
-  (e: `action:${typeof VideoCallAction.ZoomScreenshot}`): void;
-  (e: `action:${typeof VideoCallAction.CloseScreenshot}`): void;
-  (e: `change-size`, size: ComponentSize): void;
-}>()
+	(
+		e: `action:${typeof VideoCallAction.Screenshot}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Recordings}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Mic}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Video}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Settings}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Chat}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: `action:${typeof VideoCallAction.Hangup}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(e: `action:${typeof VideoCallAction.ZoomScreenshot}`): void;
+	(e: `action:${typeof VideoCallAction.CloseScreenshot}`): void;
+	(e: `change-size`, size: ComponentSize): void;
+}>();
 
 const { t } = useI18n();
 
 const mainStream = computed(() => {
-  if (!props['receiver:video:enabled']) return props['sender:stream'];
+	if (!props['receiver:video:enabled']) return props['sender:stream'];
 
-  return props['receiver:stream'] || props['sender:stream'];
-})
+	return props['receiver:stream'] || props['sender:stream'];
+});
 
 const receiverVideoMutedIconSizes = {
-  [ComponentSize.SM]: ComponentSize.MD,
-  [ComponentSize.MD]: ComponentSize.LG,
-  [ComponentSize.LG]: ComponentSize.XXL,
-}
+	[ComponentSize.SM]: ComponentSize.MD,
+	[ComponentSize.MD]: ComponentSize.LG,
+	[ComponentSize.LG]: ComponentSize.XXL,
+};
 
 const senderVideoMutedIconSizes = {
-  [ComponentSize.SM]: ComponentSize.MD,
-  [ComponentSize.MD]: ComponentSize['4XL'],
-  [ComponentSize.LG]: ComponentSize['8XL'],
-}
+	[ComponentSize.SM]: ComponentSize.MD,
+	[ComponentSize.MD]: ComponentSize['4XL'],
+	[ComponentSize.LG]: ComponentSize['8XL'],
+};
 </script>
 
 <style lang="scss" scoped>
@@ -286,15 +317,9 @@ const senderVideoMutedIconSizes = {
     color: var(--p-player-wrapper-muted-color);
 
     &--sm {
-      @extend %typo-body-2;
-
       .video-call-receiver-text {
         max-width: 73px;
       }
-    }
-
-    &--md, &--lg {
-      @extend %typo-body-1;
     }
 
     &--muted {

@@ -1,16 +1,15 @@
 <script setup>
-import Docs from './wt-textarea-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleTextarea from './examples/example-textarea.vue';
 import ExampleDisabledTextarea from './examples/example-disabled-textarea.vue';
 import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 </script>
 
-# WtTextarea
+# `wt-textarea.vue`
 
-::: raw
+## Specs
 
-<Docs />
-:::
+<Specs />
 
 ## Example Textarea
 

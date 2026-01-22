@@ -24,41 +24,19 @@ const singleValue = ref('');
 
 <template>
   <div>
-    <wt-select
-      :options="options"
-      :value="multipleValue"
-      allow-custom-values
-      label="Custom Values in Multiple Select"
-      multiple
-      track-by="id"
-      @input="multipleValue = $event"
-    />
+    <wt-select :options="options" :value="multipleValue" allow-custom-values label="Custom Values in Multiple Select"
+      multiple track-by="id" @input="multipleValue = $event" />
 
-    <wt-select-v2
-      :options="options"
-      :value="multipleValue"
-      allow-custom-values
-      label="Custom Values in Multiple Select"
-      multiple
-      track-by="id"
-      @input="multipleValue = $event"
-    />
+    <wt-select-v2 :options="options" :value="multipleValue" allow-custom-values label="Custom Values in Multiple Select"
+      multiple track-by="id" @input="multipleValue = $event" />
 
     <pre><code>{{ multipleValue }}</code></pre>
   </div>
 
   <div>
-    <wt-select
-      :options="options"
-      :value="singleValue"
-      allow-custom-values
-      label="Custom Values in Single Select"
-      track-by="id"
-      @input="singleValue = $event"
-    />
+    <wt-select :options="options" :value="singleValue" allow-custom-values label="Custom Values in Single Select"
+      track-by="id" @input="singleValue = $event" />
 
     <pre><code>{{ singleValue }}</code></pre>
   </div>
 </template>
-
-<style lang="scss" scoped></style>

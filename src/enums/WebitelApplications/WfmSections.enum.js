@@ -8,8 +8,8 @@ import { WfmSections } from './WfmSections';
  * use ts enum instead (and don't forget to compile it)
  */
 export default Object.fromEntries(
-  Object.entries(WfmSections).map(([key, value]) => [
-    upperCase(key).replaceAll(' ', '_'),
-    value,
-  ]),
+	Object.entries(WfmSections).map(([key, value]) => [
+		upperCase(key).replaceAll(' ', '_'),
+		value,
+	]),
 );

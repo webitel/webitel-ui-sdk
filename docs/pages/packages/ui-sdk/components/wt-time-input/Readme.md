@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-time-input-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleHourTimeInput from './examples/example-hour-time-input.vue';
 import ExampleMinTimeInput from './examples/example-min-time-input.vue';
 </script>
 
-# WtTimeInput
+# `wt-time-input.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Hour Time Input
 

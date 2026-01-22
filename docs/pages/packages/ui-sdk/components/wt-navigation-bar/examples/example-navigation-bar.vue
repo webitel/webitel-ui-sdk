@@ -29,8 +29,8 @@ const nav = [
   />
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .wt-navigation-bar :deep(.wt-navigation-bar__nav) {
-  z-index: 1001; // overlap vitepress sidebar
+  z-index: 1001;
 }
 </style>

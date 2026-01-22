@@ -30,121 +30,144 @@ import convertDuration from '../../scripts/convertDuration.js';
 import StatusOptions from './_internals/StatusOptions.lookup.js';
 
 export default {
-  name: 'WtStatusSelect',
-  model: {
-    prop: 'status',
-    event: 'change',
-  },
-  props: {
-    status: {
-      type: String,
-      default: AgentStatus.OFFLINE,
-    },
-    statusDuration: {
-      type: [String, Number],
-      default: 0,
-    },
-    options: {
-      type: Array,
-    },
-    // size: {
-    //   type: String,
-    //   default: 'md',
-    //   options: ['sm', 'md'],
-    // },
-  },
-  emits: ['change', 'closed'],
-  computed: {
-    selectedOption() {
-      return this.statusOptions.find((option) => option.value === this.status);
-    },
-    statusOptions() {
-      return this.options
-        ? this.options
-        : StatusOptions.map((opt) => ({
-            ...opt,
-            text: this.$t(opt.locale),
-          }));
-    },
-    availableOptions() {
-      return this.statusOptions.reduce((options, opt) => {
-        // PAUSE option is always passed
-        if (
-          (this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
-          opt.value === AgentStatus.BREAK_OUT
-        ) {
-          // skip breakout option
-          return options;
-        }
-        return [...options, opt];
-      }, []);
-    },
-    duration() {
-      /* The check commented below limits the display of time in the status to 8 characters.
+	name: 'WtStatusSelect',
+	model: {
+		prop: 'status',
+		event: 'change',
+	},
+	/**
+	 * @emits {string} change - Fires when status changes. Emits changed status value
+	 * @emits {Event} closed - Fires when dropdown is closed
+	 */
+	props: {
+		/**
+		 * Component is looking for value from AgentStatus enum
+		 * @type {string}
+		 * @default AgentStatus.OFFLINE
+		 */
+		status: {
+			type: String,
+			default: AgentStatus.OFFLINE,
+		},
+		/**
+		 * If seconds number, converts to hh:mm:ss format
+		 * @type {string | number}
+		 * @default 0
+		 */
+		statusDuration: {
+			type: [
+				String,
+				Number,
+			],
+			default: 0,
+		},
+		/**
+		 * If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"
+		 * @type {Array}
+		 */
+		options: {
+			type: Array,
+		},
+		// size: {
+		//   type: String,
+		//   default: 'md',
+		//   options: ['sm', 'md'],
+		// },
+	},
+	emits: [
+		'change',
+		'closed',
+	],
+	computed: {
+		selectedOption() {
+			return this.statusOptions.find((option) => option.value === this.status);
+		},
+		statusOptions() {
+			return this.options
+				? this.options
+				: StatusOptions.map((opt) => ({
+						...opt,
+						text: this.$t(opt.locale),
+					}));
+		},
+		availableOptions() {
+			return this.statusOptions.reduce((options, opt) => {
+				// PAUSE option is always passed
+				if (
+					(this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
+					opt.value === AgentStatus.BREAK_OUT
+				) {
+					// skip breakout option
+					return options;
+				}
+				return [
+					...options,
+					opt,
+				];
+			}, []);
+		},
+		duration() {
+			/* The check commented below limits the display of time in the status to 8 characters.
       Accordingly, if the agent is in the status of 100 hours (100: 00: 00),
       then this time will be displayed as NaN:NaN:NaN */
 
-      // if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
-      if (typeof this.statusDuration === 'string') return this.statusDuration;
-      if (this.statusDuration !== undefined) {
-        return convertDuration(this.statusDuration);
-      }
-      return this.selectedOption.text;
-    },
-  },
-  methods: {
-    inputHandler(value) {
-      this.$emit('change', value.value);
-    },
-    closedHandler(event) {
-      this.$emit('closed', event);
-    },
-  },
+			// if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+			if (typeof this.statusDuration === 'string') return this.statusDuration;
+			if (this.statusDuration !== undefined) {
+				return convertDuration(this.statusDuration);
+			}
+			return this.selectedOption.text;
+		},
+	},
+	methods: {
+		inputHandler(value) {
+			this.$emit('change', value.value);
+		},
+		closedHandler(event) {
+			this.$emit('closed', event);
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-status-select.wt-select {
   box-shadow: var(--elevation-5);
+}
 
-  :deep(.multiselect) {
-    min-height: 0;
+.wt-status-select.wt-select :deep(.multiselect) {
+  min-height: 0;
+}
 
-    .multiselect__tags {
-      border: none;
-      background: var(--wt-status-select-background-color);
-      padding: var(--wt-status-select-padding);
-      min-height: 0;
-    }
+.wt-status-select.wt-select :deep(.multiselect__tags) {
+  border: none;
+  background: var(--wt-status-select-background-color);
+  padding: var(--wt-status-select-padding);
+  min-height: 0;
+}
 
-    .multiselect__select {
-      top: 0;
-      right: 0;
-    }
+.wt-status-select.wt-select :deep(.multiselect__select) {
+  top: 0;
+  right: 0;
+}
 
-    .multiselect__content-wrapper {
-      border: none;
-      background: transparent;
+.wt-status-select.wt-select :deep(.multiselect__content-wrapper) {
+  border: none;
+  background: transparent;
+}
 
-      .multiselect__option {
-        background: var(--wt-status-select-option-background-color);
-        padding: 0;
-        min-height: 0;
-        color: var(--wt-status-select-option-text-color);
-      }
+.wt-status-select.wt-select :deep(.multiselect__option) {
+  background: var(--wt-status-select-option-background-color);
+  padding: 0;
+  min-height: 0;
+  color: var(--wt-status-select-option-text-color);
+}
 
-      .multiselect__option--highlight {
-        background: var(--wt-status-select-option-background-hover-color);
-      }
+.wt-status-select.wt-select :deep(.multiselect__option--highlight) {
+  background: var(--wt-status-select-option-background-hover-color);
+}
 
-      .multiselect__option--selected {
-        //background: var(--wt-status-select-option-background-selected-color);
-      }
-    }
-  }
+.wt-status-select.wt-select :deep(.multiselect__option--selected) {
+  /* background: var(--wt-status-select-option-background-selected-color); */
 }
 </style>

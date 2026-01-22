@@ -1,6 +1,6 @@
 import {
-  CrudGlobalAction,
-  SpecialGlobalAction,
+	CrudGlobalAction,
+	SpecialGlobalAction,
 } from './GlobalActions/GlobalActions';
 import { ScopeClass } from './ScopeClass/ScopeClass';
 

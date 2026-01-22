@@ -1,6 +1,10 @@
 <template>
   <div>
-    <wt-button @click="isShownPopup = true"> Open popup </wt-button>
+    <wt-button
+      @click="isShownPopup = true"
+    >
+      Open popup
+    </wt-button>
     <wt-selection-popup
       :options="options"
       :selected="selected"
@@ -16,7 +20,7 @@
 
 <script setup>
 import WtSelectionPopup from '__lib__/components/on-demand/wt-selection-popup/wt-selection-popup.vue';
-import { computed,onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const selected = ref(null);
 const isShownPopup = ref(false);
@@ -24,7 +28,7 @@ const isShownPopup = ref(false);
 const options = computed(() => {
   return [
     { value: 'static', title: 'static' },
-    { value: 'dinamyc', title: 'dinamyc' },
+    { value: 'dynamic', title: 'dynamic' },
   ];
 });
 
@@ -44,5 +48,3 @@ onMounted(() => {
   selected.value = options.value[0];
 });
 </script>
-
-<style lang="scss" scoped></style>

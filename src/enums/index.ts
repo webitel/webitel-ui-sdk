@@ -12,6 +12,8 @@ import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { MessageColor } from './MessageColor/MessageColor';
+import { MessageVariant } from './MessageVariant/MessageVariant';
 import { MimeTypes } from './MimeTypes/MimeTypes.enum';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
@@ -29,33 +31,35 @@ import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
 export {
-  AbstractUserStatus,
-  AdminSections,
-  AgentStatus,
-  AuditorSections,
-  ButtonColor,
-  ButtonVariant,
-  ChatGatewayProvider,
-  ChipColor,
-  ComponentSize,
-  CrmSections,
-  CrudAction,
-  EmptyCause,
-  FormatDateMode,
-  IconAction,
-  IconColor,
-  MimeTypes,
-  ProcessingTableColumnType,
-  ProviderIconType,
-  QueueType,
-  QueueTypeName,
-  RelativeDatetimeValue,
-  RingtoneType,
-  SupervisorSections,
-  TypesExportedSettings,
-  WebitelApplications,
-  WfmSections,
-  WtApplication,
-  WtObject,
-  WtTypeExtensionFieldKind,
+	AbstractUserStatus,
+	AdminSections,
+	AgentStatus,
+	AuditorSections,
+	ButtonColor,
+	ButtonVariant,
+	ChatGatewayProvider,
+	ChipColor,
+	ComponentSize,
+	CrmSections,
+	CrudAction,
+	EmptyCause,
+	FormatDateMode,
+	IconAction,
+	IconColor,
+	MessageColor,
+	MessageVariant,
+	MimeTypes,
+	ProcessingTableColumnType,
+	ProviderIconType,
+	QueueType,
+	QueueTypeName,
+	RelativeDatetimeValue,
+	RingtoneType,
+	SupervisorSections,
+	TypesExportedSettings,
+	WebitelApplications,
+	WfmSections,
+	WtApplication,
+	WtObject,
+	WtTypeExtensionFieldKind,
 };

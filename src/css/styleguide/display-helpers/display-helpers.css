@@ -1,0 +1,22 @@
+.d-none {
+  display: none;
+}
+
+@media (only screen and max-width: 960px) {
+  .d-none-sm {
+    display: none;
+  }
+  .d-block-sm {
+    display: block;
+  }
+}
+
+@media (only screen and max-width: 600px) {
+  .d-none-xs {
+    display: none;
+  }
+  .d-block-xs {
+    display: block;
+  }
+}
+

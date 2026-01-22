@@ -36,7 +36,7 @@
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
-      <p class="wt-tree-line__label">
+      <p class="wt-tree-line__label typo-body-1">
         {{ label }}
       </p>
       <wt-icon
@@ -88,303 +88,318 @@ import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 import type { WtTreeNestedIcons } from './types/wt-tree-nested-icons.ts';
 
 const props = withDefaults(
-  defineProps<{
-    modelValue: null | unknown | unknown[];
-    data: unknown;
-    itemLabel?: string | undefined;
-    itemData?: string | undefined;
-    childrenProp?: string;
-    nestedLevel?: number;
-    lastChild?: boolean;
-    selectedParent?: boolean;
-    nestedIcons?: WtTreeNestedIcons[];
-    nextElement?: boolean;
-    multiple?: boolean;
-    allowParent?: boolean;
-    /**
-     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
-     */
-    searchedProp?: string;
-    rootData?: unknown;
-  }>(),
-  {
-    nestedLevel: 0,
-    childrenProp: 'children',
-    lastChild: false,
-    nextElement: false,
-    selectedParent: false,
-    multiple: false,
-    allowParent: false,
-    searchedProp: 'searched',
-  },
+	defineProps<{
+		modelValue: null | unknown | unknown[];
+		data: unknown;
+		itemLabel?: string | undefined;
+		itemData?: string | undefined;
+		childrenProp?: string;
+		nestedLevel?: number;
+		lastChild?: boolean;
+		selectedParent?: boolean;
+		nestedIcons?: WtTreeNestedIcons[];
+		nextElement?: boolean;
+		multiple?: boolean;
+		allowParent?: boolean;
+		/**
+		 * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+		 */
+		searchedProp?: string;
+		rootData?: unknown;
+	}>(),
+	{
+		nestedLevel: 0,
+		childrenProp: 'children',
+		lastChild: false,
+		nextElement: false,
+		selectedParent: false,
+		multiple: false,
+		allowParent: false,
+		searchedProp: 'searched',
+	},
 );
 
 const emit = defineEmits<{
-  (e: 'openParent'): void;
-  (e: 'update:modelValue', value: any): void;
+	(e: 'openParent'): void;
+	(e: 'update:modelValue', value: any): void;
 }>();
 
 const label = computed(() =>
-  props.itemLabel ? props.data[props.itemLabel] : props.data,
+	props.itemLabel ? props.data[props.itemLabel] : props.data,
 );
 
 const displayIcons = computed(() => {
-  const icons = props.nestedIcons ? [...props.nestedIcons] : [];
+	const icons = props.nestedIcons
+		? [
+				...props.nestedIcons,
+			]
+		: [];
 
-  if (props.nestedLevel === 0) {
-    return icons;
-  }
+	if (props.nestedLevel === 0) {
+		return icons;
+	}
 
-  icons.push({
-    icon: 'tree-line',
-    hidden: !props.nextElement,
-  });
+	icons.push({
+		icon: 'tree-line',
+		hidden: !props.nextElement,
+	});
 
-  return icons;
+	return icons;
 });
 
 const isMultipleItemsSelected = () => {
-  if (!Array.isArray(props.modelValue)) {
-    return false;
-  }
+	if (!Array.isArray(props.modelValue)) {
+		return false;
+	}
 
-  if (props.itemData) {
-    return props.modelValue.includes(props.data[props.itemData]);
-  }
+	if (props.itemData) {
+		return props.modelValue.includes(props.data[props.itemData]);
+	}
 
-  const match = props.modelValue.find((item) => deepEqual(item, props.data));
-  return !!match;
+	const match = props.modelValue.find((item) => deepEqual(item, props.data));
+	return !!match;
 };
 
 const isSelected = computed(() => {
-  if (props.multiple) {
-    return isMultipleItemsSelected();
-  }
+	if (props.multiple) {
+		return isMultipleItemsSelected();
+	}
 
-  if (props.itemData) {
-    return props.data[props.itemData] === props.modelValue;
-  }
+	if (props.itemData) {
+		return props.data[props.itemData] === props.modelValue;
+	}
 
-  return deepEqual(props.modelValue, props.data);
+	return deepEqual(props.modelValue, props.data);
 });
 
 const displayActiveState = computed(() => {
-  if (props.multiple) {
-    return isSelected.value;
-  }
+	if (props.multiple) {
+		return isSelected.value;
+	}
 
-  return isSelected.value || props.selectedParent;
+	return isSelected.value || props.selectedParent;
 });
 
+const toggleSelectionWithChildren = (
+	node: unknown,
+	select: boolean,
+	result: unknown[],
+) => {
+	const value = props.itemData ? node[props.itemData] : node;
 
-const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unknown[]) => {
-  const value = props.itemData ? node[props.itemData] : node;
+	if (select) {
+		if (!result.some((item) => deepEqual(item, value))) {
+			result.push(value);
+		}
+	} else {
+		const index = result.findIndex((item) => deepEqual(item, value));
+		if (index !== -1) {
+			result.splice(index, 1);
+		}
+	}
 
-  if (select) {
-    if (!result.some((item) => deepEqual(item, value))) {
-      result.push(value);
-    }
-  } else {
-    const index = result.findIndex((item) => deepEqual(item, value));
-    if (index !== -1) {
-      result.splice(index, 1);
-    }
-  }
-
-  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) {
-    for (const child of node[props.childrenProp]) {
-      toggleSelectionWithChildren(child, select, result);
-    }
-  }
+	if (
+		node &&
+		Array.isArray(node[props.childrenProp]) &&
+		node[props.childrenProp].length
+	)
+		for (const child of node[props.childrenProp]) {
+			toggleSelectionWithChildren(child, select, result);
+		}
 };
 
 const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
-  const findAndDeselect = (current: unknown, parent: unknown | null): boolean => {
-    if (current === node) {
-      if (parent) {
-        const parentValue = props.itemData ? parent[props.itemData] : parent;
-        const index = result.findIndex((item) => deepEqual(item, parentValue));
-        if (index !== -1) {
-          result.splice(index, 1);
-        }
-      }
-      return true;
-    }
+	const findAndDeselect = (
+		current: unknown,
+		parent: unknown | null,
+	): boolean => {
+		if (current === node) {
+			if (parent) {
+				const parentValue = props.itemData ? parent[props.itemData] : parent;
+				const index = result.findIndex((item) => deepEqual(item, parentValue));
+				if (index !== -1) {
+					result.splice(index, 1);
+				}
+			}
+			return true;
+		}
 
-    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) {
-      for (const child of current[props.childrenProp]) {
-        if (findAndDeselect(child, current)) {
-          return true;
-        }
-      }
-    }
+		if (
+			current &&
+			Array.isArray(current[props.childrenProp]) &&
+			current[props.childrenProp].length
+		)
+			for (const child of current[props.childrenProp]) {
+				if (findAndDeselect(child, current)) {
+					return true;
+				}
+			}
 
-    return false;
-  };
+		return false;
+	};
 
-  findAndDeselect(root, null);
+	findAndDeselect(root, null);
 };
 
 const setMultipleModelValueWithTree = () => {
-  const isAlreadySelected = isSelected.value;
-  const newArray = [...props.modelValue];
+	const isAlreadySelected = isSelected.value;
+	const newArray = [
+		...props.modelValue,
+	];
 
-  // Toggle current node + children
-  toggleSelectionWithChildren(props.data, !isAlreadySelected, newArray);
+	// Toggle current node + children
+	toggleSelectionWithChildren(props.data, !isAlreadySelected, newArray);
 
-  if (isAlreadySelected) {
-    // If deselecting, also deselect parents
-    deselectParents(props.data, props.rootData, newArray);
-  }
+	if (isAlreadySelected) {
+		// If deselecting, also deselect parents
+		deselectParents(props.data, props.rootData, newArray);
+	}
 
-  emit('update:modelValue', newArray);
+	emit('update:modelValue', newArray);
 };
 
 const setMultipleModelValue = () => {
-  const value = props.itemData ? props.data[props.itemData] : props.data;
-  let existingIndex;
+	const value = props.itemData ? props.data[props.itemData] : props.data;
+	let existingIndex;
 
-  if (props.itemData) {
-    existingIndex = props.modelValue.indexOf(props.data[props.itemData]);
-  } else {
-    existingIndex = props.modelValue.findIndex((item) =>
-      deepEqual(item, props.data),
-    );
-  }
+	if (props.itemData) {
+		existingIndex = props.modelValue.indexOf(props.data[props.itemData]);
+	} else {
+		existingIndex = props.modelValue.findIndex((item) =>
+			deepEqual(item, props.data),
+		);
+	}
 
-  if (existingIndex === -1) {
-    const newArray = [...props.modelValue];
-    newArray.push(value);
-    emit('update:modelValue', newArray);
-    return;
-  }
+	if (existingIndex === -1) {
+		const newArray = [
+			...props.modelValue,
+		];
+		newArray.push(value);
+		emit('update:modelValue', newArray);
+		return;
+	}
 
-  const newArray = [...props.modelValue];
-  newArray.splice(existingIndex, 1);
-  emit('update:modelValue', newArray);
+	const newArray = [
+		...props.modelValue,
+	];
+	newArray.splice(existingIndex, 1);
+	emit('update:modelValue', newArray);
 };
 
 const selectElement = () => {
-  if (props.multiple) {
-    if (props.data[props.childrenProp]?.length) {
-      setMultipleModelValueWithTree();
-    } else {
-      setMultipleModelValue();
-    }
-    return;
-  }
+	if (props.multiple) {
+		if (props.data[props.childrenProp]?.length) {
+			setMultipleModelValueWithTree();
+		} else {
+			setMultipleModelValue();
+		}
+		return;
+	}
 
-  if (props.allowParent && !props.data[props.childrenProp]) {
-    return emit(
-      'update:modelValue',
-      props.itemData ? props.data[props.itemData] : props.data,
-    );
-  }
+	if (props.allowParent && !props.data[props.childrenProp])
+		return emit(
+			'update:modelValue',
+			props.itemData ? props.data[props.itemData] : props.data,
+		);
 
-  if (props.data[props.childrenProp]?.length) {
-    collapsed.value = !collapsed.value;
-    return;
-  }
+	if (props.data[props.childrenProp]?.length) {
+		collapsed.value = !collapsed.value;
+		return;
+	}
 
-  emit(
-    'update:modelValue',
-    props.itemData ? props.data[props.itemData] : props.data,
-  );
+	emit(
+		'update:modelValue',
+		props.itemData ? props.data[props.itemData] : props.data,
+	);
 };
 
 const collapsed = ref(true);
 const openParent = () => {
-  if (props.nestedLevel > 0) {
-    emit('openParent');
-  }
+	if (props.nestedLevel > 0) {
+		emit('openParent');
+	}
 };
 
 const onOpenParent = () => {
-  collapsed.value = false;
-  openParent();
+	collapsed.value = false;
+	openParent();
 };
 
 const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
-  // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
-    return true;
-  }
+	// Check if the object itself has searched
+	if (data[props.searchedProp] && nestedLevel) return true;
 
-  // Check if the object has children
-  if (Array.isArray(data[props.childrenProp])) {
-    // Iterate through the array
-    for (const child of data[props.childrenProp]) {
-      // Recursively check nested objects
-      if (hasSearchedElement(child, nestedLevel + 1)) {
-        return true;
-      }
-    }
-  }
+	// Check if the object has children
+	if (Array.isArray(data[props.childrenProp])) {
+		// Iterate through the array
+		for (const child of data[props.childrenProp]) {
+			// Recursively check nested objects
+			if (hasSearchedElement(child, nestedLevel + 1)) {
+				return true;
+			}
+		}
+	}
 
-  // If no match is found, return false
-  return false;
+	// If no match is found, return false
+	return false;
 };
 
 onMounted(() => {
-  if (isSelected.value) {
-    openParent();
-  }
+	if (isSelected.value) {
+		openParent();
+	}
 
-  if (props.data[props.searchedProp]) {
-    openParent();
-  }
+	if (props.searchedProp && props.data[props.searchedProp]) {
+		openParent();
+	}
 });
 
 watch(
-  () => props.modelValue,
-  () => {
-    if (isSelected.value) {
-      openParent();
-    }
-  },
+	() => props.modelValue,
+	() => {
+		if (isSelected.value) {
+			openParent();
+		}
+	},
 );
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-@use './variables.scss' as *;
-
+<style scoped>
 .wt-tree-line {
   display: flex;
   align-items: flex-start;
+}
 
-  &__icon-wrapper {
-    display: flex;
-  }
+.wt-tree-line__icon-wrapper {
+  display: flex;
+}
 
-  &__label-wrapper {
-    display: flex;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    padding: 0 var(--spacing-2xs);
-    color: var(--wt-tree-item-on);
+.wt-tree-line__label-wrapper {
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 0 var(--spacing-2xs);
+  color: var(--wt-tree-item-on);
+}
 
-    &:hover {
-      background: var(--wt-tree-item-hover);
-      color: var(--wt-tree-item-hover-on);
-    }
+.wt-tree-line__label-wrapper:hover {
+  background: var(--wt-tree-item-hover);
+  color: var(--wt-tree-item-hover-on);
+}
 
-    &.searched:not(.active) {
-      background: var(--wt-tree-item-searched);
-      color: var(--wt-tree-item-searched-on);
-    }
+.wt-tree-line__label-wrapper.searched:not(.active) {
+  background: var(--wt-tree-item-searched);
+  color: var(--wt-tree-item-searched-on);
+}
 
-    &.active {
-      background: var(--wt-tree-item-active);
-      color: var(--wt-tree-item-active-on);
-    }
-  }
+.wt-tree-line__label-wrapper.active {
+  background: var(--wt-tree-item-active);
+  color: var(--wt-tree-item-active-on);
+}
 
-  &__label {
-    @extend %typo-body-1;
-    text-wrap: nowrap;
-  }
+.wt-tree-line__label {
+  text-wrap: nowrap;
 }
 </style>

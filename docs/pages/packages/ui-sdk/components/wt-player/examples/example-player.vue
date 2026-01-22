@@ -11,6 +11,7 @@ const src = ref(
   <wt-player
     :src="src"
     :autoplay="false"
+    :download="true"
   />
 </template>
 

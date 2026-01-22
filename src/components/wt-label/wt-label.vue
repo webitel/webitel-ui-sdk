@@ -5,7 +5,7 @@
       'wt-label--disabled': disabled,
       'wt-label--required': required,
     }"
-    class="wt-label"
+    class="wt-label typo-subtitle-2"
   >
     <slot />
 
@@ -15,43 +15,52 @@
 
 <script lang="ts" setup>
 defineProps<{
-  disabled?: boolean;
-  invalid?: boolean;
-  required?: boolean;
-  hint?: string;
+	/**
+	 * Disables the label
+	 * @type {boolean}
+	 * @default false
+	 */
+	disabled?: boolean;
+	/**
+	 * Changes label visual style to invalid (red)
+	 * @type {boolean}
+	 * @default false
+	 */
+	invalid?: boolean;
+	/**
+	 * Marks the label as required
+	 * @type {boolean}
+	 * @default false
+	 */
+	required?: boolean;
+	/**
+	 * Adds wt-icon-btn with tooltip value, passed as prop
+	 * @type {string}
+	 */
+	hint?: string;
 }>();
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-label {
-  @extend %typo-subtitle-2;
-
   display: flex;
   align-items: center;
   cursor: text;
   transition: var(--transition);
   color: var(--wt-label-color);
   padding: var(--wt-label-padding);
+}
 
-  &--invalid {
-    color: var(--wt-label-error-color);
-  }
+.wt-label--invalid {
+  color: var(--wt-label-error-color);
+}
 
-  &--disabled {
-    color: var(--wt-label-disabled-color);
-  }
+.wt-label--disabled {
+  color: var(--wt-label-disabled-color);
+}
 
-  &--required {
-    &::after {
-      content: '*';
-    }
-  }
+.wt-label--required::after {
+  content: '*';
 }
 
 .wt-hint {

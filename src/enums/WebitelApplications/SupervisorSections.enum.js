@@ -8,8 +8,8 @@ import { SupervisorSections } from './SupervisorSections';
  * use ts enum instead (and don't forget to compile it)
  */
 export default Object.fromEntries(
-  Object.entries(SupervisorSections).map(([key, value]) => [
-    upperCase(key).replaceAll(' ', '_'),
-    value,
-  ]),
+	Object.entries(SupervisorSections).map(([key, value]) => [
+		upperCase(key).replaceAll(' ', '_'),
+		value,
+	]),
 );

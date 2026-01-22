@@ -1,47 +1,57 @@
 <template>
-    <section
-      class="the-chat-messages-container"
-      @click="focusOnInput"
+  <section
+    class="the-chat-messages-container"
+    @click="focusOnInput"
+  >
+    <div
+      ref="messages-container"
+      class="the-chat-messages-container__wrapper wt-scrollbar"
+      @scroll="handleChatScroll"
+      @resize="handleChatResize"
     >
-      <div
-        ref="messages-container"
-        class="the-chat-messages-container__wrapper"
-        @scroll="handleChatScroll"
-        @resize="handleChatResize"
-      >
-        <chat-observer
-          v-if="props.next"
-          :next="props.next"
-          :loading="props.isLoading"
-          @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
-          />
-        <chat-message
-          v-for="(message, index) of props.messages"
-          :key="message.id"
-          :message="message"
-          :show-avatar="showAvatar(index)"
-          :without-avatars="props.withoutAvatars"
-          @[MessageAction.ClickOnImage]="clickOnImage(message)"
-        >
-          <template #before-message>
-            <chat-date-divider
-              v-if="showChatDate(index)"
-              :date="message.createdAt"
-            />
-          </template>
-        </chat-message>
-      </div>
-      <scroll-to-bottom-btn
-        v-if="showScrollToBottomBtn"
-        :new-message-count="newUnseenMessagesCount"
-        @scroll="scrollToBottom('smooth')"
+      <chat-observer
+        v-if="props.next"
+        :next="props.next"
+        :loading="props.isLoading"
+        @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
       />
-    </section>
+      <chat-message
+        v-for="(message, index) of props.messages"
+        :key="message.id"
+        :message="message"
+        :show-avatar="showAvatar(index)"
+        :without-avatars="props.withoutAvatars"
+        @[MessageAction.ClickOnImage]="clickOnImage(message)"
+      >
+        <template #before-message>
+          <chat-date-divider
+            v-if="showChatDate(index)"
+            :date="message.createdAt"
+          />
+        </template>
+      </chat-message>
+    </div>
+    <scroll-to-bottom-btn
+      v-if="showScrollToBottomBtn"
+      :new-message-count="newUnseenMessagesCount"
+      @scroll="scrollToBottom('smooth')"
+    />
+  </section>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import type { Emitter } from "mitt";
-import {computed, defineProps,inject, nextTick, onMounted, useTemplateRef} from "vue";
+import {
+	computed,
+	defineProps,
+	inject,
+	nextTick,
+	onMounted,
+	useTemplateRef,
+} from "vue";
 
 import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
 import type { UiChatsEmitterEvents } from "../../utils/emitter";
@@ -57,56 +67,59 @@ import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
 
 const props = withDefaults(
-	defineProps<{
-		messages: ChatMessageType[];
-		next?: boolean;
-		isLoading?: boolean;
-		withoutAvatars?: boolean;
-	}>(),
-	{
-		next: false,
-		isLoading: false,
-		withoutAvatars: false,
-	},
+  defineProps<{
+    messages: ChatMessageType[];
+    next?: boolean;
+    isLoading?: boolean;
+    withoutAvatars?: boolean;
+  }>(),
+  {
+    next: false,
+    isLoading: false,
+    withoutAvatars: false,
+  },
 );
 
 const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
 
 const messagesContainer = useTemplateRef("messages-container");
 
-const { showAvatar, showChatDate } = useChatMessages(computed(() => props.messages)); // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
+const { showAvatar, showChatDate } = useChatMessages(
+	computed(() => props.messages),
+); // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 
 const {
-	showScrollToBottomBtn,
-	newUnseenMessagesCount,
-	scrollToBottom,
-	handleChatScroll,
-	handleChatResize,
+  showScrollToBottomBtn,
+  newUnseenMessagesCount,
+  scrollToBottom,
+  handleChatScroll,
+  handleChatResize,
 } = useChatScroll(
 	messagesContainer,
-  computed(() => props.messages), // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
+	computed(() => props.messages), // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 );
 
 function focusOnInput() {
-	uiChatsEmitter?.on("focusOnTextField", focus);
+  uiChatsEmitter?.on("focusOnTextField", focus);
 }
 
 function clickOnImage(message: ChatMessageType) {
-	uiChatsEmitter!.emit("clickChatMessageImage", message);
+  uiChatsEmitter!.emit("clickChatMessageImage", message);
 }
 
 onMounted(async () => {
-	/* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
-	await nextTick();
-	setTimeout(() => {
-		scrollToBottom();
-	}, 500);
+  /* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
+  await nextTick();
+  setTimeout(() => {
+    scrollToBottom();
+  }, 500);
 });
 </script>
 
-<style scoped lang="scss">
-@use '@webitel/styleguide/scroll' as *;
-
+<style
+  scoped
+  lang="scss"
+>
 .the-chat-messages-container {
   position: relative;
   display: flex;
@@ -115,7 +128,6 @@ onMounted(async () => {
 }
 
 .the-chat-messages-container__wrapper {
-  @extend %wt-scrollbar;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -126,5 +138,4 @@ onMounted(async () => {
   scrollbar-gutter: stable both-edges;
   gap: var(--spacing-xs);
 }
-
 </style>

@@ -1,23 +1,21 @@
 <script setup>
-import Docs from './wt-tags-input-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleTagsInput from './examples/example-tags-input.vue';
 import ExampleTaggableTagsInput from './examples/example-taggable-tags-input.vue';
 import ExampleDisabledTagsInput from './examples/example-disabled-tags-input.vue';
 import ExampleInvalidTagsInput from './examples/example-invalid-tags-input.vue';
 </script>
 
-# WtTagsInput
+# `wt-tags-input.vue`
 
 ### This component is built on top of [Vue Multiselect](https://vue-multiselect.js.org/), like wt-select component.
 
 **There will be described only differences from wt-select component. Same props, events and slots are listed on wt-select page.
 For more information, see WtSelect Docs**
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Tags Input
 

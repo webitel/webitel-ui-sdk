@@ -9,6 +9,7 @@
     :row-style="rowStyle"
     :show-headers="!headless"
     :value="data"
+    :data-key="props.dataKey"
     class="wt-table"
     column-resize-mode="expand"
     lazy
@@ -19,15 +20,15 @@
     @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
-    @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
+    @row-reorder="({ dragIndex, dropIndex }) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
     <p-column
       v-if="rowExpansion"
       :pt="{
         columnresizer: {
-            class: {
-                'hidden': true
-            }
+          class: {
+            'hidden': true
+          }
         }
       }"
       body-style="width: 1%;"
@@ -46,9 +47,9 @@
       v-if="rowReorder"
       :pt="{
         columnresizer: {
-            class: {
-                'hidden': true
-            }
+          class: {
+            'hidden': true
+          }
         }
       }"
       :reorderable-column="false"
@@ -69,9 +70,9 @@
       v-if="selectable"
       :pt="{
         columnresizer: {
-            class: {
-                'hidden': true
-            }
+          class: {
+            'hidden': true
+          }
         }
       }"
       :reorderable-column="false"
@@ -85,7 +86,6 @@
           @update:selected="selectAll"
         />
       </template>
-
       <template #body="{ data: row }">
         <!-- check if row exists to prevent rendering errors -->
         <wt-checkbox
@@ -114,7 +114,7 @@
           :header="col"
           :name="`header-${col.value}`"
         >
-          <div class="wt-table__th__content">
+          <div class="wt-table__th__content typo-body-1-bold">
             <span v-tooltip="col.text">
               {{ col.text }}
             </span>
@@ -133,7 +133,6 @@
           </div>
         </slot>
       </template>
-
       <template #body="{ data: row, index }">
         <!--
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
@@ -141,7 +140,7 @@
         -->
         <div
           :style="columnStyle(col)"
-          class="wt-table__td__content"
+          class="wt-table__td__content typo-body-1"
         >
           <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading)
                this guard prevents rendering errors and keeps the table stable -->
@@ -178,7 +177,7 @@
         <!--    @slot Table head actions row slot -->
         <slot name="actions-header" />
       </template>
-      <template #body="{data: actionsData, index}">
+      <template #body="{ data: actionsData, index }">
         <!--
         @slot Table body actions row slot
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
@@ -196,7 +195,10 @@
     </p-column>
     <template #expansion="{ data: row }">
       <div>
-        <slot :item="row" name="expansion"></slot>
+        <slot
+          :item="row"
+          name="expansion"
+        ></slot>
       </div>
     </template>
     <template
@@ -210,8 +212,16 @@
 
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
-import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
-import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
+import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
+import {
+	computed,
+	nextTick,
+	onMounted,
+	onUnmounted,
+	ref,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useTableColumnDrag } from '../../composables';
@@ -227,299 +237,318 @@ import type { WtTableHeader } from './types/WtTable';
 const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
 const DEFAULT_ITEM_SIZE = 40;
 
-interface Props extends DataTableProps{
-  /**
-   * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
-   */
-  headers?: WtTableHeader[];
-  /**
-   * 'List of data, represented by table. '
-   */
-  data?: Array<unknown>;
-  /**
-   * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
-   */
-  sortable?: boolean;
-  /**
-   * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
-   */
-  selectable?: boolean;
-  selected?: Array<unknown>;
-  /**
-   * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
-   */
-  gridActions?: boolean;
-  /**
-   * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
-   */
-  fixedActions?: boolean;
-  /**
-   * 'If true, displays table without header.'
-   */
-  headless?: boolean;
-  /**
-   * 'If true, allows to reorder rows.'
-   */
-  rowReorder?: boolean;
-  /**
-   * 'If true, restrict sprecific row reorder.'
-   */
-  isRowReorderDisabled?: (row) => boolean;
-  rowExpansion?: boolean;
-  rowClass?: () => string;
-  rowStyle?: () => { [key: string]: string };
-  resizableColumns?: boolean
-  reorderableColumns?: boolean
-  rowExpansionDisabled?: (row: object) => boolean;
+interface Props extends DataTableProps {
+	/**
+	 * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
+	 */
+	headers?: WtTableHeader[];
+	/**
+	 * 'List of data, represented by table. '
+	 */
+	data?: Array<unknown>;
+	/**
+	 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
+	 */
+	sortable?: boolean;
+	/**
+	 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
+	 */
+	selectable?: boolean;
+	selected?: Array<unknown>;
+	/**
+	 * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
+	 */
+	gridActions?: boolean;
+	/**
+	 * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
+	 */
+	fixedActions?: boolean;
+	/**
+	 * 'If true, displays table without header.'
+	 */
+	headless?: boolean;
+	/**
+	 * 'If true, allows to reorder rows.'
+	 */
+	rowReorder?: boolean;
+	/**
+	 * @author @Oleksandr Palonnyi
+	 *
+	 * [WTEL-8629](https://webitel.atlassian.net/browse/WTEL-8629)
+	 *
+	 * Unique field name used to identify a row.
+	 * Required for selection, expansion, and virtual scrolling to work correctly.
+	 * The value must be stable and unique across all rows.
+	 */
+	dataKey?: string;
+	/**
+	 * 'If true, restrict sprecific row reorder.'
+	 */
+	isRowReorderDisabled?: (row) => boolean;
+	rowExpansion?: boolean;
+	rowClass?: () => string;
+	rowStyle?: () => {
+		[key: string]: string;
+	};
+	resizableColumns?: boolean;
+	reorderableColumns?: boolean;
+	rowExpansionDisabled?: (row: object) => boolean;
 
-  //lazy loading
-  lazy?: boolean;
-  onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
-  loading?: boolean;
-  itemSize?: number | undefined;
+	//lazy loading
+	lazy?: boolean;
+	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+	loading?: boolean;
+	itemSize?: number | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  headers: () => [],
-  data: () => [],
-  sortable: false,
-  selectable: true,
-  gridActions: true,
-  fixedActions: false,
-  headless: false,
-  rowReorder: false,
-  rowExpansion: false,
-  isRowReorderDisabled: () => false,
-  rowClass: () => '',
-  rowStyle: () => ({}),
-  resizableColumns: false,
-  reorderableColumns: false,
-  rowExpansionDisabled: () => false,
-  lazy: false,
-  itemSize: DEFAULT_ITEM_SIZE
+	headers: () => [],
+	data: () => [],
+	sortable: false,
+	selectable: true,
+	gridActions: true,
+	fixedActions: false,
+	headless: false,
+	rowReorder: false,
+	rowExpansion: false,
+	isRowReorderDisabled: () => false,
+	rowClass: () => '',
+	rowStyle: () => ({}),
+	resizableColumns: false,
+	reorderableColumns: false,
+	rowExpansionDisabled: () => false,
+	lazy: false,
+	itemSize: DEFAULT_ITEM_SIZE,
+	dataKey: '',
 });
 
 const { t } = useI18n();
 
 const slots = useSlots();
 
-const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resize', 'column-reorder']);
+const emit = defineEmits([
+	'sort',
+	'update:selected',
+	'reorder:row',
+	'column-resize',
+	'column-reorder',
+]);
 
 const table = useTemplateRef('table');
 const tableKey = ref(0);
 const expandedRows = ref([]);
 
-const {
-  addTableDragListener,
-  removeTableDragListener,
-} = useTableColumnDrag(table, props.reorderableColumns);
+const { addTableDragListener, removeTableDragListener } = useTableColumnDrag(
+	table,
+	props.reorderableColumns,
+);
 
 // table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
+const excludeColumnsFromReorder = [
+	'row-select',
+	'row-reorder',
+	'row-actions',
+	'row-expander',
+];
 
 const _selected = computed(() => {
-  // _isSelected for backwards compatibility
-  return props.selectable
-    ? props.selected || props.data.filter(item => item._isSelected)
-    : [];
+	// _isSelected for backwards compatibility
+	return props.selectable
+		? props.selected || props.data.filter((item) => item._isSelected)
+		: [];
 });
 
 const dataHeaders = computed(() => {
-  return props.headers
-    .map(header => {
-      if (!header.text && header.locale) {
-        return {
-          ...header,
-          text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
-        };
-      }
-      return header;
-    });
+	return props.headers.map((header) => {
+		if (!header.text && header.locale)
+			return {
+				...header,
+				text:
+					typeof header.locale === 'string'
+						? t(header.locale)
+						: t(...header.locale),
+			};
+		return header;
+	});
 });
 
 const isColumnHidden = (col) => {
-  return col.show === false
-}
+	return col.show === false;
+};
 
 const columnStyle = (col) => {
-  const baseWidth = 140
+	const baseWidth = 140;
 
-  return {
-    minWidth: col.width || `${baseWidth}px`,
-  }
-}
+	return {
+		minWidth: col.width || `${baseWidth}px`,
+	};
+};
 
 const isTableColumnFooters = computed(() => {
-  return Object.keys(slots).some(slotName => slotName.includes('-footer'));
+	return Object.keys(slots).some((slotName) => slotName.includes('-footer'));
 });
 
 const isTableFooter = computed(() => {
-  return Object.keys(slots).some(slotName => slotName === 'footer');
+	return Object.keys(slots).some((slotName) => slotName === 'footer');
 });
 
 const isAllSelected = computed(() => {
-  return _selected.value.length === props.data.length && props.data.length > 0;
-})
+	return _selected.value.length === props.data.length && props.data.length > 0;
+});
 
-const sort = ({sortField}) => {
-  const col = dataHeaders.value.find(header => header.field === sortField)
-  if (!isColSortable(col)) return;
-  const nextSort = getNextSortOrder(col.sort);
-  emit('sort', col, nextSort);
-}
+const sort = ({ sortField }) => {
+	const col = dataHeaders.value.find((header) => header.field === sortField);
+	if (!isColSortable(col)) return;
+	const nextSort = getNextSortOrder(col.sort);
+	emit('sort', col, nextSort);
+};
 
 const isColSortable = ({ sort }) => {
-  /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
+	/*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
             strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
             so we need to check if this property is present
     */
-  return props.sortable && sort !== undefined;
-}
+	return props.sortable && sort !== undefined;
+};
 
 const selectAll = () => {
-  if (props.selected) {
-    if (isAllSelected.value) {
-      emit('update:selected', []);
-    } else {
-      emit('update:selected', [...props.data]);
-    }
-  } else {
-    // for backwards compatibility
+	if (props.selected) {
+		if (isAllSelected.value) {
+			emit('update:selected', []);
+		} else {
+			emit('update:selected', [
+				...props.data,
+			]);
+		}
+	} else {
+		// for backwards compatibility
 
-    // https://webitel.atlassian.net/browse/WTEL-4634
-    // Value for _isSelected must be assigned explicitly.
-    // Because allSelected recomputes after each change
+		// https://webitel.atlassian.net/browse/WTEL-4634
+		// Value for _isSelected must be assigned explicitly.
+		// Because allSelected recomputes after each change
 
-    if (isAllSelected.value) {
-      props.data.forEach((item) => {
-        item._isSelected = false;
-      });
-    } else {
-      props.data.forEach((item) => {
-        item._isSelected = true;
-      });
-    }
-  }
-}
+		if (isAllSelected.value) {
+			props.data.forEach((item) => {
+				item._isSelected = false;
+			});
+		} else {
+			props.data.forEach((item) => {
+				item._isSelected = true;
+			});
+		}
+	}
+};
 
 const handleSelection = (row, select) => {
-  if (props.selected) {
-    if (select) {
-      emit('update:selected', [..._selected.value, row]);
-    } else {
-      emit(
-        'update:selected',
-        _selected.value.filter((item) => item !== row),
-      );
-    }
-  } else {
-    // for backwards compatibility
-    row._isSelected = !row._isSelected;
-  }
-}
+	if (props.selected) {
+		if (select) {
+			emit('update:selected', [
+				..._selected.value,
+				row,
+			]);
+		} else {
+			emit(
+				'update:selected',
+				_selected.value.filter((item) => item !== row),
+			);
+		}
+	} else {
+		// for backwards compatibility
+		row._isSelected = !row._isSelected;
+	}
+};
 
-const columnResize = ({element}) => {
-  // getting column name by custom attribute due Primevue does not provide it
-  const field = element.getAttribute('data-column-field')
+const columnResize = ({ element }) => {
+	// getting column name by custom attribute due Primevue does not provide it
+	const field = element.getAttribute('data-column-field');
 
-  const computedStyle = getComputedStyle(element);
-  const paddingLeft = parseFloat(computedStyle.paddingLeft);
-  const paddingRight = parseFloat(computedStyle.paddingRight);
+	const computedStyle = getComputedStyle(element);
+	const paddingLeft = Number.parseFloat(computedStyle.paddingLeft);
+	const paddingRight = Number.parseFloat(computedStyle.paddingRight);
 
-  const columnWidth = element.offsetWidth - paddingLeft - paddingRight
+	const columnWidth = element.offsetWidth - paddingLeft - paddingRight;
 
-  emit('column-resize', { columnName: field, columnWidth: `${columnWidth}px` })
-}
+	emit('column-resize', {
+		columnName: field,
+		columnWidth: `${columnWidth}px`,
+	});
+};
 
 const columnReorder = () => {
-  const containerEl = table.value.$el.querySelector('.p-datatable-table-container');
-  const containerElScrollLeft = containerEl.scrollLeft;
-  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
-  tableKey.value += 1;
-  emit('column-reorder', newOrder)
-  nextTick(() => {
-    addTableDragListener();
-    table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
-  })
-}
+	const containerEl = table.value.$el.querySelector(
+		'.p-datatable-table-container',
+	);
+	const containerElScrollLeft = containerEl.scrollLeft;
+	const newOrder = table.value.d_columnOrder.filter(
+		(col) => !excludeColumnsFromReorder.includes(col),
+	);
+	tableKey.value += 1;
+	emit('column-reorder', newOrder);
+	nextTick(() => {
+		addTableDragListener();
+		table.value.$el.querySelector('.p-datatable-table-container').scrollLeft =
+			containerElScrollLeft;
+	});
+};
 
 const isRowExpanded = (row) => {
-  return expandedRows.value.some(r => r?.id === row?.id);
+	return expandedRows.value.some((r) => r?.id === row?.id);
 };
 
 const toggleRow = (row) => {
-  const index = expandedRows.value.findIndex(r => r.id === row.id);
-  if (index !== -1) {
-    expandedRows.value.splice(index, 1);
-  } else {
-    expandedRows.value.push(row);
-  }
+	const index = expandedRows.value.findIndex((r) => r.id === row.id);
+	if (index !== -1) {
+		expandedRows.value.splice(index, 1);
+	} else {
+		expandedRows.value.push(row);
+	}
 };
 
 const virtualScroll = computed(() => {
-  if (!props.lazy) return;
+	if (!props.lazy) return;
 
-  return {
-    lazy: props.lazy,
-    onLazyLoad: props.onLoading,
-    itemSize: props.itemSize, // The height/width of item according to orientation
-    numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
-  };
+	return {
+		lazy: props.lazy,
+		onLazyLoad: props.onLoading,
+		itemSize: props.itemSize, // The height/width of item according to orientation
+		numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
+	};
 });
 
 onMounted(() => {
-  addTableDragListener();
-})
+	addTableDragListener();
+});
 
 onUnmounted(() => {
-  removeTableDragListener();
-})
+	removeTableDragListener();
+});
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-table {
-  @extend %wt-scrollbar;
   overflow: auto;
 }
 
-.wt-table :deep(.p-datatable-table-container) {
-  @extend %wt-scrollbar;
-}
-
-//style for virtual scroller
-.wt-table :deep(.p-virtualscroller) {
-  @extend %wt-scrollbar;
-}
-
-.wt-table__th__content {
-  @extend %typo-body-1-bold;
+/* style for virtual scroller */
+.wt-table :deep(.wt-table__th__content) {
   width: 0;
   white-space: nowrap;
 }
 
-.wt-table__td__content {
-  @extend %typo-body-1;
+.wt-table :deep(.wt-table__td__content) {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.wt-table__td__actions {
+.wt-table :deep(.wt-table__td__actions) {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
   gap: var(--spacing-xs);
 }
 
-.wt-table__th__sort-arrow {
+.wt-table :deep(.wt-table__th__sort-arrow) {
   position: absolute;
   z-index: 1;
   top: 50%;

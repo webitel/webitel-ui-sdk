@@ -1,5 +1,5 @@
 <template>
-  <footer class="wt-pagination">
+  <footer class="wt-pagination typo-body-1">
     <div class="wt-pagination__size">
       <div class="wt-pagination__size-text">
         {{ $t('webitelUI.pagination.sizeText') }}
@@ -37,107 +37,138 @@
 import debounce from '../../scripts/debounce.js';
 
 export default {
-  name: 'WtPagination',
-  model: {
-    prop: 'size',
-    event: 'change',
-  },
-  props: {
-    size: {
-      type: [String, Number],
-    },
-    next: {
-      type: Boolean,
-      default: false,
-    },
-    prev: {
-      type: Boolean,
-      default: false,
-    },
-    debounce: {
-      type: Boolean,
-      default: false,
-    },
-    debounceDelay: {
-      type: Number,
-      default: 1000,
-    },
-  },
-  emits: ['change', 'input', 'prev', 'next'],
+	name: 'WtPagination',
+	model: {
+		prop: 'size',
+		event: 'change',
+	},
+	/**
+	 * @emits {string | number} change - Fires when size changes. The same as input, but if "debounce" is true, event is debounced
+	 * @emits {string | number} input - Fires when size changes. SIZE CHANGE IS DEBOUNCED
+	 * @emits {void} next - Event is triggered on "next" arrow click
+	 * @emits {void} prev - Event is triggered on "prev" arrow click
+	 */
+	props: {
+		/**
+		 * SIZE CHANGE IS DEBOUNCED
+		 * @type {string | number}
+		 * @model size
+		 */
+		size: {
+			type: [
+				String,
+				Number,
+			],
+		},
+		/**
+		 * Is false, disables paging arrow
+		 * @type {boolean}
+		 * @default false
+		 */
+		next: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Is false, disables paging arrow
+		 * @type {boolean}
+		 * @default false
+		 */
+		prev: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * If true, @change event is delayed for debounceDelay from last change
+		 * @type {boolean}
+		 * @default false
+		 */
+		debounce: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Debounce delay in milliseconds
+		 * @type {number}
+		 * @default 1000
+		 */
+		debounceDelay: {
+			type: Number,
+			default: 1000,
+		},
+	},
+	emits: [
+		'change',
+		'input',
+		'prev',
+		'next',
+	],
 
-  data: () => ({
-    defaultSize: '10',
-  }),
+	data: () => ({
+		defaultSize: '10',
+	}),
 
-  watch: {
-    size(value) {
-      this.changeSize(value);
-    },
-  },
+	watch: {
+		size(value) {
+			this.changeSize(value);
+		},
+	},
 
-  created() {
-    if (this.debounce)
-      this.changeSize = debounce(this.changeSize, this.debounceDelay);
-  },
+	created() {
+		if (this.debounce)
+			this.changeSize = debounce(this.changeSize, this.debounceDelay);
+	},
 
-  methods: {
-    inputHandler(value) {
-      const size = value >= 0 && value <= 1000 ? value : this.defaultSize;
-      this.$emit('input', size);
-      this.changeSize(size);
-    },
-    changeSize(value) {
-      this.$emit('change', value);
-    },
-    goNext() {
-      this.$emit('next');
-    },
-    goPrev() {
-      this.$emit('prev');
-    },
-  },
+	methods: {
+		inputHandler(value) {
+			const size = value >= 0 && value <= 1000 ? value : this.defaultSize;
+			this.$emit('input', size);
+			this.changeSize(size);
+		},
+		changeSize(value) {
+			this.$emit('change', value);
+		},
+		goNext() {
+			this.$emit('next');
+		},
+		goPrev() {
+			this.$emit('prev');
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-pagination {
-  @extend %typo-body-1;
-
   display: inline-flex;
   align-items: center;
   margin-left: auto;
 }
 
 .wt-pagination__size {
-  display: flex;
+display: flex;
   align-items: center;
   margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-text {
-  margin-right: var(--pagination-gap);
+margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-input {
-  width: var(--pagination-size-input-width);
+width: var(--pagination-size-input-width);
 }
 
 .wt-pagination__page-controls {
-  display: flex;
+display: flex;
   align-items: center;
 }
 
 .wt-pagination__page-control {
-  margin-left: var(--pagination-gap);
+margin-left: var(--pagination-gap);
+}
 
-  &:first-child {
-    margin-left: 0;
-  }
+.wt-pagination__page-control .wt-pagination:first-child {
+margin-left: 0;
 }
 </style>

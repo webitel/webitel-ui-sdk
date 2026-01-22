@@ -1,6 +1,6 @@
 <template>
   <section class="dynamic-filter-preview-info">
-    <header class="dynamic-filter-preview-info__header">
+    <header class="dynamic-filter-preview-info__header typo-body-2-bold">
       <slot name="header" />
     </header>
 
@@ -23,9 +23,6 @@
   gap: var(--spacing-xs);
   min-width: 60px;
 
-  &__header {
-    @extend %typo-body-2-bold;
-  }
 
   &__body {
     display: flex;

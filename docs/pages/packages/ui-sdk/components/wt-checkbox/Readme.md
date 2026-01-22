@@ -1,17 +1,15 @@
 <script setup>
-import Docs from './wt-checkbox-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleCheckbox from './examples/example-checkbox.vue';
 import ExampleDisabledCheckbox from './examples/example-disabled-checkbox.vue';
 import ExampleMultipleCheckboxes from './examples/example-multiple-checkboxes.vue';
 </script>
 
-# WtCheckbox
+# `wt-checkbox.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Checkbox
 

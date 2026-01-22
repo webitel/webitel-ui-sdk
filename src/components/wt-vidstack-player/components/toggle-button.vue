@@ -21,34 +21,32 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, Ref, useTemplateRef} from 'vue';
+import { defineEmits, defineProps, type Ref, useTemplateRef } from 'vue';
 
-import WtIconBtn from "../../wt-icon-btn/wt-icon-btn.vue";
+import WtIconBtn from '../../wt-icon-btn/wt-icon-btn.vue';
 
 const props = defineProps<{
-  primaryIcon: string;
-  secondaryIcon: string;
-  color?: string;
-  disabled?: boolean;
+	primaryIcon: string;
+	secondaryIcon: string;
+	color?: string;
+	disabled?: boolean;
 }>();
 
 const toggleButton = useTemplateRef('toggleButton') as Ref<HTMLElement>;
 
 const emit = defineEmits<{
-  'toggle': [value: boolean];
+	toggle: [
+		value: boolean,
+	];
 }>();
 
 const setToggleState = () => {
-  if (props.disabled) return;
-  emit('toggle', toggleButton.value.pressed);
-}
-
+	if (props.disabled) return;
+	emit('toggle', toggleButton.value.pressed);
+};
 </script>
 
-<style lang="scss" scoped>
-
-.toggle-button[data-pressed] .toggle-button__primary,
+<style  scoped>.toggle-button[data-pressed] .toggle-button__primary,
 .toggle-button:not([data-pressed]) .toggle-button__secondary {
-  display: none;
-}
-</style>
+display: none;
+}</style>

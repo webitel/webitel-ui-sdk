@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import {EngineQuestion, EngineQuestionAnswer} from "webitel-sdk";
+import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
 
 import { WtButton, WtRadio } from '../../../../../components';
 import updateObject from '../../../../../scripts/updateObject.js';
@@ -50,38 +50,52 @@ const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
 defineProps<{
-  /**
-   * question mode, NOT audit form mode
-   */
-  mode: 'read' | 'write';
+	/**
+	 * question mode, NOT audit form mode
+	 */
+	mode: 'read' | 'write';
 }>();
 
 function updateQuestion({ path, value }) {
-  questionModel.value = updateObject({
-    obj: questionModel.value,
-    path,
-    value,
-  });
+	questionModel.value = updateObject({
+		obj: questionModel.value,
+		path,
+		value,
+	});
 }
 
 function addQuestionOption() {
-  const options = [...questionModel.value.options, generateOption()];
-  return updateQuestion({ path: 'options', value: options });
+	const options = [
+		...questionModel.value.options,
+		generateOption(),
+	];
+	return updateQuestion({
+		path: 'options',
+		value: options,
+	});
 }
 
 function deleteQuestionOption({ key }) {
-  const options = [...questionModel.value.options];
-  options.splice(key, 1);
-  return updateQuestion({ path: 'options', value: options });
+	const options = [
+		...questionModel.value.options,
+	];
+	options.splice(key, 1);
+	return updateQuestion({
+		path: 'options',
+		value: options,
+	});
 }
 
 function updateAnswer(score) {
-  answerModel.value = answerModel.value ? {
-    ...answerModel.value,
-    score,
-  } : { score };
+	answerModel.value = answerModel.value
+		? {
+				...answerModel.value,
+				score,
+			}
+		: {
+				score,
+			};
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -17,41 +17,64 @@
 
 <script>
 export default {
-  name: 'WtProgressBar',
-  props: {
-    max: {
-      type: [Number, String],
-      default: 100,
-    },
-    value: {
-      type: [Number, String],
-      default: 0,
-    },
-    color: {
-      type: String,
-      default: 'primary',
-      options: ['primary', 'secondary', 'success', 'error'],
-    },
-  },
-  computed: {
-    progress() {
-      return (this.value * 100) / this.max;
-    },
-    isOverflow() {
-      return this.progress >= 100;
-    },
-    progressWidth() {
-      return this.isOverflow ? 100 : this.progress;
-    },
-  },
+	name: 'WtProgressBar',
+	props: {
+		/**
+		 * Max progress bar value
+		 * @type {number | string}
+		 * @default 100
+		 */
+		max: {
+			type: [
+				Number,
+				String,
+			],
+			default: 100,
+		},
+		/**
+		 * Current progress bar value
+		 * @type {number | string}
+		 * @default 0
+		 */
+		value: {
+			type: [
+				Number,
+				String,
+			],
+			default: 0,
+		},
+		/**
+		 * Progress color
+		 * @type {string}
+		 * @default 'primary'
+		 * @options ['primary', 'secondary', 'success', 'error']
+		 */
+		color: {
+			type: String,
+			default: 'primary',
+			options: [
+				'primary',
+				'secondary',
+				'success',
+				'error',
+			],
+		},
+	},
+	computed: {
+		progress() {
+			return (this.value * 100) / this.max;
+		},
+		isOverflow() {
+			return this.progress >= 100;
+		},
+		progressWidth() {
+			return this.isOverflow ? 100 : this.progress;
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-progress-bar {
   position: relative;
   box-sizing: border-box;
@@ -67,8 +90,7 @@ export default {
   display: inline-block;
   transition: var(--transition);
   will-change: width;
-  border-radius: var(--wt-progress-bar-border-radius) 0 0
-    var(--wt-progress-bar-border-radius);
+  border-radius: var(--wt-progress-bar-border-radius) 0 0 var(--wt-progress-bar-border-radius);
   background: var(--wt-progress-bar-background-primary-color);
   height: var(--wt-progress-bar-height);
 }

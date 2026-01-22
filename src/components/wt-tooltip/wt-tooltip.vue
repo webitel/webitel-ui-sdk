@@ -21,7 +21,7 @@
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
-      class="wt-tooltip__floating"
+      class="wt-tooltip__floating typo-body-2"
       @hide="hideTooltip"
       @show="showTooltip"
     >
@@ -34,12 +34,12 @@
 
 <script setup>
 import {
-  autoPlacement,
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useFloating,
+	autoPlacement,
+	autoUpdate,
+	flip,
+	offset,
+	shift,
+	useFloating,
 } from '@floating-ui/vue';
 import { onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -47,37 +47,43 @@ import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSu
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
 const props = defineProps({
-  visible: {
-    type: Boolean,
-    default: false,
-  },
-  placement: {
-    type: String,
-    default: 'auto',
-  },
-  popperTriggers: {
-    type: Array,
-    default: () => [],
-  },
-  triggers: {
-    type: Array,
-    default: () => ['hover', 'focus', 'touch'],
-  },
-  popperClass: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  disableClickAway: {
-    type: Boolean,
-    default: false,
-  },
+	visible: {
+		type: Boolean,
+		default: false,
+	},
+	placement: {
+		type: String,
+		default: 'auto',
+	},
+	popperTriggers: {
+		type: Array,
+		default: () => [],
+	},
+	triggers: {
+		type: Array,
+		default: () => [
+			'hover',
+			'focus',
+			'touch',
+		],
+	},
+	popperClass: {
+		type: String,
+		default: '',
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
+	disableClickAway: {
+		type: Boolean,
+		default: false,
+	},
 });
 
-const emit = defineEmits(['update:visible']);
+const emit = defineEmits([
+	'update:visible',
+]);
 
 const activator = useTemplateRef('activator');
 const floating = useTemplateRef('floating');
@@ -85,108 +91,101 @@ const floatingChild = useTemplateRef('floatingChild');
 const isVisible = ref(props.visible);
 
 const emitVisibilityChange = () => {
-  emit('update:visible', isVisible.value);
+	emit('update:visible', isVisible.value);
 };
 
 const showTooltip = (event = {}) => {
-  if (props.disabled || isVisible.value) return;
-  isVisible.value = true;
-  event.usedByTooltip = true; // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
-  emitVisibilityChange();
-  setScrollListener();
+	if (props.disabled || isVisible.value) return;
+	isVisible.value = true;
+	event.usedByTooltip = true; // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
+	emitVisibilityChange();
+	setScrollListener();
 };
 
 const hideTooltip = (event = {}) => {
-  const contains = floatingChild.value?.contains(event.target);
-  if (!isVisible.value || event.usedByTooltip || contains) return;
+	const contains = floatingChild.value?.contains(event.target);
+	if (!isVisible.value || event.usedByTooltip || contains) return;
 
-  isVisible.value = false;
-  emitVisibilityChange();
-  removeScrollListener();
+	isVisible.value = false;
+	emitVisibilityChange();
+	removeScrollListener();
 };
 
 const onClickAwayAction = (event = {}) => {
-  if (props.disableClickAway) {
-    return;
-  }
+	if (props.disableClickAway) {
+		return;
+	}
 
-  hideTooltip(event);
+	hideTooltip(event);
 };
 
 const setScrollListener = () => {
-  window.addEventListener('scroll', hideTooltip, true);
+	window.addEventListener('scroll', hideTooltip, true);
 };
 const removeScrollListener = () => {
-  window.removeEventListener('scroll', hideTooltip, true);
+	window.removeEventListener('scroll', hideTooltip, true);
 };
 
 // https://floating-ui.com/docs/misc#clipping
 const { floatingStyles } = useFloating(activator, floating, {
-  placement: props.placement === 'auto' ? null : props.placement,
-  strategy: 'fixed', // https://floating-ui.com/docs/computeposition#strategy
-  // https://floating-ui.com/docs/middleware
+	placement: props.placement === 'auto' ? null : props.placement,
+	strategy: 'fixed', // https://floating-ui.com/docs/computeposition#strategy
+	// https://floating-ui.com/docs/middleware
 
-  /* WE SHOULD USE v-if INSTEAD OF OPACITY VISIBILITY
+	/* WE SHOULD USE v-if INSTEAD OF OPACITY VISIBILITY
   TOGGLE BECAUSE OF PERFORMANCE ISSUES, RELATED TO USAGE OF AUTO_UPDATE OF POSITIONS
   */
-  whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
-  middleware: [
-    shift(),
-    offset(4),
-    props.placement === 'auto' ? autoPlacement() : flip(),
-  ],
+	whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
+	middleware: [
+		shift(),
+		offset(4),
+		props.placement === 'auto' ? autoPlacement() : flip(),
+	],
 });
 
 useTooltipTriggerSubscriptions({
-  target: activator,
-  triggers: props.triggers,
-  show: showTooltip,
-  hide: hideTooltip,
+	target: activator,
+	triggers: props.triggers,
+	show: showTooltip,
+	hide: hideTooltip,
 });
 
 watch(
-  () => props.visible,
-  (value) => {
-    if (value) showTooltip();
-    else hideTooltip();
-  },
+	() => props.visible,
+	(value) => {
+		if (value) showTooltip();
+		else hideTooltip();
+	},
 );
 
 onMounted(() => {
-  if (props.visible) showTooltip();
+	if (props.visible) showTooltip();
 });
 
 onBeforeUnmount(() => {
-  removeScrollListener();
+	removeScrollListener();
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-tooltip {
   display: inline-block;
   height: fit-content;
+}
 
-  &__activator {
-    line-height: 0;
-  }
+.wt-tooltip__activator {
+  line-height: 0;
+}
 
-  .wt-tooltip-floating {
-    @extend %typo-body-2;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    z-index: 1000;
-    box-shadow: var(--elevation-10);
-    border-radius: var(--border-radius);
-    background: var(--wt-tooltip-background-color);
-    padding: var(--spacing-2xs) var(--spacing-xs);
-    color: var(--wt-tooltip-text-color);
-  }
+.wt-tooltip__floating {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  z-index: 1000;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  background: var(--wt-tooltip-background-color);
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  color: var(--wt-tooltip-text-color);
 }
 </style>

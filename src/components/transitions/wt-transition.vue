@@ -12,32 +12,31 @@
 
 <script setup>
 const props = defineProps({
-  name: {
-    type: String,
-    default: 'fade-opacity',
-  },
-  mode: {
-    type: String,
-    default: 'out-in',
-  },
-  appear: {
-    type: Boolean,
-    default: false,
-  },
-  duration: {
-    type: String,
-    default: 'fast',
-  },
+	name: {
+		type: String,
+		default: 'fade-opacity',
+	},
+	mode: {
+		type: String,
+		default: 'out-in',
+	},
+	appear: {
+		type: Boolean,
+		default: false,
+	},
+	duration: {
+		type: String,
+		default: 'fast',
+	},
 });
 </script>
 
-<style lang="scss" scoped>
-/*
+<style scoped>
+  /*
 * Transition classes, what based at transition name (.fade-opacity, .fade-slide ets)
 * need to be pleased BEFORE classic classes (.wt-transition ets)
 **/
 
-// opacity
 .fade-opacity-enter-active,
 .fade-opacity-leave-active {
   transition: opacity;
@@ -48,7 +47,6 @@ const props = defineProps({
   opacity: 0;
 }
 
-// slide-up
 .fade-slide-up-enter-active,
 .fade-slide-up-leave-active {
   transition-timing-function: ease;

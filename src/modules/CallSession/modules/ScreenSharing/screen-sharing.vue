@@ -32,25 +32,28 @@
 </template>
 
 <script setup lang="ts">
-import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {defineEmits, useAttrs} from 'vue';
+import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import { defineEmits, useAttrs } from 'vue';
 
-import {RecordingIndicator, ScreenSharingControlsPanel} from "../../../../components/wt-vidstack-player/components";
-import {ScreenSharingSession, ScreenshotStatus} from '../../types';
+import {
+	RecordingIndicator,
+	ScreenSharingControlsPanel,
+} from '../../../../components/wt-vidstack-player/components';
+import type { ScreenSharingSession, ScreenshotStatus } from '../../types';
 
 interface Props {
-  session: ScreenSharingSession
-  screenshotStatus: ScreenshotStatus | null
-  screenshotIsLoading: boolean
+	session: ScreenSharingSession;
+	screenshotStatus: ScreenshotStatus | null;
+	screenshotIsLoading: boolean;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'close-session': [],
-  'make-screenshot': [],
-  'toggle-record': [],
-}>()
+	'close-session': [];
+	'make-screenshot': [];
+	'toggle-record': [];
+}>();
 
 const attrs = useAttrs();
 </script>

@@ -41,49 +41,17 @@ const load = () => {
 </script>
 
 <template>
-  <wt-tabs 
-    :current="currentSize"
-    :tabs="tabs"
-    wide
-    @change="currentSize = $event"
-  />
+  <wt-tabs :current="currentSize" :tabs="tabs" wide @change="currentSize = $event" />
   <div class="flex gap-2 mt-2">
-    <wt-button
-      v-for="color in colors"
-      :key="color"
-      :color="color"
-      :loading="loading"
-      icon="call"
-      :variant="ButtonVariant.ACTIVE"
-      :size="currentSize.value"
-      @click="load"
-    />
+    <wt-button v-for="color in colors" :key="color" :color="color" :loading="loading" icon="call"
+      :variant="ButtonVariant.ACTIVE" :size="currentSize.value" @click="load" />
   </div>
   <div class="flex gap-2 mt-2">
-    <wt-button
-      v-for="color in colors"
-      :key="color"
-      :color="color"
-      :loading="loading"
-      icon="call"
-      :variant="ButtonVariant.ACTIVE"
-      :size="currentSize.value"
-      rounded
-      @click="load"
-    />
+    <wt-button v-for="color in colors" :key="color" :color="color" :loading="loading" icon="call"
+      :variant="ButtonVariant.ACTIVE" :size="currentSize.value" rounded @click="load" />
   </div>
   <div class="flex gap-2 mt-2">
-    <wt-button
-      v-for="color in colors"
-      :key="color"
-      :color="color"
-      :loading="loading"
-      icon="call"
-      :variant="ButtonVariant.OUTLINED"
-      :size="currentSize.value"
-      @click="load"
-    />
+    <wt-button v-for="color in colors" :key="color" :color="color" :loading="loading" icon="call"
+      :variant="ButtonVariant.OUTLINED" :size="currentSize.value" @click="load" />
   </div>
 </template>
-
-<style lang="scss" scoped></style>

@@ -63,20 +63,6 @@ const loadMore = () => {
 </script>
 ```
 
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `canLoadMore` | Boolean | `true` | Controls whether the observer should trigger the next event |
-| `loading` | Boolean | `false` | Shows a loading indicator when true |
-| `root` | Element \| null | `null` | The scrollable container element. When null, uses the viewport |
-
-## Events
-
-| Event | Description |
-|-------|-------------|
-| `next` | Emitted when the observer element comes into view and canLoadMore is true |
-
 ## Usage Notes
 
 - **`canLoadMore` prop**: Controls whether the observer should trigger the `next` event for data loading. Set to `false` when you know there's no more data to load (e.g., reached the end of pagination, API returned empty response). This prevents unnecessary API calls and improves performance.

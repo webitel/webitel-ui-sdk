@@ -1,17 +1,21 @@
 import { globbySync } from 'globby';
 import path from 'path';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
-import { defineConfig } from 'vitepress';
+import { defineConfig as defineVitepressConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
 import { nav, sidebar } from './routes/routes.ts';
 import { Window } from 'happy-dom';
+import { vite as vidstack } from 'vidstack/plugins';
 
 global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't have localStorage
+global.requestAnimationFrame = new Window().requestAnimationFrame;
+global.Element = new Window().Element;
+global.HTMLElement = new Window().HTMLElement;
+global.customElements = new Window().customElements;
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default defineVitepressConfig({
   title: '@webitel/ui',
   description: 'Webitel UI docs',
   base: '/webitel-ui-sdk/',
@@ -24,8 +28,20 @@ export default defineConfig({
       },
     ],
   ],
+  vue: {
+    template: {
+          compilerOptions: {
+            isCustomElement: (tag) => tag.startsWith('media-'),
+          },
+        }
+      },
   lastUpdated: true,
   vite: {
+    build: {
+      rollupOptions: {
+        // external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
+      },
+    },
     resolve: {
       alias: {
         '__lib__': path.resolve(__dirname, '../../src'),
@@ -43,13 +59,11 @@ export default defineConfig({
       },
     },
     plugins: [
+      vidstack(),
       nodePolyfills({
         globals: {
           process: true,
         },
-      }),
-      createSvgSpritePlugin({
-        include: '**/sprite/*.svg',
       }),
       tailwindcss(),
       (() => {

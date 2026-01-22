@@ -24,10 +24,12 @@
         />
       </form>
 
-      <preset-filters-preview
-        :filters-manager="props.filtersManager"
-        :filter-configs="props.filterConfigs"
-      />
+      <div class="save-preset-filters-preview-wrapper wt-scrollbar">
+        <preset-filters-preview
+          :filters-manager="props.filtersManager"
+          :filter-configs="props.filterConfigs"
+        />
+      </div>
     </template>
 
     <template #actions>
@@ -137,7 +139,6 @@ const save = () => {
 }
 
 .save-preset-filters-preview-wrapper {
-  @extend %wt-scrollbar;
   margin-top: var(--spacing-sm);
   max-height: 140px;
   overflow-y: auto;

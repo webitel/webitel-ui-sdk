@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-page-header-docs.vue';
+import Specs from './component-specs.vue';
 import ExamplePageHeader from './examples/example-page-header.vue';
 </script>
 
-# WtPageHeader
+# `wt-page-header.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Page Header
 

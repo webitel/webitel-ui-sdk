@@ -1,7 +1,7 @@
 <template>
   <div class="talk-duration-filter-value-preview">
     <div v-if="from">
-      <p class="talk-duration-filter-value-preview__title">
+      <p class="talk-duration-filter-value-preview__title typo-subtitle-1">
         {{ t('reusable.from') }}
       </p>
 
@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="to">
-      <p class="talk-duration-filter-value-preview__title">
+      <p class="talk-duration-filter-value-preview__title typo-subtitle-1">
         {{ t('reusable.to') }}
       </p>
 
@@ -18,7 +18,10 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script
+  lang="ts"
+  setup
+>
 import { useI18n } from 'vue-i18n';
 
 import { useFromToSecToPreviewTime } from '../../composables/useFromToSecToPreviewTime';
@@ -33,12 +36,11 @@ const { t } = useI18n();
 const { from, to } = useFromToSecToPreviewTime(props.value);
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 @use '@webitel/styleguide/typography' as *;
 
-.duration-filter-value-preview {
-  &__title {
-    @extend %typo-subtitle-1;
-  }
-}
+.duration-filter-value-preview {}
 </style>

@@ -1,5 +1,1 @@
-@use '@webitel/styleguide/typography' as *;
-
-.p-popover-content {
-  @extend %typo-body-2;
-}
+@import './popover.css';

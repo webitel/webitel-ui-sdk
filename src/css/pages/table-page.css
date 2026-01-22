@@ -1,0 +1,79 @@
+:root {
+	--content-wrapper-padding: var(--spacing-xs);
+	--content-wrapper-gap: var(--spacing-xs);
+}
+
+.table-page.wt-page-wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.table-page .wt-page-wrapper__main,
+/* coz .table-section can exist without .table-page (in tabs, for instance)*/
+	.wt-page-wrapper__main:has(.table-section) {
+	min-height: 0;
+}
+
+.table-page .wt-loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.table-section {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	flex: 1;
+}
+
+.table-section__table-wrapper {
+	display: flex;
+	flex: 1 1 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 0;
+	gap: var(--spacing-sm);
+}
+
+.table-section__table-wrapper .wt-pagination {
+	margin-top: auto;
+}
+
+.table-section__visible-scroll-wrapper {
+	overflow: visible;
+	height: 100%;
+}
+
+.table-section__visible-scroll-wrapper .wt-table {
+	overflow: visible;
+}
+
+.table-title {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: var(--spacing-sm) 0;
+}
+
+.table-title__title {
+	font-family: "Montserrat", monospace;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 32px;
+	text-transform: none;
+}
+
+.table-title__title + .hint {
+	top: -2px;
+}
+
+.table-title__actions-wrap {
+	display: flex;
+	align-items: center;
+	gap: var(--table-actions-icon-gap);
+}

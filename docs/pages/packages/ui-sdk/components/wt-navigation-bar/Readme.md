@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-navigation-bar-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleNavigationBar from './examples/example-navigation-bar.vue';
 </script>
 
-# WtNavigationBar
+# `wt-navigation-bar.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example NavigationBar
 

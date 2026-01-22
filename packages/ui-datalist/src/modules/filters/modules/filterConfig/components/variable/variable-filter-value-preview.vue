@@ -1,14 +1,14 @@
 <template>
   <div class="variables-filter-value-preview">
     <div>
-      <p class="variables-filter-value-preview__title">
+      <p class="variables-filter-value-preview__title typo-subtitle-1">
         {{ t('vocabulary.keys') }}:
       </p>
       <span>{{ variable[0] }}</span>
     </div>
 
     <div>
-      <p class="variables-filter-value-preview__title">
+      <p class="variables-filter-value-preview__title typo-subtitle-1">
         {{ t('vocabulary.values') }}:
       </p>
       <span>{{ variable[1] }}</span>
@@ -32,8 +32,5 @@ const variable = props.value.split('=');
 @use '@webitel/styleguide/typography' as *;
 
 .variables-filter-value-preview {
-  &__title {
-    @extend %typo-subtitle-1;
-  }
 }
 </style>
