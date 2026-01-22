@@ -98,6 +98,7 @@ const Components = {
 	WtAvatar,
 	WtBadge,
 	WtBadgeNew,
+  WtMessage,
 	WtIcon,
 	WtIndicator,
 	WtInputInfo,
