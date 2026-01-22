@@ -8,7 +8,12 @@ import chip from './chip/chip.js';
 import divider from './divider/divider.js';
 import galleria from './galleria/galleria.js';
 import image from './image/image.js';
+import inputGroup from './input-group/input-group.js';
+import inputNumber from './input-number/input-number.js';
+import inputText from './input-text/input-text.js';
 import menubar from './menubar/menubar.js';
+import message from './message/message.js';
+import password from './password/password.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
@@ -30,7 +35,12 @@ const components = {
   toggleswitch: switcher,
   divider,
   image,
+  inputgroup: inputGroup,
+  inputnumber: inputNumber,
+  inputtext: inputText,
   menubar,
+  message,
+  password,
   popover,
   radiobutton: radio,
   slider,

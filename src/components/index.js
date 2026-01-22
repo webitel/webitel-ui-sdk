@@ -38,12 +38,16 @@ import WtImage from './wt-image/wt-image.vue';
 import WtIndicator from './wt-indicator/wt-indicator.vue';
 import WtInput from './wt-input/wt-input.vue';
 import WtInputInfo from './wt-input-info/wt-input-info.vue';
+import WtInputNumber from './wt-input-number/wt-input-number.vue';
+import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
+import WtPassword from './wt-password/wt-password.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
 import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
+import WtMessage from './wt-message/wt-message.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotification from './wt-notification/wt-notification.vue';
 import WtNotificationsBar from './wt-notifications-bar/wt-notifications-bar.vue';
@@ -86,6 +90,10 @@ const Components = {
   WtIcon,
   WtIndicator,
   WtInputInfo,
+  WtInputNumber,
+  WtInputText,
+  WtPassword,
+  WtMessage,
   WtButton,
   WtChip,
   WtConfirmDialog,
@@ -189,12 +197,16 @@ export {
   WtIndicator,
   WtInput,
   WtInputInfo,
+  WtInputNumber,
+  WtInputText,
   WtIntersectionObserver,
   WtItemLink,
+  WtPassword,
   WtLabel,
   WtLoadBar,
   WtLoader,
   WtLogo,
+  WtMessage,
   WtNavigationBar,
   WtNavigationMenu,
   WtNotification,

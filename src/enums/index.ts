@@ -13,6 +13,8 @@ import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { MimeTypes } from './MimeTypes/MimeTypes.enum';
+import { MessageColor } from './MessageColor/MessageColor';
+import { MessageVariant } from './MessageVariant/MessageVariant';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
@@ -45,6 +47,8 @@ export {
   IconAction,
   IconColor,
   MimeTypes,
+  MessageColor,
+  MessageVariant,
   ProcessingTableColumnType,
   ProviderIconType,
   QueueType,
