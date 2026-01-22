@@ -1,5 +1,6 @@
 import { TextareaScheme } from '@webitel/styleguide/component-schemes';
 import { WtTypography } from '@webitel/styleguide/enums';
+
 import { generateWtTypographyCustomCss } from '../../_shared/generators/generateWtTypographyCustomCss';
 
 const textarea = {
@@ -8,7 +9,10 @@ const textarea = {
 
 	css: ({ dt }) => `
       .wt-textarea__textarea {
-        ${generateWtTypographyCustomCss({ dt, typo: WtTypography.Body1 })}
+        ${generateWtTypographyCustomCss({
+					dt,
+					typo: WtTypography.Body1,
+				})}
         min-height: ${dt('textarea.minHeight')};
       }
   `,

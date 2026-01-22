@@ -1,5 +1,6 @@
 <template>
-  <div class="wt-input" :class="{
+  <div
+class="wt-input" :class="{
     'wt-input--disabled': disabled,
     'wt-input--invalid': invalid,
   }">
@@ -10,14 +11,16 @@
       </slot>
     </wt-label>
     <div class="wt-input__wrapper">
-      <input :id="name" ref="WtInput" :class="{
+      <input
+:id="name" ref="WtInput" :class="{
         'wt-input--is-password': isPassword,
       }" :disabled="disabled" :max="numberMax" :min="numberMin" :placeholder="placeholder || label"
         class="wt-input__input typo-body-1" :type="inputType" :value="inputValue" v-bind="$attrs" @input="inputHandler"
         @keyup="$emit('keyup', $event)" />
       <div ref="AfterWrapper" class="wt-input__after-wrapper">
         <slot name="after-input" />
-        <slot v-if="isPassword" name="show-password" v-bind="{
+        <slot
+v-if="isPassword" name="show-password" v-bind="{
           isPasswordVisible,
           switchVisibilityPassword,
         }">
@@ -45,7 +48,7 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
  * @emits {string | number} update:modelValue - Fires when input value changes (Vue 3 v-model)
  * @emits {KeyboardEvent} keyup - Fires on keyup event
  * @emits {Event} * - Plus all native input events
- * 
+ *
  * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
  * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
  */

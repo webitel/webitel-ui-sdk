@@ -1,5 +1,6 @@
 <template>
-  <div :class="{
+  <div
+:class="{
     'wt-select--disabled': disabled,
     'wt-select--invalid': invalid,
     'wt-select--multiple': multiple,
@@ -12,7 +13,8 @@
         {{ requiredLabel }}
       </slot>
     </wt-label>
-    <vue-multiselect ref="vue-multiselect" :allow-empty="allowEmpty" :close-on-select="$attrs.closeOnSelect ||
+    <vue-multiselect
+ref="vue-multiselect" :allow-empty="allowEmpty" :close-on-select="$attrs.closeOnSelect ||
       !multiple /* override default vue-multiselect value */
       " :disabled="disabled" :internal-search="!searchMethod" :label="selectOptionLabel" :limit="1" :loading="false"
       :model-value="selectValue" :multiple="multiple" :options="optionsWithCustomValues"
@@ -63,18 +65,21 @@
       <template #caret="{ toggle }">
         <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
         <!--    [https://my.webitel.com/browse/WTEL-3181]-->
-        <wt-icon-btn v-if="allowCustomValues && searchParams.search" :disabled="disabled"
+        <wt-icon-btn
+v-if="allowCustomValues && searchParams.search" :disabled="disabled"
           class="multiselect__select multiselect__custom-value" icon="select-custom-value-enter"
           @click="handleCustomValueArrowInput(toggle)" @mousedown.prevent />
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
-        <wt-icon-btn v-else :disabled="disabled" class="multiselect__select multiselect__arrow" icon="arrow-down"
+        <wt-icon-btn
+v-else :disabled="disabled" class="multiselect__select multiselect__arrow" icon="arrow-down"
           @click="toggle" @mousedown.prevent />
       </template>
 
       <!--      Slot located before the tags -->
       <template #clear="{ }">
-        <wt-icon-btn v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multiselect__clear"
+        <wt-icon-btn
+v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multiselect__clear"
           icon="close" @click="clearValue" />
       </template>
 
@@ -108,97 +113,97 @@ import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
 
 export default {
-  name: 'WtSelect',
-  mixins: [
-    multiselectMixin,
-    // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181]
-    taggableMixin,
-  ],
-  props: {
-    // vue 3
-    // modelValue: {},
+	name: 'WtSelect',
+	mixins: [
+		multiselectMixin,
+		// taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181]
+		taggableMixin,
+	],
+	props: {
+		// vue 3
+		// modelValue: {},
 
-    // vue 2 fallback
-    value: {
-      // default: (props) => {
-      //   return props.modelValue;
-      // },
-    },
+		// vue 2 fallback
+		value: {
+			// default: (props) => {
+			//   return props.modelValue;
+			// },
+		},
 
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
+		multiple: {
+			type: Boolean,
+			default: false,
+		},
 
-    clearable: {
-      type: Boolean,
-      default: true,
-    },
-    /*
+		clearable: {
+			type: Boolean,
+			default: true,
+		},
+		/*
      for taggableMixin functionality
      for more info, see WTEL-3181
      */
-    allowCustomValues: {
-      type: Boolean,
-      default: false,
-      description: 'See wt-tags-input "taggable" prop.',
-    },
-    // for taggableMixin functionality
-    handleCustomValuesAdditionManually: {
-      type: Boolean,
-      default: false,
-      description: 'See wt-tags-input "manualTagging" prop.',
-    },
-    v: {
-      type: Object,
-      default: null,
-    },
-    regleValidation: {
-      type: Object,
-      default: null,
-    },
-  },
-  emits: [
-    'reset',
-    'search-change',
-    'input', // vue 2
-    'update:modelValue', // vue 3
-    'closed',
-    'custom-value', // fires when allowCustomValues and new customValue is added
-  ],
-  setup: (props /*, ctx*/) => {
-    // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-    const { v, customValidators, regleValidation } = toRefs(props);
-    const { isValidation, invalid, validationText } = useValidation({
-      v,
-      customValidators,
-      regleValidation,
-    });
+		allowCustomValues: {
+			type: Boolean,
+			default: false,
+			description: 'See wt-tags-input "taggable" prop.',
+		},
+		// for taggableMixin functionality
+		handleCustomValuesAdditionManually: {
+			type: Boolean,
+			default: false,
+			description: 'See wt-tags-input "manualTagging" prop.',
+		},
+		v: {
+			type: Object,
+			default: null,
+		},
+		regleValidation: {
+			type: Object,
+			default: null,
+		},
+	},
+	emits: [
+		'reset',
+		'search-change',
+		'input', // vue 2
+		'update:modelValue', // vue 3
+		'closed',
+		'custom-value', // fires when allowCustomValues and new customValue is added
+	],
+	setup: (props /*, ctx*/) => {
+		// https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+		const { v, customValidators, regleValidation } = toRefs(props);
+		const { isValidation, invalid, validationText } = useValidation({
+			v,
+			customValidators,
+			regleValidation,
+		});
 
-    return {
-      isValidation,
-      invalid,
-      validationText,
-    };
-  },
-  data: () => ({
-    isOpened: false,
-    items: [],
-  }),
-  computed: {
-    // for taggableMixin
-    taggable() {
-      return this.allowCustomValues;
-    },
-    // for taggableMixin
-    manualTagging() {
-      return this.handleCustomValuesAdditionManually;
-    },
-    optionsWithCustomValues() {
-      // https://webitel.atlassian.net/browse/WTEL-3181
-      if (!this.allowCustomValues) return this.selectOptions;
+		return {
+			isValidation,
+			invalid,
+			validationText,
+		};
+	},
+	data: () => ({
+		isOpened: false,
+		items: [],
+	}),
+	computed: {
+		// for taggableMixin
+		taggable() {
+			return this.allowCustomValues;
+		},
+		// for taggableMixin
+		manualTagging() {
+			return this.handleCustomValuesAdditionManually;
+		},
+		optionsWithCustomValues() {
+			// https://webitel.atlassian.net/browse/WTEL-3181
+			if (!this.allowCustomValues) return this.selectOptions;
 
-      /**
+			/**
        custom values could be restored after refresh, so that they could be not included in options prop,
        so that we should add them to options manually (but filter duplicates, which are already in options)
 
@@ -206,76 +211,76 @@ export default {
        but current filters logic restores value at filter component, but options value are pre-defined at store state
        */
 
-      const customValuesToOptions = Array.isArray(this.value)
-        ? this.value
-        : isEmpty(this.value)
-          ? []
-          : [
-            this.value,
-          ]; //do not add empty values
-      const optionsWithoutValues = this.selectOptions.filter((opt) => {
-        const optKey = this.trackBy ? opt[this.trackBy] : opt;
-        return !customValuesToOptions.some((customValue) => {
-          const customValueKey = this.trackBy
-            ? customValue[this.trackBy]
-            : customValue;
-          return customValueKey === optKey;
-        });
-      });
-      return [
-        ...customValuesToOptions,
-        ...optionsWithoutValues,
-      ];
-    },
-  },
-  methods: {
-    // for taggableMixin functionality
-    async handleCustomValue(value) {
-      // https://webitel.atlassian.net/browse/WTEL-3181
-      this.tag(value);
-    },
-    async search(event) {
-      console.log('event.query', event.query);
-      this.items = [
-        ...this.optionsWithCustomValues,
-      ];
-    },
-    // for taggableMixin functionality
-    async handleCustomValueArrowInput(toggle) {
-      // https://webitel.atlassian.net/browse/WTEL-3181
-      // OLD CODE, but can be useful in future
-      /**
-       * tag emits input event, but there is a drawback
-       * there are causes, when input handler is async, but close event, emitted by toggle(),
-       * is performing some operations with input value.
-       * filter selects (abstract-enum(api)-filter.vue) for instance
-       *
-       * for now, i've tested this cause and it works well even without waiting for $nextTick()
-       * however, this is a potential problem, so, i've left this comment here
-       */
-      this.tag(this.searchParams.search);
-      // await this.$nextTick();
+			const customValuesToOptions = Array.isArray(this.value)
+				? this.value
+				: isEmpty(this.value)
+					? []
+					: [
+							this.value,
+						]; //do not add empty values
+			const optionsWithoutValues = this.selectOptions.filter((opt) => {
+				const optKey = this.trackBy ? opt[this.trackBy] : opt;
+				return !customValuesToOptions.some((customValue) => {
+					const customValueKey = this.trackBy
+						? customValue[this.trackBy]
+						: customValue;
+					return customValueKey === optKey;
+				});
+			});
+			return [
+				...customValuesToOptions,
+				...optionsWithoutValues,
+			];
+		},
+	},
+	methods: {
+		// for taggableMixin functionality
+		async handleCustomValue(value) {
+			// https://webitel.atlassian.net/browse/WTEL-3181
+			this.tag(value);
+		},
+		async search(event) {
+			console.log('event.query', event.query);
+			this.items = [
+				...this.optionsWithCustomValues,
+			];
+		},
+		// for taggableMixin functionality
+		async handleCustomValueArrowInput(toggle) {
+			// https://webitel.atlassian.net/browse/WTEL-3181
+			// OLD CODE, but can be useful in future
+			/**
+			 * tag emits input event, but there is a drawback
+			 * there are causes, when input handler is async, but close event, emitted by toggle(),
+			 * is performing some operations with input value.
+			 * filter selects (abstract-enum(api)-filter.vue) for instance
+			 *
+			 * for now, i've tested this cause and it works well even without waiting for $nextTick()
+			 * however, this is a potential problem, so, i've left this comment here
+			 */
+			this.tag(this.searchParams.search);
+			// await this.$nextTick();
 
-      /**
-       * call toggle strictly after tag() method because tag() emits input,
-       * because there could be code, which performs operation with input only after select close
-       * so that, it's crucial to emit input before close
-       */
-      toggle();
-    },
-    // for taggableMixin functionality
-    emitTagEvent(searchQuery, id) {
-      this.$emit('custom-value', searchQuery, id);
-    },
-    clearValue() {
-      let value = '';
-      if (Array.isArray(this.value)) value = [];
-      else if (typeof this.value === 'object' && this.value !== null)
-        value = {};
-      this.input(value);
-      this.$emit('reset', value);
-    },
-  },
+			/**
+			 * call toggle strictly after tag() method because tag() emits input,
+			 * because there could be code, which performs operation with input only after select close
+			 * so that, it's crucial to emit input before close
+			 */
+			toggle();
+		},
+		// for taggableMixin functionality
+		emitTagEvent(searchQuery, id) {
+			this.$emit('custom-value', searchQuery, id);
+		},
+		clearValue() {
+			let value = '';
+			if (Array.isArray(this.value)) value = [];
+			else if (typeof this.value === 'object' && this.value !== null)
+				value = {};
+			this.input(value);
+			this.$emit('reset', value);
+		},
+	},
 };
 </script>
 

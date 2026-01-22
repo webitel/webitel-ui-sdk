@@ -51,35 +51,44 @@
 <script setup lang="ts">
 import type { RegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
-import { computed, defineModel, ref, toRefs, useSlots,useTemplateRef } from 'vue';
+import {
+	computed,
+	defineModel,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 
 import { useInputControl } from '../../composables';
-import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
-  label?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  toggleMask?: boolean;
-  v?: Record<string, unknown>;
-  regleValidation?: RegleFieldStatus<string>;
-  customValidators?: unknown[];
+	label?: string;
+	placeholder?: string;
+	disabled?: boolean;
+	required?: boolean;
+	toggleMask?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: RegleFieldStatus<string>;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {
-  label: '',
-  placeholder: '',
-  disabled: false,
-  required: false,
-  toggleMask: true,
-  v: null,
-  regleValidation: null,
-  customValidators: () => [],
+	label: '',
+	placeholder: '',
+	disabled: false,
+	required: false,
+	toggleMask: true,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
-const model = defineModel<string>({ default: '' });
+const model = defineModel<string>({
+	default: '',
+});
 
 const password = useTemplateRef('password');
 
@@ -89,49 +98,42 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const {
-  isValidation,
-  invalid,
-  validationText,
-} = useValidation({
-  v,
-  customValidators,
-  regleValidation,
+const { isValidation, invalid, validationText } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
 });
 
-const { 
-  focus,
-  handleKeyup
-} = useInputControl(password);
+const { focus, handleKeyup } = useInputControl(password);
 
 const isPasswordVisible = ref(false);
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const requiredLabel = computed(() => {
-  return props.required ? `${props.label}*` : props.label;
+	return props.required ? `${props.label}*` : props.label;
 });
 
 const showPasswordIcon = computed(() => {
-  return isPasswordVisible.value ? 'eye--closed' : 'eye--opened';
+	return isPasswordVisible.value ? 'eye--closed' : 'eye--opened';
 });
 
 const inputType = computed(() => {
-  return isPasswordVisible.value ? 'text' : 'password';
+	return isPasswordVisible.value ? 'text' : 'password';
 });
 
 const getMessageColor = computed(() => {
-  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
+	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 const togglePassword = () => {
-  isPasswordVisible.value = !isPasswordVisible.value;
+	isPasswordVisible.value = !isPasswordVisible.value;
 };
 
 defineExpose({
-  focus,
+	focus,
 });
 </script>
 

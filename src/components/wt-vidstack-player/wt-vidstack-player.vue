@@ -1,5 +1,6 @@
 <template>
-  <div class="wt-vidstack-player" :class="[
+  <div
+class="wt-vidstack-player" :class="[
     `wt-vidstack-player--${size}`,
     `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
     fullscreen && `wt-vidstack-player--fullscreen`,
@@ -7,11 +8,13 @@
     props.static && 'wt-vidstack-player--static',
     props.hideBackground && 'wt-vidstack-player--hide-background'
   ]">
-    <media-player ref="player" :src="normalizedSrc" :autoplay="props.autoplay" :muted="props.muted"
+    <media-player
+ref="player" :src="normalizedSrc" :autoplay="props.autoplay" :muted="props.muted"
       class="wt-vidstack-player__player" cross-origin playsinline @close="emit('close')" @can-play="onCanPlay">
       <media-provider class="wt-vidstack-player__provider"></media-provider>
 
-      <video-layout :hide-video-display-panel="props.hideVideoDisplayPanel"
+      <video-layout
+:hide-video-display-panel="props.hideVideoDisplayPanel"
         :hide-controls-panel="props.hideControlsPanel" :closable="props.closable" :autoplay="props.autoplay"
         :title="props.title" :username="props.username" :hide-expand="props.hideExpand" @close-player="emit('close')">
         <template #controls-panel>

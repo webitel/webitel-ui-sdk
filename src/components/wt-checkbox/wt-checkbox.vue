@@ -26,30 +26,30 @@ import { computed, defineModel, defineProps, useSlots } from 'vue';
  * @emits {boolean | string[]} change - Fires when checkbox value changes. Emits selected value (Boolean or Array)
  */
 interface WtCheckboxProps extends CheckboxProps {
-  /**
-   * Checkbox value, which should be present in checked list, if checked
-   * @type {string | boolean}
-   * @default ''
-   */
-  value?: string | boolean;
-  /**
-   * Checkbox label text
-   * @type {string}
-   * @default ''
-   */
-  label?: string;
-  /**
-   * Disables the checkbox
-   * @type {boolean}
-   * @default false
-   */
-  disabled?: boolean;
+	/**
+	 * Checkbox value, which should be present in checked list, if checked
+	 * @type {string | boolean}
+	 * @default ''
+	 */
+	value?: string | boolean;
+	/**
+	 * Checkbox label text
+	 * @type {string}
+	 * @default ''
+	 */
+	label?: string;
+	/**
+	 * Disables the checkbox
+	 * @type {boolean}
+	 * @default false
+	 */
+	disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<WtCheckboxProps>(), {
-  value: '',
-  label: '',
-  disabled: false,
+	value: '',
+	label: '',
+	disabled: false,
 });
 
 /**
@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<WtCheckboxProps>(), {
  * @model selected
  */
 const model = defineModel<boolean | string[]>('selected', {
-  required: true,
+	required: true,
 });
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
@@ -65,26 +65,26 @@ const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const isSingle = computed(() => !Array.isArray(model.value));
 
 const isChecked = computed(() => {
-  if (isSingle.value) {
-    return model.value;
-  }
-  return model.value.includes(props.value);
+	if (isSingle.value) {
+		return model.value;
+	}
+	return model.value.includes(props.value);
 });
 
 const checkboxIcon = computed(() => {
-  return isChecked.value ? 'checkbox-tick' : '';
+	return isChecked.value ? 'checkbox-tick' : '';
 });
 
 const iconColor = computed(() => {
-  if (props.disabled) return 'disabled';
-  if (isChecked.value) return 'active';
-  return null;
+	if (props.disabled) return 'disabled';
+	if (isChecked.value) return 'active';
+	return null;
 });
 </script>
 

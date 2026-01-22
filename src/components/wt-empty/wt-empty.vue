@@ -19,7 +19,8 @@
         </slot>
       </h2>
 
-      <h3 v-if="showTitle" :class="[
+      <h3
+v-if="showTitle" :class="[
         'wt-empty__title',
         size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1'
       ]">
@@ -31,7 +32,8 @@
         </slot>
       </h3>
 
-      <p v-if="showText" :class="[
+      <p
+v-if="showText" :class="[
         'wt-empty__text',
         size === 'sm' ? 'typo-body-2' : 'typo-body-1'
       ]">
@@ -58,7 +60,8 @@
                     @scope `{ onPrimaryClick }`
          -->
         <slot name="primary-action" v-bind="{ onPrimaryClick }">
-          <wt-button v-if="primaryActionText" :size="buttonSize" :disabled="disabledPrimaryAction" color="primary"
+          <wt-button
+v-if="primaryActionText" :size="buttonSize" :disabled="disabledPrimaryAction" color="primary"
             @click="() => onPrimaryClick()">
             {{ primaryActionText }}
           </wt-button>
@@ -68,7 +71,8 @@
                     @scope `{ onSecondaryClick }`
          -->
         <slot name="secondary-action" v-bind="{ onSecondaryClick }">
-          <wt-button v-if="secondaryActionText" :size="buttonSize" :disabled="disabledSecondaryAction" color="secondary"
+          <wt-button
+v-if="secondaryActionText" :size="buttonSize" :disabled="disabledSecondaryAction" color="secondary"
             @click="() => onSecondaryClick()">
             {{ secondaryActionText }}
           </wt-button>

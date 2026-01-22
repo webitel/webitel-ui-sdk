@@ -144,9 +144,9 @@ const button = {
 
         .p-button {
             ${generateWtTypographyCustomCss({
-                dt,
-                typo: WtTypography.Button,
-            })}
+							dt,
+							typo: WtTypography.Button,
+						})}
         }
         .p-button:disabled {
           background: ${dt('button.disabled.background')};

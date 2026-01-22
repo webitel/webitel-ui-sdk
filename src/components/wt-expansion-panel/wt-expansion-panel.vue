@@ -1,11 +1,13 @@
 <template>
   <div :class="[`wt-expansion-panel--${props.size}`]" class="wt-expansion-panel">
-    <div :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']" class="wt-expansion-panel-header"
+    <div
+:class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']" class="wt-expansion-panel-header"
       tabindex="0" @click="toggle" @keypress.enter="toggle">
       <slot name="title" />
       <div class="wt-expansion-panel-actions">
         <slot name="actions" v-bind="{ open, opened }" />
-        <wt-icon :class="{ 'wt-expansion-panel-arrow--opened': opened }" class="wt-expansion-panel-arrow"
+        <wt-icon
+:class="{ 'wt-expansion-panel-arrow--opened': opened }" class="wt-expansion-panel-arrow"
           icon="arrow-right" />
       </div>
     </div>
@@ -25,7 +27,7 @@ import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 /**
  * @emits {void} opened - Emitted when the expansion panel is opened
  * @emits {void} closed - Emitted when the expansion panel is closed
- * 
+ *
  * @slot default - Content of the expansion panel
  * @slot title - Title of the expansion panel
  * @slot actions - Actions of the expansion panel
@@ -33,61 +35,61 @@ import WtExpandTransition from '../transitions/wt-expand-transition.vue';
  * @slot-scope {boolean} opened - Whether the panel is currently opened
  */
 const props = defineProps({
-  /**
-   * Size of the expansion panel
-   * @type {string}
-   * @default 'md'
-   * @options ['sm', 'md']
-   */
-  size: {
-    type: String,
-    default: 'md',
-  },
-  /**
-   * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
-   * @type {boolean}
-   * @default false
-   */
-  collapsed: {
-    type: Boolean,
-    default: false,
-  },
+	/**
+	 * Size of the expansion panel
+	 * @type {string}
+	 * @default 'md'
+	 * @options ['sm', 'md']
+	 */
+	size: {
+		type: String,
+		default: 'md',
+	},
+	/**
+	 * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
+	 * @type {boolean}
+	 * @default false
+	 */
+	collapsed: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits([
-  'opened',
-  'closed',
+	'opened',
+	'closed',
 ]);
 
 const opened = ref(!props.collapsed);
 
 function open() {
-  if (!opened.value) {
-    opened.value = true;
-    emit('opened');
-  }
+	if (!opened.value) {
+		opened.value = true;
+		emit('opened');
+	}
 }
 
 function close() {
-  if (opened.value) {
-    opened.value = false;
-    emit('closed');
-  }
+	if (opened.value) {
+		opened.value = false;
+		emit('closed');
+	}
 }
 
 function toggle() {
-  return opened.value ? close() : open();
+	return opened.value ? close() : open();
 }
 
 watch(
-  () => props.collapsed,
-  (newVal) => {
-    if (newVal) {
-      close();
-    } else {
-      open();
-    }
-  },
+	() => props.collapsed,
+	(newVal) => {
+		if (newVal) {
+			close();
+		} else {
+			open();
+		}
+	},
 );
 </script>
 

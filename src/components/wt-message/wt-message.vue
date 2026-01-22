@@ -18,23 +18,23 @@
 <script setup lang="ts">
 import type { MessageProps } from 'primevue';
 
-import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 
 interface WtMessageProps extends /* @vue-ignore */ MessageProps {
-  color?: MessageColor;
-  variant?: MessageVariant;
-  size?: ComponentSize;
+	color?: MessageColor;
+	variant?: MessageVariant;
+	size?: ComponentSize;
 }
 
 withDefaults(defineProps<WtMessageProps>(), {
-  color: MessageColor.SECONDARY,
-  variant: MessageVariant.FILLED,
-  size: ComponentSize.MD,
+	color: MessageColor.SECONDARY,
+	variant: MessageVariant.FILLED,
+	size: ComponentSize.MD,
 });
 
 const primevueSizeMap = {
-  [ComponentSize.SM]: 'small',
-  [ComponentSize.MD]: 'normal',
-  [ComponentSize.LG]: 'large',
-}
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.MD]: 'normal',
+	[ComponentSize.LG]: 'large',
+};
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div class="wt-header-actions">
-    <wt-icon-btn v-clickaway="close" v-tooltip="$t('webitelUI.headerActions.account')" :class="{ active: isOpened }"
+    <wt-icon-btn
+v-clickaway="close" v-tooltip="$t('webitelUI.headerActions.account')" :class="{ active: isOpened }"
       class="wt-header-actions__btn" icon="account" @click="isOpened = !isOpened" />
 
     <transition name="fade">
@@ -15,7 +16,8 @@
         </header>
         <ul class="wt-header-actions__actions-wrapper">
           <li class="wt-header-actions__action">
-            <a class="wt-header-actions__action__link typo-body-1"
+            <a
+class="wt-header-actions__action__link typo-body-1"
               href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform" target="_blank" @click="close">
               <wt-icon icon="docs" />
               <span>{{ $t('webitelUI.headerActions.docs') }}</span>
@@ -51,81 +53,81 @@ import { formatDate } from '@webitel/ui-sdk/utils';
 /**
  * @component WtHeaderActions
  * @description Header actions component with user info and build info display
- * 
+ *
  * @emits {void} settings - Fires when settings button is clicked
  * @emits {void} logout - Fires when logout button is clicked
  */
 export default {
-  name: 'WtHeaderActions',
-  props: {
-    /**
-     * User info object. Should have preferredUsername or account and name or username fields for representation.
-     * In most cases, this is the data returned from /userinfo api.
-     * @type {Object}
-     * @default {}
-     */
-    user: {
-      type: Object,
-      default: () => ({}),
-    },
-    /**
-     * Build info object. Should have "release" and "build" string fields for representation.
-     * @type {Object}
-     */
-    buildInfo: {
-      type: Object,
-    },
-  },
-  data: () => ({
-    isOpened: false,
-  }),
+	name: 'WtHeaderActions',
+	props: {
+		/**
+		 * User info object. Should have preferredUsername or account and name or username fields for representation.
+		 * In most cases, this is the data returned from /userinfo api.
+		 * @type {Object}
+		 * @default {}
+		 */
+		user: {
+			type: Object,
+			default: () => ({}),
+		},
+		/**
+		 * Build info object. Should have "release" and "build" string fields for representation.
+		 * @type {Object}
+		 */
+		buildInfo: {
+			type: Object,
+		},
+	},
+	data: () => ({
+		isOpened: false,
+	}),
 
-  computed: {
-    isHeader() {
-      return !!(this.userName || this.userAccount);
-    },
-    isFooter() {
-      return this.buildInfo;
-    },
-    userName() {
-      return this.user.name || this.user.username;
-    },
-    userAccount() {
-      return this.user.preferredUsername || this.user.account;
-    },
-    buildVersion() {
-      let buildString = '';
-      buildString = `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
-      if (this.buildInfo.timestamp) {
-        buildString += `, ${formatDate(this.buildInfo.timestamp, FormatDateMode.DATETIME)}`;
-      }
-      return buildString;
-    },
-  },
+	computed: {
+		isHeader() {
+			return !!(this.userName || this.userAccount);
+		},
+		isFooter() {
+			return this.buildInfo;
+		},
+		userName() {
+			return this.user.name || this.user.username;
+		},
+		userAccount() {
+			return this.user.preferredUsername || this.user.account;
+		},
+		buildVersion() {
+			let buildString = '';
+			buildString = `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
+			if (this.buildInfo.timestamp) {
+				buildString += `, ${formatDate(this.buildInfo.timestamp, FormatDateMode.DATETIME)}`;
+			}
+			return buildString;
+		},
+	},
 
-  methods: {
-    /**
-     * Emits settings event when settings button is clicked
-     * @emits settings
-     */
-    settings() {
-      this.$emit('settings');
-      this.close();
-    },
+	methods: {
+		/**
+		 * Emits settings event when settings button is clicked
+		 * @emits settings
+		 */
+		settings() {
+			this.$emit('settings');
+			this.close();
+		},
 
-    /**
-     * Emits logout event when logout button is clicked
-     * @emits logout
-     */
-    logout() {
-      this.$emit('logout');
-      this.close();
-    },
+		/**
+		 * Emits logout event when logout button is clicked
+		 * @emits logout
+		 */
+		logout() {
+			this.$emit('logout');
+			this.close();
+		},
 
-    close() {
-      this.isOpened = false;
-    },
-  },
+		close() {
+			this.isOpened = false;
+		},
+	},
 };
 </script>
 

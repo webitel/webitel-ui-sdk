@@ -1,5 +1,6 @@
 <template>
-  <div class="wt-image" :style="{
+  <div
+class="wt-image" :style="{
     width,
     height,
     minWidth,

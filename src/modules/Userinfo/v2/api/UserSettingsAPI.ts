@@ -9,9 +9,13 @@ const instance = getDefaultInstance();
 
 const BASE_URL = '/user/settings';
 
-const getUserTimezone = async (): Promise<{timezone: string}> => {
-  const response = await instance.get(`${BASE_URL}/timezone`);
-  return applyTransform(response.data, [snakeToCamel()]);
+const getUserTimezone = async (): Promise<{
+	timezone: string;
+}> => {
+	const response = await instance.get(`${BASE_URL}/timezone`);
+	return applyTransform(response.data, [
+		snakeToCamel(),
+	]);
 };
 
 const setUserTimezone = async (timezone: string) => {

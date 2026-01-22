@@ -1,32 +1,39 @@
 <template>
 	<controls-group class="video-call-controls-panel">
-		<wt-button v-if="shownActionsMap[VideoCallAction.Screenshot]" :loading="isScreenshotLoading"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Screenshot]" :loading="isScreenshotLoading"
 			:size="buttonSizeMap[size]" :icon="screenShotIcon" variant="outlined" color="secondary" rounded
 			contains-icon @click="onScreenshotClick" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Recordings]" :size="buttonSizeMap[size]" :icon="recordIcon"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Recordings]" :size="buttonSizeMap[size]" :icon="recordIcon"
 			variant="outlined" color="secondary" rounded contains-icon @click="emit(VideoCallAction.Recordings)" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Mic]" :disabled="!props['mic:accessed']"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Mic]" :disabled="!props['mic:accessed']"
 			:size="buttonSizeMap[size]" :icon="microphoneIcon" :badge="micBadge" badge-severity="error"
 			variant="outlined" color="secondary" badge-absolute-position rounded contains-icon
 			@click="emit(VideoCallAction.Mic)" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Video]" :disabled="!props['video:accessed']"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Video]" :disabled="!props['video:accessed']"
 			:size="buttonSizeMap[size]" :icon="videoCamIcon" :badge="videoBadge" badge-severity="error"
 			variant="outlined" color="secondary" badge-absolute-position rounded contains-icon
 			@click="emit(VideoCallAction.Video)" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Settings]" :size="buttonSizeMap[size]"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Settings]" :size="buttonSizeMap[size]"
 			:variant="props['actions:settings:pressed'] ? 'active' : 'outlined'"
 			:disabled="props['actions:settings:disabled']" icon="settings" color="secondary" rounded contains-icon
 			@click="emit(VideoCallAction.Settings)" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Chat]" :size="buttonSizeMap[size]"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Chat]" :size="buttonSizeMap[size]"
 			:variant="props['actions:chat:pressed'] ? 'active' : 'outlined'" icon="chat" color="secondary" rounded
 			contains-icon @click="emit(VideoCallAction.Chat)" />
 
-		<wt-button v-if="shownActionsMap[VideoCallAction.Hangup]" :size="buttonSizeMap[size]" icon="call-end--filled"
+		<wt-button
+v-if="shownActionsMap[VideoCallAction.Hangup]" :size="buttonSizeMap[size]" icon="call-end--filled"
 			color="error" rounded contains-icon @click="emit(VideoCallAction.Hangup)" />
 	</controls-group>
 </template>
@@ -40,23 +47,26 @@ import { VideoCallAction } from '../../../../../modules/CallSession/modules/Vide
 import type { ScreenshotStatus } from '../../../../../modules/CallSession/types';
 import type { ResultCallbacks } from '../../../../../types';
 
-const props = withDefaults(defineProps<{
-	actions?: VideoCallAction[];
+const props = withDefaults(
+	defineProps<{
+		actions?: VideoCallAction[];
 
-	'mic:enabled': boolean;
-	'mic:accessed': boolean;
-	'video:enabled': boolean;
-	'video:accessed': boolean;
-	'screenshot:status': ScreenshotStatus | null;
-	'screenshot:loading': boolean;
-	recordings: boolean;
+		'mic:enabled': boolean;
+		'mic:accessed': boolean;
+		'video:enabled': boolean;
+		'video:accessed': boolean;
+		'screenshot:status': ScreenshotStatus | null;
+		'screenshot:loading': boolean;
+		recordings: boolean;
 
-	'actions:settings:pressed': boolean;
-	'actions:settings:disabled': boolean;
-	'actions:chat:pressed': boolean;
-}>(), {
-	actions: () => [],
-});
+		'actions:settings:pressed': boolean;
+		'actions:settings:disabled': boolean;
+		'actions:chat:pressed': boolean;
+	}>(),
+	{
+		actions: () => [],
+	},
+);
 
 const emit = defineEmits<{
 	(

@@ -8,7 +8,10 @@ const popover = {
 	colorScheme: PopoverScheme.colorScheme,
 	css: ({ dt }) => `
 		.p-popover-content {
-			${generateWtTypographyCustomCss({ dt, typo: WtTypography.Body1 })}
+			${generateWtTypographyCustomCss({
+				dt,
+				typo: WtTypography.Body1,
+			})}
 		}
 	`,
 };

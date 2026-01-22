@@ -8,7 +8,8 @@
     </div>
     <div class="wt-dual-panel__content">
       <div :class="[`wt-dual-panel__side-panel--${sidePanelSize}`]" class="wt-dual-panel__side-panel">
-        <wt-icon-action v-if="!disableResize" :action="sidePanelCollapsed ? IconAction.EXPAND : IconAction.COLLAPSE"
+        <wt-icon-action
+v-if="!disableResize" :action="sidePanelCollapsed ? IconAction.EXPAND : IconAction.COLLAPSE"
           class="wt-dual-panel__icon-action" size="sm" @click="toggleSidePanel" />
         <slot v-if="!sidePanelCollapsed" name="side-panel" />
       </div>

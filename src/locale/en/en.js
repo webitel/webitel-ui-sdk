@@ -32,7 +32,11 @@ export default deepmerge(
 			replace: 'Replace',
 			download: 'Download',
 			history: 'History',
-			filter: ({ plural }) => plural(['Filter', 'Filters']),
+			filter: ({ plural }) =>
+				plural([
+					'Filter',
+					'Filters',
+				]),
 			total: 'Total',
 			ok: 'Ok',
 			object: 'Object',
@@ -319,7 +323,9 @@ export default deepmerge(
 					},
 				},
 			},
-			[WebitelApplications.AGENT]: { name: 'Agent Workspace' },
+			[WebitelApplications.AGENT]: {
+				name: 'Agent Workspace',
+			},
 			[WebitelApplications.AUDIT]: {
 				name: 'Audit',
 				sections: {
@@ -340,8 +346,12 @@ export default deepmerge(
 					[CrmSections.ContactGroups]: 'Contact groups',
 				},
 			},
-			[WebitelApplications.HISTORY]: { name: 'Call History' },
-			[WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
+			[WebitelApplications.HISTORY]: {
+				name: 'Call History',
+			},
+			[WebitelApplications.ANALYTICS]: {
+				name: 'Data Visualisation Tool',
+			},
 			[WebitelApplications.SUPERVISOR]: {
 				name: 'Supervisor Workspace',
 				sections: {
@@ -393,7 +403,9 @@ export default deepmerge(
 					[AdminSections.QuickReplies]: 'Quick replies',
 				},
 			},
-			[WebitelApplications.WFM]: { name: 'WFM' },
+			[WebitelApplications.WFM]: {
+				name: 'WFM',
+			},
 			[WebitelApplications.MEET]: {
 				theCameraIsTurnedOff: 'The camera is turned off',
 			},

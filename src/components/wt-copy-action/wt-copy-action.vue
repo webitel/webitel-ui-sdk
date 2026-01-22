@@ -1,5 +1,6 @@
 <template>
-	<wt-icon-btn v-tooltip="copied ? copiedTooltip : copyTooltip" :icon="copied ? 'done' : 'copy'" class="copy-action"
+	<wt-icon-btn
+v-tooltip="copied ? copiedTooltip : copyTooltip" :icon="copied ? 'done' : 'copy'" class="copy-action"
 		v-bind="$attrs" @click="copy" />
 </template>
 

@@ -1,16 +1,20 @@
 <template>
   <div ref="buttonSelect" v-clickaway="atClickaway" class="wt-button-select">
-    <wt-button :color="color" :disabled="disabled" class="wt-button-select__button" v-bind="$attrs"
+    <wt-button
+:color="color" :disabled="disabled" class="wt-button-select__button" v-bind="$attrs"
       @click="$emit('click', $event)">
       <slot />
     </wt-button>
 
-    <wt-context-menu :disabled="disabled" :options="options" :visible="isOpened" :tooltip-triggers="[]"
+    <wt-context-menu
+:disabled="disabled" :options="options" :visible="isOpened" :tooltip-triggers="[]"
       @click="selectOption">
       <template #activator="{ toggle, show }">
-        <wt-button :color="color" :disabled="disabled" :loading="false" class="wt-button-select__select-btn"
+        <wt-button
+:color="color" :disabled="disabled" :loading="false" class="wt-button-select__select-btn"
           v-bind="$attrs" @click="toggleContextMenu(toggle, $event)">
-          <wt-icon :class="{ 'wt-button-select__select-arrow--active': isOpened }"
+          <wt-icon
+:class="{ 'wt-button-select__select-arrow--active': isOpened }"
             :color="color === 'primary' ? 'on-primary' : 'default'" :disabled="disabled"
             class="wt-button-select__select-arrow" icon="arrow-down" />
         </wt-button>

@@ -1,5 +1,6 @@
 <template>
-  <div :class="{
+  <div
+:class="{
     'wt-datepicker--disabled': disabled,
     'wt-datepicker--invalid': invalid,
   }" class="wt-datepicker">
@@ -9,7 +10,8 @@
         {{ requiredLabel }}
       </slot>
     </wt-label>
-    <vue-datepicker ref="datepicker" :close-on-auto-apply="false"
+    <vue-datepicker
+ref="datepicker" :close-on-auto-apply="false"
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'" :locale="$i18n.locale" :model-value="+value"
       :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
         " auto-apply class="wt-datepicker__datepicker" v-bind="{ ...$attrs, ...$props }" @closed="isOpened = false"
@@ -18,7 +20,8 @@
         <wt-icon :color="disabled ? 'disabled' : 'default'" icon="calendar" />
       </template>
       <template #clear-icon>
-        <wt-icon-btn v-if="clearable && value" :color="disabled ? 'disabled' : 'default'" icon="close"
+        <wt-icon-btn
+v-if="clearable && value" :color="disabled ? 'disabled' : 'default'" icon="close"
           @click.stop="clearValue" />
       </template>
       <template #arrow-left>
@@ -111,19 +114,19 @@ const props = defineProps({
 		default: false,
 	},
 
-  // validation rules
-  // TODO: move to separate file to make it reusable
-  v: {
-    type: Object,
-  },
-  customValidators: {
-    type: Array,
-    default: () => [],
-  },
-  clearable: {
-    type: Boolean,
-    default: false,
-  },
+	// validation rules
+	// TODO: move to separate file to make it reusable
+	v: {
+		type: Object,
+	},
+	customValidators: {
+		type: Array,
+		default: () => [],
+	},
+	clearable: {
+		type: Boolean,
+		default: false,
+	},
 });
 const emit = defineEmits([
 	'input',

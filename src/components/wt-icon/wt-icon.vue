@@ -20,7 +20,7 @@ interface Props {
 	 * @example '<wt-icon icon="close"></wt-icon>'
 	 */
 	icon: string;
-  iconPrefix?: string;
+	iconPrefix?: string;
 	size?: ComponentSize;
 	color?: IconColor;
 	disabled?: boolean;
@@ -38,7 +38,9 @@ const emit = defineEmits<{
 }>();
 
 const iconSvg = computed(() => {
-  const iconName = props.iconPrefix ? `${props.iconPrefix}-${props.icon}` : props.icon;
+	const iconName = props.iconPrefix
+		? `${props.iconPrefix}-${props.icon}`
+		: props.icon;
 
 	return getIconFromRepository(iconName) || iconName;
 });

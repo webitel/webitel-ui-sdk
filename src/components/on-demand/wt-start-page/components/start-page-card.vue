@@ -23,14 +23,14 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const props = defineProps({
-  card: {
-    type: Object,
-    required: true,
-  },
+	card: {
+		type: Object,
+		required: true,
+	},
 });
 
 const open = () => {
-  return router.push(props.card.route);
+	return router.push(props.card.route);
 };
 </script>
 

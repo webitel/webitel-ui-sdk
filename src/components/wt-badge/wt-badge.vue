@@ -1,5 +1,6 @@
 <template>
-  <div :class="{
+  <div
+:class="{
     'wt-badge--outside': outside,
     'wt-badge--compat-mode': !hasSlot,
   }" class="wt-badge">

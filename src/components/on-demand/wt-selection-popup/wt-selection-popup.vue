@@ -69,50 +69,50 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-  /**
-   * Popup title
-   */
+	/**
+	 * Popup title
+	 */
 
-  title: {
-    type: String,
-  },
+	title: {
+		type: String,
+	},
 
-  /**
-   * Selected value. The scheme repeats attribute `option` from `options`
-   */
+	/**
+	 * Selected value. The scheme repeats attribute `option` from `options`
+	 */
 
-  selected: {
-    type: Object,
-  },
+	selected: {
+		type: Object,
+	},
 
-  /**
-   * All displayed values. Should have following schema: `{ value: '', title: '', description: '', icon: ''}`
-   */
+	/**
+	 * All displayed values. Should have following schema: `{ value: '', title: '', description: '', icon: ''}`
+	 */
 
-  options: {
-    type: Array,
-    default: () => [],
-  },
+	options: {
+		type: Array,
+		default: () => [],
+	},
 });
 
 const emit = defineEmits([
-  'change',
-  'add',
-  'close',
+	'change',
+	'add',
+	'close',
 ]);
 
 const { t } = useI18n();
 
 function add() {
-  emit('add', props.selected);
+	emit('add', props.selected);
 }
 
 function close() {
-  emit('close');
+	emit('close');
 }
 
 function selectOption(option) {
-  emit('change', option);
+	emit('change', option);
 }
 </script>
 

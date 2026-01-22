@@ -1,5 +1,6 @@
 <template>
-	<PAvatar :class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
+	<PAvatar
+:class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
 		:style="{ background: `var(${avatarLettersBackground})` }" class="wt-avatar">
 		<template #default>
 			<wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />

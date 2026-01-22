@@ -56,79 +56,74 @@ import type { InputTextProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
 
 import { useInputControl } from '../../composables';
-import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
-  label?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  preventTrim?: boolean;
-  v?: Record<string, unknown>;
-  regleValidation?: RegleFieldStatus<string>;
-  customValidators?: unknown[];
+	label?: string;
+	placeholder?: string;
+	disabled?: boolean;
+	required?: boolean;
+	preventTrim?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: RegleFieldStatus<string>;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<WtInputTextProps>(), {
-  label: '',
-  placeholder: '',
-  disabled: false,
-  required: false,
-  preventTrim: false,
-  v: null,
-  regleValidation: null,
-  customValidators: () => [],
+	label: '',
+	placeholder: '',
+	disabled: false,
+	required: false,
+	preventTrim: false,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
-const model = defineModel<string>({ default: '' });
+const model = defineModel<string>({
+	default: '',
+});
 
 const inputText = useTemplateRef('inputText');
 
 const inputId = `input-text-${Math.random().toString(36).slice(2, 11)}`;
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([
+	'update:modelValue',
+]);
 
 const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const {
-  isValidation,
-  invalid,
-  validationText,
-} = useValidation({
-  v,
-  customValidators,
-  regleValidation,
+const { isValidation, invalid, validationText } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
 });
 
-const {
-  focus,
-  handleKeyup
-} = useInputControl(inputText);
+const { focus, handleKeyup } = useInputControl(inputText);
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const requiredLabel = computed(() => {
-  return props.required ? `${props.label}*` : props.label;
+	return props.required ? `${props.label}*` : props.label;
 });
 
 const inputHandler = (value) => {
-  const handledValue = props.preventTrim
-    ? value
-    : value.trim();
-  emit('update:modelValue', handledValue);
-}
+	const handledValue = props.preventTrim ? value : value.trim();
+	emit('update:modelValue', handledValue);
+};
 
 const getMessageColor = computed(() => {
-  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
+	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 defineExpose({
-  focus,
+	focus,
 });
 </script>
 

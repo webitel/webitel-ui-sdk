@@ -14,34 +14,63 @@
 			:download="download"
 			custom-icons
 		>
-			<wt-icon slot="airplay-icon" icon="plyr-airplay" />
-			<wt-icon slot="captions-off-icon" icon="plyr-captions-off" />
-			<wt-icon slot="captions-on-icon" icon="plyr-captions-on" />
-			<wt-icon slot="download-icon" icon="plyr-download" />
-			<wt-icon slot="enter-fullscreen-icon" icon="plyr-enter-fullscreen" />
-			<wt-icon slot="enter-pip-icon" icon="plyr-pip" />
-			<wt-icon slot="exit-fullscreen-icon" icon="plyr-exit-fullscreen" />
-			<wt-icon slot="exit-pip-icon" icon="plyr-pip" />
-			<wt-icon slot="fast-forward-icon" icon="plyr-fast-forward" />
-			<wt-icon slot="muted-icon" icon="plyr-muted" />
-			<wt-icon slot="pause-icon" icon="plyr-pause" />
-			<wt-icon slot="play-icon" icon="plyr-play" />
-			<wt-icon slot="restart-icon" icon="plyr-restart" />
-			<wt-icon slot="rewind-icon" icon="plyr-rewind" />
-			<wt-icon slot="settings-icon" icon="plyr-settings" />
-			<wt-icon slot="volume-icon" icon="plyr-volume" />
+			<template #airplay-icon>
+<wt-icon  icon="plyr-airplay" />
+</template>
+			<template #captions-off-icon>
+<wt-icon  icon="plyr-captions-off" />
+</template>
+			<template #captions-on-icon>
+<wt-icon  icon="plyr-captions-on" />
+</template>
+			<template #download-icon>
+<wt-icon  icon="plyr-download" />
+</template>
+			<template #enter-fullscreen-icon>
+<wt-icon  icon="plyr-enter-fullscreen" />
+</template>
+			<template #enter-pip-icon>
+<wt-icon  icon="plyr-pip" />
+</template>
+			<template #exit-fullscreen-icon>
+<wt-icon  icon="plyr-exit-fullscreen" />
+</template>
+			<template #exit-pip-icon>
+<wt-icon  icon="plyr-pip" />
+</template>
+			<template #fast-forward-icon>
+<wt-icon  icon="plyr-fast-forward" />
+</template>
+			<template #muted-icon>
+<wt-icon  icon="plyr-muted" />
+</template>
+			<template #pause-icon>
+<wt-icon  icon="plyr-pause" />
+</template>
+			<template #play-icon>
+<wt-icon  icon="plyr-play" />
+</template>
+			<template #restart-icon>
+<wt-icon  icon="plyr-restart" />
+</template>
+			<template #rewind-icon>
+<wt-icon  icon="plyr-rewind" />
+</template>
+			<template #settings-icon>
+<wt-icon  icon="plyr-settings" />
+</template>
+			<template #volume-icon>
+<wt-icon  icon="plyr-volume" />
+</template>
 		</media-plyr-layout>
 	</media-player>
 </template>
 
 <script setup lang="ts">
 import 'vidstack/bundle';
-import { PlyrControl } from 'vidstack';
-import {
-	computed,
-	onMounted,
-	watch,
-} from 'vue';
+
+import type { PlyrControl } from 'vidstack';
+import { computed, onMounted, watch } from 'vue';
 
 import WtIcon from '../wt-icon/wt-icon.vue';
 

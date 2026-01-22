@@ -33,12 +33,7 @@
 
 <script setup lang="ts">
 import type { ToggleSwitchProps } from 'primevue/toggleswitch';
-import {
-	computed,
-	nextTick,
-	ref,
-	useSlots,
-} from 'vue';
+import { computed, nextTick, ref, useSlots } from 'vue';
 
 interface LabelProps {
 	[key: string]: any;

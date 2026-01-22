@@ -1,6 +1,7 @@
 <template>
   <div v-clickaway="close" class="wt-app-navigator">
-    <wt-icon-btn v-tooltip="$t('webitelUI.appNavigator.title')" :class="{ active: isOpened }"
+    <wt-icon-btn
+v-tooltip="$t('webitelUI.appNavigator.title')" :class="{ active: isOpened }"
       class="wt-app-navigator__btn" icon="app-navigator" @click="isOpened = !isOpened" />
 
     <transition name="fade">
@@ -9,9 +10,11 @@
           {{ $t('webitelUI.appNavigator.title') }}
         </h3>
         <ul class="wt-app-navigator__nav">
-          <li v-for="app of formattedApps" :key="app.name" :class="{ active: app.currentApp }"
+          <li
+v-for="app of formattedApps" :key="app.name" :class="{ active: app.currentApp }"
             class="wt-app-navigator__card">
-            <a :href="app.href" :title="$t(`webitelUI.appNavigator.${app.name}`)" class="wt-app-navigator__card__link"
+            <a
+:href="app.href" :title="$t(`webitelUI.appNavigator.${app.name}`)" class="wt-app-navigator__card__link"
               target="_blank">
               <img :alt="`${app.name}-pic`" :src="app.img" class="wt-app-navigator__card__img" />
               <p class="wt-app-navigator__card__title typo-overline">
@@ -45,89 +48,89 @@ import SupervisorDark from './assets/supervisor-dark.svg';
 import SupervisorLight from './assets/supervisor-light.svg';
 
 const pics = {
-  [WebitelApplications.ADMIN]: {
-    dark: AdminDark,
-    light: AdminLight,
-  },
-  [WebitelApplications.AGENT]: {
-    dark: AgentDark,
-    light: AgentLight,
-  },
-  [WebitelApplications.ANALYTICS]: {
-    dark: AnalyticsDark,
-    light: AnalyticsLight,
-  },
-  [WebitelApplications.CRM]: {
-    dark: CrmDark,
-    light: CrmLight,
-  },
-  [WebitelApplications.HISTORY]: {
-    dark: HistoryDark,
-    light: HistoryLight,
-  },
-  [WebitelApplications.AUDIT]: {
-    dark: AuditDark,
-    light: AuditLight,
-  },
-  [WebitelApplications.SUPERVISOR]: {
-    dark: SupervisorDark,
-    light: SupervisorLight,
-  },
+	[WebitelApplications.ADMIN]: {
+		dark: AdminDark,
+		light: AdminLight,
+	},
+	[WebitelApplications.AGENT]: {
+		dark: AgentDark,
+		light: AgentLight,
+	},
+	[WebitelApplications.ANALYTICS]: {
+		dark: AnalyticsDark,
+		light: AnalyticsLight,
+	},
+	[WebitelApplications.CRM]: {
+		dark: CrmDark,
+		light: CrmLight,
+	},
+	[WebitelApplications.HISTORY]: {
+		dark: HistoryDark,
+		light: HistoryLight,
+	},
+	[WebitelApplications.AUDIT]: {
+		dark: AuditDark,
+		light: AuditLight,
+	},
+	[WebitelApplications.SUPERVISOR]: {
+		dark: SupervisorDark,
+		light: SupervisorLight,
+	},
 };
 
 const props = defineProps({
-  /**
-   * Currently opened app
-   * @type {String}
-   */
-  currentApp: {
-    type: String,
-  },
-  /**
-   * Available apps with its links
-   * @type {Array}
-   * @default []
-   */
-  apps: {
-    type: Array,
-    default: () => [],
-  },
-  darkMode: {
-    type: Boolean,
-    default: false,
-  },
+	/**
+	 * Currently opened app
+	 * @type {String}
+	 */
+	currentApp: {
+		type: String,
+	},
+	/**
+	 * Available apps with its links
+	 * @type {Array}
+	 * @default []
+	 */
+	apps: {
+		type: Array,
+		default: () => [],
+	},
+	darkMode: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const isOpened = ref(false);
 
 const order = [
-  WebitelApplications.AGENT,
-  WebitelApplications.SUPERVISOR,
-  WebitelApplications.HISTORY,
-  WebitelApplications.ADMIN,
-  WebitelApplications.AUDIT,
-  WebitelApplications.CRM,
-  WebitelApplications.ANALYTICS,
+	WebitelApplications.AGENT,
+	WebitelApplications.SUPERVISOR,
+	WebitelApplications.HISTORY,
+	WebitelApplications.ADMIN,
+	WebitelApplications.AUDIT,
+	WebitelApplications.CRM,
+	WebitelApplications.ANALYTICS,
 ];
 
 const formattedApps = computed(() =>
-  props.apps
-    .reduce(
-      (apps, app) => [
-        ...apps,
-        {
-          ...app,
-          img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
-          currentApp: props.currentApp === app.name,
-        },
-      ],
-      [],
-    )
-    .sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)),
+	props.apps
+		.reduce(
+			(apps, app) => [
+				...apps,
+				{
+					...app,
+					img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
+					currentApp: props.currentApp === app.name,
+				},
+			],
+			[],
+		)
+		.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)),
 );
 
 function close() {
-  isOpened.value = false;
+	isOpened.value = false;
 }
 </script>
 

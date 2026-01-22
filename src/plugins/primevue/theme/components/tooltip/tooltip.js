@@ -10,9 +10,9 @@ const tooltip = {
 	css: ({ dt }) => `
       .p-tooltip-text {
         ${generateWtTypographyCustomCss({
-          dt,
-          typo: WtTypography.Body2,
-        })}
+					dt,
+					typo: WtTypography.Body2,
+				})}
           white-space: pre-line;
           word-break: normal;
           background: ${dt('tooltip.background')};

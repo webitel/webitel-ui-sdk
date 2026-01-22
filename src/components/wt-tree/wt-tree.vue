@@ -1,7 +1,8 @@
 <template>
   <div class="wt-tree">
     <div v-if="mode === WtTreeMode.Tree" class="wt-tree__content">
-      <wt-tree-line v-for="(item, index) in data" :key="index" :model-value="modelValue" :item-label="itemLabel"
+      <wt-tree-line
+v-for="(item, index) in data" :key="index" :model-value="modelValue" :item-label="itemLabel"
         :item-data="itemData" :data="item" :children-prop="childrenProp" :multiple="multiple"
         :allow-parent="allowParent" @update:model-value="emit('update:modelValue', $event)">
         <template v-if="$slots['item-prefix']" #item-prefix="slotProps">
@@ -10,7 +11,8 @@
       </wt-tree-line>
     </div>
     <div v-if="mode === WtTreeMode.List" class="wt-tree__list-content">
-      <span v-for="(item, index) in allData" :key="index" class="wt-tree__label-wrapper"
+      <span
+v-for="(item, index) in allData" :key="index" class="wt-tree__label-wrapper"
         :class="{ active: compareSelectElement(item) }">
         <p class="wt-tree__label" @click="selectElement(item)">
           {{ itemLabel ? item[itemLabel] : item }}

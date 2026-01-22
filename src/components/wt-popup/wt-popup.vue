@@ -1,5 +1,6 @@
 <template>
-  <div v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
+  <div
+v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
     class="wt-popup">
     <!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
     <!--    <slot-->

@@ -76,42 +76,44 @@ import type { InputNumberProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
 
 import { useInputControl } from '../../composables';
-import { ComponentSize, MessageColor,MessageVariant } from '../../enums';
+import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
-  label?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  min?: number;
-  max?: number;
-  step?: number;
-  minFractionDigits?: number;
-  maxFractionDigits?: number;
-  showButtons?: boolean;
-  v?: Record<string, unknown>;
-  regleValidation?: RegleFieldStatus<number>;
-  customValidators?: unknown[];
+	label?: string;
+	placeholder?: string;
+	disabled?: boolean;
+	required?: boolean;
+	min?: number;
+	max?: number;
+	step?: number;
+	minFractionDigits?: number;
+	maxFractionDigits?: number;
+	showButtons?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: RegleFieldStatus<number>;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<WtInputNumberProps>(), {
-  label: '',
-  placeholder: '',
-  disabled: false,
-  required: false,
-  min: undefined,
-  max: undefined,
-  step: 1,
-  minFractionDigits: undefined,
-  maxFractionDigits: undefined,
-  showButtons: true,
-  v: null,
-  regleValidation: null,
-  customValidators: () => [],
+	label: '',
+	placeholder: '',
+	disabled: false,
+	required: false,
+	min: undefined,
+	max: undefined,
+	step: 1,
+	minFractionDigits: undefined,
+	maxFractionDigits: undefined,
+	showButtons: true,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
-const model = defineModel<number | null>({ default: null });
+const model = defineModel<number | null>({
+	default: null,
+});
 
 const inputNumber = useTemplateRef('inputNumber');
 
@@ -121,35 +123,28 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const {
-  isValidation,
-  invalid,
-  validationText,
-} = useValidation({
-  v,
-  customValidators,
-  regleValidation,
+const { isValidation, invalid, validationText } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
 });
 
-const {
-  focus,
-  handleKeyup
-} = useInputControl(inputNumber);
+const { focus, handleKeyup } = useInputControl(inputNumber);
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const requiredLabel = computed(() => {
-  return props.required ? `${props.label}*` : props.label;
+	return props.required ? `${props.label}*` : props.label;
 });
 
 const getMessageColor = computed(() => {
-  return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
+	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 defineExpose({
-  focus,
+	focus,
 });
 </script>
 

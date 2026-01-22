@@ -1,7 +1,8 @@
 <template>
   <media-controls class="video-layout controls" :class="`video-layout--${size}`">
     <div class="video-display-panel-wrapper">
-      <video-display-panel v-if="!props.hideVideoDisplayPanel" :title="props.title" :username="props.username"
+      <video-display-panel
+v-if="!props.hideVideoDisplayPanel" :title="props.title" :username="props.username"
         :closable="props.closable" :hide-expand="props.hideExpand" @close="emit('close-player')" />
     </div>
 
@@ -27,19 +28,19 @@ import VideoDisplayPanel from '../panels/video-display-panel/video-display-panel
 const { size } = inject<WtVidstackPlayerSizeProvider>('size');
 
 const props = defineProps<{
-  title?: string;
-  username?: string;
-  closable?: boolean;
-  hideVideoDisplayPanel?: boolean;
-  hideControlsPanel?: boolean;
-  hideExpand?: boolean;
+	title?: string;
+	username?: string;
+	closable?: boolean;
+	hideVideoDisplayPanel?: boolean;
+	hideControlsPanel?: boolean;
+	hideExpand?: boolean;
 }>();
 
 const emit = defineEmits<{
-  'close-player': [];
-  'close-session': [];
-  'make-screenshot': [];
-  'toggle-record': [];
+	'close-player': [];
+	'close-session': [];
+	'make-screenshot': [];
+	'toggle-record': [];
 }>();
 </script>
 

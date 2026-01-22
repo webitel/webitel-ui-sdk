@@ -237,60 +237,62 @@ import type { WtTableHeader } from './types/WtTable';
 const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
 const DEFAULT_ITEM_SIZE = 40;
 
-interface Props extends DataTableProps{
-  /**
-   * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
-   */
-  headers?: WtTableHeader[];
-  /**
-   * 'List of data, represented by table. '
-   */
-  data?: Array<unknown>;
-  /**
-   * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
-   */
-  sortable?: boolean;
-  /**
-   * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
-   */
-  selectable?: boolean;
-  selected?: Array<unknown>;
-  /**
-   * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
-   */
-  gridActions?: boolean;
-  /**
-   * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
-   */
-  fixedActions?: boolean;
-  /**
-   * 'If true, displays table without header.'
-   */
-  headless?: boolean;
-  /**
-   * 'If true, allows to reorder rows.'
-   */
-  rowReorder?: boolean;
-  /**
-   * @author @Oleksandr Palonnyi
-   *
-   * [WTEL-8629](https://webitel.atlassian.net/browse/WTEL-8629)
-   *
-   * Unique field name used to identify a row.
-   * Required for selection, expansion, and virtual scrolling to work correctly.
-   * The value must be stable and unique across all rows.
-   */
-  dataKey?: string;
-  /**
-   * 'If true, restrict sprecific row reorder.'
-   */
-  isRowReorderDisabled?: (row) => boolean;
-  rowExpansion?: boolean;
-  rowClass?: () => string;
-  rowStyle?: () => { [key: string]: string };
-  resizableColumns?: boolean
-  reorderableColumns?: boolean
-  rowExpansionDisabled?: (row: object) => boolean;
+interface Props extends DataTableProps {
+	/**
+	 * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
+	 */
+	headers?: WtTableHeader[];
+	/**
+	 * 'List of data, represented by table. '
+	 */
+	data?: Array<unknown>;
+	/**
+	 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
+	 */
+	sortable?: boolean;
+	/**
+	 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
+	 */
+	selectable?: boolean;
+	selected?: Array<unknown>;
+	/**
+	 * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
+	 */
+	gridActions?: boolean;
+	/**
+	 * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
+	 */
+	fixedActions?: boolean;
+	/**
+	 * 'If true, displays table without header.'
+	 */
+	headless?: boolean;
+	/**
+	 * 'If true, allows to reorder rows.'
+	 */
+	rowReorder?: boolean;
+	/**
+	 * @author @Oleksandr Palonnyi
+	 *
+	 * [WTEL-8629](https://webitel.atlassian.net/browse/WTEL-8629)
+	 *
+	 * Unique field name used to identify a row.
+	 * Required for selection, expansion, and virtual scrolling to work correctly.
+	 * The value must be stable and unique across all rows.
+	 */
+	dataKey?: string;
+	/**
+	 * 'If true, restrict sprecific row reorder.'
+	 */
+	isRowReorderDisabled?: (row) => boolean;
+	rowExpansion?: boolean;
+	rowClass?: () => string;
+	rowStyle?: () => {
+		[key: string]: string;
+	};
+	resizableColumns?: boolean;
+	reorderableColumns?: boolean;
+	rowExpansionDisabled?: (row: object) => boolean;
 
 	//lazy loading
 	lazy?: boolean;
@@ -300,24 +302,24 @@ interface Props extends DataTableProps{
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  headers: () => [],
-  data: () => [],
-  sortable: false,
-  selectable: true,
-  gridActions: true,
-  fixedActions: false,
-  headless: false,
-  rowReorder: false,
-  rowExpansion: false,
-  isRowReorderDisabled: () => false,
-  rowClass: () => '',
-  rowStyle: () => ({}),
-  resizableColumns: false,
-  reorderableColumns: false,
-  rowExpansionDisabled: () => false,
-  lazy: false,
-  itemSize: DEFAULT_ITEM_SIZE,
-  dataKey: '',
+	headers: () => [],
+	data: () => [],
+	sortable: false,
+	selectable: true,
+	gridActions: true,
+	fixedActions: false,
+	headless: false,
+	rowReorder: false,
+	rowExpansion: false,
+	isRowReorderDisabled: () => false,
+	rowClass: () => '',
+	rowStyle: () => ({}),
+	resizableColumns: false,
+	reorderableColumns: false,
+	rowExpansionDisabled: () => false,
+	lazy: false,
+	itemSize: DEFAULT_ITEM_SIZE,
+	dataKey: '',
 });
 
 const { t } = useI18n();
@@ -360,7 +362,7 @@ const dataHeaders = computed(() => {
 	return props.headers.map((header) => {
 		if (!header.text && header.locale)
 			return {
-      ...header,
+				...header,
 				text:
 					typeof header.locale === 'string'
 						? t(header.locale)

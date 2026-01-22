@@ -110,82 +110,83 @@ import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 
 const props = withDefaults(
-  defineProps<{
-    /**
-     * 'It's a data what pass to display row.
-     */
-    data: Record<string, unknown>;
-    /**
-     * 'It's a number of position row in table.
-     */
-    rowPosition: number;
-    /**
-     * 'It's a key in data object, which contains children array. '
-     */
-    childrenProp: string;
-    selectable?: boolean;
-    selectedElements: Record<string, any>[];
-    dataHeaders: WtTableHeader[];
-    gridActions?: boolean;
-    /**
-     * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
-     */
-    nestingLevel?: number;
-    /**
-     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
-     */
-    searchedProp?: string;
-  }>(),
-  {
-    selectable: false,
-    gridActions: true,
-    nestingLevel: 0,
-    searchedProp: 'searched',
-  },
+	defineProps<{
+		/**
+		 * 'It's a data what pass to display row.
+		 */
+		data: Record<string, unknown>;
+		/**
+		 * 'It's a number of position row in table.
+		 */
+		rowPosition: number;
+		/**
+		 * 'It's a key in data object, which contains children array. '
+		 */
+		childrenProp: string;
+		selectable?: boolean;
+		selectedElements: Record<string, any>[];
+		dataHeaders: WtTableHeader[];
+		gridActions?: boolean;
+		/**
+		 * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
+		 */
+		nestingLevel?: number;
+		/**
+		 * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+		 */
+		searchedProp?: string;
+	}>(),
+	{
+		selectable: false,
+		gridActions: true,
+		nestingLevel: 0,
+		searchedProp: 'searched',
+	},
 );
 
-const emit = defineEmits(['update:selected', 'expanded-collapse']);
+const emit = defineEmits([
+	'update:selected',
+	'expanded-collapse',
+]);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
-  return props.nestingLevel;
+	return props.nestingLevel;
 });
 const childLevel = computed(() => {
-  return props.nestingLevel + 1;
+	return props.nestingLevel + 1;
 });
 
 const isSelectedRow = computed(() => {
-  return props.selectedElements.includes(props.data);
+	return props.selectedElements.includes(props.data);
 });
 
 const openCollapse = () => {
-  collapsed.value = false;
-  emit('expanded-collapse');
+	collapsed.value = false;
+	emit('expanded-collapse');
 };
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
-  // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel)
-    return true;
+	// Check if the object itself has searched
+	if (data[props.searchedProp] && nestedLevel) return true;
 
-  // Check if the object has children
-  if (Array.isArray(data[props.childrenProp])) {
-    // Iterate through the array
-    for (const child of data[props.childrenProp]) {
-      // Recursively check nested objects
-      if (hasSearchedElement(child, nestedLevel + 1)) {
-        return true;
-      }
-    }
-  }
+	// Check if the object has children
+	if (Array.isArray(data[props.childrenProp])) {
+		// Iterate through the array
+		for (const child of data[props.childrenProp]) {
+			// Recursively check nested objects
+			if (hasSearchedElement(child, nestedLevel + 1)) {
+				return true;
+			}
+		}
+	}
 
-  // If no match is found, return false
-  return false;
+	// If no match is found, return false
+	return false;
 };
 
 onMounted(() => {
-  if (props.searchedProp && hasSearchedElement(props.data))
-    openCollapse();
+	if (props.searchedProp && hasSearchedElement(props.data)) openCollapse();
 });
 </script>
 

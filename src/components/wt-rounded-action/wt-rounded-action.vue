@@ -1,5 +1,6 @@
 <template>
-  <button :class="[
+  <button
+:class="[
     `wt-rounded-action--size-${size}`,
     { 'wt-rounded-action--active': active },
     { 'wt-rounded-action--disabled': disabled },

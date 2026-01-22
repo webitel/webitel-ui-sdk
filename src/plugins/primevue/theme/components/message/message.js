@@ -18,19 +18,37 @@ const generateCustomColorCss = ({ colorName, dt }) => `
   .p-message-${colorName}.p-message-simple .p-message-close-button svg {
     fill: ${dt(`message.${colorName}.simple.color`)};
   }
-`
+`;
 
 const message = {
-  ...MessageScheme.sizes,
-  colorScheme: MessageScheme.colorScheme,
+	...MessageScheme.sizes,
+	colorScheme: MessageScheme.colorScheme,
 
-  css: ({ dt }) => `
-    ${generateCustomColorCss({ colorName: MessageColor.INFO, dt })}
-    ${generateCustomColorCss({ colorName: MessageColor.ERROR, dt })}
-    ${generateCustomColorCss({ colorName: MessageColor.SECONDARY, dt })}
-    ${generateCustomColorCss({ colorName: MessageColor.SUCCESS, dt })}
-    ${generateCustomColorCss({ colorName: MessageColor.WARN, dt })}
-    ${generateCustomColorCss({ colorName: MessageColor.CONTRAST, dt })}
+	css: ({ dt }) => `
+    ${generateCustomColorCss({
+			colorName: MessageColor.INFO,
+			dt,
+		})}
+    ${generateCustomColorCss({
+			colorName: MessageColor.ERROR,
+			dt,
+		})}
+    ${generateCustomColorCss({
+			colorName: MessageColor.SECONDARY,
+			dt,
+		})}
+    ${generateCustomColorCss({
+			colorName: MessageColor.SUCCESS,
+			dt,
+		})}
+    ${generateCustomColorCss({
+			colorName: MessageColor.WARN,
+			dt,
+		})}
+    ${generateCustomColorCss({
+			colorName: MessageColor.CONTRAST,
+			dt,
+		})}
   `,
 };
 
