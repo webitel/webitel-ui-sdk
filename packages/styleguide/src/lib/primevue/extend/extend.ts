@@ -1,4 +1,4 @@
-import { spacingsExtend } from './spacings/spacings';
+import { spacingsExtend } from './spacings/spacings.js';
 
 const extend = {
   spacing: spacingsExtend,

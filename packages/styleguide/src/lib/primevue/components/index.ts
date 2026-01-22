@@ -15,6 +15,11 @@ import TableScheme from "./table";
 import TextareaScheme from "./textarea";
 import ToolbarScheme from './toolbar';
 import TooltipScheme from './tooltip';
+import InputNumberScheme from "./input-number";
+import InputTextScheme from "./input-text";
+import PasswordScheme from "./password";
+import InputGroupScheme from "./input-group";
+import MessageScheme from "./message";
 
 export {
   AvatarScheme,
@@ -34,4 +39,9 @@ export {
   BreadcrumbScheme,
   RadioScheme,
   GalleriaScheme,
+  InputNumberScheme,
+  InputTextScheme,
+  PasswordScheme,
+  InputGroupScheme,
+  MessageScheme,
 }
