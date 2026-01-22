@@ -45,5 +45,6 @@ export default {
   display: flex;
   position: relative;
   align-items: center;
+  gap: var(--spacing-sm);
 }
 </style>
