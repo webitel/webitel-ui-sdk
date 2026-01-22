@@ -24,6 +24,8 @@ import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { nextTick,onBeforeUnmount, ref } from 'vue';
 
+import { eventBus } from '../../../scripts';
+
 const props = defineProps({
   size: {
     type: String,
@@ -68,6 +70,7 @@ const closePicker = () => {
 };
 
 const togglePicker = async () => {
+  focusOnInput()
   isOpened.value = !isOpened.value;
   if (isOpened.value) {
     await nextTick();
@@ -76,6 +79,7 @@ const togglePicker = async () => {
     closePicker();
   }
 };
+const focusOnInput = () => eventBus.$emit('chat-input-focus');
 
 onBeforeUnmount(() => {
   closePicker();

@@ -37,6 +37,7 @@
         <message-document
           v-else-if="document"
           :file="document"
+          :self-side="isSelfSide"
         />
         <message-text
           v-if="props.message?.text"

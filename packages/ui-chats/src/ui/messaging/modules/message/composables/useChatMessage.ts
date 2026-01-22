@@ -1,6 +1,6 @@
 import { FormatDateMode } from "@webitel/ui-sdk/enums";
 import { formatDate } from "@webitel/ui-sdk/utils";
-import { type Ref, ref } from "vue";
+import { type ComputedRef, type Ref } from "vue";
 
 import type { ChatMessageType } from "../../../types/ChatMessage.types";
 
@@ -10,9 +10,9 @@ interface GetMessageResult {
 	nextMessage?: ChatMessageType;
 }
 
-export const useChatMessages = (chatMessages: ChatMessageType[]) => {
-	const messages: Ref<ChatMessageType[]> = ref(chatMessages);
-
+export const useChatMessages = (
+	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>,
+) => {
 	function showChatDate(index: number): boolean {
 		const { prevMessage, message } = getMessage(index);
 		const prevDate = +prevMessage?.createdAt || 0;
