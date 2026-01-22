@@ -7,7 +7,7 @@
     <!-- TODO: move chat locales from cc-workspaces to this pkg -->
     <p>
       <!-- {{ t('workspaceSec.chat.chatsFileBlocked') }} -->
-      {{ t('@webitel/ui-chats.ui.messaging.chatsFileBlocked') }}
+      {{ t('chats.ui.messaging.chatsFileBlocked') }}
     </p>
   </div>
 </template>

@@ -1,5 +1,5 @@
 export default {
-	"@webitel/ui-chats": {
+	chats: {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Fayl karantinda yoki bloklangan",

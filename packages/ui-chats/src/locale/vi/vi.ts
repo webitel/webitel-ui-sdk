@@ -1,5 +1,5 @@
 export default {
-	"@webitel/ui-chats": {
+	chats: {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Tệp bị cách ly hoặc bị chặn",
