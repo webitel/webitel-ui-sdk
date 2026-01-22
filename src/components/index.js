@@ -24,6 +24,16 @@ import WtIconAction from './wt-icon-action/wt-icon-action.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
 import WtHint from './wt-hint/wt-hint.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
+import WtInputNumber from './wt-input-number/wt-input-number.vue';
+import WtInputText from './wt-input-text/wt-input-text.vue';
+import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
+import WtItemLink from './wt-item-link/wt-item-link.vue';
+import WtLabel from './wt-label/wt-label.vue';
+import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
+import WtLoader from './wt-loader/wt-loader.vue';
+import WtLogo from './wt-logo/wt-logo.vue';
+import WtMessage from './wt-message/wt-message.vue';
+import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotification from './wt-notification/wt-notification.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
 import WtAppHeader from './wt-app-header/wt-app-header.vue';
@@ -235,6 +245,86 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
+  WtActionBar,
+  WtAppHeader,
+  WtAppNavigator,
+  WtAvatar,
+  WtBadge,
+  WtBadgeNew,
+  WtBreadcrumb,
+  WtButton,
+  WtButtonSelect,
+  WtChatEmoji,
+  WtCheckbox,
+  WtChip,
+  WtConfirmDialog,
+  WtContextMenu,
+  WtCopyAction,
+  WtDatepicker,
+  WtDisplayChipItems,
+  WtDivider,
+  WtDualPanel,
+  WtDummy,
+  WtEmpty,
+  WtErrorPage,
+  WtExpansionPanel,
+  WtFiltersPanelWrapper,
+  WtGalleria,
+  WtHeaderActions,
+  WtHeadline,
+  WtHint,
+  WtIcon,
+  WtIconAction,
+  WtIconBtn,
+  WtImage,
+  WtIndicator,
+  WtInput,
+  WtInputInfo,
+  WtInputNumber,
+  WtInputText,
+  WtIntersectionObserver,
+  WtItemLink,
+  WtLabel,
+  WtLoadBar,
+  WtLoader,
+  WtLogo,
+  WtMessage,
+  WtNavigationBar,
+  WtNavigationMenu,
+  WtNotification,
+  WtNotificationsBar,
+  WtPageHeader,
+  WtPageWrapper,
+  WtPagination,
+  WtPassword,
+  WtPlayer,
+  WtPopover,
+  WtPopup,
+  WtProgressBar,
+  WtRadio,
+  WtReplaceTransition,
+  WtRoundedAction,
+  WtSearchBar,
+  WtSelect,
+  WtSelectionPopup,
+  WtSlider,
+  WtStartPage,
+  WtStatusSelect,
+  WtStepper,
+  WtSwitcher,
+  WtTable,
+  WtTableActions,
+  WtTableColumnSelect,
+  WtTabs,
+  WtTagsInput,
+  WtTextarea,
+  WtTimeInput,
+  WtTimepicker,
+  WtTooltip,
+  WtTree,
+  WtTreeTable,
+  WtTypeExtensionValueInput,
+  WtVidstackPlayer,
 };
 
 export default Components;

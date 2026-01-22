@@ -29,11 +29,7 @@ export default {
 		replace: 'Zamień',
 		download: 'Pobierz',
 		history: 'Historia',
-		filter: ({ plural }) =>
-			plural([
-				'Filtr',
-				'Filtry',
-			]),
+		filter: ({ plural }) => plural(['Filtr', 'Filtry']),
 		total: 'Suma',
 		ok: 'Ok',
 		object: 'Obiekt',
@@ -273,6 +269,7 @@ export default {
 			[ChannelType.Email]: 'Email',
 			[ChannelType.Chat]: 'Czat',
 			[ChannelType.Job]: 'Zadanie',
+			[ChannelType.OutCall]: 'Połączenie wychodzące',
 		},
 	},
 	calls: {
@@ -318,9 +315,7 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
-			name: 'Panel Agenta',
-		},
+		[WebitelApplications.AGENT]: { name: 'Panel Agenta' },
 		[WebitelApplications.AUDIT]: {
 			name: 'Audyt',
 			sections: {
@@ -341,12 +336,8 @@ export default {
 				[CrmSections.ContactGroups]: 'Grupy kontaktów',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
-			name: 'Historia połączeń',
-		},
-		[WebitelApplications.ANALYTICS]: {
-			name: 'Narzędzie wizualizacji danych',
-		},
+		[WebitelApplications.HISTORY]: { name: 'Historia połączeń' },
+		[WebitelApplications.ANALYTICS]: { name: 'Narzędzie wizualizacji danych' },
 		[WebitelApplications.SUPERVISOR]: {
 			name: 'Panel Supervisora',
 			sections: {
@@ -398,9 +389,7 @@ export default {
 				[AdminSections.QuickReplies]: 'Szybkie odpowiedzi',
 			},
 		},
-		[WebitelApplications.WFM]: {
-			name: 'WFM',
-		},
+		[WebitelApplications.WFM]: { name: 'WFM' },
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Kamera jest wyłączona',
 		},

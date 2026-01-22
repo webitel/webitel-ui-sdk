@@ -269,6 +269,7 @@ export default {
 			[ChannelType.Email]: 'Почта',
 			[ChannelType.Chat]: 'Чат',
 			[ChannelType.Job]: 'Задача',
+			[ChannelType.OutCall]: 'Исходящий звонок',
 		},
 	},
 	cases: {
@@ -316,9 +317,7 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
-			name: 'Agent Workspace',
-		},
+		[WebitelApplications.AGENT]: { name: 'Agent Workspace' },
 		[WebitelApplications.AUDIT]: {
 			name: 'Audit',
 			sections: {
@@ -339,12 +338,8 @@ export default {
 				[CrmSections.ContactGroups]: 'Группы контактов',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
-			name: 'Call History',
-		},
-		[WebitelApplications.ANALYTICS]: {
-			name: 'Data Visualisation Tool',
-		},
+		[WebitelApplications.HISTORY]: { name: 'Call History' },
+		[WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
 		[WebitelApplications.SUPERVISOR]: {
 			name: 'Supervisor Workspace',
 			sections: {
@@ -395,9 +390,7 @@ export default {
 				[AdminSections.QuickReplies]: 'Быстрые ответы',
 			},
 		},
-		[WebitelApplications.WFM]: {
-			name: 'WFM',
-		},
+		[WebitelApplications.WFM]: { name: 'WFM' },
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Камера выключена',
 		},

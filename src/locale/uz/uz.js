@@ -29,11 +29,7 @@ export default {
 		replace: 'Almashtirish',
 		download: 'Yuklab olish',
 		history: 'Tarix',
-		filter: ({ plural }) =>
-			plural([
-				'Filter',
-				'Filterlar',
-			]),
+		filter: ({ plural }) => plural(['Filter', 'Filterlar']),
 		total: 'Jami',
 		ok: 'Ok',
 		object: 'Obyekt',
@@ -274,6 +270,7 @@ export default {
 			[ChannelType.Email]: 'Email',
 			[ChannelType.Chat]: 'Chat',
 			[ChannelType.Job]: 'Vazifa',
+			[ChannelType.OutCall]: "Chiqish qo'ng'irog'i",
 		},
 	},
 	calls: {
@@ -320,9 +317,7 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
-			name: 'Agent ish joyi',
-		},
+		[WebitelApplications.AGENT]: { name: 'Agent ish joyi' },
 		[WebitelApplications.AUDIT]: {
 			name: 'Audit',
 			sections: {
@@ -343,9 +338,7 @@ export default {
 				[CrmSections.ContactGroups]: 'Kontakt guruhlari',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
-			name: "Qo'ng'iroqlar tarixi",
-		},
+		[WebitelApplications.HISTORY]: { name: "Qo'ng'iroqlar tarixi" },
 		[WebitelApplications.ANALYTICS]: {
 			name: "Ma'lumotlarni vizualizatsiya qilish",
 		},
@@ -400,9 +393,7 @@ export default {
 				[AdminSections.QuickReplies]: 'Tezkor javoblar',
 			},
 		},
-		[WebitelApplications.WFM]: {
-			name: 'WFM',
-		},
+		[WebitelApplications.WFM]: { name: 'WFM' },
 		[WebitelApplications.MEET]: {
 			theCameraIsTurnedOff: 'Kamera o‘chirilgan',
 		},

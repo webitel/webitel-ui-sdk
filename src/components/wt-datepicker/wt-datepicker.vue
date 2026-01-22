@@ -111,15 +111,19 @@ const props = defineProps({
 		default: false,
 	},
 
-	// validation rules
-	// TODO: move to separate file to make it reusable
-	v: {
-		type: Object,
-	},
-	clearable: {
-		type: Boolean,
-		default: false,
-	},
+  // validation rules
+  // TODO: move to separate file to make it reusable
+  v: {
+    type: Object,
+  },
+  customValidators: {
+    type: Array,
+    default: () => [],
+  },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emit = defineEmits([
 	'input',

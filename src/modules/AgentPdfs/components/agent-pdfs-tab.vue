@@ -111,7 +111,10 @@ import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteCo
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
+import { DatetimeFormat } from 'vue-i18n';
 
+import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode'
+import { formatDate } from '../../../utils/formatDate'
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
 
@@ -182,8 +185,8 @@ const initializeDefaultFilters = () => {
 initializeDefaultFilters();
 
 const prettifyTimestamp = (timestamp: string | number) => {
-	if (!timestamp) return '';
-	return new Date(+timestamp).toLocaleString();
+  if (!timestamp) return '';
+  return formatDate(+timestamp, FormatDateMode.DATETIME)
 };
 
 const isDownloadDisabled = (item: WebitelMediaExporterExportRecord) => {

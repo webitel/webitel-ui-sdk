@@ -25,7 +25,10 @@
         </slot>
       </div>
     </div>
-    <wt-input-info v-if="isValidation" :invalid="invalid">
+    <wt-input-info
+      v-if="isValidation && validationText"
+      :invalid="invalid"
+    >
       {{ validationText }}
     </wt-input-info>
   </div>

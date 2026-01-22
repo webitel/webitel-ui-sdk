@@ -8,7 +8,12 @@ import chip from './chip/chip.js';
 import divider from './divider/divider.js';
 import galleria from './galleria/galleria.js';
 import image from './image/image.js';
+import inputGroup from './input-group/input-group.js';
+import inputNumber from './input-number/input-number.js';
+import inputText from './input-text/input-text.js';
 import menubar from './menubar/menubar.js';
+import message from './message/message.js';
+import password from './password/password.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
@@ -19,25 +24,30 @@ import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
 const components = {
-	autocomplete,
-	avatar,
-	breadcrumb,
-	button,
-	badge,
-	chip,
-	checkbox,
-	textarea,
-	toggleswitch: switcher,
-	divider,
-	image,
-	menubar,
-	popover,
-	radiobutton: radio,
-	slider,
-	tooltip,
-	datatable: table,
-	toolbar,
-	galleria,
+  autocomplete,
+  avatar,
+  breadcrumb,
+  button,
+  badge,
+  chip,
+  checkbox,
+  textarea,
+  toggleswitch: switcher,
+  divider,
+  image,
+  inputgroup: inputGroup,
+  inputnumber: inputNumber,
+  inputtext: inputText,
+  menubar,
+  message,
+  password,
+  popover,
+  radiobutton: radio,
+  slider,
+  tooltip,
+  datatable: table,
+  toolbar,
+  galleria,
 };
 
 export default components;
