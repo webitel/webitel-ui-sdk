@@ -12,7 +12,6 @@ export const config: UiChatsConfig = {
 export const setConfig = (conf: UiChatsConfig) => {
 	Object.assign(config, conf);
 
-	// Automatically merge ui-chats locale messages into the provided i18n instance
 	if (conf.i18n?.global) {
 		Object.entries(messages).forEach(([locale, localeMessages]) => {
 			conf.i18n.global.mergeLocaleMessage(locale, localeMessages);
