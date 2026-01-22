@@ -16,7 +16,7 @@
     <p-input-group>
       <p-input-group-addon 
         v-if="$slots.prefix" 
-        class="wt-input-text__addon"
+        class="wt-input-text__addon typo-body-1 wt-placeholder"
       >
         <slot name="prefix" />
       </p-input-group-addon>
@@ -27,14 +27,14 @@
         :disabled="disabled"
         :invalid="invalid"
         :placeholder="placeholder || label"
-        class="wt-input-text__input"
+        class="wt-input-text__input typo-body-1"
         v-bind="$attrs"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
       <p-input-group-addon 
         v-if="$slots.suffix"
-        class="wt-input-text__addon"
+        class="wt-input-text__addon typo-body-1 wt-placeholder"
       >
         <slot name="suffix" />
       </p-input-group-addon>
@@ -132,16 +132,6 @@ defineExpose({
 });
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
+<style scoped>
 
-.wt-input-text__addon {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-}
-
-:deep(.wt-input-text__input) {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-}
 </style>

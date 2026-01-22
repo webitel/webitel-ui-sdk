@@ -28,9 +28,7 @@ import WtInputNumber from './wt-input-number/wt-input-number.vue';
 import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
-import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
-import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
@@ -42,9 +40,7 @@ import WtHeaderActions from './wt-app-header/wt-header-actions.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtHeadline from './wt-headline/wt-headline.vue';
-import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtEmpty from './wt-empty/wt-empty.vue';
-import WtLogo from './wt-logo/wt-logo.vue';
 import WtImage from './wt-image/wt-image.vue';
 import WtReplaceTransition from './transitions/cases/wt-replace-transition.vue';
 
@@ -61,9 +57,6 @@ const WtErrorPage = defineAsyncComponent(() => import('./wt-error-page/wt-error-
 const WtExpansionPanel = defineAsyncComponent(() => import('./wt-expansion-panel/wt-expansion-panel.vue'));
 const WtFiltersPanelWrapper = defineAsyncComponent(() => import('./wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue'));
 const WtGalleria = defineAsyncComponent(() => import('./wt-galleria/wt-galleria.vue'));
-const WtIntersectionObserver = defineAsyncComponent(() => import('./wt-intersection-observer/wt-intersection-observer.vue'));
-const WtItemLink = defineAsyncComponent(() => import('./wt-item-link/wt-item-link.vue'));
-const WtLoadBar = defineAsyncComponent(() => import('./wt-load-bar/wt-load-bar.vue'));
 const WtNotificationsBar = defineAsyncComponent(() => import('./wt-notifications-bar/wt-notifications-bar.vue'));
 const WtPageHeader = defineAsyncComponent(() => import('./wt-page-header/wt-page-header.vue'));
 const WtPagination = defineAsyncComponent(() => import('./wt-pagination/wt-pagination.vue'));
@@ -98,7 +91,7 @@ const Components = {
 	WtAvatar,
 	WtBadge,
 	WtBadgeNew,
-  WtMessage,
+	WtMessage,
 	WtIcon,
 	WtIndicator,
 	WtInputInfo,
@@ -115,6 +108,8 @@ const Components = {
 	WtDatepicker,
 	WtIconBtn,
 	WtInput,
+	WtInputNumber,
+	WtInputText,
 	WtIntersectionObserver,
 	WtHint,
 	WtNotification,
@@ -205,12 +200,15 @@ export {
 	WtIndicator,
 	WtInput,
 	WtInputInfo,
+	WtInputNumber,
+	WtInputText,
 	WtIntersectionObserver,
 	WtItemLink,
 	WtLabel,
 	WtLoadBar,
 	WtLoader,
 	WtLogo,
+	WtMessage,
 	WtNavigationBar,
 	WtNavigationMenu,
 	WtNotification,
@@ -246,86 +244,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-  WtActionBar,
-  WtAppHeader,
-  WtAppNavigator,
-  WtAvatar,
-  WtBadge,
-  WtBadgeNew,
-  WtBreadcrumb,
-  WtButton,
-  WtButtonSelect,
-  WtChatEmoji,
-  WtCheckbox,
-  WtChip,
-  WtConfirmDialog,
-  WtContextMenu,
-  WtCopyAction,
-  WtDatepicker,
-  WtDisplayChipItems,
-  WtDivider,
-  WtDualPanel,
-  WtDummy,
-  WtEmpty,
-  WtErrorPage,
-  WtExpansionPanel,
-  WtFiltersPanelWrapper,
-  WtGalleria,
-  WtHeaderActions,
-  WtHeadline,
-  WtHint,
-  WtIcon,
-  WtIconAction,
-  WtIconBtn,
-  WtImage,
-  WtIndicator,
-  WtInput,
-  WtInputInfo,
-  WtInputNumber,
-  WtInputText,
-  WtIntersectionObserver,
-  WtItemLink,
-  WtLabel,
-  WtLoadBar,
-  WtLoader,
-  WtLogo,
-  WtMessage,
-  WtNavigationBar,
-  WtNavigationMenu,
-  WtNotification,
-  WtNotificationsBar,
-  WtPageHeader,
-  WtPageWrapper,
-  WtPagination,
-  WtPassword,
-  WtPlayer,
-  WtPopover,
-  WtPopup,
-  WtProgressBar,
-  WtRadio,
-  WtReplaceTransition,
-  WtRoundedAction,
-  WtSearchBar,
-  WtSelect,
-  WtSelectionPopup,
-  WtSlider,
-  WtStartPage,
-  WtStatusSelect,
-  WtStepper,
-  WtSwitcher,
-  WtTable,
-  WtTableActions,
-  WtTableColumnSelect,
-  WtTabs,
-  WtTagsInput,
-  WtTextarea,
-  WtTimeInput,
-  WtTimepicker,
-  WtTooltip,
-  WtTree,
-  WtTreeTable,
-  WtTypeExtensionValueInput,
-  WtVidstackPlayer,
 };
 
 export default Components;

@@ -16,7 +16,7 @@
     <p-input-group>
       <p-input-group-addon 
         v-if="$slots.prefix"
-        class="wt-input-number__addon"
+        class="wt-input-number__addon typo-body-1 wt-placeholder"
       >
         <slot name="prefix" />
       </p-input-group-addon>
@@ -33,7 +33,7 @@
         :max-fraction-digits="maxFractionDigits"
         :placeholder="placeholder || label"
         :show-buttons="showButtons"
-        input-class="wt-input-number__input"
+        input-class="wt-input-number__input typo-body-1 wt-placeholder"
         v-bind="$attrs"
         @keyup="handleKeyup"
       >
@@ -54,7 +54,7 @@
       </p-input-number>
       <p-input-group-addon 
         v-if="$slots.suffix"
-        class="wt-input-number__addon"
+        class="wt-input-number__addon typo-body-1 wt-placeholder"
       >
         <slot name="suffix" />
       </p-input-group-addon>
@@ -153,16 +153,5 @@ defineExpose({
 });
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
-
-.wt-input-number__addon {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-}
-
-:deep(.wt-input-number__input) {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-}
+<style scoped>
 </style>
