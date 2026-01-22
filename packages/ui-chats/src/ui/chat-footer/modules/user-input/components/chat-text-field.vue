@@ -3,7 +3,7 @@
     ref="chatTextFieldInput"
     class="chat-text-field"
     :model-value="textModel"
-    :placeholder="t('@webitel/ui-chats.ui.messaging.messagePlaceholder')"
+    :placeholder="t('chats.ui.messaging.messagePlaceholder')"
     :size="size"
     autoresize
     @update:model-value="send"
