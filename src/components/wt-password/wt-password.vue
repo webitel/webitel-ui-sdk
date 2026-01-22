@@ -49,12 +49,13 @@
 </template>
 
 <script setup lang="ts">
-import type { PasswordProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
-import { computed, defineModel, ref, useTemplateRef, toRefs, useSlots } from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { MessageColor, MessageVariant, ComponentSize } from '../../enums';
+import type { PasswordProps } from 'primevue';
+import { computed, defineModel, ref, toRefs, useSlots,useTemplateRef } from 'vue';
+
 import { useInputControl } from '../../composables';
+import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
   label?: string;

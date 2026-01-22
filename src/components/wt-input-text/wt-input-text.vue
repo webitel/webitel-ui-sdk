@@ -51,12 +51,13 @@
 </template>
 
 <script setup lang="ts">
-import type { InputTextProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
+import type { InputTextProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { MessageVariant, MessageColor, ComponentSize } from '../../enums';
+
 import { useInputControl } from '../../composables';
+import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
   label?: string;

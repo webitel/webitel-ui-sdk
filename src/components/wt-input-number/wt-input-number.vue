@@ -71,12 +71,13 @@
 </template>
 
 <script setup lang="ts">
-import type { InputNumberProps } from 'primevue';
 import type { RegleFieldStatus } from '@regle/core';
+import type { InputNumberProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { ComponentSize, MessageVariant, MessageColor } from '../../enums';
+
 import { useInputControl } from '../../composables';
+import { ComponentSize, MessageColor,MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
   label?: string;

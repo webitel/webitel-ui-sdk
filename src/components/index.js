@@ -41,7 +41,6 @@ import WtInputInfo from './wt-input-info/wt-input-info.vue';
 import WtInputNumber from './wt-input-number/wt-input-number.vue';
 import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
-import WtPassword from './wt-password/wt-password.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
@@ -54,6 +53,7 @@ import WtNotificationsBar from './wt-notifications-bar/wt-notifications-bar.vue'
 import WtPageHeader from './wt-page-header/wt-page-header.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPagination from './wt-pagination/wt-pagination.vue';
+import WtPassword from './wt-password/wt-password.vue';
 import WtPlayer from './wt-player/wt-player.vue';
 import WtPopover from './wt-popover/wt-popover.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -201,7 +201,6 @@ export {
   WtInputText,
   WtIntersectionObserver,
   WtItemLink,
-  WtPassword,
   WtLabel,
   WtLoadBar,
   WtLoader,
@@ -214,6 +213,7 @@ export {
   WtPageHeader,
   WtPageWrapper,
   WtPagination,
+  WtPassword,
   WtPlayer,
   WtPopover,
   WtPopup,

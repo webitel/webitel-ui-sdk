@@ -17,7 +17,8 @@
 
 <script setup lang="ts">
 import type { MessageProps } from 'primevue';
-import { MessageColor, MessageVariant, ComponentSize } from '../../enums';
+
+import { ComponentSize,MessageColor, MessageVariant } from '../../enums';
 
 interface WtMessageProps extends /* @vue-ignore */ MessageProps {
   color?: MessageColor;
