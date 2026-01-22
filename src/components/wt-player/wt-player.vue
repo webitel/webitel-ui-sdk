@@ -1,72 +1,74 @@
 <template>
-	<media-player 
+	<media-player
 		ref="player"
 		class="wt-player"
 		:class="`wt-player--position-${position}`"
-		:src="src" 
-		:loop="loop" 
+		:src="src"
+		:loop="loop"
 		:autoplay="autoplay"
 	>
 		<media-provider></media-provider>
 		<media-plyr-layout
-			ref="player"
 			:controls="controls"
 			:download="download"
 			custom-icons
 		>
-			<template #airplay-icon>
-<wt-icon  icon="plyr-airplay" />
-</template>
-			<template #captions-off-icon>
-<wt-icon  icon="plyr-captions-off" />
-</template>
-			<template #captions-on-icon>
-<wt-icon  icon="plyr-captions-on" />
-</template>
-			<template #download-icon>
-<wt-icon  icon="plyr-download" />
-</template>
-			<template #enter-fullscreen-icon>
-<wt-icon  icon="plyr-enter-fullscreen" />
-</template>
-			<template #enter-pip-icon>
-<wt-icon  icon="plyr-pip" />
-</template>
-			<template #exit-fullscreen-icon>
-<wt-icon  icon="plyr-exit-fullscreen" />
-</template>
-			<template #exit-pip-icon>
-<wt-icon  icon="plyr-pip" />
-</template>
-			<template #fast-forward-icon>
-<wt-icon  icon="plyr-fast-forward" />
-</template>
-			<template #muted-icon>
-<wt-icon  icon="plyr-muted" />
-</template>
-			<template #pause-icon>
-<wt-icon  icon="plyr-pause" />
-</template>
-			<template #play-icon>
-<wt-icon  icon="plyr-play" />
-</template>
-			<template #restart-icon>
-<wt-icon  icon="plyr-restart" />
-</template>
-			<template #rewind-icon>
-<wt-icon  icon="plyr-rewind" />
-</template>
-			<template #settings-icon>
-<wt-icon  icon="plyr-settings" />
-</template>
-			<template #volume-icon>
-<wt-icon  icon="plyr-volume" />
-</template>
+			<template slot="airplay-icon">
+				<wt-icon icon="plyr-airplay" />
+			</template>
+			<template slot="captions-off-icon">
+				<wt-icon icon="plyr-captions-off" />
+			</template>
+			<template slot="captions-on-icon">
+				<wt-icon icon="plyr-captions-on" />
+			</template>
+			<template slot="download-icon">
+				<wt-icon icon="plyr-download" />
+			</template>
+			<template slot="enter-fullscreen-icon">
+				<wt-icon icon="plyr-enter-fullscreen" />
+			</template>
+			<template slot="enter-pip-icon">
+				<wt-icon icon="plyr-pip" />
+			</template>
+			<template slot="exit-fullscreen-icon">
+				<wt-icon icon="plyr-exit-fullscreen" />
+			</template>
+			<template slot="exit-pip-icon">
+				<wt-icon icon="plyr-pip" />
+			</template>
+			<template slot="fast-forward-icon">
+				<wt-icon icon="plyr-fast-forward" />
+			</template>
+			<template slot="muted-icon">
+				<wt-icon icon="plyr-muted" />
+			</template>
+			<template slot="pause-icon">
+				<wt-icon icon="plyr-pause" />
+			</template>
+			<template slot="play-icon">
+				<wt-icon icon="plyr-play" />
+			</template>
+			<template slot="restart-icon">
+				<wt-icon icon="plyr-restart" />
+			</template>
+			<template slot="rewind-icon">
+				<wt-icon icon="plyr-rewind" />
+			</template>
+			<template slot="settings-icon">
+				<wt-icon icon="plyr-settings" />
+			</template>
+			<template slot="volume-icon">
+				<wt-icon icon="plyr-volume" />
+			</template>
 		</media-plyr-layout>
 	</media-player>
 </template>
 
-<script setup lang="ts">
+<script
+	setup
+	lang="ts"
+>
 import 'vidstack/bundle';
 
 import type { PlyrControl } from 'vidstack';

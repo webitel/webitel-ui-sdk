@@ -1,7 +1,6 @@
 import 'vidstack/bundle';
 import 'vue-multiselect/dist/vue-multiselect.css';
 import '@webitel/styleguide/fonts';
-import 'plyr/plyr.scss';
 import './css/main.css';
 import './css/tailwind.css';
 
