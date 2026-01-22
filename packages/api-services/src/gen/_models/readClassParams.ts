@@ -6,9 +6,9 @@
  */
 
 export type ReadClassParams = {
-domain?: string;
-/**
- * [filter]: like '%class%'
- */
-class?: string;
+	domain?: string;
+	/**
+	 * [filter]: like '%class%'
+	 */
+	class?: string;
 };

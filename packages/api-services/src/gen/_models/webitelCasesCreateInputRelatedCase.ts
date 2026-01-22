@@ -11,10 +11,10 @@ import type { WebitelCasesRelationType } from './webitelCasesRelationType';
  * Input for creating a related case.
  */
 export interface WebitelCasesCreateInputRelatedCase {
-  /** Related case details. */
-  relatedCase?: GeneralLookup;
-  /** Relation type between the cases. */
-  relationType?: WebitelCasesRelationType;
-  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-  userId?: GeneralLookup;
+	/** Related case details. */
+	relatedCase?: GeneralLookup;
+	/** Relation type between the cases. */
+	relationType?: WebitelCasesRelationType;
+	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+	userId?: GeneralLookup;
 }

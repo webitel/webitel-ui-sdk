@@ -10,5 +10,5 @@ import type { ContactsCondition } from './contactsCondition';
  * Response message for locating a condition by ID.
  */
 export interface ContactsLocateConditionResponse {
-  condition?: ContactsCondition;
+	condition?: ContactsCondition;
 }

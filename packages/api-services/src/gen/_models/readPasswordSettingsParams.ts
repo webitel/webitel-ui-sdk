@@ -5,6 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface UploadMediaResponseProgress {
-  percent?: number;
-}
+export type ReadPasswordSettingsParams = {
+	password?: string;
+	username?: string;
+	domain?: string;
+};

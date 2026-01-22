@@ -4,36 +4,37 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiUserId } from './apiUserId';
+
+import type { ApiLDAPCatalogTLSConfig } from './apiLDAPCatalogTLSConfig';
 import type { ApiLDAProcess } from './apiLDAProcess';
 import type { ApiLDAProcessOptions } from './apiLDAProcessOptions';
 import type { ApiLDAPTemplate } from './apiLDAPTemplate';
-import type { ApiLDAPCatalogTLSConfig } from './apiLDAPCatalogTLSConfig';
+import type { ApiUserId } from './apiUserId';
 
 /**
  * LDAP Catalog changes.
  */
 export type LDAPUpdateLDAPCatalogBodyCatalog = {
-  baseDn?: string;
-  /** authorization method e.g.: SIMPLE, SAML, NTLM, etc. */
-  bind?: string;
-  /** unix */
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  /** [CRON]OS SPEC ! github.com/robfig/cron/v3 */
-  cron?: string;
-  entryModify?: string;
-  /** entry unique id (except DN which may be updated) */
-  entryUuid?: string;
-  name?: string;
-  password?: string;
-  process?: ApiLDAProcess;
-  sync?: ApiLDAProcessOptions;
-  templates?: ApiLDAPTemplate[];
-  tls?: ApiLDAPCatalogTLSConfig;
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  /** URL e.g.: [(ldap|ldapi|ldaps)://]host[:port] */
-  url?: string;
-  username?: string;
+	baseDn?: string;
+	/** authorization method e.g.: SIMPLE, SAML, NTLM, etc. */
+	bind?: string;
+	/** unix */
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	/** [CRON]OS SPEC ! github.com/robfig/cron/v3 */
+	cron?: string;
+	entryModify?: string;
+	/** entry unique id (except DN which may be updated) */
+	entryUuid?: string;
+	name?: string;
+	password?: string;
+	process?: ApiLDAProcess;
+	sync?: ApiLDAProcessOptions;
+	templates?: ApiLDAPTemplate[];
+	tls?: ApiLDAPCatalogTLSConfig;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	/** URL e.g.: [(ldap|ldapi|ldaps)://]host[:port] */
+	url?: string;
+	username?: string;
 };

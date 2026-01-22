@@ -4,24 +4,25 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GeneralLookup } from './generalLookup';
+
 import type { GeneralExtendedLookup } from './generalExtendedLookup';
+import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesService {
-  assignee?: GeneralLookup;
-  catalogId?: string;
-  code?: string;
-  createdAt?: string;
-  createdBy?: GeneralLookup;
-  description?: string;
-  group?: GeneralExtendedLookup;
-  id?: string;
-  name?: string;
-  rootId?: string;
-  searched?: boolean;
-  service?: WebitelCasesService[];
-  sla?: GeneralLookup;
-  state?: boolean;
-  updatedAt?: string;
-  updatedBy?: GeneralLookup;
+	assignee?: GeneralLookup;
+	catalogId?: string;
+	code?: string;
+	createdAt?: string;
+	createdBy?: GeneralLookup;
+	description?: string;
+	group?: GeneralExtendedLookup;
+	id?: string;
+	name?: string;
+	rootId?: string;
+	searched?: boolean;
+	service?: WebitelCasesService[];
+	sla?: GeneralLookup;
+	state?: boolean;
+	updatedAt?: string;
+	updatedBy?: GeneralLookup;
 }

@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsChannel = typeof SearchScreenRecordingsChannel[keyof typeof SearchScreenRecordingsChannel];
-
+export type SearchScreenRecordingsChannel =
+	(typeof SearchScreenRecordingsChannel)[keyof typeof SearchScreenRecordingsChannel];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SearchScreenRecordingsChannel = {
-  SCREENRECORDING: 'SCREENRECORDING',
-  CALL: 'CALL',
+	SCREENRECORDING: 'SCREENRECORDING',
+	CALL: 'CALL',
 } as const;

@@ -4,22 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelCasesCallFile } from './webitelCasesCallFile';
+
 import type { GeneralLookup } from './generalLookup';
+import type { WebitelCasesCallFile } from './webitelCasesCallFile';
 import type { WebitelCasesTranscriptLookup } from './webitelCasesTranscriptLookup';
 
 export interface WebitelCasesCallEvent {
-  closedAt?: string;
-  duration?: string;
-  files?: WebitelCasesCallFile[];
-  flowScheme?: GeneralLookup;
-  gateway?: GeneralLookup;
-  id?: string;
-  isDetailed?: boolean;
-  isInbound?: boolean;
-  isMissed?: boolean;
-  participants?: GeneralLookup[];
-  queue?: GeneralLookup;
-  totalDuration?: string;
-  transcripts?: WebitelCasesTranscriptLookup[];
+	closedAt?: string;
+	duration?: string;
+	files?: WebitelCasesCallFile[];
+	flowScheme?: GeneralLookup;
+	gateway?: GeneralLookup;
+	id?: string;
+	isDetailed?: boolean;
+	isInbound?: boolean;
+	isMissed?: boolean;
+	participants?: GeneralLookup[];
+	queue?: GeneralLookup;
+	totalDuration?: string;
+	transcripts?: WebitelCasesTranscriptLookup[];
 }

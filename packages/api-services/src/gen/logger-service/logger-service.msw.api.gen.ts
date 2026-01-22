@@ -4,67 +4,343 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import type { LoggerLogs } from '.././_models';
 
-import type {
-  LoggerLogs
-} from '.././_models';
+export const getLoggerServiceSearchLogByConfigIdResponseMock = (
+	overrideResponse: Partial<LoggerLogs> = {},
+): LoggerLogs => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			action: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			configId: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			date: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			newState: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			object: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			record: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			user: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			userIp: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
+export const getLoggerServiceSearchLogByUserIdResponseMock = (
+	overrideResponse: Partial<LoggerLogs> = {},
+): LoggerLogs => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			action: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			configId: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			date: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			newState: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			object: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			record: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			user: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			userIp: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getLoggerServiceSearchLogByConfigIdResponseMock = (overrideResponse: Partial< LoggerLogs > = {}): LoggerLogs => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({action: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), configId: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), date: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), newState: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), object: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), record: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), userIp: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getLoggerServiceSearchLogByRecordIdResponseMock = (
+	overrideResponse: Partial<LoggerLogs> = {},
+): LoggerLogs => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			action: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			configId: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			date: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			newState: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			object: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			record: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			user: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.number.int({ min: undefined, max: undefined }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			userIp: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getLoggerServiceSearchLogByUserIdResponseMock = (overrideResponse: Partial< LoggerLogs > = {}): LoggerLogs => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({action: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), configId: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), date: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), newState: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), object: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), record: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), userIp: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getLoggerServiceSearchLogByConfigIdMockHandler = (
+	overrideResponse?:
+		| LoggerLogs
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<LoggerLogs> | LoggerLogs),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/logger/config/:configId/logs',
+		async (info) => {
+			await delay(1000);
 
-export const getLoggerServiceSearchLogByRecordIdResponseMock = (overrideResponse: Partial< LoggerLogs > = {}): LoggerLogs => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({action: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), configId: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), date: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), newState: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), object: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), record: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), userIp: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getLoggerServiceSearchLogByConfigIdResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
+export const getLoggerServiceSearchLogByUserIdMockHandler = (
+	overrideResponse?:
+		| LoggerLogs
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<LoggerLogs> | LoggerLogs),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/logger/user/:userId/logs',
+		async (info) => {
+			await delay(1000);
 
-export const getLoggerServiceSearchLogByConfigIdMockHandler = (overrideResponse?: LoggerLogs | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<LoggerLogs> | LoggerLogs), options?: RequestHandlerOptions) => {
-  return http.get('*/logger/config/:configId/logs', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getLoggerServiceSearchLogByConfigIdResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getLoggerServiceSearchLogByUserIdResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getLoggerServiceSearchLogByUserIdMockHandler = (overrideResponse?: LoggerLogs | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<LoggerLogs> | LoggerLogs), options?: RequestHandlerOptions) => {
-  return http.get('*/logger/user/:userId/logs', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getLoggerServiceSearchLogByUserIdResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getLoggerServiceSearchLogByRecordIdMockHandler = (
+	overrideResponse?:
+		| LoggerLogs
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<LoggerLogs> | LoggerLogs),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/logger/:object/record/:recordId/logs',
+		async (info) => {
+			await delay(1000);
 
-export const getLoggerServiceSearchLogByRecordIdMockHandler = (overrideResponse?: LoggerLogs | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<LoggerLogs> | LoggerLogs), options?: RequestHandlerOptions) => {
-  return http.get('*/logger/:object/record/:recordId/logs', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getLoggerServiceSearchLogByRecordIdResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getLoggerServiceSearchLogByRecordIdResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 export const getLoggerServiceMock = () => [
-  getLoggerServiceSearchLogByConfigIdMockHandler(),
-  getLoggerServiceSearchLogByUserIdMockHandler(),
-  getLoggerServiceSearchLogByRecordIdMockHandler()]
+	getLoggerServiceSearchLogByConfigIdMockHandler(),
+	getLoggerServiceSearchLogByUserIdMockHandler(),
+	getLoggerServiceSearchLogByRecordIdMockHandler(),
+];

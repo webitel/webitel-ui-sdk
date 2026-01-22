@@ -6,6 +6,6 @@
  */
 
 export interface ApiLDAPSearchRequestTLSConfig {
-  /** base64 */
-  pem?: string;
+	/** base64 */
+	pem?: string;
 }

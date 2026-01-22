@@ -7,6 +7,6 @@
 import type { StorageCognitiveProfile } from './storageCognitiveProfile';
 
 export interface StorageListCognitiveProfile {
-  items?: StorageCognitiveProfile[];
-  next?: boolean;
+	items?: StorageCognitiveProfile[];
+	next?: boolean;
 }

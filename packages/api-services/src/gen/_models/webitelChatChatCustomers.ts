@@ -8,10 +8,10 @@ import type { WebitelChatCustomer } from './webitelChatCustomer';
 import type { WebitelChatPeer } from './webitelChatPeer';
 
 export interface WebitelChatChatCustomers {
-  next?: boolean;
-  /** Page number of results. */
-  page?: number;
-  /** Dataset page of Customer(s). */
-  peers?: WebitelChatCustomer[];
-  vias?: WebitelChatPeer[];
+	next?: boolean;
+	/** Page number of results. */
+	page?: number;
+	/** Dataset page of Customer(s). */
+	peers?: WebitelChatCustomer[];
+	vias?: WebitelChatPeer[];
 }

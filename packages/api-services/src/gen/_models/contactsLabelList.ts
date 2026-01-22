@@ -12,9 +12,9 @@ NOTE: Edge represents connection between two nodes.
 So this ContactLabels.data are always subordinate to some contact.id.
  */
 export interface ContactsLabelList {
-  /** Label(s) dataset page. */
-  data?: WebitelcontactsLabel[];
-  next?: boolean;
-  /** Page number of partial result. */
-  page?: number;
+	/** Label(s) dataset page. */
+	data?: WebitelcontactsLabel[];
+	next?: boolean;
+	/** Page number of partial result. */
+	page?: number;
 }

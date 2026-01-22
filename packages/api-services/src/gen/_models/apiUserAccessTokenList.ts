@@ -7,8 +7,8 @@
 import type { ApiUserAccessToken } from './apiUserAccessToken';
 
 export interface ApiUserAccessTokenList {
-  items?: ApiUserAccessToken[];
-  next?: boolean;
-  page?: number;
-  size?: string;
+	items?: ApiUserAccessToken[];
+	next?: boolean;
+	page?: number;
+	size?: string;
 }

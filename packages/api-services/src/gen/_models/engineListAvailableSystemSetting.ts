@@ -7,6 +7,6 @@
 import type { EngineAvailableSystemSetting } from './engineAvailableSystemSetting';
 
 export interface EngineListAvailableSystemSetting {
-  items?: EngineAvailableSystemSetting[];
-  next?: boolean;
+	items?: EngineAvailableSystemSetting[];
+	next?: boolean;
 }

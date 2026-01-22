@@ -6,7 +6,7 @@
  */
 
 export interface FtsSearchData {
-  id?: string;
-  objectName?: string;
-  text?: string;
+	id?: string;
+	objectName?: string;
+	text?: string;
 }

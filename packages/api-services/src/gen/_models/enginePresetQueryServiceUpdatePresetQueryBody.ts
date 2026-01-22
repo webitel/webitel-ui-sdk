@@ -6,7 +6,7 @@
  */
 
 export interface EnginePresetQueryServiceUpdatePresetQueryBody {
-  description?: string;
-  name?: string;
-  section?: string;
+	description?: string;
+	name?: string;
+	section?: string;
 }

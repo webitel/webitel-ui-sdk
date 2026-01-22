@@ -4,143 +4,939 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
-
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
 import type {
-  ContactsContactGroup,
-  ContactsContactGroupList
+	ContactsContactGroup,
+	ContactsContactGroupList,
 } from '.././_models';
 
+export const getDeleteContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getDeleteContactGroupsResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getListContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getListContactGroupsResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getMergeContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getMergeContactGroupsResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getResetContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getResetContactGroupsResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getDeleteContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroup> = {},
+): ContactsContactGroup => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	etag: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	group: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	ver: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getDeleteContactGroupResponseMock = (overrideResponse: Partial< ContactsContactGroup > = {}): ContactsContactGroup => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getLocateContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroup> = {},
+): ContactsContactGroup => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	etag: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	group: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	ver: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getLocateContactGroupResponseMock = (overrideResponse: Partial< ContactsContactGroup > = {}): ContactsContactGroup => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getUpdateContactGroup2ResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getUpdateContactGroup2ResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getUpdateContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
+	data: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			etag: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			group: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getUpdateContactGroupResponseMock = (overrideResponse: Partial< ContactsContactGroupList > = {}): ContactsContactGroupList => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), group: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getDeleteContactGroupsMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/contacts/:contactId/groups',
+		async (info) => {
+			await delay(1000);
 
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getDeleteContactGroupsResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getDeleteContactGroupsMockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.delete('*/contacts/:contactId/groups', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getDeleteContactGroupsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getListContactGroupsMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/contacts/:contactId/groups',
+		async (info) => {
+			await delay(1000);
 
-export const getListContactGroupsMockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.get('*/contacts/:contactId/groups', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getListContactGroupsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getListContactGroupsResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getMergeContactGroupsMockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.post('*/contacts/:contactId/groups', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getMergeContactGroupsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getMergeContactGroupsMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/contacts/:contactId/groups',
+		async (info) => {
+			await delay(1000);
 
-export const getResetContactGroupsMockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.put('*/contacts/:contactId/groups', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getResetContactGroupsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getMergeContactGroupsResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getDeleteContactGroupMockHandler = (overrideResponse?: ContactsContactGroup | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ContactsContactGroup> | ContactsContactGroup), options?: RequestHandlerOptions) => {
-  return http.delete('*/contacts/:contactId/groups/:etag', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getDeleteContactGroupResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getResetContactGroupsMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/contacts/:contactId/groups',
+		async (info) => {
+			await delay(1000);
 
-export const getLocateContactGroupMockHandler = (overrideResponse?: ContactsContactGroup | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ContactsContactGroup> | ContactsContactGroup), options?: RequestHandlerOptions) => {
-  return http.get('*/contacts/:contactId/groups/:etag', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getLocateContactGroupResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getResetContactGroupsResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getUpdateContactGroup2MockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.patch('*/contacts/:contactId/groups/:etag', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdateContactGroup2ResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getDeleteContactGroupMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroup
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<ContactsContactGroup> | ContactsContactGroup),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/contacts/:contactId/groups/:etag',
+		async (info) => {
+			await delay(1000);
 
-export const getUpdateContactGroupMockHandler = (overrideResponse?: ContactsContactGroupList | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ContactsContactGroupList> | ContactsContactGroupList), options?: RequestHandlerOptions) => {
-  return http.put('*/contacts/:contactId/groups/:etag', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdateContactGroupResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getDeleteContactGroupResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getLocateContactGroupMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroup
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ContactsContactGroup> | ContactsContactGroup),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/contacts/:contactId/groups/:etag',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getLocateContactGroupResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateContactGroup2MockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/contacts/:contactId/groups/:etag',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdateContactGroup2ResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateContactGroupMockHandler = (
+	overrideResponse?:
+		| ContactsContactGroupList
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/contacts/:contactId/groups/:etag',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdateContactGroupResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 export const getContactGroupsMock = () => [
-  getDeleteContactGroupsMockHandler(),
-  getListContactGroupsMockHandler(),
-  getMergeContactGroupsMockHandler(),
-  getResetContactGroupsMockHandler(),
-  getDeleteContactGroupMockHandler(),
-  getLocateContactGroupMockHandler(),
-  getUpdateContactGroup2MockHandler(),
-  getUpdateContactGroupMockHandler()]
+	getDeleteContactGroupsMockHandler(),
+	getListContactGroupsMockHandler(),
+	getMergeContactGroupsMockHandler(),
+	getResetContactGroupsMockHandler(),
+	getDeleteContactGroupMockHandler(),
+	getLocateContactGroupMockHandler(),
+	getUpdateContactGroup2MockHandler(),
+	getUpdateContactGroupMockHandler(),
+];

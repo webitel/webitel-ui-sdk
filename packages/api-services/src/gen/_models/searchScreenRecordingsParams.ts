@@ -4,21 +4,22 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { SearchScreenRecordingsType } from './searchScreenRecordingsType';
+
 import type { SearchScreenRecordingsChannel } from './searchScreenRecordingsChannel';
+import type { SearchScreenRecordingsType } from './searchScreenRecordingsType';
 
 export type SearchScreenRecordingsParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: string[];
-uploadedAtFrom?: string;
-uploadedAtTo?: string;
-referenceId?: string[];
-retentionUntilFrom?: string;
-retentionUntilTo?: string;
-type?: SearchScreenRecordingsType;
-channel?: SearchScreenRecordingsChannel;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	uploadedAtFrom?: string;
+	uploadedAtTo?: string;
+	referenceId?: string[];
+	retentionUntilFrom?: string;
+	retentionUntilTo?: string;
+	type?: SearchScreenRecordingsType;
+	channel?: SearchScreenRecordingsChannel;
 };

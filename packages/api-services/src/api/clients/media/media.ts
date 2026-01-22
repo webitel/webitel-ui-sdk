@@ -81,8 +81,8 @@ export const downloadFile = (id) => {
 
 export const getCallMediaUrl = (id, { download = false } = {}) => {
 	const accessToken = localStorage.getItem('access-token');
-  return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
-}
+	return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
+};
 
 export const getMediaUrl = (id, isThumb = false) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null

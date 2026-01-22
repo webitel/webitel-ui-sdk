@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WfmWorkingScheduleState = typeof WfmWorkingScheduleState[keyof typeof WfmWorkingScheduleState];
-
+export type WfmWorkingScheduleState =
+	(typeof WfmWorkingScheduleState)[keyof typeof WfmWorkingScheduleState];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WfmWorkingScheduleState = {
-  WorkingScheduleStateUnspecified: 'WORKING_SCHEDULE_STATE_UNSPECIFIED',
-  WorkingScheduleStateActive: 'WORKING_SCHEDULE_STATE_ACTIVE',
-  WorkingScheduleStatePending: 'WORKING_SCHEDULE_STATE_PENDING',
-  WorkingScheduleStateDraft: 'WORKING_SCHEDULE_STATE_DRAFT',
-  WorkingScheduleStateArchived: 'WORKING_SCHEDULE_STATE_ARCHIVED',
+	WorkingScheduleStateUnspecified: 'WORKING_SCHEDULE_STATE_UNSPECIFIED',
+	WorkingScheduleStateActive: 'WORKING_SCHEDULE_STATE_ACTIVE',
+	WorkingScheduleStatePending: 'WORKING_SCHEDULE_STATE_PENDING',
+	WorkingScheduleStateDraft: 'WORKING_SCHEDULE_STATE_DRAFT',
+	WorkingScheduleStateArchived: 'WORKING_SCHEDULE_STATE_ARCHIVED',
 } as const;

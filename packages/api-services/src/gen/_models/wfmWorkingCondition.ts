@@ -7,20 +7,20 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmWorkingCondition {
-  createdAt?: string;
-  createdBy?: WfmLookupEntity;
-  daysOff?: number;
-  description?: string;
-  domainId?: string;
-  id?: string;
-  name?: string;
-  pauseDuration?: number;
-  pauseTemplate?: WfmLookupEntity;
-  shiftTemplate?: WfmLookupEntity;
-  sickLeaves?: number;
-  updatedAt?: string;
-  updatedBy?: WfmLookupEntity;
-  vacation?: number;
-  workdayHours?: number;
-  workdaysPerMonth?: number;
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	daysOff?: number;
+	description?: string;
+	domainId?: string;
+	id?: string;
+	name?: string;
+	pauseDuration?: number;
+	pauseTemplate?: WfmLookupEntity;
+	shiftTemplate?: WfmLookupEntity;
+	sickLeaves?: number;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
+	vacation?: number;
+	workdayHours?: number;
+	workdaysPerMonth?: number;
 }

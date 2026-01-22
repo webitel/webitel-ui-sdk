@@ -6,4 +6,5 @@
  */
 import type { WebitelCasesInputStatusCondition } from './webitelCasesInputStatusCondition';
 
-export type WebitelCasesInputStatusConditionBody = WebitelCasesInputStatusCondition;
+export type WebitelCasesInputStatusConditionBody =
+	WebitelCasesInputStatusCondition;

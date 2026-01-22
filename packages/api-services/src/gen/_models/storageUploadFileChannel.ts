@@ -5,18 +5,18 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageUploadFileChannel = typeof StorageUploadFileChannel[keyof typeof StorageUploadFileChannel];
-
+export type StorageUploadFileChannel =
+	(typeof StorageUploadFileChannel)[keyof typeof StorageUploadFileChannel];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StorageUploadFileChannel = {
-  UnknownChannel: 'UnknownChannel',
-  ChatChannel: 'ChatChannel',
-  MailChannel: 'MailChannel',
-  CallChannel: 'CallChannel',
-  LogChannel: 'LogChannel',
-  MediaChannel: 'MediaChannel',
-  KnowledgebaseChannel: 'KnowledgebaseChannel',
-  CasesChannel: 'CasesChannel',
-  ScreenRecordingChannel: 'ScreenRecordingChannel',
+	UnknownChannel: 'UnknownChannel',
+	ChatChannel: 'ChatChannel',
+	MailChannel: 'MailChannel',
+	CallChannel: 'CallChannel',
+	LogChannel: 'LogChannel',
+	MediaChannel: 'MediaChannel',
+	KnowledgebaseChannel: 'KnowledgebaseChannel',
+	CasesChannel: 'CasesChannel',
+	ScreenRecordingChannel: 'ScreenRecordingChannel',
 } as const;

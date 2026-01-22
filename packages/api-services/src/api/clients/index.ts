@@ -37,9 +37,9 @@ export * from './regions/regions';
 export * from './skills/skills';
 export * from './slas/slas';
 export * from './teams/teams';
+export * from './userSettings/userSettings';
 export * from './users/users';
 export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './userSettings/userSettings'

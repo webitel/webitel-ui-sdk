@@ -4,16 +4,17 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelChatContactChat } from './webitelChatContactChat';
+
 import type { WebitelChatChatMessage } from './webitelChatChatMessage';
 import type { WebitelChatChatPeer } from './webitelChatChatPeer';
+import type { WebitelChatContactChat } from './webitelChatContactChat';
 
 export interface WebitelChatGetContactChatHistoryResponse {
-  chats?: WebitelChatContactChat[];
-  /** Dataset page of messages. */
-  messages?: WebitelChatChatMessage[];
-  next?: boolean;
-  /** Dataset page number. */
-  page?: number;
-  peers?: WebitelChatChatPeer[];
+	chats?: WebitelChatContactChat[];
+	/** Dataset page of messages. */
+	messages?: WebitelChatChatMessage[];
+	next?: boolean;
+	/** Dataset page number. */
+	page?: number;
+	peers?: WebitelChatChatPeer[];
 }

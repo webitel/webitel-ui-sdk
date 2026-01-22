@@ -6,8 +6,8 @@
  */
 
 export type SearchLookupAgentNotExistsSkillParams = {
-page?: number;
-size?: number;
-q?: string;
-domainId?: string;
+	page?: number;
+	size?: number;
+	q?: string;
+	domainId?: string;
 };

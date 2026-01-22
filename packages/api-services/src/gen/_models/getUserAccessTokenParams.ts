@@ -6,8 +6,8 @@
  */
 
 export type GetUserAccessTokenParams = {
-/**
- * display name
- */
-userName?: string;
+	/**
+	 * display name
+	 */
+	userName?: string;
 };

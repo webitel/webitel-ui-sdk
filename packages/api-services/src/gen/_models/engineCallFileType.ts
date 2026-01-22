@@ -5,15 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineCallFileType = typeof EngineCallFileType[keyof typeof EngineCallFileType];
-
+export type EngineCallFileType =
+	(typeof EngineCallFileType)[keyof typeof EngineCallFileType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineCallFileType = {
-  FileTypeEmpty: 'file_type_empty',
-  FileTypeScreenshot: 'file_type_screenshot',
-  FileTypeScreensharing: 'file_type_screensharing',
-  FileTypeAudio: 'file_type_audio',
-  FileTypeVideo: 'file_type_video',
-  FileTypePdf: 'file_type_pdf',
+	FileTypeEmpty: 'file_type_empty',
+	FileTypeScreenshot: 'file_type_screenshot',
+	FileTypeScreensharing: 'file_type_screensharing',
+	FileTypeAudio: 'file_type_audio',
+	FileTypeVideo: 'file_type_video',
+	FileTypePdf: 'file_type_pdf',
 } as const;

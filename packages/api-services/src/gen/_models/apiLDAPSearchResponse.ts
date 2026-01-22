@@ -8,10 +8,10 @@ import type { ApiLDAPControl } from './apiLDAPControl';
 import type { ApiLDAPSearchResponseEntriesItem } from './apiLDAPSearchResponseEntriesItem';
 
 export interface ApiLDAPSearchResponse {
-  controls?: ApiLDAPControl[];
-  diagnosticMessage?: string;
-  entries?: ApiLDAPSearchResponseEntriesItem[];
-  matchedDn?: string;
-  referral?: string[];
-  resultCode?: number;
+	controls?: ApiLDAPControl[];
+	diagnosticMessage?: string;
+	entries?: ApiLDAPSearchResponseEntriesItem[];
+	matchedDn?: string;
+	referral?: string[];
+	resultCode?: number;
 }

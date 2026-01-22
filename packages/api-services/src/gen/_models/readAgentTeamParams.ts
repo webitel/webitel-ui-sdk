@@ -6,5 +6,5 @@
  */
 
 export type ReadAgentTeamParams = {
-domainId?: string;
+	domainId?: string;
 };

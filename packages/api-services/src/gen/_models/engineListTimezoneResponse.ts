@@ -7,6 +7,6 @@
 import type { EngineTimezone } from './engineTimezone';
 
 export interface EngineListTimezoneResponse {
-  items?: EngineTimezone[];
-  next?: boolean;
+	items?: EngineTimezone[];
+	next?: boolean;
 }

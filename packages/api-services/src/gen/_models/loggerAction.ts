@@ -5,14 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LoggerAction = typeof LoggerAction[keyof typeof LoggerAction];
-
+export type LoggerAction = (typeof LoggerAction)[keyof typeof LoggerAction];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const LoggerAction = {
-  DefaultNoAction: 'default_no_action',
-  Create: 'create',
-  Update: 'update',
-  Read: 'read',
-  Delete: 'delete',
+	DefaultNoAction: 'default_no_action',
+	Create: 'create',
+	Update: 'update',
+	Read: 'read',
+	Delete: 'delete',
 } as const;

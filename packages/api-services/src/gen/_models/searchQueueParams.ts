@@ -6,14 +6,14 @@
  */
 
 export type SearchQueueParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: string[];
-type?: number[];
-teamId?: number[];
-tags?: string[];
-enabled?: boolean;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	type?: number[];
+	teamId?: number[];
+	tags?: string[];
+	enabled?: boolean;
 };

@@ -26,10 +26,7 @@ const getChatHistory = async ({ chatId, ...params }) => {
 	]);
 
 	try {
-		const response = await getMessages().catalogGetHistory(
-			chatId,
-			listParams,
-		);
+		const response = await getMessages().catalogGetHistory(chatId, listParams);
 		const { messages, peers, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

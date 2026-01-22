@@ -6,6 +6,6 @@
  */
 
 export interface ApiDeleteOAuthServiceRequest {
-  id?: string[];
-  permanent?: boolean;
+	id?: string[];
+	permanent?: boolean;
 }

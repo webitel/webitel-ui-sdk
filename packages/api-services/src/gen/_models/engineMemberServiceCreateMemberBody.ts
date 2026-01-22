@@ -9,15 +9,15 @@ import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommu
 import type { EngineMemberServiceCreateMemberBodyVariables } from './engineMemberServiceCreateMemberBodyVariables';
 
 export interface EngineMemberServiceCreateMemberBody {
-  agent?: EngineLookup;
-  bucket?: EngineLookup;
-  communications?: EngineMemberCommunicationCreateRequest[];
-  domainId?: string;
-  expireAt?: string;
-  minOfferingAt?: string;
-  name?: string;
-  priority?: number;
-  skill?: EngineLookup;
-  timezone?: EngineLookup;
-  variables?: EngineMemberServiceCreateMemberBodyVariables;
+	agent?: EngineLookup;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	domainId?: string;
+	expireAt?: string;
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	timezone?: EngineLookup;
+	variables?: EngineMemberServiceCreateMemberBodyVariables;
 }

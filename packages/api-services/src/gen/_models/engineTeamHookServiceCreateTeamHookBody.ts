@@ -4,12 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { EngineTeamHookEvent } from './engineTeamHookEvent';
+
 import type { EngineLookup } from './engineLookup';
+import type { EngineTeamHookEvent } from './engineTeamHookEvent';
 
 export interface EngineTeamHookServiceCreateTeamHookBody {
-  enabled?: boolean;
-  event?: EngineTeamHookEvent;
-  properties?: string[];
-  schema?: EngineLookup;
+	enabled?: boolean;
+	event?: EngineTeamHookEvent;
+	properties?: string[];
+	schema?: EngineLookup;
 }

@@ -7,7 +7,7 @@
 import type { ApiUserPresence } from './apiUserPresence';
 
 export interface ApiSetStatusRequest {
-  fields?: string[];
-  /** BODY: partial modifications */
-  publish?: ApiUserPresence;
+	fields?: string[];
+	/** BODY: partial modifications */
+	publish?: ApiUserPresence;
 }

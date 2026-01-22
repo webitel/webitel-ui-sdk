@@ -6,7 +6,7 @@
  */
 
 export interface EngineCreateOutboundResourceDisplayRequest {
-  display?: string;
-  domainId?: string;
-  resourceId?: string;
+	display?: string;
+	domainId?: string;
+	resourceId?: string;
 }

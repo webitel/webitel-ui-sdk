@@ -9,8 +9,8 @@
  * BODY: partial modifications
  */
 export type PresenceSetStatusBodyPublish = {
-  expires?: number;
-  note?: string;
-  status?: string;
-  timestamp?: string;
+	expires?: number;
+	note?: string;
+	status?: string;
+	timestamp?: string;
 };

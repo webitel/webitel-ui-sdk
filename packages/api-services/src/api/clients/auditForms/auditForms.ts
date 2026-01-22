@@ -1,12 +1,12 @@
 import {
-	getAuditFormService,
-	searchAuditFormQueryParams,
-	patchAuditFormBody,
-	updateAuditFormBody,
 	createAuditFormBody,
+	getAuditFormService,
+	patchAuditFormBody,
+	searchAuditFormQueryParams,
+	updateAuditFormBody,
 } from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -14,36 +14,38 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	translateError,
 	sanitize,
 	snakeToCamel,
-  starToSearch,
+	starToSearch,
+	translateError,
 } from '../../transformers';
 
 const itemResponseHandler = (response) => ({
 	...response,
-	questions: response.questions?.map((question) => {
-		if (question.type === EngineAuditQuestionType.QuestionScore) {
-			return {
-				...question,
-				max: question.max || 1,
-				min: question.min || 0,
-				required: question.required || false,
-				question: question.question || '',
-			};
-		}
-		if (question.type === EngineAuditQuestionType.QuestionOption) {
-			return {
-				...question,
-				options: question.options?.map((option) => ({
-					...option,
-					name: option.name || '',
-					score: option.score || 0,
-				})) || [],
-			};
-		}
-		return question;
-	}) || [],
+	questions:
+		response.questions?.map((question) => {
+			if (question.type === EngineAuditQuestionType.QuestionScore) {
+				return {
+					...question,
+					max: question.max || 1,
+					min: question.min || 0,
+					required: question.required || false,
+					question: question.question || '',
+				};
+			}
+			if (question.type === EngineAuditQuestionType.QuestionOption) {
+				return {
+					...question,
+					options:
+						question.options?.map((option) => ({
+							...option,
+							name: option.name || '',
+							score: option.score || 0,
+						})) || [],
+				};
+			}
+			return question;
+		}) || [],
 });
 
 const getAuditFormsList = async (params) => {
@@ -53,13 +55,13 @@ const getAuditFormsList = async (params) => {
 
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-    (params) => ({ ...params, q: params?.q || params?.search }),
-    starToSearch('q'),
-    starToSearch('question'),
-    (params) => ({
-      ...params,
-      fields: ['id', 'editable', ...(params?.fields || [])],
-    }),
+		(params) => ({ ...params, q: params?.q || params?.search }),
+		starToSearch('q'),
+		starToSearch('question'),
+		(params) => ({
+			...params,
+			fields: ['id', 'editable', ...(params?.fields || [])],
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);

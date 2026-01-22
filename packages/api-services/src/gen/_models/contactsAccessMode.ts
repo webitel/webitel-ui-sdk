@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ContactsAccessMode = typeof ContactsAccessMode[keyof typeof ContactsAccessMode];
-
+export type ContactsAccessMode =
+	(typeof ContactsAccessMode)[keyof typeof ContactsAccessMode];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ContactsAccessMode = {
-  Read: 'READ',
-  Write: 'WRITE',
-  Delete: 'DELETE',
+	Read: 'READ',
+	Write: 'WRITE',
+	Delete: 'DELETE',
 } as const;

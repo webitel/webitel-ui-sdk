@@ -6,5 +6,5 @@
  */
 
 export interface StorageDeleteFilesRequest {
-  id?: string[];
+	id?: string[];
 }

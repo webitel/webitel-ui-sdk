@@ -4,23 +4,24 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+
+import type { EngineLookup } from './engineLookup';
 import type { EngineTriggerEventType } from './engineTriggerEventType';
 import type { EngineTriggerObjectType } from './engineTriggerObjectType';
-import type { EngineLookup } from './engineLookup';
 import type { EngineTriggerType } from './engineTriggerType';
 import type { EngineTriggerVariables } from './engineTriggerVariables';
 
 export interface EngineTrigger {
-  description?: string;
-  enabled?: boolean;
-  event?: EngineTriggerEventType;
-  expression?: string;
-  id?: number;
-  name?: string;
-  object?: EngineTriggerObjectType;
-  schema?: EngineLookup;
-  timeout?: number;
-  timezone?: EngineLookup;
-  type?: EngineTriggerType;
-  variables?: EngineTriggerVariables;
+	description?: string;
+	enabled?: boolean;
+	event?: EngineTriggerEventType;
+	expression?: string;
+	id?: number;
+	name?: string;
+	object?: EngineTriggerObjectType;
+	schema?: EngineLookup;
+	timeout?: number;
+	timezone?: EngineLookup;
+	type?: EngineTriggerType;
+	variables?: EngineTriggerVariables;
 }

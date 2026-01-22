@@ -6,5 +6,5 @@
  */
 
 export type ActivityWorkspaceWidgetParams = {
-fields?: string[];
+	fields?: string[];
 };

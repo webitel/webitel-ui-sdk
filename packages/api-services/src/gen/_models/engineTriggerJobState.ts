@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerJobState = typeof EngineTriggerJobState[keyof typeof EngineTriggerJobState];
-
+export type EngineTriggerJobState =
+	(typeof EngineTriggerJobState)[keyof typeof EngineTriggerJobState];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerJobState = {
-  Idle: 'idle',
-  Active: 'active',
-  Done: 'done',
-  Error: 'error',
+	Idle: 'idle',
+	Active: 'active',
+	Done: 'done',
+	Error: 'error',
 } as const;

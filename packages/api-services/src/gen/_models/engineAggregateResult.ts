@@ -6,5 +6,5 @@
  */
 
 export interface EngineAggregateResult {
-  name?: string;
+	name?: string;
 }

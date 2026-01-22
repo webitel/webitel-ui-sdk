@@ -6,41 +6,31 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type {
-  FtsSearchResponse,
-  SearchParams
-} from '.././_models';
+import type { FtsSearchResponse, SearchParams } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getFtsservice =
+		// --- title end
+		() => {
+			// --- header end
+			const search = <TData = AxiosResponse<FtsSearchResponse>>(
+				params?: SearchParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/search', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return { search };
+		};
+export type SearchResult = AxiosResponse<FtsSearchResponse>;
 
-  export const 
-            // --- title start
-            getFtsservice
-            // --- title end
-           = () => {
-
-            // --- header end
-          const search = <TData = AxiosResponse<FtsSearchResponse>>(
-    params?: SearchParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/search`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {search}};
-export type SearchResult = AxiosResponse<FtsSearchResponse>
-
-            // --- footer end
-          
+// --- footer end

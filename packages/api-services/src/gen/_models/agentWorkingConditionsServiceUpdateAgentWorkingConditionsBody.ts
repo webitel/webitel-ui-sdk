@@ -7,5 +7,5 @@
 import type { WfmAgentWorkingConditions } from './wfmAgentWorkingConditions';
 
 export type AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody = {
-  item?: WfmAgentWorkingConditions;
+	item?: WfmAgentWorkingConditions;
 };

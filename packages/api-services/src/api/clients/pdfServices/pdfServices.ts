@@ -1,9 +1,9 @@
 import {
-  createCallExportBody,
-  createScreenrecordingExportBody,
-  listScreenrecordingExportsQueryParams,
+	createCallExportBody,
+	createScreenrecordingExportBody,
+	getPdfService,
 	listCallExportsQueryParams,
-  getPdfService,
+	listScreenrecordingExportsQueryParams,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -13,27 +13,32 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-  sanitize,
+	sanitize,
 	snakeToCamel,
 } from '../../transformers';
 
 const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(createScreenrecordingExportBody)),
+		sanitize(
+			getShallowFieldsToSendFromZodSchema(createScreenrecordingExportBody),
+		),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getPdfService().createScreenrecordingExport(agentId, item);
+		const response = await getPdfService().createScreenrecordingExport(
+			agentId,
+			item,
+		);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+		throw applyTransform(err, [notify]);
+	}
 };
 
 const listScreenrecordingExports = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    listScreenrecordingExportsQueryParams,
+		listScreenrecordingExportsQueryParams,
 	);
 
 	const { page, size, sort } = applyTransform(params, [
@@ -43,11 +48,14 @@ const listScreenrecordingExports = async (params: any) => {
 	]);
 
 	try {
-		const response = await getPdfService().listScreenrecordingExports(params.agentId, {
-			page,
-			size,
-			sort
-		});
+		const response = await getPdfService().listScreenrecordingExports(
+			params.agentId,
+			{
+				page,
+				size,
+				sort,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -76,7 +84,7 @@ const createCallExport = async ({ callId, itemInstance }) => {
 
 const listCallExports = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    listCallExportsQueryParams,
+		listCallExportsQueryParams,
 	);
 
 	const { page, size, sort } = applyTransform(params, [
@@ -89,7 +97,7 @@ const listCallExports = async (params: any) => {
 		const response = await getPdfService().listCallExports(params.callId, {
 			page,
 			size,
-			sort
+			sort,
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -113,9 +121,9 @@ const deleteExport = async (id: string) => {
 };
 
 export const PdfServicesAPI = {
-  createScreenrecordingExport,
+	createScreenrecordingExport,
 	getList: listScreenrecordingExports,
-  createCallExport,
+	createCallExport,
 	listCallExports,
-  delete: deleteExport,
+	delete: deleteExport,
 };

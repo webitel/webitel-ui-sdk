@@ -6,9 +6,9 @@
  */
 
 export type ReadUser2Params = {
-id?: string;
-/**
- * partial output
- */
-fields?: string[];
+	id?: string;
+	/**
+	 * partial output
+	 */
+	fields?: string[];
 };

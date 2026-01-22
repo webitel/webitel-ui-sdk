@@ -4,114 +4,564 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
-
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
 import type {
-  WebitelCasesLocateStatusConditionResponse,
-  WebitelCasesStatusCondition,
-  WebitelCasesStatusConditionList
+	WebitelCasesLocateStatusConditionResponse,
+	WebitelCasesStatusCondition,
+	WebitelCasesStatusConditionList,
 } from '.././_models';
 
+export const getListStatusConditionsResponseMock = (
+	overrideResponse: Partial<WebitelCasesStatusConditionList> = {},
+): WebitelCasesStatusConditionList => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			description: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			initial: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			statusId: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getListStatusConditionsResponseMock = (overrideResponse: Partial< WebitelCasesStatusConditionList > = {}): WebitelCasesStatusConditionList => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})
+export const getCreateStatusConditionResponseMock = (
+	overrideResponse: Partial<WebitelCasesStatusCondition> = {},
+): WebitelCasesStatusCondition => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusId: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getCreateStatusConditionResponseMock = (overrideResponse: Partial< WebitelCasesStatusCondition > = {}): WebitelCasesStatusCondition => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getDeleteStatusConditionResponseMock = (
+	overrideResponse: Partial<WebitelCasesStatusCondition> = {},
+): WebitelCasesStatusCondition => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusId: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getDeleteStatusConditionResponseMock = (overrideResponse: Partial< WebitelCasesStatusCondition > = {}): WebitelCasesStatusCondition => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getLocateStatusConditionResponseMock = (
+	overrideResponse: Partial<WebitelCasesLocateStatusConditionResponse> = {},
+): WebitelCasesLocateStatusConditionResponse => ({
+	status: faker.helpers.arrayElement([
+		{
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			description: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			initial: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			statusId: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getLocateStatusConditionResponseMock = (overrideResponse: Partial< WebitelCasesLocateStatusConditionResponse > = {}): WebitelCasesLocateStatusConditionResponse => ({status: faker.helpers.arrayElement([{createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getUpdateStatusCondition2ResponseMock = (
+	overrideResponse: Partial<WebitelCasesStatusCondition> = {},
+): WebitelCasesStatusCondition => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusId: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getUpdateStatusCondition2ResponseMock = (overrideResponse: Partial< WebitelCasesStatusCondition > = {}): WebitelCasesStatusCondition => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getUpdateStatusConditionResponseMock = (
+	overrideResponse: Partial<WebitelCasesStatusCondition> = {},
+): WebitelCasesStatusCondition => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusId: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getUpdateStatusConditionResponseMock = (overrideResponse: Partial< WebitelCasesStatusCondition > = {}): WebitelCasesStatusCondition => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), final: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), initial: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), statusId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getListStatusConditionsMockHandler = (
+	overrideResponse?:
+		| WebitelCasesStatusConditionList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelCasesStatusConditionList>
+				| WebitelCasesStatusConditionList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/statuses/:statusId/status',
+		async (info) => {
+			await delay(1000);
 
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getListStatusConditionsResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getListStatusConditionsMockHandler = (overrideResponse?: WebitelCasesStatusConditionList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesStatusConditionList> | WebitelCasesStatusConditionList), options?: RequestHandlerOptions) => {
-  return http.get('*/statuses/:statusId/status', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getListStatusConditionsResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getCreateStatusConditionMockHandler = (
+	overrideResponse?:
+		| WebitelCasesStatusCondition
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/statuses/:statusId/status',
+		async (info) => {
+			await delay(1000);
 
-export const getCreateStatusConditionMockHandler = (overrideResponse?: WebitelCasesStatusCondition | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition), options?: RequestHandlerOptions) => {
-  return http.post('*/statuses/:statusId/status', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getCreateStatusConditionResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getCreateStatusConditionResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getDeleteStatusConditionMockHandler = (overrideResponse?: WebitelCasesStatusCondition | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition), options?: RequestHandlerOptions) => {
-  return http.delete('*/statuses/:statusId/status/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getDeleteStatusConditionResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getDeleteStatusConditionMockHandler = (
+	overrideResponse?:
+		| WebitelCasesStatusCondition
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/statuses/:statusId/status/:id',
+		async (info) => {
+			await delay(1000);
 
-export const getLocateStatusConditionMockHandler = (overrideResponse?: WebitelCasesLocateStatusConditionResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateStatusConditionResponse> | WebitelCasesLocateStatusConditionResponse), options?: RequestHandlerOptions) => {
-  return http.get('*/statuses/:statusId/status/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getLocateStatusConditionResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getDeleteStatusConditionResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getUpdateStatusCondition2MockHandler = (overrideResponse?: WebitelCasesStatusCondition | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition), options?: RequestHandlerOptions) => {
-  return http.patch('*/statuses/:statusId/status/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdateStatusCondition2ResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getLocateStatusConditionMockHandler = (
+	overrideResponse?:
+		| WebitelCasesLocateStatusConditionResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelCasesLocateStatusConditionResponse>
+				| WebitelCasesLocateStatusConditionResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/statuses/:statusId/status/:id',
+		async (info) => {
+			await delay(1000);
 
-export const getUpdateStatusConditionMockHandler = (overrideResponse?: WebitelCasesStatusCondition | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition), options?: RequestHandlerOptions) => {
-  return http.put('*/statuses/:statusId/status/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdateStatusConditionResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getLocateStatusConditionResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateStatusCondition2MockHandler = (
+	overrideResponse?:
+		| WebitelCasesStatusCondition
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/statuses/:statusId/status/:id',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdateStatusCondition2ResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateStatusConditionMockHandler = (
+	overrideResponse?:
+		| WebitelCasesStatusCondition
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<WebitelCasesStatusCondition> | WebitelCasesStatusCondition),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/statuses/:statusId/status/:id',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdateStatusConditionResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 export const getStatusConditionsMock = () => [
-  getListStatusConditionsMockHandler(),
-  getCreateStatusConditionMockHandler(),
-  getDeleteStatusConditionMockHandler(),
-  getLocateStatusConditionMockHandler(),
-  getUpdateStatusCondition2MockHandler(),
-  getUpdateStatusConditionMockHandler()]
+	getListStatusConditionsMockHandler(),
+	getCreateStatusConditionMockHandler(),
+	getDeleteStatusConditionMockHandler(),
+	getLocateStatusConditionMockHandler(),
+	getUpdateStatusCondition2MockHandler(),
+	getUpdateStatusConditionMockHandler(),
+];

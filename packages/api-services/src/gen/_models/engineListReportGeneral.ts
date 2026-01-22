@@ -4,11 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { EngineQueueReportGeneralAgentStatus } from './engineQueueReportGeneralAgentStatus';
+
 import type { EngineQueueReportGeneral } from './engineQueueReportGeneral';
+import type { EngineQueueReportGeneralAgentStatus } from './engineQueueReportGeneralAgentStatus';
 
 export interface EngineListReportGeneral {
-  aggs?: EngineQueueReportGeneralAgentStatus;
-  items?: EngineQueueReportGeneral[];
-  next?: boolean;
+	aggs?: EngineQueueReportGeneralAgentStatus;
+	items?: EngineQueueReportGeneral[];
+	next?: boolean;
 }

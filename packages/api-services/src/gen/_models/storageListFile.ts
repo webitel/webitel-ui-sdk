@@ -7,6 +7,6 @@
 import type { StorageFile } from './storageFile';
 
 export interface StorageListFile {
-  items?: StorageFile[];
-  next?: boolean;
+	items?: StorageFile[];
+	next?: boolean;
 }

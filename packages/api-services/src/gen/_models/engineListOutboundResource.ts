@@ -7,6 +7,6 @@
 import type { EngineOutboundResource } from './engineOutboundResource';
 
 export interface EngineListOutboundResource {
-  items?: EngineOutboundResource[];
-  next?: boolean;
+	items?: EngineOutboundResource[];
+	next?: boolean;
 }

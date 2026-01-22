@@ -6,8 +6,8 @@
  */
 
 export type CreateRelatedCaseParams = {
-/**
- * Fields to include in the response.
- */
-fields?: string[];
+	/**
+	 * Fields to include in the response.
+	 */
+	fields?: string[];
 };
