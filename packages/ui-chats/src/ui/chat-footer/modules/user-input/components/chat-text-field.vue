@@ -3,7 +3,7 @@
     ref="chatTextFieldInput"
     class="chat-text-field"
     :model-value="textModel"
-    :placeholder="placeholder"
+    :placeholder="t('@webitel/ui-chats.ui.messaging.messagePlaceholder')"
     :size="size"
     autoresize
     @update:model-value="send"
@@ -21,10 +21,6 @@ import { useI18n } from "vue-i18n";
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
 
 const { t } = useI18n();
-
-const placeholder = computed(() =>
-	t("@webitel/ui-chats.ui.messaging.messagePlaceholder"),
-);
 
 const textModel = defineModel<MaybeRef<string>>("text", {
 	required: true,
