@@ -1,17 +1,15 @@
 <script setup>
-import Docs from './wt-icon-btn-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleIconBtn from './examples/example-icon-btn.vue';
 </script>
 
-# WtIconBtn
+# `wt-icon-btn.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
-### Note: all wt=icon props are passed as "$attrs"
+### Note: all wt-icon props are passed as "$attrs"
 
 ## Example
 

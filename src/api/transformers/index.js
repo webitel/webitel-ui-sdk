@@ -12,17 +12,17 @@ import snakeToCamel from './snakeToCamel/snakeToCamel.transformer.js';
 import starToSearch from './starToSearch/starToSearch.transformer.js';
 
 export {
-  addQueryParamsToUrl,
-  camelToSnake,
-  generateUrl,
-  log,
-  merge,
-  mergeEach,
-  notify,
-  sanitize,
-  skipIf,
-  snakeToCamel,
-  starToSearch,
+	addQueryParamsToUrl,
+	camelToSnake,
+	generateUrl,
+	log,
+	merge,
+	mergeEach,
+	notify,
+	sanitize,
+	skipIf,
+	snakeToCamel,
+	starToSearch,
 };
 
 export default applyTransform;

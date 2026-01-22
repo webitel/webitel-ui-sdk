@@ -4,21 +4,21 @@ import type { WtObject } from '../../../../enums';
 import type { createUserAccessStore } from '../../../../modules/Userinfo/v2/stores/accessStore';
 
 export type CreateUserAccessControlComposableParams =
-  ReturnType<createUserAccessStore>;
+	ReturnType<createUserAccessStore>;
 
 export type UseUserAccessControlComposableOptions =
-  | WtObject
-  | {
-      resource?: WtObject;
-      useUpdateAccessAsAllMutableChecksSource?: boolean;
-    };
+	| WtObject
+	| {
+			resource?: WtObject;
+			useUpdateAccessAsAllMutableChecksSource?: boolean;
+	  };
 
 export interface UseAccessControlReturn {
-  hasReadAccess: Ref<boolean>;
-  hasCreateAccess: Ref<boolean>;
-  hasUpdateAccess: Ref<boolean>;
-  hasDeleteAccess: Ref<boolean>;
+	hasReadAccess: Ref<boolean>;
+	hasCreateAccess: Ref<boolean>;
+	hasUpdateAccess: Ref<boolean>;
+	hasDeleteAccess: Ref<boolean>;
 
-  hasSaveActionAccess: Ref<boolean>;
-  disableUserInput: Ref<boolean>;
+	hasSaveActionAccess: Ref<boolean>;
+	disableUserInput: Ref<boolean>;
 }

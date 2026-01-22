@@ -4,11 +4,11 @@
  * */
 
 const WebchatAlternativeChannel = Object.freeze({
-  VIBER: 'viber',
-  WHATSAPP: 'whatsapp',
-  TELEGRAM: 'telegram',
-  MESSENGER: 'messenger',
-  EMAIL: 'email',
+	VIBER: 'viber',
+	WHATSAPP: 'whatsapp',
+	TELEGRAM: 'telegram',
+	MESSENGER: 'messenger',
+	EMAIL: 'email',
 });
 
 export default WebchatAlternativeChannel;

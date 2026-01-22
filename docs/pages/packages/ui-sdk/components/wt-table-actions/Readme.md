@@ -1,17 +1,17 @@
 <script setup>
+import Specs from './component-specs.vue';
+import ExampleTableActions from './examples/example-table-actions.vue';
 </script>
 
-# WtTableActions
+# `wt-table-actions.vue`
 
 > [!CAUTION]
 > Увага! Як робитимете шось нове (або перероблятимете старе), то викиньте той `wt-table-actions`,
 > і заюзайте [`wt-actions-bar`](../wt-action-bar/Readme.md).
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Table Actions
 

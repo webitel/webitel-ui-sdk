@@ -27,7 +27,9 @@ import RoleRow from './permissions-role-row.vue';
 
 const attrs = useAttrs();
 
-const model = defineModel({ required: true });
+const model = defineModel({
+	required: true,
+});
 </script>
 
 <style lang="scss" scoped></style>

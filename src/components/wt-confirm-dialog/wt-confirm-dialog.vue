@@ -53,43 +53,46 @@
 import { ref, useAttrs } from 'vue';
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  deleteMessage: {
-    type: String,
-    default: '',
-  },
-  subject: {
-    type: String,
-    default: '',
-  },
-  callback: {
-    type: Function,
-    required: true,
-  },
+	title: {
+		type: String,
+		required: true,
+	},
+	deleteMessage: {
+		type: String,
+		default: '',
+	},
+	subject: {
+		type: String,
+		default: '',
+	},
+	callback: {
+		type: Function,
+		required: true,
+	},
 });
 
-const emit = defineEmits(['close', 'confirm']);
+const emit = defineEmits([
+	'close',
+	'confirm',
+]);
 
 const attrs = useAttrs();
 
 const isDeleting = ref(false);
 
 function close() {
-  emit('close');
+	emit('close');
 }
 
 async function confirm() {
-  try {
-    isDeleting.value = true;
+	try {
+		isDeleting.value = true;
 
-    await props.callback();
-    close();
-  } finally {
-    isDeleting.value = false;
-  }
+		await props.callback();
+		close();
+	} finally {
+		isDeleting.value = false;
+	}
 }
 </script>
 

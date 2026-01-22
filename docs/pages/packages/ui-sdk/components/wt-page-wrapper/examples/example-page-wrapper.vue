@@ -13,5 +13,3 @@
     </template>
   </wt-page-wrapper>
 </template>
-
-<style lang="scss" scoped></style>

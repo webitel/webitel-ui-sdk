@@ -1,71 +1,41 @@
 <template>
   <div class="wt-header-actions">
-    <wt-icon-btn
-      v-clickaway="close"
-      v-tooltip="$t('webitelUI.headerActions.account')"
-      :class="{ active: isOpened }"
-      class="wt-header-actions__btn"
-      icon="account"
-      @click="isOpened = !isOpened"
-    />
+    <wt-icon-btn v-clickaway="close" v-tooltip="$t('webitelUI.headerActions.account')" :class="{ active: isOpened }"
+      class="wt-header-actions__btn" icon="account" @click="isOpened = !isOpened" />
 
     <transition name="fade">
-      <section
-        v-show="isOpened"
-        class="wt-header-actions__panel-wrapper"
-      >
-        <header
-          v-if="isHeader"
-          class="wt-header-actions__header"
-        >
-          <h3 class="wt-header-actions__name">
+      <section v-show="isOpened" class="wt-header-actions__panel-wrapper">
+        <header v-if="isHeader" class="wt-header-actions__header">
+          <h3 class="wt-header-actions__name typo-subtitle-1">
             {{ userName }}
           </h3>
-          <p class="wt-header-actions__account">
+          <p class="wt-header-actions__account typo-body-1">
             {{ userAccount }}
           </p>
         </header>
         <ul class="wt-header-actions__actions-wrapper">
           <li class="wt-header-actions__action">
-            <a
-              class="wt-header-actions__action__link"
-              href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform"
-              target="_blank"
-              @click="close"
-            >
+            <a class="wt-header-actions__action__link typo-body-1"
+              href="https://docs.webitel.com/display/WEP/Webitel+Elastic+Platform" target="_blank" @click="close">
               <wt-icon icon="docs" />
               <span>{{ $t('webitelUI.headerActions.docs') }}</span>
             </a>
           </li>
           <li class="wt-header-actions__action">
-            <a
-              class="wt-header-actions__action__link"
-              @click.prevent="settings"
-            >
+            <a class="wt-header-actions__action__link typo-body-1" @click.prevent="settings">
               <wt-icon icon="settings" />
               <span>{{ $t('webitelUI.headerActions.settings') }}</span>
             </a>
           </li>
-          <li
-            class="wt-header-actions__action wt-header-actions__action--logout"
-          >
-            <a
-              class="wt-header-actions__action__link"
-              @click.prevent="logout"
-            >
-              <wt-icon
-                color="error"
-                icon="logout"
-              />
+          <li class="wt-header-actions__action wt-header-actions__action--logout">
+            <a class="wt-header-actions__action__link typo-body-1" @click.prevent="logout">
+              <wt-icon color="error" icon="logout" />
               <span>{{ $t('webitelUI.headerActions.logout') }}</span>
             </a>
           </li>
         </ul>
-        <footer
-          v-if="isFooter"
-          class="wt-header-actions__footer"
-        >
-          <p class="wt-header-actions__build__version">
+        <footer v-if="isFooter" class="wt-header-actions__footer">
+          <p class="wt-header-actions__build__version typo-caption">
             {{ buildVersion }}
           </p>
         </footer>
@@ -78,13 +48,30 @@
 import { FormatDateMode } from '@webitel/ui-sdk/enums';
 import { formatDate } from '@webitel/ui-sdk/utils';
 
+/**
+ * @component WtHeaderActions
+ * @description Header actions component with user info and build info display
+ * 
+ * @emits {void} settings - Fires when settings button is clicked
+ * @emits {void} logout - Fires when logout button is clicked
+ */
 export default {
   name: 'WtHeaderActions',
   props: {
+    /**
+     * User info object. Should have preferredUsername or account and name or username fields for representation.
+     * In most cases, this is the data returned from /userinfo api.
+     * @type {Object}
+     * @default {}
+     */
     user: {
       type: Object,
       default: () => ({}),
     },
+    /**
+     * Build info object. Should have "release" and "build" string fields for representation.
+     * @type {Object}
+     */
     buildInfo: {
       type: Object,
     },
@@ -117,11 +104,19 @@ export default {
   },
 
   methods: {
+    /**
+     * Emits settings event when settings button is clicked
+     * @emits settings
+     */
     settings() {
       this.$emit('settings');
       this.close();
     },
 
+    /**
+     * Emits logout event when logout button is clicked
+     * @emits logout
+     */
     logout() {
       this.$emit('logout');
       this.close();
@@ -134,9 +129,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-header-actions {
   display: flex;
   position: relative;
@@ -147,7 +140,7 @@ export default {
 .wt-header-actions__panel-wrapper {
   display: flex;
   position: absolute;
-  top: 100%; // icon
+  top: 100%;
   right: 0;
   flex-direction: column;
   gap: var(--wt-header-actions-content-sections-gap);
@@ -161,13 +154,11 @@ export default {
 }
 
 .wt-header-actions__name {
-  @extend %typo-subtitle-1;
   color: var(--text-main-color);
   white-space: nowrap;
 }
 
 .wt-header-actions__account {
-  @extend %typo-body-1;
   color: var(--text-main-color);
   white-space: nowrap;
 }
@@ -175,32 +166,30 @@ export default {
 .wt-header-actions__action {
   display: flex;
   transition: var(--transition);
+}
 
-  &:hover {
-    background: var(--wt-header-actions-action-bg-color--hover);
-  }
+.wt-header-actions__action:hover {
+  background: var(--wt-header-actions-action-bg-color--hover);
+}
 
-  .wt-header-actions__action__link {
-    @extend %typo-body-1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: var(--wt-header-actions-action-link-padding);
-    width: 100%;
-    color: var(--text-main-color);
+.wt-header-actions__action__link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: var(--wt-header-actions-action-link-padding);
+  width: 100%;
+  color: var(--text-main-color);
+}
 
-    .wt-icon {
-      margin-right: var(--wt-header-actions-action-link-padding);
-    }
-  }
+.wt-header-actions__action__link .wt-icon {
+  margin-right: var(--wt-header-actions-action-link-padding);
+}
 
-  &--logout .wt-header-actions__action__link {
-    color: var(--error-color);
-  }
+.wt-header-actions__action--logout .wt-header-actions__action__link {
+  color: var(--error-color);
 }
 
 .wt-header-actions__build__version {
-  @extend %typo-caption;
   color: var(--text-main-color);
   white-space: nowrap;
 }

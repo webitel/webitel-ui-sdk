@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-error-page-docs.vue';
+import Specs from './component-specs.vue';
 import Example404ErrorPage from './examples/example-404-error-page.vue';
 import Example403ErrorPage from './examples/example-403-error-page.vue';
 </script>
 
-# WtErrorPage
+# `wt-error-page.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example 404 Error Page
 

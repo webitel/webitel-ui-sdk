@@ -1,23 +1,23 @@
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
 import {
-  AgentStatus,
-  CallDirection,
-  ChannelState,
-  ChannelType,
-  EngineRoutingSchemaType,
+	AgentStatus,
+	CallDirection,
+	ChannelState,
+	ChannelType,
+	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
-  AdminSections,
-  AuditorSections,
-  ChatGatewayProvider,
-  CrmSections,
-  CrmSections as CrmSectionsNew,
-  IconAction,
-  QueueType,
-  RelativeDatetimeValue,
-  SupervisorSections,
-  WebitelApplications,
+	AdminSections,
+	AuditorSections,
+	ChatGatewayProvider,
+	CrmSections,
+	CrmSections as CrmSectionsNew,
+	IconAction,
+	QueueType,
+	RelativeDatetimeValue,
+	SupervisorSections,
+	WebitelApplications,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';

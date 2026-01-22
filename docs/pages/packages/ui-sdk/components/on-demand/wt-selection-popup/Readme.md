@@ -11,7 +11,9 @@ import ExampleSelectionPopup from './examples/example-selection-popup.vue';
 
 ## Example Selection Popup
 
+::: raw
 <ExampleSelectionPopup />
+:::
 
 ::: details Code
 <<< ./examples/example-selection-popup.vue

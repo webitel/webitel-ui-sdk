@@ -19,10 +19,7 @@ import AuditForm from '@webitel/ui-sdk/src/modules/AuditForm/components/audit-fo
     </code></pre>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
       <div>
-        <audit-form
-          v-model:questions="auditQuestions"
-          mode="create"
-        />
+        <audit-form v-model:questions="auditQuestions" mode="create" />
         <article>
           <h3>Questions</h3>
           <pre><code class="language-javascript">
@@ -31,11 +28,7 @@ import AuditForm from '@webitel/ui-sdk/src/modules/AuditForm/components/audit-fo
         </article>
       </div>
       <div>
-        <audit-form
-          v-model:result="auditResult"
-          :questions="auditQuestions"
-          mode="fill"
-        />
+        <audit-form v-model:result="auditResult" :questions="auditQuestions" mode="fill" />
         <article>
           <h3>Result</h3>
           <pre><code class="language-javascript">
@@ -135,5 +128,3 @@ onMounted(() => {
   Prism.highlightAll();
 });
 </script>
-
-<style lang="scss" scoped></style>

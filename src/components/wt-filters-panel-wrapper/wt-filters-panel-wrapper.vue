@@ -1,158 +1,157 @@
 <template>
-  <article
-    :class="{ 'filters-panel-wrapper--opened': isOpened }"
-    class="filters-panel-wrapper"
-  >
+  <article :class="{ 'filters-panel-wrapper--opened': isOpened }" class="filters-panel-wrapper">
     <div class="filters-wrap">
       <slot />
     </div>
     <div class="actions-wrap">
-      <wt-table-actions
-        :icons="tableActionIcons"
-        @input="tableActionsHandler"
-      />
+      <wt-table-actions :icons="tableActionIcons" @input="tableActionsHandler" />
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'FiltersPanelWrapper',
-  props: {
-    tableActionIcons: {
-      type: Array,
-      default: () => ['filter-reset', 'settings'],
-    },
-    isOpened: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  data() {
-    return {
-      localIsOpened: this.isOpened,
-      filtersCount: 0,
-    }
-  },
-  methods: {
-    tableActionsHandler(eventName) {
-      switch (eventName) {
-        case 'filterReset':
-          this.resetFilters();
-          break;
-        case 'settings':
-          this.toggleFiltersExpansion();
-          break;
-        default:
-      }
-    },
-    toggleFiltersExpansion() {
-      this.localIsOpened = !this.localIsOpened;
-    },
-    resetFilters() {
-      this.$emit('reset');
-    },
-  },
+	name: 'FiltersPanelWrapper',
+	/**
+	 * @emits {void} reset - Filters reset click event
+	 */
+	props: {
+		/**
+		 * Array of table action icons to display
+		 * @type {Array}
+		 * @default ['filter-reset', 'settings']
+		 */
+		tableActionIcons: {
+			type: Array,
+			default: () => [
+				'filter-reset',
+				'settings',
+			],
+		},
+		/**
+		 * Controls filters panel expansion state
+		 * @type {boolean}
+		 * @default false
+		 */
+		isOpened: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	data() {
+		return {
+			localIsOpened: this.isOpened,
+			filtersCount: 0,
+		};
+	},
+	methods: {
+		tableActionsHandler(eventName) {
+			switch (eventName) {
+				case 'filterReset':
+					this.resetFilters();
+					break;
+				case 'settings':
+					this.toggleFiltersExpansion();
+					break;
+				default:
+			}
+		},
+		toggleFiltersExpansion() {
+			this.localIsOpened = !this.localIsOpened;
+		},
+		resetFilters() {
+			this.$emit('reset');
+		},
+	},
 };
 </script>
 
-<style lang="scss" scoped>
-$actions-width: calc((var(--icon-md-size) + var(--table-actions-icon-gap)));
-
+<style scoped>
 .filters-panel-wrapper {
+  --actions-width: calc(var(--icon-md-size) + var(--table-actions-icon-gap));
   display: flex;
-
-  .filters-wrap {
-    flex: 1;
-  }
-
-  .actions-wrap {
-    display: flex;
-    flex: 0 0 $actions-width;
-    margin-top: 24px;
-    margin-left: auto;
-
-    .wt-table-actions {
-      height: fit-content;
-    }
-  }
 }
 
-// 30px*2 outer paddings, 30px*2 inner paddings, table actions var value
-// -- sass doesnt work with css variables :(
-$width-except-filters: 60px + 60px + 88px;
-$filter-width: 230px;
-$filter-gap: 10px; // var(--spacing-xs)
-@function filters-width($num) {
-  // 1px corrects max width
-  @return ($filter-width * $num) + $filter-gap * $num + $width-except-filters -
-    1px;
+.filters-panel-wrapper .filters-wrap {
+  flex: 1;
 }
 
+.filters-panel-wrapper .actions-wrap {
+  display: flex;
+  flex: 0 0 var(--actions-width);
+  margin-top: 24px;
+  margin-left: auto;
+}
+
+.filters-panel-wrapper .actions-wrap .wt-table-actions {
+  height: fit-content;
+}
+
+/* 30px*2 outer paddings, 30px*2 inner paddings, table actions var value */
+/* Calculated breakpoints: filters-width = (230px * num) + (10px * num) + 208px - 1px */
 .filters-wrap {
   display: grid;
   flex-wrap: wrap;
   grid-gap: var(--spacing-xs);
+  grid-template-columns: repeat(6, 1fr);
+}
 
-  .filters-panel-wrapper & > * {
+.filters-wrap>*:nth-child(n + 7) {
+  display: none;
+}
+
+/* filters-width(6) = 1647px */
+@media (max-width: 1647px) {
+  .filters-wrap {
+    grid-template-columns: repeat(5, 1fr);
   }
 
-  & {
-    grid-template-columns: repeat(6, 1fr);
+  .filters-wrap :deep(> *:nth-child(n + 6)) {
+    display: none;
+  }
+}
 
-    > *:nth-child(n + 7) {
-      display: none;
-    }
+/* filters-width(5) = 1407px */
+@media (max-width: 1407px) {
+  .filters-wrap {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (max-width: filters-width(6)) {
-    & {
-      grid-template-columns: repeat(5, 1fr);
+  .filters-wrap :deep(> *:nth-child(n + 5)) {
+    display: none;
+  }
+}
 
-      :deep(> *:nth-child(n + 6)) {
-        display: none;
-      }
-    }
+/* filters-width(4) = 1167px */
+@media (max-width: 1167px) {
+  .filters-wrap {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: filters-width(5)) {
-    & {
-      grid-template-columns: repeat(4, 1fr);
+  .filters-wrap :deep(> *:nth-child(n + 4)) {
+    display: none;
+  }
+}
 
-      :deep(> *:nth-child(n + 5)) {
-        display: none;
-      }
-    }
+/* filters-width(3) = 927px */
+@media (max-width: 927px) {
+  .filters-wrap {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: filters-width(4)) {
-    & {
-      grid-template-columns: repeat(3, 1fr);
+  .filters-wrap :deep(> *:nth-child(n + 3)) {
+    display: none;
+  }
+}
 
-      :deep(> *:nth-child(n + 4)) {
-        display: none;
-      }
-    }
+/* filters-width(2) = 687px */
+@media (max-width: 687px) {
+  .filters-wrap {
+    grid-template-columns: repeat(1, 1fr);
   }
 
-  @media (max-width: filters-width(3)) {
-    & {
-      grid-template-columns: repeat(2, 1fr);
-
-      :deep(> *:nth-child(n + 3)) {
-        display: none;
-      }
-    }
-  }
-
-  @media (max-width: filters-width(2)) {
-    & {
-      grid-template-columns: repeat(1, 1fr);
-
-      :deep(> *:nth-child(n + 2)) {
-        display: none;
-      }
-    }
+  .filters-wrap :deep(> *:nth-child(n + 2)) {
+    display: none;
   }
 }
 

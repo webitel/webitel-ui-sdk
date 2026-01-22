@@ -35,63 +35,65 @@
 </template>
 
 <script setup lang="ts">
-import {computed, defineEmits, inject} from 'vue';
+import { computed, defineEmits, inject } from 'vue';
 
-import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
-import {ComponentSize} from "../../../../../enums";
-import {ScreenSharingSession, ScreenshotStatus} from "../../../../../modules/CallSession/types";
-import {WtVidstackPlayerSizeProvider} from "../../../types/WtVidstackPlayerSizeProvider";
+import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
+import { ComponentSize } from '../../../../../enums';
+import type {
+	ScreenSharingSession,
+	ScreenshotStatus,
+} from '../../../../../modules/CallSession/types';
+import type { WtVidstackPlayerSizeProvider } from '../../../types/WtVidstackPlayerSizeProvider';
 
 interface Props {
-  session: ScreenSharingSession
-  screenshotStatus: ScreenshotStatus | null
-  screenshotIsLoading: boolean
+	session: ScreenSharingSession;
+	screenshotStatus: ScreenshotStatus | null;
+	screenshotIsLoading: boolean;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'close-session': [],
-  'make-screenshot': [],
-  'toggle-record': [],
-}>()
+	'close-session': [];
+	'make-screenshot': [];
+	'toggle-record': [];
+}>();
 
-const {size} = inject<WtVidstackPlayerSizeProvider>('size');
+const { size } = inject<WtVidstackPlayerSizeProvider>('size');
 
-const recordIcon = computed(() => (props.session.recordings ? 'record-stop' : 'record-start'));
+const recordIcon = computed(() =>
+	props.session.recordings ? 'record-stop' : 'record-start',
+);
 
 const screenShotIcon = computed(() => {
-  switch (props.screenshotStatus) {
-    case 'done':
-      return 'screenshot-done';
-    case 'error':
-      return 'screenshot-false';
-    default:
-      return 'screenshot';
-  }
+	switch (props.screenshotStatus) {
+		case 'done':
+			return 'screenshot-done';
+		case 'error':
+			return 'screenshot-false';
+		default:
+			return 'screenshot';
+	}
 });
 
 const closeSession = () => {
-  emit('close-session')
+	emit('close-session');
 };
 
 const makeScreenshot = () => {
-  emit('make-screenshot')
+	emit('make-screenshot');
 };
 
 const buttonSizeMap = {
-  [ComponentSize.SM]: ComponentSize.SM,
-  [ComponentSize.MD]: ComponentSize.MD,
-  [ComponentSize.LG]: ComponentSize.MD,
-}
+	[ComponentSize.SM]: ComponentSize.SM,
+	[ComponentSize.MD]: ComponentSize.MD,
+	[ComponentSize.LG]: ComponentSize.MD,
+};
 </script>
 
-<style scoped lang="scss">
-.screen-sharing-controls-panel {
-  position: relative;
+<style scoped >.screen-sharing-controls-panel {
+position: relative;
   display: flex;
   justify-content: center;
-}
-</style>
-
+}</style>
 

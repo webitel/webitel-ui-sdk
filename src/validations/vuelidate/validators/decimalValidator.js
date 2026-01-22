@@ -3,9 +3,11 @@
 import { helpers } from '@vuelidate/validators';
 
 const decimalValidator = (count) =>
-  helpers.withParams(
-    { count },
-    (value) => value % 1 == 0 || value.toString().split('.')[1].length <= count,
-  );
+	helpers.withParams(
+		{
+			count,
+		},
+		(value) => value % 1 == 0 || value.toString().split('.')[1].length <= count,
+	);
 
 export default decimalValidator;

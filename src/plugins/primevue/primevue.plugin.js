@@ -29,20 +29,22 @@ import Tooltip from 'primevue/tooltip';
 import WebitelTheme from './theme/webitel-theme.js';
 
 const changeComponentCompatMode = (component) => {
-  component.compatConfig = { MODE: 3 };
+	component.compatConfig = {
+		MODE: 3,
+	};
 
-  return component;
+	return component;
 };
 
 const initPrimevue = (app) => {
-  app.use(PrimeVue, {
-    theme: {
-      preset: WebitelTheme,
-      options: {
-        darkModeSelector: '.theme--dark',
-      },
-    },
-  });
+	app.use(PrimeVue, {
+		theme: {
+			preset: WebitelTheme,
+			options: {
+				darkModeSelector: '.theme--dark',
+			},
+		},
+	});
 
   app.component('PButton', changeComponentCompatMode(PButton));
   app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
@@ -70,7 +72,7 @@ const initPrimevue = (app) => {
   app.component('PInputGroupAddon', changeComponentCompatMode(PInputGroupAddon));
   app.component('PMessage', changeComponentCompatMode(PMessage));
 
-  app.directive('tooltip', Tooltip);
+	app.directive('tooltip', Tooltip);
 };
 
 export default initPrimevue;

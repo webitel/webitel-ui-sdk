@@ -5,5 +5,3 @@
     <template #title> Title Slot </template>
   </wt-page-header>
 </template>
-
-<style lang="scss" scoped></style>

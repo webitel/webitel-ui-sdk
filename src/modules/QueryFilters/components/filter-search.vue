@@ -12,19 +12,24 @@
 import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
-  name: 'FilterSearch',
-  mixins: [baseFilterMixin],
-  props: {
-    filterQuery: {
-      type: String,
-      default: 'search',
-    },
-  },
-  methods: {
-    restoreValue(value) {
-      this.setValue({ filter: this.filterQuery, value });
-    },
-  },
+	name: 'FilterSearch',
+	mixins: [
+		baseFilterMixin,
+	],
+	props: {
+		filterQuery: {
+			type: String,
+			default: 'search',
+		},
+	},
+	methods: {
+		restoreValue(value) {
+			this.setValue({
+				filter: this.filterQuery,
+				value,
+			});
+		},
+	},
 };
 </script>
 

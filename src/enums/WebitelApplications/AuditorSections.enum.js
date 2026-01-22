@@ -8,8 +8,8 @@ import { AuditorSections } from './AuditorSections';
  * use ts enum instead (and don't forget to compile it)
  */
 export default Object.fromEntries(
-  Object.entries(AuditorSections).map(([key, value]) => [
-    upperCase(key).replaceAll(' ', '_'),
-    value,
-  ]),
+	Object.entries(AuditorSections).map(([key, value]) => [
+		upperCase(key).replaceAll(' ', '_'),
+		value,
+	]),
 );

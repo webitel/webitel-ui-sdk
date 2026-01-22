@@ -36,7 +36,7 @@
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
-      <p class="wt-tree-line__label">
+      <p class="wt-tree-line__label typo-body-1">
         {{ label }}
       </p>
       <wt-icon
@@ -176,7 +176,6 @@ const displayActiveState = computed(() => {
   return isSelected.value || props.selectedParent;
 });
 
-
 const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unknown[]) => {
   const value = props.itemData ? node[props.itemData] : node;
 
@@ -191,11 +190,10 @@ const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unk
     }
   }
 
-  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) {
+  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) 
     for (const child of node[props.childrenProp]) {
       toggleSelectionWithChildren(child, select, result);
     }
-  }
 };
 
 const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
@@ -211,13 +209,12 @@ const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
       return true;
     }
 
-    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) {
+    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) 
       for (const child of current[props.childrenProp]) {
         if (findAndDeselect(child, current)) {
           return true;
         }
       }
-    }
 
     return false;
   };
@@ -274,12 +271,11 @@ const selectElement = () => {
     return;
   }
 
-  if (props.allowParent && !props.data[props.childrenProp]) {
+  if (props.allowParent && !props.data[props.childrenProp]) 
     return emit(
       'update:modelValue',
       props.itemData ? props.data[props.itemData] : props.data,
     );
-  }
 
   if (props.data[props.childrenProp]?.length) {
     collapsed.value = !collapsed.value;
@@ -306,9 +302,8 @@ const onOpenParent = () => {
 
 const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
+  if (data[props.searchedProp] && nestedLevel) 
     return true;
-  }
 
   // Check if the object has children
   if (Array.isArray(data[props.childrenProp])) {
@@ -330,7 +325,7 @@ onMounted(() => {
     openParent();
   }
 
-  if (props.data[props.searchedProp]) {
+  if (props.searchedProp && props.data[props.searchedProp]) {
     openParent();
   }
 });
@@ -345,46 +340,42 @@ watch(
 );
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/typography' as *;
-@use './variables.scss' as *;
-
+<style scoped>
 .wt-tree-line {
   display: flex;
   align-items: flex-start;
+}
 
-  &__icon-wrapper {
-    display: flex;
-  }
+.wt-tree-line__icon-wrapper {
+  display: flex;
+}
 
-  &__label-wrapper {
-    display: flex;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    padding: 0 var(--spacing-2xs);
-    color: var(--wt-tree-item-on);
+.wt-tree-line__label-wrapper {
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 0 var(--spacing-2xs);
+  color: var(--wt-tree-item-on);
+}
 
-    &:hover {
-      background: var(--wt-tree-item-hover);
-      color: var(--wt-tree-item-hover-on);
-    }
+.wt-tree-line__label-wrapper:hover {
+  background: var(--wt-tree-item-hover);
+  color: var(--wt-tree-item-hover-on);
+}
 
-    &.searched:not(.active) {
-      background: var(--wt-tree-item-searched);
-      color: var(--wt-tree-item-searched-on);
-    }
+.wt-tree-line__label-wrapper.searched:not(.active) {
+  background: var(--wt-tree-item-searched);
+  color: var(--wt-tree-item-searched-on);
+}
 
-    &.active {
-      background: var(--wt-tree-item-active);
-      color: var(--wt-tree-item-active-on);
-    }
-  }
+.wt-tree-line__label-wrapper.active {
+  background: var(--wt-tree-item-active);
+  color: var(--wt-tree-item-active-on);
+}
 
-  &__label {
-    @extend %typo-body-1;
-    text-wrap: nowrap;
-  }
+.wt-tree-line__label {
+  text-wrap: nowrap;
 }
 </style>

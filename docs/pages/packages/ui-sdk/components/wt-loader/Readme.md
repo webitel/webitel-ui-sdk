@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-loader-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleLoaderDifferentSizes from './examples/example-loader-different-sizes.vue';
 import ExampleSmLoaderDifferentColors from './examples/example-sm-loader-different-colors.vue';
 </script>
 
-# WtLoader
+# `wt-loader.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Loader Different Sizes
 

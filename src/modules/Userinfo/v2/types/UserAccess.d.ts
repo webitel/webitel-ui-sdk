@@ -1,18 +1,18 @@
 import { NavigationGuard } from 'vue-router';
 
 import type {
-  AdminSections,
-  AuditorSections,
-  CrmSections,
-  CrudAction,
-  SupervisorSections,
-  WtApplication,
-  WtObject,
+	AdminSections,
+	AuditorSections,
+	CrmSections,
+	CrudAction,
+	SupervisorSections,
+	WtApplication,
+	WtObject,
 } from '../../../../enums';
 import type {
-  CrudGlobalAction,
-  ScopeClass,
-  SpecialGlobalAction,
+	CrudGlobalAction,
+	ScopeClass,
+	SpecialGlobalAction,
 } from '../enums';
 
 /**
@@ -20,10 +20,10 @@ import type {
  * Represents union of all Webitel web client applications/sections
  * */
 export type UiSection =
-  | AdminSections
-  | AuditorSections
-  | SupervisorSections
-  | CrmSections;
+	| AdminSections
+	| AuditorSections
+	| SupervisorSections
+	| CrmSections;
 
 /**
  * @internal
@@ -35,17 +35,17 @@ export type GlobalAction = CrudGlobalAction | SpecialGlobalAction;
  * @internal
  * */
 export interface GlobalAccessApiResponseItem {
-  id: GlobalAction;
-  name: string;
-  usage: string;
+	id: GlobalAction;
+	name: string;
+	usage: string;
 }
 
 /**
  * @internal
  * */
 export interface ScopeAccessApiResponseItem {
-  class: ScopeClass;
-  access: string;
+	class: ScopeClass;
+	access: string;
 }
 
 /**
@@ -61,19 +61,19 @@ export type VisibilityAccess = unknown;
  * Represents raw access data, received from backend.
  * */
 export interface CreateUserAccessStoreRawAccess {
-  permissions: GlobalAccessApiResponseItem[];
-  scope: ScopeAccessApiResponseItem[];
-  access: VisibilityAccess;
+	permissions: GlobalAccessApiResponseItem[];
+	scope: ScopeAccessApiResponseItem[];
+	access: VisibilityAccess;
 }
 
 /**
  * @internal
  */
 export interface CreateUserAccessStoreConfig {
-  /**
-   * @default 'userinfo'
-   * */
-  namespace?: string;
+	/**
+	 * @default 'userinfo'
+	 * */
+	namespace?: string;
 }
 
 /**
@@ -81,8 +81,8 @@ export interface CreateUserAccessStoreConfig {
  * Map is used for quick access to user permissions
  * */
 export type GlobalActionAccessMap = Map<
-  CrudAction | SpecialGlobalAction,
-  boolean
+	CrudAction | SpecialGlobalAction,
+	boolean
 >;
 
 /**
@@ -104,41 +104,41 @@ export type AppVisibilityMap = Map<WtApplication, boolean>;
 export type SectionVisibilityMap = Map<UiSection, boolean>;
 
 export interface UserAccessStore {
-  initialize: (CreateUserAccessStoreRawAccess) => void;
+	initialize: (CreateUserAccessStoreRawAccess) => void;
 
-  hasReadAccess: (object?: WtObject) => boolean;
-  hasCreateAccess: (object?: WtObject) => boolean;
-  hasUpdateAccess: (object?: WtObject) => boolean;
-  hasDeleteAccess: (object?: WtObject) => boolean;
+	hasReadAccess: (object?: WtObject) => boolean;
+	hasCreateAccess: (object?: WtObject) => boolean;
+	hasUpdateAccess: (object?: WtObject) => boolean;
+	hasDeleteAccess: (object?: WtObject) => boolean;
 
-  routeAccessGuard: NavigationGuard;
+	routeAccessGuard: NavigationGuard;
 
-  hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
+	hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
 
-  // hasApplicationVisibility: (app: WtApplication) => boolean;
-  hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
+	// hasApplicationVisibility: (app: WtApplication) => boolean;
+	hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
 
-  /**
-   * @internal
-   * for pinia devtools debug
-   */
-  globalAccess: GlobalActionAccessMap;
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	globalAccess: GlobalActionAccessMap;
 
-  /**
-   * @internal
-   * for pinia devtools debug
-   */
-  scopeAccess: ScopeAccessMap;
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	scopeAccess: ScopeAccessMap;
 
-  /**
-   * @internal
-   * for pinia devtools debug
-   */
-  appVisibilityAccess: AppVisibilityMap;
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	appVisibilityAccess: AppVisibilityMap;
 
-  /**
-   * @internal
-   * for pinia devtools debug
-   */
-  sectionVisibilityAccess: SectionVisibilityMap;
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	sectionVisibilityAccess: SectionVisibilityMap;
 }

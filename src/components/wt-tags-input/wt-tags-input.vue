@@ -116,18 +116,57 @@ export default {
     // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
     taggableMixin,
   ],
+  /**
+   * @emits {Array} input - Fires when tags value changes. Emits value array
+   * @emits {string} tag - Fires when tag is added (if manualTagging is true). Emits vue-multiselect "tag" value
+   * @emits {string} search-change - Fires when search query changes
+   * @emits {void} closed - Fires when dropdown is closed
+   * 
+   * Note: This component inherits props from multiselectMixin (options, placeholder, optionLabel, searchMethod, disabled, required, allowEmpty, useValueFromOptionsByProp) 
+   * and validationMixin (v, customValidators). Also inherits label-related props from labelUsageMixin (label, labelProps).
+   */
   props: {
+    /**
+     * Current tags value (v-model). Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).
+     * @type {Array}
+     * @model value
+     */
     value: {
       type: Array,
     },
+    /**
+     * Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).
+     * @type {string}
+     * @default null
+     */
     trackBy: {
       type: String,
       default: null,
     },
+    /**
+     * If true, user can add tags by himself
+     * @type {boolean}
+     * @default false
+     */
     taggable: {
       type: Boolean,
       default: false,
     },
+    /**
+     * Represented property of select object. REQUIRED IN OBJECT-DATA TAG-INPUTS TO PREVENT OPTION DUPLICATION.
+     * @type {string}
+     * @default null
+     */
+    optionLabel: {
+      type: String,
+      default: null,
+    },
+    /**
+     * False: "tag" method automatically pushes { optionLabel | "name", trackBy } object to value array and $emits "input" event.
+     * True: "tag" method only $emits "tag" event. Tag addition is responsibility of client side.
+     * @type {boolean}
+     * @default false
+     */
     manualTagging: {
       type: Boolean,
       default: false,
@@ -139,7 +178,12 @@ export default {
     `,
     },
   },
-  emits: ['input', 'tag', 'search-change', 'closed'],
+  emits: [
+    'input',
+    'tag',
+    'search-change',
+    'closed',
+  ],
   data: () => ({
     defaultOptionLabel: 'label',
 
@@ -159,7 +203,10 @@ export default {
       Multiselect creates new tags with "label" property by default, so we need to handle
       it as well
        */
-      const label = this.getOptionLabel({ optionLabel, option });
+      const label = this.getOptionLabel({
+        optionLabel,
+        option,
+      });
       return typeof label === 'object' ? option.label : label;
     },
     initializeOptions() {
@@ -179,46 +226,43 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '../wt-select/multiselect.scss';
+<style scoped>
+@import '../wt-select/multiselect.css';
 
 .wt-tags-input {
   width: 100%;
 }
 
-.wt-tags-input--disabled {
-  .wt-tags-input__tags-input {
-    width: 100%;
-    max-width: 100%; // reset default
-  }
+.wt-tags-input--disabled .wt-tags-input__tags-input {
+  width: 100%;
+  max-width: 100%;
+  /* reset default */
 }
 
-// paddings recalc
-.wt-tags-input :deep(.multiselect) {
-  .multiselect__tags {
-    padding-right: calc(
-      var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos)
-    );
-    padding-bottom: 0;
+/* paddings recalc */
+.wt-tags-input :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos));
+  padding-bottom: 0;
+}
 
-    .multiselect__tags-wrap {
-      display: flex;
-      flex-wrap: wrap;
-    }
+:deep(.multiselect__tags-wrap) {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    .multiselect__custom-tag {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap: var(--spacing-xs);
-      margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
-      max-width: 100%;
-      word-break: break-all;
-    }
-  }
+.wt-tags-input :deep(.multiselect__custom-tag) {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0;
+  /* border bottom */
+  max-width: 100%;
+  word-break: break-all;
+}
 
-  .multiselect__input {
-    margin-bottom: calc(var(--spacing-xs) - 1px); // border
-  }
+:deep(.multiselect__input) {
+  margin-bottom: calc(var(--spacing-xs) - 1px);
+  /* border */
 }
 </style>

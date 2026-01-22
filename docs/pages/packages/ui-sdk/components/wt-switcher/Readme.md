@@ -1,17 +1,15 @@
 <script setup>
-import Docs from './wt-switcher-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleSwitcher from './examples/example-switcher.vue';
 import ExampleDisabledSwitcher from './examples/example-disabled-switcher.vue';
 import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue';
 </script>
 
-# WtSwitcher
+# `wt-switcher.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 :::warning Important
 In `cc-history`, `cc-quality-auditor`, `cc-supervisor`, `cc-workspaces`, `client`, `crm`, use `v-model:model-value` instead of the standard `v-model`, because of compat vue 2 different behavior

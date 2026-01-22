@@ -1,43 +1,20 @@
 <template>
-  <div
-    v-clickaway="close"
-    class="wt-app-navigator"
-  >
-    <wt-icon-btn
-      v-tooltip="$t('webitelUI.appNavigator.title')"
-      :class="{ active: isOpened }"
-      class="wt-app-navigator__btn"
-      icon="app-navigator"
-      @click="isOpened = !isOpened"
-    />
+  <div v-clickaway="close" class="wt-app-navigator">
+    <wt-icon-btn v-tooltip="$t('webitelUI.appNavigator.title')" :class="{ active: isOpened }"
+      class="wt-app-navigator__btn" icon="app-navigator" @click="isOpened = !isOpened" />
 
     <transition name="fade">
-      <nav
-        v-show="isOpened"
-        class="wt-app-navigator__nav-wrapper"
-      >
-        <h3 class="wt-app-navigator__nav-title">
+      <nav v-show="isOpened" class="wt-app-navigator__nav-wrappe wt-scrollbar">
+        <h3 class="wt-app-navigator__nav-title typo-subtitle-1">
           {{ $t('webitelUI.appNavigator.title') }}
         </h3>
         <ul class="wt-app-navigator__nav">
-          <li
-            v-for="app of formattedApps"
-            :key="app.name"
-            :class="{ active: app.currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="app.href"
-              :title="$t(`webitelUI.appNavigator.${app.name}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${app.name}-pic`"
-                :src="app.img"
-                class="wt-app-navigator__card__img"
-              />
-              <p class="wt-app-navigator__card__title">
+          <li v-for="app of formattedApps" :key="app.name" :class="{ active: app.currentApp }"
+            class="wt-app-navigator__card">
+            <a :href="app.href" :title="$t(`webitelUI.appNavigator.${app.name}`)" class="wt-app-navigator__card__link"
+              target="_blank">
+              <img :alt="`${app.name}-pic`" :src="app.img" class="wt-app-navigator__card__img" />
+              <p class="wt-app-navigator__card__title typo-overline">
                 {{ $t(`webitelUI.appNavigator.${app.name}`) }}
               </p>
             </a>
@@ -99,9 +76,18 @@ const pics = {
 };
 
 const props = defineProps({
+  /**
+   * Currently opened app
+   * @type {String}
+   */
   currentApp: {
     type: String,
   },
+  /**
+   * Available apps with its links
+   * @type {Array}
+   * @default []
+   */
   apps: {
     type: Array,
     default: () => [],
@@ -145,10 +131,7 @@ function close() {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-app-navigator {
   display: flex;
   position: relative;
@@ -156,11 +139,9 @@ function close() {
   z-index: var(--wt-app-header-content-z-index);
 }
 
-// dropdown part
-.wt-app-navigator__nav-wrapper {
-  @extend %wt-scrollbar;
+.wt-app-navigator__nav-wrappe {
   position: absolute;
-  top: 100%; // icon
+  top: 100%;
   right: 0;
   transition: var(--transition);
   margin-top: var(--wt-app-header-content-panel-margin);
@@ -173,13 +154,11 @@ function close() {
 }
 
 .wt-app-navigator__nav-title {
-  @extend %typo-subtitle-1;
   margin-bottom: var(--wt-app-header-content-gap);
   text-align: center;
   text-transform: uppercase;
 }
 
-// ul with li apps
 .wt-app-navigator__nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -194,14 +173,13 @@ function close() {
   border-radius: var(--border-radius);
   width: var(--wt-app-navigator-item-width);
   height: var(--wt-app-navigator-item-height);
-
-  &.active,
-  &:hover {
-    border-color: var(--wt-app-navigator-item-border-color--hover);
-  }
 }
 
-// a tag
+.wt-app-navigator__card.active,
+.wt-app-navigator__card:hover {
+  border-color: var(--wt-app-navigator-item-border-color--hover);
+}
+
 .wt-app-navigator__card__link {
   display: inline-flex;
   flex-direction: column;
@@ -213,16 +191,13 @@ function close() {
   height: 100%;
 }
 
-// img inside a
 .wt-app-navigator__card__img {
   margin: auto;
   width: var(--wt-app-navigator-item-pic-size);
   height: var(--wt-app-navigator-item-pic-size);
 }
 
-// app title
 .wt-app-navigator__card__title {
-  @extend %typo-overline;
   color: var(--text-main-color);
   text-align: center;
 }

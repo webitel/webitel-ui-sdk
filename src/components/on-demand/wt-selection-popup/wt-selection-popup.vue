@@ -27,7 +27,7 @@
               :icon="option.icon"
               size="sm"
             />
-            <h4 class="wt-selection-popup__item-header">
+            <h4 class="wt-selection-popup__item-header typo-subtitle-2">
               {{ option.title }}
             </h4>
             <p
@@ -36,7 +36,6 @@
             >
               {{ option.description }}
             </p>
-
             <wt-icon-btn
               v-if="option.description"
               v-tooltip="option.description"
@@ -49,7 +48,6 @@
       <!--Slot for displaying specific template styling-->
       <slot name="after-section" />
     </template>
-
     <template #actions>
       <wt-button
         :disabled="!selected"
@@ -97,7 +95,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change', 'add', 'close']);
+const emit = defineEmits([
+  'change',
+  'add',
+  'close',
+]);
 
 const { t } = useI18n();
 
@@ -114,42 +116,34 @@ function selectOption(option) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
+<style scoped>
+.wt-selection-popup__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
 
-.wt-selection-popup {
-  &__options {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-  }
+.wt-selection-popup__item-wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid var(--text-main-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs);
+}
 
-  &__item-wrapper {
-    display: flex;
-    position: relative;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border: 1px solid var(--text-main-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs);
+.wt-selection-popup__item-wrapper:hover,
+.wt-selection-popup__item-wrapper.active {
+  border: 1px solid var(--primary-color);
+}
 
-    &:hover,
-    &.active {
-      border: 1px solid var(--primary-color);
-    }
+.wt-selection-popup__item-wrapper :deep(.wt-icon) {
+  margin-right: var(--spacing-xs);
+}
 
-    .wt-icon {
-      margin-right: var(--spacing-xs);
-    }
-
-    .wt-tooltip {
-      margin-left: auto;
-    }
-  }
-
-  &__item-header {
-    @extend %typo-subtitle-2;
-  }
+.wt-selection-popup__item-wrapper :deep(.wt-tooltip) {
+  margin-left: auto;
 }
 </style>

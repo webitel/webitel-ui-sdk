@@ -1,10 +1,10 @@
 import { GalleriaScheme } from '@webitel/styleguide/component-schemes';
 
 const galleria = {
-  root: GalleriaScheme.sizes,
-  colorScheme: GalleriaScheme.colorScheme,
+	root: GalleriaScheme.sizes,
+	colorScheme: GalleriaScheme.colorScheme,
 
-  css: ({dt}) => `
+	css: ({ dt }) => `
     .p-galleria-mask {
       z-index: ${dt('galleria.mask.zIndex')} !important;
     }

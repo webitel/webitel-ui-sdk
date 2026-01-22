@@ -3,7 +3,7 @@
 
     <div
       v-show="props.newMessageCount"
-      class="scroll-to-bottom-btn__messages-counter"
+      class="scroll-to-bottom-btn__messages-counter typo-body-2"
     >
       {{ props.newMessageCount }}
     </div>
@@ -34,8 +34,6 @@ const emit = defineEmits<{
 </script>
 
 <style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
 .scroll-to-bottom-btn {
   position: absolute;
   bottom: 0;
@@ -46,7 +44,6 @@ const emit = defineEmits<{
   gap: var(--spacing-2xs);
 
   &__messages-counter {
-    @extend %typo-body-2;
     width: 24px;
     height: 24px;
     display: flex;

@@ -1,0 +1,54 @@
+{
+  "name": "@webitel/styleguide",
+  "version": "26.2.0-1",
+  "main": "",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "publish-styleguide": "npm run build && npm publish --access public",
+    "build": "tsc -p ./tsconfig.build.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.x"
+  },
+  "exports": {
+    ".": {
+      "style": "./src/lib/main.css"
+    },
+    "./src/lib/main.css": {
+    "style": "./src/lib/main.css"
+    },
+    "./typography": "./src/lib/styleguide/typography/typography.css",
+    "./scroll": "./src/lib/styleguide/scroll.css",
+    "./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
+    "./fonts": "./src/lib/styleguide/fonts/fonts.css",
+    "./applications/auditor": "./src/applications/auditor/main.scss",
+    "./applications/client": "./src/applications/client/main.scss",
+    "./applications/crm": "./src/applications/crm/main.scss",
+    "./applications/history": "./src/applications/history/main.scss",
+    "./applications/supervisor": "./src/applications/supervisor/main.scss",
+    "./applications/workspaces": "./src/applications/workspaces/main.scss",
+    "./applications/wt-flow-diagram": "./src/applications/wt-flow-diagram/main.scss",
+    "./component-schemes": {
+      "types": "./types/lib/primevue/components/index.d.ts",
+      "import": "./src/lib/primevue/components/index.ts"
+    },
+    "./semantic": {
+      "types": "./types/lib/primevue/semantic/index.d.ts",
+      "import": "./src/lib/primevue/semantic/index.ts"
+    },
+    "./extend": {
+      "types": "./types/lib/primevue/extend/extend.d.ts",
+      "import": "./src/lib/primevue/extend/extend.ts"
+    },
+    "./primitive": {
+      "types": "./types/lib/primevue/primitive/index.d.ts",
+      "import": "./src/lib/primevue/primitive/index.ts"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
+    }
+  }
+}

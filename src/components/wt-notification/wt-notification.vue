@@ -1,13 +1,6 @@
 <template>
-  <article
-    class="wt-notification"
-    @click="$emit('close')"
-  >
-    <wt-icon
-      :color="notificationIconColor"
-      :icon="notificationIcon"
-      class="wt-notification__icon"
-    />
+  <article class="wt-notification typo-body-1" @click="$emit('close')">
+    <wt-icon :color="notificationIconColor" :icon="notificationIcon" class="wt-notification__icon" />
 
     <p class="wt-notification__text">
       <slot />
@@ -17,45 +10,37 @@
 
 <script>
 export default {
-  name: 'WtNotification',
-  props: {
-    type: {
-      type: String,
-      default: 'success',
-    },
-  },
-  computed: {
-    notificationIcon() {
-      switch (this.type) {
-        case 'info':
-          return 'rounded-info';
-        case 'error':
-          return 'attention';
-        case 'warning':
-          return 'attention';
-        case 'success':
-          return 'done';
-        default:
-          return '';
-      }
-    },
-    notificationIconColor() {
-      return this.type || '';
-    },
-  },
+	name: 'WtNotification',
+	props: {
+		type: {
+			type: String,
+			default: 'success',
+		},
+	},
+	computed: {
+		notificationIcon() {
+			switch (this.type) {
+				case 'info':
+					return 'rounded-info';
+				case 'error':
+					return 'attention';
+				case 'warning':
+					return 'attention';
+				case 'success':
+					return 'done';
+				default:
+					return '';
+			}
+		},
+		notificationIconColor() {
+			return this.type || '';
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-notification {
-  @extend %typo-body-1;
-
   display: flex;
   position: relative;
   align-items: flex-start;

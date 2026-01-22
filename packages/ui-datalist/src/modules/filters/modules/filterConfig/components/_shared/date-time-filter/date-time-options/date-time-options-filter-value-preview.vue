@@ -6,7 +6,7 @@
 
     <template v-else>
       <div>
-        <p class="date-time-options-filter-value-preview__title">
+        <p class="date-time-options-filter-value-preview__title typo-subtitle-1">
           {{ t('reusable.from') }}
         </p>
 
@@ -14,7 +14,7 @@
       </div>
 
       <div>
-        <p class="date-time-options-filter-value-preview__title">
+        <p class="date-time-options-filter-value-preview__title typo-subtitle-1">
           {{ t('reusable.to') }}
         </p>
 
@@ -57,7 +57,4 @@ const to = computed(() => {
 <style lang="scss" scoped>
 @use '@webitel/styleguide/typography' as *;
 
-.date-time-options-filter-value-preview__title {
-  @extend %typo-subtitle-1;
-}
 </style>

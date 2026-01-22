@@ -25,15 +25,18 @@
                 />
                 <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
                   <span
-                    :class="{
-                      'wt-cc-pause-cause-popup-option__duration--overflow':
-                        option.isOverflow,
-                    }"
+                    :class="[
+                      'typo-caption',
+                      {
+                        'wt-cc-pause-cause-popup-option__duration--overflow':
+                          option.isOverflow,
+                      },
+                    ]"
                   >
                     {{ option.duration }}
                   </span>
                   /
-                  <span>{{ option.limit }}</span>
+                  <span class="typo-caption">{{ option.limit }}</span>
                 </div>
               </div>
               <div v-if="selected && option.id === selected?.id" class="wt-cc-pause-cause-popup-option__comment">
@@ -70,13 +73,16 @@ import { useI18n } from 'vue-i18n';
 import { useRepresentableAgentPauseCause } from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause.js';
 
 const props = defineProps({
-  options: {
-    type: Array,
-    default: () => [],
-  },
+	options: {
+		type: Array,
+		default: () => [],
+	},
 });
 
-const emit = defineEmits(['change', 'close']);
+const emit = defineEmits([
+	'change',
+	'close',
+]);
 
 const options = toRef(props, 'options');
 
@@ -87,33 +93,33 @@ const { t } = useI18n();
 const { representablePauseCause } = useRepresentableAgentPauseCause(options);
 
 const pauseCause = computed(() =>
-  representablePauseCause.value.map((cause) => ({
-    ...cause,
-    duration: cause.isOverflow
-      ? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-      : `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
-    limit: cause.limitMin
-      ? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-      : t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
-    statusComment: '',
-  })),
+	representablePauseCause.value.map((cause) => ({
+		...cause,
+		duration: cause.isOverflow
+			? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+			: `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
+		limit: cause.limitMin
+			? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+			: t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
+		statusComment: '',
+	})),
 );
 
 function select(option) {
-  selected.value = option;
+	selected.value = option;
 }
 
 function close() {
-  emit('close');
+	emit('close');
 }
 
 function setPause() {
-  const payload = {
-    pauseCause: selected.value.name,
-    statusComment: selected.value?.statusComment || ''
-  }
-  emit('change', payload);
-  close();
+	const payload = {
+		pauseCause: selected.value.name,
+		statusComment: selected.value?.statusComment || '',
+	};
+	emit('change', payload);
+	close();
 }
 </script>
 
@@ -138,7 +144,6 @@ function setPause() {
 
 .wt-cc-pause-cause-popup-option__limits-wrapper {
   & > span {
-    @extend %typo-caption;
     padding: 6px 10px;
   }
 

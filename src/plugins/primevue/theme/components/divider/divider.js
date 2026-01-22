@@ -1,8 +1,8 @@
 import { DividerScheme } from '@webitel/styleguide/component-schemes';
 
 const divider = {
-  root: DividerScheme.sizes,
-  colorScheme: DividerScheme.colorScheme,
+	root: DividerScheme.sizes,
+	colorScheme: DividerScheme.colorScheme,
 };
 
 export default divider;

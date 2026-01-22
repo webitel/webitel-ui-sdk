@@ -6,7 +6,7 @@
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="headerKey"
-      class="wt-tree-table-td"
+      class="wt-tree-table-td typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <div
@@ -46,7 +46,7 @@
 
     <td
       v-if="gridActions"
-      class="wt-tree-table-td__actions"
+      class="wt-tree-table-td__actions typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <slot
@@ -165,9 +165,8 @@ const openCollapse = () => {
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
   // Check if the object itself has searched
-  if (data[props.searchedProp] && nestedLevel) {
+  if (data[props.searchedProp] && nestedLevel)
     return true;
-  }
 
   // Check if the object has children
   if (Array.isArray(data[props.childrenProp])) {
@@ -185,54 +184,50 @@ const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
 };
 
 onMounted(() => {
-  if (props.searchedProp && hasSearchedElement(props.data)) {
+  if (props.searchedProp && hasSearchedElement(props.data))
     openCollapse();
-  }
 });
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-tree-table-td {
-  @extend %typo-body-1;
+  text-transform: none;
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   word-break: break-all;
   overflow-wrap: break-word;
+}
 
-  &__actions {
-    .wt-tree-table-td__content {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-    }
-  }
+.wt-tree-table-td__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
 
-  &__icon-wrapper {
-    display: flex;
-    align-items: flex-start;
-    margin-right: var(--spacing-xs);
-  }
+.wt-tree-table-td__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
 
-  &__content {
-    display: flex;
-    align-items: flex-start;
-    text-wrap: nowrap;
-  }
+.wt-tree-table-td__icon-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-right: var(--spacing-xs);
 }
 
 .wt-tree-table-row {
   background: var(--wt-tree-table-primary-color);
+}
 
-  &__tree-space {
-    width: var(--icon-md-size);
-    height: var(--icon-md-size);
-  }
+.wt-tree-table-row--alternate {
+  background: var(--wt-tree-table-zebra-color);
+}
 
-  &--alternate {
-    background: var(--wt-tree-table-zebra-color);
-  }
+.wt-tree-table-row__tree-space {
+  width: var(--icon-md-size);
+  height: var(--icon-md-size);
 }
 </style>

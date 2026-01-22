@@ -1,11 +1,11 @@
 const image = {
-  css: () => `
+	css: () => `
     .p-image img{
       height: auto;
       width: 100%;
       object-fit: cover;
     }
-  `
-}
+  `,
+};
 
-export default image
+export default image;

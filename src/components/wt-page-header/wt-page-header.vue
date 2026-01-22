@@ -35,49 +35,87 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  hidePrimary: {
-    type: Boolean,
-    default: false,
-  },
-  hideSecondary: {
-    type: Boolean,
-    default: false,
-  },
-  primaryText: {
-    type: String,
-  },
-  primaryAction: {
-    type: Function,
-  },
-  primaryDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  secondaryDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  secondaryText: {
-    type: String,
-  },
-  secondaryAction: {
-    type: Function,
-  },
+	/**
+	 * Hides primary button
+	 * @type {boolean}
+	 * @default false
+	 */
+	hidePrimary: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Hides secondary button
+	 * @type {boolean}
+	 * @default false
+	 */
+	hideSecondary: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Text for primary button. If empty - the title "ADD"
+	 * @type {string}
+	 */
+	primaryText: {
+		type: String,
+	},
+	/**
+	 * Primary button click handler
+	 * @type {Function}
+	 */
+	primaryAction: {
+		type: Function,
+	},
+	/**
+	 * Disables primary button
+	 * @type {boolean}
+	 * @default false
+	 */
+	primaryDisabled: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Disables secondary button
+	 * @type {boolean}
+	 * @default false
+	 */
+	secondaryDisabled: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Text for secondary button. If empty - the title "CLOSE"
+	 * @type {string}
+	 */
+	secondaryText: {
+		type: String,
+	},
+	/**
+	 * Secondary button click handler
+	 * @type {Function}
+	 */
+	secondaryAction: {
+		type: Function,
+	},
 });
 
 const emptySecondary = computed(
-  () => !(props.secondaryAction || props.secondaryText),
+	() => !(props.secondaryAction || props.secondaryText),
 );
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .wt-headline {
-  .wt-button {
-    margin-left: var(--spacing-sm);
+  margin-left: var(--spacing-sm);
+}
 
-    &:first-child {
-      margin-left: 0;
-    }
-  }
+.wt-headline .wt-button {
+  margin-left: var(--spacing-sm);
+}
+
+.wt-headline .wt-button:first-child {
+  margin-left: 0;
 }
 </style>

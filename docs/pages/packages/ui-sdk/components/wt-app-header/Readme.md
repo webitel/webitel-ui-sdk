@@ -1,17 +1,28 @@
 <script setup>
-import Docs from './wt-app-header-docs.vue';
+import WtAppHeaderSpecs from './wt-app-header-component-specs.vue';
+import WtAppNavigatorSpecs from './wt-app-navigator-component-specs.vue';
+import WtHeaderActionsSpecs from './wt-header-actions-component-specs.vue';
+
 import ExampleAppHeader from './examples/example-app-header.vue';
 import ExampleAppNavigator from './examples/example-app-navigator.vue';
 import ExampleHeaderActions from './examples/example-header-actions.vue';
 </script>
 
-# WtAppHeader
+# `wt-app-header.vue`
 
-## Props
+## Specs 
 
-::: raw
-<Docs/>
-:::
+### WtAppHeader
+
+<WtAppHeaderSpecs/>
+
+### WtAppNavigator
+
+<WtAppNavigatorSpecs/>
+
+### WtHeaderActions
+
+<WtHeaderActionsSpecs/>
 
 ## Example App Header
 

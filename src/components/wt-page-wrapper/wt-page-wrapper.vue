@@ -3,10 +3,7 @@
     <div v-if="!hideHeader" class="wt-page-wrapper__header">
       <slot name="header" />
     </div>
-    <div
-      v-if="actionsPanel"
-      class="wt-page-wrapper__actions-panel"
-    >
+    <div v-if="actionsPanel" class="wt-page-wrapper__actions-panel">
       <slot name="actions-panel" />
     </div>
     <div class="wt-page-wrapper__main">
@@ -17,25 +14,31 @@
 
 <script>
 export default {
-  name: 'WtPageWrapper',
-  props: {
-    hideHeader: {
-      type: Boolean,
-      default: false,
-    },
-    actionsPanel: {
-      type: Boolean,
-      default: true,
-    },
-  },
+	name: 'WtPageWrapper',
+	props: {
+		/**
+		 * Hides header section
+		 * @type {boolean}
+		 * @default false
+		 */
+		hideHeader: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * Controls actions panel visibility
+		 * @type {boolean}
+		 * @default true
+		 */
+		actionsPanel: {
+			type: Boolean,
+			default: true,
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-page-wrapper {
   display: flex;
   flex-direction: column;

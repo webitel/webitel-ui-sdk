@@ -29,7 +29,7 @@
             :text="textEmpty"
           />
 
-          <section class="available-presets-list">
+          <section class="available-presets-list wt-scrollbar">
             <preset-preview
               v-for="preset of dataList"
               :key="preset.id"
@@ -255,8 +255,6 @@ onMounted(async () => {
 }
 
 .available-presets-list {
-  @extend %wt-scrollbar;
-
   display: flex;
   overflow-y: auto;
   flex-direction: column;

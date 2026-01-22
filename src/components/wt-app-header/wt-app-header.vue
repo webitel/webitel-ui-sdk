@@ -6,11 +6,7 @@
 
 <script setup></script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-app-header {
   display: flex;
   justify-content: flex-end;
@@ -19,8 +15,6 @@
   box-sizing: border-box;
   background: var(--wt-app-header-background);
   padding: var(--wt-app-header-padding);
-  min-height: var(
-      --wt-app-header-min-height
-  ); // fixed height because anything can be put inside slot, so padding won't work properly
+  min-height: var(--wt-app-header-min-height);
 }
 </style>

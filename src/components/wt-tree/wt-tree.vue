@@ -1,53 +1,21 @@
 <template>
   <div class="wt-tree">
-    <div
-      v-if="mode === WtTreeMode.Tree"
-      class="wt-tree__content"
-    >
-      <wt-tree-line
-        v-for="(item, index) in data"
-        :key="index"
-        :model-value="modelValue"
-        :item-label="itemLabel"
-        :item-data="itemData"
-        :data="item"
-        :children-prop="childrenProp"
-        :multiple="multiple"
-        :allow-parent="allowParent"
-        @update:model-value="emit('update:modelValue', $event)"
-      >
-        <template
-          v-if="$slots['item-prefix']"
-          #item-prefix="slotProps"
-        >
-          <slot
-            name="item-prefix"
-            v-bind="slotProps"
-          />
+    <div v-if="mode === WtTreeMode.Tree" class="wt-tree__content">
+      <wt-tree-line v-for="(item, index) in data" :key="index" :model-value="modelValue" :item-label="itemLabel"
+        :item-data="itemData" :data="item" :children-prop="childrenProp" :multiple="multiple"
+        :allow-parent="allowParent" @update:model-value="emit('update:modelValue', $event)">
+        <template v-if="$slots['item-prefix']" #item-prefix="slotProps">
+          <slot name="item-prefix" v-bind="slotProps" />
         </template>
       </wt-tree-line>
     </div>
-    <div
-      v-if="mode === WtTreeMode.List"
-      class="wt-tree__list-content"
-    >
-      <span
-        v-for="(item, index) in allData"
-        :key="index"
-        class="wt-tree__label-wrapper"
-        :class="{ active: compareSelectElement(item) }"
-      >
-        <p
-          class="wt-tree__label"
-          @click="selectElement(item)"
-        >
+    <div v-if="mode === WtTreeMode.List" class="wt-tree__list-content">
+      <span v-for="(item, index) in allData" :key="index" class="wt-tree__label-wrapper"
+        :class="{ active: compareSelectElement(item) }">
+        <p class="wt-tree__label" @click="selectElement(item)">
           {{ itemLabel ? item[itemLabel] : item }}
         </p>
-        <wt-icon
-          v-if="compareSelectElement(item)"
-          icon="chat-message-status-sent"
-          class="wt-tree__label-icon"
-        />
+        <wt-icon v-if="compareSelectElement(item)" icon="chat-message-status-sent" class="wt-tree__label-icon" />
       </span>
     </div>
   </div>
@@ -61,133 +29,128 @@ import WtTreeLine from '../wt-tree-line/wt-tree-line.vue';
 import { WtTreeMode } from './types/WtTreeMode';
 
 const props = withDefaults(
-  defineProps<{
-    /**
-     * Selected element, it can be an object or a string, related to itemData props
-     */
-    modelValue?: null | any;
-    /**
-     * You need to pass an array of objects that will be displayed in the tree
-     */
-    data: any[];
-    /**
-     * You can pass the name of the property that will be used as the label of the selected item
-     */
-    itemLabel?: string;
-    /**
-     * You can pass the name of the property that will be used as the value of the selected item
-     */
-    itemData?: string;
-    /**
-     * Select mode for display tree data
-     * @example 'tree', 'list'
-     */
-    mode?: string;
-    /**
-     * You can pass the name of the property that will be used for getting children elements
-     */
-    childrenProp?: string;
-    multiple?: boolean;
-    allowParent?: boolean
-  }>(),
-  {
-    childrenProp: 'children',
-    mode: WtTreeMode.Tree,
-    allowParent: false,
-  },
+	defineProps<{
+		/**
+		 * Selected element, it can be an object or a string, related to itemData props
+		 */
+		modelValue?: null | any;
+		/**
+		 * You need to pass an array of objects that will be displayed in the tree
+		 */
+		data: any[];
+		/**
+		 * You can pass the name of the property that will be used as the label of the selected item
+		 */
+		itemLabel?: string;
+		/**
+		 * You can pass the name of the property that will be used as the value of the selected item
+		 */
+		itemData?: string;
+		/**
+		 * Select mode for display tree data
+		 * @example 'tree', 'list'
+		 */
+		mode?: string;
+		/**
+		 * You can pass the name of the property that will be used for getting children elements
+		 */
+		childrenProp?: string;
+		multiple?: boolean;
+		allowParent?: boolean;
+	}>(),
+	{
+		childrenProp: 'children',
+		mode: WtTreeMode.Tree,
+		allowParent: false,
+	},
 );
 
 const emit = defineEmits<{
-  (e: 'select', data: any): void;
-  (e: 'update:modelValue', value: any): void;
+	(e: 'select', data: any): void;
+	(e: 'update:modelValue', value: any): void;
 }>();
 
 const allData = computed(() => {
-  const result = [];
+	const result = [];
 
-  const getNestedItems = (item: any) => {
-    result.push(item);
+	const getNestedItems = (item: any) => {
+		result.push(item);
 
-    if (item[props.childrenProp]) {
-      item[props.childrenProp].forEach((child: any) => {
-        getNestedItems(child);
-      });
-    }
-  };
+		if (item[props.childrenProp]) {
+			item[props.childrenProp].forEach((child: any) => {
+				getNestedItems(child);
+			});
+		}
+	};
 
-  props.data.forEach((item) => {
-    getNestedItems(item);
-  });
+	props.data.forEach((item) => {
+		getNestedItems(item);
+	});
 
-  return result;
+	return result;
 });
 
 const selectElement = (item: any) => {
-  emit('update:modelValue', props.itemData ? item[props.itemData] : item);
+	emit('update:modelValue', props.itemData ? item[props.itemData] : item);
 };
 
 const compareSelectElement = (item: any) => {
-  if (props.itemData) {
-    return item[props.itemData] === props.modelValue;
-  }
+	if (props.itemData) {
+		return item[props.itemData] === props.modelValue;
+	}
 
-  return deepEqual(props.modelValue, item);
+	return deepEqual(props.modelValue, item);
 };
 </script>
 
-<style lang="scss">
-@use '@webitel/styleguide/scroll' as *;
-
+<style scoped>
 .wt-tree {
   border-radius: var(--border-radius);
   background: var(--content-wrapper-color);
   padding: var(--spacing-sm);
   overflow: auto;
-
-  &__content {
-    @extend %wt-scrollbar;
-
-    display: flex;
-    flex-direction: column;
-    padding-right: var(--spacing-2xs);
-    height: 100%;
-    overflow: auto;
-  }
-
-  &__list-content {
-    @extend %wt-scrollbar;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
-    padding-right: var(--spacing-2xs);
-    height: 100%;
-    overflow: auto;
-  }
-
-  &__label-wrapper {
-    display: flex;
-    align-items: center;
-    transition: var(--transition);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    padding: 0 var(--spacing-2xs);
-    color: var(--wt-tree-item-on);
-
-    &:hover {
-      background: var(--wt-tree-item-hover);
-      color: var(--wt-tree-item-hover-on);
-    }
-
-    &.active {
-      background: var(--wt-tree-item-active);
-      color: var(--wt-tree-item-active-on);
-    }
-  }
-
-  &__label-icon {
-    flex-shrink: 0;
-  }
 }
+
+.wt-tree__content {
+  display: flex;
+  flex-direction: column;
+  padding-right: var(--spacing-2xs);
+  height: 100%;
+  overflow: auto;
+}
+
+.wt-tree__list-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  padding-right: var(--spacing-2xs);
+  height: 100%;
+  overflow: auto;
+}
+
+.wt-tree__label-wrapper {
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 0 var(--spacing-2xs);
+  color: var(--wt-tree-item-on);
+}
+
+.wt-tree__label-wrapper:hover {
+  background: var(--wt-tree-item-hover);
+  color: var(--wt-tree-item-hover-on);
+}
+
+.wt-tree__label-wrapper.active {
+  background: var(--wt-tree-item-active);
+  color: var(--wt-tree-item-active-on);
+}
+
+.wt-tree__label-icon {
+  flex-shrink: 0;
+}
+
 </style>

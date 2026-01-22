@@ -1,57 +1,24 @@
 <template>
-  <div
-    :class="{
-      'wt-select--disabled': disabled,
-      'wt-select--invalid': invalid,
-      'wt-select--multiple': multiple,
-      'wt-select--clearable': clearable,
-      'wt-select--loading': isLoading,
-    }"
-    class="wt-select"
-  >
-    <wt-label
-      v-if="hasLabel"
-      :disabled="disabled"
-      :invalid="invalid"
-      class="wt-select__label"
-      v-bind="labelProps"
-    >
+  <div :class="{
+    'wt-select--disabled': disabled,
+    'wt-select--invalid': invalid,
+    'wt-select--multiple': multiple,
+    'wt-select--clearable': clearable,
+    'wt-select--loading': isLoading,
+  }" class="wt-select">
+    <wt-label v-if="hasLabel" :disabled="disabled" :invalid="invalid" class="wt-select__label" v-bind="labelProps">
       <!-- @slot Custom input label -->
-      <slot
-        name="label"
-        v-bind="{ label }"
-      >
+      <slot name="label" v-bind="{ label }">
         {{ requiredLabel }}
       </slot>
     </wt-label>
-    <vue-multiselect
-      ref="vue-multiselect"
-      :allow-empty="allowEmpty"
-      :close-on-select="
-        $attrs.closeOnSelect ||
-        !multiple /* override default vue-multiselect value */
-      "
-      :disabled="disabled"
-      :internal-search="!searchMethod"
-      :label="selectOptionLabel"
-      :limit="1"
-      :loading="false"
-      :model-value="selectValue"
-      :multiple="multiple"
-      :options="optionsWithCustomValues"
-      :placeholder="placeholder || label"
-      :taggable="taggable"
-      :track-by="trackBy"
-      class="wt-select__select"
-      v-bind="$attrs"
-      @close="isOpened = false"
-      @open="isOpened = true"
-      v-on="listeners"
-    >
-      <template
-        v-if="!isOpened"
-        #limit
-      >
+    <vue-multiselect ref="vue-multiselect" :allow-empty="allowEmpty" :close-on-select="$attrs.closeOnSelect ||
+      !multiple /* override default vue-multiselect value */
+      " :disabled="disabled" :internal-search="!searchMethod" :label="selectOptionLabel" :limit="1" :loading="false"
+      :model-value="selectValue" :multiple="multiple" :options="optionsWithCustomValues"
+      :placeholder="placeholder || label" :taggable="taggable" :track-by="trackBy" class="wt-select__select"
+      v-bind="$attrs" @close="isOpened = false" @open="isOpened = true" v-on="listeners">
+      <template v-if="!isOpened" #limit>
         <wt-popover class="multiselect__limit">
           <template #activator="{ toggle }">
             <div @click.stop.prevent="toggle">
@@ -61,10 +28,7 @@
 
           <template #default>
             <div>
-              <p
-                v-for="(option, idx) of value.slice(1)"
-                :key="idx"
-              >
+              <p v-for="(option, idx) of value.slice(1)" :key="idx">
                 {{ getOptionLabel({ option, optionLabel }) }}
               </p>
             </div>
@@ -81,10 +45,7 @@
 
       <!--      Slot for custom label template for single select-->
       <template #singleLabel="{ option }">
-        <slot
-          name="singleLabel"
-          v-bind="{ option, optionLabel }"
-        >
+        <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
           </span>
@@ -93,10 +54,7 @@
 
       <!--      Slot for custom option template -->
       <template #option="{ option }">
-        <slot
-          name="option"
-          v-bind="{ option, optionLabel }"
-        >
+        <slot name="option" v-bind="{ option, optionLabel }">
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
@@ -105,51 +63,28 @@
       <template #caret="{ toggle }">
         <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
         <!--    [https://my.webitel.com/browse/WTEL-3181]-->
-        <wt-icon-btn
-          v-if="allowCustomValues && searchParams.search"
-          :disabled="disabled"
-          class="multiselect__select multiselect__custom-value"
-          icon="select-custom-value-enter"
-          @click="handleCustomValueArrowInput(toggle)"
-          @mousedown.prevent
-        />
+        <wt-icon-btn v-if="allowCustomValues && searchParams.search" :disabled="disabled"
+          class="multiselect__select multiselect__custom-value" icon="select-custom-value-enter"
+          @click="handleCustomValueArrowInput(toggle)" @mousedown.prevent />
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
-        <wt-icon-btn
-          v-else
-          :disabled="disabled"
-          class="multiselect__select multiselect__arrow"
-          icon="arrow-down"
-          @click="toggle"
-          @mousedown.prevent
-        />
+        <wt-icon-btn v-else :disabled="disabled" class="multiselect__select multiselect__arrow" icon="arrow-down"
+          @click="toggle" @mousedown.prevent />
       </template>
 
       <!--      Slot located before the tags -->
-      <template #clear="{}">
-        <wt-icon-btn
-          v-if="clearable"
-          :class="{ hidden: !isValue }"
-          :disabled="disabled"
-          class="multiselect__clear"
-          icon="close"
-          @click="clearValue"
-        />
+      <template #clear="{ }">
+        <wt-icon-btn v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multiselect__clear"
+          icon="close" @click="clearValue" />
       </template>
 
       <template #beforeList>
-        <div
-          v-show="isLoading"
-          class="multiselect__loading-wrapper"
-        >
+        <div v-show="isLoading" class="multiselect__loading-wrapper">
           <wt-loader size="sm" />
         </div>
       </template>
 
-      <template
-        v-if="showIntersectionObserver"
-        #afterList
-      >
+      <template v-if="showIntersectionObserver" #afterList>
         <!--        @author @Lera24-->
         <!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
         <!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
@@ -158,10 +93,7 @@
         <div v-observe-visibility="handleAfterListIntersect" style="height: 1px" />
       </template>
     </vue-multiselect>
-    <wt-input-info
-      v-if="isValidation"
-      :invalid="invalid"
-    >
+    <wt-input-info v-if="isValidation" :invalid="invalid">
       {{ validationText }}
     </wt-input-info>
   </div>
@@ -234,14 +166,10 @@ export default {
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],
-  setup: (props/*, ctx*/) => {
+  setup: (props /*, ctx*/) => {
     // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-    const {v, customValidators, regleValidation } = toRefs(props);
-    const {
-      isValidation,
-      invalid,
-      validationText,
-    } = useValidation({
+    const { v, customValidators, regleValidation } = toRefs(props);
+    const { isValidation, invalid, validationText } = useValidation({
       v,
       customValidators,
       regleValidation,
@@ -282,7 +210,9 @@ export default {
         ? this.value
         : isEmpty(this.value)
           ? []
-          : [this.value]; //do not add empty values
+          : [
+            this.value,
+          ]; //do not add empty values
       const optionsWithoutValues = this.selectOptions.filter((opt) => {
         const optKey = this.trackBy ? opt[this.trackBy] : opt;
         return !customValuesToOptions.some((customValue) => {
@@ -292,7 +222,10 @@ export default {
           return customValueKey === optKey;
         });
       });
-      return [...customValuesToOptions, ...optionsWithoutValues];
+      return [
+        ...customValuesToOptions,
+        ...optionsWithoutValues,
+      ];
     },
   },
   methods: {
@@ -303,7 +236,9 @@ export default {
     },
     async search(event) {
       console.log('event.query', event.query);
-      this.items = [...this.optionsWithCustomValues];
+      this.items = [
+        ...this.optionsWithCustomValues,
+      ];
     },
     // for taggableMixin functionality
     async handleCustomValueArrowInput(toggle) {
@@ -344,12 +279,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use './multiselect.scss' as *;
+<style scoped>
+@import './multiselect.css';
 
 .wt-select {
   width: 100%;
@@ -367,121 +298,70 @@ export default {
   pointer-events: auto;
 }
 
-:deep(.multiselect) {
-  .multiselect__custom-tag,
-  .multiselect__single-label {
-    // text overflow 3 dots
-    @extend %typo-body-1;
-    display: block;
-    overflow: hidden;
-    max-width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .multiselect__option {
-    white-space: normal; // https://webitel.atlassian.net/browse/WTEL-7400
-    word-break: break-all;
-  }
-
-  .multiselect__content {
-    width: 100%; // https://webitel.atlassian.net/browse/WTEL-7400
-  }
+.wt-select :deep(.multiselect__single-label) {
+  /* text overflow 3 dots */
+  font-family: 'Montserrat', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-transform: none;
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-:deep(.multiselect--active) {
-  .multiselect__tags-wrap,
-  .multiselect__strong {
-    display: none;
-  }
+.wt-select :deep(.multiselect__option) {
+  white-space: normal;
+  /* https://webitel.atlassian.net/browse/WTEL-7400 */
+  word-break: break-all;
 }
 
-// right padding setup
-
-// default case
-.wt-select {
-  // all is fine
-  :deep(.multiselect) {
-    .multiselect__tags {
-      padding: var(--input-padding) calc(
-        var(--input-padding) + var(--icon-md-size) +
-        var(--select-caret-right-pos)
-      ) var(--input-padding) var(--input-padding);
-    }
-  }
+.wt-select :deep(.multiselect__content) {
+  width: 100%;
+  /* https://webitel.atlassian.net/browse/WTEL-7400 */
 }
 
-// only chip
-.wt-select.wt-select--multiple:not(.wt-select--clearable) {
-  :deep(.multiselect) {
-    $multiselect-limit-right-pos: calc(
-      var(--select-caret-right-pos)// caret offet from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
-
-    .multiselect__tags {
-      padding-right: calc(
-        $multiselect-limit-right-pos + 50px// chip
-        + var(--input-padding) // chip-to-content offset
-      );
-    }
-
-    .multiselect__limit {
-      right: $multiselect-limit-right-pos;
-    }
-  }
+.wt-select :deep(.multiselect--active .multiselect__strong) {
+  display: none;
 }
 
-// only clearable
-.wt-select.wt-select--clearable:not(.wt-select--multiple) {
-  :deep(.multiselect) {
-    $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos)// caret offset from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
+/* right padding setup */
 
-    .multiselect__tags {
-      padding-right: calc(
-        $multiselect-clear-right-pos + var(--icon-md-size)// clear
-        + var(--input-padding) // clear-to-content offset
-      );
-    }
-
-    .multiselect__clear {
-      right: $multiselect-clear-right-pos;
-    }
-  }
+/* default case */
+.wt-select :deep(.multiselect) .multiselect__tags {
+  padding: var(--input-padding) calc(var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos)) var(--input-padding) var(--input-padding);
 }
 
-// clearable and chip
-.wt-select.wt-select--multiple.wt-select--clearable {
-  :deep(.multiselect) {
-    $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos)// caret offet from border
-      + var(--icon-md-size)// caret size
-      + var(--input-padding) // caret-to-chip offset
-    );
+/* only chip */
+.wt-select.wt-select--multiple:not(.wt-select--clearable) :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding));
+}
 
-    $multiselect-limit-right-pos: calc(
-      $multiselect-clear-right-pos + /* clear offet from border */var(--icon-md-size)/* clear size */ + var(--input-padding) /* cleat-to-chip offset */
-    );
+.wt-select.wt-select--multiple:not(.wt-select--clearable) .multiselect__limit {
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
+}
 
-    .multiselect__tags {
-      padding-right: calc(
-        $multiselect-limit-right-pos + 50px// chip
-        + var(--input-padding) // chip-to-content offset
-      );
-    }
+/* only clearable */
+.wt-select.wt-select--clearable:not(.wt-select--multiple) :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding));
+}
 
-    .multiselect__clear {
-      right: $multiselect-clear-right-pos;
-    }
+.wt-select.wt-select--clearable:not(.wt-select--multiple) .multiselect__clear {
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
+}
 
-    .multiselect__limit {
-      right: $multiselect-limit-right-pos;
-    }
-  }
+/* clearable and chip */
+.wt-select.wt-select--multiple.wt-select--clearable :deep(.multiselect) .multiselect__tags {
+  padding-right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding));
+}
+
+.wt-select.wt-select--multiple.wt-select--clearable .multiselect__clear {
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
+}
+
+.wt-select.wt-select--multiple.wt-select--clearable .multiselect__limit {
+  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding));
 }
 </style>

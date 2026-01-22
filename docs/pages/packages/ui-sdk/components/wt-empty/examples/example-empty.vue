@@ -1,7 +1,7 @@
 <template>
   <wt-empty
-    headline="Component is fully built using props"
-    image="https://via.placeholder.com/150"
+    headline="Component is fully built using props" 
+    :image="img"
     primary-action-text="alert me"
     secondary-action-text="me too"
     text="There is no data to display"
@@ -12,6 +12,8 @@
 </template>
 
 <script setup>
+import img from './assets/img.png';
+
 const props = defineProps({});
 
 const emit = defineEmits([]);
@@ -21,7 +23,3 @@ const handleClick = (action) => {
 };
 </script>
 
-<style lang="scss" scoped>
-.example-empty {
-}
-</style>

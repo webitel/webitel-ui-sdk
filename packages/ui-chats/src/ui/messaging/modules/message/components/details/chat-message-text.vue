@@ -1,34 +1,37 @@
 <template>
   <p
-    class="chat-message-text"
+    class="chat-message-text typo-body-1"
     v-html="text"
   />
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import Autolinker from "autolinker";
 import { computed, defineProps } from "vue";
 
 const props = defineProps<{
-	text: string;
+  text: string;
 }>();
 
 const text = computed(() => {
-	// ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
-	// https://my.webitel.com/browse/DEV-2848
-	return Autolinker.link(props.text, {
-		newWindow: true,
-		sanitizeHtml: true, // DONT FORGET TO SANITIZE, OR USE DOM PURIFY
-		className: "chat-message-new-text__link",
-	});
+  // ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
+  // https://my.webitel.com/browse/DEV-2848
+  return Autolinker.link(props.text, {
+    newWindow: true,
+    sanitizeHtml: true, // DONT FORGET TO SANITIZE, OR USE DOM PURIFY
+    className: "chat-message-new-text__link",
+  });
 });
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style
+  lang="scss"
+  scoped
+>
 .chat-message-text {
-  @extend %typo-body-1;
   overflow-wrap: anywhere;
   white-space: pre-line; // read \n as "new line"
   padding: var(--spacing-xs);
@@ -43,5 +46,4 @@ const text = computed(() => {
     text-decoration: revert;
   }
 }
-
 </style>

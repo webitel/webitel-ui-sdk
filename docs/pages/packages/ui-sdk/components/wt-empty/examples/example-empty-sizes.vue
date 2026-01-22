@@ -12,7 +12,7 @@
         <wt-empty
           :size="item.size"
           headline="Component is fully built using props"
-          image="https://via.placeholder.com/150"
+          :image="img"
           primary-action-text="primary"
           secondary-action-text="secondary"
           text="There is no data to display"
@@ -24,10 +24,8 @@
 </template>
 
 <script setup>
+import img from './assets/img.png';
+
 const sizes = ['sm', 'md', 'lg'];
 </script>
 
-<style lang="scss" scoped>
-.example-empty {
-}
-</style>

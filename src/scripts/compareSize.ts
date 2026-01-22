@@ -1,10 +1,10 @@
 import { ComponentSize } from '../enums/ComponentSize/ComponentSize';
 
 const numerics = Object.values(ComponentSize).reduce((nums, size, index) => {
-  return {
-    ...nums,
-    [size]: index,
-  };
+	return {
+		...nums,
+		[size]: index,
+	};
 }, {});
 
 /**
@@ -19,7 +19,7 @@ const numerics = Object.values(ComponentSize).reduce((nums, size, index) => {
  * compareSize(ComponentSize.LG, ComponentSize.SM); // false
  */
 export const compareSize = (s1, s2) => {
-  return numerics[s1] - numerics[s2];
+	return numerics[s1] - numerics[s2];
 };
 
 /**
@@ -30,7 +30,7 @@ export const compareSize = (s1, s2) => {
  */
 
 export const smallerThen = (s1, s2) => {
-  return compareSize(s1, s2) < 0;
+	return compareSize(s1, s2) < 0;
 };
 
 /**
@@ -40,7 +40,7 @@ export const smallerThen = (s1, s2) => {
  * @returns {boolean}
  */
 export const smallerOrEqual = (s1, s2) => {
-  return compareSize(s1, s2) <= 0;
+	return compareSize(s1, s2) <= 0;
 };
 
 /**
@@ -50,7 +50,7 @@ export const smallerOrEqual = (s1, s2) => {
  * @returns {boolean}
  */
 export const greaterThen = (s1, s2) => {
-  return compareSize(s1, s2) > 0;
+	return compareSize(s1, s2) > 0;
 };
 
 /**
@@ -60,8 +60,8 @@ export const greaterThen = (s1, s2) => {
  * @returns {boolean}
  */
 export const greaterOrEqual = (
-  s1: ComponentSize,
-  s2: ComponentSize,
+	s1: ComponentSize,
+	s2: ComponentSize,
 ): boolean => {
-  return compareSize(s1, s2) >= 0;
+	return compareSize(s1, s2) >= 0;
 };

@@ -27,46 +27,48 @@ import { nextTick,onBeforeUnmount, ref } from 'vue';
 import { eventBus } from '../../../scripts';
 
 const props = defineProps({
-  size: {
-    type: String,
-    default: ComponentSize.MD,
-  },
+	size: {
+		type: String,
+		default: ComponentSize.MD,
+	},
 });
 
-const emit = defineEmits(['insert-emoji']);
+const emit = defineEmits([
+	'insert-emoji',
+]);
 
 const emojiPickerWrapper = ref(null);
 const isOpened = ref(false);
 const picker = ref(null);
 
 const initPicker = async () => {
-  if (picker.value) return;
+	if (picker.value) return;
 
-  picker.value = document.createElement('emoji-picker');
+	picker.value = document.createElement('emoji-picker');
 
-  appendPicker();
-  picker.value.addEventListener('emoji-click', emitEmojiClickEvent);
+	appendPicker();
+	picker.value.addEventListener('emoji-click', emitEmojiClickEvent);
 };
 
 const appendPicker = () => {
-  if (emojiPickerWrapper.value && picker.value) {
-    emojiPickerWrapper.value.appendChild(picker.value);
-  }
+	if (emojiPickerWrapper.value && picker.value) {
+		emojiPickerWrapper.value.appendChild(picker.value);
+	}
 };
 
 const emitEmojiClickEvent = (event) => {
-  const { unicode } = event.detail;
-  emit('insert-emoji', unicode);
-  closePicker();
+	const { unicode } = event.detail;
+	emit('insert-emoji', unicode);
+	closePicker();
 };
 
 const closePicker = () => {
-  isOpened.value = false;
-  if (picker.value && emojiPickerWrapper.value) {
-    picker.value.removeEventListener('emoji-click', emitEmojiClickEvent);
-    emojiPickerWrapper.value.removeChild(picker.value);
-    picker.value = null;
-  }
+	isOpened.value = false;
+	if (picker.value && emojiPickerWrapper.value) {
+		picker.value.removeEventListener('emoji-click', emitEmojiClickEvent);
+		emojiPickerWrapper.value.removeChild(picker.value);
+		picker.value = null;
+	}
 };
 
 const togglePicker = async () => {
@@ -82,11 +84,11 @@ const togglePicker = async () => {
 const focusOnInput = () => eventBus.$emit('chat-input-focus');
 
 onBeforeUnmount(() => {
-  closePicker();
+	closePicker();
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .wt-chat-emoji {
   position: relative;
   width: 100%;

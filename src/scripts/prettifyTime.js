@@ -2,12 +2,12 @@ import { FormatDateMode } from '../enums';
 import { formatDate } from '../utils';
 
 const prettifyTime = (time) => {
-  let date;
-  if (time instanceof Date) date = time;
-  else if (typeof time === 'number') date = new Date(time);
-  else date = new Date(+time);
+	let date;
+	if (time instanceof Date) date = time;
+	else if (typeof time === 'number') date = new Date(time);
+	else date = new Date(+time);
 
-  return formatDate(date, FormatDateMode.TIME);
+	return formatDate(date, FormatDateMode.TIME);
 };
 
 export default prettifyTime;

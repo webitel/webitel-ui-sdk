@@ -1,6 +1,8 @@
 <template>
-  <div class="wt-tree-table">
-    <table class="wt-tree-table-wrapper">
+  <div class="wt-tree-table wt-scrollbar">
+    <table
+      class="wt-tree-table-wrapper"
+    >
       <thead class="wt-tree-table-head">
         <tr class="wt-tree-table-tr wt-tree-table-tr-head">
           <th
@@ -13,7 +15,7 @@
               `wt-tree-table-th--sort-${col.sort}`,
             ]"
             :style="col.width ? `min-width:${col.width}` : ''"
-            class="wt-tree-table-th"
+            class="wt-tree-table-th typo-body-1"
             @click="sort(col, key)"
           >
             <div class="wt-tree-table-th__content">
@@ -93,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef, withDefaults } from 'vue';
+import { computed, toRef } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
@@ -141,7 +143,10 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(['sort', 'update:selected']);
+const emit = defineEmits([
+  'sort',
+  'update:selected',
+]);
 
 const checkHasChildItems = (item: Record<string, any>) => {
   return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
@@ -152,7 +157,9 @@ const getSelectedValue = (items: Record<string, any>[]) => {
 
   const pushSelectedElement = (item: Record<string, any>) => {
     if (item._isSelected) {
-      return [item];
+      return [
+        item,
+      ];
     }
 
     if (checkHasChildItems(item)) {
@@ -227,7 +234,11 @@ const selectAll = () => {
   if (props.selected) {
     emit(
       'update:selected',
-      isAllSelected.value ? [] : [...getAllNestedElements(props.data)],
+      isAllSelected.value
+        ? []
+        : [
+          ...getAllNestedElements(props.data),
+        ],
     );
   } else {
     // for backwards compatibility
@@ -247,7 +258,10 @@ const selectAll = () => {
 const handleSelection = (row, select) => {
   if (props.selected) {
     if (select) {
-      emit('update:selected', [...selectedElements.value, row]);
+      emit('update:selected', [
+        ...selectedElements.value,
+        row,
+      ]);
     } else {
       emit(
         'update:selected',
@@ -261,89 +275,80 @@ const handleSelection = (row, select) => {
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-@use '@webitel/styleguide/scroll' as *;
-
+<style scoped>
 .wt-tree-table {
-  @extend %wt-scrollbar;
   max-height: 100%;
   overflow: auto;
+}
 
-  &-head {
-    border: var(--wt-tree-table-head-border);
-    border-color: var(--wt-tree-table-head-border-color);
-    border-radius: var(--border-radius);
-    background: var(--wt-tree-table-head-background-color);
-  }
+.wt-tree-table-head {
+  border: var(--wt-tree-table-head-border);
+  border-color: var(--wt-tree-table-head-border-color);
+  border-radius: var(--border-radius);
+  background: var(--wt-tree-table-head-background-color);
 }
 
 .wt-tree-table-wrapper {
   border-collapse: collapse;
   width: 100%;
+}
 
-  .wt-tree-table-tr-wrapper {
-    background: var(--wt-tree-table-primary-color);
+.wt-tree-table-tr-wrapper {
+  background: var(--wt-tree-table-primary-color);
+}
 
-    &:nth-child(2n) {
-      background: var(--wt-tree-table-zebra-color);
-    }
-  }
+.wt-tree-table-tr-wrapper:nth-child(2n) {
+  background: var(--wt-tree-table-zebra-color);
 }
 
 .wt-tree-table-th,
 .wt-tree-table-td {
-  @extend %typo-body-1;
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   word-break: break-all;
   overflow-wrap: break-word;
+}
 
-  &__actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
-  }
+.wt-tree-table-td__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
 
-  &__content {
-    display: flex;
-    align-items: center;
-  }
+.wt-tree-table-td__content {
+  display: flex;
+  align-items: center;
+}
 
-  &__text {
-    text-wrap: nowrap;
-  }
+.wt-tree-table-td__text {
+  text-wrap: nowrap;
 }
 
 .wt-tree-table-th {
   font-weight: normal;
+}
 
-  &--sortable {
-    cursor: pointer;
+.wt-tree-table-th--sortable {
+  cursor: pointer;
+}
 
-    &:hover :deep .wt-icon {
-      fill: var(--icon-active-color);
-    }
-  }
+.wt-tree-table-th:hover :deep(.wt-icon) {
+  fill: var(--icon-active-color);
+}
 
-  .wt-tree-table-th-sort-arrow {
-    display: none;
-    margin-left: var(--wt-tree-table-head-sort-arrow-margin);
-  }
+.wt-tree-table-th-sort-arrow {
+  display: none;
+  margin-left: var(--wt-tree-table-head-sort-arrow-margin);
+}
 
-  &--sort-asc .wt-tree-table-th-sort-arrow--asc {
-    display: block;
-  }
+.wt-tree-table-th-sort-arrow--sort-asc .wt-tree-table-th-sort-arrow--asc {
+  display: block;
+}
 
-  &--sort-desc .wt-tree-table-th-sort-arrow--desc {
-    display: block;
-  }
+.wt-tree-table-th-sort-arrow--sort-desc .wt-tree-table-th-sort-arrow--desc {
+  display: block;
 }
 
 .wt-tree-table-foot {

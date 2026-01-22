@@ -1,0 +1,6 @@
+:root {
+	--wt-expansion-panel-header-background-color: var(--dp-16-surface-color);
+	--wt-expansion-panel-header-title-color: var(--text-main-color);
+	--wt-expansion-panel-content-background-color: var(--content-wrapper-color);
+	--wt-expansion-panel-content-text-color: var(--text-main-color);
+}
