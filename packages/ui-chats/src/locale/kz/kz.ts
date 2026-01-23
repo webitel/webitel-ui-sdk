@@ -3,7 +3,7 @@ export default {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Файл карантинде немесе бұғатталған",
-				messagePlaceholder: "Хабарлама жаз...",
+				textAreaPlaceholder: "Хабарлама жаз...",
 			},
 		},
 	},

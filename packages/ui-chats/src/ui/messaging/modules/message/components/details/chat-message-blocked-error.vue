@@ -4,9 +4,7 @@
       icon="protection-error"
       color="error"
     />
-    <!-- TODO: move chat locales from cc-workspaces to this pkg -->
     <p>
-      <!-- {{ t('workspaceSec.chat.chatsFileBlocked') }} -->
       {{ t('chats.ui.messaging.chatsFileBlocked') }}
     </p>
   </div>

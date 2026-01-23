@@ -3,7 +3,7 @@ export default {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Tệp bị cách ly hoặc bị chặn",
-				messagePlaceholder: "Viết tin nhắn...",
+				textAreaPlaceholder: "Viết tin nhắn...",
 			},
 		},
 	},
