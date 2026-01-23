@@ -2,7 +2,7 @@ export default {
 	chats: {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "Fayl karantinda yoki bloklangan",
+				chatsFileBlocked: "TODO",
 				textAreaPlaceholder: "Xabar yozing...",
 			},
 		},

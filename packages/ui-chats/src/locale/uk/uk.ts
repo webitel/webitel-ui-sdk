@@ -2,7 +2,7 @@ export default {
 	chats: {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "Файл в карантині чи заблокований",
+				chatsFileBlocked: "TODO",
 				textAreaPlaceholder: "Напишіть повідомлення...",
 			},
 		},
