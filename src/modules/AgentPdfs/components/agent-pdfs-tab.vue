@@ -1,5 +1,5 @@
 <template>
-  <section class="table-wrapper table-page table-wrapper--tab-table">
+  <section class="table-section">
     <slot
       name="header"
       :selected="selected"
@@ -23,7 +23,7 @@
       :headline="textEmpty"
     />
 
-    <div v-show="!isLoading" class="table-loading-wrapper">
+    <div v-if="dataList?.length" class="table-section__table-wrapper">
       <wt-table
         v-if="dataList?.length"
         :data="dataList"
