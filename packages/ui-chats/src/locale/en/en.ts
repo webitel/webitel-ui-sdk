@@ -1,5 +1,5 @@
 export default {
-	chats: {
+	"@webitel/ui-chats": {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "File quarantined or blocked",

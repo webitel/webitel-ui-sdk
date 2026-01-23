@@ -55,14 +55,6 @@
 		"./ui": {
 			"types": "./types/ui/index.d.ts",
 			"import": "./src/ui/index.ts"
-		},
-		"./locale": {
-			"types": "./types/locale/index.d.ts",
-			"import": "./src/locale/index.ts"
-		},
-		"./locale/*": {
-			"types": "./types/locale/*",
-			"import": "./src/locale/*"
 		}
 	},
 	"author": "webitel",
