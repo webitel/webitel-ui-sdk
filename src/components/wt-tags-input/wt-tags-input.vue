@@ -259,6 +259,7 @@ export default {
   /* border bottom */
   max-width: 100%;
   word-break: break-all;
+  white-space: normal;
 }
 
 :deep(.multiselect__input) {
