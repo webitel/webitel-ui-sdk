@@ -4,8 +4,10 @@
       icon="protection-error"
       color="error"
     />
+    <!-- TODO: move chat locales from cc-workspaces to this pkg -->
     <p>
-      {{ t('chats.ui.messaging.chatsFileBlocked') }}
+      <!-- {{ t('workspaceSec.chat.chatsFileBlocked') }} -->
+      {{ t('@webitel/ui-chats.ui.messaging.chatsFileBlocked') }}
     </p>
   </div>
 </template>
