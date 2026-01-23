@@ -2,7 +2,7 @@ export default {
 	"@webitel/ui-chats": {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "TODO",
+				chatsFileBlocked: "File quarantined or blocked",
 				textAreaPlaceholder: "Write a message...",
 			},
 		},

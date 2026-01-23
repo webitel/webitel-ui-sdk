@@ -2,7 +2,7 @@ export default {
 	"@webitel/ui-chats": {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "TODO",
+				chatsFileBlocked: "Файл карантинде немесе бұғатталған",
 				textAreaPlaceholder: "Хабарлама жаз...",
 			},
 		},
