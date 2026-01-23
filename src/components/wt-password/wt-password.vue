@@ -67,7 +67,7 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	label?: string;
-  labelProps?: Record<string, unknown>;
+	labelProps?: Record<string, unknown>;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -79,7 +79,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {
 	label: '',
-  labelProps: () => ({}),
+	labelProps: () => ({}),
 	placeholder: '',
 	disabled: false,
 	required: false,

@@ -1,5 +1,5 @@
 import type { RegleFieldStatus } from '@regle/core';
-import { computed, type ComputedRef, type Ref } from 'vue';
+import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
 	field: Ref<RegleFieldStatus<string>>;

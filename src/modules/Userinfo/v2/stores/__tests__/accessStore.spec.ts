@@ -1,4 +1,4 @@
-import { createPinia, setActivePinia,type StoreDefinition } from 'pinia';
+import { createPinia, type StoreDefinition, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createApp, h } from 'vue';
 import { createRouter, createWebHistory, type Router } from 'vue-router';

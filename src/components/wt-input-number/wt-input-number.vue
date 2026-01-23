@@ -81,37 +81,37 @@ import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
-  label?: string;
-  labelProps?: Record<string, unknown>;
-  placeholder?: string;
-  disabled?: boolean;
-  required?: boolean;
-  min?: number;
-  max?: number;
-  step?: number;
-  minFractionDigits?: number;
-  maxFractionDigits?: number;
-  showButtons?: boolean;
-  v?: Record<string, unknown>;
-  regleValidation?: RegleFieldStatus<number>;
-  customValidators?: unknown[];
+	label?: string;
+	labelProps?: Record<string, unknown>;
+	placeholder?: string;
+	disabled?: boolean;
+	required?: boolean;
+	min?: number;
+	max?: number;
+	step?: number;
+	minFractionDigits?: number;
+	maxFractionDigits?: number;
+	showButtons?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: RegleFieldStatus<number>;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<WtInputNumberProps>(), {
-  label: '',
-  labelProps: () => ({}),
-  placeholder: '',
-  disabled: false,
-  required: false,
-  min: undefined,
-  max: undefined,
-  step: 1,
-  minFractionDigits: undefined,
-  maxFractionDigits: undefined,
-  showButtons: true,
-  v: null,
-  regleValidation: null,
-  customValidators: () => [],
+	label: '',
+	labelProps: () => ({}),
+	placeholder: '',
+	disabled: false,
+	required: false,
+	min: undefined,
+	max: undefined,
+	step: 1,
+	minFractionDigits: undefined,
+	maxFractionDigits: undefined,
+	showButtons: true,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
 const model = defineModel<number | null>({

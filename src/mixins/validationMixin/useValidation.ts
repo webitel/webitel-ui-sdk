@@ -1,12 +1,12 @@
 import { computed } from 'vue';
 
 import {
-	useFieldValidation as useRegleFieldValidation,
 	type UseFieldValidationParams as UseRegleFieldValidationParams,
+	useFieldValidation as useRegleFieldValidation,
 } from './regle/useRegleValidation';
 import {
-	useFieldValidation as useVuelidateValidation,
 	type UseFieldValidationParams as UseVuelidateFieldValidationParams,
+	useFieldValidation as useVuelidateValidation,
 } from './vuelidate/useVuelidateValidation';
 
 type CompatVuelidateParams = {
