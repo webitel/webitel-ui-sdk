@@ -13,52 +13,52 @@
 			:download="download"
 			custom-icons
 		>
-			<template slot="airplay-icon">
+			<template #airplay-icon>
 				<wt-icon icon="plyr-airplay" />
 			</template>
-			<template slot="captions-off-icon">
+			<template #captions-off-icon>
 				<wt-icon icon="plyr-captions-off" />
 			</template>
-			<template slot="captions-on-icon">
+			<template #captions-on-icon>
 				<wt-icon icon="plyr-captions-on" />
 			</template>
-			<template slot="download-icon">
+			<template #download-icon>
 				<wt-icon icon="plyr-download" />
 			</template>
-			<template slot="enter-fullscreen-icon">
+			<template #enter-fullscreen-icon>
 				<wt-icon icon="plyr-enter-fullscreen" />
 			</template>
-			<template slot="enter-pip-icon">
+			<template #enter-pip-icon>
 				<wt-icon icon="plyr-pip" />
 			</template>
-			<template slot="exit-fullscreen-icon">
+			<template #exit-fullscreen-icon>
 				<wt-icon icon="plyr-exit-fullscreen" />
 			</template>
-			<template slot="exit-pip-icon">
+			<template #exit-pip-icon>
 				<wt-icon icon="plyr-pip" />
 			</template>
-			<template slot="fast-forward-icon">
+			<template #fast-forward-icon>
 				<wt-icon icon="plyr-fast-forward" />
 			</template>
-			<template slot="muted-icon">
+			<template #muted-icon>
 				<wt-icon icon="plyr-muted" />
 			</template>
-			<template slot="pause-icon">
+			<template #pause-icon>
 				<wt-icon icon="plyr-pause" />
 			</template>
-			<template slot="play-icon">
+			<template #play-icon>
 				<wt-icon icon="plyr-play" />
 			</template>
-			<template slot="restart-icon">
+			<template #restart-icon>
 				<wt-icon icon="plyr-restart" />
 			</template>
-			<template slot="rewind-icon">
+			<template #rewind-icon>
 				<wt-icon icon="plyr-rewind" />
 			</template>
-			<template slot="settings-icon">
+			<template #settings-icon>
 				<wt-icon icon="plyr-settings" />
 			</template>
-			<template slot="volume-icon">
+			<template #volume-icon>
 				<wt-icon icon="plyr-volume" />
 			</template>
 		</media-plyr-layout>
