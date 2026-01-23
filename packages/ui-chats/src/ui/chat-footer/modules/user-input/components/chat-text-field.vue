@@ -3,6 +3,7 @@
     ref="chatTextFieldInput"
     class="chat-text-field"
     :model-value="textModel"
+    :placeholder="t('@webitel/ui-chats.ui.messaging.textAreaPlaceholder')"
     :size="size"
     autoresize
     @update:model-value="send"
@@ -16,8 +17,11 @@ import { ComponentSize } from "@webitel/ui-sdk/enums";
 import insertTextAtCursor from "insert-text-at-cursor";
 import type { Emitter } from "mitt";
 import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
+import { useI18n } from "vue-i18n";
 
 import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
+
+const { t } = useI18n();
 
 const textModel = defineModel<MaybeRef<string>>("text", {
 	required: true,

@@ -3,6 +3,7 @@ declare const _default: {
         ui: {
             messaging: {
                 chatsFileBlocked: string;
+                textAreaPlaceholder: string;
             };
         };
     };

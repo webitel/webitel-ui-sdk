@@ -49,6 +49,10 @@
 		"CHANGELOG.md"
 	],
 	"exports": {
+		".": {
+			"types": "./types/index.d.ts",
+			"import": "./src/index.ts"
+		},
 		"./ui": {
 			"types": "./types/ui/index.d.ts",
 			"import": "./src/ui/index.ts"
