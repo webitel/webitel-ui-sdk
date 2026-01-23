@@ -2,6 +2,7 @@
   <div class="wt-password">
     <wt-label
       v-if="hasLabel"
+      v-bind="labelProps"
       :disabled="disabled"
       :for="inputId"
       :invalid="invalid"
@@ -66,6 +67,7 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	label?: string;
+  labelProps?: Record<string, unknown>;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -77,6 +79,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {
 	label: '',
+  labelProps: () => ({}),
 	placeholder: '',
 	disabled: false,
 	required: false,
@@ -138,10 +141,5 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
 
-:deep(.wt-password__input) {
-  @extend %typo-body-1;
-  @include wt-placeholder;
-}
 </style>
