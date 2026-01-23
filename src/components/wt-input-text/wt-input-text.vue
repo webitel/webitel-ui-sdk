@@ -2,6 +2,7 @@
   <div class="wt-input-text">
     <wt-label
       v-if="hasLabel"
+      v-bind="labelProps"
       :disabled="disabled"
       :for="inputId"
       :invalid="invalid"
@@ -61,6 +62,7 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;
+  labelProps?: Record<string, unknown>;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -72,6 +74,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 
 const props = withDefaults(defineProps<WtInputTextProps>(), {
 	label: '',
+  labelProps: () => ({}),
 	placeholder: '',
 	disabled: false,
 	required: false,
