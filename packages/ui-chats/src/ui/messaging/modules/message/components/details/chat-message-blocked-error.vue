@@ -5,7 +5,7 @@
       color="error"
     />
     <p>
-      {{ t('chats.ui.messaging.chatsFileBlocked') }}
+      {{ t('@webitel/ui-chats.ui.messaging.chatsFileBlocked') }}
     </p>
   </div>
 </template>
