@@ -3,7 +3,7 @@ export default {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Fayl karantinda yoki bloklangan",
-				messagePlaceholder: "Xabar yozing...",
+				textAreaPlaceholder: "Xabar yozing...",
 			},
 		},
 	},

@@ -3,7 +3,7 @@ export default {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "Fişier în carantină sau blocat",
-				messagePlaceholder: "Scrie un mesaj...",
+				textAreaPlaceholder: "Scrie un mesaj...",
 			},
 		},
 	},

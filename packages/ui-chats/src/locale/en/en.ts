@@ -3,7 +3,7 @@ export default {
 		ui: {
 			messaging: {
 				chatsFileBlocked: "File quarantined or blocked",
-				messagePlaceholder: "Write a message...",
+				textAreaPlaceholder: "Write a message...",
 			},
 		},
 	},
