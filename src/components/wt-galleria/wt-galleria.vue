@@ -272,7 +272,6 @@ display: flex;
 .wt-galleria__footer-info {
 display: flex;
   gap: 0.5rem;
-  @extend %typo-body-2
 }
 
 .wt-galleria__footer svg {
