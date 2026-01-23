@@ -5,16 +5,18 @@ export type UiChatsConfig = {
 	i18n?: I18n;
 };
 
-export const config: UiChatsConfig = {
+export const defaultConfig: UiChatsConfig = {
 	i18n: null,
 };
 
 export const setConfig = (conf: UiChatsConfig) => {
-	Object.assign(config, conf);
+	Object.assign(defaultConfig, conf);
 
-	if (conf.i18n?.global) {
-		Object.entries(messages).forEach(([locale, localeMessages]) => {
-			conf.i18n.global.mergeLocaleMessage(locale, localeMessages);
-		});
+	if (!conf.i18n?.global) {
+		throw new Error('i18n is required');
 	}
+
+	Object.entries(messages).forEach(([locale, localeMessages]) => {
+		conf.i18n.global.mergeLocaleMessage(locale, localeMessages);
+	});
 };
