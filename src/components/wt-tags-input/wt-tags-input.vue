@@ -214,6 +214,7 @@ export default {
       margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
       max-width: 100%;
       word-break: break-all;
+      white-space: normal;
     }
   }
 
