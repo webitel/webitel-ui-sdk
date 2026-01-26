@@ -21,7 +21,8 @@ jobs:
 
       - name: Publish release
         id: publish_release
-   
+        env:
+          HUSKY: 0
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}    
           cd packages/ui-chats
