@@ -20,7 +20,9 @@
           />
         </slot>
         <slot name="footer">
-          <chat-footer-wrapper>
+          <chat-footer-wrapper
+            v-if="chatActions.includes(ChatAction.SendMessage)"
+          >
             <template #default>
               <chat-text-field
                 v-model:text="draft"
@@ -78,9 +80,7 @@ const props = withDefaults(
 	{
 		size: ComponentSize.MD,
 		withoutAvatars: false,
-		chatActions: () => [
-			ChatAction.SendMessage,
-		],
+		chatActions: () => [],
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
 	},
