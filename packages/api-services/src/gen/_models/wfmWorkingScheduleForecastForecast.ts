@@ -6,6 +6,6 @@
  */
 
 export interface WfmWorkingScheduleForecastForecast {
-  agents?: string;
-  hour?: string;
+	agents?: string;
+	hour?: string;
 }

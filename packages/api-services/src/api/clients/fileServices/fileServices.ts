@@ -4,9 +4,8 @@ import {
 	searchScreenRecordingsByAgentQueryParams,
 	searchScreenRecordingsQueryParams,
 } from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-
 import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -98,8 +97,8 @@ const getScreenRecordingsByUser = async (params: any) => {
 		retentionUntilFrom,
 		retentionUntilTo,
 		type,
-    channel,
-  } = applyTransform(params, [
+		channel,
+	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -121,8 +120,8 @@ const getScreenRecordingsByUser = async (params: any) => {
 				retentionUntilFrom,
 				retentionUntilTo,
 				type,
-        channel,
-      },
+				channel,
+			},
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -167,7 +166,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 		retentionUntilFrom,
 		retentionUntilTo,
 		type,
-    channel,
+		channel,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
@@ -190,8 +189,8 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				retentionUntilFrom,
 				retentionUntilTo,
 				type,
-        channel,
-      },
+				channel,
+			},
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -218,40 +217,42 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	}
 };
 
-const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: string }) => {
-  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    searchFilesQueryParams,
-  );
+const getFilesListByCall = async (
+	params: SearchFilesByCallParams & { callId: string },
+) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		searchFilesQueryParams,
+	);
 
-  const requestParams = applyTransform(params, [
-    merge(getDefaultGetParams()),
-    sanitize(fieldsToSend),
-    camelToSnake(),
-    (param) => ({
-      ...param,
-      q: param.q ?? param.search,
-      'uploaded_at.from': param.uploaded_at_from,
-      'uploaded_at.to': param.uploaded_at_to,
-    }),
-  ]);
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+		(param) => ({
+			...param,
+			q: param.q ?? param.search,
+			'uploaded_at.from': param.uploaded_at_from,
+			'uploaded_at.to': param.uploaded_at_to,
+		}),
+	]);
 
-  try {
-    const response = await getFileService().searchFilesByCall(
-      params.callId,
-      requestParams,
-    );
+	try {
+		const response = await getFileService().searchFilesByCall(
+			params.callId,
+			requestParams,
+		);
 
-    const { items, next } = applyTransform(response.data, [
-      merge(getDefaultGetListResponse()),
-    ]);
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
 
-    return {
-      items,
-      next,
-    };
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
 };
 
 export const FileServicesAPI = {
@@ -261,5 +262,5 @@ export const FileServicesAPI = {
 	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
 	deleteScreenRecordingsByAgent,
-  getListByCall: getFilesListByCall,
+	getListByCall: getFilesListByCall,
 };

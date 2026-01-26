@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-radio-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleRadio from './examples/example-radio.vue';
 import ExampleDisabledRadio from './examples/example-disabled-radio.vue';
 </script>
 
-# WtRadio
+# `wt-radio.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Radio
 

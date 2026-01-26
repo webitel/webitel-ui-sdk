@@ -1,13 +1,18 @@
 <template>
   <header class="wt-headline">
+    <!-- @slot headline direct child -->
     <slot>
+      <!-- @slot headline direct child slot, but with search and actions slots available -->
       <slot name="title-wrapper">
-        <h1 class="wt-headline__title">
+        <h1 class="wt-headline__title typo-heading-2">
+          <!-- @slot Title slot -->
           <slot name="title" />
         </h1>
       </slot>
       <div class="wt-headline__actions-wrapper">
+        <!-- @slot Search slot -->
         <slot name="search" />
+        <!-- @slot Action buttons slot -->
         <slot name="actions" />
       </div>
     </slot>
@@ -16,17 +21,11 @@
 
 <script>
 export default {
-  name: 'WtHeadline',
+	name: 'WtHeadline',
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .wt-headline {
   display: flex;
   justify-content: space-between;
@@ -39,7 +38,6 @@ export default {
 }
 
 .wt-headline__title {
-  @extend %typo-heading-2;
   margin-right: var(--headline-title-margin);
 }
 
@@ -47,5 +45,6 @@ export default {
   display: flex;
   position: relative;
   align-items: center;
+  gap: var(--spacing-sm);
 }
 </style>

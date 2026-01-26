@@ -1,8 +1,8 @@
 export const SupervisorSections = {
-  Queues: 'queues',
-  Agents: 'agents',
-  ActiveCalls: 'active-calls',
+	Queues: 'queues',
+	Agents: 'agents',
+	ActiveCalls: 'active-calls',
 } as const;
 
 export type SupervisorSections =
-  (typeof SupervisorSections)[keyof typeof SupervisorSections];
+	(typeof SupervisorSections)[keyof typeof SupervisorSections];

@@ -33,42 +33,70 @@
 import type { RadioButtonProps } from 'primevue/radiobutton';
 import { computed, defineModel, defineProps, useSlots } from 'vue';
 
+/**
+ * @emits {string | number | boolean | object} input - Fires when radio is selected. Emits the "value" prop
+ */
 interface Props extends RadioButtonProps {
-  // value, set by radio
-  value: string | number | boolean | object;
-  label?: string;
-  required?: boolean;
-  disabled?: boolean;
-  outline?: boolean;
+	/**
+	 * Value, set by radio
+	 * @type {string | number | boolean | object}
+	 */
+	value: string | number | boolean | object;
+	/**
+	 * Radio label text
+	 * @type {string}
+	 * @default ''
+	 */
+	label?: string;
+	/**
+	 * Marks the radio as required
+	 * @type {boolean}
+	 * @default false
+	 */
+	required?: boolean;
+	/**
+	 * Disables the radio
+	 * @type {boolean}
+	 * @default false
+	 */
+	disabled?: boolean;
+	/**
+	 * Changes visual style to outlined
+	 * @type {boolean}
+	 * @default false
+	 */
+	outline?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
-  required: false,
-  disabled: false,
-  outline: false,
+	label: '',
+	required: false,
+	disabled: false,
+	outline: false,
 });
 
-const model = defineModel<string | number | boolean | object>('selected', {required: true});
+/**
+ * [V-MODEL] currently selected value
+ * @model selected
+ */
+const model = defineModel<string | number | boolean | object>('selected', {
+	required: true,
+});
 
 const radioId = `radio-${Math.random().toString(36).slice(2, 11)}`;
 
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const isChecked = computed(() => {
-  return props.value === model.value;
+	return props.value === model.value;
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-radio {
   box-sizing: border-box;
   width: fit-content;

@@ -17,36 +17,37 @@ import errorImage from '../assets/pdf-error.png';
 import pendingImage from '../assets/pdf-pending.png';
 import processingImage from '../assets/pdf-processing.png';
 
-export type PdfExportStatusType = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
+export type PdfExportStatusType =
+	(typeof WebitelMediaExporterExportStatus)[keyof typeof WebitelMediaExporterExportStatus];
 
 const props = defineProps<{
-  status: PdfExportStatusType | string;
-  clickable?: boolean;
+	status: PdfExportStatusType | string;
+	clickable?: boolean;
 }>();
 
 const emit = defineEmits<{
-  click: () => void;
+	click: () => void;
 }>();
 
 const statusImageMap: Record<string, string> = {
-  [WebitelMediaExporterExportStatus.Pending]: pendingImage,
-  [WebitelMediaExporterExportStatus.Processing]: processingImage,
-  [WebitelMediaExporterExportStatus.Done]: doneImage,
-  [WebitelMediaExporterExportStatus.Failed]: errorImage,
+	[WebitelMediaExporterExportStatus.Pending]: pendingImage,
+	[WebitelMediaExporterExportStatus.Processing]: processingImage,
+	[WebitelMediaExporterExportStatus.Done]: doneImage,
+	[WebitelMediaExporterExportStatus.Failed]: errorImage,
 };
 
-const statusImage = computed(() =>
-  statusImageMap[props.status] || pendingImage,
+const statusImage = computed(
+	() => statusImageMap[props.status] || pendingImage,
 );
 
 const overlayIcon = computed(() => {
-  return props.status === WebitelMediaExporterExportStatus.Done && 'zoom-in';
+	return props.status === WebitelMediaExporterExportStatus.Done && 'zoom-in';
 });
 
 const handleClick = () => {
-  if (props.clickable) {
-    emit('click');
-  }
+	if (props.clickable) {
+		emit('click');
+	}
 };
 </script>
 

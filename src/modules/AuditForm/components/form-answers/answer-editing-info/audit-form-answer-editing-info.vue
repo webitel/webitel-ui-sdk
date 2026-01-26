@@ -1,6 +1,6 @@
 <template>
   <section class="audit-form-answer-editing-info">
-    <header class="audit-form-answer-editing-info-header">
+    <header class="audit-form-answer-editing-info-header typo-caption">
       <span>{{ t('reusable.updatedBy') }}</span>
       <span>{{ answer.updatedBy.name }}</span>
       <span>{{ updateTime }}</span>
@@ -8,7 +8,7 @@
     <p
       v-if="!hideComment && initialComment"
       ref="answer-editing-comment"
-      class="audit-form-answer-editing-info-comment"
+      class="audit-form-answer-editing-info-comment typo-body-1"
       :class="{
         'audit-form-answer-editing-info-comment--collapsed': collapsed,
       }"
@@ -20,7 +20,7 @@
       class="audit-form-answer-editing-info-footer"
     >
       <button
-        class="audit-form-answer-editing-info-expand-action"
+        class="audit-form-answer-editing-info-expand-action typo-body-1"
         type="button"
         @click="collapsed = false"
       >
@@ -31,20 +31,23 @@
 </template>
 
 <script setup lang="ts">
-import { FormatDateMode } from '@webitel/ui-sdk/enums'
-import { formatDate } from '@webitel/ui-sdk/utils'
-import {computed, ref, useTemplateRef } from "vue";
+import { FormatDateMode } from '@webitel/ui-sdk/enums';
+import { formatDate } from '@webitel/ui-sdk/utils';
+import { computed, ref, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import {EngineQuestionAnswer} from "webitel-sdk";
+import type { EngineQuestionAnswer } from 'webitel-sdk';
 
-const props = withDefaults(defineProps<{
-  answer: EngineQuestionAnswer;
-  collapsible?: boolean;
-  hideComment?: boolean;
-}>(), {
-  collapsible: false,
-  hideComment: false,
-});
+const props = withDefaults(
+	defineProps<{
+		answer: EngineQuestionAnswer;
+		collapsible?: boolean;
+		hideComment?: boolean;
+	}>(),
+	{
+		collapsible: false,
+		hideComment: false,
+	},
+);
 
 const commentElRef = useTemplateRef('answer-editing-comment');
 
@@ -52,17 +55,25 @@ const collapsed = ref(props.collapsible);
 
 const { t } = useI18n();
 
-const initialComment = props.answer.comment; /* prevent editing-info change if comment is changing  */
+const initialComment =
+	props.answer
+		.comment; /* prevent editing-info change if comment is changing  */
 
 const updateTime = computed(() => {
-  return formatDate(parseInt(props.answer.updatedAt), FormatDateMode.DATETIME);
+	return formatDate(
+		Number.parseInt(props.answer.updatedAt),
+		FormatDateMode.DATETIME,
+	);
 });
 
-const isCommentClamped = props.collapsible && computed(() => {
-  // https://stackoverflow.com/a/67455839
-  return commentElRef.value?.clientHeight !== commentElRef.value?.scrollHeight;
-});
-
+const isCommentClamped =
+	props.collapsible &&
+	computed(() => {
+		// https://stackoverflow.com/a/67455839
+		return (
+			commentElRef.value?.clientHeight !== commentElRef.value?.scrollHeight
+		);
+	});
 </script>
 
 <style scoped lang="scss">
@@ -75,14 +86,11 @@ const isCommentClamped = props.collapsible && computed(() => {
 }
 
 .audit-form-answer-editing-info-header {
-  @extend %typo-caption;
   display: flex;
   gap: var(--spacing-xs);
 }
 
 .audit-form-answer-editing-info-comment {
-  @extend %typo-body-1;
-
   &--collapsed {
     line-clamp: 2;
     -webkit-line-clamp: 2; /* coz autoprefixer wont write "-webkit" for us https://github.com/postcss/autoprefixer/issues/1322 */
@@ -98,7 +106,6 @@ const isCommentClamped = props.collapsible && computed(() => {
 }
 
 .audit-form-answer-editing-info-expand-action {
-  @extend %typo-body-1;
   color: var(--text-link-color);
   cursor: pointer;
   transition: var(--transition);

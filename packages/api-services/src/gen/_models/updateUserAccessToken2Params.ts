@@ -6,9 +6,9 @@
  */
 
 export type UpdateUserAccessToken2Params = {
-/**
- * [optional] PATCH implementation
- */
-fields?: string[];
-enable?: boolean;
+	/**
+	 * [optional] PATCH implementation
+	 */
+	fields?: string[];
+	enable?: boolean;
 };

@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ContactsTimelineEventType = typeof ContactsTimelineEventType[keyof typeof ContactsTimelineEventType];
-
+export type ContactsTimelineEventType =
+	(typeof ContactsTimelineEventType)[keyof typeof ContactsTimelineEventType];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ContactsTimelineEventType = {
-  Chat: 'chat',
-  Call: 'call',
-  Email: 'email',
+	Chat: 'chat',
+	Call: 'call',
+	Email: 'email',
 } as const;

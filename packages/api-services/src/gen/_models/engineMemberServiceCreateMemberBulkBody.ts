@@ -7,6 +7,6 @@
 import type { EngineCreateMemberBulkItem } from './engineCreateMemberBulkItem';
 
 export interface EngineMemberServiceCreateMemberBulkBody {
-  fileName?: string;
-  items?: EngineCreateMemberBulkItem[];
+	fileName?: string;
+	items?: EngineCreateMemberBulkItem[];
 }

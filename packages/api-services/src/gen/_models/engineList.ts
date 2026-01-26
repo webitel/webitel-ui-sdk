@@ -7,13 +7,13 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineList {
-  count?: string;
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  description?: string;
-  domainId?: string;
-  id?: string;
-  name?: string;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	count?: string;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	description?: string;
+	domainId?: string;
+	id?: string;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

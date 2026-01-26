@@ -4,19 +4,20 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+
+import type { EngineCreateMemberBulkItemVariables } from './engineCreateMemberBulkItemVariables';
 import type { EngineLookup } from './engineLookup';
 import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommunicationCreateRequest';
-import type { EngineCreateMemberBulkItemVariables } from './engineCreateMemberBulkItemVariables';
 
 export interface EngineCreateMemberBulkItem {
-  agent?: EngineLookup;
-  bucket?: EngineLookup;
-  communications?: EngineMemberCommunicationCreateRequest[];
-  expireAt?: string;
-  minOfferingAt?: string;
-  name?: string;
-  priority?: number;
-  skill?: EngineLookup;
-  timezone?: EngineLookup;
-  variables?: EngineCreateMemberBulkItemVariables;
+	agent?: EngineLookup;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	expireAt?: string;
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	timezone?: EngineLookup;
+	variables?: EngineCreateMemberBulkItemVariables;
 }

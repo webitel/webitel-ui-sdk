@@ -12,23 +12,23 @@ import type { OAuth2FederationUpdateOAuthServiceBodyChangesMetadata } from './oA
  * Configuration changes.
  */
 export type OAuth2FederationUpdateOAuthServiceBodyChanges = {
-  authUrl?: string;
-  /** google.protobuf.Struct claims = 7; */
-  claims?: ApiClaim[];
-  clientId?: string;
-  clientSecret?: string;
-  createdAt?: string;
-  createdBy?: ApiObjectId;
-  discoveryUrl?: string;
-  domain?: ApiObjectId;
-  enabled?: boolean;
-  logo?: string;
-  metadata?: OAuth2FederationUpdateOAuthServiceBodyChangesMetadata;
-  name?: string;
-  scopes?: string[];
-  tokenUrl?: string;
-  type?: string;
-  updatedAt?: string;
-  updatedBy?: ApiObjectId;
-  userinfoUrl?: string;
+	authUrl?: string;
+	/** google.protobuf.Struct claims = 7; */
+	claims?: ApiClaim[];
+	clientId?: string;
+	clientSecret?: string;
+	createdAt?: string;
+	createdBy?: ApiObjectId;
+	discoveryUrl?: string;
+	domain?: ApiObjectId;
+	enabled?: boolean;
+	logo?: string;
+	metadata?: OAuth2FederationUpdateOAuthServiceBodyChangesMetadata;
+	name?: string;
+	scopes?: string[];
+	tokenUrl?: string;
+	type?: string;
+	updatedAt?: string;
+	updatedBy?: ApiObjectId;
+	userinfoUrl?: string;
 };

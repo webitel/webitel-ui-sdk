@@ -57,12 +57,16 @@
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import {useI18n} from "vue-i18n";
-import {EngineAuditQuestionType, EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
+import { useI18n } from 'vue-i18n';
+import {
+	EngineAuditQuestionType,
+	type EngineQuestion,
+	type EngineQuestionAnswer,
+} from 'webitel-sdk';
 
-import { WtDivider,WtIcon, WtInput } from '../../../components';
+import { WtDivider, WtIcon, WtInput } from '../../../components';
 import isEmpty from '../../../scripts/isEmpty.js';
-import AuditFormAnswerEditingInfo from "./form-answers/answer-editing-info/audit-form-answer-editing-info.vue";
+import AuditFormAnswerEditingInfo from './form-answers/answer-editing-info/audit-form-answer-editing-info.vue';
 import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './form-questions/score/audit-form-question-score.vue';
 
@@ -71,40 +75,43 @@ const readonly = inject('readonly');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
 const props = defineProps<{
-  question: EngineQuestion;
-  disableDragging?: boolean;
-  first?: boolean;
+	question: EngineQuestion;
+	disableDragging?: boolean;
+	first?: boolean;
 }>();
 
 const emit = defineEmits<{
-  'activate': [];
+	activate: [];
 }>();
 
 const { t } = useI18n();
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === EngineAuditQuestionType.Option)
-    return AuditFormQuestionOptions;
-  if (props.question.type === EngineAuditQuestionType.Score)
-    return AuditFormQuestionScore;
-  return null;
+	if (props.question.type === EngineAuditQuestionType.Option)
+		return AuditFormQuestionOptions;
+	if (props.question.type === EngineAuditQuestionType.Score)
+		return AuditFormQuestionScore;
+	return null;
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
-  if (readonly.value) return; // if ... then in preview mode
+	if (readonly.value) return; // if ... then in preview mode
 
-  // coz only some properties of answer may be patched
-  const newAnswer = { ...answerModel.value, ...value };
-  answerModel.value = newAnswer;
+	// coz only some properties of answer may be patched
+	const newAnswer = {
+		...answerModel.value,
+		...value,
+	};
+	answerModel.value = newAnswer;
 };
 
 const resetAnswer = () => {
-  answerModel.value = {
-    ...answerModel.value,
-    score: null, // reset only score field
-  };
+	answerModel.value = {
+		...answerModel.value,
+		score: null, // reset only score field
+	};
 };
 </script>
 

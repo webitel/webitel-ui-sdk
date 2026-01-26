@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-breadcrumb-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleBreadcrumb from './examples/example-breadcrumb.vue';
 </script>
 
-# WtBreadcrumb
+# `wt-breadcrumb.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example:
 

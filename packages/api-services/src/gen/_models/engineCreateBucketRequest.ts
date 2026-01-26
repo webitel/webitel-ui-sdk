@@ -6,7 +6,7 @@
  */
 
 export interface EngineCreateBucketRequest {
-  description?: string;
-  domainId?: string;
-  name?: string;
+	description?: string;
+	domainId?: string;
+	name?: string;
 }

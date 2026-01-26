@@ -6,18 +6,18 @@
  */
 
 export type GetLabelsParams = {
-/**
- * Page number of result dataset records. offset = ((page-1)*size)
- */
-page?: number;
-/**
- * Size count of records on result page. limit = (size+1)
- */
-size?: number;
-/**
+	/**
+	 * Page number of result dataset records. offset = ((page-1)*size)
+	 */
+	page?: number;
+	/**
+	 * Size count of records on result page. limit = (size+1)
+	 */
+	size?: number;
+	/**
  * Search term: label.
 `?` - matches any one character
 `*` - matches 0 or more characters
  */
-q?: string;
+	q?: string;
 };

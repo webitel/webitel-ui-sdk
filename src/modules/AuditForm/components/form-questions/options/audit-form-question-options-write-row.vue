@@ -35,35 +35,44 @@ import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
 import decimalValidator from '../../../../../validations/vuelidate/validators/decimalValidator.js';
 
 const props = defineProps({
-  option: {
-    type: Object,
-    required: true,
-  },
-  first: {
-    type: Boolean,
-    default: false,
-  },
+	option: {
+		type: Object,
+		required: true,
+	},
+	first: {
+		type: Boolean,
+		default: false,
+	},
 });
 
-const emit = defineEmits(['update:option', 'delete']);
+const emit = defineEmits([
+	'update:option',
+	'delete',
+]);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
 
 const v$ = useVuelidate(
-  computed(() => ({
-    option: {
-      name: { required },
-      score: {
-        required,
-        minValue: minValue(0),
-        maxValue: maxValue(10),
-        decimalValidator: decimalValidator(2),
-      },
-    },
-  })),
-  { option },
-  { $autoDirty: true },
+	computed(() => ({
+		option: {
+			name: {
+				required,
+			},
+			score: {
+				required,
+				minValue: minValue(0),
+				maxValue: maxValue(10),
+				decimalValidator: decimalValidator(2),
+			},
+		},
+	})),
+	{
+		option,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 // init validation

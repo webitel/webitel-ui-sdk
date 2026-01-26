@@ -1,7 +1,7 @@
 import '@webitel/styleguide/fonts';
 import 'vue-multiselect/dist/vue-multiselect.css';
 import './assets/icons/sprite';
-import './css/main.scss';
+import './css/main.css';
 import 'vidstack/bundle';
 
 import { createApp } from 'vue';
@@ -17,11 +17,11 @@ import App from './the-app.vue';
 const app = createApp(App).use(router).use(i18n).provide('$eventBus', eventBus);
 
 Object.keys(Components).forEach((name) => {
-  app.component(name, Components[name]);
+	app.component(name, Components[name]);
 });
 
 Object.keys(Directives).forEach((name) => {
-  app.directive(name, Directives[name]);
+	app.directive(name, Directives[name]);
 });
 
 initPrimevue(app);

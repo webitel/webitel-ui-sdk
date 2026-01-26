@@ -6,17 +6,17 @@
  */
 
 export type SearchTypeExtensionsParams = {
-/**
+	/**
  * Number of result records (per page).
 Default: 16.
  */
-size?: number;
-/**
+	size?: number;
+	/**
  * Page number of result set of records.
 Default: 1.
  */
-page?: number;
-/**
+	page?: number;
+	/**
  * Sort result dataset of records by fields.
 ```
 sort ::= *( ORDER name )
@@ -37,8 +37,8 @@ Fields available
 
 Use ?fields=`field.sort()` option to sort Edge fields.
  */
-sort?: string[];
-/**
+	sort?: string[];
+	/**
  * Fields [Q]uery to build result dataset record.
 ```
 fields ::= field [ *( "," field ) ]
@@ -53,16 +53,16 @@ DIGIT    = %x30-39            ; "0"-"9"
 USCORE   = %x5F ; underscore  ; "_"
 ```
  */
-fields?: string[];
-/**
+	fields?: string[];
+	/**
  * Search term:
 `?` - matches any character
 `*` - matches 0 or more characters
 e.g.: name,emails{type},labels etc...
  */
-q?: string;
-/**
- * extension.type.id
- */
-id?: string[];
+	q?: string;
+	/**
+	 * extension.type.id
+	 */
+	id?: string[];
 };

@@ -1,7 +1,7 @@
 <script setup>
 import { provide } from 'vue';
 
-import { VideoCallControlsPanel } from '../../../../../../../../src/components/wt-vidstack-player/components/index.js';
+import { VideoCallControlsPanel } from '../../../../../../../../src/components/wt-vidstack-player/components';
 
 const micCallback = () => {}
 const videoCallback = () => {}

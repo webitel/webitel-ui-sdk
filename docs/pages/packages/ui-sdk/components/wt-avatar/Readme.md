@@ -1,16 +1,14 @@
 <script setup>
-import Docs from './wt-avatar-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleAvatarLetters from './examples/example-avatar-letters.vue';
 import ExampleAvatarWithStatus from './examples/example-avatar-with-status.vue';
 </script>
 
-# WtAvatar
+# `wt-avatar.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Avatar Letters
 

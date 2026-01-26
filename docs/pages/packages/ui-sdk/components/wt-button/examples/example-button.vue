@@ -12,12 +12,7 @@ const load = () => {
 </script>
 
 <template>
-  <wt-button
-    :loading="loading"
-    @click="load"
-  >
+  <wt-button :loading="loading" @click="load">
     Click me for loading
   </wt-button>
 </template>
-
-<style lang="scss" scoped></style>

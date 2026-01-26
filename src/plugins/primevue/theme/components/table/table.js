@@ -16,12 +16,12 @@ const rowStateStyles = (state, dt) => `
 `;
 
 const table = {
-  root: TableScheme.sizes,
-  colorScheme: TableScheme.colorScheme,
+	root: TableScheme.sizes,
+	colorScheme: TableScheme.colorScheme,
 
-  // Rewrite the default table styles in the theme here:
-  // For customize the table styles you need write css styles for classes
-  css: ({ dt }) => `
+	// Rewrite the default table styles in the theme here:
+	// For customize the table styles you need write css styles for classes
+	css: ({ dt }) => `
         .p-datatable-table-container {
           width: 100%;
         }

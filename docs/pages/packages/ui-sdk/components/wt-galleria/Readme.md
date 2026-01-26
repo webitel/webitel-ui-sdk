@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-galleria-docs.vue'
+import Specs from './component-specs.vue';
 import ExampleGalleria from './examples/example-galleria.vue';
 </script>
 
-# WtGalleria
+# `wt-galleria.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Galleria
 

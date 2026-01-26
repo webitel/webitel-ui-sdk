@@ -6,5 +6,5 @@
  */
 
 export type SearchAgentInQueueStatisticsParams = {
-domainId?: string;
+	domainId?: string;
 };

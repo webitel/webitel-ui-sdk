@@ -6,133 +6,154 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  SearchFilesByCallParams,
-  SearchFilesParams,
-  SearchScreenRecordingsByAgentParams,
-  SearchScreenRecordingsParams,
-  StorageDeleteFilesRequest,
-  StorageDeleteFilesResponse,
-  StorageDeleteQuarantineFilesRequest,
-  StorageFileServiceDeleteScreenRecordingsBody,
-  StorageFileServiceDeleteScreenRecordingsByAgentBody,
-  StorageListFile,
-  StorageRestoreFilesRequest,
-  StorageRestoreFilesResponse
+	SearchFilesByCallParams,
+	SearchFilesParams,
+	SearchScreenRecordingsByAgentParams,
+	SearchScreenRecordingsParams,
+	StorageDeleteFilesRequest,
+	StorageDeleteFilesResponse,
+	StorageDeleteQuarantineFilesRequest,
+	StorageFileServiceDeleteScreenRecordingsBody,
+	StorageFileServiceDeleteScreenRecordingsByAgentBody,
+	StorageListFile,
+	StorageRestoreFilesRequest,
+	StorageRestoreFilesResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getFileService =
+		// --- title end
+		() => {
+			// --- header end
+			const searchFilesByCall = <TData = AxiosResponse<StorageListFile>>(
+				callId: string,
+				params?: SearchFilesByCallParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/calls/${callId}/files`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const searchScreenRecordingsByAgent = <
+				TData = AxiosResponse<StorageListFile>,
+			>(
+				agentId: string,
+				params?: SearchScreenRecordingsByAgentParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/storage/agent/${agentId}`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteScreenRecordingsByAgent = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				agentId: string,
+				id: string[],
+				storageFileServiceDeleteScreenRecordingsByAgentBody: StorageFileServiceDeleteScreenRecordingsByAgentBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/agent/${agentId}/${id}`, {
+					data: storageFileServiceDeleteScreenRecordingsByAgentBody,
+					...options,
+				});
+			};
+			const deleteFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
+				storageDeleteFilesRequest: StorageDeleteFilesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete('/storage/file', {
+					data: storageDeleteFilesRequest,
+					...options,
+				});
+			};
+			const searchFiles = <TData = AxiosResponse<StorageListFile>>(
+				params?: SearchFilesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/storage/file', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteQuarantineFiles = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				storageDeleteQuarantineFilesRequest: StorageDeleteQuarantineFilesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete('/storage/file/quarantine', {
+					data: storageDeleteQuarantineFilesRequest,
+					...options,
+				});
+			};
+			const restoreFiles = <TData = AxiosResponse<StorageRestoreFilesResponse>>(
+				storageRestoreFilesRequest: StorageRestoreFilesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.patch(
+					'/storage/file/restore',
+					storageRestoreFilesRequest,
+					options,
+				);
+			};
+			const searchScreenRecordings = <TData = AxiosResponse<StorageListFile>>(
+				userId: string,
+				params?: SearchScreenRecordingsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/storage/users/${userId}`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteScreenRecordings = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				userId: string,
+				id: string[],
+				storageFileServiceDeleteScreenRecordingsBody: StorageFileServiceDeleteScreenRecordingsBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/users/${userId}/${id}`, {
+					data: storageFileServiceDeleteScreenRecordingsBody,
+					...options,
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchFilesByCall,
+				searchScreenRecordingsByAgent,
+				deleteScreenRecordingsByAgent,
+				deleteFiles,
+				searchFiles,
+				deleteQuarantineFiles,
+				restoreFiles,
+				searchScreenRecordings,
+				deleteScreenRecordings,
+			};
+		};
+export type SearchFilesByCallResult = AxiosResponse<StorageListFile>;
+export type SearchScreenRecordingsByAgentResult =
+	AxiosResponse<StorageListFile>;
+export type DeleteScreenRecordingsByAgentResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
+export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>;
+export type SearchFilesResult = AxiosResponse<StorageListFile>;
+export type DeleteQuarantineFilesResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
+export type RestoreFilesResult = AxiosResponse<StorageRestoreFilesResponse>;
+export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>;
+export type DeleteScreenRecordingsResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
 
-  export const 
-            // --- title start
-            getFileService
-            // --- title end
-           = () => {
-
-            // --- header end
-          const searchFilesByCall = <TData = AxiosResponse<StorageListFile>>(
-    callId: string,
-    params?: SearchFilesByCallParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/calls/${callId}/files`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const searchScreenRecordingsByAgent = <TData = AxiosResponse<StorageListFile>>(
-    agentId: string,
-    params?: SearchScreenRecordingsByAgentParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/storage/agent/${agentId}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const deleteScreenRecordingsByAgent = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
-    agentId: string,
-    id: string[],
-    storageFileServiceDeleteScreenRecordingsByAgentBody: StorageFileServiceDeleteScreenRecordingsByAgentBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/storage/agent/${agentId}/${id}`,{data:
-      storageFileServiceDeleteScreenRecordingsByAgentBody, ...options}
-    );
-  }
-const deleteFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
-    storageDeleteFilesRequest: StorageDeleteFilesRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/storage/file`,{data:
-      storageDeleteFilesRequest, ...options}
-    );
-  }
-const searchFiles = <TData = AxiosResponse<StorageListFile>>(
-    params?: SearchFilesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/storage/file`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const deleteQuarantineFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
-    storageDeleteQuarantineFilesRequest: StorageDeleteQuarantineFilesRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/storage/file/quarantine`,{data:
-      storageDeleteQuarantineFilesRequest, ...options}
-    );
-  }
-const restoreFiles = <TData = AxiosResponse<StorageRestoreFilesResponse>>(
-    storageRestoreFilesRequest: StorageRestoreFilesRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.patch(
-      `/storage/file/restore`,
-      storageRestoreFilesRequest,options
-    );
-  }
-const searchScreenRecordings = <TData = AxiosResponse<StorageListFile>>(
-    userId: string,
-    params?: SearchScreenRecordingsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/storage/users/${userId}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const deleteScreenRecordings = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
-    userId: string,
-    id: string[],
-    storageFileServiceDeleteScreenRecordingsBody: StorageFileServiceDeleteScreenRecordingsBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.delete(
-      `/storage/users/${userId}/${id}`,{data:
-      storageFileServiceDeleteScreenRecordingsBody, ...options}
-    );
-  }
-
-            // --- footer start
-            return {searchFilesByCall,searchScreenRecordingsByAgent,deleteScreenRecordingsByAgent,deleteFiles,searchFiles,deleteQuarantineFiles,restoreFiles,searchScreenRecordings,deleteScreenRecordings}};
-export type SearchFilesByCallResult = AxiosResponse<StorageListFile>
-export type SearchScreenRecordingsByAgentResult = AxiosResponse<StorageListFile>
-export type DeleteScreenRecordingsByAgentResult = AxiosResponse<StorageDeleteFilesResponse>
-export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>
-export type SearchFilesResult = AxiosResponse<StorageListFile>
-export type DeleteQuarantineFilesResult = AxiosResponse<StorageDeleteFilesResponse>
-export type RestoreFilesResult = AxiosResponse<StorageRestoreFilesResponse>
-export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>
-export type DeleteScreenRecordingsResult = AxiosResponse<StorageDeleteFilesResponse>
-
-            // --- footer end
-          
+// --- footer end

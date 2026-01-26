@@ -6,6 +6,6 @@
  */
 
 export interface WebitelknowledgebaseTag {
-  /** The name of the tag. */
-  name?: string;
+	/** The name of the tag. */
+	name?: string;
 }

@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCreateChatPlanRequest {
-  description?: string;
-  enabled?: boolean;
-  name?: string;
-  schema?: EngineLookup;
+	description?: string;
+	enabled?: boolean;
+	name?: string;
+	schema?: EngineLookup;
 }

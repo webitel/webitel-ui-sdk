@@ -1,21 +1,21 @@
 export const CrmSections = {
-  Contacts: 'contacts',
-  Cases: 'cases',
+	Contacts: 'contacts',
+	Cases: 'cases',
 
-  // CONFIGURATION - LOOKUPS
-  Slas: 'slas',
-  ServiceCatalogs: 'service-catalogs',
-  Priorities: 'priorities',
-  Statuses: 'statuses',
-  Sources: 'sources',
-  CloseReasonGroups: 'close-reason-groups',
-  ContactGroups: 'contact-groups',
-  CaseSources: 'case-sources',
+	// CONFIGURATION - LOOKUPS
+	Slas: 'slas',
+	ServiceCatalogs: 'service-catalogs',
+	Priorities: 'priorities',
+	Statuses: 'statuses',
+	Sources: 'sources',
+	CloseReasonGroups: 'close-reason-groups',
+	ContactGroups: 'contact-groups',
+	CaseSources: 'case-sources',
 
-  // CUSTOMIZATION
-  CasesExtensions: 'ext-cases',
-  ContactsExtensions: 'ext-contacts',
-  CustomLookups: 'custom-lookups',
+	// CUSTOMIZATION
+	CasesExtensions: 'ext-cases',
+	ContactsExtensions: 'ext-contacts',
+	CustomLookups: 'custom-lookups',
 } as const;
 
 export type CrmSections = (typeof CrmSections)[keyof typeof CrmSections];

@@ -6,23 +6,23 @@
  */
 
 export type SearchAuditFormParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: number[];
-teamId?: number[];
-enabled?: boolean;
-/**
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: number[];
+	teamId?: number[];
+	enabled?: boolean;
+	/**
  * bool archive = 9;
 
 bool active = 11; // not archive
  */
-editable?: boolean;
-question?: string;
-/**
- * expects userID to filter by user's team
- */
-teamFilter?: number;
+	editable?: boolean;
+	question?: string;
+	/**
+	 * expects userID to filter by user's team
+	 */
+	teamFilter?: number;
 };

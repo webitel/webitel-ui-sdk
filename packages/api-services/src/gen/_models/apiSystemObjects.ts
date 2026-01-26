@@ -5,22 +5,22 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ApiSystemObjects = typeof ApiSystemObjects[keyof typeof ApiSystemObjects];
-
+export type ApiSystemObjects =
+	(typeof ApiSystemObjects)[keyof typeof ApiSystemObjects];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ApiSystemObjects = {
-  Contacts: 'contacts',
-  CcList: 'cc_list',
-  CcBucket: 'cc_bucket',
-  Calendars: 'calendars',
-  Devices: 'devices',
-  CcAgent: 'cc_agent',
-  CcTeam: 'cc_team',
-  CcResource: 'cc_resource',
-  CcResourceGroup: 'cc_resource_group',
-  CcQueue: 'cc_queue',
-  Roles: 'roles',
-  Users: 'users',
-  CognitiveProfile: 'cognitive_profile',
+	Contacts: 'contacts',
+	CcList: 'cc_list',
+	CcBucket: 'cc_bucket',
+	Calendars: 'calendars',
+	Devices: 'devices',
+	CcAgent: 'cc_agent',
+	CcTeam: 'cc_team',
+	CcResource: 'cc_resource',
+	CcResourceGroup: 'cc_resource_group',
+	CcQueue: 'cc_queue',
+	Roles: 'roles',
+	Users: 'users',
+	CognitiveProfile: 'cognitive_profile',
 } as const;

@@ -1,313 +1,336 @@
 {
-  "name": "@webitel/ui-sdk",
-  "version": "26.2.12",
-  "private": false,
-  "scripts": {
-    "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
-    "dev": "npm run docs:dev",
-    "build": "vite build",
-    "test:unit": "vitest",
-    "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "publish-lib": " npm publish --access public",
-    "docs:dev": "vitepress dev docs --port 8080",
-    "docs:build": "vitepress build docs",
-    "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
-    "lint:fix-staged": "npx lint-staged",
-    "lint:package": "publint",
-    "lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm",
-    "utils:link": "npm link",
-    "utils:update-node": "nvm install --lts && nvm alias default node",
-    "utils:i": "npm install"
-  },
-  "workspaces": [
-    "./packages/api-services"
-  ],
-  "main": "./dist/ui-sdk.js",
-  "type": "module",
-  "files": [
-    "dist/*",
-    "types/*",
-    "src/api/*",
-    "src/assets/*",
-    "src/locale/*",
-    "src/composables/*",
-    "src/css/*",
-    "src/components/*",
-    "src/directives/*",
-    "src/enums/*",
-    "src/mixins/*",
-    "src/scripts/*",
-    "src/utils/*",
-    "src/validations/*",
-    "src/modules/*",
-    "src/plugins/*",
-    "src/store/*",
-    "src/tests/*",
-    "src/install.ts",
-    "CHANGELOG.md"
-  ],
-  "dependencies": {
-    "@floating-ui/vue": "^1.1.6",
-    "@morev/vue-transitions": "^3.0.5",
-    "@primeuix/themes": "^1.1.1",
-    "@tailwindcss/vite": "^4.1.7",
-    "@vuelidate/core": "^2.0.3",
-    "@vuelidate/validators": "^2.0.4",
-    "@vuepic/vue-datepicker": "^4.5.1",
-    "@vueuse/components": "^13.0.0",
-    "@webitel/api-services": "^0.0.105",
-    "@webitel/styleguide": "^26.2.2",
-    "autosize": "^6.0.1",
-    "axios": "^1.8.3",
-    "clipboard-copy": "^4.0.1",
-    "csv-stringify": "^5.5.3",
-    "date-fns": "^4.1.0",
-    "date-fns-tz": "^3.2.0",
-    "deep-copy": "^1.4.2",
-    "deep-equal": "^2.2.3",
-    "deepmerge": "^4.3.1",
-    "emoji-picker-element": "^1.27.0",
-    "file-saver-es": "^2.0.5",
-    "flat": "^6.0.1",
-    "is-valid-domain": "^0.1.6",
-    "jszip": "^3.10.1",
-    "jszip-utils": "^0.1.0",
-    "lodash-es": "^4.17.21",
-    "mitt": "^3.0.1",
-    "path-browserify": "^1.0.1",
-    "plyr": "^3.7.8",
-    "primevue": "^4.3.4",
-    "qs-esm": "^7.0.2",
-    "sortablejs": "^1.15.3",
-    "tailwindcss": "^4.1.7",
-    "vidstack": "^1.12.13",
-    "vue-i18n": "^11.1.2",
-    "vue-multiselect": "^3.1.0",
-    "vue-observe-visibility": "^2.0.0-alpha.1",
-    "vue-router": "^4.5.0",
-    "webitel-sdk": "^25.8.9",
-    "xlsx": "0.18.5",
-    "zod": "^3.25.55"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "@regle/core": "^1.3.0",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.13.10",
-    "@vitejs/plugin-vue": "^5.2.3",
-    "@vue/compat": "^3.5.13",
-    "@vue/compiler-sfc": "^3.5.13",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.7.0",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^10.0.0",
-    "globals": "^16.0.0",
-    "globby": "^14.1.0",
-    "happy-dom": "^17.4.4",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
-    "markdown-it": "^14.1.0",
-    "markdown-table": "^3.0.4",
-    "path": "^0.12.7",
-    "pinia": "^3.0.1",
-    "postcss": "^8.5.3",
-    "postcss-prefix-selector": "^2.1.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-css-order": "^2.1.2",
-    "prismjs": "^1.30.0",
-    "publint": "^0.3.9",
-    "sass": "^1.85.1",
-    "typedoc-github-wiki-theme": "^2.1.0",
-    "typescript": "5.8.2",
-    "typescript-eslint": "^8.26.1",
-    "typescript-plugin-css-modules": "^5.1.0",
-    "unplugin-auto-import": "^19.1.1",
-    "vite": "^6.2.2",
-    "vite-plugin-checker": "^0.9.0",
-    "vite-plugin-node-polyfills": "^0.23.0",
-    "vite-plugin-static-copy": "^2.3.0",
-    "vite-plugin-svg-sprite": "=0.5",
-    "vite-plugin-vue-docgen": "^0.3.4",
-    "vitepress": "1.6.3",
-    "vitest": "^3.0.9",
-    "vue": "^3.5.13",
-    "vue-tsc": "^2.2.8",
-    "vuex": "^4.1.0"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.9.5"
-  },
-  "overrides": {
-    "vite": "^6.2.2",
-    "date-fns": "^4.1.0"
-  },
-  "engines": {
-    "npm": "11",
-    "node": "v24"
-  },
-  "exports": {
-    ".": {
-      "types": "./types/install.d.ts",
-      "import": "./dist/ui-sdk.js"
-    },
-    "./store": {
-      "types": "./types/store/new/index.d.ts",
-      "import": "./src/store/new/index.js"
-    },
-    "./store*": {
-      "types": "./types/store*",
-      "import": "./src/store*"
-    },
-    "./src/store*": {
-      "types": "./types/store*",
-      "import": "./src/store*"
-    },
-    "./enums": {
-      "types": "./types/enums/index.d.ts",
-      "import": "./src/enums/index.ts"
-    },
-    "./enums*": {
-      "types": "./types/enums*",
-      "import": "./src/enums*"
-    },
-    "./src/enums*": {
-      "types": "./types/enums*",
-      "import": "./src/enums*"
-    },
-    "./components": {
-      "types": "./types/components/index.d.ts",
-      "import": "./src/components/index.js"
-    },
-    "./components*": {
-      "types": "./types/components*",
-      "import": "./src/components*"
-    },
-    "./src/components*": {
-      "types": "./types/components*",
-      "import": "./src/components*"
-    },
-    "./scripts": {
-      "types": "./types/scripts/index.d.ts",
-      "import": "./src/scripts/index.js"
-    },
-    "./scripts*": {
-      "types": "./types/scripts*",
-      "import": "./src/scripts*"
-    },
-    "./src/scripts*": {
-      "types": "./types/scripts*",
-      "import": "./src/scripts*"
-    },
-    "./utils*": {
-      "types": "./types/utils*",
-      "import": "./src/utils*"
-    },
-    "./utils": {
-      "types": "./types/utils/index.d.ts",
-      "import": "./src/utils/index.ts"
-    },
-    "./api*": {
-      "types": "./types/api*",
-      "import": "./src/api*"
-    },
-    "./src/api*": {
-      "types": "./types/api*",
-      "import": "./src/api*"
-    },
-    "./locale*": {
-      "types": "./types/locale*",
-      "import": "./src/locale*"
-    },
-    "./locale": {
-      "types": "./types/locale/index.d.ts",
-      "import": "./src/locale/index.ts"
-    },
-    "./src/locale*": {
-      "types": "./types/locale*",
-      "import": "./src/locale*"
-    },
-    "./composables": {
-      "types": "./types/composables/index.d.ts",
-      "import": "./src/composables/index.ts"
-    },
-    "./composables*": {
-      "types": "./types/composables*",
-      "import": "./src/composables*"
-    },
-    "./src/composables*": {
-      "types": "./types/composables*",
-      "import": "./src/composables*"
-    },
-    "./css*": {
-      "import": "./src/css*"
-    },
-    "./src/css*": {
-      "import": "./src/css*"
-    },
-    "./directives*": {
-      "types": "./types/directives*",
-      "import": "./src/directives*"
-    },
-    "./src/directives*": {
-      "types": "./types/directives*",
-      "import": "./src/directives*"
-    },
-    "./mixins*": {
-      "types": "./types/mixins*",
-      "import": "./src/mixins*"
-    },
-    "./src/mixins*": {
-      "types": "./types/mixins*",
-      "import": "./src/mixins*"
-    },
-    "./validations": {
-      "types": "./types/validations/index.d.ts",
-      "import": "./src/validations/index.ts"
-    },
-    "./validators*": {
-      "types": "./types/validations/vuelidate/validators*",
-      "import": "./src/validations/vuelidate/validators*"
-    },
-    "./src/validators*": {
-      "types": "./types/validations/vuelidate/validators*",
-      "import": "./src/validations/vuelidate/validators*"
-    },
-    "./modules*": {
-      "types": "./types/modules*",
-      "import": "./src/modules*"
-    },
-    "./src/modules*": {
-      "types": "./types/modules*",
-      "import": "./src/modules*"
-    },
-    "./modules/CallSession": {
-      "types": "./types/modules/CallSession/index.d.ts",
-      "import": "./src/modules/CallSession/index.ts"
-    },
-    "./plugins*": {
-      "types": "./types/plugins*",
-      "import": "./src/plugins*"
-    },
-    "./src/plugins*": {
-      "types": "./types/plugins*",
-      "import": "./src/plugins*"
-    },
-    "./tests*": {
-      "types": "./types/tests*",
-      "import": "./src/tests*"
-    },
-    "./src/tests*": {
-      "types": "./types/tests*",
-      "import": "./src/tests*"
-    },
-    "./dist*": {
-      "import": "./dist*"
-    },
-    "./src/types": {
-      "types": "./types/index.d.ts",
-      "import": "./src/types/index.ts"
-    }
-  }
+	"name": "@webitel/ui-sdk",
+	"version": "26.2.31",
+	"private": false,
+	"scripts": {
+		"make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run biome:format:all || true) && npm run publish-lib",
+		"dev": "npm run docs:dev",
+		"build": "vite build",
+		"test:unit": "vitest",
+		"biome:format:all": "npx biome check --write ./src",
+		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"publish-lib": " npm publish --access public --tag latest",
+		"docs:dev": "vitepress dev docs --port 8080",
+		"docs:build": "vitepress build docs",
+		"lint:fix-staged": "npx lint-staged",
+		"lint:package": "publint",
+		"lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm",
+		"utils:link": "npm link",
+		"utils:update-node": "nvm install --lts && nvm alias default node",
+		"utils:i": "npm install",
+		"prepare": "husky || true"
+	},
+	"workspaces": [
+		"./packages/api-services",
+		"./packages/styleguide"
+	],
+	"main": "./dist/ui-sdk.js",
+	"type": "module",
+	"files": [
+		"dist/*",
+		"types/*",
+		"src/api/*",
+		"src/assets/*",
+		"src/locale/*",
+		"src/composables/*",
+		"src/css/*",
+		"src/components/*",
+		"src/directives/*",
+		"src/enums/*",
+		"src/mixins/*",
+		"src/scripts/*",
+		"src/utils/*",
+		"src/validations/*",
+		"src/modules/*",
+		"src/plugins/*",
+		"src/store/*",
+		"src/tests/*",
+		"src/install.ts",
+		"CHANGELOG.md"
+	],
+	"dependencies": {
+		"@floating-ui/vue": "^1.1.9",
+		"@morev/vue-transitions": "^3.0.5",
+		"@primeuix/themes": "^1.1.1",
+		"@tailwindcss/vite": "^4.1.7",
+		"@vuepic/vue-datepicker": "^4.5.1",
+		"@vueuse/components": "^14.0.0",
+		"autosize": "^6.0.1",
+		"csv-stringify": "^5.5.3",
+		"date-fns-tz": "^3.2.0",
+		"dompurify": "^3.3.1",
+		"emoji-picker-element": "^1.28.1",
+		"file-saver-es": "^2.0.5",
+		"flat": "^6.0.1",
+		"is-valid-domain": "^0.1.6",
+		"path-browserify": "^1.0.1",
+		"primevue": "^4.5.4",
+		"qs-esm": "^7.0.3",
+		"sortablejs": "^1.15.3",
+		"tailwindcss": "^4.1.7",
+		"vue-multiselect": "^3.4.0",
+		"vue-observe-visibility": "^2.0.0-alpha.1",
+		"xlsx": "0.18.5"
+	},
+	"peerDependencies": {
+		"@vuelidate/core": "^2.0.3",
+		"@vuelidate/validators": "^2.0.4",
+		"@webitel/api-services": ">=0.0.105",
+		"@webitel/styleguide": "^26.2.5",
+		"axios": "^1.8.3",
+		"date-fns": "^4.1.0",
+		"deep-copy": "^1.4.2",
+		"deep-equal": "^2.2.3",
+		"deepmerge": "^4.3.1",
+		"jszip": "^3.10.1",
+		"jszip-utils": "^0.1.0",
+		"lodash-es": "^4.17.21",
+		"mitt": "^3.0.1",
+		"path-browserify": "^1.0.1",
+		"vidstack": "^1.12.13",
+		"vue-i18n": "^11.1.2",
+		"vue-router": "^4.5.0",
+		"webitel-sdk": "^25.8.9",
+		"zod": "^4.x"
+	},
+	"peerDependenciesMeta": {
+		"@vuelidate/core": {
+			"optional": true
+		},
+		"@vuelidate/validators": {
+			"optional": true
+		},
+		"jszip": {
+			"optional": true
+		},
+		"jszip-utils": {
+			"optional": true
+		},
+		"mitt": {
+			"optional": true
+		},
+		"zod": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.11",
+		"@regle/core": "^1.16.2",
+		"@tsconfig/node22": "^22.0.0",
+		"@types/node": "^22.13.10",
+		"@vitejs/plugin-vue": "^6.0.3",
+		"@vue/compat": "^3.5.x",
+		"@vue/test-utils": "^2.4.6",
+		"@vue/tsconfig": "^0.8.1",
+		"@webitel/styleguide": "^26.2.0-1",
+		"clipboard-copy": "^4.x",
+		"globals": "^16.0.0",
+		"globby": "^16.x",
+		"happy-dom": "^20.x",
+		"husky": "^9.x",
+		"jszip": "^3.10.1",
+		"jszip-utils": "^0.1.0",
+		"lint-staged": "^16.x",
+		"markdown-it": "^14.1.0",
+		"markdown-table": "^3.0.4",
+		"path": "^0.12.7",
+		"pinia": "^3.x",
+		"postcss": "^8.5.3",
+		"postcss-prefix-selector": "^2.1.0",
+		"prismjs": "^1.30.0",
+		"publint": "^0.3.16",
+		"sass": "^1.85.1",
+		"typedoc-github-wiki-theme": "^2.1.0",
+		"typescript": "^5.9.x",
+		"typescript-plugin-css-modules": "^5.1.0",
+		"unplugin-auto-import": "^20.3.x",
+		"vidstack": "^1.12.13",
+		"vite": "npm:rolldown-vite@latest",
+		"vite-plugin-checker": "^0.12.0",
+		"vite-plugin-node-polyfills": "^0.24.x",
+		"vite-plugin-static-copy": "^3.1.x",
+		"vite-plugin-vue-docgen": "^0.3.4",
+		"vitepress": "^1.6.4",
+		"vitest": "^4.0.x",
+		"vue": "^3.5.x",
+		"vue-tsc": "^3.x",
+		"vuex": "^4.1.0"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "4.9.5"
+	},
+	"overrides": {
+		"date-fns": "^4.1.0"
+	},
+	"engines": {
+		"npm": "11",
+		"node": "v24"
+	},
+	"exports": {
+		".": {
+			"types": "./types/install.d.ts",
+			"import": "./dist/ui-sdk.js"
+		},
+		"./icons": {
+			"types": "./types/components/icons/index.d.ts",
+			"import": "./src/assets/icons/index.ts"
+		},
+		"./store": {
+			"types": "./types/store/new/index.d.ts",
+			"import": "./src/store/new/index.js"
+		},
+		"./store*": {
+			"types": "./types/store*",
+			"import": "./src/store*"
+		},
+		"./src/store*": {
+			"types": "./types/store*",
+			"import": "./src/store*"
+		},
+		"./enums": {
+			"types": "./types/enums/index.d.ts",
+			"import": "./src/enums/index.ts"
+		},
+		"./enums*": {
+			"types": "./types/enums*",
+			"import": "./src/enums*"
+		},
+		"./src/enums*": {
+			"types": "./types/enums*",
+			"import": "./src/enums*"
+		},
+		"./components": {
+			"types": "./types/components/index.d.ts",
+			"import": "./src/components/index.js"
+		},
+		"./components*": {
+			"types": "./types/components*",
+			"import": "./src/components*"
+		},
+		"./src/components*": {
+			"types": "./types/components*",
+			"import": "./src/components*"
+		},
+		"./scripts": {
+			"types": "./types/scripts/index.d.ts",
+			"import": "./src/scripts/index.js"
+		},
+		"./scripts*": {
+			"types": "./types/scripts*",
+			"import": "./src/scripts*"
+		},
+		"./src/scripts*": {
+			"types": "./types/scripts*",
+			"import": "./src/scripts*"
+		},
+		"./utils*": {
+			"types": "./types/utils*",
+			"import": "./src/utils*"
+		},
+		"./utils": {
+			"types": "./types/utils/index.d.ts",
+			"import": "./src/utils/index.ts"
+		},
+		"./api*": {
+			"types": "./types/api*",
+			"import": "./src/api*"
+		},
+		"./src/api*": {
+			"types": "./types/api*",
+			"import": "./src/api*"
+		},
+		"./locale*": {
+			"types": "./types/locale*",
+			"import": "./src/locale*"
+		},
+		"./locale": {
+			"types": "./types/locale/index.d.ts",
+			"import": "./src/locale/index.ts"
+		},
+		"./src/locale*": {
+			"types": "./types/locale*",
+			"import": "./src/locale*"
+		},
+		"./composables": {
+			"types": "./types/composables/index.d.ts",
+			"import": "./src/composables/index.ts"
+		},
+		"./composables*": {
+			"types": "./types/composables*",
+			"import": "./src/composables*"
+		},
+		"./src/composables*": {
+			"types": "./types/composables*",
+			"import": "./src/composables*"
+		},
+		"./css*": {
+			"import": "./src/css*"
+		},
+		"./src/css*": {
+			"import": "./src/css*"
+		},
+		"./directives*": {
+			"types": "./types/directives*",
+			"import": "./src/directives*"
+		},
+		"./src/directives*": {
+			"types": "./types/directives*",
+			"import": "./src/directives*"
+		},
+		"./mixins*": {
+			"types": "./types/mixins*",
+			"import": "./src/mixins*"
+		},
+		"./src/mixins*": {
+			"types": "./types/mixins*",
+			"import": "./src/mixins*"
+		},
+		"./validations": {
+			"types": "./types/validations/index.d.ts",
+			"import": "./src/validations/index.ts"
+		},
+		"./validators*": {
+			"types": "./types/validations/vuelidate/validators*",
+			"import": "./src/validations/vuelidate/validators*"
+		},
+		"./src/validators*": {
+			"types": "./types/validations/vuelidate/validators*",
+			"import": "./src/validations/vuelidate/validators*"
+		},
+		"./modules*": {
+			"types": "./types/modules*",
+			"import": "./src/modules*"
+		},
+		"./src/modules*": {
+			"types": "./types/modules*",
+			"import": "./src/modules*"
+		},
+		"./modules/CallSession": {
+			"types": "./types/modules/CallSession/index.d.ts",
+			"import": "./src/modules/CallSession/index.ts"
+		},
+		"./plugins*": {
+			"types": "./types/plugins*",
+			"import": "./src/plugins*"
+		},
+		"./src/plugins*": {
+			"types": "./types/plugins*",
+			"import": "./src/plugins*"
+		},
+		"./tests*": {
+			"types": "./types/tests*",
+			"import": "./src/tests*"
+		},
+		"./src/tests*": {
+			"types": "./types/tests*",
+			"import": "./src/tests*"
+		},
+		"./dist*": {
+			"import": "./dist*"
+		},
+		"./src/types": {
+			"types": "./types/index.d.ts",
+			"import": "./src/types/index.ts"
+		}
+	}
 }

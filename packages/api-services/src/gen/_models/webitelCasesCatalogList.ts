@@ -7,7 +7,7 @@
 import type { WebitelCasesCatalog } from './webitelCasesCatalog';
 
 export interface WebitelCasesCatalogList {
-  items?: WebitelCasesCatalog[];
-  next?: boolean;
-  page?: number;
+	items?: WebitelCasesCatalog[];
+	next?: boolean;
+	page?: number;
 }

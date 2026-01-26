@@ -2,24 +2,24 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const createAppearanceStore = () => {
-  const namespace = 'appearance';
+	const namespace = 'appearance';
 
-  const store = defineStore(namespace, () => {
-    const theme = ref<null | string>(null);
+	const store = defineStore(namespace, () => {
+		const theme = ref<null | string>(null);
 
-    const darkMode = computed(() => theme.value === 'dark')
+		const darkMode = computed(() => theme.value === 'dark');
 
-    const setTheme = (newTheme: string) => {
-      theme.value = newTheme
-    }
+		const setTheme = (newTheme: string) => {
+			theme.value = newTheme;
+		};
 
-    return {
-      theme,
-      darkMode,
+		return {
+			theme,
+			darkMode,
 
-      setTheme
-    };
-  });
+			setTheme,
+		};
+	});
 
-  return store;
+	return store;
 };

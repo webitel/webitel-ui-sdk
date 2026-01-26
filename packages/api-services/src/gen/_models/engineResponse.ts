@@ -6,5 +6,5 @@
  */
 
 export interface EngineResponse {
-  status?: string;
+	status?: string;
 }

@@ -34,32 +34,38 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  steps: {
-    type: Object,
-  },
-  activeStep: {
-    type: Number,
-    default: 1,
-  },
+	/**
+	 * An array of displayed steps. May include "name", "description", "completed"
+	 * @type {Array}
+	 */
+	steps: {
+		type: Array,
+		required: true,
+	},
+	/**
+	 * All past and active steps are marked with "accent-secondary-color"
+	 * @type {number}
+	 * @default 1
+	 */
+	activeStep: {
+		type: Number,
+		default: 1,
+	},
 });
 
 const description = computed(
-  () => props.steps[props.activeStep - 1].description,
+	() => props.steps[props.activeStep - 1].description,
 );
 
 const stepWithCompleted = computed(() =>
-  props.steps.map((item, idx) => ({
-    ...item,
-    completed: props.activeStep > idx,
-  })),
+	props.steps.map((item, idx) => ({
+		...item,
+		completed: props.activeStep > idx,
+	})),
 );
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-stepper {
   width: 100%;
 }
@@ -74,20 +80,20 @@ const stepWithCompleted = computed(() =>
 .wt-stepper-steps {
   display: flex;
   align-items: center;
+}
 
-  &__wrapper {
-    display: contents;
-  }
+.wt-stepper-steps__wrapper {
+  display: contents;
+}
 
-  &__divider {
-    flex: 1 1 auto;
-    background: var(--wt-stepper-divider-background-color);
-    height: 1px;
+.wt-stepper-steps__divider {
+  flex: 1 1 auto;
+  background: var(--wt-stepper-divider-background-color);
+  height: 1px;
+}
 
-    &--completed {
-      background-color: var(--wt-stepper-divider-background-completed-color);
-    }
-  }
+.wt-stepper-steps__divider--completed {
+  background-color: var(--wt-stepper-divider-background-completed-color);
 }
 
 .wt-stepper-description {

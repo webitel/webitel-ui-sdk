@@ -7,13 +7,13 @@
 import type { StorageCreateBackendProfileRequestProperties } from './storageCreateBackendProfileRequestProperties';
 
 export interface StorageCreateBackendProfileRequest {
-  description?: string;
-  disabled?: boolean;
-  domainId?: string;
-  expireDays?: number;
-  maxSize?: string;
-  name?: string;
-  priority?: number;
-  properties?: StorageCreateBackendProfileRequestProperties;
-  type?: string;
+	description?: string;
+	disabled?: boolean;
+	domainId?: string;
+	expireDays?: number;
+	maxSize?: string;
+	name?: string;
+	priority?: number;
+	properties?: StorageCreateBackendProfileRequestProperties;
+	type?: string;
 }

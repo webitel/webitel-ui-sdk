@@ -10,12 +10,18 @@ const generateCustomSlotCss = ({ slot, dt }) => `
 `;
 
 const menubar = {
-  root: MenubarScheme.sizes,
-  colorScheme: MenubarScheme.colorScheme,
+	root: MenubarScheme.sizes,
+	colorScheme: MenubarScheme.colorScheme,
 
-  css: ({ dt }) => `
-        ${generateCustomSlotCss({ slot: 'start', dt })}
-        ${generateCustomSlotCss({ slot: 'end', dt })}
+	css: ({ dt }) => `
+        ${generateCustomSlotCss({
+					slot: 'start',
+					dt,
+				})}
+        ${generateCustomSlotCss({
+					slot: 'end',
+					dt,
+				})}
   `,
 };
 

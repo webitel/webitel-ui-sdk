@@ -1,21 +1,14 @@
 <template>
   <section class="wt-error-page">
     <article class="wt-error-page__wrapper">
-      <img
-        :alt="errorPic.alt"
-        :src="errorPic.src"
-        class="wt-error-page__img"
-      />
+      <img :alt="errorPic.alt" :src="errorPic.src" class="wt-error-page__img" />
       <h2 class="wt-error-page__title">
         {{ errorTitle }}
       </h2>
       <p class="wt-error-page__text">
         {{ errorText }}
       </p>
-      <wt-button
-        class="wt-error-page__action"
-        @click="$emit('back')"
-      >
+      <wt-button class="wt-error-page__action" @click="$emit('back')">
         {{ $t('webitelUI.errorPages.goBack') }}
       </wt-button>
     </article>
@@ -27,50 +20,68 @@ import pic403 from '../../assets/components/organisms/wt-error-page/403.svg';
 import pic404 from '../../assets/components/organisms/wt-error-page/404.svg';
 
 export default {
-  name: 'WtErrorPage',
-  props: {
-    type: {
-      type: String,
-      required: true,
-      options: ['403', '404'],
-    },
-  },
-  computed: {
-    errorPic() {
-      switch (this.type) {
-        case '403':
-          return { src: pic403, alt: 'Forbidden pic' };
-        case '404':
-          return { src: pic404, alt: 'Not found pic' };
-        default:
-          return '';
-      }
-    },
-    errorTitle() {
-      switch (this.type) {
-        case '403':
-          return this.$t('webitelUI.errorPages.page403.title');
-        case '404':
-          return this.$t('webitelUI.errorPages.page404.title');
-        default:
-          return '';
-      }
-    },
-    errorText() {
-      switch (this.type) {
-        case '403':
-          return this.$t('webitelUI.errorPages.page403.text');
-        case '404':
-          return this.$t('webitelUI.errorPages.page404.text');
-        default:
-          return '';
-      }
-    },
-  },
+	name: 'WtErrorPage',
+	/**
+	 * @emits {void} back - "back" button click event
+	 */
+	props: {
+		/**
+		 * Error type
+		 * @type {string}
+		 * @required
+		 * @options ['404', '403']
+		 */
+		type: {
+			type: String,
+			required: true,
+			options: [
+				'403',
+				'404',
+			],
+		},
+	},
+	computed: {
+		errorPic() {
+			switch (this.type) {
+				case '403':
+					return {
+						src: pic403,
+						alt: 'Forbidden pic',
+					};
+				case '404':
+					return {
+						src: pic404,
+						alt: 'Not found pic',
+					};
+				default:
+					return '';
+			}
+		},
+		errorTitle() {
+			switch (this.type) {
+				case '403':
+					return this.$t('webitelUI.errorPages.page403.title');
+				case '404':
+					return this.$t('webitelUI.errorPages.page404.title');
+				default:
+					return '';
+			}
+		},
+		errorText() {
+			switch (this.type) {
+				case '403':
+					return this.$t('webitelUI.errorPages.page403.text');
+				case '404':
+					return this.$t('webitelUI.errorPages.page404.text');
+				default:
+					return '';
+			}
+		},
+	},
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .wt-error-page {
   display: flex;
   justify-content: center;
@@ -80,29 +91,29 @@ export default {
   padding: 90px;
   min-width: 100vw;
   min-height: 100vh;
+}
 
-  &__wrapper {
-    color: var(--wt-error-page-text-color);
-    text-align: center;
-  }
+.wt-error-page__wrapper {
+  color: var(--wt-error-page-text-color);
+  text-align: center;
+}
 
-  &__img {
-    width: 778px;
-    max-width: 65vw;
-    user-select: none;
-  }
+.wt-error-page__img {
+  width: 778px;
+  max-width: 65vw;
+  user-select: none;
+}
 
-  &__title {
-    margin-top: 69px;
-    text-transform: uppercase;
-  }
+.wt-error-page__title {
+  margin-top: 69px;
+  text-transform: uppercase;
+}
 
-  &__text {
-    margin-top: 21px;
-  }
+.wt-error-page__text {
+  margin-top: 21px;
+}
 
-  &__action {
-    margin-top: 40px;
-  }
+.wt-error-page__action {
+  margin-top: 40px;
 }
 </style>

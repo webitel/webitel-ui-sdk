@@ -8,10 +8,10 @@
       <wt-icon class="chat-message-document__icon" icon="attach" />
     </div>
     <div class="chat-message-document__info-wrapper">
-      <a class="chat-message-document__name" :title="props.file.name">
+      <a class="chat-message-document__name typo-subtitle-2" :title="props.file.name">
         {{ props.file.name }}
       </a>
-      <div class="chat-message-document__size">
+      <div class="chat-message-document__size typo-caption">
         {{ documentSize }}
       </div>
     </div>
@@ -49,8 +49,6 @@ function downloadDocument() {
 </script>
 
 <style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
 .chat-message-document {
   display: flex;
   align-items: flex-start;
@@ -74,14 +72,12 @@ function downloadDocument() {
   }
 
   &__name {
-    @extend %typo-subtitle-2;
     cursor: pointer;
     overflow-wrap: break-word;
     color: var(--text-main-color);
   }
 
   &__size {
-    @extend %typo-caption;
     color: var(--text-main-color);
   }
 

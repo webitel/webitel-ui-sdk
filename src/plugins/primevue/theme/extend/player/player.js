@@ -25,9 +25,18 @@ const generateCustomSharingPanelSizeCss = ({ size, dt }) => `
 `;
 
 const playerCss = ({ dt }) => `
-    ${generateCustomSharingPanelSizeCss({ size: 'sm', dt })}
-    ${generateCustomSharingPanelSizeCss({ size: 'md', dt })}
-    ${generateCustomSharingPanelSizeCss({ size: 'lg', dt })}
+    ${generateCustomSharingPanelSizeCss({
+			size: 'sm',
+			dt,
+		})}
+    ${generateCustomSharingPanelSizeCss({
+			size: 'md',
+			dt,
+		})}
+    ${generateCustomSharingPanelSizeCss({
+			size: 'lg',
+			dt,
+		})}
 `;
 
 export { playerCss };

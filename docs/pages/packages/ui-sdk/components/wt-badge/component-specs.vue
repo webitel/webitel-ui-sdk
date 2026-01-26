@@ -5,5 +5,3 @@ import { WtBadge } from '@webitel/ui-sdk/components';
 <template>
   <component-info :info="WtBadge.docs" />
 </template>
-
-<style lang="scss" scoped></style>

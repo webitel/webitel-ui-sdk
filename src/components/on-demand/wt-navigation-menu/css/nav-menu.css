@@ -1,0 +1,25 @@
+.nav-menu__category {
+	border-radius: var(--border-radius);
+	height: 100%;
+}
+
+.nav-menu__option:not(:last-child) {
+	margin-bottom: var(--spacing-2xs);
+}
+
+.nav-menu__item {
+	display: flex;
+	align-items: center;
+	transition: var(--transition);
+	box-sizing: border-box;
+	border-radius: var(--border-radius);
+	padding: 18px 20px;
+	width: 100%;
+	min-height: var(--button-min-height);
+	color: var(--text-main-color);
+	text-align: left;
+}
+
+.nav-menu__item .wt-icon {
+	margin-right: var(--spacing-xs);
+}

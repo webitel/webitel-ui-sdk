@@ -5,15 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WebitelChatServerLeaveConversationCause = typeof WebitelChatServerLeaveConversationCause[keyof typeof WebitelChatServerLeaveConversationCause];
-
+export type WebitelChatServerLeaveConversationCause =
+	(typeof WebitelChatServerLeaveConversationCause)[keyof typeof WebitelChatServerLeaveConversationCause];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelChatServerLeaveConversationCause = {
-  DefaultCause: 'default_cause',
-  AgentTimeout: 'agent_timeout',
-  ClientTimeout: 'client_timeout',
-  AgentLeave: 'agent_leave',
-  Transfer: 'transfer',
-  SilenceTimeout: 'silence_timeout',
+	DefaultCause: 'default_cause',
+	AgentTimeout: 'agent_timeout',
+	ClientTimeout: 'client_timeout',
+	AgentLeave: 'agent_leave',
+	Transfer: 'transfer',
+	SilenceTimeout: 'silence_timeout',
 } as const;

@@ -6,74 +6,74 @@
  */
 
 export type CatalogGetMembersParams = {
-/**
- * Page number to return. **default**: 1.
- */
-page?: number;
-/**
- * Page records limit. **default**: 16.
- */
-size?: number;
-/**
- * Search term: peer(type;name)
- */
-q?: string;
-/**
- * Sort records by { fields } specification.
- */
-sort?: string[];
-/**
- * Fields [Q]uery to build result dataset record.
- */
-fields?: string[];
-/**
- * Set of unique chat member ID.
- */
-id?: string[];
-/**
+	/**
+	 * Page number to return. **default**: 1.
+	 */
+	page?: number;
+	/**
+	 * Page records limit. **default**: 16.
+	 */
+	size?: number;
+	/**
+	 * Search term: peer(type;name)
+	 */
+	q?: string;
+	/**
+	 * Sort records by { fields } specification.
+	 */
+	sort?: string[];
+	/**
+	 * Fields [Q]uery to build result dataset record.
+	 */
+	fields?: string[];
+	/**
+	 * Set of unique chat member ID.
+	 */
+	id?: string[];
+	/**
  * Contact unique **ID**entifier.
 Contact **type**-specific string.
  */
-viaId?: string;
-/**
- * Contact **type** provider.
- */
-viaType?: string;
-/**
- * Contact display **name**.
- */
-viaName?: string;
-/**
+	viaId?: string;
+	/**
+	 * Contact **type** provider.
+	 */
+	viaType?: string;
+	/**
+	 * Contact display **name**.
+	 */
+	viaName?: string;
+	/**
  * Contact unique **ID**entifier.
 Contact **type**-specific string.
  */
-peerId?: string;
-/**
- * Contact **type** provider.
- */
-peerType?: string;
-/**
- * Contact display **name**.
- */
-peerName?: string;
-/**
- * Since epochtime (milli).
-**Match**: greater than ..
- */
-dateSince?: string;
-/**
- * Until epochtime (milli).
-**Match**: less or equal ..
- */
-dateUntil?: string;
-/**
+	peerId?: string;
+	/**
+	 * Contact **type** provider.
+	 */
+	peerType?: string;
+	/**
+	 * Contact display **name**.
+	 */
+	peerName?: string;
+	/**
+	 * Since epochtime (milli).
+	 **Match**: greater than ..
+	 */
+	dateSince?: string;
+	/**
+	 * Until epochtime (milli).
+	 **Match**: less or equal ..
+	 */
+	dateUntil?: string;
+	/**
  * Participants ONLY who are currently [not] connected to the chat.
 ( left: ( 0 ? online : offline ) )
  */
-online?: boolean;
-/**
+	online?: boolean;
+	/**
  * Participants ONLY who have [not] been connected to the chat.
 ( join: ( 0 ? [request|abandoned] : connected ) )
  */
-joined?: boolean;
+	joined?: boolean;
 };

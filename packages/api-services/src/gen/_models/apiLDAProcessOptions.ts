@@ -6,8 +6,8 @@
  */
 
 export interface ApiLDAProcessOptions {
-  linkExistingObjects?: boolean;
-  reassignDeviceUsers?: boolean;
-  test?: boolean;
-  timeout?: string;
+	linkExistingObjects?: boolean;
+	reassignDeviceUsers?: boolean;
+	test?: boolean;
+	timeout?: string;
 }

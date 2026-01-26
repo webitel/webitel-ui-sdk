@@ -1,6 +1,6 @@
 <template>
   <div
-    class="wt-switcher"
+    class="wt-switcher typo-subtitle-2"
     :class="{ 'wt-switcher--label-left': labelLeft }"
   >
     <p-toggle-switch
@@ -22,7 +22,7 @@
       >
         <div
           v-if="label"
-          class="wt-switcher__label"
+          class="wt-switcher__label typo-subtitle-2"
         >
           {{ label }}
         </div>
@@ -32,83 +32,108 @@
 </template>
 
 <script setup lang="ts">
-import { ToggleSwitchProps } from 'primevue/toggleswitch';
-import { computed, defineEmits, defineModel, defineProps,
-          nextTick, ref, useSlots, withDefaults } from 'vue';
+import type { ToggleSwitchProps } from 'primevue/toggleswitch';
+import { computed, nextTick, ref, useSlots } from 'vue';
 
 interface LabelProps {
-  [key: string]: any;
+	[key: string]: any;
 }
 
+/**
+ * @emits {boolean} update:modelValue - Fires when switcher value changes. Returns inverted value
+ */
 interface Props extends ToggleSwitchProps {
-  label?: string;
-  labelLeft?: boolean;
-  disabled?: boolean;
-  labelProps?: LabelProps;
-  controlled?: boolean;  // for controlled mode, when need to sync visual state with model
+	/**
+	 * Switcher label text
+	 * @type {string}
+	 * @default ''
+	 */
+	label?: string;
+	/**
+	 * Positions label to the left of the switcher
+	 * @type {boolean}
+	 * @default false
+	 */
+	labelLeft?: boolean;
+	/**
+	 * Disables the switcher
+	 * @type {boolean}
+	 * @default false
+	 */
+	disabled?: boolean;
+	/**
+	 * Object with props, passed down to wt-label as props
+	 * @type {Object}
+	 * @default {}
+	 */
+	labelProps?: LabelProps;
+	/**
+	 * For controlled mode, when need to sync visual state with model
+	 * @type {boolean}
+	 * @default false
+	 */
+	controlled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
-  labelLeft: false,
-  disabled: false,
-  labelProps: () => ({}),
-  controlled: false
+	label: '',
+	labelLeft: false,
+	disabled: false,
+	labelProps: () => ({}),
+	controlled: false,
 });
 
 const model = defineModel<boolean>();
 const switcherKey = ref(0);
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([
+	'update:modelValue',
+]);
 
 const slots = useSlots();
 
 const hasLabel = computed(() => {
-  return props.label || slots.label;
+	return props.label || slots.label;
 });
 
 const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
 
 const handleSwitcherClick = () => {
-  if (props.controlled) {
-    nextTick(() => {
-      switcherKey.value++
-    })
-  }
-  emit('update:modelValue', !model.value);
-}
+	if (props.controlled) {
+		nextTick(() => {
+			switcherKey.value++;
+		});
+	}
+	emit('update:modelValue', !model.value);
+};
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style  scoped>
 .wt-switcher {
-  position: relative;
+position: relative;
   box-sizing: border-box;
   width: fit-content;
   display: flex;
   align-items: center;
   cursor: pointer;
+}
 
-  &.wt-switcher--label-left {
-    flex-direction: row-reverse;
-  }
+.wt-switcher.wt-switcher--label-left {
+flex-direction: row-reverse;
 }
 
 .wt-label {
-  @extend %typo-subtitle-2;
+font-family: 'Montserrat', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: none;
 }
 
 .wt-switcher__label {
-  @extend %typo-subtitle-2;
-  user-select: none;
+user-select: none;
   transition: var(--transition);
-
-  .wt-switcher--label-left & {
+  .wt-switcher--label-left .wt-label {
     margin-left: 0;
   }
 }

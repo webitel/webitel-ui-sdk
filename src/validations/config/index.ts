@@ -1,16 +1,18 @@
-import { ComposerTranslation as I18nComposerTranslation } from 'vue-i18n';
+import type { ComposerTranslation as I18nComposerTranslation } from 'vue-i18n';
 import { z } from 'zod/v4';
 
-import { customZodErrorsHandler } from "./errors/customZodErrorsHandler";
+import { customZodErrorsHandler } from './errors/customZodErrorsHandler';
 
-export const configureZod = ({ zodInstance, t }: {
-    t: I18nComposerTranslation;
-    zodInstance?: typeof z;
+export const configureZod = ({
+	zodInstance,
+	t,
+}: {
+	t: I18nComposerTranslation;
+	zodInstance?: typeof z;
 }) => {
-    const configuredZod = zodInstance || z;
+	const configuredZod = zodInstance || z;
 
-    configuredZod.config({
-        customError: customZodErrorsHandler(t),
-    });
+	configuredZod.config({
+		customError: customZodErrorsHandler(t),
+	});
 };
-

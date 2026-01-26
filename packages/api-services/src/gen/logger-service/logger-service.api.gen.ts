@@ -6,67 +6,86 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  LoggerLogs,
-  LoggerServiceSearchLogByConfigIdParams,
-  LoggerServiceSearchLogByRecordIdParams,
-  LoggerServiceSearchLogByUserIdParams
+	LoggerLogs,
+	LoggerServiceSearchLogByConfigIdParams,
+	LoggerServiceSearchLogByRecordIdParams,
+	LoggerServiceSearchLogByUserIdParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getLoggerService =
+		// --- title end
+		() => {
+			// --- header end
+			const loggerServiceSearchLogByConfigId = <
+				TData = AxiosResponse<LoggerLogs>,
+			>(
+				configId: number,
+				params?: LoggerServiceSearchLogByConfigIdParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/logger/config/${configId}/logs`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const loggerServiceSearchLogByUserId = <
+				TData = AxiosResponse<LoggerLogs>,
+			>(
+				userId: number,
+				params?: LoggerServiceSearchLogByUserIdParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/logger/user/${userId}/logs`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const loggerServiceSearchLogByRecordId = <
+				TData = AxiosResponse<LoggerLogs>,
+			>(
+				object:
+					| 'cc_queue'
+					| 'schema'
+					| 'users'
+					| 'devices'
+					| 'calendars'
+					| 'cc_list'
+					| 'cc_team'
+					| 'cc_agent'
+					| 'cc_resource'
+					| 'cc_resource_group'
+					| 'chat_bots'
+					| 'cases'
+					| 'contacts'
+					| 'cc_list_number'
+					| 'case_comments'
+					| 'record_file',
+				recordId: number,
+				params?: LoggerServiceSearchLogByRecordIdParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/logger/${object}/record/${recordId}/logs`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				loggerServiceSearchLogByConfigId,
+				loggerServiceSearchLogByUserId,
+				loggerServiceSearchLogByRecordId,
+			};
+		};
+export type LoggerServiceSearchLogByConfigIdResult = AxiosResponse<LoggerLogs>;
+export type LoggerServiceSearchLogByUserIdResult = AxiosResponse<LoggerLogs>;
+export type LoggerServiceSearchLogByRecordIdResult = AxiosResponse<LoggerLogs>;
 
-  export const 
-            // --- title start
-            getLoggerService
-            // --- title end
-           = () => {
-
-            // --- header end
-          const loggerServiceSearchLogByConfigId = <TData = AxiosResponse<LoggerLogs>>(
-    configId: number,
-    params?: LoggerServiceSearchLogByConfigIdParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/logger/config/${configId}/logs`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const loggerServiceSearchLogByUserId = <TData = AxiosResponse<LoggerLogs>>(
-    userId: number,
-    params?: LoggerServiceSearchLogByUserIdParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/logger/user/${userId}/logs`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const loggerServiceSearchLogByRecordId = <TData = AxiosResponse<LoggerLogs>>(
-    object: 'cc_queue' | 'schema' | 'users' | 'devices' | 'calendars' | 'cc_list' | 'cc_team' | 'cc_agent' | 'cc_resource' | 'cc_resource_group' | 'chat_bots' | 'cases' | 'contacts' | 'cc_list_number' | 'case_comments' | 'record_file',
-    recordId: number,
-    params?: LoggerServiceSearchLogByRecordIdParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axios.get(
-      `/logger/${object}/record/${recordId}/logs`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {loggerServiceSearchLogByConfigId,loggerServiceSearchLogByUserId,loggerServiceSearchLogByRecordId}};
-export type LoggerServiceSearchLogByConfigIdResult = AxiosResponse<LoggerLogs>
-export type LoggerServiceSearchLogByUserIdResult = AxiosResponse<LoggerLogs>
-export type LoggerServiceSearchLogByRecordIdResult = AxiosResponse<LoggerLogs>
-
-            // --- footer end
-          
+// --- footer end

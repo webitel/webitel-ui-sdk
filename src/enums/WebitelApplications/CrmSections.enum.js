@@ -8,8 +8,8 @@ import { CrmSections } from './CrmSections';
  * use ts enum instead (and don't forget to compile it)
  */
 export default Object.fromEntries(
-  Object.entries(CrmSections).map(([key, value]) => [
-    upperCase(key).replaceAll(' ', '_'),
-    value,
-  ]),
+	Object.entries(CrmSections).map(([key, value]) => [
+		upperCase(key).replaceAll(' ', '_'),
+		value,
+	]),
 );

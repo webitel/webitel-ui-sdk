@@ -1,17 +1,15 @@
 <script setup>
-import Docs from './wt-chip-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleChip from './examples/example-chip.vue';
 import ExampleChipDifferentColors from './examples/example-chip-different-colors.vue';
 import ExampleChipRemovable from './examples/example-chip-removable.vue'
 </script>
 
-# WtChip
+# `wt-chip.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Chip
 

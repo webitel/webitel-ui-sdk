@@ -7,6 +7,6 @@
 import type { EngineQueueResourceGroup } from './engineQueueResourceGroup';
 
 export interface EngineListQueueResourceGroup {
-  items?: EngineQueueResourceGroup[];
-  next?: boolean;
+	items?: EngineQueueResourceGroup[];
+	next?: boolean;
 }

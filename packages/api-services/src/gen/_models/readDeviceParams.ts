@@ -6,8 +6,8 @@
  */
 
 export type ReadDeviceParams = {
-/**
- * output selection
- */
-fields?: string[];
+	/**
+	 * output selection
+	 */
+	fields?: string[];
 };

@@ -7,5 +7,5 @@
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export interface WfmUpdateWorkingScheduleAddAgentsResponse {
-  agents?: WfmLookupEntity[];
+	agents?: WfmLookupEntity[];
 }

@@ -9,19 +9,19 @@ import type { EngineEmailProfileParams } from './engineEmailProfileParams';
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCreateEmailProfileRequest {
-  authType?: EngineEmailAuthType;
-  description?: string;
-  enabled?: boolean;
-  fetchInterval?: number;
-  imapHost?: string;
-  imapPort?: number;
-  listen?: boolean;
-  login?: string;
-  mailbox?: string;
-  name?: string;
-  params?: EngineEmailProfileParams;
-  password?: string;
-  schema?: EngineLookup;
-  smtpHost?: string;
-  smtpPort?: number;
+	authType?: EngineEmailAuthType;
+	description?: string;
+	enabled?: boolean;
+	fetchInterval?: number;
+	imapHost?: string;
+	imapPort?: number;
+	listen?: boolean;
+	login?: string;
+	mailbox?: string;
+	name?: string;
+	params?: EngineEmailProfileParams;
+	password?: string;
+	schema?: EngineLookup;
+	smtpHost?: string;
+	smtpPort?: number;
 }

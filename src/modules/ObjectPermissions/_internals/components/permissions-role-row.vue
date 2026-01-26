@@ -9,10 +9,10 @@
 
 <script setup>
 const props = defineProps({
-  role: {
-    type: Object,
-    required: true,
-  },
+	role: {
+		type: Object,
+		required: true,
+	},
 });
 </script>
 

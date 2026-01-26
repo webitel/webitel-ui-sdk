@@ -1,0 +1,31 @@
+#wt-flow-diagram {
+  /* В компоненті `key-value-pair` присутні компоненти з бібліотеки `webitel.ui`,
+  наприклад, `<wt-input>`, margin яких = 10px, тому у даному випадку я використав
+  змінну `--body-block-margin` , яка також = 10px.
+ Можна працювати по нових спейсінгах, але треба переписати компоненти, які є в бібліотеці*/
+  --body-block-margin: 10px;
+
+  // Workspace specific spacings
+  --workspace-content-offset-top: var(--spacing-xs);
+  --workspace-content-offset-bottom: var(--spacing-xs);
+  --workspace-content-offset-side: var(--spacing-xs);
+  --nodes-panel-width: 260px;
+  --config-panel-width: -16px; // invisible config panel width is -16 to compensate minimap offset from side + from config panel itself
+  --min-flow-toolbar-width: 491px;
+  --flow-toolbar-height: 56px;
+  --flow-pages-height: 56px;
+  --zoom-panel-width: 227px;
+  --zoom-panel-height: calc(
+    2 * var(--spacing-sm)
+    + var(--icon-md-size)
+  ); // should directly set height to setup minimap bottom offset
+
+  @media only screen and (max-width: $viewport-sm) {
+    --flow-toolbar-height: 88px;
+  }
+
+  @media only screen and (max-width: $viewport-xs) {
+    --flow-toolbar-height: 136px;
+  }
+}
+

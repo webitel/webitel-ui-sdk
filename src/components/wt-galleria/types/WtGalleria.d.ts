@@ -1,6 +1,6 @@
 export type WtGalleriaItem = {
-  src: string;
-  thumbnailSrc: string;
-  title: string;
-  description?: string;
+	src: string;
+	thumbnailSrc: string;
+	title: string;
+	description?: string;
 };

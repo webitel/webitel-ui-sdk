@@ -6,11 +6,11 @@
  */
 
 export type UpdateVariable2Body = {
-  /**
-   * NEW Key.
-   * @pattern ^\w+$
-   */
-  key: string;
-  /** NEW Value. */
-  value?: unknown;
+	/**
+	 * NEW Key.
+	 * @pattern ^\w+$
+	 */
+	key: string;
+	/** NEW Value. */
+	value?: unknown;
 };

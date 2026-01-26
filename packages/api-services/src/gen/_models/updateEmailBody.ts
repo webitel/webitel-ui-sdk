@@ -7,10 +7,10 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export type UpdateEmailBody = {
-  /** The email address. */
-  email: string;
-  /** Indicates whether this phone number is default within other channels of the same type(phone). */
-  primary?: boolean;
-  type?: WebitelcontactsLookup;
-  verified?: boolean;
+	/** The email address. */
+	email: string;
+	/** Indicates whether this phone number is default within other channels of the same type(phone). */
+	primary?: boolean;
+	type?: WebitelcontactsLookup;
+	verified?: boolean;
 };

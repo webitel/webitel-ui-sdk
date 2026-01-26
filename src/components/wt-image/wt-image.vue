@@ -1,32 +1,21 @@
 <template>
   <div
-    class="wt-image"
-    :style="{
-      width,
-      height,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
-      cursor: overlayIcon ? 'pointer' : 'auto'
-    }"
-    @click="emit('click', $event)"
-  >
+class="wt-image" :style="{
+    width,
+    height,
+    minWidth,
+    minHeight,
+    maxWidth,
+    maxHeight,
+    cursor: overlayIcon ? 'pointer' : 'auto'
+  }" @click="emit('click', $event)">
     <!--    @slot Replaces `<img>` tag
             @scope `{ alt, src }`
      -->
     <slot v-bind="{ alt, src }">
-      <p-image
-        :alt="alt"
-        :src="src"
-        class="wt-image__img"
-      />
+      <p-image :alt="alt" :src="src" class="wt-image__img" />
       <div v-if="overlayIcon" class="wt-image__overlay-icon">
-        <wt-icon 
-          :icon="overlayIcon"
-          :icon-prefix="overlayIconPrefix"
-          :color="IconColor.ON_DARK"
-        />
+        <wt-icon :icon="overlayIcon" :icon-prefix="overlayIconPrefix" :color="IconColor.ON_DARK" />
       </div>
     </slot>
   </div>
@@ -38,75 +27,74 @@ import { computed, defineEmits, defineProps } from 'vue';
 import { IconColor } from '../../enums';
 
 const sizeToUnits = {
-  '3xs': '32px',
-  '2xs': '64px',
-  xs: '92px',
-  sm: '128px',
-  md: '192px',
-  lg: '256px',
-  xl: '380px',
-  '2xl': '512px',
-  '3xl': '600px',
+	'3xs': '32px',
+	'2xs': '64px',
+	xs: '92px',
+	sm: '128px',
+	md: '192px',
+	lg: '256px',
+	xl: '380px',
+	'2xl': '512px',
+	'3xl': '600px',
 } as const;
 
 const props = defineProps<{
-  src: string | object;
-  size?: keyof typeof sizeToUnits;
-  alt?: string;
-  width?: string | number;
-  height?: string | number;
-  minWidth?: string | number;
-  minHeight?: string | number;
-  maxWidth?: string | number;
-  maxHeight?: string | number;
-  overlayIcon?: string;
-  overlayIconPrefix?: string;
+	src: string | object;
+	size?: keyof typeof sizeToUnits;
+	alt?: string;
+	width?: string | number;
+	height?: string | number;
+	minWidth?: string | number;
+	minHeight?: string | number;
+	maxWidth?: string | number;
+	maxHeight?: string | number;
+	overlayIcon?: string;
+	overlayIconPrefix?: string;
 }>();
 
-const emit = defineEmits(['click']);
+const emit = defineEmits([
+	'click',
+]);
 
 const width = computed(() => {
-  const width = props.size ? sizeToUnits[props.size] : props.width;
+	const width = props.size ? sizeToUnits[props.size] : props.width;
 
-  // if converted to Number without an error, it has no units in it
-  if (+width) {
-    return `${width}px`;
-  }
+	// if converted to Number without an error, it has no units in it
+	if (+width) {
+		return `${width}px`;
+	}
 
-  return width;
+	return width;
 });
 
 const height = computed(() => {
-  // if (props.aspectRatio) return null;
+	// if (props.aspectRatio) return null;
 
-  const height = props.size ? sizeToUnits[props.size] : props.height;
+	const height = props.size ? sizeToUnits[props.size] : props.height;
 
-  // if converted to Number without an error, it has no units in it
-  if (+height) {
-    return `${height}px`;
-  }
+	// if converted to Number without an error, it has no units in it
+	if (+height) {
+		return `${height}px`;
+	}
 
-  return height;
+	return height;
 });
-</script> 
+</script>
 
-
-<style lang="scss" scoped>
-//@use '../../css/styleguide/styleguide';
-
+<style scoped>
 .wt-image {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+}
 
-  &__img {
-    display: inline-flex;
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: auto;
-  }
+.wt-image__img {
+  display: inline-flex;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .wt-image__overlay-icon {
@@ -122,9 +110,9 @@ const height = computed(() => {
   height: 100%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.25);
+}
 
-  &:hover {
-    opacity: 1;
-  }
+.wt-image__overlay-icon:hover {
+  opacity: 1;
 }
 </style>

@@ -1,9 +1,5 @@
 <template>
-  <wt-start-page
-    :app-logo="logo"
-    :dark-mode="false"
-    :nav="nav"
-  />
+  <wt-start-page :app-logo="logo" :dark-mode="false" :nav="nav" />
 </template>
 
 <script setup>
@@ -40,5 +36,3 @@ const nav = [
   },
 ];
 </script>
-
-<style lang="scss" scoped></style>

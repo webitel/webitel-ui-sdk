@@ -1,18 +1,16 @@
 <script setup>
-import Docs from './wt-label-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleLabel from './examples/example-label.vue';
 import ExampleErrorLabel from './examples/example-error-label.vue';
 import ExampleDisabledLabel from './examples/example-disabled-label.vue';
 import ExampleHintedLabel from './examples/example-hinted-label.vue';
 </script>
 
-# WtLabel
+# `wt-label.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example label
 

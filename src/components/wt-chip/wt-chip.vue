@@ -1,6 +1,7 @@
 <template>
   <p-chip
-    :class="`wt-chip p-chip-${color}`"
+	class="wt-chip typo-caption"
+    :class="`p-chip-${color}`"
     :removable="removable"
   >
     <slot />
@@ -12,21 +13,32 @@
 
 <script setup lang="ts">
 import type { ChipProps } from 'primevue/chip';
-import { defineProps, withDefaults  } from 'vue';
 
-import { ChipColor } from '../../enums'
+import { ChipColor } from '../../enums';
 
 interface WtProps extends ChipProps {
-  color?: ChipColor;
+	/**
+	 * Chip color. "main" and "outline" are chip-specific colors
+	 * @type {ChipColor}
+	 * @default ChipColor.MAIN
+	 * @options ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer']
+	 */
+	color?: ChipColor;
+	/**
+	 * Makes the chip removable
+	 * @type {boolean}
+	 * @default false
+	 */
+	removable?: boolean;
 }
 
 withDefaults(defineProps<WtProps>(), {
-  color: ChipColor.MAIN,
-  removable: false,
+	color: ChipColor.MAIN,
+	removable: false,
 });
 </script>
 
-<style lang="scss">
+<style scoped>
 .wt-chip__close-icon {
   cursor: pointer;
 }

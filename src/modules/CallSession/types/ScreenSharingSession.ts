@@ -1,7 +1,7 @@
 export interface ScreenSharingSession {
-  close: () => void;
-  screenshot: () => void;
-  stopRecord: () => void;
-  startRecord: () => void;
-  recordings: boolean;
+	close: () => void;
+	screenshot: () => void;
+	stopRecord: () => void;
+	startRecord: () => void;
+	recordings: boolean;
 }

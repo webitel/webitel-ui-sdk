@@ -1,12 +1,10 @@
 <template>
-  <div class="chat-message-blocked-error">
+  <div class="chat-message-blocked-error typo-body-1">
     <wt-icon
       icon="protection-error"
       color="error"
     />
-    <!-- TODO: move chat locales from cc-workspaces to this pkg -->
     <p>
-      <!-- {{ t('workspaceSec.chat.chatsFileBlocked') }} -->
       {{ t('@webitel/ui-chats.ui.messaging.chatsFileBlocked') }}
     </p>
   </div>
@@ -20,10 +18,7 @@ const { t } = useI18n();
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
-@use '@webitel/styleguide/typography' as *;
-
 .chat-message-blocked-error {
-  @extend %typo-body-1;
   background: var(--p-error-highlight-color);
   border-radius: var(--spacing-xs);
   padding: var(--spacing-xs);

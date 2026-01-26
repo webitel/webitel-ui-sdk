@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted, provide } from 'vue';
-
+import { provide } from 'vue';
 import { eventBus } from '@webitel/ui-sdk/scripts';
 
 provide('$eventBus', eventBus);
@@ -22,8 +21,7 @@ function sendNotification(type) {
   </wt-button>
 
   <div style="margin-top: 10px">
-    <wt-notifications-bar style="position: static" />
+    <wt-notifications-bar />
   </div>
 </template>
 
-<style scoped lang="scss"></style>

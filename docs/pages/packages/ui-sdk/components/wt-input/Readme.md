@@ -1,5 +1,5 @@
 <script setup>
-import Docs from './wt-input-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleInput from './examples/example-input.vue';
 import ExampleDisabledInput from './examples/example-disabled-input.vue';
 import ExampleInvalidInput from './examples/example-invalid-input.vue';
@@ -7,12 +7,11 @@ import ExampleInputAfterSlot from './examples/example-input-after-slot.vue';
 import ExamplePasswordInput from './examples/example-password-input.vue';
 </script>
 
-# WtInput
+# `wt-input.vue`
 
-::: raw
+## Specs
 
-<Docs />
-:::
+<Specs />
 
 ## Example Input
 

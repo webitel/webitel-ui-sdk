@@ -7,6 +7,6 @@
 import type { EngineSchemaVersion } from './engineSchemaVersion';
 
 export interface EngineSearchSchemaVersionResponse {
-  items?: EngineSchemaVersion[];
-  next?: boolean;
+	items?: EngineSchemaVersion[];
+	next?: boolean;
 }

@@ -5,39 +5,43 @@ import LogoDark from './assets/logo-dark.svg';
 import LogoLight from './assets/logo-light.svg';
 
 const props = defineProps({
-  darkMode: {
-    type: Boolean,
-    default: false,
-  },
-  logoHref: {
-    type: String,
-    default: '',
-  },
-  logoRoute: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+	darkMode: {
+		type: Boolean,
+		default: false,
+	},
+	logoHref: {
+		type: String,
+		default: '',
+	},
+	logoRoute: {
+		type: String,
+		default: '',
+	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
 });
 const href = computed(
-  () => props.logoHref || import.meta.env.VITE_START_PAGE_URL,
+	() => props.logoHref || import.meta.env.VITE_START_PAGE_URL,
 );
 const logoSrc = props.darkMode ? LogoDark : LogoLight;
 
 const linkComponent = props.disabled
-  ? 'span'
-  : props.logoRoute
-    ? 'router-link'
-    : 'a';
+	? 'span'
+	: props.logoRoute
+		? 'router-link'
+		: 'a';
 
 const linkAttrs = props.disabled
-  ? {}
-  : props.logoRoute
-    ? { to: props.logoRoute }
-    : { href: href.value };
+	? {}
+	: props.logoRoute
+		? {
+				to: props.logoRoute,
+			}
+		: {
+				href: href.value,
+			};
 </script>
 
 <template>
@@ -53,11 +57,7 @@ const linkAttrs = props.disabled
   </component>
 </template>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-logo {
   display: block;
   width: var(--wt-logo-width);

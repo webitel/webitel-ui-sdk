@@ -6,34 +6,34 @@
  */
 
 export type LocateLDAPCatalogParams = {
-/**
+	/**
  * ----- Select Options -------------------------
 
 default: 1
  */
-page?: number;
-/**
- * default: 16
- */
-size?: number;
-/**
- * attributes list
- */
-fields?: string[];
-/**
- * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
- */
-sort?: string[];
-/**
- * term-of-search: lookup[name]
- */
-q?: string;
-/**
- * case-ignore substring match: ILIKE '*' - any; '?' - one
- */
-name?: string;
-/**
- * [M]andatory[A]ccess[C]ontrol: with access mode (action) granted!
- */
-access?: string;
+	page?: number;
+	/**
+	 * default: 16
+	 */
+	size?: number;
+	/**
+	 * attributes list
+	 */
+	fields?: string[];
+	/**
+	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+	 */
+	sort?: string[];
+	/**
+	 * term-of-search: lookup[name]
+	 */
+	q?: string;
+	/**
+	 * case-ignore substring match: ILIKE '*' - any; '?' - one
+	 */
+	name?: string;
+	/**
+	 * [M]andatory[A]ccess[C]ontrol: with access mode (action) granted!
+	 */
+	access?: string;
 };

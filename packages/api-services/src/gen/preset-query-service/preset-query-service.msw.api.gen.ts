@@ -4,113 +4,373 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
+import type { RequestHandlerOptions } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
-import {
-  HttpResponse,
-  delay,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import type { EngineListPresetQuery, EnginePresetQuery } from '.././_models';
 
-import type {
-  EngineListPresetQuery,
-  EnginePresetQuery
-} from '.././_models';
+export const getSearchPresetQueryResponseMock = (
+	overrideResponse: Partial<EngineListPresetQuery> = {},
+): EngineListPresetQuery => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			description: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.number.int({ min: undefined, max: undefined }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			section: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	...overrideResponse,
+});
 
+export const getCreatePresetQueryResponseMock = (
+	overrideResponse: Partial<EnginePresetQuery> = {},
+): EnginePresetQuery => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	section: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getSearchPresetQueryResponseMock = (overrideResponse: Partial< EngineListPresetQuery > = {}): EngineListPresetQuery => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})
+export const getDeletePresetQueryResponseMock = (
+	overrideResponse: Partial<EnginePresetQuery> = {},
+): EnginePresetQuery => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	section: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getCreatePresetQueryResponseMock = (overrideResponse: Partial< EnginePresetQuery > = {}): EnginePresetQuery => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getReadPresetQueryResponseMock = (
+	overrideResponse: Partial<EnginePresetQuery> = {},
+): EnginePresetQuery => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	section: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getDeletePresetQueryResponseMock = (overrideResponse: Partial< EnginePresetQuery > = {}): EnginePresetQuery => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getPatchPresetQueryResponseMock = (
+	overrideResponse: Partial<EnginePresetQuery> = {},
+): EnginePresetQuery => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	section: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getReadPresetQueryResponseMock = (overrideResponse: Partial< EnginePresetQuery > = {}): EnginePresetQuery => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getUpdatePresetQueryResponseMock = (
+	overrideResponse: Partial<EnginePresetQuery> = {},
+): EnginePresetQuery => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined }),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	section: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getPatchPresetQueryResponseMock = (overrideResponse: Partial< EnginePresetQuery > = {}): EnginePresetQuery => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getSearchPresetQueryMockHandler = (
+	overrideResponse?:
+		| EngineListPresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EngineListPresetQuery> | EngineListPresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/preset/query',
+		async (info) => {
+			await delay(1000);
 
-export const getUpdatePresetQueryResponseMock = (overrideResponse: Partial< EnginePresetQuery > = {}): EnginePresetQuery => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getSearchPresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
+export const getCreatePresetQueryMockHandler = (
+	overrideResponse?:
+		| EnginePresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<EnginePresetQuery> | EnginePresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/call_center/preset/query',
+		async (info) => {
+			await delay(1000);
 
-export const getSearchPresetQueryMockHandler = (overrideResponse?: EngineListPresetQuery | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EngineListPresetQuery> | EngineListPresetQuery), options?: RequestHandlerOptions) => {
-  return http.get('*/call_center/preset/query', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getSearchPresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getCreatePresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getCreatePresetQueryMockHandler = (overrideResponse?: EnginePresetQuery | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<EnginePresetQuery> | EnginePresetQuery), options?: RequestHandlerOptions) => {
-  return http.post('*/call_center/preset/query', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getCreatePresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getDeletePresetQueryMockHandler = (
+	overrideResponse?:
+		| EnginePresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<EnginePresetQuery> | EnginePresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/call_center/preset/query/:id',
+		async (info) => {
+			await delay(1000);
 
-export const getDeletePresetQueryMockHandler = (overrideResponse?: EnginePresetQuery | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<EnginePresetQuery> | EnginePresetQuery), options?: RequestHandlerOptions) => {
-  return http.delete('*/call_center/preset/query/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getDeletePresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getDeletePresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getReadPresetQueryMockHandler = (overrideResponse?: EnginePresetQuery | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EnginePresetQuery> | EnginePresetQuery), options?: RequestHandlerOptions) => {
-  return http.get('*/call_center/preset/query/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getReadPresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getReadPresetQueryMockHandler = (
+	overrideResponse?:
+		| EnginePresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EnginePresetQuery> | EnginePresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/preset/query/:id',
+		async (info) => {
+			await delay(1000);
 
-export const getPatchPresetQueryMockHandler = (overrideResponse?: EnginePresetQuery | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<EnginePresetQuery> | EnginePresetQuery), options?: RequestHandlerOptions) => {
-  return http.patch('*/call_center/preset/query/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getPatchPresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getReadPresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 
-export const getUpdatePresetQueryMockHandler = (overrideResponse?: EnginePresetQuery | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<EnginePresetQuery> | EnginePresetQuery), options?: RequestHandlerOptions) => {
-  return http.put('*/call_center/preset/query/:id', async (info) => {await delay(1000);
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdatePresetQueryResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getPatchPresetQueryMockHandler = (
+	overrideResponse?:
+		| EnginePresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<EnginePresetQuery> | EnginePresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/call_center/preset/query/:id',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getPatchPresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdatePresetQueryMockHandler = (
+	overrideResponse?:
+		| EnginePresetQuery
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<EnginePresetQuery> | EnginePresetQuery),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/call_center/preset/query/:id',
+		async (info) => {
+			await delay(1000);
+
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdatePresetQueryResponseMock(),
+				),
+				{ status: 200, headers: { 'Content-Type': 'application/json' } },
+			);
+		},
+		options,
+	);
+};
 export const getPresetQueryServiceMock = () => [
-  getSearchPresetQueryMockHandler(),
-  getCreatePresetQueryMockHandler(),
-  getDeletePresetQueryMockHandler(),
-  getReadPresetQueryMockHandler(),
-  getPatchPresetQueryMockHandler(),
-  getUpdatePresetQueryMockHandler()]
+	getSearchPresetQueryMockHandler(),
+	getCreatePresetQueryMockHandler(),
+	getDeletePresetQueryMockHandler(),
+	getReadPresetQueryMockHandler(),
+	getPatchPresetQueryMockHandler(),
+	getUpdatePresetQueryMockHandler(),
+];

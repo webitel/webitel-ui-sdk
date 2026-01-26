@@ -9,10 +9,10 @@
  * RelatedCaseLookup is created specifically to include the subject field.
  */
 export interface WebitelCasesRelatedCaseLookup {
-  color?: string;
-  etag?: string;
-  id?: string;
-  name?: string;
-  subject?: string;
-  ver?: number;
+	color?: string;
+	etag?: string;
+	id?: string;
+	name?: string;
+	subject?: string;
+	ver?: number;
 }

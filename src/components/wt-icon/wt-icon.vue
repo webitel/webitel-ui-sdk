@@ -1,57 +1,51 @@
 <template>
-  <svg
-    :class="[
-      'wt-icon',
-      `wt-icon--size-${size}`,
-      `wt-icon--color-${color}`,
-      { 'wt-icon--disabled': disabled },
-    ]"
-    @click="emit('click')"
-  >
-    <use :href="iconName" />
-  </svg>
+  <span
+:class="[
+    'wt-icon',
+    `wt-icon--size-${size}`,
+    `wt-icon--color-${color}`,
+    { 'wt-icon--disabled': disabled },
+  ]" @click="emit('click')" v-html="iconSvg" />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
+import { getIconFromRepository } from '../../assets/icons';
 import { ComponentSize, IconColor } from '../../enums';
 
 interface Props {
-  /**
-   * Icon name
-   * @example '<wt-icon icon="close"></wt-icon>'
-   */
-  icon: string;
-  size?: ComponentSize;
-  color?: IconColor;
-  /**
-   * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
-   * Useful for library icons extension with project-level icons with this prefix in name
-   */
-  iconPrefix?: string;
-  disabled?: boolean;
+	/**
+	 * Icon name
+	 * @example '<wt-icon icon="close"></wt-icon>'
+	 */
+	icon: string;
+	iconPrefix?: string;
+	size?: ComponentSize;
+	color?: IconColor;
+	disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: ComponentSize.MD,
-  color: IconColor.DEFAULT,
-  iconPrefix: '',
-  disabled: false,
+	size: ComponentSize.MD,
+	color: IconColor.DEFAULT,
+	disabled: false,
+	iconPrefix: '',
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits<{
+	click: MouseEvent[];
+}>();
 
-const iconName = computed(() => {
-  let name = '#';
-  if (props.iconPrefix) name += `${props.iconPrefix}-`;
-  return `${name}${props.icon}`;
+const iconSvg = computed(() => {
+	const iconName = props.iconPrefix
+		? `${props.iconPrefix}-${props.icon}`
+		: props.icon;
+
+	return getIconFromRepository(iconName) || iconName;
 });
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-
+<style>
 .wt-icon {
   display: inline-flex;
   justify-content: center;
@@ -59,32 +53,100 @@ const iconName = computed(() => {
   transition: var(--transition);
   stroke-width: 0;
   fill: var(--icon-color);
+}
 
-  &--size-xs { width: var(--icon-xs-size); height: var(--icon-xs-size); }
-  &--size-sm { width: var(--icon-sm-size); height: var(--icon-sm-size); }
-  &--size-md { width: var(--icon-md-size); height: var(--icon-md-size); }
-  &--size-lg { width: var(--icon-lg-size); height: var(--icon-lg-size); }
-  &--size-xl { width: var(--icon-xl-size); height: var(--icon-xl-size); }
-  &--size-2xl { width: var(--icon-2xl-size); height: var(--icon-2xl-size); }
-  &--size-3xl { width: var(--icon-3xl-size); height: var(--icon-3xl-size); }
+.wt-icon--size-xs {
+  width: var(--icon-xs-size);
+  height: var(--icon-xs-size);
+}
 
-  &--color-default { fill: var(--icon-color); }
-  &--color-active { fill: var(--icon-active-color); }
-  &--color-primary { fill: var(--icon-primary-color); }
-  &--color-error { fill: var(--icon-error-color); }
-  &--color-success { fill: var(--icon-success-color); }
-  &--color-warning { fill: var(--icon-warning-color); }
-  &--color-on-dark { fill: var(--icon-on-dark-color); }
-  &--color-on-light { fill: var(--icon-on-light-color); }
-  &--color-on-primary { fill: var(--icon-on-primary-color); }
-  &--color-info { fill: var(--icon-info-color); }
-  &--color-chat { fill: var(--icon-chat-color); }
-  &--color-transfer { fill: var(--icon-transfer-color); }
-  &--color-job { fill: var(--icon-job-color); }
-  &--color-disabled { fill: var(--icon-disabled-color); }
+.wt-icon--size-sm {
+  width: var(--icon-sm-size);
+  height: var(--icon-sm-size);
+}
 
-  &--disabled {
-    fill: var(--icon-disabled-color);
-  }
+.wt-icon--size-md {
+  width: var(--icon-md-size);
+  height: var(--icon-md-size);
+}
+
+.wt-icon--size-lg {
+  width: var(--icon-lg-size);
+  height: var(--icon-lg-size);
+}
+
+.wt-icon--size-xl {
+  width: var(--icon-xl-size);
+  height: var(--icon-xl-size);
+}
+
+.wt-icon--size-2xl {
+  width: var(--icon-2xl-size);
+  height: var(--icon-2xl-size);
+}
+
+.wt-icon--size-3xl {
+  width: var(--icon-3xl-size);
+  height: var(--icon-3xl-size);
+}
+
+.wt-icon--color-default {
+  fill: var(--icon-color);
+}
+
+.wt-icon--color-active {
+  fill: var(--icon-active-color);
+}
+
+.wt-icon--color-primary {
+  fill: var(--icon-primary-color);
+}
+
+.wt-icon--color-error {
+  fill: var(--icon-error-color);
+}
+
+.wt-icon--color-success {
+  fill: var(--icon-success-color);
+}
+
+.wt-icon--color-warning {
+  fill: var(--icon-warning-color);
+}
+
+.wt-icon--color-on-dark {
+  fill: var(--icon-on-dark-color);
+}
+
+.wt-icon--color-on-light {
+  fill: var(--icon-on-light-color);
+}
+
+.wt-icon--color-on-primary {
+  fill: var(--icon-on-primary-color);
+}
+
+.wt-icon--color-info {
+  fill: var(--icon-info-color);
+}
+
+.wt-icon--color-chat {
+  fill: var(--icon-chat-color);
+}
+
+.wt-icon--color-transfer {
+  fill: var(--icon-transfer-color);
+}
+
+.wt-icon--color-job {
+  fill: var(--icon-job-color);
+}
+
+.wt-icon--color-disabled {
+  fill: var(--icon-disabled-color);
+}
+
+.wt-icon--disabled {
+  fill: var(--icon-disabled-color);
 }
 </style>

@@ -110,99 +110,103 @@ import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
 import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
 
 const props = defineProps({
-  /**
-   * Namespace of the parent card store
-   */
-  namespace: {
-    type: String,
-    required: true,
-  },
-  /**
-   * Access to the component actions, related to permissions
-   */
-  access: {
-    type: Object,
-    default: () => ({
-      read: true,
-      add: true,
-      edit: true,
-      delete: true,
-    }),
-  },
+	/**
+	 * Namespace of the parent card store
+	 */
+	namespace: {
+		type: String,
+		required: true,
+	},
+	/**
+	 * Access to the component actions, related to permissions
+	 */
+	access: {
+		type: Object,
+		default: () => ({
+			read: true,
+			add: true,
+			edit: true,
+			delete: true,
+		}),
+	},
 });
 
 const { t } = useI18n();
 const store = useStore();
 
 const {
-  namespace: tableNamespace,
+	namespace: tableNamespace,
 
-  dataList,
-  isLoading,
-  headers,
-  isNext,
-  error,
+	dataList,
+	isLoading,
+	headers,
+	isNext,
+	error,
 
-  loadData,
-  sort,
-  onFilterEvent,
+	loadData,
+	sort,
+	onFilterEvent,
 } = useTableStore(`${props.namespace}/permissions`);
 
 const localizedDataList = computed(() => {
-  return dataList.value.map((item) => {
-    const access = Object.keys(item.access).reduce((access, rule) => {
-      return {
-        ...access,
-        [rule]: {
-          ...item.access[rule],
-          name: t(`access.accessMode.${item.access[rule].id}`),
-        },
-      };
-    }, {});
+	return dataList.value.map((item) => {
+		const access = Object.keys(item.access).reduce((access, rule) => {
+			return {
+				...access,
+				[rule]: {
+					...item.access[rule],
+					name: t(`access.accessMode.${item.access[rule].id}`),
+				},
+			};
+		}, {});
 
-    return {
-      ...item,
-      access,
-    };
-  });
+		return {
+			...item,
+			access,
+		};
+	});
 });
 
 const {
-  namespace: filtersNamespace,
-  restoreFilters,
+	namespace: filtersNamespace,
+	restoreFilters,
 
-  subscribe,
-  flushSubscribers,
-  resetFilters,
+	subscribe,
+	flushSubscribers,
+	resetFilters,
 } = useTableFilters(tableNamespace);
 
 subscribe({
-  event: '*',
-  callback: onFilterEvent,
+	event: '*',
+	callback: onFilterEvent,
 });
 
 restoreFilters();
 
 onUnmounted(() => {
-  flushSubscribers();
-  resetFilters();
+	flushSubscribers();
+	resetFilters();
 });
 
 const {
-  showEmpty,
-  image: imageEmpty,
-  text: textEmpty,
-} = useTableEmpty({ dataList, error, isLoading });
+	showEmpty,
+	image: imageEmpty,
+	text: textEmpty,
+} = useTableEmpty({
+	dataList,
+	error,
+	isLoading,
+});
 
 const accessOptions = computed(() => {
-  return Object.values(AccessMode).map((mode) => ({
-    id: mode,
-    name: t(`access.accessMode.${mode}`),
-  }));
+	return Object.values(AccessMode).map((mode) => ({
+		id: mode,
+		name: t(`access.accessMode.${mode}`),
+	}));
 });
 
 const changeAccessMode = (payload) =>
-  store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
+	store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
 </script>
 
 <style lang="scss" scoped>

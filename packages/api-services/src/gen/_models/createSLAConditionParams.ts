@@ -6,5 +6,5 @@
  */
 
 export type CreateSLAConditionParams = {
-fields?: string[];
+	fields?: string[];
 };

@@ -7,7 +7,7 @@
 import type { OAuth2FederationUpdateOAuthServiceBodyChanges } from './oAuth2FederationUpdateOAuthServiceBodyChanges';
 
 export interface OAuth2FederationUpdateOAuthServiceBody {
-  /** Configuration changes. */
-  changes?: OAuth2FederationUpdateOAuthServiceBodyChanges;
-  fields?: string[];
+	/** Configuration changes. */
+	changes?: OAuth2FederationUpdateOAuthServiceBodyChanges;
+	fields?: string[];
 }

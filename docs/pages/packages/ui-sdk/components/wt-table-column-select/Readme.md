@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-table-column-select-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleTableColumnSelect from './examples/example-table-column-select.vue';
 </script>
 
-# WtTableColumnSelect
+# `wt-table-column-select.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs />
-:::
+<Specs />
 
 ## Example Table Column Select
 

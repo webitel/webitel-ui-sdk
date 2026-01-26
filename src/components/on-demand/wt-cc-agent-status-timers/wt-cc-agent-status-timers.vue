@@ -20,26 +20,36 @@
 
 <script setup>
 const props = defineProps({
-  /**
-   * @description Status object
-   * @type {Object}
-   * @property {String} offline
-   * @property {String} online
-   * @property {String} pause
-   */
-  status: {
-    type: Object,
-    required: true,
-  },
-  size: {
-    type: String,
-    default: 'md',
-    options: ['sm', 'md'],
-  },
+	/**
+	 * Object should have "online", "offline" and "pause" properties for representation
+	 * @type {Object}
+	 * @property {string} offline - Offline status timer value
+	 * @property {string} online - Online status timer value
+	 * @property {string} pause - Pause status timer value
+	 * @required
+	 */
+	status: {
+		type: Object,
+		required: true,
+	},
+	/**
+	 * Size of component
+	 * @type {string}
+	 * @default 'md'
+	 * @options ['sm', 'md']
+	 */
+	size: {
+		type: String,
+		default: 'md',
+		options: [
+			'sm',
+			'md',
+		],
+	},
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .wt-cc-agent-status-timers {
   display: flex;
   align-items: center;

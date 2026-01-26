@@ -6,5 +6,5 @@
  */
 
 export type DeleteDomain2Params = {
-domain?: string;
+	domain?: string;
 };

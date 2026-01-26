@@ -1,0 +1,4 @@
+:root {
+	--input-info-min-height: var(--spacing-sm);
+	--input-info-margin: 5px;
+}

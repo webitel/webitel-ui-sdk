@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-pagination-docs.vue';
+import Specs from './component-specs.vue';
 import ExamplePagination from './examples/example-pagination.vue';
 </script>
 
-# WtPagination
+# `wt-pagination.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Pagination
 

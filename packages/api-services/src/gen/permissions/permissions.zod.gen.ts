@@ -6,28 +6,36 @@
  */
 import * as zod from 'zod/v4';
 
-
 /**
  * @summary GetPermissions list available from application
  */
 export const getPermissionsQueryParams = zod.object({
-  "q": zod.string().optional().describe('TermOfSearch'),
-  "id": zod.array(zod.string()).optional().describe('= ANY(id)'),
-  "not": zod.array(zod.string()).optional().describe('<> ANY(not)'),
-  "fields": zod.array(zod.string()).optional().describe('controls\n\noutput'),
-  "sort": zod.array(zod.string()).optional().describe('sort: \"field\" asc; \"!field\" desc'),
-  "page": zod.number().optional().describe('page number'),
-  "size": zod.number().optional().describe('page size')
-})
+	q: zod.string().optional().describe('TermOfSearch'),
+	id: zod.array(zod.string()).optional().describe('= ANY(id)'),
+	not: zod.array(zod.string()).optional().describe('<> ANY(not)'),
+	fields: zod.array(zod.string()).optional().describe('controls\n\noutput'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('sort: \"field\" asc; \"!field\" desc'),
+	page: zod.number().optional().describe('page number'),
+	size: zod.number().optional().describe('page size'),
+});
 
 export const getPermissionsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
+	items: zod
+		.array(
+			zod.object({
+				id: zod
+					.string()
+					.optional()
+					.describe("[required] e.g.: 'read', 'playback_record_file', ..."),
+				name: zod.string().optional(),
+				usage: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+});

@@ -7,5 +7,5 @@
 import type { WebitelCasesCloseReason } from './webitelCasesCloseReason';
 
 export interface WebitelCasesLocateCloseReasonResponse {
-  closeReason?: WebitelCasesCloseReason;
+	closeReason?: WebitelCasesCloseReason;
 }

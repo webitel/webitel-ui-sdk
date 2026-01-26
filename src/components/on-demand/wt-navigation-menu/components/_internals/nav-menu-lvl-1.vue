@@ -9,7 +9,7 @@
         :class="{
           'nav-menu__item--selected': selected.value === category.value,
         }"
-        class="nav-menu__item nav-menu__item--active"
+        class="typo-body-1 nav-menu__item nav-menu__item--active"
         @click="select(category)"
       >
         <wt-icon
@@ -26,50 +26,50 @@
 </template>
 
 <script setup>
-import { defineEmits,defineProps } from 'vue';
+import { defineEmits, defineProps } from 'vue';
 
 const props = defineProps({
-  categories: {
-    type: Array,
-    default: () => [],
-  },
-  selected: {
-    type: Object,
-    default: () => ({}),
-  },
-  icons: {
-    type: Array,
-    default: () => [],
-  },
+	categories: {
+		type: Array,
+		default: () => [],
+	},
+	selected: {
+		type: Object,
+		default: () => ({}),
+	},
+	icons: {
+		type: Array,
+		default: () => [],
+	},
 });
 
-const emit = defineEmits(['select']);
+const emit = defineEmits([
+	'select',
+]);
 
 function select(category) {
-  emit('select', category);
+	emit('select', category);
 }
 </script>
 
-<style lang="scss" scoped>
-@use '../../css/nav-menu';
+<style scoped>
+@import '../../css/nav-menu.css';
 
-.nav-menu__item {
-  &--active {
-    background: var(--secondary-color);
+.nav-menu__item--active {
+  background: var(--secondary-color);
+}
 
-    &:hover {
-      background: var(--secondary-hover-color);
-    }
-  }
+.nav-menu__item--active:hover {
+  background: var(--secondary-hover-color);
+}
 
-  &--selected {
-    background: var(--primary-color);
-    color: var(--primary-on-color);
+.nav-menu__item--selected {
+  background: var(--primary-color);
+  color: var(--primary-on-color);
+}
 
-    &:hover {
-      background: var(--primary-color);
-      color: var(--primary-on-color);
-    }
-  }
+.nav-menu__item--selected:hover {
+  background: var(--primary-color);
+  color: var(--primary-on-color);
 }
 </style>

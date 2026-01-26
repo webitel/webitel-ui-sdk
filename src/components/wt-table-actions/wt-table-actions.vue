@@ -54,35 +54,58 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+/**
+ * @emits {string} input - Fires when action button is clicked. Emits button name: [import, export, filter-reset, column-select, refresh, settings]
+ */
 interface Props {
-  icons?: string[];
-  isSettingsActive?: boolean;
-  isSettingsBadge?: boolean;
+	/**
+	 * Array of icon names to display
+	 * @type {string[]}
+	 * @default ['refresh']
+	 * @options ['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']
+	 */
+	icons?: string[];
+	/**
+	 * Marks settings button as active
+	 * @type {boolean}
+	 * @default false
+	 */
+	isSettingsActive?: boolean;
+	/**
+	 * Shows badge on settings button
+	 * @type {boolean}
+	 * @default false
+	 */
+	isSettingsBadge?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  icons: () => ['refresh'],
-  isSettingsActive: false,
-  isSettingsBadge: false,
+	icons: () => [
+		'refresh',
+	],
+	isSettingsActive: false,
+	isSettingsBadge: false,
 });
 
 defineEmits<{
-  input: [value: string];
+	input: [
+		value: string,
+	];
 }>();
 
 const isImport = computed(() => props.icons.indexOf('import') !== -1);
 const isExport = computed(() => props.icons.indexOf('export') !== -1);
-const isFilterReset = computed(() => props.icons.indexOf('filter-reset') !== -1);
-const isColumnSelect = computed(() => props.icons.indexOf('column-select') !== -1);
+const isFilterReset = computed(
+	() => props.icons.indexOf('filter-reset') !== -1,
+);
+const isColumnSelect = computed(
+	() => props.icons.indexOf('column-select') !== -1,
+);
 const isRefresh = computed(() => props.icons.indexOf('refresh') !== -1);
 const isSettings = computed(() => props.icons.indexOf('settings') !== -1);
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .wt-table-actions {
   display: flex;
   align-items: center;

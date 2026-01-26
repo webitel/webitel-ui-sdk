@@ -38,31 +38,35 @@
 
 <script>
 export default {
-  name: 'FlowSaveFailedPopup',
-  emits: ['close-popup', 'save', 'download'],
-  methods: {
-    closePopup() {
-      this.$emit('close-popup');
-    },
-    save() {
-      this.$emit('save');
-    },
-    download() {
-      this.$emit('download');
-    },
-  },
+	name: 'FlowSaveFailedPopup',
+	emits: [
+		'close-popup',
+		'save',
+		'download',
+	],
+	methods: {
+		closePopup() {
+			this.$emit('close-popup');
+		},
+		save() {
+			this.$emit('save');
+		},
+		download() {
+			this.$emit('download');
+		},
+	},
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .flow-save-filed-popup__wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
 
-  .wt-icon {
-    margin-bottom: var(--spacing-sm);
-  }
+.flow-save-filed-popup__wrapper .wt-icon {
+  margin-bottom: var(--spacing-sm);
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
-  <aside class="wt-notifications-bar">
+  <aside class="wt-notifications-bar wt-scrollbar">
     <transition-group
+	class="wt-notifications-bar__wrapper"
       name="wt-notifications-transition"
       tag="div"
     >
@@ -21,54 +22,51 @@ import defaultEventBus from '../../scripts/eventBus.js';
 import { _wtUiLog as loggr } from '../../scripts/logger.js';
 
 export default {
-  name: 'WtNotificationsBar',
-  inject: ['$eventBus'],
-  data: () => ({
-    notificationDuration: 4000,
-    notifications: [],
+	name: 'WtNotificationsBar',
+	inject: [
+		'$eventBus',
+	],
+	data: () => ({
+		notificationDuration: 4000,
+		notifications: [],
 
-    eventBus: defaultEventBus,
-  }),
-  created() {
-    if (this.$eventBus) {
-      this.eventBus = this.$eventBus;
-    } else {
-      loggr.warn({ entity: 'component', module: 'wt-notification-bar' })(
-        'no globally provided $eventBus found, using default webitel-ui eventBus',
-      );
-    }
+		eventBus: defaultEventBus,
+	}),
+	created() {
+		if (this.$eventBus) {
+			this.eventBus = this.$eventBus;
+		} else {
+			loggr.warn({
+				entity: 'component',
+				module: 'wt-notification-bar',
+			})(
+				'no globally provided $eventBus found, using default webitel-ui eventBus',
+			);
+		}
 
-    this.eventBus.$on('notification', this.showNotification);
-  },
-  unmounted() {
-    this.eventBus.$off('notification', this.showNotification);
-  },
-  methods: {
-    showNotification(notification) {
-      this.notifications.unshift(notification);
-      setTimeout(
-        () => this.closeNotification(notification),
-        notification.timeout * 1000 || this.notificationDuration,
-      );
-    },
-    closeNotification(notification) {
-      const index = this.notifications.indexOf(notification);
-      this.notifications.splice(index, 1);
-    },
-  },
+		this.eventBus.$on('notification', this.showNotification);
+	},
+	unmounted() {
+		this.eventBus.$off('notification', this.showNotification);
+	},
+	methods: {
+		showNotification(notification) {
+			this.notifications.unshift(notification);
+			setTimeout(
+				() => this.closeNotification(notification),
+				notification.timeout * 1000 || this.notificationDuration,
+			);
+		},
+		closeNotification(notification) {
+			const index = this.notifications.indexOf(notification);
+			this.notifications.splice(index, 1);
+		},
+	},
 };
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-</style>
-
-<style lang="scss" scoped>
-@use '@webitel/styleguide/scroll' as *;
-
+<style scoped>
 .wt-notifications-bar {
-  @extend %wt-scrollbar;
-
   position: fixed;
   top: var(--notifications-bar-corner-margin);
   right: var(--notifications-bar-corner-margin);
@@ -76,10 +74,13 @@ export default {
   max-height: var(--notifications-bar-max-height);
   overflow-x: hidden;
   overflow-y: auto;
+}
 
-  .wt-notification {
-    margin: var(--notifications-bar-notifications-margin);
-  }
+.wt-notifications-bar__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-height: 0;
 }
 
 .wt-notifications-transition-enter-active,

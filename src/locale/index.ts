@@ -11,25 +11,15 @@ import uz from './uz/uz';
 import vi from './vi/vi';
 
 export const messages = {
-  en,
-  es,
-  ru,
-  ro,
-  uk,
-  kz,
-  pl,
-  uz,
-  vi,
+	en,
+	es,
+	ru,
+	ro,
+	uk,
+	kz,
+	pl,
+	uz,
+	vi,
 };
 
-export {
-  en,
-  es,
-  kz,
-  pl,
-  ro,
-  ru,
-  uk,
-  uz,
-  vi,
-};
+export { en, es, kz, pl, ro, ru, uk, uz, vi };

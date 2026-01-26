@@ -6,6 +6,6 @@
  */
 
 export type SearchCognitiveProfileVoicesParams = {
-q?: string;
-key?: string;
+	q?: string;
+	key?: string;
 };

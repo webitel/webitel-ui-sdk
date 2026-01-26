@@ -50,5 +50,3 @@ onMounted(() => {
   Prism.highlightAll();
 });
 </script>
-
-<style lang="scss" scoped></style>

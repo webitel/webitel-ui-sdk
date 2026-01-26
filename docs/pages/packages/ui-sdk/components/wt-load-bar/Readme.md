@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-load-bar-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleLoadBar from './examples/example-load-bar.vue';
 </script>
 
-# WtLoadBar
+# `wt-load-bar.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Load Bar
 

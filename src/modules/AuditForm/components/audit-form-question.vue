@@ -27,8 +27,8 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, inject,onMounted, ref } from 'vue';
-import { EngineQuestion, EngineQuestionAnswer } from "webitel-sdk";
+import { computed, inject, onMounted, ref } from 'vue';
+import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
 
 import vClickaway from '../../../directives/clickaway/clickaway.js';
 import isEmpty from '../../../scripts/isEmpty.js';
@@ -41,74 +41,86 @@ const readonly = inject('readonly');
 const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
-withDefaults(defineProps<{
-  first?: boolean;
-}>(), {
-  first: false,
-});
+withDefaults(
+	defineProps<{
+		first?: boolean;
+	}>(),
+	{
+		first: false,
+	},
+);
 
 const emit = defineEmits<{
-  'copy': [];
-  'delete': [];
+	copy: [];
+	delete: [];
 }>();
 
 const QuestionState = {
-  SAVED: 'saved',
-  EDIT: 'edit',
+	SAVED: 'saved',
+	EDIT: 'edit',
 };
 
 const state = ref(QuestionState.SAVED);
 
 const v$ = useVuelidate(
-  computed(() =>
-    mode === 'create'
-      ? {
-          question: {
-            question: { required },
-          },
-        }
-      : {
-          answer: {
-            required: (value) => {
-              // if not required, no need to validate
-              if (!questionModel.value.required) return true;
+	computed(() =>
+		mode === 'create'
+			? {
+					question: {
+						question: {
+							required,
+						},
+					},
+				}
+			: {
+					answer: {
+						required: (value) => {
+							// if not required, no need to validate
+							if (!questionModel.value.required) return true;
 
-              if (value && value?.score != null) {
-                return true;
-              }
-            },
-          },
-        },
-  ),
-  { question: questionModel, answer: answerModel },
-  { $autoDirty: true },
+							if (value && value?.score != null) {
+								return true;
+							}
+						},
+					},
+				},
+	),
+	{
+		question: questionModel,
+		answer: answerModel,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 const component = computed(() => {
-  if (readonly) return QuestionRead;
-  if (mode === 'create') {
-    if (state.value === QuestionState.SAVED) return QuestionRead;
-    return QuestionWrite;
-  }
-  return QuestionRead;
+	if (readonly) return QuestionRead;
+	if (mode === 'create') {
+		if (state.value === QuestionState.SAVED) return QuestionRead;
+		return QuestionWrite;
+	}
+	return QuestionRead;
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
 
 function saveQuestion() {
-  state.value = QuestionState.SAVED;
+	state.value = QuestionState.SAVED;
 }
 
 function activateQuestion() {
-  if (mode !== 'create') return;
-  state.value = QuestionState.EDIT;
+	if (mode !== 'create') return;
+	state.value = QuestionState.EDIT;
 }
 
-defineExpose({ activateQuestion });
+defineExpose({
+	activateQuestion,
+});
 
 // initialize validations
 onMounted(() => {
-  v$.value.$touch();
+	v$.value.$touch();
 });
 </script>
 

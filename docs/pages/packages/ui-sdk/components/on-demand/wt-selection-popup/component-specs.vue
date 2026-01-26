@@ -5,5 +5,3 @@ import Component from '__lib__/components/on-demand/wt-selection-popup/wt-select
 <template>
   <component-info :info="Component.docs" />
 </template>
-
-<style lang="scss" scoped></style>

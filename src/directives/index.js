@@ -1,7 +1,7 @@
 import clickaway from './clickaway/clickaway.js';
 
 const Directives = {
-  clickaway,
+	clickaway,
 };
 
 export default Directives;

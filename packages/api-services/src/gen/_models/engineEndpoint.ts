@@ -6,8 +6,8 @@
  */
 
 export interface EngineEndpoint {
-  id?: string;
-  name?: string;
-  number?: string;
-  type?: string;
+	id?: string;
+	name?: string;
+	number?: string;
+	type?: string;
 }

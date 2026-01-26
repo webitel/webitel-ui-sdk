@@ -6,5 +6,5 @@
  */
 
 export type ReadOutboundResourceParams = {
-domainId?: string;
+	domainId?: string;
 };

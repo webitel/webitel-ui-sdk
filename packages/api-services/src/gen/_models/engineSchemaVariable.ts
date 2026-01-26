@@ -6,7 +6,7 @@
  */
 
 export interface EngineSchemaVariable {
-  encrypt?: boolean;
-  id?: number;
-  name?: string;
+	encrypt?: boolean;
+	id?: number;
+	name?: string;
 }

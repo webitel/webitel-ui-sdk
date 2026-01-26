@@ -1,15 +1,13 @@
 <script setup>
-import Docs from './wt-copy-action.vue';
+import Specs from './component-specs.vue';
 import ExampleCopyAction from './examples/example-copy-action.vue';
 </script>
 
-# WtCopyAction
+# `wt-copy-action.vue`
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
 
 ## Example Copy Action
 

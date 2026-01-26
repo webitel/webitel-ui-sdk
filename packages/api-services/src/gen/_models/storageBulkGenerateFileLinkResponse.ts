@@ -7,5 +7,5 @@
 import type { StorageGenerateFileLinkResponse } from './storageGenerateFileLinkResponse';
 
 export interface StorageBulkGenerateFileLinkResponse {
-  links?: StorageGenerateFileLinkResponse[];
+	links?: StorageGenerateFileLinkResponse[];
 }
