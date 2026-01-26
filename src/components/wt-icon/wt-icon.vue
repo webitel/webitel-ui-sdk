@@ -12,7 +12,7 @@
 import { computed } from 'vue';
 
 import { ComponentSize, IconColor } from '../../enums';
-import { getIconFromRepository } from './utils/iconsRepository';
+import { getIconFromRepository } from '../../assets/icons';
 
 interface Props {
 	/**

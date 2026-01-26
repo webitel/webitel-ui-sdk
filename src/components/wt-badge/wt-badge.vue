@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import BadgeDnd from '../../assets/icons/badge-dnd.svg';
-import BadgeOnline from '../../assets/icons/badge-online.svg';
-import BadgePause from '../../assets/icons/badge-pause.svg';
+import BadgeDnd from './assets/badge-dnd.svg';
+import BadgeOnline from './assets/badge-online.svg';
+import BadgePause from './assets/badge-pause.svg';
 import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 export default {

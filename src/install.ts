@@ -7,7 +7,7 @@ import './css/tailwind.css';
 import { generateInstance } from '@webitel/api-services/api/axios';
 
 import Components from './components'; // init all components
-import { fillIconsRepository } from './components/wt-icon/utils/iconsRepository';
+import { fillIconsRepository } from './assets/icons';
 import Directives from './directives'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin';
 

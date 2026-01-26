@@ -171,6 +171,10 @@
 			"types": "./types/install.d.ts",
 			"import": "./dist/ui-sdk.js"
 		},
+		"./icons": {
+			"types": "./types/components/icons/index.d.ts",
+			"import": "./src/assets/icons/index.ts"
+		},
 		"./store": {
 			"types": "./types/store/new/index.d.ts",
 			"import": "./src/store/new/index.js"

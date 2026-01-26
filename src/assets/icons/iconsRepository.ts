@@ -1,13 +1,13 @@
 import dompurify from 'dompurify';
 
-import icons from '../../../assets/icons/sprite/_index';
+import icons from './sprite';
 
 export type IconRepositoryEntry = {
 	iconName: string;
 	svg: string;
 };
 
-const iconsRepository = new Map<
+export const iconsRepository = new Map<
 	IconRepositoryEntry['iconName'],
 	IconRepositoryEntry['svg']
 >();
