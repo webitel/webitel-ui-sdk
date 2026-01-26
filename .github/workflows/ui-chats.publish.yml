@@ -22,7 +22,7 @@ jobs:
       - name: Publish release
         id: publish_release
         env:
-          HUSKY: 0
+          HUSKY: 0 #https://typicode.github.io/husky/how-to.html#ci-server-and-docker
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}    
           cd packages/ui-chats
