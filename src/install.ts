@@ -5,9 +5,8 @@ import './css/main.css';
 import './css/tailwind.css';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
-
-import Components from './components'; // init all components
 import { fillIconsRepository } from './assets/icons';
+import Components from './components'; // init all components
 import Directives from './directives'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin';
 

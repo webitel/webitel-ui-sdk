@@ -13,10 +13,10 @@
 </template>
 
 <script>
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 import BadgeDnd from './assets/badge-dnd.svg';
 import BadgeOnline from './assets/badge-online.svg';
 import BadgePause from './assets/badge-pause.svg';
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 export default {
 	name: 'WtBadge',

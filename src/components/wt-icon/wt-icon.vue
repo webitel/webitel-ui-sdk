@@ -10,9 +10,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
-import { ComponentSize, IconColor } from '../../enums';
 import { getIconFromRepository } from '../../assets/icons';
+import { ComponentSize, IconColor } from '../../enums';
 
 interface Props {
 	/**
