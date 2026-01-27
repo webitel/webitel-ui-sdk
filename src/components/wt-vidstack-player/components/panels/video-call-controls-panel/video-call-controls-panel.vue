@@ -93,13 +93,12 @@
 	lang="ts"
 >
 import { computed, inject, ref } from 'vue';
-
+import WtButton from '../../../../../components/wt-button/wt-button.vue';
 import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
 import { ComponentSize } from '../../../../../enums';
 import { VideoCallAction } from '../../../../../modules/CallSession/modules/VideoCall/enums/VideoCallAction.enum';
 import type { ScreenshotStatus } from '../../../../../modules/CallSession/types';
 import type { ResultCallbacks } from '../../../../../types';
-import WtButton from '../../../../../components/wt-button/wt-button.vue';
 
 const props = withDefaults(
 	defineProps<{

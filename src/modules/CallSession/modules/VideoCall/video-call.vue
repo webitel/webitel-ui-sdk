@@ -111,7 +111,7 @@ import {
 import { ComponentSize, WebitelApplications } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
-import { VideoCallAction } from './enums/VideoCallAction.enum';
+import type { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
 	defineProps<{
