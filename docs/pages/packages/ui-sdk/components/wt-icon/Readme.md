@@ -1,35 +1,38 @@
 <script setup>
-const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'];
+import Specs from './component-specs.vue';
+import ExampleIconDifferentColors from './components/example-icon-different-colors.vue';
+import ExampleIconDifferentSizes from './components/example-icon-different-sizes.vue';
 </script>
 
-# WtIcon
+# `wt-icon.vue`
 
-## Props
+## See also:
 
-| Prop       | Type    | Default | Required | Code                                                | Options                                                                                                               |
-| ---------- | ------- | ------- | -------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| icon       | String  |         | true     | `<wt-icon icon="close"></wt-icon>`                  |                                                                                                                       |
-| size       | String  | md      |          | `<wt-icon icon="close" size="sm"></wt-icon>`        | sm, md, lg, xl                                                                                                        |
-| color      | String  | default |          | `<wt-icon icon="close" color="success"></wt-icon>`  | default, active, disabled, primary, error, success, warning, on-dark, on-light, on-primary, info, chat, transfer, job |
-| iconPrefix | String  | `''`    |          | `<wt-icon icon="close" icon-prefix="ws"></wt-icon>` |                                                                                                                       |
-| disabled   | Boolean | false   |          | `<wt-icon icon="close" disabled></wt-icon>`         |                                                                                                                       |
+* [Icons List](../../assets/icons/icons.md)
 
-### Different colors:
+## Specs
 
-<div
-  style="display: flex; align-items: center; gap: 5px;"
-  v-for="color of colors"
-  :key="color"
->
-<wt-icon
-  icon="edit"
-  size="lg"
-  :color="color"
-></wt-icon>
-{{ color }}
-</div>
+<Specs />
 
-## [Available icons](../../assets/icons/icons.md)
+## Example Icon Different Colors
+
+::: raw
+<ExampleIconDifferentColors/>
+:::
+
+::: details Code
+<<< ./components/example-icon-different-colors.vue
+:::
+
+## Example Icon Different Sizes
+
+::: raw
+<ExampleIconDifferentSizes/>
+:::
+
+::: details Code
+<<< ./components/example-icon-different-sizes.vue
+:::
 
 ## How does it work?
 
