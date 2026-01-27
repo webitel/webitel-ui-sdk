@@ -9,6 +9,7 @@ const darkColors = {
     hoverBorderColor: '{form.field.hover.border.color}',
     focusBorderColor: '{form.field.focus.border.color}',
     invalidBorderColor: '{form.field.invalid.border.color}',
+    invalidHoverBorderColor: 'black',
     color: '{form.field.color}',
     disabledColor: '{form.field.disabled.color}',
     placeholderColor: '{form.field.placeholder.color}',
