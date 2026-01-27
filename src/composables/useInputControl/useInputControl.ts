@@ -5,7 +5,7 @@ export const useInputControl = (input) => {
 
 	const focus = () => {
 		inputEl.value?.focus();
-	}
+	};
 
 	// prevent double triggering
 	const handleKeyup = (e) => e.stopPropagation();
