@@ -111,7 +111,7 @@ import {
 import { ComponentSize, WebitelApplications } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
-import type { VideoCallAction } from './enums/VideoCallAction.enum';
+import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
 	defineProps<{
@@ -213,212 +213,196 @@ const senderVideoMutedIconSizes = {
 };
 </script>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
+<style scoped>
 .video-call {
   flex: 0 0 auto;
+}
 
-  &-position {
-    &--left-bottom {
-      &.wt-vidstack-player {
-        &--sm {
-          left: var(--spacing-sm);
-          bottom: var(--spacing-sm);
-          top: unset;
-        }
+.video-call-position--left-bottom.wt-vidstack-player--sm {
+  left: var(--spacing-sm);
+  bottom: var(--spacing-sm);
+  top: unset;
+}
 
-        &--md {
-          top: unset;
-          left: var(--spacing-sm);
-          bottom: var(--spacing-sm);
-        }
-      }
-    }
+.video-call-position--left-bottom.wt-vidstack-player--md {
+  top: unset;
+  left: var(--spacing-sm);
+  bottom: var(--spacing-sm);
+}
 
-    &--right-bottom {
-      &.wt-vidstack-player {
-        &--sm {
-          top: unset;
-          right: var(--spacing-sm);
-          bottom: var(--spacing-sm);
-        }
+.video-call-position--right-bottom.wt-vidstack-player--sm {
+  top: unset;
+  right: var(--spacing-sm);
+  bottom: var(--spacing-sm);
+}
 
-        &--md {
-          top: unset;
-          right: var(--spacing-sm);
-          bottom: var(--spacing-sm);
-        }
-      }
-    }
+.video-call-position--right-bottom.wt-vidstack-player--md {
+  top: unset;
+  right: var(--spacing-sm);
+  bottom: var(--spacing-sm);
+}
 
-    &--center {
-      &.wt-vidstack-player {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        right: unset;
-        bottom: unset;
-        transform: translate(-50%, -50%);
-      }
-    }
-  }
+.video-call-position--center.wt-vidstack-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: unset;
+  bottom: unset;
+  transform: translate(-50%, -50%);
+}
 
-  &-overlay {
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background: var(--p-player-wrapper-background);
-  }
+.video-call-overlay {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: var(--p-player-wrapper-background);
+}
 
-  &-content {
-    height: 100%;
-    padding: var(--p-player-counter-position-padding-sm);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+.video-call-content {
+  height: 100%;
+  padding: var(--p-player-counter-position-padding-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
 
-    &--sm {
-      padding-bottom: calc(var(--p-player-control-bar-sm-height) + var(--p-player-counter-position-padding-sm));
-    }
+.video-call-content--sm {
+  padding-bottom: calc(var(--p-player-control-bar-sm-height) + var(--p-player-counter-position-padding-sm));
+}
 
-    &-wrapper {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      gap: var(--p-player-control-bar-sm-gap);
+.video-call-content-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--p-player-control-bar-sm-gap);
+}
 
-      &--sm {
-        left: var(--p-player-counter-position-padding-sm);
-        bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
-      }
+.video-call-content-wrapper--sm {
+  left: var(--p-player-counter-position-padding-sm);
+  bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
+}
 
-      &--md {
-        left: var(--p-player-counter-position-padding-md);
-        bottom: var(--p-player-counter-position-padding-md);
-      }
+.video-call-content-wrapper--md {
+  left: var(--p-player-counter-position-padding-md);
+  bottom: var(--p-player-counter-position-padding-md);
+}
 
-      &--lg {
-        left: var(--p-player-counter-position-padding-lg);
-        bottom: var(--p-player-counter-position-padding-lg);
-      }
-    }
-  }
+.video-call-content-wrapper--lg {
+  left: var(--p-player-counter-position-padding-lg);
+  bottom: var(--p-player-counter-position-padding-lg);
+}
 
-  &-receiver {
-    color: var(--p-player-wrapper-muted-color);
+.video-call-receiver {
+  color: var(--p-player-wrapper-muted-color);
+}
 
-    &--sm {
-      .video-call-receiver-text {
-        max-width: 73px;
-      }
-    }
+.video-call-receiver--sm .video-call-receiver-text {
+  max-width: 73px;
+}
 
-    &--muted {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-xs);
-      align-items: center;
-      justify-content: center;
-    }
-  }
+.video-call-receiver--muted {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  align-items: center;
+  justify-content: center;
+}
 
-  &-sender {
-    flex: 0 0 auto;
+.video-call-sender {
+  flex: 0 0 auto;
+}
 
-    &--muted {
-      background: var(--p-player-wrapper-background);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border: 1px solid;
-      border-color: var(--p-player-wrapper-border-color);
-    }
+.video-call-sender--muted {
+  background: var(--p-player-wrapper-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: var(--p-player-wrapper-border-color);
+}
 
-    &--sm {
-      :deep(video) {
-        border-radius: var(--p-player-cam-preview-sm-border-radius);
-      }
+.video-call-sender--sm :deep(video) {
+  border-radius: var(--p-player-cam-preview-sm-border-radius);
+}
 
-      &.video-call-sender--muted {
-        border-radius: var(--p-player-cam-preview-sm-border-radius);
-      }
+.video-call-sender--sm.video-call-sender--muted {
+  border-radius: var(--p-player-cam-preview-sm-border-radius);
+}
 
-      &.video-call-receiver--muted {
-        padding-bottom: var(--p-player-control-bar-sm-height);
-      }
+.video-call-sender--sm.video-call-receiver--muted {
+  padding-bottom: var(--p-player-control-bar-sm-height);
+}
 
-      width: var(--p-player-cam-preview-sm-width);
-      height: var(--p-player-cam-preview-sm-height);
-      position: relative;
-      right: 0;
-      bottom: 0;
-    }
+.video-call-sender--sm {
+  width: var(--p-player-cam-preview-sm-width);
+  height: var(--p-player-cam-preview-sm-height);
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
 
-    &--md {
-      :deep(video) {
-        border-radius: var(--p-player-cam-preview-md-border-radius);
-      }
+.video-call-sender--md :deep(video) {
+  border-radius: var(--p-player-cam-preview-md-border-radius);
+}
 
-      &.video-call-sender--muted {
-        border-radius: var(--p-player-cam-preview-md-border-radius);
-      }
+.video-call-sender--md.video-call-sender--muted {
+  border-radius: var(--p-player-cam-preview-md-border-radius);
+}
 
-      width: var(--p-player-cam-preview-md-width);
-      height: var(--p-player-cam-preview-md-height);
-      position: relative;
-      right: 0;
-      bottom: 0;
-    }
+.video-call-sender--md {
+  width: var(--p-player-cam-preview-md-width);
+  height: var(--p-player-cam-preview-md-height);
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
 
-    &--lg {
-      :deep(video) {
-        border-radius: var(--p-player-cam-preview-lg-border-radius);
-      }
+.video-call-sender--lg :deep(video) {
+  border-radius: var(--p-player-cam-preview-lg-border-radius);
+}
 
-      &.video-call-sender--muted {
-        border-radius: var(--p-player-cam-preview-lg-border-radius);
-      }
+.video-call-sender--lg.video-call-sender--muted {
+  border-radius: var(--p-player-cam-preview-lg-border-radius);
+}
 
-      width: var(--p-player-cam-preview-lg-width);
-      height: var(--p-player-cam-preview-lg-height);
-      position: relative;
-      right: 0;
-      bottom: 0;
-    }
-  }
+.video-call-sender--lg {
+  width: var(--p-player-cam-preview-lg-width);
+  height: var(--p-player-cam-preview-lg-height);
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
 
-  &__indicator {
-    position: absolute;
-    display: flex;
-    align-items: end;
-    justify-content: flex-end;
+.video-call__indicator {
+  position: absolute;
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+}
 
-    &--sm {
-      right: var(--p-player-counter-position-padding-sm);
-      bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
-    }
+.video-call__indicator--sm {
+  right: var(--p-player-counter-position-padding-sm);
+  bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
+}
 
-    &--md {
-      right: var(--p-player-counter-position-padding-md);
-      bottom: var(--p-player-counter-position-padding-md);
-    }
+.video-call__indicator--md {
+  right: var(--p-player-counter-position-padding-md);
+  bottom: var(--p-player-counter-position-padding-md);
+}
 
-    &--lg {
-      right: var(--p-player-counter-position-padding-lg);
-      bottom: var(--p-player-counter-position-padding-lg);
-    }
-  }
+.video-call__indicator--lg {
+  right: var(--p-player-counter-position-padding-lg);
+  bottom: var(--p-player-counter-position-padding-lg);
 }
 </style>

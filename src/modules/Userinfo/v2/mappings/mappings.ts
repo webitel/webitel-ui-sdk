@@ -1,4 +1,4 @@
-import invert from 'lodash/fp/invert';
+import invert from 'lodash/invert';
 
 import {
 	AdminSections,
