@@ -4,95 +4,104 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteBucketParams,
+  EngineBucket,
+  EngineBucketServiceUpdateBucketBody,
+  EngineCreateBucketRequest,
+  EngineListBucket,
+  ReadBucketParams,
+  SearchBucketParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getBucketService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of Bucket
  */
-export const SearchBucketQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchBucketResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchBucket = <TData = AxiosResponse<EngineListBucket>>(
+    params?: SearchBucketParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/buckets`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create Bucket
  */
-export const CreateBucketBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreateBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const createBucket = <TData = AxiosResponse<EngineBucket>>(
+    engineCreateBucketRequest: EngineCreateBucketRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/buckets`,
+      engineCreateBucketRequest,options
+    );
+  }
 /**
  * @summary Remove Bucket
  */
-export const DeleteBucketParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteBucketQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const deleteBucket = <TData = AxiosResponse<EngineBucket>>(
+    id: string,
+    params?: DeleteBucketParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/buckets/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Bucket item
  */
-export const ReadBucketParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadBucketQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const readBucket = <TData = AxiosResponse<EngineBucket>>(
+    id: string,
+    params?: ReadBucketParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/buckets/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update Bucket
  */
-export const UpdateBucketParams = zod.object({
-  "id": zod.string()
-})
+const updateBucket = <TData = AxiosResponse<EngineBucket>>(
+    id: string,
+    engineBucketServiceUpdateBucketBody: EngineBucketServiceUpdateBucketBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/buckets/${id}`,
+      engineBucketServiceUpdateBucketBody,options
+    );
+  }
 
-export const UpdateBucketBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
+            // --- footer start
+            return {searchBucket,createBucket,deleteBucket,readBucket,updateBucket}};
+export type SearchBucketResult = AxiosResponse<EngineListBucket>
+export type CreateBucketResult = AxiosResponse<EngineBucket>
+export type DeleteBucketResult = AxiosResponse<EngineBucket>
+export type ReadBucketResult = AxiosResponse<EngineBucket>
+export type UpdateBucketResult = AxiosResponse<EngineBucket>
 
-export const UpdateBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+            // --- footer end
+          

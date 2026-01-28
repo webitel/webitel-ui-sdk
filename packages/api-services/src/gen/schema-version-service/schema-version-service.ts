@@ -4,33 +4,44 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineSearchSchemaVersionResponse,
+  SearchSchemaVersionParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchSchemaVersionParams = zod.object({
-  "schema_id": zod.string()
-})
 
-export const SearchSchemaVersionQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- header start
+            // 
 
-export const SearchSchemaVersionResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "schemaId": zod.string().optional(),
-  "version": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getSchemaVersionService
+            // --- title end
+           = () => {
 
+            // --- header end
+          const searchSchemaVersion = <TData = AxiosResponse<EngineSearchSchemaVersionResponse>>(
+    schemaId: string,
+    params?: SearchSchemaVersionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/${schemaId}/versions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {searchSchemaVersion}};
+export type SearchSchemaVersionResult = AxiosResponse<EngineSearchSchemaVersionResponse>
+
+            // --- footer end
+          

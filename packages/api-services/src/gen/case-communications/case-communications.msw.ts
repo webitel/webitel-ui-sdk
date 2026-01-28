@@ -20,7 +20,7 @@ import type {
   WebitelCasesLinkCommunicationResponse,
   WebitelCasesListCommunicationsResponse,
   WebitelCasesUnlinkCommunicationResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getListCommunicationsResponseMock = (overrideResponse: Partial< WebitelCasesListCommunicationsResponse > = {}): WebitelCasesListCommunicationsResponse => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({communicationId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), communicationType: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), etag: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ver: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})

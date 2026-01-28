@@ -4,999 +4,178 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiCreateUserRequest,
+  ApiCreateUserResponse,
+  ApiDeleteUsersResponse,
+  ApiGetPasswordSettingsResponse,
+  ApiLogoutUserResponse,
+  ApiReadUserResponse,
+  ApiSearchUsersRequest,
+  ApiSearchUsersResponse,
+  ApiUpdatePasswordRequest,
+  ApiUpdatePasswordResponse,
+  ApiUser,
+  DeleteUsers2Params,
+  DeleteUsersParams,
+  ReadPasswordSettingsParams,
+  ReadUser2Params,
+  ReadUserParams,
+  SearchUsersParams,
+  UpdateUser2Body,
+  UpdateUser2Params,
+  UpdateUserBody,
+  UpdateUserParams,
+  UsersLogoutUserBody
+} from '../webitelAPI.schemas';
 
 
-export const ReadUser2QueryParams = zod.object({
-  "id": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional().describe('partial output')
-})
 
-export const ReadUser2Response = zod.object({
-  "user": zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).optional().describe('User profile.')
-})
+            // --- header start
+            // 
 
-export const DeleteUsers2QueryParams = zod.object({
-  "id": zod.string().optional().describe('ONE /users/{id}'),
-  "permanent": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getUsers
+            // --- title end
+           = () => {
 
-export const DeleteUsers2BodyItem = zod.string()
-export const DeleteUsers2Body = zod.array(DeleteUsers2BodyItem)
+            // --- header end
+          const readUser2 = <TData = AxiosResponse<ApiReadUserResponse>>(
+    params?: ReadUser2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/user`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteUsers2 = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
+    deleteUsers2Body: string[],
+    params?: DeleteUsers2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/users`,{data:
+      deleteUsers2Body, 
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchUsers = <TData = AxiosResponse<ApiSearchUsersResponse>>(
+    params?: SearchUsersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createUser = <TData = AxiosResponse<ApiCreateUserResponse>>(
+    apiCreateUserRequest: ApiCreateUserRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users`,
+      apiCreateUserRequest,options
+    );
+  }
+const updatePassword = <TData = AxiosResponse<ApiUpdatePasswordResponse>>(
+    apiUpdatePasswordRequest: ApiUpdatePasswordRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/users/password`,
+      apiUpdatePasswordRequest,options
+    );
+  }
+const readPasswordSettings = <TData = AxiosResponse<ApiGetPasswordSettingsResponse>>(
+    params?: ReadPasswordSettingsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/password/settings`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchUsers2 = <TData = AxiosResponse<ApiSearchUsersResponse>>(
+    apiSearchUsersRequest: ApiSearchUsersRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users/search`,
+      apiSearchUsersRequest,options
+    );
+  }
+const deleteUsers = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
+    id: string,
+    params?: DeleteUsersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/users/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const readUser = <TData = AxiosResponse<ApiReadUserResponse>>(
+    id: string,
+    params?: ReadUserParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const logoutUser = <TData = AxiosResponse<ApiLogoutUserResponse>>(
+    id: string,
+    usersLogoutUserBody: UsersLogoutUserBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users/${id}/logout`,
+      usersLogoutUserBody,options
+    );
+  }
+const updateUser2 = <TData = AxiosResponse<ApiUser>>(
+    updateUser2Body: UpdateUser2Body,
+    params?: UpdateUser2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/users/user.id}`,
+      updateUser2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateUser = <TData = AxiosResponse<ApiUser>>(
+    updateUserBody: UpdateUserBody,
+    params?: UpdateUserParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/users/user.id}`,
+      updateUserBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const DeleteUsers2Response = zod.object({
-  "deleted": zod.array(zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')).optional()
-})
+            // --- footer start
+            return {readUser2,deleteUsers2,searchUsers,createUser,updatePassword,readPasswordSettings,searchUsers2,deleteUsers,readUser,logoutUser,updateUser2,updateUser}};
+export type ReadUser2Result = AxiosResponse<ApiReadUserResponse>
+export type DeleteUsers2Result = AxiosResponse<ApiDeleteUsersResponse>
+export type SearchUsersResult = AxiosResponse<ApiSearchUsersResponse>
+export type CreateUserResult = AxiosResponse<ApiCreateUserResponse>
+export type UpdatePasswordResult = AxiosResponse<ApiUpdatePasswordResponse>
+export type ReadPasswordSettingsResult = AxiosResponse<ApiGetPasswordSettingsResponse>
+export type SearchUsers2Result = AxiosResponse<ApiSearchUsersResponse>
+export type DeleteUsersResult = AxiosResponse<ApiDeleteUsersResponse>
+export type ReadUserResult = AxiosResponse<ApiReadUserResponse>
+export type LogoutUserResult = AxiosResponse<ApiLogoutUserResponse>
+export type UpdateUser2Result = AxiosResponse<ApiUser>
+export type UpdateUserResult = AxiosResponse<ApiUser>
 
-export const SearchUsersQueryParams = zod.object({
-  "id": zod.array(zod.string()).optional().describe('----- Base Filters ---------------------------\n\nfilter: .id = any({id}...)'),
-  "notId": zod.array(zod.string()).optional().describe('filter: .id <> all({not_ids}...)'),
-  "q": zod.string().optional().describe('----- User-specific Filters ------------------\n\nfilter: (.name|.username|.extension|.status) ILIKE \'{q}\''),
-  "name": zod.string().optional().describe('filter: .name ILIKE \'{name}\''),
-  "status": zod.string().optional().describe('filter: .status ILIKE \'{status}\''),
-  "username": zod.string().optional().describe('filter: .username ILIKE \'{username}\''),
-  "extension": zod.string().optional().describe('filter: .extension LIKE \'{extension}\''),
-  "any": zod.boolean().optional().describe('----- View Modes -----------------------------\nNOTE: by default, search NOT \'deleted\' objects ONLY\n\nfilter: include \'deleted\' ALSO ! (inactive)'),
-  "deleted": zod.boolean().optional().describe('filter: .deleted_at NOTNULL (view: RECYCLE)'),
-  "presenceStatus": zod.string().optional(),
-  "presenceNote": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional().describe('// navigation filter\nrepeated int64 roles = 7;\n----- Search Options -------------------------\n\nselect: output (fields,...)'),
-  "sort": zod.array(zod.string()).optional().describe('select: order by (fields,...)'),
-  "page": zod.number().optional().describe('select: offset {page}'),
-  "size": zod.number().optional().describe('select: limit {size}')
-})
-
-export const SearchUsersResponse = zod.object({
-  "items": zod.array(zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const CreateUserBody = zod.object({
-  "confirmPassword": zod.string().optional(),
-  "user": zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).optional().describe('User profile.'),
-  "userPassword": zod.string().optional()
-})
-
-export const CreateUserResponse = zod.object({
-  "user": zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).optional().describe('User profile.')
-})
-
-export const UpdatePasswordBody = zod.object({
-  "confirmPassword": zod.string().optional(),
-  "domain": zod.string().optional(),
-  "id": zod.string().optional(),
-  "oldPassword": zod.string().optional(),
-  "userPassword": zod.string().optional(),
-  "username": zod.string().optional()
-})
-
-export const UpdatePasswordResponse = zod.object({
-
-})
-
-export const ReadPasswordSettingsQueryParams = zod.object({
-  "password": zod.string().optional(),
-  "username": zod.string().optional(),
-  "domain": zod.string().optional()
-})
-
-export const ReadPasswordSettingsResponse = zod.object({
-  "settings": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const SearchUsers2Body = zod.object({
-  "any": zod.boolean().optional().describe('filter: include \'deleted\' ALSO ! (inactive)'),
-  "deleted": zod.boolean().optional(),
-  "extension": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional().describe('select: output (fields,...)'),
-  "id": zod.array(zod.string()).optional().describe('filter: .id = any({id}...)'),
-  "name": zod.string().optional(),
-  "notId": zod.array(zod.string()).optional(),
-  "page": zod.number().optional(),
-  "presence": zod.object({
-  "note": zod.string().optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "q": zod.string().optional().describe('filter: (.name|.username|.extension|.status) ILIKE \'{q}\''),
-  "size": zod.number().optional(),
-  "sort": zod.array(zod.string()).optional(),
-  "status": zod.string().optional(),
-  "username": zod.string().optional()
-})
-
-export const SearchUsers2Response = zod.object({
-  "items": zod.array(zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const DeleteUsersParams = zod.object({
-  "id": zod.string().describe('ONE /users/{id}')
-})
-
-export const DeleteUsersQueryParams = zod.object({
-  "selection": zod.array(zod.string()).optional().describe('MANY /users .ids=[id,...]'),
-  "permanent": zod.boolean().optional()
-})
-
-export const DeleteUsersResponse = zod.object({
-  "deleted": zod.array(zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')).optional()
-})
-
-export const ReadUserParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadUserQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('partial output')
-})
-
-export const ReadUserResponse = zod.object({
-  "user": zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).optional().describe('User profile.')
-})
-
-export const LogoutUserParams = zod.object({
-  "id": zod.string()
-})
-
-export const LogoutUserBody = zod.object({
-
-})
-
-export const LogoutUserResponse = zod.object({
-
-})
-
-export const UpdateUser2Params = zod.object({
-  "user.id": zod.string().describe('Object ID')
-})
-
-export const UpdateUser2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('PATCH: partial update')
-})
-
-export const UpdateUser2Body = zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-})
-
-export const UpdateUser2Response = zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')
-
-export const UpdateUserParams = zod.object({
-  "user.id": zod.string().describe('Object ID')
-})
-
-export const UpdateUserQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('PATCH: partial update')
-})
-
-export const UpdateUserBody = zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-})
-
-export const UpdateUserResponse = zod.object({
-  "chatName": zod.string().optional().describe('The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.'),
-  "contact": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "devices": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional().describe('[editable] list of unique `regular` devices, attached to this user'),
-  "email": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "forcePasswordChange": zod.boolean().optional().describe('When set to true, the user will be required to change their password on next login.'),
-  "hotdesks": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "presence": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional(),
-  "profile": zod.record(zod.string(), zod.string()).optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "totpUrl": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "username": zod.string().optional()
-}).describe('User profile.')
-
+            // --- footer end
+          

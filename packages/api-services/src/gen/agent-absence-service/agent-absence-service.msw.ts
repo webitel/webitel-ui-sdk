@@ -18,7 +18,7 @@ import type {
 
 import {
   WfmAbsenceType
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WfmCreateAgentAbsenceResponse,
   WfmCreateAgentsAbsencesResponse,
@@ -27,7 +27,7 @@ import type {
   WfmSearchAgentAbsenceResponse,
   WfmSearchAgentsAbsencesResponse,
   WfmUpdateAgentAbsenceResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getAgentAbsenceServiceSearchAgentsAbsencesResponseMock = (overrideResponse: Partial< WfmSearchAgentsAbsencesResponse > = {}): WfmSearchAgentsAbsencesResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({absences: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({absentAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), domainId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), typeId: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(WfmAbsenceType)), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), agent: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

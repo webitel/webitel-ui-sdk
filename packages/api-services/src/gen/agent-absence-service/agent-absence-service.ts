@@ -4,262 +4,132 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  AgentAbsenceServiceCreateAgentAbsenceBody,
+  AgentAbsenceServiceSearchAgentAbsenceParams,
+  AgentAbsenceServiceSearchAgentsAbsencesParams,
+  AgentAbsenceServiceUpdateAgentAbsenceBody,
+  WfmCreateAgentAbsenceResponse,
+  WfmCreateAgentsAbsencesRequest,
+  WfmCreateAgentsAbsencesResponse,
+  WfmDeleteAgentAbsenceResponse,
+  WfmReadAgentAbsenceResponse,
+  WfmSearchAgentAbsenceResponse,
+  WfmSearchAgentsAbsencesResponse,
+  WfmUpdateAgentAbsenceResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getAgentAbsenceService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Searches absences by filters.
  */
-export const AgentAbsenceServiceSearchAgentsAbsencesQueryParams = zod.object({
-  "q": zod.string().optional().describe('Searches by agent name.'),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "filters": zod.array(zod.string()).optional()
-})
-
-export const agentAbsenceServiceSearchAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceSearchAgentsAbsencesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absences": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceSearchAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const agentAbsenceServiceSearchAgentsAbsences = <TData = AxiosResponse<WfmSearchAgentsAbsencesResponse>>(
+    params?: AgentAbsenceServiceSearchAgentsAbsencesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/agents/absences`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Creates absences for multiple specified agents.
  */
-export const agentAbsenceServiceCreateAgentsAbsencesBodyItemsItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceCreateAgentsAbsencesBody = zod.object({
-  "agentIds": zod.array(zod.string()).optional(),
-  "items": zod.array(zod.object({
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentsAbsencesBodyItemsItemTypeIdDefault)
-})).optional()
-})
-
-export const agentAbsenceServiceCreateAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceCreateAgentsAbsencesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absences": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
-
+const agentAbsenceServiceCreateAgentsAbsences = <TData = AxiosResponse<WfmCreateAgentsAbsencesResponse>>(
+    wfmCreateAgentsAbsencesRequest: WfmCreateAgentsAbsencesRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/agents/absences`,
+      wfmCreateAgentsAbsencesRequest,options
+    );
+  }
 /**
  * @summary Searches agent absences by filters.
  */
-export const AgentAbsenceServiceSearchAgentAbsenceParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const AgentAbsenceServiceSearchAgentAbsenceQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "filters": zod.array(zod.string()).optional()
-})
-
-export const agentAbsenceServiceSearchAgentAbsenceResponseItemsItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceSearchAgentAbsenceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceSearchAgentAbsenceResponseItemsItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
-
+const agentAbsenceServiceSearchAgentAbsence = <TData = AxiosResponse<WfmSearchAgentAbsenceResponse>>(
+    agentId: string,
+    params?: AgentAbsenceServiceSearchAgentAbsenceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/agents/${agentId}/absences`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Creates one-day-absence for one agent.
  */
-export const AgentAbsenceServiceCreateAgentAbsenceParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const agentAbsenceServiceCreateAgentAbsenceBodyItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceCreateAgentAbsenceBody = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentAbsenceBodyItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const agentAbsenceServiceCreateAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceCreateAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const agentAbsenceServiceCreateAgentAbsence = <TData = AxiosResponse<WfmCreateAgentAbsenceResponse>>(
+    agentId: string,
+    agentAbsenceServiceCreateAgentAbsenceBody: AgentAbsenceServiceCreateAgentAbsenceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/agents/${agentId}/absences`,
+      agentAbsenceServiceCreateAgentAbsenceBody,options
+    );
+  }
 /**
  * @summary Deletes agent concrete absence by its id.
  */
-export const AgentAbsenceServiceDeleteAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "id": zod.string()
-})
-
-export const AgentAbsenceServiceDeleteAgentAbsenceResponse = zod.object({
-  "id": zod.string().optional()
-})
-
+const agentAbsenceServiceDeleteAgentAbsence = <TData = AxiosResponse<WfmDeleteAgentAbsenceResponse>>(
+    agentId: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/agents/${agentId}/absences/${id}`,options
+    );
+  }
 /**
  * @summary Reads one absence per agent by its id.
  */
-export const AgentAbsenceServiceReadAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "id": zod.string()
-})
-
-export const agentAbsenceServiceReadAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceReadAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceReadAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const agentAbsenceServiceReadAgentAbsence = <TData = AxiosResponse<WfmReadAgentAbsenceResponse>>(
+    agentId: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/agents/${agentId}/absences/${id}`,options
+    );
+  }
 /**
  * @summary Updates agent concrete absence by its id.
  */
-export const AgentAbsenceServiceUpdateAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "item.id": zod.string()
-})
+const agentAbsenceServiceUpdateAgentAbsence = <TData = AxiosResponse<WfmUpdateAgentAbsenceResponse>>(
+    agentId: string,
+    agentAbsenceServiceUpdateAgentAbsenceBody: AgentAbsenceServiceUpdateAgentAbsenceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/agents/${agentId}/absences/item.id}`,
+      agentAbsenceServiceUpdateAgentAbsenceBody,options
+    );
+  }
 
-export const agentAbsenceServiceUpdateAgentAbsenceBodyItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
+            // --- footer start
+            return {agentAbsenceServiceSearchAgentsAbsences,agentAbsenceServiceCreateAgentsAbsences,agentAbsenceServiceSearchAgentAbsence,agentAbsenceServiceCreateAgentAbsence,agentAbsenceServiceDeleteAgentAbsence,agentAbsenceServiceReadAgentAbsence,agentAbsenceServiceUpdateAgentAbsence}};
+export type AgentAbsenceServiceSearchAgentsAbsencesResult = AxiosResponse<WfmSearchAgentsAbsencesResponse>
+export type AgentAbsenceServiceCreateAgentsAbsencesResult = AxiosResponse<WfmCreateAgentsAbsencesResponse>
+export type AgentAbsenceServiceSearchAgentAbsenceResult = AxiosResponse<WfmSearchAgentAbsenceResponse>
+export type AgentAbsenceServiceCreateAgentAbsenceResult = AxiosResponse<WfmCreateAgentAbsenceResponse>
+export type AgentAbsenceServiceDeleteAgentAbsenceResult = AxiosResponse<WfmDeleteAgentAbsenceResponse>
+export type AgentAbsenceServiceReadAgentAbsenceResult = AxiosResponse<WfmReadAgentAbsenceResponse>
+export type AgentAbsenceServiceUpdateAgentAbsenceResult = AxiosResponse<WfmUpdateAgentAbsenceResponse>
 
-export const AgentAbsenceServiceUpdateAgentAbsenceBody = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceUpdateAgentAbsenceBodyItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const agentAbsenceServiceUpdateAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
-
-export const AgentAbsenceServiceUpdateAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceUpdateAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- footer end
+          

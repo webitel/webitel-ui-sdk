@@ -4,271 +4,116 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsCondition,
+  ContactsConditionList,
+  ContactsInputCondition,
+  ContactsLocateConditionResponse,
+  DynamicConditionsCreateConditionBody,
+  ListConditionsParams,
+  LocateConditionParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getDynamicConditions
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Delete a condition
  */
-export const DeleteConditionParams = zod.object({
-  "id": zod.string().describe('The unique ID of the condition to delete.\n\nUnique ID of the condition.')
-})
-
-export const DeleteConditionResponse = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
+const deleteCondition = <TData = AxiosResponse<ContactsCondition>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/groups/conditions/${id}`,options
+    );
+  }
 /**
  * @summary Locate a condition by ID
  */
-export const LocateConditionParams = zod.object({
-  "id": zod.string().describe('Unique ID of the condition.')
-})
-
-export const LocateConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const LocateConditionResponse = zod.object({
-  "condition": zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-}).optional()
-}).describe('Response message for locating a condition by ID.')
-
+const locateCondition = <TData = AxiosResponse<ContactsLocateConditionResponse>>(
+    id: string,
+    params?: LocateConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/groups/conditions/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing condition
  */
-export const UpdateCondition2Params = zod.object({
-  "id": zod.string().describe('The unique ID of the condition to update.')
-})
-
-export const UpdateCondition2Body = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.string().optional().describe('The ID of the static group that should be assigned if the condition is met.'),
-  "position": zod.object({
-  "condDown": zod.string().optional(),
-  "condUp": zod.string().optional()
-}).optional().describe('Position details for conditions in the group.')
-}).describe('Input message for creating/updating a condition.')
-
-export const UpdateCondition2Response = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
+const updateCondition2 = <TData = AxiosResponse<ContactsCondition>>(
+    id: string,
+    contactsInputCondition: ContactsInputCondition, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/groups/conditions/${id}`,
+      contactsInputCondition,options
+    );
+  }
 /**
  * @summary Update an existing condition
  */
-export const UpdateConditionParams = zod.object({
-  "id": zod.string().describe('The unique ID of the condition to update.')
-})
-
-export const UpdateConditionBody = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.string().optional().describe('The ID of the static group that should be assigned if the condition is met.'),
-  "position": zod.object({
-  "condDown": zod.string().optional(),
-  "condUp": zod.string().optional()
-}).optional().describe('Position details for conditions in the group.')
-}).describe('Input message for creating/updating a condition.')
-
-export const UpdateConditionResponse = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
+const updateCondition = <TData = AxiosResponse<ContactsCondition>>(
+    id: string,
+    contactsInputCondition: ContactsInputCondition, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/groups/conditions/${id}`,
+      contactsInputCondition,options
+    );
+  }
 /**
  * @summary Retrieve a list of conditions
  */
-export const ListConditionsParams = zod.object({
-  "group_id": zod.string().describe('The ID of the group to which the conditions belong.')
-})
-
-export const ListConditionsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "q": zod.string().optional().describe('Search term for conditions.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.')
-})
-
-export const ListConditionsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})).optional().describe('List of conditions.'),
-  "next": zod.boolean().optional().describe('Have more records.'),
-  "page": zod.number().optional().describe('Page number of the partial result.')
-}).describe('A list of Conditions.')
-
+const listConditions = <TData = AxiosResponse<ContactsConditionList>>(
+    groupId: string,
+    params?: ListConditionsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/groups/${groupId}/conditions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new condition
  */
-export const CreateConditionParams = zod.object({
-  "group_id": zod.string().describe('The ID of the group to which the condition belongs.')
-})
+const createCondition = <TData = AxiosResponse<ContactsCondition>>(
+    groupId: string,
+    dynamicConditionsCreateConditionBody: DynamicConditionsCreateConditionBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/groups/${groupId}/conditions`,
+      dynamicConditionsCreateConditionBody,options
+    );
+  }
 
-export const CreateConditionBody = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-}).describe('Request message for creating a new condition.')
+            // --- footer start
+            return {deleteCondition,locateCondition,updateCondition2,updateCondition,listConditions,createCondition}};
+export type DeleteConditionResult = AxiosResponse<ContactsCondition>
+export type LocateConditionResult = AxiosResponse<ContactsLocateConditionResponse>
+export type UpdateCondition2Result = AxiosResponse<ContactsCondition>
+export type UpdateConditionResult = AxiosResponse<ContactsCondition>
+export type ListConditionsResult = AxiosResponse<ContactsConditionList>
+export type CreateConditionResult = AxiosResponse<ContactsCondition>
 
-export const CreateConditionResponse = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "createdAt": zod.string().optional().describe('The timestamp (in milliseconds) of when the condition was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.'),
-  "updatedAt": zod.string().optional().describe('The timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
+            // --- footer end
+          

@@ -4,96 +4,104 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteRoutingVariableParams,
+  EngineCreateRoutingVariableRequest,
+  EngineListRoutingVariable,
+  EngineRoutingVariable,
+  EngineRoutingVariableServiceUpdateRoutingVariableBody,
+  ReadRoutingVariableParams,
+  SearchRoutingVariableParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getRoutingVariableService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of RoutingVariable
  */
-export const SearchRoutingVariableQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "domainId": zod.string().optional()
-})
-
-export const SearchRoutingVariableResponse = zod.object({
-  "items": zod.array(zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional()
-})
-
+const searchRoutingVariable = <TData = AxiosResponse<EngineListRoutingVariable>>(
+    params?: SearchRoutingVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/variables`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create RoutingVariable
  */
-export const CreateRoutingVariableBody = zod.object({
-  "domainId": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
-export const CreateRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
+const createRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
+    engineCreateRoutingVariableRequest: EngineCreateRoutingVariableRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/routing/variables`,
+      engineCreateRoutingVariableRequest,options
+    );
+  }
 /**
  * @summary Remove RoutingVariable
  */
-export const DeleteRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteRoutingVariableQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
+const deleteRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
+    id: string,
+    params?: DeleteRoutingVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/routing/variables/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary RoutingVariable item
  */
-export const ReadRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadRoutingVariableQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
+const readRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
+    id: string,
+    params?: ReadRoutingVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/variables/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update RoutingVariable
  */
-export const UpdateRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
+const updateRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
+    id: string,
+    engineRoutingVariableServiceUpdateRoutingVariableBody: EngineRoutingVariableServiceUpdateRoutingVariableBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/routing/variables/${id}`,
+      engineRoutingVariableServiceUpdateRoutingVariableBody,options
+    );
+  }
 
-export const UpdateRoutingVariableBody = zod.object({
-  "domainId": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+            // --- footer start
+            return {searchRoutingVariable,createRoutingVariable,deleteRoutingVariable,readRoutingVariable,updateRoutingVariable}};
+export type SearchRoutingVariableResult = AxiosResponse<EngineListRoutingVariable>
+export type CreateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
+export type DeleteRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
+export type ReadRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
+export type UpdateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
 
-export const UpdateRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
+            // --- footer end
+          

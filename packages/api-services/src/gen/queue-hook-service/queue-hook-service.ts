@@ -4,145 +4,98 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineListQueueHook,
+  EngineQueueHook,
+  EngineQueueHookServiceCreateQueueHookBody,
+  EngineQueueHookServicePatchQueueHookBody,
+  EngineQueueHookServiceUpdateQueueHookBody,
+  SearchQueueHookParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchQueueHookParams = zod.object({
-  "queue_id": zod.number()
-})
 
-export const SearchQueueHookQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional(),
-  "event": zod.array(zod.string()).optional()
-})
+            // --- header start
+            // 
 
-export const SearchQueueHookResponse = zod.object({
-  "items": zod.array(zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getQueueHookService
+            // --- title end
+           = () => {
 
-export const CreateQueueHookParams = zod.object({
-  "queue_id": zod.number()
-})
+            // --- header end
+          const searchQueueHook = <TData = AxiosResponse<EngineListQueueHook>>(
+    queueId: number,
+    params?: SearchQueueHookParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/hooks`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createQueueHook = <TData = AxiosResponse<EngineQueueHook>>(
+    queueId: number,
+    engineQueueHookServiceCreateQueueHookBody: EngineQueueHookServiceCreateQueueHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/hooks`,
+      engineQueueHookServiceCreateQueueHookBody,options
+    );
+  }
+const deleteQueueHook = <TData = AxiosResponse<EngineQueueHook>>(
+    queueId: number,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/hooks/${id}`,options
+    );
+  }
+const readQueueHook = <TData = AxiosResponse<EngineQueueHook>>(
+    queueId: number,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/hooks/${id}`,options
+    );
+  }
+const patchQueueHook = <TData = AxiosResponse<EngineQueueHook>>(
+    queueId: number,
+    id: number,
+    engineQueueHookServicePatchQueueHookBody: EngineQueueHookServicePatchQueueHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/hooks/${id}`,
+      engineQueueHookServicePatchQueueHookBody,options
+    );
+  }
+const updateQueueHook = <TData = AxiosResponse<EngineQueueHook>>(
+    queueId: number,
+    id: number,
+    engineQueueHookServiceUpdateQueueHookBody: EngineQueueHookServiceUpdateQueueHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${queueId}/hooks/${id}`,
+      engineQueueHookServiceUpdateQueueHookBody,options
+    );
+  }
 
-export const CreateQueueHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchQueueHook,createQueueHook,deleteQueueHook,readQueueHook,patchQueueHook,updateQueueHook}};
+export type SearchQueueHookResult = AxiosResponse<EngineListQueueHook>
+export type CreateQueueHookResult = AxiosResponse<EngineQueueHook>
+export type DeleteQueueHookResult = AxiosResponse<EngineQueueHook>
+export type ReadQueueHookResult = AxiosResponse<EngineQueueHook>
+export type PatchQueueHookResult = AxiosResponse<EngineQueueHook>
+export type UpdateQueueHookResult = AxiosResponse<EngineQueueHook>
 
-export const CreateQueueHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteQueueHookParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const DeleteQueueHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadQueueHookParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const ReadQueueHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchQueueHookParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const PatchQueueHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchQueueHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateQueueHookParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const UpdateQueueHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateQueueHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.string().optional(),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

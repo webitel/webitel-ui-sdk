@@ -4,221 +4,112 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateLinkParams,
+  ListLinksParams,
+  LocateLinkParams,
+  UpdateLink2Body,
+  UpdateLink2Params,
+  UpdateLinkBody,
+  UpdateLinkParams,
+  WebitelCasesCaseLink,
+  WebitelCasesCaseLinkList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCaseLinks
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary With Case
  */
-export const ListLinksParams = zod.object({
-  "case_etag": zod.string()
-})
+const listLinks = <TData = AxiosResponse<WebitelCasesCaseLinkList>>(
+    caseEtag: string,
+    params?: ListLinksParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/links`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
+    caseEtag: string,
+    params?: CreateLinkParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/${caseEtag}/links`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
+    caseEtag: string,
+    etag: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/${caseEtag}/links/${etag}`,options
+    );
+  }
+const locateLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
+    caseEtag: string,
+    etag: string,
+    params?: LocateLinkParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/links/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateLink2 = <TData = AxiosResponse<WebitelCasesCaseLink>>(
+    caseEtag: string,
+    updateLink2Body: UpdateLink2Body,
+    params?: UpdateLink2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/${caseEtag}/links/input.etag}`,
+      updateLink2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
+    caseEtag: string,
+    updateLinkBody: UpdateLinkBody,
+    params?: UpdateLinkParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/${caseEtag}/links/input.etag}`,
+      updateLinkBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ListLinksQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "ids": zod.array(zod.string()).optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- footer start
+            return {listLinks,createLink,deleteLink,locateLink,updateLink2,updateLink}};
+export type ListLinksResult = AxiosResponse<WebitelCasesCaseLinkList>
+export type CreateLinkResult = AxiosResponse<WebitelCasesCaseLink>
+export type DeleteLinkResult = AxiosResponse<WebitelCasesCaseLink>
+export type LocateLinkResult = AxiosResponse<WebitelCasesCaseLink>
+export type UpdateLink2Result = AxiosResponse<WebitelCasesCaseLink>
+export type UpdateLinkResult = AxiosResponse<WebitelCasesCaseLink>
 
-export const ListLinksResponse = zod.object({
-  "items": zod.array(zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.string().optional()
-})
-
-export const CreateLinkParams = zod.object({
-  "case_etag": zod.string().describe('new comment link')
-})
-
-export const CreateLinkQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('result fields needed on the front-end for each comment'),
-  "inputEtag": zod.string().optional(),
-  "inputUrl": zod.string().optional(),
-  "inputName": zod.string().optional(),
-  "inputUserIdId": zod.string().optional(),
-  "inputUserIdName": zod.string().optional()
-})
-
-export const CreateLinkResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})
-
-export const DeleteLinkParams = zod.object({
-  "case_etag": zod.string(),
-  "etag": zod.string()
-})
-
-export const DeleteLinkResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})
-
-export const LocateLinkParams = zod.object({
-  "case_etag": zod.string(),
-  "etag": zod.string().describe('(id allowed)')
-})
-
-export const LocateLinkQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const LocateLinkResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})
-
-export const UpdateLink2Params = zod.object({
-  "case_etag": zod.string(),
-  "input.etag": zod.string()
-})
-
-export const UpdateLink2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('on return')
-})
-
-export const UpdateLink2Body = zod.object({
-  "name": zod.string().optional(),
-  "url": zod.string().optional(),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateLink2Response = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})
-
-export const UpdateLinkParams = zod.object({
-  "case_etag": zod.string(),
-  "input.etag": zod.string()
-})
-
-export const UpdateLinkQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('on return')
-})
-
-export const UpdateLinkBody = zod.object({
-  "name": zod.string().optional(),
-  "url": zod.string().optional(),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateLinkResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "url": zod.string().optional(),
-  "ver": zod.number().optional()
-})
-
+            // --- footer end
+          

@@ -19,7 +19,7 @@ import type {
 import type {
   EngineListRoutingVariable,
   EngineRoutingVariable
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchRoutingVariableResponseMock = (overrideResponse: Partial< EngineListRoutingVariable > = {}): EngineListRoutingVariable => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({domainId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), key: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), value: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), ...overrideResponse})

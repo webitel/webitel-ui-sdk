@@ -4,224 +4,111 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  SearchCognitiveProfileParams,
+  SearchCognitiveProfileVoicesParams,
+  StorageCognitiveProfile,
+  StorageCognitiveProfileServicePatchCognitiveProfileBody,
+  StorageCognitiveProfileServiceUpdateCognitiveProfileBody,
+  StorageCreateCognitiveProfileRequest,
+  StorageListCognitiveProfile,
+  StorageListCognitiveProfileVoices
+} from '../webitelAPI.schemas';
 
 
-export const SearchCognitiveProfileQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "service": zod.array(zod.enum(['DefaultService', 'STT', 'TTS'])).optional(),
-  "enabled": zod.boolean().optional()
-})
 
-export const searchCognitiveProfileResponseItemsItemProviderDefault = `DefaultProvider`;export const searchCognitiveProfileResponseItemsItemServiceDefault = `DefaultService`;
+            // --- header start
+            // 
 
-export const SearchCognitiveProfileResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(searchCognitiveProfileResponseItemsItemProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(searchCognitiveProfileResponseItemsItemServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getCognitiveProfileService
+            // --- title end
+           = () => {
 
-export const createCognitiveProfileBodyProviderDefault = `DefaultProvider`;export const createCognitiveProfileBodyServiceDefault = `DefaultService`;
-
-export const CreateCognitiveProfileBody = zod.object({
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS'])
-}).describe('Create cognitive profile request body for TTS and TTS')
-
-export const createCognitiveProfileResponseProviderDefault = `DefaultProvider`;export const createCognitiveProfileResponseServiceDefault = `DefaultService`;
-
-export const CreateCognitiveProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(createCognitiveProfileResponseProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(createCognitiveProfileResponseServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- header end
+          const searchCognitiveProfile = <TData = AxiosResponse<StorageListCognitiveProfile>>(
+    params?: SearchCognitiveProfileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/cognitive_profiles`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createCognitiveProfile = <TData = AxiosResponse<StorageCognitiveProfile>>(
+    storageCreateCognitiveProfileRequest: StorageCreateCognitiveProfileRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/storage/cognitive_profiles`,
+      storageCreateCognitiveProfileRequest,options
+    );
+  }
 /**
  * @summary Remove BackendProfile
  */
-export const DeleteCognitiveProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const deleteCognitiveProfileResponseProviderDefault = `DefaultProvider`;export const deleteCognitiveProfileResponseServiceDefault = `DefaultService`;
-
-export const DeleteCognitiveProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(deleteCognitiveProfileResponseProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(deleteCognitiveProfileResponseServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadCognitiveProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const readCognitiveProfileResponseProviderDefault = `DefaultProvider`;export const readCognitiveProfileResponseServiceDefault = `DefaultService`;
-
-export const ReadCognitiveProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(readCognitiveProfileResponseProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(readCognitiveProfileResponseServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchCognitiveProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const patchCognitiveProfileBodyProviderDefault = `DefaultProvider`;export const patchCognitiveProfileBodyServiceDefault = `DefaultService`;
-
-export const PatchCognitiveProfileBody = zod.object({
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(patchCognitiveProfileBodyProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(patchCognitiveProfileBodyServiceDefault)
-})
-
-export const patchCognitiveProfileResponseProviderDefault = `DefaultProvider`;export const patchCognitiveProfileResponseServiceDefault = `DefaultService`;
-
-export const PatchCognitiveProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(patchCognitiveProfileResponseProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(patchCognitiveProfileResponseServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateCognitiveProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const updateCognitiveProfileBodyProviderDefault = `DefaultProvider`;export const updateCognitiveProfileBodyServiceDefault = `DefaultService`;
-
-export const UpdateCognitiveProfileBody = zod.object({
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(updateCognitiveProfileBodyProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(updateCognitiveProfileBodyServiceDefault)
-})
-
-export const updateCognitiveProfileResponseProviderDefault = `DefaultProvider`;export const updateCognitiveProfileResponseServiceDefault = `DefaultService`;
-
-export const UpdateCognitiveProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "provider": zod.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs']).default(updateCognitiveProfileResponseProviderDefault),
-  "service": zod.enum(['DefaultService', 'STT', 'TTS']).default(updateCognitiveProfileResponseServiceDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteCognitiveProfile = <TData = AxiosResponse<StorageCognitiveProfile>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/cognitive_profiles/${id}`,options
+    );
+  }
+const readCognitiveProfile = <TData = AxiosResponse<StorageCognitiveProfile>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/cognitive_profiles/${id}`,options
+    );
+  }
+const patchCognitiveProfile = <TData = AxiosResponse<StorageCognitiveProfile>>(
+    id: string,
+    storageCognitiveProfileServicePatchCognitiveProfileBody: StorageCognitiveProfileServicePatchCognitiveProfileBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/cognitive_profiles/${id}`,
+      storageCognitiveProfileServicePatchCognitiveProfileBody,options
+    );
+  }
+const updateCognitiveProfile = <TData = AxiosResponse<StorageCognitiveProfile>>(
+    id: string,
+    storageCognitiveProfileServiceUpdateCognitiveProfileBody: StorageCognitiveProfileServiceUpdateCognitiveProfileBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/storage/cognitive_profiles/${id}`,
+      storageCognitiveProfileServiceUpdateCognitiveProfileBody,options
+    );
+  }
 /**
  * @summary Search Voices
  */
-export const SearchCognitiveProfileVoicesParams = zod.object({
-  "id": zod.string()
-})
+const searchCognitiveProfileVoices = <TData = AxiosResponse<StorageListCognitiveProfileVoices>>(
+    id: string,
+    params?: SearchCognitiveProfileVoicesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/cognitive_profiles/${id}/voice`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const SearchCognitiveProfileVoicesQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "key": zod.string().optional()
-})
+            // --- footer start
+            return {searchCognitiveProfile,createCognitiveProfile,deleteCognitiveProfile,readCognitiveProfile,patchCognitiveProfile,updateCognitiveProfile,searchCognitiveProfileVoices}};
+export type SearchCognitiveProfileResult = AxiosResponse<StorageListCognitiveProfile>
+export type CreateCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>
+export type DeleteCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>
+export type ReadCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>
+export type PatchCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>
+export type UpdateCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>
+export type SearchCognitiveProfileVoicesResult = AxiosResponse<StorageListCognitiveProfileVoices>
 
-export const SearchCognitiveProfileVoicesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
+            // --- footer end
+          

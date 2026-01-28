@@ -4,259 +4,130 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteCommentParams,
+  ListCommentsParams,
+  LocateCommentParams,
+  PublishCommentParams,
+  UpdateComment2Body,
+  UpdateComment2Params,
+  UpdateCommentBody,
+  UpdateCommentParams,
+  WebitelCasesCaseComment,
+  WebitelCasesCaseCommentList,
+  WebitelCasesInputCaseComment
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCaseComments
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Delete a specific comment by its etag
  */
-export const DeleteCommentParams = zod.object({
-  "etag": zod.string().describe('Identifier of the comment to delete.')
-})
-
-export const DeleteCommentQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to return after deletion.')
-})
-
-export const DeleteCommentResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')
-
+const deleteComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+    etag: string,
+    params?: DeleteCommentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/comments/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Retrieve a specific comment by its etag
  */
-export const LocateCommentParams = zod.object({
-  "etag": zod.string().describe('Identifier of the comment to retrieve.')
-})
-
-export const LocateCommentQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Specific fields to return for the comment.')
-})
-
-export const LocateCommentResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')
-
+const locateComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+    etag: string,
+    params?: LocateCommentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/comments/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update a specific comment by its etag
  */
-export const UpdateComment2Params = zod.object({
-  "input.etag": zod.string().describe('Identifier for the comment.')
-})
-
-export const UpdateComment2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.'),
-  "updatedAt": zod.string().optional().describe('Optional updating timestamp. If not set, will be set default(current) time.')
-})
-
-export const UpdateComment2Body = zod.object({
-  "text": zod.string().optional().describe('Content of the comment.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateComment2Response = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')
-
+const updateComment2 = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+    updateComment2Body: UpdateComment2Body,
+    params?: UpdateComment2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/comments/input.etag}`,
+      updateComment2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update a specific comment by its etag
  */
-export const UpdateCommentParams = zod.object({
-  "input.etag": zod.string().describe('Identifier for the comment.')
-})
-
-export const UpdateCommentQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.'),
-  "updatedAt": zod.string().optional().describe('Optional updating timestamp. If not set, will be set default(current) time.')
-})
-
-export const UpdateCommentBody = zod.object({
-  "text": zod.string().optional().describe('Content of the comment.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateCommentResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')
-
+const updateComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+    updateCommentBody: UpdateCommentBody,
+    params?: UpdateCommentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/comments/input.etag}`,
+      updateCommentBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Retrieve a list of comments associated with a specific case
  */
-export const ListCommentsParams = zod.object({
-  "case_etag": zod.string().describe('Etag or ID of the case for which comments are requested.')
-})
-
-export const ListCommentsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number for pagination.'),
-  "size": zod.number().optional().describe('Number of comments per page.'),
-  "q": zod.string().optional().describe('Query string for search.'),
-  "ids": zod.array(zod.string()).optional().describe('Array of requested id.'),
-  "sort": zod.string().optional().describe('Sorting order.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to return for each comment.')
-})
-
-export const ListCommentsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')).optional().describe('List of comments on the current page.'),
-  "next": zod.boolean().optional().describe('Flag to indicate if more pages are available.'),
-  "page": zod.string().optional().describe('Current page number.')
-}).describe('Contains a paginated list of comments.')
-
+const listComments = <TData = AxiosResponse<WebitelCasesCaseCommentList>>(
+    caseEtag: string,
+    params?: ListCommentsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/comments`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Publish comment into a specific case
  */
-export const PublishCommentParams = zod.object({
-  "case_etag": zod.string().describe('Etag or ID of the case to which comments belong.')
-})
+const publishComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+    caseEtag: string,
+    webitelCasesInputCaseComment: WebitelCasesInputCaseComment,
+    params?: PublishCommentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/${caseEtag}/comments`,
+      webitelCasesInputCaseComment,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const PublishCommentQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Result fields to include in the response.'),
-  "createdAt": zod.string().optional().describe('Optional creation timestamp. If not set, will be set default(current) time.')
-})
+            // --- footer start
+            return {deleteComment,locateComment,updateComment2,updateComment,listComments,publishComment}};
+export type DeleteCommentResult = AxiosResponse<WebitelCasesCaseComment>
+export type LocateCommentResult = AxiosResponse<WebitelCasesCaseComment>
+export type UpdateComment2Result = AxiosResponse<WebitelCasesCaseComment>
+export type UpdateCommentResult = AxiosResponse<WebitelCasesCaseComment>
+export type ListCommentsResult = AxiosResponse<WebitelCasesCaseCommentList>
+export type PublishCommentResult = AxiosResponse<WebitelCasesCaseComment>
 
-export const PublishCommentBody = zod.object({
-  "etag": zod.string().optional().describe('Identifier for the comment.'),
-  "text": zod.string().optional().describe('Content of the comment.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('Input structure for creating or updating a case comment.')
-
-export const PublishCommentResponse = zod.object({
-  "author": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "canEdit": zod.boolean().optional().describe('Indicates if the comment can be edited by current user.'),
-  "caseId": zod.string().optional().describe('Optional relation to the associated case.'),
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the comment was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "edited": zod.boolean().optional().describe('Indicates if the comment was edited; true if created_at < updated_at.'),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional().describe('Main identifier for read, update, and delete operations.'),
-  "roleIds": zod.array(zod.string()).optional(),
-  "text": zod.string().optional().describe('The content of the comment.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the comment, used for concurrency control.')
-}).describe('Represents a comment associated with a case.')
-
+            // --- footer end
+          

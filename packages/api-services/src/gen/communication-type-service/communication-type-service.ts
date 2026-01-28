@@ -4,162 +4,115 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteCommunicationTypeParams,
+  EngineCommunicationType,
+  EngineCommunicationTypeRequest,
+  EngineCommunicationTypeServicePatchCommunicationTypeBody,
+  EngineCommunicationTypeServiceUpdateCommunicationTypeBody,
+  EngineListCommunicationType,
+  ReadCommunicationTypeParams,
+  SearchCommunicationTypeParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCommunicationTypeService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of CommunicationType
  */
-export const SearchCommunicationTypeQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "channel": zod.array(zod.enum(['Undefined', 'Phone', 'Email', 'Messaging'])).optional(),
-  "default": zod.boolean().optional()
-})
-
-export const searchCommunicationTypeResponseItemsItemChannelDefault = `Undefined`;
-
-export const SearchCommunicationTypeResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(searchCommunicationTypeResponseItemsItemChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchCommunicationType = <TData = AxiosResponse<EngineListCommunicationType>>(
+    params?: SearchCommunicationTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/communication_type`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create CommunicationType
  */
-export const createCommunicationTypeBodyChannelDefault = `Undefined`;
-
-export const CreateCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(createCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const createCommunicationTypeResponseChannelDefault = `Undefined`;
-
-export const CreateCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(createCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const createCommunicationType = <TData = AxiosResponse<EngineCommunicationType>>(
+    engineCommunicationTypeRequest: EngineCommunicationTypeRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/communication_type`,
+      engineCommunicationTypeRequest,options
+    );
+  }
 /**
  * @summary Remove CommunicationType
  */
-export const DeleteCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteCommunicationTypeQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const deleteCommunicationTypeResponseChannelDefault = `Undefined`;
-
-export const DeleteCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(deleteCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const deleteCommunicationType = <TData = AxiosResponse<EngineCommunicationType>>(
+    id: string,
+    params?: DeleteCommunicationTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/communication_type/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary CommunicationType item
  */
-export const ReadCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadCommunicationTypeQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const readCommunicationTypeResponseChannelDefault = `Undefined`;
-
-export const ReadCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(readCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const PatchCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
-
-export const patchCommunicationTypeBodyChannelDefault = `Undefined`;
-
-export const PatchCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(patchCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional()
-})
-
-export const patchCommunicationTypeResponseChannelDefault = `Undefined`;
-
-export const PatchCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(patchCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const readCommunicationType = <TData = AxiosResponse<EngineCommunicationType>>(
+    id: string,
+    params?: ReadCommunicationTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/communication_type/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const patchCommunicationType = <TData = AxiosResponse<EngineCommunicationType>>(
+    id: string,
+    engineCommunicationTypeServicePatchCommunicationTypeBody: EngineCommunicationTypeServicePatchCommunicationTypeBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/communication_type/${id}`,
+      engineCommunicationTypeServicePatchCommunicationTypeBody,options
+    );
+  }
 /**
  * @summary Update CommunicationType
  */
-export const UpdateCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
+const updateCommunicationType = <TData = AxiosResponse<EngineCommunicationType>>(
+    id: string,
+    engineCommunicationTypeServiceUpdateCommunicationTypeBody: EngineCommunicationTypeServiceUpdateCommunicationTypeBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/communication_type/${id}`,
+      engineCommunicationTypeServiceUpdateCommunicationTypeBody,options
+    );
+  }
 
-export const updateCommunicationTypeBodyChannelDefault = `Undefined`;
+            // --- footer start
+            return {searchCommunicationType,createCommunicationType,deleteCommunicationType,readCommunicationType,patchCommunicationType,updateCommunicationType}};
+export type SearchCommunicationTypeResult = AxiosResponse<EngineListCommunicationType>
+export type CreateCommunicationTypeResult = AxiosResponse<EngineCommunicationType>
+export type DeleteCommunicationTypeResult = AxiosResponse<EngineCommunicationType>
+export type ReadCommunicationTypeResult = AxiosResponse<EngineCommunicationType>
+export type PatchCommunicationTypeResult = AxiosResponse<EngineCommunicationType>
+export type UpdateCommunicationTypeResult = AxiosResponse<EngineCommunicationType>
 
-export const UpdateCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(updateCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const updateCommunicationTypeResponseChannelDefault = `Undefined`;
-
-export const UpdateCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(updateCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+            // --- footer end
+          

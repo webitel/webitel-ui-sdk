@@ -4,317 +4,168 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsInputPhoto,
+  ContactsPhoto,
+  ContactsPhotoList,
+  CreatePhotosParams,
+  DeletePhotoParams,
+  DeletePhotosParams,
+  LocatePhotoParams,
+  SearchPhotosParams,
+  UpdatePhoto2Body,
+  UpdatePhoto2Params,
+  UpdatePhotoBody,
+  UpdatePhotoParams,
+  UpdatePhotosParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPhotos
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Remove the contact's photo link(s)
  */
-export const DeletePhotosParams = zod.object({
-  "contact_id": zod.string().describe('Link(s) contact ID.')
-})
-
-export const DeletePhotosQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.'),
-  "etag": zod.array(zod.string()).describe('Set of linked ID(s) to be removed.')
-})
-
-export const DeletePhotosResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')).optional().describe('Photo dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Photo dataset.')
-
+const deletePhotos = <TData = AxiosResponse<ContactsPhotoList>>(
+    contactId: string,
+    params: DeletePhotosParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/photos`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Search the contact's photo(s)
  */
-export const SearchPhotosParams = zod.object({
-  "contact_id": zod.string().describe('The Contact ID linked with.')
-})
-
-export const SearchPhotosQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: email address.\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "id": zod.array(zod.string()).optional().describe('Link(s) with unique ID only.'),
-  "primary": zod.boolean().optional().describe('Default photos only.')
-})
-
-export const SearchPhotosResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')).optional().describe('Photo dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Photo dataset.')
-
+const searchPhotos = <TData = AxiosResponse<ContactsPhotoList>>(
+    contactId: string,
+    params?: SearchPhotosParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/photos`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Link photo(s) with the contact
  */
-export const CreatePhotosParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const CreatePhotosQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const CreatePhotosBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing association.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.')
-}).describe('Input of the photo.')
-export const CreatePhotosBody = zod.array(CreatePhotosBodyItem)
-
-export const CreatePhotosResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')).optional().describe('Photo dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Photo dataset.')
-
+const createPhotos = <TData = AxiosResponse<ContactsPhotoList>>(
+    contactId: string,
+    contactsInputPhoto: ContactsInputPhoto[],
+    params?: CreatePhotosParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/photos`,
+      contactsInputPhoto,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Reset the contact's photos to fit given data set.
  */
-export const UpdatePhotosParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const UpdatePhotosQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdatePhotosBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing association.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.')
-}).describe('Input of the photo.')
-export const UpdatePhotosBody = zod.array(UpdatePhotosBodyItem)
-
-export const UpdatePhotosResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')).optional().describe('Photo dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Photo dataset.')
-
+const updatePhotos = <TData = AxiosResponse<ContactsPhotoList>>(
+    contactId: string,
+    contactsInputPhoto: ContactsInputPhoto[],
+    params?: UpdatePhotosParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/photos`,
+      contactsInputPhoto,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove the contact's photo
  */
-export const DeletePhotoParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique link ID to be removed.')
-})
-
-export const DeletePhotoQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const DeletePhotoResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')
-
+const deletePhoto = <TData = AxiosResponse<ContactsPhoto>>(
+    contactId: string,
+    etag: string,
+    params?: DeletePhotoParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/photos/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's photo link details
  */
-export const UpdatePhoto2Params = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.')
-})
-
-export const UpdatePhoto2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdatePhoto2Body = zod.object({
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.')
-})
-
-export const UpdatePhoto2Response = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')
-
+const updatePhoto2 = <TData = AxiosResponse<ContactsPhoto>>(
+    contactId: string,
+    etag: string,
+    updatePhoto2Body: UpdatePhoto2Body,
+    params?: UpdatePhoto2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/${contactId}/photos/${etag}`,
+      updatePhoto2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's photo link details
  */
-export const UpdatePhotoParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.')
-})
-
-export const UpdatePhotoQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdatePhotoBody = zod.object({
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.')
-})
-
-export const UpdatePhotoResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')
-
+const updatePhoto = <TData = AxiosResponse<ContactsPhoto>>(
+    contactId: string,
+    etag: string,
+    updatePhotoBody: UpdatePhotoBody,
+    params?: UpdatePhotoParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/photos/${etag}`,
+      updatePhotoBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate the contact's photo link.
  */
-export const LocatePhotoParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "id": zod.string().describe('Link unique ID.')
-})
+const locatePhoto = <TData = AxiosResponse<ContactsPhoto>>(
+    contactId: string,
+    id: string,
+    params?: LocatePhotoParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/photos/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const LocatePhotoQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
+            // --- footer start
+            return {deletePhotos,searchPhotos,createPhotos,updatePhotos,deletePhoto,updatePhoto2,updatePhoto,locatePhoto}};
+export type DeletePhotosResult = AxiosResponse<ContactsPhotoList>
+export type SearchPhotosResult = AxiosResponse<ContactsPhotoList>
+export type CreatePhotosResult = AxiosResponse<ContactsPhotoList>
+export type UpdatePhotosResult = AxiosResponse<ContactsPhotoList>
+export type DeletePhotoResult = AxiosResponse<ContactsPhoto>
+export type UpdatePhoto2Result = AxiosResponse<ContactsPhoto>
+export type UpdatePhotoResult = AxiosResponse<ContactsPhoto>
+export type LocatePhotoResult = AxiosResponse<ContactsPhoto>
 
-export const LocatePhotoResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "photoId": zod.string().optional(),
-  "photoUrl": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('True if the photo is a default photo; false if the photo is a user-provided photo.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A contact\'s photo.\nA picture shown next to the contact\'s name\nto help others recognize the contact.')
-
+            // --- footer end
+          

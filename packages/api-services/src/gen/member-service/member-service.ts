@@ -4,1327 +4,317 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteMemberParams,
+  EngineAttemptRenewalResultResponse,
+  EngineAttemptResultResponse,
+  EngineCreateAttemptResponse,
+  EngineDeleteAllMembersRequest,
+  EngineListAttempt,
+  EngineListHistoryAttempt,
+  EngineListMember,
+  EngineListMemberAttempt,
+  EngineMemberBulkResponse,
+  EngineMemberInQueue,
+  EngineMemberServiceAttemptCallbackBody,
+  EngineMemberServiceAttemptResultBody,
+  EngineMemberServiceAttemptsRenewalResultBody,
+  EngineMemberServiceCreateAttemptBody,
+  EngineMemberServiceCreateMemberBody,
+  EngineMemberServiceCreateMemberBulkBody,
+  EngineMemberServiceDeleteMembersBody,
+  EngineMemberServicePatchMemberBody,
+  EngineMemberServicePatchMemberOneBody,
+  EngineMemberServiceResetMembersBody,
+  EngineMemberServiceUpdateMemberBody,
+  EngineResetActiveAttemptsRequest,
+  EngineResetActiveAttemptsResponse,
+  EngineResetMembersResponse,
+  ReadMemberParams,
+  SearchAttemptsHistoryParams,
+  SearchAttemptsParams,
+  SearchMemberAttemptsParams,
+  SearchMemberInQueueParams,
+  SearchMembersParams
+} from '../webitelAPI.schemas';
 
 
-export const AttemptCallbackParams = zod.object({
-  "attempt_id": zod.string()
-})
 
-export const AttemptCallbackBody = zod.object({
-  "agentId": zod.number().optional(),
-  "description": zod.string().optional(),
-  "display": zod.boolean().optional(),
-  "excludeCurrentCommunication": zod.boolean().optional(),
-  "expireAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "onlyCurrentCommunication": zod.boolean().optional(),
-  "status": zod.string().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waitBetweenRetries": zod.number().optional()
-})
+            // --- header start
+            // 
 
-export const AttemptCallbackResponse = zod.object({
-  "status": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getMemberService
+            // --- title end
+           = () => {
 
+            // --- header end
+          const attemptCallback = <TData = AxiosResponse<EngineAttemptResultResponse>>(
+    attemptId: string,
+    engineMemberServiceAttemptCallbackBody: EngineMemberServiceAttemptCallbackBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/attempts/${attemptId}`,
+      engineMemberServiceAttemptCallbackBody,options
+    );
+  }
 /**
  * @summary Search of Member
  */
-export const SearchMembersQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "queueId": zod.array(zod.number()).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "destination": zod.string().optional(),
-  "createdAtFrom": zod.string().optional(),
-  "createdAtTo": zod.string().optional(),
-  "offeringAtFrom": zod.string().optional(),
-  "offeringAtTo": zod.string().optional(),
-  "stopCause": zod.array(zod.string()).optional(),
-  "priorityFrom": zod.string().optional(),
-  "priorityTo": zod.string().optional(),
-  "name": zod.string().optional(),
-  "attemptsFrom": zod.string().optional(),
-  "attemptsTo": zod.string().optional(),
-  "agentId": zod.array(zod.number()).optional()
-})
-
-export const SearchMembersResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const PatchMemberOneParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchMemberOneBody = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "domainId": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const PatchMemberOneResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const searchMembers = <TData = AxiosResponse<EngineListMember>>(
+    params?: SearchMembersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/members`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const patchMemberOne = <TData = AxiosResponse<EngineMemberInQueue>>(
+    id: string,
+    engineMemberServicePatchMemberOneBody: EngineMemberServicePatchMemberOneBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/members/${id}`,
+      engineMemberServicePatchMemberOneBody,options
+    );
+  }
 /**
  * @summary SearchAttempts
  */
-export const SearchAttemptsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "joinedAtFrom": zod.string().optional(),
-  "joinedAtTo": zod.string().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "queueId": zod.array(zod.string()).optional(),
-  "bucketId": zod.array(zod.string()).optional(),
-  "memberId": zod.array(zod.string()).optional(),
-  "agentId": zod.array(zod.string()).optional(),
-  "result": zod.array(zod.string()).optional(),
-  "leavingAtFrom": zod.string().optional(),
-  "leavingAtTo": zod.string().optional(),
-  "offeringAtFrom": zod.string().optional(),
-  "offeringAtTo": zod.string().optional(),
-  "durationFrom": zod.string().optional(),
-  "durationTo": zod.string().optional(),
-  "offeredAgentId": zod.array(zod.string()).optional()
-})
-
-export const SearchAttemptsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "agentCallId": zod.string().optional(),
-  "attempts": zod.number().optional(),
-  "bridgedAt": zod.string().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "channel": zod.string().optional(),
-  "destination": zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional(),
-  "display": zod.string().optional(),
-  "id": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "lastStateChange": zod.string().optional(),
-  "leavingAt": zod.string().optional(),
-  "list": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "member": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "memberCallId": zod.string().optional(),
-  "offeringAt": zod.string().optional(),
-  "position": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reportingAt": zod.string().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "result": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const ResetActiveAttemptsBody = zod.object({
-  "attemptType": zod.array(zod.string()).optional(),
-  "idleForMinutes": zod.string().optional(),
-  "result": zod.string().optional()
-})
-
-export const ResetActiveAttemptsResponse = zod.object({
-
-})
-
+const searchAttempts = <TData = AxiosResponse<EngineListAttempt>>(
+    params?: SearchAttemptsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/attempts/active`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const resetActiveAttempts = <TData = AxiosResponse<EngineResetActiveAttemptsResponse>>(
+    engineResetActiveAttemptsRequest: EngineResetActiveAttemptsRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/attempts/active/reset`,
+      engineResetActiveAttemptsRequest,options
+    );
+  }
 /**
  * @summary SearchMemberAttempts
  */
-export const SearchAttemptsHistoryQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "joinedAtFrom": zod.string().optional(),
-  "joinedAtTo": zod.string().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "queueId": zod.array(zod.string()).optional(),
-  "bucketId": zod.array(zod.string()).optional(),
-  "memberId": zod.array(zod.string()).optional(),
-  "agentId": zod.array(zod.string()).optional(),
-  "result": zod.array(zod.string()).optional(),
-  "leavingAtFrom": zod.string().optional(),
-  "leavingAtTo": zod.string().optional(),
-  "offeringAtFrom": zod.string().optional(),
-  "offeringAtTo": zod.string().optional(),
-  "durationFrom": zod.string().optional(),
-  "durationTo": zod.string().optional(),
-  "offeredAgentId": zod.array(zod.string()).optional()
-})
-
-export const SearchAttemptsHistoryResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "agentCallId": zod.string().optional(),
-  "amdResult": zod.string().optional(),
-  "attempts": zod.number().optional(),
-  "bridgedAt": zod.string().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "channel": zod.string().optional(),
-  "destination": zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional(),
-  "display": zod.string().optional(),
-  "id": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "leavingAt": zod.string().optional(),
-  "list": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "member": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "memberCallId": zod.string().optional(),
-  "offeredAgents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "offeringAt": zod.string().optional(),
-  "position": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reportingAt": zod.string().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "result": zod.string().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const AttemptsRenewalResultParams = zod.object({
-  "attempt_id": zod.string()
-})
-
-export const AttemptsRenewalResultBody = zod.object({
-  "renewal": zod.number().optional()
-})
-
-export const AttemptsRenewalResultResponse = zod.object({
-
-})
-
+const searchAttemptsHistory = <TData = AxiosResponse<EngineListHistoryAttempt>>(
+    params?: SearchAttemptsHistoryParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/attempts/history`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const attemptsRenewalResult = <TData = AxiosResponse<EngineAttemptRenewalResultResponse>>(
+    attemptId: string,
+    engineMemberServiceAttemptsRenewalResultBody: EngineMemberServiceAttemptsRenewalResultBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/attempts/${attemptId}/renewal`,
+      engineMemberServiceAttemptsRenewalResultBody,options
+    );
+  }
 /**
  * @summary DeleteAllMembers
  */
-export const DeleteAllMembersBody = zod.object({
-  "agentId": zod.array(zod.number()).optional(),
-  "attempts": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "createdAt": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "destination": zod.string().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "numbers": zod.array(zod.string()).optional(),
-  "offeringAt": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "priority": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "q": zod.string().optional(),
-  "queueId": zod.array(zod.string()).optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "stopCause": zod.array(zod.string()).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "withoutMembers": zod.boolean().optional()
-})
-
-export const DeleteAllMembersResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const deleteAllMembers = <TData = AxiosResponse<EngineListMember>>(
+    engineDeleteAllMembersRequest: EngineDeleteAllMembersRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/members`,{data:
+      engineDeleteAllMembersRequest, ...options}
+    );
+  }
 /**
  * @summary DeleteMembers
  */
-export const DeleteMembersParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const DeleteMembersBody = zod.object({
-  "agentId": zod.array(zod.number()).optional(),
-  "attempts": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "createdAt": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "destination": zod.string().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "ids": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "numbers": zod.array(zod.string()).optional(),
-  "offeringAt": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "priority": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "q": zod.string().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "stopCause": zod.array(zod.string()).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "withoutMembers": zod.boolean().optional()
-})
-
-export const DeleteMembersResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const deleteMembers = <TData = AxiosResponse<EngineListMember>>(
+    queueId: string,
+    engineMemberServiceDeleteMembersBody: EngineMemberServiceDeleteMembersBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/members`,{data:
+      engineMemberServiceDeleteMembersBody, ...options}
+    );
+  }
 /**
  * @summary List of Member
  */
-export const SearchMemberInQueueParams = zod.object({
-  "queue_id": zod.number()
-})
-
-export const SearchMemberInQueueQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "destination": zod.string().optional(),
-  "createdAtFrom": zod.string().optional(),
-  "createdAtTo": zod.string().optional(),
-  "offeringAtFrom": zod.string().optional(),
-  "offeringAtTo": zod.string().optional(),
-  "stopCause": zod.array(zod.string()).optional(),
-  "priorityFrom": zod.string().optional(),
-  "priorityTo": zod.string().optional(),
-  "name": zod.string().optional(),
-  "attemptsFrom": zod.string().optional(),
-  "attemptsTo": zod.string().optional(),
-  "agentId": zod.array(zod.number()).optional(),
-  "variablesString": zod.string().optional().describe('This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18')
-})
-
-export const SearchMemberInQueueResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchMemberInQueue = <TData = AxiosResponse<EngineListMember>>(
+    queueId: number,
+    params?: SearchMemberInQueueParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/members`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create Member
  */
-export const CreateMemberParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const CreateMemberBody = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "domainId": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const CreateMemberResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const createMember = <TData = AxiosResponse<EngineMemberInQueue>>(
+    queueId: string,
+    engineMemberServiceCreateMemberBody: EngineMemberServiceCreateMemberBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/members`,
+      engineMemberServiceCreateMemberBody,options
+    );
+  }
 /**
  * @summary Create Member
  */
-export const CreateMemberBulkParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const CreateMemberBulkBody = zod.object({
-  "fileName": zod.string().optional(),
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "expireAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional()
-})
-
-export const CreateMemberBulkResponse = zod.object({
-  "ids": zod.array(zod.string()).optional()
-})
-
+const createMemberBulk = <TData = AxiosResponse<EngineMemberBulkResponse>>(
+    queueId: string,
+    engineMemberServiceCreateMemberBulkBody: EngineMemberServiceCreateMemberBulkBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/members/bulk`,
+      engineMemberServiceCreateMemberBulkBody,options
+    );
+  }
 /**
  * @summary ResetMembers
  */
-export const ResetMembersParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const ResetMembersBody = zod.object({
-  "agentId": zod.array(zod.number()).optional(),
-  "bucketId": zod.array(zod.string()).optional(),
-  "createdAt": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "ids": zod.array(zod.string()).optional(),
-  "numbers": zod.array(zod.string()).optional(),
-  "priority": zod.object({
-  "from": zod.string().optional(),
-  "to": zod.string().optional()
-}).optional(),
-  "stopCause": zod.array(zod.string()).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const ResetMembersResponse = zod.object({
-  "count": zod.string().optional()
-})
-
+const resetMembers = <TData = AxiosResponse<EngineResetMembersResponse>>(
+    queueId: string,
+    engineMemberServiceResetMembersBody: EngineMemberServiceResetMembersBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/members/reset`,
+      engineMemberServiceResetMembersBody,options
+    );
+  }
 /**
  * @summary DeleteMember
  */
-export const DeleteMemberParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteMemberQueryParams = zod.object({
-  "domainId": zod.string().optional(),
-  "force": zod.boolean().optional()
-})
-
-export const DeleteMemberResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const deleteMember = <TData = AxiosResponse<EngineMemberInQueue>>(
+    queueId: string,
+    id: string,
+    params?: DeleteMemberParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/members/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary ReadQueueRouting
  */
-export const ReadMemberParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadMemberQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadMemberResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const readMember = <TData = AxiosResponse<EngineMemberInQueue>>(
+    queueId: string,
+    id: string,
+    params?: ReadMemberParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/members/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch Member
  */
-export const PatchMemberParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const PatchMemberBody = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "domainId": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const PatchMemberResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const patchMember = <TData = AxiosResponse<EngineMemberInQueue>>(
+    queueId: string,
+    id: string,
+    engineMemberServicePatchMemberBody: EngineMemberServicePatchMemberBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/members/${id}`,
+      engineMemberServicePatchMemberBody,options
+    );
+  }
 /**
  * @summary UpdateMember
  */
-export const UpdateMemberParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const UpdateMemberBody = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "domainId": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const UpdateMemberResponse = zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "communications": zod.array(zod.object({
-  "attempts": zod.number().optional(),
-  "description": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "display": zod.string().optional(),
-  "dtmf": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "lastCause": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.number().optional(),
-  "stopAt": zod.string().optional(),
-  "type": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "lastActivityAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "reserved": zod.boolean().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "stopCause": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const updateMember = <TData = AxiosResponse<EngineMemberInQueue>>(
+    queueId: string,
+    id: string,
+    engineMemberServiceUpdateMemberBody: EngineMemberServiceUpdateMemberBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${queueId}/members/${id}`,
+      engineMemberServiceUpdateMemberBody,options
+    );
+  }
 /**
  * @summary SearchMemberAttempts
  */
-export const SearchMemberAttemptsParams = zod.object({
-  "queue_id": zod.string(),
-  "member_id": zod.string()
-})
-
-export const SearchMemberAttemptsQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const SearchMemberAttemptsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "active": zod.boolean().optional(),
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "answeredAt": zod.string().optional(),
-  "attempts": zod.number().optional(),
-  "bridgedAt": zod.string().optional(),
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "destination": zod.string().optional(),
-  "hangupAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "legAId": zod.string().optional(),
-  "legBId": zod.string().optional(),
-  "member": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "node": zod.string().optional(),
-  "originateAt": zod.string().optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "result": zod.string().optional(),
-  "weight": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchMemberAttempts = <TData = AxiosResponse<EngineListMemberAttempt>>(
+    queueId: string,
+    memberId: string,
+    params?: SearchMemberAttemptsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/members/${memberId}/attempts`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Offline queue
  */
-export const CreateAttemptParams = zod.object({
-  "queue_id": zod.string(),
-  "member_id": zod.string()
-})
+const createAttempt = <TData = AxiosResponse<EngineCreateAttemptResponse>>(
+    queueId: string,
+    memberId: string,
+    engineMemberServiceCreateAttemptBody: EngineMemberServiceCreateAttemptBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/members/${memberId}/attempts`,
+      engineMemberServiceCreateAttemptBody,options
+    );
+  }
+const attemptResult = <TData = AxiosResponse<EngineAttemptResultResponse>>(
+    queueId: number,
+    memberId: string,
+    attemptId: string,
+    engineMemberServiceAttemptResultBody: EngineMemberServiceAttemptResultBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/members/${memberId}/attempts/${attemptId}`,
+      engineMemberServiceAttemptResultBody,options
+    );
+  }
 
-export const CreateAttemptBody = zod.object({
-  "agentId": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
+            // --- footer start
+            return {attemptCallback,searchMembers,patchMemberOne,searchAttempts,resetActiveAttempts,searchAttemptsHistory,attemptsRenewalResult,deleteAllMembers,deleteMembers,searchMemberInQueue,createMember,createMemberBulk,resetMembers,deleteMember,readMember,patchMember,updateMember,searchMemberAttempts,createAttempt,attemptResult}};
+export type AttemptCallbackResult = AxiosResponse<EngineAttemptResultResponse>
+export type SearchMembersResult = AxiosResponse<EngineListMember>
+export type PatchMemberOneResult = AxiosResponse<EngineMemberInQueue>
+export type SearchAttemptsResult = AxiosResponse<EngineListAttempt>
+export type ResetActiveAttemptsResult = AxiosResponse<EngineResetActiveAttemptsResponse>
+export type SearchAttemptsHistoryResult = AxiosResponse<EngineListHistoryAttempt>
+export type AttemptsRenewalResultResult = AxiosResponse<EngineAttemptRenewalResultResponse>
+export type DeleteAllMembersResult = AxiosResponse<EngineListMember>
+export type DeleteMembersResult = AxiosResponse<EngineListMember>
+export type SearchMemberInQueueResult = AxiosResponse<EngineListMember>
+export type CreateMemberResult = AxiosResponse<EngineMemberInQueue>
+export type CreateMemberBulkResult = AxiosResponse<EngineMemberBulkResponse>
+export type ResetMembersResult = AxiosResponse<EngineResetMembersResponse>
+export type DeleteMemberResult = AxiosResponse<EngineMemberInQueue>
+export type ReadMemberResult = AxiosResponse<EngineMemberInQueue>
+export type PatchMemberResult = AxiosResponse<EngineMemberInQueue>
+export type UpdateMemberResult = AxiosResponse<EngineMemberInQueue>
+export type SearchMemberAttemptsResult = AxiosResponse<EngineListMemberAttempt>
+export type CreateAttemptResult = AxiosResponse<EngineCreateAttemptResponse>
+export type AttemptResultResult = AxiosResponse<EngineAttemptResultResponse>
 
-export const CreateAttemptResponse = zod.object({
-  "attemptId": zod.string().optional()
-})
-
-export const AttemptResultParams = zod.object({
-  "queue_id": zod.number(),
-  "member_id": zod.string(),
-  "attempt_id": zod.string()
-})
-
-export const AttemptResultBody = zod.object({
-  "agentId": zod.number().optional(),
-  "description": zod.string().optional(),
-  "display": zod.boolean().optional(),
-  "excludeCurrentCommunication": zod.boolean().optional(),
-  "expireAt": zod.string().optional(),
-  "minOfferingAt": zod.string().optional(),
-  "nextMemberId": zod.string().optional(),
-  "onlyCurrentCommunication": zod.boolean().optional(),
-  "status": zod.string().optional(),
-  "transferQueueId": zod.string().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waitBetweenRetries": zod.number().optional()
-})
-
-export const AttemptResultResponse = zod.object({
-  "status": zod.string().optional()
-})
-
+            // --- footer end
+          

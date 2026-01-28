@@ -4,936 +4,168 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteQueueParams,
+  EngineCreateQueueRequest,
+  EngineGetQueuesGlobalStateResponse,
+  EngineListQueue,
+  EngineListReportGeneral,
+  EngineListTags,
+  EngineQueue,
+  EngineQueueServicePatchQueueBody,
+  EngineQueueServiceUpdateQueueBody,
+  EngineSetQueuesGlobalStateRequest,
+  EngineSetQueuesGlobalStateResponse,
+  GetQueuesGlobalStateParams,
+  ReadQueueParams,
+  SearchQueueParams,
+  SearchQueueReportGeneralParams,
+  SearchQueueTagsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getQueueService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of Queue
  */
-export const SearchQueueQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "type": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "tags": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional()
-})
-
-export const SearchQueueResponse = zod.object({
-  "items": zod.array(zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchQueue = <TData = AxiosResponse<EngineListQueue>>(
+    params?: SearchQueueParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create Queue
  */
-export const CreateQueueBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const CreateQueueResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})
-
-export const SearchQueueReportGeneralQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "joinedAtFrom": zod.string().optional(),
-  "joinedAtTo": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "sort": zod.string().optional(),
-  "q": zod.string().optional(),
-  "queueId": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "type": zod.array(zod.number()).optional()
-})
-
-export const SearchQueueReportGeneralResponse = zod.object({
-  "aggs": zod.object({
-  "free": zod.number().optional(),
-  "offline": zod.number().optional(),
-  "online": zod.number().optional(),
-  "pause": zod.number().optional(),
-  "total": zod.number().optional()
-}).optional(),
-  "items": zod.array(zod.object({
-  "abandoned": zod.number().optional(),
-  "agentStatus": zod.object({
-  "free": zod.number().optional(),
-  "offline": zod.number().optional(),
-  "online": zod.number().optional(),
-  "pause": zod.number().optional(),
-  "total": zod.number().optional()
-}).optional(),
-  "attempts": zod.number().optional(),
-  "avgAhtSec": zod.number().optional(),
-  "avgAsaSec": zod.number().optional(),
-  "avgAwtSec": zod.number().optional(),
-  "avgWrapSec": zod.number().optional(),
-  "bridged": zod.number().optional(),
-  "count": zod.string().optional(),
-  "missed": zod.number().optional(),
-  "processed": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sl20": zod.number().optional(),
-  "sl30": zod.number().optional(),
-  "sumBillSec": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "transferred": zod.number().optional(),
-  "waiting": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const GetQueuesGlobalStateQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "type": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "tags": zod.array(zod.string()).optional()
-})
-
-export const GetQueuesGlobalStateResponse = zod.object({
-  "isAllEnabled": zod.boolean().optional(),
-  "potentialRows": zod.number().optional()
-})
-
-export const SetQueuesGlobalStateBody = zod.object({
-  "tags": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "q": zod.string().optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "type": zod.array(zod.number()).optional()
-})
-
-export const SetQueuesGlobalStateResponse = zod.object({
-  "count": zod.number().optional()
-})
-
+const createQueue = <TData = AxiosResponse<EngineQueue>>(
+    engineCreateQueueRequest: EngineCreateQueueRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues`,
+      engineCreateQueueRequest,options
+    );
+  }
+const searchQueueReportGeneral = <TData = AxiosResponse<EngineListReportGeneral>>(
+    params?: SearchQueueReportGeneralParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/reports/general`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const getQueuesGlobalState = <TData = AxiosResponse<EngineGetQueuesGlobalStateResponse>>(
+    params?: GetQueuesGlobalStateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/state`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const setQueuesGlobalState = <TData = AxiosResponse<EngineSetQueuesGlobalStateResponse>>(
+    engineSetQueuesGlobalStateRequest: EngineSetQueuesGlobalStateRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/state`,
+      engineSetQueuesGlobalStateRequest,options
+    );
+  }
 /**
  * @summary List RoutingSchemaTags
  */
-export const SearchQueueTagsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const SearchQueueTagsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchQueueTags = <TData = AxiosResponse<EngineListTags>>(
+    params?: SearchQueueTagsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/tags`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove Queue
  */
-export const DeleteQueueParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteQueueQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteQueueResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})
-
+const deleteQueue = <TData = AxiosResponse<EngineQueue>>(
+    id: string,
+    params?: DeleteQueueParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Queue item
  */
-export const ReadQueueParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadQueueQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadQueueResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})
-
+const readQueue = <TData = AxiosResponse<EngineQueue>>(
+    id: string,
+    params?: ReadQueueParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch Queue
  */
-export const PatchQueueParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchQueueBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const PatchQueueResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})
-
+const patchQueue = <TData = AxiosResponse<EngineQueue>>(
+    id: string,
+    engineQueueServicePatchQueueBody: EngineQueueServicePatchQueueBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${id}`,
+      engineQueueServicePatchQueueBody,options
+    );
+  }
 /**
  * @summary Update Queue
  */
-export const UpdateQueueParams = zod.object({
-  "id": zod.string()
-})
+const updateQueue = <TData = AxiosResponse<EngineQueue>>(
+    id: string,
+    engineQueueServiceUpdateQueueBody: EngineQueueServiceUpdateQueueBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${id}`,
+      engineQueueServiceUpdateQueueBody,options
+    );
+  }
 
-export const UpdateQueueBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
+            // --- footer start
+            return {searchQueue,createQueue,searchQueueReportGeneral,getQueuesGlobalState,setQueuesGlobalState,searchQueueTags,deleteQueue,readQueue,patchQueue,updateQueue}};
+export type SearchQueueResult = AxiosResponse<EngineListQueue>
+export type CreateQueueResult = AxiosResponse<EngineQueue>
+export type SearchQueueReportGeneralResult = AxiosResponse<EngineListReportGeneral>
+export type GetQueuesGlobalStateResult = AxiosResponse<EngineGetQueuesGlobalStateResponse>
+export type SetQueuesGlobalStateResult = AxiosResponse<EngineSetQueuesGlobalStateResponse>
+export type SearchQueueTagsResult = AxiosResponse<EngineListTags>
+export type DeleteQueueResult = AxiosResponse<EngineQueue>
+export type ReadQueueResult = AxiosResponse<EngineQueue>
+export type PatchQueueResult = AxiosResponse<EngineQueue>
+export type UpdateQueueResult = AxiosResponse<EngineQueue>
 
-export const UpdateQueueResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "active": zod.number().optional(),
-  "afterSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "count": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "dncList": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "doSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "grantee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "processing": zod.boolean().optional(),
-  "processingRenewalSec": zod.number().optional(),
-  "processingSec": zod.number().optional(),
-  "resourceGroups": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "resources": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "ringtone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "secLocateAgent": zod.number().optional(),
-  "stickyAgent": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskProcessing": zod.object({
-  "enabled": zod.boolean().optional(),
-  "formSchema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "prolongationOptions": zod.object({
-  "enabled": zod.boolean().optional(),
-  "isTimeoutRetry": zod.boolean().optional(),
-  "prolongationTimeSec": zod.number().optional(),
-  "repeatsNumber": zod.number().optional()
-}).optional(),
-  "renewalSec": zod.number().optional(),
-  "sec": zod.number().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "timeout": zod.number().optional(),
-  "type": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional(),
-  "waiting": zod.number().optional()
-})
-
+            // --- footer end
+          

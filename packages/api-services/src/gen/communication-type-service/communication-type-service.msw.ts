@@ -18,11 +18,11 @@ import type {
 
 import {
   EngineCommunicationChannels
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   EngineCommunicationType,
   EngineListCommunicationType
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchCommunicationTypeResponseMock = (overrideResponse: Partial< EngineListCommunicationType > = {}): EngineListCommunicationType => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({channel: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineCommunicationChannels)), undefined]), code: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), default: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domainId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

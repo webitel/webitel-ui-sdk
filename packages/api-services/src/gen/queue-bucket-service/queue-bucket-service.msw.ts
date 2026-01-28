@@ -19,7 +19,7 @@ import type {
 import type {
   EngineListQueueBucket,
   EngineQueueBucket
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchQueueBucketResponseMock = (overrideResponse: Partial< EngineListQueueBucket > = {}): EngineListQueueBucket => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({bucket: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), disabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), priority: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ratio: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

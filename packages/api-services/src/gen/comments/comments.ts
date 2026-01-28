@@ -4,311 +4,101 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsComment,
+  ContactsCommentList,
+  ContactsInputComment,
+  DeleteCommentCommentsParams,
+  PublishCommentCommentsParams,
+  SearchCommentsParams,
+  UpdateCommentCommentsBody,
+  UpdateCommentCommentsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getComments
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Search for Contact Comment(s) ...
  */
-export const SearchCommentsParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const searchCommentsQueryModeDefault = `READ`;
-
-export const SearchCommentsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result. offset = ((page-1)*size)'),
-  "size": zod.number().optional().describe('Size of result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: comment text;\n`?` - matches any character\n`*` - matches 0 or more characters\n\nterm-of-search: lookup[name|...]'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "id": zod.array(zod.string()).optional().describe('Comment(s) with unique ID only.'),
-  "mode": zod.enum(['READ', 'WRITE', 'DELETE']).default(searchCommentsQueryModeDefault).describe('The requirement of [M]andatory [A]ccess [C]ontrol.\n\n - READ: Can `fetch` record. [GET]\n - WRITE: Can `update` record. [PUT|PATCH]\n - DELETE: Can `delete` record. [DELETE]'),
-  "dateSince": zod.string().optional().describe('Since timestamp(milli). Not before.'),
-  "dateUntil": zod.string().optional().describe('Until timestamp(milli). Not after.'),
-  "authorId": zod.string().optional().describe('Reference Object unique ID.'),
-  "authorType": zod.string().optional().describe('Reference Object well-known type.'),
-  "authorName": zod.string().optional().describe('Reference Object display name.'),
-  "editorId": zod.string().optional().describe('Reference Object unique ID.'),
-  "editorType": zod.string().optional().describe('Reference Object well-known type.'),
-  "editorName": zod.string().optional().describe('Reference Object display name.')
-})
-
-export const SearchCommentsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('Styles of the text components.'),
-  "id": zod.string().optional().describe('The unique ID of the Comment. Never changes.'),
-  "text": zod.string().optional().describe('Rich Text, multi-line[d] string value.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-})).optional().describe('Comment dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Comment dataset.')
-
+const searchComments = <TData = AxiosResponse<ContactsCommentList>>(
+    contactId: string,
+    params?: SearchCommentsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/comments`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Publish comment for a Contact.
  */
-export const PublishCommentCommentsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const PublishCommentCommentsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const PublishCommentCommentsBody = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('NEW Text components styling format.'),
-  "text": zod.string().describe('NEW Text of the comment.')
-})
-
-export const PublishCommentCommentsResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('Styles of the text components.'),
-  "id": zod.string().optional().describe('The unique ID of the Comment. Never changes.'),
-  "text": zod.string().optional().describe('Rich Text, multi-line[d] string value.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-})
-
+const publishCommentComments = <TData = AxiosResponse<ContactsComment>>(
+    contactId: string,
+    contactsInputComment: ContactsInputComment,
+    params?: PublishCommentCommentsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/comments`,
+      contactsInputComment,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete Comment(s) for Contact ...
  */
-
-
-
-export const DeleteCommentCommentsParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.array(zod.string()).min(1).describe('Set of unique ID(s) to remove.')
-})
-
-export const DeleteCommentCommentsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const DeleteCommentCommentsResponseItem = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('Styles of the text components.'),
-  "id": zod.string().optional().describe('The unique ID of the Comment. Never changes.'),
-  "text": zod.string().optional().describe('Rich Text, multi-line[d] string value.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-})
-export const DeleteCommentCommentsResponse = zod.array(DeleteCommentCommentsResponseItem)
-
+const deleteCommentComments = <TData = AxiosResponse<ContactsComment[]>>(
+    contactId: string,
+    etag: string[],
+    params?: DeleteCommentCommentsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/comments/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update (edit) specific Comment text owned
  */
-export const UpdateCommentCommentsParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
+const updateCommentComments = <TData = AxiosResponse<ContactsComment>>(
+    contactId: string,
+    etag: string,
+    updateCommentCommentsBody: UpdateCommentCommentsBody,
+    params?: UpdateCommentCommentsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/comments/${etag}`,
+      updateCommentCommentsBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateCommentCommentsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+            // --- footer start
+            return {searchComments,publishCommentComments,deleteCommentComments,updateCommentComments}};
+export type SearchCommentsResult = AxiosResponse<ContactsCommentList>
+export type PublishCommentCommentsResult = AxiosResponse<ContactsComment>
+export type DeleteCommentCommentsResult = AxiosResponse<ContactsComment[]>
+export type UpdateCommentCommentsResult = AxiosResponse<ContactsComment>
 
-export const UpdateCommentCommentsBody = zod.object({
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('NEW Text components styling format.'),
-  "text": zod.string().describe('NEW Text of the comment.')
-})
-
-export const UpdateCommentCommentsResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "format": zod.array(zod.object({
-  "bold": zod.object({
-
-}).optional(),
-  "codeblock": zod.object({
-  "language": zod.string().optional()
-}).optional(),
-  "italic": zod.object({
-
-}).optional(),
-  "length": zod.number().optional().describe('Length text runes count.'),
-  "link": zod.object({
-  "url": zod.string().optional()
-}).optional(),
-  "monospace": zod.object({
-
-}).optional(),
-  "offset": zod.number().optional().describe('Offset text runes count.'),
-  "strikethrough": zod.object({
-
-}).optional(),
-  "underline": zod.object({
-
-}).optional()
-})).optional().describe('Styles of the text components.'),
-  "id": zod.string().optional().describe('The unique ID of the Comment. Never changes.'),
-  "text": zod.string().optional().describe('Rich Text, multi-line[d] string value.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-})
-
+            // --- footer end
+          

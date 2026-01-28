@@ -4,108 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreatePresetQueryRequest,
+  EngineListPresetQuery,
+  EnginePresetQuery,
+  EnginePresetQueryServicePatchPresetQueryBody,
+  EnginePresetQueryServiceUpdatePresetQueryBody,
+  SearchPresetQueryParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchPresetQueryQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "section": zod.array(zod.string()).optional()
-})
 
-export const SearchPresetQueryResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreatePresetQueryBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getPresetQueryService
+            // --- title end
+           = () => {
 
-export const CreatePresetQueryResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})
+            // --- header end
+          const searchPresetQuery = <TData = AxiosResponse<EngineListPresetQuery>>(
+    params?: SearchPresetQueryParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/preset/query`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+    engineCreatePresetQueryRequest: EngineCreatePresetQueryRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/preset/query`,
+      engineCreatePresetQueryRequest,options
+    );
+  }
+const deletePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/preset/query/${id}`,options
+    );
+  }
+const readPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/preset/query/${id}`,options
+    );
+  }
+const patchPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+    id: number,
+    enginePresetQueryServicePatchPresetQueryBody: EnginePresetQueryServicePatchPresetQueryBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/preset/query/${id}`,
+      enginePresetQueryServicePatchPresetQueryBody,options
+    );
+  }
+const updatePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+    id: number,
+    enginePresetQueryServiceUpdatePresetQueryBody: EnginePresetQueryServiceUpdatePresetQueryBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/preset/query/${id}`,
+      enginePresetQueryServiceUpdatePresetQueryBody,options
+    );
+  }
 
-export const DeletePresetQueryParams = zod.object({
-  "id": zod.number()
-})
+            // --- footer start
+            return {searchPresetQuery,createPresetQuery,deletePresetQuery,readPresetQuery,patchPresetQuery,updatePresetQuery}};
+export type SearchPresetQueryResult = AxiosResponse<EngineListPresetQuery>
+export type CreatePresetQueryResult = AxiosResponse<EnginePresetQuery>
+export type DeletePresetQueryResult = AxiosResponse<EnginePresetQuery>
+export type ReadPresetQueryResult = AxiosResponse<EnginePresetQuery>
+export type PatchPresetQueryResult = AxiosResponse<EnginePresetQuery>
+export type UpdatePresetQueryResult = AxiosResponse<EnginePresetQuery>
 
-export const DeletePresetQueryResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})
-
-export const ReadPresetQueryParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadPresetQueryResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})
-
-export const PatchPresetQueryParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchPresetQueryBody = zod.object({
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional()
-})
-
-export const PatchPresetQueryResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})
-
-export const UpdatePresetQueryParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdatePresetQueryBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional()
-})
-
-export const UpdatePresetQueryResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "section": zod.string().optional(),
-  "updatedAt": zod.string().optional()
-})
-
+            // --- footer end
+          

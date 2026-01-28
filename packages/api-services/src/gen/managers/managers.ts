@@ -4,357 +4,168 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsInputManager,
+  ContactsManager,
+  ContactsManagerList,
+  DeleteManagerParams,
+  DeleteManagersParams,
+  ListManagersParams,
+  LocateManagerParams,
+  MergeManagersParams,
+  ResetManagersParams,
+  UpdateManager2Body,
+  UpdateManager2Params,
+  UpdateManagerBody,
+  UpdateManagerParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getManagers
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Remove Contact Managers associations.
  */
-export const DeleteManagersParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const DeleteManagersQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "etag": zod.array(zod.string()).describe('Set of unique ID(s) to remove.')
-})
-
-export const DeleteManagersResponseItem = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')
-export const DeleteManagersResponse = zod.array(DeleteManagersResponseItem)
-
+const deleteManagers = <TData = AxiosResponse<ContactsManager[]>>(
+    contactId: string,
+    params: DeleteManagersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/managers`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Search the Contact's Managers.
  */
-export const ListManagersParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const ListManagersQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result. offset = ((page-1)*size)'),
-  "size": zod.number().optional().describe('Size of result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: user name;\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "id": zod.array(zod.string()).optional().describe('Record(s) with unique ID only.')
-})
-
-export const ListManagersResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')).optional().describe('Manager dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Manager dataset.')
-
+const listManagers = <TData = AxiosResponse<ContactsManagerList>>(
+    contactId: string,
+    params?: ListManagersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/managers`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Associate new Managers to the Contact.
  */
-export const MergeManagersParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const MergeManagersQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const MergeManagersBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-export const MergeManagersBody = zod.array(MergeManagersBodyItem)
-
-export const MergeManagersResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')).optional().describe('Manager dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Manager dataset.')
-
+const mergeManagers = <TData = AxiosResponse<ContactsManagerList>>(
+    contactId: string,
+    contactsInputManager: ContactsInputManager[],
+    params?: MergeManagersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/managers`,
+      contactsInputManager,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Reset Managers to fit the specified final set.
  */
-export const ResetManagersParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const ResetManagersQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const ResetManagersBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-export const ResetManagersBody = zod.array(ResetManagersBodyItem)
-
-export const ResetManagersResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')).optional().describe('Manager dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Manager dataset.')
-
+const resetManagers = <TData = AxiosResponse<ContactsManagerList>>(
+    contactId: string,
+    contactsInputManager: ContactsInputManager[],
+    params?: ResetManagersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/managers`,
+      contactsInputManager,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove the contact's manager address link
  */
-export const DeleteManagerParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID to remove.')
-})
-
-export const DeleteManagerQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const DeleteManagerResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')
-
+const deleteManager = <TData = AxiosResponse<ContactsManager>>(
+    contactId: string,
+    etag: string,
+    params?: DeleteManagerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/managers/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate the manager address link.
  */
-export const LocateManagerParams = zod.object({
-  "contact_id": zod.string().describe('Contact source ID.'),
-  "etag": zod.string().describe('Unique manager link IDentifier.\nAccept: `etag` (obsolete+) or `id`.')
-})
-
-export const LocateManagerQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
-
-export const LocateManagerResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')
-
+const locateManager = <TData = AxiosResponse<ContactsManager>>(
+    contactId: string,
+    etag: string,
+    params?: LocateManagerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/managers/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's manager address link details
  */
-export const UpdateManager2Params = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.')
-})
-
-export const UpdateManager2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdateManager2Body = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
-export const UpdateManager2Response = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')).optional().describe('Manager dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Manager dataset.')
-
+const updateManager2 = <TData = AxiosResponse<ContactsManagerList>>(
+    contactId: string,
+    etag: string,
+    updateManager2Body: UpdateManager2Body,
+    params?: UpdateManager2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/${contactId}/managers/${etag}`,
+      updateManager2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's manager address link details
  */
-export const UpdateManagerParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.')
-})
+const updateManager = <TData = AxiosResponse<ContactsManagerList>>(
+    contactId: string,
+    etag: string,
+    updateManagerBody: UpdateManagerBody,
+    params?: UpdateManagerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/managers/${etag}`,
+      updateManagerBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateManagerQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+            // --- footer start
+            return {deleteManagers,listManagers,mergeManagers,resetManagers,deleteManager,locateManager,updateManager2,updateManager}};
+export type DeleteManagersResult = AxiosResponse<ContactsManager[]>
+export type ListManagersResult = AxiosResponse<ContactsManagerList>
+export type MergeManagersResult = AxiosResponse<ContactsManagerList>
+export type ResetManagersResult = AxiosResponse<ContactsManagerList>
+export type DeleteManagerResult = AxiosResponse<ContactsManager>
+export type LocateManagerResult = AxiosResponse<ContactsManager>
+export type UpdateManager2Result = AxiosResponse<ContactsManagerList>
+export type UpdateManagerResult = AxiosResponse<ContactsManagerList>
 
-export const UpdateManagerBody = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
-export const UpdateManagerResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "user": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('Manager. The Contact\'s responsible User.')).optional().describe('Manager dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Manager dataset.')
-
+            // --- footer end
+          

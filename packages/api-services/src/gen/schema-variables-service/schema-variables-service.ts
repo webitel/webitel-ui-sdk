@@ -4,85 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreateSchemaVariableRequest,
+  EngineListSchemaVariable,
+  EngineSchemaVariable,
+  EngineSchemaVariablesServicePatchSchemaVariableBody,
+  EngineSchemaVariablesServiceUpdateSchemaVariableBody,
+  SearchSchemaVariableParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchSchemaVariableQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const SearchSchemaVariableResponse = zod.object({
-  "items": zod.array(zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreateSchemaVariableBody = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "name": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getSchemaVariablesService
+            // --- title end
+           = () => {
 
-export const CreateSchemaVariableResponse = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})
+            // --- header end
+          const searchSchemaVariable = <TData = AxiosResponse<EngineListSchemaVariable>>(
+    params?: SearchSchemaVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/variables`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createSchemaVariable = <TData = AxiosResponse<EngineSchemaVariable>>(
+    engineCreateSchemaVariableRequest: EngineCreateSchemaVariableRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/routing/schema/variables`,
+      engineCreateSchemaVariableRequest,options
+    );
+  }
+const deleteSchemaVariable = <TData = AxiosResponse<EngineSchemaVariable>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/routing/schema/variables/${id}`,options
+    );
+  }
+const readSchemaVariable = <TData = AxiosResponse<EngineSchemaVariable>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/variables/${id}`,options
+    );
+  }
+const patchSchemaVariable = <TData = AxiosResponse<EngineSchemaVariable>>(
+    id: number,
+    engineSchemaVariablesServicePatchSchemaVariableBody: EngineSchemaVariablesServicePatchSchemaVariableBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/routing/schema/variables/${id}`,
+      engineSchemaVariablesServicePatchSchemaVariableBody,options
+    );
+  }
+const updateSchemaVariable = <TData = AxiosResponse<EngineSchemaVariable>>(
+    id: number,
+    engineSchemaVariablesServiceUpdateSchemaVariableBody: EngineSchemaVariablesServiceUpdateSchemaVariableBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/routing/schema/variables/${id}`,
+      engineSchemaVariablesServiceUpdateSchemaVariableBody,options
+    );
+  }
 
-export const DeleteSchemaVariableParams = zod.object({
-  "id": zod.number()
-})
+            // --- footer start
+            return {searchSchemaVariable,createSchemaVariable,deleteSchemaVariable,readSchemaVariable,patchSchemaVariable,updateSchemaVariable}};
+export type SearchSchemaVariableResult = AxiosResponse<EngineListSchemaVariable>
+export type CreateSchemaVariableResult = AxiosResponse<EngineSchemaVariable>
+export type DeleteSchemaVariableResult = AxiosResponse<EngineSchemaVariable>
+export type ReadSchemaVariableResult = AxiosResponse<EngineSchemaVariable>
+export type PatchSchemaVariableResult = AxiosResponse<EngineSchemaVariable>
+export type UpdateSchemaVariableResult = AxiosResponse<EngineSchemaVariable>
 
-export const DeleteSchemaVariableResponse = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
-export const ReadSchemaVariableParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadSchemaVariableResponse = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
-export const PatchSchemaVariableParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchSchemaVariableBody = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional()
-})
-
-export const PatchSchemaVariableResponse = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateSchemaVariableParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateSchemaVariableBody = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateSchemaVariableResponse = zod.object({
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
+            // --- footer end
+          

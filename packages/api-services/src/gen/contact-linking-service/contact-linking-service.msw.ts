@@ -19,7 +19,7 @@ import type {
 import type {
   WebitelChatEmptyResponse,
   WebitelChatLookup
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getContactLinkingServiceCreateContactFromConversationResponseMock = (overrideResponse: Partial< WebitelChatLookup > = {}): WebitelChatLookup => ({id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})

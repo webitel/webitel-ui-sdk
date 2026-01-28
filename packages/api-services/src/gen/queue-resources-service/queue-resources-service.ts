@@ -4,140 +4,109 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteQueueResourceGroupParams,
+  EngineListQueueResourceGroup,
+  EngineQueueResourceGroup,
+  EngineQueueResourcesServiceCreateQueueResourceGroupBody,
+  EngineQueueResourcesServiceUpdateQueueResourceGroupBody,
+  ReadQueueResourceGroupParams,
+  SearchQueueResourceGroupParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getQueueResourcesService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary SearchQueueResourceGroup
  */
-export const SearchQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const SearchQueueResourceGroupQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchQueueResourceGroupResponse = zod.object({
-  "items": zod.array(zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchQueueResourceGroup = <TData = AxiosResponse<EngineListQueueResourceGroup>>(
+    queueId: string,
+    params?: SearchQueueResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/resource_groups`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary CreateQueueResourceGroup
  */
-export const CreateQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const CreateQueueResourceGroupBody = zod.object({
-  "domainId": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createQueueResourceGroup = <TData = AxiosResponse<EngineQueueResourceGroup>>(
+    queueId: string,
+    engineQueueResourcesServiceCreateQueueResourceGroupBody: EngineQueueResourcesServiceCreateQueueResourceGroupBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/resource_groups`,
+      engineQueueResourcesServiceCreateQueueResourceGroupBody,options
+    );
+  }
 /**
  * @summary DeleteQueueResourceGroup
  */
-export const DeleteQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteQueueResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteQueueResourceGroup = <TData = AxiosResponse<EngineQueueResourceGroup>>(
+    queueId: string,
+    id: string,
+    params?: DeleteQueueResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/resource_groups/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary ReadQueueResourceGroup
  */
-export const ReadQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadQueueResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readQueueResourceGroup = <TData = AxiosResponse<EngineQueueResourceGroup>>(
+    queueId: string,
+    id: string,
+    params?: ReadQueueResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/resource_groups/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary UpdateQueueResourceGroup
  */
-export const UpdateQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+const updateQueueResourceGroup = <TData = AxiosResponse<EngineQueueResourceGroup>>(
+    queueId: string,
+    id: string,
+    engineQueueResourcesServiceUpdateQueueResourceGroupBody: EngineQueueResourcesServiceUpdateQueueResourceGroupBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${queueId}/resource_groups/${id}`,
+      engineQueueResourcesServiceUpdateQueueResourceGroupBody,options
+    );
+  }
 
-export const UpdateQueueResourceGroupBody = zod.object({
-  "domainId": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchQueueResourceGroup,createQueueResourceGroup,deleteQueueResourceGroup,readQueueResourceGroup,updateQueueResourceGroup}};
+export type SearchQueueResourceGroupResult = AxiosResponse<EngineListQueueResourceGroup>
+export type CreateQueueResourceGroupResult = AxiosResponse<EngineQueueResourceGroup>
+export type DeleteQueueResourceGroupResult = AxiosResponse<EngineQueueResourceGroup>
+export type ReadQueueResourceGroupResult = AxiosResponse<EngineQueueResourceGroup>
+export type UpdateQueueResourceGroupResult = AxiosResponse<EngineQueueResourceGroup>
 
-export const UpdateQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

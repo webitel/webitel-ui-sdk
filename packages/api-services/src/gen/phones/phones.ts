@@ -4,389 +4,168 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsInputPhoneNumber,
+  ContactsPhoneList,
+  ContactsPhoneNumber,
+  DeletePhoneParams,
+  DeletePhonesParams,
+  ListPhonesParams,
+  LocatePhoneParams,
+  MergePhonesParams,
+  ResetPhonesParams,
+  UpdatePhone2Body,
+  UpdatePhone2Params,
+  UpdatePhoneBody,
+  UpdatePhoneParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPhones
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Remove the Contact's phone number association(s)
  */
-export const DeletePhonesParams = zod.object({
-  "contact_id": zod.string().describe('The Contact ID associated with.')
-})
-
-export const DeletePhonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "etag": zod.array(zod.string()).describe('Set of linked ID(s) to be removed.')
-})
-
-export const DeletePhonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+const deletePhones = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    params: DeletePhonesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/phones`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Search phone number(s)
  */
-export const ListPhonesParams = zod.object({
-  "contact_id": zod.string().describe('The Contact ID associated with.')
-})
-
-export const ListPhonesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: phone number.\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "id": zod.array(zod.string()).optional().describe('Link(s) with unique ID only.'),
-  "primary": zod.boolean().optional().describe('Primary phone  only.'),
-  "verified": zod.boolean().optional().describe('Verified phone only.'),
-  "typeId": zod.string().optional().describe('Reference Object unique ID.'),
-  "typeType": zod.string().optional().describe('Reference Object well-known type.'),
-  "typeName": zod.string().optional().describe('Reference Object display name.')
-})
-
-export const ListPhonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+const listPhones = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    params?: ListPhonesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/phones`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Associate phone number(s) with the Contact
  */
-export const MergePhonesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const MergePhonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const MergePhonesBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "number": zod.string().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-}).describe('Input of the contact phone number.')
-export const MergePhonesBody = zod.array(MergePhonesBodyItem)
-
-export const MergePhonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+const mergePhones = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    contactsInputPhoneNumber: ContactsInputPhoneNumber[],
+    params?: MergePhonesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/phones`,
+      contactsInputPhoneNumber,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Reset the Contact's phone numbers to fit given data set.
  */
-export const ResetPhonesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const ResetPhonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const ResetPhonesBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "number": zod.string().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-}).describe('Input of the contact phone number.')
-export const ResetPhonesBody = zod.array(ResetPhonesBodyItem)
-
-export const ResetPhonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+const resetPhones = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    contactsInputPhoneNumber: ContactsInputPhoneNumber[],
+    params?: ResetPhonesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/phones`,
+      contactsInputPhoneNumber,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove the Contact's phone number
  */
-export const DeletePhoneParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique link ID to be removed.')
-})
-
-export const DeletePhoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
-
-export const DeletePhoneResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')
-
+const deletePhone = <TData = AxiosResponse<ContactsPhoneNumber>>(
+    contactId: string,
+    etag: string,
+    params?: DeletePhoneParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/phones/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate the Contact's phone number association.
  */
-export const LocatePhoneParams = zod.object({
-  "contact_id": zod.string().describe('Reference Contact unique ID.'),
-  "etag": zod.string()
-})
-
-export const LocatePhoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result record.')
-})
-
-export const LocatePhoneResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')
-
+const locatePhone = <TData = AxiosResponse<ContactsPhoneNumber>>(
+    contactId: string,
+    etag: string,
+    params?: LocatePhoneParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/phones/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the Contact's phone number association details
  */
-export const UpdatePhone2Params = zod.object({
-  "contact_id": zod.string().describe('The Contact ID to be associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
-
-export const UpdatePhone2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdatePhone2Body = zod.object({
-  "number": zod.string().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-})
-
-export const UpdatePhone2Response = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+const updatePhone2 = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    etag: string,
+    updatePhone2Body: UpdatePhone2Body,
+    params?: UpdatePhone2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/${contactId}/phones/${etag}`,
+      updatePhone2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the Contact's phone number association details
  */
-export const UpdatePhoneParams = zod.object({
-  "contact_id": zod.string().describe('The Contact ID to be associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
+const updatePhone = <TData = AxiosResponse<ContactsPhoneList>>(
+    contactId: string,
+    etag: string,
+    updatePhoneBody: UpdatePhoneBody,
+    params?: UpdatePhoneParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/phones/${etag}`,
+      updatePhoneBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdatePhoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+            // --- footer start
+            return {deletePhones,listPhones,mergePhones,resetPhones,deletePhone,locatePhone,updatePhone2,updatePhone}};
+export type DeletePhonesResult = AxiosResponse<ContactsPhoneList>
+export type ListPhonesResult = AxiosResponse<ContactsPhoneList>
+export type MergePhonesResult = AxiosResponse<ContactsPhoneList>
+export type ResetPhonesResult = AxiosResponse<ContactsPhoneList>
+export type DeletePhoneResult = AxiosResponse<ContactsPhoneNumber>
+export type LocatePhoneResult = AxiosResponse<ContactsPhoneNumber>
+export type UpdatePhone2Result = AxiosResponse<ContactsPhoneList>
+export type UpdatePhoneResult = AxiosResponse<ContactsPhoneList>
 
-export const UpdatePhoneBody = zod.object({
-  "number": zod.string().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-})
-
-export const UpdatePhoneResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "number": zod.string().optional().describe('The phone number.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s phone number.')).optional().describe('PhoneNumber dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('PhoneNumber dataset.')
-
+            // --- footer end
+          

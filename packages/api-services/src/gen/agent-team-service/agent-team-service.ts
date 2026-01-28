@@ -4,219 +4,104 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteAgentTeamParams,
+  EngineAgentTeam,
+  EngineAgentTeamServiceUpdateAgentTeamBody,
+  EngineCreateAgentTeamRequest,
+  EngineListAgentTeam,
+  ReadAgentTeamParams,
+  SearchAgentTeamParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getAgentTeamService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of AgentTeam
  */
-export const SearchAgentTeamQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "strategy": zod.array(zod.string()).optional(),
-  "adminId": zod.array(zod.number()).optional()
-})
-
-export const SearchAgentTeamResponse = zod.object({
-  "items": zod.array(zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "wrapUpTime": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchAgentTeam = <TData = AxiosResponse<EngineListAgentTeam>>(
+    params?: SearchAgentTeamParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create AgentTeam
  */
-export const CreateAgentTeamBody = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "wrapUpTime": zod.number().optional()
-})
-
-export const CreateAgentTeamResponse = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "wrapUpTime": zod.number().optional()
-})
-
+const createAgentTeam = <TData = AxiosResponse<EngineAgentTeam>>(
+    engineCreateAgentTeamRequest: EngineCreateAgentTeamRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/teams`,
+      engineCreateAgentTeamRequest,options
+    );
+  }
 /**
  * @summary Remove AgentTeam
  */
-export const DeleteAgentTeamParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteAgentTeamQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteAgentTeamResponse = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "wrapUpTime": zod.number().optional()
-})
-
+const deleteAgentTeam = <TData = AxiosResponse<EngineAgentTeam>>(
+    id: string,
+    params?: DeleteAgentTeamParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/teams/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary AgentTeam item
  */
-export const ReadAgentTeamParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadAgentTeamQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadAgentTeamResponse = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "wrapUpTime": zod.number().optional()
-})
-
+const readAgentTeam = <TData = AxiosResponse<EngineAgentTeam>>(
+    id: string,
+    params?: ReadAgentTeamParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update AgentTeam
  */
-export const UpdateAgentTeamParams = zod.object({
-  "id": zod.string()
-})
+const updateAgentTeam = <TData = AxiosResponse<EngineAgentTeam>>(
+    id: string,
+    engineAgentTeamServiceUpdateAgentTeamBody: EngineAgentTeamServiceUpdateAgentTeamBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/teams/${id}`,
+      engineAgentTeamServiceUpdateAgentTeamBody,options
+    );
+  }
 
-export const UpdateAgentTeamBody = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "wrapUpTime": zod.number().optional()
-})
+            // --- footer start
+            return {searchAgentTeam,createAgentTeam,deleteAgentTeam,readAgentTeam,updateAgentTeam}};
+export type SearchAgentTeamResult = AxiosResponse<EngineListAgentTeam>
+export type CreateAgentTeamResult = AxiosResponse<EngineAgentTeam>
+export type DeleteAgentTeamResult = AxiosResponse<EngineAgentTeam>
+export type ReadAgentTeamResult = AxiosResponse<EngineAgentTeam>
+export type UpdateAgentTeamResult = AxiosResponse<EngineAgentTeam>
 
-export const UpdateAgentTeamResponse = zod.object({
-  "admin": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTimeout": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "forecastCalculation": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "inviteChatTimeout": zod.number().optional(),
-  "maxNoAnswer": zod.number().optional(),
-  "name": zod.string().optional(),
-  "noAnswerDelayTime": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "strategy": zod.string().optional(),
-  "taskAcceptTimeout": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "wrapUpTime": zod.number().optional()
-})
-
+            // --- footer end
+          

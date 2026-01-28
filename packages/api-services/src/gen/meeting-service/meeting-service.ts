@@ -4,30 +4,52 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
+  WebMeetingBackendMeetingView,
+  WebMeetingBackendSatisfactionMeetingResponse
+} from '../webitelAPI.schemas';
 
 
-export const GetMeetingViewParams = zod.object({
-  "id": zod.string()
-})
 
-export const GetMeetingViewResponse = zod.object({
-  "allowSatisfaction": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "expiresAt": zod.string().optional(),
-  "satisfaction": zod.string().optional(),
-  "title": zod.string().optional()
-})
+            // --- header start
+            // 
 
-export const SatisfactionMeetingParams = zod.object({
-  "id": zod.string()
-})
+  export const 
+            // --- title start
+            getMeetingService
+            // --- title end
+           = () => {
 
-export const SatisfactionMeetingBody = zod.object({
-  "satisfaction": zod.string().optional()
-})
+            // --- header end
+          const getMeetingView = <TData = AxiosResponse<WebMeetingBackendMeetingView>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/meetings/${id}`,options
+    );
+  }
+const satisfactionMeeting = <TData = AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>>(
+    id: string,
+    webMeetingBackendMeetingServiceSatisfactionMeetingBody: WebMeetingBackendMeetingServiceSatisfactionMeetingBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/meetings/${id}/satisfaction`,
+      webMeetingBackendMeetingServiceSatisfactionMeetingBody,options
+    );
+  }
 
-export const SatisfactionMeetingResponse = zod.object({
+            // --- footer start
+            return {getMeetingView,satisfactionMeeting}};
+export type GetMeetingViewResult = AxiosResponse<WebMeetingBackendMeetingView>
+export type SatisfactionMeetingResult = AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>
 
-})
-
+            // --- footer end
+          

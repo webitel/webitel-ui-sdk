@@ -18,14 +18,14 @@ import type {
 
 import {
   WebitelChatButtonRequest
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WebitelChatBroadcastMessageResponse,
   WebitelChatChatCustomers,
   WebitelChatChatDialogs,
   WebitelChatChatMembers,
   WebitelChatChatMessages
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getMessagesServiceBroadcastMessageResponseMock = (overrideResponse: Partial< WebitelChatBroadcastMessageResponse > = {}): WebitelChatBroadcastMessageResponse => ({failure: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({error: faker.helpers.arrayElement([{code: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), details: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({'@type': faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), peerId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), variables: faker.helpers.arrayElement([{

@@ -20,7 +20,7 @@ import {
   EngineCallFileType,
   EngineHistoryFileJobHistoryFileJobAction,
   EngineHistoryFileJobHistoryFileJobState
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   EngineActiveCall,
   EngineBlindTransferCallResponse,
@@ -35,7 +35,7 @@ import type {
   EngineListCall,
   EngineListHistoryCall,
   EngineSetVariablesCallResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getCreateCallResponseMock = (overrideResponse: Partial< EngineCreateCallResponse > = {}): EngineCreateCallResponse => ({id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})

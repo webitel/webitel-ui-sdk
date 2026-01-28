@@ -4,43 +4,63 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactLinkingServiceCreateContactFromConversationParams,
+  ContactLinkingServiceLinkContactToClientParams,
+  WebitelChatEmptyResponse,
+  WebitelChatLookup
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getContactLinkingService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary CreateContactFromConversation creates new contact from the data existing in the conversation and after that links this contact to the external user.
  */
-export const ContactLinkingServiceCreateContactFromConversationParams = zod.object({
-  "conversation_id": zod.string()
-})
-
-export const ContactLinkingServiceCreateContactFromConversationQueryParams = zod.object({
-  "timezoneId": zod.string().optional(),
-  "timezoneName": zod.string().optional(),
-  "ownerId": zod.string().optional(),
-  "ownerName": zod.string().optional(),
-  "label": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "description": zod.string().optional()
-})
-
-export const ContactLinkingServiceCreateContactFromConversationResponse = zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+const contactLinkingServiceCreateContactFromConversation = <TData = AxiosResponse<WebitelChatLookup>>(
+    conversationId: string,
+    params?: ContactLinkingServiceCreateContactFromConversationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/chat/${conversationId}/contact`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary LinkContactToClient creates connection between existing internal contact and external client.
  */
-export const ContactLinkingServiceLinkContactToClientParams = zod.object({
-  "conversation_id": zod.string()
-})
+const contactLinkingServiceLinkContactToClient = <TData = AxiosResponse<WebitelChatEmptyResponse>>(
+    conversationId: string,
+    params?: ContactLinkingServiceLinkContactToClientParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/chat/${conversationId}/link`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ContactLinkingServiceLinkContactToClientQueryParams = zod.object({
-  "contactId": zod.string().optional()
-})
+            // --- footer start
+            return {contactLinkingServiceCreateContactFromConversation,contactLinkingServiceLinkContactToClient}};
+export type ContactLinkingServiceCreateContactFromConversationResult = AxiosResponse<WebitelChatLookup>
+export type ContactLinkingServiceLinkContactToClientResult = AxiosResponse<WebitelChatEmptyResponse>
 
-export const ContactLinkingServiceLinkContactToClientResponse = zod.object({
-
-})
-
+            // --- footer end
+          

@@ -4,10 +4,38 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateSpaceParams,
+  DeleteSpaceParams,
+  KnowledgebaseInputSpace,
+  KnowledgebaseSpace,
+  KnowledgebaseSpaceList,
+  ListSpacesParams,
+  LocateSpaceParams,
+  UpdateSpaceBody,
+  UpdateSpaceParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getSpaces
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * | Field       | Type 
 | ----------- | ---- 
 | **----------- READ-ONLY -----------** | 
@@ -26,214 +54,78 @@ import * as zod from 'zod';
 | `has_children`| bool 
 
  */
-export const listSpacesQuerySortItemDefault = `id`;
-export const listSpacesQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
-export const listSpacesQueryFieldsItemDefault = `*`;
-
-export const ListSpacesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional().describe('Limit of result page records count.   _default(16); limit=(size<=0?-1:size+1);_\n\n```javascript\nconst\n    default = 16\n  , maximum = 32\n;\n\n```'),
-  "q": zod.string().optional().describe('Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\nUsed to query records within a set of `qin` fields, eg: name, etc...'),
-  "sort": zod.array(zod.string().regex(listSpacesQuerySortItemRegExp)).optional().describe('Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `state`'),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional().describe('Records with unique IDentifier(s).\nAccept: `id` -or- `etag`.')
-})
-
-export const ListSpacesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The timestamp when the space was created (in Unix time).'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "domain": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "hasChildren": zod.boolean().optional().describe('Indicates if the space has children.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "mode": zod.string().optional().describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
-  "name": zod.string().optional().describe('The name of the space.'),
-  "state": zod.boolean().optional().describe('The state of the space.'),
-  "updatedAt": zod.string().optional().describe('The timestamp when the space was last updated (in Unix time).'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.')
-})).optional().describe('Space(s) dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-})
-
+const listSpaces = <TData = AxiosResponse<KnowledgebaseSpaceList>>(
+    params?: ListSpacesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/spaces`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create NEW Space
  */
-export const CreateSpaceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Source Fields to return into result.')
-})
-
-export const CreateSpaceBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.\nOPTIONAL. Multi-lined text.'),
-  "name": zod.string().optional().describe('Represents the name of the knowledge base space.'),
-  "state": zod.boolean().optional().describe('The state of the space.')
-}).describe('The Space principal input.')
-export const CreateSpaceBody = zod.array(CreateSpaceBodyItem)
-
-export const CreateSpaceResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The timestamp when the space was created (in Unix time).'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "domain": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "hasChildren": zod.boolean().optional().describe('Indicates if the space has children.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "mode": zod.string().optional().describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
-  "name": zod.string().optional().describe('The name of the space.'),
-  "state": zod.boolean().optional().describe('The state of the space.'),
-  "updatedAt": zod.string().optional().describe('The timestamp when the space was last updated (in Unix time).'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.')
-})
-
+const createSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
+    knowledgebaseInputSpace: KnowledgebaseInputSpace[],
+    params?: CreateSpaceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/spaces`,
+      knowledgebaseInputSpace,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove Space source
  */
-export const DeleteSpaceParams = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of a resource.')
-})
-
-export const DeleteSpaceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const DeleteSpaceResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The timestamp when the space was created (in Unix time).'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "domain": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "hasChildren": zod.boolean().optional().describe('Indicates if the space has children.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "mode": zod.string().optional().describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
-  "name": zod.string().optional().describe('The name of the space.'),
-  "state": zod.boolean().optional().describe('The state of the space.'),
-  "updatedAt": zod.string().optional().describe('The timestamp when the space was last updated (in Unix time).'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.')
-})
-
+const deleteSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
+    etag: string,
+    params?: DeleteSpaceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/spaces/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate spaces source
  */
-export const LocateSpaceParams = zod.object({
-  "etag": zod.string().describe('The Space source IDentifier.\nAccept: `etag` (obsolete+) or `id`.')
-})
-
-export const LocateSpaceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Source Fields to return into result.')
-})
-
-export const LocateSpaceResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The timestamp when the space was created (in Unix time).'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "domain": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "hasChildren": zod.boolean().optional().describe('Indicates if the space has children.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "mode": zod.string().optional().describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
-  "name": zod.string().optional().describe('The name of the space.'),
-  "state": zod.boolean().optional().describe('The state of the space.'),
-  "updatedAt": zod.string().optional().describe('The timestamp when the space was last updated (in Unix time).'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.')
-})
-
+const locateSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
+    etag: string,
+    params?: LocateSpaceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/spaces/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary NEW Update of the Space source
  */
-export const UpdateSpaceParams = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
+const updateSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
+    etag: string,
+    updateSpaceBody: UpdateSpaceBody,
+    params?: UpdateSpaceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/spaces/${etag}`,
+      updateSpaceBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateSpaceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Source Fields to return into result.')
-})
+            // --- footer start
+            return {listSpaces,createSpace,deleteSpace,locateSpace,updateSpace}};
+export type ListSpacesResult = AxiosResponse<KnowledgebaseSpaceList>
+export type CreateSpaceResult = AxiosResponse<KnowledgebaseSpace>
+export type DeleteSpaceResult = AxiosResponse<KnowledgebaseSpace>
+export type LocateSpaceResult = AxiosResponse<KnowledgebaseSpace>
+export type UpdateSpaceResult = AxiosResponse<KnowledgebaseSpace>
 
-export const UpdateSpaceBody = zod.object({
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.\nOPTIONAL. Multi-lined text.'),
-  "name": zod.string().optional().describe('Represents the name of the knowledge base space.'),
-  "state": zod.boolean().optional().describe('The state of the space.')
-})
-
-export const UpdateSpaceResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The timestamp when the space was created (in Unix time).'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "domain": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "hasChildren": zod.boolean().optional().describe('Indicates if the space has children.'),
-  "homePage": zod.string().optional().describe('BIO. Short description about the space.'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "mode": zod.string().optional().describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
-  "name": zod.string().optional().describe('The name of the space.'),
-  "state": zod.boolean().optional().describe('The state of the space.'),
-  "updatedAt": zod.string().optional().describe('The timestamp when the space was last updated (in Unix time).'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.')
-})
-
+            // --- footer end
+          

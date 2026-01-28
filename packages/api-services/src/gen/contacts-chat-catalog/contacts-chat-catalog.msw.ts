@@ -18,10 +18,10 @@ import type {
 
 import {
   WebitelChatMessageButtonRequest
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WebitelChatGetContactChatHistoryResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getContactsChatCatalogGetContactChatHistory2ResponseMock = (overrideResponse: Partial< WebitelChatGetContactChatHistoryResponse > = {}): WebitelChatGetContactChatHistoryResponse => ({chats: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({context: faker.helpers.arrayElement([{

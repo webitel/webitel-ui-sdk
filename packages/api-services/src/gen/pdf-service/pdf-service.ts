@@ -4,127 +4,105 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ListCallExportsParams,
+  ListScreenrecordingExportsParams,
+  WebitelMediaExporterDeleteExportResponse,
+  WebitelMediaExporterExportTask,
+  WebitelMediaExporterListExportsResponse,
+  WebitelMediaExporterPdfServiceCreateCallExportBody,
+  WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPdfService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Lists the history of PDF exports for a specific agent.
  */
-export const ListScreenrecordingExportsParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const ListScreenrecordingExportsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number (1-based).'),
-  "size": zod.number().optional().describe('Number of items per page.'),
-  "sort": zod.string().optional().describe('sorting criteria, e.g. \"+created_at\" or \"-name\"')
-})
-
-export const listScreenrecordingExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
-
-export const ListScreenrecordingExportsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('Creation timestamp (Unix millis).'),
-  "createdBy": zod.string().optional().describe('User ID who initiated the export.'),
-  "fileId": zod.string().optional().describe('Reference to the file in the storage system.'),
-  "id": zod.string().optional().describe('Internal database record ID.'),
-  "mimeType": zod.string().optional().describe('MIME type of the generated file.'),
-  "name": zod.string().optional().describe('Display name of the export.'),
-  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(listScreenrecordingExportsResponseItemsItemStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
-  "updatedAt": zod.string().optional().describe('Last update timestamp (Unix millis).'),
-  "updatedBy": zod.string().optional().describe('User ID who last modified the record.')
-}).describe('Represents a persisted record of a PDF export.')).optional().describe('List of export records.'),
-  "next": zod.boolean().optional().describe('Indicates if there are more records available.'),
-  "page": zod.number().optional().describe('Current page number.')
-}).describe('Response containing a page of export history records.')
-
+const listScreenrecordingExports = <TData = AxiosResponse<WebitelMediaExporterListExportsResponse>>(
+    agentId: string,
+    params?: ListScreenrecordingExportsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/agents/${agentId}/exports/pdf/screenrecordings`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Creates a new task to generate a PDF export for an agent's screen recordings.
 This operation is asynchronous and returns a task metadata.
  */
-export const CreateScreenrecordingExportParams = zod.object({
-  "agent_id": zod.string().describe('Unique identifier of the agent.')
-})
-
-export const CreateScreenrecordingExportBody = zod.object({
-  "fileIds": zod.array(zod.string()).optional().describe('Optional: specific file IDs to include in the PDF.'),
-  "from": zod.string().optional().describe('Start timestamp of the range (Unix millis).'),
-  "to": zod.string().optional().describe('End timestamp of the range (Unix millis).')
-}).describe('Request for generating a screen recording PDF.')
-
-export const createScreenrecordingExportResponseStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
-
-export const CreateScreenrecordingExportResponse = zod.object({
-  "fileName": zod.string().optional().describe('Target name of the PDF file.'),
-  "mimeType": zod.string().optional().describe('MIME type (usually application/pdf).'),
-  "size": zod.string().optional().describe('File size in bytes (0 if not yet generated).'),
-  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(createScreenrecordingExportResponseStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
-  "taskId": zod.string().optional().describe('Unique ID to track the background task.')
-}).describe('Metadata about an export task immediately after creation.')
-
+const createScreenrecordingExport = <TData = AxiosResponse<WebitelMediaExporterExportTask>>(
+    agentId: string,
+    webitelMediaExporterPdfServiceCreateScreenrecordingExportBody: WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/agents/${agentId}/exports/pdf/screenrecordings`,
+      webitelMediaExporterPdfServiceCreateScreenrecordingExportBody,options
+    );
+  }
 /**
  * @summary Lists the history of PDF exports for a specific call ID.
  */
-export const ListCallExportsParams = zod.object({
-  "call_id": zod.string()
-})
-
-export const ListCallExportsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number (1-based).'),
-  "size": zod.number().optional().describe('Number of items per page.'),
-  "sort": zod.string().optional().describe('sorting criteria, e.g. \"+created_at\" or \"-name\"')
-})
-
-export const listCallExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
-
-export const ListCallExportsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('Creation timestamp (Unix millis).'),
-  "createdBy": zod.string().optional().describe('User ID who initiated the export.'),
-  "fileId": zod.string().optional().describe('Reference to the file in the storage system.'),
-  "id": zod.string().optional().describe('Internal database record ID.'),
-  "mimeType": zod.string().optional().describe('MIME type of the generated file.'),
-  "name": zod.string().optional().describe('Display name of the export.'),
-  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(listCallExportsResponseItemsItemStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
-  "updatedAt": zod.string().optional().describe('Last update timestamp (Unix millis).'),
-  "updatedBy": zod.string().optional().describe('User ID who last modified the record.')
-}).describe('Represents a persisted record of a PDF export.')).optional().describe('List of export records.'),
-  "next": zod.boolean().optional().describe('Indicates if there are more records available.'),
-  "page": zod.number().optional().describe('Current page number.')
-}).describe('Response containing a page of export history records.')
-
+const listCallExports = <TData = AxiosResponse<WebitelMediaExporterListExportsResponse>>(
+    callId: string,
+    params?: ListCallExportsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/calls/${callId}/exports/pdf`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Creates a new task to generate a PDF export for a specific call.
 Useful for documenting call transcripts or associated media.
  */
-export const CreateCallExportParams = zod.object({
-  "call_id": zod.string().describe('Unique identifier of the call.')
-})
-
-export const CreateCallExportBody = zod.object({
-  "fileIds": zod.array(zod.string()).optional().describe('Optional: specific file IDs to include in the PDF.'),
-  "from": zod.string().optional().describe('Start timestamp of the range (Unix millis).'),
-  "to": zod.string().optional().describe('End timestamp of the range (Unix millis).')
-}).describe('Request for generating a call media PDF.')
-
-export const createCallExportResponseStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
-
-export const CreateCallExportResponse = zod.object({
-  "fileName": zod.string().optional().describe('Target name of the PDF file.'),
-  "mimeType": zod.string().optional().describe('MIME type (usually application/pdf).'),
-  "size": zod.string().optional().describe('File size in bytes (0 if not yet generated).'),
-  "status": zod.enum(['EXPORT_STATUS_UNSPECIFIED', 'PENDING', 'PROCESSING', 'DONE', 'FAILED']).default(createCallExportResponseStatusDefault).describe('Status of the PDF generation process.\n\n - PENDING: Task is queued and waiting for a worker.\n - PROCESSING: PDF is currently being rendered.\n - DONE: Export finished successfully.\n - FAILED: Export failed during generation.'),
-  "taskId": zod.string().optional().describe('Unique ID to track the background task.')
-}).describe('Metadata about an export task immediately after creation.')
-
+const createCallExport = <TData = AxiosResponse<WebitelMediaExporterExportTask>>(
+    callId: string,
+    webitelMediaExporterPdfServiceCreateCallExportBody: WebitelMediaExporterPdfServiceCreateCallExportBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/calls/${callId}/exports/pdf`,
+      webitelMediaExporterPdfServiceCreateCallExportBody,options
+    );
+  }
 /**
  * @summary Deletes a specific export record from the history.
  */
-export const DeleteExportParams = zod.object({
-  "id": zod.string().describe('ID of the record to remove.')
-})
+const deleteExport = <TData = AxiosResponse<WebitelMediaExporterDeleteExportResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/exports/pdf/history/${id}`,options
+    );
+  }
 
-export const DeleteExportResponse = zod.object({
-  "id": zod.string().optional().describe('ID of the deleted record.')
-}).describe('Response confirming the deletion of a record.')
+            // --- footer start
+            return {listScreenrecordingExports,createScreenrecordingExport,listCallExports,createCallExport,deleteExport}};
+export type ListScreenrecordingExportsResult = AxiosResponse<WebitelMediaExporterListExportsResponse>
+export type CreateScreenrecordingExportResult = AxiosResponse<WebitelMediaExporterExportTask>
+export type ListCallExportsResult = AxiosResponse<WebitelMediaExporterListExportsResponse>
+export type CreateCallExportResult = AxiosResponse<WebitelMediaExporterExportTask>
+export type DeleteExportResult = AxiosResponse<WebitelMediaExporterDeleteExportResponse>
 
+            // --- footer end
+          

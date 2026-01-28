@@ -28,7 +28,7 @@ import type {
   EngineMemberInQueue,
   EngineResetActiveAttemptsResponse,
   EngineResetMembersResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getAttemptCallbackResponseMock = (overrideResponse: Partial< EngineAttemptResultResponse > = {}): EngineAttemptResultResponse => ({status: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})

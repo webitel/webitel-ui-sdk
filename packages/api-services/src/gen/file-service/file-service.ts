@@ -4,277 +4,135 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
 
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
-export const SearchFilesByCallParams = zod.object({
-  "call_id": zod.string()
-})
-
-export const SearchFilesByCallQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "uploadedAtFrom": zod.string().optional(),
-  "uploadedAtTo": zod.string().optional(),
-  "referenceId": zod.array(zod.string()).optional(),
-  "retentionUntilFrom": zod.string().optional(),
-  "retentionUntilTo": zod.string().optional(),
-  "channel": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional().describe(' - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated')
-})
-
-export const searchFilesByCallResponseItemsItemChannelDefault = `UnknownChannel`;
-
-export const SearchFilesByCallResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel']).default(searchFilesByCallResponseItemsItemChannelDefault),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "properties": zod.object({
-  "endTime": zod.string().optional(),
-  "height": zod.string().optional(),
-  "startTime": zod.string().optional(),
-  "width": zod.string().optional()
-}).optional(),
-  "referenceId": zod.string().optional(),
-  "retentionUntil": zod.string().optional(),
-  "sha256Sum": zod.string().optional(),
-  "size": zod.string().optional(),
-  "thumbnail": zod.object({
-  "mimeType": zod.string().optional(),
-  "scale": zod.string().optional(),
-  "size": zod.string().optional()
-}).optional(),
-  "uploadedAt": zod.string().optional(),
-  "uploadedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.string().optional(),
-  "viewName": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const SearchScreenRecordingsByAgentParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const searchScreenRecordingsByAgentQueryTypeDefault = `PDF`;export const searchScreenRecordingsByAgentQueryChannelDefault = `SCREENRECORDING`;
-
-export const SearchScreenRecordingsByAgentQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "uploadedAtFrom": zod.string().optional(),
-  "uploadedAtTo": zod.string().optional(),
-  "referenceId": zod.array(zod.string()).optional(),
-  "retentionUntilFrom": zod.string().optional(),
-  "retentionUntilTo": zod.string().optional(),
-  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsByAgentQueryTypeDefault),
-  "channel": zod.enum(['SCREENRECORDING', 'CALL']).default(searchScreenRecordingsByAgentQueryChannelDefault)
-})
-
-export const searchScreenRecordingsByAgentResponseItemsItemChannelDefault = `UnknownChannel`;
-
-export const SearchScreenRecordingsByAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel']).default(searchScreenRecordingsByAgentResponseItemsItemChannelDefault),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "properties": zod.object({
-  "endTime": zod.string().optional(),
-  "height": zod.string().optional(),
-  "startTime": zod.string().optional(),
-  "width": zod.string().optional()
-}).optional(),
-  "referenceId": zod.string().optional(),
-  "retentionUntil": zod.string().optional(),
-  "sha256Sum": zod.string().optional(),
-  "size": zod.string().optional(),
-  "thumbnail": zod.object({
-  "mimeType": zod.string().optional(),
-  "scale": zod.string().optional(),
-  "size": zod.string().optional()
-}).optional(),
-  "uploadedAt": zod.string().optional(),
-  "uploadedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.string().optional(),
-  "viewName": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+import type {
+  SearchFilesByCallParams,
+  SearchFilesParams,
+  SearchScreenRecordingsByAgentParams,
+  SearchScreenRecordingsParams,
+  StorageDeleteFilesRequest,
+  StorageDeleteFilesResponse,
+  StorageDeleteQuarantineFilesRequest,
+  StorageFileServiceDeleteScreenRecordingsBody,
+  StorageFileServiceDeleteScreenRecordingsByAgentBody,
+  StorageListFile,
+  StorageRestoreFilesRequest,
+  StorageRestoreFilesResponse
+} from '../webitelAPI.schemas';
 
 
 
+            // --- header start
+            // 
 
-export const DeleteScreenRecordingsByAgentParams = zod.object({
-  "agent_id": zod.string(),
-  "id": zod.array(zod.string()).min(1)
-})
+  export const 
+            // --- title start
+            getFileService
+            // --- title end
+           = () => {
 
-export const DeleteScreenRecordingsByAgentBody = zod.object({
+            // --- header end
+          const searchFilesByCall = <TData = AxiosResponse<StorageListFile>>(
+    callId: string,
+    params?: SearchFilesByCallParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/calls/${callId}/files`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchScreenRecordingsByAgent = <TData = AxiosResponse<StorageListFile>>(
+    agentId: string,
+    params?: SearchScreenRecordingsByAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/agent/${agentId}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteScreenRecordingsByAgent = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
+    agentId: string,
+    id: string[],
+    storageFileServiceDeleteScreenRecordingsByAgentBody: StorageFileServiceDeleteScreenRecordingsByAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/agent/${agentId}/${id}`,{data:
+      storageFileServiceDeleteScreenRecordingsByAgentBody, ...options}
+    );
+  }
+const deleteFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
+    storageDeleteFilesRequest: StorageDeleteFilesRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/file`,{data:
+      storageDeleteFilesRequest, ...options}
+    );
+  }
+const searchFiles = <TData = AxiosResponse<StorageListFile>>(
+    params?: SearchFilesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/file`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteQuarantineFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
+    storageDeleteQuarantineFilesRequest: StorageDeleteQuarantineFilesRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/file/quarantine`,{data:
+      storageDeleteQuarantineFilesRequest, ...options}
+    );
+  }
+const restoreFiles = <TData = AxiosResponse<StorageRestoreFilesResponse>>(
+    storageRestoreFilesRequest: StorageRestoreFilesRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/file/restore`,
+      storageRestoreFilesRequest,options
+    );
+  }
+const searchScreenRecordings = <TData = AxiosResponse<StorageListFile>>(
+    userId: string,
+    params?: SearchScreenRecordingsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/users/${userId}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteScreenRecordings = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
+    userId: string,
+    id: string[],
+    storageFileServiceDeleteScreenRecordingsBody: StorageFileServiceDeleteScreenRecordingsBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/users/${userId}/${id}`,{data:
+      storageFileServiceDeleteScreenRecordingsBody, ...options}
+    );
+  }
 
-})
+            // --- footer start
+            return {searchFilesByCall,searchScreenRecordingsByAgent,deleteScreenRecordingsByAgent,deleteFiles,searchFiles,deleteQuarantineFiles,restoreFiles,searchScreenRecordings,deleteScreenRecordings}};
+export type SearchFilesByCallResult = AxiosResponse<StorageListFile>
+export type SearchScreenRecordingsByAgentResult = AxiosResponse<StorageListFile>
+export type DeleteScreenRecordingsByAgentResult = AxiosResponse<StorageDeleteFilesResponse>
+export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>
+export type SearchFilesResult = AxiosResponse<StorageListFile>
+export type DeleteQuarantineFilesResult = AxiosResponse<StorageDeleteFilesResponse>
+export type RestoreFilesResult = AxiosResponse<StorageRestoreFilesResponse>
+export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>
+export type DeleteScreenRecordingsResult = AxiosResponse<StorageDeleteFilesResponse>
 
-export const DeleteScreenRecordingsByAgentResponse = zod.object({
-
-})
-
-export const DeleteFilesBody = zod.object({
-  "id": zod.array(zod.string()).optional()
-})
-
-export const DeleteFilesResponse = zod.object({
-
-})
-
-export const SearchFilesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "uploadedAtFrom": zod.string().optional(),
-  "uploadedAtTo": zod.string().optional(),
-  "uploadedBy": zod.array(zod.string()).optional(),
-  "referenceId": zod.array(zod.string()).optional(),
-  "channel": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional().describe(' - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated'),
-  "retentionUntilFrom": zod.string().optional(),
-  "retentionUntilTo": zod.string().optional()
-})
-
-export const searchFilesResponseItemsItemChannelDefault = `UnknownChannel`;
-
-export const SearchFilesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel']).default(searchFilesResponseItemsItemChannelDefault),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "properties": zod.object({
-  "endTime": zod.string().optional(),
-  "height": zod.string().optional(),
-  "startTime": zod.string().optional(),
-  "width": zod.string().optional()
-}).optional(),
-  "referenceId": zod.string().optional(),
-  "retentionUntil": zod.string().optional(),
-  "sha256Sum": zod.string().optional(),
-  "size": zod.string().optional(),
-  "thumbnail": zod.object({
-  "mimeType": zod.string().optional(),
-  "scale": zod.string().optional(),
-  "size": zod.string().optional()
-}).optional(),
-  "uploadedAt": zod.string().optional(),
-  "uploadedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.string().optional(),
-  "viewName": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const DeleteQuarantineFilesBody = zod.object({
-  "id": zod.array(zod.string()).optional()
-})
-
-export const DeleteQuarantineFilesResponse = zod.object({
-
-})
-
-export const RestoreFilesBody = zod.object({
-  "id": zod.array(zod.string()).optional()
-})
-
-export const RestoreFilesResponse = zod.object({
-
-})
-
-export const SearchScreenRecordingsParams = zod.object({
-  "user_id": zod.string()
-})
-
-export const searchScreenRecordingsQueryTypeDefault = `PDF`;export const searchScreenRecordingsQueryChannelDefault = `SCREENRECORDING`;
-
-export const SearchScreenRecordingsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "uploadedAtFrom": zod.string().optional(),
-  "uploadedAtTo": zod.string().optional(),
-  "referenceId": zod.array(zod.string()).optional(),
-  "retentionUntilFrom": zod.string().optional(),
-  "retentionUntilTo": zod.string().optional(),
-  "type": zod.enum(['PDF', 'SCREENSHOT', 'SCREENSHARING']).default(searchScreenRecordingsQueryTypeDefault),
-  "channel": zod.enum(['SCREENRECORDING', 'CALL']).default(searchScreenRecordingsQueryChannelDefault)
-})
-
-export const searchScreenRecordingsResponseItemsItemChannelDefault = `UnknownChannel`;
-
-export const SearchScreenRecordingsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel']).default(searchScreenRecordingsResponseItemsItemChannelDefault),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "properties": zod.object({
-  "endTime": zod.string().optional(),
-  "height": zod.string().optional(),
-  "startTime": zod.string().optional(),
-  "width": zod.string().optional()
-}).optional(),
-  "referenceId": zod.string().optional(),
-  "retentionUntil": zod.string().optional(),
-  "sha256Sum": zod.string().optional(),
-  "size": zod.string().optional(),
-  "thumbnail": zod.object({
-  "mimeType": zod.string().optional(),
-  "scale": zod.string().optional(),
-  "size": zod.string().optional()
-}).optional(),
-  "uploadedAt": zod.string().optional(),
-  "uploadedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.string().optional(),
-  "viewName": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-
-
-
-export const DeleteScreenRecordingsParams = zod.object({
-  "user_id": zod.string(),
-  "id": zod.array(zod.string()).min(1)
-})
-
-export const DeleteScreenRecordingsBody = zod.object({
-
-})
-
-export const DeleteScreenRecordingsResponse = zod.object({
-
-})
-
+            // --- footer end
+          

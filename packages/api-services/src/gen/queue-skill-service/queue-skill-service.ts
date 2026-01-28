@@ -4,194 +4,98 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineListQueueSkill,
+  EngineQueueSkill,
+  EngineQueueSkillServiceCreateQueueSkillBody,
+  EngineQueueSkillServicePatchQueueSkillBody,
+  EngineQueueSkillServiceUpdateQueueSkillBody,
+  SearchQueueSkillParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchQueueSkillParams = zod.object({
-  "queue_id": zod.number()
-})
 
-export const SearchQueueSkillQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "skillId": zod.array(zod.number()).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "lvl": zod.array(zod.number()).optional(),
-  "minCapacity": zod.array(zod.number()).optional(),
-  "maxCapacity": zod.array(zod.number()).optional(),
-  "enabled": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const SearchQueueSkillResponse = zod.object({
-  "items": zod.array(zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getQueueSkillService
+            // --- title end
+           = () => {
 
-export const CreateQueueSkillParams = zod.object({
-  "queue_id": zod.number()
-})
+            // --- header end
+          const searchQueueSkill = <TData = AxiosResponse<EngineListQueueSkill>>(
+    queueId: number,
+    params?: SearchQueueSkillParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/skills`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createQueueSkill = <TData = AxiosResponse<EngineQueueSkill>>(
+    queueId: number,
+    engineQueueSkillServiceCreateQueueSkillBody: EngineQueueSkillServiceCreateQueueSkillBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/skills`,
+      engineQueueSkillServiceCreateQueueSkillBody,options
+    );
+  }
+const deleteQueueSkill = <TData = AxiosResponse<EngineQueueSkill>>(
+    queueId: number,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/skills/${id}`,options
+    );
+  }
+const readQueueSkill = <TData = AxiosResponse<EngineQueueSkill>>(
+    queueId: number,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/skills/${id}`,options
+    );
+  }
+const patchQueueSkill = <TData = AxiosResponse<EngineQueueSkill>>(
+    queueId: number,
+    id: number,
+    engineQueueSkillServicePatchQueueSkillBody: EngineQueueSkillServicePatchQueueSkillBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/skills/${id}`,
+      engineQueueSkillServicePatchQueueSkillBody,options
+    );
+  }
+const updateQueueSkill = <TData = AxiosResponse<EngineQueueSkill>>(
+    queueId: number,
+    id: number,
+    engineQueueSkillServiceUpdateQueueSkillBody: EngineQueueSkillServiceUpdateQueueSkillBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${queueId}/skills/${id}`,
+      engineQueueSkillServiceUpdateQueueSkillBody,options
+    );
+  }
 
-export const CreateQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchQueueSkill,createQueueSkill,deleteQueueSkill,readQueueSkill,patchQueueSkill,updateQueueSkill}};
+export type SearchQueueSkillResult = AxiosResponse<EngineListQueueSkill>
+export type CreateQueueSkillResult = AxiosResponse<EngineQueueSkill>
+export type DeleteQueueSkillResult = AxiosResponse<EngineQueueSkill>
+export type ReadQueueSkillResult = AxiosResponse<EngineQueueSkill>
+export type PatchQueueSkillResult = AxiosResponse<EngineQueueSkill>
+export type UpdateQueueSkillResult = AxiosResponse<EngineQueueSkill>
 
-export const CreateQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const DeleteQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const ReadQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const PatchQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
-
-export const UpdateQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

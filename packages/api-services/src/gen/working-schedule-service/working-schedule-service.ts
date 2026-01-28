@@ -4,337 +4,122 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  WfmCreateWorkingScheduleRequest,
+  WfmCreateWorkingScheduleResponse,
+  WfmDeleteWorkingScheduleResponse,
+  WfmReadWorkingScheduleForecastResponse,
+  WfmReadWorkingScheduleResponse,
+  WfmSearchWorkingScheduleResponse,
+  WfmUpdateWorkingScheduleAddAgentsResponse,
+  WfmUpdateWorkingScheduleRemoveAgentResponse,
+  WfmUpdateWorkingScheduleResponse,
+  WorkingScheduleServiceReadWorkingScheduleForecastParams,
+  WorkingScheduleServiceReadWorkingScheduleParams,
+  WorkingScheduleServiceSearchWorkingScheduleParams,
+  WorkingScheduleServiceUpdateWorkingScheduleAddAgentsBody,
+  WorkingScheduleServiceUpdateWorkingScheduleBody
+} from '../webitelAPI.schemas';
 
 
-export const WorkingScheduleServiceSearchWorkingScheduleQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const workingScheduleServiceSearchWorkingScheduleResponseItemsItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
+            // --- header start
+            // 
 
-export const WorkingScheduleServiceSearchWorkingScheduleResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceSearchWorkingScheduleResponseItemsItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getWorkingScheduleService
+            // --- title end
+           = () => {
 
-export const workingScheduleServiceCreateWorkingScheduleBodyItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
+            // --- header end
+          const workingScheduleServiceSearchWorkingSchedule = <TData = AxiosResponse<WfmSearchWorkingScheduleResponse>>(
+    params?: WorkingScheduleServiceSearchWorkingScheduleParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/working_schedules`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const workingScheduleServiceCreateWorkingSchedule = <TData = AxiosResponse<WfmCreateWorkingScheduleResponse>>(
+    wfmCreateWorkingScheduleRequest: WfmCreateWorkingScheduleRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/working_schedules`,
+      wfmCreateWorkingScheduleRequest,options
+    );
+  }
+const workingScheduleServiceDeleteWorkingSchedule = <TData = AxiosResponse<WfmDeleteWorkingScheduleResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/working_schedules/${id}`,options
+    );
+  }
+const workingScheduleServiceReadWorkingSchedule = <TData = AxiosResponse<WfmReadWorkingScheduleResponse>>(
+    id: string,
+    params?: WorkingScheduleServiceReadWorkingScheduleParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/working_schedules/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const workingScheduleServiceUpdateWorkingScheduleAddAgents = <TData = AxiosResponse<WfmUpdateWorkingScheduleAddAgentsResponse>>(
+    id: string,
+    workingScheduleServiceUpdateWorkingScheduleAddAgentsBody: WorkingScheduleServiceUpdateWorkingScheduleAddAgentsBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/working_schedules/${id}/agents`,
+      workingScheduleServiceUpdateWorkingScheduleAddAgentsBody,options
+    );
+  }
+const workingScheduleServiceUpdateWorkingScheduleRemoveAgent = <TData = AxiosResponse<WfmUpdateWorkingScheduleRemoveAgentResponse>>(
+    id: string,
+    agentId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/working_schedules/${id}/agents/${agentId}`,options
+    );
+  }
+const workingScheduleServiceReadWorkingScheduleForecast = <TData = AxiosResponse<WfmReadWorkingScheduleForecastResponse>>(
+    id: string,
+    params?: WorkingScheduleServiceReadWorkingScheduleForecastParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/working_schedules/${id}/forecast`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const workingScheduleServiceUpdateWorkingSchedule = <TData = AxiosResponse<WfmUpdateWorkingScheduleResponse>>(
+    workingScheduleServiceUpdateWorkingScheduleBody: WorkingScheduleServiceUpdateWorkingScheduleBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/lookups/working_schedules/item.id}`,
+      workingScheduleServiceUpdateWorkingScheduleBody,options
+    );
+  }
 
-export const WorkingScheduleServiceCreateWorkingScheduleBody = zod.object({
-  "item": zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceCreateWorkingScheduleBodyItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- footer start
+            return {workingScheduleServiceSearchWorkingSchedule,workingScheduleServiceCreateWorkingSchedule,workingScheduleServiceDeleteWorkingSchedule,workingScheduleServiceReadWorkingSchedule,workingScheduleServiceUpdateWorkingScheduleAddAgents,workingScheduleServiceUpdateWorkingScheduleRemoveAgent,workingScheduleServiceReadWorkingScheduleForecast,workingScheduleServiceUpdateWorkingSchedule}};
+export type WorkingScheduleServiceSearchWorkingScheduleResult = AxiosResponse<WfmSearchWorkingScheduleResponse>
+export type WorkingScheduleServiceCreateWorkingScheduleResult = AxiosResponse<WfmCreateWorkingScheduleResponse>
+export type WorkingScheduleServiceDeleteWorkingScheduleResult = AxiosResponse<WfmDeleteWorkingScheduleResponse>
+export type WorkingScheduleServiceReadWorkingScheduleResult = AxiosResponse<WfmReadWorkingScheduleResponse>
+export type WorkingScheduleServiceUpdateWorkingScheduleAddAgentsResult = AxiosResponse<WfmUpdateWorkingScheduleAddAgentsResponse>
+export type WorkingScheduleServiceUpdateWorkingScheduleRemoveAgentResult = AxiosResponse<WfmUpdateWorkingScheduleRemoveAgentResponse>
+export type WorkingScheduleServiceReadWorkingScheduleForecastResult = AxiosResponse<WfmReadWorkingScheduleForecastResponse>
+export type WorkingScheduleServiceUpdateWorkingScheduleResult = AxiosResponse<WfmUpdateWorkingScheduleResponse>
 
-export const workingScheduleServiceCreateWorkingScheduleResponseItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
-
-export const WorkingScheduleServiceCreateWorkingScheduleResponse = zod.object({
-  "item": zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceCreateWorkingScheduleResponseItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const WorkingScheduleServiceDeleteWorkingScheduleParams = zod.object({
-  "id": zod.string()
-})
-
-export const WorkingScheduleServiceDeleteWorkingScheduleResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const WorkingScheduleServiceReadWorkingScheduleParams = zod.object({
-  "id": zod.string()
-})
-
-export const WorkingScheduleServiceReadWorkingScheduleQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const workingScheduleServiceReadWorkingScheduleResponseItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
-
-export const WorkingScheduleServiceReadWorkingScheduleResponse = zod.object({
-  "item": zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceReadWorkingScheduleResponseItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleAddAgentsParams = zod.object({
-  "id": zod.string()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleAddAgentsBody = zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleAddAgentsResponse = zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleRemoveAgentParams = zod.object({
-  "id": zod.string(),
-  "agent_id": zod.string()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleRemoveAgentResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const WorkingScheduleServiceReadWorkingScheduleForecastParams = zod.object({
-  "id": zod.string()
-})
-
-export const WorkingScheduleServiceReadWorkingScheduleForecastQueryParams = zod.object({
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional()
-})
-
-export const WorkingScheduleServiceReadWorkingScheduleForecastResponse = zod.object({
-  "items": zod.record(zod.string(), zod.object({
-  "forecast": zod.array(zod.object({
-  "agents": zod.string().optional(),
-  "hour": zod.string().optional()
-})).optional()
-})).optional()
-})
-
-export const WorkingScheduleServiceUpdateWorkingScheduleParams = zod.object({
-  "item.id": zod.string()
-})
-
-export const workingScheduleServiceUpdateWorkingScheduleBodyItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
-
-export const WorkingScheduleServiceUpdateWorkingScheduleBody = zod.object({
-  "item": zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceUpdateWorkingScheduleBodyItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const workingScheduleServiceUpdateWorkingScheduleResponseItemStateDefault = `WORKING_SCHEDULE_STATE_UNSPECIFIED`;
-
-export const WorkingScheduleServiceUpdateWorkingScheduleResponse = zod.object({
-  "item": zod.object({
-  "agents": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "blockOutsideActivity": zod.boolean().optional(),
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "endDateAt": zod.string().optional(),
-  "endTimeAt": zod.string().optional(),
-  "extraSkills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "startDateAt": zod.string().optional(),
-  "startTimeAt": zod.string().optional(),
-  "state": zod.enum(['WORKING_SCHEDULE_STATE_UNSPECIFIED', 'WORKING_SCHEDULE_STATE_ACTIVE', 'WORKING_SCHEDULE_STATE_PENDING', 'WORKING_SCHEDULE_STATE_DRAFT', 'WORKING_SCHEDULE_STATE_ARCHIVED']).default(workingScheduleServiceUpdateWorkingScheduleResponseItemStateDefault),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "totalAgents": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- footer end
+          

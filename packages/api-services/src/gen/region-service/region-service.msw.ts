@@ -19,7 +19,7 @@ import type {
 import type {
   EngineListRegion,
   EngineRegion
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchRegionResponseMock = (overrideResponse: Partial< EngineListRegion > = {}): EngineListRegion => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), timezone: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

@@ -4,362 +4,130 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiGetCustomerResponse,
+  ApiLicenseUsageResponse,
+  ApiLicenseUsersResponse,
+  ApiServerInfoResponse,
+  ApiUpdateCustomerResponse,
+  GetCustomer2Params,
+  GetCustomerParams,
+  LicenseUsage2Params,
+  LicenseUsage3Params,
+  LicenseUsageParams,
+  LicenseUsersParams,
+  UpdateCustomerParams
+} from '../webitelAPI.schemas';
 
 
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCustomers
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
+ */
+const getCustomer = <TData = AxiosResponse<ApiGetCustomerResponse>>(
+    params?: GetCustomerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/customer`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateCustomer = <TData = AxiosResponse<ApiUpdateCustomerResponse>>(
+    params?: UpdateCustomerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/customer`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const licenseUsage = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
+    customerId: string,
+    params?: LicenseUsageParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/customer/${customerId}/license`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
  */
-export const GetCustomerQueryParams = zod.object({
-  "id": zod.string().optional().describe('Available Filters\n\nshow by customer id; serial number (uuid)'),
-  "valid": zod.boolean().optional().describe('show if valid only!'),
-  "domainId": zod.string().optional().describe('identifier'),
-  "domainName": zod.string().optional().describe('display name'),
-  "fields": zod.array(zod.string()).optional().describe('Request Controls\n\nserial,'),
-  "sort": zod.array(zod.string()).optional()
-})
+const getCustomer2 = <TData = AxiosResponse<ApiGetCustomerResponse>>(
+    id: string,
+    params?: GetCustomer2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/customer/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const licenseUsage2 = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
+    params?: LicenseUsage2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/license`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const licenseUsage3 = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
+    params?: LicenseUsage3Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/products`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const licenseUsers = <TData = AxiosResponse<ApiLicenseUsersResponse>>(
+    id: string,
+    params?: LicenseUsersParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/products/${id}/users`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const serverInfo = <TData = AxiosResponse<ApiServerInfoResponse>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/srvinfo`,options
+    );
+  }
 
-export const GetCustomerResponse = zod.object({
-  "customer": zod.object({
-  "createdAt": zod.string().optional().describe('local created ms'),
-  "dnsrv": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional().describe('[required] issuer(CA) created at'),
-  "license": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional().describe('grants issued'),
-  "limit": zod.record(zod.string(), zod.number()).optional().describe('defines map[class]limit usage'),
-  "nextUpdate": zod.string().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "organization": zod.string().optional(),
-  "revokedAt": zod.string().optional(),
-  "thisUpdate": zod.string().optional().describe('[optional]: issuer(CA) signed at'),
-  "updatedAt": zod.string().optional(),
-  "verify": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional()
-}).optional()
-})
+            // --- footer start
+            return {getCustomer,updateCustomer,licenseUsage,getCustomer2,licenseUsage2,licenseUsage3,licenseUsers,serverInfo}};
+export type GetCustomerResult = AxiosResponse<ApiGetCustomerResponse>
+export type UpdateCustomerResult = AxiosResponse<ApiUpdateCustomerResponse>
+export type LicenseUsageResult = AxiosResponse<ApiLicenseUsageResponse>
+export type GetCustomer2Result = AxiosResponse<ApiGetCustomerResponse>
+export type LicenseUsage2Result = AxiosResponse<ApiLicenseUsageResponse>
+export type LicenseUsage3Result = AxiosResponse<ApiLicenseUsageResponse>
+export type LicenseUsersResult = AxiosResponse<ApiLicenseUsersResponse>
+export type ServerInfoResult = AxiosResponse<ApiServerInfoResponse>
 
-export const UpdateCustomerQueryParams = zod.object({
-  "organization": zod.string().optional().describe('[optional] e.g.: Example Org.'),
-  "logoPicture": zod.string().optional().describe('[optional] logo source image'),
-  "certificate": zod.string().optional().describe('[optional] raw bytes protobuf::base64.RawStdEncoding != certificate::base64.StdEncoding'),
-  "revoke": zod.boolean().optional()
-})
-
-export const UpdateCustomerResponse = zod.object({
-  "customer": zod.object({
-  "createdAt": zod.string().optional().describe('local created ms'),
-  "dnsrv": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional().describe('[required] issuer(CA) created at'),
-  "license": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional().describe('grants issued'),
-  "limit": zod.record(zod.string(), zod.number()).optional().describe('defines map[class]limit usage'),
-  "nextUpdate": zod.string().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "organization": zod.string().optional(),
-  "revokedAt": zod.string().optional(),
-  "thisUpdate": zod.string().optional().describe('[optional]: issuer(CA) signed at'),
-  "updatedAt": zod.string().optional(),
-  "verify": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional()
-}).optional()
-})
-
-export const LicenseUsageParams = zod.object({
-  "customer_id": zod.string()
-})
-
-export const LicenseUsageQueryParams = zod.object({
-  "size": zod.number().optional().describe('----- Search Options ----- //\n\ndefault: 16'),
-  "page": zod.number().optional().describe('default: 1'),
-  "fields": zod.array(zod.string()).optional().describe('set of output fields'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "userId": zod.string().optional().describe('identifier'),
-  "userName": zod.string().optional().describe('display name'),
-  "domainId": zod.string().optional().describe('identifier'),
-  "domainName": zod.string().optional().describe('display name'),
-  "id": zod.array(zod.string()).optional().describe('by serial number(s)'),
-  "product": zod.array(zod.string()).optional().describe('by product name(s)'),
-  "valid": zod.boolean().optional().describe('view: all|valid|grantable\n\nshow: available to be granted'),
-  "q": zod.string().optional().describe('filter: term of search')
-})
-
-export const LicenseUsageResponse = zod.object({
-  "items": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('this page number !')
-})
-
-/**
- * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
- */
-export const GetCustomer2Params = zod.object({
-  "id": zod.string().describe('Available Filters\n\nshow by customer id; serial number (uuid)')
-})
-
-export const GetCustomer2QueryParams = zod.object({
-  "valid": zod.boolean().optional().describe('show if valid only!'),
-  "domainId": zod.string().optional().describe('identifier'),
-  "domainName": zod.string().optional().describe('display name'),
-  "fields": zod.array(zod.string()).optional().describe('Request Controls\n\nserial,'),
-  "sort": zod.array(zod.string()).optional()
-})
-
-export const GetCustomer2Response = zod.object({
-  "customer": zod.object({
-  "createdAt": zod.string().optional().describe('local created ms'),
-  "dnsrv": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional().describe('[required] issuer(CA) created at'),
-  "license": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional().describe('grants issued'),
-  "limit": zod.record(zod.string(), zod.number()).optional().describe('defines map[class]limit usage'),
-  "nextUpdate": zod.string().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "organization": zod.string().optional(),
-  "revokedAt": zod.string().optional(),
-  "thisUpdate": zod.string().optional().describe('[optional]: issuer(CA) signed at'),
-  "updatedAt": zod.string().optional(),
-  "verify": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional()
-}).optional()
-})
-
-export const LicenseUsage2QueryParams = zod.object({
-  "size": zod.number().optional().describe('----- Search Options ----- //\n\ndefault: 16'),
-  "page": zod.number().optional().describe('default: 1'),
-  "fields": zod.array(zod.string()).optional().describe('set of output fields'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "userId": zod.string().optional().describe('identifier'),
-  "userName": zod.string().optional().describe('display name'),
-  "domainId": zod.string().optional().describe('identifier'),
-  "domainName": zod.string().optional().describe('display name'),
-  "customerId": zod.string().optional(),
-  "id": zod.array(zod.string()).optional().describe('by serial number(s)'),
-  "product": zod.array(zod.string()).optional().describe('by product name(s)'),
-  "valid": zod.boolean().optional().describe('view: all|valid|grantable\n\nshow: available to be granted'),
-  "q": zod.string().optional().describe('filter: term of search')
-})
-
-export const LicenseUsage2Response = zod.object({
-  "items": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('this page number !')
-})
-
-export const LicenseUsage3QueryParams = zod.object({
-  "size": zod.number().optional().describe('----- Search Options ----- //\n\ndefault: 16'),
-  "page": zod.number().optional().describe('default: 1'),
-  "fields": zod.array(zod.string()).optional().describe('set of output fields'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "userId": zod.string().optional().describe('identifier'),
-  "userName": zod.string().optional().describe('display name'),
-  "domainId": zod.string().optional().describe('identifier'),
-  "domainName": zod.string().optional().describe('display name'),
-  "customerId": zod.string().optional(),
-  "id": zod.array(zod.string()).optional().describe('by serial number(s)'),
-  "product": zod.array(zod.string()).optional().describe('by product name(s)'),
-  "valid": zod.boolean().optional().describe('view: all|valid|grantable\n\nshow: available to be granted'),
-  "q": zod.string().optional().describe('filter: term of search')
-})
-
-export const LicenseUsage3Response = zod.object({
-  "items": zod.array(zod.object({
-  "competitive": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "notAfter": zod.string().optional(),
-  "notBefore": zod.string().optional(),
-  "product": zod.string().optional(),
-  "remain": zod.number().optional().describe('available'),
-  "scope": zod.array(zod.string()).optional().describe('list of known classes, &this product grants mandatory access to, e.g.: \'users\', \'roles\', \'cc_agent\', \'calendars\', ...'),
-  "status": zod.object({
-  "errors": zod.array(zod.string()).optional(),
-  "notify": zod.array(zod.string()).optional()
-}).optional(),
-  "users": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('this page number !')
-})
-
-export const LicenseUsersParams = zod.object({
-  "id": zod.string().describe('----- Search Filters ----- //\n\nREQUIRED Product ID')
-})
-
-export const LicenseUsersQueryParams = zod.object({
-  "size": zod.number().optional().describe('----- Search Options ----- //\n\ndefault: 16'),
-  "page": zod.number().optional().describe('default: 1'),
-  "fields": zod.array(zod.string()).optional().describe('set of output fields'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "q": zod.string().optional().describe('filter: term of search (username)')
-})
-
-export const LicenseUsersResponse = zod.object({
-  "items": zod.array(zod.object({
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "expiresAt": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "sessions": zod.number().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('this page number !')
-})
-
-export const ServerInfoResponse = zod.object({
-  "key": zod.string().optional()
-})
-
+            // --- footer end
+          

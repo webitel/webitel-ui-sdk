@@ -4,485 +4,227 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteOutboundResourceDisplayParams,
+  DeleteOutboundResourceDisplaysParams,
+  DeleteOutboundResourceParams,
+  EngineCreateOutboundResourceRequest,
+  EngineEmptyResponse,
+  EngineListOutboundResource,
+  EngineListOutboundResourceDisplay,
+  EngineListResourceDisplay,
+  EngineOutboundResource,
+  EngineOutboundResourceServiceCreateOutboundResourceDisplayBody,
+  EngineOutboundResourceServiceCreateOutboundResourceDisplayBulkBody,
+  EngineOutboundResourceServicePatchOutboundResourceBody,
+  EngineOutboundResourceServiceUpdateOutboundResourceBody,
+  EngineOutboundResourceServiceUpdateOutboundResourceDisplayBody,
+  EngineResourceDisplay,
+  ReadOutboundResourceDisplayParams,
+  ReadOutboundResourceParams,
+  SearchOutboundResourceDisplayParams,
+  SearchOutboundResourceParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getOutboundResourceService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of OutboundResource
  */
-export const SearchOutboundResourceQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchOutboundResourceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchOutboundResource = <TData = AxiosResponse<EngineListOutboundResource>>(
+    params?: SearchOutboundResourceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resources`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create OutboundResource
  */
-export const CreateOutboundResourceBody = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const CreateOutboundResourceResponse = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const createOutboundResource = <TData = AxiosResponse<EngineOutboundResource>>(
+    engineCreateOutboundResourceRequest: EngineCreateOutboundResourceRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/resources`,
+      engineCreateOutboundResourceRequest,options
+    );
+  }
 /**
  * @summary Remove OutboundResource
  */
-export const DeleteOutboundResourceParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteOutboundResourceQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteOutboundResourceResponse = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const deleteOutboundResource = <TData = AxiosResponse<EngineOutboundResource>>(
+    id: string,
+    params?: DeleteOutboundResourceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/resources/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary OutboundResource item
  */
-export const ReadOutboundResourceParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadOutboundResourceQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadOutboundResourceResponse = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const readOutboundResource = <TData = AxiosResponse<EngineOutboundResource>>(
+    id: string,
+    params?: ReadOutboundResourceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resources/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch OutboundResource
  */
-export const PatchOutboundResourceParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchOutboundResourceBody = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const PatchOutboundResourceResponse = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const patchOutboundResource = <TData = AxiosResponse<EngineOutboundResource>>(
+    id: string,
+    engineOutboundResourceServicePatchOutboundResourceBody: EngineOutboundResourceServicePatchOutboundResourceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/resources/${id}`,
+      engineOutboundResourceServicePatchOutboundResourceBody,options
+    );
+  }
 /**
  * @summary Update OutboundResource
  */
-export const UpdateOutboundResourceParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateOutboundResourceBody = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const UpdateOutboundResourceResponse = zod.object({
-  "parameters": zod.object({
-  "cidType": zod.string().optional(),
-  "ignoreEarlyMedia": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "errorIds": zod.array(zod.string()).optional(),
-  "failureDialDelay": zod.number().optional(),
-  "gateway": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "lastErrorAt": zod.string().optional(),
-  "lastErrorId": zod.string().optional(),
-  "limit": zod.number().optional(),
-  "maxSuccessivelyErrors": zod.number().optional(),
-  "name": zod.string().optional(),
-  "number": zod.string().optional(),
-  "patterns": zod.array(zod.string()).optional(),
-  "reserve": zod.boolean().optional(),
-  "rps": zod.number().optional(),
-  "successivelyErrors": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
-
+const updateOutboundResource = <TData = AxiosResponse<EngineOutboundResource>>(
+    id: string,
+    engineOutboundResourceServiceUpdateOutboundResourceBody: EngineOutboundResourceServiceUpdateOutboundResourceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/resources/${id}`,
+      engineOutboundResourceServiceUpdateOutboundResourceBody,options
+    );
+  }
 /**
  * @summary Remove ResourceDisplays
  */
-export const DeleteOutboundResourceDisplaysParams = zod.object({
-  "resource_id": zod.string()
-})
-
-export const DeleteOutboundResourceDisplaysQueryParams = zod.object({
-  "items": zod.array(zod.string()).optional()
-})
-
-export const DeleteOutboundResourceDisplaysResponse = zod.object({
-
-})
-
+const deleteOutboundResourceDisplays = <TData = AxiosResponse<EngineEmptyResponse>>(
+    resourceId: string,
+    params?: DeleteOutboundResourceDisplaysParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/resources/${resourceId}/display`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List of ResourceDisplay
  */
-export const SearchOutboundResourceDisplayParams = zod.object({
-  "resource_id": zod.string()
-})
-
-export const SearchOutboundResourceDisplayQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchOutboundResourceDisplayResponse = zod.object({
-  "items": zod.array(zod.object({
-  "display": zod.string().optional(),
-  "id": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchOutboundResourceDisplay = <TData = AxiosResponse<EngineListOutboundResourceDisplay>>(
+    resourceId: string,
+    params?: SearchOutboundResourceDisplayParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resources/${resourceId}/display`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create CreateOutboundResourceDisplay
  */
-export const CreateOutboundResourceDisplayParams = zod.object({
-  "resource_id": zod.string()
-})
-
-export const CreateOutboundResourceDisplayBody = zod.object({
-  "display": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
-
-export const CreateOutboundResourceDisplayResponse = zod.object({
-  "display": zod.string().optional(),
-  "id": zod.string().optional()
-})
-
+const createOutboundResourceDisplay = <TData = AxiosResponse<EngineResourceDisplay>>(
+    resourceId: string,
+    engineOutboundResourceServiceCreateOutboundResourceDisplayBody: EngineOutboundResourceServiceCreateOutboundResourceDisplayBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/resources/${resourceId}/display`,
+      engineOutboundResourceServiceCreateOutboundResourceDisplayBody,options
+    );
+  }
 /**
  * @summary Create CreateOutboundResourceDisplay
  */
-export const CreateOutboundResourceDisplayBulkParams = zod.object({
-  "resource_id": zod.string()
-})
-
-export const CreateOutboundResourceDisplayBulkBody = zod.object({
-  "items": zod.array(zod.object({
-  "display": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "resourceId": zod.string().optional()
-})).optional()
-})
-
-export const CreateOutboundResourceDisplayBulkResponse = zod.object({
-  "id": zod.array(zod.string()).optional()
-})
-
+const createOutboundResourceDisplayBulk = <TData = AxiosResponse<EngineListResourceDisplay>>(
+    resourceId: string,
+    engineOutboundResourceServiceCreateOutboundResourceDisplayBulkBody: EngineOutboundResourceServiceCreateOutboundResourceDisplayBulkBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/resources/${resourceId}/display/bulk`,
+      engineOutboundResourceServiceCreateOutboundResourceDisplayBulkBody,options
+    );
+  }
 /**
  * @summary Remove ResourceDisplay
  */
-export const DeleteOutboundResourceDisplayParams = zod.object({
-  "resource_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteOutboundResourceDisplayQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteOutboundResourceDisplayResponse = zod.object({
-  "display": zod.string().optional(),
-  "id": zod.string().optional()
-})
-
+const deleteOutboundResourceDisplay = <TData = AxiosResponse<EngineResourceDisplay>>(
+    resourceId: string,
+    id: string,
+    params?: DeleteOutboundResourceDisplayParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/resources/${resourceId}/display/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary ResourceDisplay item
  */
-export const ReadOutboundResourceDisplayParams = zod.object({
-  "resource_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadOutboundResourceDisplayQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadOutboundResourceDisplayResponse = zod.object({
-  "display": zod.string().optional(),
-  "id": zod.string().optional()
-})
-
+const readOutboundResourceDisplay = <TData = AxiosResponse<EngineResourceDisplay>>(
+    resourceId: string,
+    id: string,
+    params?: ReadOutboundResourceDisplayParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resources/${resourceId}/display/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update ResourceDisplay
  */
-export const UpdateOutboundResourceDisplayParams = zod.object({
-  "resource_id": zod.string(),
-  "id": zod.string()
-})
+const updateOutboundResourceDisplay = <TData = AxiosResponse<EngineResourceDisplay>>(
+    resourceId: string,
+    id: string,
+    engineOutboundResourceServiceUpdateOutboundResourceDisplayBody: EngineOutboundResourceServiceUpdateOutboundResourceDisplayBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/resources/${resourceId}/display/${id}`,
+      engineOutboundResourceServiceUpdateOutboundResourceDisplayBody,options
+    );
+  }
 
-export const UpdateOutboundResourceDisplayBody = zod.object({
-  "display": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
+            // --- footer start
+            return {searchOutboundResource,createOutboundResource,deleteOutboundResource,readOutboundResource,patchOutboundResource,updateOutboundResource,deleteOutboundResourceDisplays,searchOutboundResourceDisplay,createOutboundResourceDisplay,createOutboundResourceDisplayBulk,deleteOutboundResourceDisplay,readOutboundResourceDisplay,updateOutboundResourceDisplay}};
+export type SearchOutboundResourceResult = AxiosResponse<EngineListOutboundResource>
+export type CreateOutboundResourceResult = AxiosResponse<EngineOutboundResource>
+export type DeleteOutboundResourceResult = AxiosResponse<EngineOutboundResource>
+export type ReadOutboundResourceResult = AxiosResponse<EngineOutboundResource>
+export type PatchOutboundResourceResult = AxiosResponse<EngineOutboundResource>
+export type UpdateOutboundResourceResult = AxiosResponse<EngineOutboundResource>
+export type DeleteOutboundResourceDisplaysResult = AxiosResponse<EngineEmptyResponse>
+export type SearchOutboundResourceDisplayResult = AxiosResponse<EngineListOutboundResourceDisplay>
+export type CreateOutboundResourceDisplayResult = AxiosResponse<EngineResourceDisplay>
+export type CreateOutboundResourceDisplayBulkResult = AxiosResponse<EngineListResourceDisplay>
+export type DeleteOutboundResourceDisplayResult = AxiosResponse<EngineResourceDisplay>
+export type ReadOutboundResourceDisplayResult = AxiosResponse<EngineResourceDisplay>
+export type UpdateOutboundResourceDisplayResult = AxiosResponse<EngineResourceDisplay>
 
-export const UpdateOutboundResourceDisplayResponse = zod.object({
-  "display": zod.string().optional(),
-  "id": zod.string().optional()
-})
-
+            // --- footer end
+          

@@ -4,356 +4,126 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateServiceParams,
+  ListServicesParams,
+  LocateServiceParams,
+  UpdateService2Params,
+  UpdateServiceParams,
+  WebitelCasesInputCreateService,
+  WebitelCasesInputService,
+  WebitelCasesLocateServiceResponse,
+  WebitelCasesService,
+  WebitelCasesServiceList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getServices
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of services or search services within a catalog
  */
-export const ListServicesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number for pagination'),
-  "size": zod.number().optional().describe('Number of records per page'),
-  "sort": zod.string().optional().describe('Sorting options by fields'),
-  "id": zod.array(zod.string()).optional().describe('List of IDs to filter the services'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names'),
-  "rootId": zod.string().optional().describe('Filter services by catalog ID (required)'),
-  "state": zod.boolean().optional().describe('Filter by state (true for active, false for inactive)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const ListServicesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listServices = <TData = AxiosResponse<WebitelCasesServiceList>>(
+    params?: ListServicesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/services`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new service within a catalog
  */
-export const CreateServiceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const CreateServiceBody = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional()
-})
-
-export const CreateServiceResponse = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createService = <TData = AxiosResponse<WebitelCasesService>>(
+    webitelCasesInputCreateService: WebitelCasesInputCreateService,
+    params?: CreateServiceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/services`,
+      webitelCasesInputCreateService,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a service
  */
-
-
-
-export const DeleteServiceParams = zod.object({
-  "id": zod.array(zod.string()).min(1).describe('ID of the service to be deleted')
-})
-
-export const DeleteServiceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const deleteService = <TData = AxiosResponse<WebitelCasesServiceList>>(
+    id: string[], options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/services/${id}`,options
+    );
+  }
 /**
  * @summary Locate a service by ID
  */
-export const LocateServiceParams = zod.object({
-  "id": zod.string().describe('ID of the service to be located')
-})
-
-export const LocateServiceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const LocateServiceResponse = zod.object({
-  "service": zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locateService = <TData = AxiosResponse<WebitelCasesLocateServiceResponse>>(
+    id: string,
+    params?: LocateServiceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/services/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing service
  */
-export const UpdateService2Params = zod.object({
-  "id": zod.string().describe('ID of the service to be updated')
-})
-
-export const UpdateService2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateService2Body = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional()
-})
-
-export const UpdateService2Response = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateService2 = <TData = AxiosResponse<WebitelCasesService>>(
+    id: string,
+    webitelCasesInputService: WebitelCasesInputService,
+    params?: UpdateService2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/services/${id}`,
+      webitelCasesInputService,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing service
  */
-export const UpdateServiceParams = zod.object({
-  "id": zod.string().describe('ID of the service to be updated')
-})
+const updateService = <TData = AxiosResponse<WebitelCasesService>>(
+    id: string,
+    webitelCasesInputService: WebitelCasesInputService,
+    params?: UpdateServiceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/services/${id}`,
+      webitelCasesInputService,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateServiceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- footer start
+            return {listServices,createService,deleteService,locateService,updateService2,updateService}};
+export type ListServicesResult = AxiosResponse<WebitelCasesServiceList>
+export type CreateServiceResult = AxiosResponse<WebitelCasesService>
+export type DeleteServiceResult = AxiosResponse<WebitelCasesServiceList>
+export type LocateServiceResult = AxiosResponse<WebitelCasesLocateServiceResponse>
+export type UpdateService2Result = AxiosResponse<WebitelCasesService>
+export type UpdateServiceResult = AxiosResponse<WebitelCasesService>
 
-export const UpdateServiceBody = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional()
-})
-
-export const UpdateServiceResponse = zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

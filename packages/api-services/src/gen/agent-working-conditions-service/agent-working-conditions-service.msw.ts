@@ -19,7 +19,7 @@ import type {
 import type {
   WfmReadAgentWorkingConditionsResponse,
   WfmUpdateAgentWorkingConditionsResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getAgentWorkingConditionsServiceReadAgentWorkingConditionsResponseMock = (overrideResponse: Partial< WfmReadAgentWorkingConditionsResponse > = {}): WfmReadAgentWorkingConditionsResponse => ({item: faker.helpers.arrayElement([{pauseTemplate: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), workingCondition: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})

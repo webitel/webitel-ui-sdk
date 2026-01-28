@@ -4,163 +4,98 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineListTeamHook,
+  EngineTeamHook,
+  EngineTeamHookServiceCreateTeamHookBody,
+  EngineTeamHookServicePatchTeamHookBody,
+  EngineTeamHookServiceUpdateTeamHookBody,
+  SearchTeamHookParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchTeamHookParams = zod.object({
-  "team_id": zod.string()
-})
 
-export const SearchTeamHookQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional(),
-  "event": zod.array(zod.enum(['teamHookEventUndefined', 'agent_status'])).optional()
-})
+            // --- header start
+            // 
 
-export const searchTeamHookResponseItemsItemEventDefault = `teamHookEventUndefined`;
+  export const 
+            // --- title start
+            getTeamHookService
+            // --- title end
+           = () => {
 
-export const SearchTeamHookResponse = zod.object({
-  "items": zod.array(zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(searchTeamHookResponseItemsItemEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header end
+          const searchTeamHook = <TData = AxiosResponse<EngineListTeamHook>>(
+    teamId: string,
+    params?: SearchTeamHookParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/${teamId}/hooks`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+    teamId: string,
+    engineTeamHookServiceCreateTeamHookBody: EngineTeamHookServiceCreateTeamHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/teams/${teamId}/hooks`,
+      engineTeamHookServiceCreateTeamHookBody,options
+    );
+  }
+const deleteTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+    teamId: string,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/teams/${teamId}/hooks/${id}`,options
+    );
+  }
+const readTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+    teamId: string,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/${teamId}/hooks/${id}`,options
+    );
+  }
+const patchTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+    teamId: string,
+    id: number,
+    engineTeamHookServicePatchTeamHookBody: EngineTeamHookServicePatchTeamHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/teams/${teamId}/hooks/${id}`,
+      engineTeamHookServicePatchTeamHookBody,options
+    );
+  }
+const updateTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+    teamId: string,
+    id: number,
+    engineTeamHookServiceUpdateTeamHookBody: EngineTeamHookServiceUpdateTeamHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/teams/${teamId}/hooks/${id}`,
+      engineTeamHookServiceUpdateTeamHookBody,options
+    );
+  }
 
-export const CreateTeamHookParams = zod.object({
-  "team_id": zod.string()
-})
+            // --- footer start
+            return {searchTeamHook,createTeamHook,deleteTeamHook,readTeamHook,patchTeamHook,updateTeamHook}};
+export type SearchTeamHookResult = AxiosResponse<EngineListTeamHook>
+export type CreateTeamHookResult = AxiosResponse<EngineTeamHook>
+export type DeleteTeamHookResult = AxiosResponse<EngineTeamHook>
+export type ReadTeamHookResult = AxiosResponse<EngineTeamHook>
+export type PatchTeamHookResult = AxiosResponse<EngineTeamHook>
+export type UpdateTeamHookResult = AxiosResponse<EngineTeamHook>
 
-export const createTeamHookBodyEventDefault = `teamHookEventUndefined`;
-
-export const CreateTeamHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(createTeamHookBodyEventDefault),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const createTeamHookResponseEventDefault = `teamHookEventUndefined`;
-
-export const CreateTeamHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(createTeamHookResponseEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteTeamHookParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const deleteTeamHookResponseEventDefault = `teamHookEventUndefined`;
-
-export const DeleteTeamHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(deleteTeamHookResponseEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadTeamHookParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const readTeamHookResponseEventDefault = `teamHookEventUndefined`;
-
-export const ReadTeamHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(readTeamHookResponseEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchTeamHookParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const patchTeamHookBodyEventDefault = `teamHookEventUndefined`;
-
-export const PatchTeamHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(patchTeamHookBodyEventDefault),
-  "fields": zod.array(zod.string()).optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const patchTeamHookResponseEventDefault = `teamHookEventUndefined`;
-
-export const PatchTeamHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(patchTeamHookResponseEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateTeamHookParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const updateTeamHookBodyEventDefault = `teamHookEventUndefined`;
-
-export const UpdateTeamHookBody = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(updateTeamHookBodyEventDefault),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const updateTeamHookResponseEventDefault = `teamHookEventUndefined`;
-
-export const UpdateTeamHookResponse = zod.object({
-  "enabled": zod.boolean().optional(),
-  "event": zod.enum(['teamHookEventUndefined', 'agent_status']).default(updateTeamHookResponseEventDefault),
-  "id": zod.number().optional(),
-  "properties": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

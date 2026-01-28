@@ -4,246 +4,134 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteRoutingOutboundCallParams,
+  EngineCreateRoutingOutboundCallRequest,
+  EngineListRoutingOutboundCall,
+  EngineMovePositionRoutingOutboundCallResponse,
+  EngineRoutingOutboundCall,
+  EngineRoutingOutboundCallServiceMovePositionRoutingOutboundCallBody,
+  EngineRoutingOutboundCallServicePatchRoutingOutboundCallBody,
+  EngineRoutingOutboundCallServiceUpdateRoutingOutboundCallBody,
+  ReadRoutingOutboundCallParams,
+  SearchRoutingOutboundCallParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getRoutingOutboundCallService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of RoutingOutboundCall
  */
-export const SearchRoutingOutboundCallQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "name": zod.string().optional(),
-  "schemaId": zod.array(zod.number()).optional(),
-  "pattern": zod.string().optional(),
-  "description": zod.string().optional()
-})
-
-export const SearchRoutingOutboundCallResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "position": zod.number().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchRoutingOutboundCall = <TData = AxiosResponse<EngineListRoutingOutboundCall>>(
+    params?: SearchRoutingOutboundCallParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/outbound/calls`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create RoutingOutboundCall
  */
-export const CreateRoutingOutboundCallBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateRoutingOutboundCallResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createRoutingOutboundCall = <TData = AxiosResponse<EngineRoutingOutboundCall>>(
+    engineCreateRoutingOutboundCallRequest: EngineCreateRoutingOutboundCallRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/routing/outbound/calls`,
+      engineCreateRoutingOutboundCallRequest,options
+    );
+  }
 /**
  * @summary Move RoutingOutboundCall
  */
-export const MovePositionRoutingOutboundCallParams = zod.object({
-  "from_id": zod.string(),
-  "to_id": zod.string()
-})
-
-export const MovePositionRoutingOutboundCallBody = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const MovePositionRoutingOutboundCallResponse = zod.object({
-  "success": zod.boolean().optional()
-})
-
+const movePositionRoutingOutboundCall = <TData = AxiosResponse<EngineMovePositionRoutingOutboundCallResponse>>(
+    fromId: string,
+    toId: string,
+    engineRoutingOutboundCallServiceMovePositionRoutingOutboundCallBody: EngineRoutingOutboundCallServiceMovePositionRoutingOutboundCallBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/routing/outbound/calls/${fromId}/to/${toId}`,
+      engineRoutingOutboundCallServiceMovePositionRoutingOutboundCallBody,options
+    );
+  }
 /**
  * @summary Remove RoutingOutboundCall
  */
-export const DeleteRoutingOutboundCallParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteRoutingOutboundCallQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteRoutingOutboundCallResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteRoutingOutboundCall = <TData = AxiosResponse<EngineRoutingOutboundCall>>(
+    id: string,
+    params?: DeleteRoutingOutboundCallParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/routing/outbound/calls/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary RoutingOutboundCall item
  */
-export const ReadRoutingOutboundCallParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadRoutingOutboundCallQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadRoutingOutboundCallResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readRoutingOutboundCall = <TData = AxiosResponse<EngineRoutingOutboundCall>>(
+    id: string,
+    params?: ReadRoutingOutboundCallParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/outbound/calls/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch RoutingOutboundCall
  */
-export const PatchRoutingOutboundCallParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchRoutingOutboundCallBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchRoutingOutboundCallResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const patchRoutingOutboundCall = <TData = AxiosResponse<EngineRoutingOutboundCall>>(
+    id: string,
+    engineRoutingOutboundCallServicePatchRoutingOutboundCallBody: EngineRoutingOutboundCallServicePatchRoutingOutboundCallBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/routing/outbound/calls/${id}`,
+      engineRoutingOutboundCallServicePatchRoutingOutboundCallBody,options
+    );
+  }
 /**
  * @summary Update RoutingOutboundCall
  */
-export const UpdateRoutingOutboundCallParams = zod.object({
-  "id": zod.string()
-})
+const updateRoutingOutboundCall = <TData = AxiosResponse<EngineRoutingOutboundCall>>(
+    id: string,
+    engineRoutingOutboundCallServiceUpdateRoutingOutboundCallBody: EngineRoutingOutboundCallServiceUpdateRoutingOutboundCallBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/routing/outbound/calls/${id}`,
+      engineRoutingOutboundCallServiceUpdateRoutingOutboundCallBody,options
+    );
+  }
 
-export const UpdateRoutingOutboundCallBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchRoutingOutboundCall,createRoutingOutboundCall,movePositionRoutingOutboundCall,deleteRoutingOutboundCall,readRoutingOutboundCall,patchRoutingOutboundCall,updateRoutingOutboundCall}};
+export type SearchRoutingOutboundCallResult = AxiosResponse<EngineListRoutingOutboundCall>
+export type CreateRoutingOutboundCallResult = AxiosResponse<EngineRoutingOutboundCall>
+export type MovePositionRoutingOutboundCallResult = AxiosResponse<EngineMovePositionRoutingOutboundCallResponse>
+export type DeleteRoutingOutboundCallResult = AxiosResponse<EngineRoutingOutboundCall>
+export type ReadRoutingOutboundCallResult = AxiosResponse<EngineRoutingOutboundCall>
+export type PatchRoutingOutboundCallResult = AxiosResponse<EngineRoutingOutboundCall>
+export type UpdateRoutingOutboundCallResult = AxiosResponse<EngineRoutingOutboundCall>
 
-export const UpdateRoutingOutboundCallResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pattern": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

@@ -4,290 +4,110 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  AddUserAccessTokenBody,
+  AddUserAccessTokenParams,
+  ApiUserAccessToken,
+  ApiUserAccessTokenList,
+  DeleteUserAccessTokenParams,
+  GetUserAccessTokenParams,
+  ListUserAccessTokenParams,
+  UpdateUserAccessToken2Body,
+  UpdateUserAccessToken2Params,
+  UpdateUserAccessTokenBody,
+  UpdateUserAccessTokenParams
+} from '../webitelAPI.schemas';
 
 
-export const AddUserAccessTokenParams = zod.object({
-  "token.user.id": zod.string().describe('identifier')
-})
 
-export const AddUserAccessTokenQueryParams = zod.object({
-  "enable": zod.boolean().optional().describe('ObjectId user = 1; // [required]\n string usage = 2;  // [optional] usage description\n bool enable = 3;')
-})
+            // --- header start
+            // 
 
-export const AddUserAccessTokenBody = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "name": zod.string().optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getUserAccessTokens
+            // --- title end
+           = () => {
 
-export const AddUserAccessTokenResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')
+            // --- header end
+          const addUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+    addUserAccessTokenBody: AddUserAccessTokenBody,
+    params?: AddUserAccessTokenParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users/token.user.id}/tokens`,
+      addUserAccessTokenBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateUserAccessToken2 = <TData = AxiosResponse<ApiUserAccessToken>>(
+    updateUserAccessToken2Body: UpdateUserAccessToken2Body,
+    params?: UpdateUserAccessToken2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/users/update.user.id}/tokens/update.id}`,
+      updateUserAccessToken2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+    updateUserAccessTokenBody: UpdateUserAccessTokenBody,
+    params?: UpdateUserAccessTokenParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/users/update.user.id}/tokens/update.id}`,
+      updateUserAccessTokenBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const listUserAccessToken = <TData = AxiosResponse<ApiUserAccessTokenList>>(
+    params?: ListUserAccessTokenParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/user.id}/tokens`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+    id: string,
+    params?: DeleteUserAccessTokenParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/users/user.id}/tokens/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const getUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+    id: string,
+    params?: GetUserAccessTokenParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/user.id}/tokens/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateUserAccessToken2Params = zod.object({
-  "update.user.id": zod.string().describe('identifier'),
-  "update.id": zod.string().describe('tokenKey::token_key')
-})
+            // --- footer start
+            return {addUserAccessToken,updateUserAccessToken2,updateUserAccessToken,listUserAccessToken,deleteUserAccessToken,getUserAccessToken}};
+export type AddUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>
+export type UpdateUserAccessToken2Result = AxiosResponse<ApiUserAccessToken>
+export type UpdateUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>
+export type ListUserAccessTokenResult = AxiosResponse<ApiUserAccessTokenList>
+export type DeleteUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>
+export type GetUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>
 
-export const UpdateUserAccessToken2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('[optional] PATCH implementation'),
-  "enable": zod.boolean().optional()
-})
-
-export const UpdateUserAccessToken2Body = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateUserAccessToken2Response = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')
-
-export const UpdateUserAccessTokenParams = zod.object({
-  "update.user.id": zod.string().describe('identifier'),
-  "update.id": zod.string().describe('tokenKey::token_key')
-})
-
-export const UpdateUserAccessTokenQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('[optional] PATCH implementation'),
-  "enable": zod.boolean().optional()
-})
-
-export const UpdateUserAccessTokenBody = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateUserAccessTokenResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')
-
-export const ListUserAccessTokenParams = zod.object({
-  "user.id": zod.string().describe('identifier')
-})
-
-export const ListUserAccessTokenQueryParams = zod.object({
-  "userName": zod.string().optional().describe('display name'),
-  "q": zod.string().optional().describe('int32 page = 2;\nint64 size = 3;\n\n.usage ILIKE :q'),
-  "fields": zod.array(zod.string()).optional().describe('----- Search Options -------------------------\n\nselect: output (fields,...)'),
-  "sort": zod.array(zod.string()).optional().describe('select: order by (fields,...)'),
-  "page": zod.number().optional().describe('select: offset {page}'),
-  "size": zod.number().optional().describe('select: limit {size}')
-})
-
-export const ListUserAccessTokenResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.string().optional()
-})
-
-export const DeleteUserAccessTokenParams = zod.object({
-  "user.id": zod.string().describe('identifier'),
-  "id": zod.string().describe('tokenKey::uuid')
-})
-
-export const DeleteUserAccessTokenQueryParams = zod.object({
-  "userName": zod.string().optional().describe('display name')
-})
-
-export const DeleteUserAccessTokenResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')
-
-export const GetUserAccessTokenParams = zod.object({
-  "user.id": zod.string().describe('identifier'),
-  "id": zod.string().describe('tokenKey::uuid')
-})
-
-export const GetUserAccessTokenQueryParams = zod.object({
-  "userName": zod.string().optional().describe('display name')
-})
-
-export const GetUserAccessTokenResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "token": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "usage": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('UserId lookup value.')
-
+            // --- footer end
+          

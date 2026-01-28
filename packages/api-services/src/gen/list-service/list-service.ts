@@ -4,267 +4,182 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteListCommunicationParams,
+  DeleteListParams,
+  EngineCreateListRequest,
+  EngineList,
+  EngineListCommunication,
+  EngineListOfList,
+  EngineListOfListCommunication,
+  EngineListServiceCreateListCommunicationBody,
+  EngineListServiceUpdateListBody,
+  EngineListServiceUpdateListCommunicationBody,
+  ReadListCommunicationParams,
+  ReadListParams,
+  SearchListCommunicationParams,
+  SearchListParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getListService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of List
  */
-export const SearchListQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchListResponse = zod.object({
-  "items": zod.array(zod.object({
-  "count": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchList = <TData = AxiosResponse<EngineListOfList>>(
+    params?: SearchListParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/list`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create List
  */
-export const CreateListBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreateListResponse = zod.object({
-  "count": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createList = <TData = AxiosResponse<EngineList>>(
+    engineCreateListRequest: EngineCreateListRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/list`,
+      engineCreateListRequest,options
+    );
+  }
 /**
  * @summary Remove list
  */
-export const DeleteListParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteListQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteListResponse = zod.object({
-  "count": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteList = <TData = AxiosResponse<EngineList>>(
+    id: string,
+    params?: DeleteListParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/list/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List item
  */
-export const ReadListParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadListQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadListResponse = zod.object({
-  "count": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readList = <TData = AxiosResponse<EngineList>>(
+    id: string,
+    params?: ReadListParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/list/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update list
  */
-export const UpdateListParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateListBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateListResponse = zod.object({
-  "count": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateList = <TData = AxiosResponse<EngineList>>(
+    id: string,
+    engineListServiceUpdateListBody: EngineListServiceUpdateListBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/list/${id}`,
+      engineListServiceUpdateListBody,options
+    );
+  }
 /**
  * @summary List of List
  */
-export const SearchListCommunicationParams = zod.object({
-  "list_id": zod.string()
-})
-
-export const SearchListCommunicationQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "expireAtFrom": zod.string().optional(),
-  "expireAtTo": zod.string().optional()
-})
-
-export const SearchListCommunicationResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "listId": zod.string().optional(),
-  "number": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchListCommunication = <TData = AxiosResponse<EngineListOfListCommunication>>(
+    listId: string,
+    params?: SearchListCommunicationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/list/${listId}/communication`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create ListCommunication
  */
-export const CreateListCommunicationParams = zod.object({
-  "list_id": zod.string()
-})
-
-export const CreateListCommunicationBody = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "number": zod.string().optional()
-})
-
-export const CreateListCommunicationResponse = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "listId": zod.string().optional(),
-  "number": zod.string().optional()
-})
-
+const createListCommunication = <TData = AxiosResponse<EngineListCommunication>>(
+    listId: string,
+    engineListServiceCreateListCommunicationBody: EngineListServiceCreateListCommunicationBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/list/${listId}/communication`,
+      engineListServiceCreateListCommunicationBody,options
+    );
+  }
 /**
  * @summary Remove ListCommunication
  */
-export const DeleteListCommunicationParams = zod.object({
-  "list_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteListCommunicationQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteListCommunicationResponse = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "listId": zod.string().optional(),
-  "number": zod.string().optional()
-})
-
+const deleteListCommunication = <TData = AxiosResponse<EngineListCommunication>>(
+    listId: string,
+    id: string,
+    params?: DeleteListCommunicationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/list/${listId}/communication/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List item
  */
-export const ReadListCommunicationParams = zod.object({
-  "list_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadListCommunicationQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadListCommunicationResponse = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "listId": zod.string().optional(),
-  "number": zod.string().optional()
-})
-
+const readListCommunication = <TData = AxiosResponse<EngineListCommunication>>(
+    listId: string,
+    id: string,
+    params?: ReadListCommunicationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/list/${listId}/communication/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update ListCommunication
  */
-export const UpdateListCommunicationParams = zod.object({
-  "list_id": zod.string(),
-  "id": zod.string()
-})
+const updateListCommunication = <TData = AxiosResponse<EngineListCommunication>>(
+    listId: string,
+    id: string,
+    engineListServiceUpdateListCommunicationBody: EngineListServiceUpdateListCommunicationBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/list/${listId}/communication/${id}`,
+      engineListServiceUpdateListCommunicationBody,options
+    );
+  }
 
-export const UpdateListCommunicationBody = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "number": zod.string().optional()
-})
+            // --- footer start
+            return {searchList,createList,deleteList,readList,updateList,searchListCommunication,createListCommunication,deleteListCommunication,readListCommunication,updateListCommunication}};
+export type SearchListResult = AxiosResponse<EngineListOfList>
+export type CreateListResult = AxiosResponse<EngineList>
+export type DeleteListResult = AxiosResponse<EngineList>
+export type ReadListResult = AxiosResponse<EngineList>
+export type UpdateListResult = AxiosResponse<EngineList>
+export type SearchListCommunicationResult = AxiosResponse<EngineListOfListCommunication>
+export type CreateListCommunicationResult = AxiosResponse<EngineListCommunication>
+export type DeleteListCommunicationResult = AxiosResponse<EngineListCommunication>
+export type ReadListCommunicationResult = AxiosResponse<EngineListCommunication>
+export type UpdateListCommunicationResult = AxiosResponse<EngineListCommunication>
 
-export const UpdateListCommunicationResponse = zod.object({
-  "description": zod.string().optional(),
-  "expireAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "listId": zod.string().optional(),
-  "number": zod.string().optional()
-})
-
+            // --- footer end
+          

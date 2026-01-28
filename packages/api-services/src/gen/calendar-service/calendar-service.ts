@@ -4,360 +4,119 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteCalendarParams,
+  EngineCalendar,
+  EngineCalendarServiceUpdateCalendarBody,
+  EngineCreateCalendarRequest,
+  EngineListCalendar,
+  EngineListTimezoneResponse,
+  ReadCalendarParams,
+  SearchCalendarParams,
+  SearchTimezonesParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCalendarService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of calendar
  */
-export const SearchCalendarQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchCalendarResponse = zod.object({
-  "items": zod.array(zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchCalendar = <TData = AxiosResponse<EngineListCalendar>>(
+    params?: SearchCalendarParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/calendars`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create calendar
  */
-export const CreateCalendarBody = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateCalendarResponse = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createCalendar = <TData = AxiosResponse<EngineCalendar>>(
+    engineCreateCalendarRequest: EngineCreateCalendarRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/calendars`,
+      engineCreateCalendarRequest,options
+    );
+  }
 /**
  * @summary List timezones
  */
-export const SearchTimezonesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchTimezonesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "offset": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchTimezones = <TData = AxiosResponse<EngineListTimezoneResponse>>(
+    params?: SearchTimezonesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/calendars/timezones`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove calendar
  */
-export const DeleteCalendarParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteCalendarQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteCalendarResponse = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteCalendar = <TData = AxiosResponse<EngineCalendar>>(
+    id: string,
+    params?: DeleteCalendarParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/calendars/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Calendar item
  */
-export const ReadCalendarParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadCalendarQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadCalendarResponse = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readCalendar = <TData = AxiosResponse<EngineCalendar>>(
+    id: string,
+    params?: ReadCalendarParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/calendars/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update calendar
  */
-export const UpdateCalendarParams = zod.object({
-  "id": zod.string()
-})
+const updateCalendar = <TData = AxiosResponse<EngineCalendar>>(
+    id: string,
+    engineCalendarServiceUpdateCalendarBody: EngineCalendarServiceUpdateCalendarBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/calendars/${id}`,
+      engineCalendarServiceUpdateCalendarBody,options
+    );
+  }
 
-export const UpdateCalendarBody = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchCalendar,createCalendar,searchTimezones,deleteCalendar,readCalendar,updateCalendar}};
+export type SearchCalendarResult = AxiosResponse<EngineListCalendar>
+export type CreateCalendarResult = AxiosResponse<EngineCalendar>
+export type SearchTimezonesResult = AxiosResponse<EngineListTimezoneResponse>
+export type DeleteCalendarResult = AxiosResponse<EngineCalendar>
+export type ReadCalendarResult = AxiosResponse<EngineCalendar>
+export type UpdateCalendarResult = AxiosResponse<EngineCalendar>
 
-export const UpdateCalendarResponse = zod.object({
-  "accepts": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "endAt": zod.string().optional(),
-  "excepts": zod.array(zod.object({
-  "date": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "repeat": zod.boolean().optional(),
-  "workStart": zod.number().optional(),
-  "workStop": zod.number().optional(),
-  "working": zod.boolean().optional()
-})).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "specials": zod.array(zod.object({
-  "day": zod.number().optional(),
-  "disabled": zod.boolean().optional(),
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "startAt": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

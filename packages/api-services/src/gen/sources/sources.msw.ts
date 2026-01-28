@@ -18,12 +18,12 @@ import type {
 
 import {
   WebitelCasesSourceType
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WebitelCasesLocateSourceResponse,
   WebitelCasesSource,
   WebitelCasesSourceList
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getListSourcesResponseMock = (overrideResponse: Partial< WebitelCasesSourceList > = {}): WebitelCasesSourceList => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.string.alpha({length: {min: 10, max: 20}}), createdBy: {id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 500}}), undefined]), id: faker.string.alpha({length: {min: 10, max: 20}}), name: faker.string.alpha({length: {min: 3, max: 100}}), type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)), updatedAt: faker.string.alpha({length: {min: 10, max: 20}}), updatedBy: {id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})

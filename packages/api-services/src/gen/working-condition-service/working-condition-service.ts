@@ -4,232 +4,87 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  WfmCreateWorkingConditionRequest,
+  WfmCreateWorkingConditionResponse,
+  WfmDeleteWorkingConditionResponse,
+  WfmReadWorkingConditionResponse,
+  WfmSearchWorkingConditionResponse,
+  WfmUpdateWorkingConditionResponse,
+  WorkingConditionServiceReadWorkingConditionParams,
+  WorkingConditionServiceSearchWorkingConditionParams,
+  WorkingConditionServiceUpdateWorkingConditionBody
+} from '../webitelAPI.schemas';
 
 
-export const WorkingConditionServiceSearchWorkingConditionQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const WorkingConditionServiceSearchWorkingConditionResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const WorkingConditionServiceCreateWorkingConditionBody = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getWorkingConditionService
+            // --- title end
+           = () => {
 
-export const WorkingConditionServiceCreateWorkingConditionResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-}).optional()
-})
+            // --- header end
+          const workingConditionServiceSearchWorkingCondition = <TData = AxiosResponse<WfmSearchWorkingConditionResponse>>(
+    params?: WorkingConditionServiceSearchWorkingConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/working_conditions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const workingConditionServiceCreateWorkingCondition = <TData = AxiosResponse<WfmCreateWorkingConditionResponse>>(
+    wfmCreateWorkingConditionRequest: WfmCreateWorkingConditionRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/working_conditions`,
+      wfmCreateWorkingConditionRequest,options
+    );
+  }
+const workingConditionServiceDeleteWorkingCondition = <TData = AxiosResponse<WfmDeleteWorkingConditionResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/working_conditions/${id}`,options
+    );
+  }
+const workingConditionServiceReadWorkingCondition = <TData = AxiosResponse<WfmReadWorkingConditionResponse>>(
+    id: string,
+    params?: WorkingConditionServiceReadWorkingConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/working_conditions/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const workingConditionServiceUpdateWorkingCondition = <TData = AxiosResponse<WfmUpdateWorkingConditionResponse>>(
+    workingConditionServiceUpdateWorkingConditionBody: WorkingConditionServiceUpdateWorkingConditionBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/lookups/working_conditions/item.id}`,
+      workingConditionServiceUpdateWorkingConditionBody,options
+    );
+  }
 
-export const WorkingConditionServiceDeleteWorkingConditionParams = zod.object({
-  "id": zod.string()
-})
+            // --- footer start
+            return {workingConditionServiceSearchWorkingCondition,workingConditionServiceCreateWorkingCondition,workingConditionServiceDeleteWorkingCondition,workingConditionServiceReadWorkingCondition,workingConditionServiceUpdateWorkingCondition}};
+export type WorkingConditionServiceSearchWorkingConditionResult = AxiosResponse<WfmSearchWorkingConditionResponse>
+export type WorkingConditionServiceCreateWorkingConditionResult = AxiosResponse<WfmCreateWorkingConditionResponse>
+export type WorkingConditionServiceDeleteWorkingConditionResult = AxiosResponse<WfmDeleteWorkingConditionResponse>
+export type WorkingConditionServiceReadWorkingConditionResult = AxiosResponse<WfmReadWorkingConditionResponse>
+export type WorkingConditionServiceUpdateWorkingConditionResult = AxiosResponse<WfmUpdateWorkingConditionResponse>
 
-export const WorkingConditionServiceDeleteWorkingConditionResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const WorkingConditionServiceReadWorkingConditionParams = zod.object({
-  "id": zod.string()
-})
-
-export const WorkingConditionServiceReadWorkingConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const WorkingConditionServiceReadWorkingConditionResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-}).optional()
-})
-
-export const WorkingConditionServiceUpdateWorkingConditionParams = zod.object({
-  "item.id": zod.string()
-})
-
-export const WorkingConditionServiceUpdateWorkingConditionBody = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-}).optional()
-})
-
-export const WorkingConditionServiceUpdateWorkingConditionResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "daysOff": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "pauseDuration": zod.number().optional(),
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "shiftTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sickLeaves": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "vacation": zod.number().optional(),
-  "workdayHours": zod.number().optional(),
-  "workdaysPerMonth": zod.number().optional()
-}).optional()
-})
-
+            // --- footer end
+          

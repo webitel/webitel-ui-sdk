@@ -4,285 +4,135 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  SearchFilePoliciesParams,
+  StorageCreateFilePolicyRequest,
+  StorageFilePoliciesServiceFilePolicyApplyBody,
+  StorageFilePoliciesServiceMovePositionFilePolicyBody,
+  StorageFilePoliciesServicePatchFilePolicyBody,
+  StorageFilePoliciesServiceUpdateFilePolicyBody,
+  StorageFilePolicy,
+  StorageFilePolicyApplyResponse,
+  StorageListFilePolicies,
+  StorageMovePositionFilePolicyResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getFilePoliciesService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of FilePolicy
  */
-export const SearchFilePoliciesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const searchFilePoliciesResponseItemsItemChannelsItemDefault = `UnknownChannel`;
-
-export const SearchFilePoliciesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchFilePolicies = <TData = AxiosResponse<StorageListFilePolicies>>(
+    params?: SearchFilePoliciesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/file_policies`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create FilePolicy
  */
-export const createFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
-
-export const CreateFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
-
-export const createFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
-
-export const CreateFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const MovePositionFilePolicyParams = zod.object({
-  "from_id": zod.number(),
-  "to_id": zod.number()
-})
-
-export const MovePositionFilePolicyBody = zod.object({
-
-})
-
-export const MovePositionFilePolicyResponse = zod.object({
-  "success": zod.boolean().optional()
-})
-
+const createFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
+    storageCreateFilePolicyRequest: StorageCreateFilePolicyRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/storage/file_policies`,
+      storageCreateFilePolicyRequest,options
+    );
+  }
+const movePositionFilePolicy = <TData = AxiosResponse<StorageMovePositionFilePolicyResponse>>(
+    fromId: number,
+    toId: number,
+    storageFilePoliciesServiceMovePositionFilePolicyBody: StorageFilePoliciesServiceMovePositionFilePolicyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/file_policies/${fromId}/to/${toId}`,
+      storageFilePoliciesServiceMovePositionFilePolicyBody,options
+    );
+  }
 /**
  * @summary Remove FilePolicy
  */
-export const DeleteFilePolicyParams = zod.object({
-  "id": zod.number()
-})
-
-export const deleteFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
-
-export const DeleteFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/file_policies/${id}`,options
+    );
+  }
 /**
  * @summary FilePolicy item
  */
-export const ReadFilePolicyParams = zod.object({
-  "id": zod.number()
-})
-
-export const readFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
-
-export const ReadFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/file_policies/${id}`,options
+    );
+  }
 /**
  * @summary Patch FilePolicy
  */
-export const PatchFilePolicyParams = zod.object({
-  "id": zod.number()
-})
-
-export const patchFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
-
-export const PatchFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
-
-export const patchFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
-
-export const PatchFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const patchFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
+    id: number,
+    storageFilePoliciesServicePatchFilePolicyBody: StorageFilePoliciesServicePatchFilePolicyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/file_policies/${id}`,
+      storageFilePoliciesServicePatchFilePolicyBody,options
+    );
+  }
 /**
  * @summary Update FilePolicy
  */
-export const UpdateFilePolicyParams = zod.object({
-  "id": zod.number()
-})
+const updateFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
+    id: number,
+    storageFilePoliciesServiceUpdateFilePolicyBody: StorageFilePoliciesServiceUpdateFilePolicyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/storage/file_policies/${id}`,
+      storageFilePoliciesServiceUpdateFilePolicyBody,options
+    );
+  }
+const filePolicyApply = <TData = AxiosResponse<StorageFilePolicyApplyResponse>>(
+    id: number,
+    storageFilePoliciesServiceFilePolicyApplyBody: StorageFilePoliciesServiceFilePolicyApplyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/file_policies/${id}/apply`,
+      storageFilePoliciesServiceFilePolicyApplyBody,options
+    );
+  }
 
-export const updateFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
+            // --- footer start
+            return {searchFilePolicies,createFilePolicy,movePositionFilePolicy,deleteFilePolicy,readFilePolicy,patchFilePolicy,updateFilePolicy,filePolicyApply}};
+export type SearchFilePoliciesResult = AxiosResponse<StorageListFilePolicies>
+export type CreateFilePolicyResult = AxiosResponse<StorageFilePolicy>
+export type MovePositionFilePolicyResult = AxiosResponse<StorageMovePositionFilePolicyResponse>
+export type DeleteFilePolicyResult = AxiosResponse<StorageFilePolicy>
+export type ReadFilePolicyResult = AxiosResponse<StorageFilePolicy>
+export type PatchFilePolicyResult = AxiosResponse<StorageFilePolicy>
+export type UpdateFilePolicyResult = AxiosResponse<StorageFilePolicy>
+export type FilePolicyApplyResult = AxiosResponse<StorageFilePolicyApplyResponse>
 
-export const UpdateFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
-
-export const updateFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
-
-export const UpdateFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const FilePolicyApplyParams = zod.object({
-  "id": zod.number()
-})
-
-export const FilePolicyApplyBody = zod.object({
-  "applyToNullChannel": zod.boolean().optional()
-})
-
-export const FilePolicyApplyResponse = zod.object({
-  "count": zod.string().optional()
-})
-
+            // --- footer end
+          

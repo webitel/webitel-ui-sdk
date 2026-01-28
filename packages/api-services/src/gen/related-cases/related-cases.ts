@@ -4,339 +4,130 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateRelatedCaseParams,
+  ListRelatedCasesParams,
+  LocateRelatedCaseParams,
+  UpdateRelatedCase2Body,
+  UpdateRelatedCase2Params,
+  UpdateRelatedCaseBody,
+  UpdateRelatedCaseParams,
+  WebitelCasesCreateInputRelatedCase,
+  WebitelCasesRelatedCase,
+  WebitelCasesRelatedCaseList
+} from '../webitelAPI.schemas';
 
 
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getRelatedCases
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * @summary Update an existing related case
+ */
+const updateRelatedCase2 = <TData = AxiosResponse<WebitelCasesRelatedCase>>(
+    etag: string,
+    updateRelatedCase2Body: UpdateRelatedCase2Body,
+    params?: UpdateRelatedCase2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/input.primary_case.id}/related/${etag}`,
+      updateRelatedCase2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing related case
  */
-export const UpdateRelatedCase2Params = zod.object({
-  "input.primary_case.id": zod.string(),
-  "etag": zod.string().describe('Identifier of the related case to update.')
-})
-
-export const UpdateRelatedCase2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.')
-})
-
-export const updateRelatedCase2BodyRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const UpdateRelatedCase2Body = zod.object({
-  "primaryCase": zod.object({
-  "name": zod.string().optional()
-}).optional().describe('Primary case details.'),
-  "relatedCase": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(updateRelatedCase2BodyRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const updateRelatedCase2ResponseRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const UpdateRelatedCase2Response = zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(updateRelatedCase2ResponseRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')
-
-/**
- * @summary Update an existing related case
- */
-export const UpdateRelatedCaseParams = zod.object({
-  "input.primary_case.id": zod.string(),
-  "etag": zod.string().describe('Identifier of the related case to update.')
-})
-
-export const UpdateRelatedCaseQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.')
-})
-
-export const updateRelatedCaseBodyRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const UpdateRelatedCaseBody = zod.object({
-  "primaryCase": zod.object({
-  "name": zod.string().optional()
-}).optional().describe('Primary case details.'),
-  "relatedCase": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(updateRelatedCaseBodyRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const updateRelatedCaseResponseRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const UpdateRelatedCaseResponse = zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(updateRelatedCaseResponseRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')
-
+const updateRelatedCase = <TData = AxiosResponse<WebitelCasesRelatedCase>>(
+    etag: string,
+    updateRelatedCaseBody: UpdateRelatedCaseBody,
+    params?: UpdateRelatedCaseParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/input.primary_case.id}/related/${etag}`,
+      updateRelatedCaseBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List all related cases for a specific case
  */
-export const ListRelatedCasesParams = zod.object({
-  "primary_case_etag": zod.string().describe('Primary Case ID for which related cases are requested.')
-})
-
-export const ListRelatedCasesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number for pagination.'),
-  "size": zod.number().optional().describe('Number of related cases per page.'),
-  "q": zod.string().optional().describe('Query string for search.'),
-  "sort": zod.string().optional().describe('Sorting order.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to return for each related case.'),
-  "ids": zod.array(zod.string()).optional().describe('Filter by ids')
-})
-
-export const listRelatedCasesResponseDataItemRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const ListRelatedCasesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(listRelatedCasesResponseDataItemRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')).optional().describe('List of related cases on the current page.'),
-  "next": zod.boolean().optional().describe('Flag to indicate if more pages are available.'),
-  "page": zod.string().optional().describe('Current page number.')
-}).describe('Paginated list of related cases.')
-
+const listRelatedCases = <TData = AxiosResponse<WebitelCasesRelatedCaseList>>(
+    primaryCaseEtag: string,
+    params?: ListRelatedCasesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${primaryCaseEtag}/related`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new related case
  */
-export const CreateRelatedCaseParams = zod.object({
-  "primary_case_etag": zod.string().describe('Primary case details.')
-})
-
-export const CreateRelatedCaseQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.')
-})
-
-export const createRelatedCaseBodyRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const CreateRelatedCaseBody = zod.object({
-  "relatedCase": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(createRelatedCaseBodyRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "userId": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('Input for creating a related case.')
-
-export const createRelatedCaseResponseRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const CreateRelatedCaseResponse = zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(createRelatedCaseResponseRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')
-
+const createRelatedCase = <TData = AxiosResponse<WebitelCasesRelatedCase>>(
+    primaryCaseEtag: string,
+    webitelCasesCreateInputRelatedCase: WebitelCasesCreateInputRelatedCase,
+    params?: CreateRelatedCaseParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/${primaryCaseEtag}/related`,
+      webitelCasesCreateInputRelatedCase,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a specific related case
  */
-export const DeleteRelatedCaseParams = zod.object({
-  "primary_case_etag": zod.string().describe('Etag or ID of the primary case'),
-  "etag": zod.string().describe('Identifier of the related case to delete.')
-})
-
-export const deleteRelatedCaseResponseRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const DeleteRelatedCaseResponse = zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(deleteRelatedCaseResponseRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')
-
+const deleteRelatedCase = <TData = AxiosResponse<WebitelCasesRelatedCase>>(
+    primaryCaseEtag: string,
+    etag: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/${primaryCaseEtag}/related/${etag}`,options
+    );
+  }
 /**
  * @summary Retrieve a specific related case by ID
  */
-export const LocateRelatedCaseParams = zod.object({
-  "primary_case_etag": zod.string().describe('Primary case identifier.'),
-  "etag": zod.string().describe('Identifier of the related case.')
-})
+const locateRelatedCase = <TData = AxiosResponse<WebitelCasesRelatedCase>>(
+    primaryCaseEtag: string,
+    etag: string,
+    params?: LocateRelatedCaseParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${primaryCaseEtag}/related/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const LocateRelatedCaseQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to return in the response.')
-})
+            // --- footer start
+            return {updateRelatedCase2,updateRelatedCase,listRelatedCases,createRelatedCase,deleteRelatedCase,locateRelatedCase}};
+export type UpdateRelatedCase2Result = AxiosResponse<WebitelCasesRelatedCase>
+export type UpdateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>
+export type ListRelatedCasesResult = AxiosResponse<WebitelCasesRelatedCaseList>
+export type CreateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>
+export type DeleteRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>
+export type LocateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>
 
-export const locateRelatedCaseResponseRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
-
-export const LocateRelatedCaseResponse = zod.object({
-  "createdAt": zod.string().optional().describe('Timestamp (in milliseconds) of when the relation was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Etag for the related case entity.'),
-  "id": zod.string().optional().describe('Unique identifier for the related case.'),
-  "primaryCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relatedCase": zod.object({
-  "color": zod.string().optional(),
-  "etag": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "subject": zod.string().optional(),
-  "ver": zod.number().optional()
-}).optional().describe('RelatedCaseLookup is created specifically to include the subject field.'),
-  "relationType": zod.enum(['RELATION_TYPE_UNSPECIFIED', 'DUPLICATES', 'IS_DUPLICATED_BY', 'BLOCKS', 'IS_BLOCKED_BY', 'CAUSES', 'IS_CAUSED_BY', 'IS_CHILD_OF', 'IS_PARENT_OF', 'RELATES_TO']).default(locateRelatedCaseResponseRelationTypeDefault).describe('Enum for relation types between cases.'),
-  "updatedAt": zod.string().optional().describe('Timestamp (in milliseconds) of the last update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "ver": zod.number().optional().describe('Version number of the related case, used for concurrency control.')
-}).describe('Represents a related case with its relationship details.')
-
+            // --- footer end
+          

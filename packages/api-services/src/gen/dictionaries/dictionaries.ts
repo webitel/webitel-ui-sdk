@@ -4,1653 +4,244 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateData200,
+  CreateDataBody,
+  DataDataset,
+  DataInputDictionary,
+  DataStructList,
+  DeleteData2Params,
+  DeleteDataParams,
+  DeleteTypeParams,
+  DictionariesImportCSVBody,
+  LocateData200,
+  LocateDataParams,
+  ProtodataStruct,
+  SearchDataParams,
+  SearchTypeParams,
+  UpdateData200,
+  UpdateData2200,
+  UpdateData2Body,
+  UpdateData2Params,
+  UpdateDataBody,
+  UpdateDataParams,
+  UpdateTypeParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getDictionaries
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Delete a dictionary records.
  */
-export const DeleteDataParams = zod.object({
-  "repo": zod.string().describe('[`types.repo`]')
-})
-
-export const DeleteDataQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result dataset.'),
-  "id": zod.array(zod.string()).describe('[`record.id`]')
-})
-
-export const deleteDataResponseTypeFieldsItemKindDefault = `none`;
-
-export const DeleteDataResponse = zod.object({
-  "data": zod.array(zod.object({
-
-})).optional().describe('List of the dataset page records.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Current page number.'),
-  "type": zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(deleteDataResponseTypeFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).optional().describe('Type of the Structure.\n\nint64 dc = 0;')
-}).describe('Dataset records page view.')
-
+const deleteData = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    params: DeleteDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/dictionaries/${repo}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Lookup a dictionary dataset.
  */
-export const SearchDataParams = zod.object({
-  "repo": zod.string().describe('[`types.repo`]')
-})
-
-export const searchDataQuerySortItemDefault = `*`;
-export const searchDataQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
-export const searchDataQueryFieldsItemDefault = `*`;
-
-export const SearchDataQueryParams = zod.object({
-  "size": zod.number().optional().describe('Number of result records (per page).\nDefault: 16.'),
-  "page": zod.number().optional().describe('Page number of result set of records.\nDefault: 1.'),
-  "sort": zod.array(zod.string().regex(searchDataQuerySortItemRegExp)).optional().describe('Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```'),
-  "q": zod.string().optional().describe('Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\ne.g.: name,emails{type},labels etc...'),
-  "id": zod.array(zod.string()).optional().describe('[`record.id`]'),
-  "filters": zod.string().optional().describe('Filter string in CEL format.')
-})
-
-export const searchDataResponseTypeFieldsItemKindDefault = `none`;
-
-export const SearchDataResponse = zod.object({
-  "data": zod.array(zod.object({
-
-})).optional().describe('List of the dataset page records.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Current page number.'),
-  "type": zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(searchDataResponseTypeFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).optional().describe('Type of the Structure.\n\nint64 dc = 0;')
-}).describe('Dataset records page view.')
-
+const searchData = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    params?: SearchDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/dictionaries/${repo}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (Record) {
  * @summary Create a dictionary record.
  */
-export const CreateDataParams = zod.object({
-  "repo": zod.string().describe('[`types.repo`]')
-})
-
-export const CreateDataBody = zod.object({
-
-})
-
-export const CreateDataResponse = zod.object({
-
-})
-
+const createData = <TData = AxiosResponse<CreateData200>>(
+    repo: string,
+    createDataBody: CreateDataBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/dictionaries/${repo}`,
+      createDataBody,options
+    );
+  }
 /**
  * @summary Import dataset from CSV file.
  */
-export const ImportCSVParams = zod.object({
-  "repo": zod.string().describe('`types.repo`')
-})
-
-export const importCSVBodyOnDataErrorDefault = `continue`;export const importCSVBodyOnEmptyLineDefault = `continue`;
-
-export const ImportCSVBody = zod.object({
-  "data": zod.string().optional(),
-  "fields": zod.record(zod.string(), zod.number()).optional(),
-  "lineBegin": zod.number().optional(),
-  "lineEnd": zod.number().optional(),
-  "onDataError": zod.enum(['continue', 'break']).default(importCSVBodyOnDataErrorDefault),
-  "onEmptyLine": zod.enum(['continue', 'break']).default(importCSVBodyOnEmptyLineDefault)
-})
-
-export const importCSVResponseTypeFieldsItemKindDefault = `none`;
-
-export const ImportCSVResponse = zod.object({
-  "data": zod.array(zod.object({
-
-})).optional().describe('List of the dataset page records.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Current page number.'),
-  "type": zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(importCSVResponseTypeFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).optional().describe('Type of the Structure.\n\nint64 dc = 0;')
-}).describe('Dataset records page view.')
-
+const importCSV = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    dictionariesImportCSVBody: DictionariesImportCSVBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/dictionaries/${repo}/csv`,
+      dictionariesImportCSVBody,options
+    );
+  }
 /**
  * @summary Delete a dictionary records.
  */
-
-
-
-export const DeleteData2Params = zod.object({
-  "repo": zod.string().describe('[`types.repo`]'),
-  "id": zod.array(zod.string()).min(1).describe('[`record.id`]')
-})
-
-export const DeleteData2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result dataset.')
-})
-
-export const deleteData2ResponseTypeFieldsItemKindDefault = `none`;
-
-export const DeleteData2Response = zod.object({
-  "data": zod.array(zod.object({
-
-})).optional().describe('List of the dataset page records.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Current page number.'),
-  "type": zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(deleteData2ResponseTypeFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).optional().describe('Type of the Structure.\n\nint64 dc = 0;')
-}).describe('Dataset records page view.')
-
+const deleteData2 = <TData = AxiosResponse<DataDataset>>(
+    repo: string,
+    id: string[],
+    params?: DeleteData2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/dictionaries/${repo}/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (Record) {
  * @summary Locate a dictionary record.
  */
-export const LocateDataParams = zod.object({
-  "repo": zod.string().describe('[`types.repo`]'),
-  "id": zod.string().describe('[`record.id`]')
-})
-
-export const locateDataQueryFieldsItemDefault = `*`;
-
-export const LocateDataQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```')
-})
-
-export const LocateDataResponse = zod.object({
-
-})
-
+const locateData = <TData = AxiosResponse<LocateData200>>(
+    repo: string,
+    id: string,
+    params?: LocateDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/dictionaries/${repo}/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (Record) {
  * @summary Update a dictionary record.
  */
-export const UpdateDataParams = zod.object({
-  "repo": zod.string().describe('[`types.repo`] data source'),
-  "id": zod.string().describe('[`record.id`] for update')
-})
-
-export const UpdateDataQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Source Fields to return into result.')
-})
-
-export const UpdateDataBody = zod.object({
-
-})
-
-export const UpdateDataResponse = zod.object({
-
-})
-
+const updateData = <TData = AxiosResponse<UpdateData200>>(
+    repo: string,
+    id: string,
+    updateDataBody: UpdateDataBody,
+    params?: UpdateDataParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/dictionaries/${repo}/${id}`,
+      updateDataBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (Record) {
  * @summary Update a dictionary record.
  */
-export const UpdateData2Params = zod.object({
-  "repo": zod.string().describe('[`types.repo`] data source'),
-  "id": zod.string().describe('[`record.id`] for update')
-})
-
-export const UpdateData2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Source Fields to return into result.')
-})
-
-export const UpdateData2Body = zod.object({
-
-})
-
-export const UpdateData2Response = zod.object({
-
-})
-
+const updateData2 = <TData = AxiosResponse<UpdateData2200>>(
+    repo: string,
+    id: string,
+    updateData2Body: UpdateData2Body,
+    params?: UpdateData2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/dictionaries/${repo}/${id}`,
+      updateData2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (DictionaryList) {
  * @summary Delete custom dictionaries.
  */
-export const DeleteTypeQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to retrive into result dataset.'),
-  "repo": zod.array(zod.string()).describe('`types.repo`\n\n// `record.pk`\n repeated string id = 3;')
-})
-
-export const deleteTypeResponseDataItemFieldsItemKindDefault = `none`;
-
-export const DeleteTypeResponse = zod.object({
-  "data": zod.array(zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(deleteTypeResponseDataItemFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).describe('Type of the Structure.\n\nint64 dc = 0;')).optional().describe('List of `Struct` types.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of results.')
-}).describe('Dataset of structured types.')
-
+const deleteType = <TData = AxiosResponse<DataStructList>>(
+    params: DeleteTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/types/dictionaries`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Lookup dictionaries data types.
  */
-export const searchTypeQuerySortItemDefault = `*`;
-export const searchTypeQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
-export const searchTypeQueryFieldsItemDefault = `*`;
-
-export const SearchTypeQueryParams = zod.object({
-  "q": zod.string().optional().describe('Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\ne.g.: name,emails{type},labels etc...'),
-  "id": zod.string().optional().describe('`types.id`'),
-  "name": zod.string().optional().describe('`types.name`'),
-  "repo": zod.string().optional().describe('`types.repo`'),
-  "path": zod.string().optional().describe('`types.path`'),
-  "readonly": zod.boolean().optional().describe('[NOT] [ system / custom ] types only'),
-  "extendable": zod.boolean().optional().describe('[NOT] Extend[able] types only.'),
-  "extensions": zod.boolean().optional().describe('[NOT] include extensions/* types.'),
-  "extended": zod.boolean().optional().describe('[NOT] Extend[ed] types only.'),
-  "administered": zod.boolean().optional().describe('[NOT] Administer access control only'),
-  "size": zod.number().optional().describe('Number of result records (per page).\nDefault: 16.'),
-  "page": zod.number().optional().describe('Page number of result set of records.\nDefault: 1.'),
-  "sort": zod.array(zod.string().regex(searchTypeQuerySortItemRegExp)).optional().describe('Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```')
-})
-
-export const searchTypeResponseDataItemFieldsItemKindDefault = `none`;
-
-export const SearchTypeResponse = zod.object({
-  "data": zod.array(zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(searchTypeResponseDataItemFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).describe('Type of the Structure.\n\nint64 dc = 0;')).optional().describe('List of `Struct` types.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of results.')
-}).describe('Dataset of structured types.')
-
+const searchType = <TData = AxiosResponse<DataStructList>>(
+    params?: SearchTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/types/dictionaries`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (Dictionary) {
  * @summary Locate the dictionary type.
  */
-export const LocateTypeParams = zod.object({
-  "repo": zod.string().describe('`types.repo`')
-})
-
-export const locateTypeResponseFieldsItemKindDefault = `none`;
-
-export const LocateTypeResponse = zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(locateTypeResponseFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).describe('Type of the Structure.\n\nint64 dc = 0;')
-
+const locateType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/types/dictionaries/${repo}`,options
+    );
+  }
 /**
  * (Dictionary) {
  * @summary Create custom dictionary.
  */
-export const CreateTypeParams = zod.object({
-  "repo": zod.string().describe('NEW [`types.repo`] repository name, e.g.: `countries`.')
-})
-
-export const createTypeBodyFieldsItemKindDefault = `none`;
-
-export const CreateTypeBody = zod.object({
-  "about": zod.string().optional(),
-  "administered": zod.boolean().optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(createTypeBodyFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional(),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.'),
-  "name": zod.string().optional().describe('A User-friendly [type.id] name ; lang: specific.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "repo": zod.string().optional().describe('string id = 1; // The [type] name (singular form), e.g.: `country`.\n\nRepository (dataset) name (plural form), e.g.: `countries`.')
-})
-
-export const createTypeResponseFieldsItemKindDefault = `none`;
-
-export const CreateTypeResponse = zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(createTypeResponseFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).describe('Type of the Structure.\n\nint64 dc = 0;')
-
+const createType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string,
+    dataInputDictionary: DataInputDictionary, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/types/dictionaries/${repo}`,
+      dataInputDictionary,options
+    );
+  }
 /**
  * (Dictionary) {
  * @summary Update custom dictionary.
  */
-export const UpdateTypeParams = zod.object({
-  "repo": zod.string().describe('[**repo**] name of the dataset type, e.g.: `countries`.')
-})
+const updateType = <TData = AxiosResponse<ProtodataStruct>>(
+    repo: string,
+    dataInputDictionary: DataInputDictionary,
+    params?: UpdateTypeParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/types/dictionaries/${repo}`,
+      dataInputDictionary,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateTypeQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to return into result.')
-})
+            // --- footer start
+            return {deleteData,searchData,createData,importCSV,deleteData2,locateData,updateData,updateData2,deleteType,searchType,locateType,createType,updateType}};
+export type DeleteDataResult = AxiosResponse<DataDataset>
+export type SearchDataResult = AxiosResponse<DataDataset>
+export type CreateDataResult = AxiosResponse<CreateData200>
+export type ImportCSVResult = AxiosResponse<DataDataset>
+export type DeleteData2Result = AxiosResponse<DataDataset>
+export type LocateDataResult = AxiosResponse<LocateData200>
+export type UpdateDataResult = AxiosResponse<UpdateData200>
+export type UpdateData2Result = AxiosResponse<UpdateData2200>
+export type DeleteTypeResult = AxiosResponse<DataStructList>
+export type SearchTypeResult = AxiosResponse<DataStructList>
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>
 
-export const updateTypeBodyFieldsItemKindDefault = `none`;
-
-export const UpdateTypeBody = zod.object({
-  "about": zod.string().optional(),
-  "administered": zod.boolean().optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(updateTypeBodyFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional(),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.'),
-  "name": zod.string().optional().describe('A User-friendly [type.id] name ; lang: specific.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "repo": zod.string().optional().describe('string id = 1; // The [type] name (singular form), e.g.: `country`.\n\nRepository (dataset) name (plural form), e.g.: `countries`.')
-})
-
-export const updateTypeResponseFieldsItemKindDefault = `none`;
-
-export const UpdateTypeResponse = zod.object({
-  "about": zod.string().optional().describe('Optional. Short description.'),
-  "administered": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional(),
-  "display": zod.string().optional().describe('Required. Display [fields.id] key.\nUsed as [lookup].name setting for this [struct] type.'),
-  "extendable": zod.boolean().optional().describe('// Extension fields type.\n Extension extension = 23;'),
-  "fields": zod.array(zod.object({
-  "always": zod.unknown().optional().describe('Always signifies that the field value will be computed on any write (INSERT OR UPDATE) operations.\nThe field cannot be written to, and when read the result of the last generated expression will be returned.\n\nThe generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.'),
-  "binary": zod.object({
-  "maxBytes": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "bool": zod.object({
-
-}).optional(),
-  "datetime": zod.object({
-  "epoch": zod.number().optional().describe('Epoch timestamp.\nIf zero - UNIX epoch (1970-01-01 00:00:00) will be used.'),
-  "format": zod.string().optional(),
-  "zone": zod.string().optional().describe('Timezone associated.\nDefault: `UTC`.')
-}).optional().describe('Datetime type settings.\n\nenum Part {\n   full = 0; // date & time\n   date = 1; // date only ; YYYY-MM-DD\n   time = 2; // time only ; HH:mm:ss[.pres]\n }\n Part part = 1; // part of: [ date &| time ]\n enum Stamp {\n   s  =  0; // seconds\n   ms =  1; // [milli]seconds ; E+3\n   mc =  2; // [micro]seconds ; E+6\n   ns =  3; // [nano]seconds  ; E+9\n   m  = -1; // minutes\n   h  = -2; // hours\n }\n Stamp time = 2; // time precision\n string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]'),
-  "default": zod.unknown().optional().describe('The `default` expression will be used in `INSERT` operation\nthat does not specify a value for the field.\n\nIf there is no default for a field, then the default is null.'),
-  "disabled": zod.boolean().optional(),
-  "duration": zod.object({
-  "format": zod.string().optional(),
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float32": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "float64": zod.object({
-  "frac": zod.number().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "hidden": zod.boolean().optional(),
-  "hint": zod.string().optional().describe('Short description. Default: {name}.'),
-  "id": zod.string().optional().describe('Field [code] name.\n\ncode'),
-  "int": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "int64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "kind": zod.enum(['none', 'list', 'bool', 'int', 'int32', 'int64', 'uint', 'uint32', 'uint64', 'float', 'float32', 'float64', 'binary', 'lookup', 'string', 'richtext', 'datetime', 'duration']).default(updateTypeResponseFieldsItemKindDefault).describe('Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time'),
-  "lookup": zod.object({
-  "display": zod.string().optional().describe('[Readonly]. Display dataset field.\n(lookup).{`name`} value relation.'),
-  "name": zod.string().optional().describe('[Readonly]. Dataset title.'),
-  "path": zod.string().optional().describe('[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.'),
-  "primary": zod.string().optional().describe('[Readonly]. Primary dataset field.\n(lookup).{`id`} value relation.'),
-  "query": zod.record(zod.string(), zod.string()).optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional().describe('Lookup ( REFERENCE ) type descriptor.\nSimplified [webitel.custom.Struct] options.'),
-  "name": zod.string().optional().describe('Title of the field. Lang specific.\n\ntitle'),
-  "readonly": zod.boolean().optional().describe('Optional. Disable any write (INSERT OR UPDATE) operations.\nREADONLY signifies that the field value will be always computed on any write (INSERT OR UPDATE) operations.\nIf selected, the `default` value MUST be specified.\n\nFIXME: Is base field ? [ id, created_, updated_ ]'),
-  "required": zod.boolean().optional(),
-  "richtext": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "string": zod.object({
-  "maxBytes": zod.number().optional(),
-  "maxChars": zod.number().optional(),
-  "multiline": zod.boolean().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint32": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional(),
-  "uint64": zod.object({
-  "max": zod.string().optional(),
-  "min": zod.string().optional(),
-  "violation": zod.record(zod.string(), zod.string()).optional()
-}).optional()
-}).describe('Field of the struct.')).optional().describe('Fields of the struct type.'),
-  "id": zod.string().optional().describe('Deprecated. Use `repo` instead. The [type] name (singular form), e.g.: `country`.'),
-  "indexes": zod.record(zod.string(), zod.object({
-  "fields": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INDEX within [type] dataset.'),
-  "include": zod.array(zod.string()).optional().describe('A set of [struct.fields.id] to INCLUDE beside the [fields] index.'),
-  "unique": zod.boolean().optional().describe('Indicates whether set of [fields] MUST be UNIQUE within [type].')
-}).describe('INDEX [struct.fields].')).optional().describe('INDEX fields.\n\nExtension extension = 15;'),
-  "name": zod.string().optional().describe('A User-friendly [id] name ; lang: specific.'),
-  "objclass": zod.string().optional().describe('Readonly. RbAC objclass identity.'),
-  "path": zod.string().optional().describe('Readonly. Relative path to access the dataset APIs, e.g.: `dictionaries/countries`.'),
-  "primary": zod.string().optional().describe('Required. Primary [fields.id] key.\nUsed as [lookup].id setting for this [struct] type.'),
-  "readonly": zod.boolean().optional(),
-  "repo": zod.string().optional().describe('Repository (dataset) name (plural form), e.g.: `countries`.'),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Required. Unique Identifier.'),
-  "name": zod.string().optional().describe('Readonly. Display name.'),
-  "type": zod.string().optional().describe('Optional. Reference type.')
-}).optional()
-}).describe('Type of the Structure.\n\nint64 dc = 0;')
-
+            // --- footer end
+          

@@ -19,7 +19,7 @@ import type {
 import type {
   StorageListMedia,
   StorageMediaFile
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchMediaFileResponseMock = (overrideResponse: Partial< StorageListMedia > = {}): StorageListMedia => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), mimeType: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), size: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

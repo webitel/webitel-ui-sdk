@@ -4,177 +4,100 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ForecastCalculationServiceExecuteForecastCalculationParams,
+  ForecastCalculationServiceReadForecastCalculationParams,
+  ForecastCalculationServiceSearchForecastCalculationParams,
+  ForecastCalculationServiceUpdateForecastCalculationBody,
+  WfmCreateForecastCalculationRequest,
+  WfmCreateForecastCalculationResponse,
+  WfmDeleteForecastCalculationResponse,
+  WfmExecuteForecastCalculationResponse,
+  WfmReadForecastCalculationResponse,
+  WfmSearchForecastCalculationResponse,
+  WfmUpdateForecastCalculationResponse
+} from '../webitelAPI.schemas';
 
 
-export const ForecastCalculationServiceSearchForecastCalculationQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const ForecastCalculationServiceSearchForecastCalculationResponse = zod.object({
-  "items": zod.array(zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const ForecastCalculationServiceCreateForecastCalculationBody = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getForecastCalculationService
+            // --- title end
+           = () => {
 
-export const ForecastCalculationServiceCreateForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- header end
+          const forecastCalculationServiceSearchForecastCalculation = <TData = AxiosResponse<WfmSearchForecastCalculationResponse>>(
+    params?: ForecastCalculationServiceSearchForecastCalculationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/forecast_calculation`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const forecastCalculationServiceCreateForecastCalculation = <TData = AxiosResponse<WfmCreateForecastCalculationResponse>>(
+    wfmCreateForecastCalculationRequest: WfmCreateForecastCalculationRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/forecast_calculation`,
+      wfmCreateForecastCalculationRequest,options
+    );
+  }
+const forecastCalculationServiceDeleteForecastCalculation = <TData = AxiosResponse<WfmDeleteForecastCalculationResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/forecast_calculation/${id}`,options
+    );
+  }
+const forecastCalculationServiceReadForecastCalculation = <TData = AxiosResponse<WfmReadForecastCalculationResponse>>(
+    id: string,
+    params?: ForecastCalculationServiceReadForecastCalculationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/forecast_calculation/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const forecastCalculationServiceExecuteForecastCalculation = <TData = AxiosResponse<WfmExecuteForecastCalculationResponse>>(
+    id: string,
+    params?: ForecastCalculationServiceExecuteForecastCalculationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/forecast_calculation/${id}/execute`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const forecastCalculationServiceUpdateForecastCalculation = <TData = AxiosResponse<WfmUpdateForecastCalculationResponse>>(
+    forecastCalculationServiceUpdateForecastCalculationBody: ForecastCalculationServiceUpdateForecastCalculationBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/lookups/forecast_calculation/item.id}`,
+      forecastCalculationServiceUpdateForecastCalculationBody,options
+    );
+  }
 
-export const ForecastCalculationServiceDeleteForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
+            // --- footer start
+            return {forecastCalculationServiceSearchForecastCalculation,forecastCalculationServiceCreateForecastCalculation,forecastCalculationServiceDeleteForecastCalculation,forecastCalculationServiceReadForecastCalculation,forecastCalculationServiceExecuteForecastCalculation,forecastCalculationServiceUpdateForecastCalculation}};
+export type ForecastCalculationServiceSearchForecastCalculationResult = AxiosResponse<WfmSearchForecastCalculationResponse>
+export type ForecastCalculationServiceCreateForecastCalculationResult = AxiosResponse<WfmCreateForecastCalculationResponse>
+export type ForecastCalculationServiceDeleteForecastCalculationResult = AxiosResponse<WfmDeleteForecastCalculationResponse>
+export type ForecastCalculationServiceReadForecastCalculationResult = AxiosResponse<WfmReadForecastCalculationResponse>
+export type ForecastCalculationServiceExecuteForecastCalculationResult = AxiosResponse<WfmExecuteForecastCalculationResponse>
+export type ForecastCalculationServiceUpdateForecastCalculationResult = AxiosResponse<WfmUpdateForecastCalculationResponse>
 
-export const ForecastCalculationServiceDeleteForecastCalculationResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const ForecastCalculationServiceReadForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
-
-export const ForecastCalculationServiceReadForecastCalculationQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const ForecastCalculationServiceReadForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const ForecastCalculationServiceExecuteForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
-
-export const ForecastCalculationServiceExecuteForecastCalculationQueryParams = zod.object({
-  "teamId": zod.string().optional(),
-  "forecastDataFrom": zod.string().optional(),
-  "forecastDataTo": zod.string().optional()
-})
-
-export const ForecastCalculationServiceExecuteForecastCalculationResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agents": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})).optional()
-})
-
-export const ForecastCalculationServiceUpdateForecastCalculationParams = zod.object({
-  "item.id": zod.string()
-})
-
-export const ForecastCalculationServiceUpdateForecastCalculationBody = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const ForecastCalculationServiceUpdateForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- footer end
+          

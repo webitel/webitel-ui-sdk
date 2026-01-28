@@ -20,7 +20,7 @@ import type {
   ApiReadClassResponse,
   ApiSearchClassesResponse,
   ApiUpdateClassResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchClassesResponseMock = (overrideResponse: Partial< ApiSearchClassesResponse > = {}): ApiSearchClassesResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({abac: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), class: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), obac: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), rbac: faker.helpers.arrayElement([faker.datatype.boolean(), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), size: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})

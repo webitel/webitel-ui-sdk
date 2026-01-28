@@ -19,7 +19,7 @@ import type {
 import type {
   EngineListPresetQuery,
   EnginePresetQuery
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchPresetQueryResponseMock = (overrideResponse: Partial< EngineListPresetQuery > = {}): EngineListPresetQuery => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), section: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

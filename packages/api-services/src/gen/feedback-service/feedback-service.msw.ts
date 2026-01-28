@@ -18,7 +18,7 @@ import type {
 
 import type {
   EngineFeedback
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getGetFeedbackResponseMock = (overrideResponse: Partial< EngineFeedback > = {}): EngineFeedback => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), payload: faker.helpers.arrayElement([{

@@ -20,7 +20,7 @@ import type {
   ApiDeleteOAuthServiceResponse,
   ApiOAuthService,
   ApiSearchOAuthServiceResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getDeleteOAuthServiceResponseMock = (): ApiDeleteOAuthServiceResponse => ({})

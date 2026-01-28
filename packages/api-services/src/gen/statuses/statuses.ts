@@ -4,182 +4,126 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateStatusParams,
+  ListStatusesParams,
+  LocateStatusParams,
+  UpdateStatus2Params,
+  UpdateStatusParams,
+  WebitelCasesInputStatus,
+  WebitelCasesInputStatusBody,
+  WebitelCasesLocateStatusResponse,
+  WebitelCasesStatus,
+  WebitelCasesStatusList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getStatuses
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of statuses or search statuses
  */
-export const ListStatusesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names')
-})
-
-export const ListStatusesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listStatuses = <TData = AxiosResponse<WebitelCasesStatusList>>(
+    params?: ListStatusesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/statuses`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new status
  */
-export const CreateStatusQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const CreateStatusBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreateStatusResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+    webitelCasesInputStatusBody: WebitelCasesInputStatusBody,
+    params?: CreateStatusParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/statuses`,
+      webitelCasesInputStatusBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a status
  */
-export const DeleteStatusParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteStatusResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/statuses/${id}`,options
+    );
+  }
 /**
  * @summary Locate a status by ID
  */
-export const LocateStatusParams = zod.object({
-  "id": zod.string()
-})
-
-export const LocateStatusQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const LocateStatusResponse = zod.object({
-  "status": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locateStatus = <TData = AxiosResponse<WebitelCasesLocateStatusResponse>>(
+    id: string,
+    params?: LocateStatusParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/statuses/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing status
  */
-export const UpdateStatus2Params = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateStatus2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const UpdateStatus2Body = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateStatus2Response = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateStatus2 = <TData = AxiosResponse<WebitelCasesStatus>>(
+    id: string,
+    webitelCasesInputStatus: WebitelCasesInputStatus,
+    params?: UpdateStatus2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/statuses/${id}`,
+      webitelCasesInputStatus,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing status
  */
-export const UpdateStatusParams = zod.object({
-  "id": zod.string()
-})
+const updateStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+    id: string,
+    webitelCasesInputStatus: WebitelCasesInputStatus,
+    params?: UpdateStatusParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/statuses/${id}`,
+      webitelCasesInputStatus,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateStatusQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+            // --- footer start
+            return {listStatuses,createStatus,deleteStatus,locateStatus,updateStatus2,updateStatus}};
+export type ListStatusesResult = AxiosResponse<WebitelCasesStatusList>
+export type CreateStatusResult = AxiosResponse<WebitelCasesStatus>
+export type DeleteStatusResult = AxiosResponse<WebitelCasesStatus>
+export type LocateStatusResult = AxiosResponse<WebitelCasesLocateStatusResponse>
+export type UpdateStatus2Result = AxiosResponse<WebitelCasesStatus>
+export type UpdateStatusResult = AxiosResponse<WebitelCasesStatus>
 
-export const UpdateStatusBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateStatusResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          
