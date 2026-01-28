@@ -25,6 +25,7 @@
         :id="inputId"
         ref="inputNumber"
         v-model="model"
+        :use-grouping="useGrouping"
         :disabled="disabled"
         :invalid="invalid"
         :min="min"
@@ -89,6 +90,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	min?: number;
 	max?: number;
 	step?: number;
+	useGrouping?: boolean;
 	minFractionDigits?: number;
 	maxFractionDigits?: number;
 	showButtons?: boolean;
@@ -106,6 +108,7 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 	min: undefined,
 	max: undefined,
 	step: 1,
+	useGrouping: false,
 	minFractionDigits: undefined,
 	maxFractionDigits: undefined,
 	showButtons: true,
