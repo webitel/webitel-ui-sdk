@@ -59,8 +59,6 @@ export const createUserinfoStore = () => {
 		};
 
 		const logoutUser = async () => {
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-expect-error
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
 			await logout();
