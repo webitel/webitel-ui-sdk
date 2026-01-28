@@ -85,13 +85,13 @@
         :actions:settings:pressed="props['actions:settings:pressed']"
         :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:chat:pressed="props['actions:chat:pressed']"
-        @[VideoCallAction.Screenshot]="(payload, options) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
-        @[VideoCallAction.Recordings]="(payload, options) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
-        @[VideoCallAction.Mic]="(payload, options) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
-        @[VideoCallAction.Video]="(payload, options) => emit(`action:${VideoCallAction.Video}`, payload, options)"
-        @[VideoCallAction.Settings]="(payload, options) => emit(`action:${VideoCallAction.Settings}`, payload, options)"
-        @[VideoCallAction.Chat]="(payload, options) => emit(`action:${VideoCallAction.Chat}`, payload, options)"
-        @[VideoCallAction.Hangup]="(payload, options) => emit(`action:${VideoCallAction.Hangup}`, payload, options)"
+        @[VideoCallAction.Recordings]="(payload, options) => emit(emitKeys[VideoCallAction.Recordings], payload, options)"
+        @[VideoCallAction.Screenshot]="(payload, options) => emit(emitKeys[VideoCallAction.Screenshot], payload, options)"
+        @[VideoCallAction.Mic]="(payload, options) => emit(emitKeys[VideoCallAction.Mic], payload, options)"
+        @[VideoCallAction.Video]="(payload, options) => emit(emitKeys[VideoCallAction.Video], payload, options)"
+        @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
+        @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
+        @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
       />
     </template>
   </wt-vidstack-player>
@@ -111,7 +111,7 @@ import {
 import { ComponentSize, WebitelApplications } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
-import type { VideoCallAction } from './enums/VideoCallAction.enum';
+import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
 	defineProps<{
@@ -191,6 +191,19 @@ const emit = defineEmits<{
 	(e: `action:${typeof VideoCallAction.CloseScreenshot}`): void;
 	(e: `change-size`, size: ComponentSize): void;
 }>();
+
+/**
+ * dont remove, coz biome reformats VideoCallAction import to "type"
+ */
+const emitKeys = {
+	[VideoCallAction.Screenshot]: `action:${VideoCallAction.Screenshot}`,
+	[VideoCallAction.Recordings]: `action:${VideoCallAction.Recordings}`,
+	[VideoCallAction.Mic]: `action:${VideoCallAction.Mic}`,
+	[VideoCallAction.Video]: `action:${VideoCallAction.Video}`,
+	[VideoCallAction.Settings]: `action:${VideoCallAction.Settings}`,
+	[VideoCallAction.Chat]: `action:${VideoCallAction.Chat}`,
+	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
+};
 
 const { t } = useI18n();
 
