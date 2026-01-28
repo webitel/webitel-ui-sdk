@@ -1,5 +1,4 @@
 export * from './access-store/access-store';
-export * from './webitelAPI.schemas';
 export * from './agent-chat-service/agent-chat-service';
 export * from './pdf-service/pdf-service';
 export * from './calendar-service/calendar-service';
@@ -114,6 +113,7 @@ export * from './pause-template-service/pause-template-service';
 export * from './shift-template-service/shift-template-service';
 export * from './working-condition-service/working-condition-service';
 export * from './working-schedule-service/working-schedule-service';
+export * from './_models';
 export * from './access-store/access-store.zod';
 export * from './agent-chat-service/agent-chat-service.zod';
 export * from './pdf-service/pdf-service.zod';
@@ -229,4 +229,3 @@ export * from './pause-template-service/pause-template-service.zod';
 export * from './shift-template-service/shift-template-service.zod';
 export * from './working-condition-service/working-condition-service.zod';
 export * from './working-schedule-service/working-schedule-service.zod';
-export * from './_models';
