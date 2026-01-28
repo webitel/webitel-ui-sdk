@@ -14,6 +14,7 @@ import {
 	makeGlobalAccessMap,
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
+	isScopeException,
 } from '../scripts/utils';
 import type {
 	AppVisibilityMap,
@@ -43,16 +44,17 @@ export const createUserAccessStore = ({
 
 		const hasAccess = (
 			action: CrudAction | SpecialGlobalAction,
-			object?: WtObject,
+			object: WtObject,
 		) => {
-			const allowGlobalAccess = globalAccess.value.get(action);
-			if (allowGlobalAccess) return true;
-
-			const allowScopeAccess =
-				object && scopeAccess.value.get(object)?.get(action as CrudAction);
-			if (allowScopeAccess) return true;
-
-			return false;
+			if (!isScopeException(object)) {
+				const allowScopeAccess = scopeAccess.value
+					.get(object)
+					?.get(action as CrudAction);
+				return !!allowScopeAccess;
+			} else {
+				const allowGlobalAccess = globalAccess.value.get(action);
+				return !!allowGlobalAccess;
+			}
 		};
 
 		const hasReadAccess = (object?: WtObject) => {
@@ -156,9 +158,13 @@ export const createUserAccessStore = ({
 			 * @internal
 			 * for pinia devtools debug
 			 */
+			// @ts-expect-error
 			globalAccess,
+			// @ts-expect-error
 			scopeAccess,
+			// @ts-expect-error
 			appVisibilityAccess,
+			// @ts-expect-error
 			sectionVisibilityAccess,
 		};
 	});

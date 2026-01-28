@@ -1,37 +1,57 @@
 <template>
-  <div v-clickaway="close" class="wt-app-navigator">
-    <wt-icon-btn
-v-tooltip="$t('webitelUI.appNavigator.title')" :class="{ active: isOpened }"
-      class="wt-app-navigator__btn" icon="app-navigator" @click="isOpened = !isOpened" />
+	<div
+		v-clickaway="close"
+		class="wt-app-navigator"
+	>
+		<wt-icon-btn
+			v-tooltip="$t('webitelUI.appNavigator.title')"
+			:class="{ active: isOpened }"
+			class="wt-app-navigator__btn"
+			icon="app-navigator"
+			@click="isOpened = !isOpened"
+		/>
 
-    <transition name="fade">
-      <nav v-show="isOpened" class="wt-app-navigator__nav-wrappe wt-scrollbar">
-        <h3 class="wt-app-navigator__nav-title typo-subtitle-1">
-          {{ $t('webitelUI.appNavigator.title') }}
-        </h3>
-        <ul class="wt-app-navigator__nav">
-          <li
-v-for="app of formattedApps" :key="app.name" :class="{ active: app.currentApp }"
-            class="wt-app-navigator__card">
-            <a
-:href="app.href" :title="$t(`webitelUI.appNavigator.${app.name}`)" class="wt-app-navigator__card__link"
-              target="_blank">
-              <img :alt="`${app.name}-pic`" :src="app.img" class="wt-app-navigator__card__img" />
-              <p class="wt-app-navigator__card__title typo-overline">
-                {{ $t(`webitelUI.appNavigator.${app.name}`) }}
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </transition>
-  </div>
+		<transition name="fade">
+			<nav
+				v-show="isOpened"
+				class="wt-app-navigator__nav-wrappe wt-scrollbar"
+			>
+				<h3 class="wt-app-navigator__nav-title typo-subtitle-1">
+					{{ $t('webitelUI.appNavigator.title') }}
+				</h3>
+				<ul class="wt-app-navigator__nav">
+					<li
+						v-for="app of formattedApps"
+						:key="app.name"
+						:class="{ active: app.currentApp }"
+						class="wt-app-navigator__card"
+					>
+						<a
+							:href="app.href"
+							:title="$t(`webitelUI.appNavigator.${app.name}`)"
+							class="wt-app-navigator__card__link"
+							target="_blank"
+						>
+							<img
+								:alt="`${app.name}-pic`"
+								:src="app.img"
+								class="wt-app-navigator__card__img"
+							/>
+							<p class="wt-app-navigator__card__title typo-overline">
+								{{ $t(`webitelUI.appNavigator.${app.name}`) }}
+							</p>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</transition>
+	</div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
 
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { WtApplication } from '../../enums';
 import AdminDark from './assets/admin-dark.svg';
 import AdminLight from './assets/admin-light.svg';
 import AgentDark from './assets/agent-dark.svg';
@@ -48,31 +68,31 @@ import SupervisorDark from './assets/supervisor-dark.svg';
 import SupervisorLight from './assets/supervisor-light.svg';
 
 const pics = {
-	[WebitelApplications.ADMIN]: {
+	[WtApplication.Admin]: {
 		dark: AdminDark,
 		light: AdminLight,
 	},
-	[WebitelApplications.AGENT]: {
+	[WtApplication.Agent]: {
 		dark: AgentDark,
 		light: AgentLight,
 	},
-	[WebitelApplications.ANALYTICS]: {
+	[WtApplication.Analytics]: {
 		dark: AnalyticsDark,
 		light: AnalyticsLight,
 	},
-	[WebitelApplications.CRM]: {
+	[WtApplication.Crm]: {
 		dark: CrmDark,
 		light: CrmLight,
 	},
-	[WebitelApplications.HISTORY]: {
+	[WtApplication.History]: {
 		dark: HistoryDark,
 		light: HistoryLight,
 	},
-	[WebitelApplications.AUDIT]: {
+	[WtApplication.Audit]: {
 		dark: AuditDark,
 		light: AuditLight,
 	},
-	[WebitelApplications.SUPERVISOR]: {
+	[WtApplication.Supervisor]: {
 		dark: SupervisorDark,
 		light: SupervisorLight,
 	},
@@ -104,13 +124,13 @@ const props = defineProps({
 const isOpened = ref(false);
 
 const order = [
-	WebitelApplications.AGENT,
-	WebitelApplications.SUPERVISOR,
-	WebitelApplications.HISTORY,
-	WebitelApplications.ADMIN,
-	WebitelApplications.AUDIT,
-	WebitelApplications.CRM,
-	WebitelApplications.ANALYTICS,
+	WtApplication.Agent,
+	WtApplication.Supervisor,
+	WtApplication.History,
+	WtApplication.Admin,
+	WtApplication.Audit,
+	WtApplication.Crm,
+	WtApplication.Analytics,
 ];
 
 const formattedApps = computed(() =>
@@ -136,72 +156,72 @@ function close() {
 
 <style scoped>
 .wt-app-navigator {
-  display: flex;
-  position: relative;
-  align-items: center;
-  z-index: var(--wt-app-header-content-z-index);
+	display: flex;
+	position: relative;
+	align-items: center;
+	z-index: var(--wt-app-header-content-z-index);
 }
 
 .wt-app-navigator__nav-wrappe {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  transition: var(--transition);
-  margin-top: var(--wt-app-header-content-panel-margin);
-  box-shadow: var(--elevation-10);
-  border-radius: var(--border-radius);
-  background: var(--wt-app-header-content-bg-color);
-  padding: var(--wt-app-header-content-gap);
-  max-height: var(--wt-app-navigator-max-height);
-  overflow: auto;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	transition: var(--transition);
+	margin-top: var(--wt-app-header-content-panel-margin);
+	box-shadow: var(--elevation-10);
+	border-radius: var(--border-radius);
+	background: var(--wt-app-header-content-bg-color);
+	padding: var(--wt-app-header-content-gap);
+	max-height: var(--wt-app-navigator-max-height);
+	overflow: auto;
 }
 
 .wt-app-navigator__nav-title {
-  margin-bottom: var(--wt-app-header-content-gap);
-  text-align: center;
-  text-transform: uppercase;
+	margin-bottom: var(--wt-app-header-content-gap);
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .wt-app-navigator__nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: var(--wt-app-navigator-item-gap);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: var(--wt-app-navigator-item-gap);
 }
 
 .wt-app-navigator__card {
-  transition: var(--transition);
-  box-sizing: border-box;
-  border: var(--wt-app-navigator-item-border);
-  border-color: var(--wt-app-navigator-item-border-color);
-  border-radius: var(--border-radius);
-  width: var(--wt-app-navigator-item-width);
-  height: var(--wt-app-navigator-item-height);
+	transition: var(--transition);
+	box-sizing: border-box;
+	border: var(--wt-app-navigator-item-border);
+	border-color: var(--wt-app-navigator-item-border-color);
+	border-radius: var(--border-radius);
+	width: var(--wt-app-navigator-item-width);
+	height: var(--wt-app-navigator-item-height);
 }
 
 .wt-app-navigator__card.active,
 .wt-app-navigator__card:hover {
-  border-color: var(--wt-app-navigator-item-border-color--hover);
+	border-color: var(--wt-app-navigator-item-border-color--hover);
 }
 
 .wt-app-navigator__card__link {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  box-sizing: border-box;
-  padding: var(--wt-app-navigator-item-padding);
-  width: 100%;
-  height: 100%;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+	box-sizing: border-box;
+	padding: var(--wt-app-navigator-item-padding);
+	width: 100%;
+	height: 100%;
 }
 
 .wt-app-navigator__card__img {
-  margin: auto;
-  width: var(--wt-app-navigator-item-pic-size);
-  height: var(--wt-app-navigator-item-pic-size);
+	margin: auto;
+	width: var(--wt-app-navigator-item-pic-size);
+	height: var(--wt-app-navigator-item-pic-size);
 }
 
 .wt-app-navigator__card__title {
-  color: var(--text-main-color);
-  text-align: center;
+	color: var(--text-main-color);
+	text-align: center;
 }
 </style>

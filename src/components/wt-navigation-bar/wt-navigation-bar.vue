@@ -22,9 +22,8 @@
           >
             <img
               :alt="currentApp"
-              :src="
-                darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
-              "
+              :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
+                "
               class="wt-navigation-bar__app-pic"
             />
           </router-link>
@@ -70,7 +69,7 @@
               >
                 <span class="wt-navigation-bar__nav-expansion-name typo-subtitle-1">{{
                   navItem.name || navItem.value
-                }}</span>
+                  }}</span>
                 <wt-icon
                   class="wt-navigation-bar__expansion-arrow"
                   color="active"
@@ -109,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { WtApplication } from '../../enums';
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
 import AdminDark from './assets/dark/app-logo-dark-admin.svg';
 import AuditDark from './assets/dark/app-logo-dark-audit.svg';
@@ -128,31 +127,31 @@ import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo = {
-	[WebitelApplications.SUPERVISOR]: {
+	[WtApplication.Supervisor]: {
 		dark: SupervisorDark,
 		light: SupervisorLight,
 	},
-	[WebitelApplications.ADMIN]: {
+	[WtApplication.Admin]: {
 		dark: AdminDark,
 		light: AdminLight,
 	},
-	[WebitelApplications.AGENT]: {
+	[WtApplication.Agent]: {
 		dark: WorkspaceDark,
 		light: WorkspaceLight,
 	},
-	[WebitelApplications.AUDIT]: {
+	[WtApplication.Audit]: {
 		dark: AuditDark,
 		light: AuditLight,
 	},
-	[WebitelApplications.HISTORY]: {
+	[WtApplication.History]: {
 		dark: HistoryDark,
 		light: HistoryLight,
 	},
-	[WebitelApplications.CRM]: {
+	[WtApplication.Crm]: {
 		dark: CrmDark,
 		light: CrmLight,
 	},
-	[WebitelApplications.WFM]: {
+	[WtApplication.Wfm]: {
 		dark: WfmDark,
 		light: WfmLight,
 	},

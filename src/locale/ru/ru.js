@@ -17,7 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
-	WebitelApplications,
+	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -298,9 +298,9 @@ export default {
 		},
 	},
 	// describes Webitel FRONTEND applications + their navs
-	WebitelApplications: {
+	WtApplication: {
 		overrideApplicationsAccess: {
-			[WebitelApplications.CRM]: {
+			[WtApplication.Crm]: {
 				sections: {
 					[CrmSectionsNew.CasesExtensions]: ({ linked }) =>
 						linked('objects.customization.customization') +
@@ -317,16 +317,16 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
+		[WtApplication.Agent]: {
 			name: 'Agent Workspace',
 		},
-		[WebitelApplications.AUDIT]: {
+		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Анкеты',
 			},
 		},
-		[WebitelApplications.CRM]: {
+		[WtApplication.Crm]: {
 			name: 'CRM',
 			sections: {
 				[CrmSections.Contacts]: 'Контакты',
@@ -340,13 +340,13 @@ export default {
 				[CrmSections.ContactGroups]: 'Группы контактов',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
+		[WtApplication.History]: {
 			name: 'Call History',
 		},
-		[WebitelApplications.ANALYTICS]: {
+		[WtApplication.Analytics]: {
 			name: 'Data Visualisation Tool',
 		},
-		[WebitelApplications.SUPERVISOR]: {
+		[WtApplication.Supervisor]: {
 			name: 'Supervisor Workspace',
 			sections: {
 				[SupervisorSections.Queues]: 'Очереди',
@@ -354,7 +354,7 @@ export default {
 				[SupervisorSections.ActiveCalls]: 'Активные звонки',
 			},
 		},
-		[WebitelApplications.ADMIN]: {
+		[WtApplication.Admin]: {
 			name: 'Admin',
 			sections: {
 				[AdminSections.Users]: 'Пользователи',
@@ -396,10 +396,10 @@ export default {
 				[AdminSections.QuickReplies]: 'Быстрые ответы',
 			},
 		},
-		[WebitelApplications.WFM]: {
+		[WtApplication.Wfm]: {
 			name: 'WFM',
 		},
-		[WebitelApplications.MEET]: {
+		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера выключена',
 		},
 	},

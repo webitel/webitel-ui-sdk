@@ -168,6 +168,12 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
 	],
 };
 
+export const wtObjectsWithNoScopeExceptions: Partial<
+	Record<WtObject, boolean>
+> = {
+	[WtObject.License]: true,
+};
+
 export const mapScopeClassAccessTokenToCrudAction = {
 	r: CrudAction.Read,
 	w: CrudAction.Update,
@@ -259,6 +265,8 @@ export const mapWtObjectToUiSection: Record<
 		[WtObject.Agent]: SupervisorSections.Agents,
 		[WtObject.Communication]: SupervisorSections.ActiveCalls,
 	},
+
+	[WtApplication.Wfm]: {},
 };
 
 export const mapUiSectionToWtObject = invert(mapWtObjectToUiSection);

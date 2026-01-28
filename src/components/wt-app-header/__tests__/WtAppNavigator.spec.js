@@ -1,19 +1,19 @@
 import { shallowMount } from '@vue/test-utils';
 
-import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { WtApplication } from '@webitel/ui-sdk/enums';
 import WtAppNavigator from '../wt-app-navigator.vue';
 
 const apps = [
 	{
-		name: WebitelApplications.ADMIN,
+		name: WtApplication.Admin,
 		href: '',
 	},
 	{
-		name: WebitelApplications.HISTORY,
+		name: WtApplication.History,
 		href: '',
 	},
 	{
-		name: WebitelApplications.SUPERVISOR,
+		name: WtApplication.Supervisor,
 		href: '',
 	},
 ];

@@ -14,6 +14,7 @@ import {
 	mapUiSectionToWtObject,
 	mapWtObjectToUiSection,
 	SupervisorSectionsValues,
+	wtObjectsWithNoScopeExceptions,
 } from '../mappings/mappings';
 import type {
 	AppVisibilityMap,
@@ -97,7 +98,14 @@ export const makeSectionVisibilityMap = (
 	Object.values(rawVisibility).forEach((appSectionsVisibility) => {
 		Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
 			if (section.startsWith('_')) return map; // skip private fields
-			map.set(section, visibility._enabled);
+			map.set(
+				section,
+				(
+					visibility as {
+						_enabled: boolean;
+					}
+				)._enabled,
+			);
 		});
 	});
 
@@ -130,4 +138,8 @@ export const getWtAppByUiSection = (section: UiSection): WtApplication => {
 	// then => custom lookup
 	// console.info(`Havent found app for section: ${section}, fallback to crm`);
 	return WtApplication.Crm;
+};
+
+export const isScopeException = (object: WtObject): boolean => {
+	return wtObjectsWithNoScopeExceptions[object] ?? false;
 };
