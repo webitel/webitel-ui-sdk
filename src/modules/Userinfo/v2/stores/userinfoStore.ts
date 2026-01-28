@@ -1,5 +1,5 @@
 import pick from 'lodash/pick';
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
@@ -28,11 +28,13 @@ export const createUserinfoStore = () => {
 			hasSectionVisibility,
 			hasApplicationVisibility,
 		} = accessStore;
-		const { initialize: initializeSettingsStore, timezone } =
-			useSettingsStore();
+
+		const settingsStore = useSettingsStore();
+		const { initialize: initializeSettingsStore } = settingsStore;
+		const { timezone } = storeToRefs(settingsStore);
 
 		const userId = ref();
-		const userInfo = ref(null);
+		const userInfo = ref();
 
 		const initialize = async () => {
 			const session = await getSession();
