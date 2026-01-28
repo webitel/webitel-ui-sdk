@@ -8,7 +8,6 @@ import IconsTable from './icons-table.vue';
 
 **(fun) facts:**
 
-
 1. Іконки – `.svg`
 2. Іконки лежать у [`src/assets/icons/sprite`](https://github.com/webitel/webitel-ui-sdk/tree/main/src/assets/icons/sprite)...
 3. ... і підключаються у [`index.ts`](https://github.com/webitel/webitel-ui-sdk/blob/main/src/assets/icons/sprite/index.ts) файлі...
@@ -44,6 +43,10 @@ import IconsTable from './icons-table.vue';
 
 ### Проблеми:
 
+> [!WARNING]
+> Зважайте: ця **проблема є актуальною тільки для апплікейшенів, де є свої локальні іконки**, які треба підключати.
+> **Якщо таких іконок немає, то це не проблемою**, бо **глобальні іконки підключаються в середині ліби**.
+
 Через те що ця мапа імпортується у `wt-icon.vue`, який білдиться як ліба у дефолтному експорті `@webitel/ui-sdk`, то і 
 репозиторій іконок також бандлиться разом з лібою.
 
@@ -60,6 +63,10 @@ import IconsTable from './icons-table.vue';
 
 
 ## Project-level (local) icons
+
+У деяких апплікейшенах є свої набори іконок, які підключаються саме в тих апплікейшенах. Бо, вони локальні, 
+і задумка така щоб не тягти їх в основний бандл. Наприклад, це іконки нодів у `webitel-flow-diagram`, або
+іконки розділів у `Admin`.
 
 ### Icons naming convention
 
