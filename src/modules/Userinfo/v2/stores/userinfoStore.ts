@@ -46,6 +46,7 @@ export const createUserinfoStore = () => {
 				'username',
 				'permissions',
 				'userId',
+				'preferredUsername',
 				'scope',
 				'roles',
 				'license',
