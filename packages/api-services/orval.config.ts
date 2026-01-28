@@ -59,8 +59,6 @@ export default defineConfig({
     output: {
       workspace: outputWorkspace,
       target: outputTarget,
-      fileExtension: '.zod.ts',
-      // fileExtension: `.zod.${sharedGenFileExtension}`,
       client: 'zod',
       mode: 'tags-split',
       indexFiles: true,
