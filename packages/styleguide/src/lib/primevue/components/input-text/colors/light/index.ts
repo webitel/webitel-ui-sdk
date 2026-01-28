@@ -9,7 +9,7 @@ const lightColors = {
     hoverBorderColor: '{form.field.hover.border.color}',
     focusBorderColor: '{form.field.focus.border.color}',
     invalidBorderColor: '{form.field.invalid.border.color}',
-    invalidHoverBorderColor: 'black',
+    invalidHoverBorderColor: '{form.field.invalid.hover.border.color}',
     color: '{form.field.color}',
     disabledColor: '{form.field.disabled.color}',
     placeholderColor: '{form.field.placeholder.color}',
