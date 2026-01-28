@@ -18,12 +18,12 @@ import type {
 
 import {
   EngineRoutingSchemaType
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   EngineListRoutingSchema,
   EngineListRoutingSchemaTags,
   EngineRoutingSchema
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchRoutingSchemaResponseMock = (overrideResponse: Partial< EngineListRoutingSchema > = {}): EngineListRoutingSchema => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({tags: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), debug: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), editor: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineRoutingSchemaType)), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

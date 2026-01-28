@@ -4,295 +4,152 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsInputVariable,
+  ContactsVariable,
+  ContactsVariableList,
+  DeleteVariableParams,
+  DeleteVariablesParams,
+  ListVariablesParams,
+  MergeVariablesParams,
+  ResetVariablesParams,
+  UpdateVariable2Body,
+  UpdateVariable2Params,
+  UpdateVariableBody,
+  UpdateVariableParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getVariables
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Remove variable(s) of the contact
  */
-export const DeleteVariablesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const deleteVariablesQueryEtagItemRegExp = new RegExp('^.+$');
-
-
-export const DeleteVariablesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "etag": zod.array(zod.string().regex(deleteVariablesQueryEtagItemRegExp)).describe('Set of unique ID(s) to remove.')
-})
-
-export const DeleteVariablesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+const deleteVariables = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    params: DeleteVariablesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/variables`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List variables of the contact
  */
-export const ListVariablesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const ListVariablesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result. offset = ((page-1)*size)'),
-  "size": zod.number().optional().describe('Size of result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: variable key;\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "id": zod.array(zod.string()).optional().describe('Record(s) with unique ID only.')
-})
-
-export const ListVariablesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+const listVariables = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    params?: ListVariablesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/variables`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update or append variables to the contact
  */
-export const MergeVariablesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const MergeVariablesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const mergeVariablesBodyKeyRegExp = new RegExp('^\\w+$');
-
-
-export const MergeVariablesBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "key": zod.string().regex(mergeVariablesBodyKeyRegExp).describe('NEW Key.'),
-  "value": zod.unknown().optional().describe('NEW Value.')
-}).describe('Input of the Contact\'s variable.')
-export const MergeVariablesBody = zod.array(MergeVariablesBodyItem)
-
-export const MergeVariablesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+const mergeVariables = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    contactsInputVariable: ContactsInputVariable[],
+    params?: MergeVariablesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/variables`,
+      contactsInputVariable,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Reset all variables of the contact
  */
-export const ResetVariablesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const ResetVariablesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const resetVariablesBodyKeyRegExp = new RegExp('^\\w+$');
-
-
-export const ResetVariablesBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "key": zod.string().regex(resetVariablesBodyKeyRegExp).describe('NEW Key.'),
-  "value": zod.unknown().optional().describe('NEW Value.')
-}).describe('Input of the Contact\'s variable.')
-export const ResetVariablesBody = zod.array(ResetVariablesBodyItem)
-
-export const ResetVariablesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+const resetVariables = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    contactsInputVariable: ContactsInputVariable[],
+    params?: ResetVariablesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/variables`,
+      contactsInputVariable,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove the contact's variable by etag
  */
-export const DeleteVariableParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID to remove.')
-})
-
-export const DeleteVariableQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const DeleteVariableResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')
-
+const deleteVariable = <TData = AxiosResponse<ContactsVariable>>(
+    contactId: string,
+    etag: string,
+    params?: DeleteVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/variables/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update contact variable
  */
-export const UpdateVariable2Params = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
-
-export const UpdateVariable2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const updateVariable2BodyKeyRegExp = new RegExp('^\\w+$');
-
-
-export const UpdateVariable2Body = zod.object({
-  "key": zod.string().regex(updateVariable2BodyKeyRegExp).describe('NEW Key.'),
-  "value": zod.unknown().optional().describe('NEW Value.')
-})
-
-export const UpdateVariable2Response = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+const updateVariable2 = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    etag: string,
+    updateVariable2Body: UpdateVariable2Body,
+    params?: UpdateVariable2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/${contactId}/variables/${etag}`,
+      updateVariable2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update contact variable
  */
-export const UpdateVariableParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
+const updateVariable = <TData = AxiosResponse<ContactsVariableList>>(
+    contactId: string,
+    etag: string,
+    updateVariableBody: UpdateVariableBody,
+    params?: UpdateVariableParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/variables/${etag}`,
+      updateVariableBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateVariableQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+            // --- footer start
+            return {deleteVariables,listVariables,mergeVariables,resetVariables,deleteVariable,updateVariable2,updateVariable}};
+export type DeleteVariablesResult = AxiosResponse<ContactsVariableList>
+export type ListVariablesResult = AxiosResponse<ContactsVariableList>
+export type MergeVariablesResult = AxiosResponse<ContactsVariableList>
+export type ResetVariablesResult = AxiosResponse<ContactsVariableList>
+export type DeleteVariableResult = AxiosResponse<ContactsVariable>
+export type UpdateVariable2Result = AxiosResponse<ContactsVariableList>
+export type UpdateVariableResult = AxiosResponse<ContactsVariableList>
 
-export const updateVariableBodyKeyRegExp = new RegExp('^\\w+$');
-
-
-export const UpdateVariableBody = zod.object({
-  "key": zod.string().regex(updateVariableBodyKeyRegExp).describe('NEW Key.'),
-  "value": zod.unknown().optional().describe('NEW Value.')
-})
-
-export const UpdateVariableResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "key": zod.string().optional().describe('Key name of the variable.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "value": zod.unknown().optional().describe('JSON value of the variable.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('The Contact\'s variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.')).optional().describe('Variable dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Variable dataset.')
-
+            // --- footer end
+          

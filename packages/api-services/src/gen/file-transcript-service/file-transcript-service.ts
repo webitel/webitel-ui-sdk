@@ -4,71 +4,77 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  GetFileTranscriptPhrasesParams,
+  StorageDeleteFileTranscriptRequest,
+  StorageDeleteFileTranscriptResponse,
+  StorageListPhrases,
+  StoragePutFileTranscriptRequest,
+  StoragePutFileTranscriptResponse,
+  StorageStartFileTranscriptRequest,
+  StorageStartFileTranscriptResponse
+} from '../webitelAPI.schemas';
 
 
-export const DeleteFileTranscriptBody = zod.object({
-  "id": zod.array(zod.string()).optional(),
-  "uuid": zod.array(zod.string()).optional()
-})
 
-export const DeleteFileTranscriptResponse = zod.object({
-  "items": zod.array(zod.string()).optional()
-})
+            // --- header start
+            // 
 
-export const CreateFileTranscriptBody = zod.object({
-  "fileId": zod.array(zod.string()).optional(),
-  "locale": zod.string().optional(),
-  "profile": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.array(zod.string()).optional()
-})
+  export const 
+            // --- title start
+            getFileTranscriptService
+            // --- title end
+           = () => {
 
-export const CreateFileTranscriptResponse = zod.object({
-  "items": zod.array(zod.object({
-  "action": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "fileId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "state": zod.string().optional()
-})).optional()
-})
+            // --- header end
+          const deleteFileTranscript = <TData = AxiosResponse<StorageDeleteFileTranscriptResponse>>(
+    storageDeleteFileTranscriptRequest: StorageDeleteFileTranscriptRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/transcript_file`,{data:
+      storageDeleteFileTranscriptRequest, ...options}
+    );
+  }
+const createFileTranscript = <TData = AxiosResponse<StorageStartFileTranscriptResponse>>(
+    storageStartFileTranscriptRequest: StorageStartFileTranscriptRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/storage/transcript_file`,
+      storageStartFileTranscriptRequest,options
+    );
+  }
+const putFileTranscript = <TData = AxiosResponse<StoragePutFileTranscriptResponse>>(
+    storagePutFileTranscriptRequest: StoragePutFileTranscriptRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/storage/transcript_file`,
+      storagePutFileTranscriptRequest,options
+    );
+  }
+const getFileTranscriptPhrases = <TData = AxiosResponse<StorageListPhrases>>(
+    id: string,
+    params?: GetFileTranscriptPhrasesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/transcript_file/${id}/phrases`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const PutFileTranscriptBody = zod.object({
-  "fileId": zod.string().optional(),
-  "locale": zod.string().optional(),
-  "phrases": zod.array(zod.object({
-  "channel": zod.number().optional(),
-  "endSec": zod.number().optional(),
-  "phrase": zod.string().optional(),
-  "startSec": zod.number().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "uuid": zod.string().optional()
-})
+            // --- footer start
+            return {deleteFileTranscript,createFileTranscript,putFileTranscript,getFileTranscriptPhrases}};
+export type DeleteFileTranscriptResult = AxiosResponse<StorageDeleteFileTranscriptResponse>
+export type CreateFileTranscriptResult = AxiosResponse<StorageStartFileTranscriptResponse>
+export type PutFileTranscriptResult = AxiosResponse<StoragePutFileTranscriptResponse>
+export type GetFileTranscriptPhrasesResult = AxiosResponse<StorageListPhrases>
 
-export const PutFileTranscriptResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const GetFileTranscriptPhrasesParams = zod.object({
-  "id": zod.string()
-})
-
-export const GetFileTranscriptPhrasesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const GetFileTranscriptPhrasesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.number().optional(),
-  "endSec": zod.number().optional(),
-  "phrase": zod.string().optional(),
-  "startSec": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+            // --- footer end
+          

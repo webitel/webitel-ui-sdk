@@ -18,12 +18,12 @@ import type {
 
 import {
   WebitelMediaExporterExportStatus
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WebitelMediaExporterDeleteExportResponse,
   WebitelMediaExporterExportTask,
   WebitelMediaExporterListExportsResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getListScreenrecordingExportsResponseMock = (overrideResponse: Partial< WebitelMediaExporterListExportsResponse > = {}): WebitelMediaExporterListExportsResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), fileId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), mimeType: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), status: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(WebitelMediaExporterExportStatus)), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})

@@ -4,947 +4,304 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  AgentStateHistoryParams,
+  AgentTodayStatisticsParams,
+  DeleteAgentParams,
+  EngineAgent,
+  EngineAgentCallStatisticsList,
+  EngineAgentInQueueStatisticsList,
+  EngineAgentServiceAgentSetStateBody,
+  EngineAgentServicePatchAgentBody,
+  EngineAgentServiceUpdateAgentBody,
+  EngineAgentServiceUpdateAgentStatusBody,
+  EngineAgentSetStateResponse,
+  EngineAgentStatusStatisticItem,
+  EngineAgentTodayStatisticsResponse,
+  EngineCreateAgentRequest,
+  EngineForAgentPauseCauseList,
+  EngineListAgent,
+  EngineListAgentInQueue,
+  EngineListAgentInTeam,
+  EngineListAgentStateHistory,
+  EngineListAgentStatsStatistic,
+  EngineListAgentUser,
+  EngineListUserStatus,
+  EngineResponse,
+  ReadAgentParams,
+  SearchAgentCallStatisticsParams,
+  SearchAgentInQueueParams,
+  SearchAgentInQueueStatisticsParams,
+  SearchAgentInTeamParams,
+  SearchAgentParams,
+  SearchAgentStateHistoryParams,
+  SearchAgentStatusStatisticItemParams,
+  SearchAgentStatusStatisticParams,
+  SearchLookupUsersAgentNotExistsParams,
+  SearchPauseCauseForAgentParams,
+  SearchUserStatusParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getAgentService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of Agent
  */
-export const SearchAgentQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "allowChannels": zod.array(zod.string()).optional(),
-  "supervisorId": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "regionId": zod.array(zod.number()).optional(),
-  "auditorId": zod.array(zod.number()).optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "skillId": zod.array(zod.number()).optional(),
-  "queueId": zod.array(zod.number()).optional(),
-  "notSupervisor": zod.boolean().optional(),
-  "userId": zod.array(zod.string()).optional(),
-  "extension": zod.array(zod.string()).optional(),
-  "notTeamId": zod.array(zod.number()).optional(),
-  "notSkillId": zod.array(zod.number()).optional(),
-  "notUserId": zod.array(zod.string()).optional()
-})
-
-export const SearchAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchAgent = <TData = AxiosResponse<EngineListAgent>>(
+    params?: SearchAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create Agent
  */
-export const CreateAgentBody = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateAgentResponse = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})
-
-export const SearchAgentCallStatisticsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "timeFrom": zod.string().optional(),
-  "timeTo": zod.string().optional(),
-  "agentId": zod.array(zod.number()).optional(),
-  "domainId": zod.string().optional(),
-  "q": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "sort": zod.string().optional()
-})
-
-export const SearchAgentCallStatisticsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "abandoned": zod.number().optional(),
-  "avgHoldSec": zod.number().optional(),
-  "avgTalkSec": zod.number().optional(),
-  "chatAccepts": zod.number().optional(),
-  "chatAht": zod.number().optional(),
-  "count": zod.number().optional(),
-  "handles": zod.number().optional(),
-  "maxHoldSec": zod.number().optional(),
-  "maxTalkSec": zod.number().optional(),
-  "minHoldSec": zod.number().optional(),
-  "minTalkSec": zod.number().optional(),
-  "name": zod.string().optional(),
-  "occupancy": zod.number().optional(),
-  "sumHoldSec": zod.number().optional(),
-  "sumTalkSec": zod.number().optional(),
-  "utilization": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const SearchAgentStatusStatisticQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "agentId": zod.array(zod.string()).optional(),
-  "timeFrom": zod.string().optional(),
-  "timeTo": zod.string().optional(),
-  "status": zod.array(zod.string()).optional(),
-  "queueId": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "utilizationFrom": zod.string().optional(),
-  "utilizationTo": zod.string().optional(),
-  "hasCall": zod.boolean().optional(),
-  "skillId": zod.array(zod.number()).optional(),
-  "regionId": zod.array(zod.number()).optional(),
-  "supervisorId": zod.array(zod.number()).optional(),
-  "auditorId": zod.array(zod.string()).optional()
-})
-
-export const SearchAgentStatusStatisticResponse = zod.object({
-  "items": zod.array(zod.object({
-  "activeCallId": zod.string().optional(),
-  "agentId": zod.number().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "callTime": zod.string().optional(),
-  "chatCount": zod.number().optional(),
-  "chatTime": zod.string().optional(),
-  "descTrack": zod.boolean().optional(),
-  "extension": zod.string().optional(),
-  "handles": zod.number().optional(),
-  "maxBridgedAt": zod.string().optional(),
-  "maxOfferingAt": zod.string().optional(),
-  "missed": zod.number().optional(),
-  "name": zod.string().optional(),
-  "occupancy": zod.number().optional(),
-  "offline": zod.string().optional(),
-  "online": zod.string().optional(),
-  "pause": zod.string().optional(),
-  "pauseCause": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusComment": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "transferred": zod.number().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "utilization": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const SearchAgentStatusStatisticItemParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const SearchAgentStatusStatisticItemQueryParams = zod.object({
-  "timeFrom": zod.string().optional(),
-  "timeTo": zod.string().optional()
-})
-
-export const SearchAgentStatusStatisticItemResponse = zod.object({
-  "agentId": zod.number().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "descTrack": zod.boolean().optional(),
-  "extension": zod.string().optional(),
-  "name": zod.string().optional(),
-  "offline": zod.string().optional(),
-  "online": zod.string().optional(),
-  "pause": zod.string().optional(),
-  "pauseCause": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreCount": zod.string().optional(),
-  "scoreOptionalAvg": zod.number().optional(),
-  "scoreRequiredAvg": zod.number().optional(),
-  "screenControl": zod.boolean().optional(),
-  "status": zod.string().optional(),
-  "statusComment": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const SearchAgentStateHistoryQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "joinedAtFrom": zod.string().optional(),
-  "joinedAtTo": zod.string().optional(),
-  "agentId": zod.array(zod.string()).optional(),
-  "sort": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "fromId": zod.string().optional()
-})
-
-export const SearchAgentStateHistoryResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "channel": zod.string().optional(),
-  "duration": zod.string().optional(),
-  "id": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "leavedAt": zod.string().optional(),
-  "pauseCause": zod.string().optional(),
-  "payload": zod.string().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const SearchPauseCauseForAgentParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const SearchPauseCauseForAgentQueryParams = zod.object({
-  "allowChange": zod.boolean().optional()
-})
-
-export const SearchPauseCauseForAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "durationMin": zod.number().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const AgentStateHistoryParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const AgentStateHistoryQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "timeFrom": zod.string().optional(),
-  "timeTo": zod.string().optional(),
-  "q": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
-
-export const AgentStateHistoryResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "channel": zod.string().optional(),
-  "duration": zod.string().optional(),
-  "id": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "leavedAt": zod.string().optional(),
-  "pauseCause": zod.string().optional(),
-  "payload": zod.string().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const AgentSetStateParams = zod.object({
-  "agent_id": zod.number()
-})
-
-export const AgentSetStateBody = zod.object({
-
-})
-
-export const AgentSetStateResponse = zod.object({
-
-})
-
-export const SearchAgentInQueueStatisticsParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const SearchAgentInQueueStatisticsQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const SearchAgentInQueueStatisticsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "statistics": zod.array(zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "memberWaiting": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})).optional()
-})
-
-export const AgentTodayStatisticsParams = zod.object({
-  "agent_id": zod.string()
-})
-
-export const AgentTodayStatisticsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const AgentTodayStatisticsResponse = zod.object({
-  "available": zod.number().optional(),
-  "avgHoldSec": zod.number().optional(),
-  "avgTalkSec": zod.number().optional(),
-  "callAbandoned": zod.number().optional(),
-  "callDialerQueue": zod.number().optional(),
-  "callHandled": zod.number().optional(),
-  "callInbound": zod.number().optional(),
-  "callInboundQueue": zod.number().optional(),
-  "callManual": zod.number().optional(),
-  "callMissed": zod.number().optional(),
-  "callQueueMissed": zod.number().optional(),
-  "chatAccepts": zod.number().optional(),
-  "chatAht": zod.number().optional(),
-  "occupancy": zod.number().optional(),
-  "online": zod.number().optional(),
-  "processing": zod.number().optional(),
-  "queueTalkSec": zod.number().optional(),
-  "scoreCount": zod.string().optional(),
-  "scoreOptionalAvg": zod.number().optional(),
-  "scoreOptionalSum": zod.number().optional(),
-  "scoreRequiredAvg": zod.number().optional(),
-  "scoreRequiredSum": zod.number().optional(),
-  "sumTalkSec": zod.string().optional(),
-  "taskAccepts": zod.number().optional(),
-  "utilization": zod.number().optional(),
-  "voiceMail": zod.number().optional()
-})
-
+const createAgent = <TData = AxiosResponse<EngineAgent>>(
+    engineCreateAgentRequest: EngineCreateAgentRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/agents`,
+      engineCreateAgentRequest,options
+    );
+  }
+const searchAgentCallStatistics = <TData = AxiosResponse<EngineAgentCallStatisticsList>>(
+    params?: SearchAgentCallStatisticsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/reports/call`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchAgentStatusStatistic = <TData = AxiosResponse<EngineListAgentStatsStatistic>>(
+    params?: SearchAgentStatusStatisticParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/reports/status`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchAgentStatusStatisticItem = <TData = AxiosResponse<EngineAgentStatusStatisticItem>>(
+    agentId: string,
+    params?: SearchAgentStatusStatisticItemParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/reports/status/${agentId}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchAgentStateHistory = <TData = AxiosResponse<EngineListAgentStateHistory>>(
+    params?: SearchAgentStateHistoryParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/states/history`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchPauseCauseForAgent = <TData = AxiosResponse<EngineForAgentPauseCauseList>>(
+    agentId: string,
+    params?: SearchPauseCauseForAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${agentId}/pause_causes`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const agentStateHistory = <TData = AxiosResponse<EngineListAgentStateHistory>>(
+    agentId: string,
+    params?: AgentStateHistoryParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${agentId}/states/history`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const agentSetState = <TData = AxiosResponse<EngineAgentSetStateResponse>>(
+    agentId: number,
+    engineAgentServiceAgentSetStateBody: EngineAgentServiceAgentSetStateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/agents/${agentId}/states/waiting`,
+      engineAgentServiceAgentSetStateBody,options
+    );
+  }
+const searchAgentInQueueStatistics = <TData = AxiosResponse<EngineAgentInQueueStatisticsList>>(
+    agentId: string,
+    params?: SearchAgentInQueueStatisticsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${agentId}/statistics/queues`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const agentTodayStatistics = <TData = AxiosResponse<EngineAgentTodayStatisticsResponse>>(
+    agentId: string,
+    params?: AgentTodayStatisticsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${agentId}/statistics/today`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove Agent
  */
-export const DeleteAgentParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteAgentQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteAgentResponse = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})
-
+const deleteAgent = <TData = AxiosResponse<EngineAgent>>(
+    id: string,
+    params?: DeleteAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/agents/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Agent item
  */
-export const ReadAgentParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadAgentQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadAgentResponse = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})
-
+const readAgent = <TData = AxiosResponse<EngineAgent>>(
+    id: string,
+    params?: ReadAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update Agent
  */
-export const PatchAgentParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchAgentBody = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchAgentResponse = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})
-
+const patchAgent = <TData = AxiosResponse<EngineAgent>>(
+    id: string,
+    engineAgentServicePatchAgentBody: EngineAgentServicePatchAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/agents/${id}`,
+      engineAgentServicePatchAgentBody,options
+    );
+  }
 /**
  * @summary Update Agent
  */
-export const UpdateAgentParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateAgentBody = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateAgentResponse = zod.object({
-  "allowChannels": zod.array(zod.string()).optional(),
-  "allowSetScreenControl": zod.boolean().optional(),
-  "auditor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "channel": zod.array(zod.object({
-  "channel": zod.string().optional(),
-  "joinedAt": zod.string().optional(),
-  "state": zod.string().optional(),
-  "timeout": zod.string().optional()
-})).optional(),
-  "chatCount": zod.number().optional(),
-  "description": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "greetingMedia": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "isSupervisor": zod.boolean().optional(),
-  "lastStatusChange": zod.string().optional(),
-  "name": zod.string().optional(),
-  "progressiveCount": zod.number().optional(),
-  "region": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "screenControl": zod.boolean().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "status": zod.string().optional(),
-  "statusDuration": zod.string().optional(),
-  "supervisor": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "taskCount": zod.number().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userPresenceStatus": zod.object({
-  "status": zod.string().optional()
-}).optional()
-})
-
-export const SearchAgentInQueueParams = zod.object({
-  "id": zod.string()
-})
-
-export const SearchAgentInQueueQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const SearchAgentInQueueResponse = zod.object({
-  "items": zod.array(zod.object({
-  "activeMembers": zod.number().optional(),
-  "agents": zod.object({
-  "allowPause": zod.number().optional(),
-  "free": zod.number().optional(),
-  "offline": zod.number().optional(),
-  "online": zod.number().optional(),
-  "pause": zod.number().optional(),
-  "total": zod.number().optional()
-}).optional(),
-  "countMembers": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "maxMemberLimit": zod.number().optional(),
-  "priority": zod.number().optional(),
-  "queue": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "strategy": zod.string().optional(),
-  "type": zod.number().optional(),
-  "waitingMembers": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const updateAgent = <TData = AxiosResponse<EngineAgent>>(
+    id: string,
+    engineAgentServiceUpdateAgentBody: EngineAgentServiceUpdateAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/agents/${id}`,
+      engineAgentServiceUpdateAgentBody,options
+    );
+  }
+const searchAgentInQueue = <TData = AxiosResponse<EngineListAgentInQueue>>(
+    id: string,
+    params?: SearchAgentInQueueParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${id}/queues`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Change agent status
  */
-export const UpdateAgentStatusParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateAgentStatusBody = zod.object({
-  "channels": zod.array(zod.string()).optional(),
-  "domainId": zod.string().optional(),
-  "onDemand": zod.boolean().optional(),
-  "payload": zod.string().optional(),
-  "status": zod.string().optional(),
-  "statusComment": zod.string().optional()
-})
-
-export const UpdateAgentStatusResponse = zod.object({
-  "status": zod.string().optional()
-})
-
+const updateAgentStatus = <TData = AxiosResponse<EngineResponse>>(
+    id: string,
+    engineAgentServiceUpdateAgentStatusBody: EngineAgentServiceUpdateAgentStatusBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/agents/${id}/status`,
+      engineAgentServiceUpdateAgentStatusBody,options
+    );
+  }
 /**
  * @summary todo deprecated ?
  */
-export const SearchAgentInTeamParams = zod.object({
-  "id": zod.string()
-})
-
-export const SearchAgentInTeamQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
-
-export const SearchAgentInTeamResponse = zod.object({
-  "items": zod.array(zod.object({
-  "strategy": zod.string().optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchAgentInTeam = <TData = AxiosResponse<EngineListAgentInTeam>>(
+    id: string,
+    params?: SearchAgentInTeamParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/agents/${id}/teams`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary SearchLookupAgentNotExistsUser
  */
-export const SearchLookupUsersAgentNotExistsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "domainId": zod.string().optional()
-})
-
-export const SearchLookupUsersAgentNotExistsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchLookupUsersAgentNotExists = <TData = AxiosResponse<EngineListAgentUser>>(
+    params?: SearchLookupUsersAgentNotExistsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/lookups/agents/users`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary List of UserStatus
  */
-export const SearchUserStatusQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "notUserId": zod.array(zod.string()).optional()
-})
+const searchUserStatus = <TData = AxiosResponse<EngineListUserStatus>>(
+    params?: SearchUserStatusParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/users`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const SearchUserStatusResponse = zod.object({
-  "items": zod.array(zod.object({
-  "extension": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "presence": zod.object({
-  "status": zod.string().optional()
-}).optional(),
-  "status": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- footer start
+            return {searchAgent,createAgent,searchAgentCallStatistics,searchAgentStatusStatistic,searchAgentStatusStatisticItem,searchAgentStateHistory,searchPauseCauseForAgent,agentStateHistory,agentSetState,searchAgentInQueueStatistics,agentTodayStatistics,deleteAgent,readAgent,patchAgent,updateAgent,searchAgentInQueue,updateAgentStatus,searchAgentInTeam,searchLookupUsersAgentNotExists,searchUserStatus}};
+export type SearchAgentResult = AxiosResponse<EngineListAgent>
+export type CreateAgentResult = AxiosResponse<EngineAgent>
+export type SearchAgentCallStatisticsResult = AxiosResponse<EngineAgentCallStatisticsList>
+export type SearchAgentStatusStatisticResult = AxiosResponse<EngineListAgentStatsStatistic>
+export type SearchAgentStatusStatisticItemResult = AxiosResponse<EngineAgentStatusStatisticItem>
+export type SearchAgentStateHistoryResult = AxiosResponse<EngineListAgentStateHistory>
+export type SearchPauseCauseForAgentResult = AxiosResponse<EngineForAgentPauseCauseList>
+export type AgentStateHistoryResult = AxiosResponse<EngineListAgentStateHistory>
+export type AgentSetStateResult = AxiosResponse<EngineAgentSetStateResponse>
+export type SearchAgentInQueueStatisticsResult = AxiosResponse<EngineAgentInQueueStatisticsList>
+export type AgentTodayStatisticsResult = AxiosResponse<EngineAgentTodayStatisticsResponse>
+export type DeleteAgentResult = AxiosResponse<EngineAgent>
+export type ReadAgentResult = AxiosResponse<EngineAgent>
+export type PatchAgentResult = AxiosResponse<EngineAgent>
+export type UpdateAgentResult = AxiosResponse<EngineAgent>
+export type SearchAgentInQueueResult = AxiosResponse<EngineListAgentInQueue>
+export type UpdateAgentStatusResult = AxiosResponse<EngineResponse>
+export type SearchAgentInTeamResult = AxiosResponse<EngineListAgentInTeam>
+export type SearchLookupUsersAgentNotExistsResult = AxiosResponse<EngineListAgentUser>
+export type SearchUserStatusResult = AxiosResponse<EngineListUserStatus>
 
+            // --- footer end
+          

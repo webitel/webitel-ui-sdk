@@ -4,270 +4,133 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteRoutingSchemaParams,
+  EngineCreateRoutingSchemaRequest,
+  EngineListRoutingSchema,
+  EngineListRoutingSchemaTags,
+  EngineRoutingSchema,
+  EngineRoutingSchemaServicePatchRoutingSchemaBody,
+  EngineRoutingSchemaServiceUpdateRoutingSchemaBody,
+  ReadRoutingSchemaParams,
+  SearchRoutingSchemaParams,
+  SearchRoutingSchemaTagsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getRoutingSchemaService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List RoutingSchema
  */
-export const SearchRoutingSchemaQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "name": zod.string().optional(),
-  "type": zod.array(zod.enum(['default', 'voice', 'chat', 'processing', 'service'])).optional(),
-  "editor": zod.boolean().optional(),
-  "tags": zod.array(zod.string()).optional()
-})
-
-export const searchRoutingSchemaResponseItemsItemTypeDefault = `default`;
-
-export const SearchRoutingSchemaResponse = zod.object({
-  "items": zod.array(zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(searchRoutingSchemaResponseItemsItemTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchRoutingSchema = <TData = AxiosResponse<EngineListRoutingSchema>>(
+    params?: SearchRoutingSchemaParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create RoutingSchema
  */
-export const createRoutingSchemaBodyTypeDefault = `default`;
-
-export const CreateRoutingSchemaBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(createRoutingSchemaBodyTypeDefault)
-})
-
-export const createRoutingSchemaResponseTypeDefault = `default`;
-
-export const CreateRoutingSchemaResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(createRoutingSchemaResponseTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createRoutingSchema = <TData = AxiosResponse<EngineRoutingSchema>>(
+    engineCreateRoutingSchemaRequest: EngineCreateRoutingSchemaRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/routing/schema`,
+      engineCreateRoutingSchemaRequest,options
+    );
+  }
 /**
  * @summary List RoutingSchemaTags
  */
-export const SearchRoutingSchemaTagsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "type": zod.array(zod.enum(['default', 'voice', 'chat', 'processing', 'service'])).optional()
-})
-
-export const SearchRoutingSchemaTagsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "count": zod.number().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchRoutingSchemaTags = <TData = AxiosResponse<EngineListRoutingSchemaTags>>(
+    params?: SearchRoutingSchemaTagsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/tags`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove RoutingSchema
  */
-export const DeleteRoutingSchemaParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteRoutingSchemaQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const deleteRoutingSchemaResponseTypeDefault = `default`;
-
-export const DeleteRoutingSchemaResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(deleteRoutingSchemaResponseTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteRoutingSchema = <TData = AxiosResponse<EngineRoutingSchema>>(
+    id: string,
+    params?: DeleteRoutingSchemaParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/routing/schema/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary RoutingSchema item
  */
-export const ReadRoutingSchemaParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadRoutingSchemaQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const readRoutingSchemaResponseTypeDefault = `default`;
-
-export const ReadRoutingSchemaResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(readRoutingSchemaResponseTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readRoutingSchema = <TData = AxiosResponse<EngineRoutingSchema>>(
+    id: string,
+    params?: ReadRoutingSchemaParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/schema/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch RoutingSchema
  */
-export const PatchRoutingSchemaParams = zod.object({
-  "id": zod.string()
-})
-
-export const patchRoutingSchemaBodyTypeDefault = `default`;
-
-export const PatchRoutingSchemaBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "note": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(patchRoutingSchemaBodyTypeDefault)
-})
-
-export const patchRoutingSchemaResponseTypeDefault = `default`;
-
-export const PatchRoutingSchemaResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(patchRoutingSchemaResponseTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const patchRoutingSchema = <TData = AxiosResponse<EngineRoutingSchema>>(
+    id: string,
+    engineRoutingSchemaServicePatchRoutingSchemaBody: EngineRoutingSchemaServicePatchRoutingSchemaBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/routing/schema/${id}`,
+      engineRoutingSchemaServicePatchRoutingSchemaBody,options
+    );
+  }
 /**
  * @summary Update RoutingSchema
  */
-export const UpdateRoutingSchemaParams = zod.object({
-  "id": zod.string()
-})
+const updateRoutingSchema = <TData = AxiosResponse<EngineRoutingSchema>>(
+    id: string,
+    engineRoutingSchemaServiceUpdateRoutingSchemaBody: EngineRoutingSchemaServiceUpdateRoutingSchemaBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/routing/schema/${id}`,
+      engineRoutingSchemaServiceUpdateRoutingSchemaBody,options
+    );
+  }
 
-export const updateRoutingSchemaBodyTypeDefault = `default`;
+            // --- footer start
+            return {searchRoutingSchema,createRoutingSchema,searchRoutingSchemaTags,deleteRoutingSchema,readRoutingSchema,patchRoutingSchema,updateRoutingSchema}};
+export type SearchRoutingSchemaResult = AxiosResponse<EngineListRoutingSchema>
+export type CreateRoutingSchemaResult = AxiosResponse<EngineRoutingSchema>
+export type SearchRoutingSchemaTagsResult = AxiosResponse<EngineListRoutingSchemaTags>
+export type DeleteRoutingSchemaResult = AxiosResponse<EngineRoutingSchema>
+export type ReadRoutingSchemaResult = AxiosResponse<EngineRoutingSchema>
+export type PatchRoutingSchemaResult = AxiosResponse<EngineRoutingSchema>
+export type UpdateRoutingSchemaResult = AxiosResponse<EngineRoutingSchema>
 
-export const UpdateRoutingSchemaBody = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "note": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(updateRoutingSchemaBodyTypeDefault)
-})
-
-export const updateRoutingSchemaResponseTypeDefault = `default`;
-
-export const UpdateRoutingSchemaResponse = zod.object({
-  "tags": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "debug": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "editor": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.enum(['default', 'voice', 'chat', 'processing', 'service']).default(updateRoutingSchemaResponseTypeDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

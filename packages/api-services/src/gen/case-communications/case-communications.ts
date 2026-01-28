@@ -4,85 +4,84 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  LinkCommunicationParams,
+  ListCommunicationsParams,
+  UnlinkCommunicationParams,
+  WebitelCasesInputCaseCommunication,
+  WebitelCasesLinkCommunicationResponse,
+  WebitelCasesListCommunicationsResponse,
+  WebitelCasesUnlinkCommunicationResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCaseCommunications
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Lists all communications linked to a specific case.
 Currently a feature for future development.
  */
-export const ListCommunicationsParams = zod.object({
-  "case_etag": zod.string().describe('Case identifier.')
-})
-
-export const ListCommunicationsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('List of fields to include in the response.'),
-  "q": zod.string().optional().describe('Query string for filtering results.'),
-  "size": zod.number().optional().describe('Number of records per page.'),
-  "page": zod.number().optional().describe('Page number for pagination.'),
-  "sort": zod.string().optional().describe('Sorting order.')
-})
-
-export const ListCommunicationsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "communicationId": zod.string().optional().describe('External communication ID.'),
-  "communicationType": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Version of the communication record.'),
-  "id": zod.string().optional().describe('Database ID of the communication.'),
-  "ver": zod.number().optional().describe('Version of the communication record.')
-}).describe('Represents a single case communication.')).optional().describe('List of communications.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Current page number.')
-}).describe('Response message for listing communications linked to a case.')
-
+const listCommunications = <TData = AxiosResponse<WebitelCasesListCommunicationsResponse>>(
+    caseEtag: string,
+    params?: ListCommunicationsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/communication`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Links a communication to a specific case.
  */
-export const LinkCommunicationParams = zod.object({
-  "case_etag": zod.string().describe('Case identifier.')
-})
-
-export const LinkCommunicationQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('List of fields to include in the response.')
-})
-
-export const LinkCommunicationBody = zod.object({
-  "communicationId": zod.string().optional().describe('External communication ID.'),
-  "communicationType": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('Represents input data for creating or linking a communication.')
-
-export const LinkCommunicationResponse = zod.object({
-  "data": zod.array(zod.object({
-  "communicationId": zod.string().optional().describe('External communication ID.'),
-  "communicationType": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "etag": zod.string().optional().describe('Version of the communication record.'),
-  "id": zod.string().optional().describe('Database ID of the communication.'),
-  "ver": zod.number().optional().describe('Version of the communication record.')
-}).describe('Represents a single case communication.')).optional().describe('List of linked communications.')
-}).describe('Response message after linking communications to a case.')
-
+const linkCommunication = <TData = AxiosResponse<WebitelCasesLinkCommunicationResponse>>(
+    caseEtag: string,
+    webitelCasesInputCaseCommunication: WebitelCasesInputCaseCommunication,
+    params?: LinkCommunicationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/${caseEtag}/communication`,
+      webitelCasesInputCaseCommunication,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Unlinks a communication from a specific case.
  */
-export const UnlinkCommunicationParams = zod.object({
-  "case_etag": zod.string(),
-  "id": zod.string().describe('Communication identifier.')
-})
+const unlinkCommunication = <TData = AxiosResponse<WebitelCasesUnlinkCommunicationResponse>>(
+    caseEtag: string,
+    id: string,
+    params?: UnlinkCommunicationParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/${caseEtag}/communication/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UnlinkCommunicationQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('List of fields to include in the response.')
-})
+            // --- footer start
+            return {listCommunications,linkCommunication,unlinkCommunication}};
+export type ListCommunicationsResult = AxiosResponse<WebitelCasesListCommunicationsResponse>
+export type LinkCommunicationResult = AxiosResponse<WebitelCasesLinkCommunicationResponse>
+export type UnlinkCommunicationResult = AxiosResponse<WebitelCasesUnlinkCommunicationResponse>
 
-export const UnlinkCommunicationResponse = zod.object({
-  "affected": zod.string().optional().describe('Affected rows.')
-}).describe('Response message after unlinking a communication from a case.')
-
+            // --- footer end
+          

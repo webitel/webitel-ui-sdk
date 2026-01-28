@@ -4,30 +4,46 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiSearchPermissionResponse,
+  GetPermissionsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPermissions
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary GetPermissions list available from application
  */
-export const GetPermissionsQueryParams = zod.object({
-  "q": zod.string().optional().describe('TermOfSearch'),
-  "id": zod.array(zod.string()).optional().describe('= ANY(id)'),
-  "not": zod.array(zod.string()).optional().describe('<> ANY(not)'),
-  "fields": zod.array(zod.string()).optional().describe('controls\n\noutput'),
-  "sort": zod.array(zod.string()).optional().describe('sort: \"field\" asc; \"!field\" desc'),
-  "page": zod.number().optional().describe('page number'),
-  "size": zod.number().optional().describe('page size')
-})
+const getPermissions = <TData = AxiosResponse<ApiSearchPermissionResponse>>(
+    params?: GetPermissionsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/permissions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const GetPermissionsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
+            // --- footer start
+            return {getPermissions}};
+export type GetPermissionsResult = AxiosResponse<ApiSearchPermissionResponse>
 
+            // --- footer end
+          

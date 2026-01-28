@@ -4,173 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  SearchImportTemplateParams,
+  StorageCreateImportTemplateRequest,
+  StorageImportTemplate,
+  StorageImportTemplateServicePatchImportTemplateBody,
+  StorageImportTemplateServiceUpdateImportTemplateBody,
+  StorageListImportTemplate
+} from '../webitelAPI.schemas';
 
 
-export const SearchImportTemplateQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
 
-export const searchImportTemplateResponseItemsItemSourceTypeDefault = `DefaultSourceType`;
+            // --- header start
+            // 
 
-export const SearchImportTemplateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "parameters": zod.object({
+  export const 
+            // --- title start
+            getImportTemplateService
+            // --- title end
+           = () => {
 
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(searchImportTemplateResponseItemsItemSourceTypeDefault)
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header end
+          const searchImportTemplate = <TData = AxiosResponse<StorageListImportTemplate>>(
+    params?: SearchImportTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/import_templates`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
+    storageCreateImportTemplateRequest: StorageCreateImportTemplateRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/storage/import_templates`,
+      storageCreateImportTemplateRequest,options
+    );
+  }
+const deleteImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/import_templates/${id}`,options
+    );
+  }
+const readImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/import_templates/${id}`,options
+    );
+  }
+const patchImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
+    id: number,
+    storageImportTemplateServicePatchImportTemplateBody: StorageImportTemplateServicePatchImportTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/import_templates/${id}`,
+      storageImportTemplateServicePatchImportTemplateBody,options
+    );
+  }
+const updateImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
+    id: number,
+    storageImportTemplateServiceUpdateImportTemplateBody: StorageImportTemplateServiceUpdateImportTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/storage/import_templates/${id}`,
+      storageImportTemplateServiceUpdateImportTemplateBody,options
+    );
+  }
 
-export const createImportTemplateBodySourceTypeDefault = `DefaultSourceType`;
+            // --- footer start
+            return {searchImportTemplate,createImportTemplate,deleteImportTemplate,readImportTemplate,patchImportTemplate,updateImportTemplate}};
+export type SearchImportTemplateResult = AxiosResponse<StorageListImportTemplate>
+export type CreateImportTemplateResult = AxiosResponse<StorageImportTemplate>
+export type DeleteImportTemplateResult = AxiosResponse<StorageImportTemplate>
+export type ReadImportTemplateResult = AxiosResponse<StorageImportTemplate>
+export type PatchImportTemplateResult = AxiosResponse<StorageImportTemplate>
+export type UpdateImportTemplateResult = AxiosResponse<StorageImportTemplate>
 
-export const CreateImportTemplateBody = zod.object({
-  "parameters": zod.object({
-
-}),
-  "description": zod.string().optional(),
-  "name": zod.string(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(createImportTemplateBodySourceTypeDefault)
-}).describe('Create import template for CSV')
-
-export const createImportTemplateResponseSourceTypeDefault = `DefaultSourceType`;
-
-export const CreateImportTemplateResponse = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(createImportTemplateResponseSourceTypeDefault)
-})
-
-export const DeleteImportTemplateParams = zod.object({
-  "id": zod.number()
-})
-
-export const deleteImportTemplateResponseSourceTypeDefault = `DefaultSourceType`;
-
-export const DeleteImportTemplateResponse = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(deleteImportTemplateResponseSourceTypeDefault)
-})
-
-export const ReadImportTemplateParams = zod.object({
-  "id": zod.number()
-})
-
-export const readImportTemplateResponseSourceTypeDefault = `DefaultSourceType`;
-
-export const ReadImportTemplateResponse = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(readImportTemplateResponseSourceTypeDefault)
-})
-
-export const PatchImportTemplateParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchImportTemplateBody = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional()
-}).describe('Patch import template for CSV')
-
-export const patchImportTemplateResponseSourceTypeDefault = `DefaultSourceType`;
-
-export const PatchImportTemplateResponse = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(patchImportTemplateResponseSourceTypeDefault)
-})
-
-export const UpdateImportTemplateParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateImportTemplateBody = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "name": zod.string(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).describe('Update import template for CSV')
-
-export const updateImportTemplateResponseSourceTypeDefault = `DefaultSourceType`;
-
-export const UpdateImportTemplateResponse = zod.object({
-  "parameters": zod.object({
-
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "source": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "sourceId": zod.string().optional(),
-  "sourceType": zod.enum(['DefaultSourceType', 'Dialer']).default(updateImportTemplateResponseSourceTypeDefault)
-})
-
+            // --- footer end
+          

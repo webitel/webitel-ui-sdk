@@ -4,133 +4,69 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  LoggerLogs,
+  LoggerServiceSearchLogByConfigIdParams,
+  LoggerServiceSearchLogByRecordIdParams,
+  LoggerServiceSearchLogByUserIdParams
+} from '../webitelAPI.schemas';
 
 
-export const LoggerServiceSearchLogByConfigIdParams = zod.object({
-  "config_id": zod.number()
-})
 
-export const LoggerServiceSearchLogByConfigIdQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "userId": zod.array(zod.string()).optional(),
-  "action": zod.array(zod.enum(['default_no_action', 'create', 'update', 'read', 'delete'])).optional(),
-  "userIp": zod.string().optional(),
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional()
-})
+            // --- header start
+            // 
 
-export const LoggerServiceSearchLogByConfigIdResponse = zod.object({
-  "items": zod.array(zod.object({
-  "action": zod.string().optional(),
-  "configId": zod.number().optional(),
-  "date": zod.string().optional(),
-  "id": zod.number().optional(),
-  "newState": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "record": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userIp": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
+  export const 
+            // --- title start
+            getLoggerService
+            // --- title end
+           = () => {
 
-export const LoggerServiceSearchLogByUserIdParams = zod.object({
-  "user_id": zod.number().describe('REQUIRED filter')
-})
+            // --- header end
+          const loggerServiceSearchLogByConfigId = <TData = AxiosResponse<LoggerLogs>>(
+    configId: number,
+    params?: LoggerServiceSearchLogByConfigIdParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/config/${configId}/logs`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const loggerServiceSearchLogByUserId = <TData = AxiosResponse<LoggerLogs>>(
+    userId: number,
+    params?: LoggerServiceSearchLogByUserIdParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/user/${userId}/logs`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const loggerServiceSearchLogByRecordId = <TData = AxiosResponse<LoggerLogs>>(
+    object: 'cc_queue' | 'schema' | 'users' | 'devices' | 'calendars' | 'cc_list' | 'cc_team' | 'cc_agent' | 'cc_resource' | 'cc_resource_group' | 'chat_bots' | 'cases' | 'contacts' | 'cc_list_number' | 'case_comments' | 'record_file',
+    recordId: number,
+    params?: LoggerServiceSearchLogByRecordIdParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/${object}/record/${recordId}/logs`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const LoggerServiceSearchLogByUserIdQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "objectId": zod.array(zod.string()).optional().describe('SPECIFIC filter'),
-  "action": zod.array(zod.enum(['default_no_action', 'create', 'update', 'read', 'delete'])).optional().describe('GENERAL filters'),
-  "userIp": zod.string().optional(),
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional()
-})
+            // --- footer start
+            return {loggerServiceSearchLogByConfigId,loggerServiceSearchLogByUserId,loggerServiceSearchLogByRecordId}};
+export type LoggerServiceSearchLogByConfigIdResult = AxiosResponse<LoggerLogs>
+export type LoggerServiceSearchLogByUserIdResult = AxiosResponse<LoggerLogs>
+export type LoggerServiceSearchLogByRecordIdResult = AxiosResponse<LoggerLogs>
 
-export const LoggerServiceSearchLogByUserIdResponse = zod.object({
-  "items": zod.array(zod.object({
-  "action": zod.string().optional(),
-  "configId": zod.number().optional(),
-  "date": zod.string().optional(),
-  "id": zod.number().optional(),
-  "newState": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "record": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userIp": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
-export const LoggerServiceSearchLogByRecordIdParams = zod.object({
-  "object": zod.enum(['cc_queue', 'schema', 'users', 'devices', 'calendars', 'cc_list', 'cc_team', 'cc_agent', 'cc_resource', 'cc_resource_group', 'chat_bots', 'cases', 'contacts', 'cc_list_number', 'case_comments', 'record_file']).describe('SPECIFIC filter'),
-  "record_id": zod.number().describe('REQUIRED filter')
-})
-
-export const LoggerServiceSearchLogByRecordIdQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "action": zod.array(zod.enum(['default_no_action', 'create', 'update', 'read', 'delete'])).optional().describe('GENERAL filters'),
-  "userId": zod.array(zod.string()).optional(),
-  "userIp": zod.string().optional(),
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional()
-})
-
-export const LoggerServiceSearchLogByRecordIdResponse = zod.object({
-  "items": zod.array(zod.object({
-  "action": zod.string().optional(),
-  "configId": zod.number().optional(),
-  "date": zod.string().optional(),
-  "id": zod.number().optional(),
-  "newState": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "record": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "user": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userIp": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+            // --- footer end
+          

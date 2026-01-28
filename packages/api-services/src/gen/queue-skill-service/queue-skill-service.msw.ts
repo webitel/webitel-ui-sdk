@@ -19,7 +19,7 @@ import type {
 import type {
   EngineListQueueSkill,
   EngineQueueSkill
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchQueueSkillResponseMock = (overrideResponse: Partial< EngineListQueueSkill > = {}): EngineListQueueSkill => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({buckets: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), lvl: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), maxCapacity: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), minCapacity: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), skill: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

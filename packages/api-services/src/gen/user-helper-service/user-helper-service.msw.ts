@@ -20,7 +20,7 @@ import type {
   EngineActivityWorkspaceWidgetResponse,
   EngineDefaultDeviceConfigResponse,
   EngineListOpenedWebSocket
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getDefaultDeviceConfigResponseMock = (overrideResponse: Partial< EngineDefaultDeviceConfigResponse > = {}): EngineDefaultDeviceConfigResponse => ({sip: faker.helpers.arrayElement([{auth: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), domain: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), extension: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), password: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), proxy: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), webrtc: faker.helpers.arrayElement([{authorizationUser: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), displayName: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), extension: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ha1: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), realm: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), server: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), uri: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})

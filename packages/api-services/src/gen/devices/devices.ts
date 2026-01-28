@@ -4,502 +4,149 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiCreateDeviceResponse,
+  ApiDeleteDeviceResponse,
+  ApiDevice,
+  ApiDeviceAuditResponse,
+  ApiListRegistrationsResponse,
+  ApiReadDeviceResponse,
+  ApiSearchDeviceResponse,
+  ApiUpdateDeviceResponse,
+  DeleteDevice2Params,
+  DeleteDeviceParams,
+  ListRegistrationsParams,
+  ReadDeviceParams,
+  SearchDeviceAuditParams,
+  SearchDeviceParams,
+  UpdateDevice2Body,
+  UpdateDevice2Params,
+  UpdateDeviceBody,
+  UpdateDeviceParams
+} from '../webitelAPI.schemas';
 
 
-export const DeleteDevice2QueryParams = zod.object({
-  "id": zod.string().optional(),
-  "permanent": zod.boolean().optional()
-})
 
-export const DeleteDevice2BodyItem = zod.string()
-export const DeleteDevice2Body = zod.array(DeleteDevice2BodyItem)
+            // --- header start
+            // 
 
-export const DeleteDevice2Response = zod.object({
-  "deleted": zod.array(zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})).optional()
-})
+  export const 
+            // --- title start
+            getDevices
+            // --- title end
+           = () => {
 
-export const SearchDeviceQueryParams = zod.object({
-  "size": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 16'),
-  "page": zod.number().optional().describe('default: 1'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "ids": zod.array(zod.string()).optional().describe('----- Search Basic Filters ---------------------------\n\nselection: by unique identifier'),
-  "q": zod.string().optional().describe('term-of-search: lookup[name,account,hotdesk,brand,model,mac,ip]'),
-  "name": zod.string().optional().describe('case-ignore substring match: ILIKE \'*\' - any; \'?\' - one'),
-  "access": zod.string().optional().describe('[M]andatory[A]ccess[C]ontrol: with access mode (action) granted!'),
-  "account": zod.string().optional().describe('----- Device-Specific Filters ----------------\n\nsubstring like \'%name%\''),
-  "hotdesk": zod.string().optional().describe('filter: has hotdesk (=pattern); is hotdesk (=*)'),
-  "userId": zod.string().optional().describe('Object ID'),
-  "userName": zod.string().optional().describe('Display Name'),
-  "mac": zod.string().optional().describe('filter: by MAC address'),
-  "ip": zod.string().optional().describe('filter: by IP address')
-})
-
-export const SearchDeviceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const CreateDeviceBody = zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})
-
-export const CreateDeviceResponse = zod.object({
-  "device": zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
-
-export const UpdateDevice2Params = zod.object({
-  "device.id": zod.string().describe('object id')
-})
-
-export const UpdateDevice2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('PATCH: partial update')
-})
-
-export const UpdateDevice2Body = zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})
-
-export const UpdateDevice2Response = zod.object({
-  "device": zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
-
-export const UpdateDeviceParams = zod.object({
-  "device.id": zod.string().describe('object id')
-})
-
-export const UpdateDeviceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('PATCH: partial update')
-})
-
-export const UpdateDeviceBody = zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})
-
-export const UpdateDeviceResponse = zod.object({
-  "device": zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
-
-export const ListRegistrationsParams = zod.object({
-  "device.id": zod.string().describe('Object ID')
-})
-
-export const ListRegistrationsQueryParams = zod.object({
-  "userId": zod.string().optional().describe('Object ID'),
-  "userName": zod.string().optional().describe('Display Name'),
-  "deviceName": zod.string().optional().describe('Display Name')
-})
-
-export const ListRegistrationsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "callid": zod.string().optional(),
-  "contact": zod.string().optional(),
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "instance": zod.string().optional(),
-  "received": zod.string().optional(),
-  "registerAt": zod.string().optional(),
-  "socket": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "userAgent": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
+            // --- header end
+          const deleteDevice2 = <TData = AxiosResponse<ApiDeleteDeviceResponse>>(
+    deleteDevice2Body: string[],
+    params?: DeleteDevice2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/devices`,{data:
+      deleteDevice2Body, 
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const searchDevice = <TData = AxiosResponse<ApiSearchDeviceResponse>>(
+    params?: SearchDeviceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/devices`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createDevice = <TData = AxiosResponse<ApiCreateDeviceResponse>>(
+    apiDevice: ApiDevice, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/devices`,
+      apiDevice,options
+    );
+  }
+const updateDevice2 = <TData = AxiosResponse<ApiUpdateDeviceResponse>>(
+    updateDevice2Body: UpdateDevice2Body,
+    params?: UpdateDevice2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/devices/device.id}`,
+      updateDevice2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateDevice = <TData = AxiosResponse<ApiUpdateDeviceResponse>>(
+    updateDeviceBody: UpdateDeviceBody,
+    params?: UpdateDeviceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/devices/device.id}`,
+      updateDeviceBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const listRegistrations = <TData = AxiosResponse<ApiListRegistrationsResponse>>(
+    params?: ListRegistrationsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/devices/device.id}/registered`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary ----- Details (1:M) ----------------------------------------------
  */
-export const SearchDeviceAuditParams = zod.object({
-  "device.id": zod.string().describe('Object ID')
-})
+const searchDeviceAudit = <TData = AxiosResponse<ApiDeviceAuditResponse>>(
+    params?: SearchDeviceAuditParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/devices/device.id}/users/audit`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteDevice = <TData = AxiosResponse<ApiDeleteDeviceResponse>>(
+    id: string,
+    params?: DeleteDeviceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/devices/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const readDevice = <TData = AxiosResponse<ApiReadDeviceResponse>>(
+    id: string,
+    params?: ReadDeviceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/devices/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const SearchDeviceAuditQueryParams = zod.object({
-  "userId": zod.string().optional().describe('Object ID'),
-  "userName": zod.string().optional().describe('Display Name'),
-  "deviceName": zod.string().optional().describe('Display Name'),
-  "timeFrom": zod.string().optional().describe('Filter: timing range (optional)\n\nunix milliseconds'),
-  "timeTill": zod.string().optional().describe('unix milliseconds'),
-  "fields": zod.array(zod.string()).optional().describe('Search Options'),
-  "sort": zod.array(zod.string()).optional(),
-  "size": zod.number().optional(),
-  "page": zod.number().optional()
-})
+            // --- footer start
+            return {deleteDevice2,searchDevice,createDevice,updateDevice2,updateDevice,listRegistrations,searchDeviceAudit,deleteDevice,readDevice}};
+export type DeleteDevice2Result = AxiosResponse<ApiDeleteDeviceResponse>
+export type SearchDeviceResult = AxiosResponse<ApiSearchDeviceResponse>
+export type CreateDeviceResult = AxiosResponse<ApiCreateDeviceResponse>
+export type UpdateDevice2Result = AxiosResponse<ApiUpdateDeviceResponse>
+export type UpdateDeviceResult = AxiosResponse<ApiUpdateDeviceResponse>
+export type ListRegistrationsResult = AxiosResponse<ApiListRegistrationsResponse>
+export type SearchDeviceAuditResult = AxiosResponse<ApiDeviceAuditResponse>
+export type DeleteDeviceResult = AxiosResponse<ApiDeleteDeviceResponse>
+export type ReadDeviceResult = AxiosResponse<ApiReadDeviceResponse>
 
-export const SearchDeviceAuditResponse = zod.object({
-  "items": zod.array(zod.object({
-  "device": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "hotdesk": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "loggedOut": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
-
-export const DeleteDeviceParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteDeviceQueryParams = zod.object({
-  "permanent": zod.boolean().optional(),
-  "ids": zod.array(zod.string()).optional().describe('bulk')
-})
-
-export const DeleteDeviceResponse = zod.object({
-  "deleted": zod.array(zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-})).optional()
-})
-
-export const ReadDeviceParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadDeviceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('output selection')
-})
-
-export const ReadDeviceResponse = zod.object({
-  "device": zod.object({
-  "account": zod.string().optional().describe('username'),
-  "brand": zod.string().optional().describe('vendor brand name'),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "deletedAt": zod.string().optional(),
-  "deletedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "hotdesk": zod.boolean().optional().describe('act as a hotdesk'),
-  "hotdesks": zod.array(zod.string()).optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "loggedIn": zod.string().optional(),
-  "mac": zod.string().optional(),
-  "model": zod.string().optional(),
-  "name": zod.string().optional().describe('display name'),
-  "password": zod.string().optional(),
-  "provision": zod.record(zod.string(), zod.string()).optional(),
-  "reged": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
-
+            // --- footer end
+          

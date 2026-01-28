@@ -4,183 +4,105 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ConfigServicePatchConfigBody,
+  ConfigServiceReadSystemObjectsParams,
+  ConfigServiceSearchConfigParams,
+  ConfigServiceUpdateConfigBody,
+  LoggerConfig,
+  LoggerConfigs,
+  LoggerCreateConfigRequest,
+  LoggerEmpty,
+  LoggerSystemObjects
+} from '../webitelAPI.schemas';
 
 
-export const ConfigServiceReadSystemObjectsQueryParams = zod.object({
-  "includeExisting": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const ConfigServiceReadSystemObjectsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
+            // --- header start
+            // 
 
-export const ConfigServiceSearchConfigQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "object": zod.array(zod.enum(['cc_queue', 'schema', 'users', 'devices', 'calendars', 'cc_list', 'cc_team', 'cc_agent', 'cc_resource', 'cc_resource_group', 'chat_bots', 'cases', 'contacts', 'cc_list_number', 'case_comments', 'record_file'])).optional().describe('NOT USED')
-})
+  export const 
+            // --- title start
+            getConfigService
+            // --- title end
+           = () => {
 
-export const ConfigServiceSearchConfigResponse = zod.object({
-  "items": zod.array(zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "logsCount": zod.string().optional(),
-  "logsSize": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
+            // --- header end
+          const configServiceReadSystemObjects = <TData = AxiosResponse<LoggerSystemObjects>>(
+    params?: ConfigServiceReadSystemObjectsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/available_objects`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const configServiceSearchConfig = <TData = AxiosResponse<LoggerConfigs>>(
+    params?: ConfigServiceSearchConfigParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/config`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const configServiceCreateConfig = <TData = AxiosResponse<LoggerConfig>>(
+    loggerCreateConfigRequest: LoggerCreateConfigRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/logger/config`,
+      loggerCreateConfigRequest,options
+    );
+  }
+const configServiceDeleteConfig = <TData = AxiosResponse<LoggerEmpty>>(
+    configId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/logger/config/${configId}`,options
+    );
+  }
+const configServiceReadConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/logger/config/${configId}`,options
+    );
+  }
+const configServicePatchConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number,
+    configServicePatchConfigBody: ConfigServicePatchConfigBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/logger/config/${configId}`,
+      configServicePatchConfigBody,options
+    );
+  }
+const configServiceUpdateConfig = <TData = AxiosResponse<LoggerConfig>>(
+    configId: number,
+    configServiceUpdateConfigBody: ConfigServiceUpdateConfigBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/logger/config/${configId}`,
+      configServiceUpdateConfigBody,options
+    );
+  }
 
-export const ConfigServiceCreateConfigBody = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {configServiceReadSystemObjects,configServiceSearchConfig,configServiceCreateConfig,configServiceDeleteConfig,configServiceReadConfig,configServicePatchConfig,configServiceUpdateConfig}};
+export type ConfigServiceReadSystemObjectsResult = AxiosResponse<LoggerSystemObjects>
+export type ConfigServiceSearchConfigResult = AxiosResponse<LoggerConfigs>
+export type ConfigServiceCreateConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServiceDeleteConfigResult = AxiosResponse<LoggerEmpty>
+export type ConfigServiceReadConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServicePatchConfigResult = AxiosResponse<LoggerConfig>
+export type ConfigServiceUpdateConfigResult = AxiosResponse<LoggerConfig>
 
-export const ConfigServiceCreateConfigResponse = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "logsCount": zod.string().optional(),
-  "logsSize": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ConfigServiceDeleteConfigParams = zod.object({
-  "config_id": zod.number()
-})
-
-export const ConfigServiceDeleteConfigResponse = zod.object({
-
-})
-
-export const ConfigServiceReadConfigParams = zod.object({
-  "config_id": zod.number().describe('int32 domainId = 8;')
-})
-
-export const ConfigServiceReadConfigResponse = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "logsCount": zod.string().optional(),
-  "logsSize": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ConfigServicePatchConfigParams = zod.object({
-  "config_id": zod.number()
-})
-
-export const ConfigServicePatchConfigBody = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ConfigServicePatchConfigResponse = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "logsCount": zod.string().optional(),
-  "logsSize": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ConfigServiceUpdateConfigParams = zod.object({
-  "config_id": zod.number()
-})
-
-export const ConfigServiceUpdateConfigBody = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ConfigServiceUpdateConfigResponse = zod.object({
-  "daysToStore": zod.number().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "logsCount": zod.string().optional(),
-  "logsSize": zod.string().optional(),
-  "object": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "period": zod.number().optional(),
-  "storage": zod.object({
-  "id": zod.number().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

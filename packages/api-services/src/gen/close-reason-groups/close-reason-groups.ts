@@ -4,182 +4,126 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateCloseReasonGroupParams,
+  ListCloseReasonGroupsParams,
+  LocateCloseReasonGroupParams,
+  UpdateCloseReasonGroup2Params,
+  UpdateCloseReasonGroupParams,
+  WebitelCasesCloseReasonGroup,
+  WebitelCasesCloseReasonGroupList,
+  WebitelCasesInputCloseReasonGroup,
+  WebitelCasesInputCloseReasonGroupBody,
+  WebitelCasesLocateCloseReasonGroupResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCloseReasonGroups
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of close reason groups or search close reason groups
  */
-export const ListCloseReasonGroupsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "sort": zod.string().optional(),
-  "id": zod.array(zod.string()).optional(),
-  "q": zod.string().optional()
-})
-
-export const ListCloseReasonGroupsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listCloseReasonGroups = <TData = AxiosResponse<WebitelCasesCloseReasonGroupList>>(
+    params?: ListCloseReasonGroupsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/close_reason_groups`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new close reason group
  */
-export const CreateCloseReasonGroupQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const CreateCloseReasonGroupBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreateCloseReasonGroupResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createCloseReasonGroup = <TData = AxiosResponse<WebitelCasesCloseReasonGroup>>(
+    webitelCasesInputCloseReasonGroupBody: WebitelCasesInputCloseReasonGroupBody,
+    params?: CreateCloseReasonGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/close_reason_groups`,
+      webitelCasesInputCloseReasonGroupBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a close reason group
  */
-export const DeleteCloseReasonGroupParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteCloseReasonGroupResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteCloseReasonGroup = <TData = AxiosResponse<WebitelCasesCloseReasonGroup>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/close_reason_groups/${id}`,options
+    );
+  }
 /**
  * @summary Locate a close reason group by ID
  */
-export const LocateCloseReasonGroupParams = zod.object({
-  "id": zod.string()
-})
-
-export const LocateCloseReasonGroupQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const LocateCloseReasonGroupResponse = zod.object({
-  "closeReasonGroup": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locateCloseReasonGroup = <TData = AxiosResponse<WebitelCasesLocateCloseReasonGroupResponse>>(
+    id: string,
+    params?: LocateCloseReasonGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/close_reason_groups/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing close reason group
  */
-export const UpdateCloseReasonGroup2Params = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateCloseReasonGroup2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const UpdateCloseReasonGroup2Body = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateCloseReasonGroup2Response = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateCloseReasonGroup2 = <TData = AxiosResponse<WebitelCasesCloseReasonGroup>>(
+    id: string,
+    webitelCasesInputCloseReasonGroup: WebitelCasesInputCloseReasonGroup,
+    params?: UpdateCloseReasonGroup2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/close_reason_groups/${id}`,
+      webitelCasesInputCloseReasonGroup,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing close reason group
  */
-export const UpdateCloseReasonGroupParams = zod.object({
-  "id": zod.string()
-})
+const updateCloseReasonGroup = <TData = AxiosResponse<WebitelCasesCloseReasonGroup>>(
+    id: string,
+    webitelCasesInputCloseReasonGroup: WebitelCasesInputCloseReasonGroup,
+    params?: UpdateCloseReasonGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/close_reason_groups/${id}`,
+      webitelCasesInputCloseReasonGroup,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateCloseReasonGroupQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+            // --- footer start
+            return {listCloseReasonGroups,createCloseReasonGroup,deleteCloseReasonGroup,locateCloseReasonGroup,updateCloseReasonGroup2,updateCloseReasonGroup}};
+export type ListCloseReasonGroupsResult = AxiosResponse<WebitelCasesCloseReasonGroupList>
+export type CreateCloseReasonGroupResult = AxiosResponse<WebitelCasesCloseReasonGroup>
+export type DeleteCloseReasonGroupResult = AxiosResponse<WebitelCasesCloseReasonGroup>
+export type LocateCloseReasonGroupResult = AxiosResponse<WebitelCasesLocateCloseReasonGroupResponse>
+export type UpdateCloseReasonGroup2Result = AxiosResponse<WebitelCasesCloseReasonGroup>
+export type UpdateCloseReasonGroupResult = AxiosResponse<WebitelCasesCloseReasonGroup>
 
-export const UpdateCloseReasonGroupBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateCloseReasonGroupResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

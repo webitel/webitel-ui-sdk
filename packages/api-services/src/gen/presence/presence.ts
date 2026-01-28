@@ -4,71 +4,60 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiPresenceStatus,
+  ApiSetStatusRequest,
+  PresenceSetStatusBody
+} from '../webitelAPI.schemas';
 
 
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPresence
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
+ * (UserPresence) {
+ * @summary set(presence) (notify, error)
+ */
+const setStatus2 = <TData = AxiosResponse<ApiPresenceStatus>>(
+    apiSetStatusRequest: ApiSetStatusRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/presence`,
+      apiSetStatusRequest,options
+    );
+  }
 /**
  * (UserPresence) {
  * @summary set(presence) (notify, error)
  */
-export const SetStatus2Body = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "publish": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional()
-})
+const setStatus = <TData = AxiosResponse<ApiPresenceStatus>>(
+    presenceSetStatusBody: PresenceSetStatusBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/users/publish.id}/presence`,
+      presenceSetStatusBody,options
+    );
+  }
 
-export const SetStatus2Response = zod.object({
-  "app": zod.string().optional(),
-  "closed": zod.boolean().optional(),
-  "contact": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "expires": zod.string().optional(),
-  "id": zod.string().optional().describe('[required] tuple unique id; <track>'),
-  "note": zod.string().optional(),
-  "open": zod.number().optional(),
-  "presence": zod.array(zod.unknown()).optional().describe('// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;'),
-  "priority": zod.number().optional(),
-  "sequence": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})
+            // --- footer start
+            return {setStatus2,setStatus}};
+export type SetStatus2Result = AxiosResponse<ApiPresenceStatus>
+export type SetStatusResult = AxiosResponse<ApiPresenceStatus>
 
-/**
- * (UserPresence) {
- * @summary set(presence) (notify, error)
- */
-export const SetStatusParams = zod.object({
-  "publish.id": zod.string().describe('[required] user identity')
-})
-
-export const SetStatusBody = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "publish": zod.object({
-  "expires": zod.number().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional().describe('BODY: partial modifications')
-})
-
-export const SetStatusResponse = zod.object({
-  "app": zod.string().optional(),
-  "closed": zod.boolean().optional(),
-  "contact": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "expires": zod.string().optional(),
-  "id": zod.string().optional().describe('[required] tuple unique id; <track>'),
-  "note": zod.string().optional(),
-  "open": zod.number().optional(),
-  "presence": zod.array(zod.unknown()).optional().describe('// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;'),
-  "priority": zod.number().optional(),
-  "sequence": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})
-
+            // --- footer end
+          

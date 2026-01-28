@@ -4,94 +4,77 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteMediaFileParams,
+  ReadMediaFileParams,
+  SearchMediaFileParams,
+  StorageListMedia,
+  StorageMediaFile
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getMediaFileService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Search MediaFile
  */
-export const SearchMediaFileQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchMediaFileResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchMediaFile = <TData = AxiosResponse<StorageListMedia>>(
+    params?: SearchMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/media`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove MediaFile
  */
-export const DeleteMediaFileParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteMediaFileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteMediaFileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
+    id: string,
+    params?: DeleteMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/media/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary MediaFile item
  */
-export const ReadMediaFileParams = zod.object({
-  "id": zod.string()
-})
+const readMediaFile = <TData = AxiosResponse<StorageMediaFile>>(
+    id: string,
+    params?: ReadMediaFileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/media/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ReadMediaFileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+            // --- footer start
+            return {searchMediaFile,deleteMediaFile,readMediaFile}};
+export type SearchMediaFileResult = AxiosResponse<StorageListMedia>
+export type DeleteMediaFileResult = AxiosResponse<StorageMediaFile>
+export type ReadMediaFileResult = AxiosResponse<StorageMediaFile>
 
-export const ReadMediaFileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "mimeType": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

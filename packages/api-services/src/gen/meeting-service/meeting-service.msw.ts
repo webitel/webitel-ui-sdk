@@ -19,7 +19,7 @@ import type {
 import type {
   WebMeetingBackendMeetingView,
   WebMeetingBackendSatisfactionMeetingResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getGetMeetingViewResponseMock = (overrideResponse: Partial< WebMeetingBackendMeetingView > = {}): WebMeetingBackendMeetingView => ({allowSatisfaction: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), expiresAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), satisfaction: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), title: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})

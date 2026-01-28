@@ -18,7 +18,7 @@ import type {
 
 import {
   TypeKind
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   CreateData200,
   DataDataset,
@@ -27,7 +27,7 @@ import type {
   ProtodataStruct,
   UpdateData200,
   UpdateData2200
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getDeleteDataResponseMock = (overrideResponse: Partial< DataDataset > = {}): DataDataset => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), type: faker.helpers.arrayElement([{about: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), administered: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), display: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), extendable: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), fields: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({always: faker.helpers.arrayElement([{}, undefined]), binary: faker.helpers.arrayElement([{maxBytes: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), violation: faker.helpers.arrayElement([{

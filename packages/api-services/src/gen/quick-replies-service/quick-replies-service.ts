@@ -4,256 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreateQuickReplyRequest,
+  EngineListQuickReplies,
+  EngineQuickRepliesServicePatchQuickReplyBody,
+  EngineQuickRepliesServiceUpdateQuickReplyBody,
+  EngineQuickReply,
+  SearchQuickRepliesParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchQuickRepliesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "queue": zod.array(zod.number()).optional(),
-  "restrictToAgent": zod.boolean().optional()
-})
 
-export const SearchQuickRepliesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreateQuickReplyBody = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getQuickRepliesService
+            // --- title end
+           = () => {
 
-export const CreateQuickReplyResponse = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- header end
+          const searchQuickReplies = <TData = AxiosResponse<EngineListQuickReplies>>(
+    params?: SearchQuickRepliesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/quick_replies`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createQuickReply = <TData = AxiosResponse<EngineQuickReply>>(
+    engineCreateQuickReplyRequest: EngineCreateQuickReplyRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/quick_replies`,
+      engineCreateQuickReplyRequest,options
+    );
+  }
+const deleteQuickReply = <TData = AxiosResponse<EngineQuickReply>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/quick_replies/${id}`,options
+    );
+  }
+const readQuickReply = <TData = AxiosResponse<EngineQuickReply>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/quick_replies/${id}`,options
+    );
+  }
+const patchQuickReply = <TData = AxiosResponse<EngineQuickReply>>(
+    id: number,
+    engineQuickRepliesServicePatchQuickReplyBody: EngineQuickRepliesServicePatchQuickReplyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/quick_replies/${id}`,
+      engineQuickRepliesServicePatchQuickReplyBody,options
+    );
+  }
+const updateQuickReply = <TData = AxiosResponse<EngineQuickReply>>(
+    id: number,
+    engineQuickRepliesServiceUpdateQuickReplyBody: EngineQuickRepliesServiceUpdateQuickReplyBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/quick_replies/${id}`,
+      engineQuickRepliesServiceUpdateQuickReplyBody,options
+    );
+  }
 
-export const DeleteQuickReplyParams = zod.object({
-  "id": zod.number()
-})
+            // --- footer start
+            return {searchQuickReplies,createQuickReply,deleteQuickReply,readQuickReply,patchQuickReply,updateQuickReply}};
+export type SearchQuickRepliesResult = AxiosResponse<EngineListQuickReplies>
+export type CreateQuickReplyResult = AxiosResponse<EngineQuickReply>
+export type DeleteQuickReplyResult = AxiosResponse<EngineQuickReply>
+export type ReadQuickReplyResult = AxiosResponse<EngineQuickReply>
+export type PatchQuickReplyResult = AxiosResponse<EngineQuickReply>
+export type UpdateQuickReplyResult = AxiosResponse<EngineQuickReply>
 
-export const DeleteQuickReplyResponse = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadQuickReplyParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadQuickReplyResponse = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchQuickReplyParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchQuickReplyBody = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional()
-})
-
-export const PatchQuickReplyResponse = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateQuickReplyParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateQuickReplyBody = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional()
-})
-
-export const UpdateQuickReplyResponse = zod.object({
-  "article": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "queues": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

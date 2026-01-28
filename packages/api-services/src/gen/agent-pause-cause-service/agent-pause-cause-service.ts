@@ -4,182 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineAgentPauseCause,
+  EngineAgentPauseCauseServicePatchAgentPauseCauseBody,
+  EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody,
+  EngineCreateAgentPauseCauseRequest,
+  EngineListAgentPauseCause,
+  SearchAgentPauseCauseParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchAgentPauseCauseQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
 
-export const SearchAgentPauseCauseResponse = zod.object({
-  "items": zod.array(zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreateAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getAgentPauseCauseService
+            // --- title end
+           = () => {
 
-export const CreateAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- header end
+          const searchAgentPauseCause = <TData = AxiosResponse<EngineListAgentPauseCause>>(
+    params?: SearchAgentPauseCauseParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/pause_causes`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
+    engineCreateAgentPauseCauseRequest: EngineCreateAgentPauseCauseRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/pause_causes`,
+      engineCreateAgentPauseCauseRequest,options
+    );
+  }
+const deleteAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/pause_causes/${id}`,options
+    );
+  }
+const readAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/pause_causes/${id}`,options
+    );
+  }
+const patchAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
+    id: number,
+    engineAgentPauseCauseServicePatchAgentPauseCauseBody: EngineAgentPauseCauseServicePatchAgentPauseCauseBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/pause_causes/${id}`,
+      engineAgentPauseCauseServicePatchAgentPauseCauseBody,options
+    );
+  }
+const updateAgentPauseCause = <TData = AxiosResponse<EngineAgentPauseCause>>(
+    id: number,
+    engineAgentPauseCauseServiceUpdateAgentPauseCauseBody: EngineAgentPauseCauseServiceUpdateAgentPauseCauseBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/pause_causes/${id}`,
+      engineAgentPauseCauseServiceUpdateAgentPauseCauseBody,options
+    );
+  }
 
-export const DeleteAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
+            // --- footer start
+            return {searchAgentPauseCause,createAgentPauseCause,deleteAgentPauseCause,readAgentPauseCause,patchAgentPauseCause,updateAgentPauseCause}};
+export type SearchAgentPauseCauseResult = AxiosResponse<EngineListAgentPauseCause>
+export type CreateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
+export type DeleteAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
+export type ReadAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
+export type PatchAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
+export type UpdateAgentPauseCauseResult = AxiosResponse<EngineAgentPauseCause>
 
-export const DeleteAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
-export const PatchAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

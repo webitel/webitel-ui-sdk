@@ -19,12 +19,12 @@ import type {
 import {
   StorageProviderType,
   StorageServiceType
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   StorageCognitiveProfile,
   StorageListCognitiveProfile,
   StorageListCognitiveProfileVoices
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchCognitiveProfileResponseMock = (overrideResponse: Partial< StorageListCognitiveProfile > = {}): StorageListCognitiveProfile => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), default: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), provider: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(StorageProviderType)), undefined]), service: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(StorageServiceType)), undefined]), updatedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), updatedBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

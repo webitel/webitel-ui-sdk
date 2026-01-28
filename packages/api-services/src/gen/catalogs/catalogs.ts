@@ -4,611 +4,125 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateCatalogParams,
+  ListCatalogsParams,
+  LocateCatalogParams,
+  UpdateCatalog2Params,
+  UpdateCatalogParams,
+  WebitelCasesCatalog,
+  WebitelCasesCatalogList,
+  WebitelCasesInputCatalog,
+  WebitelCasesLocateCatalogResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCatalogs
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of catalogs or search catalogs
  */
-export const ListCatalogsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number for pagination'),
-  "size": zod.number().optional().describe('Number of records per page'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog.'),
-  "sort": zod.string().optional().describe('Sorting options by fields'),
-  "id": zod.array(zod.string()).optional().describe('List of IDs to filter the catalogs'),
-  "query": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names'),
-  "state": zod.boolean().optional().describe('Filter by state (true for active, false for inactive)'),
-  "depth": zod.string().optional().describe('Filter by the depth of the hierarchy to retrieve services.\nThe depth indicates how many ancestor levels of services\nwill be included for each catalog.\n- A depth of 0 includes only the direct catalog.\n- A depth of 1 includes the catalog and its immediate services.\n- By default the depth is limited by 3,\n  meaning all nested services and sub-services will be included.'),
-  "subFields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog subservices.'),
-  "hasSubservices": zod.boolean().optional().describe('Filter catalogs with subservices')
-})
-
-export const ListCatalogsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listCatalogs = <TData = AxiosResponse<WebitelCasesCatalogList>>(
+    params?: ListCatalogsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/catalogs`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new catalog
  */
-export const CreateCatalogQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const CreateCatalogBody = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const CreateCatalogResponse = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createCatalog = <TData = AxiosResponse<WebitelCasesCatalog>>(
+    webitelCasesInputCatalog: WebitelCasesInputCatalog,
+    params?: CreateCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/catalogs`,
+      webitelCasesInputCatalog,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a catalog
  */
-
-
-
-export const DeleteCatalogParams = zod.object({
-  "id": zod.array(zod.string()).min(1).describe('ID of the catalog to be deleted')
-})
-
-export const DeleteCatalogResponse = zod.object({
-  "items": zod.array(zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const deleteCatalog = <TData = AxiosResponse<WebitelCasesCatalogList>>(
+    id: string[], options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/catalogs/${id}`,options
+    );
+  }
 /**
  * @summary Locate a catalog by ID
  */
-export const LocateCatalogParams = zod.object({
-  "id": zod.string().describe('ID of the catalog to be located')
-})
-
-export const LocateCatalogQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog.'),
-  "subFields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog subservices.')
-})
-
-export const LocateCatalogResponse = zod.object({
-  "catalog": zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locateCatalog = <TData = AxiosResponse<WebitelCasesLocateCatalogResponse>>(
+    id: string,
+    params?: LocateCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/catalogs/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing catalog
  */
-export const UpdateCatalog2Params = zod.object({
-  "id": zod.string().describe('ID of the catalog to be updated')
-})
-
-export const UpdateCatalog2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateCatalog2Body = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const UpdateCatalog2Response = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateCatalog2 = <TData = AxiosResponse<WebitelCasesCatalog>>(
+    id: string,
+    webitelCasesInputCatalog: WebitelCasesInputCatalog,
+    params?: UpdateCatalog2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/catalogs/${id}`,
+      webitelCasesInputCatalog,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing catalog
  */
-export const UpdateCatalogParams = zod.object({
-  "id": zod.string().describe('ID of the catalog to be updated')
-})
+const updateCatalog = <TData = AxiosResponse<WebitelCasesCatalog>>(
+    id: string,
+    webitelCasesInputCatalog: WebitelCasesInputCatalog,
+    params?: UpdateCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/catalogs/${id}`,
+      webitelCasesInputCatalog,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateCatalogQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- footer start
+            return {listCatalogs,createCatalog,deleteCatalog,locateCatalog,updateCatalog2,updateCatalog}};
+export type ListCatalogsResult = AxiosResponse<WebitelCasesCatalogList>
+export type CreateCatalogResult = AxiosResponse<WebitelCasesCatalog>
+export type DeleteCatalogResult = AxiosResponse<WebitelCasesCatalogList>
+export type LocateCatalogResult = AxiosResponse<WebitelCasesLocateCatalogResponse>
+export type UpdateCatalog2Result = AxiosResponse<WebitelCasesCatalog>
+export type UpdateCatalogResult = AxiosResponse<WebitelCasesCatalog>
 
-export const UpdateCatalogBody = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const UpdateCatalogResponse = zod.object({
-  "closeReasonGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "prefix": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "catalogId": zod.string().optional(),
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "group": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "rootId": zod.string().optional(),
-  "searched": zod.boolean().optional(),
-  "service": zod.array(zod.unknown()).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "skills": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "sla": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "state": zod.boolean().optional(),
-  "status": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

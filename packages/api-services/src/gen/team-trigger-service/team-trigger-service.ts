@@ -4,183 +4,121 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineListTeamTrigger,
+  EngineRunTeamTriggerResponse,
+  EngineTeamTrigger,
+  EngineTeamTriggerServiceCreateTeamTriggerBody,
+  EngineTeamTriggerServicePatchTeamTriggerBody,
+  EngineTeamTriggerServiceRunTeamTriggerBody,
+  EngineTeamTriggerServiceUpdateTeamTriggerBody,
+  SearchAgentTriggerParams,
+  SearchTeamTriggerParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchAgentTriggerQueryParams = zod.object({
-  "teamId": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional()
-})
 
-export const SearchAgentTriggerResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const RunTeamTriggerParams = zod.object({
-  "trigger_id": zod.number()
-})
+  export const 
+            // --- title start
+            getTeamTriggerService
+            // --- title end
+           = () => {
 
-export const RunTeamTriggerBody = zod.object({
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
+            // --- header end
+          const searchAgentTrigger = <TData = AxiosResponse<EngineListTeamTrigger>>(
+    params?: SearchAgentTriggerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/triggers/agent`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const runTeamTrigger = <TData = AxiosResponse<EngineRunTeamTriggerResponse>>(
+    triggerId: number,
+    engineTeamTriggerServiceRunTeamTriggerBody: EngineTeamTriggerServiceRunTeamTriggerBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/teams/triggers/${triggerId}`,
+      engineTeamTriggerServiceRunTeamTriggerBody,options
+    );
+  }
+const searchTeamTrigger = <TData = AxiosResponse<EngineListTeamTrigger>>(
+    teamId: string,
+    params?: SearchTeamTriggerParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/${teamId}/triggers`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createTeamTrigger = <TData = AxiosResponse<EngineTeamTrigger>>(
+    teamId: string,
+    engineTeamTriggerServiceCreateTeamTriggerBody: EngineTeamTriggerServiceCreateTeamTriggerBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/teams/${teamId}/triggers`,
+      engineTeamTriggerServiceCreateTeamTriggerBody,options
+    );
+  }
+const deleteTeamTrigger = <TData = AxiosResponse<EngineTeamTrigger>>(
+    teamId: string,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/teams/${teamId}/triggers/${id}`,options
+    );
+  }
+const readTeamTrigger = <TData = AxiosResponse<EngineTeamTrigger>>(
+    teamId: string,
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/teams/${teamId}/triggers/${id}`,options
+    );
+  }
+const patchTeamTrigger = <TData = AxiosResponse<EngineTeamTrigger>>(
+    teamId: string,
+    id: number,
+    engineTeamTriggerServicePatchTeamTriggerBody: EngineTeamTriggerServicePatchTeamTriggerBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/teams/${teamId}/triggers/${id}`,
+      engineTeamTriggerServicePatchTeamTriggerBody,options
+    );
+  }
+const updateTeamTrigger = <TData = AxiosResponse<EngineTeamTrigger>>(
+    teamId: string,
+    id: number,
+    engineTeamTriggerServiceUpdateTeamTriggerBody: EngineTeamTriggerServiceUpdateTeamTriggerBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/teams/${teamId}/triggers/${id}`,
+      engineTeamTriggerServiceUpdateTeamTriggerBody,options
+    );
+  }
 
-export const RunTeamTriggerResponse = zod.object({
-  "jobId": zod.string().optional()
-})
+            // --- footer start
+            return {searchAgentTrigger,runTeamTrigger,searchTeamTrigger,createTeamTrigger,deleteTeamTrigger,readTeamTrigger,patchTeamTrigger,updateTeamTrigger}};
+export type SearchAgentTriggerResult = AxiosResponse<EngineListTeamTrigger>
+export type RunTeamTriggerResult = AxiosResponse<EngineRunTeamTriggerResponse>
+export type SearchTeamTriggerResult = AxiosResponse<EngineListTeamTrigger>
+export type CreateTeamTriggerResult = AxiosResponse<EngineTeamTrigger>
+export type DeleteTeamTriggerResult = AxiosResponse<EngineTeamTrigger>
+export type ReadTeamTriggerResult = AxiosResponse<EngineTeamTrigger>
+export type PatchTeamTriggerResult = AxiosResponse<EngineTeamTrigger>
+export type UpdateTeamTriggerResult = AxiosResponse<EngineTeamTrigger>
 
-export const SearchTeamTriggerParams = zod.object({
-  "team_id": zod.string()
-})
-
-export const SearchTeamTriggerQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.array(zod.number()).optional(),
-  "schemaId": zod.array(zod.number()).optional()
-})
-
-export const SearchTeamTriggerResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const CreateTeamTriggerParams = zod.object({
-  "team_id": zod.string()
-})
-
-export const CreateTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const DeleteTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const ReadTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const PatchTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateTeamTriggerParams = zod.object({
-  "team_id": zod.string(),
-  "id": zod.number()
-})
-
-export const UpdateTeamTriggerBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateTeamTriggerResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

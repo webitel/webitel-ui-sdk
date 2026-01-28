@@ -4,1806 +4,310 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiDeleteLDAPRequest,
+  ApiLDAPCatalog,
+  ApiLDAPSearchRequest,
+  ApiLDAPSearchResponse,
+  ApiLDAPTemplate,
+  ApiLDAPTemplateResponse,
+  ApiLDAProcess,
+  ApiLDAProcessResponse,
+  ApiSearchLDAPResponse,
+  DeleteLDAPCatalogParams,
+  LDAPCreateLDAPTemplateBody,
+  LDAPDeleteLDAPTemplateBody,
+  LDAPLDAPSearchBody,
+  LDAPResyncLDAPCatalogBody,
+  LDAPSearch2Params,
+  LDAPSearch4Params,
+  LDAPUpdateLDAPCatalogBody,
+  LDAPUpdateLDAPTemplateBody,
+  LocateLDAPCatalogParams,
+  LocateLDAPTemplateParams,
+  LocateLDAProcessParams,
+  SearchLDAPCatalogParams,
+  SearchLDAPTemplateParams,
+  SearchLDAProcessParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getLdap
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Delete LDAP profile(s) ...
  */
-export const DeleteLDAPCatalog2Body = zod.object({
-  "id": zod.string().optional(),
-  "relatedObjects": zod.boolean().optional()
-})
-
-export const DeleteLDAPCatalog2Response = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
+const deleteLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    apiDeleteLDAPRequest: ApiDeleteLDAPRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/ldap`,{data:
+      apiDeleteLDAPRequest, ...options}
+    );
+  }
 /**
  * @summary Search for LDAP directories ...
  */
-export const SearchLDAPCatalogQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "id": zod.array(zod.string()).optional().describe('----- Search Basic Filters ---------------------------\n\nselection: by unique identifier'),
-  "q": zod.string().optional().describe('term-of-search: lookup[name]'),
-  "name": zod.string().optional().describe('case-ignore substring match: ILIKE \'*\' - any; \'?\' - one'),
-  "access": zod.string().optional().describe('[M]andatory[A]ccess[C]ontrol: with access mode (action) granted!')
-})
-
-export const SearchLDAPCatalogResponse = zod.object({
-  "items": zod.array(zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const searchLDAPCatalog = <TData = AxiosResponse<ApiSearchLDAPResponse>>(
+    params?: SearchLDAPCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create LDAP profile
  */
-export const CreateLDAPCatalogBody = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
-export const CreateLDAPCatalogResponse = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
+const createLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    apiLDAPCatalog: ApiLDAPCatalog, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/ldap`,
+      apiLDAPCatalog,options
+    );
+  }
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const LDAPSearch4QueryParams = zod.object({
-  "catalogId": zod.string().optional().describe('----- connection -----\nOptional. ID of the preconfigured LDAP catalog'),
-  "url": zod.string().optional().describe('Optional. URL to establish connection to LDAP catalog\n\nURL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "tlsPem": zod.string().optional().describe('TODO: (!)\n\nbase64'),
-  "bind": zod.string().optional().describe('----- BIND: Authorization -----\n\nauthorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "username": zod.string().optional().describe('bind_dn'),
-  "password": zod.string().optional().describe('password'),
-  "baseObject": zod.string().optional().describe('----- SearchRequest -----\nbaseObject [D]istinguished[N]ame'),
-  "scope": zod.number().optional().describe('baseObject              (0),\nsingleLevel             (1),\nwholeSubtree            (2)'),
-  "derefAliases": zod.number().optional().describe('neverDerefAliases       (0),\nderefInSearching        (1),\nderefFindingBaseObj     (2),\nderefAlways             (3)'),
-  "sizeLimit": zod.string().optional().describe('INTEGER (0 ..  maxInt),'),
-  "timeLimit": zod.string().optional().describe('INTEGER (0 ..  maxInt),'),
-  "typesOnly": zod.boolean().optional().describe('BOOLEAN,'),
-  "filter": zod.string().optional().describe('Filter,'),
-  "attributes": zod.array(zod.string()).optional().describe('AttributeSelection')
-})
-
-export const LDAPSearch4Response = zod.object({
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "diagnosticMessage": zod.string().optional(),
-  "entries": zod.array(zod.object({
-
-})).optional(),
-  "matchedDn": zod.string().optional(),
-  "referral": zod.array(zod.string()).optional(),
-  "resultCode": zod.number().optional()
-})
-
+const lDAPSearch4 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+    params?: LDAPSearch4Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/search`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const LDAPSearch3Body = zod.object({
-  "attributes": zod.array(zod.string()).optional(),
-  "baseObject": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "catalogId": zod.string().optional(),
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "derefAliases": zod.number().optional(),
-  "filter": zod.string().optional(),
-  "password": zod.string().optional(),
-  "scope": zod.number().optional(),
-  "sizeLimit": zod.string().optional(),
-  "timeLimit": zod.string().optional(),
-  "tls": zod.object({
-  "pem": zod.string().optional().describe('base64')
-}).optional(),
-  "typesOnly": zod.boolean().optional(),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
-export const LDAPSearch3Response = zod.object({
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "diagnosticMessage": zod.string().optional(),
-  "entries": zod.array(zod.object({
-
-})).optional(),
-  "matchedDn": zod.string().optional(),
-  "referral": zod.array(zod.string()).optional(),
-  "resultCode": zod.number().optional()
-})
-
+const lDAPSearch3 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+    apiLDAPSearchRequest: ApiLDAPSearchRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/ldap/search`,
+      apiLDAPSearchRequest,options
+    );
+  }
 /**
  * @summary Update LDAP profile details
  */
-export const UpdateLDAPCatalog2Params = zod.object({
-  "catalog.id": zod.string().describe('identity\nint64 dc = 1;')
-})
-
-export const UpdateLDAPCatalog2Body = zod.object({
-  "catalog": zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-}).optional().describe('LDAP Catalog changes.'),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateLDAPCatalog2Response = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
+const updateLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    lDAPUpdateLDAPCatalogBody: LDAPUpdateLDAPCatalogBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/ldap/catalog.id}`,
+      lDAPUpdateLDAPCatalogBody,options
+    );
+  }
 /**
  * @summary Update LDAP profile details
  */
-export const UpdateLDAPCatalogParams = zod.object({
-  "catalog.id": zod.string().describe('identity\nint64 dc = 1;')
-})
-
-export const UpdateLDAPCatalogBody = zod.object({
-  "catalog": zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-}).optional().describe('LDAP Catalog changes.'),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateLDAPCatalogResponse = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
-export const CreateLDAPTemplateParams = zod.object({
-  "catalog.id": zod.string().describe('identifier')
-})
-
-export const CreateLDAPTemplateBody = zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})
-
-export const CreateLDAPTemplateResponse = zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})
-
+const updateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    lDAPUpdateLDAPCatalogBody: LDAPUpdateLDAPCatalogBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/ldap/catalog.id}`,
+      lDAPUpdateLDAPCatalogBody,options
+    );
+  }
+const createLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+    lDAPCreateLDAPTemplateBody: LDAPCreateLDAPTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/ldap/catalog.id}/templates`,
+      lDAPCreateLDAPTemplateBody,options
+    );
+  }
 /**
  * @summary (ResyncLDAPResponse) {
  */
-export const SearchLDAProcessParams = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier')
-})
-
-export const SearchLDAProcessQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "id": zod.array(zod.string()).optional().describe('----- Search Basic Filters ---------------------------\nOPTIONAL. Search process by unique .id'),
-  "q": zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
-  "template": zod.string().optional(),
-  "objclass": zod.array(zod.string()).optional(),
-  "failed": zod.boolean().optional().describe('WITH .errs'),
-  "enabled": zod.boolean().optional().describe('created|updated'),
-  "disabled": zod.boolean().optional().describe('deleted')
-})
-
-export const SearchLDAProcessResponse = zod.object({
-  "items": zod.array(zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const searchLDAProcess = <TData = AxiosResponse<ApiLDAProcessResponse>>(
+    catalogId: string,
+    params?: SearchLDAProcessParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${catalogId}/rsync`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * (ResyncLDAPResponse) {
  * @summary Resync LDAP directory catalog changes ...
  */
-export const ResyncLDAPCatalogParams = zod.object({
-  "catalog_id": zod.string().describe('LDAP Catalog unique IDentifier to sync with\n\ncatalog_id')
-})
-
-export const ResyncLDAPCatalogBody = zod.object({
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional()
-})
-
-export const ResyncLDAPCatalogResponse = zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-})
-
+const resyncLDAPCatalog = <TData = AxiosResponse<ApiLDAProcess>>(
+    catalogId: string,
+    lDAPResyncLDAPCatalogBody: LDAPResyncLDAPCatalogBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/ldap/${catalogId}/rsync`,
+      lDAPResyncLDAPCatalogBody,options
+    );
+  }
 /**
  * @summary (ResyncLDAPResponse) {
  */
-
-
-
-export const LocateLDAProcessParams = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
-  "id": zod.array(zod.string()).min(1).describe('----- Search Basic Filters ---------------------------\nOPTIONAL. Search process by unique .id')
-})
-
-export const LocateLDAProcessQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "q": zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
-  "template": zod.string().optional(),
-  "objclass": zod.array(zod.string()).optional(),
-  "failed": zod.boolean().optional().describe('WITH .errs'),
-  "enabled": zod.boolean().optional().describe('created|updated'),
-  "disabled": zod.boolean().optional().describe('deleted')
-})
-
-export const LocateLDAProcessResponse = zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-})
-
+const locateLDAProcess = <TData = AxiosResponse<ApiLDAProcess>>(
+    catalogId: string,
+    id: string[],
+    params?: LocateLDAProcessParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${catalogId}/rsync/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const LDAPSearch2Params = zod.object({
-  "catalog_id": zod.string().describe('----- connection -----\nOptional. ID of the preconfigured LDAP catalog')
-})
-
-export const LDAPSearch2QueryParams = zod.object({
-  "url": zod.string().optional().describe('Optional. URL to establish connection to LDAP catalog\n\nURL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "tlsPem": zod.string().optional().describe('TODO: (!)\n\nbase64'),
-  "bind": zod.string().optional().describe('----- BIND: Authorization -----\n\nauthorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "username": zod.string().optional().describe('bind_dn'),
-  "password": zod.string().optional().describe('password'),
-  "baseObject": zod.string().optional().describe('----- SearchRequest -----\nbaseObject [D]istinguished[N]ame'),
-  "scope": zod.number().optional().describe('baseObject              (0),\nsingleLevel             (1),\nwholeSubtree            (2)'),
-  "derefAliases": zod.number().optional().describe('neverDerefAliases       (0),\nderefInSearching        (1),\nderefFindingBaseObj     (2),\nderefAlways             (3)'),
-  "sizeLimit": zod.string().optional().describe('INTEGER (0 ..  maxInt),'),
-  "timeLimit": zod.string().optional().describe('INTEGER (0 ..  maxInt),'),
-  "typesOnly": zod.boolean().optional().describe('BOOLEAN,'),
-  "filter": zod.string().optional().describe('Filter,'),
-  "attributes": zod.array(zod.string()).optional().describe('AttributeSelection')
-})
-
-export const LDAPSearch2Response = zod.object({
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "diagnosticMessage": zod.string().optional(),
-  "entries": zod.array(zod.object({
-
-})).optional(),
-  "matchedDn": zod.string().optional(),
-  "referral": zod.array(zod.string()).optional(),
-  "resultCode": zod.number().optional()
-})
-
+const lDAPSearch2 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+    catalogId: string,
+    params?: LDAPSearch2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${catalogId}/search`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const LDAPSearchParams = zod.object({
-  "catalog_id": zod.string().describe('----- connection -----\nOptional. ID of the preconfigured LDAP catalog')
-})
-
-export const LDAPSearchBody = zod.object({
-  "attributes": zod.array(zod.string()).optional(),
-  "baseObject": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "derefAliases": zod.number().optional(),
-  "filter": zod.string().optional(),
-  "password": zod.string().optional(),
-  "scope": zod.number().optional(),
-  "sizeLimit": zod.string().optional(),
-  "timeLimit": zod.string().optional(),
-  "tls": zod.object({
-  "pem": zod.string().optional().describe('base64')
-}).optional(),
-  "typesOnly": zod.boolean().optional(),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
-export const LDAPSearchResponse = zod.object({
-  "controls": zod.array(zod.object({
-  "controlType": zod.string().optional(),
-  "controlValue": zod.string().optional(),
-  "criticality": zod.boolean().optional()
-})).optional(),
-  "diagnosticMessage": zod.string().optional(),
-  "entries": zod.array(zod.object({
-
-})).optional(),
-  "matchedDn": zod.string().optional(),
-  "referral": zod.array(zod.string()).optional(),
-  "resultCode": zod.number().optional()
-})
-
-export const DeleteLDAPTemplate2Params = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier')
-})
-
-export const DeleteLDAPTemplate2Body = zod.object({
-  "baseDn": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "objclass": zod.string().optional(),
-  "page": zod.number().optional().describe('default: 1'),
-  "q": zod.string().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.array(zod.string()).optional()
-})
-
-export const DeleteLDAPTemplate2Response = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
-export const SearchLDAPTemplateParams = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier')
-})
-
-export const SearchLDAPTemplateQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "id": zod.array(zod.string()).optional().describe('----- Search Basic Filters ---------------------------\nOPTIONAL. Search templates by .id'),
-  "q": zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
-  "name": zod.string().optional(),
-  "baseDn": zod.string().optional(),
-  "objclass": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "disabled": zod.boolean().optional()
-})
-
-export const SearchLDAPTemplateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
-
-
-
-export const DeleteLDAPTemplateParams = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
-  "id": zod.array(zod.string()).min(1).describe('----- Search Basic Filters ---------------------------\nOPTIONAL. Search templates by .id')
-})
-
-export const DeleteLDAPTemplateBody = zod.object({
-  "baseDn": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "objclass": zod.string().optional(),
-  "page": zod.number().optional().describe('default: 1'),
-  "q": zod.string().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.array(zod.string()).optional()
-})
-
-export const DeleteLDAPTemplateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
-
-
-
-export const LocateLDAPTemplateParams = zod.object({
-  "catalog_id": zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
-  "id": zod.array(zod.string()).min(1).describe('----- Search Basic Filters ---------------------------\nOPTIONAL. Search templates by .id')
-})
-
-export const LocateLDAPTemplateQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "q": zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
-  "name": zod.string().optional(),
-  "baseDn": zod.string().optional(),
-  "objclass": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "disabled": zod.boolean().optional()
-})
-
-export const LocateLDAPTemplateResponse = zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})
-
+const lDAPSearch = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+    catalogId: string,
+    lDAPLDAPSearchBody: LDAPLDAPSearchBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/ldap/${catalogId}/search`,
+      lDAPLDAPSearchBody,options
+    );
+  }
+const deleteLDAPTemplate2 = <TData = AxiosResponse<ApiLDAPTemplateResponse>>(
+    catalogId: string,
+    lDAPDeleteLDAPTemplateBody: LDAPDeleteLDAPTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/ldap/${catalogId}/templates`,{data:
+      lDAPDeleteLDAPTemplateBody, ...options}
+    );
+  }
+const searchLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplateResponse>>(
+    catalogId: string,
+    params?: SearchLDAPTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${catalogId}/templates`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplateResponse>>(
+    catalogId: string,
+    id: string[],
+    lDAPDeleteLDAPTemplateBody: LDAPDeleteLDAPTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/ldap/${catalogId}/templates/${id}`,{data:
+      lDAPDeleteLDAPTemplateBody, ...options}
+    );
+  }
+const locateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+    catalogId: string,
+    id: string[],
+    params?: LocateLDAPTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${catalogId}/templates/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete LDAP profile(s) ...
  */
-export const DeleteLDAPCatalogParams = zod.object({
-  "id": zod.string().describe('catalog id')
-})
-
-export const DeleteLDAPCatalogQueryParams = zod.object({
-  "relatedObjects": zod.boolean().optional().describe('WITH objects bound to ?')
-})
-
-export const DeleteLDAPCatalogResponse = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
+const deleteLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    id: string,
+    params?: DeleteLDAPCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/ldap/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Read LDAP catalog profile by .id
  */
+const locateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+    id: string[],
+    params?: LocateLDAPCatalogParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/ldap/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+    lDAPUpdateLDAPTemplateBody: LDAPUpdateLDAPTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/ldap/template.catalog.id}/templates/template.id}`,
+      lDAPUpdateLDAPTemplateBody,options
+    );
+  }
+const updateLDAPTemplate2 = <TData = AxiosResponse<ApiLDAPTemplate>>(
+    lDAPUpdateLDAPTemplateBody: LDAPUpdateLDAPTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/ldap/template.catalog.id}/templates/template.id}`,
+      lDAPUpdateLDAPTemplateBody,options
+    );
+  }
 
+            // --- footer start
+            return {deleteLDAPCatalog2,searchLDAPCatalog,createLDAPCatalog,lDAPSearch4,lDAPSearch3,updateLDAPCatalog2,updateLDAPCatalog,createLDAPTemplate,searchLDAProcess,resyncLDAPCatalog,locateLDAProcess,lDAPSearch2,lDAPSearch,deleteLDAPTemplate2,searchLDAPTemplate,deleteLDAPTemplate,locateLDAPTemplate,deleteLDAPCatalog,locateLDAPCatalog,updateLDAPTemplate,updateLDAPTemplate2}};
+export type DeleteLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>
+export type SearchLDAPCatalogResult = AxiosResponse<ApiSearchLDAPResponse>
+export type CreateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>
+export type LDAPSearch4Result = AxiosResponse<ApiLDAPSearchResponse>
+export type LDAPSearch3Result = AxiosResponse<ApiLDAPSearchResponse>
+export type UpdateLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>
+export type UpdateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>
+export type CreateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>
+export type SearchLDAProcessResult = AxiosResponse<ApiLDAProcessResponse>
+export type ResyncLDAPCatalogResult = AxiosResponse<ApiLDAProcess>
+export type LocateLDAProcessResult = AxiosResponse<ApiLDAProcess>
+export type LDAPSearch2Result = AxiosResponse<ApiLDAPSearchResponse>
+export type LDAPSearchResult = AxiosResponse<ApiLDAPSearchResponse>
+export type DeleteLDAPTemplate2Result = AxiosResponse<ApiLDAPTemplateResponse>
+export type SearchLDAPTemplateResult = AxiosResponse<ApiLDAPTemplateResponse>
+export type DeleteLDAPTemplateResult = AxiosResponse<ApiLDAPTemplateResponse>
+export type LocateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>
+export type DeleteLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>
+export type LocateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>
+export type UpdateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>
+export type UpdateLDAPTemplate2Result = AxiosResponse<ApiLDAPTemplate>
 
-
-export const LocateLDAPCatalogParams = zod.object({
-  "id": zod.array(zod.string()).min(1).describe('----- Search Basic Filters ---------------------------\n\nselection: by unique identifier')
-})
-
-export const LocateLDAPCatalogQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "q": zod.string().optional().describe('term-of-search: lookup[name]'),
-  "name": zod.string().optional().describe('case-ignore substring match: ILIKE \'*\' - any; \'?\' - one'),
-  "access": zod.string().optional().describe('[M]andatory[A]ccess[C]ontrol: with access mode (action) granted!')
-})
-
-export const LocateLDAPCatalogResponse = zod.object({
-  "baseDn": zod.string().optional(),
-  "bind": zod.string().optional().describe('authorization method e.g.: SIMPLE, SAML, NTLM, etc.'),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "cron": zod.string().optional().describe('[CRON]OS SPEC ! github.com/robfig/cron/v3'),
-  "entryModify": zod.string().optional(),
-  "entryUuid": zod.string().optional().describe('entry unique id (except DN which may be updated)'),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "process": zod.object({
-  "completeAt": zod.string().optional().describe('Optional. If not <zero> indicates that this process is completed.'),
-  "executeAt": zod.string().optional(),
-  "executeBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "user": zod.boolean().optional()
-}).optional().describe('RoleId lookup value.'),
-  "id": zod.string().optional(),
-  "options": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "progress": zod.array(zod.object({
-  "class": zod.string().optional(),
-  "entry": zod.object({
-
-}).optional().describe('map<string, string> entry = 1;'),
-  "errs": zod.array(zod.string()).optional(),
-  "object": zod.object({
-
-}).optional(),
-  "proc": zod.string().optional(),
-  "warn": zod.array(zod.string()).optional()
-})).optional(),
-  "status": zod.string().optional()
-}).optional(),
-  "sync": zod.object({
-  "linkExistingObjects": zod.boolean().optional(),
-  "reassignDeviceUsers": zod.boolean().optional(),
-  "test": zod.boolean().optional(),
-  "timeout": zod.string().optional()
-}).optional(),
-  "templates": zod.array(zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})).optional(),
-  "tls": zod.object({
-  "ca": zod.string().optional(),
-  "cert": zod.string().optional().describe('PEM: base64'),
-  "key": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "url": zod.string().optional().describe('URL e.g.: [(ldap|ldapi|ldaps)://]host[:port]'),
-  "username": zod.string().optional()
-})
-
-export const UpdateLDAPTemplateParams = zod.object({
-  "template.catalog.id": zod.string().describe('identifier'),
-  "template.id": zod.string().describe('ID unique')
-})
-
-export const UpdateLDAPTemplateBody = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "template": zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-}).optional().describe('Template changes.')
-})
-
-export const UpdateLDAPTemplateResponse = zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})
-
-export const UpdateLDAPTemplate2Params = zod.object({
-  "template.catalog.id": zod.string().describe('identifier'),
-  "template.id": zod.string().describe('ID unique')
-})
-
-export const UpdateLDAPTemplate2Body = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "template": zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-}).optional().describe('Template changes.')
-})
-
-export const UpdateLDAPTemplate2Response = zod.object({
-  "agent": zod.object({
-
-}).optional(),
-  "baseDn": zod.string().optional(),
-  "catalog": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional().describe('unix'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "device": zod.object({
-
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "role": zod.object({
-
-}).optional(),
-  "search": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.'),
-  "user": zod.object({
-
-}).optional()
-})
-
+            // --- footer end
+          

@@ -4,392 +4,168 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsEmailAddress,
+  ContactsEmailList,
+  ContactsInputEmailAddress,
+  DeleteEmailParams,
+  DeleteEmailsParams,
+  ListEmailsParams,
+  LocateEmailParams,
+  MergeEmailsParams,
+  ResetEmailsParams,
+  UpdateEmail2Body,
+  UpdateEmail2Params,
+  UpdateEmailBody,
+  UpdateEmailParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getEmails
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Remove email address(es) of the contact.
  */
-export const DeleteEmailsParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
-
-export const deleteEmailsQueryEtagItemRegExp = new RegExp('^.+$');
-
-
-export const DeleteEmailsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "etag": zod.array(zod.string().regex(deleteEmailsQueryEtagItemRegExp)).describe('Set of unique ID(s) to remove.')
-})
-
-export const DeleteEmailsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+const deleteEmails = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    params: DeleteEmailsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/emails`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locates email address(es) of the contact.
  */
-export const ListEmailsParams = zod.object({
-  "contact_id": zod.string().describe('The Contact ID linked with.')
-})
-
-export const ListEmailsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: email address.\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "id": zod.array(zod.string()).optional().describe('Link(s) with unique ID only.'),
-  "primary": zod.boolean().optional().describe('Primary email address only.'),
-  "verified": zod.boolean().optional().describe('Verified email addresses only.'),
-  "typeId": zod.string().optional().describe('Reference Object unique ID.'),
-  "typeType": zod.string().optional().describe('Reference Object well-known type.'),
-  "typeName": zod.string().optional().describe('Reference Object display name.')
-})
-
-export const ListEmailsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+const listEmails = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    params?: ListEmailsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/emails`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update or append email address(es) of the contact.
  */
-export const MergeEmailsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const MergeEmailsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const MergeEmailsBodyItem = zod.object({
-  "email": zod.string().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-}).describe('Input of the Contact\'s email address.')
-export const MergeEmailsBody = zod.array(MergeEmailsBodyItem)
-
-export const MergeEmailsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+const mergeEmails = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    contactsInputEmailAddress: ContactsInputEmailAddress[],
+    params?: MergeEmailsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/emails`,
+      contactsInputEmailAddress,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Resets all emails of the contact according to the input dataset.
  */
-export const ResetEmailsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const ResetEmailsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const ResetEmailsBodyItem = zod.object({
-  "email": zod.string().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-}).describe('Input of the Contact\'s email address.')
-export const ResetEmailsBody = zod.array(ResetEmailsBodyItem)
-
-export const ResetEmailsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+const resetEmails = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    contactsInputEmailAddress: ContactsInputEmailAddress[],
+    params?: ResetEmailsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/emails`,
+      contactsInputEmailAddress,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove the contact's email address link
  */
-export const DeleteEmailParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID to remove.')
-})
-
-export const DeleteEmailQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const DeleteEmailResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')
-
+const deleteEmail = <TData = AxiosResponse<ContactsEmailAddress>>(
+    contactId: string,
+    etag: string,
+    params?: DeleteEmailParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/emails/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate the email address link.
  */
-export const LocateEmailParams = zod.object({
-  "contact_id": zod.string().describe('Contact source ID.'),
-  "etag": zod.string().describe('Unique mail address link IDentifier.\nAccept: `etag` (obsolete+) or `id`.')
-})
-
-export const LocateEmailQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
-
-export const LocateEmailResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')
-
+const locateEmail = <TData = AxiosResponse<ContactsEmailAddress>>(
+    contactId: string,
+    etag: string,
+    params?: LocateEmailParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/emails/${etag}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's email address link details
  */
-export const UpdateEmail2Params = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
-
-export const UpdateEmail2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
-
-export const UpdateEmail2Body = zod.object({
-  "email": zod.string().describe('The email address.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-})
-
-export const UpdateEmail2Response = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+const updateEmail2 = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    etag: string,
+    updateEmail2Body: UpdateEmail2Body,
+    params?: UpdateEmail2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/contacts/${contactId}/emails/${etag}`,
+      updateEmail2Body,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update the contact's email address link details
  */
-export const UpdateEmailParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resorce.')
-})
+const updateEmail = <TData = AxiosResponse<ContactsEmailList>>(
+    contactId: string,
+    etag: string,
+    updateEmailBody: UpdateEmailBody,
+    params?: UpdateEmailParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/emails/${etag}`,
+      updateEmailBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateEmailQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+            // --- footer start
+            return {deleteEmails,listEmails,mergeEmails,resetEmails,deleteEmail,locateEmail,updateEmail2,updateEmail}};
+export type DeleteEmailsResult = AxiosResponse<ContactsEmailList>
+export type ListEmailsResult = AxiosResponse<ContactsEmailList>
+export type MergeEmailsResult = AxiosResponse<ContactsEmailList>
+export type ResetEmailsResult = AxiosResponse<ContactsEmailList>
+export type DeleteEmailResult = AxiosResponse<ContactsEmailAddress>
+export type LocateEmailResult = AxiosResponse<ContactsEmailAddress>
+export type UpdateEmail2Result = AxiosResponse<ContactsEmailList>
+export type UpdateEmailResult = AxiosResponse<ContactsEmailList>
 
-export const UpdateEmailBody = zod.object({
-  "email": zod.string().describe('The email address.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "verified": zod.boolean().optional()
-})
-
-export const UpdateEmailResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "email": zod.string().optional().describe('The email address.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this phone number is default within other channels of the same type(phone).'),
-  "type": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.'),
-  "verified": zod.boolean().optional()
-}).describe('The Contact\'s email address.')).optional().describe('EmailAddress dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Email dataset.')
-
+            // --- footer end
+          

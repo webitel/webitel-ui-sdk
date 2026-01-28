@@ -4,302 +4,157 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteSkillParams,
+  EngineCreateSkillAgentResponse,
+  EngineCreateSkillRequest,
+  EngineDeleteSkillAgentResponse,
+  EngineListSkill,
+  EngineListSkillAgent,
+  EnginePatchSkillAgentResponse,
+  EngineSkill,
+  EngineSkillServiceCreateSkillAgentBody,
+  EngineSkillServiceDeleteSkillAgentBody,
+  EngineSkillServicePatchSkillAgentBody,
+  EngineSkillServiceUpdateSkillBody,
+  ReadSkillParams,
+  SearchSkillAgentParams,
+  SearchSkillParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getSkillService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of Skill
  */
-export const SearchSkillQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchSkillResponse = zod.object({
-  "items": zod.array(zod.object({
-  "activeAgents": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "totalAgents": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchSkill = <TData = AxiosResponse<EngineListSkill>>(
+    params?: SearchSkillParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/skills`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create Skill
  */
-export const CreateSkillBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreateSkillResponse = zod.object({
-  "activeAgents": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "totalAgents": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createSkill = <TData = AxiosResponse<EngineSkill>>(
+    engineCreateSkillRequest: EngineCreateSkillRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/skills`,
+      engineCreateSkillRequest,options
+    );
+  }
 /**
  * @summary Remove Skill
  */
-export const DeleteSkillParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteSkillQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteSkillResponse = zod.object({
-  "activeAgents": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "totalAgents": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteSkill = <TData = AxiosResponse<EngineSkill>>(
+    id: string,
+    params?: DeleteSkillParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/skills/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Skill item
  */
-export const ReadSkillParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadSkillQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadSkillResponse = zod.object({
-  "activeAgents": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "totalAgents": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readSkill = <TData = AxiosResponse<EngineSkill>>(
+    id: string,
+    params?: ReadSkillParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/skills/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update Skill
  */
-export const UpdateSkillParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateSkillBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdateSkillResponse = zod.object({
-  "activeAgents": zod.number().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "totalAgents": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteSkillAgentParams = zod.object({
-  "skill_id": zod.string()
-})
-
-export const DeleteSkillAgentBody = zod.object({
-  "agentId": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional()
-})
-
-export const DeleteSkillAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
-
+const updateSkill = <TData = AxiosResponse<EngineSkill>>(
+    id: string,
+    engineSkillServiceUpdateSkillBody: EngineSkillServiceUpdateSkillBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/skills/${id}`,
+      engineSkillServiceUpdateSkillBody,options
+    );
+  }
+const deleteSkillAgent = <TData = AxiosResponse<EngineDeleteSkillAgentResponse>>(
+    skillId: string,
+    engineSkillServiceDeleteSkillAgentBody: EngineSkillServiceDeleteSkillAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/skills/${skillId}/agents`,{data:
+      engineSkillServiceDeleteSkillAgentBody, ...options}
+    );
+  }
 /**
  * @summary For agents
 SearchSkillAgent
  */
-export const SearchSkillAgentParams = zod.object({
-  "skill_id": zod.string()
-})
+const searchSkillAgent = <TData = AxiosResponse<EngineListSkillAgent>>(
+    skillId: string,
+    params?: SearchSkillAgentParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/skills/${skillId}/agents`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const patchSkillAgent = <TData = AxiosResponse<EnginePatchSkillAgentResponse>>(
+    skillId: string,
+    engineSkillServicePatchSkillAgentBody: EngineSkillServicePatchSkillAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/skills/${skillId}/agents`,
+      engineSkillServicePatchSkillAgentBody,options
+    );
+  }
+const createSkillAgent = <TData = AxiosResponse<EngineCreateSkillAgentResponse>>(
+    skillId: string,
+    engineSkillServiceCreateSkillAgentBody: EngineSkillServiceCreateSkillAgentBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/skills/${skillId}/agents`,
+      engineSkillServiceCreateSkillAgentBody,options
+    );
+  }
 
-export const SearchSkillAgentQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "agentId": zod.array(zod.string()).optional()
-})
+            // --- footer start
+            return {searchSkill,createSkill,deleteSkill,readSkill,updateSkill,deleteSkillAgent,searchSkillAgent,patchSkillAgent,createSkillAgent}};
+export type SearchSkillResult = AxiosResponse<EngineListSkill>
+export type CreateSkillResult = AxiosResponse<EngineSkill>
+export type DeleteSkillResult = AxiosResponse<EngineSkill>
+export type ReadSkillResult = AxiosResponse<EngineSkill>
+export type UpdateSkillResult = AxiosResponse<EngineSkill>
+export type DeleteSkillAgentResult = AxiosResponse<EngineDeleteSkillAgentResponse>
+export type SearchSkillAgentResult = AxiosResponse<EngineListSkillAgent>
+export type PatchSkillAgentResult = AxiosResponse<EnginePatchSkillAgentResponse>
+export type CreateSkillAgentResult = AxiosResponse<EngineCreateSkillAgentResponse>
 
-export const SearchSkillAgentResponse = zod.object({
-  "aggs": zod.object({
-  "enabled": zod.boolean().optional(),
-  "potentialRows": zod.number().optional()
-}).optional(),
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const PatchSkillAgentParams = zod.object({
-  "skill_id": zod.string()
-})
-
-export const PatchSkillAgentBody = zod.object({
-  "agentId": zod.array(zod.string()).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "q": zod.string().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchSkillAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
-
-export const CreateSkillAgentParams = zod.object({
-  "skill_id": zod.string()
-})
-
-export const CreateSkillAgentBody = zod.object({
-  "agent": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional()
-})
-
-export const CreateSkillAgentResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "capacity": zod.number().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "team": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
-
+            // --- footer end
+          

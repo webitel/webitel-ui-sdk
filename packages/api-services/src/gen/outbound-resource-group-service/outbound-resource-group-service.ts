@@ -4,350 +4,182 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteOutboundResourceGroupParams,
+  DeleteOutboundResourceInGroupParams,
+  EngineCreateOutboundResourceGroupRequest,
+  EngineListOutboundResourceGroup,
+  EngineListOutboundResourceInGroup,
+  EngineOutboundResourceGroup,
+  EngineOutboundResourceGroupServiceCreateOutboundResourceInGroupBody,
+  EngineOutboundResourceGroupServiceUpdateOutboundResourceGroupBody,
+  EngineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody,
+  EngineOutboundResourceInGroup,
+  ReadOutboundResourceGroupParams,
+  ReadOutboundResourceInGroupParams,
+  SearchOutboundResourceGroupParams,
+  SearchOutboundResourceInGroupParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getOutboundResourceGroupService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of OutboundResourceGroup
  */
-export const SearchOutboundResourceGroupQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchOutboundResourceGroupResponse = zod.object({
-  "items": zod.array(zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchOutboundResourceGroup = <TData = AxiosResponse<EngineListOutboundResourceGroup>>(
+    params?: SearchOutboundResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resource_group`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create OutboundResourceGroup
  */
-export const CreateOutboundResourceGroupBody = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional()
-})
-
-export const CreateOutboundResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createOutboundResourceGroup = <TData = AxiosResponse<EngineOutboundResourceGroup>>(
+    engineCreateOutboundResourceGroupRequest: EngineCreateOutboundResourceGroupRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/resource_group`,
+      engineCreateOutboundResourceGroupRequest,options
+    );
+  }
 /**
  * @summary List of OutboundResourceInGroup
  */
-export const SearchOutboundResourceInGroupParams = zod.object({
-  "group_id": zod.string()
-})
-
-export const SearchOutboundResourceInGroupQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchOutboundResourceInGroupResponse = zod.object({
-  "items": zod.array(zod.object({
-  "groupId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchOutboundResourceInGroup = <TData = AxiosResponse<EngineListOutboundResourceInGroup>>(
+    groupId: string,
+    params?: SearchOutboundResourceInGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resource_group/${groupId}/resource`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create OutboundResourceGroup
  */
-export const CreateOutboundResourceInGroupParams = zod.object({
-  "group_id": zod.string()
-})
-
-export const CreateOutboundResourceInGroupBody = zod.object({
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateOutboundResourceInGroupResponse = zod.object({
-  "groupId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createOutboundResourceInGroup = <TData = AxiosResponse<EngineOutboundResourceInGroup>>(
+    groupId: string,
+    engineOutboundResourceGroupServiceCreateOutboundResourceInGroupBody: EngineOutboundResourceGroupServiceCreateOutboundResourceInGroupBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/resource_group/${groupId}/resource`,
+      engineOutboundResourceGroupServiceCreateOutboundResourceInGroupBody,options
+    );
+  }
 /**
  * @summary Remove OutboundResourceInGroup
  */
-export const DeleteOutboundResourceInGroupParams = zod.object({
-  "group_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteOutboundResourceInGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteOutboundResourceInGroupResponse = zod.object({
-  "groupId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteOutboundResourceInGroup = <TData = AxiosResponse<EngineOutboundResourceInGroup>>(
+    groupId: string,
+    id: string,
+    params?: DeleteOutboundResourceInGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/resource_group/${groupId}/resource/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary OutboundResourceInGroup item
  */
-export const ReadOutboundResourceInGroupParams = zod.object({
-  "group_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadOutboundResourceInGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadOutboundResourceInGroupResponse = zod.object({
-  "groupId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readOutboundResourceInGroup = <TData = AxiosResponse<EngineOutboundResourceInGroup>>(
+    groupId: string,
+    id: string,
+    params?: ReadOutboundResourceInGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resource_group/${groupId}/resource/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update OutboundResourceInGroup
  */
-export const UpdateOutboundResourceInGroupParams = zod.object({
-  "group_id": zod.string(),
-  "id": zod.string()
-})
-
-export const UpdateOutboundResourceInGroupBody = zod.object({
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateOutboundResourceInGroupResponse = zod.object({
-  "groupId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "reserveResource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "resource": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateOutboundResourceInGroup = <TData = AxiosResponse<EngineOutboundResourceInGroup>>(
+    groupId: string,
+    id: string,
+    engineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody: EngineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/resource_group/${groupId}/resource/${id}`,
+      engineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody,options
+    );
+  }
 /**
  * @summary Remove OutboundResourceGroup
  */
-export const DeleteOutboundResourceGroupParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteOutboundResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteOutboundResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteOutboundResourceGroup = <TData = AxiosResponse<EngineOutboundResourceGroup>>(
+    id: string,
+    params?: DeleteOutboundResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/resource_group/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary OutboundResourceGroup item
  */
-export const ReadOutboundResourceGroupParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadOutboundResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadOutboundResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readOutboundResourceGroup = <TData = AxiosResponse<EngineOutboundResourceGroup>>(
+    id: string,
+    params?: ReadOutboundResourceGroupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/resource_group/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update OutboundResourceGroup
  */
-export const UpdateOutboundResourceGroupParams = zod.object({
-  "id": zod.string()
-})
+const updateOutboundResourceGroup = <TData = AxiosResponse<EngineOutboundResourceGroup>>(
+    id: string,
+    engineOutboundResourceGroupServiceUpdateOutboundResourceGroupBody: EngineOutboundResourceGroupServiceUpdateOutboundResourceGroupBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/resource_group/${id}`,
+      engineOutboundResourceGroupServiceUpdateOutboundResourceGroupBody,options
+    );
+  }
 
-export const UpdateOutboundResourceGroupBody = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional()
-})
+            // --- footer start
+            return {searchOutboundResourceGroup,createOutboundResourceGroup,searchOutboundResourceInGroup,createOutboundResourceInGroup,deleteOutboundResourceInGroup,readOutboundResourceInGroup,updateOutboundResourceInGroup,deleteOutboundResourceGroup,readOutboundResourceGroup,updateOutboundResourceGroup}};
+export type SearchOutboundResourceGroupResult = AxiosResponse<EngineListOutboundResourceGroup>
+export type CreateOutboundResourceGroupResult = AxiosResponse<EngineOutboundResourceGroup>
+export type SearchOutboundResourceInGroupResult = AxiosResponse<EngineListOutboundResourceInGroup>
+export type CreateOutboundResourceInGroupResult = AxiosResponse<EngineOutboundResourceInGroup>
+export type DeleteOutboundResourceInGroupResult = AxiosResponse<EngineOutboundResourceInGroup>
+export type ReadOutboundResourceInGroupResult = AxiosResponse<EngineOutboundResourceInGroup>
+export type UpdateOutboundResourceInGroupResult = AxiosResponse<EngineOutboundResourceInGroup>
+export type DeleteOutboundResourceGroupResult = AxiosResponse<EngineOutboundResourceGroup>
+export type ReadOutboundResourceGroupResult = AxiosResponse<EngineOutboundResourceGroup>
+export type UpdateOutboundResourceGroupResult = AxiosResponse<EngineOutboundResourceGroup>
 
-export const UpdateOutboundResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "strategy": zod.string().optional(),
-  "time": zod.array(zod.object({
-  "endTimeOfDay": zod.number().optional(),
-  "startTimeOfDay": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

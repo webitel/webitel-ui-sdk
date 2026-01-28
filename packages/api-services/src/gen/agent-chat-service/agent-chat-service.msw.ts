@@ -18,12 +18,12 @@ import type {
 
 import {
   WebitelChatButtonRequest
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   WebitelChatGetAgentChatsCounterResponse,
   WebitelChatGetAgentChatsResponse,
   WebitelChatMarkChatProcessedResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getAgentChatServiceGetAgentChatsResponseMock = (overrideResponse: Partial< WebitelChatGetAgentChatsResponse > = {}): WebitelChatGetAgentChatsResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({closeReason: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), closedAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), contact: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), gateway: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), lastMessage: faker.helpers.arrayElement([{chat: faker.helpers.arrayElement([{context: faker.helpers.arrayElement([{

@@ -18,12 +18,12 @@ import type {
 
 import {
   EngineSystemSettingName
-} from '.././_models';
+} from '../webitelAPI.schemas';
 import type {
   EngineListAvailableSystemSetting,
   EngineListSystemSetting,
   EngineSystemSetting
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchSystemSettingResponseMock = (overrideResponse: Partial< EngineListSystemSetting > = {}): EngineListSystemSetting => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), name: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineSystemSettingName)), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

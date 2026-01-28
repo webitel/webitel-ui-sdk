@@ -19,7 +19,7 @@ import type {
 import type {
   ApiLoginResponse,
   ApiUserinfo
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSignupResponseMock = (overrideResponse: Partial< ApiLoginResponse > = {}): ApiLoginResponse => ({authorization: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), expiresIn: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), refreshToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), state: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), tokenType: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), warnings: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({detail: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), warningData: faker.helpers.arrayElement([{passwordExpiry: faker.helpers.arrayElement([{daysRemaining: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), expiresAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined])})), undefined]), ...overrideResponse})

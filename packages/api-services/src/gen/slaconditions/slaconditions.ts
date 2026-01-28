@@ -4,247 +4,131 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateSLAConditionParams,
+  ListSLAConditionsParams,
+  LocateSLAConditionParams,
+  UpdateSLACondition2Params,
+  UpdateSLAConditionParams,
+  WebitelCasesInputSLACondition,
+  WebitelCasesLocateSLAConditionResponse,
+  WebitelCasesSLACondition,
+  WebitelCasesSLAConditionList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getSlaconditions
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Create a new SLACondition
  */
-export const CreateSLAConditionParams = zod.object({
-  "sla_id": zod.string()
-})
-
-export const CreateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const CreateSLAConditionBody = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
-
-export const CreateSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createSLACondition = <TData = AxiosResponse<WebitelCasesSLACondition>>(
+    slaId: string,
+    webitelCasesInputSLACondition: WebitelCasesInputSLACondition,
+    params?: CreateSLAConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/slas/${slaId}/sla_condition`,
+      webitelCasesInputSLACondition,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete an SLACondition
  */
-export const DeleteSLAConditionParams = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteSLACondition = <TData = AxiosResponse<WebitelCasesSLACondition>>(
+    slaId: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/slas/${slaId}/sla_condition/${id}`,options
+    );
+  }
 /**
  * @summary Locate an SLACondition by ID
  */
-export const LocateSLAConditionParams = zod.object({
-  "sla_id": zod.string().describe('Unique identifier of the SLACondition'),
-  "id": zod.string().describe('Unique identifier of the SLACondition')
-})
-
-export const LocateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const LocateSLAConditionResponse = zod.object({
-  "slaCondition": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locateSLACondition = <TData = AxiosResponse<WebitelCasesLocateSLAConditionResponse>>(
+    slaId: string,
+    id: string,
+    params?: LocateSLAConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/slas/${slaId}/sla_condition/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing SLACondition
  */
-export const UpdateSLACondition2Params = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
-
-export const UpdateSLACondition2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateSLACondition2Body = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
-
-export const UpdateSLACondition2Response = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateSLACondition2 = <TData = AxiosResponse<WebitelCasesSLACondition>>(
+    slaId: string,
+    id: string,
+    webitelCasesInputSLACondition: WebitelCasesInputSLACondition,
+    params?: UpdateSLACondition2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/slas/${slaId}/sla_condition/${id}`,
+      webitelCasesInputSLACondition,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing SLACondition
  */
-export const UpdateSLAConditionParams = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
-
-export const UpdateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateSLAConditionBody = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
-
-export const UpdateSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updateSLACondition = <TData = AxiosResponse<WebitelCasesSLACondition>>(
+    slaId: string,
+    id: string,
+    webitelCasesInputSLACondition: WebitelCasesInputSLACondition,
+    params?: UpdateSLAConditionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/slas/${slaId}/sla_condition/${id}`,
+      webitelCasesInputSLACondition,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Retrieve a list of SLAConditions or search SLACondition conditions
  */
-export const ListSLAConditionsParams = zod.object({
-  "sla_id": zod.string().describe('Filter by SLA Id')
-})
+const listSLAConditions = <TData = AxiosResponse<WebitelCasesSLAConditionList>>(
+    slaId: string,
+    params?: ListSLAConditionsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/slas/${slaId}/sla_conditions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ListSLAConditionsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names'),
-  "slaConditionId": zod.string().optional().describe('Filter by SLACondition Id.'),
-  "priorityId": zod.string().optional().describe('filter by priority id')
-})
+            // --- footer start
+            return {createSLACondition,deleteSLACondition,locateSLACondition,updateSLACondition2,updateSLACondition,listSLAConditions}};
+export type CreateSLAConditionResult = AxiosResponse<WebitelCasesSLACondition>
+export type DeleteSLAConditionResult = AxiosResponse<WebitelCasesSLACondition>
+export type LocateSLAConditionResult = AxiosResponse<WebitelCasesLocateSLAConditionResponse>
+export type UpdateSLACondition2Result = AxiosResponse<WebitelCasesSLACondition>
+export type UpdateSLAConditionResult = AxiosResponse<WebitelCasesSLACondition>
+export type ListSLAConditionsResult = AxiosResponse<WebitelCasesSLAConditionList>
 
-export const ListSLAConditionsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+            // --- footer end
+          

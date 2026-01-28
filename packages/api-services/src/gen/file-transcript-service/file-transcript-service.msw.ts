@@ -21,7 +21,7 @@ import type {
   StorageListPhrases,
   StoragePutFileTranscriptResponse,
   StorageStartFileTranscriptResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getDeleteFileTranscriptResponseMock = (overrideResponse: Partial< StorageDeleteFileTranscriptResponse > = {}): StorageDeleteFileTranscriptResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), ...overrideResponse})

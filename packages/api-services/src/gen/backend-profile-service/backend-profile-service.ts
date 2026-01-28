@@ -4,239 +4,118 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  DeleteBackendProfileParams,
+  ReadBackendProfileParams,
+  SearchBackendProfileParams,
+  StorageBackendProfile,
+  StorageBackendProfileServicePatchBackendProfileBody,
+  StorageBackendProfileServiceUpdateBackendProfileBody,
+  StorageCreateBackendProfileRequest,
+  StorageListBackendProfile
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getBackendProfileService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of BackendProfile
  */
-export const SearchBackendProfileQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchBackendProfileResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchBackendProfile = <TData = AxiosResponse<StorageListBackendProfile>>(
+    params?: SearchBackendProfileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/backend_profiles`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create BackendProfile
  */
-export const CreateBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional()
-})
-
-export const CreateBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
+    storageCreateBackendProfileRequest: StorageCreateBackendProfileRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/storage/backend_profiles`,
+      storageCreateBackendProfileRequest,options
+    );
+  }
 /**
  * @summary Remove BackendProfile
  */
-export const DeleteBackendProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteBackendProfileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const DeleteBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
+    id: string,
+    params?: DeleteBackendProfileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/storage/backend_profiles/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary BackendProfile item
  */
-export const ReadBackendProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadBackendProfileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
-
-export const ReadBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
+    id: string,
+    params?: ReadBackendProfileParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/storage/backend_profiles/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Patch BackendProfile
  */
-export const PatchBackendProfileParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional()
-})
-
-export const PatchBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const patchBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
+    id: string,
+    storageBackendProfileServicePatchBackendProfileBody: StorageBackendProfileServicePatchBackendProfileBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/storage/backend_profiles/${id}`,
+      storageBackendProfileServicePatchBackendProfileBody,options
+    );
+  }
 /**
  * @summary Update BackendProfile
  */
-export const UpdateBackendProfileParams = zod.object({
-  "id": zod.string()
-})
+const updateBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
+    id: string,
+    storageBackendProfileServiceUpdateBackendProfileBody: StorageBackendProfileServiceUpdateBackendProfileBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/storage/backend_profiles/${id}`,
+      storageBackendProfileServiceUpdateBackendProfileBody,options
+    );
+  }
 
-export const UpdateBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional()
-})
+            // --- footer start
+            return {searchBackendProfile,createBackendProfile,deleteBackendProfile,readBackendProfile,patchBackendProfile,updateBackendProfile}};
+export type SearchBackendProfileResult = AxiosResponse<StorageListBackendProfile>
+export type CreateBackendProfileResult = AxiosResponse<StorageBackendProfile>
+export type DeleteBackendProfileResult = AxiosResponse<StorageBackendProfile>
+export type ReadBackendProfileResult = AxiosResponse<StorageBackendProfile>
+export type PatchBackendProfileResult = AxiosResponse<StorageBackendProfile>
+export type UpdateBackendProfileResult = AxiosResponse<StorageBackendProfile>
 
-export const UpdateBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

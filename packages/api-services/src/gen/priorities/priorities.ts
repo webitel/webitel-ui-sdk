@@ -4,193 +4,126 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreatePriorityParams,
+  ListPrioritiesParams,
+  LocatePriorityParams,
+  UpdatePriority2Params,
+  UpdatePriorityParams,
+  WebitelCasesInputPriority,
+  WebitelCasesInputPriorityBody,
+  WebitelCasesLocatePriorityResponse,
+  WebitelCasesPriority,
+  WebitelCasesPriorityList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getPriorities
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of priorities or search priorities
  */
-export const ListPrioritiesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names'),
-  "notInSla": zod.string().optional().describe('Filter priorities that are not in filtered SLA'),
-  "inSlaCond": zod.string().optional().describe('Filter priorities that are in filtered SlaCondition and not in current SLA')
-})
-
-export const ListPrioritiesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listPriorities = <TData = AxiosResponse<WebitelCasesPriorityList>>(
+    params?: ListPrioritiesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/priorities`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new priority
  */
-export const CreatePriorityQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const CreatePriorityBody = zod.object({
-  "color": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const CreatePriorityResponse = zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createPriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+    webitelCasesInputPriorityBody: WebitelCasesInputPriorityBody,
+    params?: CreatePriorityParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/priorities`,
+      webitelCasesInputPriorityBody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a priority
  */
-export const DeletePriorityParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeletePriorityResponse = zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deletePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/priorities/${id}`,options
+    );
+  }
 /**
  * @summary Locate a priority by ID
  */
-export const LocatePriorityParams = zod.object({
-  "id": zod.string().describe('ID of the priority to be located')
-})
-
-export const LocatePriorityQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const LocatePriorityResponse = zod.object({
-  "priority": zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+const locatePriority = <TData = AxiosResponse<WebitelCasesLocatePriorityResponse>>(
+    id: string,
+    params?: LocatePriorityParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/priorities/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing priority
  */
-export const UpdatePriority2Params = zod.object({
-  "id": zod.string()
-})
-
-export const UpdatePriority2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const UpdatePriority2Body = zod.object({
-  "color": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdatePriority2Response = zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const updatePriority2 = <TData = AxiosResponse<WebitelCasesPriority>>(
+    id: string,
+    webitelCasesInputPriority: WebitelCasesInputPriority,
+    params?: UpdatePriority2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/priorities/${id}`,
+      webitelCasesInputPriority,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing priority
  */
-export const UpdatePriorityParams = zod.object({
-  "id": zod.string()
-})
+const updatePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+    id: string,
+    webitelCasesInputPriority: WebitelCasesInputPriority,
+    params?: UpdatePriorityParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/priorities/${id}`,
+      webitelCasesInputPriority,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdatePriorityQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+            // --- footer start
+            return {listPriorities,createPriority,deletePriority,locatePriority,updatePriority2,updatePriority}};
+export type ListPrioritiesResult = AxiosResponse<WebitelCasesPriorityList>
+export type CreatePriorityResult = AxiosResponse<WebitelCasesPriority>
+export type DeletePriorityResult = AxiosResponse<WebitelCasesPriority>
+export type LocatePriorityResult = AxiosResponse<WebitelCasesLocatePriorityResponse>
+export type UpdatePriority2Result = AxiosResponse<WebitelCasesPriority>
+export type UpdatePriorityResult = AxiosResponse<WebitelCasesPriority>
 
-export const UpdatePriorityBody = zod.object({
-  "color": zod.string().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
-export const UpdatePriorityResponse = zod.object({
-  "color": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

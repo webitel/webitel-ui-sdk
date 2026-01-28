@@ -18,7 +18,7 @@ import type {
 
 import type {
   EngineSearchSchemaVersionResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchSchemaVersionResponseMock = (overrideResponse: Partial< EngineSearchSchemaVersionResponse > = {}): EngineSearchSchemaVersionResponse => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), note: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), schemaId: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), version: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})

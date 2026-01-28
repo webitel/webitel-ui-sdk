@@ -4,25 +4,43 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  KnowledgebaseCombinedList,
+  SpacesArticlesSearchParams
+} from '../webitelAPI.schemas';
 
 
-export const SpacesArticlesSearchQueryParams = zod.object({
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "q": zod.string().optional().describe('Search term: location name;\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "state": zod.boolean().optional().describe('Active Article only.'),
-  "tags": zod.array(zod.string()).optional().describe('Tags associated with the article.')
-})
 
-export const SpacesArticlesSearchResponse = zod.object({
-  "data": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-})
+            // --- header start
+            // 
 
+  export const 
+            // --- title start
+            getKnowledgebaseSearch
+            // --- title end
+           = () => {
+
+            // --- header end
+          const spacesArticlesSearch = <TData = AxiosResponse<KnowledgebaseCombinedList>>(
+    params?: SpacesArticlesSearchParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/spaces/search`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {spacesArticlesSearch}};
+export type SpacesArticlesSearchResult = AxiosResponse<KnowledgebaseCombinedList>
+
+            // --- footer end
+          

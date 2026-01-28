@@ -19,7 +19,7 @@ import type {
 import type {
   StorageBackendProfile,
   StorageListBackendProfile
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getSearchBackendProfileResponseMock = (overrideResponse: Partial< StorageListBackendProfile > = {}): StorageListBackendProfile => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), createdBy: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), dataCount: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dataSize: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), disabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), expireDays: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), maxSize: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), priority: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([{

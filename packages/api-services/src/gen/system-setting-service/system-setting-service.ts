@@ -4,105 +4,104 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreateSystemSettingRequest,
+  EngineListAvailableSystemSetting,
+  EngineListSystemSetting,
+  EngineSystemSetting,
+  EngineSystemSettingServicePatchSystemSettingBody,
+  EngineSystemSettingServiceUpdateSystemSettingBody,
+  SearchAvailableSystemSettingParams,
+  SearchSystemSettingParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchSystemSettingQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.array(zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password'])).optional().describe('Filter by setting names')
-})
 
-export const searchSystemSettingResponseItemsItemNameDefault = `empty_system_settings_name`;
+            // --- header start
+            // 
 
-export const SearchSystemSettingResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(searchSystemSettingResponseItemsItemNameDefault)
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getSystemSettingService
+            // --- title end
+           = () => {
 
-export const createSystemSettingBodyNameDefault = `empty_system_settings_name`;
+            // --- header end
+          const searchSystemSetting = <TData = AxiosResponse<EngineListSystemSetting>>(
+    params?: SearchSystemSettingParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/settings`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+    engineCreateSystemSettingRequest: EngineCreateSystemSettingRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/settings`,
+      engineCreateSystemSettingRequest,options
+    );
+  }
+const searchAvailableSystemSetting = <TData = AxiosResponse<EngineListAvailableSystemSetting>>(
+    params?: SearchAvailableSystemSettingParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/settings/available`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/settings/${id}`,options
+    );
+  }
+const readSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/settings/${id}`,options
+    );
+  }
+const patchSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+    id: number,
+    engineSystemSettingServicePatchSystemSettingBody: EngineSystemSettingServicePatchSystemSettingBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/settings/${id}`,
+      engineSystemSettingServicePatchSystemSettingBody,options
+    );
+  }
+const updateSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+    id: number,
+    engineSystemSettingServiceUpdateSystemSettingBody: EngineSystemSettingServiceUpdateSystemSettingBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/settings/${id}`,
+      engineSystemSettingServiceUpdateSystemSettingBody,options
+    );
+  }
 
-export const CreateSystemSettingBody = zod.object({
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(createSystemSettingBodyNameDefault)
-})
+            // --- footer start
+            return {searchSystemSetting,createSystemSetting,searchAvailableSystemSetting,deleteSystemSetting,readSystemSetting,patchSystemSetting,updateSystemSetting}};
+export type SearchSystemSettingResult = AxiosResponse<EngineListSystemSetting>
+export type CreateSystemSettingResult = AxiosResponse<EngineSystemSetting>
+export type SearchAvailableSystemSettingResult = AxiosResponse<EngineListAvailableSystemSetting>
+export type DeleteSystemSettingResult = AxiosResponse<EngineSystemSetting>
+export type ReadSystemSettingResult = AxiosResponse<EngineSystemSetting>
+export type PatchSystemSettingResult = AxiosResponse<EngineSystemSetting>
+export type UpdateSystemSettingResult = AxiosResponse<EngineSystemSetting>
 
-export const createSystemSettingResponseNameDefault = `empty_system_settings_name`;
-
-export const CreateSystemSettingResponse = zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(createSystemSettingResponseNameDefault)
-})
-
-export const SearchAvailableSystemSettingQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const SearchAvailableSystemSettingResponse = zod.object({
-  "items": zod.array(zod.object({
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const DeleteSystemSettingParams = zod.object({
-  "id": zod.number()
-})
-
-export const deleteSystemSettingResponseNameDefault = `empty_system_settings_name`;
-
-export const DeleteSystemSettingResponse = zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(deleteSystemSettingResponseNameDefault)
-})
-
-export const ReadSystemSettingParams = zod.object({
-  "id": zod.number()
-})
-
-export const readSystemSettingResponseNameDefault = `empty_system_settings_name`;
-
-export const ReadSystemSettingResponse = zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(readSystemSettingResponseNameDefault)
-})
-
-export const PatchSystemSettingParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchSystemSettingBody = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const patchSystemSettingResponseNameDefault = `empty_system_settings_name`;
-
-export const PatchSystemSettingResponse = zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(patchSystemSettingResponseNameDefault)
-})
-
-export const UpdateSystemSettingParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateSystemSettingBody = zod.object({
-
-})
-
-export const updateSystemSettingResponseNameDefault = `empty_system_settings_name`;
-
-export const UpdateSystemSettingResponse = zod.object({
-  "id": zod.number().optional(),
-  "name": zod.enum(['empty_system_settings_name', 'enable_omnichannel', 'member_chunk_size', 'amd_cancel_not_human', 'scheme_version_limit', 'enable_2fa', 'export_settings', 'search_number_length', 'chat_ai_connection', 'password_reg_exp', 'password_validation_text', 'autolink_call_to_contact', 'period_to_playback_records', 'is_fulltext_search_enabled', 'wbt_hide_contact', 'show_full_contact', 'call_end_sound_notification', 'call_end_push_notification', 'chat_end_sound_notification', 'chat_end_push_notification', 'task_end_sound_notification', 'task_end_push_notification', 'push_notification_timeout', 'labels_to_limit_contacts', 'autolink_mail_to_contact', 'new_message_sound_notification', 'new_chat_sound_notification', 'screenshot_interval', 'password_expiry_days', 'password_min_length', 'password_categories', 'password_contains_login', 'password_warning_days', 'default_password']).default(updateSystemSettingResponseNameDefault)
-})
-
+            // --- footer end
+          

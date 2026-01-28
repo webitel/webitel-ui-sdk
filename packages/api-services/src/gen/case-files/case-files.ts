@@ -4,64 +4,60 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ListFilesParams,
+  WebitelCasesCaseFileList,
+  WebitelCasesFile
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getCaseFiles
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of files associated with a case
  */
-export const ListFilesParams = zod.object({
-  "case_etag": zod.string().describe('ID of the case to fetch files for (required).')
-})
-
-export const ListFilesQueryParams = zod.object({
-  "page": zod.number().optional().describe('The page number to retrieve.'),
-  "size": zod.number().optional().describe('Number of items per page.'),
-  "q": zod.string().optional().describe('Search term.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to include in the response.'),
-  "ids": zod.array(zod.string()).optional().describe('Array of requested id.'),
-  "sort": zod.string().optional().describe('Sorting')
-})
-
-export const ListFilesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('Creation timestamp in Unix milliseconds.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional().describe('Storage file ID.'),
-  "mime": zod.string().optional().describe('MIME type of the file.'),
-  "name": zod.string().optional().describe('File name.'),
-  "size": zod.string().optional().describe('File size in bytes.'),
-  "source": zod.string().optional(),
-  "url": zod.string().optional()
-}).describe('Metadata for a file associated with a case.')).optional().describe('List of case files.'),
-  "next": zod.boolean().optional().describe('Indicator if there is a next page.'),
-  "page": zod.string().optional().describe('Current page number.')
-}).describe('Contains a list of case files with pagination.')
-
+const listFiles = <TData = AxiosResponse<WebitelCasesCaseFileList>>(
+    caseEtag: string,
+    params?: ListFilesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/${caseEtag}/files`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete a file
  */
-export const DeleteFileParams = zod.object({
-  "case_etag": zod.string(),
-  "id": zod.string().describe('The unique ID of the file to delete.')
-})
+const deleteFile = <TData = AxiosResponse<WebitelCasesFile>>(
+    caseEtag: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/${caseEtag}/files/${id}`,options
+    );
+  }
 
-export const DeleteFileResponse = zod.object({
-  "createdAt": zod.string().optional().describe('Creation timestamp in Unix milliseconds.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "type": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional().describe('Storage file ID.'),
-  "mime": zod.string().optional().describe('MIME type of the file.'),
-  "name": zod.string().optional().describe('File name.'),
-  "size": zod.string().optional().describe('File size in bytes.'),
-  "source": zod.string().optional(),
-  "url": zod.string().optional()
-}).describe('Metadata for a file associated with a case.')
+            // --- footer start
+            return {listFiles,deleteFile}};
+export type ListFilesResult = AxiosResponse<WebitelCasesCaseFileList>
+export type DeleteFileResult = AxiosResponse<WebitelCasesFile>
 
+            // --- footer end
+          

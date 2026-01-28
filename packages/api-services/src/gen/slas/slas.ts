@@ -4,254 +4,126 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateSLAParams,
+  ListSLAsParams,
+  LocateSLAParams,
+  UpdateSLA2Params,
+  UpdateSLAParams,
+  WebitelCasesInputSLA,
+  WebitelCasesInputSLABody,
+  WebitelCasesLocateSLAResponse,
+  WebitelCasesSLA,
+  WebitelCasesSLAList
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getSlas
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Retrieve a list of SLAs or search SLA conditions
  */
-export const ListSLAsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names')
-})
-
-export const ListSLAsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+const listSLAs = <TData = AxiosResponse<WebitelCasesSLAList>>(
+    params?: ListSLAsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/slas`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create a new SLA
  */
-export const CreateSLAQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const CreateSLABody = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
-export const CreateSLAResponse = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
+const createSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
+    webitelCasesInputSLABody: WebitelCasesInputSLABody,
+    params?: CreateSLAParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/cases/slas`,
+      webitelCasesInputSLABody,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Delete an SLA
  */
-export const DeleteSLAParams = zod.object({
-  "id": zod.string()
-})
-
-export const DeleteSLAResponse = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
+const deleteSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/cases/slas/${id}`,options
+    );
+  }
 /**
  * @summary Locate an SLA by ID
  */
-export const LocateSLAParams = zod.object({
-  "id": zod.string()
-})
-
-export const LocateSLAQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const LocateSLAResponse = zod.object({
-  "sla": zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-}).optional()
-})
-
+const locateSLA = <TData = AxiosResponse<WebitelCasesLocateSLAResponse>>(
+    id: string,
+    params?: LocateSLAParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/cases/slas/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing SLA
  */
-export const UpdateSLA2Params = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateSLA2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
-
-export const UpdateSLA2Body = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
-export const UpdateSLA2Response = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
+const updateSLA2 = <TData = AxiosResponse<WebitelCasesSLA>>(
+    id: string,
+    webitelCasesInputSLA: WebitelCasesInputSLA,
+    params?: UpdateSLA2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/cases/slas/${id}`,
+      webitelCasesInputSLA,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Update an existing SLA
  */
-export const UpdateSLAParams = zod.object({
-  "id": zod.string()
-})
+const updateSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
+    id: string,
+    webitelCasesInputSLA: WebitelCasesInputSLA,
+    params?: UpdateSLAParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/cases/slas/${id}`,
+      webitelCasesInputSLA,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateSLAQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+            // --- footer start
+            return {listSLAs,createSLA,deleteSLA,locateSLA,updateSLA2,updateSLA}};
+export type ListSLAsResult = AxiosResponse<WebitelCasesSLAList>
+export type CreateSLAResult = AxiosResponse<WebitelCasesSLA>
+export type DeleteSLAResult = AxiosResponse<WebitelCasesSLA>
+export type LocateSLAResult = AxiosResponse<WebitelCasesLocateSLAResponse>
+export type UpdateSLA2Result = AxiosResponse<WebitelCasesSLA>
+export type UpdateSLAResult = AxiosResponse<WebitelCasesSLA>
 
-export const UpdateSLABody = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
-export const UpdateSLAResponse = zod.object({
-  "calendar": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "validFrom": zod.string().optional(),
-  "validTo": zod.string().optional()
-})
-
+            // --- footer end
+          

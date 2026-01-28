@@ -4,185 +4,112 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ContactsInputLabel,
+  ContactsLabelList,
+  ContactsLabelTags,
+  DeleteLabelsParams,
+  GetLabelsParams,
+  ListLabelsParams,
+  MergeLabelsParams,
+  ResetLabelsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getLabels
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Search for Contacts engaged Label(s).
  */
-export const GetLabelsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = ((page-1)*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size+1)'),
-  "q": zod.string().optional().describe('Search term: label.\n`?` - matches any one character\n`*` - matches 0 or more characters')
-})
-
-export const GetLabelsResponse = zod.object({
-  "labels": zod.array(zod.object({
-  "label": zod.string().optional().describe('Label tag.\n\nCount of sources.\nint32 count = 2;\n Sources of Contacts assigned.\nrepeated string sources = 3;')
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result.'),
-  "sources": zod.array(zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')).optional()
-}).describe('LabelTags dataset list of label\'s info.')
-
+const getLabels = <TData = AxiosResponse<ContactsLabelTags>>(
+    params?: GetLabelsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/labels`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Remove Contact Labels associations.
  */
-export const DeleteLabelsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const deleteLabelsQueryEtagItemRegExp = new RegExp('^(\\w+)(,\\w+)*$');
-
-
-export const DeleteLabelsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "etag": zod.array(zod.string().regex(deleteLabelsQueryEtagItemRegExp)).describe('Set of unique label(s).etag identifiers.')
-})
-
-export const DeleteLabelsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "label": zod.string().optional().describe('REQUIRED. Tag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')).optional().describe('Label(s) dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result.')
-}).describe('LabelList dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
-
+const deleteLabels = <TData = AxiosResponse<ContactsLabelList>>(
+    contactId: string,
+    params: DeleteLabelsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/contacts/${contactId}/labels`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Locate the Contact's associated Label(s).
  */
-export const ListLabelsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const ListLabelsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = ((page-1)*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size+1)'),
-  "q": zod.string().optional().describe('Search term: label tag.\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.'),
-  "id": zod.array(zod.string()).optional().describe('Record(s) with unique ID or ETag.')
-})
-
-export const ListLabelsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "label": zod.string().optional().describe('REQUIRED. Tag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')).optional().describe('Label(s) dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result.')
-}).describe('LabelList dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
-
+const listLabels = <TData = AxiosResponse<ContactsLabelList>>(
+    contactId: string,
+    params?: ListLabelsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/contacts/${contactId}/labels`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Associate NEW Labels to the Contact.
  */
-export const MergeLabelsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
-
-export const MergeLabelsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
-
-export const MergeLabelsBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "label": zod.string().optional().describe('REQUIRED. Hashtag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')
-export const MergeLabelsBody = zod.array(MergeLabelsBodyItem)
-
-export const MergeLabelsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "label": zod.string().optional().describe('REQUIRED. Tag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')).optional().describe('Label(s) dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result.')
-}).describe('LabelList dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
-
+const mergeLabels = <TData = AxiosResponse<ContactsLabelList>>(
+    contactId: string,
+    contactsInputLabel: ContactsInputLabel[],
+    params?: MergeLabelsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/contacts/${contactId}/labels`,
+      contactsInputLabel,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Reset Labels to fit the specified final set.
  */
-export const ResetLabelsParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
+const resetLabels = <TData = AxiosResponse<ContactsLabelList>>(
+    contactId: string,
+    contactsInputLabel: ContactsInputLabel[],
+    params?: ResetLabelsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/contacts/${contactId}/labels`,
+      contactsInputLabel,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ResetLabelsQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
+            // --- footer start
+            return {getLabels,deleteLabels,listLabels,mergeLabels,resetLabels}};
+export type GetLabelsResult = AxiosResponse<ContactsLabelTags>
+export type DeleteLabelsResult = AxiosResponse<ContactsLabelList>
+export type ListLabelsResult = AxiosResponse<ContactsLabelList>
+export type MergeLabelsResult = AxiosResponse<ContactsLabelList>
+export type ResetLabelsResult = AxiosResponse<ContactsLabelList>
 
-export const ResetLabelsBodyItem = zod.object({
-  "etag": zod.string().optional().describe('Unique ID of the latest version of an existing resorce.'),
-  "label": zod.string().optional().describe('REQUIRED. Hashtag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')
-export const ResetLabelsBody = zod.array(ResetLabelsBodyItem)
-
-export const ResetLabelsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "label": zod.string().optional().describe('REQUIRED. Tag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s associated Tag.\nOutput purpose only.')).optional().describe('Label(s) dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result.')
-}).describe('LabelList dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
-
+            // --- footer end
+          

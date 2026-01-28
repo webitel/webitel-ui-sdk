@@ -4,134 +4,75 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiLoginResponse,
+  ApiUserinfo,
+  SignupParams,
+  UserInfo2Params,
+  UserInfoParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getAuth
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary Signup new domain with superior access token
  */
-export const SignupQueryParams = zod.object({
-  "domain": zod.string().optional().describe('domain name'),
-  "username": zod.string().optional().describe('username'),
-  "password": zod.string().optional().describe('user password'),
-  "scope": zod.array(zod.string()).optional().describe('scope request control'),
-  "certificate": zod.string().optional().describe('license/certificate'),
-  "mobile": zod.boolean().optional().describe('OPTIONAL. Mobile device /login request ?')
-})
-
-export const SignupResponse = zod.object({
-  "authorization": zod.object({
-  "accessToken": zod.string().optional().describe('REQUIRED. The access token issued by the authorization server.'),
-  "expiresIn": zod.number().optional().describe('RECOMMENDED. The lifetime in seconds of the access token.'),
-  "refreshToken": zod.string().optional().describe('OPTIONAL. The refresh token, which can be used to obtain\nnew access tokens using the same authorization grant.'),
-  "state": zod.string().optional().describe('OPTIONAL, if identical to the scope requested by the client;\notherwise, REQUIRED. The scope of the access token.\nrepeated string scope = 5 [ json_name = \"scope\" ];\nREQUIRED if the \"state\" parameter was present in the client\nauthorization request. The exact value received from the client.'),
-  "tokenType": zod.string().optional().describe('REQUIRED. The type of the token issued. Value is case insensitive.')
-}).optional(),
-  "warnings": zod.array(zod.object({
-  "detail": zod.string().optional(),
-  "id": zod.string().optional(),
-  "warningData": zod.object({
-  "passwordExpiry": zod.object({
-  "daysRemaining": zod.string().optional(),
-  "expiresAt": zod.string().optional()
-}).optional()
-}).optional()
-})).optional()
-})
-
+const signup = <TData = AxiosResponse<ApiLoginResponse>>(
+    params?: SignupParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/signup`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
  */
-export const UserInfo2QueryParams = zod.object({
-  "accessToken": zod.string().optional().describe('string id_token = 2;')
-})
-
-export const UserInfo2Response = zod.object({
-  "dc": zod.string().optional(),
-  "domain": zod.string().optional(),
-  "expiresAt": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "preferredUsername": zod.string().optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "scope": zod.array(zod.object({
-  "abac": zod.boolean().optional().describe('[A]ttribute-[b]ased;  not implemented; next releases ...'),
-  "access": zod.string().optional().describe('flags: [ CREATE | SELECT | UPDATE | DELETE ]'),
-  "class": zod.string().optional(),
-  "id": zod.string().optional().describe('class: object id'),
-  "name": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "userId": zod.string().optional(),
-  "username": zod.string().optional()
-})
-
+const userInfo2 = <TData = AxiosResponse<ApiUserinfo>>(
+    params?: UserInfo2Params, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/userinfo`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
  */
-export const UserInfoQueryParams = zod.object({
-  "accessToken": zod.string().optional().describe('string id_token = 2;')
-})
+const userInfo = <TData = AxiosResponse<ApiUserinfo>>(
+    params?: UserInfoParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/userinfo`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UserInfoResponse = zod.object({
-  "dc": zod.string().optional(),
-  "domain": zod.string().optional(),
-  "expiresAt": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "license": zod.array(zod.object({
-  "expiresAt": zod.string().optional(),
-  "id": zod.string().optional(),
-  "issuedAt": zod.string().optional(),
-  "prod": zod.string().optional(),
-  "scope": zod.array(zod.string()).optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "name": zod.string().optional(),
-  "permissions": zod.array(zod.object({
-  "id": zod.string().optional().describe('[required] e.g.: \'read\', \'playback_record_file\', ...'),
-  "name": zod.string().optional(),
-  "usage": zod.string().optional()
-})).optional(),
-  "preferredUsername": zod.string().optional(),
-  "roles": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "scope": zod.array(zod.object({
-  "abac": zod.boolean().optional().describe('[A]ttribute-[b]ased;  not implemented; next releases ...'),
-  "access": zod.string().optional().describe('flags: [ CREATE | SELECT | UPDATE | DELETE ]'),
-  "class": zod.string().optional(),
-  "id": zod.string().optional().describe('class: object id'),
-  "name": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "userId": zod.string().optional(),
-  "username": zod.string().optional()
-})
+            // --- footer start
+            return {signup,userInfo2,userInfo}};
+export type SignupResult = AxiosResponse<ApiLoginResponse>
+export type UserInfo2Result = AxiosResponse<ApiUserinfo>
+export type UserInfoResult = AxiosResponse<ApiUserinfo>
 
+            // --- footer end
+          

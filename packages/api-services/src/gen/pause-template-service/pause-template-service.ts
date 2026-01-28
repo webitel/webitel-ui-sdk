@@ -4,194 +4,91 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  PauseTemplateServiceReadPauseTemplateParams,
+  PauseTemplateServiceSearchPauseTemplateParams,
+  PauseTemplateServiceUpdatePauseTemplateBody,
+  WfmCreatePauseTemplateRequest,
+  WfmCreatePauseTemplateResponse,
+  WfmDeletePauseTemplateResponse,
+  WfmReadPauseTemplateResponse,
+  WfmSearchPauseTemplateResponse,
+  WfmUpdatePauseTemplateResponse
+} from '../webitelAPI.schemas';
 
 
-export const PauseTemplateServiceSearchPauseTemplateQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const PauseTemplateServiceSearchPauseTemplateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const PauseTemplateServiceCreatePauseTemplateBody = zod.object({
-  "item": zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getPauseTemplateService
+            // --- title end
+           = () => {
 
-export const PauseTemplateServiceCreatePauseTemplateResponse = zod.object({
-  "item": zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const PauseTemplateServiceDeletePauseTemplateParams = zod.object({
-  "id": zod.string()
-})
-
-export const PauseTemplateServiceDeletePauseTemplateResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const PauseTemplateServiceReadPauseTemplateParams = zod.object({
-  "id": zod.string()
-})
-
-export const PauseTemplateServiceReadPauseTemplateQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const PauseTemplateServiceReadPauseTemplateResponse = zod.object({
-  "item": zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- header end
+          const pauseTemplateServiceSearchPauseTemplate = <TData = AxiosResponse<WfmSearchPauseTemplateResponse>>(
+    params?: PauseTemplateServiceSearchPauseTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/pause_templates`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const pauseTemplateServiceCreatePauseTemplate = <TData = AxiosResponse<WfmCreatePauseTemplateResponse>>(
+    wfmCreatePauseTemplateRequest: WfmCreatePauseTemplateRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/pause_templates`,
+      wfmCreatePauseTemplateRequest,options
+    );
+  }
+const pauseTemplateServiceDeletePauseTemplate = <TData = AxiosResponse<WfmDeletePauseTemplateResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/pause_templates/${id}`,options
+    );
+  }
+const pauseTemplateServiceReadPauseTemplate = <TData = AxiosResponse<WfmReadPauseTemplateResponse>>(
+    id: string,
+    params?: PauseTemplateServiceReadPauseTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/pause_templates/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary UpdatePauseTemplateCauseBulk updates a pause template with a list of causes.
 Update existing cause, create that not exists in database and delete that not exists in the list.
  */
-export const PauseTemplateServiceUpdatePauseTemplateParams = zod.object({
-  "item.id": zod.string()
-})
+const pauseTemplateServiceUpdatePauseTemplate = <TData = AxiosResponse<WfmUpdatePauseTemplateResponse>>(
+    pauseTemplateServiceUpdatePauseTemplateBody: PauseTemplateServiceUpdatePauseTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/lookups/pause_templates/item.id}`,
+      pauseTemplateServiceUpdatePauseTemplateBody,options
+    );
+  }
 
-export const PauseTemplateServiceUpdatePauseTemplateBody = zod.object({
-  "item": zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- footer start
+            return {pauseTemplateServiceSearchPauseTemplate,pauseTemplateServiceCreatePauseTemplate,pauseTemplateServiceDeletePauseTemplate,pauseTemplateServiceReadPauseTemplate,pauseTemplateServiceUpdatePauseTemplate}};
+export type PauseTemplateServiceSearchPauseTemplateResult = AxiosResponse<WfmSearchPauseTemplateResponse>
+export type PauseTemplateServiceCreatePauseTemplateResult = AxiosResponse<WfmCreatePauseTemplateResponse>
+export type PauseTemplateServiceDeletePauseTemplateResult = AxiosResponse<WfmDeletePauseTemplateResponse>
+export type PauseTemplateServiceReadPauseTemplateResult = AxiosResponse<WfmReadPauseTemplateResponse>
+export type PauseTemplateServiceUpdatePauseTemplateResult = AxiosResponse<WfmUpdatePauseTemplateResponse>
 
-export const PauseTemplateServiceUpdatePauseTemplateResponse = zod.object({
-  "item": zod.object({
-  "causes": zod.array(zod.object({
-  "cause": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "duration": zod.string().optional()
-})).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- footer end
+          

@@ -4,364 +4,106 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
 
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
-export const DeleteOAuthServiceBody = zod.object({
-  "id": zod.array(zod.string()).optional(),
-  "permanent": zod.boolean().optional()
-})
-
-export const DeleteOAuthServiceResponse = zod.object({
-
-})
-
-export const SearchOAuthServiceQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "id": zod.array(zod.string()).optional().describe('----- Search Basic Filters ---------------------------\n\nselection: by unique identifier'),
-  "q": zod.string().optional().describe('term-of-search: lookup[name]'),
-  "name": zod.string().optional().describe('case-ignore substring match: ILIKE \'*\' - any; \'?\' - one'),
-  "access": zod.string().optional().describe('[M]andatory[A]ccess[C]ontrol: with access mode (action) granted!'),
-  "enabled": zod.boolean().optional().describe('----- OAuthService-Specific Filters ----------------')
-})
-
-export const SearchOAuthServiceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
-export const CreateOAuthServiceBody = zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})
-
-export const CreateOAuthServiceResponse = zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})
-
-export const UpdateOAuthService2Params = zod.object({
-  "changes.id": zod.string()
-})
-
-export const UpdateOAuthService2Body = zod.object({
-  "changes": zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-}).optional().describe('Configuration changes.'),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateOAuthService2Response = zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})
-
-export const UpdateOAuthServiceParams = zod.object({
-  "changes.id": zod.string()
-})
-
-export const UpdateOAuthServiceBody = zod.object({
-  "changes": zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-}).optional().describe('Configuration changes.'),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateOAuthServiceResponse = zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})
+import type {
+  ApiDeleteOAuthServiceRequest,
+  ApiDeleteOAuthServiceResponse,
+  ApiOAuthService,
+  ApiSearchOAuthServiceResponse,
+  LocateOAuthServiceParams,
+  OAuth2FederationDeleteOAuthServiceBody,
+  OAuth2FederationUpdateOAuthServiceBody,
+  SearchOAuthServiceParams
+} from '../webitelAPI.schemas';
 
 
 
+            // --- header start
+            // 
 
-export const DeleteOAuthService2Params = zod.object({
-  "id": zod.array(zod.string()).min(1)
-})
+  export const 
+            // --- title start
+            getOauth2Federation
+            // --- title end
+           = () => {
 
-export const DeleteOAuthService2Body = zod.object({
-  "permanent": zod.boolean().optional()
-})
+            // --- header end
+          const deleteOAuthService = <TData = AxiosResponse<ApiDeleteOAuthServiceResponse>>(
+    apiDeleteOAuthServiceRequest: ApiDeleteOAuthServiceRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/oauth/apps`,{data:
+      apiDeleteOAuthServiceRequest, ...options}
+    );
+  }
+const searchOAuthService = <TData = AxiosResponse<ApiSearchOAuthServiceResponse>>(
+    params?: SearchOAuthServiceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/oauth/apps`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
+    apiOAuthService: ApiOAuthService, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/oauth/apps`,
+      apiOAuthService,options
+    );
+  }
+const updateOAuthService2 = <TData = AxiosResponse<ApiOAuthService>>(
+    oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/oauth/apps/changes.id}`,
+      oAuth2FederationUpdateOAuthServiceBody,options
+    );
+  }
+const updateOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
+    oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/oauth/apps/changes.id}`,
+      oAuth2FederationUpdateOAuthServiceBody,options
+    );
+  }
+const deleteOAuthService2 = <TData = AxiosResponse<ApiDeleteOAuthServiceResponse>>(
+    id: string[],
+    oAuth2FederationDeleteOAuthServiceBody: OAuth2FederationDeleteOAuthServiceBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/oauth/apps/${id}`,{data:
+      oAuth2FederationDeleteOAuthServiceBody, ...options}
+    );
+  }
+const locateOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
+    id: string[],
+    params?: LocateOAuthServiceParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/oauth/apps/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const DeleteOAuthService2Response = zod.object({
+            // --- footer start
+            return {deleteOAuthService,searchOAuthService,createOAuthService,updateOAuthService2,updateOAuthService,deleteOAuthService2,locateOAuthService}};
+export type DeleteOAuthServiceResult = AxiosResponse<ApiDeleteOAuthServiceResponse>
+export type SearchOAuthServiceResult = AxiosResponse<ApiSearchOAuthServiceResponse>
+export type CreateOAuthServiceResult = AxiosResponse<ApiOAuthService>
+export type UpdateOAuthService2Result = AxiosResponse<ApiOAuthService>
+export type UpdateOAuthServiceResult = AxiosResponse<ApiOAuthService>
+export type DeleteOAuthService2Result = AxiosResponse<ApiDeleteOAuthServiceResponse>
+export type LocateOAuthServiceResult = AxiosResponse<ApiOAuthService>
 
-})
-
-
-
-
-export const LocateOAuthServiceParams = zod.object({
-  "id": zod.array(zod.string()).min(1).describe('----- Search Basic Filters ---------------------------\n\nselection: by unique identifier')
-})
-
-export const LocateOAuthServiceQueryParams = zod.object({
-  "page": zod.number().optional().describe('----- Select Options -------------------------\n\ndefault: 1'),
-  "size": zod.number().optional().describe('default: 16'),
-  "fields": zod.array(zod.string()).optional().describe('attributes list'),
-  "sort": zod.array(zod.string()).optional().describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
-  "q": zod.string().optional().describe('term-of-search: lookup[name]'),
-  "name": zod.string().optional().describe('case-ignore substring match: ILIKE \'*\' - any; \'?\' - one'),
-  "access": zod.string().optional().describe('[M]andatory[A]ccess[C]ontrol: with access mode (action) granted!'),
-  "enabled": zod.boolean().optional().describe('----- OAuthService-Specific Filters ----------------')
-})
-
-export const LocateOAuthServiceResponse = zod.object({
-  "authUrl": zod.string().optional(),
-  "claims": zod.array(zod.object({
-  "type": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional().describe('google.protobuf.Struct claims = 7;'),
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "discoveryUrl": zod.string().optional(),
-  "domain": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "logo": zod.string().optional(),
-  "metadata": zod.object({
-
-}).optional(),
-  "name": zod.string().optional(),
-  "scopes": zod.array(zod.string()).optional(),
-  "tokenUrl": zod.string().optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "userinfoUrl": zod.string().optional()
-})
-
+            // --- footer end
+          

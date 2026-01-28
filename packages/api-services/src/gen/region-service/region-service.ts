@@ -4,125 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreateRegionRequest,
+  EngineListRegion,
+  EngineRegion,
+  EngineRegionServicePatchRegionBody,
+  EngineRegionServiceUpdateRegionBody,
+  SearchRegionParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchRegionQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "description": zod.string().optional(),
-  "timezoneId": zod.array(zod.number()).optional()
-})
 
-export const SearchRegionResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreateRegionBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getRegionService
+            // --- title end
+           = () => {
 
-export const CreateRegionResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- header end
+          const searchRegion = <TData = AxiosResponse<EngineListRegion>>(
+    params?: SearchRegionParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/regions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createRegion = <TData = AxiosResponse<EngineRegion>>(
+    engineCreateRegionRequest: EngineCreateRegionRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/regions`,
+      engineCreateRegionRequest,options
+    );
+  }
+const deleteRegion = <TData = AxiosResponse<EngineRegion>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/regions/${id}`,options
+    );
+  }
+const readRegion = <TData = AxiosResponse<EngineRegion>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/regions/${id}`,options
+    );
+  }
+const patchRegion = <TData = AxiosResponse<EngineRegion>>(
+    id: string,
+    engineRegionServicePatchRegionBody: EngineRegionServicePatchRegionBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/regions/${id}`,
+      engineRegionServicePatchRegionBody,options
+    );
+  }
+const updateRegion = <TData = AxiosResponse<EngineRegion>>(
+    id: string,
+    engineRegionServiceUpdateRegionBody: EngineRegionServiceUpdateRegionBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/regions/${id}`,
+      engineRegionServiceUpdateRegionBody,options
+    );
+  }
 
-export const DeleteRegionParams = zod.object({
-  "id": zod.string()
-})
+            // --- footer start
+            return {searchRegion,createRegion,deleteRegion,readRegion,patchRegion,updateRegion}};
+export type SearchRegionResult = AxiosResponse<EngineListRegion>
+export type CreateRegionResult = AxiosResponse<EngineRegion>
+export type DeleteRegionResult = AxiosResponse<EngineRegion>
+export type ReadRegionResult = AxiosResponse<EngineRegion>
+export type PatchRegionResult = AxiosResponse<EngineRegion>
+export type UpdateRegionResult = AxiosResponse<EngineRegion>
 
-export const DeleteRegionResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadRegionParams = zod.object({
-  "id": zod.string()
-})
-
-export const ReadRegionResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchRegionParams = zod.object({
-  "id": zod.string()
-})
-
-export const PatchRegionBody = zod.object({
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchRegionResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateRegionParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateRegionBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateRegionResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "timezone": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

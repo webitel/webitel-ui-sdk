@@ -4,92 +4,65 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
 
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
 
-export const DefaultDeviceConfigParams = zod.object({
-  "type": zod.string()
-})
-
-export const DefaultDeviceConfigResponse = zod.object({
-  "sip": zod.object({
-  "auth": zod.string().optional(),
-  "domain": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "password": zod.string().optional(),
-  "proxy": zod.string().optional()
-}).optional(),
-  "webrtc": zod.object({
-  "authorizationUser": zod.string().optional(),
-  "displayName": zod.string().optional(),
-  "extension": zod.string().optional(),
-  "ha1": zod.string().optional(),
-  "realm": zod.string().optional(),
-  "server": zod.string().optional(),
-  "uri": zod.string().optional()
-}).optional()
-})
-
-export const ActivityWorkspaceWidgetQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const ActivityWorkspaceWidgetResponse = zod.object({
-  "available": zod.number().optional(),
-  "avgHoldSec": zod.number().optional(),
-  "avgTalkSec": zod.number().optional(),
-  "callAbandoned": zod.number().optional(),
-  "callDialerQueue": zod.number().optional(),
-  "callHandled": zod.number().optional(),
-  "callInbound": zod.number().optional(),
-  "callInboundQueue": zod.number().optional(),
-  "callManual": zod.number().optional(),
-  "callMissed": zod.number().optional(),
-  "callQueueMissed": zod.number().optional(),
-  "chatAccepts": zod.number().optional(),
-  "chatAht": zod.number().optional(),
-  "occupancy": zod.number().optional(),
-  "online": zod.number().optional(),
-  "processing": zod.number().optional(),
-  "queueTalkSec": zod.number().optional(),
-  "scoreCount": zod.string().optional(),
-  "scoreOptionalAvg": zod.number().optional(),
-  "scoreOptionalSum": zod.number().optional(),
-  "scoreRequiredAvg": zod.number().optional(),
-  "scoreRequiredSum": zod.number().optional(),
-  "sumTalkSec": zod.string().optional(),
-  "taskAccepts": zod.number().optional(),
-  "utilization": zod.number().optional(),
-  "voiceMail": zod.number().optional()
-})
+import type {
+  ActivityWorkspaceWidgetParams,
+  EngineActivityWorkspaceWidgetResponse,
+  EngineDefaultDeviceConfigResponse,
+  EngineListOpenedWebSocket,
+  OpenedWebSocketsParams
+} from '../webitelAPI.schemas';
 
 
 
+            // --- header start
+            // 
 
-export const OpenedWebSocketsParams = zod.object({
-  "user_id": zod.array(zod.string()).min(1)
-})
+  export const 
+            // --- title start
+            getUserHelperService
+            // --- title end
+           = () => {
 
-export const OpenedWebSocketsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- header end
+          const defaultDeviceConfig = <TData = AxiosResponse<EngineDefaultDeviceConfigResponse>>(
+    type: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/user/device/config/${type}`,options
+    );
+  }
+const activityWorkspaceWidget = <TData = AxiosResponse<EngineActivityWorkspaceWidgetResponse>>(
+    params?: ActivityWorkspaceWidgetParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/user/widget/activity/today`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const openedWebSockets = <TData = AxiosResponse<EngineListOpenedWebSocket>>(
+    userId: string[],
+    params?: OpenedWebSocketsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/user/${userId}/websockets`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const OpenedWebSocketsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "applicationName": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "duration": zod.string().optional(),
-  "id": zod.string().optional(),
-  "ip": zod.string().optional(),
-  "pong": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "userAgent": zod.string().optional(),
-  "ver": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- footer start
+            return {defaultDeviceConfig,activityWorkspaceWidget,openedWebSockets}};
+export type DefaultDeviceConfigResult = AxiosResponse<EngineDefaultDeviceConfigResponse>
+export type ActivityWorkspaceWidgetResult = AxiosResponse<EngineActivityWorkspaceWidgetResponse>
+export type OpenedWebSocketsResult = AxiosResponse<EngineListOpenedWebSocket>
 
+            // --- footer end
+          

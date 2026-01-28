@@ -4,22 +4,46 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  KnowledgebaseTagsList,
+  ListTagsParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getTags
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of the all Articles's Tag(s).
  */
-export const ListTagsQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
+const listTags = <TData = AxiosResponse<KnowledgebaseTagsList>>(
+    params?: ListTagsParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/spaces/tags`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const ListTagsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "name": zod.string().optional().describe('The name of the tag.')
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
+            // --- footer start
+            return {listTags}};
+export type ListTagsResult = AxiosResponse<KnowledgebaseTagsList>
 
+            // --- footer end
+          

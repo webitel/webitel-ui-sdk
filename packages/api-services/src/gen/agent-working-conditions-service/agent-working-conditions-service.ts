@@ -4,53 +4,52 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,
+  WfmReadAgentWorkingConditionsResponse,
+  WfmUpdateAgentWorkingConditionsResponse
+} from '../webitelAPI.schemas';
 
 
-export const AgentWorkingConditionsServiceReadAgentWorkingConditionsParams = zod.object({
-  "agent_id": zod.string()
-})
 
-export const AgentWorkingConditionsServiceReadAgentWorkingConditionsResponse = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- header start
+            // 
 
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsParams = zod.object({
-  "agent_id": zod.string()
-})
+  export const 
+            // --- title start
+            getAgentWorkingConditionsService
+            // --- title end
+           = () => {
 
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- header end
+          const agentWorkingConditionsServiceReadAgentWorkingConditions = <TData = AxiosResponse<WfmReadAgentWorkingConditionsResponse>>(
+    agentId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/agents/${agentId}/conditions`,options
+    );
+  }
+const agentWorkingConditionsServiceUpdateAgentWorkingConditions = <TData = AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>>(
+    agentId: string,
+    agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody: AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/agents/${agentId}/conditions`,
+      agentWorkingConditionsServiceUpdateAgentWorkingConditionsBody,options
+    );
+  }
 
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponse = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- footer start
+            return {agentWorkingConditionsServiceReadAgentWorkingConditions,agentWorkingConditionsServiceUpdateAgentWorkingConditions}};
+export type AgentWorkingConditionsServiceReadAgentWorkingConditionsResult = AxiosResponse<WfmReadAgentWorkingConditionsResponse>
+export type AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResult = AxiosResponse<WfmUpdateAgentWorkingConditionsResponse>
 
+            // --- footer end
+          

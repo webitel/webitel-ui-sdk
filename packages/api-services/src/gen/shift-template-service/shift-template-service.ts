@@ -4,176 +4,91 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ShiftTemplateServiceReadShiftTemplateParams,
+  ShiftTemplateServiceSearchShiftTemplateParams,
+  ShiftTemplateServiceUpdateShiftTemplateBody,
+  WfmCreateShiftTemplateRequest,
+  WfmCreateShiftTemplateResponse,
+  WfmDeleteShiftTemplateResponse,
+  WfmReadShiftTemplateResponse,
+  WfmSearchShiftTemplateResponse,
+  WfmUpdateShiftTemplateResponse
+} from '../webitelAPI.schemas';
 
 
-export const ShiftTemplateServiceSearchShiftTemplateQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
 
-export const ShiftTemplateServiceSearchShiftTemplateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const ShiftTemplateServiceCreateShiftTemplateBody = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getShiftTemplateService
+            // --- title end
+           = () => {
 
-export const ShiftTemplateServiceCreateShiftTemplateResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const ShiftTemplateServiceDeleteShiftTemplateParams = zod.object({
-  "id": zod.string()
-})
-
-export const ShiftTemplateServiceDeleteShiftTemplateResponse = zod.object({
-  "id": zod.string().optional()
-})
-
-export const ShiftTemplateServiceReadShiftTemplateParams = zod.object({
-  "id": zod.string()
-})
-
-export const ShiftTemplateServiceReadShiftTemplateQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const ShiftTemplateServiceReadShiftTemplateResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- header end
+          const shiftTemplateServiceSearchShiftTemplate = <TData = AxiosResponse<WfmSearchShiftTemplateResponse>>(
+    params?: ShiftTemplateServiceSearchShiftTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/shift_templates`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const shiftTemplateServiceCreateShiftTemplate = <TData = AxiosResponse<WfmCreateShiftTemplateResponse>>(
+    wfmCreateShiftTemplateRequest: WfmCreateShiftTemplateRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/wfm/lookups/shift_templates`,
+      wfmCreateShiftTemplateRequest,options
+    );
+  }
+const shiftTemplateServiceDeleteShiftTemplate = <TData = AxiosResponse<WfmDeleteShiftTemplateResponse>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/wfm/lookups/shift_templates/${id}`,options
+    );
+  }
+const shiftTemplateServiceReadShiftTemplate = <TData = AxiosResponse<WfmReadShiftTemplateResponse>>(
+    id: string,
+    params?: ShiftTemplateServiceReadShiftTemplateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/wfm/lookups/shift_templates/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary UpdateShiftTemplate updates a shift template with a list times.
 Update existing time, create that not exists in database and delete that not exists in the list.
  */
-export const ShiftTemplateServiceUpdateShiftTemplateParams = zod.object({
-  "item.id": zod.string()
-})
+const shiftTemplateServiceUpdateShiftTemplate = <TData = AxiosResponse<WfmUpdateShiftTemplateResponse>>(
+    shiftTemplateServiceUpdateShiftTemplateBody: ShiftTemplateServiceUpdateShiftTemplateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/wfm/lookups/shift_templates/item.id}`,
+      shiftTemplateServiceUpdateShiftTemplateBody,options
+    );
+  }
 
-export const ShiftTemplateServiceUpdateShiftTemplateBody = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+            // --- footer start
+            return {shiftTemplateServiceSearchShiftTemplate,shiftTemplateServiceCreateShiftTemplate,shiftTemplateServiceDeleteShiftTemplate,shiftTemplateServiceReadShiftTemplate,shiftTemplateServiceUpdateShiftTemplate}};
+export type ShiftTemplateServiceSearchShiftTemplateResult = AxiosResponse<WfmSearchShiftTemplateResponse>
+export type ShiftTemplateServiceCreateShiftTemplateResult = AxiosResponse<WfmCreateShiftTemplateResponse>
+export type ShiftTemplateServiceDeleteShiftTemplateResult = AxiosResponse<WfmDeleteShiftTemplateResponse>
+export type ShiftTemplateServiceReadShiftTemplateResult = AxiosResponse<WfmReadShiftTemplateResponse>
+export type ShiftTemplateServiceUpdateShiftTemplateResult = AxiosResponse<WfmUpdateShiftTemplateResponse>
 
-export const ShiftTemplateServiceUpdateShiftTemplateResponse = zod.object({
-  "item": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "times": zod.array(zod.object({
-  "end": zod.number().optional(),
-  "start": zod.number().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+            // --- footer end
+          

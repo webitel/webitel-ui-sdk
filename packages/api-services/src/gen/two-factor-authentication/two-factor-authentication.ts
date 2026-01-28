@@ -4,40 +4,55 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiGenerateUserTfaKeyResponse,
+  ApiGetUserTfaKeyResponse
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getTwoFactorAuthentication
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
  */
-export const GetUserTfaKeyParams = zod.object({
-  "user_id": zod.string()
-})
-
-export const GetUserTfaKeyResponse = zod.object({
-  "totp": zod.object({
-  "url": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
-
+const getUserTfaKey = <TData = AxiosResponse<ApiGetUserTfaKeyResponse>>(
+    userId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/users/${userId}/2fa`,options
+    );
+  }
 /**
  * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
  */
-export const GenerateUserTfaKeyParams = zod.object({
-  "user_id": zod.string()
-})
+const generateUserTfaKey = <TData = AxiosResponse<ApiGenerateUserTfaKeyResponse>>(
+    userId: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/users/${userId}/2fa`,undefined,options
+    );
+  }
 
-export const GenerateUserTfaKeyResponse = zod.object({
-  "totp": zod.object({
-  "url": zod.string().optional(),
-  "user": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional().describe('UserId lookup value.')
-}).optional()
-})
+            // --- footer start
+            return {getUserTfaKey,generateUserTfaKey}};
+export type GetUserTfaKeyResult = AxiosResponse<ApiGetUserTfaKeyResponse>
+export type GenerateUserTfaKeyResult = AxiosResponse<ApiGenerateUserTfaKeyResponse>
 
+            // --- footer end
+          

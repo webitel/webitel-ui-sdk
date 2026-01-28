@@ -4,233 +4,110 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineCreateWebHookRequest,
+  EngineListWebHook,
+  EngineWebHook,
+  EngineWebHookServicePatchWebHookBody,
+  EngineWebHookServiceUpdateWebHookBody,
+  SearchWebHookParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getWebHookService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary List of WebHook
  */
-export const SearchWebHookQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchWebHookResponse = zod.object({
-  "items": zod.array(zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchWebHook = <TData = AxiosResponse<EngineListWebHook>>(
+    params?: SearchWebHookParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/hook`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create WebHook
  */
-export const CreateWebHookBody = zod.object({
-  "authorization": zod.string().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateWebHookResponse = zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const createWebHook = <TData = AxiosResponse<EngineWebHook>>(
+    engineCreateWebHookRequest: EngineCreateWebHookRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/hook`,
+      engineCreateWebHookRequest,options
+    );
+  }
 /**
  * @summary Remove WebHook
  */
-export const DeleteWebHookParams = zod.object({
-  "id": zod.number()
-})
-
-export const DeleteWebHookResponse = zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const deleteWebHook = <TData = AxiosResponse<EngineWebHook>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/hook/${id}`,options
+    );
+  }
 /**
  * @summary WebHook item
  */
-export const ReadWebHookParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadWebHookResponse = zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const readWebHook = <TData = AxiosResponse<EngineWebHook>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/hook/${id}`,options
+    );
+  }
 /**
  * @summary Patch WebHook
  */
-export const PatchWebHookParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchWebHookBody = zod.object({
-  "authorization": zod.string().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchWebHookResponse = zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+const patchWebHook = <TData = AxiosResponse<EngineWebHook>>(
+    id: number,
+    engineWebHookServicePatchWebHookBody: EngineWebHookServicePatchWebHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/hook/${id}`,
+      engineWebHookServicePatchWebHookBody,options
+    );
+  }
 /**
  * @summary Update WebHook
  */
-export const UpdateWebHookParams = zod.object({
-  "id": zod.number()
-})
+const updateWebHook = <TData = AxiosResponse<EngineWebHook>>(
+    id: number,
+    engineWebHookServiceUpdateWebHookBody: EngineWebHookServiceUpdateWebHookBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/hook/${id}`,
+      engineWebHookServiceUpdateWebHookBody,options
+    );
+  }
 
-export const UpdateWebHookBody = zod.object({
-  "authorization": zod.string().optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchWebHook,createWebHook,deleteWebHook,readWebHook,patchWebHook,updateWebHook}};
+export type SearchWebHookResult = AxiosResponse<EngineListWebHook>
+export type CreateWebHookResult = AxiosResponse<EngineWebHook>
+export type DeleteWebHookResult = AxiosResponse<EngineWebHook>
+export type ReadWebHookResult = AxiosResponse<EngineWebHook>
+export type PatchWebHookResult = AxiosResponse<EngineWebHook>
+export type UpdateWebHookResult = AxiosResponse<EngineWebHook>
 
-export const UpdateWebHookResponse = zod.object({
-  "authorization": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "key": zod.string().optional(),
-  "name": zod.string().optional(),
-  "origin": zod.array(zod.string()).optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

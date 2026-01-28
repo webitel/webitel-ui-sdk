@@ -4,31 +4,54 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  CreateFeedbackParams,
+  EngineFeedback,
+  GetFeedbackParams
+} from '../webitelAPI.schemas';
 
 
-export const GetFeedbackQueryParams = zod.object({
-  "key": zod.string().optional()
-})
 
-export const GetFeedbackResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "payload": zod.record(zod.string(), zod.string()).optional(),
-  "rating": zod.number().optional()
-})
+            // --- header start
+            // 
 
-export const CreateFeedbackQueryParams = zod.object({
-  "key": zod.string().optional(),
-  "payloadString": zod.string().optional().describe('This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18'),
-  "rating": zod.number().optional(),
-  "description": zod.string().optional()
-})
+  export const 
+            // --- title start
+            getFeedbackService
+            // --- title end
+           = () => {
 
-export const CreateFeedbackResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "payload": zod.record(zod.string(), zod.string()).optional(),
-  "rating": zod.number().optional()
-})
+            // --- header end
+          const getFeedback = <TData = AxiosResponse<EngineFeedback>>(
+    params?: GetFeedbackParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/feedback`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createFeedback = <TData = AxiosResponse<EngineFeedback>>(
+    params?: CreateFeedbackParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/feedback`,undefined,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
+            // --- footer start
+            return {getFeedback,createFeedback}};
+export type GetFeedbackResult = AxiosResponse<EngineFeedback>
+export type CreateFeedbackResult = AxiosResponse<EngineFeedback>
+
+            // --- footer end
+          

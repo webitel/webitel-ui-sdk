@@ -4,97 +4,76 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  ApiReadClassResponse,
+  ApiSearchClassesResponse,
+  ApiUpdateClassResponse,
+  ClassesUpdateClassBody,
+  ReadClassParams,
+  SearchClassesParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchClassesQueryParams = zod.object({
-  "domain": zod.string().optional().describe('TO BE REMOVED // bound to session.domain.id'),
-  "class": zod.string().optional().describe('[filter]: like \'%class%\''),
-  "fields": zod.array(zod.string()).optional().describe('int64 id = 3;  // [filter]: obj.id = id\ncontrols\n\noutput'),
-  "sort": zod.array(zod.string()).optional().describe('sort: \"field\" asc; \"!field\" desc'),
-  "page": zod.number().optional().describe('page number'),
-  "size": zod.number().optional().describe('page size')
-})
 
-export const SearchClassesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
+            // --- header start
+            // 
 
-export const UpdateClass2Params = zod.object({
-  "class.id": zod.string().describe('(class::object).id')
-})
+  export const 
+            // --- title start
+            getClasses
+            // --- title end
+           = () => {
 
-export const UpdateClass2Body = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional(),
-  "domain": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+            // --- header end
+          const searchClasses = <TData = AxiosResponse<ApiSearchClassesResponse>>(
+    params?: SearchClassesParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/objclass`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const updateClass2 = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+    classesUpdateClassBody: ClassesUpdateClassBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/objclass/_class.id}`,
+      classesUpdateClassBody,options
+    );
+  }
+const updateClass = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+    classesUpdateClassBody: ClassesUpdateClassBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/objclass/_class.id}`,
+      classesUpdateClassBody,options
+    );
+  }
+const readClass = <TData = AxiosResponse<ApiReadClassResponse>>(
+    id: string,
+    params?: ReadClassParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/objclass/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 
-export const UpdateClass2Response = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
+            // --- footer start
+            return {searchClasses,updateClass2,updateClass,readClass}};
+export type SearchClassesResult = AxiosResponse<ApiSearchClassesResponse>
+export type UpdateClass2Result = AxiosResponse<ApiUpdateClassResponse>
+export type UpdateClassResult = AxiosResponse<ApiUpdateClassResponse>
+export type ReadClassResult = AxiosResponse<ApiReadClassResponse>
 
-export const UpdateClassParams = zod.object({
-  "class.id": zod.string().describe('(class::object).id')
-})
-
-export const UpdateClassBody = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional(),
-  "domain": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
-
-export const UpdateClassResponse = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
-
-export const ReadClassParams = zod.object({
-  "id": zod.string().describe('[filter]: obj.id = id')
-})
-
-export const ReadClassQueryParams = zod.object({
-  "domain": zod.string().optional(),
-  "class": zod.string().optional().describe('[filter]: like \'%class%\'')
-})
-
-export const ReadClassResponse = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
-
+            // --- footer end
+          

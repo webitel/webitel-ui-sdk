@@ -4,133 +4,92 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineChatPlan,
+  EngineCreateChatPlanRequest,
+  EngineListChatPlan,
+  EngineRoutingChatPlanServicePatchChatPlanBody,
+  EngineRoutingChatPlanServiceUpdateChatPlanBody,
+  SearchChatPlanParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchChatPlanQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "name": zod.string().optional(),
-  "enabled": zod.boolean().optional()
-})
 
-export const SearchChatPlanResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
-export const CreateChatPlanBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+  export const 
+            // --- title start
+            getRoutingChatPlanService
+            // --- title end
+           = () => {
 
-export const CreateChatPlanResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+            // --- header end
+          const searchChatPlan = <TData = AxiosResponse<EngineListChatPlan>>(
+    params?: SearchChatPlanParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/outbound/chat`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createChatPlan = <TData = AxiosResponse<EngineChatPlan>>(
+    engineCreateChatPlanRequest: EngineCreateChatPlanRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/routing/outbound/chat`,
+      engineCreateChatPlanRequest,options
+    );
+  }
+const deleteChatPlan = <TData = AxiosResponse<EngineChatPlan>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/routing/outbound/chat/${id}`,options
+    );
+  }
+const readChatPlan = <TData = AxiosResponse<EngineChatPlan>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/routing/outbound/chat/${id}`,options
+    );
+  }
+const patchChatPlan = <TData = AxiosResponse<EngineChatPlan>>(
+    id: number,
+    engineRoutingChatPlanServicePatchChatPlanBody: EngineRoutingChatPlanServicePatchChatPlanBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/routing/outbound/chat/${id}`,
+      engineRoutingChatPlanServicePatchChatPlanBody,options
+    );
+  }
+const updateChatPlan = <TData = AxiosResponse<EngineChatPlan>>(
+    id: number,
+    engineRoutingChatPlanServiceUpdateChatPlanBody: EngineRoutingChatPlanServiceUpdateChatPlanBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/routing/outbound/chat/${id}`,
+      engineRoutingChatPlanServiceUpdateChatPlanBody,options
+    );
+  }
 
-export const DeleteChatPlanParams = zod.object({
-  "id": zod.number()
-})
+            // --- footer start
+            return {searchChatPlan,createChatPlan,deleteChatPlan,readChatPlan,patchChatPlan,updateChatPlan}};
+export type SearchChatPlanResult = AxiosResponse<EngineListChatPlan>
+export type CreateChatPlanResult = AxiosResponse<EngineChatPlan>
+export type DeleteChatPlanResult = AxiosResponse<EngineChatPlan>
+export type ReadChatPlanResult = AxiosResponse<EngineChatPlan>
+export type PatchChatPlanResult = AxiosResponse<EngineChatPlan>
+export type UpdateChatPlanResult = AxiosResponse<EngineChatPlan>
 
-export const DeleteChatPlanResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadChatPlanParams = zod.object({
-  "id": zod.number()
-})
-
-export const ReadChatPlanResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchChatPlanParams = zod.object({
-  "id": zod.number()
-})
-
-export const PatchChatPlanBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchChatPlanResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateChatPlanParams = zod.object({
-  "id": zod.number()
-})
-
-export const UpdateChatPlanBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateChatPlanResponse = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

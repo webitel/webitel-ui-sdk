@@ -20,7 +20,7 @@ import type {
   ApiListAccessResponseV1,
   ApiToggleDefaultAccessResponse,
   ApiUpdateAccessResponseV1
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getListDefaultAccessResponseMock = (overrideResponse: Partial< ApiListAccessResponseV1 > = {}): ApiListAccessResponseV1 => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({granted: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), grantee: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([faker.datatype.boolean(), undefined])}, undefined]), grantor: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([faker.datatype.boolean(), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), page: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), ...overrideResponse})

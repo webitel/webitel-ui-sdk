@@ -4,158 +4,113 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineListQueueBucket,
+  EngineQueueBucket,
+  EngineQueueBucketServiceCreateQueueBucketBody,
+  EngineQueueBucketServicePatchQueueBucketBody,
+  EngineQueueBucketServiceUpdateQueueBucketBody,
+  SearchQueueBucketParams
+} from '../webitelAPI.schemas';
 
 
-/**
+
+            // --- header start
+            // 
+
+  export const 
+            // --- title start
+            getQueueBucketService
+            // --- title end
+           = () => {
+
+            // --- header end
+          /**
  * @summary SearchQueueRouting
  */
-export const SearchQueueBucketParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const SearchQueueBucketQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
-
-export const SearchQueueBucketResponse = zod.object({
-  "items": zod.array(zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+const searchQueueBucket = <TData = AxiosResponse<EngineListQueueBucket>>(
+    queueId: string,
+    params?: SearchQueueBucketParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/buckets`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
 /**
  * @summary Create QueueBucket
  */
-export const CreateQueueBucketParams = zod.object({
-  "queue_id": zod.string()
-})
-
-export const CreateQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
-export const CreateQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
+const createQueueBucket = <TData = AxiosResponse<EngineQueueBucket>>(
+    queueId: string,
+    engineQueueBucketServiceCreateQueueBucketBody: EngineQueueBucketServiceCreateQueueBucketBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/queues/${queueId}/buckets`,
+      engineQueueBucketServiceCreateQueueBucketBody,options
+    );
+  }
 /**
  * @summary DeleteQueueRouting
  */
-export const DeleteQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const DeleteQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
+const deleteQueueBucket = <TData = AxiosResponse<EngineQueueBucket>>(
+    queueId: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/queues/${queueId}/buckets/${id}`,options
+    );
+  }
 /**
  * @summary ReadQueueRouting
  */
-export const ReadQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const ReadQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
-export const PatchQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
-
-export const PatchQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
-export const PatchQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
+const readQueueBucket = <TData = AxiosResponse<EngineQueueBucket>>(
+    queueId: string,
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/queues/${queueId}/buckets/${id}`,options
+    );
+  }
+const patchQueueBucket = <TData = AxiosResponse<EngineQueueBucket>>(
+    queueId: string,
+    id: string,
+    engineQueueBucketServicePatchQueueBucketBody: EngineQueueBucketServicePatchQueueBucketBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/queues/${queueId}/buckets/${id}`,
+      engineQueueBucketServicePatchQueueBucketBody,options
+    );
+  }
 /**
  * @summary UpdateQueueBucket
  */
-export const UpdateQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+const updateQueueBucket = <TData = AxiosResponse<EngineQueueBucket>>(
+    queueId: string,
+    id: string,
+    engineQueueBucketServiceUpdateQueueBucketBody: EngineQueueBucketServiceUpdateQueueBucketBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/queues/${queueId}/buckets/${id}`,
+      engineQueueBucketServiceUpdateQueueBucketBody,options
+    );
+  }
 
-export const UpdateQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+            // --- footer start
+            return {searchQueueBucket,createQueueBucket,deleteQueueBucket,readQueueBucket,patchQueueBucket,updateQueueBucket}};
+export type SearchQueueBucketResult = AxiosResponse<EngineListQueueBucket>
+export type CreateQueueBucketResult = AxiosResponse<EngineQueueBucket>
+export type DeleteQueueBucketResult = AxiosResponse<EngineQueueBucket>
+export type ReadQueueBucketResult = AxiosResponse<EngineQueueBucket>
+export type PatchQueueBucketResult = AxiosResponse<EngineQueueBucket>
+export type UpdateQueueBucketResult = AxiosResponse<EngineQueueBucket>
 
-export const UpdateQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
+            // --- footer end
+          

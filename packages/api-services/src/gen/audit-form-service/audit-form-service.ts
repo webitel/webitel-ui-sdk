@@ -4,644 +4,143 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  EngineAuditForm,
+  EngineAuditFormServicePatchAuditFormBody,
+  EngineAuditFormServiceUpdateAuditFormBody,
+  EngineAuditFormServiceUpdateAuditRateBody,
+  EngineAuditRate,
+  EngineCreateAuditFormRateRequest,
+  EngineCreateAuditFormRequest,
+  EngineListAuditForm,
+  EngineListAuditRate,
+  SearchAuditFormParams,
+  SearchAuditRateParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchAuditFormQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "teamId": zod.array(zod.number()).optional(),
-  "enabled": zod.boolean().optional(),
-  "editable": zod.boolean().optional().describe('bool archive = 9;\n\nbool active = 11; // not archive'),
-  "question": zod.string().optional(),
-  "teamFilter": zod.number().optional().describe('expects userID to filter by user\'s team')
-})
 
-export const searchAuditFormResponseItemsItemQuestionsItemTypeDefault = `question_default`;
+            // --- header start
+            // 
 
-export const SearchAuditFormResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(searchAuditFormResponseItemsItemQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+  export const 
+            // --- title start
+            getAuditFormService
+            // --- title end
+           = () => {
 
-export const createAuditFormBodyQuestionsItemTypeDefault = `question_default`;
+            // --- header end
+          const searchAuditForm = <TData = AxiosResponse<EngineListAuditForm>>(
+    params?: SearchAuditFormParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/audit/forms`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const createAuditForm = <TData = AxiosResponse<EngineAuditForm>>(
+    engineCreateAuditFormRequest: EngineCreateAuditFormRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/audit/forms`,
+      engineCreateAuditFormRequest,options
+    );
+  }
+const searchAuditRate = <TData = AxiosResponse<EngineListAuditRate>>(
+    formId: number,
+    params?: SearchAuditRateParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/audit/forms/${formId}/rate`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+const deleteAuditForm = <TData = AxiosResponse<EngineAuditForm>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/audit/forms/${id}`,options
+    );
+  }
+const readAuditForm = <TData = AxiosResponse<EngineAuditForm>>(
+    id: number, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/audit/forms/${id}`,options
+    );
+  }
+const patchAuditForm = <TData = AxiosResponse<EngineAuditForm>>(
+    id: number,
+    engineAuditFormServicePatchAuditFormBody: EngineAuditFormServicePatchAuditFormBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.patch(
+      `/call_center/audit/forms/${id}`,
+      engineAuditFormServicePatchAuditFormBody,options
+    );
+  }
+const updateAuditForm = <TData = AxiosResponse<EngineAuditForm>>(
+    id: number,
+    engineAuditFormServiceUpdateAuditFormBody: EngineAuditFormServiceUpdateAuditFormBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/audit/forms/${id}`,
+      engineAuditFormServiceUpdateAuditFormBody,options
+    );
+  }
+const createAuditFormRate = <TData = AxiosResponse<EngineAuditRate>>(
+    engineCreateAuditFormRateRequest: EngineCreateAuditFormRateRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/call_center/audit/rate`,
+      engineCreateAuditFormRateRequest,options
+    );
+  }
+const deleteAuditRate = <TData = AxiosResponse<EngineAuditRate>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.delete(
+      `/call_center/audit/rate/${id}`,options
+    );
+  }
+const readAuditRate = <TData = AxiosResponse<EngineAuditRate>>(
+    id: string, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/call_center/audit/rate/${id}`,options
+    );
+  }
+const updateAuditRate = <TData = AxiosResponse<EngineAuditRate>>(
+    id: string,
+    engineAuditFormServiceUpdateAuditRateBody: EngineAuditFormServiceUpdateAuditRateBody, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.put(
+      `/call_center/audit/rate/${id}`,
+      engineAuditFormServiceUpdateAuditRateBody,options
+    );
+  }
 
-export const CreateAuditFormBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(createAuditFormBodyQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
+            // --- footer start
+            return {searchAuditForm,createAuditForm,searchAuditRate,deleteAuditForm,readAuditForm,patchAuditForm,updateAuditForm,createAuditFormRate,deleteAuditRate,readAuditRate,updateAuditRate}};
+export type SearchAuditFormResult = AxiosResponse<EngineListAuditForm>
+export type CreateAuditFormResult = AxiosResponse<EngineAuditForm>
+export type SearchAuditRateResult = AxiosResponse<EngineListAuditRate>
+export type DeleteAuditFormResult = AxiosResponse<EngineAuditForm>
+export type ReadAuditFormResult = AxiosResponse<EngineAuditForm>
+export type PatchAuditFormResult = AxiosResponse<EngineAuditForm>
+export type UpdateAuditFormResult = AxiosResponse<EngineAuditForm>
+export type CreateAuditFormRateResult = AxiosResponse<EngineAuditRate>
+export type DeleteAuditRateResult = AxiosResponse<EngineAuditRate>
+export type ReadAuditRateResult = AxiosResponse<EngineAuditRate>
+export type UpdateAuditRateResult = AxiosResponse<EngineAuditRate>
 
-export const createAuditFormResponseQuestionsItemTypeDefault = `question_default`;
-
-export const CreateAuditFormResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(createAuditFormResponseQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const SearchAuditRateParams = zod.object({
-  "form_id": zod.number()
-})
-
-export const SearchAuditRateQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "createdAtFrom": zod.string().optional(),
-  "createdAtTo": zod.string().optional(),
-  "id": zod.array(zod.number()).optional(),
-  "callId": zod.array(zod.string()).optional(),
-  "ratedUser": zod.array(zod.string()).optional()
-})
-
-export const searchAuditRateResponseItemsItemQuestionsItemTypeDefault = `question_default`;
-
-export const SearchAuditRateResponse = zod.object({
-  "items": zod.array(zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "comment": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "criticalCount": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(searchAuditRateResponseItemsItemQuestionsItemTypeDefault)
-})).optional(),
-  "ratedUser": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreOptional": zod.number().optional(),
-  "scoreRequired": zod.number().optional(),
-  "selectYesCount": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
-export const DeleteAuditFormParams = zod.object({
-  "id": zod.number()
-})
-
-export const deleteAuditFormResponseQuestionsItemTypeDefault = `question_default`;
-
-export const DeleteAuditFormResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(deleteAuditFormResponseQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadAuditFormParams = zod.object({
-  "id": zod.number()
-})
-
-export const readAuditFormResponseQuestionsItemTypeDefault = `question_default`;
-
-export const ReadAuditFormResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(readAuditFormResponseQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const PatchAuditFormParams = zod.object({
-  "id": zod.number()
-})
-
-export const patchAuditFormBodyQuestionsItemTypeDefault = `question_default`;
-
-export const PatchAuditFormBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(patchAuditFormBodyQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const patchAuditFormResponseQuestionsItemTypeDefault = `question_default`;
-
-export const PatchAuditFormResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(patchAuditFormResponseQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateAuditFormParams = zod.object({
-  "id": zod.number()
-})
-
-export const updateAuditFormBodyQuestionsItemTypeDefault = `question_default`;
-
-export const UpdateAuditFormBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(updateAuditFormBodyQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional()
-})
-
-export const updateAuditFormResponseQuestionsItemTypeDefault = `question_default`;
-
-export const UpdateAuditFormResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "editable": zod.boolean().optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "name": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(updateAuditFormResponseQuestionsItemTypeDefault)
-})).optional(),
-  "teams": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const CreateAuditFormRateBody = zod.object({
-  "answers": zod.array(zod.object({
-  "score": zod.number().optional()
-})).optional(),
-  "callId": zod.string().optional(),
-  "comment": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const createAuditFormRateResponseQuestionsItemTypeDefault = `question_default`;
-
-export const CreateAuditFormRateResponse = zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "comment": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "criticalCount": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(createAuditFormRateResponseQuestionsItemTypeDefault)
-})).optional(),
-  "ratedUser": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreOptional": zod.number().optional(),
-  "scoreRequired": zod.number().optional(),
-  "selectYesCount": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const DeleteAuditRateParams = zod.object({
-  "id": zod.string()
-})
-
-export const deleteAuditRateResponseQuestionsItemTypeDefault = `question_default`;
-
-export const DeleteAuditRateResponse = zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "comment": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "criticalCount": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(deleteAuditRateResponseQuestionsItemTypeDefault)
-})).optional(),
-  "ratedUser": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreOptional": zod.number().optional(),
-  "scoreRequired": zod.number().optional(),
-  "selectYesCount": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const ReadAuditRateParams = zod.object({
-  "id": zod.string()
-})
-
-export const readAuditRateResponseQuestionsItemTypeDefault = `question_default`;
-
-export const ReadAuditRateResponse = zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "comment": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "criticalCount": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(readAuditRateResponseQuestionsItemTypeDefault)
-})).optional(),
-  "ratedUser": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreOptional": zod.number().optional(),
-  "scoreRequired": zod.number().optional(),
-  "selectYesCount": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
-export const UpdateAuditRateParams = zod.object({
-  "id": zod.string()
-})
-
-export const UpdateAuditRateBody = zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "comment": zod.string().optional()
-})
-
-export const updateAuditRateResponseQuestionsItemTypeDefault = `question_default`;
-
-export const UpdateAuditRateResponse = zod.object({
-  "answers": zod.array(zod.object({
-  "comment": zod.string().optional(),
-  "score": zod.number().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "comment": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "criticalCount": zod.string().optional(),
-  "form": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "questions": zod.array(zod.object({
-  "criticalViolation": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "max": zod.number().optional(),
-  "min": zod.number().optional(),
-  "options": zod.array(zod.object({
-  "name": zod.string().optional(),
-  "score": zod.number().optional()
-})).optional(),
-  "question": zod.string().optional(),
-  "required": zod.boolean().optional(),
-  "type": zod.enum(['question_default', 'question_score', 'question_option', 'question_yes']).default(updateAuditRateResponseQuestionsItemTypeDefault)
-})).optional(),
-  "ratedUser": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "scoreOptional": zod.number().optional(),
-  "scoreRequired": zod.number().optional(),
-  "selectYesCount": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+            // --- footer end
+          

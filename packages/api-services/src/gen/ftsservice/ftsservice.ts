@@ -4,24 +4,43 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import * as zod from 'zod';
+import axios from '@aliasedDeps/api-services/axios';
+
+import type {
+  AxiosRequestConfig,
+  AxiosResponse
+} from 'axios';
+
+import type {
+  FtsSearchResponse,
+  SearchParams
+} from '../webitelAPI.schemas';
 
 
-export const SearchQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "objectName": zod.array(zod.string()).optional()
-})
 
-export const SearchResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "objectName": zod.string().optional(),
-  "text": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+            // --- header start
+            // 
 
+  export const 
+            // --- title start
+            getFtsservice
+            // --- title end
+           = () => {
+
+            // --- header end
+          const search = <TData = AxiosResponse<FtsSearchResponse>>(
+    params?: SearchParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/search`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+            // --- footer start
+            return {search}};
+export type SearchResult = AxiosResponse<FtsSearchResponse>
+
+            // --- footer end
+          

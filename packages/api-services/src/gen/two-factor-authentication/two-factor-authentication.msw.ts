@@ -19,7 +19,7 @@ import type {
 import type {
   ApiGenerateUserTfaKeyResponse,
   ApiGetUserTfaKeyResponse
-} from '.././_models';
+} from '../webitelAPI.schemas';
 
 
 export const getGetUserTfaKeyResponseMock = (overrideResponse: Partial< ApiGetUserTfaKeyResponse > = {}): ApiGetUserTfaKeyResponse => ({totp: faker.helpers.arrayElement([{url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
