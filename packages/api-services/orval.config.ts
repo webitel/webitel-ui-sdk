@@ -31,6 +31,7 @@ export default defineConfig({
       mode: 'tags-split',
       clean: true,
       indexFiles: true,
+      schemas: './_models',
       // {
       //   path: './_models',
       //   type: 'typescript',
