@@ -1,14 +1,13 @@
 import {
-	configServiceCreateConfigBody,
-	configServicePatchConfigBody,
-	configServiceSearchConfigQueryParams,
-	configServiceUpdateConfigBody,
-	getConfigService,
+  ConfigServiceCreateConfigBody,
+  ConfigServicePatchConfigBody,
+  ConfigServiceSearchConfigQueryParams,
+  ConfigServiceUpdateConfigBody,
+  getConfigService,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
-
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,8 +19,8 @@ import {
 
 const getChangelogsList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		configServiceSearchConfigQueryParams,
-	);
+    ConfigServiceSearchConfigQueryParams,
+  );
 
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
@@ -47,62 +46,62 @@ const getChangelogsList = async (params) => {
 };
 
 const getChangelog = async ({ itemId: id }) => {
-	try {
-		const response = await getConfigService().configServiceReadConfig(id);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  try {
+    const response = await getConfigService().configServiceReadConfig(id);
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const addChangelog = async ({ itemInstance }) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(
-			getShallowFieldsToSendFromZodSchema(configServiceCreateConfigBody),
-		),
-		camelToSnake(),
-	]);
-	try {
-		const response = await getConfigService().configServiceCreateConfig(item);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  const item = applyTransform(itemInstance, [
+    sanitize(
+      getShallowFieldsToSendFromZodSchema(ConfigServiceCreateConfigBody),
+    ),
+    camelToSnake(),
+  ]);
+  try {
+    const response = await getConfigService().configServiceCreateConfig(item);
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const updateChangelog = async ({ itemInstance, itemId: id }) => {
-	const item = applyTransform(itemInstance, [
-		camelToSnake(),
-		sanitize(
-			getShallowFieldsToSendFromZodSchema(configServiceUpdateConfigBody),
-		),
-	]);
+  const item = applyTransform(itemInstance, [
+    camelToSnake(),
+    sanitize(
+      getShallowFieldsToSendFromZodSchema(ConfigServiceUpdateConfigBody),
+    ),
+  ]);
 
-	try {
-		const response = await getConfigService().configServiceUpdateConfig(
-			id,
-			item,
-		);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  try {
+    const response = await getConfigService().configServiceUpdateConfig(
+      id,
+      item,
+    );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const patchChangelog = async ({ id, changes }) => {
-	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(configServicePatchConfigBody)),
-		camelToSnake(),
-	]);
-	try {
-		const response = await getConfigService().configServicePatchConfig(
-			id,
-			body,
-		);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  const body = applyTransform(changes, [
+    sanitize(getShallowFieldsToSendFromZodSchema(ConfigServicePatchConfigBody)),
+    camelToSnake(),
+  ]);
+  try {
+    const response = await getConfigService().configServicePatchConfig(
+      id,
+      body,
+    );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const deleteChangelog = async ({ id }) => {
