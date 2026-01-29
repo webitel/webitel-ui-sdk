@@ -55,9 +55,8 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import { useWindowFocus } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
-
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { MessageVariant, ComponentSize } from '../../enums';
 
 const props = defineProps({
 	/**

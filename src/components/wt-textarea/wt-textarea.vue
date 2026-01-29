@@ -52,10 +52,8 @@
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
 import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
-
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-
 import { ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /**
  * @emits {string} input - Fires when textarea value changes. Emits value

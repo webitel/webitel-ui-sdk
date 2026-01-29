@@ -105,11 +105,10 @@
 
 <script>
 import deepEqual from 'deep-equal';
-
+import { ComponentSize, MessageVariant } from '../../enums';
 import validationMixin from '../../mixins/validationMixin/validationMixin';
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
-import { MessageVariant, ComponentSize } from '../../enums';
 
 export default {
 	name: 'WtTagsInput',

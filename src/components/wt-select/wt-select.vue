@@ -111,12 +111,11 @@ v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multi
 
 <script>
 import { toRefs } from 'vue';
-
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
-import { MessageVariant, ComponentSize } from '../../enums';
 
 export default {
 	name: 'WtSelect',
