@@ -1,33 +1,23 @@
 <template>
-  <div
-    :class="{
-      'wt-search-bar--invalid': invalid,
-    }"
-    class="wt-search-bar"
+  <wt-input-text
+    :model-value="value"
+    :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
+    :invalid="invalid"
+    type="search"
+    @update:model-value="handleInput"
+    @keyup="handleKeyup"
   >
-    <div class="wt-search-bar__wrapper">
-      <div class="wt-search-bar__search-icon">
-        <slot
-          v-bind="{ invalid, searchMode }"
-          name="search-icon"
-        >
-          <wt-icon
-            :color="invalidColorProvider"
-            :icon="searchMode?.icon || 'search'"
-          />
-        </slot>
-      </div>
-      <input
-        :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
-        :value="value"
-        class="wt-search-bar__input typo-body-1"
-        type="search"
-        @input="handleInput($event.target.value)"
-        @keyup="handleKeyup"
+    <template #prefix>
+      <wt-icon
+        :color="invalidColorProvider"
+        :icon="searchMode?.icon || 'search'"
       />
+    </template>
+
+    <template #suffix v-if="isSuffixShow">
       <div class="wt-search-bar__icon-controls">
         <wt-icon-btn
-          :class="{ hidden: !value }"
+          v-if="value"
           :color="invalidColorProvider"
           class="wt-search-bar__reset-icon-btn"
           icon="close"
@@ -72,8 +62,8 @@
           name="additional-actions"
         />
       </div>
-    </div>
-  </div>
+    </template>
+  </wt-input-text>
 </template>
 
 <script lang="ts" setup>
@@ -164,6 +154,10 @@ const invalidColorProvider = computed(() =>
 	invalid.value ? 'error' : 'default',
 );
 
+const isSuffixShow = computed(
+	() => props.value || props.searchMode || props.hint,
+);
+
 const search = debounce((value) => {
 	emit('search', value);
 }, 1000);
@@ -190,79 +184,6 @@ function updateSearchMode({ option }) {
 </script>
 
 <style scoped>
-.wt-search-bar {
-  cursor: text;
-}
-
-.wt-search-bar--invalid .wt-search-bar__wrapper {
-  outline: none; /* prevent outline overlapping false color */
-  border-color: var(--wt-text-field-input-border-error-color);
-}
-
-.wt-search-bar--invalid .wt-search-bar__input::placeholder,
-.wt-search-bar--invalid .wt-search-bar__input::-webkit-input-placeholder,
-.wt-search-bar--invalid .wt-search-bar__input::-moz-placeholder,
-.wt-search-bar--invalid .wt-search-bar__input:-moz-placeholder,
-.wt-search-bar--invalid .wt-search-bar__input:-ms-input-placeholder {
-  color: var(--wt-text-field-placeholder-error-color);
-}
-
-.wt-search-bar--invalid .wt-search-bar__input {
-  color: var(--wt-text-field-error-text-color);
-}
-
-.wt-search-bar__wrapper {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  border: var(--input-border);
-  border-color: var(--wt-text-field-input-border-color);
-  border-radius: var(--border-radius);
-  padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
-}
-
-.wt-search-bar__search-icon {
-  display: flex;
-}
-
-.wt-search-bar:not(:focus-within) .wt-search-bar__reset-icon-btn {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.wt-search-bar__input {
-  transition: var(--transition);
-  display: block;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  background: transparent;
-  padding: 0;
-  width: 100%;
-  color: var(--wt-text-field-text-color);
-}
-
-/* clears the 'X' from Internet Explorer */
-.wt-search-bar__input::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.wt-search-bar__input::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-/* clears the 'X' from Chrome */
-.wt-search-bar__input::-webkit-search-decoration,
-.wt-search-bar__input::-webkit-search-cancel-button,
-.wt-search-bar__input::-webkit-search-results-button,
-.wt-search-bar__input::-webkit-search-results-decoration {
-  display: none;
-}
-
 .wt-search-bar__icon-controls {
   display: flex;
   align-items: center;

@@ -29,6 +29,7 @@
         :invalid="invalid"
         :placeholder="placeholder || label"
         class="wt-input-text__input typo-body-1"
+        :inputmode="type"
         v-bind="$attrs"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
@@ -41,8 +42,8 @@
       </p-input-group-addon>
     </p-input-group>
     <wt-message
-      v-if="isValidation && validationText"
-      :color="getMessageColor"
+      v-if="isValidation && validationText && !hideInputInfo"
+      :color="validationTextColor"
       :variant="MessageVariant.SIMPLE"
       :size="ComponentSize.SM"
     >
@@ -63,6 +64,7 @@ import { useValidation } from '../../mixins/validationMixin/useValidation';
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;
 	labelProps?: Record<string, unknown>;
+	type?: string;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -70,11 +72,13 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<string>;
 	customValidators?: unknown[];
+	hideInputInfo?: boolean;
 }
 
 const props = withDefaults(defineProps<WtInputTextProps>(), {
 	label: '',
 	labelProps: () => ({}),
+	type: 'text',
 	placeholder: '',
 	disabled: false,
 	required: false,
@@ -82,6 +86,7 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	v: null,
 	regleValidation: null,
 	customValidators: () => [],
+	hideInputInfo: false,
 });
 
 const model = defineModel<string>({
@@ -100,11 +105,12 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v,
-	customValidators,
-	regleValidation,
-});
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+		regleValidation,
+	});
 
 const { focus, handleKeyup } = useInputControl(inputText);
 
@@ -120,10 +126,6 @@ const inputHandler = (value) => {
 	const handledValue = props.preventTrim ? value : value.trim();
 	emit('update:modelValue', handledValue);
 };
-
-const getMessageColor = computed(() => {
-	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
-});
 
 defineExpose({
 	focus,

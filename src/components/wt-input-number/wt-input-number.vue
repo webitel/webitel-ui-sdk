@@ -62,8 +62,8 @@
       </p-input-group-addon>
     </p-input-group>
     <wt-message
-      v-if="isValidation && validationText"
-      :color="getMessageColor"
+      v-if="isValidation && validationText && !hideInputInfo"
+      :color="validationTextColor"
       :variant="MessageVariant.SIMPLE"
       :size="ComponentSize.SM"
     >
@@ -97,6 +97,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<number>;
 	customValidators?: unknown[];
+	hideInputInfo?: boolean;
 }
 
 const props = withDefaults(defineProps<WtInputNumberProps>(), {
@@ -115,6 +116,7 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 	v: null,
 	regleValidation: null,
 	customValidators: () => [],
+	hideInputInfo: false,
 });
 
 const model = defineModel<number | null>({
@@ -129,11 +131,12 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v,
-	customValidators,
-	regleValidation,
-});
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+		regleValidation,
+	});
 
 const { focus, handleKeyup } = useInputControl(inputNumber);
 
@@ -143,10 +146,6 @@ const hasLabel = computed(() => {
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
-});
-
-const getMessageColor = computed(() => {
-	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 defineExpose({

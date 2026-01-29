@@ -8,33 +8,34 @@ const isShowDialog = ref(false);
 const deleteCount = ref(1);
 
 const deleteMessage = computed(() => {
-  if (deleteCount.value === 0) {
-    return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', 2, null, {
-      count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
-    });
-  }
-  return t(
-    'webitelUI.deleteConfirmationPopup.tableAskingAlert',
-    { count: deleteCount.value },
-    null,
-  );
+	if (deleteCount.value === 0) {
+		return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', 2, null, {
+			count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
+		});
+	}
+	return t(
+		'webitelUI.deleteConfirmationPopup.tableAskingAlert',
+		{
+			count: deleteCount.value,
+		},
+		null,
+	);
 });
 
 const callback = async () => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, 500),
-  );
+	return new Promise((resolve) =>
+		setTimeout(() => {
+			resolve();
+		}, 500),
+	);
 };
 </script>
 
 <template>
   <div style="display: flex; gap: var(--spacing-xs)">
     <wt-button @click="isShowDialog = true"> Show dialog </wt-button>
-    <wt-input
-      :value="deleteCount"
-      @input="deleteCount = $event"
+    <wt-input-text
+      v-model:model-value="deleteCount"
     />
   </div>
   <wt-confirm-dialog

@@ -6,10 +6,9 @@ const value = ref(14);
 
 <template>
   <wt-time-input
-    :value="value"
+    v-model:model-value="value"
     label="hour"
     :max-value="23"
-    @input="value = $event"
   />
 </template>
 

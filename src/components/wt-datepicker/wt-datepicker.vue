@@ -32,15 +32,20 @@ v-if="clearable && value" :color="disabled ? 'disabled' : 'default'" icon="close
       </template>
       <template v-if="isDateTime" #time-picker="{ time, updateTime }">
         <div class="datepicker__timepicker">
-          <wt-time-input :value="time.hours" max-value="23" @input="updateTime" />
+          <wt-time-input :model-value="time.hours" max-value="23" @update:model-value="updateTime" />
           :
-          <wt-time-input :value="time.minutes" max-value="59" @input="updateTime($event, false)" />
+          <wt-time-input :model-value="time.minutes" max-value="59" @update:model-value="updateTime($event, false)" />
         </div>
       </template>
     </vue-datepicker>
-    <wt-input-info v-if="isValidation" :invalid="invalid">
+    <wt-message
+      v-if="isValidation && validationText"
+      :color="validationTextColor"
+      :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
+    >
       {{ validationText }}
-    </wt-input-info>
+    </wt-message>
   </div>
 </template>
 
@@ -52,7 +57,7 @@ import { useWindowFocus } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import WtInputInfo from '../wt-input-info/wt-input-info.vue';
+import { MessageVariant, ComponentSize } from '../../enums';
 
 const props = defineProps({
 	/**
@@ -146,10 +151,11 @@ const requiredLabel = computed(() => {
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
 const { v, customValidators } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v,
-	customValidators,
-});
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+	});
 
 const clearValue = () => {
 	emit('input', null);

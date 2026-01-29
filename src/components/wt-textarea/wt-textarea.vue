@@ -38,12 +38,14 @@
         @blur="emit('blur')"
       />
     </div>
-    <wt-input-info
-      v-if="isValidation"
-      :invalid="invalid"
+    <wt-message
+      v-if="isValidation && validationText"
+      :color="validationTextColor"
+      :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
     >
       {{ validationText }}
-    </wt-input-info>
+    </wt-message>
   </div>
 </template>
 
@@ -52,6 +54,8 @@ import type { TextareaProps } from 'primevue/textarea';
 import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+
+import { ComponentSize, MessageVariant } from '../../enums';
 
 /**
  * @emits {string} input - Fires when textarea value changes. Emits value
@@ -162,10 +166,11 @@ const emit = defineEmits([
 
 const isScrollHidden = ref(false);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v: props.v,
-	customValidators: props.customValidators,
-} as any);
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v: props.v,
+		customValidators: props.customValidators,
+	} as any);
 
 const handleKeypress = (event: KeyboardEvent) => {
 	emit('keydown', event);

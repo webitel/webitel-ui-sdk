@@ -1,4 +1,5 @@
 import { computed } from 'vue';
+import { MessageColor } from '../../enums';
 
 import {
 	type UseFieldValidationParams as UseRegleFieldValidationParams,
@@ -52,9 +53,14 @@ export const useValidation = ({
 			: vuelidateValidationText.value;
 	});
 
+	const validationTextColor = computed(() => {
+		return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
+	});
+
 	return {
 		isValidation,
 		invalid,
 		validationText,
+		validationTextColor,
 	};
 };

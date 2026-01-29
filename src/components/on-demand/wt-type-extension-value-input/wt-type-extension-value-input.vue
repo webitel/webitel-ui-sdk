@@ -1,16 +1,15 @@
 <template>
-  <wt-input
+  <wt-input-text
     v-if="field.kind === FieldType.Text"
     v-bind="sharedChildrenProps"
-    :value="value"
-    @input="setValue"
+    :model-value="value"
+    @update:model-value="setValue"
   />
-  <wt-input
+  <wt-input-number
     v-else-if="field.kind === FieldType.Number"
     v-bind="sharedChildrenProps"
-    :value="value"
-    type="number"
-    @input="setValue"
+    :model-value="value"
+    @update:model-value="setValue"
   />
   <slot
     v-else-if="field.kind === FieldType.Boolean"
@@ -75,12 +74,7 @@
 
 <script lang="ts" setup>
 import { SysTypesAPI } from '@webitel/api-services/api';
-import {
-	WtDatepicker,
-	WtInput,
-	WtSelect,
-	WtSwitcher,
-} from '@webitel/ui-sdk/components';
+import { WtDatepicker, WtSelect, WtSwitcher } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { WebitelProtoDataField } from 'webitel-sdk';

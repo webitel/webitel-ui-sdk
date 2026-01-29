@@ -3,8 +3,8 @@
     <h2>prettifyFileSize</h2>
     <article class="script">
       <p>prettifies bytes number to string size script:</p>
-      <wt-input
-        v-model="input"
+      <wt-input-text
+        v-model:model-value="input"
         style="max-width: 400px"
         label="Size"
       />
@@ -20,18 +20,18 @@ import prettifyFileSize from '@webitel/ui-sdk/src/scripts/prettifyFileSize';
 import Prism from 'prismjs';
 
 export default {
-  name: 'PrettifyFileSizeScriptDocs',
-  data: () => ({
-    input: 1024,
-  }),
-  computed: {
-    output() {
-      return prettifyFileSize(this.input);
-    },
-  },
-  mounted() {
-    Prism.highlightAll();
-  },
+	name: 'PrettifyFileSizeScriptDocs',
+	data: () => ({
+		input: 1024,
+	}),
+	computed: {
+		output() {
+			return prettifyFileSize(this.input);
+		},
+	},
+	mounted() {
+		Prism.highlightAll();
+	},
 };
 </script>
 

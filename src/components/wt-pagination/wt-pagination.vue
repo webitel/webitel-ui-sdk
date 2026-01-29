@@ -4,13 +4,12 @@
       <div class="wt-pagination__size-text">
         {{ $t('webitelUI.pagination.sizeText') }}
       </div>
-      <wt-input
-        :number-max="1000"
-        :number-min="1"
-        :value="size"
+      <wt-input-number
+        :max="1000"
+        :min="1"
+        :model-value="size"
         class="wt-pagination__size-input"
-        type="number"
-        @input="inputHandler"
+        @update:model-value="inputHandler"
       />
     </div>
     <div class="wt-pagination__page-controls">

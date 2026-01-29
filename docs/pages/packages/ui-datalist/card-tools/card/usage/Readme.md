@@ -87,7 +87,7 @@ const {
 
 <template>
     // ...
-    <wt-input
+    <wt-input-text
         v-model="modelValue.name" //note: v-model is preffered [!code highlight]
         :label="t('reusable.name')"
         :regle-validation="validationFields?.name" //note: prop name [!code highlight]
@@ -111,7 +111,7 @@ const {
     import {RegleSchemaFieldStatus} from '@regle/schemas';
     import {WebitelCasesSourceType} from '@webitel/api-services/gen/models'; // [!code highlight]
     import {WebitelCasesSource} from '@webitel/api-services/gen/models';
-    import {WtInput, WtSelect} from '@webitel/ui-sdk/components';
+    import {WtInputText, WtSelect} from '@webitel/ui-sdk/components';
     
     // ...
 
