@@ -8,6 +8,10 @@ const password = {
     .wt-password .wt-icon {
       fill: ${dt('password.icon.color')};
     }
+      
+    .p-inputtext.p-invalid:enabled:hover {
+      border-color: ${dt('inputtext.invalidHoverBorderColor')};
+    }
   `,
 };
 
