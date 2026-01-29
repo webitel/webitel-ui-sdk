@@ -190,6 +190,9 @@ export default {
 			isValidation,
 			invalid,
 			validationText,
+			validationTextColor,
+			MessageVariant,
+			ComponentSize,
 		};
 	},
 	data: () => ({
