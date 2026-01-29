@@ -114,6 +114,7 @@ export interface UserAccessStore {
 	routeAccessGuard: NavigationGuard;
 
 	hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
+	hasGlobalCrudActionAccess: (action: CrudAction) => boolean;
 
 	hasApplicationVisibility: (app: WtApplication) => boolean;
 	hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;

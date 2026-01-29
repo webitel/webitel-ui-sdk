@@ -3,12 +3,12 @@ import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 
 import {
-	AdminSections as AdminSectionsNew,
-	AuditorSections as AuditorSectionsNew,
-	CrmSections as CrmSectionsNew,
-	SupervisorSections as SupervisorSectionsNew,
+	AdminSections,
+	AuditorSections,
+	CrmSections,
+	SupervisorSections,
+	WtApplication,
 } from '../../../enums';
-import { WtApplication } from '../../../enums';
 
 const applicationsAccess = (value = true) => ({
 	[WtApplication.Agent]: {
@@ -28,15 +28,15 @@ const applicationsAccess = (value = true) => ({
 		_locale: `WtApplication.${WtApplication.Supervisor}.name`,
 		[SupervisorSections.Queues]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSectionsNew.Queues}`,
+			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSections.Queues}`,
 		},
 		[SupervisorSections.Agents]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSectionsNew.Agents}`,
+			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSections.Agents}`,
 		},
 		[SupervisorSections.ActiveCalls]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSectionsNew.ActiveCalls}`,
+			_locale: `WtApplication.${WtApplication.Supervisor}.sections.${SupervisorSections.ActiveCalls}`,
 		},
 	},
 	[WtApplication.Admin]: {
@@ -44,151 +44,151 @@ const applicationsAccess = (value = true) => ({
 		_locale: `WtApplication.${WtApplication.Admin}.name`,
 		[AdminSections.License]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.License}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.License}`,
 		},
 		[AdminSections.Users]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Users}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Users}`,
 		},
 		[AdminSections.Devices]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Devices}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Devices}`,
 		},
 		[AdminSections.Flow]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Flow}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Flow}`,
 		},
 		[AdminSections.Dialplan]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Dialplan}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Dialplan}`,
 		},
 		[AdminSections.Gateways]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Gateways}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Gateways}`,
 		},
 		[AdminSections.Chatplan]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Chatplan}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Chatplan}`,
 		},
 		[AdminSections.ChatGateways]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.ChatGateways}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ChatGateways}`,
 		},
 		[AdminSections.Skills]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Skills}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Skills}`,
 		},
 		[AdminSections.Buckets]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Buckets}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Buckets}`,
 		},
 		[AdminSections.Blacklist]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Blacklist}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Blacklist}`,
 		},
 		[AdminSections.Regions]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Regions}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Regions}`,
 		},
 		[AdminSections.Calendars]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Calendars}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Calendars}`,
 		},
 		[AdminSections.Communications]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Communications}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Communications}`,
 		},
 		[AdminSections.PauseCause]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.PauseCause}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseCause}`,
 		},
 		[AdminSections.Media]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Media}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,
 		},
 		[AdminSections.ShiftTemplates]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.ShiftTemplates}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ShiftTemplates}`,
 		},
 		[AdminSections.PauseTemplates]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.PauseTemplates}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseTemplates}`,
 		},
 		[AdminSections.WorkingConditions]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.WorkingConditions}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
 		},
 		[AdminSections.QuickReplies]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.QuickReplies}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.QuickReplies}`,
 		},
 		[AdminSections.Agents]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Agents}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Agents}`,
 		},
 		[AdminSections.Teams]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Teams}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Teams}`,
 		},
 		[AdminSections.Resources]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Resources}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Resources}`,
 		},
 		[AdminSections.ResourceGroups]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.ResourceGroups}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ResourceGroups}`,
 		},
 		[AdminSections.Queues]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Queues}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Queues}`,
 		},
 		[AdminSections.Storage]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Storage}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Storage}`,
 		},
 		[AdminSections.StoragePolicies]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.StoragePolicies}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.StoragePolicies}`,
 		},
 		[AdminSections.CognitiveProfiles]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.CognitiveProfiles}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.CognitiveProfiles}`,
 		},
 		[AdminSections.EmailProfiles]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.EmailProfiles}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.EmailProfiles}`,
 		},
 		[AdminSections.SingleSignOn]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.SingleSignOn}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.SingleSignOn}`,
 		},
 		[AdminSections.ImportCsv]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.ImportCsv}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ImportCsv}`,
 		},
 		[AdminSections.Triggers]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Triggers}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Triggers}`,
 		},
 		[AdminSections.Roles]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Roles}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Roles}`,
 		},
 		[AdminSections.Objects]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Objects}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Objects}`,
 		},
 		[AdminSections.Changelogs]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Changelogs}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Changelogs}`,
 		},
 		[AdminSections.Configuration]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.Configuration}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Configuration}`,
 		},
 		[AdminSections.GlobalVariables]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSectionsNew.GlobalVariables}`,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.GlobalVariables}`,
 		},
 	},
 	[WtApplication.Audit]: {
@@ -196,7 +196,7 @@ const applicationsAccess = (value = true) => ({
 		_locale: `WtApplication.${WtApplication.Audit}.name`,
 		[AuditorSections.Scorecards]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Audit}.sections.${AuditorSectionsNew.Scorecards}`,
+			_locale: `WtApplication.${WtApplication.Audit}.sections.${AuditorSections.Scorecards}`,
 		},
 	},
 	[WtApplication.Crm]: {
@@ -204,51 +204,51 @@ const applicationsAccess = (value = true) => ({
 		_locale: `WtApplication.${WtApplication.Crm}.name`,
 		[CrmSections.Contacts]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Contacts}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Contacts}`,
 		},
 		[CrmSections.Cases]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Cases}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Cases}`,
 		},
 		[CrmSections.Slas]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Slas}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Slas}`,
 		},
 		[CrmSections.Sources]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Sources}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Sources}`,
 		},
 		[CrmSections.ServiceCatalogs]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.ServiceCatalogs}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.ServiceCatalogs}`,
 		},
 		[CrmSections.CloseReasonGroups]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.CloseReasonGroups}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.CloseReasonGroups}`,
 		},
 		[CrmSections.ContactGroups]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.ContactGroups}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.ContactGroups}`,
 		},
 		[CrmSections.Priorities]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Priorities}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Priorities}`,
 		},
 		[CrmSections.Statuses]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSectionsNew.Statuses}`,
+			_locale: `WtApplication.${WtApplication.Crm}.sections.${CrmSections.Statuses}`,
 		},
-		[CrmSectionsNew.CasesExtensions]: {
+		[CrmSections.CasesExtensions]: {
 			_enabled: value,
-			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSectionsNew.CasesExtensions}`,
+			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSections.CasesExtensions}`,
 		},
-		[CrmSectionsNew.ContactsExtensions]: {
+		[CrmSections.ContactsExtensions]: {
 			_enabled: value,
-			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSectionsNew.ContactsExtensions}`,
+			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSections.ContactsExtensions}`,
 		},
-		[CrmSectionsNew.CustomLookups]: {
+		[CrmSections.CustomLookups]: {
 			_enabled: value,
-			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSectionsNew.CustomLookups}`,
+			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSections.CustomLookups}`,
 		},
 	},
 });

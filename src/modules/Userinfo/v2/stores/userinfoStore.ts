@@ -24,6 +24,7 @@ export const createUserinfoStore = () => {
 			hasDeleteAccess,
 			initialize: initializeAccessStore,
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasSectionVisibility,
 			hasApplicationVisibility,
@@ -81,6 +82,7 @@ export const createUserinfoStore = () => {
 
 			hasSectionVisibility,
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
 			logoutUser,

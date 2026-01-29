@@ -108,7 +108,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
 		WtObject.Contact,
 	],
 	[ScopeClass.Logger]: [
-		WtObject.Logger,
+		WtObject.ChangeLog,
 	], // Change log in Admin
 	[ScopeClass.Calls]: [
 		WtObject.Call,

@@ -122,6 +122,10 @@ export const createUserAccessStore = ({
 			return true;
 		};
 
+		const hasGlobalCrudActionAccess = (action: CrudAction): boolean => {
+			return !!globalAccess.value.get(action);
+		};
+
 		const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
 			return !!globalAccess.value.get(id);
 		};
@@ -151,6 +155,7 @@ export const createUserAccessStore = ({
 			hasSectionVisibility,
 
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
 

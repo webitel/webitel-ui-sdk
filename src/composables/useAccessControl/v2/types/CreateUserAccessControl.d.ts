@@ -11,6 +11,7 @@ export type UseUserAccessControlComposableOptions =
 	| {
 			resource?: WtObject;
 			useUpdateAccessAsAllMutableChecksSource?: boolean;
+			useGlobalAccessAsChecksSource?: boolean;
 	  };
 
 export interface UseAccessControlReturn {

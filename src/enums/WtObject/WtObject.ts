@@ -41,7 +41,6 @@ export const WtObject = {
 	GlobalVariable: 'globalVariable',
 	ActiveCall: 'activeCall',
 	Scorecard: 'scorecard',
-	Logger: 'logger',
 	Call: 'call',
 	RecordFile: 'recordFile',
 	ContactGroup: 'contactGroup',

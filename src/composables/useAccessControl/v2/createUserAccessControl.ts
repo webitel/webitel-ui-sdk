@@ -7,6 +7,7 @@ import type {
 	UseAccessControlReturn,
 	UseUserAccessControlComposableOptions,
 } from './types/CreateUserAccessControl';
+import { CrudAction } from '../../../enums';
 
 export const createUserAccessControlComposable = (
 	useUserinfoStore: CreateUserAccessControlComposableParams,
@@ -17,6 +18,8 @@ export const createUserAccessControlComposable = (
 		const resource = typeof options === 'string' ? options : options?.resource;
 		const useUpdateAccessAsAllMutableChecksSource =
 			options?.useUpdateAccessAsAllMutableChecksSource;
+		const useGlobalAccessAsChecksSource =
+			options?.useGlobalAccessAsChecksSource;
 
 		const route = useRoute();
 		const object = resource || route?.meta?.WtObject;
@@ -33,19 +36,38 @@ export const createUserAccessControlComposable = (
 		}
 
 		const hasReadAccess = computed(() => {
+			if (useGlobalAccessAsChecksSource) {
+				return userinfoStore.hasSpecialGlobalActionAccess(CrudAction.Read);
+			}
 			return userinfoStore.hasReadAccess(object);
 		});
+
 		const hasUpdateAccess = computed(() => {
+			if (useGlobalAccessAsChecksSource) {
+				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Update);
+			}
 			return userinfoStore.hasUpdateAccess(object);
 		});
-		const hasCreateAccess = computed(() => {
-			if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
 
+		const hasCreateAccess = computed(() => {
+			if (useUpdateAccessAsAllMutableChecksSource) {
+				return hasUpdateAccess.value;
+			}
+
+			if (useGlobalAccessAsChecksSource) {
+				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Create);
+			}
 			return userinfoStore.hasCreateAccess(object);
 		});
-		const hasDeleteAccess = computed(() => {
-			if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
 
+		const hasDeleteAccess = computed(() => {
+			if (useUpdateAccessAsAllMutableChecksSource) {
+				return hasUpdateAccess.value;
+			}
+
+			if (useGlobalAccessAsChecksSource) {
+				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Delete);
+			}
 			return userinfoStore.hasDeleteAccess(object);
 		});
 
