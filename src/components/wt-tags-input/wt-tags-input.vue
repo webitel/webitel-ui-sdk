@@ -193,6 +193,10 @@ export default {
 		// Multiple value is needed in TaggableMixin mixin to correctly add custom values
 
 		multiple: true,
+
+		// Expose enums to template
+		MessageVariant,
+		ComponentSize,
 	}),
 	created() {
 		if (!this.isApiMode) {
