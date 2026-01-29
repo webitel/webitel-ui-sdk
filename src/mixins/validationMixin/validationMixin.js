@@ -1,3 +1,5 @@
+import { MessageColor } from '../../enums';
+
 export default {
 	props: {
 		// validation rules
@@ -73,6 +75,9 @@ export default {
 				if (this.v[name]?.$invalid) validationText = text;
 			}
 			return validationText;
+		},
+		validationTextColor() {
+			return this.invalid ? MessageColor.ERROR : MessageColor.SUCCESS;
 		},
 	},
 };

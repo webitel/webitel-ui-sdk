@@ -24,13 +24,13 @@
     </header>
     <section class="audit-form-question-write-content">
       <div class="audit-form-question-write-content-question">
-        <wt-input
+        <wt-input-text
           :label="t('webitelUI.auditForm.question')"
           :v="v.question.question"
-          :value="question.question"
+          :model-value="question.question"
           prevent-trim
           required
-          @input="updateQuestion({ path: 'question', value: $event })"
+          @update:model-value="updateQuestion({ path: 'question', value: $event })"
         />
         <wt-select
           :clearable="false"
@@ -56,7 +56,6 @@ import { useI18n } from 'vue-i18n';
 import { EngineAuditQuestionType, type EngineQuestion } from 'webitel-sdk';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
-import WtInput from '../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';

@@ -9,14 +9,13 @@
         >
           {{ $t('reusable.from') }}
         </wt-label>
-        <wt-input
-          :number-max="numberMax"
-          :number-min="0"
-          :value="filterSchema.value.from"
+        <wt-input-number
+          :max="numberMax"
+          :min="0"
+          :model-value="filterSchema.value.from"
           class="filter-from-to-input"
           name="filter-from-to-from"
-          type="number"
-          @input="setFrom"
+          @update:model-value="setFrom"
         />
       </div>
       <div class="filter-from-to__input-wrapper">
@@ -26,14 +25,13 @@
         >
           {{ $t('reusable.to') }}
         </wt-label>
-        <wt-input
-          :number-max="numberMax"
-          :number-min="0"
-          :value="filterSchema.value.to"
+        <wt-input-number
+          :max="numberMax"
+          :min="0"
+          :model-value="filterSchema.value.to"
           class="filter-from-to-input"
           name="filter-from-to-to"
-          type="number"
-          @input="setTo"
+          @update:model-value="setTo"
         />
       </div>
     </div>

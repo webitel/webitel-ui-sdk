@@ -21,8 +21,6 @@ import WtIconAction from './wt-icon-action/wt-icon-action.vue';
 import WtIconBtn from './wt-icon-btn/wt-icon-btn.vue';
 import WtImage from './wt-image/wt-image.vue';
 import WtIndicator from './wt-indicator/wt-indicator.vue';
-import WtInput from './wt-input/wt-input.vue';
-import WtInputInfo from './wt-input-info/wt-input-info.vue';
 import WtInputNumber from './wt-input-number/wt-input-number.vue';
 import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
@@ -165,7 +163,6 @@ const Components = {
 	WtMessage,
 	WtIcon,
 	WtIndicator,
-	WtInputInfo,
 	WtButton,
 	WtChip,
 	WtConfirmDialog,
@@ -178,7 +175,6 @@ const Components = {
 	WtCheckbox,
 	WtDatepicker,
 	WtIconBtn,
-	WtInput,
 	WtInputNumber,
 	WtInputText,
 	WtPassword,
@@ -270,8 +266,6 @@ export {
 	WtIconBtn,
 	WtImage,
 	WtIndicator,
-	WtInput,
-	WtInputInfo,
 	WtInputNumber,
 	WtInputText,
 	WtIntersectionObserver,

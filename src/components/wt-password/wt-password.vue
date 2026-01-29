@@ -40,7 +40,7 @@
     </p-input-group>
     <wt-message
       v-if="isValidation && validationText"
-      :color="getMessageColor"
+      :color="validationTextColor"
       :variant="MessageVariant.SIMPLE"
       :size="ComponentSize.SM"
     >
@@ -101,11 +101,12 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v,
-	customValidators,
-	regleValidation,
-});
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+		regleValidation,
+	});
 
 const { focus, handleKeyup } = useInputControl(password);
 
@@ -125,10 +126,6 @@ const showPasswordIcon = computed(() => {
 
 const inputType = computed(() => {
 	return isPasswordVisible.value ? 'text' : 'password';
-});
-
-const getMessageColor = computed(() => {
-	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 const togglePassword = () => {

@@ -6,10 +6,9 @@ const value = ref(25);
 
 <template>
   <wt-time-input
-    :value="value"
+    v-model:model-value="value"
     label="min"
     :max-value="59"
-    @input="value = $event"
   />
 </template>
 

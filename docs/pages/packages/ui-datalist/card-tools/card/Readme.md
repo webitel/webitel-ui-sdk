@@ -75,9 +75,9 @@
 
 <template>
     // ...
-  <wt-input
-    :value="itemInstance.name"
-    @input="setItemProp({ value: $event, prop: 'name' })"
+  <wt-input-text
+    :model-value="itemInstance.name"
+    @update:model-value="setItemProp({ value: $event, prop: 'name' })"
   />
     // ...
 </template>
@@ -104,7 +104,7 @@
 
 <template>
     // ...
-  <wt-input
+  <wt-input-text
     v-model="modelValue.name"
   />
     // ...

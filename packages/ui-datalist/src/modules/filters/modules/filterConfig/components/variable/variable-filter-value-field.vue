@@ -1,6 +1,6 @@
 <template>
-  <wt-input
-    v-model="model"
+  <wt-input-text
+    v-model:model-value="model"
     :label="t('webitelUI.filters.filterValue')"
     :v="v$.model"
   />
@@ -16,33 +16,41 @@ type ModelValue = string;
 
 const model = defineModel<ModelValue>();
 if (!model.value) {
-  model.value = '';
+	model.value = '';
 }
 
 const { t } = useI18n();
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required: variableSearchValidator(),
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			required: variableSearchValidator(),
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 v$.value.$touch();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

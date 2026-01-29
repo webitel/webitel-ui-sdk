@@ -92,12 +92,14 @@
       </template>
     </vue-multiselect>
 
-    <wt-input-info
-      v-if="isValidation"
-      :invalid="invalid"
+    <wt-message
+      v-if="isValidation && validationText"
+      :color="validationTextColor"
+      :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
     >
       {{ validationText }}
-    </wt-input-info>
+    </wt-message>
   </div>
 </template>
 
@@ -107,6 +109,7 @@ import deepEqual from 'deep-equal';
 import validationMixin from '../../mixins/validationMixin/validationMixin';
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
+import { MessageVariant, ComponentSize } from '../../enums';
 
 export default {
 	name: 'WtTagsInput',
