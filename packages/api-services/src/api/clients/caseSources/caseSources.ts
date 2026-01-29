@@ -1,8 +1,8 @@
 import {
-	createSourceBody,
-	getSources,
-	listSourcesQueryParams,
-	updateSourceBody,
+  CreateSourceBody,
+  getSources,
+  ListSourcesQueryParams,
+  UpdateSourceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -18,8 +18,8 @@ import {
 
 const getSourcesList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		listSourcesQueryParams,
-	);
+    ListSourcesQueryParams,
+  );
 
 	const { page, size, fields, sort, id, q, type } = applyTransform(params, [
 		merge(getDefaultGetParams()),
@@ -61,30 +61,30 @@ const getSource = async ({ itemId: id }) => {
 };
 
 const addSource = async ({ itemInstance }) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(createSourceBody)),
-		camelToSnake(),
-	]);
-	try {
-		const response = await getSources().createSource(item);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  const item = applyTransform(itemInstance, [
+    sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
+    camelToSnake(),
+  ]);
+  try {
+    const response = await getSources().createSource(item);
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const updateSource = async ({ itemInstance, itemId: id }) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(updateSourceBody)),
-		camelToSnake(),
-	]);
+  const item = applyTransform(itemInstance, [
+    sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
+    camelToSnake(),
+  ]);
 
-	try {
-		const response = await getSources().updateSource(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
+  try {
+    const response = await getSources().updateSource(id, item);
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
 };
 
 const deleteSource = async ({ id }) => {

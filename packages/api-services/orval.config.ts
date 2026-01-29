@@ -4,12 +4,6 @@ import {
   generateAxiosHeader,
   generateAxiosTitle,
 } from '@orval/axios';
-import {
-  builder as zodBuilder,
-  getZodDependencies,
-} from '@orval/zod';
-import { pascalCase as pascal } from 'change-case';
-import isJson from 'is-json';
 import { defineConfig } from 'orval';
 
 const outputWorkspace = './src/gen';
@@ -22,60 +16,30 @@ const runFormatterCLICommand =
   // 'true';
   'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
 
-const inputOverrideTransformer = (openApi /*: OpenAPIObject*/) => {
-  for (const [name, schema] of Object.entries(
-    openApi.components?.schemas ?? {},
-  )) {
-    const enumProp = schema /* as SchemaObject*/.enum;
-    const defaultValueProp = schema /* as SchemaObject*/.default;
-
-    if (enumProp) {
-      openApi.components.schemas[name]['x-enumNames'] = enumProp.map(pascal);
-    }
-
-    if (defaultValueProp && isJson(defaultValueProp)) {
-      openApi.components.schemas[name].default = JSON.parse(defaultValueProp);
-    }
-
-    for (const [nameNested, schemaNested] of Object.entries(
-      schema /* as SchemaObject*/?.properties ?? {},
-    )) {
-      const enumProp = schemaNested /* as SchemaObject*/.enum;
-      if (enumProp) {
-        openApi.components.schemas[name] /* as SchemaObject*/.properties[
-          nameNested
-        ]['x-enumNames'] = enumProp.map(pascal);
-      }
-    }
-  }
-
-  return openApi;
-};
-
 export default defineConfig({
   main: {
     input: {
       target: inputTarget,
-      override: {
-        transformer: inputOverrideTransformer,
-        //   transformer: (openAPIObject) => {
-        //     console.info(JSON.stringify(openAPIObject, null, 2));
-        //     return openAPIObject;
-        //   },
-      },
     },
     output: {
       workspace: outputWorkspace,
       target: outputTarget,
-      fileExtension: `.api.${sharedGenFileExtension}`,
+      // fileExtension: `.api.${sharedGenFileExtension}`,
       // client: 'axios',
       client: axiosClient,
       mock: true,
       mode: 'tags-split',
       clean: true,
       indexFiles: true,
-      schemas: '_models',
+      schemas: './_models',
+      // {
+      //   path: './_models',
+      //   type: 'typescript',
+      // },
       override: {
+        namingConvention: {
+          enum: 'PascalCase',
+        },
         // Use this to view transformed options formatting
         // transformer: (options: GeneratorVerbOptions): GeneratorVerbOptions => {
         //   console.info(JSON.stringify(options, null, 2));
@@ -91,19 +55,24 @@ export default defineConfig({
   zod: {
     input: {
       target: inputTarget,
-      override: {
-        transformer: inputOverrideTransformer,
-      },
     },
     output: {
       workspace: outputWorkspace,
       target: outputTarget,
-      fileExtension: `.zod.${sharedGenFileExtension}`,
-      client: zodClient,
+      fileExtension: '.zod.ts',
+      // fileExtension: `.zod.${sharedGenFileExtension}`,
+      client: 'zod',
       mode: 'tags-split',
       indexFiles: true,
-      schemas: '_models',
+      schemas: './_models',
+      // {
+      //   path: './_models',
+      //   type: 'zod',
+      // },
       override: {
+        namingConvention: {
+          enum: 'PascalCase',
+        },
         zod: {
           generate: {
             response: true, // minimum required, least is optional, hai bude
@@ -112,10 +81,6 @@ export default defineConfig({
             param: true,
             body: true,
           },
-          // coerce: {
-          //   response: [ 'boolean'],
-          //   query: ['string', 'number', 'boolean', 'bigint', 'date'],
-          // },
         },
       },
     },
@@ -175,25 +140,5 @@ function axiosClient() {
             ${generateAxiosTitle(title)}
             // --- title end
           `,
-  };
-}
-
-// rm me when will be officially supported: https://github.com/orval-labs/orval/issues/2091
-function zodClient() {
-  const zBuilder = zodBuilder()();
-  const deps = getZodDependencies().map((dep) => {
-    if (dep.dependency === 'zod') {
-      return {
-        ...dep,
-        dependency: 'zod/v4', // make import {} from 'zod' -> import {} from 'zod/v4'
-      };
-    }
-
-    return dep;
-  });
-
-  return {
-    ...zBuilder,
-    dependencies: () => deps,
   };
 }
