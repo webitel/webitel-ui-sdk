@@ -24,7 +24,7 @@
       <p-input-number
         :id="inputId"
         ref="inputNumber"
-        v-model="model"
+        :model-value="model"
         :use-grouping="useGrouping"
         :disabled="disabled"
         :invalid="invalid"
@@ -38,6 +38,7 @@
         input-class="wt-input-number__input typo-body-1 wt-placeholder"
         v-bind="$attrs"
         @keyup="handleKeyup"
+        @input="emit('update:modelValue', $event.value)"
       >
       <template #incrementbuttonicon>
           <wt-icon
@@ -75,7 +76,14 @@
 <script setup lang="ts">
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
-import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	defineEmits,
+	defineModel,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 
 import { useInputControl } from '../../composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
@@ -122,6 +130,10 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 const model = defineModel<number | null>({
 	default: null,
 });
+
+const emit = defineEmits([
+	'update:modelValue',
+]);
 
 const inputNumber = useTemplateRef('inputNumber');
 
