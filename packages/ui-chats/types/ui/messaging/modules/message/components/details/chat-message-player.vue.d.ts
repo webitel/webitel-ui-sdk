@@ -1,4 +1,4 @@
-import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
+import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 type __VLS_Props = {
     file: ChatMessageFile;
     type: string;
