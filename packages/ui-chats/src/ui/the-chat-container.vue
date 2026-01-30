@@ -71,7 +71,7 @@ const props = withDefaults(
 		canLoadNextMessages?: boolean; // 'next'
 		isNextMessagesLoading?: boolean;
 		withoutAvatars?: boolean;
-    readonly?: boolean;
+    readonly?: boolean; // hide chat footer with textarea and action-buttons
 	}>(),
 	{
 		size: ComponentSize.MD,
