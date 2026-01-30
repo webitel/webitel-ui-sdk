@@ -1,50 +1,47 @@
 <template>
   <section class="the-chat-container">
-    <!-- <slot name="header">
-            header goes here
-        </slot> -->
-        <slot name="main">
-          <dropzone
-            v-if="!isDropzoneDisabled && isDropzoneVisible"
-            @dragenter.prevent
-            @dragleave.prevent="handleDragLeave"
-            @drop="sendFile"
+    <slot name="main">
+      <dropzone
+        v-if="!isDropzoneDisabled && isDropzoneVisible"
+        @dragenter.prevent
+        @dragleave.prevent="handleDragLeave"
+        @drop="sendFile"
+      />
+      <messages-container
+        :messages="props.messages"
+        :next="props.canLoadNextMessages"
+        :is-loading="props.isNextMessagesLoading"
+        :without-avatars="props.withoutAvatars"
+        @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
+      />
+    </slot>
+    <slot name="footer">
+      <chat-footer-wrapper v-if="!props.readonly">
+        <template #default>
+          <chat-text-field
+            v-model:text="draft"
+            @enter="sendMessage"
           />
-          <messages-container
-            :messages="props.messages"
-            :next="props.canLoadNextMessages"
-            :is-loading="props.isNextMessagesLoading"
-            :without-avatars="props.withoutAvatars"
-            @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
+          <chat-input-actions-bar
+            :actions="props.chatActions"
+            @[ChatAction.SendMessage]="sendMessage"
             @[ChatAction.AttachFiles]="sendFile"
-          />
-        </slot>
-        <slot name="footer">
-          <chat-footer-wrapper>
-            <template #default>
-              <chat-text-field
-                v-model:text="draft"
+          >
+            <template
+              v-for="action in slottedChatActions"
+              :key="action"
+              #[action]="{ size }"
+            >
+              <slot
+                :name="`action:${action}`"
+                v-bind="{ size }"
               />
-              <chat-input-actions-bar
-                :actions="props.chatActions"
-                @[ChatAction.SendMessage]="sendMessage"
-                @[ChatAction.AttachFiles]="sendFile"
-              >
-                <template
-                  v-for="action in slottedChatActions"
-                  :key="action"
-                  #[action]="{ size }"
-                >
-                  <slot
-                    :name="`action:${action}`"
-                    v-bind="{ size }"
-                  />
-                </template>
-              </chat-input-actions-bar>
             </template>
-          </chat-footer-wrapper>
-        </slot>
-    </section>
+          </chat-input-actions-bar>
+        </template>
+      </chat-footer-wrapper>
+    </slot>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -74,15 +71,17 @@ const props = withDefaults(
 		canLoadNextMessages?: boolean; // 'next'
 		isNextMessagesLoading?: boolean;
 		withoutAvatars?: boolean;
+    readonly?: boolean; // hide chat footer with textarea and action-buttons
 	}>(),
 	{
 		size: ComponentSize.MD,
 		withoutAvatars: false,
-		chatActions: () => [
-			ChatAction.SendMessage,
-		],
+    chatActions: () => [
+      ChatAction.SendMessage,
+    ],
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
+    readonly: false,
 	},
 );
 
