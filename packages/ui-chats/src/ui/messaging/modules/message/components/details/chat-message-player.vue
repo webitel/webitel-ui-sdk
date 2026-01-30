@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from "vue";
+import { computed, defineEmits, defineProps } from 'vue';
 
-import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
+import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
 	file: ChatMessageFile;
@@ -36,11 +36,13 @@ const emit = defineEmits<{
 const mediaUrl = computed(() => props.file.streamUrl || props.file.url);
 
 function handlePlayerInitialize(player) {
-	emit("initialized", player);
+	emit('initialized', player);
 }
 </script>
 
 <style lang="scss" scoped>
+$chat-file-max-width: 280px;
+$chat-file-max-height: 280px;
 .chat-message-player {
   .wt-player :deep(.plyr) {
     .wt-player__close-icon,
@@ -49,8 +51,8 @@ function handlePlayerInitialize(player) {
     }
 
     &.plyr--video {
-      max-height: var(--chat-file-max-height);
-      max-width: var(--chat-file-max-width);
+      max-height: $chat-file-max-height;
+      max-width: $chat-file-max-width;
     }
   }
 }
