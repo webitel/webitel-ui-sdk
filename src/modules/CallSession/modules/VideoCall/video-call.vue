@@ -14,7 +14,7 @@
     <template #content="{ size: innerSize }">
       <slot name="content" :size="innerSize" />
 
-      <slot v-if="!mainStream" name="overlay" :size="innerSize">
+      <slot v-if="showReceiverOverlay" name="overlay" :size="innerSize">
         <div class="video-call-overlay">
           <div
             v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
@@ -213,6 +213,10 @@ const mainStream = computed(() => {
 	return props['receiver:stream'] || props['sender:stream'];
 });
 
+const showReceiverOverlay = computed(() => {
+	return !props['receiver:video:enabled'] && props['receiver:stream'];
+});
+
 const receiverVideoMutedIconSizes = {
 	[ComponentSize.SM]: ComponentSize.MD,
 	[ComponentSize.MD]: ComponentSize.LG,
@@ -319,6 +323,7 @@ const senderVideoMutedIconSizes = {
 
 .video-call-receiver--sm .video-call-receiver-text {
   max-width: 73px;
+  text-align: center;
 }
 
 .video-call-receiver--muted {
@@ -357,7 +362,7 @@ const senderVideoMutedIconSizes = {
   padding-bottom: var(--p-player-control-bar-sm-height);
 }
 
-.video-call-sender--sm {
+.video-call-sender.video-call-sender--sm {
   width: var(--p-player-cam-preview-sm-width);
   height: var(--p-player-cam-preview-sm-height);
   position: relative;
