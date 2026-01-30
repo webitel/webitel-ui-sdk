@@ -208,7 +208,7 @@ const emitKeys = {
 const { t } = useI18n();
 
 const mainStream = computed(() => {
-	if (!props['receiver:video:enabled']) return props['sender:stream'];
+	if (!props['receiver:video:enabled']) return null;
 
 	return props['receiver:stream'] || props['sender:stream'];
 });
