@@ -76,7 +76,9 @@ const props = withDefaults(
 	{
 		size: ComponentSize.MD,
 		withoutAvatars: false,
-		chatActions: () => [],
+    chatActions: () => [
+      ChatAction.SendMessage,
+    ],
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
     readonly: false,
