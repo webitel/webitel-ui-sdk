@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :stream="mainStream"
+    :src="mainStream"
     :static="props.static"
     :size="props.size"
     :class="[!props.static && `video-call-position--${props.position}`]"
@@ -17,7 +17,6 @@
       <slot v-if="showReceiverOverlay" name="overlay" :size="innerSize">
         <div class="video-call-overlay">
           <div
-            v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
@@ -50,7 +49,7 @@
 
         <template v-else-if="props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
-            :stream="props['sender:stream']"
+            :src="props['sender:stream']"
             :class="`video-call-sender--${innerSize}`"
             hide-video-display-panel
             hide-controls-panel
