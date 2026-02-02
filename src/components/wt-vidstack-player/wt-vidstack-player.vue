@@ -149,6 +149,8 @@ const normalizedSrc = computed(() => {
 });
 
 const onCanPlay = (ev: Event) => {
+	if (!props.autoplay) return;
+
 	(ev.target as HTMLMediaElement)?.play();
 };
 </script>
