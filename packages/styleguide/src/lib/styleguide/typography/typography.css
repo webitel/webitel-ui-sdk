@@ -2,7 +2,12 @@
 NOTE:   text-transform: none; is set explicitly cause t-t is inherited from parent
  */
 
-@layer typography {
+/* 
+	@author HlukhovYe
+	layer needed for overriding primevue's default typography for the components
+	https://webitel.atlassian.net/browse/WTEL-8775?focusedCommentId=723773
+*/
+@layer wt-typography {
 	.typo-heading-1 {
 		font-family: "Montserrat", monospace;
 		font-size: 32px;

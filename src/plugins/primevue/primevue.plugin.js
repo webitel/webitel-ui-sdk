@@ -44,7 +44,7 @@ const initPrimevue = (app) => {
 				darkModeSelector: '.theme--dark',
 				cssLayer: {
 					name: 'primevue',
-					order: 'base, primevue, typography',
+					order: 'base, primevue, wt-typography',
 				},
 			},
 		},
