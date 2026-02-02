@@ -17,7 +17,7 @@
     <p-input-group>
       <p-input-group-addon 
         v-if="$slots.prefix" 
-        class="wt-input-text__addon typo-body-1 wt-placeholder"
+        class="wt-input-text__addon typo-body-1"
       >
         <slot name="prefix" />
       </p-input-group-addon>
@@ -36,7 +36,7 @@
       />
       <p-input-group-addon 
         v-if="$slots.suffix"
-        class="wt-input-text__addon typo-body-1 wt-placeholder"
+        class="wt-input-text__addon typo-body-1"
       >
         <slot name="suffix" />
       </p-input-group-addon>

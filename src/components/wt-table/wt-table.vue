@@ -16,6 +16,9 @@
     scroll-height="flex"
     scrollable
     :virtual-scroller-options="virtualScroll"
+    :pt="{
+      tableContainer: 'wt-scrollbar'
+    }"
     @sort="sort"
     @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"

@@ -17,7 +17,7 @@
     <p-input-group>
       <p-input-group-addon 
         v-if="$slots.prefix"
-        class="wt-input-number__addon typo-body-1 wt-placeholder"
+        class="wt-input-number__addon typo-body-1"
       >
         <slot name="prefix" />
       </p-input-group-addon>
@@ -35,7 +35,7 @@
         :max-fraction-digits="maxFractionDigits"
         :placeholder="placeholder || label"
         :show-buttons="showButtons"
-        input-class="wt-input-number__input typo-body-1 wt-placeholder"
+        input-class="wt-input-number__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
         @input="emit('update:modelValue', $event.value)"
@@ -57,7 +57,7 @@
       </p-input-number>
       <p-input-group-addon 
         v-if="$slots.suffix"
-        class="wt-input-number__addon typo-body-1 wt-placeholder"
+        class="wt-input-number__addon typo-body-1"
       >
         <slot name="suffix" />
       </p-input-group-addon>
