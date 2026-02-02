@@ -42,6 +42,10 @@ const initPrimevue = (app) => {
 			preset: WebitelTheme,
 			options: {
 				darkModeSelector: '.theme--dark',
+				cssLayer: {
+					name: 'primevue',
+					order: 'base, primevue, wt-typography',
+				},
 			},
 		},
 	});

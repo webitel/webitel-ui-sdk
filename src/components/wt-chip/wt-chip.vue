@@ -1,6 +1,6 @@
 <template>
   <p-chip
-	class="wt-chip typo-caption"
+	class="wt-chip typo-body-2"
     :class="`p-chip-${color}`"
     :removable="removable"
   >
