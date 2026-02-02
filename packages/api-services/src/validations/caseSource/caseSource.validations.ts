@@ -1,4 +1,4 @@
-import { createSourceBody as genCaseSourceSchema } from '../../gen';
+import { CreateSourceBody as genCaseSourceSchema } from '../../gen';
 
 export const caseSourceSchema = genCaseSourceSchema.extend({
 	name: genCaseSourceSchema.shape.name.default(''),
