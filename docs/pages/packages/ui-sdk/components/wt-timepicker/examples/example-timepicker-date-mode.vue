@@ -6,7 +6,7 @@ const value = ref(Date.now());
 
 <template>
   <wt-timepicker
-    v-model="value"
+    v-model:model-value="value"
     date-mode
   />
   value: {{ value }}
