@@ -14,9 +14,10 @@
     <template #content="{ size: innerSize }">
       <slot name="content" :size="innerSize" />
 
-      <slot v-if="showReceiverOverlay" name="overlay" :size="innerSize">
+      <slot name="overlay" :size="innerSize">
         <div class="video-call-overlay">
           <div
+            v-if="showReceiverOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
