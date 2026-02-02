@@ -131,9 +131,11 @@ const normalizedSrc = computed(() => {
   };
 });
 
-const onCanPlay = (ev: unknown) => {
-  ev?.srcElement?.play()
-}
+const onCanPlay = (ev: Event) => {
+	if (!props.autoplay) return;
+
+	(ev.target as HTMLMediaElement)?.play();
+};
 </script>
 
 <style scoped lang="scss">
