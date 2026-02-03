@@ -1,8 +1,14 @@
 name: webitel ui-chats pkg publish
 
 on:
-#  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
+  #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
   workflow_dispatch:
+    inputs:
+      npm_tag:
+        description: "NPM tag - latest, next, etc."
+        required: false
+        default: latest
+        type: string
 
 jobs:
   publish:
@@ -21,7 +27,9 @@ jobs:
 
       - name: Publish release
         id: publish_release
-   
+        env:
+          HUSKY: 0 #https://typicode.github.io/husky/how-to.html#ci-server-and-docker
+          NPM_TAG: ${{ inputs.npm_tag }}
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}    
           cd packages/ui-chats
