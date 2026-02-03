@@ -3,6 +3,7 @@
     :model-value="value"
     :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
     :invalid="invalid"
+		class="wt-search-bar"
     type="search"
     @update:model-value="handleInput"
     @keyup="handleKeyup"
@@ -184,6 +185,15 @@ function updateSearchMode({ option }) {
 </script>
 
 <style scoped>
+.wt-search-bar {
+	/* 
+	@author HlukhovYe
+	fixed width to prevent component from growing 
+	https://webitel.atlassian.net/browse/WTEL-8812
+	*/
+	width: var(--wt-search-bar-width);
+}
+
 .wt-search-bar__icon-controls {
   display: flex;
   align-items: center;
