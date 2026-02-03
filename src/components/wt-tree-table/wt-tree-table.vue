@@ -18,7 +18,8 @@
             class="wt-tree-table-th typo-body-1"
             @click="sort(col, key)"
           >
-            <div class="wt-tree-table-th__content">
+            <div class="wt-tree-table-th__content"
+                 :class="{'wt-tree-table-th__content--selectable': key === 0 && selectable}">
               <div
                 v-if="key === 0 && selectable"
                 @click.stop
@@ -286,6 +287,10 @@ const handleSelection = (row, select) => {
   border-color: var(--wt-tree-table-head-border-color);
   border-radius: var(--border-radius);
   background: var(--wt-tree-table-head-background-color);
+}
+
+.wt-tree-table-th__content--selectable {
+  display: flex;
 }
 
 .wt-tree-table-wrapper {
