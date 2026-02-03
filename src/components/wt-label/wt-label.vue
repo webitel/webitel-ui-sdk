@@ -51,12 +51,12 @@ defineProps<{
   padding: var(--wt-label-padding);
 }
 
-.wt-label--invalid {
-  color: var(--wt-label-error-color);
+.wt-label--disabled {
+	color: var(--wt-label-disabled-color);
 }
 
-.wt-label--disabled {
-  color: var(--wt-label-disabled-color);
+.wt-label--invalid {
+  color: var(--wt-label-error-color);
 }
 
 .wt-label--required::after {
