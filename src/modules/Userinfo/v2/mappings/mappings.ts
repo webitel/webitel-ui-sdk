@@ -169,6 +169,7 @@ export const wtObjectsWithNoScopeExceptions: Partial<
 	Record<WtObject, boolean>
 > = {
 	[WtObject.License]: true,
+	[WtObject.Object]: true,
 };
 
 export const mapScopeClassAccessTokenToCrudAction = {
