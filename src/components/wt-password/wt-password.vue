@@ -24,9 +24,8 @@
         :placeholder="placeholder || label"
         :toggle-mask="false"
         :feedback="false"
-        class="typo-body-1"
         :input-props="{ type: inputType }"
-        input-class="wt-password__input"
+        input-class="wt-password__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
       >
