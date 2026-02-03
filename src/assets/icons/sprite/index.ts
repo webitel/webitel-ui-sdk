@@ -195,6 +195,8 @@ import sharingEnd from './sharing-end.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
+import sortAsc from './sort-asc.svg?raw';
+import sortDesc from './sort-desc.svg?raw';
 import soundOff from './sound-off.svg?raw';
 import soundOn from './sound-on.svg?raw';
 import star from './star.svg?raw';
@@ -229,8 +231,6 @@ import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
-import sortAsc from './sort-asc.svg?raw';
-import sortDesc from './sort-desc.svg?raw';
 
 export default objCamelToKebab({
 	account,
