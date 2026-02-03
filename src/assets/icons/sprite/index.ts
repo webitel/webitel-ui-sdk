@@ -229,6 +229,8 @@ import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
+import sortAsc from './sort-asc.svg?raw';
+import sortDesc from './sort-desc.svg?raw';
 
 export default objCamelToKebab({
 	account,
@@ -468,4 +470,6 @@ export default objCamelToKebab({
 	screenshotFalse,
 	sharingEnd,
 	protectionError,
+	sortAsc,
+	sortDesc,
 }) as Record<string, string>;
