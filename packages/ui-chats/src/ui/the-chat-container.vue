@@ -71,17 +71,17 @@ const props = withDefaults(
 		canLoadNextMessages?: boolean; // 'next'
 		isNextMessagesLoading?: boolean;
 		withoutAvatars?: boolean;
-    readonly?: boolean; // hide chat footer with textarea and action-buttons
+		readonly?: boolean; // hide chat footer with textarea and action-buttons
 	}>(),
 	{
 		size: ComponentSize.MD,
 		withoutAvatars: false,
-    chatActions: () => [
-      ChatAction.SendMessage,
-    ],
+		chatActions: () => [
+			ChatAction.SendMessage,
+		],
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
-    readonly: false,
+		readonly: false,
 	},
 );
 

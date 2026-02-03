@@ -1,1 +1,1 @@
-export {};
+export { setConfig } from "./config/config";

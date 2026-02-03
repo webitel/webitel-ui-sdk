@@ -1,5 +1,5 @@
-import type { I18n } from 'vue-i18n';
-import { messages } from '../locale';
+import type { I18n } from "vue-i18n";
+import { messages } from "../locale";
 
 export type UiChatsConfig = {
 	i18n?: I18n;
@@ -13,7 +13,7 @@ export const setConfig = (conf: UiChatsConfig) => {
 	Object.assign(defaultConfig, conf);
 
 	if (!conf.i18n?.global) {
-		throw new Error('i18n is required');
+		throw new Error("i18n is required");
 	}
 
 	Object.entries(messages).forEach(([locale, localeMessages]) => {
