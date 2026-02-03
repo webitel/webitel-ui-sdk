@@ -200,13 +200,6 @@ onMounted(() => {
   overflow-wrap: break-word;
 }
 
-.wt-tree-table-td__actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: var(--spacing-xs);
-}
-
 .wt-tree-table-td__content {
   display: flex;
   align-items: center;

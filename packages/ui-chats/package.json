@@ -13,7 +13,7 @@
 		"build": "(npm run build:types || true)",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
 		"lint:biome": "biome check --write",
-		"utils:publish": "npm publish --access public"
+		"utils:publish": "npm publish --access public --tag ${NPM_TAG:-latest}"
 	},
 	"dependencies": {
 		"autolinker": "^4.1.5",
