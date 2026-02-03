@@ -14,7 +14,7 @@ export const WtObject = {
 	Dialplan: 'dialplan',
 	Gateway: 'gateway',
 	Chatplan: 'chatplan',
-	ChatGateway: 'chatGateway',
+	ChatGateway: 'chatGateway', // or "chat_bot"
 	Blacklist: 'blacklist',
 	Calendar: 'calendar',
 	Communication: 'communication',
@@ -44,7 +44,6 @@ export const WtObject = {
 	Call: 'call',
 	RecordFile: 'recordFile',
 	ContactGroup: 'contactGroup',
-	ChatBot: 'chatBot',
 	Case: 'case',
 	CaseComment: 'caseComment',
 	Slas: 'slas',

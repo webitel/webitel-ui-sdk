@@ -40,9 +40,6 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
 	[ScopeClass.AcrChatPlan]: [
 		WtObject.Chatplan,
 	],
-	[ScopeClass.Chats]: [
-		WtObject.ChatGateway,
-	],
 	[ScopeClass.Dictionaries]: [
 		WtObject.Region,
 		WtObject.Bucket,
@@ -120,7 +117,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
 		WtObject.ContactGroup,
 	], //CRM
 	[ScopeClass.ChatBots]: [
-		WtObject.ChatBot,
+		WtObject.ChatGateway,
 	], // routing cht_gateway
 	[ScopeClass.Cases]: [
 		WtObject.Case,
