@@ -2,11 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { NavigationGuard } from 'vue-router';
 
-import {
-	CrudAction,
-	type WtApplication,
-	type WtObject,
-} from '../../../../enums';
+import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
 import type { SpecialGlobalAction } from '../enums';
 import {
 	getWtAppByUiSection,

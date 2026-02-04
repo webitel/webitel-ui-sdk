@@ -1,7 +1,7 @@
 import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
 
-import ApplicationsAccess from '../../../modules/Userinfo/classes/ApplicationsAccess.js';
+import { ApplicationsAccess } from '../../../modules/Userinfo';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,

@@ -1,30 +1,49 @@
-import { computed } from 'vue';
+import { computed, Ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { _wtUiLog } from '../../../scripts/logger';
-import type {
-	CreateUserAccessControlComposableParams,
-	UseAccessControlReturn,
-	UseUserAccessControlComposableOptions,
-} from './types/CreateUserAccessControl';
-import { CrudAction } from '../../../enums';
+import type { UserAccessStore } from '../types/UserAccess.d.ts';
+import { CrudAction, type WtObject } from '../../../enums';
+import { createUserAccessStore } from '../stores/accessStore';
+
+export type UseUserAccessControlComposableOptions =
+	| WtObject
+	| {
+			resource?: WtObject;
+			useUpdateAccessAsAllMutableChecksSource?: boolean;
+			useGlobalCrudActionAccessAsChecksSource?: boolean;
+	  };
+
+export interface UseAccessControlReturn {
+	hasReadAccess: Ref<boolean>;
+	hasCreateAccess: Ref<boolean>;
+	hasUpdateAccess: Ref<boolean>;
+	hasDeleteAccess: Ref<boolean>;
+
+	hasSaveActionAccess: Ref<boolean>;
+	disableUserInput: Ref<boolean>;
+}
 
 export const createUserAccessControlComposable = (
-	useUserinfoStore: CreateUserAccessControlComposableParams,
+	useUserinfoStore: ReturnType<typeof createUserAccessStore>,
 ) => {
 	const useUserAccessControl = (
 		options?: UseUserAccessControlComposableOptions,
 	): UseAccessControlReturn => {
 		const resource = typeof options === 'string' ? options : options?.resource;
 		const useUpdateAccessAsAllMutableChecksSource =
-			options?.useUpdateAccessAsAllMutableChecksSource;
-		const useGlobalAccessAsChecksSource =
-			options?.useGlobalAccessAsChecksSource;
+			typeof options === 'object' && options !== null
+				? options.useUpdateAccessAsAllMutableChecksSource
+				: false;
+		const useGlobalCrudActionAccessAsChecksSource =
+			typeof options === 'object' && options !== null
+				? options.useGlobalCrudActionAccessAsChecksSource
+				: false;
 
 		const route = useRoute();
 		const object = resource || route?.meta?.WtObject;
 
-		const userinfoStore = useUserinfoStore();
+		const userinfoStore = useUserinfoStore() as UserAccessStore;
 
 		if (!object) {
 			_wtUiLog.error({
@@ -36,14 +55,14 @@ export const createUserAccessControlComposable = (
 		}
 
 		const hasReadAccess = computed(() => {
-			if (useGlobalAccessAsChecksSource) {
-				return userinfoStore.hasSpecialGlobalActionAccess(CrudAction.Read);
+			if (useGlobalCrudActionAccessAsChecksSource) {
+				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Read);
 			}
 			return userinfoStore.hasReadAccess(object);
 		});
 
 		const hasUpdateAccess = computed(() => {
-			if (useGlobalAccessAsChecksSource) {
+			if (useGlobalCrudActionAccessAsChecksSource) {
 				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Update);
 			}
 			return userinfoStore.hasUpdateAccess(object);
@@ -54,7 +73,7 @@ export const createUserAccessControlComposable = (
 				return hasUpdateAccess.value;
 			}
 
-			if (useGlobalAccessAsChecksSource) {
+			if (useGlobalCrudActionAccessAsChecksSource) {
 				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Create);
 			}
 			return userinfoStore.hasCreateAccess(object);
@@ -65,7 +84,7 @@ export const createUserAccessControlComposable = (
 				return hasUpdateAccess.value;
 			}
 
-			if (useGlobalAccessAsChecksSource) {
+			if (useGlobalCrudActionAccessAsChecksSource) {
 				return userinfoStore.hasGlobalCrudActionAccess(CrudAction.Delete);
 			}
 			return userinfoStore.hasDeleteAccess(object);

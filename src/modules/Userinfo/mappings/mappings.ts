@@ -8,7 +8,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 	WtObject,
-} from '../../../../enums';
+} from '../../../enums';
 import { CrudGlobalAction, ScopeClass, SpecialGlobalAction } from '../enums';
 
 export const mapGlobalActionToCrudAction = {
@@ -21,149 +21,150 @@ export const mapGlobalActionToCrudAction = {
 export const mapCrudActionToGlobalAction = invert(mapGlobalActionToCrudAction);
 
 /* one-to-many */
-export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
-	[ScopeClass.Users]: [
-		WtObject.User,
-	],
-	[ScopeClass.Devices]: [
-		WtObject.Device,
-	],
-	[ScopeClass.Schema]: [
-		WtObject.Flow,
-	],
-	[ScopeClass.AcrRouting]: [
-		WtObject.Dialplan,
-	],
-	[ScopeClass.Gateways]: [
-		WtObject.Gateway,
-	],
-	[ScopeClass.AcrChatPlan]: [
-		WtObject.Chatplan,
-	],
-	[ScopeClass.Dictionaries]: [
-		WtObject.Region,
-		WtObject.Bucket,
-		WtObject.Communication,
-		WtObject.PauseCause,
-		WtObject.Source,
-		WtObject.Slas,
-		WtObject.Priorities,
-		WtObject.CloseReasonGroup,
-		WtObject.ServiceCatalog,
-		WtObject.Status,
-	],
-	[ScopeClass.List]: [
-		WtObject.Blacklist,
-	],
-	[ScopeClass.Skills]: [
-		WtObject.Skill,
-	],
-	[ScopeClass.Calendars]: [
-		WtObject.Calendar,
-	],
-	[ScopeClass.MediaFile]: [
-		WtObject.Media,
-	],
-	[ScopeClass.Agent]: [
-		WtObject.Agent,
-	],
-	[ScopeClass.Queue]: [
-		WtObject.Queue,
-		WtObject.Member,
-	],
-	[ScopeClass.ResourceGroup]: [
-		WtObject.ResourceGroup,
-	],
-	[ScopeClass.Resource]: [
-		WtObject.Resource,
-	],
-	[ScopeClass.Team]: [
-		WtObject.Team,
-	],
-	[ScopeClass.StorageProfile]: [
-		WtObject.Storage,
-	],
-	[ScopeClass.CognitiveProfile]: [
-		WtObject.CognitiveProfile,
-	],
-	[ScopeClass.EmailProfile]: [
-		WtObject.EmailProfile,
-	],
-	[ScopeClass.SingleSignOn]: [
-		WtObject.SingleSignOn,
-	],
-	[ScopeClass.ImportTemplate]: [
-		WtObject.ImportCsv,
-	],
-	[ScopeClass.Trigger]: [
-		WtObject.Trigger,
-	],
-	[ScopeClass.Role]: [
-		WtObject.Role,
-	],
-	[ScopeClass.Contacts]: [
-		WtObject.Contact,
-	],
-	[ScopeClass.Logger]: [
-		WtObject.ChangeLog,
-	], // Change log in Admin
-	[ScopeClass.Calls]: [
-		WtObject.Call,
-	], // Call history
-	[ScopeClass.RecordFile]: [
-		WtObject.RecordFile,
-	], // Call history
-	[ScopeClass.ContactGroups]: [
-		WtObject.ContactGroup,
-	], //CRM
-	[ScopeClass.ChatBots]: [
-		WtObject.ChatGateway,
-	], // routing cht_gateway
-	[ScopeClass.Cases]: [
-		WtObject.Case,
-	], // CRM
-	[ScopeClass.CaseComments]: [
-		WtObject.CaseComment,
-	],
-	[ScopeClass.AuditForm]: [
-		WtObject.AuditForm,
-	],
-	[ScopeClass.AuditRating]: [
-		WtObject.AuditRating,
-	],
-	[ScopeClass.PauseTemplates]: [
-		WtObject.PauseTemplate,
-	],
-	[ScopeClass.ShiftTemplates]: [
-		WtObject.ShiftTemplate,
-	],
-	[ScopeClass.WorkingConditions]: [
-		WtObject.WorkingCondition,
-	],
-	[ScopeClass.AgentWorkingConditions]: [
-		WtObject.AgentWorkingCondition,
-	],
-	[ScopeClass.ListNumber]: [
-		WtObject.ListNumber,
-	],
-	[ScopeClass.CaseLookups]: [
-		WtObject.Slas,
-		WtObject.ServiceCatalog,
-		WtObject.Priorities,
-		WtObject.Status,
-		WtObject.Source,
-		WtObject.CloseReasonGroup,
-	],
-	[ScopeClass.FilesPolicy]: [
-		WtObject.FilePolicy,
-	],
-	[ScopeClass.PortalUsers]: [
-		WtObject.PortalUser,
-	],
-	[ScopeClass.Custom]: [
-		WtObject.CustomLookup,
-	],
-};
+export const mapScopeClassToWtObjects: Partial<Record<ScopeClass, WtObject[]>> =
+	{
+		[ScopeClass.Users]: [
+			WtObject.User,
+		],
+		[ScopeClass.Devices]: [
+			WtObject.Device,
+		],
+		[ScopeClass.Schema]: [
+			WtObject.Flow,
+		],
+		[ScopeClass.AcrRouting]: [
+			WtObject.Dialplan,
+		],
+		[ScopeClass.Gateways]: [
+			WtObject.Gateway,
+		],
+		[ScopeClass.AcrChatPlan]: [
+			WtObject.Chatplan,
+		],
+		[ScopeClass.Dictionaries]: [
+			WtObject.Region,
+			WtObject.Bucket,
+			WtObject.Communication,
+			WtObject.PauseCause,
+			WtObject.Source,
+			WtObject.Slas,
+			WtObject.Priorities,
+			WtObject.CloseReasonGroup,
+			WtObject.ServiceCatalog,
+			WtObject.Status,
+		],
+		[ScopeClass.List]: [
+			WtObject.Blacklist,
+		],
+		[ScopeClass.Skills]: [
+			WtObject.Skill,
+		],
+		[ScopeClass.Calendars]: [
+			WtObject.Calendar,
+		],
+		[ScopeClass.MediaFile]: [
+			WtObject.Media,
+		],
+		[ScopeClass.Agent]: [
+			WtObject.Agent,
+		],
+		[ScopeClass.Queue]: [
+			WtObject.Queue,
+			WtObject.Member,
+		],
+		[ScopeClass.ResourceGroup]: [
+			WtObject.ResourceGroup,
+		],
+		[ScopeClass.Resource]: [
+			WtObject.Resource,
+		],
+		[ScopeClass.Team]: [
+			WtObject.Team,
+		],
+		[ScopeClass.StorageProfile]: [
+			WtObject.Storage,
+		],
+		[ScopeClass.CognitiveProfile]: [
+			WtObject.CognitiveProfile,
+		],
+		[ScopeClass.EmailProfile]: [
+			WtObject.EmailProfile,
+		],
+		[ScopeClass.SingleSignOn]: [
+			WtObject.SingleSignOn,
+		],
+		[ScopeClass.ImportTemplate]: [
+			WtObject.ImportCsv,
+		],
+		[ScopeClass.Trigger]: [
+			WtObject.Trigger,
+		],
+		[ScopeClass.Role]: [
+			WtObject.Role,
+		],
+		[ScopeClass.Contacts]: [
+			WtObject.Contact,
+		],
+		[ScopeClass.Logger]: [
+			WtObject.ChangeLog,
+		], // Change log in Admin
+		[ScopeClass.Calls]: [
+			WtObject.Call,
+		], // Call history
+		[ScopeClass.RecordFile]: [
+			WtObject.RecordFile,
+		], // Call history
+		[ScopeClass.ContactGroups]: [
+			WtObject.ContactGroup,
+		], //CRM
+		[ScopeClass.ChatBots]: [
+			WtObject.ChatGateway,
+		], // routing cht_gateway
+		[ScopeClass.Cases]: [
+			WtObject.Case,
+		], // CRM
+		[ScopeClass.CaseComments]: [
+			WtObject.CaseComment,
+		],
+		[ScopeClass.AuditForm]: [
+			WtObject.AuditForm,
+		],
+		[ScopeClass.AuditRating]: [
+			WtObject.AuditRating,
+		],
+		[ScopeClass.PauseTemplates]: [
+			WtObject.PauseTemplate,
+		],
+		[ScopeClass.ShiftTemplates]: [
+			WtObject.ShiftTemplate,
+		],
+		[ScopeClass.WorkingConditions]: [
+			WtObject.WorkingCondition,
+		],
+		[ScopeClass.AgentWorkingConditions]: [
+			WtObject.AgentWorkingCondition,
+		],
+		[ScopeClass.ListNumber]: [
+			WtObject.ListNumber,
+		],
+		[ScopeClass.CaseLookups]: [
+			WtObject.Slas,
+			WtObject.ServiceCatalog,
+			WtObject.Priorities,
+			WtObject.Status,
+			WtObject.Source,
+			WtObject.CloseReasonGroup,
+		],
+		[ScopeClass.FilesPolicy]: [
+			WtObject.FilePolicy,
+		],
+		[ScopeClass.PortalUsers]: [
+			WtObject.PortalUser,
+		],
+		[ScopeClass.Custom]: [
+			WtObject.CustomLookup,
+		],
+	};
 
 export const wtObjectsWithGlobalCrudActionAccessAsChecksSource = {
 	[WtObject.License]: true,
@@ -193,16 +194,10 @@ type UiSection =
 	| AuditorSections
 	| CrmSections
 	| SupervisorSections;
-export const mapWtObjectToUiSection: Record<
-	WtApplication,
-	Partial<Record<WtObject, UiSection>>
+export const mapWtObjectToUiSection: Partial<
+	Record<WtApplication, Partial<Record<WtObject, UiSection>>>
 > = {
 	// if we don`t need empty objects we can use  Partial<Record<WtApplication, Partial<Record<WtObject, UiSection>>>>
-	[WtApplication.Agent]: {},
-	[WtApplication.History]: {},
-	[WtApplication.Analytics]: {},
-
-	// Admin sections
 	[WtApplication.Admin]: {
 		[WtObject.User]: AdminSections.Users,
 		[WtObject.Agent]: AdminSections.Agents,

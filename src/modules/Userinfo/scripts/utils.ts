@@ -1,9 +1,5 @@
-import {
-	type CrudAction,
-	WtApplication,
-	type WtObject,
-} from '../../../../enums';
-import { _wtUiLog as wtlog } from '../../../../scripts/logger';
+import { type CrudAction, WtApplication, type WtObject } from '../../../enums';
+import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import {
 	AdminSectionsValues,
 	AuditorSectionsValues,

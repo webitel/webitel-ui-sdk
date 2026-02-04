@@ -309,6 +309,10 @@
 			"types": "./types/modules/CallSession/index.d.ts",
 			"import": "./src/modules/CallSession/index.ts"
 		},
+		"./modules/Userinfo": {
+			"types": "./types/modules/Userinfo/index.d.ts",
+			"import": "./src/modules/Userinfo/index.ts"
+		},
 		"./plugins*": {
 			"types": "./types/plugins*",
 			"import": "./src/plugins*"
