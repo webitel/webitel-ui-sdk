@@ -17,14 +17,14 @@
     <p-input-group>
       <p-input-group-addon 
         v-if="$slots.prefix"
-        class="wt-input-number__addon typo-body-1 wt-placeholder"
+        class="wt-input-number__addon typo-body-1"
       >
         <slot name="prefix" />
       </p-input-group-addon>
       <p-input-number
         :id="inputId"
         ref="inputNumber"
-        v-model="model"
+        :model-value="model"
         :use-grouping="useGrouping"
         :disabled="disabled"
         :invalid="invalid"
@@ -35,9 +35,10 @@
         :max-fraction-digits="maxFractionDigits"
         :placeholder="placeholder || label"
         :show-buttons="showButtons"
-        input-class="wt-input-number__input typo-body-1 wt-placeholder"
+        input-class="wt-input-number__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
+        @input="emit('update:modelValue', $event.value)"
       >
       <template #incrementbuttonicon>
           <wt-icon
@@ -56,14 +57,14 @@
       </p-input-number>
       <p-input-group-addon 
         v-if="$slots.suffix"
-        class="wt-input-number__addon typo-body-1 wt-placeholder"
+        class="wt-input-number__addon typo-body-1"
       >
         <slot name="suffix" />
       </p-input-group-addon>
     </p-input-group>
     <wt-message
-      v-if="isValidation && validationText"
-      :color="getMessageColor"
+      v-if="isValidation && validationText && !hideInputInfo"
+      :color="validationTextColor"
       :variant="MessageVariant.SIMPLE"
       :size="ComponentSize.SM"
     >
@@ -75,7 +76,14 @@
 <script setup lang="ts">
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
-import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	defineEmits,
+	defineModel,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 
 import { useInputControl } from '../../composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
@@ -97,6 +105,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<number>;
 	customValidators?: unknown[];
+	hideInputInfo?: boolean;
 }
 
 const props = withDefaults(defineProps<WtInputNumberProps>(), {
@@ -115,11 +124,16 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 	v: null,
 	regleValidation: null,
 	customValidators: () => [],
+	hideInputInfo: false,
 });
 
 const model = defineModel<number | null>({
 	default: null,
 });
+
+const emit = defineEmits([
+	'update:modelValue',
+]);
 
 const inputNumber = useTemplateRef('inputNumber');
 
@@ -129,11 +143,12 @@ const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-	v,
-	customValidators,
-	regleValidation,
-});
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+		regleValidation,
+	});
 
 const { focus, handleKeyup } = useInputControl(inputNumber);
 
@@ -143,10 +158,6 @@ const hasLabel = computed(() => {
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
-});
-
-const getMessageColor = computed(() => {
-	return invalid.value ? MessageColor.ERROR : MessageColor.SECONDARY;
 });
 
 defineExpose({

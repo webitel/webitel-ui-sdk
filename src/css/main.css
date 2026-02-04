@@ -3,72 +3,79 @@
 @import "./pages/table-page.css";
 @import "./pages/card-page.css";
 
-:root {
-	--transition: 0.2s;
-	--box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+/* 
+	@author HlukhovYe
+	layer needed beacuse of manipulating primevue's default typography
+	https://webitel.atlassian.net/browse/WTEL-8775?focusedCommentId=723773
+*/
+@layer wt-default {
+	:root {
+		--transition: 0.2s;
+		--box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 
-	/* viewport breakpoints */
-	--viewport-lg: 1904px;
-	--viewport-md: 1264px;
-	--viewport-sm: 960px;
-	--viewport-xs: 600px;
-}
+		/* viewport breakpoints */
+		--viewport-lg: 1904px;
+		--viewport-md: 1264px;
+		--viewport-sm: 960px;
+		--viewport-xs: 600px;
+	}
 
-html {
-	height: 100%;
-	font-size: 16px;
-}
+	html {
+		height: 100%;
+		font-size: 16px;
+	}
 
-body {
-	font-family: "Montserrat", monospace;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 24px;
-	text-transform: none;
-	margin: 0;
-	height: 100%;
-	min-height: 100%;
-}
+	body {
+		font-family: "Montserrat", monospace;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 24px;
+		text-transform: none;
+		margin: 0;
+		height: 100%;
+		min-height: 100%;
+	}
 
-* {
-	box-sizing: border-box;
-}
+	* {
+		box-sizing: border-box;
+	}
 
-.theme--dark body {
-	color-scheme: dark;
-}
+	.theme--dark body {
+		color-scheme: dark;
+	}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-	margin: 0;
-	font-weight: normal;
-}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		margin: 0;
+		font-weight: normal;
+	}
 
-/* reset ul styles */
-ul {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
+	/* reset ul styles */
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
 
-iframe {
-	outline: none;
-	border: none;
-}
+	iframe {
+		outline: none;
+		border: none;
+	}
 
-a {
-	color: #000;
-	text-decoration: none;
-}
+	a {
+		color: #000;
+		text-decoration: none;
+	}
 
-.hidden {
-	opacity: 0;
-	pointer-events: none;
+	.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
 }
 
 /* https://github.com/Akryum/floating-vue/issues/488 */

@@ -39,6 +39,10 @@
 	gap: var(--spacing-sm);
 }
 
+.table-section__table-wrapper .table-wrapper__visible-scroll-wrapper {
+	flex-grow: 1;
+}
+
 .table-section__table-wrapper .wt-pagination {
 	margin-top: auto;
 }

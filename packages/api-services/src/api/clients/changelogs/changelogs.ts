@@ -1,14 +1,13 @@
 import {
-	configServiceCreateConfigBody,
-	configServicePatchConfigBody,
-	configServiceSearchConfigQueryParams,
-	configServiceUpdateConfigBody,
+	ConfigServiceCreateConfigBody,
+	ConfigServicePatchConfigBody,
+	ConfigServiceSearchConfigQueryParams,
+	ConfigServiceUpdateConfigBody,
 	getConfigService,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
-
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,12 +19,15 @@ import {
 
 const getChangelogsList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		configServiceSearchConfigQueryParams,
+		ConfigServiceSearchConfigQueryParams,
 	);
 
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -42,31 +44,41 @@ const getChangelogsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getChangelog = async ({ itemId: id }) => {
 	try {
 		const response = await getConfigService().configServiceReadConfig(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const addChangelog = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(
-			getShallowFieldsToSendFromZodSchema(configServiceCreateConfigBody),
+			getShallowFieldsToSendFromZodSchema(ConfigServiceCreateConfigBody),
 		),
 		camelToSnake(),
 	]);
 	try {
 		const response = await getConfigService().configServiceCreateConfig(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -74,7 +86,7 @@ const updateChangelog = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(
-			getShallowFieldsToSendFromZodSchema(configServiceUpdateConfigBody),
+			getShallowFieldsToSendFromZodSchema(ConfigServiceUpdateConfigBody),
 		),
 	]);
 
@@ -83,15 +95,19 @@ const updateChangelog = async ({ itemInstance, itemId: id }) => {
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchChangelog = async ({ id, changes }) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(configServicePatchConfigBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(ConfigServicePatchConfigBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -99,9 +115,13 @@ const patchChangelog = async ({ id, changes }) => {
 			id,
 			body,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -110,20 +130,28 @@ const deleteChangelog = async ({ id }) => {
 		const response = await getConfigService().configServiceDeleteConfig(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getChangelogsList({
 		...params,
-		fields: params.fields || ['id', 'object'],
+		fields: params.fields || [
+			'id',
+			'object',
+		],
 	});
 
 const getObjectsList = async (params) => {
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		camelToSnake(),
 	]);
 
@@ -141,7 +169,9 @@ const getObjectsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

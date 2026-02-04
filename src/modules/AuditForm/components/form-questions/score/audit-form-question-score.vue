@@ -4,25 +4,19 @@
       v-if="mode === 'write'"
       class="audit-form-question-score-write"
     >
-      <wt-input
+      <wt-input-number
         :label="$t('reusable.from')"
-        :number-max="9"
-        :number-min="0"
         :v="v$.question.min"
-        :value="question.min"
+        :model-value="question.min"
         required
-        type="number"
-        @input="updateQuestion({ path: 'min', value: $event })"
+        @update:model-value="updateQuestion({ path: 'min', value: $event })"
       />
-      <wt-input
+      <wt-input-number
         :label="$t('reusable.to')"
-        :number-max="10"
-        :number-min="question.min"
         :v="v$.question.max"
-        :value="question.max"
+        :model-value="question.max"
         required
-        type="number"
-        @input="updateQuestion({ path: 'max', value: $event })"
+        @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
     </div>
     <div
@@ -47,7 +41,6 @@ import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted } from 'vue';
 import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
 
-import WtInput from '../../../../../components/wt-input/wt-input.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 

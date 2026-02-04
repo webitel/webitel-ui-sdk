@@ -2,7 +2,7 @@
 
 <template>
   <wt-timepicker
-    :value="332"
+    :model-value="332"
     label="Disabled timepicker"
     format="hh:mm:ss"
     disabled

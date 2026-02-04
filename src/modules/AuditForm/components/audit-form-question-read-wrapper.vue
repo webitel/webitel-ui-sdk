@@ -37,7 +37,7 @@
       >
         {{ t('webitelUI.auditForm.clearSelection') }}
       </div>
-      <wt-input
+      <wt-input-text
         v-if="answerModel?.createdAt"
         :model-value="answerModel.comment"
         :label="t('reusable.comment')"
@@ -64,7 +64,7 @@ import {
 	type EngineQuestionAnswer,
 } from 'webitel-sdk';
 
-import { WtDivider, WtIcon, WtInput } from '../../../components';
+import { WtDivider, WtIcon } from '../../../components';
 import isEmpty from '../../../scripts/isEmpty.js';
 import AuditFormAnswerEditingInfo from './form-answers/answer-editing-info/audit-form-answer-editing-info.vue';
 import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';

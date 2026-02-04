@@ -167,6 +167,7 @@ import previewTagAudio from './preview-tag-audio.svg?raw';
 import previewTagImage from './preview-tag-image.svg?raw';
 import previewTagVideo from './preview-tag-video.svg?raw';
 import prompter from './prompter.svg?raw';
+import protectionError from './protection-error.svg?raw';
 import queueMember from './queue-member.svg?raw';
 import quickReplies from './quick-replies.svg?raw';
 import radio from './radio.svg?raw';
@@ -194,6 +195,8 @@ import sharingEnd from './sharing-end.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
+import sortAsc from './sort-asc.svg?raw';
+import sortDesc from './sort-desc.svg?raw';
 import soundOff from './sound-off.svg?raw';
 import soundOn from './sound-on.svg?raw';
 import star from './star.svg?raw';
@@ -466,4 +469,7 @@ export default objCamelToKebab({
 	screenshotDone,
 	screenshotFalse,
 	sharingEnd,
+	protectionError,
+	sortAsc,
+	sortDesc,
 }) as Record<string, string>;

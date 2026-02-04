@@ -1,8 +1,8 @@
 import {
-	createSourceBody,
+	CreateSourceBody,
 	getSources,
-	listSourcesQueryParams,
-	updateSourceBody,
+	ListSourcesQueryParams,
+	UpdateSourceBody,
 } from '@webitel/api-services/gen';
 import {
 	getFieldsToSendFromZodSchema,
@@ -25,7 +25,7 @@ const sourceService = getSources();
 
 const getSourcesList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		listSourcesQueryParams,
+		ListSourcesQueryParams,
 	);
 
 	const { page, size, fields, sort, id, q, type } = applyTransform(params, [
@@ -76,7 +76,7 @@ const getSource = async ({ itemId: id }) => {
 
 const addSource = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(createSourceBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -94,7 +94,7 @@ const addSource = async ({ itemInstance }) => {
 const updateSource = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
-		sanitize(getShallowFieldsToSendFromZodSchema(updateSourceBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
 	]);
 
 	try {

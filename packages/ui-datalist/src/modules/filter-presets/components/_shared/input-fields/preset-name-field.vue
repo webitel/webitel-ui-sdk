@@ -1,6 +1,6 @@
 <template>
-  <wt-input
-    v-model="model"
+  <wt-input-text
+    v-model:model-value="model"
     :v="props.v"
     :label="t('reusable.name')"
     required
@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import { Validation } from '@vuelidate/core';
-import { WtInput } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = string;
@@ -17,7 +16,7 @@ type ModelValue = string;
 const model = defineModel<ModelValue>();
 
 type Props = {
-  v: Validation;
+	v: Validation;
 };
 
 const props = defineProps<Props>();

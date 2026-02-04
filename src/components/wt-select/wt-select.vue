@@ -98,15 +98,20 @@ v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multi
         <div v-observe-visibility="handleAfterListIntersect" style="height: 1px" />
       </template>
     </vue-multiselect>
-    <wt-input-info v-if="isValidation" :invalid="invalid">
+    <wt-message
+      v-if="isValidation && validationText"
+      :color="validationTextColor"
+      :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
+    >
       {{ validationText }}
-    </wt-input-info>
+    </wt-message>
   </div>
 </template>
 
 <script>
 import { toRefs } from 'vue';
-
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
@@ -174,16 +179,20 @@ export default {
 	setup: (props /*, ctx*/) => {
 		// https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
 		const { v, customValidators, regleValidation } = toRefs(props);
-		const { isValidation, invalid, validationText } = useValidation({
-			v,
-			customValidators,
-			regleValidation,
-		});
+		const { isValidation, invalid, validationText, validationTextColor } =
+			useValidation({
+				v,
+				customValidators,
+				regleValidation,
+			});
 
 		return {
 			isValidation,
 			invalid,
 			validationText,
+			validationTextColor,
+			MessageVariant,
+			ComponentSize,
 		};
 	},
 	data: () => ({

@@ -1,30 +1,23 @@
 <template>
   <wt-vidstack-player
+    :class="[!props.static && `video-call-position--${props.position}`]"
+    :hide-video-display-panel="props.hideVideoDisplayPanel"
+    :size="props.size"
     :stream="mainStream"
     :static="props.static"
-    :size="props.size"
-    :class="[!props.static && `video-call-position--${props.position}`]"
     :username="props.username"
-    :hide-video-display-panel="props.hideVideoDisplayPanel"
+    autoplay
     class="video-call"
     hide-background
-    autoplay
     @change-size="(payload) => emit('change-size', payload)"
   >
     <template #content="{ size: innerSize }">
-      <slot
-        name="content"
-        :size="innerSize"
-      />
+      <slot :size="innerSize" name="content" />
 
-      <slot
-        v-if="!mainStream"
-        name="overlay"
-        :size="innerSize"
-      >
+      <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
           <div
-            v-if="props['receiver:stream'] && !props['receiver:video:enabled']"
+            v-if="showReceiverOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
@@ -33,7 +26,8 @@
               icon="video-cam-off--filled"
             />
 
-            <span class="video-call-receiver-text">{{ t(`WtApplication.${WtApplication.Meet}.theCameraIsTurnedOff`)
+            <span class="video-call-receiver-text">{{
+                t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`)
               }}</span>
           </div>
         </div>
@@ -44,13 +38,13 @@
         class="video-call-content-wrapper"
       >
         <screenshot-box
-          :src="props['screenshot:src']"
           :size="innerSize"
-          @zoom="emit(`action:${VideoCallAction.ZoomScreenshot}`)"
+          :src="props['screenshot:src']"
           @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
+          @zoom="emit(`action:${VideoCallAction.ZoomScreenshot}`)"
         />
 
-        <template v-if="props['sender:stream'] && !props['sender:video:enabled']">
+        <template v-if="showSenderMutedScreen">
           <div
             :class="`video-call-sender--${innerSize}`"
             class="video-call-sender video-call-sender--muted"
@@ -64,13 +58,13 @@
 
         <template v-else-if="props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
-            :stream="props['sender:stream']"
             :class="`video-call-sender--${innerSize}`"
-            hide-video-display-panel
-            hide-controls-panel
-            static
+            :stream="props['sender:stream']"
             autoplay
             class="video-call-sender"
+            hide-controls-panel
+            hide-video-display-panel
+            static
           />
         </template>
       </div>
@@ -88,17 +82,17 @@
 
     <template #controls-panel>
       <video-call-controls-panel
-        :mic:enabled="props['sender:mic:enabled']"
-        :mic:accessed="props['sender:mic:accessed']"
-        :video:enabled="props['sender:video:enabled']"
-        :video:accessed="props['sender:video:accessed']"
-        :screenshot:status="props['screenshot:status']"
-        :screenshot:loading="props['screenshot:loading']"
-        :recordings="props.recordings"
         :actions="props.actions"
-        :actions:settings:pressed="props['actions:settings:pressed']"
-        :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:chat:pressed="props['actions:chat:pressed']"
+        :actions:settings:disabled="props['actions:settings:disabled']"
+        :actions:settings:pressed="props['actions:settings:pressed']"
+        :mic:accessed="props['sender:mic:accessed']"
+        :mic:enabled="props['sender:mic:enabled']"
+        :recordings="props.recordings"
+        :screenshot:loading="props['screenshot:loading']"
+        :screenshot:status="props['screenshot:status']"
+        :video:accessed="props['sender:video:accessed']"
+        :video:enabled="props['sender:video:enabled']"
         @[VideoCallAction.Recordings]="(payload, options) => emit(emitKeys[VideoCallAction.Recordings], payload, options)"
         @[VideoCallAction.Screenshot]="(payload, options) => emit(emitKeys[VideoCallAction.Screenshot], payload, options)"
         @[VideoCallAction.Mic]="(payload, options) => emit(emitKeys[VideoCallAction.Mic], payload, options)"
@@ -224,11 +218,45 @@ const emitKeys = {
 
 const { t } = useI18n();
 
-const mainStream = computed(() => {
-	if (!props['receiver:video:enabled']) return props['sender:stream'];
+const receiverStream = computed(() => props['receiver:stream']);
+const senderStream = computed(() => props['sender:stream']);
 
-	return props['receiver:stream'] || props['sender:stream'];
+const receiverVideoEnabled = computed(() => props['receiver:video:enabled']);
+const senderVideoEnabled = computed(() => props['sender:video:enabled']);
+
+const bothStreamsAvailable = computed(
+	() => !!receiverStream.value && !!senderStream.value,
+);
+
+const showReceiverOverlay = computed(
+	() =>
+		(!receiverStream.value &&
+			senderStream.value &&
+			!senderVideoEnabled.value) ||
+		(receiverStream.value && !receiverVideoEnabled.value),
+);
+
+const mainStream = computed(() => {
+	if (
+		(bothStreamsAvailable.value && !receiverVideoEnabled.value) ||
+		(!receiverStream.value && senderStream.value && !senderVideoEnabled.value)
+	) {
+		return null;
+	}
+
+	if (!receiverVideoEnabled.value) {
+		return senderStream.value;
+	}
+
+	return receiverStream.value ?? senderStream.value;
 });
+
+const showSenderMutedScreen = computed(
+	() =>
+		bothStreamsAvailable.value &&
+		!senderVideoEnabled.value &&
+		!!receiverStream.value,
+);
 
 const receiverVideoMutedIconSizes = {
 	[ComponentSize.SM]: ComponentSize.MD,
@@ -249,15 +277,15 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-position--left-bottom.wt-vidstack-player--sm {
-  left: var(--spacing-sm);
-  bottom: var(--spacing-sm);
   top: unset;
+  bottom: var(--spacing-sm);
+  left: var(--spacing-sm);
 }
 
 .video-call-position--left-bottom.wt-vidstack-player--md {
   top: unset;
-  left: var(--spacing-sm);
   bottom: var(--spacing-sm);
+  left: var(--spacing-sm);
 }
 
 .video-call-position--right-bottom.wt-vidstack-player--sm {
@@ -275,33 +303,33 @@ const senderVideoMutedIconSizes = {
 .video-call-position--center.wt-vidstack-player {
   position: absolute;
   top: 50%;
-  left: 50%;
   right: unset;
   bottom: unset;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .video-call-overlay {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
   background: var(--p-player-wrapper-background);
 }
 
 .video-call-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
   height: 100%;
   padding: var(--p-player-counter-position-padding-sm);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
 }
 
 .video-call-content--sm {
@@ -316,18 +344,18 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-content-wrapper--sm {
-  left: var(--p-player-counter-position-padding-sm);
   bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
+  left: var(--p-player-counter-position-padding-sm);
 }
 
 .video-call-content-wrapper--md {
-  left: var(--p-player-counter-position-padding-md);
   bottom: var(--p-player-counter-position-padding-md);
+  left: var(--p-player-counter-position-padding-md);
 }
 
 .video-call-content-wrapper--lg {
-  left: var(--p-player-counter-position-padding-lg);
   bottom: var(--p-player-counter-position-padding-lg);
+  left: var(--p-player-counter-position-padding-lg);
 }
 
 .video-call-receiver {
@@ -336,16 +364,17 @@ const senderVideoMutedIconSizes = {
 
 .video-call-receiver--sm .video-call-receiver-text {
   max-width: 73px;
+  text-align: center;
 }
 
 .video-call-receiver--muted {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   gap: var(--spacing-xs);
-  align-items: center;
-  justify-content: center;
 }
 
 .video-call-sender {
@@ -353,13 +382,13 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-sender--muted {
-  background: var(--p-player-wrapper-background);
   display: flex;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   border: 1px solid;
   border-color: var(--p-player-wrapper-border-color);
+  background: var(--p-player-wrapper-background);
 }
 
 .video-call-sender--sm :deep(video) {
@@ -374,12 +403,12 @@ const senderVideoMutedIconSizes = {
   padding-bottom: var(--p-player-control-bar-sm-height);
 }
 
-.video-call-sender--sm {
-  width: var(--p-player-cam-preview-sm-width);
-  height: var(--p-player-cam-preview-sm-height);
+.video-call-sender.video-call-sender--sm {
   position: relative;
   right: 0;
   bottom: 0;
+  width: var(--p-player-cam-preview-sm-width);
+  height: var(--p-player-cam-preview-sm-height);
 }
 
 .video-call-sender--md :deep(video) {
@@ -391,11 +420,11 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-sender--md {
-  width: var(--p-player-cam-preview-md-width);
-  height: var(--p-player-cam-preview-md-height);
   position: relative;
   right: 0;
   bottom: 0;
+  width: var(--p-player-cam-preview-md-width);
+  height: var(--p-player-cam-preview-md-height);
 }
 
 .video-call-sender--lg :deep(video) {
@@ -407,11 +436,11 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-sender--lg {
-  width: var(--p-player-cam-preview-lg-width);
-  height: var(--p-player-cam-preview-lg-height);
   position: relative;
   right: 0;
   bottom: 0;
+  width: var(--p-player-cam-preview-lg-width);
+  height: var(--p-player-cam-preview-lg-height);
 }
 
 .video-call__indicator {

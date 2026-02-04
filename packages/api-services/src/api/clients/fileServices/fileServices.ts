@@ -1,8 +1,8 @@
 import {
 	getFileService,
-	searchFilesQueryParams,
-	searchScreenRecordingsByAgentQueryParams,
-	searchScreenRecordingsQueryParams,
+	SearchFilesQueryParams,
+	SearchScreenRecordingsByAgentQueryParams,
+	SearchScreenRecordingsQueryParams,
 } from '@webitel/api-services/gen';
 import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
@@ -19,7 +19,7 @@ import {
 
 const getFilesList = async (params: SearchFilesByCallParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		searchFilesQueryParams,
+		SearchFilesQueryParams,
 	);
 
 	const {
@@ -66,22 +66,30 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const deleteFiles = async (id) => {
 	try {
-		const response = await getFileService().deleteFiles({ id });
-		return applyTransform(response.data, [snakeToCamel()]);
+		const response = await getFileService().deleteFiles({
+			id,
+		});
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getScreenRecordingsByUser = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		searchScreenRecordingsQueryParams,
+		SearchScreenRecordingsQueryParams,
 	);
 
 	const {
@@ -112,7 +120,10 @@ const getScreenRecordingsByUser = async (params: any) => {
 				size,
 				q: q || params.search,
 				sort,
-				fields: ['id', ...fields],
+				fields: [
+					'id',
+					...fields,
+				],
 				id,
 				'uploaded_at.from': uploadedAtFrom,
 				'uploaded_at.to': uploadedAtTo,
@@ -131,7 +142,9 @@ const getScreenRecordingsByUser = async (params: any) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -142,15 +155,19 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 			id,
 			{},
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getScreenRecordingsByAgent = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		searchScreenRecordingsByAgentQueryParams,
+		SearchScreenRecordingsByAgentQueryParams,
 	);
 
 	const {
@@ -181,7 +198,12 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				size,
 				q: q || params.search,
 				sort,
-				fields: ['id', 'view_name', 'mime_type', ...fields],
+				fields: [
+					'id',
+					'view_name',
+					'mime_type',
+					...fields,
+				],
 				id,
 				'uploaded_at.from': uploadedAtFrom,
 				'uploaded_at.to': uploadedAtTo,
@@ -200,7 +222,9 @@ const getScreenRecordingsByAgent = async (params: any) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -211,17 +235,23 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 			id,
 			{},
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getFilesListByCall = async (
-	params: SearchFilesByCallParams & { callId: string },
+	params: SearchFilesByCallParams & {
+		callId: string;
+	},
 ) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		searchFilesQueryParams,
+		SearchFilesQueryParams,
 	);
 
 	const requestParams = applyTransform(params, [
@@ -251,7 +281,9 @@ const getFilesListByCall = async (
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

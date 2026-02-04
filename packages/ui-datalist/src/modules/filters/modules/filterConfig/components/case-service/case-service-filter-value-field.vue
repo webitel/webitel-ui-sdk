@@ -21,23 +21,29 @@ import { searchMethod } from './config.js';
 
 type ModelValue = string[];
 const model = defineModel<ModelValue>({
-  default: [],
+	default: [],
 });
 
 const catalogData = ref([]);
 
 const loadCatalogs = async () => {
-  const { items } = await searchMethod({
-    size: -1, // To get all catalogs with services we need to pass size -1
-    fields: ['id', 'name', 'closeReasonGroup', 'status', 'service'],
-    hasSubservices: true,
-  });
+	const { items } = await searchMethod({
+		size: -1, // To get all catalogs with services we need to pass size -1
+		fields: [
+			'id',
+			'name',
+			'closeReasonGroup',
+			'status',
+			'service',
+		],
+		hasSubservices: true,
+	});
 
-  catalogData.value = deepCopy(items);
+	catalogData.value = deepCopy(items);
 };
 
 if (!model.value) {
-  model.value = [];
+	model.value = [];
 }
 
 onMounted(loadCatalogs);
@@ -71,7 +77,7 @@ $form-width: 800px;
       height: fit-content;
     }
 
-    .wt-input {
+    .wt-input-text {
       grid-area: label;
     }
 

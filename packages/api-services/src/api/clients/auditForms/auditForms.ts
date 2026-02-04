@@ -1,9 +1,9 @@
 import {
-	createAuditFormBody,
+	CreateAuditFormBody,
 	getAuditFormService,
-	patchAuditFormBody,
-	searchAuditFormQueryParams,
-	updateAuditFormBody,
+	PatchAuditFormBody,
+	SearchAuditFormQueryParams,
+	UpdateAuditFormBody,
 } from '@webitel/api-services/gen';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
@@ -50,17 +50,24 @@ const itemResponseHandler = (response) => ({
 
 const getAuditFormsList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		searchAuditFormQueryParams,
+		SearchAuditFormQueryParams,
 	);
 
 	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params?.q || params?.search }),
+		(params) => ({
+			...params,
+			q: params?.q || params?.search,
+		}),
 		starToSearch('q'),
 		starToSearch('question'),
 		(params) => ({
 			...params,
-			fields: ['id', 'editable', ...(params?.fields || [])],
+			fields: [
+				'id',
+				'editable',
+				...(params?.fields || []),
+			],
 		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -78,27 +85,39 @@ const getAuditFormsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 
 const getAuditForm = async ({ itemId: id }) => {
 	try {
 		const response = await getAuditFormService().readAuditForm(id);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getAuditFormsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const createAuditForm = async ({ itemInstance }) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(createAuditFormBody);
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
@@ -107,14 +126,19 @@ const createAuditForm = async ({ itemInstance }) => {
 
 	try {
 		const response = await getAuditFormService().createAuditForm(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 
 const updateAuditForm = async ({ itemInstance, itemId: id }) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(updateAuditFormBody);
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
@@ -123,14 +147,19 @@ const updateAuditForm = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await getAuditFormService().updateAuditForm(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 
 const patchAuditForm = async ({ changes, id }) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(patchAuditFormBody);
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(PatchAuditFormBody);
 
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
@@ -139,9 +168,14 @@ const patchAuditForm = async ({ changes, id }) => {
 
 	try {
 		const response = await getAuditFormService().patchAuditForm(id, body);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 
@@ -150,7 +184,10 @@ const deleteAuditForm = async ({ id }) => {
 		const response = await getAuditFormService().deleteAuditForm(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [translateError, notify]);
+		throw applyTransform(err, [
+			translateError,
+			notify,
+		]);
 	}
 };
 

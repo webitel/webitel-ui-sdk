@@ -5,12 +5,14 @@ import { computed, ref } from 'vue';
 const value = ref(322);
 
 const v$ = useVuelidate(
-  computed(() => ({
-    value: {
-      required: () => false,
-    },
-  })),
-  { value },
+	computed(() => ({
+		value: {
+			required: () => false,
+		},
+	})),
+	{
+		value,
+	},
 );
 
 v$.value.$touch();
@@ -18,7 +20,7 @@ v$.value.$touch();
 
 <template>
   <wt-timepicker
-    :value="value"
+    :model-value="value"
     label="Invalid timepicker"
     format="hh:mm:ss"
     :v="v$"
