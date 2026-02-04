@@ -239,7 +239,7 @@ export const mapWtObjectToUiSection: Partial<
 
 	// Auditor sections
 	[WtApplication.Audit]: {
-		[WtObject.Scorecard]: AuditorSections.Scorecards,
+		[WtObject.AuditForm]: AuditorSections.Scorecards,
 	},
 
 	// Crm sections
