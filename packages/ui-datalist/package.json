@@ -32,7 +32,7 @@
 		"@vuelidate/validators": "^2.0.4",
 		"@vueuse/core": "^14.0",
 		"@webitel/api-services": "^0.1.0",
-		"@webitel/styleguide": "^26.2.0-1",
+		"@webitel/styleguide": "^26.2.53",
 		"@webitel/ui-sdk": "^26.2.53",
 		"axios": "^1",
 		"date-fns": "^4",
