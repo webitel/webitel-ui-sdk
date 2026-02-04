@@ -14,7 +14,8 @@ import {
 	makeGlobalAccessMap,
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
-	isScopeException,
+	shouldUseGlobalSpecialActionAccessAsChecksSource,
+	shouldUseGlobalCrudActionAccessAsChecksSource,
 } from '../scripts/utils';
 import type {
 	AppVisibilityMap,
@@ -26,6 +27,7 @@ import type {
 	UiSection,
 	UserAccessStore,
 } from '../types/UserAccess.d.ts';
+import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 
 export const createUserAccessStore = ({
 	namespace = 'userinfo',
@@ -46,15 +48,22 @@ export const createUserAccessStore = ({
 			action: CrudAction | SpecialGlobalAction,
 			object: WtObject,
 		) => {
-			if (!isScopeException(object)) {
-				const allowScopeAccess = scopeAccess.value
-					.get(object)
-					?.get(action as CrudAction);
-				return !!allowScopeAccess;
-			} else {
-				const allowGlobalAccess = globalAccess.value.get(action);
-				return !!allowGlobalAccess;
+			/* scope exceptions handling */
+
+			if (shouldUseGlobalSpecialActionAccessAsChecksSource(object)) {
+				return hasSpecialGlobalActionAccess(
+					wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object],
+				);
 			}
+
+			if (shouldUseGlobalCrudActionAccessAsChecksSource(object)) {
+				return hasGlobalCrudActionAccess(action as CrudAction);
+			}
+
+			const allowScopeAccess = scopeAccess.value
+				.get(object)
+				?.get(action as CrudAction);
+			return !!allowScopeAccess;
 		};
 
 		const hasReadAccess = (object?: WtObject) => {

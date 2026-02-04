@@ -14,7 +14,8 @@ import {
 	mapUiSectionToWtObject,
 	mapWtObjectToUiSection,
 	SupervisorSectionsValues,
-	wtObjectsWithNoScopeExceptions,
+	wtObjectsWithGlobalSpecialActionAccessAsChecksSource,
+	wtObjectsWithGlobalCrudActionAccessAsChecksSource,
 } from '../mappings/mappings';
 import type {
 	AppVisibilityMap,
@@ -140,6 +141,14 @@ export const getWtAppByUiSection = (section: UiSection): WtApplication => {
 	return WtApplication.Crm;
 };
 
-export const isScopeException = (object: WtObject): boolean => {
-	return wtObjectsWithNoScopeExceptions[object] ?? false;
+export const shouldUseGlobalSpecialActionAccessAsChecksSource = (
+	object: WtObject,
+): boolean => {
+	return !!wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object];
+};
+
+export const shouldUseGlobalCrudActionAccessAsChecksSource = (
+	object: WtObject,
+): boolean => {
+	return !!wtObjectsWithGlobalCrudActionAccessAsChecksSource[object];
 };

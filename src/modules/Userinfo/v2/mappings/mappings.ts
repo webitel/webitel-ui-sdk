@@ -9,7 +9,7 @@ import {
 	WtApplication,
 	WtObject,
 } from '../../../../enums';
-import { CrudGlobalAction, ScopeClass } from '../enums';
+import { CrudGlobalAction, ScopeClass, SpecialGlobalAction } from '../enums';
 
 export const mapGlobalActionToCrudAction = {
 	[CrudGlobalAction.Add]: CrudAction.Create,
@@ -165,11 +165,16 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
 	],
 };
 
-export const wtObjectsWithNoScopeExceptions: Partial<
-	Record<WtObject, boolean>
-> = {
+export const wtObjectsWithGlobalCrudActionAccessAsChecksSource = {
 	[WtObject.License]: true,
 	[WtObject.Object]: true,
+};
+
+export const wtObjectsWithGlobalSpecialActionAccessAsChecksSource: Partial<
+	Record<WtObject, SpecialGlobalAction>
+> = {
+	[WtObject.Configuration]: SpecialGlobalAction.SystemSetting,
+	[WtObject.GlobalVariable]: SpecialGlobalAction.SchemeVariables,
 };
 
 export const mapScopeClassAccessTokenToCrudAction = {
