@@ -1,4 +1,3 @@
-export * from './useAccessControl';
 export * from './useCachedInterval/useCachedInterval';
 export * from './useCachedItemInstanceName/useCachedItemInstanceName';
 export * from './useCard/useCardComponent';
