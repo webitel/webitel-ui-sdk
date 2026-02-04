@@ -1,98 +1,98 @@
 {
-  "name": "@webitel/ui-datalist",
-  "version": "1.1.2",
-  "description": "Toolkit for building data lists in webitel ui system",
-  "scripts": {
-    "make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
-    "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
-    "lint:fix-staged": "npx lint-staged",
-    "lint:package": "publint",
-    "utils:i": "npm i",
-    "utils:link": "npm link",
-    "utils:publish": "npm publish --access public"
-  },
-  "type": "module",
-  "main": "./src/index.ts",
-  "types": "./types/index.d.ts",
-  "workspaces": [
-    "../../",
-    "../styleguide",
-    "../api-services"
-  ],
-  "files": [
-    "src/*",
-    "types/",
-    "Readme.md",
-    "CHANGELOG.md"
-  ],
-  "peerDependencies": {
-    "@regle/schemas": "^1.x",
-    "@vuelidate/core": "^2.0.3",
-    "@vuelidate/validators": "^2.0.4",
-    "@vueuse/core": "^14.0",
-    "@webitel/api-services": "^0.1.0",
-    "@webitel/styleguide": "^26.2.0-1",
-    "@webitel/ui-sdk": "^26.2.0-2",
-    "axios": "^1",
-    "date-fns": "^4",
-    "pinia": "^3.x",
-    "vue": "^3.5",
-    "zod": "^4.x"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "@standard-schema/spec": "^1.x",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^24.x",
-    "@vue/tsconfig": "^0.8.x",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^10.0.0",
-    "globals": "^17.x",
-    "globby": "^16.x",
-    "lint-staged": "^16.x",
-    "prettier": "^3.5.3",
-    "prettier-plugin-css-order": "^2.1.2",
-    "publint": "^0.3.9",
-    "sass": "^1.85.1",
-    "typescript": "5.9.x",
-    "typescript-eslint": "^8.26.1",
-    "typescript-plugin-css-modules": "^5.x",
-    "unplugin-auto-import": "^19.x",
-    "vue-tsc": "^3.x"
-  },
-  "engines": {
-    "npm": "11",
-    "node": "v24"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/webitel/webitel-ui-sdk"
-  },
-  "keywords": [
-    "webitel",
-    "webitel-ui"
-  ],
-  "author": "webitel",
-  "license": "ISC",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./src/index.ts"
-    },
-    "./filters": {
-      "types": "./types/modules/filters/index.d.ts",
-      "import": "./src/modules/filters/index.ts"
-    },
-    "./presets": {
-      "types": "./types/modules/filter-presets/index.d.ts",
-      "import": "./src/modules/filter-presets/index.ts"
-    },
-    "./card": {
-      "types": "./types/modules/card/index.d.ts",
-      "import": "./src/modules/card/index.ts"
-    }
-  }
+	"name": "@webitel/ui-datalist",
+	"version": "1.1.2",
+	"description": "Toolkit for building data lists in webitel ui system",
+	"scripts": {
+		"make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
+		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"lint:fix": "eslint --fix ./src && prettier --write --check ./src",
+		"lint:fix-staged": "npx lint-staged",
+		"lint:package": "publint",
+		"utils:i": "npm i",
+		"utils:link": "npm link",
+		"utils:publish": "npm publish --access public"
+	},
+	"type": "module",
+	"main": "./src/index.ts",
+	"types": "./types/index.d.ts",
+	"workspaces": [
+		"../../",
+		"../styleguide",
+		"../api-services"
+	],
+	"files": [
+		"src/*",
+		"types/",
+		"Readme.md",
+		"CHANGELOG.md"
+	],
+	"peerDependencies": {
+		"@regle/schemas": "^1.x",
+		"@vuelidate/core": "^2.0.3",
+		"@vuelidate/validators": "^2.0.4",
+		"@vueuse/core": "^14.0",
+		"@webitel/api-services": "^0.1.0",
+		"@webitel/styleguide": "^26.2.0-1",
+		"@webitel/ui-sdk": "^26.2.53",
+		"axios": "^1",
+		"date-fns": "^4",
+		"pinia": "^3.x",
+		"vue": "^3.5",
+		"zod": "^4.x"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.22.0",
+		"@standard-schema/spec": "^1.x",
+		"@tsconfig/node22": "^22.0.0",
+		"@types/node": "^24.x",
+		"@vue/tsconfig": "^0.8.x",
+		"eslint": "^9.22.0",
+		"eslint-config-prettier": "^10.1.1",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"eslint-plugin-vue": "^10.0.0",
+		"globals": "^17.x",
+		"globby": "^16.x",
+		"lint-staged": "^16.x",
+		"prettier": "^3.5.3",
+		"prettier-plugin-css-order": "^2.1.2",
+		"publint": "^0.3.9",
+		"sass": "^1.85.1",
+		"typescript": "5.9.x",
+		"typescript-eslint": "^8.26.1",
+		"typescript-plugin-css-modules": "^5.x",
+		"unplugin-auto-import": "^19.x",
+		"vue-tsc": "^3.x"
+	},
+	"engines": {
+		"npm": "11",
+		"node": "v24"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/webitel/webitel-ui-sdk"
+	},
+	"keywords": [
+		"webitel",
+		"webitel-ui"
+	],
+	"author": "webitel",
+	"license": "ISC",
+	"exports": {
+		".": {
+			"types": "./types/index.d.ts",
+			"import": "./src/index.ts"
+		},
+		"./filters": {
+			"types": "./types/modules/filters/index.d.ts",
+			"import": "./src/modules/filters/index.ts"
+		},
+		"./presets": {
+			"types": "./types/modules/filter-presets/index.d.ts",
+			"import": "./src/modules/filter-presets/index.ts"
+		},
+		"./card": {
+			"types": "./types/modules/card/index.d.ts",
+			"import": "./src/modules/card/index.ts"
+		}
+	}
 }
