@@ -79,7 +79,7 @@ v-else :disabled="disabled" class="multiselect__select multiselect__arrow" icon=
       <!--      Slot located before the tags -->
       <template #clear="{ }">
         <wt-icon-btn
-v-if="clearable" :class="{ hidden: !isValue }" :disabled="disabled" class="multiselect__clear"
+v-if="clearable && isValue" :disabled="disabled" class="multiselect__clear"
           icon="close" @click="clearValue" />
       </template>
 
