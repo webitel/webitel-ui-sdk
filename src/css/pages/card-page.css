@@ -33,9 +33,9 @@
 
 .opened-card-header__title {
 	font-family: "Montserrat", monospace;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 600;
-	line-height: 32px;
+	line-height: 24px;
 	text-transform: none;
 }
 
