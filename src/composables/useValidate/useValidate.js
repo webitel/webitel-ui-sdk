@@ -1,7 +1,6 @@
-///import { useVuelidate } from '@vuelidate/core';
+import { useVuelidate } from '@vuelidate/core';
 
-export const useValidate = async (schema, data) => {
-	const { useVuelidate } = await import('@vuelidate/core');
+export const useValidate = (schema, data) => {
 	const v$ = useVuelidate(schema, data, {
 		$autoDirty: true,
 	});
