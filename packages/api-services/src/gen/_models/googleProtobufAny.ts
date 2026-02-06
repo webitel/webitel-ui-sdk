@@ -6,5 +6,5 @@
  */
 
 export interface GoogleProtobufAny {
-  '@type'?: string;
+	'@type'?: string;
 }

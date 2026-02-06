@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsType = typeof SearchScreenRecordingsType[keyof typeof SearchScreenRecordingsType];
-
+export type SearchScreenRecordingsType =
+	(typeof SearchScreenRecordingsType)[keyof typeof SearchScreenRecordingsType];
 
 export const SearchScreenRecordingsType = {
-  Pdf: 'PDF',
-  Screenshot: 'SCREENSHOT',
-  Screensharing: 'SCREENSHARING',
+	Pdf: 'PDF',
+	Screenshot: 'SCREENSHOT',
+	Screensharing: 'SCREENSHARING',
 } as const;

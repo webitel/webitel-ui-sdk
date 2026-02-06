@@ -21,7 +21,10 @@
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
-            <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
+            <wt-icon
+              :size="receiverVideoMutedIconSizes[innerSize]"
+              icon="video-cam-off--filled"
+            />
 
             <span class="video-call-receiver-text">{{
                 t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`)
@@ -46,7 +49,10 @@
             :class="`video-call-sender--${innerSize}`"
             class="video-call-sender video-call-sender--muted"
           >
-            <wt-icon :size="senderVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
+            <wt-icon
+              :size="senderVideoMutedIconSizes[innerSize]"
+              icon="video-cam-off--filled"
+            />
           </div>
         </template>
 
@@ -99,7 +105,10 @@
   </wt-vidstack-player>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -110,7 +119,7 @@ import {
 	ScreenshotBox,
 	VideoCallControlsPanel,
 } from '../../../../components/wt-vidstack-player/components';
-import { ComponentSize, WebitelApplications } from '../../../../enums';
+import { ComponentSize, WtApplication } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
 import { VideoCallAction } from './enums/VideoCallAction.enum';

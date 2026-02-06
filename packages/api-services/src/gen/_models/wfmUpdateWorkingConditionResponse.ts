@@ -7,5 +7,5 @@
 import type { WfmWorkingCondition } from './wfmWorkingCondition';
 
 export interface WfmUpdateWorkingConditionResponse {
-  item?: WfmWorkingCondition;
+	item?: WfmWorkingCondition;
 }

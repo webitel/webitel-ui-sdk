@@ -6,6 +6,6 @@
  */
 
 export type DeleteDomainParams = {
-domain?: string;
-dc?: string;
+	domain?: string;
+	dc?: string;
 };

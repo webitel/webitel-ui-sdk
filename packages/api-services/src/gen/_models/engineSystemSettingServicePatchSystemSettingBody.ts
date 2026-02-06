@@ -6,5 +6,5 @@
  */
 
 export interface EngineSystemSettingServicePatchSystemSettingBody {
-  fields?: string[];
+	fields?: string[];
 }

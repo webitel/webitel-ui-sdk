@@ -7,8 +7,8 @@
 import type { KnowledgebaseCombined } from './knowledgebaseCombined';
 
 export interface KnowledgebaseCombinedList {
-  data?: KnowledgebaseCombined[];
-  next?: boolean;
-  /** The page number of the partial result. */
-  page?: number;
+	data?: KnowledgebaseCombined[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

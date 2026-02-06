@@ -6,90 +6,97 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineCreatePresetQueryRequest,
-  EngineListPresetQuery,
-  EnginePresetQuery,
-  EnginePresetQueryServicePatchPresetQueryBody,
-  EnginePresetQueryServiceUpdatePresetQueryBody,
-  SearchPresetQueryParams
+	EngineCreatePresetQueryRequest,
+	EngineListPresetQuery,
+	EnginePresetQuery,
+	EnginePresetQueryServicePatchPresetQueryBody,
+	EnginePresetQueryServiceUpdatePresetQueryBody,
+	SearchPresetQueryParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getPresetQueryService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const searchPresetQuery = <TData = AxiosResponse<EngineListPresetQuery>>(
+				params?: SearchPresetQueryParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/call_center/preset/query`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const createPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+				engineCreatePresetQueryRequest: EngineCreatePresetQueryRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/call_center/preset/query`,
+					engineCreatePresetQueryRequest,
+					options,
+				);
+			};
+			const deletePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/call_center/preset/query/${id}`, options);
+			};
+			const readPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/call_center/preset/query/${id}`, options);
+			};
+			const patchPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+				id: number,
+				enginePresetQueryServicePatchPresetQueryBody: EnginePresetQueryServicePatchPresetQueryBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/call_center/preset/query/${id}`,
+					enginePresetQueryServicePatchPresetQueryBody,
+					options,
+				);
+			};
+			const updatePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
+				id: number,
+				enginePresetQueryServiceUpdatePresetQueryBody: EnginePresetQueryServiceUpdatePresetQueryBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/call_center/preset/query/${id}`,
+					enginePresetQueryServiceUpdatePresetQueryBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchPresetQuery,
+				createPresetQuery,
+				deletePresetQuery,
+				readPresetQuery,
+				patchPresetQuery,
+				updatePresetQuery,
+			};
+		};
+export type SearchPresetQueryResult = AxiosResponse<EngineListPresetQuery>;
+export type CreatePresetQueryResult = AxiosResponse<EnginePresetQuery>;
+export type DeletePresetQueryResult = AxiosResponse<EnginePresetQuery>;
+export type ReadPresetQueryResult = AxiosResponse<EnginePresetQuery>;
+export type PatchPresetQueryResult = AxiosResponse<EnginePresetQuery>;
+export type UpdatePresetQueryResult = AxiosResponse<EnginePresetQuery>;
 
-  export const 
-            // --- title start
-            getPresetQueryService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const searchPresetQuery = <TData = AxiosResponse<EngineListPresetQuery>>(
-    params?: SearchPresetQueryParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/call_center/preset/query`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
-    engineCreatePresetQueryRequest: EngineCreatePresetQueryRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/call_center/preset/query`,
-      engineCreatePresetQueryRequest,options
-    );
-  }
-const deletePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/call_center/preset/query/${id}`,options
-    );
-  }
-const readPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/call_center/preset/query/${id}`,options
-    );
-  }
-const patchPresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
-    id: number,
-    enginePresetQueryServicePatchPresetQueryBody: EnginePresetQueryServicePatchPresetQueryBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/call_center/preset/query/${id}`,
-      enginePresetQueryServicePatchPresetQueryBody,options
-    );
-  }
-const updatePresetQuery = <TData = AxiosResponse<EnginePresetQuery>>(
-    id: number,
-    enginePresetQueryServiceUpdatePresetQueryBody: EnginePresetQueryServiceUpdatePresetQueryBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/call_center/preset/query/${id}`,
-      enginePresetQueryServiceUpdatePresetQueryBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchPresetQuery,createPresetQuery,deletePresetQuery,readPresetQuery,patchPresetQuery,updatePresetQuery}};
-export type SearchPresetQueryResult = AxiosResponse<EngineListPresetQuery>
-export type CreatePresetQueryResult = AxiosResponse<EnginePresetQuery>
-export type DeletePresetQueryResult = AxiosResponse<EnginePresetQuery>
-export type ReadPresetQueryResult = AxiosResponse<EnginePresetQuery>
-export type PatchPresetQueryResult = AxiosResponse<EnginePresetQuery>
-export type UpdatePresetQueryResult = AxiosResponse<EnginePresetQuery>
-
-            // --- footer end
-          
+// --- footer end

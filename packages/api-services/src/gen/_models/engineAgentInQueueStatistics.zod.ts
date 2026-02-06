@@ -8,6 +8,6 @@ import type { EngineAgentInQueueStatisticsAgentInQueueStatisticsItem } from './e
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentInQueueStatistics {
-  queue?: EngineLookup;
-  statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
+	queue?: EngineLookup;
+	statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
 }

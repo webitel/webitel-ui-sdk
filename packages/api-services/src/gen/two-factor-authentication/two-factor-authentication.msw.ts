@@ -4,52 +4,166 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
-import {
-  HttpResponse,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { HttpResponse, http } from 'msw';
+import type { RequestHandlerOptions } from 'msw';
 
 import type {
-  ApiGenerateUserTfaKeyResponse,
-  ApiGetUserTfaKeyResponse
+	ApiGenerateUserTfaKeyResponse,
+	ApiGetUserTfaKeyResponse,
 } from '.././_models';
 
+export const getGetUserTfaKeyResponseMock = (
+	overrideResponse: Partial<ApiGetUserTfaKeyResponse> = {},
+): ApiGetUserTfaKeyResponse => ({
+	totp: faker.helpers.arrayElement([
+		{
+			url: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			user: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getGetUserTfaKeyResponseMock = (overrideResponse: Partial< ApiGetUserTfaKeyResponse > = {}): ApiGetUserTfaKeyResponse => ({totp: faker.helpers.arrayElement([{url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getGenerateUserTfaKeyResponseMock = (
+	overrideResponse: Partial<ApiGenerateUserTfaKeyResponse> = {},
+): ApiGenerateUserTfaKeyResponse => ({
+	totp: faker.helpers.arrayElement([
+		{
+			url: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			user: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getGenerateUserTfaKeyResponseMock = (overrideResponse: Partial< ApiGenerateUserTfaKeyResponse > = {}): ApiGenerateUserTfaKeyResponse => ({totp: faker.helpers.arrayElement([{url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getGetUserTfaKeyMockHandler = (
+	overrideResponse?:
+		| ApiGetUserTfaKeyResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ApiGetUserTfaKeyResponse> | ApiGetUserTfaKeyResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/users/:userId/2fa',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getGetUserTfaKeyResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-
-export const getGetUserTfaKeyMockHandler = (overrideResponse?: ApiGetUserTfaKeyResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ApiGetUserTfaKeyResponse> | ApiGetUserTfaKeyResponse), options?: RequestHandlerOptions) => {
-  return http.get('*/users/:userId/2fa', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getGetUserTfaKeyResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
-
-export const getGenerateUserTfaKeyMockHandler = (overrideResponse?: ApiGenerateUserTfaKeyResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ApiGenerateUserTfaKeyResponse> | ApiGenerateUserTfaKeyResponse), options?: RequestHandlerOptions) => {
-  return http.post('*/users/:userId/2fa', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getGenerateUserTfaKeyResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getGenerateUserTfaKeyMockHandler = (
+	overrideResponse?:
+		| ApiGenerateUserTfaKeyResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<ApiGenerateUserTfaKeyResponse>
+				| ApiGenerateUserTfaKeyResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/users/:userId/2fa',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getGenerateUserTfaKeyResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 export const getTwoFactorAuthenticationMock = () => [
-  getGetUserTfaKeyMockHandler(),
-  getGenerateUserTfaKeyMockHandler()]
+	getGetUserTfaKeyMockHandler(),
+	getGenerateUserTfaKeyMockHandler(),
+];

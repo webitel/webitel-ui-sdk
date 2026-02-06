@@ -7,5 +7,5 @@
 import type { ApiObjectClass } from './apiObjectClass';
 
 export interface ApiReadClassResponse {
-  class?: ApiObjectClass;
+	class?: ApiObjectClass;
 }

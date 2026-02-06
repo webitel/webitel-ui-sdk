@@ -6,7 +6,7 @@
  */
 
 export type ReadPasswordSettingsParams = {
-password?: string;
-username?: string;
-domain?: string;
+	password?: string;
+	username?: string;
+	domain?: string;
 };

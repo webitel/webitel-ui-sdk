@@ -6,5 +6,5 @@
  */
 
 export type ForecastCalculationServiceReadForecastCalculationParams = {
-fields?: string[];
+	fields?: string[];
 };

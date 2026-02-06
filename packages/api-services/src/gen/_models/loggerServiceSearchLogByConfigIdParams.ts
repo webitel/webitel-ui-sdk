@@ -7,14 +7,14 @@
 import type { LoggerServiceSearchLogByConfigIdActionItem } from './loggerServiceSearchLogByConfigIdActionItem';
 
 export type LoggerServiceSearchLogByConfigIdParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-userId?: string[];
-action?: LoggerServiceSearchLogByConfigIdActionItem[];
-userIp?: string;
-dateFrom?: string;
-dateTo?: string;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	userId?: string[];
+	action?: LoggerServiceSearchLogByConfigIdActionItem[];
+	userIp?: string;
+	dateFrom?: string;
+	dateTo?: string;
 };

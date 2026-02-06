@@ -7,8 +7,8 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export type UpdateTimezoneInputBody = {
-  /** Indicates whether this association must be default among others. */
-  primary?: boolean;
-  /** Timezone dictionary reference value associated. */
-  timezone?: WebitelcontactsLookup;
+	/** Indicates whether this association must be default among others. */
+	primary?: boolean;
+	/** Timezone dictionary reference value associated. */
+	timezone?: WebitelcontactsLookup;
 };

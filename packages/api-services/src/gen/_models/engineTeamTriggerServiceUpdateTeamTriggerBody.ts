@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineTeamTriggerServiceUpdateTeamTriggerBody {
-  description?: string;
-  enabled?: boolean;
-  name?: string;
-  schema?: EngineLookup;
+	description?: string;
+	enabled?: boolean;
+	name?: string;
+	schema?: EngineLookup;
 }

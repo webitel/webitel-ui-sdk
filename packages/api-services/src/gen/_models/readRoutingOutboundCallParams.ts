@@ -6,5 +6,5 @@
  */
 
 export type ReadRoutingOutboundCallParams = {
-domainId?: string;
+	domainId?: string;
 };

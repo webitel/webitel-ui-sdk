@@ -6,16 +6,16 @@
  */
 
 export type ListScreenrecordingExportsParams = {
-/**
- * Page number (1-based).
- */
-page?: number;
-/**
- * Number of items per page.
- */
-size?: number;
-/**
- * sorting criteria, e.g. "+created_at" or "-name"
- */
-sort?: string;
+	/**
+	 * Page number (1-based).
+	 */
+	page?: number;
+	/**
+	 * Number of items per page.
+	 */
+	size?: number;
+	/**
+	 * sorting criteria, e.g. "+created_at" or "-name"
+	 */
+	sort?: string;
 };

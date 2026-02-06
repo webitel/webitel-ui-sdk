@@ -6,5 +6,5 @@
  */
 
 export interface EngineTag {
-  name?: string;
+	name?: string;
 }

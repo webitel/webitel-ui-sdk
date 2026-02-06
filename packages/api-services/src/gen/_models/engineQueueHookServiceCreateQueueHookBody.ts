@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueHookServiceCreateQueueHookBody {
-  enabled?: boolean;
-  event?: string;
-  properties?: string[];
-  schema?: EngineLookup;
+	enabled?: boolean;
+	event?: string;
+	properties?: string[];
+	schema?: EngineLookup;
 }

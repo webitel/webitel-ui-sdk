@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineEmailAuthType = typeof EngineEmailAuthType[keyof typeof EngineEmailAuthType];
-
+export type EngineEmailAuthType =
+	(typeof EngineEmailAuthType)[keyof typeof EngineEmailAuthType];
 
 export const EngineEmailAuthType = {
-  EmailAuthTypeUndefined: 'EmailAuthTypeUndefined',
-  Plain: 'Plain',
-  OAuth2: 'OAuth2',
+	EmailAuthTypeUndefined: 'EmailAuthTypeUndefined',
+	Plain: 'Plain',
+	OAuth2: 'OAuth2',
 } as const;

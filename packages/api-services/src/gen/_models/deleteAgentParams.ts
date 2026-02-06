@@ -6,5 +6,5 @@
  */
 
 export type DeleteAgentParams = {
-domainId?: string;
+	domainId?: string;
 };

@@ -6,5 +6,5 @@
  */
 
 export type SearchPauseCauseForAgentParams = {
-allowChange?: boolean;
+	allowChange?: boolean;
 };

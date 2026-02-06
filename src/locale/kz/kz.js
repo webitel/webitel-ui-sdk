@@ -17,7 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
-	WebitelApplications,
+	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -302,9 +302,9 @@ export default {
 		actualResolutionTime: 'Нақты шешу уақыты',
 	},
 	// describes Webitel FRONTEND applications + their navs
-	WebitelApplications: {
+	WtApplication: {
 		overrideApplicationsAccess: {
-			[WebitelApplications.CRM]: {
+			[WtApplication.Crm]: {
 				sections: {
 					[CrmSectionsNew.CasesExtensions]: ({ linked }) =>
 						linked('objects.customization.customization') +
@@ -319,16 +319,16 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
+		[WtApplication.Agent]: {
 			name: 'Оператор жұмыс орны',
 		},
-		[WebitelApplications.AUDIT]: {
+		[WtApplication.Audit]: {
 			name: 'Аудит',
 			sections: {
 				[AuditorSections.Scorecards]: 'Бағалау карточкалары',
 			},
 		},
-		[WebitelApplications.CRM]: {
+		[WtApplication.Crm]: {
 			name: 'CRM',
 			sections: {
 				[CrmSections.Contacts]: 'Байланыстар',
@@ -342,13 +342,13 @@ export default {
 				[CrmSections.ContactGroups]: 'Байланыс топтары',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
+		[WtApplication.History]: {
 			name: 'Қоңырау тарихы',
 		},
-		[WebitelApplications.ANALYTICS]: {
+		[WtApplication.Analytics]: {
 			name: 'Деректерді көрсету құралы',
 		},
-		[WebitelApplications.SUPERVISOR]: {
+		[WtApplication.Supervisor]: {
 			name: 'Супервайзер жұмыс орны',
 			sections: {
 				[SupervisorSections.Queues]: 'Кезектер',
@@ -356,7 +356,7 @@ export default {
 				[SupervisorSections.ActiveCalls]: 'Белсенді қоңыраулар',
 			},
 		},
-		[WebitelApplications.ADMIN]: {
+		[WtApplication.Admin]: {
 			name: 'Әкімші',
 			sections: {
 				[AdminSections.Users]: 'Пайдаланушылар',
@@ -399,10 +399,10 @@ export default {
 				[AdminSections.QuickReplies]: 'Жылдам жауаптар',
 			},
 		},
-		[WebitelApplications.WFM]: {
+		[WtApplication.Wfm]: {
 			name: 'WFM',
 		},
-		[WebitelApplications.MEET]: {
+		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера өшірілген',
 		},
 	},

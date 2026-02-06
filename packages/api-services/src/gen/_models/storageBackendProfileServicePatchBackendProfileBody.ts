@@ -7,13 +7,13 @@
 import type { StorageBackendProfileServicePatchBackendProfileBodyProperties } from './storageBackendProfileServicePatchBackendProfileBodyProperties';
 
 export interface StorageBackendProfileServicePatchBackendProfileBody {
-  description?: string;
-  disabled?: boolean;
-  domainId?: string;
-  expireDays?: number;
-  fields?: string[];
-  maxSize?: string;
-  name?: string;
-  priority?: number;
-  properties?: StorageBackendProfileServicePatchBackendProfileBodyProperties;
+	description?: string;
+	disabled?: boolean;
+	domainId?: string;
+	expireDays?: number;
+	fields?: string[];
+	maxSize?: string;
+	name?: string;
+	priority?: number;
+	properties?: StorageBackendProfileServicePatchBackendProfileBodyProperties;
 }

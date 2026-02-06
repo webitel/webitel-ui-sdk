@@ -7,7 +7,7 @@
 import type { ApiLDAPCatalog } from './apiLDAPCatalog';
 
 export interface ApiSearchLDAPResponse {
-  items?: ApiLDAPCatalog[];
-  next?: boolean;
-  page?: number;
+	items?: ApiLDAPCatalog[];
+	next?: boolean;
+	page?: number;
 }

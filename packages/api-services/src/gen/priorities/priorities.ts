@@ -6,124 +6,150 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CreatePriorityParams,
-  ListPrioritiesParams,
-  LocatePriorityParams,
-  UpdatePriority2Params,
-  UpdatePriorityParams,
-  WebitelCasesInputPriority,
-  WebitelCasesInputPriorityBody,
-  WebitelCasesLocatePriorityResponse,
-  WebitelCasesPriority,
-  WebitelCasesPriorityList
+	CreatePriorityParams,
+	ListPrioritiesParams,
+	LocatePriorityParams,
+	UpdatePriority2Params,
+	UpdatePriorityParams,
+	WebitelCasesInputPriority,
+	WebitelCasesInputPriorityBody,
+	WebitelCasesLocatePriorityResponse,
+	WebitelCasesPriority,
+	WebitelCasesPriorityList,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getPriorities =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Retrieve a list of priorities or search priorities
+			 */
+			const listPriorities = <TData = AxiosResponse<WebitelCasesPriorityList>>(
+				params?: ListPrioritiesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/priorities`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Create a new priority
+			 */
+			const createPriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+				webitelCasesInputPriorityBody: WebitelCasesInputPriorityBody,
+				params?: CreatePriorityParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/cases/priorities`,
+					webitelCasesInputPriorityBody,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Delete a priority
+			 */
+			const deletePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/cases/priorities/${id}`, options);
+			};
+			/**
+			 * @summary Locate a priority by ID
+			 */
+			const locatePriority = <
+				TData = AxiosResponse<WebitelCasesLocatePriorityResponse>,
+			>(
+				id: string,
+				params?: LocatePriorityParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/priorities/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Update an existing priority
+			 */
+			const updatePriority2 = <TData = AxiosResponse<WebitelCasesPriority>>(
+				id: string,
+				webitelCasesInputPriority: WebitelCasesInputPriority,
+				params?: UpdatePriority2Params,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/cases/priorities/${id}`,
+					webitelCasesInputPriority,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Update an existing priority
+			 */
+			const updatePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
+				id: string,
+				webitelCasesInputPriority: WebitelCasesInputPriority,
+				params?: UpdatePriorityParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/cases/priorities/${id}`,
+					webitelCasesInputPriority,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				listPriorities,
+				createPriority,
+				deletePriority,
+				locatePriority,
+				updatePriority2,
+				updatePriority,
+			};
+		};
+export type ListPrioritiesResult = AxiosResponse<WebitelCasesPriorityList>;
+export type CreatePriorityResult = AxiosResponse<WebitelCasesPriority>;
+export type DeletePriorityResult = AxiosResponse<WebitelCasesPriority>;
+export type LocatePriorityResult =
+	AxiosResponse<WebitelCasesLocatePriorityResponse>;
+export type UpdatePriority2Result = AxiosResponse<WebitelCasesPriority>;
+export type UpdatePriorityResult = AxiosResponse<WebitelCasesPriority>;
 
-  export const 
-            // --- title start
-            getPriorities
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Retrieve a list of priorities or search priorities
- */
-const listPriorities = <TData = AxiosResponse<WebitelCasesPriorityList>>(
-    params?: ListPrioritiesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/priorities`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Create a new priority
- */
-const createPriority = <TData = AxiosResponse<WebitelCasesPriority>>(
-    webitelCasesInputPriorityBody: WebitelCasesInputPriorityBody,
-    params?: CreatePriorityParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/cases/priorities`,
-      webitelCasesInputPriorityBody,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Delete a priority
- */
-const deletePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/cases/priorities/${id}`,options
-    );
-  }
-/**
- * @summary Locate a priority by ID
- */
-const locatePriority = <TData = AxiosResponse<WebitelCasesLocatePriorityResponse>>(
-    id: string,
-    params?: LocatePriorityParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/priorities/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing priority
- */
-const updatePriority2 = <TData = AxiosResponse<WebitelCasesPriority>>(
-    id: string,
-    webitelCasesInputPriority: WebitelCasesInputPriority,
-    params?: UpdatePriority2Params, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/cases/priorities/${id}`,
-      webitelCasesInputPriority,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing priority
- */
-const updatePriority = <TData = AxiosResponse<WebitelCasesPriority>>(
-    id: string,
-    webitelCasesInputPriority: WebitelCasesInputPriority,
-    params?: UpdatePriorityParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/cases/priorities/${id}`,
-      webitelCasesInputPriority,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {listPriorities,createPriority,deletePriority,locatePriority,updatePriority2,updatePriority}};
-export type ListPrioritiesResult = AxiosResponse<WebitelCasesPriorityList>
-export type CreatePriorityResult = AxiosResponse<WebitelCasesPriority>
-export type DeletePriorityResult = AxiosResponse<WebitelCasesPriority>
-export type LocatePriorityResult = AxiosResponse<WebitelCasesLocatePriorityResponse>
-export type UpdatePriority2Result = AxiosResponse<WebitelCasesPriority>
-export type UpdatePriorityResult = AxiosResponse<WebitelCasesPriority>
-
-            // --- footer end
-          
+// --- footer end

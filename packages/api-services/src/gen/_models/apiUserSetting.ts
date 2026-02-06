@@ -6,5 +6,5 @@
  */
 
 export interface ApiUserSetting {
-  key?: string;
+	key?: string;
 }

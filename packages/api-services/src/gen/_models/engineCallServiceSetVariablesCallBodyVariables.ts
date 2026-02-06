@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineCallServiceSetVariablesCallBodyVariables = {[key: string]: string};
+export type EngineCallServiceSetVariablesCallBodyVariables = {
+	[key: string]: string;
+};

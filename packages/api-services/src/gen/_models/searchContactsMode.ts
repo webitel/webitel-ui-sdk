@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchContactsMode = typeof SearchContactsMode[keyof typeof SearchContactsMode];
-
+export type SearchContactsMode =
+	(typeof SearchContactsMode)[keyof typeof SearchContactsMode];
 
 export const SearchContactsMode = {
-  Read: 'READ',
-  Write: 'WRITE',
-  Delete: 'DELETE',
+	Read: 'READ',
+	Write: 'WRITE',
+	Delete: 'DELETE',
 } as const;

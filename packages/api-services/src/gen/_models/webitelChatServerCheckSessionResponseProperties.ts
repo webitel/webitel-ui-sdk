@@ -8,4 +8,6 @@
 /**
  * optional: extra context
  */
-export type WebitelChatServerCheckSessionResponseProperties = {[key: string]: string};
+export type WebitelChatServerCheckSessionResponseProperties = {
+	[key: string]: string;
+};

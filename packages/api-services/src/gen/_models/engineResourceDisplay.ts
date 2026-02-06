@@ -6,6 +6,6 @@
  */
 
 export interface EngineResourceDisplay {
-  display?: string;
-  id?: string;
+	display?: string;
+	id?: string;
 }

@@ -10,18 +10,18 @@ import type { ApiRoleMetadata } from './apiRoleMetadata';
 import type { ApiUserId } from './apiUserId';
 
 export interface ApiRole {
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  deletedAt?: string;
-  deletedBy?: ApiUserId;
-  description?: string;
-  id?: string;
-  /** users/roles */
-  members?: ApiObjectId[];
-  metadata?: ApiRoleMetadata;
-  name?: string;
-  permissions?: ApiPermission[];
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  user?: boolean;
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	deletedAt?: string;
+	deletedBy?: ApiUserId;
+	description?: string;
+	id?: string;
+	/** users/roles */
+	members?: ApiObjectId[];
+	metadata?: ApiRoleMetadata;
+	name?: string;
+	permissions?: ApiPermission[];
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	user?: boolean;
 }

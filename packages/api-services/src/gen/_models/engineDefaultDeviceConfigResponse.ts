@@ -8,6 +8,6 @@ import type { EngineDefaultDeviceConfigResponseSipDeviceConfig } from './engineD
 import type { EngineDefaultDeviceConfigResponseWebRTCDeviceConfig } from './engineDefaultDeviceConfigResponseWebRTCDeviceConfig';
 
 export interface EngineDefaultDeviceConfigResponse {
-  sip?: EngineDefaultDeviceConfigResponseSipDeviceConfig;
-  webrtc?: EngineDefaultDeviceConfigResponseWebRTCDeviceConfig;
+	sip?: EngineDefaultDeviceConfigResponseSipDeviceConfig;
+	webrtc?: EngineDefaultDeviceConfigResponseWebRTCDeviceConfig;
 }

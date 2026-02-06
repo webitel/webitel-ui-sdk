@@ -6,8 +6,8 @@
  */
 
 export type GetQueuesGlobalStateParams = {
-q?: string;
-type?: number[];
-teamId?: number[];
-tags?: string[];
+	q?: string;
+	type?: number[];
+	teamId?: number[];
+	tags?: string[];
 };

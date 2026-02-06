@@ -6,7 +6,7 @@
  */
 
 export interface GeneralExtendedLookup {
-  id?: string;
-  name?: string;
-  type?: string;
+	id?: string;
+	name?: string;
+	type?: string;
 }

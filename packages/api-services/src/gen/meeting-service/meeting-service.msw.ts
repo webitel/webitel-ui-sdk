@@ -4,52 +4,131 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
-import {
-  HttpResponse,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { HttpResponse, http } from 'msw';
+import type { RequestHandlerOptions } from 'msw';
 
 import type {
-  WebMeetingBackendMeetingView,
-  WebMeetingBackendSatisfactionMeetingResponse
+	WebMeetingBackendMeetingView,
+	WebMeetingBackendSatisfactionMeetingResponse,
 } from '.././_models';
 
+export const getGetMeetingViewResponseMock = (
+	overrideResponse: Partial<WebMeetingBackendMeetingView> = {},
+): WebMeetingBackendMeetingView => ({
+	allowSatisfaction: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	expiresAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	satisfaction: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	title: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getGetMeetingViewResponseMock = (overrideResponse: Partial< WebMeetingBackendMeetingView > = {}): WebMeetingBackendMeetingView => ({allowSatisfaction: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), createdAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), expiresAt: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), satisfaction: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), title: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getSatisfactionMeetingResponseMock =
+	(): WebMeetingBackendSatisfactionMeetingResponse => ({});
 
-export const getSatisfactionMeetingResponseMock = (): WebMeetingBackendSatisfactionMeetingResponse => ({})
+export const getGetMeetingViewMockHandler = (
+	overrideResponse?:
+		| WebMeetingBackendMeetingView
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebMeetingBackendMeetingView>
+				| WebMeetingBackendMeetingView),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/meetings/:id',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getGetMeetingViewResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-
-export const getGetMeetingViewMockHandler = (overrideResponse?: WebMeetingBackendMeetingView | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebMeetingBackendMeetingView> | WebMeetingBackendMeetingView), options?: RequestHandlerOptions) => {
-  return http.get('*/meetings/:id', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getGetMeetingViewResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
-
-export const getSatisfactionMeetingMockHandler = (overrideResponse?: WebMeetingBackendSatisfactionMeetingResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebMeetingBackendSatisfactionMeetingResponse> | WebMeetingBackendSatisfactionMeetingResponse), options?: RequestHandlerOptions) => {
-  return http.post('*/meetings/:id/satisfaction', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getSatisfactionMeetingResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getSatisfactionMeetingMockHandler = (
+	overrideResponse?:
+		| WebMeetingBackendSatisfactionMeetingResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebMeetingBackendSatisfactionMeetingResponse>
+				| WebMeetingBackendSatisfactionMeetingResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/meetings/:id/satisfaction',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getSatisfactionMeetingResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 export const getMeetingServiceMock = () => [
-  getGetMeetingViewMockHandler(),
-  getSatisfactionMeetingMockHandler()]
+	getGetMeetingViewMockHandler(),
+	getSatisfactionMeetingMockHandler(),
+];

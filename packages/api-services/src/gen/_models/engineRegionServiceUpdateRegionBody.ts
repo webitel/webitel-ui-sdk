@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRegionServiceUpdateRegionBody {
-  description?: string;
-  name?: string;
-  timezone?: EngineLookup;
+	description?: string;
+	name?: string;
+	timezone?: EngineLookup;
 }

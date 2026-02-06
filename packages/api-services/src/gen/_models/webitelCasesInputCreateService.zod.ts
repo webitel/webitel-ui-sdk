@@ -8,13 +8,13 @@ import type { GeneralExtendedLookup } from './generalExtendedLookup';
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesInputCreateService {
-  assignee?: GeneralLookup;
-  catalogId?: string;
-  code?: string;
-  description?: string;
-  group?: GeneralExtendedLookup;
-  name?: string;
-  rootId?: string;
-  sla?: GeneralLookup;
-  state?: boolean;
+	assignee?: GeneralLookup;
+	catalogId?: string;
+	code?: string;
+	description?: string;
+	group?: GeneralExtendedLookup;
+	name?: string;
+	rootId?: string;
+	sla?: GeneralLookup;
+	state?: boolean;
 }

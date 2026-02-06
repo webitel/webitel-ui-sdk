@@ -6,8 +6,8 @@
  */
 
 export type ResetEmailsParams = {
-/**
- * Fields to be retrieved into result of changes.
- */
-fields?: string[];
+	/**
+	 * Fields to be retrieved into result of changes.
+	 */
+	fields?: string[];
 };

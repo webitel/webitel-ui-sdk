@@ -6,175 +6,230 @@
  */
 import * as zod from 'zod';
 
+export const ForecastCalculationServiceSearchForecastCalculationQueryParams =
+	zod.object({
+		q: zod.string().optional(),
+		page: zod.number().optional(),
+		size: zod.number().optional(),
+		sort: zod.string().optional(),
+		fields: zod.array(zod.string()).optional(),
+	});
 
-export const ForecastCalculationServiceSearchForecastCalculationQueryParams = zod.object({
-  "q": zod.string().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+export const ForecastCalculationServiceSearchForecastCalculationResponse =
+	zod.object({
+		items: zod
+			.array(
+				zod.object({
+					args: zod.array(zod.string()).optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					domainId: zod.string().optional(),
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					procedure: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				}),
+			)
+			.optional(),
+		next: zod.boolean().optional(),
+	});
 
-export const ForecastCalculationServiceSearchForecastCalculationResponse = zod.object({
-  "items": zod.array(zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+export const ForecastCalculationServiceCreateForecastCalculationBody =
+	zod.object({
+		item: zod
+			.object({
+				args: zod.array(zod.string()).optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				procedure: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const ForecastCalculationServiceCreateForecastCalculationBody = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+export const ForecastCalculationServiceCreateForecastCalculationResponse =
+	zod.object({
+		item: zod
+			.object({
+				args: zod.array(zod.string()).optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				procedure: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const ForecastCalculationServiceCreateForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+export const ForecastCalculationServiceDeleteForecastCalculationParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const ForecastCalculationServiceDeleteForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
+export const ForecastCalculationServiceDeleteForecastCalculationResponse =
+	zod.object({
+		id: zod.string().optional(),
+	});
 
-export const ForecastCalculationServiceDeleteForecastCalculationResponse = zod.object({
-  "id": zod.string().optional()
-})
+export const ForecastCalculationServiceReadForecastCalculationParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const ForecastCalculationServiceReadForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
+export const ForecastCalculationServiceReadForecastCalculationQueryParams =
+	zod.object({
+		fields: zod.array(zod.string()).optional(),
+	});
 
-export const ForecastCalculationServiceReadForecastCalculationQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+export const ForecastCalculationServiceReadForecastCalculationResponse =
+	zod.object({
+		item: zod
+			.object({
+				args: zod.array(zod.string()).optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				procedure: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const ForecastCalculationServiceReadForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+export const ForecastCalculationServiceExecuteForecastCalculationParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const ForecastCalculationServiceExecuteForecastCalculationParams = zod.object({
-  "id": zod.string()
-})
+export const ForecastCalculationServiceExecuteForecastCalculationQueryParams =
+	zod.object({
+		teamId: zod.string().optional(),
+		forecastDataFrom: zod.string().optional(),
+		forecastDataTo: zod.string().optional(),
+	});
 
-export const ForecastCalculationServiceExecuteForecastCalculationQueryParams = zod.object({
-  "teamId": zod.string().optional(),
-  "forecastDataFrom": zod.string().optional(),
-  "forecastDataTo": zod.string().optional()
-})
+export const ForecastCalculationServiceExecuteForecastCalculationResponse =
+	zod.object({
+		items: zod
+			.array(
+				zod.object({
+					agents: zod.string().optional(),
+					timestamp: zod.string().optional(),
+				}),
+			)
+			.optional(),
+	});
 
-export const ForecastCalculationServiceExecuteForecastCalculationResponse = zod.object({
-  "items": zod.array(zod.object({
-  "agents": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})).optional()
-})
+export const ForecastCalculationServiceUpdateForecastCalculationParams =
+	zod.object({
+		'item.id': zod.string(),
+	});
 
-export const ForecastCalculationServiceUpdateForecastCalculationParams = zod.object({
-  "item.id": zod.string()
-})
+export const ForecastCalculationServiceUpdateForecastCalculationBody =
+	zod.object({
+		item: zod
+			.object({
+				args: zod.array(zod.string()).optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				name: zod.string().optional(),
+				procedure: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const ForecastCalculationServiceUpdateForecastCalculationBody = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const ForecastCalculationServiceUpdateForecastCalculationResponse = zod.object({
-  "item": zod.object({
-  "args": zod.array(zod.string()).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "procedure": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+export const ForecastCalculationServiceUpdateForecastCalculationResponse =
+	zod.object({
+		item: zod
+			.object({
+				args: zod.array(zod.string()).optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				procedure: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});

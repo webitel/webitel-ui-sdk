@@ -6,22 +6,24 @@
  */
 import * as zod from 'zod';
 
-
 export const SearchQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "objectName": zod.array(zod.string()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	objectName: zod.array(zod.string()).optional(),
+});
 
 export const SearchResponse = zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "objectName": zod.string().optional(),
-  "text": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+	items: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				objectName: zod.string().optional(),
+				text: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

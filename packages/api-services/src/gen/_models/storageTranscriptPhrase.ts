@@ -6,8 +6,8 @@
  */
 
 export interface StorageTranscriptPhrase {
-  channel?: number;
-  endSec?: number;
-  phrase?: string;
-  startSec?: number;
+	channel?: number;
+	endSec?: number;
+	phrase?: string;
+	startSec?: number;
 }

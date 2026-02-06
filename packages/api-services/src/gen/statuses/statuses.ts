@@ -6,124 +6,150 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CreateStatusParams,
-  ListStatusesParams,
-  LocateStatusParams,
-  UpdateStatus2Params,
-  UpdateStatusParams,
-  WebitelCasesInputStatus,
-  WebitelCasesInputStatusBody,
-  WebitelCasesLocateStatusResponse,
-  WebitelCasesStatus,
-  WebitelCasesStatusList
+	CreateStatusParams,
+	ListStatusesParams,
+	LocateStatusParams,
+	UpdateStatus2Params,
+	UpdateStatusParams,
+	WebitelCasesInputStatus,
+	WebitelCasesInputStatusBody,
+	WebitelCasesLocateStatusResponse,
+	WebitelCasesStatus,
+	WebitelCasesStatusList,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getStatuses =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Retrieve a list of statuses or search statuses
+			 */
+			const listStatuses = <TData = AxiosResponse<WebitelCasesStatusList>>(
+				params?: ListStatusesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/statuses`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Create a new status
+			 */
+			const createStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+				webitelCasesInputStatusBody: WebitelCasesInputStatusBody,
+				params?: CreateStatusParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/cases/statuses`,
+					webitelCasesInputStatusBody,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Delete a status
+			 */
+			const deleteStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/cases/statuses/${id}`, options);
+			};
+			/**
+			 * @summary Locate a status by ID
+			 */
+			const locateStatus = <
+				TData = AxiosResponse<WebitelCasesLocateStatusResponse>,
+			>(
+				id: string,
+				params?: LocateStatusParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/statuses/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Update an existing status
+			 */
+			const updateStatus2 = <TData = AxiosResponse<WebitelCasesStatus>>(
+				id: string,
+				webitelCasesInputStatus: WebitelCasesInputStatus,
+				params?: UpdateStatus2Params,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/cases/statuses/${id}`,
+					webitelCasesInputStatus,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Update an existing status
+			 */
+			const updateStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
+				id: string,
+				webitelCasesInputStatus: WebitelCasesInputStatus,
+				params?: UpdateStatusParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/cases/statuses/${id}`,
+					webitelCasesInputStatus,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				listStatuses,
+				createStatus,
+				deleteStatus,
+				locateStatus,
+				updateStatus2,
+				updateStatus,
+			};
+		};
+export type ListStatusesResult = AxiosResponse<WebitelCasesStatusList>;
+export type CreateStatusResult = AxiosResponse<WebitelCasesStatus>;
+export type DeleteStatusResult = AxiosResponse<WebitelCasesStatus>;
+export type LocateStatusResult =
+	AxiosResponse<WebitelCasesLocateStatusResponse>;
+export type UpdateStatus2Result = AxiosResponse<WebitelCasesStatus>;
+export type UpdateStatusResult = AxiosResponse<WebitelCasesStatus>;
 
-  export const 
-            // --- title start
-            getStatuses
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Retrieve a list of statuses or search statuses
- */
-const listStatuses = <TData = AxiosResponse<WebitelCasesStatusList>>(
-    params?: ListStatusesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/statuses`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Create a new status
- */
-const createStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
-    webitelCasesInputStatusBody: WebitelCasesInputStatusBody,
-    params?: CreateStatusParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/cases/statuses`,
-      webitelCasesInputStatusBody,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Delete a status
- */
-const deleteStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/cases/statuses/${id}`,options
-    );
-  }
-/**
- * @summary Locate a status by ID
- */
-const locateStatus = <TData = AxiosResponse<WebitelCasesLocateStatusResponse>>(
-    id: string,
-    params?: LocateStatusParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/statuses/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing status
- */
-const updateStatus2 = <TData = AxiosResponse<WebitelCasesStatus>>(
-    id: string,
-    webitelCasesInputStatus: WebitelCasesInputStatus,
-    params?: UpdateStatus2Params, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/cases/statuses/${id}`,
-      webitelCasesInputStatus,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing status
- */
-const updateStatus = <TData = AxiosResponse<WebitelCasesStatus>>(
-    id: string,
-    webitelCasesInputStatus: WebitelCasesInputStatus,
-    params?: UpdateStatusParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/cases/statuses/${id}`,
-      webitelCasesInputStatus,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {listStatuses,createStatus,deleteStatus,locateStatus,updateStatus2,updateStatus}};
-export type ListStatusesResult = AxiosResponse<WebitelCasesStatusList>
-export type CreateStatusResult = AxiosResponse<WebitelCasesStatus>
-export type DeleteStatusResult = AxiosResponse<WebitelCasesStatus>
-export type LocateStatusResult = AxiosResponse<WebitelCasesLocateStatusResponse>
-export type UpdateStatus2Result = AxiosResponse<WebitelCasesStatus>
-export type UpdateStatusResult = AxiosResponse<WebitelCasesStatus>
-
-            // --- footer end
-          
+// --- footer end

@@ -6,74 +6,82 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ApiReadClassResponse,
-  ApiSearchClassesResponse,
-  ApiUpdateClassResponse,
-  ClassesUpdateClassBody,
-  ReadClassParams,
-  SearchClassesParams
+	ApiReadClassResponse,
+	ApiSearchClassesResponse,
+	ApiUpdateClassResponse,
+	ClassesUpdateClassBody,
+	ReadClassParams,
+	SearchClassesParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getClasses =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const searchClasses = <TData = AxiosResponse<ApiSearchClassesResponse>>(
+				params?: SearchClassesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/objclass`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const updateClass2 = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+				classesUpdateClassBody: ClassesUpdateClassBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/objclass/_class.id}`,
+					classesUpdateClassBody,
+					options,
+				);
+			};
+			const updateClass = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+				classesUpdateClassBody: ClassesUpdateClassBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/objclass/_class.id}`,
+					classesUpdateClassBody,
+					options,
+				);
+			};
+			const readClass = <TData = AxiosResponse<ApiReadClassResponse>>(
+				id: string,
+				params?: ReadClassParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/objclass/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchClasses,
+				updateClass2,
+				updateClass,
+				readClass,
+			};
+		};
+export type SearchClassesResult = AxiosResponse<ApiSearchClassesResponse>;
+export type UpdateClass2Result = AxiosResponse<ApiUpdateClassResponse>;
+export type UpdateClassResult = AxiosResponse<ApiUpdateClassResponse>;
+export type ReadClassResult = AxiosResponse<ApiReadClassResponse>;
 
-  export const 
-            // --- title start
-            getClasses
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const searchClasses = <TData = AxiosResponse<ApiSearchClassesResponse>>(
-    params?: SearchClassesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/objclass`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const updateClass2 = <TData = AxiosResponse<ApiUpdateClassResponse>>(
-    classesUpdateClassBody: ClassesUpdateClassBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/objclass/_class.id}`,
-      classesUpdateClassBody,options
-    );
-  }
-const updateClass = <TData = AxiosResponse<ApiUpdateClassResponse>>(
-    classesUpdateClassBody: ClassesUpdateClassBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/objclass/_class.id}`,
-      classesUpdateClassBody,options
-    );
-  }
-const readClass = <TData = AxiosResponse<ApiReadClassResponse>>(
-    id: string,
-    params?: ReadClassParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/objclass/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {searchClasses,updateClass2,updateClass,readClass}};
-export type SearchClassesResult = AxiosResponse<ApiSearchClassesResponse>
-export type UpdateClass2Result = AxiosResponse<ApiUpdateClassResponse>
-export type UpdateClassResult = AxiosResponse<ApiUpdateClassResponse>
-export type ReadClassResult = AxiosResponse<ApiReadClassResponse>
-
-            // --- footer end
-          
+// --- footer end

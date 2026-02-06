@@ -10,9 +10,9 @@ import type { ContactsPhoneNumber } from './contactsPhoneNumber';
  * PhoneNumber dataset.
  */
 export interface ContactsPhoneList {
-  /** PhoneNumber dataset page. */
-  data?: ContactsPhoneNumber[];
-  next?: boolean;
-  /** The page number of the partial result. */
-  page?: number;
+	/** PhoneNumber dataset page. */
+	data?: ContactsPhoneNumber[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

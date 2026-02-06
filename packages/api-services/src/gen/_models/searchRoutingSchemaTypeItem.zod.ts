@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchRoutingSchemaTypeItem = typeof SearchRoutingSchemaTypeItem[keyof typeof SearchRoutingSchemaTypeItem];
-
+export type SearchRoutingSchemaTypeItem =
+	(typeof SearchRoutingSchemaTypeItem)[keyof typeof SearchRoutingSchemaTypeItem];
 
 export const SearchRoutingSchemaTypeItem = {
-  Default: 'default',
-  Voice: 'voice',
-  Chat: 'chat',
-  Processing: 'processing',
-  Service: 'service',
+	Default: 'default',
+	Voice: 'voice',
+	Chat: 'chat',
+	Processing: 'processing',
+	Service: 'service',
 } as const;

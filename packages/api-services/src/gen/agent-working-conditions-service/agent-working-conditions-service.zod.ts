@@ -6,51 +6,72 @@
  */
 import * as zod from 'zod';
 
+export const AgentWorkingConditionsServiceReadAgentWorkingConditionsParams =
+	zod.object({
+		agent_id: zod.string(),
+	});
 
-export const AgentWorkingConditionsServiceReadAgentWorkingConditionsParams = zod.object({
-  "agent_id": zod.string()
-})
+export const AgentWorkingConditionsServiceReadAgentWorkingConditionsResponse =
+	zod.object({
+		item: zod
+			.object({
+				pauseTemplate: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				workingCondition: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const AgentWorkingConditionsServiceReadAgentWorkingConditionsResponse = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsParams =
+	zod.object({
+		agent_id: zod.string(),
+	});
 
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsParams = zod.object({
-  "agent_id": zod.string()
-})
+export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody =
+	zod.object({
+		item: zod
+			.object({
+				pauseTemplate: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				workingCondition: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});
 
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
-export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponse = zod.object({
-  "item": zod.object({
-  "pauseTemplate": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "workingCondition": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+export const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponse =
+	zod.object({
+		item: zod
+			.object({
+				pauseTemplate: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				workingCondition: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional(),
+	});

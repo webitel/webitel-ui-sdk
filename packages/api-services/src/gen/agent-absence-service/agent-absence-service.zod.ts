@@ -6,46 +6,68 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Searches absences by filters.
  */
 export const AgentAbsenceServiceSearchAgentsAbsencesQueryParams = zod.object({
-  "q": zod.string().optional().describe('Searches by agent name.'),
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "filters": zod.array(zod.string()).optional()
-})
+	q: zod.string().optional().describe('Searches by agent name.'),
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	filters: zod.array(zod.string()).optional(),
+});
 
 export const agentAbsenceServiceSearchAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceSearchAgentsAbsencesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absences": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceSearchAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				absences: zod
+					.array(
+						zod.object({
+							absentAt: zod.string().optional(),
+							createdAt: zod.string().optional(),
+							createdBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							domainId: zod.string().optional(),
+							id: zod.string().optional(),
+							typeId: zod
+								.enum([
+									'ABSENCE_TYPE_UNSPECIFIED',
+									'ABSENCE_TYPE_DAYOFF',
+									'ABSENCE_TYPE_VACATION',
+									'ABSENCE_TYPE_SICKDAY',
+								])
+								.default(
+									agentAbsenceServiceSearchAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault,
+								),
+							updatedAt: zod.string().optional(),
+							updatedBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+						}),
+					)
+					.optional(),
+				agent: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Creates absences for multiple specified agents.
@@ -53,213 +75,334 @@ export const AgentAbsenceServiceSearchAgentsAbsencesResponse = zod.object({
 export const agentAbsenceServiceCreateAgentsAbsencesBodyItemsItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceCreateAgentsAbsencesBody = zod.object({
-  "agentIds": zod.array(zod.string()).optional(),
-  "items": zod.array(zod.object({
-  "dateFrom": zod.string().optional(),
-  "dateTo": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentsAbsencesBodyItemsItemTypeIdDefault)
-})).optional()
-})
+	agentIds: zod.array(zod.string()).optional(),
+	items: zod
+		.array(
+			zod.object({
+				dateFrom: zod.string().optional(),
+				dateTo: zod.string().optional(),
+				typeId: zod
+					.enum([
+						'ABSENCE_TYPE_UNSPECIFIED',
+						'ABSENCE_TYPE_DAYOFF',
+						'ABSENCE_TYPE_VACATION',
+						'ABSENCE_TYPE_SICKDAY',
+					])
+					.default(
+						agentAbsenceServiceCreateAgentsAbsencesBodyItemsItemTypeIdDefault,
+					),
+			}),
+		)
+		.optional(),
+});
 
 export const agentAbsenceServiceCreateAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceCreateAgentsAbsencesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absences": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "agent": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				absences: zod
+					.array(
+						zod.object({
+							absentAt: zod.string().optional(),
+							createdAt: zod.string().optional(),
+							createdBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							domainId: zod.string().optional(),
+							id: zod.string().optional(),
+							typeId: zod
+								.enum([
+									'ABSENCE_TYPE_UNSPECIFIED',
+									'ABSENCE_TYPE_DAYOFF',
+									'ABSENCE_TYPE_VACATION',
+									'ABSENCE_TYPE_SICKDAY',
+								])
+								.default(
+									agentAbsenceServiceCreateAgentsAbsencesResponseItemsItemAbsencesItemTypeIdDefault,
+								),
+							updatedAt: zod.string().optional(),
+							updatedBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+						}),
+					)
+					.optional(),
+				agent: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+});
 
 /**
  * @summary Searches agent absences by filters.
  */
 export const AgentAbsenceServiceSearchAgentAbsenceParams = zod.object({
-  "agent_id": zod.string()
-})
+	agent_id: zod.string(),
+});
 
 export const AgentAbsenceServiceSearchAgentAbsenceQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "filters": zod.array(zod.string()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	filters: zod.array(zod.string()).optional(),
+});
 
 export const agentAbsenceServiceSearchAgentAbsenceResponseItemsItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceSearchAgentAbsenceResponse = zod.object({
-  "items": zod.array(zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceSearchAgentAbsenceResponseItemsItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				absentAt: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				typeId: zod
+					.enum([
+						'ABSENCE_TYPE_UNSPECIFIED',
+						'ABSENCE_TYPE_DAYOFF',
+						'ABSENCE_TYPE_VACATION',
+						'ABSENCE_TYPE_SICKDAY',
+					])
+					.default(
+						agentAbsenceServiceSearchAgentAbsenceResponseItemsItemTypeIdDefault,
+					),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+});
 
 /**
  * @summary Creates one-day-absence for one agent.
  */
 export const AgentAbsenceServiceCreateAgentAbsenceParams = zod.object({
-  "agent_id": zod.string()
-})
+	agent_id: zod.string(),
+});
 
 export const agentAbsenceServiceCreateAgentAbsenceBodyItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceCreateAgentAbsenceBody = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentAbsenceBodyItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	item: zod
+		.object({
+			absentAt: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			domainId: zod.string().optional(),
+			id: zod.string().optional(),
+			typeId: zod
+				.enum([
+					'ABSENCE_TYPE_UNSPECIFIED',
+					'ABSENCE_TYPE_DAYOFF',
+					'ABSENCE_TYPE_VACATION',
+					'ABSENCE_TYPE_SICKDAY',
+				])
+				.default(agentAbsenceServiceCreateAgentAbsenceBodyItemTypeIdDefault),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 export const agentAbsenceServiceCreateAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceCreateAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceCreateAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	item: zod
+		.object({
+			absentAt: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			domainId: zod.string().optional(),
+			id: zod.string().optional(),
+			typeId: zod
+				.enum([
+					'ABSENCE_TYPE_UNSPECIFIED',
+					'ABSENCE_TYPE_DAYOFF',
+					'ABSENCE_TYPE_VACATION',
+					'ABSENCE_TYPE_SICKDAY',
+				])
+				.default(
+					agentAbsenceServiceCreateAgentAbsenceResponseItemTypeIdDefault,
+				),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Deletes agent concrete absence by its id.
  */
 export const AgentAbsenceServiceDeleteAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "id": zod.string()
-})
+	agent_id: zod.string(),
+	id: zod.string(),
+});
 
 export const AgentAbsenceServiceDeleteAgentAbsenceResponse = zod.object({
-  "id": zod.string().optional()
-})
+	id: zod.string().optional(),
+});
 
 /**
  * @summary Reads one absence per agent by its id.
  */
 export const AgentAbsenceServiceReadAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "id": zod.string()
-})
+	agent_id: zod.string(),
+	id: zod.string(),
+});
 
 export const agentAbsenceServiceReadAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceReadAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceReadAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	item: zod
+		.object({
+			absentAt: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			domainId: zod.string().optional(),
+			id: zod.string().optional(),
+			typeId: zod
+				.enum([
+					'ABSENCE_TYPE_UNSPECIFIED',
+					'ABSENCE_TYPE_DAYOFF',
+					'ABSENCE_TYPE_VACATION',
+					'ABSENCE_TYPE_SICKDAY',
+				])
+				.default(agentAbsenceServiceReadAgentAbsenceResponseItemTypeIdDefault),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Updates agent concrete absence by its id.
  */
 export const AgentAbsenceServiceUpdateAgentAbsenceParams = zod.object({
-  "agent_id": zod.string(),
-  "item.id": zod.string()
-})
+	agent_id: zod.string(),
+	'item.id': zod.string(),
+});
 
 export const agentAbsenceServiceUpdateAgentAbsenceBodyItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceUpdateAgentAbsenceBody = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceUpdateAgentAbsenceBodyItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	item: zod
+		.object({
+			absentAt: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			domainId: zod.string().optional(),
+			typeId: zod
+				.enum([
+					'ABSENCE_TYPE_UNSPECIFIED',
+					'ABSENCE_TYPE_DAYOFF',
+					'ABSENCE_TYPE_VACATION',
+					'ABSENCE_TYPE_SICKDAY',
+				])
+				.default(agentAbsenceServiceUpdateAgentAbsenceBodyItemTypeIdDefault),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 export const agentAbsenceServiceUpdateAgentAbsenceResponseItemTypeIdDefault = `ABSENCE_TYPE_UNSPECIFIED`;
 
 export const AgentAbsenceServiceUpdateAgentAbsenceResponse = zod.object({
-  "item": zod.object({
-  "absentAt": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "typeId": zod.enum(['ABSENCE_TYPE_UNSPECIFIED', 'ABSENCE_TYPE_DAYOFF', 'ABSENCE_TYPE_VACATION', 'ABSENCE_TYPE_SICKDAY']).default(agentAbsenceServiceUpdateAgentAbsenceResponseItemTypeIdDefault),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
-
+	item: zod
+		.object({
+			absentAt: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			domainId: zod.string().optional(),
+			id: zod.string().optional(),
+			typeId: zod
+				.enum([
+					'ABSENCE_TYPE_UNSPECIFIED',
+					'ABSENCE_TYPE_DAYOFF',
+					'ABSENCE_TYPE_VACATION',
+					'ABSENCE_TYPE_SICKDAY',
+				])
+				.default(
+					agentAbsenceServiceUpdateAgentAbsenceResponseItemTypeIdDefault,
+				),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});

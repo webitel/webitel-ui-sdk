@@ -7,8 +7,8 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export type UpdateManagerInputBody = {
-  /** Indicates whether this association must be default among others. */
-  primary?: boolean;
-  /** Responsible User. */
-  user?: WebitelcontactsLookup;
+	/** Indicates whether this association must be default among others. */
+	primary?: boolean;
+	/** Responsible User. */
+	user?: WebitelcontactsLookup;
 };

@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineChatPlan {
-  description?: string;
-  enabled?: boolean;
-  id?: number;
-  name?: string;
-  schema?: EngineLookup;
+	description?: string;
+	enabled?: boolean;
+	id?: number;
+	name?: string;
+	schema?: EngineLookup;
 }

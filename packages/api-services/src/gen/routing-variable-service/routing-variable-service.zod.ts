@@ -6,94 +6,96 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary List of RoutingVariable
  */
 export const SearchRoutingVariableQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "domainId": zod.string().optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	domainId: zod.string().optional(),
+});
 
 export const SearchRoutingVariableResponse = zod.object({
-  "items": zod.array(zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})).optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				key: zod.string().optional(),
+				value: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});
 
 /**
  * @summary Create RoutingVariable
  */
 export const CreateRoutingVariableBody = zod.object({
-  "domainId": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});
 
 export const CreateRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});
 
 /**
  * @summary Remove RoutingVariable
  */
 export const DeleteRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const DeleteRoutingVariableQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const DeleteRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});
 
 /**
  * @summary RoutingVariable item
  */
 export const ReadRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const ReadRoutingVariableQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const ReadRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});
 
 /**
  * @summary Update RoutingVariable
  */
 export const UpdateRoutingVariableParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const UpdateRoutingVariableBody = zod.object({
-  "domainId": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});
 
 export const UpdateRoutingVariableResponse = zod.object({
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "key": zod.string().optional(),
-  "value": zod.string().optional()
-})
-
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	key: zod.string().optional(),
+	value: zod.string().optional(),
+});

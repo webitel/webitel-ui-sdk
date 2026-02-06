@@ -8,13 +8,13 @@ import type { LoggerLookup } from './loggerLookup';
 import type { LoggerRecord } from './loggerRecord';
 
 export interface LoggerLog {
-  action?: string;
-  configId?: number;
-  date?: string;
-  id?: number;
-  newState?: string;
-  object?: LoggerLookup;
-  record?: LoggerRecord;
-  user?: LoggerLookup;
-  userIp?: string;
+	action?: string;
+	configId?: number;
+	date?: string;
+	id?: number;
+	newState?: string;
+	object?: LoggerLookup;
+	record?: LoggerRecord;
+	user?: LoggerLookup;
+	userIp?: string;
 }

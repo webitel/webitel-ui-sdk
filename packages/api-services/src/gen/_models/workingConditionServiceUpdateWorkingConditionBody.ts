@@ -7,5 +7,5 @@
 import type { WorkingConditionServiceUpdateWorkingConditionBodyItem } from './workingConditionServiceUpdateWorkingConditionBodyItem';
 
 export type WorkingConditionServiceUpdateWorkingConditionBody = {
-  item?: WorkingConditionServiceUpdateWorkingConditionBodyItem;
+	item?: WorkingConditionServiceUpdateWorkingConditionBodyItem;
 };

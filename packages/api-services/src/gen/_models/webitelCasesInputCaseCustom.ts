@@ -8,4 +8,6 @@
 /**
  * Custom data extension fields ..
  */
-export type WebitelCasesInputCaseCustom = { [key: string]: unknown };
+export type WebitelCasesInputCaseCustom = {
+	[key: string]: unknown;
+};

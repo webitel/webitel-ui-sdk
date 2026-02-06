@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type GetTimelineTimelineTypeItem = typeof GetTimelineTimelineTypeItem[keyof typeof GetTimelineTimelineTypeItem];
-
+export type GetTimelineTimelineTypeItem =
+	(typeof GetTimelineTimelineTypeItem)[keyof typeof GetTimelineTimelineTypeItem];
 
 export const GetTimelineTimelineTypeItem = {
-  Chat: 'chat',
-  Call: 'call',
-  Email: 'email',
+	Chat: 'chat',
+	Call: 'call',
+	Email: 'email',
 } as const;

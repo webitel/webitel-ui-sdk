@@ -10,10 +10,10 @@ import type { WebitelCasesRelatedCase } from './webitelCasesRelatedCase';
  * Paginated list of related cases.
  */
 export interface WebitelCasesRelatedCaseList {
-  /** List of related cases on the current page. */
-  data?: WebitelCasesRelatedCase[];
-  /** Flag to indicate if more pages are available. */
-  next?: boolean;
-  /** Current page number. */
-  page?: string;
+	/** List of related cases on the current page. */
+	data?: WebitelCasesRelatedCase[];
+	/** Flag to indicate if more pages are available. */
+	next?: boolean;
+	/** Current page number. */
+	page?: string;
 }

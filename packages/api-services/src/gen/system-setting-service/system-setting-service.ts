@@ -6,102 +6,118 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineCreateSystemSettingRequest,
-  EngineListAvailableSystemSetting,
-  EngineListSystemSetting,
-  EngineSystemSetting,
-  EngineSystemSettingServicePatchSystemSettingBody,
-  EngineSystemSettingServiceUpdateSystemSettingBody,
-  SearchAvailableSystemSettingParams,
-  SearchSystemSettingParams
+	EngineCreateSystemSettingRequest,
+	EngineListAvailableSystemSetting,
+	EngineListSystemSetting,
+	EngineSystemSetting,
+	EngineSystemSettingServicePatchSystemSettingBody,
+	EngineSystemSettingServiceUpdateSystemSettingBody,
+	SearchAvailableSystemSettingParams,
+	SearchSystemSettingParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getSystemSettingService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const searchSystemSetting = <
+				TData = AxiosResponse<EngineListSystemSetting>,
+			>(
+				params?: SearchSystemSettingParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/settings`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const createSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+				engineCreateSystemSettingRequest: EngineCreateSystemSettingRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/settings`,
+					engineCreateSystemSettingRequest,
+					options,
+				);
+			};
+			const searchAvailableSystemSetting = <
+				TData = AxiosResponse<EngineListAvailableSystemSetting>,
+			>(
+				params?: SearchAvailableSystemSettingParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/settings/available`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const deleteSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/settings/${id}`, options);
+			};
+			const readSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/settings/${id}`, options);
+			};
+			const patchSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+				id: number,
+				engineSystemSettingServicePatchSystemSettingBody: EngineSystemSettingServicePatchSystemSettingBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/settings/${id}`,
+					engineSystemSettingServicePatchSystemSettingBody,
+					options,
+				);
+			};
+			const updateSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
+				id: number,
+				engineSystemSettingServiceUpdateSystemSettingBody: EngineSystemSettingServiceUpdateSystemSettingBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/settings/${id}`,
+					engineSystemSettingServiceUpdateSystemSettingBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchSystemSetting,
+				createSystemSetting,
+				searchAvailableSystemSetting,
+				deleteSystemSetting,
+				readSystemSetting,
+				patchSystemSetting,
+				updateSystemSetting,
+			};
+		};
+export type SearchSystemSettingResult = AxiosResponse<EngineListSystemSetting>;
+export type CreateSystemSettingResult = AxiosResponse<EngineSystemSetting>;
+export type SearchAvailableSystemSettingResult =
+	AxiosResponse<EngineListAvailableSystemSetting>;
+export type DeleteSystemSettingResult = AxiosResponse<EngineSystemSetting>;
+export type ReadSystemSettingResult = AxiosResponse<EngineSystemSetting>;
+export type PatchSystemSettingResult = AxiosResponse<EngineSystemSetting>;
+export type UpdateSystemSettingResult = AxiosResponse<EngineSystemSetting>;
 
-  export const 
-            // --- title start
-            getSystemSettingService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const searchSystemSetting = <TData = AxiosResponse<EngineListSystemSetting>>(
-    params?: SearchSystemSettingParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/settings`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
-    engineCreateSystemSettingRequest: EngineCreateSystemSettingRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/settings`,
-      engineCreateSystemSettingRequest,options
-    );
-  }
-const searchAvailableSystemSetting = <TData = AxiosResponse<EngineListAvailableSystemSetting>>(
-    params?: SearchAvailableSystemSettingParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/settings/available`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const deleteSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/settings/${id}`,options
-    );
-  }
-const readSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/settings/${id}`,options
-    );
-  }
-const patchSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
-    id: number,
-    engineSystemSettingServicePatchSystemSettingBody: EngineSystemSettingServicePatchSystemSettingBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/settings/${id}`,
-      engineSystemSettingServicePatchSystemSettingBody,options
-    );
-  }
-const updateSystemSetting = <TData = AxiosResponse<EngineSystemSetting>>(
-    id: number,
-    engineSystemSettingServiceUpdateSystemSettingBody: EngineSystemSettingServiceUpdateSystemSettingBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/settings/${id}`,
-      engineSystemSettingServiceUpdateSystemSettingBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchSystemSetting,createSystemSetting,searchAvailableSystemSetting,deleteSystemSetting,readSystemSetting,patchSystemSetting,updateSystemSetting}};
-export type SearchSystemSettingResult = AxiosResponse<EngineListSystemSetting>
-export type CreateSystemSettingResult = AxiosResponse<EngineSystemSetting>
-export type SearchAvailableSystemSettingResult = AxiosResponse<EngineListAvailableSystemSetting>
-export type DeleteSystemSettingResult = AxiosResponse<EngineSystemSetting>
-export type ReadSystemSettingResult = AxiosResponse<EngineSystemSetting>
-export type PatchSystemSettingResult = AxiosResponse<EngineSystemSetting>
-export type UpdateSystemSettingResult = AxiosResponse<EngineSystemSetting>
-
-            // --- footer end
-          
+// --- footer end

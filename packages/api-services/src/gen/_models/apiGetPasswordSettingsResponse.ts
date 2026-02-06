@@ -7,5 +7,5 @@
 import type { ApiGetPasswordSettingsResponseSettings } from './apiGetPasswordSettingsResponseSettings';
 
 export interface ApiGetPasswordSettingsResponse {
-  settings?: ApiGetPasswordSettingsResponseSettings;
+	settings?: ApiGetPasswordSettingsResponseSettings;
 }

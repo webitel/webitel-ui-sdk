@@ -8,13 +8,13 @@ import type { EngineFilterBetween } from './engineFilterBetween';
 import type { EngineMemberServiceResetMembersBodyVariables } from './engineMemberServiceResetMembersBodyVariables';
 
 export interface EngineMemberServiceResetMembersBody {
-  agentId?: number[];
-  bucketId?: string[];
-  createdAt?: EngineFilterBetween;
-  id?: string[];
-  ids?: string[];
-  numbers?: string[];
-  priority?: EngineFilterBetween;
-  stopCause?: string[];
-  variables?: EngineMemberServiceResetMembersBodyVariables;
+	agentId?: number[];
+	bucketId?: string[];
+	createdAt?: EngineFilterBetween;
+	id?: string[];
+	ids?: string[];
+	numbers?: string[];
+	priority?: EngineFilterBetween;
+	stopCause?: string[];
+	variables?: EngineMemberServiceResetMembersBodyVariables;
 }

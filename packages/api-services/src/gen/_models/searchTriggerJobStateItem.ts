@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchTriggerJobStateItem = typeof SearchTriggerJobStateItem[keyof typeof SearchTriggerJobStateItem];
-
+export type SearchTriggerJobStateItem =
+	(typeof SearchTriggerJobStateItem)[keyof typeof SearchTriggerJobStateItem];
 
 export const SearchTriggerJobStateItem = {
-  Idle: 'idle',
-  Active: 'active',
-  Done: 'done',
-  Error: 'error',
+	Idle: 'idle',
+	Active: 'active',
+	Done: 'done',
+	Error: 'error',
 } as const;

@@ -8,12 +8,12 @@ import type { WfmLookupEntity } from './wfmLookupEntity';
 import type { WfmPauseTemplateCause } from './wfmPauseTemplateCause';
 
 export type PauseTemplateServiceUpdatePauseTemplateBodyItem = {
-  causes?: WfmPauseTemplateCause[];
-  createdAt?: string;
-  createdBy?: WfmLookupEntity;
-  description?: string;
-  domainId?: string;
-  name?: string;
-  updatedAt?: string;
-  updatedBy?: WfmLookupEntity;
+	causes?: WfmPauseTemplateCause[];
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	description?: string;
+	domainId?: string;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 };

@@ -7,10 +7,10 @@
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export type UpdatePhoneInputBody = {
-  /** The phone number. */
-  number: string;
-  /** Indicates whether this phone number is default within other channels of the same type(phone). */
-  primary?: boolean;
-  type?: WebitelcontactsLookup;
-  verified?: boolean;
+	/** The phone number. */
+	number: string;
+	/** Indicates whether this phone number is default within other channels of the same type(phone). */
+	primary?: boolean;
+	type?: WebitelcontactsLookup;
+	verified?: boolean;
 };

@@ -6,56 +6,54 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  DataStructList,
-  ProtodataStruct,
-  SearchTypesParams
+	DataStructList,
+	ProtodataStruct,
+	SearchTypesParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getTypes =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Lookup data types registry.
+			 */
+			const searchTypes = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/types`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Structured data type details.
+			 */
+			const locate = <TData = AxiosResponse<ProtodataStruct>>(
+				path: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/types/${path}`, options);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchTypes,
+				locate,
+			};
+		};
+export type SearchTypesResult = AxiosResponse<DataStructList>;
+export type LocateResult = AxiosResponse<ProtodataStruct>;
 
-  export const 
-            // --- title start
-            getTypes
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Lookup data types registry.
- */
-const searchTypes = <TData = AxiosResponse<DataStructList>>(
-    params?: SearchTypesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/types`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Structured data type details.
- */
-const locate = <TData = AxiosResponse<ProtodataStruct>>(
-    path: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/types/${path}`,options
-    );
-  }
-
-            // --- footer start
-            return {searchTypes,locate}};
-export type SearchTypesResult = AxiosResponse<DataStructList>
-export type LocateResult = AxiosResponse<ProtodataStruct>
-
-            // --- footer end
-          
+// --- footer end

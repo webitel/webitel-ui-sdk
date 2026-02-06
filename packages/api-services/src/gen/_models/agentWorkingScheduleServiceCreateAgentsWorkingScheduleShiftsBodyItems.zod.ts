@@ -10,4 +10,6 @@ import type { WfmAgentScheduleShift } from './wfmAgentScheduleShift';
  * Map key is a day of week: 0 - Sunday, ..., 6 - Saturday.
  */
 export type AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBodyItems =
-	{ [key: string]: WfmAgentScheduleShift };
+	{
+		[key: string]: WfmAgentScheduleShift;
+	};

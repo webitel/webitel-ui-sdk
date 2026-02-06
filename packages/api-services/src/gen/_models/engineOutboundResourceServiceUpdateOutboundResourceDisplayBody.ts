@@ -6,6 +6,6 @@
  */
 
 export interface EngineOutboundResourceServiceUpdateOutboundResourceDisplayBody {
-  display?: string;
-  domainId?: string;
+	display?: string;
+	domainId?: string;
 }

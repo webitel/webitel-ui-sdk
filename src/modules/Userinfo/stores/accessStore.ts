@@ -2,18 +2,18 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { NavigationGuard } from 'vue-router';
 
-import {
-	CrudAction,
-	type WtApplication,
-	type WtObject,
-} from '../../../../enums';
-import type { SpecialGlobalAction } from '../enums';
+import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
+import type { SpecialGlobalAction, WebitelLicense } from '../enums';
+import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 import {
 	getWtAppByUiSection,
 	makeAppVisibilityMap,
 	makeGlobalAccessMap,
+	makeLicenseAccessMap,
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
+	shouldUseGlobalCrudActionAccessAsChecksSource,
+	shouldUseGlobalSpecialActionAccessAsChecksSource,
 } from '../scripts/utils';
 import type {
 	AppVisibilityMap,
@@ -24,7 +24,8 @@ import type {
 	SectionVisibilityMap,
 	UiSection,
 	UserAccessStore,
-} from '../types/UserAccess.d.ts';
+	WebitelLicenseInfo,
+} from '../types/UserAccess.d';
 
 export const createUserAccessStore = ({
 	namespace = 'userinfo',
@@ -38,21 +39,33 @@ export const createUserAccessStore = ({
 
 		const sectionVisibilityAccess = ref<SectionVisibilityMap>(new Map());
 
+		const licenseAccess = ref<Map<WebitelLicense, WebitelLicenseInfo[]>>(
+			new Map(),
+		);
+
 		// Bypass mode for when no access data exists (new projects)
 		const bypassMode = ref<boolean>(false);
 
 		const hasAccess = (
 			action: CrudAction | SpecialGlobalAction,
-			object?: WtObject,
+			object: WtObject,
 		) => {
-			const allowGlobalAccess = globalAccess.value.get(action);
-			if (allowGlobalAccess) return true;
+			/* scope exceptions handling */
 
-			const allowScopeAccess =
-				object && scopeAccess.value.get(object)?.get(action as CrudAction);
-			if (allowScopeAccess) return true;
+			if (shouldUseGlobalSpecialActionAccessAsChecksSource(object)) {
+				return hasSpecialGlobalActionAccess(
+					wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object],
+				);
+			}
 
-			return false;
+			if (shouldUseGlobalCrudActionAccessAsChecksSource(object)) {
+				return hasGlobalCrudActionAccess(action as CrudAction);
+			}
+
+			const allowScopeAccess = scopeAccess.value
+				.get(object)
+				?.get(action as CrudAction);
+			return !!allowScopeAccess;
 		};
 
 		const hasReadAccess = (object?: WtObject) => {
@@ -120,14 +133,23 @@ export const createUserAccessStore = ({
 			return true;
 		};
 
+		const hasGlobalCrudActionAccess = (action: CrudAction): boolean => {
+			return !!globalAccess.value.get(action);
+		};
+
 		const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
 			return !!globalAccess.value.get(id);
+		};
+
+		const hasLicense = (license: WebitelLicense): boolean => {
+			return !!globalAccess.value.get(license);
 		};
 
 		const initialize = ({
 			permissions: rawGlobalAccess,
 			scope: rawScopeAccess,
 			access: rawVisibilityAccess,
+			license: rawLicenseAccess,
 		}: CreateUserAccessStoreRawAccess) => {
 			// Enable bypass mode if access data is null/undefined
 			bypassMode.value = rawVisibilityAccess === null;
@@ -137,6 +159,7 @@ export const createUserAccessStore = ({
 			appVisibilityAccess.value = makeAppVisibilityMap(rawVisibilityAccess);
 			sectionVisibilityAccess.value =
 				makeSectionVisibilityMap(rawVisibilityAccess);
+			licenseAccess.value = makeLicenseAccessMap(rawLicenseAccess);
 		};
 
 		return {
@@ -149,17 +172,25 @@ export const createUserAccessStore = ({
 			hasSectionVisibility,
 
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
+			hasLicense,
 
 			/**
 			 * @internal
 			 * for pinia devtools debug
 			 */
+			// @ts-expect-error
 			globalAccess,
+			// @ts-expect-error
 			scopeAccess,
+			// @ts-expect-error
 			appVisibilityAccess,
+			// @ts-expect-error
 			sectionVisibilityAccess,
+			// @ts-expect-error
+			licenseAccess,
 		};
 	});
 };

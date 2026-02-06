@@ -6,77 +6,77 @@
  */
 
 export type CatalogGetDialogsParams = {
-/**
- * Page number to return. **default**: 1.
- */
-page?: number;
-/**
- * Page records limit. **default**: 16.
- */
-size?: number;
-/**
- * Search term: peer.name
- */
-q?: string;
-/**
- * Sort records by { fields } specification.
- */
-sort?: string[];
-/**
- * Fields [Q]uery to build result dataset record.
- */
-fields?: string[];
-/**
+	/**
+	 * Page number to return. **default**: 1.
+	 */
+	page?: number;
+	/**
+	 * Page records limit. **default**: 16.
+	 */
+	size?: number;
+	/**
+	 * Search term: peer.name
+	 */
+	q?: string;
+	/**
+	 * Sort records by { fields } specification.
+	 */
+	sort?: string[];
+	/**
+	 * Fields [Q]uery to build result dataset record.
+	 */
+	fields?: string[];
+	/**
  * Set of unique chat IDentifier(s).
 Accept: dialog -or- member ID.
  */
-id?: string[];
-/**
+	id?: string[];
+	/**
  * Contact unique **ID**entifier.
 Contact **type**-specific string.
  */
-viaId?: string;
-/**
- * Contact **type** provider.
- */
-viaType?: string;
-/**
- * Contact display **name**.
- */
-viaName?: string;
-/**
+	viaId?: string;
+	/**
+	 * Contact **type** provider.
+	 */
+	viaType?: string;
+	/**
+	 * Contact display **name**.
+	 */
+	viaName?: string;
+	/**
  * Contact unique **ID**entifier.
 Contact **type**-specific string.
  */
-peerId?: string;
-/**
- * Contact **type** provider.
- */
-peerType?: string;
-/**
- * Contact display **name**.
- */
-peerName?: string;
-/**
- * Since epochtime (milli).
-**Match**: greater than ..
- */
-dateSince?: string;
-/**
- * Until epochtime (milli).
-**Match**: less or equal ..
- */
-dateUntil?: string;
-/**
- * Dialogs ONLY that are currently [not] active( closed: ? ).
- */
-online?: boolean;
-/**
+	peerId?: string;
+	/**
+	 * Contact **type** provider.
+	 */
+	peerType?: string;
+	/**
+	 * Contact display **name**.
+	 */
+	peerName?: string;
+	/**
+	 * Since epochtime (milli).
+	 **Match**: greater than ..
+	 */
+	dateSince?: string;
+	/**
+	 * Until epochtime (milli).
+	 **Match**: less or equal ..
+	 */
+	dateUntil?: string;
+	/**
+	 * Dialogs ONLY that are currently [not] active( closed: ? ).
+	 */
+	online?: boolean;
+	/**
  * Includes ONLY those chat dialogs
 whose member channel(s) contain
 a specified set of variables.
 
 10
  */
-groupString?: string;
+	groupString?: string;
 };

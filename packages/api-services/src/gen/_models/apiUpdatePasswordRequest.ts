@@ -6,10 +6,10 @@
  */
 
 export interface ApiUpdatePasswordRequest {
-  confirmPassword?: string;
-  domain?: string;
-  id?: string;
-  oldPassword?: string;
-  userPassword?: string;
-  username?: string;
+	confirmPassword?: string;
+	domain?: string;
+	id?: string;
+	oldPassword?: string;
+	userPassword?: string;
+	username?: string;
 }

@@ -6,9 +6,9 @@
  */
 
 export interface StorageStartFileTranscriptResponseTranscriptJob {
-  action?: string;
-  createdAt?: string;
-  fileId?: string;
-  id?: string;
-  state?: string;
+	action?: string;
+	createdAt?: string;
+	fileId?: string;
+	id?: string;
+	state?: string;
 }

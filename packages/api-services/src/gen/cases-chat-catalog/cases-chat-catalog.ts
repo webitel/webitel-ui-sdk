@@ -6,43 +6,44 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CasesChatCatalogGetCaseChatHistoryParams,
-  WebitelChatChatMessages
+	CasesChatCatalogGetCaseChatHistoryParams,
+	WebitelChatChatMessages,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getCasesChatCatalog =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const casesChatCatalogGetCaseChatHistory = <
+				TData = AxiosResponse<WebitelChatChatMessages>,
+			>(
+				caseId: string,
+				chatId: string,
+				params?: CasesChatCatalogGetCaseChatHistoryParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/${caseId}/chat/${chatId}/messages`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				casesChatCatalogGetCaseChatHistory,
+			};
+		};
+export type CasesChatCatalogGetCaseChatHistoryResult =
+	AxiosResponse<WebitelChatChatMessages>;
 
-  export const 
-            // --- title start
-            getCasesChatCatalog
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const casesChatCatalogGetCaseChatHistory = <TData = AxiosResponse<WebitelChatChatMessages>>(
-    caseId: string,
-    chatId: string,
-    params?: CasesChatCatalogGetCaseChatHistoryParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/${caseId}/chat/${chatId}/messages`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {casesChatCatalogGetCaseChatHistory}};
-export type CasesChatCatalogGetCaseChatHistoryResult = AxiosResponse<WebitelChatChatMessages>
-
-            // --- footer end
-          
+// --- footer end

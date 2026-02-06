@@ -9,13 +9,13 @@ import type { StorageThumbnail } from './storageThumbnail';
 import type { StorageUploadStatusCode } from './storageUploadStatusCode';
 
 export interface StorageUploadFileUrlResponse {
-  code?: StorageUploadStatusCode;
-  id?: string;
-  malware?: StorageFileMalwareScan;
-  mime?: string;
-  server?: string;
-  sha256Sum?: string;
-  size?: string;
-  thumbnail?: StorageThumbnail;
-  url?: string;
+	code?: StorageUploadStatusCode;
+	id?: string;
+	malware?: StorageFileMalwareScan;
+	mime?: string;
+	server?: string;
+	sha256Sum?: string;
+	size?: string;
+	thumbnail?: StorageThumbnail;
+	url?: string;
 }

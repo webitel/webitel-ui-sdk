@@ -7,12 +7,12 @@
 import type { SearchCognitiveProfileServiceItem } from './searchCognitiveProfileServiceItem';
 
 export type SearchCognitiveProfileParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: string[];
-service?: SearchCognitiveProfileServiceItem[];
-enabled?: boolean;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	service?: SearchCognitiveProfileServiceItem[];
+	enabled?: boolean;
 };

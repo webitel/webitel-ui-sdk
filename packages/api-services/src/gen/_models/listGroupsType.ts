@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ListGroupsType = typeof ListGroupsType[keyof typeof ListGroupsType];
-
+export type ListGroupsType =
+	(typeof ListGroupsType)[keyof typeof ListGroupsType];
 
 export const ListGroupsType = {
-  GroupTypeUnspecified: 'GROUP_TYPE_UNSPECIFIED',
-  Static: 'STATIC',
-  Dynamic: 'DYNAMIC',
+	GroupTypeUnspecified: 'GROUP_TYPE_UNSPECIFIED',
+	Static: 'STATIC',
+	Dynamic: 'DYNAMIC',
 } as const;

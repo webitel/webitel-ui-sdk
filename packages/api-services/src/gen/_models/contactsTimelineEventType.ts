@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ContactsTimelineEventType = typeof ContactsTimelineEventType[keyof typeof ContactsTimelineEventType];
-
+export type ContactsTimelineEventType =
+	(typeof ContactsTimelineEventType)[keyof typeof ContactsTimelineEventType];
 
 export const ContactsTimelineEventType = {
-  Chat: 'chat',
-  Call: 'call',
-  Email: 'email',
+	Chat: 'chat',
+	Call: 'call',
+	Email: 'email',
 } as const;

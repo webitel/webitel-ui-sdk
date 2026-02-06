@@ -7,5 +7,5 @@
 import type { ApiRole } from './apiRole';
 
 export interface ApiCreateRoleResponse {
-  created?: ApiRole;
+	created?: ApiRole;
 }

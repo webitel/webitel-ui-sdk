@@ -7,6 +7,6 @@
 import type { WfmAgentAbsences } from './wfmAgentAbsences';
 
 export interface WfmSearchAgentsAbsencesResponse {
-  items?: WfmAgentAbsences[];
-  next?: boolean;
+	items?: WfmAgentAbsences[];
+	next?: boolean;
 }

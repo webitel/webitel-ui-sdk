@@ -6,95 +6,116 @@
  */
 import * as zod from 'zod';
 
-
 export const SearchClassesQueryParams = zod.object({
-  "domain": zod.string().optional().describe('TO BE REMOVED // bound to session.domain.id'),
-  "class": zod.string().optional().describe('[filter]: like \'%class%\''),
-  "fields": zod.array(zod.string()).optional().describe('int64 id = 3;  // [filter]: obj.id = id\ncontrols\n\noutput'),
-  "sort": zod.array(zod.string()).optional().describe('sort: \"field\" asc; \"!field\" desc'),
-  "page": zod.number().optional().describe('page number'),
-  "size": zod.number().optional().describe('page size')
-})
+	domain: zod
+		.string()
+		.optional()
+		.describe('TO BE REMOVED // bound to session.domain.id'),
+	class: zod.string().optional().describe("[filter]: like '%class%'"),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('int64 id = 3;  // [filter]: obj.id = id\ncontrols\n\noutput'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('sort: \"field\" asc; \"!field\" desc'),
+	page: zod.number().optional().describe('page number'),
+	size: zod.number().optional().describe('page size'),
+});
 
 export const SearchClassesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				abac: zod.boolean().optional(),
+				class: zod.string().optional(),
+				id: zod.string().optional(),
+				obac: zod.boolean().optional(),
+				rbac: zod.boolean().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+});
 
 export const UpdateClass2Params = zod.object({
-  "class.id": zod.string().describe('(class::object).id')
-})
+	'class.id': zod.string().describe('(class::object).id'),
+});
 
 export const UpdateClass2Body = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional(),
-  "domain": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+	class: zod
+		.object({
+			abac: zod.boolean().optional(),
+			class: zod.string().optional(),
+			obac: zod.boolean().optional(),
+			rbac: zod.boolean().optional(),
+		})
+		.optional(),
+	domain: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const UpdateClass2Response = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
+	class: zod
+		.object({
+			abac: zod.boolean().optional(),
+			class: zod.string().optional(),
+			id: zod.string().optional(),
+			obac: zod.boolean().optional(),
+			rbac: zod.boolean().optional(),
+		})
+		.optional(),
+});
 
 export const UpdateClassParams = zod.object({
-  "class.id": zod.string().describe('(class::object).id')
-})
+	'class.id': zod.string().describe('(class::object).id'),
+});
 
 export const UpdateClassBody = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional(),
-  "domain": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+	class: zod
+		.object({
+			abac: zod.boolean().optional(),
+			class: zod.string().optional(),
+			obac: zod.boolean().optional(),
+			rbac: zod.boolean().optional(),
+		})
+		.optional(),
+	domain: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const UpdateClassResponse = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
+	class: zod
+		.object({
+			abac: zod.boolean().optional(),
+			class: zod.string().optional(),
+			id: zod.string().optional(),
+			obac: zod.boolean().optional(),
+			rbac: zod.boolean().optional(),
+		})
+		.optional(),
+});
 
 export const ReadClassParams = zod.object({
-  "id": zod.string().describe('[filter]: obj.id = id')
-})
+	id: zod.string().describe('[filter]: obj.id = id'),
+});
 
 export const ReadClassQueryParams = zod.object({
-  "domain": zod.string().optional(),
-  "class": zod.string().optional().describe('[filter]: like \'%class%\'')
-})
+	domain: zod.string().optional(),
+	class: zod.string().optional().describe("[filter]: like '%class%'"),
+});
 
 export const ReadClassResponse = zod.object({
-  "class": zod.object({
-  "abac": zod.boolean().optional(),
-  "class": zod.string().optional(),
-  "id": zod.string().optional(),
-  "obac": zod.boolean().optional(),
-  "rbac": zod.boolean().optional()
-}).optional()
-})
-
+	class: zod
+		.object({
+			abac: zod.boolean().optional(),
+			class: zod.string().optional(),
+			id: zod.string().optional(),
+			obac: zod.boolean().optional(),
+			rbac: zod.boolean().optional(),
+		})
+		.optional(),
+});

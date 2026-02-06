@@ -1,9 +1,5 @@
-import {
-	type CrudAction,
-	WtApplication,
-	type WtObject,
-} from '../../../../enums';
-import { _wtUiLog as wtlog } from '../../../../scripts/logger';
+import { type CrudAction, WtApplication, type WtObject } from '../../../enums';
+import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import {
 	AdminSectionsValues,
 	AuditorSectionsValues,
@@ -14,18 +10,22 @@ import {
 	mapUiSectionToWtObject,
 	mapWtObjectToUiSection,
 	SupervisorSectionsValues,
+	wtObjectsWithGlobalCrudActionAccessAsChecksSource,
+	wtObjectsWithGlobalSpecialActionAccessAsChecksSource,
 } from '../mappings/mappings';
 import type {
 	AppVisibilityMap,
 	GlobalAccessApiResponseItem,
 	GlobalAction,
 	GlobalActionAccessMap,
+	LicenseAccessMap,
 	ScopeAccessApiResponseItem,
 	ScopeAccessMap,
 	SectionVisibilityMap,
 	UiSection,
 	VisibilityAccess,
-} from '../types/UserAccess.d.ts';
+	WebitelLicenseInfo,
+} from '../types/UserAccess.d';
 
 /**
  * @internal
@@ -97,8 +97,33 @@ export const makeSectionVisibilityMap = (
 	Object.values(rawVisibility).forEach((appSectionsVisibility) => {
 		Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
 			if (section.startsWith('_')) return map; // skip private fields
-			map.set(section, visibility._enabled);
+			map.set(
+				section,
+				(
+					visibility as {
+						_enabled: boolean;
+					}
+				)._enabled,
+			);
 		});
+	});
+
+	return map;
+};
+
+export const makeLicenseAccessMap = (
+	rawLicense: WebitelLicenseInfo[],
+): LicenseAccessMap => {
+	const map = new Map();
+
+	rawLicense.forEach((license) => {
+		if (map.has(license.prod)) {
+			map.get(license.prod)?.push(license);
+		} else {
+			map.set(license.prod, [
+				license,
+			]);
+		}
 	});
 
 	return map;
@@ -130,4 +155,16 @@ export const getWtAppByUiSection = (section: UiSection): WtApplication => {
 	// then => custom lookup
 	// console.info(`Havent found app for section: ${section}, fallback to crm`);
 	return WtApplication.Crm;
+};
+
+export const shouldUseGlobalSpecialActionAccessAsChecksSource = (
+	object: WtObject,
+): boolean => {
+	return !!wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object];
+};
+
+export const shouldUseGlobalCrudActionAccessAsChecksSource = (
+	object: WtObject,
+): boolean => {
+	return !!wtObjectsWithGlobalCrudActionAccessAsChecksSource[object];
 };

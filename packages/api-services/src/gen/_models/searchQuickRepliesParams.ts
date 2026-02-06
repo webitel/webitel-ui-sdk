@@ -6,12 +6,12 @@
  */
 
 export type SearchQuickRepliesParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: number[];
-queue?: number[];
-restrictToAgent?: boolean;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: number[];
+	queue?: number[];
+	restrictToAgent?: boolean;
 };

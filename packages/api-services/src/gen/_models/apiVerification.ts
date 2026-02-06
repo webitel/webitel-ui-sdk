@@ -6,6 +6,6 @@
  */
 
 export interface ApiVerification {
-  errors?: string[];
-  notify?: string[];
+	errors?: string[];
+	notify?: string[];
 }

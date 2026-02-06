@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ApiGetPasswordSettingsResponseSettings = {[key: string]: string};
+export type ApiGetPasswordSettingsResponseSettings = {
+	[key: string]: string;
+};

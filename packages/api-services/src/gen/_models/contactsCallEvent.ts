@@ -9,17 +9,17 @@ import type { ContactsTranscriptLookup } from './contactsTranscriptLookup';
 import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsCallEvent {
-  closedAt?: string;
-  duration?: string;
-  files?: ContactsCallFile[];
-  flowScheme?: WebitelcontactsLookup;
-  gateway?: WebitelcontactsLookup;
-  id?: string;
-  isDetailed?: boolean;
-  isInbound?: boolean;
-  isMissed?: boolean;
-  participants?: WebitelcontactsLookup[];
-  queue?: WebitelcontactsLookup;
-  totalDuration?: string;
-  transcripts?: ContactsTranscriptLookup[];
+	closedAt?: string;
+	duration?: string;
+	files?: ContactsCallFile[];
+	flowScheme?: WebitelcontactsLookup;
+	gateway?: WebitelcontactsLookup;
+	id?: string;
+	isDetailed?: boolean;
+	isInbound?: boolean;
+	isMissed?: boolean;
+	participants?: WebitelcontactsLookup[];
+	queue?: WebitelcontactsLookup;
+	totalDuration?: string;
+	transcripts?: ContactsTranscriptLookup[];
 }

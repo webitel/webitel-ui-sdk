@@ -1,5 +1,5 @@
 import pick from 'lodash/pick';
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
@@ -22,17 +22,21 @@ export const createUserinfoStore = () => {
 			hasCreateAccess,
 			hasUpdateAccess,
 			hasDeleteAccess,
+			hasLicense,
 			initialize: initializeAccessStore,
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasSectionVisibility,
 			hasApplicationVisibility,
 		} = accessStore;
-		const { initialize: initializeSettingsStore, timezone } =
-			useSettingsStore();
+
+		const settingsStore = useSettingsStore();
+		const { initialize: initializeSettingsStore } = settingsStore;
+		const { timezone } = storeToRefs(settingsStore);
 
 		const userId = ref();
-		const userInfo = ref(null);
+		const userInfo = ref();
 
 		const initialize = async () => {
 			const session = await getSession();
@@ -44,14 +48,15 @@ export const createUserinfoStore = () => {
 				'username',
 				'permissions',
 				'userId',
+				'preferredUsername',
 				'scope',
 				'roles',
-				'license',
 			]);
 
 			initializeAccessStore({
 				scope: session.scope,
 				permissions: session.permissions,
+				license: session.license,
 				access,
 			});
 
@@ -59,8 +64,6 @@ export const createUserinfoStore = () => {
 		};
 
 		const logoutUser = async () => {
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-expect-error
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
 			await logout();
@@ -77,16 +80,17 @@ export const createUserinfoStore = () => {
 			hasCreateAccess,
 			hasUpdateAccess,
 			hasDeleteAccess,
+			hasLicense,
 
 			hasSectionVisibility,
 			routeAccessGuard,
+			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
 			logoutUser,
 		};
 	});
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-expect-error
 	window._userinfoStore = store;
 

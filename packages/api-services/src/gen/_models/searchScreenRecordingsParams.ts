@@ -8,17 +8,17 @@ import type { SearchScreenRecordingsChannel } from './searchScreenRecordingsChan
 import type { SearchScreenRecordingsType } from './searchScreenRecordingsType';
 
 export type SearchScreenRecordingsParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: string[];
-uploadedAtFrom?: string;
-uploadedAtTo?: string;
-referenceId?: string[];
-retentionUntilFrom?: string;
-retentionUntilTo?: string;
-type?: SearchScreenRecordingsType;
-channel?: SearchScreenRecordingsChannel;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	uploadedAtFrom?: string;
+	uploadedAtTo?: string;
+	referenceId?: string[];
+	retentionUntilFrom?: string;
+	retentionUntilTo?: string;
+	type?: SearchScreenRecordingsType;
+	channel?: SearchScreenRecordingsChannel;
 };

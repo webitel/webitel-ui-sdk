@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type CreateDataBody = { [key: string]: unknown };
+export type CreateDataBody = {
+	[key: string]: unknown;
+};

@@ -6,96 +6,109 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineListTeamHook,
-  EngineTeamHook,
-  EngineTeamHookServiceCreateTeamHookBody,
-  EngineTeamHookServicePatchTeamHookBody,
-  EngineTeamHookServiceUpdateTeamHookBody,
-  SearchTeamHookParams
+	EngineListTeamHook,
+	EngineTeamHook,
+	EngineTeamHookServiceCreateTeamHookBody,
+	EngineTeamHookServicePatchTeamHookBody,
+	EngineTeamHookServiceUpdateTeamHookBody,
+	SearchTeamHookParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getTeamHookService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const searchTeamHook = <TData = AxiosResponse<EngineListTeamHook>>(
+				teamId: string,
+				params?: SearchTeamHookParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/call_center/teams/${teamId}/hooks`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const createTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+				teamId: string,
+				engineTeamHookServiceCreateTeamHookBody: EngineTeamHookServiceCreateTeamHookBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/call_center/teams/${teamId}/hooks`,
+					engineTeamHookServiceCreateTeamHookBody,
+					options,
+				);
+			};
+			const deleteTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+				teamId: string,
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(
+					`/call_center/teams/${teamId}/hooks/${id}`,
+					options,
+				);
+			};
+			const readTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+				teamId: string,
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(
+					`/call_center/teams/${teamId}/hooks/${id}`,
+					options,
+				);
+			};
+			const patchTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+				teamId: string,
+				id: number,
+				engineTeamHookServicePatchTeamHookBody: EngineTeamHookServicePatchTeamHookBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/call_center/teams/${teamId}/hooks/${id}`,
+					engineTeamHookServicePatchTeamHookBody,
+					options,
+				);
+			};
+			const updateTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
+				teamId: string,
+				id: number,
+				engineTeamHookServiceUpdateTeamHookBody: EngineTeamHookServiceUpdateTeamHookBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/call_center/teams/${teamId}/hooks/${id}`,
+					engineTeamHookServiceUpdateTeamHookBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchTeamHook,
+				createTeamHook,
+				deleteTeamHook,
+				readTeamHook,
+				patchTeamHook,
+				updateTeamHook,
+			};
+		};
+export type SearchTeamHookResult = AxiosResponse<EngineListTeamHook>;
+export type CreateTeamHookResult = AxiosResponse<EngineTeamHook>;
+export type DeleteTeamHookResult = AxiosResponse<EngineTeamHook>;
+export type ReadTeamHookResult = AxiosResponse<EngineTeamHook>;
+export type PatchTeamHookResult = AxiosResponse<EngineTeamHook>;
+export type UpdateTeamHookResult = AxiosResponse<EngineTeamHook>;
 
-  export const 
-            // --- title start
-            getTeamHookService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const searchTeamHook = <TData = AxiosResponse<EngineListTeamHook>>(
-    teamId: string,
-    params?: SearchTeamHookParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/call_center/teams/${teamId}/hooks`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
-    teamId: string,
-    engineTeamHookServiceCreateTeamHookBody: EngineTeamHookServiceCreateTeamHookBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/call_center/teams/${teamId}/hooks`,
-      engineTeamHookServiceCreateTeamHookBody,options
-    );
-  }
-const deleteTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
-    teamId: string,
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/call_center/teams/${teamId}/hooks/${id}`,options
-    );
-  }
-const readTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
-    teamId: string,
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/call_center/teams/${teamId}/hooks/${id}`,options
-    );
-  }
-const patchTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
-    teamId: string,
-    id: number,
-    engineTeamHookServicePatchTeamHookBody: EngineTeamHookServicePatchTeamHookBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/call_center/teams/${teamId}/hooks/${id}`,
-      engineTeamHookServicePatchTeamHookBody,options
-    );
-  }
-const updateTeamHook = <TData = AxiosResponse<EngineTeamHook>>(
-    teamId: string,
-    id: number,
-    engineTeamHookServiceUpdateTeamHookBody: EngineTeamHookServiceUpdateTeamHookBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/call_center/teams/${teamId}/hooks/${id}`,
-      engineTeamHookServiceUpdateTeamHookBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchTeamHook,createTeamHook,deleteTeamHook,readTeamHook,patchTeamHook,updateTeamHook}};
-export type SearchTeamHookResult = AxiosResponse<EngineListTeamHook>
-export type CreateTeamHookResult = AxiosResponse<EngineTeamHook>
-export type DeleteTeamHookResult = AxiosResponse<EngineTeamHook>
-export type ReadTeamHookResult = AxiosResponse<EngineTeamHook>
-export type PatchTeamHookResult = AxiosResponse<EngineTeamHook>
-export type UpdateTeamHookResult = AxiosResponse<EngineTeamHook>
-
-            // --- footer end
-          
+// --- footer end

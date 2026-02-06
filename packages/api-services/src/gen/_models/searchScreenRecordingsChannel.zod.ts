@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsChannel = typeof SearchScreenRecordingsChannel[keyof typeof SearchScreenRecordingsChannel];
-
+export type SearchScreenRecordingsChannel =
+	(typeof SearchScreenRecordingsChannel)[keyof typeof SearchScreenRecordingsChannel];
 
 export const SearchScreenRecordingsChannel = {
-  Screenrecording: 'SCREENRECORDING',
-  Call: 'CALL',
+	Screenrecording: 'SCREENRECORDING',
+	Call: 'CALL',
 } as const;

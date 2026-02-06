@@ -6,64 +6,83 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Search EmailProfile
  */
 export const SearchEmailProfileQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const searchEmailProfileResponseItemsItemAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const SearchEmailProfileResponse = zod.object({
-  "items": zod.array(zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(searchEmailProfileResponseItemsItemAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				activityAt: zod.string().optional(),
+				authType: zod
+					.enum([
+						'EmailAuthTypeUndefined',
+						'Plain',
+						'OAuth2',
+					])
+					.default(searchEmailProfileResponseItemsItemAuthTypeDefault),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				enabled: zod.boolean().optional(),
+				fetchError: zod.string().optional(),
+				fetchInterval: zod.number().optional(),
+				id: zod.string().optional(),
+				imapHost: zod.string().optional(),
+				imapPort: zod.number().optional(),
+				listen: zod.boolean().optional(),
+				logged: zod.boolean().optional(),
+				login: zod.string().optional(),
+				mailbox: zod.string().optional(),
+				name: zod.string().optional(),
+				params: zod
+					.object({
+						oauth2: zod
+							.object({
+								clientId: zod.string().optional(),
+								clientSecret: zod.string().optional(),
+								redirectUrl: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
+				password: zod.string().optional(),
+				schema: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				smtpHost: zod.string().optional(),
+				smtpPort: zod.number().optional(),
+				state: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create EmailProfile
@@ -71,354 +90,463 @@ export const SearchEmailProfileResponse = zod.object({
 export const createEmailProfileBodyAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const CreateEmailProfileBody = zod.object({
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(createEmailProfileBodyAuthTypeDefault),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchInterval": zod.number().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional()
-})
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(createEmailProfileBodyAuthTypeDefault),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchInterval: zod.number().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+});
 
 export const createEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const CreateEmailProfileResponse = zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(createEmailProfileResponseAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	activityAt: zod.string().optional(),
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(createEmailProfileResponseAuthTypeDefault),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchError: zod.string().optional(),
+	fetchInterval: zod.number().optional(),
+	id: zod.string().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	logged: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+	state: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Remove EmailProfile
  */
 export const DeleteEmailProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const deleteEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const DeleteEmailProfileResponse = zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(deleteEmailProfileResponseAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	activityAt: zod.string().optional(),
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(deleteEmailProfileResponseAuthTypeDefault),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchError: zod.string().optional(),
+	fetchInterval: zod.number().optional(),
+	id: zod.string().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	logged: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+	state: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary EmailProfile item
  */
 export const ReadEmailProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const readEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const ReadEmailProfileResponse = zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(readEmailProfileResponseAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	activityAt: zod.string().optional(),
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(readEmailProfileResponseAuthTypeDefault),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchError: zod.string().optional(),
+	fetchInterval: zod.number().optional(),
+	id: zod.string().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	logged: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+	state: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const PatchEmailProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const PatchEmailProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchInterval": zod.number().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional()
-})
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchInterval: zod.number().optional(),
+	fields: zod.array(zod.string()).optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+});
 
 export const patchEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const PatchEmailProfileResponse = zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(patchEmailProfileResponseAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	activityAt: zod.string().optional(),
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(patchEmailProfileResponseAuthTypeDefault),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchError: zod.string().optional(),
+	fetchInterval: zod.number().optional(),
+	id: zod.string().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	logged: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+	state: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update EmailProfile
  */
 export const UpdateEmailProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const updateEmailProfileBodyAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const UpdateEmailProfileBody = zod.object({
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(updateEmailProfileBodyAuthTypeDefault),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchInterval": zod.number().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional()
-})
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(updateEmailProfileBodyAuthTypeDefault),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchInterval: zod.number().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+});
 
 export const updateEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const UpdateEmailProfileResponse = zod.object({
-  "activityAt": zod.string().optional(),
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(updateEmailProfileResponseAuthTypeDefault),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "fetchError": zod.string().optional(),
-  "fetchInterval": zod.number().optional(),
-  "id": zod.string().optional(),
-  "imapHost": zod.string().optional(),
-  "imapPort": zod.number().optional(),
-  "listen": zod.boolean().optional(),
-  "logged": zod.boolean().optional(),
-  "login": zod.string().optional(),
-  "mailbox": zod.string().optional(),
-  "name": zod.string().optional(),
-  "params": zod.object({
-  "oauth2": zod.object({
-  "clientId": zod.string().optional(),
-  "clientSecret": zod.string().optional(),
-  "redirectUrl": zod.string().optional()
-}).optional()
-}).optional(),
-  "password": zod.string().optional(),
-  "schema": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "smtpHost": zod.string().optional(),
-  "smtpPort": zod.number().optional(),
-  "state": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	activityAt: zod.string().optional(),
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(updateEmailProfileResponseAuthTypeDefault),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	fetchError: zod.string().optional(),
+	fetchInterval: zod.number().optional(),
+	id: zod.string().optional(),
+	imapHost: zod.string().optional(),
+	imapPort: zod.number().optional(),
+	listen: zod.boolean().optional(),
+	logged: zod.boolean().optional(),
+	login: zod.string().optional(),
+	mailbox: zod.string().optional(),
+	name: zod.string().optional(),
+	params: zod
+		.object({
+			oauth2: zod
+				.object({
+					clientId: zod.string().optional(),
+					clientSecret: zod.string().optional(),
+					redirectUrl: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+	password: zod.string().optional(),
+	schema: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	smtpHost: zod.string().optional(),
+	smtpPort: zod.number().optional(),
+	state: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const LoginEmailProfileParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const loginEmailProfileResponseAuthTypeDefault = `EmailAuthTypeUndefined`;
 
 export const LoginEmailProfileResponse = zod.object({
-  "authType": zod.enum(['EmailAuthTypeUndefined', 'Plain', 'OAuth2']).default(loginEmailProfileResponseAuthTypeDefault),
-  "cookie": zod.record(zod.string(), zod.string()).optional(),
-  "redirectUrl": zod.string().optional()
-})
+	authType: zod
+		.enum([
+			'EmailAuthTypeUndefined',
+			'Plain',
+			'OAuth2',
+		])
+		.default(loginEmailProfileResponseAuthTypeDefault),
+	cookie: zod.record(zod.string(), zod.string()).optional(),
+	redirectUrl: zod.string().optional(),
+});
 
 export const LogoutEmailProfileParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
-export const LogoutEmailProfileResponse = zod.object({
-
-})
+export const LogoutEmailProfileResponse = zod.object({});
 
 /**
  * @summary EmailProfile check login
  */
 export const TestEmailProfileParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const TestEmailProfileResponse = zod.object({
-  "error": zod.string().optional()
-})
-
+	error: zod.string().optional(),
+});

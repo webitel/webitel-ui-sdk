@@ -9,18 +9,18 @@ import type { EngineOutboundResourceParameters } from './engineOutboundResourceP
 import type { EngineOutboundResourceServiceUpdateOutboundResourceBodyVariables } from './engineOutboundResourceServiceUpdateOutboundResourceBodyVariables';
 
 export interface EngineOutboundResourceServiceUpdateOutboundResourceBody {
-  parameters?: EngineOutboundResourceParameters;
-  description?: string;
-  enabled?: boolean;
-  errorIds?: string[];
-  failureDialDelay?: number;
-  gateway?: EngineLookup;
-  limit?: number;
-  maxSuccessivelyErrors?: number;
-  name?: string;
-  number?: string;
-  patterns?: string[];
-  reserve?: boolean;
-  rps?: number;
-  variables?: EngineOutboundResourceServiceUpdateOutboundResourceBodyVariables;
+	parameters?: EngineOutboundResourceParameters;
+	description?: string;
+	enabled?: boolean;
+	errorIds?: string[];
+	failureDialDelay?: number;
+	gateway?: EngineLookup;
+	limit?: number;
+	maxSuccessivelyErrors?: number;
+	name?: string;
+	number?: string;
+	patterns?: string[];
+	reserve?: boolean;
+	rps?: number;
+	variables?: EngineOutboundResourceServiceUpdateOutboundResourceBodyVariables;
 }

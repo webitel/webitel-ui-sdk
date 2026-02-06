@@ -7,7 +7,7 @@
 import type { TypeIntViolation } from './typeIntViolation';
 
 export interface TypeInt {
-  max?: string;
-  min?: string;
-  violation?: TypeIntViolation;
+	max?: string;
+	min?: string;
+	violation?: TypeIntViolation;
 }

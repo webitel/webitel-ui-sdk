@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchCommentsMode = typeof SearchCommentsMode[keyof typeof SearchCommentsMode];
-
+export type SearchCommentsMode =
+	(typeof SearchCommentsMode)[keyof typeof SearchCommentsMode];
 
 export const SearchCommentsMode = {
-  Read: 'READ',
-  Write: 'WRITE',
-  Delete: 'DELETE',
+	Read: 'READ',
+	Write: 'WRITE',
+	Delete: 'DELETE',
 } as const;

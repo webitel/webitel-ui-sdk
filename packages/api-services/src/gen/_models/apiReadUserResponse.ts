@@ -7,5 +7,5 @@
 import type { ApiUser } from './apiUser';
 
 export interface ApiReadUserResponse {
-  user?: ApiUser;
+	user?: ApiUser;
 }

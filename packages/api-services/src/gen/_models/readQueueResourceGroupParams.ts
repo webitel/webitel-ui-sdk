@@ -6,5 +6,5 @@
  */
 
 export type ReadQueueResourceGroupParams = {
-domainId?: string;
+	domainId?: string;
 };

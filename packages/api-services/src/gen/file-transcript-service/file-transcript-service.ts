@@ -6,75 +6,92 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  GetFileTranscriptPhrasesParams,
-  StorageDeleteFileTranscriptRequest,
-  StorageDeleteFileTranscriptResponse,
-  StorageListPhrases,
-  StoragePutFileTranscriptRequest,
-  StoragePutFileTranscriptResponse,
-  StorageStartFileTranscriptRequest,
-  StorageStartFileTranscriptResponse
+	GetFileTranscriptPhrasesParams,
+	StorageDeleteFileTranscriptRequest,
+	StorageDeleteFileTranscriptResponse,
+	StorageListPhrases,
+	StoragePutFileTranscriptRequest,
+	StoragePutFileTranscriptResponse,
+	StorageStartFileTranscriptRequest,
+	StorageStartFileTranscriptResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getFileTranscriptService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const deleteFileTranscript = <
+				TData = AxiosResponse<StorageDeleteFileTranscriptResponse>,
+			>(
+				storageDeleteFileTranscriptRequest: StorageDeleteFileTranscriptRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/storage/transcript_file`, {
+					data: storageDeleteFileTranscriptRequest,
+					...options,
+				});
+			};
+			const createFileTranscript = <
+				TData = AxiosResponse<StorageStartFileTranscriptResponse>,
+			>(
+				storageStartFileTranscriptRequest: StorageStartFileTranscriptRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/storage/transcript_file`,
+					storageStartFileTranscriptRequest,
+					options,
+				);
+			};
+			const putFileTranscript = <
+				TData = AxiosResponse<StoragePutFileTranscriptResponse>,
+			>(
+				storagePutFileTranscriptRequest: StoragePutFileTranscriptRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/storage/transcript_file`,
+					storagePutFileTranscriptRequest,
+					options,
+				);
+			};
+			const getFileTranscriptPhrases = <
+				TData = AxiosResponse<StorageListPhrases>,
+			>(
+				id: string,
+				params?: GetFileTranscriptPhrasesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/storage/transcript_file/${id}/phrases`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				deleteFileTranscript,
+				createFileTranscript,
+				putFileTranscript,
+				getFileTranscriptPhrases,
+			};
+		};
+export type DeleteFileTranscriptResult =
+	AxiosResponse<StorageDeleteFileTranscriptResponse>;
+export type CreateFileTranscriptResult =
+	AxiosResponse<StorageStartFileTranscriptResponse>;
+export type PutFileTranscriptResult =
+	AxiosResponse<StoragePutFileTranscriptResponse>;
+export type GetFileTranscriptPhrasesResult = AxiosResponse<StorageListPhrases>;
 
-  export const 
-            // --- title start
-            getFileTranscriptService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const deleteFileTranscript = <TData = AxiosResponse<StorageDeleteFileTranscriptResponse>>(
-    storageDeleteFileTranscriptRequest: StorageDeleteFileTranscriptRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/storage/transcript_file`,{data:
-      storageDeleteFileTranscriptRequest, ...options}
-    );
-  }
-const createFileTranscript = <TData = AxiosResponse<StorageStartFileTranscriptResponse>>(
-    storageStartFileTranscriptRequest: StorageStartFileTranscriptRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/storage/transcript_file`,
-      storageStartFileTranscriptRequest,options
-    );
-  }
-const putFileTranscript = <TData = AxiosResponse<StoragePutFileTranscriptResponse>>(
-    storagePutFileTranscriptRequest: StoragePutFileTranscriptRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/storage/transcript_file`,
-      storagePutFileTranscriptRequest,options
-    );
-  }
-const getFileTranscriptPhrases = <TData = AxiosResponse<StorageListPhrases>>(
-    id: string,
-    params?: GetFileTranscriptPhrasesParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/storage/transcript_file/${id}/phrases`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {deleteFileTranscript,createFileTranscript,putFileTranscript,getFileTranscriptPhrases}};
-export type DeleteFileTranscriptResult = AxiosResponse<StorageDeleteFileTranscriptResponse>
-export type CreateFileTranscriptResult = AxiosResponse<StorageStartFileTranscriptResponse>
-export type PutFileTranscriptResult = AxiosResponse<StoragePutFileTranscriptResponse>
-export type GetFileTranscriptPhrasesResult = AxiosResponse<StorageListPhrases>
-
-            // --- footer end
-          
+// --- footer end

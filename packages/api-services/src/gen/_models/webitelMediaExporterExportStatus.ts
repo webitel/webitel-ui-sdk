@@ -13,13 +13,13 @@
  - DONE: Export finished successfully.
  - FAILED: Export failed during generation.
  */
-export type WebitelMediaExporterExportStatus = typeof WebitelMediaExporterExportStatus[keyof typeof WebitelMediaExporterExportStatus];
-
+export type WebitelMediaExporterExportStatus =
+	(typeof WebitelMediaExporterExportStatus)[keyof typeof WebitelMediaExporterExportStatus];
 
 export const WebitelMediaExporterExportStatus = {
-  ExportStatusUnspecified: 'EXPORT_STATUS_UNSPECIFIED',
-  Pending: 'PENDING',
-  Processing: 'PROCESSING',
-  Done: 'DONE',
-  Failed: 'FAILED',
+	ExportStatusUnspecified: 'EXPORT_STATUS_UNSPECIFIED',
+	Pending: 'PENDING',
+	Processing: 'PROCESSING',
+	Done: 'DONE',
+	Failed: 'FAILED',
 } as const;

@@ -10,13 +10,13 @@ import type { WebitelChatPeer } from './webitelChatPeer';
  * Customer is external chat contact.
  */
 export interface WebitelChatCustomer {
-  /** Customer unique **ID**entifier.
+	/** Customer unique **ID**entifier.
 Account **type**-specific string. */
-  id?: string;
-  /** Customer account **name**. */
-  name?: string;
-  /** Customer account **type**. */
-  type?: string;
-  /** [VIA] Text gateway associations. */
-  via?: WebitelChatPeer[];
+	id?: string;
+	/** Customer account **name**. */
+	name?: string;
+	/** Customer account **type**. */
+	type?: string;
+	/** [VIA] Text gateway associations. */
+	via?: WebitelChatPeer[];
 }

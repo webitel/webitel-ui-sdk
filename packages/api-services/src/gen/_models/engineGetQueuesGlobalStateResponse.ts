@@ -6,6 +6,6 @@
  */
 
 export interface EngineGetQueuesGlobalStateResponse {
-  isAllEnabled?: boolean;
-  potentialRows?: number;
+	isAllEnabled?: boolean;
+	potentialRows?: number;
 }

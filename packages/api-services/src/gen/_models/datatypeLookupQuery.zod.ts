@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type DatatypeLookupQuery = { [key: string]: string };
+export type DatatypeLookupQuery = {
+	[key: string]: string;
+};

@@ -8,12 +8,12 @@ import type { WebitelChatServerHistoryMessage } from './webitelChatServerHistory
 import type { WebitelChatServerMember } from './webitelChatServerMember';
 
 export interface WebitelChatServerConversation {
-  closedAt?: string;
-  createdAt?: string;
-  domainId?: string;
-  id?: string;
-  members?: WebitelChatServerMember[];
-  messages?: WebitelChatServerHistoryMessage[];
-  title?: string;
-  updatedAt?: string;
+	closedAt?: string;
+	createdAt?: string;
+	domainId?: string;
+	id?: string;
+	members?: WebitelChatServerMember[];
+	messages?: WebitelChatServerHistoryMessage[];
+	title?: string;
+	updatedAt?: string;
 }

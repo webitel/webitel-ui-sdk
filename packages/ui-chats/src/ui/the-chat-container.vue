@@ -45,23 +45,23 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { computed, provide, ref } from "vue";
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { computed, provide, ref } from 'vue';
 
-import ChatFooterWrapper from "./chat-footer/components/chat-footer-wrapper.vue";
-import ChatInputActionsBar from "./chat-footer/modules/user-input/components/chat-input-actions-bar.vue";
-import ChatTextField from "./chat-footer/modules/user-input/components/chat-text-field.vue";
+import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
+import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
+import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
 import {
 	ChatAction,
 	type SharedActionSlots,
-} from "./chat-footer/modules/user-input/enums/ChatAction.enum";
-import Dropzone from "./messaging/components/dropzone.vue";
-import MessagesContainer from "./messaging/components/the-messages-container.vue";
-import { useDropzoneHandlers } from "./messaging/composables/useDropzoneHandlers";
-import { MessageAction } from "./messaging/modules/message/enums/MessageAction.enum";
-import type { ChatMessageType } from "./messaging/types/ChatMessage.types";
-import { createUiChatsEmitter } from "./utils/emitter";
-import type { ResultCallbacks } from "./utils/ResultCallbacks.types";
+} from './chat-footer/modules/user-input/enums/ChatAction.enum';
+import Dropzone from './messaging/components/dropzone.vue';
+import MessagesContainer from './messaging/components/the-messages-container.vue';
+import { useDropzoneHandlers } from './messaging/composables/useDropzoneHandlers';
+import { MessageAction } from './messaging/modules/message/enums/MessageAction.enum';
+import type { ChatMessageType } from './messaging/types/ChatMessage.types';
+import { createUiChatsEmitter } from './utils/emitter';
+import type { ResultCallbacks } from './utils/ResultCallbacks.types';
 
 const props = withDefaults(
 	defineProps<{
@@ -71,7 +71,7 @@ const props = withDefaults(
 		canLoadNextMessages?: boolean; // 'next'
 		isNextMessagesLoading?: boolean;
 		withoutAvatars?: boolean;
-    readonly?: boolean; // hide chat footer with textarea and action-buttons
+		readonly?: boolean; // hide chat footer with textarea and action-buttons
 	}>(),
 	{
 		size: ComponentSize.MD,
@@ -79,7 +79,7 @@ const props = withDefaults(
 		chatActions: () => [],
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
-    readonly: false,
+		readonly: false,
 	},
 );
 
@@ -107,20 +107,20 @@ const slots = defineSlots<
 
 const uiChatsEmitter = createUiChatsEmitter();
 
-provide("size", props.size);
-provide("uiChatsEmitter", uiChatsEmitter);
+provide('size', props.size);
+provide('uiChatsEmitter', uiChatsEmitter);
 
-uiChatsEmitter?.on("clickChatMessageImage", (message) => {
+uiChatsEmitter?.on('clickChatMessageImage', (message) => {
 	emit(MessageAction.ClickOnImage, message);
 });
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
 
-const draft = ref<string>("");
+const draft = ref<string>('');
 
 const slottedChatActions = computed(() => {
 	return Object.keys(slots)
-		.filter((key) => key.startsWith("action:"))
-		.map((key) => key.replace("action:", ""));
+		.filter((key) => key.startsWith('action:'))
+		.map((key) => key.replace('action:', ''));
 });
 const isDropzoneDisabled = computed(
 	() => !props.chatActions.includes(ChatAction.AttachFiles),
@@ -128,7 +128,7 @@ const isDropzoneDisabled = computed(
 
 function sendMessage() {
 	emit(`action:${ChatAction.SendMessage}`, draft.value, {
-		onSuccess: () => (draft.value = ""),
+		onSuccess: () => (draft.value = ''),
 	});
 }
 

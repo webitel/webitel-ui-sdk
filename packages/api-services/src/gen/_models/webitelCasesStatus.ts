@@ -7,11 +7,11 @@
 import type { GeneralLookup } from './generalLookup';
 
 export interface WebitelCasesStatus {
-  createdAt?: string;
-  createdBy?: GeneralLookup;
-  description?: string;
-  id?: string;
-  name?: string;
-  updatedAt?: string;
-  updatedBy?: GeneralLookup;
+	createdAt?: string;
+	createdBy?: GeneralLookup;
+	description?: string;
+	id?: string;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: GeneralLookup;
 }

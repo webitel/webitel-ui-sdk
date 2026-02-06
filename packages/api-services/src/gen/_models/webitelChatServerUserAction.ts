@@ -13,10 +13,10 @@ about their chat partner's actions: typing or sending attachments of all kinds.
  - Cancel: Invalidate all previous action updates.
 E.g. when user deletes entered text or aborts a video upload.
  */
-export type WebitelChatServerUserAction = typeof WebitelChatServerUserAction[keyof typeof WebitelChatServerUserAction];
-
+export type WebitelChatServerUserAction =
+	(typeof WebitelChatServerUserAction)[keyof typeof WebitelChatServerUserAction];
 
 export const WebitelChatServerUserAction = {
-  Typing: 'Typing',
-  Cancel: 'Cancel',
+	Typing: 'Typing',
+	Cancel: 'Cancel',
 } as const;

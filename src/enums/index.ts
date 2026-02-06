@@ -1,7 +1,7 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
-import { ButtonSize } from './ButtonSize/ButtonSize.js';
+import { ButtonSize } from './ButtonSize/ButtonSize';
 import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
@@ -24,7 +24,6 @@ import { AdminSections } from './WebitelApplications/AdminSections';
 import { AuditorSections } from './WebitelApplications/AuditorSections';
 import { CrmSections } from './WebitelApplications/CrmSections';
 import { SupervisorSections } from './WebitelApplications/SupervisorSections';
-import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
 import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
@@ -57,7 +56,6 @@ export {
 	RingtoneType,
 	SupervisorSections,
 	TypesExportedSettings,
-	WebitelApplications,
 	WfmSections,
 	WtApplication,
 	WtObject,

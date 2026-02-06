@@ -9,12 +9,12 @@
  * Input of the contact IM client.
  */
 export interface ContactsInputIMClient {
-  /** Id of Agent created this IM client. */
-  createdBy?: string;
-  externalUser?: string;
-  /** App (Text-Gateway) used to connect the IM client. */
-  gatewayId?: string;
-  protocol?: string;
-  /** [Via] App(-specific) peer(-id) to connect[from] the IM client. */
-  via?: string;
+	/** Id of Agent created this IM client. */
+	createdBy?: string;
+	externalUser?: string;
+	/** App (Text-Gateway) used to connect the IM client. */
+	gatewayId?: string;
+	protocol?: string;
+	/** [Via] App(-specific) peer(-id) to connect[from] the IM client. */
+	via?: string;
 }

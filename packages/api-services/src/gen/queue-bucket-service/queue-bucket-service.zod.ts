@@ -6,156 +6,176 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary SearchQueueRouting
  */
 export const SearchQueueBucketParams = zod.object({
-  "queue_id": zod.string()
-})
+	queue_id: zod.string(),
+});
 
 export const SearchQueueBucketQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const SearchQueueBucketResponse = zod.object({
-  "items": zod.array(zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				bucket: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				disabled: zod.boolean().optional(),
+				id: zod.string().optional(),
+				priority: zod.number().optional(),
+				ratio: zod.number().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create QueueBucket
  */
 export const CreateQueueBucketParams = zod.object({
-  "queue_id": zod.string()
-})
+	queue_id: zod.string(),
+});
 
 export const CreateQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 export const CreateQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 /**
  * @summary DeleteQueueRouting
  */
 export const DeleteQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const DeleteQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 /**
  * @summary ReadQueueRouting
  */
 export const ReadQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const ReadQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 export const PatchQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const PatchQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	fields: zod.array(zod.string()).optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 export const PatchQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 /**
  * @summary UpdateQueueBucket
  */
 export const UpdateQueueBucketParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateQueueBucketBody = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});
 
 export const UpdateQueueBucketResponse = zod.object({
-  "bucket": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "disabled": zod.boolean().optional(),
-  "id": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "ratio": zod.number().optional()
-})
-
+	bucket: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	disabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	priority: zod.number().optional(),
+	ratio: zod.number().optional(),
+});

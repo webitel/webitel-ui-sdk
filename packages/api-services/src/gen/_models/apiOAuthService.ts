@@ -9,24 +9,24 @@ import type { ApiOAuthServiceMetadata } from './apiOAuthServiceMetadata';
 import type { ApiObjectId } from './apiObjectId';
 
 export interface ApiOAuthService {
-  authUrl?: string;
-  /** google.protobuf.Struct claims = 7; */
-  claims?: ApiClaim[];
-  clientId?: string;
-  clientSecret?: string;
-  createdAt?: string;
-  createdBy?: ApiObjectId;
-  discoveryUrl?: string;
-  domain?: ApiObjectId;
-  enabled?: boolean;
-  id?: string;
-  logo?: string;
-  metadata?: ApiOAuthServiceMetadata;
-  name?: string;
-  scopes?: string[];
-  tokenUrl?: string;
-  type?: string;
-  updatedAt?: string;
-  updatedBy?: ApiObjectId;
-  userinfoUrl?: string;
+	authUrl?: string;
+	/** google.protobuf.Struct claims = 7; */
+	claims?: ApiClaim[];
+	clientId?: string;
+	clientSecret?: string;
+	createdAt?: string;
+	createdBy?: ApiObjectId;
+	discoveryUrl?: string;
+	domain?: ApiObjectId;
+	enabled?: boolean;
+	id?: string;
+	logo?: string;
+	metadata?: ApiOAuthServiceMetadata;
+	name?: string;
+	scopes?: string[];
+	tokenUrl?: string;
+	type?: string;
+	updatedAt?: string;
+	updatedBy?: ApiObjectId;
+	userinfoUrl?: string;
 }

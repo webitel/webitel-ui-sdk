@@ -8,11 +8,11 @@ import type { StorageProviderType } from './storageProviderType';
 import type { StorageServiceType } from './storageServiceType';
 
 export interface StorageCognitiveProfileServicePatchCognitiveProfileBody {
-  default?: boolean;
-  description?: string;
-  enabled?: boolean;
-  fields?: string[];
-  name?: string;
-  provider?: StorageProviderType;
-  service?: StorageServiceType;
+	default?: boolean;
+	description?: string;
+	enabled?: boolean;
+	fields?: string[];
+	name?: string;
+	provider?: StorageProviderType;
+	service?: StorageServiceType;
 }

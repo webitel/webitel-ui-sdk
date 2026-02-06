@@ -6,8 +6,8 @@
  */
 
 export type LocateCaseParams = {
-/**
- * List of fields to include in the response.
- */
-fields?: string[];
+	/**
+	 * List of fields to include in the response.
+	 */
+	fields?: string[];
 };

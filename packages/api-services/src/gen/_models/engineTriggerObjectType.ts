@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerObjectType = typeof EngineTriggerObjectType[keyof typeof EngineTriggerObjectType];
-
+export type EngineTriggerObjectType =
+	(typeof EngineTriggerObjectType)[keyof typeof EngineTriggerObjectType];
 
 export const EngineTriggerObjectType = {
-  EmptyTriggerObject: 'empty_trigger_object',
-  Cases: 'cases',
-  CaseFiles: 'case_files',
-  CaseComments: 'case_comments',
-  CaseLinks: 'case_links',
-  RelatedCases: 'related_cases',
+	EmptyTriggerObject: 'empty_trigger_object',
+	Cases: 'cases',
+	CaseFiles: 'case_files',
+	CaseComments: 'case_comments',
+	CaseLinks: 'case_links',
+	RelatedCases: 'related_cases',
 } as const;

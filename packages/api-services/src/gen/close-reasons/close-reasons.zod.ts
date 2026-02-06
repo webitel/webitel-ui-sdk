@@ -6,198 +6,252 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Retrieve a list of close reasons or search close reasons
  */
 export const ListCloseReasonsParams = zod.object({
-  "close_reason_group_id": zod.string().describe('Close reason group ID filter')
-})
+	close_reason_group_id: zod.string().describe('Close reason group ID filter'),
+});
 
 export const ListCloseReasonsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional(),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number of result dataset records. offset = (page*size)'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Size count of records on result page. limit = (size++)'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	sort: zod
+		.string()
+		.optional()
+		.describe('Sort the result according to fields.'),
+	id: zod.array(zod.string()).optional(),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names',
+		),
+});
 
 export const ListCloseReasonsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				closeReasonGroupId: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+	page: zod.number().optional(),
+});
 
 /**
  * @summary Create a new close reason
  */
 export const CreateCloseReasonParams = zod.object({
-  "close_reason_group_id": zod.string()
-})
+	close_reason_group_id: zod.string(),
+});
 
 export const CreateCloseReasonQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const CreateCloseReasonBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const CreateCloseReasonResponse = zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	closeReasonGroupId: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Delete a close reason
  */
 export const DeleteCloseReasonParams = zod.object({
-  "close_reason_group_id": zod.string(),
-  "id": zod.string()
-})
+	close_reason_group_id: zod.string(),
+	id: zod.string(),
+});
 
 export const DeleteCloseReasonResponse = zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	closeReasonGroupId: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Locate a close reason by ID
  */
 export const LocateCloseReasonParams = zod.object({
-  "close_reason_group_id": zod.string(),
-  "id": zod.string()
-})
+	close_reason_group_id: zod.string(),
+	id: zod.string(),
+});
 
 export const LocateCloseReasonQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const LocateCloseReasonResponse = zod.object({
-  "closeReason": zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	closeReason: zod
+		.object({
+			closeReasonGroupId: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			description: zod.string().optional(),
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update an existing close reason
  */
 export const UpdateCloseReason2Params = zod.object({
-  "close_reason_group_id": zod.string(),
-  "id": zod.string()
-})
+	close_reason_group_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateCloseReason2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const UpdateCloseReason2Body = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const UpdateCloseReason2Response = zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	closeReasonGroupId: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update an existing close reason
  */
 export const UpdateCloseReasonParams = zod.object({
-  "close_reason_group_id": zod.string(),
-  "id": zod.string()
-})
+	close_reason_group_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateCloseReasonQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const UpdateCloseReasonBody = zod.object({
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const UpdateCloseReasonResponse = zod.object({
-  "closeReasonGroupId": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	closeReasonGroupId: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

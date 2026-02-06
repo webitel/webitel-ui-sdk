@@ -7,5 +7,5 @@
 import type { ApiLDAProcessOptions } from './apiLDAProcessOptions';
 
 export interface LDAPResyncLDAPCatalogBody {
-  options?: ApiLDAProcessOptions;
+	options?: ApiLDAProcessOptions;
 }

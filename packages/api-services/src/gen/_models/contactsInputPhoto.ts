@@ -9,10 +9,10 @@
  * Input of the photo.
  */
 export interface ContactsInputPhoto {
-  /** Unique ID of the latest version of an existing association. */
-  etag?: string;
-  photoId?: string;
-  photoUrl?: string;
-  /** True if the photo is a default photo; false if the photo is a user-provided photo. */
-  primary?: boolean;
+	/** Unique ID of the latest version of an existing association. */
+	etag?: string;
+	photoId?: string;
+	photoUrl?: string;
+	/** True if the photo is a default photo; false if the photo is a user-provided photo. */
+	primary?: boolean;
 }

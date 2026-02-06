@@ -6,6 +6,6 @@
  */
 
 export type ReadDomainParams = {
-domain?: string;
-dc?: string;
+	domain?: string;
+	dc?: string;
 };

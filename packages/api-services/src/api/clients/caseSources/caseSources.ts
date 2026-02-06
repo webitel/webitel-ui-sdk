@@ -1,8 +1,8 @@
 import {
-  CreateSourceBody,
-  getSources,
-  ListSourcesQueryParams,
-  UpdateSourceBody,
+	CreateSourceBody,
+	getSources,
+	ListSourcesQueryParams,
+	UpdateSourceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -18,8 +18,8 @@ import {
 
 const getSourcesList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    ListSourcesQueryParams,
-  );
+		ListSourcesQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q, type } = applyTransform(params, [
 		merge(getDefaultGetParams()),
@@ -45,7 +45,9 @@ const getSourcesList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -54,37 +56,50 @@ const getSource = async ({ itemId: id }) => {
 
 	try {
 		const response = await getSources().locateSource(id);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const addSource = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
-    camelToSnake(),
-  ]);
-  try {
-    const response = await getSources().createSource(item);
-    return applyTransform(response.data, [snakeToCamel()]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+	const item = applyTransform(itemInstance, [
+		sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
+		camelToSnake(),
+	]);
+	try {
+		const response = await getSources().createSource(item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
 };
 
 const updateSource = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
-    camelToSnake(),
-  ]);
+	const item = applyTransform(itemInstance, [
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
+		camelToSnake(),
+	]);
 
-  try {
-    const response = await getSources().updateSource(id, item);
-    return applyTransform(response.data, [snakeToCamel()]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+	try {
+		const response = await getSources().updateSource(id, item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
 };
 
 const deleteSource = async ({ id }) => {
@@ -92,14 +107,20 @@ const deleteSource = async ({ id }) => {
 		const response = await getSources().deleteSource(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getSourcesList({
 		...params,
-		fields: params.fields || ['id', 'name', 'type'],
+		fields: params.fields || [
+			'id',
+			'name',
+			'type',
+		],
 	});
 
 export const CaseSourcesAPI = {

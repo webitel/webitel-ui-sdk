@@ -6,359 +6,1070 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Remove the Contact's timezone(s).
  */
 export const DeleteTimezonesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+});
 
 export const DeleteTimezonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "etag": zod.array(zod.string()).describe('Set of unique ID(s) to remove.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	etag: zod.array(zod.string()).describe('Set of unique ID(s) to remove.'),
+});
 
-export const DeleteTimezonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
+export const DeleteTimezonesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary List of the Contact's timezone(s).
  */
 export const ListTimezonesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+});
 
 export const ListTimezonesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: location name;\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "id": zod.array(zod.string()).optional().describe('Record(s) with unique ID only.'),
-  "primary": zod.boolean().optional().describe('Primary timezone only.')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number of result dataset records. offset = (page*size)'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Size count of records on result page. limit = (size++)'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search term: location name;\n`?` - matches any one character\n`*` - matches 0 or more characters',
+		),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort the result according to fields.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe('Record(s) with unique ID only.'),
+	primary: zod.boolean().optional().describe('Primary timezone only.'),
+});
 
-export const ListTimezonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
+export const ListTimezonesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Associate more timezone(s) with the Contact.
  */
 export const MergeTimezonesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+});
 
 export const MergeTimezonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
-export const MergeTimezonesBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-}).describe('An input of the Contact\'s timezones.')
-export const MergeTimezonesBody = zod.array(MergeTimezonesBodyItem)
+export const MergeTimezonesBodyItem = zod
+	.object({
+		etag: zod
+			.string()
+			.describe('Unique ID of the latest version of an existing resource.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default among others.',
+			),
+		timezone: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+	})
+	.describe("An input of the Contact's timezones.");
+export const MergeTimezonesBody = zod.array(MergeTimezonesBodyItem);
 
-export const MergeTimezonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
+export const MergeTimezonesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Resets all timezones of the contact according to the input dataset.
  */
 export const ResetTimezonesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+});
 
 export const ResetTimezonesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result of changes.'),
+});
 
-export const ResetTimezonesBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-}).describe('An input of the Contact\'s timezones.')
-export const ResetTimezonesBody = zod.array(ResetTimezonesBodyItem)
+export const ResetTimezonesBodyItem = zod
+	.object({
+		etag: zod
+			.string()
+			.describe('Unique ID of the latest version of an existing resource.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default among others.',
+			),
+		timezone: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+	})
+	.describe("An input of the Contact's timezones.");
+export const ResetTimezonesBody = zod.array(ResetTimezonesBodyItem);
 
-export const ResetTimezonesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
+export const ResetTimezonesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Remove the Contact's timezone association.
  */
 export const DeleteTimezoneParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID to remove.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+	etag: zod.string().describe('Unique ID to remove.'),
+});
 
 export const DeleteTimezoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
-export const DeleteTimezoneResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')
+export const DeleteTimezoneResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('The user who created this Field.'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		etag: zod
+			.string()
+			.optional()
+			.describe(
+				'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+			),
+		id: zod
+			.string()
+			.optional()
+			.describe('The unique ID of the association. Never changes.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association is the default\namong others of the same type.',
+			),
+		timezone: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe(
+				'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+			),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		ver: zod
+			.number()
+			.optional()
+			.describe('Version of the latest update. Numeric sequence.'),
+	})
+	.describe("A Contact's timezone preference.");
 
 /**
  * @summary Locate the Contact's timezone association.
  */
 export const LocateTimezoneParams = zod.object({
-  "contact_id": zod.string().describe('Contact source ID.'),
-  "etag": zod.string().describe('Unique timezone link IDentifier.\nAccept: `etag` (obsolete+) or `id`.')
-})
+	contact_id: zod.string().describe('Contact source ID.'),
+	etag: zod
+		.string()
+		.describe(
+			'Unique timezone link IDentifier.\nAccept: `etag` (obsolete+) or `id`.',
+		),
+});
 
 export const LocateTimezoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result.'),
+});
 
-export const LocateTimezoneResponse = zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')
+export const LocateTimezoneResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('The user who created this Field.'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		etag: zod
+			.string()
+			.optional()
+			.describe(
+				'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+			),
+		id: zod
+			.string()
+			.optional()
+			.describe('The unique ID of the association. Never changes.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association is the default\namong others of the same type.',
+			),
+		timezone: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe(
+				'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+			),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		ver: zod
+			.number()
+			.optional()
+			.describe('Version of the latest update. Numeric sequence.'),
+	})
+	.describe("A Contact's timezone preference.");
 
 /**
  * @summary Update the Contact's timezone details.
  */
 export const UpdateTimezone2Params = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+	etag: zod
+		.string()
+		.describe('Unique ID of the latest version of an existing resource.'),
+});
 
 export const UpdateTimezone2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result of changes.'),
+});
 
 export const UpdateTimezone2Body = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
+	primary: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether this association must be default among others.',
+		),
+	timezone: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});
 
-export const UpdateTimezone2Response = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
+export const UpdateTimezone2Response = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Update the Contact's timezone details.
  */
 export const UpdateTimezoneParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing resource.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+	etag: zod
+		.string()
+		.describe('Unique ID of the latest version of an existing resource.'),
+});
 
 export const UpdateTimezoneQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result of changes.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result of changes.'),
+});
 
 export const UpdateTimezoneBody = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default among others.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
+	primary: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether this association must be default among others.',
+		),
+	timezone: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});
 
-export const UpdateTimezoneResponse = zod.object({
-  "data": zod.array(zod.object({
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "timezone": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s timezone preference.')).optional().describe('Timezone dataset page.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('The page number of the partial result.')
-}).describe('Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.')
-
+export const UpdateTimezoneResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's timezone preference."),
+			)
+			.optional()
+			.describe('Timezone dataset page.'),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('The page number of the partial result.'),
+	})
+	.describe(
+		'Timezone dataset.\nNOTE: Edge represents connection between two nodes.\nSo this ContactTimezones.data are always subordinate to some contact.id.',
+	);

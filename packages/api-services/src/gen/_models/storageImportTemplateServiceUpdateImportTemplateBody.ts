@@ -11,8 +11,8 @@ import type { StorageImportTemplateServiceUpdateImportTemplateBodyParameters } f
  * Update import template for CSV
  */
 export interface StorageImportTemplateServiceUpdateImportTemplateBody {
-  parameters?: StorageImportTemplateServiceUpdateImportTemplateBodyParameters;
-  description?: string;
-  name: string;
-  source?: EngineLookup;
+	parameters?: StorageImportTemplateServiceUpdateImportTemplateBodyParameters;
+	description?: string;
+	name: string;
+	source?: EngineLookup;
 }

@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchCognitiveProfileServiceItem = typeof SearchCognitiveProfileServiceItem[keyof typeof SearchCognitiveProfileServiceItem];
-
+export type SearchCognitiveProfileServiceItem =
+	(typeof SearchCognitiveProfileServiceItem)[keyof typeof SearchCognitiveProfileServiceItem];
 
 export const SearchCognitiveProfileServiceItem = {
-  DefaultService: 'DefaultService',
-  Stt: 'STT',
-  Tts: 'TTS',
+	DefaultService: 'DefaultService',
+	Stt: 'STT',
+	Tts: 'TTS',
 } as const;

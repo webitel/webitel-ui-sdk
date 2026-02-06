@@ -6,5 +6,5 @@
  */
 
 export interface StorageDeleteQuarantineFilesRequest {
-  id?: string[];
+	id?: string[];
 }

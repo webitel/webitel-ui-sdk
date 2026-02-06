@@ -6,5 +6,5 @@
  */
 
 export type ShiftTemplateServiceReadShiftTemplateParams = {
-fields?: string[];
+	fields?: string[];
 };

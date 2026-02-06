@@ -8,4 +8,6 @@
 /**
  * defines map[class]limit usage
  */
-export type ApiCustomerLimit = {[key: string]: number};
+export type ApiCustomerLimit = {
+	[key: string]: number;
+};

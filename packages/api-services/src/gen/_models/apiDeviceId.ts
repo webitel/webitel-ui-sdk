@@ -6,6 +6,6 @@
  */
 
 export interface ApiDeviceId {
-  id?: string;
-  name?: string;
+	id?: string;
+	name?: string;
 }

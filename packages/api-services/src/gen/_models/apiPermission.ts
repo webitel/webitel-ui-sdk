@@ -6,8 +6,8 @@
  */
 
 export interface ApiPermission {
-  /** [required] e.g.: 'read', 'playback_record_file', ... */
-  id?: string;
-  name?: string;
-  usage?: string;
+	/** [required] e.g.: 'read', 'playback_record_file', ... */
+	id?: string;
+	name?: string;
+	usage?: string;
 }

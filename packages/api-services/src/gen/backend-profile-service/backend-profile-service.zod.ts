@@ -6,237 +6,263 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary List of BackendProfile
  */
 export const SearchBackendProfileQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const SearchBackendProfileResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				dataCount: zod.string().optional(),
+				dataSize: zod.string().optional(),
+				description: zod.string().optional(),
+				disabled: zod.boolean().optional(),
+				expireDays: zod.number().optional(),
+				id: zod.string().optional(),
+				maxSize: zod.string().optional(),
+				name: zod.string().optional(),
+				priority: zod.number().optional(),
+				properties: zod.record(zod.string(), zod.string()).optional(),
+				type: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create BackendProfile
  */
 export const CreateBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional()
-})
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	domainId: zod.string().optional(),
+	expireDays: zod.number().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+});
 
 export const CreateBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	dataCount: zod.string().optional(),
+	dataSize: zod.string().optional(),
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	expireDays: zod.number().optional(),
+	id: zod.string().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Remove BackendProfile
  */
 export const DeleteBackendProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const DeleteBackendProfileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const DeleteBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	dataCount: zod.string().optional(),
+	dataSize: zod.string().optional(),
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	expireDays: zod.number().optional(),
+	id: zod.string().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary BackendProfile item
  */
 export const ReadBackendProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const ReadBackendProfileQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const ReadBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	dataCount: zod.string().optional(),
+	dataSize: zod.string().optional(),
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	expireDays: zod.number().optional(),
+	id: zod.string().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Patch BackendProfile
  */
 export const PatchBackendProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const PatchBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional()
-})
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	domainId: zod.string().optional(),
+	expireDays: zod.number().optional(),
+	fields: zod.array(zod.string()).optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+});
 
 export const PatchBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	dataCount: zod.string().optional(),
+	dataSize: zod.string().optional(),
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	expireDays: zod.number().optional(),
+	id: zod.string().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update BackendProfile
  */
 export const UpdateBackendProfileParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const UpdateBackendProfileBody = zod.object({
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "domainId": zod.string().optional(),
-  "expireDays": zod.number().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional()
-})
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	domainId: zod.string().optional(),
+	expireDays: zod.number().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+});
 
 export const UpdateBackendProfileResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "dataCount": zod.string().optional(),
-  "dataSize": zod.string().optional(),
-  "description": zod.string().optional(),
-  "disabled": zod.boolean().optional(),
-  "expireDays": zod.number().optional(),
-  "id": zod.string().optional(),
-  "maxSize": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priority": zod.number().optional(),
-  "properties": zod.record(zod.string(), zod.string()).optional(),
-  "type": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	dataCount: zod.string().optional(),
+	dataSize: zod.string().optional(),
+	description: zod.string().optional(),
+	disabled: zod.boolean().optional(),
+	expireDays: zod.number().optional(),
+	id: zod.string().optional(),
+	maxSize: zod.string().optional(),
+	name: zod.string().optional(),
+	priority: zod.number().optional(),
+	properties: zod.record(zod.string(), zod.string()).optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

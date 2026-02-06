@@ -6,6 +6,6 @@
  */
 
 export interface EngineSkillServiceDeleteSkillAgentBody {
-  agentId?: string[];
-  id?: string[];
+	agentId?: string[];
+	id?: string[];
 }

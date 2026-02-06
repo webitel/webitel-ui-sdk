@@ -7,7 +7,7 @@
 import type { ApiAccessRule } from './apiAccessRule';
 
 export interface ApiListAccessResponseV1 {
-  items?: ApiAccessRule[];
-  next?: boolean;
-  page?: number;
+	items?: ApiAccessRule[];
+	next?: boolean;
+	page?: number;
 }

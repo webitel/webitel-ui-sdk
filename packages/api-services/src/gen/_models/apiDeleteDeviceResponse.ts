@@ -7,5 +7,5 @@
 import type { ApiDevice } from './apiDevice';
 
 export interface ApiDeleteDeviceResponse {
-  deleted?: ApiDevice[];
+	deleted?: ApiDevice[];
 }

@@ -10,6 +10,6 @@ import type { WebitelCasesCaseCommunication } from './webitelCasesCaseCommunicat
  * Response message after linking communications to a case.
  */
 export interface WebitelCasesLinkCommunicationResponse {
-  /** List of linked communications. */
-  data?: WebitelCasesCaseCommunication[];
+	/** List of linked communications. */
+	data?: WebitelCasesCaseCommunication[];
 }

@@ -6,69 +6,82 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * (UserPresence) {
  * @summary set(presence) (notify, error)
  */
 export const SetStatus2Body = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "publish": zod.object({
-  "expires": zod.number().optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+	publish: zod
+		.object({
+			expires: zod.number().optional(),
+			id: zod.string().optional(),
+			note: zod.string().optional(),
+			status: zod.string().optional(),
+			timestamp: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const SetStatus2Response = zod.object({
-  "app": zod.string().optional(),
-  "closed": zod.boolean().optional(),
-  "contact": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "expires": zod.string().optional(),
-  "id": zod.string().optional().describe('[required] tuple unique id; <track>'),
-  "note": zod.string().optional(),
-  "open": zod.number().optional(),
-  "presence": zod.array(zod.unknown()).optional().describe('// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;'),
-  "priority": zod.number().optional(),
-  "sequence": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})
+	app: zod.string().optional(),
+	closed: zod.boolean().optional(),
+	contact: zod.string().optional(),
+	domainId: zod.string().optional(),
+	expires: zod.string().optional(),
+	id: zod.string().optional().describe('[required] tuple unique id; <track>'),
+	note: zod.string().optional(),
+	open: zod.number().optional(),
+	presence: zod
+		.array(zod.unknown())
+		.optional()
+		.describe(
+			'// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;',
+		),
+	priority: zod.number().optional(),
+	sequence: zod.string().optional(),
+	status: zod.string().optional(),
+	timestamp: zod.string().optional(),
+});
 
 /**
  * (UserPresence) {
  * @summary set(presence) (notify, error)
  */
 export const SetStatusParams = zod.object({
-  "publish.id": zod.string().describe('[required] user identity')
-})
+	'publish.id': zod.string().describe('[required] user identity'),
+});
 
 export const SetStatusBody = zod.object({
-  "fields": zod.array(zod.string()).optional(),
-  "publish": zod.object({
-  "expires": zod.number().optional(),
-  "note": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-}).optional().describe('BODY: partial modifications')
-})
+	fields: zod.array(zod.string()).optional(),
+	publish: zod
+		.object({
+			expires: zod.number().optional(),
+			note: zod.string().optional(),
+			status: zod.string().optional(),
+			timestamp: zod.string().optional(),
+		})
+		.optional()
+		.describe('BODY: partial modifications'),
+});
 
 export const SetStatusResponse = zod.object({
-  "app": zod.string().optional(),
-  "closed": zod.boolean().optional(),
-  "contact": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "expires": zod.string().optional(),
-  "id": zod.string().optional().describe('[required] tuple unique id; <track>'),
-  "note": zod.string().optional(),
-  "open": zod.number().optional(),
-  "presence": zod.array(zod.unknown()).optional().describe('// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;'),
-  "priority": zod.number().optional(),
-  "sequence": zod.string().optional(),
-  "status": zod.string().optional(),
-  "timestamp": zod.string().optional()
-})
-
+	app: zod.string().optional(),
+	closed: zod.boolean().optional(),
+	contact: zod.string().optional(),
+	domainId: zod.string().optional(),
+	expires: zod.string().optional(),
+	id: zod.string().optional().describe('[required] tuple unique id; <track>'),
+	note: zod.string().optional(),
+	open: zod.number().optional(),
+	presence: zod
+		.array(zod.unknown())
+		.optional()
+		.describe(
+			'// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;',
+		),
+	priority: zod.number().optional(),
+	sequence: zod.string().optional(),
+	status: zod.string().optional(),
+	timestamp: zod.string().optional(),
+});

@@ -6,23 +6,23 @@
  */
 
 export type GetCustomer2Params = {
-/**
- * show if valid only!
- */
-valid?: boolean;
-/**
- * identifier
- */
-domainId?: string;
-/**
- * display name
- */
-domainName?: string;
-/**
+	/**
+	 * show if valid only!
+	 */
+	valid?: boolean;
+	/**
+	 * identifier
+	 */
+	domainId?: string;
+	/**
+	 * display name
+	 */
+	domainName?: string;
+	/**
  * Request Controls
 
 serial,
  */
-fields?: string[];
-sort?: string[];
+	fields?: string[];
+	sort?: string[];
 };

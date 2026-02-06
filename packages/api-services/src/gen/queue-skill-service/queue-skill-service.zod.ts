@@ -6,192 +6,248 @@
  */
 import * as zod from 'zod';
 
-
 export const SearchQueueSkillParams = zod.object({
-  "queue_id": zod.number()
-})
+	queue_id: zod.number(),
+});
 
 export const SearchQueueSkillQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "skillId": zod.array(zod.number()).optional(),
-  "bucketId": zod.array(zod.number()).optional(),
-  "lvl": zod.array(zod.number()).optional(),
-  "minCapacity": zod.array(zod.number()).optional(),
-  "maxCapacity": zod.array(zod.number()).optional(),
-  "enabled": zod.boolean().optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+	skillId: zod.array(zod.number()).optional(),
+	bucketId: zod.array(zod.number()).optional(),
+	lvl: zod.array(zod.number()).optional(),
+	minCapacity: zod.array(zod.number()).optional(),
+	maxCapacity: zod.array(zod.number()).optional(),
+	enabled: zod.boolean().optional(),
+});
 
 export const SearchQueueSkillResponse = zod.object({
-  "items": zod.array(zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				buckets: zod
+					.array(
+						zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
+				enabled: zod.boolean().optional(),
+				id: zod.number().optional(),
+				lvl: zod.number().optional(),
+				maxCapacity: zod.number().optional(),
+				minCapacity: zod.number().optional(),
+				skill: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 export const CreateQueueSkillParams = zod.object({
-  "queue_id": zod.number()
-})
+	queue_id: zod.number(),
+});
 
 export const CreateQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const CreateQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const DeleteQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
+	queue_id: zod.number(),
+	id: zod.number(),
+});
 
 export const DeleteQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const ReadQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
+	queue_id: zod.number(),
+	id: zod.number(),
+});
 
 export const ReadQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const PatchQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
+	queue_id: zod.number(),
+	id: zod.number(),
+});
 
 export const PatchQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	fields: zod.array(zod.string()).optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const PatchQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const UpdateQueueSkillParams = zod.object({
-  "queue_id": zod.number(),
-  "id": zod.number()
-})
+	queue_id: zod.number(),
+	id: zod.number(),
+});
 
 export const UpdateQueueSkillBody = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const UpdateQueueSkillResponse = zod.object({
-  "buckets": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "enabled": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "lvl": zod.number().optional(),
-  "maxCapacity": zod.number().optional(),
-  "minCapacity": zod.number().optional(),
-  "skill": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	buckets: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	lvl: zod.number().optional(),
+	maxCapacity: zod.number().optional(),
+	minCapacity: zod.number().optional(),
+	skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LocateContactMode = typeof LocateContactMode[keyof typeof LocateContactMode];
-
+export type LocateContactMode =
+	(typeof LocateContactMode)[keyof typeof LocateContactMode];
 
 export const LocateContactMode = {
-  Read: 'READ',
-  Write: 'WRITE',
-  Delete: 'DELETE',
+	Read: 'READ',
+	Write: 'WRITE',
+	Delete: 'DELETE',
 } as const;

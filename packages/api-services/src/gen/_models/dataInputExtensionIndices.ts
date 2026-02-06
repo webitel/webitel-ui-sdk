@@ -6,4 +6,6 @@
  */
 import type { DataIndex } from './dataIndex';
 
-export type DataInputExtensionIndices = {[key: string]: DataIndex};
+export type DataInputExtensionIndices = {
+	[key: string]: DataIndex;
+};

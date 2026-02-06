@@ -7,6 +7,6 @@
 import type { EngineAgentSkillItem } from './engineAgentSkillItem';
 
 export interface EngineListAgentSkill {
-  items?: EngineAgentSkillItem[];
-  next?: boolean;
+	items?: EngineAgentSkillItem[];
+	next?: boolean;
 }

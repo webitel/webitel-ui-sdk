@@ -18,30 +18,30 @@ import type { ContactsInputTimezone } from './contactsInputTimezone';
 import type { ContactsInputVariable } from './contactsInputVariable';
 
 export type UpdateContactBody = {
-  /** BIO. Short description about the Contact person.
+	/** BIO. Short description about the Contact person.
 OPTIONAL. Multi-lined text. */
-  about?: string;
-  /** Publish NEW comment(s) for this Contact. */
-  comments?: ContactsInputComment[];
-  /** The Contact's email address(es). */
-  emails?: ContactsInputEmailAddress[];
-  /** The Contact's associated group(s). */
-  groups?: ContactsInputContactGroup[];
-  /** The contact's [I]nstant[M]essaging clients. */
-  imclients?: ContactsInputIMClient[];
-  /** The Contact's associated label(s). */
-  labels?: ContactsInputLabel[];
-  /** A Contact's locale preference(s). */
-  languages?: ContactsInputLanguage[];
-  /** The Contact's internal manager(s). */
-  managers?: ContactsInputManager[];
-  name?: ContactsInputName;
-  /** The Contact's phone numbers. */
-  phones?: ContactsInputPhoneNumber[];
-  /** Output only. The Contact's photo(s). */
-  readonly photos?: readonly ContactsInputPhoto[];
-  /** The Contact's timezone preference(s). */
-  timezones?: ContactsInputTimezone[];
-  /** Arbitrary client data that is populated by clients. */
-  variables?: ContactsInputVariable[];
+	about?: string;
+	/** Publish NEW comment(s) for this Contact. */
+	comments?: ContactsInputComment[];
+	/** The Contact's email address(es). */
+	emails?: ContactsInputEmailAddress[];
+	/** The Contact's associated group(s). */
+	groups?: ContactsInputContactGroup[];
+	/** The contact's [I]nstant[M]essaging clients. */
+	imclients?: ContactsInputIMClient[];
+	/** The Contact's associated label(s). */
+	labels?: ContactsInputLabel[];
+	/** A Contact's locale preference(s). */
+	languages?: ContactsInputLanguage[];
+	/** The Contact's internal manager(s). */
+	managers?: ContactsInputManager[];
+	name?: ContactsInputName;
+	/** The Contact's phone numbers. */
+	phones?: ContactsInputPhoneNumber[];
+	/** Output only. The Contact's photo(s). */
+	readonly photos?: readonly ContactsInputPhoto[];
+	/** The Contact's timezone preference(s). */
+	timezones?: ContactsInputTimezone[];
+	/** Arbitrary client data that is populated by clients. */
+	variables?: ContactsInputVariable[];
 };

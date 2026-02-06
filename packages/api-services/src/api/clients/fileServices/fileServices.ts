@@ -1,8 +1,8 @@
 import {
-  getFileService,
-  SearchFilesQueryParams,
-  SearchScreenRecordingsByAgentQueryParams,
-  SearchScreenRecordingsQueryParams,
+	getFileService,
+	SearchFilesQueryParams,
+	SearchScreenRecordingsByAgentQueryParams,
+	SearchScreenRecordingsQueryParams,
 } from '@webitel/api-services/gen';
 import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
@@ -19,8 +19,8 @@ import {
 
 const getFilesList = async (params: SearchFilesByCallParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    SearchFilesQueryParams,
-  );
+		SearchFilesQueryParams,
+	);
 
 	const {
 		page,
@@ -66,91 +66,30 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const deleteFiles = async (id) => {
 	try {
-		const response = await getFileService().deleteFiles({ id });
-		return applyTransform(response.data, [snakeToCamel()]);
+		const response = await getFileService().deleteFiles({
+			id,
+		});
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getScreenRecordingsByUser = async (params: any) => {
-  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    SearchScreenRecordingsQueryParams,
-  );
-
-  const {
-    page,
-    size,
-    q,
-    sort,
-    fields,
-    id,
-    uploaded_at_from: uploadedAtFrom,
-    uploaded_at_to: uploadedAtTo,
-    referenceId,
-    retentionUntilFrom,
-    retentionUntilTo,
-    type,
-    channel,
-  } = applyTransform(params, [
-    merge(getDefaultGetParams()),
-    sanitize(fieldsToSend),
-    camelToSnake(),
-  ]);
-
-  try {
-    const response = await getFileService().searchScreenRecordings(
-      params.userId,
-      {
-        page,
-        size,
-        q: q || params.search,
-        sort,
-        fields: ['id', ...fields],
-        id,
-        'uploaded_at.from': uploadedAtFrom,
-        'uploaded_at.to': uploadedAtTo,
-        referenceId,
-        retentionUntilFrom,
-        retentionUntilTo,
-        type,
-        channel,
-      },
-    );
-    const { items, next } = applyTransform(response.data, [
-      merge(getDefaultGetListResponse()),
-    ]);
-    return {
-      items,
-      next,
-    };
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
-};
-
-const deleteScreenRecordingsByUser = async ({ userId, id }) => {
-	try {
-		const response = await getFileService().deleteScreenRecordings(
-      userId,
-      id,
-      {},
-    );
-    return applyTransform(response.data, [snakeToCamel()]);
-	} catch (err) {
-		throw applyTransform(err, [notify]);
-	}
-};
-
-const getScreenRecordingsByAgent = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    SearchScreenRecordingsByAgentQueryParams,
+		SearchScreenRecordingsQueryParams,
 	);
 
 	const {
@@ -166,7 +105,85 @@ const getScreenRecordingsByAgent = async (params: any) => {
 		retentionUntilFrom,
 		retentionUntilTo,
 		type,
-    channel,
+		channel,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getFileService().searchScreenRecordings(
+			params.userId,
+			{
+				page,
+				size,
+				q: q || params.search,
+				sort,
+				fields: [
+					'id',
+					...fields,
+				],
+				id,
+				'uploaded_at.from': uploadedAtFrom,
+				'uploaded_at.to': uploadedAtTo,
+				referenceId,
+				retentionUntilFrom,
+				retentionUntilTo,
+				type,
+				channel,
+			},
+		);
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const deleteScreenRecordingsByUser = async ({ userId, id }) => {
+	try {
+		const response = await getFileService().deleteScreenRecordings(
+			userId,
+			id,
+			{},
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const getScreenRecordingsByAgent = async (params: any) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchScreenRecordingsByAgentQueryParams,
+	);
+
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields,
+		id,
+		uploaded_at_from: uploadedAtFrom,
+		uploaded_at_to: uploadedAtTo,
+		referenceId,
+		retentionUntilFrom,
+		retentionUntilTo,
+		type,
+		channel,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		sanitize(fieldsToSend),
@@ -181,7 +198,12 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				size,
 				q: q || params.search,
 				sort,
-				fields: ['id', 'view_name', 'mime_type', ...fields],
+				fields: [
+					'id',
+					'view_name',
+					'mime_type',
+					...fields,
+				],
 				id,
 				'uploaded_at.from': uploadedAtFrom,
 				'uploaded_at.to': uploadedAtTo,
@@ -189,8 +211,8 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				retentionUntilFrom,
 				retentionUntilTo,
 				type,
-        channel,
-      },
+				channel,
+			},
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -200,57 +222,69 @@ const getScreenRecordingsByAgent = async (params: any) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	try {
-    const response = await getFileService().deleteScreenRecordingsByAgent(
-      agentId,
-      id,
-      {},
-    );
-    return applyTransform(response.data, [snakeToCamel()]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+		const response = await getFileService().deleteScreenRecordingsByAgent(
+			agentId,
+			id,
+			{},
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
 };
 
-const getFilesListByCall = async (params: SearchFilesByCallParams & { callId: string }) => {
-  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    SearchFilesQueryParams,
-  );
+const getFilesListByCall = async (
+	params: SearchFilesByCallParams & {
+		callId: string;
+	},
+) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchFilesQueryParams,
+	);
 
-  const requestParams = applyTransform(params, [
-    merge(getDefaultGetParams()),
-    sanitize(fieldsToSend),
-    camelToSnake(),
-    (param) => ({
-      ...param,
-      q: param.q ?? param.search,
-      'uploaded_at.from': param.uploaded_at_from,
-      'uploaded_at.to': param.uploaded_at_to,
-    }),
-  ]);
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+		(param) => ({
+			...param,
+			q: param.q ?? param.search,
+			'uploaded_at.from': param.uploaded_at_from,
+			'uploaded_at.to': param.uploaded_at_to,
+		}),
+	]);
 
-  try {
-    const response = await getFileService().searchFilesByCall(
-      params.callId,
-      requestParams,
-    );
+	try {
+		const response = await getFileService().searchFilesByCall(
+			params.callId,
+			requestParams,
+		);
 
-    const { items, next } = applyTransform(response.data, [
-      merge(getDefaultGetListResponse()),
-    ]);
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
 
-    return {
-      items,
-      next,
-    };
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
 };
 
 export const FileServicesAPI = {
@@ -260,5 +294,5 @@ export const FileServicesAPI = {
 	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
 	deleteScreenRecordingsByAgent,
-  getListByCall: getFilesListByCall,
+	getListByCall: getFilesListByCall,
 };

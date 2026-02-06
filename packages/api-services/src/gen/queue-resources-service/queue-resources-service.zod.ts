@@ -6,138 +6,164 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary SearchQueueResourceGroup
  */
 export const SearchQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string()
-})
+	queue_id: zod.string(),
+});
 
 export const SearchQueueResourceGroupQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const SearchQueueResourceGroupResponse = zod.object({
-  "items": zod.array(zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				communication: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				id: zod.string().optional(),
+				resourceGroup: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary CreateQueueResourceGroup
  */
 export const CreateQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string()
-})
+	queue_id: zod.string(),
+});
 
 export const CreateQueueResourceGroupBody = zod.object({
-  "domainId": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	domainId: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const CreateQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	communication: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary DeleteQueueResourceGroup
  */
 export const DeleteQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const DeleteQueueResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const DeleteQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	communication: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary ReadQueueResourceGroup
  */
 export const ReadQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const ReadQueueResourceGroupQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const ReadQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	communication: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary UpdateQueueResourceGroup
  */
 export const UpdateQueueResourceGroupParams = zod.object({
-  "queue_id": zod.string(),
-  "id": zod.string()
-})
+	queue_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateQueueResourceGroupBody = zod.object({
-  "domainId": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	domainId: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const UpdateQueueResourceGroupResponse = zod.object({
-  "communication": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "resourceGroup": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	communication: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	resourceGroup: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

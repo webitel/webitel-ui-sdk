@@ -6,6 +6,6 @@
  */
 
 export interface WebitelCasesInputCloseReason {
-  description?: string;
-  name?: string;
+	description?: string;
+	name?: string;
 }

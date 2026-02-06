@@ -7,5 +7,5 @@
 import type { EngineSkillAgentItem } from './engineSkillAgentItem';
 
 export interface EngineDeleteSkillAgentResponse {
-  items?: EngineSkillAgentItem[];
+	items?: EngineSkillAgentItem[];
 }

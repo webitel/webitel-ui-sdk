@@ -10,10 +10,10 @@ import type { WebitelCasesCaseComment } from './webitelCasesCaseComment';
  * Contains a paginated list of comments.
  */
 export interface WebitelCasesCaseCommentList {
-  /** List of comments on the current page. */
-  items?: WebitelCasesCaseComment[];
-  /** Flag to indicate if more pages are available. */
-  next?: boolean;
-  /** Current page number. */
-  page?: string;
+	/** List of comments on the current page. */
+	items?: WebitelCasesCaseComment[];
+	/** Flag to indicate if more pages are available. */
+	next?: boolean;
+	/** Current page number. */
+	page?: string;
 }

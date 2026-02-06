@@ -9,12 +9,12 @@ import type { UpdateRelatedCaseBodyPrimaryCase } from './updateRelatedCaseBodyPr
 import type { WebitelCasesRelationType } from './webitelCasesRelationType';
 
 export type UpdateRelatedCaseBody = {
-  /** Primary case details. */
-  primaryCase?: UpdateRelatedCaseBodyPrimaryCase;
-  /** Related case details. */
-  relatedCase?: GeneralLookup;
-  /** Relation type. */
-  relationType?: WebitelCasesRelationType;
-  /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-  userId?: GeneralLookup;
+	/** Primary case details. */
+	primaryCase?: UpdateRelatedCaseBodyPrimaryCase;
+	/** Related case details. */
+	relatedCase?: GeneralLookup;
+	/** Relation type. */
+	relationType?: WebitelCasesRelationType;
+	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+	userId?: GeneralLookup;
 };

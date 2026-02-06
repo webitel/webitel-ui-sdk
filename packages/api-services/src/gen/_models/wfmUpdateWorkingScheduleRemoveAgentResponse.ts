@@ -6,5 +6,5 @@
  */
 
 export interface WfmUpdateWorkingScheduleRemoveAgentResponse {
-  id?: string;
+	id?: string;
 }

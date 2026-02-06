@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchTeamHookEventItem = typeof SearchTeamHookEventItem[keyof typeof SearchTeamHookEventItem];
-
+export type SearchTeamHookEventItem =
+	(typeof SearchTeamHookEventItem)[keyof typeof SearchTeamHookEventItem];
 
 export const SearchTeamHookEventItem = {
-  TeamHookEventUndefined: 'teamHookEventUndefined',
-  AgentStatus: 'agent_status',
+	TeamHookEventUndefined: 'teamHookEventUndefined',
+	AgentStatus: 'agent_status',
 } as const;

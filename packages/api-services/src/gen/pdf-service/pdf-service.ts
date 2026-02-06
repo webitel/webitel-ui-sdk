@@ -6,103 +6,129 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ListCallExportsParams,
-  ListScreenrecordingExportsParams,
-  WebitelMediaExporterDeleteExportResponse,
-  WebitelMediaExporterExportTask,
-  WebitelMediaExporterListExportsResponse,
-  WebitelMediaExporterPdfServiceCreateCallExportBody,
-  WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody
+	ListCallExportsParams,
+	ListScreenrecordingExportsParams,
+	WebitelMediaExporterDeleteExportResponse,
+	WebitelMediaExporterExportTask,
+	WebitelMediaExporterListExportsResponse,
+	WebitelMediaExporterPdfServiceCreateCallExportBody,
+	WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody,
 } from '.././_models';
 
+// --- header start
+//
 
-
-            // --- header start
-            // 
-
-  export const 
-            // --- title start
-            getPdfService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Lists the history of PDF exports for a specific agent.
- */
-const listScreenrecordingExports = <TData = AxiosResponse<WebitelMediaExporterListExportsResponse>>(
-    agentId: string,
-    params?: ListScreenrecordingExportsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/agents/${agentId}/exports/pdf/screenrecordings`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
+export const // --- title start
+	getPdfService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Lists the history of PDF exports for a specific agent.
+			 */
+			const listScreenrecordingExports = <
+				TData = AxiosResponse<WebitelMediaExporterListExportsResponse>,
+			>(
+				agentId: string,
+				params?: ListScreenrecordingExportsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(
+					`/agents/${agentId}/exports/pdf/screenrecordings`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
  * @summary Creates a new task to generate a PDF export for an agent's screen recordings.
 This operation is asynchronous and returns a task metadata.
  */
-const createScreenrecordingExport = <TData = AxiosResponse<WebitelMediaExporterExportTask>>(
-    agentId: string,
-    webitelMediaExporterPdfServiceCreateScreenrecordingExportBody: WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/agents/${agentId}/exports/pdf/screenrecordings`,
-      webitelMediaExporterPdfServiceCreateScreenrecordingExportBody,options
-    );
-  }
-/**
- * @summary Lists the history of PDF exports for a specific call ID.
- */
-const listCallExports = <TData = AxiosResponse<WebitelMediaExporterListExportsResponse>>(
-    callId: string,
-    params?: ListCallExportsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/calls/${callId}/exports/pdf`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
+			const createScreenrecordingExport = <
+				TData = AxiosResponse<WebitelMediaExporterExportTask>,
+			>(
+				agentId: string,
+				webitelMediaExporterPdfServiceCreateScreenrecordingExportBody: WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/agents/${agentId}/exports/pdf/screenrecordings`,
+					webitelMediaExporterPdfServiceCreateScreenrecordingExportBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Lists the history of PDF exports for a specific call ID.
+			 */
+			const listCallExports = <
+				TData = AxiosResponse<WebitelMediaExporterListExportsResponse>,
+			>(
+				callId: string,
+				params?: ListCallExportsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/calls/${callId}/exports/pdf`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
  * @summary Creates a new task to generate a PDF export for a specific call.
 Useful for documenting call transcripts or associated media.
  */
-const createCallExport = <TData = AxiosResponse<WebitelMediaExporterExportTask>>(
-    callId: string,
-    webitelMediaExporterPdfServiceCreateCallExportBody: WebitelMediaExporterPdfServiceCreateCallExportBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/calls/${callId}/exports/pdf`,
-      webitelMediaExporterPdfServiceCreateCallExportBody,options
-    );
-  }
-/**
- * @summary Deletes a specific export record from the history.
- */
-const deleteExport = <TData = AxiosResponse<WebitelMediaExporterDeleteExportResponse>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/exports/pdf/history/${id}`,options
-    );
-  }
+			const createCallExport = <
+				TData = AxiosResponse<WebitelMediaExporterExportTask>,
+			>(
+				callId: string,
+				webitelMediaExporterPdfServiceCreateCallExportBody: WebitelMediaExporterPdfServiceCreateCallExportBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/calls/${callId}/exports/pdf`,
+					webitelMediaExporterPdfServiceCreateCallExportBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Deletes a specific export record from the history.
+			 */
+			const deleteExport = <
+				TData = AxiosResponse<WebitelMediaExporterDeleteExportResponse>,
+			>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/exports/pdf/history/${id}`, options);
+			};
 
-            // --- footer start
-            return {listScreenrecordingExports,createScreenrecordingExport,listCallExports,createCallExport,deleteExport}};
-export type ListScreenrecordingExportsResult = AxiosResponse<WebitelMediaExporterListExportsResponse>
-export type CreateScreenrecordingExportResult = AxiosResponse<WebitelMediaExporterExportTask>
-export type ListCallExportsResult = AxiosResponse<WebitelMediaExporterListExportsResponse>
-export type CreateCallExportResult = AxiosResponse<WebitelMediaExporterExportTask>
-export type DeleteExportResult = AxiosResponse<WebitelMediaExporterDeleteExportResponse>
+			// --- footer start
+			return {
+				listScreenrecordingExports,
+				createScreenrecordingExport,
+				listCallExports,
+				createCallExport,
+				deleteExport,
+			};
+		};
+export type ListScreenrecordingExportsResult =
+	AxiosResponse<WebitelMediaExporterListExportsResponse>;
+export type CreateScreenrecordingExportResult =
+	AxiosResponse<WebitelMediaExporterExportTask>;
+export type ListCallExportsResult =
+	AxiosResponse<WebitelMediaExporterListExportsResponse>;
+export type CreateCallExportResult =
+	AxiosResponse<WebitelMediaExporterExportTask>;
+export type DeleteExportResult =
+	AxiosResponse<WebitelMediaExporterDeleteExportResponse>;
 
-            // --- footer end
-          
+// --- footer end

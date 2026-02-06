@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelChatServerCloseConversationResponse { [key: string]: unknown }
+export interface WebitelChatServerCloseConversationResponse {
+	[key: string]: unknown;
+}

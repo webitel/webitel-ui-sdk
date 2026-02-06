@@ -6,5 +6,5 @@
  */
 
 export type LocateStatusParams = {
-fields?: string[];
+	fields?: string[];
 };

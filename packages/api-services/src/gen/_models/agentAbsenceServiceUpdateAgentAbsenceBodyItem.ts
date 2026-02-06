@@ -8,11 +8,11 @@ import type { WfmAbsenceType } from './wfmAbsenceType';
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export type AgentAbsenceServiceUpdateAgentAbsenceBodyItem = {
-  absentAt?: string;
-  createdAt?: string;
-  createdBy?: WfmLookupEntity;
-  domainId?: string;
-  typeId?: WfmAbsenceType;
-  updatedAt?: string;
-  updatedBy?: WfmLookupEntity;
+	absentAt?: string;
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	domainId?: string;
+	typeId?: WfmAbsenceType;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 };

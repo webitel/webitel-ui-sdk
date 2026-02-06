@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchScreenRecordingsByAgentChannel = typeof SearchScreenRecordingsByAgentChannel[keyof typeof SearchScreenRecordingsByAgentChannel];
-
+export type SearchScreenRecordingsByAgentChannel =
+	(typeof SearchScreenRecordingsByAgentChannel)[keyof typeof SearchScreenRecordingsByAgentChannel];
 
 export const SearchScreenRecordingsByAgentChannel = {
-  Screenrecording: 'SCREENRECORDING',
-  Call: 'CALL',
+	Screenrecording: 'SCREENRECORDING',
+	Call: 'CALL',
 } as const;

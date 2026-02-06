@@ -7,19 +7,19 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentTeam {
-  admin?: EngineLookup[];
-  callTimeout?: number;
-  description?: string;
-  domainId?: string;
-  forecastCalculation?: EngineLookup;
-  id?: string;
-  inviteChatTimeout?: number;
-  maxNoAnswer?: number;
-  name?: string;
-  noAnswerDelayTime?: number;
-  screenControl?: boolean;
-  strategy?: string;
-  taskAcceptTimeout?: number;
-  updatedAt?: string;
-  wrapUpTime?: number;
+	admin?: EngineLookup[];
+	callTimeout?: number;
+	description?: string;
+	domainId?: string;
+	forecastCalculation?: EngineLookup;
+	id?: string;
+	inviteChatTimeout?: number;
+	maxNoAnswer?: number;
+	name?: string;
+	noAnswerDelayTime?: number;
+	screenControl?: boolean;
+	strategy?: string;
+	taskAcceptTimeout?: number;
+	updatedAt?: string;
+	wrapUpTime?: number;
 }

@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageServiceType = typeof StorageServiceType[keyof typeof StorageServiceType];
-
+export type StorageServiceType =
+	(typeof StorageServiceType)[keyof typeof StorageServiceType];
 
 export const StorageServiceType = {
-  DefaultService: 'DefaultService',
-  Stt: 'STT',
-  Tts: 'TTS',
+	DefaultService: 'DefaultService',
+	Stt: 'STT',
+	Tts: 'TTS',
 } as const;

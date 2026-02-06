@@ -6,6 +6,6 @@
  */
 
 export interface WebitelCasesInputCreateStatusCondition {
-  description?: string;
-  name?: string;
+	description?: string;
+	name?: string;
 }

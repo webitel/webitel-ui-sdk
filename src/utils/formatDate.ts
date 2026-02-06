@@ -2,7 +2,7 @@ import { uk } from 'date-fns/locale';
 import { formatInTimeZone } from 'date-fns-tz';
 
 import type { FormatDateMode } from '../enums';
-import { TIMEZONE_STORAGE_KEY } from '../modules/Userinfo/v2/constants/UserSettingsConstants';
+import { TIMEZONE_STORAGE_KEY } from '../modules/Userinfo/constants/UserSettingsConstants';
 
 function getUserTimeZone(): string {
 	return (

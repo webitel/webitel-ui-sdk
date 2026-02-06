@@ -6,12 +6,12 @@
  */
 
 export type DeletePhotosParams = {
-/**
- * Fields to be retrieved into result of changes.
- */
-fields?: string[];
-/**
- * Set of linked ID(s) to be removed.
- */
-etag: string[];
+	/**
+	 * Fields to be retrieved into result of changes.
+	 */
+	fields?: string[];
+	/**
+	 * Set of linked ID(s) to be removed.
+	 */
+	etag: string[];
 };
