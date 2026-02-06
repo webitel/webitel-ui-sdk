@@ -237,7 +237,7 @@ import type { WtTableHeader } from './types/WtTable';
  * that are about to come into view, reducing the chance of blank spaces
  * during fast scrolling.
  */
-const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+const VIRTUAL_SCROLL_TOLERATED_ITEMS = 100;
 const DEFAULT_ITEM_SIZE = 40;
 
 interface Props extends DataTableProps {
