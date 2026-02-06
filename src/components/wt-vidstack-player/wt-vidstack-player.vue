@@ -171,7 +171,6 @@ const onCanPlay = (ev: Event) => {
   box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
   background: var(--wt-popup-background-color);
-  max-height: var(--popup-max-height);
   position: relative;
   display: block;
   width: 100%;
