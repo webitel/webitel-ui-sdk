@@ -12,3 +12,4 @@ export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause
 export * from './useTableColumnDrag/useTableColumnDrag';
 export * from './useValidate/useValidate';
 export * from './useWtTable/useWtTable';
+export * from './useExpansion/useExpansion';
