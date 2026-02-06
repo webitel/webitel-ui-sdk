@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ApiLDAPObjentryObject = { [key: string]: unknown };
+export type ApiLDAPObjentryObject = {
+	[key: string]: unknown;
+};

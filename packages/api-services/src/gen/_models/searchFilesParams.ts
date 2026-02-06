@@ -7,20 +7,20 @@
 import type { SearchFilesChannelItem } from './searchFilesChannelItem';
 
 export type SearchFilesParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: string[];
-uploadedAtFrom?: string;
-uploadedAtTo?: string;
-uploadedBy?: string[];
-referenceId?: string[];
-/**
- *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
- */
-channel?: SearchFilesChannelItem[];
-retentionUntilFrom?: string;
-retentionUntilTo?: string;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	uploadedAtFrom?: string;
+	uploadedAtTo?: string;
+	uploadedBy?: string[];
+	referenceId?: string[];
+	/**
+	 *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
+	 */
+	channel?: SearchFilesChannelItem[];
+	retentionUntilFrom?: string;
+	retentionUntilTo?: string;
 };

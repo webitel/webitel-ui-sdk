@@ -6,43 +6,43 @@
  */
 
 export type CatalogGetHistoryParams = {
-/**
- * Messages ONLY starting from the specified message ID
- */
-offsetId?: string;
-/**
- * Messages ONLY been sent before the specified epochtime(milli).
- */
-offsetDate?: string;
-/**
- * Number of messages to return.
- */
-limit?: number;
-/**
- * Search term: message.text
- */
-q?: string;
-/**
- * Fields to return into result.
- */
-fields?: string[];
-/**
+	/**
+	 * Messages ONLY starting from the specified message ID
+	 */
+	offsetId?: string;
+	/**
+	 * Messages ONLY been sent before the specified epochtime(milli).
+	 */
+	offsetDate?: string;
+	/**
+	 * Number of messages to return.
+	 */
+	limit?: number;
+	/**
+	 * Search term: message.text
+	 */
+	q?: string;
+	/**
+	 * Fields to return into result.
+	 */
+	fields?: string[];
+	/**
  * Contact unique **ID**entifier.
 Contact **type**-specific string.
  */
-peerId?: string;
-/**
- * Contact **type** provider.
- */
-peerType?: string;
-/**
- * Contact display **name**.
- */
-peerName?: string;
-/**
+	peerId?: string;
+	/**
+	 * Contact **type** provider.
+	 */
+	peerType?: string;
+	/**
+	 * Contact display **name**.
+	 */
+	peerName?: string;
+	/**
  * Includes the history of ONLY those dialogs
 whose member channel(s) contain
 a specified set of variables.
  */
-groupString?: string;
+	groupString?: string;
 };

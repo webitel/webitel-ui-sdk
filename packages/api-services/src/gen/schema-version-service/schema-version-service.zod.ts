@@ -6,31 +6,35 @@
  */
 import * as zod from 'zod';
 
-
 export const SearchSchemaVersionParams = zod.object({
-  "schema_id": zod.string()
-})
+	schema_id: zod.string(),
+});
 
 export const SearchSchemaVersionQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const SearchSchemaVersionResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "note": zod.string().optional(),
-  "schemaId": zod.string().optional(),
-  "version": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+	items: zod
+		.array(
+			zod.object({
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				id: zod.string().optional(),
+				note: zod.string().optional(),
+				schemaId: zod.string().optional(),
+				version: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

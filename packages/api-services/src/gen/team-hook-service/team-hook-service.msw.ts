@@ -4,115 +4,599 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import {
-  faker
-} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
-import {
-  HttpResponse,
-  http
-} from 'msw';
-import type {
-  RequestHandlerOptions
-} from 'msw';
+import { HttpResponse, http } from 'msw';
+import type { RequestHandlerOptions } from 'msw';
 
-import {
-  EngineTeamHookEvent
-} from '.././_models';
-import type {
-  EngineListTeamHook,
-  EngineTeamHook
-} from '.././_models';
+import { EngineTeamHookEvent } from '.././_models';
+import type { EngineListTeamHook, EngineTeamHook } from '.././_models';
 
+export const getSearchTeamHookResponseMock = (
+	overrideResponse: Partial<EngineListTeamHook> = {},
+): EngineListTeamHook => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			enabled: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
+			event: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.number.int({
+					min: undefined,
+					max: undefined,
+				}),
+				undefined,
+			]),
+			properties: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() =>
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+				),
+				undefined,
+			]),
+			schema: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getSearchTeamHookResponseMock = (overrideResponse: Partial< EngineListTeamHook > = {}): EngineListTeamHook => ({items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined])})), undefined]), next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})
+export const getCreateTeamHookResponseMock = (
+	overrideResponse: Partial<EngineTeamHook> = {},
+): EngineTeamHook => ({
+	enabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	event: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	properties: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	schema: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getCreateTeamHookResponseMock = (overrideResponse: Partial< EngineTeamHook > = {}): EngineTeamHook => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getDeleteTeamHookResponseMock = (
+	overrideResponse: Partial<EngineTeamHook> = {},
+): EngineTeamHook => ({
+	enabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	event: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	properties: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	schema: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getDeleteTeamHookResponseMock = (overrideResponse: Partial< EngineTeamHook > = {}): EngineTeamHook => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getReadTeamHookResponseMock = (
+	overrideResponse: Partial<EngineTeamHook> = {},
+): EngineTeamHook => ({
+	enabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	event: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	properties: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	schema: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getReadTeamHookResponseMock = (overrideResponse: Partial< EngineTeamHook > = {}): EngineTeamHook => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getPatchTeamHookResponseMock = (
+	overrideResponse: Partial<EngineTeamHook> = {},
+): EngineTeamHook => ({
+	enabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	event: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	properties: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	schema: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getPatchTeamHookResponseMock = (overrideResponse: Partial< EngineTeamHook > = {}): EngineTeamHook => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getUpdateTeamHookResponseMock = (
+	overrideResponse: Partial<EngineTeamHook> = {},
+): EngineTeamHook => ({
+	enabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	event: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	properties: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	schema: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getUpdateTeamHookResponseMock = (overrideResponse: Partial< EngineTeamHook > = {}): EngineTeamHook => ({enabled: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), event: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(EngineTeamHookEvent)), undefined]), id: faker.helpers.arrayElement([faker.number.int({min: undefined, max: undefined}), undefined]), properties: faker.helpers.arrayElement([Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), schema: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])}, undefined]), ...overrideResponse})
+export const getSearchTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineListTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EngineListTeamHook> | EngineListTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/teams/:teamId/hooks',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getSearchTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
+export const getCreateTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<EngineTeamHook> | EngineTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/call_center/teams/:teamId/hooks',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getCreateTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-export const getSearchTeamHookMockHandler = (overrideResponse?: EngineListTeamHook | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EngineListTeamHook> | EngineListTeamHook), options?: RequestHandlerOptions) => {
-  return http.get('*/call_center/teams/:teamId/hooks', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getSearchTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getDeleteTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<EngineTeamHook> | EngineTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/call_center/teams/:teamId/hooks/:id',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getDeleteTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-export const getCreateTeamHookMockHandler = (overrideResponse?: EngineTeamHook | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<EngineTeamHook> | EngineTeamHook), options?: RequestHandlerOptions) => {
-  return http.post('*/call_center/teams/:teamId/hooks', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getCreateTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getReadTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EngineTeamHook> | EngineTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/teams/:teamId/hooks/:id',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getReadTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-export const getDeleteTeamHookMockHandler = (overrideResponse?: EngineTeamHook | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<EngineTeamHook> | EngineTeamHook), options?: RequestHandlerOptions) => {
-  return http.delete('*/call_center/teams/:teamId/hooks/:id', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getDeleteTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getPatchTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<EngineTeamHook> | EngineTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/call_center/teams/:teamId/hooks/:id',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getPatchTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 
-export const getReadTeamHookMockHandler = (overrideResponse?: EngineTeamHook | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<EngineTeamHook> | EngineTeamHook), options?: RequestHandlerOptions) => {
-  return http.get('*/call_center/teams/:teamId/hooks/:id', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getReadTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
-
-export const getPatchTeamHookMockHandler = (overrideResponse?: EngineTeamHook | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<EngineTeamHook> | EngineTeamHook), options?: RequestHandlerOptions) => {
-  return http.patch('*/call_center/teams/:teamId/hooks/:id', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getPatchTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
-
-export const getUpdateTeamHookMockHandler = (overrideResponse?: EngineTeamHook | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<EngineTeamHook> | EngineTeamHook), options?: RequestHandlerOptions) => {
-  return http.put('*/call_center/teams/:teamId/hooks/:id', async (info) => {
-  
-    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
-    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
-    : getUpdateTeamHookResponseMock()),
-      { status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })
-  }, options)
-}
+export const getUpdateTeamHookMockHandler = (
+	overrideResponse?:
+		| EngineTeamHook
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<EngineTeamHook> | EngineTeamHook),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/call_center/teams/:teamId/hooks/:id',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getUpdateTeamHookResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 export const getTeamHookServiceMock = () => [
-  getSearchTeamHookMockHandler(),
-  getCreateTeamHookMockHandler(),
-  getDeleteTeamHookMockHandler(),
-  getReadTeamHookMockHandler(),
-  getPatchTeamHookMockHandler(),
-  getUpdateTeamHookMockHandler()]
+	getSearchTeamHookMockHandler(),
+	getCreateTeamHookMockHandler(),
+	getDeleteTeamHookMockHandler(),
+	getReadTeamHookMockHandler(),
+	getPatchTeamHookMockHandler(),
+	getUpdateTeamHookMockHandler(),
+];

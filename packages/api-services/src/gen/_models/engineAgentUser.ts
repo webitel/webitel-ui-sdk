@@ -6,6 +6,6 @@
  */
 
 export interface EngineAgentUser {
-  id?: string;
-  name?: string;
+	id?: string;
+	name?: string;
 }

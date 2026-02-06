@@ -6,29 +6,32 @@
  */
 import * as zod from 'zod';
 
-
 export const GetFeedbackQueryParams = zod.object({
-  "key": zod.string().optional()
-})
+	key: zod.string().optional(),
+});
 
 export const GetFeedbackResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "payload": zod.record(zod.string(), zod.string()).optional(),
-  "rating": zod.number().optional()
-})
+	createdAt: zod.string().optional(),
+	description: zod.string().optional(),
+	payload: zod.record(zod.string(), zod.string()).optional(),
+	rating: zod.number().optional(),
+});
 
 export const CreateFeedbackQueryParams = zod.object({
-  "key": zod.string().optional(),
-  "payloadString": zod.string().optional().describe('This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18'),
-  "rating": zod.number().optional(),
-  "description": zod.string().optional()
-})
+	key: zod.string().optional(),
+	payloadString: zod
+		.string()
+		.optional()
+		.describe(
+			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
+		),
+	rating: zod.number().optional(),
+	description: zod.string().optional(),
+});
 
 export const CreateFeedbackResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "description": zod.string().optional(),
-  "payload": zod.record(zod.string(), zod.string()).optional(),
-  "rating": zod.number().optional()
-})
-
+	createdAt: zod.string().optional(),
+	description: zod.string().optional(),
+	payload: zod.record(zod.string(), zod.string()).optional(),
+	rating: zod.number().optional(),
+});

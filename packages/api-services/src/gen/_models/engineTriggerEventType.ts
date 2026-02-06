@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerEventType = typeof EngineTriggerEventType[keyof typeof EngineTriggerEventType];
-
+export type EngineTriggerEventType =
+	(typeof EngineTriggerEventType)[keyof typeof EngineTriggerEventType];
 
 export const EngineTriggerEventType = {
-  EmptyTriggerEvent: 'empty_trigger_event',
-  Create: 'create',
-  Update: 'update',
-  Remove: 'remove',
-  ResolutionTime: 'resolution_time',
+	EmptyTriggerEvent: 'empty_trigger_event',
+	Create: 'create',
+	Update: 'update',
+	Remove: 'remove',
+	ResolutionTime: 'resolution_time',
 } as const;

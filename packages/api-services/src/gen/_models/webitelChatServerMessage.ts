@@ -13,32 +13,32 @@ import type { WebitelChatServerMessageVariables } from './webitelChatServerMessa
 import type { WebitelChatServerPostback } from './webitelChatServerPostback';
 
 export interface WebitelChatServerMessage {
-  buttons?: WebitelChatServerButtons[];
-  contact?: WebitelChatServerAccount;
-  /** Optional. Send message date (epochtime ms) Generates by the service. */
-  createdAt?: string;
-  file?: WebitelChatServerFile;
-  forwardFromChatId?: string;
-  forwardFromMessageId?: string;
-  forwardFromVariables?: WebitelChatServerMessageForwardFromVariables;
-  from?: WebitelChatServerAccount;
-  id?: string;
-  inline?: WebitelChatServerButtons[];
-  kind?: string;
-  leftChatMember?: WebitelChatServerAccount;
-  newChatMembers?: WebitelChatServerAccount[];
-  /** An option used to block input to force the user
+	buttons?: WebitelChatServerButtons[];
+	contact?: WebitelChatServerAccount;
+	/** Optional. Send message date (epochtime ms) Generates by the service. */
+	createdAt?: string;
+	file?: WebitelChatServerFile;
+	forwardFromChatId?: string;
+	forwardFromMessageId?: string;
+	forwardFromVariables?: WebitelChatServerMessageForwardFromVariables;
+	from?: WebitelChatServerAccount;
+	id?: string;
+	inline?: WebitelChatServerButtons[];
+	kind?: string;
+	leftChatMember?: WebitelChatServerAccount;
+	newChatMembers?: WebitelChatServerAccount[];
+	/** An option used to block input to force the user
 to respond with one of the `Buttons`.
 Instructs client agents to disable input capabilities.
 Can only be used with a set of `Buttons`. */
-  noInput?: boolean;
-  /** Postback. Reply Button Click[ed]. */
-  postback?: WebitelChatServerPostback;
-  replyToMessageId?: string;
-  replyToVariables?: WebitelChatServerMessageReplyToVariables;
-  text?: string;
-  /** Type of this Message to notify e.g.: text, file, read, status etc. */
-  type?: string;
-  updatedAt?: string;
-  variables?: WebitelChatServerMessageVariables;
+	noInput?: boolean;
+	/** Postback. Reply Button Click[ed]. */
+	postback?: WebitelChatServerPostback;
+	replyToMessageId?: string;
+	replyToVariables?: WebitelChatServerMessageReplyToVariables;
+	text?: string;
+	/** Type of this Message to notify e.g.: text, file, read, status etc. */
+	type?: string;
+	updatedAt?: string;
+	variables?: WebitelChatServerMessageVariables;
 }

@@ -7,15 +7,15 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentPauseCause {
-  allowAdmin?: boolean;
-  allowAgent?: boolean;
-  allowSupervisor?: boolean;
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  description?: string;
-  id?: number;
-  limitMin?: number;
-  name?: string;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	allowAdmin?: boolean;
+	allowAgent?: boolean;
+	allowSupervisor?: boolean;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	description?: string;
+	id?: number;
+	limitMin?: number;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

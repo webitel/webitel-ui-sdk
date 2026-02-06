@@ -6,8 +6,8 @@
  */
 
 export interface WebitelChatServerUser {
-  connection?: string;
-  internal?: boolean;
-  type?: string;
-  userId?: string;
+	connection?: string;
+	internal?: boolean;
+	type?: string;
+	userId?: string;
 }

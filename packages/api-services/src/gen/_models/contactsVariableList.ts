@@ -10,9 +10,9 @@ import type { ContactsVariable } from './contactsVariable';
  * Variable dataset.
  */
 export interface ContactsVariableList {
-  /** Variable dataset page. */
-  data?: ContactsVariable[];
-  next?: boolean;
-  /** The page number of the partial result. */
-  page?: number;
+	/** Variable dataset page. */
+	data?: ContactsVariable[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

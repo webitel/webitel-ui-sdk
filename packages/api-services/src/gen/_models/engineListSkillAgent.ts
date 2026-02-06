@@ -8,7 +8,7 @@ import type { EngineListSkillAgentListSkillAgg } from './engineListSkillAgentLis
 import type { EngineSkillAgentItem } from './engineSkillAgentItem';
 
 export interface EngineListSkillAgent {
-  aggs?: EngineListSkillAgentListSkillAgg;
-  items?: EngineSkillAgentItem[];
-  next?: boolean;
+	aggs?: EngineListSkillAgentListSkillAgg;
+	items?: EngineSkillAgentItem[];
+	next?: boolean;
 }

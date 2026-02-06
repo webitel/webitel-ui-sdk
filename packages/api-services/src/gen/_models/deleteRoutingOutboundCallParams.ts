@@ -6,5 +6,5 @@
  */
 
 export type DeleteRoutingOutboundCallParams = {
-domainId?: string;
+	domainId?: string;
 };

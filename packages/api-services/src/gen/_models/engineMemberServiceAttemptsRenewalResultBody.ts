@@ -6,5 +6,5 @@
  */
 
 export interface EngineMemberServiceAttemptsRenewalResultBody {
-  renewal?: number;
+	renewal?: number;
 }

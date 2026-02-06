@@ -7,7 +7,7 @@
 import type { WebitelknowledgebaseTag } from './webitelknowledgebaseTag';
 
 export interface KnowledgebaseTagsList {
-  data?: WebitelknowledgebaseTag[];
-  next?: boolean;
-  page?: number;
+	data?: WebitelknowledgebaseTag[];
+	next?: boolean;
+	page?: number;
 }

@@ -12,19 +12,19 @@ import type { LDAPCreateLDAPTemplateBodyRole } from './lDAPCreateLDAPTemplateBod
 import type { LDAPCreateLDAPTemplateBodyUser } from './lDAPCreateLDAPTemplateBodyUser';
 
 export interface LDAPCreateLDAPTemplateBody {
-  agent?: LDAPCreateLDAPTemplateBodyAgent;
-  baseDn?: string;
-  catalog?: LDAPCreateLDAPTemplateBodyCatalog;
-  /** unix */
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  device?: LDAPCreateLDAPTemplateBodyDevice;
-  enabled?: boolean;
-  id?: string;
-  name?: string;
-  role?: LDAPCreateLDAPTemplateBodyRole;
-  search?: string;
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  user?: LDAPCreateLDAPTemplateBodyUser;
+	agent?: LDAPCreateLDAPTemplateBodyAgent;
+	baseDn?: string;
+	catalog?: LDAPCreateLDAPTemplateBodyCatalog;
+	/** unix */
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	device?: LDAPCreateLDAPTemplateBodyDevice;
+	enabled?: boolean;
+	id?: string;
+	name?: string;
+	role?: LDAPCreateLDAPTemplateBodyRole;
+	search?: string;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	user?: LDAPCreateLDAPTemplateBodyUser;
 }

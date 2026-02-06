@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineTriggerType = typeof EngineTriggerType[keyof typeof EngineTriggerType];
-
+export type EngineTriggerType =
+	(typeof EngineTriggerType)[keyof typeof EngineTriggerType];
 
 export const EngineTriggerType = {
-  DefaultTriggerType: 'default_trigger_type',
-  Cron: 'cron',
-  Event: 'event',
+	DefaultTriggerType: 'default_trigger_type',
+	Cron: 'cron',
+	Event: 'event',
 } as const;

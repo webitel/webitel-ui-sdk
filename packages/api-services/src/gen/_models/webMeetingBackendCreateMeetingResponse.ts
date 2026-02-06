@@ -6,6 +6,6 @@
  */
 
 export interface WebMeetingBackendCreateMeetingResponse {
-  id?: string;
-  url?: string;
+	id?: string;
+	url?: string;
 }

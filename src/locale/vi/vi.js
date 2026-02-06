@@ -17,7 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
-	WebitelApplications,
+	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -302,9 +302,9 @@ export default {
 		actualResolutionTime: 'Thời gian giải quyết thực tế',
 	},
 	// describes Webitel FRONTEND applications + their navs
-	WebitelApplications: {
+	WtApplication: {
 		overrideApplicationsAccess: {
-			[WebitelApplications.CRM]: {
+			[WtApplication.Crm]: {
 				sections: {
 					[CrmSectionsNew.CasesExtensions]: ({ linked }) =>
 						linked('objects.customization.customization') +
@@ -321,16 +321,16 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
+		[WtApplication.Agent]: {
 			name: 'Không gian làm việc của tổng đài viên',
 		},
-		[WebitelApplications.AUDIT]: {
+		[WtApplication.Audit]: {
 			name: 'Kiểm toán',
 			sections: {
 				[AuditorSections.Scorecards]: 'Bảng điểm',
 			},
 		},
-		[WebitelApplications.CRM]: {
+		[WtApplication.Crm]: {
 			name: 'CRM',
 			sections: {
 				[CrmSections.Contacts]: 'Danh bạ',
@@ -344,13 +344,13 @@ export default {
 				[CrmSections.ContactGroups]: 'Nhóm liên hệ',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
+		[WtApplication.History]: {
 			name: 'Lịch sử cuộc gọi',
 		},
-		[WebitelApplications.ANALYTICS]: {
+		[WtApplication.Analytics]: {
 			name: 'Công cụ trực quan hóa dữ liệu',
 		},
-		[WebitelApplications.SUPERVISOR]: {
+		[WtApplication.Supervisor]: {
 			name: 'Không gian làm việc của giám sát viên',
 			sections: {
 				[SupervisorSections.Queues]: 'Hàng chờ',
@@ -358,7 +358,7 @@ export default {
 				[SupervisorSections.ActiveCalls]: 'Cuộc gọi đang diễn ra',
 			},
 		},
-		[WebitelApplications.ADMIN]: {
+		[WtApplication.Admin]: {
 			name: 'Quản trị',
 			sections: {
 				[AdminSections.Users]: 'Người dùng',
@@ -401,10 +401,10 @@ export default {
 				[AdminSections.QuickReplies]: 'Trả lời nhanh',
 			},
 		},
-		[WebitelApplications.WFM]: {
+		[WtApplication.Wfm]: {
 			name: 'WFM',
 		},
-		[WebitelApplications.MEET]: {
+		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera đã được tắt',
 		},
 	},

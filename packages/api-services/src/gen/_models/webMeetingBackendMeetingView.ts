@@ -6,9 +6,9 @@
  */
 
 export interface WebMeetingBackendMeetingView {
-  allowSatisfaction?: boolean;
-  createdAt?: string;
-  expiresAt?: string;
-  satisfaction?: string;
-  title?: string;
+	allowSatisfaction?: boolean;
+	createdAt?: string;
+	expiresAt?: string;
+	satisfaction?: string;
+	title?: string;
 }

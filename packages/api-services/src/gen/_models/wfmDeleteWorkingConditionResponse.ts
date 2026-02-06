@@ -6,5 +6,5 @@
  */
 
 export interface WfmDeleteWorkingConditionResponse {
-  id?: string;
+	id?: string;
 }

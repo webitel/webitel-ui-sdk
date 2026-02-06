@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WebitelChatServerCloseConversationCause = typeof WebitelChatServerCloseConversationCause[keyof typeof WebitelChatServerCloseConversationCause];
-
+export type WebitelChatServerCloseConversationCause =
+	(typeof WebitelChatServerCloseConversationCause)[keyof typeof WebitelChatServerCloseConversationCause];
 
 export const WebitelChatServerCloseConversationCause = {
-  NoCause: 'no_cause',
-  FlowEnd: 'flow_end',
-  ClientLeave: 'client_leave',
-  FlowErr: 'flow_err',
-  BroadcastEnd: 'broadcast_end',
+	NoCause: 'no_cause',
+	FlowEnd: 'flow_end',
+	ClientLeave: 'client_leave',
+	FlowErr: 'flow_err',
+	BroadcastEnd: 'broadcast_end',
 } as const;

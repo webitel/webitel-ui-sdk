@@ -7,6 +7,6 @@
 import type { ApiUserId } from './apiUserId';
 
 export interface ApiTfaUrl {
-  url?: string;
-  user?: ApiUserId;
+	url?: string;
+	user?: ApiUserId;
 }

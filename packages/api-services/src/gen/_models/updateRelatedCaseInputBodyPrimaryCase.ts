@@ -9,5 +9,5 @@
  * Primary case details.
  */
 export type UpdateRelatedCaseInputBodyPrimaryCase = {
-  name?: string;
+	name?: string;
 };

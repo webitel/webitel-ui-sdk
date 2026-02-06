@@ -8,4 +8,6 @@
 /**
  * Custom data extension fields ..
  */
-export type UpdateCase2BodyCustom = { [key: string]: unknown };
+export type UpdateCase2BodyCustom = {
+	[key: string]: unknown;
+};

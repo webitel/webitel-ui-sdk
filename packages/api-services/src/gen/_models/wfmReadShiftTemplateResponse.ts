@@ -7,5 +7,5 @@
 import type { WfmShiftTemplate } from './wfmShiftTemplate';
 
 export interface WfmReadShiftTemplateResponse {
-  item?: WfmShiftTemplate;
+	item?: WfmShiftTemplate;
 }

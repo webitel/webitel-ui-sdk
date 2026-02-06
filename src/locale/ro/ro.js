@@ -17,7 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
-	WebitelApplications,
+	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -302,9 +302,9 @@ export default {
 		actualResolutionTime: 'Timp real de rezolvare',
 	},
 	// describes Webitel FRONTEND applications + their navs
-	WebitelApplications: {
+	WtApplication: {
 		overrideApplicationsAccess: {
-			[WebitelApplications.CRM]: {
+			[WtApplication.Crm]: {
 				sections: {
 					[CrmSectionsNew.CasesExtensions]: ({ linked }) =>
 						linked('objects.customization.customization') +
@@ -321,16 +321,16 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
+		[WtApplication.Agent]: {
 			name: 'Spațiu Agent',
 		},
-		[WebitelApplications.AUDIT]: {
+		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Fișe evaluare',
 			},
 		},
-		[WebitelApplications.CRM]: {
+		[WtApplication.Crm]: {
 			name: 'CRM',
 			sections: {
 				[CrmSections.Contacts]: 'Contacte',
@@ -344,13 +344,13 @@ export default {
 				[CrmSections.ContactGroups]: 'Grupuri contacte',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
+		[WtApplication.History]: {
 			name: 'Istoric apeluri',
 		},
-		[WebitelApplications.ANALYTICS]: {
+		[WtApplication.Analytics]: {
 			name: 'Instrument vizualizare date',
 		},
-		[WebitelApplications.SUPERVISOR]: {
+		[WtApplication.Supervisor]: {
 			name: 'Spațiu Supervizor',
 			sections: {
 				[SupervisorSections.Queues]: 'Cozi',
@@ -358,7 +358,7 @@ export default {
 				[SupervisorSections.ActiveCalls]: 'Apeluri active',
 			},
 		},
-		[WebitelApplications.ADMIN]: {
+		[WtApplication.Admin]: {
 			name: 'Admin',
 			sections: {
 				[AdminSections.Users]: 'Utilizatori',
@@ -401,10 +401,10 @@ export default {
 				[AdminSections.QuickReplies]: 'Răspunsuri rapide',
 			},
 		},
-		[WebitelApplications.WFM]: {
+		[WtApplication.Wfm]: {
 			name: 'WFM',
 		},
-		[WebitelApplications.MEET]: {
+		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera este oprită',
 		},
 	},

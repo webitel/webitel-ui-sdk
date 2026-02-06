@@ -9,11 +9,11 @@ import type { StorageImportSourceType } from './storageImportSourceType';
 import type { StorageImportTemplateParameters } from './storageImportTemplateParameters';
 
 export interface StorageImportTemplate {
-  parameters?: StorageImportTemplateParameters;
-  description?: string;
-  id?: number;
-  name?: string;
-  source?: EngineLookup;
-  sourceId?: string;
-  sourceType?: StorageImportSourceType;
+	parameters?: StorageImportTemplateParameters;
+	description?: string;
+	id?: number;
+	name?: string;
+	source?: EngineLookup;
+	sourceId?: string;
+	sourceType?: StorageImportSourceType;
 }

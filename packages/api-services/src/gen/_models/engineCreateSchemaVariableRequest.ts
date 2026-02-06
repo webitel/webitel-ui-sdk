@@ -6,6 +6,6 @@
  */
 
 export interface EngineCreateSchemaVariableRequest {
-  encrypt?: boolean;
-  name?: string;
+	encrypt?: boolean;
+	name?: string;
 }

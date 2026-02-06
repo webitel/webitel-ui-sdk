@@ -6,318 +6,834 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Remove the Contact's language association(s).
  */
 export const DelContactLanguagesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+});
 
 export const DelContactLanguagesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "etag": zod.array(zod.string()).describe('Set of unique language{etag} association(s) to remove.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	etag: zod
+		.array(zod.string())
+		.describe('Set of unique language{etag} association(s) to remove.'),
+});
 
-export const DelContactLanguagesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
+export const DelContactLanguagesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary List of the Contact's language association(s).
  */
 export const GetContactLanguagesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+});
 
 export const GetContactLanguagesQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "q": zod.string().optional().describe('Search term: language tag (lang, name, region, ..)\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "id": zod.array(zod.string()).optional().describe('Language(s) with unique ID|ETag only.'),
-  "primary": zod.boolean().optional().describe('Primary language only.'),
-  "code": zod.string().optional(),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "region": zod.string().optional()
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number of result dataset records. offset = (page*size)'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Size count of records on result page. limit = (size++)'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search term: language tag (lang, name, region, ..)\n`?` - matches any one character\n`*` - matches 0 or more characters',
+		),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort the result according to fields.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe('Language(s) with unique ID|ETag only.'),
+	primary: zod.boolean().optional().describe('Primary language only.'),
+	code: zod.string().optional(),
+	lang: zod.string().optional(),
+	name: zod.string().optional(),
+	region: zod.string().optional(),
+});
 
-export const GetContactLanguagesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
+export const GetContactLanguagesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Associate more language(s) with the Contact.
  */
 export const AddContactLanguagesParams = zod.object({
-  "contact_id": zod.string().describe('Link contact ID.')
-})
+	contact_id: zod.string().describe('Link contact ID.'),
+});
 
 export const AddContactLanguagesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
-export const AddContactLanguagesBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default\namong others of the same type.'),
-  "tag": zod.string().optional()
-}).describe('An input of the Contact\'s language.')
-export const AddContactLanguagesBody = zod.array(AddContactLanguagesBodyItem)
+export const AddContactLanguagesBodyItem = zod
+	.object({
+		etag: zod
+			.string()
+			.describe('Unique ID of the latest version of an existing association.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default\namong others of the same type.',
+			),
+		tag: zod.string().optional(),
+	})
+	.describe("An input of the Contact's language.");
+export const AddContactLanguagesBody = zod.array(AddContactLanguagesBodyItem);
 
-export const AddContactLanguagesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
+export const AddContactLanguagesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Reset all Contact's languages to fit the specified fixed set.
  */
 export const SetContactLanguagesParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+});
 
 export const SetContactLanguagesQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
-export const SetContactLanguagesBodyItem = zod.object({
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.'),
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default\namong others of the same type.'),
-  "tag": zod.string().optional()
-}).describe('An input of the Contact\'s language.')
-export const SetContactLanguagesBody = zod.array(SetContactLanguagesBodyItem)
+export const SetContactLanguagesBodyItem = zod
+	.object({
+		etag: zod
+			.string()
+			.describe('Unique ID of the latest version of an existing association.'),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default\namong others of the same type.',
+			),
+		tag: zod.string().optional(),
+	})
+	.describe("An input of the Contact's language.");
+export const SetContactLanguagesBody = zod.array(SetContactLanguagesBodyItem);
 
-export const SetContactLanguagesResponse = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
+export const SetContactLanguagesResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Remove the Contact's language association.
  */
 export const DelContactLanguageParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the language association: {id,etag,code}.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+	etag: zod
+		.string()
+		.describe('Unique ID of the language association: {id,etag,code}.'),
+});
 
 export const DelContactLanguageQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
-export const DelContactLanguageResponse = zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')
+export const DelContactLanguageResponse = zod
+	.object({
+		code: zod.string().optional(),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('The user who created this Field.'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		etag: zod
+			.string()
+			.optional()
+			.describe(
+				'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+			),
+		id: zod
+			.string()
+			.optional()
+			.describe('The unique ID of the association. Never changes.'),
+		lang: zod.string().optional(),
+		name: zod.string().optional(),
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association is the default\namong others of the same type.',
+			),
+		region: zod.string().optional(),
+		script: zod.string().optional(),
+		tag: zod.string().optional(),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe(
+				'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+			),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		ver: zod
+			.number()
+			.optional()
+			.describe('Version of the latest update. Numeric sequence.'),
+	})
+	.describe("A Contact's locale preference.\nOutput purpose only.");
 
 /**
  * @summary Update the Contact's language association details.
  */
 export const SetContactLanguage2Params = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+	etag: zod
+		.string()
+		.describe('Unique ID of the latest version of an existing association.'),
+});
 
 export const SetContactLanguage2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const SetContactLanguage2Body = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default\namong others of the same type.'),
-  "tag": zod.string().optional()
-})
+	primary: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether this association must be default\namong others of the same type.',
+		),
+	tag: zod.string().optional(),
+});
 
-export const SetContactLanguage2Response = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
+export const SetContactLanguage2Response = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);
 
 /**
  * @summary Update the Contact's language association details.
  */
 export const SetContactLanguageParams = zod.object({
-  "contact_id": zod.string().describe('Contact ID associated with.'),
-  "etag": zod.string().describe('Unique ID of the latest version of an existing association.')
-})
+	contact_id: zod.string().describe('Contact ID associated with.'),
+	etag: zod
+		.string()
+		.describe('Unique ID of the latest version of an existing association.'),
+});
 
 export const SetContactLanguageQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const SetContactLanguageBody = zod.object({
-  "primary": zod.boolean().optional().describe('Indicates whether this association must be default\namong others of the same type.'),
-  "tag": zod.string().optional()
-})
+	primary: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether this association must be default\namong others of the same type.',
+		),
+	tag: zod.string().optional(),
+});
 
-export const SetContactLanguageResponse = zod.object({
-  "data": zod.array(zod.object({
-  "code": zod.string().optional(),
-  "createdAt": zod.string().optional().describe('The user who created this Field.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "etag": zod.string().optional().describe('Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).'),
-  "id": zod.string().optional().describe('The unique ID of the association. Never changes.'),
-  "lang": zod.string().optional(),
-  "name": zod.string().optional(),
-  "primary": zod.boolean().optional().describe('Indicates whether this association is the default\namong others of the same type.'),
-  "region": zod.string().optional(),
-  "script": zod.string().optional(),
-  "tag": zod.string().optional(),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last Field update.\nTake part in Etag generation.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "ver": zod.number().optional().describe('Version of the latest update. Numeric sequence.')
-}).describe('A Contact\'s locale preference.\nOutput purpose only.')).optional().describe('Page of the Contact\'s Language(s) dataset.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of partial result dataset records.')
-}).describe('LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.')
-
+export const SetContactLanguageResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						code: zod.string().optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('The user who created this Field.'),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						lang: zod.string().optional(),
+						name: zod.string().optional(),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association is the default\namong others of the same type.',
+							),
+						region: zod.string().optional(),
+						script: zod.string().optional(),
+						tag: zod.string().optional(),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+							),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe('Version of the latest update. Numeric sequence.'),
+					})
+					.describe("A Contact's locale preference.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("Page of the Contact's Language(s) dataset."),
+		next: zod.boolean().optional(),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of partial result dataset records.'),
+	})
+	.describe(
+		'LabelsData\nNOTE: Edge represents connection between two nodes.\nSo this ContactLabels.data are always subordinate to some contact.id.',
+	);

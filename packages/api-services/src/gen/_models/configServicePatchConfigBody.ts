@@ -7,10 +7,10 @@
 import type { LoggerLookup } from './loggerLookup';
 
 export type ConfigServicePatchConfigBody = {
-  daysToStore?: number;
-  description?: string;
-  enabled?: boolean;
-  fields?: string[];
-  period?: number;
-  storage?: LoggerLookup;
+	daysToStore?: number;
+	description?: string;
+	enabled?: boolean;
+	fields?: string[];
+	period?: number;
+	storage?: LoggerLookup;
 };

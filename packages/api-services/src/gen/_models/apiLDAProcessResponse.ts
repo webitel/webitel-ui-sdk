@@ -7,7 +7,7 @@
 import type { ApiLDAProcess } from './apiLDAProcess';
 
 export interface ApiLDAProcessResponse {
-  items?: ApiLDAProcess[];
-  next?: boolean;
-  page?: number;
+	items?: ApiLDAProcess[];
+	next?: boolean;
+	page?: number;
 }

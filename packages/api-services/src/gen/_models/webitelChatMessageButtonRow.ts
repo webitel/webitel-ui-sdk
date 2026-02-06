@@ -7,5 +7,5 @@
 import type { WebitelChatMessageButton } from './webitelChatMessageButton';
 
 export interface WebitelChatMessageButtonRow {
-  row?: WebitelChatMessageButton[];
+	row?: WebitelChatMessageButton[];
 }

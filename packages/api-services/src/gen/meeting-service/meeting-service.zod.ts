@@ -6,28 +6,24 @@
  */
 import * as zod from 'zod';
 
-
 export const GetMeetingViewParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const GetMeetingViewResponse = zod.object({
-  "allowSatisfaction": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "expiresAt": zod.string().optional(),
-  "satisfaction": zod.string().optional(),
-  "title": zod.string().optional()
-})
+	allowSatisfaction: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	expiresAt: zod.string().optional(),
+	satisfaction: zod.string().optional(),
+	title: zod.string().optional(),
+});
 
 export const SatisfactionMeetingParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const SatisfactionMeetingBody = zod.object({
-  "satisfaction": zod.string().optional()
-})
+	satisfaction: zod.string().optional(),
+});
 
-export const SatisfactionMeetingResponse = zod.object({
-
-})
-
+export const SatisfactionMeetingResponse = zod.object({});

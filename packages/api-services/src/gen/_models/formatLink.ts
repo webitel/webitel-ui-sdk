@@ -6,5 +6,5 @@
  */
 
 export interface FormatLink {
-  url?: string;
+	url?: string;
 }

@@ -7,10 +7,10 @@
 import type { SearchRoutingSchemaTagsTypeItem } from './searchRoutingSchemaTagsTypeItem';
 
 export type SearchRoutingSchemaTagsParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-type?: SearchRoutingSchemaTagsTypeItem[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	type?: SearchRoutingSchemaTagsTypeItem[];
 };

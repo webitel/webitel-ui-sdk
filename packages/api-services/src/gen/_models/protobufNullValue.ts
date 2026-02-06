@@ -13,9 +13,9 @@ The JSON representation for `NullValue` is JSON `null`.
 
  - NULL_VALUE: Null value.
  */
-export type ProtobufNullValue = typeof ProtobufNullValue[keyof typeof ProtobufNullValue];
-
+export type ProtobufNullValue =
+	(typeof ProtobufNullValue)[keyof typeof ProtobufNullValue];
 
 export const ProtobufNullValue = {
-  NullValue: 'NULL_VALUE',
+	NullValue: 'NULL_VALUE',
 } as const;

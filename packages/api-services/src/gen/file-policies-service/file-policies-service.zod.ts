@@ -6,48 +6,69 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary List of FilePolicy
  */
 export const SearchFilePoliciesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const searchFilePoliciesResponseItemsItemChannelsItemDefault = `UnknownChannel`;
 
 export const SearchFilePoliciesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				channels: zod
+					.array(
+						zod.enum([
+							'UnknownChannel',
+							'ChatChannel',
+							'MailChannel',
+							'CallChannel',
+							'LogChannel',
+							'MediaChannel',
+							'KnowledgebaseChannel',
+							'CasesChannel',
+							'ScreenRecordingChannel',
+						]),
+					)
+					.optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				enabled: zod.boolean().optional(),
+				encrypt: zod.boolean().optional(),
+				id: zod.number().optional(),
+				maxUploadSize: zod.string().optional(),
+				mimeTypes: zod.array(zod.string()).optional(),
+				name: zod.string().optional(),
+				position: zod.number().optional(),
+				retentionDays: zod.number().optional(),
+				speedDownload: zod.string().optional(),
+				speedUpload: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create FilePolicy
@@ -55,234 +76,363 @@ export const SearchFilePoliciesResponse = zod.object({
 export const createFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
 
 export const CreateFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+});
 
 export const createFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
 
 export const CreateFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	id: zod.number().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	position: zod.number().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const MovePositionFilePolicyParams = zod.object({
-  "from_id": zod.number(),
-  "to_id": zod.number()
-})
+	from_id: zod.number(),
+	to_id: zod.number(),
+});
 
-export const MovePositionFilePolicyBody = zod.object({
-
-})
+export const MovePositionFilePolicyBody = zod.object({});
 
 export const MovePositionFilePolicyResponse = zod.object({
-  "success": zod.boolean().optional()
-})
+	success: zod.boolean().optional(),
+});
 
 /**
  * @summary Remove FilePolicy
  */
 export const DeleteFilePolicyParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const deleteFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
 
 export const DeleteFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	id: zod.number().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	position: zod.number().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary FilePolicy item
  */
 export const ReadFilePolicyParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const readFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
 
 export const ReadFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	id: zod.number().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	position: zod.number().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Patch FilePolicy
  */
 export const PatchFilePolicyParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const patchFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
 
 export const PatchFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	fields: zod.array(zod.string()).optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+});
 
 export const patchFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
 
 export const PatchFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	id: zod.number().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	position: zod.number().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update FilePolicy
  */
 export const UpdateFilePolicyParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const updateFilePolicyBodyChannelsItemDefault = `UnknownChannel`;
 
 export const UpdateFilePolicyBody = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+});
 
 export const updateFilePolicyResponseChannelsItemDefault = `UnknownChannel`;
 
 export const UpdateFilePolicyResponse = zod.object({
-  "channels": zod.array(zod.enum(['UnknownChannel', 'ChatChannel', 'MailChannel', 'CallChannel', 'LogChannel', 'MediaChannel', 'KnowledgebaseChannel', 'CasesChannel', 'ScreenRecordingChannel'])).optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "enabled": zod.boolean().optional(),
-  "encrypt": zod.boolean().optional(),
-  "id": zod.number().optional(),
-  "maxUploadSize": zod.string().optional(),
-  "mimeTypes": zod.array(zod.string()).optional(),
-  "name": zod.string().optional(),
-  "position": zod.number().optional(),
-  "retentionDays": zod.number().optional(),
-  "speedDownload": zod.string().optional(),
-  "speedUpload": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	channels: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	encrypt: zod.boolean().optional(),
+	id: zod.number().optional(),
+	maxUploadSize: zod.string().optional(),
+	mimeTypes: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+	position: zod.number().optional(),
+	retentionDays: zod.number().optional(),
+	speedDownload: zod.string().optional(),
+	speedUpload: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const FilePolicyApplyParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const FilePolicyApplyBody = zod.object({
-  "applyToNullChannel": zod.boolean().optional()
-})
+	applyToNullChannel: zod.boolean().optional(),
+});
 
 export const FilePolicyApplyResponse = zod.object({
-  "count": zod.string().optional()
-})
-
+	count: zod.string().optional(),
+});

@@ -6,5 +6,5 @@
  */
 
 export interface LoggerConfigStatus {
-  isEnabled?: boolean;
+	isEnabled?: boolean;
 }

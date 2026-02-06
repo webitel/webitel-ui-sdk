@@ -7,9 +7,9 @@
 import type { WebitelCasesEvent } from './webitelCasesEvent';
 
 export interface WebitelCasesDayTimeline {
-  callsCount?: string;
-  chatsCount?: string;
-  dayTimestamp?: string;
-  emailsCount?: string;
-  items?: WebitelCasesEvent[];
+	callsCount?: string;
+	chatsCount?: string;
+	dayTimestamp?: string;
+	emailsCount?: string;
+	items?: WebitelCasesEvent[];
 }

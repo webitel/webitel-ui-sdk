@@ -8,9 +8,9 @@ import type { AccessStoreToggleDefaultAccessBodyObject } from './accessStoreTogg
 import type { ApiGrantAccessRequestV1 } from './apiGrantAccessRequestV1';
 
 export interface AccessStoreToggleDefaultAccessBody {
-  /** list of changes ...
+	/** list of changes ...
 
 [TO] (GRANT/REVOKE) */
-  list?: ApiGrantAccessRequestV1[];
-  object?: AccessStoreToggleDefaultAccessBodyObject;
+	list?: ApiGrantAccessRequestV1[];
+	object?: AccessStoreToggleDefaultAccessBodyObject;
 }

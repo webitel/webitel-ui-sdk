@@ -6,73 +6,79 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ApiLoginResponse,
-  ApiUserinfo,
-  SignupParams,
-  UserInfo2Params,
-  UserInfoParams
+	ApiLoginResponse,
+	ApiUserinfo,
+	SignupParams,
+	UserInfo2Params,
+	UserInfoParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getAuth =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Signup new domain with superior access token
+			 */
+			const signup = <TData = AxiosResponse<ApiLoginResponse>>(
+				params?: SignupParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(`/signup`, undefined, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
+			 */
+			const userInfo2 = <TData = AxiosResponse<ApiUserinfo>>(
+				params?: UserInfo2Params,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/userinfo`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
+			 */
+			const userInfo = <TData = AxiosResponse<ApiUserinfo>>(
+				params?: UserInfoParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(`/userinfo`, undefined, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				signup,
+				userInfo2,
+				userInfo,
+			};
+		};
+export type SignupResult = AxiosResponse<ApiLoginResponse>;
+export type UserInfo2Result = AxiosResponse<ApiUserinfo>;
+export type UserInfoResult = AxiosResponse<ApiUserinfo>;
 
-  export const 
-            // --- title start
-            getAuth
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Signup new domain with superior access token
- */
-const signup = <TData = AxiosResponse<ApiLoginResponse>>(
-    params?: SignupParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/signup`,undefined,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
- */
-const userInfo2 = <TData = AxiosResponse<ApiUserinfo>>(
-    params?: UserInfo2Params, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/userinfo`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
- */
-const userInfo = <TData = AxiosResponse<ApiUserinfo>>(
-    params?: UserInfoParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/userinfo`,undefined,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {signup,userInfo2,userInfo}};
-export type SignupResult = AxiosResponse<ApiLoginResponse>
-export type UserInfo2Result = AxiosResponse<ApiUserinfo>
-export type UserInfoResult = AxiosResponse<ApiUserinfo>
-
-            // --- footer end
-          
+// --- footer end

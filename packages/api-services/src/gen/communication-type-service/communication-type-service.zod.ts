@@ -6,35 +6,54 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary List of CommunicationType
  */
 export const SearchCommunicationTypeQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional(),
-  "channel": zod.array(zod.enum(['Undefined', 'Phone', 'Email', 'Messaging'])).optional(),
-  "default": zod.boolean().optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+	channel: zod
+		.array(
+			zod.enum([
+				'Undefined',
+				'Phone',
+				'Email',
+				'Messaging',
+			]),
+		)
+		.optional(),
+	default: zod.boolean().optional(),
+});
 
 export const searchCommunicationTypeResponseItemsItemChannelDefault = `Undefined`;
 
 export const SearchCommunicationTypeResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(searchCommunicationTypeResponseItemsItemChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				channel: zod
+					.enum([
+						'Undefined',
+						'Phone',
+						'Email',
+						'Messaging',
+					])
+					.default(searchCommunicationTypeResponseItemsItemChannelDefault),
+				code: zod.string().optional(),
+				default: zod.boolean().optional(),
+				description: zod.string().optional(),
+				domainId: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create CommunicationType
@@ -42,124 +61,179 @@ export const SearchCommunicationTypeResponse = zod.object({
 export const createCommunicationTypeBodyChannelDefault = `Undefined`;
 
 export const CreateCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(createCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(createCommunicationTypeBodyChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const createCommunicationTypeResponseChannelDefault = `Undefined`;
 
 export const CreateCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(createCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(createCommunicationTypeResponseChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary Remove CommunicationType
  */
 export const DeleteCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const DeleteCommunicationTypeQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const deleteCommunicationTypeResponseChannelDefault = `Undefined`;
 
 export const DeleteCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(deleteCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(deleteCommunicationTypeResponseChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary CommunicationType item
  */
 export const ReadCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const ReadCommunicationTypeQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const readCommunicationTypeResponseChannelDefault = `Undefined`;
 
 export const ReadCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(readCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(readCommunicationTypeResponseChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const PatchCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const patchCommunicationTypeBodyChannelDefault = `Undefined`;
 
 export const PatchCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(patchCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(patchCommunicationTypeBodyChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	name: zod.string().optional(),
+});
 
 export const patchCommunicationTypeResponseChannelDefault = `Undefined`;
 
 export const PatchCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(patchCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(patchCommunicationTypeResponseChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary Update CommunicationType
  */
 export const UpdateCommunicationTypeParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const updateCommunicationTypeBodyChannelDefault = `Undefined`;
 
 export const UpdateCommunicationTypeBody = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(updateCommunicationTypeBodyChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(updateCommunicationTypeBodyChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const updateCommunicationTypeResponseChannelDefault = `Undefined`;
 
 export const UpdateCommunicationTypeResponse = zod.object({
-  "channel": zod.enum(['Undefined', 'Phone', 'Email', 'Messaging']).default(updateCommunicationTypeResponseChannelDefault),
-  "code": zod.string().optional(),
-  "default": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+	channel: zod
+		.enum([
+			'Undefined',
+			'Phone',
+			'Email',
+			'Messaging',
+		])
+		.default(updateCommunicationTypeResponseChannelDefault),
+	code: zod.string().optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});

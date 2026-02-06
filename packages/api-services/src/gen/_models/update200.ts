@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type Update200 = { [key: string]: unknown };
+export type Update200 = {
+	[key: string]: unknown;
+};

@@ -6,6 +6,6 @@
  */
 
 export interface ApiUpdateAccessResponseV1 {
-  granted?: string;
-  revoked?: string;
+	granted?: string;
+	revoked?: string;
 }

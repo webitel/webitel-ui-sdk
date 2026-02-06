@@ -11,12 +11,12 @@ import type { WebitelcontactsLookup } from './webitelcontactsLookup';
  * Input message for creating/updating a condition.
  */
 export interface ContactsInputCondition {
-  /** The ID of the assignee that should be assigned if the condition is met (optional). */
-  assignee?: WebitelcontactsLookup;
-  /** The query or condition expression used to evaluate the group. */
-  expression?: string;
-  /** The ID of the static group that should be assigned if the condition is met. */
-  group?: string;
-  /** The position of the condition in the group. */
-  position?: ContactsPosition;
+	/** The ID of the assignee that should be assigned if the condition is met (optional). */
+	assignee?: WebitelcontactsLookup;
+	/** The query or condition expression used to evaluate the group. */
+	expression?: string;
+	/** The ID of the static group that should be assigned if the condition is met. */
+	group?: string;
+	/** The position of the condition in the group. */
+	position?: ContactsPosition;
 }

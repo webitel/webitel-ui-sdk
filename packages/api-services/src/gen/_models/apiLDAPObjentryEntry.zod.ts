@@ -8,4 +8,6 @@
 /**
  * map<string, string> entry = 1;
  */
-export type ApiLDAPObjentryEntry = { [key: string]: unknown };
+export type ApiLDAPObjentryEntry = {
+	[key: string]: unknown;
+};

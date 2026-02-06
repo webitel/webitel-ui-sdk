@@ -9,4 +9,6 @@ import type { DataIndex } from './dataIndex';
 /**
  * INDEX fields.
  */
-export type DataInputDictionaryIndexes = { [key: string]: DataIndex };
+export type DataInputDictionaryIndexes = {
+	[key: string]: DataIndex;
+};

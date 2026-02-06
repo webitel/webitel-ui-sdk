@@ -7,38 +7,38 @@
 import type { ListSourcesTypeItem } from './listSourcesTypeItem';
 
 export type ListSourcesParams = {
-/**
+	/**
  * Page number of result dataset records. offset = (page * size)
 Default: 0
  */
-page?: number;
-/**
+	page?: number;
+	/**
  * Size count of records on result page. limit = (size++)
 Default: 25
  */
-size?: number;
-/**
+	size?: number;
+	/**
  * Fields to be retrieved as a result.
 Default: [] (all fields)
  */
-fields?: string[];
-/**
+	fields?: string[];
+	/**
  * Sort the result according to fields.
 Default: "id:desc"
  */
-sort?: string;
-/**
- * Filter by unique IDs.
- */
-id?: string[];
-/**
+	sort?: string;
+	/**
+	 * Filter by unique IDs.
+	 */
+	id?: string[];
+	/**
  * Search query string for filtering by name. Supports:
 - Wildcards (*)
 - Placeholder (?)
 - Exact match
  */
-q?: string;
-/**
+	q?: string;
+	/**
  * Filter by source type.
 
  - TYPE_UNSPECIFIED: Unspecified source type.
@@ -49,5 +49,5 @@ q?: string;
  - API: API source type.
  - MANUAL: Manual source type.
  */
-type?: ListSourcesTypeItem[];
+	type?: ListSourcesTypeItem[];
 };

@@ -5,15 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ListSourcesTypeItem = typeof ListSourcesTypeItem[keyof typeof ListSourcesTypeItem];
-
+export type ListSourcesTypeItem =
+	(typeof ListSourcesTypeItem)[keyof typeof ListSourcesTypeItem];
 
 export const ListSourcesTypeItem = {
-  TypeUnspecified: 'TYPE_UNSPECIFIED',
-  Call: 'CALL',
-  Chat: 'CHAT',
-  SocialMedia: 'SOCIAL_MEDIA',
-  Email: 'EMAIL',
-  Api: 'API',
-  Manual: 'MANUAL',
+	TypeUnspecified: 'TYPE_UNSPECIFIED',
+	Call: 'CALL',
+	Chat: 'CHAT',
+	SocialMedia: 'SOCIAL_MEDIA',
+	Email: 'EMAIL',
+	Api: 'API',
+	Manual: 'MANUAL',
 } as const;

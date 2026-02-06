@@ -6,15 +6,15 @@
  */
 
 export type SearchDomainsParams = {
-/**
- * like
- */
-domain?: string;
-/**
- * attrs
- */
-fields?: string[];
-sort?: string[];
-page?: string;
-size?: string;
+	/**
+	 * like
+	 */
+	domain?: string;
+	/**
+	 * attrs
+	 */
+	fields?: string[];
+	sort?: string[];
+	page?: string;
+	size?: string;
 };

@@ -6,7 +6,7 @@
  */
 
 export interface EngineCallServiceHangupCallBody {
-  appId?: string;
-  cause?: string;
-  domainId?: string;
+	appId?: string;
+	cause?: string;
+	domainId?: string;
 }

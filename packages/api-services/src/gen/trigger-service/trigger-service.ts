@@ -6,130 +6,144 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineCreateTriggerRequest,
-  EngineListTrigger,
-  EngineListTriggerJob,
-  EngineTrigger,
-  EngineTriggerJob,
-  EngineTriggerServiceCreateTriggerJobBody,
-  EngineTriggerServicePatchTriggerBody,
-  EngineTriggerServiceUpdateTriggerBody,
-  SearchTriggerJobParams,
-  SearchTriggerParams
+	EngineCreateTriggerRequest,
+	EngineListTrigger,
+	EngineListTriggerJob,
+	EngineTrigger,
+	EngineTriggerJob,
+	EngineTriggerServiceCreateTriggerJobBody,
+	EngineTriggerServicePatchTriggerBody,
+	EngineTriggerServiceUpdateTriggerBody,
+	SearchTriggerJobParams,
+	SearchTriggerParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getTriggerService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary List of Trigger
+			 */
+			const searchTrigger = <TData = AxiosResponse<EngineListTrigger>>(
+				params?: SearchTriggerParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/trigger`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Create Trigger
+			 */
+			const createTrigger = <TData = AxiosResponse<EngineTrigger>>(
+				engineCreateTriggerRequest: EngineCreateTriggerRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/trigger`,
+					engineCreateTriggerRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary Remove Trigger
+			 */
+			const deleteTrigger = <TData = AxiosResponse<EngineTrigger>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/trigger/${id}`, options);
+			};
+			/**
+			 * @summary Trigger item
+			 */
+			const readTrigger = <TData = AxiosResponse<EngineTrigger>>(
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/trigger/${id}`, options);
+			};
+			const patchTrigger = <TData = AxiosResponse<EngineTrigger>>(
+				id: number,
+				engineTriggerServicePatchTriggerBody: EngineTriggerServicePatchTriggerBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/trigger/${id}`,
+					engineTriggerServicePatchTriggerBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Update Trigger
+			 */
+			const updateTrigger = <TData = AxiosResponse<EngineTrigger>>(
+				id: number,
+				engineTriggerServiceUpdateTriggerBody: EngineTriggerServiceUpdateTriggerBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/trigger/${id}`,
+					engineTriggerServiceUpdateTriggerBody,
+					options,
+				);
+			};
+			const searchTriggerJob = <TData = AxiosResponse<EngineListTriggerJob>>(
+				triggerId: number,
+				params?: SearchTriggerJobParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/trigger/${triggerId}/job`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const createTriggerJob = <TData = AxiosResponse<EngineTriggerJob>>(
+				triggerId: number,
+				engineTriggerServiceCreateTriggerJobBody: EngineTriggerServiceCreateTriggerJobBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/trigger/${triggerId}/job`,
+					engineTriggerServiceCreateTriggerJobBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchTrigger,
+				createTrigger,
+				deleteTrigger,
+				readTrigger,
+				patchTrigger,
+				updateTrigger,
+				searchTriggerJob,
+				createTriggerJob,
+			};
+		};
+export type SearchTriggerResult = AxiosResponse<EngineListTrigger>;
+export type CreateTriggerResult = AxiosResponse<EngineTrigger>;
+export type DeleteTriggerResult = AxiosResponse<EngineTrigger>;
+export type ReadTriggerResult = AxiosResponse<EngineTrigger>;
+export type PatchTriggerResult = AxiosResponse<EngineTrigger>;
+export type UpdateTriggerResult = AxiosResponse<EngineTrigger>;
+export type SearchTriggerJobResult = AxiosResponse<EngineListTriggerJob>;
+export type CreateTriggerJobResult = AxiosResponse<EngineTriggerJob>;
 
-  export const 
-            // --- title start
-            getTriggerService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary List of Trigger
- */
-const searchTrigger = <TData = AxiosResponse<EngineListTrigger>>(
-    params?: SearchTriggerParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/trigger`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Create Trigger
- */
-const createTrigger = <TData = AxiosResponse<EngineTrigger>>(
-    engineCreateTriggerRequest: EngineCreateTriggerRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/trigger`,
-      engineCreateTriggerRequest,options
-    );
-  }
-/**
- * @summary Remove Trigger
- */
-const deleteTrigger = <TData = AxiosResponse<EngineTrigger>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/trigger/${id}`,options
-    );
-  }
-/**
- * @summary Trigger item
- */
-const readTrigger = <TData = AxiosResponse<EngineTrigger>>(
-    id: number, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/trigger/${id}`,options
-    );
-  }
-const patchTrigger = <TData = AxiosResponse<EngineTrigger>>(
-    id: number,
-    engineTriggerServicePatchTriggerBody: EngineTriggerServicePatchTriggerBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/trigger/${id}`,
-      engineTriggerServicePatchTriggerBody,options
-    );
-  }
-/**
- * @summary Update Trigger
- */
-const updateTrigger = <TData = AxiosResponse<EngineTrigger>>(
-    id: number,
-    engineTriggerServiceUpdateTriggerBody: EngineTriggerServiceUpdateTriggerBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/trigger/${id}`,
-      engineTriggerServiceUpdateTriggerBody,options
-    );
-  }
-const searchTriggerJob = <TData = AxiosResponse<EngineListTriggerJob>>(
-    triggerId: number,
-    params?: SearchTriggerJobParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/trigger/${triggerId}/job`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createTriggerJob = <TData = AxiosResponse<EngineTriggerJob>>(
-    triggerId: number,
-    engineTriggerServiceCreateTriggerJobBody: EngineTriggerServiceCreateTriggerJobBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/trigger/${triggerId}/job`,
-      engineTriggerServiceCreateTriggerJobBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchTrigger,createTrigger,deleteTrigger,readTrigger,patchTrigger,updateTrigger,searchTriggerJob,createTriggerJob}};
-export type SearchTriggerResult = AxiosResponse<EngineListTrigger>
-export type CreateTriggerResult = AxiosResponse<EngineTrigger>
-export type DeleteTriggerResult = AxiosResponse<EngineTrigger>
-export type ReadTriggerResult = AxiosResponse<EngineTrigger>
-export type PatchTriggerResult = AxiosResponse<EngineTrigger>
-export type UpdateTriggerResult = AxiosResponse<EngineTrigger>
-export type SearchTriggerJobResult = AxiosResponse<EngineListTriggerJob>
-export type CreateTriggerJobResult = AxiosResponse<EngineTriggerJob>
-
-            // --- footer end
-          
+// --- footer end

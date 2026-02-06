@@ -17,7 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
-	WebitelApplications,
+	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -296,9 +296,9 @@ export default {
 		actualReactionTime: 'Tiempo de reacción real',
 		actualResolutionTime: 'Tiempo de resolución real',
 	},
-	WebitelApplications: {
+	WtApplication: {
 		overrideApplicationsAccess: {
-			[WebitelApplications.CRM]: {
+			[WtApplication.Crm]: {
 				sections: {
 					[CrmSectionsNew.CasesExtensions]: ({ linked }) =>
 						linked('objects.customization.customization') +
@@ -314,16 +314,16 @@ export default {
 				},
 			},
 		},
-		[WebitelApplications.AGENT]: {
+		[WtApplication.Agent]: {
 			name: 'Espacio de trabajo del agente',
 		},
-		[WebitelApplications.AUDIT]: {
+		[WtApplication.Audit]: {
 			name: 'Auditoría',
 			sections: {
 				[AuditorSections.Scorecards]: 'Tarjetas de puntuación',
 			},
 		},
-		[WebitelApplications.CRM]: {
+		[WtApplication.Crm]: {
 			name: 'CRM',
 			sections: {
 				[CrmSections.Contacts]: 'Contactos',
@@ -337,13 +337,13 @@ export default {
 				[CrmSections.ContactGroups]: 'Grupos de contactos',
 			},
 		},
-		[WebitelApplications.HISTORY]: {
+		[WtApplication.History]: {
 			name: 'Historial de llamadas',
 		},
-		[WebitelApplications.ANALYTICS]: {
+		[WtApplication.Analytics]: {
 			name: 'Herramienta de visualización de datos',
 		},
-		[WebitelApplications.SUPERVISOR]: {
+		[WtApplication.Supervisor]: {
 			name: 'Espacio de trabajo del supervisor',
 			sections: {
 				[SupervisorSections.Queues]: 'Colas',
@@ -351,7 +351,7 @@ export default {
 				[SupervisorSections.ActiveCalls]: 'Llamadas activas',
 			},
 		},
-		[WebitelApplications.ADMIN]: {
+		[WtApplication.Admin]: {
 			name: 'Administrador',
 			sections: {
 				[AdminSections.Users]: 'Usuarios',
@@ -394,10 +394,10 @@ export default {
 				[AdminSections.QuickReplies]: 'Respuestas rápidas',
 			},
 		},
-		[WebitelApplications.WFM]: {
+		[WtApplication.Wfm]: {
 			name: 'WFM',
 		},
-		[WebitelApplications.MEET]: {
+		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'La cámara está apagada',
 		},
 	},

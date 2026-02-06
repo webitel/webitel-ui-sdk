@@ -6,332 +6,933 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Retrieve a list of dynamic groups or search dynamic groups
  */
 export const ListDynamicGroupsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.array(zod.string()).optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search term: group name;\n`?` - matches any one character\n`*` - matches 0 or more characters'),
-  "name": zod.string().optional().describe('Filter by group name.')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number of result dataset records. offset = (page*size)'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Size count of records on result page. limit = (size++)'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort the result according to fields.'),
+	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search term: group name;\n`?` - matches any one character\n`*` - matches 0 or more characters',
+		),
+	name: zod.string().optional().describe('Filter by group name.'),
+});
 
-export const ListDynamicGroupsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})).optional().describe('List of dynamic groups.'),
-  "next": zod.boolean().optional().describe('Have more records.'),
-  "page": zod.number().optional().describe('Page number of the partial result.')
-}).describe('A list of Dynamic Groups.')
+export const ListDynamicGroupsResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod.object({
+					conditions: zod
+						.array(
+							zod.object({
+								assignee: zod
+									.object({
+										id: zod
+											.string()
+											.optional()
+											.describe('Reference Object unique ID.'),
+										name: zod
+											.string()
+											.optional()
+											.describe('Reference Object display name.'),
+										type: zod
+											.string()
+											.optional()
+											.describe('Reference Object well-known type.'),
+									})
+									.optional()
+									.describe(
+										'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+									),
+								expression: zod
+									.string()
+									.optional()
+									.describe(
+										'The query or condition expression used to evaluate the group.',
+									),
+								group: zod
+									.object({
+										id: zod
+											.string()
+											.optional()
+											.describe('Reference Object unique ID.'),
+										name: zod
+											.string()
+											.optional()
+											.describe('Reference Object display name.'),
+										type: zod
+											.string()
+											.optional()
+											.describe('Reference Object well-known type.'),
+									})
+									.optional()
+									.describe(
+										'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+									),
+								id: zod
+									.string()
+									.optional()
+									.describe('The unique ID of the condition.'),
+							}),
+						)
+						.optional()
+						.describe('List of dynamic conditions associated with the group.'),
+					createdAt: zod
+						.string()
+						.optional()
+						.describe("Timestamp(milli) of the group's creation."),
+					createdBy: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe(
+							'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+						),
+					defaultGroup: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe(
+							'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+						),
+					description: zod
+						.string()
+						.optional()
+						.describe('The description of the dynamic group.'),
+					enabled: zod
+						.boolean()
+						.optional()
+						.describe('Enabled status of the group: active or inactive.'),
+					id: zod
+						.string()
+						.optional()
+						.describe('The unique ID of the dynamic group. Never changes.'),
+					name: zod
+						.string()
+						.optional()
+						.describe('The name of the dynamic group.'),
+					updatedAt: zod
+						.string()
+						.optional()
+						.describe('Timestamp(milli) of the last group update.'),
+					updatedBy: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe(
+							'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+						),
+				}),
+			)
+			.optional()
+			.describe('List of dynamic groups.'),
+		next: zod.boolean().optional().describe('Have more records.'),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of the partial result.'),
+	})
+	.describe('A list of Dynamic Groups.');
 
 /**
  * @summary Create a new dynamic group
  */
-export const CreateDynamicGroupBody = zod.object({
-  "condition": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})).optional().describe('Input details for the dynamic group.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the dynamic group: active/inactive.'),
-  "name": zod.string().describe('The name of the dynamic group.')
-}).describe('Request message for creating a new dynamic group.')
+export const CreateDynamicGroupBody = zod
+	.object({
+		condition: zod
+			.array(
+				zod.object({
+					assignee: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe(
+							'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+						),
+					expression: zod
+						.string()
+						.optional()
+						.describe(
+							'The query or condition expression used to evaluate the group.',
+						),
+					group: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe(
+							'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+						),
+				}),
+			)
+			.optional()
+			.describe('Input details for the dynamic group.'),
+		defaultGroup: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		description: zod
+			.string()
+			.optional()
+			.describe('The description of the dynamic group.'),
+		enabled: zod
+			.boolean()
+			.optional()
+			.describe('Enabled status of the dynamic group: active/inactive.'),
+		name: zod.string().describe('The name of the dynamic group.'),
+	})
+	.describe('Request message for creating a new dynamic group.');
 
 export const CreateDynamicGroupResponse = zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
+	conditions: zod
+		.array(
+			zod.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				expression: zod
+					.string()
+					.optional()
+					.describe(
+						'The query or condition expression used to evaluate the group.',
+					),
+				group: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				id: zod.string().optional().describe('The unique ID of the condition.'),
+			}),
+		)
+		.optional()
+		.describe('List of dynamic conditions associated with the group.'),
+	createdAt: zod
+		.string()
+		.optional()
+		.describe("Timestamp(milli) of the group's creation."),
+	createdBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	defaultGroup: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	description: zod
+		.string()
+		.optional()
+		.describe('The description of the dynamic group.'),
+	enabled: zod
+		.boolean()
+		.optional()
+		.describe('Enabled status of the group: active or inactive.'),
+	id: zod
+		.string()
+		.optional()
+		.describe('The unique ID of the dynamic group. Never changes.'),
+	name: zod.string().optional().describe('The name of the dynamic group.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe('Timestamp(milli) of the last group update.'),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});
 
 /**
  * @summary Delete a dynamic group
  */
 export const DeleteDynamicGroupParams = zod.object({
-  "id": zod.string().describe('The unique ID of the dynamic group to delete.')
-})
+	id: zod.string().describe('The unique ID of the dynamic group to delete.'),
+});
 
 export const DeleteDynamicGroupResponse = zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
+	conditions: zod
+		.array(
+			zod.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				expression: zod
+					.string()
+					.optional()
+					.describe(
+						'The query or condition expression used to evaluate the group.',
+					),
+				group: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				id: zod.string().optional().describe('The unique ID of the condition.'),
+			}),
+		)
+		.optional()
+		.describe('List of dynamic conditions associated with the group.'),
+	createdAt: zod
+		.string()
+		.optional()
+		.describe("Timestamp(milli) of the group's creation."),
+	createdBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	defaultGroup: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	description: zod
+		.string()
+		.optional()
+		.describe('The description of the dynamic group.'),
+	enabled: zod
+		.boolean()
+		.optional()
+		.describe('Enabled status of the group: active or inactive.'),
+	id: zod
+		.string()
+		.optional()
+		.describe('The unique ID of the dynamic group. Never changes.'),
+	name: zod.string().optional().describe('The name of the dynamic group.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe('Timestamp(milli) of the last group update.'),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});
 
 /**
  * @summary Locate a dynamic group by ID
  */
 export const LocateDynamicGroupParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const LocateDynamicGroupQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
-export const LocateDynamicGroupResponse = zod.object({
-  "group": zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-}).optional()
-}).describe('Response message for locating a dynamic group by ID.')
+export const LocateDynamicGroupResponse = zod
+	.object({
+		group: zod
+			.object({
+				conditions: zod
+					.array(
+						zod.object({
+							assignee: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe('Reference Object unique ID.'),
+									name: zod
+										.string()
+										.optional()
+										.describe('Reference Object display name.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Reference Object well-known type.'),
+								})
+								.optional()
+								.describe(
+									'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+								),
+							expression: zod
+								.string()
+								.optional()
+								.describe(
+									'The query or condition expression used to evaluate the group.',
+								),
+							group: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe('Reference Object unique ID.'),
+									name: zod
+										.string()
+										.optional()
+										.describe('Reference Object display name.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Reference Object well-known type.'),
+								})
+								.optional()
+								.describe(
+									'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+								),
+							id: zod
+								.string()
+								.optional()
+								.describe('The unique ID of the condition.'),
+						}),
+					)
+					.optional()
+					.describe('List of dynamic conditions associated with the group.'),
+				createdAt: zod
+					.string()
+					.optional()
+					.describe("Timestamp(milli) of the group's creation."),
+				createdBy: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				defaultGroup: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				description: zod
+					.string()
+					.optional()
+					.describe('The description of the dynamic group.'),
+				enabled: zod
+					.boolean()
+					.optional()
+					.describe('Enabled status of the group: active or inactive.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('The unique ID of the dynamic group. Never changes.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('The name of the dynamic group.'),
+				updatedAt: zod
+					.string()
+					.optional()
+					.describe('Timestamp(milli) of the last group update.'),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+			})
+			.optional(),
+	})
+	.describe('Response message for locating a dynamic group by ID.');
 
 /**
  * @summary Update an existing dynamic group
  */
 export const UpdateDynamicGroup2Params = zod.object({
-  "id": zod.string().describe('The unique ID of the dynamic group to update.')
-})
+	id: zod.string().describe('The unique ID of the dynamic group to update.'),
+});
 
-export const UpdateDynamicGroup2Body = zod.object({
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the dynamic group: active/inactive.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.')
-}).describe('Input message for creating/updating a dynamic group.')
+export const UpdateDynamicGroup2Body = zod
+	.object({
+		defaultGroup: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		description: zod
+			.string()
+			.optional()
+			.describe('The description of the dynamic group.'),
+		enabled: zod
+			.boolean()
+			.optional()
+			.describe('Enabled status of the dynamic group: active/inactive.'),
+		name: zod.string().optional().describe('The name of the dynamic group.'),
+	})
+	.describe('Input message for creating/updating a dynamic group.');
 
 export const UpdateDynamicGroup2Response = zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
+	conditions: zod
+		.array(
+			zod.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				expression: zod
+					.string()
+					.optional()
+					.describe(
+						'The query or condition expression used to evaluate the group.',
+					),
+				group: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				id: zod.string().optional().describe('The unique ID of the condition.'),
+			}),
+		)
+		.optional()
+		.describe('List of dynamic conditions associated with the group.'),
+	createdAt: zod
+		.string()
+		.optional()
+		.describe("Timestamp(milli) of the group's creation."),
+	createdBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	defaultGroup: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	description: zod
+		.string()
+		.optional()
+		.describe('The description of the dynamic group.'),
+	enabled: zod
+		.boolean()
+		.optional()
+		.describe('Enabled status of the group: active or inactive.'),
+	id: zod
+		.string()
+		.optional()
+		.describe('The unique ID of the dynamic group. Never changes.'),
+	name: zod.string().optional().describe('The name of the dynamic group.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe('Timestamp(milli) of the last group update.'),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});
 
 /**
  * @summary Update an existing dynamic group
  */
 export const UpdateDynamicGroupParams = zod.object({
-  "id": zod.string().describe('The unique ID of the dynamic group to update.')
-})
+	id: zod.string().describe('The unique ID of the dynamic group to update.'),
+});
 
-export const UpdateDynamicGroupBody = zod.object({
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the dynamic group: active/inactive.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.')
-}).describe('Input message for creating/updating a dynamic group.')
+export const UpdateDynamicGroupBody = zod
+	.object({
+		defaultGroup: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+			),
+		description: zod
+			.string()
+			.optional()
+			.describe('The description of the dynamic group.'),
+		enabled: zod
+			.boolean()
+			.optional()
+			.describe('Enabled status of the dynamic group: active/inactive.'),
+		name: zod.string().optional().describe('The name of the dynamic group.'),
+	})
+	.describe('Input message for creating/updating a dynamic group.');
 
 export const UpdateDynamicGroupResponse = zod.object({
-  "conditions": zod.array(zod.object({
-  "assignee": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "expression": zod.string().optional().describe('The query or condition expression used to evaluate the group.'),
-  "group": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "id": zod.string().optional().describe('The unique ID of the condition.')
-})).optional().describe('List of dynamic conditions associated with the group.'),
-  "createdAt": zod.string().optional().describe('Timestamp(milli) of the group\'s creation.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "defaultGroup": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.'),
-  "description": zod.string().optional().describe('The description of the dynamic group.'),
-  "enabled": zod.boolean().optional().describe('Enabled status of the group: active or inactive.'),
-  "id": zod.string().optional().describe('The unique ID of the dynamic group. Never changes.'),
-  "name": zod.string().optional().describe('The name of the dynamic group.'),
-  "updatedAt": zod.string().optional().describe('Timestamp(milli) of the last group update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional().describe('Reference Object unique ID.'),
-  "name": zod.string().optional().describe('Reference Object display name.'),
-  "type": zod.string().optional().describe('Reference Object well-known type.')
-}).optional().describe('Lookup reference information.\nSimplified search filter to uniquely identify related object.')
-})
-
+	conditions: zod
+		.array(
+			zod.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				expression: zod
+					.string()
+					.optional()
+					.describe(
+						'The query or condition expression used to evaluate the group.',
+					),
+				group: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				id: zod.string().optional().describe('The unique ID of the condition.'),
+			}),
+		)
+		.optional()
+		.describe('List of dynamic conditions associated with the group.'),
+	createdAt: zod
+		.string()
+		.optional()
+		.describe("Timestamp(milli) of the group's creation."),
+	createdBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	defaultGroup: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+	description: zod
+		.string()
+		.optional()
+		.describe('The description of the dynamic group.'),
+	enabled: zod
+		.boolean()
+		.optional()
+		.describe('Enabled status of the group: active or inactive.'),
+	id: zod
+		.string()
+		.optional()
+		.describe('The unique ID of the dynamic group. Never changes.'),
+	name: zod.string().optional().describe('The name of the dynamic group.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe('Timestamp(milli) of the last group update.'),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional().describe('Reference Object unique ID.'),
+			name: zod.string().optional().describe('Reference Object display name.'),
+			type: zod
+				.string()
+				.optional()
+				.describe('Reference Object well-known type.'),
+		})
+		.optional()
+		.describe(
+			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+		),
+});

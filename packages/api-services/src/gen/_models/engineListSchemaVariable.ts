@@ -7,6 +7,6 @@
 import type { EngineSchemaVariable } from './engineSchemaVariable';
 
 export interface EngineListSchemaVariable {
-  items?: EngineSchemaVariable[];
-  next?: boolean;
+	items?: EngineSchemaVariable[];
+	next?: boolean;
 }

@@ -7,6 +7,6 @@
 import type { StorageTranscriptPhrase } from './storageTranscriptPhrase';
 
 export interface StorageListPhrases {
-  items?: StorageTranscriptPhrase[];
-  next?: boolean;
+	items?: StorageTranscriptPhrase[];
+	next?: boolean;
 }

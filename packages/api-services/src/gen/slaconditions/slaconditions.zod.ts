@@ -6,245 +6,332 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Create a new SLACondition
  */
 export const CreateSLAConditionParams = zod.object({
-  "sla_id": zod.string()
-})
+	sla_id: zod.string(),
+});
 
 export const CreateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const CreateSLAConditionBody = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+});
 
 export const CreateSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+	slaId: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Delete an SLACondition
  */
 export const DeleteSLAConditionParams = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
+	sla_id: zod.string(),
+	id: zod.string(),
+});
 
 export const DeleteSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+	slaId: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Locate an SLACondition by ID
  */
 export const LocateSLAConditionParams = zod.object({
-  "sla_id": zod.string().describe('Unique identifier of the SLACondition'),
-  "id": zod.string().describe('Unique identifier of the SLACondition')
-})
+	sla_id: zod.string().describe('Unique identifier of the SLACondition'),
+	id: zod.string().describe('Unique identifier of the SLACondition'),
+});
 
 export const LocateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+});
 
 export const LocateSLAConditionResponse = zod.object({
-  "slaCondition": zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-}).optional()
-})
+	slaCondition: zod
+		.object({
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+			priorities: zod
+				.array(
+					zod.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					}),
+				)
+				.optional(),
+			reactionTime: zod.string().optional(),
+			resolutionTime: zod.string().optional(),
+			slaId: zod.string().optional(),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update an existing SLACondition
  */
 export const UpdateSLACondition2Params = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
+	sla_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateSLACondition2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const UpdateSLACondition2Body = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+});
 
 export const UpdateSLACondition2Response = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+	slaId: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Update an existing SLACondition
  */
 export const UpdateSLAConditionParams = zod.object({
-  "sla_id": zod.string(),
-  "id": zod.string()
-})
+	sla_id: zod.string(),
+	id: zod.string(),
+});
 
 export const UpdateSLAConditionQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
 export const UpdateSLAConditionBody = zod.object({
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional()
-})
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+});
 
 export const UpdateSLAConditionResponse = zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	priorities: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	reactionTime: zod.string().optional(),
+	resolutionTime: zod.string().optional(),
+	slaId: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Retrieve a list of SLAConditions or search SLACondition conditions
  */
 export const ListSLAConditionsParams = zod.object({
-  "sla_id": zod.string().describe('Filter by SLA Id')
-})
+	sla_id: zod.string().describe('Filter by SLA Id'),
+});
 
 export const ListSLAConditionsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number of result dataset records. offset = (page*size)'),
-  "size": zod.number().optional().describe('Size count of records on result page. limit = (size++)'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.'),
-  "sort": zod.string().optional().describe('Sort the result according to fields.'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names'),
-  "slaConditionId": zod.string().optional().describe('Filter by SLACondition Id.'),
-  "priorityId": zod.string().optional().describe('filter by priority id')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number of result dataset records. offset = (page*size)'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Size count of records on result page. limit = (size++)'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.'),
+	sort: zod
+		.string()
+		.optional()
+		.describe('Sort the result according to fields.'),
+	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names',
+		),
+	slaConditionId: zod
+		.string()
+		.optional()
+		.describe('Filter by SLACondition Id.'),
+	priorityId: zod.string().optional().describe('filter by priority id'),
+});
 
 export const ListSLAConditionsResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "priorities": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "reactionTime": zod.string().optional(),
-  "resolutionTime": zod.string().optional(),
-  "slaId": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional()
-})
-
+	items: zod
+		.array(
+			zod.object({
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				priorities: zod
+					.array(
+						zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
+				reactionTime: zod.string().optional(),
+				resolutionTime: zod.string().optional(),
+				slaId: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+	page: zod.number().optional(),
+});

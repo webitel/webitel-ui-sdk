@@ -7,5 +7,5 @@
 import type { DomainsUpdateDomainBodyDomain } from './domainsUpdateDomainBodyDomain';
 
 export interface DomainsUpdateDomainBody {
-  domain?: DomainsUpdateDomainBodyDomain;
+	domain?: DomainsUpdateDomainBodyDomain;
 }

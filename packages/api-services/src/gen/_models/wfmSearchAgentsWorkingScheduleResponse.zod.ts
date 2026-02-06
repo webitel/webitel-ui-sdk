@@ -8,7 +8,7 @@ import type { WfmAgentWorkingSchedule } from './wfmAgentWorkingSchedule';
 import type { WfmHoliday } from './wfmHoliday';
 
 export interface WfmSearchAgentsWorkingScheduleResponse {
-  holidays?: WfmHoliday[];
-  items?: WfmAgentWorkingSchedule[];
-  total?: string;
+	holidays?: WfmHoliday[];
+	items?: WfmAgentWorkingSchedule[];
+	total?: string;
 }

@@ -7,5 +7,5 @@
 import type { ApiUser } from './apiUser';
 
 export interface ApiUpdateUserResponse {
-  updated?: ApiUser;
+	updated?: ApiUser;
 }

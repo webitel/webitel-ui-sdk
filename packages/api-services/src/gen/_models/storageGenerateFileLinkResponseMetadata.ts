@@ -6,9 +6,9 @@
  */
 
 export interface StorageGenerateFileLinkResponseMetadata {
-  id?: string;
-  mimeType?: string;
-  name?: string;
-  size?: string;
-  uuid?: string;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	size?: string;
+	uuid?: string;
 }

@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineQueueVariables = { [key: string]: string };
+export type EngineQueueVariables = {
+	[key: string]: string;
+};

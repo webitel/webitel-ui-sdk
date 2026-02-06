@@ -6,5 +6,5 @@
  */
 
 export type ReadListParams = {
-domainId?: string;
+	domainId?: string;
 };

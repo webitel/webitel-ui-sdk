@@ -6,12 +6,12 @@
  */
 
 export type DeletePhonesParams = {
-/**
- * Fields to be retrieved into result.
- */
-fields?: string[];
-/**
- * Set of linked ID(s) to be removed.
- */
-etag: string[];
+	/**
+	 * Fields to be retrieved into result.
+	 */
+	fields?: string[];
+	/**
+	 * Set of linked ID(s) to be removed.
+	 */
+	etag: string[];
 };

@@ -6,6 +6,6 @@
  */
 
 export interface StorageSafeUploadFileResponsePart {
-  size?: string;
-  uploadId?: string;
+	size?: string;
+	uploadId?: string;
 }

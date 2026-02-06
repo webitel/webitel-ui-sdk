@@ -6,102 +6,125 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  DeleteRoutingVariableParams,
-  EngineCreateRoutingVariableRequest,
-  EngineListRoutingVariable,
-  EngineRoutingVariable,
-  EngineRoutingVariableServiceUpdateRoutingVariableBody,
-  ReadRoutingVariableParams,
-  SearchRoutingVariableParams
+	DeleteRoutingVariableParams,
+	EngineCreateRoutingVariableRequest,
+	EngineListRoutingVariable,
+	EngineRoutingVariable,
+	EngineRoutingVariableServiceUpdateRoutingVariableBody,
+	ReadRoutingVariableParams,
+	SearchRoutingVariableParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getRoutingVariableService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary List of RoutingVariable
+			 */
+			const searchRoutingVariable = <
+				TData = AxiosResponse<EngineListRoutingVariable>,
+			>(
+				params?: SearchRoutingVariableParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/routing/variables`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Create RoutingVariable
+			 */
+			const createRoutingVariable = <
+				TData = AxiosResponse<EngineRoutingVariable>,
+			>(
+				engineCreateRoutingVariableRequest: EngineCreateRoutingVariableRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/routing/variables`,
+					engineCreateRoutingVariableRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary Remove RoutingVariable
+			 */
+			const deleteRoutingVariable = <
+				TData = AxiosResponse<EngineRoutingVariable>,
+			>(
+				id: string,
+				params?: DeleteRoutingVariableParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/routing/variables/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary RoutingVariable item
+			 */
+			const readRoutingVariable = <
+				TData = AxiosResponse<EngineRoutingVariable>,
+			>(
+				id: string,
+				params?: ReadRoutingVariableParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/routing/variables/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Update RoutingVariable
+			 */
+			const updateRoutingVariable = <
+				TData = AxiosResponse<EngineRoutingVariable>,
+			>(
+				id: string,
+				engineRoutingVariableServiceUpdateRoutingVariableBody: EngineRoutingVariableServiceUpdateRoutingVariableBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/routing/variables/${id}`,
+					engineRoutingVariableServiceUpdateRoutingVariableBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchRoutingVariable,
+				createRoutingVariable,
+				deleteRoutingVariable,
+				readRoutingVariable,
+				updateRoutingVariable,
+			};
+		};
+export type SearchRoutingVariableResult =
+	AxiosResponse<EngineListRoutingVariable>;
+export type CreateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>;
+export type DeleteRoutingVariableResult = AxiosResponse<EngineRoutingVariable>;
+export type ReadRoutingVariableResult = AxiosResponse<EngineRoutingVariable>;
+export type UpdateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>;
 
-  export const 
-            // --- title start
-            getRoutingVariableService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary List of RoutingVariable
- */
-const searchRoutingVariable = <TData = AxiosResponse<EngineListRoutingVariable>>(
-    params?: SearchRoutingVariableParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/routing/variables`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Create RoutingVariable
- */
-const createRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
-    engineCreateRoutingVariableRequest: EngineCreateRoutingVariableRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/routing/variables`,
-      engineCreateRoutingVariableRequest,options
-    );
-  }
-/**
- * @summary Remove RoutingVariable
- */
-const deleteRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
-    id: string,
-    params?: DeleteRoutingVariableParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/routing/variables/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary RoutingVariable item
- */
-const readRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
-    id: string,
-    params?: ReadRoutingVariableParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/routing/variables/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update RoutingVariable
- */
-const updateRoutingVariable = <TData = AxiosResponse<EngineRoutingVariable>>(
-    id: string,
-    engineRoutingVariableServiceUpdateRoutingVariableBody: EngineRoutingVariableServiceUpdateRoutingVariableBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/routing/variables/${id}`,
-      engineRoutingVariableServiceUpdateRoutingVariableBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchRoutingVariable,createRoutingVariable,deleteRoutingVariable,readRoutingVariable,updateRoutingVariable}};
-export type SearchRoutingVariableResult = AxiosResponse<EngineListRoutingVariable>
-export type CreateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
-export type DeleteRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
-export type ReadRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
-export type UpdateRoutingVariableResult = AxiosResponse<EngineRoutingVariable>
-
-            // --- footer end
-          
+// --- footer end

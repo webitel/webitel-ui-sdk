@@ -7,12 +7,12 @@
 import type { WebMeetingBackendMeetingVariables } from './webMeetingBackendMeetingVariables';
 
 export interface WebMeetingBackendMeeting {
-  allowSatisfaction?: boolean;
-  createdAt?: string;
-  expiresAt?: string;
-  id?: string;
-  satisfaction?: string;
-  title?: string;
-  url?: string;
-  variables?: WebMeetingBackendMeetingVariables;
+	allowSatisfaction?: boolean;
+	createdAt?: string;
+	expiresAt?: string;
+	id?: string;
+	satisfaction?: string;
+	title?: string;
+	url?: string;
+	variables?: WebMeetingBackendMeetingVariables;
 }

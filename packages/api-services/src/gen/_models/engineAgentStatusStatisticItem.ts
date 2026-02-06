@@ -7,26 +7,26 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentStatusStatisticItem {
-  agentId?: number;
-  auditor?: EngineLookup[];
-  chatCount?: number;
-  descTrack?: boolean;
-  extension?: string;
-  name?: string;
-  offline?: string;
-  online?: string;
-  pause?: string;
-  pauseCause?: string;
-  progressiveCount?: number;
-  region?: EngineLookup;
-  scoreCount?: string;
-  scoreOptionalAvg?: number;
-  scoreRequiredAvg?: number;
-  screenControl?: boolean;
-  status?: string;
-  statusComment?: string;
-  statusDuration?: string;
-  supervisor?: EngineLookup[];
-  team?: EngineLookup;
-  user?: EngineLookup;
+	agentId?: number;
+	auditor?: EngineLookup[];
+	chatCount?: number;
+	descTrack?: boolean;
+	extension?: string;
+	name?: string;
+	offline?: string;
+	online?: string;
+	pause?: string;
+	pauseCause?: string;
+	progressiveCount?: number;
+	region?: EngineLookup;
+	scoreCount?: string;
+	scoreOptionalAvg?: number;
+	scoreRequiredAvg?: number;
+	screenControl?: boolean;
+	status?: string;
+	statusComment?: string;
+	statusDuration?: string;
+	supervisor?: EngineLookup[];
+	team?: EngineLookup;
+	user?: EngineLookup;
 }

@@ -8,4 +8,6 @@
 /**
  * Context. Variables. Environment.
  */
-export type WebitelChatChatMessageContext = { [key: string]: string };
+export type WebitelChatChatMessageContext = {
+	[key: string]: string;
+};

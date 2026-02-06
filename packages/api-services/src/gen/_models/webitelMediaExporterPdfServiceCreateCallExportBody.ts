@@ -9,10 +9,10 @@
  * Request for generating a call media PDF.
  */
 export interface WebitelMediaExporterPdfServiceCreateCallExportBody {
-  /** Optional: specific file IDs to include in the PDF. */
-  fileIds?: string[];
-  /** Start timestamp of the range (Unix millis). */
-  from?: string;
-  /** End timestamp of the range (Unix millis). */
-  to?: string;
+	/** Optional: specific file IDs to include in the PDF. */
+	fileIds?: string[];
+	/** Start timestamp of the range (Unix millis). */
+	from?: string;
+	/** End timestamp of the range (Unix millis). */
+	to?: string;
 }

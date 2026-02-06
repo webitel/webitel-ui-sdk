@@ -6,12 +6,12 @@
  */
 
 export type SearchListCommunicationParams = {
-page?: number;
-size?: number;
-q?: string;
-sort?: string;
-fields?: string[];
-id?: number[];
-expireAtFrom?: string;
-expireAtTo?: string;
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: number[];
+	expireAtFrom?: string;
+	expireAtTo?: string;
 };

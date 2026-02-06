@@ -6,5 +6,5 @@
  */
 
 export interface EngineAgentUserPresence {
-  status?: string;
+	status?: string;
 }

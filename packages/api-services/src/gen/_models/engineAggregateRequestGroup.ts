@@ -6,10 +6,10 @@
  */
 
 export interface EngineAggregateRequestGroup {
-  aggregate?: string;
-  desc?: boolean;
-  field?: string;
-  id?: string;
-  interval?: string;
-  top?: number;
+	aggregate?: string;
+	desc?: boolean;
+	field?: string;
+	id?: string;
+	interval?: string;
+	top?: number;
 }

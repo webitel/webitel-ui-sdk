@@ -7,7 +7,7 @@
 import type { ProtobufAny } from './protobufAny';
 
 export interface RpcStatus {
-  code?: number;
-  details?: ProtobufAny[];
-  message?: string;
+	code?: number;
+	details?: ProtobufAny[];
+	message?: string;
 }

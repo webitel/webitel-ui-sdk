@@ -9,8 +9,8 @@ import type { WfmFilterBetween } from './wfmFilterBetween';
 import type { WfmLookupEntity } from './wfmLookupEntity';
 
 export type AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBody = {
-  agents?: WfmLookupEntity[];
-  date?: WfmFilterBetween;
-  /** Map key is a day of week: 0 - Sunday, ..., 6 - Saturday. */
-  items?: AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBodyItems;
+	agents?: WfmLookupEntity[];
+	date?: WfmFilterBetween;
+	/** Map key is a day of week: 0 - Sunday, ..., 6 - Saturday. */
+	items?: AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBodyItems;
 };

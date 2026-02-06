@@ -6,9 +6,9 @@
  */
 
 export type AgentAbsenceServiceSearchAgentAbsenceParams = {
-page?: number;
-size?: number;
-sort?: string;
-fields?: string[];
-filters?: string[];
+	page?: number;
+	size?: number;
+	sort?: string;
+	fields?: string[];
+	filters?: string[];
 };

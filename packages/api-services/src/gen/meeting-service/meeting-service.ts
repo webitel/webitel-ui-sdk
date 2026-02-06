@@ -6,50 +6,52 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
-  WebMeetingBackendMeetingView,
-  WebMeetingBackendSatisfactionMeetingResponse
+	WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
+	WebMeetingBackendMeetingView,
+	WebMeetingBackendSatisfactionMeetingResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getMeetingService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const getMeetingView = <
+				TData = AxiosResponse<WebMeetingBackendMeetingView>,
+			>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/meetings/${id}`, options);
+			};
+			const satisfactionMeeting = <
+				TData = AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>,
+			>(
+				id: string,
+				webMeetingBackendMeetingServiceSatisfactionMeetingBody: WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/meetings/${id}/satisfaction`,
+					webMeetingBackendMeetingServiceSatisfactionMeetingBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				getMeetingView,
+				satisfactionMeeting,
+			};
+		};
+export type GetMeetingViewResult = AxiosResponse<WebMeetingBackendMeetingView>;
+export type SatisfactionMeetingResult =
+	AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>;
 
-  export const 
-            // --- title start
-            getMeetingService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const getMeetingView = <TData = AxiosResponse<WebMeetingBackendMeetingView>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/meetings/${id}`,options
-    );
-  }
-const satisfactionMeeting = <TData = AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>>(
-    id: string,
-    webMeetingBackendMeetingServiceSatisfactionMeetingBody: WebMeetingBackendMeetingServiceSatisfactionMeetingBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/meetings/${id}/satisfaction`,
-      webMeetingBackendMeetingServiceSatisfactionMeetingBody,options
-    );
-  }
-
-            // --- footer start
-            return {getMeetingView,satisfactionMeeting}};
-export type GetMeetingViewResult = AxiosResponse<WebMeetingBackendMeetingView>
-export type SatisfactionMeetingResult = AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>
-
-            // --- footer end
-          
+// --- footer end

@@ -8,13 +8,13 @@ import type { WfmLookupEntity } from './wfmLookupEntity';
 import type { WfmShiftTemplateTime } from './wfmShiftTemplateTime';
 
 export interface WfmShiftTemplate {
-  createdAt?: string;
-  createdBy?: WfmLookupEntity;
-  description?: string;
-  domainId?: string;
-  id?: string;
-  name?: string;
-  times?: WfmShiftTemplateTime[];
-  updatedAt?: string;
-  updatedBy?: WfmLookupEntity;
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	description?: string;
+	domainId?: string;
+	id?: string;
+	name?: string;
+	times?: WfmShiftTemplateTime[];
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 }

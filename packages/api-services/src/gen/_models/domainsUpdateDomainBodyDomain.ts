@@ -6,18 +6,18 @@
  */
 
 export type DomainsUpdateDomainBodyDomain = {
-  country?: string;
-  createdAt?: string;
-  createdBy?: string;
-  domain?: string;
-  email?: string;
-  locality?: string;
-  organization?: string;
-  postalAddress?: string;
-  postalCode?: string;
-  stateOrProvince?: string;
-  streetAddress?: string;
-  telephoneNumber?: string;
-  updatedAt?: string;
-  updatedBy?: string;
+	country?: string;
+	createdAt?: string;
+	createdBy?: string;
+	domain?: string;
+	email?: string;
+	locality?: string;
+	organization?: string;
+	postalAddress?: string;
+	postalCode?: string;
+	stateOrProvince?: string;
+	streetAddress?: string;
+	telephoneNumber?: string;
+	updatedAt?: string;
+	updatedBy?: string;
 };

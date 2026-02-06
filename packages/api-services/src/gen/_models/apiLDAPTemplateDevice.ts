@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ApiLDAPTemplateDevice = { [key: string]: unknown };
+export type ApiLDAPTemplateDevice = {
+	[key: string]: unknown;
+};

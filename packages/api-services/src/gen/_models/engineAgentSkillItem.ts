@@ -7,8 +7,8 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentSkillItem {
-  capacity?: number;
-  enabled?: boolean;
-  id?: string;
-  skill?: EngineLookup;
+	capacity?: number;
+	enabled?: boolean;
+	id?: string;
+	skill?: EngineLookup;
 }

@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineCreateMemberBulkItemVariables = { [key: string]: string };
+export type EngineCreateMemberBulkItemVariables = {
+	[key: string]: string;
+};

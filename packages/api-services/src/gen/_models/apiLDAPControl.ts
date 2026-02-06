@@ -6,7 +6,7 @@
  */
 
 export interface ApiLDAPControl {
-  controlType?: string;
-  controlValue?: string;
-  criticality?: boolean;
+	controlType?: string;
+	controlValue?: string;
+	criticality?: boolean;
 }

@@ -6,6 +6,6 @@
  */
 
 export interface EngineSchemaVariablesServiceUpdateSchemaVariableBody {
-  encrypt?: boolean;
-  name?: string;
+	encrypt?: boolean;
+	name?: string;
 }

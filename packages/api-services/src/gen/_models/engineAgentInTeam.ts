@@ -7,6 +7,6 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentInTeam {
-  strategy?: string;
-  team?: EngineLookup;
+	strategy?: string;
+	team?: EngineLookup;
 }

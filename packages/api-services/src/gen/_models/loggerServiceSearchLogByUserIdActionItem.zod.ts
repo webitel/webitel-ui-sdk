@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LoggerServiceSearchLogByUserIdActionItem = typeof LoggerServiceSearchLogByUserIdActionItem[keyof typeof LoggerServiceSearchLogByUserIdActionItem];
-
+export type LoggerServiceSearchLogByUserIdActionItem =
+	(typeof LoggerServiceSearchLogByUserIdActionItem)[keyof typeof LoggerServiceSearchLogByUserIdActionItem];
 
 export const LoggerServiceSearchLogByUserIdActionItem = {
-  DefaultNoAction: 'default_no_action',
-  Create: 'create',
-  Update: 'update',
-  Read: 'read',
-  Delete: 'delete',
+	DefaultNoAction: 'default_no_action',
+	Create: 'create',
+	Update: 'update',
+	Read: 'read',
+	Delete: 'delete',
 } as const;

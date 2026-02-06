@@ -15,26 +15,26 @@ import type { WebitelChatMessageReplyMarkup } from './webitelChatMessageReplyMar
  * Chat Message.
  */
 export interface WebitelChatChatMessage {
-  /** Conversation the message belongs to .. */
-  chat?: WebitelChatContactChat;
-  /** Context. Variables. Environment. */
-  context?: WebitelChatChatMessageContext;
-  /** Timestamp when this message was sent (published). */
-  date?: string;
-  /** Timestamp when this message was last edited. */
-  edit?: string;
-  /** Message Media. Attachment. */
-  file?: WebitelChatMessageFile;
-  /** Sender of the message. */
-  from?: WebitelChatChatPeer;
-  /** Unique message identifier inside this chat. */
-  id?: string;
-  /** Keyboard. Buttons. Quick Replies. */
-  keyboard?: WebitelChatMessageReplyMarkup;
-  /** Postback. Reply Button Click[ed]. */
-  postback?: WebitelChatMessagePostback;
-  /** Chat Sender of the message, sent on behalf of a chat (member). */
-  sender?: WebitelChatContactChat;
-  /** Message Text. */
-  text?: string;
+	/** Conversation the message belongs to .. */
+	chat?: WebitelChatContactChat;
+	/** Context. Variables. Environment. */
+	context?: WebitelChatChatMessageContext;
+	/** Timestamp when this message was sent (published). */
+	date?: string;
+	/** Timestamp when this message was last edited. */
+	edit?: string;
+	/** Message Media. Attachment. */
+	file?: WebitelChatMessageFile;
+	/** Sender of the message. */
+	from?: WebitelChatChatPeer;
+	/** Unique message identifier inside this chat. */
+	id?: string;
+	/** Keyboard. Buttons. Quick Replies. */
+	keyboard?: WebitelChatMessageReplyMarkup;
+	/** Postback. Reply Button Click[ed]. */
+	postback?: WebitelChatMessagePostback;
+	/** Chat Sender of the message, sent on behalf of a chat (member). */
+	sender?: WebitelChatContactChat;
+	/** Message Text. */
+	text?: string;
 }

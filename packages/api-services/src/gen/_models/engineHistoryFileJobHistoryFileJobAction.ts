@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineHistoryFileJobHistoryFileJobAction = typeof EngineHistoryFileJobHistoryFileJobAction[keyof typeof EngineHistoryFileJobHistoryFileJobAction];
-
+export type EngineHistoryFileJobHistoryFileJobAction =
+	(typeof EngineHistoryFileJobHistoryFileJobAction)[keyof typeof EngineHistoryFileJobHistoryFileJobAction];
 
 export const EngineHistoryFileJobHistoryFileJobAction = {
-  Undefined: 'undefined',
-  Stt: 'STT',
-  Delete: 'delete',
+	Undefined: 'undefined',
+	Stt: 'STT',
+	Delete: 'delete',
 } as const;

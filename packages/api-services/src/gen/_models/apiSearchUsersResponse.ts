@@ -7,8 +7,8 @@
 import type { ApiUser } from './apiUser';
 
 export interface ApiSearchUsersResponse {
-  items?: ApiUser[];
-  next?: boolean;
-  page?: number;
-  size?: number;
+	items?: ApiUser[];
+	next?: boolean;
+	page?: number;
+	size?: number;
 }

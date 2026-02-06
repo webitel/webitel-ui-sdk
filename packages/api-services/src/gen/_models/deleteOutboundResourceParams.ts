@@ -6,5 +6,5 @@
  */
 
 export type DeleteOutboundResourceParams = {
-domainId?: string;
+	domainId?: string;
 };

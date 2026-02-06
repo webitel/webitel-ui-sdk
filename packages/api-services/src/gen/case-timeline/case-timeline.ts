@@ -6,51 +6,54 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  GetTimelineParams,
-  WebitelCasesGetTimelineCounterResponse,
-  WebitelCasesGetTimelineResponse
+	GetTimelineParams,
+	WebitelCasesGetTimelineCounterResponse,
+	WebitelCasesGetTimelineResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getCaseTimeline =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const getTimeline = <
+				TData = AxiosResponse<WebitelCasesGetTimelineResponse>,
+			>(
+				caseId: string,
+				params?: GetTimelineParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/${caseId}/timeline`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const getTimelineCounter = <
+				TData = AxiosResponse<WebitelCasesGetTimelineCounterResponse>,
+			>(
+				caseId: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/${caseId}/timeline/counter`, options);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				getTimeline,
+				getTimelineCounter,
+			};
+		};
+export type GetTimelineResult = AxiosResponse<WebitelCasesGetTimelineResponse>;
+export type GetTimelineCounterResult =
+	AxiosResponse<WebitelCasesGetTimelineCounterResponse>;
 
-  export const 
-            // --- title start
-            getCaseTimeline
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const getTimeline = <TData = AxiosResponse<WebitelCasesGetTimelineResponse>>(
-    caseId: string,
-    params?: GetTimelineParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/${caseId}/timeline`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const getTimelineCounter = <TData = AxiosResponse<WebitelCasesGetTimelineCounterResponse>>(
-    caseId: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/cases/${caseId}/timeline/counter`,options
-    );
-  }
-
-            // --- footer start
-            return {getTimeline,getTimelineCounter}};
-export type GetTimelineResult = AxiosResponse<WebitelCasesGetTimelineResponse>
-export type GetTimelineCounterResult = AxiosResponse<WebitelCasesGetTimelineCounterResponse>
-
-            // --- footer end
-          
+// --- footer end

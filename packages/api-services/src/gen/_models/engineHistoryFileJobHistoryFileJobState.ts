@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type EngineHistoryFileJobHistoryFileJobState = typeof EngineHistoryFileJobHistoryFileJobState[keyof typeof EngineHistoryFileJobHistoryFileJobState];
-
+export type EngineHistoryFileJobHistoryFileJobState =
+	(typeof EngineHistoryFileJobHistoryFileJobState)[keyof typeof EngineHistoryFileJobHistoryFileJobState];
 
 export const EngineHistoryFileJobHistoryFileJobState = {
-  Idle: 'idle',
-  Active: 'active',
-  Finished: 'finished',
-  Error: 'error',
+	Idle: 'idle',
+	Active: 'active',
+	Finished: 'finished',
+	Error: 'error',
 } as const;

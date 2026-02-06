@@ -6,6 +6,6 @@
  */
 
 export interface EngineOutboundResourceTimeRange {
-  endTimeOfDay?: number;
-  startTimeOfDay?: number;
+	endTimeOfDay?: number;
+	startTimeOfDay?: number;
 }

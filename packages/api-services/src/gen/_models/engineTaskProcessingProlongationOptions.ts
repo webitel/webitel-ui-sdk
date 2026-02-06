@@ -6,8 +6,8 @@
  */
 
 export interface EngineTaskProcessingProlongationOptions {
-  enabled?: boolean;
-  isTimeoutRetry?: boolean;
-  prolongationTimeSec?: number;
-  repeatsNumber?: number;
+	enabled?: boolean;
+	isTimeoutRetry?: boolean;
+	prolongationTimeSec?: number;
+	repeatsNumber?: number;
 }

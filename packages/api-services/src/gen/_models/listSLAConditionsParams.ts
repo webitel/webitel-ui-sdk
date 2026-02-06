@@ -6,39 +6,39 @@
  */
 
 export type ListSLAConditionsParams = {
-/**
- * Page number of result dataset records. offset = (page*size)
- */
-page?: number;
-/**
- * Size count of records on result page. limit = (size++)
- */
-size?: number;
-/**
- * Fields to be retrieved as a result.
- */
-fields?: string[];
-/**
- * Sort the result according to fields.
- */
-sort?: string;
-/**
- * Filter by unique IDs.
- */
-id?: string[];
-/**
+	/**
+	 * Page number of result dataset records. offset = (page*size)
+	 */
+	page?: number;
+	/**
+	 * Size count of records on result page. limit = (size++)
+	 */
+	size?: number;
+	/**
+	 * Fields to be retrieved as a result.
+	 */
+	fields?: string[];
+	/**
+	 * Sort the result according to fields.
+	 */
+	sort?: string;
+	/**
+	 * Filter by unique IDs.
+	 */
+	id?: string[];
+	/**
  * Search query string for filtering by name. Supports:
 - Wildcards (*) for substring matching
 - Placeholder (?) for single character substitution
 - Exact match for full names
  */
-q?: string;
-/**
- * Filter by SLACondition Id.
- */
-slaConditionId?: string;
-/**
- * filter by priority id
- */
-priorityId?: string;
+	q?: string;
+	/**
+	 * Filter by SLACondition Id.
+	 */
+	slaConditionId?: string;
+	/**
+	 * filter by priority id
+	 */
+	priorityId?: string;
 };

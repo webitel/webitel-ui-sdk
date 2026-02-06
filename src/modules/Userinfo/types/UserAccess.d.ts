@@ -13,6 +13,7 @@ import type {
 	CrudGlobalAction,
 	ScopeClass,
 	SpecialGlobalAction,
+	WebitelLicense,
 } from '../enums';
 
 /**
@@ -64,6 +65,7 @@ export interface CreateUserAccessStoreRawAccess {
 	permissions: GlobalAccessApiResponseItem[];
 	scope: ScopeAccessApiResponseItem[];
 	access: VisibilityAccess;
+	license: WebitelLicenseInfo[];
 }
 
 /**
@@ -114,8 +116,9 @@ export interface UserAccessStore {
 	routeAccessGuard: NavigationGuard;
 
 	hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
+	hasGlobalCrudActionAccess: (action: CrudAction) => boolean;
 
-	// hasApplicationVisibility: (app: WtApplication) => boolean;
+	hasApplicationVisibility: (app: WtApplication) => boolean;
 	hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
 
 	/**
@@ -141,4 +144,20 @@ export interface UserAccessStore {
 	 * for pinia devtools debug
 	 */
 	sectionVisibilityAccess: SectionVisibilityMap;
+
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	licenseAccess: LicenseAccessMap;
 }
+
+export type WebitelLicenseInfo = {
+	prod: WebitelLicense;
+	scope: ScopeClass[];
+	id: string;
+	expiresAt: string; // timestamp
+	issuedAt: string; // timestamp
+};
+
+export type LicenseAccessMap = Map<WebitelLicense, WebitelLicenseInfo[]>;

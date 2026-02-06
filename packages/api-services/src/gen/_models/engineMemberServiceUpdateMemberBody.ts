@@ -9,16 +9,16 @@ import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommu
 import type { EngineMemberServiceUpdateMemberBodyVariables } from './engineMemberServiceUpdateMemberBodyVariables';
 
 export interface EngineMemberServiceUpdateMemberBody {
-  agent?: EngineLookup;
-  bucket?: EngineLookup;
-  communications?: EngineMemberCommunicationCreateRequest[];
-  domainId?: string;
-  expireAt?: string;
-  minOfferingAt?: string;
-  name?: string;
-  priority?: number;
-  skill?: EngineLookup;
-  stopCause?: string;
-  timezone?: EngineLookup;
-  variables?: EngineMemberServiceUpdateMemberBodyVariables;
+	agent?: EngineLookup;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	domainId?: string;
+	expireAt?: string;
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	stopCause?: string;
+	timezone?: EngineLookup;
+	variables?: EngineMemberServiceUpdateMemberBodyVariables;
 }

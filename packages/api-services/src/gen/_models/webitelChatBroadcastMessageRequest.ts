@@ -9,8 +9,8 @@ import type { WebitelChatInputMessage } from './webitelChatInputMessage';
 import type { WebitelChatInputPeer } from './webitelChatInputPeer';
 
 export interface WebitelChatBroadcastMessageRequest {
-  message?: WebitelChatInputMessage;
-  peers?: WebitelChatInputPeer[];
-  timeout?: string;
-  variables?: WebitelChatBroadcastMessageRequestVariables;
+	message?: WebitelChatInputMessage;
+	peers?: WebitelChatInputPeer[];
+	timeout?: string;
+	variables?: WebitelChatBroadcastMessageRequestVariables;
 }

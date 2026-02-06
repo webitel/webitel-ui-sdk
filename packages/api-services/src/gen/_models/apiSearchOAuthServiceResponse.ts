@@ -7,7 +7,7 @@
 import type { ApiOAuthService } from './apiOAuthService';
 
 export interface ApiSearchOAuthServiceResponse {
-  items?: ApiOAuthService[];
-  next?: boolean;
-  page?: number;
+	items?: ApiOAuthService[];
+	next?: boolean;
+	page?: number;
 }

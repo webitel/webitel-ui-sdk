@@ -6,44 +6,39 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type {
-  KnowledgebaseTagsList,
-  ListTagsParams
-} from '.././_models';
+import type { KnowledgebaseTagsList, ListTagsParams } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getTags =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary List of the all Articles's Tag(s).
+			 */
+			const listTags = <TData = AxiosResponse<KnowledgebaseTagsList>>(
+				params?: ListTagsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/spaces/tags`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				listTags,
+			};
+		};
+export type ListTagsResult = AxiosResponse<KnowledgebaseTagsList>;
 
-  export const 
-            // --- title start
-            getTags
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary List of the all Articles's Tag(s).
- */
-const listTags = <TData = AxiosResponse<KnowledgebaseTagsList>>(
-    params?: ListTagsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/spaces/tags`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {listTags}};
-export type ListTagsResult = AxiosResponse<KnowledgebaseTagsList>
-
-            // --- footer end
-          
+// --- footer end

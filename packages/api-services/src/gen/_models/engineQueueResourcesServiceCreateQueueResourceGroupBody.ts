@@ -7,6 +7,6 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueResourcesServiceCreateQueueResourceGroupBody {
-  domainId?: string;
-  resourceGroup?: EngineLookup;
+	domainId?: string;
+	resourceGroup?: EngineLookup;
 }

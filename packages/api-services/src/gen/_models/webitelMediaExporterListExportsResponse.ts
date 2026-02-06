@@ -10,10 +10,10 @@ import type { WebitelMediaExporterExportRecord } from './webitelMediaExporterExp
  * Response containing a page of export history records.
  */
 export interface WebitelMediaExporterListExportsResponse {
-  /** List of export records. */
-  items?: WebitelMediaExporterExportRecord[];
-  /** Indicates if there are more records available. */
-  next?: boolean;
-  /** Current page number. */
-  page?: number;
+	/** List of export records. */
+	items?: WebitelMediaExporterExportRecord[];
+	/** Indicates if there are more records available. */
+	next?: boolean;
+	/** Current page number. */
+	page?: number;
 }

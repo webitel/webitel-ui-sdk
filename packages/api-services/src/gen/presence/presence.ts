@@ -6,58 +6,54 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ApiPresenceStatus,
-  ApiSetStatusRequest,
-  PresenceSetStatusBody
+	ApiPresenceStatus,
+	ApiSetStatusRequest,
+	PresenceSetStatusBody,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getPresence =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * (UserPresence) {
+			 * @summary set(presence) (notify, error)
+			 */
+			const setStatus2 = <TData = AxiosResponse<ApiPresenceStatus>>(
+				apiSetStatusRequest: ApiSetStatusRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(`/presence`, apiSetStatusRequest, options);
+			};
+			/**
+			 * (UserPresence) {
+			 * @summary set(presence) (notify, error)
+			 */
+			const setStatus = <TData = AxiosResponse<ApiPresenceStatus>>(
+				presenceSetStatusBody: PresenceSetStatusBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/users/publish.id}/presence`,
+					presenceSetStatusBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				setStatus2,
+				setStatus,
+			};
+		};
+export type SetStatus2Result = AxiosResponse<ApiPresenceStatus>;
+export type SetStatusResult = AxiosResponse<ApiPresenceStatus>;
 
-  export const 
-            // --- title start
-            getPresence
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * (UserPresence) {
- * @summary set(presence) (notify, error)
- */
-const setStatus2 = <TData = AxiosResponse<ApiPresenceStatus>>(
-    apiSetStatusRequest: ApiSetStatusRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/presence`,
-      apiSetStatusRequest,options
-    );
-  }
-/**
- * (UserPresence) {
- * @summary set(presence) (notify, error)
- */
-const setStatus = <TData = AxiosResponse<ApiPresenceStatus>>(
-    presenceSetStatusBody: PresenceSetStatusBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/users/publish.id}/presence`,
-      presenceSetStatusBody,options
-    );
-  }
-
-            // --- footer start
-            return {setStatus2,setStatus}};
-export type SetStatus2Result = AxiosResponse<ApiPresenceStatus>
-export type SetStatusResult = AxiosResponse<ApiPresenceStatus>
-
-            // --- footer end
-          
+// --- footer end

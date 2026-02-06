@@ -1,8 +1,8 @@
 import {
-  builder,
-  generateAxiosFooter,
-  generateAxiosHeader,
-  generateAxiosTitle,
+	builder,
+	generateAxiosFooter,
+	generateAxiosHeader,
+	generateAxiosTitle,
 } from '@orval/axios';
 import { defineConfig } from 'orval';
 
@@ -13,132 +13,140 @@ const inputTarget = './formatted-openapi.yaml';
 const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand =
-  // 'true';
-  'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
+	// 'true';
+	'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
 
 export default defineConfig({
-  main: {
-    input: {
-      target: inputTarget,
-    },
-    output: {
-      workspace: outputWorkspace,
-      target: outputTarget,
-      // fileExtension: `.api.${sharedGenFileExtension}`,
-      // client: 'axios',
-      client: axiosClient,
-      mock: true,
-      mode: 'tags-split',
-      clean: true,
-      indexFiles: true,
-      schemas: './_models',
-      // {
-      //   path: './_models',
-      //   type: 'typescript',
-      // },
-      override: {
-        namingConvention: {
-          enum: 'PascalCase',
-        },
-        // Use this to view transformed options formatting
-        // transformer: (options: GeneratorVerbOptions): GeneratorVerbOptions => {
-        //   console.info(JSON.stringify(options, null, 2));
-        //   return options;
-        // },
-      },
-    },
+	main: {
+		input: {
+			target: inputTarget,
+		},
+		output: {
+			workspace: outputWorkspace,
+			target: outputTarget,
+			// fileExtension: `.api.${sharedGenFileExtension}`,
+			// client: 'axios',
+			client: axiosClient,
+			mock: true,
+			mode: 'tags-split',
+			clean: true,
+			indexFiles: true,
+			schemas: './_models',
+			// {
+			//   path: './_models',
+			//   type: 'typescript',
+			// },
+			override: {
+				namingConvention: {
+					enum: 'PascalCase',
+				},
+				// Use this to view transformed options formatting
+				// transformer: (options: GeneratorVerbOptions): GeneratorVerbOptions => {
+				//   console.info(JSON.stringify(options, null, 2));
+				//   return options;
+				// },
+			},
+		},
 
-    hooks: {
-      afterAllFilesWrite: runFormatterCLICommand,
-    },
-  },
-  zod: {
-    input: {
-      target: inputTarget,
-    },
-    output: {
-      workspace: outputWorkspace,
-      target: outputTarget,
-      fileExtension: '.zod.ts',
-      // fileExtension: `.zod.${sharedGenFileExtension}`,
-      client: 'zod',
-      mode: 'tags-split',
-      indexFiles: true,
-      schemas: './_models',
-      // {
-      //   path: './_models',
-      //   type: 'zod',
-      // },
-      override: {
-        namingConvention: {
-          enum: 'PascalCase',
-        },
-        zod: {
-          generate: {
-            response: true, // minimum required, least is optional, hai bude
-            query: true,
-            header: true,
-            param: true,
-            body: true,
-          },
-        },
-      },
-    },
+		hooks: {
+			afterAllFilesWrite: runFormatterCLICommand,
+		},
+	},
+	zod: {
+		input: {
+			target: inputTarget,
+		},
+		output: {
+			workspace: outputWorkspace,
+			target: outputTarget,
+			fileExtension: '.zod.ts',
+			// fileExtension: `.zod.${sharedGenFileExtension}`,
+			client: 'zod',
+			mode: 'tags-split',
+			indexFiles: true,
+			schemas: './_models',
+			// {
+			//   path: './_models',
+			//   type: 'zod',
+			// },
+			override: {
+				namingConvention: {
+					enum: 'PascalCase',
+				},
+				zod: {
+					generate: {
+						response: true, // minimum required, least is optional, hai bude
+						query: true,
+						header: true,
+						param: true,
+						body: true,
+					},
+				},
+			},
+		},
 
-    hooks: {
-      afterAllFilesWrite: runFormatterCLICommand,
-    },
-  },
+		hooks: {
+			afterAllFilesWrite: runFormatterCLICommand,
+		},
+	},
 });
 
 function axiosClient() {
-  const axiosBuilder = builder({ type: 'axios' })();
-  return {
-    ...axiosBuilder,
-    dependencies: () => {
-      return [
-        /*
+	const axiosBuilder = builder({
+		type: 'axios',
+	})();
+	return {
+		...axiosBuilder,
+		dependencies: () => {
+			return [
+				/*
           defaults are:
           ISSUE: https://github.com/orval-labs/orval/discussions/1373#discussioncomment-12735345
           CODE:  https://github.com/orval-labs/orval/blob/a154264719ccc49b3ab95dadbb3d62513110d8c3/packages/axios/src/index.ts#L22
         */
-        {
-          exports: [
-            { name: 'AxiosRequestConfig' },
-            { name: 'AxiosResponse' },
-            { name: 'CreateAxiosDefaults' },
-          ],
-          dependency: 'axios',
-        },
-        {
-          exports: [
-            {
-              name: 'axios',
-              default: true,
-              values: true,
-              syntheticDefaultImport: true,
-            },
-          ],
-          dependency: '@aliasedDeps/api-services/axios',
-        },
-      ];
-    },
-    header: (params) => {
-      return `
+				{
+					exports: [
+						{
+							name: 'AxiosRequestConfig',
+						},
+						{
+							name: 'AxiosResponse',
+						},
+						{
+							name: 'CreateAxiosDefaults',
+						},
+					],
+					dependency: 'axios',
+				},
+				{
+					exports: [
+						{
+							name: 'axios',
+							default: true,
+							values: true,
+							syntheticDefaultImport: true,
+						},
+					],
+					dependency: '@aliasedDeps/api-services/axios',
+				},
+			];
+		},
+		header: (params) => {
+			return `
             // --- header start
             // ${generateAxiosHeader(params)}
             // --- header end
           `;
-    },
-    footer: (params) => `
+		},
+		footer: (params) => `
             // --- footer start
             ${generateAxiosFooter(params)}
             // --- footer end
           `,
-    title: (title) => `
+		title: (title) => `
             // --- title start
             ${generateAxiosTitle(title)}
             // --- title end
           `,
-  };
+	};
 }

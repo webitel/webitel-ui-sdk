@@ -6,9 +6,9 @@
  */
 
 export interface EngineAgentSkillServicePatchAgentSkillsBody {
-  capacity?: number;
-  enabled?: boolean;
-  fields?: string[];
-  id?: string[];
-  skillId?: string[];
+	capacity?: number;
+	enabled?: boolean;
+	fields?: string[];
+	id?: string[];
+	skillId?: string[];
 }

@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface FormatMonospace { [key: string]: unknown }
+export interface FormatMonospace {
+	[key: string]: unknown;
+}

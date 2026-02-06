@@ -7,7 +7,7 @@
 import type { WebitelCasesStatus } from './webitelCasesStatus';
 
 export interface WebitelCasesStatusList {
-  items?: WebitelCasesStatus[];
-  next?: boolean;
-  page?: number;
+	items?: WebitelCasesStatus[];
+	next?: boolean;
+	page?: number;
 }

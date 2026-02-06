@@ -8,10 +8,10 @@ import type { EngineLookup } from './engineLookup';
 import type { EngineQuestion } from './engineQuestion';
 
 export interface EngineAuditFormServicePatchAuditFormBody {
-  description?: string;
-  enabled?: boolean;
-  fields?: string[];
-  name?: string;
-  questions?: EngineQuestion[];
-  teams?: EngineLookup[];
+	description?: string;
+	enabled?: boolean;
+	fields?: string[];
+	name?: string;
+	questions?: EngineQuestion[];
+	teams?: EngineLookup[];
 }

@@ -5,17 +5,17 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchFilesByCallChannelItem = typeof SearchFilesByCallChannelItem[keyof typeof SearchFilesByCallChannelItem];
-
+export type SearchFilesByCallChannelItem =
+	(typeof SearchFilesByCallChannelItem)[keyof typeof SearchFilesByCallChannelItem];
 
 export const SearchFilesByCallChannelItem = {
-  UnknownChannel: 'UnknownChannel',
-  ChatChannel: 'ChatChannel',
-  MailChannel: 'MailChannel',
-  CallChannel: 'CallChannel',
-  LogChannel: 'LogChannel',
-  MediaChannel: 'MediaChannel',
-  KnowledgebaseChannel: 'KnowledgebaseChannel',
-  CasesChannel: 'CasesChannel',
-  ScreenRecordingChannel: 'ScreenRecordingChannel',
+	UnknownChannel: 'UnknownChannel',
+	ChatChannel: 'ChatChannel',
+	MailChannel: 'MailChannel',
+	CallChannel: 'CallChannel',
+	LogChannel: 'LogChannel',
+	MediaChannel: 'MediaChannel',
+	KnowledgebaseChannel: 'KnowledgebaseChannel',
+	CasesChannel: 'CasesChannel',
+	ScreenRecordingChannel: 'ScreenRecordingChannel',
 } as const;

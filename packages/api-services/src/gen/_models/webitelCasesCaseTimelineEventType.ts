@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WebitelCasesCaseTimelineEventType = typeof WebitelCasesCaseTimelineEventType[keyof typeof WebitelCasesCaseTimelineEventType];
-
+export type WebitelCasesCaseTimelineEventType =
+	(typeof WebitelCasesCaseTimelineEventType)[keyof typeof WebitelCasesCaseTimelineEventType];
 
 export const WebitelCasesCaseTimelineEventType = {
-  Chat: 'chat',
-  Call: 'call',
-  Email: 'email',
+	Chat: 'chat',
+	Call: 'call',
+	Email: 'email',
 } as const;

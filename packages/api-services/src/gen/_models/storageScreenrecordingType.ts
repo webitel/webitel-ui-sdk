@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageScreenrecordingType = typeof StorageScreenrecordingType[keyof typeof StorageScreenrecordingType];
-
+export type StorageScreenrecordingType =
+	(typeof StorageScreenrecordingType)[keyof typeof StorageScreenrecordingType];
 
 export const StorageScreenrecordingType = {
-  Pdf: 'PDF',
-  Screenshot: 'SCREENSHOT',
-  Screensharing: 'SCREENSHARING',
+	Pdf: 'PDF',
+	Screenshot: 'SCREENSHOT',
+	Screensharing: 'SCREENSHARING',
 } as const;

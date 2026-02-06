@@ -11,6 +11,7 @@ import type {
 	GlobalAccessApiResponseItem,
 	ScopeAccessApiResponseItem,
 	VisibilityAccess,
+	WebitelLicenseInfo,
 } from '../types/UserAccess';
 
 let instance = getDefaultInstance();
@@ -23,12 +24,14 @@ const getSession = async (): Promise<{
 	scope: ScopeAccessApiResponseItem[];
 	permissions: GlobalAccessApiResponseItem[];
 	userId: string;
+	license: WebitelLicenseInfo[];
 }> => {
 	const url = '/userinfo';
 	try {
 		const defaultObject = () => ({
 			scope: [],
 			permissions: [],
+			license: [],
 		});
 
 		const response = await instance.get(url);

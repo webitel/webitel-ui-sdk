@@ -7,6 +7,6 @@
 import type { EngineTriggerJob } from './engineTriggerJob';
 
 export interface EngineListTriggerJob {
-  items?: EngineTriggerJob[];
-  next?: boolean;
+	items?: EngineTriggerJob[];
+	next?: boolean;
 }

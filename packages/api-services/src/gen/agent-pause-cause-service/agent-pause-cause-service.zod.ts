@@ -6,180 +6,206 @@
  */
 import * as zod from 'zod';
 
-
 export const SearchAgentPauseCauseQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const SearchAgentPauseCauseResponse = zod.object({
-  "items": zod.array(zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				allowAdmin: zod.boolean().optional(),
+				allowAgent: zod.boolean().optional(),
+				allowSupervisor: zod.boolean().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				id: zod.number().optional(),
+				limitMin: zod.number().optional(),
+				name: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 export const CreateAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	description: zod.string().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+});
 
 export const CreateAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.number().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const DeleteAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const DeleteAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.number().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const ReadAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const ReadAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.number().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const PatchAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const PatchAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	description: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+});
 
 export const PatchAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.number().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 export const UpdateAgentPauseCauseParams = zod.object({
-  "id": zod.number()
-})
+	id: zod.number(),
+});
 
 export const UpdateAgentPauseCauseBody = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "description": zod.string().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional()
-})
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	description: zod.string().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+});
 
 export const UpdateAgentPauseCauseResponse = zod.object({
-  "allowAdmin": zod.boolean().optional(),
-  "allowAgent": zod.boolean().optional(),
-  "allowSupervisor": zod.boolean().optional(),
-  "createdAt": zod.string().optional(),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "description": zod.string().optional(),
-  "id": zod.number().optional(),
-  "limitMin": zod.number().optional(),
-  "name": zod.string().optional(),
-  "updatedAt": zod.string().optional(),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional()
-})
-
+	allowAdmin: zod.boolean().optional(),
+	allowAgent: zod.boolean().optional(),
+	allowSupervisor: zod.boolean().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	description: zod.string().optional(),
+	id: zod.number().optional(),
+	limitMin: zod.number().optional(),
+	name: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});

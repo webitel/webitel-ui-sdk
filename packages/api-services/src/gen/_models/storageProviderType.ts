@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type StorageProviderType = typeof StorageProviderType[keyof typeof StorageProviderType];
-
+export type StorageProviderType =
+	(typeof StorageProviderType)[keyof typeof StorageProviderType];
 
 export const StorageProviderType = {
-  DefaultProvider: 'DefaultProvider',
-  Microsoft: 'Microsoft',
-  Google: 'Google',
-  ElevenLabs: 'ElevenLabs',
+	DefaultProvider: 'DefaultProvider',
+	Microsoft: 'Microsoft',
+	Google: 'Google',
+	ElevenLabs: 'ElevenLabs',
 } as const;

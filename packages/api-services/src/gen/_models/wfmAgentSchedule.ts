@@ -8,8 +8,8 @@ import type { WfmAbsenceType } from './wfmAbsenceType';
 import type { WfmAgentScheduleShift } from './wfmAgentScheduleShift';
 
 export interface WfmAgentSchedule {
-  absence?: WfmAbsenceType;
-  date?: string;
-  locked?: boolean;
-  shift?: WfmAgentScheduleShift;
+	absence?: WfmAbsenceType;
+	date?: string;
+	locked?: boolean;
+	shift?: WfmAgentScheduleShift;
 }

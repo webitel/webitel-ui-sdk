@@ -7,14 +7,14 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgentSkill {
-  agent?: EngineLookup;
-  capacity?: number;
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  domainId?: string;
-  enabled?: boolean;
-  id?: string;
-  skill?: EngineLookup;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	agent?: EngineLookup;
+	capacity?: number;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	domainId?: string;
+	enabled?: boolean;
+	id?: string;
+	skill?: EngineLookup;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

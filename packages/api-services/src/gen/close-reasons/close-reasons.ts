@@ -6,129 +6,174 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  CreateCloseReasonParams,
-  ListCloseReasonsParams,
-  LocateCloseReasonParams,
-  UpdateCloseReason2Params,
-  UpdateCloseReasonParams,
-  WebitelCasesCloseReason,
-  WebitelCasesCloseReasonList,
-  WebitelCasesInputCloseReason,
-  WebitelCasesLocateCloseReasonResponse
+	CreateCloseReasonParams,
+	ListCloseReasonsParams,
+	LocateCloseReasonParams,
+	UpdateCloseReason2Params,
+	UpdateCloseReasonParams,
+	WebitelCasesCloseReason,
+	WebitelCasesCloseReasonList,
+	WebitelCasesInputCloseReason,
+	WebitelCasesLocateCloseReasonResponse,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getCloseReasons =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			/**
+			 * @summary Retrieve a list of close reasons or search close reasons
+			 */
+			const listCloseReasons = <
+				TData = AxiosResponse<WebitelCasesCloseReasonList>,
+			>(
+				closeReasonGroupId: string,
+				params?: ListCloseReasonsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Create a new close reason
+			 */
+			const createCloseReason = <
+				TData = AxiosResponse<WebitelCasesCloseReason>,
+			>(
+				closeReasonGroupId: string,
+				webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
+				params?: CreateCloseReasonParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons`,
+					webitelCasesInputCloseReason,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Delete a close reason
+			 */
+			const deleteCloseReason = <
+				TData = AxiosResponse<WebitelCasesCloseReason>,
+			>(
+				closeReasonGroupId: string,
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
+					options,
+				);
+			};
+			/**
+			 * @summary Locate a close reason by ID
+			 */
+			const locateCloseReason = <
+				TData = AxiosResponse<WebitelCasesLocateCloseReasonResponse>,
+			>(
+				closeReasonGroupId: string,
+				id: string,
+				params?: LocateCloseReasonParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Update an existing close reason
+			 */
+			const updateCloseReason2 = <
+				TData = AxiosResponse<WebitelCasesCloseReason>,
+			>(
+				closeReasonGroupId: string,
+				id: string,
+				webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
+				params?: UpdateCloseReason2Params,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
+					webitelCasesInputCloseReason,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Update an existing close reason
+			 */
+			const updateCloseReason = <
+				TData = AxiosResponse<WebitelCasesCloseReason>,
+			>(
+				closeReasonGroupId: string,
+				id: string,
+				webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
+				params?: UpdateCloseReasonParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
+					webitelCasesInputCloseReason,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				listCloseReasons,
+				createCloseReason,
+				deleteCloseReason,
+				locateCloseReason,
+				updateCloseReason2,
+				updateCloseReason,
+			};
+		};
+export type ListCloseReasonsResult = AxiosResponse<WebitelCasesCloseReasonList>;
+export type CreateCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>;
+export type DeleteCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>;
+export type LocateCloseReasonResult =
+	AxiosResponse<WebitelCasesLocateCloseReasonResponse>;
+export type UpdateCloseReason2Result = AxiosResponse<WebitelCasesCloseReason>;
+export type UpdateCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>;
 
-  export const 
-            // --- title start
-            getCloseReasons
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          /**
- * @summary Retrieve a list of close reasons or search close reasons
- */
-const listCloseReasons = <TData = AxiosResponse<WebitelCasesCloseReasonList>>(
-    closeReasonGroupId: string,
-    params?: ListCloseReasonsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Create a new close reason
- */
-const createCloseReason = <TData = AxiosResponse<WebitelCasesCloseReason>>(
-    closeReasonGroupId: string,
-    webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
-    params?: CreateCloseReasonParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons`,
-      webitelCasesInputCloseReason,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Delete a close reason
- */
-const deleteCloseReason = <TData = AxiosResponse<WebitelCasesCloseReason>>(
-    closeReasonGroupId: string,
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,options
-    );
-  }
-/**
- * @summary Locate a close reason by ID
- */
-const locateCloseReason = <TData = AxiosResponse<WebitelCasesLocateCloseReasonResponse>>(
-    closeReasonGroupId: string,
-    id: string,
-    params?: LocateCloseReasonParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing close reason
- */
-const updateCloseReason2 = <TData = AxiosResponse<WebitelCasesCloseReason>>(
-    closeReasonGroupId: string,
-    id: string,
-    webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
-    params?: UpdateCloseReason2Params, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
-      webitelCasesInputCloseReason,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-/**
- * @summary Update an existing close reason
- */
-const updateCloseReason = <TData = AxiosResponse<WebitelCasesCloseReason>>(
-    closeReasonGroupId: string,
-    id: string,
-    webitelCasesInputCloseReason: WebitelCasesInputCloseReason,
-    params?: UpdateCloseReasonParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/close_reason_groups/${closeReasonGroupId}/close_reasons/${id}`,
-      webitelCasesInputCloseReason,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {listCloseReasons,createCloseReason,deleteCloseReason,locateCloseReason,updateCloseReason2,updateCloseReason}};
-export type ListCloseReasonsResult = AxiosResponse<WebitelCasesCloseReasonList>
-export type CreateCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>
-export type DeleteCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>
-export type LocateCloseReasonResult = AxiosResponse<WebitelCasesLocateCloseReasonResponse>
-export type UpdateCloseReason2Result = AxiosResponse<WebitelCasesCloseReason>
-export type UpdateCloseReasonResult = AxiosResponse<WebitelCasesCloseReason>
-
-            // --- footer end
-          
+// --- footer end

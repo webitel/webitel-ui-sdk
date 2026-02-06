@@ -76,7 +76,7 @@
 		"@vuelidate/core": "^2.0.3",
 		"@vuelidate/validators": "^2.0.4",
 		"@webitel/api-services": ">=0.0.105",
-		"@webitel/styleguide": "^26.2.5",
+		"@webitel/styleguide": "~26.2",
 		"axios": "^1.8.3",
 		"date-fns": "^4.1.0",
 		"deep-copy": "^1.4.2",
@@ -308,6 +308,10 @@
 		"./modules/CallSession": {
 			"types": "./types/modules/CallSession/index.d.ts",
 			"import": "./src/modules/CallSession/index.ts"
+		},
+		"./modules/Userinfo": {
+			"types": "./types/modules/Userinfo/index.d.ts",
+			"import": "./src/modules/Userinfo/index.ts"
 		},
 		"./plugins*": {
 			"types": "./types/plugins*",

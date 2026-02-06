@@ -6,8 +6,8 @@
  */
 
 export interface EngineAgentChannel {
-  channel?: string;
-  joinedAt?: string;
-  state?: string;
-  timeout?: string;
+	channel?: string;
+	joinedAt?: string;
+	state?: string;
+	timeout?: string;
 }

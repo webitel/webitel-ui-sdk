@@ -6,5 +6,5 @@
  */
 
 export type ReadCalendarParams = {
-domainId?: string;
+	domainId?: string;
 };

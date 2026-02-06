@@ -6,63 +6,73 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  ActivityWorkspaceWidgetParams,
-  EngineActivityWorkspaceWidgetResponse,
-  EngineDefaultDeviceConfigResponse,
-  EngineListOpenedWebSocket,
-  OpenedWebSocketsParams
+	ActivityWorkspaceWidgetParams,
+	EngineActivityWorkspaceWidgetResponse,
+	EngineDefaultDeviceConfigResponse,
+	EngineListOpenedWebSocket,
+	OpenedWebSocketsParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getUserHelperService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const defaultDeviceConfig = <
+				TData = AxiosResponse<EngineDefaultDeviceConfigResponse>,
+			>(
+				type: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/user/device/config/${type}`, options);
+			};
+			const activityWorkspaceWidget = <
+				TData = AxiosResponse<EngineActivityWorkspaceWidgetResponse>,
+			>(
+				params?: ActivityWorkspaceWidgetParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/user/widget/activity/today`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const openedWebSockets = <
+				TData = AxiosResponse<EngineListOpenedWebSocket>,
+			>(
+				userId: string[],
+				params?: OpenedWebSocketsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/user/${userId}/websockets`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				defaultDeviceConfig,
+				activityWorkspaceWidget,
+				openedWebSockets,
+			};
+		};
+export type DefaultDeviceConfigResult =
+	AxiosResponse<EngineDefaultDeviceConfigResponse>;
+export type ActivityWorkspaceWidgetResult =
+	AxiosResponse<EngineActivityWorkspaceWidgetResponse>;
+export type OpenedWebSocketsResult = AxiosResponse<EngineListOpenedWebSocket>;
 
-  export const 
-            // --- title start
-            getUserHelperService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const defaultDeviceConfig = <TData = AxiosResponse<EngineDefaultDeviceConfigResponse>>(
-    type: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/user/device/config/${type}`,options
-    );
-  }
-const activityWorkspaceWidget = <TData = AxiosResponse<EngineActivityWorkspaceWidgetResponse>>(
-    params?: ActivityWorkspaceWidgetParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/user/widget/activity/today`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const openedWebSockets = <TData = AxiosResponse<EngineListOpenedWebSocket>>(
-    userId: string[],
-    params?: OpenedWebSocketsParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/user/${userId}/websockets`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {defaultDeviceConfig,activityWorkspaceWidget,openedWebSockets}};
-export type DefaultDeviceConfigResult = AxiosResponse<EngineDefaultDeviceConfigResponse>
-export type ActivityWorkspaceWidgetResult = AxiosResponse<EngineActivityWorkspaceWidgetResponse>
-export type OpenedWebSocketsResult = AxiosResponse<EngineListOpenedWebSocket>
-
-            // --- footer end
-          
+// --- footer end

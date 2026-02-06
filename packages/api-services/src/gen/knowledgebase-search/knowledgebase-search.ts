@@ -6,41 +6,42 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  KnowledgebaseCombinedList,
-  SpacesArticlesSearchParams
+	KnowledgebaseCombinedList,
+	SpacesArticlesSearchParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getKnowledgebaseSearch =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const spacesArticlesSearch = <
+				TData = AxiosResponse<KnowledgebaseCombinedList>,
+			>(
+				params?: SpacesArticlesSearchParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/spaces/search`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				spacesArticlesSearch,
+			};
+		};
+export type SpacesArticlesSearchResult =
+	AxiosResponse<KnowledgebaseCombinedList>;
 
-  export const 
-            // --- title start
-            getKnowledgebaseSearch
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const spacesArticlesSearch = <TData = AxiosResponse<KnowledgebaseCombinedList>>(
-    params?: SpacesArticlesSearchParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/spaces/search`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-            // --- footer start
-            return {spacesArticlesSearch}};
-export type SpacesArticlesSearchResult = AxiosResponse<KnowledgebaseCombinedList>
-
-            // --- footer end
-          
+// --- footer end

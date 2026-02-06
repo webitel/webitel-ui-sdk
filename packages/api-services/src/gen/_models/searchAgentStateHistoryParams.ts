@@ -6,12 +6,12 @@
  */
 
 export type SearchAgentStateHistoryParams = {
-page?: number;
-size?: number;
-joinedAtFrom?: string;
-joinedAtTo?: string;
-agentId?: string[];
-sort?: string;
-domainId?: string;
-fromId?: string;
+	page?: number;
+	size?: number;
+	joinedAtFrom?: string;
+	joinedAtTo?: string;
+	agentId?: string[];
+	sort?: string;
+	domainId?: string;
+	fromId?: string;
 };

@@ -8,9 +8,9 @@ import type { EngineLookup } from './engineLookup';
 import type { EngineTeamHookEvent } from './engineTeamHookEvent';
 
 export interface EngineTeamHook {
-  enabled?: boolean;
-  event?: EngineTeamHookEvent;
-  id?: number;
-  properties?: string[];
-  schema?: EngineLookup;
+	enabled?: boolean;
+	event?: EngineTeamHookEvent;
+	id?: number;
+	properties?: string[];
+	schema?: EngineLookup;
 }

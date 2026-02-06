@@ -6,34 +6,34 @@
  */
 
 export type GetPermissionsParams = {
-/**
- * TermOfSearch
- */
-q?: string;
-/**
- * = ANY(id)
- */
-id?: string[];
-/**
- * <> ANY(not)
- */
-not?: string[];
-/**
+	/**
+	 * TermOfSearch
+	 */
+	q?: string;
+	/**
+	 * = ANY(id)
+	 */
+	id?: string[];
+	/**
+	 * <> ANY(not)
+	 */
+	not?: string[];
+	/**
  * controls
 
 output
  */
-fields?: string[];
-/**
- * sort: "field" asc; "!field" desc
- */
-sort?: string[];
-/**
- * page number
- */
-page?: number;
-/**
- * page size
- */
-size?: number;
+	fields?: string[];
+	/**
+	 * sort: "field" asc; "!field" desc
+	 */
+	sort?: string[];
+	/**
+	 * page number
+	 */
+	page?: number;
+	/**
+	 * page size
+	 */
+	size?: number;
 };

@@ -10,9 +10,9 @@ import type { WebitelCasesChatEvent } from './webitelCasesChatEvent';
 import type { WebitelCasesEmailEvent } from './webitelCasesEmailEvent';
 
 export interface WebitelCasesEvent {
-  call?: WebitelCasesCallEvent;
-  chat?: WebitelCasesChatEvent;
-  createdAt?: string;
-  email?: WebitelCasesEmailEvent;
-  type?: WebitelCasesCaseTimelineEventType;
+	call?: WebitelCasesCallEvent;
+	chat?: WebitelCasesChatEvent;
+	createdAt?: string;
+	email?: WebitelCasesEmailEvent;
+	type?: WebitelCasesCaseTimelineEventType;
 }

@@ -7,6 +7,6 @@
 import type { EngineWebHook } from './engineWebHook';
 
 export interface EngineListWebHook {
-  items?: EngineWebHook[];
-  next?: boolean;
+	items?: EngineWebHook[];
+	next?: boolean;
 }

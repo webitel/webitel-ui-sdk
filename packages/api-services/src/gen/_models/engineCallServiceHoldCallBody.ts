@@ -6,6 +6,6 @@
  */
 
 export interface EngineCallServiceHoldCallBody {
-  appId?: string;
-  domainId?: string;
+	appId?: string;
+	domainId?: string;
 }

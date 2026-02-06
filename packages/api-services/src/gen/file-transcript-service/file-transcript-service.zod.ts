@@ -6,69 +6,81 @@
  */
 import * as zod from 'zod';
 
-
 export const DeleteFileTranscriptBody = zod.object({
-  "id": zod.array(zod.string()).optional(),
-  "uuid": zod.array(zod.string()).optional()
-})
+	id: zod.array(zod.string()).optional(),
+	uuid: zod.array(zod.string()).optional(),
+});
 
 export const DeleteFileTranscriptResponse = zod.object({
-  "items": zod.array(zod.string()).optional()
-})
+	items: zod.array(zod.string()).optional(),
+});
 
 export const CreateFileTranscriptBody = zod.object({
-  "fileId": zod.array(zod.string()).optional(),
-  "locale": zod.string().optional(),
-  "profile": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}).optional(),
-  "uuid": zod.array(zod.string()).optional()
-})
+	fileId: zod.array(zod.string()).optional(),
+	locale: zod.string().optional(),
+	profile: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	uuid: zod.array(zod.string()).optional(),
+});
 
 export const CreateFileTranscriptResponse = zod.object({
-  "items": zod.array(zod.object({
-  "action": zod.string().optional(),
-  "createdAt": zod.string().optional(),
-  "fileId": zod.string().optional(),
-  "id": zod.string().optional(),
-  "state": zod.string().optional()
-})).optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				action: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				fileId: zod.string().optional(),
+				id: zod.string().optional(),
+				state: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});
 
 export const PutFileTranscriptBody = zod.object({
-  "fileId": zod.string().optional(),
-  "locale": zod.string().optional(),
-  "phrases": zod.array(zod.object({
-  "channel": zod.number().optional(),
-  "endSec": zod.number().optional(),
-  "phrase": zod.string().optional(),
-  "startSec": zod.number().optional()
-})).optional(),
-  "text": zod.string().optional(),
-  "uuid": zod.string().optional()
-})
+	fileId: zod.string().optional(),
+	locale: zod.string().optional(),
+	phrases: zod
+		.array(
+			zod.object({
+				channel: zod.number().optional(),
+				endSec: zod.number().optional(),
+				phrase: zod.string().optional(),
+				startSec: zod.number().optional(),
+			}),
+		)
+		.optional(),
+	text: zod.string().optional(),
+	uuid: zod.string().optional(),
+});
 
 export const PutFileTranscriptResponse = zod.object({
-  "id": zod.string().optional()
-})
+	id: zod.string().optional(),
+});
 
 export const GetFileTranscriptPhrasesParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const GetFileTranscriptPhrasesQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+});
 
 export const GetFileTranscriptPhrasesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "channel": zod.number().optional(),
-  "endSec": zod.number().optional(),
-  "phrase": zod.string().optional(),
-  "startSec": zod.number().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
-
+	items: zod
+		.array(
+			zod.object({
+				channel: zod.number().optional(),
+				endSec: zod.number().optional(),
+				phrase: zod.string().optional(),
+				startSec: zod.number().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

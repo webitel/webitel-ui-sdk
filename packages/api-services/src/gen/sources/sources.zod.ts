@@ -6,21 +6,58 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Retrieve a list of sources or search sources
  */
-export const listSourcesQueryPageDefault = `1`;export const listSourcesQuerySizeDefault = `20`;export const listSourcesQuerySortDefault = `name:desc`;
+export const listSourcesQueryPageDefault = `1`;
+export const listSourcesQuerySizeDefault = `20`;
+export const listSourcesQuerySortDefault = `name:desc`;
 
 export const ListSourcesQueryParams = zod.object({
-  "page": zod.number().default(listSourcesQueryPageDefault).describe('Page number of result dataset records. offset = (page * size)\nDefault: 0'),
-  "size": zod.number().default(listSourcesQuerySizeDefault).describe('Size count of records on result page. limit = (size++)\nDefault: 25'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved as a result.\nDefault: [] (all fields)'),
-  "sort": zod.string().default(listSourcesQuerySortDefault).describe('Sort the result according to fields.\nDefault: \"id:desc\"'),
-  "id": zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
-  "q": zod.string().optional().describe('Search query string for filtering by name. Supports:\n- Wildcards (*)\n- Placeholder (?)\n- Exact match'),
-  "type": zod.array(zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL'])).optional().describe('Filter by source type.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.')
-})
+	page: zod
+		.number()
+		.default(listSourcesQueryPageDefault)
+		.describe(
+			'Page number of result dataset records. offset = (page * size)\nDefault: 0',
+		),
+	size: zod
+		.number()
+		.default(listSourcesQuerySizeDefault)
+		.describe(
+			'Size count of records on result page. limit = (size++)\nDefault: 25',
+		),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved as a result.\nDefault: [] (all fields)'),
+	sort: zod
+		.string()
+		.default(listSourcesQuerySortDefault)
+		.describe('Sort the result according to fields.\nDefault: \"id:desc\"'),
+	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Search query string for filtering by name. Supports:\n- Wildcards (*)\n- Placeholder (?)\n- Exact match',
+		),
+	type: zod
+		.array(
+			zod.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			]),
+		)
+		.optional()
+		.describe(
+			'Filter by source type.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+		),
+});
 
 export const listSourcesResponseItemsItemDescriptionMax = 500;
 
@@ -29,35 +66,87 @@ export const listSourcesResponseItemsItemNameMax = 100;
 
 export const listSourcesResponseItemsItemTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const ListSourcesResponse = zod.object({
-  "items": zod.array(zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(listSourcesResponseItemsItemDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(listSourcesResponseItemsItemNameMin).max(listSourcesResponseItemsItemNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).describe('Represents a data source in the contact management system.')).optional().describe('List of sources.'),
-  "next": zod.boolean().optional().describe('Have more records.'),
-  "page": zod.number().optional().describe('Page number of the partial result.')
-}).describe('A list of sources.')
+export const ListSourcesResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						createdAt: zod
+							.string()
+							.describe(
+								'Unix timestamp representing when the source was created.',
+							),
+						createdBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+						description: zod
+							.string()
+							.max(listSourcesResponseItemsItemDescriptionMax)
+							.optional()
+							.describe(
+								"An optional longer explanation of the source's purpose.",
+							),
+						id: zod
+							.string()
+							.describe(
+								'Unique identifier for the source, generated automatically.',
+							),
+						name: zod
+							.string()
+							.min(listSourcesResponseItemsItemNameMin)
+							.max(listSourcesResponseItemsItemNameMax)
+							.describe('A unique, descriptive name for the source.'),
+						type: zod
+							.enum([
+								'TYPE_UNSPECIFIED',
+								'CALL',
+								'CHAT',
+								'SOCIAL_MEDIA',
+								'EMAIL',
+								'API',
+								'MANUAL',
+							])
+							.describe(
+								'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+							),
+						updatedAt: zod
+							.string()
+							.describe('Unix timestamp representing the most recent update.'),
+						updatedBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+					})
+					.describe(
+						'Represents a data source in the contact management system.',
+					),
+			)
+			.optional()
+			.describe('List of sources.'),
+		next: zod.boolean().optional().describe('Have more records.'),
+		page: zod
+			.number()
+			.optional()
+			.describe('Page number of the partial result.'),
+	})
+	.describe('A list of sources.');
 
 /**
  * @summary Create a new source
  */
 export const CreateSourceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Optional list of specific fields to return after creation\n\nSpecific fields to include in response')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Optional list of specific fields to return after creation\n\nSpecific fields to include in response',
+		),
+});
 
-export const createSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;export const createSourceBodyDescriptionMax = 500;
+export const createSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
+export const createSourceBodyDescriptionMax = 500;
 
 export const createSourceBodyNameDefault = `New Source`;
 export const createSourceBodyNameMin = 2;
@@ -65,11 +154,33 @@ export const createSourceBodyNameMax = 100;
 
 export const createSourceBodyTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const CreateSourceBody = zod.object({
-  "description": zod.string().max(createSourceBodyDescriptionMax).optional().describe('A short description of the source'),
-  "name": zod.string().min(createSourceBodyNameMin).max(createSourceBodyNameMax).describe('The name of the source'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.')
-}).describe('The data structure representing a source')
+export const CreateSourceBody = zod
+	.object({
+		description: zod
+			.string()
+			.max(createSourceBodyDescriptionMax)
+			.optional()
+			.describe('A short description of the source'),
+		name: zod
+			.string()
+			.min(createSourceBodyNameMin)
+			.max(createSourceBodyNameMax)
+			.describe('The name of the source'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+	})
+	.describe('The data structure representing a source');
 
 export const createSourceResponseDescriptionMax = 500;
 
@@ -78,29 +189,57 @@ export const createSourceResponseNameMax = 100;
 
 export const createSourceResponseTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const CreateSourceResponse = zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(createSourceResponseDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(createSourceResponseNameMin).max(createSourceResponseNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).describe('Represents a data source in the contact management system.')
+export const CreateSourceResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.describe('Unix timestamp representing when the source was created.'),
+		createdBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+		description: zod
+			.string()
+			.max(createSourceResponseDescriptionMax)
+			.optional()
+			.describe("An optional longer explanation of the source's purpose."),
+		id: zod
+			.string()
+			.describe('Unique identifier for the source, generated automatically.'),
+		name: zod
+			.string()
+			.min(createSourceResponseNameMin)
+			.max(createSourceResponseNameMax)
+			.describe('A unique, descriptive name for the source.'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+		updatedAt: zod
+			.string()
+			.describe('Unix timestamp representing the most recent update.'),
+		updatedBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+	})
+	.describe('Represents a data source in the contact management system.');
 
 /**
  * @summary Delete a source
  */
 export const DeleteSourceParams = zod.object({
-  "id": zod.string().describe('The unique ID of the source to delete.')
-})
+	id: zod.string().describe('The unique ID of the source to delete.'),
+});
 
 export const deleteSourceResponseDescriptionMax = 500;
 
@@ -109,33 +248,64 @@ export const deleteSourceResponseNameMax = 100;
 
 export const deleteSourceResponseTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const DeleteSourceResponse = zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(deleteSourceResponseDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(deleteSourceResponseNameMin).max(deleteSourceResponseNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).describe('Represents a data source in the contact management system.')
+export const DeleteSourceResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.describe('Unix timestamp representing when the source was created.'),
+		createdBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+		description: zod
+			.string()
+			.max(deleteSourceResponseDescriptionMax)
+			.optional()
+			.describe("An optional longer explanation of the source's purpose."),
+		id: zod
+			.string()
+			.describe('Unique identifier for the source, generated automatically.'),
+		name: zod
+			.string()
+			.min(deleteSourceResponseNameMin)
+			.max(deleteSourceResponseNameMax)
+			.describe('A unique, descriptive name for the source.'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+		updatedAt: zod
+			.string()
+			.describe('Unix timestamp representing the most recent update.'),
+		updatedBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+	})
+	.describe('Represents a data source in the contact management system.');
 
 /**
  * @summary Locate a source by ID
  */
 export const LocateSourceParams = zod.object({
-  "id": zod.string().describe('The unique ID of the source to locate.')
-})
+	id: zod.string().describe('The unique ID of the source to locate.'),
+});
 
 export const LocateSourceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional().describe('Fields to be retrieved into result.')
-})
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result.'),
+});
 
 export const locateSourceResponseSourceDescriptionMax = 500;
 
@@ -144,37 +314,71 @@ export const locateSourceResponseSourceNameMax = 100;
 
 export const locateSourceResponseSourceTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const LocateSourceResponse = zod.object({
-  "source": zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(locateSourceResponseSourceDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(locateSourceResponseSourceNameMin).max(locateSourceResponseSourceNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).optional().describe('Represents a data source in the contact management system.')
-}).describe('Response message for locating a source.')
+export const LocateSourceResponse = zod
+	.object({
+		source: zod
+			.object({
+				createdAt: zod
+					.string()
+					.describe('Unix timestamp representing when the source was created.'),
+				createdBy: zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+				description: zod
+					.string()
+					.max(locateSourceResponseSourceDescriptionMax)
+					.optional()
+					.describe("An optional longer explanation of the source's purpose."),
+				id: zod
+					.string()
+					.describe(
+						'Unique identifier for the source, generated automatically.',
+					),
+				name: zod
+					.string()
+					.min(locateSourceResponseSourceNameMin)
+					.max(locateSourceResponseSourceNameMax)
+					.describe('A unique, descriptive name for the source.'),
+				type: zod
+					.enum([
+						'TYPE_UNSPECIFIED',
+						'CALL',
+						'CHAT',
+						'SOCIAL_MEDIA',
+						'EMAIL',
+						'API',
+						'MANUAL',
+					])
+					.describe(
+						'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+					),
+				updatedAt: zod
+					.string()
+					.describe('Unix timestamp representing the most recent update.'),
+				updatedBy: zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			})
+			.optional()
+			.describe('Represents a data source in the contact management system.'),
+	})
+	.describe('Response message for locating a source.');
 
 /**
  * @summary Update an existing source
  */
 export const UpdateSource2Params = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const UpdateSource2QueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
-export const updateSource2BodyDefault = `{ "name": "Default Source", "type": "CALL" }`;export const updateSource2BodyDescriptionMax = 500;
+export const updateSource2BodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
+export const updateSource2BodyDescriptionMax = 500;
 
 export const updateSource2BodyNameDefault = `New Source`;
 export const updateSource2BodyNameMin = 2;
@@ -182,11 +386,33 @@ export const updateSource2BodyNameMax = 100;
 
 export const updateSource2BodyTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const UpdateSource2Body = zod.object({
-  "description": zod.string().max(updateSource2BodyDescriptionMax).optional().describe('A short description of the source'),
-  "name": zod.string().min(updateSource2BodyNameMin).max(updateSource2BodyNameMax).describe('The name of the source'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.')
-}).describe('The data structure representing a source')
+export const UpdateSource2Body = zod
+	.object({
+		description: zod
+			.string()
+			.max(updateSource2BodyDescriptionMax)
+			.optional()
+			.describe('A short description of the source'),
+		name: zod
+			.string()
+			.min(updateSource2BodyNameMin)
+			.max(updateSource2BodyNameMax)
+			.describe('The name of the source'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+	})
+	.describe('The data structure representing a source');
 
 export const updateSource2ResponseDescriptionMax = 500;
 
@@ -195,35 +421,64 @@ export const updateSource2ResponseNameMax = 100;
 
 export const updateSource2ResponseTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const UpdateSource2Response = zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(updateSource2ResponseDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(updateSource2ResponseNameMin).max(updateSource2ResponseNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).describe('Represents a data source in the contact management system.')
+export const UpdateSource2Response = zod
+	.object({
+		createdAt: zod
+			.string()
+			.describe('Unix timestamp representing when the source was created.'),
+		createdBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+		description: zod
+			.string()
+			.max(updateSource2ResponseDescriptionMax)
+			.optional()
+			.describe("An optional longer explanation of the source's purpose."),
+		id: zod
+			.string()
+			.describe('Unique identifier for the source, generated automatically.'),
+		name: zod
+			.string()
+			.min(updateSource2ResponseNameMin)
+			.max(updateSource2ResponseNameMax)
+			.describe('A unique, descriptive name for the source.'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+		updatedAt: zod
+			.string()
+			.describe('Unix timestamp representing the most recent update.'),
+		updatedBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+	})
+	.describe('Represents a data source in the contact management system.');
 
 /**
  * @summary Update an existing source
  */
 export const UpdateSourceParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const UpdateSourceQueryParams = zod.object({
-  "fields": zod.array(zod.string()).optional()
-})
+	fields: zod.array(zod.string()).optional(),
+});
 
-export const updateSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;export const updateSourceBodyDescriptionMax = 500;
+export const updateSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
+export const updateSourceBodyDescriptionMax = 500;
 
 export const updateSourceBodyNameDefault = `New Source`;
 export const updateSourceBodyNameMin = 2;
@@ -231,11 +486,33 @@ export const updateSourceBodyNameMax = 100;
 
 export const updateSourceBodyTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const UpdateSourceBody = zod.object({
-  "description": zod.string().max(updateSourceBodyDescriptionMax).optional().describe('A short description of the source'),
-  "name": zod.string().min(updateSourceBodyNameMin).max(updateSourceBodyNameMax).describe('The name of the source'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.')
-}).describe('The data structure representing a source')
+export const UpdateSourceBody = zod
+	.object({
+		description: zod
+			.string()
+			.max(updateSourceBodyDescriptionMax)
+			.optional()
+			.describe('A short description of the source'),
+		name: zod
+			.string()
+			.min(updateSourceBodyNameMin)
+			.max(updateSourceBodyNameMax)
+			.describe('The name of the source'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+	})
+	.describe('The data structure representing a source');
 
 export const updateSourceResponseDescriptionMax = 500;
 
@@ -244,20 +521,47 @@ export const updateSourceResponseNameMax = 100;
 
 export const updateSourceResponseTypeDefault = `TYPE_UNSPECIFIED`;
 
-export const UpdateSourceResponse = zod.object({
-  "createdAt": zod.string().describe('Unix timestamp representing when the source was created.'),
-  "createdBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-}),
-  "description": zod.string().max(updateSourceResponseDescriptionMax).optional().describe('An optional longer explanation of the source\'s purpose.'),
-  "id": zod.string().describe('Unique identifier for the source, generated automatically.'),
-  "name": zod.string().min(updateSourceResponseNameMin).max(updateSourceResponseNameMax).describe('A unique, descriptive name for the source.'),
-  "type": zod.enum(['TYPE_UNSPECIFIED', 'CALL', 'CHAT', 'SOCIAL_MEDIA', 'EMAIL', 'API', 'MANUAL']).describe('Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.'),
-  "updatedAt": zod.string().describe('Unix timestamp representing the most recent update.'),
-  "updatedBy": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-}).describe('Represents a data source in the contact management system.')
-
+export const UpdateSourceResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.describe('Unix timestamp representing when the source was created.'),
+		createdBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+		description: zod
+			.string()
+			.max(updateSourceResponseDescriptionMax)
+			.optional()
+			.describe("An optional longer explanation of the source's purpose."),
+		id: zod
+			.string()
+			.describe('Unique identifier for the source, generated automatically.'),
+		name: zod
+			.string()
+			.min(updateSourceResponseNameMin)
+			.max(updateSourceResponseNameMax)
+			.describe('A unique, descriptive name for the source.'),
+		type: zod
+			.enum([
+				'TYPE_UNSPECIFIED',
+				'CALL',
+				'CHAT',
+				'SOCIAL_MEDIA',
+				'EMAIL',
+				'API',
+				'MANUAL',
+			])
+			.describe(
+				'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+			),
+		updatedAt: zod
+			.string()
+			.describe('Unix timestamp representing the most recent update.'),
+		updatedBy: zod.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		}),
+	})
+	.describe('Represents a data source in the contact management system.');

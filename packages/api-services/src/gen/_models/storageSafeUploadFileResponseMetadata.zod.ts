@@ -9,15 +9,15 @@ import type { StorageThumbnail } from './storageThumbnail';
 import type { StorageUploadStatusCode } from './storageUploadStatusCode';
 
 export interface StorageSafeUploadFileResponseMetadata {
-  code?: StorageUploadStatusCode;
-  fileId?: string;
-  fileUrl?: string;
-  malware?: StorageFileMalwareScan;
-  mimeType?: string;
-  name?: string;
-  server?: string;
-  sha256Sum?: string;
-  size?: string;
-  thumbnail?: StorageThumbnail;
-  uuid?: string;
+	code?: StorageUploadStatusCode;
+	fileId?: string;
+	fileUrl?: string;
+	malware?: StorageFileMalwareScan;
+	mimeType?: string;
+	name?: string;
+	server?: string;
+	sha256Sum?: string;
+	size?: string;
+	thumbnail?: StorageThumbnail;
+	uuid?: string;
 }

@@ -7,5 +7,5 @@
 import type { WebitelCasesSLA } from './webitelCasesSLA';
 
 export interface WebitelCasesLocateSLAResponse {
-  sla?: WebitelCasesSLA;
+	sla?: WebitelCasesSLA;
 }

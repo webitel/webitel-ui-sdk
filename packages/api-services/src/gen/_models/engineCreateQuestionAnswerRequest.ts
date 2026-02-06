@@ -6,5 +6,5 @@
  */
 
 export interface EngineCreateQuestionAnswerRequest {
-  score?: number;
+	score?: number;
 }

@@ -6,8 +6,8 @@
  */
 
 export interface EngineAcceptOfDay {
-  day?: number;
-  disabled?: boolean;
-  endTimeOfDay?: number;
-  startTimeOfDay?: number;
+	day?: number;
+	disabled?: boolean;
+	endTimeOfDay?: number;
+	startTimeOfDay?: number;
 }

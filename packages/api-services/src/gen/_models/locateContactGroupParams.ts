@@ -6,8 +6,8 @@
  */
 
 export type LocateContactGroupParams = {
-/**
- * Fields to be retrieved into result.
- */
-fields?: string[];
+	/**
+	 * Fields to be retrieved into result.
+	 */
+	fields?: string[];
 };

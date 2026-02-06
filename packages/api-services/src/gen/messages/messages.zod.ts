@@ -6,611 +6,1817 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary Broadcast message send message from via to peer recipients.
  */
 export const MessagesServiceBroadcastMessageBody = zod.object({
-  "message": zod.object({
-  "file": zod.object({
-  "id": zod.string().optional(),
-  "source": zod.string().optional(),
-  "url": zod.string().optional()
-}).optional(),
-  "keyboard": zod.object({
-  "rows": zod.array(zod.object({
-  "buttons": zod.array(zod.object({
-  "caption": zod.string().optional(),
-  "code": zod.string().optional(),
-  "text": zod.string().optional(),
-  "type": zod.string().optional(),
-  "url": zod.string().optional()
-})).optional()
-})).optional()
-}).optional(),
-  "text": zod.string().optional()
-}).optional(),
-  "peers": zod.array(zod.object({
-  "id": zod.string().optional(),
-  "type": zod.string().optional(),
-  "via": zod.string().optional()
-}).describe('InputPeer identity.')).optional(),
-  "timeout": zod.string().optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
+	message: zod
+		.object({
+			file: zod
+				.object({
+					id: zod.string().optional(),
+					source: zod.string().optional(),
+					url: zod.string().optional(),
+				})
+				.optional(),
+			keyboard: zod
+				.object({
+					rows: zod
+						.array(
+							zod.object({
+								buttons: zod
+									.array(
+										zod.object({
+											caption: zod.string().optional(),
+											code: zod.string().optional(),
+											text: zod.string().optional(),
+											type: zod.string().optional(),
+											url: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							}),
+						)
+						.optional(),
+				})
+				.optional(),
+			text: zod.string().optional(),
+		})
+		.optional(),
+	peers: zod
+		.array(
+			zod
+				.object({
+					id: zod.string().optional(),
+					type: zod.string().optional(),
+					via: zod.string().optional(),
+				})
+				.describe('InputPeer identity.'),
+		)
+		.optional(),
+	timeout: zod.string().optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
 
 export const MessagesServiceBroadcastMessageResponse = zod.object({
-  "failure": zod.array(zod.object({
-  "error": zod.object({
-  "code": zod.number().optional(),
-  "details": zod.array(zod.object({
-  "@type": zod.string().optional()
-})).optional(),
-  "message": zod.string().optional()
-}).optional(),
-  "peerId": zod.string().optional()
-})).optional(),
-  "variables": zod.record(zod.string(), zod.string()).optional()
-})
+	failure: zod
+		.array(
+			zod.object({
+				error: zod
+					.object({
+						code: zod.number().optional(),
+						details: zod
+							.array(
+								zod.object({
+									'@type': zod.string().optional(),
+								}),
+							)
+							.optional(),
+						message: zod.string().optional(),
+					})
+					.optional(),
+				peerId: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
 
 /**
  * @summary Query of external chat customers
  */
 export const CatalogGetCustomersQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number to return. **default**: 1.'),
-  "size": zod.number().optional().describe('Page records limit. **default**: 16.'),
-  "q": zod.string().optional().describe('Search term: peer{id,name}'),
-  "sort": zod.array(zod.string()).optional().describe('Sort records by { fields } specification.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.'),
-  "id": zod.array(zod.string()).optional().describe('Set of unique contact **ID**entifier(s).'),
-  "type": zod.string().optional().describe('The type of contact to filter.'),
-  "viaId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "viaType": zod.string().optional().describe('Contact **type** provider.'),
-  "viaName": zod.string().optional().describe('Contact display **name**.')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number to return. **default**: 1.'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Page records limit. **default**: 16.'),
+	q: zod.string().optional().describe('Search term: peer{id,name}'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort records by { fields } specification.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields [Q]uery to build result dataset record.'),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe('Set of unique contact **ID**entifier(s).'),
+	type: zod.string().optional().describe('The type of contact to filter.'),
+	viaId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
+});
 
 export const CatalogGetCustomersResponse = zod.object({
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of results.'),
-  "peers": zod.array(zod.object({
-  "id": zod.string().optional().describe('Customer unique **ID**entifier.\nAccount **type**-specific string.'),
-  "name": zod.string().optional().describe('Customer account **name**.'),
-  "type": zod.string().optional().describe('Customer account **type**.'),
-  "via": zod.array(zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).describe('Peer contact.')).optional().describe('[VIA] Text gateway associations.')
-}).describe('Customer is external chat contact.')).optional().describe('Dataset page of Customer(s).'),
-  "vias": zod.array(zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).describe('Peer contact.')).optional()
-})
+	next: zod.boolean().optional(),
+	page: zod.number().optional().describe('Page number of results.'),
+	peers: zod
+		.array(
+			zod
+				.object({
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Customer unique **ID**entifier.\nAccount **type**-specific string.',
+						),
+					name: zod.string().optional().describe('Customer account **name**.'),
+					type: zod.string().optional().describe('Customer account **type**.'),
+					via: zod
+						.array(
+							zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.describe('Peer contact.'),
+						)
+						.optional()
+						.describe('[VIA] Text gateway associations.'),
+				})
+				.describe('Customer is external chat contact.'),
+		)
+		.optional()
+		.describe('Dataset page of Customer(s).'),
+	vias: zod
+		.array(
+			zod
+				.object({
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Contact unique **ID**entifier.\nContact **type**-specific string.',
+						),
+					name: zod.string().optional().describe('Contact display **name**.'),
+					type: zod.string().optional().describe('Contact **type** provider.'),
+				})
+				.describe('Peer contact.'),
+		)
+		.optional(),
+});
 
 /**
  * @summary Query of chat conversations
  */
 export const CatalogGetDialogsQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number to return. **default**: 1.'),
-  "size": zod.number().optional().describe('Page records limit. **default**: 16.'),
-  "q": zod.string().optional().describe('Search term: peer.name'),
-  "sort": zod.array(zod.string()).optional().describe('Sort records by { fields } specification.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.'),
-  "id": zod.array(zod.string()).optional().describe('Set of unique chat IDentifier(s).\nAccept: dialog -or- member ID.'),
-  "viaId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "viaType": zod.string().optional().describe('Contact **type** provider.'),
-  "viaName": zod.string().optional().describe('Contact display **name**.'),
-  "peerId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "peerType": zod.string().optional().describe('Contact **type** provider.'),
-  "peerName": zod.string().optional().describe('Contact display **name**.'),
-  "dateSince": zod.string().optional().describe('Since epochtime (milli).\n**Match**: greater than ..'),
-  "dateUntil": zod.string().optional().describe('Until epochtime (milli).\n**Match**: less or equal ..'),
-  "online": zod.boolean().optional().describe('Dialogs ONLY that are currently [not] active( closed: ? ).'),
-  "groupString": zod.string().optional().describe('Includes ONLY those chat dialogs\nwhose member channel(s) contain\na specified set of variables.\n\n10')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number to return. **default**: 1.'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Page records limit. **default**: 16.'),
+	q: zod.string().optional().describe('Search term: peer.name'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort records by { fields } specification.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields [Q]uery to build result dataset record.'),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Set of unique chat IDentifier(s).\nAccept: dialog -or- member ID.',
+		),
+	viaId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
+	peerId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	dateSince: zod
+		.string()
+		.optional()
+		.describe('Since epochtime (milli).\n**Match**: greater than ..'),
+	dateUntil: zod
+		.string()
+		.optional()
+		.describe('Until epochtime (milli).\n**Match**: less or equal ..'),
+	online: zod
+		.boolean()
+		.optional()
+		.describe('Dialogs ONLY that are currently [not] active( closed: ? ).'),
+	groupString: zod
+		.string()
+		.optional()
+		.describe(
+			'Includes ONLY those chat dialogs\nwhose member channel(s) contain\na specified set of variables.\n\n10',
+		),
+});
 
 export const catalogGetDialogsResponseDataItemMessageKeyboardButtonsItemRowItemShareDefault = `phone`;
 
 export const CatalogGetDialogsResponse = zod.object({
-  "data": zod.array(zod.object({
-  "closed": zod.string().optional(),
-  "closedCause": zod.string().optional(),
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables. Environment.'),
-  "date": zod.string().optional().describe('Timestamp of the latest activity.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "from": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "id": zod.string().optional().describe('The Conversation thread unique ID.'),
-  "members": zod.array(zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.')).optional().describe('[TO]: Participants.\nLeg[A+]. Schema / Agent.'),
-  "message": zod.object({
-  "chat": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables. Environment.'),
-  "date": zod.string().optional().describe('Timestamp when this message was sent (published).'),
-  "edit": zod.string().optional().describe('Timestamp when this message was last edited.'),
-  "file": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "type": zod.string().optional(),
-  "url": zod.string().optional()
-}).optional().describe('Media File.'),
-  "from": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "id": zod.string().optional().describe('Unique message identifier inside this chat.'),
-  "keyboard": zod.object({
-  "buttons": zod.array(zod.object({
-  "row": zod.array(zod.object({
-  "code": zod.string().optional().describe('Postback/Callback data.'),
-  "share": zod.enum(['phone', 'email', 'contact', 'location']).default(catalogGetDialogsResponseDataItemMessageKeyboardButtonsItemRowItemShareDefault).describe('- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location'),
-  "text": zod.string().optional().describe('Caption to display.'),
-  "url": zod.string().optional().describe('URL to navigate to ..')
-})).optional()
-})).optional(),
-  "noInput": zod.boolean().optional().describe('An option used to block input to force\nthe user to respond with one of the buttons.')
-}).optional(),
-  "kind": zod.string().optional(),
-  "postback": zod.object({
-  "code": zod.string().optional().describe('Data associated with the Button.'),
-  "mid": zod.string().optional().describe('Message ID of the button.'),
-  "text": zod.string().optional().describe('Button\'s display caption.')
-}).optional().describe('Postback. Reply Button Click[ed].'),
-  "sender": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "text": zod.string().optional().describe('Message Text.')
-}).optional().describe('Chat Message.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "started": zod.string().optional().describe('Timestamp when dialog started.'),
-  "title": zod.string().optional().describe('Title of the dialog.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).describe('Chat Dialog. Conversation info.')).optional().describe('Dataset page of Dialog(s).'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of results.')
-})
+	data: zod
+		.array(
+			zod
+				.object({
+					closed: zod.string().optional(),
+					closedCause: zod.string().optional(),
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables. Environment.'),
+					date: zod
+						.string()
+						.optional()
+						.describe('Timestamp of the latest activity.'),
+					dc: zod
+						.string()
+						.optional()
+						.describe('[D]omain[C]omponent primary ID.'),
+					from: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					id: zod
+						.string()
+						.optional()
+						.describe('The Conversation thread unique ID.'),
+					members: zod
+						.array(
+							zod
+								.object({
+									context: zod
+										.record(zod.string(), zod.string())
+										.optional()
+										.describe('Context. Variables.'),
+									dc: zod
+										.string()
+										.optional()
+										.describe('[D]omain[C]omponent primary ID.'),
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+										),
+									invite: zod
+										.object({
+											date: zod.string().optional(),
+											from: zod.string().optional(),
+										})
+										.optional(),
+									join: zod
+										.string()
+										.optional()
+										.describe(
+											'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+										),
+									left: zod.string().optional(),
+									peer: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									queue: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									title: zod.string().optional().describe('[TO]: Chat title.'),
+									via: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+								})
+								.describe(
+									'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+								),
+						)
+						.optional()
+						.describe('[TO]: Participants.\nLeg[A+]. Schema / Agent.'),
+					message: zod
+						.object({
+							chat: zod
+								.object({
+									context: zod
+										.record(zod.string(), zod.string())
+										.optional()
+										.describe('Context. Variables.'),
+									dc: zod
+										.string()
+										.optional()
+										.describe('[D]omain[C]omponent primary ID.'),
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+										),
+									invite: zod
+										.object({
+											date: zod.string().optional(),
+											from: zod.string().optional(),
+										})
+										.optional(),
+									join: zod
+										.string()
+										.optional()
+										.describe(
+											'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+										),
+									left: zod.string().optional(),
+									peer: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									queue: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									title: zod.string().optional().describe('[TO]: Chat title.'),
+									via: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+								})
+								.optional()
+								.describe(
+									'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+								),
+							context: zod
+								.record(zod.string(), zod.string())
+								.optional()
+								.describe('Context. Variables. Environment.'),
+							date: zod
+								.string()
+								.optional()
+								.describe('Timestamp when this message was sent (published).'),
+							edit: zod
+								.string()
+								.optional()
+								.describe('Timestamp when this message was last edited.'),
+							file: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+									size: zod.string().optional(),
+									type: zod.string().optional(),
+									url: zod.string().optional(),
+								})
+								.optional()
+								.describe('Media File.'),
+							from: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							id: zod
+								.string()
+								.optional()
+								.describe('Unique message identifier inside this chat.'),
+							keyboard: zod
+								.object({
+									buttons: zod
+										.array(
+											zod.object({
+												row: zod
+													.array(
+														zod.object({
+															code: zod
+																.string()
+																.optional()
+																.describe('Postback/Callback data.'),
+															share: zod
+																.enum([
+																	'phone',
+																	'email',
+																	'contact',
+																	'location',
+																])
+																.default(
+																	catalogGetDialogsResponseDataItemMessageKeyboardButtonsItemRowItemShareDefault,
+																)
+																.describe(
+																	'- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location',
+																),
+															text: zod
+																.string()
+																.optional()
+																.describe('Caption to display.'),
+															url: zod
+																.string()
+																.optional()
+																.describe('URL to navigate to ..'),
+														}),
+													)
+													.optional(),
+											}),
+										)
+										.optional(),
+									noInput: zod
+										.boolean()
+										.optional()
+										.describe(
+											'An option used to block input to force\nthe user to respond with one of the buttons.',
+										),
+								})
+								.optional(),
+							kind: zod.string().optional(),
+							postback: zod
+								.object({
+									code: zod
+										.string()
+										.optional()
+										.describe('Data associated with the Button.'),
+									mid: zod
+										.string()
+										.optional()
+										.describe('Message ID of the button.'),
+									text: zod
+										.string()
+										.optional()
+										.describe("Button's display caption."),
+								})
+								.optional()
+								.describe('Postback. Reply Button Click[ed].'),
+							sender: zod
+								.object({
+									context: zod
+										.record(zod.string(), zod.string())
+										.optional()
+										.describe('Context. Variables.'),
+									dc: zod
+										.string()
+										.optional()
+										.describe('[D]omain[C]omponent primary ID.'),
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+										),
+									invite: zod
+										.object({
+											date: zod.string().optional(),
+											from: zod.string().optional(),
+										})
+										.optional(),
+									join: zod
+										.string()
+										.optional()
+										.describe(
+											'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+										),
+									left: zod.string().optional(),
+									peer: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									queue: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+									title: zod.string().optional().describe('[TO]: Chat title.'),
+									via: zod
+										.object({
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'Contact unique **ID**entifier.\nContact **type**-specific string.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Contact display **name**.'),
+											type: zod
+												.string()
+												.optional()
+												.describe('Contact **type** provider.'),
+										})
+										.optional()
+										.describe('Peer contact.'),
+								})
+								.optional()
+								.describe(
+									'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+								),
+							text: zod.string().optional().describe('Message Text.'),
+						})
+						.optional()
+						.describe('Chat Message.'),
+					queue: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					started: zod
+						.string()
+						.optional()
+						.describe('Timestamp when dialog started.'),
+					title: zod.string().optional().describe('Title of the dialog.'),
+					via: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+				})
+				.describe('Chat Dialog. Conversation info.'),
+		)
+		.optional()
+		.describe('Dataset page of Dialog(s).'),
+	next: zod.boolean().optional(),
+	page: zod.number().optional().describe('Page number of results.'),
+});
 
 /**
  * @summary Query of chat participants
  */
 export const CatalogGetMembersParams = zod.object({
-  "chat_id": zod.string().describe('ID of the chat dialog.')
-})
+	chat_id: zod.string().describe('ID of the chat dialog.'),
+});
 
 export const CatalogGetMembersQueryParams = zod.object({
-  "page": zod.number().optional().describe('Page number to return. **default**: 1.'),
-  "size": zod.number().optional().describe('Page records limit. **default**: 16.'),
-  "q": zod.string().optional().describe('Search term: peer(type;name)'),
-  "sort": zod.array(zod.string()).optional().describe('Sort records by { fields } specification.'),
-  "fields": zod.array(zod.string()).optional().describe('Fields [Q]uery to build result dataset record.'),
-  "id": zod.array(zod.string()).optional().describe('Set of unique chat member ID.'),
-  "viaId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "viaType": zod.string().optional().describe('Contact **type** provider.'),
-  "viaName": zod.string().optional().describe('Contact display **name**.'),
-  "peerId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "peerType": zod.string().optional().describe('Contact **type** provider.'),
-  "peerName": zod.string().optional().describe('Contact display **name**.'),
-  "dateSince": zod.string().optional().describe('Since epochtime (milli).\n**Match**: greater than ..'),
-  "dateUntil": zod.string().optional().describe('Until epochtime (milli).\n**Match**: less or equal ..'),
-  "online": zod.boolean().optional().describe('Participants ONLY who are currently [not] connected to the chat.\n( left: ( 0 ? online : offline ) )'),
-  "joined": zod.boolean().optional().describe('Participants ONLY who have [not] been connected to the chat.\n( join: ( 0 ? [request|abandoned] : connected ) )')
-})
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number to return. **default**: 1.'),
+	size: zod
+		.number()
+		.optional()
+		.describe('Page records limit. **default**: 16.'),
+	q: zod.string().optional().describe('Search term: peer(type;name)'),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe('Sort records by { fields } specification.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields [Q]uery to build result dataset record.'),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe('Set of unique chat member ID.'),
+	viaId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
+	peerId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	dateSince: zod
+		.string()
+		.optional()
+		.describe('Since epochtime (milli).\n**Match**: greater than ..'),
+	dateUntil: zod
+		.string()
+		.optional()
+		.describe('Until epochtime (milli).\n**Match**: less or equal ..'),
+	online: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Participants ONLY who are currently [not] connected to the chat.\n( left: ( 0 ? online : offline ) )',
+		),
+	joined: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Participants ONLY who have [not] been connected to the chat.\n( join: ( 0 ? [request|abandoned] : connected ) )',
+		),
+});
 
 export const CatalogGetMembersResponse = zod.object({
-  "data": zod.array(zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.')).optional().describe('Page of the chat participants.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Page number of results.')
-})
+	data: zod
+		.array(
+			zod
+				.object({
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables.'),
+					dc: zod
+						.string()
+						.optional()
+						.describe('[D]omain[C]omponent primary ID.'),
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+						),
+					invite: zod
+						.object({
+							date: zod.string().optional(),
+							from: zod.string().optional(),
+						})
+						.optional(),
+					join: zod
+						.string()
+						.optional()
+						.describe(
+							'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+						),
+					left: zod.string().optional(),
+					peer: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					queue: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					title: zod.string().optional().describe('[TO]: Chat title.'),
+					via: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+				})
+				.describe(
+					'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+				),
+		)
+		.optional()
+		.describe('Page of the chat participants.'),
+	next: zod.boolean().optional(),
+	page: zod.number().optional().describe('Page number of results.'),
+});
 
 /**
  * @summary Query of the chat history
  */
 export const CatalogGetHistoryParams = zod.object({
-  "chat_id": zod.string().describe('Unique chat dialog')
-})
+	chat_id: zod.string().describe('Unique chat dialog'),
+});
 
 export const CatalogGetHistoryQueryParams = zod.object({
-  "offsetId": zod.string().optional().describe('Messages ONLY starting from the specified message ID'),
-  "offsetDate": zod.string().optional().describe('Messages ONLY been sent before the specified epochtime(milli).'),
-  "limit": zod.number().optional().describe('Number of messages to return.'),
-  "q": zod.string().optional().describe('Search term: message.text'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to return into result.'),
-  "peerId": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "peerType": zod.string().optional().describe('Contact **type** provider.'),
-  "peerName": zod.string().optional().describe('Contact display **name**.'),
-  "groupString": zod.string().optional().describe('Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.')
-})
+	offsetId: zod
+		.string()
+		.optional()
+		.describe('Messages ONLY starting from the specified message ID'),
+	offsetDate: zod
+		.string()
+		.optional()
+		.describe('Messages ONLY been sent before the specified epochtime(milli).'),
+	limit: zod.number().optional().describe('Number of messages to return.'),
+	q: zod.string().optional().describe('Search term: message.text'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to return into result.'),
+	peerId: zod
+		.string()
+		.optional()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	groupString: zod
+		.string()
+		.optional()
+		.describe(
+			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
+		),
+});
 
 export const catalogGetHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = `phone`;
 
 export const CatalogGetHistoryResponse = zod.object({
-  "chats": zod.array(zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.')).optional(),
-  "messages": zod.array(zod.object({
-  "chat": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables. Environment.'),
-  "date": zod.string().optional().describe('Timestamp when this message was sent (published).'),
-  "edit": zod.string().optional().describe('Timestamp when this message was last edited.'),
-  "file": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "type": zod.string().optional(),
-  "url": zod.string().optional()
-}).optional().describe('Media File.'),
-  "from": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "id": zod.string().optional().describe('Unique message identifier inside this chat.'),
-  "keyboard": zod.object({
-  "buttons": zod.array(zod.object({
-  "row": zod.array(zod.object({
-  "code": zod.string().optional().describe('Postback/Callback data.'),
-  "share": zod.enum(['phone', 'email', 'contact', 'location']).default(catalogGetHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault).describe('- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location'),
-  "text": zod.string().optional().describe('Caption to display.'),
-  "url": zod.string().optional().describe('URL to navigate to ..')
-})).optional()
-})).optional(),
-  "noInput": zod.boolean().optional().describe('An option used to block input to force\nthe user to respond with one of the buttons.')
-}).optional(),
-  "kind": zod.string().optional(),
-  "postback": zod.object({
-  "code": zod.string().optional().describe('Data associated with the Button.'),
-  "mid": zod.string().optional().describe('Message ID of the button.'),
-  "text": zod.string().optional().describe('Button\'s display caption.')
-}).optional().describe('Postback. Reply Button Click[ed].'),
-  "sender": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "text": zod.string().optional().describe('Message Text.')
-}).describe('Chat Message.')).optional().describe('Dataset page of messages.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Dataset page number.'),
-  "peers": zod.array(zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).describe('Peer contact.')).optional()
-})
+	chats: zod
+		.array(
+			zod
+				.object({
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables.'),
+					dc: zod
+						.string()
+						.optional()
+						.describe('[D]omain[C]omponent primary ID.'),
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+						),
+					invite: zod
+						.object({
+							date: zod.string().optional(),
+							from: zod.string().optional(),
+						})
+						.optional(),
+					join: zod
+						.string()
+						.optional()
+						.describe(
+							'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+						),
+					left: zod.string().optional(),
+					peer: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					queue: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					title: zod.string().optional().describe('[TO]: Chat title.'),
+					via: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+				})
+				.describe(
+					'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+				),
+		)
+		.optional(),
+	messages: zod
+		.array(
+			zod
+				.object({
+					chat: zod
+						.object({
+							context: zod
+								.record(zod.string(), zod.string())
+								.optional()
+								.describe('Context. Variables.'),
+							dc: zod
+								.string()
+								.optional()
+								.describe('[D]omain[C]omponent primary ID.'),
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+								),
+							invite: zod
+								.object({
+									date: zod.string().optional(),
+									from: zod.string().optional(),
+								})
+								.optional(),
+							join: zod
+								.string()
+								.optional()
+								.describe(
+									'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+								),
+							left: zod.string().optional(),
+							peer: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							queue: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							title: zod.string().optional().describe('[TO]: Chat title.'),
+							via: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+						})
+						.optional()
+						.describe(
+							'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+						),
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables. Environment.'),
+					date: zod
+						.string()
+						.optional()
+						.describe('Timestamp when this message was sent (published).'),
+					edit: zod
+						.string()
+						.optional()
+						.describe('Timestamp when this message was last edited.'),
+					file: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							size: zod.string().optional(),
+							type: zod.string().optional(),
+							url: zod.string().optional(),
+						})
+						.optional()
+						.describe('Media File.'),
+					from: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					id: zod
+						.string()
+						.optional()
+						.describe('Unique message identifier inside this chat.'),
+					keyboard: zod
+						.object({
+							buttons: zod
+								.array(
+									zod.object({
+										row: zod
+											.array(
+												zod.object({
+													code: zod
+														.string()
+														.optional()
+														.describe('Postback/Callback data.'),
+													share: zod
+														.enum([
+															'phone',
+															'email',
+															'contact',
+															'location',
+														])
+														.default(
+															catalogGetHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault,
+														)
+														.describe(
+															'- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location',
+														),
+													text: zod
+														.string()
+														.optional()
+														.describe('Caption to display.'),
+													url: zod
+														.string()
+														.optional()
+														.describe('URL to navigate to ..'),
+												}),
+											)
+											.optional(),
+									}),
+								)
+								.optional(),
+							noInput: zod
+								.boolean()
+								.optional()
+								.describe(
+									'An option used to block input to force\nthe user to respond with one of the buttons.',
+								),
+						})
+						.optional(),
+					kind: zod.string().optional(),
+					postback: zod
+						.object({
+							code: zod
+								.string()
+								.optional()
+								.describe('Data associated with the Button.'),
+							mid: zod
+								.string()
+								.optional()
+								.describe('Message ID of the button.'),
+							text: zod
+								.string()
+								.optional()
+								.describe("Button's display caption."),
+						})
+						.optional()
+						.describe('Postback. Reply Button Click[ed].'),
+					sender: zod
+						.object({
+							context: zod
+								.record(zod.string(), zod.string())
+								.optional()
+								.describe('Context. Variables.'),
+							dc: zod
+								.string()
+								.optional()
+								.describe('[D]omain[C]omponent primary ID.'),
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+								),
+							invite: zod
+								.object({
+									date: zod.string().optional(),
+									from: zod.string().optional(),
+								})
+								.optional(),
+							join: zod
+								.string()
+								.optional()
+								.describe(
+									'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+								),
+							left: zod.string().optional(),
+							peer: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							queue: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							title: zod.string().optional().describe('[TO]: Chat title.'),
+							via: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+						})
+						.optional()
+						.describe(
+							'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+						),
+					text: zod.string().optional().describe('Message Text.'),
+				})
+				.describe('Chat Message.'),
+		)
+		.optional()
+		.describe('Dataset page of messages.'),
+	next: zod.boolean().optional(),
+	page: zod.number().optional().describe('Dataset page number.'),
+	peers: zod
+		.array(
+			zod
+				.object({
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Contact unique **ID**entifier.\nContact **type**-specific string.',
+						),
+					name: zod.string().optional().describe('Contact display **name**.'),
+					type: zod.string().optional().describe('Contact **type** provider.'),
+				})
+				.describe('Peer contact.'),
+		)
+		.optional(),
+});
 
 /**
  * @summary Query of the chat history
  */
 export const CatalogGetHistory2Params = zod.object({
-  "peer.type": zod.string().describe('Contact **type** provider.'),
-  "peer.id": zod.string().describe('Contact unique **ID**entifier.\nContact **type**-specific string.')
-})
+	'peer.type': zod.string().describe('Contact **type** provider.'),
+	'peer.id': zod
+		.string()
+		.describe(
+			'Contact unique **ID**entifier.\nContact **type**-specific string.',
+		),
+});
 
 export const CatalogGetHistory2QueryParams = zod.object({
-  "offsetId": zod.string().optional().describe('Messages ONLY starting from the specified message ID'),
-  "offsetDate": zod.string().optional().describe('Messages ONLY been sent before the specified epochtime(milli).'),
-  "limit": zod.number().optional().describe('Number of messages to return.'),
-  "q": zod.string().optional().describe('Search term: message.text'),
-  "fields": zod.array(zod.string()).optional().describe('Fields to return into result.'),
-  "chatId": zod.string().optional().describe('Unique chat dialog'),
-  "peerName": zod.string().optional().describe('Contact display **name**.'),
-  "groupStringString": zod.string().optional().describe('Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.')
-})
+	offsetId: zod
+		.string()
+		.optional()
+		.describe('Messages ONLY starting from the specified message ID'),
+	offsetDate: zod
+		.string()
+		.optional()
+		.describe('Messages ONLY been sent before the specified epochtime(milli).'),
+	limit: zod.number().optional().describe('Number of messages to return.'),
+	q: zod.string().optional().describe('Search term: message.text'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to return into result.'),
+	chatId: zod.string().optional().describe('Unique chat dialog'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	groupStringString: zod
+		.string()
+		.optional()
+		.describe(
+			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
+		),
+});
 
 export const catalogGetHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = `phone`;
 
 export const CatalogGetHistory2Response = zod.object({
-  "chats": zod.array(zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.')).optional(),
-  "messages": zod.array(zod.object({
-  "chat": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables. Environment.'),
-  "date": zod.string().optional().describe('Timestamp when this message was sent (published).'),
-  "edit": zod.string().optional().describe('Timestamp when this message was last edited.'),
-  "file": zod.object({
-  "id": zod.string().optional(),
-  "name": zod.string().optional(),
-  "size": zod.string().optional(),
-  "type": zod.string().optional(),
-  "url": zod.string().optional()
-}).optional().describe('Media File.'),
-  "from": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "id": zod.string().optional().describe('Unique message identifier inside this chat.'),
-  "keyboard": zod.object({
-  "buttons": zod.array(zod.object({
-  "row": zod.array(zod.object({
-  "code": zod.string().optional().describe('Postback/Callback data.'),
-  "share": zod.enum(['phone', 'email', 'contact', 'location']).default(catalogGetHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault).describe('- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location'),
-  "text": zod.string().optional().describe('Caption to display.'),
-  "url": zod.string().optional().describe('URL to navigate to ..')
-})).optional()
-})).optional(),
-  "noInput": zod.boolean().optional().describe('An option used to block input to force\nthe user to respond with one of the buttons.')
-}).optional(),
-  "kind": zod.string().optional(),
-  "postback": zod.object({
-  "code": zod.string().optional().describe('Data associated with the Button.'),
-  "mid": zod.string().optional().describe('Message ID of the button.'),
-  "text": zod.string().optional().describe('Button\'s display caption.')
-}).optional().describe('Postback. Reply Button Click[ed].'),
-  "sender": zod.object({
-  "context": zod.record(zod.string(), zod.string()).optional().describe('Context. Variables.'),
-  "dc": zod.string().optional().describe('[D]omain[C]omponent primary ID.'),
-  "id": zod.string().optional().describe('Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;'),
-  "invite": zod.object({
-  "date": zod.string().optional(),
-  "from": zod.string().optional()
-}).optional(),
-  "join": zod.string().optional().describe('OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.'),
-  "left": zod.string().optional(),
-  "peer": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "queue": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.'),
-  "title": zod.string().optional().describe('[TO]: Chat title.'),
-  "via": zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).optional().describe('Peer contact.')
-}).optional().describe('The Chat info.\nAlias: participant, subscriber, member, peer, leg.'),
-  "text": zod.string().optional().describe('Message Text.')
-}).describe('Chat Message.')).optional().describe('Dataset page of messages.'),
-  "next": zod.boolean().optional(),
-  "page": zod.number().optional().describe('Dataset page number.'),
-  "peers": zod.array(zod.object({
-  "id": zod.string().optional().describe('Contact unique **ID**entifier.\nContact **type**-specific string.'),
-  "name": zod.string().optional().describe('Contact display **name**.'),
-  "type": zod.string().optional().describe('Contact **type** provider.')
-}).describe('Peer contact.')).optional()
-})
-
+	chats: zod
+		.array(
+			zod
+				.object({
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables.'),
+					dc: zod
+						.string()
+						.optional()
+						.describe('[D]omain[C]omponent primary ID.'),
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+						),
+					invite: zod
+						.object({
+							date: zod.string().optional(),
+							from: zod.string().optional(),
+						})
+						.optional(),
+					join: zod
+						.string()
+						.optional()
+						.describe(
+							'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+						),
+					left: zod.string().optional(),
+					peer: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					queue: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					title: zod.string().optional().describe('[TO]: Chat title.'),
+					via: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+				})
+				.describe(
+					'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+				),
+		)
+		.optional(),
+	messages: zod
+		.array(
+			zod
+				.object({
+					chat: zod
+						.object({
+							context: zod
+								.record(zod.string(), zod.string())
+								.optional()
+								.describe('Context. Variables.'),
+							dc: zod
+								.string()
+								.optional()
+								.describe('[D]omain[C]omponent primary ID.'),
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+								),
+							invite: zod
+								.object({
+									date: zod.string().optional(),
+									from: zod.string().optional(),
+								})
+								.optional(),
+							join: zod
+								.string()
+								.optional()
+								.describe(
+									'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+								),
+							left: zod.string().optional(),
+							peer: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							queue: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							title: zod.string().optional().describe('[TO]: Chat title.'),
+							via: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+						})
+						.optional()
+						.describe(
+							'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+						),
+					context: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe('Context. Variables. Environment.'),
+					date: zod
+						.string()
+						.optional()
+						.describe('Timestamp when this message was sent (published).'),
+					edit: zod
+						.string()
+						.optional()
+						.describe('Timestamp when this message was last edited.'),
+					file: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							size: zod.string().optional(),
+							type: zod.string().optional(),
+							url: zod.string().optional(),
+						})
+						.optional()
+						.describe('Media File.'),
+					from: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact unique **ID**entifier.\nContact **type**-specific string.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe('Contact display **name**.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Contact **type** provider.'),
+						})
+						.optional()
+						.describe('Peer contact.'),
+					id: zod
+						.string()
+						.optional()
+						.describe('Unique message identifier inside this chat.'),
+					keyboard: zod
+						.object({
+							buttons: zod
+								.array(
+									zod.object({
+										row: zod
+											.array(
+												zod.object({
+													code: zod
+														.string()
+														.optional()
+														.describe('Postback/Callback data.'),
+													share: zod
+														.enum([
+															'phone',
+															'email',
+															'contact',
+															'location',
+														])
+														.default(
+															catalogGetHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault,
+														)
+														.describe(
+															'- phone: Phone Number\n - email: Email Address\n - contact: General Form\n - location: Current Location',
+														),
+													text: zod
+														.string()
+														.optional()
+														.describe('Caption to display.'),
+													url: zod
+														.string()
+														.optional()
+														.describe('URL to navigate to ..'),
+												}),
+											)
+											.optional(),
+									}),
+								)
+								.optional(),
+							noInput: zod
+								.boolean()
+								.optional()
+								.describe(
+									'An option used to block input to force\nthe user to respond with one of the buttons.',
+								),
+						})
+						.optional(),
+					kind: zod.string().optional(),
+					postback: zod
+						.object({
+							code: zod
+								.string()
+								.optional()
+								.describe('Data associated with the Button.'),
+							mid: zod
+								.string()
+								.optional()
+								.describe('Message ID of the button.'),
+							text: zod
+								.string()
+								.optional()
+								.describe("Button's display caption."),
+						})
+						.optional()
+						.describe('Postback. Reply Button Click[ed].'),
+					sender: zod
+						.object({
+							context: zod
+								.record(zod.string(), zod.string())
+								.optional()
+								.describe('Context. Variables.'),
+							dc: zod
+								.string()
+								.optional()
+								.describe('[D]omain[C]omponent primary ID.'),
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Unique identifier for this chat.\n[FROM] Member / Channel ID.\n\n// [TO] Group. Conversation ID.\n string chat_id = 2;',
+								),
+							invite: zod
+								.object({
+									date: zod.string().optional(),
+									from: zod.string().optional(),
+								})
+								.optional(),
+							join: zod
+								.string()
+								.optional()
+								.describe(
+									'OPTIONAL. A non-zero value indicates that\nthe participant has joined the chat.',
+								),
+							left: zod.string().optional(),
+							peer: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							queue: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+							title: zod.string().optional().describe('[TO]: Chat title.'),
+							via: zod
+								.object({
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Contact unique **ID**entifier.\nContact **type**-specific string.',
+										),
+									name: zod
+										.string()
+										.optional()
+										.describe('Contact display **name**.'),
+									type: zod
+										.string()
+										.optional()
+										.describe('Contact **type** provider.'),
+								})
+								.optional()
+								.describe('Peer contact.'),
+						})
+						.optional()
+						.describe(
+							'The Chat info.\nAlias: participant, subscriber, member, peer, leg.',
+						),
+					text: zod.string().optional().describe('Message Text.'),
+				})
+				.describe('Chat Message.'),
+		)
+		.optional()
+		.describe('Dataset page of messages.'),
+	next: zod.boolean().optional(),
+	page: zod.number().optional().describe('Dataset page number.'),
+	peers: zod
+		.array(
+			zod
+				.object({
+					id: zod
+						.string()
+						.optional()
+						.describe(
+							'Contact unique **ID**entifier.\nContact **type**-specific string.',
+						),
+					name: zod.string().optional().describe('Contact display **name**.'),
+					type: zod.string().optional().describe('Contact **type** provider.'),
+				})
+				.describe('Peer contact.'),
+		)
+		.optional(),
+});

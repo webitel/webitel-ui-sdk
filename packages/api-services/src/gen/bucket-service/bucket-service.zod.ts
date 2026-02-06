@@ -6,93 +6,95 @@
  */
 import * as zod from 'zod';
 
-
 /**
  * @summary List of Bucket
  */
 export const SearchBucketQueryParams = zod.object({
-  "page": zod.number().optional(),
-  "size": zod.number().optional(),
-  "q": zod.string().optional(),
-  "sort": zod.string().optional(),
-  "fields": zod.array(zod.string()).optional(),
-  "id": zod.array(zod.number()).optional()
-})
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.number()).optional(),
+});
 
 export const SearchBucketResponse = zod.object({
-  "items": zod.array(zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})).optional(),
-  "next": zod.boolean().optional()
-})
+	items: zod
+		.array(
+			zod.object({
+				description: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
 /**
  * @summary Create Bucket
  */
 export const CreateBucketBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const CreateBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary Remove Bucket
  */
 export const DeleteBucketParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const DeleteBucketQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const DeleteBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary Bucket item
  */
 export const ReadBucketParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const ReadBucketQueryParams = zod.object({
-  "domainId": zod.string().optional()
-})
+	domainId: zod.string().optional(),
+});
 
 export const ReadBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 /**
  * @summary Update Bucket
  */
 export const UpdateBucketParams = zod.object({
-  "id": zod.string()
-})
+	id: zod.string(),
+});
 
 export const UpdateBucketBody = zod.object({
-  "description": zod.string().optional(),
-  "domainId": zod.string().optional(),
-  "name": zod.string().optional()
-})
+	description: zod.string().optional(),
+	domainId: zod.string().optional(),
+	name: zod.string().optional(),
+});
 
 export const UpdateBucketResponse = zod.object({
-  "description": zod.string().optional(),
-  "id": zod.string().optional(),
-  "name": zod.string().optional()
-})
-
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+});

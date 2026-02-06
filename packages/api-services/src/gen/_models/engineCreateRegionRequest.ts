@@ -7,7 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineCreateRegionRequest {
-  description?: string;
-  name?: string;
-  timezone?: EngineLookup;
+	description?: string;
+	name?: string;
+	timezone?: EngineLookup;
 }

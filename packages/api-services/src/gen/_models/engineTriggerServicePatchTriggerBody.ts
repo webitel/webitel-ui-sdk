@@ -11,16 +11,16 @@ import type { EngineTriggerServicePatchTriggerBodyVariables } from './engineTrig
 import type { EngineTriggerType } from './engineTriggerType';
 
 export interface EngineTriggerServicePatchTriggerBody {
-  description?: string;
-  enabled?: boolean;
-  event?: EngineTriggerEventType;
-  expression?: string;
-  fields?: string[];
-  name?: string;
-  object?: EngineTriggerObjectType;
-  schema?: EngineLookup;
-  timeout?: number;
-  timezone?: EngineLookup;
-  type?: EngineTriggerType;
-  variables?: EngineTriggerServicePatchTriggerBodyVariables;
+	description?: string;
+	enabled?: boolean;
+	event?: EngineTriggerEventType;
+	expression?: string;
+	fields?: string[];
+	name?: string;
+	object?: EngineTriggerObjectType;
+	schema?: EngineLookup;
+	timeout?: number;
+	timezone?: EngineLookup;
+	type?: EngineTriggerType;
+	variables?: EngineTriggerServicePatchTriggerBodyVariables;
 }

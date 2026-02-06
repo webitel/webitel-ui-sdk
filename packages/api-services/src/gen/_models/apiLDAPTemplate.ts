@@ -12,19 +12,19 @@ import type { ApiObjectId } from './apiObjectId';
 import type { ApiUserId } from './apiUserId';
 
 export interface ApiLDAPTemplate {
-  agent?: ApiLDAPTemplateAgent;
-  baseDn?: string;
-  catalog?: ApiObjectId;
-  /** unix */
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  device?: ApiLDAPTemplateDevice;
-  enabled?: boolean;
-  id?: string;
-  name?: string;
-  role?: ApiLDAPTemplateRole;
-  search?: string;
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  user?: ApiLDAPTemplateUser;
+	agent?: ApiLDAPTemplateAgent;
+	baseDn?: string;
+	catalog?: ApiObjectId;
+	/** unix */
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	device?: ApiLDAPTemplateDevice;
+	enabled?: boolean;
+	id?: string;
+	name?: string;
+	role?: ApiLDAPTemplateRole;
+	search?: string;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	user?: ApiLDAPTemplateUser;
 }

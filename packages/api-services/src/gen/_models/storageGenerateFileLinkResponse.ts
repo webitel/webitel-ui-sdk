@@ -7,7 +7,7 @@
 import type { StorageGenerateFileLinkResponseMetadata } from './storageGenerateFileLinkResponseMetadata';
 
 export interface StorageGenerateFileLinkResponse {
-  baseUrl?: string;
-  metadata?: StorageGenerateFileLinkResponseMetadata;
-  url?: string;
+	baseUrl?: string;
+	metadata?: StorageGenerateFileLinkResponseMetadata;
+	url?: string;
 }

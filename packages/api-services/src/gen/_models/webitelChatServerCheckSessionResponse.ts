@@ -8,10 +8,10 @@ import type { WebitelChatServerAccount } from './webitelChatServerAccount';
 import type { WebitelChatServerCheckSessionResponseProperties } from './webitelChatServerCheckSessionResponseProperties';
 
 export interface WebitelChatServerCheckSessionResponse {
-  account?: WebitelChatServerAccount;
-  channelId?: string;
-  clientId?: string;
-  exists?: boolean;
-  /** optional: extra context */
-  properties?: WebitelChatServerCheckSessionResponseProperties;
+	account?: WebitelChatServerAccount;
+	channelId?: string;
+	clientId?: string;
+	exists?: boolean;
+	/** optional: extra context */
+	properties?: WebitelChatServerCheckSessionResponseProperties;
 }

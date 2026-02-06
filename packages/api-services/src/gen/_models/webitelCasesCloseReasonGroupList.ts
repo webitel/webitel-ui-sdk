@@ -7,7 +7,7 @@
 import type { WebitelCasesCloseReasonGroup } from './webitelCasesCloseReasonGroup';
 
 export interface WebitelCasesCloseReasonGroupList {
-  items?: WebitelCasesCloseReasonGroup[];
-  next?: boolean;
-  page?: number;
+	items?: WebitelCasesCloseReasonGroup[];
+	next?: boolean;
+	page?: number;
 }

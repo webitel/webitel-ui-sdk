@@ -6,12 +6,12 @@
  */
 
 export interface WebitelChatServerAccount {
-  /** e.g.: bot, user, phone, telegram, facebook, viber, skype ... */
-  channel?: string;
-  /** optional: channel specific contact string */
-  contact?: string;
-  firstName?: string;
-  id?: string;
-  lastName?: string;
-  username?: string;
+	/** e.g.: bot, user, phone, telegram, facebook, viber, skype ... */
+	channel?: string;
+	/** optional: channel specific contact string */
+	contact?: string;
+	firstName?: string;
+	id?: string;
+	lastName?: string;
+	username?: string;
 }

@@ -15,18 +15,18 @@ import type { LDAPUpdateLDAPTemplateBodyTemplateUser } from './lDAPUpdateLDAPTem
  * Template changes.
  */
 export type LDAPUpdateLDAPTemplateBodyTemplate = {
-  agent?: LDAPUpdateLDAPTemplateBodyTemplateAgent;
-  baseDn?: string;
-  catalog?: LDAPUpdateLDAPTemplateBodyTemplateCatalog;
-  /** unix */
-  createdAt?: string;
-  createdBy?: ApiUserId;
-  device?: LDAPUpdateLDAPTemplateBodyTemplateDevice;
-  enabled?: boolean;
-  name?: string;
-  role?: LDAPUpdateLDAPTemplateBodyTemplateRole;
-  search?: string;
-  updatedAt?: string;
-  updatedBy?: ApiUserId;
-  user?: LDAPUpdateLDAPTemplateBodyTemplateUser;
+	agent?: LDAPUpdateLDAPTemplateBodyTemplateAgent;
+	baseDn?: string;
+	catalog?: LDAPUpdateLDAPTemplateBodyTemplateCatalog;
+	/** unix */
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	device?: LDAPUpdateLDAPTemplateBodyTemplateDevice;
+	enabled?: boolean;
+	name?: string;
+	role?: LDAPUpdateLDAPTemplateBodyTemplateRole;
+	search?: string;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	user?: LDAPUpdateLDAPTemplateBodyTemplateUser;
 };

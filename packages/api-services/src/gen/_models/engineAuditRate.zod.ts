@@ -9,18 +9,18 @@ import type { EngineQuestion } from './engineQuestion';
 import type { EngineQuestionAnswer } from './engineQuestionAnswer';
 
 export interface EngineAuditRate {
-  answers?: EngineQuestionAnswer[];
-  comment?: string;
-  createdAt?: string;
-  createdBy?: EngineLookup;
-  criticalCount?: string;
-  form?: EngineLookup;
-  id?: string;
-  questions?: EngineQuestion[];
-  ratedUser?: EngineLookup;
-  scoreOptional?: number;
-  scoreRequired?: number;
-  selectYesCount?: string;
-  updatedAt?: string;
-  updatedBy?: EngineLookup;
+	answers?: EngineQuestionAnswer[];
+	comment?: string;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	criticalCount?: string;
+	form?: EngineLookup;
+	id?: string;
+	questions?: EngineQuestion[];
+	ratedUser?: EngineLookup;
+	scoreOptional?: number;
+	scoreRequired?: number;
+	selectYesCount?: string;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

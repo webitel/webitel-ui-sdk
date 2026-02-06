@@ -7,11 +7,11 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineQueueSkill {
-  buckets?: EngineLookup[];
-  enabled?: boolean;
-  id?: number;
-  lvl?: number;
-  maxCapacity?: number;
-  minCapacity?: number;
-  skill?: EngineLookup;
+	buckets?: EngineLookup[];
+	enabled?: boolean;
+	id?: number;
+	lvl?: number;
+	maxCapacity?: number;
+	minCapacity?: number;
+	skill?: EngineLookup;
 }

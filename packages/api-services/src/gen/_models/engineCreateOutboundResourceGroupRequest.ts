@@ -8,10 +8,10 @@ import type { EngineLookup } from './engineLookup';
 import type { EngineOutboundResourceTimeRange } from './engineOutboundResourceTimeRange';
 
 export interface EngineCreateOutboundResourceGroupRequest {
-  communication?: EngineLookup;
-  description?: string;
-  domainId?: string;
-  name?: string;
-  strategy?: string;
-  time?: EngineOutboundResourceTimeRange[];
+	communication?: EngineLookup;
+	description?: string;
+	domainId?: string;
+	name?: string;
+	strategy?: string;
+	time?: EngineOutboundResourceTimeRange[];
 }

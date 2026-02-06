@@ -6,90 +6,97 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type {
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-  EngineCreateRegionRequest,
-  EngineListRegion,
-  EngineRegion,
-  EngineRegionServicePatchRegionBody,
-  EngineRegionServiceUpdateRegionBody,
-  SearchRegionParams
+	EngineCreateRegionRequest,
+	EngineListRegion,
+	EngineRegion,
+	EngineRegionServicePatchRegionBody,
+	EngineRegionServiceUpdateRegionBody,
+	SearchRegionParams,
 } from '.././_models';
 
+// --- header start
+//
 
+export const // --- title start
+	getRegionService =
+		// --- title end
+		(axiosInstance: AxiosInstance = axios) => {
+			// --- header end
+			const searchRegion = <TData = AxiosResponse<EngineListRegion>>(
+				params?: SearchRegionParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/regions`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			const createRegion = <TData = AxiosResponse<EngineRegion>>(
+				engineCreateRegionRequest: EngineCreateRegionRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(
+					`/regions`,
+					engineCreateRegionRequest,
+					options,
+				);
+			};
+			const deleteRegion = <TData = AxiosResponse<EngineRegion>>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.delete(`/regions/${id}`, options);
+			};
+			const readRegion = <TData = AxiosResponse<EngineRegion>>(
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/regions/${id}`, options);
+			};
+			const patchRegion = <TData = AxiosResponse<EngineRegion>>(
+				id: string,
+				engineRegionServicePatchRegionBody: EngineRegionServicePatchRegionBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.patch(
+					`/regions/${id}`,
+					engineRegionServicePatchRegionBody,
+					options,
+				);
+			};
+			const updateRegion = <TData = AxiosResponse<EngineRegion>>(
+				id: string,
+				engineRegionServiceUpdateRegionBody: EngineRegionServiceUpdateRegionBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.put(
+					`/regions/${id}`,
+					engineRegionServiceUpdateRegionBody,
+					options,
+				);
+			};
 
-            // --- header start
-            // 
+			// --- footer start
+			return {
+				searchRegion,
+				createRegion,
+				deleteRegion,
+				readRegion,
+				patchRegion,
+				updateRegion,
+			};
+		};
+export type SearchRegionResult = AxiosResponse<EngineListRegion>;
+export type CreateRegionResult = AxiosResponse<EngineRegion>;
+export type DeleteRegionResult = AxiosResponse<EngineRegion>;
+export type ReadRegionResult = AxiosResponse<EngineRegion>;
+export type PatchRegionResult = AxiosResponse<EngineRegion>;
+export type UpdateRegionResult = AxiosResponse<EngineRegion>;
 
-  export const 
-            // --- title start
-            getRegionService
-            // --- title end
-           = (axiosInstance: AxiosInstance = axios) => {
-
-            // --- header end
-          const searchRegion = <TData = AxiosResponse<EngineListRegion>>(
-    params?: SearchRegionParams, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/regions`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-const createRegion = <TData = AxiosResponse<EngineRegion>>(
-    engineCreateRegionRequest: EngineCreateRegionRequest, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.post(
-      `/regions`,
-      engineCreateRegionRequest,options
-    );
-  }
-const deleteRegion = <TData = AxiosResponse<EngineRegion>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.delete(
-      `/regions/${id}`,options
-    );
-  }
-const readRegion = <TData = AxiosResponse<EngineRegion>>(
-    id: string, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.get(
-      `/regions/${id}`,options
-    );
-  }
-const patchRegion = <TData = AxiosResponse<EngineRegion>>(
-    id: string,
-    engineRegionServicePatchRegionBody: EngineRegionServicePatchRegionBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.patch(
-      `/regions/${id}`,
-      engineRegionServicePatchRegionBody,options
-    );
-  }
-const updateRegion = <TData = AxiosResponse<EngineRegion>>(
-    id: string,
-    engineRegionServiceUpdateRegionBody: EngineRegionServiceUpdateRegionBody, options?: AxiosRequestConfig
- ): Promise<TData> => {
-    return axiosInstance.put(
-      `/regions/${id}`,
-      engineRegionServiceUpdateRegionBody,options
-    );
-  }
-
-            // --- footer start
-            return {searchRegion,createRegion,deleteRegion,readRegion,patchRegion,updateRegion}};
-export type SearchRegionResult = AxiosResponse<EngineListRegion>
-export type CreateRegionResult = AxiosResponse<EngineRegion>
-export type DeleteRegionResult = AxiosResponse<EngineRegion>
-export type ReadRegionResult = AxiosResponse<EngineRegion>
-export type PatchRegionResult = AxiosResponse<EngineRegion>
-export type UpdateRegionResult = AxiosResponse<EngineRegion>
-
-            // --- footer end
-          
+// --- footer end
