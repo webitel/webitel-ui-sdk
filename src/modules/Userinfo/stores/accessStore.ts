@@ -3,11 +3,12 @@ import { ref } from 'vue';
 import type { NavigationGuard } from 'vue-router';
 
 import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
-import type { SpecialGlobalAction } from '../enums';
+import type { SpecialGlobalAction, WebitelLicense } from '../enums';
 import {
 	getWtAppByUiSection,
 	makeAppVisibilityMap,
 	makeGlobalAccessMap,
+	makeLicenseAccessMap,
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
 	shouldUseGlobalSpecialActionAccessAsChecksSource,
@@ -21,8 +22,9 @@ import type {
 	ScopeAccessMap,
 	SectionVisibilityMap,
 	UiSection,
+	WebitelLicenseInfo,
 	UserAccessStore,
-} from '../types/UserAccess.d.ts';
+} from '../types/UserAccess.d';
 import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 
 export const createUserAccessStore = ({
@@ -36,6 +38,10 @@ export const createUserAccessStore = ({
 		const appVisibilityAccess = ref<AppVisibilityMap>(new Map());
 
 		const sectionVisibilityAccess = ref<SectionVisibilityMap>(new Map());
+
+		const licenseAccess = ref<Map<WebitelLicense, WebitelLicenseInfo[]>>(
+			new Map(),
+		);
 
 		// Bypass mode for when no access data exists (new projects)
 		const bypassMode = ref<boolean>(false);
@@ -135,10 +141,15 @@ export const createUserAccessStore = ({
 			return !!globalAccess.value.get(id);
 		};
 
+		const hasLicense = (license: WebitelLicense): boolean => {
+			return !!globalAccess.value.get(license);
+		};
+
 		const initialize = ({
 			permissions: rawGlobalAccess,
 			scope: rawScopeAccess,
 			access: rawVisibilityAccess,
+			license: rawLicenseAccess,
 		}: CreateUserAccessStoreRawAccess) => {
 			// Enable bypass mode if access data is null/undefined
 			bypassMode.value = rawVisibilityAccess === null;
@@ -148,6 +159,7 @@ export const createUserAccessStore = ({
 			appVisibilityAccess.value = makeAppVisibilityMap(rawVisibilityAccess);
 			sectionVisibilityAccess.value =
 				makeSectionVisibilityMap(rawVisibilityAccess);
+			licenseAccess.value = makeLicenseAccessMap(rawLicenseAccess);
 		};
 
 		return {
@@ -163,6 +175,7 @@ export const createUserAccessStore = ({
 			hasGlobalCrudActionAccess,
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
+			hasLicense,
 
 			/**
 			 * @internal
@@ -176,6 +189,8 @@ export const createUserAccessStore = ({
 			appVisibilityAccess,
 			// @ts-expect-error
 			sectionVisibilityAccess,
+			// @ts-expect-error
+			licenseAccess,
 		};
 	});
 };

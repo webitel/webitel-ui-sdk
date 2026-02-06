@@ -23,7 +23,9 @@ import type {
 	SectionVisibilityMap,
 	UiSection,
 	VisibilityAccess,
-} from '../types/UserAccess.d.ts';
+	WebitelLicenseInfo,
+	LicenseAccessMap,
+} from '../types/UserAccess.d';
 
 /**
  * @internal
@@ -104,6 +106,24 @@ export const makeSectionVisibilityMap = (
 				)._enabled,
 			);
 		});
+	});
+
+	return map;
+};
+
+export const makeLicenseAccessMap = (
+	rawLicense: WebitelLicenseInfo[],
+): LicenseAccessMap => {
+	const map = new Map();
+
+	rawLicense.forEach((license) => {
+		if (map.has(license.prod)) {
+			map.get(license.prod)?.push(license);
+		} else {
+			map.set(license.prod, [
+				license,
+			]);
+		}
 	});
 
 	return map;

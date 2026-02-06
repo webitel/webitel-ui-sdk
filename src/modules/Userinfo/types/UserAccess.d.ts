@@ -13,6 +13,7 @@ import type {
 	CrudGlobalAction,
 	ScopeClass,
 	SpecialGlobalAction,
+	WebitelLicense,
 } from '../enums';
 
 /**
@@ -64,6 +65,7 @@ export interface CreateUserAccessStoreRawAccess {
 	permissions: GlobalAccessApiResponseItem[];
 	scope: ScopeAccessApiResponseItem[];
 	access: VisibilityAccess;
+	license: WebitelLicenseInfo[];
 }
 
 /**
@@ -142,4 +144,20 @@ export interface UserAccessStore {
 	 * for pinia devtools debug
 	 */
 	sectionVisibilityAccess: SectionVisibilityMap;
+
+	/**
+	 * @internal
+	 * for pinia devtools debug
+	 */
+	licenseAccess: LicenseAccessMap;
 }
+
+export type WebitelLicenseInfo = {
+	prod: WebitelLicense;
+	scope: ScopeClass[];
+	id: string;
+	expiresAt: string; // timestamp
+	issuedAt: string; // timestamp
+};
+
+export type LicenseAccessMap = Map<WebitelLicense, WebitelLicenseInfo[]>;

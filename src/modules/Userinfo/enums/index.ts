@@ -1,7 +1,6 @@
-import {
+export {
 	CrudGlobalAction,
 	SpecialGlobalAction,
 } from './GlobalActions/GlobalActions';
-import { ScopeClass } from './ScopeClass/ScopeClass';
-
-export { CrudGlobalAction, ScopeClass, SpecialGlobalAction };
+export { ScopeClass } from './ScopeClass/ScopeClass';
+export { WebitelLicense } from './WebitelLicense/WebitelLicense';

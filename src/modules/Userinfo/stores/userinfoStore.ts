@@ -22,6 +22,7 @@ export const createUserinfoStore = () => {
 			hasCreateAccess,
 			hasUpdateAccess,
 			hasDeleteAccess,
+			hasLicense,
 			initialize: initializeAccessStore,
 			routeAccessGuard,
 			hasGlobalCrudActionAccess,
@@ -50,12 +51,12 @@ export const createUserinfoStore = () => {
 				'preferredUsername',
 				'scope',
 				'roles',
-				'license',
 			]);
 
 			initializeAccessStore({
 				scope: session.scope,
 				permissions: session.permissions,
+				license: session.license,
 				access,
 			});
 
@@ -79,6 +80,7 @@ export const createUserinfoStore = () => {
 			hasCreateAccess,
 			hasUpdateAccess,
 			hasDeleteAccess,
+			hasLicense,
 
 			hasSectionVisibility,
 			routeAccessGuard,
