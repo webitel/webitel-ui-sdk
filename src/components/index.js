@@ -42,7 +42,6 @@ import WtSelect from './wt-select/wt-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
-
 // Async components - heavy or rarely used components
 const WtActionBar = defineAsyncComponent(
 	() => import('./wt-action-bar/wt-action-bar.vue'),
@@ -71,6 +70,9 @@ const WtErrorPage = defineAsyncComponent(
 );
 const WtExpansionPanel = defineAsyncComponent(
 	() => import('./wt-expansion-panel/wt-expansion-panel.vue'),
+);
+const WtExpansionCard = defineAsyncComponent(
+	() => import('./wt-expansion-card/wt-expansion-card.vue'),
 );
 const WtFiltersPanelWrapper = defineAsyncComponent(
 	() => import('./wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue'),
@@ -230,6 +232,7 @@ const Components = {
 	WtGalleria,
 	WtVidstackPlayer,
 	WtChatEmoji,
+	WtExpansionCard,
 };
 
 export {
@@ -311,6 +314,7 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
+	WtExpansionCard,
 };
 
 export default Components;

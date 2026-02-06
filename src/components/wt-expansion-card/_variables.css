@@ -1,0 +1,6 @@
+:root {
+	--wt-expansion-card-header-background-color: var(--content-wrapper-color);
+	--wt-expansion-card-header-title-color: var(--text-main-color);
+	--wt-expansion-card-content-background-color: var(--content-wrapper-color);
+	--wt-expansion-card-content-text-color: var(--text-main-color);
+}
