@@ -10,21 +10,21 @@ import {
 	mapUiSectionToWtObject,
 	mapWtObjectToUiSection,
 	SupervisorSectionsValues,
-	wtObjectsWithGlobalSpecialActionAccessAsChecksSource,
 	wtObjectsWithGlobalCrudActionAccessAsChecksSource,
+	wtObjectsWithGlobalSpecialActionAccessAsChecksSource,
 } from '../mappings/mappings';
 import type {
 	AppVisibilityMap,
 	GlobalAccessApiResponseItem,
 	GlobalAction,
 	GlobalActionAccessMap,
+	LicenseAccessMap,
 	ScopeAccessApiResponseItem,
 	ScopeAccessMap,
 	SectionVisibilityMap,
 	UiSection,
 	VisibilityAccess,
 	WebitelLicenseInfo,
-	LicenseAccessMap,
 } from '../types/UserAccess.d';
 
 /**

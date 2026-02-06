@@ -1,10 +1,9 @@
 import { computed, Ref } from 'vue';
 import { useRoute } from 'vue-router';
-
-import { _wtUiLog } from '../../../scripts/logger';
-import type { UserAccessStore } from '../types/UserAccess.d.ts';
 import { CrudAction, type WtObject } from '../../../enums';
+import { _wtUiLog } from '../../../scripts/logger';
 import { createUserAccessStore } from '../stores/accessStore';
+import type { UserAccessStore } from '../types/UserAccess.d.ts';
 
 export type UseUserAccessControlComposableOptions =
 	| WtObject

@@ -4,6 +4,7 @@ import type { NavigationGuard } from 'vue-router';
 
 import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
 import type { SpecialGlobalAction, WebitelLicense } from '../enums';
+import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 import {
 	getWtAppByUiSection,
 	makeAppVisibilityMap,
@@ -11,8 +12,8 @@ import {
 	makeLicenseAccessMap,
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
-	shouldUseGlobalSpecialActionAccessAsChecksSource,
 	shouldUseGlobalCrudActionAccessAsChecksSource,
+	shouldUseGlobalSpecialActionAccessAsChecksSource,
 } from '../scripts/utils';
 import type {
 	AppVisibilityMap,
@@ -22,10 +23,9 @@ import type {
 	ScopeAccessMap,
 	SectionVisibilityMap,
 	UiSection,
-	WebitelLicenseInfo,
 	UserAccessStore,
+	WebitelLicenseInfo,
 } from '../types/UserAccess.d';
-import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 
 export const createUserAccessStore = ({
 	namespace = 'userinfo',

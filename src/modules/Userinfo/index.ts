@@ -1,11 +1,10 @@
+export { default as ApplicationsAccess } from './classes/ApplicationsAccess';
 export { createUserAccessControlComposable } from './composables/createUserAccessControl';
-export { createUserinfoStore } from './stores/userinfoStore';
 
 export {
-	SpecialGlobalAction,
 	CrudGlobalAction,
 	ScopeClass,
+	SpecialGlobalAction,
 	WebitelLicense,
 } from './enums';
-
-export { default as ApplicationsAccess } from './classes/ApplicationsAccess';
+export { createUserinfoStore } from './stores/userinfoStore';
