@@ -166,6 +166,11 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player__player {
+  gap: var(--popup-sections-gap);
+  z-index: 1;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  background: var(--wt-popup-background-color);
   position: relative;
   display: block;
   width: 100%;
@@ -226,6 +231,16 @@ const onCanPlay = (ev: Event) => {
 .wt-vidstack-player--md:not(.wt-vidstack-player--static) {
   overflow: visible;
   border-radius: 0;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--popup-wrapper-z-index);
+  background: var(--wt-popup-shadow-color);
 }
 
 .wt-vidstack-player--lg {
