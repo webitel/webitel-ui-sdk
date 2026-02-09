@@ -15,6 +15,7 @@ import type {
 	SpecialGlobalAction,
 	WebitelLicense,
 } from '../enums';
+import type { ApplicationsAccessSchema } from '../classes/ApplicationsAccess';
 
 /**
  * @description
@@ -25,6 +26,8 @@ export type UiSection =
 	| AuditorSections
 	| SupervisorSections
 	| CrmSections;
+
+export type FullUiSectionName = `${WtApplication}/${UiSection}`;
 
 /**
  * @internal
@@ -54,7 +57,7 @@ export interface ScopeAccessApiResponseItem {
  * @description
  * Represents admin->permissions->roles->access.
  * */
-export type VisibilityAccess = unknown;
+export type VisibilityAccess = ApplicationsAccessSchema;
 
 /**
  * @internal
@@ -103,7 +106,7 @@ export type AppVisibilityMap = Map<WtApplication, boolean>;
  * @description
  * Map is used for quick access to user permissions
  * */
-export type SectionVisibilityMap = Map<UiSection, boolean>;
+export type SectionVisibilityMap = Map<FullUiSectionName, boolean>;
 
 export interface UserAccessStore {
 	initialize: (CreateUserAccessStoreRawAccess) => void;
@@ -117,9 +120,14 @@ export interface UserAccessStore {
 
 	hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
 	hasGlobalCrudActionAccess: (action: CrudAction) => boolean;
+	hasLicense: (license: WebitelLicense) => boolean;
 
 	hasApplicationVisibility: (app: WtApplication) => boolean;
-	hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
+	hasSectionVisibility: ({
+		section: UiSection,
+		object: WtObject,
+		app: WtApplication,
+	}) => boolean;
 
 	/**
 	 * @internal
