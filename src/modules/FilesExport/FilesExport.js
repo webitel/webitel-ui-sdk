@@ -55,14 +55,15 @@ export default class FilesExport {
 		};
 	}
 
-	async _addFilesToZip(items, zip) {
+	async _addFilesToZip(
+		items,
+		zip,
+		fileType = EngineCallFileType.FileTypeAudio,
+	) {
 		for (const item of items) {
 			if (item.files) {
-				if (item.files?.[EngineCallFileType.FileTypeAudio]) {
-					await this._addFilesToZip(
-						item.files[EngineCallFileType.FileTypeAudio],
-						zip,
-					);
+				if (item.files?.[fileType]) {
+					await this._addFilesToZip(item.files[fileType], zip, fileType);
 				} else continue;
 			} else {
 				try {
@@ -108,7 +109,7 @@ export default class FilesExport {
 		}
 	}
 
-	async _fetchAndZip(zip, requestParams) {
+	async _fetchAndZip(zip, requestParams, fileType) {
 		const params = {
 			from: 0,
 			size: 5000,
@@ -125,20 +126,23 @@ export default class FilesExport {
 				...params,
 				page,
 			});
-			await this._addFilesToZip(items, zip);
+			await this._addFilesToZip(items, zip, fileType);
 
 			isNext = next;
 			page += 1;
 		} while (isNext);
 	}
 
-	async exportFiles(files, { reqParams }) {
+	async exportFiles(
+		files,
+		{ reqParams, fileType = EngineCallFileType.FileTypeAudio },
+	) {
 		try {
 			this.isLoading = true;
 			const zip = new JSZip();
-			if (files?.length) await this._addFilesToZip(files, zip);
+			if (files?.length) await this._addFilesToZip(files, zip, fileType);
 			else {
-				await this._fetchAndZip(zip, reqParams);
+				await this._fetchAndZip(zip, reqParams, fileType);
 			}
 			const file = await this._generateZip(zip);
 			await this._saveZip(file);
