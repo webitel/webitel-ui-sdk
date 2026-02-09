@@ -6,4 +6,4 @@ Admin Sections enum is used for admin nav sections identifying across projects.
 import { AdminSections } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/WebitelApplications/AdminSections.enum.js
+<<< ../../../../../../src/enums/WebitelApplications/AdminSections.ts
