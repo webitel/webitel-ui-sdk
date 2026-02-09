@@ -105,6 +105,12 @@ export const createUserAccessStore = ({
 		};
 
 		const routeAccessGuard: NavigationGuard = (to) => {
+			let wtApplication = to.matched
+				.toReversed()
+				.find(({ meta }) => meta.WtApplication)?.meta?.WtApplication as
+				| WtApplication
+				| ((RouteLocationNormalized) => WtApplication);
+
 			/* find last because "matched" has top=>bottom routes order */
 			let uiSection = to.matched.toReversed().find(({ meta }) => meta.UiSection)
 				?.meta?.UiSection as
@@ -115,6 +121,11 @@ export const createUserAccessStore = ({
 				?.meta?.WtObject as WtObject | ((RouteLocationNormalized) => WtObject);
 
 			// if, then compute fn
+			if (typeof wtApplication === 'function') {
+				wtApplication = wtApplication(to);
+			}
+
+			// if, then compute fn
 			if (typeof uiSection === 'function') {
 				uiSection = uiSection(to);
 			}
@@ -123,8 +134,13 @@ export const createUserAccessStore = ({
 				wtObject = wtObject(to);
 			}
 
+			if (wtApplication && !hasApplicationVisibility(wtApplication)) {
+				return {
+					path: '/access-denied',
+				};
+			}
+
 			if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
-				// return false;
 				return {
 					path: '/access-denied',
 				};
