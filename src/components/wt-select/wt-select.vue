@@ -341,6 +341,10 @@ export default {
   display: none;
 }
 
+.wt-select--multiple :deep(.multiselect--active .multiselect__tags-wrap) {
+  display: none;
+}
+
 /* right padding setup */
 
 /* default case */

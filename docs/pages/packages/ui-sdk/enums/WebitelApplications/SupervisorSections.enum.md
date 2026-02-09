@@ -6,4 +6,4 @@ Supervisor Sections enum is used for Supervisor nav sections identifying across 
 import { SupervisorSections } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/WebitelApplications/SupervisorSections.enum.js
+<<< ../../../../../../src/enums/WebitelApplications/SupervisorSections.ts

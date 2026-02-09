@@ -6,4 +6,4 @@ Auditor Sections enum is used for Auditor nav sections identifying across projec
 import { AuditorSections } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/WebitelApplications/AuditorSections.enum.js
+<<< ../../../../../../src/enums/WebitelApplications/AuditorSections.ts
