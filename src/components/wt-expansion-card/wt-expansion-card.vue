@@ -39,21 +39,33 @@ import { toRef } from 'vue';
 import { useExpansion } from '../../composables';
 
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
+import { ComponentSize } from '../../enums';
 
 const props = withDefaults(
 	defineProps<{
-		size?: 'sm' | 'md';
+		/**
+		 * Size of the expansion panel
+		 * @type {string}
+		 * @default 'md'
+		 * @options ['sm', 'md']
+		 */
+		size?: ComponentSize;
+		/**
+		 * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
+		 * @type {boolean}
+		 * @default false
+		 */
 		collapsed?: boolean;
 	}>(),
 	{
-		size: 'md',
+		size: ComponentSize.MD,
 		collapsed: false,
 	},
 );
 
 const emit = defineEmits<{
-	(e: 'opened'): void;
-	(e: 'closed'): void;
+	opened: [];
+	closed: [];
 }>();
 
 const { opened, open, close, toggle } = useExpansion(

@@ -34,6 +34,7 @@ import { toRef } from 'vue';
 import { useExpansion } from '../../composables/useExpansion/useExpansion';
 
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
+import { ComponentSize } from '../../enums';
 
 /**
  * @emits {void} opened - Emitted when the expansion panel is opened
@@ -47,22 +48,22 @@ import WtExpandTransition from '../transitions/wt-expand-transition.vue';
  */
 const props = withDefaults(
 	defineProps<{
-		size?: 'sm' | 'md';
+		size?: ComponentSize;
 		collapsed?: boolean;
 	}>(),
 	{
-		size: 'md',
+		size: ComponentSize.MD,
 		collapsed: false,
 	},
 );
 
 const emit = defineEmits<{
-	(e: 'opened'): void;
-	(e: 'closed'): void;
+	opened: [];
+	closed: [];
 }>();
 
 const { opened, open, close, toggle } = useExpansion(
-	toRef(props, 'collapsed', false),
+	toRef(props, 'collapsed'),
 	emit,
 );
 </script>
