@@ -24,7 +24,6 @@ export default {
 			app.provide(globalKey, globals[globalKey]);
 		});
 		app.provide('$eventBus', eventBus);
-		if (router) app.use(router);
 		initPrimevue(app);
 	},
 	generateInstance,
