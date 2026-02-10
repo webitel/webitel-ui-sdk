@@ -15,7 +15,9 @@ import TimeSlider from './components/sliders/time-slider.vue';
 import TimeGroup from './components/time-group.vue';
 </script>
 
-<style scoped >.media-control-panel {
-width: 100%;
+<style scoped>
+.media-control-panel {
+  width: 100%;
   max-width: 100%;
-}</style>
+}
+</style>
