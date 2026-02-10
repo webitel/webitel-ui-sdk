@@ -1,6 +1,6 @@
 :root {
 	--wt-app-header-min-height: 40px;
-	--wt-app-header-padding: var(--spacing-sm);
+	--wt-app-header-padding: var(--spacing-xs) var(--spacing-sm);
 	--wt-app-header-background: var(--dp-9-surface-color);
 
 	--wt-app-header-content-gap: var(--spacing-sm);
