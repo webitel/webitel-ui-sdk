@@ -15,7 +15,7 @@
       </slot>
     </wt-label>
     <p-input-group>
-      <p-input-group-addon 
+      <p-input-group-addon
         v-if="$slots.prefix"
         class="wt-input-number__addon typo-body-1"
       >
@@ -37,6 +37,7 @@
         :show-buttons="showButtons"
         input-class="wt-input-number__input typo-body-1"
         v-bind="$attrs"
+        @keydown.enter="emit('enter', $event);"
         @keyup="handleKeyup"
         @input="emit('update:modelValue', $event.value)"
       >
@@ -55,7 +56,7 @@
           />
       </template>
       </p-input-number>
-      <p-input-group-addon 
+      <p-input-group-addon
         v-if="$slots.suffix"
         class="wt-input-number__addon typo-body-1"
       >
@@ -133,6 +134,7 @@ const model = defineModel<number | null>({
 
 const emit = defineEmits([
 	'update:modelValue',
+  'enter'
 ]);
 
 const inputNumber = useTemplateRef('inputNumber');

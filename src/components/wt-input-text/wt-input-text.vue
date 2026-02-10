@@ -15,8 +15,8 @@
       </slot>
     </wt-label>
     <p-input-group>
-      <p-input-group-addon 
-        v-if="$slots.prefix" 
+      <p-input-group-addon
+        v-if="$slots.prefix"
         class="wt-input-text__addon typo-body-1"
       >
         <slot name="prefix" />
@@ -32,9 +32,10 @@
         :inputmode="type"
         v-bind="$attrs"
         @update:model-value="inputHandler"
+        @keydown.enter="emit('enter', $event);"
         @keyup="handleKeyup"
       />
-      <p-input-group-addon 
+      <p-input-group-addon
         v-if="$slots.suffix"
         class="wt-input-text__addon typo-body-1"
       >
@@ -99,6 +100,7 @@ const inputId = `input-text-${Math.random().toString(36).slice(2, 11)}`;
 
 const emit = defineEmits([
 	'update:modelValue',
+  'enter'
 ]);
 
 const slots = useSlots();
