@@ -401,6 +401,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера выключена',
+			theCallIsOnHold: 'На удержании',
 		},
 	},
 	validation: {

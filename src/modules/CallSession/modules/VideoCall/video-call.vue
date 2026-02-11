@@ -17,7 +17,27 @@
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
           <div
-            v-if="showReceiverOverlay"
+            v-if="showHoldOverlay"
+            :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
+            class="video-call-receiver video-call-receiver--muted video-call-receiver--on-hold"
+          >
+            <wt-icon
+              :size="receiverVideoMutedIconSizes[innerSize]"
+              icon="pause--filled"
+              color="warning"
+            />
+
+            <span class="video-call-receiver-text">
+              {{ holdDurationTime }}
+            </span>
+
+            <span class="video-call-receiver-text">
+              {{ t(`WtApplication.${WtApplication.Meet}.theCallIsOnHold`) }}
+            </span>
+          </div>
+
+          <div
+            v-else-if="showReceiverOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
             class="video-call-receiver video-call-receiver--muted"
           >
@@ -27,7 +47,7 @@
             />
 
             <span class="video-call-receiver-text">{{
-                t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`)
+                t(`WtApplication.${WtApplication.Meet}.theCameraIsTurnedOff`)
               }}</span>
           </div>
         </div>
@@ -56,7 +76,7 @@
           </div>
         </template>
 
-        <template v-else-if="props['sender:stream'] && props['receiver:stream']">
+        <template v-else-if="!isOnHold && props['sender:stream'] && props['receiver:stream']">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
             :stream="props['sender:stream']"
@@ -110,7 +130,7 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtIcon } from '../../../../components';
@@ -122,6 +142,7 @@ import {
 import { ComponentSize, WtApplication } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
+import convertDuration from '../../../../scripts/convertDuration';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
@@ -137,6 +158,8 @@ const props = withDefaults(
 		'receiver:stream'?: MediaStream | null;
 		'receiver:mic:enabled'?: boolean;
 		'receiver:video:enabled'?: boolean;
+
+		'call:onHold'?: boolean;
 
 		'screenshot:status'?: ScreenshotStatus | null;
 		'screenshot:loading'?: boolean;
@@ -223,6 +246,25 @@ const senderStream = computed(() => props['sender:stream']);
 
 const receiverVideoEnabled = computed(() => props['receiver:video:enabled']);
 const senderVideoEnabled = computed(() => props['sender:video:enabled']);
+const isOnHold = computed(() => !!props['call:onHold']);
+
+const holdSecondsElapsed = ref(0);
+const holdTimerId = ref<number | null>(null);
+
+const startHoldTimer = () => {
+	holdSecondsElapsed.value = 0;
+	stopHoldTimer();
+	holdTimerId.value = window.setInterval(() => {
+		holdSecondsElapsed.value++;
+	}, 1000);
+};
+
+const stopHoldTimer = () => {
+	if (holdTimerId.value !== null) {
+		clearInterval(holdTimerId.value);
+		holdTimerId.value = null;
+	}
+};
 
 const bothStreamsAvailable = computed(
 	() => !!receiverStream.value && !!senderStream.value,
@@ -236,7 +278,17 @@ const showReceiverOverlay = computed(
 		(receiverStream.value && !receiverVideoEnabled.value),
 );
 
+const showHoldOverlay = computed(() => isOnHold.value);
+
+const holdDurationTime = computed(() =>
+	convertDuration(holdSecondsElapsed.value),
+);
+
 const mainStream = computed(() => {
+	if (isOnHold.value) {
+		return null;
+	}
+
 	if (
 		(bothStreamsAvailable.value && !receiverVideoEnabled.value) ||
 		(!receiverStream.value && senderStream.value && !senderVideoEnabled.value)
@@ -253,10 +305,31 @@ const mainStream = computed(() => {
 
 const showSenderMutedScreen = computed(
 	() =>
+		!isOnHold.value &&
 		bothStreamsAvailable.value &&
 		!senderVideoEnabled.value &&
 		!!receiverStream.value,
 );
+
+watch(
+	isOnHold,
+	(value) => {
+		if (value) {
+			startHoldTimer();
+			return;
+		}
+
+		stopHoldTimer();
+		holdSecondsElapsed.value = 0;
+	},
+	{
+		immediate: true,
+	},
+);
+
+onBeforeUnmount(() => {
+	stopHoldTimer();
+});
 
 const receiverVideoMutedIconSizes = {
 	[ComponentSize.SM]: ComponentSize.MD,
@@ -419,7 +492,7 @@ const senderVideoMutedIconSizes = {
   border-radius: var(--p-player-cam-preview-md-border-radius);
 }
 
-.video-call-sender--md {
+.video-call-sender.video-call-sender--md {
   position: relative;
   right: 0;
   bottom: 0;
