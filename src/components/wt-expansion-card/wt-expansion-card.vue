@@ -68,10 +68,7 @@ const emit = defineEmits<{
 	closed: [];
 }>();
 
-const { opened, open, toggle } = useExpansion(
-	toRef(props, 'collapsed', false),
-	emit,
-);
+const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
 </script>
 
 <style scoped>
