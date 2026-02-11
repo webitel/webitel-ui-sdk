@@ -253,6 +253,13 @@ width: 100%;
   object-fit: contain;
 }
 
+.wt-galleria__thumbnails {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
 .wt-galleria__thumbnail {
 object-fit: cover;
 }
