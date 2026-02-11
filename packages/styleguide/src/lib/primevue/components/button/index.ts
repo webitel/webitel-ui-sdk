@@ -2,8 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const ButtonScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default ButtonScheme
+export default ButtonScheme;

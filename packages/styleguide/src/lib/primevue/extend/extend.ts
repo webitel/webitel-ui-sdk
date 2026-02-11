@@ -1,7 +1,7 @@
 import { spacingsExtend } from './spacings/spacings.js';
 
 const extend = {
-  spacing: spacingsExtend,
+	spacing: spacingsExtend,
 };
 
 export default extend;

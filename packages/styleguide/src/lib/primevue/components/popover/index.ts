@@ -2,9 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const PopoverScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default PopoverScheme
-
+export default PopoverScheme;

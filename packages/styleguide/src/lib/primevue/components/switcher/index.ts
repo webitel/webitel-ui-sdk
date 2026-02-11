@@ -2,8 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const SwitcherScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default SwitcherScheme
+export default SwitcherScheme;

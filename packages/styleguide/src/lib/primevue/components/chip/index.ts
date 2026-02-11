@@ -2,8 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const ChipScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default ChipScheme
+export default ChipScheme;

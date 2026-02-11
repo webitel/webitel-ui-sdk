@@ -2,8 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const CheckboxScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default CheckboxScheme
+export default CheckboxScheme;

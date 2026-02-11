@@ -2,9 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const ToolbarScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default ToolbarScheme
-
+export default ToolbarScheme;

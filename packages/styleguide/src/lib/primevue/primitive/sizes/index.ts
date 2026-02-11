@@ -1,5 +1,5 @@
-import borderRadius from "./border-radius";
+import borderRadius from './border-radius';
 
 export default {
-    borderRadius,
-}
+	borderRadius,
+};

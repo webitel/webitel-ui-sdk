@@ -2,8 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const GalleriaScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default GalleriaScheme
+export default GalleriaScheme;

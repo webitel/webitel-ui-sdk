@@ -2,9 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const AvatarScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default AvatarScheme
-
+export default AvatarScheme;

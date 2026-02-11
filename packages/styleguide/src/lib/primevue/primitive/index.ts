@@ -1,7 +1,7 @@
 import sizes from './sizes';
 
 const primitive = {
-    ...sizes,
+	...sizes,
 };
 
 export default primitive;
