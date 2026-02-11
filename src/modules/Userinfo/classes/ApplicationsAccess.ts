@@ -1,6 +1,6 @@
-import { AdjunctTypesAPI as CustomTypesAPI } from '@webitel/api-services/api';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
+import type { PartialDeep } from 'type-fest';
 
 import {
 	AdminSections,
@@ -10,7 +10,32 @@ import {
 	WtApplication,
 } from '../../../enums';
 
-const applicationsAccess = (value = true) => ({
+type BaseAccessSchema = {
+	_enabled: boolean;
+	_locale: string;
+};
+
+export type ApplicationsAccessSchema = {
+	[WtApplication.Agent]: BaseAccessSchema;
+} & {
+	[WtApplication.History]: BaseAccessSchema;
+} & {
+	[WtApplication.Analytics]: BaseAccessSchema;
+} & {
+	[WtApplication.Supervisor]: BaseAccessSchema &
+		Partial<Record<SupervisorSections, BaseAccessSchema>>;
+} & {
+	[WtApplication.Admin]: BaseAccessSchema &
+		Partial<Record<AdminSections, BaseAccessSchema>>;
+} & {
+	[WtApplication.Audit]: BaseAccessSchema &
+		Partial<Record<AuditorSections, BaseAccessSchema>>;
+} & {
+	[WtApplication.Crm]: BaseAccessSchema &
+		Partial<Record<CrmSections, BaseAccessSchema>>;
+};
+
+const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 	[WtApplication.Agent]: {
 		_enabled: value,
 		_locale: `WtApplication.${WtApplication.Agent}.name`,
@@ -256,9 +281,17 @@ const applicationsAccess = (value = true) => ({
 /**
  */
 export default class ApplicationsAccess {
+	access: ApplicationsAccessSchema;
+
 	// value param could be passed to set same value for all options
 	constructor(
-		{ access, value } = {
+		{
+			access,
+			value,
+		}: {
+			access?: PartialDeep<ApplicationsAccessSchema>;
+			value?: boolean;
+		} = {
 			value: true,
 		},
 	) {

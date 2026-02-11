@@ -6,7 +6,6 @@ import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
 import type { SpecialGlobalAction, WebitelLicense } from '../enums';
 import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
 import {
-	getWtAppByUiSection,
 	makeAppVisibilityMap,
 	makeGlobalAccessMap,
 	makeLicenseAccessMap,
@@ -19,6 +18,7 @@ import type {
 	AppVisibilityMap,
 	CreateUserAccessStoreConfig,
 	CreateUserAccessStoreRawAccess,
+	FullUiSectionName,
 	GlobalActionAccessMap,
 	ScopeAccessMap,
 	SectionVisibilityMap,
@@ -88,13 +88,21 @@ export const createUserAccessStore = ({
 			return appVisibilityAccess.value.get(app);
 		};
 
-		const hasSectionVisibility = (section: UiSection, object: WtObject) => {
+		const hasSectionVisibility = ({
+			section,
+			object,
+			app: appOfSection,
+		}: {
+			section: UiSection;
+			object: WtObject;
+			app: WtApplication;
+		}) => {
 			if (bypassMode.value) return true;
 
-			const appOfSection = getWtAppByUiSection(section);
 			const objectOfSection = object; /*castUiSectionToWtObject(section)*/
 			const hasSectionVisibilityAccess = (section: UiSection) => {
-				return sectionVisibilityAccess.value.get(section);
+				const fullSectionName: FullUiSectionName = `${appOfSection}/${section}`;
+				return sectionVisibilityAccess.value.get(fullSectionName);
 			};
 
 			const allowAppVisibility = hasApplicationVisibility(appOfSection);
@@ -140,7 +148,14 @@ export const createUserAccessStore = ({
 				};
 			}
 
-			if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
+			if (
+				uiSection &&
+				!hasSectionVisibility({
+					section: uiSection,
+					object: wtObject,
+					app: wtApplication,
+				})
+			) {
 				return {
 					path: '/access-denied',
 				};

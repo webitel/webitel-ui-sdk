@@ -4,36 +4,38 @@
   </media-time-slider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import WtSlider from '../../../../../../../components/wt-slider/wt-slider.vue';
 </script>
 
-<style scoped >.time-slider {
-display: inline-flex;
+<style scoped>
+.time-slider {
+  display: inline-flex;
   align-items: center;
   width: 100%;
   padding: 10px 0;
 }
 
 .time-slider .time-slider:hover {
-cursor: pointer;
-
-    .time-slider:deep(.p-slider-handle) {
-      transform: scale(1.5);
+  cursor: pointer;
 }
 
-  .time-slider__slider {
-width: 100%;
+.time-slider:deep(.p-slider-handle) {
+  transform: scale(1.5);
 }
 
-  .time-slider:deep(.p-slider-range) {
-/* set vidstach slider variable to primeview component @author liza-pohrsnichna */
-    width: var(--slider-fill, 0%) !important;
+.time-slider__slider {
+  width: 100%;
 }
 
-  .time-slider:deep(.p-slider-handle) {
-/*set vidstach slider variable to primeview component @author liza-pohrsnichna */
-    inset-inline-start: var(--slider-fill, 0%) !important;
-    transition: transform ease var(--transition);
+.time-slider:deep(.p-slider-range) {
+  /* set vidstach slider variable to primeview component @author liza-pohrsnichna */
+  width: var(--slider-fill, 0%) !important;
 }
-}</style>
+
+.time-slider:deep(.p-slider-handle) {
+  /*set vidstach slider variable to primeview component @author liza-pohrsnichna */
+  transition: transform ease var(--transition);
+  inset-inline-start: var(--slider-fill, 0%) !important;
+}
+</style>

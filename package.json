@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.2.67",
+	"version": "26.2.70",
 	"private": false,
 	"scripts": {
 		"make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run biome:format:all || true) && npm run publish-lib",
@@ -140,6 +140,7 @@
 		"prismjs": "^1.30.0",
 		"publint": "^0.3.16",
 		"sass": "^1.85.1",
+		"type-fest": "^5.4.4",
 		"typedoc-github-wiki-theme": "^2.1.0",
 		"typescript": "^5.9.x",
 		"typescript-plugin-css-modules": "^5.1.0",

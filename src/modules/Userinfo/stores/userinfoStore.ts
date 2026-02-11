@@ -51,6 +51,7 @@ export const createUserinfoStore = () => {
 				'preferredUsername',
 				'scope',
 				'roles',
+				'name',
 			]);
 
 			initializeAccessStore({

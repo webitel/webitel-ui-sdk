@@ -94,11 +94,11 @@ export const makeSectionVisibilityMap = (
 
 	if (!rawVisibility) return map;
 
-	Object.values(rawVisibility).forEach((appSectionsVisibility) => {
+	Object.entries(rawVisibility).forEach(([app, appSectionsVisibility]) => {
 		Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
 			if (section.startsWith('_')) return map; // skip private fields
 			map.set(
-				section,
+				`${app}/${section}`,
 				(
 					visibility as {
 						_enabled: boolean;
@@ -135,26 +135,6 @@ export const castUiSectionToWtObject = (section: UiSection): WtObject => {
 
 export const castWtObjectToUiSection = (object: WtObject): UiSection => {
 	return mapWtObjectToUiSection[object];
-};
-
-export const getWtAppByUiSection = (section: UiSection): WtApplication => {
-	/* use inverted maps because UiSection is the enum value, not key */
-	if (AdminSectionsValues[section]) {
-		return WtApplication.Admin;
-	}
-	if (AuditorSectionsValues[section]) {
-		return WtApplication.Audit;
-	}
-	if (CrmSectionsValues[section]) {
-		return WtApplication.Crm;
-	}
-	if (SupervisorSectionsValues[section]) {
-		return WtApplication.Supervisor;
-	}
-
-	// then => custom lookup
-	// console.info(`Havent found app for section: ${section}, fallback to crm`);
-	return WtApplication.Crm;
 };
 
 export const shouldUseGlobalSpecialActionAccessAsChecksSource = (
