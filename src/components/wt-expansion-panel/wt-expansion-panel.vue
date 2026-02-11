@@ -48,7 +48,18 @@ import { ComponentSize } from '../../enums';
  */
 const props = withDefaults(
 	defineProps<{
+		/**
+		 * Size of the expansion panel
+		 * @type {string}
+		 * @default 'md'
+		 * @options ['sm', 'md']
+		 */
 		size?: ComponentSize;
+		/**
+		 * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
+		 * @type {boolean}
+		 * @default false
+		 */
 		collapsed?: boolean;
 	}>(),
 	{
