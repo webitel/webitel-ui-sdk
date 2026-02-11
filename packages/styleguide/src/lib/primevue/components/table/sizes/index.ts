@@ -69,7 +69,7 @@ const sizes = {
 		},
 	},
 	columnResizer: {
-		width: '1px',
+		width: '2px',
 	},
 	resizeIndicator: {
 		width: '1px',
