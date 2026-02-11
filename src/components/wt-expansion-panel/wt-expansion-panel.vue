@@ -32,9 +32,8 @@
 <script setup lang="ts">
 import { toRef } from 'vue';
 import { useExpansion } from '../../composables/useExpansion/useExpansion';
-
-import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 import { ComponentSize } from '../../enums';
+import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 /**
  * @emits {void} opened - Emitted when the expansion panel is opened

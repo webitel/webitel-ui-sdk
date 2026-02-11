@@ -42,6 +42,7 @@ import WtSelect from './wt-select/wt-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
+
 // Async components - heavy or rarely used components
 const WtActionBar = defineAsyncComponent(
 	() => import('./wt-action-bar/wt-action-bar.vue'),
