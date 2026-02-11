@@ -1,4 +1,5 @@
 import { SystemSettingServiceApiFactory } from 'webitel-sdk';
+import { EngineSystemSettingName } from '../../../gen/_models/engineSystemSettingName';
 
 import {
 	getDefaultGetListResponse,
@@ -25,6 +26,32 @@ const configurationService = SystemSettingServiceApiFactory(
 	instance,
 );
 
+ /**
+ * author @Lera24
+ * https://webitel.atlassian.net/browse/WTEL-8203?focusedCommentId=710207
+ * rename password_contains_username to password_contains_username in ui
+ */
+
+const PASSWORD_CONTAINS_LOGIN = 'password_contains_username';
+
+const listResponseHandler = (items) => {
+  const index = items.findIndex((item) =>
+    item.name === EngineSystemSettingName.PasswordContainsUsername);
+  if(index === -1) return items;
+  items[index].name = PASSWORD_CONTAINS_LOGIN;
+  return items;
+};
+
+const itemHandler = (item) => {
+  const map = {
+    [EngineSystemSettingName.PasswordContainsUsername]: PASSWORD_CONTAINS_LOGIN,
+    PASSWORD_CONTAINS_LOGIN: EngineSystemSettingName.PasswordContainsUsername,
+  };
+
+  item.name = map[item.name] ?? item.name;
+  return item;
+};
+
 const getList = async (params) => {
 	const { page, size, search, sort, fields, name } = applyTransform(params, [
 		merge(getDefaultGetParams()),
@@ -45,7 +72,7 @@ const getList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+      items: applyTransform(items, [listResponseHandler]),
 			next,
 		};
 	} catch (err) {
@@ -56,7 +83,7 @@ const getList = async (params) => {
 const get = async ({ itemId: id }) => {
 	try {
 		const response = await configurationService.readSystemSetting(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [snakeToCamel(), itemHandler]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
 	}
@@ -68,6 +95,7 @@ const add = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
+    itemHandler,
 	]);
 	try {
 		const response = await configurationService.createSystemSetting(item);
@@ -81,6 +109,7 @@ const update = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
+    itemHandler,
 	]);
 	try {
 		const response = await configurationService.updateSystemSetting(id, item);
@@ -124,7 +153,7 @@ const getObjectsList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+      items: applyTransform(items, [listResponseHandler]),
 			next,
 		};
 	} catch (err) {
