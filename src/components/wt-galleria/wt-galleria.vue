@@ -22,17 +22,17 @@
     }"
   >
     <template #item="{item}: {item: WtGalleriaItem}">
-      <div 
+      <div
         class="wt-galleria__image-container"
         :class="{ 'wt-galleria__image-container--preview': !fullScreen }"
       >
         <wt-loader v-if="isImageOnLoad" />
-        <img 
+        <img
           v-show="!isImageOnLoad"
-          class="wt-galleria__image" 
+          class="wt-galleria__image"
           :class="{ 'wt-galleria__image--fullscreen': fullScreen }"
-          :src="item?.src" 
-          :alt="item?.title" 
+          :src="item?.src"
+          :alt="item?.title"
           @load="onImageLoad"
         />
       </div>
@@ -41,33 +41,33 @@
         <img :src="item?.thumbnailSrc" :alt="item?.title" class="wt-galleria__thumbnail" />
     </template>
     <template #closeicon>
-      <wt-icon 
+      <wt-icon
         icon="close"
       />
     </template>
     <template #previousitemicon>
-      <wt-icon 
+      <wt-icon
         icon="arrow-left"
       />
     </template>
     <template #nextitemicon>
-      <wt-icon 
+      <wt-icon
         icon="arrow-right"
       />
     </template>
     <template #previousthumbnailicon>
-      <wt-icon 
+      <wt-icon
         icon="arrow-left"
       />
     </template>
     <template #nextthumbnailicon>
-      <wt-icon 
+      <wt-icon
         icon="arrow-right"
       />
     </template>
     <template #footer>
       <div class="wt-galleria__footer">
-        <wt-icon 
+        <wt-icon
           icon="tile"
           @click="toggleThumbnails"
         />
@@ -77,15 +77,15 @@
             <span>{{ value[activeIndex].description }}</span>
         </span>
         <div class="wt-galleria__footer-actions">
-          <wt-icon 
+          <wt-icon
             icon="download"
             @click="emit('download', activeIndex)"
           />
-          <wt-icon 
+          <wt-icon
             icon="bucket"
             @click="handleDelete"
           />
-          <wt-icon 
+          <wt-icon
             :icon="fullScreen ? 'collapse' : 'expand'"
             @click="toggleFullScreen"
           />
@@ -234,11 +234,12 @@ onUnmounted(() => {
 });
 </script>
 
-<style >.wt-galleria__image-container {
-max-width: 100%; 
+<style>
+.wt-galleria__image-container {
+  background-color: var(--dp-24-surface-color);
+  max-width: 100%;
   display: flex;
   align-items: center;
-  background: transparent;
 }
 
 .wt-galleria__content--fullscreen {
@@ -253,7 +254,7 @@ width: 100%;
 }
 
 .wt-galleria__thumbnails {
-position: absolute;
+  position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
