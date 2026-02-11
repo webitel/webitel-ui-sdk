@@ -419,7 +419,7 @@ const senderVideoMutedIconSizes = {
   border-radius: var(--p-player-cam-preview-md-border-radius);
 }
 
-.video-call-sender--md {
+.video-call-sender.video-call-sender--md {
   position: relative;
   right: 0;
   bottom: 0;
@@ -435,7 +435,7 @@ const senderVideoMutedIconSizes = {
   border-radius: var(--p-player-cam-preview-lg-border-radius);
 }
 
-.video-call-sender--lg {
+.video-call-sender.video-call-sender--lg {
   position: relative;
   right: 0;
   bottom: 0;
