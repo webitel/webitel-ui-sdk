@@ -1,9 +1,9 @@
-import light from './light'
-import dark from './dark'
+import dark from './dark';
+import light from './light';
 
 export default {
-  colorScheme: {
-    light,
-    dark,
-  },
-}
+	colorScheme: {
+		light,
+		dark,
+	},
+};

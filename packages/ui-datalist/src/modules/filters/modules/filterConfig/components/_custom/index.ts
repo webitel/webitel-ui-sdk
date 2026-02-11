@@ -3,9 +3,9 @@ import TypeExtensionFilterValueField from './type-extension-filter-value-field.v
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
 export {
-  createTypeExtensionFilterConfig,
-  TypeExtensionFilterValueField,
-  TypeExtensionFilterValuePreview,
+	createTypeExtensionFilterConfig,
+	TypeExtensionFilterValueField,
+	TypeExtensionFilterValuePreview,
 };
 
 export type * from './filterConfig';

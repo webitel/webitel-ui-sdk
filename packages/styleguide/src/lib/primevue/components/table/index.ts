@@ -1,9 +1,9 @@
-import colorScheme from "./colors";
-import sizes from "./sizes";
+import colorScheme from './colors';
+import sizes from './sizes';
 
 const TableScheme = {
-  colorScheme,
-  sizes,
+	colorScheme,
+	sizes,
 };
 
-export default TableScheme
+export default TableScheme;

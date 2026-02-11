@@ -72,6 +72,9 @@ const WtErrorPage = defineAsyncComponent(
 const WtExpansionPanel = defineAsyncComponent(
 	() => import('./wt-expansion-panel/wt-expansion-panel.vue'),
 );
+const WtExpansionCard = defineAsyncComponent(
+	() => import('./wt-expansion-card/wt-expansion-card.vue'),
+);
 const WtFiltersPanelWrapper = defineAsyncComponent(
 	() => import('./wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue'),
 );
@@ -230,6 +233,7 @@ const Components = {
 	WtGalleria,
 	WtVidstackPlayer,
 	WtChatEmoji,
+	WtExpansionCard,
 };
 
 export {
@@ -311,6 +315,7 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
+	WtExpansionCard,
 };
 
 export default Components;

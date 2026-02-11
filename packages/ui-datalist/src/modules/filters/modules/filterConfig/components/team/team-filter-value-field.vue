@@ -21,8 +21,8 @@ import { useI18n } from 'vue-i18n';
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const props = defineProps<{
-  filterConfig: WtSysTypeFilterConfig;
-  disableValidation?: boolean;
+	filterConfig: WtSysTypeFilterConfig;
+	disableValidation?: boolean;
 }>();
 
 type ModelValue = number[];
@@ -30,39 +30,53 @@ type ModelValue = number[];
 const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			required,
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 v$.value.$touch();
 
 const labelValue = computed(() =>
-  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
-    props?.filterConfig.name : 'filterValue'}`))
+	t(
+		`webitelUI.filters.${
+			props?.filterConfig?.showFilterName
+				? props?.filterConfig.name
+				: 'filterValue'
+		}`,
+	),
+);
 
 onMounted(() => {
-  if (!props?.disableValidation) v$.value.$touch();
+	if (!props?.disableValidation) v$.value.$touch();
 });
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 
 const handleInput = (value: ModelValue) => {
-  model.value = value;
+	model.value = value;
 };
 </script>
 

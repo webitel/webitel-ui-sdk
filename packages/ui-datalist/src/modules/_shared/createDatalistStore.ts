@@ -1,22 +1,22 @@
 import {
-  defineStore as definePiniaStore,
-  StoreGeneric,
-  storeToRefs as piniaStoreToRefs,
+	defineStore as definePiniaStore,
+	storeToRefs as piniaStoreToRefs,
+	StoreGeneric,
 } from 'pinia';
-import { ToRefs, toRefs as composableStoreToRefs } from 'vue';
+import { toRefs as composableStoreToRefs, ToRefs } from 'vue';
 
 import { applyStorePatch } from '../scripts/utils';
 import {
-  CreateDatalistStoreParams,
-  Identifiable,
-  Patch,
-  PatchableStore,
-  PatchableStoreFactory,
-  StoreInstance,
+	CreateDatalistStoreParams,
+	Identifiable,
+	Patch,
+	PatchableStore,
+	PatchableStoreFactory,
+	StoreInstance,
 } from '../types/createDatalistStore.types';
 import {
-  DatalistStoreProvider,
-  DatalistStoreProviderType,
+	DatalistStoreProvider,
+	DatalistStoreProviderType,
 } from '../types/StoreProvider';
 
 const defaultStoreType = DatalistStoreProvider.Pinia;
@@ -26,48 +26,48 @@ const defaultStoreType = DatalistStoreProvider.Pinia;
  * using Pinia's storeToRefs if it's a Pinia store, or Vue's toRefs for composable stores.
  * */
 export const makeThisToRefs = <StoreBody extends object>(
-  store: StoreBody,
-  storeType: DatalistStoreProviderType,
+	store: StoreBody,
+	storeType: DatalistStoreProviderType,
 ): ToRefs<StoreBody> => {
-  const thisStoreType = storeType || defaultStoreType;
+	const thisStoreType = storeType || defaultStoreType;
 
-  if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return piniaStoreToRefs(store as StoreGeneric) as ToRefs<StoreBody>;
-  }
+	if (thisStoreType === DatalistStoreProvider.Pinia) {
+		return piniaStoreToRefs(store as StoreGeneric) as ToRefs<StoreBody>;
+	}
 
-  return composableStoreToRefs(store) as ToRefs<StoreBody>;
+	return composableStoreToRefs(store) as ToRefs<StoreBody>;
 };
 
 export const createDatalistStore = <
-  StoreBody extends StoreInstance,
-  G extends Identifiable,
+	StoreBody extends StoreInstance,
+	G extends Identifiable,
 >({
-  config,
-  namespace,
-  storeBody,
+	config,
+	namespace,
+	storeBody,
 }: CreateDatalistStoreParams<
-  StoreBody,
-  G
+	StoreBody,
+	G
 >): PatchableStoreFactory<StoreBody> => {
-  const thisStoreType = config.storeType || defaultStoreType;
+	const thisStoreType = config.storeType || defaultStoreType;
 
-  if (thisStoreType === DatalistStoreProvider.Composable) {
-    const storeFactory = storeBody({
-      ...config,
-      storeType: thisStoreType,
-    }) as PatchableStore<StoreBody>;
-    storeFactory.$patch = (val: Patch) => applyStorePatch(storeFactory, val);
-    return () => storeFactory;
-  }
+	if (thisStoreType === DatalistStoreProvider.Composable) {
+		const storeFactory = storeBody({
+			...config,
+			storeType: thisStoreType,
+		}) as PatchableStore<StoreBody>;
+		storeFactory.$patch = (val: Patch) => applyStorePatch(storeFactory, val);
+		return () => storeFactory;
+	}
 
-  if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return definePiniaStore(namespace, () =>
-      storeBody({
-        ...config,
-        storeType: thisStoreType,
-      }),
-    );
-  }
+	if (thisStoreType === DatalistStoreProvider.Pinia) {
+		return definePiniaStore(namespace, () =>
+			storeBody({
+				...config,
+				storeType: thisStoreType,
+			}),
+		);
+	}
 
-  throw new Error(`Unsupported store type: ${thisStoreType}`);
+	throw new Error(`Unsupported store type: ${thisStoreType}`);
 };

@@ -19,7 +19,7 @@ import { useI18n } from 'vue-i18n';
 import { BooleanOptions } from '../../../enums/options/BooleanFilterOptions';
 
 const props = defineProps<{
-  hideLabel?: boolean;
+	hideLabel?: boolean;
 }>();
 
 const model = defineModel<boolean | null>();
@@ -28,15 +28,17 @@ const attrs = useAttrs();
 
 const { t } = useI18n();
 
-const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
+const labelValue = computed(() =>
+	props?.hideLabel ? null : t('webitelUI.filters.filterValue'),
+);
 
 const strModel = computed({
-  get: () => {
-    return typeof model.value === 'boolean' ? String(model.value) : model.value;
-  },
-  set: (value: string) => {
-    model.value = typeof value === 'string' ? value === 'true' : value;
-  },
+	get: () => {
+		return typeof model.value === 'boolean' ? String(model.value) : model.value;
+	},
+	set: (value: string) => {
+		model.value = typeof value === 'string' ? value === 'true' : value;
+	},
 });
 </script>
 

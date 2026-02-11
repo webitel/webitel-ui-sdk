@@ -25,54 +25,65 @@ import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { CaseAssigneeFilterConfig } from "./index";
-
+import { CaseAssigneeFilterConfig } from './index';
 
 type ModelValue = {
-  list: string[];
-  unassigned: boolean;
+	list: string[];
+	unassigned: boolean;
 };
 
 const model = defineModel<ModelValue>();
 
 const props = defineProps<{
-  filterConfig: CaseAssigneeFilterConfig;
+	filterConfig: CaseAssigneeFilterConfig;
 }>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 const { t } = useI18n();
 
 const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      list: [],
-      unassigned: false,
-    };
-  }
+	if (!model.value) {
+		model.value = {
+			list: [],
+			unassigned: false,
+		};
+	}
 };
 onMounted(() => initModel());
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      list: { required: requiredIf(() => !model.value.unassigned) },
-      unassigned: { required: requiredIf(() => !model.value.list.length) },
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			list: {
+				required: requiredIf(() => !model.value.unassigned),
+			},
+			unassigned: {
+				required: requiredIf(() => !model.value.list.length),
+			},
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 v$.value.$touch();
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

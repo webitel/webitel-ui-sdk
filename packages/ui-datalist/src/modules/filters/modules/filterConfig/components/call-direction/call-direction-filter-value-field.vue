@@ -24,27 +24,35 @@ const model = defineModel<string>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			required,
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 v$.value.$touch();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

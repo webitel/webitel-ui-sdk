@@ -8,7 +8,7 @@ import type { WebitelcasesStatus } from 'webitel-sdk';
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
-  value: WebitelcasesStatus[];
+	value: WebitelcasesStatus[];
 }>();
 </script>
 

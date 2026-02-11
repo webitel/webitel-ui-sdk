@@ -25,35 +25,47 @@ type ModelValue = number[];
 const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			required,
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 v$.value.$touch();
 
 const searchGateway = async (params) => {
-  return params.search ? await searchMethod({ name: params.search }) : await searchMethod(params);
+	return params.search
+		? await searchMethod({
+				name: params.search,
+			})
+		: await searchMethod(params);
 };
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 
 const handleInput = (value: ModelValue) => {
-  model.value = value;
+	model.value = value;
 };
 </script>
 

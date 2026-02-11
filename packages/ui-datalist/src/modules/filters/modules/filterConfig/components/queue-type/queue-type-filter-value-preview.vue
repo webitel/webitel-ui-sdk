@@ -10,24 +10,24 @@
 </template>
 
 <script lang="ts" setup>
-import { useQueueTypeOptions } from '../../composables/useQueueTypeOptions';
 import { computed } from 'vue';
+import { useQueueTypeOptions } from '../../composables/useQueueTypeOptions';
 
 const props = defineProps<{
-  value: number[];
+	value: number[];
 }>();
 
 const { options } = useQueueTypeOptions();
 
 const arrayLabels = computed(() =>
-  options.value.reduce((acc, { value, label }) => {
-    acc[value] = label;
-    return acc;
-  }, {})
+	options.value.reduce((acc, { value, label }) => {
+		acc[value] = label;
+		return acc;
+	}, {}),
 );
 
 const arrayValues = computed(() =>
-  props.value.map((v) => arrayLabels.value[v] || v)
+	props.value.map((v) => arrayLabels.value[v] || v),
 );
 </script>
 

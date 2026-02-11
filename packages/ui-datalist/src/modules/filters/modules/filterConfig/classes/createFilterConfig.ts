@@ -1,30 +1,30 @@
 import {
-  FilterOptionToFilterConfigCreatorMap,
-  FilterOptionToPreviewComponentMap,
-  FilterOptionToValueComponentMap,
+	FilterOptionToFilterConfigCreatorMap,
+	FilterOptionToPreviewComponentMap,
+	FilterOptionToValueComponentMap,
 } from '../components';
 import {
-  BaseFilterConfig,
-  FilterConfig,
-  FilterConfigBaseParams,
+	BaseFilterConfig,
+	FilterConfig,
+	FilterConfigBaseParams,
 } from './FilterConfig';
 
 export const createFilterConfig = (
-  params: BaseFilterConfigParams &
-    Required<BaseFilterConfig, 'name'> &
-    Record<string, unknown>,
+	params: BaseFilterConfigParams &
+		Required<BaseFilterConfig, 'name'> &
+		Record<string, unknown>,
 ): BaseFilterConfig => {
-  const { name } = params;
+	const { name } = params;
 
-  const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
+	const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
 
-  if (filterConfigClass) {
-    return filterConfigClass(params);
-  }
+	if (filterConfigClass) {
+		return filterConfigClass(params);
+	}
 
-  return new FilterConfig({
-    valueInputComponent: FilterOptionToValueComponentMap[name],
-    valuePreviewComponent: FilterOptionToPreviewComponentMap[name],
-    ...params,
-  });
+	return new FilterConfig({
+		valueInputComponent: FilterOptionToValueComponentMap[name],
+		valuePreviewComponent: FilterOptionToPreviewComponentMap[name],
+		...params,
+	});
 };

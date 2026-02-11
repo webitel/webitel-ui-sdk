@@ -1,11 +1,11 @@
-import {computed, Ref} from 'vue';
+import { computed, Ref } from 'vue';
 
 import { CardItemId } from '../types/CardStore.types';
 
 export const useCardIsNew = ({ itemId }: { itemId: Ref<CardItemId> }) => {
-  const isNew = computed(() => !itemId.value);
+	const isNew = computed(() => !itemId.value);
 
-  return {
-    isNew,
-  };
+	return {
+		isNew,
+	};
 };

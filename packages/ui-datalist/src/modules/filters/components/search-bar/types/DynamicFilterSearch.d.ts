@@ -2,4 +2,4 @@ import { WtSearchBarSearchModeOption } from '../../../../../../../../src/compone
 import { FilterName } from '../../../classes/Filter';
 
 export type DynamicFilterSearchSearchModeOption =
-  WtSearchBarSearchModeOption<FilterName>;
+	WtSearchBarSearchModeOption<FilterName>;

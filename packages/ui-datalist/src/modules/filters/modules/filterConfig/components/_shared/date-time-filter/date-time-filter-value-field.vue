@@ -24,24 +24,27 @@ import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
-  from: number;
-  to: number;
+	from: number;
+	to: number;
 };
 
 const model = defineModel<ModelValue>();
 const { t } = useI18n();
 
 const handleInput = (key: keyof ModelValue, value: number) => {
-  model.value = { ...model.value, [key]: value };
+	model.value = {
+		...model.value,
+		[key]: value,
+	};
 };
 
 const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      from: startOfToday().getTime(),
-      to: endOfToday().getTime(),
-    };
-  }
+	if (!model.value) {
+		model.value = {
+			from: startOfToday().getTime(),
+			to: endOfToday().getTime(),
+		};
+	}
 };
 
 onMounted(() => initModel());

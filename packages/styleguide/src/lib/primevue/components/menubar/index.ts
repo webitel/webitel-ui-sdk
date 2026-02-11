@@ -2,9 +2,8 @@ import colorScheme from './colors';
 import sizes from './sizes';
 
 const MenubarScheme = {
-  colorScheme,
-  sizes,
-}
+	colorScheme,
+	sizes,
+};
 
-export default MenubarScheme
-
+export default MenubarScheme;

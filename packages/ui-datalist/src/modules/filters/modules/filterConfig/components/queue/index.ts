@@ -6,16 +6,17 @@ import QueueFilterValueField from './queue-filter-value-field.vue';
 import QueueFilterValuePreview from './queue-filter-value-preview.vue';
 
 class QueueFilterConfig extends WtSysTypeFilterConfig {
-  readonly name = FilterOption.Queue;
-  valueInputComponent = QueueFilterValueField;
-  valuePreviewComponent = QueueFilterValuePreview;
+	readonly name = FilterOption.Queue;
+	valueInputComponent = QueueFilterValueField;
+	valuePreviewComponent = QueueFilterValuePreview;
 
-  searchRecords(
-    params: object
-  ): Promise<{ items: unknown[]; next?: boolean }> {
-    return QueuesAPI.getLookup(params);
-  }
+	searchRecords(params: object): Promise<{
+		items: unknown[];
+		next?: boolean;
+	}> {
+		return QueuesAPI.getLookup(params);
+	}
 }
 
 export const createQueueFilterConfig = (params) =>
-  new QueueFilterConfig(params);
+	new QueueFilterConfig(params);

@@ -166,7 +166,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 			context,
 			{
 				locale,
-				text = i18n.t(locale),
+				text = i18n.global.t(locale),
 				icon = notificationIcon,
 				interval = NOTIFICATION_VISIBLE_INTERVAL,
 			},

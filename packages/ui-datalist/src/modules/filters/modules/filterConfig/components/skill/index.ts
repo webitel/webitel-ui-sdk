@@ -6,16 +6,17 @@ import SkillFilterValueField from './skill-filter-value-field.vue';
 import SkillFilterValuePreview from './skill-filter-value-preview.vue';
 
 class SkillFilterConfig extends WtSysTypeFilterConfig {
-  readonly name = FilterOption.Skill;
-  valueInputComponent = SkillFilterValueField;
-  valuePreviewComponent = SkillFilterValuePreview;
+	readonly name = FilterOption.Skill;
+	valueInputComponent = SkillFilterValueField;
+	valuePreviewComponent = SkillFilterValuePreview;
 
-  searchRecords(
-    params: object
-  ): Promise<{ items: unknown[]; next?: boolean }> {
-    return SkillsAPI.getLookup(params);
-  }
+	searchRecords(params: object): Promise<{
+		items: unknown[];
+		next?: boolean;
+	}> {
+		return SkillsAPI.getLookup(params);
+	}
 }
 
 export const createSkillFilterConfig = (params) =>
-  new SkillFilterConfig(params);
+	new SkillFilterConfig(params);

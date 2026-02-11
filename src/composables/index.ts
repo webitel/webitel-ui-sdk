@@ -4,6 +4,7 @@ export * from './useCard/useCardComponent';
 export * from './useCard/useCardTabs';
 export * from './useClose/useClose';
 export * from './useDestroyableSortable/useDestroyableSortable';
+export * from './useExpansion/useExpansion';
 export * from './useGalleriaFullscreen/useGalleriaFullscreen';
 export * from './useGalleriaMaskClick/useGalleriaMaskClick';
 export * from './useInputControl/useInputControl';

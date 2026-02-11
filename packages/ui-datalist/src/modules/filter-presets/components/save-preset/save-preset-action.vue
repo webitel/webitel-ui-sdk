@@ -33,40 +33,37 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
-import { computed, inject, reactive, type Ref, ref, watch } from 'vue';
+import { computed, inject, type Ref, reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import {
-  createFiltersManager, FilterName,
-  IFiltersManager,
+	createFiltersManager,
+	FilterName,
+	IFiltersManager,
 } from '../../../filters';
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
-import {
-  addPreset,
-  getPresetList,
-  updatePreset,
-} from '../../api/PresetQuery';
+import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
+import { addPreset, getPresetList, updatePreset } from '../../api/PresetQuery';
 import OverwritePresetPopup from './overwrite-preset-popup.vue';
 import SavePresetPopup, { SubmitConfig } from './save-preset-popup.vue';
 
 const props = defineProps<{
-  /**
-   * @description
-   * presets "section" namespace
-   */
-  namespace: string;
-  /**
-   * @author @dlohvinov
-   * serves as a source for local filters manager
-   */
-  filtersManager: IFiltersManager;
-  /**
-   * @description
-   * include in preset only filter values related to filters panel
-   */
-  filtersIncluded: FilterName[];
-  filterConfigs: AnyFilterConfig[];
+	/**
+	 * @description
+	 * presets "section" namespace
+	 */
+	namespace: string;
+	/**
+	 * @author @dlohvinov
+	 * serves as a source for local filters manager
+	 */
+	filtersManager: IFiltersManager;
+	/**
+	 * @description
+	 * include in preset only filter values related to filters panel
+	 */
+	filtersIncluded: FilterName[];
+	filterConfigs: AnyFilterConfig[];
 }>();
 
 const eventBus = inject('$eventBus');
@@ -74,14 +71,18 @@ const eventBus = inject('$eventBus');
 const localFiltersManager = reactive(createFiltersManager());
 
 watch(
-  props.filtersManager,
-  () => {
-    localFiltersManager.reset();
-    localFiltersManager.fromString(
-      props.filtersManager.toString({ include: props.filtersIncluded }),
-    );
-  },
-  { immediate: true },
+	props.filtersManager,
+	() => {
+		localFiltersManager.reset();
+		localFiltersManager.fromString(
+			props.filtersManager.toString({
+				include: props.filtersIncluded,
+			}),
+		);
+	},
+	{
+		immediate: true,
+	},
 );
 
 const { t } = useI18n();
@@ -90,7 +91,7 @@ const { t } = useI18n();
  * disable "save" btn if there's nothing to save
  * */
 const disableAction = computed(() => {
-  return !localFiltersManager.getAllKeys().length;
+	return !localFiltersManager.getAllKeys().length;
 });
 
 /**
@@ -104,64 +105,69 @@ const showSaveForm = ref(false);
 const presetToOverwriteWith: Ref<EnginePresetQuery | null> = ref(null);
 
 const handlePresetSubmit = async (
-  preset: EnginePresetQuery,
-  { onCompleted }: SubmitConfig,
+	preset: EnginePresetQuery,
+	{ onCompleted }: SubmitConfig,
 ) => {
-  try {
-    await addPreset({ preset, namespace: props.namespace });
+	try {
+		await addPreset({
+			preset,
+			namespace: props.namespace,
+		});
 
-    eventBus.$emit('notification', {
-      type: 'success',
-      text: t('systemNotifications.success.create', {
-        entity: t('webitelUI.filters.presets.preset'),
-      }),
-    });
+		eventBus.$emit('notification', {
+			type: 'success',
+			text: t('systemNotifications.success.create', {
+				entity: t('webitelUI.filters.presets.preset'),
+			}),
+		});
 
-    showSaveForm.value = false;
-  } catch (err) {
-    if (err?.status === 409) {
-      presetToOverwriteWith.value = preset;
-    }
-    throw err;
-  } finally {
-    if (onCompleted) onCompleted();
-  }
+		showSaveForm.value = false;
+	} catch (err) {
+		if (err?.status === 409) {
+			presetToOverwriteWith.value = preset;
+		}
+		throw err;
+	} finally {
+		if (onCompleted) onCompleted();
+	}
 };
 
 const handlePresetOverwriteConfirmation = async ({
-  onCompleted,
+	onCompleted,
 }: SubmitConfig) => {
-  try {
-    const { items } = await getPresetList(
-      {
-        search: presetToOverwriteWith.value.name,
-        presetNamespace: props.namespace,
-      },
-      {
-        transformers: { useStarToSearch: false },
-      },
-    );
-    const { id: existingPresetId } = items[0];
-    await updatePreset({
-      id: existingPresetId,
-      item: {
-        ...presetToOverwriteWith.value,
-      },
-      namespace: props.namespace,
-    });
+	try {
+		const { items } = await getPresetList(
+			{
+				search: presetToOverwriteWith.value.name,
+				presetNamespace: props.namespace,
+			},
+			{
+				transformers: {
+					useStarToSearch: false,
+				},
+			},
+		);
+		const { id: existingPresetId } = items[0];
+		await updatePreset({
+			id: existingPresetId,
+			item: {
+				...presetToOverwriteWith.value,
+			},
+			namespace: props.namespace,
+		});
 
-    eventBus.$emit('notification', {
-      type: 'success',
-      text: t('systemNotifications.success.update', {
-        entity: t('webitelUI.filters.presets.preset'),
-      }),
-    });
+		eventBus.$emit('notification', {
+			type: 'success',
+			text: t('systemNotifications.success.update', {
+				entity: t('webitelUI.filters.presets.preset'),
+			}),
+		});
 
-    presetToOverwriteWith.value = null;
-    showSaveForm.value = false;
-  } finally {
-    if (onCompleted) onCompleted();
-  }
+		presetToOverwriteWith.value = null;
+		showSaveForm.value = false;
+	} finally {
+		if (onCompleted) onCompleted();
+	}
 };
 </script>
 

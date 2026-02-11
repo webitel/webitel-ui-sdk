@@ -30,24 +30,22 @@ const emit = defineEmits<StaticFilterEmits>();
 const filterValue = computed(() => props.filter?.value);
 
 const onValueChange = (value) => {
-    if (isEmpty(value) && typeof value !== 'boolean') {
-      return emit('delete:filter', props.filter);
-    }
+	if (isEmpty(value) && typeof value !== 'boolean') {
+		return emit('delete:filter', props.filter);
+	}
 
-    if (isEmpty(filterValue.value)) {
-      return emit('add:filter', {
-        name: props.filterConfig.name,
-        value,
-      });
-    }
+	if (isEmpty(filterValue.value)) {
+		return emit('add:filter', {
+			name: props.filterConfig.name,
+			value,
+		});
+	}
 
-    emit('update:filter', {
-      ...props.filter,
-      value,
-    });
-  }
-;
-
+	emit('update:filter', {
+		...props.filter,
+		value,
+	});
+};
 </script>
 
 <style lang="scss" scoped>

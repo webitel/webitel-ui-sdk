@@ -20,7 +20,7 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-  value: string;
+	value: string;
 }>();
 
 const { t } = useI18n();

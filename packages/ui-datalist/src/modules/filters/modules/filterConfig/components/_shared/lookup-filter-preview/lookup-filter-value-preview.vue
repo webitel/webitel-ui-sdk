@@ -11,10 +11,10 @@
 
 <script lang="ts" setup>
 defineProps<{
-  /**
-   * would be great to use a type for this
-   * */
-  value: Record<string, unknown>[];
+	/**
+	 * would be great to use a type for this
+	 * */
+	value: Record<string, unknown>[];
 }>();
 </script>
 

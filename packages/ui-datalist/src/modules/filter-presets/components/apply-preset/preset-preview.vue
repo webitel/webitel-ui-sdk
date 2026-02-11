@@ -81,50 +81,54 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import {
-  WtExpansionPanel,
-  WtIconAction,
-  WtRadio,
+	WtExpansionPanel,
+	WtIconAction,
+	WtRadio,
 } from '@webitel/ui-sdk/components';
 import { AxiosError } from 'axios';
 import { computed, ref } from 'vue';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import { createFiltersManager } from '../../../filters';
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
 
 type Props = {
-  preset: EnginePresetQuery;
-  isSelected: boolean;
-  collapsed: boolean;
-  filterConfigs: AnyFilterConfig[];
+	preset: EnginePresetQuery;
+	isSelected: boolean;
+	collapsed: boolean;
+	filterConfigs: AnyFilterConfig[];
 };
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'preset:select': [EnginePresetQuery];
-  'preset:update': [
-    {
-      preset: EnginePresetQuery;
-      onSuccess: () => void;
-      onFailure: (err: AxiosError) => void;
-    },
-  ];
-  'preset:delete': [EnginePresetQuery];
+	'preset:select': [
+		EnginePresetQuery,
+	];
+	'preset:update': [
+		{
+			preset: EnginePresetQuery;
+			onSuccess: () => void;
+			onFailure: (err: AxiosError) => void;
+		},
+	];
+	'preset:delete': [
+		EnginePresetQuery,
+	];
 }>();
 
 const filtersManager = computed(() => {
-  const filtersManager = createFiltersManager();
+	const filtersManager = createFiltersManager();
 
-  const snapshot = props.preset?.preset?.['filtersManager.toString'];
-  if (snapshot) {
-    filtersManager.fromString(snapshot);
-  }
+	const snapshot = props.preset?.preset?.['filtersManager.toString'];
+	if (snapshot) {
+		filtersManager.fromString(snapshot);
+	}
 
-  return filtersManager;
+	return filtersManager;
 });
 
 const editMode = ref(false);
@@ -137,64 +141,66 @@ const editing = ref(false);
 const nameAlreadyExistsError = ref(false);
 
 const editDraft = ref({
-  name: '',
-  description: '',
+	name: '',
+	description: '',
 });
 
 const fillDraft = () => {
-  editDraft.value = {
-    name: props.preset.name,
-    description: props.preset.description,
-  };
+	editDraft.value = {
+		name: props.preset.name,
+		description: props.preset.description,
+	};
 };
 
 fillDraft();
 
 const v$ = useVuelidate(
-  computed(() => {
-    return {
-      name: {
-        required,
-        nameAlreadyInUse: () => !nameAlreadyExistsError.value,
-      },
-    };
-  }),
-  editDraft,
-  { $autoDirty: true },
+	computed(() => {
+		return {
+			name: {
+				required,
+				nameAlreadyInUse: () => !nameAlreadyExistsError.value,
+			},
+		};
+	}),
+	editDraft,
+	{
+		$autoDirty: true,
+	},
 );
 v$.value.$touch();
 
 const startEdit = ({ open: openExpansion }) => {
-  openExpansion();
-  editMode.value = true;
+	openExpansion();
+	editMode.value = true;
 };
 
 const clearEdit = () => {
-  editMode.value = false;
+	editMode.value = false;
 };
 
 const submitEdit = () => {
-  const preset: EnginePresetQuery = {
-    ...props.preset,
-    ...editDraft.value,
-  };
-  const onFailure = (err: AxiosError) => {
-    if (err.status === 409) {
-      nameAlreadyExistsError.value = true;
-    }
-    editing.value = false;
-  };
+	const preset: EnginePresetQuery = {
+		...props.preset,
+		...editDraft.value,
+	};
+	const onFailure = (err: AxiosError) => {
+		if (err.status === 409) {
+			nameAlreadyExistsError.value = true;
+		}
+		editing.value = false;
+	};
 
-  emit('preset:update', {
-    preset,
-    onSuccess: clearEdit,
-    onFailure,
-  });
+	emit('preset:update', {
+		preset,
+		onSuccess: clearEdit,
+		onFailure,
+	});
 };
 
 const updatePresetName = () => {
-  nameAlreadyExistsError.value = false;
-  editing.value = true;
+	nameAlreadyExistsError.value = false;
+	editing.value = true;
 };
 </script>
 

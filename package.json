@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.2.70",
+	"version": "26.2.75",
 	"private": false,
 	"scripts": {
 		"make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run biome:format:all || true) && npm run publish-lib",
@@ -94,9 +94,6 @@
 		"zod": "^4.x"
 	},
 	"peerDependenciesMeta": {
-		"@vuelidate/core": {
-			"optional": true
-		},
 		"@vuelidate/validators": {
 			"optional": true
 		},
@@ -114,6 +111,8 @@
 		}
 	},
 	"devDependencies": {
+		"@vuelidate/core": "^2.0.3",
+		"@vuelidate/validators": "^2.0.4",
 		"@biomejs/biome": "^2.3.11",
 		"@regle/core": "^1.16.2",
 		"@tsconfig/node22": "^22.0.0",
@@ -140,12 +139,13 @@
 		"prismjs": "^1.30.0",
 		"publint": "^0.3.16",
 		"sass": "^1.85.1",
+		"type-fest": "^5.4.4",
 		"typedoc-github-wiki-theme": "^2.1.0",
 		"typescript": "^5.9.x",
 		"typescript-plugin-css-modules": "^5.1.0",
 		"unplugin-auto-import": "^20.3.x",
 		"vidstack": "^1.12.13",
-		"vite": "npm:rolldown-vite@latest",
+		"vite": "^7.3.1",
 		"vite-plugin-checker": "^0.12.0",
 		"vite-plugin-node-polyfills": "^0.24.x",
 		"vite-plugin-static-copy": "^3.1.x",

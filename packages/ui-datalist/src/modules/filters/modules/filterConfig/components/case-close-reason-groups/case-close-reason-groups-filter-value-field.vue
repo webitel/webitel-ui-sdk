@@ -36,66 +36,74 @@ import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {
-  caseCloseReasonsGroupsSearchMethod,
-  caseCloseReasonsSearchMethod,
+	caseCloseReasonsGroupsSearchMethod,
+	caseCloseReasonsSearchMethod,
 } from './config.js';
 
 type ModelValue = {
-  selection: string;
-  conditions: string;
+	selection: string;
+	conditions: string;
 };
 const model = defineModel<ModelValue>();
 const { t } = useI18n();
 
 const updateSelected = (value) => {
-  model.value.selection = value;
-  model.value.conditions = '';
+	model.value.selection = value;
+	model.value.conditions = '';
 };
 
 const getConditionList = (params) => {
-  return caseCloseReasonsSearchMethod({
-    parentId: model.value.selection,
-    ...params,
-  });
+	return caseCloseReasonsSearchMethod({
+		parentId: model.value.selection,
+		...params,
+	});
 };
 
 const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      selection: '',
-      conditions: '',
-    };
-  }
+	if (!model.value) {
+		model.value = {
+			selection: '',
+			conditions: '',
+		};
+	}
 };
 onMounted(() => initModel());
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      selection: {
-        required,
-      },
-      conditions: {
-        required,
-      },
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			selection: {
+				required,
+			},
+			conditions: {
+				required,
+			},
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 v$.value.$touch();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

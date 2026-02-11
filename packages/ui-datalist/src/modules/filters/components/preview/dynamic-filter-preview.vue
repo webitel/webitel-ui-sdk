@@ -68,18 +68,18 @@
 
 <script lang="ts" setup>
 import {
-  WtChip,
-  WtIconBtn,
-  WtLoader,
-  WtPopover,
+	WtChip,
+	WtIconBtn,
+	WtLoader,
+	WtPopover,
 } from '@webitel/ui-sdk/components';
-import {computed, ref, watch} from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { IFilter } from '../../classes/Filter';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
-import { DynamicFilterEmits,DynamicFilterProps } from '../types/Filter.types';
+import { DynamicFilterEmits, DynamicFilterProps } from '../types/Filter.types';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 const props = defineProps<DynamicFilterProps>();
@@ -89,11 +89,11 @@ const emit = defineEmits<DynamicFilterEmits>();
 const localValue = ref();
 
 const showChipPopover = (event, showPopoverCb: (event) => void) => {
-  if (!localValue.value) {
-    fillLocalValue()
-  }
+	if (!localValue.value) {
+		fillLocalValue();
+	}
 
-  showPopoverCb(event);
+	showPopoverCb(event);
 };
 
 /**
@@ -104,58 +104,60 @@ const showChipPopover = (event, showPopoverCb: (event) => void) => {
  * instead of tooltip-components to avoid api requests spam
  */
 const fillLocalValue = async (filter = props.filter) => {
-  const filterName = props.filter.name;
-  const filterValue = filter.value;
+	const filterName = props.filter.name;
+	const filterValue = filter.value;
 
-  let valueSearchMethod;
+	let valueSearchMethod;
 
-  if (props.filterConfig.searchRecords) {
-    /* arrow fn here preserves filterConfig class "this" */
-    valueSearchMethod = (...params) =>
-      props.filterConfig.searchRecords(...params);
-  } else {
-    valueSearchMethod =
-      /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
-  }
+	if (props.filterConfig.searchRecords) {
+		/* arrow fn here preserves filterConfig class "this" */
+		valueSearchMethod = (...params) =>
+			props.filterConfig.searchRecords(...params);
+	} else {
+		valueSearchMethod =
+			/* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
+	}
 
-  if (valueSearchMethod) {
-    const { items } = await valueSearchMethod(
-      { id: filterValue },
-      {
-        filterValue,
-        filterName,
-        filterConfig: props.filterConfig,
-      },
-    );
-    localValue.value = items;
-  } else {
-    localValue.value = filterValue;
-  }
+	if (valueSearchMethod) {
+		const { items } = await valueSearchMethod(
+			{
+				id: filterValue,
+			},
+			{
+				filterValue,
+				filterName,
+				filterConfig: props.filterConfig,
+			},
+		);
+		localValue.value = items;
+	} else {
+		localValue.value = filterValue;
+	}
 };
 
 watch(
-  () => props.filter.value,
-  () => {
-    fillLocalValue(props.filter);
-  },
-  {
-    immediate: true,
-  },
+	() => props.filter.value,
+	() => {
+		fillLocalValue(props.filter);
+	},
+	{
+		immediate: true,
+	},
 );
 
 // [https://webitel.atlassian.net/browse/WTEL-6732]
 // if type filter is boolean and value = false, need display preview
 const isRenderPreview = computed(
-  () => localValue.value === false || localValue.value,
+	() => localValue.value === false || localValue.value,
 );
 
 const submit = (filter: IFilter, { hide }) => {
-  emit('update:filter', filter);
-  hide();
+	emit('update:filter', filter);
+	hide();
 };
 
 const deleteFilter = () => {
-  emit('delete:filter', props.filter);
+	emit('delete:filter', props.filter);
 };
 </script>
 

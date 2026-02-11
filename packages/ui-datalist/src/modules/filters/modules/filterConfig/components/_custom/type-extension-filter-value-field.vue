@@ -45,8 +45,8 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import {
-  WtSelect,
-  WtTypeExtensionValueInput,
+	WtSelect,
+	WtTypeExtensionValueInput,
 } from '@webitel/ui-sdk/components';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
 import { computed, useAttrs, watch } from 'vue';
@@ -58,31 +58,39 @@ import { ITypeExtensionFilterConfig } from './index';
 const model = defineModel<unknown>();
 
 const props = defineProps<{
-  filterConfig: ITypeExtensionFilterConfig;
+	filterConfig: ITypeExtensionFilterConfig;
 }>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 const attrs = useAttrs();
 
 const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
+	computed(() => ({
+		model: {
+			required,
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

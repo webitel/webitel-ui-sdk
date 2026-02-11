@@ -9,17 +9,19 @@
 </template>
 
 <script setup lang="ts">
-import {AnyFilterConfig} from "../../../modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../../modules/filterConfig/classes/FilterConfig';
 
 const filterValue = defineModel<unknown>();
 
 const props = defineProps<{
-  filterConfig: AnyFilterConfig;
-  label?: string;
+	filterConfig: AnyFilterConfig;
+	label?: string;
 }>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 </script>
 

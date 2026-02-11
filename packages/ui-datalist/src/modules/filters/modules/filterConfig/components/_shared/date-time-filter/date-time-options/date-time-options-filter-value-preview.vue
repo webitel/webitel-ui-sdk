@@ -25,32 +25,37 @@
 </template>
 
 <script lang="ts" setup>
-import { RelativeDatetimeValue, FormatDateMode } from '@webitel/ui-sdk/enums';
+import { FormatDateMode, RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
 import { isRelativeDatetimeValue } from '@webitel/ui-sdk/scripts';
 import { formatDate } from '@webitel/ui-sdk/utils';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-  value: { from: number; to: number } | RelativeDatetimeValue;
+	value:
+		| {
+				from: number;
+				to: number;
+		  }
+		| RelativeDatetimeValue;
 }>();
 
 const { t } = useI18n();
 
 const isRelativeValue = computed(() => {
-  return isRelativeDatetimeValue(props.value);
+	return isRelativeDatetimeValue(props.value);
 });
 
 const from = computed(() => {
-  return isRelativeDatetimeValue.value
-    ? false
-    : formatDate(props.value.from, FormatDateMode.DATETIME);
+	return isRelativeDatetimeValue.value
+		? false
+		: formatDate(props.value.from, FormatDateMode.DATETIME);
 });
 
 const to = computed(() => {
-  return isRelativeDatetimeValue.value
-    ? false
-    : formatDate(props.value.to, FormatDateMode.DATETIME);
+	return isRelativeDatetimeValue.value
+		? false
+		: formatDate(props.value.to, FormatDateMode.DATETIME);
 });
 </script>
 

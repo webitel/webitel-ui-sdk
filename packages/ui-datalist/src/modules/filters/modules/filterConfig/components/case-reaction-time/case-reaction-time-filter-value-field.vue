@@ -9,8 +9,8 @@
 import DateTimeFilterValueField from '../_shared/date-time-filter/date-time-filter-value-field.vue';
 
 type ModelValue = {
-  from: number;
-  to: number;
+	from: number;
+	to: number;
 };
 const model = defineModel<ModelValue>();
 </script>

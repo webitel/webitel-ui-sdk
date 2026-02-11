@@ -71,34 +71,36 @@
 
 <script lang="ts" setup>
 import {
-  WtButton,
-  WtEmpty,
-  WtIconAction,
-  WtPopup,
-  WtSearchBar,
+	WtButton,
+	WtEmpty,
+	WtIconAction,
+	WtPopup,
+	WtSearchBar,
 } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
 import { type Store, storeToRefs } from 'pinia';
-import {computed, inject, onMounted, ref, watch} from 'vue';
+import { computed, inject, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 import PresetQueryAPI from '../../api/PresetQuery.ts';
 import PresetPreview from './preset-preview.vue';
 
 const props = defineProps<{
-  /**
-   * presets "section" namespace
-   */
-  namespace: string;
-  presetsStore: () => Store;
-  filterConfigs: AnyFilterConfig[];
+	/**
+	 * presets "section" namespace
+	 */
+	namespace: string;
+	presetsStore: () => Store;
+	filterConfigs: AnyFilterConfig[];
 }>();
 
 const emit = defineEmits<{
-  apply: [string];
+	apply: [
+		string,
+	];
 }>();
 
 const eventBus = inject('$eventBus');
@@ -109,128 +111,148 @@ const showPresetsList = ref(false);
 
 const presetsStore = props.presetsStore;
 const { dataList, error, isLoading, filtersManager, presetId } =
-  storeToRefs(presetsStore);
+	storeToRefs(presetsStore);
 
-const { loadDataList, initialize, updateSize, deleteEls, setupPresetPersistence } = presetsStore;
+const {
+	loadDataList,
+	initialize,
+	updateSize,
+	deleteEls,
+	setupPresetPersistence,
+} = presetsStore;
 
 updateSize(1000);
 filtersManager.value.addFilter({
-  name: 'presetNamespace',
-  value: props.namespace,
+	name: 'presetNamespace',
+	value: props.namespace,
 });
 
 const lastSetSearchValue = ref<string | null>(null);
 
 const search = computed({
-  get: () => {
-    return filtersManager.value.getFilter('search')?.value || '';
-  },
-  set: (value) => {
-    // Skip if this value was already set via handleSearchInput
-    if (lastSetSearchValue.value === value) {
-      lastSetSearchValue.value = null;
-      return;
-    }
-    filtersManager.value.addFilter({ name: 'search', value });
-  },
+	get: () => {
+		return filtersManager.value.getFilter('search')?.value || '';
+	},
+	set: (value) => {
+		// Skip if this value was already set via handleSearchInput
+		if (lastSetSearchValue.value === value) {
+			lastSetSearchValue.value = null;
+			return;
+		}
+		filtersManager.value.addFilter({
+			name: 'search',
+			value,
+		});
+	},
 });
 
 const handleSearchInput = (value: string) => {
-  // Update search immediately when cleared to bypass debounce
-  if (!value) {
-    lastSetSearchValue.value = value;
-    filtersManager.value.addFilter({ name: 'search', value });
-  }
+	// Update search immediately when cleared to bypass debounce
+	if (!value) {
+		lastSetSearchValue.value = value;
+		filtersManager.value.addFilter({
+			name: 'search',
+			value,
+		});
+	}
 };
 
 const {
-  showEmpty,
-  image: imageEmpty,
-  text: textEmpty,
+	showEmpty,
+	image: imageEmpty,
+	text: textEmpty,
 } = useTableEmpty({
-  dataList,
-  isLoading,
-  error,
-  filters: computed(() => {
-    return {
-      search: search.value,
-    };
-  }),
+	dataList,
+	isLoading,
+	error,
+	filters: computed(() => {
+		return {
+			search: search.value,
+		};
+	}),
 });
 
 watch(
-  showPresetsList,
-  () => {
-    initialize();
+	showPresetsList,
+	() => {
+		initialize();
 
-    watch(showPresetsList, (value) => {
-      if (value) {
-        search.value = '';
-        /* search.value reset causes re-fetch as filter change, so
+		watch(showPresetsList, (value) => {
+			if (value) {
+				search.value = '';
+				/* search.value reset causes re-fetch as filter change, so
       loadDataList() is commented.
       TODO: implement ability to set filters "silently" and refactor this code */
-        // loadDataList();
-      }
-    });
-  },
-  { once: true },
+				// loadDataList();
+			}
+		});
+	},
+	{
+		once: true,
+	},
 );
 
 const selectedPreset = ref();
 
 const applySelectedPreset = () => {
-  const filtersSnapshot =
-    selectedPreset.value.preset['filtersManager.toString'];
-  emit('apply', filtersSnapshot);
-  presetId.value = selectedPreset.value.id
+	const filtersSnapshot =
+		selectedPreset.value.preset['filtersManager.toString'];
+	emit('apply', filtersSnapshot);
+	presetId.value = selectedPreset.value.id;
 
-  selectedPreset.value = null;
-  showPresetsList.value = false;
+	selectedPreset.value = null;
+	showPresetsList.value = false;
 };
 
 const updatePreset = async ({ preset, onSuccess, onFailure }) => {
-  try {
-    await PresetQueryAPI.update({
-      item: { ...preset },
-      id: preset.id,
-      namespace: preset.preset?.namespace,
-    });
-    eventBus.$emit('notification', {
-      type: 'success',
-      text: t('systemNotifications.success.update', {
-        entity: t('webitelUI.filters.presets.preset'),
-      }),
-    });
-    onSuccess();
-    return loadDataList();
-  } catch (err) {
-    onFailure(err);
-    throw err;
-  }
+	try {
+		await PresetQueryAPI.update({
+			item: {
+				...preset,
+			},
+			id: preset.id,
+			namespace: preset.preset?.namespace,
+		});
+		eventBus.$emit('notification', {
+			type: 'success',
+			text: t('systemNotifications.success.update', {
+				entity: t('webitelUI.filters.presets.preset'),
+			}),
+		});
+		onSuccess();
+		return loadDataList();
+	} catch (err) {
+		onFailure(err);
+		throw err;
+	}
 };
 
 const deletePreset = async (preset: EnginePresetQuery) => {
-  await deleteEls([preset]);
-  eventBus.$emit('notification', {
-    type: 'success',
-    text: t('systemNotifications.success.delete', {
-      entity: t('webitelUI.filters.presets.preset'),
-    }),
-  });
+	await deleteEls([
+		preset,
+	]);
+	eventBus.$emit('notification', {
+		type: 'success',
+		text: t('systemNotifications.success.delete', {
+			entity: t('webitelUI.filters.presets.preset'),
+		}),
+	});
 };
 
 const restorePresetById = async (id: number | null) => {
-  if (!id) return;
-  const presetData = await PresetQueryAPI.get({ id });
-  const filters = presetData?.preset?.['filtersManager.toString'];
+	if (!id) return;
+	const presetData = await PresetQueryAPI.get({
+		id,
+	});
+	const filters = presetData?.preset?.['filtersManager.toString'];
 
-  if (filters) emit('apply', filters);
-}
+	if (filters) emit('apply', filters);
+};
 
 onMounted(async () => {
-  await setupPresetPersistence();
-  await restorePresetById(presetId.value)
-})
+	await setupPresetPersistence();
+	await restorePresetById(presetId.value);
+});
 </script>
 
 <style lang="scss" scoped>

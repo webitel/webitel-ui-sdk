@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  value: number[];
+	value: number[];
 }>();
 </script>
 

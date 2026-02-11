@@ -59,29 +59,32 @@ import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import type { IFiltersManager } from '../../../filters';
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
 
 export type SubmitConfig = {
-  onSuccess?: () => void;
-  onFailure?: (err: Error) => void;
-  onCompleted?: () => void;
+	onSuccess?: () => void;
+	onFailure?: (err: Error) => void;
+	onCompleted?: () => void;
 };
 
 const props = defineProps<{
-  /**
-   * @description
-   * is needed here for `.toString()`
-   */
-  filtersManager: IFiltersManager;
-  filterConfigs: AnyFilterConfig[];
+	/**
+	 * @description
+	 * is needed here for `.toString()`
+	 */
+	filtersManager: IFiltersManager;
+	filterConfigs: AnyFilterConfig[];
 }>();
 
 const emit = defineEmits<{
-  submit: [EnginePresetQuery, SubmitConfig?];
-  close: [];
+	submit: [
+		EnginePresetQuery,
+		SubmitConfig?,
+	];
+	close: [];
 }>();
 
 const { t } = useI18n();
@@ -89,42 +92,44 @@ const { t } = useI18n();
 const isSaving = ref(false);
 
 const presetForm = reactive({
-  name: '',
-  description: '',
+	name: '',
+	description: '',
 });
 
 const v$ = useVuelidate(
-  computed(() => {
-    return {
-      name: {
-        required,
-      },
-    };
-  }),
-  presetForm,
-  { $autoDirty: true },
+	computed(() => {
+		return {
+			name: {
+				required,
+			},
+		};
+	}),
+	presetForm,
+	{
+		$autoDirty: true,
+	},
 );
 v$.value.$touch();
 
 const appliedFilters = computed(() => {
-  return props.filtersManager.getFiltersList();
+	return props.filtersManager.getFiltersList();
 });
 
 const save = () => {
-  isSaving.value = true;
+	isSaving.value = true;
 
-  const preset: EnginePresetQuery = {
-    ...presetForm,
-    preset: {
-      'filtersManager.toString': props.filtersManager.toString(),
-    },
-  };
+	const preset: EnginePresetQuery = {
+		...presetForm,
+		preset: {
+			'filtersManager.toString': props.filtersManager.toString(),
+		},
+	};
 
-  emit('submit', preset, {
-    onCompleted: () => {
-      isSaving.value = false;
-    },
-  });
+	emit('submit', preset, {
+		onCompleted: () => {
+			isSaving.value = false;
+		},
+	});
 };
 </script>
 

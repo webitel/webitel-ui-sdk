@@ -1,8 +1,8 @@
 const darkColors = {
-  root: {
-    background: '{overlay.tooltip.background}',
-    color: '{overlay.tooltip.color}',
-  }
+	root: {
+		background: '{overlay.tooltip.background}',
+		color: '{overlay.tooltip.color}',
+	},
 };
 
-export default darkColors
+export default darkColors;

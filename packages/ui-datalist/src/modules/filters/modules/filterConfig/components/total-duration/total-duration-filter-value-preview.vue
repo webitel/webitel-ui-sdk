@@ -28,7 +28,7 @@ import { useFromToSecToPreviewTime } from '../../composables/useFromToSecToPrevi
 import type { TalkDurationFilterModelValue } from '../talk-duration/TalkDurationFilter';
 
 const props = defineProps<{
-  value: TalkDurationFilterModelValue;
+	value: TalkDurationFilterModelValue;
 }>();
 
 const { t } = useI18n();

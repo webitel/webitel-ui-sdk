@@ -23,82 +23,93 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
-import { WtCheckbox } from '@webitel/ui-sdk/components';
+import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { IContactGroupFilterConfig } from './index';
 
 const props = defineProps<{
-  filterConfig: IContactGroupFilterConfig;
-  disableValidation?: boolean;
-  hideLabel?: boolean;
+	filterConfig: IContactGroupFilterConfig;
+	disableValidation?: boolean;
+	hideLabel?: boolean;
 }>();
 
 type ModelValue = {
-  list: string[];
-  unassigned: boolean;
+	list: string[];
+	unassigned: boolean;
 };
 
 const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 const { t } = useI18n();
 
-const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
+const labelValue = computed(() =>
+	props?.hideLabel ? null : t('webitelUI.filters.filterValue'),
+);
 
 const changeListValue = (event) => {
-  if(!event.length && !model.value.unassigned) {
-
-    return model.value = {}
-  } else {
-    model.value = {
-      ...model.value,
-      list: event,
-    };
-  }
+	if (!event.length && !model.value.unassigned) {
+		return (model.value = {});
+	} else {
+		model.value = {
+			...model.value,
+			list: event,
+		};
+	}
 };
-const v$ =  useVuelidate(
-    computed(() => ({
-      model: {
-        list: { required: requiredIf(() => !model.value.unassigned) },
-        unassigned: {
-          required: requiredIf(() =>
-            props.filterConfig?.hideUnassigned && !model.value.list.length
-          ),
-        },
-      },
-    })),
-    { model },
-    { $autoDirty: true }
+const v$ = useVuelidate(
+	computed(() => ({
+		model: {
+			list: {
+				required: requiredIf(() => !model.value.unassigned),
+			},
+			unassigned: {
+				required: requiredIf(
+					() => props.filterConfig?.hideUnassigned && !model.value.list.length,
+				),
+			},
+		},
+	})),
+	{
+		model,
+	},
+	{
+		$autoDirty: true,
+	},
 );
 
 const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      list: [],
-      unassigned: null,
-    };
-  }
+	if (!model.value) {
+		model.value = {
+			list: [],
+			unassigned: null,
+		};
+	}
 };
 
 onMounted(() => {
-  if(!props?.disableValidation) v$.value.$touch();
+	if (!props?.disableValidation) v$.value.$touch();
 
-  initModel();
+	initModel();
 });
 
 watch(
-  () => v$?.value?.$invalid,
-  (invalid) => {
-    if (v$?.value) {
-      emit('update:invalid', invalid);
-    }
-  },
-  { immediate: true });
+	() => v$?.value?.$invalid,
+	(invalid) => {
+		if (v$?.value) {
+			emit('update:invalid', invalid);
+		}
+	},
+	{
+		immediate: true,
+	},
+);
 </script>
 
 <style scoped></style>
