@@ -1,14 +1,24 @@
 <template>
-  <div :class="[`wt-expansion-panel--${props.size}`]" class="wt-expansion-panel">
+  <div
+    :class="[`wt-expansion-panel--${props.size}`]"
+    class="wt-expansion-panel"
+  >
     <div
-:class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']" class="wt-expansion-panel-header"
-      tabindex="0" @click="toggle" @keypress.enter="toggle">
-      <slot name="title" />
+      :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']"
+      class="wt-expansion-panel-header"
+      tabindex="0"
+      @click="toggle"
+      @keypress.enter="toggle"
+    >
+      <slot name="title"/>
+
       <div class="wt-expansion-panel-actions">
         <slot name="actions" v-bind="{ open, opened }" />
         <wt-icon
-:class="{ 'wt-expansion-panel-arrow--opened': opened }" class="wt-expansion-panel-arrow"
-          icon="arrow-right" />
+          :class="{ 'wt-expansion-panel-arrow--opened': opened }"
+          class="wt-expansion-panel-arrow"
+          icon="arrow-right"
+        />
       </div>
     </div>
     <wt-expand-transition v-show="opened">
@@ -19,10 +29,12 @@
   </div>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue';
+<script setup lang="ts">
+import { toRef } from 'vue';
+import { useExpansion } from '../../composables/useExpansion/useExpansion';
 
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
+import { ComponentSize } from '../../enums';
 
 /**
  * @emits {void} opened - Emitted when the expansion panel is opened
@@ -34,63 +46,34 @@ import WtExpandTransition from '../transitions/wt-expand-transition.vue';
  * @slot-scope {function} open - Function to open the panel
  * @slot-scope {boolean} opened - Whether the panel is currently opened
  */
-const props = defineProps({
-	/**
-	 * Size of the expansion panel
-	 * @type {string}
-	 * @default 'md'
-	 * @options ['sm', 'md']
-	 */
-	size: {
-		type: String,
-		default: 'md',
-	},
-	/**
-	 * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
-	 * @type {boolean}
-	 * @default false
-	 */
-	collapsed: {
-		type: Boolean,
-		default: false,
-	},
-});
-
-const emit = defineEmits([
-	'opened',
-	'closed',
-]);
-
-const opened = ref(!props.collapsed);
-
-function open() {
-	if (!opened.value) {
-		opened.value = true;
-		emit('opened');
-	}
-}
-
-function close() {
-	if (opened.value) {
-		opened.value = false;
-		emit('closed');
-	}
-}
-
-function toggle() {
-	return opened.value ? close() : open();
-}
-
-watch(
-	() => props.collapsed,
-	(newVal) => {
-		if (newVal) {
-			close();
-		} else {
-			open();
-		}
+const props = withDefaults(
+	defineProps<{
+		/**
+		 * Size of the expansion panel
+		 * @type {string}
+		 * @default 'md'
+		 * @options ['sm', 'md']
+		 */
+		size?: ComponentSize;
+		/**
+		 * Whether the expansion panel is initially collapsed. Also, can force expansion state, if changed
+		 * @type {boolean}
+		 * @default false
+		 */
+		collapsed?: boolean;
+	}>(),
+	{
+		size: ComponentSize.MD,
+		collapsed: false,
 	},
 );
+
+const emit = defineEmits<{
+	opened: [];
+	closed: [];
+}>();
+
+const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
 </script>
 
 <style scoped>
@@ -110,11 +93,6 @@ watch(
   color: var(--wt-expansion-panel-header-title-color);
 }
 
-.wt-expansion-panel-body {
-  background-color: var(--wt-expansion-panel-content-background-color);
-  color: var(--wt-expansion-panel-content-text-color);
-}
-
 .wt-expansion-panel-actions {
   display: flex;
   gap: var(--spacing-xs);
@@ -127,4 +105,10 @@ watch(
 .wt-expansion-panel-arrow--opened {
   transform: rotate(90deg);
 }
+
+.wt-expansion-panel-body {
+  background-color: var(--wt-expansion-panel-content-background-color);
+  color: var(--wt-expansion-panel-content-text-color);
+}
+
 </style>
