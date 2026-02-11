@@ -12,7 +12,9 @@ import type { TalkDurationFilterModelValue } from './TalkDurationFilter.d.ts';
 
 const model = defineModel<TalkDurationFilterModelValue>();
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 </script>
 

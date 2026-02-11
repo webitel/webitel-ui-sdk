@@ -2,38 +2,46 @@ import { useVuelidate } from '@vuelidate/core';
 import { computed, ModelRef, type Reactive, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {BooleanFilterModelValue} from "../enums/options/BooleanFilterOptions";
+import { BooleanFilterModelValue } from '../enums/options/BooleanFilterOptions';
 
 export const usePrettifyBooleanValuePreview = (
-  value: Reactive<boolean>,
-): { localeValue: Ref<string> } => {
-  const { t } = useI18n();
+	value: Reactive<boolean>,
+): {
+	localeValue: Ref<string>;
+} => {
+	const { t } = useI18n();
 
-  const localeValue = computed(() => {
-    return value ? t('vocabulary.yes') : t('vocabulary.no');
-  });
+	const localeValue = computed(() => {
+		return value ? t('vocabulary.yes') : t('vocabulary.no');
+	});
 
-  return { localeValue };
+	return {
+		localeValue,
+	};
 };
 
 export const useBooleanFilterValueValidation = <
-  T extends BooleanFilterModelValue,
+	T extends BooleanFilterModelValue,
 >(
-  model: ModelRef<T>,
+	model: ModelRef<T>,
 ) => {
-  const v$ = useVuelidate(
-    computed(() => ({
-      model: {
-        required: (v: T) => !(!v && v !== false),
-      },
-    })),
-    { model },
-    { $autoDirty: true },
-  );
+	const v$ = useVuelidate(
+		computed(() => ({
+			model: {
+				required: (v: T) => !(!v && v !== false),
+			},
+		})),
+		{
+			model,
+		},
+		{
+			$autoDirty: true,
+		},
+	);
 
-  v$.value.$touch();
+	v$.value.$touch();
 
-  return {
-    v$,
-  };
+	return {
+		v$,
+	};
 };

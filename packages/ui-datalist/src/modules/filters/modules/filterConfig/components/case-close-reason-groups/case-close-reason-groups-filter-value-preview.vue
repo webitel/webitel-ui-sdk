@@ -8,7 +8,7 @@ import { CasesCloseReasonGroup } from 'webitel-sdk';
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
-  value: CasesCloseReasonGroup[];
+	value: CasesCloseReasonGroup[];
 }>();
 </script>
 

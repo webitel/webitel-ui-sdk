@@ -21,24 +21,22 @@
 import { WtLabel } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import type {IFiltersManager} from '../../../filters';
+import type { IFiltersManager } from '../../../filters';
 import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from '../../../filters/components/preview/dynamic-filter-preview.vue';
-import { useFilterConfigsToolkit } from "../../../filters/composables/useFilterConfigsToolkit";
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { useFilterConfigsToolkit } from '../../../filters/composables/useFilterConfigsToolkit';
+import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 
 const props = defineProps<{
-  filtersManager: IFiltersManager;
-  filterConfigs: AnyFilterConfig[];
+	filtersManager: IFiltersManager;
+	filterConfigs: AnyFilterConfig[];
 }>();
 
 const { t } = useI18n();
 
-const {
-  appliedFilterToFilterConfigMappings,
-} = useFilterConfigsToolkit({
-  filterOptions: props.filterConfigs,
-  filtersManager: props.filtersManager,
+const { appliedFilterToFilterConfigMappings } = useFilterConfigsToolkit({
+	filterOptions: props.filterConfigs,
+	filtersManager: props.filtersManager,
 });
 </script>
 

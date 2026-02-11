@@ -23,13 +23,13 @@ import { format } from 'date-fns';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-  value: number[];
+	value: number[];
 }>();
 
 const { t } = useI18n();
 
 function convertTimestampToDate(value) {
-  return format(new Date(value), 'dd.MM.yyyy HH:mm');
+	return format(new Date(value), 'dd.MM.yyyy HH:mm');
 }
 </script>
 

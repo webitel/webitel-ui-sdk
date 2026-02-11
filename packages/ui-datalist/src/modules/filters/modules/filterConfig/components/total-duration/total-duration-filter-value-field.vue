@@ -12,7 +12,9 @@ import type { TotalDurationFilterModelValue } from './TotalDurationFilter';
 
 const model = defineModel<TotalDurationFilterModelValue>();
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 </script>
 

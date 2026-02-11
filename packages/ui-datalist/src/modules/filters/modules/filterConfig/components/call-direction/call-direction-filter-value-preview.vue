@@ -8,7 +8,7 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-  value: number[];
+	value: number[];
 }>();
 
 const { t } = useI18n();

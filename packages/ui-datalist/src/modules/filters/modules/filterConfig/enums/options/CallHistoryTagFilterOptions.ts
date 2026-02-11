@@ -1,8 +1,8 @@
-import {FilterEnumOption} from "../../../../classes/Filter";
+import { FilterEnumOption } from '../../../../classes/Filter';
 
 export const CallHistoryTagFilterOptions: Array<FilterEnumOption> = [
-  {
-    locale: 'filters.tag.options.vm',
-    value: 'vm',
-  },
+	{
+		locale: 'filters.tag.options.vm',
+		value: 'vm',
+	},
 ] as const;

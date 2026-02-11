@@ -22,7 +22,7 @@ import { useI18n } from 'vue-i18n';
 const model = defineModel<string>();
 
 const props = defineProps<{
-  previewMode?: boolean;
+	previewMode?: boolean;
 }>();
 
 const { t } = useI18n();

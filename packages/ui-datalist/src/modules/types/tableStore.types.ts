@@ -8,61 +8,61 @@ import { DatalistStoreProviderType } from './StoreProvider';
 export type TrackSelectedRowBy<T> = (row: T) => T;
 
 export interface useTableStoreConfig<Entity> {
-  apiModule: ApiModule<Entity>;
-  headers: WtTableHeader[];
-  disablePersistence?: boolean | [];
-  storeType?: DatalistStoreProviderType;
-  isAppendDataList?: boolean;
-  // etagMode: boolean;
+	apiModule: ApiModule<Entity>;
+	headers: WtTableHeader[];
+	disablePersistence?: boolean | [];
+	storeType?: DatalistStoreProviderType;
+	isAppendDataList?: boolean;
+	// etagMode: boolean;
 }
 
 export interface PatchItemPropertyParams {
-  index: number;
-  path: string;
-  value: unknown;
+	index: number;
+	path: string;
+	value: unknown;
 }
 
 export interface TableStore<Entity> {
-  // tableStore
-  dataList: Ref<Entity[]>;
-  selected: Ref<Entity[]>;
-  error: Ref<Error | null>;
-  isLoading: Ref<boolean>;
+	// tableStore
+	dataList: Ref<Entity[]>;
+	selected: Ref<Entity[]>;
+	error: Ref<Error | null>;
+	isLoading: Ref<boolean>;
 
-  // paginationStore
-  page: Ref<number>;
-  size: Ref<number>;
-  next: Ref<boolean>;
+	// paginationStore
+	page: Ref<number>;
+	size: Ref<number>;
+	next: Ref<boolean>;
 
-  // headersStore
-  headers: Ref<[]>;
-  shownHeaders: Ref<[]>;
-  fields: Ref<[]>;
-  sort: Ref<string>;
-  columnWidths: Ref<[]>;
+	// headersStore
+	headers: Ref<[]>;
+	shownHeaders: Ref<[]>;
+	fields: Ref<[]>;
+	sort: Ref<string>;
+	columnWidths: Ref<[]>;
 
-  // filtersStore
-  filtersManager: Ref<IFiltersManager>;
-  isFiltersRestoring: Ref<boolean>;
+	// filtersStore
+	filtersManager: Ref<IFiltersManager>;
+	isFiltersRestoring: Ref<boolean>;
 
-  // tableStore
-  initialize: () => Promise<void>;
-  loadDataList: (query?: object) => Promise<void>;
-  updateSelected: (selected: Entity[]) => void;
-  patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
-  deleteEls: (deleted: Entity[]) => Promise<void>;
+	// tableStore
+	initialize: () => Promise<void>;
+	loadDataList: (query?: object) => Promise<void>;
+	updateSelected: (selected: Entity[]) => void;
+	patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
+	deleteEls: (deleted: Entity[]) => Promise<void>;
 
-  // paginationStore
-  updatePage: (page: number) => void;
-  updateSize: (size: number) => void;
+	// paginationStore
+	updatePage: (page: number) => void;
+	updateSize: (size: number) => void;
 
-  // headersStore
-  updateSort: (column: object) => void;
-  updateShownHeaders: () => void;
+	// headersStore
+	updateSort: (column: object) => void;
+	updateShownHeaders: () => void;
 
-  // filtersStore
-  hasFilter: IFiltersManager['hasFilter'];
-  addFilter: IFiltersManager['addFilter'];
-  updateFilter: IFiltersManager['updateFilter'];
-  deleteFilter: IFiltersManager['deleteFilter'];
+	// filtersStore
+	hasFilter: IFiltersManager['hasFilter'];
+	addFilter: IFiltersManager['addFilter'];
+	updateFilter: IFiltersManager['updateFilter'];
+	deleteFilter: IFiltersManager['deleteFilter'];
 }

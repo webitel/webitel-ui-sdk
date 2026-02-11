@@ -32,16 +32,16 @@ import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-fi
 import { ITypeExtensionFilterConfig } from './index';
 
 const props = defineProps<
-  DynamicFilterPreviewComponentProps & {
-    filterConfig: ITypeExtensionFilterConfig;
-  }
+	DynamicFilterPreviewComponentProps & {
+		filterConfig: ITypeExtensionFilterConfig;
+	}
 >();
 
 const showLookupValuePreview = computed(() => {
-  return [
-    WtTypeExtensionFieldKind.Multiselect,
-    WtTypeExtensionFieldKind.Select,
-  ].includes(props.filterConfig.field.kind);
+	return [
+		WtTypeExtensionFieldKind.Multiselect,
+		WtTypeExtensionFieldKind.Select,
+	].includes(props.filterConfig.field.kind);
 });
 </script>
 

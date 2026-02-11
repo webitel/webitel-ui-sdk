@@ -41,9 +41,11 @@ import { useI18n } from 'vue-i18n';
 import { SubmitConfig } from './save-preset-popup.vue';
 
 const emit = defineEmits<{
-  confirm: [SubmitConfig];
-  cancel: [];
-  close: [];
+	confirm: [
+		SubmitConfig,
+	];
+	cancel: [];
+	close: [];
 }>();
 
 const { t } = useI18n();
@@ -51,9 +53,9 @@ const { t } = useI18n();
 const isSaving = ref(false);
 
 const confirm = () => {
-  emit('confirm', {
-    onCompleted: () => (isSaving.value = false),
-  });
+	emit('confirm', {
+		onCompleted: () => (isSaving.value = false),
+	});
 };
 </script>
 

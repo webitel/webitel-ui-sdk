@@ -6,7 +6,7 @@
 import { usePrettifyBooleanValuePreview } from '../../composables/booleanFilterToolkit';
 
 const props = defineProps<{
-  value: boolean;
+	value: boolean;
 }>();
 
 const { localeValue } = usePrettifyBooleanValuePreview(props.value);

@@ -10,7 +10,7 @@
 import { watch } from 'vue';
 
 import { useBooleanFilterValueValidation } from '../../composables/booleanFilterToolkit';
-import {BooleanFilterModelValue} from "../../enums/options/BooleanFilterOptions";
+import { BooleanFilterModelValue } from '../../enums/options/BooleanFilterOptions';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
 const model = defineModel<BooleanFilterModelValue>();
@@ -18,15 +18,19 @@ const model = defineModel<BooleanFilterModelValue>();
 const { v$ } = useBooleanFilterValueValidation<BooleanFilterModelValue>(model);
 
 const emit = defineEmits<{
-  'update:invalid': [boolean];
+	'update:invalid': [
+		boolean,
+	];
 }>();
 
 watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
 );
 </script>
 

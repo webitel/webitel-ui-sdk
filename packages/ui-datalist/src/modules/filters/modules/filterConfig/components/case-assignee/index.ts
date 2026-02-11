@@ -3,9 +3,9 @@ import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview
 import { createCaseAssigneeFilterConfig } from './filterConfig';
 
 export {
-  CaseAssigneeFilterValueField,
-  CaseAssigneeFilterValuePreview,
-  createCaseAssigneeFilterConfig,
+	CaseAssigneeFilterValueField,
+	CaseAssigneeFilterValuePreview,
+	createCaseAssigneeFilterConfig,
 };
 
 export type * from './filterConfig';

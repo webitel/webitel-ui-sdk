@@ -17,12 +17,12 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 
 const props = withDefaults(
-  defineProps<{
-    size?: ComponentSize;
-  }>(),
-  {
-    size: ComponentSize.MD,
-  },
+	defineProps<{
+		size?: ComponentSize;
+	}>(),
+	{
+		size: ComponentSize.MD,
+	},
 );
 </script>
 

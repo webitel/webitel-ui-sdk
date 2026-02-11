@@ -65,32 +65,34 @@ import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams, IFilter} from "../../../classes/Filter";
-import {BaseFilterConfig} from "../../../modules/filterConfig/classes/FilterConfig";
+import { FilterInitParams, IFilter } from '../../../classes/Filter';
+import { BaseFilterConfig } from '../../../modules/filterConfig/classes/FilterConfig';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
-import DynamicFilterConfigFormValueInput from "./dynamic-filter-config-form-value-input.vue";
+import DynamicFilterConfigFormValueInput from './dynamic-filter-config-form-value-input.vue';
 
 const props = defineProps<{
-  /**
-   * @description
-   * "Add" mode
-   */
-  filterConfigs?: BaseFilterConfig[];
-  /**
-   * @description
-   * "Edit" mode
-   */
-  filterConfig?: BaseFilterConfig;
-  /**
-   * @description
-   * Edited filter instance
-   */
-  filter?: IFilter;
+	/**
+	 * @description
+	 * "Add" mode
+	 */
+	filterConfigs?: BaseFilterConfig[];
+	/**
+	 * @description
+	 * "Edit" mode
+	 */
+	filterConfig?: BaseFilterConfig;
+	/**
+	 * @description
+	 * Edited filter instance
+	 */
+	filter?: IFilter;
 }>();
 
 const emit = defineEmits<{
-  submit: [FilterInitParams];
-  cancel: [];
+	submit: [
+		FilterInitParams,
+	];
+	cancel: [];
 }>();
 
 const { t } = useI18n();
@@ -104,63 +106,67 @@ const editMode = !!props.filter;
 const invalid = ref(false);
 
 const filterConfigOptions = computed(() => {
-  if (props.filterConfig) {
-    return [props.filterConfig];
-  }
+	if (props.filterConfig) {
+		return [
+			props.filterConfig,
+		];
+	}
 
-  return props.filterConfigs;
+	return props.filterConfigs;
 });
 
 const selectedFilterConfig = computed(() => {
-  if (props.filterConfig) {
-    return props.filterConfig;
-  }
+	if (props.filterConfig) {
+		return props.filterConfig;
+	}
 
-  return filterConfigOptions.value.find((filterConfig) => {
-    return filterConfig.name === filterName.value;
-  });
+	return filterConfigOptions.value.find((filterConfig) => {
+		return filterConfig.name === filterName.value;
+	});
 });
 
 const onValueChange = (v) => {
-  filterValue.value = v;
+	filterValue.value = v;
 };
 
 const onValueInvalidChange = (v) => {
-  invalid.value = v;
+	invalid.value = v;
 };
 
 const valueInputLabelText = computed(() => {
-  return t('webitelUI.filters.filterValue');
+	return t('webitelUI.filters.filterValue');
 });
 
 const onLabelValueUpdate = (val: string) => {
-  filterLabel.value = val;
+	filterLabel.value = val;
 };
 
 const onFilterNameUpdate = (val: string) => {
-  filterName.value = val;
-  filterValue.value = null;
-  invalid.value = false;
+	filterName.value = val;
+	filterValue.value = null;
+	invalid.value = false;
 };
 
 const submit = () => {
-  emit('submit', {
-    name: filterName.value,
-    label: filterLabel.value,
-    value: filterValue.value,
-  });
+	emit('submit', {
+		name: filterName.value,
+		label: filterLabel.value,
+		value: filterValue.value,
+	});
 };
 
 if (props.filter) {
-  watch(
-    props.filter,
-    () => {
-      filterName.value = props.filter.name;
-      filterValue.value = deepcopy(props.filter.value);
-      filterLabel.value = props.filter.label;
-    },
-    { immediate: true },
-  );
+	watch(
+		props.filter,
+		() => {
+			filterName.value = props.filter.name;
+			filterValue.value = deepcopy(props.filter.value);
+			filterLabel.value = props.filter.label;
+		},
+		{
+			immediate: true,
+		},
+	);
 }
 </script>
 

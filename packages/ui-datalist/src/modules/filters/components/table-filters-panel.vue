@@ -69,14 +69,14 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { Store } from 'pinia';
-import {computed} from 'vue';
-import {WebitelProtoDataField} from "webitel-sdk";
+import { computed } from 'vue';
+import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
-import {FilterData, IFilter} from "../classes/Filter";
-import {IFiltersManager} from "../classes/FiltersManager";
-import {useFilterConfigsToolkit} from "../composables/useFilterConfigsToolkit";
-import {AnyFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
+import { FilterData, IFilter } from '../classes/Filter';
+import { IFiltersManager } from '../classes/FiltersManager';
+import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
+import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import StaticFilterField from './config/static-view/static-filter-field.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
@@ -84,55 +84,55 @@ import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
 type Props = {
-  /**
-   * @description
-   * available filter options to set
-   */
-  filterOptions: (FilterOption | AnyFilterConfig)[];
-  /**
-   * @description
-   * create local filters manager from snapshot
-   * inside save-preset.vue
-   */
-  filtersManager: IFiltersManager;
-  /**
-   * @author @dlohvinov
-   *
-   * @implements
-   * [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702)
-   *
-   * @description
-   * Decided to pass fields as a prop instead of converting them to
-   * Props.filterOptions, because this functionality can be expanded to many
-   * filter panels
-   */
-  filterableExtensionFields?: WebitelProtoDataField[];
-  /**
-   * @description
-   * QueryPreset "section" field
-   */
-  presetNamespace?: string;
-  /**
-   * @author @dlohvinov
-   *
-   * @description
-   * table store for operating with presets as dataList.
-   * Seems to me like a bad idea, because apply-preset should not store
-   * any data in a specific store – component state should be enough.
-   * However as for now, there's no composable implementing this logic,
-   * so store is used instead.
-   *
-   * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
-   */
-  usePresetsStore?: Store;
+	/**
+	 * @description
+	 * available filter options to set
+	 */
+	filterOptions: (FilterOption | AnyFilterConfig)[];
+	/**
+	 * @description
+	 * create local filters manager from snapshot
+	 * inside save-preset.vue
+	 */
+	filtersManager: IFiltersManager;
+	/**
+	 * @author @dlohvinov
+	 *
+	 * @implements
+	 * [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702)
+	 *
+	 * @description
+	 * Decided to pass fields as a prop instead of converting them to
+	 * Props.filterOptions, because this functionality can be expanded to many
+	 * filter panels
+	 */
+	filterableExtensionFields?: WebitelProtoDataField[];
+	/**
+	 * @description
+	 * QueryPreset "section" field
+	 */
+	presetNamespace?: string;
+	/**
+	 * @author @dlohvinov
+	 *
+	 * @description
+	 * table store for operating with presets as dataList.
+	 * Seems to me like a bad idea, because apply-preset should not store
+	 * any data in a specific store – component state should be enough.
+	 * However as for now, there's no composable implementing this logic,
+	 * so store is used instead.
+	 *
+	 * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
+	 */
+	usePresetsStore?: Store;
 
-  /**
-   * @author @Lera24
-   * @description
-   * Static view filter rendering mode. With it, filters are drawn immediately when the form is opened
-   * [https://webitel.atlassian.net/browse/WTEL-6934]
-   */
-  staticMode?: boolean;
+	/**
+	 * @author @Lera24
+	 * @description
+	 * Static view filter rendering mode. With it, filters are drawn immediately when the form is opened
+	 * [https://webitel.atlassian.net/browse/WTEL-6934]
+	 */
+	staticMode?: boolean;
 };
 
 const props = defineProps<Props>();
@@ -147,29 +147,37 @@ const props = defineProps<Props>();
  * 2. filtersManager shouldn't be passed here, it seems to me like an anti-pattern
  */
 const emit = defineEmits<{
-  'filter:add': [FilterData];
-  'filter:update': [FilterData];
-  'filter:delete': [IFilter];
-  'filter:reset-all': [];
-  /**
-   * string == filtersManager.toString() snapshot
-   */
-  'preset:apply': [string];
-  hide: [];
+	'filter:add': [
+		FilterData,
+	];
+	'filter:update': [
+		FilterData,
+	];
+	'filter:delete': [
+		IFilter,
+	];
+	'filter:reset-all': [];
+	/**
+	 * string == filtersManager.toString() snapshot
+	 */
+	'preset:apply': [
+		string,
+	];
+	hide: [];
 }>();
 
 const {
-  filterConfigs,
-  staticViewFilterToFilterConfigMappings,
-  filtersIncluded,
-  appliedFilters,
-  appliedFilterToFilterConfigMappings,
-  unAppliedFiltersConfigs,
+	filterConfigs,
+	staticViewFilterToFilterConfigMappings,
+	filtersIncluded,
+	appliedFilters,
+	appliedFilterToFilterConfigMappings,
+	unAppliedFiltersConfigs,
 } = useFilterConfigsToolkit({
-  filterOptions: props.filterOptions,
-  filtersManager: props.filtersManager,
-  filterableExtensionFields: props.filterableExtensionFields,
-  staticMode: props.staticMode,
+	filterOptions: props.filterOptions,
+	filtersManager: props.filtersManager,
+	filterableExtensionFields: props.filterableExtensionFields,
+	staticMode: props.staticMode,
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
@@ -179,19 +187,25 @@ https://webitel.atlassian.net/browse/WTEL-7014
 Clear filters button should be active only if filters are defined in the table-filter-panel. Excluding the search filter
 **/
 
-const listSelectedFilters = computed(()=> {
-  const filterOptionsKeys = props.filterOptions.map(filter => typeof filter === 'string' ? filter : filter.name);
-  return new Map([...props.filtersManager.filters].filter(([key]) => filterOptionsKeys.includes(key)));
+const listSelectedFilters = computed(() => {
+	const filterOptionsKeys = props.filterOptions.map((filter) =>
+		typeof filter === 'string' ? filter : filter.name,
+	);
+	return new Map(
+		[
+			...props.filtersManager.filters,
+		].filter(([key]) => filterOptionsKeys.includes(key)),
+	);
 });
 
 const presetStore = props.usePresetsStore ? props.usePresetsStore() : null;
 
 const handleResetFilters = () => {
-  emit('filter:reset-all')
-  if (presetStore) {
-    presetStore.resetPreset()
-  }
-}
+	emit('filter:reset-all');
+	if (presetStore) {
+		presetStore.resetPreset();
+	}
+};
 </script>
 
 <style>

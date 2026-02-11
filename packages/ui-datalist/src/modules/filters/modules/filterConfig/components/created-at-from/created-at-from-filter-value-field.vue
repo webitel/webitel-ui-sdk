@@ -17,7 +17,7 @@ const model = defineModel<number>();
 const { t } = useI18n();
 
 if (!model.value) {
-  model.value = startOfToday().getTime();
+	model.value = startOfToday().getTime();
 }
 </script>
 

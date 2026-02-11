@@ -10,73 +10,75 @@ import { useCardValidation } from './useCardValidation';
 import { useItemCardSaveText } from './useItemCardSaveText';
 
 export const useCardComponent = <CardEntity>({
-  useCardStore,
+	useCardStore,
 }: {
-  useCardStore: StoreDefinition;
+	useCardStore: StoreDefinition;
 }) => {
-  const cardStore = useCardStore();
+	const cardStore = useCardStore();
 
-  const {
-    itemId,
-    originalItemInstance,
-    validationSchema,
-    isLoading,
-    // isSaving, // todo: use me
-    // error, // todo: use me
-  } = storeToRefs(cardStore);
+	const {
+		itemId,
+		originalItemInstance,
+		validationSchema,
+		isLoading,
+		// isSaving, // todo: use me
+		// error, // todo: use me
+	} = storeToRefs(cardStore);
 
-  const { initialize, saveItem, $reset } = cardStore;
+	const { initialize, saveItem, $reset } = cardStore;
 
-  const { routeId } = useCardRouting({
-    itemId,
-  });
+	const { routeId } = useCardRouting({
+		itemId,
+	});
 
-  const { modelValue, validationFields, hasValidationErrors, validate } =
-    useCardValidation({ validationSchema });
+	const { modelValue, validationFields, hasValidationErrors, validate } =
+		useCardValidation({
+			validationSchema,
+		});
 
-  const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({
-    value: modelValue,
-  });
+	const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({
+		value: modelValue,
+	});
 
-  const debouncedIsLoading = refDebounced(isLoading, 300);
+	const debouncedIsLoading = refDebounced(isLoading, 300);
 
-  const { isNew } = useCardIsNew({
-    itemId,
-  });
+	const { isNew } = useCardIsNew({
+		itemId,
+	});
 
-  const { saveText } = useItemCardSaveText({
-    isNew,
-    isAnyFieldEdited,
-  });
+	const { saveText } = useItemCardSaveText({
+		isNew,
+		isAnyFieldEdited,
+	});
 
-  const { save } = useCardSaveAction<CardEntity>({
-    // @ts-expect-error
-    validate, // fixme: type
-    saveItem,
-  });
+	const { save } = useCardSaveAction<CardEntity>({
+		// @ts-expect-error
+		validate, // fixme: type
+		saveItem,
+	});
 
-  initialize({
-    itemId: routeId.value,
-  });
+	initialize({
+		itemId: routeId.value,
+	});
 
-  onUnmounted($reset);
+	onUnmounted($reset);
 
-  return {
-    // models
-    modelValue,
+	return {
+		// models
+		modelValue,
 
-    // state
-    debouncedIsLoading,
-    originalItemInstance,
+		// state
+		debouncedIsLoading,
+		originalItemInstance,
 
-    // computed
-    isNew,
-    saveText,
-    hasValidationErrors,
-    isAnyFieldEdited,
-    validationFields,
+		// computed
+		isNew,
+		saveText,
+		hasValidationErrors,
+		isAnyFieldEdited,
+		validationFields,
 
-    // actions
-    save,
-  };
+		// actions
+		save,
+	};
 };

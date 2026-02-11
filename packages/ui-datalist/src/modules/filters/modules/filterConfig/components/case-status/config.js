@@ -3,4 +3,4 @@ import CaseStatusesApi from '@webitel/ui-sdk/api/clients/caseStatuses/caseStatus
 
 export const caseStatusesSearchMethod = CaseStatusesApi.getLookup;
 export const caseStatusConditionsSearchMethod =
-  CaseStatusConditionsAPI.getLookup;
+	CaseStatusConditionsAPI.getLookup;

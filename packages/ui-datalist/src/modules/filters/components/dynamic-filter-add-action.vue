@@ -30,14 +30,14 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams} from "../classes/Filter";
-import {BaseFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
+import { FilterInitParams } from '../classes/Filter';
+import { BaseFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
 import DynamicFilterConfigForm from './config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from './config/dynamic-view/dynamic-filter-config-view.vue';
 
 interface Props {
-  filterConfigs: BaseFilterConfig[];
-  showLabel?: boolean;
+	filterConfigs: BaseFilterConfig[];
+	showLabel?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -45,12 +45,14 @@ const props = defineProps<Props>();
 const { t } = useI18n();
 
 const emit = defineEmits<{
-  'add:filter': [FilterInitParams];
+	'add:filter': [
+		FilterInitParams,
+	];
 }>();
 
 const submit = (payload: FilterInitParams, { hide }) => {
-  emit('add:filter', payload);
-  hide();
+	emit('add:filter', payload);
+	hide();
 };
 </script>
 

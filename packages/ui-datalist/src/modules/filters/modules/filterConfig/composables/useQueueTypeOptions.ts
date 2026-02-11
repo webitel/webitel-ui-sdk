@@ -3,20 +3,19 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export function useQueueTypeOptions() {
-  const { t } = useI18n();
+	const { t } = useI18n();
 
-  const mapQueueTypeToLabel = (value: string) =>
-    t(`objects.queue.type.${value}`);
+	const mapQueueTypeToLabel = (value: string) =>
+		t(`objects.queue.type.${value}`);
 
-  const options = computed(() =>
-    Object.entries(QueueType)
-      .map(([key, value]) => ({
-        value,
-        label: mapQueueTypeToLabel(value),
-      }))
-  );
+	const options = computed(() =>
+		Object.entries(QueueType).map(([key, value]) => ({
+			value,
+			label: mapQueueTypeToLabel(value),
+		})),
+	);
 
-  return {
-    options,
-  };
+	return {
+		options,
+	};
 }

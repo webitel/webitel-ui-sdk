@@ -26,8 +26,8 @@
 import { WtPopover } from '@webitel/ui-sdk/components';
 
 interface Props {
-  disabled?: boolean;
-  disableClickAway?: boolean;
+	disabled?: boolean;
+	disableClickAway?: boolean;
 }
 
 const props = defineProps<Props>();

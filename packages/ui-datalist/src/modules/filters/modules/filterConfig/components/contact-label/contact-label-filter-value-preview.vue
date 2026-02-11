@@ -11,12 +11,11 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  /**
-   * would be great to use generated type for this
-   * */
-  value: Record<string, unknown>[];
+	/**
+	 * would be great to use generated type for this
+	 * */
+	value: Record<string, unknown>[];
 }>();
-
 </script>
 
 <style scoped></style>
