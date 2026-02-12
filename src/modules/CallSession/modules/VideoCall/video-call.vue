@@ -27,7 +27,7 @@
             />
 
             <span class="video-call-receiver-text">{{
-                t(`WebitelApplications.${WebitelApplications.MEET}.theCameraIsTurnedOff`)
+                t(`WtApplication.${WtApplication.Meet}.theCameraIsTurnedOff`)
               }}</span>
           </div>
         </div>
