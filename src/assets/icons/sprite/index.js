@@ -227,6 +227,7 @@ import videoCamOffFilled from './video-cam-off--filled.svg';
 import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+import protectionError from './protection-error.svg?raw';
 
 export default objCamelToKebab({
   account,
@@ -465,4 +466,5 @@ export default objCamelToKebab({
   screenshotDone,
   screenshotFalse,
   sharingEnd,
+  protectionError
 });
