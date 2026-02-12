@@ -27,11 +27,11 @@
               color="warning"
             />
 
-            <span class="video-call-receiver-text">
+            <span class="video-call-receiver-text typo-heading-4">
               {{ holdDurationTime }}
             </span>
 
-            <span class="video-call-receiver-text">
+            <span class="video-call-hold-text">
               {{ t(`WtApplication.${WtApplication.Meet}.theCallIsOnHold`) }}
             </span>
           </div>
@@ -76,7 +76,7 @@
           </div>
         </template>
 
-        <template v-else-if="!isOnHold && props['sender:stream'] && props['receiver:stream']">
+        <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
             :stream="props['sender:stream']"
@@ -160,6 +160,7 @@ const props = withDefaults(
 		'receiver:video:enabled'?: boolean;
 
 		'call:onHold'?: boolean;
+		hideSenderOnHold?: boolean;
 
 		'screenshot:status'?: ScreenshotStatus | null;
 		'screenshot:loading'?: boolean;
@@ -303,13 +304,21 @@ const mainStream = computed(() => {
 	return receiverStream.value ?? senderStream.value;
 });
 
-const showSenderMutedScreen = computed(
-	() =>
+const showSenderScreen = computed(
+	() => !props.hideSenderOnHold && senderStream.value && receiverStream.value,
+);
+
+const showSenderMutedScreen = computed(() => {
+	if (isOnHold.value && senderVideoEnabled.value && senderStream.value)
+		return false;
+
+	return (
 		!isOnHold.value &&
 		bothStreamsAvailable.value &&
 		!senderVideoEnabled.value &&
-		!!receiverStream.value,
-);
+		!!receiverStream.value
+	);
+});
 
 watch(
 	isOnHold,
@@ -437,6 +446,10 @@ const senderVideoMutedIconSizes = {
 
 .video-call-receiver--sm .video-call-receiver-text {
   max-width: 73px;
+  text-align: center;
+}
+
+.video-call-receiver--sm .video-call-hold-text {
   text-align: center;
 }
 
