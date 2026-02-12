@@ -333,6 +333,8 @@ const handleSelection = (row, select) => {
 
 .wt-tree-table-th {
   font-weight: normal;
+  text-wrap: nowrap;
+  text-align: start;
 }
 
 .wt-tree-table-th--sortable {
