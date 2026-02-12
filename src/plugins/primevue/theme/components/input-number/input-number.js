@@ -8,6 +8,10 @@ const inputNumber = {
     .p-inputtext.p-invalid:enabled:hover {
       border-color: ${dt('inputtext.invalidHoverBorderColor')};
     }
+
+    .p-inputnumber:has(+ .p-inputgroupaddon) .p-inputnumber-button {
+      border-radius: 0;
+    }
   `,
 };
 
