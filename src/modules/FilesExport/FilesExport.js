@@ -55,14 +55,18 @@ export default class FilesExport {
 		};
 	}
 
-	async _addFilesToZip(items, zip) {
+	// Recursively adds files to zip archive, filtering by fileType
+	// Supports FileTypeAudio, FileTypeVideo, FileTypeScreensharing (defaults to FileTypeAudio)
+	async _addFilesToZip(
+		items,
+		zip,
+		fileType = EngineCallFileType.FileTypeAudio,
+	) {
 		for (const item of items) {
 			if (item.files) {
-				if (item.files?.[EngineCallFileType.FileTypeAudio]) {
-					await this._addFilesToZip(
-						item.files[EngineCallFileType.FileTypeAudio],
-						zip,
-					);
+				// If item has nested files object, filter by fileType and recurse
+				if (item.files?.[fileType]) {
+					await this._addFilesToZip(item.files[fileType], zip, fileType);
 				} else continue;
 			} else {
 				try {
@@ -108,7 +112,8 @@ export default class FilesExport {
 		}
 	}
 
-	async _fetchAndZip(zip, requestParams) {
+	// Fetches history items and adds files of specified type to zip
+	async _fetchAndZip(zip, requestParams, fileType) {
 		const params = {
 			from: 0,
 			size: 5000,
@@ -125,20 +130,27 @@ export default class FilesExport {
 				...params,
 				page,
 			});
-			await this._addFilesToZip(items, zip);
+			// Filter and add files of the specified type
+			await this._addFilesToZip(items, zip, fileType);
 
 			isNext = next;
 			page += 1;
 		} while (isNext);
 	}
 
-	async exportFiles(files, { reqParams }) {
+	// Exports files to a zip archive
+	// fileType: FileTypeAudio (default), FileTypeVideo, or FileTypeScreensharing
+	async exportFiles(
+		files,
+		{ reqParams, fileType = EngineCallFileType.FileTypeAudio },
+	) {
 		try {
 			this.isLoading = true;
 			const zip = new JSZip();
-			if (files?.length) await this._addFilesToZip(files, zip);
+			// If files provided, use them; otherwise fetch from API with fileType filter
+			if (files?.length) await this._addFilesToZip(files, zip, fileType);
 			else {
-				await this._fetchAndZip(zip, reqParams);
+				await this._fetchAndZip(zip, reqParams, fileType);
 			}
 			const file = await this._generateZip(zip);
 			await this._saveZip(file);
