@@ -35,6 +35,7 @@ export default {
 			if (this.selectedItems?.length) {
 				files = this.selectedItems.reduce(
 					(filesAccumulator, next) =>
+						// Check if item has files and contains files of the specified type
 						next.files && next.files[fileType]
 							? [
 									...filesAccumulator,
