@@ -28,6 +28,8 @@ export default {
 			this.FilesExport = new FilesExport(options);
 		},
 
+		// Gets selected files of a specific type from selectedItems
+		// fileType: FileTypeAudio (default), FileTypeVideo, or FileTypeScreensharing
 		getSelectedFiles(fileType = EngineCallFileType.FileTypeAudio) {
 			let files = null;
 			if (this.selectedItems?.length) {
@@ -45,12 +47,15 @@ export default {
 			return files;
 		},
 
+		// Exports files of a specific type to a zip archive
+		// fileType: FileTypeAudio (default), FileTypeVideo, or FileTypeScreensharing
 		async exportFiles(
 			files,
 			reqParams = {},
 			fileType = EngineCallFileType.FileTypeAudio,
 		) {
 			if (!this.FilesExport) throw new Error('FilesExport is not initialized');
+			// Use provided files or get from selectedItems filtered by fileType
 			const exportFiles = files || this.getSelectedFiles(fileType);
 			try {
 				await this.FilesExport.exportFiles(exportFiles, {
