@@ -166,6 +166,7 @@ import previewTagAudio from './preview-tag-audio.svg?raw';
 import previewTagImage from './preview-tag-image.svg?raw';
 import previewTagVideo from './preview-tag-video.svg?raw';
 import prompter from './prompter.svg?raw';
+import protectionError from './protection-error.svg?raw';
 import queueMember from './queue-member.svg?raw';
 import quickReplies from './quick-replies.svg?raw';
 import radio from './radio.svg?raw';
@@ -227,7 +228,6 @@ import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
-import protectionError from './protection-error.svg?raw';
 
 export default objCamelToKebab({
 	account,
