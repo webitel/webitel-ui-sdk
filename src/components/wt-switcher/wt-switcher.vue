@@ -18,7 +18,7 @@
       <!-- @slot Custom input label -->
       <slot
         name="label"
-        v-bind="{ label, value, disabled }"
+        v-bind="{ label, value: model, disabled }"
       >
         <div
           v-if="label"
