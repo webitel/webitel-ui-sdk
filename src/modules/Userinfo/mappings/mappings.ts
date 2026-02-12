@@ -46,12 +46,7 @@ export const mapScopeClassToWtObjects: Partial<Record<ScopeClass, WtObject[]>> =
 			WtObject.Bucket,
 			WtObject.Communication,
 			WtObject.PauseCause,
-			WtObject.Source,
-			WtObject.Slas,
-			WtObject.Priorities,
-			WtObject.CloseReasonGroup,
-			WtObject.ServiceCatalog,
-			WtObject.Status,
+			WtObject.QuickReply,
 		],
 		[ScopeClass.List]: [
 			WtObject.Blacklist,

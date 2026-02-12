@@ -1,15 +1,11 @@
-import { type CrudAction, WtApplication, type WtObject } from '../../../enums';
+import { type CrudAction, type WtObject } from '../../../enums';
 import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import {
-	AdminSectionsValues,
-	AuditorSectionsValues,
-	CrmSectionsValues,
 	mapGlobalActionToCrudAction,
 	mapScopeClassAccessTokenToCrudAction,
 	mapScopeClassToWtObjects,
 	mapUiSectionToWtObject,
 	mapWtObjectToUiSection,
-	SupervisorSectionsValues,
 	wtObjectsWithGlobalCrudActionAccessAsChecksSource,
 	wtObjectsWithGlobalSpecialActionAccessAsChecksSource,
 } from '../mappings/mappings';
@@ -61,7 +57,7 @@ export const makeScopeAccessMap = (
 		const scopeClassObjects = mapScopeClassToWtObjects[scopeClass];
 
 		if (!scopeClassObjects) {
-			wtlog.error({
+			wtlog.info({
 				module: 'modules/userinfo',
 			})('Unknown scope class to convert to WtObject:', scopeClass);
 			map.set(scopeClass, access);
