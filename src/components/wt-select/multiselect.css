@@ -227,3 +227,11 @@
 .wt-tags-input--invalid :deep(.multiselect) .multiselect__tags .multiselect__single-label {
     color: var(--wt-chip-main-text-color);
 }
+
+.multiselect__custom-tag {
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
