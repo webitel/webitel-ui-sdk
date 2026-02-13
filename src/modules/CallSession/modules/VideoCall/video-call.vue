@@ -17,9 +17,29 @@
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
           <div
-            v-if="showReceiverOverlay"
+            v-if="showHoldOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
-            class="video-call-receiver video-call-receiver--muted"
+            class="video-call-receiver video-call-receiver__fallback-screen"
+          >
+            <wt-icon
+              :size="receiverVideoMutedIconSizes[innerSize]"
+              icon="pause--filled"
+              color="warning"
+            />
+
+            <span class="video-call-receiver-text typo-heading-4">
+              {{ holdDurationTime }}
+            </span>
+
+            <span class="video-call-hold-text">
+              {{ t(`WtApplication.${WtApplication.Meet}.theCallIsOnHold`) }}
+            </span>
+          </div>
+
+          <div
+            v-else-if="showReceiverOverlay"
+            :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
+            class="video-call-receiver video-call-receiver__fallback-screen"
           >
             <wt-icon
               :size="receiverVideoMutedIconSizes[innerSize]"
@@ -56,7 +76,7 @@
           </div>
         </template>
 
-        <template v-else-if="props['sender:stream'] && props['receiver:stream']">
+        <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
             :stream="props['sender:stream']"
@@ -110,7 +130,7 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtIcon } from '../../../../components';
@@ -122,6 +142,7 @@ import {
 import { ComponentSize, WtApplication } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
+import { convertDuration } from '../../../../scripts';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
@@ -137,6 +158,9 @@ const props = withDefaults(
 		'receiver:stream'?: MediaStream | null;
 		'receiver:mic:enabled'?: boolean;
 		'receiver:video:enabled'?: boolean;
+
+		'call:onHold'?: boolean;
+		hideSenderOnHold?: boolean;
 
 		'screenshot:status'?: ScreenshotStatus | null;
 		'screenshot:loading'?: boolean;
@@ -223,6 +247,30 @@ const senderStream = computed(() => props['sender:stream']);
 
 const receiverVideoEnabled = computed(() => props['receiver:video:enabled']);
 const senderVideoEnabled = computed(() => props['sender:video:enabled']);
+const isOnHold = computed(() => !!props['call:onHold']);
+
+const holdSecondsElapsed = ref(0);
+let holdTimerId: number | null = null;
+
+const startHoldTimer = () => {
+	holdSecondsElapsed.value = 0;
+	stopHoldTimer();
+	holdTimerId = window.setInterval(() => {
+		holdSecondsElapsed.value++;
+	}, 1000);
+};
+
+const stopHoldTimer = () => {
+	if (holdTimerId !== null) {
+		clearInterval(holdTimerId);
+		holdTimerId = null;
+	}
+};
+
+const resetHoldState = () => {
+	stopHoldTimer();
+	holdSecondsElapsed.value = 0;
+};
 
 const bothStreamsAvailable = computed(
 	() => !!receiverStream.value && !!senderStream.value,
@@ -236,7 +284,17 @@ const showReceiverOverlay = computed(
 		(receiverStream.value && !receiverVideoEnabled.value),
 );
 
+const showHoldOverlay = computed(() => isOnHold.value);
+
+const holdDurationTime = computed(() =>
+	convertDuration(holdSecondsElapsed.value),
+);
+
 const mainStream = computed(() => {
+	if (isOnHold.value) {
+		return null;
+	}
+
 	if (
 		(bothStreamsAvailable.value && !receiverVideoEnabled.value) ||
 		(!receiverStream.value && senderStream.value && !senderVideoEnabled.value)
@@ -251,12 +309,48 @@ const mainStream = computed(() => {
 	return receiverStream.value ?? senderStream.value;
 });
 
-const showSenderMutedScreen = computed(
-	() =>
-		bothStreamsAvailable.value &&
-		!senderVideoEnabled.value &&
-		!!receiverStream.value,
+const showSenderScreen = computed(() => {
+	if (!isOnHold.value) return bothStreamsAvailable.value;
+
+	return !props.hideSenderOnHold && senderStream.value && receiverStream.value;
+});
+
+const showSenderMutedScreen = computed(() => {
+	// If call is on hold but sender video exists — muted screen should NOT show
+	if (isOnHold.value && senderVideoEnabled.value && senderStream.value) {
+		return false;
+	}
+
+	const isActiveCall = !isOnHold.value;
+	const hasBothStreams = bothStreamsAvailable.value;
+	const senderVideoOff = !senderVideoEnabled.value;
+	const receiverHasStream = !!receiverStream.value;
+
+	// Show muted screen only when:
+	// - call is active
+	// - both participants connected
+	// - sender video disabled
+	// - receiver stream exists
+	return isActiveCall && hasBothStreams && senderVideoOff && receiverHasStream;
+});
+
+watch(
+	isOnHold,
+	(enableHold) => {
+		if (enableHold) {
+			startHoldTimer();
+		} else {
+			resetHoldState();
+		}
+	},
+	{
+		immediate: true,
+	},
 );
+
+onBeforeUnmount(() => {
+	stopHoldTimer();
+});
 
 const receiverVideoMutedIconSizes = {
 	[ComponentSize.SM]: ComponentSize.MD,
@@ -367,7 +461,11 @@ const senderVideoMutedIconSizes = {
   text-align: center;
 }
 
-.video-call-receiver--muted {
+.video-call-receiver--sm .video-call-hold-text {
+  text-align: center;
+}
+
+.video-call-receiver__fallback-screen {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -375,6 +473,11 @@ const senderVideoMutedIconSizes = {
   width: 100%;
   height: 100%;
   gap: var(--spacing-xs);
+}
+
+.video-call-receiver--sm.video-call-receiver__fallback-screen {
+  justify-content: flex-end;
+  padding-bottom: calc(var(--p-player-control-bar-sm-height) + 24px);
 }
 
 .video-call-sender {

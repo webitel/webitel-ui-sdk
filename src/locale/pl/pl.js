@@ -404,6 +404,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Kamera jest wyłączona',
+			theCallIsOnHold: 'Na wstrzymaniu',
 		},
 	},
 	validation: {

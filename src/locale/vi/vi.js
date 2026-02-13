@@ -406,6 +406,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera đã được tắt',
+			theCallIsOnHold: 'Đang giữ',
 		},
 	},
 	validation: {

@@ -406,6 +406,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Kamera o‘chirilgan',
+			theCallIsOnHold: 'Kutishda',
 		},
 	},
 	validation: {

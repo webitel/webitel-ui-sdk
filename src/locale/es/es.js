@@ -399,6 +399,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'La cámara está apagada',
+			theCallIsOnHold: 'En espera',
 		},
 	},
 	validation: {
