@@ -4,12 +4,12 @@ import { InputGroupScheme } from '@webitel/styleguide/component-schemes';
     selectors are including inputtext itself where .p-inputtext is sibling 
     and inputnumber where .p-inputtext is inside of the sibling block
 */
-const addonStateStyle = (inputState, cssProperty, dtToken, dt) => `
+const addonStateStyle = (inputState, cssPropertyName, cssPropertyValue) => `
   .p-inputtext${inputState} ~ .p-inputgroupaddon,
   *:has(.p-inputtext${inputState}) ~ .p-inputgroupaddon,
   .p-inputgroupaddon:has(~ .p-inputtext${inputState}),
   .p-inputgroupaddon:has(~ * .p-inputtext${inputState}) {
-    ${cssProperty}: ${dt(dtToken)};
+    ${cssPropertyName}: ${cssPropertyValue};
   }
 `;
 
@@ -27,11 +27,21 @@ const inputGroup = {
                   box-shadow ${dt('inputtext.transition.duration')};
     }
 
-    ${addonStateStyle('.p-invalid', 'border-color', 'inputtext.invalid.borderColor', dt)}
-    ${addonStateStyle('.p-invalid:enabled:hover', 'border-color', 'inputtext.invalidHoverBorderColor', dt)}
-    ${addonStateStyle(':enabled:hover', 'border-color', 'inputtext.hover.borderColor', dt)}
-    ${addonStateStyle(':enabled:focus', 'border-color', 'inputtext.focus.borderColor', dt)}
-    ${addonStateStyle(':disabled', 'background', 'inputtext.disabled.background', dt)}
+    .p-inputtext ~ .p-inputgroupaddon,
+    *:has(.p-inputtext) ~ .p-inputgroupaddon {
+      padding-left: 0;
+    }
+
+    .p-inputgroupaddon:has(~ .p-inputtext),
+    .p-inputgroupaddon:has(~ * .p-inputtext) {
+      padding-right: 0;
+    }
+
+    ${addonStateStyle('.p-invalid', 'border-color', dt('inputtext.invalid.borderColor'))}
+    ${addonStateStyle('.p-invalid:enabled:hover', 'border-color', dt('inputtext.invalidHoverBorderColor'))}
+    ${addonStateStyle(':enabled:hover', 'border-color', dt('inputtext.hover.borderColor'))}
+    ${addonStateStyle(':enabled:focus', 'border-color', dt('inputtext.focus.borderColor'))}
+    ${addonStateStyle(':disabled', 'background', dt('inputtext.disabled.background'))}
   `,
 };
 
