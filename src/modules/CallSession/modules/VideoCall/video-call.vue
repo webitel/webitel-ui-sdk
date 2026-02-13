@@ -19,7 +19,7 @@
           <div
             v-if="showHoldOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
-            class="video-call-receiver video-call-receiver--muted video-call-receiver--on-hold"
+            class="video-call-receiver video-call-receiver__fallback-screen"
           >
             <wt-icon
               :size="receiverVideoMutedIconSizes[innerSize]"
@@ -39,7 +39,7 @@
           <div
             v-else-if="showReceiverOverlay"
             :class="[`video-call-receiver--${innerSize}`, innerSize === 'sm' ? 'typo-body-2' : 'typo-body-1']"
-            class="video-call-receiver video-call-receiver--muted"
+            class="video-call-receiver video-call-receiver__fallback-screen"
           >
             <wt-icon
               :size="receiverVideoMutedIconSizes[innerSize]"
@@ -142,7 +142,7 @@ import {
 import { ComponentSize, WtApplication } from '../../../../enums';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
-import convertDuration from '../../../../scripts/convertDuration';
+import { convertDuration } from '../../../../scripts';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
@@ -250,21 +250,26 @@ const senderVideoEnabled = computed(() => props['sender:video:enabled']);
 const isOnHold = computed(() => !!props['call:onHold']);
 
 const holdSecondsElapsed = ref(0);
-const holdTimerId = ref<number | null>(null);
+let holdTimerId: number | null = null;
 
 const startHoldTimer = () => {
 	holdSecondsElapsed.value = 0;
 	stopHoldTimer();
-	holdTimerId.value = window.setInterval(() => {
+	holdTimerId = window.setInterval(() => {
 		holdSecondsElapsed.value++;
 	}, 1000);
 };
 
 const stopHoldTimer = () => {
-	if (holdTimerId.value !== null) {
-		clearInterval(holdTimerId.value);
-		holdTimerId.value = null;
+	if (holdTimerId !== null) {
+		clearInterval(holdTimerId);
+		holdTimerId = null;
 	}
+};
+
+const resetHoldState = () => {
+	stopHoldTimer();
+	holdSecondsElapsed.value = 0;
 };
 
 const bothStreamsAvailable = computed(
@@ -304,32 +309,39 @@ const mainStream = computed(() => {
 	return receiverStream.value ?? senderStream.value;
 });
 
-const showSenderScreen = computed(
-	() => !props.hideSenderOnHold && senderStream.value && receiverStream.value,
-);
+const showSenderScreen = computed(() => {
+	if (!isOnHold.value) return bothStreamsAvailable.value;
+
+	return !props.hideSenderOnHold && senderStream.value && receiverStream.value;
+});
 
 const showSenderMutedScreen = computed(() => {
-	if (isOnHold.value && senderVideoEnabled.value && senderStream.value)
+	// If call is on hold but sender video exists — muted screen should NOT show
+	if (isOnHold.value && senderVideoEnabled.value && senderStream.value) {
 		return false;
+	}
 
-	return (
-		!isOnHold.value &&
-		bothStreamsAvailable.value &&
-		!senderVideoEnabled.value &&
-		!!receiverStream.value
-	);
+	const isActiveCall = !isOnHold.value;
+	const hasBothStreams = bothStreamsAvailable.value;
+	const senderVideoOff = !senderVideoEnabled.value;
+	const receiverHasStream = !!receiverStream.value;
+
+	// Show muted screen only when:
+	// - call is active
+	// - both participants connected
+	// - sender video disabled
+	// - receiver stream exists
+	return isActiveCall && hasBothStreams && senderVideoOff && receiverHasStream;
 });
 
 watch(
 	isOnHold,
-	(value) => {
-		if (value) {
+	(enableHold) => {
+		if (enableHold) {
 			startHoldTimer();
-			return;
+		} else {
+			resetHoldState();
 		}
-
-		stopHoldTimer();
-		holdSecondsElapsed.value = 0;
 	},
 	{
 		immediate: true,
@@ -453,7 +465,7 @@ const senderVideoMutedIconSizes = {
   text-align: center;
 }
 
-.video-call-receiver--muted {
+.video-call-receiver__fallback-screen {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -461,6 +473,11 @@ const senderVideoMutedIconSizes = {
   width: 100%;
   height: 100%;
   gap: var(--spacing-xs);
+}
+
+.video-call-receiver--sm.video-call-receiver__fallback-screen {
+  justify-content: flex-end;
+  padding-bottom: calc(var(--p-player-control-bar-sm-height) + 24px);
 }
 
 .video-call-sender {
