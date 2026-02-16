@@ -211,6 +211,14 @@ const {
 	closeDelete,
 } = useDeleteConfirmationPopup();
 
+const tabFilters = computed(() =>
+	filtersManager.value.getAllValues({
+		exclude: [
+			props.entityIdKey,
+		],
+	}),
+);
+
 const {
 	showEmpty,
 	image: imageEmpty,
@@ -218,7 +226,7 @@ const {
 } = useTableEmpty({
 	dataList,
 	error,
-	filters: computed(() => filtersManager.value.getAllValues()),
+	filters: tabFilters.value,
 	isLoading,
 });
 
