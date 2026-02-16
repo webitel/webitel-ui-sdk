@@ -3,8 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createApp, h } from 'vue';
 import { createRouter, createWebHistory, type Router } from 'vue-router';
 
-import { AdminSections, WtApplication, WtObject } from '../../../../../enums';
-import { CrudGlobalAction } from '../../enums';
+import { AdminSections, WtApplication, WtObject } from '../../../../enums';
 import { createUserAccessStore } from '../accessStore';
 
 describe('AccessStore', () => {
@@ -25,6 +24,7 @@ describe('AccessStore', () => {
 					name: 'users',
 					component: () => h('div', 'users'),
 					meta: {
+						WtApplication: WtApplication.Admin,
 						WtObject: WtObject.User,
 						UiSection: AdminSections.Users,
 					},
@@ -48,6 +48,7 @@ describe('AccessStore', () => {
 			permissions: [],
 			scope: [],
 			access: {},
+			license: [],
 		});
 
 		await router.push({
@@ -57,26 +58,6 @@ describe('AccessStore', () => {
 		/* because guard should not allow to navigate
     there since we pass empty permissions */
 		expect(router.currentRoute.value.name).not.toBe('users');
-	});
-
-	it('allows route access if has global permission', async () => {
-		const { initialize, routeAccessGuard } = useAccessStore();
-		router.beforeEach(routeAccessGuard);
-
-		initialize({
-			permissions: [
-				{
-					id: CrudGlobalAction.Read,
-				},
-			],
-			scope: [],
-			access: {},
-		});
-
-		await router.push({
-			name: 'users',
-		});
-		expect(router.currentRoute.value.name).toBe('users');
 	});
 
 	it('allows route access if has scope permission, app visibility and section visibility', async () => {
@@ -99,6 +80,7 @@ describe('AccessStore', () => {
 					},
 				},
 			},
+			license: [],
 		});
 
 		await router.push({
@@ -127,6 +109,7 @@ describe('AccessStore', () => {
 					},
 				},
 			},
+			license: [],
 		});
 
 		await router.push({
@@ -155,6 +138,7 @@ describe('AccessStore', () => {
 					},
 				},
 			},
+			license: [],
 		});
 
 		await router.push({

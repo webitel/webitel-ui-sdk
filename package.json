@@ -10,7 +10,7 @@
 		"biome:format:all": "npx biome check --write ./src",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
 		"publish-lib": " npm publish --access public --tag latest",
-		"docs:dev": "vitepress dev docs --port 8080",
+		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"lint:fix-staged": "npx lint-staged",
 		"lint:package": "publint",
