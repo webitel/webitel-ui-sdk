@@ -224,8 +224,33 @@ const onCanPlay = (ev: Event) => {
  * Note: popup-wrapper and popup-container mixins removed - apply popup styles separately if needed
  */
 .wt-vidstack-player--md:not(.wt-vidstack-player--static) {
-  overflow: visible;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--popup-wrapper-z-index);
+  background: var(--wt-popup-shadow-color);
   border-radius: 0;
+  overflow: visible;
+}
+
+.wt-vidstack-player--md:not(.wt-vidstack-player--static) .wt-vidstack-player__player {
+  flex-direction: column;
+  gap: var(--popup-sections-gap);
+  z-index: 1;
+  box-shadow: var(--elevation-10);
+  background: var(--wt-popup-background-color);
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  max-height: var(--p-player-wrapper-md-height);
+  border-radius: var(--p-player-wrapper-md-border-radius);
+  overflow: hidden;
 }
 
 .wt-vidstack-player--lg {
