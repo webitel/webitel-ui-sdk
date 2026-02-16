@@ -1,4 +1,4 @@
-import { setActivePinia, createPinia, storeToRefs } from 'pinia';
+import { createPinia, setActivePinia, storeToRefs } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createUserinfoStore } from '../userinfoStore';
