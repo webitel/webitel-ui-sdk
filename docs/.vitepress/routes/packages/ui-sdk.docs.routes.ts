@@ -78,12 +78,6 @@ export const uiSdkRoutes = [
 			{
 				text: 'Modules',
 				items: [
-					...resolveItems([
-						'modules/**/*.md',
-						'!modules/Userinfo',
-						'!modules/ObjectPermissions',
-						'!modules/TableComponentModule',
-					]),
 					{
 						text: 'Module: Object Permissions',
 						collapsed: true,
@@ -125,7 +119,7 @@ export const uiSdkRoutes = [
 							...resolveItems('modules/CallSessionModule/index.md'),
 							{
 								text: 'VideoCall',
-								items: resolveItems(
+								link: resolveLink(
 									'modules/CallSessionModule/components/**/*.md',
 								),
 							},
@@ -139,7 +133,39 @@ export const uiSdkRoutes = [
 								text: 'index',
 								link: resolveLink('modules/Userinfo/index.md'),
 							},
+							{
+								text: 'Access',
+								link: resolveLink('modules/Userinfo/access/Readme.md'),
+							},
 						],
+					},
+					{
+						text: 'Module: Filters',
+						collapsed: true,
+						items: resolveItems([
+							'modules/Filters/**/*.md',
+						]),
+					},
+					{
+						text: 'Module: Appearance',
+						collapsed: true,
+						items: resolveItems([
+							'modules/Appearance/**/*.md',
+						]),
+					},
+					{
+						text: 'Module: Query Filters',
+						collapsed: true,
+						items: resolveItems([
+							'modules/query-filters/**/*.md',
+						]),
+					},
+					{
+						text: 'Module: Notifications',
+						collapsed: true,
+						items: resolveItems([
+							'modules/notifications-module/md/**/*.md',
+						]),
 					},
 				],
 				collapsed: true,
