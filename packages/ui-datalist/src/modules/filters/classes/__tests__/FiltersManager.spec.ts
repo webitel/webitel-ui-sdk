@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { createFiltersManager, IFiltersManager } from '../FiltersManager';
 
 describe('FiltersManager', () => {
