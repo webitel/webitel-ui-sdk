@@ -408,6 +408,7 @@ export default deepmerge(
 			},
 			[WtApplication.Meet]: {
 				theCameraIsTurnedOff: 'The camera is turned off',
+				theCallIsOnHold: 'On hold',
 			},
 		},
 		validation: {

@@ -406,6 +406,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera este oprită',
+			theCallIsOnHold: 'În așteptare',
 		},
 	},
 	validation: {

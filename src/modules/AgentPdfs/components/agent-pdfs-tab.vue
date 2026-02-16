@@ -1,5 +1,5 @@
 <template>
-  <section class="table-section">
+  <section class="table-wrapper table-page table-wrapper--tab-table">
     <slot
       name="header"
       :selected="selected"
@@ -23,7 +23,7 @@
       :headline="textEmpty"
     />
 
-    <div v-if="dataList?.length" class="table-section__table-wrapper">
+    <div v-if="dataList?.length" class="table-loading-wrapper">
       <wt-table
         v-if="dataList?.length"
         :data="dataList"
@@ -122,6 +122,7 @@ interface Props {
 	store?: any;
 	entityIdKey?: string;
 	entityIdValue?: string | number;
+	isCreatedAtFilter: boolean;
 	onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
 }
 
@@ -129,6 +130,7 @@ const props = withDefaults(defineProps<Props>(), {
 	store: undefined,
 	entityIdKey: undefined,
 	entityIdValue: undefined,
+	isCreatedAtFilter: false,
 	onDeleteItem: undefined,
 });
 
@@ -167,14 +169,14 @@ const initializeDefaultFilters = () => {
 		});
 	}
 
-	if (!hasFilter('createdAtFrom')) {
+	if (!hasFilter('createdAtFrom') && props.isCreatedAtFilter) {
 		addFilter({
 			name: 'createdAtFrom',
 			value: getStartOfDay(),
 		});
 	}
 
-	if (!hasFilter('createdAtTo')) {
+	if (!hasFilter('createdAtTo') && props.isCreatedAtFilter) {
 		addFilter({
 			name: 'createdAtTo',
 			value: getEndOfDay(),

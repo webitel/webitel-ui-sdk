@@ -404,6 +404,7 @@ export default {
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера өшірілген',
+			theCallIsOnHold: 'Күту режимінде',
 		},
 	},
 	validation: {
