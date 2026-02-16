@@ -1,9 +1,12 @@
 <template>
   <p-badge
-:value="props.value" :class="[
-    props.size`p-badge--${props.size}`,
-    props.severity`p-badge--${props.severity}`
-  ]" class="wt-badge typo-caption">
+    :value="props.value"
+    :class="[
+      props.size && `p-badge--${props.size}`,
+      props.severity && `p-badge--${props.severity}`
+    ]"
+    class="wt-badge typo-caption"
+  >
     <slot />
   </p-badge>
 </template>
