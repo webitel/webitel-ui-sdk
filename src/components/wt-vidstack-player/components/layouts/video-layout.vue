@@ -80,7 +80,7 @@ const emit = defineEmits<{
   align-self: flex-start;
 }
 
-:deep(media-player[data-hocus]) :deep(.video-display-panel) {
+media-player[data-hocus] .video-display-panel {
   /* hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs */
   background: var(--p-player-head-line-hover-background);
   opacity: 1;

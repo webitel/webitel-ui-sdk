@@ -67,7 +67,13 @@ export interface IFiltersManager {
 	 * @returns { FilterName: FilterValue }
 	 */
 
-	getAllValues: () => {
+	getAllValues: ({
+		include,
+		exclude,
+	}?: {
+		include?: FilterName[];
+		exclude?: FilterName[];
+	}) => {
 		[name: FilterName]: FilterValue;
 	};
 	/**
@@ -133,15 +139,27 @@ class FiltersManager implements IFiltersManager {
 		return filter;
 	}
 
-	getAllValues(): {
+	getAllValues({
+		include,
+		exclude,
+	}: {
+		include?: FilterName[];
+		exclude?: FilterName[];
+	} = {}): {
 		[name: FilterName]: FilterValue;
 	} {
-		const filters = [
-			...this.filters.values(),
-		].reduce((acc, filter) => {
-			acc[filter.name] = filter.value;
-			return acc;
-		}, {});
+		const filters = this.getFiltersList({
+			include,
+			exclude,
+		}).reduce(
+			(acc, filter) => {
+				acc[filter.name] = filter.value;
+				return acc;
+			},
+			{} as {
+				[name: FilterName]: FilterValue;
+			},
+		);
 
 		return filters;
 	}
