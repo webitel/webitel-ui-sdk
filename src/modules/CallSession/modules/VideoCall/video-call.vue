@@ -140,9 +140,9 @@ import {
 	VideoCallControlsPanel,
 } from '../../../../components/wt-vidstack-player/components';
 import { ComponentSize, WtApplication } from '../../../../enums';
+import { convertDuration } from '../../../../scripts';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
-import { convertDuration } from '../../../../scripts';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
