@@ -1,14 +1,35 @@
 <script setup>
-import { WebitelApplications } from '@webitel/ui-sdk/enums';
+import { WtApplication } from '@webitel/ui-sdk/enums';
 
 const apps = [
-  { name: WebitelApplications.AGENT, href: 'https://example.com' },
-  { name: WebitelApplications.AUDIT, href: 'https://example.com' },
-  { name: WebitelApplications.SUPERVISOR, href: 'https://example.com' },
-  { name: WebitelApplications.CRM, href: 'https://example.com' },
-  { name: WebitelApplications.ADMIN, href: 'https://example.com' },
-  { name: WebitelApplications.HISTORY, href: 'https://example.com' },
-  { name: WebitelApplications.ANALYTICS, href: 'https://example.com' },
+	{
+		name: WebitelApplications.AGENT,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.AUDIT,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.SUPERVISOR,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.CRM,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.ADMIN,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.HISTORY,
+		href: 'https://example.com',
+	},
+	{
+		name: WebitelApplications.ANALYTICS,
+		href: 'https://example.com',
+	},
 ];
 </script>
 

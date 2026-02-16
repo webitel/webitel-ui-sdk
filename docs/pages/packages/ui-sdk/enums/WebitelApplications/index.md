@@ -1,7 +1,7 @@
 # `WebitelApplications` Enum
 
 ```ts
-import { WebitelApplications } from '@webitel/ui-sdk/enums';
+import { WtApplication } from '@webitel/ui-sdk/enums';
 ```
 
 <<< ../../../../../../src/enums/WebitelApplications/WtApplication.ts

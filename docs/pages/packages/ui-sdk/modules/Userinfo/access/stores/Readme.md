@@ -25,7 +25,7 @@ return {
 > **Зверніть увагу!** Ще раз: **ці методи – не перевіряють доступ до видимості розділів**. 
 >
 > Перевіряється тільки право до конкретного набору обʼєктів.
-> aka WtObject aka [`WtSysType`'ів](../../../../../../../knowledge-base/namings/wt-types/WtTypes.md)
+> aka WtObject aka [`WtSysType`'ів](../../../../../../knowledge-base/namings/wt-types/WtTypes.md)
 
 ## Route Access Guard
 
