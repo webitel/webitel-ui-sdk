@@ -173,7 +173,7 @@ export const createUserAccessStore = ({
 		};
 
 		const hasLicense = (license: WebitelLicense): boolean => {
-			return !!globalAccess.value.get(license);
+			return !!licenseAccess.value.get(license);
 		};
 
 		const initialize = ({
