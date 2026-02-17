@@ -141,8 +141,7 @@
   },
   "overrides": {
     "vite": "^6.2.2",
-    "date-fns": "^4.1.0",
-    "zod": "^4.x"
+    "date-fns": "^4.1.0"
   },
   "engines": {
     "npm": "11",
