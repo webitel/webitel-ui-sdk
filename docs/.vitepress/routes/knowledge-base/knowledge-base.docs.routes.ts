@@ -28,6 +28,36 @@ export const knowledgeBaseRoutes = [
 						collapsed: false,
 						items: [
 							{
+								text: 'Access Control',
+								collapsed: true,
+								items: [
+									{
+										text: 'index',
+										link: resolveKnowledgeBaseLinkDoc(
+											'general/access-control/index.md',
+										),
+									},
+									{
+										text: 'Vocabulary',
+										link: resolveKnowledgeBaseLinkDoc(
+											'general/access-control/vocabulary/Readme.md',
+										),
+									},
+									{
+										text: 'Access Configuration',
+										link: resolveKnowledgeBaseLinkDoc(
+											'general/access-control/access-configuration/Readme.md',
+										),
+									},
+									{
+										text: 'Access Computing',
+										link: resolveKnowledgeBaseLinkDoc(
+											'general/access-control/access-computing/Readme.md',
+										),
+									},
+								],
+							},
+							{
 								text: 'Code Base Deprecation Info',
 								link: resolveKnowledgeBaseLinkDoc(
 									'general/code-base-deprecation-info/Readme.md',
