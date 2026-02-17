@@ -28,6 +28,8 @@ import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
 
+import './primevue.css';
+
 const changeComponentCompatMode = (component) => {
 	component.compatConfig = {
 		MODE: 3,

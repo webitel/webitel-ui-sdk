@@ -2,16 +2,16 @@
   <p-breadcrumb :model="path">
     <template #item="{ item }">
       <router-link
-v-if="item?.route" :to="item?.route" class="wt-breadcrumb__text"
+v-if="item?.route" :to="item?.route" class="wt-breadcrumb__text typo-body-1"
         :class="{ 'wt-breadcrumb__text--last': item == lastItem }">
         {{ item?.name }}
       </router-link>
-      <span v-else class="wt-breadcrumb__text" :class="{ 'wt-breadcrumb__text--last': item == lastItem }">
+      <span v-else class="wt-breadcrumb__text typo-body-1" :class="{ 'wt-breadcrumb__text--last': item == lastItem }">
         {{ item?.name }}
       </span>
     </template>
     <template #separator>
-      <wt-icon icon="bread-crumbs" />
+      <wt-icon icon="bread-crumbs" :size="ComponentSize.SM" />
     </template>
   </p-breadcrumb>
 </template>
@@ -19,6 +19,7 @@ v-if="item?.route" :to="item?.route" class="wt-breadcrumb__text"
 <script setup lang="ts">
 import type { BreadcrumbProps } from 'primevue';
 import { computed } from 'vue';
+import { ComponentSize } from '../../enums';
 
 interface Props extends BreadcrumbProps {
 	/**
