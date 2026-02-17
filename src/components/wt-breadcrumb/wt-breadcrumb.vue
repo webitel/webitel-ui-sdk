@@ -18,8 +18,8 @@ v-if="item?.route" :to="item?.route" class="wt-breadcrumb__text typo-body-1"
 
 <script setup lang="ts">
 import type { BreadcrumbProps } from 'primevue';
-import { ComponentSize } from '../../enums';
 import { computed } from 'vue';
+import { ComponentSize } from '../../enums';
 
 interface Props extends BreadcrumbProps {
 	/**
