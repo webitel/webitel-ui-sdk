@@ -112,11 +112,8 @@ export default {
   color: var(--wt-tabs-text-color);
 }
 
+.wt-tab:focus,
 .wt-tab:hover {
-  /* disables bold font resize on hover */
-}
-
-.wt-tab:focus {
   border-bottom-color: var(--wt-tabs-underline-active-color);
   color: var(--wt-tabs-text-hover-color);
 }

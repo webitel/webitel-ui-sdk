@@ -309,6 +309,20 @@ const onCanPlay = (ev: Event) => {
   min-width: 0;
   height: 100%;
   background: var(--p-player-wrapper-background);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.wt-vidstack-player--sm :deep(video) {
+  border-radius: var(--p-player-control-bar-sm-border-radius);
+}
+
+.wt-vidstack-player--md :deep(video) {
+  border-radius: var(--p-player-control-bar-md-border-radius);
+}
+
+.wt-vidstack-player--lg :deep(video) {
+  border-radius: var(--p-player-control-bar-lg-border-radius);
 }
 
 .wt-vidstack-player-video-object-fit--cover :deep(video) {
