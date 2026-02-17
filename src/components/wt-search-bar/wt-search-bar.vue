@@ -4,6 +4,7 @@
     :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
     :invalid="invalid"
 		class="wt-search-bar"
+    :class="{ 'wt-search-bar--full-width': fullWidth }"
     type="search"
     @update:model-value="handleInput"
     @keyup="handleKeyup"
@@ -108,6 +109,10 @@ const props = defineProps({
 		type: Array,
 		default: () => [],
 	},
+  fullWidth: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits<{
@@ -192,6 +197,10 @@ function updateSearchMode({ option }) {
 	https://webitel.atlassian.net/browse/WTEL-8812
 	*/
 	width: var(--wt-search-bar-width);
+}
+
+.wt-search-bar--full-width {
+  width: 100%;
 }
 
 .wt-search-bar__icon-controls {
