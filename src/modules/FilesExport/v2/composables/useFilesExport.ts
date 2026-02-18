@@ -1,9 +1,8 @@
 import JSZip from 'jszip';
 import { ref } from 'vue';
-
-import { saveZip, fetchFileBinary, handleMimeType } from '../utils/utils';
 import { _wtUiLog } from '../../../../scripts/logger';
 import { UseFilesExportOptions, UseFilesExportReturn } from '../types/types';
+import { fetchFileBinary, handleMimeType, saveZip } from '../utils/utils';
 
 export const useFilesExportProgress = () => {
 	const isLoading = ref(false);
