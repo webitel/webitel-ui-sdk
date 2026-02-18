@@ -126,7 +126,7 @@ export const uiSdkRoutes = [
 						],
 					},
 					{
-						text: 'Userinfo',
+						text: 'Module: Userinfo',
 						collapsed: true,
 						items: [
 							{
@@ -138,6 +138,13 @@ export const uiSdkRoutes = [
 								link: resolveLink('modules/Userinfo/access/Readme.md'),
 							},
 						],
+					},
+					{
+						text: 'Module: Files Export',
+						collapsed: true,
+						items: resolveItems([
+							'modules/FilesExport/Readme.md',
+						]),
 					},
 					{
 						text: 'Module: Filters',
