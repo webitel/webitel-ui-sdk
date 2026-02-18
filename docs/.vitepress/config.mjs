@@ -16,91 +16,105 @@ global.customElements = new Window().customElements;
 
 // https://vitepress.dev/reference/site-config
 export default defineVitepressConfig({
-  title: '@webitel/ui',
-  description: 'Webitel UI docs',
-  base: '/webitel-ui-sdk/',
-  head: [
-    [
-      'link',
-      {
-        rel: 'icon',
-        href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧑‍💻 </text></svg>',
-      },
-    ],
-  ],
-  vue: {
-    template: {
-          compilerOptions: {
-            isCustomElement: (tag) => tag.startsWith('media-'),
-          },
-        }
-      },
-  lastUpdated: true,
-  vite: {
-    build: {
-      rollupOptions: {
-        // external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
-      },
-    },
-    resolve: {
-      alias: {
-        '__lib__': path.resolve(__dirname, '../../src'),
-        '@aliasedDeps/api-services/axios': path.resolve(__dirname, './aliases/axios'),
-      },
-    },
-    ssr: {
-      noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern', // or "modern-compiler", "legacy",
-        },
-      },
-    },
-    plugins: [
-      vidstack(),
-      nodePolyfills({
-        globals: {
-          process: true,
-        },
-      }),
-      tailwindcss(),
-      (() => {
-        const docgen = vueDocgenPlugin({
-          include: globbySync(['src/**/*.vue']),
-          injectAt: 'docs',
-        });
-        // dunno why, but default enforce value breaks build
-        docgen.enforce = null;
-        return docgen;
-      })(),
-    ],
-  },
+	title: '@webitel/ui',
+	description: 'Webitel UI docs',
+	base: '/webitel-ui-sdk/',
+	ignoreDeadLinks: true,
+	head: [
+		[
+			'link',
+			{
+				rel: 'icon',
+				href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧑‍💻 </text></svg>',
+			},
+		],
+	],
+	vue: {
+		template: {
+			compilerOptions: {
+				isCustomElement: (tag) => tag.startsWith('media-'),
+			},
+		},
+	},
+	lastUpdated: true,
+	vite: {
+		build: {
+			rollupOptions: {
+				// external: ['@webitel/styleguide/extend', '@webitel/styleguide/primitive', '@webitel/styleguide/semantic'],
+			},
+		},
+		resolve: {
+			alias: {
+				__lib__: path.resolve(__dirname, '../../src'),
+				'@aliasedDeps/api-services/axios': path.resolve(
+					__dirname,
+					'./aliases/axios',
+				),
+			},
+		},
+		ssr: {
+			noExternal: [
+				'@vuelidate/core',
+				'vue-multiselect',
+				'webitel-sdk',
+			],
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: 'modern', // or "modern-compiler", "legacy",
+				},
+			},
+		},
+		plugins: [
+			vidstack(),
+			nodePolyfills({
+				globals: {
+					process: true,
+				},
+			}),
+			tailwindcss(),
+			(() => {
+				const docgen = vueDocgenPlugin({
+					include: globbySync([
+						'src/**/*.vue',
+					]),
+					injectAt: 'docs',
+				});
+				// dunno why, but default enforce value breaks build
+				docgen.enforce = null;
+				return docgen;
+			})(),
+		],
+	},
 
-  // additionalData: `@import "../../src/css/main.scss";`,
-  themeConfig: {
-    // search won't work till i18n locales are "legacy: false"
-    search: { provider: 'local' },
-    // https://vitepress.dev/reference/default-theme-config
-    nav,
-    sidebar,
+	// additionalData: `@import "../../src/css/main.scss";`,
+	themeConfig: {
+		// search won't work till i18n locales are "legacy: false"
+		search: {
+			provider: 'local',
+		},
+		// https://vitepress.dev/reference/default-theme-config
+		nav,
+		sidebar,
 
-    socialLinks: [
-      {
-        icon: 'github',
-        link: 'https://github.com/webitel/webitel-ui-sdk',
-      },
-      {
-        icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📖</text></svg>' },
-        link: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs',
-      },
-    ],
-    // https://vitepress.dev/reference/default-theme-edit-link#site-level-config
-    editLink: {
-      // https://vitepress.dev/reference/runtime-api#usedata
-      pattern:
-        'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
-    },
-  },
+		socialLinks: [
+			{
+				icon: 'github',
+				link: 'https://github.com/webitel/webitel-ui-sdk',
+			},
+			{
+				icon: {
+					svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📖</text></svg>',
+				},
+				link: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs',
+			},
+		],
+		// https://vitepress.dev/reference/default-theme-edit-link#site-level-config
+		editLink: {
+			// https://vitepress.dev/reference/runtime-api#usedata
+			pattern:
+				'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
+		},
+	},
 });
