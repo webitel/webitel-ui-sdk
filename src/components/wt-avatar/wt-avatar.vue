@@ -91,6 +91,8 @@ const isLetterAvatar = computed(() => !props.src && props.username);
 const avatarLetters = computed(() => {
 	if (!props.username) return false;
 	const abbreviation = props.username
+		.trim()
+		.replace(/\s+/g, ' ') //change several spaces to one
 		.split(' ')
 		.map((word) => word.at(0).toUpperCase())
 		.join('');
@@ -159,7 +161,13 @@ const avatarLettersBackground = computed(() => {
 		},
 	];
 	const searchedLetter = letterList.find(({ letters }) =>
-		letters.includes(avatarLetters.value.at(0).toUpperCase()),
+		letters.includes(
+			avatarLetters.value
+				.at(0)
+				.trim()
+				.replace(/\s+/g, ' ') //change several spaces to one
+				.toUpperCase(),
+		),
 	);
 	return searchedLetter?.color || '--p-avatar-letters-p1-color';
 });
