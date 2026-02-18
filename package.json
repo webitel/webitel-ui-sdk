@@ -305,6 +305,10 @@
 			"types": "./types/modules*",
 			"import": "./src/modules*"
 		},
+		"./modules/FilesExport": {
+			"types": "./types/modules/FilesExport/v2/index.d.ts",
+			"import": "./src/modules/FilesExport/v2/index.ts"
+		},
 		"./modules/CallSession": {
 			"types": "./types/modules/CallSession/index.d.ts",
 			"import": "./src/modules/CallSession/index.ts"
