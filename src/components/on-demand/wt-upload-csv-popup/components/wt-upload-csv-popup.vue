@@ -63,12 +63,12 @@
         <ul class="upload-popup-mapping">
           <li class="upload-popup-mapping-item">
             <p
-              class="upload-popup-mapping-item__field upload-popup-mapping-item__field--title"
+              class="upload-popup-mapping-item__field typo-subtitle-1"
             >
               {{ t('objects.CSV.fieldName') }}
             </p>
             <p
-              class="upload-popup-mapping-item__field upload-popup-mapping-item__field--title"
+              class="upload-popup-mapping-item__field typo-subtitle-1"
             >
               {{ t('objects.CSV.CSVColumn') }}
             </p>
@@ -206,12 +206,8 @@ const {
 @use '../../../../../src/css/main' as *;
 
 .upload-popup {
-  .object-input-grid {
-    grid-auto-rows: minmax(40px, auto); // override default
-  }
-
   :deep(.wt-popup__popup) {
-    min-height: 40vh; // to place loader in the center, till file is parsed
+    min-height: 40vh;
   }
 
   .upload-popup__reading-file-loader {
@@ -222,7 +218,12 @@ const {
   }
 
   .upload-popup-form__form {
-    @extend .object-input-grid;
+    display: grid;
+    align-items: flex-start;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(40px, auto);
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
     margin: var(--spacing-sm) 0;
   }
 
@@ -237,16 +238,16 @@ const {
 
   .upload-popup-mapping {
     .upload-popup-mapping-item {
-      @extend .object-input-grid;
+      display: grid;
+      align-items: flex-start;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(40px, auto);
+      grid-column-gap: 20px;
+      grid-row-gap: 10px;
       margin-bottom: var(--spacing-sm);
 
       &__field {
-        //@extend %typo-body-1;
         align-self: center;
-
-        &.upload-popup-mapping-item__field--title {
-          //@extend %typo-subtitle-1;
-        }
       }
 
       &__select :deep(.wt-label),
