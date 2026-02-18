@@ -162,7 +162,11 @@ const {
 initialize();
 
 const initializeDefaultFilters = () => {
-	if (props.entityIdKey && props.entityIdValue) {
+	if (
+		props.entityIdKey &&
+		props.entityIdValue &&
+		!hasFilter(props.entityIdKey)
+	) {
 		addFilter({
 			name: props.entityIdKey,
 			value: props.entityIdValue,
