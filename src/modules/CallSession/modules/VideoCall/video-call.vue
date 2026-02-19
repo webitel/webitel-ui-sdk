@@ -316,12 +316,13 @@ const showSenderScreen = computed(() => {
 });
 
 const showSenderMutedScreen = computed(() => {
+	const isActiveCall = !isOnHold.value;
+
 	// If call is on hold but sender video exists — muted screen should NOT show
-	if (isOnHold.value && senderVideoEnabled.value && senderStream.value) {
-		return false;
+	if (!isActiveCall && !senderVideoEnabled.value && senderStream.value) {
+		return true;
 	}
 
-	const isActiveCall = !isOnHold.value;
 	const hasBothStreams = bothStreamsAvailable.value;
 	const senderVideoOff = !senderVideoEnabled.value;
 	const receiverHasStream = !!receiverStream.value;
