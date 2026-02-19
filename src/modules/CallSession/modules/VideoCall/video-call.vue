@@ -3,7 +3,7 @@
     :class="[!props.static && `video-call-position--${props.position}`]"
     :hide-video-display-panel="props.hideVideoDisplayPanel"
     :size="props.size"
-    :src="mainStream"
+    :stream="mainStream"
     :static="props.static"
     :username="props.username"
     :hide-controls-panel="isOnHold"
@@ -80,7 +80,7 @@
         <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
-            :src="props['sender:stream']"
+            :stream="props['sender:stream']"
             autoplay
             class="video-call-sender"
             hide-controls-panel
