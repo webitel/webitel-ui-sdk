@@ -3,9 +3,10 @@
     :class="[!props.static && `video-call-position--${props.position}`]"
     :hide-video-display-panel="props.hideVideoDisplayPanel"
     :size="props.size"
-    :stream="mainStream"
+    :src="mainStream"
     :static="props.static"
     :username="props.username"
+    :hide-controls-panel="isOnHold"
     autoplay
     class="video-call"
     hide-background
@@ -54,7 +55,7 @@
       </slot>
 
       <div
-        :class="`video-call-content-wrapper--${innerSize}`"
+        :class="[`video-call-content-wrapper--${innerSize}`, { 'video-call-content-wrapper--is-on-hold': isOnHold }]"
         class="video-call-content-wrapper"
       >
         <screenshot-box
@@ -79,7 +80,7 @@
         <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
-            :stream="props['sender:stream']"
+            :src="props['sender:stream']"
             autoplay
             class="video-call-sender"
             hide-controls-panel
@@ -440,6 +441,10 @@ const senderVideoMutedIconSizes = {
 .video-call-content-wrapper--sm {
   bottom: calc(var(--p-player-counter-position-padding-sm) + var(--p-player-control-bar-sm-height));
   left: var(--p-player-counter-position-padding-sm);
+}
+
+.video-call-content-wrapper--sm.video-call-content-wrapper--is-on-hold {
+  bottom: var(--p-player-counter-position-padding-sm);
 }
 
 .video-call-content-wrapper--md {
