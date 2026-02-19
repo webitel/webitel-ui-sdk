@@ -2,7 +2,7 @@
   <wt-popup
     v-bind="$attrs"
     :shown="file"
-    class="upload-popup"
+    class="wt-upload-csv-popup"
     @close="close"
   >
     <template #title>
@@ -12,12 +12,12 @@
     <template #main>
       <wt-loader
         v-show="isReadingFile"
-        class="upload-popup__reading-file-loader"
+        class="wt-upload-csv-popup__reading-file-loader"
       />
 
       <section
         v-show="!isReadingFile"
-        class="upload-popup-form"
+        class="wt-upload-csv-popup-form"
       >
         <wt-checkbox
           v-model:selected="skipHeaders"
@@ -25,7 +25,7 @@
           disabled
         />
 
-        <form class="upload-popup-form__form">
+        <form class="wt-upload-csv-popup-form__form">
           <wt-select
             v-model="charset"
             :clearable="false"
@@ -43,12 +43,12 @@
         <!-- PREVIEW SECTION: preview loader, preview table, parsing stack trace -->
         <section>
           <wt-loader
-            v-show="isParsingPreview"
-            class="upload-popup__parsing-preview-loader"
+            v-if="isParsingPreview"
+            class="wt-upload-csv-popup__parsing-preview-loader"
           />
           <article
-            v-show="!isParsingPreview"
-            class="upload-popup-form__file-preview"
+            v-else
+            class="wt-upload-csv-popup-form__file-preview"
           >
             <wt-table
               :data="csvPreviewTableData"
@@ -60,26 +60,26 @@
         </section>
 
         <!-- FIELDS MAPPING -->
-        <ul class="upload-popup-mapping">
-          <li class="upload-popup-mapping-item">
+        <div class="wt-upload-csv-popup-mapping">
+          <div class="wt-upload-csv-popup-mapping-item">
             <p
-              class="upload-popup-mapping-item__field typo-subtitle-1"
+              class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1"
             >
               {{ t('objects.CSV.fieldName') }}
             </p>
             <p
-              class="upload-popup-mapping-item__field typo-subtitle-1"
+              class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1"
             >
               {{ t('objects.CSV.CSVColumn') }}
             </p>
-          </li>
+          </div>
 
-          <li
+          <div
             v-for="(field, key) in mappingFields"
             :key="key"
-            class="upload-popup-mapping-item"
+            class="wt-upload-csv-popup-mapping-item"
           >
-            <p class="upload-popup-mapping-item__field">
+            <p class="wt-upload-csv-popup-mapping-item__field">
               {{ t(field.locale) }}<span v-if="field.required">*</span>
             </p>
 
@@ -90,14 +90,14 @@
               :options="csvColumns"
               :placeholder="t(field.locale)"
               :track-by="null"
-              class="upload-popup-mapping-item__select"
+              class="wt-upload-csv-popup-mapping-item__select"
             />
             <wt-tags-input
               v-else
               v-model="field.csv"
               :options="csvColumns"
               :placeholder="t(field.locale)"
-              class="upload-popup-mapping-item__select"
+              class="wt-upload-csv-popup-mapping-item__select"
             />
 
             <div
@@ -106,16 +106,16 @@
             >
               {{ field.tooltip }}
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </section>
 
-      <article
+      <div
         v-show="!isParsingPreview && parseErrorStackTrace"
-        class="upload-popup-form__error-stack-trace"
+        class="wt-upload-csv-popup-form__error-stack-trace"
       >
         {{ parseErrorStackTrace }}
-      </article>
+      </div>
     </template>
 
     <template
@@ -203,21 +203,19 @@ const {
 </script>
 
 <style lang="scss">
-@use '../../../../../src/css/main' as *;
-
-.upload-popup {
+.wt-upload-csv-popup {
   :deep(.wt-popup__popup) {
     min-height: 40vh;
   }
 
-  .upload-popup__reading-file-loader {
+  .wt-upload-csv-popup__reading-file-loader {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
-  .upload-popup-form__form {
+  .wt-upload-csv-popup-form__form {
     display: grid;
     align-items: flex-start;
     grid-template-columns: 1fr 1fr;
@@ -227,17 +225,17 @@ const {
     margin: var(--spacing-sm) 0;
   }
 
-  .upload-popup__parsing-preview-loader {
+  .wt-upload-csv-popup__parsing-preview-loader {
     margin: auto;
   }
 
-  .upload-popup-form__file-preview .wt-table {
+  .wt-upload-csv-popup-form__file-preview .wt-table {
     overflow: auto;
     max-width: 60vw;
   }
 
-  .upload-popup-mapping {
-    .upload-popup-mapping-item {
+  .wt-upload-csv-popup-mapping {
+    .wt-upload-csv-popup-mapping-item {
       display: grid;
       align-items: flex-start;
       grid-template-columns: 1fr 1fr;
@@ -257,16 +255,12 @@ const {
     }
   }
 
-  .upload-popup-form__error-stack-trace {
+  .wt-upload-csv-popup-form__error-stack-trace {
     margin-top: var(--spacing-sm);
     padding: var(--spacing-sm);
     color: var(--error-color);
     border-radius: var(--border-radius);
     background: var(--secondary-color);
-  }
-
-  .upload-tooltip {
-    //@extend %typo-caption;
   }
 }
 </style>

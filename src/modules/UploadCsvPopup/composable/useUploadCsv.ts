@@ -1,6 +1,6 @@
-import { computed, defineEmits, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
-import { debounce, isEmpty } from '../../../../scripts';
+import { debounce, isEmpty } from '../../../scripts';
 import normalizeCSVData from '../scripts/normalizeCSVData';
 import parseCSV from '../scripts/parseCSV';
 import processFile from '../scripts/processFile';
@@ -23,8 +23,6 @@ const useUploadCsv = ({ props, emit, skipHeaders, separator }) => {
 	const csvPreview = ref([
 		[],
 	]);
-
-	console.log('emit', emit);
 
 	const csvValues = computed(() =>
 		(props.mappingFields || [])
