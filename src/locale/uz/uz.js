@@ -571,7 +571,9 @@ export default {
 			type: {
 				options: 'Variantlar',
 				score: 'Ball',
+				yes: '"Ha" ni tanlash',
 			},
+			criticalViolation: 'Jiddiy buzilish',
 			clearSelection: 'Tanlovni tozalash',
 		},
 		deleteConfirmationPopup: {

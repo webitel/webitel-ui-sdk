@@ -562,7 +562,9 @@ export default {
 			type: {
 				options: 'Вариант',
 				score: 'Бал',
+				yes: 'Выбор "Да"',
 			},
+			criticalViolation: 'Критическое нарушение',
 			clearSelection: 'Очистить выбор',
 		},
 		deleteConfirmationPopup: {

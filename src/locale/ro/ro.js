@@ -571,7 +571,9 @@ export default {
 			type: {
 				options: 'Opțiuni',
 				score: 'Scor',
+				yes: 'Selectează "Da"',
 			},
+			criticalViolation: 'Încălcare critică',
 			clearSelection: 'Șterge selecția',
 		},
 		deleteConfirmationPopup: {

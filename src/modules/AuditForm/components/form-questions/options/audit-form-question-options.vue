@@ -39,11 +39,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
+import type {
+	EngineQuestion,
+	EngineQuestionAnswer,
+} from '@webitel/api-services/gen/models';
 
 import { WtButton, WtRadio } from '../../../../../components';
 import updateObject from '../../../../../scripts/updateObject.js';
-import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema.js';
+import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
 const questionModel = defineModel<EngineQuestion>('question');

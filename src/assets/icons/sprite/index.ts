@@ -228,6 +228,8 @@ import versions from './versions.svg?raw';
 import videoCam from './video-cam.svg?raw';
 import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
+import violation from './violation.svg?raw';
+import violationFilled from './violation--filled.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
@@ -404,6 +406,8 @@ export default objCamelToKebab({
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
 	videoCam,
+	violation,
+	'violation--filled': violationFilled,
 	zoomIn,
 	zoomOut,
 	ttsDownload,

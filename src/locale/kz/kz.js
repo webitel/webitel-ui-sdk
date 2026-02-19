@@ -568,7 +568,9 @@ export default {
 			type: {
 				options: 'Опциялар',
 				score: 'Баға',
+				yes: '"Иә" таңдау',
 			},
+			criticalViolation: 'Критикалық бұзу',
 			clearSelection: 'Таңдауды тазалау',
 		},
 		deleteConfirmationPopup: {
