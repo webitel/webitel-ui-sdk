@@ -64,13 +64,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { useI18n } from 'vue-i18n';
 import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
+import { computed, inject } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { WtDivider, WtIcon } from '../../../components';
 import { IconColor } from '../../../enums';

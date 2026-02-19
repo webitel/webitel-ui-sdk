@@ -38,11 +38,11 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { integer, maxValue, minValue, required } from '@vuelidate/validators';
-import { computed, onMounted } from 'vue';
 import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
+import { computed, onMounted } from 'vue';
 
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import updateObject from '../../../../../scripts/updateObject.js';

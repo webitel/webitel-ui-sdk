@@ -39,6 +39,10 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
+import type {
+	EngineQuestion,
+	EngineQuestionAnswer,
+} from '@webitel/api-services/gen/models';
 import cloneDeep from 'lodash/cloneDeep.js';
 import {
 	computed,
@@ -50,10 +54,6 @@ import {
 	useTemplateRef,
 	watch,
 } from 'vue';
-import type {
-	EngineQuestion,
-	EngineQuestionAnswer,
-} from '@webitel/api-services/gen/models';
 
 import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';

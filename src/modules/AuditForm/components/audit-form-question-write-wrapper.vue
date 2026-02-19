@@ -59,10 +59,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import type { EngineQuestion } from '@webitel/api-services/gen/models';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';

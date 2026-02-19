@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts" setup>
+import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
 
 import WtCheckbox from '../../../../../components/wt-checkbox/wt-checkbox.vue';
 
