@@ -571,7 +571,9 @@ export default {
 			type: {
 				options: 'Tùy chọn',
 				score: 'Điểm',
+				yes: 'Chọn "Có"',
 			},
+			criticalViolation: 'Vi phạm nghiêm trọng',
 			clearSelection: 'Xóa lựa chọn',
 		},
 		deleteConfirmationPopup: {

@@ -565,7 +565,9 @@ export default {
 			type: {
 				options: 'Opciones',
 				score: 'Puntuación',
+				yes: 'Seleccionar "Sí"',
 			},
+			criticalViolation: 'Violación crítica',
 			clearSelection: 'Limpiar selección',
 		},
 		deleteConfirmationPopup: {

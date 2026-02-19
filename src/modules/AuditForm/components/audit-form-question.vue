@@ -28,7 +28,10 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, inject, onMounted, ref } from 'vue';
-import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
+import type {
+	EngineQuestion,
+	EngineQuestionAnswer,
+} from '@webitel/api-services/gen/models';
 
 import vClickaway from '../../../directives/clickaway/clickaway.js';
 import isEmpty from '../../../scripts/isEmpty.js';

@@ -50,11 +50,14 @@ import {
 	useTemplateRef,
 	watch,
 } from 'vue';
-import type { EngineQuestion, EngineQuestionAnswer } from 'webitel-sdk';
+import type {
+	EngineQuestion,
+	EngineQuestionAnswer,
+} from '@webitel/api-services/gen/models';
 
 import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
-import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
+import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
 import AuditFormQuestion from './audit-form-question.vue';
 import AuditFormFooter from './form/form-footer/audit-form-footer.vue';
 

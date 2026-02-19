@@ -578,7 +578,9 @@ export default deepmerge(
 				type: {
 					options: 'Options',
 					score: 'Score',
+					yes: 'Select "Yes"',
 				},
+				criticalViolation: 'Critical violation',
 				clearSelection: 'Clear selection',
 			},
 			deleteConfirmationPopup: {

@@ -9,14 +9,22 @@
     @keyup.enter="emit('activate')"
   >
     <header class="audit-form-question-read-header">
-      <p
-        :class="{
-          'audit-form-question-read-text--required': question.required,
-        }"
-        class="audit-form-question-read-text"
-      >
-        {{ question.question }}
-      </p>
+      <div class="audit-form-question-read-text-wrapper">
+        <wt-icon
+          v-if="showCriticalViolationIcon"
+          class="audit-form-question-read__critical-violation-icon"
+          icon="violation--filled"
+          size="md"
+        />
+        <p
+          :class="{
+            'audit-form-question-read-text--required': question.required,
+          }"
+          class="audit-form-question-read-text"
+        >
+          {{ question.question }}
+        </p>
+      </div>
       <wt-icon
         v-if="!disableDragging && !first"
         class="audit-form-question-read__drag-icon"
@@ -58,17 +66,19 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
-import {
-	EngineAuditQuestionType,
-	type EngineQuestion,
-	type EngineQuestionAnswer,
-} from 'webitel-sdk';
+import type {
+	EngineQuestion,
+	EngineQuestionAnswer,
+} from '@webitel/api-services/gen/models';
+import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 
 import { WtDivider, WtIcon } from '../../../components';
+import { IconColor } from '../../../enums';
 import isEmpty from '../../../scripts/isEmpty.js';
 import AuditFormAnswerEditingInfo from './form-answers/answer-editing-info/audit-form-answer-editing-info.vue';
 import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './form-questions/score/audit-form-question-score.vue';
+import AuditFormQuestionYes from './form-questions/yes/audit-form-question-yes.vue';
 
 const readonly = inject('readonly');
 
@@ -87,14 +97,20 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const QuestionTypeComponent = computed(() => {
-	if (props.question.type === EngineAuditQuestionType.Option)
+	if (props.question.type === EngineAuditQuestionType.QuestionOption)
 		return AuditFormQuestionOptions;
-	if (props.question.type === EngineAuditQuestionType.Score)
+	if (props.question.type === EngineAuditQuestionType.QuestionScore)
 		return AuditFormQuestionScore;
+	if (props.question.type === EngineAuditQuestionType.QuestionYes)
+		return AuditFormQuestionYes;
 	return null;
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
+
+const showCriticalViolationIcon = computed(() => {
+	return props.question.criticalViolation === true;
+});
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
 	if (readonly.value) return; // if ... then in preview mode
@@ -145,6 +161,16 @@ const resetAnswer = () => {
 
 .audit-form-question-read-header {
   margin-bottom: var(--spacing-xs);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.audit-form-question-read-text-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex: 1;
 }
 
 .audit-form-question-read-text {
@@ -156,6 +182,10 @@ const resetAnswer = () => {
       color: var(--error-color);
     }
   }
+}
+
+.audit-form-question-read__critical-violation-icon {
+  flex-shrink: 0;
 }
 
 .audit-form-question-read-content {

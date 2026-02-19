@@ -35,7 +35,7 @@ import { FormatDateMode } from '@webitel/ui-sdk/enums';
 import { formatDate } from '@webitel/ui-sdk/utils';
 import { computed, ref, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { EngineQuestionAnswer } from 'webitel-sdk';
+import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
 
 const props = withDefaults(
 	defineProps<{
