@@ -12,7 +12,8 @@
     >
       <wt-checkbox
         :label="t('vocabulary.yes')"
-        v-model:selected="isYesModel"
+        :selected="isYes"
+        @update:selected="toggleYes"
       />
     </div>
   </article>
@@ -21,17 +22,11 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type {
-	EngineQuestion,
-	EngineQuestionAnswer,
-} from '@webitel/api-services/gen/models';
+import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
 
 import WtCheckbox from '../../../../../components/wt-checkbox/wt-checkbox.vue';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
-defineModel<EngineQuestion>('question', {
-	required: false,
-});
 
 defineProps<{
 	/**
@@ -44,19 +39,17 @@ const { t } = useI18n();
 
 const isYes = computed(() => answerModel.value?.score === 1);
 
-const isYesModel = computed({
-	get: () => isYes.value,
-	set: (value: boolean) => {
-		answerModel.value = answerModel.value
-			? {
-					...answerModel.value,
-					score: value ? 1 : 0,
-				}
-			: {
-					score: value ? 1 : 0,
-				};
-	},
-});
+function toggleYes(value: boolean | string[]) {
+	const boolValue = typeof value === 'boolean' ? value : value.length > 0;
+	answerModel.value = answerModel.value
+		? {
+				...answerModel.value,
+				score: boolValue ? 1 : 0,
+			}
+		: {
+				score: boolValue ? 1 : 0,
+			};
+}
 </script>
 
 <style lang="scss" scoped>

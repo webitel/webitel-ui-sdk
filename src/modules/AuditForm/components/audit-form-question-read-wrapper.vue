@@ -109,10 +109,7 @@ const QuestionTypeComponent = computed(() => {
 const isAnswer = computed(() => !isEmpty(answerModel.value));
 
 const showCriticalViolationIcon = computed(() => {
-	return (
-		props.question.type === EngineAuditQuestionType.QuestionYes &&
-		props.question.criticalViolation === true
-	);
+	return props.question.criticalViolation === true;
 });
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
