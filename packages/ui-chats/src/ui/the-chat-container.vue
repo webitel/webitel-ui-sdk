@@ -1,5 +1,9 @@
 <template>
   <section class="the-chat-container">
+    <media-viewer
+      :media="mediaView"
+      @close="closeMedia"
+    />
     <slot name="main">
       <dropzone
         v-if="!isDropzoneDisabled && isDropzoneVisible"
@@ -55,11 +59,14 @@ import {
 	ChatAction,
 	type SharedActionSlots,
 } from './chat-footer/modules/user-input/enums/ChatAction.enum';
+import MediaViewer from './media-viewer/media-viewer.vue';
 import Dropzone from './messaging/components/dropzone.vue';
 import MessagesContainer from './messaging/components/the-messages-container.vue';
 import { useDropzoneHandlers } from './messaging/composables/useDropzoneHandlers';
-import { MessageAction } from './messaging/modules/message/enums/MessageAction.enum';
-import type { ChatMessageType } from './messaging/types/ChatMessage.types';
+import type {
+	ChatMessageFile,
+	ChatMessageType,
+} from './messaging/types/ChatMessage.types';
 import { createUiChatsEmitter } from './utils/emitter';
 import type { ResultCallbacks } from './utils/ResultCallbacks.types';
 
@@ -95,7 +102,6 @@ const emit = defineEmits<{
 		options: ResultCallbacks,
 	): void;
 	(e: typeof ChatAction.LoadNextMessages): void;
-	(e: typeof MessageAction.ClickOnImage, message: ChatMessageType): void;
 }>();
 
 const slots = defineSlots<
@@ -110,10 +116,20 @@ const uiChatsEmitter = createUiChatsEmitter();
 provide('size', props.size);
 provide('uiChatsEmitter', uiChatsEmitter);
 
+const mediaView = ref<ChatMessageFile | null>(null);
+
 uiChatsEmitter?.on('clickChatMessageImage', (message) => {
-	emit(MessageAction.ClickOnImage, message);
+	openMedia(message);
 });
 const { isDropzoneVisible, handleDragLeave } = useDropzoneHandlers();
+
+function openMedia(message: ChatMessageType) {
+	mediaView.value = message.file ?? null;
+}
+
+function closeMedia() {
+	mediaView.value = null;
+}
 
 const draft = ref<string>('');
 
