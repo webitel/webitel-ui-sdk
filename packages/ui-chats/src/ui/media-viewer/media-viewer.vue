@@ -7,7 +7,7 @@
     <div class="media-viewer__shadow" />
     <div class="media-viewer__content-wrapper">
       <img
-        class="media-viewer__content__img"
+        class="media-viewer__content-img"
         :src="media.url"
         :alt="media.name"
       >
@@ -58,7 +58,7 @@ function close() {
   z-index: 1;
 }
 
-.media-viewer__content__img {
+.media-viewer__content-img {
   /* like on web telegram preview */
   display: block;
   max-width: 100vw;
