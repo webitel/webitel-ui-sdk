@@ -32,9 +32,8 @@ const props = withDefaults(defineProps<Props>(), {
 	accept: '.csv',
 });
 
-const emit = defineEmits<{
-	(e: 'change', files: FileList | null, event: Event): void;
-}>();
+const emit =
+	defineEmits<(e: 'change', files: FileList | null, event: Event) => void>();
 
 const { t } = useI18n();
 
