@@ -249,6 +249,15 @@ export default {
 			},
 		},
 	},
+	importCSV: 'Імпорт CSV',
+	CSV: {
+		skipHeaders: 'Пропустити заголовки',
+		charSet: 'Кодування',
+		separator: 'Роздільник',
+		CSVColumn: 'Стовпець CSV',
+		fieldName: 'Назва поля',
+		clearMember: 'Очистити учасника',
+	},
 	channel: {
 		state: {
 			[ChannelState.Waiting]: 'Очікування',
