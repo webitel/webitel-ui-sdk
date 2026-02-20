@@ -306,8 +306,8 @@
 			"import": "./src/modules*"
 		},
 		"./modules/FilesExport": {
-			"types": "./types/modules/FilesExport/v2/index.d.ts",
-			"import": "./src/modules/FilesExport/v2/index.ts"
+			"types": "./types/modules/FilesExport/index.d.ts",
+			"import": "./src/modules/FilesExport/index.ts"
 		},
 		"./modules/CallSession": {
 			"types": "./types/modules/CallSession/index.d.ts",
