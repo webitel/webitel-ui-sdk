@@ -55,7 +55,7 @@
       </slot>
 
       <div
-        :class="[`video-call-content-wrapper--${innerSize}`, { 'video-call-content-wrapper--is-on-hold': isOnHold }]"
+        :class="[`video-call-content-wrapper--${innerSize}`, { 'video-call-content-wrapper--hold': isOnHold }]"
         class="video-call-content-wrapper"
       >
         <screenshot-box
@@ -443,7 +443,7 @@ const senderVideoMutedIconSizes = {
   left: var(--p-player-counter-position-padding-sm);
 }
 
-.video-call-content-wrapper--sm.video-call-content-wrapper--is-on-hold {
+.video-call-content-wrapper--sm.video-call-content-wrapper--hold {
   bottom: var(--p-player-counter-position-padding-sm);
 }
 
