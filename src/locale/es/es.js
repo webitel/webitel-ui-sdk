@@ -249,6 +249,15 @@ export default {
 			},
 		},
 	},
+	importCSV: 'Importar CSV',
+	CSV: {
+		skipHeaders: 'Omitir encabezados',
+		charSet: 'Conjunto de caracteres',
+		separator: 'Separador',
+		CSVColumn: 'Columna CSV',
+		fieldName: 'Nombre del campo',
+		clearMember: 'Eliminar miembro',
+	},
 	channel: {
 		state: {
 			[ChannelState.Waiting]: 'En espera',

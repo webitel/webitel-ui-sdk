@@ -256,6 +256,15 @@ export default deepmerge(
 					[WebitelMediaExporterExportStatus.Failed]: 'Error',
 				},
 			},
+			importCSV: 'Import CSV',
+			CSV: {
+				skipHeaders: 'Skip headers',
+				charSet: 'Char set',
+				separator: 'Separator',
+				CSVColumn: 'CSV column',
+				fieldName: 'Field name',
+				clearMember: 'Clear member',
+			},
 		},
 		channel: {
 			state: {
