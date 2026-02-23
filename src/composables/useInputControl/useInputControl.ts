@@ -1,10 +1,21 @@
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 export const useInputControl = (input) => {
-	const inputEl = computed(() => input.value?.$el);
+	// inputnumber has span wrapper while inputtext hasnt
+	const inputEl = computed(() => {
+		if (input.value?.$el instanceof HTMLInputElement) {
+			return input.value?.$el;
+		} else {
+			return input.value?.$el?.querySelector('input');
+		}
+	});
 
 	const focus = () => {
 		inputEl.value?.focus();
+	};
+
+	const removeAutocomplete = () => {
+		inputEl.value?.setAttribute('autocomplete', 'off');
 	};
 
 	// prevent double triggering
@@ -13,5 +24,6 @@ export const useInputControl = (input) => {
 	return {
 		focus,
 		handleKeyup,
+		removeAutocomplete,
 	};
 };

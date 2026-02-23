@@ -80,6 +80,7 @@ import {
 	computed,
 	defineEmits,
 	defineModel,
+	onMounted,
 	toRefs,
 	useSlots,
 	useTemplateRef,
@@ -150,7 +151,7 @@ const { isValidation, invalid, validationText, validationTextColor } =
 		regleValidation,
 	});
 
-const { focus, handleKeyup } = useInputControl(inputNumber);
+const { focus, handleKeyup, removeAutocomplete } = useInputControl(inputNumber);
 
 const hasLabel = computed(() => {
 	return props.label || slots.label;
@@ -158,6 +159,10 @@ const hasLabel = computed(() => {
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
+});
+
+onMounted(() => {
+	removeAutocomplete();
 });
 
 defineExpose({
