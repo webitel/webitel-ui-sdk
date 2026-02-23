@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, provide } from 'vue';
 
 import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
@@ -48,6 +48,8 @@ const props = withDefaults(
 		darkMode: false,
 	},
 );
+
+provide('darkMode', props.darkMode);
 
 const logo = computed(() => {
 	return props.darkMode ? props.appLogo.dark : props.appLogo.light;

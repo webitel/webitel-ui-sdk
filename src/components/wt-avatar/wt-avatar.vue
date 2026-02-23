@@ -89,7 +89,7 @@ const props = defineProps({
 const isLetterAvatar = computed(() => !props.src && props.username);
 
 const avatarLetters = computed(() => {
-	if (!props.username) return false;
+	if (!props.username) return '';
 	const abbreviation = props.username
 		.trim()
 		.replace(/\s+/g, ' ') //change several spaces to one
