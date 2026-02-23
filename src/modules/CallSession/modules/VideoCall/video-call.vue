@@ -317,10 +317,10 @@ const showSenderScreen = computed(() => {
 });
 
 const showSenderMutedScreen = computed(() => {
-	const isActiveCall = !isOnHold.value;
+	const isNotOnHold = !isOnHold.value;
 
 	// If call is on hold but sender video exists — muted screen should NOT show
-	if (!isActiveCall && !senderVideoEnabled.value && senderStream.value) {
+	if (!isNotOnHold && !senderVideoEnabled.value && senderStream.value) {
 		return true;
 	}
 
@@ -333,7 +333,7 @@ const showSenderMutedScreen = computed(() => {
 	// - both participants connected
 	// - sender video disabled
 	// - receiver stream exists
-	return isActiveCall && hasBothStreams && senderVideoOff && receiverHasStream;
+	return isNotOnHold && hasBothStreams && senderVideoOff && receiverHasStream;
 });
 
 watch(
