@@ -3,8 +3,8 @@ import { ref } from 'vue';
 // eslint-disable-next-line import/prefer-default-export
 export const useDeleteConfirmationPopup = () => {
 	const isVisible = ref(false);
-	const deleteCount = ref(null);
-	const deleteCallback = ref(null);
+	const deleteCount = ref(0);
+	const deleteCallback = ref(() => {});
 
 	function askDeleteConfirmation({ deleted, callback }) {
 		if (Array.isArray(deleted)) deleteCount.value = deleted.length;
