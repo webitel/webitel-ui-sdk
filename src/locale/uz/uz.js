@@ -255,6 +255,15 @@ export default {
 			},
 		},
 	},
+	importCSV: 'CSV import qilish',
+	CSV: {
+		skipHeaders: 'Sarlavhalarni o‘tkazib yuborish',
+		charSet: 'Belgilar to‘plami',
+		separator: 'Ajratgich',
+		CSVColumn: 'CSV ustuni',
+		fieldName: 'Maydon nomi',
+		clearMember: 'A’zoni tozalash',
+	},
 	channel: {
 		state: {
 			[ChannelState.Waiting]: 'Kutmoqda',

@@ -1,7 +1,12 @@
 import JSZip from 'jszip';
 import { ref } from 'vue';
-import { _wtUiLog } from '../../../../scripts/logger';
-import { UseFilesExportOptions, UseFilesExportReturn } from '../types/types';
+
+import { _wtUiLog } from '../../../scripts/logger';
+import {
+	ExportedItem,
+	UseFilesExportOptions,
+	UseFilesExportReturn,
+} from '../types/types';
 import { fetchFileBinary, handleMimeType, saveZip } from '../utils/utils';
 
 export const useFilesExportProgress = () => {
@@ -56,6 +61,7 @@ export const useFilesExportProgress = () => {
 
 export const useFilesExport = ({
 	getFileURL,
+	getFileBlob,
 	fetch,
 	filename,
 	skipFilesWithError,
@@ -70,6 +76,16 @@ export const useFilesExport = ({
 		reset: resetProgress,
 	} = useFilesExportProgress();
 
+	const getFile = async (item: ExportedItem) => {
+		if (getFileURL) {
+			return fetchFileBinary(getFileURL(item));
+		}
+		if (getFileBlob) {
+			return getFileBlob(item);
+		}
+		throw new Error('getFileURL or getFileBlob is required');
+	};
+
 	const fillZip = async (zip: JSZip) => {
 		let page = 1;
 		let hasNext = true;
@@ -80,9 +96,9 @@ export const useFilesExport = ({
 			});
 			for (const item of items) {
 				try {
-					const binary = await fetchFileBinary(getFileURL(item));
+					const file = await getFile(item);
 					const itemFilename = handleMimeType(item);
-					zip.file(itemFilename, binary);
+					zip.file(itemFilename, file);
 					updateDownloadStatus(downloadStatus.value.count + 1);
 				} catch (err) {
 					_wtUiLog.warn({

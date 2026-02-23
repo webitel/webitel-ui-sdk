@@ -6,7 +6,8 @@ export type ExportedItem = {
 } & Record<string, unknown>;
 
 export type UseFilesExportOptions = {
-	getFileURL: (item: ExportedItem) => string;
+	getFileURL?: (item: ExportedItem) => string;
+	getFileBlob?: (item: ExportedItem) => Promise<Blob>;
 	fetch: ({ page, size }: { page: number; size?: number }) => Promise<{
 		items: ExportedItem[];
 		next: boolean;
