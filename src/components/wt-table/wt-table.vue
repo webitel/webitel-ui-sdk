@@ -522,8 +522,8 @@ const virtualScroll = computed(() => {
 		itemSize: props.itemSize, // The height/width of item according to orientation
 		numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
 		totalRecords: props.data.length,
-		autoSize: true, // Enable auto height recalculation
-		appendOnly: true, // Prevent scroll position jumps
+		autoSize: true,
+		appendOnly: true,
 	};
 });
 
