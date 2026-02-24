@@ -520,7 +520,10 @@ const virtualScroll = computed(() => {
 		lazy: props.lazy,
 		onLazyLoad: props.onLoading,
 		itemSize: props.itemSize, // The height/width of item according to orientation
-		numToleratedItems: props.data.length, // Number of items to pre-render outside visible area
+		numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
+		totalRecords: props.data.length,
+		autoSize: true,
+		appendOnly: true,
 	};
 });
 
