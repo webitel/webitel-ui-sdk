@@ -26,8 +26,6 @@ export default (/*{ mode }*/) => {
 					'vue',
 					'primevue',
 					'@aliasedDeps/api-services/axios',
-					'@webitel/styleguide',
-					'@webitel/styleguide/fonts',
 					'lodash-es',
 					'zod',
 					'clipboard-copy',
