@@ -103,7 +103,7 @@ const getUser = async ({ itemId: id }) => {
 		const copy = deepCopy(item);
 		if (copy.license) {
 			copy.license.forEach((item) => {
-				item.name = item.prod;
+				item.name = item.name || item.prod;
 			});
 		}
 		if (copy.profile) {
