@@ -516,6 +516,7 @@ const toggleRow = (row) => {
 const virtualScroll = computed(() => {
 	if (!props.lazy) return;
 
+	// TEST COMMENT
 	return {
 		lazy: props.lazy,
 		onLazyLoad: props.onLoading,
