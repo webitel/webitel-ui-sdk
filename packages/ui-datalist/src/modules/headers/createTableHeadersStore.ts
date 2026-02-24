@@ -130,7 +130,12 @@ export const tableHeadersStoreBody = ({
 		]);
 	};
 
-	const updateSort = (column) => {
+	const updateSort = (
+		column,
+		options: {
+			order?: SortSymbols;
+		} = {},
+	) => {
 		const getNextSortOrder = (sort) => {
 			switch (sort) {
 				case SortSymbols.NONE:
@@ -162,7 +167,10 @@ export const tableHeadersStoreBody = ({
 			});
 		};
 
-		const order = getNextSortOrder(column.sort);
+		const order =
+			options.order !== undefined
+				? options.order
+				: getNextSortOrder(column.sort);
 
 		headers.value = changeHeadersSort({
 			headers: headers.value,
