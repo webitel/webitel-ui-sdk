@@ -3,7 +3,8 @@
     v-clickaway="closePicker"
     class="wt-chat-emoji"
   >
-    <wt-rounded-action
+    <wt-button
+			variant="outlined"
       :size="size"
       color="secondary"
       icon="chat-emoji"
