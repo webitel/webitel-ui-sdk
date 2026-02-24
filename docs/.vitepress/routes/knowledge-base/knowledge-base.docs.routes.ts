@@ -55,6 +55,12 @@ export const knowledgeBaseRoutes = [
 											'general/access-control/access-computing/Readme.md',
 										),
 									},
+									{
+										text: 'FAQ: Access Control',
+										link: resolveKnowledgeBaseLinkDoc(
+											'general/access-control/faq/Readme.md',
+										),
+									},
 								],
 							},
 							{
