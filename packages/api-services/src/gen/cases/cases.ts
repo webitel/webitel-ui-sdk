@@ -11,6 +11,8 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	CreateCaseParams,
 	DeleteCaseParams,
+	ExportCases200,
+	ExportCasesParams,
 	LocateCaseParams,
 	SearchCases2Params,
 	SearchCasesParams,
@@ -56,6 +58,21 @@ export const // --- title start
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axiosInstance.post(`/cases`, webitelCasesInputCreateCase, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary RPC method for exporting cases to CSV or XLSX format (server-side streaming).
+			 */
+			const exportCases = <TData = AxiosResponse<ExportCases200>>(
+				params?: ExportCasesParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/cases/export`, {
 					...options,
 					params: {
 						...params,
@@ -152,6 +169,7 @@ export const // --- title start
 			return {
 				searchCases,
 				createCase,
+				exportCases,
 				deleteCase,
 				locateCase,
 				updateCase2,
@@ -161,6 +179,7 @@ export const // --- title start
 		};
 export type SearchCasesResult = AxiosResponse<WebitelCasesCaseList>;
 export type CreateCaseResult = AxiosResponse<WebitelCasesCase>;
+export type ExportCasesResult = AxiosResponse<ExportCases200>;
 export type DeleteCaseResult = AxiosResponse<WebitelCasesCase>;
 export type LocateCaseResult = AxiosResponse<WebitelCasesCase>;
 export type UpdateCase2Result = AxiosResponse<WebitelCasesUpdateCaseResponse>;

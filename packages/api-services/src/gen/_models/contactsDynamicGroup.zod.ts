@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ContactsDynamicCondition } from './contactsDynamicCondition';
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 export interface ContactsDynamicGroup {
 	/** List of dynamic conditions associated with the group. */
@@ -13,9 +13,9 @@ export interface ContactsDynamicGroup {
 	/** Timestamp(milli) of the group's creation. */
 	createdAt?: string;
 	/** The user who created this dynamic group. */
-	createdBy?: WebitelcontactsLookup;
+	createdBy?: WebitelContactsLookup;
 	/** Default static group to be assigned if no conditions are met. */
-	defaultGroup?: WebitelcontactsLookup;
+	defaultGroup?: WebitelContactsLookup;
 	/** The description of the dynamic group. */
 	description?: string;
 	/** Enabled status of the group: active or inactive. */
@@ -27,5 +27,5 @@ export interface ContactsDynamicGroup {
 	/** Timestamp(milli) of the last group update. */
 	updatedAt?: string;
 	/** The user who performed the last update. */
-	updatedBy?: WebitelcontactsLookup;
+	updatedBy?: WebitelContactsLookup;
 }

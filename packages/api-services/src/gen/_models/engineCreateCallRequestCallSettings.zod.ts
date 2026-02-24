@@ -7,7 +7,6 @@
 import type { EngineCreateCallRequestCallSettingsVariables } from './engineCreateCallRequestCallSettingsVariables';
 
 export interface EngineCreateCallRequestCallSettings {
-	audio?: boolean;
 	cancelDistribute?: boolean;
 	contactId?: string;
 	disableAutoAnswer?: boolean;
@@ -15,9 +14,6 @@ export interface EngineCreateCallRequestCallSettings {
 	display?: string;
 	hideNumber?: boolean;
 	isOnline?: boolean;
-	record?: boolean;
-	screen?: boolean;
 	timeout?: number;
 	variables?: EngineCreateCallRequestCallSettingsVariables;
-	video?: boolean;
 }

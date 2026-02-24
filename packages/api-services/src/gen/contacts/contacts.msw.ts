@@ -9,7 +9,11 @@ import { faker } from '@faker-js/faker';
 import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
 
-import type { ContactsContactList, WebitelcontactsContact } from '.././_models';
+import type {
+	ContactsContactList,
+	WebitelContactsContact,
+	WebitelImApiGatewayV1ContactList,
+} from '.././_models';
 
 export const getSearchContactsResponseMock = (
 	overrideResponse: Partial<ContactsContactList> = {},
@@ -2251,8 +2255,8 @@ export const getSearchContactsResponseMock = (
 });
 
 export const getCreateContactResponseMock = (
-	overrideResponse: Partial<WebitelcontactsContact> = {},
-): WebitelcontactsContact => ({
+	overrideResponse: Partial<WebitelContactsContact> = {},
+): WebitelContactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -4466,8 +4470,8 @@ export const getCreateContactResponseMock = (
 });
 
 export const getDeleteContactResponseMock = (
-	overrideResponse: Partial<WebitelcontactsContact> = {},
-): WebitelcontactsContact => ({
+	overrideResponse: Partial<WebitelContactsContact> = {},
+): WebitelContactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -6681,8 +6685,8 @@ export const getDeleteContactResponseMock = (
 });
 
 export const getLocateContactResponseMock = (
-	overrideResponse: Partial<WebitelcontactsContact> = {},
-): WebitelcontactsContact => ({
+	overrideResponse: Partial<WebitelContactsContact> = {},
+): WebitelContactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -8896,8 +8900,8 @@ export const getLocateContactResponseMock = (
 });
 
 export const getUpdateContactResponseMock = (
-	overrideResponse: Partial<WebitelcontactsContact> = {},
-): WebitelcontactsContact => ({
+	overrideResponse: Partial<WebitelContactsContact> = {},
+): WebitelContactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -11110,6 +11114,126 @@ export const getUpdateContactResponseMock = (
 	...overrideResponse,
 });
 
+export const getSearchContactsResponseMock = (
+	overrideResponse: Partial<WebitelImApiGatewayV1ContactList> = {},
+): WebitelImApiGatewayV1ContactList => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			appId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			issId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			metadata: faker.helpers.arrayElement([
+				{
+					[faker.string.alphanumeric(5)]: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+				},
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			subject: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			username: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	page: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	size: faker.helpers.arrayElement([
+		faker.number.int({
+			min: undefined,
+			max: undefined,
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getSearchContactsMockHandler = (
 	overrideResponse?:
 		| ContactsContactList
@@ -11143,10 +11267,10 @@ export const getSearchContactsMockHandler = (
 
 export const getCreateContactMockHandler = (
 	overrideResponse?:
-		| WebitelcontactsContact
+		| WebitelContactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
+		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -11174,10 +11298,10 @@ export const getCreateContactMockHandler = (
 
 export const getDeleteContactMockHandler = (
 	overrideResponse?:
-		| WebitelcontactsContact
+		| WebitelContactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
+		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.delete(
@@ -11205,10 +11329,10 @@ export const getDeleteContactMockHandler = (
 
 export const getLocateContactMockHandler = (
 	overrideResponse?:
-		| WebitelcontactsContact
+		| WebitelContactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
+		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
@@ -11236,10 +11360,10 @@ export const getLocateContactMockHandler = (
 
 export const getUpdateContactMockHandler = (
 	overrideResponse?:
-		| WebitelcontactsContact
+		| WebitelContactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
+		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.patch(
@@ -11264,10 +11388,44 @@ export const getUpdateContactMockHandler = (
 		options,
 	);
 };
+
+export const getSearchContactsMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1ContactList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1ContactList>
+				| WebitelImApiGatewayV1ContactList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/contacts',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getSearchContactsResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 export const getContactsMock = () => [
 	getSearchContactsMockHandler(),
 	getCreateContactMockHandler(),
 	getDeleteContactMockHandler(),
 	getLocateContactMockHandler(),
 	getUpdateContactMockHandler(),
+	getSearchContactsMockHandler(),
 ];

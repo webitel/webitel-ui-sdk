@@ -1170,6 +1170,13 @@ export const getSearchQueueReportGeneralResponseMock = (
 ): EngineListReportGeneral => ({
 	aggs: faker.helpers.arrayElement([
 		{
+			busy: faker.helpers.arrayElement([
+				faker.number.int({
+					min: undefined,
+					max: undefined,
+				}),
+				undefined,
+			]),
 			free: faker.helpers.arrayElement([
 				faker.number.int({
 					min: undefined,
@@ -1227,6 +1234,13 @@ export const getSearchQueueReportGeneralResponseMock = (
 			]),
 			agentStatus: faker.helpers.arrayElement([
 				{
+					busy: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+						}),
+						undefined,
+					]),
 					free: faker.helpers.arrayElement([
 						faker.number.int({
 							min: undefined,

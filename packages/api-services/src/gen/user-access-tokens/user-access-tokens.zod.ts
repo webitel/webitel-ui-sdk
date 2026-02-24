@@ -19,37 +19,41 @@ export const AddUserAccessTokenQueryParams = zod.object({
 		),
 });
 
-export const AddUserAccessTokenBody = zod.object({
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	deletedAt: zod.string().optional(),
-	deletedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	id: zod.string().optional(),
-	token: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	usage: zod.string().optional(),
-	user: zod
-		.object({
-			name: zod.string().optional(),
-		})
-		.optional(),
-});
+export const AddUserAccessTokenBody = zod
+	.object({
+		createdAt: zod.string().optional(),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional(),
+		deletedAt: zod.string().optional(),
+		deletedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional(),
+		id: zod.string().optional(),
+		token: zod.string().optional(),
+		updatedAt: zod.string().optional(),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional(),
+		usage: zod.string().optional(),
+		user: zod
+			.object({
+				name: zod.string().optional(),
+			})
+			.optional(),
+	})
+	.describe(
+		'processing\n------------\ntoken.user.id // [required] authorization\ntoken.usage   // [optional] short description',
+	);
 
 export const AddUserAccessTokenResponse = zod
 	.object({

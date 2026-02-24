@@ -6,9 +6,26 @@
  */
 
 export type SearchAgentInQueueParams = {
+	/**
+	 * Page number (1-based).
+	 */
 	page?: number;
+	/**
+	 * Maximum number of records per page.
+	 */
 	size?: number;
+	/**
+ * Free-text search query.
+Typically applied to queue name.
+ */
 	q?: string;
+	/**
+	 * Sorting expression.
+	 */
 	sort?: string;
+	/**
+ * List of fields to be returned in the response.
+Used for response projection and payload optimization.
+ */
 	fields?: string[];
 };

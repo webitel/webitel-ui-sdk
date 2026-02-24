@@ -17,7 +17,8 @@ import type {
 	SearchContactsParams,
 	UpdateContactBody,
 	UpdateContactParams,
-	WebitelcontactsContact,
+	WebitelContactsContact,
+	WebitelImApiGatewayV1ContactList,
 } from '.././_models';
 
 // https://stackoverflow.com/questions/49579094/typescript-conditional-types-filter-out-readonly-properties-pick-only-requir/49579497#49579497
@@ -107,7 +108,7 @@ export const // --- title start
 			/**
 			 * @summary Create NEW Contact
 			 */
-			const createContact = <TData = AxiosResponse<WebitelcontactsContact>>(
+			const createContact = <TData = AxiosResponse<WebitelContactsContact>>(
 				contactsInputContact: NonReadonly<ContactsInputContact>,
 				params?: CreateContactParams,
 				options?: AxiosRequestConfig,
@@ -123,7 +124,7 @@ export const // --- title start
 			/**
 			 * @summary Remove Contact source
 			 */
-			const deleteContact = <TData = AxiosResponse<WebitelcontactsContact>>(
+			const deleteContact = <TData = AxiosResponse<WebitelContactsContact>>(
 				etag: string,
 				params?: DeleteContactParams,
 				options?: AxiosRequestConfig,
@@ -139,7 +140,7 @@ export const // --- title start
 			/**
 			 * @summary Locate Contact source
 			 */
-			const locateContact = <TData = AxiosResponse<WebitelcontactsContact>>(
+			const locateContact = <TData = AxiosResponse<WebitelContactsContact>>(
 				etag: string,
 				params?: LocateContactParams,
 				options?: AxiosRequestConfig,
@@ -155,13 +156,30 @@ export const // --- title start
 			/**
 			 * @summary NEW Update of the Contact source
 			 */
-			const updateContact = <TData = AxiosResponse<WebitelcontactsContact>>(
+			const updateContact = <TData = AxiosResponse<WebitelContactsContact>>(
 				etag: string,
 				updateContactBody: NonReadonly<UpdateContactBody>,
 				params?: UpdateContactParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axiosInstance.patch(`/contacts/${etag}`, updateContactBody, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Search retrieves a paginated list of contacts based on filters and search queries.
+			 */
+			const searchContacts = <
+				TData = AxiosResponse<WebitelImApiGatewayV1ContactList>,
+			>(
+				params?: SearchContactsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.get(`/v1/contacts`, {
 					...options,
 					params: {
 						...params,
@@ -177,12 +195,16 @@ export const // --- title start
 				deleteContact,
 				locateContact,
 				updateContact,
+				searchContacts,
 			};
 		};
-export type SearchContactsResult = AxiosResponse<ContactsContactList>;
-export type CreateContactResult = AxiosResponse<WebitelcontactsContact>;
-export type DeleteContactResult = AxiosResponse<WebitelcontactsContact>;
-export type LocateContactResult = AxiosResponse<WebitelcontactsContact>;
-export type UpdateContactResult = AxiosResponse<WebitelcontactsContact>;
+export type SearchContactsResult =
+	AxiosResponse<WebitelImApiGatewayV1ContactList>;
+export type CreateContactResult = AxiosResponse<WebitelContactsContact>;
+export type DeleteContactResult = AxiosResponse<WebitelContactsContact>;
+export type LocateContactResult = AxiosResponse<WebitelContactsContact>;
+export type UpdateContactResult = AxiosResponse<WebitelContactsContact>;
+export type SearchContactsResult =
+	AxiosResponse<WebitelImApiGatewayV1ContactList>;
 
 // --- footer end

@@ -10,7 +10,7 @@ import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
 
 import { TypeKind } from '.././_models';
-import type { DataStructList, ProtodataStruct } from '.././_models';
+import type { DataStructList, ProtoDataStruct } from '.././_models';
 
 export const getSearchTypesResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
@@ -879,8 +879,8 @@ export const getSearchTypesResponseMock = (
 });
 
 export const getLocateResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -1753,10 +1753,10 @@ export const getSearchTypesMockHandler = (
 
 export const getLocateMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(

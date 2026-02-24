@@ -1224,6 +1224,42 @@ export const CreateCaseResponse = zod
 	.describe('Message representing a case.');
 
 /**
+ * @summary RPC method for exporting cases to CSV or XLSX format (server-side streaming).
+ */
+export const ExportCasesQueryParams = zod.object({
+	q: zod.string().optional(),
+	ids: zod.array(zod.string()).optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	filters: zod.array(zod.string()).optional(),
+	contactId: zod.string().optional(),
+	qin: zod.string().optional(),
+	filtersV1: zod.string().optional(),
+	format: zod.string().optional(),
+});
+
+export const ExportCasesResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.number().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional(),
+});
+
+/**
  * @summary RPC method for deleting an existing case by its etag.
  */
 export const DeleteCaseParams = zod.object({

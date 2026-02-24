@@ -4,14 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ProtodataStruct } from './protodataStruct';
+import type { ProtoDataStruct } from './protoDataStruct';
 
 /**
  * Dataset of structured types.
  */
 export interface DataStructList {
 	/** List of `Struct` types. */
-	data?: ProtodataStruct[];
+	data?: ProtoDataStruct[];
 	next?: boolean;
 	/** Page number of results. */
 	page?: number;

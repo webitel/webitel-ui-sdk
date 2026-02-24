@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelcontactsAttachment {
+export interface WebitelContactsAttachment {
 	id?: string;
 	mime?: string;
 	name?: string;

@@ -4,14 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { DatatypeLookupQuery } from './datatypeLookupQuery';
-import type { DatatypeLookupViolation } from './datatypeLookupViolation';
+import type { DataTypeLookupQuery } from './dataTypeLookupQuery';
+import type { DataTypeLookupViolation } from './dataTypeLookupViolation';
 
 /**
  * Lookup ( REFERENCE ) type descriptor.
 Simplified [webitel.custom.Struct] options.
  */
-export interface DatatypeLookup {
+export interface DataTypeLookup {
 	/** [Readonly]. Display dataset field.
 (lookup).{`name`} value relation. */
 	display?: string;
@@ -24,6 +24,6 @@ e.g.: "contacts", "dictionaries/cities".
 	/** [Readonly]. Primary dataset field.
 (lookup).{`id`} value relation. */
 	primary?: string;
-	query?: DatatypeLookupQuery;
-	violation?: DatatypeLookupViolation;
+	query?: DataTypeLookupQuery;
+	violation?: DataTypeLookupViolation;
 }
