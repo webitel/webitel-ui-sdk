@@ -167,19 +167,17 @@ watch(
 	position: relative;
 }
 
-.wt-button--with-badge {
-      overflow: visible;
+.p-button--with-badge {
+  overflow: visible;
 }
 
-.wt-button.p-button {
-  .wt-button__contents {
-	display: contents;
-  }
+.wt-button__contents {
+  display: contents;
+}
 
-  .wt-badge .wt-badge--absolute {
-	position: absolute;
-    top: 0;
-    right: 0;
-  }
+.wt-badge.wt-badge--absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
