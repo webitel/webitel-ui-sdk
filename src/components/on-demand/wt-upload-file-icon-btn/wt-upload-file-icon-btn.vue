@@ -1,8 +1,8 @@
 <template>
   <div class="wt-upload-file-icon-btn">
     <wt-icon-btn
-      v-tooltip="t('iconHints.upload')"
-      icon="upload"
+      v-tooltip="t('reusable.upload')"
+      icon="import-csv"
       @click="triggerFileInput"
     />
 

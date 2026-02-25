@@ -101,6 +101,7 @@ import group from './group.svg?raw';
 import history from './history.svg?raw';
 import hold from './hold.svg?raw';
 import idle from './idle.svg?raw';
+import importCsv from './import-csv.svg?raw';
 import impacted from './impacted.svg?raw';
 import instagram from './instagram.svg?raw';
 import job from './job.svg?raw';
@@ -340,6 +341,7 @@ export default objCamelToKebab({
 	history,
 	hold,
 	impacted,
+	'import-csv': importCsv,
 	like,
 	link,
 	lock,
