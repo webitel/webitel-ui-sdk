@@ -23,7 +23,7 @@
       :headline="textEmpty"
     />
 
-    <div v-if="dataList?.length" class="table-loading-wrapper">
+    <div v-if="dataList?.length" class="table-section__table-wrapper">
       <wt-table
         v-if="dataList?.length"
         :data="dataList"
