@@ -5,15 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { ContactsTimelineEventType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	ContactsGetTimelineCounterResponse,
 	ContactsGetTimelineResponse,
 } from '.././_models';
+import { ContactsTimelineEventType } from '.././_models';
 
 export const getGetTimelineTimelineResponseMock = (
 	overrideResponse: Partial<ContactsGetTimelineResponse> = {},

@@ -217,7 +217,7 @@ export const DeleteDataResponse = zod
 											.string()
 											.optional()
 											.describe(
-												'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+												'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 											),
 										primary: zod
 											.string()
@@ -383,7 +383,7 @@ export const SearchDataParams = zod.object({
 });
 
 export const searchDataQuerySortItemDefault = `*`;
-export const searchDataQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
+export const searchDataQuerySortItemRegExp = /^[+|-|!]?\w+$/;
 export const searchDataQueryFieldsItemDefault = `*`;
 
 export const SearchDataQueryParams = zod.object({
@@ -399,13 +399,13 @@ export const SearchDataQueryParams = zod.object({
 		.array(zod.string().regex(searchDataQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
 		),
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
 		),
 	q: zod
 		.string()
@@ -613,7 +613,7 @@ export const SearchDataResponse = zod
 											.string()
 											.optional()
 											.describe(
-												'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+												'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 											),
 										primary: zod
 											.string()
@@ -1008,7 +1008,7 @@ export const ImportCSVResponse = zod
 											.string()
 											.optional()
 											.describe(
-												'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+												'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 											),
 										primary: zod
 											.string()
@@ -1378,7 +1378,7 @@ export const DeleteData2Response = zod
 											.string()
 											.optional()
 											.describe(
-												'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+												'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 											),
 										primary: zod
 											.string()
@@ -1552,7 +1552,7 @@ export const LocateDataQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
 		),
 });
 
@@ -1815,7 +1815,7 @@ export const DeleteTypeResponse = zod
 													.string()
 													.optional()
 													.describe(
-														'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+														'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 													),
 												primary: zod
 													.string()
@@ -1989,7 +1989,7 @@ export const DeleteTypeResponse = zod
  * @summary Lookup dictionaries data types.
  */
 export const searchTypeQuerySortItemDefault = `*`;
-export const searchTypeQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
+export const searchTypeQuerySortItemRegExp = /^[+|-|!]?\w+$/;
 export const searchTypeQueryFieldsItemDefault = `*`;
 
 export const SearchTypeQueryParams = zod.object({
@@ -2032,13 +2032,13 @@ export const SearchTypeQueryParams = zod.object({
 		.array(zod.string().regex(searchTypeQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
 		),
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
 		),
 });
 
@@ -2245,7 +2245,7 @@ export const SearchTypeResponse = zod
 													.string()
 													.optional()
 													.describe(
-														'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+														'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 													),
 												primary: zod
 													.string()
@@ -2589,7 +2589,7 @@ export const LocateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()
@@ -2890,7 +2890,7 @@ export const CreateTypeBody = zod.object({
 								.string()
 								.optional()
 								.describe(
-									'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+									'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 								),
 							primary: zod
 								.string()
@@ -3169,7 +3169,7 @@ export const CreateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()
@@ -3477,7 +3477,7 @@ export const UpdateTypeBody = zod.object({
 								.string()
 								.optional()
 								.describe(
-									'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+									'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 								),
 							primary: zod
 								.string()
@@ -3756,7 +3756,7 @@ export const UpdateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()

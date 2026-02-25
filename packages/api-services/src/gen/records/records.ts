@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	_DeleteParams,
 	Create200,
 	CreateBody,
 	DataDataset,
 	LocateRecords200,
 	LocateRecordsParams,
 	SearchRecordsParams,
-	Update200,
-	Update2200,
 	Update2Body,
 	Update2Params,
+	Update200,
+	Update2200,
 	UpdateBody,
 	UpdateParams,
-	_DeleteParams,
 } from '.././_models';
 
 // --- header start

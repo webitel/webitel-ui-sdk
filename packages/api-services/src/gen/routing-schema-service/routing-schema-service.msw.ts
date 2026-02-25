@@ -5,16 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { EngineRoutingSchemaType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	EngineListRoutingSchema,
 	EngineListRoutingSchemaTags,
 	EngineRoutingSchema,
 } from '.././_models';
+import { EngineRoutingSchemaType } from '.././_models';
 
 export const getSearchRoutingSchemaResponseMock = (
 	overrideResponse: Partial<EngineListRoutingSchema> = {},

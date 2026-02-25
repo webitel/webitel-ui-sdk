@@ -5,11 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WfmWorkingScheduleState } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WfmCreateWorkingScheduleResponse,
 	WfmDeleteWorkingScheduleResponse,
@@ -20,6 +17,7 @@ import type {
 	WfmUpdateWorkingScheduleRemoveAgentResponse,
 	WfmUpdateWorkingScheduleResponse,
 } from '.././_models';
+import { WfmWorkingScheduleState } from '.././_models';
 
 export const getWorkingScheduleServiceSearchWorkingScheduleResponseMock = (
 	overrideResponse: Partial<WfmSearchWorkingScheduleResponse> = {},

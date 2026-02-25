@@ -5,11 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { EngineEmailAuthType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	EngineEmailProfile,
 	EngineListEmailProfile,
@@ -17,6 +14,7 @@ import type {
 	EngineLogoutEmailProfileResponse,
 	EngineTestEmailProfileResponse,
 } from '.././_models';
+import { EngineEmailAuthType } from '.././_models';
 
 export const getSearchEmailProfileResponseMock = (
 	overrideResponse: Partial<EngineListEmailProfile> = {},

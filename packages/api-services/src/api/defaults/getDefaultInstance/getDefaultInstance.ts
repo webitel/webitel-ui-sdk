@@ -16,8 +16,12 @@ export const getDefaultInstance = () => {
 
 	return generateInstance({
 		interceptors: {
-			request: [updateTokenInterceptor],
-			response: [handleUnauthorizedInterceptor],
+			request: [
+				updateTokenInterceptor,
+			],
+			response: [
+				handleUnauthorizedInterceptor,
+			],
 		},
 		baseURL: import.meta.env.VITE_API_URL,
 		paramsSerializer: (params) => {

@@ -33,7 +33,7 @@ export const ListSourcesQueryParams = zod.object({
 	sort: zod
 		.string()
 		.default(listSourcesQuerySortDefault)
-		.describe('Sort the result according to fields.\nDefault: \"id:desc\"'),
+		.describe('Sort the result according to fields.\nDefault: "id:desc"'),
 	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
 	q: zod
 		.string()

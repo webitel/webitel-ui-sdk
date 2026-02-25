@@ -164,7 +164,7 @@ export const SearchLDAPCatalogQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	id: zod
 		.array(zod.string())
 		.optional()
@@ -1387,7 +1387,7 @@ export const SearchLDAProcessQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	id: zod
 		.array(zod.string())
 		.optional()
@@ -1541,7 +1541,7 @@ export const LocateLDAProcessQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	q: zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
 	template: zod.string().optional(),
 	objclass: zod.array(zod.string()).optional(),
@@ -1797,7 +1797,7 @@ export const SearchLDAPTemplateQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	id: zod
 		.array(zod.string())
 		.optional()
@@ -1940,7 +1940,7 @@ export const LocateLDAPTemplateQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	q: zod.string().optional().describe('OPTIONAL. Filter(s) SET'),
 	name: zod.string().optional(),
 	baseDn: zod.string().optional(),
@@ -2154,7 +2154,7 @@ export const LocateLDAPCatalogQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
+		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
 	q: zod.string().optional().describe('term-of-search: lookup[name]'),
 	name: zod
 		.string()

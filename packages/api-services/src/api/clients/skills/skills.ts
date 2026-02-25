@@ -45,20 +45,29 @@ const getSkillsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getSkill = async ({ itemId: id }) => {
 	try {
 		const response = await skillService.readSkill(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const addSkill = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -67,9 +76,13 @@ const addSkill = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await skillService.createSkill(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -80,9 +93,13 @@ const updateSkill = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await skillService.updateSkill(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -91,14 +108,19 @@ const deleteSkill = async ({ id }) => {
 		const response = await skillService.deleteSkill(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getSkillsLookup = (params) =>
 	getSkillsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const SkillsAPI = {

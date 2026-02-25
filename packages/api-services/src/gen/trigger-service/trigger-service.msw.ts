@@ -5,21 +5,19 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import {
-	EngineTriggerEventType,
-	EngineTriggerJobState,
-	EngineTriggerObjectType,
-	EngineTriggerType,
-} from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	EngineListTrigger,
 	EngineListTriggerJob,
 	EngineTrigger,
 	EngineTriggerJob,
+} from '.././_models';
+import {
+	EngineTriggerEventType,
+	EngineTriggerJobState,
+	EngineTriggerObjectType,
+	EngineTriggerType,
 } from '.././_models';
 
 export const getSearchTriggerResponseMock = (

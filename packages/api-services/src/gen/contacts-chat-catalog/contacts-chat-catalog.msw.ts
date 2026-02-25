@@ -5,12 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelChatMessageButtonRequest } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type { WebitelChatGetContactChatHistoryResponse } from '.././_models';
+import { WebitelChatMessageButtonRequest } from '.././_models';
 
 export const getContactsChatCatalogGetContactChatHistory2ResponseMock = (
 	overrideResponse: Partial<WebitelChatGetContactChatHistoryResponse> = {},

@@ -5,11 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { TypeKind } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	CreateData200,
 	DataDataset,
@@ -19,6 +16,7 @@ import type {
 	UpdateData200,
 	UpdateData2200,
 } from '.././_models';
+import { TypeKind } from '.././_models';
 
 export const getDeleteDataResponseMock = (
 	overrideResponse: Partial<DataDataset> = {},

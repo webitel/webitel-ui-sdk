@@ -13,7 +13,9 @@ const getUserSettings = async ({ key }) => {
 		const response = await service.getUserSettings(key);
 		return response.data;
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -22,7 +24,9 @@ const setUserSettings = async ({ key, value }) => {
 		const response = await service.setUserSettings(key, value);
 		return response.data;
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

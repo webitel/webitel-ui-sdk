@@ -5,16 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { StorageProviderType, StorageServiceType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	StorageCognitiveProfile,
 	StorageListCognitiveProfile,
 	StorageListCognitiveProfileVoices,
 } from '.././_models';
+import { StorageProviderType, StorageServiceType } from '.././_models';
 
 export const getSearchCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageListCognitiveProfile> = {},

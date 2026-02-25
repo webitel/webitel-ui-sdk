@@ -5,11 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WfmAbsenceType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WfmCreateAgentAbsenceResponse,
 	WfmCreateAgentsAbsencesResponse,
@@ -19,6 +16,7 @@ import type {
 	WfmSearchAgentsAbsencesResponse,
 	WfmUpdateAgentAbsenceResponse,
 } from '.././_models';
+import { WfmAbsenceType } from '.././_models';
 
 export const getAgentAbsenceServiceSearchAgentsAbsencesResponseMock = (
 	overrideResponse: Partial<WfmSearchAgentsAbsencesResponse> = {},

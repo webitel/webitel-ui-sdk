@@ -47,7 +47,7 @@ export const SearchThreadManagementQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'Sorting field.\nOptional \"+\" or \"-\" prefix indicates ascending or descending order.\nExample: \"-created_at\", \"subject\"',
+			'Sorting field.\nOptional "+" or "-" prefix indicates ascending or descending order.\nExample: "-created_at", "subject"',
 		),
 	page: zod.number().optional().describe('Page number (1-based).'),
 });

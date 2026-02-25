@@ -45,20 +45,30 @@ const getRegionsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getRegion = async ({ itemId: id }) => {
 	try {
 		const response = await regionService.readRegion(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['name', 'timezone', 'description'];
+const fieldsToSend = [
+	'name',
+	'timezone',
+	'description',
+];
 
 const addRegion = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -67,9 +77,13 @@ const addRegion = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await regionService.createRegion(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -80,9 +94,13 @@ const updateRegion = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await regionService.updateRegion(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -91,14 +109,19 @@ const deleteRegion = async ({ id }) => {
 		const response = await regionService.deleteRegion(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getRegionsLookup = (params) =>
 	getRegionsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const RegionsAPI = {

@@ -21,18 +21,25 @@ const getChatsList = async (params) => {
 			onlyClosed,
 			onlyUnprocessed,
 		});
-		const { items, next } = applyTransform(response.data, [snakeToCamel()]);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 		return {
 			items,
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getChatCount = async (params) => {
-	const fieldsToSend = ['only_closed', 'only_unprocessed'];
+	const fieldsToSend = [
+		'only_closed',
+		'only_unprocessed',
+	];
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetParams()),
@@ -44,10 +51,14 @@ const getChatCount = async (params) => {
 			await getAgentChatService().agentChatServiceGetAgentChatsCounter(
 				requestParams,
 			);
-		const { count } = applyTransform(response.data, [snakeToCamel()]);
+		const { count } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 		return count;
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -56,7 +67,9 @@ const markChatProcessed = async (chatId) => {
 	try {
 		const response =
 			await getAgentChatService().agentChatServiceMarkChatProcessed(chatId);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify(({ callback }) =>

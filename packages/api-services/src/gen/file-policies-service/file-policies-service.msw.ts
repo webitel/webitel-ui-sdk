@@ -5,17 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { StorageUploadFileChannel } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	StorageFilePolicy,
 	StorageFilePolicyApplyResponse,
 	StorageListFilePolicies,
 	StorageMovePositionFilePolicyResponse,
 } from '.././_models';
+import { StorageUploadFileChannel } from '.././_models';
 
 export const getSearchFilePoliciesResponseMock = (
 	overrideResponse: Partial<StorageListFilePolicies> = {},

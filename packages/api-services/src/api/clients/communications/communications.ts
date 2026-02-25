@@ -33,7 +33,10 @@ const getCommunicationsList = async (params) => {
 
 	const { page, size, search, sort, fields, id, channel } = applyTransform(
 		params,
-		[merge(getDefaultGetParams()), starToSearch('search')],
+		[
+			merge(getDefaultGetParams()),
+			starToSearch('search'),
+		],
 	);
 
 	try {
@@ -51,24 +54,38 @@ const getCommunicationsList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCommunication = async ({ itemId: id }) => {
 	try {
 		const response = await communicationService.readCommunicationType(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['code', 'name', 'description', 'channel', 'default'];
+const fieldsToSend = [
+	'code',
+	'name',
+	'description',
+	'channel',
+	'default',
+];
 
 const addCommunication = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -77,9 +94,13 @@ const addCommunication = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await communicationService.createCommunicationType(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -93,9 +114,13 @@ const patchCommunication = async ({ changes, id }) => {
 			id,
 			body,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -109,9 +134,13 @@ const updateCommunication = async ({ itemInstance, itemId: id }) => {
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -120,14 +149,19 @@ const deleteCommunication = async ({ id }) => {
 		const response = await communicationService.deleteCommunicationType(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCommunicationsLookup = (params) =>
 	getCommunicationsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const CommunicationsAPI = {

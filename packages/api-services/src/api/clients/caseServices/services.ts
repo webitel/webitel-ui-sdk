@@ -36,12 +36,22 @@ const fieldsToSend = [
 ];
 
 const getServicesList = async ({ rootId, ...rest }) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -64,7 +74,9 @@ const getServicesList = async ({ rootId, ...rest }) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -88,9 +100,14 @@ const getService = async ({ itemId: id }) => {
 
 	try {
 		const response = await servicesService.locateService(id, fieldsToSend);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -108,16 +125,23 @@ const preRequestHandler = ({ rootId, catalogId }) => {
 
 const addService = async ({ itemInstance, rootId, catalogId }) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({ rootId, catalogId }),
+		preRequestHandler({
+			rootId,
+			catalogId,
+		}),
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 
 	try {
 		const response = await servicesService.createService(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -128,16 +152,23 @@ const updateService = async ({
 	catalogId,
 }) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({ rootId, catalogId }),
+		preRequestHandler({
+			rootId,
+			catalogId,
+		}),
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 
 	try {
 		const response = await servicesService.updateService(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -148,9 +179,13 @@ const patchService = async ({ changes, id }) => {
 	]);
 	try {
 		const response = await servicesService.updateService2(id, body);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -159,14 +194,19 @@ const deleteService = async ({ id }) => {
 		const response = await servicesService.deleteService(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getServicesLookup = async (params) =>
 	getServicesList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const ServicesAPI = {

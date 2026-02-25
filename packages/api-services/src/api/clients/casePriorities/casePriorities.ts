@@ -20,7 +20,11 @@ const configuration = getDefaultOpenAPIConfig();
 
 const priorityService = PrioritiesApiFactory(configuration, '', instance);
 
-const fieldsToSend = ['name', 'description', 'color'];
+const fieldsToSend = [
+	'name',
+	'description',
+	'color',
+];
 
 const getPrioritiesList = async (params) => {
 	const fieldsToSend = [
@@ -45,7 +49,10 @@ const getPrioritiesList = async (params) => {
 		in_sla_cond: inSlaCond,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -68,7 +75,9 @@ const getPrioritiesList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -79,9 +88,14 @@ const getPriority = async ({ itemId: id }) => {
 
 	try {
 		const response = await priorityService.locatePriority(id, fieldsToSend);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -93,9 +107,13 @@ const addPriority = async ({ itemInstance }) => {
 
 	try {
 		const response = await priorityService.createPriority(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -107,9 +125,13 @@ const updatePriority = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await priorityService.updatePriority(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -118,14 +140,19 @@ const deletePriority = async ({ id }) => {
 		const response = await priorityService.deletePriority(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getConditionsLookup = (params) =>
 	getPrioritiesList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const CasePrioritiesAPI = {

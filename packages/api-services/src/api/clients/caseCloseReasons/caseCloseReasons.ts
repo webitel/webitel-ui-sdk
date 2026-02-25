@@ -20,14 +20,27 @@ const configuration = getDefaultOpenAPIConfig();
 
 const closeReasonsService = CloseReasonsApiFactory(configuration, '', instance);
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const getCloseReasonsList = async ({ parentId, ...rest }) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -45,11 +58,15 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -60,9 +77,14 @@ const getCloseReason = async ({ parentId, itemId: id }) => {
 
 	try {
 		const response = await closeReasonsService.locateCloseReason(parentId, id);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -77,14 +99,20 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 			parentId,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const updateCloseReason = async ({ itemInstance, itemId: id }) => {
-	const item = applyTransform(itemInstance, [camelToSnake()]);
+	const item = applyTransform(itemInstance, [
+		camelToSnake(),
+	]);
 
 	try {
 		const response = await closeReasonsService.updateCloseReason(
@@ -92,9 +120,13 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 			id,
 			item,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -103,14 +135,19 @@ const deleteCloseReason = async ({ id, parentId }) => {
 		const response = await closeReasonsService.deleteCloseReason(parentId, id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCloseReasonLookup = async (params) =>
 	getCloseReasonsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const CaseCloseReasonsAPI = {

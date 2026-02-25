@@ -193,7 +193,10 @@ const getChatGatewayList = async (params) => {
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl(baseUrl),
@@ -205,11 +208,15 @@ const getChatGatewayList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -231,9 +238,14 @@ const getChatGateway = async ({ itemId: id }) => {
 
 	try {
 		const response = await instance.get(url);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -245,9 +257,13 @@ const addChatGateway = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await instance.post(baseUrl, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -261,9 +277,13 @@ const updateChatGateway = async ({ itemInstance, itemId: id }) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.put(url, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -275,9 +295,13 @@ const patchChatGateway = async ({ changes, id }) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.patch(url, body);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -287,14 +311,19 @@ const deleteChatGateway = async ({ id }) => {
 		const response = await instance.delete(url);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getChatGatewayList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 /**

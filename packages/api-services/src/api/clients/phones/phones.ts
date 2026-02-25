@@ -24,9 +24,14 @@ const getPhonesList = async ({ contactId, options, ...params }) => {
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
-		return { items, next };
+		return {
+			items,
+			next,
+		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -38,14 +43,20 @@ const getPhone = async ({ contactId, etag, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const mergePhones = async ({ contactId, phones, params, options }) => {
-	const body = applyTransform(phones, [camelToSnake()]);
+	const body = applyTransform(phones, [
+		camelToSnake(),
+	]);
 	try {
 		const response = await getPhones().mergePhones(
 			contactId,
@@ -53,14 +64,20 @@ const mergePhones = async ({ contactId, phones, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const resetPhones = async ({ contactId, phones, params, options }) => {
-	const body = applyTransform(phones, [camelToSnake()]);
+	const body = applyTransform(phones, [
+		camelToSnake(),
+	]);
 	try {
 		const response = await getPhones().resetPhones(
 			contactId,
@@ -68,14 +85,20 @@ const resetPhones = async ({ contactId, phones, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const updatePhone = async ({ contactId, etag, data, params, options }) => {
-	const body = applyTransform(data, [camelToSnake()]);
+	const body = applyTransform(data, [
+		camelToSnake(),
+	]);
 	try {
 		const response = await getPhones().updatePhone(
 			contactId,
@@ -84,14 +107,20 @@ const updatePhone = async ({ contactId, etag, data, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const patchPhone = async ({ contactId, etag, changes, params, options }) => {
-	const body = applyTransform(changes, [camelToSnake()]);
+	const body = applyTransform(changes, [
+		camelToSnake(),
+	]);
 	try {
 		const response = await getPhones().updatePhone2(
 			contactId,
@@ -100,9 +129,13 @@ const patchPhone = async ({ contactId, etag, changes, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -114,25 +147,37 @@ const deletePhone = async ({ contactId, etag, params, options }) => {
 			params,
 			options,
 		);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const deletePhones = async ({ contactId, params, options }) => {
 	try {
 		const response = await getPhones().deletePhones(contactId, params, options);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getPhonesLookup = (params) =>
 	getPhonesList({
 		...params,
-		fields: params?.fields || ['etag', 'number', 'priority'],
+		fields: params?.fields || [
+			'etag',
+			'number',
+			'priority',
+		],
 	});
 
 export const PhonesAPI = {

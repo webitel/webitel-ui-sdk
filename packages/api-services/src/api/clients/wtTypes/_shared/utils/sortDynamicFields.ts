@@ -12,7 +12,10 @@ export const sortDynamicFields = (
 			return a.position - b.position;
 		});
 
-	const fields = [...unSortableFields, ...sortableFields];
+	const fields = [
+		...unSortableFields,
+		...sortableFields,
+	];
 
 	return {
 		...item,

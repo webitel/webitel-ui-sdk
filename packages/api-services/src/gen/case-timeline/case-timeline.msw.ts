@@ -5,15 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelCasesCaseTimelineEventType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesGetTimelineCounterResponse,
 	WebitelCasesGetTimelineResponse,
 } from '.././_models';
+import { WebitelCasesCaseTimelineEventType } from '.././_models';
 
 export const getGetTimelineResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineResponse> = {},

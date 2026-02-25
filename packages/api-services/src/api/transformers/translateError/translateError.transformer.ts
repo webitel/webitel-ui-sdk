@@ -21,7 +21,10 @@ const translateError = (err) => {
 	const translation = i18n.global.t(
 		fullKey,
 		{},
-		{ missingWarn: false, fallbackWarn: false },
+		{
+			missingWarn: false,
+			fallbackWarn: false,
+		},
 	);
 
 	// Add translation to error response if found (i18n.t returns the key if translation is missing)

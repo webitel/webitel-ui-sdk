@@ -45,20 +45,29 @@ const getBucketsList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getBucket = async ({ itemId: id }) => {
 	try {
 		const response = await bucketService.readBucket(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
-const fieldsToSend = ['name', 'description'];
+const fieldsToSend = [
+	'name',
+	'description',
+];
 
 const addBucket = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
@@ -67,9 +76,13 @@ const addBucket = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await bucketService.createBucket(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -80,9 +93,13 @@ const updateBucket = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await bucketService.updateBucket(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -91,14 +108,19 @@ const deleteBucket = async ({ id }) => {
 		const response = await bucketService.deleteBucket(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getBucketsLookup = (params) =>
 	getBucketsList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const BucketsAPI = {

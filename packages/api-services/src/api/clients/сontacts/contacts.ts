@@ -66,21 +66,50 @@ const getList = async (params) => {
 		items?.map((item) => ({
 			...item,
 			name: item.name.commonName,
-			managers: item.managers ? [...item.managers.data] : [],
-			labels: item.labels ? [...item.labels.data] : [],
+			managers: item.managers
+				? [
+						...item.managers.data,
+					]
+				: [],
+			labels: item.labels
+				? [
+						...item.labels.data,
+					]
+				: [],
 			groups: getGroupsFromResponse(item),
-			variables: item.variables ? [...item.variables.data] : [],
-			timezones: item.timezones ? [...item.timezones.data] : [],
-			phones: item.phones ? [...item.phones.data] : [],
-			emails: item.emails ? [...item.emails.data] : [],
+			variables: item.variables
+				? [
+						...item.variables.data,
+					]
+				: [],
+			timezones: item.timezones
+				? [
+						...item.timezones.data,
+					]
+				: [],
+			phones: item.phones
+				? [
+						...item.phones.data,
+					]
+				: [],
+			emails: item.emails
+				? [
+						...item.emails.data,
+					]
+				: [],
 		}));
 
 	let changedParams;
 
 	if (params?.search) {
-		changedParams = { ...params, q: params.search };
+		changedParams = {
+			...params,
+			q: params.search,
+		};
 	} else if (params?.q && params?.qin) {
-		changedParams = { ...params };
+		changedParams = {
+			...params,
+		};
 	} else {
 		let searchValue = '';
 		let searchKey = '';
@@ -119,7 +148,9 @@ const getList = async (params) => {
 	}
 
 	if (params.contactGroup) {
-		changedParams.group = [...params.contactGroup.list];
+		changedParams.group = [
+			...params.contactGroup.list,
+		];
 	}
 	if (params.contactLabel) {
 		changedParams.label = params.contactLabel.map((item) => item.label);
@@ -129,7 +160,9 @@ const getList = async (params) => {
 	}
 
 	if (params.parentId) {
-		changedParams.group = [params.parentId];
+		changedParams.group = [
+			params.parentId,
+		];
 	}
 
 	const transformations = [
@@ -161,7 +194,10 @@ const getList = async (params) => {
 			size,
 			q,
 			sort || '+name',
-			['mode', ...fields],
+			[
+				'mode',
+				...fields,
+			],
 			id,
 			qin,
 			mode,
@@ -173,8 +209,16 @@ const getList = async (params) => {
 		);
 
 		const { items, next } = applyTransform(
-			{ ...response.data, items: response.data.data || [] },
-			[snakeToCamel(['custom']), merge(getDefaultGetListResponse())],
+			{
+				...response.data,
+				items: response.data.data || [],
+			},
+			[
+				snakeToCamel([
+					'custom',
+				]),
+				merge(getDefaultGetListResponse()),
+			],
 		);
 
 		return {
@@ -185,7 +229,9 @@ const getList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -212,25 +258,53 @@ const get = async ({ itemId: id }) => {
 		return {
 			...item,
 			name: item.name.commonName,
-			labels: item.labels ? [...item.labels.data] : [],
+			labels: item.labels
+				? [
+						...item.labels.data,
+					]
+				: [],
 			groups: getGroupsFromResponse(item),
-			managers: item.managers ? [...item.managers.data] : [],
-			timezones: item.timezones ? [...item.timezones.data] : [],
-			variables: item.variables ? [...item.variables.data] : [],
-			phones: item.phones ? [...item.phones.data] : [],
-			emails: item.emails ? [...item.emails.data] : [],
+			managers: item.managers
+				? [
+						...item.managers.data,
+					]
+				: [],
+			timezones: item.timezones
+				? [
+						...item.timezones.data,
+					]
+				: [],
+			variables: item.variables
+				? [
+						...item.variables.data,
+					]
+				: [],
+			phones: item.phones
+				? [
+						...item.phones.data,
+					]
+				: [],
+			emails: item.emails
+				? [
+						...item.emails.data,
+					]
+				: [],
 		};
 	};
 	try {
 		const response = await contactService.locateContact(id, fields);
 		return applyTransform(response.data, [
-			snakeToCamel(['custom']),
+			snakeToCamel([
+				'custom',
+			]),
 			merge(defaultObject),
 			itemResponseHandler,
 			formatAccessMode,
 		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -249,7 +323,10 @@ const sanitizeManagers = (itemInstance) => {
 	const managers = (itemInstance.managers || []).filter(
 		({ user } = {}) => user.id,
 	);
-	return { ...itemInstance, managers };
+	return {
+		...itemInstance,
+		managers,
+	};
 };
 
 const sanitizeTimezones = (itemInstance) => {
@@ -257,13 +334,21 @@ const sanitizeTimezones = (itemInstance) => {
 	const timezones = (itemInstance.timezones || []).filter(
 		({ timezone } = {}) => timezone.id,
 	);
-	return { ...itemInstance, timezones };
+	return {
+		...itemInstance,
+		timezones,
+	};
 };
 
 const sanitizeGroups = (itemInstance) => {
 	// handle many groups and even no groups field cases
-	const groups = (itemInstance.groups || []).map((item) => ({ group: item }));
-	return { ...itemInstance, groups };
+	const groups = (itemInstance.groups || []).map((item) => ({
+		group: item,
+	}));
+	return {
+		...itemInstance,
+		groups,
+	};
 };
 
 const preRequestHandler = (item) => {
@@ -275,7 +360,11 @@ const preRequestHandler = (item) => {
 };
 
 const getGroupsFromResponse = (item) => {
-	return item.groups ? [...item.groups.data.map((el) => el.group)] : [];
+	return item.groups
+		? [
+				...item.groups.data.map((el) => el.group),
+			]
+		: [];
 };
 
 const add = async ({ itemInstance }) => {
@@ -285,13 +374,21 @@ const add = async ({ itemInstance }) => {
 		sanitizeTimezones,
 		sanitizeGroups,
 		sanitize(fieldsToSend),
-		camelToSnake(['custom']),
+		camelToSnake([
+			'custom',
+		]),
 	]);
 	try {
 		const response = await contactService.createContact(item);
-		return applyTransform(response.data, [snakeToCamel(['custom'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'custom',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -303,13 +400,21 @@ const update = async ({ itemInstance }) => {
 		sanitizeTimezones,
 		sanitizeGroups,
 		sanitize(fieldsToSend),
-		camelToSnake(['custom']),
+		camelToSnake([
+			'custom',
+		]),
 	]);
 	try {
 		const response = await contactService.updateContact(etag, item);
-		return applyTransform(response.data, [snakeToCamel(['custom'])]);
+		return applyTransform(response.data, [
+			snakeToCamel([
+				'custom',
+			]),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -318,14 +423,19 @@ const deleteContact = async ({ id }) => {
 		const response = await contactService.deleteContact(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getContactsLookup = (params) =>
 	getList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const ContactsAPI = {

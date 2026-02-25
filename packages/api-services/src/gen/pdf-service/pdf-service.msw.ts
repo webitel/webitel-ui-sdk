@@ -5,16 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelMediaExporterExportStatus } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WebitelMediaExporterDeleteExportResponse,
 	WebitelMediaExporterExportTask,
 	WebitelMediaExporterListExportsResponse,
 } from '.././_models';
+import { WebitelMediaExporterExportStatus } from '.././_models';
 
 export const getListScreenrecordingExportsResponseMock = (
 	overrideResponse: Partial<WebitelMediaExporterListExportsResponse> = {},

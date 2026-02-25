@@ -9,13 +9,19 @@ import {
 } from '../../transformers';
 
 const patchMessagesService = async (changes) => {
-	const body = applyTransform(changes, [camelToSnake()]);
+	const body = applyTransform(changes, [
+		camelToSnake(),
+	]);
 
 	try {
 		const response = await getMessages().messagesServiceBroadcastMessage(body);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -31,9 +37,15 @@ const getChatHistory = async ({ chatId, ...params }) => {
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
-		return { messages, peers, next };
+		return {
+			messages,
+			peers,
+			next,
+		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

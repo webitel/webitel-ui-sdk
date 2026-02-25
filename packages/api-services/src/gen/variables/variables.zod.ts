@@ -13,7 +13,7 @@ export const DeleteVariablesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const deleteVariablesQueryEtagItemRegExp = new RegExp('^.+$');
+export const deleteVariablesQueryEtagItemRegExp = /^.+$/;
 
 export const DeleteVariablesQueryParams = zod.object({
 	fields: zod
@@ -251,7 +251,7 @@ export const MergeVariablesQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const mergeVariablesBodyKeyRegExp = new RegExp('^\\w+$');
+export const mergeVariablesBodyKeyRegExp = /^\w+$/;
 
 export const MergeVariablesBodyItem = zod
 	.object({
@@ -367,7 +367,7 @@ export const ResetVariablesQueryParams = zod.object({
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const resetVariablesBodyKeyRegExp = new RegExp('^\\w+$');
+export const resetVariablesBodyKeyRegExp = /^\w+$/;
 
 export const ResetVariablesBodyItem = zod
 	.object({
@@ -566,7 +566,7 @@ export const UpdateVariable2QueryParams = zod.object({
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const updateVariable2BodyKeyRegExp = new RegExp('^\\w+$');
+export const updateVariable2BodyKeyRegExp = /^\w+$/;
 
 export const UpdateVariable2Body = zod.object({
 	key: zod.string().regex(updateVariable2BodyKeyRegExp).describe('NEW Key.'),
@@ -678,7 +678,7 @@ export const UpdateVariableQueryParams = zod.object({
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const updateVariableBodyKeyRegExp = new RegExp('^\\w+$');
+export const updateVariableBodyKeyRegExp = /^\w+$/;
 
 export const UpdateVariableBody = zod.object({
 	key: zod.string().regex(updateVariableBodyKeyRegExp).describe('NEW Key.'),

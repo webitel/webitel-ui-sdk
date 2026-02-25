@@ -28,13 +28,17 @@ const getAgentAbsenceList = async (
 				sort,
 				fields,
 			});
-		const { items, next } = applyTransform(response.data, [snakeToCamel()]);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 		return {
 			items,
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -53,9 +57,13 @@ const getAgentAbsence = async ({
 				agentId,
 				id,
 			);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -74,9 +82,13 @@ const addAgentAbsence = async ({
 				agentId,
 				itemInstance,
 			);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -95,9 +107,13 @@ const updateAgentAbsence = async ({
 				itemId,
 				itemInstance,
 			);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -116,9 +132,13 @@ const deleteAgentAbsence = async ({
 				agentId,
 				id,
 			);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -127,7 +147,10 @@ const getAgentAbsenceLookup = (
 ) => {
 	return getAgentAbsenceList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 };
 

@@ -5,15 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelCasesRelationType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesRelatedCase,
 	WebitelCasesRelatedCaseList,
 } from '.././_models';
+import { WebitelCasesRelationType } from '.././_models';
 
 export const getUpdateRelatedCase2ResponseMock = (
 	overrideResponse: Partial<WebitelCasesRelatedCase> = {},

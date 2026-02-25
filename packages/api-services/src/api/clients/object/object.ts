@@ -23,12 +23,22 @@ const configuration = getDefaultOpenAPIConfig();
 const typeService = TypesApiFactory(configuration, '', instance);
 
 const getObjectList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -59,11 +69,16 @@ const getObjectList = async (params) => {
 			}));
 
 		return {
-			items: applyTransform(data, [snakeToCamel(), itemResponseHandler]),
+			items: applyTransform(data, [
+				snakeToCamel(),
+				itemResponseHandler,
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -80,7 +95,11 @@ const getObjectLookupList = async ({ ...params }) => {
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search, extensions: false }),
+		(params) => ({
+			...params,
+			q: params.search,
+			extensions: false,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl('types'),
@@ -97,14 +116,19 @@ const getObjectLookupList = async ({ ...params }) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getObjectLookup = async (params) =>
 	getObjectLookupList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const ObjectsAPI = {

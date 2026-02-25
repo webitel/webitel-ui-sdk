@@ -5,17 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { ContactsGroupType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	ContactsContactList,
 	ContactsGroup,
 	ContactsGroupList,
 	ContactsLocateGroupResponse,
 } from '.././_models';
+import { ContactsGroupType } from '.././_models';
 
 export const getListGroupsResponseMock = (
 	overrideResponse: Partial<ContactsGroupList> = {},
@@ -6149,7 +6147,7 @@ export const getAddContactsToGroupsMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
-		'*/contacts/groups/contacts\:attach',
+		'*/contacts/groups/contacts:attach',
 		async (info) => {
 			return new HttpResponse(
 				JSON.stringify(

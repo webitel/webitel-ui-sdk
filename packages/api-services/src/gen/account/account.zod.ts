@@ -228,7 +228,7 @@ export const InspectResponse = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'REQUIRED if the \"state\" parameter was present in the client\nauthorization request. The exact value received from the client.',
+					'REQUIRED if the "state" parameter was present in the client\nauthorization request. The exact value received from the client.',
 				),
 			tokenType: zod
 				.string()
@@ -261,7 +261,7 @@ export const TokenBody = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'Authorization code grant.\nREQUIRED. When grant_type is set to \"authorization_code\".',
+			'Authorization code grant.\nREQUIRED. When grant_type is set to "authorization_code".',
 		),
 	identity: zod
 		.object({
@@ -371,7 +371,7 @@ export const TokenBody = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'Refresh token string to obtain NEW access token.\nREQUIRED. When grant_type is set to \"refresh_token\".',
+			'Refresh token string to obtain NEW access token.\nREQUIRED. When grant_type is set to "refresh_token".',
 		),
 	scope: zod.array(zod.string()).optional(),
 	state: zod.string().optional(),
@@ -547,7 +547,7 @@ export const TokenResponse = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'REQUIRED if the \"state\" parameter was present in the client\nauthorization request. The exact value received from the client.',
+					'REQUIRED if the "state" parameter was present in the client\nauthorization request. The exact value received from the client.',
 				),
 			tokenType: zod
 				.string()

@@ -5,16 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelCasesSourceType } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesLocateSourceResponse,
 	WebitelCasesSource,
 	WebitelCasesSourceList,
 } from '.././_models';
+import { WebitelCasesSourceType } from '.././_models';
 
 export const getListSourcesResponseMock = (
 	overrideResponse: Partial<WebitelCasesSourceList> = {},

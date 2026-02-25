@@ -1,11 +1,18 @@
 export const snakeToCamel = (str) =>
 	str.replace(/([a-z])([_])([a-z])/g, (_group, p1, _p2, p3) =>
-		[p1, p3.toUpperCase()].join(''),
+		[
+			p1,
+			p3.toUpperCase(),
+		].join(''),
 	);
 
 export const camelToSnake = (str) =>
 	str.replace(/([a-z])([A-Z])/g, (_group, p1, p2) =>
-		[p1, '_', p2.toLowerCase()].join(''),
+		[
+			p1,
+			'_',
+			p2.toLowerCase(),
+		].join(''),
 	);
 
 export const kebabToCamel = (str) =>

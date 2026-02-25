@@ -5,12 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { EngineTeamHookEvent } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type { EngineListTeamHook, EngineTeamHook } from '.././_models';
+import { EngineTeamHookEvent } from '.././_models';
 
 export const getSearchTeamHookResponseMock = (
 	overrideResponse: Partial<EngineListTeamHook> = {},

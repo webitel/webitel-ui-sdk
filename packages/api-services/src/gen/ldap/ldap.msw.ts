@@ -5,17 +5,16 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
+import { HttpResponse, http } from 'msw';
 
 import type {
 	ApiLDAPCatalog,
+	ApiLDAProcess,
+	ApiLDAProcessResponse,
 	ApiLDAPSearchResponse,
 	ApiLDAPTemplate,
 	ApiLDAPTemplateResponse,
-	ApiLDAProcess,
-	ApiLDAProcessResponse,
 	ApiSearchLDAPResponse,
 } from '.././_models';
 

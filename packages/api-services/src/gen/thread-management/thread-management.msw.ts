@@ -5,12 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelImApiGatewayV1ThreadKind } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type { WebitelImApiGatewayV1SearchThreadResponse } from '.././_models';
+import { WebitelImApiGatewayV1ThreadKind } from '.././_models';
 
 export const getSearchThreadManagementResponseMock = (
 	overrideResponse: Partial<WebitelImApiGatewayV1SearchThreadResponse> = {},

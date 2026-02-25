@@ -73,7 +73,7 @@ export const DeleteLabelsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const deleteLabelsQueryEtagItemRegExp = new RegExp('^(\\w+)(,\\w+)*$');
+export const deleteLabelsQueryEtagItemRegExp = /^(\w+)(,\w+)*$/;
 
 export const DeleteLabelsQueryParams = zod.object({
 	fields: zod

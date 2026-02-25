@@ -13,7 +13,7 @@ export const DeleteEmailsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const deleteEmailsQueryEtagItemRegExp = new RegExp('^.+$');
+export const deleteEmailsQueryEtagItemRegExp = /^.+$/;
 
 export const DeleteEmailsQueryParams = zod.object({
 	fields: zod

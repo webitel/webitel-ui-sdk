@@ -11,12 +11,12 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	ApiDeleteLDAPRequest,
 	ApiLDAPCatalog,
+	ApiLDAProcess,
+	ApiLDAProcessResponse,
 	ApiLDAPSearchRequest,
 	ApiLDAPSearchResponse,
 	ApiLDAPTemplate,
 	ApiLDAPTemplateResponse,
-	ApiLDAProcess,
-	ApiLDAProcessResponse,
 	ApiSearchLDAPResponse,
 	DeleteLDAPCatalogParams,
 	LDAPCreateLDAPTemplateBody,
@@ -28,11 +28,11 @@ import type {
 	LDAPUpdateLDAPCatalogBody,
 	LDAPUpdateLDAPTemplateBody,
 	LocateLDAPCatalogParams,
-	LocateLDAPTemplateParams,
 	LocateLDAProcessParams,
+	LocateLDAPTemplateParams,
 	SearchLDAPCatalogParams,
-	SearchLDAPTemplateParams,
 	SearchLDAProcessParams,
+	SearchLDAPTemplateParams,
 } from '.././_models';
 
 // --- header start

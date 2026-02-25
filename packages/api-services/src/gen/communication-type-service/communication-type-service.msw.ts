@@ -5,15 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { EngineCommunicationChannels } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	EngineCommunicationType,
 	EngineListCommunicationType,
 } from '.././_models';
+import { EngineCommunicationChannels } from '.././_models';
 
 export const getSearchCommunicationTypeResponseMock = (
 	overrideResponse: Partial<EngineListCommunicationType> = {},

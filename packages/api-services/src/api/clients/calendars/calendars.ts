@@ -46,7 +46,9 @@ const getCalendarList = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -80,14 +82,22 @@ const getCalendar = async ({ itemId: id }) => {
 				workStop: except.workStop || null,
 			}));
 		}
-		return { ...defaultSingleObject, ...copy };
+		return {
+			...defaultSingleObject,
+			...copy,
+		};
 	};
 
 	try {
 		const response = await calendarService.readCalendar(id);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -135,9 +145,13 @@ const addCalendar = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await calendarService.createCalendar(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -149,9 +163,13 @@ const updateCalendar = async ({ itemInstance, itemId: id }) => {
 	]);
 	try {
 		const response = await calendarService.updateCalendar(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -160,14 +178,19 @@ const deleteCalendar = async ({ id }) => {
 		const response = await calendarService.deleteCalendar(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCalendarsLookup = (params) =>
 	getCalendarList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 const getTimezonesLookup = async (params) => {
@@ -194,7 +217,9 @@ const getTimezonesLookup = async (params) => {
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 

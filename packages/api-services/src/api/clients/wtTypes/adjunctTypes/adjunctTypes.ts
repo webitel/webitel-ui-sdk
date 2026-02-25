@@ -17,12 +17,22 @@ const getAdjunctTypesList = async (
 	{ repo, ...params },
 	{ silent = false } = {},
 ) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -43,7 +53,11 @@ const getAdjunctTypesList = async (
 			next,
 		};
 	} catch (err) {
-		const errTransformers = silent ? [] : [notify];
+		const errTransformers = silent
+			? []
+			: [
+					notify,
+				];
 		throw applyTransform(err, errTransformers);
 	}
 };

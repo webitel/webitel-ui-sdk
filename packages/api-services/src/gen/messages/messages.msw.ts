@@ -5,11 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
-import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
-
-import { WebitelChatButtonRequest } from '.././_models';
+import { HttpResponse, http } from 'msw';
 import type {
 	WebitelChatBroadcastMessageResponse,
 	WebitelChatChatCustomers,
@@ -17,6 +14,7 @@ import type {
 	WebitelChatChatMembers,
 	WebitelChatChatMessages,
 } from '.././_models';
+import { WebitelChatButtonRequest } from '.././_models';
 
 export const getMessagesServiceBroadcastMessageResponseMock = (
 	overrideResponse: Partial<WebitelChatBroadcastMessageResponse> = {},

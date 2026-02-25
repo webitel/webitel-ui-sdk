@@ -11,7 +11,13 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const fieldsToSend = ['name', 'queues', 'article', 'teams', 'text'];
+const fieldsToSend = [
+	'name',
+	'queues',
+	'article',
+	'teams',
+	'text',
+];
 
 const getQuickRepliesList = async (params) => {
 	const fieldsToSend = [
@@ -28,7 +34,10 @@ const getQuickRepliesList = async (params) => {
 		params,
 		[
 			merge(getDefaultGetParams()),
-			(params) => ({ ...params, q: params.search }),
+			(params) => ({
+				...params,
+				q: params.search,
+			}),
 			sanitize(fieldsToSend),
 			starToSearch('q'),
 			camelToSnake(),
@@ -49,20 +58,28 @@ const getQuickRepliesList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [snakeToCamel()]),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getQuickReply = async ({ itemId: id }) => {
 	try {
 		const response = await getQuickRepliesService().readQuickReply(id);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -73,9 +90,13 @@ const addQuickReply = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await getQuickRepliesService().createQuickReply(item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -87,9 +108,13 @@ const updateQuickReply = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await getQuickRepliesService().updateQuickReply(id, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -98,14 +123,19 @@ const deleteQuickReply = async ({ id }) => {
 		const response = await getQuickRepliesService().deleteQuickReply(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getLookup = (params) =>
 	getQuickRepliesList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const QuickRepliesAPI = {

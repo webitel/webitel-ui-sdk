@@ -23,14 +23,21 @@ const getCallHistoryList = async ({ options, ...params }) => {
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
-		return { items, next };
+		return {
+			items,
+			next,
+		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCallHistoryListPost = async ({ data, options }) => {
-	const body = applyTransform(data, [camelToSnake()]);
+	const body = applyTransform(data, [
+		camelToSnake(),
+	]);
 	try {
 		const response = await getCallService().searchHistoryCallPost(
 			body,
@@ -40,16 +47,26 @@ const getCallHistoryListPost = async ({ data, options }) => {
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
-		return { items, next };
+		return {
+			items,
+			next,
+		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getCallHistoryLookup = (params) =>
 	getCallHistoryList({
 		...params,
-		fields: params?.fields || ['id', 'destination', 'state', 'created_at'],
+		fields: params?.fields || [
+			'id',
+			'destination',
+			'state',
+			'created_at',
+		],
 	});
 
 export const CallHistoryAPI = {

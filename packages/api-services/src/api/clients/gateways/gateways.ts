@@ -22,7 +22,15 @@ const instance = getDefaultInstance();
 const baseUrl = '/sip/gateways';
 
 const getGatewayList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'name'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+		'name',
+	];
 
 	const defaultObject = {
 		name: '',
@@ -34,7 +42,10 @@ const getGatewayList = async (params) => {
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
 		starToSearch('name'),
-		(params) => ({ ...params, q: params.search }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl(baseUrl),
@@ -46,11 +57,15 @@ const getGatewayList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -62,13 +77,22 @@ const getGateway = async ({ itemId: id }) => {
 			port: null,
 		};
 
-		const result = { ...trunkingGateway(), ...response };
-		result.ipacl = result.ipacl.map((acl) => ({ ...defaultIPacl, ...acl }));
+		const result = {
+			...trunkingGateway(),
+			...response,
+		};
+		result.ipacl = result.ipacl.map((acl) => ({
+			...defaultIPacl,
+			...acl,
+		}));
 		return result;
 	};
 
 	const coerceRegisterResponse = (response) => {
-		const result = { ...registerGateway(), ...response };
+		const result = {
+			...registerGateway(),
+			...response,
+		};
 		return result;
 	};
 
@@ -81,9 +105,14 @@ const getGateway = async ({ itemId: id }) => {
 
 	try {
 		const response = await instance.get(url);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			itemResponseHandler,
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -113,9 +142,13 @@ const addGateway = async ({ itemInstance }) => {
 	]);
 	try {
 		const response = await instance.post(baseUrl, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 const updateGateway = async ({ itemInstance, itemId: id }) => {
@@ -127,9 +160,13 @@ const updateGateway = async ({ itemInstance, itemId: id }) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.put(url, item);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -141,9 +178,13 @@ const patchGateway = async ({ changes, id }) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.patch(url, body);
-		return applyTransform(response.data, [snakeToCamel()]);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
@@ -153,14 +194,19 @@ const deleteGateway = async ({ id }) => {
 		const response = await instance.delete(url);
 		return applyTransform(response.data, []);
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		throw applyTransform(err, [
+			notify,
+		]);
 	}
 };
 
 const getGatewaysLookup = (params) =>
 	getGatewayList({
 		...params,
-		fields: params.fields || ['id', 'name'],
+		fields: params.fields || [
+			'id',
+			'name',
+		],
 	});
 
 export const GatewaysAPI = {

@@ -19,7 +19,7 @@ export const ListScreenrecordingExportsQueryParams = zod.object({
 	sort: zod
 		.string()
 		.optional()
-		.describe('sorting criteria, e.g. \"+created_at\" or \"-name\"'),
+		.describe('sorting criteria, e.g. "+created_at" or "-name"'),
 });
 
 export const listScreenrecordingExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
@@ -157,7 +157,7 @@ export const ListCallExportsQueryParams = zod.object({
 	sort: zod
 		.string()
 		.optional()
-		.describe('sorting criteria, e.g. \"+created_at\" or \"-name\"'),
+		.describe('sorting criteria, e.g. "+created_at" or "-name"'),
 });
 
 export const listCallExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
