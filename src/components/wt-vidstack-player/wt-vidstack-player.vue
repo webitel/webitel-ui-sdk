@@ -163,6 +163,17 @@ const onCanPlay = (ev: Event) => {
   max-height: 100%;
   transition: var(--transition);
   box-shadow: var(--elevation-10);
+
+  /*
+    Shortened size tokens for player sizes border-radius:
+    --br-* = size-specific radius values
+    --video-br = final computed radius used by component
+  */
+  --br-sm: var(--p-player-control-bar-sm-border-radius);
+  --br-md: var(--p-player-control-bar-md-border-radius);
+  --br-lg: var(--p-player-control-bar-lg-border-radius);
+
+  --video-br: 0;
 }
 
 .wt-vidstack-player__player {
@@ -179,6 +190,7 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--sm {
+  --video-br: var(--br-sm);
   position: fixed;
   z-index: 10;
   right: var(--spacing-md);
@@ -198,6 +210,7 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--md {
+  --video-br: var(--br-md);
   overflow: hidden;
   flex: 0 0 auto;
   max-width: 100%;
@@ -254,6 +267,7 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--lg {
+  --video-br: var(--br-lg);
   z-index: 10;
   overflow: hidden;
   border-radius: var(--p-player-wrapper-lg-border-radius);
@@ -310,22 +324,6 @@ const onCanPlay = (ev: Event) => {
   min-width: 0;
   height: 100%;
   background: var(--p-player-wrapper-background);
-}
-
-.wt-vidstack-player {
-  --br-sm: var(--p-player-control-bar-sm-border-radius);
-  --br-md: var(--p-player-control-bar-md-border-radius);
-  --br-lg: var(--p-player-control-bar-lg-border-radius);
-
-  /* default radius */
-  --video-br: 0;
-}
-
-.wt-vidstack-player--sm { --video-br: var(--br-sm); }
-.wt-vidstack-player--md { --video-br: var(--br-md); }
-.wt-vidstack-player--lg { --video-br: var(--br-lg); }
-
-.wt-vidstack-player :deep(video) {
   border-radius: var(--video-br) var(--video-br) 0 0;
 }
 
