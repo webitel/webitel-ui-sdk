@@ -10,7 +10,7 @@ import { HttpResponse, http } from 'msw';
 import type { RequestHandlerOptions } from 'msw';
 
 import { TypeKind } from '.././_models';
-import type { DataStructList, ProtodataStruct } from '.././_models';
+import type { DataStructList, ProtoDataStruct } from '.././_models';
 
 export const getDeleteType2ResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
@@ -2611,8 +2611,8 @@ export const getDeleteTypeExtensionsResponseMock = (
 });
 
 export const getLocateTypeExtensionsResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -3453,8 +3453,8 @@ export const getLocateTypeExtensionsResponseMock = (
 });
 
 export const getCreateTypeExtensionsResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -4295,8 +4295,8 @@ export const getCreateTypeExtensionsResponseMock = (
 });
 
 export const getUpdateTypeExtensionsResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -5231,10 +5231,10 @@ export const getDeleteTypeExtensionsMockHandler = (
 
 export const getLocateTypeExtensionsMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
@@ -5262,10 +5262,10 @@ export const getLocateTypeExtensionsMockHandler = (
 
 export const getCreateTypeExtensionsMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -5293,10 +5293,10 @@ export const getCreateTypeExtensionsMockHandler = (
 
 export const getUpdateTypeExtensionsMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.put(

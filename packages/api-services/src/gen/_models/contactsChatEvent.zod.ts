@@ -4,17 +4,17 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 export interface ContactsChatEvent {
 	closedAt?: string;
 	duration?: string;
-	flowScheme?: WebitelcontactsLookup;
-	gateway?: WebitelcontactsLookup;
+	flowScheme?: WebitelContactsLookup;
+	gateway?: WebitelContactsLookup;
 	id?: string;
 	isDetailed?: boolean;
 	isInbound?: boolean;
 	isMissed?: boolean;
-	participants?: WebitelcontactsLookup[];
-	queue?: WebitelcontactsLookup;
+	participants?: WebitelContactsLookup[];
+	queue?: WebitelContactsLookup;
 }

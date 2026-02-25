@@ -7324,3 +7324,103 @@ export const UpdateContactResponse = zod
 			),
 	})
 	.describe('The Contact principal source.\nOUTPUT purpose only.');
+
+/**
+ * @summary Search retrieves a paginated list of contacts based on filters and search queries.
+ */
+export const SearchContactsQueryParams = zod.object({
+	page: zod
+		.number()
+		.optional()
+		.describe('Page number to retrieve (starts from 1).'),
+	size: zod.number().optional().describe('Number of items per page.'),
+	sort: zod
+		.string()
+		.optional()
+		.describe('Sorting criteria (e.g., \"name\" or \"-created_at\").'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'List of specific fields to include in the response. If empty, all fields are returned.',
+		),
+	q: zod
+		.string()
+		.optional()
+		.describe('Full-text search query (matches against name or username).'),
+	type: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by channel types (e.g., [\"telegram\", \"viber\"]).'),
+	subjects: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by internal system subjects/user IDs.'),
+});
+
+export const SearchContactsResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						appId: zod
+							.string()
+							.optional()
+							.describe('Identifier of the specific integration app or bot.'),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Record creation timestamp (Unix Epoch in milliseconds).',
+							),
+						issId: zod
+							.string()
+							.optional()
+							.describe('Provider-specific unique identifier (Issuer ID).'),
+						metadata: zod
+							.record(zod.string(), zod.string())
+							.optional()
+							.describe(
+								'Additional dynamic attributes provided by the messenger.',
+							),
+						name: zod
+							.string()
+							.optional()
+							.describe('Display name of the contact.'),
+						subject: zod
+							.string()
+							.optional()
+							.describe('Associated internal system subject/identifier.'),
+						type: zod
+							.string()
+							.optional()
+							.describe("Channel type (e.g., 'webchat', 'telegram')."),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Last record update timestamp (Unix Epoch in milliseconds).',
+							),
+						username: zod
+							.string()
+							.optional()
+							.describe('Technical username or handle.'),
+					})
+					.describe('Contact represents an external messaging identity.'),
+			)
+			.optional()
+			.describe('List of contacts found.'),
+		next: zod
+			.boolean()
+			.optional()
+			.describe('Indicates if there are more pages available.'),
+		page: zod.number().optional().describe('Current page number.'),
+		size: zod
+			.number()
+			.optional()
+			.describe('Number of items returned in this batch.'),
+	})
+	.describe(
+		'SearchList represents a paginated collection of Contact entities.',
+	);

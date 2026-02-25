@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ContactsPosition } from './contactsPosition';
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * Input message for creating/updating a condition.
  */
 export interface ContactsInputCondition {
 	/** The ID of the assignee that should be assigned if the condition is met (optional). */
-	assignee?: WebitelcontactsLookup;
+	assignee?: WebitelContactsLookup;
 	/** The query or condition expression used to evaluate the group. */
 	expression?: string;
 	/** The ID of the static group that should be assigned if the condition is met. */

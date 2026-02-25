@@ -11,6 +11,7 @@ import type { RequestHandlerOptions } from 'msw';
 
 import { WebitelCasesRelationType, WebitelCasesSourceType } from '.././_models';
 import type {
+	ExportCases200,
 	WebitelCasesCase,
 	WebitelCasesCaseList,
 	WebitelCasesUpdateCaseResponse,
@@ -3347,6 +3348,69 @@ export const getCreateCaseResponseMock = (
 			min: undefined,
 			max: undefined,
 		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getExportCasesResponseMock = (
+	overrideResponse: Partial<ExportCases200> = {},
+): ExportCases200 => ({
+	error: faker.helpers.arrayElement([
+		{
+			code: faker.helpers.arrayElement([
+				faker.number.int({
+					min: undefined,
+					max: undefined,
+				}),
+				undefined,
+			]),
+			details: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					'@type': faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			message: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	result: faker.helpers.arrayElement([
+		{
+			data: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
 		undefined,
 	]),
 	...overrideResponse,
@@ -11786,6 +11850,37 @@ export const getCreateCaseMockHandler = (
 	);
 };
 
+export const getExportCasesMockHandler = (
+	overrideResponse?:
+		| ExportCases200
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ExportCases200> | ExportCases200),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/cases/export',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getExportCasesResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getDeleteCaseMockHandler = (
 	overrideResponse?:
 		| WebitelCasesCase
@@ -11947,6 +12042,7 @@ export const getSearchCases2MockHandler = (
 export const getCasesMock = () => [
 	getSearchCasesMockHandler(),
 	getCreateCaseMockHandler(),
+	getExportCasesMockHandler(),
 	getDeleteCaseMockHandler(),
 	getLocateCaseMockHandler(),
 	getUpdateCase2MockHandler(),

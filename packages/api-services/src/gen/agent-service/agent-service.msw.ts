@@ -3727,6 +3727,13 @@ export const getSearchAgentInQueueResponseMock = (
 						}),
 						undefined,
 					]),
+					busy: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+						}),
+						undefined,
+					]),
 					free: faker.helpers.arrayElement([
 						faker.number.int({
 							min: undefined,

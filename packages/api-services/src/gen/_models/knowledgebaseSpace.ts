@@ -4,15 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelknowledgebaseLookup } from './webitelknowledgebaseLookup';
+import type { WebitelKnowledgebaseLookup } from './webitelKnowledgebaseLookup';
 
 export interface KnowledgebaseSpace {
 	/** The timestamp when the space was created (in Unix time). */
 	createdAt?: string;
 	/** The user who created the space. */
-	createdBy?: WebitelknowledgebaseLookup;
+	createdBy?: WebitelKnowledgebaseLookup;
 	/** READONLY. The space's metadata. */
-	domain?: WebitelknowledgebaseLookup;
+	domain?: WebitelKnowledgebaseLookup;
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
@@ -31,7 +31,7 @@ This ID changes after any update to the underlying value(s). */
 	/** The timestamp when the space was last updated (in Unix time). */
 	updatedAt?: string;
 	/** The user who last updated the space. */
-	updatedBy?: WebitelknowledgebaseLookup;
+	updatedBy?: WebitelKnowledgebaseLookup;
 	/** READONLY. Operational attributes
 Version of the latest update. Numeric sequence. */
 	ver?: number;

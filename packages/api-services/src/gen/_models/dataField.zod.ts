@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { DatatypeLookup } from './datatypeLookup';
+import type { DataTypeLookup } from './dataTypeLookup';
 import type { TypeBinary } from './typeBinary';
 import type { TypeBool } from './typeBool';
 import type { TypeDatetime } from './typeDatetime';
@@ -49,7 +49,7 @@ code */
 	int64?: TypeInt;
 	/** Required. The field type. */
 	kind?: TypeKind;
-	lookup?: DatatypeLookup;
+	lookup?: DataTypeLookup;
 	/** Title of the field. Lang specific.
 
 title */
