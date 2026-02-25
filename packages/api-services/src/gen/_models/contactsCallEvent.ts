@@ -6,20 +6,20 @@
  */
 import type { ContactsCallFile } from './contactsCallFile';
 import type { ContactsTranscriptLookup } from './contactsTranscriptLookup';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsCallEvent {
 	closedAt?: string;
 	duration?: string;
 	files?: ContactsCallFile[];
-	flowScheme?: WebitelContactsLookup;
-	gateway?: WebitelContactsLookup;
+	flowScheme?: WebitelcontactsLookup;
+	gateway?: WebitelcontactsLookup;
 	id?: string;
 	isDetailed?: boolean;
 	isInbound?: boolean;
 	isMissed?: boolean;
-	participants?: WebitelContactsLookup[];
-	queue?: WebitelContactsLookup;
+	participants?: WebitelcontactsLookup[];
+	queue?: WebitelcontactsLookup;
 	totalDuration?: string;
 	transcripts?: ContactsTranscriptLookup[];
 }

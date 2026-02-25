@@ -4,23 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsCondition {
 	/** The ID of the assignee that should be assigned if the condition is met (optional). */
-	assignee?: WebitelContactsLookup;
+	assignee?: WebitelcontactsLookup;
 	/** The timestamp (in milliseconds) of when the condition was created. */
 	createdAt?: string;
 	/** The user who created this condition. */
-	createdBy?: WebitelContactsLookup;
+	createdBy?: WebitelcontactsLookup;
 	/** The query or condition expression used to evaluate the group. */
 	expression?: string;
 	/** The ID of the static group that should be assigned if the condition is met. */
-	group?: WebitelContactsLookup;
+	group?: WebitelcontactsLookup;
 	/** The unique ID of the condition. */
 	id?: string;
 	/** The timestamp (in milliseconds) of the last update. */
 	updatedAt?: string;
 	/** The user who performed the last update. */
-	updatedBy?: WebitelContactsLookup;
+	updatedBy?: WebitelcontactsLookup;
 }

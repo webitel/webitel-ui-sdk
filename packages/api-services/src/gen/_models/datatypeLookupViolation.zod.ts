@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type DataTypeLookupViolation = {
+export type DatatypeLookupViolation = {
 	[key: string]: string;
 };

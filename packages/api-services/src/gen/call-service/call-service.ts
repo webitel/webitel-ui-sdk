@@ -49,18 +49,12 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
-			/**
-			 * @summary CreateCall initiates a new outbound call with specified parameters.
-			 */
 			const createCall = <TData = AxiosResponse<EngineCreateCallResponse>>(
 				engineCreateCallRequest: EngineCreateCallRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axiosInstance.post(`/calls`, engineCreateCallRequest, options);
 			};
-			/**
-			 * @summary SearchActiveCall returns a list of all calls currently in progress.
-			 */
 			const searchActiveCall = <TData = AxiosResponse<EngineListCall>>(
 				params?: SearchActiveCallParams,
 				options?: AxiosRequestConfig,
@@ -73,9 +67,6 @@ export const // --- title start
 					},
 				});
 			};
-			/**
-			 * @summary HangupCall terminates an active call session.
-			 */
 			const hangupCall = <TData = AxiosResponse<EngineHangupCallResponse>>(
 				id: string,
 				engineCallServiceHangupCallBody: EngineCallServiceHangupCallBody,
@@ -87,7 +78,7 @@ export const // --- title start
 				});
 			};
 			/**
-			 * @summary ReadCall returns detailed real-time information for a specific active call.
+			 * @summary Call item
 			 */
 			const readCall = <TData = AxiosResponse<EngineActiveCall>>(
 				id: string,
@@ -103,7 +94,7 @@ export const // --- title start
 				});
 			};
 			/**
-			 * @summary ConfirmPush confirms receipt of a push notification for synchronization.
+			 * @summary Call item
 			 */
 			const confirmPush = <TData = AxiosResponse<EngineConfirmPushResponse>>(
 				id: string,
@@ -115,9 +106,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary DtmfCall sends DTMF digits to an active call.
-			 */
 			const dtmfCall = <TData = AxiosResponse<EngineDtmfCallResponse>>(
 				id: string,
 				engineCallServiceDtmfCallBody: EngineCallServiceDtmfCallBody,
@@ -129,9 +117,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary EavesdropCall allows a supervisor to listen, whisper, or join an active call.
-			 */
 			const eavesdropCall = <TData = AxiosResponse<EngineCreateCallResponse>>(
 				id: string,
 				engineCallServiceEavesdropCallBody: EngineCallServiceEavesdropCallBody,
@@ -143,9 +128,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary HoldCall puts an active call on hold.
-			 */
 			const holdCall = <TData = AxiosResponse<EngineHoldCallResponse>>(
 				id: string,
 				engineCallServiceHoldCallBody: EngineCallServiceHoldCallBody,
@@ -157,9 +139,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary BlindTransferCall redirects an active call to another destination.
-			 */
 			const blindTransferCall = <
 				TData = AxiosResponse<EngineBlindTransferCallResponse>,
 			>(
@@ -173,9 +152,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary UnHoldCall resumes a call from hold state.
-			 */
 			const unHoldCall = <TData = AxiosResponse<EngineHoldCallResponse>>(
 				id: string,
 				engineCallServiceUnHoldCallBody: EngineCallServiceUnHoldCallBody,
@@ -187,9 +163,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary SetVariablesCall updates call channel variables in real-time.
-			 */
 			const setVariablesCall = <
 				TData = AxiosResponse<EngineSetVariablesCallResponse>,
 			>(
@@ -204,9 +177,8 @@ export const // --- title start
 				);
 			};
 			/**
- * @summary SearchHistoryCall retrieves a list of completed calls using filters (GET).
-Supports advanced filtering by participants, duration, causes, and custom variables.
- */
+			 * @summary List of call
+			 */
 			const searchHistoryCall = <TData = AxiosResponse<EngineListHistoryCall>>(
 				params?: SearchHistoryCallParams,
 				options?: AxiosRequestConfig,
@@ -220,9 +192,8 @@ Supports advanced filtering by participants, duration, causes, and custom variab
 				});
 			};
 			/**
- * @summary SearchHistoryCallPost retrieves a list of completed calls using a complex filter body (POST).
-Ideal for large filter sets that exceed URL length limits.
- */
+			 * @summary List of call
+			 */
 			const searchHistoryCallPost = <
 				TData = AxiosResponse<EngineListHistoryCall>,
 			>(
@@ -235,10 +206,6 @@ Ideal for large filter sets that exceed URL length limits.
 					options,
 				);
 			};
-			/**
- * @summary AggregateHistoryCall performs statistical analysis on historical data.
-Group and aggregate metrics like average duration, call counts, or peak hours.
- */
 			const aggregateHistoryCall = <TData = AxiosResponse<EngineListAggregate>>(
 				engineAggregateHistoryCallRequest: EngineAggregateHistoryCallRequest,
 				options?: AxiosRequestConfig,
@@ -249,9 +216,6 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
-			/**
-			 * @summary CreateCallAnnotation adds a text note to a specific timeframe of a historical call.
-			 */
 			const createCallAnnotation = <
 				TData = AxiosResponse<EngineCallAnnotation>,
 			>(
@@ -265,9 +229,6 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
-			/**
-			 * @summary DeleteCallAnnotation removes an annotation from a historical call.
-			 */
 			const deleteCallAnnotation = <
 				TData = AxiosResponse<EngineCallAnnotation>,
 			>(
@@ -280,9 +241,6 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
-			/**
-			 * @summary UpdateCallAnnotation modifies an existing call note.
-			 */
 			const updateCallAnnotation = <
 				TData = AxiosResponse<EngineCallAnnotation>,
 			>(
@@ -297,9 +255,6 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
-			/**
-			 * @summary RedialCall quickly initiates a new call using data from a previous history record.
-			 */
 			const redialCall = <TData = AxiosResponse<EngineCreateCallResponse>>(
 				callId: string,
 				engineCallServiceRedialCallBody: EngineCallServiceRedialCallBody,
@@ -311,9 +266,6 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
-			/**
-			 * @summary PatchHistoryCall updates metadata for a completed call (e.g., variables or visibility).
-			 */
 			const patchHistoryCall = <TData = AxiosResponse<EngineHistoryCall>>(
 				id: string,
 				engineCallServicePatchHistoryCallBody: EngineCallServicePatchHistoryCallBody,

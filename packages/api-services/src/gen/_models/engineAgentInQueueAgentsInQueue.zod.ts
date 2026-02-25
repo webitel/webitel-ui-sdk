@@ -5,24 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-/**
- * AgentsInQueue contains aggregated statistics
-about agents assigned to queue.
- */
 export interface EngineAgentInQueueAgentsInQueue {
-	/** Indicates whether pause is allowed for agents.
-If unset, pause availability is not defined. */
 	allowPause?: number;
-	/** Number of agents currently on call. */
-	busy?: number;
-	/** Number of agents that are online and in 'waiting' (idle) state. */
 	free?: number;
-	/** Number of agents currently offline. */
 	offline?: number;
-	/** Number of agents currently online. */
 	online?: number;
-	/** Number of agents currently in pause state. */
 	pause?: number;
-	/** Total number of agents assigned to the queue. */
 	total?: number;
 }

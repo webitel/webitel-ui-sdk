@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ImportCSVRequestAction =
-	(typeof ImportCSVRequestAction)[keyof typeof ImportCSVRequestAction];
+export type ImportCSVRequestaction =
+	(typeof ImportCSVRequestaction)[keyof typeof ImportCSVRequestaction];
 
-export const ImportCSVRequestAction = {
+export const ImportCSVRequestaction = {
 	Continue: 'continue',
 	Break: 'break',
 } as const;

@@ -36,7 +36,7 @@ import * as zod from 'zod';
  * @summary Search for Contact(s)
  */
 export const searchContactsQuerySortItemDefault = `id`;
-export const searchContactsQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchContactsQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
 export const searchContactsQueryFieldsItemDefault = `*`;
 export const searchContactsQueryModeDefault = `READ`;
 
@@ -63,13 +63,13 @@ export const SearchContactsQueryParams = zod.object({
 		.array(zod.string().regex(searchContactsQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
 		),
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
 		),
 	id: zod
 		.array(zod.string())
@@ -1480,7 +1480,7 @@ export const CreateContactQueryParams = zod.object({
 		.describe('Source Fields to return into result.'),
 });
 
-export const createContactBodyVariablesItemKeyRegExp = /^\w+$/;
+export const createContactBodyVariablesItemKeyRegExp = new RegExp('^\\w+$');
 
 export const CreateContactBody = zod
 	.object({
@@ -5706,7 +5706,7 @@ export const UpdateContactQueryParams = zod.object({
 		.describe('Source Fields to return into result.'),
 });
 
-export const updateContactBodyVariablesItemKeyRegExp = /^\w+$/;
+export const updateContactBodyVariablesItemKeyRegExp = new RegExp('^\\w+$');
 
 export const UpdateContactBody = zod.object({
 	about: zod
@@ -7324,103 +7324,3 @@ export const UpdateContactResponse = zod
 			),
 	})
 	.describe('The Contact principal source.\nOUTPUT purpose only.');
-
-/**
- * @summary Search retrieves a paginated list of contacts based on filters and search queries.
- */
-export const SearchContactsQueryParams = zod.object({
-	page: zod
-		.number()
-		.optional()
-		.describe('Page number to retrieve (starts from 1).'),
-	size: zod.number().optional().describe('Number of items per page.'),
-	sort: zod
-		.string()
-		.optional()
-		.describe('Sorting criteria (e.g., "name" or "-created_at").'),
-	fields: zod
-		.array(zod.string())
-		.optional()
-		.describe(
-			'List of specific fields to include in the response. If empty, all fields are returned.',
-		),
-	q: zod
-		.string()
-		.optional()
-		.describe('Full-text search query (matches against name or username).'),
-	type: zod
-		.array(zod.string())
-		.optional()
-		.describe('Filter by channel types (e.g., ["telegram", "viber"]).'),
-	subjects: zod
-		.array(zod.string())
-		.optional()
-		.describe('Filter by internal system subjects/user IDs.'),
-});
-
-export const SearchContactsResponse = zod
-	.object({
-		items: zod
-			.array(
-				zod
-					.object({
-						appId: zod
-							.string()
-							.optional()
-							.describe('Identifier of the specific integration app or bot.'),
-						createdAt: zod
-							.string()
-							.optional()
-							.describe(
-								'Record creation timestamp (Unix Epoch in milliseconds).',
-							),
-						issId: zod
-							.string()
-							.optional()
-							.describe('Provider-specific unique identifier (Issuer ID).'),
-						metadata: zod
-							.record(zod.string(), zod.string())
-							.optional()
-							.describe(
-								'Additional dynamic attributes provided by the messenger.',
-							),
-						name: zod
-							.string()
-							.optional()
-							.describe('Display name of the contact.'),
-						subject: zod
-							.string()
-							.optional()
-							.describe('Associated internal system subject/identifier.'),
-						type: zod
-							.string()
-							.optional()
-							.describe("Channel type (e.g., 'webchat', 'telegram')."),
-						updatedAt: zod
-							.string()
-							.optional()
-							.describe(
-								'Last record update timestamp (Unix Epoch in milliseconds).',
-							),
-						username: zod
-							.string()
-							.optional()
-							.describe('Technical username or handle.'),
-					})
-					.describe('Contact represents an external messaging identity.'),
-			)
-			.optional()
-			.describe('List of contacts found.'),
-		next: zod
-			.boolean()
-			.optional()
-			.describe('Indicates if there are more pages available.'),
-		page: zod.number().optional().describe('Current page number.'),
-		size: zod
-			.number()
-			.optional()
-			.describe('Number of items returned in this batch.'),
-	})
-	.describe(
-		'SearchList represents a paginated collection of Contact entities.',
-	);

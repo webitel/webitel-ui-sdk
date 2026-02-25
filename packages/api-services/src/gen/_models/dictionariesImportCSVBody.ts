@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { DictionariesImportCSVBodyFields } from './dictionariesImportCSVBodyFields';
-import type { ImportCSVRequestAction } from './importCSVRequestAction';
+import type { ImportCSVRequestaction } from './importCSVRequestaction';
 
 export interface DictionariesImportCSVBody {
 	data?: string;
 	fields?: DictionariesImportCSVBodyFields;
 	lineBegin?: number;
 	lineEnd?: number;
-	onDataError?: ImportCSVRequestAction;
-	onEmptyLine?: ImportCSVRequestAction;
+	onDataError?: ImportCSVRequestaction;
+	onEmptyLine?: ImportCSVRequestaction;
 }

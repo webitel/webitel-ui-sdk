@@ -11,7 +11,6 @@ export interface ApiLicenseV1 {
 	competitive?: boolean;
 	id?: string;
 	limit?: number;
-	name?: string;
 	notAfter?: string;
 	notBefore?: string;
 	product?: string;

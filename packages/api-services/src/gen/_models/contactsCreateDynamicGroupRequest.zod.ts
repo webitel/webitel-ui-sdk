@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ContactsInputDynamicCondition } from './contactsInputDynamicCondition';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * Request message for creating a new dynamic group.
@@ -14,7 +14,7 @@ export interface ContactsCreateDynamicGroupRequest {
 	/** Input details for the dynamic group. */
 	condition?: ContactsInputDynamicCondition[];
 	/** Default static group to assign if no conditions are met. */
-	defaultGroup?: WebitelContactsLookup;
+	defaultGroup?: WebitelcontactsLookup;
 	/** The description of the dynamic group. */
 	description?: string;
 	/** Enabled status of the dynamic group: active/inactive. */

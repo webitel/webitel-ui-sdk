@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * The Contact's Group association.
@@ -13,19 +13,19 @@ export interface ContactsContactGroup {
 	/** The user who created this Field. */
 	createdAt?: string;
 	/** Timestamp(milli) of the Field creation. */
-	createdBy?: WebitelContactsLookup;
+	createdBy?: WebitelcontactsLookup;
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
 	/** Group of contacts associated. */
-	group?: WebitelContactsLookup;
+	group?: WebitelcontactsLookup;
 	/** The unique ID of the association. Never changes. */
 	id?: string;
 	/** Timestamp(milli) of the last Field update.
 Take part in Etag generation. */
 	updatedAt?: string;
 	/** The user who performed last Update. */
-	updatedBy?: WebitelContactsLookup;
+	updatedBy?: WebitelcontactsLookup;
 	/** Version of the latest update. Numeric sequence. */
 	ver?: number;
 }

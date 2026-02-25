@@ -4,10 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelKnowledgebaseTag } from './webitelKnowledgebaseTag';
+import type { WebitelknowledgebaseTag } from './webitelknowledgebaseTag';
 
 export interface KnowledgebaseTagsList {
-	data?: WebitelKnowledgebaseTag[];
+	data?: WebitelknowledgebaseTag[];
 	next?: boolean;
 	page?: number;
 }

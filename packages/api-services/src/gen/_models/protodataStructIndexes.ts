@@ -11,6 +11,6 @@ import type { DataIndex } from './dataIndex';
 
 Extension extension = 15;
  */
-export type ProtoDataStructIndexes = {
+export type ProtodataStructIndexes = {
 	[key: string]: DataIndex;
 };

@@ -6,13 +6,7 @@
  */
 import type { EngineAgentInQueue } from './engineAgentInQueue';
 
-/**
- * ListAgentInQueue contains search results
-and pagination metadata.
- */
 export interface EngineListAgentInQueue {
-	/** List of agent-to-queue assignments. */
 	items?: EngineAgentInQueue[];
-	/** Indicates weather more records are available. */
 	next?: boolean;
 }

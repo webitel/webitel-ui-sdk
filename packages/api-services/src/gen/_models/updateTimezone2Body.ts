@@ -4,11 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export type UpdateTimezone2Body = {
 	/** Indicates whether this association must be default among others. */
 	primary?: boolean;
 	/** Timezone dictionary reference value associated. */
-	timezone?: WebitelContactsLookup;
+	timezone?: WebitelcontactsLookup;
 };

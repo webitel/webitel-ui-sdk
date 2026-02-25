@@ -16,22 +16,22 @@ import type { ContactsPhoneList } from './contactsPhoneList';
 import type { ContactsPhotoList } from './contactsPhotoList';
 import type { ContactsTimezoneList } from './contactsTimezoneList';
 import type { ContactsVariableList } from './contactsVariableList';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * The Contact principal source.
 OUTPUT purpose only.
  */
-export interface WebitelContactsContact {
+export interface WebitelcontactsContact {
 	/** BIO. Short description about the Contact person.
 OPTIONAL. Multi-lined text. */
 	about?: string;
 	/** The Contact's internal comment(s). */
 	comments?: ContactsCommentList;
 	createdAt?: string;
-	createdBy?: WebitelContactsLookup;
+	createdBy?: WebitelcontactsLookup;
 	/** READONLY. The contact's metadata. */
-	domain?: WebitelContactsLookup;
+	domain?: WebitelcontactsLookup;
 	/** The Contact's email address(es). */
 	emails?: ContactsEmailList;
 	/** Unique ID of the latest version of the update.
@@ -61,8 +61,8 @@ This field is a singleton for Contact sources. */
 	/** The Contact's timezone preference(s). */
 	timezones?: ContactsTimezoneList;
 	updatedAt?: string;
-	updatedBy?: WebitelContactsLookup;
-	user?: WebitelContactsLookup;
+	updatedBy?: WebitelcontactsLookup;
+	user?: WebitelcontactsLookup;
 	/** Arbitrary client data that is populated by clients.
 Duplicate keys and values are allowed. */
 	variables?: ContactsVariableList;

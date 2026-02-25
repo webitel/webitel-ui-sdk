@@ -5,10 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-import type { RequestHandlerOptions } from 'msw';
+
 import { HttpResponse, http } from 'msw';
-import type { DataStructList, ProtoDataStruct } from '.././_models';
+import type { RequestHandlerOptions } from 'msw';
+
 import { TypeKind } from '.././_models';
+import type { DataStructList, ProtodataStruct } from '.././_models';
 
 export const getSearchTypesResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
@@ -877,8 +879,8 @@ export const getSearchTypesResponseMock = (
 });
 
 export const getLocateResponseMock = (
-	overrideResponse: Partial<ProtoDataStruct> = {},
-): ProtoDataStruct => ({
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -1751,10 +1753,10 @@ export const getSearchTypesMockHandler = (
 
 export const getLocateMockHandler = (
 	overrideResponse?:
-		| ProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(

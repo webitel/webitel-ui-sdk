@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * An input of the Contact's timezones.
@@ -15,5 +15,5 @@ export interface ContactsInputTimezone {
 	/** Indicates whether this association must be default among others. */
 	primary?: boolean;
 	/** Timezone dictionary reference value associated. */
-	timezone?: WebitelContactsLookup;
+	timezone?: WebitelcontactsLookup;
 }

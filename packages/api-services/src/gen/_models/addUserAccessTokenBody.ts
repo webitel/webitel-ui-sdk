@@ -7,12 +7,6 @@
 import type { AddUserAccessTokenBodyUser } from './addUserAccessTokenBodyUser';
 import type { ApiObjectId } from './apiObjectId';
 
-/**
- * processing
-------------
-token.user.id // [required] authorization
-token.usage   // [optional] short description
- */
 export type AddUserAccessTokenBody = {
 	createdAt?: string;
 	createdBy?: ApiObjectId;

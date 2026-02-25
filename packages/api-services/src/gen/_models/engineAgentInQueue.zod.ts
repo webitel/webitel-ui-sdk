@@ -7,29 +7,15 @@
 import type { EngineAgentInQueueAgentsInQueue } from './engineAgentInQueueAgentsInQueue';
 import type { EngineLookup } from './engineLookup';
 
-/**
- * AgentInQueue represents agent assignment
-and configuration within a specific queue.
- */
 export interface EngineAgentInQueue {
-	/** Number of members currently active in the queue. */
 	activeMembers?: number;
-	/** Aggregated agent statistics for the queue. */
 	agents?: EngineAgentInQueueAgentsInQueue;
-	/** Total number of members assigned to the queue. */
 	countMembers?: number;
-	/** Indicates whether the queue is enabled. */
 	enabled?: boolean;
-	/** Maximum number of members allowed in the queue. */
 	maxMemberLimit?: number;
-	/** Agent priority within the queue. */
 	priority?: number;
-	/** Queue reference. */
 	queue?: EngineLookup;
-	/** Call distribution strategy used by the queue. */
 	strategy?: string;
-	/** Queue type. */
 	type?: number;
-	/** Number of members currently waiting in the queue. */
 	waitingMembers?: number;
 }

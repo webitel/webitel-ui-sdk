@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsInputManager {
 	/** Unique ID of the latest version of an existing resource. */
@@ -12,5 +12,5 @@ export interface ContactsInputManager {
 	/** Indicates whether this association must be default among others. */
 	primary?: boolean;
 	/** Responsible User. */
-	user?: WebitelContactsLookup;
+	user?: WebitelcontactsLookup;
 }
