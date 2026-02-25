@@ -1,6 +1,6 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-popover :disabled="props.disabled">
+    <wt-popover ref="popover" :disabled="props.disabled">
       <template #activator="{ toggle }">
         <slot
           name="activator"
@@ -24,6 +24,7 @@
  * and their styling
  */
 import { WtPopover } from '@webitel/ui-sdk/components';
+import { defineExpose, ref } from 'vue';
 
 interface Props {
 	disabled?: boolean;
@@ -31,6 +32,16 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const popover = ref(null);
+
+const hidePopover = () => {
+	popover.value?.hide();
+};
+
+defineExpose({
+	hidePopover,
+});
 </script>
 
 <style scoped></style>

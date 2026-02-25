@@ -1,5 +1,6 @@
 <template>
   <dynamic-filter-config-view
+    ref="dynamicFilterAddAction"
     disable-click-away
     class="dynamic-filter-add-action"
   >
@@ -14,13 +15,15 @@
 
     <template #content="{ hide }">
       <slot name="form">
-        <dynamic-filter-config-form
-          :filter-configs="props.filterConfigs"
-          @cancel="hide"
-          @submit="
-            (payload) => submit(payload, { hide })
-          "
-        />
+        <div ref="popoverContentRef">
+          <dynamic-filter-config-form
+            :filter-configs="props.filterConfigs"
+            @cancel="hide"
+            @submit="
+              (payload) => submit(payload, { hide })
+            "
+          />
+        </div>
       </slot>
     </template>
   </dynamic-filter-config-view>
@@ -29,6 +32,8 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
+import { onClickOutside } from '@vueuse/core';
+import { ref } from 'vue';
 
 import { FilterInitParams } from '../classes/Filter';
 import { BaseFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
@@ -54,6 +59,31 @@ const submit = (payload: FilterInitParams, { hide }) => {
 	emit('add:filter', payload);
 	hide();
 };
+
+const popoverContentRef = ref<HTMLElement | null>(null);
+const dynamicFilterAddAction = ref<null>(null);
+
+/**
+ * @author @Oleksandr Palonnyi
+ *
+ * [WTEL-8817](https://webitel.atlassian.net/browse/WTEL-8817)
+ *
+ * Close popover on outside click.
+ * Capture phase fixes PrimeVue bug where stopPropagation() (used by navbar menus)
+ * blocks default outside-click detection. Capture fires before the block.
+ * Ignore: .wt-chip (activator), .p-popover (popover content)
+ * */
+onClickOutside(
+	popoverContentRef,
+	() => dynamicFilterAddAction.value?.hidePopover(),
+	{
+		capture: true, // Fix for PrimeVue stopPropagation bug
+		ignore: [
+			'.wt-chip',
+			'.p-popover',
+		], // Exclude activator and popover
+	},
+);
 </script>
 
 <style lang="scss" scoped>
