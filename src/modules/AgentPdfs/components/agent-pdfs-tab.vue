@@ -69,7 +69,7 @@
           />
           <wt-icon-action
             action="delete"
-            :disabled="isDeleteDisabled(item)"
+            :disabled="isDeleteDisabled(item) || !hasDeleteAccess"
             @click="
               askDeleteConfirmation({
                 deleted: [item],
@@ -113,26 +113,20 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { DatetimeFormat } from 'vue-i18n';
 
+import { CrudAction } from '../../../enums';
 import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode';
 import { formatDate } from '../../../utils/formatDate';
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
 
-interface Props {
+const props = defineProps<{
 	store?: any;
 	entityIdKey?: string;
 	entityIdValue?: string | number;
 	isCreatedAtFilter: boolean;
 	onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-	store: undefined,
-	entityIdKey: undefined,
-	entityIdValue: undefined,
-	isCreatedAtFilter: false,
-	onDeleteItem: undefined,
-});
+	access?: Partial<Record<CrudAction, boolean>>;
+}>();
 
 const tableStore = props.store;
 
@@ -205,6 +199,10 @@ const isDeleteDisabled = (item: WebitelMediaExporterExportRecord) => {
 		item.status !== WebitelMediaExporterExportStatus.Failed
 	);
 };
+
+const hasDeleteAccess = computed(() => {
+	return props.access?.delete ?? true;
+});
 
 const {
 	isVisible: isDeleteConfirmationPopup,
