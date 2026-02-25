@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ContactsLabelInfo } from './contactsLabelInfo';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * LabelTags dataset list of label's info.
@@ -15,5 +15,5 @@ export interface ContactsLabelTags {
 	next?: boolean;
 	/** Page number of partial result. */
 	page?: number;
-	sources?: WebitelContactsLookup[];
+	sources?: WebitelcontactsLookup[];
 }

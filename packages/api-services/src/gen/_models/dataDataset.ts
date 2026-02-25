@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { DataDatasetDataItem } from './dataDatasetDataItem';
-import type { ProtoDataStruct } from './protoDataStruct';
+import type { ProtodataStruct } from './protodataStruct';
 
 /**
  * Dataset records page view.
@@ -17,5 +17,5 @@ export interface DataDataset {
 	/** Current page number. */
 	page?: number;
 	/** Type of the dataset record. */
-	type?: ProtoDataStruct;
+	type?: ProtodataStruct;
 }

@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 /**
  * The Contact's variable.
@@ -15,7 +15,7 @@ export interface ContactsVariable {
 	/** The user who created this Field. */
 	createdAt?: string;
 	/** Timestamp(milli) of the Field creation. */
-	createdBy?: WebitelContactsLookup;
+	createdBy?: WebitelcontactsLookup;
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
@@ -27,7 +27,7 @@ This ID changes after any update to the underlying value(s). */
 Take part in Etag generation. */
 	updatedAt?: string;
 	/** The user who performed last Update. */
-	updatedBy?: WebitelContactsLookup;
+	updatedBy?: WebitelcontactsLookup;
 	/** JSON value of the variable. */
 	value?: unknown;
 	/** Version of the latest update. Numeric sequence. */

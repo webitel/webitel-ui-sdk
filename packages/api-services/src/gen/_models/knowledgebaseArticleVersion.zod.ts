@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelKnowledgebaseLookup } from './webitelKnowledgebaseLookup';
+import type { WebitelknowledgebaseLookup } from './webitelknowledgebaseLookup';
 
 export interface KnowledgebaseArticleVersion {
 	/** Tags associated with the article. */
@@ -22,7 +22,7 @@ export interface KnowledgebaseArticleVersion {
 	/** Timestamp(milli) of the last Field update. */
 	updatedAt?: string;
 	/** The user who loaded this attachment. */
-	updatedBy?: WebitelKnowledgebaseLookup;
+	updatedBy?: WebitelknowledgebaseLookup;
 	/** Version of the latest update. Numeric sequence. */
 	ver?: number;
 }

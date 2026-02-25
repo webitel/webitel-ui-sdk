@@ -4,13 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsInputDynamicCondition {
 	/** The ID of the assignee that should be assigned if the condition is met (optional). */
-	assignee?: WebitelContactsLookup;
+	assignee?: WebitelcontactsLookup;
 	/** The query or condition expression used to evaluate the group. */
 	expression?: string;
 	/** The ID of the static group that should be assigned if the condition is met. */
-	group?: WebitelContactsLookup;
+	group?: WebitelcontactsLookup;
 }

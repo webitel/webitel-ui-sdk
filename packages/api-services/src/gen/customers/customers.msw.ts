@@ -109,15 +109,6 @@ export const getGetCustomerResponseMock = (
 						}),
 						undefined,
 					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
 					notAfter: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -522,15 +513,6 @@ export const getUpdateCustomerResponseMock = (
 						}),
 						undefined,
 					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
 					notAfter: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -875,15 +857,6 @@ export const getLicenseUsageResponseMock = (
 				}),
 				undefined,
 			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
 			notAfter: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -1178,15 +1151,6 @@ export const getGetCustomer2ResponseMock = (
 						faker.number.int({
 							min: undefined,
 							max: undefined,
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
 						}),
 						undefined,
 					]),
@@ -1534,15 +1498,6 @@ export const getLicenseUsage2ResponseMock = (
 				}),
 				undefined,
 			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
 			notAfter: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -1777,15 +1732,6 @@ export const getLicenseUsage3ResponseMock = (
 				faker.number.int({
 					min: undefined,
 					max: undefined,
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
 				}),
 				undefined,
 			]),

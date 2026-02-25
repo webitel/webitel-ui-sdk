@@ -6,7 +6,7 @@
  */
 import type { ContactsDynamicCondition } from './contactsDynamicCondition';
 import type { ContactsGroupType } from './contactsGroupType';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsGroup {
 	/** List of dynamic conditions associated with the group. */
@@ -15,9 +15,9 @@ export interface ContactsGroup {
 	/** Timestamp(milli) of the group's creation. */
 	createdAt?: string;
 	/** The user who created this group. */
-	createdBy?: WebitelContactsLookup;
+	createdBy?: WebitelcontactsLookup;
 	/** Default static group to be assigned if no conditions are met. */
-	defaultGroup?: WebitelContactsLookup;
+	defaultGroup?: WebitelcontactsLookup;
 	/** The description of the group. */
 	description?: string;
 	enabled?: boolean;
@@ -29,5 +29,5 @@ export interface ContactsGroup {
 	/** Timestamp(milli) of the last group update. */
 	updatedAt?: string;
 	/** The user who performed the last update. */
-	updatedBy?: WebitelContactsLookup;
+	updatedBy?: WebitelcontactsLookup;
 }

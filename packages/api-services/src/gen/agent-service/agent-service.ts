@@ -287,10 +287,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
- * @summary Searches queues where the specified agent is assigned.
-Supports pagination, sorting and free-text search.
- */
 			const searchAgentInQueue = <
 				TData = AxiosResponse<EngineListAgentInQueue>,
 			>(

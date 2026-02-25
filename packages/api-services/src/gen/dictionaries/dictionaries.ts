@@ -20,7 +20,7 @@ import type {
 	DictionariesImportCSVBody,
 	LocateData200,
 	LocateDataParams,
-	ProtoDataStruct,
+	ProtodataStruct,
 	SearchDataParams,
 	SearchTypeParams,
 	UpdateData2Body,
@@ -217,7 +217,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Locate the dictionary type.
 			 */
-			const locateType = <TData = AxiosResponse<ProtoDataStruct>>(
+			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -227,7 +227,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Create custom dictionary.
 			 */
-			const createType = <TData = AxiosResponse<ProtoDataStruct>>(
+			const createType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
 				options?: AxiosRequestConfig,
@@ -242,7 +242,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Update custom dictionary.
 			 */
-			const updateType = <TData = AxiosResponse<ProtoDataStruct>>(
+			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
 				params?: UpdateTypeParams,
@@ -288,8 +288,8 @@ export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
 export type DeleteTypeResult = AxiosResponse<DataStructList>;
 export type SearchTypeResult = AxiosResponse<DataStructList>;
-export type LocateTypeResult = AxiosResponse<ProtoDataStruct>;
-export type CreateTypeResult = AxiosResponse<ProtoDataStruct>;
-export type UpdateTypeResult = AxiosResponse<ProtoDataStruct>;
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

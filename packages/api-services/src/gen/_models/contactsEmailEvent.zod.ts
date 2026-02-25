@@ -4,11 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelContactsAttachment } from './webitelContactsAttachment';
-import type { WebitelContactsLookup } from './webitelContactsLookup';
+import type { WebitelcontactsAttachment } from './webitelcontactsAttachment';
+import type { WebitelcontactsLookup } from './webitelcontactsLookup';
 
 export interface ContactsEmailEvent {
-	attachments?: WebitelContactsAttachment[];
+	attachments?: WebitelcontactsAttachment[];
 	body?: string;
 	cc?: string[];
 	from?: string[];
@@ -16,8 +16,8 @@ export interface ContactsEmailEvent {
 	id?: string;
 	isDetailed?: boolean;
 	isInbound?: boolean;
-	owner?: WebitelContactsLookup;
-	profile?: WebitelContactsLookup;
+	owner?: WebitelcontactsLookup;
+	profile?: WebitelcontactsLookup;
 	sender?: string[];
 	subject?: string;
 	to?: string[];
