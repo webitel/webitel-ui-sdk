@@ -36,7 +36,7 @@ import * as zod from 'zod';
  * @summary Search for Contact(s)
  */
 export const searchContactsQuerySortItemDefault = `id`;
-export const searchContactsQuerySortItemRegExp = new RegExp('^[+|-|!]?\\w+$');
+export const searchContactsQuerySortItemRegExp = /^[+|-|!]?\w+$/;
 export const searchContactsQueryFieldsItemDefault = `*`;
 export const searchContactsQueryModeDefault = `READ`;
 
@@ -63,13 +63,13 @@ export const SearchContactsQueryParams = zod.object({
 		.array(zod.string().regex(searchContactsQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
 		),
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
 		),
 	id: zod
 		.array(zod.string())
@@ -1480,7 +1480,7 @@ export const CreateContactQueryParams = zod.object({
 		.describe('Source Fields to return into result.'),
 });
 
-export const createContactBodyVariablesItemKeyRegExp = new RegExp('^\\w+$');
+export const createContactBodyVariablesItemKeyRegExp = /^\w+$/;
 
 export const CreateContactBody = zod
 	.object({
@@ -5706,7 +5706,7 @@ export const UpdateContactQueryParams = zod.object({
 		.describe('Source Fields to return into result.'),
 });
 
-export const updateContactBodyVariablesItemKeyRegExp = new RegExp('^\\w+$');
+export const updateContactBodyVariablesItemKeyRegExp = /^\w+$/;
 
 export const UpdateContactBody = zod.object({
 	about: zod
