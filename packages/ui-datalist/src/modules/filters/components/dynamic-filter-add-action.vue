@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts" setup>
-import { WtIconAction } from '@webitel/ui-sdk/components';
-import { useI18n } from 'vue-i18n';
 import { onClickOutside } from '@vueuse/core';
+import { WtIconAction } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { FilterInitParams } from '../classes/Filter';
 import { BaseFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
