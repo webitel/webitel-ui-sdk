@@ -545,6 +545,8 @@ export default {
 					return `${linked('reusable.add')} контакти`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT_ASC]: 'Сортування за зростанням',
+				[IconAction.SORT_DESC]: 'Сортування за спаданням',
 			},
 		},
 		errorPages: {

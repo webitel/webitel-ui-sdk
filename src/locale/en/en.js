@@ -561,6 +561,8 @@ export default deepmerge(
 						return `${linked('reusable.add')} contacts`;
 					},
 					[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+					[IconAction.SORT_ASC]: 'Sort ascending',
+					[IconAction.SORT_DESC]: 'Sort descending',
 				},
 			},
 			errorPages: {

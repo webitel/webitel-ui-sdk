@@ -554,6 +554,8 @@ export default {
 					return `${linked('reusable.add')} liên hệ`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT_ASC]: 'Sắp xếp tăng dần',
+				[IconAction.SORT_DESC]: 'Sắp xếp giảm dần',
 			},
 		},
 		errorPages: {

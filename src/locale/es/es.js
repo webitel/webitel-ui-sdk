@@ -548,6 +548,8 @@ export default {
 					return `${linked('reusable.add')} contacts`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT_ASC]: 'Orden ascendente',
+				[IconAction.SORT_DESC]: 'Orden descendente',
 			},
 		},
 		errorPages: {

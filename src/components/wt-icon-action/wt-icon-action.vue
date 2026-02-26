@@ -38,6 +38,8 @@ const props = defineProps({
 				IconAction.ADD_CONTACT,
 				IconAction.DOWNLOAD_PDF,
 				IconAction.CHAT,
+				IconAction.SORT_ASC,
+				IconAction.SORT_DESC,
 			]).includes(v),
 	},
 	disabled: {

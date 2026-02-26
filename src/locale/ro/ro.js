@@ -555,6 +555,8 @@ export default {
 					return `${linked('reusable.add')} contacte`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT_ASC]: 'Sortare crescătoare',
+				[IconAction.SORT_DESC]: 'Sortare descrescătoare',
 			},
 		},
 		errorPages: {

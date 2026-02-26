@@ -553,6 +553,8 @@ export default {
 					return `${linked('reusable.add')} kontakty`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT_ASC]: 'Sortowanie rosnąco',
+				[IconAction.SORT_DESC]: 'Sortowanie malejąco',
 			},
 		},
 		errorPages: {
