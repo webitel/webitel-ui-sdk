@@ -157,23 +157,22 @@ const onCanPlay = (ev: Event) => {
 
 <style scoped>
 .wt-vidstack-player {
+  /*
+    Shortened size tokens for player sizes border-radius:
+    --video-border-radius-* = size-specific radius values for video tag
+    --video-border-radius = final computed radius used by component
+  */
+  --video-border-radius-sm: var(--p-player-control-bar-sm-border-radius);
+  --video-border-radius-md: var(--p-player-control-bar-md-border-radius);
+  --video-border-radius-lg: var(--p-player-control-bar-lg-border-radius);
+  --video-border-radius-br: 0;
+
   width: 100%;
   max-width: 100%;
   height: 100%;
   max-height: 100%;
   transition: var(--transition);
   box-shadow: var(--elevation-10);
-
-  /*
-    Shortened size tokens for player sizes border-radius:
-    --br-* = size-specific radius values
-    --video-br = final computed radius used by component
-  */
-  --br-sm: var(--p-player-control-bar-sm-border-radius);
-  --br-md: var(--p-player-control-bar-md-border-radius);
-  --br-lg: var(--p-player-control-bar-lg-border-radius);
-
-  --video-br: 0;
 }
 
 .wt-vidstack-player__player {
@@ -190,7 +189,8 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--sm {
-  --video-br: var(--br-sm);
+  --video-border-radius: var(--video-border-radius-sm);
+
   position: fixed;
   z-index: 10;
   right: var(--spacing-md);
@@ -210,7 +210,8 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--md {
-  --video-br: var(--br-md);
+  --video-border-radius: var(--video-border-radius-md);
+
   overflow: hidden;
   flex: 0 0 auto;
   max-width: 100%;
@@ -267,7 +268,8 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--lg {
-  --video-br: var(--br-lg);
+  --video-border-radius: var(--video-border-radius-lg);
+
   z-index: 10;
   overflow: hidden;
   border-radius: var(--p-player-wrapper-lg-border-radius);
@@ -324,7 +326,7 @@ const onCanPlay = (ev: Event) => {
   min-width: 0;
   height: 100%;
   background: var(--p-player-wrapper-background);
-  border-radius: var(--video-br) var(--video-br) 0 0;
+  border-radius: var(--video-border-radius) var(--video-border-radius) 0 0;
 }
 
 .wt-vidstack-player-video-object-fit--cover :deep(video) {
