@@ -135,7 +135,25 @@ export const uiSdkRoutes = [
 							},
 							{
 								text: 'Access',
-								link: resolveLink('modules/Userinfo/access/Readme.md'),
+								// collapsed: true,
+								items: [
+									{
+										text: 'main',
+										link: resolveLink('modules/Userinfo/access/Readme.md'),
+									},
+									{
+										text: 'stores',
+										link: resolveLink(
+											'modules/Userinfo/access/stores/Readme.md',
+										),
+									},
+									{
+										text: 'cookbook',
+										link: resolveLink(
+											'modules/Userinfo/access/cookbook/Readme.md',
+										),
+									},
+								],
 							},
 						],
 					},

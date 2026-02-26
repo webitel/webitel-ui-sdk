@@ -5,6 +5,7 @@
 ## General
 - [Code Base Deprecation Info](general/code-base-deprecation-info/Readme): Інформація про застарілі частини коду.
 - [Branching](general/branching/Readme): Гайд по гілкуванню у репозиторіях.
+- [Access Control](./general/access-control/index.md): Інформація про те, як працюють Права доступу у Webitel.
 
 ## FAQ
 - [FAQ](faq/Readme.md): Відповіді на часті питання.

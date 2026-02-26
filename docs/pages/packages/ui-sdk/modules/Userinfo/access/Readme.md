@@ -9,6 +9,102 @@
 
 ## Ініціалізація
 
+Усереднена ініціалізація в апплікейшені виглядає десь так:
+
+:::details main.ts
+
+```js
+// main.ts
+
+import { createUserAccessControl } from './app/composables/useUserAccessControl';
+
+import { useUserinfoStore } from './modules/userinfo/store/userinfoStore';
+
+const initApp = async () => {
+	const app = createApp(App)
+    // ..
+    /* Перед ініціалізацією userinfoStore маємо спершу зареєструвати pinia  */
+    .use(pinia);
+
+	const { initialize, routeAccessGuard } = useUserinfoStore();
+	try {
+        /* 
+            Ініціалізуємо userinfoStore, який під капотом ініціалізує
+            і accessStore
+            
+            Саме на цьому етапі робиться запит на Права, і їх
+            трансформація для доступу в геттерах
+        */
+		await initialize();
+
+        /*
+          Компоузабл створюємо після ініціалізації стора, 
+          бо нам треба прокинути цей стор, щоб ініціалізувати компоузабл 
+          (компоузабл напряму залежить від стора, 
+          тому що бігає в стор перевіряти права)
+        */
+		createUserAccessControl(useUserinfoStore);
+
+        /*
+          Ініціалізуємо роутер після того, ініціалізували userinfoStore 
+          і routeAccessGuard вже знає, куди (не)можна пускати користувача.
+        */
+		await initRouter({
+			beforeEach: [
+				routeAccessGuard,
+			],
+		});
+	} catch (err) {
+		console.error('Error initializing app', err);
+	}
+
+/* 
+        Отут дуже важливо!
+        Ми реєструємо роутер ПІСЛЯ того, 
+        як ініціалізуємо userinfo i Access Control, 
+        тому що вже на старті роутера нам необхідно 
+        запустити guard
+*/
+	app.use(router); // [!code highlight]
+	app.use(WebitelUi, {
+		...WebitelUiOptions,
+		router,
+	}); // setup webitel ui after router init
+
+	return app;
+};
+```
+:::
+
+І допоміжні copy-paste файли `useUserAccessControl` і `userinfoStore`:
+
+:::details useUserAccessControl code
+
+```js
+// crm/../useUserAccessControl.ts
+import { createUserAccessControlComposable } from '@webitel/ui-sdk/modules/Userinfo';
+
+export let useUserAccessControl: ReturnType<
+	typeof createUserAccessControlComposable
+>;
+
+export const createUserAccessControl = (useUserinfoStore) => {
+	useUserAccessControl = createUserAccessControlComposable(useUserinfoStore);
+	return useUserAccessControl;
+};
+```
+:::
+
+:::details userinfoStore code
+
+```js
+// crm/../userinfoStore.ts
+import { createUserinfoStore } from '@webitel/ui-sdk/modules/Userinfo';
+
+export const useUserinfoStore = createUserinfoStore();
+```
+:::
+
 ## В яких місцях відбувається перевірка Прав
 
 На фронтенді є 3 таких основних місця:
