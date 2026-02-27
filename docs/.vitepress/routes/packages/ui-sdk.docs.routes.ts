@@ -134,7 +134,11 @@ export const uiSdkRoutes = [
 								link: resolveLink('modules/Userinfo/index.md'),
 							},
 							{
-								text: 'Access',
+								text: 'main',
+								link: resolveLink('modules/Userinfo/main.md'),
+							},
+							{
+								text: 'Userinfo: Access',
 								// collapsed: true,
 								items: [
 									{
@@ -142,15 +146,30 @@ export const uiSdkRoutes = [
 										link: resolveLink('modules/Userinfo/access/Readme.md'),
 									},
 									{
-										text: 'stores',
+										text: 'mappings',
 										link: resolveLink(
-											'modules/Userinfo/access/stores/Readme.md',
+											'modules/Userinfo/access/mappings/Readme.md',
 										),
 									},
 									{
 										text: 'cookbook',
 										link: resolveLink(
 											'modules/Userinfo/access/cookbook/Readme.md',
+										),
+									},
+								],
+							},
+							{
+								text: 'Userinfo: Settings',
+								items: [
+									{
+										text: 'index',
+										link: resolveLink('modules/Userinfo/settings/index.md'),
+									},
+									{
+										text: 'main',
+										link: resolveLink(
+											'modules/Userinfo/settings/main/Readme.md',
 										),
 									},
 								],
