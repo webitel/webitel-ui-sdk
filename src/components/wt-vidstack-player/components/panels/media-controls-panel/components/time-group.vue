@@ -6,7 +6,8 @@
   </div>
 </template>
 
-<style  scoped>.time-group {
+<style  scoped>
+.time-group {
 font-family: 'Montserrat', monospace;
   font-size: 12px;
   font-weight: 400;
