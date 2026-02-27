@@ -1,4 +1,4 @@
-<template>
+<template>fff
 	<media-player
 		ref="player"
 		class="wt-player"
@@ -148,14 +148,14 @@ const controls = computed<PlyrControl[]>(() => {
 watch(
 	() => props.src,
 	() => {
-		setupDownload();
+		// setupDownload();
 	},
 );
 // todo??
 watch(
 	() => props.download,
 	() => {
-		setupDownload();
+		// setupDownload();
 	},
 );
 
@@ -164,31 +164,31 @@ onMounted(() => {
 });
 
 async function setupPlayer() {
-	if (props.resetVolume) makeVolumeReset();
-	if (props.download) setupDownload();
+	// if (props.resetVolume) makeVolumeReset();
+	// if (props.download) setupDownload();
 
 	if (props.closable) appendCloseIcon();
-	emit('initialized', player.value);
+	// emit('initialized', player.value);
 }
 
-function makeVolumeReset() {
-	if (player.value) {
-		player.value.volume = 1;
-		player.value.muted = false;
-	}
-}
+// function makeVolumeReset() {
+// 	if (player.value) {
+// 		player.value.volume = 1;
+// 		player.value.muted = false;
+// 	}
+// }
 
-function setupDownload() {
-	if (!props.download) {
-		setupPlayer();
-	} else if (player.value) {
-		if (typeof props.download === 'string') {
-			player.value.download = props.download;
-		} else if (typeof props.download === 'function') {
-			player.value.download = props.download(props.src || '');
-		}
-	}
-}
+// function setupDownload() {
+// 	if (!props.download) {
+// 		setupPlayer();
+// 	} else if (player.value) {
+// 		if (typeof props.download === 'string') {
+// 			player.value.download = props.download;
+// 		} else if (typeof props.download === 'function') {
+// 			player.value.download = props.download(props.src || '');
+// 		}
+// 	}
+// }
 
 function appendCloseIcon() {
 	// Note: $refs would need to be accessed via template refs in Composition API
