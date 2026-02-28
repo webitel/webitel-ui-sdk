@@ -27,11 +27,12 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
+import { computed, inject, onMounted, ref } from 'vue';
 import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-import { computed, inject, onMounted, ref } from 'vue';
+import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 
 import vClickaway from '../../../directives/clickaway/clickaway.js';
 import isEmpty from '../../../scripts/isEmpty.js';
@@ -81,6 +82,14 @@ const v$ = useVuelidate(
 							// if not required, no need to validate
 							if (!questionModel.value.required) return true;
 
+							// For yes-type required questions, only "yes" (score === 1) is valid
+							if (
+								questionModel.value.type === EngineAuditQuestionType.QuestionYes
+							) {
+								return !!(value && value.score === 1);
+							}
+
+							// For other types, having a score is sufficient
 							if (value && value?.score != null) {
 								return true;
 							}
