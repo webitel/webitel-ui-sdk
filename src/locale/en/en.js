@@ -561,8 +561,12 @@ export default deepmerge(
 						return `${linked('reusable.add')} contacts`;
 					},
 					[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-					[IconAction.SORT_ASC]: 'Sort ascending',
-					[IconAction.SORT_DESC]: 'Sort descending',
+					[IconAction.SORT]: ({ named }) => {
+						const order = named('order');
+						if (order === 'asc') return 'Sort ascending';
+						if (order === 'desc') return 'Sort descending';
+						return 'Sort';
+					},
 				},
 			},
 			errorPages: {

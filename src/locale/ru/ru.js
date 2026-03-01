@@ -546,8 +546,12 @@ export default {
 					return `${linked('reusable.add')} контакты`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-				[IconAction.SORT_ASC]: 'Сортировка по возрастанию',
-				[IconAction.SORT_DESC]: 'Сортировка по убыванию',
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Сортировка по возрастанию';
+					if (order === 'desc') return 'Сортировка по убыванию';
+					return 'Сортировка';
+				},
 			},
 		},
 		errorPages: {

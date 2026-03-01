@@ -552,8 +552,12 @@ export default {
 					return `${linked('reusable.add')} contacts`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-				[IconAction.SORT_ASC]: 'Өсу бойынша сұрыптау',
-				[IconAction.SORT_DESC]: 'Кему бойынша сұрыптау',
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Өсу бойынша сұрыптау';
+					if (order === 'desc') return 'Кему бойынша сұрыптау';
+					return 'Сұрыптау';
+				},
 			},
 		},
 		errorPages: {

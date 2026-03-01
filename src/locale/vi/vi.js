@@ -554,8 +554,12 @@ export default {
 					return `${linked('reusable.add')} liên hệ`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-				[IconAction.SORT_ASC]: 'Sắp xếp tăng dần',
-				[IconAction.SORT_DESC]: 'Sắp xếp giảm dần',
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Sắp xếp tăng dần';
+					if (order === 'desc') return 'Sắp xếp giảm dần';
+					return 'Sắp xếp';
+				},
 			},
 		},
 		errorPages: {

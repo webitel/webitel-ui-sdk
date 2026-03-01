@@ -545,8 +545,12 @@ export default {
 					return `${linked('reusable.add')} контакти`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-				[IconAction.SORT_ASC]: 'Сортування за зростанням',
-				[IconAction.SORT_DESC]: 'Сортування за спаданням',
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Сортування за зростанням';
+					if (order === 'desc') return 'Сортування за спаданням';
+					return 'Сортування';
+				},
 			},
 		},
 		errorPages: {

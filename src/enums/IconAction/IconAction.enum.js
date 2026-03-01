@@ -23,8 +23,7 @@ const IconAction = Object.freeze({
 	ADD_CONTACT: 'add-contact',
 	DOWNLOAD_PDF: 'download-pdf',
 	CHAT: 'chat',
-	SORT_ASC: 'sort-asc',
-	SORT_DESC: 'sort-desc',
+	SORT: 'sort',
 });
 
 export default IconAction;

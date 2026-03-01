@@ -555,8 +555,12 @@ export default {
 					return `${linked('reusable.add')} contacte`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
-				[IconAction.SORT_ASC]: 'Sortare crescătoare',
-				[IconAction.SORT_DESC]: 'Sortare descrescătoare',
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Sortare crescătoare';
+					if (order === 'desc') return 'Sortare descrescătoare';
+					return 'Sortare';
+				},
 			},
 		},
 		errorPages: {
