@@ -24,6 +24,7 @@
       <wt-icon-action
         :action="action"
         :disabled="props[`disabled:${kebabToCamel(action)}`]"
+        :sort-order="action === IconAction.SORT ? props.sortOrder : null"
         @click="handleActionClick(action)"
       />
     </slot>
@@ -40,6 +41,7 @@ import {
 	sectionActionsOrder,
 	tableActionsOrder,
 } from './WtActionBarActionsOrder.js';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 const props = defineProps({
 	/**
@@ -80,6 +82,12 @@ const props = defineProps({
 	exclude: {
 		type: Array,
 		default: () => [],
+	},
+	sortOrder: {
+		type: String,
+		default: null,
+		required: false,
+		validator: (v) => Object.values(SortSymbols).includes(v),
 	},
 
 	/**

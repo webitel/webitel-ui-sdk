@@ -555,6 +555,12 @@ export default {
 					return `${linked('reusable.add')} kontaktlar`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Oʻsish tartibida saralash';
+					if (order === 'desc') return 'Kamayish tartibida saralash';
+					return 'Saralash';
+				},
 			},
 		},
 		errorPages: {

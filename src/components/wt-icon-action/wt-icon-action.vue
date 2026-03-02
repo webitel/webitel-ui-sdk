@@ -1,6 +1,6 @@
 <template>
   <wt-icon-btn
-    v-tooltip="t(iconAction.hint)"
+    v-tooltip="t(iconAction.hint, iconAction.hintParams)"
     :disabled="disabled"
     :icon="iconAction.icon"
     :size="size"
@@ -14,6 +14,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import { WtIconActionIconMappings } from './iconMappings.js';
 
 const props = defineProps({
@@ -38,6 +39,7 @@ const props = defineProps({
 				IconAction.ADD_CONTACT,
 				IconAction.DOWNLOAD_PDF,
 				IconAction.CHAT,
+				IconAction.SORT,
 			]).includes(v),
 	},
 	disabled: {
@@ -49,6 +51,11 @@ const props = defineProps({
 		default: 'md',
 		required: false,
 	},
+	sortOrder: {
+		type: String,
+		default: null,
+		validator: (v) => Object.values(SortSymbols).includes(v),
+	},
 });
 
 const emit = defineEmits([
@@ -59,6 +66,18 @@ const emit = defineEmits([
 const { t } = useI18n();
 
 const iconAction = computed(() => {
+	if (props.action === IconAction.SORT) {
+		const icon =
+			props.sortOrder === SortSymbols.DESC ? 'sort-desc' : 'sort-asc';
+		return {
+			icon,
+			hint: 'webitelUI.iconAction.hints.sort',
+			hintParams: {
+				order: props.sortOrder,
+			},
+		};
+	}
+
 	const icon = WtIconActionIconMappings[props.action];
 
 	if (!icon) {

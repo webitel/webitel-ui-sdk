@@ -548,6 +548,12 @@ export default {
 					return `${linked('reusable.add')} contacts`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === 'asc') return 'Orden ascendente';
+					if (order === 'desc') return 'Orden descendente';
+					return 'Ordenar';
+				},
 			},
 		},
 		errorPages: {
