@@ -3,38 +3,44 @@
 		ref="player"
 		class="wt-player"
 		:class="`wt-player--position-${position}`"
-		:src="src"
+		:src="normalizedSrc"
 		:loop="loop"
 		:autoplay="autoplay"
 	>
 
 		<media-provider />
 
-    <media-controls-group class="controls-group">
+		<media-controls-group class="controls-group">
 
-		  <play-button />
-      <time-slider />
-      <time-group />
-      <mute-button />
-      <volume-slide />
+			<play-button />
+			<time-slider />
+			<time-group />
+			<mute-button />
+			<volume-slide />
 
-      <media-button
-        v-if="props.download"
-        class="download-button"
-        @click="downloadMedia"
-      >
-        <wt-icon-btn icon="plyr-download" size="sm" />
-      </media-button>
+			<media-button
+				v-if="props.download"
+				class="download-button"
+				@click="downloadMedia"
+			>
+				<wt-icon-btn
+					icon="plyr-download"
+					size="sm"
+				/>
+			</media-button>
 
-      <media-button
-        v-if="props.closable"
-        class="close-button"
-        @click="$emit('close')"
-      >
-        <wt-icon-btn icon="close" size="sm" />
-      </media-button>
+			<media-button
+				v-if="props.closable"
+				class="close-button"
+				@click="$emit('close')"
+			>
+				<wt-icon-btn
+					icon="close"
+					size="sm"
+				/>
+			</media-button>
 
-    </media-controls-group>
+		</media-controls-group>
 	</media-player>
 </template>
 
@@ -133,13 +139,30 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-	initialized: []; // todo
+	initialized: []; // is needed?
 	close: [];
 }>();
 
-onMounted(() => {
-	// this.setupPlayer();
+const normalizedSrc = computed(() => {
+	if (!props.src?.type) return props.src;
+
+	const type = handleVidstackUnsupportedAudioTypes(props.src.type);
+
+	return {
+		src: props.src.src,
+		type,
+	};
 });
+
+// https://github.com/vidstack/player/issues/1453
+function handleVidstackUnsupportedAudioTypes(mimeType: string): AudioMimeType {
+	const unsupportedTypes = [
+		'audio/wav',
+	];
+	return unsupportedTypes.includes(mimeType)
+		? 'audio/mp3'
+		: (mimeType as AudioMimeType);
+}
 
 function downloadMedia() {
 	const src = typeof props.src === 'string' ? props.src : props.src?.src;
@@ -163,30 +186,29 @@ function downloadMedia() {
 </script>
 
 <style scoped>
-
 .wt-player {
-  width: auto;
-  max-width: 100%;
-  box-shadow: var(--elevation-10);
-  border-radius: var(--border-radius);
-  background: var(--wt-popup-background-color);
-  z-index: 2;
+	width: auto;
+	max-width: 100%;
+	box-shadow: var(--elevation-10);
+	border-radius: var(--border-radius);
+	background: var(--wt-popup-background-color);
+	z-index: 2;
 }
 
 .controls-group {
-  padding: var(--spacing-sm);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  gap: var(--spacing-sm);
+	padding: var(--spacing-sm);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	gap: var(--spacing-sm);
 }
 
 .close-button,
 .download-button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
 .wt-player--position-fixed {
@@ -204,5 +226,4 @@ function downloadMedia() {
 .wt-player--position-static {
 	position: static;
 }
-
 </style>
