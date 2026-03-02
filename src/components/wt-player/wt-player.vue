@@ -21,9 +21,9 @@
       <media-button
         v-if="props.download"
         class="download-button"
-        @click="setupDownload"
+        @click="downloadMedia"
       >
-        <wt-icon icon="plyr-download" size="sm" />
+        <wt-icon-btn icon="plyr-download" size="sm" />
       </media-button>
 
       <media-button
@@ -31,7 +31,7 @@
         class="close-button"
         @click="$emit('close')"
       >
-        <wt-icon icon="close" size="sm" />
+        <wt-icon-btn icon="close" size="sm" />
       </media-button>
 
     </media-controls-group>
@@ -43,7 +43,6 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-
 import type { PlyrControl, MediaSrc } from 'vidstack';
 import { computed, onMounted, watch } from 'vue';
 
@@ -60,6 +59,11 @@ interface Props {
 	 * @type {MediaSrc}
 	 */
 	src?: MediaSrc;
+	/**
+	 * Media id
+	 * @type {string}
+	 */
+	id?: string;
 	/**
 	 * Autoplay media on load
 	 * @type {boolean}
@@ -130,72 +134,43 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
 	initialized: []; // todo
-	close: []; // todo
+	close: [];
 }>();
-
-// todo??
-watch(
-	() => props.src,
-	() => {
-		// setupDownload();
-	},
-);
-// todo??
-watch(
-	() => props.download,
-	() => {
-		// setupDownload();
-	},
-);
 
 onMounted(() => {
 	// this.setupPlayer();
 });
 
-async function setupPlayer() {
-	// if (props.resetVolume) makeVolumeReset();
-	// if (props.download) setupDownload();
-	// if (props.closable) appendCloseIcon();
-	// emit('initialized', player.value);
-}
+function downloadMedia() {
+	const src = typeof props.src === 'string' ? props.src : props.src?.src;
 
-// function makeVolumeReset() {
-// 	if (player.value) {
-// 		player.value.volume = 1;
-// 		player.value.muted = false;
-// 	}
-// }
+	const url =
+		typeof props.download === 'function' ? props.download(src) : props.download;
 
-// function setupDownload() {
-// 	if (!props.download) {
-// 		setupPlayer();
-// 	} else if (player.value) {
-// 		if (typeof props.download === 'string') {
-// 			player.value.download = props.download;
-// 		} else if (typeof props.download === 'function') {
-// 			player.value.download = props.download(props.src || '');
-// 		}
-// 	}
-// }
+	const ext = props.src?.type.split('/').pop();
 
-function appendCloseIcon() {
-	// Note: $refs would need to be accessed via template refs in Composition API
-	// const plyrControls = playerRef.value?.plyr?.elements?.controls;
-	// const closeIcon = closeIconRef.value?.$el;
-	// if (plyrControls) {
-	// 	plyrControls.append(closeIcon);
-	// }
+	const filename = props.id || 'unknown';
+
+	// download with [a] tag el
+	const link = document.createElement('a');
+	link.style.display = 'none';
+	link.href = url;
+	link.download = `${filename}.${ext}`;
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
 }
 </script>
 
 <style scoped>
 
 .wt-player {
-	bottom: 60px;
-  width: 100%;
+  width: auto;
   max-width: 100%;
   box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
+  background: var(--wt-popup-background-color);
+  z-index: 2;
 }
 
 .controls-group {
@@ -214,14 +189,16 @@ function appendCloseIcon() {
   cursor: pointer;
 }
 
+.wt-player--position-fixed {
+	position: fixed;
+}
+
 .wt-player--position-sticky {
 	position: sticky;
-	z-index: 2;
 }
 
 .wt-player--position-relative {
 	position: relative;
-	bottom: unset;
 }
 
 .wt-player--position-static {
