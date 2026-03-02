@@ -24,7 +24,7 @@
       <wt-icon-action
         :action="action"
         :disabled="props[`disabled:${kebabToCamel(action)}`]"
-        :sort-order="action === IconAction.SORT ? props.sortOrder : null"
+        v-bind="getActionProps(action)"
         @click="handleActionClick(action)"
       />
     </slot>
@@ -83,7 +83,8 @@ const props = defineProps({
 		type: Array,
 		default: () => [],
 	},
-	sortOrder: {
+
+	'sort:order': {
 		type: String,
 		default: null,
 		required: false,
@@ -130,6 +131,17 @@ const shownActions = computed(() => {
 
 const handleActionClick = (action) => {
 	emit(`click:${action}`);
+};
+
+const getActionProps = (action) => {
+	switch (action) {
+		case IconAction.SORT:
+			return {
+				'sort:order': props['sort:order'],
+			};
+		default:
+			return {};
+	}
 };
 </script>
 

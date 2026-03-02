@@ -51,7 +51,7 @@ const props = defineProps({
 		default: 'md',
 		required: false,
 	},
-	sortOrder: {
+	'sort:order': {
 		type: String,
 		default: null,
 		validator: (v) => Object.values(SortSymbols).includes(v),
@@ -68,12 +68,12 @@ const { t } = useI18n();
 const iconAction = computed(() => {
 	if (props.action === IconAction.SORT) {
 		const icon =
-			props.sortOrder === SortSymbols.DESC ? 'sort-desc' : 'sort-asc';
+			props['sort:order'] === SortSymbols.DESC ? 'sort-desc' : 'sort-asc';
 		return {
 			icon,
 			hint: 'webitelUI.iconAction.hints.sort',
 			hintParams: {
-				order: props.sortOrder,
+				order: props['sort:order'],
 			},
 		};
 	}

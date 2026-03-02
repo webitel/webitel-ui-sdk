@@ -21,6 +21,7 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
 	// describes reusable buttons, actions, default titles, and other ui elements
@@ -548,8 +549,8 @@ export default {
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
 				[IconAction.SORT]: ({ named }) => {
 					const order = named('order');
-					if (order === 'asc') return 'Сортировка по возрастанию';
-					if (order === 'desc') return 'Сортировка по убыванию';
+					if (order === SortSymbols.ASC) return 'Сортировка по возрастанию';
+					if (order === SortSymbols.DESC) return 'Сортировка по убыванию';
 					return 'Сортировка';
 				},
 			},

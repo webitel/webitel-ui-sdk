@@ -21,6 +21,7 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
 	reusable: {
@@ -550,8 +551,8 @@ export default {
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
 				[IconAction.SORT]: ({ named }) => {
 					const order = named('order');
-					if (order === 'asc') return 'Orden ascendente';
-					if (order === 'desc') return 'Orden descendente';
+					if (order === SortSymbols.ASC) return 'Orden ascendente';
+					if (order === SortSymbols.DESC) return 'Orden descendente';
 					return 'Ordenar';
 				},
 			},
