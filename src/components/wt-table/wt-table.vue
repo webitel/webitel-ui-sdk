@@ -408,7 +408,7 @@ const isAllSelected = computed(() => {
 const sort = ({ sortField }) => {
 	const col = dataHeaders.value.find((header) => header.field === sortField);
 	if (!isColSortable(col)) return;
-	const nextSort = getNextSortOrder(col.sort);
+	const nextSort = getNextSortOrder(col.sort, col.sortMode);
 	emit('sort', col, nextSort);
 };
 

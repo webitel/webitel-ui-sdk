@@ -4,5 +4,6 @@ export type WtTableHeader = {
 	text?: string;
 	width?: string;
 	sort?: boolean;
+	sortMode?: string;
 	show?: boolean;
 };

@@ -215,7 +215,7 @@ const isColSortable = ({ sort }: WtTableHeader) => {
 
 const sort = (col: WtTableHeader) => {
 	if (!isColSortable(col)) return;
-	const nextSort = getNextSortOrder(col.sort);
+	const nextSort = getNextSortOrder(col.sort, col.sortMode);
 
 	emit('sort', col, nextSort);
 };

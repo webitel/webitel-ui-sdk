@@ -8,6 +8,11 @@ import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import { useTableStoreConfig } from '../types/tableStore.types';
 
+enum SortMode {
+	ASC_DESC = 'asc-desc',
+	ASC_DESC_NONE = 'asc-desc-none',
+}
+
 interface TableHeadersStoreBodyParams {
 	rawHeaders: WtTableHeader[];
 	id: string;
@@ -131,7 +136,15 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateSort = (column) => {
-		const getNextSortOrder = (sort) => {
+		const getNextSortOrder = (sort, sortMode = SortMode.ASC_DESC_NONE) => {
+			if (sortMode === SortMode.ASC_DESC) {
+				return sort === SortSymbols.ASC ? SortSymbols.DESC : SortSymbols.ASC;
+			}
+
+			// Чому є дублювання ???
+			// Хто робитиме збереження в локал стореж?
+			// Чи воно вже є?
+
 			switch (sort) {
 				case SortSymbols.NONE:
 					return SortSymbols.ASC;
@@ -162,7 +175,7 @@ export const tableHeadersStoreBody = ({
 			});
 		};
 
-		const order = getNextSortOrder(column.sort);
+		const order = getNextSortOrder(column.sort, column.sortMode);
 
 		headers.value = changeHeadersSort({
 			headers: headers.value,
