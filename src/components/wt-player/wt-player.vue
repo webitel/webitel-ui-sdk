@@ -7,29 +7,34 @@
 		:loop="loop"
 		:autoplay="autoplay"
 	>
-		<media-provider></media-provider>
-		<media-plyr-layout
-			:controls="controls"
-			:download="download"
-			custom-icons
-		>
-			<wt-icon icon="plyr-airplay" slot="airplay-icon" />
-			<wt-icon icon="plyr-captions-off" slot="captions-off-icon" />
-			<wt-icon icon="plyr-captions-on" slot="captions-on-icon" />
-			<wt-icon icon="plyr-download" slot="download-icon" />
-			<wt-icon icon="plyr-enter-fullscreen" slot="enter-fullscreen-icon" />
-			<wt-icon icon="plyr-pip" slot="enter-pip-icon" />
-			<wt-icon icon="plyr-exit-fullscreen" slot="exit-fullscreen-icon" />
-			<wt-icon icon="plyr-pip" slot="exit-pip-icon" />
-			<wt-icon icon="plyr-fast-forward" slot="fast-forward-icon" />
-			<wt-icon icon="plyr-muted" slot="muted-icon" />
-			<wt-icon icon="plyr-pause" slot="pause-icon" />
-			<wt-icon icon="plyr-play" slot="play-icon" />
-			<wt-icon icon="plyr-restart" slot="restart-icon" />
-			<wt-icon icon="plyr-rewind" slot="rewind-icon" />
-			<wt-icon icon="plyr-settings" slot="settings-icon" />
-			<wt-icon icon="plyr-volume" slot="volume-icon" />
-		</media-plyr-layout>
+
+		<media-provider />
+
+    <media-controls-group class="controls-group">
+
+		  <play-button />
+      <time-slider />
+      <time-group />
+      <mute-button />
+      <volume-slide />
+
+      <media-button
+        v-if="props.download"
+        class="download-button"
+        @click="setupDownload"
+      >
+        <wt-icon icon="plyr-download" size="sm" />
+      </media-button>
+
+      <media-button
+        v-if="props.closable"
+        class="close-button"
+        @click="$emit('close')"
+      >
+        <wt-icon icon="close" size="sm" />
+      </media-button>
+
+    </media-controls-group>
 	</media-player>
 </template>
 
@@ -39,17 +44,22 @@
 >
 import 'vidstack/bundle';
 
-import type { PlyrControl } from 'vidstack';
+import type { PlyrControl, MediaSrc } from 'vidstack';
 import { computed, onMounted, watch } from 'vue';
 
 import WtIcon from '../wt-icon/wt-icon.vue';
+import PlayButton from './src/components/buttons/play-button.vue';
+import TimeSlider from './src/components/sliders/time-slider.vue';
+import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
+import MuteButton from './src/components/buttons/mute-button.vue';
+import VolumeSlide from './src/components/sliders/volume-slide.vue';
 
 interface Props {
 	/**
-	 * Media source URL
-	 * @type {string}
+	 * vidstack media src
+	 * @type {MediaSrc}
 	 */
-	src?: string;
+	src?: MediaSrc;
 	/**
 	 * Autoplay media on load
 	 * @type {boolean}
@@ -123,39 +133,18 @@ const emit = defineEmits<{
 	close: []; // todo
 }>();
 
-const controls = computed<PlyrControl[]>(() => {
-	/**
-	 * order matters!
-	 */
-	let baseControls: PlyrControl[] = [
-		'play',
-		'progress',
-		'mute+volume',
-		'download',
-		'fullscreen',
-		'settings',
-	];
-	if (props.hideDuration) {
-		baseControls = baseControls.filter((control) => control !== 'duration');
-	}
-	if (!props.download) {
-		baseControls = baseControls.filter((control) => control !== 'download');
-	}
-	return baseControls;
-});
-
 // todo??
 watch(
 	() => props.src,
 	() => {
-		setupDownload();
+		// setupDownload();
 	},
 );
 // todo??
 watch(
 	() => props.download,
 	() => {
-		setupDownload();
+		// setupDownload();
 	},
 );
 
@@ -164,31 +153,30 @@ onMounted(() => {
 });
 
 async function setupPlayer() {
-	if (props.resetVolume) makeVolumeReset();
-	if (props.download) setupDownload();
-
-	if (props.closable) appendCloseIcon();
-	emit('initialized', player.value);
+	// if (props.resetVolume) makeVolumeReset();
+	// if (props.download) setupDownload();
+	// if (props.closable) appendCloseIcon();
+	// emit('initialized', player.value);
 }
 
-function makeVolumeReset() {
-	if (player.value) {
-		player.value.volume = 1;
-		player.value.muted = false;
-	}
-}
+// function makeVolumeReset() {
+// 	if (player.value) {
+// 		player.value.volume = 1;
+// 		player.value.muted = false;
+// 	}
+// }
 
-function setupDownload() {
-	if (!props.download) {
-		setupPlayer();
-	} else if (player.value) {
-		if (typeof props.download === 'string') {
-			player.value.download = props.download;
-		} else if (typeof props.download === 'function') {
-			player.value.download = props.download(props.src || '');
-		}
-	}
-}
+// function setupDownload() {
+// 	if (!props.download) {
+// 		setupPlayer();
+// 	} else if (player.value) {
+// 		if (typeof props.download === 'string') {
+// 			player.value.download = props.download;
+// 		} else if (typeof props.download === 'function') {
+// 			player.value.download = props.download(props.src || '');
+// 		}
+// 	}
+// }
 
 function appendCloseIcon() {
 	// Note: $refs would need to be accessed via template refs in Composition API
@@ -201,8 +189,29 @@ function appendCloseIcon() {
 </script>
 
 <style scoped>
+
 .wt-player {
 	bottom: 60px;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+}
+
+.controls-group {
+  padding: var(--spacing-sm);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  gap: var(--spacing-sm);
+}
+
+.close-button,
+.download-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .wt-player--position-sticky {
@@ -219,75 +228,4 @@ function appendCloseIcon() {
 	position: static;
 }
 
-.wt-player :deep(.plyr) {
-	box-shadow: var(--elevation-10);
-	border-radius: var(--border-radius);
-	max-width: 100%;
-}
-
-.wt-player :deep(.plyr__controls > .plyr__control),
-.wt-player :deep(.plyr__controls > .plyr__controls__item > .plyr__control) {
-	padding: var(--plyr-controls-icon-padding);
-}
-
-.wt-player :deep(.plyr__controls > .plyr__control > svg),
-.wt-player :deep(.plyr__controls > .plyr__controls__item > .plyr__control > svg) {
-	width: var(--plyr-controls-icon-size);
-	height: var(--plyr-controls-icon-size);
-}
-
-.wt-player :deep(.plyr__control--overlaid svg) {
-	left: 0;
-	/* reset plyr style for video "play" button icon */
-}
-
-.wt-player :deep(.plyr__progress input),
-.wt-player :deep(.plyr__volume input) {
-	cursor: pointer;
-}
-
-.wt-player :deep(.plyr__progress__buffer) {
-	background: var(--wt-player-audio-progress-background);
-}
-
-.wt-player :deep(.plyr__progress input)::-webkit-slider-thumb,
-.wt-player :deep(.plyr__volume input)::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	transition: var(--transition);
-	border: var(--wt-slider-border);
-	border-radius: var(--wt-slider-pointer-radius);
-	background: var(--wt-slider-pointer-background-color);
-}
-
-.wt-player :deep(.plyr__progress input)::-webkit-slider-runnable-track,
-.wt-player :deep(.plyr__volume input)::-webkit-slider-runnable-track {
-	-webkit-appearance: none;
-}
-
-.wt-player :deep(.plyr__progress input)::-moz-range-thumb,
-.wt-player :deep(.plyr__volume input)::-moz-range-thumb {
-	-moz-appearance: none;
-	transition: var(--transition);
-	border: var(--wt-slider-border);
-	border-color: var(--wt-slider-pointer-border-color);
-	border-radius: var(--wt-slider-pointer-radius);
-	background: var(--wt-slider-pointer-background-color);
-	width: var(--wt-slider-pointer-size);
-	height: var(--wt-slider-pointer-size);
-}
-
-.wt-player :deep(.plyr__progress input)::-moz-range-track,
-.wt-player :deep(.plyr__volume input)::-moz-range-track {
-	-moz-appearance: none;
-}
-
-.wt-player :deep(.plyr__progress input)::-ms-thumb,
-.wt-player :deep(.plyr__volume input)::-ms-thumb {
-	appearance: none;
-}
-
-.wt-player :deep(.plyr__progress input)::-ms-track,
-.wt-player :deep(.plyr__volume input)::-ms-track {
-	appearance: none;
-}
 </style>

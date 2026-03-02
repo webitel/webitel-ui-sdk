@@ -8,7 +8,7 @@
   lang="ts"
   setup
 >
-import WtSlider from '../../../../../../../components/wt-slider/wt-slider.vue';
+import WtSlider from '../../../../wt-slider/wt-slider.vue';
 </script>
 
 <style scoped>
@@ -16,10 +16,7 @@ import WtSlider from '../../../../../../../components/wt-slider/wt-slider.vue';
   display: inline-flex;
   align-items: center;
   width: 100%;
-  padding: 10px 0;
-}
-
-.time-slider .time-slider:hover {
+  padding: var(--spacing-xs) 0;
   cursor: pointer;
 }
 
