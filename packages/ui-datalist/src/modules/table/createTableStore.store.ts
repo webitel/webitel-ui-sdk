@@ -226,21 +226,8 @@ export const tableStoreBody = <
 		}
 	};
 
-	const setupStore = async () => {
-		if (isStoreSetUp.value) {
-			return;
-		}
-
-		if (!disablePersistence) {
-			await Promise.allSettled([
-				setupPaginationPersistence(),
-				setupFiltersPersistence(),
-				setupHeadersPersistence(),
-			]);
-		}
-
+	const setupWatchers = () => {
 		let loadingAfterFiltersChange = false;
-
 		watch(
 			[
 				() => filtersManager.value.getAllValues(),
@@ -277,6 +264,20 @@ export const tableStoreBody = <
 				}
 			},
 		);
+	};
+
+	const setupStore = async () => {
+		if (isStoreSetUp.value) {
+			return;
+		}
+
+		if (!disablePersistence) {
+			await Promise.allSettled([
+				setupPaginationPersistence(),
+				setupFiltersPersistence(),
+				setupHeadersPersistence(),
+			]);
+		}
 
 		isStoreSetUp.value = true;
 	};
@@ -291,7 +292,7 @@ export const tableStoreBody = <
 		}
 
 		await setupStore();
-
+		setupWatchers();
 		return loadDataList();
 	};
 
