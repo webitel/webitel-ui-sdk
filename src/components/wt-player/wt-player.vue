@@ -3,7 +3,7 @@
 		ref="player"
 		class="wt-player"
 		:class="`wt-player--position-${position}`"
-		:src="url"
+		:src="src"
 		:loop="loop"
 		:autoplay="autoplay"
 	>
@@ -44,7 +44,7 @@
 >
 import 'vidstack/bundle';
 
-import type { PlyrControl } from 'vidstack';
+import type { PlyrControl, MediaSrc } from 'vidstack';
 import { computed, onMounted, watch } from 'vue';
 
 import WtIcon from '../wt-icon/wt-icon.vue';
@@ -56,17 +56,16 @@ import VolumeSlide from './src/components/sliders/volume-slide.vue';
 
 interface Props {
 	/**
-	 * Media source URL
-	 * @type {string}
+	 * vidstack media src
+	 * @type {MediaSrc}
 	 */
-	src?: string;
+	src?: MediaSrc;
 	/**
 	 * Autoplay media on load
 	 * @type {boolean}
 	 * @default true
 	 */
 	autoplay?: boolean;
-	type?: string;
 	/**
 	 * Loop media playback
 	 * @type {boolean}
@@ -127,18 +126,12 @@ const props = withDefaults(defineProps<Props>(), {
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
-	type: 'audio/mp3',
 });
 
 const emit = defineEmits<{
 	initialized: []; // todo
 	close: []; // todo
 }>();
-
-const url = {
-	src: props.src,
-	type: props.type,
-};
 
 // todo??
 watch(

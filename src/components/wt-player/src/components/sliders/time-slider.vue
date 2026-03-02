@@ -4,7 +4,10 @@
   </media-time-slider>
 </template>
 
-<script lang="ts" setup>
+<script
+  lang="ts"
+  setup
+>
 import WtSlider from '../../../../wt-slider/wt-slider.vue';
 </script>
 
@@ -26,12 +29,12 @@ import WtSlider from '../../../../wt-slider/wt-slider.vue';
 }
 
 .time-slider:deep(.p-slider-range) {
-  /* set vidstach slider variable to primeview component @author liza-pohrsnichna */
+  /* set vidstach slider variable to primevue component @author liza-pohrsnichna */
   width: var(--slider-fill, 0%) !important;
 }
 
 .time-slider:deep(.p-slider-handle) {
-  /*set vidstach slider variable to primeview component @author liza-pohrsnichna */
+  /*set vidstach slider variable to primevue component @author liza-pohrsnichna */
   transition: transform ease var(--transition);
   inset-inline-start: var(--slider-fill, 0%) !important;
 }
