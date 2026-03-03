@@ -7,30 +7,30 @@ export function useChatMessageFile(
 ) {
 	const fileRef = toRef(file);
 
-	const type = computed(() => {
+	const fileType = computed(() => {
 		return fileRef.value?.mime;
 	});
 
-	const src = computed(() => {
-		return fileRef.value?.url || fileRef.value?.streamUrl;
+	const fileSrc = computed(() => {
+		return fileRef.value?.streamUrl || fileRef.value?.url;
 	});
 
 	const image = computed(() => {
-		const isImage = type.value?.includes('image');
-		const isHEIC = type.value?.includes('heic');
+		const isImage = fileType.value?.includes('image');
+		const isHEIC = fileType.value?.includes('heic');
 
 		if (isHEIC) return null;
 
 		return isImage && fileRef.value; //https://webitel.atlassian.net/browse/WTEL-6268
 	});
 	const media = computed(() => {
-		const isMedia =
-			isIncludeMediaType(src.value) || isIncludeMediaType(type.value);
-
-		return isMedia && fileRef.value;
+		return (
+			fileRef.value &&
+			(isMediaType(fileType.value) || isMediaType(fileSrc.value))
+		);
 	});
 
-	const isIncludeMediaType = (value: string) => {
+	const isMediaType = (value: string) => {
 		return !!(value?.includes('audio') || value?.includes('video'));
 	};
 
