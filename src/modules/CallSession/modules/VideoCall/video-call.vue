@@ -6,7 +6,7 @@
     :stream="mainStream"
     :static="props.static"
     :username="props.username"
-    :hide-controls-panel="isOnHold"
+    :hide-controls-panel="props.hideControlsPanel"
     autoplay
     class="video-call"
     hide-background
@@ -161,7 +161,7 @@ const props = withDefaults(
 		'receiver:video:enabled'?: boolean;
 
 		'call:onHold'?: boolean;
-		hideSenderOnHold?: boolean;
+		hideControlsPanel?: boolean;
 
 		'screenshot:status'?: ScreenshotStatus | null;
 		'screenshot:loading'?: boolean;
