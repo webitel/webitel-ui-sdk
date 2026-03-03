@@ -1,11 +1,11 @@
 <template>
 	<media-player
-		ref="player"
 		class="wt-player"
-		:class="`wt-player--position-${position}`"
+		:class="`wt-player--position-${props.position}`"
 		:src="normalizedSrc"
-		:loop="loop"
+		:loop="props.loop"
 		:autoplay="autoplay"
+    @ended="handleEnded"
 	>
 
 		<media-provider />
@@ -14,7 +14,7 @@
 
 			<play-button />
 			<time-slider />
-			<time-group :invertTime="props.invertTime" />
+			<time-group :countdown="props.countdownTimeMode" />
 			<mute-button />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
@@ -49,8 +49,8 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-import type { MediaSrc, PlyrControl } from 'vidstack';
-import { computed, onMounted, watch } from 'vue';
+import type { MediaSrc, AudioMimeType } from 'vidstack';
+import { computed, useTemplateRef } from 'vue';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
@@ -88,29 +88,23 @@ interface Props {
 	 */
 	download?: string | ((url: string) => string) | boolean;
 	/**
-	 * Plyr-specific prop. Resets player position to start on file end.
+	 * Resets player position to start after file has been played to the end
 	 * @type {boolean}
 	 * @default false
 	 */
-	resetOnEnd?: boolean; // todo??
+	resetOnEnd?: boolean;
 	/**
-	 * Show media time like duration with countdown
+	 * Show media time like duration with countdown. Example: "-00:12"
 	 * @type {boolean}
 	 * @default true
 	 */
-	invertTime?: boolean; // todo
+	countdownTimeMode?: boolean;
 	/**
 	 * Hide volume slider
 	 * @type {boolean}
 	 * @default false
 	 */
 	hideVolumeSlider?: boolean;
-	/**
-	 * Plyr is caching volume settings ("muted" too) so we could reset them at init
-	 * @type {boolean}
-	 * @default false
-	 */
-	resetVolume?: boolean; // todo??
 	/**
 	 * Shows close button
 	 * @type {boolean}
@@ -141,14 +135,13 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
-
 const normalizedSrc = computed(() => {
 	if (!props.src?.type) return props.src;
 
 	const type = handleVidstackUnsupportedAudioTypes(props.src.type);
 
 	return {
-		src: props.src.src,
+		src: props.src.src.replace('/download', '/stream'),
 		type,
 	};
 });
@@ -181,6 +174,13 @@ function downloadMedia() {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
+}
+
+function handleEnded(event: Event) {
+	if (!props.resetOnEnd) return;
+
+	const player = event.target as HTMLMediaElement;
+	player.currentTime = 0;
 }
 </script>
 

@@ -1,20 +1,25 @@
 <template>
   <div class="time-group">
-    <media-time type="current" />
-    /
-    <media-time type="duration" />
-    <!--    TODO: invert time -->
-    <!--    <media-time type="buffered" />-->
+    <media-time v-if="props.countdown" type="current" remainder />
+
+    <template v-else>
+      <media-time type="current" />
+      /
+      <media-time type="duration" />
+    </template>
+
   </div>
 </template>
 
 <script setup lang="ts">
+import { withDefaults, defineProps } from 'vue';
+
 const props = withDefaults(
 	defineProps<{
-		invertTime?: boolean;
+		countdown?: boolean;
 	}>(),
 	{
-		invertTime: false,
+		countdown: false,
 	},
 );
 </script>
@@ -30,4 +35,5 @@ const props = withDefaults(
   align-items: center;
   gap: var(--spacing-2xs);
   color: var(--wt-player-video-control-bar-color);
-}</style>
+}
+</style>
