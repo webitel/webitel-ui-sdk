@@ -24,7 +24,6 @@ export function useChatMessageFile(
 		return isImage && fileRef.value; //https://webitel.atlassian.net/browse/WTEL-6268
 	});
 	const media = computed(() => {
-		console.log('type:', type.value);
 		const isMedia =
 			isIncludeMediaType(src.value) || isIncludeMediaType(type.value);
 

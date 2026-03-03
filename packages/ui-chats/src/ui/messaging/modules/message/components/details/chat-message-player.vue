@@ -45,7 +45,6 @@ const emit = defineEmits<{
 }>();
 
 const isVideo = computed(() => {
-	// console.log('mediaSrc?.src:', mediaSrc.value?.src, 'mediaSrc?.type:', mediaSrc.value?.type);
 	return (
 		mediaSrc.value?.src?.includes('video') ||
 		mediaSrc.value?.type?.includes('video')
