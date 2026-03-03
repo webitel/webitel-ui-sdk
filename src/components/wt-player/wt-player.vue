@@ -154,7 +154,11 @@ const normalizedSrc = computed(() => {
 	};
 });
 
-// https://github.com/vidstack/player/issues/1453
+/**
+ * https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733255
+ * https://github.com/vidstack/player/issues/1453
+ *
+ */
 function handleVidstackUnsupportedAudioTypes(mimeType: string): AudioMimeType {
 	const unsupportedTypes = [
 		'audio/wav',
