@@ -21,6 +21,7 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
 	// describes reusable buttons, actions, default titles, and other ui elements
@@ -552,6 +553,12 @@ export default {
 					return `${linked('reusable.add')} contacts`;
 				},
 				[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+				[IconAction.SORT]: ({ named }) => {
+					const order = named('order');
+					if (order === SortSymbols.ASC) return 'Өсу бойынша сұрыптау';
+					if (order === SortSymbols.DESC) return 'Кему бойынша сұрыптау';
+					return 'Сұрыптау';
+				},
 			},
 		},
 		errorPages: {
