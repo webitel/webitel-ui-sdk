@@ -141,7 +141,7 @@ const normalizedSrc = computed(() => {
 	const type = handleVidstackUnsupportedAudioTypes(props.src.type);
 
 	return {
-		src: props.src.src.replace('/download', '/stream'),
+		src: props.src.src,
 		type,
 	};
 });
