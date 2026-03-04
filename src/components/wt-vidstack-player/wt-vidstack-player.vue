@@ -49,17 +49,13 @@
 import 'vidstack/player';
 import 'vidstack/player/ui';
 import { computed, provide, ref } from 'vue';
+import type { VideoMimeType, MediaSrc } from 'vidstack';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
 
 interface Props {
-	src?:
-		| string
-		| {
-				src: string;
-				type?: string;
-		  };
+	src?: MediaSrc;
 	mime?: string;
 	autoplay?: boolean;
 	muted?: boolean;
@@ -116,17 +112,24 @@ provide('size', {
 
 const normalizedType = computed(() => {
 	// https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
-	if (props.mime) return props.mime;
+	const mimeType = props.mime || props.src.type || props.src.mime;
 
-	if (typeof props.src === 'string') {
-		if (props.src.includes('media')) return 'audio/mp3';
-		if (props.src.includes('mp3')) return 'audio/mp3';
-		if (props.src.includes('ogg') || props.src.includes('oga'))
-			return 'audio/ogg';
-	}
-
-	return 'video/mp4';
+	return handleVidstackUnsupportedVideoTypes(mimeType);
 });
+
+/**
+ * https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733255
+ * https://github.com/vidstack/player/issues/1453
+ *
+ */
+function handleVidstackUnsupportedVideoTypes(mimeType: string): VideoMimeType {
+	const unsupportedMimeTypes = [
+		'video/quicktime',
+	];
+	return unsupportedMimeTypes.includes(mimeType)
+		? 'video/mp4'
+		: (mimeType as VideoMimeType);
+}
 
 const normalizedSrc = computed(() => {
 	if (props.stream) {
