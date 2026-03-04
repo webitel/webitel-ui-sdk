@@ -12,7 +12,7 @@ v-if="!props.hideVideoDisplayPanel" :title="props.title" :username="props.userna
 
     <div class="video-layout-controls">
       <slot v-if="!props.hideControlsPanel" name="controls-panel">
-        <video-controls-panel />
+        <playback-controls-panel />
       </slot>
     </div>
   </media-controls>
@@ -22,7 +22,7 @@ v-if="!props.hideVideoDisplayPanel" :title="props.title" :username="props.userna
 import { inject } from 'vue';
 
 import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
-import { VideoControlsPanel } from '../index';
+import { PlaybackControlsPanel } from '../index';
 import VideoDisplayPanel from '../panels/video-display-panel/video-display-panel.vue';
 
 const { size } = inject<WtVidstackPlayerSizeProvider>('size');
