@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue';
+import { defineProps, withDefaults } from 'vue';
 
 const props = withDefaults(
 	defineProps<{

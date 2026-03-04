@@ -49,7 +49,7 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-import type { MediaSrc, AudioMimeType } from 'vidstack';
+import type { AudioMimeType, MediaSrc } from 'vidstack';
 import { computed, useTemplateRef } from 'vue';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
