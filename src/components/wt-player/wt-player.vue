@@ -52,7 +52,7 @@ import 'vidstack/bundle';
 import type { AudioMimeType, MediaSrc } from 'vidstack';
 import { computed, useTemplateRef } from 'vue';
 
-import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
+import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
