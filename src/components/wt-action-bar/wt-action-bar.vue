@@ -36,12 +36,12 @@ import { computed } from 'vue';
 
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import { kebabToCamel } from '../../scripts/caseConverters.js';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,
 } from './WtActionBarActionsOrder.js';
-import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 const props = defineProps({
 	/**

@@ -106,12 +106,8 @@ const emptySecondary = computed(
 );
 </script>
 
-<style scoped>
-.wt-headline .wt-button {
+<style>
+.wt-headline .wt-button:not(.wt-button-select__select-btn) {
   margin-left: var(--spacing-sm);
-}
-
-.wt-headline .wt-button:first-child {
-  margin-left: 0;
 }
 </style>

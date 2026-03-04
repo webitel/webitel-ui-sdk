@@ -85,6 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
 	username: '',
 	closable: false,
 	static: false,
+	hideControlsPanel: false,
 	videoObjectFit: 'contain',
 });
 
