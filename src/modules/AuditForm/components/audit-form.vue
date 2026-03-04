@@ -22,6 +22,7 @@
     <wt-textarea
       v-if="mode === AuditFormMode.Fill"
       :model-value="resultCommentModel"
+	  :disabled="readonly"
       class="call-evaluation-form__comment"
       :label="$t('reusable.comment')"
       @update:model-value="handleResultCommentUpdate"
