@@ -49,10 +49,11 @@
 import 'vidstack/player';
 import 'vidstack/player/ui';
 import { computed, provide, ref } from 'vue';
-import type { VideoMimeType, MediaSrc } from 'vidstack';
+import type { MediaSrc } from 'vidstack';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
+import { handleVidstackUnsupportedTypes } from './_shared/handleVidstackTypes';
 
 interface Props {
 	src?: MediaSrc;
@@ -111,25 +112,10 @@ provide('size', {
 });
 
 const normalizedType = computed(() => {
-	// https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
 	const mimeType = props.mime || props.src.type || props.src.mime;
 
-	return handleVidstackUnsupportedVideoTypes(mimeType);
+	return handleVidstackUnsupportedTypes(mimeType);
 });
-
-/**
- * https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733255
- * https://github.com/vidstack/player/issues/1453
- *
- */
-function handleVidstackUnsupportedVideoTypes(mimeType: string): VideoMimeType {
-	const unsupportedMimeTypes = [
-		'video/quicktime',
-	];
-	return unsupportedMimeTypes.includes(mimeType)
-		? 'video/mp4'
-		: (mimeType as VideoMimeType);
-}
 
 const normalizedSrc = computed(() => {
 	if (props.stream) {
