@@ -20,10 +20,6 @@ import WtSlider from '../../../../wt-slider/wt-slider.vue';
   cursor: pointer;
 }
 
-.time-slider:deep(.p-slider-handle) {
-  transform: scale(1.5);
-}
-
 .time-slider__slider {
   width: 100%;
 }
