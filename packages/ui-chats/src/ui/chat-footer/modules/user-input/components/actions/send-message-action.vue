@@ -1,8 +1,9 @@
 <template>
-  <wt-rounded-action
-    icon="chat-send"
-    color="accent"
+  <wt-button
     :size="size"
+    icon="chat-send"
+    color="secondary"
+    variant="outlined"
     rounded
     wide
     @click="emit(ChatAction.SendMessage)"
@@ -10,12 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { inject } from "vue";
+import { WtButton } from '@webitel/ui-sdk/components';
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { inject } from 'vue';
 
-import { ChatAction } from "../../enums/ChatAction.enum";
+import { ChatAction } from '../../enums/ChatAction.enum';
 
-const size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>('size');
 
 const emit = defineEmits<(e: typeof ChatAction.SendMessage) => void>();
 </script>
