@@ -45,10 +45,7 @@ const emit = defineEmits<{
 }>();
 
 const isVideo = computed(() => {
-	return (
-		mediaSrc.value?.src?.includes('video') ||
-		mediaSrc.value?.type?.includes('video')
-	);
+	return mediaSrc.value?.type?.includes('video');
 });
 const mediaSrc = computed(() => {
 	return {
