@@ -1,11 +1,11 @@
 <template>
 	<media-player
-		ref="player"
 		class="wt-player"
-		:class="`wt-player--position-${position}`"
+		:class="`wt-player--position-${props.position}`"
 		:src="normalizedSrc"
-		:loop="loop"
+		:loop="props.loop"
 		:autoplay="autoplay"
+    @ended="handleEnded"
 	>
 
 		<media-provider />
@@ -14,9 +14,9 @@
 
 			<play-button />
 			<time-slider />
-			<time-group />
+			<time-group :countdown="props.countdownTimeMode" />
 			<mute-button />
-			<volume-slide />
+			<volume-slider v-if="!props.hideVolumeSlider" />
 
 			<media-button
 				v-if="props.download"
@@ -49,15 +49,14 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-import type { MediaSrc, PlyrControl } from 'vidstack';
-import { computed, onMounted, watch } from 'vue';
+import type { AudioMimeType, MediaSrc } from 'vidstack';
+import { computed, useTemplateRef } from 'vue';
 
-import WtIcon from '../wt-icon/wt-icon.vue';
-import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
+import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
-import VolumeSlide from './src/components/sliders/volume-slide.vue';
+import VolumeSlider from './src/components/sliders/volume-slider.vue';
 
 interface Props {
 	/**
@@ -83,41 +82,35 @@ interface Props {
 	 */
 	loop?: boolean;
 	/**
-	 * Hides duration display
-	 * @type {boolean}
-	 * @default false
-	 */
-	hideDuration?: boolean;
-	/**
 	 * Download button configuration. If false, no download button will be shown
 	 * @type {string | Function | boolean}
 	 * @default (url) => url.replace('/stream', '/download')
 	 */
 	download?: string | ((url: string) => string) | boolean;
 	/**
-	 * Plyr-specific prop. Resets player position to start on file end.
+	 * Resets player position to start after file has been played to the end
 	 * @type {boolean}
 	 * @default false
 	 */
-	resetOnEnd?: boolean; // todo??
+	resetOnEnd?: boolean;
 	/**
-	 * Plyr-specific prop
+	 * Show media time like duration with countdown. Example: "-00:12"
 	 * @type {boolean}
 	 * @default true
 	 */
-	invertTime?: boolean; // todo
+	countdownTimeMode?: boolean;
 	/**
-	 * Plyr is caching volume settings ("muted" too) so we could reset them at init
+	 * Hide volume slider
 	 * @type {boolean}
 	 * @default false
 	 */
-	resetVolume?: boolean; // todo??
+	hideVolumeSlider?: boolean;
 	/**
 	 * Shows close button
 	 * @type {boolean}
 	 * @default true
 	 */
-	closable?: boolean; // todo??
+	closable?: boolean;
 	/**
 	 * Player position
 	 * @type {string}
@@ -129,10 +122,10 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
 	autoplay: true,
 	loop: false,
-	hideDuration: false,
 	download: () => (url: string) => url.replace('/stream', '/download'),
 	resetOnEnd: false,
 	invertTime: true,
+	hideVolumeSlider: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
@@ -142,7 +135,6 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
-
 const normalizedSrc = computed(() => {
 	if (!props.src?.type) return props.src;
 
@@ -154,7 +146,11 @@ const normalizedSrc = computed(() => {
 	};
 });
 
-// https://github.com/vidstack/player/issues/1453
+/**
+ * https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733255
+ * https://github.com/vidstack/player/issues/1453
+ *
+ */
 function handleVidstackUnsupportedAudioTypes(mimeType: string): AudioMimeType {
 	const unsupportedTypes = [
 		'audio/wav',
@@ -182,6 +178,13 @@ function downloadMedia() {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
+}
+
+function handleEnded(event: Event) {
+	if (!props.resetOnEnd) return;
+
+	const player = event.target as HTMLMediaElement;
+	player.currentTime = 0;
 }
 </script>
 

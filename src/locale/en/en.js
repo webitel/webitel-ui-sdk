@@ -22,6 +22,7 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import notTranslatable from './notTranslatable.en';
 
 export default deepmerge(
@@ -561,6 +562,12 @@ export default deepmerge(
 						return `${linked('reusable.add')} contacts`;
 					},
 					[IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
+					[IconAction.SORT]: ({ named }) => {
+						const order = named('order');
+						if (order === SortSymbols.ASC) return 'Sort ascending';
+						if (order === SortSymbols.DESC) return 'Sort descending';
+						return 'Sort';
+					},
 				},
 			},
 			errorPages: {

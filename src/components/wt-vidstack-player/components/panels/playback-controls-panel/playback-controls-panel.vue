@@ -1,5 +1,5 @@
 <template>
-  <controls-group class="media-control-panel">
+  <controls-group class="playback-control-panel">
     <play-button />
 
     <time-slider />
@@ -16,7 +16,7 @@ import TimeGroup from './components/time-group.vue';
 </script>
 
 <style scoped>
-.media-control-panel {
+.playback-control-panel {
   width: 100%;
   max-width: 100%;
 }
