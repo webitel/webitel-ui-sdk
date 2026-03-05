@@ -46,7 +46,7 @@ export function normalizeVidstackMediaSrc({
 			src: srcStr,
 			type,
 		}) ||
-		!isVideoSrc({
+		isVideoSrc({
 			src: srcStr,
 			type,
 		})
