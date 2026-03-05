@@ -1,30 +1,38 @@
-import { computed, type Ref, toRef } from "vue";
+import { computed, type Ref, toRef } from 'vue';
 
-import type { ChatMessageFile } from "../../../types/ChatMessage.types";
+import type { ChatMessageFile } from '../../../types/ChatMessage.types';
 
 export function useChatMessageFile(
 	file: ChatMessageFile | Ref<ChatMessageFile>,
 ) {
 	const fileRef = toRef(file);
 
-	const type = computed(() => {
+	const fileType = computed(() => {
 		return fileRef.value?.mime;
 	});
 
+	const fileSrc = computed(() => {
+		return fileRef.value?.streamUrl || fileRef.value?.url;
+	});
+
 	const image = computed(() => {
-		const isImage = type.value?.includes("image");
-		const isHEIC = type.value?.includes("heic");
+		const isImage = fileType.value?.includes('image');
+		const isHEIC = fileType.value?.includes('heic');
 
 		if (isHEIC) return null;
 
 		return isImage && fileRef.value; //https://webitel.atlassian.net/browse/WTEL-6268
 	});
-
 	const media = computed(() => {
-		const isMedia =
-			type.value?.includes("audio") || type.value?.includes("video");
-		return isMedia && fileRef.value;
+		return (
+			fileRef.value &&
+			(isMediaType(fileType.value) || isMediaType(fileSrc.value))
+		);
 	});
+
+	const isMediaType = (value: string) => {
+		return !!(value?.includes('audio') || value?.includes('video'));
+	};
 
 	const document = computed(() => {
 		return !media.value && !image.value && fileRef.value;
