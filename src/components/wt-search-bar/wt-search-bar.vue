@@ -5,6 +5,8 @@
     :invalid="invalid"
 		class="wt-search-bar"
     type="search"
+		:v="v"
+		:custom-validators="customValidators"
     @update:model-value="handleInput"
     @keyup="handleKeyup"
   >
