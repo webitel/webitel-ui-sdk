@@ -57,10 +57,16 @@ export function normalizeVidstackMediaSrc({
 		};
 	}
 	if (type.includes('audio') && !type.includes('object')) {
-		return 'audio/mp3';
+		return {
+			src: srcStr,
+			type: 'audio/mp3',
+		};
 	}
 
 	if (type.includes('video') && !type.includes('object')) {
-		return 'video/mp4';
+		return {
+			src: srcStr,
+			type: 'video/mp4',
+		};
 	}
 }
