@@ -2,7 +2,7 @@
 	<media-player
 		class="wt-player"
 		:class="`wt-player--position-${props.position}`"
-		:src="normalizedSrc"
+		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
     @ended="handleEnded"
@@ -50,14 +50,14 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { computed } from 'vue';
+import { computed, toRefs } from 'vue';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/media-controls-panel/components/time-group.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
-import { handleVidstackUnsupportedTypes } from '../wt-vidstack-player/_shared/handleVidstackTypes';
+import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
 
 interface Props {
 	/**
@@ -136,15 +136,11 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
-const normalizedSrc = computed(() => {
-	if (!props.src?.type) return props.src;
 
-	const type = handleVidstackUnsupportedTypes(props.src.type);
+const { src: srcRef } = toRefs(props);
 
-	return {
-		src: props.src.src,
-		type,
-	};
+const { normalizedSrcObject } = useVidstackSrc({
+	src: srcRef,
 });
 
 function downloadMedia() {

@@ -13,7 +13,7 @@
       ref="player"
       :autoplay="props.autoplay"
       :muted="props.muted"
-      :src="normalizedSrc"
+      :src="normalizedSrcObject"
       class="wt-vidstack-player__player"
       cross-origin
       playsinline
@@ -48,12 +48,12 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
-import { computed, provide, ref } from 'vue';
+import { computed, provide, ref, toRefs } from 'vue';
 import type { MediaSrc } from 'vidstack';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
-import { handleVidstackUnsupportedTypes } from './_shared/handleVidstackTypes';
+import { useVidstackSrc } from './composables/useVidstackSrc';
 
 interface Props {
 	src?: MediaSrc;
@@ -111,31 +111,12 @@ provide('size', {
 	changeSize,
 });
 
-const normalizedType = computed(() => {
-	const mimeType = props.mime || props.src.type || props.src.mime;
+const { src: srcRef, type: typeRef, stream: streamRef } = toRefs(props);
 
-	return handleVidstackUnsupportedTypes(mimeType);
-});
-
-const normalizedSrc = computed(() => {
-	if (props.stream) {
-		return {
-			src: props.stream,
-			type: 'video/object',
-		};
-	}
-
-	if (typeof props.src === 'string') {
-		return {
-			src: props.src,
-			type: normalizedType.value,
-		};
-	}
-
-	return {
-		src: props.src?.src || null,
-		type: props.src?.type || normalizedType.value,
-	};
+const { normalizedSrcObject } = useVidstackSrc({
+	src: srcRef,
+	type: typeRef,
+	stream: streamRef,
 });
 
 const onCanPlay = (ev: Event) => {
