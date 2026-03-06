@@ -1,37 +1,37 @@
 <template>
-  <div
+  <section
     :class="[`wt-expansion-card--${props.size}`]"
     class="wt-expansion-card"
   >
-    <div
+    <header
       :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']"
       class="wt-expansion-card-header"
       tabindex="0"
       @click="toggle"
       @keypress.enter="toggle"
     >
-      <slot name="title"></slot>
-    </div>
+      <slot name="header" />
+    </header>
 
     <wt-expand-transition v-show="opened">
-      <div class="wt-expansion-card-body">
-        <slot> </slot>
-      </div>
+      <article class="wt-expansion-card-body">
+        <slot name="body" />
+      </article>
     </wt-expand-transition>
 
-    <div
+    <footer
       class="wt-expansion-card-actions"
       @click="toggle"
       @keypress.enter="toggle"
     >
-      <slot name="actions" v-bind="{ open, opened }"></slot>
-      <wt-icon
+      <slot name="actions" v-bind="{ open, opened }" />
+      <wt-icon-btn
         :class="{ 'wt-expansion-card-arrow--opened': opened }"
         class="wt-expansion-card-arrow"
         icon="arrow-down"
       />
-    </div>
-  </div>
+    </footer>
+  </section>
 </template>
 
 <script setup lang="ts">
