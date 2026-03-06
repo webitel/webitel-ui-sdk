@@ -17,32 +17,31 @@
   setup
   lang="ts"
 >
-import { defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps } from 'vue';
 
-import type { ChatMessageFile } from "../../../../types/ChatMessage.types";
+import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
-  file: ChatMessageFile;
+	file: ChatMessageFile;
 }>();
 const emit = defineEmits<{
-  open: [
-    ChatMessageFile,
-  ];
+	open: [
+		ChatMessageFile,
+	];
 }>();
 </script>
 
 
 <style
-  lang="scss"
   scoped
 >
 .chat-message-image {
   cursor: pointer;
+}
 
-  &__img {
-    max-height: var(--chat-file-max-height);
-    max-width: var(--chat-file-max-width);
-    width: 100%;
-  }
+.chat-message-image__img {
+  max-height: var(--chat-file-max-height);
+  max-width: var(--chat-file-max-width);
+  width: 100%;
 }
 </style>

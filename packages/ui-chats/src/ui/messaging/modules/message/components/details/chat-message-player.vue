@@ -60,19 +60,8 @@ function handlePlayerInitialize(player) {
 </script>
 
 <style lang="scss" scoped>
-$chat-file-max-width: 280px;
-$chat-file-max-height: 280px;
-.chat-message-player {
-  .wt-player :deep(.plyr) {
-    .wt-player__close-icon,
-    .plyr__volume {
-      display: none;
-    }
-
-    &.plyr--video {
-      max-height: $chat-file-max-height;
-      max-width: $chat-file-max-width;
-    }
-  }
+.chat-message-player :deep(.wt-vidstack-player) {
+  max-height: var(--chat-file-max-height);
+  max-width: var(--chat-file-max-width);
 }
 </style>

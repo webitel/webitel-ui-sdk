@@ -25,8 +25,8 @@ export function useChatMessageFile(
 	});
 	const media = computed(() => {
 		return (
-			fileRef.value &&
-			(isMediaType(fileType.value) || isMediaType(fileSrc.value))
+			(isMediaType(fileType.value) || isMediaType(fileSrc.value)) &&
+			fileRef.value
 		);
 	});
 
