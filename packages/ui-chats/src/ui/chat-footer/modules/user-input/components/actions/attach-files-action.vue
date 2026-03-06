@@ -1,8 +1,9 @@
 <template>
-  <wt-rounded-action
-    icon="attach"
-    color="secondary"
+  <wt-button
     :size="size"
+    icon="attach"
+    variant="outlined"
+    color="secondary"
     rounded
     wide
     @click="attachFilesInputRef!.click()"
@@ -17,18 +18,18 @@
 </template>
 
 <script setup lang="ts">
-import { WtRoundedAction } from "@webitel/ui-sdk/components";
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { inject, useTemplateRef } from "vue";
+import { WtButton } from '@webitel/ui-sdk/components';
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { inject, useTemplateRef } from 'vue';
 
-import { ChatAction } from "../../enums/ChatAction.enum";
+import { ChatAction } from '../../enums/ChatAction.enum';
 
-const size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>('size');
 
 const emit =
 	defineEmits<(e: typeof ChatAction.AttachFiles, files: File[]) => void>();
 
-const attachFilesInputRef = useTemplateRef("attachFilesInput");
+const attachFilesInputRef = useTemplateRef('attachFilesInput');
 
 const handleAttachmentInputChange = (event: Event) => {
 	const files = (event.target as HTMLInputElement).files;
