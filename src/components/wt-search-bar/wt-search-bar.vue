@@ -3,7 +3,7 @@
     :model-value="value"
     :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
     :invalid="invalid"
-		class="wt-search-bar"
+    :class="['wt-search-bar', { 'wt-search-bar--full-width': fullWidth }]"
     type="search"
 		:v="v"
 		:custom-validators="customValidators"
@@ -110,6 +110,13 @@ const props = defineProps({
 		type: Array,
 		default: () => [],
 	},
+	/**
+	 * When true, width is unset (parent controls width). When false, uses --wt-search-bar-width.
+	 */
+	fullWidth: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits<{
@@ -188,12 +195,21 @@ function updateSearchMode({ option }) {
 
 <style scoped>
 .wt-search-bar {
-	/* 
+	/*
 	@author HlukhovYe
-	fixed width to prevent component from growing 
+	fixed width to prevent component from growing
 	https://webitel.atlassian.net/browse/WTEL-8812
 	*/
 	width: var(--wt-search-bar-width);
+}
+
+/*
+ * @author volodymyr
+ * Fixed width of search bar in popups
+ * https://webitel.atlassian.net/browse/WTEL-8995
+ */
+.wt-search-bar--full-width {
+	width: 100%;
 }
 
 .wt-search-bar__icon-controls {

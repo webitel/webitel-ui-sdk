@@ -21,6 +21,7 @@
             :value="search"
             @input="handleSearchInput"
             @search="search = $event"
+            full-width
           />
 
           <wt-empty
