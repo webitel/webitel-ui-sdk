@@ -1,8 +1,8 @@
-import { computed, toRef } from 'vue';
 import {
 	isAudioSrc as vidstackNativeIsAudioCheck,
 	isVideoSrc as vidstackNativeIsVideoCheck,
 } from 'vidstack';
+import { computed, toRef } from 'vue';
 
 export const useVidstackSrc = ({ src, type, stream }) => {
 	const srcRef = toRef(src);

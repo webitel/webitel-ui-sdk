@@ -48,8 +48,8 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
-import { computed, provide, ref, toRefs } from 'vue';
 import type { MediaSrc } from 'vidstack';
+import { computed, provide, ref, toRefs } from 'vue';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
