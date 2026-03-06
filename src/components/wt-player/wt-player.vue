@@ -2,7 +2,7 @@
 	<media-player
 		class="wt-player"
 		:class="`wt-player--position-${props.position}`"
-		:src="normalizedSrc"
+		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
     @ended="handleEnded"
@@ -49,14 +49,15 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-import type { AudioMimeType, MediaSrc } from 'vidstack';
-import { computed, useTemplateRef } from 'vue';
+import type { MediaSrc } from 'vidstack';
+import { computed, toRefs } from 'vue';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
+import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
 
 interface Props {
 	/**
@@ -135,30 +136,12 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
-const normalizedSrc = computed(() => {
-	if (!props.src?.type) return props.src;
 
-	const type = handleVidstackUnsupportedAudioTypes(props.src.type);
+const { src: srcRef } = toRefs(props);
 
-	return {
-		src: props.src.src,
-		type,
-	};
+const { normalizedSrcObject } = useVidstackSrc({
+	src: srcRef,
 });
-
-/**
- * https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733255
- * https://github.com/vidstack/player/issues/1453
- *
- */
-function handleVidstackUnsupportedAudioTypes(mimeType: string): AudioMimeType {
-	const unsupportedTypes = [
-		'audio/wav',
-	];
-	return unsupportedTypes.includes(mimeType)
-		? 'audio/mp3'
-		: (mimeType as AudioMimeType);
-}
 
 function downloadMedia() {
 	const src = typeof props.src === 'string' ? props.src : props.src?.src;

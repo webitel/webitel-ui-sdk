@@ -13,7 +13,7 @@
       ref="player"
       :autoplay="props.autoplay"
       :muted="props.muted"
-      :src="normalizedSrc"
+      :src="normalizedSrcObject"
       class="wt-vidstack-player__player"
       cross-origin
       playsinline
@@ -48,18 +48,15 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
-import { computed, provide, ref } from 'vue';
+import { computed, provide, ref, toRefs } from 'vue';
+import type { MediaSrc } from 'vidstack';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
+import { useVidstackSrc } from './composables/useVidstackSrc';
 
 interface Props {
-	src?:
-		| string
-		| {
-				src: string;
-				type?: string;
-		  };
+	src?: MediaSrc;
 	mime?: string;
 	autoplay?: boolean;
 	muted?: boolean;
@@ -114,39 +111,12 @@ provide('size', {
 	changeSize,
 });
 
-const normalizedType = computed(() => {
-	// https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
-	if (props.mime) return props.mime;
+const { src: srcRef, type: typeRef, stream: streamRef } = toRefs(props);
 
-	if (typeof props.src === 'string') {
-		if (props.src.includes('media')) return 'audio/mp3';
-		if (props.src.includes('mp3')) return 'audio/mp3';
-		if (props.src.includes('ogg') || props.src.includes('oga'))
-			return 'audio/ogg';
-	}
-
-	return 'video/mp4';
-});
-
-const normalizedSrc = computed(() => {
-	if (props.stream) {
-		return {
-			src: props.stream,
-			type: 'video/object',
-		};
-	}
-
-	if (typeof props.src === 'string') {
-		return {
-			src: props.src,
-			type: normalizedType.value,
-		};
-	}
-
-	return {
-		src: props.src?.src || null,
-		type: props.src?.type || normalizedType.value,
-	};
+const { normalizedSrcObject } = useVidstackSrc({
+	src: srcRef,
+	type: typeRef,
+	stream: streamRef,
 });
 
 const onCanPlay = (ev: Event) => {
