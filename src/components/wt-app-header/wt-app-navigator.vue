@@ -4,7 +4,7 @@
 		class="wt-app-navigator"
 	>
 		<wt-icon-btn
-			v-tooltip="$t('webitelUI.appNavigator.title')"
+			v-tooltip.left="$t('webitelUI.appNavigator.title')"
 			:class="{ active: isOpened }"
 			class="wt-app-navigator__btn"
 			icon="app-navigator"
