@@ -4,7 +4,7 @@
     class="wt-chat-emoji"
   >
     <wt-button
-			variant="outlined"
+      :variant="isOpened ? 'active' : 'outlined'"
       :size="size"
       color="secondary"
       icon="chat-emoji"
