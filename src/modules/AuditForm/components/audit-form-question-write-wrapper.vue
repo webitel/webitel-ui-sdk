@@ -137,7 +137,6 @@ function handleQuestionTypeChange(type) {
 		question: questionModel.value.question,
 		required: questionModel.value.required,
 		description: questionModel.value.description,
-		criticalViolation: questionModel.value.criticalViolation,
 	};
 
 	if (type === EngineAuditQuestionType.QuestionOption) {
