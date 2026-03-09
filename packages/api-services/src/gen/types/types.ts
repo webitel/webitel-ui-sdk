@@ -10,7 +10,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	DataStructList,
-	ProtodataStruct,
+	ProtoDataStruct,
 	SearchTypesParams,
 } from '.././_models';
 
@@ -40,7 +40,7 @@ export const // --- title start
 			/**
 			 * @summary Structured data type details.
 			 */
-			const locate = <TData = AxiosResponse<ProtodataStruct>>(
+			const locate = <TData = AxiosResponse<ProtoDataStruct>>(
 				path: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -54,6 +54,6 @@ export const // --- title start
 			};
 		};
 export type SearchTypesResult = AxiosResponse<DataStructList>;
-export type LocateResult = AxiosResponse<ProtodataStruct>;
+export type LocateResult = AxiosResponse<ProtoDataStruct>;
 
 // --- footer end

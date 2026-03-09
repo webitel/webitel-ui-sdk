@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * Input of the contact phone number.
@@ -16,6 +16,6 @@ export interface ContactsInputPhoneNumber {
 	number: string;
 	/** Indicates whether this phone number is default within other channels of the same type(phone). */
 	primary?: boolean;
-	type?: WebitelcontactsLookup;
+	type?: WebitelContactsLookup;
 	verified?: boolean;
 }

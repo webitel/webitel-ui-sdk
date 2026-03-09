@@ -16,4 +16,6 @@ export interface WebitelImApiGatewayV1ExternalParticipant {
 	subject?: string;
 	/** Participant type. */
 	type?: string;
+	/** Participant name. */
+	username?: string;
 }

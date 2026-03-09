@@ -4,13 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 export type UpdateEmailInputBody = {
 	/** The email address. */
 	email: string;
 	/** Indicates whether this phone number is default within other channels of the same type(phone). */
 	primary?: boolean;
-	type?: WebitelcontactsLookup;
+	type?: WebitelContactsLookup;
 	verified?: boolean;
 };

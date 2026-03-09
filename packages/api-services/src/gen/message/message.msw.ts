@@ -9,6 +9,7 @@ import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
 import type {
+	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendImageResponse,
 	WebitelImApiGatewayV1SendTextResponse,
@@ -224,6 +225,9 @@ export const getSendTextResponseMock = (
 	...overrideResponse,
 });
 
+export const getReadResponseMock =
+	(): WebitelImApiGatewayV1ReadMessageResponse => ({});
+
 export const getSendFileMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendDocumentResponse
@@ -322,8 +326,42 @@ export const getSendTextMockHandler = (
 		options,
 	);
 };
+
+export const getReadMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1ReadMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1ReadMessageResponse>
+				| WebitelImApiGatewayV1ReadMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/:id/read',
+		async (info) => {
+			return new HttpResponse(
+				JSON.stringify(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getReadResponseMock(),
+				),
+				{
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+		},
+		options,
+	);
+};
 export const getMessageMock = () => [
 	getSendFileMockHandler(),
 	getSendImageMockHandler(),
 	getSendTextMockHandler(),
+	getReadMockHandler(),
 ];

@@ -4,14 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsContact } from './webitelcontactsContact';
+import type { WebitelContactsContact } from './webitelContactsContact';
 
 /**
  * Contact dataset.
  */
 export interface ContactsContactList {
 	/** Contact(s) dataset page. */
-	data?: WebitelcontactsContact[];
+	data?: WebitelContactsContact[];
 	next?: boolean;
 	/** The page number of the partial result. */
 	page?: number;

@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * A Contact's timezone preference.
@@ -13,7 +13,7 @@ export interface ContactsTimezone {
 	/** The user who created this Field. */
 	createdAt?: string;
 	/** Timestamp(milli) of the Field creation. */
-	createdBy?: WebitelcontactsLookup;
+	createdBy?: WebitelContactsLookup;
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
@@ -23,12 +23,12 @@ This ID changes after any update to the underlying value(s). */
 among others of the same type. */
 	primary?: boolean;
 	/** Timezone dictionary reference value associated. */
-	timezone?: WebitelcontactsLookup;
+	timezone?: WebitelContactsLookup;
 	/** Timestamp(milli) of the last Field update.
 Take part in Etag generation. */
 	updatedAt?: string;
 	/** The user who performed last Update. */
-	updatedBy?: WebitelcontactsLookup;
+	updatedBy?: WebitelContactsLookup;
 	/** Version of the latest update. Numeric sequence. */
 	ver?: number;
 }

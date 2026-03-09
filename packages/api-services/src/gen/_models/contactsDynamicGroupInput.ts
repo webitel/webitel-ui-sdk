@@ -4,14 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * Input message for creating/updating a dynamic group.
  */
 export interface ContactsDynamicGroupInput {
 	/** Default static group to assign if no conditions are met. */
-	defaultGroup?: WebitelcontactsLookup;
+	defaultGroup?: WebitelContactsLookup;
 	/** The description of the dynamic group. */
 	description?: string;
 	/** Enabled status of the dynamic group: active/inactive. */
