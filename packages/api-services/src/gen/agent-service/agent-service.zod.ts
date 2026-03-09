@@ -1101,51 +1101,125 @@ export const UpdateAgentResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary Searches queues where the specified agent is assigned.
+Supports pagination, sorting and free-text search.
+ */
 export const SearchAgentInQueueParams = zod.object({
-	id: zod.string(),
+	id: zod.string().describe('Unique identifier of the agent.'),
 });
 
 export const SearchAgentInQueueQueryParams = zod.object({
-	page: zod.number().optional(),
-	size: zod.number().optional(),
-	q: zod.string().optional(),
-	sort: zod.string().optional(),
-	fields: zod.array(zod.string()).optional(),
+	page: zod.number().optional().describe('Page number (1-based).'),
+	size: zod.number().optional().describe('Maximum number of records per page.'),
+	q: zod
+		.string()
+		.optional()
+		.describe('Free-text search query.\nTypically applied to queue name.'),
+	sort: zod.string().optional().describe('Sorting expression.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'List of fields to be returned in the response.\nUsed for response projection and payload optimization.',
+		),
 });
 
-export const SearchAgentInQueueResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				activeMembers: zod.number().optional(),
-				agents: zod
+export const SearchAgentInQueueResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
 					.object({
-						allowPause: zod.number().optional(),
-						free: zod.number().optional(),
-						offline: zod.number().optional(),
-						online: zod.number().optional(),
-						pause: zod.number().optional(),
-						total: zod.number().optional(),
+						activeMembers: zod
+							.number()
+							.optional()
+							.describe('Number of members currently active in the queue.'),
+						agents: zod
+							.object({
+								allowPause: zod
+									.number()
+									.optional()
+									.describe(
+										'Indicates whether pause is allowed for agents.\nIf unset, pause availability is not defined.',
+									),
+								busy: zod
+									.number()
+									.optional()
+									.describe('Number of agents currently on call.'),
+								free: zod
+									.number()
+									.optional()
+									.describe(
+										"Number of agents that are online and in 'waiting' (idle) state.",
+									),
+								offline: zod
+									.number()
+									.optional()
+									.describe('Number of agents currently offline.'),
+								online: zod
+									.number()
+									.optional()
+									.describe('Number of agents currently online.'),
+								pause: zod
+									.number()
+									.optional()
+									.describe('Number of agents currently in pause state.'),
+								total: zod
+									.number()
+									.optional()
+									.describe('Total number of agents assigned to the queue.'),
+							})
+							.optional()
+							.describe(
+								'AgentsInQueue contains aggregated statistics\nabout agents assigned to queue.',
+							),
+						countMembers: zod
+							.number()
+							.optional()
+							.describe('Total number of members assigned to the queue.'),
+						enabled: zod
+							.boolean()
+							.optional()
+							.describe('Indicates whether the queue is enabled.'),
+						maxMemberLimit: zod
+							.number()
+							.optional()
+							.describe('Maximum number of members allowed in the queue.'),
+						priority: zod
+							.number()
+							.optional()
+							.describe('Agent priority within the queue.'),
+						queue: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						strategy: zod
+							.string()
+							.optional()
+							.describe('Call distribution strategy used by the queue.'),
+						type: zod.number().optional().describe('Queue type.'),
+						waitingMembers: zod
+							.number()
+							.optional()
+							.describe('Number of members currently waiting in the queue.'),
 					})
-					.optional(),
-				countMembers: zod.number().optional(),
-				enabled: zod.boolean().optional(),
-				maxMemberLimit: zod.number().optional(),
-				priority: zod.number().optional(),
-				queue: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				strategy: zod.string().optional(),
-				type: zod.number().optional(),
-				waitingMembers: zod.number().optional(),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-});
+					.describe(
+						'AgentInQueue represents agent assignment\nand configuration within a specific queue.',
+					),
+			)
+			.optional()
+			.describe('List of agent-to-queue assignments.'),
+		next: zod
+			.boolean()
+			.optional()
+			.describe('Indicates weather more records are available.'),
+	})
+	.describe(
+		'ListAgentInQueue contains search results\nand pagination metadata.',
+	);
 
 /**
  * @summary Change agent status

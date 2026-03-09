@@ -132,3 +132,34 @@ Default: `name{common_name}`.
  */
 	user?: boolean;
 };
+
+export type SearchContactsParams = {
+	/**
+	 * Page number to retrieve (starts from 1).
+	 */
+	page?: number;
+	/**
+	 * Number of items per page.
+	 */
+	size?: number;
+	/**
+	 * Sorting criteria (e.g., "name" or "-created_at").
+	 */
+	sort?: string;
+	/**
+	 * List of specific fields to include in the response. If empty, all fields are returned.
+	 */
+	fields?: string[];
+	/**
+	 * Full-text search query (matches against name or username).
+	 */
+	q?: string;
+	/**
+	 * Filter by channel types (e.g., ["telegram", "viber"]).
+	 */
+	type?: string[];
+	/**
+	 * Filter by internal system subjects/user IDs.
+	 */
+	subjects?: string[];
+};

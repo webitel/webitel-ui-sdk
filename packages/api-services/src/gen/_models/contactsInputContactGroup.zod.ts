@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * An input of the Contact's groups.
@@ -13,5 +13,5 @@ export interface ContactsInputContactGroup {
 	/** Unique ID of the latest version of an existing resource. */
 	etag: string;
 	/** Group of contacts associated. */
-	group?: WebitelcontactsLookup;
+	group?: WebitelContactsLookup;
 }

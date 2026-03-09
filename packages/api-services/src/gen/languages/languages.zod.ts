@@ -611,15 +611,19 @@ export const SetContactLanguage2QueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const SetContactLanguage2Body = zod.object({
-	primary: zod
-		.boolean()
-		.optional()
-		.describe(
-			'Indicates whether this association must be default\namong others of the same type.',
-		),
-	tag: zod.string().optional(),
-});
+export const SetContactLanguage2Body = zod
+	.object({
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default\namong others of the same type.',
+			),
+		tag: zod.string().optional(),
+	})
+	.describe(
+		'Final set [array] of the unique well-formed IETF BCP 47 language tag(s) to associate with the Contact.\nThe first element will become `primary` one.',
+	);
 
 export const SetContactLanguage2Response = zod
 	.object({
@@ -733,15 +737,19 @@ export const SetContactLanguageQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const SetContactLanguageBody = zod.object({
-	primary: zod
-		.boolean()
-		.optional()
-		.describe(
-			'Indicates whether this association must be default\namong others of the same type.',
-		),
-	tag: zod.string().optional(),
-});
+export const SetContactLanguageBody = zod
+	.object({
+		primary: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Indicates whether this association must be default\namong others of the same type.',
+			),
+		tag: zod.string().optional(),
+	})
+	.describe(
+		'Final set [array] of the unique well-formed IETF BCP 47 language tag(s) to associate with the Contact.\nThe first element will become `primary` one.',
+	);
 
 export const SetContactLanguageResponse = zod
 	.object({

@@ -6,6 +6,9 @@
  */
 import * as zod from 'zod';
 
+/**
+ * @summary CreateCall initiates a new outbound call with specified parameters.
+ */
 export const CreateCallBody = zod.object({
 	destination: zod.string().optional(),
 	domainId: zod.string().optional(),
@@ -19,7 +22,6 @@ export const CreateCallBody = zod.object({
 		.optional(),
 	params: zod
 		.object({
-			audio: zod.boolean().optional(),
 			cancelDistribute: zod.boolean().optional(),
 			contactId: zod.string().optional(),
 			disableAutoAnswer: zod.boolean().optional(),
@@ -27,11 +29,8 @@ export const CreateCallBody = zod.object({
 			display: zod.string().optional(),
 			hideNumber: zod.boolean().optional(),
 			isOnline: zod.boolean().optional(),
-			record: zod.boolean().optional(),
-			screen: zod.boolean().optional(),
 			timeout: zod.number().optional(),
 			variables: zod.record(zod.string(), zod.string()).optional(),
-			video: zod.boolean().optional(),
 		})
 		.optional(),
 	to: zod
@@ -48,6 +47,9 @@ export const CreateCallResponse = zod.object({
 	id: zod.string().optional(),
 });
 
+/**
+ * @summary SearchActiveCall returns a list of all calls currently in progress.
+ */
 export const SearchActiveCallQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
@@ -177,6 +179,9 @@ export const SearchActiveCallResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+/**
+ * @summary HangupCall terminates an active call session.
+ */
 export const HangupCallParams = zod.object({
 	id: zod.string(),
 });
@@ -190,7 +195,7 @@ export const HangupCallBody = zod.object({
 export const HangupCallResponse = zod.object({});
 
 /**
- * @summary Call item
+ * @summary ReadCall returns detailed real-time information for a specific active call.
  */
 export const ReadCallParams = zod.object({
 	id: zod.string(),
@@ -291,7 +296,7 @@ export const ReadCallResponse = zod.object({
 });
 
 /**
- * @summary Call item
+ * @summary ConfirmPush confirms receipt of a push notification for synchronization.
  */
 export const ConfirmPushParams = zod.object({
 	id: zod.string(),
@@ -299,6 +304,9 @@ export const ConfirmPushParams = zod.object({
 
 export const ConfirmPushResponse = zod.object({});
 
+/**
+ * @summary DtmfCall sends DTMF digits to an active call.
+ */
 export const DtmfCallParams = zod.object({
 	id: zod.string(),
 });
@@ -311,6 +319,9 @@ export const DtmfCallBody = zod.object({
 
 export const DtmfCallResponse = zod.object({});
 
+/**
+ * @summary EavesdropCall allows a supervisor to listen, whisper, or join an active call.
+ */
 export const EavesdropCallParams = zod.object({
 	id: zod.string(),
 });
@@ -336,6 +347,9 @@ export const EavesdropCallResponse = zod.object({
 	id: zod.string().optional(),
 });
 
+/**
+ * @summary HoldCall puts an active call on hold.
+ */
 export const HoldCallParams = zod.object({
 	id: zod.string(),
 });
@@ -349,6 +363,9 @@ export const HoldCallResponse = zod.object({
 	state: zod.string().optional(),
 });
 
+/**
+ * @summary BlindTransferCall redirects an active call to another destination.
+ */
 export const BlindTransferCallParams = zod.object({
 	id: zod.string(),
 });
@@ -361,6 +378,9 @@ export const BlindTransferCallBody = zod.object({
 
 export const BlindTransferCallResponse = zod.object({});
 
+/**
+ * @summary UnHoldCall resumes a call from hold state.
+ */
 export const UnHoldCallParams = zod.object({
 	id: zod.string(),
 });
@@ -374,6 +394,9 @@ export const UnHoldCallResponse = zod.object({
 	state: zod.string().optional(),
 });
 
+/**
+ * @summary SetVariablesCall updates call channel variables in real-time.
+ */
 export const SetVariablesCallParams = zod.object({
 	id: zod.string(),
 });
@@ -385,7 +408,8 @@ export const SetVariablesCallBody = zod.object({
 export const SetVariablesCallResponse = zod.object({});
 
 /**
- * @summary List of call
+ * @summary SearchHistoryCall retrieves a list of completed calls using filters (GET).
+Supports advanced filtering by participants, duration, causes, and custom variables.
  */
 export const SearchHistoryCallQueryParams = zod.object({
 	page: zod.number().optional(),
@@ -732,7 +756,8 @@ export const SearchHistoryCallResponse = zod.object({
 });
 
 /**
- * @summary List of call
+ * @summary SearchHistoryCallPost retrieves a list of completed calls using a complex filter body (POST).
+Ideal for large filter sets that exceed URL length limits.
  */
 export const SearchHistoryCallPostBody = zod.object({
 	tags: zod.array(zod.string()).optional(),
@@ -1101,6 +1126,10 @@ export const SearchHistoryCallPostResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+/**
+ * @summary AggregateHistoryCall performs statistical analysis on historical data.
+Group and aggregate metrics like average duration, call counts, or peak hours.
+ */
 export const AggregateHistoryCallBody = zod.object({
 	tags: zod.array(zod.string()).optional(),
 	agentDescription: zod.string().optional(),
@@ -1193,6 +1222,9 @@ export const AggregateHistoryCallResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary CreateCallAnnotation adds a text note to a specific timeframe of a historical call.
+ */
 export const CreateCallAnnotationParams = zod.object({
 	call_id: zod.string(),
 });
@@ -1225,6 +1257,9 @@ export const CreateCallAnnotationResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary DeleteCallAnnotation removes an annotation from a historical call.
+ */
 export const DeleteCallAnnotationParams = zod.object({
 	call_id: zod.string(),
 	id: zod.string(),
@@ -1252,6 +1287,9 @@ export const DeleteCallAnnotationResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary UpdateCallAnnotation modifies an existing call note.
+ */
 export const UpdateCallAnnotationParams = zod.object({
 	call_id: zod.string(),
 	id: zod.string(),
@@ -1285,6 +1323,9 @@ export const UpdateCallAnnotationResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary RedialCall quickly initiates a new call using data from a previous history record.
+ */
 export const RedialCallParams = zod.object({
 	call_id: zod.string(),
 });
@@ -1295,6 +1336,9 @@ export const RedialCallResponse = zod.object({
 	id: zod.string().optional(),
 });
 
+/**
+ * @summary PatchHistoryCall updates metadata for a completed call (e.g., variables or visibility).
+ */
 export const PatchHistoryCallParams = zod.object({
 	id: zod.string(),
 });

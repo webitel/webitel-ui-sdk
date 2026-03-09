@@ -6,14 +6,14 @@
  */
 import type { DataField } from './dataField';
 import type { DataLookupValue } from './dataLookupValue';
-import type { ProtodataStructIndexes } from './protodataStructIndexes';
+import type { ProtoDataStructIndexes } from './protoDataStructIndexes';
 
 /**
  * Type of the Structure.
 
 int64 dc = 0;
  */
-export interface ProtodataStruct {
+export interface ProtoDataStruct {
 	/** Optional. Short description. */
 	about?: string;
 	administered?: boolean;
@@ -32,7 +32,7 @@ Used as [lookup].name setting for this [struct] type. */
 	/** INDEX fields.
 
 Extension extension = 15; */
-	indexes?: ProtodataStructIndexes;
+	indexes?: ProtoDataStructIndexes;
 	/** A User-friendly [id] name ; lang: specific. */
 	name?: string;
 	/** Readonly. RbAC objclass identity. */

@@ -12,7 +12,7 @@ import type {
 	DataDataset,
 	DataStructList,
 	LocateData200,
-	ProtodataStruct,
+	ProtoDataStruct,
 	UpdateData200,
 	UpdateData2200,
 } from '.././_models';
@@ -5239,8 +5239,8 @@ export const getSearchTypeResponseMock = (
 });
 
 export const getLocateTypeResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -6081,8 +6081,8 @@ export const getLocateTypeResponseMock = (
 });
 
 export const getCreateTypeResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -6923,8 +6923,8 @@ export const getCreateTypeResponseMock = (
 });
 
 export const getUpdateTypeResponseMock = (
-	overrideResponse: Partial<ProtodataStruct> = {},
-): ProtodataStruct => ({
+	overrideResponse: Partial<ProtoDataStruct> = {},
+): ProtoDataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -8076,10 +8076,10 @@ export const getSearchTypeMockHandler = (
 
 export const getLocateTypeMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
@@ -8107,10 +8107,10 @@ export const getLocateTypeMockHandler = (
 
 export const getCreateTypeMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -8138,10 +8138,10 @@ export const getCreateTypeMockHandler = (
 
 export const getUpdateTypeMockHandler = (
 	overrideResponse?:
-		| ProtodataStruct
+		| ProtoDataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<ProtodataStruct> | ProtodataStruct),
+		  ) => Promise<ProtoDataStruct> | ProtoDataStruct),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.put(

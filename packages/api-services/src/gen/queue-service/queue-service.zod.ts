@@ -414,6 +414,7 @@ export const SearchQueueReportGeneralQueryParams = zod.object({
 export const SearchQueueReportGeneralResponse = zod.object({
 	aggs: zod
 		.object({
+			busy: zod.number().optional(),
 			free: zod.number().optional(),
 			offline: zod.number().optional(),
 			online: zod.number().optional(),
@@ -427,6 +428,7 @@ export const SearchQueueReportGeneralResponse = zod.object({
 				abandoned: zod.number().optional(),
 				agentStatus: zod
 					.object({
+						busy: zod.number().optional(),
 						free: zod.number().optional(),
 						offline: zod.number().optional(),
 						online: zod.number().optional(),

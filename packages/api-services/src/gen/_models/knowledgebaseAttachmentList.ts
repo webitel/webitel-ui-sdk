@@ -4,11 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelknowledgebaseAttachment } from './webitelknowledgebaseAttachment';
+import type { WebitelKnowledgebaseAttachment } from './webitelKnowledgebaseAttachment';
 
 export interface KnowledgebaseAttachmentList {
 	/** Attachment dataset page. */
-	data?: WebitelknowledgebaseAttachment[];
+	data?: WebitelKnowledgebaseAttachment[];
 	next?: boolean;
 	/** The page number of the partial result. */
 	page?: number;

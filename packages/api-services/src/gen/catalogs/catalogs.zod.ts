@@ -69,6 +69,28 @@ export const ListCatalogsResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
 				description: zod.string().optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
@@ -90,6 +112,28 @@ export const ListCatalogsResponse = zod.object({
 								.object({
 									id: zod.string().optional(),
 									name: zod.string().optional(),
+								})
+								.optional(),
+							defaultPriority: zod
+								.object({
+									color: zod.string().optional(),
+									createdAt: zod.string().optional(),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									description: zod.string().optional(),
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+									updatedAt: zod.string().optional(),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
 								})
 								.optional(),
 							description: zod.string().optional(),
@@ -180,6 +224,12 @@ export const CreateCatalogBody = zod.object({
 		})
 		.optional(),
 	code: zod.string().optional(),
+	defaultPriority: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	name: zod.string().optional(),
 	prefix: zod.string().optional(),
@@ -229,6 +279,28 @@ export const CreateCatalogResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	defaultPriority: zod
+		.object({
+			color: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			description: zod.string().optional(),
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
@@ -250,6 +322,28 @@ export const CreateCatalogResponse = zod.object({
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 				description: zod.string().optional(),
@@ -349,6 +443,28 @@ export const DeleteCatalogResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
 				description: zod.string().optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
@@ -370,6 +486,28 @@ export const DeleteCatalogResponse = zod.object({
 								.object({
 									id: zod.string().optional(),
 									name: zod.string().optional(),
+								})
+								.optional(),
+							defaultPriority: zod
+								.object({
+									color: zod.string().optional(),
+									createdAt: zod.string().optional(),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									description: zod.string().optional(),
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+									updatedAt: zod.string().optional(),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
 								})
 								.optional(),
 							description: zod.string().optional(),
@@ -484,6 +622,28 @@ export const LocateCatalogResponse = zod.object({
 					name: zod.string().optional(),
 				})
 				.optional(),
+			defaultPriority: zod
+				.object({
+					color: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				})
+				.optional(),
 			description: zod.string().optional(),
 			id: zod.string().optional(),
 			name: zod.string().optional(),
@@ -505,6 +665,28 @@ export const LocateCatalogResponse = zod.object({
 							.object({
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+							})
+							.optional(),
+						defaultPriority: zod
+							.object({
+								color: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								createdBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								description: zod.string().optional(),
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+								updatedAt: zod.string().optional(),
+								updatedBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
 							})
 							.optional(),
 						description: zod.string().optional(),
@@ -596,6 +778,12 @@ export const UpdateCatalog2Body = zod.object({
 		})
 		.optional(),
 	code: zod.string().optional(),
+	defaultPriority: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	name: zod.string().optional(),
 	prefix: zod.string().optional(),
@@ -645,6 +833,28 @@ export const UpdateCatalog2Response = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	defaultPriority: zod
+		.object({
+			color: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			description: zod.string().optional(),
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
@@ -666,6 +876,28 @@ export const UpdateCatalog2Response = zod.object({
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 				description: zod.string().optional(),
@@ -755,6 +987,12 @@ export const UpdateCatalogBody = zod.object({
 		})
 		.optional(),
 	code: zod.string().optional(),
+	defaultPriority: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	name: zod.string().optional(),
 	prefix: zod.string().optional(),
@@ -804,6 +1042,28 @@ export const UpdateCatalogResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	defaultPriority: zod
+		.object({
+			color: zod.string().optional(),
+			createdAt: zod.string().optional(),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			description: zod.string().optional(),
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+			updatedAt: zod.string().optional(),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
 	description: zod.string().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
@@ -825,6 +1085,28 @@ export const UpdateCatalogResponse = zod.object({
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 				description: zod.string().optional(),
