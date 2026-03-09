@@ -21,6 +21,7 @@ export function formatDate(
 	const formatStringMap = {
 		date: 'P', // dd.MM.yyyy (13.11.2025)
 		time: 'p', // HH:mm (15:53)
+		timeSec: 'pp', // HH:mm:ss (15:53:00)
 		datetime: 'Ppp', // dd.MM.yyyy, HH:mm:ss (13.11.2025, 15:53:00)
 		datetimeShort: 'Pp', // dd.MM.yyyy, HH:mm (13.11.2025, 15:53)
 	};
