@@ -9,7 +9,7 @@ import { computed } from 'vue';
 
 const props = defineProps<{
 	datetime: string | number | Date;
-	mode?: (typeof FormatDateMode)[keyof typeof FormatDateMode];
+	mode?: FormatDateMode;
 	timezone?: string;
 }>();
 
