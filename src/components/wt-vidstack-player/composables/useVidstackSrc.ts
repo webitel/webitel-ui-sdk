@@ -20,7 +20,7 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 
 		const srcStr = srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
 
-		return srcStr.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
+		return srcStr?.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
 	});
 
 	const normalizedSrcObject = computed(() => {
@@ -83,7 +83,7 @@ export function normalizeVidstackMediaSrc({
 	}
 
 	// normalize to default audio format, if vidstack doesn't recognize this type as audio
-	if (type.includes('audio')) {
+	if (type?.includes('audio')) {
 		return {
 			src,
 			type: 'audio/mp3',
@@ -91,7 +91,7 @@ export function normalizeVidstackMediaSrc({
 	}
 
 	// normalize to default video format, if vidstack doesn't recognize this type as video
-	if (type.includes('video')) {
+	if (type?.includes('video')) {
 		return {
 			src,
 			type: 'video/mp4',
