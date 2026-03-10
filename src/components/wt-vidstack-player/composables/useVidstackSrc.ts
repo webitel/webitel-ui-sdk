@@ -18,7 +18,9 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 	const normalizedSrcValue = computed(() => {
 		if (streamRef.value) return streamRef.value;
 
-		return typeof srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
+		const srcStr = srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
+
+		return srcStr.replace('/download', '/stream');
 	});
 
 	const normalizedSrcObject = computed(() => {
