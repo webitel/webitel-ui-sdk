@@ -20,7 +20,7 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 
 		const srcStr = srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
 
-		return srcStr.replace('/download', '/stream');
+		return srcStr.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
 	});
 
 	const normalizedSrcObject = computed(() => {
