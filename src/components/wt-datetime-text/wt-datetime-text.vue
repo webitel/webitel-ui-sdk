@@ -7,14 +7,20 @@ import { FormatDateMode } from '../../enums';
 import { formatDate } from '../../utils';
 import { computed } from 'vue';
 
-const props = defineProps<{
-	datetime: string | number | Date;
-	mode?: FormatDateMode;
-	timezone?: string;
-}>();
+const props = withDefaults(
+	defineProps<{
+		datetime: string | number | Date;
+		mode?: FormatDateMode;
+		timezone?: string;
+	}>(),
+	{
+		mode: FormatDateMode.DATETIME,
+		timezone: undefined,
+	},
+);
 
 const formatted = computed(() =>
-	formatDate(props.datetime, props.mode ?? FormatDateMode.DATETIME, {
+	formatDate(props.datetime, props.mode, {
 		timezone: props.timezone,
 	}),
 );
