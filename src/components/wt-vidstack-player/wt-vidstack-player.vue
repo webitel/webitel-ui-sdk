@@ -292,6 +292,10 @@ const onCanPlay = (ev: Event) => {
   background: none;
 }
 
+.wt-vidstack-player--hide-background .wt-vidstack-player__player {
+  pointer-events: all;
+}
+
 .wt-vidstack-player :deep(video) {
   width: 100%;
   min-width: 0;
