@@ -111,7 +111,7 @@ provide('size', {
 	changeSize,
 });
 
-const { src: srcRef, type: typeRef, stream: streamRef } = toRefs(props);
+const { src: srcRef, mime: typeRef, stream: streamRef } = toRefs(props);
 
 const { normalizedSrcObject } = useVidstackSrc({
 	src: srcRef,
