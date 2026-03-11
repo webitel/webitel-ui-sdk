@@ -11,11 +11,11 @@ import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
+import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
 import WtDivider from './wt-divider/wt-divider.vue';
 import WtEmpty from './wt-empty/wt-empty.vue';
 import WtHeadline from './wt-headline/wt-headline.vue';
 import WtHint from './wt-hint/wt-hint.vue';
-import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
 // Core components - kept synchronous (used on almost every page, small)
 import WtIcon from './wt-icon/wt-icon.vue';
 import WtIconAction from './wt-icon-action/wt-icon-action.vue';

@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { FormatDateMode } from '../../enums';
 import { formatDate } from '../../utils';
-import { computed } from 'vue';
 
 const props = withDefaults(
 	defineProps<{
