@@ -5,3 +5,6 @@ export const FormatDateMode = {
 	DATETIME: 'datetime',
 	DATETIME_SHORT: 'datetimeShort',
 } as const;
+
+export type FormatDateMode =
+	(typeof FormatDateMode)[keyof typeof FormatDateMode];

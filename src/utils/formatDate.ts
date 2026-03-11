@@ -11,20 +11,25 @@ function getUserTimeZone(): string {
 	);
 }
 
+// https://date-fns.org/v4.1.0/docs/format
+const formatStringMap = {
+	date: 'P', // dd.MM.yyyy (13.11.2025)
+	time: 'p', // HH:mm (15:53)
+	timeSec: 'pp', // HH:mm:ss (15:53:00)
+	datetime: 'Ppp', // dd.MM.yyyy, HH:mm:ss (13.11.2025, 15:53:00)
+	datetimeShort: 'Pp', // dd.MM.yyyy, HH:mm (13.11.2025, 15:53)
+};
+
 export function formatDate(
 	date: string | number | Date,
 	to: (typeof FormatDateMode)[keyof typeof FormatDateMode],
+	{
+		timezone = undefined,
+	}: {
+		timezone?: string;
+	} = {},
 ): string {
-	const timeZone = getUserTimeZone();
-
-	// https://date-fns.org/v4.1.0/docs/format
-	const formatStringMap = {
-		date: 'P', // dd.MM.yyyy (13.11.2025)
-		time: 'p', // HH:mm (15:53)
-		timeSec: 'pp', // HH:mm:ss (15:53:00)
-		datetime: 'Ppp', // dd.MM.yyyy, HH:mm:ss (13.11.2025, 15:53:00)
-		datetimeShort: 'Pp', // dd.MM.yyyy, HH:mm (13.11.2025, 15:53)
-	};
+	const timeZone = timezone ?? getUserTimeZone();
 
 	return formatInTimeZone(date, timeZone, formatStringMap[to], {
 		locale: uk,
