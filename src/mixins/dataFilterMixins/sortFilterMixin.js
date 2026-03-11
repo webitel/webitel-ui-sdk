@@ -91,9 +91,13 @@ export default {
 			const sortedColumns = decodeSortQuery({
 				value,
 			});
+			// NOTE: disable sorting if sort === undefined
 			const headers = this.headers.map((header) => ({
 				...header,
-				sort: sortedColumns[header.field] || null,
+				sort:
+					header.field in sortedColumns
+						? sortedColumns[header.field] || null
+						: header.sort,
 			}));
 			this.setHeaders(headers);
 		},
