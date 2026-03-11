@@ -152,11 +152,15 @@ const onCanPlay = (ev: Event) => {
   width: 100%;
   margin: 0;
   padding: 0;
+  transform: translateZ(0);
+  overflow: hidden;
 }
 
 .wt-vidstack-player__provider {
   display: block;
   height: 100%;
+  background: var(--p-player-wrapper-background);
+  border-radius: var(--video-border-radius);
 }
 
 .wt-vidstack-player--sm {
@@ -300,8 +304,7 @@ const onCanPlay = (ev: Event) => {
   width: 100%;
   min-width: 0;
   height: 100%;
-  background: var(--p-player-wrapper-background);
-  border-radius: var(--video-border-radius) var(--video-border-radius) 0 0;
+  border-radius: var(--video-border-radius);
 }
 
 .wt-vidstack-player-video-object-fit--cover :deep(video) {
