@@ -15,7 +15,6 @@ const props = withDefaults(
 	}>(),
 	{
 		mode: FormatDateMode.DATETIME,
-		timezone: undefined,
 	},
 );
 
