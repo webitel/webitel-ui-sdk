@@ -1,6 +1,6 @@
 <template>
   <section class="the-chat-container">
-    <media-viewer
+    <image-viewer
       :media="mediaView"
       @close="closeMedia"
     />
@@ -59,7 +59,7 @@ import {
 	ChatAction,
 	type SharedActionSlots,
 } from './chat-footer/modules/user-input/enums/ChatAction.enum';
-import MediaViewer from './media-viewer/media-viewer.vue';
+import ImageViewer from './image-viewer/image-viewer.vue';
 import Dropzone from './messaging/components/dropzone.vue';
 import MessagesContainer from './messaging/components/the-messages-container.vue';
 import { useDropzoneHandlers } from './messaging/composables/useDropzoneHandlers';
