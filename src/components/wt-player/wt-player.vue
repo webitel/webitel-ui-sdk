@@ -173,7 +173,7 @@ function handleEnded(event: Event) {
 
 <style scoped>
 .wt-player {
-	width: auto;
+	width: 100%;
 	max-width: 100%;
 	box-shadow: var(--elevation-10);
 	border-radius: var(--border-radius);
@@ -198,6 +198,7 @@ function handleEnded(event: Event) {
 }
 
 .wt-player--position-fixed {
+  width: auto;
 	position: fixed;
 }
 
