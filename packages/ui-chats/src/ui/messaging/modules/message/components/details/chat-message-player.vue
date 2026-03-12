@@ -16,6 +16,7 @@
       :src="mediaSrc"
       :autoplay="false"
       :closable="false"
+      :id="ringtone.name"
       hide-volume-slider
       class="chat-message-player__player"
       @initialized="handlePlayerInitialize"

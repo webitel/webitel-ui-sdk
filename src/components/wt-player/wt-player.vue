@@ -71,6 +71,11 @@ interface Props {
 	 */
 	id?: string;
 	/**
+	 * Media name
+	 * @type {string}
+	 */
+	fileName?: string;
+	/**
 	 * Autoplay media on load
 	 * @type {boolean}
 	 * @default true
@@ -151,7 +156,7 @@ function downloadMedia() {
 
 	const ext = props.src?.type.split('/').pop();
 
-	const filename = props.id || 'unknown';
+	const filename = props.fileName || props.id || 'unknown';
 
 	// download with [a] tag el
 	const link = document.createElement('a');
