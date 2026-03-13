@@ -314,4 +314,11 @@ const onCanPlay = (ev: Event) => {
 .wt-vidstack-player-video-object-fit--contain :deep(video) {
   object-fit: contain;
 }
+
+// @author @Oleksandr Palonnyi
+// [WTEL-9094](https://webitel.atlassian.net/browse/WTEL-9094)
+// link for comment https://webitel.atlassian.net/browse/WTEL-8974?focusedCommentId=735933
+.wt-vidstack-player :deep(.controls-group) {
+  margin-bottom: -1px;
+}
 </style>
