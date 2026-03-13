@@ -315,9 +315,11 @@ const onCanPlay = (ev: Event) => {
   object-fit: contain;
 }
 
-// @author @Oleksandr Palonnyi
-// [WTEL-9094](https://webitel.atlassian.net/browse/WTEL-9094)
-// link for comment https://webitel.atlassian.net/browse/WTEL-8974?focusedCommentId=735933
+/*
+ * @author Oleksandr Palonnyi
+ * WTEL-9094: https://webitel.atlassian.net/browse/WTEL-9094
+ * Comment: https://webitel.atlassian.net/browse/WTEL-8974?focusedCommentId=735933
+ */
 .wt-vidstack-player :deep(.controls-group) {
   margin-bottom: -1px;
 }
