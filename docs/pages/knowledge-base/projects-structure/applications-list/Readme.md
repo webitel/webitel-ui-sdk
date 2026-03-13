@@ -48,3 +48,7 @@
 ## Omni-Widget
 
 - repository: [omnichannel-widget](https://github.com/webitel/omnichannel-widget)
+
+## Web-meeting
+- repository: [web-meeting](https://github.com/webitel/web-meeting)
+- dev env: [test.webitel.me/meeting](https://test.webitel.me/meet/)
