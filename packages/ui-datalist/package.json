@@ -33,7 +33,7 @@
 		"@vueuse/core": "^14.0",
 		"@webitel/api-services": "^0.1.0",
 		"@webitel/styleguide": "~26.2",
-		"@webitel/ui-sdk": "~26.2",
+		"@webitel/ui-sdk": "~26.4",
 		"axios": "^1",
 		"date-fns": "^4",
 		"pinia": "^3.x",

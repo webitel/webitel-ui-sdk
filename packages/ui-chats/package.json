@@ -33,7 +33,7 @@
 	"peerDependencies": {
 		"@webitel/api-services": "^0.1.0",
 		"@webitel/styleguide": "~26.2",
-		"@webitel/ui-sdk": "~26.2",
+		"@webitel/ui-sdk": "~26.4",
 		"mitt": "^3",
 		"vue": "^3.5"
 	},
