@@ -1,6 +1,6 @@
 const darkColors = {
 	root: {
-		borderColor: 'transparent',
+		borderColor: '{surface.850}',
 	},
 	activeImageContainer: {
 		background: '{black}',

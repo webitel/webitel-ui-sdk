@@ -1,6 +1,6 @@
 const lightColors = {
 	root: {
-		borderColor: 'transparent',
+		borderColor: '{surface.50}',
 	},
 	activeImageContainer: {
 		background: '{white}',
