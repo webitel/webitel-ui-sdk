@@ -1,6 +1,6 @@
 const sizes = {
 	root: {
-		borderWidth: '1px',
+		borderWidth: '0',
 		borderRadius: '{border.radius.lg}',
 		transitionDuration: '{transition.duration}',
 	},
