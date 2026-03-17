@@ -1,26 +1,28 @@
 <script setup>
+import { FormatDateMode } from '__lib__/enums';
+
 const now = new Date();
 
 const modes = [
 	{
-		mode: 'date',
-		label: 'date',
+		mode: FormatDateMode.DATE,
+		label: 'FormatDateMode.DATE',
 	},
 	{
-		mode: 'time',
-		label: 'time',
+		mode: FormatDateMode.TIME,
+		label: 'FormatDateMode.TIME',
 	},
 	{
-		mode: 'timeSec',
-		label: 'timeSec',
+		mode: FormatDateMode.TIME_SEC,
+		label: 'FormatDateMode.TIME_SEC',
 	},
 	{
-		mode: 'datetime',
-		label: 'datetime (default)',
+		mode: FormatDateMode.DATETIME,
+		label: 'FormatDateMode.DATETIME (default)',
 	},
 	{
-		mode: 'datetimeShort',
-		label: 'datetimeShort',
+		mode: FormatDateMode.DATETIME_SHORT,
+		label: 'FormatDateMode.DATETIME_SHORT',
 	},
 ];
 </script>
