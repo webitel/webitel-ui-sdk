@@ -53,26 +53,22 @@ export const useSelect = ({
 			: [
 					selected.value,
 				];
-		if (optionValue.value) {
-			const selectedOptions = deduped.filter((option) =>
-				selectedAsArray.includes(option[optionValue.value]),
-			);
-			const otherOptions = deduped.filter(
-				(option) => !selectedAsArray.includes(option[optionValue.value]),
-			);
-			return selectedOptions.concat(otherOptions);
-		} else {
-			const selectedInOptions = deduped.filter((option) =>
-				selectedAsArray.find((selected) => deepEqual(selected, option)),
-			);
-			const otherOptions = deduped.filter(
-				(option) =>
-					!selectedAsArray.find((selected) => deepEqual(selected, option)),
-			);
-			return (
-				selectedInOptions.length ? selectedInOptions : selectedAsArray
-			).concat(otherOptions);
+
+		const selectedOptions = [];
+		const otherOptions = [];
+
+		for (const option of deduped) {
+			const isSelected = optionValue.value
+				? selectedAsArray.includes(option[optionValue.value])
+				: selectedAsArray.some((s) => deepEqual(s, option));
+			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
+
+		const topOptions =
+			optionValue.value || selectedOptions.length
+				? selectedOptions
+				: selectedAsArray;
+		return topOptions.concat(otherOptions);
 	};
 
 	const getOptionLabel = (option) => {
@@ -104,11 +100,7 @@ export const useSelect = ({
 		isLoading.value = false;
 	};
 
-	const debouncedFetch = debounce((value) => {
-		searchParams.search = value;
-		searchParams.page = 1;
-		fetchOptions();
-	});
+	const debouncedFetch = debounce((value) => resetAndFetch(value));
 
 	const filterOptions = (value) => {
 		filterText.value = value;
@@ -159,28 +151,47 @@ export const useSelect = ({
 		overlayResizeObserver = null;
 		if (searchMethod.value) {
 			getListContainer()?.removeEventListener('scroll', handleScroll);
-			if (filterText.value) initialOptionsFetch();
+			if (filterText.value) resetAndFetch();
 		}
 		filterText.value = '';
 	};
 
-	const initialOptionsFetch = () => {
-		searchParams.search = '';
+	const resetAndFetch = (search = '') => {
+		searchParams.search = search;
 		searchParams.page = 1;
 		fetchOptions();
+	};
+
+	const makeCustomValue = (text: string) => {
+		const sample = options.value[0];
+		if (sample && typeof sample === 'object') {
+			return Object.fromEntries(
+				Object.keys(sample).map((key) => [
+					key,
+					text,
+				]),
+			);
+		}
+		return text;
 	};
 
 	const onInputKeydown = () => {
 		if (!allowCustomValues.value) return;
 		if (isSingle) {
+			const customValue = makeCustomValue(filterText.value);
 			selectRef.value?.hide();
-			options.value.unshift(filterText.value);
-			selected.value = filterText.value;
+			options.value.unshift(customValue);
+			selected.value = customValue;
 			filterText.value = '';
 			filterOptions('');
 		} else {
 			// TODO: logic for multiselect
 		}
+	};
+
+	const clearValue = (e) => {
+		e.stopPropagation();
+		selected.value = null;
 	};
 
 	onMounted(() => {
@@ -199,5 +210,6 @@ export const useSelect = ({
 		onDropdownShow,
 		onDropdownHide,
 		onInputKeydown,
+		clearValue,
 	};
 };

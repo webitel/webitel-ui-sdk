@@ -17,6 +17,7 @@
       fluid
       auto-option-focus
       input-class="typo-body-1"
+      :invalid="invalid"
       :id="selectId"
       :show-clear="showClear"
       :disabled="disabled"
@@ -34,6 +35,7 @@
     >
       <template #header>
         <wt-input-text
+          v-if="filterable"
           ref="filterInput"
           :model-value="filterText"
           @update:model-value="filterOptions($event)"
@@ -44,6 +46,13 @@
             <wt-icon icon="search" />
           </template>
         </wt-input-text>
+      </template>
+      <template #clearicon>
+        <wt-icon-btn 
+          v-if="showClear && model"  
+          icon="close" 
+          @click="clearValue"
+        />
       </template>
       <template #dropdownicon>
         <wt-icon :icon="isDropdownOpen ? 'arrow-up' : 'arrow-down'" />
@@ -77,6 +86,7 @@ interface Props extends SelectProps {
 	required?: boolean;
 	disabled?: boolean;
 	disabledOptions?: boolean;
+	filterable?: boolean;
 	hasLabel?: boolean;
 	showClear?: boolean;
 	options?: unknown[];
@@ -96,6 +106,7 @@ const props = withDefaults(defineProps<Props>(), {
 	required: false,
 	disabled: false,
 	disabledOptions: false,
+	filterable: true,
 	hasLabel: true,
 	showClear: false,
 	options: () => [],
@@ -130,6 +141,7 @@ const {
 	onDropdownHide,
 	filterOptions,
 	onInputKeydown,
+	clearValue,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),

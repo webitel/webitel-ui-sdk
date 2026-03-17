@@ -9,6 +9,12 @@
       use-value-from-options-by-prop="value"
       @input="selectedValue = $event"
     />
+
+    <wt-select-v2
+      v-model="selectedValue"
+      :options="options"
+      option-value="value"
+    />
   </div>
 </template>
 
@@ -16,9 +22,18 @@
 import { ref } from 'vue';
 
 const options = [
-  { value: 'a', name: 'Option A' },
-  { value: 'b', name: 'Option B' },
-  { value: 'c', name: 'Option C' },
+	{
+		value: 'a',
+		name: 'Option A',
+	},
+	{
+		value: 'b',
+		name: 'Option B',
+	},
+	{
+		value: 'c',
+		name: 'Option C',
+	},
 ];
 
 const selectedValue = ref('b');

@@ -3,21 +3,16 @@ import { ref } from 'vue';
 
 import { frameworkOptions as options } from './_internals/select-example-options.js';
 
-const value = ref([
-	options[0],
-	options[1],
-]);
+const value = ref(options[0]);
 </script>
 
 <template>
-  <wt-select
-    :value="value"
+  <wt-select-v2
+    :model-value="value"
     :options="options"
     label="Select"
-    track-by="name"
-    :close-on-select="false"
-    multiple
-    @input="value = $event"
+    option-label="name"
+    disabled-options
   />
 </template>
 
