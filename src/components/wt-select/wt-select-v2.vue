@@ -1,243 +1,164 @@
 <template>
-  <p-auto-complete
-    class="w-full"
-    :model-value="selectValue"
-    :suggestions="suggestions"
-    dropdown
-    :multiple="multiple"
-    option-label="name"
-    complete-on-focus
-    v-bind="$attrs"
-    v-on="listeners"
-    @complete="search"
-  />
+  <div class="wt-select">
+    <wt-label 
+      v-if="hasLabel" 
+      :disabled="disabled" 
+      :invalid="invalid" 
+      class="wt-select__label" 
+      v-bind="labelProps">
+      <!-- @slot Custom input label -->
+      <slot name="label" v-bind="{ label }">
+        {{ requiredLabel }}
+      </slot>
+    </wt-label>
+    <p-select
+      ref="selectRef"
+      v-model="model"
+      fluid
+      auto-option-focus
+      input-class="typo-body-1"
+      :id="selectId"
+      :show-clear="showClear"
+      :disabled="disabled"
+      :placeholder="placeholder || label"
+      :option-disabled="() => disabledOptions"
+      :options="filteredOptions"
+      :option-label="(option) => getOptionLabel(option)"
+      :option-value="optionValue"
+      :loading="isLoading"
+      v-bind="$attrs"
+      @before-show="onDropdownBeforeShow"
+      @before-hide="onDropdownBeforeHide"
+      @show="onDropdownShow"
+      @hide="onDropdownHide"
+    >
+      <template #header>
+        <wt-input-text
+          ref="filterInput"
+          :model-value="filterText"
+          @update:model-value="filterOptions($event)"
+          @keydown.enter.stop="onInputKeydown"
+        >
+          <template #suffix>
+            <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
+            <wt-icon icon="search" />
+          </template>
+        </wt-input-text>
+      </template>
+      <template #dropdownicon>
+        <wt-icon :icon="isDropdownOpen ? 'arrow-up' : 'arrow-down'" />
+      </template>
+    </p-select>
+    <wt-message
+      v-if="isValidation && validationText"
+      :color="validationTextColor"
+      :variant="MessageVariant.SIMPLE"
+      :size="ComponentSize.SM"
+    >
+      {{ validationText }}
+    </wt-message>
+  </div>
 </template>
 
-<script setup>
-import { computed, reactive, ref } from 'vue';
+<script setup lang="ts">
+import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import type { SelectProps } from 'primevue';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+} from '../../enums/index.ts';
+import { useValidation } from '../../mixins/validationMixin/useValidation.ts';
+import { useSelect } from '../../composables/useSelect/useSelect.ts';
 
-import isEmpty from '../../scripts/isEmpty.js';
+interface Props extends SelectProps {
+	label?: string;
+	placeholder?: string;
+	required?: boolean;
+	disabled?: boolean;
+	disabledOptions?: boolean;
+	hasLabel?: boolean;
+	showClear?: boolean;
+	options?: unknown[];
+	optionLabel?: string;
+	optionValue?: string;
+	searchMethod?: () => void;
+	allowCustomValues?: boolean;
+	labelProps?: object;
+	v?: Record<string, unknown>;
+	regleValidation?: RegleFieldStatus<string>;
+	customValidators?: unknown[];
+}
 
-const props = defineProps({
-	value: {
-		// default: (props) => {
-		//   return props.modelValue;
-		// },
-	},
-
-	multiple: {
-		type: Boolean,
-		default: false,
-	},
-
-	options: {
-		type: Array,
-		default: () => [],
-	},
-
-	clearable: {
-		type: Boolean,
-		default: true,
-	},
-	searchMethod: {
-		type: Function,
-	},
-	/*
-   for taggableMixin functionality
-   for more info, see WTEL-3181
-   */
-	allowCustomValues: {
-		type: Boolean,
-		default: false,
-		description: 'See wt-tags-input "taggable" prop.',
-	},
-	// for taggableMixin functionality
-	handleCustomValuesAdditionManually: {
-		type: Boolean,
-		default: false,
-		description: 'See wt-tags-input "manualTagging" prop.',
-	},
+const props = withDefaults(defineProps<Props>(), {
+	label: '',
+	placeholder: '',
+	required: false,
+	disabled: false,
+	disabledOptions: false,
+	hasLabel: true,
+	showClear: false,
+	options: () => [],
+	optionLabel: 'label',
+	optionValue: '',
+	searchMethod: null,
+	allowCustomValues: false,
+	labelProps: () => ({}),
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
-const emits = defineEmits([
-	'reset',
-	'search-change',
-	'input', // vue 2
-	'update:modelValue', // vue 3
-	'closed',
-	'custom-value', // fires when allowCustomValues and new customValue is added
-]);
-
-const isOpened = ref(false);
-const isLoading = ref(false);
-const searchHasNext = ref(true);
-const suggestions = ref([]);
-const searchParams = reactive({
-	search: '',
-	page: 1,
+const model = defineModel<string>({
+	default: '',
 });
 
-const taggable = computed(() => {
-	return props.allowCustomValues;
+const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
+
+const filterInput = useTemplateRef('filterInput');
+const selectRef = useTemplateRef('selectRef');
+
+const {
+	isLoading,
+	isDropdownOpen,
+	filterText,
+	filteredOptions,
+	getOptionLabel,
+	onDropdownBeforeShow,
+	onDropdownBeforeHide,
+	onDropdownShow,
+	onDropdownHide,
+	filterOptions,
+	onInputKeydown,
+} = useSelect({
+	selected: model,
+	options: computed(() => props.options),
+	optionLabel: computed(() => props.optionLabel),
+	optionValue: computed(() => props.optionValue),
+	allowCustomValues: computed(() => props.allowCustomValues),
+	filterInput,
+	selectRef,
+	searchMethod: computed(() => props.searchMethod),
+	selectId: computed(() => selectId),
+	isSingle: true,
 });
 
-const manualTagging = computed(() => {
-	return props.handleCustomValuesAdditionManually;
-});
+const slots = useSlots();
 
-const isApiMode = computed(() => {
-	return !!props.searchMethod;
-});
+const { v, customValidators, regleValidation } = toRefs(props);
 
-const optionsWithCustomValues = computed(() => {
-	// https://webitel.atlassian.net/browse/WTEL-3181
-	console.log('props.allowCustomValues', props.allowCustomValues);
-
-	if (!props.allowCustomValues) return selectOptions.value;
-
-	/**
-   custom values could be restored after refresh, so that they could be not included in options prop,
-   so that we should add them to options manually (but filter duplicates, which are already in options)
-
-   i assume it's bad decision and it's better to include custom values to options prop,
-   but current filters logic restores value at filter component, but options value are pre-defined at store state
-   */
-
-	const customValuesToOptions = Array.isArray(props.value)
-		? props.value
-		: isEmpty(props.value)
-			? []
-			: [
-					props.value,
-				]; //do not add empty values
-	const optionsWithoutValues = selectOptions.value.filter((opt) => {
-		const optKey = props.trackBy ? opt[props.trackBy] : opt;
-		return !customValuesToOptions.some((customValue) => {
-			const customValueKey = props.trackBy
-				? customValue[props.trackBy]
-				: customValue;
-			return customValueKey === optKey;
-		});
-	});
-	return [
-		...customValuesToOptions,
-		...optionsWithoutValues,
-	];
-});
-
-const fetchOptions = async ({ search, page }) => {
-	if (!isApiMode.value) return [];
-	const { items, next } = await this.searchMethod({
-		search,
-		page,
-	});
-	searchHasNext.value = next;
-	return items;
-};
-
-const search = async (event) => {
-	console.log('event.query', event.query);
-	console.log('event.query', event);
-
-	if (!isApiMode.value) {
-		return (suggestions.value = [
-			...props.options,
-		]);
-	}
-
-	const fetchedOptions = await fetchOptions({
-		search: event.query,
-		page: 1,
+const { isValidation, invalid, validationText, validationTextColor } =
+	useValidation({
+		v,
+		customValidators,
+		regleValidation,
 	});
 
-	suggestions.value = [
-		...suggestions.value,
-		...fetchedOptions,
-	];
-};
+const hasLabel = computed(() => {
+	return props.label || slots.label;
+});
+
+const requiredLabel = computed(() => {
+	return props.required ? `${props.label}*` : props.label;
+});
 </script>
-
-<style scoped>
-/* @import './multiselect.css';  */
-
-.wt-select {
-  width: 100%;
-  min-width: 0;
-}
-
-/*
- * @author: Oleksandr Palonnyi
- *
- * [WTEL-6814](https://webitel.atlassian.net/browse/WTEL-6814)
- *
- * added pointer-events: auto; to have access to multiselect__limit when select is disabled.
-*/
-.multiselect__limit {
-  pointer-events: auto;
-}
-
-.wt-select :deep(.multiselect__single-label) {
-  /* text overflow 3 dots */
-  font-family: 'Montserrat', monospace;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-  text-transform: none;
-  display: block;
-  overflow: hidden;
-  max-width: 100%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.wt-select :deep(.multiselect--active .multiselect__strong) {
-  display: none;
-}
-
-/* right padding setup */
-
-/* default case */
-.wt-select :deep(.multiselect) .multiselect__tags {
-  padding: var(--input-padding) calc(
-    var(--input-padding) + var(--icon-md-size) +
-    var(--select-caret-right-pos)
-  ) var(--input-padding) var(--input-padding);
-}
-
-/* only chip */
-.wt-select.wt-select--multiple:not(.wt-select--clearable) :deep(.multiselect) .multiselect__tags {
-  padding-right: calc(
-    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding)
-  );
-}
-
-.wt-select.wt-select--multiple:not(.wt-select--clearable) .multiselect__limit {
-  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
-}
-
-/* only clearable */
-.wt-select.wt-select--clearable:not(.wt-select--multiple) :deep(.multiselect) .multiselect__tags {
-  padding-right: calc(
-    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding)
-  );
-}
-
-.wt-select.wt-select--clearable:not(.wt-select--multiple) .multiselect__clear {
-  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
-}
-
-/* clearable and chip */
-.wt-select.wt-select--multiple.wt-select--clearable :deep(.multiselect) .multiselect__tags {
-  padding-right: calc(
-    var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding) + 50px + var(--input-padding)
-  );
-}
-
-.wt-select.wt-select--multiple.wt-select--clearable .multiselect__clear {
-  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding));
-}
-
-.wt-select.wt-select--multiple.wt-select--clearable .multiselect__limit {
-  right: calc(var(--select-caret-right-pos) + var(--icon-md-size) + var(--input-padding) + var(--icon-md-size) + var(--input-padding));
-}
-</style>
