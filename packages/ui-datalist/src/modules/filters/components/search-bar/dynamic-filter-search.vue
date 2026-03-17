@@ -167,6 +167,9 @@ watch(
 			}
 		}
 	},
+	{
+		immediate: true,
+	},
 );
 </script>
 
