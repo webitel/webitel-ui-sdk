@@ -42,6 +42,10 @@
 			"types": "./types/lib/primevue/semantic/index.d.ts",
 			"import": "./src/lib/primevue/semantic/index.ts"
 		},
+		"./assets": {
+			"types": "./types/assets/fonts/index.ts",
+			"import": "./src/assets/fonts/index.ts"
+		},
 		"./extend": {
 			"types": "./types/lib/primevue/extend/extend.d.ts",
 			"import": "./src/lib/primevue/extend/extend.ts"
