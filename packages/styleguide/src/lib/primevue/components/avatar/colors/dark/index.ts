@@ -4,6 +4,8 @@ export default {
 		color: '{text.avatar.color}',
 	},
 	letters: {
+		'na-color': '{gray.650}',
+		'na-background': '{gray.350}',
 		'p1-color': 'linear-gradient(45deg, {deep-purple.700}, {deep-purple.350})',
 		'p2-color': 'linear-gradient(45deg, {indigo.550}, {indigo.300})',
 		'p3-color': 'linear-gradient(45deg, {deep-purple.350}, {cyan.250})',
