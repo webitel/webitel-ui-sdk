@@ -2,11 +2,11 @@
   <div class="wt-tree-table">
     <table class="wt-tree-table-wrapper">
       <thead class="wt-tree-table-head">
-        <tr class="wt-tree-table-tr wt-tree-table-tr-head">
-          <th
-            v-for="(col, key) of dataHeaders"
-            :key="String(key) + col?.sort"
-            :class="[
+      <tr class="wt-tree-table-tr wt-tree-table-tr-head">
+        <th
+          v-for="(col, key) of dataHeaders"
+          :key="String(key) + col?.sort"
+          :class="[
               {
                 'wt-tree-table-th--sortable': isColSortable(col),
               },
@@ -17,76 +17,76 @@
             @click="sort(col, key)"
           >
             <div class="wt-tree-table-th__content">
-              <div
-                v-if="key === 0 && selectable"
-                @click.stop
-              >
-                <wt-checkbox
-                  :selected="isAllSelected"
-                  @update:selected="selectAll"
-                />
-              </div>
-              <div class="wt-tree-table-th__text">
-                {{ col.text }}
-              </div>
-              <wt-icon
-                v-if="sortable"
-                class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--asc"
-                icon="sort-arrow-up"
-                size="sm"
-              />
-              <wt-icon
-                v-if="sortable"
-                class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--desc"
-                icon="sort-arrow-down"
-                size="sm"
+            <div
+              v-if="key === 0 && selectable"
+              @click.stop
+            >
+              <wt-checkbox
+                :selected="isAllSelected"
+                @update:selected="selectAll"
               />
             </div>
-          </th>
-          <th
-            v-if="gridActions"
-            class="wt-tree-table-th__actions"
-          >
-            <div class="wt-tree-table-th__content">
-              <slot name="actions-header" />
+            <div class="wt-tree-table-th__text">
+              {{ col.text }}
             </div>
-          </th>
-        </tr>
+            <wt-icon
+              v-if="sortable"
+              class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--asc"
+              icon="sort-arrow-up"
+              size="sm"
+            />
+            <wt-icon
+              v-if="sortable"
+              class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--desc"
+              icon="sort-arrow-down"
+              size="sm"
+            />
+          </div>
+        </th>
+        <th
+          v-if="gridActions"
+          class="wt-tree-table-th__actions"
+        >
+          <div class="wt-tree-table-th__content">
+            <slot name="actions-header" />
+          </div>
+        </th>
+      </tr>
       </thead>
 
       <tbody class="wt-tree-table-body">
-        <wt-tree-table-row
-          v-for="(row, dataKey) of data"
-          :key="dataKey"
-          :row-position="dataKey"
-          :data-headers="dataHeaders"
-          :data="row"
-          :selectable="selectable"
-          :children-prop="childrenProp"
-          :selected-elements="selectedElements"
-          :searched-prop="searchedProp"
-          @update:selected="handleSelection($event.data, $event.select)"
+      <wt-tree-table-row
+        v-for="(row, dataKey) of data"
+        :key="dataKey"
+        :row-position="dataKey"
+        :data-headers="dataHeaders"
+        :data="row"
+        :selectable="selectable"
+        :children-prop="childrenProp"
+        :selected-elements="selectedElements"
+        :searched-prop="searchedProp"
+        @update:selected="handleSelection($event.data, $event.select)"
+      >
+        <template #actions="{ item }">
+          <slot
+            name="actions"
+            :item="item"
+          />
+        </template>
+        <template
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          #[col.value]="{ item }"
         >
-          <template #actions="{ item }">
-            <slot
-              name="actions"
-              :item="item"
-            />
-          </template>
-          <template
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            #[col.value]="{ item }"
+          <slot
+            :index="dataKey"
+            :item="item"
+            :name="col.value"
           >
-            <slot
-              :index="dataKey"
-              :item="item"
-              :name="col.value"
-            >
-              {{ item[col.value] }}
-            </slot>
-          </template>
-        </wt-tree-table-row>
+            {{ item[col.value] }}
+          </slot>
+        </template>
+      </wt-tree-table-row>
       </tbody>
     </table>
   </div>
@@ -280,6 +280,15 @@ const handleSelection = (row, select) => {
     border-radius: var(--border-radius);
     background: var(--wt-tree-table-head-background-color);
   }
+}
+
+.wt-tree-table-th__content {
+  display: flex;
+  align-items: center;
+}
+
+.wt-tree-table-th__content--selectable {
+  display: flex;
 }
 
 .wt-tree-table-wrapper {
