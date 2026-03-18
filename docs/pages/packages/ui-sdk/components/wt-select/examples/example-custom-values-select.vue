@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 
-import wtSelectV2 from '../../../../../../../src/components/wt-select/wt-select-v2.vue';
 import { frameworkOptions as options } from './_internals/select-example-options.js';
 
 const multipleValue = ref([
@@ -22,8 +21,6 @@ const singleValue = ref('');
     <wt-select :options="options" :value="singleValue" allow-custom-values label="Custom Values in Single Select"
       track-by="name" @input="singleValue = $event" />
 
-    <wt-select-v2 :options="options" v-model="singleValue" allow-custom-values label="Custom Values in Single Select"
-      option-label="name" />  
     <pre><code>{{ singleValue }}</code></pre>
   </div>
 </template>

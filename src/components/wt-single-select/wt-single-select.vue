@@ -72,13 +72,9 @@
 <script setup lang="ts">
 import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
 import type { SelectProps } from 'primevue';
-import {
-	ComponentSize,
-	MessageColor,
-	MessageVariant,
-} from '../../enums/index.ts';
-import { useValidation } from '../../mixins/validationMixin/useValidation.ts';
-import { useSelect } from '../../composables/useSelect/useSelect.ts';
+import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useSelect } from '../../composables/useSelect/useSelect';
 
 interface Props extends SelectProps {
 	label?: string;
@@ -105,15 +101,15 @@ const props = withDefaults(defineProps<Props>(), {
 	placeholder: '',
 	required: false,
 	disabled: false,
-	disabledOptions: false,
-	filterable: true,
+	disabledOptions: false, // true disables all options but shows dropdown
+	filterable: true, // false disables options search
 	hasLabel: true,
-	showClear: false,
+	showClear: false, // false hides clear button
 	options: () => [],
 	optionLabel: 'label',
 	optionValue: '',
-	searchMethod: null,
-	allowCustomValues: false,
+	searchMethod: null, // function that returns filtered options
+	allowCustomValues: false, // true allows adding custom values through input
 	labelProps: () => ({}),
 	v: null,
 	regleValidation: null,

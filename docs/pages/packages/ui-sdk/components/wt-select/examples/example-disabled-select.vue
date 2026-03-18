@@ -22,20 +22,6 @@ const value = ref(options[0]);
     track-by="name"
     disabled
   />
-  <wt-select-v2
-    v-model="value"
-    :options="options"
-    label="Select"
-    option-label="name"
-    disabled
-  />
-  <wt-select-v2
-    :model-value="''"
-    :options="options"
-    label="Select"
-    option-label="name"
-    disabled
-  />
 </template>
 
 <style scoped lang="scss"></style>

@@ -9,12 +9,6 @@
       use-value-from-options-by-prop="value"
       @input="selectedValue = $event"
     />
-
-    <wt-select-v2
-      v-model="selectedValue"
-      :options="options"
-      option-value="value"
-    />
   </div>
 </template>
 

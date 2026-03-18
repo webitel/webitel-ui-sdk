@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import {
 	allApiOptions,
 	frameworkOptions as options,
-} from './_internals/select-example-options.js';
+} from '../../wt-select/examples/_internals/select-example-options.js';
 
 const PAGE_SIZE = 10;
 
@@ -32,18 +32,24 @@ const apiValue = ref(allApiOptions[11]);
 </script>
 
 <template>
-  <wt-select
-    :value="value"
+  <wt-single-select
+    v-model="value"
     :options="options"
-    label="Select"
-    track-by="name"
-    @input="value = $event"
+    label="Single Select"
+    option-label="name"
   />
-  <wt-select
-    :value="empty"
+  <wt-single-select
+    v-model="empty"
     :options="options"
-    label="Select"
-    track-by="name"
+    show-clear
+    label="Single Select (empty)"
+    option-label="name"
+  />
+  <wt-single-select
+    v-model="apiValue"
+    :search-method="searchMethod"
+    label="Single Select (API)"
+    option-label="name"
   />
 </template>
 
