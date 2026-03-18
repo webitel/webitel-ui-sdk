@@ -11,6 +11,7 @@ export interface WebitelCasesInputService {
 	assignee?: GeneralLookup;
 	catalogId?: string;
 	code?: string;
+	defaultPriority?: GeneralLookup;
 	description?: string;
 	group?: GeneralExtendedLookup;
 	name?: string;

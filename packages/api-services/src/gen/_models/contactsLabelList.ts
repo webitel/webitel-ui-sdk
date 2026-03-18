@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLabel } from './webitelcontactsLabel';
+import type { WebitelContactsLabel } from './webitelContactsLabel';
 
 /**
  * LabelList dataset.
@@ -13,7 +13,7 @@ So this ContactLabels.data are always subordinate to some contact.id.
  */
 export interface ContactsLabelList {
 	/** Label(s) dataset page. */
-	data?: WebitelcontactsLabel[];
+	data?: WebitelContactsLabel[];
 	next?: boolean;
 	/** Page number of partial result. */
 	page?: number;

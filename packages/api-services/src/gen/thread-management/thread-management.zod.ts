@@ -79,6 +79,10 @@ export const SearchThreadManagementResponse = zod
 												'Client-readable participant subject or display name.',
 											),
 										type: zod.string().optional().describe('Participant type.'),
+										username: zod
+											.string()
+											.optional()
+											.describe('Participant name.'),
 									})
 									.describe(
 										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
@@ -123,6 +127,10 @@ export const SearchThreadManagementResponse = zod
 												'Client-readable participant subject or display name.',
 											),
 										type: zod.string().optional().describe('Participant type.'),
+										username: zod
+											.string()
+											.optional()
+											.describe('Participant name.'),
 									})
 									.describe(
 										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
@@ -183,6 +191,10 @@ export const SearchThreadManagementResponse = zod
 													.string()
 													.optional()
 													.describe('Participant type.'),
+												username: zod
+													.string()
+													.optional()
+													.describe('Participant name.'),
 											})
 											.optional()
 											.describe(
@@ -208,6 +220,7 @@ export const SearchThreadManagementResponse = zod
 										'Client-readable participant subject or display name.',
 									),
 								type: zod.string().optional().describe('Participant type.'),
+								username: zod.string().optional().describe('Participant name.'),
 							})
 							.optional()
 							.describe(

@@ -4,10 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 export interface ContactsTranscriptLookup {
-	file?: WebitelcontactsLookup;
+	file?: WebitelContactsLookup;
 	id?: string;
 	locale?: string;
 }

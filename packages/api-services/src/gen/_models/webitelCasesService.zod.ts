@@ -6,6 +6,7 @@
  */
 import type { GeneralExtendedLookup } from './generalExtendedLookup';
 import type { GeneralLookup } from './generalLookup';
+import type { WebitelCasesPriority } from './webitelCasesPriority';
 
 export interface WebitelCasesService {
 	assignee?: GeneralLookup;
@@ -13,6 +14,7 @@ export interface WebitelCasesService {
 	code?: string;
 	createdAt?: string;
 	createdBy?: GeneralLookup;
+	defaultPriority?: WebitelCasesPriority;
 	description?: string;
 	group?: GeneralExtendedLookup;
 	id?: string;

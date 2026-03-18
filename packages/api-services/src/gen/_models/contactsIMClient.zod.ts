@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 /**
  * A contact's [I]nstant[M]essaging client.
@@ -13,11 +13,11 @@ export interface ContactsIMClient {
 	/** App (Text-Gateway) used to connect the IM client.
 Id will be internal id of gateway.
 Name will be name of the gateway. */
-	app?: WebitelcontactsLookup;
+	app?: WebitelContactsLookup;
 	/** The user who created this Field. */
 	createdAt?: string;
 	/** Timestamp(milli) of the Field creation. */
-	createdBy?: WebitelcontactsLookup;
+	createdBy?: WebitelContactsLookup;
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
@@ -31,11 +31,11 @@ This ID changes after any update to the underlying value(s). */
 Take part in Etag generation. */
 	updatedAt?: string;
 	/** The user who performed last Update. */
-	updatedBy?: WebitelcontactsLookup;
+	updatedBy?: WebitelContactsLookup;
 	/** External user which contacted to us.
 Id will be from external service.
 Name will be from external service. */
-	user?: WebitelcontactsLookup;
+	user?: WebitelContactsLookup;
 	/** Version of the latest update. Numeric sequence. */
 	ver?: number;
 	/** [Via] App(-specific) peer(-id) to connect[from] the IM client. */

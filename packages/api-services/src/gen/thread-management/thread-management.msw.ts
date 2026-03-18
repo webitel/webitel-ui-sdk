@@ -64,6 +64,15 @@ export const getSearchThreadManagementResponseMock = (
 						}),
 						undefined,
 					]),
+					username: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				})),
 				undefined,
 			]),
@@ -129,6 +138,15 @@ export const getSearchThreadManagementResponseMock = (
 						undefined,
 					]),
 					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					username: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -227,6 +245,15 @@ export const getSearchThreadManagementResponseMock = (
 								}),
 								undefined,
 							]),
+							username: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
 						},
 						undefined,
 					]),
@@ -254,6 +281,15 @@ export const getSearchThreadManagementResponseMock = (
 						undefined,
 					]),
 					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					username: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,

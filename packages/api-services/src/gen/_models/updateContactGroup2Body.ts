@@ -4,9 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelcontactsLookup } from './webitelcontactsLookup';
+import type { WebitelContactsLookup } from './webitelContactsLookup';
 
 export type UpdateContactGroup2Body = {
 	/** Group of contacts associated. */
-	group?: WebitelcontactsLookup;
+	group?: WebitelContactsLookup;
 };

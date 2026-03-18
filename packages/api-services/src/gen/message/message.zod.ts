@@ -31,6 +31,7 @@ export const SendFileBody = zod
 					.optional(),
 			})
 			.optional(),
+		sendId: zod.string().optional(),
 		to: zod
 			.object({
 				channelId: zod.string().optional(),
@@ -94,6 +95,7 @@ export const SendImageBody = zod
 					.optional(),
 			})
 			.optional(),
+		sendId: zod.string().optional(),
 		to: zod
 			.object({
 				channelId: zod.string().optional(),
@@ -142,6 +144,7 @@ We use the shared Request/Response types directly to avoid duplication.
 export const SendTextBody = zod
 	.object({
 		body: zod.string().optional(),
+		sendId: zod.string().optional(),
 		to: zod
 			.object({
 				channelId: zod.string().optional(),
@@ -182,3 +185,16 @@ export const SendTextResponse = zod
 			),
 	})
 	.describe('Represents a response to send a text message.');
+
+/**
+ * @summary Mark message as read by id.
+ */
+export const ReadParams = zod.object({
+	id: zod.string(),
+});
+
+export const ReadQueryParams = zod.object({
+	threadId: zod.string().optional(),
+});
+
+export const ReadResponse = zod.object({});

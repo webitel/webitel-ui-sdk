@@ -447,6 +447,28 @@ export const SearchCasesResponse = zod
 										name: zod.string().optional(),
 									})
 									.optional(),
+								defaultPriority: zod
+									.object({
+										color: zod.string().optional(),
+										createdAt: zod.string().optional(),
+										createdBy: zod
+											.object({
+												id: zod.string().optional(),
+												name: zod.string().optional(),
+											})
+											.optional(),
+										description: zod.string().optional(),
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										updatedAt: zod.string().optional(),
+										updatedBy: zod
+											.object({
+												id: zod.string().optional(),
+												name: zod.string().optional(),
+											})
+											.optional(),
+									})
+									.optional(),
 								description: zod.string().optional(),
 								group: zod
 									.object({
@@ -1117,6 +1139,28 @@ export const CreateCaseResponse = zod
 						name: zod.string().optional(),
 					})
 					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
 				description: zod.string().optional(),
 				group: zod
 					.object({
@@ -1222,6 +1266,42 @@ export const CreateCaseResponse = zod
 		ver: zod.number().optional().describe('Version number of the case.'),
 	})
 	.describe('Message representing a case.');
+
+/**
+ * @summary RPC method for exporting cases to CSV or XLSX format (server-side streaming).
+ */
+export const ExportCasesQueryParams = zod.object({
+	q: zod.string().optional(),
+	ids: zod.array(zod.string()).optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	filters: zod.array(zod.string()).optional(),
+	contactId: zod.string().optional(),
+	qin: zod.string().optional(),
+	filtersV1: zod.string().optional(),
+	format: zod.string().optional(),
+});
+
+export const ExportCasesResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.number().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary RPC method for deleting an existing case by its etag.
@@ -1622,6 +1702,28 @@ export const DeleteCaseResponse = zod
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 				description: zod.string().optional(),
@@ -2129,6 +2231,28 @@ export const LocateCaseResponse = zod
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				defaultPriority: zod
+					.object({
+						color: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						description: zod.string().optional(),
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 				description: zod.string().optional(),
@@ -2747,6 +2871,28 @@ export const UpdateCase2Response = zod.object({
 						.object({
 							id: zod.string().optional(),
 							name: zod.string().optional(),
+						})
+						.optional(),
+					defaultPriority: zod
+						.object({
+							color: zod.string().optional(),
+							createdAt: zod.string().optional(),
+							createdBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							description: zod.string().optional(),
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							updatedAt: zod.string().optional(),
+							updatedBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
 						})
 						.optional(),
 					description: zod.string().optional(),
@@ -3378,6 +3524,28 @@ export const UpdateCaseResponse = zod.object({
 							name: zod.string().optional(),
 						})
 						.optional(),
+					defaultPriority: zod
+						.object({
+							color: zod.string().optional(),
+							createdAt: zod.string().optional(),
+							createdBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							description: zod.string().optional(),
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							updatedAt: zod.string().optional(),
+							updatedBy: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+						})
+						.optional(),
 					description: zod.string().optional(),
 					group: zod
 						.object({
@@ -3934,6 +4102,28 @@ export const SearchCases2Response = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+									})
+									.optional(),
+								defaultPriority: zod
+									.object({
+										color: zod.string().optional(),
+										createdAt: zod.string().optional(),
+										createdBy: zod
+											.object({
+												id: zod.string().optional(),
+												name: zod.string().optional(),
+											})
+											.optional(),
+										description: zod.string().optional(),
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										updatedAt: zod.string().optional(),
+										updatedBy: zod
+											.object({
+												id: zod.string().optional(),
+												name: zod.string().optional(),
+											})
+											.optional(),
 									})
 									.optional(),
 								description: zod.string().optional(),

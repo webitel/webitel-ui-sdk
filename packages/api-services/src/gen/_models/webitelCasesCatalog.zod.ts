@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { GeneralLookup } from './generalLookup';
+import type { WebitelCasesPriority } from './webitelCasesPriority';
 import type { WebitelCasesService } from './webitelCasesService';
 
 export interface WebitelCasesCatalog {
@@ -12,6 +13,7 @@ export interface WebitelCasesCatalog {
 	code?: string;
 	createdAt?: string;
 	createdBy?: GeneralLookup;
+	defaultPriority?: WebitelCasesPriority;
 	description?: string;
 	id?: string;
 	name?: string;

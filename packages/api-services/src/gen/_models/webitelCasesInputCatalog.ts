@@ -9,6 +9,7 @@ import type { GeneralLookup } from './generalLookup';
 export interface WebitelCasesInputCatalog {
 	closeReasonGroup?: GeneralLookup;
 	code?: string;
+	defaultPriority?: GeneralLookup;
 	description?: string;
 	name?: string;
 	prefix?: string;

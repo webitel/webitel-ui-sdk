@@ -9,6 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	ReadParams,
+	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendDocumentRequest,
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendImageRequest,
@@ -71,12 +73,31 @@ We use the shared Request/Response types directly to avoid duplication.
 					options,
 				);
 			};
+			/**
+			 * @summary Mark message as read by id.
+			 */
+			const read = <
+				TData = AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>,
+			>(
+				id: string,
+				params?: ReadParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axiosInstance.post(`/v1/messages/${id}/read`, undefined, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
 			// --- footer start
 			return {
 				sendFile,
 				sendImage,
 				sendText,
+				read,
 			};
 		};
 export type SendFileResult =
@@ -85,5 +106,7 @@ export type SendImageResult =
 	AxiosResponse<WebitelImApiGatewayV1SendImageResponse>;
 export type SendTextResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTextResponse>;
+export type ReadResult =
+	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 
 // --- footer end
