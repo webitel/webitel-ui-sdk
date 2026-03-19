@@ -81,14 +81,29 @@ interface Props extends SelectProps {
 	placeholder?: string;
 	required?: boolean;
 	disabled?: boolean;
+	/**
+	 * true disables all options but keeps dropdown visible
+	 */
 	disabledOptions?: boolean;
+	/**
+	 * false disables options search
+	 */
 	filterable?: boolean;
 	hasLabel?: boolean;
+	/**
+	 * true shows the clear button
+	 */
 	showClear?: boolean;
 	options?: unknown[];
 	optionLabel?: string;
 	optionValue?: string;
+	/**
+	 * Function that returns filtered options for server-side search
+	 */
 	searchMethod?: () => void;
+	/**
+	 * true allows adding custom values through the filter input
+	 */
 	allowCustomValues?: boolean;
 	labelProps?: object;
 	v?: Record<string, unknown>;
@@ -101,15 +116,15 @@ const props = withDefaults(defineProps<Props>(), {
 	placeholder: '',
 	required: false,
 	disabled: false,
-	disabledOptions: false, // true disables all options but shows dropdown
-	filterable: true, // false disables options search
+	disabledOptions: false,
+	filterable: true,
 	hasLabel: true,
-	showClear: false, // false hides clear button
+	showClear: false,
 	options: () => [],
 	optionLabel: 'label',
 	optionValue: '',
-	searchMethod: null, // function that returns filtered options
-	allowCustomValues: false, // true allows adding custom values through input
+	searchMethod: null,
+	allowCustomValues: false,
 	labelProps: () => ({}),
 	v: null,
 	regleValidation: null,
