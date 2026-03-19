@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/api-services",
-	"version": "0.1.12",
+	"version": "0.1.13",
 	"private": false,
 	"scripts": {
 		"make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
