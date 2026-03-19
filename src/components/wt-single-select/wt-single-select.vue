@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import type { SelectProps } from 'primevue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
@@ -89,7 +89,6 @@ interface Props extends SelectProps {
 	 * false disables options search
 	 */
 	filterable?: boolean;
-	hasLabel?: boolean;
 	/**
 	 * true shows the clear button
 	 */
@@ -112,22 +111,10 @@ interface Props extends SelectProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	label: '',
-	placeholder: '',
-	required: false,
-	disabled: false,
-	disabledOptions: false,
 	filterable: true,
-	hasLabel: true,
-	showClear: false,
 	options: () => [],
 	optionLabel: 'label',
-	optionValue: '',
-	searchMethod: null,
-	allowCustomValues: false,
 	labelProps: () => ({}),
-	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 });
 
@@ -146,6 +133,7 @@ const {
 	filterText,
 	filteredOptions,
 	getOptionLabel,
+	fetchOptions,
 	onDropdownBeforeShow,
 	onDropdownBeforeHide,
 	onDropdownShow,
@@ -183,5 +171,9 @@ const hasLabel = computed(() => {
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
+});
+
+onMounted(() => {
+	if (props.searchMethod) fetchOptions();
 });
 </script>

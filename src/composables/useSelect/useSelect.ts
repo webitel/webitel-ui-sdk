@@ -69,6 +69,7 @@ export const useSelect = ({
 		filterText,
 		filteredOptions,
 		getOptionLabel,
+		fetchOptions,
 		filterOptions,
 		onDropdownBeforeShow,
 		onDropdownBeforeHide,

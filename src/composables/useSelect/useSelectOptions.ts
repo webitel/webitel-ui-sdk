@@ -1,5 +1,5 @@
 import { useI18n } from 'vue-i18n';
-import { onMounted, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import deepEqual from 'deep-equal';
 import uniqWith from 'lodash/uniqWith';
 import debounce from '../../scripts/debounce';
@@ -44,7 +44,7 @@ export const useSelectOptions = ({
 		for (const option of deduped) {
 			const isSelected = optionValue.value
 				? selectedAsArray.includes(option[optionValue.value])
-				: selectedAsArray.some((s) => deepEqual(s, option));
+				: selectedAsArray.some((s) => s === option);
 			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
 
@@ -106,10 +106,6 @@ export const useSelectOptions = ({
 			debouncedFetch(value);
 		}
 	};
-
-	onMounted(() => {
-		if (searchMethod.value) fetchOptions();
-	});
 
 	return {
 		filterText,

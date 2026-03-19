@@ -15,7 +15,7 @@ import MessageScheme from './message';
 import PasswordScheme from './password';
 import PopoverScheme from './popover';
 import RadioScheme from './radio';
-import SelectScheme from './select';
+import SingleSelectScheme from './single-select';
 import SliderScheme from './slider';
 import SwitcherScheme from './switcher';
 import TableScheme from './table';
@@ -46,6 +46,6 @@ export {
 	PasswordScheme,
 	InputGroupScheme,
 	MessageScheme,
-	SelectScheme,
+	SingleSelectScheme,
 	MultiSelectScheme,
 };
