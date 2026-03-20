@@ -74,7 +74,7 @@ import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import type { SelectProps } from 'primevue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { useSelect } from '../../composables/useSelect/useSelect';
+import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
 interface Props extends SelectProps {
 	label?: string;

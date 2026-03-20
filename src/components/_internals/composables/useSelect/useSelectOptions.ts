@@ -2,7 +2,7 @@ import { useI18n } from 'vue-i18n';
 import { reactive, ref } from 'vue';
 import deepEqual from 'deep-equal';
 import uniqWith from 'lodash/uniqWith';
-import debounce from '../../scripts/debounce';
+import debounce from '../../../../scripts/debounce';
 
 export const useSelectOptions = ({
 	selected,

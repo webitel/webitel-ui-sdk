@@ -98,7 +98,7 @@
 <script setup lang="ts">
 import { computed, toRef } from 'vue';
 
-import { useWtTable } from '../../composables/useWtTable/useWtTable';
+import { useWtTable } from '../_internals/composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';

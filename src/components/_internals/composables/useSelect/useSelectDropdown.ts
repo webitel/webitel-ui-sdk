@@ -64,6 +64,10 @@ export const useSelectDropdown = ({
 		overlayResizeObserver?.disconnect();
 		overlayResizeObserver = null;
 		if (searchMethod.value) {
+			/*
+			  @author @HlukhovYe
+			  remove scroll listener on dropdown close, no need to remove it on unmount
+			*/
 			getListContainer()?.removeEventListener('scroll', handleScroll);
 			if (filterText.value) resetAndFetch();
 		}
