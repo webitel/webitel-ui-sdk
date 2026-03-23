@@ -74,7 +74,7 @@ const restoreLocalSearchValue = (searchMode: string) => {
 };
 
 const hasSearchModes = computed(() => {
-	return props.searchModeOptions && props.searchModeOptions.length > 0;
+	return props.searchModeOptions && props.searchModeOptions.length > 1;
 });
 
 const currentSearchName = computed(() => {
@@ -94,6 +94,7 @@ const inputValue = (value: string) => {
 				name: currentSearchName.value,
 			});
 		}
+		searchMode.value = props.searchModeOptions[0].value;
 		return;
 	}
 };
@@ -127,12 +128,12 @@ const updateSearchMode = (
 };
 
 const initialize = () => {
-	if (hasSearchModes.value) {
-		if (!searchMode.value) {
-			searchMode.value = props.searchModeOptions[0].value;
-		}
-		restoreLocalSearchValue(searchMode.value);
+	if (!hasSearchModes.value) return;
+
+	if (!searchMode.value) {
+		searchMode.value = props.searchModeOptions[0].value;
 	}
+	restoreLocalSearchValue(searchMode.value);
 };
 /**
  * @description
@@ -154,14 +155,16 @@ watch(
 		const searchModes = [
 			defaultSearchName,
 		];
-		if (hasSearchModes.value) {
+		if (hasSearchModes.value && !searchMode.value) {
 			searchMode.value =
 				props.searchModeOptions?.map((option) => option.value)[0] || '';
 		}
 
 		for (const mode of searchModes) {
 			if (hasFilter(mode)) {
-				searchMode.value = mode;
+				if (hasSearchModes.value) {
+					searchMode.value = mode;
+				}
 				restoreLocalSearchValue(mode);
 				break;
 			}
