@@ -15,7 +15,7 @@
 			<play-button />
 			<time-slider />
 			<time-group :countdown="props.countdownTimeMode" />
-			<mute-button />
+			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
 			<media-button
@@ -107,6 +107,12 @@ interface Props {
 	 */
 	hideVolumeSlider?: boolean;
 	/**
+	 * Hide mute button
+	 * @type {boolean}
+	 * @default false
+	 */
+	hideMuteButton?: boolean;
+	/**
 	 * Shows close button
 	 * @type {boolean}
 	 * @default true
@@ -127,6 +133,7 @@ const props = withDefaults(defineProps<Props>(), {
 	resetOnEnd: false,
 	invertTime: true,
 	hideVolumeSlider: false,
+	hideMuteButton: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
