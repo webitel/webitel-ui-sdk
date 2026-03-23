@@ -17,9 +17,11 @@ import PInputNumber from 'primevue/inputnumber';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PMessage from 'primevue/message';
+import PMultiSelect from 'primevue/multiSelect';
 import PPassword from 'primevue/password';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
+import PSelect from 'primevue/select';
 import PSlider from 'primevue/slider';
 import PTextarea from 'primevue/textarea';
 import PToggleSwitch from 'primevue/toggleswitch';
@@ -80,6 +82,8 @@ const initPrimevue = (app) => {
 		changeComponentCompatMode(PInputGroupAddon),
 	);
 	app.component('PMessage', changeComponentCompatMode(PMessage));
+	app.component('PMultiSelect', changeComponentCompatMode(PMultiSelect));
+	app.component('PSelect', changeComponentCompatMode(PSelect));
 
 	app.directive('tooltip', Tooltip);
 };

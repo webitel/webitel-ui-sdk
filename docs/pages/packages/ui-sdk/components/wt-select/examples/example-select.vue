@@ -1,25 +1,34 @@
 <script setup>
 import { ref } from 'vue';
 
-import wtSelectV2 from '../../../../../../../src/components/wt-select/wt-select-v2.vue';
+import {
+	allApiOptions,
+	frameworkOptions as options,
+} from './_internals/select-example-options.js';
 
-const options = [
-  { name: 'Vue.js1', language: 'JavaScript' },
-  { name: 'Adonis2', language: 'JavaScript' },
-  { name: 'Rails3', language: 'Ruby' },
-  { name: 'Sinatra4', language: 'Ruby' },
-  { name: 'Laravel5', language: 'PHP' },
-  { name: 'Phoenix6', language: 'Elixir' },
-  { name: 'Vue.js7', language: 'JavaScript' },
-  { name: 'Adonis8', language: 'JavaScript' },
-  { name: 'Rails9', language: 'Ruby' },
-  { name: 'Sinatra10', language: 'Ruby' },
-  { name: 'Laravel11', language: 'PHP' },
-  { name: 'Phoenix12', language: 'Elixir' },
-];
+const PAGE_SIZE = 10;
+
+const searchMethod = async ({ search, page }) => {
+	// simulate network delay
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
+	const filtered = allApiOptions.filter(({ name }) =>
+		name.toLowerCase().includes(search.toLowerCase()),
+	);
+
+	const offset = (page - 1) * PAGE_SIZE;
+	const items = filtered.slice(offset, offset + PAGE_SIZE);
+	const next = offset + PAGE_SIZE < filtered.length;
+
+	return {
+		items,
+		next,
+	};
+};
 
 const value = ref(options[0]);
 const empty = ref('');
+const apiValue = ref(allApiOptions[11]);
 </script>
 
 <template>
@@ -30,20 +39,7 @@ const empty = ref('');
     track-by="name"
     @input="value = $event"
   />
-  <wt-select-v2
-    :value="value"
-    :options="options"
-    label="Select"
-    track-by="name"
-    @input="value = $event"
-  />
   <wt-select
-    :value="empty"
-    :options="options"
-    label="Select"
-    track-by="name"
-  />
-  <wt-select-v2
     :value="empty"
     :options="options"
     label="Select"

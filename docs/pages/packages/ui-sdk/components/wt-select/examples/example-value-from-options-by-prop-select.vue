@@ -16,9 +16,18 @@
 import { ref } from 'vue';
 
 const options = [
-  { value: 'a', name: 'Option A' },
-  { value: 'b', name: 'Option B' },
-  { value: 'c', name: 'Option C' },
+	{
+		value: 'a',
+		name: 'Option A',
+	},
+	{
+		value: 'b',
+		name: 'Option B',
+	},
+	{
+		value: 'c',
+		name: 'Option C',
+	},
 ];
 
 const selectedValue = ref('b');

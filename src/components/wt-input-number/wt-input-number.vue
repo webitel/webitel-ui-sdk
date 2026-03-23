@@ -86,7 +86,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 
-import { useInputControl } from '../../composables';
+import { useInputControl } from '../_internals/composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 

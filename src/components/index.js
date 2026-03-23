@@ -100,6 +100,9 @@ const WtPopover = defineAsyncComponent(
 const WtSearchBar = defineAsyncComponent(
 	() => import('./wt-search-bar/wt-search-bar.vue'),
 );
+const WtSingleSelect = defineAsyncComponent(
+	() => import('./wt-single-select/wt-single-select.vue'),
+);
 const WtSlider = defineAsyncComponent(
 	() => import('./wt-slider/wt-slider.vue'),
 );
@@ -236,6 +239,7 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtSingleSelect,
 };
 
 export {
@@ -319,6 +323,7 @@ export {
 	WtVidstackPlayer,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtSingleSelect,
 };
 
 export default Components;
