@@ -17,6 +17,7 @@
       :autoplay="false"
       :closable="false"
       hide-volume-slider
+      hide-mute-button
       class="chat-message-player__player"
       @initialized="handlePlayerInitialize"
     />
