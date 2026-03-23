@@ -94,8 +94,9 @@ const inputValue = (value: string) => {
 				name: currentSearchName.value,
 			});
 		}
-		searchMode.value = props.searchModeOptions[0].value;
-		return;
+		if (hasSearchModes.value) {
+			searchMode.value = props.searchModeOptions[0].value;
+		}
 	}
 };
 
