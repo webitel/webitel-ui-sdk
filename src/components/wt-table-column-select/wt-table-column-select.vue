@@ -178,6 +178,7 @@ export default {
 }
 
 .wt-table-column-select__popup-item {
+  text-align: start;
   display: flex;
   align-items: center;
   margin-right: var(--spacing-sm);
