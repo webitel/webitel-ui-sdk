@@ -1,6 +1,6 @@
 import { refDebounced } from '@vueuse/core';
 import { StoreDefinition, storeToRefs } from 'pinia';
-import { onUnmounted } from 'vue';
+import { onUnmounted, watch } from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
@@ -11,8 +11,10 @@ import { useItemCardSaveText } from './useItemCardSaveText';
 
 export const useCardComponent = <CardEntity>({
 	useCardStore,
+	onLoadErrorHandler,
 }: {
 	useCardStore: StoreDefinition;
+	onLoadErrorHandler?: (err: any) => void;
 }) => {
 	const cardStore = useCardStore();
 
@@ -22,7 +24,7 @@ export const useCardComponent = <CardEntity>({
 		validationSchema,
 		isLoading,
 		// isSaving, // todo: use me
-		// error, // todo: use me
+		error,
 	} = storeToRefs(cardStore);
 
 	const { initialize, saveItem, $reset } = cardStore;
@@ -63,6 +65,10 @@ export const useCardComponent = <CardEntity>({
 
 	onUnmounted($reset);
 
+	watch(error, (err) => {
+		if (onLoadErrorHandler) onLoadErrorHandler(err);
+	});
+
 	return {
 		// models
 		modelValue,
@@ -70,6 +76,7 @@ export const useCardComponent = <CardEntity>({
 		// state
 		debouncedIsLoading,
 		originalItemInstance,
+		error,
 
 		// computed
 		isNew,
