@@ -120,7 +120,8 @@ export default {
 
 	methods: {
 		inputHandler(value) {
-			const size = value >= 0 && value <= 1000 ? value : this.defaultSize;
+			const size =
+				value != null && value >= 0 && value <= 1000 ? value : this.defaultSize;
 			this.$emit('input', size);
 			this.changeSize(size);
 		},
