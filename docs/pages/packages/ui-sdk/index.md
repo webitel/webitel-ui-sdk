@@ -34,6 +34,7 @@
 * [wt-context-menu](components/wt-context-menu/Readme.md)
 * [wt-copy-action](components/wt-copy-action/Readme.md)
 * [wt-datepicker](components/wt-datepicker/Readme.md)
+* [wt-datetime-text](components/wt-datetime-text/Readme.md)
 * [wt-divider](components/wt-divider/Readme.md)
 * [wt-dual-panel](components/wt-dual-panel/Readme.md)
 * [wt-dummy](components/wt-dummy/Readme.md)

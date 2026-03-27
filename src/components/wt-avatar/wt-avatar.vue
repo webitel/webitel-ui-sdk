@@ -1,7 +1,11 @@
 <template>
 	<PAvatar
-:class="[`p-avatar-${props.size}`]" :shape="props.shape" :label="avatarLetters"
-		:style="{ background: `var(${avatarLettersBackground})` }" class="wt-avatar">
+    :class="[`p-avatar-${props.size}`]"
+    :shape="props.shape"
+    :label="avatarLetters"
+		:style="{ background: `var(${avatarLettersBackground})`, color: `var(${avatarLettersColor})` }"
+    class="wt-avatar"
+  >
 		<template #default>
 			<wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
 
@@ -86,10 +90,10 @@ const props = defineProps({
 	},
 });
 
-const isLetterAvatar = computed(() => !props.src && props.username);
+const isLetterAvatar = computed(() => !props.src);
 
 const avatarLetters = computed(() => {
-	if (!props.username) return '';
+	if (!props.username) return 'N/A';
 	const abbreviation = props.username
 		.trim()
 		.replace(/\s+/g, ' ') //change several spaces to one
@@ -101,9 +105,17 @@ const avatarLetters = computed(() => {
 		: abbreviation;
 });
 
+const avatarLettersColor = computed(() => {
+	if (!props.username) {
+		return '--p-avatar-letters-na-color';
+	}
+
+	return '--wt-avatar-text-color';
+});
+
 const avatarLettersBackground = computed(() => {
-	if (!avatarLetters.value) {
-		return '';
+	if (!props.username) {
+		return '--p-avatar-letters-na-background';
 	}
 	// en.concat(uk)
 	const letterList = [
@@ -216,7 +228,6 @@ const badgeColorVar = computed(() => {
 	border-radius: 50%;
 	height: 100%;
 	width: 100%;
-	color: var(--wt-avatar-text-color);
 }
 
 .wt-avatar__img {
