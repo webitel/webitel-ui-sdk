@@ -39,6 +39,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.cursor
 
 vite.config.*.timestamp*
 .eslintcache
