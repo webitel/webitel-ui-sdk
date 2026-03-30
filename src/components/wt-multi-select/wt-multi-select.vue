@@ -16,7 +16,7 @@
       v-model="model"
       fluid
       input-class="typo-body-1"
-      :display="isChip ? 'chip' : 'comma'"
+      :display="chip ? 'chip' : 'comma'"
       :show-toggle-all="false"
       :invalid="invalid"
       :id="selectId"
@@ -101,6 +101,7 @@ import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { useI18n } from 'vue-i18n';
+import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
 interface Props extends SelectProps {
 	label?: string;
@@ -138,7 +139,7 @@ interface Props extends SelectProps {
 	 * true emits custom values through the filter input instead of adding them automatically
 	 */
 	manualCustomValues?: boolean;
-	isChip?: boolean;
+	chip?: boolean;
 	labelProps?: object;
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<string>;
@@ -157,10 +158,7 @@ const props = withDefaults(defineProps<Props>(), {
 const model = defineModel({
 	default: [],
 	get(value) {
-		if (Array.isArray(value)) return value;
-		return [
-			value,
-		];
+		return toArray(value);
 	},
 });
 
