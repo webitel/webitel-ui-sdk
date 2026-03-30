@@ -32,6 +32,7 @@ const value = ref(allApiOptions[11]);
     :search-method="searchMethod"
     label="Single Select (API)"
     option-label="name"
+		data-key="language"
   />
 </template>
 

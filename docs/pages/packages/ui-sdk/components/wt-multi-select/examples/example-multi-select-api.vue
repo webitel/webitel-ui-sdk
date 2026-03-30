@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import {
-	allApiOptions,
-	frameworkOptions as options,
-} from '../../wt-select/examples/_internals/select-example-options.js';
+import { allApiOptions } from '../../wt-select/examples/_internals/select-example-options.js';
 
 const PAGE_SIZE = 10;
 
@@ -26,30 +23,16 @@ const searchMethod = async ({ search, page }) => {
 	};
 };
 
-const value = ref(options[0]);
-const empty = ref('');
-const apiValue = ref(allApiOptions[11]);
+const value = ref([]);
 </script>
 
 <template>
-  <wt-single-select
+  <wt-multi-select
     v-model="value"
-    :options="options"
-    label="Single Select"
-    option-label="name"
-  />
-  <wt-single-select
-    v-model="empty"
-    :options="options"
-    show-clear
-    label="Single Select (empty)"
-    option-label="name"
-  />
-  <wt-single-select
-    v-model="apiValue"
     :search-method="searchMethod"
-    label="Single Select (API)"
+    label="Multi Select (API)"
     option-label="name"
+		data-key="language"
   />
 </template>
 

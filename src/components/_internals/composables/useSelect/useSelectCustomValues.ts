@@ -1,14 +1,24 @@
+import { nextTick } from 'vue';
+import { toArray, isOptionSelected } from './useSelectUtils';
+
 export const useSelectCustomValues = ({
 	selected,
+	filteredOptions,
 	options,
+	dataKey,
 	filterText,
 	filterOptions,
+	updateSelectedOptionsCache,
 	selectRef,
 	allowCustomValues,
+	manualCustomValues,
 	isSingle,
+	emit,
 }) => {
-	const makeCustomValue = (text: string) => {
-		const sample = options.value[0];
+	const makeCustomOption = (text: string) => {
+		const sample = options.value.length
+			? options.value[0]
+			: filteredOptions.value[0];
 		if (sample && typeof sample === 'object') {
 			return Object.fromEntries(
 				Object.keys(sample).map((key) => [
@@ -21,26 +31,58 @@ export const useSelectCustomValues = ({
 	};
 
 	const onInputKeydown = () => {
-		if (!allowCustomValues.value) return;
+		if (!allowCustomValues.value || !filterText.value) return;
+
+		// check if custom option is already selected
+		const selectedAsArray = toArray(selected.value);
+		const isAlreadySelected = selectedAsArray.some(
+			(s) => (dataKey.value ? s[dataKey.value] : s) === filterText.value,
+		);
+
+		if (isAlreadySelected) return;
+
+		if (manualCustomValues.value) {
+			emit('add:custom-value', filterText.value);
+			return;
+		}
+
+		const customOption = makeCustomOption(filterText.value);
+
+		const isOptionInList = filteredOptions.value.some((option) =>
+			isOptionSelected(
+				option,
+				[
+					customOption,
+				],
+				dataKey.value,
+			),
+		);
+
+		if (!isOptionInList) {
+			filteredOptions.value.unshift(customOption);
+		}
+
 		if (isSingle) {
-			const customValue = makeCustomValue(filterText.value);
 			selectRef.value?.hide();
-			options.value.unshift(customValue);
-			selected.value = customValue;
+			selected.value = customOption;
+		} else {
+			// redefine selected value instead of pushing element is for max-selected-labels prop correct work
+			selected.value = [
+				...selected.value,
+				customOption,
+			];
+		}
+
+		// Sync cache immediately so the custom value survives the upcoming API refetch
+		updateSelectedOptionsCache();
+
+		nextTick(() => {
 			filterText.value = '';
 			filterOptions('');
-		} else {
-			// TODO: logic for multiselect
-		}
-	};
-
-	const clearValue = (e) => {
-		e.stopPropagation();
-		selected.value = null;
+		});
 	};
 
 	return {
 		onInputKeydown,
-		clearValue,
 	};
 };

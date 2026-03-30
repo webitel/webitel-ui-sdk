@@ -12,6 +12,7 @@ const value = ref(options[0]);
     :options="options"
     label="Single Select"
     option-label="name"
+    data-key="language"
     disabled
   />
   <wt-single-select
@@ -19,6 +20,7 @@ const value = ref(options[0]);
     :options="options"
     label="Single Select (empty)"
     option-label="name"
+    data-key="language"
     disabled
   />
 </template>

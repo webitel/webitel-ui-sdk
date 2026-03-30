@@ -823,6 +823,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'елементів вибрано',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity')} було оновлено`,

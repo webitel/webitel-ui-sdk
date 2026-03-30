@@ -82,6 +82,9 @@ const WtFiltersPanelWrapper = defineAsyncComponent(
 const WtGalleria = defineAsyncComponent(
 	() => import('./wt-galleria/wt-galleria.vue'),
 );
+const WtMultiSelect = defineAsyncComponent(
+	() => import('./wt-multi-select/wt-multi-select.vue'),
+);
 const WtNotificationsBar = defineAsyncComponent(
 	() => import('./wt-notifications-bar/wt-notifications-bar.vue'),
 );
@@ -240,6 +243,7 @@ const Components = {
 	WtExpansionCard,
 	WtDatetimeText,
 	WtSingleSelect,
+	WtMultiSelect,
 };
 
 export {
@@ -285,6 +289,7 @@ export {
 	WtLoader,
 	WtLogo,
 	WtMessage,
+	WtMultiSelect,
 	WtNavigationBar,
 	WtNavigationMenu,
 	WtNotification,

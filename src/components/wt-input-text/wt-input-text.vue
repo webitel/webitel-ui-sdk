@@ -31,6 +31,7 @@
         class="wt-input-text__input typo-body-1"
         :inputmode="type"
         v-bind="$attrs"
+        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />

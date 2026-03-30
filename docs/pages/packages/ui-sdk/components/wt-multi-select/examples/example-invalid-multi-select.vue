@@ -4,8 +4,10 @@ import { computed, ref } from 'vue';
 
 import { frameworkOptions as options } from '../../wt-select/examples/_internals/select-example-options.js';
 
-const value = ref(options[0]);
-const empty = ref('');
+const value = ref([
+	options[0],
+]);
+const empty = ref([]);
 
 const v$ = useVuelidate(
 	computed(() => ({
@@ -22,18 +24,18 @@ v$.value.$touch();
 </script>
 
 <template>
-  <wt-single-select
+  <wt-multi-select
     v-model="value"
     :options="options"
-    label="Single Select"
+    label="Multi Select"
     option-label="name"
     data-key="language"
     :v="v$"
   />
-  <wt-single-select
+  <wt-multi-select
     v-model="empty"
     :options="options"
-    label="Single Select (empty)"
+    label="Multi Select (empty)"
     option-label="name"
     data-key="language"
     :v="v$"

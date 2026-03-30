@@ -830,6 +830,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'elementów wybranych',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) =>

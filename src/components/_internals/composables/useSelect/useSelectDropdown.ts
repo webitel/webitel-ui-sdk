@@ -7,6 +7,7 @@ export const useSelectDropdown = ({
 	searchMethod,
 	filteredOptions,
 	filterText,
+	filterOptions,
 	resetAndFetch,
 	sortOptions,
 	fetchOptions,
@@ -56,6 +57,12 @@ export const useSelectDropdown = ({
 	};
 
 	const onDropdownBeforeHide = () => {
+		/**
+		 * @author @HlukhovYe
+		 * neccessary fix for this problem: https://github.com/primefaces/primevue/issues/8508
+		 */
+		const overlay = selectRef?.value?.overlay;
+		if (overlay) overlay.style.pointerEvents = 'none';
 		getListContainer()?.scrollTo(0, 0); // scroll dropdown list to top
 	};
 
@@ -70,6 +77,8 @@ export const useSelectDropdown = ({
 			*/
 			getListContainer()?.removeEventListener('scroll', handleScroll);
 			if (filterText.value) resetAndFetch();
+		} else {
+			filterOptions('');
 		}
 		filterText.value = '';
 	};

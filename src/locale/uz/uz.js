@@ -832,6 +832,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'ta element tanlandi',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity').toLowerCase()} yangilandi`,

@@ -13,6 +13,7 @@ const value = ref('');
     show-clear
     label="Single Select (empty)"
     option-label="name"
+    data-key="language"
   />
 </template>
 
