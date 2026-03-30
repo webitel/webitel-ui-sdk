@@ -26,7 +26,7 @@ v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--over
           </slot>
           <wt-icon-btn v-if="closable" class="wt-popup__close-btn" icon="close" @click="emit('close')" />
         </header>
-        <section v-if="$slots.main" class="wt-popup__main typo-body-1">
+        <section v-if="$slots.main" class="wt-popup__main wt-scrollbar typo-body-1">
           <slot name="main" />
         </section>
         <footer v-if="$slots.actions" class="wt-popup__actions">
