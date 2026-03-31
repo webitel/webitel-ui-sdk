@@ -48,7 +48,7 @@ export const useSelectCustomValues = ({
 
 		const customOption = makeCustomOption(filterText.value);
 
-		const isOptionInList = filteredOptions.value.some((option) =>
+		const isOptionAlreadyInList = filteredOptions.value.some((option) =>
 			isOptionSelected(
 				option,
 				[
@@ -58,7 +58,7 @@ export const useSelectCustomValues = ({
 			),
 		);
 
-		if (!isOptionInList) {
+		if (!isOptionAlreadyInList) {
 			filteredOptions.value.unshift(customOption);
 		}
 

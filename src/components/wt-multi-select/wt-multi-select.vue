@@ -16,7 +16,7 @@
       v-model="model"
       fluid
       input-class="typo-body-1"
-      :display="chip ? 'chip' : 'comma'"
+      :display="chipsView ? 'chip' : 'comma'"
       :show-toggle-all="false"
       :invalid="invalid"
       :id="selectId"
@@ -139,7 +139,7 @@ interface Props extends SelectProps {
 	 * true emits custom values through the filter input instead of adding them automatically
 	 */
 	manualCustomValues?: boolean;
-	chip?: boolean;
+	chipsView?: boolean;
 	labelProps?: object;
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<string>;
