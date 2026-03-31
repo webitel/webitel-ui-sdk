@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.4.10",
+	"version": "26.4.9",
 	"private": false,
 	"scripts": {
 		"make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run biome:format:all || true) && npm run publish-lib",
@@ -77,7 +77,7 @@
 		"@vuelidate/validators": "^2.0.4",
 		"@webitel/api-services": ">=0.0.105",
 		"@webitel/styleguide": "~26.2",
-		"axios": "^1.8.3",
+		"axios": "1.13.2",
 		"date-fns": "^4.1.0",
 		"deep-copy": "^1.4.2",
 		"deep-equal": "^2.2.3",
