@@ -1,9 +1,19 @@
+/* 
+	@author Palonnyi Oleksandr
+	Must be first — locks cascade layer priority 
+	before any content is loaded: wt-default < base < primevue < wt-typography.
+	[WTEL-9107](https://webitel.atlassian.net/browse/WTEL-9107)
+
+	link for complex comment https://webitel.atlassian.net/browse/WTEL-9107?focusedCommentId=740565
+*/
+@layer wt-default, base, primevue, wt-typography;
+
 @import "./styleguide/styleguide.css";
 @import "./components-variables.css";
 @import "./pages/table-page.css";
 @import "./pages/card-page.css";
 
-/* 
+/*
 	@author HlukhovYe
 	layer needed beacuse of manipulating primevue's default typography
 	https://webitel.atlassian.net/browse/WTEL-8775?focusedCommentId=723773
@@ -78,7 +88,7 @@
 	}
 }
 
-/* 
+/*
 	@author HlukhovYe
 	reset input autofill styles https://webitel.atlassian.net/browse/WTEL-9005
 */
