@@ -1,13 +1,18 @@
 <template>
   <button
-:class="[
-    `wt-rounded-action--size-${size}`,
-    { 'wt-rounded-action--active': active },
-    { 'wt-rounded-action--disabled': disabled },
-    { 'wt-rounded-action--rounded': rounded },
-    { 'wt-rounded-action--wide': wide },
-    { 'wt-button--loading': showLoader },
-  ]" class="wt-rounded-action" type="button" @click="emit('click', $event)">
+    :class="[
+      `wt-rounded-action--size-${size}`,
+      { 'wt-rounded-action--active': active },
+      { 'wt-rounded-action--disabled': disabled },
+      { 'wt-rounded-action--rounded': rounded },
+      { 'wt-rounded-action--wide': wide },
+      { 'wt-button--loading': showLoader },
+    ]"
+    class="wt-rounded-action"
+    type="button"
+    v-tooltip="tooltip || undefined"
+    @click="emit('click', $event)"
+  >
     <wt-loader v-if="showLoader" color="main" :size="loaderSize" />
     <wt-icon v-else :color="iColor" :icon="icon" :icon-prefix="iconPrefix" :size="size" />
   </button>
@@ -108,6 +113,16 @@ const props = defineProps({
 	loading: {
 		type: Boolean,
 		default: false,
+	},
+
+	/**
+	 * Tooltip text displayed on hover via v-tooltip directive
+	 * @type {string}
+	 * @default ''
+	 */
+	tooltip: {
+		type: String,
+		default: '',
 	},
 });
 const emit = defineEmits([
