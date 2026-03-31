@@ -1,14 +1,15 @@
 import { useI18n } from 'vue-i18n';
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import deepEqual from 'deep-equal';
 import uniqWith from 'lodash/uniqWith';
 import debounce from '../../../../scripts/debounce';
+import { toArray, isOptionSelected } from './useSelectUtils';
 
 export const useSelectOptions = ({
 	selected,
 	options,
 	optionLabel,
-	optionValue,
+	dataKey,
 	allowCustomValues,
 	searchMethod,
 }) => {
@@ -32,24 +33,22 @@ export const useSelectOptions = ({
 		const deduped = uniqWith(opts, deepEqual);
 		if (!selected.value) return deduped;
 
-		const selectedAsArray = Array.isArray(selected.value)
-			? selected.value
-			: [
-					selected.value,
-				];
+		const selectedAsArray = toArray(selected.value);
 
 		const selectedOptions = [];
 		const otherOptions = [];
 
 		for (const option of deduped) {
-			const isSelected = optionValue.value
-				? selectedAsArray.includes(option[optionValue.value])
-				: selectedAsArray.some((s) => s === option);
+			const isSelected = isOptionSelected(
+				option,
+				selectedAsArray,
+				dataKey.value,
+			);
 			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
 
 		const topOptions =
-			optionValue.value || selectedOptions.length
+			dataKey.value || selectedOptions.length
 				? selectedOptions
 				: selectedAsArray;
 		return topOptions.concat(otherOptions);
@@ -68,6 +67,32 @@ export const useSelectOptions = ({
 		return option[defaultOptionLabel] || option;
 	};
 
+	// Cache of full option objects for currently selected values,
+	// so they can be preserved in filteredOptions after filtering
+	const selectedOptionsCache = ref([]);
+
+	const updateSelectedOptionsCache = () => {
+		if (!selected.value) {
+			selectedOptionsCache.value = [];
+			return;
+		}
+		const selectedAsArray = toArray(selected.value);
+		const isSelected = (option) =>
+			isOptionSelected(option, selectedAsArray, dataKey.value);
+
+		// Find full option objects from filteredOptions that match selected values
+		const foundOptions = filteredOptions.value.filter(isSelected);
+		// Merge with previous cache, then remove entries no longer selected
+		const mergedOptions = uniqWith(
+			[
+				...selectedOptionsCache.value,
+				...foundOptions,
+			],
+			deepEqual,
+		);
+		selectedOptionsCache.value = mergedOptions.filter(isSelected);
+	};
+
 	const fetchOptions = async () => {
 		if (!searchMethod.value) return;
 		const { search, page } = searchParams;
@@ -76,9 +101,17 @@ export const useSelectOptions = ({
 			search,
 			page,
 		});
-		filteredOptions.value = sortOptions(
-			searchParams.page === 1 ? items : filteredOptions.value.concat(items),
-		);
+		const baseOptions =
+			searchParams.page === 1
+				? uniqWith(
+						[
+							...selectedOptionsCache.value,
+							...items,
+						],
+						deepEqual,
+					)
+				: filteredOptions.value.concat(items);
+		filteredOptions.value = sortOptions(baseOptions);
 		searchHasNext.value = next;
 		searchParams.page += 1;
 		isLoading.value = false;
@@ -95,17 +128,26 @@ export const useSelectOptions = ({
 	const filterOptions = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
+			const matchingOptions = options.value.filter((option) =>
+				getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
+			);
 			filteredOptions.value = sortOptions(
-				options.value.filter((option) => {
-					return getOptionLabel(option)
-						.toLowerCase()
-						.includes(value.toLowerCase());
-				}),
+				uniqWith(
+					[
+						...selectedOptionsCache.value,
+						...matchingOptions,
+					],
+					deepEqual,
+				),
 			);
 		} else {
 			debouncedFetch(value);
 		}
 	};
+
+	watch(() => selected.value, updateSelectedOptionsCache, {
+		deep: true,
+	});
 
 	return {
 		filterText,
@@ -117,5 +159,6 @@ export const useSelectOptions = ({
 		fetchOptions,
 		resetAndFetch,
 		filterOptions,
+		updateSelectedOptionsCache,
 	};
 };

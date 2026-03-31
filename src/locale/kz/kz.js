@@ -831,6 +831,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'элемент таңдалды',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,

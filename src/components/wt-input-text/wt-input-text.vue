@@ -21,6 +21,7 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
+      <!-- $listeners is because of compat using in applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -31,6 +32,7 @@
         class="wt-input-text__input typo-body-1"
         :inputmode="type"
         v-bind="$attrs"
+        v-on="$listeners"   
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />

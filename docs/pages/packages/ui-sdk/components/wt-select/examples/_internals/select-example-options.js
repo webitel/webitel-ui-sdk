@@ -1,241 +1,241 @@
 export const frameworkOptions = [
 	{
-		name: 'Vue.js1',
-		language: 'JavaScript',
+		name: 'Vue.js',
+		language: 'vue',
 	},
 	{
-		name: 'Adonis2',
-		language: 'JavaScript',
+		name: 'Adonis',
+		language: 'adonis',
 	},
 	{
-		name: 'Rails3',
-		language: 'Ruby',
+		name: 'Rails',
+		language: 'rails',
 	},
 	{
-		name: 'Sinatra4',
-		language: 'Ruby',
+		name: 'Sinatra',
+		language: 'sinatra',
 	},
 	{
-		name: 'Laravel5',
-		language: 'PHP',
+		name: 'Laravel',
+		language: 'laravel',
 	},
 	{
-		name: 'Phoenix6',
-		language: 'Elixir',
+		name: 'Phoenix',
+		language: 'phoenix',
 	},
 	{
-		name: 'Vue.js7',
-		language: 'JavaScript',
+		name: 'Nuxt.js',
+		language: 'nuxt',
 	},
 	{
-		name: 'Adonis8',
-		language: 'JavaScript',
+		name: 'Next.js',
+		language: 'next',
 	},
 	{
-		name: 'Rails9',
-		language: 'Ruby',
+		name: 'Django',
+		language: 'django',
 	},
 	{
-		name: 'Sinatra10',
-		language: 'Ruby',
+		name: 'FastAPI',
+		language: 'fastapi',
 	},
 	{
-		name: 'Laravel11',
-		language: 'PHP',
+		name: 'Spring',
+		language: 'spring',
 	},
 	{
-		name: 'Phoenix12',
-		language: 'Elixir',
+		name: 'Gin',
+		language: 'gin',
 	},
 ];
 
 export const allApiOptions = [
 	{
 		name: 'Angular',
-		language: 'TypeScript',
+		language: 'angular',
 	},
 	{
 		name: 'React',
-		language: 'JavaScript',
+		language: 'react',
 	},
 	{
 		name: 'Svelte',
-		language: 'JavaScript',
+		language: 'svelte',
 	},
 	{
 		name: 'Ember',
-		language: 'JavaScript',
+		language: 'ember',
 	},
 	{
 		name: 'Backbone',
-		language: 'JavaScript',
+		language: 'backbone',
 	},
 	{
 		name: 'Meteor',
-		language: 'JavaScript',
+		language: 'meteor',
 	},
 	{
 		name: 'Next.js',
-		language: 'JavaScript',
+		language: 'next',
 	},
 	{
 		name: 'Nuxt.js',
-		language: 'JavaScript',
+		language: 'nuxt',
 	},
 	{
 		name: 'Django',
-		language: 'Python',
+		language: 'django',
 	},
 	{
 		name: 'Flask',
-		language: 'Python',
+		language: 'flask',
 	},
 	{
 		name: 'FastAPI',
-		language: 'Python',
+		language: 'fastapi',
 	},
 	{
 		name: 'Spring',
-		language: 'Java',
+		language: 'spring',
 	},
 	{
 		name: 'Quarkus',
-		language: 'Java',
+		language: 'quarkus',
 	},
 	{
 		name: 'Micronaut',
-		language: 'Java',
+		language: 'micronaut',
 	},
 	{
 		name: 'Express',
-		language: 'JavaScript',
+		language: 'express',
 	},
 	{
 		name: 'Koa',
-		language: 'JavaScript',
+		language: 'koa',
 	},
 	{
 		name: 'Hapi',
-		language: 'JavaScript',
+		language: 'hapi',
 	},
 	{
 		name: 'Gin',
-		language: 'Go',
+		language: 'gin',
 	},
 	{
 		name: 'Echo',
-		language: 'Go',
+		language: 'echo',
 	},
 	{
 		name: 'Fiber',
-		language: 'Go',
+		language: 'fiber',
 	},
 	{
 		name: 'Buffalo',
-		language: 'Go',
+		language: 'buffalo',
 	},
 	{
 		name: 'Revel',
-		language: 'Go',
+		language: 'revel',
 	},
 	{
 		name: 'Actix',
-		language: 'Rust',
+		language: 'actix',
 	},
 	{
 		name: 'Axum',
-		language: 'Rust',
+		language: 'axum',
 	},
 	{
 		name: 'Rocket',
-		language: 'Rust',
+		language: 'rocket',
 	},
 	{
 		name: 'Warp',
-		language: 'Rust',
+		language: 'warp',
 	},
 	{
 		name: 'Tide',
-		language: 'Rust',
+		language: 'tide',
 	},
 	{
 		name: 'Ktor',
-		language: 'Kotlin',
+		language: 'ktor',
 	},
 	{
 		name: 'Javalin',
-		language: 'Kotlin',
+		language: 'javalin',
 	},
 	{
 		name: 'Yii',
-		language: 'PHP',
+		language: 'yii',
 	},
 	{
 		name: 'Symfony',
-		language: 'PHP',
+		language: 'symfony',
 	},
 	{
 		name: 'CodeIgniter',
-		language: 'PHP',
+		language: 'codeigniter',
 	},
 	{
 		name: 'Slim',
-		language: 'PHP',
+		language: 'slim',
 	},
 	{
 		name: 'Grape',
-		language: 'Ruby',
+		language: 'grape',
 	},
 	{
 		name: 'Hanami',
-		language: 'Ruby',
+		language: 'hanami',
 	},
 	{
 		name: 'Falcon',
-		language: 'Python',
+		language: 'falcon',
 	},
 	{
 		name: 'Tornado',
-		language: 'Python',
+		language: 'tornado',
 	},
 	{
 		name: 'Sanic',
-		language: 'Python',
+		language: 'sanic',
 	},
 	{
 		name: 'Loco',
-		language: 'Rust',
+		language: 'loco',
 	},
 	{
 		name: 'Hono',
-		language: 'JavaScript',
+		language: 'hono',
 	},
 	{
 		name: 'Elysia',
-		language: 'JavaScript',
+		language: 'elysia',
 	},
 	{
 		name: 'Fastify',
-		language: 'JavaScript',
+		language: 'fastify',
 	},
 	{
 		name: 'Nitro',
-		language: 'JavaScript',
+		language: 'nitro',
 	},
 	{
 		name: 'Nest.js',
-		language: 'TypeScript',
+		language: 'nest',
 	},
 	{
 		name: 'Adonis.js',
-		language: 'TypeScript',
+		language: 'adonis',
 	},
 	{
 		name: 'Feathers',
-		language: 'JavaScript',
+		language: 'feathers',
 	},
 	{
 		name: 'Moleculer',
-		language: 'JavaScript',
+		language: 'moleculer',
 	},
 ];

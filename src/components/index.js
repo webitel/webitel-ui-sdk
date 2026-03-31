@@ -31,6 +31,7 @@ import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
 import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
+import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotification from './wt-notification/wt-notification.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
@@ -40,6 +41,7 @@ import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
 import WtSelect from './wt-select/wt-select.vue';
+import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
@@ -99,9 +101,6 @@ const WtPopover = defineAsyncComponent(
 );
 const WtSearchBar = defineAsyncComponent(
 	() => import('./wt-search-bar/wt-search-bar.vue'),
-);
-const WtSingleSelect = defineAsyncComponent(
-	() => import('./wt-single-select/wt-single-select.vue'),
 );
 const WtSlider = defineAsyncComponent(
 	() => import('./wt-slider/wt-slider.vue'),
@@ -240,6 +239,7 @@ const Components = {
 	WtExpansionCard,
 	WtDatetimeText,
 	WtSingleSelect,
+	WtMultiSelect,
 };
 
 export {
@@ -285,6 +285,7 @@ export {
 	WtLoader,
 	WtLogo,
 	WtMessage,
+	WtMultiSelect,
 	WtNavigationBar,
 	WtNavigationMenu,
 	WtNotification,

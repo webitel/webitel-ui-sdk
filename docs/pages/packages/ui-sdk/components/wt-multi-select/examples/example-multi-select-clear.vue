@@ -3,14 +3,15 @@ import { ref } from 'vue';
 
 import { frameworkOptions as options } from '../../wt-select/examples/_internals/select-example-options.js';
 
-const value = ref(options[0]);
+const value = ref([]);
 </script>
 
 <template>
-  <wt-single-select
+  <wt-multi-select
     v-model="value"
     :options="options"
-    label="Single Select"
+    show-clear
+    label="Multi Select (with clear)"
     option-label="name"
     data-key="language"
   />

@@ -6,13 +6,15 @@ export const useSelect = ({
 	selected,
 	options,
 	optionLabel,
-	optionValue,
+	dataKey,
 	allowCustomValues,
+	manualCustomValues = false,
 	filterInput,
 	selectRef,
 	searchMethod,
 	selectId,
 	isSingle,
+	emit = () => {},
 }) => {
 	const {
 		filterText,
@@ -24,11 +26,12 @@ export const useSelect = ({
 		fetchOptions,
 		resetAndFetch,
 		filterOptions,
+		updateSelectedOptionsCache,
 	} = useSelectOptions({
 		selected,
 		options,
 		optionLabel,
-		optionValue,
+		dataKey,
 		allowCustomValues,
 		searchMethod,
 	});
@@ -46,6 +49,7 @@ export const useSelect = ({
 		searchMethod,
 		filteredOptions,
 		filterText,
+		filterOptions,
 		resetAndFetch,
 		sortOptions,
 		fetchOptions,
@@ -53,14 +57,19 @@ export const useSelect = ({
 		searchHasNext,
 	});
 
-	const { onInputKeydown, clearValue } = useSelectCustomValues({
+	const { onInputKeydown } = useSelectCustomValues({
 		selected,
+		filteredOptions,
 		options,
+		dataKey,
 		filterText,
 		filterOptions,
+		updateSelectedOptionsCache,
 		selectRef,
 		allowCustomValues,
+		manualCustomValues,
 		isSingle,
+		emit,
 	});
 
 	return {
@@ -76,6 +85,5 @@ export const useSelect = ({
 		onDropdownShow,
 		onDropdownHide,
 		onInputKeydown,
-		clearValue,
 	};
 };

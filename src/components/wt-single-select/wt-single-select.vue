@@ -1,5 +1,5 @@
 <template>
-  <div class="wt-select">
+  <div class="wt-single-select">
     <wt-label 
       v-if="hasLabel" 
       :disabled="disabled" 
@@ -15,7 +15,6 @@
       ref="selectRef"
       v-model="model"
       fluid
-      auto-option-focus
       input-class="typo-body-1"
       :invalid="invalid"
       :id="selectId"
@@ -27,6 +26,7 @@
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
       :loading="isLoading"
+      :data-key="dataKey"
       v-bind="$attrs"
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
@@ -47,11 +47,19 @@
           </template>
         </wt-input-text>
       </template>
-      <template #clearicon>
+      <template #option="{ option }">
+        <span
+          class="wt-single-select__option-label"
+          v-tooltip="getOptionLabel(option)"
+        >
+          {{ getOptionLabel(option) }}
+        </span>
+      </template>
+      <template #clearicon="{clearCallback}">
         <wt-icon-btn 
           v-if="showClear && model"  
           icon="close" 
-          @click="clearValue"
+          @click="clearCallback"
         />
       </template>
       <template #dropdownicon>
@@ -97,6 +105,10 @@ interface Props extends SelectProps {
 	optionLabel?: string;
 	optionValue?: string;
 	/**
+	 * A property to uniquely identify an option.
+	 */
+	dataKey?: string;
+	/**
 	 * Function that returns filtered options for server-side search
 	 */
 	searchMethod?: () => void;
@@ -114,6 +126,7 @@ const props = withDefaults(defineProps<Props>(), {
 	filterable: true,
 	options: () => [],
 	optionLabel: 'label',
+	dataKey: 'id',
 	labelProps: () => ({}),
 	customValidators: () => [],
 });
@@ -140,12 +153,11 @@ const {
 	onDropdownHide,
 	filterOptions,
 	onInputKeydown,
-	clearValue,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),
 	optionLabel: computed(() => props.optionLabel),
-	optionValue: computed(() => props.optionValue),
+	dataKey: computed(() => props.dataKey),
 	allowCustomValues: computed(() => props.allowCustomValues),
 	filterInput,
 	selectRef,
@@ -177,3 +189,14 @@ onMounted(() => {
 	if (props.searchMethod) fetchOptions();
 });
 </script>
+
+<style scoped>
+.wt-single-select {
+  width: 100%;
+  min-width: 0;
+}
+
+.wt-single-select__option-label {
+  user-select: none;
+}
+</style>
