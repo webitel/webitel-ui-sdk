@@ -10,7 +10,7 @@
     ]"
     class="wt-rounded-action"
     type="button"
-    v-tooltip="tooltip || undefined"
+    v-tooltip="tooltip"
     @click="emit('click', $event)"
   >
     <wt-loader v-if="showLoader" color="main" :size="loaderSize" />
@@ -118,11 +118,11 @@ const props = defineProps({
 	/**
 	 * Tooltip text displayed on hover via v-tooltip directive
 	 * @type {string}
-	 * @default ''
+	 * @default undefined
 	 */
 	tooltip: {
 		type: String,
-		default: '',
+		default: undefined,
 	},
 });
 const emit = defineEmits([
