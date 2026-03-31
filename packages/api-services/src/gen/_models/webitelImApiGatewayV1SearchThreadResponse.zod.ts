@@ -11,8 +11,8 @@ import type { WebitelImApiGatewayV1Thread } from './webitelImApiGatewayV1Thread'
 and pagination metadata.
  */
 export interface WebitelImApiGatewayV1SearchThreadResponse {
+	/** List of threads matching the search criteria. */
+	items?: WebitelImApiGatewayV1Thread[];
 	/** Indicates whether there is a next page available. */
 	next?: boolean;
-	/** List of threads matching the search criteria. */
-	threads?: WebitelImApiGatewayV1Thread[];
 }

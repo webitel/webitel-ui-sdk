@@ -5,8 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelImServiceThreadV1HistoryMessageCursor {
-	createdAt?: string;
-	direction?: boolean;
+export interface WebitelImServiceThreadV1HistoryMessageCursorResponse {
 	id?: string;
 }

@@ -25,13 +25,13 @@ export const // --- title start
 			 * @summary Search for messages in a thread.
 			 */
 			const messageHistorySearchThreadMessagesHistory = (
-				threadId: string,
+				threadId1: string,
 				params?: MessageHistorySearchThreadMessagesHistoryParams,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImServiceThreadV1SearchMessageHistoryResponse>
 			> => {
-				return axiosInstance.get(`/messaging/v1/${threadId}/messages`, {
+				return axiosInstance.get(`/v1/${threadId1}/messages`, {
 					...options,
 					params: {
 						...params,

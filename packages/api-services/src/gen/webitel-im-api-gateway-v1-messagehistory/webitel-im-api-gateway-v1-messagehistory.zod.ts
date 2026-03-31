@@ -35,16 +35,17 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 			.array(zod.number())
 			.optional()
 			.describe('Filter messages by message types.'),
-		cursorCreatedAt: zod
+		cursorId: zod
 			.string()
 			.optional()
-			.describe('Message creation timestamp (Unix time, microseconds).'),
-		cursorId: zod.string().optional().describe('Unique message identifier.'),
-		cursorDirection: zod
+			.describe(
+				'Cursor identifier.\nMust be a valid UUID referencing an existing message.\nDefines the starting point for pagination.',
+			),
+		cursorBefore: zod
 			.boolean()
 			.optional()
 			.describe(
-				'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
+				'Pagination direction flag.\n\ntrue  -> fetch newer messages (back before history)\nfalse -> fetch older messages (back to older history)',
 			),
 		size: zod
 			.number()
@@ -55,31 +56,7 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponse =
 	zod
 		.object({
-			from: zod
-				.array(
-					zod
-						.object({
-							isBot: zod.boolean().optional(),
-							issuer: zod
-								.string()
-								.optional()
-								.describe('Client issuer for the sender.'),
-							subject: zod
-								.string()
-								.optional()
-								.describe('Client-readable sender subject or display name.'),
-							type: zod.string().optional().describe('Sender type.'),
-							username: zod.string().optional().describe('Sender username.'),
-						})
-						.describe(
-							'MessageParticipant represents aggregated participant information\npresent in the message history response.',
-						),
-				)
-				.optional()
-				.describe(
-					'List of unique message senders present\nin the current response page.',
-				),
-			messages: zod
+			items: zod
 				.array(
 					zod
 						.object({
@@ -188,34 +165,31 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 								.optional()
 								.describe('List of image attachments.'),
 							metadata: zod
-								.record(
-									zod.string(),
-									zod.object({
-										'@type': zod.string().optional(),
-									}),
-								)
+								.looseObject({})
 								.optional()
 								.describe(
 									'Arbitrary message metadata.\nCan contain structured data depending on message type.',
 								),
 							sender: zod
 								.object({
-									isBot: zod.boolean().optional(),
-									issuer: zod
+									isBot: zod
+										.boolean()
+										.optional()
+										.describe(
+											'Represents if user is automation bot or actual user of system.',
+										),
+									iss: zod
 										.string()
 										.optional()
 										.describe('Client issuer for the sender.'),
-									subject: zod
+									name: zod.string().optional().describe('Sender username.'),
+									sub: zod
 										.string()
 										.optional()
 										.describe(
 											'Client-readable sender subject or display name.',
 										),
 									type: zod.string().optional().describe('Sender type.'),
-									username: zod
-										.string()
-										.optional()
-										.describe('Sender username.'),
 								})
 								.optional()
 								.describe('Sender user aggregated information.'),
@@ -240,78 +214,28 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 				)
 				.optional()
 				.describe('List of messages matching the search criteria.'),
-			next: zod
-				.boolean()
-				.optional()
-				.describe('Indicates whether more messages are available.'),
 			nextCursor: zod
 				.object({
-					createdAt: zod
+					id: zod
 						.string()
 						.optional()
-						.describe('Message creation timestamp (Unix time, microseconds).'),
-					direction: zod
-						.boolean()
-						.optional()
-						.describe(
-							'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-						),
-					id: zod.string().optional().describe('Unique message identifier.'),
+						.describe('Unique identifier last message where cursor stopped.'),
 				})
 				.optional()
-				.describe('Cursor pointing to the next page of messages.'),
-			paging: zod
+				.describe(
+					"Cursor that represents position to get older messages (used without 'before' param).",
+				),
+			prevCursor: zod
 				.object({
-					cursors: zod
-						.object({
-							after: zod
-								.object({
-									createdAt: zod
-										.string()
-										.optional()
-										.describe(
-											'Message creation timestamp (Unix time, microseconds).',
-										),
-									direction: zod
-										.boolean()
-										.optional()
-										.describe(
-											'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-										),
-									id: zod
-										.string()
-										.optional()
-										.describe('Unique message identifier.'),
-								})
-								.optional()
-								.describe('Cursor pointing to the next page of results.'),
-							before: zod
-								.object({
-									createdAt: zod
-										.string()
-										.optional()
-										.describe(
-											'Message creation timestamp (Unix time, microseconds).',
-										),
-									direction: zod
-										.boolean()
-										.optional()
-										.describe(
-											'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-										),
-									id: zod
-										.string()
-										.optional()
-										.describe('Unique message identifier.'),
-								})
-								.optional()
-								.describe('Cursor pointing to the previous page of results.'),
-						})
+					id: zod
+						.string()
 						.optional()
-						.describe('Cursor-based pagination information.'),
+						.describe('Unique identifier last message where cursor stopped.'),
 				})
 				.optional()
-				.describe('Detailed paging metadata.'),
+				.describe(
+					"Cursor that represents position to get newest messages (used with 'before' param).",
+				),
 		})
 		.describe(
 			'SearchMessageHistoryResponse contains\nmessage history search results and pagination metadata.',

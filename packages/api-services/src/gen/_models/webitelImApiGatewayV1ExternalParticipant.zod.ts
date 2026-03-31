@@ -10,12 +10,14 @@
 present in the thread history response.
  */
 export interface WebitelImApiGatewayV1ExternalParticipant {
+	/** Represents if user is automation bot or actual user of system. */
+	isBot?: boolean;
 	/** Client issuer for the sender. */
-	issuer?: string;
+	iss?: string;
+	/** Participant name. */
+	name?: string;
 	/** Client-readable participant subject or display name. */
-	subject?: string;
+	sub?: string;
 	/** Participant type. */
 	type?: string;
-	/** Participant name. */
-	username?: string;
 }

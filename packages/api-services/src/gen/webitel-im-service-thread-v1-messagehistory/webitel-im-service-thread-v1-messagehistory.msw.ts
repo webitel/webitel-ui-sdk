@@ -34,7 +34,7 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 		),
 		undefined,
 	]),
-	messages: faker.helpers.arrayElement([
+	items: faker.helpers.arrayElement([
 		Array.from(
 			{
 				length: faker.number.int({
@@ -232,19 +232,7 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 				undefined,
 			]),
 			metadata: faker.helpers.arrayElement([
-				{
-					[faker.string.alphanumeric(5)]: {
-						'@type': faker.helpers.arrayElement([
-							faker.string.alpha({
-								length: {
-									min: 10,
-									max: 20,
-								},
-							}),
-							undefined,
-						]),
-					},
-				},
+				{},
 				undefined,
 			]),
 			senderId: faker.helpers.arrayElement([
@@ -281,25 +269,8 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 		})),
 		undefined,
 	]),
-	next: faker.helpers.arrayElement([
-		faker.datatype.boolean(),
-		undefined,
-	]),
 	nextCursor: faker.helpers.arrayElement([
 		{
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			direction: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
 			id: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -312,65 +283,15 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 		},
 		undefined,
 	]),
-	paging: faker.helpers.arrayElement([
+	prevCursor: faker.helpers.arrayElement([
 		{
-			cursors: faker.helpers.arrayElement([
-				{
-					after: faker.helpers.arrayElement([
-						{
-							createdAt: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							direction: faker.helpers.arrayElement([
-								faker.datatype.boolean(),
-								undefined,
-							]),
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-						},
-						undefined,
-					]),
-					before: faker.helpers.arrayElement([
-						{
-							createdAt: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							direction: faker.helpers.arrayElement([
-								faker.datatype.boolean(),
-								undefined,
-							]),
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-						},
-						undefined,
-					]),
-				},
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
 				undefined,
 			]),
 		},
@@ -390,7 +311,7 @@ export const getMessageHistorySearchThreadMessagesHistoryMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/messaging/v1/:threadId/messages',
+		'*/v1/:threadId1/messages',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

@@ -25,19 +25,18 @@ Used to reduce payload size.
 		 */
 		types?: number[];
 		/**
-		 * Message creation timestamp (Unix time, microseconds).
-		 */
-		cursorCreatedAt?: string;
-		/**
-		 * Unique message identifier.
-		 */
+ * Cursor identifier.
+Must be a valid UUID referencing an existing message.
+Defines the starting point for pagination.
+ */
 		cursorId?: string;
 		/**
- * Pagination direction.
-true - backward (older messages).
-false - forward (newer messages).
+ * Pagination direction flag.
+
+true  -> fetch newer messages (back before history)
+false -> fetch older messages (back to older history)
  */
-		cursorDirection?: boolean;
+		cursorBefore?: boolean;
 		/**
 		 * Maximum number of messages to return.
 		 */

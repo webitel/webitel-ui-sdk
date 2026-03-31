@@ -10,7 +10,7 @@ import * as zod from 'zod';
  * @summary Search for messages in a thread.
  */
 export const MessageHistorySearchThreadMessagesHistoryParams = zod.object({
-	thread_id: zod.string(),
+	thread_id_1: zod.string(),
 });
 
 export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
@@ -19,15 +19,14 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 	senderIds: zod.array(zod.string()).optional(),
 	types: zod.array(zod.number()).optional(),
 	domainId: zod.number().optional(),
-	cursorCreatedAt: zod.string().optional(),
 	cursorId: zod.string().optional(),
-	cursorDirection: zod.boolean().optional(),
+	cursorBefore: zod.boolean().optional(),
 	size: zod.number().optional(),
 });
 
 export const MessageHistorySearchThreadMessagesHistoryResponse = zod.object({
 	from: zod.array(zod.string()).optional(),
-	messages: zod
+	items: zod
 		.array(
 			zod.object({
 				body: zod.string().optional(),
@@ -61,14 +60,7 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod.object({
 						}),
 					)
 					.optional(),
-				metadata: zod
-					.record(
-						zod.string(),
-						zod.object({
-							'@type': zod.string().optional(),
-						}),
-					)
-					.optional(),
+				metadata: zod.looseObject({}).optional(),
 				senderId: zod.string().optional(),
 				threadId: zod.string().optional(),
 				type: zod.number().optional(),
@@ -76,34 +68,14 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod.object({
 			}),
 		)
 		.optional(),
-	next: zod.boolean().optional(),
 	nextCursor: zod
 		.object({
-			createdAt: zod.string().optional(),
-			direction: zod.boolean().optional(),
 			id: zod.string().optional(),
 		})
 		.optional(),
-	paging: zod
+	prevCursor: zod
 		.object({
-			cursors: zod
-				.object({
-					after: zod
-						.object({
-							createdAt: zod.string().optional(),
-							direction: zod.boolean().optional(),
-							id: zod.string().optional(),
-						})
-						.optional(),
-					before: zod
-						.object({
-							createdAt: zod.string().optional(),
-							direction: zod.boolean().optional(),
-							id: zod.string().optional(),
-						})
-						.optional(),
-				})
-				.optional(),
+			id: zod.string().optional(),
 		})
 		.optional(),
 });

@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1ExternalParticipant } from './webitelImApiGatewayV1ExternalParticipant';
+import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
@@ -22,6 +23,8 @@ export interface WebitelImApiGatewayV1Thread {
 	id?: string;
 	/** Type of the thread. */
 	kind?: WebitelImApiGatewayV1ThreadKind;
+	/** Last message of the linked thread. */
+	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** List of member users aggregated information. */
 	memberIds?: WebitelImApiGatewayV1ExternalParticipant[];
 	/** Detailed member information. */

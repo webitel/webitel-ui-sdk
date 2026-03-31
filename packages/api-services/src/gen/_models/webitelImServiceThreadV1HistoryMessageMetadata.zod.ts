@@ -4,8 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GoogleProtobufAny } from './googleProtobufAny';
 
 export type WebitelImServiceThreadV1HistoryMessageMetadata = {
-	[key: string]: GoogleProtobufAny;
+	[key: string]: unknown;
 };

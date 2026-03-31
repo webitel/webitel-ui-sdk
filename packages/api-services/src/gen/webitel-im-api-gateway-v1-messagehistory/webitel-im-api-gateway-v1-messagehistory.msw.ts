@@ -16,60 +16,7 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 			Extract<WebitelImApiGatewayV1SearchMessageHistoryResponse, object>
 		> = {},
 	): WebitelImApiGatewayV1SearchMessageHistoryResponse => ({
-		from: faker.helpers.arrayElement([
-			Array.from(
-				{
-					length: faker.number.int({
-						min: 1,
-						max: 10,
-					}),
-				},
-				(_, i) => i + 1,
-			).map(() => ({
-				isBot: faker.helpers.arrayElement([
-					faker.datatype.boolean(),
-					undefined,
-				]),
-				issuer: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
-					undefined,
-				]),
-				subject: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
-					undefined,
-				]),
-				type: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
-					undefined,
-				]),
-				username: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
-					undefined,
-				]),
-			})),
-			undefined,
-		]),
-		messages: faker.helpers.arrayElement([
+		items: faker.helpers.arrayElement([
 			Array.from(
 				{
 					length: faker.number.int({
@@ -267,19 +214,7 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 					undefined,
 				]),
 				metadata: faker.helpers.arrayElement([
-					{
-						[faker.string.alphanumeric(5)]: {
-							'@type': faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-						},
-					},
+					{},
 					undefined,
 				]),
 				sender: faker.helpers.arrayElement([
@@ -288,7 +223,7 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 							faker.datatype.boolean(),
 							undefined,
 						]),
-						issuer: faker.helpers.arrayElement([
+						iss: faker.helpers.arrayElement([
 							faker.string.alpha({
 								length: {
 									min: 10,
@@ -297,7 +232,16 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 							}),
 							undefined,
 						]),
-						subject: faker.helpers.arrayElement([
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						sub: faker.helpers.arrayElement([
 							faker.string.alpha({
 								length: {
 									min: 10,
@@ -307,15 +251,6 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 							undefined,
 						]),
 						type: faker.helpers.arrayElement([
-							faker.string.alpha({
-								length: {
-									min: 10,
-									max: 20,
-								},
-							}),
-							undefined,
-						]),
-						username: faker.helpers.arrayElement([
 							faker.string.alpha({
 								length: {
 									min: 10,
@@ -352,25 +287,8 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 			})),
 			undefined,
 		]),
-		next: faker.helpers.arrayElement([
-			faker.datatype.boolean(),
-			undefined,
-		]),
 		nextCursor: faker.helpers.arrayElement([
 			{
-				createdAt: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
-					undefined,
-				]),
-				direction: faker.helpers.arrayElement([
-					faker.datatype.boolean(),
-					undefined,
-				]),
 				id: faker.helpers.arrayElement([
 					faker.string.alpha({
 						length: {
@@ -383,65 +301,15 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 			},
 			undefined,
 		]),
-		paging: faker.helpers.arrayElement([
+		prevCursor: faker.helpers.arrayElement([
 			{
-				cursors: faker.helpers.arrayElement([
-					{
-						after: faker.helpers.arrayElement([
-							{
-								createdAt: faker.helpers.arrayElement([
-									faker.string.alpha({
-										length: {
-											min: 10,
-											max: 20,
-										},
-									}),
-									undefined,
-								]),
-								direction: faker.helpers.arrayElement([
-									faker.datatype.boolean(),
-									undefined,
-								]),
-								id: faker.helpers.arrayElement([
-									faker.string.alpha({
-										length: {
-											min: 10,
-											max: 20,
-										},
-									}),
-									undefined,
-								]),
-							},
-							undefined,
-						]),
-						before: faker.helpers.arrayElement([
-							{
-								createdAt: faker.helpers.arrayElement([
-									faker.string.alpha({
-										length: {
-											min: 10,
-											max: 20,
-										},
-									}),
-									undefined,
-								]),
-								direction: faker.helpers.arrayElement([
-									faker.datatype.boolean(),
-									undefined,
-								]),
-								id: faker.helpers.arrayElement([
-									faker.string.alpha({
-										length: {
-											min: 10,
-											max: 20,
-										},
-									}),
-									undefined,
-								]),
-							},
-							undefined,
-						]),
-					},
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
 					undefined,
 				]),
 			},

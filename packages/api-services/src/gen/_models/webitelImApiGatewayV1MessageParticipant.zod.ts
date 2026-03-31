@@ -10,13 +10,14 @@
 present in the message history response.
  */
 export interface WebitelImApiGatewayV1MessageParticipant {
+	/** Represents if user is automation bot or actual user of system. */
 	isBot?: boolean;
 	/** Client issuer for the sender. */
-	issuer?: string;
+	iss?: string;
+	/** Sender username. */
+	name?: string;
 	/** Client-readable sender subject or display name. */
-	subject?: string;
+	sub?: string;
 	/** Sender type. */
 	type?: string;
-	/** Sender username. */
-	username?: string;
 }

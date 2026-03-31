@@ -52,15 +52,11 @@ export const ThreadManagementSearchQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number (1-based).'),
 });
 
-export const threadManagementSearchResponseThreadsItemKindDefault = `UNKNOWN`;
+export const threadManagementSearchResponseItemsItemKindDefault = `UNKNOWN`;
 
 export const ThreadManagementSearchResponse = zod
 	.object({
-		next: zod
-			.boolean()
-			.optional()
-			.describe('Indicates whether there is a next page available.'),
-		threads: zod
+		items: zod
 			.array(
 				zod
 					.object({
@@ -68,21 +64,24 @@ export const ThreadManagementSearchResponse = zod
 							.array(
 								zod
 									.object({
-										issuer: zod
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if user is automation bot or actual user of system.',
+											),
+										iss: zod
 											.string()
 											.optional()
 											.describe('Client issuer for the sender.'),
-										subject: zod
+										name: zod.string().optional().describe('Participant name.'),
+										sub: zod
 											.string()
 											.optional()
 											.describe(
 												'Client-readable participant subject or display name.',
 											),
 										type: zod.string().optional().describe('Participant type.'),
-										username: zod
-											.string()
-											.optional()
-											.describe('Participant name.'),
 									})
 									.describe(
 										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
@@ -108,27 +107,187 @@ export const ThreadManagementSearchResponse = zod
 								'GROUP',
 								'CHANNEL',
 							])
-							.default(threadManagementSearchResponseThreadsItemKindDefault)
+							.default(threadManagementSearchResponseItemsItemKindDefault)
 							.describe('Type of the thread.'),
+						lastMsg: zod
+							.object({
+								body: zod.string().optional().describe('Message body content.'),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Message creation timestamp (Unix time, milliseconds).',
+									),
+								documents: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Creation timestamp (Unix time, milliseconds).',
+													),
+												fileId: zod
+													.string()
+													.optional()
+													.describe('File storage identifier.'),
+												id: zod
+													.string()
+													.optional()
+													.describe('Document identifier.'),
+												messageId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the message this document belongs to.',
+													),
+												mime: zod
+													.string()
+													.optional()
+													.describe('MIME type of the document.'),
+												name: zod
+													.string()
+													.optional()
+													.describe('Original file name.'),
+												size: zod
+													.string()
+													.optional()
+													.describe('File size in bytes.'),
+												url: zod
+													.string()
+													.optional()
+													.describe(
+														'Public signed URL for downloading the document.',
+													),
+											})
+											.describe(
+												'Document represents a file attachment\nassociated with a message.',
+											),
+									)
+									.optional()
+									.describe('List of document attachments.'),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique message identifier.'),
+								images: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Creation timestamp (Unix time, milliseconds).',
+													),
+												fileId: zod
+													.string()
+													.optional()
+													.describe('File storage identifier.'),
+												height: zod
+													.number()
+													.optional()
+													.describe('Image height in pixels.'),
+												id: zod
+													.string()
+													.optional()
+													.describe('Image identifier.'),
+												messageId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the message this message belongs to.',
+													),
+												mime: zod
+													.string()
+													.optional()
+													.describe('MIME type of the image.'),
+												url: zod
+													.string()
+													.optional()
+													.describe(
+														'Public signed URL for accessing the image.',
+													),
+												width: zod
+													.number()
+													.optional()
+													.describe('Image width in pixels.'),
+											})
+											.describe(
+												'Image represents an image attachment\nassociated with a message.',
+											),
+									)
+									.optional()
+									.describe('List of image attachments.'),
+								metadata: zod
+									.looseObject({})
+									.optional()
+									.describe(
+										'Arbitrary message metadata.\nCan contain structured data depending on message type.',
+									),
+								sender: zod
+									.object({
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if user is automation bot or actual user of system.',
+											),
+										iss: zod
+											.string()
+											.optional()
+											.describe('Client issuer for the sender.'),
+										name: zod.string().optional().describe('Sender username.'),
+										sub: zod
+											.string()
+											.optional()
+											.describe(
+												'Client-readable sender subject or display name.',
+											),
+										type: zod.string().optional().describe('Sender type.'),
+									})
+									.optional()
+									.describe('Sender user aggregated information.'),
+								threadId: zod
+									.string()
+									.optional()
+									.describe('Identifier of the thread the message belongs to.'),
+								type: zod
+									.number()
+									.optional()
+									.describe('Message type identifier.'),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Message last update timestamp (Unix time, milliseconds).',
+									),
+							})
+							.optional()
+							.describe('Last message of the linked thread.'),
 						memberIds: zod
 							.array(
 								zod
 									.object({
-										issuer: zod
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if user is automation bot or actual user of system.',
+											),
+										iss: zod
 											.string()
 											.optional()
 											.describe('Client issuer for the sender.'),
-										subject: zod
+										name: zod.string().optional().describe('Participant name.'),
+										sub: zod
 											.string()
 											.optional()
 											.describe(
 												'Client-readable participant subject or display name.',
 											),
 										type: zod.string().optional().describe('Participant type.'),
-										username: zod
-											.string()
-											.optional()
-											.describe('Participant name.'),
 									})
 									.describe(
 										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
@@ -175,11 +334,21 @@ export const ThreadManagementSearchResponse = zod
 											),
 										member: zod
 											.object({
-												issuer: zod
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if user is automation bot or actual user of system.',
+													),
+												iss: zod
 													.string()
 													.optional()
 													.describe('Client issuer for the sender.'),
-												subject: zod
+												name: zod
+													.string()
+													.optional()
+													.describe('Participant name.'),
+												sub: zod
 													.string()
 													.optional()
 													.describe(
@@ -189,10 +358,6 @@ export const ThreadManagementSearchResponse = zod
 													.string()
 													.optional()
 													.describe('Participant type.'),
-												username: zod
-													.string()
-													.optional()
-													.describe('Participant name.'),
 											})
 											.optional()
 											.describe('User aggregated information.'),
@@ -205,18 +370,24 @@ export const ThreadManagementSearchResponse = zod
 							.describe('Detailed member information.'),
 						owner: zod
 							.object({
-								issuer: zod
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if user is automation bot or actual user of system.',
+									),
+								iss: zod
 									.string()
 									.optional()
 									.describe('Client issuer for the sender.'),
-								subject: zod
+								name: zod.string().optional().describe('Participant name.'),
+								sub: zod
 									.string()
 									.optional()
 									.describe(
 										'Client-readable participant subject or display name.',
 									),
 								type: zod.string().optional().describe('Participant type.'),
-								username: zod.string().optional().describe('Participant name.'),
 							})
 							.optional()
 							.describe('Aggregated user information of the thread owner.'),
@@ -235,6 +406,10 @@ export const ThreadManagementSearchResponse = zod
 			)
 			.optional()
 			.describe('List of threads matching the search criteria.'),
+		next: zod
+			.boolean()
+			.optional()
+			.describe('Indicates whether there is a next page available.'),
 	})
 	.describe(
 		'SearchThreadResponse contains the list of threads\nand pagination metadata.',

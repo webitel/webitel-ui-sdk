@@ -5,13 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImServiceThreadV1HistoryMessage } from './webitelImServiceThreadV1HistoryMessage';
-import type { WebitelImServiceThreadV1HistoryMessageCursor } from './webitelImServiceThreadV1HistoryMessageCursor';
-import type { WebitelImServiceThreadV1Paging } from './webitelImServiceThreadV1Paging';
+import type { WebitelImServiceThreadV1HistoryMessageCursorResponse } from './webitelImServiceThreadV1HistoryMessageCursorResponse';
 
 export interface WebitelImServiceThreadV1SearchMessageHistoryResponse {
 	from?: string[];
-	messages?: WebitelImServiceThreadV1HistoryMessage[];
-	next?: boolean;
-	nextCursor?: WebitelImServiceThreadV1HistoryMessageCursor;
-	paging?: WebitelImServiceThreadV1Paging;
+	items?: WebitelImServiceThreadV1HistoryMessage[];
+	nextCursor?: WebitelImServiceThreadV1HistoryMessageCursorResponse;
+	prevCursor?: WebitelImServiceThreadV1HistoryMessageCursorResponse;
 }

@@ -14,15 +14,16 @@ export interface WebitelImApiGatewayV1Contact {
 	appId?: string;
 	/** Record creation timestamp (Unix Epoch in milliseconds). */
 	createdAt?: string;
+	/** Represents if usere is real person or automatic script. */
 	isBot?: boolean;
 	/** Provider-specific unique identifier (Issuer ID). */
-	issId?: string;
+	iss?: string;
 	/** Additional dynamic attributes provided by the messenger. */
 	metadata?: WebitelImApiGatewayV1ContactMetadata;
 	/** Display name of the contact. */
 	name?: string;
 	/** Associated internal system subject/identifier. */
-	subject?: string;
+	sub?: string;
 	/** Channel type (e.g., 'webchat', 'telegram'). */
 	type?: string;
 	/** Last record update timestamp (Unix Epoch in milliseconds). */

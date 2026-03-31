@@ -11,8 +11,7 @@ export type MessageHistorySearchThreadMessagesHistoryParams = {
 	senderIds?: string[];
 	types?: number[];
 	domainId?: number;
-	cursorCreatedAt?: string;
 	cursorId?: string;
-	cursorDirection?: boolean;
+	cursorBefore?: boolean;
 	size?: number;
 };

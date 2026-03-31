@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type WebitelImServiceThreadV1HistoryMessageMetadata = {
-	[key: string]: unknown;
-};
+export interface WebitelImServiceThreadV1HistoryMessageCursorRequest {
+	before?: boolean;
+	id?: string;
+}

@@ -15,11 +15,7 @@ export const getThreadManagementSearchResponseMock = (
 		Extract<WebitelImApiGatewayV1SearchThreadResponse, object>
 	> = {},
 ): WebitelImApiGatewayV1SearchThreadResponse => ({
-	next: faker.helpers.arrayElement([
-		faker.datatype.boolean(),
-		undefined,
-	]),
-	threads: faker.helpers.arrayElement([
+	items: faker.helpers.arrayElement([
 		Array.from(
 			{
 				length: faker.number.int({
@@ -39,7 +35,11 @@ export const getThreadManagementSearchResponseMock = (
 					},
 					(_, i) => i + 1,
 				).map(() => ({
-					issuer: faker.helpers.arrayElement([
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -48,7 +48,16 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					subject: faker.helpers.arrayElement([
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -58,15 +67,6 @@ export const getThreadManagementSearchResponseMock = (
 						undefined,
 					]),
 					type: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					username: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -111,6 +111,269 @@ export const getThreadManagementSearchResponseMock = (
 				),
 				undefined,
 			]),
+			lastMsg: faker.helpers.arrayElement([
+				{
+					body: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					documents: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							fileId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							messageId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							mime: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							size: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							url: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					images: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							fileId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							height: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							messageId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							mime: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							url: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							width: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{},
+						undefined,
+					]),
+					sender: faker.helpers.arrayElement([
+						{
+							isBot: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							iss: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							sub: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							type: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					threadId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			memberIds: faker.helpers.arrayElement([
 				Array.from(
 					{
@@ -121,7 +384,11 @@ export const getThreadManagementSearchResponseMock = (
 					},
 					(_, i) => i + 1,
 				).map(() => ({
-					issuer: faker.helpers.arrayElement([
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -130,7 +397,16 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					subject: faker.helpers.arrayElement([
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -140,15 +416,6 @@ export const getThreadManagementSearchResponseMock = (
 						undefined,
 					]),
 					type: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					username: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -217,7 +484,11 @@ export const getThreadManagementSearchResponseMock = (
 					]),
 					member: faker.helpers.arrayElement([
 						{
-							issuer: faker.helpers.arrayElement([
+							isBot: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							iss: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
 										min: 10,
@@ -226,7 +497,16 @@ export const getThreadManagementSearchResponseMock = (
 								}),
 								undefined,
 							]),
-							subject: faker.helpers.arrayElement([
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							sub: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
 										min: 10,
@@ -244,15 +524,6 @@ export const getThreadManagementSearchResponseMock = (
 								}),
 								undefined,
 							]),
-							username: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
 						},
 						undefined,
 					]),
@@ -261,7 +532,11 @@ export const getThreadManagementSearchResponseMock = (
 			]),
 			owner: faker.helpers.arrayElement([
 				{
-					issuer: faker.helpers.arrayElement([
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -270,7 +545,16 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					subject: faker.helpers.arrayElement([
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -280,15 +564,6 @@ export const getThreadManagementSearchResponseMock = (
 						undefined,
 					]),
 					type: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					username: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -319,6 +594,10 @@ export const getThreadManagementSearchResponseMock = (
 				undefined,
 			]),
 		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	...overrideResponse,

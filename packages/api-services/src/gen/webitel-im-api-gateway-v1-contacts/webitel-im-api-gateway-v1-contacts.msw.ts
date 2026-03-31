@@ -47,7 +47,7 @@ export const getContactsSearchResponseMock = (
 				faker.datatype.boolean(),
 				undefined,
 			]),
-			issId: faker.helpers.arrayElement([
+			iss: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -76,7 +76,7 @@ export const getContactsSearchResponseMock = (
 				}),
 				undefined,
 			]),
-			subject: faker.helpers.arrayElement([
+			sub: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
