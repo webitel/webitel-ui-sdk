@@ -41,10 +41,11 @@ export const useSelectCustomValues = ({
 
 		if (isAlreadySelected) return;
 
-		if (manualCustomValues.value) {
-			emit('add:custom-value', filterText.value);
-			return;
-		}
+		// TODO: remove this functionality if there is no select that does manually handling
+		// if (manualCustomValues.value) {
+		// 	emit('add:custom-value', filterText.value);
+		// 	return;
+		// }
 
 		const customOption = makeCustomOption(filterText.value);
 
