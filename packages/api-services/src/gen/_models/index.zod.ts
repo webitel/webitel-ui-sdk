@@ -55,6 +55,7 @@ export * from './apiGetCustomerResponse.zod';
 export * from './apiGetPasswordSettingsResponse.zod';
 export * from './apiGetPasswordSettingsResponseSettings.zod';
 export * from './apiGetUserTfaKeyResponse.zod';
+export * from './apiGetUserWarningsResponse.zod';
 export * from './apiGrantAccessRequestV1.zod';
 export * from './apiLDAPCatalog.zod';
 export * from './apiLDAPCatalogTLSConfig.zod';

@@ -12,6 +12,7 @@ import type {
 	ApiCreateUserResponse,
 	ApiDeleteUsersResponse,
 	ApiGetPasswordSettingsResponse,
+	ApiGetUserWarningsResponse,
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersResponse,
@@ -2634,6 +2635,71 @@ export const getSearchUsers2ResponseMock = (
 	...overrideResponse,
 });
 
+export const getGetUserWarningsResponseMock = (
+	overrideResponse: Partial<Extract<ApiGetUserWarningsResponse, object>> = {},
+): ApiGetUserWarningsResponse => ({
+	warnings: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			detail: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			warningData: faker.helpers.arrayElement([
+				{
+					passwordExpiry: faker.helpers.arrayElement([
+						{
+							daysRemaining: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							expiresAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getDeleteUsersResponseMock = (
 	overrideResponse: Partial<Extract<ApiDeleteUsersResponse, object>> = {},
 ): ApiDeleteUsersResponse => ({
@@ -4854,6 +4920,32 @@ export const getSearchUsers2MockHandler = (
 	);
 };
 
+export const getGetUserWarningsMockHandler = (
+	overrideResponse?:
+		| ApiGetUserWarningsResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ApiGetUserWarningsResponse> | ApiGetUserWarningsResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/users/warnings',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGetUserWarningsResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getDeleteUsersMockHandler = (
 	overrideResponse?:
 		| ApiDeleteUsersResponse
@@ -4991,6 +5083,7 @@ export const getUsersMock = () => [
 	getUpdatePasswordMockHandler(),
 	getReadPasswordSettingsMockHandler(),
 	getSearchUsers2MockHandler(),
+	getGetUserWarningsMockHandler(),
 	getDeleteUsersMockHandler(),
 	getReadUserMockHandler(),
 	getLogoutUserMockHandler(),

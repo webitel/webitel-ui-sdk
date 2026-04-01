@@ -54,24 +54,6 @@ export const SignupResponse = zod.object({
 				),
 		})
 		.optional(),
-	warnings: zod
-		.array(
-			zod.object({
-				detail: zod.string().optional(),
-				id: zod.string().optional(),
-				warningData: zod
-					.object({
-						passwordExpiry: zod
-							.object({
-								daysRemaining: zod.string().optional(),
-								expiresAt: zod.string().optional(),
-							})
-							.optional(),
-					})
-					.optional(),
-			}),
-		)
-		.optional(),
 });
 
 /**

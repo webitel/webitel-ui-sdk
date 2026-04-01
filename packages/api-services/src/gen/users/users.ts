@@ -13,6 +13,7 @@ import type {
 	ApiCreateUserResponse,
 	ApiDeleteUsersResponse,
 	ApiGetPasswordSettingsResponse,
+	ApiGetUserWarningsResponse,
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersRequest,
@@ -117,6 +118,11 @@ export const // --- title start
 					options,
 				);
 			};
+			const getUserWarnings = (
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ApiGetUserWarningsResponse>> => {
+				return axiosInstance.get(`/users/warnings`, options);
+			};
 			const deleteUsers = (
 				id: string,
 				params?: DeleteUsersParams,
@@ -190,6 +196,7 @@ export const // --- title start
 				updatePassword,
 				readPasswordSettings,
 				searchUsers2,
+				getUserWarnings,
 				deleteUsers,
 				readUser,
 				logoutUser,
@@ -205,6 +212,7 @@ export type UpdatePasswordResult = AxiosResponse<ApiUpdatePasswordResponse>;
 export type ReadPasswordSettingsResult =
 	AxiosResponse<ApiGetPasswordSettingsResponse>;
 export type SearchUsers2Result = AxiosResponse<ApiSearchUsersResponse>;
+export type GetUserWarningsResult = AxiosResponse<ApiGetUserWarningsResponse>;
 export type DeleteUsersResult = AxiosResponse<ApiDeleteUsersResponse>;
 export type ReadUserResult = AxiosResponse<ApiReadUserResponse>;
 export type LogoutUserResult = AxiosResponse<ApiLogoutUserResponse>;

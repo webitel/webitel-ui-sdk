@@ -55,6 +55,7 @@ export * from './apiGetCustomerResponse';
 export * from './apiGetPasswordSettingsResponse';
 export * from './apiGetPasswordSettingsResponseSettings';
 export * from './apiGetUserTfaKeyResponse';
+export * from './apiGetUserWarningsResponse';
 export * from './apiGrantAccessRequestV1';
 export * from './apiLDAPCatalog';
 export * from './apiLDAPCatalogTLSConfig';

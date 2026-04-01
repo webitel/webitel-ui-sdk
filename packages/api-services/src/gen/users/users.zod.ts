@@ -945,6 +945,27 @@ export const SearchUsers2Response = zod.object({
 	size: zod.number().optional(),
 });
 
+export const GetUserWarningsResponse = zod.object({
+	warnings: zod
+		.array(
+			zod.object({
+				detail: zod.string().optional(),
+				id: zod.string().optional(),
+				warningData: zod
+					.object({
+						passwordExpiry: zod
+							.object({
+								daysRemaining: zod.string().optional(),
+								expiresAt: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+});
+
 export const DeleteUsersParams = zod.object({
 	id: zod.string().describe('ONE /users/{id}'),
 });
