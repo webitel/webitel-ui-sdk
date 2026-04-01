@@ -845,6 +845,8 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
 	},

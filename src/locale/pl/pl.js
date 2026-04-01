@@ -842,6 +842,8 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
 	},

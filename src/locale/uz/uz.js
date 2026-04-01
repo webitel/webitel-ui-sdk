@@ -844,6 +844,8 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
 	},

@@ -844,6 +844,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
 	},

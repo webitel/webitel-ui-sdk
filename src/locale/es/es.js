@@ -839,6 +839,8 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
 	},
