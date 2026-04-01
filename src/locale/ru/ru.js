@@ -835,6 +835,8 @@ export default {
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
 	},

@@ -853,6 +853,7 @@ export default deepmerge(
 			},
 		},
 		errorNotifications: {
+			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
 		},
