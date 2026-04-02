@@ -118,11 +118,9 @@ const props = defineProps({
 	/**
 	 * Tooltip text displayed on hover via v-tooltip directive
 	 * @type {string}
-	 * @default undefined
 	 */
 	tooltip: {
 		type: String,
-		default: undefined,
 	},
 });
 const emit = defineEmits([
