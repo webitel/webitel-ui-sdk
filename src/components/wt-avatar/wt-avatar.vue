@@ -120,8 +120,8 @@ const avatarLetters = computed(() => {
 });
 
 const avatarLettersColor = computed(() => {
+	if (props.bot) return;
 	if (!props.username) {
-		if (props.bot) return;
 		return '--p-avatar-letters-na-color';
 	}
 
@@ -129,8 +129,8 @@ const avatarLettersColor = computed(() => {
 });
 
 const avatarLettersBackground = computed(() => {
+	if (props.bot) return;
 	if (!props.username) {
-		if (props.bot) return;
 		return '--p-avatar-letters-na-background';
 	}
 	// en.concat(uk)
