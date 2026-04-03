@@ -9,7 +9,17 @@
 		<template #default>
 			<wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
 
-			<img v-if="!isLetterAvatar" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
+      <div
+        v-if="bot"
+        class="wt-avatar__bot"
+      >
+        <wt-icon
+          icon="bot"
+          :style="{ fill: 'var(--p-avatar-bot-color)' }"
+        />
+      </div>
+
+			<img v-if="!isLetterAvatar && !bot" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
 		</template>
 	</PAvatar>
 </template>
@@ -88,6 +98,10 @@ const props = defineProps({
 			'square',
 		],
 	},
+	bot: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const isLetterAvatar = computed(() => !props.src);
@@ -107,6 +121,7 @@ const avatarLetters = computed(() => {
 
 const avatarLettersColor = computed(() => {
 	if (!props.username) {
+		if (props.bot) return;
 		return '--p-avatar-letters-na-color';
 	}
 
@@ -115,6 +130,7 @@ const avatarLettersColor = computed(() => {
 
 const avatarLettersBackground = computed(() => {
 	if (!props.username) {
+		if (props.bot) return;
 		return '--p-avatar-letters-na-background';
 	}
 	// en.concat(uk)
@@ -234,5 +250,14 @@ const badgeColorVar = computed(() => {
 	border-radius: 50%;
 	width: 100%;
 	height: 100%;
+}
+
+.wt-avatar__bot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--p-avatar-bot-background);
 }
 </style>

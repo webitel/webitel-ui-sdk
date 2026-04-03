@@ -4,8 +4,8 @@ export default {
 		color: '{text.avatar.color}',
 	},
 	letters: {
-		'na-color': '{gray.650}',
-		'na-background': '{gray.350}',
+		'na-color': '{gray.350}',
+		'na-background': '{gray.650}',
 		'p1-color': 'linear-gradient(45deg, {deep-purple.700}, {deep-purple.350})',
 		'p2-color': 'linear-gradient(45deg, {indigo.550}, {indigo.300})',
 		'p3-color': 'linear-gradient(45deg, {deep-purple.350}, {cyan.250})',
@@ -20,5 +20,9 @@ export default {
 		'p12-color': 'linear-gradient(45deg, {green.500}, {indigo.500})',
 		'p13-color': 'linear-gradient(45deg, {orange.400}, {amber.200})',
 		'p14-color': 'linear-gradient(45deg, {amber.400}, {lime.350})',
+	},
+	bot: {
+		color: '{gray.350}',
+		background: '{gray.650}',
 	},
 };
