@@ -13,10 +13,12 @@
         v-if="!props.withoutAvatars"
         class="chat-message__avatar-wrapper"
       >
-        <message-avatar
+        <wt-avatar
           v-if="props.showAvatar"
-          :bot="isBot"
           :username="getClientUsername"
+          :size="size"
+          :src="ComponentSize.SM || size"
+          :bot="isBot"
         />
       </div>
       <!--    click.stop prevents focus on textarea and allows to select the message-new text -->
@@ -54,19 +56,18 @@
 </template>
 
   <script setup lang="ts">
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { computed, defineEmits, defineProps, inject } from "vue";
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { computed, defineEmits, defineProps, inject } from 'vue';
 
-import type { ChatMessageType } from "../../../types/ChatMessage.types";
-import { useChatMessageFile } from "../composables/useChatMessageFile";
-import { MessageAction } from "../enums/MessageAction.enum";
-import MessageAvatar from "./details/chat-message-avatar.vue";
-import MessageBlockedError from "./details/chat-message-blocked-error.vue";
-import MessageDocument from "./details/chat-message-document.vue";
-import MessageImage from "./details/chat-message-image.vue";
-import MessagePlayer from "./details/chat-message-player.vue";
-import MessageText from "./details/chat-message-text.vue";
-import MessageTime from "./details/chat-message-time.vue";
+import type { ChatMessageType } from '../../../types/ChatMessage.types';
+import { useChatMessageFile } from '../composables/useChatMessageFile';
+import { MessageAction } from '../enums/MessageAction.enum';
+import MessageBlockedError from './details/chat-message-blocked-error.vue';
+import MessageDocument from './details/chat-message-document.vue';
+import MessageImage from './details/chat-message-image.vue';
+import MessagePlayer from './details/chat-message-player.vue';
+import MessageText from './details/chat-message-text.vue';
+import MessageTime from './details/chat-message-time.vue';
 
 const props = withDefaults(
 	defineProps<{
@@ -78,7 +79,7 @@ const props = withDefaults(
 	{
 		showAvatar: false,
 		withoutAvatars: false,
-		username: "",
+		username: '',
 	},
 );
 
@@ -87,17 +88,17 @@ const emit = defineEmits<{
 	(e: typeof MessageAction.InitializedPlayer, player: object): void;
 }>();
 
-const size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>('size');
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
 const isSelfSide = computed<boolean>(
-	() => props.message.member?.self || props.message.member?.type === "webitel",
+	() => props.message.member?.self || props.message.member?.type === 'webitel',
 );
-const isBot = computed<boolean>(() => props.message.member?.type === "bot");
+const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
 
 const getClientUsername = computed<string>(() => {
-	return !isSelfSide.value ? props.username : ""; // need to show username avatar only for client
+	return !isSelfSide.value ? props.username : ''; // need to show username avatar only for client
 });
 
 function handlePlayerInitialize(player) {
@@ -134,11 +135,7 @@ function handlePlayerInitialize(player) {
 .chat-message__avatar-wrapper {
   flex: 0 0 var(--spacing-lg);
   width: var(--wt-avatar-size--size-sm);
-}
-
-.chat-message-avatar {
-  width: 100%;
-  flex: 0 0 var(--icon-lg-size);
+  pointer-events: none; // prevents dragging to upload file area
 }
 
 .chat-message--right .chat-message__content {
