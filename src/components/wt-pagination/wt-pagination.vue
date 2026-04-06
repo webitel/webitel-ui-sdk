@@ -129,6 +129,11 @@ export default {
 	methods: {
 		inputHandler(value) {
 			if (value === null) {
+				// @author r.zaritskyi
+				// https://github.com/webitel/webitel-ui-sdk/pull/1283#issue-4194972887
+				// If internalSize is already DEFAULT_SIZE, Vuex won't detect a change,
+				// Vue won't re-render wt-input-number, and the field stays empty.
+				// Setting null first forces a DOM update; nextTick restores the value.
 				this.internalSize = null;
 				this.$nextTick(() => {
 					this.internalSize = DEFAULT_SIZE;
