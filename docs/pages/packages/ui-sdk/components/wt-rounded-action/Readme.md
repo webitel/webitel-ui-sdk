@@ -6,6 +6,7 @@ import ExampleWideRoundedAction from './examples/example-wide-rounded-action.vue
 import ExampleRoundedActionDifferentColors from './examples/example-rounded-action-different-colors.vue';
 import ExampleRoundedRoundedAction from './examples/example-rounded-rounded-action.vue';
 import ExampleSmallRoundedAction from './examples/example-small-rounded-action.vue';
+import ExampleTooltipRoundedAction from './examples/example-tooltip-rounded-action.vue';
 </script>
 
 # `wt-rounded-action.vue`
@@ -72,4 +73,14 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 
 ::: details Code
 <<< ./examples/example-loading-state-rounded-action.vue{js}
+:::
+
+## Tooltip
+
+::: raw
+<ExampleTooltipRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-tooltip-rounded-action.vue{js}
 :::
