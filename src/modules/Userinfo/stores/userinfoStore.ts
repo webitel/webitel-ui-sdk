@@ -2,7 +2,12 @@ import pick from 'lodash/pick';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
+import {
+	getSession,
+	getUiVisibilityAccess,
+	logout,
+	getUserWarnings,
+} from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
 
@@ -37,10 +42,13 @@ export const createUserinfoStore = () => {
 
 		const userId = ref();
 		const userInfo = ref();
+		const userWarnings = ref();
 
 		const initialize = async () => {
 			const session = await getSession();
 			const access = await getUiVisibilityAccess();
+			const { warnings } = await getUserWarnings();
+			userWarnings.value = warnings;
 
 			userId.value = session.userId;
 			userInfo.value = pick(session, [
@@ -75,6 +83,7 @@ export const createUserinfoStore = () => {
 			userId,
 			userInfo,
 			timezone,
+			warnings: userWarnings,
 			initialize,
 
 			hasReadAccess,

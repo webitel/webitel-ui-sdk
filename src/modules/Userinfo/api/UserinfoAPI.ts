@@ -71,4 +71,22 @@ const logout = async () => {
 	}
 };
 
-export { getSession, getUiVisibilityAccess, logout, setInstance };
+const getUserWarnings = async () => {
+	const url = 'users/warnings';
+	try {
+		const response = await instance.get(url);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, []);
+	}
+};
+
+export {
+	getSession,
+	getUiVisibilityAccess,
+	logout,
+	setInstance,
+	getUserWarnings,
+};
