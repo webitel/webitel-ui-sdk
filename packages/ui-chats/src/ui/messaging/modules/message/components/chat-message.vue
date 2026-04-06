@@ -135,7 +135,7 @@ function handlePlayerInitialize(player) {
 .chat-message__avatar-wrapper {
   flex: 0 0 var(--spacing-lg);
   width: var(--wt-avatar-size--size-sm);
-  pointer-events: none; // prevents dragging to upload file area
+  pointer-events: none; /* prevents dragging to upload file area */
 }
 
 .chat-message--right .chat-message__content {
