@@ -48,13 +48,17 @@ describe('QueryFiltersStoreModule getters', () => {
 });
 
 describe('QueryFiltersStoreModule actions', () => {
-	const context = {
-		state: {
-			...state,
-		},
-		commit: vi.fn(),
-	};
-	const module = new QueryFiltersStoreModule().getModule();
+	let context;
+	let module;
+	beforeEach(() => {
+		context = {
+			state: {
+				...state,
+			},
+			commit: vi.fn(),
+		};
+		module = new QueryFiltersStoreModule().getModule();
+	});
 	it('SET_FILTER: single value filter', () => {
 		const filter = {
 			filter: valueFilter,
@@ -114,7 +118,7 @@ describe('QueryFiltersStoreModule actions', () => {
 	});
 	it('calls RESET_FILTERS mutation on RESET_FILTERS action call', () => {
 		module.actions.RESET_FILTERS(context);
-		expect(context.commit).toHaveBeenCalledWith('RESET_FILTERS');
+		expect(context.commit).toHaveBeenCalledWith('RESET_FILTERS', undefined);
 	});
 });
 
