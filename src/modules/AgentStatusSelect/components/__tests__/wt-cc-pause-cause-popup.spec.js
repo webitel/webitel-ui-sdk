@@ -13,7 +13,8 @@ describe('Pause cause popup', () => {
 			props: {
 				options: [
 					{
-						value,
+						id: 1,
+						name: value,
 					},
 				],
 			},
@@ -22,7 +23,7 @@ describe('Pause cause popup', () => {
 			.findComponent({
 				name: 'wt-radio',
 			})
-			.vm.$emit('input');
-		expect(wrapper.vm.selected.value).toEqual(value);
+			.vm.$emit('update:selected');
+		expect(wrapper.vm.selected.name).toEqual(value);
 	});
 });

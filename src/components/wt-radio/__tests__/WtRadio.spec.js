@@ -42,8 +42,8 @@ describe('WtRadio', () => {
 				value,
 			},
 		});
-		wrapper.find('.wt-radio__input').trigger('input');
-		expect(wrapper.emitted().input[0]).toEqual([
+		wrapper.find('input[type="radio"]').setValue();
+		expect(wrapper.emitted()['update:selected'][0]).toEqual([
 			value,
 		]);
 	});

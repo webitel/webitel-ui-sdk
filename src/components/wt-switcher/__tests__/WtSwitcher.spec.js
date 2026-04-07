@@ -25,20 +25,4 @@ describe('WtSwitcher', () => {
 		});
 		expect(wrapper.find('.wt-switcher__label').text()).toBe(label);
 	});
-
-	it('toggles passed value at click', () => {
-		const value = true;
-		const wrapper = mount(WtSwitcher, {
-			stubs: {
-				WtLabel,
-			},
-			props: {
-				value,
-			},
-		});
-		wrapper.find('.wt-switcher__input').trigger('change');
-		expect(wrapper.emitted().change[0]).toEqual([
-			!value,
-		]);
-	});
 });

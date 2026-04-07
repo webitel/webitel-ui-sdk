@@ -1,6 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 
-import WtLoader from '../../wt-loader/wt-loader.vue';
 import WtButton from '../wt-button.vue';
 
 describe('WtButton', () => {
@@ -11,12 +10,12 @@ describe('WtButton', () => {
 
 	it('renders a button content via default slot', () => {
 		const content = 'button content';
-		const wrapper = shallowMount(WtButton, {
+		const wrapper = mount(WtButton, {
 			slots: {
 				default: content,
 			},
 		});
-		expect(wrapper.find('.wt-button').text()).toBe(content);
+		expect(wrapper.text()).toContain(content);
 	});
 
 	it('renders button spinner', () => {
@@ -25,6 +24,6 @@ describe('WtButton', () => {
 				loading: true,
 			},
 		});
-		expect(wrapper.findComponent(WtLoader).exists()).toBe(true);
+		expect(wrapper.classes('p-button--loading')).toBe(true);
 	});
 });

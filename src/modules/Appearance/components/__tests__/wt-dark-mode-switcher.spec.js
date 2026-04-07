@@ -25,11 +25,12 @@ describe('WtDarkModeSwitcher', () => {
 		expect(
 			window.document.documentElement.classList.contains('theme--dark'),
 		).toBe(false);
-		await wrapper
+		wrapper
 			.findComponent({
 				name: 'wt-switcher',
 			})
-			.trigger('change');
+			.vm.$emit('update:model-value');
+		await wrapper.vm.$nextTick();
 		expect(
 			window.document.documentElement.classList.contains('theme--dark'),
 		).toBe(true);

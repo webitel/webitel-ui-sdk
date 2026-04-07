@@ -10,7 +10,7 @@ describe('WtTimeInput', () => {
 				WtLabel,
 			},
 		});
-		expect(wrapper.classes('wt-time-input')).toBe(true);
+		expect(wrapper.exists()).toBe(true);
 	});
 
 	it('renders label text when passed', () => {

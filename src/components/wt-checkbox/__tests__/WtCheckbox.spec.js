@@ -40,8 +40,8 @@ describe('WtCheckbox', () => {
 				selected,
 			},
 		});
-		wrapper.find('.wt-checkbox__input').trigger('change');
-		expect(wrapper.emitted().change[0]).toEqual([
+		wrapper.find('input[type="checkbox"]').setValue(!selected);
+		expect(wrapper.emitted()['update:selected'][0]).toEqual([
 			!selected,
 		]);
 	});
