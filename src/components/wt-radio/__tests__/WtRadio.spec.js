@@ -7,6 +7,10 @@ import WtRadio from '../wt-radio.vue';
 describe('WtRadio', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtRadio, {
+			props: {
+				selected: '',
+				value: 'v',
+			},
 			stubs: {
 				WtLabel,
 				WtIcon,
@@ -24,6 +28,8 @@ describe('WtRadio', () => {
 			},
 			props: {
 				label,
+				selected: '',
+				value: 'v',
 			},
 		});
 		expect(wrapper.find('.wt-radio__label').text()).toBe(label);

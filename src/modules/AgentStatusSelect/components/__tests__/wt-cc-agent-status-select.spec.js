@@ -56,7 +56,6 @@ describe('Wt Cc Agent Status Select', () => {
 	});
 	it(`at pause-cause-popup "change" event, triggers patch agent status
    with "pause" status and passed pauseCause`, async () => {
-		const pauseCause = 'jest';
 		const wrapper = mount(WtCcAgentStatusSelect, mountOptions);
 		wrapper.vm.openPauseCausePopup();
 		await wrapper.vm.$nextTick();
@@ -65,12 +64,15 @@ describe('Wt Cc Agent Status Select', () => {
 			.findComponent({
 				name: 'pause-cause-popup',
 			})
-			.vm.$emit('change', pauseCause);
+			.vm.$emit('change', {
+				pauseCause: 'coffee',
+				statusComment: 'brb',
+			});
 		const reqPayload = {
 			status: AgentStatus.PAUSE,
 			agentId: agent.agentId,
-			pauseCause: undefined,
-			statusComment: undefined,
+			pauseCause: 'coffee',
+			statusComment: 'brb',
 		};
 		expect(agentStatusMock).toHaveBeenCalledWith(reqPayload);
 	});

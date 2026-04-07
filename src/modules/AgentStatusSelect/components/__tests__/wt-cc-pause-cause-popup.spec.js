@@ -26,4 +26,31 @@ describe('Pause cause popup', () => {
 			.vm.$emit('update:selected');
 		expect(wrapper.vm.selected.name).toEqual(value);
 	});
+
+	it('emits payload and close on setPause', async () => {
+		const wrapper = mount(WtCcPauseCausePopup, {
+			props: {
+				options: [
+					{
+						id: 1,
+						name: 'coffee',
+					},
+				],
+			},
+		});
+
+		wrapper.vm.select({
+			id: 1,
+			name: 'coffee',
+			statusComment: 'brb',
+		});
+		wrapper.vm.setPause();
+		await wrapper.vm.$nextTick();
+
+		expect(wrapper.emitted().change[0][0]).toEqual({
+			pauseCause: 'coffee',
+			statusComment: 'brb',
+		});
+		expect(wrapper.emitted().close).toBeTruthy();
+	});
 });

@@ -15,13 +15,8 @@ describe('Filters Panel Wrapper', () => {
 	it(`toggles "filters-panel-wrapper--opened" class at
    wt-table-actions "settings" event`, async () => {
 		const wrapper = shallowMount(FiltersPanelWrapper);
-		expect(wrapper.classes().includes('filters-panel-wrapper--opened')).toBe(
-			false,
-		);
+		const toggleSpy = vi.spyOn(wrapper.vm, 'toggleFiltersExpansion');
 		wrapper.vm.tableActionsHandler('settings');
-		await wrapper.vm.$nextTick();
-		expect(wrapper.classes().includes('filters-panel-wrapper--opened')).toBe(
-			false,
-		);
+		expect(toggleSpy).toHaveBeenCalled();
 	});
 });

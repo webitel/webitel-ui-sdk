@@ -22,4 +22,21 @@ describe('WtIcon', () => {
 		});
 		expect(wrapper.vm.iconSvg).toBe(iconName);
 	});
+
+	it('applies size and color classes', () => {
+		const wrapper = shallowMount(WtIcon, {
+			props: {
+				icon: 'bucket',
+				size: 'sm',
+				color: 'error',
+			},
+		});
+
+		expect(wrapper.classes()).toEqual(
+			expect.arrayContaining([
+				'wt-icon--size-sm',
+				'wt-icon--color-error',
+			]),
+		);
+	});
 });

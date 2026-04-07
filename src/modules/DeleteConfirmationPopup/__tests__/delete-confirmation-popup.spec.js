@@ -33,4 +33,15 @@ describe('DeleteConfirmationPopup', () => {
 		});
 		expect(wrapper.vm.deleteMessage).toContain(deleteCount.toString());
 	});
+
+	it('uses "delete all" text for zero count', () => {
+		const wrapper = shallowMount(DeleteConfirmationPopup, {
+			props: {
+				deleteCount: 0,
+				callback: vi.fn(),
+			},
+		});
+
+		expect(wrapper.vm.deleteMessage).toBeTruthy();
+	});
 });

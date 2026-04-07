@@ -26,13 +26,9 @@ describe('WtTimepicker', () => {
 	});
 
 	it('Correctly converts value from MIN time-input to output', async () => {
-		const value = 0;
 		const wrapper = mount(WtTimepicker, {
-			// stubs: {
-			//   WtTimeInput,
-			// },
 			props: {
-				value,
+				modelValue: 0,
 			},
 		});
 		wrapper.findAllComponents(WtTimeInput)[0].vm.$emit('update:modelValue', 21);
@@ -42,13 +38,12 @@ describe('WtTimepicker', () => {
 	});
 
 	it('Correctly converts value from HOUR time-input to output', () => {
-		const value = 0;
 		const wrapper = mount(WtTimepicker, {
 			stubs: {
 				WtTimeInput,
 			},
 			props: {
-				value,
+				modelValue: 0,
 			},
 		});
 		wrapper.findAllComponents(WtTimeInput)[1].vm.$emit('update:modelValue', 21);
@@ -58,13 +53,12 @@ describe('WtTimepicker', () => {
 	});
 
 	it('Correctly converts value from SEC time-input to output', () => {
-		const value = 0;
 		const wrapper = mount(WtTimepicker, {
 			stubs: {
 				WtTimeInput,
 			},
 			props: {
-				value,
+				modelValue: 0,
 			},
 		});
 		wrapper.findAllComponents(WtTimeInput)[2].vm.$emit('update:modelValue', 21);

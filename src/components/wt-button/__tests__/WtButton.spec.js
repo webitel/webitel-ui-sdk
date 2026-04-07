@@ -26,4 +26,10 @@ describe('WtButton', () => {
 		});
 		expect(wrapper.classes('p-button--loading')).toBe(true);
 	});
+
+	it('emits click event', async () => {
+		const wrapper = shallowMount(WtButton);
+		await wrapper.trigger('click');
+		expect(wrapper.emitted().click).toBeTruthy();
+	});
 });

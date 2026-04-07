@@ -5,16 +5,20 @@ import AppearanceStoreModule from '../../store/AppearanceStoreModule.js';
 import WtDarkModeSwitcher from '../wt-dark-mode-switcher.vue';
 
 describe('WtDarkModeSwitcher', () => {
-	let store;
+	let wrapper;
 
-	store = createStore(new AppearanceStoreModule().getModule());
+	beforeEach(() => {
+		const store = createStore(new AppearanceStoreModule().getModule());
+		localStorage.removeItem('theme');
+		document.documentElement.classList.remove('theme--dark');
 
-	const wrapper = shallowMount(WtDarkModeSwitcher, {
-		global: {
-			plugins: [
-				store,
-			],
-		},
+		wrapper = shallowMount(WtDarkModeSwitcher, {
+			global: {
+				plugins: [
+					store,
+				],
+			},
+		});
 	});
 
 	it('should render component', () => {
@@ -34,5 +38,6 @@ describe('WtDarkModeSwitcher', () => {
 		expect(
 			window.document.documentElement.classList.contains('theme--dark'),
 		).toBe(true);
+		expect(localStorage.getItem('theme')).toBe('dark');
 	});
 });
