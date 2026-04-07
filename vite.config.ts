@@ -52,7 +52,6 @@ export default (/*{ mode }*/) => {
 		},
 		resolve: {
 			alias: {
-				'@webitel/ui-sdk': resolve(__dirname, 'src'),
 				// vue: '@vue/compat',
 			},
 		},
@@ -118,19 +117,31 @@ export default (/*{ mode }*/) => {
 			}),
 		],
 		test: {
+			alias: {
+				'@webitel/ui-sdk': resolve(__dirname, 'src'),
+			},
 			globals: true,
 			environment: 'happy-dom',
 			setupFiles: [
 				'./tests/config/config.js',
 			],
+			reporters:
+				process.env.GITHUB_ACTIONS === 'true'
+					? [
+							'dot',
+							'github-actions',
+						]
+					: [
+							'dot',
+						],
 			coverage: {
 				provider: 'v8',
-				reporter: [
-					// 'text',
-					// 'html',
-					'json-summary',
-				],
-				reportsDirectory: './coverage',
+				// reporter: [
+				// 	// 'text',
+				// 	// 'html',
+				// 	'json-summary',
+				// ],
+				// reportsDirectory: './coverage',
 				exclude: [
 					'**/node_modules/**',
 					'**/dist/**',
