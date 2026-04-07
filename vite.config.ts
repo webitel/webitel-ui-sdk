@@ -52,6 +52,7 @@ export default (/*{ mode }*/) => {
 		},
 		resolve: {
 			alias: {
+				'@webitel/ui-sdk': resolve(__dirname, 'src'),
 				// vue: '@vue/compat',
 			},
 		},
