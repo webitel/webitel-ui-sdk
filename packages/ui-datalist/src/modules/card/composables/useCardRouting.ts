@@ -1,7 +1,7 @@
-import { computed, Ref, watch } from 'vue';
+import { computed, type Ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { CardItemId } from '../types/CardStore.types';
+import type { CardItemId } from '../types/CardStore.types';
 
 export const useCardRouting = ({ itemId }: { itemId: Ref<CardItemId> }) => {
 	const router = useRouter();

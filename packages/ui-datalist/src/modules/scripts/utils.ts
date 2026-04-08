@@ -1,7 +1,7 @@
 import type { Store } from 'pinia';
-import { isRef, Ref, ref, unref } from 'vue';
+import { isRef, type Ref, ref, unref } from 'vue';
 
-import { Patch, StoreInstance } from '../types/createDatalistStore.types';
+import type { Patch, StoreInstance } from '../types/createDatalistStore.types';
 
 /**
  * the applyStorePatch method is used to repeat the logic of the $patch method from pinia for the composable stores

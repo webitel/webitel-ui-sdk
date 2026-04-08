@@ -1,9 +1,9 @@
 import { watch } from 'vue';
 
 import {
-	PersistableValue,
-	PersistedPropertyConfig,
-	PersistedStorageController,
+	type PersistableValue,
+	type PersistedPropertyConfig,
+	type PersistedStorageController,
 	PersistedStorageType,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';

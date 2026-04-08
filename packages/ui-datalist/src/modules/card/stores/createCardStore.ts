@@ -1,12 +1,15 @@
-import { RegleBehaviourOptions } from '@regle/core';
-import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
+import type { RegleBehaviourOptions } from '@regle/core';
+import {
+	type RegleSchemaBehaviourOptions,
+	useRegleSchema,
+} from '@regle/schemas';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
-import { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
+import type { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import { ref, toRaw, watch } from 'vue';
-import { z } from 'zod/v4';
+import type { z } from 'zod/v4';
 
-import { CardItemId, CardParentId } from '../types/CardStore.types';
+import type { CardItemId, CardParentId } from '../types/CardStore.types';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
 	RegleBehaviourOptions = {

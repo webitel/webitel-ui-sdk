@@ -4,7 +4,7 @@ import {
 	FilterOptionToValueComponentMap,
 } from '../components';
 import {
-	BaseFilterConfig,
+	type BaseFilterConfig,
 	FilterConfig,
 	FilterConfigBaseParams,
 } from './FilterConfig';

@@ -3,7 +3,7 @@ import type { Component } from 'vue';
 import {
 	CustomFilterOption,
 	FilterOption,
-	FilterOptionName,
+	type FilterOptionName,
 } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';

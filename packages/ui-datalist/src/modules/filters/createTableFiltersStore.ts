@@ -3,10 +3,10 @@ import { computed, reactive, ref } from 'vue';
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
-import { useTableStoreConfig } from '../types/tableStore.types';
+import type { useTableStoreConfig } from '../types/tableStore.types';
 import {
 	createFiltersManager,
-	FiltersManagerConfig,
+	type FiltersManagerConfig,
 } from './classes/FiltersManager';
 
 export const tableFiltersStoreBody = (

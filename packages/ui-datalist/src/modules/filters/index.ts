@@ -1,16 +1,16 @@
 import {
 	Filter,
-	FilterInitParams,
-	FilterInstanceConfig,
-	FilterLabel,
-	FilterName,
-	FilterValue,
-	IFilter,
+	type FilterInitParams,
+	type FilterInstanceConfig,
+	type FilterLabel,
+	type FilterName,
+	type FilterValue,
+	type IFilter,
 } from './classes/Filter';
 import {
 	createFiltersManager,
-	FiltersManagerConfig,
-	IFiltersManager,
+	type FiltersManagerConfig,
+	type IFiltersManager,
 } from './classes/FiltersManager';
 import DynamicFilterSearchComponent from './components/search-bar/dynamic-filter-search.vue';
 import TableFiltersPanelComponent from './components/table-filters-panel.vue';

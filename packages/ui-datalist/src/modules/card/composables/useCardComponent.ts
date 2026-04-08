@@ -1,5 +1,5 @@
 import { refDebounced } from '@vueuse/core';
-import { StoreDefinition, storeToRefs } from 'pinia';
+import { type StoreDefinition, storeToRefs } from 'pinia';
 import { onUnmounted, watch } from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';

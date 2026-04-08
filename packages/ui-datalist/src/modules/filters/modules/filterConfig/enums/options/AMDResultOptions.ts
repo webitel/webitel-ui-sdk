@@ -1,4 +1,4 @@
-import { FilterInitParams } from '../../../../classes/Filter';
+import type { FilterInitParams } from '../../../../classes/Filter';
 
 /**
  * AMD Result to filter
