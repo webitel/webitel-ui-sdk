@@ -262,12 +262,14 @@ export {
 	WtContextMenu,
 	WtCopyAction,
 	WtDatepicker,
+	WtDatetimeText,
 	WtDisplayChipItems,
 	WtDivider,
 	WtDualPanel,
 	WtDummy,
 	WtEmpty,
 	WtErrorPage,
+	WtExpansionCard,
 	WtExpansionPanel,
 	WtFiltersPanelWrapper,
 	WtGalleria,
@@ -303,6 +305,7 @@ export {
 	WtRadio,
 	WtReplaceTransition,
 	WtRoundedAction,
+	WtScreenRecordingsAction,
 	WtSearchBar,
 	WtSelect,
 	WtSelectionPopup,
@@ -324,9 +327,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-	WtExpansionCard,
-	WtDatetimeText,
-	WtScreenRecordingsAction,
 };
 
 export default Components;

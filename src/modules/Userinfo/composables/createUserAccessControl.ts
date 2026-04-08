@@ -1,4 +1,4 @@
-import { computed, Ref } from 'vue';
+import { computed, type Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { CrudAction, type WtObject } from '../../../enums';
 import { _wtUiLog } from '../../../scripts/logger';
