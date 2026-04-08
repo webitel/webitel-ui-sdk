@@ -10,6 +10,7 @@
 		"test:unit:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"biome:format:all": "npx biome check --write ./src",
+		"biome:ci:gh": "biome ci ./src --reporter=github",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
 		"publish-lib": " npm publish --access public --tag latest",
 		"docs:dev": "vitepress dev docs",

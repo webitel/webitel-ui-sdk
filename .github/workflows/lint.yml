@@ -1,0 +1,22 @@
+name: Webitel UI lint
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  workflow_dispatch:
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run biome:ci:gh
