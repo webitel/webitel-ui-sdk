@@ -1,99 +1,105 @@
 <template>
-  <section class="table-wrapper table-page table-wrapper--tab-table">
-    <slot
-      name="header"
-      :selected="selected"
-      :load-data-list="loadDataList"
-      :ask-delete-confirmation="askDeleteConfirmation"
-      :handle-delete="handleDelete"
-    />
+	<section class="table-wrapper table-page table-wrapper--tab-table">
+		<slot
+			name="header"
+			:selected="selected"
+			:load-data-list="loadDataList"
+			:ask-delete-confirmation="askDeleteConfirmation"
+			:handle-delete="handleDelete"
+		/>
 
-    <delete-confirmation-popup
-      :shown="isDeleteConfirmationPopup"
-      :callback="deleteCallback"
-      :delete-count="deleteCount"
-      @close="closeDelete"
-    />
+		<delete-confirmation-popup
+			:shown="isDeleteConfirmationPopup"
+			:callback="deleteCallback"
+			:delete-count="deleteCount"
+			@close="closeDelete"
+		/>
 
-    <wt-loader v-show="isLoading" />
+		<wt-loader v-show="isLoading" />
 
-    <wt-empty
-      v-show="showEmpty"
-      :image="imageEmpty"
-      :headline="textEmpty"
-    />
+		<wt-empty
+			v-show="showEmpty"
+			:image="imageEmpty"
+			:headline="textEmpty"
+		/>
 
-    <div v-if="dataList?.length" class="table-section__table-wrapper">
-      <wt-table
-        v-if="dataList?.length"
-        :data="dataList"
-        :headers="shownHeaders"
-        :selected="selected"
-        sortable
-        @sort="updateSort"
-        @update:selected="updateSelected"
-      >
-        <template #preview="{ item }">
-          <pdf-status-preview
-            :status="item.status"
-            :clickable="item.status === WebitelMediaExporterExportStatus.Done"
-            @click="openPdfInNewWindow(item.fileId)"
-          />
-        </template>
+		<div
+			v-if="dataList?.length"
+			class="table-section__table-wrapper"
+		>
+			<wt-table
+				v-if="dataList?.length"
+				:data="dataList"
+				:headers="shownHeaders"
+				:selected="selected"
+				sortable
+				@sort="updateSort"
+				@update:selected="updateSelected"
+			>
+				<template #preview="{ item }">
+					<pdf-status-preview
+						:status="item.status"
+						:clickable="item.status === WebitelMediaExporterExportStatus.Done"
+						@click="openPdfInNewWindow(item.fileId)"
+					/>
+				</template>
 
-        <template #name="{ item }">
-          {{ item.name }}
-        </template>
+				<template #name="{ item }">
+					{{ item.name }}
+				</template>
 
-        <template #status="{ item }">
-          <pdf-status :status="item.status" />
-        </template>
+				<template #status="{ item }">
+					<pdf-status :status="item.status" />
+				</template>
 
-        <template #valid_until="{ item }">
-          {{ prettifyTimestamp(item.validUntil) }}
-        </template>
+				<template #valid_until="{ item }">
+					{{ prettifyTimestamp(item.validUntil) }}
+				</template>
 
-        <template #created_at="{ item }">
-          {{ prettifyTimestamp(item.createdAt) }}
-        </template>
+				<template #created_at="{ item }">
+					{{ prettifyTimestamp(item.createdAt) }}
+				</template>
 
-        <template #created_by="{ item }">
-          {{ item.createdBy }}
-        </template>
+				<template #created_by="{ item }">
+					{{ item.createdBy }}
+				</template>
 
-        <template #actions="{ item }">
-          <wt-icon-action
-            action="download"
-            :disabled="isDownloadDisabled(item)"
-            @click="downloadPdf(item.fileId)"
-          />
-          <wt-icon-action
-            action="delete"
-            :disabled="isDeleteDisabled(item) || !hasDeleteAccess"
-            @click="
-              askDeleteConfirmation({
-                deleted: [item],
-                callback: () => handleDelete([item]),
-              })
-            "
-          />
-        </template>
-      </wt-table>
+				<template #actions="{ item }">
+					<wt-icon-action
+						action="download"
+						:disabled="isDownloadDisabled(item)"
+						@click="downloadPdf(item.fileId)"
+					/>
+					<wt-icon-action
+						action="delete"
+						:disabled="isDeleteDisabled(item) || !hasDeleteAccess"
+						@click="
+							askDeleteConfirmation({
+								deleted: [item],
+								callback: () => handleDelete([item]),
+							})
+							"
+					/>
+				</template>
+			</wt-table>
 
-      <wt-pagination
-        :next="next"
-        :prev="page > 1"
-        :size="size"
-        debounce
-        @change="updateSize"
-        @next="updatePage(page + 1)"
-        @prev="updatePage(page - 1)"
-      />
-    </div>
-  </section>
+			<wt-pagination
+				:next="next"
+				:prev="page > 1"
+				:size="size"
+				debounce
+				@change="updateSize"
+				@next="updatePage(page + 1)"
+				@prev="updatePage(page - 1)"
+			/>
+		</div>
+	</section>
 </template>
 
-<script lang="ts" setup>
+<script
+	lang="ts"
+	setup
+>
 import {
 	downloadFile,
 	FileServicesAPI,
@@ -120,7 +126,7 @@ import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
 
 const props = defineProps<{
-	store?: any;
+	store?: unknown;
 	entityIdKey?: string;
 	entityIdValue?: string | number;
 	isCreatedAtFilter: boolean;
@@ -275,5 +281,7 @@ const openPdfInNewWindow = (fileId: string) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
-
+<style
+	lang="scss"
+	scoped
+></style>

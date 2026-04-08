@@ -8,8 +8,12 @@
 	"files": {
 		"includes": [
 			"**",
-			"!!**/dist"
+			"!!**/dist",
+			"!!src/components/wt-select/multiselect.css"
 		]
+	},
+	"html": {
+		// "experimentalFullSupportEnabled": true // https://github.com/biomejs/biome/issues/7978
 	},
 	"formatter": {
 		"enabled": true,
@@ -20,10 +24,13 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"style": {
-				"useImportType": "off"
-			}
+			"recommended": true
+			// 	"correctness": {
+			// 		"noUnusedImports": "off" // coz biome doesnt parse Vue component import + usage inside <template> (as of 2.4)
+			// 	},
+			// 	"style": {
+			// 		"useImportType": "off"
+			// 	}
 		}
 	},
 	"javascript": {
@@ -38,5 +45,25 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	// https://biomejs.dev/internals/language-support/#linting-html-ish-languages
+	"overrides": [
+		{
+			"includes": [
+				"**/*.vue"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	]
 }
