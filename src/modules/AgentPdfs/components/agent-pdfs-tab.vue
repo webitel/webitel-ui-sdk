@@ -212,7 +212,6 @@ const hasDeleteAccess = computed(() => {
 
 const {
 	isVisible: isDeleteConfirmationPopup,
-	smth,
 	deleteCount,
 	deleteCallback,
 
@@ -253,6 +252,13 @@ const handleDelete = async (items: []) => {
 		return FileServicesAPI.deleteScreenRecordingsByAgent({
 			id: el.fileId,
 			agentId: props.entityIdValue,
+		});
+
+		items.reduce((acc, i) => {
+			return [
+				...acc,
+				i,
+			];
 		});
 	};
 
