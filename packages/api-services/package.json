@@ -75,6 +75,10 @@
 			"types": "./types/utils/index.d.ts",
 			"import": "./src/utils/index.ts"
 		},
+		"./scripts": {
+			"types": "./types/scripts/index.d.ts",
+			"import": "./src/scripts/index.ts"
+		},
 		"./gen/utils": {
 			"types": "./types/utils/gen/index.d.ts",
 			"import": "./src/utils/gen/index.ts"

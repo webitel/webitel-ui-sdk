@@ -1,11 +1,18 @@
-const downloadFile = (response, filename, mimeType = null) => {
+import { DownloadFileOptions } from './types/downloadFile.types';
+
+const downloadFile = ({
+	response,
+	fileFormat,
+	filename,
+	mimetype = null,
+}: DownloadFileOptions) => {
 	const blob = new Blob(
 		[
 			response.data,
 		],
 		{
 			type:
-				mimeType ||
+				mimetype ||
 				response.headers?.['content-type'] ||
 				'application/octet-stream',
 		},
@@ -15,7 +22,9 @@ const downloadFile = (response, filename, mimeType = null) => {
 	const link = document.createElement('a');
 
 	link.href = url;
-	link.download = filename;
+	link.download = filename
+		? `${filename}.${fileFormat}`
+		: `${response.headers?.['Content-Disposition']}.${fileFormat}`;
 
 	document.body.appendChild(link);
 	link.click();

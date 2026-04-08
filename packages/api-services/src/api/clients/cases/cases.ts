@@ -14,30 +14,6 @@ import downloadFile from '../../../scripts/downloadFile/downloadFile';
 
 const casesService = getCases();
 
-const fieldsToSend = [
-	'subject',
-	'description',
-	'contact_info',
-	'status_lookup',
-	'close_reason_lookup',
-	'author',
-	'assignee',
-	'reporter',
-	'impacted',
-	'group',
-	'priority',
-	'source',
-	'status',
-	'close_reason',
-	'close_result',
-	'sla_condition',
-	'sla',
-	'service',
-	'status_condition',
-	'close_reason_group',
-	'custom',
-];
-
 function transformSourceType(data) {
 	if (Array.isArray(data)) {
 		return data.map((item) => {
@@ -55,18 +31,6 @@ function transformSourceType(data) {
 }
 
 const exportCase = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'ids',
-		'sort',
-		'fields',
-		'filters',
-	];
-
-	console.log('params', params);
-
 	const { page, size, q, ids, sort, fields, options, format, ...filters } =
 		applyTransform(
 			{
@@ -74,12 +38,10 @@ const exportCase = async (params) => {
 			},
 			[
 				merge(getDefaultGetParams()),
-				// starToSearch('search'),
 				(params) => ({
 					...params,
 					q: params.search,
 				}),
-				// camelToSnake(),
 			],
 		);
 
@@ -95,11 +57,19 @@ const exportCase = async (params) => {
 				format,
 				filters: stringifyCaseFilters(filters),
 			},
-			options,
+			{
+				...options,
+				responseType: 'blob',
+			},
 		);
-		downloadFile(response, 'fileName.csv');
 
-		console.log('response', response);
+		const today = Date.now();
+
+		downloadFile({
+			response,
+			filename: today,
+			fileFormat: format,
+		});
 
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
