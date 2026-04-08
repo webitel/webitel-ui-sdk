@@ -21,7 +21,7 @@ const normalizeCSVData = ({ data, mappings }) => {
 
 	return data.map((dataItem, index) => {
 		const normalized = nonEmptyMappingFields.reduce(
-			(normalizedItem, { name, csv, required }) => {
+			(normalizedItem: Record<string, unknown>, { name, csv, required }) => {
 				const value = Array.isArray(csv)
 					? csv.map((csv) => dataItem[csv])
 					: dataItem[csv];
@@ -43,14 +43,14 @@ const normalizeCSVData = ({ data, mappings }) => {
 					);
 				}
 
-				return isValueEmpty
-					? normalizedItem
-					: {
-							...normalizedItem,
-							[name]: value, // Return the original value for proper mapping (e.g., variables in members)
-						};
+				if (isValueEmpty) {
+					return normalizedItem;
+				}
+				// Original value for proper mapping (e.g., variables in members)
+				normalizedItem[name] = value;
+				return normalizedItem;
 			},
-			{},
+			{} as Record<string, unknown>,
 		);
 
 		return normalized;
