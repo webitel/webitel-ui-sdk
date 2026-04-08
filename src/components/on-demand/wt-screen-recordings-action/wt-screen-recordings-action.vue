@@ -1,5 +1,5 @@
 <template>
-  <div class="wt-table-screencast-action">
+  <div class="wt-screen-recordings-action">
     <wt-context-menu
       :options="contextOptions"
       max-width="400px"
@@ -13,7 +13,7 @@
         />
       </template>
       <template #option="{ text }">
-        <div class="wt-table-screencast-action__option">
+        <div class="wt-screen-recordings-action__option">
           <wt-icon icon="preview-tag-video" />
           {{ text }}
         </div>
@@ -58,13 +58,13 @@ const handleOptionSelect = ({ option }) => {
 </script>
 
 <style lang="scss" scoped>
-.wt-table-screencast-action {
+.wt-screen-recordings-action {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
 }
 
-.wt-table-screencast-action__option {
+.wt-screen-recordings-action__option {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
