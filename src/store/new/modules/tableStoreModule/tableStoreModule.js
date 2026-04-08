@@ -18,7 +18,7 @@ const getters = {
 	PARENT_ID: () => null, // override me
 
 	// FIXME: maybe move to filters module?
-	FILTERS: (state, getters) => () => getters['filters/GET_FILTERS'](),
+	FILTERS: (_, getters) => () => getters['filters/GET_FILTERS'](),
 
 	REQUIRED_FIELDS: () => [
 		'id',
@@ -42,7 +42,7 @@ const getters = {
 		];
 	},
 
-	GET_LIST_PARAMS: (state, getters) => (overrides) => {
+	GET_LIST_PARAMS: (_s, getters) => (overrides) => {
 		const filters = getters.FILTERS();
 		const fields = getters.FIELDS;
 		const parentId = getters.PARENT_ID;

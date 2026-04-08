@@ -164,7 +164,7 @@ function handleAnswerUpdate({ key, value }) {
 }
 
 function initAnswers() {
-	if (!answersModel.value || !answersModel.value.length) {
+	if (!answersModel.value?.length) {
 		answersModel.value = props.questions.map(() => ({}));
 	}
 }

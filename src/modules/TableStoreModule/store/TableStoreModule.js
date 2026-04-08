@@ -19,7 +19,7 @@ export default class TableStoreModule extends BaseStoreModule {
 		PARENT_ID: () => null, // override me
 
 		// FIXME: maybe move to filters module?
-		FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
+		FILTERS: (_, getters) => getters['filters/GET_FILTERS'],
 
 		FIELDS: (state) => {
 			const fields = state.headers.reduce((fields, { show, field }) => {
@@ -40,7 +40,7 @@ export default class TableStoreModule extends BaseStoreModule {
 		},
 
 		// main GET_LIST params collector
-		GET_LIST_PARAMS: (state, getters) => (overrides) => {
+		GET_LIST_PARAMS: (_state, getters) => (overrides) => {
 			const filters = getters.FILTERS();
 			const fields = getters.FIELDS;
 			const parentId = getters.PARENT_ID;
