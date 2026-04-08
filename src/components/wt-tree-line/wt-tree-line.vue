@@ -260,7 +260,7 @@ const setMultipleModelValueWithTree = () => {
 
 const setMultipleModelValue = () => {
 	const value = props.itemData ? props.data[props.itemData] : props.data;
-	let existingIndex;
+	let existingIndex: number;
 
 	if (props.itemData) {
 		existingIndex = props.modelValue.indexOf(props.data[props.itemData]);

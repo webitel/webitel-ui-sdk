@@ -24,13 +24,11 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
-			// 	"correctness": {
-			// 		"noUnusedImports": "off" // coz biome doesnt parse Vue component import + usage inside <template> (as of 2.4)
-			// 	},
-			// 	"style": {
-			// 		"useImportType": "off"
-			// 	}
+			"recommended": true,
+			"correctness": {
+				"noUnusedVariables": "off",
+				"noUnusedFunctionParameters": "off"
+			}
 		}
 	},
 	"javascript": {

@@ -26,7 +26,7 @@ const normalizeCSVData = ({ data, mappings }) => {
 					? csv.map((csv) => dataItem[csv])
 					: dataItem[csv];
 
-				let filteredValue; // Filter empty values in validation purposes
+				let filteredValue: unknown; // Filter empty values in validation purposes
 				if (Array.isArray(value)) {
 					// Because required field can be combined from many fields in multiple select, so we need to check all values.
 					// For example, if we have 3 fields and they are empty, we will get empty array.
