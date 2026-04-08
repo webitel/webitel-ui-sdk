@@ -22,16 +22,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		},
 
 		_STATE_FILTER_NAMES: (state) => {
-			return Object.values(state).reduce(
-				(names, prop) =>
-					prop.value || prop.name
-						? [
-								...names,
-								prop.name,
-							]
-						: names,
-				[],
-			);
+			return Object.values(state).reduce((names, prop) => {
+				if (prop.value || prop.name) {
+					names.push(prop.name);
+				}
+				return names;
+			}, []);
 		},
 
 		// get value of specific filter
@@ -49,12 +45,11 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		GET_FILTERS: (_state, getters) => () => {
 			return getters._STATE_FILTER_NAMES.reduce((values, filterName) => {
 				const filterValue = getters.GET_FILTER(filterName);
-				return isEmpty(filterValue)
-					? values
-					: {
-							...values,
-							[filterName]: filterValue,
-						};
+				if (isEmpty(filterValue)) {
+					return values;
+				}
+				values[filterName] = filterValue;
+				return values;
 			}, {});
 		},
 	};
@@ -146,10 +141,8 @@ export default class FiltersStoreModule extends BaseStoreModule {
 					if (context.state[qKey]) {
 						return filteredQuery;
 					}
-					return {
-						...filteredQuery,
-						[qKey]: qValue,
-					};
+					filteredQuery[qKey] = qValue;
+					return filteredQuery;
 				},
 				{},
 			);

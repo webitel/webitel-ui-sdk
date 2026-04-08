@@ -1,11 +1,12 @@
 import { ComponentSize } from '../enums/ComponentSize/ComponentSize';
 
-const numerics = Object.values(ComponentSize).reduce((nums, size, index) => {
-	return {
-		...nums,
-		[size]: index,
-	};
-}, {});
+const numerics = Object.values(ComponentSize).reduce(
+	(nums, size, index) => {
+		nums[size] = index;
+		return nums;
+	},
+	{} as Record<ComponentSize, number>,
+);
 
 /**
  * Compare two sizes, returning a number indicating the difference between them.

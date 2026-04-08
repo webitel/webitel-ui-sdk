@@ -23,11 +23,9 @@ export default class TableStoreModule extends BaseStoreModule {
 
 		FIELDS: (state) => {
 			const fields = state.headers.reduce((fields, { show, field }) => {
-				if (show)
-					return [
-						...fields,
-						field,
-					];
+				if (show) {
+					fields.push(field);
+				}
 				return fields;
 			}, []);
 

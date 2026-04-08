@@ -121,7 +121,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
 	(e: 'openParent'): void;
-	(e: 'update:modelValue', value: any): void;
+	(e: 'update:modelValue', value: unknown): void;
 }>();
 
 const label = computed(() =>

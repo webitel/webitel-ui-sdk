@@ -26,11 +26,9 @@ const getters = {
 
 	FIELDS: (state, getters) => {
 		const fields = state.headers.reduce((fields, { show, field }) => {
-			if (show || show === undefined)
-				return [
-					...fields,
-					field,
-				];
+			if (show || show === undefined) {
+				fields.push(field);
+			}
 			return fields;
 		}, []);
 
