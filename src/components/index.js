@@ -155,6 +155,12 @@ const WtTypeExtensionValueInput = defineAsyncComponent(
 			'./on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue'
 		),
 );
+const WtScreenRecordingsAction = defineAsyncComponent(
+	() =>
+		import(
+			'./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue'
+		),
+);
 
 const Components = {
 	WtActionBar,
@@ -236,6 +242,7 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtScreenRecordingsAction,
 };
 
 export {
@@ -319,6 +326,7 @@ export {
 	WtVidstackPlayer,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtScreenRecordingsAction,
 };
 
 export default Components;
