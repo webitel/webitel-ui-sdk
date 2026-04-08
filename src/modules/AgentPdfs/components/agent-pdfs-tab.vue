@@ -212,6 +212,7 @@ const hasDeleteAccess = computed(() => {
 
 const {
 	isVisible: isDeleteConfirmationPopup,
+	smth,
 	deleteCount,
 	deleteCallback,
 
