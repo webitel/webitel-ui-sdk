@@ -1,7 +1,7 @@
-import { useScroll } from "@vueuse/core";
-import { type ComputedRef, computed, type Ref, ref, watch } from "vue";
+import { useScroll } from '@vueuse/core';
+import { type ComputedRef, computed, type Ref, ref, watch } from 'vue';
 
-import type { ChatMessageType } from "../types/ChatMessage.types";
+import type { ChatMessageType } from '../types/ChatMessage.types';
 
 export const useChatScroll = (
 	element: Ref<HTMLElement | null> = null,
@@ -64,16 +64,16 @@ export const useChatScroll = (
 
 	const handleBtnAfterNewMessage = () => {
 		if (arrivedState.bottom || isLastMessageIsMy.value) {
-			scrollToBottom("smooth");
+			scrollToBottom('smooth');
 		} else {
 			newUnseenMessagesCount.value += 1;
 		}
 	};
 
-	const scrollToBottom = (behavior: ScrollBehavior = "instant") => {
+	const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
 		element?.value.scrollTo({
 			top: element?.value.scrollHeight,
-			behavior: behavior === "instant" ? "auto" : behavior,
+			behavior: behavior === 'instant' ? 'auto' : behavior,
 		});
 
 		newUnseenMessagesCount.value = 0;
@@ -87,7 +87,7 @@ export const useChatScroll = (
 			if (newMessageReceived) handleBtnAfterNewMessage();
 		},
 		{
-			flush: "post",
+			flush: 'post',
 		},
 	);
 

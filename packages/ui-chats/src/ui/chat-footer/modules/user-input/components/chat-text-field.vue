@@ -12,36 +12,38 @@
 </template>
 
 <script setup lang="ts">
-import { WtTextarea } from "@webitel/ui-sdk/components";
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import insertTextAtCursor from "insert-text-at-cursor";
-import type { Emitter } from "mitt";
-import { computed, inject, type MaybeRef, useTemplateRef } from "vue";
-import { useI18n } from "vue-i18n";
+import { WtTextarea } from '@webitel/ui-sdk/components';
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import insertTextAtCursor from 'insert-text-at-cursor';
+import type { Emitter } from 'mitt';
+import { computed, inject, type MaybeRef, useTemplateRef } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import type { UiChatsEmitterEvents } from "../../../../utils/emitter";
+import type { UiChatsEmitterEvents } from '../../../../utils/emitter';
 
 const { t } = useI18n();
 
-const textModel = defineModel<MaybeRef<string>>("text", {
+const textModel = defineModel<MaybeRef<string>>('text', {
 	required: true,
 });
 
-const size = inject<ComponentSize>("size");
-const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
+const size = inject<ComponentSize>('size');
+const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
 
-uiChatsEmitter!.on("insertAtCursor", ({ text }) => insertAtCursor(text));
-uiChatsEmitter!.on("focusOnTextField", focus);
+if (uiChatsEmitter) {
+	uiChatsEmitter.on('insertAtCursor', ({ text }) => insertAtCursor(text));
+	uiChatsEmitter.on('focusOnTextField', focus);
+}
 
 const emit = defineEmits<{
 	enter: [];
 }>();
 
 const chatTextFieldInputRef =
-	useTemplateRef<typeof WtTextarea>("chatTextFieldInput");
+	useTemplateRef<typeof WtTextarea>('chatTextFieldInput');
 
 const textareaEl = computed(() =>
-	chatTextFieldInputRef.value?.$el.querySelector("textarea"),
+	chatTextFieldInputRef.value?.$el.querySelector('textarea'),
 );
 
 function send(text: string) {
@@ -49,12 +51,14 @@ function send(text: string) {
 }
 
 function focus() {
-	textareaEl.value!.focus();
+	textareaEl.value?.focus();
 }
 
 function insertAtCursor(text: string) {
 	focus();
-	insertTextAtCursor(textareaEl.value!, text);
+	const textarea = textareaEl.value;
+	if (!textarea) return;
+	insertTextAtCursor(textarea, text);
 }
 </script>
 

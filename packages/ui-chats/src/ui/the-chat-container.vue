@@ -106,8 +106,8 @@ const emit = defineEmits<{
 
 const slots = defineSlots<
 	{
-		main: () => any;
-		footer: () => any;
+		main: () => unknown;
+		footer: () => unknown;
 	} & SharedActionSlots
 >();
 

@@ -1,9 +1,9 @@
 export default {
-	"@webitel/ui-chats": {
+	'@webitel/ui-chats': {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "Fayl karantinda yoki bloklangan",
-				textAreaPlaceholder: "Xabar yozing...",
+				chatsFileBlocked: 'Fayl karantinda yoki bloklangan',
+				textAreaPlaceholder: 'Xabar yozing...',
 			},
 		},
 	},
