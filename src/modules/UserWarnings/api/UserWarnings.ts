@@ -4,7 +4,7 @@ import {
 	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
 
-let instance = getDefaultInstance();
+const instance = getDefaultInstance();
 
 const getUserWarnings = async () => {
 	const url = 'users/warnings';

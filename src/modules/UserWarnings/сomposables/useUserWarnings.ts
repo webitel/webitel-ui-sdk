@@ -1,11 +1,11 @@
 import { computed, ref } from 'vue';
-import { getUserWarnings } from '../api/UserWarnings';
-import { USER_WARNINGS_MAP } from '../maps/userWarningsMap';
 import i18n from '../../../locale/i18n';
 import eventBus from '../../../scripts/eventBus';
+import { getUserWarnings } from '../api/UserWarnings';
+import { USER_WARNINGS_MAP } from '../maps/userWarningsMap';
 import type {
-	UserWarningsMapConfig,
 	MappedUserWarningsType,
+	UserWarningsMapConfig,
 } from '../types/UserWarnings';
 
 export const useUserWarnings = () => {

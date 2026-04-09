@@ -1,11 +1,10 @@
 import pick from 'lodash/pick';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
-
+import { useUserWarnings } from '../../UserWarnings/сomposables/useUserWarnings';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
-import { useUserWarnings } from '../../UserWarnings/сomposables/useUserWarnings';
 
 export const createUserinfoStore = () => {
 	const namespace = 'userinfo';
