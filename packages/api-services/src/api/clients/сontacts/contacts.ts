@@ -99,7 +99,7 @@ const getList = async (params) => {
 				: [],
 		}));
 
-	let changedParams;
+	let changedParams = {};
 
 	if (params?.search) {
 		changedParams = {

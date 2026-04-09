@@ -43,7 +43,7 @@
   setup
   lang="ts"
 >
-import type { Emitter } from "mitt";
+import type { Emitter } from 'mitt';
 import {
 	computed,
 	defineProps,
@@ -51,68 +51,68 @@ import {
 	nextTick,
 	onMounted,
 	useTemplateRef,
-} from "vue";
+} from 'vue';
 
-import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
-import type { UiChatsEmitterEvents } from "../../utils/emitter";
-import { useChatScroll } from "../composables/useChatScroll";
-import ChatMessage from "../modules/message/components/chat-message.vue";
-import { useChatMessages } from "../modules/message/composables/useChatMessage";
-import { MessageAction } from "../modules/message/enums/MessageAction.enum";
-import type { ChatMessageType } from "../types/ChatMessage.types";
-import ChatDateDivider from "./chat-date-divider.vue";
-import ChatObserver from "./chat-observer.vue";
-import ScrollToBottomBtn from "./scroll-to-bottom-btn.vue";
+import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
+import type { UiChatsEmitterEvents } from '../../utils/emitter';
+import { useChatScroll } from '../composables/useChatScroll';
+import ChatMessage from '../modules/message/components/chat-message.vue';
+import { useChatMessages } from '../modules/message/composables/useChatMessage';
+import { MessageAction } from '../modules/message/enums/MessageAction.enum';
+import type { ChatMessageType } from '../types/ChatMessage.types';
+import ChatDateDivider from './chat-date-divider.vue';
+import ChatObserver from './chat-observer.vue';
+import ScrollToBottomBtn from './scroll-to-bottom-btn.vue';
 
-const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>("uiChatsEmitter");
+const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
 
 const props = withDefaults(
-  defineProps<{
-    messages: ChatMessageType[];
-    next?: boolean;
-    isLoading?: boolean;
-    withoutAvatars?: boolean;
-  }>(),
-  {
-    next: false,
-    isLoading: false,
-    withoutAvatars: false,
-  },
+	defineProps<{
+		messages: ChatMessageType[];
+		next?: boolean;
+		isLoading?: boolean;
+		withoutAvatars?: boolean;
+	}>(),
+	{
+		next: false,
+		isLoading: false,
+		withoutAvatars: false,
+	},
 );
 
 const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
 
-const messagesContainer = useTemplateRef("messages-container");
+const messagesContainer = useTemplateRef('messages-container');
 
 const { showAvatar, showChatDate } = useChatMessages(
 	computed(() => props.messages),
 ); // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 
 const {
-  showScrollToBottomBtn,
-  newUnseenMessagesCount,
-  scrollToBottom,
-  handleChatScroll,
-  handleChatResize,
+	showScrollToBottomBtn,
+	newUnseenMessagesCount,
+	scrollToBottom,
+	handleChatScroll,
+	handleChatResize,
 } = useChatScroll(
 	messagesContainer,
 	computed(() => props.messages), // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
 );
 
 function focusOnInput() {
-  uiChatsEmitter?.on("focusOnTextField", focus);
+	uiChatsEmitter?.on('focusOnTextField', focus);
 }
 
 function clickOnImage(message: ChatMessageType) {
-  uiChatsEmitter!.emit("clickChatMessageImage", message);
+	uiChatsEmitter?.emit('clickChatMessageImage', message);
 }
 
 onMounted(async () => {
-  /* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
-  await nextTick();
-  setTimeout(() => {
-    scrollToBottom();
-  }, 500);
+	/* TODO: add loader on all chat(in the-chat-container?) and remove timeout after that */
+	await nextTick();
+	setTimeout(() => {
+		scrollToBottom();
+	}, 500);
 });
 </script>
 

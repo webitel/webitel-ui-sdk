@@ -299,7 +299,7 @@ interface Props extends DataTableProps {
 
 	//lazy loading
 	lazy?: boolean;
-	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<unknown>;
 	loading?: boolean;
 	itemSize?: number | undefined;
 }

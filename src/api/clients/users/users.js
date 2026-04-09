@@ -144,9 +144,17 @@ const preRequestHandler = (item) => {
 	const copy = deepCopy(item);
 	if (item.device && !item.device.id) delete copy.device;
 
-	if (copy.roles) copy.roles.forEach((copy) => delete copy.text);
+	if (copy.roles) {
+		copy.roles.forEach((role) => {
+			delete role.text;
+		});
+	}
 
-	if (copy.devices) copy.devices.forEach((copy) => delete copy.text);
+	if (copy.devices) {
+		copy.devices.forEach((device) => {
+			delete device.text;
+		});
+	}
 	if (copy.license) {
 		copy.license = copy.license.map((copy) => ({
 			id: copy.id,

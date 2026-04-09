@@ -155,6 +155,12 @@ const WtTypeExtensionValueInput = defineAsyncComponent(
 			'./on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue'
 		),
 );
+const WtScreenRecordingsAction = defineAsyncComponent(
+	() =>
+		import(
+			'./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue'
+		),
+);
 
 const Components = {
 	WtActionBar,
@@ -236,6 +242,7 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtScreenRecordingsAction,
 };
 
 export {
@@ -255,12 +262,14 @@ export {
 	WtContextMenu,
 	WtCopyAction,
 	WtDatepicker,
+	WtDatetimeText,
 	WtDisplayChipItems,
 	WtDivider,
 	WtDualPanel,
 	WtDummy,
 	WtEmpty,
 	WtErrorPage,
+	WtExpansionCard,
 	WtExpansionPanel,
 	WtFiltersPanelWrapper,
 	WtGalleria,
@@ -296,6 +305,7 @@ export {
 	WtRadio,
 	WtReplaceTransition,
 	WtRoundedAction,
+	WtScreenRecordingsAction,
 	WtSearchBar,
 	WtSelect,
 	WtSelectionPopup,
@@ -317,8 +327,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-	WtExpansionCard,
-	WtDatetimeText,
 };
 
 export default Components;

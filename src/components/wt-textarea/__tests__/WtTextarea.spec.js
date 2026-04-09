@@ -35,7 +35,7 @@ describe('WtTextarea', () => {
 				autoresize: true,
 			},
 		});
-		wrapper.find('.wt-textarea__textarea').trigger('keypress', {
+		wrapper.find('.wt-textarea__textarea').trigger('keydown', {
 			key: 'Enter',
 		});
 		expect(wrapper.emitted().enter).toBeTruthy();
@@ -47,7 +47,7 @@ describe('WtTextarea', () => {
 				WtLabel,
 			},
 		});
-		wrapper.find('.wt-textarea__textarea').trigger('keypress', {
+		wrapper.find('.wt-textarea__textarea').trigger('keydown', {
 			key: 'Enter',
 		});
 		expect(wrapper.emitted().enter).toBeFalsy();

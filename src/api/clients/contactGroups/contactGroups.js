@@ -13,7 +13,6 @@ import applyTransform, {
 	notify,
 	sanitize,
 	snakeToCamel,
-	starToSearch,
 } from '../../transformers/index.js';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi.js';
 

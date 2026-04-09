@@ -1,4 +1,4 @@
-import { FilterEnumOption } from '../../../../classes/Filter';
+import type { FilterEnumOption } from '../../../../classes/Filter';
 
 export const CallHistoryTagFilterOptions: Array<FilterEnumOption> = [
 	{

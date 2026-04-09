@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChatAction } from "../../chat-footer/modules/user-input/enums/ChatAction.enum";
+import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 
 const props = withDefaults(
 	defineProps<{

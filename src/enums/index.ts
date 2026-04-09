@@ -1,7 +1,6 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
-import { ButtonSize } from './ButtonSize/ButtonSize';
 import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';

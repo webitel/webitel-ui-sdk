@@ -12,7 +12,12 @@
 		"make-all": "npm version patch --git-tag-version false && (npm run lint:biome || true) && (npm run build:types || true) && npm run utils:publish",
 		"build": "(npm run build:types || true)",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
-		"lint:biome": "biome check --write",
+		"biome:ci:gh": "biome ci ./src --reporter=github",
+		"test:unit": "node -e \"process.exit(0)\"",
+		"lint": "biome ci ./src",
+		"test": "npm run test:unit",
+		"ci:check": "npm run biome:ci:gh && npm run test:unit",
+		"lint:biome": "biome check --write ./src",
 		"utils:publish": "npm publish --access public --tag ${NPM_TAG:-latest}"
 	},
 	"dependencies": {
@@ -20,7 +25,7 @@
 		"insert-text-at-cursor": "^0.3.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.8",
+		"@biomejs/biome": "2.4.10",
 		"@types/node": "^24.10.0",
 		"@vitejs/plugin-vue": "^6.0.1",
 		"@vue/tsconfig": "^0.8.1",

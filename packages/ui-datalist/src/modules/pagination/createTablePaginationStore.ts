@@ -2,7 +2,7 @@ import { ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
-import { useTableStoreConfig } from '../types/tableStore.types';
+import type { useTableStoreConfig } from '../types/tableStore.types';
 
 export const tablePaginationStoreBody = () => {
 	const page = ref(1);

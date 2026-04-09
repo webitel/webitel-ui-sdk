@@ -11,7 +11,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
 	};
 
 	getters = {
-		ROUTER: (state, g, rootState) => {
+		ROUTER: (_s, _g, rootState) => {
 			if (rootState.router === undefined) {
 				console.warn(
 					'"rootState.router" is needed for filters to work properly.' +
@@ -22,16 +22,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		},
 
 		_STATE_FILTER_NAMES: (state) => {
-			return Object.values(state).reduce(
-				(names, prop) =>
-					prop.value || prop.name
-						? [
-								...names,
-								prop.name,
-							]
-						: names,
-				[],
-			);
+			return Object.values(state).reduce((names, prop) => {
+				if (prop.value || prop.name) {
+					names.push(prop.name);
+				}
+				return names;
+			}, []);
 		},
 
 		// get value of specific filter
@@ -46,15 +42,14 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		},
 
 		// get all filters values
-		GET_FILTERS: (state, getters) => () => {
+		GET_FILTERS: (_state, getters) => () => {
 			return getters._STATE_FILTER_NAMES.reduce((values, filterName) => {
 				const filterValue = getters.GET_FILTER(filterName);
-				return isEmpty(filterValue)
-					? values
-					: {
-							...values,
-							[filterName]: filterValue,
-						};
+				if (isEmpty(filterValue)) {
+					return values;
+				}
+				values[filterName] = filterValue;
+				return values;
 			}, {});
 		},
 	};
@@ -146,10 +141,8 @@ export default class FiltersStoreModule extends BaseStoreModule {
 					if (context.state[qKey]) {
 						return filteredQuery;
 					}
-					return {
-						...filteredQuery,
-						[qKey]: qValue,
-					};
+					filteredQuery[qKey] = qValue;
+					return filteredQuery;
 				},
 				{},
 			);
@@ -166,9 +159,13 @@ export default class FiltersStoreModule extends BaseStoreModule {
 		},
 
 		SUBSCRIBE: (context, { event, callback }) => {
-			const subscribe = () => context.state._emitter.on(event, callback);
-			if (Array.isArray(event)) event.forEach((e) => subscribe(e, callback));
-			else subscribe(event, callback);
+			if (Array.isArray(event)) {
+				event.forEach((e) => {
+					context.state._emitter.on(e, callback);
+				});
+			} else {
+				context.state._emitter.on(event, callback);
+			}
 		},
 
 		FLUSH_SUBSCRIBERS: (context) => {
@@ -217,8 +214,11 @@ export default class FiltersStoreModule extends BaseStoreModule {
 			};
 		};
 
-		if (Array.isArray(filter)) filter.forEach((f) => setup(f));
-		else setup(filter);
+		if (Array.isArray(filter)) {
+			filter.forEach((f) => {
+				setup(f);
+			});
+		} else setup(filter);
 
 		return this;
 	}

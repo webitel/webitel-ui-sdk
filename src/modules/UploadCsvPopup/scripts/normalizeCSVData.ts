@@ -21,12 +21,12 @@ const normalizeCSVData = ({ data, mappings }) => {
 
 	return data.map((dataItem, index) => {
 		const normalized = nonEmptyMappingFields.reduce(
-			(normalizedItem, { name, csv, required }) => {
+			(normalizedItem: Record<string, unknown>, { name, csv, required }) => {
 				const value = Array.isArray(csv)
 					? csv.map((csv) => dataItem[csv])
 					: dataItem[csv];
 
-				let filteredValue; // Filter empty values in validation purposes
+				let filteredValue: unknown; // Filter empty values in validation purposes
 				if (Array.isArray(value)) {
 					// Because required field can be combined from many fields in multiple select, so we need to check all values.
 					// For example, if we have 3 fields and they are empty, we will get empty array.
@@ -43,14 +43,14 @@ const normalizeCSVData = ({ data, mappings }) => {
 					);
 				}
 
-				return isValueEmpty
-					? normalizedItem
-					: {
-							...normalizedItem,
-							[name]: value, // Return the original value for proper mapping (e.g., variables in members)
-						};
+				if (isValueEmpty) {
+					return normalizedItem;
+				}
+				// Original value for proper mapping (e.g., variables in members)
+				normalizedItem[name] = value;
+				return normalizedItem;
 			},
-			{},
+			{} as Record<string, unknown>,
 		);
 
 		return normalized;

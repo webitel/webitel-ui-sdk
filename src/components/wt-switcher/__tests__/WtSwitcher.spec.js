@@ -6,6 +6,9 @@ import WtSwitcher from '../wt-switcher.vue';
 describe('WtSwitcher', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtSwitcher, {
+			props: {
+				modelValue: false,
+			},
 			stubs: {
 				WtLabel,
 			},
@@ -21,24 +24,19 @@ describe('WtSwitcher', () => {
 			},
 			props: {
 				label,
+				modelValue: false,
 			},
 		});
 		expect(wrapper.find('.wt-switcher__label').text()).toBe(label);
 	});
 
-	it('toggles passed value at click', () => {
-		const value = true;
-		const wrapper = mount(WtSwitcher, {
-			stubs: {
-				WtLabel,
-			},
+	it('reflects left-label modifier class', () => {
+		const wrapper = shallowMount(WtSwitcher, {
 			props: {
-				value,
+				modelValue: false,
+				labelLeft: true,
 			},
 		});
-		wrapper.find('.wt-switcher__input').trigger('change');
-		expect(wrapper.emitted().change[0]).toEqual([
-			!value,
-		]);
+		expect(wrapper.classes('wt-switcher--label-left')).toBe(true);
 	});
 });

@@ -1,7 +1,7 @@
 import { contactGroups } from '@webitel/ui-sdk/api/clients/index';
 
 import {
-	IWtSysTypeFilterConfig,
+	type IWtSysTypeFilterConfig,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';

@@ -1,12 +1,12 @@
 import {
 	defineStore as definePiniaStore,
 	storeToRefs as piniaStoreToRefs,
-	StoreGeneric,
+	type StoreGeneric,
 } from 'pinia';
-import { toRefs as composableStoreToRefs, ToRefs } from 'vue';
+import { toRefs as composableStoreToRefs, type ToRefs } from 'vue';
 
 import { applyStorePatch } from '../scripts/utils';
-import {
+import type {
 	CreateDatalistStoreParams,
 	Identifiable,
 	Patch,
@@ -16,7 +16,7 @@ import {
 } from '../types/createDatalistStore.types';
 import {
 	DatalistStoreProvider,
-	DatalistStoreProviderType,
+	type DatalistStoreProviderType,
 } from '../types/StoreProvider';
 
 const defaultStoreType = DatalistStoreProvider.Pinia;

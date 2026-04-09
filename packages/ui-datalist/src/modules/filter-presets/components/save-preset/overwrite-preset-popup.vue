@@ -54,7 +54,9 @@ const isSaving = ref(false);
 
 const confirm = () => {
 	emit('confirm', {
-		onCompleted: () => (isSaving.value = false),
+		onCompleted: () => {
+			isSaving.value = false;
+		},
 	});
 };
 </script>

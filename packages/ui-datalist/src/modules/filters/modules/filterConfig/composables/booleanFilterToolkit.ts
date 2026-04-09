@@ -1,8 +1,8 @@
 import { useVuelidate } from '@vuelidate/core';
-import { computed, ModelRef, type Reactive, type Ref } from 'vue';
+import { computed, type ModelRef, type Reactive, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { BooleanFilterModelValue } from '../enums/options/BooleanFilterOptions';
+import type { BooleanFilterModelValue } from '../enums/options/BooleanFilterOptions';
 
 export const usePrettifyBooleanValuePreview = (
 	value: Reactive<boolean>,

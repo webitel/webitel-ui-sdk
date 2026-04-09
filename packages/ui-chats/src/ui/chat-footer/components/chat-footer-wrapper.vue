@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 const slots = defineSlots<{
-	default: () => any;
+	default: () => unknown;
 }>();
 </script>
 

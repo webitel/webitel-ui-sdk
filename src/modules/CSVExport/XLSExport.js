@@ -59,13 +59,11 @@ export default class XLSExport {
 			});
 
 			return columns.reduce((acc, column) => {
-				return {
-					...acc,
-					[column]:
-						this.extractNameFromObject(item[column]) ||
-						flatVariables[column] ||
-						'',
-				};
+				acc[column] =
+					this.extractNameFromObject(item[column]) ||
+					flatVariables[column] ||
+					'';
+				return acc;
 			}, {});
 		});
 

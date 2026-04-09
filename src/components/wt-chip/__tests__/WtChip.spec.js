@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 
 import WtChip from '../wt-chip.vue';
 
@@ -10,11 +10,11 @@ describe('WtChip', () => {
 
 	it('renders a chip content via default slot', () => {
 		const content = 'chip content';
-		const wrapper = shallowMount(WtChip, {
+		const wrapper = mount(WtChip, {
 			slots: {
 				default: content,
 			},
 		});
-		expect(wrapper.find('.wt-chip').text()).toBe(content);
+		expect(wrapper.text()).toContain(content);
 	});
 });

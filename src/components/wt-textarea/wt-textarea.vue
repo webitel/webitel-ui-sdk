@@ -110,7 +110,7 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	 * Object with props, passed down to wt-label as props
 	 * @type {Object}
 	 */
-	labelProps?: Record<string, any>;
+	labelProps?: Record<string, unknown>;
 	/**
 	 * Enables auto-resize. If passed, "Enter" key press emits "enter" event, new line is shift+enter
 	 * @type {boolean}
@@ -119,9 +119,8 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	autoresize?: boolean;
 	/**
 	 * Validation rules
-	 * @type {any}
 	 */
-	v?: any;
+	v?: unknown;
 	/**
 	 * Custom validators array
 	 * @type {Array<{name: string, text: string}>}
@@ -168,7 +167,7 @@ const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
 		v: props.v,
 		customValidators: props.customValidators,
-	} as any);
+	});
 
 const handleKeypress = (event: KeyboardEvent) => {
 	emit('keydown', event);

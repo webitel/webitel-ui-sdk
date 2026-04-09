@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createFiltersManager, IFiltersManager } from '../FiltersManager';
+import { createFiltersManager, type IFiltersManager } from '../FiltersManager';
 
 describe('FiltersManager', () => {
 	let filtersManager: IFiltersManager;

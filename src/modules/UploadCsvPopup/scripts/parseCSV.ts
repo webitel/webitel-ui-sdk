@@ -6,7 +6,7 @@ const parseCSV = (csvStr, options = {}) =>
 			csvStr,
 			{
 				columns: true,
-				cast: (value, context) => {
+				cast: (value /* context */) => {
 					if (typeof value !== 'string') return value;
 
 					const trimmed = value.trim();

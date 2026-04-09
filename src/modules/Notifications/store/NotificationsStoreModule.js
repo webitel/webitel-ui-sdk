@@ -163,7 +163,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 		},
 
 		SEND_NOTIFICATION: (
-			context,
+			_,
 			{
 				locale,
 				text = i18n.global.t(locale),

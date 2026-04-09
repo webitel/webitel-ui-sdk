@@ -1,4 +1,4 @@
-import { FilterName } from '../classes/Filter';
+import type { FilterName } from '../classes/Filter';
 
 export const filterLabelToSnapshotKey = (name: FilterName): string =>
 	`${name}_lbl`;
