@@ -2,14 +2,10 @@ import pick from 'lodash/pick';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-import {
-	getSession,
-	getUiVisibilityAccess,
-	logout,
-	getUserWarnings,
-} from '../api/UserinfoAPI';
+import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
+import { useUserWarnings } from '../../UserWarnings/сomposables/useUserWarnings';
 
 export const createUserinfoStore = () => {
 	const namespace = 'userinfo';
@@ -39,16 +35,16 @@ export const createUserinfoStore = () => {
 		const settingsStore = useSettingsStore();
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
+		const { fetch: fetchUserWarnings, show: showUserWarnings } =
+			useUserWarnings();
 
 		const userId = ref();
 		const userInfo = ref();
-		const userWarnings = ref();
 
 		const initialize = async () => {
 			const session = await getSession();
 			const access = await getUiVisibilityAccess();
-			const { warnings } = await getUserWarnings();
-			userWarnings.value = warnings;
+			await fetchUserWarnings();
 
 			userId.value = session.userId;
 			userInfo.value = pick(session, [
@@ -83,7 +79,6 @@ export const createUserinfoStore = () => {
 			userId,
 			userInfo,
 			timezone,
-			warnings: userWarnings,
 			initialize,
 
 			hasReadAccess,
@@ -98,6 +93,7 @@ export const createUserinfoStore = () => {
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
 			logoutUser,
+			showUserWarnings,
 		};
 	});
 

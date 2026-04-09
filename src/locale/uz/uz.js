@@ -838,7 +838,7 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} saqlandi`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage:
 				'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
 		},

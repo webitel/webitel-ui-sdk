@@ -834,7 +834,7 @@ export default {
 			delete: ({ named }) =>
 				`El ${named('entity').toLowerCase()} fue eliminado`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage: 'Tu contraseña expirará en { days } días',
 		},
 	},

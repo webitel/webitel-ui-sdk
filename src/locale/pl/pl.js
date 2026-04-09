@@ -837,7 +837,7 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} został zapisany`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni',
 		},
 	},

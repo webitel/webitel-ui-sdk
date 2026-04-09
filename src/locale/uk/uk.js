@@ -829,7 +829,7 @@ export default {
 			create: ({ named }) => `${named('entity')} було збережено`,
 			delete: ({ named }) => `${named('entity')} було видалено`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage: 'Пароль спливе через { days } дн(і/ів)',
 		},
 	},

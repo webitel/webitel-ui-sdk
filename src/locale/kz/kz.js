@@ -837,7 +837,7 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} сақталды`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage:
 				'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады',
 		},
