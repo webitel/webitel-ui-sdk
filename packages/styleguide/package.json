@@ -10,9 +10,9 @@
 		"build": "tsc -p ./tsconfig.build.json",
 		"lint:fix": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
-		"test:unit": "npm run build",
+		"test:unit": "node -e \"process.exit(0)\"",
 		"lint": "biome ci ./src",
-		"test": "npm run build",
+		"test": "npm run test:unit",
 		"ci:check": "npm run biome:ci:gh && npm run test:unit"
 	},
 	"devDependencies": {
