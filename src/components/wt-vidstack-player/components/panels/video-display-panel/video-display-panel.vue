@@ -22,8 +22,8 @@
       />
       <toggle-button
         v-if="!props.hideExpand"
-        primary-icon="expand"
-        secondary-icon="collapse"
+        primary-icon="collapse"
+        secondary-icon="expand"
         color="on-dark"
         @toggle="handlePlayerSize"
       />
