@@ -17,15 +17,6 @@ import TableFiltersPanelComponent from './components/table-filters-panel.vue';
 import { FilterOption } from './modules/filterConfig/enums/FilterOption';
 
 export * from './modules/filterConfig';
-
-export {
-	createFiltersManager,
-	DynamicFilterSearchComponent,
-	Filter,
-	FilterOption,
-	TableFiltersPanelComponent,
-};
-
 export type {
 	FilterInitParams,
 	FilterInstanceConfig,
@@ -35,4 +26,11 @@ export type {
 	FilterValue,
 	IFilter,
 	IFiltersManager,
+};
+export {
+	createFiltersManager,
+	DynamicFilterSearchComponent,
+	Filter,
+	FilterOption,
+	TableFiltersPanelComponent,
 };
