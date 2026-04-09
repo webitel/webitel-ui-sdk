@@ -11,4 +11,4 @@ interface MappedUserWarningsType {
 	days: number;
 }
 
-export type { UserWarningsMapConfig, MappedUserWarningsType };
+export type { MappedUserWarningsType, UserWarningsMapConfig };
