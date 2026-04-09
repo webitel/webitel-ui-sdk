@@ -11,6 +11,8 @@ import {
 import { stringifyCaseFilters } from '../../../scripts';
 import { snakeToKebab } from '../../../utils';
 import downloadFile from '../../../scripts/downloadFile/downloadFile';
+import { formatDate } from '../../../../../../src/utils/formatDate';
+import { FormatDateMode } from '../../../../../../src/enums';
 
 const casesService = getCases();
 
@@ -63,11 +65,11 @@ const exportCase = async (params) => {
 			},
 		);
 
-		const today = Date.now();
+		const filename = `Cases-${formatDate(Date.now(), FormatDateMode.DATE)}-${formatDate(Date.now(), FormatDateMode.TIME_SEC)}`;
 
 		downloadFile({
 			response,
-			filename: today,
+			filename,
 			fileFormat: format,
 		});
 
