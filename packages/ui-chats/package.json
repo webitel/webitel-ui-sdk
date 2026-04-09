@@ -12,6 +12,11 @@
 		"make-all": "npm version patch --git-tag-version false && (npm run lint:biome || true) && (npm run build:types || true) && npm run utils:publish",
 		"build": "(npm run build:types || true)",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"biome:ci:gh": "biome ci ./src --reporter=github",
+		"test:unit": "npm run build:types",
+		"lint": "biome ci ./src",
+		"test": "npm run build:types",
+		"ci:check": "npm run biome:ci:gh && npm run test:unit",
 		"lint:biome": "biome check --write ./src",
 		"utils:publish": "npm publish --access public --tag ${NPM_TAG:-latest}"
 	},
