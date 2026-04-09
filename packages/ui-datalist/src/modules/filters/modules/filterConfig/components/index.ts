@@ -1,10 +1,6 @@
 import type { Component } from 'vue';
 
-import {
-	CustomFilterOption,
-	FilterOption,
-	type FilterOptionName,
-} from '../enums/FilterOption';
+import { FilterOption, type FilterOptionName } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';

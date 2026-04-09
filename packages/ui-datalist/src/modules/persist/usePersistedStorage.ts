@@ -35,13 +35,10 @@ export const usePersistedStorage = ({
 
 		return settledResults.reduce((acc, result) => {
 			if (result.status === 'fulfilled') {
-				return [
-					...acc,
-					result.value,
-				];
+				acc.push(result.value);
 			}
 			return acc;
-		}, []);
+		}, [] as PersistableValue[]);
 	};
 
 	const storages = Array.isArray(configStorages)
@@ -152,7 +149,7 @@ export const usePersistedStorage = ({
 		await Promise.all(removeItemFns.map((removeItem) => removeItem(name)));
 	};
 
-	const endWatch = () => unwatch && unwatch();
+	const endWatch = () => unwatch?.();
 
 	return {
 		watch: startWatch,

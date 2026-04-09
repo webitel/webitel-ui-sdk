@@ -6,11 +6,11 @@ import {
 import {
 	type BaseFilterConfig,
 	FilterConfig,
-	FilterConfigBaseParams,
+	type FilterConfigBaseParams,
 } from './FilterConfig';
 
 export const createFilterConfig = (
-	params: BaseFilterConfigParams &
+	params: FilterConfigBaseParams &
 		Required<BaseFilterConfig, 'name'> &
 		Record<string, unknown>,
 ): BaseFilterConfig => {

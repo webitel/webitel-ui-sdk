@@ -118,12 +118,10 @@ export const useFilterConfigsToolkit = ({
 	const appliedFilterToFilterConfigMappings = computed(() => {
 		const filterNameToFilterConfigMap = filterConfigs.value.reduce(
 			(map, filterConfig) => {
-				return {
-					...map,
-					[filterConfig.name]: filterConfig,
-				};
+				map[filterConfig.name] = filterConfig;
+				return map;
 			},
-			{},
+			{} as Record<string, BaseFilterConfig>,
 		);
 
 		return appliedFilters.value.map((filter) => {

@@ -14,7 +14,7 @@ export const useCardComponent = <CardEntity>({
 	onLoadErrorHandler,
 }: {
 	useCardStore: StoreDefinition;
-	onLoadErrorHandler?: (err: any) => void;
+	onLoadErrorHandler?: (err: unknown) => void;
 }) => {
 	const cardStore = useCardStore();
 

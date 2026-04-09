@@ -65,14 +65,18 @@ export const tableHeadersStoreBody = ({
 			if (!arrayFieldOrder.has(header.field)) {
 				arrayFieldOrder.set(header.field, []);
 			}
-			arrayFieldOrder.get(header.field)!.push(idx);
+			const list = arrayFieldOrder.get(header.field);
+			if (list) {
+				list.push(idx);
+			}
 		});
 
 		const newOrder = [];
 		for (const field of orderedFields) {
 			const indices = arrayFieldOrder.get(field);
-			if (indices && indices.length) {
-				newOrder.push(indices.shift()!);
+			const next = indices?.shift();
+			if (next) {
+				newOrder.push(next);
 			}
 		}
 
