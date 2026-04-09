@@ -35,4 +35,8 @@ export const AmdResultOptions: Array<FilterInitParams> = [
 		name: 'RINGING',
 		value: 'RINGING',
 	},
+	{
+		name: 'TIMEOUT',
+		value: 'TIMEOUT',
+	},
 ] as const;
