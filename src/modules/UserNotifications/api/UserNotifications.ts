@@ -1,15 +1,16 @@
 import { getDefaultInstance } from '@webitel/api-services/api/defaults';
+import { getUsers } from '@webitel/api-services/gen';
 import {
 	applyTransform,
 	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
 
 const instance = getDefaultInstance();
+const usersApi = getUsers(instance);
 
 const getUserWarnings = async () => {
-	const url = 'users/warnings';
 	try {
-		const response = await instance.get(url);
+		const response = await usersApi.getUserWarnings();
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApp } from 'vue';
 
 // Mocks for modules used by the store
-vi.mock('../../api/UserWarnings', () => {
+vi.mock('../../api/UserNotifications', () => {
 	return {
 		getUserWarnings: vi.fn(),
 	};
@@ -32,11 +32,11 @@ vi.mock('../../../../scripts/eventBus', () => {
 });
 
 import eventBus from '../../../../scripts/eventBus';
-import { getUserWarnings } from '../../api/UserWarnings';
-import { USER_WARNINGS_MAP } from '../../maps/userWarningsMap';
-import { createUserWarningsStore } from '../userWarningsStore';
+import { getUserWarnings } from '../../api/UserNotifications';
+import { USER_NOTIFICATIONS_MAP } from '../../maps/userNotificationsMap';
+import { createUserNotificationsStore } from '../userNotificationsStore';
 
-describe('UserWarningsStore', () => {
+describe('createUserNotificationsStore', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 
@@ -46,9 +46,9 @@ describe('UserWarningsStore', () => {
 		setActivePinia(pinia);
 	});
 
-	it('fetch should call API and populate warningsList', async () => {
+	it('fetch should call API and populate notifications', async () => {
 		// Arrange: mock API to return warnings
-		const warningsResponse = {
+		const notificationsResponse = {
 			warnings: [
 				{
 					id: 'app.password.expires_soon',
@@ -60,23 +60,25 @@ describe('UserWarningsStore', () => {
 				},
 			],
 		};
-		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(warningsResponse);
+		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(
+			notificationsResponse,
+		);
 
-		const store = createUserWarningsStore();
+		const store = createUserNotificationsStore();
 
 		// Act
-		await store.fetch();
+		await store.initialize();
 
-		// Assert: internal mappedWarnings should reflect map config
-		expect(store.mappedWarnings.length).toBe(1);
-		expect(store.mappedWarnings[0].days).toBe(5);
-		expect(store.mappedWarnings[0].localeKey).toBe(
-			USER_WARNINGS_MAP.get('app.password.expires_soon')?.localeKey,
+		// Assert: internal mappedNotifications should reflect map config
+		expect(store.mappedNotifications.length).toBe(1);
+		expect(store.mappedNotifications[0].days).toBe(5);
+		expect(store.mappedNotifications[0].localeKey).toBe(
+			USER_NOTIFICATIONS_MAP.get('app.password.expires_soon')?.localeKey,
 		);
 	});
 
 	it('show should emit notification for mapped warnings and not repeat when already shown', async () => {
-		const warningsResponse = {
+		const notificationsResponse = {
 			warnings: [
 				{
 					id: 'app.password.expires_soon',
@@ -88,10 +90,12 @@ describe('UserWarningsStore', () => {
 				},
 			],
 		};
-		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(warningsResponse);
+		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(
+			notificationsResponse,
+		);
 
-		const store = createUserWarningsStore();
-		await store.fetch();
+		const store = createUserNotificationsStore();
+		await store.initialize();
 
 		// Act: show should emit once
 		store.show();

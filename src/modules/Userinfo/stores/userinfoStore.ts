@@ -1,7 +1,7 @@
 import pick from 'lodash/pick';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import { createUserWarningsStore } from '../../UserWarnings/stores/userWarningsStore';
+import { createUserNotificationsStore } from '../../UserNotifications/stores/userNotificationsStore';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
@@ -34,9 +34,11 @@ export const createUserinfoStore = () => {
 		const settingsStore = useSettingsStore();
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
-		const userWarningsStore = createUserWarningsStore();
-		const { fetch: fetchUserWarnings, show: showUserWarnings } =
-			userWarningsStore;
+		const userNotificationsStore = createUserNotificationsStore();
+		const {
+			initialize: initializeUserNotificationsStore,
+			show: showUserNotifications,
+		} = userNotificationsStore;
 
 		const userId = ref();
 		const userInfo = ref();
@@ -44,7 +46,7 @@ export const createUserinfoStore = () => {
 		const initialize = async () => {
 			const session = await getSession();
 			const access = await getUiVisibilityAccess();
-			await fetchUserWarnings();
+			await initializeUserNotificationsStore();
 
 			userId.value = session.userId;
 			userInfo.value = pick(session, [
@@ -93,7 +95,7 @@ export const createUserinfoStore = () => {
 			hasSpecialGlobalActionAccess,
 			hasApplicationVisibility,
 			logoutUser,
-			showUserWarnings,
+			showUserNotifications,
 		};
 	});
 
