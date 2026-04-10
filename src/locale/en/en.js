@@ -1,11 +1,13 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import deepmerge from 'deepmerge';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -231,6 +233,7 @@ export default deepmerge(
 					[EngineRoutingSchemaType.Voice]: 'Voice',
 					[EngineRoutingSchemaType.Service]: 'Service',
 					[EngineRoutingSchemaType.Processing]: 'Forms',
+					[EngineRoutingSchemaType.Default]: 'No type',
 				},
 			},
 			messengers: {

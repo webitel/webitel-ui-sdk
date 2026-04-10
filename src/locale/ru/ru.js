@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -224,6 +226,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Голосовая',
 				[EngineRoutingSchemaType.Service]: 'Служебная',
 				[EngineRoutingSchemaType.Processing]: 'Формы',
+				[EngineRoutingSchemaType.Default]: 'Нет типа',
 			},
 		},
 		messengers: {
