@@ -1,4 +1,4 @@
-import { ChatMessageType } from "../../../types/ui";
+import type { ChatMessageType } from '../../../types/ui';
 export type UiChatsEmitterEvents = {
     insertAtCursor: {
         text: string;

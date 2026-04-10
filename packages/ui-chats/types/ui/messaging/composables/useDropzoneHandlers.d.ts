@@ -1,4 +1,4 @@
-import { Ref } from "vue";
+import { type Ref } from 'vue';
 interface UseDropzoneHandlers {
     isDropzoneVisible: Ref<boolean>;
     handleDragEnter: () => void;

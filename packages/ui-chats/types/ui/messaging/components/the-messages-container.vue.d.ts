@@ -1,4 +1,4 @@
-import type { ChatMessageType } from "../types/ChatMessage.types";
+import type { ChatMessageType } from '../types/ChatMessage.types';
 type __VLS_Props = {
     messages: ChatMessageType[];
     next?: boolean;
