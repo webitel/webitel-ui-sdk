@@ -68,10 +68,10 @@ import type { ChatMessageType } from '../../../types/ChatMessage.types';
 import { useChatMessageFile } from '../composables/useChatMessageFile';
 import { MessageAction } from '../enums/MessageAction.enum';
 import MessageBlockedError from './details/chat-message-blocked-error.vue';
-import MessageSizeExceededError from './details/chat-message-size-exceeded-error.vue';
 import MessageDocument from './details/chat-message-document.vue';
 import MessageImage from './details/chat-message-image.vue';
 import MessagePlayer from './details/chat-message-player.vue';
+import MessageSizeExceededError from './details/chat-message-size-exceeded-error.vue';
 import MessageText from './details/chat-message-text.vue';
 import MessageTime from './details/chat-message-time.vue';
 
