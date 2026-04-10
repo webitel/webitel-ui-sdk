@@ -15,9 +15,8 @@
       >
         <wt-avatar
           v-if="props.showAvatar"
-          :username="getClientUsername"
-          :size="size"
-          :src="ComponentSize.SM || size"
+          :username="username"
+          :size="ComponentSize.SM || size"
           :bot="isBot"
         />
       </div>
@@ -106,10 +105,6 @@ const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === 'webitel',
 );
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
-
-const getClientUsername = computed<string>(() => {
-	return !isSelfSide.value ? props.username : ''; // need to show username avatar only for client
-});
 
 function handlePlayerInitialize(player) {
 	emit(MessageAction.InitializedPlayer, {
