@@ -6,9 +6,15 @@ interface UserWarningsMapConfig {
 }
 
 interface MappedUserWarningsType {
-	type: string;
+	type: 'info' | 'warning' | 'error';
 	localeKey: string;
 	days: number;
 }
 
-export type { MappedUserWarningsType, UserWarningsMapConfig };
+type WarningRaw = {
+	id: string;
+	details: string;
+	warningData: object;
+};
+
+export type { MappedUserWarningsType, UserWarningsMapConfig, WarningRaw };

@@ -3,6 +3,25 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createUserinfoStore } from '../userinfoStore';
 
+// Mock modules at top-level so vitest hoists them before imports
+vi.mock('../../api/UserinfoAPI', () => ({
+	getSession: vi.fn().mockResolvedValue({
+		userId: 1,
+		username: 'test',
+		permissions: [],
+		scope: [],
+		access: {},
+		license: [],
+	}),
+	getUiVisibilityAccess: vi.fn().mockResolvedValue({}),
+}));
+
+vi.mock('../../../UserWarnings/api/UserWarnings', () => ({
+	getUserWarnings: vi.fn().mockResolvedValue({
+		warnings: [],
+	}),
+}));
+
 describe('UserinfoAccessControl', () => {
 	let useUserinfoStore: ReturnType<typeof createUserinfoStore>;
 
@@ -13,17 +32,6 @@ describe('UserinfoAccessControl', () => {
 	});
 
 	it('should be defined', async () => {
-		vi.mock(import('../../api/UserinfoAPI'), () => ({
-			getSession: vi.fn().mockResolvedValue({
-				userId: 1,
-				username: 'test',
-				permissions: [],
-				scope: [],
-				access: {},
-				license: [],
-			}),
-			getUiVisibilityAccess: vi.fn().mockResolvedValue({}),
-		}));
 		const userinfoStore = useUserinfoStore();
 		const { initialize } = userinfoStore;
 		const { userId } = storeToRefs(userinfoStore);

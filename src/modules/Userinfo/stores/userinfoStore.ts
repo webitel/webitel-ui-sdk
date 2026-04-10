@@ -1,7 +1,7 @@
 import pick from 'lodash/pick';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import { useUserWarnings } from '../../UserWarnings/сomposables/useUserWarnings';
+import { createUserWarningsStore } from '../../UserWarnings/stores/userWarningsStore';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
@@ -34,8 +34,9 @@ export const createUserinfoStore = () => {
 		const settingsStore = useSettingsStore();
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
+		const userWarningsStore = createUserWarningsStore();
 		const { fetch: fetchUserWarnings, show: showUserWarnings } =
-			useUserWarnings();
+			userWarningsStore;
 
 		const userId = ref();
 		const userInfo = ref();
