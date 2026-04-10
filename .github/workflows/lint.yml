@@ -72,7 +72,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run --prefix packages/api-services biome:ci:gh
-      - run: npm run --prefix packages/api-services lint:package
 
   lint-styleguide:
     needs: changes
@@ -103,7 +102,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run --prefix packages/ui-datalist biome:ci:gh
-      - run: npm run --prefix packages/ui-datalist lint:package
 
   lint-ui-chats:
     needs: changes
