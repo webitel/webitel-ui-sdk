@@ -310,6 +310,10 @@
 			"types": "./types/modules*",
 			"import": "./src/modules*"
 		},
+		"./modules/Flow": {
+			"types": "./types/modules/Flow/index.d.ts",
+			"import": "./src/modules/Flow/index.ts"
+		},
 		"./modules/FilesExport": {
 			"types": "./types/modules/FilesExport/index.d.ts",
 			"import": "./src/modules/FilesExport/index.ts"
