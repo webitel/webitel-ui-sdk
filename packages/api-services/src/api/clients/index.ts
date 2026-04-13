@@ -6,6 +6,7 @@ export * from './auditForms/auditForms';
 export * from './buckets/buckets';
 export * from './calendars/calendars';
 export * from './callHistory/callHistory';
+export * from './cases/cases';
 export * from './caseCloseReasonGroups/caseCloseReasonGroups';
 export * from './caseCloseReasons/caseCloseReasons';
 export * from './casePriorities/casePriorities';
