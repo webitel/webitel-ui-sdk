@@ -63,6 +63,10 @@ function insertAtCursor(text: string) {
 </script>
 
 <style scoped>
+.chat-text-field {
+  min-height: 0;
+}
+
 .chat-text-field :deep(textarea) {
   /* https://webitel.atlassian.net/browse/WTEL-7388
    fixed styles after component migrated on vuetify */
