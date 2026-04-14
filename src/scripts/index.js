@@ -36,6 +36,7 @@ import {
 	sortToQueryAdapter,
 } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
+import downloadFile from './downloadFile/downloadFile';
 
 export {
 	camelToKebab,
@@ -47,6 +48,7 @@ export {
 	getEndOfDay,
 	getNextSortOrder,
 	getStartOfDay,
+	downloadFile,
 	isEmpty,
 	isRelativeDatetimeValue,
 	kebabToCamel,
