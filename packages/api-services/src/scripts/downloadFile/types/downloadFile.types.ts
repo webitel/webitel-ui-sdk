@@ -1,4 +1,4 @@
-import { FileFormat } from './fileFormat.types';
+import type { FileFormat } from './fileFormat.types';
 
 export interface DownloadFileOptions {
 	response: any;

@@ -1,4 +1,4 @@
-import { DownloadFileOptions } from './types/downloadFile.types';
+import type { DownloadFileOptions } from './types/downloadFile.types';
 
 const downloadFile = ({
 	response,

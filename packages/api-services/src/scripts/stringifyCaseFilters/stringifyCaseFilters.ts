@@ -1,8 +1,8 @@
 import { startOfToday } from 'date-fns';
 import isObject from 'lodash/isObject';
 import {
-	normalizeToTimestamp,
 	isRelativeDatetimeValue,
+	normalizeToTimestamp,
 } from '../../../../../src/scripts';
 
 const filterTransformersMap = {
