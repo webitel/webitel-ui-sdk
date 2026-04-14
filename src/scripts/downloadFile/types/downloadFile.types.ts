@@ -1,7 +1,7 @@
 import type { FileFormat } from './fileFormat.types';
 
 export interface DownloadFileOptions {
-	response: any;
+	response: never;
 	fileFormat: FileFormat;
 	filename?: string;
 	mimetype?: string;

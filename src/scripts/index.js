@@ -18,6 +18,7 @@ import {
 } from './compareSize.ts';
 import convertDuration from './convertDuration.js';
 import debounce from './debounce.js';
+import downloadFile from './downloadFile/downloadFile';
 import eventBus from './eventBus.js';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate.js';
 import isEmpty from './isEmpty.js';
@@ -36,7 +37,6 @@ import {
 	sortToQueryAdapter,
 } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
-import downloadFile from './downloadFile/downloadFile';
 
 export {
 	camelToKebab,
@@ -44,11 +44,11 @@ export {
 	compareSize,
 	convertDuration,
 	debounce,
+	downloadFile,
 	eventBus,
 	getEndOfDay,
 	getNextSortOrder,
 	getStartOfDay,
-	downloadFile,
 	isEmpty,
 	isRelativeDatetimeValue,
 	kebabToCamel,
