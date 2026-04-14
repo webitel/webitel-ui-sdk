@@ -1,3 +1,5 @@
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
+import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
+import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 
-export { ChatGatewayProvider };
+export { ChatGatewayProvider, RelativeDatetimeValue, FormatDateMode };

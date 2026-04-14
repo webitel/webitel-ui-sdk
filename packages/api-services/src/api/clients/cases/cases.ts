@@ -1,6 +1,4 @@
 import { getCases } from '@webitel/api-services/gen';
-import { FormatDateMode } from '../../../../../../src/enums';
-import { formatDate } from '../../../../../../src/utils/formatDate';
 
 import { stringifyCaseFilters } from '../../../scripts';
 import downloadFile from '../../../scripts/downloadFile/downloadFile';
@@ -12,6 +10,7 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
+import formatNow from '../../../utils/formatNow';
 
 const casesService = getCases();
 
@@ -64,7 +63,7 @@ const exportCase = async (params) => {
 			},
 		);
 
-		const filename = `Cases-${formatDate(Date.now(), FormatDateMode.DATE)}-${formatDate(Date.now(), FormatDateMode.TIME_SEC)}`;
+		const filename = `Cases-${formatNow(Date.now())}`;
 
 		downloadFile({
 			response,
