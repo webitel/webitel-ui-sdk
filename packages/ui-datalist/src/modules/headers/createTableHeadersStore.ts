@@ -75,7 +75,7 @@ export const tableHeadersStoreBody = ({
 		for (const field of orderedFields) {
 			const indices = arrayFieldOrder.get(field);
 			const next = indices?.shift();
-			if (next) {
+			if (next !== undefined) {
 				newOrder.push(next);
 			}
 		}
