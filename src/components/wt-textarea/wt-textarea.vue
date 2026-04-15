@@ -6,6 +6,7 @@
     }"
   >
     <wt-label
+			v-if="hasLabel"
       :disabled="disabled"
       :for="name"
       :required="required"
@@ -51,7 +52,14 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
+import {
+	computed,
+	defineModel,
+	onMounted,
+	ref,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -162,6 +170,12 @@ const emit = defineEmits([
 ]);
 
 const isScrollHidden = ref(false);
+
+const slots = useSlots();
+
+const hasLabel = computed(() => {
+	return props.label || slots.label;
+});
 
 const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({

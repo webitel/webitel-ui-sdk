@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/api-services",
-	"version": "0.1.19",
+	"version": "0.1.21",
 	"private": false,
 	"scripts": {
 		"make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
@@ -79,6 +79,10 @@
 		"./utils": {
 			"types": "./types/utils/index.d.ts",
 			"import": "./src/utils/index.ts"
+		},
+		"./scripts": {
+			"types": "./types/scripts/index.d.ts",
+			"import": "./src/scripts/index.ts"
 		},
 		"./gen/utils": {
 			"types": "./types/utils/gen/index.d.ts",
