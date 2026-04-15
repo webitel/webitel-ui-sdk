@@ -15,7 +15,7 @@
       >
         <wt-avatar
           v-if="props.showAvatar"
-          :username="username"
+          :username="getClientUsername"
           :size="ComponentSize.SM || size"
           :bot="isBot"
         />
@@ -94,6 +94,7 @@ const emit = defineEmits<{
 }>();
 
 const size = inject<ComponentSize>('size');
+const agentName = inject<string>('agentName');
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
@@ -105,6 +106,10 @@ const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === 'webitel',
 );
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
+
+const getClientUsername = computed<string>(() => {
+	return isSelfSide.value ? agentName : props.username;
+});
 
 function handlePlayerInitialize(player) {
 	emit(MessageAction.InitializedPlayer, {
