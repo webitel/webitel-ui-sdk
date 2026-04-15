@@ -12,7 +12,10 @@
       wide
       @click="togglePicker"
     />
-		<Teleport :to="popupTeleportTo">
+		<Teleport 
+			:disabled="!popupTeleportTo"
+		 	:to="teleportValue"
+		>
 			<div
 				v-if="isOpened"
 				ref="emojiPickerWrapper"
@@ -25,7 +28,7 @@
 <script setup>
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
-import { nextTick, onBeforeUnmount, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
 
 import { eventBus } from '../../../scripts';
 
@@ -41,7 +44,7 @@ const props = defineProps({
 	 */
 	popupTeleportTo: {
 		type: String,
-		default: '.wt-chat-emoji',
+		default: '',
 	},
 });
 
@@ -52,6 +55,9 @@ const emit = defineEmits([
 const emojiPickerWrapper = ref(null);
 const isOpened = ref(false);
 const picker = ref(null);
+
+// Teleport's to prop is required even if it's disabled
+const teleportValue = computed(() => props.popupTeleportTo || 'body');
 
 const initPicker = async () => {
 	if (picker.value) return;
@@ -109,14 +115,13 @@ onBeforeUnmount(() => {
 .wt-chat-emoji__wrapper {
 	position: absolute;
 	left: 50%;
+	bottom: calc(100% + 8px);
+	z-index: calc(var(--popup-wrapper-z-index) - 1);
 }
 
 :deep() emoji-picker {
 	--background: var(--content-wrapper-color);
 	--border-color: var(--secondary-color);
-	position: absolute;
-  z-index: calc(var(--popup-wrapper-z-index) - 1);
-  bottom: calc(100% + 8px);
-  transform: translateX(-50%);
+	transform: translateX(-50%);
 }
 </style>
