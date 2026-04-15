@@ -12,12 +12,14 @@
       wide
       @click="togglePicker"
     />
-    <div
-      v-if="isOpened"
-      ref="emojiPickerWrapper"
-      class="wt-chat-emoji__wrapper"
-    ></div>
-  </div>
+		<Teleport :to="popupTeleportTo">
+			<div
+				v-if="isOpened"
+				ref="emojiPickerWrapper"
+				class="wt-chat-emoji__wrapper"
+			></div>
+		</Teleport>
+	</div>
 </template>
 
 <script setup>
@@ -31,6 +33,15 @@ const props = defineProps({
 	size: {
 		type: String,
 		default: ComponentSize.MD,
+	},
+	/**
+	 * @author HlukhovYe
+	 * teleport popup to specific element, pass selector
+	 * https://webitel.atlassian.net/browse/WTEL-8731
+	 */
+	popupTeleportTo: {
+		type: String,
+		default: '.wt-chat-emoji',
 	},
 });
 
@@ -93,10 +104,19 @@ onBeforeUnmount(() => {
 .wt-chat-emoji {
   position: relative;
   width: 100%;
+}
 
-  :deep() emoji-picker {
-    --background: var(--content-wrapper-color);
-    --border-color: var(--secondary-color);
-  }
+.wt-chat-emoji__wrapper {
+	position: absolute;
+	left: 50%;
+}
+
+:deep() emoji-picker {
+	--background: var(--content-wrapper-color);
+	--border-color: var(--secondary-color);
+	position: absolute;
+  z-index: calc(var(--popup-wrapper-z-index) - 1);
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
 }
 </style>
