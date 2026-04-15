@@ -3,36 +3,35 @@ import { computed, ref } from 'vue';
 import i18n from '../../../locale/i18n';
 import eventBus from '../../../scripts/eventBus';
 import { getUserWarnings } from '../api/UserNotifications';
-import { USER_NOTIFICATIONS_MAP } from '../maps/userNotificationsMap';
+import { USER_NOTIFICATION_CONFIGS_MAP } from '../maps/userNotificationConfigsMap';
 import type {
-	MappedUserNotificationsType,
-	RawUserNotification,
-	UserNotificationsMapConfig,
+	NotificationsType,
+	RawNotification,
+	UserNotificationsConfigsMap,
 } from '../types/UserNotifications';
 
 export const createUserNotificationsStore = () => {
 	const namespace = 'userNotifications';
 
-	const useStore = defineStore(namespace, () => {
-		const notifications = ref<RawUserNotification[]>([]);
+	const store = defineStore(namespace, () => {
+		const rawNotifications = ref<RawNotification[]>([]);
 		const isShown = ref(false);
 
-		const initialize = async (): Promise<void> => {
+		const initialize = async () => {
 			await fetch();
 		};
 
-		const fetch = async (): Promise<void> => {
+		const fetch = async () => {
 			const response = await getUserWarnings();
-			notifications.value =
-				(response && (response.warnings as RawUserNotification[])) ?? [];
+			rawNotifications.value =
+				(response && (response.warnings as RawNotification[])) ?? [];
 		};
 
-		const mappedNotifications = computed<MappedUserNotificationsType[]>(() => {
-			return notifications.value
+		const notifications = computed<NotificationsType[]>(() => {
+			return rawNotifications.value
 				.map((notification) => {
-					const config: UserNotificationsMapConfig = USER_NOTIFICATIONS_MAP.get(
-						notification.id,
-					);
+					const config: UserNotificationsConfigsMap =
+						USER_NOTIFICATION_CONFIGS_MAP.get(notification.id);
 					if (!config) return null;
 
 					return {
@@ -41,12 +40,12 @@ export const createUserNotificationsStore = () => {
 						days: config.getDays(notification.warningData),
 					};
 				})
-				.filter(Boolean) as MappedUserNotificationsType[];
+				.filter(Boolean) as NotificationsType[];
 		});
 
 		const show = () => {
 			if (isShown.value) return;
-			mappedNotifications.value.forEach((notification) => {
+			notifications.value.forEach((notification) => {
 				eventBus.$emit('notification', {
 					type: notification.type,
 					text: i18n.global.t(
@@ -65,13 +64,11 @@ export const createUserNotificationsStore = () => {
 			show,
 
 			/** internal for devtools/debug */
-			notifications,
+			rawNotifications,
 			isShown,
-			mappedNotifications,
+			notifications,
 		};
 	});
 
-	// Immediately return a store instance to preserve the previous API: userNotificationsStore()
-	// will return an object with fetch/show methods.
-	return useStore();
+	return store;
 };

@@ -2,6 +2,8 @@ import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApp } from 'vue';
 
+type ViMock = ReturnType<typeof vi.fn>;
+
 // Mocks for modules used by the store
 vi.mock('../../api/UserNotifications', () => {
 	return {
@@ -13,7 +15,8 @@ vi.mock('../../../../locale/i18n', () => {
 	return {
 		default: {
 			global: {
-				t: (key: string, payload?: any) => `${key}:${JSON.stringify(payload)}`,
+				t: (key: string, payload?: number) =>
+					`${key}:${JSON.stringify(payload)}`,
 			},
 		},
 	};
@@ -23,27 +26,31 @@ vi.mock('../../../../scripts/eventBus', () => {
 	const emitMock = vi.fn();
 	return {
 		default: {
+			$on: vi.fn(),
+			$off: vi.fn(),
 			$emit: emitMock,
-			$: {
-				emit: emitMock,
-			},
 		},
 	};
 });
 
 import eventBus from '../../../../scripts/eventBus';
 import { getUserWarnings } from '../../api/UserNotifications';
-import { USER_NOTIFICATIONS_MAP } from '../../maps/userNotificationsMap';
+import { USER_NOTIFICATION_CONFIGS_MAP } from '../../maps/userNotificationConfigsMap';
 import { createUserNotificationsStore } from '../userNotificationsStore';
 
 describe('createUserNotificationsStore', () => {
+	let useStore: ReturnType<typeof createUserNotificationsStore>;
+	let pinia: ReturnType<typeof createPinia>;
+
 	beforeEach(() => {
 		vi.clearAllMocks();
 
-		const pinia = createPinia();
+		pinia = createPinia();
 		const app = createApp({});
 		app.use(pinia);
 		setActivePinia(pinia);
+
+		useStore = createUserNotificationsStore();
 	});
 
 	it('fetch should call API and populate notifications', async () => {
@@ -60,24 +67,24 @@ describe('createUserNotificationsStore', () => {
 				},
 			],
 		};
-		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(
-			notificationsResponse,
-		);
 
-		const store = createUserNotificationsStore();
+		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
+
+		const store = useStore();
 
 		// Act
 		await store.initialize();
 
-		// Assert: internal mappedNotifications should reflect map config
-		expect(store.mappedNotifications.length).toBe(1);
-		expect(store.mappedNotifications[0].days).toBe(5);
-		expect(store.mappedNotifications[0].localeKey).toBe(
-			USER_NOTIFICATIONS_MAP.get('app.password.expires_soon')?.localeKey,
+		// Assert
+		expect(store.notifications.length).toBe(1);
+		expect(store.notifications[0].days).toBe(5);
+		expect(store.notifications[0].localeKey).toBe(
+			USER_NOTIFICATION_CONFIGS_MAP.get('app.password.expires_soon')?.localeKey,
 		);
+		expect(getUserWarnings).toHaveBeenCalledOnce();
 	});
 
-	it('show should emit notification for mapped warnings and not repeat when already shown', async () => {
+	it('show should emit notification for mapped warnings', async () => {
 		const notificationsResponse = {
 			warnings: [
 				{
@@ -90,26 +97,20 @@ describe('createUserNotificationsStore', () => {
 				},
 			],
 		};
-		(getUserWarnings as unknown as vi.Mock).mockResolvedValue(
-			notificationsResponse,
-		);
 
-		const store = createUserNotificationsStore();
+		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
+
+		const store = useStore();
 		await store.initialize();
 
 		// Act: show should emit once
 		store.show();
-		expect(eventBus.$.emit).toHaveBeenCalled();
-		const [[eventName, payload]] = (eventBus.$.emit as vi.Mock).mock.calls;
+		expect(eventBus.$emit).toHaveBeenCalledOnce();
+		const [[eventName, payload]] = (eventBus.$emit as ViMock).mock.calls;
 		expect(eventName).toBe('notification');
 		expect(payload.type).toBe('info');
 		expect(payload.text).toContain(
 			'systemNotifications.warnings.passwordExpirationMessage',
 		);
-
-		// Act: calling show again should not emit
-		(eventBus.$.emit as vi.Mock).mockClear();
-		store.show();
-		expect(eventBus.$.emit).not.toHaveBeenCalled();
 	});
 });

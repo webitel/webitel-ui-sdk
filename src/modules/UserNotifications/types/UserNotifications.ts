@@ -1,24 +1,20 @@
-interface UserNotificationsMapConfig {
+interface UserNotificationsConfigsMap {
 	id: string;
 	type: 'info' | 'warning' | 'error';
 	localeKey: string;
 	getDays: (warningData: number) => number;
 }
 
-interface MappedUserNotificationsType {
+interface NotificationsType {
 	type: 'info' | 'warning' | 'error';
 	localeKey: string;
 	days: number;
 }
 
-type RawUserNotification = {
+type RawNotification = {
 	id: string;
 	details: string;
 	warningData: object;
 };
 
-export type {
-	MappedUserNotificationsType,
-	RawUserNotification,
-	UserNotificationsMapConfig,
-};
+export type { NotificationsType, RawNotification, UserNotificationsConfigsMap };

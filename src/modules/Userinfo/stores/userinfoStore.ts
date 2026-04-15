@@ -15,6 +15,8 @@ export const createUserinfoStore = () => {
 		namespace,
 	});
 
+	const useUserNotificationsStore = createUserNotificationsStore();
+
 	const store = defineStore(namespace, () => {
 		const accessStore = useAccessStore();
 		const {
@@ -34,7 +36,7 @@ export const createUserinfoStore = () => {
 		const settingsStore = useSettingsStore();
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
-		const userNotificationsStore = createUserNotificationsStore();
+		const userNotificationsStore = useUserNotificationsStore();
 		const {
 			initialize: initializeUserNotificationsStore,
 			show: showUserNotifications,

@@ -1,8 +1,8 @@
-import type { UserNotificationsMapConfig } from '../types/UserWarnings';
+import type { UserNotificationsConfigsMap } from '../types/UserWarnings';
 
-export const USER_NOTIFICATIONS_MAP = new Map<
+export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
 	string,
-	UserNotificationsMapConfig
+	UserNotificationsConfigsMap
 >([
 	[
 		'app.password.expires_soon',
