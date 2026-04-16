@@ -9,6 +9,7 @@ interface NotificationsType {
 	type: 'info' | 'warning' | 'error';
 	localeKey: string;
 	days: number;
+	shown?: boolean;
 }
 
 export type { NotificationsType, UserNotificationsConfigsMap };
