@@ -28,7 +28,6 @@ const props = defineProps<{
 	 * default search name is used when there are no search modes
 	 */
 	singleSearchName?: string;
-	searchMode?: string;
 }>();
 
 const defaultSearchName = props.singleSearchName || 'search';
@@ -69,8 +68,8 @@ const deleteFilter = ({ name }: { name: FilterName }) => {
 };
 
 const restoreLocalSearchValue = (searchMode: string) => {
-	return (localSearchValue.value =
-		props.filtersManager.filters.get(searchMode)?.value);
+	localSearchValue.value = props.filtersManager.filters.get(searchMode)?.value;
+	return localSearchValue.value;
 };
 
 const hasSearchModes = computed(() => {

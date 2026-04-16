@@ -140,9 +140,10 @@ const search = async (event) => {
 	console.log('event.query', event);
 
 	if (!isApiMode.value) {
-		return (suggestions.value = [
+		suggestions.value = [
 			...props.options,
-		]);
+		];
+		return suggestions.value;
 	}
 
 	const fetchedOptions = await fetchOptions({

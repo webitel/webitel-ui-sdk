@@ -1,101 +1,104 @@
 <template>
   <div class="wt-tree-table wt-scrollbar">
-    <table
-      class="wt-tree-table-wrapper"
-    >
+    <table class="wt-tree-table-wrapper">
       <thead class="wt-tree-table-head">
-      <tr class="wt-tree-table-tr wt-tree-table-tr-head">
-        <th
-          v-for="(col, key) of dataHeaders"
-          :key="String(key) + col?.sort"
-          :class="[
+        <tr class="wt-tree-table-tr wt-tree-table-tr-head">
+          <th
+            v-for="(col, key) of dataHeaders"
+            :key="String(key) + col?.sort"
+            :class="[
               {
                 'wt-tree-table-th--sortable': isColSortable(col),
               },
               `wt-tree-table-th--sort-${col.sort}`,
             ]"
-          :style="col.width ? `min-width:${col.width}` : ''"
-          class="wt-tree-table-th typo-body-1"
-          @click="sort(col, key)"
-        >
-          <div class="wt-tree-table-th__content"
-               :class="{'wt-tree-table-th__content--selectable': key === 0 && selectable}">
+            :style="col.width ? `min-width:${col.width}` : ''"
+            class="wt-tree-table-th typo-body-1"
+            @click="sort(col, key)"
+          >
             <div
-              v-if="key === 0 && selectable"
-              @click.stop
+              class="wt-tree-table-th__content"
+              :class="{ 'wt-tree-table-th__content--selectable': key === 0 && selectable }"
             >
-              <wt-checkbox
-                :selected="isAllSelected"
-                @update:selected="selectAll"
+              <div
+                v-if="key === 0 && selectable"
+                @click.stop
+              >
+                <wt-checkbox
+                  :selected="isAllSelected"
+                  @update:selected="selectAll"
+                />
+              </div>
+              <div class="wt-tree-table-th__text">
+                {{ col.text }}
+              </div>
+              <wt-icon
+                v-if="sortable"
+                class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--asc"
+                icon="sort-arrow-up"
+                size="sm"
+              />
+              <wt-icon
+                v-if="sortable"
+                class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--desc"
+                icon="sort-arrow-down"
+                size="sm"
               />
             </div>
-            <div class="wt-tree-table-th__text">
-              {{ col.text }}
+          </th>
+          <th
+            v-if="gridActions"
+            class="wt-tree-table-th__actions"
+          >
+            <div class="wt-tree-table-th__content">
+              <slot name="actions-header" />
             </div>
-            <wt-icon
-              v-if="sortable"
-              class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-if="sortable"
-              class="wt-tree-table-th-sort-arrow wt-tree-table-th-sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
-          </div>
-        </th>
-        <th
-          v-if="gridActions"
-          class="wt-tree-table-th__actions"
-        >
-          <div class="wt-tree-table-th__content">
-            <slot name="actions-header" />
-          </div>
-        </th>
-      </tr>
+          </th>
+        </tr>
       </thead>
 
       <tbody class="wt-tree-table-body">
-      <wt-tree-table-row
-        v-for="(row, dataKey) of data"
-        :key="dataKey"
-        :row-position="dataKey"
-        :data-headers="dataHeaders"
-        :data="row"
-        :selectable="selectable"
-        :children-prop="childrenProp"
-        :selected-elements="selectedElements"
-        :searched-prop="searchedProp"
-        @update:selected="handleSelection($event.data, $event.select)"
-      >
-        <template #actions="{ item }">
-          <slot
-            name="actions"
-            :item="item"
-          />
-        </template>
-        <template
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          #[col.value]="{ item }"
+        <wt-tree-table-row
+          v-for="(row, dataKey) of data"
+          :key="dataKey"
+          :row-position="dataKey"
+          :data-headers="dataHeaders"
+          :data="row"
+          :selectable="selectable"
+          :children-prop="childrenProp"
+          :selected-elements="selectedElements"
+          :searched-prop="searchedProp"
+          @update:selected="handleSelection($event.data, $event.select)"
         >
-          <slot
-            :index="dataKey"
-            :item="item"
-            :name="col.value"
+          <template #actions="{ item }">
+            <slot
+              name="actions"
+              :item="item"
+            />
+          </template>
+          <template
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            #[col.value]="{ item }"
           >
-            {{ item[col.value] }}
-          </slot>
-        </template>
-      </wt-tree-table-row>
+            <slot
+              :index="dataKey"
+              :item="item"
+              :name="col.value"
+            >
+              {{ item[col.value] }}
+            </slot>
+          </template>
+        </wt-tree-table-row>
       </tbody>
     </table>
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { computed, toRef } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
@@ -113,7 +116,7 @@ const props = withDefaults(
 		/**
 		 * 'List of data, represented by table. '
 		 */
-		data: Record<string, any>[];
+		data: Record<string, unknown>[];
 		/**
 		 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
 		 */
@@ -122,7 +125,7 @@ const props = withDefaults(
 		 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
 		 */
 		selectable?: boolean;
-		selected: any[];
+		selected: unknown[];
 		/**
 		 * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
 		 */
@@ -149,14 +152,14 @@ const emit = defineEmits([
 	'update:selected',
 ]);
 
-const checkHasChildItems = (item: Record<string, any>) => {
+const checkHasChildItems = (item: Record<string, unknown>) => {
 	return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
 };
 
-const getSelectedValue = (items: Record<string, any>[]) => {
+const getSelectedValue = (items: Record<string, unknown>[]) => {
 	const selected = [];
 
-	const pushSelectedElement = (item: Record<string, any>) => {
+	const pushSelectedElement = (item: Record<string, unknown>) => {
 		if (item._isSelected) {
 			return [
 				item,
@@ -173,10 +176,10 @@ const getSelectedValue = (items: Record<string, any>[]) => {
 	return selected;
 };
 
-const getAllNestedElements = (item: Record<string, any>) => {
+const getAllNestedElements = (item: Record<string, unknown>) => {
 	const nested = [];
 
-	const pushElement = (item: Record<string, any>) => {
+	const pushElement = (item: Record<string, unknown>) => {
 		nested.push(item);
 
 		if (checkHasChildItems(item)) {
@@ -189,7 +192,7 @@ const getAllNestedElements = (item: Record<string, any>) => {
 	return nested;
 };
 
-const selectedElements = computed<Record<string, any>[]>(() => {
+const selectedElements = computed<Record<string, unknown>[]>(() => {
 	// _isSelected for backwards compatibility
 	return props.selected || getSelectedValue(props.data);
 });
@@ -220,7 +223,10 @@ const sort = (col: WtTableHeader) => {
 	emit('sort', col, nextSort);
 };
 
-const changeSelectItem = (items: Record<string, any>[], selected: boolean) => {
+const changeSelectItem = (
+	items: Record<string, unknown>[],
+	selected: boolean,
+) => {
 	items.forEach((item) => {
 		item._isSelected = selected;
 

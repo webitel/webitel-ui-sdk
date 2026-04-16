@@ -150,14 +150,12 @@ const {
 
 const localizedDataList = computed(() => {
 	return dataList.value.map((item) => {
-		const access = Object.keys(item.access).reduce((access, rule) => {
-			return {
-				...access,
-				[rule]: {
-					...item.access[rule],
-					name: t(`access.accessMode.${item.access[rule].id}`),
-				},
+		const access = Object.keys(item.access).reduce((acc, rule) => {
+			acc[rule] = {
+				...item.access[rule],
+				name: t(`access.accessMode.${item.access[rule].id}`),
 			};
+			return acc;
 		}, {});
 
 		return {

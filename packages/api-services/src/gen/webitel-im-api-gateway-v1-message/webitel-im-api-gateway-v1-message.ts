@@ -9,12 +9,18 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	MessageReadWebitelImApiGatewayV1MessageParams,
+	MessageReadParams,
+	WebitelImApiGatewayV1InteractiveCallbackResponse,
+	WebitelImApiGatewayV1MessageSendInteractiveCallbackBody,
 	WebitelImApiGatewayV1ReadMessageResponse,
+	WebitelImApiGatewayV1SendContactRequest,
 	WebitelImApiGatewayV1SendDocumentRequest,
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendImageRequest,
 	WebitelImApiGatewayV1SendImageResponse,
+	WebitelImApiGatewayV1SendInteractiveMessageRequest,
+	WebitelImApiGatewayV1SendLocationRequest,
+	WebitelImApiGatewayV1SendMessageResponse,
 	WebitelImApiGatewayV1SendTextRequest,
 	WebitelImApiGatewayV1SendTextResponse,
 } from '../_models';
@@ -28,14 +34,27 @@ export const // --- title start
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
 			/**
-			 * @summary SendFile delivers documents or files.
+			 * @summary Sends a contact card.
 			 */
-			const messageSendFile = (
+			const messageSendContact = (
+				webitelImApiGatewayV1SendContactRequest: WebitelImApiGatewayV1SendContactRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/messages/contact`,
+					webitelImApiGatewayV1SendContactRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary SendDocument delivers a document message.
+			 */
+			const messageSendDocument = (
 				webitelImApiGatewayV1SendDocumentRequest: WebitelImApiGatewayV1SendDocumentRequest,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1SendDocumentResponse>> => {
 				return axiosInstance.post(
-					`/v1/messages/file`,
+					`/v1/messages/document`,
 					webitelImApiGatewayV1SendDocumentRequest,
 					options,
 				);
@@ -43,7 +62,7 @@ export const // --- title start
 			/**
 			 * @summary SendImage delivers image-specific messages.
 			 */
-			const messageSendImageWebitelImApiGatewayV1Message = (
+			const messageSendImage = (
 				webitelImApiGatewayV1SendImageRequest: WebitelImApiGatewayV1SendImageRequest,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1SendImageResponse>> => {
@@ -54,10 +73,54 @@ export const // --- title start
 				);
 			};
 			/**
+ * @summary Sends an interactive message (buttons, lists, CTA).
+Supports idempotency via send_id.
+ */
+			const messageSendInteractive = (
+				webitelImApiGatewayV1SendInteractiveMessageRequest: WebitelImApiGatewayV1SendInteractiveMessageRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/messages/interactive`,
+					webitelImApiGatewayV1SendInteractiveMessageRequest,
+					options,
+				);
+			};
+			/**
+ * @summary Handles user interaction callbacks.
+Should be called by client when user interacts with UI.
+ */
+			const messageSendInteractiveCallback = (
+				inReplyTo: string,
+				webitelImApiGatewayV1MessageSendInteractiveCallbackBody: WebitelImApiGatewayV1MessageSendInteractiveCallbackBody,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1InteractiveCallbackResponse>
+			> => {
+				return axiosInstance.post(
+					`/v1/messages/interactive/${inReplyTo}/callback`,
+					webitelImApiGatewayV1MessageSendInteractiveCallbackBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Sends a geographic location message.
+			 */
+			const messageSendLocation = (
+				webitelImApiGatewayV1SendLocationRequest: WebitelImApiGatewayV1SendLocationRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/messages/location`,
+					webitelImApiGatewayV1SendLocationRequest,
+					options,
+				);
+			};
+			/**
  * @summary SendText delivers a plain text message.
 We use the shared Request/Response types directly to avoid duplication.
  */
-			const messageSendTextWebitelImApiGatewayV1Message = (
+			const messageSendText = (
 				webitelImApiGatewayV1SendTextRequest: WebitelImApiGatewayV1SendTextRequest,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1SendTextResponse>> => {
@@ -70,9 +133,9 @@ We use the shared Request/Response types directly to avoid duplication.
 			/**
 			 * @summary Mark message as read by id.
 			 */
-			const messageReadWebitelImApiGatewayV1Message = (
+			const messageRead = (
 				id: string,
-				params?: MessageReadWebitelImApiGatewayV1MessageParams,
+				params?: MessageReadParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>> => {
 				return axiosInstance.post(`/v1/messages/${id}/read`, undefined, {
@@ -86,19 +149,31 @@ We use the shared Request/Response types directly to avoid duplication.
 
 			// --- footer start
 			return {
-				messageSendFile,
-				messageSendImageWebitelImApiGatewayV1Message,
-				messageSendTextWebitelImApiGatewayV1Message,
-				messageReadWebitelImApiGatewayV1Message,
+				messageSendContact,
+				messageSendDocument,
+				messageSendImage,
+				messageSendInteractive,
+				messageSendInteractiveCallback,
+				messageSendLocation,
+				messageSendText,
+				messageRead,
 			};
 		};
-export type MessageSendFileResult =
+export type MessageSendContactResult =
+	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
+export type MessageSendDocumentResult =
 	AxiosResponse<WebitelImApiGatewayV1SendDocumentResponse>;
-export type MessageSendImageWebitelImApiGatewayV1MessageResult =
+export type MessageSendImageResult =
 	AxiosResponse<WebitelImApiGatewayV1SendImageResponse>;
-export type MessageSendTextWebitelImApiGatewayV1MessageResult =
+export type MessageSendInteractiveResult =
+	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
+export type MessageSendInteractiveCallbackResult =
+	AxiosResponse<WebitelImApiGatewayV1InteractiveCallbackResponse>;
+export type MessageSendLocationResult =
+	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
+export type MessageSendTextResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTextResponse>;
-export type MessageReadWebitelImApiGatewayV1MessageResult =
+export type MessageReadResult =
 	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 
 // --- footer end

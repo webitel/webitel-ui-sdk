@@ -4,9 +4,9 @@ import { useRoute } from 'vue-router';
 
 import CSVExport from '../CSVExport';
 
-export type CSVRow = Record<string, any>;
+export type CSVRow = Record<string, unknown>;
 
-export type FetchMethod = (params: Record<string, any>) => Promise<{
+export type FetchMethod = (params: Record<string, unknown>) => Promise<{
 	items: CSVRow[];
 	next: boolean;
 }>;
@@ -39,7 +39,7 @@ export function useCSVExport({ selected }: { selected: Ref<number[]> }) {
 		CSVExportInstance.value = new CSVExport(fetchMethod, options);
 	}
 
-	async function exportCSV(exportParams?: Record<string, any>) {
+	async function exportCSV(exportParams?: Record<string, unknown>) {
 		const routeQuery = route.query;
 		const params = {
 			...(exportParams || routeQuery),

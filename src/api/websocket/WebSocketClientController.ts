@@ -52,10 +52,12 @@ class WebSocketClientController {
 		// const cli = new Client(config);
 		const cli = shallowReactive(new Client(config));
 
-		this._on[WebSocketClientEvent.AFTER_AUTH].forEach((callback) => callback());
-		this._on[WebSocketClientEvent.ERROR].forEach((callback) =>
-			cli.on('error', callback),
-		);
+		this._on[WebSocketClientEvent.AFTER_AUTH].forEach((callback) => {
+			callback();
+		});
+		this._on[WebSocketClientEvent.ERROR].forEach((callback) => {
+			cli.on('error', callback);
+		});
 		cli.on('show_message', (e) =>
 			eventBus.$emit('notification', {
 				type: e.type,

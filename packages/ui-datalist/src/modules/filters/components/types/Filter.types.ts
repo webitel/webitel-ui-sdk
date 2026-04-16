@@ -1,5 +1,9 @@
-import { FilterData, FilterInitParams, IFilter } from '../../classes/Filter';
-import { AnyFilterConfig } from '../../modules/filterConfig';
+import type {
+	FilterData,
+	FilterInitParams,
+	IFilter,
+} from '../../classes/Filter';
+import type { AnyFilterConfig } from '../../modules/filterConfig';
 
 export interface FilterEmits {
 	'update:filter': [

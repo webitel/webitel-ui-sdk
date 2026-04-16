@@ -12,7 +12,7 @@ describe('WtIcon', () => {
 		expect(wrapper.classes('wt-icon')).toBe(true);
 	});
 	it('correctly computes icon name', () => {
-		const iconName = '#jest-bucket';
+		const iconName = 'jest-bucket';
 		const wrapper = shallowMount(WtIcon, {
 			props: {
 				icon: 'bucket',
@@ -20,6 +20,23 @@ describe('WtIcon', () => {
 				iconPrefix: 'jest',
 			},
 		});
-		expect(wrapper.vm.iconName).toBe(iconName);
+		expect(wrapper.vm.iconSvg).toBe(iconName);
+	});
+
+	it('applies size and color classes', () => {
+		const wrapper = shallowMount(WtIcon, {
+			props: {
+				icon: 'bucket',
+				size: 'sm',
+				color: 'error',
+			},
+		});
+
+		expect(wrapper.classes()).toEqual(
+			expect.arrayContaining([
+				'wt-icon--size-sm',
+				'wt-icon--color-error',
+			]),
+		);
 	});
 });

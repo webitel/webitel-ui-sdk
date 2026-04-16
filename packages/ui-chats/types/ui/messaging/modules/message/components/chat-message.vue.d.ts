@@ -5,11 +5,11 @@ type __VLS_Props = {
     withoutAvatars?: boolean;
     username?: string;
 };
-declare var __VLS_1: {}, __VLS_45: {};
+declare var __VLS_1: {}, __VLS_52: {};
 type __VLS_Slots = {} & {
     'before-message'?: (props: typeof __VLS_1) => any;
 } & {
-    'after-message'?: (props: typeof __VLS_45) => any;
+    'after-message'?: (props: typeof __VLS_52) => any;
 };
 declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
     clickOnImage: () => any;

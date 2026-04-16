@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from 'vue';
-import { WtVidstackPlayer, WtPlayer } from '@webitel/ui-sdk/components';
+import { WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { computed, defineEmits, defineProps } from 'vue';
 
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 

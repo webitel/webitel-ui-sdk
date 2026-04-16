@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { EnginePresetQuery } from 'webitel-sdk';
+import type { EnginePresetQuery } from 'webitel-sdk';
 
 import { PersistedStorageType } from '../../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../../persist/usePersistedStorage';

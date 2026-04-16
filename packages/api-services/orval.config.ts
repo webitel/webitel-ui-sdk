@@ -14,7 +14,7 @@ const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand =
 	// 'true';
-	'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
+	'npx biome check --write ./src/gen'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
 
 export default defineConfig({
 	main: {

@@ -6,12 +6,12 @@ const addQueryParamsToUrl = (queryArray) => (url) => {
 
 	if (queryArray && queryArray.length > 0) {
 		if (modifyUrl.includes('?')) {
-			modifyUrl += '&' + queryArray.join('&');
+			modifyUrl += `&${queryArray.join('&')}`;
 
 			return modifyUrl;
 		}
 
-		modifyUrl += '?' + queryArray.join('&');
+		modifyUrl += `?${queryArray.join('&')}`;
 	}
 
 	return modifyUrl;

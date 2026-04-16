@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { ApiUserWarningId } from './apiUserWarningId';
 import type { ApiWarningData } from './apiWarningData';
 
 export interface ApiUserWarning {
 	detail?: string;
-	id?: string;
+	id?: ApiUserWarningId;
 	warningData?: ApiWarningData;
 }

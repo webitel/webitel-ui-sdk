@@ -1,4 +1,4 @@
-import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
@@ -6,7 +6,7 @@ import { computed, nextTick, ref } from 'vue';
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
-import { useTableStoreConfig } from '../types/tableStore.types';
+import type { useTableStoreConfig } from '../types/tableStore.types';
 
 interface TableHeadersStoreBodyParams {
 	rawHeaders: WtTableHeader[];
@@ -65,14 +65,18 @@ export const tableHeadersStoreBody = ({
 			if (!arrayFieldOrder.has(header.field)) {
 				arrayFieldOrder.set(header.field, []);
 			}
-			arrayFieldOrder.get(header.field)!.push(idx);
+			const list = arrayFieldOrder.get(header.field);
+			if (list) {
+				list.push(idx);
+			}
 		});
 
 		const newOrder = [];
 		for (const field of orderedFields) {
 			const indices = arrayFieldOrder.get(field);
-			if (indices && indices.length) {
-				newOrder.push(indices.shift()!);
+			const next = indices?.shift();
+			if (next !== undefined) {
+				newOrder.push(next);
 			}
 		}
 

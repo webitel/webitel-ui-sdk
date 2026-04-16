@@ -121,7 +121,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
 	(e: 'openParent'): void;
-	(e: 'update:modelValue', value: any): void;
+	(e: 'update:modelValue', value: unknown): void;
 }>();
 
 const label = computed(() =>
@@ -260,7 +260,7 @@ const setMultipleModelValueWithTree = () => {
 
 const setMultipleModelValue = () => {
 	const value = props.itemData ? props.data[props.itemData] : props.data;
-	let existingIndex;
+	let existingIndex: number;
 
 	if (props.itemData) {
 		existingIndex = props.modelValue.indexOf(props.data[props.itemData]);

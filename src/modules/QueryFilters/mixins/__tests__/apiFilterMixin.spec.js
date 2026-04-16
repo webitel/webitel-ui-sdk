@@ -53,7 +53,7 @@ describe('API filter mixin', () => {
 				team,
 			},
 		});
-		const wrapper = shallowMount(Component, {
+		shallowMount(Component, {
 			global: {
 				plugins: [
 					router,
@@ -74,7 +74,7 @@ describe('API filter mixin', () => {
 	});
 
 	it('Sets empty array value if $route query is empty', async () => {
-		const wrapper = shallowMount(Component, {
+		shallowMount(Component, {
 			global: {
 				plugins: [
 					router,

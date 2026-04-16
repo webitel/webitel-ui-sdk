@@ -9,7 +9,7 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
-import {
+import type {
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';

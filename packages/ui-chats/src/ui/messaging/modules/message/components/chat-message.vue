@@ -15,14 +15,18 @@
       >
         <wt-avatar
           v-if="props.showAvatar"
-          :username="getClientUsername"
-          :size="size"
-          :src="ComponentSize.SM || size"
+          :username="username"
+          :size="ComponentSize.SM || size"
           :bot="isBot"
         />
       </div>
       <!--    click.stop prevents focus on textarea and allows to select the message-new text -->
       <message-blocked-error v-if="message.file?.malware" @click.stop />
+      <message-size-exceeded-error
+        v-else-if="isFileSizeExceeded"
+        :self-side="isSelfSide"
+        @click.stop
+      />
       <div v-else @click.stop>
         <message-player
           v-if="media"
@@ -66,6 +70,7 @@ import MessageBlockedError from './details/chat-message-blocked-error.vue';
 import MessageDocument from './details/chat-message-document.vue';
 import MessageImage from './details/chat-message-image.vue';
 import MessagePlayer from './details/chat-message-player.vue';
+import MessageSizeExceededError from './details/chat-message-size-exceeded-error.vue';
 import MessageText from './details/chat-message-text.vue';
 import MessageTime from './details/chat-message-time.vue';
 
@@ -92,14 +97,14 @@ const size = inject<ComponentSize>('size');
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
+const isFileSizeExceeded = computed<boolean>(
+	() => !!props.message.file && !props.message.file?.size,
+);
+
 const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === 'webitel',
 );
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
-
-const getClientUsername = computed<string>(() => {
-	return !isSelfSide.value ? props.username : ''; // need to show username avatar only for client
-});
 
 function handlePlayerInitialize(player) {
 	emit(MessageAction.InitializedPlayer, {

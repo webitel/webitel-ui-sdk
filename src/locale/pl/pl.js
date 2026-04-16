@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -228,6 +230,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Głos',
 				[EngineRoutingSchemaType.Service]: 'Usługa',
 				[EngineRoutingSchemaType.Processing]: 'Formularze',
+				[EngineRoutingSchemaType.Default]: 'Brak typu',
 			},
 		},
 		messengers: {
@@ -321,11 +324,9 @@ export default {
 						': ' +
 						linked('objects.case'),
 					[CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-						linked('objects.customization.customization') +
-						': ' +
-						linked('objects.contact'),
+						`${linked('objects.customization.customization')}: ${linked('objects.contact')}`,
 					[CrmSectionsNew.CustomLookups]: ({ linked }) =>
-						linked('objects.customization.customization') + ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+						`${linked('objects.customization.customization')}: Dostosowania`, // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
 				},
 			},
 		},

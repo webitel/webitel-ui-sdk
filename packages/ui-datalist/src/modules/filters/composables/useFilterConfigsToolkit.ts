@@ -1,16 +1,16 @@
-import { ComputedRef, computed } from 'vue';
+import { type ComputedRef, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WebitelProtoDataField } from 'webitel-sdk';
+import type { WebitelProtoDataField } from 'webitel-sdk';
 
-import { FilterName, IFilter } from '../classes/Filter';
-import { IFiltersManager } from '../classes/FiltersManager';
+import type { FilterName, IFilter } from '../classes/Filter';
+import type { IFiltersManager } from '../classes/FiltersManager';
 import { createFilterConfig } from '../modules/filterConfig/classes/createFilterConfig';
 import {
-	BaseFilterConfig,
+	type BaseFilterConfig,
 	FilterConfig,
 } from '../modules/filterConfig/classes/FilterConfig';
 import { createTypeExtensionFilterConfig } from '../modules/filterConfig/components/_custom';
-import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
+import type { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 
 export type FilterConfigToolkit = {
 	filterConfigs: ComputedRef<BaseFilterConfig[]>;
@@ -118,12 +118,10 @@ export const useFilterConfigsToolkit = ({
 	const appliedFilterToFilterConfigMappings = computed(() => {
 		const filterNameToFilterConfigMap = filterConfigs.value.reduce(
 			(map, filterConfig) => {
-				return {
-					...map,
-					[filterConfig.name]: filterConfig,
-				};
+				map[filterConfig.name] = filterConfig;
+				return map;
 			},
-			{},
+			{} as Record<string, BaseFilterConfig>,
 		);
 
 		return appliedFilters.value.map((filter) => {

@@ -1,9 +1,9 @@
-import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
+import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import type { Ref } from 'vue';
 
-import { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTable';
-import { IFiltersManager } from '../filters';
-import { DatalistStoreProviderType } from './StoreProvider';
+import type { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTable';
+import type { IFiltersManager } from '../filters';
+import type { DatalistStoreProviderType } from './StoreProvider';
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
 

@@ -9,6 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	WebMeetingBackendCreateMeetingRequest,
+	WebMeetingBackendCreateMeetingResponse,
 	WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
 	WebMeetingBackendMeetingView,
 	WebMeetingBackendSatisfactionMeetingResponse,
@@ -22,12 +24,31 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
+			/**
+			 * @summary CreateMeeting creates a new meeting session with specific parameters and returns its URL.
+			 */
+			const createMeeting = (
+				webMeetingBackendCreateMeetingRequest: WebMeetingBackendCreateMeetingRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebMeetingBackendCreateMeetingResponse>> => {
+				return axiosInstance.post(
+					`/meetings`,
+					webMeetingBackendCreateMeetingRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary GetMeetingView retrieves public-facing information about a meeting.
+			 */
 			const getMeetingView = (
 				id: string,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebMeetingBackendMeetingView>> => {
 				return axiosInstance.get(`/meetings/${id}`, options);
 			};
+			/**
+			 * @summary SatisfactionMeeting submits feedback or a satisfaction rating for a completed meeting.
+			 */
 			const satisfactionMeeting = (
 				id: string,
 				webMeetingBackendMeetingServiceSatisfactionMeetingBody: WebMeetingBackendMeetingServiceSatisfactionMeetingBody,
@@ -44,10 +65,13 @@ export const // --- title start
 
 			// --- footer start
 			return {
+				createMeeting,
 				getMeetingView,
 				satisfactionMeeting,
 			};
 		};
+export type CreateMeetingResult =
+	AxiosResponse<WebMeetingBackendCreateMeetingResponse>;
 export type GetMeetingViewResult = AxiosResponse<WebMeetingBackendMeetingView>;
 export type SatisfactionMeetingResult =
 	AxiosResponse<WebMeetingBackendSatisfactionMeetingResponse>;

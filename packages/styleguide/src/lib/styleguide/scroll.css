@@ -38,9 +38,6 @@
 	background-color: var(--scrollbar-hover-thumb-color);
 }
 
-.wt-distant-scrollbar {
-}
-
 .wt-distant-scrollbar::-webkit-scrollbar {
 	width: 14px;
 	height: 18px;

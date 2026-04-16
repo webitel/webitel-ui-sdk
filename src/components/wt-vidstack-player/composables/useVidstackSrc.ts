@@ -109,6 +109,6 @@ export function normalizeVidstackMediaSrc({
 /**
  * "video/object" or "audio/object" types represent JS objects like MediaStream or file Blob
  */
-function isObjectSrcType({ src, type }: { src: unknown; type: string }) {
+function isObjectSrcType({ type }: { src: unknown; type: string }) {
 	return type?.includes('/object');
 }

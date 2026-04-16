@@ -40,7 +40,7 @@ const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
 	}
 };
 
-const listScreenrecordingExports = async (params: any) => {
+const listScreenrecordingExports = async (params: unknown) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListScreenrecordingExportsQueryParams,
 	);
@@ -94,7 +94,7 @@ const createCallExport = async ({ callId, itemInstance }) => {
 	}
 };
 
-const listCallExports = async (params: any) => {
+const listCallExports = async (params: unknown) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCallExportsQueryParams,
 	);

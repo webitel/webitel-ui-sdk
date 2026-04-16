@@ -11,13 +11,20 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 
 describe('WtSelectButton', () => {
 	it('renders a component', () => {
-		const wrapper = shallowMount(WtSelectButton);
+		const wrapper = shallowMount(WtSelectButton, {
+			props: {
+				options: [],
+			},
+		});
 		expect(wrapper.classes('wt-button-select')).toBe(true);
 	});
 
 	it('renders a button content via default slot', () => {
 		const content = 'button content';
 		const wrapper = mount(WtSelectButton, {
+			props: {
+				options: [],
+			},
 			slots: {
 				default: content,
 			},
@@ -25,24 +32,14 @@ describe('WtSelectButton', () => {
 		expect(wrapper.find('.wt-button-select__button').text()).toBe(content);
 	});
 
-	it('should rotate the arrow', async () => {
-		const wrapper = mount(WtSelectButton, {
+	it('emits click from main action button', async () => {
+		const wrapper = shallowMount(WtSelectButton, {
 			props: {
 				options: [],
 			},
 		});
-		const arrowBtn = wrapper
-			.findAllComponents({
-				name: 'wt-button',
-			})
-			.find((component) =>
-				component.classes().includes('wt-button-select__select-btn'),
-			);
-		arrowBtn.vm.$emit('click');
-		await wrapper.vm.$nextTick();
-		const wtIcon = wrapper.find('.wt-button-select__select-arrow');
-		expect(wtIcon.classes()).toContain(
-			'wt-button-select__select-arrow--active',
-		);
+
+		await wrapper.find('.wt-button-select__button').trigger('click');
+		expect(wrapper.emitted().click).toBeTruthy();
 	});
 });

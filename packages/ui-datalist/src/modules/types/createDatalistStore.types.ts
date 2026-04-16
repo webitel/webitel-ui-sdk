@@ -1,6 +1,6 @@
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 
-import { useTableStoreConfig } from './tableStore.types';
+import type { useTableStoreConfig } from './tableStore.types';
 
 /**
  * this type is used to define the value that is used in the applyStorePatch method,

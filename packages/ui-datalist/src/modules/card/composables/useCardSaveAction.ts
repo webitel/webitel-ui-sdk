@@ -1,4 +1,4 @@
-import { RegleSchemaResult } from '@regle/schemas';
+import type { RegleSchemaResult } from '@regle/schemas';
 
 export const useCardSaveAction = <CardEntity>({
 	validate,

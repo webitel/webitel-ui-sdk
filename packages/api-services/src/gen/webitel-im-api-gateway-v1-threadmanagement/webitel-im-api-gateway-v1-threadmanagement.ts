@@ -9,8 +9,17 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	ThreadManagementAddMemberParams,
+	ThreadManagementRemoveMemberParams,
 	ThreadManagementSearchParams,
+	ThreadManagementSearchVariablesParams,
+	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
+	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
+	WebitelImApiGatewayV1ThreadVariables,
 } from '../_models';
 
 // --- header start
@@ -36,13 +45,125 @@ export const // --- title start
 					},
 				});
 			};
+			/**
+			 * @summary Remove member from the thread.
+			 */
+			const threadManagementRemoveMember = (
+				threadId: string,
+				params?: ThreadManagementRemoveMemberParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
+				return axiosInstance.delete(`/v1/threads/${threadId}/members`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Add member to the thread.
+			 */
+			const threadManagementAddMember = (
+				threadId: string,
+				params?: ThreadManagementAddMemberParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/members`,
+					undefined,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+			 * @summary Retrieves all variables for a specific thread.
+			 */
+			const threadManagementLocateVariables = (
+				threadId: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.get(`/v1/threads/${threadId}/variables`, options);
+			};
+			/**
+ * @summary Sets or updates variables for a specific thread.
+Existing variables with the same keys will be overwritten if were setted by the caller.
+New variables will be created if they do not exist.
+ */
+			const threadManagementSetVariables = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementSetVariablesBody: WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/variables`,
+					webitelImApiGatewayV1ThreadManagementSetVariablesBody,
+					options,
+				);
+			};
+			/**
+ * @summary Removes specified variables from a thread with caller's permission.
+If no keys are provided, all variables may be removed
+depending on implementation.
+ */
+			const threadManagementFlushVariables = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementFlushVariablesBody: WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.delete(`/v1/threads/${threadId}/variables/flush`, {
+					data: webitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+					...options,
+				});
+			};
+			/**
+ * @summary Searches thread variables across multiple threads.
+Supports pagination and field projection.
+ */
+			const threadManagementSearchVariables = (
+				params?: ThreadManagementSearchVariablesParams,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1SearchVariablesResponse>
+			> => {
+				return axiosInstance.get(`/v1/variables`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
 			// --- footer start
 			return {
 				threadManagementSearch,
+				threadManagementRemoveMember,
+				threadManagementAddMember,
+				threadManagementLocateVariables,
+				threadManagementSetVariables,
+				threadManagementFlushVariables,
+				threadManagementSearchVariables,
 			};
 		};
 export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
+export type ThreadManagementRemoveMemberResult =
+	AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>;
+export type ThreadManagementAddMemberResult =
+	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
+export type ThreadManagementLocateVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementSetVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementFlushVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementSearchVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1SearchVariablesResponse>;
 
 // --- footer end

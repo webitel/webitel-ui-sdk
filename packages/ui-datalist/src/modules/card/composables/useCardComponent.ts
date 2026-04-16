@@ -1,5 +1,5 @@
 import { refDebounced } from '@vueuse/core';
-import { StoreDefinition, storeToRefs } from 'pinia';
+import { type StoreDefinition, storeToRefs } from 'pinia';
 import { onUnmounted, watch } from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
@@ -14,7 +14,7 @@ export const useCardComponent = <CardEntity>({
 	onLoadErrorHandler,
 }: {
 	useCardStore: StoreDefinition;
-	onLoadErrorHandler?: (err: any) => void;
+	onLoadErrorHandler?: (err: unknown) => void;
 }) => {
 	const cardStore = useCardStore();
 

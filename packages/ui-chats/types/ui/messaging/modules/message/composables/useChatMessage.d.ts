@@ -1,5 +1,5 @@
-import { type ComputedRef, type Ref } from "vue";
-import type { ChatMessageType } from "../../../types/ChatMessage.types";
+import type { ComputedRef, Ref } from 'vue';
+import type { ChatMessageType } from '../../../types/ChatMessage.types';
 interface GetMessageResult {
     prevMessage?: ChatMessageType;
     message?: ChatMessageType;

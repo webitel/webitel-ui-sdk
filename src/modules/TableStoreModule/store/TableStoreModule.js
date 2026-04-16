@@ -19,15 +19,13 @@ export default class TableStoreModule extends BaseStoreModule {
 		PARENT_ID: () => null, // override me
 
 		// FIXME: maybe move to filters module?
-		FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
+		FILTERS: (_, getters) => getters['filters/GET_FILTERS'],
 
 		FIELDS: (state) => {
 			const fields = state.headers.reduce((fields, { show, field }) => {
-				if (show)
-					return [
-						...fields,
-						field,
-					];
+				if (show) {
+					fields.push(field);
+				}
 				return fields;
 			}, []);
 
@@ -40,7 +38,7 @@ export default class TableStoreModule extends BaseStoreModule {
 		},
 
 		// main GET_LIST params collector
-		GET_LIST_PARAMS: (state, getters) => (overrides) => {
+		GET_LIST_PARAMS: (_state, getters) => (overrides) => {
 			const filters = getters.FILTERS();
 			const fields = getters.FIELDS;
 			const parentId = getters.PARENT_ID;
@@ -250,8 +248,6 @@ export default class TableStoreModule extends BaseStoreModule {
 			}
 			try {
 				await context.dispatch(action, deleted);
-			} catch (err) {
-				throw err;
 			} finally {
 				await context.dispatch('LOAD_DATA_LIST');
 
@@ -269,15 +265,11 @@ export default class TableStoreModule extends BaseStoreModule {
 		},
 
 		DELETE_SINGLE: async (context, { id, etag }) => {
-			try {
-				await context.dispatch('api/DELETE_ITEM', {
-					context,
-					id,
-					etag,
-				});
-			} catch (err) {
-				throw err;
-			}
+			await context.dispatch('api/DELETE_ITEM', {
+				context,
+				id,
+				etag,
+			});
 		},
 
 		DELETE_BULK: async (context, deleted) =>
