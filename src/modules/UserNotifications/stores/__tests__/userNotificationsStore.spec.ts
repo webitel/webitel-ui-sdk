@@ -1,7 +1,7 @@
+import { ApiUserWarningId } from '@webitel/api-services/gen/models';
 import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApp } from 'vue';
-import { ApiUserWarningId } from '@webitel/api-services/gen/models';
 
 type ViMock = ReturnType<typeof vi.fn>;
 

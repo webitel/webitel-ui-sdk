@@ -1,6 +1,6 @@
+import type { ApiUserWarning } from '@webitel/api-services/gen/models';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { ApiUserWarning } from '@webitel/api-services/gen/models';
 import i18n from '../../../locale/i18n';
 import eventBus from '../../../scripts/eventBus';
 import { getUserWarnings } from '../api/UserNotifications';
