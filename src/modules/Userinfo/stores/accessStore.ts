@@ -142,7 +142,13 @@ export const createUserAccessStore = ({
 				wtObject = wtObject(to);
 			}
 
-			if (wtApplication && !hasApplicationVisibility(wtApplication)) {
+			const alwaysAllowed = to.matched.some(({ meta }) => meta.alwaysAllowed);
+
+			if (
+				!alwaysAllowed &&
+				wtApplication &&
+				!hasApplicationVisibility(wtApplication)
+			) {
 				return {
 					path: '/access-denied',
 				};
