@@ -80,6 +80,7 @@ const props = withDefaults(
 		showAvatar?: boolean;
 		withoutAvatars?: boolean;
 		username?: string;
+		agentName?: string;
 	}>(),
 	{
 		showAvatar: false,
@@ -94,7 +95,6 @@ const emit = defineEmits<{
 }>();
 
 const size = inject<ComponentSize>('size');
-const agentName = inject<string>('agentName');
 
 const { image, media, document } = useChatMessageFile(props.message.file);
 
@@ -108,7 +108,7 @@ const isSelfSide = computed<boolean>(
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
 
 const getClientUsername = computed<string>(() => {
-	return isSelfSide.value ? agentName : props.username;
+	return isSelfSide.value ? props?.agentName : props.username;
 });
 
 function handlePlayerInitialize(player) {

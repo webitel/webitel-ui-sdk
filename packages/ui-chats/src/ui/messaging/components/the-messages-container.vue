@@ -19,6 +19,7 @@
         v-for="(message, index) of props.messages"
         :key="message.id"
         :message="message"
+        :agent-name="props.agentName"
         :show-avatar="showAvatar(index)"
         :without-avatars="props.withoutAvatars"
         @[MessageAction.ClickOnImage]="clickOnImage(message)"
@@ -72,6 +73,7 @@ const props = withDefaults(
 		next?: boolean;
 		isLoading?: boolean;
 		withoutAvatars?: boolean;
+		agentName?: string;
 	}>(),
 	{
 		next: false,
