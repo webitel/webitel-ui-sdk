@@ -6,7 +6,5 @@
  */
 
 export type MessageReadParams = {
-	userId?: string;
 	threadId?: string;
-	domainId?: number;
 };

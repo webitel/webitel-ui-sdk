@@ -945,14 +945,30 @@ export const SearchUsers2Response = zod.object({
 	size: zod.number().optional(),
 });
 
+export const getUserWarningsResponseWarningsItemIdDefault = `user_warning_id_unspecified`;
+
 export const GetUserWarningsResponse = zod.object({
 	warnings: zod
 		.array(
 			zod.object({
 				detail: zod.string().optional(),
-				id: zod.string().optional(),
+				id: zod
+					.enum([
+						'user_warning_id_unspecified',
+						'password_expires_soon',
+						'license_expires_soon',
+						'license_expired',
+					])
+					.default(getUserWarningsResponseWarningsItemIdDefault),
 				warningData: zod
 					.object({
+						licenseExpiry: zod
+							.object({
+								daysRemaining: zod.string().optional(),
+								expiresAt: zod.string().optional(),
+								licenseName: zod.string().optional(),
+							})
+							.optional(),
 						passwordExpiry: zod
 							.object({
 								daysRemaining: zod.string().optional(),

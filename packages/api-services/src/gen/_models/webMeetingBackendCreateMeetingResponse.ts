@@ -5,7 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * Response containing the created meeting details.
+ */
 export interface WebMeetingBackendCreateMeetingResponse {
+	/** Unique identifier of the created meeting. */
 	id?: string;
+	/** Full URL to access the meeting. */
 	url?: string;
 }

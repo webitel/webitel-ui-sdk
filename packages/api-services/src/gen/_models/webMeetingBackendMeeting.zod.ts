@@ -6,13 +6,24 @@
  */
 import type { WebMeetingBackendMeetingVariables } from './webMeetingBackendMeetingVariables';
 
+/**
+ * Detailed meeting information.
+ */
 export interface WebMeetingBackendMeeting {
+	/** Flag indicating if satisfaction feedback is allowed. */
 	allowSatisfaction?: boolean;
+	/** Timestamp when the meeting was created (Unix). */
 	createdAt?: string;
+	/** Timestamp when the meeting link expires (Unix). */
 	expiresAt?: string;
+	/** Unique identifier of the meeting. */
 	id?: string;
+	/** Current satisfaction rating. */
 	satisfaction?: string;
+	/** Title or topic of the meeting. */
 	title?: string;
+	/** Full URL to join the meeting. */
 	url?: string;
+	/** Custom metadata or configuration variables. */
 	variables?: WebMeetingBackendMeetingVariables;
 }

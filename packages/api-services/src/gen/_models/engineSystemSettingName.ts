@@ -43,4 +43,5 @@ export const EngineSystemSettingName = {
 	PasswordContainsLogin: 'password_contains_login',
 	PasswordWarningDays: 'password_warning_days',
 	DefaultPassword: 'default_password',
+	ExpandContactTabs: 'expand_contact_tabs',
 } as const;

@@ -6,24 +6,86 @@
  */
 import * as zod from 'zod';
 
+/**
+ * @summary CreateMeeting creates a new meeting session with specific parameters and returns its URL.
+ */
+export const CreateMeetingBody = zod
+	.object({
+		basePath: zod
+			.string()
+			.optional()
+			.describe('Base path for the generated meeting URL.'),
+		domainId: zod
+			.string()
+			.optional()
+			.describe('Identifier of the domain owning the meeting.'),
+		expireSec: zod
+			.string()
+			.optional()
+			.describe('Expiration time in seconds from the moment of creation.'),
+		title: zod.string().optional().describe('Title or topic of the meeting.'),
+		variables: zod
+			.record(zod.string(), zod.string())
+			.optional()
+			.describe('Custom metadata or configuration variables.'),
+	})
+	.describe('Request to create a new meeting.');
+
+export const CreateMeetingResponse = zod
+	.object({
+		id: zod
+			.string()
+			.optional()
+			.describe('Unique identifier of the created meeting.'),
+		url: zod.string().optional().describe('Full URL to access the meeting.'),
+	})
+	.describe('Response containing the created meeting details.');
+
+/**
+ * @summary GetMeetingView retrieves public-facing information about a meeting.
+ */
 export const GetMeetingViewParams = zod.object({
-	id: zod.string(),
+	id: zod.string().describe('Unique identifier of the meeting.'),
 });
 
-export const GetMeetingViewResponse = zod.object({
-	allowSatisfaction: zod.boolean().optional(),
-	createdAt: zod.string().optional(),
-	expiresAt: zod.string().optional(),
-	satisfaction: zod.string().optional(),
-	title: zod.string().optional(),
-});
+export const GetMeetingViewResponse = zod
+	.object({
+		allowSatisfaction: zod
+			.boolean()
+			.optional()
+			.describe('Flag indicating if satisfaction feedback is allowed.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('Timestamp when the meeting was created (Unix).'),
+		expiresAt: zod
+			.string()
+			.optional()
+			.describe('Timestamp when the meeting link expires (Unix).'),
+		satisfaction: zod
+			.string()
+			.optional()
+			.describe('Current satisfaction rating.'),
+		title: zod.string().optional().describe('Title or topic of the meeting.'),
+	})
+	.describe('Public view of the meeting (limited fields).');
 
+/**
+ * @summary SatisfactionMeeting submits feedback or a satisfaction rating for a completed meeting.
+ */
 export const SatisfactionMeetingParams = zod.object({
-	id: zod.string(),
+	id: zod.string().describe('Unique identifier of the meeting.'),
 });
 
-export const SatisfactionMeetingBody = zod.object({
-	satisfaction: zod.string().optional(),
-});
+export const SatisfactionMeetingBody = zod
+	.object({
+		satisfaction: zod
+			.string()
+			.optional()
+			.describe('The satisfaction value or score.'),
+	})
+	.describe('Request to submit meeting satisfaction feedback.');
 
-export const SatisfactionMeetingResponse = zod.looseObject({});
+export const SatisfactionMeetingResponse = zod
+	.looseObject({})
+	.describe('Empty response for satisfaction submission.');
