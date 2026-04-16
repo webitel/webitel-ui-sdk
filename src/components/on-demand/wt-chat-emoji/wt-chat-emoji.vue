@@ -12,7 +12,7 @@
       wide
       @click="togglePicker"
     />
-		<Teleport 
+		<teleport 
 			:disabled="!popupTeleportTo"
 		 	:to="teleportValue"
 		>
@@ -21,7 +21,7 @@
 				ref="emojiPickerWrapper"
 				class="wt-chat-emoji__wrapper"
 			></div>
-		</Teleport>
+		</teleport>
 	</div>
 </template>
 
@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
 .wt-chat-emoji__wrapper {
 	position: absolute;
 	left: 50%;
-	bottom: calc(100% + 8px);
+	bottom: calc(100% + var(--spacing-xs));
 	z-index: calc(var(--popup-wrapper-z-index) - 1);
 }
 
