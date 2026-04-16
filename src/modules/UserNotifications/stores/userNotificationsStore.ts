@@ -15,7 +15,9 @@ export const createUserNotificationsStore = () => {
 
 	const store = defineStore(namespace, () => {
 		const rawNotifications = ref<ApiUserWarning[]>([]);
-		const isShown = ref(false);
+		// @author @Lera24
+		// notifications ID that has already been shown
+		const shownIds = ref(new Set());
 
 		const initialize = async () => {
 			await fetch();
@@ -44,8 +46,13 @@ export const createUserNotificationsStore = () => {
 		});
 
 		const show = () => {
-			if (isShown.value) return;
 			notifications.value.forEach((notification) => {
+				const notificationKey = `${notification.localeKey}-${notification.days}`;
+
+				// @author @Lera24
+				//notification should only be displayed the first time you visit the page
+				if (shownIds.value.has(notificationKey)) return;
+
 				eventBus.$emit('notification', {
 					type: notification.type,
 					text: i18n.global.t(
@@ -55,8 +62,8 @@ export const createUserNotificationsStore = () => {
 						},
 					),
 				});
+				shownIds.value.add(notificationKey);
 			});
-			isShown.value = true;
 		};
 
 		return {
@@ -65,7 +72,7 @@ export const createUserNotificationsStore = () => {
 
 			/** internal for devtools/debug */
 			rawNotifications,
-			isShown,
+			shownIds,
 			notifications,
 		};
 	});
