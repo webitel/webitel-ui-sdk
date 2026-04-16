@@ -11,10 +11,4 @@ interface NotificationsType {
 	days: number;
 }
 
-type RawNotification = {
-	id: string;
-	details: string;
-	warningData: object;
-};
-
-export type { NotificationsType, RawNotification, UserNotificationsConfigsMap };
+export type { NotificationsType, UserNotificationsConfigsMap };

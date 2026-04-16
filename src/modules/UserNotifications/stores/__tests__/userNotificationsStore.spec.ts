@@ -1,6 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApp } from 'vue';
+import { ApiUserWarningId } from '@webitel/api-services/gen/models';
 
 type ViMock = ReturnType<typeof vi.fn>;
 
@@ -58,7 +59,7 @@ describe('createUserNotificationsStore', () => {
 		const notificationsResponse = {
 			warnings: [
 				{
-					id: 'app.password.expires_soon',
+					id: ApiUserWarningId.PasswordExpiresSoon,
 					warningData: {
 						passwordExpiry: {
 							daysRemaining: 5,
@@ -79,7 +80,8 @@ describe('createUserNotificationsStore', () => {
 		expect(store.notifications.length).toBe(1);
 		expect(store.notifications[0].days).toBe(5);
 		expect(store.notifications[0].localeKey).toBe(
-			USER_NOTIFICATION_CONFIGS_MAP.get('app.password.expires_soon')?.localeKey,
+			USER_NOTIFICATION_CONFIGS_MAP.get(ApiUserWarningId.PasswordExpiresSoon)
+				?.localeKey,
 		);
 		expect(getUserWarnings).toHaveBeenCalledOnce();
 	});
@@ -88,7 +90,7 @@ describe('createUserNotificationsStore', () => {
 		const notificationsResponse = {
 			warnings: [
 				{
-					id: 'app.password.expires_soon',
+					id: ApiUserWarningId.PasswordExpiresSoon,
 					warningData: {
 						passwordExpiry: {
 							daysRemaining: 3,

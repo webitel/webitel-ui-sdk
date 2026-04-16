@@ -1,3 +1,4 @@
+import { ApiUserWarningId } from '@webitel/api-services/gen/models';
 import type { UserNotificationsConfigsMap } from '../types/UserWarnings';
 
 export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
@@ -5,7 +6,7 @@ export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
 	UserNotificationsConfigsMap
 >([
 	[
-		'app.password.expires_soon',
+		ApiUserWarningId.PasswordExpiresSoon,
 		{
 			type: 'info',
 			localeKey: 'passwordExpirationMessage',

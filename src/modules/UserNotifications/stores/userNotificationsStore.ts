@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
+import { ApiUserWarning } from '@webitel/api-services/gen/models';
 import i18n from '../../../locale/i18n';
 import eventBus from '../../../scripts/eventBus';
 import { getUserWarnings } from '../api/UserNotifications';
 import { USER_NOTIFICATION_CONFIGS_MAP } from '../maps/userNotificationConfigsMap';
 import type {
 	NotificationsType,
-	RawNotification,
 	UserNotificationsConfigsMap,
 } from '../types/UserNotifications';
 
@@ -14,7 +14,7 @@ export const createUserNotificationsStore = () => {
 	const namespace = 'userNotifications';
 
 	const store = defineStore(namespace, () => {
-		const rawNotifications = ref<RawNotification[]>([]);
+		const rawNotifications = ref<ApiUserWarning[]>([]);
 		const isShown = ref(false);
 
 		const initialize = async () => {
@@ -24,7 +24,7 @@ export const createUserNotificationsStore = () => {
 		const fetch = async () => {
 			const response = await getUserWarnings();
 			rawNotifications.value =
-				(response && (response.warnings as RawNotification[])) ?? [];
+				(response && (response.warnings as ApiUserWarning[])) ?? [];
 		};
 
 		const notifications = computed<NotificationsType[]>(() => {
