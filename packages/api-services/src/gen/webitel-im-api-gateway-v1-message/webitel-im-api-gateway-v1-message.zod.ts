@@ -7,9 +7,64 @@
 import * as zod from 'zod';
 
 /**
- * @summary SendFile delivers documents or files.
+ * @summary Sends a contact card.
  */
-export const MessageSendFileBody = zod
+export const MessageSendContactBody = zod
+	.object({
+		email: zod.string().optional().describe('Email must be valid if provided.'),
+		metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
+		name: zod.string().optional().describe('Full name of the contact.'),
+		phoneNumber: zod
+			.string()
+			.optional()
+			.describe('Phone number in E.164 format recommended.'),
+		sendId: zod
+			.string()
+			.optional()
+			.describe('Optional send ID for idempotency.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe('SendContactRequest sends contact information.');
+
+export const MessageSendContactResponse = zod
+	.object({
+		id: zod.string().optional().describe('Unique message identifier.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
+	);
+
+/**
+ * @summary SendDocument delivers a document message.
+ */
+export const MessageSendDocumentBody = zod
 	.object({
 		document: zod
 			.object({
@@ -51,7 +106,7 @@ export const MessageSendFileBody = zod
 	})
 	.describe('Represents a request to send a message with document.');
 
-export const MessageSendFileResponse = zod
+export const MessageSendDocumentResponse = zod
 	.object({
 		id: zod.string().optional(),
 		to: zod
@@ -76,7 +131,7 @@ export const MessageSendFileResponse = zod
 /**
  * @summary SendImage delivers image-specific messages.
  */
-export const MessageSendImageWebitelImApiGatewayV1MessageBody = zod
+export const MessageSendImageBody = zod
 	.object({
 		image: zod
 			.object({
@@ -90,7 +145,7 @@ export const MessageSendImageWebitelImApiGatewayV1MessageBody = zod
 								mimeType: zod.string().optional(),
 								name: zod.string().optional(),
 							})
-							.describe('Represents `Image` entity with \nnecessary fields.'),
+							.describe('Represents `Image` entity with\nnecessary fields.'),
 					)
 					.optional(),
 			})
@@ -115,7 +170,7 @@ export const MessageSendImageWebitelImApiGatewayV1MessageBody = zod
 	})
 	.describe('Represents a request to send an message with image.');
 
-export const MessageSendImageWebitelImApiGatewayV1MessageResponse = zod
+export const MessageSendImageResponse = zod
 	.object({
 		id: zod.string().optional(),
 		to: zod
@@ -138,10 +193,429 @@ export const MessageSendImageWebitelImApiGatewayV1MessageResponse = zod
 	.describe('Represents a response to send message with image.');
 
 /**
+ * @summary Sends an interactive message (buttons, lists, CTA).
+Supports idempotency via send_id.
+ */
+export const MessageSendInteractiveBody = zod
+	.object({
+		body: zod.string().optional().describe('Body text for the message.'),
+		interactive: zod
+			.object({
+				documents: zod
+					.object({
+						documents: zod
+							.array(
+								zod
+									.object({
+										fileName: zod.string().optional(),
+										id: zod.string().optional(),
+										mimeType: zod.string().optional(),
+										sizeBytes: zod.string().optional(),
+										url: zod.string().optional(),
+									})
+									.describe(
+										'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
+									),
+							)
+							.optional()
+							.describe(
+								'Documents to be attached to the header of interactive message.\nMax allowed documents: 10.',
+							),
+					})
+					.optional()
+					.describe('Document attachments header.'),
+				images: zod
+					.object({
+						images: zod
+							.array(
+								zod
+									.object({
+										id: zod.string().optional(),
+										link: zod.string().optional(),
+										mimeType: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.describe(
+										'Represents `Image` entity with\nnecessary fields.',
+									),
+							)
+							.optional()
+							.describe(
+								'Images to be attached to the header of interactive message.\nMax allowed images: 10.',
+							),
+					})
+					.optional()
+					.describe('Images attachment header.'),
+				listReply: zod
+					.object({
+						mainButtonTitle: zod
+							.string()
+							.optional()
+							.describe(
+								'Title of the main button, that on-click show up list.',
+							),
+						sections: zod
+							.array(
+								zod
+									.object({
+										buttons: zod
+											.array(
+												zod
+													.object({
+														callback: zod
+															.object({
+																data: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Opaque data payload passed back to the server upon interaction.',
+																	),
+															})
+															.optional()
+															.describe(
+																'Triggers a backend event (callback) with associated metadata.',
+															),
+														id: zod
+															.string()
+															.optional()
+															.describe(
+																'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+															),
+														label: zod
+															.string()
+															.optional()
+															.describe(
+																'The human-readable label displayed on the button.',
+															),
+														metadata: zod
+															.looseObject({})
+															.optional()
+															.describe(
+																'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+															),
+														request: zod
+															.object({
+																action: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'The specific action to be performed by the client application.',
+																	),
+															})
+															.optional()
+															.describe(
+																'Requests sensitive information from the client (e.g., location or contact).',
+															),
+														url: zod
+															.object({
+																url: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Must be a valid absolute URI (e.g., https://example.com).',
+																	),
+															})
+															.optional()
+															.describe(
+																'Directs the user to an external web resource.',
+															),
+													})
+													.describe(
+														'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+													),
+											)
+											.optional()
+											.describe(
+												'Collection of buttons within this section.\nMinimum of 1 button is required to prevent empty sections.',
+											),
+										section: zod
+											.string()
+											.optional()
+											.describe(
+												'The header text for this section. Must be concise and descriptive.',
+											),
+									})
+									.describe(
+										'Represents a row of buttons grouped under a specific logical section header.\nUseful for creating categorized menus or structured interactive interfaces.',
+									),
+							)
+							.optional()
+							.describe('List with sections with buttons.'),
+					})
+					.optional()
+					.describe(
+						'List reply with main list button text and sections with buttons.',
+					),
+				markup: zod
+					.object({
+						rows: zod
+							.array(
+								zod
+									.object({
+										buttons: zod
+											.array(
+												zod
+													.object({
+														callback: zod
+															.object({
+																data: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Opaque data payload passed back to the server upon interaction.',
+																	),
+															})
+															.optional()
+															.describe(
+																'Triggers a backend event (callback) with associated metadata.',
+															),
+														id: zod
+															.string()
+															.optional()
+															.describe(
+																'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+															),
+														label: zod
+															.string()
+															.optional()
+															.describe(
+																'The human-readable label displayed on the button.',
+															),
+														metadata: zod
+															.looseObject({})
+															.optional()
+															.describe(
+																'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+															),
+														request: zod
+															.object({
+																action: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'The specific action to be performed by the client application.',
+																	),
+															})
+															.optional()
+															.describe(
+																'Requests sensitive information from the client (e.g., location or contact).',
+															),
+														url: zod
+															.object({
+																url: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Must be a valid absolute URI (e.g., https://example.com).',
+																	),
+															})
+															.optional()
+															.describe(
+																'Directs the user to an external web resource.',
+															),
+													})
+													.describe(
+														'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+													),
+											)
+											.optional()
+											.describe(
+												'Horizontal collection of buttons.\nCapped at 10 to ensure UI responsiveness and prevent overflow.',
+											),
+									})
+									.describe(
+										'A standard horizontal row of interactive buttons without a section header.',
+									),
+							)
+							.optional()
+							.describe('Rows of buttons matrix.'),
+					})
+					.optional()
+					.describe('Markup matrix with buttons.'),
+				singleUse: zod
+					.boolean()
+					.optional()
+					.describe('Force to block user keyboard.'),
+			})
+			.optional()
+			.describe('Interactive payload.'),
+		metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
+		sendId: zod
+			.string()
+			.optional()
+			.describe('Optional idempotency key for deduplication.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendInteractiveMessageRequest sends a structured interactive message.',
+	);
+
+export const MessageSendInteractiveResponse = zod
+	.object({
+		id: zod.string().optional().describe('Unique message identifier.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
+	);
+
+/**
+ * @summary Handles user interaction callbacks.
+Should be called by client when user interacts with UI.
+ */
+export const MessageSendInteractiveCallbackParams = zod.object({
+	in_reply_to: zod.string().describe('Original message ID.'),
+});
+
+export const MessageSendInteractiveCallbackBody = zod
+	.object({
+		buttonCode: zod.string().optional().describe('Button identifier.'),
+		callbackData: zod
+			.string()
+			.optional()
+			.describe('Optional callback payload.'),
+		reactedBy: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who clicked the button.'),
+	})
+	.describe('Client sends callback event when user clicks a button.');
+
+export const MessageSendInteractiveCallbackResponse = zod
+	.object({
+		buttonCode: zod.string().optional().describe('Button identifier.'),
+		callbackData: zod
+			.string()
+			.optional()
+			.describe('Optional callback payload.'),
+		inReplyTo: zod.string().optional().describe('Original message ID.'),
+		reactedAt: zod
+			.string()
+			.optional()
+			.describe('Unix time in milliseconds when callback button was clicked.'),
+		reactedBy: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who clicked the button.'),
+	})
+	.describe('Response sent back to the client after a button click.');
+
+/**
+ * @summary Sends a geographic location message.
+ */
+export const MessageSendLocationBody = zod
+	.object({
+		address: zod
+			.string()
+			.optional()
+			.describe('Optional human-readable address.'),
+		latitude: zod
+			.number()
+			.optional()
+			.describe('Latitude in degrees. Must be between -90 and +90.'),
+		longitude: zod
+			.number()
+			.optional()
+			.describe('Longitude in degrees. Must be between -180 and +180.'),
+		metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
+		name: zod
+			.string()
+			.optional()
+			.describe('Optional location name (e.g., "Central Park").'),
+		sendId: zod
+			.string()
+			.optional()
+			.describe('Optional send ID for idempotency.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe('SendLocationRequest sends a geographic location message.');
+
+export const MessageSendLocationResponse = zod
+	.object({
+		id: zod.string().optional().describe('Unique message identifier.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
+	);
+
+/**
  * @summary SendText delivers a plain text message.
 We use the shared Request/Response types directly to avoid duplication.
  */
-export const MessageSendTextWebitelImApiGatewayV1MessageBody = zod
+export const MessageSendTextBody = zod
 	.object({
 		body: zod.string().optional(),
 		sendId: zod.string().optional(),
@@ -164,7 +638,7 @@ export const MessageSendTextWebitelImApiGatewayV1MessageBody = zod
 	})
 	.describe('Represents a request to send a text message.');
 
-export const MessageSendTextWebitelImApiGatewayV1MessageResponse = zod
+export const MessageSendTextResponse = zod
 	.object({
 		id: zod.string().optional(),
 		to: zod
@@ -189,14 +663,12 @@ export const MessageSendTextWebitelImApiGatewayV1MessageResponse = zod
 /**
  * @summary Mark message as read by id.
  */
-export const MessageReadWebitelImApiGatewayV1MessageParams = zod.object({
+export const MessageReadParams = zod.object({
 	id: zod.string(),
 });
 
-export const MessageReadWebitelImApiGatewayV1MessageQueryParams = zod.object({
+export const MessageReadQueryParams = zod.object({
 	threadId: zod.string().optional(),
 });
 
-export const MessageReadWebitelImApiGatewayV1MessageResponse = zod.looseObject(
-	{},
-);
+export const MessageReadResponse = zod.looseObject({});

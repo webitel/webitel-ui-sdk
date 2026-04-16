@@ -7,7 +7,6 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-
 import type {
 	ApiCreateUserResponse,
 	ApiDeleteUsersResponse,
@@ -19,6 +18,7 @@ import type {
 	ApiUpdatePasswordResponse,
 	ApiUser,
 } from '../_models';
+import { ApiUserWarningId } from '../_models';
 
 export const getReadUser2ResponseMock = (
 	overrideResponse: Partial<Extract<ApiReadUserResponse, object>> = {},
@@ -2658,16 +2658,43 @@ export const getGetUserWarningsResponseMock = (
 				undefined,
 			]),
 			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
+				faker.helpers.arrayElement(Object.values(ApiUserWarningId)),
 				undefined,
 			]),
 			warningData: faker.helpers.arrayElement([
 				{
+					licenseExpiry: faker.helpers.arrayElement([
+						{
+							daysRemaining: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							expiresAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							licenseName: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
 					passwordExpiry: faker.helpers.arrayElement([
 						{
 							daysRemaining: faker.helpers.arrayElement([

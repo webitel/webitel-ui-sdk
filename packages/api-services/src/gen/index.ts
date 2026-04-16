@@ -237,8 +237,6 @@ export * from './webitel-im-api-gateway-v1-messagehistory/webitel-im-api-gateway
 export * from './webitel-im-api-gateway-v1-messagehistory/webitel-im-api-gateway-v1-messagehistory.zod';
 export * from './webitel-im-api-gateway-v1-threadmanagement/webitel-im-api-gateway-v1-threadmanagement';
 export * from './webitel-im-api-gateway-v1-threadmanagement/webitel-im-api-gateway-v1-threadmanagement.zod';
-export * from './webitel-im-service-thread-v1-message/webitel-im-service-thread-v1-message';
-export * from './webitel-im-service-thread-v1-message/webitel-im-service-thread-v1-message.zod';
 export * from './webitel-im-service-thread-v1-messagehistory/webitel-im-service-thread-v1-messagehistory';
 export * from './webitel-im-service-thread-v1-messagehistory/webitel-im-service-thread-v1-messagehistory.zod';
 export * from './working-condition-service/working-condition-service';

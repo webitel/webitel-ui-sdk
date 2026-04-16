@@ -9,13 +9,87 @@ import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
 import type {
+	WebitelImApiGatewayV1InteractiveCallbackResponse,
 	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendImageResponse,
+	WebitelImApiGatewayV1SendMessageResponse,
 	WebitelImApiGatewayV1SendTextResponse,
 } from '../_models';
 
-export const getMessageSendFileResponseMock = (
+export const getMessageSendContactResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SendMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SendMessageResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	to: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageSendDocumentResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImApiGatewayV1SendDocumentResponse, object>
 	> = {},
@@ -87,7 +161,7 @@ export const getMessageSendFileResponseMock = (
 	...overrideResponse,
 });
 
-export const getMessageSendImageWebitelImApiGatewayV1MessageResponseMock = (
+export const getMessageSendImageResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImApiGatewayV1SendImageResponse, object>
 	> = {},
@@ -159,7 +233,250 @@ export const getMessageSendImageWebitelImApiGatewayV1MessageResponseMock = (
 	...overrideResponse,
 });
 
-export const getMessageSendTextWebitelImApiGatewayV1MessageResponseMock = (
+export const getMessageSendInteractiveResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SendMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SendMessageResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	to: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageSendInteractiveCallbackResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1InteractiveCallbackResponse, object>
+	> = {},
+): WebitelImApiGatewayV1InteractiveCallbackResponse => ({
+	buttonCode: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	callbackData: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	inReplyTo: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	reactedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	reactedBy: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageSendLocationResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SendMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SendMessageResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	to: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageSendTextResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImApiGatewayV1SendTextResponse, object>
 	> = {},
@@ -231,10 +548,38 @@ export const getMessageSendTextWebitelImApiGatewayV1MessageResponseMock = (
 	...overrideResponse,
 });
 
-export const getMessageReadWebitelImApiGatewayV1MessageResponseMock =
+export const getMessageReadResponseMock =
 	(): WebitelImApiGatewayV1ReadMessageResponse => ({});
 
-export const getMessageSendFileMockHandler = (
+export const getMessageSendContactMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendMessageResponse>
+				| WebitelImApiGatewayV1SendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/contact',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendContactResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageSendDocumentMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendDocumentResponse
 		| ((
@@ -245,14 +590,14 @@ export const getMessageSendFileMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
-		'*/v1/messages/file',
+		'*/v1/messages/document',
 		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMessageSendFileResponseMock(),
+					: getMessageSendDocumentResponseMock(),
 				{
 					status: 200,
 				},
@@ -262,7 +607,7 @@ export const getMessageSendFileMockHandler = (
 	);
 };
 
-export const getMessageSendImageWebitelImApiGatewayV1MessageMockHandler = (
+export const getMessageSendImageMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendImageResponse
 		| ((
@@ -280,7 +625,7 @@ export const getMessageSendImageWebitelImApiGatewayV1MessageMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMessageSendImageWebitelImApiGatewayV1MessageResponseMock(),
+					: getMessageSendImageResponseMock(),
 				{
 					status: 200,
 				},
@@ -290,7 +635,91 @@ export const getMessageSendImageWebitelImApiGatewayV1MessageMockHandler = (
 	);
 };
 
-export const getMessageSendTextWebitelImApiGatewayV1MessageMockHandler = (
+export const getMessageSendInteractiveMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendMessageResponse>
+				| WebitelImApiGatewayV1SendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/interactive',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendInteractiveResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageSendInteractiveCallbackMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1InteractiveCallbackResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1InteractiveCallbackResponse>
+				| WebitelImApiGatewayV1InteractiveCallbackResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/interactive/:inReplyTo/callback',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendInteractiveCallbackResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageSendLocationMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendMessageResponse>
+				| WebitelImApiGatewayV1SendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/location',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendLocationResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageSendTextMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendTextResponse
 		| ((
@@ -308,7 +737,7 @@ export const getMessageSendTextWebitelImApiGatewayV1MessageMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMessageSendTextWebitelImApiGatewayV1MessageResponseMock(),
+					: getMessageSendTextResponseMock(),
 				{
 					status: 200,
 				},
@@ -318,7 +747,7 @@ export const getMessageSendTextWebitelImApiGatewayV1MessageMockHandler = (
 	);
 };
 
-export const getMessageReadWebitelImApiGatewayV1MessageMockHandler = (
+export const getMessageReadMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1ReadMessageResponse
 		| ((
@@ -336,7 +765,7 @@ export const getMessageReadWebitelImApiGatewayV1MessageMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMessageReadWebitelImApiGatewayV1MessageResponseMock(),
+					: getMessageReadResponseMock(),
 				{
 					status: 200,
 				},
@@ -346,8 +775,12 @@ export const getMessageReadWebitelImApiGatewayV1MessageMockHandler = (
 	);
 };
 export const getWebitelImApiGatewayV1MessageMock = () => [
-	getMessageSendFileMockHandler(),
-	getMessageSendImageWebitelImApiGatewayV1MessageMockHandler(),
-	getMessageSendTextWebitelImApiGatewayV1MessageMockHandler(),
-	getMessageReadWebitelImApiGatewayV1MessageMockHandler(),
+	getMessageSendContactMockHandler(),
+	getMessageSendDocumentMockHandler(),
+	getMessageSendImageMockHandler(),
+	getMessageSendInteractiveMockHandler(),
+	getMessageSendInteractiveCallbackMockHandler(),
+	getMessageSendLocationMockHandler(),
+	getMessageSendTextMockHandler(),
+	getMessageReadMockHandler(),
 ];
