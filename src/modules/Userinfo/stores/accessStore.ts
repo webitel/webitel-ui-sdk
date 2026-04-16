@@ -142,12 +142,10 @@ export const createUserAccessStore = ({
 				wtObject = wtObject(to);
 			}
 
-			const requiresAccess = to.matched.some(
-				({ meta }) => meta.requiresAccess === false,
-			);
+			const alwaysAllowed = to.matched.some(({ meta }) => meta.alwaysAllowed);
 
 			if (
-				!requiresAccess &&
+				!alwaysAllowed &&
 				wtApplication &&
 				!hasApplicationVisibility(wtApplication)
 			) {
