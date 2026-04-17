@@ -12,6 +12,16 @@
     hide-background
     @change-size="(payload) => emit('change-size', payload)"
   >
+    <template v-if="props['receiver:mic:enabled'] === false || props.hideAvatar" #avatar>
+      <wt-icon
+        v-if="props['receiver:mic:enabled'] === false"
+        icon="mic-muted"
+        size="sm"
+        color="on-dark"
+      />
+      <div v-else style="display: none;" />
+    </template>
+
     <template #content="{ size: innerSize }">
       <slot :size="innerSize" name="content" />
 
@@ -173,6 +183,7 @@ const props = withDefaults(
 		position?: 'left-bottom' | 'right-bottom' | 'center';
 		size?: ComponentSize;
 		hideVideoDisplayPanel?: boolean;
+		hideAvatar?: boolean;
 		resizable?: boolean;
 
 		actions: VideoCallAction[];

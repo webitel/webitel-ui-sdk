@@ -2,8 +2,17 @@
   <media-controls class="video-layout controls" :class="`video-layout--${size}`">
     <div class="video-display-panel-wrapper">
       <video-display-panel
-v-if="!props.hideVideoDisplayPanel" :title="props.title" :username="props.username"
-        :closable="props.closable" :hide-expand="props.hideExpand" @close="emit('close-player')" />
+        v-if="!props.hideVideoDisplayPanel"
+        :title="props.title"
+        :username="props.username"
+        :closable="props.closable"
+        :hide-expand="props.hideExpand"
+        @close="emit('close-player')"
+      >
+        <template v-if="$slots['avatar']" #avatar>
+          <slot name="avatar" />
+        </template>
+      </video-display-panel>
     </div>
 
     <media-controls-group class="video-layout-content">
