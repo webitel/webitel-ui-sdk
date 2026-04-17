@@ -1,6 +1,6 @@
 <template>
   <div
-    v-clickaway="closePicker"
+    v-clickaway="onClickaway"
     class="wt-chat-emoji"
   >
     <wt-button
@@ -87,6 +87,11 @@ const closePicker = () => {
 		emojiPickerWrapper.value.removeChild(picker.value);
 		picker.value = null;
 	}
+};
+
+const onClickaway = (event) => {
+	if (emojiPickerWrapper.value?.contains(event.target)) return;
+	closePicker();
 };
 
 const togglePicker = async () => {
