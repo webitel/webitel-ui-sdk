@@ -15,6 +15,16 @@
         {{ $t('webitelUI.tableColumnSelect.title') }}
       </template>
       <template #main>
+				<wt-input-text
+					class="wt-table-column-select__popup-search"
+					v-model:model-value="search"
+				>
+					<template #prefix>
+						<wt-icon
+							icon="search"
+						/>
+					</template>
+				</wt-input-text>
         <div class="wt-table-column-select__popup-list-wrap">
           <ul
             :class="{
@@ -97,12 +107,17 @@ export default {
 	],
 	data: () => ({
 		draft: [], // headers draft
+		search: '',
 		isColumnSelectPopup: false,
 	}),
 	computed: {
 		changeableDraft() {
 			return this.draft
-				.filter((header) => !this.staticHeaders.includes(header.value))
+				.filter(
+					(header) =>
+						!this.staticHeaders.includes(header.value) &&
+						this.shownColLabel(header)?.toLowerCase().includes(this.search),
+				)
 				.sort((a, b) => {
 					return this.shownColLabel(a)?.localeCompare(this.shownColLabel(b));
 					// sorting headers for alphabet just in popup
@@ -148,6 +163,10 @@ export default {
   text-align: center;
 }
 
+.wt-table-column-select__popup-search {
+	margin-bottom: var(--spacing-xs);
+}
+
 .wt-table-column-select__popup-list-wrap {
   max-height: 400px;
 }
@@ -182,6 +201,6 @@ export default {
   display: flex;
   align-items: center;
   margin-right: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
 }
 </style>
