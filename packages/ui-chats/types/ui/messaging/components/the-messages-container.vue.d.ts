@@ -4,6 +4,7 @@ type __VLS_Props = {
     next?: boolean;
     isLoading?: boolean;
     withoutAvatars?: boolean;
+    agentName?: string;
 };
 declare const __VLS_export: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
     loadNextMessages: () => any;
