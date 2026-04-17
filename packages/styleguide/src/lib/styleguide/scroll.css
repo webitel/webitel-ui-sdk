@@ -9,9 +9,9 @@
 }
 
 :root.theme--dark {
-	--scrollbar-bg-color: var(--p-surface-750);
-	--scrollbar-thumb-color: var(--p-surface-850);
-	--scrollbar-hover-thumb-color: var(--p-surface-950);
+	--scrollbar-bg-color: var(--p-surface-850);
+	--scrollbar-thumb-color: var(--p-surface-700);
+	--scrollbar-hover-thumb-color: var(--p-surface-800);
 }
 
 .wt-scrollbar {
