@@ -32,6 +32,10 @@
         :username="props.username"
         @close-player="emit('close')"
       >
+        <template v-if="$slots['avatar']" #avatar>
+          <slot name="avatar" />
+        </template>
+
         <template #controls-panel>
           <slot :size="size" name="controls-panel" />
         </template>

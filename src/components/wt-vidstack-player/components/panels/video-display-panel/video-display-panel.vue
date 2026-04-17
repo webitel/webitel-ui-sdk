@@ -4,12 +4,14 @@
     class="video-display-panel controls-group"
   >
     <div class="video-display-panel__head">
-      <wt-avatar
-        v-if="props.username"
-        :username="props.username"
-        size="sm"
-        class="video-display-panel__avatar"
-      />
+      <slot name="avatar">
+        <wt-avatar
+          v-if="props.username"
+          :username="props.username"
+          size="sm"
+          class="video-display-panel__avatar"
+        />
+      </slot>
 
       <span class="video-display-panel__title">
         {{ props.title || props.username }}
