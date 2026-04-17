@@ -4,6 +4,7 @@ type __VLS_Props = {
 	showAvatar?: boolean;
 	withoutAvatars?: boolean;
 	username?: string;
+	agentName?: string;
 };
 declare var __VLS_1: {}, __VLS_52: {};
 type __VLS_Slots = {} & {

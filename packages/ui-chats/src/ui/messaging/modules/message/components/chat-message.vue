@@ -15,7 +15,7 @@
       >
         <wt-avatar
           v-if="props.showAvatar"
-          :username="username"
+          :username="getClientUsername"
           :size="ComponentSize.SM || size"
           :bot="isBot"
         />
@@ -80,6 +80,7 @@ const props = withDefaults(
 		showAvatar?: boolean;
 		withoutAvatars?: boolean;
 		username?: string;
+		agentName?: string;
 	}>(),
 	{
 		showAvatar: false,
@@ -105,6 +106,10 @@ const isSelfSide = computed<boolean>(
 	() => props.message.member?.self || props.message.member?.type === 'webitel',
 );
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
+
+const getClientUsername = computed<string>(() => {
+	return isSelfSide.value ? props?.agentName : props.username;
+});
 
 function handlePlayerInitialize(player) {
 	emit(MessageAction.InitializedPlayer, {

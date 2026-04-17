@@ -16,6 +16,7 @@
         :next="props.canLoadNextMessages"
         :is-loading="props.isNextMessagesLoading"
         :without-avatars="props.withoutAvatars"
+        :agent-name="props.agentName"
         @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
       />
     </slot>
@@ -79,6 +80,7 @@ const props = withDefaults(
 		isNextMessagesLoading?: boolean;
 		withoutAvatars?: boolean;
 		readonly?: boolean; // hide chat footer with textarea and action-buttons
+		agentName?: string;
 	}>(),
 	{
 		size: ComponentSize.MD,
