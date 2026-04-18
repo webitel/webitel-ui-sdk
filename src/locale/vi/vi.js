@@ -841,7 +841,7 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} đã được lưu`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage:
 				'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
 		},

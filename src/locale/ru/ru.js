@@ -833,7 +833,7 @@ export default {
 			create: ({ named }) => `${named('entity')} был сохранён`,
 			delete: ({ named }) => `${named('entity')} был удалён`,
 		},
-		info: {
+		warnings: {
 			passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
 		},
 	},

@@ -851,7 +851,7 @@ export default deepmerge(
 				delete: ({ named }) =>
 					`The ${named('entity').toLowerCase()} was deleted`,
 			},
-			info: {
+			warnings: {
 				passwordExpirationMessage: 'Your password will expire in { days } days',
 			},
 		},
