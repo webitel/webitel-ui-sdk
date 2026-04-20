@@ -7,7 +7,7 @@
 import type { WebitelImApiGatewayV1Document } from './webitelImApiGatewayV1Document';
 import type { WebitelImApiGatewayV1HistoryMessageMetadata } from './webitelImApiGatewayV1HistoryMessageMetadata';
 import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
-import type { WebitelImApiGatewayV1MessageParticipant } from './webitelImApiGatewayV1MessageParticipant';
+import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 /**
  * HistoryMessage represents a single message
@@ -28,7 +28,7 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 Can contain structured data depending on message type. */
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
 	/** Sender user aggregated information. */
-	sender?: WebitelImApiGatewayV1MessageParticipant;
+	sender?: WebitelImApiGatewayV1ThreadMember;
 	/** Identifier of the thread the message belongs to. */
 	threadId?: string;
 	/** Message type identifier. */

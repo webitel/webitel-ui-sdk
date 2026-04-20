@@ -21,6 +21,7 @@ import type {
 	WebitelImApiGatewayV1SendInteractiveMessageRequest,
 	WebitelImApiGatewayV1SendLocationRequest,
 	WebitelImApiGatewayV1SendMessageResponse,
+	WebitelImApiGatewayV1SendSystemMessageRequest,
 	WebitelImApiGatewayV1SendTextRequest,
 	WebitelImApiGatewayV1SendTextResponse,
 } from '../_models';
@@ -116,6 +117,16 @@ Should be called by client when user interacts with UI.
 					options,
 				);
 			};
+			const messageSendSystemMessage = (
+				webitelImApiGatewayV1SendSystemMessageRequest: WebitelImApiGatewayV1SendSystemMessageRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/messages/system`,
+					webitelImApiGatewayV1SendSystemMessageRequest,
+					options,
+				);
+			};
 			/**
  * @summary SendText delivers a plain text message.
 We use the shared Request/Response types directly to avoid duplication.
@@ -155,6 +166,7 @@ We use the shared Request/Response types directly to avoid duplication.
 				messageSendInteractive,
 				messageSendInteractiveCallback,
 				messageSendLocation,
+				messageSendSystemMessage,
 				messageSendText,
 				messageRead,
 			};
@@ -170,6 +182,8 @@ export type MessageSendInteractiveResult =
 export type MessageSendInteractiveCallbackResult =
 	AxiosResponse<WebitelImApiGatewayV1InteractiveCallbackResponse>;
 export type MessageSendLocationResult =
+	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
+export type MessageSendSystemMessageResult =
 	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
 export type MessageSendTextResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTextResponse>;

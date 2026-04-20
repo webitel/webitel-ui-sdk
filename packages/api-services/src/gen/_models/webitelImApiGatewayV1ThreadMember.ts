@@ -4,17 +4,17 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1ExternalParticipant } from './webitelImApiGatewayV1ExternalParticipant';
-import type { WebitelImApiGatewayV1ThreadDirectSettings } from './webitelImApiGatewayV1ThreadDirectSettings';
+import type { WebitelImApiGatewayV1Contact } from './webitelImApiGatewayV1Contact';
+import type { WebitelImApiGatewayV1ThreadPermissions } from './webitelImApiGatewayV1ThreadPermissions';
+import type { WebitelImApiGatewayV1ThreadRole } from './webitelImApiGatewayV1ThreadRole';
 
 /**
  * ThreadMember represents a thread participant
 with optional type-specific settings.
  */
 export interface WebitelImApiGatewayV1ThreadMember {
-	/** Direct thread specific settings.
-Present only for DIRECT threads. */
-	directSettings?: WebitelImApiGatewayV1ThreadDirectSettings;
-	/** User aggregated information. */
-	member?: WebitelImApiGatewayV1ExternalParticipant;
+	contact?: WebitelImApiGatewayV1Contact;
+	id?: string;
+	permissions?: WebitelImApiGatewayV1ThreadPermissions;
+	role?: WebitelImApiGatewayV1ThreadRole;
 }

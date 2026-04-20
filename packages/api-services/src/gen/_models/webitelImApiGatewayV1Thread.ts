@@ -7,6 +7,7 @@
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
+import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
 import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGatewayV1ThreadVariables';
 
 /**
@@ -25,6 +26,8 @@ export interface WebitelImApiGatewayV1Thread {
 	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
 	members?: WebitelImApiGatewayV1ThreadMember[];
+	/** User-specific settings for this thread. */
+	settings?: WebitelImApiGatewayV1ThreadSettings;
 	/** Thread subject or title. */
 	subject?: string;
 	/** Last update timestamp (Unix time, milliseconds). */

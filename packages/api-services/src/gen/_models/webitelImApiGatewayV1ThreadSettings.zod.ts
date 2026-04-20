@@ -9,7 +9,7 @@
  * ThreadDirectSettings defines settings
 specific to direct (one-to-one) threads.
  */
-export interface WebitelImApiGatewayV1ThreadDirectSettings {
+export interface WebitelImApiGatewayV1ThreadSettings {
 	/** Creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
 	/** Domain identifier. */

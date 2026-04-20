@@ -10,7 +10,6 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ThreadManagementAddMemberParams,
-	ThreadManagementRemoveMemberParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
@@ -46,22 +45,6 @@ export const // --- title start
 				});
 			};
 			/**
-			 * @summary Remove member from the thread.
-			 */
-			const threadManagementRemoveMember = (
-				threadId: string,
-				params?: ThreadManagementRemoveMemberParams,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
-				return axiosInstance.delete(`/v1/threads/${threadId}/members`, {
-					...options,
-					params: {
-						...params,
-						...options?.params,
-					},
-				});
-			};
-			/**
 			 * @summary Add member to the thread.
 			 */
 			const threadManagementAddMember = (
@@ -79,6 +62,19 @@ export const // --- title start
 							...options?.params,
 						},
 					},
+				);
+			};
+			/**
+			 * @summary Remove member from the thread.
+			 */
+			const threadManagementRemoveMember = (
+				threadId: string,
+				memberId: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
+				return axiosInstance.delete(
+					`/v1/threads/${threadId}/members/${memberId}`,
+					options,
 				);
 			};
 			/**
@@ -143,8 +139,8 @@ Supports pagination and field projection.
 			// --- footer start
 			return {
 				threadManagementSearch,
-				threadManagementRemoveMember,
 				threadManagementAddMember,
+				threadManagementRemoveMember,
 				threadManagementLocateVariables,
 				threadManagementSetVariables,
 				threadManagementFlushVariables,
@@ -153,10 +149,10 @@ Supports pagination and field projection.
 		};
 export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
-export type ThreadManagementRemoveMemberResult =
-	AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>;
 export type ThreadManagementAddMemberResult =
 	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
+export type ThreadManagementRemoveMemberResult =
+	AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>;
 export type ThreadManagementLocateVariablesResult =
 	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
 export type ThreadManagementSetVariablesResult =

@@ -611,6 +611,55 @@ export const MessageSendLocationResponse = zod
 		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
 	);
 
+export const MessageSendSystemMessageBody = zod.object({
+	body: zod
+		.string()
+		.optional()
+		.describe('System message content (e.g., "User X joined the chat").'),
+	metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
+	sendId: zod.string().optional().describe('Optional send ID for idempotency.'),
+	to: zod
+		.object({
+			channelId: zod.string().optional(),
+			contact: zod
+				.object({
+					iss: zod.string().optional(),
+					sub: zod.string().optional(),
+				})
+				.optional(),
+			groupId: zod.string().optional(),
+			threadId: zod.string().optional(),
+		})
+		.optional()
+		.describe('Recipient of the message.'),
+	type: zod
+		.string()
+		.optional()
+		.describe('System message type (e.g., "user_joined", "user_left").'),
+});
+
+export const MessageSendSystemMessageResponse = zod
+	.object({
+		id: zod.string().optional().describe('Unique message identifier.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
+	);
+
 /**
  * @summary SendText delivers a plain text message.
 We use the shared Request/Response types directly to avoid duplication.

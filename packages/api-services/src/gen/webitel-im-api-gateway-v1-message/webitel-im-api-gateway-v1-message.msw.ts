@@ -476,6 +476,78 @@ export const getMessageSendLocationResponseMock = (
 	...overrideResponse,
 });
 
+export const getMessageSendSystemMessageResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SendMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SendMessageResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	to: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getMessageSendTextResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImApiGatewayV1SendTextResponse, object>
@@ -719,6 +791,34 @@ export const getMessageSendLocationMockHandler = (
 	);
 };
 
+export const getMessageSendSystemMessageMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendMessageResponse>
+				| WebitelImApiGatewayV1SendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/system',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendSystemMessageResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getMessageSendTextMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendTextResponse
@@ -781,6 +881,7 @@ export const getWebitelImApiGatewayV1MessageMock = () => [
 	getMessageSendInteractiveMockHandler(),
 	getMessageSendInteractiveCallbackMockHandler(),
 	getMessageSendLocationMockHandler(),
+	getMessageSendSystemMessageMockHandler(),
 	getMessageSendTextMockHandler(),
 	getMessageReadMockHandler(),
 ];

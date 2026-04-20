@@ -4,7 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 export interface WebitelImApiGatewayV1AddMemberResponse {
-	[key: string]: unknown;
+	member?: WebitelImApiGatewayV1ThreadMember;
 }

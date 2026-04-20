@@ -53,6 +53,8 @@ export const ThreadManagementSearchQueryParams = zod.object({
 });
 
 export const threadManagementSearchResponseItemsItemKindDefault = `UNKNOWN`;
+export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 
 export const ThreadManagementSearchResponse = zod
 	.object({
@@ -197,24 +199,94 @@ export const ThreadManagementSearchResponse = zod
 									),
 								sender: zod
 									.object({
-										isBot: zod
-											.boolean()
+										contact: zod
+											.object({
+												appId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+											})
 											.optional()
 											.describe(
-												'Represents if user is automation bot or actual user of system.',
+												'Contact represents an external messaging identity.',
 											),
-										iss: zod
-											.string()
-											.optional()
-											.describe('Client issuer for the sender.'),
-										name: zod.string().optional().describe('Sender username.'),
-										sub: zod
-											.string()
-											.optional()
-											.describe(
-												'Client-readable sender subject or display name.',
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												canAddMembers: zod.boolean().optional(),
+												canChangeMembersPermissions: zod.boolean().optional(),
+												canChangeThreadInfo: zod.boolean().optional(),
+												canRemoveMembers: zod.boolean().optional(),
+												canSendMessages: zod.boolean().optional(),
+												createdAt: zod.string().optional(),
+												id: zod.string().optional(),
+												memberId: zod.string().optional(),
+												updatedAt: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault,
 											),
-										type: zod.string().optional().describe('Sender type.'),
 									})
 									.optional()
 									.describe('Sender user aggregated information.'),
@@ -239,68 +311,94 @@ export const ThreadManagementSearchResponse = zod
 							.array(
 								zod
 									.object({
-										directSettings: zod
+										contact: zod
 											.object({
+												appId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
 												createdAt: zod
 													.string()
 													.optional()
 													.describe(
-														'Creation timestamp (Unix time, milliseconds).',
+														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
-												domainId: zod
-													.number()
+												isBot: zod
+													.boolean()
 													.optional()
-													.describe('Domain identifier.'),
-												id: zod
-													.string()
-													.optional()
-													.describe('Settings identifier.'),
-												title: zod
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
 													.string()
 													.optional()
 													.describe(
-														'Custom title for the direct thread.\nUsually represents the display name of the conversation.',
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
 													),
 												updatedAt: zod
 													.string()
 													.optional()
 													.describe(
-														'Last update timestamp (Unix time, milliseconds).',
+														'Last record update timestamp (Unix Epoch in milliseconds).',
 													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
 											})
 											.optional()
 											.describe(
-												'Direct thread specific settings.\nPresent only for DIRECT threads.',
+												'Contact represents an external messaging identity.',
 											),
-										member: zod
+										id: zod.string().optional(),
+										permissions: zod
 											.object({
-												isBot: zod
-													.boolean()
-													.optional()
-													.describe(
-														'Represents if user is automation bot or actual user of system.',
-													),
-												iss: zod
-													.string()
-													.optional()
-													.describe('Client issuer for the sender.'),
-												name: zod
-													.string()
-													.optional()
-													.describe('Participant name.'),
-												sub: zod
-													.string()
-													.optional()
-													.describe(
-														'Client-readable participant subject or display name.',
-													),
-												type: zod
-													.string()
-													.optional()
-													.describe('Participant type.'),
+												canAddMembers: zod.boolean().optional(),
+												canChangeMembersPermissions: zod.boolean().optional(),
+												canChangeThreadInfo: zod.boolean().optional(),
+												canRemoveMembers: zod.boolean().optional(),
+												canSendMessages: zod.boolean().optional(),
+												createdAt: zod.string().optional(),
+												id: zod.string().optional(),
+												memberId: zod.string().optional(),
+												updatedAt: zod.string().optional(),
 											})
-											.optional()
-											.describe('User aggregated information.'),
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemMembersItemRoleDefault,
+											),
 									})
 									.describe(
 										'ThreadMember represents a thread participant\nwith optional type-specific settings.',
@@ -308,6 +406,30 @@ export const ThreadManagementSearchResponse = zod
 							)
 							.optional()
 							.describe('Detailed member information.'),
+						settings: zod
+							.object({
+								createdAt: zod
+									.string()
+									.optional()
+									.describe('Creation timestamp (Unix time, milliseconds).'),
+								domainId: zod
+									.number()
+									.optional()
+									.describe('Domain identifier.'),
+								id: zod.string().optional().describe('Settings identifier.'),
+								title: zod
+									.string()
+									.optional()
+									.describe(
+										'Custom title for the direct thread.\nUsually represents the display name of the conversation.',
+									),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe('Last update timestamp (Unix time, milliseconds).'),
+							})
+							.optional()
+							.describe('User-specific settings for this thread.'),
 						subject: zod
 							.string()
 							.optional()
@@ -429,21 +551,6 @@ export const ThreadManagementSearchResponse = zod
 	);
 
 /**
- * @summary Remove member from the thread.
- */
-export const ThreadManagementRemoveMemberParams = zod.object({
-	thread_id: zod.string(),
-});
-
-export const ThreadManagementRemoveMemberQueryParams = zod.object({
-	memberSub: zod.string().optional(),
-	memberIss: zod.string().optional(),
-	reason: zod.string().optional(),
-});
-
-export const ThreadManagementRemoveMemberResponse = zod.looseObject({});
-
-/**
  * @summary Add member to the thread.
  */
 export const ThreadManagementAddMemberParams = zod.object({
@@ -453,8 +560,8 @@ export const ThreadManagementAddMemberParams = zod.object({
 export const threadManagementAddMemberQueryRoleDefault = `ROLE_UNSPECIFIED`;
 
 export const ThreadManagementAddMemberQueryParams = zod.object({
-	memberSub: zod.string().optional(),
-	memberIss: zod.string().optional(),
+	contactSub: zod.string().optional(),
+	contactIss: zod.string().optional(),
 	role: zod
 		.enum([
 			'ROLE_UNSPECIFIED',
@@ -466,7 +573,103 @@ export const ThreadManagementAddMemberQueryParams = zod.object({
 		.default(threadManagementAddMemberQueryRoleDefault),
 });
 
-export const ThreadManagementAddMemberResponse = zod.looseObject({});
+export const threadManagementAddMemberResponseMemberRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const ThreadManagementAddMemberResponse = zod.object({
+	member: zod
+		.object({
+			contact: zod
+				.object({
+					appId: zod
+						.string()
+						.optional()
+						.describe('Identifier of the specific integration app or bot.'),
+					createdAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Record creation timestamp (Unix Epoch in milliseconds).',
+						),
+					isBot: zod
+						.boolean()
+						.optional()
+						.describe(
+							'Represents if usere is real person or automatic script.',
+						),
+					iss: zod
+						.string()
+						.optional()
+						.describe('Provider-specific unique identifier (Issuer ID).'),
+					metadata: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe(
+							'Additional dynamic attributes provided by the messenger.',
+						),
+					name: zod
+						.string()
+						.optional()
+						.describe('Display name of the contact.'),
+					sub: zod
+						.string()
+						.optional()
+						.describe('Associated internal system subject/identifier.'),
+					type: zod
+						.string()
+						.optional()
+						.describe("Channel type (e.g., 'webchat', 'telegram')."),
+					updatedAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Last record update timestamp (Unix Epoch in milliseconds).',
+						),
+					username: zod
+						.string()
+						.optional()
+						.describe('Technical username or handle.'),
+				})
+				.optional()
+				.describe('Contact represents an external messaging identity.'),
+			id: zod.string().optional(),
+			permissions: zod
+				.object({
+					canAddMembers: zod.boolean().optional(),
+					canChangeMembersPermissions: zod.boolean().optional(),
+					canChangeThreadInfo: zod.boolean().optional(),
+					canRemoveMembers: zod.boolean().optional(),
+					canSendMessages: zod.boolean().optional(),
+					createdAt: zod.string().optional(),
+					id: zod.string().optional(),
+					memberId: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+				})
+				.optional(),
+			role: zod
+				.enum([
+					'ROLE_UNSPECIFIED',
+					'ROLE_MEMBER',
+					'ROLE_ADMIN',
+					'ROLE_OWNER',
+					'ROLE_SUPERVISOR',
+				])
+				.default(threadManagementAddMemberResponseMemberRoleDefault),
+		})
+		.optional()
+		.describe(
+			'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+		),
+});
+
+/**
+ * @summary Remove member from the thread.
+ */
+export const ThreadManagementRemoveMemberParams = zod.object({
+	thread_id: zod.string(),
+	member_id: zod.string(),
+});
+
+export const ThreadManagementRemoveMemberResponse = zod.looseObject({});
 
 /**
  * @summary Retrieves all variables for a specific thread.

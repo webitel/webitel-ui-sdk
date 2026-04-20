@@ -5,8 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ThreadManagementRemoveMemberParams = {
-	memberSub?: string;
-	memberIss?: string;
-	reason?: string;
+export type ContactSettingsManagementGetParams = {
+	contactId?: string;
 };

@@ -53,6 +53,8 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 			.describe('Maximum number of messages to return.'),
 	});
 
+export const messageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponseItemsItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
+
 export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponse =
 	zod
 		.object({
@@ -172,24 +174,94 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 								),
 							sender: zod
 								.object({
-									isBot: zod
-										.boolean()
+									contact: zod
+										.object({
+											appId: zod
+												.string()
+												.optional()
+												.describe(
+													'Identifier of the specific integration app or bot.',
+												),
+											createdAt: zod
+												.string()
+												.optional()
+												.describe(
+													'Record creation timestamp (Unix Epoch in milliseconds).',
+												),
+											isBot: zod
+												.boolean()
+												.optional()
+												.describe(
+													'Represents if usere is real person or automatic script.',
+												),
+											iss: zod
+												.string()
+												.optional()
+												.describe(
+													'Provider-specific unique identifier (Issuer ID).',
+												),
+											metadata: zod
+												.record(zod.string(), zod.string())
+												.optional()
+												.describe(
+													'Additional dynamic attributes provided by the messenger.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Display name of the contact.'),
+											sub: zod
+												.string()
+												.optional()
+												.describe(
+													'Associated internal system subject/identifier.',
+												),
+											type: zod
+												.string()
+												.optional()
+												.describe(
+													"Channel type (e.g., 'webchat', 'telegram').",
+												),
+											updatedAt: zod
+												.string()
+												.optional()
+												.describe(
+													'Last record update timestamp (Unix Epoch in milliseconds).',
+												),
+											username: zod
+												.string()
+												.optional()
+												.describe('Technical username or handle.'),
+										})
 										.optional()
 										.describe(
-											'Represents if user is automation bot or actual user of system.',
+											'Contact represents an external messaging identity.',
 										),
-									iss: zod
-										.string()
-										.optional()
-										.describe('Client issuer for the sender.'),
-									name: zod.string().optional().describe('Sender username.'),
-									sub: zod
-										.string()
-										.optional()
-										.describe(
-											'Client-readable sender subject or display name.',
+									id: zod.string().optional(),
+									permissions: zod
+										.object({
+											canAddMembers: zod.boolean().optional(),
+											canChangeMembersPermissions: zod.boolean().optional(),
+											canChangeThreadInfo: zod.boolean().optional(),
+											canRemoveMembers: zod.boolean().optional(),
+											canSendMessages: zod.boolean().optional(),
+											createdAt: zod.string().optional(),
+											id: zod.string().optional(),
+											memberId: zod.string().optional(),
+											updatedAt: zod.string().optional(),
+										})
+										.optional(),
+									role: zod
+										.enum([
+											'ROLE_UNSPECIFIED',
+											'ROLE_MEMBER',
+											'ROLE_ADMIN',
+											'ROLE_OWNER',
+											'ROLE_SUPERVISOR',
+										])
+										.default(
+											messageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponseItemsItemSenderRoleDefault,
 										),
-									type: zod.string().optional().describe('Sender type.'),
 								})
 								.optional()
 								.describe('Sender user aggregated information.'),

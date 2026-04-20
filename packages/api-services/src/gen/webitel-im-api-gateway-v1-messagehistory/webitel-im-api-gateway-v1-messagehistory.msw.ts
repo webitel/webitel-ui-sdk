@@ -7,8 +7,8 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-
 import type { WebitelImApiGatewayV1SearchMessageHistoryResponse } from '../_models';
+import { WebitelImApiGatewayV1ThreadRole } from '../_models';
 
 export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponseMock =
 	(
@@ -219,11 +219,99 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 				]),
 				sender: faker.helpers.arrayElement([
 					{
-						isBot: faker.helpers.arrayElement([
-							faker.datatype.boolean(),
+						contact: faker.helpers.arrayElement([
+							{
+								appId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								isBot: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								iss: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{
+										[faker.string.alphanumeric(5)]: faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+									},
+									undefined,
+								]),
+								name: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								sub: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								type: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								username: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+							},
 							undefined,
 						]),
-						iss: faker.helpers.arrayElement([
+						id: faker.helpers.arrayElement([
 							faker.string.alpha({
 								length: {
 									min: 10,
@@ -232,31 +320,71 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 							}),
 							undefined,
 						]),
-						name: faker.helpers.arrayElement([
-							faker.string.alpha({
-								length: {
-									min: 10,
-									max: 20,
-								},
-							}),
+						permissions: faker.helpers.arrayElement([
+							{
+								canAddMembers: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								canChangeMembersPermissions: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								canChangeThreadInfo: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								canRemoveMembers: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								canSendMessages: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								id: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								memberId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+							},
 							undefined,
 						]),
-						sub: faker.helpers.arrayElement([
-							faker.string.alpha({
-								length: {
-									min: 10,
-									max: 20,
-								},
-							}),
-							undefined,
-						]),
-						type: faker.helpers.arrayElement([
-							faker.string.alpha({
-								length: {
-									min: 10,
-									max: 20,
-								},
-							}),
+						role: faker.helpers.arrayElement([
+							faker.helpers.arrayElement(
+								Object.values(WebitelImApiGatewayV1ThreadRole),
+							),
 							undefined,
 						]),
 					},

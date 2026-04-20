@@ -7,7 +7,7 @@
 import type { ThreadManagementAddMemberRole } from './threadManagementAddMemberRole';
 
 export type ThreadManagementAddMemberParams = {
-	memberSub?: string;
-	memberIss?: string;
+	contactSub?: string;
+	contactIss?: string;
 	role?: ThreadManagementAddMemberRole;
 };
