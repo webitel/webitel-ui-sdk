@@ -162,6 +162,10 @@ const WtScreenRecordingsAction = defineAsyncComponent(
 		),
 );
 
+const WtInlineAddPanel = defineAsyncComponent(
+	() => import('./wt-inline-add-panel/wt-inline-add-panel.vue'),
+);
+
 const Components = {
 	WtActionBar,
 	WtImage,
@@ -243,6 +247,7 @@ const Components = {
 	WtExpansionCard,
 	WtDatetimeText,
 	WtScreenRecordingsAction,
+	WtInlineAddPanel,
 };
 
 export {
@@ -281,6 +286,7 @@ export {
 	WtIconBtn,
 	WtImage,
 	WtIndicator,
+	WtInlineAddPanel,
 	WtInputNumber,
 	WtInputText,
 	WtIntersectionObserver,
