@@ -20,6 +20,8 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	createdAt?: string;
 	/** List of document attachments. */
 	documents?: WebitelImApiGatewayV1Document[];
+	/** Message last update timestamp (Unix time, milliseconds). */
+	editedAt?: string;
 	/** Unique message identifier. */
 	id?: string;
 	/** List of image attachments. */
@@ -33,6 +35,4 @@ Can contain structured data depending on message type. */
 	threadId?: string;
 	/** Message type identifier. */
 	type?: number;
-	/** Message last update timestamp (Unix time, milliseconds). */
-	updatedAt?: string;
 }

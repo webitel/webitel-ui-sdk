@@ -61,12 +61,6 @@ export const getThreadManagementSearchResponseMock = (
 				}),
 				undefined,
 			]),
-			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiGatewayV1ThreadKind),
-				),
-				undefined,
-			]),
 			lastMsg: faker.helpers.arrayElement([
 				{
 					body: faker.helpers.arrayElement([
@@ -170,6 +164,15 @@ export const getThreadManagementSearchResponseMock = (
 								undefined,
 							]),
 						})),
+						undefined,
+					]),
+					editedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
 						undefined,
 					]),
 					id: faker.helpers.arrayElement([
@@ -446,15 +449,6 @@ export const getThreadManagementSearchResponseMock = (
 						faker.number.int(),
 						undefined,
 					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
 				},
 				undefined,
 			]),
@@ -691,6 +685,12 @@ export const getThreadManagementSearchResponseMock = (
 						max: 20,
 					},
 				}),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1ThreadKind),
+				),
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([

@@ -6,9 +6,10 @@
  */
 import type { WebitelImServiceThreadV1HistoryMessage } from './webitelImServiceThreadV1HistoryMessage';
 import type { WebitelImServiceThreadV1HistoryMessageCursorResponse } from './webitelImServiceThreadV1HistoryMessageCursorResponse';
+import type { WebitelImServiceThreadV1ThreadMember } from './webitelImServiceThreadV1ThreadMember';
 
 export interface WebitelImServiceThreadV1SearchMessageHistoryResponse {
-	from?: string[];
+	from?: WebitelImServiceThreadV1ThreadMember[];
 	items?: WebitelImServiceThreadV1HistoryMessage[];
 	nextCursor?: WebitelImServiceThreadV1HistoryMessageCursorResponse;
 	prevCursor?: WebitelImServiceThreadV1HistoryMessageCursorResponse;

@@ -7,8 +7,8 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-
 import type { WebitelImServiceThreadV1SearchMessageHistoryResponse } from '../_models';
+import { WebitelImServiceThreadV1ThreadRole } from '../_models';
 
 export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 	overrideResponse: Partial<
@@ -24,14 +24,102 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 				}),
 			},
 			(_, i) => i + 1,
-		).map(() =>
-			faker.string.alpha({
-				length: {
-					min: 10,
-					max: 20,
+		).map(() => ({
+			contactId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			permissions: faker.helpers.arrayElement([
+				{
+					canAddMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeMembersPermissions: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeThreadInfo: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canRemoveMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canSendMessages: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					memberId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					threadId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				},
-			}),
-		),
+				undefined,
+			]),
+			role: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImServiceThreadV1ThreadRole),
+				),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	items: faker.helpers.arrayElement([

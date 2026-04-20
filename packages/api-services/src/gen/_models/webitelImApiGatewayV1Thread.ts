@@ -20,8 +20,6 @@ export interface WebitelImApiGatewayV1Thread {
 	description?: string;
 	/** Unique thread identifier. */
 	id?: string;
-	/** Type of the thread. */
-	kind?: WebitelImApiGatewayV1ThreadKind;
 	/** Last message of the linked thread. */
 	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
@@ -30,6 +28,8 @@ export interface WebitelImApiGatewayV1Thread {
 	settings?: WebitelImApiGatewayV1ThreadSettings;
 	/** Thread subject or title. */
 	subject?: string;
+	/** Type of the thread. */
+	type?: WebitelImApiGatewayV1ThreadKind;
 	/** Last update timestamp (Unix time, milliseconds). */
 	updatedAt?: string;
 	/** Optional variables associated with the thread. */

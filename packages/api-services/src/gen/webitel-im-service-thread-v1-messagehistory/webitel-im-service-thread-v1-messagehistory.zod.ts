@@ -24,8 +24,53 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 	size: zod.number().optional(),
 });
 
+export const messageHistorySearchThreadMessagesHistoryResponseFromItemRoleDefault = `ROLE_UNSPECIFIED`;
+
 export const MessageHistorySearchThreadMessagesHistoryResponse = zod.object({
-	from: zod.array(zod.string()).optional(),
+	from: zod
+		.array(
+			zod
+				.object({
+					contactId: zod
+						.string()
+						.optional()
+						.describe('Contact ID of the thread member.'),
+					id: zod.string().optional(),
+					permissions: zod
+						.object({
+							canAddMembers: zod.boolean().optional(),
+							canChangeMembersPermissions: zod.boolean().optional(),
+							canChangeThreadInfo: zod.boolean().optional(),
+							canRemoveMembers: zod.boolean().optional(),
+							canSendMessages: zod.boolean().optional(),
+							createdAt: zod.string().optional(),
+							id: zod.string().optional(),
+							memberId: zod.string().optional(),
+							threadId: zod.string().optional(),
+							updatedAt: zod.string().optional(),
+						})
+						.optional()
+						.describe('User rights in the thread, determined by their role.'),
+					role: zod
+						.enum([
+							'ROLE_UNSPECIFIED',
+							'ROLE_MEMBER',
+							'ROLE_ADMIN',
+							'ROLE_OWNER',
+							'ROLE_SUPERVISOR',
+						])
+						.default(
+							messageHistorySearchThreadMessagesHistoryResponseFromItemRoleDefault,
+						)
+						.describe(
+							'Role of the member in the thread, determining their permissions.',
+						),
+				})
+				.describe(
+					'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+				),
+		)
+		.optional(),
 	items: zod
 		.array(
 			zod.object({

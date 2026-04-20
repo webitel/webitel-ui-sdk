@@ -118,6 +118,12 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 								)
 								.optional()
 								.describe('List of document attachments.'),
+							editedAt: zod
+								.string()
+								.optional()
+								.describe(
+									'Message last update timestamp (Unix time, milliseconds).',
+								),
 							id: zod
 								.string()
 								.optional()
@@ -273,12 +279,6 @@ export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Messa
 								.number()
 								.optional()
 								.describe('Message type identifier.'),
-							updatedAt: zod
-								.string()
-								.optional()
-								.describe(
-									'Message last update timestamp (Unix time, milliseconds).',
-								),
 						})
 						.describe(
 							'HistoryMessage represents a single message\nin thread history.',

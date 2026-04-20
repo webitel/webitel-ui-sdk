@@ -52,9 +52,9 @@ export const ThreadManagementSearchQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number (1-based).'),
 });
 
-export const threadManagementSearchResponseItemsItemKindDefault = `UNKNOWN`;
 export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemTypeDefault = `UNKNOWN`;
 
 export const ThreadManagementSearchResponse = zod
 	.object({
@@ -71,15 +71,6 @@ export const ThreadManagementSearchResponse = zod
 							.optional()
 							.describe('Optional thread description.'),
 						id: zod.string().optional().describe('Unique thread identifier.'),
-						kind: zod
-							.enum([
-								'UNKNOWN',
-								'DIRECT',
-								'GROUP',
-								'CHANNEL',
-							])
-							.default(threadManagementSearchResponseItemsItemKindDefault)
-							.describe('Type of the thread.'),
 						lastMsg: zod
 							.object({
 								body: zod.string().optional().describe('Message body content.'),
@@ -138,6 +129,12 @@ export const ThreadManagementSearchResponse = zod
 									)
 									.optional()
 									.describe('List of document attachments.'),
+								editedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Message last update timestamp (Unix time, milliseconds).',
+									),
 								id: zod
 									.string()
 									.optional()
@@ -298,12 +295,6 @@ export const ThreadManagementSearchResponse = zod
 									.number()
 									.optional()
 									.describe('Message type identifier.'),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Message last update timestamp (Unix time, milliseconds).',
-									),
 							})
 							.optional()
 							.describe('Last message of the linked thread.'),
@@ -434,6 +425,15 @@ export const ThreadManagementSearchResponse = zod
 							.string()
 							.optional()
 							.describe('Thread subject or title.'),
+						type: zod
+							.enum([
+								'UNKNOWN',
+								'DIRECT',
+								'GROUP',
+								'CHANNEL',
+							])
+							.default(threadManagementSearchResponseItemsItemTypeDefault)
+							.describe('Type of the thread.'),
 						updatedAt: zod
 							.string()
 							.optional()

@@ -129,6 +129,15 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 					})),
 					undefined,
 				]),
+				editedAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
 				id: faker.helpers.arrayElement([
 					faker.string.alpha({
 						length: {
@@ -401,15 +410,6 @@ export const getMessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1Me
 				]),
 				type: faker.helpers.arrayElement([
 					faker.number.int(),
-					undefined,
-				]),
-				updatedAt: faker.helpers.arrayElement([
-					faker.string.alpha({
-						length: {
-							min: 10,
-							max: 20,
-						},
-					}),
 					undefined,
 				]),
 			})),
