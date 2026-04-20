@@ -41,6 +41,7 @@
 
       <wt-icon
         v-if="icon"
+        :class="{ 'wt-button__icon--hidden': showLoader }"  
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -173,6 +174,14 @@ watch(
 
 .wt-button__contents {
   display: contents;
+}
+
+/* 
+	@author HlukhovYe
+	Hides the icon instantly when the loader is shown. 
+*/
+.wt-button__icon--hidden {
+  opacity: 0;
 }
 
 .wt-badge.wt-badge--absolute {
