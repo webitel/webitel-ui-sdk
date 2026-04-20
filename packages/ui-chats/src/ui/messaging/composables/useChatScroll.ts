@@ -1,11 +1,19 @@
 import { useScroll } from '@vueuse/core';
-import { type ComputedRef, computed, type Ref, ref, watch } from 'vue';
+import {
+	type ComputedRef,
+	computed,
+	nextTick,
+	type Ref,
+	ref,
+	watch,
+} from 'vue';
 
 import type { ChatMessageType } from '../types/ChatMessage.types';
 
 export const useChatScroll = (
 	element: Ref<HTMLElement | null> = null,
 	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>,
+	isLoading?: Ref<boolean> | ComputedRef<boolean>,
 ) => {
 	/* @author ye.pohranichna
   why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
@@ -17,6 +25,8 @@ export const useChatScroll = (
 	/* @author ye.pohranichna
     the distance where the scrollToBottomBtn must be shown/hide. */
 	const threshold = ref<number>(defaultThreshold);
+	const isLoadingNextMessages = ref<boolean>(false);
+	const lastVisibleMessageEl = ref<HTMLElement | null>(null);
 
 	const isLastMessageIsMy = computed<boolean>(
 		() => lastMessage.value?.member?.self,
@@ -80,6 +90,27 @@ export const useChatScroll = (
 		showScrollToBottomBtn.value = false;
 	};
 
+	const getTopMessageEl = () => {
+		// help to fix chat viewing position when new messages was loaded
+		if (!element.value?.children) return;
+		lastVisibleMessageEl.value =
+			element.value?.getElementsByClassName('chat-message')[0] ?? null;
+	};
+
+	const loadNextMessages = (
+		canLoadMore: boolean | undefined,
+		onLoadNextMessages: () => void,
+	) => {
+		if (isLoadingNextMessages.value || isLoading?.value || !canLoadMore) return;
+
+		isLoadingNextMessages.value = true;
+		getTopMessageEl();
+
+		setTimeout(() => {
+			onLoadNextMessages();
+		}, 200);
+	};
+
 	watch(
 		() => messages.value?.length,
 		(newValue, oldValue) => {
@@ -91,10 +122,27 @@ export const useChatScroll = (
 		},
 	);
 
+	watch(
+		() => isLoading?.value,
+		async (loading) => {
+			if (loading || !isLoadingNextMessages.value) return;
+
+			await nextTick();
+
+			element.value?.scrollTo({
+				top: lastVisibleMessageEl.value?.offsetTop,
+				behavior: 'auto',
+			});
+
+			isLoadingNextMessages.value = false;
+		},
+	);
+
 	return {
 		showScrollToBottomBtn,
 		newUnseenMessagesCount,
 		scrollToBottom,
+		loadNextMessages,
 		handleChatScroll,
 		handleChatResize,
 	};
