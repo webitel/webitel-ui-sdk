@@ -4,14 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1DocumentRequest } from './webitelImApiGatewayV1DocumentRequest';
+import type { WebitelImApiGatewayV1DocumentInput } from './webitelImApiGatewayV1DocumentInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 
 /**
  * Represents a request to send a message with document.
  */
 export interface WebitelImApiGatewayV1SendDocumentRequest {
-	document?: WebitelImApiGatewayV1DocumentRequest;
+	body?: string;
+	documents?: WebitelImApiGatewayV1DocumentInput[];
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
 }

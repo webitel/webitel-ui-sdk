@@ -66,25 +66,21 @@ export const MessageSendContactResponse = zod
  */
 export const MessageSendDocumentBody = zod
 	.object({
-		document: zod
-			.object({
-				body: zod.string().optional(),
-				documents: zod
-					.array(
-						zod
-							.object({
-								fileName: zod.string().optional(),
-								id: zod.string().optional(),
-								mimeType: zod.string().optional(),
-								sizeBytes: zod.string().optional(),
-								url: zod.string().optional(),
-							})
-							.describe(
-								'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
-							),
-					)
-					.optional(),
-			})
+		body: zod.string().optional(),
+		documents: zod
+			.array(
+				zod
+					.object({
+						fileName: zod.string().optional(),
+						id: zod.string().optional(),
+						mimeType: zod.string().optional(),
+						sizeBytes: zod.string().optional(),
+						url: zod.string().optional(),
+					})
+					.describe(
+						'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
+					),
+			)
 			.optional(),
 		sendId: zod.string().optional(),
 		to: zod
@@ -133,22 +129,18 @@ export const MessageSendDocumentResponse = zod
  */
 export const MessageSendImageBody = zod
 	.object({
-		image: zod
-			.object({
-				body: zod.string().optional(),
-				images: zod
-					.array(
-						zod
-							.object({
-								id: zod.string().optional(),
-								link: zod.string().optional(),
-								mimeType: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.describe('Represents `Image` entity with\nnecessary fields.'),
-					)
-					.optional(),
-			})
+		body: zod.string().optional(),
+		images: zod
+			.array(
+				zod
+					.object({
+						id: zod.string().optional(),
+						link: zod.string().optional(),
+						mimeType: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.describe('Represents `Image` entity with\nnecessary fields.'),
+			)
 			.optional(),
 		sendId: zod.string().optional(),
 		to: zod

@@ -4,14 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1ImageRequest } from './webitelImApiGatewayV1ImageRequest';
+import type { WebitelImApiGatewayV1ImageInput } from './webitelImApiGatewayV1ImageInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 
 /**
  * Represents a request to send an message with image.
  */
 export interface WebitelImApiGatewayV1SendImageRequest {
-	image?: WebitelImApiGatewayV1ImageRequest;
+	body?: string;
+	images?: WebitelImApiGatewayV1ImageInput[];
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
 }
