@@ -108,7 +108,10 @@ const isSelfSide = computed<boolean>(
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
 
 const getClientUsername = computed<string>(() => {
-	return isSelfSide.value ? props?.agentName : props.username;
+	if (isSelfSide.value) return props?.agentName;
+	if (!props.username && props.message.member?.name)
+		return props.message.member.name;
+	return props.username;
 });
 
 function handlePlayerInitialize(player) {
