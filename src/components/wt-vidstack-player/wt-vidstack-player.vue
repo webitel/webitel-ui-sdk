@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="rootEl"
     :class="[
       `wt-vidstack-player--${size}`,
       `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
@@ -98,6 +99,12 @@ const emit = defineEmits<{
 }>();
 
 // const player = useTemplateRef<MediaPlayerElement>('player');
+const rootEl = ref<HTMLDivElement | null>(null);
+
+defineExpose({
+	rootEl,
+});
+
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 

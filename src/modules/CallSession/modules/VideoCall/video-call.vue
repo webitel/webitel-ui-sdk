@@ -1,6 +1,10 @@
 <template>
   <wt-vidstack-player
-    :class="[!props.static && `video-call-position--${props.position}`]"
+    ref="playerRef"
+    :class="[
+      !props.static && !isPiP && `video-call-position--${props.position}`,
+      isPiP && 'video-call--pip',
+    ]"
     :hide-video-display-panel="props.hideVideoDisplayPanel"
     :size="props.size"
     :stream="mainStream"
@@ -113,7 +117,7 @@
 
     <template #controls-panel>
       <video-call-controls-panel
-        :actions="props.actions"
+        :actions="effectiveActions"
         :actions:chat:pressed="props['actions:chat:pressed']"
         :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:settings:pressed="props['actions:settings:pressed']"
@@ -131,6 +135,7 @@
         @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
         @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
         @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
+        @[VideoCallAction.Pip]="togglePiP"
       />
     </template>
   </wt-vidstack-player>
@@ -143,6 +148,8 @@
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { useDocumentPiP } from './composables/useDocumentPiP';
 
 import { WtIcon } from '../../../../components';
 import {
@@ -185,6 +192,7 @@ const props = withDefaults(
 		hideVideoDisplayPanel?: boolean;
 		hideAvatar?: boolean;
 		resizable?: boolean;
+		hideSenderOnHold?: boolean;
 
 		actions: VideoCallAction[];
 		username?: string;
@@ -253,6 +261,21 @@ const emitKeys = {
 };
 
 const { t } = useI18n();
+
+const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
+
+const {
+	isPiP,
+	isSupported: isPiPSupported,
+	togglePiP,
+	exitPiP,
+} = useDocumentPiP(() => playerRef.value?.rootEl ?? null);
+
+const effectiveActions = computed(() =>
+	isPiPSupported.value
+		? props.actions
+		: props.actions.filter((a) => a !== VideoCallAction.Pip),
+);
 
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);
@@ -381,6 +404,41 @@ const senderVideoMutedIconSizes = {
 <style scoped>
 .video-call {
   flex: 0 0 auto;
+}
+
+.video-call--pip.wt-vidstack-player {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.video-call-pip-return {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: none;
+  border-radius: var(--border-radius-md);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--wt-color-on-dark);
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.video-call-pip-return:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .video-call-position--left-bottom.wt-vidstack-player--sm {

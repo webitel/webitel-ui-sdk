@@ -77,6 +77,17 @@
 		/>
 
 		<wt-button
+			v-if="shownActionsMap[VideoCallAction.Pip]"
+			:size="buttonSizeMap[size]"
+			icon="plyr-pip"
+			variant="outlined"
+			color="secondary"
+			rounded
+			contains-icon
+			@click="emit(VideoCallAction.Pip)"
+		/>
+
+		<wt-button
 			v-if="shownActionsMap[VideoCallAction.Hangup]"
 			:size="buttonSizeMap[size]"
 			icon="call-end--filled"
@@ -157,6 +168,7 @@ const emit = defineEmits<{
 		payload?: unknown,
 		options?: ResultCallbacks,
 	): void;
+	(e: typeof VideoCallAction.Pip): void;
 }>();
 
 const { size } = inject('size') as {

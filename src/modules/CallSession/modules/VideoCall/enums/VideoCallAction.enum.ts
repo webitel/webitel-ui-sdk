@@ -6,6 +6,7 @@ export const VideoCallAction = {
 	Settings: 'settings',
 	Chat: 'chat',
 	Hangup: 'hangup',
+	Pip: 'pip',
 	ZoomScreenshot: 'zoom-screenshot',
 	CloseScreenshot: 'close-screenshot',
 } as const;
