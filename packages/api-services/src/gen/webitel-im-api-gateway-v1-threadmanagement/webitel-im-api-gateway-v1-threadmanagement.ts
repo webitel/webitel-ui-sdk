@@ -9,13 +9,13 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ThreadManagementAddMemberParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
 	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
 	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
 	WebitelImApiGatewayV1ThreadVariables,
@@ -49,19 +49,13 @@ export const // --- title start
 			 */
 			const threadManagementAddMember = (
 				threadId: string,
-				params?: ThreadManagementAddMemberParams,
+				webitelImApiGatewayV1ThreadManagementAddMemberBody: WebitelImApiGatewayV1ThreadManagementAddMemberBody,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>> => {
 				return axiosInstance.post(
 					`/v1/threads/${threadId}/members`,
-					undefined,
-					{
-						...options,
-						params: {
-							...params,
-							...options?.params,
-						},
-					},
+					webitelImApiGatewayV1ThreadManagementAddMemberBody,
+					options,
 				);
 			};
 			/**

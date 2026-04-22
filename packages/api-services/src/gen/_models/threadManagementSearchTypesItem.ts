@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ThreadManagementSearchKindsItem =
-	(typeof ThreadManagementSearchKindsItem)[keyof typeof ThreadManagementSearchKindsItem];
+export type ThreadManagementSearchTypesItem =
+	(typeof ThreadManagementSearchTypesItem)[keyof typeof ThreadManagementSearchTypesItem];
 
-export const ThreadManagementSearchKindsItem = {
+export const ThreadManagementSearchTypesItem = {
 	Unknown: 'UNKNOWN',
 	Direct: 'DIRECT',
 	Group: 'GROUP',
