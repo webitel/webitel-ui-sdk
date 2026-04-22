@@ -4,11 +4,11 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
+	sanitize,
 	snakeToCamel,
 	starToSearch,
-	sanitize,
-	mergeEach,
 } from '../../transformers';
 
 const getList = async (params) => {
