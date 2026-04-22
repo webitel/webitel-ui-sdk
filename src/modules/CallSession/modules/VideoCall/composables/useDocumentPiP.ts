@@ -158,6 +158,7 @@ export function useDocumentPiP(getElement: () => HTMLElement | null) {
 	return {
 		isPiP,
 		isSupported,
+		enterPiP,
 		togglePiP,
 		exitPiP,
 	};

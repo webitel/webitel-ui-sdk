@@ -146,7 +146,7 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useDocumentPiP } from './composables/useDocumentPiP';
@@ -267,9 +267,20 @@ const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
 const {
 	isPiP,
 	isSupported: isPiPSupported,
+	enterPiP,
 	togglePiP,
 	exitPiP,
-} = useDocumentPiP(() => playerRef.value?.rootEl ?? null);
+} = useDocumentPiP(() => (playerRef.value as any)?.$el ?? null);
+
+watch(
+	() => (playerRef.value as any)?.$el as HTMLElement | undefined,
+	(el) => {
+		if (el && isPiPSupported.value) void enterPiP();
+	},
+	{
+		once: true,
+	},
+);
 
 const effectiveActions = computed(() =>
 	isPiPSupported.value
