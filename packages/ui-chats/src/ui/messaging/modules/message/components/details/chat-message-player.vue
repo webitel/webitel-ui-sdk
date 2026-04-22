@@ -16,7 +16,6 @@
       :src="mediaSrc"
       :autoplay="false"
       :closable="false"
-      :id="ringtone.name"
       hide-volume-slider
       hide-mute-button
       class="chat-message-player__player"
@@ -66,4 +65,9 @@ function handlePlayerInitialize(player) {
   max-height: var(--chat-file-max-height);
   max-width: var(--chat-file-max-width);
 }
+.chat-message-player {
+  min-width: 250px;
+}
+
+
 </style>
