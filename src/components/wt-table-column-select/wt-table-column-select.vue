@@ -163,6 +163,10 @@ export default {
   text-align: center;
 }
 
+.wt-table-column-select__popup :deep(.wt-popup__popup) {
+	height: var(--popup-max-height);
+}
+
 .wt-table-column-select__popup-search {
 	margin-bottom: var(--spacing-xs);
 }
