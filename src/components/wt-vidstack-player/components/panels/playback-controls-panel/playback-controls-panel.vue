@@ -4,7 +4,7 @@
 
     <time-slider />
 
-    <time-group />
+    <time-group :countdown="props.countdownTimeMode"/>
   </controls-group>
 </template>
 
@@ -13,6 +13,17 @@ import { ControlsGroup } from '../../../../../components/wt-vidstack-player/comp
 import PlayButton from './components/buttons/play-button.vue';
 import TimeSlider from './components/sliders/time-slider.vue';
 import TimeGroup from './components/time-group.vue';
+
+import { defineProps, withDefaults } from 'vue';
+
+const props = withDefaults(
+	defineProps<{
+		countdownTimeMode?: boolean;
+	}>(),
+	{
+		countdownTimeMode: false,
+	},
+);
 </script>
 
 <style scoped>

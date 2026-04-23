@@ -5,11 +5,12 @@
   >
     <wt-vidstack-player
       v-if="isVideo"
+      :size="ComponentSize.SM"
+      :src="mediaSrc"
       static
       hide-expand
       stretch
-      :size="ComponentSize.SM"
-      :src="mediaSrc"
+      countdown-time-mode
     />
     <wt-player
       v-else
