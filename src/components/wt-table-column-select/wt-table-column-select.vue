@@ -116,7 +116,9 @@ export default {
 				.filter(
 					(header) =>
 						!this.staticHeaders.includes(header.value) &&
-						this.shownColLabel(header)?.toLowerCase().includes(this.search),
+						this.shownColLabel(header)
+							?.toLowerCase()
+							.includes(this.search?.toLowerCase()),
 				)
 				.sort((a, b) => {
 					return this.shownColLabel(a)?.localeCompare(this.shownColLabel(b));
