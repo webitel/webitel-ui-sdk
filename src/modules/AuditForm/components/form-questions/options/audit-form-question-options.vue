@@ -44,9 +44,8 @@ import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-
-import { WtButton, WtRadio } from '../../../../../components';
 import { inject } from 'vue';
+import { WtButton, WtRadio } from '../../../../../components';
 import updateObject from '../../../../../scripts/updateObject.js';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
