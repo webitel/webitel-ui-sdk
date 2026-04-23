@@ -66,9 +66,6 @@ function handlePlayerInitialize(player) {
   max-height: var(--chat-file-max-height);
   max-width: var(--chat-file-max-width);
 }
-.chat-message-player {
-  min-width: 250px;
-}
 
 
 </style>
