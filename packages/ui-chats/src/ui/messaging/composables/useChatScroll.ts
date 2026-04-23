@@ -106,9 +106,7 @@ export const useChatScroll = (
 		isLoadingNextMessages.value = true;
 		getTopMessageEl();
 
-		setTimeout(() => {
-			onLoadNextMessages();
-		}, 200);
+		onLoadNextMessages();
 	};
 
 	watch(
