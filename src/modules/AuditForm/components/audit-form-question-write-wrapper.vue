@@ -3,7 +3,7 @@
     <header class="audit-form-question-write-header">
       <div class="audit-form-question-write-header__switchers">
         <wt-switcher
-          :disabled="isRequiredSwitcherDisabled"
+          :disabled="isQuestionActionDisabled"
           :label="t('reusable.required')"
           :model-value="question.required"
           @update:model-value="updateQuestion({ path: 'required', value: $event })"
@@ -26,7 +26,7 @@
 
         <wt-icon-btn
           v-tooltip="t('reusable.delete')"
-          :disabled="isDeleteButtonDisabled"
+          :disabled="isQuestionActionDisabled"
           icon="bucket"
           @click="emit('delete')"
         />
@@ -119,8 +119,7 @@ const QuestionType = [
 const prettifiedQuestionType = computed(() =>
 	QuestionType.find(({ value }) => value === questionModel.value.type),
 );
-const isRequiredSwitcherDisabled = computed(() => props.first || readonly);
-const isDeleteButtonDisabled = computed(() => props.first || readonly);
+const isQuestionActionDisabled = computed(() => props.first || readonly);
 
 const QuestionTypeComponent = computed(() => {
 	if (questionModel.value.type === EngineAuditQuestionType.QuestionOption)
