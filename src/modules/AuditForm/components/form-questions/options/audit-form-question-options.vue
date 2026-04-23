@@ -16,6 +16,7 @@
       />
       <wt-button
         class="audit-form-question-options-write__add-button"
+        :disabled="readonly"
         @click="addQuestionOption"
       >
         {{ $t('reusable.add') }}
@@ -45,12 +46,14 @@ import type {
 } from '@webitel/api-services/gen/models';
 
 import { WtButton, WtRadio } from '../../../../../components';
+import { inject } from 'vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
 const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
+const readonly = inject<boolean>('readonly', false);
 
 defineProps<{
 	/**
@@ -60,6 +63,7 @@ defineProps<{
 }>();
 
 function updateQuestion({ path, value }) {
+	if (readonly) return;
 	questionModel.value = updateObject({
 		obj: questionModel.value,
 		path,
@@ -68,6 +72,7 @@ function updateQuestion({ path, value }) {
 }
 
 function addQuestionOption() {
+	if (readonly) return;
 	const options = [
 		...questionModel.value.options,
 		generateOption(),
@@ -79,6 +84,7 @@ function addQuestionOption() {
 }
 
 function deleteQuestionOption({ key }) {
+	if (readonly) return;
 	const options = [
 		...questionModel.value.options,
 	];

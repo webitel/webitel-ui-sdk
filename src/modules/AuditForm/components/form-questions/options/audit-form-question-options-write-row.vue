@@ -4,6 +4,7 @@
       :label="$t('webitelUI.auditForm.option', 1)"
       :v="v$.option.name"
       :model-value="option.name"
+      :disabled="readonly"
       prevent-trim
       @update:model-value="emit('update:option', { name: $event, score: option.score })"
     />
@@ -11,12 +12,13 @@
       :label="$t('webitelUI.auditForm.score', 1)"
       :v="v$.option.score"
       :model-value="option.score"
+      :disabled="readonly"
       @update:model-value="emit('update:option', { name: option.name, score: $event })"
     />
 
     <wt-icon-btn
       v-tooltip="$t('reusable.delete')"
-      :disabled="first"
+      :disabled="isDeleteDisabled"
       icon="bucket"
       @click="emit('delete')"
     />
@@ -26,7 +28,7 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
 import { maxValue, minValue, required } from '@vuelidate/validators';
-import { computed, onMounted, toRefs } from 'vue';
+import { computed, inject, onMounted, toRefs } from 'vue';
 
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
@@ -50,6 +52,8 @@ const emit = defineEmits([
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
+const readonly = inject('readonly', false);
+const isDeleteDisabled = computed(() => props.first || readonly);
 
 const v$ = useVuelidate(
 	computed(() => ({

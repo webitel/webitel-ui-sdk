@@ -8,6 +8,7 @@
         :label="$t('reusable.from')"
         :v="v$.question.min"
         :model-value="question.min"
+        :disabled="readonly"
         required
         @update:model-value="updateQuestion({ path: 'min', value: $event })"
       />
@@ -15,6 +16,7 @@
         :label="$t('reusable.to')"
         :v="v$.question.max"
         :model-value="question.max"
+        :disabled="readonly"
         required
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
@@ -42,13 +44,14 @@ import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-import { computed, onMounted } from 'vue';
+import { computed, inject, onMounted } from 'vue';
 
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
+const readonly = inject<boolean>('readonly', false);
 
 defineProps({
 	mode: {
@@ -108,6 +111,7 @@ function updateAnswer(score) {
 }
 
 function updateQuestion({ path, value }) {
+	if (readonly) return;
 	questionModel.value = updateObject({
 		obj: questionModel.value,
 		path,

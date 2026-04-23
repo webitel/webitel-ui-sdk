@@ -26,7 +26,7 @@
         </p>
       </div>
       <wt-icon
-        v-if="!disableDragging && !first"
+        v-if="showMoveIcon"
         class="audit-form-question-read__drag-icon"
         icon="move"
       />
@@ -111,6 +111,9 @@ const isAnswer = computed(() => !isEmpty(answerModel.value));
 const showCriticalViolationIcon = computed(() => {
 	return props.question.criticalViolation === true;
 });
+const showMoveIcon = computed(
+	() => !props.disableDragging && !props.first && !readonly.value,
+);
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
 	if (readonly.value) return; // if ... then in preview mode
