@@ -108,7 +108,7 @@ const isSelfSide = computed<boolean>(
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
 
 const getClientUsername = computed<string>(() => {
-	if (isSelfSide.value) return isSelfSide?.value;
+	if (isSelfSide.value) return props?.agentName;
 
 	return props.username || props.message.member?.name;
 });
