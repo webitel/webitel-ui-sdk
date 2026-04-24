@@ -133,6 +133,9 @@ const WtTreeTable = defineAsyncComponent(
 const WtVidstackPlayer = defineAsyncComponent(
 	() => import('./wt-vidstack-player/wt-vidstack-player.vue'),
 );
+const WtCallMediaAction = defineAsyncComponent(
+	() => import('./wt-call-media-action/wt-call-media-action.vue'),
+);
 const WtChatEmoji = defineAsyncComponent(
 	() => import('./on-demand/wt-chat-emoji/wt-chat-emoji.vue'),
 );
@@ -248,6 +251,7 @@ const Components = {
 	WtDatetimeText,
 	WtScreenRecordingsAction,
 	WtInlineAddPanel,
+	WtCallMediaAction,
 };
 
 export {
@@ -333,6 +337,7 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
+	WtCallMediaAction,
 };
 
 export default Components;

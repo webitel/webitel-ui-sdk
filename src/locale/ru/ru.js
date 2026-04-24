@@ -52,6 +52,7 @@ export default {
 		delete: 'Удалить',
 		search: 'Поиск',
 		open: 'Открыть',
+		openInHistory: 'Открыть в History',
 		name: 'Название',
 		expand: 'Развернуть',
 		collapse: 'Свернуть',

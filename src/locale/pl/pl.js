@@ -56,6 +56,7 @@ export default {
 		delete: 'Usuń',
 		search: 'Szukaj',
 		open: 'Otwórz',
+		openInHistory: 'Otwórz w historii',
 		name: 'Nazwa',
 		expand: 'Rozwiń',
 		collapse: 'Zwiń',
