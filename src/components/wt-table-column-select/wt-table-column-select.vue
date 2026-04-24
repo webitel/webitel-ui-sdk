@@ -165,16 +165,12 @@ export default {
   text-align: center;
 }
 
-.wt-table-column-select__popup :deep(.wt-popup__popup) {
-	height: var(--popup-max-height);
-}
-
 .wt-table-column-select__popup-search {
 	margin-bottom: var(--spacing-xs);
 }
 
 .wt-table-column-select__popup-list-wrap {
-  max-height: 400px;
+  height: 400px;
 }
 
 .wt-table-column-select__popup-list {
