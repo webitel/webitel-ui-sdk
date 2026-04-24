@@ -58,7 +58,7 @@ function reset() {
 
 .wt-inline-add-panel__actions {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
   gap: var(--spacing-xs);
 }
