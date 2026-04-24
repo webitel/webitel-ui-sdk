@@ -30,6 +30,7 @@
         :hide-video-display-panel="props.hideVideoDisplayPanel"
         :title="props.title"
         :username="props.username"
+        :countdown-time-mode="props.countdownTimeMode"
         @close-player="emit('close')"
       >
         <template v-if="$slots['avatar']" #avatar>
@@ -67,6 +68,7 @@ interface Props {
 	title?: string;
 	username?: string;
 	closable?: boolean;
+	countdownTimeMode?: boolean;
 	static?: boolean;
 	stream?: MediaStream;
 	size?: ComponentSize;
@@ -85,6 +87,7 @@ const props = withDefaults(defineProps<Props>(), {
 	title: '',
 	username: '',
 	closable: false,
+	countdownTimeMode: false,
 	static: false,
 	hideControlsPanel: false,
 	videoObjectFit: 'contain',

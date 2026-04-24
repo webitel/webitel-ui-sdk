@@ -13,7 +13,10 @@
         />
       </slot>
 
-      <span class="video-display-panel__title">
+      <span
+        class="video-display-panel__title typo-body-2-bold"
+        :title="props.title || props.username"
+      >
         {{ props.title || props.username }}
       </span>
     </div>
@@ -123,8 +126,9 @@ onMounted(() => {
 });
 </script>
 
-<style  scoped>.video-display-panel {
-display: flex;
+<style  scoped>
+.video-display-panel {
+  display: flex;
   justify-content: space-between;
   padding: var(--p-player-headline-sm-padding);
   background: var(--p-player-head-line-background);
@@ -135,43 +139,42 @@ display: flex;
 }
 
 .video-display-panel .video-display-panel__head {
-font-family: 'Montserrat', monospace;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 24px;
-  text-transform: none;
-    display: flex;
-    align-items: center;
-    gap: var(--p-player-headline-sm-gap);
-    min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--p-player-headline-sm-gap);
+  min-width: 0;
 }
 
 .video-display-panel .video-display-panel__title {
-white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .video-display-panel .video-display-panel__controls {
-display: flex;
-    align-items: center;
-    gap: var(--p-player-headline-sm-gap);
+  display: flex;
+  align-items: center;
+  gap: var(--p-player-headline-sm-gap);
 }
 
 .video-display-panel .video-display-panel--sm {
-gap: var(--p-player-headline-sm-gap);
+  gap: var(--p-player-headline-sm-gap);
 }
 
 .video-display-panel .video-display-panel--md {
-padding: var(--p-player-headline-md-padding);
+  padding: var(--p-player-headline-md-padding);
+  gap: var(--p-player-headline-md-gap);
+
+  .video-display-panel__controls {
     gap: var(--p-player-headline-md-gap);
-
-    .video-display-panel__controls {
-      gap: var(--p-player-headline-md-gap);
+  }
 }
 
-  .video-display-panel--lg {
-gap: var(--p-player-headline-lg-gap);
+.video-display-panel--lg {
+  gap: var(--p-player-headline-lg-gap);
+  /* https://webitel.atlassian.net/browse/WTEL-9345 */
+  line-height: 24px;
 }
-}</style>
+
+</style>
