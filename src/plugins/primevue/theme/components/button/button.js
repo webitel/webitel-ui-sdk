@@ -180,6 +180,7 @@ const button = {
         }
         .p-button.p-button-outlined {
             background: transparent;
+            outline-offset: -1px;
         }
         .p-button--icon-${ComponentSize.XS} {
             padding: ${dt('button.icon.xs.padding')};
