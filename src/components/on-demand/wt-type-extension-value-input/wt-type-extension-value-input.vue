@@ -26,19 +26,19 @@
     v-else-if="field.kind === FieldType.Select"
     :name="FieldType.Select"
     :default-props="{
-        ...sharedChildrenProps,
-        ...selectProps,
-        value,
-      }"
+      ...sharedChildrenProps,
+      ...selectProps,
+      value,
+    }"
   >
-  <wt-select
-    v-bind="sharedChildrenProps"
-    :value="value"
-    :search-method="loadLookupList(field.lookup)"
-    track-by="id"
-    clearable
-    @input="selectElement"
-  />
+    <wt-select
+      v-bind="sharedChildrenProps"
+      :value="value"
+      :search-method="loadLookupList(field.lookup)"
+      track-by="id"
+      clearable
+      @input="selectElement"
+    />
   </slot>
   <slot
     v-else-if="field.kind === FieldType.Multiselect"
@@ -85,6 +85,7 @@ const model = defineModel<unknown>();
 
 const props = defineProps<{
 	field: WebitelProtoDataField;
+	label?: string;
 	required?: boolean;
 	/**
 	 * TODO: implement validation
@@ -95,11 +96,11 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const label = computed(() => {
-	return t(props.field?.name || 'vocabulary.labels');
+	return props.label || t(props.field?.name || 'vocabulary.labels');
 });
 
 const isRequired = computed(() => {
-	return props.required || props.field.required;
+	return props.required ?? props.field.required;
 });
 
 const value = computed(() => {
