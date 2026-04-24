@@ -264,6 +264,7 @@ export {
 	WtBreadcrumb,
 	WtButton,
 	WtButtonSelect,
+	WtCallMediaAction,
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
@@ -337,7 +338,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-	WtCallMediaAction,
 };
 
 export default Components;
