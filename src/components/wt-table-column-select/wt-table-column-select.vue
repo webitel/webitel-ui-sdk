@@ -27,6 +27,7 @@
 				</wt-input-text>
         <div class="wt-table-column-select__popup-list-wrap">
           <ul
+						v-if="changeableDraft.length"
             :class="{
               'wt-table-column-select__popup-list--md':
                 changeableDraft.length > 10 && changeableDraft.length <= 20,
@@ -48,6 +49,11 @@
               />
             </li>
           </ul>
+					<wt-empty 
+						v-else
+						:image="darkMode ? EmptyImageDark : EmptyImageLight"
+						:title="$t('webitelUI.empty.text.filters')"
+					/>
         </div>
       </template>
       <template #actions>
@@ -65,98 +71,92 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import deepCopy from 'deep-copy';
+import { computed, inject, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-export default {
-	name: 'WtTableColumnSelect',
+import EmptyImageDark from './_internals/assets/empty-dark.svg';
+import EmptyImageLight from './_internals/assets/empty-light.svg';
 
-	model: {
-		prop: 'headers',
-		event: 'change',
-	},
-	/**
-	 * @emits {Array} change - Fires when headers are changed. Emits mutated headers
-	 */
-	props: {
-		/**
-		 * Each header should have following schema: { value: String, show: Boolean, text: String }
-		 * @type {Array}
-		 * @required
-		 * @model headers
-		 */
-		headers: {
-			type: Array,
-			required: true,
-			description:
-				'Each header should have following schema: { value: String, show: Boolean, text: String }',
-		},
-		/**
-		 * Header values to exclude from selection
-		 * @type {Array}
-		 * @default []
-		 */
-		staticHeaders: {
-			type: Array,
-			default: () => [],
-			description: 'Header values to exclude from selection',
-		},
-	},
-	emits: [
-		'change',
-	],
-	data: () => ({
-		draft: [], // headers draft
-		search: '',
-		isColumnSelectPopup: false,
-	}),
-	computed: {
-		changeableDraft() {
-			return this.draft
-				.filter(
-					(header) =>
-						!this.staticHeaders.includes(header.value) &&
-						this.shownColLabel(header)
-							?.toLowerCase()
-							.includes(this.search?.toLowerCase()),
-				)
-				.sort((a, b) => {
-					return this.shownColLabel(a)?.localeCompare(this.shownColLabel(b));
-					// sorting headers for alphabet just in popup
-				});
-		},
-	},
+interface Header {
+	value: string;
+	show: boolean;
+	text?: string;
+	locale?: string | string[];
+}
 
-	watch: {
-		isColumnSelectPopup: {
-			handler() {
-				this.fillHeadersDraft();
-			},
-		},
+const props = withDefaults(
+	defineProps<{
+		headers: Header[];
+		staticHeaders?: string[];
+	}>(),
+	{
+		staticHeaders: () => [],
 	},
-	methods: {
-		shownColLabel({ text, locale }) {
-			if (!text && locale)
-				return typeof locale === 'string'
-					? this.$t(locale)
-					: this.$t(...locale);
-			return text;
-		},
-		openPopup() {
-			this.isColumnSelectPopup = true;
-		},
-		close() {
-			this.isColumnSelectPopup = false;
-		},
-		fillHeadersDraft() {
-			this.draft = deepCopy(this.headers);
-		},
-		setShownColumns() {
-			this.$emit('change', this.draft);
-			this.close();
-		},
-	},
-};
+);
+
+const emit = defineEmits<{
+	change: [
+		headers: Header[],
+	];
+}>();
+
+const { t } = useI18n();
+
+const darkMode = inject('darkMode');
+
+const draft = ref<Header[]>([]);
+const search = ref('');
+const isColumnSelectPopup = ref(false);
+
+function shownColLabel({ text, locale }: Header): string | undefined {
+	if (!text && locale)
+		return typeof locale === 'string'
+			? t(locale)
+			: t(
+					...(locale as [
+						string,
+						...unknown[],
+					]),
+				);
+	return text;
+}
+
+const changeableDraft = computed(() =>
+	draft.value
+		.filter(
+			(header) =>
+				!props.staticHeaders.includes(header.value) &&
+				shownColLabel(header)
+					?.toLowerCase()
+					.includes(search.value?.toLowerCase()),
+		)
+		.sort(
+			(a, b) => shownColLabel(a)?.localeCompare(shownColLabel(b) ?? '') ?? 0,
+		),
+);
+
+function fillHeadersDraft() {
+	draft.value = deepCopy(props.headers);
+}
+
+function openPopup() {
+	isColumnSelectPopup.value = true;
+}
+
+function close() {
+	isColumnSelectPopup.value = false;
+}
+
+function setShownColumns() {
+	emit('change', draft.value);
+	close();
+}
+
+watch(isColumnSelectPopup, () => {
+	fillHeadersDraft();
+});
 </script>
 
 <style scoped>
@@ -171,6 +171,7 @@ export default {
 
 .wt-table-column-select__popup-list-wrap {
   height: 400px;
+	display: flex;
 }
 
 .wt-table-column-select__popup-list {
