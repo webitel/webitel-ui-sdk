@@ -26,10 +26,10 @@
 </template>
 
 <script setup>
+import { WtButton } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
-import { WtButton } from '@webitel/ui-sdk/components';
 
 import { eventBus } from '../../../scripts';
 
