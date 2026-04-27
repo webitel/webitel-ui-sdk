@@ -7,6 +7,7 @@
       v-if="isVideo"
       :size="ComponentSize.SM"
       :src="mediaSrc"
+      :title="file.name"
       static
       hide-expand
       stretch

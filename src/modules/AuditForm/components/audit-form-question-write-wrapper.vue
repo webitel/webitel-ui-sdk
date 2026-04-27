@@ -3,13 +3,14 @@
     <header class="audit-form-question-write-header">
       <div class="audit-form-question-write-header__switchers">
         <wt-switcher
-          :disabled="first"
+          :disabled="isQuestionActionDisabled"
           :label="t('reusable.required')"
           :model-value="question.required"
           @update:model-value="updateQuestion({ path: 'required', value: $event })"
         />
         <wt-switcher
           v-if="question.type === EngineAuditQuestionType.QuestionYes"
+          :disabled="readonly"
           :label="t('webitelUI.auditForm.criticalViolation')"
           :model-value="question.criticalViolation || false"
           @update:model-value="updateQuestion({ path: 'criticalViolation', value: $event })"
@@ -18,13 +19,14 @@
       <div class="audit-form-question-write-header__actions">
         <wt-icon-btn
           v-tooltip="t('reusable.copy')"
+          :disabled="readonly"
           icon="copy"
           @click="emit('copy')"
         />
 
         <wt-icon-btn
           v-tooltip="t('reusable.delete')"
-          :disabled="first"
+          :disabled="isQuestionActionDisabled"
           icon="bucket"
           @click="emit('delete')"
         />
@@ -36,6 +38,7 @@
           :label="t('webitelUI.auditForm.question')"
           :v="v.question.question"
           :model-value="question.question"
+          :disabled="readonly"
           prevent-trim
           required
           @update:model-value="updateQuestion({ path: 'question', value: $event })"
@@ -45,6 +48,7 @@
           :label="t('webitelUI.auditForm.answerType')"
           :options="QuestionType"
           :value="prettifiedQuestionType"
+          :disabled="readonly"
           track-by="value"
           @input="handleQuestionTypeChange($event.value)"
         />
@@ -53,6 +57,7 @@
         :is="QuestionTypeComponent"
         v-model:question="questionModel"
         mode="write"
+        :readonly="readonly"
       />
     </section>
   </article>
@@ -61,7 +66,7 @@
 <script lang="ts" setup>
 import type { EngineQuestion } from '@webitel/api-services/gen/models';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
@@ -77,8 +82,9 @@ import AuditFormQuestionScore from './form-questions/score/audit-form-question-s
 import AuditFormQuestionYes from './form-questions/yes/audit-form-question-yes.vue';
 
 const questionModel = defineModel<EngineQuestion>('question');
+const readonly = inject<boolean>('readonly', false);
 
-defineProps({
+const props = defineProps({
 	first: {
 		type: Boolean,
 		default: false,
@@ -113,6 +119,7 @@ const QuestionType = [
 const prettifiedQuestionType = computed(() =>
 	QuestionType.find(({ value }) => value === questionModel.value.type),
 );
+const isQuestionActionDisabled = computed(() => props.first || readonly);
 
 const QuestionTypeComponent = computed(() => {
 	if (questionModel.value.type === EngineAuditQuestionType.QuestionOption)
@@ -125,6 +132,7 @@ const QuestionTypeComponent = computed(() => {
 });
 
 function updateQuestion({ path, value }) {
+	if (readonly) return;
 	questionModel.value = updateObject({
 		obj: questionModel.value,
 		path,
@@ -133,6 +141,7 @@ function updateQuestion({ path, value }) {
 }
 
 function handleQuestionTypeChange(type) {
+	if (readonly) return;
 	const commonFields = {
 		question: questionModel.value.question,
 		required: questionModel.value.required,

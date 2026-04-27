@@ -40,7 +40,7 @@ import QuestionRead from './audit-form-question-read-wrapper.vue';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
 const mode = inject('mode');
-const readonly = inject('readonly');
+const readonly = inject<boolean>('readonly', false);
 
 const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
@@ -107,11 +107,11 @@ const v$ = useVuelidate(
 );
 
 const component = computed(() => {
-	if (readonly) return QuestionRead;
 	if (mode === 'create') {
 		if (state.value === QuestionState.SAVED) return QuestionRead;
 		return QuestionWrite;
 	}
+	if (readonly) return QuestionRead;
 	return QuestionRead;
 });
 

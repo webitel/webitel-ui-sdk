@@ -20,7 +20,7 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Filter by specific thread IDs.'),
-	kinds: zod
+	types: zod
 		.array(
 			zod.enum([
 				'UNKNOWN',
@@ -557,11 +557,15 @@ export const ThreadManagementAddMemberParams = zod.object({
 	thread_id: zod.string(),
 });
 
-export const threadManagementAddMemberQueryRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementAddMemberBodyRoleDefault = `ROLE_UNSPECIFIED`;
 
-export const ThreadManagementAddMemberQueryParams = zod.object({
-	contactSub: zod.string().optional(),
-	contactIss: zod.string().optional(),
+export const ThreadManagementAddMemberBody = zod.object({
+	contact: zod
+		.object({
+			iss: zod.string().optional(),
+			sub: zod.string().optional(),
+		})
+		.optional(),
 	role: zod
 		.enum([
 			'ROLE_UNSPECIFIED',
@@ -570,7 +574,7 @@ export const ThreadManagementAddMemberQueryParams = zod.object({
 			'ROLE_OWNER',
 			'ROLE_SUPERVISOR',
 		])
-		.default(threadManagementAddMemberQueryRoleDefault),
+		.default(threadManagementAddMemberBodyRoleDefault),
 });
 
 export const threadManagementAddMemberResponseMemberRoleDefault = `ROLE_UNSPECIFIED`;

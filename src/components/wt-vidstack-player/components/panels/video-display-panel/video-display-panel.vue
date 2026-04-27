@@ -27,8 +27,7 @@
       />
       <toggle-button
         v-if="!props.hideExpand"
-        primary-icon="expand"
-        secondary-icon="collapse"
+        :icon="toggleIcon"
         color="on-dark"
         @toggle="handlePlayerSize"
       />
@@ -44,6 +43,7 @@
 
 <script setup lang="ts">
 import {
+	computed,
 	defineEmits,
 	defineProps,
 	inject,
@@ -60,6 +60,10 @@ import ToggleButton from '../../toggle-button.vue';
 
 const { size, fullscreen, changeSize } =
 	inject<WtVidstackPlayerSizeProvider>('size');
+
+const toggleIcon = computed(() =>
+	size.value === ComponentSize.SM ? 'expand' : 'collapse',
+);
 
 const props = defineProps<{
 	title?: string;
