@@ -4,9 +4,11 @@
     class="wt-chat-emoji"
   >
     <wt-button
+      :variant="buttonVariant"
       :size="size"
       color="secondary"
       icon="chat-emoji"
+      :rounded="buttonRounded"
       wide
       @click="togglePicker"
     />
@@ -36,6 +38,14 @@ const props = defineProps({
 		type: String,
 		default: ComponentSize.MD,
 	},
+	filledButton: {
+		type: Boolean,
+		default: false,
+	},
+	buttonRounded: {
+		type: Boolean,
+		default: false,
+	},
 	/**
 	 * @author HlukhovYe
 	 * teleport popup to specific element, pass selector
@@ -57,6 +67,9 @@ const picker = ref(null);
 
 // Teleport's to prop is required even if it's disabled
 const teleportValue = computed(() => props.popupTeleportTo || 'body');
+const buttonVariant = computed(() =>
+	props.filledButton || isOpened.value ? 'active' : 'outlined',
+);
 
 const initPicker = async () => {
 	if (picker.value) return;
