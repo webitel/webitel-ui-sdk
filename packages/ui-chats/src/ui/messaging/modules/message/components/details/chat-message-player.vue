@@ -20,7 +20,7 @@
       :closable="false"
       hide-volume-slider
       hide-mute-button
-      class="chat-message-player__player"
+      class="chat-message-player__audio"
       @initialized="handlePlayerInitialize"
     />
   </div>
@@ -68,5 +68,8 @@ function handlePlayerInitialize(player) {
   max-width: var(--chat-file-max-width);
 }
 
+.chat-message-player__audio {
+  min-width: var(--chat-file-min-width);
+}
 
 </style>
