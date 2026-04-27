@@ -8,13 +8,13 @@
 		<template #activator="{ toggle }">
 			<wt-icon-btn
 				v-if="recordingFiles.length"
-				:icon="isAnyFilePlaying ? 'stop' : activatorIcon"
+				:icon="isOwnFilePlaying ? 'stop' : activatorIcon"
 				@click="toggle"
 			/>
 		</template>
 		<template #option="{ text, id, icon: optionIcon }">
 			<div class="wt-call-media-action__option">
-				<wt-icon :icon="id === currentlyPlaying ? 'stop' : optionIcon" />
+				<wt-icon :icon="id === playingFileId ? 'stop' : optionIcon" />
 				{{ text }}
 			</div>
 		</template>
@@ -30,11 +30,11 @@ import { computed } from 'vue';
 
 interface Props {
 	files: Partial<Record<EngineCallFileType, EngineCallFile[]>>;
-	currentlyPlaying?: string;
+	playingFileId?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	currentlyPlaying: '',
+	playingFileId: '',
 });
 
 const emit = defineEmits<{
@@ -53,8 +53,8 @@ const activatorIcon = computed(() =>
 	props.files[EngineCallFileType.FileTypeVideo] ? 'preview-tag-video' : 'play',
 );
 
-const isAnyFilePlaying = computed(() =>
-	recordingFiles.value.some((file) => file.id === props.currentlyPlaying),
+const isOwnFilePlaying = computed(() =>
+	recordingFiles.value.some((file) => file.id === props.playingFileId),
 );
 
 const contextOptions = computed(() =>
@@ -68,7 +68,7 @@ const contextOptions = computed(() =>
 );
 
 const handleOptionSelect = ({ option }: { option: EngineCallFile }) => {
-	if (props.currentlyPlaying === option.id) {
+	if (props.playingFileId === option.id) {
 		emit('stop');
 	} else {
 		emit('play', option);

@@ -134,7 +134,7 @@ const WtVidstackPlayer = defineAsyncComponent(
 	() => import('./wt-vidstack-player/wt-vidstack-player.vue'),
 );
 const WtCallMediaAction = defineAsyncComponent(
-	() => import('./wt-call-media-action/wt-call-media-action.vue'),
+	() => import('./on-demand/wt-call-media-action/wt-call-media-action.vue'),
 );
 const WtChatEmoji = defineAsyncComponent(
 	() => import('./on-demand/wt-chat-emoji/wt-chat-emoji.vue'),
