@@ -24,6 +24,13 @@
 							icon="search"
 						/>
 					</template>
+					<template #suffix>
+						<wt-icon-btn 
+							v-if="search"
+							icon="close--filled"
+							@click="search = ''"
+						/>
+					</template>
 				</wt-input-text>
         <div class="wt-table-column-select__popup-list-wrap">
           <ul
@@ -52,7 +59,7 @@
 					<wt-empty 
 						v-else
 						:image="darkMode ? EmptyImageDark : EmptyImageLight"
-						:title="$t('webitelUI.empty.text.filters')"
+						:text="$t('webitelUI.empty.text.filters')"
 					/>
         </div>
       </template>
