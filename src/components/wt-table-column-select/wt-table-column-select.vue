@@ -16,6 +16,7 @@
       </template>
       <template #main>
 				<wt-input-text
+					v-if="enableSearch"
 					class="wt-table-column-select__popup-search"
 					v-model:model-value="search"
 				>
@@ -97,9 +98,11 @@ const props = withDefaults(
 	defineProps<{
 		headers: Header[];
 		staticHeaders?: string[];
+		enableSearch?: boolean;
 	}>(),
 	{
 		staticHeaders: () => [],
+		enableSearch: false,
 	},
 );
 
