@@ -4,15 +4,15 @@
     class="wt-chat-emoji"
   >
     <wt-button
-      :variant="isOpened ? 'active' : 'outlined'"
       :size="size"
+      :variant="buttonVariant"
       color="secondary"
       icon="chat-emoji"
-      rounded
+      :rounded="rounded"
       wide
       @click="togglePicker"
     />
-		<teleport 
+		<teleport
 			:disabled="!popupTeleportTo"
 		 	:to="teleportValue"
 		>
@@ -26,10 +26,10 @@
 </template>
 
 <script setup>
+import { WtButton } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
-
 import { eventBus } from '../../../scripts';
 
 const props = defineProps({
@@ -46,6 +46,14 @@ const props = defineProps({
 		type: String,
 		default: '',
 	},
+	filled: {
+		type: Boolean,
+		default: false,
+	},
+	rounded: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const emit = defineEmits([
@@ -58,6 +66,9 @@ const picker = ref(null);
 
 // Teleport's to prop is required even if it's disabled
 const teleportValue = computed(() => props.popupTeleportTo || 'body');
+const buttonVariant = computed(() =>
+	props.filled || isOpened.value ? 'active' : 'outlined',
+);
 
 const initPicker = async () => {
 	if (picker.value) return;
