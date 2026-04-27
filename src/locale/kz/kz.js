@@ -56,6 +56,7 @@ export default {
 		delete: 'Жою',
 		search: 'Іздеу',
 		open: 'Ашу',
+		openInHistory: 'Тарихта ашу',
 		name: 'Атау',
 		expand: 'Кеңейту',
 		collapse: 'Жігу',
