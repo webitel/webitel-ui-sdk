@@ -7,6 +7,7 @@
     :static="props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
+    :mirror-video="!showSenderScreen"
     autoplay
     class="video-call"
     hide-background
@@ -95,6 +96,7 @@
             class="video-call-sender"
             hide-controls-panel
             hide-video-display-panel
+            mirror-video
             static
           />
         </template>
