@@ -133,7 +133,8 @@ const { normalizedSrcObject } = useVidstackSrc({
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
 
-	(ev.target as HTMLMediaElement)?.play();
+	const p = (ev.target as HTMLMediaElement)?.play();
+	if (p && typeof p.catch === 'function') p.catch(() => {});
 };
 </script>
 

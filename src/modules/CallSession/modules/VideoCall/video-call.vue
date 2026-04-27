@@ -29,6 +29,24 @@
     <template #content="{ size: innerSize }">
       <slot :size="innerSize" name="content" />
 
+      <button
+        v-if="isPiPSupported && !isPiP"
+        class="video-call-pip-test"
+        type="button"
+        @click="onPiPTestClick"
+      >
+        Open PiP (debug)
+      </button>
+
+      <button
+        v-if="isPiP"
+        class="video-call-pip-resume"
+        type="button"
+        @click="resumePlayback"
+      >
+        <wt-icon icon="play--filled" size="md" color="on-dark" />
+      </button>
+
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
           <div
@@ -135,7 +153,7 @@
         @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
         @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
         @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
-        @[VideoCallAction.Pip]="togglePiP"
+      
       />
     </template>
   </wt-vidstack-player>
@@ -146,7 +164,7 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useDocumentPiP } from './composables/useDocumentPiP';
@@ -264,23 +282,25 @@ const { t } = useI18n();
 
 const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
 
+const getPlayerEl = (): HTMLElement | null | undefined => {
+	const inst = playerRef.value as unknown as {
+		rootEl?: HTMLElement | null;
+		$el?: HTMLElement | null;
+	} | null;
+	return inst?.rootEl ?? inst?.$el ?? null;
+};
+
 const {
 	isPiP,
 	isSupported: isPiPSupported,
-	enterPiP,
 	togglePiP,
-	exitPiP,
-} = useDocumentPiP(() => (playerRef.value as any)?.$el ?? null);
+	resumePlayback,
+} = useDocumentPiP(getPlayerEl);
 
-watch(
-	() => (playerRef.value as any)?.$el as HTMLElement | undefined,
-	(el) => {
-		if (el && isPiPSupported.value) void enterPiP();
-	},
-	{
-		once: true,
-	},
-);
+const onPiPTestClick = (ev: MouseEvent) => {
+	console.log('[PiP] test button click reached handler', ev);
+	togglePiP();
+};
 
 const effectiveActions = computed(() =>
 	isPiPSupported.value
@@ -449,6 +469,50 @@ const senderVideoMutedIconSizes = {
 }
 
 .video-call-pip-return:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.video-call-pip-test {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 99999;
+  padding: 12px 20px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: #e91e63;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.video-call-pip-test:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.video-call-pip-resume {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--wt-color-on-dark);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.video-call-pip-resume:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
