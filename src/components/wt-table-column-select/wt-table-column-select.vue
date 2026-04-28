@@ -33,7 +33,10 @@
 						/>
 					</template>
 				</wt-input-text>
-        <div class="wt-table-column-select__popup-list-wrap">
+        <div 
+					class="wt-table-column-select__popup-list-wrap"
+					:class="{'wt-table-column-select__popup-list-wrap__height-fixed': enableSearch}"
+				>
           <ul
 						v-if="changeableDraft.length"
             :class="{
@@ -180,8 +183,12 @@ watch(isColumnSelectPopup, () => {
 }
 
 .wt-table-column-select__popup-list-wrap {
-  height: 400px;
+  max-height: 400px;
 	display: flex;
+}
+
+.wt-table-column-select__popup-list-wrap__height-fixed {
+	height: 400px;
 }
 
 .wt-table-column-select__popup-list {
