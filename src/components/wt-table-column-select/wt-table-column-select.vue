@@ -184,7 +184,6 @@ watch(isColumnSelectPopup, () => {
 
 .wt-table-column-select__popup-list-wrap {
   max-height: 400px;
-	display: flex;
 }
 
 .wt-table-column-select__popup-list-wrap__height-fixed {
