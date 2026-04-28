@@ -21,7 +21,8 @@
 		"utils:link": "npm link",
 		"utils:update-node": "nvm install --lts && nvm alias default node",
 		"utils:i": "npm install",
-		"prepare": "husky || true"
+		"prepare": "husky || true",
+		"test:unit:ci": "npm run test:coverage"
 	},
 	"workspaces": [
 		"./packages/api-services",
