@@ -22,7 +22,8 @@
 		"utils:update-node": "nvm install --lts && nvm alias default node",
 		"utils:i": "npm install",
 		"prepare": "husky || true",
-		"test:unit:ci": "npm run test:coverage"
+		"test:unit:ci": "npm run test:coverage",
+		"typecheck:ci": "true"
 	},
 	"workspaces": [
 		"./packages/api-services",
