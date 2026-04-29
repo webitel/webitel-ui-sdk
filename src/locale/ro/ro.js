@@ -242,6 +242,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway Chat Personalizat',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Răspuns rapid | Răspunsuri rapide',

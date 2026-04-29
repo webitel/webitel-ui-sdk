@@ -237,6 +237,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Chat web',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway de chat personalizado',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Respuesta rápida | Respuestas rápidas',

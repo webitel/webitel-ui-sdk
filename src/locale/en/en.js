@@ -245,6 +245,7 @@ export default deepmerge(
 				[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 				[ChatGatewayProvider.INFOBIP]: 'Infobip',
 				[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+				[ChatGatewayProvider.PORTAL]: 'Portal',
 			},
 			quickReplies: {
 				quickReplies: 'Quick reply | Quick replies',

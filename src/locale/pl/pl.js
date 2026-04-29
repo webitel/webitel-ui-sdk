@@ -242,6 +242,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Czat webowy',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Niestandardowa bramka czatu',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
