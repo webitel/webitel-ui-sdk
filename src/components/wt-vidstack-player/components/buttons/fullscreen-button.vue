@@ -1,8 +1,8 @@
 <template>
-  <media-fullscreen-button
+  <div
     class="fullscreen-button"
-    @media-enter-fullscreen-request="emit('toggle', true)"
-    @media-exit-fullscreen-request="emit('toggle', false)"
+    :class="{ 'fullscreen-button--active': fullscreen }"
+    @click="emit('toggle', !fullscreen)"
   >
     <wt-icon-btn
       icon="player-enter-fullscreen"
@@ -14,13 +14,16 @@
       color="on-dark"
       class="fullscreen-button__exit"
     />
-  </media-fullscreen-button>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue';
+import { inject } from 'vue';
 
+import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
 import WtIconBtn from '../../../wt-icon-btn/wt-icon-btn.vue';
+
+const { fullscreen } = inject<WtVidstackPlayerSizeProvider>('size');
 
 const emit = defineEmits<{
 	toggle: [
@@ -29,7 +32,15 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style scoped>.fullscreen-button[data-active] .fullscreen-button__enter,
-.fullscreen-button:not([data-active]) .fullscreen-button__exit {
-display: none;
-}</style>
+<style scoped>
+.fullscreen-button {
+  display: inline-flex;
+  padding: 0;
+  cursor: pointer;
+}
+
+.fullscreen-button--active .fullscreen-button__enter,
+.fullscreen-button:not(.fullscreen-button--active) .fullscreen-button__exit {
+  display: none;
+}
+</style>
