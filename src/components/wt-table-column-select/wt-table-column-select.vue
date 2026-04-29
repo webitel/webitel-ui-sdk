@@ -51,7 +51,6 @@
               v-for="(column, key) of changeableDraft"
               :key="key"
               class="wt-table-column-select__popup-item"
-              @click.capture.prevent="column.show = !column.show"
             >
               <wt-checkbox
                 :label="shownColLabel(column)"
