@@ -241,6 +241,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Жылдам жауап | Жылдам жауаптар',

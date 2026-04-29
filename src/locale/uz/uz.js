@@ -241,6 +241,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Veb chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Maxsus chat shlyuzi',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Tezkor javob | Tezkor javoblar',
