@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="root"
     :class="rootClasses"
     class="wt-vidstack-player"
   >
@@ -48,7 +49,7 @@
 import 'vidstack/player';
 import 'vidstack/player/ui';
 import type { MediaSrc } from 'vidstack';
-import { computed, provide, ref, toRefs } from 'vue';
+import { computed, provide, ref, toRefs, useTemplateRef } from 'vue';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
@@ -96,12 +97,17 @@ const emit = defineEmits<{
 }>();
 
 // const player = useTemplateRef<MediaPlayerElement>('player');
+const rootEl = useTemplateRef<HTMLElement>('root');
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 
 const changeSize = (value) => {
 	size.value = value;
 	emit('change-size', value);
+};
+
+const enterFullscreen = () => {
+	rootEl.value?.requestFullscreen();
 };
 
 /** @author liza-pohranichna
@@ -111,6 +117,7 @@ provide('size', {
 	size,
 	fullscreen,
 	changeSize,
+	enterFullscreen,
 });
 
 const { src: srcRef, mime: typeRef, stream: streamRef } = toRefs(props);
@@ -265,6 +272,7 @@ const onCanPlay = (ev: Event) => {
 .wt-vidstack-player--lg .wt-vidstack-player__player {
   display: flex;
   align-items: center;
+  min-height: 100%;
 }
 
 .wt-vidstack-player--lg .wt-vidstack-player__provider {
@@ -273,6 +281,10 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--fullscreen {
+  border-radius: 0;
+}
+
+.wt-vidstack-player--fullscreen .wt-vidstack-player__provider :deep(video) {
   border-radius: 0;
 }
 

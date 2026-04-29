@@ -58,7 +58,7 @@ import type { WtVidstackPlayerSizeProvider } from '../../../types/WtVidstackPlay
 import FullscreenButton from '../../buttons/fullscreen-button.vue';
 import ToggleButton from '../../toggle-button.vue';
 
-const { size, fullscreen, changeSize } =
+const { size, fullscreen, changeSize, enterFullscreen } =
 	inject<WtVidstackPlayerSizeProvider>('size');
 
 const toggleIcon = computed(() =>
@@ -81,6 +81,7 @@ const handleFullscreen = (value: boolean) => {
 		if (size.value !== ComponentSize.LG) {
 			fullscreen.value = true;
 			changeSize(ComponentSize.LG);
+			enterFullscreen();
 		}
 	} else if (size.value === ComponentSize.LG) {
 		exitFullscreen();
