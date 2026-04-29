@@ -1,13 +1,7 @@
 <template>
   <div
-    :class="[
-      `wt-vidstack-player--${size}`,
-      `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
-      fullscreen && `wt-vidstack-player--fullscreen`,
-      stretch && `wt-vidstack-player--stretch`,
-      props.static && 'wt-vidstack-player--static',
-      props.hideBackground && 'wt-vidstack-player--hide-background'
-    ]" class="wt-vidstack-player"
+    :class="rootClasses"
+    class="wt-vidstack-player"
   >
     <media-player
       ref="player"
@@ -78,6 +72,7 @@ interface Props {
 	hideExpand?: boolean;
 	stretch?: boolean;
 	videoObjectFit?: 'cover' | 'contain';
+	mirrorVideo?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -125,6 +120,16 @@ const { normalizedSrcObject } = useVidstackSrc({
 	type: typeRef,
 	stream: streamRef,
 });
+
+const rootClasses = computed(() => [
+	`wt-vidstack-player--${size.value}`,
+	`wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
+	props.mirrorVideo && 'wt-vidstack-player--mirror-video',
+	fullscreen.value && 'wt-vidstack-player--fullscreen',
+	props.stretch && 'wt-vidstack-player--stretch',
+	props.static && 'wt-vidstack-player--static',
+	props.hideBackground && 'wt-vidstack-player--hide-background',
+]);
 
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
@@ -320,6 +325,10 @@ const onCanPlay = (ev: Event) => {
 
 .wt-vidstack-player-video-object-fit--contain :deep(video) {
   object-fit: contain;
+}
+
+.wt-vidstack-player--mirror-video :deep(video) {
+  transform: scaleX(-1);
 }
 
 /*
