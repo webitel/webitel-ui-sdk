@@ -19,9 +19,8 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-
-import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
 import WtIconBtn from '../../../wt-icon-btn/wt-icon-btn.vue';
+import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
 
 const { fullscreen } = inject<WtVidstackPlayerSizeProvider>('size');
 
