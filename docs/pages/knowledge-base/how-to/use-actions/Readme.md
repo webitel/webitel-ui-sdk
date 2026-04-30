@@ -15,7 +15,7 @@ Action виконує наступні дії:
 ---
 
 ### [Update lib](https://github.com/webitel/client/blob/main/.github/workflows/libs.update.yml)
-Оновлює `webitel/ui-sdk` чи обраний пакет до останньої версії і робить коміт з оновленим `package-lock.json`.
+Оновлює обраний `@webitel/` пакет до останньої версії і робить коміт з оновленим `package-lock.json`.
 
 **Параметри:**
 - `package` — вибрати бібліотеку зі списку
