@@ -215,6 +215,7 @@
 </template>
 
 <script lang="ts" setup>
+import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import type { DataTableProps } from 'primevue';
 import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import {
@@ -227,7 +228,6 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 
 import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
