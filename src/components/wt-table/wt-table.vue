@@ -9,6 +9,7 @@
     :row-style="rowStyle"
     :show-headers="!headless"
     :value="data"
+    :sort-field="sortField"
     :data-key="props.dataKey"
     class="wt-table"
     column-resize-mode="expand"
@@ -226,6 +227,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 
 import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
@@ -403,6 +405,18 @@ const isTableFooter = computed(() => {
 
 const isAllSelected = computed(() => {
 	return _selected.value.length === props.data.length && props.data.length > 0;
+});
+
+/*
+ * @author @Lera24
+ * [WTEL-9194] https://webitel.atlassian.net/browse/WTEL-9192
+ * save sorted the value field to apply it after reload
+ * */
+const sortField = computed(() => {
+	const sortedCol = props.headers.find(
+		(h) => h.sort === SortSymbols.ASC || h.sort === SortSymbols.DESC,
+	);
+	return sortedCol?.field ?? null;
 });
 
 const sort = ({ sortField }) => {
