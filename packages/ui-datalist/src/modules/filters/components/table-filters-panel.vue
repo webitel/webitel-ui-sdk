@@ -188,13 +188,16 @@ Clear filters button should be active only if filters are defined in the table-f
 **/
 
 const listSelectedFilters = computed(() => {
-	const filterOptionsKeys = props.filterOptions.map((filter) =>
-		typeof filter === 'string' ? filter : filter.name,
-	);
+	const allowedKeys = new Set([
+		...props.filterOptions.map((filter) =>
+			typeof filter === 'string' ? filter : filter.name,
+		),
+		...(props.filterableExtensionFields ?? []).map((filter) => filter.id),
+	]);
 	return new Map(
 		[
 			...props.filtersManager.filters,
-		].filter(([key]) => filterOptionsKeys.includes(key)),
+		].filter(([key]) => allowedKeys.has(key)),
 	);
 });
 
