@@ -13,7 +13,7 @@
         v-if="props.next"
         :next="props.next"
         :loading="props.isLoading"
-        @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
+        @[ChatAction.LoadNextMessages]="handleLoadNextMessages"
       />
       <chat-message
         v-for="(message, index) of props.messages"
@@ -94,12 +94,18 @@ const {
 	showScrollToBottomBtn,
 	newUnseenMessagesCount,
 	scrollToBottom,
+	loadNextMessages,
 	handleChatScroll,
 	handleChatResize,
 } = useChatScroll(
 	messagesContainer,
 	computed(() => props.messages), // props values reactivity https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3 @author ye.pohranichna
+	computed(() => props.isLoading),
 );
+
+function handleLoadNextMessages() {
+	loadNextMessages(props.next, () => emit(ChatAction.LoadNextMessages));
+}
 
 function focusOnInput() {
 	uiChatsEmitter?.on('focusOnTextField', focus);

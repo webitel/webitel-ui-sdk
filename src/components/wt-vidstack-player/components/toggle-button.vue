@@ -1,52 +1,31 @@
 <template>
-  <media-toggle-button
-    ref="toggleButton"
+  <div
     class="toggle-button"
-    :disabled="props.disabled"
     @click="setToggleState"
   >
     <wt-icon-btn
-      :icon="props.primaryIcon"
+      :icon="props.icon"
       :color="props.color"
       :disabled="props.disabled"
-      class="toggle-button__primary"
     />
-    <wt-icon-btn
-      :icon="props.secondaryIcon"
-      :color="props.color"
-      :disabled="props.disabled"
-      class="toggle-button__secondary"
-    />
-  </media-toggle-button>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, type Ref, useTemplateRef } from 'vue';
-
 import WtIconBtn from '../../wt-icon-btn/wt-icon-btn.vue';
 
 const props = defineProps<{
-	primaryIcon: string;
-	secondaryIcon: string;
+	icon: string;
 	color?: string;
 	disabled?: boolean;
 }>();
 
-const toggleButton = useTemplateRef('toggleButton') as Ref<HTMLElement>;
-
 const emit = defineEmits<{
-	toggle: [
-		value: boolean,
-	];
+	toggle: [];
 }>();
 
 const setToggleState = () => {
 	if (props.disabled) return;
-	emit('toggle', toggleButton.value.pressed);
+	emit('toggle');
 };
 </script>
-
-<style  scoped>.toggle-button[data-pressed] .toggle-button__primary,
-.toggle-button:not([data-pressed]) .toggle-button__secondary {
-display: none;
-}</style>

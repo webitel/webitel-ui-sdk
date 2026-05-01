@@ -6,4 +6,5 @@ export interface WtVidstackPlayerSizeProvider {
 	size: Ref<ComponentSize>;
 	fullscreen: Ref<boolean>;
 	changeSize: (value: ComponentSize) => void;
+	enterFullscreen: () => void;
 }

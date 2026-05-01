@@ -316,6 +316,7 @@ const fieldsToSend = [
 	'timezones',
 	'groups',
 	'custom',
+	'emails',
 ];
 
 const sanitizeManagers = (itemInstance) => {

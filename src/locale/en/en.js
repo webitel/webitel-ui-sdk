@@ -59,6 +59,7 @@ export default deepmerge(
 			delete: 'Delete',
 			search: 'Search',
 			open: 'Open',
+			openInHistory: 'Open in History',
 			name: 'Name',
 			expand: 'Expand',
 			collapse: 'Collapse',

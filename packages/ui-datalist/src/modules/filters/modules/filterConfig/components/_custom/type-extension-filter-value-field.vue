@@ -3,6 +3,7 @@
     v-bind="attrs"
     v-model:model-value="model"
     :field="props.filterConfig.field"
+    :required="false"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
       <has-option-filter-value-field v-model:model-value="model" />

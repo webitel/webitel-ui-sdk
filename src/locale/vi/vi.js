@@ -56,6 +56,7 @@ export default {
 		delete: 'Xóa',
 		search: 'Tìm kiếm',
 		open: 'Mở',
+		openInHistory: 'Mở trong lịch sử',
 		name: 'Tên',
 		expand: 'Mở rộng',
 		collapse: 'Thu gọn',

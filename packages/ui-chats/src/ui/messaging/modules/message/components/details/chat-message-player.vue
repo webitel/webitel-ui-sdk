@@ -5,21 +5,22 @@
   >
     <wt-vidstack-player
       v-if="isVideo"
+      :size="ComponentSize.SM"
+      :src="mediaSrc"
+      :title="file.name"
       static
       hide-expand
       stretch
-      :size="ComponentSize.SM"
-      :src="mediaSrc"
+      countdown-time-mode
     />
     <wt-player
       v-else
       :src="mediaSrc"
       :autoplay="false"
       :closable="false"
-      :id="ringtone.name"
       hide-volume-slider
       hide-mute-button
-      class="chat-message-player__player"
+      class="chat-message-player__audio"
       @initialized="handlePlayerInitialize"
     />
   </div>
@@ -66,4 +67,9 @@ function handlePlayerInitialize(player) {
   max-height: var(--chat-file-max-height);
   max-width: var(--chat-file-max-width);
 }
+
+.chat-message-player__audio {
+  min-width: var(--chat-file-min-width);
+}
+
 </style>

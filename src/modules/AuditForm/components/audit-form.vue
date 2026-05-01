@@ -239,7 +239,7 @@ watch(
 );
 
 onMounted(() => {
-	if (props.mode === AuditFormMode.Create) {
+	if (props.mode === AuditFormMode.Create && !props.readonly) {
 		initQuestions();
 	} else if (props.mode === AuditFormMode.Fill) {
 		initAnswers();

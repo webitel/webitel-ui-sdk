@@ -55,6 +55,7 @@ export default {
 		delete: 'Eliminar',
 		search: 'Buscar',
 		open: 'Abrir',
+		openInHistory: 'Abrir en Historial',
 		name: 'Nombre',
 		expand: 'Expandir',
 		collapse: 'Colapsar',

@@ -56,6 +56,7 @@ export default {
 		delete: "O'chirish",
 		search: 'Qidirish',
 		open: 'Ochish',
+		openInHistory: 'Tarixda ochish',
 		name: 'Nomi',
 		expand: 'Kengaytirish',
 		collapse: 'Yigʻish',

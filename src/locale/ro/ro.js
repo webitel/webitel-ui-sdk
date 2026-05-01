@@ -56,6 +56,7 @@ export default {
 		delete: 'Șterge',
 		search: 'Caută',
 		open: 'Deschide',
+		openInHistory: 'Deschide în Istoric',
 		name: 'Nume',
 		expand: 'Extinde',
 		collapse: 'Restrânge',

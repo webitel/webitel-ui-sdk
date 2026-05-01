@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ThreadManagementSearchKindsItem } from './threadManagementSearchKindsItem';
+import type { ThreadManagementSearchTypesItem } from './threadManagementSearchTypesItem';
 
 export type ThreadManagementSearchParams = {
 	/**
@@ -27,7 +27,7 @@ Must not be used in valid requests.
  - GROUP: Group thread with multiple members.
  - CHANNEL: Channel-style thread (broadcast or topic based communication).
  */
-	kinds?: ThreadManagementSearchKindsItem[];
+	types?: ThreadManagementSearchTypesItem[];
 	/**
  * Full-text search query.
 Typically applied to subject.

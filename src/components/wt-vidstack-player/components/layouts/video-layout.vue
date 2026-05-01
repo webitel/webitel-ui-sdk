@@ -21,7 +21,7 @@
 
     <div class="video-layout-controls">
       <slot v-if="!props.hideControlsPanel" name="controls-panel">
-        <playback-controls-panel />
+        <playback-controls-panel :countdown-time-mode="props.countdownTimeMode"/>
       </slot>
     </div>
   </media-controls>
@@ -43,6 +43,7 @@ const props = defineProps<{
 	hideVideoDisplayPanel?: boolean;
 	hideControlsPanel?: boolean;
 	hideExpand?: boolean;
+	countdownTimeMode?: boolean;
 }>();
 
 const emit = defineEmits<{
