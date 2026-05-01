@@ -48,8 +48,8 @@
             class="wt-table-column-select__popup-list"
           >
             <li
-              v-for="(column, key) of changeableDraft"
-              :key="key"
+              v-for="column of changeableDraft"
+              :key="column.value"
               class="wt-table-column-select__popup-item"
             >
               <wt-checkbox
