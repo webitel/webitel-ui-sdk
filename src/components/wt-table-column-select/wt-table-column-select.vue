@@ -48,8 +48,8 @@
             class="wt-table-column-select__popup-list"
           >
             <li
-              v-for="(column, key) of changeableDraft"
-              :key="key"
+              v-for="column of changeableDraft"
+              :key="column.value"
               class="wt-table-column-select__popup-item"
             >
               <wt-checkbox
@@ -179,6 +179,10 @@ watch(isColumnSelectPopup, () => {
 
 .wt-table-column-select__popup-search {
 	margin-bottom: var(--spacing-xs);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--wt-popup-background-color);
 }
 
 .wt-table-column-select__popup-list-wrap {
