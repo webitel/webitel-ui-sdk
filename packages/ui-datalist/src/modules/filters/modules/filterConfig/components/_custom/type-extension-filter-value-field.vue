@@ -77,11 +77,9 @@ const attrs = useAttrs();
 
 const v$ = useVuelidate(
 	computed(() => ({
-		model: props.filterConfig?.field?.required
-			? {
-					required,
-				}
-			: {},
+		model: {
+			required,
+		},
 	})),
 	{
 		model,
