@@ -34,7 +34,7 @@
         v-if="isPiPSupported && !isPiP"
         class="video-call-pip-test"
         type="button"
-        @click="onPiPTestClick"
+        @click="togglePiP"
       >
         Open PiP (debug)
       </button>
@@ -155,7 +155,7 @@
         @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
         @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
         @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
-      
+
       />
     </template>
   </wt-vidstack-player>
@@ -166,7 +166,7 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, isRef, onBeforeUnmount, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useDocumentPiP } from './composables/useDocumentPiP';
@@ -284,25 +284,25 @@ const { t } = useI18n();
 
 const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
 
-const getPlayerEl = (): HTMLElement | null | undefined => {
+/** `defineExpose({ rootEl })` on `WtVidstackPlayer` passes a Ref — DOM is ready after stream + Vidstack upgrade. */
+const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 	const inst = playerRef.value as unknown as {
-		rootEl?: HTMLElement | null;
+		rootEl?: HTMLElement | Ref<HTMLElement | null> | null;
 		$el?: HTMLElement | null;
 	} | null;
-	return inst?.rootEl ?? inst?.$el ?? null;
+	if (!inst) return null;
+	const root = inst.rootEl;
+	const fromExpose = root == null ? null : isRef(root) ? root.value : root;
+	return fromExpose ?? inst.$el ?? null;
 };
 
 const {
 	isPiP,
 	isSupported: isPiPSupported,
 	togglePiP,
+	enterPiP,
 	resumePlayback,
-} = useDocumentPiP(getPlayerEl);
-
-const onPiPTestClick = (ev: MouseEvent) => {
-	console.log('[PiP] test button click reached handler', ev);
-	togglePiP();
-};
+} = useDocumentPiP(getVideoCallPlayerHostElement);
 
 const effectiveActions = computed(() =>
 	isPiPSupported.value
@@ -417,8 +417,27 @@ watch(
 	},
 );
 
+// Document PiP: open once `mainStream` exists and host div exists (`flush: 'post'` after Vidstack / WC attach).
+const stopAutoDocumentPiP = watch(
+	[
+		mainStream,
+		playerRef,
+	],
+	() => {
+		if (!mainStream.value || !playerRef.value || isPiP.value) return;
+		if (!getVideoCallPlayerHostElement()) return;
+		stopAutoDocumentPiP();
+		void enterPiP();
+	},
+	{
+		flush: 'post',
+		immediate: true,
+	},
+);
+
 onBeforeUnmount(() => {
 	stopHoldTimer();
+	stopAutoDocumentPiP();
 });
 
 const receiverVideoMutedIconSizes = {

@@ -11,29 +11,15 @@ type DocumentPiPWindow = Window &
 	};
 
 /**
- * Opens a Document Picture-in-Picture window containing the SAME Vue
- * component tree that is already rendered in the main page (e.g. a full
- * `<video-call>` with vidstack chrome) by moving its root DOM node.
+ * Document Picture-in-Picture (Chrome): moves an existing DOM subtree into a
+ * small auxiliary window so the same Vue/Vidstack tree keeps running.
  *
- * Three things must be handled for this to work reliably:
+ * Requires `documentPictureInPicture` and a **user gesture** for
+ * `requestWindow()` in typical browser policy — auto-open from data-only
+ * watchers may get `NotAllowedError`.
  *
- * 1. **Custom-element definitions** — vidstack uses Web Components
- *    (`<media-player>`, etc.) registered on the main window's
- *    `customElements` registry. The PiP window gets its own, empty
- *    registry. If definitions aren't ported the elements render as
- *    unknown/black when `connectedCallback` runs in the PiP doc. We walk
- *    the tree before moving and bridge each hyphenated tag name.
- *
- * 2. **Autoplay policy** — the PiP document has no transient user
- *    activation right after adoption, so `HTMLMediaElement.play()` calls
- *    (our own and vidstack's internal) reject with `NotAllowedError`. We
- *    force-mute all media before the move (muted autoplay is always
- *    allowed), swallow any remaining uncaught rejections with a scoped
- *    `unhandledrejection` guard, and arm a one-shot gesture listener in
- *    the PiP window to unmute on first user interaction.
- *
- * 3. **Styles** — the PiP document is blank. We clone every stylesheet
- *    from the main document so the moved subtree still looks correct.
+ * Extra work: copy styles (blank PiP doc), bridge custom elements to PiP
+ * `customElements`, mute-then-restore around the move for autoplay policy.
  */
 export function useDocumentPiP(
 	getElement: () => HTMLElement | null | undefined,
@@ -64,14 +50,10 @@ export function useDocumentPiP(
 	};
 
 	const copyStyles = (targetWindow: Window) => {
-		[
-			...document.styleSheets,
-		].forEach((sheet) => {
+		Array.from(document.styleSheets).forEach((sheet) => {
 			try {
 				const style = targetWindow.document.createElement('style');
-				style.textContent = [
-					...sheet.cssRules,
-				]
+				style.textContent = Array.from(sheet.cssRules)
 					.map((r) => r.cssText)
 					.join('');
 				targetWindow.document.head.appendChild(style);
@@ -86,13 +68,6 @@ export function useDocumentPiP(
 		});
 	};
 
-	/**
-	 * Walks the subtree (and any shadow roots) collecting every custom-element
-	 * tag name (those with a dash). For each tag, looks up its constructor in
-	 * the main window's `customElements` registry and defines it on the PiP
-	 * window's registry — so adopted elements get their upgrade machinery
-	 * available under the new document.
-	 */
 	const bridgeCustomElements = (root: Element, targetWindow: Window) => {
 		const tags = new Set<string>();
 		const visit = (node: Element | ShadowRoot) => {
@@ -117,13 +92,10 @@ export function useDocumentPiP(
 						ctor as CustomElementConstructor,
 					);
 				} catch (err) {
-					console.warn('[PiP] failed to bridge custom element', tag, err);
+					console.warn('[document PiP] custom element bridge failed', tag, err);
 				}
 			}
 		});
-		console.log('[PiP] bridged custom elements:', [
-			...tags,
-		]);
 	};
 
 	const collectMedia = (root: Element): HTMLMediaElement[] => {
@@ -165,13 +137,6 @@ export function useDocumentPiP(
 		});
 	};
 
-	/**
-	 * After element adoption the video may need a few beats before it's
-	 * ready to play (canplay has to re-fire, vidstack's reactive cycle may
-	 * re-set `muted`, etc.). Poll every 200 ms for up to 3 s and re-call
-	 * play on any paused media. The element is muted here so autoplay
-	 * policy permits this regardless of user activation.
-	 */
 	let retryTimer: number | null = null;
 	const stopPlaybackRetry = () => {
 		if (retryTimer !== null) {
@@ -179,6 +144,7 @@ export function useDocumentPiP(
 			retryTimer = null;
 		}
 	};
+
 	const retryPlayback = (root: Element, durationMs = 3000) => {
 		stopPlaybackRetry();
 		const started = performance.now();
@@ -251,20 +217,10 @@ export function useDocumentPiP(
 	};
 
 	const enterPiP = async (width = 480, height = 320) => {
-		console.log(
-			'[PiP] enterPiP START. supported?',
-			isSupported.value,
-			'isPiP?',
-			isPiP.value,
-		);
 		if (!isSupported.value || isPiP.value) return;
 
 		const el = getElement();
-		console.log('[PiP] element to move:', el);
-		if (!el) {
-			console.error('[PiP] no element to move');
-			return;
-		}
+		if (!el) return;
 
 		try {
 			pipWindow = await (
@@ -273,9 +229,7 @@ export function useDocumentPiP(
 				width,
 				height,
 			});
-			console.log('[PiP] requestWindow resolved');
-		} catch (err) {
-			console.error('[PiP] requestWindow REJECTED:', err);
+		} catch {
 			return;
 		}
 
@@ -294,7 +248,6 @@ export function useDocumentPiP(
 
 		forceMuteMedia(el);
 		pipWindow.document.body.appendChild(el);
-		console.log('[PiP] element moved to pip doc');
 		resumePlayback(el);
 		retryPlayback(el);
 		armFirstGestureResume(pipWindow);
@@ -320,20 +273,14 @@ export function useDocumentPiP(
 	};
 
 	const togglePiP = () => {
-		console.log(
-			'[PiP] togglePiP. isPiP:',
-			isPiP.value,
-			'supported:',
-			isSupported.value,
-		);
 		if (isPiP.value) {
 			exitPiP();
 		} else {
-			enterPiP().catch((err) => console.error('[PiP] enterPiP threw:', err));
+			void enterPiP();
 		}
 	};
 
-	const resumePlaybackPublic = () => {
+	const resumePlaybackInPiP = () => {
 		if (movedEl) resumePlayback(movedEl);
 	};
 
@@ -347,6 +294,6 @@ export function useDocumentPiP(
 		enterPiP,
 		togglePiP,
 		exitPiP,
-		resumePlayback: resumePlaybackPublic,
+		resumePlayback: resumePlaybackInPiP,
 	};
 }
