@@ -1,26 +1,25 @@
 import { computed, onUnmounted, ref } from 'vue';
 
-type DocumentPiPWindow = Window &
-	typeof globalThis & {
-		documentPictureInPicture: {
-			requestWindow: (opts: {
-				width: number;
-				height: number;
-			}) => Promise<Window>;
-		};
-	};
+import type { DocumentPiPWindow } from '../types/types';
 
-/**
- * Document Picture-in-Picture (Chrome): moves an existing DOM subtree into a
- * small auxiliary window so the same Vue/Vidstack tree keeps running.
- *
- * Requires `documentPictureInPicture` and a **user gesture** for
- * `requestWindow()` in typical browser policy — auto-open from data-only
- * watchers may get `NotAllowedError`.
- *
- * Extra work: copy styles (blank PiP doc), bridge custom elements to PiP
- * `customElements`, mute-then-restore around the move for autoplay policy.
- */
+const walkElementTree = (
+	root: Element | ShadowRoot,
+	visit: (el: Element) => void,
+) => {
+	const step = (node: Element | ShadowRoot) => {
+		if (node instanceof Element) visit(node);
+		const host = node instanceof Element ? node : undefined;
+		const sr = host?.shadowRoot;
+		if (sr) sr.querySelectorAll('*').forEach((c) => step(c));
+		Array.from(node.children).forEach((c) => step(c));
+	};
+	step(root);
+};
+
+const safePlay = (el: HTMLMediaElement) => {
+	void el.play().catch(() => {});
+};
+
 export function useDocumentPiP(
 	getElement: () => HTMLElement | null | undefined,
 ) {
@@ -35,19 +34,6 @@ export function useDocumentPiP(
 		el: HTMLMediaElement;
 		muted: boolean;
 	}> = [];
-
-	const suppressPlayRejection = (ev: PromiseRejectionEvent) => {
-		const reason = ev.reason as unknown;
-		const name =
-			reason instanceof DOMException
-				? reason.name
-				: (
-						reason as {
-							name?: string;
-						} | null
-					)?.name;
-		if (name === 'NotAllowedError') ev.preventDefault();
-	};
 
 	const copyStyles = (targetWindow: Window) => {
 		Array.from(document.styleSheets).forEach((sheet) => {
@@ -70,44 +56,30 @@ export function useDocumentPiP(
 
 	const bridgeCustomElements = (root: Element, targetWindow: Window) => {
 		const tags = new Set<string>();
-		const visit = (node: Element | ShadowRoot) => {
-			if ('tagName' in node) {
-				const t = (node as Element).tagName.toLowerCase();
-				if (t.includes('-')) tags.add(t);
-			}
-			const sr = (node as Element).shadowRoot;
-			if (sr) sr.querySelectorAll('*').forEach((c) => visit(c));
-			const children = (node as Element | ShadowRoot).children;
-			if (children) Array.from(children).forEach((c) => visit(c));
-		};
-		visit(root);
+		walkElementTree(root, (el) => {
+			const t = el.tagName.toLowerCase();
+			if (t.includes('-')) tags.add(t);
+		});
 
 		tags.forEach((tag) => {
 			const ctor = window.customElements.get(tag);
-			if (!ctor) return;
-			if (!targetWindow.customElements.get(tag)) {
-				try {
-					targetWindow.customElements.define(
-						tag,
-						ctor as CustomElementConstructor,
-					);
-				} catch (err) {
-					console.warn('[document PiP] custom element bridge failed', tag, err);
-				}
+			if (!ctor || targetWindow.customElements.get(tag)) return;
+			try {
+				targetWindow.customElements.define(
+					tag,
+					ctor as CustomElementConstructor,
+				);
+			} catch (err) {
+				console.warn('[document PiP] custom element bridge failed', tag, err);
 			}
 		});
 	};
 
 	const collectMedia = (root: Element): HTMLMediaElement[] => {
 		const list: HTMLMediaElement[] = [];
-		const visit = (node: Element | ShadowRoot) => {
-			if (node instanceof HTMLMediaElement) list.push(node);
-			const sr = (node as Element).shadowRoot;
-			if (sr) sr.querySelectorAll('*').forEach((c) => visit(c));
-			const children = (node as Element | ShadowRoot).children;
-			if (children) Array.from(children).forEach((c) => visit(c));
-		};
-		visit(root);
+		walkElementTree(root, (el) => {
+			if (el instanceof HTMLMediaElement) list.push(el);
+		});
 		return list;
 	};
 
@@ -131,10 +103,7 @@ export function useDocumentPiP(
 	};
 
 	const resumePlayback = (root: Element) => {
-		collectMedia(root).forEach((el) => {
-			const p = el.play();
-			if (p && typeof p.catch === 'function') p.catch(() => {});
-		});
+		collectMedia(root).forEach(safePlay);
 	};
 
 	let retryTimer: number | null = null;
@@ -153,10 +122,7 @@ export function useDocumentPiP(
 			if (media.length === 0) return;
 			media.forEach((el) => {
 				el.muted = true;
-				if (el.paused) {
-					const p = el.play();
-					if (p && typeof p.catch === 'function') p.catch(() => {});
-				}
+				if (el.paused) safePlay(el);
 			});
 			const allPlaying = media.every((el) => !el.paused);
 			if (allPlaying || performance.now() - started > durationMs) {
@@ -165,17 +131,21 @@ export function useDocumentPiP(
 		}, 200);
 	};
 
-	const armFirstGestureResume = (w: Window) => {
+	const armFirstGestureResume = (w?: Window) => {
+		const target = w ?? pipWindow;
+		if (!target || target.closed) return;
+
 		const kick = () => {
 			if (movedEl) resumePlayback(movedEl);
-			w.document.removeEventListener('pointerdown', kick, true);
-			w.document.removeEventListener('keydown', kick, true);
+			target.document.removeEventListener('pointerdown', kick, true);
+			target.document.removeEventListener('keydown', kick, true);
 		};
-		w.document.addEventListener('pointerdown', kick, true);
-		w.document.addEventListener('keydown', kick, true);
+		target.document.addEventListener('pointerdown', kick, true);
+		target.document.addEventListener('keydown', kick, true);
 	};
 
 	const restoreElement = () => {
+		console.log('restoreElement', movedEl, originalParent, originalNextSibling);
 		if (!movedEl || !originalParent) {
 			restoreMuteMedia();
 			movedEl = null;
@@ -188,9 +158,9 @@ export function useDocumentPiP(
 			originalNextSibling &&
 			originalNextSibling.parentNode === originalParent
 		) {
+			console.log('here 1');
+
 			originalParent.insertBefore(movedEl, originalNextSibling);
-		} else {
-			originalParent.appendChild(movedEl);
 		}
 
 		restoreMuteMedia();
@@ -201,17 +171,9 @@ export function useDocumentPiP(
 		originalNextSibling = null;
 	};
 
-	const detachGuards = (w: Window | null) => {
-		window.removeEventListener('unhandledrejection', suppressPlayRejection);
-		if (w && !w.closed) {
-			w.removeEventListener('unhandledrejection', suppressPlayRejection);
-		}
-	};
-
 	const onPiPWindowClose = () => {
 		stopPlaybackRetry();
 		restoreElement();
-		detachGuards(pipWindow);
 		pipWindow = null;
 		isPiP.value = false;
 	};
@@ -222,10 +184,10 @@ export function useDocumentPiP(
 		const el = getElement();
 		if (!el) return;
 
+		const api = (window as DocumentPiPWindow).documentPictureInPicture;
+		let win: Window;
 		try {
-			pipWindow = await (
-				window as DocumentPiPWindow
-			).documentPictureInPicture.requestWindow({
+			win = await api.requestWindow({
 				width,
 				height,
 			});
@@ -233,27 +195,26 @@ export function useDocumentPiP(
 			return;
 		}
 
-		copyStyles(pipWindow);
-		pipWindow.document.body.style.cssText =
+		pipWindow = win;
+
+		copyStyles(win);
+		win.document.body.style.cssText =
 			'margin:0;overflow:hidden;width:100%;height:100%;';
 
-		bridgeCustomElements(el, pipWindow);
-
-		window.addEventListener('unhandledrejection', suppressPlayRejection);
-		pipWindow.addEventListener('unhandledrejection', suppressPlayRejection);
+		bridgeCustomElements(el, win);
 
 		originalParent = el.parentNode;
 		originalNextSibling = el.nextSibling;
 		movedEl = el;
 
 		forceMuteMedia(el);
-		pipWindow.document.body.appendChild(el);
+		win.document.body.appendChild(el);
 		resumePlayback(el);
 		retryPlayback(el);
-		armFirstGestureResume(pipWindow);
+		armFirstGestureResume(win);
 
 		isPiP.value = true;
-		pipWindow.addEventListener('pagehide', onPiPWindowClose);
+		win.addEventListener('pagehide', onPiPWindowClose);
 	};
 
 	const exitPiP = () => {
@@ -261,7 +222,6 @@ export function useDocumentPiP(
 
 		stopPlaybackRetry();
 		restoreElement();
-		detachGuards(pipWindow);
 
 		if (pipWindow && !pipWindow.closed) {
 			pipWindow.removeEventListener('pagehide', onPiPWindowClose);
@@ -272,18 +232,6 @@ export function useDocumentPiP(
 		isPiP.value = false;
 	};
 
-	const togglePiP = () => {
-		if (isPiP.value) {
-			exitPiP();
-		} else {
-			void enterPiP();
-		}
-	};
-
-	const resumePlaybackInPiP = () => {
-		if (movedEl) resumePlayback(movedEl);
-	};
-
 	onUnmounted(() => {
 		if (isPiP.value) exitPiP();
 	});
@@ -292,8 +240,7 @@ export function useDocumentPiP(
 		isPiP,
 		isSupported,
 		enterPiP,
-		togglePiP,
 		exitPiP,
-		resumePlayback: resumePlaybackInPiP,
+		armFirstGestureResume,
 	};
 }

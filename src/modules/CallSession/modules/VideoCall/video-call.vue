@@ -1,4 +1,10 @@
 <template>
+  <div
+    v-show="isPiP"
+    :class="[!props.static && `video-call-position--${props.position}`]"
+    class="video-call video-call--pip-active"
+  />
+
   <wt-vidstack-player
     ref="playerRef"
     :class="[
@@ -29,24 +35,6 @@
 
     <template #content="{ size: innerSize }">
       <slot :size="innerSize" name="content" />
-
-      <button
-        v-if="isPiPSupported && !isPiP"
-        class="video-call-pip-test"
-        type="button"
-        @click="togglePiP"
-      >
-        Open PiP (debug)
-      </button>
-
-      <button
-        v-if="isPiP"
-        class="video-call-pip-resume"
-        type="button"
-        @click="resumePlayback"
-      >
-        <wt-icon icon="play--filled" size="md" color="on-dark" />
-      </button>
 
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
@@ -137,7 +125,7 @@
 
     <template #controls-panel>
       <video-call-controls-panel
-        :actions="effectiveActions"
+        :actions="props.actions"
         :actions:chat:pressed="props['actions:chat:pressed']"
         :actions:settings:disabled="props['actions:settings:disabled']"
         :actions:settings:pressed="props['actions:settings:pressed']"
@@ -170,6 +158,7 @@ import { computed, isRef, onBeforeUnmount, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useDocumentPiP } from './composables/useDocumentPiP';
+import { useReceiverLiveStream } from './composables/useReceiverLiveStream';
 
 import { WtIcon } from '../../../../components';
 import {
@@ -213,6 +202,8 @@ const props = withDefaults(
 		hideAvatar?: boolean;
 		resizable?: boolean;
 		hideSenderOnHold?: boolean;
+
+		isPipMode?: boolean;
 
 		actions: VideoCallAction[];
 		username?: string;
@@ -296,19 +287,7 @@ const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 	return fromExpose ?? inst.$el ?? null;
 };
 
-const {
-	isPiP,
-	isSupported: isPiPSupported,
-	togglePiP,
-	enterPiP,
-	resumePlayback,
-} = useDocumentPiP(getVideoCallPlayerHostElement);
-
-const effectiveActions = computed(() =>
-	isPiPSupported.value
-		? props.actions
-		: props.actions.filter((a) => a !== VideoCallAction.Pip),
-);
+const { isPiP, enterPiP } = useDocumentPiP(getVideoCallPlayerHostElement);
 
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);
@@ -344,6 +323,12 @@ const bothStreamsAvailable = computed(
 	() => !!receiverStream.value && !!senderStream.value,
 );
 
+const receiverStreamLiveForMain = useReceiverLiveStream(
+	receiverStream,
+	receiverVideoEnabled,
+	isOnHold,
+);
+
 const showReceiverOverlay = computed(
 	() =>
 		(!receiverStream.value &&
@@ -374,13 +359,22 @@ const mainStream = computed(() => {
 		return senderStream.value;
 	}
 
-	return receiverStream.value ?? senderStream.value;
+	return receiverStreamLiveForMain.value ?? senderStream.value;
 });
 
 const showSenderScreen = computed(() => {
-	if (!isOnHold.value) return bothStreamsAvailable.value;
-
-	return !props.hideSenderOnHold && senderStream.value && receiverStream.value;
+	if (isOnHold.value) {
+		return (
+			!props.hideSenderOnHold && !!senderStream.value && !!receiverStream.value
+		);
+	}
+	if (!bothStreamsAvailable.value) {
+		return false;
+	}
+	if (!receiverVideoEnabled.value) {
+		return true;
+	}
+	return receiverStreamLiveForMain.value != null;
 });
 
 const showSenderMutedScreen = computed(() => {
@@ -417,17 +411,26 @@ watch(
 	},
 );
 
-// Document PiP: open once `mainStream` exists and host div exists (`flush: 'post'` after Vidstack / WC attach).
+/**
+ * @author @Oleksandr Palinnyi
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Document PiP: call `requestWindow()` only when `mainStream` and a usable player host exist.
+ * `flush: 'post'` runs after DOM updates so Vidstack / WC upgrade can finish before we read `rootEl`.
+ * Stop the watcher only once `enterPiP` succeeds (`isPiP`), so gesture/API failures can retry on later ticks.
+ */
 const stopAutoDocumentPiP = watch(
 	[
 		mainStream,
 		playerRef,
 	],
-	() => {
+	async () => {
+		if (!props.isPipMode) return;
 		if (!mainStream.value || !playerRef.value || isPiP.value) return;
 		if (!getVideoCallPlayerHostElement()) return;
-		stopAutoDocumentPiP();
-		void enterPiP();
+		await enterPiP();
+		if (isPiP.value) stopAutoDocumentPiP();
 	},
 	{
 		flush: 'post',
@@ -470,72 +473,12 @@ const senderVideoMutedIconSizes = {
   max-height: 100%;
 }
 
-.video-call-pip-return {
-  position: absolute;
-  top: var(--spacing-sm);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border: none;
-  border-radius: var(--border-radius-md);
-  background: rgba(0, 0, 0, 0.6);
-  color: var(--wt-color-on-dark);
-  font-size: 12px;
-  cursor: pointer;
-  white-space: nowrap;
+/* Placeholder occupies original layout space while element lives in PiP window */
+.video-call--pip-active {
+  background: var(--p-player-wrapper-background, #000);
+  border-radius: inherit;
 }
 
-.video-call-pip-return:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.video-call-pip-test {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 99999;
-  padding: 12px 20px;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  background: #e91e63;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.video-call-pip-test:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.video-call-pip-resume {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 11;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  color: var(--wt-color-on-dark);
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-}
-
-.video-call-pip-resume:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
 
 .video-call-position--left-bottom.wt-vidstack-player--sm {
   top: unset;
