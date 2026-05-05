@@ -37,9 +37,9 @@
 
 <script setup lang="ts">
 import { AgentsAPI, MessagesServiceAPI } from '@webitel/api-services/api';
-import { WtChatEmoji } from '../..';
 import { inject, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { WtChatEmoji } from '../..';
 
 interface Item {
 	id: string;
