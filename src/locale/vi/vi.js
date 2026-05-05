@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Lưu như',
 		saved: 'Đã lưu',
 		send: 'Gửi',
+		sendMessage: 'Gửi tin nhắn',
 		start: 'Bắt đầu',
 		close: 'Đóng',
 		add: 'Thêm',

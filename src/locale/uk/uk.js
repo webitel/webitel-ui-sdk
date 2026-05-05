@@ -40,6 +40,7 @@ export default {
 		saveAs: 'Зберегти як',
 		saved: 'Збережено',
 		send: 'Надіслати',
+		sendMessage: 'Надіслати повідомлення',
 		start: 'Почати',
 		close: 'Закрити',
 		add: 'Додати',

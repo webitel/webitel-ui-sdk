@@ -43,6 +43,7 @@ export default {
 		saveAs: 'Guardar como',
 		saved: 'Guardado',
 		send: 'Enviar',
+		sendMessage: 'Enviar mensaje',
 		start: 'Iniciar',
 		close: 'Cerrar',
 		add: 'Añadir',

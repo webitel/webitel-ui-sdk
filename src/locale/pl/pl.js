@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Zapisz jako',
 		saved: 'Zapisano',
 		send: 'Wyślij',
+		sendMessage: 'Хабар жіберу',
 		start: 'Start',
 		close: 'Zamknij',
 		add: 'Dodaj',
