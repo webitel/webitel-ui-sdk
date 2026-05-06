@@ -242,6 +242,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Cổng kết nối chat tùy chỉnh',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Trả lời nhanh | Trả lời nhanh',
