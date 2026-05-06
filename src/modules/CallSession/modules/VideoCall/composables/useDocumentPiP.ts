@@ -1,24 +1,47 @@
 import { MediaRemoteControl } from 'vidstack';
 import { computed, onUnmounted, ref } from 'vue';
 
-import type { DocumentPiPWindow } from '../types/types';
+import type { DocumentPiPWindow, MediaSnapshot } from '../types/types';
 
+/**
+ * @author @Palonnyi Oleksandr
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Depth-first walk of an element tree including shadow roots.
+ * The previous implementation used `querySelectorAll('*')` on each shadow root,
+ * which returned all descendants flat and then recursed into each one — causing
+ * every element to be visited multiple times.  This version does a single
+ * recursive descent: visit the element, walk its shadow root children, then
+ * walk its light-DOM children.
+ */
 const walkElementTree = (
 	root: Element | ShadowRoot,
 	visit: (el: Element) => void,
 ) => {
-	const step = (node: Element | ShadowRoot) => {
-		if (node instanceof Element) visit(node);
-		const host = node instanceof Element ? node : undefined;
-		const sr = host?.shadowRoot;
-		if (sr) sr.querySelectorAll('*').forEach((c) => step(c));
-		Array.from(node.children).forEach((c) => step(c));
-	};
-	step(root);
+	if (root instanceof Element) {
+		visit(root);
+		if (root.shadowRoot) {
+			for (const child of root.shadowRoot.children) {
+				walkElementTree(child, visit);
+			}
+		}
+	}
+	for (const child of root.children) {
+		walkElementTree(child, visit);
+	}
 };
 
 const safePlay = (el: HTMLMediaElement) => {
 	void el.play().catch(() => {});
+};
+
+const collectMedia = (root: Element): HTMLMediaElement[] => {
+	const list: HTMLMediaElement[] = [];
+	walkElementTree(root, (el) => {
+		if (el instanceof HTMLMediaElement) list.push(el);
+	});
+	return list;
 };
 
 const collectMediaPlayers = (root: Element): Element[] => {
@@ -48,18 +71,12 @@ export function useDocumentPiP(
 	let movedEl: HTMLElement | null = null;
 	let originalParent: Node | null = null;
 	let originalNextSibling: Node | null = null;
-	let mutedState: Array<{
-		el: HTMLMediaElement;
-		muted: boolean;
-	}> = [];
 
-	let streamState: Array<{
-		el: HTMLMediaElement;
-		srcObject: MediaStream | null;
-	}> = [];
+	/** Snapshot of every media element taken before the DOM move. */
+	let mediaSnapshot: MediaSnapshot[] = [];
 
 	const copyStyles = (targetWindow: Window) => {
-		Array.from(document.styleSheets).forEach((sheet) => {
+		for (const sheet of Array.from(document.styleSheets)) {
 			try {
 				const style = targetWindow.document.createElement('style');
 				style.textContent = Array.from(sheet.cssRules)
@@ -74,19 +91,19 @@ export function useDocumentPiP(
 					targetWindow.document.head.appendChild(link);
 				}
 			}
-		});
+		}
 	};
 
 	const bridgeCustomElements = (root: Element, targetWindow: Window) => {
 		const tags = new Set<string>();
 		walkElementTree(root, (el) => {
-			const t = el.tagName.toLowerCase();
-			if (t.includes('-')) tags.add(t);
+			const tag = el.tagName.toLowerCase();
+			if (tag.includes('-')) tags.add(tag);
 		});
 
-		tags.forEach((tag) => {
+		for (const tag of tags) {
 			const ctor = window.customElements.get(tag);
-			if (!ctor || targetWindow.customElements.get(tag)) return;
+			if (!ctor || targetWindow.customElements.get(tag)) continue;
 			try {
 				targetWindow.customElements.define(
 					tag,
@@ -95,60 +112,65 @@ export function useDocumentPiP(
 			} catch (err) {
 				console.warn('[document PiP] custom element bridge failed', tag, err);
 			}
-		});
+		}
 	};
-
-	const collectMedia = (root: Element): HTMLMediaElement[] => {
-		const list: HTMLMediaElement[] = [];
-		walkElementTree(root, (el) => {
-			if (el instanceof HTMLMediaElement) list.push(el);
-		});
-		return list;
-	};
-
-	const forceMuteMedia = (root: Element) => {
-		mutedState = collectMedia(root).map((el) => ({
+	/**
+	 * @author @Palonnyi Oleksandr
+	 *
+	 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+	 *
+	 * Captures muted state and srcObject of every media element, then mutes them
+	 * all.  Must be called before the DOM move: the PiP window's autoplay policy
+	 * requires media to be muted, and we need the original values to restore later.
+	 */
+	const snapshotMedia = (root: Element) => {
+		mediaSnapshot = collectMedia(root).map((el) => ({
 			el,
 			muted: el.muted,
+			srcObject: el.srcObject instanceof MediaStream ? el.srcObject : null,
 		}));
-		mutedState.forEach(({ el }) => {
+		for (const { el } of mediaSnapshot) {
 			el.muted = true;
 			el.setAttribute('muted', '');
 			el.defaultMuted = true;
-		});
-	};
-
-	const restoreMuteMedia = () => {
-		mutedState.forEach(({ el, muted }) => {
-			el.muted = muted;
-		});
-		mutedState = [];
+		}
 	};
 
 	/**
-	 * Snapshot srcObject for every media element **before** the DOM move.
-	 * Vidstack's connectedCallback can fire after adoptNode / appendChild and
-	 * reset the player, clearing srcObject — restoreStreams puts it back.
+	 * @author @Palonnyi Oleksandr
+	 *
+	 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+	 *
+	 * Restores muted state and srcObject from the snapshot and clears it.
+	 * Call on PiP exit after the element is back in the original document.
 	 */
-	const captureStreams = (root: Element) => {
-		streamState = collectMedia(root).map((el) => ({
-			el,
-			srcObject: el.srcObject instanceof MediaStream ? el.srcObject : null,
-		}));
+	const restoreMedia = () => {
+		for (const { el, muted, srcObject } of mediaSnapshot) {
+			el.muted = muted;
+			if (!el.srcObject && srcObject) el.srcObject = srcObject;
+		}
+		mediaSnapshot = [];
 	};
 
+	/**
+	 * @author @Palonnyi Oleksandr
+	 *
+	 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+	 *
+	 * Re-applies captured srcObjects without clearing the snapshot.
+	 * Vidstack's `connectedCallback` fires synchronously on `appendChild` and
+	 * may clear `srcObject` during player re-initialization in the new document.
+	 * Called on every retry tick to recover from that.
+	 */
 	const restoreStreams = () => {
-		streamState.forEach(({ el, srcObject }) => {
-			if (!el.srcObject && srcObject) {
-				el.srcObject = srcObject;
-			}
-		});
+		for (const { el, srcObject } of mediaSnapshot) {
+			if (!el.srcObject && srcObject) el.srcObject = srcObject;
+		}
 	};
-
-	const resumePlayback = (root: Element, withVidstack = true) => {
+	const resumePlayback = (root: Element) => {
 		restoreStreams();
 		collectMedia(root).forEach(safePlay);
-		if (withVidstack) requestVidstackPlayback(root);
+		requestVidstackPlayback(root);
 	};
 
 	let retryTimer: number | null = null;
@@ -165,41 +187,52 @@ export function useDocumentPiP(
 		}
 	};
 
+	/**
+	 * @author @Palonnyi Oleksandr
+	 *
+	 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+	 *
+	 * Polls every 200 ms until every media element is playing with metadata, or
+	 * the timeout expires.  `requestVidstackPlayback` is intentionally delayed
+	 * 800 ms: calling it on every tick re-triggers Vidstack's load cycle which
+	 * calls `load()` and cancels any in-flight `play()` Promise.  The delay lets
+	 * `connectedCallback` async work settle before we touch Vidstack's API.
+	 */
 	const retryPlayback = (root: Element, durationMs = 10000) => {
 		stopPlaybackRetry();
 		const started = performance.now();
-		// Fire requestVidstackPlayback once after ~800 ms so Vidstack's connectedCallback
-		// async work (which may call load() and cancel an in-flight play() Promise) has
-		// settled before we ask Vidstack's request manager to play.
-		// Calling it on every 200 ms tick causes Vidstack to re-enter its load cycle
-		// each time, which keeps cancelling our safePlay calls.
+
 		vidstackDelayTimer = window.setTimeout(() => {
 			vidstackDelayTimer = null;
 			requestVidstackPlayback(root);
 		}, 800);
 
 		retryTimer = window.setInterval(() => {
-			// Restore srcObject first — Vidstack connectedCallback may have cleared it
 			restoreStreams();
 
 			const media = collectMedia(root);
-			if (media.length === 0) return;
-			media.forEach((el) => {
+			if (!media.length) return;
+
+			for (const el of media) {
 				el.muted = true;
-				// Also play when readyState is 0: video has no source yet (stream not yet
-				// assigned by Vidstack) — we call play() speculatively so it queues once
-				// srcObject is set.
 				if (el.paused || el.readyState === 0) safePlay(el);
-			});
-			// Stop only when the video has both metadata AND is playing, so we don't
-			// bail out while readyState is still 0 (no source) with paused falsely false.
+			}
+
 			const allReady = media.every((el) => !el.paused && el.readyState > 0);
 			if (allReady || performance.now() - started > durationMs) {
 				stopPlaybackRetry();
 			}
 		}, 200);
 	};
-
+	/**
+	 * @author @Palonnyi Oleksandr
+	 *
+	 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+	 *
+	 * Last-resort fallback: resumes playback on the first user interaction inside
+	 * the PiP window if all automatic attempts fail.  A user gesture guarantees
+	 * the browser's autoplay policy is satisfied.
+	 */
 	const armFirstGestureResume = (w?: Window) => {
 		const target = w ?? pipWindow;
 		if (!target || target.closed) return;
@@ -215,8 +248,7 @@ export function useDocumentPiP(
 
 	const restoreElement = () => {
 		if (!movedEl || !originalParent) {
-			restoreMuteMedia();
-			streamState = [];
+			mediaSnapshot = [];
 			movedEl = null;
 			originalParent = null;
 			originalNextSibling = null;
@@ -230,8 +262,7 @@ export function useDocumentPiP(
 			originalParent.insertBefore(movedEl, originalNextSibling);
 		}
 
-		restoreMuteMedia();
-		streamState = [];
+		restoreMedia();
 		resumePlayback(movedEl);
 
 		movedEl = null;
@@ -268,29 +299,29 @@ export function useDocumentPiP(
 		copyStyles(win);
 		win.document.body.style.cssText =
 			'margin:0;overflow:hidden;width:100%;height:100%;';
-
 		bridgeCustomElements(el, win);
 
 		originalParent = el.parentNode;
 		originalNextSibling = el.nextSibling;
 		movedEl = el;
 
-		forceMuteMedia(el);
-		captureStreams(el);
+		snapshotMedia(el);
 		win.document.body.appendChild(el);
-		// withVidstack=false: Vidstack's connectedCallback fires synchronously during
-		// appendChild and may start async work (e.g. load()) that cancels any play()
-		// Promise we create here. Don't touch Vidstack's request manager yet — the
-		// single delayed call inside retryPlayback fires at ~800 ms once that work settles.
-		resumePlayback(el, false);
-		queueMicrotask(() => {
-			resumePlayback(el, false);
-		});
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				resumePlayback(el, false);
-			});
-		});
+
+		/**
+		 * @author @Palonnyi Oleksandr
+		 *
+		 * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+		 *
+		 * Immediate native play without Vidstack API: `connectedCallback` fires
+		 * synchronously on `appendChild` and may start async work (e.g. `load()`)
+		 * that cancels an in-flight `play()` Promise if we call Vidstack here.
+		 * `retryPlayback` covers subsequent attempts; its 800 ms delayed
+		 * `requestVidstackPlayback` fires once that async work has settled.
+		 */
+		restoreStreams();
+		collectMedia(el).forEach(safePlay);
+
 		retryPlayback(el);
 		armFirstGestureResume(win);
 

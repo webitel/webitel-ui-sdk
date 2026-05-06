@@ -96,7 +96,6 @@ const emit = defineEmits<{
 	];
 }>();
 
-// const player = useTemplateRef<MediaPlayerElement>('player');
 const rootEl = useTemplateRef<HTMLElement>('root');
 
 defineExpose({
@@ -144,37 +143,47 @@ const rootClasses = computed(() => [
 ]);
 
 /**
- * Walk shadow DOM + light DOM to find the first native <video> element.
- * querySelector() does not pierce shadow roots, so we traverse manually.
+ * @author @Palonnyi Oleksandr
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Finds the first native `<video>` by walking the element tree and piercing
+ * shadow roots.  `querySelector('video')` does not cross shadow boundaries, so
+ * Vidstack's `<video>` — which lives inside `<media-provider>`'s shadow root —
+ * would never be found without manual traversal.
  */
-const findNativeVideo = (root: Element): HTMLVideoElement | null => {
+const findNativeVideo = (
+	root: Element | ShadowRoot,
+): HTMLVideoElement | null => {
 	if (root instanceof HTMLVideoElement) return root;
-	const sr = root.shadowRoot;
-	if (sr) {
-		for (const child of Array.from(sr.children)) {
-			const found = findNativeVideo(child as Element);
+	if (root instanceof Element && root.shadowRoot) {
+		for (const child of root.shadowRoot.children) {
+			const found = findNativeVideo(child);
 			if (found) return found;
 		}
 	}
-	for (const child of Array.from(root.children)) {
-		const found = findNativeVideo(child as Element);
+	for (const child of root.children) {
+		const found = findNativeVideo(child);
 		if (found) return found;
 	}
 	return null;
 };
 
+/**
+ * @author @Palonnyi Oleksandr
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * `can-play` fires on `<media-player>`, not on the native `<video>`.
+ * In Document PiP, Vidstack's request manager can block autoplay after
+ * `connectedCallback` re-initialises the player in the new document — even for
+ * muted media.  Calling `play()` on the native `<video>` directly bypasses
+ * that layer; the browser always permits muted video autoplay.
+ */
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
-
-	// ev.target is the <media-player> custom element, not an HTMLVideoElement.
-	// In Document PiP, calling media-player.play() goes through Vidstack's request
-	// manager which may reject autoplay even for muted media after connectedCallback
-	// reinitialises the player in the new document. Call play() on the native <video>
-	// directly to bypass that check — muted video autoplay is always allowed by the browser.
-	const target = ev.target as Element;
-	const video = findNativeVideo(target);
-	const playable = (video ?? target) as HTMLMediaElement;
-	const p = playable.play?.();
+	const video = findNativeVideo(ev.target as Element);
+	const p = (video ?? (ev.target as HTMLMediaElement)).play?.();
 	if (p && typeof p.catch === 'function') p.catch(() => {});
 };
 </script>

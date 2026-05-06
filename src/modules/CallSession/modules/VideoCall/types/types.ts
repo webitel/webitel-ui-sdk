@@ -7,3 +7,9 @@ export type DocumentPiPWindow = Window &
 			}) => Promise<Window>;
 		};
 	};
+
+export type MediaSnapshot = {
+	el: HTMLMediaElement;
+	muted: boolean;
+	srcObject: MediaStream | null;
+};
