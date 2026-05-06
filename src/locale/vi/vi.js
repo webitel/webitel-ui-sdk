@@ -844,8 +844,13 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
 		},
 		warnings: {
-			passwordExpirationMessage:
-				'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
+			passwordExpirationMessageDays:
+				'Mật khẩu của bạn sẽ hết hạn sau { amount } ngày',
+			passwordExpirationMessageHours:
+				'Mật khẩu của bạn sẽ hết hạn sau ít hơn { amount } giờ',
+			licenseExpirationSoonMessage:
+				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
+			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
 		},
 	},
 	errorNotifications: {

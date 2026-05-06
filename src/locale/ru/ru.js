@@ -836,7 +836,13 @@ export default {
 			delete: ({ named }) => `${named('entity')} был удалён`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
+			passwordExpirationMessageDays:
+				'Ваш пароль истечёт через {amound} дн(я/ей)',
+			passwordExpirationMessageHours:
+				'До истечения пароля осталось менее {amound} часов.',
+			licenseExpirationSoonMessage:
+				'Ваша лицензия {name}  завершится через {amount} дней',
+			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
 		},
 	},
 	errorNotifications: {

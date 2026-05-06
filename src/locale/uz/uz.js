@@ -844,8 +844,13 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
 		},
 		warnings: {
-			passwordExpirationMessage:
-				'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
+			passwordExpirationMessageDays:
+				'Parolingiz {amount} kundan keyin amal qilishdan chiqadi',
+			passwordExpirationMessageHours:
+				'Parolingiz {amount} soatdan kam vaqtdan keyin amal qilishdan chiqadi',
+			licenseExpirationSoonMessage:
+				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
+			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
 		},
 	},
 	errorNotifications: {

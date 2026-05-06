@@ -841,8 +841,13 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
 		},
 		warnings: {
-			passwordExpirationMessage:
-				'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады',
+			passwordExpirationMessageDays:
+				'Сіздің құпия сөзіңіз {amount} күннен кейін мерзімі аяқталады',
+			passwordExpirationMessageHours:
+				'Сіздің құпия сөзіңіз {amount} сағаттан аз уақыттан кейін мерзімі аяқталады',
+			licenseExpirationSoonMessage:
+				'Сіздің лицензия {name} {amount} күннен кейін мерзімі аяқталады',
+			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
 		},
 	},
 	errorNotifications: {
