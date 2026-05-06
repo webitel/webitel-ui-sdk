@@ -1,3 +1,4 @@
+import { MediaRemoteControl } from 'vidstack';
 import { computed, onUnmounted, ref } from 'vue';
 
 import type { DocumentPiPWindow } from '../types/types';
@@ -20,6 +21,23 @@ const safePlay = (el: HTMLMediaElement) => {
 	void el.play().catch(() => {});
 };
 
+const collectMediaPlayers = (root: Element): Element[] => {
+	const list: Element[] = [];
+	walkElementTree(root, (el) => {
+		if (el.tagName.toLowerCase() === 'media-player') list.push(el);
+	});
+	return list;
+};
+
+const requestVidstackPlayback = (root: Element) => {
+	for (const player of collectMediaPlayers(root)) {
+		const remote = new MediaRemoteControl();
+		remote.setTarget(player);
+		remote.mute();
+		remote.play();
+	}
+};
+
 export function useDocumentPiP(
 	getElement: () => HTMLElement | null | undefined,
 ) {
@@ -33,6 +51,11 @@ export function useDocumentPiP(
 	let mutedState: Array<{
 		el: HTMLMediaElement;
 		muted: boolean;
+	}> = [];
+
+	let streamState: Array<{
+		el: HTMLMediaElement;
+		srcObject: MediaStream | null;
 	}> = [];
 
 	const copyStyles = (targetWindow: Window) => {
@@ -102,30 +125,76 @@ export function useDocumentPiP(
 		mutedState = [];
 	};
 
-	const resumePlayback = (root: Element) => {
+	/**
+	 * Snapshot srcObject for every media element **before** the DOM move.
+	 * Vidstack's connectedCallback can fire after adoptNode / appendChild and
+	 * reset the player, clearing srcObject — restoreStreams puts it back.
+	 */
+	const captureStreams = (root: Element) => {
+		streamState = collectMedia(root).map((el) => ({
+			el,
+			srcObject: el.srcObject instanceof MediaStream ? el.srcObject : null,
+		}));
+	};
+
+	const restoreStreams = () => {
+		streamState.forEach(({ el, srcObject }) => {
+			if (!el.srcObject && srcObject) {
+				el.srcObject = srcObject;
+			}
+		});
+	};
+
+	const resumePlayback = (root: Element, withVidstack = true) => {
+		restoreStreams();
 		collectMedia(root).forEach(safePlay);
+		if (withVidstack) requestVidstackPlayback(root);
 	};
 
 	let retryTimer: number | null = null;
+	let vidstackDelayTimer: number | null = null;
+
 	const stopPlaybackRetry = () => {
 		if (retryTimer !== null) {
 			clearInterval(retryTimer);
 			retryTimer = null;
 		}
+		if (vidstackDelayTimer !== null) {
+			clearTimeout(vidstackDelayTimer);
+			vidstackDelayTimer = null;
+		}
 	};
 
-	const retryPlayback = (root: Element, durationMs = 3000) => {
+	const retryPlayback = (root: Element, durationMs = 10000) => {
 		stopPlaybackRetry();
 		const started = performance.now();
+		// Fire requestVidstackPlayback once after ~800 ms so Vidstack's connectedCallback
+		// async work (which may call load() and cancel an in-flight play() Promise) has
+		// settled before we ask Vidstack's request manager to play.
+		// Calling it on every 200 ms tick causes Vidstack to re-enter its load cycle
+		// each time, which keeps cancelling our safePlay calls.
+		vidstackDelayTimer = window.setTimeout(() => {
+			vidstackDelayTimer = null;
+			requestVidstackPlayback(root);
+		}, 800);
+
 		retryTimer = window.setInterval(() => {
+			// Restore srcObject first — Vidstack connectedCallback may have cleared it
+			restoreStreams();
+
 			const media = collectMedia(root);
 			if (media.length === 0) return;
 			media.forEach((el) => {
 				el.muted = true;
-				if (el.paused) safePlay(el);
+				// Also play when readyState is 0: video has no source yet (stream not yet
+				// assigned by Vidstack) — we call play() speculatively so it queues once
+				// srcObject is set.
+				if (el.paused || el.readyState === 0) safePlay(el);
 			});
-			const allPlaying = media.every((el) => !el.paused);
-			if (allPlaying || performance.now() - started > durationMs) {
+			// Stop only when the video has both metadata AND is playing, so we don't
+			// bail out while readyState is still 0 (no source) with paused falsely false.
+			const allReady = media.every((el) => !el.paused && el.readyState > 0);
+			if (allReady || performance.now() - started > durationMs) {
 				stopPlaybackRetry();
 			}
 		}, 200);
@@ -145,9 +214,9 @@ export function useDocumentPiP(
 	};
 
 	const restoreElement = () => {
-		console.log('restoreElement', movedEl, originalParent, originalNextSibling);
 		if (!movedEl || !originalParent) {
 			restoreMuteMedia();
+			streamState = [];
 			movedEl = null;
 			originalParent = null;
 			originalNextSibling = null;
@@ -158,12 +227,11 @@ export function useDocumentPiP(
 			originalNextSibling &&
 			originalNextSibling.parentNode === originalParent
 		) {
-			console.log('here 1');
-
 			originalParent.insertBefore(movedEl, originalNextSibling);
 		}
 
 		restoreMuteMedia();
+		streamState = [];
 		resumePlayback(movedEl);
 
 		movedEl = null;
@@ -208,8 +276,21 @@ export function useDocumentPiP(
 		movedEl = el;
 
 		forceMuteMedia(el);
+		captureStreams(el);
 		win.document.body.appendChild(el);
-		resumePlayback(el);
+		// withVidstack=false: Vidstack's connectedCallback fires synchronously during
+		// appendChild and may start async work (e.g. load()) that cancels any play()
+		// Promise we create here. Don't touch Vidstack's request manager yet — the
+		// single delayed call inside retryPlayback fires at ~800 ms once that work settles.
+		resumePlayback(el, false);
+		queueMicrotask(() => {
+			resumePlayback(el, false);
+		});
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				resumePlayback(el, false);
+			});
+		});
 		retryPlayback(el);
 		armFirstGestureResume(win);
 

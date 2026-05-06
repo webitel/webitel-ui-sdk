@@ -143,10 +143,38 @@ const rootClasses = computed(() => [
 	props.hideBackground && 'wt-vidstack-player--hide-background',
 ]);
 
+/**
+ * Walk shadow DOM + light DOM to find the first native <video> element.
+ * querySelector() does not pierce shadow roots, so we traverse manually.
+ */
+const findNativeVideo = (root: Element): HTMLVideoElement | null => {
+	if (root instanceof HTMLVideoElement) return root;
+	const sr = root.shadowRoot;
+	if (sr) {
+		for (const child of Array.from(sr.children)) {
+			const found = findNativeVideo(child as Element);
+			if (found) return found;
+		}
+	}
+	for (const child of Array.from(root.children)) {
+		const found = findNativeVideo(child as Element);
+		if (found) return found;
+	}
+	return null;
+};
+
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
 
-	const p = (ev.target as HTMLMediaElement)?.play();
+	// ev.target is the <media-player> custom element, not an HTMLVideoElement.
+	// In Document PiP, calling media-player.play() goes through Vidstack's request
+	// manager which may reject autoplay even for muted media after connectedCallback
+	// reinitialises the player in the new document. Call play() on the native <video>
+	// directly to bypass that check — muted video autoplay is always allowed by the browser.
+	const target = ev.target as Element;
+	const video = findNativeVideo(target);
+	const playable = (video ?? target) as HTMLMediaElement;
+	const p = playable.play?.();
 	if (p && typeof p.catch === 'function') p.catch(() => {});
 };
 </script>
