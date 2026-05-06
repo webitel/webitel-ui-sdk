@@ -4,9 +4,10 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
     :required="false"
+    :v="v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
-      <has-option-filter-value-field v-model:model-value="model" />
+      <has-option-filter-value-field v-model:model-value="model"/>
     </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
@@ -83,6 +84,8 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
+
+v$.value.$touch();
 
 watch(
 	() => v$.value.$invalid,
