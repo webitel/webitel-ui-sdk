@@ -7,7 +7,7 @@
     :v="v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
-      <has-option-filter-value-field v-model:model-value="model"/>
+      <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="model"/>
     </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
@@ -35,6 +35,7 @@
         "
         use-value-from-options-by-prop="id"
         @input="model = $event"
+        :v="v$.model"
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
@@ -84,8 +85,6 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-
-v$.value.$touch();
 
 watch(
 	() => v$.value.$invalid,
