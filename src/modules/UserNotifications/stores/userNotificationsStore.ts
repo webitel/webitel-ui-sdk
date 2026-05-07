@@ -61,7 +61,7 @@ export const createUserNotificationsStore = () => {
 			localeKey,
 			params,
 		}: NotificationsType): void => {
-			const locale = localStorage.getItem('lang') || 'en';
+			const locale = localStorage.getItem('lang');
 			setTimeout(() => {
 				eventBus.$emit('notification', {
 					type,
