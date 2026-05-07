@@ -35,7 +35,6 @@
         "
         use-value-from-options-by-prop="id"
         @input="model = $event"
-        :v="v$.model"
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
