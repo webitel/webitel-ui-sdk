@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Salvează ca',
 		saved: 'Salvat',
 		send: 'Trimite',
+		sendMessage: 'Trimite mesaj',
 		start: 'Start',
 		close: 'Închide',
 		add: 'Adaugă',

@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Басқаша сақтау',
 		saved: 'Сақталды',
 		send: 'Жіберу',
+		sendMessage: 'Хабар жіберу',
 		start: 'Бастау',
 		close: 'Жабу',
 		add: 'Қосу',

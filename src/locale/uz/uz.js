@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Boshqa nom bilan saqlash',
 		saved: 'Saqlandi',
 		send: "Jo'natish",
+		sendMessage: 'Xabar yuborish',
 		start: 'Boshlash',
 		close: 'Yopish',
 		add: "Qo'shish",

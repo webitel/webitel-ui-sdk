@@ -47,6 +47,7 @@ export default deepmerge(
 			saveAs: 'Save as',
 			saved: 'Saved',
 			send: 'Send',
+			sendMessage: 'Send message',
 			start: 'Start',
 			close: 'Close',
 			add: 'Add',
