@@ -1,4 +1,4 @@
-import { ref, watch, type ComputedRef } from 'vue';
+import { type ComputedRef, ref, watch } from 'vue';
 
 /**
  * Tracks whether the receiver's stream has a live video track.

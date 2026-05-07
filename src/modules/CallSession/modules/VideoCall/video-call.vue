@@ -154,12 +154,8 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed, isRef, onBeforeUnmount, ref, watch, type Ref } from 'vue';
+import { computed, isRef, onBeforeUnmount, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { useDocumentPiP } from './composables/useDocumentPiP';
-import { useReceiverLiveStream } from './composables/useReceiverLiveStream';
-
 import { WtIcon } from '../../../../components';
 import {
 	RecordingIndicator,
@@ -170,6 +166,8 @@ import { ComponentSize, WtApplication } from '../../../../enums';
 import { convertDuration } from '../../../../scripts';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
+import { useDocumentPiP } from './composables/useDocumentPiP';
+import { useReceiverLiveStream } from './composables/useReceiverLiveStream';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(

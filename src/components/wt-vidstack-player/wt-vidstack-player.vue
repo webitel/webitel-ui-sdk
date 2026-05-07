@@ -157,12 +157,12 @@ const findNativeVideo = (
 ): HTMLVideoElement | null => {
 	if (root instanceof HTMLVideoElement) return root;
 	if (root instanceof Element && root.shadowRoot) {
-		for (const child of root.shadowRoot.children) {
+		for (const child of Array.from(root.shadowRoot.children ?? [])) {
 			const found = findNativeVideo(child);
 			if (found) return found;
 		}
 	}
-	for (const child of root.children) {
+	for (const child of Array.from(root.children ?? [])) {
 		const found = findNativeVideo(child);
 		if (found) return found;
 	}
