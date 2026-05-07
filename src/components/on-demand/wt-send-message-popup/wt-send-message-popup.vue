@@ -1,7 +1,7 @@
 <template>
   <wt-popup
     v-bind="$attrs"
-    class="contact-send-message"
+    class="send-message-popup"
     overflow
     @close="emit('close')"
   >
@@ -20,7 +20,7 @@
       <wt-chat-emoji
         filled
         :rounded="false"
-        class="contact-send-message__emoji"
+        class="send-message-popup__emoji"
         @insert-emoji="insertEmoji"
       />
 
@@ -41,7 +41,7 @@ import { inject, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WtChatEmoji } from '../..';
 
-interface Item {
+interface ChatItem {
 	id: string;
 	protocol: string;
 	externalId: string;
@@ -58,7 +58,7 @@ interface Item {
 }
 
 const props = defineProps<{
-	item?: Item;
+	item?: ChatItem;
 	userId: string;
 }>();
 
@@ -119,15 +119,3 @@ const insertEmoji = (emoji) => {
 
 onMounted(async () => await getAgentId());
 </script>
-
-<style lang="scss" scoped>
-.contact-send-message__emoji {
-  :deep(.wt-chat-emoji__wrapper emoji-picker) {
-    position: absolute;
-    transform: translateX(-50%);
-    bottom: 100%;
-    left: 50%;
-    z-index: 1000;
-  }
-}
-</style>
