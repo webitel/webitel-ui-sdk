@@ -1,7 +1,7 @@
 <template>
   <wt-popup
     v-bind="$attrs"
-    class="send-message-popup"
+    class="wt-send-message-popup"
     overflow
     @close="emit('close')"
   >
@@ -20,7 +20,7 @@
       <wt-chat-emoji
         filled
         :rounded="false"
-        class="send-message-popup__emoji"
+        class="wt-send-message-popup__emoji"
         @insert-emoji="insertEmoji"
       />
 
@@ -58,7 +58,7 @@ interface ChatItem {
 }
 
 const props = defineProps<{
-	item?: ChatItem;
+	chatItem?: ChatItem;
 	userId: string;
 }>();
 
@@ -70,8 +70,8 @@ const { t } = useI18n();
 
 const generateNewDraft = () => {
 	return {
-		gateway: props.item?.app || {},
-		provider: props.item?.protocol || '',
+		gateway: props.chatItem?.app || {},
+		provider: props.chatItem?.protocol || '',
 		message: '',
 		agentId: null,
 	};
@@ -92,7 +92,7 @@ const sendMessage = async () => {
 		peers: [
 			{
 				via: draft.value.gateway.id,
-				id: props.item?.externalId,
+				id: props.chatItem?.externalId,
 				type: draft.value.provider,
 			},
 		],
