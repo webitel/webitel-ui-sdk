@@ -108,6 +108,10 @@
 			"types": "./types/enums/index.d.ts",
 			"import": "./src/enums/index.ts"
 		},
+		"./validations": {
+			"types": "./types/validations/index.d.ts",
+			"import": "./src/validations/index.ts"
+		},
 		"./locale": {
 			"types": "./src/locale/locale.ts",
 			"import": "./src/locale/locale.ts"
