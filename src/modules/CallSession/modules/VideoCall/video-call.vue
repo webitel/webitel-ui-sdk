@@ -1,20 +1,14 @@
 <template>
-  <div
-    v-show="isPiP"
-    :class="[!props.static && `video-call-position--${props.position}`]"
-    class="video-call video-call--pip-active"
-  />
-
   <wt-vidstack-player
     ref="playerRef"
     :class="[
       !props.static && !isPiP && `video-call-position--${props.position}`,
       isPiP && 'video-call--pip',
     ]"
+    :size="isPiP ? 'md' : props.size"
+    :static="isPiP ? true : props.static"
     :hide-video-display-panel="props.hideVideoDisplayPanel"
-    :size="props.size"
     :stream="mainStream"
-    :static="props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
     :mirror-video="!showSenderScreen"
@@ -101,6 +95,7 @@
         <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
+            :style="pipSenderSize ? { width: `${pipSenderSize.width}px`, height: `${pipSenderSize.height}px` } : undefined"
             :stream="props['sender:stream']"
             autoplay
             class="video-call-sender"
@@ -285,7 +280,36 @@ const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 	return fromExpose ?? inst.$el ?? null;
 };
 
-const { isPiP, enterPiP } = useDocumentPiP(getVideoCallPlayerHostElement);
+const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
+	getVideoCallPlayerHostElement,
+);
+
+/**
+ * @author @Oleksandr Palinnyi
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Sender preview dimensions relative to the main player, taken from Figma design (256×171 / 1366×912).
+ */
+const SENDER_WIDTH_RATIO = 256 / 1366;
+const SENDER_ASPECT_RATIO = 171 / 256;
+
+const pipSenderSize = ref<{
+	width: number;
+	height: number;
+} | null>(null);
+
+onPiPResize((rect) => {
+	const width = rect.width * SENDER_WIDTH_RATIO;
+	pipSenderSize.value = {
+		width,
+		height: width * SENDER_ASPECT_RATIO,
+	};
+});
+
+watch(isPiP, (active) => {
+	if (!active) pipSenderSize.value = null;
+});
 
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);

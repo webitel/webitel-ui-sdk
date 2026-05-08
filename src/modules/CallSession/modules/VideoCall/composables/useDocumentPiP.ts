@@ -1,7 +1,11 @@
 import { MediaRemoteControl } from 'vidstack';
 import { computed, onUnmounted, ref } from 'vue';
 
-import type { DocumentPiPWindow, MediaSnapshot } from '../types/types';
+import type {
+	DocumentPiPWindow,
+	MediaSnapshot,
+	PiPResizeCallback,
+} from '../types/types';
 
 /**
  * @author @Palonnyi Oleksandr
@@ -71,6 +75,27 @@ export function useDocumentPiP(
 	let movedEl: HTMLElement | null = null;
 	let originalParent: Node | null = null;
 	let originalNextSibling: Node | null = null;
+
+	const resizeCallbacks = new Set<PiPResizeCallback>();
+	let pipResizeObserver: ResizeObserver | null = null;
+
+	const startPiPResizeObserver = (el: HTMLElement) => {
+		pipResizeObserver?.disconnect();
+		pipResizeObserver = new ResizeObserver(([entry]) => {
+			for (const cb of resizeCallbacks) cb(entry.contentRect);
+		});
+		pipResizeObserver.observe(el);
+	};
+
+	const stopPiPResizeObserver = () => {
+		pipResizeObserver?.disconnect();
+		pipResizeObserver = null;
+	};
+
+	const onPiPResize = (cb: PiPResizeCallback) => {
+		resizeCallbacks.add(cb);
+		return () => resizeCallbacks.delete(cb);
+	};
 
 	/** Snapshot of every media element taken before the DOM move. */
 	let mediaSnapshot: MediaSnapshot[] = [];
@@ -272,6 +297,7 @@ export function useDocumentPiP(
 
 	const onPiPWindowClose = () => {
 		stopPlaybackRetry();
+		stopPiPResizeObserver();
 		restoreElement();
 		pipWindow = null;
 		isPiP.value = false;
@@ -327,12 +353,14 @@ export function useDocumentPiP(
 
 		isPiP.value = true;
 		win.addEventListener('pagehide', onPiPWindowClose);
+		startPiPResizeObserver(el);
 	};
 
 	const exitPiP = () => {
 		if (!isPiP.value) return;
 
 		stopPlaybackRetry();
+		stopPiPResizeObserver();
 		restoreElement();
 
 		if (pipWindow && !pipWindow.closed) {
@@ -354,5 +382,6 @@ export function useDocumentPiP(
 		enterPiP,
 		exitPiP,
 		armFirstGestureResume,
+		onPiPResize,
 	};
 }
