@@ -44,21 +44,14 @@ const collectMedia = (root: Element): HTMLMediaElement[] => {
 	return list;
 };
 
-const collectMediaPlayers = (root: Element): Element[] => {
-	const list: Element[] = [];
-	walkElementTree(root, (el) => {
-		if (el.tagName.toLowerCase() === 'media-player') list.push(el);
-	});
-	return list;
-};
-
 const requestVidstackPlayback = (root: Element) => {
-	for (const player of collectMediaPlayers(root)) {
+	walkElementTree(root, (el) => {
+		if (el.tagName.toLowerCase() !== 'media-player') return;
 		const remote = new MediaRemoteControl();
-		remote.setTarget(player);
+		remote.setTarget(el);
 		remote.mute();
 		remote.play();
-	}
+	});
 };
 
 export function useDocumentPiP(
