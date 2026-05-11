@@ -35,7 +35,7 @@
         v-model:model-value="hour"
         :disabled="disabled"
         :label="labelHours"
-        :max-value="dateMode ? null : 23"
+        :max-value="getHoursMaxValue"
         :v="v"
         hide-input-info
         @blur="onHoursBlurEvent"
@@ -127,11 +127,16 @@ interface WtTimepickerProps {
 	 * Custom validators for vuelidate
 	 */
 	customValidators?: unknown[];
+	/**
+	 * remove max hour restriction
+	 */
+	noMaxHours?: boolean;
 }
 
 const props = withDefaults(defineProps<WtTimepickerProps>(), {
 	modelValue: 0,
 	dateMode: false,
+	noMaxHours: false,
 	label: '',
 	format: 'hh:mm:ss',
 	disabled: false,
@@ -166,6 +171,11 @@ const { isValidation, invalid, validationText, validationTextColor } =
 const isHour = computed(() => props.format.includes('hh'));
 const isMin = computed(() => props.format.includes('mm'));
 const isSec = computed(() => props.format.includes('ss'));
+
+const getHoursMaxValue = computed(() => {
+	if (props.noMaxHours || props.dateMode) return null;
+	return 23;
+});
 
 // labelDays() {
 //   if (this.noLabel) return null;
