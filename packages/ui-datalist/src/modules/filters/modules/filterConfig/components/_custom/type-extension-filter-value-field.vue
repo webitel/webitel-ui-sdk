@@ -20,7 +20,7 @@
         :search-method="
           (...params) => props.filterConfig.searchRecords(...params)
         "
-        :required="false"
+        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
@@ -36,7 +36,8 @@
         :search-method="
           (...params) => props.filterConfig.searchRecords(...params)
         "
-        :required="false"
+
+        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */""
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
