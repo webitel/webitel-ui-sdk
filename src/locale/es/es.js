@@ -43,6 +43,7 @@ export default {
 		saveAs: 'Guardar como',
 		saved: 'Guardado',
 		send: 'Enviar',
+		sendMessage: 'Enviar mensaje',
 		start: 'Iniciar',
 		close: 'Cerrar',
 		add: 'Añadir',
@@ -237,6 +238,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Chat web',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway de chat personalizado',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Respuesta rápida | Respuestas rápidas',
@@ -839,7 +841,12 @@ export default {
 				`El ${named('entity').toLowerCase()} fue eliminado`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Tu contraseña expirará en { days } días',
+			passwordExpirationMessageDays: 'Tu contraseña expirará en {amount} días',
+			passwordExpirationMessageHours:
+				'Tu contraseña expirará en menos de {amount} horas',
+			licenseExpirationSoonMessage:
+				'Tu licencia {name} expirará en {amount} días',
+			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
 		},
 	},
 	errorNotifications: {

@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Lưu như',
 		saved: 'Đã lưu',
 		send: 'Gửi',
+		sendMessage: 'Gửi tin nhắn',
 		start: 'Bắt đầu',
 		close: 'Đóng',
 		add: 'Thêm',
@@ -242,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Cổng kết nối chat tùy chỉnh',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Trả lời nhanh | Trả lời nhanh',
@@ -843,8 +845,13 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
 		},
 		warnings: {
-			passwordExpirationMessage:
-				'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
+			passwordExpirationMessageDays:
+				'Mật khẩu của bạn sẽ hết hạn sau { amount } ngày',
+			passwordExpirationMessageHours:
+				'Mật khẩu của bạn sẽ hết hạn sau ít hơn { amount } giờ',
+			licenseExpirationSoonMessage:
+				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
+			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
 		},
 	},
 	errorNotifications: {

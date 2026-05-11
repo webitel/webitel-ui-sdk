@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Salvează ca',
 		saved: 'Salvat',
 		send: 'Trimite',
+		sendMessage: 'Trimite mesaj',
 		start: 'Start',
 		close: 'Închide',
 		add: 'Adaugă',
@@ -242,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway Chat Personalizat',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Răspuns rapid | Răspunsuri rapide',
@@ -845,7 +847,12 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} a fost șters`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Parola ta va expira în { days } zile',
+			passwordExpirationMessageDays: 'Parola ta va expira în {amount} zile',
+			passwordExpirationMessageHours:
+				'Parola ta va expira în mai puțin de {amount} ore',
+			licenseExpirationSoonMessage:
+				'Licența ta {name} va expira în {amount} zile',
+			licenseExpirationMessage: 'Licența ta {name} a expirat',
 		},
 	},
 	errorNotifications: {

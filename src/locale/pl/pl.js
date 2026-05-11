@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Zapisz jako',
 		saved: 'Zapisano',
 		send: 'Wyślij',
+		sendMessage: 'Хабар жіберу',
 		start: 'Start',
 		close: 'Zamknij',
 		add: 'Dodaj',
@@ -242,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Czat webowy',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Niestandardowa bramka czatu',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
@@ -840,7 +842,12 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni',
+			passwordExpirationMessageDays: 'Twoje hasło wygaśnie za {amount} dni',
+			passwordExpirationMessageHours:
+				'Twoje hasło wygaśnie za mniej niż {amount} godzin',
+			licenseExpirationSoonMessage:
+				'Twoja licencja {name} wygaśnie za {amount} dni',
+			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
 		},
 	},
 	errorNotifications: {
