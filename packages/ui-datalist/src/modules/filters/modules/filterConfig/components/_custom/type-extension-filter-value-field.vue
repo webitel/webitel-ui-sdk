@@ -12,6 +12,7 @@
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
+        :v="v$.model"
         :value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -19,6 +20,7 @@
         :search-method="
           (...params) => props.filterConfig.searchRecords(...params)
         "
+        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
@@ -26,6 +28,7 @@
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
+        :v="v$.model"
         :value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -33,6 +36,8 @@
         :search-method="
           (...params) => props.filterConfig.searchRecords(...params)
         "
+
+        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */""
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
@@ -51,7 +56,8 @@ import {
 	WtTypeExtensionValueInput,
 } from '@webitel/ui-sdk/components';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import { computed, useAttrs, watch } from 'vue';
+import { computed, onMounted, useAttrs, watch } from 'vue';
+import { WebitelProtoDataTypeKind } from 'webitel-sdk';
 
 import DateTimeOptionsFilterValueField from '../_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
@@ -84,7 +90,7 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-
+v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {
