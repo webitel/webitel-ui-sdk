@@ -117,17 +117,6 @@ describe('createUserNotificationsStore', () => {
 		expect(store.clearShownMap).toBeDefined();
 	});
 
-	it('showNotifications should fetch and map notifications on first call', async () => {
-		vi.useFakeTimers();
-		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
-
-		const store = useStore();
-		await store.showNotifications(userId);
-
-		vi.runAllTimers();
-		vi.useRealTimers();
-	});
-
 	it('showNotifications should emit notification with defer', async () => {
 		vi.useFakeTimers();
 		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
