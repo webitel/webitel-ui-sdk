@@ -93,6 +93,8 @@ const props = defineProps<{
 	v?: object;
 }>();
 
+props.v?.$touch();
+
 const { t } = useI18n();
 
 const label = computed(() => {
