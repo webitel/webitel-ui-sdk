@@ -152,12 +152,12 @@ const rootClasses = computed(() => [
  * even for muted media.  To work around this we locate the native `<video>`
  * and call `play()` on it directly — the browser always permits muted autoplay.
  *
- * `findNativeVideo` is needed because `querySelector('video')` does not cross
+ * `findNativeVideoElement` is needed because `querySelector('video')` does not cross
  * shadow-DOM boundaries; Vidstack renders `<video>` inside `<media-provider>`'s
  * shadow root, so we walk the tree manually and pierce each shadow root we meet.
  * Technique: https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot
  */
-const findNativeVideo = (
+const findNativeVideoElement = (
 	root: Element | ShadowRoot,
 ): HTMLVideoElement | null => {
 	if (root instanceof HTMLVideoElement) return root;
@@ -172,7 +172,7 @@ const findNativeVideo = (
 		...shadowChildren,
 		...lightChildren,
 	]) {
-		const found = findNativeVideo(child);
+		const found = findNativeVideoElement(child);
 		if (found) return found;
 	}
 
@@ -181,7 +181,7 @@ const findNativeVideo = (
 
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
-	const video = findNativeVideo(ev.target as Element);
+	const video = findNativeVideoElement(ev.target as Element);
 	const playPromise = (video ?? (ev.target as HTMLMediaElement)).play?.();
 	if (playPromise && typeof playPromise.catch === 'function') {
 		playPromise.catch(() => {});

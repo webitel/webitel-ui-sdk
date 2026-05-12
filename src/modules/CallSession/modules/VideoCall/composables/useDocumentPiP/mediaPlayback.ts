@@ -1,9 +1,8 @@
 import { MediaRemoteControl } from 'vidstack';
 
 import type { MediaSnapshot } from '../../types/types';
-
-import { collectMedia, safePlay } from './mediaCollection';
 import { walkElementTree } from './domTraversal';
+import { collectMedia, safePlay } from './mediaCollection';
 import { restoreStreams } from './mediaSnapshot';
 
 export const requestVidstackPlayback = (root: Element) => {
