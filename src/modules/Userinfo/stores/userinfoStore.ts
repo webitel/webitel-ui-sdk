@@ -37,7 +37,7 @@ export const createUserinfoStore = () => {
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
 		const userNotificationsStore = useUserNotificationsStore();
-		const { showNotifications, clearShownMap: clearNotificationStorage } =
+		const { showNotifications, clearShownUserNotifications } =
 			userNotificationsStore;
 
 		const userId = ref();
@@ -75,7 +75,7 @@ export const createUserinfoStore = () => {
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
 			await logout();
-			clearNotificationStorage(userId.value);
+			clearShownUserNotifications(userId.value);
 			window.location.href = authUrl;
 		};
 

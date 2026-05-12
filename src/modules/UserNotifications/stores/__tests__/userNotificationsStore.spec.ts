@@ -1,206 +1,185 @@
 import { ApiUserWarningId } from '@webitel/api-services/gen/models';
 import { createPinia, setActivePinia } from 'pinia';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createApp } from 'vue';
-import '../../../../../tests/mocks/localStorageMock';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import eventBus from '../../../../scripts/eventBus';
+import { getUserWarnings } from '../../api/UserNotifications';
+import { createUserNotificationsStore } from '../userNotificationsStore';
 
-type ViMock = ReturnType<typeof vi.fn>;
-
-// Mock notification class
-class MockNotification {
-	id: string;
-	type: string = 'info';
-	localeKey: string;
-	params: Record<string, unknown>;
-	shown: boolean = false;
-
-	constructor({ id, warningData: data }: any) {
-		this.id = `${id}_mock`;
-		this.localeKey = 'passwordExpirationMessageDays';
-		this.params = {
-			amount: data.passwordExpiry?.daysRemaining || 3,
-		};
-	}
-}
-
-// Mocks for modules used by the store
 vi.mock('../../api/UserNotifications', () => {
 	return {
 		getUserWarnings: vi.fn(),
 	};
 });
+vi.mock('../../../../scripts/eventBus', () => ({
+	default: {
+		$emit: vi.fn(),
+	},
+}));
 
-vi.mock('../../../../scripts/isEmpty', () => {
-	return {
-		default: (obj: object) => Object.keys(obj).length === 0,
-	};
-});
+const mockedGetUserWarnings = vi.mocked(getUserWarnings);
+const STORAGE_KEY = 'usersWithShownNotifications';
+const TEST_USER_ID = 'user-123';
 
-vi.mock('../classes/UserNotifications', () => {
-	return {
-		USER_NOTIFICATION_CONFIGS_MAP: new Map([
-			[
-				ApiUserWarningId.PasswordExpiresSoon,
-				MockNotification,
-			],
-		]),
-	};
-});
-
-vi.mock('../../../../locale/i18n', () => {
-	return {
-		default: {
-			global: {
-				t: (key: string, payload?: Record<string, unknown>) =>
-					`${key}:${JSON.stringify(payload)}`,
-				locale: {
-					value: 'en',
-				},
-			},
+const mockPasswordWarning = {
+	id: ApiUserWarningId.PasswordExpiresSoon,
+	warningData: {
+		passwordExpiry: {
+			daysRemaining: 3,
 		},
-	};
-});
+	},
+};
 
-vi.mock('../../../../scripts/eventBus', () => {
-	return {
-		default: {
-			$on: vi.fn(),
-			$off: vi.fn(),
-			$emit: vi.fn(),
+const mockLicenseWarning = {
+	id: ApiUserWarningId.LicenseExpiresSoon,
+	warningData: {
+		licenseExpiry: {
+			daysRemaining: 5,
+			licenseName: 'Enterprise',
 		},
-	};
-});
+	},
+};
 
-import eventBus from '../../../../scripts/eventBus';
-import { getUserWarnings } from '../../api/UserNotifications';
-import { createUserNotificationsStore } from '../userNotificationsStore';
-
-describe('createUserNotificationsStore', () => {
-	let useStore: ReturnType<typeof createUserNotificationsStore>;
-	let pinia: ReturnType<typeof createPinia>;
-	const userId = 'test-user-123';
-
-	const notificationsResponse = {
-		warnings: [
-			{
-				id: ApiUserWarningId.PasswordExpiresSoon,
-				warningData: {
-					passwordExpiry: {
-						daysRemaining: 5,
-					},
-				},
-			},
-		],
-	};
-
+describe('userNotificationsStore', () => {
 	beforeEach(() => {
-		vi.clearAllMocks();
-		localStorage.clear();
-
-		pinia = createPinia();
-		const app = createApp({});
-		app.use(pinia);
-		setActivePinia(pinia);
-
-		useStore = createUserNotificationsStore();
-	});
-
-	afterEach(() => {
+		setActivePinia(createPinia());
 		localStorage.clear();
 		vi.clearAllMocks();
-	});
-
-	it('should be defined', () => {
-		const store = useStore();
-		expect(store).toBeDefined();
-		expect(store.showNotifications).toBeDefined();
-		expect(store.clearShownMap).toBeDefined();
-	});
-
-	it('showNotifications should emit notification with defer', async () => {
 		vi.useFakeTimers();
-		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
-
-		const store = useStore();
-		await store.showNotifications(userId);
-
-		// Notification should be deferred by setTimeout
-		expect(eventBus.$emit).not.toHaveBeenCalled();
-
-		vi.runAllTimers();
-
-		expect(eventBus.$emit).toHaveBeenCalled();
-		const call = (eventBus.$emit as ViMock).mock.calls[0];
-		expect(call[0]).toBe('notification');
-		expect(call[1]).toHaveProperty('type');
-		expect(call[1]).toHaveProperty('text');
-
-		vi.useRealTimers();
 	});
 
-	it('showNotifications should not re-fetch if shownMap exists', async () => {
-		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
-		const store = useStore();
+	describe('showNotifications', () => {
+		it('does not show notifications that the user is already in storage', async () => {
+			localStorage.setItem(
+				STORAGE_KEY,
+				JSON.stringify([
+					TEST_USER_ID,
+				]),
+			);
 
-		// First call
-		await store.showNotifications(userId);
-		expect(getUserWarnings).toHaveBeenCalledOnce();
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
 
-		vi.clearAllMocks();
+			await store.showNotifications(TEST_USER_ID);
 
-		// Second call - should NOT fetch
-		vi.useFakeTimers();
-		await store.showNotifications(userId);
-		vi.runAllTimers();
-
-		expect(getUserWarnings).not.toHaveBeenCalled();
-		vi.useRealTimers();
-	});
-
-	it('showNotifications should mark notifications as shown', async () => {
-		vi.useFakeTimers();
-		(getUserWarnings as ViMock).mockResolvedValue(notificationsResponse);
-
-		const store = useStore();
-		await store.showNotifications(userId);
-
-		vi.runAllTimers();
-
-		const storageKey = `userNotifications/${userId}/shown`;
-		const shownMap = JSON.parse(localStorage.getItem(storageKey) || '{}');
-
-		expect(Object.keys(shownMap).length).toBeGreaterThan(0);
-		expect(Object.values(shownMap).some((v) => v === true)).toBe(true);
-
-		vi.useRealTimers();
-	});
-
-	it('clearShownMap should remove stored notifications', () => {
-		const storageKey = `userNotifications/${userId}/shown`;
-		localStorage.setItem(
-			storageKey,
-			JSON.stringify({
-				'notification-1': true,
-			}),
-		);
-
-		expect(localStorage.getItem(storageKey)).not.toBeNull();
-
-		const store = useStore();
-		store.clearShownMap(userId);
-
-		expect(localStorage.getItem(storageKey)).toBeNull();
-	});
-
-	it('should handle empty notifications response', async () => {
-		(getUserWarnings as ViMock).mockResolvedValue({
-			warnings: [],
+			expect(getUserWarnings).not.toHaveBeenCalled();
 		});
 
-		const store = useStore();
-		await store.showNotifications(userId);
+		it('shows notifications and saves the user in storage', async () => {
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					mockPasswordWarning,
+				],
+			});
 
-		const state = store as any;
-		expect(state.notifications?.length || 0).toBe(0);
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).toHaveBeenCalledWith(
+				'notification',
+				expect.objectContaining({
+					type: 'info',
+				}),
+			);
+
+			const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+			expect(stored).toContain(TEST_USER_ID);
+		});
+
+		it('Do not ignore API notifications by turning an empty array', async () => {
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).not.toHaveBeenCalled();
+		});
+
+		it('Do not save if the id is not found in the map config', async () => {
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					{
+						id: 'unknown_warning',
+						warningData: {},
+					},
+				],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).not.toHaveBeenCalled();
+		});
+
+		it('shows some notifications', async () => {
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					mockPasswordWarning,
+					mockLicenseWarning,
+				],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).toHaveBeenCalledTimes(2);
+		});
+	});
+
+	describe('clearShownUserNotifications', () => {
+		it('clear localStorage', async () => {
+			localStorage.setItem(
+				STORAGE_KEY,
+				JSON.stringify([
+					TEST_USER_ID,
+					'user-456',
+				]),
+			);
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			store.clearShownUserNotifications(TEST_USER_ID);
+
+			const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+			expect(stored).not.toContain(TEST_USER_ID);
+			expect(stored).toContain('user-456');
+		});
+
+		it('after clearShownUserNotifications notifications display again', async () => {
+			localStorage.setItem(
+				STORAGE_KEY,
+				JSON.stringify([
+					TEST_USER_ID,
+				]),
+			);
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					mockPasswordWarning,
+				],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			store.clearShownUserNotifications(TEST_USER_ID);
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).toHaveBeenCalled();
+		});
 	});
 });
