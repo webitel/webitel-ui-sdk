@@ -13,6 +13,7 @@
       @click="togglePicker"
     />
 		<teleport
+			defer
 			:disabled="!popupTeleportTo"
 		 	:to="teleportValue"
 		>
