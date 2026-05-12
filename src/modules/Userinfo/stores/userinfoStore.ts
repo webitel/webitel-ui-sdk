@@ -52,7 +52,7 @@ export const createUserinfoStore = () => {
 
 			userId.value = session.userId;
 			userInfo.value = pick(session, [
-				'domainId',
+				'domain',
 				'username',
 				'permissions',
 				'userId',
