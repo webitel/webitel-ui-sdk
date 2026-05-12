@@ -8,6 +8,12 @@
  * all are ready or the timeout expires. Triggers vidstack playback after an
  * initial delay and re-kicks it periodically when any element stays stalled,
  * throttled to once per 1500 ms to avoid redundant calls.
+ *
+ * Background: browsers block autoplay until the user interacts with the page,
+ * which caused the video to freeze after opening PiP. Since the video must
+ * play immediately without any extra clicks, this retry loop works around that
+ * by muting elements (which bypasses the autoplay restriction) and
+ * re-attempting playback until all media is running.
  */
 import type { MediaSnapshot } from '../../types/types';
 
