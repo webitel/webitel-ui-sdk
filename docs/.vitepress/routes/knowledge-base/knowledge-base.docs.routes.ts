@@ -178,6 +178,18 @@ export const knowledgeBaseRoutes = [
 									'how-to/add-rest-api-module/Readme.md',
 								),
 							},
+							{
+								text: 'Make release',
+								link: resolveKnowledgeBaseLinkDoc(
+									'how-to/make-release/Readme.md',
+								),
+							},
+							{
+								text: 'Use actions',
+								link: resolveKnowledgeBaseLinkDoc(
+									'how-to/use-actions/Readme.md',
+								),
+							},
 						],
 					},
 					{

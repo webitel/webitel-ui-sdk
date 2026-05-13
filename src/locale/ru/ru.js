@@ -40,6 +40,7 @@ export default {
 		saveAs: 'Сохранить как',
 		saved: 'Сохранено',
 		send: 'Отправить',
+		sendMessage: 'Отправить сообщение',
 		start: 'Начать',
 		close: 'Закрыть',
 		add: 'Добавить',
@@ -238,6 +239,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+			[ChatGatewayProvider.PORTAL]: 'Портал',
 		},
 		quickReplies: {
 			quickReplies: 'Быстрый ответ | Быстрые ответы',
@@ -835,7 +837,13 @@ export default {
 			delete: ({ named }) => `${named('entity')} был удалён`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
+			passwordExpirationMessageDays:
+				'Ваш пароль истечёт через {amound} дн(я/ей)',
+			passwordExpirationMessageHours:
+				'До истечения пароля осталось менее {amound} часов.',
+			licenseExpirationSoonMessage:
+				'Ваша лицензия {name}  завершится через {amount} дней',
+			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
 		},
 	},
 	errorNotifications: {

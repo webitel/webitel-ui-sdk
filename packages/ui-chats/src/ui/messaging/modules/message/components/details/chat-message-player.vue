@@ -69,7 +69,7 @@ function handlePlayerInitialize(player) {
 }
 
 .chat-message-player__audio {
-  min-width: var(--chat-file-min-width);
+  min-width: var(--chat-audio-player-min-width);
 }
 
 </style>

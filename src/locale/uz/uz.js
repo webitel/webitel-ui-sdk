@@ -44,6 +44,7 @@ export default {
 		saveAs: 'Boshqa nom bilan saqlash',
 		saved: 'Saqlandi',
 		send: "Jo'natish",
+		sendMessage: 'Xabar yuborish',
 		start: 'Boshlash',
 		close: 'Yopish',
 		add: "Qo'shish",
@@ -242,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Veb chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Maxsus chat shlyuzi',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Tezkor javob | Tezkor javoblar',
@@ -843,8 +845,13 @@ export default {
 			delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
 		},
 		warnings: {
-			passwordExpirationMessage:
-				'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
+			passwordExpirationMessageDays:
+				'Parolingiz {amount} kundan keyin amal qilishdan chiqadi',
+			passwordExpirationMessageHours:
+				'Parolingiz {amount} soatdan kam vaqtdan keyin amal qilishdan chiqadi',
+			licenseExpirationSoonMessage:
+				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
+			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
 		},
 	},
 	errorNotifications: {

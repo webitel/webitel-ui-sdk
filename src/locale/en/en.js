@@ -47,6 +47,7 @@ export default deepmerge(
 			saveAs: 'Save as',
 			saved: 'Saved',
 			send: 'Send',
+			sendMessage: 'Send message',
 			start: 'Start',
 			close: 'Close',
 			add: 'Add',
@@ -245,6 +246,7 @@ export default deepmerge(
 				[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 				[ChatGatewayProvider.INFOBIP]: 'Infobip',
 				[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+				[ChatGatewayProvider.PORTAL]: 'Portal',
 			},
 			quickReplies: {
 				quickReplies: 'Quick reply | Quick replies',
@@ -853,7 +855,13 @@ export default deepmerge(
 					`The ${named('entity').toLowerCase()} was deleted`,
 			},
 			warnings: {
-				passwordExpirationMessage: 'Your password will expire in { days } days',
+				passwordExpirationMessageDays:
+					'Your password will expire in {amount} days',
+				passwordExpirationMessageHours:
+					'Your password will expire in less than {amount} hours',
+				licenseExpirationSoonMessage:
+					'Your license {name} will expire in {amount} days',
+				licenseExpirationMessage: 'Your license {name} has expired',
 			},
 		},
 		errorNotifications: {

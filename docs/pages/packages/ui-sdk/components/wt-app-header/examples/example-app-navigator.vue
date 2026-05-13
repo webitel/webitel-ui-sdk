@@ -3,31 +3,31 @@ import { WtApplication } from '@webitel/ui-sdk/enums';
 
 const apps = [
 	{
-		name: WebitelApplications.AGENT,
+		name: WtApplication.Agent,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.AUDIT,
+		name: WtApplication.Audit,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.SUPERVISOR,
+		name: WtApplication.Supervisor,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.CRM,
+		name: WtApplication.Crm,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.ADMIN,
+		name: WtApplication.Admin,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.HISTORY,
+		name: WtApplication.History,
 		href: 'https://example.com',
 	},
 	{
-		name: WebitelApplications.ANALYTICS,
+		name: WtApplication.Analytics,
 		href: 'https://example.com',
 	},
 ];

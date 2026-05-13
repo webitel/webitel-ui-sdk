@@ -7,7 +7,7 @@
         </span>
       </template>
     </p-checkbox>
-    <wt-label v-if="hasLabel" :disabled="disabled" :for="checkboxId">
+    <wt-label v-if="hasLabel" :disabled="disabled">
       <!-- @slot Custom label markup -->
       <slot name="label" v-bind="{ label, isChecked, disabled }">
         <div v-if="label" class="wt-checkbox__label">
@@ -101,7 +101,7 @@ const iconColor = computed(() => {
 }
 
 .wt-checkbox__label {
-  cursor: pointer;
+  cursor: default;
   transition: var(--transition);
 }
 </style>

@@ -114,7 +114,7 @@
 * [ComponentSize](enums/ComponentSize/Readme.md)
 * [IconAction](enums/IconAction/Readme.md)
 * [TypesExportedSettings](enums/TypesExportedSettings/Readme.md)
-* [WebitelApplications](enums/WebitelApplications/index.md)
+* [WebitelApplications](enums/WebitelApplications/WebitelApplications.enum.md)
 
 ## Locale
 * [en](locale/en/Readme.md)

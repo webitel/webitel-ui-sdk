@@ -33,7 +33,10 @@
 						/>
 					</template>
 				</wt-input-text>
-        <div class="wt-table-column-select__popup-list-wrap">
+        <div 
+					class="wt-table-column-select__popup-list-wrap"
+					:class="{'wt-table-column-select__popup-list-wrap__height-fixed': enableSearch}"
+				>
           <ul
 						v-if="changeableDraft.length"
             :class="{
@@ -45,10 +48,9 @@
             class="wt-table-column-select__popup-list"
           >
             <li
-              v-for="(column, key) of changeableDraft"
-              :key="key"
+              v-for="column of changeableDraft"
+              :key="column.value"
               class="wt-table-column-select__popup-item"
-              @click.capture.prevent="column.show = !column.show"
             >
               <wt-checkbox
                 :label="shownColLabel(column)"
@@ -177,11 +179,18 @@ watch(isColumnSelectPopup, () => {
 
 .wt-table-column-select__popup-search {
 	margin-bottom: var(--spacing-xs);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--wt-popup-background-color);
 }
 
 .wt-table-column-select__popup-list-wrap {
-  height: 400px;
-	display: flex;
+  max-height: 400px;
+}
+
+.wt-table-column-select__popup-list-wrap__height-fixed {
+	height: 400px;
 }
 
 .wt-table-column-select__popup-list {

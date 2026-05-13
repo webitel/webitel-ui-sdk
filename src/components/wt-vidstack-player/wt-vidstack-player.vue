@@ -1,13 +1,8 @@
 <template>
   <div
-    :class="[
-      `wt-vidstack-player--${size}`,
-      `wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
-      fullscreen && `wt-vidstack-player--fullscreen`,
-      stretch && `wt-vidstack-player--stretch`,
-      props.static && 'wt-vidstack-player--static',
-      props.hideBackground && 'wt-vidstack-player--hide-background'
-    ]" class="wt-vidstack-player"
+    ref="root"
+    :class="rootClasses"
+    class="wt-vidstack-player"
   >
     <media-player
       ref="player"
@@ -54,7 +49,7 @@
 import 'vidstack/player';
 import 'vidstack/player/ui';
 import type { MediaSrc } from 'vidstack';
-import { computed, provide, ref, toRefs } from 'vue';
+import { computed, provide, ref, toRefs, useTemplateRef } from 'vue';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
@@ -78,6 +73,7 @@ interface Props {
 	hideExpand?: boolean;
 	stretch?: boolean;
 	videoObjectFit?: 'cover' | 'contain';
+	mirrorVideo?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -101,12 +97,17 @@ const emit = defineEmits<{
 }>();
 
 // const player = useTemplateRef<MediaPlayerElement>('player');
+const rootEl = useTemplateRef<HTMLElement>('root');
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 
 const changeSize = (value) => {
 	size.value = value;
 	emit('change-size', value);
+};
+
+const enterFullscreen = () => {
+	rootEl.value?.requestFullscreen();
 };
 
 /** @author liza-pohranichna
@@ -116,6 +117,7 @@ provide('size', {
 	size,
 	fullscreen,
 	changeSize,
+	enterFullscreen,
 });
 
 const { src: srcRef, mime: typeRef, stream: streamRef } = toRefs(props);
@@ -125,6 +127,16 @@ const { normalizedSrcObject } = useVidstackSrc({
 	type: typeRef,
 	stream: streamRef,
 });
+
+const rootClasses = computed(() => [
+	`wt-vidstack-player--${size.value}`,
+	`wt-vidstack-player-video-object-fit--${props.videoObjectFit}`,
+	props.mirrorVideo && 'wt-vidstack-player--mirror-video',
+	fullscreen.value && 'wt-vidstack-player--fullscreen',
+	props.stretch && 'wt-vidstack-player--stretch',
+	props.static && 'wt-vidstack-player--static',
+	props.hideBackground && 'wt-vidstack-player--hide-background',
+]);
 
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
@@ -260,6 +272,7 @@ const onCanPlay = (ev: Event) => {
 .wt-vidstack-player--lg .wt-vidstack-player__player {
   display: flex;
   align-items: center;
+  min-height: 100%;
 }
 
 .wt-vidstack-player--lg .wt-vidstack-player__provider {
@@ -268,6 +281,10 @@ const onCanPlay = (ev: Event) => {
 }
 
 .wt-vidstack-player--fullscreen {
+  border-radius: 0;
+}
+
+.wt-vidstack-player--fullscreen .wt-vidstack-player__provider :deep(video) {
   border-radius: 0;
 }
 
@@ -320,6 +337,10 @@ const onCanPlay = (ev: Event) => {
 
 .wt-vidstack-player-video-object-fit--contain :deep(video) {
   object-fit: contain;
+}
+
+.wt-vidstack-player--mirror-video :deep(video) {
+  transform: scaleX(-1);
 }
 
 /*
