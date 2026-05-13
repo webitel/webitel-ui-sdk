@@ -1,5 +1,5 @@
 :root {
-	--_elevation-color: hsla(0, 0%, 0%, 0.08);
+	--_elevation-color: hsla(0, 0%, 0%, 0.05);
 	--elevation-1: 0px 0px 2px 1px var(--_elevation-color);
 	--elevation-2: 0px 0px 4px 2px var(--_elevation-color);
 	--elevation-3: 0px 0px 6px 3px var(--_elevation-color);

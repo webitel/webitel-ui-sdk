@@ -77,7 +77,7 @@ const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
   padding: var(--spacing-xs);
   gap: var(--spacing-xs);
   border-radius: var(--spacing-xs);
-  box-shadow: var(--elevation-10);
+  box-shadow: var(--elevation-3);
 }
 
 .wt-expansion-card-header {
