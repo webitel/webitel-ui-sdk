@@ -64,8 +64,8 @@ function handlePlayerInitialize(player) {
 
 <style lang="scss" scoped>
 .chat-message-player :deep(.wt-vidstack-player) {
-  height: var(--chat-video-player-height);
-  width: var(--chat-video-player-width);
+  max-height: var(--chat-file-max-height);
+  max-width: var(--chat-file-max-width);
 }
 
 .chat-message-player__audio {
