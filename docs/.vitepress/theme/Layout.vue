@@ -8,23 +8,25 @@ import { onMounted, provide } from 'vue';
 const { isDark } = useData();
 
 const toggleComponentsDarkTheme = (value) => {
-  const html = document.querySelector('html');
-  if (value) html.classList.add('theme--dark');
-  else html.classList.remove('theme--dark');
+	const html = document.querySelector('html');
+	if (value) html.classList.add('theme--dark');
+	else html.classList.remove('theme--dark');
 };
 
 provide('toggle-appearance', () => {
-  isDark.value = !isDark.value;
-  toggleComponentsDarkTheme(isDark.value);
+	isDark.value = !isDark.value;
+	toggleComponentsDarkTheme(isDark.value);
 });
 
 onMounted(() => {
-  toggleComponentsDarkTheme(isDark.value);
+	toggleComponentsDarkTheme(isDark.value);
 });
 </script>
 
 <template>
   <DefaultTheme.Layout />
+  <!-- PrimeVue Toast host for docs (e.g. wt-notification migration demos) -->
+  <PToast position="top-right" />
 </template>
 
 <style lang="scss">

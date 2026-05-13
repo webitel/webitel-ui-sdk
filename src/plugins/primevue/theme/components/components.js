@@ -20,6 +20,7 @@ import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
 import textarea from './textarea/textarea.js';
+import toast from './toast/toast.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -32,6 +33,7 @@ const components = {
 	chip,
 	checkbox,
 	textarea,
+	toast,
 	toggleswitch: switcher,
 	divider,
 	image,

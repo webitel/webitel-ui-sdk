@@ -22,6 +22,8 @@ import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
 import PSlider from 'primevue/slider';
 import PTextarea from 'primevue/textarea';
+import PToast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 import PToggleSwitch from 'primevue/toggleswitch';
 import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
@@ -39,6 +41,7 @@ const changeComponentCompatMode = (component) => {
 };
 
 const initPrimevue = (app) => {
+	app.use(ToastService);
 	app.use(PrimeVue, {
 		theme: {
 			preset: WebitelTheme,
@@ -80,6 +83,7 @@ const initPrimevue = (app) => {
 		changeComponentCompatMode(PInputGroupAddon),
 	);
 	app.component('PMessage', changeComponentCompatMode(PMessage));
+	app.component('PToast', changeComponentCompatMode(PToast));
 
 	app.directive('tooltip', Tooltip);
 };
