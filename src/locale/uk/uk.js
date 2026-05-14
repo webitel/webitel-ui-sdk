@@ -836,7 +836,7 @@ export default {
 			delete: ({ named }) => `${named('entity')} було видалено`,
 		},
 		warnings: {
-			passwordExpirationMessageDays: 'Пароль спливе через {amound} дн(і/ів)',
+			passwordExpirationMessageDays: 'Пароль спливе через {amount} дн(і/ів)',
 			passwordExpirationMessageHours:
 				'Залишилось менше доби до завершення дії пароля',
 			licenseExpirationSoonMessage:
