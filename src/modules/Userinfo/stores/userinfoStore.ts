@@ -70,12 +70,14 @@ export const createUserinfoStore = () => {
 		};
 
 		const showUserNotifications = () => showNotifications(userId.value);
+		const clearStorageNotifications = (id?: string) =>
+			clearShownUserNotifications(id ?? userId.value);
 
 		const logoutUser = async () => {
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
 			await logout();
-			clearShownUserNotifications(userId.value);
+			clearStorageNotifications();
 			window.location.href = authUrl;
 		};
 
@@ -98,6 +100,7 @@ export const createUserinfoStore = () => {
 			hasApplicationVisibility,
 			logoutUser,
 			showUserNotifications,
+			clearStorageNotifications,
 		};
 	});
 

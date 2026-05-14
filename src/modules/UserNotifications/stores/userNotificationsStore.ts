@@ -28,8 +28,10 @@ export const createUserNotificationsStore = () => {
 			localStorage.setItem(
 				STORAGE_KEY,
 				JSON.stringify([
-					...shown,
-					userId,
+					...new Set([
+						...shown,
+						userId,
+					]),
 				]),
 			);
 		};
