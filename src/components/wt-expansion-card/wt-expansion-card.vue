@@ -7,8 +7,6 @@
       :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']"
       class="wt-expansion-card-header"
       tabindex="0"
-      @click="toggle"
-      @keypress.enter="toggle"
     >
       <slot name="header" />
     </header>
