@@ -5,9 +5,17 @@ import { z } from 'zod/v4';
  * only depth=1 fields will be returned
  * */
 export const getShallowFieldsToSendFromZodSchema = (
-	schema: z.ZodObject,
+	schema: z.ZodObject | z.ZodDefault<z.ZodObject>,
 ): string[] => {
-	return schema.keyof().options;
+	/**
+	 * @author r.zatirskyi
+	 * Previously, orval (v8.4.1) ignored `default` values and generated plain `ZodObject`.
+	 * Now schemas are wrapped with `.default(...)`, which transforms
+	 * `sechema` from `ZodObject` into `ZodDefault<ZodObject>`.
+	 */
+	const objectSchema =
+		schema instanceof z.ZodDefault ? schema.unwrap() : schema;
+	return objectSchema.keyof().options;
 };
 
 /*
