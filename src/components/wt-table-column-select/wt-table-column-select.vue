@@ -26,14 +26,14 @@
 						/>
 					</template>
 					<template #suffix>
-						<wt-icon-btn 
+						<wt-icon-btn
 							v-if="search"
 							icon="close--filled"
 							@click="search = ''"
 						/>
 					</template>
 				</wt-input-text>
-        <div 
+        <div
 					class="wt-table-column-select__popup-list-wrap"
 					:class="{'wt-table-column-select__popup-list-wrap__height-fixed': enableSearch}"
 				>
@@ -59,7 +59,7 @@
               />
             </li>
           </ul>
-					<wt-empty 
+					<wt-empty
 						v-else
 						:image="darkMode ? EmptyImageDark : EmptyImageLight"
 						:text="$t('webitelUI.empty.text.filters')"
@@ -174,7 +174,6 @@ watch(isColumnSelectPopup, () => {
 <style scoped>
 .wt-table-column-select {
   line-height: 0; /* prevent 24x28 icon height :/ */
-  text-align: center;
 }
 
 .wt-table-column-select__popup-search {

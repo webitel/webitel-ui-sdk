@@ -8,6 +8,10 @@ const textarea = {
 	colorScheme: TextareaScheme.colorScheme,
 
 	css: ({ dt }) => `
+      .p-textarea.p-invalid:enabled:hover {
+        border-color: ${dt('textarea.invalidHoverBorderColor')};
+      }
+
       .wt-textarea__textarea {
         ${generateWtTypographyCustomCss({
 					dt,

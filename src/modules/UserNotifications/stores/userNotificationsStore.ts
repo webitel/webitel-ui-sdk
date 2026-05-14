@@ -1,74 +1,107 @@
 import type { ApiUserWarning } from '@webitel/api-services/gen/models';
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import i18n from '../../../locale/i18n';
 import eventBus from '../../../scripts/eventBus';
 import { getUserWarnings } from '../api/UserNotifications';
 import { USER_NOTIFICATION_CONFIGS_MAP } from '../maps/userNotificationConfigsMap';
-import type {
-	NotificationsType,
-	UserNotificationsConfigsMap,
-} from '../types/UserNotifications';
+import type { NotificationsType } from '../types/UserNotifications';
+
+const STORAGE_KEY = 'usersWithShownNotifications';
 
 export const createUserNotificationsStore = () => {
 	const namespace = 'userNotifications';
 
 	const store = defineStore(namespace, () => {
-		const rawNotifications = ref<ApiUserWarning[]>([]);
+		const notifications = ref<NotificationsType[]>([]);
 
-		const initialize = async () => {
-			await fetch();
+		const getStoredUsers = (): string[] => {
+			const stored = localStorage.getItem(STORAGE_KEY);
+			return stored ? JSON.parse(stored) : [];
 		};
 
-		const fetch = async () => {
+		const isShownUserNotifications = (userId: string): boolean =>
+			getStoredUsers().includes(userId);
+
+		const setShownUserNotifications = (userId: string) => {
+			const shown = getStoredUsers();
+			localStorage.setItem(
+				STORAGE_KEY,
+				JSON.stringify([
+					...new Set([
+						...shown,
+						userId,
+					]),
+				]),
+			);
+		};
+
+		const clearShownUserNotifications = (userId: string) => {
+			const shown = getStoredUsers().filter((id: string) => id !== userId);
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(shown));
+		};
+
+		const fetchNotifications = async (): Promise<ApiUserWarning[]> => {
 			const response = await getUserWarnings();
-			rawNotifications.value =
-				(response && (response.warnings as ApiUserWarning[])) ?? [];
+			return (response?.warnings as ApiUserWarning[]) ?? [];
 		};
 
-		const notifications = computed<NotificationsType[]>(() => {
-			return rawNotifications.value
-				.map((notification) => {
-					const config: UserNotificationsConfigsMap =
-						USER_NOTIFICATION_CONFIGS_MAP.get(notification.id);
-					if (!config) return null;
-
-					return {
-						type: config.type,
-						localeKey: config.localeKey,
-						days: config.getDays(notification.warningData),
-						shown: false,
-					};
+		const mapNotifications = (array: ApiUserWarning[]) => {
+			return array
+				.map((warning) => {
+					const map = USER_NOTIFICATION_CONFIGS_MAP.get(warning.id);
+					if (!map) return null;
+					return map(warning);
 				})
 				.filter(Boolean) as NotificationsType[];
-		});
+		};
 
-		const show = () => {
-			notifications.value.forEach((notification) => {
-				// @author @Lera24
-				//notification should only be displayed the first time you visit the page
-				if (notification.shown) return;
+		const emitNotification = ({
+			type,
+			localeKey,
+			params,
+		}: NotificationsType) => {
+			const locale = localStorage.getItem('lang') || i18n.global.locale.value;
+			setTimeout(
+				() =>
+					eventBus.$emit('notification', {
+						type,
+						text: i18n.global.t(
+							`systemNotifications.warnings.${localeKey}`,
+							{
+								...params,
+							},
+							{
+								locale,
+							},
+						),
+					}),
+				100,
+			);
+		};
 
-				eventBus.$emit('notification', {
-					type: notification.type,
-					text: i18n.global.t(
-						`systemNotifications.warnings.${notification.localeKey}`,
-						{
-							days: notification.days,
-						},
-					),
+		const showNotifications = async (userId: string) => {
+			try {
+				if (isShownUserNotifications(userId)) return;
+
+				const apiNotifications = await fetchNotifications();
+				notifications.value = mapNotifications(apiNotifications);
+
+				if (!notifications.value?.length) return;
+
+				notifications.value.forEach((notification) => {
+					emitNotification(notification);
 				});
-				notification.shown = true;
-			});
+
+				setShownUserNotifications(userId);
+			} catch (err) {
+				throw err;
+			}
 		};
 
 		return {
-			initialize,
-			show,
-
-			/** internal for devtools/debug */
-			rawNotifications,
-			notifications,
+			showNotifications,
+			clearShownUserNotifications,
 		};
 	});
 
