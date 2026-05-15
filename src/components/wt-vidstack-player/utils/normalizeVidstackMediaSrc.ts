@@ -75,6 +75,8 @@ export function normalizeVidstackMediaSrc({ src, type }: SrcInput) {
 /**
  * Assume that the src and type are supported by vidstack
  * by normalizing its type and then re-checking it using vidstack's native check function
+ *
+ * @see https://webitel.atlassian.net/browse/WTEL-9557?focusedCommentId=753995
  */
 export function assumeVidstackSupportedAudioType({ src, type }: SrcInput) {
 	const normalizedSrc = normalizeVidstackMediaSrc({
@@ -88,6 +90,8 @@ export function assumeVidstackSupportedAudioType({ src, type }: SrcInput) {
 /**
  * Assume that the src and type are supported by vidstack
  * by normalizing its type and then re-checking it using vidstack's native check function
+ *
+ * @see https://webitel.atlassian.net/browse/WTEL-9557?focusedCommentId=753995
  */
 export function assumeVidstackSupportedVideoType({ src, type }: SrcInput) {
 	const normalizedSrc = normalizeVidstackMediaSrc({
