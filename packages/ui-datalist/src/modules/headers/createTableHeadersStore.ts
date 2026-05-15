@@ -101,43 +101,50 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateFields = (persistedFields: string[]) => {
-		const visibility = new Set(persistedFields);
+		const persistedFieldsSet = new Set(persistedFields);
+		const knownFieldNames = new Set(
+			headers.value.map((header) => header.field),
+		);
 
 		const knownHeaders = headers.value.map((header: WtTableHeader) => ({
 			...header,
-			show: visibility.has(header.field),
+			show: persistedFieldsSet.has(header.field),
 		}));
 
 		const customHeaders = persistedFields
-			.filter((field) => !headers.value.some((h) => h.field === field))
+			.filter((field) => !knownFieldNames.has(field))
 			.map((field) => ({
 				show: true,
 				field,
 				shouldBeInitialized: true,
 			}));
 
-		const remaining = new Map(
+		const headersByField = new Map(
 			[
 				...knownHeaders,
 				...customHeaders,
-			].map((h) => [
-				h.field,
-				h,
+			].map((header) => [
+				header.field,
+				header,
 			]),
 		);
 
-		const ordered = persistedFields.flatMap((field) => {
-			const header = remaining.get(field);
+		const headersInPersistedOrder = persistedFields.flatMap((field) => {
+			const header = headersByField.get(field);
 			if (!header) return [];
-			remaining.delete(field);
+			headersByField.delete(field);
 			return [
 				header,
 			];
 		});
 
+		const hiddenHeaders = [
+			...headersByField.values(),
+		];
+
 		updateShownHeaders([
-			...ordered,
-			...remaining.values(),
+			...headersInPersistedOrder,
+			...hiddenHeaders,
 		]);
 	};
 
