@@ -8,6 +8,7 @@ import { USER_NOTIFICATION_CONFIGS_MAP } from '../maps/userNotificationConfigsMa
 import type { NotificationsType } from '../types/UserNotifications';
 
 const STORAGE_KEY = 'usersWithShownNotifications';
+const NOTIFICATION_DURATION_SEC = 20;
 
 export const createUserNotificationsStore = () => {
 	const namespace = 'userNotifications';
@@ -75,6 +76,7 @@ export const createUserNotificationsStore = () => {
 								locale,
 							},
 						),
+						timeout: NOTIFICATION_DURATION_SEC,
 					}),
 				100,
 			);
