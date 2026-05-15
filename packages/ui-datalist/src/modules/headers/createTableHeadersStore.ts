@@ -100,37 +100,44 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
-	const updateFields = (fields: string[]) => {
-		const newHeaders = headers.value.map((header: WtTableHeader) => ({
+	const updateFields = (persistedFields: string[]) => {
+		const visibility = new Set(persistedFields);
+
+		const knownHeaders = headers.value.map((header: WtTableHeader) => ({
 			...header,
-			show: fields.includes(header.field),
+			show: visibility.has(header.field),
 		}));
 
-		const customFields = fields.filter(
-			(field) => !headers.value.some((header) => header.field === field),
-		);
-		const customFieldHeaders = customFields.map((field) => ({
-			show: true,
-			field,
-			shouldBeInitialized: true,
-		}));
+		const customHeaders = persistedFields
+			.filter((field) => !headers.value.some((h) => h.field === field))
+			.map((field) => ({
+				show: true,
+				field,
+				shouldBeInitialized: true,
+			}));
 
-		const mergedHeaders = [
-			...newHeaders,
-			...customFieldHeaders,
-		];
-		const orderedFields = fields.filter((field) =>
-			mergedHeaders.some((header) => header.field === field),
+		const remaining = new Map(
+			[
+				...knownHeaders,
+				...customHeaders,
+			].map((h) => [
+				h.field,
+				h,
+			]),
 		);
-		const reordered = setHeaderOrder(orderedFields);
 
-		const uniqueMerged = mergedHeaders.filter(
-			(merged) => !reordered.some((r) => r.field === merged.field),
-		);
+		const ordered = persistedFields.flatMap((field) => {
+			const header = remaining.get(field);
+			if (!header) return [];
+			remaining.delete(field);
+			return [
+				header,
+			];
+		});
 
 		updateShownHeaders([
-			...reordered,
-			...uniqueMerged,
+			...ordered,
+			...remaining.values(),
 		]);
 	};
 
