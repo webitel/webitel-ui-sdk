@@ -30,4 +30,14 @@ export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
 			},
 		}),
 	],
+	[
+		ApiUserWarningId.LicenseExpired,
+		({ warningData: data }) => ({
+			type: 'info',
+			localeKey: 'licenseExpirationMessage',
+			params: {
+				name: data.licenseExpiry.licenseName,
+			},
+		}),
+	],
 ]);
