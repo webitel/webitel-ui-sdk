@@ -20,10 +20,10 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	chatName?: string;
 	/** [optional] contact connected to this user */
 	contact?: ApiObjectId;
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
+	readonly createdAt?: string;
+	readonly createdBy?: ApiUserId;
+	readonly deletedAt?: string;
+	readonly deletedBy?: ApiUserId;
 	device?: ApiObjectId;
 	/** [editable] list of unique `regular` devices, attached to this user */
 	devices?: ApiObjectId[];
@@ -32,7 +32,7 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	/** When set to true, the user will be required to change their password on next login. */
 	forcePasswordChange?: boolean;
 	hotdesks?: ApiObjectId[];
-	id?: string;
+	readonly id?: string;
 	license?: ApiLicenseUser[];
 	name?: string;
 	password?: string;
@@ -43,7 +43,7 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	profile?: ApiUserProfile;
 	roles?: ApiObjectId[];
 	totpUrl?: string;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
+	readonly updatedAt?: string;
+	readonly updatedBy?: ApiUserId;
 	username?: string;
 }

@@ -274,6 +274,15 @@ export const getReadUser2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -783,6 +792,15 @@ export const getDeleteUsers2ResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -1308,6 +1326,15 @@ export const getSearchUsersResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1821,6 +1848,15 @@ export const getCreateUserResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -2360,6 +2396,15 @@ export const getSearchUsers2ResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -2989,6 +3034,15 @@ export const getDeleteUsersResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -3490,6 +3544,15 @@ export const getReadUserResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -4007,6 +4070,15 @@ export const getUpdateUser2ResponseMock = (
 				}),
 				undefined,
 			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			prod: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -4503,6 +4575,15 @@ export const getUpdateUserResponseMock = (
 				undefined,
 			]),
 			issuedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,

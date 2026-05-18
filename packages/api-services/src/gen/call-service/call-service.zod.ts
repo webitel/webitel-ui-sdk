@@ -505,6 +505,7 @@ export const SearchHistoryCallResponse = zod.object({
 								})
 								.optional(),
 							endSec: zod.number().optional(),
+							fileId: zod.string().optional(),
 							id: zod.string().optional(),
 							note: zod.string().optional(),
 							startSec: zod.number().optional(),
@@ -670,6 +671,31 @@ export const SearchHistoryCallResponse = zod.object({
 					.optional(),
 				memberId: zod.string().optional(),
 				parentId: zod.string().optional(),
+				qualityMetrics: zod
+					.object({
+						jitterAvg: zod.number().optional(),
+						jitterMax: zod.number().optional(),
+						jitterMaxAt: zod.number().optional(),
+						jitterMin: zod.number().optional(),
+						jitterMinAt: zod.number().optional(),
+						mosAvg: zod.number().optional(),
+						mosMax: zod.number().optional(),
+						mosMaxAt: zod.number().optional(),
+						mosMin: zod.number().optional(),
+						mosMinAt: zod.number().optional(),
+						packetlossAvg: zod.number().optional(),
+						packetlossMax: zod.number().optional(),
+						packetlossMaxAt: zod.number().optional(),
+						packetlossMin: zod.number().optional(),
+						packetlossMinAt: zod.number().optional(),
+						roundtripAvg: zod.number().optional(),
+						roundtripMax: zod.number().optional(),
+						roundtripMaxAt: zod.number().optional(),
+						roundtripMin: zod.number().optional(),
+						roundtripMinAt: zod.number().optional(),
+						sipId: zod.string().optional(),
+					})
+					.optional(),
 				queue: zod
 					.object({
 						id: zod.string().optional(),
@@ -876,6 +902,7 @@ export const SearchHistoryCallPostResponse = zod.object({
 								})
 								.optional(),
 							endSec: zod.number().optional(),
+							fileId: zod.string().optional(),
 							id: zod.string().optional(),
 							note: zod.string().optional(),
 							startSec: zod.number().optional(),
@@ -1041,6 +1068,31 @@ export const SearchHistoryCallPostResponse = zod.object({
 					.optional(),
 				memberId: zod.string().optional(),
 				parentId: zod.string().optional(),
+				qualityMetrics: zod
+					.object({
+						jitterAvg: zod.number().optional(),
+						jitterMax: zod.number().optional(),
+						jitterMaxAt: zod.number().optional(),
+						jitterMin: zod.number().optional(),
+						jitterMinAt: zod.number().optional(),
+						mosAvg: zod.number().optional(),
+						mosMax: zod.number().optional(),
+						mosMaxAt: zod.number().optional(),
+						mosMin: zod.number().optional(),
+						mosMinAt: zod.number().optional(),
+						packetlossAvg: zod.number().optional(),
+						packetlossMax: zod.number().optional(),
+						packetlossMaxAt: zod.number().optional(),
+						packetlossMin: zod.number().optional(),
+						packetlossMinAt: zod.number().optional(),
+						roundtripAvg: zod.number().optional(),
+						roundtripMax: zod.number().optional(),
+						roundtripMaxAt: zod.number().optional(),
+						roundtripMin: zod.number().optional(),
+						roundtripMinAt: zod.number().optional(),
+						sipId: zod.string().optional(),
+					})
+					.optional(),
 				queue: zod
 					.object({
 						id: zod.string().optional(),
@@ -1231,6 +1283,7 @@ export const CreateCallAnnotationParams = zod.object({
 
 export const CreateCallAnnotationBody = zod.object({
 	endSec: zod.number().optional(),
+	fileId: zod.string().optional(),
 	note: zod.string().optional(),
 	startSec: zod.number().optional(),
 });
@@ -1245,6 +1298,7 @@ export const CreateCallAnnotationResponse = zod.object({
 		})
 		.optional(),
 	endSec: zod.number().optional(),
+	fileId: zod.string().optional(),
 	id: zod.string().optional(),
 	note: zod.string().optional(),
 	startSec: zod.number().optional(),
@@ -1275,6 +1329,7 @@ export const DeleteCallAnnotationResponse = zod.object({
 		})
 		.optional(),
 	endSec: zod.number().optional(),
+	fileId: zod.string().optional(),
 	id: zod.string().optional(),
 	note: zod.string().optional(),
 	startSec: zod.number().optional(),
@@ -1311,6 +1366,7 @@ export const UpdateCallAnnotationResponse = zod.object({
 		})
 		.optional(),
 	endSec: zod.number().optional(),
+	fileId: zod.string().optional(),
 	id: zod.string().optional(),
 	note: zod.string().optional(),
 	startSec: zod.number().optional(),
@@ -1377,6 +1433,7 @@ export const PatchHistoryCallResponse = zod.object({
 					})
 					.optional(),
 				endSec: zod.number().optional(),
+				fileId: zod.string().optional(),
 				id: zod.string().optional(),
 				note: zod.string().optional(),
 				startSec: zod.number().optional(),
@@ -1536,6 +1593,31 @@ export const PatchHistoryCallResponse = zod.object({
 		.optional(),
 	memberId: zod.string().optional(),
 	parentId: zod.string().optional(),
+	qualityMetrics: zod
+		.object({
+			jitterAvg: zod.number().optional(),
+			jitterMax: zod.number().optional(),
+			jitterMaxAt: zod.number().optional(),
+			jitterMin: zod.number().optional(),
+			jitterMinAt: zod.number().optional(),
+			mosAvg: zod.number().optional(),
+			mosMax: zod.number().optional(),
+			mosMaxAt: zod.number().optional(),
+			mosMin: zod.number().optional(),
+			mosMinAt: zod.number().optional(),
+			packetlossAvg: zod.number().optional(),
+			packetlossMax: zod.number().optional(),
+			packetlossMaxAt: zod.number().optional(),
+			packetlossMin: zod.number().optional(),
+			packetlossMinAt: zod.number().optional(),
+			roundtripAvg: zod.number().optional(),
+			roundtripMax: zod.number().optional(),
+			roundtripMaxAt: zod.number().optional(),
+			roundtripMin: zod.number().optional(),
+			roundtripMinAt: zod.number().optional(),
+			sipId: zod.string().optional(),
+		})
+		.optional(),
 	queue: zod
 		.object({
 			id: zod.string().optional(),
