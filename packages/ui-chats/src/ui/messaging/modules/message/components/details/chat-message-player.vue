@@ -11,7 +11,6 @@
       static
       hide-expand
       stretch
-      countdown-time-mode
     />
     <wt-player
       v-else
