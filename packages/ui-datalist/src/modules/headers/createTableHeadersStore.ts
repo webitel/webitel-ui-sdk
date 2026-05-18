@@ -100,19 +100,17 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
-	const updateFields = (persistedFields: string[]) => {
-		const persistedFieldsSet = new Set(persistedFields);
-		const knownFieldNames = new Set(
-			headers.value.map((header) => header.field),
-		);
+	const updateFields = (fields: string[]) => {
+		const fieldsSet = new Set(fields);
+		const mainFieldNames = new Set(headers.value.map((header) => header.field));
 
-		const knownHeaders = headers.value.map((header: WtTableHeader) => ({
+		const mainHeaders = headers.value.map((header: WtTableHeader) => ({
 			...header,
-			show: persistedFieldsSet.has(header.field),
+			show: fieldsSet.has(header.field),
 		}));
 
-		const customHeaders = persistedFields
-			.filter((field) => !knownFieldNames.has(field))
+		const customHeaders = fields
+			.filter((field) => !mainFieldNames.has(field))
 			.map((field) => ({
 				show: true,
 				field,
@@ -121,7 +119,7 @@ export const tableHeadersStoreBody = ({
 
 		const headersByField = new Map(
 			[
-				...knownHeaders,
+				...mainHeaders,
 				...customHeaders,
 			].map((header) => [
 				header.field,
@@ -129,7 +127,7 @@ export const tableHeadersStoreBody = ({
 			]),
 		);
 
-		const headersInPersistedOrder = persistedFields.flatMap((field) => {
+		const headersInPersistedOrder = fields.flatMap((field) => {
 			const header = headersByField.get(field);
 			if (!header) return [];
 			headersByField.delete(field);
