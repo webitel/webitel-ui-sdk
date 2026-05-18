@@ -260,7 +260,7 @@ export default {
 	CSV: {
 		skipHeaders: 'Пропустити заголовки',
 		charSet: 'Кодування',
-		separator: 'Роздільник',
+		separator: 'Розділювач',
 		CSVColumn: 'Стовпець CSV',
 		fieldName: 'Назва поля',
 		clearMember: 'Очистити учасника',
