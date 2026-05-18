@@ -1,7 +1,7 @@
 /**
  * @author @PalonnyiOleksandr
  *
- * [WETL-9414](https://webitel.atlassian.net/browse/WETL-9414)
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
  *
  * Polling retry mechanism for media playback inside Document PiP window.
  * Restores streams from snapshot, mutes and plays all media elements until
@@ -14,6 +14,8 @@
  * play immediately without any extra clicks, this retry loop works around that
  * by muting elements (which bypasses the autoplay restriction) and
  * re-attempting playback until all media is running.
+ *
+ * link to explanation - https://webitel.atlassian.net/browse/WTEL-9414?focusedCommentId=754533
  */
 import type { MediaSnapshot } from '../../types/types';
 

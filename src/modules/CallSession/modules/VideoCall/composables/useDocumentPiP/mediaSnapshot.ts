@@ -1,7 +1,7 @@
 /**
  * @author @PalonnyiOleksandr
  *
- * [WETL-9414](https://webitel.atlassian.net/browse/WETL-9414)
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
  *
  * Snapshot utilities for media elements inside Document PiP window.
  * `snapshotMedia` captures current muted state and srcObject of all media

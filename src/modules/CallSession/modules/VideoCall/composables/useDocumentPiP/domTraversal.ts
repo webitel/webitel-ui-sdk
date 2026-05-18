@@ -1,4 +1,4 @@
-export const walkElementTree = (
+export const domTraversal = (
 	root: Element | ShadowRoot,
 	visit: (el: Element) => void,
 ) => {
@@ -6,11 +6,11 @@ export const walkElementTree = (
 		visit(root);
 		if (root.shadowRoot) {
 			for (const child of root.shadowRoot.children) {
-				walkElementTree(child, visit);
+				domTraversal(child, visit);
 			}
 		}
 	}
 	for (const child of root.children) {
-		walkElementTree(child, visit);
+		domTraversal(child, visit);
 	}
 };

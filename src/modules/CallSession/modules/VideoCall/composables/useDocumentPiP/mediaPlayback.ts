@@ -1,12 +1,12 @@
 import { MediaRemoteControl } from 'vidstack';
 
 import type { MediaSnapshot } from '../../types/types';
-import { walkElementTree } from './domTraversal';
+import { domTraversal } from './domTraversal';
 import { collectMedia, safePlay } from './mediaCollection';
 import { restoreStreams } from './mediaSnapshot';
 
 export const requestVidstackPlayback = (root: Element) => {
-	walkElementTree(root, (el) => {
+	domTraversal(root, (el) => {
 		if (el.tagName.toLowerCase() !== 'media-player') return;
 		const remote = new MediaRemoteControl();
 		remote.setTarget(el);
