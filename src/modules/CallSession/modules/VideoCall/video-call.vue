@@ -76,6 +76,7 @@
         <screenshot-box
           :size="innerSize"
           :src="props['screenshot:src']"
+          :style="pipContentSizeStyle"
           @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
           @zoom="emit(`action:${VideoCallAction.ZoomScreenshot}`)"
         />
@@ -95,7 +96,7 @@
         <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
-            :style="pipSenderSize ? { width: `${pipSenderSize.width}px`, height: `${pipSenderSize.height}px` } : undefined"
+            :style="pipContentSizeStyle"
             :stream="props['sender:stream']"
             autoplay
             class="video-call-sender"
@@ -285,31 +286,41 @@ const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
 );
 
 /**
- * @author @Oleksandr Palinnyi
+ * @author @Oleksandr Palionnyi
  *
  * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
  *
  * Sender preview dimensions relative to the main player, taken from Figma design (256×171 / 1366×912).
+ * https://webitel.atlassian.net/browse/WTEL-9542?focusedCommentId=754891
  */
 const SENDER_WIDTH_RATIO = 256 / 1366;
 const SENDER_ASPECT_RATIO = 171 / 256;
 
-const pipSenderSize = ref<{
+const pipContentSize = ref<{
 	width: number;
 	height: number;
 } | null>(null);
 
 onPiPResize((rect) => {
 	const width = rect.width * SENDER_WIDTH_RATIO;
-	pipSenderSize.value = {
+	pipContentSize.value = {
 		width,
 		height: width * SENDER_ASPECT_RATIO,
 	};
 });
 
 watch(isPiP, (active) => {
-	if (!active) pipSenderSize.value = null;
+	if (!active) pipContentSize.value = null;
 });
+
+const pipContentSizeStyle = computed(() =>
+	pipContentSize.value
+		? {
+				width: `${pipContentSize.value.width}px`,
+				height: `${pipContentSize.value.height}px`,
+			}
+		: undefined,
+);
 
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);
@@ -434,7 +445,7 @@ watch(
 );
 
 /**
- * @author @Oleksandr Palinnyi
+ * @author @Oleksandr Palionnyi
  *
  * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
  *

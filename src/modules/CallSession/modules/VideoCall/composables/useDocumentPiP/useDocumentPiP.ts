@@ -8,6 +8,7 @@ import { collectMedia, safePlay } from './mediaCollection';
 import { resumePlayback } from './mediaPlayback';
 import { restoreMedia, restoreStreams, snapshotMedia } from './mediaSnapshot';
 import { createPlaybackRetry } from './playbackRetry';
+import { usePiPResizeObserver } from './usePiPResizeObserver';
 
 export function useDocumentPiP(
 	getElement: () => HTMLElement | null | undefined,
@@ -23,6 +24,9 @@ export function useDocumentPiP(
 	const mediaSnapshot: MediaSnapshot[] = [];
 	const { retryPlayback, stopPlaybackRetry } =
 		createPlaybackRetry(mediaSnapshot);
+
+	const { startPiPResizeObserver, stopPiPResizeObserver, onPiPResize } =
+		usePiPResizeObserver();
 
 	const armFirstGestureResume = (w?: Window) => {
 		const target = w ?? pipWindow;
@@ -63,6 +67,7 @@ export function useDocumentPiP(
 
 	const onPiPWindowClose = () => {
 		stopPlaybackRetry();
+		stopPiPResizeObserver();
 		restoreElement();
 		pipWindow = null;
 		isPiP.value = false;
@@ -107,12 +112,14 @@ export function useDocumentPiP(
 
 		isPiP.value = true;
 		win.addEventListener('pagehide', onPiPWindowClose);
+		startPiPResizeObserver(el);
 	};
 
 	const exitPiP = () => {
 		if (!isPiP.value) return;
 
 		stopPlaybackRetry();
+		stopPiPResizeObserver();
 		restoreElement();
 
 		if (pipWindow && !pipWindow.closed) {
@@ -134,5 +141,6 @@ export function useDocumentPiP(
 		enterPiP,
 		exitPiP,
 		armFirstGestureResume,
+		onPiPResize,
 	};
 }
