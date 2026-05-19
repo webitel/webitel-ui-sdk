@@ -94,6 +94,19 @@ export const ContactsSearchResponse = zod
 							.string()
 							.optional()
 							.describe('Technical username or handle.'),
+						vias: zod
+							.array(
+								zod.object({
+									contactId: zod.string().optional(),
+									createdAt: zod.string().optional(),
+									disable: zod.boolean().optional(),
+									disableReason: zod.string().optional(),
+									metadata: zod.looseObject({}).optional(),
+									updatedAt: zod.string().optional(),
+									via: zod.string().optional(),
+								}),
+							)
+							.optional(),
 					})
 					.describe('Contact represents an external messaging identity.'),
 			)

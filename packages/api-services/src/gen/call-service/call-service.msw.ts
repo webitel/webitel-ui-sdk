@@ -1211,6 +1211,15 @@ export const getSearchHistoryCallResponseMock = (
 						faker.number.int(),
 						undefined,
 					]),
+					fileId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1926,6 +1935,124 @@ export const getSearchHistoryCallResponseMock = (
 						max: 20,
 					},
 				}),
+				undefined,
+			]),
+			qualityMetrics: faker.helpers.arrayElement([
+				{
+					jitterAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					jitterMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					mosAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					mosMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					packetlossAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					packetlossMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					roundtripAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					roundtripMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					sipId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
 				undefined,
 			]),
 			queue: faker.helpers.arrayElement([
@@ -2476,6 +2603,15 @@ export const getSearchHistoryCallPostResponseMock = (
 						faker.number.int(),
 						undefined,
 					]),
+					fileId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -3193,6 +3329,124 @@ export const getSearchHistoryCallPostResponseMock = (
 				}),
 				undefined,
 			]),
+			qualityMetrics: faker.helpers.arrayElement([
+				{
+					jitterAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					jitterMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					jitterMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					mosAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					mosMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					mosMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					packetlossAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					packetlossMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					packetlossMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					roundtripAvg: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMax: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMaxAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					roundtripMin: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					roundtripMinAt: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					sipId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			queue: faker.helpers.arrayElement([
 				{
 					id: faker.helpers.arrayElement([
@@ -3657,6 +3911,15 @@ export const getCreateCallAnnotationResponseMock = (
 		faker.number.int(),
 		undefined,
 	]),
+	fileId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	id: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -3762,6 +4025,15 @@ export const getDeleteCallAnnotationResponseMock = (
 		faker.number.int(),
 		undefined,
 	]),
+	fileId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	id: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -3865,6 +4137,15 @@ export const getUpdateCallAnnotationResponseMock = (
 	]),
 	endSec: faker.helpers.arrayElement([
 		faker.number.int(),
+		undefined,
+	]),
+	fileId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
 		undefined,
 	]),
 	id: faker.helpers.arrayElement([
@@ -4087,6 +4368,15 @@ export const getPatchHistoryCallResponseMock = (
 			]),
 			endSec: faker.helpers.arrayElement([
 				faker.number.int(),
+				undefined,
+			]),
+			fileId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
 				undefined,
 			]),
 			id: faker.helpers.arrayElement([
@@ -4804,6 +5094,124 @@ export const getPatchHistoryCallResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	qualityMetrics: faker.helpers.arrayElement([
+		{
+			jitterAvg: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			jitterMax: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			jitterMaxAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			jitterMin: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			jitterMinAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			mosAvg: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			mosMax: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			mosMaxAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			mosMin: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			mosMinAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			packetlossAvg: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			packetlossMax: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			packetlossMaxAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			packetlossMin: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			packetlossMinAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			roundtripAvg: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			roundtripMax: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			roundtripMaxAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			roundtripMin: faker.helpers.arrayElement([
+				faker.number.float({
+					fractionDigits: 2,
+				}),
+				undefined,
+			]),
+			roundtripMinAt: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			sipId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
 		undefined,
 	]),
 	queue: faker.helpers.arrayElement([

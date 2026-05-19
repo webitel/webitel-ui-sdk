@@ -73,6 +73,9 @@ export default {
 			page: 1,
 		},
 		searchHasNext: true,
+		// https://webitel.atlassian.net/browse/WTEL-9569
+		// prevents cascade page loads when the sentinel stays visible after a page appends to the list
+		_canLoadNext: true,
 	}),
 	computed: {
 		selectOptionLabel() {
@@ -158,11 +161,22 @@ export default {
 			if (!this.isApiMode) return;
 			this.isLoading = true;
 			this.searchParams.page = 1;
+			// block auto-load until sentinel leaves the viewport: list is being reset,
+			// so the sentinel may still be visible from the previous result set
+			this._canLoadNext = false;
 			this.fetchOptions();
 		},
 
 		handleAfterListIntersect(isVisible) {
-			if (isVisible && this.searchHasNext) {
+			if (!isVisible) {
+				// sentinel left the viewport — user scrolled up or list shrank;
+				// next intersection will be a genuine scroll-to-bottom
+				this._canLoadNext = true;
+				return;
+			}
+			if (this.searchHasNext && this._canLoadNext) {
+				// sentinel entered the viewport after user scrolled to the bottom
+				this._canLoadNext = false;
 				this.isLoading = true;
 				this.searchParams.page += 1;
 				this.fetchOptions();

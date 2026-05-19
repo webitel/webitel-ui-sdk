@@ -4,7 +4,6 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 
 /**
  * Client sends callback event when user clicks a button.
@@ -14,6 +13,4 @@ export interface WebitelImApiGatewayV1MessageSendInteractiveCallbackBody {
 	buttonCode?: string;
 	/** Optional callback payload. */
 	callbackData?: string;
-	/** User who clicked the button. */
-	reactedBy?: WebitelImApiGatewayV1Peer;
 }

@@ -26,20 +26,6 @@ export const // --- title start
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
 			/**
-			 * @summary Deletes a device by its token, stops sending PUSH-notifications to it.
-			 */
-			const accountUnregisterDevice = (
-				webitelImApiGatewayV1PUSHSubscriptionBody: WebitelImApiGatewayV1PUSHSubscriptionBody,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiGatewayV1UnregisterDeviceResponse>
-			> => {
-				return axiosInstance.delete(`/v1/auth/device`, {
-					data: webitelImApiGatewayV1PUSHSubscriptionBody,
-					...options,
-				});
-			};
-			/**
 			 * @summary Register device to receive PUSH notifications
 			 */
 			const accountRegisterDevice = (
@@ -48,8 +34,23 @@ export const // --- title start
 			): Promise<
 				AxiosResponse<WebitelImApiGatewayV1RegisterDeviceResponse>
 			> => {
-				return axiosInstance.put(
-					`/v1/auth/device`,
+				return axiosInstance.post(
+					`/v1/auth/devices`,
+					webitelImApiGatewayV1PUSHSubscriptionBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Deletes a device by its token, stops sending PUSH-notifications to it.
+			 */
+			const accountUnregisterDevice = (
+				webitelImApiGatewayV1PUSHSubscriptionBody: WebitelImApiGatewayV1PUSHSubscriptionBody,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1UnregisterDeviceResponse>
+			> => {
+				return axiosInstance.post(
+					`/v1/auth/devices/unregister`,
 					webitelImApiGatewayV1PUSHSubscriptionBody,
 					options,
 				);
@@ -87,17 +88,17 @@ rpc Auth(AuthRequest) returns (AuthResponse);
 
 			// --- footer start
 			return {
-				accountUnregisterDevice,
 				accountRegisterDevice,
+				accountUnregisterDevice,
 				accountLogout,
 				accountInspect,
 				accountToken,
 			};
 		};
-export type AccountUnregisterDeviceResult =
-	AxiosResponse<WebitelImApiGatewayV1UnregisterDeviceResponse>;
 export type AccountRegisterDeviceResult =
 	AxiosResponse<WebitelImApiGatewayV1RegisterDeviceResponse>;
+export type AccountUnregisterDeviceResult =
+	AxiosResponse<WebitelImApiGatewayV1UnregisterDeviceResponse>;
 export type AccountLogoutResult =
 	AxiosResponse<WebitelImApiGatewayV1LogoutResponse>;
 export type AccountInspectResult =

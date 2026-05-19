@@ -10,6 +10,7 @@ import type { EngineCallHold } from './engineCallHold';
 import type { EngineEndpoint } from './engineEndpoint';
 import type { EngineHistoryCallBlindTransfer } from './engineHistoryCallBlindTransfer';
 import type { EngineHistoryCallCallForm } from './engineHistoryCallCallForm';
+import type { EngineHistoryCallQualityMetrics } from './engineHistoryCallQualityMetrics';
 import type { EngineHistoryCallVariables } from './engineHistoryCallVariables';
 import type { EngineHistoryFileJob } from './engineHistoryFileJob';
 import type { EngineLookup } from './engineLookup';
@@ -63,6 +64,7 @@ export interface EngineHistoryCall {
 	member?: EngineLookup;
 	memberId?: string;
 	parentId?: string;
+	qualityMetrics?: EngineHistoryCallQualityMetrics;
 	queue?: EngineLookup;
 	queueBridgedAt?: string;
 	queueDurationSec?: number;
