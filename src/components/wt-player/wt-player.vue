@@ -129,6 +129,8 @@ interface Props {
 	 * @default 'sticky'
 	 */
 	position?: string;
+	invertTime?: boolean;
+	resetVolume?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

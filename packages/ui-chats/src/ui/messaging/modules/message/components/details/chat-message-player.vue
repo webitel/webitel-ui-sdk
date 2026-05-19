@@ -11,7 +11,6 @@
       static
       hide-expand
       stretch
-      countdown-time-mode
     />
     <wt-player
       v-else
@@ -64,8 +63,8 @@ function handlePlayerInitialize(player) {
 
 <style lang="scss" scoped>
 .chat-message-player :deep(.wt-vidstack-player) {
-  max-height: var(--chat-file-max-height);
-  max-width: var(--chat-file-max-width);
+  height: var(--chat-video-player-height);
+  width: var(--chat-video-player-width);
 }
 
 .chat-message-player__audio {

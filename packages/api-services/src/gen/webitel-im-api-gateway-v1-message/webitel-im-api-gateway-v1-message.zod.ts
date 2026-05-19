@@ -492,20 +492,6 @@ export const MessageSendInteractiveCallbackBody = zod
 			.string()
 			.optional()
 			.describe('Optional callback payload.'),
-		reactedBy: zod
-			.object({
-				channelId: zod.string().optional(),
-				contact: zod
-					.object({
-						iss: zod.string().optional(),
-						sub: zod.string().optional(),
-					})
-					.optional(),
-				groupId: zod.string().optional(),
-				threadId: zod.string().optional(),
-			})
-			.optional()
-			.describe('User who clicked the button.'),
 	})
 	.describe('Client sends callback event when user clicks a button.');
 
@@ -582,55 +568,6 @@ export const MessageSendLocationBody = zod
 	.describe('SendLocationRequest sends a geographic location message.');
 
 export const MessageSendLocationResponse = zod
-	.object({
-		id: zod.string().optional().describe('Unique message identifier.'),
-		to: zod
-			.object({
-				channelId: zod.string().optional(),
-				contact: zod
-					.object({
-						iss: zod.string().optional(),
-						sub: zod.string().optional(),
-					})
-					.optional(),
-				groupId: zod.string().optional(),
-				threadId: zod.string().optional(),
-			})
-			.optional()
-			.describe('Recipient of the message.'),
-	})
-	.describe(
-		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
-	);
-
-export const MessageSendSystemMessageBody = zod.object({
-	body: zod
-		.string()
-		.optional()
-		.describe('System message content (e.g., "User X joined the chat").'),
-	metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
-	sendId: zod.string().optional().describe('Optional send ID for idempotency.'),
-	to: zod
-		.object({
-			channelId: zod.string().optional(),
-			contact: zod
-				.object({
-					iss: zod.string().optional(),
-					sub: zod.string().optional(),
-				})
-				.optional(),
-			groupId: zod.string().optional(),
-			threadId: zod.string().optional(),
-		})
-		.optional()
-		.describe('Recipient of the message.'),
-	type: zod
-		.string()
-		.optional()
-		.describe('System message type (e.g., "user_joined", "user_left").'),
-});
-
-export const MessageSendSystemMessageResponse = zod
 	.object({
 		id: zod.string().optional().describe('Unique message identifier.'),
 		to: zod

@@ -76,6 +76,7 @@ which is intended to be consumed by the Client, e.g., 24400320 or AItOawmwtWwcT0
 It MUST NOT exceed 255 ASCII characters in length.
 The sub value is a case sensitive string. */
 	sub?: string;
+	type?: string;
 	updatedAt?: string;
 	username?: string;
 	/** OPTIONAL. String from zoneinfo [zoneinfo] time zone database representing the End-User's time zone.

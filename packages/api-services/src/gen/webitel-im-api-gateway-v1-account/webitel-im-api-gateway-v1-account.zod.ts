@@ -7,28 +7,6 @@
 import * as zod from 'zod';
 
 /**
- * @summary Deletes a device by its token, stops sending PUSH-notifications to it.
- */
-export const AccountUnregisterDeviceBody = zod.object({
-	apn: zod.string().optional(),
-	fcm: zod.string().optional(),
-	secret: zod.string().optional(),
-	web: zod
-		.object({
-			endpoint: zod.string().optional(),
-			key: zod
-				.object({
-					auth: zod.string().optional(),
-					p256Dh: zod.string().optional(),
-				})
-				.optional(),
-		})
-		.optional(),
-});
-
-export const AccountUnregisterDeviceResponse = zod.looseObject({});
-
-/**
  * @summary Register device to receive PUSH notifications
  */
 export const AccountRegisterDeviceBody = zod.object({
@@ -49,6 +27,28 @@ export const AccountRegisterDeviceBody = zod.object({
 });
 
 export const AccountRegisterDeviceResponse = zod.looseObject({});
+
+/**
+ * @summary Deletes a device by its token, stops sending PUSH-notifications to it.
+ */
+export const AccountUnregisterDeviceBody = zod.object({
+	apn: zod.string().optional(),
+	fcm: zod.string().optional(),
+	secret: zod.string().optional(),
+	web: zod
+		.object({
+			endpoint: zod.string().optional(),
+			key: zod
+				.object({
+					auth: zod.string().optional(),
+					p256Dh: zod.string().optional(),
+				})
+				.optional(),
+		})
+		.optional(),
+});
+
+export const AccountUnregisterDeviceResponse = zod.looseObject({});
 
 /**
  * @summary Logout Device Request
@@ -167,6 +167,7 @@ export const AccountInspectResponse = zod.object({
 				.describe(
 					'REQUIRED. Subject Identifier.\nA locally unique and never reassigned identifier within the Issuer for the End-User,\nwhich is intended to be consumed by the Client, e.g., 24400320 or AItOawmwtWwcT0k51BayewNvutrJUqsvl6qs7A4.\nIt MUST NOT exceed 255 ASCII characters in length.\nThe sub value is a case sensitive string.',
 				),
+			type: zod.string().optional(),
 			updatedAt: zod.string().optional(),
 			username: zod.string().optional(),
 			zoneinfo: zod
@@ -489,6 +490,7 @@ export const AccountTokenResponse = zod.object({
 				.describe(
 					'REQUIRED. Subject Identifier.\nA locally unique and never reassigned identifier within the Issuer for the End-User,\nwhich is intended to be consumed by the Client, e.g., 24400320 or AItOawmwtWwcT0k51BayewNvutrJUqsvl6qs7A4.\nIt MUST NOT exceed 255 ASCII characters in length.\nThe sub value is a case sensitive string.',
 				),
+			type: zod.string().optional(),
 			updatedAt: zod.string().optional(),
 			username: zod.string().optional(),
 			zoneinfo: zod

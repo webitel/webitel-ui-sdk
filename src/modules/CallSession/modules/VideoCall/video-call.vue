@@ -275,9 +275,9 @@ const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 		$el?: HTMLElement | null;
 	} | null;
 	if (!inst) return null;
-	const root = inst.rootEl;
-	const fromExpose = root == null ? null : isRef(root) ? root.value : root;
-	return fromExpose ?? inst.$el ?? null;
+	const rootEl = inst.rootEl;
+	const exposedElement = isRef(rootEl) ? rootEl.value : (rootEl ?? null);
+	return exposedElement ?? inst.$el ?? null;
 };
 
 const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(

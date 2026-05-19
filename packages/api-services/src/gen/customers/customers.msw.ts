@@ -245,6 +245,15 @@ export const getGetCustomerResponseMock = (
 								}),
 								undefined,
 							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
 							prod: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
@@ -649,6 +658,15 @@ export const getUpdateCustomerResponseMock = (
 								}),
 								undefined,
 							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
 							prod: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
@@ -993,6 +1011,15 @@ export const getLicenseUsageResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1282,6 +1309,15 @@ export const getGetCustomer2ResponseMock = (
 								undefined,
 							]),
 							issuedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
 										min: 10,
@@ -1634,6 +1670,15 @@ export const getLicenseUsage2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1863,6 +1908,15 @@ export const getLicenseUsage3ResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,

@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1ContactMetadata } from './webitelImApiGatewayV1ContactMetadata';
+import type { WebitelImApiGatewayV1Via } from './webitelImApiGatewayV1Via';
 
 /**
  * Contact represents an external messaging identity.
@@ -30,4 +31,5 @@ export interface WebitelImApiGatewayV1Contact {
 	updatedAt?: string;
 	/** Technical username or handle. */
 	username?: string;
+	vias?: WebitelImApiGatewayV1Via[];
 }
