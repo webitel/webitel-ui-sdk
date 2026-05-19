@@ -38,24 +38,26 @@ jobs:
           NEXT_VERSION=$(echo $INPUT | cut -d',' -f2 | tr -d ' ') #splits versions from input by separator
           
           # Add .0 patch version for package.json
-          echo "version=$VERSION"
-          echo "next_full_version=${NEXT_VERSION}.0"
-          echo "version_tag=v${VERSION}"
-          echo "version_git_tag=v${VERSION}-tagged"
+          {
+            echo "version=$VERSION"
+            echo "next_full_version=${NEXT_VERSION}.0"
+            echo "version_tag=v${VERSION}"
+            echo "version_git_tag=v${VERSION}-tagged"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Create release branch
         run: |
-          git checkout -b ${{ steps.version.outputs.version_tag }}
+          git checkout -b "${{ steps.version.outputs.version_tag }}"
           git push -u origin "${{ steps.version.outputs.version_tag }}"
 
       - name: Bump version in main to next version
         run: |
-          git checkout ${{ github.event.repository.default_branch }}
+          git checkout "${{ github.event.repository.default_branch }}"
           npm version "${{ steps.version.outputs.next_full_version }}" --no-git-tag-version --allow-same-version
           
           git add package.json
           git commit -m "chore: bump version to ${{ steps.version.outputs.full_version }}"
-          git push origin ${{ github.event.repository.default_branch }}
+          git push origin "${{ github.event.repository.default_branch }}"
 
       - name: Create and push tag (after merge)
         run: |
