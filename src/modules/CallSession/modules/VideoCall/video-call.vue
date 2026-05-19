@@ -35,8 +35,8 @@
         class="video-call--pip__mic-indicator"
       >
         <wt-icon
+          :size="ComponentSize.SM"
           icon="mic-muted"
-          size="sm"
           color="on-dark"
         />
       </div>
