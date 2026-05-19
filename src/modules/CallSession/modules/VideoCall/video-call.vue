@@ -493,7 +493,7 @@ const senderVideoMutedIconSizes = {
   left: var(--spacing-sm);
   z-index: 1;
   padding: var(--spacing-xs);
-  background: var(--p-player-wrapper-muted-color);
+  background: var(--p-player-head-line-hover-background);
   border-radius: var(--p-player-wrapper-sm-border-radius);
 }
 
