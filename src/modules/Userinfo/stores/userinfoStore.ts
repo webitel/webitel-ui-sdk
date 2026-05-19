@@ -37,10 +37,8 @@ export const createUserinfoStore = () => {
 		const { initialize: initializeSettingsStore } = settingsStore;
 		const { timezone } = storeToRefs(settingsStore);
 		const userNotificationsStore = useUserNotificationsStore();
-		const {
-			initialize: initializeUserNotificationsStore,
-			show: showUserNotifications,
-		} = userNotificationsStore;
+		const { showNotifications, clearShownUserNotifications } =
+			userNotificationsStore;
 
 		const userId = ref();
 		const userInfo = ref();
@@ -48,11 +46,10 @@ export const createUserinfoStore = () => {
 		const initialize = async () => {
 			const session = await getSession();
 			const access = await getUiVisibilityAccess();
-			await initializeUserNotificationsStore();
 
 			userId.value = session.userId;
 			userInfo.value = pick(session, [
-				'domainId',
+				'domain',
 				'username',
 				'permissions',
 				'userId',
@@ -72,10 +69,15 @@ export const createUserinfoStore = () => {
 			await initializeSettingsStore();
 		};
 
+		const showUserNotifications = () => showNotifications(userId.value);
+		const clearStorageNotifications = (id?: string) =>
+			clearShownUserNotifications(id ?? userId.value);
+
 		const logoutUser = async () => {
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
 			await logout();
+			clearStorageNotifications();
 			window.location.href = authUrl;
 		};
 
@@ -98,6 +100,7 @@ export const createUserinfoStore = () => {
 			hasApplicationVisibility,
 			logoutUser,
 			showUserNotifications,
+			clearStorageNotifications,
 		};
 	});
 

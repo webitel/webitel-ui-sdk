@@ -1,15 +1,12 @@
-interface UserNotificationsConfigsMap {
-	id: string;
-	type: 'info' | 'warning' | 'error';
-	localeKey: string;
-	getDays: (warningData: number) => number;
+interface UserNotificationsConfigsParams {
+	amount?: number;
+	name?: string;
 }
 
 interface NotificationsType {
 	type: 'info' | 'warning' | 'error';
 	localeKey: string;
-	days: number;
-	shown?: boolean;
+	params?: UserNotificationsConfigsParams;
 }
 
-export type { NotificationsType, UserNotificationsConfigsMap };
+export type { NotificationsType, UserNotificationsConfigsParams };

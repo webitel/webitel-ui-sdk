@@ -164,6 +164,9 @@ const WtScreenRecordingsAction = defineAsyncComponent(
 			'./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue'
 		),
 );
+const WtSendMessagePopup = defineAsyncComponent(
+	() => import('./on-demand/wt-send-message-popup/wt-send-message-popup.vue'),
+);
 
 const WtInlineAddPanel = defineAsyncComponent(
 	() => import('./wt-inline-add-panel/wt-inline-add-panel.vue'),
@@ -252,6 +255,7 @@ const Components = {
 	WtScreenRecordingsAction,
 	WtInlineAddPanel,
 	WtCallMediaAction,
+	WtSendMessagePopup,
 };
 
 export {
@@ -320,6 +324,7 @@ export {
 	WtSearchBar,
 	WtSelect,
 	WtSelectionPopup,
+	WtSendMessagePopup,
 	WtSlider,
 	WtStartPage,
 	WtStatusSelect,

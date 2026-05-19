@@ -40,6 +40,7 @@ export default {
 		saveAs: 'Зберегти як',
 		saved: 'Збережено',
 		send: 'Надіслати',
+		sendMessage: 'Надіслати повідомлення',
 		start: 'Почати',
 		close: 'Закрити',
 		add: 'Додати',
@@ -259,7 +260,7 @@ export default {
 	CSV: {
 		skipHeaders: 'Пропустити заголовки',
 		charSet: 'Кодування',
-		separator: 'Роздільник',
+		separator: 'Розділювач',
 		CSVColumn: 'Стовпець CSV',
 		fieldName: 'Назва поля',
 		clearMember: 'Очистити учасника',
@@ -835,7 +836,12 @@ export default {
 			delete: ({ named }) => `${named('entity')} було видалено`,
 		},
 		warnings: {
-			passwordExpirationMessage: 'Пароль спливе через { days } дн(і/ів)',
+			passwordExpirationMessageDays: 'Пароль спливе через {amount} дн(і/ів)',
+			passwordExpirationMessageHours:
+				'Залишилось менше доби до завершення дії пароля',
+			licenseExpirationSoonMessage:
+				'Ваша ліцензія {name}  завершиться через {amount} днів',
+			licenseExpirationMessage: 'Ваша ліцензія {name}  завершилася',
 		},
 	},
 	errorNotifications: {

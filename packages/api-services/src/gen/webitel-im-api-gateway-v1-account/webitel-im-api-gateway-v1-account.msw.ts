@@ -15,11 +15,11 @@ import type {
 	WebitelImApiGatewayV1UnregisterDeviceResponse,
 } from '../_models';
 
-export const getAccountUnregisterDeviceResponseMock =
-	(): WebitelImApiGatewayV1UnregisterDeviceResponse => ({});
-
 export const getAccountRegisterDeviceResponseMock =
 	(): WebitelImApiGatewayV1RegisterDeviceResponse => ({});
+
+export const getAccountUnregisterDeviceResponseMock =
+	(): WebitelImApiGatewayV1UnregisterDeviceResponse => ({});
 
 export const getAccountLogoutResponseMock =
 	(): WebitelImApiGatewayV1LogoutResponse => ({});
@@ -188,6 +188,15 @@ export const getAccountInspectResponseMock = (
 				undefined,
 			]),
 			sub: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -585,6 +594,15 @@ export const getAccountTokenResponseMock = (
 				}),
 				undefined,
 			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -802,25 +820,25 @@ export const getAccountTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getAccountUnregisterDeviceMockHandler = (
+export const getAccountRegisterDeviceMockHandler = (
 	overrideResponse?:
-		| WebitelImApiGatewayV1UnregisterDeviceResponse
+		| WebitelImApiGatewayV1RegisterDeviceResponse
 		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiGatewayV1UnregisterDeviceResponse>
-				| WebitelImApiGatewayV1UnregisterDeviceResponse),
+				| Promise<WebitelImApiGatewayV1RegisterDeviceResponse>
+				| WebitelImApiGatewayV1RegisterDeviceResponse),
 	options?: RequestHandlerOptions,
 ) => {
-	return http.delete(
-		'*/v1/auth/device',
-		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+	return http.post(
+		'*/v1/auth/devices',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAccountUnregisterDeviceResponseMock(),
+					: getAccountRegisterDeviceResponseMock(),
 				{
 					status: 200,
 				},
@@ -830,25 +848,25 @@ export const getAccountUnregisterDeviceMockHandler = (
 	);
 };
 
-export const getAccountRegisterDeviceMockHandler = (
+export const getAccountUnregisterDeviceMockHandler = (
 	overrideResponse?:
-		| WebitelImApiGatewayV1RegisterDeviceResponse
+		| WebitelImApiGatewayV1UnregisterDeviceResponse
 		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiGatewayV1RegisterDeviceResponse>
-				| WebitelImApiGatewayV1RegisterDeviceResponse),
+				| Promise<WebitelImApiGatewayV1UnregisterDeviceResponse>
+				| WebitelImApiGatewayV1UnregisterDeviceResponse),
 	options?: RequestHandlerOptions,
 ) => {
-	return http.put(
-		'*/v1/auth/device',
-		async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+	return http.post(
+		'*/v1/auth/devices/unregister',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAccountRegisterDeviceResponseMock(),
+					: getAccountUnregisterDeviceResponseMock(),
 				{
 					status: 200,
 				},
@@ -942,8 +960,8 @@ export const getAccountTokenMockHandler = (
 	);
 };
 export const getWebitelImApiGatewayV1AccountMock = () => [
-	getAccountUnregisterDeviceMockHandler(),
 	getAccountRegisterDeviceMockHandler(),
+	getAccountUnregisterDeviceMockHandler(),
 	getAccountLogoutMockHandler(),
 	getAccountInspectMockHandler(),
 	getAccountTokenMockHandler(),

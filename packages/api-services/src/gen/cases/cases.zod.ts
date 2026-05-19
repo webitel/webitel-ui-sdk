@@ -1332,6 +1332,7 @@ export const ExportCasesQueryParams = zod.object({
 	qin: zod.string().optional(),
 	filtersV1: zod.string().optional(),
 	format: zod.string().optional(),
+	separator: zod.string().optional(),
 });
 
 export const ExportCasesResponse = zod.object({

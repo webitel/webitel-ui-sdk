@@ -17,10 +17,10 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	chatName?: string;
 	/** [optional] contact connected to this user */
 	contact?: ApiObjectId;
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
+	readonly createdAt?: string;
+	readonly createdBy?: ApiUserId;
+	readonly deletedAt?: string;
+	readonly deletedBy?: ApiUserId;
 	device?: ApiObjectId;
 	/** [editable] list of unique `regular` devices, attached to this user */
 	devices?: ApiObjectId[];
@@ -39,7 +39,7 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	profile?: UpdateUserBodyProfile;
 	roles?: ApiObjectId[];
 	totpUrl?: string;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
+	readonly updatedAt?: string;
+	readonly updatedBy?: ApiUserId;
 	username?: string;
 };
