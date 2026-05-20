@@ -12,7 +12,6 @@
 	],
 	"author": "webitel",
 	"scripts": {
-		"make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true)",
 		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
 		"publish-lib": "npm publish --access public --tag latest",
 		"gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
