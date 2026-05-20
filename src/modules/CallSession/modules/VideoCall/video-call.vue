@@ -1,10 +1,14 @@
 <template>
   <wt-vidstack-player
-    :class="[!props.static && `video-call-position--${props.position}`]"
-    :hide-video-display-panel="props.hideVideoDisplayPanel"
-    :size="props.size"
+    ref="playerRef"
+    :class="[
+      !props.static && !isPiP && `video-call-position--${props.position}`,
+      isPiP && 'video-call--pip',
+    ]"
+    :hide-video-display-panel="isPiP || props.hideVideoDisplayPanel"
+    :size="isPiP ? ComponentSize.MD : props.size"
     :stream="mainStream"
-    :static="props.static"
+    :static="isPiP || props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
     :mirror-video="!showSenderScreen"
@@ -25,6 +29,17 @@
 
     <template #content="{ size: innerSize }">
       <slot :size="innerSize" name="content" />
+
+      <div
+        v-if="isPiP && props['receiver:mic:enabled'] === false"
+        class="video-call--pip__mic-indicator"
+      >
+        <wt-icon
+          :size="ComponentSize.SM"
+          icon="mic-muted"
+          color="on-dark"
+        />
+      </div>
 
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
@@ -72,6 +87,7 @@
         <screenshot-box
           :size="innerSize"
           :src="props['screenshot:src']"
+          :style="pipContentSizeStyle"
           @close="emit(`action:${VideoCallAction.CloseScreenshot}`)"
           @zoom="emit(`action:${VideoCallAction.ZoomScreenshot}`)"
         />
@@ -91,6 +107,7 @@
         <template v-else-if="showSenderScreen">
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
+            :style="pipContentSizeStyle"
             :stream="props['sender:stream']"
             autoplay
             class="video-call-sender"
@@ -133,6 +150,7 @@
         @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
         @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
         @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
+
       />
     </template>
   </wt-vidstack-player>
@@ -143,9 +161,8 @@
   lang="ts"
 >
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, isRef, onBeforeUnmount, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import { WtIcon } from '../../../../components';
 import {
 	RecordingIndicator,
@@ -156,6 +173,8 @@ import { ComponentSize, WtApplication } from '../../../../enums';
 import { convertDuration } from '../../../../scripts';
 import type { ResultCallbacks } from '../../../../types';
 import type { ScreenshotStatus } from '../../types';
+import { useDocumentPiP } from './composables/useDocumentPiP';
+import { useReceiverLiveStream } from './composables/useReceiverLiveStream';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = withDefaults(
@@ -187,6 +206,9 @@ const props = withDefaults(
 		hideVideoDisplayPanel?: boolean;
 		hideAvatar?: boolean;
 		resizable?: boolean;
+		hideSenderOnHold?: boolean;
+
+		isPipMode?: boolean;
 
 		actions: VideoCallAction[];
 		username?: string;
@@ -256,6 +278,61 @@ const emitKeys = {
 
 const { t } = useI18n();
 
+const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
+
+/** `defineExpose({ rootEl })` on `WtVidstackPlayer` passes a Ref — DOM is ready after stream + Vidstack upgrade. */
+const getVideoCallPlayerHostElement = (): HTMLElement | null => {
+	const inst = playerRef.value as unknown as {
+		rootEl?: HTMLElement | Ref<HTMLElement | null> | null;
+		$el?: HTMLElement | null;
+	} | null;
+	if (!inst) return null;
+	const rootEl = inst.rootEl;
+	const exposedElement = isRef(rootEl) ? rootEl.value : (rootEl ?? null);
+	return exposedElement ?? inst.$el ?? null;
+};
+
+const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
+	getVideoCallPlayerHostElement,
+);
+
+/**
+ * @author @Oleksandr Palionnyi
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Sender preview dimensions relative to the main player, taken from Figma design (256×171 / 1366×912).
+ * https://webitel.atlassian.net/browse/WTEL-9542?focusedCommentId=754891
+ */
+const SENDER_WIDTH_RATIO = 256 / 1366;
+const SENDER_ASPECT_RATIO = 171 / 256;
+
+const pipContentSize = ref<{
+	width: number;
+	height: number;
+} | null>(null);
+
+onPiPResize((rect) => {
+	const width = rect.width * SENDER_WIDTH_RATIO;
+	pipContentSize.value = {
+		width,
+		height: width * SENDER_ASPECT_RATIO,
+	};
+});
+
+watch(isPiP, (active) => {
+	if (!active) pipContentSize.value = null;
+});
+
+const pipContentSizeStyle = computed(() => {
+	if (!pipContentSize.value) return '';
+
+	return {
+		width: `${pipContentSize.value.width}px`,
+		height: `${pipContentSize.value.height}px`,
+	};
+});
+
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);
 
@@ -290,6 +367,12 @@ const bothStreamsAvailable = computed(
 	() => !!receiverStream.value && !!senderStream.value,
 );
 
+const receiverStreamLiveForMain = useReceiverLiveStream(
+	receiverStream,
+	receiverVideoEnabled,
+	isOnHold,
+);
+
 const showReceiverOverlay = computed(
 	() =>
 		(!receiverStream.value &&
@@ -320,13 +403,22 @@ const mainStream = computed(() => {
 		return senderStream.value;
 	}
 
-	return receiverStream.value ?? senderStream.value;
+	return receiverStreamLiveForMain.value ?? senderStream.value;
 });
 
 const showSenderScreen = computed(() => {
-	if (!isOnHold.value) return bothStreamsAvailable.value;
-
-	return !props.hideSenderOnHold && senderStream.value && receiverStream.value;
+	if (isOnHold.value) {
+		return (
+			!props.hideSenderOnHold && !!senderStream.value && !!receiverStream.value
+		);
+	}
+	if (!bothStreamsAvailable.value) {
+		return false;
+	}
+	if (!receiverVideoEnabled.value) {
+		return true;
+	}
+	return receiverStreamLiveForMain.value != null;
 });
 
 const showSenderMutedScreen = computed(() => {
@@ -363,8 +455,36 @@ watch(
 	},
 );
 
+/**
+ * @author @Oleksandr Palionnyi
+ *
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * Document PiP: call `requestWindow()` only when `mainStream` and a usable player host exist.
+ * `flush: 'post'` runs after DOM updates so Vidstack / WC upgrade can finish before we read `rootEl`.
+ * Stop the watcher only once `enterPiP` succeeds (`isPiP`), so gesture/API failures can retry on later ticks.
+ */
+const stopAutoDocumentPiP = watch(
+	[
+		mainStream,
+		playerRef,
+	],
+	async () => {
+		if (!props.isPipMode) return;
+		if (!mainStream.value || !playerRef.value || isPiP.value) return;
+		if (!getVideoCallPlayerHostElement()) return;
+		await enterPiP();
+		if (isPiP.value) stopAutoDocumentPiP();
+	},
+	{
+		flush: 'post',
+		immediate: true,
+	},
+);
+
 onBeforeUnmount(() => {
 	stopHoldTimer();
+	stopAutoDocumentPiP();
 });
 
 const receiverVideoMutedIconSizes = {
@@ -384,6 +504,46 @@ const senderVideoMutedIconSizes = {
 .video-call {
   flex: 0 0 auto;
 }
+
+.video-call--pip.wt-vidstack-player {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
+}
+
+.video-call--pip :deep(.wt-vidstack-player__player:not(.video-call-sender *)),
+.video-call--pip :deep(.wt-vidstack-player__provider:not(.video-call-sender *)),
+.video-call--pip :deep(.wt-vidstack-player:not(.video-call-sender)),
+.video-call--pip :deep(video:not(.video-call-sender *)) {
+  border-radius: 0;
+}
+
+.video-call--pip__mic-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 1;
+  padding: var(--spacing-xs);
+  background: var(--p-player-head-line-hover-background);
+  border-radius: var(--p-player-wrapper-sm-border-radius);
+}
+
+/* Placeholder occupies original layout space while element lives in PiP window */
+.video-call--pip-active {
+  background: var(--p-player-wrapper-background, #000);
+  border-radius: inherit;
+}
+
 
 .video-call-position--left-bottom.wt-vidstack-player--sm {
   top: unset;
@@ -533,10 +693,6 @@ const senderVideoMutedIconSizes = {
   height: var(--p-player-cam-preview-sm-height);
 }
 
-.video-call-sender--md :deep(video) {
-  border-radius: var(--p-player-cam-preview-md-border-radius);
-}
-
 .video-call-sender--md.video-call-sender--muted {
   border-radius: var(--p-player-cam-preview-md-border-radius);
 }
@@ -547,10 +703,6 @@ const senderVideoMutedIconSizes = {
   bottom: 0;
   width: var(--p-player-cam-preview-md-width);
   height: var(--p-player-cam-preview-md-height);
-}
-
-.video-call-sender--lg :deep(video) {
-  border-radius: var(--p-player-cam-preview-lg-border-radius);
 }
 
 .video-call-sender--lg.video-call-sender--muted {
