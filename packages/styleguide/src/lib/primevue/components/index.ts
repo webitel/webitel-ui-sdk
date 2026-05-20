@@ -1,4 +1,5 @@
 import AvatarScheme from './avatar';
+import DatePickerScheme from './datepicker';
 import BadgeScheme from './badge';
 import BreadcrumbScheme from './breadcrumb';
 import ButtonScheme from './button';
@@ -23,6 +24,7 @@ import TooltipScheme from './tooltip';
 
 export {
 	AvatarScheme,
+	DatePickerScheme,
 	ButtonScheme,
 	BadgeScheme,
 	PopoverScheme,
