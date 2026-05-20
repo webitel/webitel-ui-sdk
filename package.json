@@ -172,6 +172,15 @@
 		"npm": "11",
 		"node": "v24"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/webitel/webitel-ui-sdk"
+	},
+	"keywords": [
+		"webitel",
+		"ui-sdk"
+	],
+	"author": "webitel",
 	"exports": {
 		".": {
 			"types": "./types/install.d.ts",
