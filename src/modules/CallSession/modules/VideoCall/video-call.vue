@@ -5,8 +5,8 @@
       !props.static && !isPiP && `video-call-position--${props.position}`,
       isPiP && 'video-call--pip',
     ]"
-    :size="isPiP ? 'md' : props.size"
-    :static="isPiP ? true : props.static"
+    :size="isPiP ? ComponentSize.MD : props.size"
+    :static="isPiP || props.static"
     :hide-video-display-panel="props.hideVideoDisplayPanel"
     :stream="mainStream"
     :username="props.username"
@@ -313,14 +313,14 @@ watch(isPiP, (active) => {
 	if (!active) pipContentSize.value = null;
 });
 
-const pipContentSizeStyle = computed(() =>
-	pipContentSize.value
-		? {
-				width: `${pipContentSize.value.width}px`,
-				height: `${pipContentSize.value.height}px`,
-			}
-		: undefined,
-);
+const pipContentSizeStyle = computed(() => {
+	if (!pipContentSize.value) return '';
+
+	return {
+		width: `${pipContentSize.value.width}px`,
+		height: `${pipContentSize.value.height}px`,
+	};
+});
 
 const receiverStream = computed(() => props['receiver:stream']);
 const senderStream = computed(() => props['sender:stream']);
