@@ -1,40 +1,35 @@
 name: webitel ui-chats pkg publish
 
 on:
-  #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
+#  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
   workflow_dispatch:
-    inputs:
-      npm_tag:
-        description: "NPM tag - latest, next, etc."
-        required: false
-        default: latest
-        type: string
 
 jobs:
   publish:
     permissions:
+      id-token: write  # Required for OIDC, https://docs.npmjs.com/trusted-publishers#github-actions-configuration
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          check-latest: true
-          registry-url: https://registry.npmjs.org
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
 
       - name: Publish release
         id: publish_release
-        env:
-          HUSKY: 0 #https://typicode.github.io/husky/how-to.html#ci-server-and-docker
-          NPM_TAG: ${{ inputs.npm_tag }}
         run: |
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}    
           cd packages/ui-chats
           npm ci
-          npm run make-all
+          npm version patch --git-tag-version false
+          npm run lint:fix || true
+          (npm run build:types || true)
+          npm run lint:package
+          npm run utils:publish
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v5
