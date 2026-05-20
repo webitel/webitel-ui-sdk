@@ -11,7 +11,7 @@
     <p-datepicker
 			:id="datepickerId"
 			v-model="modelValue"
-			dateFormat="dd/mm/yy"
+			date-format="dd/mm/yy"
 			:disabled="disabled"
 			:show-time="showTime"
 			:min-date="minDate"
@@ -80,7 +80,10 @@
 
 <script setup lang="ts">
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
-import PDatepicker, { DatePickerProps } from 'primevue/datepicker';
+import PDatepicker, {
+	DatePickerEmitsOptions,
+	DatePickerProps,
+} from 'primevue/datepicker';
 import { computed, defineModel, defineProps, ref, toRefs, watch } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
@@ -101,23 +104,17 @@ interface Props extends DatePickerProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	showTime: false,
-	minDate: undefined,
-	maxDate: undefined,
-	label: '',
 	labelProps: () => ({}),
-	placholder: '',
-	disabled: false,
-	required: false,
-	clearable: false,
-	timezone: undefined,
-	v: undefined,
 	customValidators: () => [],
 });
 
-const emit = defineEmits([
-	'update:modelValue',
-]);
+type EmitOptions = Omit<DatePickerEmitsOptions, 'update:modelValue'> & {
+	'update:modelValue': [
+		value: number | null,
+	];
+};
+
+const emit = defineEmits<EmitOptions>();
 
 const model = defineModel<number | null>({
 	default: null,
