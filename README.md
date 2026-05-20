@@ -2,6 +2,16 @@
 
 Main lib
 
+## Build steps
+
+
+1. `npm ci` - install dependencies
+2. `npm version patch --git-tag-version false` - bump version
+3. `npm run build` - build
+4. `(npm run build:types || true)` - build types
+5. `(npm run format:all || true)` - format code
+6. `npm run publish-lib` - publish library
+
 ## Packages:
 
 * [`@webitel/api-services`](./packages/api-services)

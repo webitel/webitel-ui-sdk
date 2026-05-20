@@ -1,6 +1,14 @@
 # `@webitel/api-services`
 
-## Contents:
+## Full build steps
+
+1. `npm run gen:api` - generate API services
+2. `npm version patch` - bump version
+3. `npm run build:types` - build types
+4. `npm run format:all` - format code
+5. `npm run publish-lib` - publish library
+
+## Contents
 
 ### Generated API services. 
 
