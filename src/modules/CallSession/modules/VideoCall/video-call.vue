@@ -5,10 +5,10 @@
       !props.static && !isPiP && `video-call-position--${props.position}`,
       isPiP && 'video-call--pip',
     ]"
+    :hide-video-display-panel="isPiP || props.hideVideoDisplayPanel"
     :size="isPiP ? ComponentSize.MD : props.size"
-    :static="isPiP || props.static"
-    :hide-video-display-panel="props.hideVideoDisplayPanel"
     :stream="mainStream"
+    :static="isPiP || props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
     :mirror-video="!showSenderScreen"
@@ -29,6 +29,17 @@
 
     <template #content="{ size: innerSize }">
       <slot :size="innerSize" name="content" />
+
+      <div
+        v-if="isPiP && props['receiver:mic:enabled'] === false"
+        class="video-call--pip__mic-indicator"
+      >
+        <wt-icon
+          :size="ComponentSize.SM"
+          icon="mic-muted"
+          color="on-dark"
+        />
+      </div>
 
       <slot v-if="!mainStream" :size="innerSize" name="overlay">
         <div class="video-call-overlay">
@@ -504,6 +515,27 @@ const senderVideoMutedIconSizes = {
   height: 100%;
   max-width: 100%;
   max-height: 100%;
+  border-radius: 0;
+}
+
+.video-call--pip :deep(.wt-vidstack-player__player:not(.video-call-sender *)),
+.video-call--pip :deep(.wt-vidstack-player__provider:not(.video-call-sender *)),
+.video-call--pip :deep(.wt-vidstack-player:not(.video-call-sender)),
+.video-call--pip :deep(video:not(.video-call-sender *)) {
+  border-radius: 0;
+}
+
+.video-call--pip__mic-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 1;
+  padding: var(--spacing-xs);
+  background: var(--p-player-head-line-hover-background);
+  border-radius: var(--p-player-wrapper-sm-border-radius);
 }
 
 /* Placeholder occupies original layout space while element lives in PiP window */
@@ -661,10 +693,6 @@ const senderVideoMutedIconSizes = {
   height: var(--p-player-cam-preview-sm-height);
 }
 
-.video-call-sender--md :deep(video) {
-  border-radius: var(--p-player-cam-preview-md-border-radius);
-}
-
 .video-call-sender--md.video-call-sender--muted {
   border-radius: var(--p-player-cam-preview-md-border-radius);
 }
@@ -675,10 +703,6 @@ const senderVideoMutedIconSizes = {
   bottom: 0;
   width: var(--p-player-cam-preview-md-width);
   height: var(--p-player-cam-preview-md-height);
-}
-
-.video-call-sender--lg :deep(video) {
-  border-radius: var(--p-player-cam-preview-lg-border-radius);
 }
 
 .video-call-sender--lg.video-call-sender--muted {
