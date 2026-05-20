@@ -50,6 +50,10 @@ export const ThreadManagementSearchQueryParams = zod.object({
 			'Sorting field.\nOptional "+" or "-" prefix indicates ascending or descending order.\nExample: "-created_at", "subject"',
 		),
 	page: zod.number().optional().describe('Page number (1-based).'),
+	contactIds: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter threads by participant contact IDs.'),
 });
 
 export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;

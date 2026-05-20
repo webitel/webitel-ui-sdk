@@ -48,4 +48,8 @@ Example: "-created_at", "subject"
 	 * Page number (1-based).
 	 */
 	page?: number;
+	/**
+	 * Filter threads by participant contact IDs.
+	 */
+	contactIds?: string[];
 };
