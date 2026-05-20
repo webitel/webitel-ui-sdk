@@ -13,3 +13,5 @@ export type MediaSnapshot = {
 	muted: boolean;
 	srcObject: MediaStream | null;
 };
+
+export type PiPResizeCallback = (rect: DOMRectReadOnly) => void;
