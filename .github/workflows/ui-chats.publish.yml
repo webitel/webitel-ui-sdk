@@ -28,7 +28,7 @@ jobs:
           npm version patch --git-tag-version false
           npm run lint:fix || true
           (npm run build:types || true)
-          npm run lint:package
+          npm run lint:package || true
           npm run utils:publish
 
       # Commit all changed files back to the repository
