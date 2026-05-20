@@ -34,4 +34,7 @@ jobs:
           npm run publish-lib
 
       # Commit all changed files back to the repository
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'ci: publish ui-sdk'
+          commit_options: '--no-verify'
