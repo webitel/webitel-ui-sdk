@@ -1,11 +1,11 @@
 <template>
 	<media-player
-		ref="mediaPlayerRef"
 		class="wt-player"
 		:class="`wt-player--position-${props.position}`"
 		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
+    :playback-rate="playbackRate"
     @ended="handleEnded"
 	>
 
@@ -19,7 +19,7 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
-			<wt-popover class="settings-popover">
+			<wt-popover v-if="props.settings" class="settings-popover">
 				<template #activator="{ toggle }">
 					<media-button class="settings-button" @click="toggle">
 						<wt-icon-btn
@@ -28,8 +28,9 @@
 						/>
 					</media-button>
 				</template>
+
 				<speed-settings
-					v-model="playbackRate"
+					v-model:model-value="playbackRate"
 				/>
 			</wt-popover>
 
@@ -65,7 +66,7 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { ref, toRefs, useTemplateRef, watch } from 'vue';
+import { ref, toRefs } from 'vue';
 import { ComponentSize } from '../../enums';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
@@ -136,6 +137,12 @@ interface Props {
 	 */
 	hideMuteButton?: boolean;
 	/**
+	 * Hide settings button
+	 * @type {boolean}
+	 * @default false
+	 */
+	settings?: boolean;
+	/**
 	 * Shows close button
 	 * @type {boolean}
 	 * @default true
@@ -159,6 +166,7 @@ const props = withDefaults(defineProps<Props>(), {
 	invertTime: true,
 	hideVolumeSlider: false,
 	hideMuteButton: false,
+	settings: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
@@ -169,18 +177,7 @@ const emit = defineEmits<{
 	close: [];
 }>();
 
-const mediaPlayerRef = useTemplateRef('mediaPlayerRef');
 const playbackRate = ref(1);
-
-watch(playbackRate, (updatedPlaybackRate) => {
-	if (mediaPlayerRef.value) {
-		(
-			mediaPlayerRef.value as HTMLElement & {
-				playbackRate: number;
-			}
-		).playbackRate = updatedPlaybackRate;
-	}
-});
 
 const { src: srcRef } = toRefs(props);
 

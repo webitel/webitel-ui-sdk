@@ -2,11 +2,11 @@
   <div class="speed-settings">
     <div class="speed-settings__controls">
       <wt-button
-        :size="ComponentSize.MD"
+        :size="ComponentSize.SM"
+        :disabled="modelValue <= minSpeed"
         class="speed-settings__step-button"
         variant="outlined"
         color="secondary"
-        :disabled="modelValue <= minSpeed"
         @click="handleDecrease"
       >
         <template #default>
@@ -17,14 +17,17 @@
       <span class="speed-settings__label">{{ formattedSpeed }}</span>
 
       <wt-button
-        :size="ComponentSize.MD"
+        :size="ComponentSize.SM"
+        :disabled="modelValue >= maxSpeed"
         class="speed-settings__step-button"
-        icon="plus"
         variant="outlined"
         color="secondary"
-        :disabled="modelValue >= maxSpeed"
         @click="handleIncrease"
-      />
+      >
+        <template #default>
+          <wt-icon icon="plus" :size="ComponentSize.SM" />
+        </template>
+      </wt-button>
     </div>
 
     <wt-slider
@@ -38,14 +41,18 @@
 
     <div class="speed-settings__presets">
       <wt-button
-        v-for="presetSpeed in speedPresets"
-        :key="presetSpeed"
-        :variant="modelValue === presetSpeed ? 'active' : 'outlined'"
-        :size="ComponentSize.XS"
+        v-for="speedPreset in speedPresets"
+        :key="speedPreset.speed"
+        :variant="modelValue === speedPreset.speed ? 'active' : 'outlined'"
+        :size="ComponentSize.SM"
         class="speed-settings__preset-button"
         color="secondary"
-        @click="$emit('update:modelValue', presetSpeed)"
-      >{{ presetSpeed }}</wt-button>
+        @click="$emit('update:modelValue', speedPreset.speed)"
+      >
+        <template #default>
+          <wt-icon :icon="speedPreset.icon" :size="ComponentSize.SM" />
+        </template>
+      </wt-button>
     </div>
   </div>
 </template>
@@ -74,11 +81,26 @@ const minSpeed = 0.25;
 const maxSpeed = 2;
 const speedStep = 0.25;
 const speedPresets = [
-	0.5,
-	0.75,
-	1,
-	1.5,
-	1.75,
+	{
+		speed: 0.5,
+		icon: 'playback-0.50',
+	},
+	{
+		speed: 0.75,
+		icon: 'playback-0.75',
+	},
+	{
+		speed: 1,
+		icon: 'playback-1.00',
+	},
+	{
+		speed: 1.5,
+		icon: 'playback-1.50',
+	},
+	{
+		speed: 1.75,
+		icon: 'playback-1.75',
+	},
 ];
 
 const formattedSpeed = computed(() => `${props.modelValue.toFixed(2)}x`);
@@ -103,6 +125,10 @@ function handleIncrease() {
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
   min-width: 192px;
+}
+.speed-settings__step-button {
+  min-width: 0;
+  padding: var(--spacing-xs);
 }
 
 .speed-settings__controls {
@@ -131,5 +157,6 @@ function handleIncrease() {
 
 .speed-settings__preset-button {
   min-width: 0;
+  padding: var(--spacing-xs);
 }
 </style>

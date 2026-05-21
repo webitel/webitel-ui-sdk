@@ -11,7 +11,7 @@
     :disabled="disabled"
     :loading="showLoader"
     :severity="color"
-    :size="primevueSizeMap[size]"
+    size="small"
     :variant="variant"
     class="wt-button typo-button typo-button"
     v-bind="attrs"
@@ -41,7 +41,7 @@
 
       <wt-icon
         v-if="icon"
-        :class="{ 'wt-button__icon--hidden': showLoader }"  
+        :class="{ 'wt-button__icon--hidden': showLoader }"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -97,6 +97,7 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
 	iconPrefix: '',
 	variant: ButtonVariant.ACTIVE,
 });
+console.log(primevueSizeMap[props.size], ' SIZE');
 
 const emit = defineEmits([
 	'click',
@@ -176,9 +177,9 @@ watch(
   display: contents;
 }
 
-/* 
+/*
 	@author HlukhovYe
-	Hides the icon instantly when the loader is shown. 
+	Hides the icon instantly when the loader is shown.
 */
 .wt-button__icon--hidden {
   opacity: 0;
