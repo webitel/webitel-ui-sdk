@@ -1,6 +1,6 @@
 <template>
   <media-play-button class="play-button">
-    <wt-icon icon="plyr-play"  type="play" class="play-icon" size="sm"/>
+    <wt-icon icon="plyr-play"  type="play" class="play-icon" size="sm" />
     <wt-icon icon="plyr-pause" type="pause" class="pause-icon" size="sm" />
   </media-play-button>
 </template>
