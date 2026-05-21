@@ -108,13 +108,7 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
-type EmitOptions = Omit<DatePickerEmitsOptions, 'update:modelValue'> & {
-	'update:modelValue': [
-		value: number | null,
-	];
-};
-
-const emit = defineEmits<EmitOptions>();
+const emit = defineEmits<DatePickerEmitsOptions>();
 
 const model = defineModel<number | null>({
 	default: null,
@@ -127,9 +121,12 @@ const modelValue = computed({
 		return props.timezone ? toZonedTime(date, props.timezone) : date;
 	},
 	set(value) {
-		if (!value) return emit('update:modelValue', null);
+		if (!value) {
+			model.value = null;
+			return;
+		}
 		const utc = props.timezone ? fromZonedTime(value, props.timezone) : value;
-		emit('update:modelValue', utc.getTime());
+		model.value = utc.getTime();
 	},
 });
 

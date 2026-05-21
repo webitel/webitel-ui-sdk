@@ -58,7 +58,7 @@ const initPrimevue = (app) => {
 				},
 			},
 		},
-		locale: all[currentLocale.value],
+		locale: all[currentLocale.value] || all.en,
 	});
 
 	app.component('PButton', changeComponentCompatMode(PButton));
