@@ -1,5 +1,6 @@
 <template>
 	<media-player
+		ref="mediaPlayerRef"
 		class="wt-player"
 		:class="`wt-player--position-${props.position}`"
 		:src="normalizedSrcObject"
@@ -18,6 +19,20 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
+			<wt-popover class="settings-popover">
+				<template #activator="{ toggle }">
+					<media-button class="settings-button" @click="toggle">
+						<wt-icon-btn
+							icon="plyr-settings"
+							:size="ComponentSize.MD"
+						/>
+					</media-button>
+				</template>
+				<speed-settings
+					v-model="playbackRate"
+				/>
+			</wt-popover>
+
 			<media-button
 				v-if="props.download"
 				class="download-button"
@@ -25,7 +40,7 @@
 			>
 				<wt-icon-btn
 					icon="plyr-download"
-					size="sm"
+					:size="ComponentSize.MD"
 				/>
 			</media-button>
 
@@ -36,7 +51,7 @@
 			>
 				<wt-icon-btn
 					icon="close"
-					size="sm"
+					:size="ComponentSize.MD"
 				/>
 			</media-button>
 
@@ -50,12 +65,15 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { computed, toRefs } from 'vue';
+import { ref, toRefs, useTemplateRef, watch } from 'vue';
+import { ComponentSize } from '../../enums';
 
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
+import WtPopover from '../wt-popover/wt-popover.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
+import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
 
@@ -151,6 +169,19 @@ const emit = defineEmits<{
 	close: [];
 }>();
 
+const mediaPlayerRef = useTemplateRef('mediaPlayerRef');
+const playbackRate = ref(1);
+
+watch(playbackRate, (updatedPlaybackRate) => {
+	if (mediaPlayerRef.value) {
+		(
+			mediaPlayerRef.value as HTMLElement & {
+				playbackRate: number;
+			}
+		).playbackRate = updatedPlaybackRate;
+	}
+});
+
 const { src: srcRef } = toRefs(props);
 
 const { normalizedSrcObject } = useVidstackSrc({
@@ -205,7 +236,8 @@ function handleEnded(event: Event) {
 }
 
 .close-button,
-.download-button {
+.download-button,
+.settings-button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
