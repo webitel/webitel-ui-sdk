@@ -6,13 +6,9 @@ export const useMediaScroll = (
 ) => {
 	let observer: MutationObserver | null = null;
 
-	const handleImageLoad = () => {
-		onMediaLoaded();
-	};
-
 	const observeImages = (img: HTMLImageElement) => {
 		if (img.complete) return;
-		img.addEventListener('load', handleImageLoad, {
+		img.addEventListener('load', () => onMediaLoaded(), {
 			once: true,
 		});
 	};
