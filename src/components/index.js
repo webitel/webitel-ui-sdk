@@ -348,8 +348,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-	WtExpansionCard,
-	WtDatetimeText,
 	WtSingleSelect,
 };
 
