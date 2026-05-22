@@ -6,6 +6,7 @@
         'p-button--with-badge': props.badge,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
+        [`p-button--size-${size}`]: true,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
       }"
     :disabled="disabled"
