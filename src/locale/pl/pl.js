@@ -260,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Błąd',
 			},
 		},
-	},
-	importCSV: 'Importuj CSV',
-	CSV: {
-		skipHeaders: 'Pomiń nagłówki',
-		charSet: 'Zestaw znaków',
-		separator: 'Separator',
-		CSVColumn: 'Kolumna CSV',
-		fieldName: 'Nazwa pola',
-		clearMember: 'Wyczyść członka',
+		importCSV: 'Importuj CSV',
+		CSV: {
+			skipHeaders: 'Pomiń nagłówki',
+			charSet: 'Zestaw znaków',
+			separator: 'Separator',
+			CSVColumn: 'Kolumna CSV',
+			fieldName: 'Nazwa pola',
+			clearMember: 'Wyczyść członka',
+		},
 	},
 	channel: {
 		state: {
