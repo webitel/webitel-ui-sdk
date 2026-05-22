@@ -19,12 +19,12 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
-			<wt-popover v-if="props.settings" class="settings-popover">
+			<wt-popover v-if="!props.hideSettings" class="settings-popover">
 				<template #activator="{ toggle }">
 					<media-button class="settings-button" @click="toggle">
 						<wt-icon-btn
 							icon="plyr-settings"
-							:size="ComponentSize.MD"
+							:size="ComponentSize.SM"
 						/>
 					</media-button>
 				</template>
@@ -41,7 +41,7 @@
 			>
 				<wt-icon-btn
 					icon="plyr-download"
-					:size="ComponentSize.MD"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -52,7 +52,7 @@
 			>
 				<wt-icon-btn
 					icon="close"
-					:size="ComponentSize.MD"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -141,7 +141,7 @@ interface Props {
 	 * @type {boolean}
 	 * @default false
 	 */
-	settings?: boolean;
+	hideSettings?: boolean;
 	/**
 	 * Shows close button
 	 * @type {boolean}
@@ -166,7 +166,7 @@ const props = withDefaults(defineProps<Props>(), {
 	invertTime: true,
 	hideVolumeSlider: false,
 	hideMuteButton: false,
-	settings: false,
+	hideSettings: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
@@ -230,6 +230,10 @@ function handleEnded(event: Event) {
 	justify-content: center;
 	align-self: center;
 	gap: var(--spacing-sm);
+}
+
+.settings-popover {
+  display: flex;
 }
 
 .close-button,

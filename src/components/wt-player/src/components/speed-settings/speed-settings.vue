@@ -43,8 +43,8 @@
       <wt-button
         v-for="speedPreset in speedPresets"
         :key="speedPreset.speed"
-        :variant="modelValue === speedPreset.speed ? 'active' : 'outlined'"
         :size="ComponentSize.SM"
+        variant="outlined"
         class="speed-settings__preset-button"
         color="secondary"
         @click="$emit('update:modelValue', speedPreset.speed)"
@@ -78,7 +78,7 @@ const emit = defineEmits<{
 }>();
 
 const minSpeed = 0.25;
-const maxSpeed = 2;
+const maxSpeed = 3;
 const speedStep = 0.25;
 const speedPresets = [
 	{
