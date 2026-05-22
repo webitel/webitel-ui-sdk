@@ -5,7 +5,7 @@
 		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
-    :playback-rate="playbackRate"
+    :playback-rate="playerSettings.playbackRate"
     @ended="handleEnded"
 	>
 
@@ -19,20 +19,10 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
-			<wt-popover v-if="!props.hideSettings" class="settings-popover">
-				<template #activator="{ toggle }">
-					<media-button class="settings-button" @click="toggle">
-						<wt-icon-btn
-							icon="plyr-settings"
-							:size="ComponentSize.SM"
-						/>
-					</media-button>
-				</template>
-
-				<speed-settings
-					v-model:model-value="playbackRate"
-				/>
-			</wt-popover>
+			<audio-settings
+				v-if="!props.hideSettings"
+				v-model="playerSettings"
+			/>
 
 			<media-button
 				v-if="props.download"
@@ -68,14 +58,15 @@ import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
 import { ref, toRefs } from 'vue';
 import { ComponentSize } from '../../enums';
-import WtPopover from '../wt-popover/wt-popover.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
+import AudioSettings, {
+	type PlayerSettings,
+} from './src/components/audio-settings/audio-settings.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
-import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 
 interface Props {
 	/**
@@ -176,7 +167,9 @@ const emit = defineEmits<{
 	close: [];
 }>();
 
-const playbackRate = ref(1);
+const playerSettings = ref<PlayerSettings>({
+	playbackRate: 1,
+});
 
 const { src: srcRef } = toRefs(props);
 
@@ -231,13 +224,8 @@ function handleEnded(event: Event) {
 	gap: var(--spacing-sm);
 }
 
-.settings-popover {
-  display: flex;
-}
-
 .close-button,
-.download-button,
-.settings-button {
+.download-button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
