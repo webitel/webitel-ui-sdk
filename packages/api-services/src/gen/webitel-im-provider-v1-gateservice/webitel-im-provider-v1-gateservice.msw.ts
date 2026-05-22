@@ -7,17 +7,17 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-import type { WebitelImApiProviderV1ProviderListGatesResponse } from '../_models';
+import type { WebitelImProviderV1ProviderListGatesResponse } from '../_models';
 import {
-	WebitelImApiProviderV1ProviderStatus,
-	WebitelImApiProviderV1ProviderType,
+	WebitelImProviderV1ProviderStatus,
+	WebitelImProviderV1ProviderType,
 } from '../_models';
 
 export const getGateServiceListGatesResponseMock = (
 	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderListGatesResponse, object>
+		Extract<WebitelImProviderV1ProviderListGatesResponse, object>
 	> = {},
-): WebitelImApiProviderV1ProviderListGatesResponse => ({
+): WebitelImProviderV1ProviderListGatesResponse => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{
@@ -75,13 +75,13 @@ export const getGateServiceListGatesResponseMock = (
 			]),
 			status: faker.helpers.arrayElement([
 				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderStatus),
+					Object.values(WebitelImProviderV1ProviderStatus),
 				),
 				undefined,
 			]),
 			type: faker.helpers.arrayElement([
 				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderType),
+					Object.values(WebitelImProviderV1ProviderType),
 				),
 				undefined,
 			]),
@@ -123,12 +123,12 @@ export const getGateServiceListGatesResponseMock = (
 
 export const getGateServiceListGatesMockHandler = (
 	overrideResponse?:
-		| WebitelImApiProviderV1ProviderListGatesResponse
+		| WebitelImProviderV1ProviderListGatesResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderListGatesResponse>
-				| WebitelImApiProviderV1ProviderListGatesResponse),
+				| Promise<WebitelImProviderV1ProviderListGatesResponse>
+				| WebitelImProviderV1ProviderListGatesResponse),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
@@ -148,6 +148,6 @@ export const getGateServiceListGatesMockHandler = (
 		options,
 	);
 };
-export const getWebitelImApiProviderV1GateserviceMock = () => [
+export const getWebitelImProviderV1GateserviceMock = () => [
 	getGateServiceListGatesMockHandler(),
 ];

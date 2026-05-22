@@ -29,6 +29,7 @@ export const MessageSendContactBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -49,6 +50,7 @@ export const MessageSendContactResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -90,6 +92,7 @@ export const MessageSendDocumentBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -112,6 +115,7 @@ export const MessageSendDocumentResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -150,6 +154,7 @@ export const MessageSendImageBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -172,6 +177,7 @@ export const MessageSendImageResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -443,6 +449,7 @@ export const MessageSendInteractiveBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -465,6 +472,7 @@ export const MessageSendInteractiveResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -514,6 +522,7 @@ export const MessageSendInteractiveCallbackResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -557,6 +566,7 @@ export const MessageSendLocationBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -577,6 +587,7 @@ export const MessageSendLocationResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -604,6 +615,7 @@ export const MessageSendTextBody = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),
@@ -626,6 +638,7 @@ export const MessageSendTextResponse = zod
 					.object({
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
+						via: zod.string().optional(),
 					})
 					.optional(),
 				groupId: zod.string().optional(),

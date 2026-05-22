@@ -8,13 +8,13 @@ import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
-import type { WebitelImApiProviderV1ProviderSendMessageResponse } from '../_models';
+import type { WebitelImProviderV1ProviderSendMessageResponse } from '../_models';
 
 export const getProviderMessageServiceSendDocumentResponseMock = (
 	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderSendMessageResponse, object>
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
 	> = {},
-): WebitelImApiProviderV1ProviderSendMessageResponse => ({
+): WebitelImProviderV1ProviderSendMessageResponse => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -38,9 +38,9 @@ export const getProviderMessageServiceSendDocumentResponseMock = (
 
 export const getProviderMessageServiceSendImageResponseMock = (
 	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderSendMessageResponse, object>
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
 	> = {},
-): WebitelImApiProviderV1ProviderSendMessageResponse => ({
+): WebitelImProviderV1ProviderSendMessageResponse => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -64,9 +64,9 @@ export const getProviderMessageServiceSendImageResponseMock = (
 
 export const getProviderMessageServiceSendTextResponseMock = (
 	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderSendMessageResponse, object>
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
 	> = {},
-): WebitelImApiProviderV1ProviderSendMessageResponse => ({
+): WebitelImProviderV1ProviderSendMessageResponse => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -90,12 +90,12 @@ export const getProviderMessageServiceSendTextResponseMock = (
 
 export const getProviderMessageServiceSendDocumentMockHandler = (
 	overrideResponse?:
-		| WebitelImApiProviderV1ProviderSendMessageResponse
+		| WebitelImProviderV1ProviderSendMessageResponse
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderSendMessageResponse>
-				| WebitelImApiProviderV1ProviderSendMessageResponse),
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -118,12 +118,12 @@ export const getProviderMessageServiceSendDocumentMockHandler = (
 
 export const getProviderMessageServiceSendImageMockHandler = (
 	overrideResponse?:
-		| WebitelImApiProviderV1ProviderSendMessageResponse
+		| WebitelImProviderV1ProviderSendMessageResponse
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderSendMessageResponse>
-				| WebitelImApiProviderV1ProviderSendMessageResponse),
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -146,12 +146,12 @@ export const getProviderMessageServiceSendImageMockHandler = (
 
 export const getProviderMessageServiceSendTextMockHandler = (
 	overrideResponse?:
-		| WebitelImApiProviderV1ProviderSendMessageResponse
+		| WebitelImProviderV1ProviderSendMessageResponse
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderSendMessageResponse>
-				| WebitelImApiProviderV1ProviderSendMessageResponse),
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
@@ -171,7 +171,7 @@ export const getProviderMessageServiceSendTextMockHandler = (
 		options,
 	);
 };
-export const getWebitelImApiProviderV1ProvidermessageserviceMock = () => [
+export const getWebitelImProviderV1ProvidermessageserviceMock = () => [
 	getProviderMessageServiceSendDocumentMockHandler(),
 	getProviderMessageServiceSendImageMockHandler(),
 	getProviderMessageServiceSendTextMockHandler(),

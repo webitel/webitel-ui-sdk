@@ -10,22 +10,25 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	GateServiceListGatesParams,
-	WebitelImApiProviderV1ProviderListGatesResponse,
+	WebitelImProviderV1ProviderListGatesResponse,
 } from '../_models';
 
 // --- header start
 //
 
 export const // --- title start
-	getWebitelImApiProviderV1Gateservice =
+	getWebitelImProviderV1Gateservice =
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
+			/**
+			 * @summary / ListGates returns a collection of all registered gateways within the current domain.
+			 */
 			const gateServiceListGates = (
 				params?: GateServiceListGatesParams,
 				options?: AxiosRequestConfig,
 			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderListGatesResponse>
+				AxiosResponse<WebitelImProviderV1ProviderListGatesResponse>
 			> => {
 				return axiosInstance.get(`/im/gates`, {
 					...options,
@@ -42,6 +45,6 @@ export const // --- title start
 			};
 		};
 export type GateServiceListGatesResult =
-	AxiosResponse<WebitelImApiProviderV1ProviderListGatesResponse>;
+	AxiosResponse<WebitelImProviderV1ProviderListGatesResponse>;
 
 // --- footer end

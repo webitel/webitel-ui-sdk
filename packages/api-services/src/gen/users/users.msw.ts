@@ -2120,6 +2120,8 @@ export const getCreateUserResponseMock = (
 	...overrideResponse,
 });
 
+export const getLogoutUser2ResponseMock = (): ApiLogoutUserResponse => ({});
+
 export const getUpdatePasswordResponseMock =
 	(): ApiUpdatePasswordResponse => ({});
 
@@ -4948,6 +4950,32 @@ export const getCreateUserMockHandler = (
 	);
 };
 
+export const getLogoutUser2MockHandler = (
+	overrideResponse?:
+		| ApiLogoutUserResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<ApiLogoutUserResponse> | ApiLogoutUserResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/users/logout',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getLogoutUser2ResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getUpdatePasswordMockHandler = (
 	overrideResponse?:
 		| ApiUpdatePasswordResponse
@@ -5188,6 +5216,7 @@ export const getUsersMock = () => [
 	getDeleteUsers2MockHandler(),
 	getSearchUsersMockHandler(),
 	getCreateUserMockHandler(),
+	getLogoutUser2MockHandler(),
 	getUpdatePasswordMockHandler(),
 	getReadPasswordSettingsMockHandler(),
 	getSearchUsers2MockHandler(),

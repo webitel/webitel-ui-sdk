@@ -6,92 +6,74 @@
  */
 import * as zod from 'zod';
 
-export const MetaAppServiceCreateMetaAppBody = zod.object({
-	appId: zod.string().optional(),
-	appSecret: zod.string().optional(),
-	name: zod.string().optional(),
-	oauthRedirectUri: zod.string().optional(),
-	scopes: zod.array(zod.string()).optional(),
-	uri: zod.string().optional(),
-	verifyToken: zod.string().optional(),
-});
+export const MetaAppServiceDeleteMetaAppWebitelImApiProviderV1MetaAppServiceParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const MetaAppServiceCreateMetaAppResponse = zod.object({
-	item: zod
-		.object({
-			appId: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			oauthRedirectUri: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			updatedAt: zod.string().optional(),
-			verifyToken: zod.string().optional(),
-		})
-		.optional(),
-});
+export const MetaAppServiceDeleteMetaAppWebitelImApiProviderV1MetaAppServiceResponse =
+	zod.object({
+		item: zod
+			.object({
+				appId: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				oauthRedirectUri: zod.string().optional(),
+				scopes: zod.array(zod.string()).optional(),
+				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
+			})
+			.optional(),
+	});
 
-export const MetaAppServiceDeleteMetaAppParams = zod.object({
-	id: zod.string(),
-});
+export const MetaAppServiceGetMetaAppWebitelImApiProviderV1MetaAppServiceParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const MetaAppServiceDeleteMetaAppResponse = zod.object({
-	item: zod
-		.object({
-			appId: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			oauthRedirectUri: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			updatedAt: zod.string().optional(),
-			verifyToken: zod.string().optional(),
-		})
-		.optional(),
-});
+export const MetaAppServiceGetMetaAppWebitelImApiProviderV1MetaAppServiceResponse =
+	zod.object({
+		item: zod
+			.object({
+				appId: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				oauthRedirectUri: zod.string().optional(),
+				scopes: zod.array(zod.string()).optional(),
+				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
+			})
+			.optional(),
+	});
 
-export const MetaAppServiceGetMetaAppParams = zod.object({
-	id: zod.string(),
-});
+export const MetaAppServiceUpdateMetaAppWebitelImApiProviderV1MetaAppServiceParams =
+	zod.object({
+		id: zod.string(),
+	});
 
-export const MetaAppServiceGetMetaAppResponse = zod.object({
-	item: zod
-		.object({
-			appId: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			oauthRedirectUri: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			updatedAt: zod.string().optional(),
-			verifyToken: zod.string().optional(),
-		})
-		.optional(),
-});
+export const MetaAppServiceUpdateMetaAppWebitelImApiProviderV1MetaAppServiceBody =
+	zod.object({
+		appSecret: zod.string().optional(),
+		name: zod.string().optional(),
+		oauthRedirectUri: zod.string().optional(),
+		scopes: zod.array(zod.string()).optional(),
+		verifyToken: zod.string().optional(),
+	});
 
-export const MetaAppServiceUpdateMetaAppParams = zod.object({
-	id: zod.string(),
-});
-
-export const MetaAppServiceUpdateMetaAppBody = zod.object({
-	appSecret: zod.string().optional(),
-	name: zod.string().optional(),
-	oauthRedirectUri: zod.string().optional(),
-	scopes: zod.array(zod.string()).optional(),
-	verifyToken: zod.string().optional(),
-});
-
-export const MetaAppServiceUpdateMetaAppResponse = zod.object({
-	item: zod
-		.object({
-			appId: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			oauthRedirectUri: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			updatedAt: zod.string().optional(),
-			verifyToken: zod.string().optional(),
-		})
-		.optional(),
-});
+export const MetaAppServiceUpdateMetaAppWebitelImApiProviderV1MetaAppServiceResponse =
+	zod.object({
+		item: zod
+			.object({
+				appId: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				oauthRedirectUri: zod.string().optional(),
+				scopes: zod.array(zod.string()).optional(),
+				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
+			})
+			.optional(),
+	});
