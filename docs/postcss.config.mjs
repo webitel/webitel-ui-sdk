@@ -3,12 +3,17 @@ import { postcssIsolateStyles } from 'vitepress';
 
 export default {
 	plugins: [
-		/* 
+		/*
       @author HlukhovYe
-
       see: https://github.com/vuejs/vitepress/issues/4425
-      This plugin fixes the issue with the isolation of styles in the documentation,
-      because this styles have higher priority than other more specific styles
+
+      VitePress base.css ship unlayered CSS resets (e.g. `input { border: 0 }`).
+      Unlayered styles always beat @layer rules regardless of specificity, so they override
+      PrimeVue's `@layer primevue` component styles — inputs lose their border and background.
+
+      postcssIsolateStyles wraps the matched files in `@layer base`, making those resets layered.
+      Since `base` is declared before `primevue` in src/css/main.css (@layer wt-default, base, primevue, wt-typography),
+      PrimeVue's layer now wins over the resets.
     */
 		postcssIsolateStyles({
 			includeFiles: [
