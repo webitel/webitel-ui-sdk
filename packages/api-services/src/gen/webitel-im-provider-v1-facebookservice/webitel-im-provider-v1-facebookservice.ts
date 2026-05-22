@@ -44,36 +44,36 @@ export const // --- title start
 			 * @summary / DeleteFacebookGate deactivates the gateway.
 			 */
 			const facebookServiceDeleteFacebookGate = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderDeleteFacebookGateResponse>
 			> => {
-				return axiosInstance.delete(`/im/gates/facebook/${id}`, options);
+				return axiosInstance.delete(`/im/gates/facebook/${id1}`, options);
 			};
 			/**
 			 * @summary / GetFacebookGate retrieves details of a specific Facebook gateway.
 			 */
 			const facebookServiceGetFacebookGate = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderGetFacebookGateResponse>
 			> => {
-				return axiosInstance.get(`/im/gates/facebook/${id}`, options);
+				return axiosInstance.get(`/im/gates/facebook/${id1}`, options);
 			};
 			/**
 			 * @summary / UpdateFacebookGate modifies Facebook gateway settings.
 			 */
 			const facebookServiceUpdateFacebookGate = (
-				id: string,
+				id1: string,
 				webitelImProviderV1FacebookServiceUpdateFacebookGateBody: WebitelImProviderV1FacebookServiceUpdateFacebookGateBody,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderUpdateFacebookGateResponse>
 			> => {
 				return axiosInstance.patch(
-					`/im/gates/facebook/${id}`,
+					`/im/gates/facebook/${id1}`,
 					webitelImProviderV1FacebookServiceUpdateFacebookGateBody,
 					options,
 				);

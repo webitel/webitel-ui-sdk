@@ -16,5 +16,4 @@ export interface WebitelImProviderV1ProviderFacebookGate {
 	pageName?: string;
 	status?: WebitelImProviderV1ProviderStatus;
 	updatedAt?: string;
-	webhook?: string;
 }

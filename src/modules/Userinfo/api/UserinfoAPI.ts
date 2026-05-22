@@ -24,6 +24,7 @@ const getSession = async (): Promise<{
 	scope: ScopeAccessApiResponseItem[];
 	permissions: GlobalAccessApiResponseItem[];
 	userId: string;
+	domain: string;
 	license: WebitelLicenseInfo[];
 }> => {
 	const url = '/userinfo';

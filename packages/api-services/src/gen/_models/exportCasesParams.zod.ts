@@ -15,4 +15,5 @@ export type ExportCasesParams = {
 	qin?: string;
 	filtersV1?: string;
 	format?: string;
+	separator?: string;
 };

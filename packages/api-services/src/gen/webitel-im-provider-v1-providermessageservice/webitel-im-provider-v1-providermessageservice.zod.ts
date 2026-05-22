@@ -14,16 +14,19 @@ export const providerMessageServiceSendDocumentBodyTypeDefault = `PROVIDER_TYPE_
 export const ProviderMessageServiceSendDocumentBody = zod
 	.object({
 		caption: zod.string().optional(),
-		document: zod
-			.object({
-				id: zod.string().optional(),
-				mimeType: zod.string().optional(),
-				name: zod.string().optional(),
-				size: zod.string().optional(),
-				url: zod.string().optional(),
-			})
-			.optional()
-			.describe('ProviderFile represents a generic file attachment.'),
+		documents: zod
+			.array(
+				zod
+					.object({
+						id: zod.string().optional(),
+						mimeType: zod.string().optional(),
+						name: zod.string().optional(),
+						size: zod.string().optional(),
+						url: zod.string().optional(),
+					})
+					.describe('ProviderFile represents a generic file attachment.'),
+			)
+			.optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
 		type: zod
@@ -65,16 +68,19 @@ export const ProviderMessageServiceSendImageBody = zod
 		caption: zod.string().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
-		image: zod
-			.object({
-				id: zod.string().optional(),
-				mimeType: zod.string().optional(),
-				name: zod.string().optional(),
-				size: zod.string().optional(),
-				url: zod.string().optional(),
-			})
-			.optional()
-			.describe('ProviderFile represents a generic file attachment.'),
+		images: zod
+			.array(
+				zod
+					.object({
+						id: zod.string().optional(),
+						mimeType: zod.string().optional(),
+						name: zod.string().optional(),
+						size: zod.string().optional(),
+						url: zod.string().optional(),
+					})
+					.describe('ProviderFile represents a generic file attachment.'),
+			)
+			.optional(),
 		type: zod
 			.enum([
 				'PROVIDER_TYPE_UNSPECIFIED',

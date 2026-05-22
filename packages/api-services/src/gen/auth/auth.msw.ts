@@ -137,6 +137,15 @@ export const getUserInfo2ResponseMock = (
 				}),
 				undefined,
 			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			prod: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -439,6 +448,15 @@ export const getUserInfoResponseMock = (
 				undefined,
 			]),
 			issuedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,

@@ -12,6 +12,6 @@ export interface WebitelImProviderV1ProviderMetaApp {
 	name?: string;
 	oauthRedirectUri?: string;
 	scopes?: string[];
-	systemUserToken?: string;
 	updatedAt?: string;
+	verifyToken?: string;
 }

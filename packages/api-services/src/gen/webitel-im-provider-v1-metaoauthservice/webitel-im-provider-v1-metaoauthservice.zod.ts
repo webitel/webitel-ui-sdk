@@ -10,7 +10,7 @@ import * as zod from 'zod';
  * @summary / MetaOAuthCallback processes the authorization code returned by Facebook.
  */
 export const MetaOAuthServiceMetaOAuthCallbackParams = zod.object({
-	meta_app_id: zod.string(),
+	meta_app_id_1: zod.string(),
 });
 
 export const MetaOAuthServiceMetaOAuthCallbackBody = zod
@@ -48,7 +48,7 @@ export const MetaOAuthServiceMetaOAuthCallbackResponse = zod
  * @summary / StartMetaOAuth generates a secure Facebook Authorization URL.
  */
 export const MetaOAuthServiceStartMetaOAuthParams = zod.object({
-	meta_app_id: zod
+	meta_app_id_1: zod
 		.string()
 		.describe('Internal ID of the MetaApp to use for this flow'),
 });

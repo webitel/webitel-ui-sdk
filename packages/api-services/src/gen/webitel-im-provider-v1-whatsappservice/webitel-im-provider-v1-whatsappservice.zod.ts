@@ -57,7 +57,7 @@ export const WhatsAppServiceCreateWhatsAppGateResponse = zod
  * @summary / DeleteWhatsAppGate removes the WhatsApp gateway integration.
  */
 export const WhatsAppServiceDeleteWhatsAppGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const whatsAppServiceDeleteWhatsAppGateResponseItemStatusDefault = `PROVIDER_STATUS_UNSPECIFIED`;
@@ -92,7 +92,7 @@ export const WhatsAppServiceDeleteWhatsAppGateResponse = zod.object({
  * @summary / GetWhatsAppGate retrieves configuration and status for a WhatsApp gateway.
  */
 export const WhatsAppServiceGetWhatsAppGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const whatsAppServiceGetWhatsAppGateResponseItemStatusDefault = `PROVIDER_STATUS_UNSPECIFIED`;
@@ -127,7 +127,7 @@ export const WhatsAppServiceGetWhatsAppGateResponse = zod.object({
  * @summary / UpdateWhatsAppGate updates WhatsApp-specific gateway configurations.
  */
 export const WhatsAppServiceUpdateWhatsAppGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const WhatsAppServiceUpdateWhatsAppGateBody = zod

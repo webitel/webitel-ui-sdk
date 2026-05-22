@@ -44,36 +44,36 @@ export const // --- title start
 			 * @summary / DeleteMetaApp removes a Meta Application registration.
 			 */
 			const metaAppServiceDeleteMetaApp = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderDeleteMetaAppResponse>
 			> => {
-				return axiosInstance.delete(`/im/meta-apps/${id}`, options);
+				return axiosInstance.delete(`/im/meta-apps/${id1}`, options);
 			};
 			/**
 			 * @summary / GetMetaApp retrieves the configuration details of a specific Meta Application by its ID.
 			 */
 			const metaAppServiceGetMetaApp = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderGetMetaAppResponse>
 			> => {
-				return axiosInstance.get(`/im/meta-apps/${id}`, options);
+				return axiosInstance.get(`/im/meta-apps/${id1}`, options);
 			};
 			/**
 			 * @summary / UpdateMetaApp modifies an existing Meta Application configuration.
 			 */
 			const metaAppServiceUpdateMetaApp = (
-				id: string,
+				id1: string,
 				webitelImProviderV1MetaAppServiceUpdateMetaAppBody: WebitelImProviderV1MetaAppServiceUpdateMetaAppBody,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderUpdateMetaAppResponse>
 			> => {
 				return axiosInstance.patch(
-					`/im/meta-apps/${id}`,
+					`/im/meta-apps/${id1}`,
 					webitelImProviderV1MetaAppServiceUpdateMetaAppBody,
 					options,
 				);

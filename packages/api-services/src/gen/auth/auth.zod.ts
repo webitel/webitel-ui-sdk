@@ -74,6 +74,7 @@ export const UserInfo2Response = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod
@@ -149,6 +150,7 @@ export const UserInfoResponse = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod

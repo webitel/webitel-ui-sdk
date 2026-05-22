@@ -33,8 +33,8 @@
             :options="charsetOptions"
             disabled
           />
-
-          <wt-input
+          
+          <wt-input-text
             v-model="separator"
             :label="t('objects.CSV.separator')"
           />

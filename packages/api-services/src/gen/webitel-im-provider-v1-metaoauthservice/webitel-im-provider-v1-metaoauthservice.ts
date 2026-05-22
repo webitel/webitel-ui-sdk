@@ -27,14 +27,14 @@ export const // --- title start
 			 * @summary / MetaOAuthCallback processes the authorization code returned by Facebook.
 			 */
 			const metaOAuthServiceMetaOAuthCallback = (
-				metaAppId: string,
+				metaAppId1: string,
 				webitelImProviderV1MetaOAuthServiceMetaOAuthCallbackBody: WebitelImProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderMetaOAuthCallbackResponse>
 			> => {
 				return axiosInstance.post(
-					`/im/meta-apps/${metaAppId}/oauth/callback`,
+					`/im/meta-apps/${metaAppId1}/oauth/callback`,
 					webitelImProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
 					options,
 				);
@@ -43,14 +43,14 @@ export const // --- title start
 			 * @summary / StartMetaOAuth generates a secure Facebook Authorization URL.
 			 */
 			const metaOAuthServiceStartMetaOAuth = (
-				metaAppId: string,
+				metaAppId1: string,
 				webitelImProviderV1MetaOAuthServiceStartMetaOAuthBody: WebitelImProviderV1MetaOAuthServiceStartMetaOAuthBody,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderMetaOAuthStartResponse>
 			> => {
 				return axiosInstance.post(
-					`/im/meta-apps/${metaAppId}/oauth/start`,
+					`/im/meta-apps/${metaAppId1}/oauth/start`,
 					webitelImProviderV1MetaOAuthServiceStartMetaOAuthBody,
 					options,
 				);

@@ -95,15 +95,6 @@ export const getFacebookServiceCreateFacebookGateResponseMock = (
 				}),
 				undefined,
 			]),
-			webhook: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
 		},
 		undefined,
 	]),
@@ -182,15 +173,6 @@ export const getFacebookServiceDeleteFacebookGateResponseMock = (
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			webhook: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -285,15 +267,6 @@ export const getFacebookServiceGetFacebookGateResponseMock = (
 				}),
 				undefined,
 			]),
-			webhook: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
 		},
 		undefined,
 	]),
@@ -380,15 +353,6 @@ export const getFacebookServiceUpdateFacebookGateResponseMock = (
 				}),
 				undefined,
 			]),
-			webhook: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
 		},
 		undefined,
 	]),
@@ -434,7 +398,7 @@ export const getFacebookServiceDeleteFacebookGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.delete(
-		'*/im/gates/facebook/:id',
+		'*/im/gates/facebook/:id1',
 		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -462,7 +426,7 @@ export const getFacebookServiceGetFacebookGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/im/gates/facebook/:id',
+		'*/im/gates/facebook/:id1',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -490,7 +454,7 @@ export const getFacebookServiceUpdateFacebookGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.patch(
-		'*/im/gates/facebook/:id',
+		'*/im/gates/facebook/:id1',
 		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

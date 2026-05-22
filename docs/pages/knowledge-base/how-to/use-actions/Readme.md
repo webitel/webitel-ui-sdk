@@ -32,7 +32,7 @@ Action виконує наступні дії:
 ### webitel package_name pkg publish
 Публікує пакет на npm та робить коміт з оновленим `package.json` та `package-lock.json`. Є окремий екшн для кожного пакету, а саме:
 #### 1.[api-services](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/api-services.publish.yml) 
-> [!TIP] Action `webitel api-services pkg publish` публікує тільки нову версію пакета. Для генерації API та публікації нової версії використовуй action `webitel api-services pkg generate api and publish`
+> [!TIP] Action `webitel api-services pkg publish` публікує тільки нову версію пакета. Для генерації API використовуй action `webitel api-services pkg generate api`
 #### 2.[ui-chats](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/ui-chats.publish.yml)
 #### 3.[ui-datalist](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/ui-datalist.publish.yml)
 #### 4.[ui-sdk](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/ui-sdk.publish.yml)
@@ -45,8 +45,9 @@ Action виконує наступні дії:
 
 ---
 
-### [webitel api-services pkg generate api and publish](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/api-services.gen-api-and-publish.yml)
-Генерує API клієнт з актуальних специфікацій і публікує пакет `@webitel/api-services` в npm. Після генерації автоматично комітить змінені файли назад в репозиторій
+### [webitel api-services pkg generate api](https://github.com/webitel/webitel-ui-sdk/blob/main/.github/workflows/api-services.gen.yml)
+Генерує API клієнт з актуальних специфікацій **але! не** публікує пакет `@webitel/api-services` в npm. Після генерації автоматично комітить змінені файли назад в репозиторій.
+Щоб зробити publish, використовуйте action `webitel api-services pkg publish`
 
 ---
 

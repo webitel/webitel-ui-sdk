@@ -7,7 +7,7 @@
 import type { ApiUser } from './apiUser';
 
 export interface ApiCreateUserRequest {
-	confirmPassword?: string;
+	readonly confirmPassword?: string;
 	user?: ApiUser;
-	userPassword?: string;
+	readonly userPassword?: string;
 }

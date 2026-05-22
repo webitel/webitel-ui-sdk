@@ -8,4 +8,5 @@
 export interface WebitelImApiGatewayV1PeerIdentity {
 	iss?: string;
 	sub?: string;
+	via?: string;
 }

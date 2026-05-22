@@ -274,6 +274,15 @@ export const getReadUser2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -791,6 +800,15 @@ export const getDeleteUsers2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1300,6 +1318,15 @@ export const getSearchUsersResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -1829,6 +1856,15 @@ export const getCreateUserResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -2083,6 +2119,8 @@ export const getCreateUserResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getLogoutUser2ResponseMock = (): ApiLogoutUserResponse => ({});
 
 export const getUpdatePasswordResponseMock =
 	(): ApiUpdatePasswordResponse => ({});
@@ -2360,6 +2398,15 @@ export const getSearchUsers2ResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -2989,6 +3036,15 @@ export const getDeleteUsersResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -3490,6 +3546,15 @@ export const getReadUserResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -4007,6 +4072,15 @@ export const getUpdateUser2ResponseMock = (
 				}),
 				undefined,
 			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			prod: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -4511,6 +4585,15 @@ export const getUpdateUserResponseMock = (
 				}),
 				undefined,
 			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			prod: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -4867,6 +4950,32 @@ export const getCreateUserMockHandler = (
 	);
 };
 
+export const getLogoutUser2MockHandler = (
+	overrideResponse?:
+		| ApiLogoutUserResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<ApiLogoutUserResponse> | ApiLogoutUserResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/users/logout',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getLogoutUser2ResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getUpdatePasswordMockHandler = (
 	overrideResponse?:
 		| ApiUpdatePasswordResponse
@@ -5107,6 +5216,7 @@ export const getUsersMock = () => [
 	getDeleteUsers2MockHandler(),
 	getSearchUsersMockHandler(),
 	getCreateUserMockHandler(),
+	getLogoutUser2MockHandler(),
 	getUpdatePasswordMockHandler(),
 	getReadPasswordSettingsMockHandler(),
 	getSearchUsers2MockHandler(),
