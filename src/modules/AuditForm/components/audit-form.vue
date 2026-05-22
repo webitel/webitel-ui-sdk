@@ -164,7 +164,7 @@ function handleAnswerUpdate({ key, value }) {
 }
 
 function initAnswers() {
-	if (!answersModel.value || !answersModel.value.length) {
+	if (!answersModel.value?.length) {
 		answersModel.value = props.questions.map(() => ({}));
 	}
 }
@@ -239,7 +239,7 @@ watch(
 );
 
 onMounted(() => {
-	if (props.mode === AuditFormMode.Create) {
+	if (props.mode === AuditFormMode.Create && !props.readonly) {
 		initQuestions();
 	} else if (props.mode === AuditFormMode.Fill) {
 		initAnswers();

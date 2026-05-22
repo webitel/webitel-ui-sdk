@@ -57,13 +57,13 @@ const webChatGateway = (_btnCodeDirty = false) => ({
 			id: '',
 		},
 		alternativeChannels: Object.values(WebchatAlternativeChannel).reduce(
-			(channels, channel) => ({
-				...channels,
-				[channel]: {
+			(channels, channel) => {
+				channels[channel] = {
 					url: '',
 					enabled: false,
-				},
-			}),
+				};
+				return channels;
+			},
 			{},
 		),
 	},

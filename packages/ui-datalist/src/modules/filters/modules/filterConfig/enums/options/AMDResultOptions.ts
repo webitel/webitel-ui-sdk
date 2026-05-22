@@ -1,4 +1,4 @@
-import { FilterInitParams } from '../../../../classes/Filter';
+import type { FilterInitParams } from '../../../../classes/Filter';
 
 /**
  * AMD Result to filter
@@ -34,5 +34,9 @@ export const AmdResultOptions: Array<FilterInitParams> = [
 	{
 		name: 'RINGING',
 		value: 'RINGING',
+	},
+	{
+		name: 'TIMEOUT',
+		value: 'TIMEOUT',
 	},
 ] as const;

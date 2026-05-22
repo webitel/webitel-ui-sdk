@@ -7,6 +7,9 @@ import WtCheckbox from '../wt-checkbox.vue';
 describe('WtCheckbox', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtCheckbox, {
+			props: {
+				selected: false,
+			},
 			stubs: {
 				WtLabel,
 				WtIcon,
@@ -24,6 +27,7 @@ describe('WtCheckbox', () => {
 			},
 			props: {
 				label,
+				selected: false,
 			},
 		});
 		expect(wrapper.find('.wt-checkbox__label').text()).toBe(label);
@@ -40,8 +44,8 @@ describe('WtCheckbox', () => {
 				selected,
 			},
 		});
-		wrapper.find('.wt-checkbox__input').trigger('change');
-		expect(wrapper.emitted().change[0]).toEqual([
+		wrapper.find('input[type="checkbox"]').setValue(!selected);
+		expect(wrapper.emitted()['update:selected'][0]).toEqual([
 			!selected,
 		]);
 	});

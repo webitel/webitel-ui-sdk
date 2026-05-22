@@ -39,6 +39,7 @@
         v-bind="$attrs"
         @keyup="handleKeyup"
         @input="emit('update:modelValue', $event.value)"
+        @update:model-value="emit('update:modelValue', $event)"
       >
       <template #incrementbuttonicon>
           <wt-icon

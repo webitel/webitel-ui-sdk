@@ -99,7 +99,7 @@ const getList = async (params) => {
 				: [],
 		}));
 
-	let changedParams;
+	let changedParams = {};
 
 	if (params?.search) {
 		changedParams = {
@@ -316,6 +316,7 @@ const fieldsToSend = [
 	'timezones',
 	'groups',
 	'custom',
+	'emails',
 ];
 
 const sanitizeManagers = (itemInstance) => {

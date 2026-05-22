@@ -4,32 +4,34 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1ExternalParticipant } from './webitelImApiGatewayV1ExternalParticipant';
+import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
+import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
+import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGatewayV1ThreadVariables';
 
 /**
  * Thread represents a thread (aka chat or conversation) entity.
  */
 export interface WebitelImApiGatewayV1Thread {
-	/** List of users aggregated information with admin privileges. */
-	admins?: WebitelImApiGatewayV1ExternalParticipant[];
 	/** Thread creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
 	/** Optional thread description. */
 	description?: string;
 	/** Unique thread identifier. */
 	id?: string;
-	/** Type of the thread. */
-	kind?: WebitelImApiGatewayV1ThreadKind;
-	/** List of member users aggregated information. */
-	memberIds?: WebitelImApiGatewayV1ExternalParticipant[];
+	/** Last message of the linked thread. */
+	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
 	members?: WebitelImApiGatewayV1ThreadMember[];
-	/** Aggregated user information of the thread owner. */
-	owner?: WebitelImApiGatewayV1ExternalParticipant;
+	/** User-specific settings for this thread. */
+	settings?: WebitelImApiGatewayV1ThreadSettings;
 	/** Thread subject or title. */
 	subject?: string;
+	/** Type of the thread. */
+	type?: WebitelImApiGatewayV1ThreadKind;
 	/** Last update timestamp (Unix time, milliseconds). */
 	updatedAt?: string;
+	/** Optional variables associated with the thread. */
+	variables?: WebitelImApiGatewayV1ThreadVariables;
 }

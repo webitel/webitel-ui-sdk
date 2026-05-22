@@ -179,7 +179,6 @@ const getList = async (params) => {
 		id,
 		qin,
 		mode,
-		group_id,
 		group,
 		not_id_group,
 		owner,

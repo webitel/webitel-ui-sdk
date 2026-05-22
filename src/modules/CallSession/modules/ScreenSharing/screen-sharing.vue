@@ -12,7 +12,7 @@
         class="screen-sharing__indicator"
       >
         <recording-indicator
-          v-if="props.session.recordings"
+          v-if="props.session.recordings && !props.recordIsLoading"
           :recording="props.session.recordings"
         />
       </div>
@@ -23,6 +23,7 @@
         :session="props.session"
         :screenshot-status="props.screenshotStatus"
         :screenshot-is-loading="props.screenshotIsLoading"
+        :record-is-loading="props.recordIsLoading"
         @close-session="emit('close-session')"
         @make-screenshot="emit('make-screenshot')"
         @toggle-record="emit('toggle-record')"
@@ -45,6 +46,7 @@ interface Props {
 	session: ScreenSharingSession;
 	screenshotStatus: ScreenshotStatus | null;
 	screenshotIsLoading: boolean;
+	recordIsLoading: boolean;
 }
 
 const props = defineProps<Props>();

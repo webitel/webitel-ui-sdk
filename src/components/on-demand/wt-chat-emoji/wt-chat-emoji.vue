@@ -1,36 +1,59 @@
 <template>
   <div
-    v-clickaway="closePicker"
+    v-clickaway="onClickaway"
     class="wt-chat-emoji"
   >
     <wt-button
-      :variant="isOpened ? 'active' : 'outlined'"
       :size="size"
+      :variant="buttonVariant"
       color="secondary"
       icon="chat-emoji"
-      rounded
+      :rounded="rounded"
       wide
       @click="togglePicker"
     />
-    <div
-      v-if="isOpened"
-      ref="emojiPickerWrapper"
-      class="wt-chat-emoji__wrapper"
-    ></div>
-  </div>
+		<teleport
+			defer
+			:disabled="!popupTeleportTo"
+		 	:to="teleportValue"
+		>
+			<div
+				v-if="isOpened"
+				ref="emojiPickerWrapper"
+				class="wt-chat-emoji__wrapper"
+			></div>
+		</teleport>
+	</div>
 </template>
 
 <script setup>
+import { WtButton } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
-import { nextTick, onBeforeUnmount, ref } from 'vue';
-
+import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
 import { eventBus } from '../../../scripts';
 
 const props = defineProps({
 	size: {
 		type: String,
 		default: ComponentSize.MD,
+	},
+	/**
+	 * @author HlukhovYe
+	 * teleport popup to specific element, pass selector
+	 * https://webitel.atlassian.net/browse/WTEL-8731
+	 */
+	popupTeleportTo: {
+		type: String,
+		default: '',
+	},
+	filled: {
+		type: Boolean,
+		default: false,
+	},
+	rounded: {
+		type: Boolean,
+		default: true,
 	},
 });
 
@@ -41,6 +64,12 @@ const emit = defineEmits([
 const emojiPickerWrapper = ref(null);
 const isOpened = ref(false);
 const picker = ref(null);
+
+// Teleport's to prop is required even if it's disabled
+const teleportValue = computed(() => props.popupTeleportTo || 'body');
+const buttonVariant = computed(() =>
+	props.filled || isOpened.value ? 'active' : 'outlined',
+);
 
 const initPicker = async () => {
 	if (picker.value) return;
@@ -72,6 +101,11 @@ const closePicker = () => {
 	}
 };
 
+const onClickaway = (event) => {
+	if (emojiPickerWrapper.value?.contains(event.target)) return;
+	closePicker();
+};
+
 const togglePicker = async () => {
 	focusOnInput();
 	isOpened.value = !isOpened.value;
@@ -93,10 +127,18 @@ onBeforeUnmount(() => {
 .wt-chat-emoji {
   position: relative;
   width: 100%;
+}
 
-  :deep() emoji-picker {
-    --background: var(--content-wrapper-color);
-    --border-color: var(--secondary-color);
-  }
+.wt-chat-emoji__wrapper {
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + var(--spacing-xs));
+	z-index: calc(var(--popup-wrapper-z-index) - 1);
+}
+
+:deep() emoji-picker {
+	--background: var(--content-wrapper-color);
+	--border-color: var(--secondary-color);
+	transform: translateX(-50%);
 }
 </style>

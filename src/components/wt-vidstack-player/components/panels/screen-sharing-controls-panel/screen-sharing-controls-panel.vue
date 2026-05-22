@@ -16,6 +16,7 @@
       contains-icon
       variant="outlined"
       color="secondary"
+      :loading="props.recordIsLoading"
       :size="buttonSizeMap[size]"
       :icon="recordIcon"
       @click="emit('toggle-record')"
@@ -49,6 +50,7 @@ interface Props {
 	session: ScreenSharingSession;
 	screenshotStatus: ScreenshotStatus | null;
 	screenshotIsLoading: boolean;
+	recordIsLoading: boolean;
 }
 
 const props = defineProps<Props>();

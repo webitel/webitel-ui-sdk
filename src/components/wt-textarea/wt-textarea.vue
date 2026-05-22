@@ -6,6 +6,7 @@
     }"
   >
     <wt-label
+			v-if="hasLabel"
       :disabled="disabled"
       :for="name"
       :required="required"
@@ -51,7 +52,14 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import { defineModel, onMounted, ref, useTemplateRef } from 'vue';
+import {
+	computed,
+	defineModel,
+	onMounted,
+	ref,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -110,7 +118,7 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	 * Object with props, passed down to wt-label as props
 	 * @type {Object}
 	 */
-	labelProps?: Record<string, any>;
+	labelProps?: Record<string, unknown>;
 	/**
 	 * Enables auto-resize. If passed, "Enter" key press emits "enter" event, new line is shift+enter
 	 * @type {boolean}
@@ -119,9 +127,8 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	autoresize?: boolean;
 	/**
 	 * Validation rules
-	 * @type {any}
 	 */
-	v?: any;
+	v?: unknown;
 	/**
 	 * Custom validators array
 	 * @type {Array<{name: string, text: string}>}
@@ -164,11 +171,17 @@ const emit = defineEmits([
 
 const isScrollHidden = ref(false);
 
+const slots = useSlots();
+
+const hasLabel = computed(() => {
+	return props.label || slots.label;
+});
+
 const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
 		v: props.v,
 		customValidators: props.customValidators,
-	} as any);
+	});
 
 const handleKeypress = (event: KeyboardEvent) => {
 	emit('keydown', event);

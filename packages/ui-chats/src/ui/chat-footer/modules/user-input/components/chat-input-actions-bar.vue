@@ -17,15 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from "@webitel/ui-sdk/enums";
-import { computed, inject } from "vue";
+import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { computed, inject } from 'vue';
 
-import { ChatAction, type SharedActionSlots } from "../enums/ChatAction.enum";
-import AttachFilesAction from "./actions/attach-files-action.vue";
-import EmojiPickerAction from "./actions/emoji-picker-action.vue";
-import SendMessageAction from "./actions/send-message-action.vue";
+import { ChatAction, type SharedActionSlots } from '../enums/ChatAction.enum';
+import AttachFilesAction from './actions/attach-files-action.vue';
+import EmojiPickerAction from './actions/emoji-picker-action.vue';
+import SendMessageAction from './actions/send-message-action.vue';
 
-const size = inject<ComponentSize>("size");
+const size = inject<ComponentSize>('size');
 
 const props = defineProps<{
 	actions: ChatAction[];

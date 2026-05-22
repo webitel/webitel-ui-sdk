@@ -135,17 +135,14 @@ const order = [
 
 const formattedApps = computed(() =>
 	props.apps
-		.reduce(
-			(apps, app) => [
-				...apps,
-				{
-					...app,
-					img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
-					currentApp: props.currentApp === app.name,
-				},
-			],
-			[],
-		)
+		.reduce((apps, app) => {
+			apps.push({
+				...app,
+				img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
+				currentApp: props.currentApp === app.name,
+			});
+			return apps;
+		}, [])
 		.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)),
 );
 

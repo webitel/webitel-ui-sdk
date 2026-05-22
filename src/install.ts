@@ -13,7 +13,7 @@ import initPrimevue from './plugins/primevue/primevue.plugin';
 export { fillIconsRepository };
 
 export default {
-	install(app, { eventBus, router, globals = {} }) {
+	install(app, { eventBus, globals = {} }) {
 		Object.keys(Directives).forEach((name) => {
 			app.directive(name, Directives[name]);
 		});

@@ -1,9 +1,10 @@
 export default {
-	"@webitel/ui-chats": {
+	'@webitel/ui-chats': {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "Fişier în carantină sau blocat",
-				textAreaPlaceholder: "Scrie un mesaj...",
+				chatsFileBlocked: 'Fişier în carantină sau blocat',
+				chatsIncorrectFileSize: 'Dimensiune fișier incorectă',
+				textAreaPlaceholder: 'Scrie un mesaj...',
 			},
 		},
 	},

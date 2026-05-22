@@ -1,8 +1,8 @@
-import { FormatDateMode } from "@webitel/ui-sdk/enums";
-import { formatDate } from "@webitel/ui-sdk/utils";
-import { type ComputedRef, type Ref } from "vue";
+import { FormatDateMode } from '@webitel/ui-sdk/enums';
+import { formatDate } from '@webitel/ui-sdk/utils';
+import type { ComputedRef, Ref } from 'vue';
 
-import type { ChatMessageType } from "../../../types/ChatMessage.types";
+import type { ChatMessageType } from '../../../types/ChatMessage.types';
 
 interface GetMessageResult {
 	prevMessage?: ChatMessageType;

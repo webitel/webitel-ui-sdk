@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -42,6 +44,7 @@ export default {
 		saveAs: 'Salvează ca',
 		saved: 'Salvat',
 		send: 'Trimite',
+		sendMessage: 'Trimite mesaj',
 		start: 'Start',
 		close: 'Închide',
 		add: 'Adaugă',
@@ -54,6 +57,7 @@ export default {
 		delete: 'Șterge',
 		search: 'Caută',
 		open: 'Deschide',
+		openInHistory: 'Deschide în Istoric',
 		name: 'Nume',
 		expand: 'Extinde',
 		collapse: 'Restrânge',
@@ -228,6 +232,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Voce',
 				[EngineRoutingSchemaType.Service]: 'Serviciu',
 				[EngineRoutingSchemaType.Processing]: 'Formulare',
+				[EngineRoutingSchemaType.Default]: 'Fără tip',
 			},
 		},
 		messengers: {
@@ -238,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway Chat Personalizat',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Răspuns rapid | Răspunsuri rapide',
@@ -254,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Eroare',
 			},
 		},
-	},
-	importCSV: 'Importă CSV',
-	CSV: {
-		skipHeaders: 'Omite anteturile',
-		charSet: 'Set de caractere',
-		separator: 'Separator',
-		CSVColumn: 'Coloană CSV',
-		fieldName: 'Nume câmp',
-		clearMember: 'Șterge membrul',
+		importCSV: 'Importă CSV',
+		CSV: {
+			skipHeaders: 'Omite anteturile',
+			charSet: 'Set de caractere',
+			separator: 'Separator',
+			CSVColumn: 'Coloană CSV',
+			fieldName: 'Nume câmp',
+			clearMember: 'Șterge membrul',
+		},
 	},
 	channel: {
 		state: {
@@ -843,11 +849,18 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} a fost salvat`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} a fost șters`,
 		},
-		info: {
-			passwordExpirationMessage: 'Parola ta va expira în { days } zile',
+		warnings: {
+			passwordExpirationMessageDays: 'Parola ta va expira în {amount} zile',
+			passwordExpirationMessageHours:
+				'Parola ta va expira în mai puțin de {amount} ore',
+			licenseExpirationSoonMessage:
+				'Licența ta {name} va expira în {amount} zile',
+			licenseExpirationMessage: 'Licența ta {name} a expirat',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
 	},

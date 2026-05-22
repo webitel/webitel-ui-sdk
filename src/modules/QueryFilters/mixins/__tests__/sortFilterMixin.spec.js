@@ -69,7 +69,7 @@ describe('Sort filter mixin', () => {
 				sort: '+queue',
 			},
 		});
-		const wrapper = shallowMount(Component, {
+		shallowMount(Component, {
 			global: {
 				plugins: [
 					router,

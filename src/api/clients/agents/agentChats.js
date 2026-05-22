@@ -10,7 +10,6 @@ import applyTransform, {
 	merge,
 	notify,
 	snakeToCamel,
-	starToSearch,
 } from '../../transformers/index.js';
 
 const { t } = i18n.global;

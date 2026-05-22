@@ -1,4 +1,4 @@
-import { type CrudAction, type WtObject } from '../../../enums';
+import type { CrudAction, WtObject } from '../../../enums';
 import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import {
 	mapGlobalActionToCrudAction,
@@ -92,7 +92,9 @@ export const makeSectionVisibilityMap = (
 
 	Object.entries(rawVisibility).forEach(([app, appSectionsVisibility]) => {
 		Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
-			if (section.startsWith('_')) return map; // skip private fields
+			if (section.startsWith('_')) {
+				return; // skip private fields
+			}
 			map.set(
 				`${app}/${section}`,
 				(

@@ -107,16 +107,12 @@ const fillLocalValue = async (filter = props.filter) => {
 	const filterName = props.filter.name;
 	const filterValue = filter.value;
 
-	let valueSearchMethod;
-
-	if (props.filterConfig.searchRecords) {
-		/* arrow fn here preserves filterConfig class "this" */
-		valueSearchMethod = (...params) =>
-			props.filterConfig.searchRecords(...params);
-	} else {
-		valueSearchMethod =
-			/* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
-	}
+	const valueSearchMethod = props.filterConfig.searchRecords
+		? (...params) => {
+				/* arrow fn here preserves filterConfig class "this" */
+				return props.filterConfig.searchRecords(...params);
+			}
+		: FilterOptionToPreviewApiSearchMethodMap[filterName];
 
 	if (valueSearchMethod) {
 		const { items } = await valueSearchMethod(

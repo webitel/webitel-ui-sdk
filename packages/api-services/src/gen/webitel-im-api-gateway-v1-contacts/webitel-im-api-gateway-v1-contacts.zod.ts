@@ -56,8 +56,13 @@ export const ContactsSearchResponse = zod
 							.describe(
 								'Record creation timestamp (Unix Epoch in milliseconds).',
 							),
-						isBot: zod.boolean().optional(),
-						issId: zod
+						isBot: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Represents if usere is real person or automatic script.',
+							),
+						iss: zod
 							.string()
 							.optional()
 							.describe('Provider-specific unique identifier (Issuer ID).'),
@@ -71,7 +76,7 @@ export const ContactsSearchResponse = zod
 							.string()
 							.optional()
 							.describe('Display name of the contact.'),
-						subject: zod
+						sub: zod
 							.string()
 							.optional()
 							.describe('Associated internal system subject/identifier.'),
@@ -89,6 +94,19 @@ export const ContactsSearchResponse = zod
 							.string()
 							.optional()
 							.describe('Technical username or handle.'),
+						vias: zod
+							.array(
+								zod.object({
+									contactId: zod.string().optional(),
+									createdAt: zod.string().optional(),
+									disable: zod.boolean().optional(),
+									disableReason: zod.string().optional(),
+									metadata: zod.looseObject({}).optional(),
+									updatedAt: zod.string().optional(),
+									via: zod.string().optional(),
+								}),
+							)
+							.optional(),
 					})
 					.describe('Contact represents an external messaging identity.'),
 			)

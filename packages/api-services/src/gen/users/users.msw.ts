@@ -7,17 +7,18 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-
 import type {
 	ApiCreateUserResponse,
 	ApiDeleteUsersResponse,
 	ApiGetPasswordSettingsResponse,
+	ApiGetUserWarningsResponse,
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersResponse,
 	ApiUpdatePasswordResponse,
 	ApiUser,
 } from '../_models';
+import { ApiUserWarningId } from '../_models';
 
 export const getReadUser2ResponseMock = (
 	overrideResponse: Partial<Extract<ApiReadUserResponse, object>> = {},
@@ -265,6 +266,15 @@ export const getReadUser2ResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -790,6 +800,15 @@ export const getDeleteUsers2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1299,6 +1318,15 @@ export const getSearchUsersResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -1820,6 +1848,15 @@ export const getCreateUserResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -2367,6 +2404,15 @@ export const getSearchUsers2ResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -2634,6 +2680,98 @@ export const getSearchUsers2ResponseMock = (
 	...overrideResponse,
 });
 
+export const getGetUserWarningsResponseMock = (
+	overrideResponse: Partial<Extract<ApiGetUserWarningsResponse, object>> = {},
+): ApiGetUserWarningsResponse => ({
+	warnings: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			detail: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(Object.values(ApiUserWarningId)),
+				undefined,
+			]),
+			warningData: faker.helpers.arrayElement([
+				{
+					licenseExpiry: faker.helpers.arrayElement([
+						{
+							daysRemaining: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							expiresAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							licenseName: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					passwordExpiry: faker.helpers.arrayElement([
+						{
+							daysRemaining: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							expiresAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getDeleteUsersResponseMock = (
 	overrideResponse: Partial<Extract<ApiDeleteUsersResponse, object>> = {},
 ): ApiDeleteUsersResponse => ({
@@ -2888,6 +3026,15 @@ export const getDeleteUsersResponseMock = (
 						undefined,
 					]),
 					issuedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -3405,6 +3552,15 @@ export const getReadUserResponseMock = (
 						}),
 						undefined,
 					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					prod: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -3906,6 +4062,15 @@ export const getUpdateUser2ResponseMock = (
 				undefined,
 			]),
 			issuedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -4418,6 +4583,15 @@ export const getUpdateUserResponseMock = (
 				}),
 				undefined,
 			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			prod: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -4854,6 +5028,32 @@ export const getSearchUsers2MockHandler = (
 	);
 };
 
+export const getGetUserWarningsMockHandler = (
+	overrideResponse?:
+		| ApiGetUserWarningsResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ApiGetUserWarningsResponse> | ApiGetUserWarningsResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/users/warnings',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGetUserWarningsResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getDeleteUsersMockHandler = (
 	overrideResponse?:
 		| ApiDeleteUsersResponse
@@ -4991,6 +5191,7 @@ export const getUsersMock = () => [
 	getUpdatePasswordMockHandler(),
 	getReadPasswordSettingsMockHandler(),
 	getSearchUsers2MockHandler(),
+	getGetUserWarningsMockHandler(),
 	getDeleteUsersMockHandler(),
 	getReadUserMockHandler(),
 	getLogoutUserMockHandler(),

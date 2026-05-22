@@ -55,13 +55,13 @@ const labelValue = computed(() =>
 
 const changeListValue = (event) => {
 	if (!event.length && !model.value.unassigned) {
-		return (model.value = {});
-	} else {
-		model.value = {
-			...model.value,
-			list: event,
-		};
+		model.value = {};
+		return;
 	}
+	model.value = {
+		...model.value,
+		list: event,
+	};
 };
 const v$ = useVuelidate(
 	computed(() => ({

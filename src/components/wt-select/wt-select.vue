@@ -312,7 +312,8 @@ export default {
   pointer-events: auto;
 }
 
-.wt-select :deep(.multiselect__single-label) {
+.wt-select :deep(.multiselect__single-label),
+.wt-select :deep(.multiselect__custom-tag) {
   /* text overflow 3 dots */
   font-family: 'Montserrat', monospace;
   font-size: 14px;

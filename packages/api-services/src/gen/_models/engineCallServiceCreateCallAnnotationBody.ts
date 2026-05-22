@@ -7,6 +7,7 @@
 
 export interface EngineCallServiceCreateCallAnnotationBody {
 	endSec?: number;
+	fileId?: string;
 	note?: string;
 	startSec?: number;
 }

@@ -1,29 +1,62 @@
 <template>
-  <div class="wt-tree">
-    <div v-if="mode === WtTreeMode.Tree" class="wt-tree__content">
-      <wt-tree-line
-v-for="(item, index) in data" :key="index" :model-value="modelValue" :item-label="itemLabel"
-        :item-data="itemData" :data="item" :children-prop="childrenProp" :multiple="multiple"
-        :allow-parent="allowParent" @update:model-value="emit('update:modelValue', $event)">
-        <template v-if="$slots['item-prefix']" #item-prefix="slotProps">
-          <slot name="item-prefix" v-bind="slotProps" />
-        </template>
-      </wt-tree-line>
-    </div>
-    <div v-if="mode === WtTreeMode.List" class="wt-tree__list-content">
-      <span
-v-for="(item, index) in allData" :key="index" class="wt-tree__label-wrapper"
-        :class="{ active: compareSelectElement(item) }">
-        <p class="wt-tree__label" @click="selectElement(item)">
-          {{ itemLabel ? item[itemLabel] : item }}
-        </p>
-        <wt-icon v-if="compareSelectElement(item)" icon="chat-message-status-sent" class="wt-tree__label-icon" />
-      </span>
-    </div>
-  </div>
+	<div class="wt-tree">
+		<div
+			v-if="mode === WtTreeMode.Tree"
+			class="wt-tree__content"
+		>
+			<wt-tree-line
+				v-for="(item, index) in data"
+				:key="index"
+				:model-value="modelValue"
+				:item-label="itemLabel"
+				:item-data="itemData"
+				:data="item"
+				:children-prop="childrenProp"
+				:multiple="multiple"
+				:allow-parent="allowParent"
+				@update:model-value="emit('update:modelValue', $event)"
+			>
+				<template
+					v-if="$slots['item-prefix']"
+					#item-prefix="slotProps"
+				>
+					<slot
+						name="item-prefix"
+						v-bind="slotProps"
+					/>
+				</template>
+			</wt-tree-line>
+		</div>
+		<div
+			v-if="mode === WtTreeMode.List"
+			class="wt-tree__list-content"
+		>
+			<span
+				v-for="(item, index) in allData"
+				:key="index"
+				class="wt-tree__label-wrapper"
+				:class="{ active: compareSelectElement(item) }"
+			>
+				<p
+					class="wt-tree__label"
+					@click="selectElement(item)"
+				>
+					{{ itemLabel ? item[itemLabel] : item }}
+				</p>
+				<wt-icon
+					v-if="compareSelectElement(item)"
+					icon="chat-message-status-sent"
+					class="wt-tree__label-icon"
+				/>
+			</span>
+		</div>
+	</div>
 </template>
 
-<script setup lang="ts">
+<script
+	setup
+	lang="ts"
+>
 import deepEqual from 'deep-equal';
 import { computed } from 'vue';
 
@@ -35,11 +68,11 @@ const props = withDefaults(
 		/**
 		 * Selected element, it can be an object or a string, related to itemData props
 		 */
-		modelValue?: null | any;
+		modelValue?: null | unknown;
 		/**
 		 * You need to pass an array of objects that will be displayed in the tree
 		 */
-		data: any[];
+		data: unknown[];
 		/**
 		 * You can pass the name of the property that will be used as the label of the selected item
 		 */
@@ -68,18 +101,18 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-	(e: 'select', data: any): void;
-	(e: 'update:modelValue', value: any): void;
+	(e: 'select', data: unknown): void;
+	(e: 'update:modelValue', value: unknown): void;
 }>();
 
 const allData = computed(() => {
 	const result = [];
 
-	const getNestedItems = (item: any) => {
+	const getNestedItems = (item: unknown) => {
 		result.push(item);
 
 		if (item[props.childrenProp]) {
-			item[props.childrenProp].forEach((child: any) => {
+			item[props.childrenProp].forEach((child: unknown) => {
 				getNestedItems(child);
 			});
 		}
@@ -92,11 +125,11 @@ const allData = computed(() => {
 	return result;
 });
 
-const selectElement = (item: any) => {
+const selectElement = (item: unknown) => {
 	emit('update:modelValue', props.itemData ? item[props.itemData] : item);
 };
 
-const compareSelectElement = (item: any) => {
+const compareSelectElement = (item: unknown) => {
 	if (props.itemData) {
 		return item[props.itemData] === props.modelValue;
 	}
@@ -107,52 +140,51 @@ const compareSelectElement = (item: any) => {
 
 <style scoped>
 .wt-tree {
-  border-radius: var(--border-radius);
-  background: var(--content-wrapper-color);
-  padding: var(--spacing-sm);
-  overflow: auto;
+	border-radius: var(--border-radius);
+	background: var(--content-wrapper-color);
+	padding: var(--spacing-sm);
+	overflow: auto;
 }
 
 .wt-tree__content {
-  display: flex;
-  flex-direction: column;
-  padding-right: var(--spacing-2xs);
-  height: 100%;
-  overflow: auto;
+	display: flex;
+	flex-direction: column;
+	padding-right: var(--spacing-2xs);
+	height: 100%;
+	overflow: auto;
 }
 
 .wt-tree__list-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-xs);
-  padding-right: var(--spacing-2xs);
-  height: 100%;
-  overflow: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--spacing-xs);
+	padding-right: var(--spacing-2xs);
+	height: 100%;
+	overflow: auto;
 }
 
 .wt-tree__label-wrapper {
-  display: flex;
-  align-items: center;
-  transition: var(--transition);
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  padding: 0 var(--spacing-2xs);
-  color: var(--wt-tree-item-on);
+	display: flex;
+	align-items: center;
+	transition: var(--transition);
+	cursor: pointer;
+	border-radius: var(--border-radius);
+	padding: 0 var(--spacing-2xs);
+	color: var(--wt-tree-item-on);
 }
 
 .wt-tree__label-wrapper:hover {
-  background: var(--wt-tree-item-hover);
-  color: var(--wt-tree-item-hover-on);
+	background: var(--wt-tree-item-hover);
+	color: var(--wt-tree-item-hover-on);
 }
 
 .wt-tree__label-wrapper.active {
-  background: var(--wt-tree-item-active);
-  color: var(--wt-tree-item-active-on);
+	background: var(--wt-tree-item-active);
+	color: var(--wt-tree-item-active-on);
 }
 
 .wt-tree__label-icon {
-  flex-shrink: 0;
+	flex-shrink: 0;
 }
-
 </style>

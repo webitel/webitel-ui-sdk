@@ -1,4 +1,4 @@
-import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
@@ -6,7 +6,7 @@ import { computed, nextTick, ref } from 'vue';
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
-import { useTableStoreConfig } from '../types/tableStore.types';
+import type { useTableStoreConfig } from '../types/tableStore.types';
 
 interface TableHeadersStoreBodyParams {
 	rawHeaders: WtTableHeader[];
@@ -65,14 +65,18 @@ export const tableHeadersStoreBody = ({
 			if (!arrayFieldOrder.has(header.field)) {
 				arrayFieldOrder.set(header.field, []);
 			}
-			arrayFieldOrder.get(header.field)!.push(idx);
+			const list = arrayFieldOrder.get(header.field);
+			if (list) {
+				list.push(idx);
+			}
 		});
 
 		const newOrder = [];
 		for (const field of orderedFields) {
 			const indices = arrayFieldOrder.get(field);
-			if (indices && indices.length) {
-				newOrder.push(indices.shift()!);
+			const next = indices?.shift();
+			if (next !== undefined) {
+				newOrder.push(next);
 			}
 		}
 
@@ -97,36 +101,48 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateFields = (fields: string[]) => {
-		const newHeaders = headers.value.map((header: WtTableHeader) => ({
+		const fieldsSet = new Set(fields);
+		const mainFieldNames = new Set(headers.value.map((header) => header.field));
+
+		const mainHeaders = headers.value.map((header: WtTableHeader) => ({
 			...header,
-			show: fields.includes(header.field),
+			show: fieldsSet.has(header.field),
 		}));
 
-		const customFields = fields.filter(
-			(field) => !headers.value.some((header) => header.field === field),
+		const customHeaders = fields
+			.filter((field) => !mainFieldNames.has(field))
+			.map((field) => ({
+				show: true,
+				field,
+				shouldBeInitialized: true,
+			}));
+
+		const headersByField = new Map(
+			[
+				...mainHeaders,
+				...customHeaders,
+			].map((header) => [
+				header.field,
+				header,
+			]),
 		);
-		const customFieldHeaders = customFields.map((field) => ({
-			show: true,
-			field,
-			shouldBeInitialized: true,
-		}));
 
-		const mergedHeaders = [
-			...newHeaders,
-			...customFieldHeaders,
+		const headersInPersistedOrder = fields.flatMap((field) => {
+			const header = headersByField.get(field);
+			if (!header) return [];
+			headersByField.delete(field);
+			return [
+				header,
+			];
+		});
+
+		const hiddenHeaders = [
+			...headersByField.values(),
 		];
-		const orderedFields = fields.filter((field) =>
-			mergedHeaders.some((header) => header.field === field),
-		);
-		const reordered = setHeaderOrder(orderedFields);
-
-		const uniqueMerged = mergedHeaders.filter(
-			(merged) => !reordered.some((r) => r.field === merged.field),
-		);
 
 		updateShownHeaders([
-			...reordered,
-			...uniqueMerged,
+			...headersInPersistedOrder,
+			...hiddenHeaders,
 		]);
 	};
 

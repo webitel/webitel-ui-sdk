@@ -5,6 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * Custom metadata or configuration variables.
+ */
 export type WebMeetingBackendMeetingVariables = {
 	[key: string]: string;
 };

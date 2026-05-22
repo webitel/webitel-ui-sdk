@@ -5,6 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * Empty response for satisfaction submission.
+ */
 export interface WebMeetingBackendSatisfactionMeetingResponse {
 	[key: string]: unknown;
 }

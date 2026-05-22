@@ -100,10 +100,8 @@ export default {
 					// skip breakout option
 					return options;
 				}
-				return [
-					...options,
-					opt,
-				];
+				options.push(opt);
+				return options;
 			}, []);
 		},
 		duration() {

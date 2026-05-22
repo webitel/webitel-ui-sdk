@@ -5,6 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * Request to submit meeting satisfaction feedback.
+ */
 export interface WebMeetingBackendMeetingServiceSatisfactionMeetingBody {
+	/** The satisfaction value or score. */
 	satisfaction?: string;
 }

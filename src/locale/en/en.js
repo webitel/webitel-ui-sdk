@@ -1,11 +1,13 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import deepmerge from 'deepmerge';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -45,6 +47,7 @@ export default deepmerge(
 			saveAs: 'Save as',
 			saved: 'Saved',
 			send: 'Send',
+			sendMessage: 'Send message',
 			start: 'Start',
 			close: 'Close',
 			add: 'Add',
@@ -57,6 +60,7 @@ export default deepmerge(
 			delete: 'Delete',
 			search: 'Search',
 			open: 'Open',
+			openInHistory: 'Open in History',
 			name: 'Name',
 			expand: 'Expand',
 			collapse: 'Collapse',
@@ -231,6 +235,7 @@ export default deepmerge(
 					[EngineRoutingSchemaType.Voice]: 'Voice',
 					[EngineRoutingSchemaType.Service]: 'Service',
 					[EngineRoutingSchemaType.Processing]: 'Forms',
+					[EngineRoutingSchemaType.Default]: 'No type',
 				},
 			},
 			messengers: {
@@ -241,6 +246,7 @@ export default deepmerge(
 				[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 				[ChatGatewayProvider.INFOBIP]: 'Infobip',
 				[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+				[ChatGatewayProvider.PORTAL]: 'Portal',
 			},
 			quickReplies: {
 				quickReplies: 'Quick reply | Quick replies',
@@ -851,11 +857,18 @@ export default deepmerge(
 				delete: ({ named }) =>
 					`The ${named('entity').toLowerCase()} was deleted`,
 			},
-			info: {
-				passwordExpirationMessage: 'Your password will expire in { days } days',
+			warnings: {
+				passwordExpirationMessageDays:
+					'Your password will expire in {amount} days',
+				passwordExpirationMessageHours:
+					'Your password will expire in less than {amount} hours',
+				licenseExpirationSoonMessage:
+					'Your license {name} will expire in {amount} days',
+				licenseExpirationMessage: 'Your license {name} has expired',
 			},
 		},
 		errorNotifications: {
+			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
 		},

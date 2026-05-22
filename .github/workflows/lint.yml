@@ -1,0 +1,119 @@
+name: Webitel UI lint
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  workflow_dispatch:
+
+concurrency:
+  group: lint-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      root: ${{ steps.filter.outputs.root }}
+      api_services: ${{ steps.filter.outputs.api_services }}
+      styleguide: ${{ steps.filter.outputs.styleguide }}
+      ui_datalist: ${{ steps.filter.outputs.ui_datalist }}
+      ui_chats: ${{ steps.filter.outputs.ui_chats }}
+      shared: ${{ steps.filter.outputs.shared }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            root:
+              - "src/**"
+            api_services:
+              - "packages/api-services/**"
+            styleguide:
+              - "packages/styleguide/**"
+            ui_datalist:
+              - "packages/ui-datalist/**"
+            ui_chats:
+              - "packages/ui-chats/**"
+            shared:
+              - "package.json"
+              - "package-lock.json"
+              - "biome.jsonc"
+              - ".github/workflows/**"
+              - "tsconfig*.json"
+
+  lint-root:
+    needs: changes
+    if: needs.changes.outputs.root == 'true' || needs.changes.outputs.shared == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run biome:ci:gh
+
+  lint-api-services:
+    needs: changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: needs.changes.outputs.api_services == 'true' || needs.changes.outputs.shared == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run --prefix packages/api-services biome:ci:gh
+
+  lint-styleguide:
+    needs: changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: needs.changes.outputs.styleguide == 'true' || needs.changes.outputs.shared == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run --prefix packages/styleguide biome:ci:gh
+
+  lint-ui-datalist:
+    needs: changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: needs.changes.outputs.ui_datalist == 'true' || needs.changes.outputs.shared == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run --prefix packages/ui-datalist biome:ci:gh
+
+  lint-ui-chats:
+    needs: changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: needs.changes.outputs.ui_chats == 'true' || needs.changes.outputs.shared == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      - run: npm run --prefix packages/ui-chats biome:ci:gh

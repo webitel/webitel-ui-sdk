@@ -9,6 +9,7 @@
     :row-style="rowStyle"
     :show-headers="!headless"
     :value="data"
+    :sort-field="sortField"
     :data-key="props.dataKey"
     class="wt-table"
     column-resize-mode="expand"
@@ -214,6 +215,7 @@
 </template>
 
 <script lang="ts" setup>
+import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import type { DataTableProps } from 'primevue';
 import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import {
@@ -299,7 +301,7 @@ interface Props extends DataTableProps {
 
 	//lazy loading
 	lazy?: boolean;
-	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<unknown>;
 	loading?: boolean;
 	itemSize?: number | undefined;
 }
@@ -403,6 +405,18 @@ const isTableFooter = computed(() => {
 
 const isAllSelected = computed(() => {
 	return _selected.value.length === props.data.length && props.data.length > 0;
+});
+
+/*
+ * @author @Lera24
+ * [WTEL-9194] https://webitel.atlassian.net/browse/WTEL-9192
+ * save sorted the value field to apply it after reload
+ * */
+const sortField = computed(() => {
+	const sortedCol = props.headers.find(
+		(h) => h.sort === SortSymbols.ASC || h.sort === SortSymbols.DESC,
+	);
+	return sortedCol?.field ?? null;
 });
 
 const sort = ({ sortField }) => {

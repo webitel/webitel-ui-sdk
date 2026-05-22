@@ -7,7 +7,7 @@
       <wt-input-number
         :max="1000"
         :min="1"
-        :model-value="size"
+        :model-value="internalSize"
         class="wt-pagination__size-input"
         @update:model-value="inputHandler"
       />
@@ -34,6 +34,8 @@
 
 <script>
 import debounce from '../../scripts/debounce.js';
+
+const DEFAULT_SIZE = 10;
 
 export default {
 	name: 'WtPagination',
@@ -103,13 +105,19 @@ export default {
 		'next',
 	],
 
-	data: () => ({
-		defaultSize: '10',
-	}),
+	data() {
+		return {
+			internalSize: this.size != null ? +this.size : DEFAULT_SIZE,
+		};
+	},
 
 	watch: {
-		size(value) {
+		internalSize(value) {
+			if (value === null) return;
 			this.changeSize(value);
+		},
+		size(value) {
+			this.internalSize = value != null ? +value : DEFAULT_SIZE;
 		},
 	},
 
@@ -120,10 +128,22 @@ export default {
 
 	methods: {
 		inputHandler(value) {
-			const size =
-				value != null && value >= 0 && value <= 1000 ? value : this.defaultSize;
+			if (value === null) {
+				// @author r.zaritskyi
+				// https://github.com/webitel/webitel-ui-sdk/pull/1283#issue-4194972887
+				// If internalSize is already DEFAULT_SIZE, Vuex won't detect a change,
+				// Vue won't re-render wt-input-number, and the field stays empty.
+				// Setting null first forces a DOM update; nextTick restores the value.
+				this.internalSize = null;
+				this.$nextTick(() => {
+					this.internalSize = DEFAULT_SIZE;
+					this.$emit('input', DEFAULT_SIZE);
+				});
+				return;
+			}
+			const size = value >= 0 && value <= 1000 ? value : DEFAULT_SIZE;
+			this.internalSize = size;
 			this.$emit('input', size);
-			this.changeSize(size);
 		},
 		changeSize(value) {
 			this.$emit('change', value);

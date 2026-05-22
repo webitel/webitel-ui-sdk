@@ -1,4 +1,4 @@
-import { StorageLike } from './PersistedStorage.types.ts';
+import type { StorageLike } from './PersistedStorage.types.ts';
 
 const separator = ';';
 

@@ -5,30 +5,30 @@
   >
     <wt-vidstack-player
       v-if="isVideo"
+      :size="ComponentSize.SM"
+      :src="mediaSrc"
+      :title="file.name"
       static
       hide-expand
       stretch
-      :size="ComponentSize.SM"
-      :src="mediaSrc"
     />
     <wt-player
       v-else
       :src="mediaSrc"
       :autoplay="false"
       :closable="false"
-      :id="ringtone.name"
       hide-volume-slider
       hide-mute-button
-      class="chat-message-player__player"
+      class="chat-message-player__audio"
       @initialized="handlePlayerInitialize"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from 'vue';
-import { WtVidstackPlayer, WtPlayer } from '@webitel/ui-sdk/components';
+import { WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { computed, defineEmits, defineProps } from 'vue';
 
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
@@ -63,7 +63,12 @@ function handlePlayerInitialize(player) {
 
 <style lang="scss" scoped>
 .chat-message-player :deep(.wt-vidstack-player) {
-  max-height: var(--chat-file-max-height);
-  max-width: var(--chat-file-max-width);
+  height: var(--chat-video-player-height);
+  width: var(--chat-video-player-width);
 }
+
+.chat-message-player__audio {
+  min-width: var(--chat-audio-player-min-width);
+}
+
 </style>

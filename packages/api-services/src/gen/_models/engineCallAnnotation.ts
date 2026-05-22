@@ -11,6 +11,7 @@ export interface EngineCallAnnotation {
 	createdAt?: string;
 	createdBy?: EngineLookup;
 	endSec?: number;
+	fileId?: string;
 	id?: string;
 	note?: string;
 	startSec?: number;

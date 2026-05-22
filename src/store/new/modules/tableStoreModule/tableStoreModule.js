@@ -18,7 +18,7 @@ const getters = {
 	PARENT_ID: () => null, // override me
 
 	// FIXME: maybe move to filters module?
-	FILTERS: (state, getters) => () => getters['filters/GET_FILTERS'](),
+	FILTERS: (_, getters) => () => getters['filters/GET_FILTERS'](),
 
 	REQUIRED_FIELDS: () => [
 		'id',
@@ -26,11 +26,9 @@ const getters = {
 
 	FIELDS: (state, getters) => {
 		const fields = state.headers.reduce((fields, { show, field }) => {
-			if (show || show === undefined)
-				return [
-					...fields,
-					field,
-				];
+			if (show || show === undefined) {
+				fields.push(field);
+			}
 			return fields;
 		}, []);
 
@@ -42,7 +40,7 @@ const getters = {
 		];
 	},
 
-	GET_LIST_PARAMS: (state, getters) => (overrides) => {
+	GET_LIST_PARAMS: (_s, getters) => (overrides) => {
 		const filters = getters.FILTERS();
 		const fields = getters.FIELDS;
 		const parentId = getters.PARENT_ID;
@@ -257,8 +255,6 @@ const actions = {
 		}
 		try {
 			await context.dispatch(action, deleted);
-		} catch (err) {
-			throw err;
 		} finally {
 			await context.dispatch('LOAD_DATA_LIST');
 			await context.dispatch('SET_SELECTED', []);
@@ -277,30 +273,22 @@ const actions = {
 	},
 
 	DELETE_SINGLE: async (context, { id, etag }) => {
-		try {
-			await context.dispatch('DELETE_ITEM_API', {
-				context,
-				id,
-				etag,
-			});
-		} catch (err) {
-			throw err;
-		}
+		await context.dispatch('DELETE_ITEM_API', {
+			context,
+			id,
+			etag,
+		});
 	},
 
 	DELETE_BULK: async (context, deleted) => {
-		try {
-			const results = await Promise.allSettled(
-				deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
-			);
+		const results = await Promise.allSettled(
+			deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
+		);
 
-			// list of rejected requests
-			const rejected = results.filter((result) => result.status === 'rejected');
-			if (rejected.length) {
-				throw rejected;
-			}
-		} catch (err) {
-			throw err;
+		// list of rejected requests
+		const rejected = results.filter((result) => result.status === 'rejected');
+		if (rejected.length) {
+			throw rejected;
 		}
 	},
 

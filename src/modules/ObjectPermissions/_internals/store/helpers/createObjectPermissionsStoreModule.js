@@ -15,10 +15,6 @@ export const createObjectPermissionsStoreModule = (modules) => {
 		objectPermissionsStoreModule(),
 	]);
 
-	const cardSubmodule = [
-		// empty, now permissions don't have standard card functionality
-	];
-
 	return createBaseStoreModule([
 		{
 			modules: {

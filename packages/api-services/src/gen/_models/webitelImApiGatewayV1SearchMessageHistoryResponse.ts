@@ -5,24 +5,17 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
-import type { WebitelImApiGatewayV1HistoryMessageCursor } from './webitelImApiGatewayV1HistoryMessageCursor';
-import type { WebitelImApiGatewayV1MessageParticipant } from './webitelImApiGatewayV1MessageParticipant';
-import type { WebitelImApiGatewayV1Paging } from './webitelImApiGatewayV1Paging';
+import type { WebitelImApiGatewayV1HistoryMessageCursorResponse } from './webitelImApiGatewayV1HistoryMessageCursorResponse';
 
 /**
  * SearchMessageHistoryResponse contains
 message history search results and pagination metadata.
  */
 export interface WebitelImApiGatewayV1SearchMessageHistoryResponse {
-	/** List of unique message senders present
-in the current response page. */
-	from?: WebitelImApiGatewayV1MessageParticipant[];
 	/** List of messages matching the search criteria. */
-	messages?: WebitelImApiGatewayV1HistoryMessage[];
-	/** Indicates whether more messages are available. */
-	next?: boolean;
-	/** Cursor pointing to the next page of messages. */
-	nextCursor?: WebitelImApiGatewayV1HistoryMessageCursor;
-	/** Detailed paging metadata. */
-	paging?: WebitelImApiGatewayV1Paging;
+	items?: WebitelImApiGatewayV1HistoryMessage[];
+	/** Cursor that represents position to get older messages (used without 'before' param). */
+	nextCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
+	/** Cursor that represents position to get newest messages (used with 'before' param). */
+	prevCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
 }

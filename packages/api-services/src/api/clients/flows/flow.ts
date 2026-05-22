@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	RoutingSchemaServiceApiFactory,
-} from 'webitel-sdk';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models';
+import { RoutingSchemaServiceApiFactory } from 'webitel-sdk';
 
 import {
 	getDefaultGetListResponse,

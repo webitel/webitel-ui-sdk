@@ -52,7 +52,7 @@ export const useTableColumnDrag = (table, reorderableColumns) => {
 		copyEl.style.position = 'absolute';
 		copyEl.style.top = '-9999px';
 		copyEl.style.background = 'var(--p-datatable-header-cell-drag-background)';
-		copyEl.style.width = event.target.offsetWidth + 'px';
+		copyEl.style.width = `${event.target.offsetWidth}px`;
 		document.body.appendChild(copyEl);
 		event.dataTransfer.setDragImage(copyEl, event.offsetX, event.offsetY);
 		// Clean up after drag starts

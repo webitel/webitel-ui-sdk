@@ -31,6 +31,7 @@ const fieldsToSend = [
 	'status',
 	'state',
 	'prefix',
+	'default_priority',
 	'close_reason_group',
 	'reason',
 	'description',
@@ -43,6 +44,7 @@ const servicesFieldsToSend = [
 	'assignee',
 	'assignee.name',
 	'description',
+	'default_priority',
 	'code',
 	'prefix',
 	'state',
@@ -138,6 +140,7 @@ const addCatalog = async ({ itemInstance }) => {
 		'sla',
 		'status',
 		'close_reason_group',
+		'default_priority',
 		'teams',
 		'skills',
 	];
@@ -167,6 +170,7 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 		'sla',
 		'status',
 		'close_reason_group',
+		'default_priority',
 		'teams',
 		'skills',
 	];

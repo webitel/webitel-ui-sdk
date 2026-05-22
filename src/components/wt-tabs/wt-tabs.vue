@@ -74,8 +74,7 @@ export default {
 
 		moveActiveLine(newValue) {
 			if (!this.current) return;
-			if (!this.$refs || !this.$refs[newValue] || !this.$refs[newValue][0])
-				return;
+			if (!this.$refs?.[newValue]?.[0]) return;
 			const element = this.$refs[newValue][0];
 			this.activeLineWidth = element.clientWidth;
 			this.activeLineOffset = element.offsetLeft;

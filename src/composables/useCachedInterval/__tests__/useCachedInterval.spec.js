@@ -8,7 +8,7 @@ describe('useCachedInterval', () => {
 		});
 		subscribe(callback);
 		expect(callback).toHaveBeenCalledTimes(1);
-		return await new Promise((resolve, reject) =>
+		return await new Promise((resolve) =>
 			setTimeout(() => {
 				expect(callback).toHaveBeenCalledTimes(2);
 				resolve();

@@ -4,7 +4,7 @@
     <div class="filter-from-to__inputs-wrapper">
       <div class="filter-from-to__input-wrapper">
         <wt-label
-          class="filter-from-to__input-label typo-subtitle-1"
+          class="filter-from-to__input-label"
           for="filter-from-to-from"
         >
           {{ $t('reusable.from') }}
@@ -20,7 +20,7 @@
       </div>
       <div class="filter-from-to__input-wrapper">
         <wt-label
-          class="filter-from-to__input-label typo-subtitle-1"
+          class="filter-from-to__input-label"
           for="filter-from-to-to"
         >
           {{ $t('reusable.to') }}

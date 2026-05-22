@@ -8,13 +8,13 @@ import {
 } from '../scripts/utils';
 import {
 	Filter,
-	FilterData,
-	FilterInitParams,
-	FilterInstanceConfig,
-	FilterLabel,
-	FilterName,
-	FilterValue,
-	IFilter,
+	type FilterData,
+	type FilterInitParams,
+	type FilterInstanceConfig,
+	type FilterLabel,
+	type FilterName,
+	type FilterValue,
+	type IFilter,
 } from './Filter';
 
 export interface IFiltersManager {

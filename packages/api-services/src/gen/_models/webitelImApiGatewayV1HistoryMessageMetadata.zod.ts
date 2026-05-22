@@ -4,12 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GoogleProtobufAny } from './googleProtobufAny';
 
 /**
  * Arbitrary message metadata.
 Can contain structured data depending on message type.
  */
 export type WebitelImApiGatewayV1HistoryMessageMetadata = {
-	[key: string]: GoogleProtobufAny;
+	[key: string]: unknown;
 };

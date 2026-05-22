@@ -124,7 +124,7 @@ const props = withDefaults(
 		 */
 		childrenProp: string;
 		selectable?: boolean;
-		selectedElements: Record<string, any>[];
+		selectedElements: Record<string, unknown>[];
 		dataHeaders: WtTableHeader[];
 		gridActions?: boolean;
 		/**
@@ -166,7 +166,7 @@ const openCollapse = () => {
 	emit('expanded-collapse');
 };
 
-const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
+const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
 	// Check if the object itself has searched
 	if (data[props.searchedProp] && nestedLevel) return true;
 

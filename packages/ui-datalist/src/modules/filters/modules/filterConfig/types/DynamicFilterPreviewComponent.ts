@@ -1,5 +1,5 @@
-import { IFilter } from '../../../classes/Filter';
-import { TFilterConfig } from './FilterConfig';
+import type { IFilter } from '../../../classes/Filter';
+import type { TFilterConfig } from './FilterConfig';
 
 export type DynamicFilterPreviewComponentProps = {
 	value: unknown;

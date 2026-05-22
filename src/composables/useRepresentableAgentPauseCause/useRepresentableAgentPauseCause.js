@@ -12,7 +12,7 @@ const isDurationOverflow = ({ durationMin, limitMin }) => {
 	return durationMin > limitMin && limitMin !== 0;
 };
 
-const duration = ({ durationMin, limitMin }) => {
+const duration = ({ durationMin /* limitMin */ }) => {
 	return prettifyPauseCauseDuration(durationMin);
 };
 

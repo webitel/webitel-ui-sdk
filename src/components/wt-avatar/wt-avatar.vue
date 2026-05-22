@@ -1,17 +1,30 @@
 <template>
-	<PAvatar
+  <PAvatar
     :class="[`p-avatar-${props.size}`]"
     :shape="props.shape"
-    :label="avatarLetters"
-		:style="{ background: `var(${avatarLettersBackground})`, color: `var(${avatarLettersColor})` }"
+    :style="{ background: `var(${avatarLettersBackground})`, color: `var(${avatarLettersColor})` }"
     class="wt-avatar"
   >
-		<template #default>
-			<wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
+    <template #default>
+      <wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
 
-			<img v-if="!isLetterAvatar" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
-		</template>
-	</PAvatar>
+      <span v-if="isLetterAvatar && !bot" class="wt-avatar__letters-text">
+        {{ avatarLetters }}
+      </span>
+
+      <div
+        v-if="bot"
+        class="wt-avatar__bot"
+      >
+        <wt-icon
+          icon="bot"
+          :style="{ fill: 'var(--p-avatar-bot-color)' }"
+        />
+      </div>
+
+      <img v-if="!isLetterAvatar && !bot" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
+    </template>
+  </PAvatar>
 </template>
 
 <script setup>
@@ -88,6 +101,10 @@ const props = defineProps({
 			'square',
 		],
 	},
+	bot: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const isLetterAvatar = computed(() => !props.src);
@@ -106,6 +123,7 @@ const avatarLetters = computed(() => {
 });
 
 const avatarLettersColor = computed(() => {
+	if (props.bot) return;
 	if (!props.username) {
 		return '--p-avatar-letters-na-color';
 	}
@@ -114,6 +132,7 @@ const avatarLettersColor = computed(() => {
 });
 
 const avatarLettersBackground = computed(() => {
+	if (props.bot) return;
 	if (!props.username) {
 		return '--p-avatar-letters-na-background';
 	}
@@ -221,18 +240,26 @@ const badgeColorVar = computed(() => {
 	user-select: none;
 }
 
-.wt-avatar__letters {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
-	height: 100%;
-	width: 100%;
-}
-
 .wt-avatar__img {
 	border-radius: 50%;
 	width: 100%;
 	height: 100%;
+}
+
+.wt-avatar__bot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--p-avatar-bot-background);
+}
+
+.wt-avatar__letters-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 </style>

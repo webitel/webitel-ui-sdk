@@ -29,7 +29,7 @@ describe('UsersAPI', () => {
 				'vitest',
 			],
 		};
-		const url = '/users?fields=id&fields=name&fields=vitest&page=1&size=10';
+		const url = '/users?page=1&size=10&fields=id&fields=name&fields=vitest';
 		await UsersAPI.getList(inputParams);
 		expect(get).toHaveBeenCalledWith(url);
 	});

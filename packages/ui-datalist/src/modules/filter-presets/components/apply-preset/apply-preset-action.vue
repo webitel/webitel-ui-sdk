@@ -110,9 +110,9 @@ const { t } = useI18n();
 
 const showPresetsList = ref(false);
 
-const presetsStore = props.presetsStore;
-const { dataList, error, isLoading, filtersManager, presetId } =
-	storeToRefs(presetsStore);
+const { dataList, error, isLoading, filtersManager, presetId } = storeToRefs(
+	props.presetsStore,
+);
 
 const {
 	loadDataList,
@@ -120,7 +120,7 @@ const {
 	updateSize,
 	deleteEls,
 	setupPresetPersistence,
-} = presetsStore;
+} = props.presetsStore;
 
 updateSize(1000);
 filtersManager.value.addFilter({

@@ -135,6 +135,9 @@ const WtTreeTable = defineAsyncComponent(
 const WtVidstackPlayer = defineAsyncComponent(
 	() => import('./wt-vidstack-player/wt-vidstack-player.vue'),
 );
+const WtCallMediaAction = defineAsyncComponent(
+	() => import('./on-demand/wt-call-media-action/wt-call-media-action.vue'),
+);
 const WtChatEmoji = defineAsyncComponent(
 	() => import('./on-demand/wt-chat-emoji/wt-chat-emoji.vue'),
 );
@@ -156,6 +159,19 @@ const WtTypeExtensionValueInput = defineAsyncComponent(
 		import(
 			'./on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue'
 		),
+);
+const WtScreenRecordingsAction = defineAsyncComponent(
+	() =>
+		import(
+			'./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue'
+		),
+);
+const WtSendMessagePopup = defineAsyncComponent(
+	() => import('./on-demand/wt-send-message-popup/wt-send-message-popup.vue'),
+);
+
+const WtInlineAddPanel = defineAsyncComponent(
+	() => import('./wt-inline-add-panel/wt-inline-add-panel.vue'),
 );
 
 const Components = {
@@ -240,6 +256,10 @@ const Components = {
 	WtDatetimeText,
 	WtSingleSelect,
 	WtMultiSelect,
+	WtScreenRecordingsAction,
+	WtInlineAddPanel,
+	WtCallMediaAction,
+	WtSendMessagePopup,
 };
 
 export {
@@ -252,6 +272,7 @@ export {
 	WtBreadcrumb,
 	WtButton,
 	WtButtonSelect,
+	WtCallMediaAction,
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
@@ -259,12 +280,14 @@ export {
 	WtContextMenu,
 	WtCopyAction,
 	WtDatepicker,
+	WtDatetimeText,
 	WtDisplayChipItems,
 	WtDivider,
 	WtDualPanel,
 	WtDummy,
 	WtEmpty,
 	WtErrorPage,
+	WtExpansionCard,
 	WtExpansionPanel,
 	WtFiltersPanelWrapper,
 	WtGalleria,
@@ -276,6 +299,7 @@ export {
 	WtIconBtn,
 	WtImage,
 	WtIndicator,
+	WtInlineAddPanel,
 	WtInputNumber,
 	WtInputText,
 	WtIntersectionObserver,
@@ -301,9 +325,11 @@ export {
 	WtRadio,
 	WtReplaceTransition,
 	WtRoundedAction,
+	WtScreenRecordingsAction,
 	WtSearchBar,
 	WtSelect,
 	WtSelectionPopup,
+	WtSendMessagePopup,
 	WtSlider,
 	WtStartPage,
 	WtStatusSelect,

@@ -9,8 +9,20 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	ThreadManagementGetParams,
 	ThreadManagementSearchParams,
+	ThreadManagementSearchVariablesParams,
+	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
+	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1Thread,
+	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
+	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
+	WebitelImApiGatewayV1ThreadManagementTransferBody,
+	WebitelImApiGatewayV1ThreadVariables,
+	WebitelImApiGatewayV1TransferResponse,
 } from '../_models';
 
 // --- header start
@@ -36,13 +48,153 @@ export const // --- title start
 					},
 				});
 			};
+			/**
+			 * @summary Returns a single thread by its identifier.
+			 */
+			const threadManagementGet = (
+				id: string,
+				params?: ThreadManagementGetParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1Thread>> => {
+				return axiosInstance.get(`/v1/threads/${id}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Add member to the thread.
+			 */
+			const threadManagementAddMember = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementAddMemberBody: WebitelImApiGatewayV1ThreadManagementAddMemberBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/members`,
+					webitelImApiGatewayV1ThreadManagementAddMemberBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Remove member from the thread.
+			 */
+			const threadManagementRemoveMember = (
+				threadId: string,
+				memberId: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
+				return axiosInstance.delete(
+					`/v1/threads/${threadId}/members/${memberId}`,
+					options,
+				);
+			};
+			/**
+ * @summary Transfer unites add member and remove member.
+It adds a new member to the thread and removes the initiator from the thread.
+ */
+			const threadManagementTransfer = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementTransferBody: WebitelImApiGatewayV1ThreadManagementTransferBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1TransferResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/transfer`,
+					webitelImApiGatewayV1ThreadManagementTransferBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Retrieves all variables for a specific thread.
+			 */
+			const threadManagementLocateVariables = (
+				threadId: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.get(`/v1/threads/${threadId}/variables`, options);
+			};
+			/**
+ * @summary Sets or updates variables for a specific thread.
+Existing variables with the same keys will be overwritten if were setted by the caller.
+New variables will be created if they do not exist.
+ */
+			const threadManagementSetVariables = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementSetVariablesBody: WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/variables`,
+					webitelImApiGatewayV1ThreadManagementSetVariablesBody,
+					options,
+				);
+			};
+			/**
+ * @summary Removes specified variables from a thread with caller's permission.
+If no keys are provided, all variables may be removed
+depending on implementation.
+ */
+			const threadManagementFlushVariables = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementFlushVariablesBody: WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ThreadVariables>> => {
+				return axiosInstance.delete(`/v1/threads/${threadId}/variables/flush`, {
+					data: webitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+					...options,
+				});
+			};
+			/**
+ * @summary Searches thread variables across multiple threads.
+Supports pagination and field projection.
+ */
+			const threadManagementSearchVariables = (
+				params?: ThreadManagementSearchVariablesParams,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1SearchVariablesResponse>
+			> => {
+				return axiosInstance.get(`/v1/variables`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
 			// --- footer start
 			return {
 				threadManagementSearch,
+				threadManagementGet,
+				threadManagementAddMember,
+				threadManagementRemoveMember,
+				threadManagementTransfer,
+				threadManagementLocateVariables,
+				threadManagementSetVariables,
+				threadManagementFlushVariables,
+				threadManagementSearchVariables,
 			};
 		};
 export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
+export type ThreadManagementGetResult =
+	AxiosResponse<WebitelImApiGatewayV1Thread>;
+export type ThreadManagementAddMemberResult =
+	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
+export type ThreadManagementRemoveMemberResult =
+	AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>;
+export type ThreadManagementTransferResult =
+	AxiosResponse<WebitelImApiGatewayV1TransferResponse>;
+export type ThreadManagementLocateVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementSetVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementFlushVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadVariables>;
+export type ThreadManagementSearchVariablesResult =
+	AxiosResponse<WebitelImApiGatewayV1SearchVariablesResponse>;
 
 // --- footer end

@@ -7,19 +7,26 @@
 import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
-import type { WebitelImApiGatewayV1SearchThreadResponse } from '../_models';
-import { WebitelImApiGatewayV1ThreadKind } from '../_models';
+import type {
+	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1RemoveMemberResponse,
+	WebitelImApiGatewayV1SearchThreadResponse,
+	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1Thread,
+	WebitelImApiGatewayV1ThreadVariables,
+	WebitelImApiGatewayV1TransferResponse,
+} from '../_models';
+import {
+	WebitelImApiGatewayV1ThreadKind,
+	WebitelImApiGatewayV1ThreadRole,
+} from '../_models';
 
 export const getThreadManagementSearchResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImApiGatewayV1SearchThreadResponse, object>
 	> = {},
 ): WebitelImApiGatewayV1SearchThreadResponse => ({
-	next: faker.helpers.arrayElement([
-		faker.datatype.boolean(),
-		undefined,
-	]),
-	threads: faker.helpers.arrayElement([
+	items: faker.helpers.arrayElement([
 		Array.from(
 			{
 				length: faker.number.int({
@@ -29,55 +36,6 @@ export const getThreadManagementSearchResponseMock = (
 			},
 			(_, i) => i + 1,
 		).map(() => ({
-			admins: faker.helpers.arrayElement([
-				Array.from(
-					{
-						length: faker.number.int({
-							min: 1,
-							max: 10,
-						}),
-					},
-					(_, i) => i + 1,
-				).map(() => ({
-					issuer: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					subject: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					username: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-				})),
-				undefined,
-			]),
 			createdAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -105,23 +63,9 @@ export const getThreadManagementSearchResponseMock = (
 				}),
 				undefined,
 			]),
-			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiGatewayV1ThreadKind),
-				),
-				undefined,
-			]),
-			memberIds: faker.helpers.arrayElement([
-				Array.from(
-					{
-						length: faker.number.int({
-							min: 1,
-							max: 10,
-						}),
-					},
-					(_, i) => i + 1,
-				).map(() => ({
-					issuer: faker.helpers.arrayElement([
+			lastMsg: faker.helpers.arrayElement([
+				{
+					body: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -130,48 +74,57 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					subject: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					username: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-				})),
-				undefined,
-			]),
-			members: faker.helpers.arrayElement([
-				Array.from(
-					{
-						length: faker.number.int({
-							min: 1,
-							max: 10,
-						}),
-					},
-					(_, i) => i + 1,
-				).map(() => ({
-					directSettings: faker.helpers.arrayElement([
+					contact: faker.helpers.arrayElement([
 						{
+							email: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							phone: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					documents: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
 							createdAt: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
@@ -181,7 +134,119 @@ export const getThreadManagementSearchResponseMock = (
 								}),
 								undefined,
 							]),
-							domainId: faker.helpers.arrayElement([
+							fileId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							messageId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							mime: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							size: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							url: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+					editedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					images: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							fileId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							height: faker.helpers.arrayElement([
 								faker.number.int(),
 								undefined,
 							]),
@@ -194,7 +259,886 @@ export const getThreadManagementSearchResponseMock = (
 								}),
 								undefined,
 							]),
-							title: faker.helpers.arrayElement([
+							messageId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							mime: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							url: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							width: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+					interactive: faker.helpers.arrayElement([
+						{
+							documents: faker.helpers.arrayElement([
+								{
+									documents: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											fileName: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											id: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											mimeType: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											sizeBytes: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											url: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							images: faker.helpers.arrayElement([
+								{
+									images: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											id: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											link: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											mimeType: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											name: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							listReply: faker.helpers.arrayElement([
+								{
+									mainButtonTitle: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									sections: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											buttons: faker.helpers.arrayElement([
+												Array.from(
+													{
+														length: faker.number.int({
+															min: 1,
+															max: 10,
+														}),
+													},
+													(_, i) => i + 1,
+												).map(() => ({
+													callback: faker.helpers.arrayElement([
+														{
+															data: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+													id: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+													label: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+													metadata: faker.helpers.arrayElement([
+														{},
+														undefined,
+													]),
+													request: faker.helpers.arrayElement([
+														{
+															action: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+													url: faker.helpers.arrayElement([
+														{
+															url: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+												})),
+												undefined,
+											]),
+											section: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							markup: faker.helpers.arrayElement([
+								{
+									rows: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											buttons: faker.helpers.arrayElement([
+												Array.from(
+													{
+														length: faker.number.int({
+															min: 1,
+															max: 10,
+														}),
+													},
+													(_, i) => i + 1,
+												).map(() => ({
+													callback: faker.helpers.arrayElement([
+														{
+															data: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+													id: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+													label: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+													metadata: faker.helpers.arrayElement([
+														{},
+														undefined,
+													]),
+													request: faker.helpers.arrayElement([
+														{
+															action: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+													url: faker.helpers.arrayElement([
+														{
+															url: faker.helpers.arrayElement([
+																faker.string.alpha({
+																	length: {
+																		min: 10,
+																		max: 20,
+																	},
+																}),
+																undefined,
+															]),
+														},
+														undefined,
+													]),
+												})),
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							singleUse: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					location: faker.helpers.arrayElement([
+						{
+							address: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							latitude: faker.helpers.arrayElement([
+								faker.number.float({
+									fractionDigits: 2,
+								}),
+								undefined,
+							]),
+							longitude: faker.helpers.arrayElement([
+								faker.number.float({
+									fractionDigits: 2,
+								}),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{},
+						undefined,
+					]),
+					sender: faker.helpers.arrayElement([
+						{
+							contact: faker.helpers.arrayElement([
+								{
+									appId: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									createdAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									isBot: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									iss: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									metadata: faker.helpers.arrayElement([
+										{
+											[faker.string.alphanumeric(5)]: faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+										},
+										undefined,
+									]),
+									name: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									sub: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									type: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									updatedAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									username: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									vias: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											contactId: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											createdAt: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											disable: faker.helpers.arrayElement([
+												faker.datatype.boolean(),
+												undefined,
+											]),
+											disableReason: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											metadata: faker.helpers.arrayElement([
+												{},
+												undefined,
+											]),
+											updatedAt: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											via: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							permissions: faker.helpers.arrayElement([
+								{
+									canAddMembers: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									canChangeMembersPermissions: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									canChangeThreadInfo: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									canRemoveMembers: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									canSendMessages: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									createdAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									id: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									memberId: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									updatedAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								},
+								undefined,
+							]),
+							role: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1ThreadRole),
+								),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					threadId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			members: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					contact: faker.helpers.arrayElement([
+						{
+							appId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							isBot: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							iss: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							metadata: faker.helpers.arrayElement([
+								{
+									[faker.string.alphanumeric(5)]: faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+								},
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							sub: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							type: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							username: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							vias: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									contactId: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									createdAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									disable: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									disableReason: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									metadata: faker.helpers.arrayElement([
+										{},
+										undefined,
+									]),
+									updatedAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									via: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					permissions: faker.helpers.arrayElement([
+						{
+							canAddMembers: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canChangeMembersPermissions: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canChangeThreadInfo: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canRemoveMembers: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canSendMessages: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							memberId: faker.helpers.arrayElement([
 								faker.string.alpha({
 									length: {
 										min: 10,
@@ -215,53 +1159,18 @@ export const getThreadManagementSearchResponseMock = (
 						},
 						undefined,
 					]),
-					member: faker.helpers.arrayElement([
-						{
-							issuer: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							subject: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							type: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							username: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-						},
+					role: faker.helpers.arrayElement([
+						faker.helpers.arrayElement(
+							Object.values(WebitelImApiGatewayV1ThreadRole),
+						),
 						undefined,
 					]),
 				})),
 				undefined,
 			]),
-			owner: faker.helpers.arrayElement([
+			settings: faker.helpers.arrayElement([
 				{
-					issuer: faker.helpers.arrayElement([
+					createdAt: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -270,7 +1179,11 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					subject: faker.helpers.arrayElement([
+					domainId: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -279,7 +1192,7 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					type: faker.helpers.arrayElement([
+					title: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -288,7 +1201,7 @@ export const getThreadManagementSearchResponseMock = (
 						}),
 						undefined,
 					]),
-					username: faker.helpers.arrayElement([
+					updatedAt: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -309,6 +1222,12 @@ export const getThreadManagementSearchResponseMock = (
 				}),
 				undefined,
 			]),
+			type: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1ThreadKind),
+				),
+				undefined,
+			]),
 			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -318,7 +1237,2894 @@ export const getThreadManagementSearchResponseMock = (
 				}),
 				undefined,
 			]),
+			variables: faker.helpers.arrayElement([
+				{
+					threadId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					variables: faker.helpers.arrayElement([
+						{
+							[faker.string.alphanumeric(5)]: {
+								setAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								setBy: faker.helpers.arrayElement([
+									{
+										appId: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										createdAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										isBot: faker.helpers.arrayElement([
+											faker.datatype.boolean(),
+											undefined,
+										]),
+										iss: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										metadata: faker.helpers.arrayElement([
+											{
+												[faker.string.alphanumeric(5)]: faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+											},
+											undefined,
+										]),
+										name: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										sub: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										type: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										updatedAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										username: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										vias: faker.helpers.arrayElement([
+											Array.from(
+												{
+													length: faker.number.int({
+														min: 1,
+														max: 10,
+													}),
+												},
+												(_, i) => i + 1,
+											).map(() => ({
+												contactId: faker.helpers.arrayElement([
+													faker.string.alpha({
+														length: {
+															min: 10,
+															max: 20,
+														},
+													}),
+													undefined,
+												]),
+												createdAt: faker.helpers.arrayElement([
+													faker.string.alpha({
+														length: {
+															min: 10,
+															max: 20,
+														},
+													}),
+													undefined,
+												]),
+												disable: faker.helpers.arrayElement([
+													faker.datatype.boolean(),
+													undefined,
+												]),
+												disableReason: faker.helpers.arrayElement([
+													faker.string.alpha({
+														length: {
+															min: 10,
+															max: 20,
+														},
+													}),
+													undefined,
+												]),
+												metadata: faker.helpers.arrayElement([
+													{},
+													undefined,
+												]),
+												updatedAt: faker.helpers.arrayElement([
+													faker.string.alpha({
+														length: {
+															min: 10,
+															max: 20,
+														},
+													}),
+													undefined,
+												]),
+												via: faker.helpers.arrayElement([
+													faker.string.alpha({
+														length: {
+															min: 10,
+															max: 20,
+														},
+													}),
+													undefined,
+												]),
+											})),
+											undefined,
+										]),
+									},
+									undefined,
+								]),
+								value: faker.helpers.arrayElement([
+									{},
+									undefined,
+								]),
+							},
+						},
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementGetResponseMock = (
+	overrideResponse: Partial<Extract<WebitelImApiGatewayV1Thread, object>> = {},
+): WebitelImApiGatewayV1Thread => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	lastMsg: faker.helpers.arrayElement([
+		{
+			body: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					email: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					phone: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			documents: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					fileId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					messageId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					mime: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					size: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					url: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			editedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			images: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					fileId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					height: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					messageId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					mime: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					url: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					width: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			interactive: faker.helpers.arrayElement([
+				{
+					documents: faker.helpers.arrayElement([
+						{
+							documents: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									fileName: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									id: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									mimeType: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									sizeBytes: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									url: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					images: faker.helpers.arrayElement([
+						{
+							images: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									id: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									link: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									mimeType: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									name: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					listReply: faker.helpers.arrayElement([
+						{
+							mainButtonTitle: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							sections: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									buttons: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											callback: faker.helpers.arrayElement([
+												{
+													data: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+											id: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											label: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											metadata: faker.helpers.arrayElement([
+												{},
+												undefined,
+											]),
+											request: faker.helpers.arrayElement([
+												{
+													action: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+											url: faker.helpers.arrayElement([
+												{
+													url: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+									section: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					markup: faker.helpers.arrayElement([
+						{
+							rows: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									buttons: faker.helpers.arrayElement([
+										Array.from(
+											{
+												length: faker.number.int({
+													min: 1,
+													max: 10,
+												}),
+											},
+											(_, i) => i + 1,
+										).map(() => ({
+											callback: faker.helpers.arrayElement([
+												{
+													data: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+											id: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											label: faker.helpers.arrayElement([
+												faker.string.alpha({
+													length: {
+														min: 10,
+														max: 20,
+													},
+												}),
+												undefined,
+											]),
+											metadata: faker.helpers.arrayElement([
+												{},
+												undefined,
+											]),
+											request: faker.helpers.arrayElement([
+												{
+													action: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+											url: faker.helpers.arrayElement([
+												{
+													url: faker.helpers.arrayElement([
+														faker.string.alpha({
+															length: {
+																min: 10,
+																max: 20,
+															},
+														}),
+														undefined,
+													]),
+												},
+												undefined,
+											]),
+										})),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					singleUse: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			location: faker.helpers.arrayElement([
+				{
+					address: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					latitude: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					longitude: faker.helpers.arrayElement([
+						faker.number.float({
+							fractionDigits: 2,
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			metadata: faker.helpers.arrayElement([
+				{},
+				undefined,
+			]),
+			sender: faker.helpers.arrayElement([
+				{
+					contact: faker.helpers.arrayElement([
+						{
+							appId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							isBot: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							iss: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							metadata: faker.helpers.arrayElement([
+								{
+									[faker.string.alphanumeric(5)]: faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+								},
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							sub: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							type: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							username: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							vias: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() => ({
+									contactId: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									createdAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									disable: faker.helpers.arrayElement([
+										faker.datatype.boolean(),
+										undefined,
+									]),
+									disableReason: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									metadata: faker.helpers.arrayElement([
+										{},
+										undefined,
+									]),
+									updatedAt: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+									via: faker.helpers.arrayElement([
+										faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+										undefined,
+									]),
+								})),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					permissions: faker.helpers.arrayElement([
+						{
+							canAddMembers: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canChangeMembersPermissions: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canChangeThreadInfo: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canRemoveMembers: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							canSendMessages: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							memberId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					role: faker.helpers.arrayElement([
+						faker.helpers.arrayElement(
+							Object.values(WebitelImApiGatewayV1ThreadRole),
+						),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	members: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			contact: faker.helpers.arrayElement([
+				{
+					appId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{
+							[faker.string.alphanumeric(5)]: faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+						},
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					username: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					vias: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							contactId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							disable: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							disableReason: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							metadata: faker.helpers.arrayElement([
+								{},
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							via: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			permissions: faker.helpers.arrayElement([
+				{
+					canAddMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeMembersPermissions: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeThreadInfo: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canRemoveMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canSendMessages: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					memberId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			role: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1ThreadRole),
+				),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	settings: faker.helpers.arrayElement([
+		{
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			domainId: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			title: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	subject: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	type: faker.helpers.arrayElement([
+		faker.helpers.arrayElement(Object.values(WebitelImApiGatewayV1ThreadKind)),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		{
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			variables: faker.helpers.arrayElement([
+				{
+					[faker.string.alphanumeric(5)]: {
+						setAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						setBy: faker.helpers.arrayElement([
+							{
+								appId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								isBot: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								iss: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{
+										[faker.string.alphanumeric(5)]: faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+									},
+									undefined,
+								]),
+								name: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								sub: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								type: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								username: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								vias: faker.helpers.arrayElement([
+									Array.from(
+										{
+											length: faker.number.int({
+												min: 1,
+												max: 10,
+											}),
+										},
+										(_, i) => i + 1,
+									).map(() => ({
+										contactId: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										createdAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										disable: faker.helpers.arrayElement([
+											faker.datatype.boolean(),
+											undefined,
+										]),
+										disableReason: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										metadata: faker.helpers.arrayElement([
+											{},
+											undefined,
+										]),
+										updatedAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										via: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+									})),
+									undefined,
+								]),
+							},
+							undefined,
+						]),
+						value: faker.helpers.arrayElement([
+							{},
+							undefined,
+						]),
+					},
+				},
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementAddMemberResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1AddMemberResponse, object>
+	> = {},
+): WebitelImApiGatewayV1AddMemberResponse => ({
+	member: faker.helpers.arrayElement([
+		{
+			contact: faker.helpers.arrayElement([
+				{
+					appId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{
+							[faker.string.alphanumeric(5)]: faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+						},
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					username: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					vias: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							contactId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							disable: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							disableReason: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							metadata: faker.helpers.arrayElement([
+								{},
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							via: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			permissions: faker.helpers.arrayElement([
+				{
+					canAddMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeMembersPermissions: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeThreadInfo: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canRemoveMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canSendMessages: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					memberId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			role: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1ThreadRole),
+				),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementRemoveMemberResponseMock =
+	(): WebitelImApiGatewayV1RemoveMemberResponse => ({});
+
+export const getThreadManagementTransferResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1TransferResponse, object>
+	> = {},
+): WebitelImApiGatewayV1TransferResponse => ({
+	member: faker.helpers.arrayElement([
+		{
+			contact: faker.helpers.arrayElement([
+				{
+					appId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					isBot: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{
+							[faker.string.alphanumeric(5)]: faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+						},
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					username: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					vias: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							contactId: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							createdAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							disable: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							disableReason: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							metadata: faker.helpers.arrayElement([
+								{},
+								undefined,
+							]),
+							updatedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							via: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			permissions: faker.helpers.arrayElement([
+				{
+					canAddMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeMembersPermissions: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canChangeThreadInfo: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canRemoveMembers: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					canSendMessages: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					createdAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					memberId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					updatedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			role: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1ThreadRole),
+				),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementLocateVariablesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1ThreadVariables, object>
+	> = {},
+): WebitelImApiGatewayV1ThreadVariables => ({
+	threadId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: {
+				setAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				setBy: faker.helpers.arrayElement([
+					{
+						appId: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						createdAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						isBot: faker.helpers.arrayElement([
+							faker.datatype.boolean(),
+							undefined,
+						]),
+						iss: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						metadata: faker.helpers.arrayElement([
+							{
+								[faker.string.alphanumeric(5)]: faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+							},
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						sub: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						type: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						updatedAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						username: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						vias: faker.helpers.arrayElement([
+							Array.from(
+								{
+									length: faker.number.int({
+										min: 1,
+										max: 10,
+									}),
+								},
+								(_, i) => i + 1,
+							).map(() => ({
+								contactId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								disable: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								disableReason: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{},
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								via: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+							})),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+				value: faker.helpers.arrayElement([
+					{},
+					undefined,
+				]),
+			},
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementSetVariablesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1ThreadVariables, object>
+	> = {},
+): WebitelImApiGatewayV1ThreadVariables => ({
+	threadId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: {
+				setAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				setBy: faker.helpers.arrayElement([
+					{
+						appId: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						createdAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						isBot: faker.helpers.arrayElement([
+							faker.datatype.boolean(),
+							undefined,
+						]),
+						iss: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						metadata: faker.helpers.arrayElement([
+							{
+								[faker.string.alphanumeric(5)]: faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+							},
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						sub: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						type: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						updatedAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						username: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						vias: faker.helpers.arrayElement([
+							Array.from(
+								{
+									length: faker.number.int({
+										min: 1,
+										max: 10,
+									}),
+								},
+								(_, i) => i + 1,
+							).map(() => ({
+								contactId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								disable: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								disableReason: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{},
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								via: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+							})),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+				value: faker.helpers.arrayElement([
+					{},
+					undefined,
+				]),
+			},
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementFlushVariablesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1ThreadVariables, object>
+	> = {},
+): WebitelImApiGatewayV1ThreadVariables => ({
+	threadId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: {
+				setAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				setBy: faker.helpers.arrayElement([
+					{
+						appId: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						createdAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						isBot: faker.helpers.arrayElement([
+							faker.datatype.boolean(),
+							undefined,
+						]),
+						iss: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						metadata: faker.helpers.arrayElement([
+							{
+								[faker.string.alphanumeric(5)]: faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+							},
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						sub: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						type: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						updatedAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						username: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						vias: faker.helpers.arrayElement([
+							Array.from(
+								{
+									length: faker.number.int({
+										min: 1,
+										max: 10,
+									}),
+								},
+								(_, i) => i + 1,
+							).map(() => ({
+								contactId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								disable: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								disableReason: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{},
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								via: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+							})),
+							undefined,
+						]),
+					},
+					undefined,
+				]),
+				value: faker.helpers.arrayElement([
+					{},
+					undefined,
+				]),
+			},
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getThreadManagementSearchVariablesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SearchVariablesResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SearchVariablesResponse => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			variables: faker.helpers.arrayElement([
+				{
+					[faker.string.alphanumeric(5)]: {
+						setAt: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						setBy: faker.helpers.arrayElement([
+							{
+								appId: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								createdAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								isBot: faker.helpers.arrayElement([
+									faker.datatype.boolean(),
+									undefined,
+								]),
+								iss: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								metadata: faker.helpers.arrayElement([
+									{
+										[faker.string.alphanumeric(5)]: faker.string.alpha({
+											length: {
+												min: 10,
+												max: 20,
+											},
+										}),
+									},
+									undefined,
+								]),
+								name: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								sub: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								type: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								updatedAt: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								username: faker.helpers.arrayElement([
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+									undefined,
+								]),
+								vias: faker.helpers.arrayElement([
+									Array.from(
+										{
+											length: faker.number.int({
+												min: 1,
+												max: 10,
+											}),
+										},
+										(_, i) => i + 1,
+									).map(() => ({
+										contactId: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										createdAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										disable: faker.helpers.arrayElement([
+											faker.datatype.boolean(),
+											undefined,
+										]),
+										disableReason: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										metadata: faker.helpers.arrayElement([
+											{},
+											undefined,
+										]),
+										updatedAt: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+										via: faker.helpers.arrayElement([
+											faker.string.alpha({
+												length: {
+													min: 10,
+													max: 20,
+												},
+											}),
+											undefined,
+										]),
+									})),
+									undefined,
+								]),
+							},
+							undefined,
+						]),
+						value: faker.helpers.arrayElement([
+							{},
+							undefined,
+						]),
+					},
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	...overrideResponse,
@@ -351,6 +4157,236 @@ export const getThreadManagementSearchMockHandler = (
 		options,
 	);
 };
+
+export const getThreadManagementGetMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1Thread
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelImApiGatewayV1Thread> | WebitelImApiGatewayV1Thread),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/threads/:id',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementGetResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementAddMemberMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1AddMemberResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1AddMemberResponse>
+				| WebitelImApiGatewayV1AddMemberResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/threads/:threadId/members',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementAddMemberResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementRemoveMemberMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1RemoveMemberResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1RemoveMemberResponse>
+				| WebitelImApiGatewayV1RemoveMemberResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/v1/threads/:threadId/members/:memberId',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementRemoveMemberResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementTransferMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1TransferResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1TransferResponse>
+				| WebitelImApiGatewayV1TransferResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/threads/:threadId/transfer',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementTransferResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementLocateVariablesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1ThreadVariables
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1ThreadVariables>
+				| WebitelImApiGatewayV1ThreadVariables),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/threads/:threadId/variables',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementLocateVariablesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementSetVariablesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1ThreadVariables
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1ThreadVariables>
+				| WebitelImApiGatewayV1ThreadVariables),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/threads/:threadId/variables',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementSetVariablesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementFlushVariablesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1ThreadVariables
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1ThreadVariables>
+				| WebitelImApiGatewayV1ThreadVariables),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/v1/threads/:threadId/variables/flush',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementFlushVariablesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getThreadManagementSearchVariablesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SearchVariablesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SearchVariablesResponse>
+				| WebitelImApiGatewayV1SearchVariablesResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/variables',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getThreadManagementSearchVariablesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getWebitelImApiGatewayV1ThreadmanagementMock = () => [
 	getThreadManagementSearchMockHandler(),
+	getThreadManagementGetMockHandler(),
+	getThreadManagementAddMemberMockHandler(),
+	getThreadManagementRemoveMemberMockHandler(),
+	getThreadManagementTransferMockHandler(),
+	getThreadManagementLocateVariablesMockHandler(),
+	getThreadManagementSetVariablesMockHandler(),
+	getThreadManagementFlushVariablesMockHandler(),
+	getThreadManagementSearchVariablesMockHandler(),
 ];

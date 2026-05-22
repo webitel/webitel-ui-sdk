@@ -6,7 +6,7 @@
  */
 
 /**
- * Represents `Image` entity with 
+ * Represents `Image` entity with
 necessary fields.
  */
 export interface WebitelImApiGatewayV1ImageInput {

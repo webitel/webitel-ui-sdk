@@ -57,10 +57,8 @@ const preRequestHandler = (item) => {
 	const copy = deepCopy(item);
 	copy.variables = copy.variables.reduce((variables, variable) => {
 		if (!variable.key) return variables;
-		return {
-			...variables,
-			[variable.key]: variable.value,
-		};
+		variables[variable.key] = variable.value;
+		return variables;
 	}, {});
 	return copy;
 };
@@ -118,25 +116,21 @@ const getQueue = async ({ itemId: id }) => {
 	};
 	const responseHandler = (item) => {
 		const copy = deepCopy(item);
-		try {
-			if (copy.variables) {
-				copy.variables = Object.keys(copy.variables).map((key) => ({
-					key,
-					value: copy.variables[key],
-				}));
-			}
-			if (isEmpty(copy.taskProcessing)) {
-				copy.taskProcessing = processing({
-					enabled: !!copy.processing,
-					formSchema: copy.formSchema,
-					sec: copy.processingSec || 0,
-					renewalSec: copy.processingRenewalSec || 0,
-				});
-			}
-			return copy;
-		} catch (err) {
-			throw err;
+		if (copy.variables) {
+			copy.variables = Object.keys(copy.variables).map((key) => ({
+				key,
+				value: copy.variables[key],
+			}));
 		}
+		if (isEmpty(copy.taskProcessing)) {
+			copy.taskProcessing = processing({
+				enabled: !!copy.processing,
+				formSchema: copy.formSchema,
+				sec: copy.processingSec || 0,
+				renewalSec: copy.processingRenewalSec || 0,
+			});
+		}
+		return copy;
 	};
 	try {
 		const response = await queueService.readQueue(id);

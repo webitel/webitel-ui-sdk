@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -38,6 +40,7 @@ export default {
 		saveAs: 'Сохранить как',
 		saved: 'Сохранено',
 		send: 'Отправить',
+		sendMessage: 'Отправить сообщение',
 		start: 'Начать',
 		close: 'Закрыть',
 		add: 'Добавить',
@@ -50,6 +53,7 @@ export default {
 		delete: 'Удалить',
 		search: 'Поиск',
 		open: 'Открыть',
+		openInHistory: 'Открыть в History',
 		name: 'Название',
 		expand: 'Развернуть',
 		collapse: 'Свернуть',
@@ -224,6 +228,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Голосовая',
 				[EngineRoutingSchemaType.Service]: 'Служебная',
 				[EngineRoutingSchemaType.Processing]: 'Формы',
+				[EngineRoutingSchemaType.Default]: 'Нет типа',
 			},
 		},
 		messengers: {
@@ -234,6 +239,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+			[ChatGatewayProvider.PORTAL]: 'Портал',
 		},
 		quickReplies: {
 			quickReplies: 'Быстрый ответ | Быстрые ответы',
@@ -250,15 +256,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Ошибка',
 			},
 		},
-	},
-	importCSV: 'Импорт CSV',
-	CSV: {
-		skipHeaders: 'Пропустить заголовки',
-		charSet: 'Кодировка',
-		separator: 'Разделитель',
-		CSVColumn: 'Столбец CSV',
-		fieldName: 'Имя поля',
-		clearMember: 'Очистить участника',
+		importCSV: 'Импорт CSV',
+		CSV: {
+			skipHeaders: 'Пропустить заголовки',
+			charSet: 'Кодировка',
+			separator: 'Разделитель',
+			CSVColumn: 'Столбец CSV',
+			fieldName: 'Имя поля',
+			clearMember: 'Очистить участника',
+		},
 	},
 	channel: {
 		state: {
@@ -833,11 +839,19 @@ export default {
 			create: ({ named }) => `${named('entity')} был сохранён`,
 			delete: ({ named }) => `${named('entity')} был удалён`,
 		},
-		info: {
-			passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
+		warnings: {
+			passwordExpirationMessageDays:
+				'Ваш пароль истечёт через {amount} дн(я/ей)',
+			passwordExpirationMessageHours:
+				'До истечения пароля осталось менее {amount} часов.',
+			licenseExpirationSoonMessage:
+				'Ваша лицензия {name}  завершится через {amount} дней',
+			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
 	},

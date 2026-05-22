@@ -1,11 +1,11 @@
 import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import get from 'lodash/get';
-import { WebitelProtoDataField } from 'webitel-sdk';
+import type { WebitelProtoDataField } from 'webitel-sdk';
 
 import { FilterConfig } from '../../classes/FilterConfig';
-import { CustomFilterOption } from '../../enums/FilterOption';
-import {
+import type { CustomFilterOption } from '../../enums/FilterOption';
+import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
 	IWtSysTypeFilterConfig,

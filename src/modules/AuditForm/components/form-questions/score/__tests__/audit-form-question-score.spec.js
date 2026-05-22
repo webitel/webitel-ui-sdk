@@ -29,8 +29,8 @@ describe('AuditFormQuestionScore', () => {
 			.findComponent({
 				name: 'wt-radio',
 			})
-			.vm.$emit('input');
-		expect(wrapper.emitted()['change:result'][0][0]).toEqual({
+			.vm.$emit('update:selected', min);
+		expect(wrapper.emitted()['update:answer'][0][0]).toEqual({
 			score: min,
 		});
 	});

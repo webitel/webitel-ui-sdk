@@ -90,6 +90,7 @@ import email from './email.svg?raw';
 import emailInbound from './email-inbound.svg?raw';
 import emailOutbound from './email-outbound.svg?raw';
 import expand from './expand.svg?raw';
+import exportExel from './export-exel.svg?raw';
 import eyeClosed from './eye--closed.svg?raw';
 import eyeOpened from './eye--opened.svg?raw';
 import falseIc from './false-ic.svg?raw';
@@ -330,6 +331,7 @@ export default objCamelToKebab({
 	elevenlabs,
 	plus,
 	expand,
+	exportExel,
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
 	filter,

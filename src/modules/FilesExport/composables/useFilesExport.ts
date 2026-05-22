@@ -2,7 +2,7 @@ import JSZip from 'jszip';
 import { ref } from 'vue';
 
 import { _wtUiLog } from '../../../scripts/logger';
-import {
+import type {
 	ExportedItem,
 	UseFilesExportOptions,
 	UseFilesExportReturn,

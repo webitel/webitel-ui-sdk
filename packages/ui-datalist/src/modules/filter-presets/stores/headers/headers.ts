@@ -1,4 +1,4 @@
-import { WtTableHeader } from 'src/components/wt-table/types/WtTable.d.ts';
+import type { WtTableHeader } from 'src/components/wt-table/types/WtTable.d.ts';
 
 export const headers: WtTableHeader[] = [
 	{

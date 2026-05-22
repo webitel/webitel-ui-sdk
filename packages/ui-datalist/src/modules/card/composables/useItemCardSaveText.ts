@@ -1,4 +1,4 @@
-import { computed, Ref } from 'vue';
+import { computed, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export const useItemCardSaveText = ({

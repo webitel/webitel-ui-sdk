@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -42,6 +44,7 @@ export default {
 		saveAs: 'Zapisz jako',
 		saved: 'Zapisano',
 		send: 'Wyślij',
+		sendMessage: 'Хабар жіберу',
 		start: 'Start',
 		close: 'Zamknij',
 		add: 'Dodaj',
@@ -54,6 +57,7 @@ export default {
 		delete: 'Usuń',
 		search: 'Szukaj',
 		open: 'Otwórz',
+		openInHistory: 'Otwórz w historii',
 		name: 'Nazwa',
 		expand: 'Rozwiń',
 		collapse: 'Zwiń',
@@ -228,6 +232,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Głos',
 				[EngineRoutingSchemaType.Service]: 'Usługa',
 				[EngineRoutingSchemaType.Processing]: 'Formularze',
+				[EngineRoutingSchemaType.Default]: 'Brak typu',
 			},
 		},
 		messengers: {
@@ -238,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Czat webowy',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Niestandardowa bramka czatu',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
@@ -254,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Błąd',
 			},
 		},
-	},
-	importCSV: 'Importuj CSV',
-	CSV: {
-		skipHeaders: 'Pomiń nagłówki',
-		charSet: 'Zestaw znaków',
-		separator: 'Separator',
-		CSVColumn: 'Kolumna CSV',
-		fieldName: 'Nazwa pola',
-		clearMember: 'Wyczyść członka',
+		importCSV: 'Importuj CSV',
+		CSV: {
+			skipHeaders: 'Pomiń nagłówki',
+			charSet: 'Zestaw znaków',
+			separator: 'Separator',
+			CSVColumn: 'Kolumna CSV',
+			fieldName: 'Nazwa pola',
+			clearMember: 'Wyczyść członka',
+		},
 	},
 	channel: {
 		state: {
@@ -321,11 +327,9 @@ export default {
 						': ' +
 						linked('objects.case'),
 					[CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-						linked('objects.customization.customization') +
-						': ' +
-						linked('objects.contact'),
+						`${linked('objects.customization.customization')}: ${linked('objects.contact')}`,
 					[CrmSectionsNew.CustomLookups]: ({ linked }) =>
-						linked('objects.customization.customization') + ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+						`${linked('objects.customization.customization')}: Dostosowania`, // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
 				},
 			},
 		},
@@ -840,11 +844,18 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} został zapisany`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
 		},
-		info: {
-			passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni',
+		warnings: {
+			passwordExpirationMessageDays: 'Twoje hasło wygaśnie za {amount} dni',
+			passwordExpirationMessageHours:
+				'Twoje hasło wygaśnie za mniej niż {amount} godzin',
+			licenseExpirationSoonMessage:
+				'Twoja licencja {name} wygaśnie za {amount} dni',
+			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
 	},

@@ -1,7 +1,7 @@
-import { Component } from 'vue';
-import { MessageResolver } from 'vue-i18n';
+import type { Component } from 'vue';
+import type { MessageResolver } from 'vue-i18n';
 
-import { FilterName, FilterValue } from '../../../classes/Filter';
+import type { FilterName, FilterValue } from '../../../classes/Filter';
 
 export interface BaseFilterConfig {
 	name: FilterName;

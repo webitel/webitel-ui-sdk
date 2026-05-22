@@ -9,9 +9,36 @@ import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
 import type {
+	WebMeetingBackendCreateMeetingResponse,
 	WebMeetingBackendMeetingView,
 	WebMeetingBackendSatisfactionMeetingResponse,
 } from '../_models';
+
+export const getCreateMeetingResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebMeetingBackendCreateMeetingResponse, object>
+	> = {},
+): WebMeetingBackendCreateMeetingResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	url: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
 export const getGetMeetingViewResponseMock = (
 	overrideResponse: Partial<Extract<WebMeetingBackendMeetingView, object>> = {},
@@ -61,6 +88,34 @@ export const getGetMeetingViewResponseMock = (
 
 export const getSatisfactionMeetingResponseMock =
 	(): WebMeetingBackendSatisfactionMeetingResponse => ({});
+
+export const getCreateMeetingMockHandler = (
+	overrideResponse?:
+		| WebMeetingBackendCreateMeetingResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebMeetingBackendCreateMeetingResponse>
+				| WebMeetingBackendCreateMeetingResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/meetings',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getCreateMeetingResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 
 export const getGetMeetingViewMockHandler = (
 	overrideResponse?:
@@ -118,6 +173,7 @@ export const getSatisfactionMeetingMockHandler = (
 	);
 };
 export const getMeetingServiceMock = () => [
+	getCreateMeetingMockHandler(),
 	getGetMeetingViewMockHandler(),
 	getSatisfactionMeetingMockHandler(),
 ];

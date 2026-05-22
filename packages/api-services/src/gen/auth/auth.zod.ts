@@ -54,24 +54,6 @@ export const SignupResponse = zod.object({
 				),
 		})
 		.optional(),
-	warnings: zod
-		.array(
-			zod.object({
-				detail: zod.string().optional(),
-				id: zod.string().optional(),
-				warningData: zod
-					.object({
-						passwordExpiry: zod
-							.object({
-								daysRemaining: zod.string().optional(),
-								expiresAt: zod.string().optional(),
-							})
-							.optional(),
-					})
-					.optional(),
-			}),
-		)
-		.optional(),
 });
 
 /**
@@ -92,6 +74,7 @@ export const UserInfo2Response = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod
@@ -167,6 +150,7 @@ export const UserInfoResponse = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod

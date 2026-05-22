@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -42,6 +44,7 @@ export default {
 		saveAs: 'Boshqa nom bilan saqlash',
 		saved: 'Saqlandi',
 		send: "Jo'natish",
+		sendMessage: 'Xabar yuborish',
 		start: 'Boshlash',
 		close: 'Yopish',
 		add: "Qo'shish",
@@ -54,6 +57,7 @@ export default {
 		delete: "O'chirish",
 		search: 'Qidirish',
 		open: 'Ochish',
+		openInHistory: 'Tarixda ochish',
 		name: 'Nomi',
 		expand: 'Kengaytirish',
 		collapse: 'Yigʻish',
@@ -228,6 +232,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Ovozli',
 				[EngineRoutingSchemaType.Service]: 'Xizmat',
 				[EngineRoutingSchemaType.Processing]: 'Shakllar',
+				[EngineRoutingSchemaType.Default]: 'Turi yo‘q',
 			},
 		},
 		messengers: {
@@ -238,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Veb chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Maxsus chat shlyuzi',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Tezkor javob | Tezkor javoblar',
@@ -255,15 +261,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Xatolik',
 			},
 		},
-	},
-	importCSV: 'CSV import qilish',
-	CSV: {
-		skipHeaders: 'Sarlavhalarni o‘tkazib yuborish',
-		charSet: 'Belgilar to‘plami',
-		separator: 'Ajratgich',
-		CSVColumn: 'CSV ustuni',
-		fieldName: 'Maydon nomi',
-		clearMember: 'A’zoni tozalash',
+		importCSV: 'CSV import qilish',
+		CSV: {
+			skipHeaders: 'Sarlavhalarni o‘tkazib yuborish',
+			charSet: 'Belgilar to‘plami',
+			separator: 'Ajratgich',
+			CSVColumn: 'CSV ustuni',
+			fieldName: 'Maydon nomi',
+			clearMember: 'A’zoni tozalash',
+		},
 	},
 	channel: {
 		state: {
@@ -841,12 +847,19 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} saqlandi`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
 		},
-		info: {
-			passwordExpirationMessage:
-				'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
+		warnings: {
+			passwordExpirationMessageDays:
+				'Parolingiz {amount} kundan keyin amal qilishdan chiqadi',
+			passwordExpirationMessageHours:
+				'Parolingiz {amount} soatdan kam vaqtdan keyin amal qilishdan chiqadi',
+			licenseExpirationSoonMessage:
+				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
+			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
 	},

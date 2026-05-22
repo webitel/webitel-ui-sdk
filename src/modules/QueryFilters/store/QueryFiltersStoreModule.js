@@ -6,12 +6,11 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
 		GET_FILTERS: (state, getters) =>
 			Object.keys(state).reduce((filters, filterKey) => {
 				const filterValue = getters.GET_FILTER(filterKey);
-				return isEmpty(filterValue)
-					? filters
-					: {
-							...filters,
-							[filterKey]: filterValue,
-						};
+				if (isEmpty(filterValue)) {
+					return filters;
+				}
+				filters[filterKey] = filterValue;
+				return filters;
 			}, {}),
 		GET_FILTER: (state) => (filter) => {
 			const { value, storedProp, multiple } = state[filter];

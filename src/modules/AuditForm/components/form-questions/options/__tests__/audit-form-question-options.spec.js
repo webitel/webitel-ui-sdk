@@ -25,7 +25,7 @@ describe('AuditFormQuestionOptions', () => {
 		wrapper
 			.findComponent('.audit-form-question-options-write__add-button')
 			.vm.$emit('click');
-		expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(2);
+		expect(wrapper.emitted()['update:question'][0][0].options.length).toBe(2);
 	});
 	it('deletes existing question option at "delete" icon-btn click', () => {
 		const wrapper = mount(AuditFormQuestionOptions, {
@@ -42,7 +42,7 @@ describe('AuditFormQuestionOptions', () => {
 			name: 'audit-form-question-options-write-row',
 		});
 		writeRow.vm.$emit('delete');
-		expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(0);
+		expect(wrapper.emitted()['update:question'][0][0].options.length).toBe(0);
 	});
 	it('emits result change with selected radio option score', () => {
 		const score = 11;
@@ -62,10 +62,8 @@ describe('AuditFormQuestionOptions', () => {
 			.findComponent({
 				name: 'wt-radio',
 			})
-			.vm.$emit('input', {
-				score,
-			});
-		expect(wrapper.emitted()['change:result'][0][0]).toEqual({
+			.vm.$emit('update:selected', score);
+		expect(wrapper.emitted()['update:answer'][0][0]).toEqual({
 			score,
 		});
 	});

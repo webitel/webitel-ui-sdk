@@ -13,8 +13,8 @@ import applyTransform, {
 	starToSearch,
 } from '@webitel/ui-sdk/api/transformers/index';
 import {
-	EngineCreatePresetQueryRequest,
-	EnginePresetQuery,
+	type EngineCreatePresetQueryRequest,
+	type EnginePresetQuery,
 	PresetQueryServiceApiFactory,
 } from 'webitel-sdk';
 

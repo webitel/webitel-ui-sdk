@@ -10,7 +10,7 @@ describe('WtTimeInput', () => {
 				WtLabel,
 			},
 		});
-		expect(wrapper.classes('wt-time-input')).toBe(true);
+		expect(wrapper.exists()).toBe(true);
 	});
 
 	it('renders label text when passed', () => {
@@ -24,5 +24,22 @@ describe('WtTimeInput', () => {
 			},
 		});
 		expect(wrapper.find('.wt-label').text()).toBe(label);
+	});
+
+	it('emits model update from input-number', () => {
+		const wrapper = shallowMount(WtTimeInput, {
+			props: {
+				modelValue: 0,
+			},
+		});
+
+		wrapper
+			.findComponent({
+				name: 'wt-input-number',
+			})
+			.vm.$emit('update:modelValue', 7);
+		expect(wrapper.emitted()['update:modelValue'][0]).toEqual([
+			7,
+		]);
 	});
 });

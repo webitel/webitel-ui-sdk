@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -42,6 +44,7 @@ export default {
 		saveAs: 'Lưu như',
 		saved: 'Đã lưu',
 		send: 'Gửi',
+		sendMessage: 'Gửi tin nhắn',
 		start: 'Bắt đầu',
 		close: 'Đóng',
 		add: 'Thêm',
@@ -54,6 +57,7 @@ export default {
 		delete: 'Xóa',
 		search: 'Tìm kiếm',
 		open: 'Mở',
+		openInHistory: 'Mở trong lịch sử',
 		name: 'Tên',
 		expand: 'Mở rộng',
 		collapse: 'Thu gọn',
@@ -228,6 +232,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Thoại',
 				[EngineRoutingSchemaType.Service]: 'Dịch vụ',
 				[EngineRoutingSchemaType.Processing]: 'Biểu mẫu',
+				[EngineRoutingSchemaType.Default]: 'Không có loại',
 			},
 		},
 		messengers: {
@@ -238,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Cổng kết nối chat tùy chỉnh',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Trả lời nhanh | Trả lời nhanh',
@@ -254,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Lỗi',
 			},
 		},
-	},
-	importCSV: 'Nhập CSV',
-	CSV: {
-		skipHeaders: 'Bỏ qua tiêu đề',
-		charSet: 'Bộ ký tự',
-		separator: 'Dấu phân cách',
-		CSVColumn: 'Cột CSV',
-		fieldName: 'Tên trường',
-		clearMember: 'Xóa thành viên',
+		importCSV: 'Nhập CSV',
+		CSV: {
+			skipHeaders: 'Bỏ qua tiêu đề',
+			charSet: 'Bộ ký tự',
+			separator: 'Dấu phân cách',
+			CSVColumn: 'Cột CSV',
+			fieldName: 'Tên trường',
+			clearMember: 'Xóa thành viên',
+		},
 	},
 	channel: {
 		state: {
@@ -841,12 +847,18 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} đã được lưu`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
 		},
-		info: {
-			passwordExpirationMessage:
-				'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
+		warnings: {
+			passwordExpirationMessageDays:
+				'Mật khẩu của bạn sẽ hết hạn sau { amount } ngày',
+			passwordExpirationMessageHours:
+				'Mật khẩu của bạn sẽ hết hạn sau ít hơn { amount } giờ',
+			licenseExpirationSoonMessage:
+				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
+			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
 	},

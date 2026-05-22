@@ -1,5 +1,5 @@
-import { RegleSchema } from '@regle/schemas';
-import { computed, Ref } from 'vue';
+import type { RegleSchema } from '@regle/schemas';
+import { computed, type Ref } from 'vue';
 
 export const useCardValidation = <TState, TSchema>({
 	validationSchema,

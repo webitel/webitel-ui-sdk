@@ -83,6 +83,7 @@ export const ReadUser2Response = zod.object({
 						expiresAt: zod.string().optional(),
 						id: zod.string().optional(),
 						issuedAt: zod.string().optional(),
+						name: zod.string().optional(),
 						prod: zod.string().optional(),
 						scope: zod.array(zod.string()).optional(),
 						user: zod
@@ -226,6 +227,7 @@ export const DeleteUsers2Response = zod.object({
 								expiresAt: zod.string().optional(),
 								id: zod.string().optional(),
 								issuedAt: zod.string().optional(),
+								name: zod.string().optional(),
 								prod: zod.string().optional(),
 								scope: zod.array(zod.string()).optional(),
 								user: zod
@@ -417,6 +419,7 @@ export const SearchUsersResponse = zod.object({
 								expiresAt: zod.string().optional(),
 								id: zod.string().optional(),
 								issuedAt: zod.string().optional(),
+								name: zod.string().optional(),
 								prod: zod.string().optional(),
 								scope: zod.array(zod.string()).optional(),
 								user: zod
@@ -485,7 +488,6 @@ export const SearchUsersResponse = zod.object({
 });
 
 export const CreateUserBody = zod.object({
-	confirmPassword: zod.string().optional(),
 	user: zod
 		.object({
 			chatName: zod
@@ -557,6 +559,7 @@ export const CreateUserBody = zod.object({
 						expiresAt: zod.string().optional(),
 						id: zod.string().optional(),
 						issuedAt: zod.string().optional(),
+						name: zod.string().optional(),
 						prod: zod.string().optional(),
 						scope: zod.array(zod.string()).optional(),
 						user: zod
@@ -616,7 +619,6 @@ export const CreateUserBody = zod.object({
 		})
 		.optional()
 		.describe('User profile.'),
-	userPassword: zod.string().optional(),
 });
 
 export const CreateUserResponse = zod.object({
@@ -691,6 +693,7 @@ export const CreateUserResponse = zod.object({
 						expiresAt: zod.string().optional(),
 						id: zod.string().optional(),
 						issuedAt: zod.string().optional(),
+						name: zod.string().optional(),
 						prod: zod.string().optional(),
 						scope: zod.array(zod.string()).optional(),
 						user: zod
@@ -878,6 +881,7 @@ export const SearchUsers2Response = zod.object({
 								expiresAt: zod.string().optional(),
 								id: zod.string().optional(),
 								issuedAt: zod.string().optional(),
+								name: zod.string().optional(),
 								prod: zod.string().optional(),
 								scope: zod.array(zod.string()).optional(),
 								user: zod
@@ -943,6 +947,43 @@ export const SearchUsers2Response = zod.object({
 	next: zod.boolean().optional(),
 	page: zod.number().optional(),
 	size: zod.number().optional(),
+});
+
+export const getUserWarningsResponseWarningsItemIdDefault = `user_warning_id_unspecified`;
+
+export const GetUserWarningsResponse = zod.object({
+	warnings: zod
+		.array(
+			zod.object({
+				detail: zod.string().optional(),
+				id: zod
+					.enum([
+						'user_warning_id_unspecified',
+						'password_expires_soon',
+						'license_expires_soon',
+						'license_expired',
+					])
+					.default(getUserWarningsResponseWarningsItemIdDefault),
+				warningData: zod
+					.object({
+						licenseExpiry: zod
+							.object({
+								daysRemaining: zod.string().optional(),
+								expiresAt: zod.string().optional(),
+								licenseName: zod.string().optional(),
+							})
+							.optional(),
+						passwordExpiry: zod
+							.object({
+								daysRemaining: zod.string().optional(),
+								expiresAt: zod.string().optional(),
+							})
+							.optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
 });
 
 export const DeleteUsersParams = zod.object({
@@ -1031,6 +1072,7 @@ export const DeleteUsersResponse = zod.object({
 								expiresAt: zod.string().optional(),
 								id: zod.string().optional(),
 								issuedAt: zod.string().optional(),
+								name: zod.string().optional(),
 								prod: zod.string().optional(),
 								scope: zod.array(zod.string()).optional(),
 								user: zod
@@ -1175,6 +1217,7 @@ export const ReadUserResponse = zod.object({
 						expiresAt: zod.string().optional(),
 						id: zod.string().optional(),
 						issuedAt: zod.string().optional(),
+						name: zod.string().optional(),
 						prod: zod.string().optional(),
 						scope: zod.array(zod.string()).optional(),
 						user: zod
@@ -1266,22 +1309,6 @@ export const UpdateUser2Body = zod.object({
 		})
 		.optional()
 		.describe('[optional] contact connected to this user'),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
-	deletedAt: zod.string().optional(),
-	deletedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
 	device: zod
 		.object({
 			id: zod.string().optional(),
@@ -1321,6 +1348,7 @@ export const UpdateUser2Body = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod
@@ -1368,14 +1396,6 @@ export const UpdateUser2Body = zod.object({
 		)
 		.optional(),
 	totpUrl: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
 	username: zod.string().optional(),
 });
 
@@ -1450,6 +1470,7 @@ export const UpdateUser2Response = zod
 					expiresAt: zod.string().optional(),
 					id: zod.string().optional(),
 					issuedAt: zod.string().optional(),
+					name: zod.string().optional(),
 					prod: zod.string().optional(),
 					scope: zod.array(zod.string()).optional(),
 					user: zod
@@ -1531,22 +1552,6 @@ export const UpdateUserBody = zod.object({
 		})
 		.optional()
 		.describe('[optional] contact connected to this user'),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
-	deletedAt: zod.string().optional(),
-	deletedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
 	device: zod
 		.object({
 			id: zod.string().optional(),
@@ -1586,6 +1591,7 @@ export const UpdateUserBody = zod.object({
 				expiresAt: zod.string().optional(),
 				id: zod.string().optional(),
 				issuedAt: zod.string().optional(),
+				name: zod.string().optional(),
 				prod: zod.string().optional(),
 				scope: zod.array(zod.string()).optional(),
 				user: zod
@@ -1633,14 +1639,6 @@ export const UpdateUserBody = zod.object({
 		)
 		.optional(),
 	totpUrl: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-		})
-		.optional()
-		.describe('UserId lookup value.'),
 	username: zod.string().optional(),
 });
 
@@ -1715,6 +1713,7 @@ export const UpdateUserResponse = zod
 					expiresAt: zod.string().optional(),
 					id: zod.string().optional(),
 					issuedAt: zod.string().optional(),
+					name: zod.string().optional(),
 					prod: zod.string().optional(),
 					scope: zod.array(zod.string()).optional(),
 					user: zod

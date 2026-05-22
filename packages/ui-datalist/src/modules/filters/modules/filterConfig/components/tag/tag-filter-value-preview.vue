@@ -22,12 +22,13 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const tags = computed(() => {
-	const tagLocaleMap = CallHistoryTagFilterOptions.reduce((acc, option) => {
-		return {
-			...acc,
-			[option.value]: option.locale,
-		};
-	}, {});
+	const tagLocaleMap = CallHistoryTagFilterOptions.reduce(
+		(acc, option) => {
+			acc[option.value] = option.locale;
+			return acc;
+		},
+		{} as Record<string, string>,
+	);
 
 	return props.value.map((tag) => {
 		return t(tagLocaleMap[tag]) || tag;

@@ -1,10 +1,6 @@
 import type { Component } from 'vue';
 
-import {
-	CustomFilterOption,
-	FilterOption,
-	FilterOptionName,
-} from '../enums/FilterOption';
+import { FilterOption, type FilterOptionName } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
@@ -131,20 +127,12 @@ import VariableFilterPreview from './variable/variable-filter-value-preview.vue'
 export {
 	AgentFilter,
 	AgentFilterPreview,
-	SkillFilter,
-	SkillFilterPreview,
-	SupervisorFilter,
-	SupervisorFilterPreview,
-	AuditorFilter,
-	AuditorFilterPreview,
-	RegionFilter,
-	RegionFilterPreview,
 	AgentStatusFilter,
 	AgentStatusFilterPreview,
-	UtilizationProgressFilter,
-	UtilizationProgressFilterPreview,
 	AmdResultFilter,
 	AmdResultFilterPreview,
+	AuditorFilter,
+	AuditorFilterPreview,
 	CallDirectionFilterValueField,
 	CallDirectionFilterValuePreview,
 	CaseActualReactionTimeFilterValueField,
@@ -202,16 +190,22 @@ export {
 	HasUserFilterPreview,
 	QueueFilter,
 	QueueFilterPreview,
-	QueueTypeFilter,
-	QueueTypeFilterPreview,
 	QueuePeriodFilter,
 	QueuePeriodFilterPreview,
+	QueueTypeFilter,
+	QueueTypeFilterPreview,
 	RatedByFilter,
 	RatedByFilterPreview,
 	RatingFromToFilter,
 	RatingFromToFilterPreview,
+	RegionFilter,
+	RegionFilterPreview,
 	ScoreFilter,
 	ScoreFilterPreview,
+	SkillFilter,
+	SkillFilterPreview,
+	SupervisorFilter,
+	SupervisorFilterPreview,
 	TagFilter,
 	TagFilterPreview,
 	TalkDurationFilter,
@@ -222,6 +216,8 @@ export {
 	TotalDurationFilterPreview,
 	UserFilter,
 	UserFilterPreview,
+	UtilizationProgressFilter,
+	UtilizationProgressFilterPreview,
 	VariableFilter,
 	VariableFilterPreview,
 };

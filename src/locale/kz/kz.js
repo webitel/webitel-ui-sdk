@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -42,6 +44,7 @@ export default {
 		saveAs: 'Басқаша сақтау',
 		saved: 'Сақталды',
 		send: 'Жіберу',
+		sendMessage: 'Хабар жіберу',
 		start: 'Бастау',
 		close: 'Жабу',
 		add: 'Қосу',
@@ -54,6 +57,7 @@ export default {
 		delete: 'Жою',
 		search: 'Іздеу',
 		open: 'Ашу',
+		openInHistory: 'Тарихта ашу',
 		name: 'Атау',
 		expand: 'Кеңейту',
 		collapse: 'Жігу',
@@ -228,6 +232,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Дауыс',
 				[EngineRoutingSchemaType.Service]: 'Қызмет',
 				[EngineRoutingSchemaType.Processing]: 'Пішіндер',
+				[EngineRoutingSchemaType.Default]: 'Түрі жоқ',
 			},
 		},
 		messengers: {
@@ -238,6 +243,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Web chat',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Жылдам жауап | Жылдам жауаптар',
@@ -254,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Қате',
 			},
 		},
-	},
-	importCSV: 'CSV импорттау',
-	CSV: {
-		skipHeaders: 'Тақырыптарды өткізіп жіберу',
-		charSet: 'Таңбалар жиыны',
-		separator: 'Бөлгіш',
-		CSVColumn: 'CSV бағаны',
-		fieldName: 'Өріс атауы',
-		clearMember: 'Мүшені тазалау',
+		importCSV: 'CSV импорттау',
+		CSV: {
+			skipHeaders: 'Тақырыптарды өткізіп жіберу',
+			charSet: 'Таңбалар жиыны',
+			separator: 'Бөлгіш',
+			CSVColumn: 'CSV бағаны',
+			fieldName: 'Өріс атауы',
+			clearMember: 'Мүшені тазалау',
+		},
 	},
 	channel: {
 		state: {
@@ -321,11 +327,9 @@ export default {
 						': ' +
 						linked('objects.case'),
 					[CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-						linked('objects.customization.customization') +
-						': ' +
-						linked('objects.contact'),
+						`${linked('objects.customization.customization')}: ${linked('objects.contact')}`,
 					[CrmSectionsNew.CustomLookups]: ({ linked }) =>
-						linked('objects.customization.customization') + ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+						`${linked('objects.customization.customization')}: Жекелендірулер`, // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
 				},
 			},
 		},
@@ -840,12 +844,18 @@ export default {
 			create: ({ named }) => `${named('entity').toLowerCase()} сақталды`,
 			delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
 		},
-		info: {
-			passwordExpirationMessage:
-				'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады',
+		warnings: {
+			passwordExpirationMessageDays:
+				'Сіздің құпия сөзіңіз {amount} күннен кейін мерзімі аяқталады',
+			passwordExpirationMessageHours:
+				'Сіздің құпия сөзіңіз {amount} сағаттан аз уақыттан кейін мерзімі аяқталады',
+			licenseExpirationSoonMessage:
+				'Сіздің лицензия {name} {amount} күннен кейін мерзімі аяқталады',
+			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
 	},

@@ -1,4 +1,4 @@
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 export const useInputControl = (input) => {
 	// inputnumber has span wrapper while inputtext hasnt

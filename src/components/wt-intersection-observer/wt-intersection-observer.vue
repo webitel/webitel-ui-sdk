@@ -27,7 +27,7 @@ const emit = defineEmits([
 
 const intersectionTarget = ref(null);
 
-let stopObs;
+let stopObs: (() => void) | undefined;
 
 onMounted(() => {
 	/**

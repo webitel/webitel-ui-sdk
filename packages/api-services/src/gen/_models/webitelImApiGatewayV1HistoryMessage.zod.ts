@@ -7,7 +7,10 @@
 import type { WebitelImApiGatewayV1Document } from './webitelImApiGatewayV1Document';
 import type { WebitelImApiGatewayV1HistoryMessageMetadata } from './webitelImApiGatewayV1HistoryMessageMetadata';
 import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
-import type { WebitelImApiGatewayV1MessageParticipant } from './webitelImApiGatewayV1MessageParticipant';
+import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive';
+import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact';
+import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation';
+import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 /**
  * HistoryMessage represents a single message
@@ -16,23 +19,26 @@ in thread history.
 export interface WebitelImApiGatewayV1HistoryMessage {
 	/** Message body content. */
 	body?: string;
+	contact?: WebitelImApiGatewayV1MessageContact;
 	/** Message creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
 	/** List of document attachments. */
 	documents?: WebitelImApiGatewayV1Document[];
+	/** Message last update timestamp (Unix time, milliseconds). */
+	editedAt?: string;
 	/** Unique message identifier. */
 	id?: string;
 	/** List of image attachments. */
 	images?: WebitelImApiGatewayV1Image[];
+	interactive?: WebitelImApiGatewayV1Interactive;
+	location?: WebitelImApiGatewayV1MessageLocation;
 	/** Arbitrary message metadata.
 Can contain structured data depending on message type. */
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
 	/** Sender user aggregated information. */
-	sender?: WebitelImApiGatewayV1MessageParticipant;
+	sender?: WebitelImApiGatewayV1ThreadMember;
 	/** Identifier of the thread the message belongs to. */
 	threadId?: string;
 	/** Message type identifier. */
 	type?: number;
-	/** Message last update timestamp (Unix time, milliseconds). */
-	updatedAt?: string;
 }

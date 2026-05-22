@@ -20,7 +20,7 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Filter by specific thread IDs.'),
-	kinds: zod
+	types: zod
 		.array(
 			zod.enum([
 				'UNKNOWN',
@@ -50,48 +50,22 @@ export const ThreadManagementSearchQueryParams = zod.object({
 			'Sorting field.\nOptional "+" or "-" prefix indicates ascending or descending order.\nExample: "-created_at", "subject"',
 		),
 	page: zod.number().optional().describe('Page number (1-based).'),
+	contactIds: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter threads by participant contact IDs.'),
 });
 
-export const threadManagementSearchResponseThreadsItemKindDefault = `UNKNOWN`;
+export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemTypeDefault = `UNKNOWN`;
 
 export const ThreadManagementSearchResponse = zod
 	.object({
-		next: zod
-			.boolean()
-			.optional()
-			.describe('Indicates whether there is a next page available.'),
-		threads: zod
+		items: zod
 			.array(
 				zod
 					.object({
-						admins: zod
-							.array(
-								zod
-									.object({
-										issuer: zod
-											.string()
-											.optional()
-											.describe('Client issuer for the sender.'),
-										subject: zod
-											.string()
-											.optional()
-											.describe(
-												'Client-readable participant subject or display name.',
-											),
-										type: zod.string().optional().describe('Participant type.'),
-										username: zod
-											.string()
-											.optional()
-											.describe('Participant name.'),
-									})
-									.describe(
-										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
-									),
-							)
-							.optional()
-							.describe(
-								'List of users aggregated information with admin privileges.',
-							),
 						createdAt: zod
 							.string()
 							.optional()
@@ -101,46 +75,25 @@ export const ThreadManagementSearchResponse = zod
 							.optional()
 							.describe('Optional thread description.'),
 						id: zod.string().optional().describe('Unique thread identifier.'),
-						kind: zod
-							.enum([
-								'UNKNOWN',
-								'DIRECT',
-								'GROUP',
-								'CHANNEL',
-							])
-							.default(threadManagementSearchResponseThreadsItemKindDefault)
-							.describe('Type of the thread.'),
-						memberIds: zod
-							.array(
-								zod
+						lastMsg: zod
+							.object({
+								body: zod.string().optional().describe('Message body content.'),
+								contact: zod
 									.object({
-										issuer: zod
-											.string()
-											.optional()
-											.describe('Client issuer for the sender.'),
-										subject: zod
-											.string()
-											.optional()
-											.describe(
-												'Client-readable participant subject or display name.',
-											),
-										type: zod.string().optional().describe('Participant type.'),
-										username: zod
-											.string()
-											.optional()
-											.describe('Participant name.'),
+										email: zod.string().optional(),
+										name: zod.string().optional(),
+										phone: zod.string().optional(),
 									})
+									.optional(),
+								createdAt: zod
+									.string()
+									.optional()
 									.describe(
-										'ExternalParticipant represents aggregated participant information\npresent in the thread history response.',
+										'Message creation timestamp (Unix time, milliseconds).',
 									),
-							)
-							.optional()
-							.describe('List of member users aggregated information.'),
-						members: zod
-							.array(
-								zod
-									.object({
-										directSettings: zod
+								documents: zod
+									.array(
+										zod
 											.object({
 												createdAt: zod
 													.string()
@@ -148,54 +101,582 @@ export const ThreadManagementSearchResponse = zod
 													.describe(
 														'Creation timestamp (Unix time, milliseconds).',
 													),
-												domainId: zod
-													.number()
+												fileId: zod
+													.string()
 													.optional()
-													.describe('Domain identifier.'),
+													.describe('File storage identifier.'),
 												id: zod
 													.string()
 													.optional()
-													.describe('Settings identifier.'),
-												title: zod
+													.describe('Document identifier.'),
+												messageId: zod
 													.string()
 													.optional()
 													.describe(
-														'Custom title for the direct thread.\nUsually represents the display name of the conversation.',
+														'Identifier of the message this document belongs to.',
+													),
+												mime: zod
+													.string()
+													.optional()
+													.describe('MIME type of the document.'),
+												name: zod
+													.string()
+													.optional()
+													.describe('Original file name.'),
+												size: zod
+													.string()
+													.optional()
+													.describe('File size in bytes.'),
+												url: zod
+													.string()
+													.optional()
+													.describe(
+														'Public signed URL for downloading the document.',
+													),
+											})
+											.describe(
+												'Document represents a file attachment\nassociated with a message.',
+											),
+									)
+									.optional()
+									.describe('List of document attachments.'),
+								editedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Message last update timestamp (Unix time, milliseconds).',
+									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique message identifier.'),
+								images: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Creation timestamp (Unix time, milliseconds).',
+													),
+												fileId: zod
+													.string()
+													.optional()
+													.describe('File storage identifier.'),
+												height: zod
+													.number()
+													.optional()
+													.describe('Image height in pixels.'),
+												id: zod
+													.string()
+													.optional()
+													.describe('Image identifier.'),
+												messageId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the message this message belongs to.',
+													),
+												mime: zod
+													.string()
+													.optional()
+													.describe('MIME type of the image.'),
+												url: zod
+													.string()
+													.optional()
+													.describe(
+														'Public signed URL for accessing the image.',
+													),
+												width: zod
+													.number()
+													.optional()
+													.describe('Image width in pixels.'),
+											})
+											.describe(
+												'Image represents an image attachment\nassociated with a message.',
+											),
+									)
+									.optional()
+									.describe('List of image attachments.'),
+								interactive: zod
+									.object({
+										documents: zod
+											.object({
+												documents: zod
+													.array(
+														zod
+															.object({
+																fileName: zod.string().optional(),
+																id: zod.string().optional(),
+																mimeType: zod.string().optional(),
+																sizeBytes: zod.string().optional(),
+																url: zod.string().optional(),
+															})
+															.describe(
+																'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
+															),
+													)
+													.optional()
+													.describe(
+														'Documents to be attached to the header of interactive message.\nMax allowed documents: 10.',
+													),
+											})
+											.optional()
+											.describe('Document attachments header.'),
+										images: zod
+											.object({
+												images: zod
+													.array(
+														zod
+															.object({
+																id: zod.string().optional(),
+																link: zod.string().optional(),
+																mimeType: zod.string().optional(),
+																name: zod.string().optional(),
+															})
+															.describe(
+																'Represents `Image` entity with\nnecessary fields.',
+															),
+													)
+													.optional()
+													.describe(
+														'Images to be attached to the header of interactive message.\nMax allowed images: 10.',
+													),
+											})
+											.optional()
+											.describe('Images attachment header.'),
+										listReply: zod
+											.object({
+												mainButtonTitle: zod
+													.string()
+													.optional()
+													.describe(
+														'Title of the main button, that on-click show up list.',
+													),
+												sections: zod
+													.array(
+														zod
+															.object({
+																buttons: zod
+																	.array(
+																		zod
+																			.object({
+																				callback: zod
+																					.object({
+																						data: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'Opaque data payload passed back to the server upon interaction.',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Triggers a backend event (callback) with associated metadata.',
+																					),
+																				id: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																					),
+																				label: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'The human-readable label displayed on the button.',
+																					),
+																				metadata: zod
+																					.looseObject({})
+																					.optional()
+																					.describe(
+																						'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																					),
+																				request: zod
+																					.object({
+																						action: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'The specific action to be performed by the client application.',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Requests sensitive information from the client (e.g., location or contact).',
+																					),
+																				url: zod
+																					.object({
+																						url: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'Must be a valid absolute URI (e.g., https://example.com).',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Directs the user to an external web resource.',
+																					),
+																			})
+																			.describe(
+																				'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+																			),
+																	)
+																	.optional()
+																	.describe(
+																		'Collection of buttons within this section.\nMinimum of 1 button is required to prevent empty sections.',
+																	),
+																section: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'The header text for this section. Must be concise and descriptive.',
+																	),
+															})
+															.describe(
+																'Represents a row of buttons grouped under a specific logical section header.\nUseful for creating categorized menus or structured interactive interfaces.',
+															),
+													)
+													.optional()
+													.describe('List with sections with buttons.'),
+											})
+											.optional()
+											.describe(
+												'List reply with main list button text and sections with buttons.',
+											),
+										markup: zod
+											.object({
+												rows: zod
+													.array(
+														zod
+															.object({
+																buttons: zod
+																	.array(
+																		zod
+																			.object({
+																				callback: zod
+																					.object({
+																						data: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'Opaque data payload passed back to the server upon interaction.',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Triggers a backend event (callback) with associated metadata.',
+																					),
+																				id: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																					),
+																				label: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'The human-readable label displayed on the button.',
+																					),
+																				metadata: zod
+																					.looseObject({})
+																					.optional()
+																					.describe(
+																						'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																					),
+																				request: zod
+																					.object({
+																						action: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'The specific action to be performed by the client application.',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Requests sensitive information from the client (e.g., location or contact).',
+																					),
+																				url: zod
+																					.object({
+																						url: zod
+																							.string()
+																							.optional()
+																							.describe(
+																								'Must be a valid absolute URI (e.g., https://example.com).',
+																							),
+																					})
+																					.optional()
+																					.describe(
+																						'Directs the user to an external web resource.',
+																					),
+																			})
+																			.describe(
+																				'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+																			),
+																	)
+																	.optional()
+																	.describe(
+																		'Horizontal collection of buttons.\nCapped at 10 to ensure UI responsiveness and prevent overflow.',
+																	),
+															})
+															.describe(
+																'A standard horizontal row of interactive buttons without a section header.',
+															),
+													)
+													.optional()
+													.describe('Rows of buttons matrix.'),
+											})
+											.optional()
+											.describe('Markup matrix with buttons.'),
+										singleUse: zod
+											.boolean()
+											.optional()
+											.describe('Force to block user keyboard.'),
+									})
+									.optional()
+									.describe(
+										'Interactive represents a rich message with UI elements.',
+									),
+								location: zod
+									.object({
+										address: zod.string().optional(),
+										latitude: zod.number().optional(),
+										longitude: zod.number().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								metadata: zod
+									.looseObject({})
+									.optional()
+									.describe(
+										'Arbitrary message metadata.\nCan contain structured data depending on message type.',
+									),
+								sender: zod
+									.object({
+										contact: zod
+											.object({
+												appId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
 													),
 												updatedAt: zod
 													.string()
 													.optional()
 													.describe(
-														'Last update timestamp (Unix time, milliseconds).',
+														'Last record update timestamp (Unix Epoch in milliseconds).',
 													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contactId: zod.string().optional(),
+															createdAt: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disableReason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updatedAt: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
 											})
 											.optional()
 											.describe(
-												'Direct thread specific settings.\nPresent only for DIRECT threads.',
+												'Contact represents an external messaging identity.',
 											),
-										member: zod
+										id: zod.string().optional(),
+										permissions: zod
 											.object({
-												issuer: zod
-													.string()
-													.optional()
-													.describe('Client issuer for the sender.'),
-												subject: zod
+												canAddMembers: zod.boolean().optional(),
+												canChangeMembersPermissions: zod.boolean().optional(),
+												canChangeThreadInfo: zod.boolean().optional(),
+												canRemoveMembers: zod.boolean().optional(),
+												canSendMessages: zod.boolean().optional(),
+												createdAt: zod.string().optional(),
+												id: zod.string().optional(),
+												memberId: zod.string().optional(),
+												updatedAt: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault,
+											),
+									})
+									.optional()
+									.describe('Sender user aggregated information.'),
+								threadId: zod
+									.string()
+									.optional()
+									.describe('Identifier of the thread the message belongs to.'),
+								type: zod
+									.number()
+									.optional()
+									.describe('Message type identifier.'),
+							})
+							.optional()
+							.describe('Last message of the linked thread.'),
+						members: zod
+							.array(
+								zod
+									.object({
+										contact: zod
+											.object({
+												appId: zod
 													.string()
 													.optional()
 													.describe(
-														'Client-readable participant subject or display name.',
+														'Identifier of the specific integration app or bot.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
 													),
 												type: zod
 													.string()
 													.optional()
-													.describe('Participant type.'),
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
 												username: zod
 													.string()
 													.optional()
-													.describe('Participant name.'),
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contactId: zod.string().optional(),
+															createdAt: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disableReason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updatedAt: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
 											})
 											.optional()
-											.describe('User aggregated information.'),
+											.describe(
+												'Contact represents an external messaging identity.',
+											),
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												canAddMembers: zod.boolean().optional(),
+												canChangeMembersPermissions: zod.boolean().optional(),
+												canChangeThreadInfo: zod.boolean().optional(),
+												canRemoveMembers: zod.boolean().optional(),
+												canSendMessages: zod.boolean().optional(),
+												createdAt: zod.string().optional(),
+												id: zod.string().optional(),
+												memberId: zod.string().optional(),
+												updatedAt: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemMembersItemRoleDefault,
+											),
 									})
 									.describe(
 										'ThreadMember represents a thread participant\nwith optional type-specific settings.',
@@ -203,31 +684,156 @@ export const ThreadManagementSearchResponse = zod
 							)
 							.optional()
 							.describe('Detailed member information.'),
-						owner: zod
+						settings: zod
 							.object({
-								issuer: zod
+								createdAt: zod
 									.string()
 									.optional()
-									.describe('Client issuer for the sender.'),
-								subject: zod
+									.describe('Creation timestamp (Unix time, milliseconds).'),
+								domainId: zod
+									.number()
+									.optional()
+									.describe('Domain identifier.'),
+								id: zod.string().optional().describe('Settings identifier.'),
+								title: zod
 									.string()
 									.optional()
 									.describe(
-										'Client-readable participant subject or display name.',
+										'Custom title for the direct thread.\nUsually represents the display name of the conversation.',
 									),
-								type: zod.string().optional().describe('Participant type.'),
-								username: zod.string().optional().describe('Participant name.'),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe('Last update timestamp (Unix time, milliseconds).'),
 							})
 							.optional()
-							.describe('Aggregated user information of the thread owner.'),
+							.describe('User-specific settings for this thread.'),
 						subject: zod
 							.string()
 							.optional()
 							.describe('Thread subject or title.'),
+						type: zod
+							.enum([
+								'UNKNOWN',
+								'DIRECT',
+								'GROUP',
+								'CHANNEL',
+							])
+							.default(threadManagementSearchResponseItemsItemTypeDefault)
+							.describe('Type of the thread.'),
 						updatedAt: zod
 							.string()
 							.optional()
 							.describe('Last update timestamp (Unix time, milliseconds).'),
+						variables: zod
+							.object({
+								threadId: zod
+									.string()
+									.optional()
+									.describe('Unique identifier for the thread.'),
+								variables: zod
+									.record(
+										zod.string(),
+										zod
+											.object({
+												setAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp when the variable was set (Unix time, milliseconds).',
+													),
+												setBy: zod
+													.object({
+														appId: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														createdAt: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														isBot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updatedAt: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contactId: zod.string().optional(),
+																	createdAt: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disableReason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updatedAt: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe('Contact who set the variable.'),
+												value: zod
+													.looseObject({})
+													.optional()
+													.describe(
+														'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+													),
+											})
+											.describe(
+												'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+											),
+									)
+									.optional()
+									.describe(
+										'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+									),
+							})
+							.optional()
+							.describe('Optional variables associated with the thread.'),
 					})
 					.describe(
 						'Thread represents a thread (aka chat or conversation) entity.',
@@ -235,7 +841,1522 @@ export const ThreadManagementSearchResponse = zod
 			)
 			.optional()
 			.describe('List of threads matching the search criteria.'),
+		next: zod
+			.boolean()
+			.optional()
+			.describe('Indicates whether there is a next page available.'),
 	})
 	.describe(
 		'SearchThreadResponse contains the list of threads\nand pagination metadata.',
+	);
+
+/**
+ * @summary Returns a single thread by its identifier.
+ */
+export const ThreadManagementGetParams = zod.object({
+	id: zod.string().describe('Unique thread identifier.'),
+});
+
+export const ThreadManagementGetQueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('List of fields to include in the response.'),
+});
+
+export const threadManagementGetResponseLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementGetResponseMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementGetResponseTypeDefault = `UNKNOWN`;
+
+export const ThreadManagementGetResponse = zod
+	.object({
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('Thread creation timestamp (Unix time, milliseconds).'),
+		description: zod
+			.string()
+			.optional()
+			.describe('Optional thread description.'),
+		id: zod.string().optional().describe('Unique thread identifier.'),
+		lastMsg: zod
+			.object({
+				body: zod.string().optional().describe('Message body content.'),
+				contact: zod
+					.object({
+						email: zod.string().optional(),
+						name: zod.string().optional(),
+						phone: zod.string().optional(),
+					})
+					.optional(),
+				createdAt: zod
+					.string()
+					.optional()
+					.describe('Message creation timestamp (Unix time, milliseconds).'),
+				documents: zod
+					.array(
+						zod
+							.object({
+								createdAt: zod
+									.string()
+									.optional()
+									.describe('Creation timestamp (Unix time, milliseconds).'),
+								fileId: zod
+									.string()
+									.optional()
+									.describe('File storage identifier.'),
+								id: zod.string().optional().describe('Document identifier.'),
+								messageId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the message this document belongs to.',
+									),
+								mime: zod
+									.string()
+									.optional()
+									.describe('MIME type of the document.'),
+								name: zod.string().optional().describe('Original file name.'),
+								size: zod.string().optional().describe('File size in bytes.'),
+								url: zod
+									.string()
+									.optional()
+									.describe('Public signed URL for downloading the document.'),
+							})
+							.describe(
+								'Document represents a file attachment\nassociated with a message.',
+							),
+					)
+					.optional()
+					.describe('List of document attachments.'),
+				editedAt: zod
+					.string()
+					.optional()
+					.describe('Message last update timestamp (Unix time, milliseconds).'),
+				id: zod.string().optional().describe('Unique message identifier.'),
+				images: zod
+					.array(
+						zod
+							.object({
+								createdAt: zod
+									.string()
+									.optional()
+									.describe('Creation timestamp (Unix time, milliseconds).'),
+								fileId: zod
+									.string()
+									.optional()
+									.describe('File storage identifier.'),
+								height: zod
+									.number()
+									.optional()
+									.describe('Image height in pixels.'),
+								id: zod.string().optional().describe('Image identifier.'),
+								messageId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the message this message belongs to.',
+									),
+								mime: zod
+									.string()
+									.optional()
+									.describe('MIME type of the image.'),
+								url: zod
+									.string()
+									.optional()
+									.describe('Public signed URL for accessing the image.'),
+								width: zod
+									.number()
+									.optional()
+									.describe('Image width in pixels.'),
+							})
+							.describe(
+								'Image represents an image attachment\nassociated with a message.',
+							),
+					)
+					.optional()
+					.describe('List of image attachments.'),
+				interactive: zod
+					.object({
+						documents: zod
+							.object({
+								documents: zod
+									.array(
+										zod
+											.object({
+												fileName: zod.string().optional(),
+												id: zod.string().optional(),
+												mimeType: zod.string().optional(),
+												sizeBytes: zod.string().optional(),
+												url: zod.string().optional(),
+											})
+											.describe(
+												'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
+											),
+									)
+									.optional()
+									.describe(
+										'Documents to be attached to the header of interactive message.\nMax allowed documents: 10.',
+									),
+							})
+							.optional()
+							.describe('Document attachments header.'),
+						images: zod
+							.object({
+								images: zod
+									.array(
+										zod
+											.object({
+												id: zod.string().optional(),
+												link: zod.string().optional(),
+												mimeType: zod.string().optional(),
+												name: zod.string().optional(),
+											})
+											.describe(
+												'Represents `Image` entity with\nnecessary fields.',
+											),
+									)
+									.optional()
+									.describe(
+										'Images to be attached to the header of interactive message.\nMax allowed images: 10.',
+									),
+							})
+							.optional()
+							.describe('Images attachment header.'),
+						listReply: zod
+							.object({
+								mainButtonTitle: zod
+									.string()
+									.optional()
+									.describe(
+										'Title of the main button, that on-click show up list.',
+									),
+								sections: zod
+									.array(
+										zod
+											.object({
+												buttons: zod
+													.array(
+														zod
+															.object({
+																callback: zod
+																	.object({
+																		data: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Opaque data payload passed back to the server upon interaction.',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Triggers a backend event (callback) with associated metadata.',
+																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																	),
+																label: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'The human-readable label displayed on the button.',
+																	),
+																metadata: zod
+																	.looseObject({})
+																	.optional()
+																	.describe(
+																		'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																	),
+																request: zod
+																	.object({
+																		action: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'The specific action to be performed by the client application.',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Requests sensitive information from the client (e.g., location or contact).',
+																	),
+																url: zod
+																	.object({
+																		url: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Must be a valid absolute URI (e.g., https://example.com).',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Directs the user to an external web resource.',
+																	),
+															})
+															.describe(
+																'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+															),
+													)
+													.optional()
+													.describe(
+														'Collection of buttons within this section.\nMinimum of 1 button is required to prevent empty sections.',
+													),
+												section: zod
+													.string()
+													.optional()
+													.describe(
+														'The header text for this section. Must be concise and descriptive.',
+													),
+											})
+											.describe(
+												'Represents a row of buttons grouped under a specific logical section header.\nUseful for creating categorized menus or structured interactive interfaces.',
+											),
+									)
+									.optional()
+									.describe('List with sections with buttons.'),
+							})
+							.optional()
+							.describe(
+								'List reply with main list button text and sections with buttons.',
+							),
+						markup: zod
+							.object({
+								rows: zod
+									.array(
+										zod
+											.object({
+												buttons: zod
+													.array(
+														zod
+															.object({
+																callback: zod
+																	.object({
+																		data: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Opaque data payload passed back to the server upon interaction.',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Triggers a backend event (callback) with associated metadata.',
+																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																	),
+																label: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'The human-readable label displayed on the button.',
+																	),
+																metadata: zod
+																	.looseObject({})
+																	.optional()
+																	.describe(
+																		'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																	),
+																request: zod
+																	.object({
+																		action: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'The specific action to be performed by the client application.',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Requests sensitive information from the client (e.g., location or contact).',
+																	),
+																url: zod
+																	.object({
+																		url: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Must be a valid absolute URI (e.g., https://example.com).',
+																			),
+																	})
+																	.optional()
+																	.describe(
+																		'Directs the user to an external web resource.',
+																	),
+															})
+															.describe(
+																'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+															),
+													)
+													.optional()
+													.describe(
+														'Horizontal collection of buttons.\nCapped at 10 to ensure UI responsiveness and prevent overflow.',
+													),
+											})
+											.describe(
+												'A standard horizontal row of interactive buttons without a section header.',
+											),
+									)
+									.optional()
+									.describe('Rows of buttons matrix.'),
+							})
+							.optional()
+							.describe('Markup matrix with buttons.'),
+						singleUse: zod
+							.boolean()
+							.optional()
+							.describe('Force to block user keyboard.'),
+					})
+					.optional()
+					.describe('Interactive represents a rich message with UI elements.'),
+				location: zod
+					.object({
+						address: zod.string().optional(),
+						latitude: zod.number().optional(),
+						longitude: zod.number().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				metadata: zod
+					.looseObject({})
+					.optional()
+					.describe(
+						'Arbitrary message metadata.\nCan contain structured data depending on message type.',
+					),
+				sender: zod
+					.object({
+						contact: zod
+							.object({
+								appId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contactId: zod.string().optional(),
+											createdAt: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disableReason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updatedAt: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact represents an external messaging identity.'),
+						id: zod.string().optional(),
+						permissions: zod
+							.object({
+								canAddMembers: zod.boolean().optional(),
+								canChangeMembersPermissions: zod.boolean().optional(),
+								canChangeThreadInfo: zod.boolean().optional(),
+								canRemoveMembers: zod.boolean().optional(),
+								canSendMessages: zod.boolean().optional(),
+								createdAt: zod.string().optional(),
+								id: zod.string().optional(),
+								memberId: zod.string().optional(),
+								updatedAt: zod.string().optional(),
+							})
+							.optional(),
+						role: zod
+							.enum([
+								'ROLE_UNSPECIFIED',
+								'ROLE_MEMBER',
+								'ROLE_ADMIN',
+								'ROLE_OWNER',
+								'ROLE_SUPERVISOR',
+							])
+							.default(threadManagementGetResponseLastMsgSenderRoleDefault),
+					})
+					.optional()
+					.describe('Sender user aggregated information.'),
+				threadId: zod
+					.string()
+					.optional()
+					.describe('Identifier of the thread the message belongs to.'),
+				type: zod.number().optional().describe('Message type identifier.'),
+			})
+			.optional()
+			.describe('Last message of the linked thread.'),
+		members: zod
+			.array(
+				zod
+					.object({
+						contact: zod
+							.object({
+								appId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contactId: zod.string().optional(),
+											createdAt: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disableReason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updatedAt: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact represents an external messaging identity.'),
+						id: zod.string().optional(),
+						permissions: zod
+							.object({
+								canAddMembers: zod.boolean().optional(),
+								canChangeMembersPermissions: zod.boolean().optional(),
+								canChangeThreadInfo: zod.boolean().optional(),
+								canRemoveMembers: zod.boolean().optional(),
+								canSendMessages: zod.boolean().optional(),
+								createdAt: zod.string().optional(),
+								id: zod.string().optional(),
+								memberId: zod.string().optional(),
+								updatedAt: zod.string().optional(),
+							})
+							.optional(),
+						role: zod
+							.enum([
+								'ROLE_UNSPECIFIED',
+								'ROLE_MEMBER',
+								'ROLE_ADMIN',
+								'ROLE_OWNER',
+								'ROLE_SUPERVISOR',
+							])
+							.default(threadManagementGetResponseMembersItemRoleDefault),
+					})
+					.describe(
+						'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+					),
+			)
+			.optional()
+			.describe('Detailed member information.'),
+		settings: zod
+			.object({
+				createdAt: zod
+					.string()
+					.optional()
+					.describe('Creation timestamp (Unix time, milliseconds).'),
+				domainId: zod.number().optional().describe('Domain identifier.'),
+				id: zod.string().optional().describe('Settings identifier.'),
+				title: zod
+					.string()
+					.optional()
+					.describe(
+						'Custom title for the direct thread.\nUsually represents the display name of the conversation.',
+					),
+				updatedAt: zod
+					.string()
+					.optional()
+					.describe('Last update timestamp (Unix time, milliseconds).'),
+			})
+			.optional()
+			.describe('User-specific settings for this thread.'),
+		subject: zod.string().optional().describe('Thread subject or title.'),
+		type: zod
+			.enum([
+				'UNKNOWN',
+				'DIRECT',
+				'GROUP',
+				'CHANNEL',
+			])
+			.default(threadManagementGetResponseTypeDefault)
+			.describe('Type of the thread.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('Last update timestamp (Unix time, milliseconds).'),
+		variables: zod
+			.object({
+				threadId: zod
+					.string()
+					.optional()
+					.describe('Unique identifier for the thread.'),
+				variables: zod
+					.record(
+						zod.string(),
+						zod
+							.object({
+								setAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Timestamp when the variable was set (Unix time, milliseconds).',
+									),
+								setBy: zod
+									.object({
+										appId: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the specific integration app or bot.',
+											),
+										createdAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Record creation timestamp (Unix Epoch in milliseconds).',
+											),
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if usere is real person or automatic script.',
+											),
+										iss: zod
+											.string()
+											.optional()
+											.describe(
+												'Provider-specific unique identifier (Issuer ID).',
+											),
+										metadata: zod
+											.record(zod.string(), zod.string())
+											.optional()
+											.describe(
+												'Additional dynamic attributes provided by the messenger.',
+											),
+										name: zod
+											.string()
+											.optional()
+											.describe('Display name of the contact.'),
+										sub: zod
+											.string()
+											.optional()
+											.describe(
+												'Associated internal system subject/identifier.',
+											),
+										type: zod
+											.string()
+											.optional()
+											.describe("Channel type (e.g., 'webchat', 'telegram')."),
+										updatedAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Last record update timestamp (Unix Epoch in milliseconds).',
+											),
+										username: zod
+											.string()
+											.optional()
+											.describe('Technical username or handle.'),
+										vias: zod
+											.array(
+												zod.object({
+													contactId: zod.string().optional(),
+													createdAt: zod.string().optional(),
+													disable: zod.boolean().optional(),
+													disableReason: zod.string().optional(),
+													metadata: zod.looseObject({}).optional(),
+													updatedAt: zod.string().optional(),
+													via: zod.string().optional(),
+												}),
+											)
+											.optional(),
+									})
+									.optional()
+									.describe('Contact who set the variable.'),
+								value: zod
+									.looseObject({})
+									.optional()
+									.describe(
+										'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+									),
+							})
+							.describe(
+								'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+							),
+					)
+					.optional()
+					.describe(
+						'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+					),
+			})
+			.optional()
+			.describe('Optional variables associated with the thread.'),
+	})
+	.describe('Thread represents a thread (aka chat or conversation) entity.');
+
+/**
+ * @summary Add member to the thread.
+ */
+export const ThreadManagementAddMemberParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const threadManagementAddMemberBodyRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const ThreadManagementAddMemberBody = zod.object({
+	contact: zod
+		.object({
+			iss: zod.string().optional(),
+			sub: zod.string().optional(),
+		})
+		.optional(),
+	role: zod
+		.enum([
+			'ROLE_UNSPECIFIED',
+			'ROLE_MEMBER',
+			'ROLE_ADMIN',
+			'ROLE_OWNER',
+			'ROLE_SUPERVISOR',
+		])
+		.default(threadManagementAddMemberBodyRoleDefault),
+});
+
+export const threadManagementAddMemberResponseMemberRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const ThreadManagementAddMemberResponse = zod.object({
+	member: zod
+		.object({
+			contact: zod
+				.object({
+					appId: zod
+						.string()
+						.optional()
+						.describe('Identifier of the specific integration app or bot.'),
+					createdAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Record creation timestamp (Unix Epoch in milliseconds).',
+						),
+					isBot: zod
+						.boolean()
+						.optional()
+						.describe(
+							'Represents if usere is real person or automatic script.',
+						),
+					iss: zod
+						.string()
+						.optional()
+						.describe('Provider-specific unique identifier (Issuer ID).'),
+					metadata: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe(
+							'Additional dynamic attributes provided by the messenger.',
+						),
+					name: zod
+						.string()
+						.optional()
+						.describe('Display name of the contact.'),
+					sub: zod
+						.string()
+						.optional()
+						.describe('Associated internal system subject/identifier.'),
+					type: zod
+						.string()
+						.optional()
+						.describe("Channel type (e.g., 'webchat', 'telegram')."),
+					updatedAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Last record update timestamp (Unix Epoch in milliseconds).',
+						),
+					username: zod
+						.string()
+						.optional()
+						.describe('Technical username or handle.'),
+					vias: zod
+						.array(
+							zod.object({
+								contactId: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								disable: zod.boolean().optional(),
+								disableReason: zod.string().optional(),
+								metadata: zod.looseObject({}).optional(),
+								updatedAt: zod.string().optional(),
+								via: zod.string().optional(),
+							}),
+						)
+						.optional(),
+				})
+				.optional()
+				.describe('Contact represents an external messaging identity.'),
+			id: zod.string().optional(),
+			permissions: zod
+				.object({
+					canAddMembers: zod.boolean().optional(),
+					canChangeMembersPermissions: zod.boolean().optional(),
+					canChangeThreadInfo: zod.boolean().optional(),
+					canRemoveMembers: zod.boolean().optional(),
+					canSendMessages: zod.boolean().optional(),
+					createdAt: zod.string().optional(),
+					id: zod.string().optional(),
+					memberId: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+				})
+				.optional(),
+			role: zod
+				.enum([
+					'ROLE_UNSPECIFIED',
+					'ROLE_MEMBER',
+					'ROLE_ADMIN',
+					'ROLE_OWNER',
+					'ROLE_SUPERVISOR',
+				])
+				.default(threadManagementAddMemberResponseMemberRoleDefault),
+		})
+		.optional()
+		.describe(
+			'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+		),
+});
+
+/**
+ * @summary Remove member from the thread.
+ */
+export const ThreadManagementRemoveMemberParams = zod.object({
+	thread_id: zod.string(),
+	member_id: zod.string(),
+});
+
+export const ThreadManagementRemoveMemberResponse = zod.looseObject({});
+
+/**
+ * @summary Transfer unites add member and remove member.
+It adds a new member to the thread and removes the initiator from the thread.
+ */
+export const ThreadManagementTransferParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const threadManagementTransferBodyRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const ThreadManagementTransferBody = zod.object({
+	contact: zod
+		.object({
+			iss: zod.string().optional(),
+			sub: zod.string().optional(),
+		})
+		.optional(),
+	role: zod
+		.enum([
+			'ROLE_UNSPECIFIED',
+			'ROLE_MEMBER',
+			'ROLE_ADMIN',
+			'ROLE_OWNER',
+			'ROLE_SUPERVISOR',
+		])
+		.default(threadManagementTransferBodyRoleDefault),
+});
+
+export const threadManagementTransferResponseMemberRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const ThreadManagementTransferResponse = zod.object({
+	member: zod
+		.object({
+			contact: zod
+				.object({
+					appId: zod
+						.string()
+						.optional()
+						.describe('Identifier of the specific integration app or bot.'),
+					createdAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Record creation timestamp (Unix Epoch in milliseconds).',
+						),
+					isBot: zod
+						.boolean()
+						.optional()
+						.describe(
+							'Represents if usere is real person or automatic script.',
+						),
+					iss: zod
+						.string()
+						.optional()
+						.describe('Provider-specific unique identifier (Issuer ID).'),
+					metadata: zod
+						.record(zod.string(), zod.string())
+						.optional()
+						.describe(
+							'Additional dynamic attributes provided by the messenger.',
+						),
+					name: zod
+						.string()
+						.optional()
+						.describe('Display name of the contact.'),
+					sub: zod
+						.string()
+						.optional()
+						.describe('Associated internal system subject/identifier.'),
+					type: zod
+						.string()
+						.optional()
+						.describe("Channel type (e.g., 'webchat', 'telegram')."),
+					updatedAt: zod
+						.string()
+						.optional()
+						.describe(
+							'Last record update timestamp (Unix Epoch in milliseconds).',
+						),
+					username: zod
+						.string()
+						.optional()
+						.describe('Technical username or handle.'),
+					vias: zod
+						.array(
+							zod.object({
+								contactId: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								disable: zod.boolean().optional(),
+								disableReason: zod.string().optional(),
+								metadata: zod.looseObject({}).optional(),
+								updatedAt: zod.string().optional(),
+								via: zod.string().optional(),
+							}),
+						)
+						.optional(),
+				})
+				.optional()
+				.describe('Contact represents an external messaging identity.'),
+			id: zod.string().optional(),
+			permissions: zod
+				.object({
+					canAddMembers: zod.boolean().optional(),
+					canChangeMembersPermissions: zod.boolean().optional(),
+					canChangeThreadInfo: zod.boolean().optional(),
+					canRemoveMembers: zod.boolean().optional(),
+					canSendMessages: zod.boolean().optional(),
+					createdAt: zod.string().optional(),
+					id: zod.string().optional(),
+					memberId: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+				})
+				.optional(),
+			role: zod
+				.enum([
+					'ROLE_UNSPECIFIED',
+					'ROLE_MEMBER',
+					'ROLE_ADMIN',
+					'ROLE_OWNER',
+					'ROLE_SUPERVISOR',
+				])
+				.default(threadManagementTransferResponseMemberRoleDefault),
+		})
+		.optional()
+		.describe(
+			'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+		),
+});
+
+/**
+ * @summary Retrieves all variables for a specific thread.
+ */
+export const ThreadManagementLocateVariablesParams = zod.object({
+	thread_id: zod.string().describe('Unique identifier for the thread.'),
+});
+
+export const ThreadManagementLocateVariablesResponse = zod
+	.object({
+		threadId: zod
+			.string()
+			.optional()
+			.describe('Unique identifier for the thread.'),
+		variables: zod
+			.record(
+				zod.string(),
+				zod
+					.object({
+						setAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp when the variable was set (Unix time, milliseconds).',
+							),
+						setBy: zod
+							.object({
+								appId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contactId: zod.string().optional(),
+											createdAt: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disableReason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updatedAt: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact who set the variable.'),
+						value: zod
+							.looseObject({})
+							.optional()
+							.describe(
+								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+							),
+					})
+					.describe(
+						'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+					),
+			)
+			.optional()
+			.describe(
+				'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+			),
+	})
+	.describe('ThreadVariables contains all variables associated with a thread.');
+
+/**
+ * @summary Sets or updates variables for a specific thread.
+Existing variables with the same keys will be overwritten if were setted by the caller.
+New variables will be created if they do not exist.
+ */
+export const ThreadManagementSetVariablesParams = zod.object({
+	thread_id: zod.string().describe('Unique identifier for the thread.'),
+});
+
+export const ThreadManagementSetVariablesBody = zod
+	.object({
+		variables: zod
+			.array(
+				zod
+					.object({
+						key: zod.string().optional().describe('Variable key.'),
+						value: zod.looseObject({}).optional().describe('Variable value.'),
+					})
+					.describe(
+						'VariableEntryRequest represents a variable update operation.',
+					),
+			)
+			.optional()
+			.describe(
+				'List of variables to set or update.\nExisting variables with the same keys will be overwritten.',
+			),
+	})
+	.describe(
+		'SetVariablesRequest defines parameters\nfor setting or updating thread variables.',
+	);
+
+export const ThreadManagementSetVariablesResponse = zod
+	.object({
+		threadId: zod
+			.string()
+			.optional()
+			.describe('Unique identifier for the thread.'),
+		variables: zod
+			.record(
+				zod.string(),
+				zod
+					.object({
+						setAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp when the variable was set (Unix time, milliseconds).',
+							),
+						setBy: zod
+							.object({
+								appId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contactId: zod.string().optional(),
+											createdAt: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disableReason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updatedAt: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact who set the variable.'),
+						value: zod
+							.looseObject({})
+							.optional()
+							.describe(
+								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+							),
+					})
+					.describe(
+						'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+					),
+			)
+			.optional()
+			.describe(
+				'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+			),
+	})
+	.describe('ThreadVariables contains all variables associated with a thread.');
+
+/**
+ * @summary Removes specified variables from a thread with caller's permission.
+If no keys are provided, all variables may be removed
+depending on implementation.
+ */
+export const ThreadManagementFlushVariablesParams = zod.object({
+	thread_id: zod.string().describe('Unique identifier for the thread.'),
+});
+
+export const ThreadManagementFlushVariablesBody = zod
+	.object({
+		keys: zod
+			.array(zod.string())
+			.optional()
+			.describe('List of variable keys to flush.'),
+	})
+	.describe(
+		'FlushVariablesRequest defines parameters\nfor flushing thread variables by thread ID.',
+	);
+
+export const ThreadManagementFlushVariablesResponse = zod
+	.object({
+		threadId: zod
+			.string()
+			.optional()
+			.describe('Unique identifier for the thread.'),
+		variables: zod
+			.record(
+				zod.string(),
+				zod
+					.object({
+						setAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Timestamp when the variable was set (Unix time, milliseconds).',
+							),
+						setBy: zod
+							.object({
+								appId: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								createdAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								isBot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updatedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contactId: zod.string().optional(),
+											createdAt: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disableReason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updatedAt: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact who set the variable.'),
+						value: zod
+							.looseObject({})
+							.optional()
+							.describe(
+								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+							),
+					})
+					.describe(
+						'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+					),
+			)
+			.optional()
+			.describe(
+				'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+			),
+	})
+	.describe('ThreadVariables contains all variables associated with a thread.');
+
+/**
+ * @summary Searches thread variables across multiple threads.
+Supports pagination and field projection.
+ */
+export const ThreadManagementSearchVariablesQueryParams = zod.object({
+	size: zod
+		.number()
+		.optional()
+		.describe('Number of results to return per page.'),
+	page: zod.number().optional().describe('Page number (1-based).'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('List of fields to include in the response.'),
+	threadIds: zod
+		.array(zod.string())
+		.optional()
+		.describe('List of thread IDs to filter by.'),
+});
+
+export const ThreadManagementSearchVariablesResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						threadId: zod
+							.string()
+							.optional()
+							.describe('Unique identifier for the thread.'),
+						variables: zod
+							.record(
+								zod.string(),
+								zod
+									.object({
+										setAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Timestamp when the variable was set (Unix time, milliseconds).',
+											),
+										setBy: zod
+											.object({
+												appId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contactId: zod.string().optional(),
+															createdAt: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disableReason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updatedAt: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
+											})
+											.optional()
+											.describe('Contact who set the variable.'),
+										value: zod
+											.looseObject({})
+											.optional()
+											.describe(
+												'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
+											),
+									})
+									.describe(
+										'VariableEntry represents a single variable value\nalong with metadata about who and when it was set.',
+									),
+							)
+							.optional()
+							.describe(
+								'Key-value map of variables.\nKey is the variable name, value contains data and metadata.',
+							),
+					})
+					.describe(
+						'ThreadVariables contains all variables associated with a thread.',
+					),
+			)
+			.optional()
+			.describe('List of thread variables grouped by thread.'),
+		next: zod
+			.boolean()
+			.optional()
+			.describe('Indicates if there are more results to fetch.'),
+	})
+	.describe(
+		'SearchVariablesResponse contains search results\nand pagination metadata.',
 	);

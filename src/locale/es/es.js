@@ -1,10 +1,12 @@
-import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models';
+import {
+	EngineRoutingSchemaType,
+	WebitelMediaExporterExportStatus,
+} from '@webitel/api-services/gen/models';
 import {
 	AgentStatus,
 	CallDirection,
 	ChannelState,
 	ChannelType,
-	EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
 import {
@@ -41,6 +43,7 @@ export default {
 		saveAs: 'Guardar como',
 		saved: 'Guardado',
 		send: 'Enviar',
+		sendMessage: 'Enviar mensaje',
 		start: 'Iniciar',
 		close: 'Cerrar',
 		add: 'Añadir',
@@ -53,6 +56,7 @@ export default {
 		delete: 'Eliminar',
 		search: 'Buscar',
 		open: 'Abrir',
+		openInHistory: 'Abrir en Historial',
 		name: 'Nombre',
 		expand: 'Expandir',
 		collapse: 'Colapsar',
@@ -223,6 +227,7 @@ export default {
 				[EngineRoutingSchemaType.Voice]: 'Voz',
 				[EngineRoutingSchemaType.Service]: 'Servicio',
 				[EngineRoutingSchemaType.Processing]: 'Formularios',
+				[EngineRoutingSchemaType.Default]: 'Sin tipo',
 			},
 		},
 		messengers: {
@@ -233,6 +238,7 @@ export default {
 			[ChatGatewayProvider.WEBCHAT]: 'Chat web',
 			[ChatGatewayProvider.INFOBIP]: 'Infobip',
 			[ChatGatewayProvider.CUSTOM]: 'Gateway de chat personalizado',
+			[ChatGatewayProvider.PORTAL]: 'Portal',
 		},
 		quickReplies: {
 			quickReplies: 'Respuesta rápida | Respuestas rápidas',
@@ -249,15 +255,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Error',
 			},
 		},
-	},
-	importCSV: 'Importar CSV',
-	CSV: {
-		skipHeaders: 'Omitir encabezados',
-		charSet: 'Conjunto de caracteres',
-		separator: 'Separador',
-		CSVColumn: 'Columna CSV',
-		fieldName: 'Nombre del campo',
-		clearMember: 'Eliminar miembro',
+		importCSV: 'Importar CSV',
+		CSV: {
+			skipHeaders: 'Omitir encabezados',
+			charSet: 'Conjunto de caracteres',
+			separator: 'Separador',
+			CSVColumn: 'Columna CSV',
+			fieldName: 'Nombre del campo',
+			clearMember: 'Eliminar miembro',
+		},
 	},
 	channel: {
 		state: {
@@ -837,11 +843,18 @@ export default {
 			delete: ({ named }) =>
 				`El ${named('entity').toLowerCase()} fue eliminado`,
 		},
-		info: {
-			passwordExpirationMessage: 'Tu contraseña expirará en { days } días',
+		warnings: {
+			passwordExpirationMessageDays: 'Tu contraseña expirará en {amount} días',
+			passwordExpirationMessageHours:
+				'Tu contraseña expirará en menos de {amount} horas',
+			licenseExpirationSoonMessage:
+				'Tu licencia {name} expirará en {amount} días',
+			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
 		},
 	},
 	errorNotifications: {
+		websocketDisconnect:
+			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
 	},

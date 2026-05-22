@@ -3,7 +3,7 @@ export default (value) => {
 	try {
 		const url = new URL(value);
 		return /^(wss?)/i.test(url.protocol);
-	} catch (e) {
+	} catch {
 		return false;
 	}
 };

@@ -10,309 +10,564 @@ import * as zod from 'zod';
  * @summary Searches messages within a specific thread.
 Supports cursor-based pagination and field selection.
  */
-export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryParams =
-	zod.object({
-		thread_id: zod.string().describe('Filter by thread IDs.'),
-	});
+export const MessageHistorySearchThreadMessagesHistoryParams = zod.object({
+	thread_id: zod.string().describe('Filter by thread IDs.'),
+});
 
-export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryQueryParams =
-	zod.object({
-		fields: zod
-			.array(zod.string())
-			.optional()
-			.describe(
-				'List of message fields to be returned.\nUsed to reduce payload size.',
-			),
-		ids: zod
-			.array(zod.string())
-			.optional()
-			.describe('Filter by specific message IDs.'),
-		senderIds: zod
-			.array(zod.string())
-			.optional()
-			.describe('Filter messages by sender user IDs.'),
-		types: zod
-			.array(zod.number())
-			.optional()
-			.describe('Filter messages by message types.'),
-		cursorCreatedAt: zod
-			.string()
-			.optional()
-			.describe('Message creation timestamp (Unix time, microseconds).'),
-		cursorId: zod.string().optional().describe('Unique message identifier.'),
-		cursorDirection: zod
-			.boolean()
-			.optional()
-			.describe(
-				'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-			),
-		size: zod
-			.number()
-			.optional()
-			.describe('Maximum number of messages to return.'),
-	});
-
-export const MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResponse =
-	zod
-		.object({
-			from: zod
-				.array(
-					zod
-						.object({
-							isBot: zod.boolean().optional(),
-							issuer: zod
-								.string()
-								.optional()
-								.describe('Client issuer for the sender.'),
-							subject: zod
-								.string()
-								.optional()
-								.describe('Client-readable sender subject or display name.'),
-							type: zod.string().optional().describe('Sender type.'),
-							username: zod.string().optional().describe('Sender username.'),
-						})
-						.describe(
-							'MessageParticipant represents aggregated participant information\npresent in the message history response.',
-						),
-				)
-				.optional()
-				.describe(
-					'List of unique message senders present\nin the current response page.',
-				),
-			messages: zod
-				.array(
-					zod
-						.object({
-							body: zod.string().optional().describe('Message body content.'),
-							createdAt: zod
-								.string()
-								.optional()
-								.describe(
-									'Message creation timestamp (Unix time, milliseconds).',
-								),
-							documents: zod
-								.array(
-									zod
-										.object({
-											createdAt: zod
-												.string()
-												.optional()
-												.describe(
-													'Creation timestamp (Unix time, milliseconds).',
-												),
-											fileId: zod
-												.string()
-												.optional()
-												.describe('File storage identifier.'),
-											id: zod
-												.string()
-												.optional()
-												.describe('Document identifier.'),
-											messageId: zod
-												.string()
-												.optional()
-												.describe(
-													'Identifier of the message this document belongs to.',
-												),
-											mime: zod
-												.string()
-												.optional()
-												.describe('MIME type of the document.'),
-											name: zod
-												.string()
-												.optional()
-												.describe('Original file name.'),
-											size: zod
-												.string()
-												.optional()
-												.describe('File size in bytes.'),
-											url: zod
-												.string()
-												.optional()
-												.describe(
-													'Public signed URL for downloading the document.',
-												),
-										})
-										.describe(
-											'Document represents a file attachment\nassociated with a message.',
-										),
-								)
-								.optional()
-								.describe('List of document attachments.'),
-							id: zod
-								.string()
-								.optional()
-								.describe('Unique message identifier.'),
-							images: zod
-								.array(
-									zod
-										.object({
-											createdAt: zod
-												.string()
-												.optional()
-												.describe(
-													'Creation timestamp (Unix time, milliseconds).',
-												),
-											fileId: zod
-												.string()
-												.optional()
-												.describe('File storage identifier.'),
-											height: zod
-												.number()
-												.optional()
-												.describe('Image height in pixels.'),
-											id: zod.string().optional().describe('Image identifier.'),
-											messageId: zod
-												.string()
-												.optional()
-												.describe(
-													'Identifier of the message this message belongs to.',
-												),
-											mime: zod
-												.string()
-												.optional()
-												.describe('MIME type of the image.'),
-											url: zod
-												.string()
-												.optional()
-												.describe('Public signed URL for accessing the image.'),
-											width: zod
-												.number()
-												.optional()
-												.describe('Image width in pixels.'),
-										})
-										.describe(
-											'Image represents an image attachment\nassociated with a message.',
-										),
-								)
-								.optional()
-								.describe('List of image attachments.'),
-							metadata: zod
-								.record(
-									zod.string(),
-									zod.object({
-										'@type': zod.string().optional(),
-									}),
-								)
-								.optional()
-								.describe(
-									'Arbitrary message metadata.\nCan contain structured data depending on message type.',
-								),
-							sender: zod
-								.object({
-									isBot: zod.boolean().optional(),
-									issuer: zod
-										.string()
-										.optional()
-										.describe('Client issuer for the sender.'),
-									subject: zod
-										.string()
-										.optional()
-										.describe(
-											'Client-readable sender subject or display name.',
-										),
-									type: zod.string().optional().describe('Sender type.'),
-									username: zod
-										.string()
-										.optional()
-										.describe('Sender username.'),
-								})
-								.optional()
-								.describe('Sender user aggregated information.'),
-							threadId: zod
-								.string()
-								.optional()
-								.describe('Identifier of the thread the message belongs to.'),
-							type: zod
-								.number()
-								.optional()
-								.describe('Message type identifier.'),
-							updatedAt: zod
-								.string()
-								.optional()
-								.describe(
-									'Message last update timestamp (Unix time, milliseconds).',
-								),
-						})
-						.describe(
-							'HistoryMessage represents a single message\nin thread history.',
-						),
-				)
-				.optional()
-				.describe('List of messages matching the search criteria.'),
-			next: zod
-				.boolean()
-				.optional()
-				.describe('Indicates whether more messages are available.'),
-			nextCursor: zod
-				.object({
-					createdAt: zod
-						.string()
-						.optional()
-						.describe('Message creation timestamp (Unix time, microseconds).'),
-					direction: zod
-						.boolean()
-						.optional()
-						.describe(
-							'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-						),
-					id: zod.string().optional().describe('Unique message identifier.'),
-				})
-				.optional()
-				.describe('Cursor pointing to the next page of messages.'),
-			paging: zod
-				.object({
-					cursors: zod
-						.object({
-							after: zod
-								.object({
-									createdAt: zod
-										.string()
-										.optional()
-										.describe(
-											'Message creation timestamp (Unix time, microseconds).',
-										),
-									direction: zod
-										.boolean()
-										.optional()
-										.describe(
-											'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-										),
-									id: zod
-										.string()
-										.optional()
-										.describe('Unique message identifier.'),
-								})
-								.optional()
-								.describe('Cursor pointing to the next page of results.'),
-							before: zod
-								.object({
-									createdAt: zod
-										.string()
-										.optional()
-										.describe(
-											'Message creation timestamp (Unix time, microseconds).',
-										),
-									direction: zod
-										.boolean()
-										.optional()
-										.describe(
-											'Pagination direction.\ntrue - backward (older messages).\nfalse - forward (newer messages).',
-										),
-									id: zod
-										.string()
-										.optional()
-										.describe('Unique message identifier.'),
-								})
-								.optional()
-								.describe('Cursor pointing to the previous page of results.'),
-						})
-						.optional()
-						.describe('Cursor-based pagination information.'),
-				})
-				.optional()
-				.describe('Detailed paging metadata.'),
-		})
+export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
+		.optional()
 		.describe(
-			'SearchMessageHistoryResponse contains\nmessage history search results and pagination metadata.',
-		);
+			'List of message fields to be returned.\nUsed to reduce payload size.',
+		),
+	ids: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by specific message IDs.'),
+	senderIds: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter messages by sender user IDs.'),
+	types: zod
+		.array(zod.number())
+		.optional()
+		.describe('Filter messages by message types.'),
+	cursorId: zod
+		.string()
+		.optional()
+		.describe(
+			'Cursor identifier.\nMust be a valid UUID referencing an existing message.\nDefines the starting point for pagination.',
+		),
+	cursorBefore: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Pagination direction flag.\n\ntrue  -> fetch newer messages (back before history)\nfalse -> fetch older messages (back to older history)',
+		),
+	size: zod
+		.number()
+		.optional()
+		.describe('Maximum number of messages to return.'),
+});
+
+export const messageHistorySearchThreadMessagesHistoryResponseItemsItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
+
+export const MessageHistorySearchThreadMessagesHistoryResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						body: zod.string().optional().describe('Message body content.'),
+						contact: zod
+							.object({
+								email: zod.string().optional(),
+								name: zod.string().optional(),
+								phone: zod.string().optional(),
+							})
+							.optional(),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Message creation timestamp (Unix time, milliseconds).',
+							),
+						documents: zod
+							.array(
+								zod
+									.object({
+										createdAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Creation timestamp (Unix time, milliseconds).',
+											),
+										fileId: zod
+											.string()
+											.optional()
+											.describe('File storage identifier.'),
+										id: zod
+											.string()
+											.optional()
+											.describe('Document identifier.'),
+										messageId: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the message this document belongs to.',
+											),
+										mime: zod
+											.string()
+											.optional()
+											.describe('MIME type of the document.'),
+										name: zod
+											.string()
+											.optional()
+											.describe('Original file name.'),
+										size: zod
+											.string()
+											.optional()
+											.describe('File size in bytes.'),
+										url: zod
+											.string()
+											.optional()
+											.describe(
+												'Public signed URL for downloading the document.',
+											),
+									})
+									.describe(
+										'Document represents a file attachment\nassociated with a message.',
+									),
+							)
+							.optional()
+							.describe('List of document attachments.'),
+						editedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Message last update timestamp (Unix time, milliseconds).',
+							),
+						id: zod.string().optional().describe('Unique message identifier.'),
+						images: zod
+							.array(
+								zod
+									.object({
+										createdAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Creation timestamp (Unix time, milliseconds).',
+											),
+										fileId: zod
+											.string()
+											.optional()
+											.describe('File storage identifier.'),
+										height: zod
+											.number()
+											.optional()
+											.describe('Image height in pixels.'),
+										id: zod.string().optional().describe('Image identifier.'),
+										messageId: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the message this message belongs to.',
+											),
+										mime: zod
+											.string()
+											.optional()
+											.describe('MIME type of the image.'),
+										url: zod
+											.string()
+											.optional()
+											.describe('Public signed URL for accessing the image.'),
+										width: zod
+											.number()
+											.optional()
+											.describe('Image width in pixels.'),
+									})
+									.describe(
+										'Image represents an image attachment\nassociated with a message.',
+									),
+							)
+							.optional()
+							.describe('List of image attachments.'),
+						interactive: zod
+							.object({
+								documents: zod
+									.object({
+										documents: zod
+											.array(
+												zod
+													.object({
+														fileName: zod.string().optional(),
+														id: zod.string().optional(),
+														mimeType: zod.string().optional(),
+														sizeBytes: zod.string().optional(),
+														url: zod.string().optional(),
+													})
+													.describe(
+														'Represents `Document` message with necessary fields\nto process it into frequently used `document`\nentity in messaging systems.',
+													),
+											)
+											.optional()
+											.describe(
+												'Documents to be attached to the header of interactive message.\nMax allowed documents: 10.',
+											),
+									})
+									.optional()
+									.describe('Document attachments header.'),
+								images: zod
+									.object({
+										images: zod
+											.array(
+												zod
+													.object({
+														id: zod.string().optional(),
+														link: zod.string().optional(),
+														mimeType: zod.string().optional(),
+														name: zod.string().optional(),
+													})
+													.describe(
+														'Represents `Image` entity with\nnecessary fields.',
+													),
+											)
+											.optional()
+											.describe(
+												'Images to be attached to the header of interactive message.\nMax allowed images: 10.',
+											),
+									})
+									.optional()
+									.describe('Images attachment header.'),
+								listReply: zod
+									.object({
+										mainButtonTitle: zod
+											.string()
+											.optional()
+											.describe(
+												'Title of the main button, that on-click show up list.',
+											),
+										sections: zod
+											.array(
+												zod
+													.object({
+														buttons: zod
+															.array(
+																zod
+																	.object({
+																		callback: zod
+																			.object({
+																				data: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Opaque data payload passed back to the server upon interaction.',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Triggers a backend event (callback) with associated metadata.',
+																			),
+																		id: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																			),
+																		label: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'The human-readable label displayed on the button.',
+																			),
+																		metadata: zod
+																			.looseObject({})
+																			.optional()
+																			.describe(
+																				'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																			),
+																		request: zod
+																			.object({
+																				action: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'The specific action to be performed by the client application.',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Requests sensitive information from the client (e.g., location or contact).',
+																			),
+																		url: zod
+																			.object({
+																				url: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Must be a valid absolute URI (e.g., https://example.com).',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Directs the user to an external web resource.',
+																			),
+																	})
+																	.describe(
+																		'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+																	),
+															)
+															.optional()
+															.describe(
+																'Collection of buttons within this section.\nMinimum of 1 button is required to prevent empty sections.',
+															),
+														section: zod
+															.string()
+															.optional()
+															.describe(
+																'The header text for this section. Must be concise and descriptive.',
+															),
+													})
+													.describe(
+														'Represents a row of buttons grouped under a specific logical section header.\nUseful for creating categorized menus or structured interactive interfaces.',
+													),
+											)
+											.optional()
+											.describe('List with sections with buttons.'),
+									})
+									.optional()
+									.describe(
+										'List reply with main list button text and sections with buttons.',
+									),
+								markup: zod
+									.object({
+										rows: zod
+											.array(
+												zod
+													.object({
+														buttons: zod
+															.array(
+																zod
+																	.object({
+																		callback: zod
+																			.object({
+																				data: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Opaque data payload passed back to the server upon interaction.',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Triggers a backend event (callback) with associated metadata.',
+																			),
+																		id: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'Unique idempotent identifier for the button.\nUsed by the frontend to track state and prevent duplicate interactions.',
+																			),
+																		label: zod
+																			.string()
+																			.optional()
+																			.describe(
+																				'The human-readable label displayed on the button.',
+																			),
+																		metadata: zod
+																			.looseObject({})
+																			.optional()
+																			.describe(
+																				'Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").\nUsage: Allows for future-proofing without breaking schema changes.',
+																			),
+																		request: zod
+																			.object({
+																				action: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'The specific action to be performed by the client application.',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Requests sensitive information from the client (e.g., location or contact).',
+																			),
+																		url: zod
+																			.object({
+																				url: zod
+																					.string()
+																					.optional()
+																					.describe(
+																						'Must be a valid absolute URI (e.g., https://example.com).',
+																					),
+																			})
+																			.optional()
+																			.describe(
+																				'Directs the user to an external web resource.',
+																			),
+																	})
+																	.describe(
+																		'Defines a single interactive element within the keyboard.\nEach button must have a unique identifier and a specific action type.',
+																	),
+															)
+															.optional()
+															.describe(
+																'Horizontal collection of buttons.\nCapped at 10 to ensure UI responsiveness and prevent overflow.',
+															),
+													})
+													.describe(
+														'A standard horizontal row of interactive buttons without a section header.',
+													),
+											)
+											.optional()
+											.describe('Rows of buttons matrix.'),
+									})
+									.optional()
+									.describe('Markup matrix with buttons.'),
+								singleUse: zod
+									.boolean()
+									.optional()
+									.describe('Force to block user keyboard.'),
+							})
+							.optional()
+							.describe(
+								'Interactive represents a rich message with UI elements.',
+							),
+						location: zod
+							.object({
+								address: zod.string().optional(),
+								latitude: zod.number().optional(),
+								longitude: zod.number().optional(),
+								name: zod.string().optional(),
+							})
+							.optional(),
+						metadata: zod
+							.looseObject({})
+							.optional()
+							.describe(
+								'Arbitrary message metadata.\nCan contain structured data depending on message type.',
+							),
+						sender: zod
+							.object({
+								contact: zod
+									.object({
+										appId: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the specific integration app or bot.',
+											),
+										createdAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Record creation timestamp (Unix Epoch in milliseconds).',
+											),
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if usere is real person or automatic script.',
+											),
+										iss: zod
+											.string()
+											.optional()
+											.describe(
+												'Provider-specific unique identifier (Issuer ID).',
+											),
+										metadata: zod
+											.record(zod.string(), zod.string())
+											.optional()
+											.describe(
+												'Additional dynamic attributes provided by the messenger.',
+											),
+										name: zod
+											.string()
+											.optional()
+											.describe('Display name of the contact.'),
+										sub: zod
+											.string()
+											.optional()
+											.describe(
+												'Associated internal system subject/identifier.',
+											),
+										type: zod
+											.string()
+											.optional()
+											.describe("Channel type (e.g., 'webchat', 'telegram')."),
+										updatedAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Last record update timestamp (Unix Epoch in milliseconds).',
+											),
+										username: zod
+											.string()
+											.optional()
+											.describe('Technical username or handle.'),
+										vias: zod
+											.array(
+												zod.object({
+													contactId: zod.string().optional(),
+													createdAt: zod.string().optional(),
+													disable: zod.boolean().optional(),
+													disableReason: zod.string().optional(),
+													metadata: zod.looseObject({}).optional(),
+													updatedAt: zod.string().optional(),
+													via: zod.string().optional(),
+												}),
+											)
+											.optional(),
+									})
+									.optional()
+									.describe(
+										'Contact represents an external messaging identity.',
+									),
+								id: zod.string().optional(),
+								permissions: zod
+									.object({
+										canAddMembers: zod.boolean().optional(),
+										canChangeMembersPermissions: zod.boolean().optional(),
+										canChangeThreadInfo: zod.boolean().optional(),
+										canRemoveMembers: zod.boolean().optional(),
+										canSendMessages: zod.boolean().optional(),
+										createdAt: zod.string().optional(),
+										id: zod.string().optional(),
+										memberId: zod.string().optional(),
+										updatedAt: zod.string().optional(),
+									})
+									.optional(),
+								role: zod
+									.enum([
+										'ROLE_UNSPECIFIED',
+										'ROLE_MEMBER',
+										'ROLE_ADMIN',
+										'ROLE_OWNER',
+										'ROLE_SUPERVISOR',
+									])
+									.default(
+										messageHistorySearchThreadMessagesHistoryResponseItemsItemSenderRoleDefault,
+									),
+							})
+							.optional()
+							.describe('Sender user aggregated information.'),
+						threadId: zod
+							.string()
+							.optional()
+							.describe('Identifier of the thread the message belongs to.'),
+						type: zod.number().optional().describe('Message type identifier.'),
+					})
+					.describe(
+						'HistoryMessage represents a single message\nin thread history.',
+					),
+			)
+			.optional()
+			.describe('List of messages matching the search criteria.'),
+		nextCursor: zod
+			.object({
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier last message where cursor stopped.'),
+			})
+			.optional()
+			.describe(
+				"Cursor that represents position to get older messages (used without 'before' param).",
+			),
+		prevCursor: zod
+			.object({
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier last message where cursor stopped.'),
+			})
+			.optional()
+			.describe(
+				"Cursor that represents position to get newest messages (used with 'before' param).",
+			),
+	})
+	.describe(
+		'SearchMessageHistoryResponse contains\nmessage history search results and pagination metadata.',
+	);

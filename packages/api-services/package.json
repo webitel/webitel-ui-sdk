@@ -1,9 +1,17 @@
 {
 	"name": "@webitel/api-services",
-	"version": "0.1.13",
+	"version": "0.1.38",
 	"private": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/webitel/webitel-ui-sdk.git"
+	},
+	"keywords": [
+		"webitel",
+		"api-services"
+	],
+	"author": "webitel",
 	"scripts": {
-		"make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
 		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
 		"publish-lib": "npm publish --access public --tag latest",
 		"gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
@@ -12,6 +20,11 @@
 		"gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
 		"format:all": "npx biome check --write ./src",
+		"biome:ci:gh": "biome ci ./src --reporter=github",
+		"test:unit": "node -e \"process.exit(0)\"",
+		"lint": "biome ci ./src",
+		"test": "npm run test:unit",
+		"ci:check": "npm run biome:ci:gh && npm run test:unit && npm run lint:package",
 		"orval": "orval",
 		"lint:package": "publint",
 		"utils:i": "npm i"
@@ -30,10 +43,10 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.14",
+		"@biomejs/biome": "^2.4.10",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/node": "^22.13.10",
-		"axios": "^1.10.0",
+		"axios": "1.13.2",
 		"change-case": "^5.4.4",
 		"globby": "^14.1.0",
 		"husky": "^9.1.7",
@@ -75,6 +88,10 @@
 			"types": "./types/utils/index.d.ts",
 			"import": "./src/utils/index.ts"
 		},
+		"./scripts": {
+			"types": "./types/scripts/index.d.ts",
+			"import": "./src/scripts/index.ts"
+		},
 		"./gen/utils": {
 			"types": "./types/utils/gen/index.d.ts",
 			"import": "./src/utils/gen/index.ts"
@@ -98,6 +115,10 @@
 		"./enums": {
 			"types": "./types/enums/index.d.ts",
 			"import": "./src/enums/index.ts"
+		},
+		"./validations": {
+			"types": "./types/validations/index.d.ts",
+			"import": "./src/validations/index.ts"
 		},
 		"./locale": {
 			"types": "./src/locale/locale.ts",

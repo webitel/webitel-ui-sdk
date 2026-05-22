@@ -58,65 +58,6 @@ export const getSignupResponseMock = (
 		},
 		undefined,
 	]),
-	warnings: faker.helpers.arrayElement([
-		Array.from(
-			{
-				length: faker.number.int({
-					min: 1,
-					max: 10,
-				}),
-			},
-			(_, i) => i + 1,
-		).map(() => ({
-			detail: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			warningData: faker.helpers.arrayElement([
-				{
-					passwordExpiry: faker.helpers.arrayElement([
-						{
-							daysRemaining: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							expiresAt: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-						},
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-		})),
-		undefined,
-	]),
 	...overrideResponse,
 });
 
@@ -188,6 +129,15 @@ export const getUserInfo2ResponseMock = (
 				undefined,
 			]),
 			issuedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -498,6 +448,15 @@ export const getUserInfoResponseMock = (
 				undefined,
 			]),
 			issuedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,

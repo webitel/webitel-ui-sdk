@@ -1,3 +1,5 @@
+/* THIS FILE IS ADDED TO BIOME IGNORE coz it fails to parse Vue :deep() selector*/
+
 :deep(.multiselect) {
     position: relative;
     cursor: pointer;

@@ -5,7 +5,7 @@ import {
 	UpdateSourceBody,
 } from '@webitel/api-services/gen';
 import {
-	getFieldsToSendFromZodSchema,
+	// getFieldsToSendFromZodSchema,
 	getShallowFieldsToSendFromZodSchema,
 } from '@webitel/api-services/gen/utils';
 

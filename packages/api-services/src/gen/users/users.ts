@@ -13,6 +13,7 @@ import type {
 	ApiCreateUserResponse,
 	ApiDeleteUsersResponse,
 	ApiGetPasswordSettingsResponse,
+	ApiGetUserWarningsResponse,
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersRequest,
@@ -32,6 +33,38 @@ import type {
 	UpdateUserParams,
 	UsersLogoutUserBody,
 } from '../_models';
+
+// https://stackoverflow.com/questions/49579094/typescript-conditional-types-filter-out-readonly-properties-pick-only-requir/49579497#49579497
+type IfEquals<X, Y, A = X, B = never> =
+	(<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
+
+type WritableKeys<T> = {
+	[P in keyof T]-?: IfEquals<
+		{ [Q in P]: T[P] },
+		{ -readonly [Q in P]: T[P] },
+		P
+	>;
+}[keyof T];
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+	k: infer I,
+) => void
+	? I
+	: never;
+type DistributeReadOnlyOverUnions<T> = T extends any ? NonReadonly<T> : never;
+
+type Writable<T> = Pick<T, WritableKeys<T>>;
+type NonReadonly<T> = [
+	T,
+] extends [
+	UnionToIntersection<T>,
+]
+	? {
+			[P in keyof Writable<T>]: T[P] extends object
+				? NonReadonly<NonNullable<T[P]>>
+				: T[P];
+		}
+	: DistributeReadOnlyOverUnions<T>;
 
 // --- header start
 //
@@ -80,7 +113,7 @@ export const // --- title start
 				});
 			};
 			const createUser = (
-				apiCreateUserRequest: ApiCreateUserRequest,
+				apiCreateUserRequest: NonReadonly<ApiCreateUserRequest>,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiCreateUserResponse>> => {
 				return axiosInstance.post(`/users`, apiCreateUserRequest, options);
@@ -116,6 +149,11 @@ export const // --- title start
 					apiSearchUsersRequest,
 					options,
 				);
+			};
+			const getUserWarnings = (
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ApiGetUserWarningsResponse>> => {
+				return axiosInstance.get(`/users/warnings`, options);
 			};
 			const deleteUsers = (
 				id: string,
@@ -155,7 +193,7 @@ export const // --- title start
 				);
 			};
 			const updateUser2 = (
-				updateUser2Body: UpdateUser2Body,
+				updateUser2Body: NonReadonly<UpdateUser2Body>,
 				params?: UpdateUser2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiUser>> => {
@@ -168,7 +206,7 @@ export const // --- title start
 				});
 			};
 			const updateUser = (
-				updateUserBody: UpdateUserBody,
+				updateUserBody: NonReadonly<UpdateUserBody>,
 				params?: UpdateUserParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiUser>> => {
@@ -190,6 +228,7 @@ export const // --- title start
 				updatePassword,
 				readPasswordSettings,
 				searchUsers2,
+				getUserWarnings,
 				deleteUsers,
 				readUser,
 				logoutUser,
@@ -205,6 +244,7 @@ export type UpdatePasswordResult = AxiosResponse<ApiUpdatePasswordResponse>;
 export type ReadPasswordSettingsResult =
 	AxiosResponse<ApiGetPasswordSettingsResponse>;
 export type SearchUsers2Result = AxiosResponse<ApiSearchUsersResponse>;
+export type GetUserWarningsResult = AxiosResponse<ApiGetUserWarningsResponse>;
 export type DeleteUsersResult = AxiosResponse<ApiDeleteUsersResponse>;
 export type ReadUserResult = AxiosResponse<ApiReadUserResponse>;
 export type LogoutUserResult = AxiosResponse<ApiLogoutUserResponse>;

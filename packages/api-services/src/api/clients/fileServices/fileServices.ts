@@ -87,7 +87,7 @@ const deleteFiles = async (id) => {
 	}
 };
 
-const getScreenRecordingsByUser = async (params: any) => {
+const getScreenRecordingsByUser = async (params: unknown) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsQueryParams,
 	);
@@ -165,7 +165,7 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 	}
 };
 
-const getScreenRecordingsByAgent = async (params: any) => {
+const getScreenRecordingsByAgent = async (params: unknown) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsByAgentQueryParams,
 	);

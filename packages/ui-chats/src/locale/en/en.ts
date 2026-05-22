@@ -1,9 +1,10 @@
 export default {
-	"@webitel/ui-chats": {
+	'@webitel/ui-chats': {
 		ui: {
 			messaging: {
-				chatsFileBlocked: "File quarantined or blocked",
-				textAreaPlaceholder: "Write a message...",
+				chatsFileBlocked: 'File quarantined or blocked',
+				chatsIncorrectFileSize: 'Incorrect file size',
+				textAreaPlaceholder: 'Write a message...',
 			},
 		},
 	},

@@ -61,7 +61,7 @@ const initialComment =
 
 const updateTime = computed(() => {
 	return formatDate(
-		Number.parseInt(props.answer.updatedAt),
+		Number.parseInt(props.answer.updatedAt, 10),
 		FormatDateMode.DATETIME,
 	);
 });
