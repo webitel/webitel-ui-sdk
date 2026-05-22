@@ -260,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Қате',
 			},
 		},
-	},
-	importCSV: 'CSV импорттау',
-	CSV: {
-		skipHeaders: 'Тақырыптарды өткізіп жіберу',
-		charSet: 'Таңбалар жиыны',
-		separator: 'Бөлгіш',
-		CSVColumn: 'CSV бағаны',
-		fieldName: 'Өріс атауы',
-		clearMember: 'Мүшені тазалау',
+		importCSV: 'CSV импорттау',
+		CSV: {
+			skipHeaders: 'Тақырыптарды өткізіп жіберу',
+			charSet: 'Таңбалар жиыны',
+			separator: 'Бөлгіш',
+			CSVColumn: 'CSV бағаны',
+			fieldName: 'Өріс атауы',
+			clearMember: 'Мүшені тазалау',
+		},
 	},
 	channel: {
 		state: {
