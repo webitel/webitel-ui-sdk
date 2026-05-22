@@ -12,7 +12,7 @@
     :disabled="disabled"
     :loading="showLoader"
     :severity="color"
-    size="small"
+    :size="primevueSizeMap[size]"
     :variant="variant"
     class="wt-button typo-button typo-button"
     v-bind="attrs"
@@ -98,7 +98,6 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
 	iconPrefix: '',
 	variant: ButtonVariant.ACTIVE,
 });
-console.log(primevueSizeMap[props.size], ' SIZE');
 
 const emit = defineEmits([
 	'click',
@@ -167,7 +166,7 @@ watch(
 
 <style>
 .wt-button {
-	position: relative;
+  position: relative;
 }
 
 .p-button--with-badge {
