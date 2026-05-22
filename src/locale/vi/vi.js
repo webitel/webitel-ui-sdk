@@ -260,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Lỗi',
 			},
 		},
-	},
-	importCSV: 'Nhập CSV',
-	CSV: {
-		skipHeaders: 'Bỏ qua tiêu đề',
-		charSet: 'Bộ ký tự',
-		separator: 'Dấu phân cách',
-		CSVColumn: 'Cột CSV',
-		fieldName: 'Tên trường',
-		clearMember: 'Xóa thành viên',
+		importCSV: 'Nhập CSV',
+		CSV: {
+			skipHeaders: 'Bỏ qua tiêu đề',
+			charSet: 'Bộ ký tự',
+			separator: 'Dấu phân cách',
+			CSVColumn: 'Cột CSV',
+			fieldName: 'Tên trường',
+			clearMember: 'Xóa thành viên',
+		},
 	},
 	channel: {
 		state: {
