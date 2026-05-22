@@ -68,15 +68,14 @@ import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
 import { ref, toRefs } from 'vue';
 import { ComponentSize } from '../../enums';
-
+import WtPopover from '../wt-popover/wt-popover.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
-import WtPopover from '../wt-popover/wt-popover.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
-import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
+import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 
 interface Props {
 	/**
