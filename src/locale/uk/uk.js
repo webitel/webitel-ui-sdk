@@ -255,15 +255,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Помилка',
 			},
 		},
-	},
-	importCSV: 'Імпорт CSV',
-	CSV: {
-		skipHeaders: 'Пропустити заголовки',
-		charSet: 'Кодування',
-		separator: 'Розділювач',
-		CSVColumn: 'Стовпець CSV',
-		fieldName: 'Назва поля',
-		clearMember: 'Очистити учасника',
+		importCSV: 'Імпорт CSV',
+		CSV: {
+			skipHeaders: 'Пропустити заголовки',
+			charSet: 'Кодування',
+			separator: 'Розділювач',
+			CSVColumn: 'Стовпець CSV',
+			fieldName: 'Назва поля',
+			clearMember: 'Очистити учасника',
+		},
 	},
 	channel: {
 		state: {
