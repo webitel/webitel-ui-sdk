@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { WtButton, WtSlider, WtIcon } from '../../../../../components';
+import { WtButton, WtIcon, WtSlider } from '../../../../../components';
 import { ComponentSize } from '../../../../../enums';
 
 interface Props {
