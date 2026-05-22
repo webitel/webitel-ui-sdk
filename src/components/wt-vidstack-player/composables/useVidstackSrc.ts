@@ -21,6 +21,8 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 		const srcStr =
 			typeof srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
 
+		if (typeof srcStr !== 'string') return srcStr;
+
 		return srcStr?.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
 	});
 
