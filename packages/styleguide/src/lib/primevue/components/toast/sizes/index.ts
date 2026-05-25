@@ -6,7 +6,7 @@ const sizes = {
 		transitionDuration: '{transition.duration}',
 	},
 	icon: {
-		size: '1.125rem',
+		size: '1.5rem',
 	},
 	content: {
 		padding: '{overlay.popover.padding}',
@@ -16,11 +16,11 @@ const sizes = {
 		gap: '0.5rem',
 	},
 	summary: {
-		fontWeight: '500',
-		fontSize: '1rem',
+		fontWeight: '700',
+		fontSize: '0.875rem',
 	},
 	detail: {
-		fontWeight: '500',
+		fontWeight: '400',
 		fontSize: '0.875rem',
 	},
 	closeButton: {
