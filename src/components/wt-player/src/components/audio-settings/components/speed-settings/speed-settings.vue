@@ -60,8 +60,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { WtButton, WtIcon, WtSlider } from '../../../../../components';
-import { ComponentSize } from '../../../../../enums';
+import { WtButton, WtIcon, WtSlider } from '../../../../../../../components';
+import { ComponentSize } from '../../../../../../../enums';
 
 interface Props {
 	modelValue?: number;
