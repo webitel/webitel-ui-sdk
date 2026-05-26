@@ -19,7 +19,7 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 		const src =
 			typeof srcRef.value === 'string' ? srcRef.value : srcRef.value?.src;
 
-		if (typeof src !== 'undefined' && src instanceof Blob) return src; // https://webitel.atlassian.net/browse/WTEL-9633
+		if (src instanceof Blob) return src; // https://webitel.atlassian.net/browse/WTEL-9633
 
 		return src?.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
 	});
