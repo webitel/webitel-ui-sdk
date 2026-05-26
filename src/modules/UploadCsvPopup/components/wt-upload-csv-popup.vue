@@ -35,7 +35,7 @@
           />
           
           <wt-input-text
-            v-model="separator"
+            v-model:model-value="separator"
             :label="t('objects.CSV.separator')"
           />
         </form>
