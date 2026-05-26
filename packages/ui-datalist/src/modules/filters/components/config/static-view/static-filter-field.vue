@@ -51,5 +51,6 @@ const onValueChange = (value) => {
 <style lang="scss" scoped>
 .static-filter-field {
   flex: 1;
+  min-width: 0;
 }
 </style>
