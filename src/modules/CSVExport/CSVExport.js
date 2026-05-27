@@ -85,7 +85,12 @@ export default class CSVExport {
 				...params,
 				page,
 			});
-			if (!columns.length && items.length) columns = Object.keys(items[0]);
+			if (!columns.length && items.length) {
+				const keySet = new Set(items.flatMap(Object.keys));
+				columns = [
+					...keySet,
+				].filter((key) => !key.startsWith('_'));
+			}
 
 			const options = {
 				...CSVExport._getStringifyOptions(params.delimiter),
