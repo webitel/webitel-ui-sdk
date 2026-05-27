@@ -1,7 +1,7 @@
 <template>
-	<wt-popover class="audio-settings">
+	<wt-popover class="media-settings-wrapper">
 		<template #activator="{ toggle }">
-			<media-button class="audio-settings__button" @click="toggle">
+			<media-button class="media-settings-wrapper__button" @click="toggle">
 				<wt-icon-btn
 					icon="plyr-settings"
 					:size="ComponentSize.SM"
@@ -17,16 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from '../../../../../enums';
-import WtPopover from '../../../../wt-popover/wt-popover.vue';
+import { ComponentSize } from '../../../enums';
+import { WtPopover } from '../../../components';
 import SpeedSettings from './components/speed-settings/speed-settings.vue';
 
-export interface PlayerSettings {
+export interface MediaSettings {
 	playbackRate: number;
 }
 
 interface Props {
-	modelValue: PlayerSettings;
+	modelValue: MediaSettings;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
 	'update:modelValue': [
-		value: PlayerSettings,
+		value: MediaSettings,
 	];
 }>();
 
@@ -50,11 +50,11 @@ function handlePlaybackRateUpdate(playbackRate: number) {
 </script>
 
 <style scoped>
-.audio-settings {
+.media-settings-wrapper {
 	display: flex;
 }
 
-.audio-settings__button {
+.media-settings-wrapper__button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;

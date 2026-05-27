@@ -19,9 +19,9 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
-			<audio-settings
+			<settings-panel
 				v-if="!props.hideSettings"
-				v-model="playerSettings"
+				v-model:model-value="playerSettings"
 			/>
 
 			<media-button
@@ -58,11 +58,11 @@ import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
 import { ref, toRefs } from 'vue';
 import { ComponentSize } from '../../enums';
+import SettingsPanel, {
+	type MediaSettings,
+} from '../_shared/settings-panel/settings-panel.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
-import AudioSettings, {
-	type PlayerSettings,
-} from './src/components/audio-settings/audio-settings.vue';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
@@ -167,7 +167,7 @@ const emit = defineEmits<{
 	close: [];
 }>();
 
-const playerSettings = ref<PlayerSettings>({
+const playerSettings = ref<MediaSettings>({
 	playbackRate: 1,
 });
 
