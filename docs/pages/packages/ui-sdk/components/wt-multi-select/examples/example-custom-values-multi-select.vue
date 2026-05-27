@@ -15,7 +15,7 @@ const value = ref([]);
       option-label="name"
       data-key="language"
       allow-custom-values
-      is-chip
+      chips-view
     />
     <pre><code>{{ value }}</code></pre>
   </div>

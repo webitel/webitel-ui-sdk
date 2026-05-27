@@ -16,7 +16,7 @@ const value = ref([
     label="Multi Select (chip display)"
     option-label="name"
     data-key="language"
-    is-chip
+    chips-view
   />
 </template>
 
