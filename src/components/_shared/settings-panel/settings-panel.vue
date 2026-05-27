@@ -1,7 +1,7 @@
 <template>
-	<wt-popover class="media-settings-wrapper">
+	<wt-popover class="settings-panel">
 		<template #activator="{ toggle }">
-			<media-button class="media-settings-wrapper__button" @click="toggle">
+			<media-button class="settings-panel__button" @click="toggle">
 				<wt-icon-btn
 					icon="plyr-settings"
 					:size="ComponentSize.SM"
@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from '../../../enums';
 import { WtPopover } from '../../../components';
+import { ComponentSize } from '../../../enums';
 import SpeedSettings from './components/speed-settings/speed-settings.vue';
 
 export interface MediaSettings {
@@ -50,11 +50,11 @@ function handlePlaybackRateUpdate(playbackRate: number) {
 </script>
 
 <style scoped>
-.media-settings-wrapper {
+.settings-panel {
 	display: flex;
 }
 
-.media-settings-wrapper__button {
+.settings-panel__button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
