@@ -45,12 +45,12 @@ const lightColors = {
 		rangeSelectedBackground: '{highlight.background}',
 		color: '{content.color}',
 		hoverColor: '{content.hover.color}',
-		selectedColor: '{primary.contrast.color}',
+		selectedColor: '{primary.foreground}',
 		rangeSelectedColor: '{highlight.color}',
 	},
 	today: {
-		background: '{surface.200}',
-		color: '{surface.900}',
+		background: '{secondary.highlightColor}',
+		color: '{secondary.foreground}',
 	},
 	buttonbar: {
 		borderColor: '{content.border.color}',
