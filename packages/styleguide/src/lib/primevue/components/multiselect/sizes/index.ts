@@ -43,7 +43,7 @@ const sizes = {
 		padding: '{list.option.group.padding}',
 	},
 	chip: {
-		borderRadius: '{border.radius.sm}',
+		borderRadius: '{border.radius.xl}',
 	},
 	emptyMessage: {
 		padding: '{list.option.padding}',
