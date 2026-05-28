@@ -27,7 +27,7 @@
         :self-side="isSelfSide"
         @click.stop
       />
-      <div v-else @click.stop>
+      <div class="chat-message__message" v-else @click.stop>
         <message-player
           v-if="media"
           :file="media"
@@ -45,12 +45,23 @@
           :file="document"
           :self-side="isSelfSide"
         />
-        <message-text
+        <div
           v-if="props.message?.text"
-          :text="props.message.text"
+          class="chat-message-text-wrapper"
+        >
+          <message-text
+            :text="props.message.text"
+            :with-timestamp-spacer="true"
+          />
+          <message-time :date="props.message.createdAt" />
+        </div>
+        <message-time
+          v-else
+          :date="props.message.createdAt"
         />
       </div>
       <message-time
+        v-if="message.file?.malware || isFileSizeExceeded"
         :date="props.message.createdAt"
       />
     </div>
@@ -165,10 +176,32 @@ function handlePlayerInitialize(player) {
   margin: 0 var(--spacing-2xs) 0 var(--spacing-md);
 }
 
-.chat-message--right .chat-message-text {
+.chat-message--right .chat-message__message {
   background: var(--secondary-light-color);
   color: var(--secondary-on-color);
   place-self: flex-end;
+}
+
+.chat-message__message {
+  position: relative;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius);
+  background: var(--primary-light-color);
+  color: var(--primary-on-color);
+  place-self: flex-start;
+}
+
+.chat-message-text-wrapper {
+  --chat-message-timestamp-spacer-width: 44px;
+}
+
+.chat-message-text-wrapper :deep(.chat-message-time) {
+  position: absolute;
+  bottom: var(--spacing-xs);
+  right: var(--spacing-xs);
+  pointer-events: none;
 }
 
 </style>

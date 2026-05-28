@@ -14,9 +14,10 @@ import { computed, defineProps } from 'vue';
 
 const props = defineProps<{
 	text: string;
+	withTimestampSpacer?: boolean;
 }>();
 
-const text = computed(() => {
+const linkedText = computed(() => {
 	// ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
 	// https://my.webitel.com/browse/DEV-2848
 	return Autolinker.link(props.text, {
@@ -25,6 +26,14 @@ const text = computed(() => {
 		className: 'chat-message-new-text__link',
 	});
 });
+
+const text = computed(() => {
+	if (!props.withTimestampSpacer) return linkedText.value;
+	return (
+		linkedText.value +
+		'<span class="chat-message-text__timestamp-spacer" aria-hidden="true"></span>'
+	);
+});
 </script>
 
 <style
@@ -32,18 +41,17 @@ const text = computed(() => {
   scoped
 >
 .chat-message-text {
-  overflow-wrap: anywhere;
-  white-space: pre-line; // read \n as "new line"
-  padding: var(--spacing-xs);
-  border-radius: var(--border-radius);
-  background: var(--primary-light-color);
-  color: var(--primary-on-color);
-  place-self: flex-start;
-
   // reset links inside text
   :deep(.chat-message-text__link) {
     color: revert;
     text-decoration: revert;
+  }
+
+  :deep(.chat-message-text__timestamp-spacer) {
+    display: inline-block;
+    width: var(--chat-message-timestamp-spacer-width, 44px);
+    height: 1em;
+    vertical-align: bottom;
   }
 }
 </style>
