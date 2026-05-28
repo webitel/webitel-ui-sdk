@@ -83,7 +83,6 @@ const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   background-color: var(--wt-expansion-card-header-background-color);
   color: var(--wt-expansion-card-header-title-color);
 }
