@@ -57,6 +57,7 @@ export const createUserinfoStore = () => {
 				'scope',
 				'roles',
 				'name',
+				'chatName',
 			]);
 
 			initializeAccessStore({
