@@ -56,7 +56,7 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { ref, toRefs } from 'vue';
+import { ref, toRefs, watch } from 'vue';
 import { ComponentSize } from '../../enums';
 import SettingsPanel, {
 	type MediaSettings,
@@ -203,6 +203,17 @@ function handleEnded(event: Event) {
 	const player = event.target as HTMLMediaElement;
 	player.currentTime = 0;
 }
+
+function resetPlayerSettings() {
+	playerSettings.value.playbackRate = 1;
+}
+
+watch(
+	() => props.src,
+	() => {
+		resetPlayerSettings();
+	},
+);
 </script>
 
 <style scoped>
