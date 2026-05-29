@@ -107,4 +107,5 @@ export default {
 			lg: '1rem',
 		},
 	},
+	chatMessageGap: '0.25rem',
 };
