@@ -27,7 +27,7 @@
         :self-side="isSelfSide"
         @click.stop
       />
-      <div class="chat-message__message" v-else @click.stop>
+      <div class="chat-message__body" v-else @click.stop>
         <message-player
           v-if="media"
           :file="media"
@@ -176,13 +176,13 @@ function handlePlayerInitialize(player) {
   margin: 0 var(--spacing-2xs) 0 var(--spacing-md);
 }
 
-.chat-message--right .chat-message__message {
+.chat-message--right .chat-message__body {
   background: var(--secondary-light-color);
   color: var(--secondary-on-color);
   place-self: flex-end;
 }
 
-.chat-message__message {
+.chat-message__body {
   position: relative;
   overflow-wrap: anywhere;
   white-space: pre-line;
@@ -197,7 +197,11 @@ function handlePlayerInitialize(player) {
   --chat-message-timestamp-spacer-width: 44px;
 }
 
-.chat-message-text-wrapper :deep(.chat-message-time) {
+.chat-message-time {
+  margin-top: var(--p-player-chat-message-gap);
+}
+
+.chat-message-text-wrapper .chat-message-time {
   position: absolute;
   bottom: var(--spacing-xs);
   right: var(--spacing-xs);
