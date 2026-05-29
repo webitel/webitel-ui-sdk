@@ -1,11 +1,12 @@
-import { useSelectOptions } from './useSelectOptions';
-import { useSelectDropdown } from './useSelectDropdown';
 import { useSelectCustomValues } from './useSelectCustomValues';
+import { useSelectDropdown } from './useSelectDropdown';
+import { useSelectOptions } from './useSelectOptions';
 
 export const useSelect = ({
 	selected,
 	options,
 	optionLabel,
+	optionValue,
 	dataKey,
 	allowCustomValues,
 	manualCustomValues = false,
@@ -31,6 +32,7 @@ export const useSelect = ({
 		selected,
 		options,
 		optionLabel,
+		optionValue,
 		dataKey,
 		allowCustomValues,
 		searchMethod,
@@ -72,6 +74,15 @@ export const useSelect = ({
 		emit,
 	});
 
+	const clearValue = () => {
+		let value: any = '';
+		if (Array.isArray(selected.value)) value = [];
+		else if (typeof selected.value === 'object' && selected.value !== null)
+			value = {};
+		selected.value = value;
+		emit('reset', value);
+	};
+
 	return {
 		isLoading,
 		isDropdownOpen,
@@ -85,5 +96,6 @@ export const useSelect = ({
 		onDropdownShow,
 		onDropdownHide,
 		onInputKeydown,
+		clearValue,
 	};
 };

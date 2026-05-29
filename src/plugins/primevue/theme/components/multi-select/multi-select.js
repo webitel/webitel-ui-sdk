@@ -18,6 +18,14 @@ const multiSelect = {
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+
+		.p-multiselect-label:has(.p-chip) {
+			padding: ${dt('multiselect.paddingY')} ${dt('multiselect.paddingX')};
+		}
+
+		.p-multiselect-chip-item {
+			display: flex;
+		}
 	`,
 };
 

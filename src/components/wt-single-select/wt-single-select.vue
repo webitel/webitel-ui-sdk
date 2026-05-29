@@ -47,23 +47,37 @@
           </template>
         </wt-input-text>
       </template>
-      <template #option="{ option }">
-        <span
-          class="wt-single-select__option-label"
-          v-tooltip="getOptionLabel(option)"
-        >
-          {{ getOptionLabel(option) }}
-        </span>
+      <template v-if="model" #value="{ value, placeholder }">
+        <slot name="value" v-bind="{ value, getOptionLabel, placeholder }">
+          <span
+            v-tooltip="getOptionLabel(value)"
+          >
+            {{ getOptionLabel(value) || placeholder }}
+          </span>
+        </slot>
       </template>
-      <template #clearicon="{clearCallback}">
+      <template #option="{ option }">
+        <slot name="option" v-bind="{ option, getOptionLabel }">
+          <span
+            class="wt-single-select__option-label"
+            v-tooltip="getOptionLabel(option)"
+          >
+            {{ getOptionLabel(option) }}
+          </span>
+        </slot>
+      </template>
+      <template #clearicon>
         <wt-icon-btn 
           v-if="showClear && model"  
           icon="close" 
-          @click="clearCallback"
+          @click="clearValue"
         />
       </template>
       <template #dropdownicon>
         <wt-icon :icon="isDropdownOpen ? 'arrow-up' : 'arrow-down'" />
+      </template>
+      <template #loadingicon>
+        <wt-loader :size="ComponentSize.SM" />
       </template>
     </p-select>
     <wt-message
@@ -78,8 +92,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import type { SelectProps } from 'primevue';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
@@ -124,6 +138,7 @@ interface Props extends SelectProps {
 
 const props = withDefaults(defineProps<Props>(), {
 	filterable: true,
+	showClear: true,
 	options: () => [],
 	optionLabel: 'label',
 	dataKey: 'id',
@@ -133,7 +148,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 const model = defineModel<string>({
 	default: '',
+	get: (value) => {
+		if (value == null) return '';
+		if (typeof value !== 'object') return value;
+		return Object.keys(value).length > 0 ? value : '';
+	},
 });
+
+const emit = defineEmits([
+	'reset',
+]);
 
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
@@ -153,10 +177,12 @@ const {
 	onDropdownHide,
 	filterOptions,
 	onInputKeydown,
+	clearValue,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),
 	optionLabel: computed(() => props.optionLabel),
+	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),
 	allowCustomValues: computed(() => props.allowCustomValues),
 	filterInput,
@@ -164,6 +190,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: true,
+	emit,
 });
 
 const slots = useSlots();
