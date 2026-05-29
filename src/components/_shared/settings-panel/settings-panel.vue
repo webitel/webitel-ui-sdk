@@ -51,14 +51,12 @@ function handlePlaybackRateUpdate(playbackRate: number) {
 
 <style scoped>
 .settings-panel {
-	//display: flex;
-  //height: 20px;
+  display: flex;
 }
 
 .settings-panel__button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-  height: 20px;
 }
 </style>
