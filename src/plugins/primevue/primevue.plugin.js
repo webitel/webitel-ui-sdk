@@ -17,7 +17,7 @@ import PInputNumber from 'primevue/inputnumber';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PMessage from 'primevue/message';
-import PMultiSelect from 'primevue/multiSelect';
+import PMultiSelect from 'primevue/multiselect';
 import PPassword from 'primevue/password';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
