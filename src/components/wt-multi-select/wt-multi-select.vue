@@ -178,8 +178,10 @@ const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
 const emit = defineEmits<{
-	(e: 'add:custom-value', value: string): void;
-	(e: 'reset'): void;
+	'add:custom-value': [
+		value: string,
+	];
+	reset: [];
 }>();
 
 const {

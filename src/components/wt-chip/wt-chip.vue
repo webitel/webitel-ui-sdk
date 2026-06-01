@@ -43,7 +43,7 @@ withDefaults(defineProps<WtProps>(), {
 });
 
 const emit = defineEmits<{
-	(e: 'remove'): void;
+	remove: [];
 }>();
 </script>
 
