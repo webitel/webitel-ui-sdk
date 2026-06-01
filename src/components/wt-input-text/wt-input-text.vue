@@ -58,10 +58,9 @@
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
-
-import { useInputControl } from '../_internals/composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useInputControl } from '../_internals/composables';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;

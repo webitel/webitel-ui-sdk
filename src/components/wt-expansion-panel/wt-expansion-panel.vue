@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 import { toRef } from 'vue';
-import { useExpansion } from '../_internals/composables/useExpansion/useExpansion';
 import { ComponentSize } from '../../enums';
+import { useExpansion } from '../_internals/composables/useExpansion/useExpansion';
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 /**

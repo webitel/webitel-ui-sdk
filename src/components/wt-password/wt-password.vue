@@ -60,10 +60,9 @@ import {
 	useSlots,
 	useTemplateRef,
 } from 'vue';
-
-import { useInputControl } from '../_internals/composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useInputControl } from '../_internals/composables';
 
 interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	label?: string;

@@ -330,6 +330,7 @@ export {
 	WtSelect,
 	WtSelectionPopup,
 	WtSendMessagePopup,
+	WtSingleSelect,
 	WtSlider,
 	WtStartPage,
 	WtStatusSelect,
@@ -348,7 +349,6 @@ export {
 	WtTreeTable,
 	WtTypeExtensionValueInput,
 	WtVidstackPlayer,
-	WtSingleSelect,
 };
 
 export default Components;

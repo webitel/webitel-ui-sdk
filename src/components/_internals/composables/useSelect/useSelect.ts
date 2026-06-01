@@ -75,7 +75,7 @@ export const useSelect = ({
 	});
 
 	const clearValue = () => {
-		let value: any = '';
+		let value: string | unknown[] | Record<string, unknown> = '';
 		if (Array.isArray(selected.value)) value = [];
 		else if (typeof selected.value === 'object' && selected.value !== null)
 			value = {};

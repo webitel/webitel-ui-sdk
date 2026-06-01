@@ -1,5 +1,5 @@
 import { nextTick } from 'vue';
-import { toArray, isOptionSelected } from './useSelectUtils';
+import { isOptionSelected, toArray } from './useSelectUtils';
 
 export const useSelectCustomValues = ({
 	selected,

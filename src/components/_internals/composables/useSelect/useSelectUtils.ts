@@ -20,7 +20,10 @@ export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
 	}
 	const seen = new Map();
 	for (const item of items) {
-		const k = (item as any)[key];
+		const k =
+			item != null && typeof item === 'object'
+				? (item as Record<string, unknown>)[key]
+				: item;
 		if (!seen.has(k)) seen.set(k, item);
 	}
 	return [

@@ -228,9 +228,8 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { useTableColumnDrag } from '../_internals/composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { useTableColumnDrag } from '../_internals/composables';
 import type { WtTableHeader } from './types/WtTable';
 
 /**
