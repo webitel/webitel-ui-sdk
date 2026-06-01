@@ -155,28 +155,31 @@ export const useSelectOptions = ({
 		}
 	};
 
+	const addSelectedValueToList = (newVal) => {
+		// If the selected value is not in the list, add it
+		if (!newVal || !searchMethod.value) return;
+		const selectedAsArray = toArray(newVal);
+		const missingSelected = selectedAsArray.filter(
+			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
+		);
+		if (missingSelected.length) {
+			filteredOptions.value = sortOptions(
+				dedupeByKey(
+					[
+						...missingSelected,
+						...filteredOptions.value,
+					],
+					dataKey.value,
+				),
+			);
+		}
+	};
+
 	watch(
 		() => selected.value,
 		(newVal) => {
 			updateSelectedOptionsCache();
-
-			// If the selected value is not in the list, add it
-			if (!newVal || !searchMethod.value) return;
-			const selectedAsArray = toArray(newVal);
-			const missingSelected = selectedAsArray.filter(
-				(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
-			);
-			if (missingSelected.length) {
-				filteredOptions.value = sortOptions(
-					dedupeByKey(
-						[
-							...missingSelected,
-							...filteredOptions.value,
-						],
-						dataKey.value,
-					),
-				);
-			}
+			addSelectedValueToList(newVal);
 		},
 	);
 

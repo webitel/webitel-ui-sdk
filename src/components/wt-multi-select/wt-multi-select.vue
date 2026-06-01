@@ -177,10 +177,10 @@ const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
-const emit = defineEmits([
-	'add:custom-value',
-	'reset',
-]);
+const emit = defineEmits<{
+	(e: 'add:custom-value', value: string): void;
+	(e: 'reset'): void;
+}>();
 
 const {
 	isLoading,

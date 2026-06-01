@@ -42,9 +42,9 @@ withDefaults(defineProps<WtProps>(), {
 	removable: false,
 });
 
-const emit = defineEmits([
-	'remove',
-]);
+const emit = defineEmits<{
+	(e: 'remove'): void;
+}>();
 </script>
 
 <style scoped>

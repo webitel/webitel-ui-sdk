@@ -155,9 +155,9 @@ const model = defineModel<string>({
 	},
 });
 
-const emit = defineEmits([
-	'reset',
-]);
+const emit = defineEmits<{
+	(e: 'reset'): void;
+}>();
 
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
