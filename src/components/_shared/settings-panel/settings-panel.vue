@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { WtPopover } from '../../../components';
 import { ComponentSize } from '../../../enums';
+import WtPopover from '../../wt-popover/wt-popover.vue';
 import SpeedSettings from './components/speed-settings/speed-settings.vue';
 
 export interface MediaSettings {
@@ -51,7 +51,7 @@ function handlePlaybackRateUpdate(playbackRate: number) {
 
 <style scoped>
 .settings-panel {
-	display: flex;
+  display: flex;
 }
 
 .settings-panel__button {
