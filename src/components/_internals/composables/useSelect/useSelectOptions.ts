@@ -1,14 +1,13 @@
-import { useI18n } from 'vue-i18n';
 import { reactive, ref, watch } from 'vue';
-import deepEqual from 'deep-equal';
-import uniqWith from 'lodash/uniqWith';
+import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
-import { toArray, isOptionSelected } from './useSelectUtils';
+import { dedupeByKey, isOptionSelected, toArray } from './useSelectUtils';
 
 export const useSelectOptions = ({
 	selected,
 	options,
 	optionLabel,
+	optionValue,
 	dataKey,
 	allowCustomValues,
 	searchMethod,
@@ -30,7 +29,7 @@ export const useSelectOptions = ({
 	  selected values that are not in the list are prepended as-is
 	*/
 	const sortOptions = (opts) => {
-		const deduped = uniqWith(opts, deepEqual);
+		const deduped = dedupeByKey(opts, dataKey.value);
 		if (!selected.value) return deduped;
 
 		const selectedAsArray = toArray(selected.value);
@@ -55,11 +54,21 @@ export const useSelectOptions = ({
 	};
 
 	const getOptionLabel = (option) => {
+		if (!option) return '';
 		// https://webitel.atlassian.net/browse/WTEL-3181
 		// if allowCustomValue select mode, return label as is
 		if (allowCustomValues.value && option.isTag) return option.label;
 
-		if (optionLabel && option[optionLabel]) return option[optionLabel];
+		// when optionValue is used PrimeVue passes the extracted primitive instead of the full object
+		if (optionValue?.value && typeof option !== 'object') {
+			const foundOption = (
+				filteredOptions.value as Record<string, unknown>[]
+			).find((o) => o[optionValue.value] === option);
+			return foundOption ? getOptionLabel(foundOption) : String(option);
+		}
+
+		if (optionLabel.value && option[optionLabel.value])
+			return option[optionLabel.value];
 		if (option.locale) {
 			if (Array.isArray(option.locale)) return t(...option.locale);
 			return t(option.locale);
@@ -83,12 +92,12 @@ export const useSelectOptions = ({
 		// Find full option objects from filteredOptions that match selected values
 		const foundOptions = filteredOptions.value.filter(isSelected);
 		// Merge with previous cache, then remove entries no longer selected
-		const mergedOptions = uniqWith(
+		const mergedOptions = dedupeByKey(
 			[
 				...selectedOptionsCache.value,
 				...foundOptions,
 			],
-			deepEqual,
+			dataKey.value,
 		);
 		selectedOptionsCache.value = mergedOptions.filter(isSelected);
 	};
@@ -103,12 +112,13 @@ export const useSelectOptions = ({
 		});
 		const baseOptions =
 			searchParams.page === 1
-				? uniqWith(
+				? dedupeByKey(
 						[
+							...toArray(selected.value).filter(Boolean),
 							...selectedOptionsCache.value,
 							...items,
 						],
-						deepEqual,
+						dataKey.value,
 					)
 				: filteredOptions.value.concat(items);
 		filteredOptions.value = sortOptions(baseOptions);
@@ -132,12 +142,12 @@ export const useSelectOptions = ({
 				getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
 			);
 			filteredOptions.value = sortOptions(
-				uniqWith(
+				dedupeByKey(
 					[
 						...selectedOptionsCache.value,
 						...matchingOptions,
 					],
-					deepEqual,
+					dataKey.value,
 				),
 			);
 		} else {
@@ -145,9 +155,33 @@ export const useSelectOptions = ({
 		}
 	};
 
-	watch(() => selected.value, updateSelectedOptionsCache, {
-		deep: true,
-	});
+	const addSelectedValueToList = (newVal) => {
+		// If the selected value is not in the list, add it
+		if (!newVal || !searchMethod.value) return;
+		const selectedAsArray = toArray(newVal);
+		const missingSelected = selectedAsArray.filter(
+			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
+		);
+		if (missingSelected.length) {
+			filteredOptions.value = sortOptions(
+				dedupeByKey(
+					[
+						...missingSelected,
+						...filteredOptions.value,
+					],
+					dataKey.value,
+				),
+			);
+		}
+	};
+
+	watch(
+		() => selected.value,
+		(newVal) => {
+			updateSelectedOptionsCache();
+			addSelectedValueToList(newVal);
+		},
+	);
 
 	return {
 		filterText,

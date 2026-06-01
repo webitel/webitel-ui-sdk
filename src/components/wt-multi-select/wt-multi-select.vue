@@ -65,22 +65,27 @@
           class="wt-multi-select__option-checkbox"
         />
       </template>
-      <template #clearicon="{clearCallback}">
+      <template #clearicon>
         <wt-icon-btn 
           v-if="showClear && model"  
           icon="close" 
-          @click="clearCallback"
+          @click="clearValue"
         />
       </template>
       <template #dropdownicon>
         <wt-icon :icon="isDropdownOpen ? 'arrow-up' : 'arrow-down'" />
       </template>
-      <template #chipicon="{removeCallback}">
-        <wt-icon-btn 
-          icon="close--filled" 
-          size="sm"
-          @click="removeCallback"
-        />
+      <template #loadingicon>
+        <wt-loader :size="ComponentSize.SM" />
+      </template>
+      <template #chip="{ value, removeCallback }">
+        <wt-chip
+          removable
+          :color="ChipColor.SECONDARY"
+          @remove="removeCallback($event)"
+        > 
+          {{ getOptionLabel(value) }}
+        </wt-chip>
       </template>
     </p-multi-select>
     <wt-message
@@ -95,12 +100,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import type { SelectProps } from 'primevue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
-import { useI18n } from 'vue-i18n';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
 interface Props extends SelectProps {
@@ -148,6 +153,7 @@ interface Props extends SelectProps {
 
 const props = withDefaults(defineProps<Props>(), {
 	filterable: true,
+	showClear: true,
 	options: () => [],
 	optionLabel: 'label',
 	dataKey: 'id',
@@ -171,9 +177,12 @@ const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
-const emit = defineEmits([
-	'add:custom-value',
-]);
+const emit = defineEmits<{
+	'add:custom-value': [
+		value: string,
+	];
+	reset: [];
+}>();
 
 const {
 	isLoading,
@@ -188,10 +197,12 @@ const {
 	onDropdownHide,
 	filterOptions,
 	onInputKeydown,
+	clearValue,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),
 	optionLabel: computed(() => props.optionLabel),
+	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),
 	allowCustomValues: computed(() => props.allowCustomValues),
 	manualCustomValues: computed(() => props.manualCustomValues),
