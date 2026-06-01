@@ -755,6 +755,13 @@ export const CreateUserResponse = zod.object({
 		.describe('User profile.'),
 });
 
+export const LogoutUser2Body = zod.object({
+	id: zod.string().optional(),
+	selection: zod.array(zod.string()).optional(),
+});
+
+export const LogoutUser2Response = zod.looseObject({});
+
 export const UpdatePasswordBody = zod.object({
 	confirmPassword: zod.string().optional(),
 	domain: zod.string().optional(),
@@ -1280,10 +1287,12 @@ export const ReadUserResponse = zod.object({
 });
 
 export const LogoutUserParams = zod.object({
-	id: zod.string(),
+	id: zod.string().describe('ONE  /users/{id}/logout'),
 });
 
-export const LogoutUserBody = zod.looseObject({});
+export const LogoutUserBody = zod.object({
+	selection: zod.array(zod.string()).optional(),
+});
 
 export const LogoutUserResponse = zod.looseObject({});
 

@@ -6,38 +6,44 @@
  */
 import * as zod from 'zod';
 
-export const MetaOAuthServiceMetaOAuthCallbackParams = zod.object({
-	meta_app_id: zod.string(),
-});
+export const MetaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthServiceParams =
+	zod.object({
+		meta_app_id: zod.string(),
+	});
 
-export const MetaOAuthServiceMetaOAuthCallbackBody = zod.object({
-	code: zod.string().optional(),
-	state: zod.string().optional(),
-});
+export const MetaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthServiceBody =
+	zod.object({
+		code: zod.string().optional(),
+		state: zod.string().optional(),
+	});
 
-export const MetaOAuthServiceMetaOAuthCallbackResponse = zod.object({
-	pages: zod
-		.array(
-			zod.object({
-				accessToken: zod.string().optional(),
-				pageId: zod.string().optional(),
-				pageName: zod.string().optional(),
-				platform: zod.string().optional(),
-			}),
-		)
-		.optional(),
-	userAccessToken: zod.string().optional(),
-});
+export const MetaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthServiceResponse =
+	zod.object({
+		pages: zod
+			.array(
+				zod.object({
+					accessToken: zod.string().optional(),
+					pageId: zod.string().optional(),
+					pageName: zod.string().optional(),
+					platform: zod.string().optional(),
+				}),
+			)
+			.optional(),
+		userAccessToken: zod.string().optional(),
+	});
 
-export const MetaOAuthServiceStartMetaOAuthParams = zod.object({
-	meta_app_id: zod.string(),
-});
+export const MetaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthServiceParams =
+	zod.object({
+		meta_app_id: zod.string(),
+	});
 
-export const MetaOAuthServiceStartMetaOAuthBody = zod.object({
-	extraScopes: zod.array(zod.string()).optional(),
-});
+export const MetaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthServiceBody =
+	zod.object({
+		extraScopes: zod.array(zod.string()).optional(),
+	});
 
-export const MetaOAuthServiceStartMetaOAuthResponse = zod.object({
-	authUrl: zod.string().optional(),
-	state: zod.string().optional(),
-});
+export const MetaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthServiceResponse =
+	zod.object({
+		authUrl: zod.string().optional(),
+		state: zod.string().optional(),
+	});

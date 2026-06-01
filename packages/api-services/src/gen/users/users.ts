@@ -14,6 +14,7 @@ import type {
 	ApiDeleteUsersResponse,
 	ApiGetPasswordSettingsResponse,
 	ApiGetUserWarningsResponse,
+	ApiLogoutUserRequest,
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersRequest,
@@ -117,6 +118,16 @@ export const // --- title start
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiCreateUserResponse>> => {
 				return axiosInstance.post(`/users`, apiCreateUserRequest, options);
+			};
+			const logoutUser2 = (
+				apiLogoutUserRequest: ApiLogoutUserRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ApiLogoutUserResponse>> => {
+				return axiosInstance.post(
+					`/users/logout`,
+					apiLogoutUserRequest,
+					options,
+				);
 			};
 			const updatePassword = (
 				apiUpdatePasswordRequest: ApiUpdatePasswordRequest,
@@ -225,6 +236,7 @@ export const // --- title start
 				deleteUsers2,
 				searchUsers,
 				createUser,
+				logoutUser2,
 				updatePassword,
 				readPasswordSettings,
 				searchUsers2,
@@ -240,6 +252,7 @@ export type ReadUser2Result = AxiosResponse<ApiReadUserResponse>;
 export type DeleteUsers2Result = AxiosResponse<ApiDeleteUsersResponse>;
 export type SearchUsersResult = AxiosResponse<ApiSearchUsersResponse>;
 export type CreateUserResult = AxiosResponse<ApiCreateUserResponse>;
+export type LogoutUser2Result = AxiosResponse<ApiLogoutUserResponse>;
 export type UpdatePasswordResult = AxiosResponse<ApiUpdatePasswordResponse>;
 export type ReadPasswordSettingsResult =
 	AxiosResponse<ApiGetPasswordSettingsResponse>;

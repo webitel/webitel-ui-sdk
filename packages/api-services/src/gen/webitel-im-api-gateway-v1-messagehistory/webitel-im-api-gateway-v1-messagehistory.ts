@@ -32,7 +32,7 @@ Supports cursor-based pagination and field selection.
 			): Promise<
 				AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>
 			> => {
-				return axiosInstance.get(`/v1/${threadId}/messages`, {
+				return axiosInstance.get(`/v1/threads/${threadId}/messages`, {
 					...options,
 					params: {
 						...params,

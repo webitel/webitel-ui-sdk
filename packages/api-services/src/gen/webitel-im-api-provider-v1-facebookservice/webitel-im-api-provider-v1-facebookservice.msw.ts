@@ -8,471 +8,361 @@ import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 import type {
-	WebitelImApiProviderV1ProviderCreateFacebookGateResponse,
 	WebitelImApiProviderV1ProviderDeleteFacebookGateResponse,
 	WebitelImApiProviderV1ProviderGetFacebookGateResponse,
 	WebitelImApiProviderV1ProviderUpdateFacebookGateResponse,
 } from '../_models';
 import { WebitelImApiProviderV1ProviderStatus } from '../_models';
 
-export const getFacebookServiceCreateFacebookGateResponseMock = (
-	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderCreateFacebookGateResponse, object>
-	> = {},
-): WebitelImApiProviderV1ProviderCreateFacebookGateResponse => ({
-	item: faker.helpers.arrayElement([
-		{
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			enabled: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			metaAppId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageName: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			status: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderStatus),
-				),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getFacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock =
+	(
+		overrideResponse: Partial<
+			Extract<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse, object>
+		> = {},
+	): WebitelImApiProviderV1ProviderDeleteFacebookGateResponse => ({
+		item: faker.helpers.arrayElement([
+			{
+				createdAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				enabled: faker.helpers.arrayElement([
+					faker.datatype.boolean(),
+					undefined,
+				]),
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				metaAppId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageName: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				status: faker.helpers.arrayElement([
+					faker.helpers.arrayElement(
+						Object.values(WebitelImApiProviderV1ProviderStatus),
+					),
+					undefined,
+				]),
+				updatedAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		...overrideResponse,
+	});
 
-export const getFacebookServiceDeleteFacebookGateResponseMock = (
-	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse, object>
-	> = {},
-): WebitelImApiProviderV1ProviderDeleteFacebookGateResponse => ({
-	item: faker.helpers.arrayElement([
-		{
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			enabled: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			metaAppId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageName: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			status: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderStatus),
-				),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getFacebookServiceGetFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock =
+	(
+		overrideResponse: Partial<
+			Extract<WebitelImApiProviderV1ProviderGetFacebookGateResponse, object>
+		> = {},
+	): WebitelImApiProviderV1ProviderGetFacebookGateResponse => ({
+		item: faker.helpers.arrayElement([
+			{
+				createdAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				enabled: faker.helpers.arrayElement([
+					faker.datatype.boolean(),
+					undefined,
+				]),
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				metaAppId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageName: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				status: faker.helpers.arrayElement([
+					faker.helpers.arrayElement(
+						Object.values(WebitelImApiProviderV1ProviderStatus),
+					),
+					undefined,
+				]),
+				updatedAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		...overrideResponse,
+	});
 
-export const getFacebookServiceGetFacebookGateResponseMock = (
-	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderGetFacebookGateResponse, object>
-	> = {},
-): WebitelImApiProviderV1ProviderGetFacebookGateResponse => ({
-	item: faker.helpers.arrayElement([
-		{
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			enabled: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			metaAppId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageName: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			status: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderStatus),
-				),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+export const getFacebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock =
+	(
+		overrideResponse: Partial<
+			Extract<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse, object>
+		> = {},
+	): WebitelImApiProviderV1ProviderUpdateFacebookGateResponse => ({
+		item: faker.helpers.arrayElement([
+			{
+				createdAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				enabled: faker.helpers.arrayElement([
+					faker.datatype.boolean(),
+					undefined,
+				]),
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				metaAppId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageId: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				pageName: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				status: faker.helpers.arrayElement([
+					faker.helpers.arrayElement(
+						Object.values(WebitelImApiProviderV1ProviderStatus),
+					),
+					undefined,
+				]),
+				updatedAt: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		...overrideResponse,
+	});
 
-export const getFacebookServiceUpdateFacebookGateResponseMock = (
-	overrideResponse: Partial<
-		Extract<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse, object>
-	> = {},
-): WebitelImApiProviderV1ProviderUpdateFacebookGateResponse => ({
-	item: faker.helpers.arrayElement([
-		{
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
+export const getFacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler =
+	(
+		overrideResponse?:
+			| WebitelImApiProviderV1ProviderDeleteFacebookGateResponse
+			| ((
+					info: Parameters<Parameters<typeof http.delete>[1]>[0],
+			  ) =>
+					| Promise<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse>
+					| WebitelImApiProviderV1ProviderDeleteFacebookGateResponse),
+		options?: RequestHandlerOptions,
+	) => {
+		return http.delete(
+			'*/im/gates/facebook/:id',
+			async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+				return HttpResponse.json(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getFacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock(),
+					{
+						status: 200,
 					},
-				}),
-				undefined,
-			]),
-			enabled: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			metaAppId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageId: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			pageName: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			status: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(
-					Object.values(WebitelImApiProviderV1ProviderStatus),
-				),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	...overrideResponse,
-});
+				);
+			},
+			options,
+		);
+	};
 
-export const getFacebookServiceCreateFacebookGateMockHandler = (
-	overrideResponse?:
-		| WebitelImApiProviderV1ProviderCreateFacebookGateResponse
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderCreateFacebookGateResponse>
-				| WebitelImApiProviderV1ProviderCreateFacebookGateResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.post(
-		'*/im/gates/facebook',
-		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
-			return HttpResponse.json(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getFacebookServiceCreateFacebookGateResponseMock(),
-				{
-					status: 200,
-				},
-			);
-		},
-		options,
-	);
-};
+export const getFacebookServiceGetFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler =
+	(
+		overrideResponse?:
+			| WebitelImApiProviderV1ProviderGetFacebookGateResponse
+			| ((
+					info: Parameters<Parameters<typeof http.get>[1]>[0],
+			  ) =>
+					| Promise<WebitelImApiProviderV1ProviderGetFacebookGateResponse>
+					| WebitelImApiProviderV1ProviderGetFacebookGateResponse),
+		options?: RequestHandlerOptions,
+	) => {
+		return http.get(
+			'*/im/gates/facebook/:id',
+			async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+				return HttpResponse.json(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getFacebookServiceGetFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock(),
+					{
+						status: 200,
+					},
+				);
+			},
+			options,
+		);
+	};
 
-export const getFacebookServiceDeleteFacebookGateMockHandler = (
-	overrideResponse?:
-		| WebitelImApiProviderV1ProviderDeleteFacebookGateResponse
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse>
-				| WebitelImApiProviderV1ProviderDeleteFacebookGateResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.delete(
-		'*/im/gates/facebook/:id',
-		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
-			return HttpResponse.json(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getFacebookServiceDeleteFacebookGateResponseMock(),
-				{
-					status: 200,
-				},
-			);
-		},
-		options,
-	);
-};
-
-export const getFacebookServiceGetFacebookGateMockHandler = (
-	overrideResponse?:
-		| WebitelImApiProviderV1ProviderGetFacebookGateResponse
-		| ((
-				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderGetFacebookGateResponse>
-				| WebitelImApiProviderV1ProviderGetFacebookGateResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.get(
-		'*/im/gates/facebook/:id',
-		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-			return HttpResponse.json(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getFacebookServiceGetFacebookGateResponseMock(),
-				{
-					status: 200,
-				},
-			);
-		},
-		options,
-	);
-};
-
-export const getFacebookServiceUpdateFacebookGateMockHandler = (
-	overrideResponse?:
-		| WebitelImApiProviderV1ProviderUpdateFacebookGateResponse
-		| ((
-				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) =>
-				| Promise<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse>
-				| WebitelImApiProviderV1ProviderUpdateFacebookGateResponse),
-	options?: RequestHandlerOptions,
-) => {
-	return http.patch(
-		'*/im/gates/facebook/:id',
-		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
-			return HttpResponse.json(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getFacebookServiceUpdateFacebookGateResponseMock(),
-				{
-					status: 200,
-				},
-			);
-		},
-		options,
-	);
-};
+export const getFacebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler =
+	(
+		overrideResponse?:
+			| WebitelImApiProviderV1ProviderUpdateFacebookGateResponse
+			| ((
+					info: Parameters<Parameters<typeof http.patch>[1]>[0],
+			  ) =>
+					| Promise<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse>
+					| WebitelImApiProviderV1ProviderUpdateFacebookGateResponse),
+		options?: RequestHandlerOptions,
+	) => {
+		return http.patch(
+			'*/im/gates/facebook/:id',
+			async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
+				return HttpResponse.json(
+					overrideResponse !== undefined
+						? typeof overrideResponse === 'function'
+							? await overrideResponse(info)
+							: overrideResponse
+						: getFacebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock(),
+					{
+						status: 200,
+					},
+				);
+			},
+			options,
+		);
+	};
 export const getWebitelImApiProviderV1FacebookserviceMock = () => [
-	getFacebookServiceCreateFacebookGateMockHandler(),
-	getFacebookServiceDeleteFacebookGateMockHandler(),
-	getFacebookServiceGetFacebookGateMockHandler(),
-	getFacebookServiceUpdateFacebookGateMockHandler(),
+	getFacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler(),
+	getFacebookServiceGetFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler(),
+	getFacebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookServiceMockHandler(),
 ];

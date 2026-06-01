@@ -62,6 +62,15 @@ export const getMessageSendContactResponseMock = (
 						}),
 						undefined,
 					]),
+					via: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				},
 				undefined,
 			]),
@@ -126,6 +135,15 @@ export const getMessageSendDocumentResponseMock = (
 						undefined,
 					]),
 					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					via: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -206,6 +224,15 @@ export const getMessageSendImageResponseMock = (
 						}),
 						undefined,
 					]),
+					via: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				},
 				undefined,
 			]),
@@ -270,6 +297,15 @@ export const getMessageSendInteractiveResponseMock = (
 						undefined,
 					]),
 					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					via: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -377,6 +413,15 @@ export const getMessageSendInteractiveCallbackResponseMock = (
 						}),
 						undefined,
 					]),
+					via: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				},
 				undefined,
 			]),
@@ -449,6 +494,15 @@ export const getMessageSendLocationResponseMock = (
 						}),
 						undefined,
 					]),
+					via: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 				},
 				undefined,
 			]),
@@ -513,6 +567,15 @@ export const getMessageSendTextResponseMock = (
 						undefined,
 					]),
 					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					via: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,

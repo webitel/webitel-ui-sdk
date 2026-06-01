@@ -8,9 +8,28 @@ import type { GateServiceListGatesStatus } from './gateServiceListGatesStatus';
 import type { GateServiceListGatesTypesItem } from './gateServiceListGatesTypesItem';
 
 export type GateServiceListGatesParams = {
+	/**
+	 * Page number (starts from 1)
+	 */
 	page?: number;
+	/**
+	 * Items per page
+	 */
 	size?: number;
+	/**
+	 * Filter by channel type (Telegram, Facebook, etc.)
+	 */
 	types?: GateServiceListGatesTypesItem[];
+	/**
+ * Filter by active/inactive status
+
+ - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages
+ - PROVIDER_STATUS_INACTIVE: Manually disabled by user
+ - PROVIDER_STATUS_ERROR: Connection or authentication failed
+ */
 	status?: GateServiceListGatesStatus;
+	/**
+	 * Search query for name or metadata
+	 */
 	q?: string;
 };

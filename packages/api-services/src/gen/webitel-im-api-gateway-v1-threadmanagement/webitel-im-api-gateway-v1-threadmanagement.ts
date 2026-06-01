@@ -10,10 +10,12 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ThreadManagementGetParams,
+	ThreadManagementSearchLeftParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
+	WebitelImApiGatewayV1SearchLeftResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
 	WebitelImApiGatewayV1SearchVariablesResponse,
 	WebitelImApiGatewayV1Thread,
@@ -41,6 +43,21 @@ export const // --- title start
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>> => {
 				return axiosInstance.get(`/v1/threads`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+			 * @summary Search threads that the caller has left from
+			 */
+			const threadManagementSearchLeft = (
+				params?: ThreadManagementSearchLeftParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>> => {
+				return axiosInstance.get(`/v1/threads/left`, {
 					...options,
 					params: {
 						...params,
@@ -168,6 +185,7 @@ Supports pagination and field projection.
 			// --- footer start
 			return {
 				threadManagementSearch,
+				threadManagementSearchLeft,
 				threadManagementGet,
 				threadManagementAddMember,
 				threadManagementRemoveMember,
@@ -180,6 +198,8 @@ Supports pagination and field projection.
 		};
 export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
+export type ThreadManagementSearchLeftResult =
+	AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>;
 export type ThreadManagementGetResult =
 	AxiosResponse<WebitelImApiGatewayV1Thread>;
 export type ThreadManagementAddMemberResult =

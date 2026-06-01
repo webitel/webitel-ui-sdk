@@ -10,8 +10,6 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	WebitelImApiProviderV1FacebookServiceUpdateFacebookGateBody,
-	WebitelImApiProviderV1ProviderCreateFacebookGateRequest,
-	WebitelImApiProviderV1ProviderCreateFacebookGateResponse,
 	WebitelImApiProviderV1ProviderDeleteFacebookGateResponse,
 	WebitelImApiProviderV1ProviderGetFacebookGateResponse,
 	WebitelImApiProviderV1ProviderUpdateFacebookGateResponse,
@@ -25,63 +23,51 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
-			const facebookServiceCreateFacebookGate = (
-				webitelImApiProviderV1ProviderCreateFacebookGateRequest: WebitelImApiProviderV1ProviderCreateFacebookGateRequest,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderCreateFacebookGateResponse>
-			> => {
-				return axiosInstance.post(
-					`/im/gates/facebook`,
-					webitelImApiProviderV1ProviderCreateFacebookGateRequest,
-					options,
-				);
-			};
-			const facebookServiceDeleteFacebookGate = (
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse>
-			> => {
-				return axiosInstance.delete(`/im/gates/facebook/${id}`, options);
-			};
-			const facebookServiceGetFacebookGate = (
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderGetFacebookGateResponse>
-			> => {
-				return axiosInstance.get(`/im/gates/facebook/${id}`, options);
-			};
-			const facebookServiceUpdateFacebookGate = (
-				id: string,
-				webitelImApiProviderV1FacebookServiceUpdateFacebookGateBody: WebitelImApiProviderV1FacebookServiceUpdateFacebookGateBody,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse>
-			> => {
-				return axiosInstance.patch(
-					`/im/gates/facebook/${id}`,
-					webitelImApiProviderV1FacebookServiceUpdateFacebookGateBody,
-					options,
-				);
-			};
+			const facebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookService =
+				(
+					id: string,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse>
+				> => {
+					return axiosInstance.delete(`/im/gates/facebook/${id}`, options);
+				};
+			const facebookServiceGetFacebookGateWebitelImApiProviderV1FacebookService =
+				(
+					id: string,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderGetFacebookGateResponse>
+				> => {
+					return axiosInstance.get(`/im/gates/facebook/${id}`, options);
+				};
+			const facebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookService =
+				(
+					id: string,
+					webitelImApiProviderV1FacebookServiceUpdateFacebookGateBody: WebitelImApiProviderV1FacebookServiceUpdateFacebookGateBody,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse>
+				> => {
+					return axiosInstance.patch(
+						`/im/gates/facebook/${id}`,
+						webitelImApiProviderV1FacebookServiceUpdateFacebookGateBody,
+						options,
+					);
+				};
 
 			// --- footer start
 			return {
-				facebookServiceCreateFacebookGate,
-				facebookServiceDeleteFacebookGate,
-				facebookServiceGetFacebookGate,
-				facebookServiceUpdateFacebookGate,
+				facebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookService,
+				facebookServiceGetFacebookGateWebitelImApiProviderV1FacebookService,
+				facebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookService,
 			};
 		};
-export type FacebookServiceCreateFacebookGateResult =
-	AxiosResponse<WebitelImApiProviderV1ProviderCreateFacebookGateResponse>;
-export type FacebookServiceDeleteFacebookGateResult =
+export type FacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderDeleteFacebookGateResponse>;
-export type FacebookServiceGetFacebookGateResult =
+export type FacebookServiceGetFacebookGateWebitelImApiProviderV1FacebookServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderGetFacebookGateResponse>;
-export type FacebookServiceUpdateFacebookGateResult =
+export type FacebookServiceUpdateFacebookGateWebitelImApiProviderV1FacebookServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderUpdateFacebookGateResponse>;
 
 // --- footer end

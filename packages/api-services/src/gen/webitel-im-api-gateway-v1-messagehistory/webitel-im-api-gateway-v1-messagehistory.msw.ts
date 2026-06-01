@@ -923,7 +923,7 @@ export const getMessageHistorySearchThreadMessagesHistoryMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/v1/:threadId/messages',
+		'*/v1/threads/:threadId/messages',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

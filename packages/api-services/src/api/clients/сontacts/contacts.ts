@@ -317,6 +317,7 @@ const fieldsToSend = [
 	'groups',
 	'custom',
 	'emails',
+	'phones',
 ];
 
 const sanitizeManagers = (itemInstance) => {

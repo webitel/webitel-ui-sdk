@@ -23,42 +23,44 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
-			const metaOAuthServiceMetaOAuthCallback = (
-				metaAppId: string,
-				webitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody: WebitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthCallbackResponse>
-			> => {
-				return axiosInstance.post(
-					`/im/meta-apps/${metaAppId}/oauth/callback`,
-					webitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
-					options,
-				);
-			};
-			const metaOAuthServiceStartMetaOAuth = (
-				metaAppId: string,
-				webitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody: WebitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthStartResponse>
-			> => {
-				return axiosInstance.post(
-					`/im/meta-apps/${metaAppId}/oauth/start`,
-					webitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody,
-					options,
-				);
-			};
+			const metaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthService =
+				(
+					metaAppId: string,
+					webitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody: WebitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthCallbackResponse>
+				> => {
+					return axiosInstance.post(
+						`/im/meta-apps/${metaAppId}/oauth/callback`,
+						webitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody,
+						options,
+					);
+				};
+			const metaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthService =
+				(
+					metaAppId: string,
+					webitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody: WebitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthStartResponse>
+				> => {
+					return axiosInstance.post(
+						`/im/meta-apps/${metaAppId}/oauth/start`,
+						webitelImApiProviderV1MetaOAuthServiceStartMetaOAuthBody,
+						options,
+					);
+				};
 
 			// --- footer start
 			return {
-				metaOAuthServiceMetaOAuthCallback,
-				metaOAuthServiceStartMetaOAuth,
+				metaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthService,
+				metaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthService,
 			};
 		};
-export type MetaOAuthServiceMetaOAuthCallbackResult =
+export type MetaOAuthServiceMetaOAuthCallbackWebitelImApiProviderV1MetaOAuthServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthCallbackResponse>;
-export type MetaOAuthServiceStartMetaOAuthResult =
+export type MetaOAuthServiceStartMetaOAuthWebitelImApiProviderV1MetaOAuthServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderMetaOAuthStartResponse>;
 
 // --- footer end

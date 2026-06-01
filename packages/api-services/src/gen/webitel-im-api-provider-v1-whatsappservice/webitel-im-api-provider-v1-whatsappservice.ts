@@ -9,8 +9,6 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	WebitelImApiProviderV1ProviderCreateWhatsAppGateRequest,
-	WebitelImApiProviderV1ProviderCreateWhatsAppGateResponse,
 	WebitelImApiProviderV1ProviderDeleteWhatsAppGateResponse,
 	WebitelImApiProviderV1ProviderGetWhatsAppGateResponse,
 	WebitelImApiProviderV1ProviderUpdateWhatsAppGateResponse,
@@ -25,63 +23,51 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
-			const whatsAppServiceCreateWhatsAppGate = (
-				webitelImApiProviderV1ProviderCreateWhatsAppGateRequest: WebitelImApiProviderV1ProviderCreateWhatsAppGateRequest,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderCreateWhatsAppGateResponse>
-			> => {
-				return axiosInstance.post(
-					`/im/gates/whatsapp`,
-					webitelImApiProviderV1ProviderCreateWhatsAppGateRequest,
-					options,
-				);
-			};
-			const whatsAppServiceDeleteWhatsAppGate = (
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderDeleteWhatsAppGateResponse>
-			> => {
-				return axiosInstance.delete(`/im/gates/whatsapp/${id}`, options);
-			};
-			const whatsAppServiceGetWhatsAppGate = (
-				id: string,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderGetWhatsAppGateResponse>
-			> => {
-				return axiosInstance.get(`/im/gates/whatsapp/${id}`, options);
-			};
-			const whatsAppServiceUpdateWhatsAppGate = (
-				id: string,
-				webitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody: WebitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
-				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImApiProviderV1ProviderUpdateWhatsAppGateResponse>
-			> => {
-				return axiosInstance.patch(
-					`/im/gates/whatsapp/${id}`,
-					webitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
-					options,
-				);
-			};
+			const whatsAppServiceDeleteWhatsAppGateWebitelImApiProviderV1WhatsAppService =
+				(
+					id: string,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderDeleteWhatsAppGateResponse>
+				> => {
+					return axiosInstance.delete(`/im/gates/whatsapp/${id}`, options);
+				};
+			const whatsAppServiceGetWhatsAppGateWebitelImApiProviderV1WhatsAppService =
+				(
+					id: string,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderGetWhatsAppGateResponse>
+				> => {
+					return axiosInstance.get(`/im/gates/whatsapp/${id}`, options);
+				};
+			const whatsAppServiceUpdateWhatsAppGateWebitelImApiProviderV1WhatsAppService =
+				(
+					id: string,
+					webitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody: WebitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
+					options?: AxiosRequestConfig,
+				): Promise<
+					AxiosResponse<WebitelImApiProviderV1ProviderUpdateWhatsAppGateResponse>
+				> => {
+					return axiosInstance.patch(
+						`/im/gates/whatsapp/${id}`,
+						webitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
+						options,
+					);
+				};
 
 			// --- footer start
 			return {
-				whatsAppServiceCreateWhatsAppGate,
-				whatsAppServiceDeleteWhatsAppGate,
-				whatsAppServiceGetWhatsAppGate,
-				whatsAppServiceUpdateWhatsAppGate,
+				whatsAppServiceDeleteWhatsAppGateWebitelImApiProviderV1WhatsAppService,
+				whatsAppServiceGetWhatsAppGateWebitelImApiProviderV1WhatsAppService,
+				whatsAppServiceUpdateWhatsAppGateWebitelImApiProviderV1WhatsAppService,
 			};
 		};
-export type WhatsAppServiceCreateWhatsAppGateResult =
-	AxiosResponse<WebitelImApiProviderV1ProviderCreateWhatsAppGateResponse>;
-export type WhatsAppServiceDeleteWhatsAppGateResult =
+export type WhatsAppServiceDeleteWhatsAppGateWebitelImApiProviderV1WhatsAppServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderDeleteWhatsAppGateResponse>;
-export type WhatsAppServiceGetWhatsAppGateResult =
+export type WhatsAppServiceGetWhatsAppGateWebitelImApiProviderV1WhatsAppServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderGetWhatsAppGateResponse>;
-export type WhatsAppServiceUpdateWhatsAppGateResult =
+export type WhatsAppServiceUpdateWhatsAppGateWebitelImApiProviderV1WhatsAppServiceResult =
 	AxiosResponse<WebitelImApiProviderV1ProviderUpdateWhatsAppGateResponse>;
 
 // --- footer end

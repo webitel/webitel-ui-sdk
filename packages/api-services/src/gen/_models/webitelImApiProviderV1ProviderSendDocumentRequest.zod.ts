@@ -9,7 +9,7 @@ import type { WebitelImApiProviderV1ProviderType } from './webitelImApiProviderV
 
 export interface WebitelImApiProviderV1ProviderSendDocumentRequest {
 	caption?: string;
-	document?: WebitelImApiProviderV1ProviderFile;
+	documents?: WebitelImApiProviderV1ProviderFile[];
 	externalUserId?: string;
 	gateId?: string;
 	type?: WebitelImApiProviderV1ProviderType;
