@@ -4,6 +4,7 @@ import BreadcrumbScheme from './breadcrumb';
 import ButtonScheme from './button';
 import CheckboxScheme from './checkbox';
 import ChipScheme from './chip';
+import DatePickerScheme from './datepicker';
 import DividerScheme from './divider';
 import GalleriaScheme from './galleria';
 import InputGroupScheme from './input-group';
@@ -23,25 +24,26 @@ import TooltipScheme from './tooltip';
 
 export {
 	AvatarScheme,
-	ButtonScheme,
 	BadgeScheme,
-	PopoverScheme,
-	TooltipScheme,
-	MenubarScheme,
-	ToolbarScheme,
-	ChipScheme,
-	CheckboxScheme,
-	TableScheme,
-	TextareaScheme,
-	SwitcherScheme,
-	DividerScheme,
-	SliderScheme,
 	BreadcrumbScheme,
-	RadioScheme,
+	ButtonScheme,
+	CheckboxScheme,
+	ChipScheme,
+	DatePickerScheme,
+	DividerScheme,
 	GalleriaScheme,
+	InputGroupScheme,
 	InputNumberScheme,
 	InputTextScheme,
-	PasswordScheme,
-	InputGroupScheme,
+	MenubarScheme,
 	MessageScheme,
+	PasswordScheme,
+	PopoverScheme,
+	RadioScheme,
+	SliderScheme,
+	SwitcherScheme,
+	TableScheme,
+	TextareaScheme,
+	ToolbarScheme,
+	TooltipScheme,
 };
