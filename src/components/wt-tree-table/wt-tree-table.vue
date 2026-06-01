@@ -100,9 +100,8 @@
   lang="ts"
 >
 import { computed, toRef } from 'vue';
-
-import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
+import { useWtTable } from '../_internals/composables/useWtTable/useWtTable';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';

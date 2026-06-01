@@ -839,6 +839,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'elemente selectate',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) =>

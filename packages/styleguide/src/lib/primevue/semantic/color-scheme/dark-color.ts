@@ -90,10 +90,10 @@ const darkColor = {
 	},
 
 	highlight: {
-		background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
-		focusBackground: 'color-mix(in srgb, {primary.400}, transparent 76%)',
-		color: 'rgba(255,255,255,.87)',
-		focusColor: 'rgba(255,255,255,.87)',
+		background: '{amber.800}',
+		focusBackground: '{amber.700}',
+		color: '{amber.300}',
+		focusColor: '{amber.200}',
 	},
 	mask: {
 		background: 'rgba(0,0,0,0.6)',

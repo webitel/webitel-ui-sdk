@@ -845,6 +845,9 @@ export default deepmerge(
 					},
 				},
 			},
+			select: {
+				selectedItemsLabel: 'items selected',
+			},
 		},
 		systemNotifications: {
 			success: {
