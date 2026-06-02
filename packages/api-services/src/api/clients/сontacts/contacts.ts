@@ -31,21 +31,6 @@ const formatAccessMode = (item) => ({
 });
 
 const getList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'qin',
-		'notIdGroup',
-		'group',
-		'owner',
-		'label',
-		'user',
-	];
-
 	if (!params.fields) {
 		params.fields = [
 			'id',
@@ -166,7 +151,6 @@ const getList = async (params) => {
 	}
 
 	const transformations = [
-		sanitize(fieldsToSend),
 		merge(getDefaultGetParams()),
 		camelToSnake(),
 	];
@@ -186,7 +170,20 @@ const getList = async (params) => {
 		owner,
 		label,
 		user,
+		...extensionFilters
 	} = applyTransform(changedParams, transformations);
+
+	const filters = Object.entries(extensionFilters).flatMap(([key, value]) => {
+		if (value == null) return [];
+		if (typeof value === 'object' && !Array.isArray(value)) {
+			return Object.entries(value as Record<string, unknown>)
+				.filter(([, v]) => v != null)
+				.map(([subKey, subValue]) => `${key}.${subKey}=${subValue}`);
+		}
+		return [
+			`${key}=${value}`,
+		];
+	});
 
 	try {
 		const response = await contactService.searchContacts(
@@ -206,6 +203,13 @@ const getList = async (params) => {
 			owner,
 			label,
 			user,
+			filters.length
+				? {
+						params: {
+							filters,
+						},
+					}
+				: undefined,
 		);
 
 		const { items, next } = applyTransform(
