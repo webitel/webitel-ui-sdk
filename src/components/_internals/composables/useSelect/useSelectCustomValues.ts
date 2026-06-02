@@ -27,6 +27,11 @@ export const useSelectCustomValues = ({
 				]),
 			);
 		}
+		if (dataKey.value) {
+			return {
+				[dataKey.value]: text,
+			};
+		}
 		return text;
 	};
 
