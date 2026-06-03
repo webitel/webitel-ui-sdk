@@ -54,9 +54,18 @@ function handlePlaybackRateUpdate(playbackRate: number) {
   display: flex;
 }
 
+/*
+* @author @Oleksandr Palonnyi
+*
+* [WTEL-9163](https://webitel.atlassian.net/browse/WTEL-9163)
+*
+* comment link - https://webitel.atlassian.net/browse/WTEL-9163?focusedCommentId=759364
+*/
 .settings-panel__button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+  margin: 0 calc(var(--spacing-2xs) * -1);
+  padding: 0 var(--spacing-2xs);
 }
 </style>
