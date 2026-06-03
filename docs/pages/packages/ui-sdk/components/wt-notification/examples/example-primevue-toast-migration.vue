@@ -32,7 +32,8 @@ const showWtLike = (type) => {
 	if (payload) {
 		toast.add({
 			...payload,
-			life: lifeMs,
+			// life: lifeMs,
+			closable: false,
 		});
 	}
 };
@@ -42,7 +43,7 @@ const showWtLike = (type) => {
   <div class="wt-toast-migration-demo">
     <p class="wt-toast-migration-demo__hint">
       Кнопки нижче викликають PrimeVue Toast (той самий контейнер, що й у застосунках після додавання
-      <code>&lt;PToast /&gt;</code> у корінь і <code>ToastService</code> у плагіні PrimeVue).
+      <code>&lt;WtToast /&gt;</code> у корінь і <code>ToastService</code> у плагіні PrimeVue).
     </p>
     <div class="wt-toast-migration-demo__actions">
       <wt-button color="success" @click="showWtLike('success')"> success </wt-button>

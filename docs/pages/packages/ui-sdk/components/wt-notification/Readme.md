@@ -11,12 +11,12 @@ import ExamplePrimevueToastMigration from './examples/example-primevue-toast-mig
 
 Міграція на **PrimeVue Toast** зводиться до такого:
 
-1. Один раз змонтувати **`<PToast />`** (наприклад, у кореневому layout), позиція на кшталт `top-right` відповідає правому верхньому куту як у `wt-notifications-bar`.
+1. Один раз змонтувати **`<WtToast />`** (наприклад, у кореневому layout), позиція на кшталт `top-right` відповідає правому верхньому куту як у `wt-notifications-bar`. `WtToast` — обгортка над `PToast`, яка автоматично підставляє іконки Webitel відповідно до типу повідомлення.
 2. Підключити **`ToastService`** через `app.use(ToastService)` (у цьому репозиторії це вже робить `primevue.plugin.js`).
 3. Замість `eventBus.$emit('notification', { text, type, timeout })` викликати **`useToast()`** і `toast.add({ severity, summary, detail, life })`, де **`life` у мілісекундах** (у старому API `timeout` був у секундах).
 4. Відповідність типів: `success` → `success`, `info` → `info`, `error` → `error`, `warning` → **`warn`** (PrimeVue).
 
-Нижче можна натиснути кнопки й перевірити, що тости з’являються (контейнер `PToast` додано у VitePress layout документації).
+Нижче можна натиснути кнопки й перевірити, що тости з’являються (контейнер `WtToast` додано у VitePress layout документації).
 
 ::: raw
 <ExamplePrimevueToastMigration/>

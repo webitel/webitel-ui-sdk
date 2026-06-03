@@ -25,8 +25,8 @@ onMounted(() => {
 
 <template>
   <DefaultTheme.Layout />
-  <!-- PrimeVue Toast host for docs (e.g. wt-notification migration demos) -->
-  <PToast position="top-right" />
+  <!-- Toast host for docs (e.g. wt-notification migration demos) -->
+  <WtToast position="top-right" />
 </template>
 
 <style lang="scss">

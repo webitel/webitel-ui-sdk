@@ -13,7 +13,7 @@ const sizes = {
 		gap: '0.5rem',
 	},
 	text: {
-		gap: '0.5rem',
+		gap: '0',
 	},
 	summary: {
 		fontWeight: '700',
