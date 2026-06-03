@@ -125,7 +125,6 @@ function handleIncrease() {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
   min-width: 192px;
 }
 .speed-settings__step-button {
