@@ -71,3 +71,9 @@ defineExpose({
 	hide,
 });
 </script>
+
+<style>
+.p-popover {
+  box-shadow: var(--elevation-5);
+}
+</style>
