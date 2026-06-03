@@ -6,5 +6,5 @@
  */
 
 export interface UsersLogoutUserBody {
-	[key: string]: unknown;
+	selection?: string[];
 }

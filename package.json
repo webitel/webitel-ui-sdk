@@ -1,9 +1,8 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.4.68",
+	"version": "26.6.16",
 	"private": false,
 	"scripts": {
-		"make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run biome:format:all || true) && npm run publish-lib",
 		"dev": "npm run docs:dev",
 		"build": "vite build",
 		"test:unit": "vitest run",
@@ -173,6 +172,15 @@
 		"npm": "11",
 		"node": "v24"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/webitel/webitel-ui-sdk"
+	},
+	"keywords": [
+		"webitel",
+		"ui-sdk"
+	],
+	"author": "webitel",
 	"exports": {
 		".": {
 			"types": "./types/install.d.ts",

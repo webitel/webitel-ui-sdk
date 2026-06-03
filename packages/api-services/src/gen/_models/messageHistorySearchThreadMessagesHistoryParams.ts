@@ -6,12 +6,38 @@
  */
 
 export type MessageHistorySearchThreadMessagesHistoryParams = {
+	/**
+ * List of message fields to be returned.
+Used to reduce payload size.
+ */
 	fields?: string[];
+	/**
+	 * Filter by specific message IDs.
+	 */
 	ids?: string[];
+	/**
+	 * Filter messages by sender user IDs.
+	 */
 	senderIds?: string[];
+	/**
+	 * Filter messages by message types.
+	 */
 	types?: number[];
-	domainId?: number;
+	/**
+ * Cursor identifier.
+Must be a valid UUID referencing an existing message.
+Defines the starting point for pagination.
+ */
 	cursorId?: string;
+	/**
+ * Pagination direction flag.
+
+true  -> fetch newer messages (back before history)
+false -> fetch older messages (back to older history)
+ */
 	cursorBefore?: boolean;
+	/**
+	 * Maximum number of messages to return.
+	 */
 	size?: number;
 };

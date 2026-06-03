@@ -10,6 +10,7 @@ export interface ApiLicenseUser {
 	expiresAt?: string;
 	id?: string;
 	issuedAt?: string;
+	name?: string;
 	prod?: string;
 	scope?: string[];
 	user?: ApiObjectId;

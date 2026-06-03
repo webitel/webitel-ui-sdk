@@ -255,15 +255,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Помилка',
 			},
 		},
-	},
-	importCSV: 'Імпорт CSV',
-	CSV: {
-		skipHeaders: 'Пропустити заголовки',
-		charSet: 'Кодування',
-		separator: 'Роздільник',
-		CSVColumn: 'Стовпець CSV',
-		fieldName: 'Назва поля',
-		clearMember: 'Очистити учасника',
+		importCSV: 'Імпорт CSV',
+		CSV: {
+			skipHeaders: 'Пропустити заголовки',
+			charSet: 'Кодування',
+			separator: 'Розділювач',
+			CSVColumn: 'Стовпець CSV',
+			fieldName: 'Назва поля',
+			clearMember: 'Очистити учасника',
+		},
 	},
 	channel: {
 		state: {
@@ -829,6 +829,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'елементів вибрано',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity')} було оновлено`,
@@ -836,7 +839,7 @@ export default {
 			delete: ({ named }) => `${named('entity')} було видалено`,
 		},
 		warnings: {
-			passwordExpirationMessageDays: 'Пароль спливе через {amound} дн(і/ів)',
+			passwordExpirationMessageDays: 'Пароль спливе через {amount} дн(і/ів)',
 			passwordExpirationMessageHours:
 				'Залишилось менше доби до завершення дії пароля',
 			licenseExpirationSoonMessage:

@@ -114,9 +114,11 @@ import {
 	ref,
 	watch,
 } from 'vue';
-
-import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables';
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
+import {
+	useGalleriaFullscreen,
+	useGalleriaMaskClick,
+} from '../_internals/composables';
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
 
 /**

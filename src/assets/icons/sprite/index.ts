@@ -144,6 +144,11 @@ import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
 import pin from './pin.svg?raw';
 import play from './play.svg?raw';
+import playback050 from './playback-0.50.svg?raw';
+import playback075 from './playback-0.75.svg?raw';
+import playback100 from './playback-1.00.svg?raw';
+import playback150 from './playback-1.50.svg?raw';
+import playback175 from './playback-1.75.svg?raw';
 import playerEnterFullscreen from './player-enter-fullscreen.svg?raw';
 import playerExitFullscreen from './player-exit-fullscreen.svg?raw';
 import plus from './plus.svg?raw';
@@ -378,6 +383,11 @@ export default objCamelToKebab({
 	pause,
 	'pause--filled': pauseFilled,
 	play,
+	'playback-0.50': playback050,
+	'playback-0.75': playback075,
+	'playback-1.00': playback100,
+	'playback-1.50': playback150,
+	'playback-1.75': playback175,
 	table,
 	treeExpand,
 	prompter,

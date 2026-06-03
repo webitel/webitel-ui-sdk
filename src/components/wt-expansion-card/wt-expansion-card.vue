@@ -7,8 +7,6 @@
       :class="[props.size === 'sm' ? 'typo-subtitle-2' : 'typo-subtitle-1']"
       class="wt-expansion-card-header"
       tabindex="0"
-      @click="toggle"
-      @keypress.enter="toggle"
     >
       <slot name="header" />
     </header>
@@ -36,8 +34,8 @@
 
 <script setup lang="ts">
 import { toRef } from 'vue';
-import { useExpansion } from '../../composables';
 import { ComponentSize } from '../../enums';
+import { useExpansion } from '../_internals/composables';
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 const props = withDefaults(
@@ -85,7 +83,6 @@ const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   background-color: var(--wt-expansion-card-header-background-color);
   color: var(--wt-expansion-card-header-title-color);
 }

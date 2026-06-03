@@ -116,7 +116,7 @@ export const getMetaOAuthServiceMetaOAuthCallbackMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
-		'*/im/meta-apps/:metaAppId/oauth/callback',
+		'*/im/meta-apps/:metaAppId1/oauth/callback',
 		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -144,7 +144,7 @@ export const getMetaOAuthServiceStartMetaOAuthMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.post(
-		'*/im/meta-apps/:metaAppId/oauth/start',
+		'*/im/meta-apps/:metaAppId1/oauth/start',
 		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

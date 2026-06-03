@@ -1,7 +1,7 @@
 export default {
 	list: {
 		option: {
-			focusBackground: '{surface.100}',
+			focusBackground: '{surface.50}',
 			selectedBackground: '{highlight.background}',
 			selectedFocusBackground: '{highlight.focus.background}',
 			color: '{text.color}',

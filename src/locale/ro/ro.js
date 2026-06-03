@@ -260,15 +260,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Eroare',
 			},
 		},
-	},
-	importCSV: 'Importă CSV',
-	CSV: {
-		skipHeaders: 'Omite anteturile',
-		charSet: 'Set de caractere',
-		separator: 'Separator',
-		CSVColumn: 'Coloană CSV',
-		fieldName: 'Nume câmp',
-		clearMember: 'Șterge membrul',
+		importCSV: 'Importă CSV',
+		CSV: {
+			skipHeaders: 'Omite anteturile',
+			charSet: 'Set de caractere',
+			separator: 'Separator',
+			CSVColumn: 'Coloană CSV',
+			fieldName: 'Nume câmp',
+			clearMember: 'Șterge membrul',
+		},
 	},
 	channel: {
 		state: {
@@ -838,6 +838,9 @@ export default {
 				},
 			},
 		},
+	},
+	select: {
+		selectedItemsLabel: 'elemente selectate',
 	},
 	systemNotifications: {
 		success: {

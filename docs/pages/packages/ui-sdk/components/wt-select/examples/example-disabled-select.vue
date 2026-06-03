@@ -1,20 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const options = [
-  { name: 'Vue.js1', language: 'JavaScript' },
-  { name: 'Adonis2', language: 'JavaScript' },
-  { name: 'Rails3', language: 'Ruby' },
-  { name: 'Sinatra4', language: 'Ruby' },
-  { name: 'Laravel5', language: 'PHP' },
-  { name: 'Phoenix6', language: 'Elixir' },
-  { name: 'Vue.js7', language: 'JavaScript' },
-  { name: 'Adonis8', language: 'JavaScript' },
-  { name: 'Rails9', language: 'Ruby' },
-  { name: 'Sinatra10', language: 'Ruby' },
-  { name: 'Laravel11', language: 'PHP' },
-  { name: 'Phoenix12', language: 'Elixir' },
-];
+import { frameworkOptions as options } from './_internals/select-example-options.js';
 
 const value = ref(options[0]);
 </script>

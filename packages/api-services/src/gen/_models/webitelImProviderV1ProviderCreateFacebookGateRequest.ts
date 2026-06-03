@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer';
 
 /**
  * / ProviderCreateFacebookGateRequest links a specific Facebook Page as a messaging gateway.
@@ -14,4 +15,5 @@ export interface WebitelImProviderV1ProviderCreateFacebookGateRequest {
 	name?: string;
 	pageId?: string;
 	pageToken?: string;
+	peer?: WebitelImProviderV1Peer;
 }

@@ -7,6 +7,9 @@
 import type { WebitelImApiGatewayV1Document } from './webitelImApiGatewayV1Document';
 import type { WebitelImApiGatewayV1HistoryMessageMetadata } from './webitelImApiGatewayV1HistoryMessageMetadata';
 import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
+import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive';
+import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact';
+import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 /**
@@ -16,6 +19,7 @@ in thread history.
 export interface WebitelImApiGatewayV1HistoryMessage {
 	/** Message body content. */
 	body?: string;
+	contact?: WebitelImApiGatewayV1MessageContact;
 	/** Message creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
 	/** List of document attachments. */
@@ -26,6 +30,8 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	id?: string;
 	/** List of image attachments. */
 	images?: WebitelImApiGatewayV1Image[];
+	interactive?: WebitelImApiGatewayV1Interactive;
+	location?: WebitelImApiGatewayV1MessageLocation;
 	/** Arbitrary message metadata.
 Can contain structured data depending on message type. */
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;

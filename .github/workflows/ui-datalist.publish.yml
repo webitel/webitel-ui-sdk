@@ -7,28 +7,32 @@ on:
 jobs:
   publish:
     permissions:
+      id-token: write  # Required for OIDC, https://docs.npmjs.com/trusted-publishers#github-actions-configuration
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          check-latest: true
-          registry-url: https://registry.npmjs.org
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
 
       - name: Publish release
         id: publish_release
-        # if: ${{ steps.check_publish.outputs.exists == '0' }}
-
         run: |
-          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           cd packages/ui-datalist
           npm ci
-          npm run make-all
+          npm version patch --git-tag-version false
+          npm run lint:fix || true
+          (npm run build:types || true)
+          npm run lint:package
+          npm run utils:publish
 
       # Commit all changed files back to the repository
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'ci: publish ui-datalist'
+          commit_options: '--no-verify'

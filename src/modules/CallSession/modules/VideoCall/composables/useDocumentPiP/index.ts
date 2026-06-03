@@ -1,0 +1,1 @@
+export { useDocumentPiP } from './useDocumentPiP';

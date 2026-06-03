@@ -152,14 +152,12 @@ export const CreateSourceQueryParams = zod.object({
 		),
 });
 
-export const createSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
 export const createSourceBodyDescriptionMax = 500;
 
-export const createSourceBodyNameDefault = `New Source`;
 export const createSourceBodyNameMin = 2;
 export const createSourceBodyNameMax = 100;
 
-export const createSourceBodyTypeDefault = `"CALL"`;
+export const createSourceBodyTypeDefault = `CALL`;
 
 export const CreateSourceBody = zod
 	.object({
@@ -172,7 +170,6 @@ export const CreateSourceBody = zod
 			.string()
 			.min(createSourceBodyNameMin)
 			.max(createSourceBodyNameMax)
-			.default(createSourceBodyNameDefault)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -187,7 +184,6 @@ export const CreateSourceBody = zod
 			.default(createSourceBodyTypeDefault)
 			.describe('The type of the source'),
 	})
-	.default(createSourceBodyDefault)
 	.describe('The data structure representing a source');
 
 export const createSourceResponseDescriptionMax = 500;
@@ -402,14 +398,12 @@ export const UpdateSource2QueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const updateSource2BodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
 export const updateSource2BodyDescriptionMax = 500;
 
-export const updateSource2BodyNameDefault = `New Source`;
 export const updateSource2BodyNameMin = 2;
 export const updateSource2BodyNameMax = 100;
 
-export const updateSource2BodyTypeDefault = `"CALL"`;
+export const updateSource2BodyTypeDefault = `CALL`;
 
 export const UpdateSource2Body = zod
 	.object({
@@ -422,7 +416,6 @@ export const UpdateSource2Body = zod
 			.string()
 			.min(updateSource2BodyNameMin)
 			.max(updateSource2BodyNameMax)
-			.default(updateSource2BodyNameDefault)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -437,7 +430,6 @@ export const UpdateSource2Body = zod
 			.default(updateSource2BodyTypeDefault)
 			.describe('The type of the source'),
 	})
-	.default(updateSource2BodyDefault)
 	.describe('The data structure representing a source');
 
 export const updateSource2ResponseDescriptionMax = 500;
@@ -508,14 +500,12 @@ export const UpdateSourceQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const updateSourceBodyDefault = `{ "name": "Default Source", "type": "CALL" }`;
 export const updateSourceBodyDescriptionMax = 500;
 
-export const updateSourceBodyNameDefault = `New Source`;
 export const updateSourceBodyNameMin = 2;
 export const updateSourceBodyNameMax = 100;
 
-export const updateSourceBodyTypeDefault = `"CALL"`;
+export const updateSourceBodyTypeDefault = `CALL`;
 
 export const UpdateSourceBody = zod
 	.object({
@@ -528,7 +518,6 @@ export const UpdateSourceBody = zod
 			.string()
 			.min(updateSourceBodyNameMin)
 			.max(updateSourceBodyNameMax)
-			.default(updateSourceBodyNameDefault)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -543,7 +532,6 @@ export const UpdateSourceBody = zod
 			.default(updateSourceBodyTypeDefault)
 			.describe('The type of the source'),
 	})
-	.default(updateSourceBodyDefault)
 	.describe('The data structure representing a source');
 
 export const updateSourceResponseDescriptionMax = 500;

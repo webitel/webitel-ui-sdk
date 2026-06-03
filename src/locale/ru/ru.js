@@ -256,15 +256,15 @@ export default {
 				[WebitelMediaExporterExportStatus.Failed]: 'Ошибка',
 			},
 		},
-	},
-	importCSV: 'Импорт CSV',
-	CSV: {
-		skipHeaders: 'Пропустить заголовки',
-		charSet: 'Кодировка',
-		separator: 'Разделитель',
-		CSVColumn: 'Столбец CSV',
-		fieldName: 'Имя поля',
-		clearMember: 'Очистить участника',
+		importCSV: 'Импорт CSV',
+		CSV: {
+			skipHeaders: 'Пропустить заголовки',
+			charSet: 'Кодировка',
+			separator: 'Разделитель',
+			CSVColumn: 'Столбец CSV',
+			fieldName: 'Имя поля',
+			clearMember: 'Очистить участника',
+		},
 	},
 	channel: {
 		state: {
@@ -830,6 +830,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'элементов выбрано',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity')} был обновлён`,
@@ -838,9 +841,9 @@ export default {
 		},
 		warnings: {
 			passwordExpirationMessageDays:
-				'Ваш пароль истечёт через {amound} дн(я/ей)',
+				'Ваш пароль истечёт через {amount} дн(я/ей)',
 			passwordExpirationMessageHours:
-				'До истечения пароля осталось менее {amound} часов.',
+				'До истечения пароля осталось менее {amount} часов.',
 			licenseExpirationSoonMessage:
 				'Ваша лицензия {name}  завершится через {amount} дней',
 			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',

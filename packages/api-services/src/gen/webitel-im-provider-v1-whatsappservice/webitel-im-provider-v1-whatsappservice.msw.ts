@@ -418,7 +418,7 @@ export const getWhatsAppServiceDeleteWhatsAppGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.delete(
-		'*/im/gates/whatsapp/:id',
+		'*/im/gates/whatsapp/:id1',
 		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -446,7 +446,7 @@ export const getWhatsAppServiceGetWhatsAppGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/im/gates/whatsapp/:id',
+		'*/im/gates/whatsapp/:id1',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -474,7 +474,7 @@ export const getWhatsAppServiceUpdateWhatsAppGateMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.patch(
-		'*/im/gates/whatsapp/:id',
+		'*/im/gates/whatsapp/:id1',
 		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

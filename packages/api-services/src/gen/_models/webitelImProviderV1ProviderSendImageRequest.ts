@@ -14,6 +14,6 @@ export interface WebitelImProviderV1ProviderSendImageRequest {
 	caption?: string;
 	externalUserId?: string;
 	gateId?: string;
-	image?: WebitelImProviderV1ProviderFile;
+	images?: WebitelImProviderV1ProviderFile[];
 	type?: WebitelImProviderV1ProviderType;
 }

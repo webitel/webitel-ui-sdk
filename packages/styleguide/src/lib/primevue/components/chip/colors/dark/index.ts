@@ -1,6 +1,6 @@
 const darkColors = {
-	background: '{surface.100}',
-	color: '{surface.800}',
+	background: '{secondary.color}',
+	color: '{secondary.foreground}',
 	main: {
 		background: '{amber.650}',
 		color: '{amber.950}',

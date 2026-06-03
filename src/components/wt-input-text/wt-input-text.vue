@@ -21,6 +21,7 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
+      <!-- $listeners is because of compat using in applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -31,6 +32,7 @@
         class="wt-input-text__input typo-body-1"
         :inputmode="type"
         v-bind="$attrs"
+        v-on="$listeners"   
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
@@ -56,10 +58,9 @@
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
-
-import { useInputControl } from '../../composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useInputControl } from '../_internals/composables';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;

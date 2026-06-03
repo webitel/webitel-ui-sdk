@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer';
 
 /**
  * / ProviderUpdateFacebookGateRequest updates the operational settings of a Facebook provider.
@@ -12,4 +13,5 @@ export interface WebitelImProviderV1FacebookServiceUpdateFacebookGateBody {
 	enabled?: boolean;
 	name?: string;
 	pageToken?: string;
+	peer?: WebitelImProviderV1Peer;
 }

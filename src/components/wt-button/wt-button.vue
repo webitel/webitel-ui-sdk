@@ -6,6 +6,7 @@
         'p-button--with-badge': props.badge,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
+        [`p-button--size-${size}`]: true,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
       }"
     :disabled="disabled"
@@ -41,7 +42,7 @@
 
       <wt-icon
         v-if="icon"
-        :class="{ 'wt-button__icon--hidden': showLoader }"  
+        :class="{ 'wt-button__icon--hidden': showLoader }"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -165,7 +166,7 @@ watch(
 
 <style>
 .wt-button {
-	position: relative;
+  position: relative;
 }
 
 .p-button--with-badge {
@@ -176,9 +177,9 @@ watch(
   display: contents;
 }
 
-/* 
+/*
 	@author HlukhovYe
-	Hides the icon instantly when the loader is shown. 
+	Hides the icon instantly when the loader is shown.
 */
 .wt-button__icon--hidden {
   opacity: 0;

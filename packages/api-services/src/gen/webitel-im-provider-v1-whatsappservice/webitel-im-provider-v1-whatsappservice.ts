@@ -44,36 +44,36 @@ export const // --- title start
 			 * @summary / DeleteWhatsAppGate removes the WhatsApp gateway integration.
 			 */
 			const whatsAppServiceDeleteWhatsAppGate = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderDeleteWhatsAppGateResponse>
 			> => {
-				return axiosInstance.delete(`/im/gates/whatsapp/${id}`, options);
+				return axiosInstance.delete(`/im/gates/whatsapp/${id1}`, options);
 			};
 			/**
 			 * @summary / GetWhatsAppGate retrieves configuration and status for a WhatsApp gateway.
 			 */
 			const whatsAppServiceGetWhatsAppGate = (
-				id: string,
+				id1: string,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderGetWhatsAppGateResponse>
 			> => {
-				return axiosInstance.get(`/im/gates/whatsapp/${id}`, options);
+				return axiosInstance.get(`/im/gates/whatsapp/${id1}`, options);
 			};
 			/**
 			 * @summary / UpdateWhatsAppGate updates WhatsApp-specific gateway configurations.
 			 */
 			const whatsAppServiceUpdateWhatsAppGate = (
-				id: string,
+				id1: string,
 				webitelImProviderV1WhatsAppServiceUpdateWhatsAppGateBody: WebitelImProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
 				options?: AxiosRequestConfig,
 			): Promise<
 				AxiosResponse<WebitelImProviderV1ProviderUpdateWhatsAppGateResponse>
 			> => {
 				return axiosInstance.patch(
-					`/im/gates/whatsapp/${id}`,
+					`/im/gates/whatsapp/${id1}`,
 					webitelImProviderV1WhatsAppServiceUpdateWhatsAppGateBody,
 					options,
 				);

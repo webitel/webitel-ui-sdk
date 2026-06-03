@@ -86,7 +86,7 @@ export const getMetaAppServiceCreateMetaAppResponseMock = (
 				),
 				undefined,
 			]),
-			systemUserToken: faker.helpers.arrayElement([
+			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -95,7 +95,7 @@ export const getMetaAppServiceCreateMetaAppResponseMock = (
 				}),
 				undefined,
 			]),
-			updatedAt: faker.helpers.arrayElement([
+			verifyToken: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -181,7 +181,7 @@ export const getMetaAppServiceDeleteMetaAppResponseMock = (
 				),
 				undefined,
 			]),
-			systemUserToken: faker.helpers.arrayElement([
+			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -190,7 +190,7 @@ export const getMetaAppServiceDeleteMetaAppResponseMock = (
 				}),
 				undefined,
 			]),
-			updatedAt: faker.helpers.arrayElement([
+			verifyToken: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -276,7 +276,7 @@ export const getMetaAppServiceGetMetaAppResponseMock = (
 				),
 				undefined,
 			]),
-			systemUserToken: faker.helpers.arrayElement([
+			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -285,7 +285,7 @@ export const getMetaAppServiceGetMetaAppResponseMock = (
 				}),
 				undefined,
 			]),
-			updatedAt: faker.helpers.arrayElement([
+			verifyToken: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -371,7 +371,7 @@ export const getMetaAppServiceUpdateMetaAppResponseMock = (
 				),
 				undefined,
 			]),
-			systemUserToken: faker.helpers.arrayElement([
+			updatedAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -380,7 +380,7 @@ export const getMetaAppServiceUpdateMetaAppResponseMock = (
 				}),
 				undefined,
 			]),
-			updatedAt: faker.helpers.arrayElement([
+			verifyToken: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,
@@ -434,7 +434,7 @@ export const getMetaAppServiceDeleteMetaAppMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.delete(
-		'*/im/meta-apps/:id',
+		'*/im/meta-apps/:id1',
 		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -462,7 +462,7 @@ export const getMetaAppServiceGetMetaAppMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/im/meta-apps/:id',
+		'*/im/meta-apps/:id1',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -490,7 +490,7 @@ export const getMetaAppServiceUpdateMetaAppMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.patch(
-		'*/im/meta-apps/:id',
+		'*/im/meta-apps/:id1',
 		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined

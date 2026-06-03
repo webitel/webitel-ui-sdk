@@ -16,6 +16,8 @@ export const MetaAppServiceCreateMetaAppBody = zod
 		name: zod.string().optional(),
 		oauthRedirectUri: zod.string().optional(),
 		scopes: zod.array(zod.string()).optional(),
+		uri: zod.string().optional(),
+		verifyToken: zod.string().optional(),
 	})
 	.describe(
 		'/ ProviderCreateMetaAppRequest is used to register a new Meta Developer Application.\n/ This configuration is the foundation for all subsequent OAuth-based integrations.',
@@ -31,8 +33,8 @@ export const MetaAppServiceCreateMetaAppResponse = zod
 				name: zod.string().optional(),
 				oauthRedirectUri: zod.string().optional(),
 				scopes: zod.array(zod.string()).optional(),
-				systemUserToken: zod.string().optional(),
 				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
 			})
 			.optional(),
 	})
@@ -44,7 +46,7 @@ export const MetaAppServiceCreateMetaAppResponse = zod
  * @summary / DeleteMetaApp removes a Meta Application registration.
  */
 export const MetaAppServiceDeleteMetaAppParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const MetaAppServiceDeleteMetaAppResponse = zod
@@ -57,8 +59,8 @@ export const MetaAppServiceDeleteMetaAppResponse = zod
 				name: zod.string().optional(),
 				oauthRedirectUri: zod.string().optional(),
 				scopes: zod.array(zod.string()).optional(),
-				systemUserToken: zod.string().optional(),
 				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
 			})
 			.optional(),
 	})
@@ -70,7 +72,7 @@ export const MetaAppServiceDeleteMetaAppResponse = zod
  * @summary / GetMetaApp retrieves the configuration details of a specific Meta Application by its ID.
  */
 export const MetaAppServiceGetMetaAppParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const MetaAppServiceGetMetaAppResponse = zod
@@ -83,8 +85,8 @@ export const MetaAppServiceGetMetaAppResponse = zod
 				name: zod.string().optional(),
 				oauthRedirectUri: zod.string().optional(),
 				scopes: zod.array(zod.string()).optional(),
-				systemUserToken: zod.string().optional(),
 				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
 			})
 			.optional(),
 	})
@@ -96,7 +98,7 @@ export const MetaAppServiceGetMetaAppResponse = zod
  * @summary / UpdateMetaApp modifies an existing Meta Application configuration.
  */
 export const MetaAppServiceUpdateMetaAppParams = zod.object({
-	id: zod.string().describe('The internal ID of the MetaApp record'),
+	id_1: zod.string().describe('The internal ID of the MetaApp record'),
 });
 
 export const MetaAppServiceUpdateMetaAppBody = zod
@@ -105,6 +107,7 @@ export const MetaAppServiceUpdateMetaAppBody = zod
 		name: zod.string().optional(),
 		oauthRedirectUri: zod.string().optional(),
 		scopes: zod.array(zod.string()).optional(),
+		verifyToken: zod.string().optional(),
 	})
 	.describe(
 		'/ ProviderUpdateMetaAppRequest updates the settings for an existing Meta application.',
@@ -120,8 +123,8 @@ export const MetaAppServiceUpdateMetaAppResponse = zod
 				name: zod.string().optional(),
 				oauthRedirectUri: zod.string().optional(),
 				scopes: zod.array(zod.string()).optional(),
-				systemUserToken: zod.string().optional(),
 				updatedAt: zod.string().optional(),
+				verifyToken: zod.string().optional(),
 			})
 			.optional(),
 	})

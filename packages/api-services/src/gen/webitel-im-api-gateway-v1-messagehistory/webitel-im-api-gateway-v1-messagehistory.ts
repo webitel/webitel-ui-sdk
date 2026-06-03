@@ -9,7 +9,7 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryParams,
+	MessageHistorySearchThreadMessagesHistoryParams,
 	WebitelImApiGatewayV1SearchMessageHistoryResponse,
 } from '../_models';
 
@@ -25,29 +25,28 @@ export const // --- title start
  * @summary Searches messages within a specific thread.
 Supports cursor-based pagination and field selection.
  */
-			const messageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistory =
-				(
-					threadId: string,
-					params?: MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryParams,
-					options?: AxiosRequestConfig,
-				): Promise<
-					AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>
-				> => {
-					return axiosInstance.get(`/v1/${threadId}/messages`, {
-						...options,
-						params: {
-							...params,
-							...options?.params,
-						},
-					});
-				};
+			const messageHistorySearchThreadMessagesHistory = (
+				threadId: string,
+				params?: MessageHistorySearchThreadMessagesHistoryParams,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>
+			> => {
+				return axiosInstance.get(`/v1/threads/${threadId}/messages`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
 			// --- footer start
 			return {
-				messageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistory,
+				messageHistorySearchThreadMessagesHistory,
 			};
 		};
-export type MessageHistorySearchThreadMessagesHistoryWebitelImApiGatewayV1MessageHistoryResult =
+export type MessageHistorySearchThreadMessagesHistoryResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>;
 
 // --- footer end

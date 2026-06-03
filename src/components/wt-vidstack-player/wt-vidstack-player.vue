@@ -96,8 +96,12 @@ const emit = defineEmits<{
 	];
 }>();
 
-// const player = useTemplateRef<MediaPlayerElement>('player');
 const rootEl = useTemplateRef<HTMLElement>('root');
+
+defineExpose({
+	rootEl,
+});
+
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 
@@ -138,10 +142,50 @@ const rootClasses = computed(() => [
 	props.hideBackground && 'wt-vidstack-player--hide-background',
 ]);
 
+/**
+ * @author @Palonnyi Oleksandr
+ * Document Picture-in-Picture (PiP) autoplay support.
+ * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
+ *
+ * When the player moves into a PiP window, Vidstack re-initialises inside a
+ * new Document context.  Its internal request manager can then block autoplay
+ * even for muted media.  To work around this we locate the native `<video>`
+ * and call `play()` on it directly — the browser always permits muted autoplay.
+ *
+ * `findNativeVideoElement` is needed because `querySelector('video')` does not cross
+ * shadow-DOM boundaries; Vidstack renders `<video>` inside `<media-provider>`'s
+ * shadow root, so we walk the tree manually and pierce each shadow root we meet.
+ * Technique: https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot
+ */
+const findNativeVideoElement = (
+	root: Element | ShadowRoot,
+): HTMLVideoElement | null => {
+	if (root instanceof HTMLVideoElement) return root;
+
+	const shadowChildren =
+		root instanceof Element && root.shadowRoot
+			? Array.from(root.shadowRoot.children)
+			: [];
+	const lightChildren = Array.from(root.children ?? []);
+
+	for (const child of [
+		...shadowChildren,
+		...lightChildren,
+	]) {
+		const found = findNativeVideoElement(child);
+		if (found) return found;
+	}
+
+	return null;
+};
+
 const onCanPlay = (ev: Event) => {
 	if (!props.autoplay) return;
-
-	(ev.target as HTMLMediaElement)?.play();
+	const video = findNativeVideoElement(ev.target as Element);
+	const playPromise = (video ?? (ev.target as HTMLMediaElement)).play?.();
+	if (playPromise && typeof playPromise.catch === 'function') {
+		playPromise.catch(() => {});
+	}
 };
 </script>
 

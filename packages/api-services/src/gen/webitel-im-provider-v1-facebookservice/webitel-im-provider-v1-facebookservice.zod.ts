@@ -16,6 +16,12 @@ export const FacebookServiceCreateFacebookGateBody = zod
 		name: zod.string().optional(),
 		pageId: zod.string().optional(),
 		pageToken: zod.string().optional(),
+		peer: zod
+			.object({
+				iss: zod.string().optional(),
+				sub: zod.string().optional(),
+			})
+			.optional(),
 	})
 	.describe(
 		'/ ProviderCreateFacebookGateRequest links a specific Facebook Page as a messaging gateway.',
@@ -46,7 +52,6 @@ export const FacebookServiceCreateFacebookGateResponse = zod
 						'/ ProviderStatus represents the operational state of a provider gateway.\n\n - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages\n - PROVIDER_STATUS_INACTIVE: Manually disabled by user\n - PROVIDER_STATUS_ERROR: Connection or authentication failed',
 					),
 				updatedAt: zod.string().optional(),
-				webhook: zod.string().optional(),
 			})
 			.optional(),
 	})
@@ -58,7 +63,7 @@ export const FacebookServiceCreateFacebookGateResponse = zod
  * @summary / DeleteFacebookGate deactivates the gateway.
  */
 export const FacebookServiceDeleteFacebookGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const facebookServiceDeleteFacebookGateResponseItemStatusDefault = `PROVIDER_STATUS_UNSPECIFIED`;
@@ -85,7 +90,6 @@ export const FacebookServiceDeleteFacebookGateResponse = zod.object({
 					'/ ProviderStatus represents the operational state of a provider gateway.\n\n - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages\n - PROVIDER_STATUS_INACTIVE: Manually disabled by user\n - PROVIDER_STATUS_ERROR: Connection or authentication failed',
 				),
 			updatedAt: zod.string().optional(),
-			webhook: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -94,7 +98,7 @@ export const FacebookServiceDeleteFacebookGateResponse = zod.object({
  * @summary / GetFacebookGate retrieves details of a specific Facebook gateway.
  */
 export const FacebookServiceGetFacebookGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const facebookServiceGetFacebookGateResponseItemStatusDefault = `PROVIDER_STATUS_UNSPECIFIED`;
@@ -121,7 +125,6 @@ export const FacebookServiceGetFacebookGateResponse = zod.object({
 					'/ ProviderStatus represents the operational state of a provider gateway.\n\n - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages\n - PROVIDER_STATUS_INACTIVE: Manually disabled by user\n - PROVIDER_STATUS_ERROR: Connection or authentication failed',
 				),
 			updatedAt: zod.string().optional(),
-			webhook: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -130,7 +133,7 @@ export const FacebookServiceGetFacebookGateResponse = zod.object({
  * @summary / UpdateFacebookGate modifies Facebook gateway settings.
  */
 export const FacebookServiceUpdateFacebookGateParams = zod.object({
-	id: zod.string(),
+	id_1: zod.string(),
 });
 
 export const FacebookServiceUpdateFacebookGateBody = zod
@@ -138,6 +141,12 @@ export const FacebookServiceUpdateFacebookGateBody = zod
 		enabled: zod.boolean().optional(),
 		name: zod.string().optional(),
 		pageToken: zod.string().optional(),
+		peer: zod
+			.object({
+				iss: zod.string().optional(),
+				sub: zod.string().optional(),
+			})
+			.optional(),
 	})
 	.describe(
 		'/ ProviderUpdateFacebookGateRequest updates the operational settings of a Facebook provider.',
@@ -168,7 +177,6 @@ export const FacebookServiceUpdateFacebookGateResponse = zod
 						'/ ProviderStatus represents the operational state of a provider gateway.\n\n - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages\n - PROVIDER_STATUS_INACTIVE: Manually disabled by user\n - PROVIDER_STATUS_ERROR: Connection or authentication failed',
 					),
 				updatedAt: zod.string().optional(),
-				webhook: zod.string().optional(),
 			})
 			.optional(),
 	})

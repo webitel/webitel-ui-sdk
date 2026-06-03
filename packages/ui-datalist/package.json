@@ -1,9 +1,8 @@
 {
 	"name": "@webitel/ui-datalist",
-	"version": "1.1.26",
+	"version": "1.1.30",
 	"description": "Toolkit for building data lists in webitel ui system",
 	"scripts": {
-		"make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run lint:package && npm run utils:publish",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
 		"lint:fix": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
