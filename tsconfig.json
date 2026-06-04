@@ -1,30 +1,44 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext", "dom"],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": false,
-    "skipLibCheck": true,
-    "listEmittedFiles": true,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ],
-    "types": ["vidstack/vue"],
-    "moduleResolution": "Bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "noEmitOnError": false,
-    "strict": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
-  },
-  "include": ["src/**/*.ts", "docs/pages/**/*.ts", "env.d.ts"],
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowJs": false,
+		"skipLibCheck": true,
+		"listEmittedFiles": true,
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		],
+		"types": [
+			"vidstack/vue"
+		],
+		"moduleResolution": "Bundler",
+		"isolatedModules": true,
+		"moduleDetection": "force",
+		"noEmit": true,
+		"noEmitOnError": false,
+		"strict": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedSideEffectImports": true
+	},
+	"include": [
+		"src/**/*.ts",
+		"docs/pages/**/*.ts",
+		"env.d.ts",
+		"packages/*/src/**/*.ts",
+		"packages/*/src/**/*.vue"
+	],
+	"exclude": [
+		"**/*.spec.ts",
+		"**/*.test.ts"
+	]
 }
