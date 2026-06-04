@@ -22,18 +22,22 @@ const showWtLike = (type) => {
 			summary: 'Warning',
 			detail: 'Please review this warning',
 		},
-		error: {
-			severity: 'error',
-			summary: 'Error',
-			detail: 'Something went wrong',
+		contrast: {
+			severity: 'contrast',
+			summary: 'Contrast',
+			detail: 'Toast text',
+		},
+		secondary: {
+			severity: 'secondary',
+			summary: 'Secondary',
+			detail: 'Toast text',
 		},
 	};
 	const payload = map[type];
 	if (payload) {
 		toast.add({
 			...payload,
-			// life: lifeMs,
-			closable: false,
+			life: lifeMs,
 		});
 	}
 };
@@ -48,8 +52,10 @@ const showWtLike = (type) => {
     <div class="wt-toast-migration-demo__actions">
       <wt-button color="success" @click="showWtLike('success')"> success </wt-button>
       <wt-button color="primary" @click="showWtLike('info')"> info </wt-button>
-      <wt-button color="warning" @click="showWtLike('warning')"> warning </wt-button>
+      <wt-button color="warn" @click="showWtLike('warning')"> warning </wt-button>
       <wt-button color="error" @click="showWtLike('error')"> error </wt-button>
+      <wt-button color="job" @click="showWtLike('contrast')"> contrast </wt-button>
+      <wt-button color="secondary" @click="showWtLike('secondary')"> secondary </wt-button>
     </div>
   </div>
 </template>

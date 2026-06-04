@@ -2,8 +2,8 @@
   <PToast v-bind="$attrs">
     <template #message="{ message }">
       <wt-icon
-        :icon="severityToIconNameMap[message.severity] ?? 'done'"
-        :color="severityToIconColorMap[message.severity] ?? IconColor.DEFAULT"
+        :icon="severityToIconNameMap[message.severity] ?? ''"
+        :color="severityToIconColorMap[message.severity] ?? MessageColor.CONTRAST"
         class="p-toast-message-icon"
       />
       <div class="p-toast-message-text">
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import WtIcon from '../wt-icon/wt-icon.vue';
-import { ComponentSize, IconColor } from '../../enums';
+import { ComponentSize, IconColor, MessageColor } from '../../enums';
 
 defineOptions({
 	name: 'WtToast',
@@ -29,14 +29,16 @@ defineOptions({
 const severityToIconNameMap: Record<string, string> = {
 	success: 'done',
 	info: 'rounded-info',
-	warn: 'attention',
-	error: 'attention',
+	warn: 'warning',
+	error: 'error',
 };
 
 const severityToIconColorMap: Record<string, string> = {
-	success: IconColor.SUCCESS,
-	info: IconColor.INFO,
-	warn: IconColor.WARNING,
-	error: IconColor.ERROR,
+	success: MessageColor.SUCCESS,
+	info: MessageColor.INFO,
+	warn: MessageColor.WARN,
+	error: MessageColor.ERROR,
+	contrast: MessageColor.CONTRAST,
+	secondary: MessageColor.SECONDARY,
 };
 </script>

@@ -178,6 +178,8 @@ import prompter from './prompter.svg?raw';
 import protectionError from './protection-error.svg?raw';
 import queueMember from './queue-member.svg?raw';
 import quickReplies from './quick-replies.svg?raw';
+import error from './error.svg?raw';
+import warning from './warning.svg?raw';
 import radio from './radio.svg?raw';
 import radioChecked from './radio--checked.svg?raw';
 import rec from './rec.svg?raw';
@@ -418,6 +420,8 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	error,
+	warning,
 	union,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
