@@ -1,5 +1,6 @@
-import { CreateStatusConditionBody as genCaseStatusConditionSchema } from '../../gen';
+import { z } from 'zod';
+import { CreateStatusConditionBody } from '../../gen';
 
-export const caseStatusConditionSchema = genCaseStatusConditionSchema.extend({
-	name: genCaseStatusConditionSchema.shape.name.unwrap().min(1),
+export const caseStatusConditionSchema = CreateStatusConditionBody.extend({
+	name: CreateStatusConditionBody.shape.name.pipe(z.string().min(1)),
 });
