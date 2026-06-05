@@ -837,6 +837,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'mục đã chọn',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) =>

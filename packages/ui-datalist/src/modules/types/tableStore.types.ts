@@ -22,6 +22,10 @@ export interface PatchItemPropertyParams {
 	value: unknown;
 }
 
+export interface LoadDataListOptions {
+	withLoading?: boolean;
+}
+
 export interface TableStore<Entity> {
 	// tableStore
 	dataList: Ref<Entity[]>;
@@ -47,7 +51,7 @@ export interface TableStore<Entity> {
 
 	// tableStore
 	initialize: () => Promise<void>;
-	loadDataList: (query?: object) => Promise<void>;
+	loadDataList: (options?: LoadDataListOptions) => Promise<void>;
 	updateSelected: (selected: Entity[]) => void;
 	patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
 	deleteEls: (deleted: Entity[]) => Promise<void>;

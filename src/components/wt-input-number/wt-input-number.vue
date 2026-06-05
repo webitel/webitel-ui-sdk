@@ -86,10 +86,9 @@ import {
 	useSlots,
 	useTemplateRef,
 } from 'vue';
-
-import { useInputControl } from '../../composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useInputControl } from '../_internals/composables';
 
 interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	label?: string;

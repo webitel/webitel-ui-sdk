@@ -2,6 +2,7 @@
 import ExampleSelect from './examples/example-select.vue';
 import ExampleMultipleSelect from './examples/example-multiple-select.vue';
 import ExampleDisabledSelect from './examples/example-disabled-select.vue';
+import ExampleDisabledOptionsSelect from './examples/example-disabled-options-select.vue';
 import ExampleInvalidSelect from './examples/example-invalid-select.vue';
 import ExampleCustomValuesSelect from './examples/example-custom-values-select.vue';
 import ExampleValueFromOptionsByPropSelect from './examples/example-value-from-options-by-prop-select.vue';
@@ -81,6 +82,16 @@ import ExampleValueFromOptionsByPropSelect from './examples/example-value-from-o
 
 ::: details Code
 <<< ./examples/example-disabled-select.vue
+:::
+
+## Example Disabled Options Select
+
+::: raw
+<ExampleDisabledOptionsSelect/>
+:::
+
+::: details Code
+<<< ./examples/example-disabled-options-select.vue
 :::
 
 ## Example Invalid Select

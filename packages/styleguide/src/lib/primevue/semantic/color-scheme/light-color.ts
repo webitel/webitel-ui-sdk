@@ -90,10 +90,10 @@ const lightColor = {
 	},
 
 	highlight: {
-		background: '{primary.50}',
-		focusBackground: '{primary.100}',
-		color: '{primary.700}',
-		focusColor: '{primary.800}',
+		background: '{amber.100}',
+		focusBackground: '{amber.200}',
+		color: '{amber.700}',
+		focusColor: '{amber.800}',
 	},
 
 	mask: {

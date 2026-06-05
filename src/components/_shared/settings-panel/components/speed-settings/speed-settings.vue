@@ -60,8 +60,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { WtButton, WtIcon, WtSlider } from '../../../../../components';
 import { ComponentSize } from '../../../../../enums';
+import WtButton from '../../../../wt-button/wt-button.vue';
+import WtIcon from '../../../../wt-icon/wt-icon.vue';
+import WtSlider from '../../../../wt-slider/wt-slider.vue';
 
 interface Props {
 	modelValue?: number;
@@ -123,7 +125,6 @@ function handleIncrease() {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
   min-width: 192px;
 }
 .speed-settings__step-button {

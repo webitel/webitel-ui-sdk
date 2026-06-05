@@ -1,7 +1,7 @@
 import { computed, unref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { WtTableHeader } from '../../components/wt-table/types/WtTable.d.ts';
+import type { WtTableHeader } from '../../wt-table/types/WtTable';
 
 export const useWtTable = ({ headers }) => {
 	const { t } = useI18n();

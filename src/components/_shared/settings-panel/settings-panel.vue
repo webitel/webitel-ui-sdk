@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { WtPopover } from '../../../components';
 import { ComponentSize } from '../../../enums';
+import WtPopover from '../../wt-popover/wt-popover.vue';
 import SpeedSettings from './components/speed-settings/speed-settings.vue';
 
 export interface MediaSettings {
@@ -51,12 +51,21 @@ function handlePlaybackRateUpdate(playbackRate: number) {
 
 <style scoped>
 .settings-panel {
-	display: flex;
+  display: flex;
 }
 
+/*
+* @author @Oleksandr Palonnyi
+*
+* [WTEL-9163](https://webitel.atlassian.net/browse/WTEL-9163)
+*
+* comment link - https://webitel.atlassian.net/browse/WTEL-9163?focusedCommentId=759364
+*/
 .settings-panel__button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+  margin: 0 calc(var(--spacing-2xs) * -1);
+  padding: 0 var(--spacing-2xs);
 }
 </style>

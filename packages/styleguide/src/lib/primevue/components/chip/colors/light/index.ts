@@ -1,6 +1,6 @@
 const lightColors = {
-	background: '{surface.200}',
-	color: '{surface.800}',
+	background: '{secondary.color}',
+	color: '{secondary.foreground}',
 	main: {
 		background: '{amber.200}',
 		color: '{amber.950}',
