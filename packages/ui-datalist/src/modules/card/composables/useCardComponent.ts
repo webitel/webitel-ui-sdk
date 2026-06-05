@@ -1,6 +1,7 @@
 import { refDebounced } from '@vueuse/core';
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { onUnmounted, watch } from 'vue';
+import { type Ref, onUnmounted, watch } from 'vue';
+import type { RegleSchema } from '@regle/schemas';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
@@ -34,8 +35,8 @@ export const useCardComponent = <CardEntity>({
 	});
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
-		useCardValidation({
-			validationSchema,
+		useCardValidation<CardEntity>({
+			validationSchema: validationSchema as Ref<RegleSchema<CardEntity>>,
 		});
 
 	const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({
