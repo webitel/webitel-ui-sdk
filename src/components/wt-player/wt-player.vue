@@ -5,6 +5,7 @@
 		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
+    :playback-rate="playbackRate"
     @ended="handleEnded"
 	>
 
@@ -18,6 +19,21 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
+			<wt-popover v-if="!props.hideSettings" class="settings-popover">
+				<template #activator="{ toggle }">
+					<media-button class="settings-button" @click="toggle">
+						<wt-icon-btn
+							icon="plyr-settings"
+							:size="ComponentSize.SM"
+						/>
+					</media-button>
+				</template>
+
+				<speed-settings
+					v-model:model-value="playbackRate"
+				/>
+			</wt-popover>
+
 			<media-button
 				v-if="props.download"
 				class="download-button"
@@ -25,7 +41,7 @@
 			>
 				<wt-icon-btn
 					icon="plyr-download"
-					size="sm"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -36,7 +52,7 @@
 			>
 				<wt-icon-btn
 					icon="close"
-					size="sm"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -50,14 +66,16 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { computed, toRefs } from 'vue';
-
+import { ref, toRefs, watch } from 'vue';
+import { ComponentSize } from '../../enums';
+import WtPopover from '../wt-popover/wt-popover.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
+import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 
 interface Props {
 	/**
@@ -118,6 +136,12 @@ interface Props {
 	 */
 	hideMuteButton?: boolean;
 	/**
+	 * Hide settings button
+	 * @type {boolean}
+	 * @default false
+	 */
+	hideSettings?: boolean;
+	/**
 	 * Shows close button
 	 * @type {boolean}
 	 * @default true
@@ -141,6 +165,7 @@ const props = withDefaults(defineProps<Props>(), {
 	invertTime: true,
 	hideVolumeSlider: false,
 	hideMuteButton: false,
+	hideSettings: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
@@ -150,6 +175,8 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
+
+const playbackRate = ref(1);
 
 const { src: srcRef } = toRefs(props);
 
@@ -183,6 +210,17 @@ function handleEnded(event: Event) {
 	const player = event.target as HTMLMediaElement;
 	player.currentTime = 0;
 }
+
+function resetPlayerSettings() {
+	playerSettings.value.playbackRate = 1;
+}
+
+watch(
+	() => props.src,
+	() => {
+		resetPlayerSettings();
+	},
+);
 </script>
 
 <style scoped>
@@ -204,8 +242,13 @@ function handleEnded(event: Event) {
 	gap: var(--spacing-sm);
 }
 
+.settings-popover {
+  display: flex;
+}
+
 .close-button,
-.download-button {
+.download-button,
+.settings-button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;

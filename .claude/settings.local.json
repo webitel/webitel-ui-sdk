@@ -1,0 +1,8 @@
+{
+	"permissions": {
+		"allow": [
+			"Bash(Get-ChildItem -Path D:\\\\study\\\\webitel\\\\sdk\\\\webitel-ui-sdk\\\\src -Filter \"*icon*\" -Recurse -ErrorAction SilentlyContinue)",
+			"Bash(Select-Object -ExpandProperty FullName -First 20)"
+		]
+	}
+}
