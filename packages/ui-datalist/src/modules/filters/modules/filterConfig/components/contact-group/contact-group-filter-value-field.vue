@@ -1,15 +1,13 @@
 <template>
-  <wt-select
-    :close-on-select="false"
+  <wt-multi-select
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
     :v="!disableValidation && v$?.model?.list"
-    :value="model?.list"
-    multiple
-    track-by="id"
-    use-value-from-options-by-prop="id"
+    :model-value="model?.list"
+    data-key="id"
+    option-value="id"
     v-bind="$attrs"
-    @input="changeListValue"
+    @update:model-value="changeListValue"
   />
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
@@ -23,7 +21,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
-import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/components';
+import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

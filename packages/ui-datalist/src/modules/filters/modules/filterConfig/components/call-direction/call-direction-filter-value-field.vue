@@ -1,20 +1,19 @@
 <template>
-  <wt-select
+  <wt-single-select
     :clearable="false"
     :label="t('webitelUI.filters.filterValue')"
     :options="CallDirectionFilterOptions"
-    :value="model"
+    v-model:model-value="model"
     :v="v$.model"
-    track-by="value"
-    use-value-from-options-by-prop="value"
-    @input="model = $event"
+    data-key="value"
+    option-value="value"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtSingleSelect } from '@webitel/ui-sdk/components';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

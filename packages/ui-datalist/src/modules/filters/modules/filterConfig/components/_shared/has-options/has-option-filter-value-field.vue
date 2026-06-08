@@ -1,18 +1,17 @@
 <template>
-  <wt-select
+  <wt-single-select
     :label="labelValue"
     :options="BooleanOptions"
-    :value="strModel"
+    v-model:model-value="strModel"
     class="has-option-filter-value-field"
-    track-by="value"
-    use-value-from-options-by-prop="value"
+    data-key="value"
+    option-value="value"
     v-bind="attrs"
-    @input="strModel = $event"
   />
 </template>
 
 <script lang="ts" setup>
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtSingleSelect } from '@webitel/ui-sdk/components';
 import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
