@@ -44,6 +44,7 @@ import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
+import WtToast from './wt-toast/wt-toast.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
 // Async components - heavy or rarely used components
@@ -211,6 +212,7 @@ const Components = {
 	WtTimeInput,
 	WtTimepicker,
 	WtTextarea,
+	WtToast,
 	WtAppHeader,
 	WtHeadline,
 	WtBreadcrumb,
@@ -339,6 +341,7 @@ export {
 	WtTextarea,
 	WtTimeInput,
 	WtTimepicker,
+	WtToast,
 	WtTooltip,
 	WtTree,
 	WtTreeTable,

@@ -20,32 +20,34 @@ import SliderScheme from './slider';
 import SwitcherScheme from './switcher';
 import TableScheme from './table';
 import TextareaScheme from './textarea';
+import ToastScheme from './toast';
 import ToolbarScheme from './toolbar';
 import TooltipScheme from './tooltip';
 
 export {
 	AvatarScheme,
-	ButtonScheme,
 	BadgeScheme,
-	PopoverScheme,
-	TooltipScheme,
-	MenubarScheme,
-	ToolbarScheme,
-	ChipScheme,
-	CheckboxScheme,
-	TableScheme,
-	TextareaScheme,
-	SwitcherScheme,
-	DividerScheme,
-	SliderScheme,
 	BreadcrumbScheme,
-	RadioScheme,
+	ButtonScheme,
+	CheckboxScheme,
+	ChipScheme,
+	DividerScheme,
 	GalleriaScheme,
+	InputGroupScheme,
 	InputNumberScheme,
 	InputTextScheme,
-	PasswordScheme,
-	InputGroupScheme,
+	MenubarScheme,
 	MessageScheme,
-	SingleSelectScheme,
 	MultiSelectScheme,
+	PasswordScheme,
+	PopoverScheme,
+	RadioScheme,
+	SingleSelectScheme,
+	SliderScheme,
+	SwitcherScheme,
+	TableScheme,
+	TextareaScheme,
+	ToastScheme,
+	ToolbarScheme,
+	TooltipScheme,
 };
