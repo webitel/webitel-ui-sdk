@@ -536,7 +536,6 @@ const virtualScroll = computed(() => {
 		numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
 		totalRecords: props.data.length,
 		autoSize: true, // Enable auto height recalculation
-		appendOnly: true, // Prevent scroll position jumps
 	};
 });
 

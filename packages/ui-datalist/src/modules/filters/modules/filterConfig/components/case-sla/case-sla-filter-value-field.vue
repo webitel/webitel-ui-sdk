@@ -1,12 +1,10 @@
 <template>
-  <wt-select
-    :close-on-select="false"
+  <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="searchMethod"
     :v="v$.model"
-    :value="model"
-    multiple
-    use-value-from-options-by-prop="id"
+    :model-value="model"
+    option-value="id"
     @input="handleInput"
   />
 </template>
@@ -14,7 +12,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

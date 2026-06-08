@@ -1,29 +1,28 @@
 <template>
   <div>
-    <wt-select
-      :clearable="false"
+    <wt-single-select
+      :show-clear="false"
       :label="t('cases.appliedSLA')"
       :search-method="slasSearchMethod"
       :v="v$.model.selection"
-      :value="model?.selection"
-      track-by="id"
-      use-value-from-options-by-prop="id"
-      @input="updateSelected"
+      :model-value="model?.selection"
+      data-key="id"
+      option-value="id"
+      @update:model-value="updateSelected"
     />
 
-    <wt-select
+    <wt-multi-select
       v-if="model?.selection"
       :key="model.selection"
-      :clearable="false"
+      :show-clear="false"
       :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"
       :v="v$.model.conditions"
-      :value="model?.conditions"
-      multiple
-      track-by="id"
-      use-value-from-options-by-prop="id"
-      @input="model.conditions = $event"
+      :model-value="model?.conditions"
+      data-key="id"
+      option-value="id"
+      @update:model-value="model.conditions = $event"
     />
   </div>
 </template>
@@ -31,7 +30,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

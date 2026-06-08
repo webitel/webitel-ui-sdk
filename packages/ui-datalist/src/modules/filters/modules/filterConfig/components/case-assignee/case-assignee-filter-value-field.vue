@@ -1,14 +1,11 @@
 <template>
-  <wt-select
-    :close-on-select="false"
+  <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
     :v="v$.model.list"
-    :value="model?.list"
-    multiple
-    track-by="id"
-    use-value-from-options-by-prop="id"
-    @input="model.list = $event"
+    v-model:model-value="model.list"
+    data-key="id"
+    option-value="id"
   />
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
@@ -21,7 +18,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
-import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/components';
+import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

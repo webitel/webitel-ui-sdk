@@ -1,13 +1,22 @@
 <template>
-  <wt-select
-    :close-on-select="!filterSchema.multiple"
-    :multiple="filterSchema.multiple"
+  <wt-single-select
+		v-if="!filterSchema.multiple"
     :options="options"
     :search-method="search"
-    :track-by="trackBy"
-    :value="value"
+    :data-key="trackBy"
+    :model-value="value"
     v-bind="attrs"
-    @input="setValue"
+    @update:model-value="setValue"
+  />
+
+	<wt-multi-select
+		v-else
+    :options="options"
+    :search-method="search"
+    :data-key="trackBy"
+    :model-value="value"
+    v-bind="attrs"
+    @update:model-value="setValue"
   />
 </template>
 

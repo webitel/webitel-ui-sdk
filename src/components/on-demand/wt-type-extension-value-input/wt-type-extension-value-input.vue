@@ -31,13 +31,12 @@
       value,
     }"
   >
-    <wt-select
+    <wt-single-select
       v-bind="sharedChildrenProps"
-      :value="value"
+      :model-value="value"
       :search-method="loadLookupList(field.lookup)"
-      track-by="id"
-      clearable
-      @input="selectElement"
+      data-key="id"
+      @update:model-value="selectElement"
     />
   </slot>
   <slot
@@ -49,10 +48,10 @@
       value,
     }"
   >
-    <wt-select
+    <wt-multi-select
       v-bind="{ ...sharedChildrenProps, ...multiselectProps }"
-      :value="value"
-      @input="selectElements"
+      :model-value="value"
+      @update:model-value="selectElements"
     />
   </slot>
   <slot
@@ -74,7 +73,12 @@
 
 <script lang="ts" setup>
 import { SysTypesAPI } from '@webitel/api-services/api';
-import { WtDatepicker, WtSelect, WtSwitcher } from '@webitel/ui-sdk/components';
+import {
+	WtDatepicker,
+	WtMultiSelect,
+	WtSingleSelect,
+	WtSwitcher,
+} from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { WebitelProtoDataField } from 'webitel-sdk';
@@ -123,13 +127,12 @@ const sharedChildrenProps = computed(() => ({
  */
 const selectProps = computed(() => ({
 	clearable: true,
-	trackBy: 'id',
+	dataKey: 'id',
 	searchMethod: () => loadLookupList(props.field.lookup),
 }));
 
 const multiselectProps = computed(() => ({
 	...selectProps.value,
-	multiple: true,
 }));
 
 const setValue = (value) => {

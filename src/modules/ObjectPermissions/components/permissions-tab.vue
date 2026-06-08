@@ -45,32 +45,32 @@
           </template>
 
           <template #read="{ item }">
-            <wt-select
-              :clearable="false"
+            <wt-single-select
+              :show-clear="false"
               :disabled="!access.edit"
               :options="accessOptions"
-              :value="item.access.r"
-              @input="changeAccessMode({ item, ruleName: 'r', mode: $event })"
+              :model-value="item.access.r"
+              @update:model-value="changeAccessMode({ item, ruleName: 'r', mode: $event })"
             />
           </template>
 
           <template #edit="{ item }">
-            <wt-select
-              :clearable="false"
+            <wt-single-select
+              :show-clear="false"
               :disabled="!access.edit"
               :options="accessOptions"
-              :value="item.access.w"
-              @input="changeAccessMode({ item, ruleName: 'w', mode: $event })"
+              :model-value="item.access.w"
+              @update:model-value="changeAccessMode({ item, ruleName: 'w', mode: $event })"
             />
           </template>
 
           <template #delete="{ item }">
-            <wt-select
-              :clearable="false"
+            <wt-single-select
+              :show-clear="false"
               :disabled="!access.edit"
               :options="accessOptions"
-              :value="item.access.d"
-              @input="changeAccessMode({ item, ruleName: 'd', mode: $event })"
+              :model-value="item.access.d"
+              @update:model-value="changeAccessMode({ item, ruleName: 'd', mode: $event })"
             />
           </template>
           <template #actions="{ item }">

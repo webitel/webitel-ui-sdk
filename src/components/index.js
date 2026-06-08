@@ -119,9 +119,6 @@ const WtTableColumnSelect = defineAsyncComponent(
 	() => import('./wt-table-column-select/wt-table-column-select.vue'),
 );
 const WtTabs = defineAsyncComponent(() => import('./wt-tabs/wt-tabs.vue'));
-const WtTagsInput = defineAsyncComponent(
-	() => import('./wt-tags-input/wt-tags-input.vue'),
-);
 const WtTimeInput = defineAsyncComponent(
 	() => import('./wt-time-input/wt-time-input.vue'),
 );
@@ -211,7 +208,6 @@ const Components = {
 	WtSlider,
 	WtSwitcher,
 	WtTabs,
-	WtTagsInput,
 	WtTimeInput,
 	WtTimepicker,
 	WtTextarea,
@@ -340,7 +336,6 @@ export {
 	WtTableActions,
 	WtTableColumnSelect,
 	WtTabs,
-	WtTagsInput,
 	WtTextarea,
 	WtTimeInput,
 	WtTimepicker,
