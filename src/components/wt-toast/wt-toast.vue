@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import WtIcon from '../wt-icon/wt-icon.vue';
 import { ComponentSize, IconColor, MessageColor } from '../../enums';
+import WtIcon from '../wt-icon/wt-icon.vue';
 
 defineOptions({
 	name: 'WtToast',
