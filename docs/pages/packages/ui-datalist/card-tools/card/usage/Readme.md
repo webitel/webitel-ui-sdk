@@ -95,13 +95,13 @@ const {
         required 
     />
         
-    <wt-select
+    <wt-single-select
         v-model="modelValue.type"
         :label="t('vocabulary.type')"
         :options="typesSourcesOptions"
         :regle-validation="validationFields?.type"
         :disabled="disableUserInput"
-        use-value-from-options-by-prop="id"
+        option-value="id"
         required
     />
     // ...
@@ -111,7 +111,7 @@ const {
     import {RegleSchemaFieldStatus} from '@regle/schemas';
     import {WebitelCasesSourceType} from '@webitel/api-services/gen/models'; // [!code highlight]
     import {WebitelCasesSource} from '@webitel/api-services/gen/models';
-    import {WtInputText, WtSelect} from '@webitel/ui-sdk/components';
+    import {WtInputText, WtSingleSelect} from '@webitel/ui-sdk/components';
     
     // ...
 

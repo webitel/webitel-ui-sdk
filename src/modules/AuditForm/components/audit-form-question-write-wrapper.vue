@@ -43,14 +43,14 @@
           required
           @update:model-value="updateQuestion({ path: 'question', value: $event })"
         />
-        <wt-select
-          :clearable="false"
+        <wt-single-select
+          :show-clear="false"
           :label="t('webitelUI.auditForm.answerType')"
           :options="QuestionType"
-          :value="prettifiedQuestionType"
+          :model-value="prettifiedQuestionType"
           :disabled="readonly"
-          track-by="value"
-          @input="handleQuestionTypeChange($event.value)"
+          data-key="value"
+          @update:model-value="handleQuestionTypeChange($event.value)"
         />
       </div>
       <component
@@ -70,7 +70,7 @@ import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
-import WtSelect from '../../../components/wt-select/wt-select.vue';
+import WtSingleSelect from '../../../components/wt-single-select/wt-single-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
 import { updateObject } from '../../../scripts';

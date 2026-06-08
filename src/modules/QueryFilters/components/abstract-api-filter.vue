@@ -1,20 +1,42 @@
 <template>
-  <wt-select
-    :close-on-select="filterSchema.closeOnSelect"
+  <wt-single-select
+    v-if="!filterSchema.multiple"
     :label="label"
-    :multiple="filterSchema.multiple"
     :search-method="search"
-    :track-by="filterSchema.storedProp"
-    :value="filterSchema.value"
+    :data-key="filterSchema.storedProp"
+    :model-value="filterSchema.value"
     v-bind="$attrs"
-    @closed="
+    @hide="
       setValueToQuery({
         value,
         filterQuery,
         storedProp: filterSchema.storedProp,
       })
     "
-    @input="setValue({ filter: filterQuery, value: $event })"
+    @update:model-value="setValue({ filter: filterQuery, value: $event })"
+    @reset="
+      setValueToQuery({
+        value,
+        filterQuery,
+        storedProp: filterSchema.storedProp,
+      })
+    "
+  />
+
+  <wt-multi-select
+    :label="label"
+    :search-method="search"
+    :data-key="filterSchema.storedProp"
+    :model-value="filterSchema.value"
+    v-bind="$attrs"
+    @hide="
+      setValueToQuery({
+        value,
+        filterQuery,
+        storedProp: filterSchema.storedProp,
+      })
+    "
+    @update:model-value="setValue({ filter: filterQuery, value: $event })"
     @reset="
       setValueToQuery({
         value,

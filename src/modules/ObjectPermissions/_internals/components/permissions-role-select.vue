@@ -1,23 +1,22 @@
 <template>
-  <wt-select
+  <wt-single-select
     class="permissions-role-select"
     option-label="name"
     v-bind="attrs"
-    :value="model"
-    @input="model = $event"
+    v-model:model-value="model"
   >
-    <template #singleLabel="{ option, optionLabel }">
-      <role-row :role="option">
-        {{ option[optionLabel] || option }}
+    <template #value="{ value, getOptionLabel }">
+      <role-row :role="value">
+        {{ getOptionLabel(value) || value }}
       </role-row>
     </template>
 
-    <template #option="{ option, optionLabel }">
+    <template #option="{ option, getOptionLabel }">
       <role-row :role="option">
-        {{ option[optionLabel] || option }}
+        {{ getOptionLabel(option) || option }}
       </role-row>
     </template>
-  </wt-select>
+  </wt-single-select>
 </template>
 
 <script setup>
