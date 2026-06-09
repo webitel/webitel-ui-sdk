@@ -79,6 +79,13 @@ export const uiSdkRoutes = [
 				text: 'Modules',
 				items: [
 					{
+						text: 'Module: App Config',
+						collapsed: true,
+						items: resolveItems([
+							'modules/AppConfig/**/*.md',
+						]),
+					},
+					{
 						text: 'Module: Object Permissions',
 						collapsed: true,
 						items: [
