@@ -1,6 +1,19 @@
 import { z } from 'zod';
-import { CreateStatusConditionBody } from '../../gen';
 
-export const caseStatusConditionSchema = z.object({
-	name: CreateStatusConditionBody.shape.name.pipe(z.string().min(1)),
+import type { ZodShape } from '../types';
+
+interface CaseStatusConditionInput {
+	name?: string;
+	description?: string;
+	final?: boolean;
+	initial?: boolean;
+}
+
+export const caseStatusConditionSchema = z.object<
+	ZodShape<CaseStatusConditionInput>
+>({
+	name: z.string().min(1),
+	description: z.string().optional(),
+	final: z.boolean().optional(),
+	initial: z.boolean().optional(),
 });

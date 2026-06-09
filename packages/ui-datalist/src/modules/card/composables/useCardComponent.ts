@@ -13,21 +13,18 @@ import { useItemCardSaveText } from './useItemCardSaveText';
 export const useCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
-	routeParamName = 'id',
+	manualSetup = false,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
 	/**
-	 * Route param name for the card item id. Defaults to 'id'.
+	 * When `true` — the composable skips automatic initialization and
+	 * `onUnmounted` reset. Use this when you need manual control over
+	 * the card lifecycle (e.g. inside `useNestedCardComponent`).
 	 *
-	 * When set to any value other than 'id' — automatically enables nested-card
-	 * (popup) mode: watches the route param and reads the parent id from
-	 * `route.params.id`.
-	 *
-	 * Top-level card (default):   routeParamName = 'id'
-	 * Nested popup card:          routeParamName = 'conditionId' | 'statusConditionId' | …
+	 * @default false
 	 */
-	routeParamName?: string;
+	manualSetup?: boolean;
 }) => {
 	const cardStore = useCardStore();
 
@@ -41,11 +38,6 @@ export const useCardComponent = <CardEntity>({
 	} = storeToRefs(cardStore);
 
 	const { initialize, saveItem, $reset } = cardStore;
-
-	const { routeId, isNestedCard, parentId } = useCardRouting({
-		itemId,
-		routeParamName,
-	});
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
 		useCardValidation<CardEntity>({
@@ -73,26 +65,10 @@ export const useCardComponent = <CardEntity>({
 		saveItem,
 	});
 
-	if (isNestedCard) {
-		// Nested card mode (popup): watch routeId, reset when popup closes
-		watch(
-			routeId,
-			(value) => {
-				if (value) {
-					initialize({
-						itemId: value === 'new' ? null : value,
-						parentId: parentId.value,
-					});
-				} else {
-					$reset();
-				}
-			},
-			{
-				immediate: true,
-			},
-		);
-	} else {
-		// Top-level card: initialize once, reset on unmount
+	if (!manualSetup) {
+		const { routeId } = useCardRouting({
+			itemId,
+		});
 		initialize({
 			itemId: routeId.value,
 		});
