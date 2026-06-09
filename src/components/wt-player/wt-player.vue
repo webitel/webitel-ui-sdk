@@ -218,6 +218,7 @@ watch(
 
 <style scoped>
 .wt-player {
+  display: block;
 	width: 100%;
 	max-width: 100%;
 	box-shadow: var(--elevation-10);
