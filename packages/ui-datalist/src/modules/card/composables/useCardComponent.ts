@@ -13,9 +13,21 @@ import { useItemCardSaveText } from './useItemCardSaveText';
 export const useCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
+	routeParamName = 'id',
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
+	/**
+	 * Route param name for the card item id. Defaults to 'id'.
+	 *
+	 * When set to any value other than 'id' — automatically enables nested-card
+	 * (popup) mode: watches the route param and reads the parent id from
+	 * `route.params.id`.
+	 *
+	 * Top-level card (default):   routeParamName = 'id'
+	 * Nested popup card:          routeParamName = 'conditionId' | 'statusConditionId' | …
+	 */
+	routeParamName?: string;
 }) => {
 	const cardStore = useCardStore();
 
@@ -30,8 +42,9 @@ export const useCardComponent = <CardEntity>({
 
 	const { initialize, saveItem, $reset } = cardStore;
 
-	const { routeId } = useCardRouting({
+	const { routeId, isNestedCard, parentId } = useCardRouting({
 		itemId,
+		routeParamName,
 	});
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
@@ -60,11 +73,31 @@ export const useCardComponent = <CardEntity>({
 		saveItem,
 	});
 
-	initialize({
-		itemId: routeId.value,
-	});
-
-	onUnmounted($reset);
+	if (isNestedCard) {
+		// Nested card mode (popup): watch routeId, reset when popup closes
+		watch(
+			routeId,
+			(value) => {
+				if (value) {
+					initialize({
+						itemId: value === 'new' ? null : value,
+						parentId: parentId.value,
+					});
+				} else {
+					$reset();
+				}
+			},
+			{
+				immediate: true,
+			},
+		);
+	} else {
+		// Top-level card: initialize once, reset on unmount
+		initialize({
+			itemId: routeId.value,
+		});
+		onUnmounted($reset);
+	}
 
 	watch(error, (err) => {
 		if (onLoadErrorHandler) onLoadErrorHandler(err);

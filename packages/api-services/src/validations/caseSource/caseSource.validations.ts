@@ -9,10 +9,9 @@ import { CreateSourceBody as genCaseSourceSchema } from '../../gen';
  * Now schemas are wrapped with `.default(...)`, which transforms
  * `CreateSourceBody` from `ZodObject` into `ZodDefault<ZodObject>`.
  */
-const innerSchema = genCaseSourceSchema.unwrap();
 
-export const caseSourceSchema = innerSchema.extend({
-	name: innerSchema.shape.name.unwrap().default(''),
-	description: innerSchema.shape.description.default(''),
-	type: innerSchema.shape.type.unwrap(),
+export const caseSourceSchema = genCaseSourceSchema.extend({
+	name: genCaseSourceSchema.shape.name.default(''),
+	description: genCaseSourceSchema.shape.description.default(''),
+	type: genCaseSourceSchema.shape.type,
 });
