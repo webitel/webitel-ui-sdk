@@ -91,6 +91,7 @@
 		"lodash-es": "^4.17.21",
 		"mitt": "^3.0.1",
 		"path-browserify": "^1.0.1",
+		"tiny-jsonc": "^1.0.2",
 		"vidstack": "^1.12.13",
 		"vue-i18n": "^11.1.2",
 		"vue-router": "^4.5.0",
@@ -319,6 +320,10 @@
 		"./src/modules*": {
 			"types": "./types/modules*",
 			"import": "./src/modules*"
+		},
+		"./modules/AppConfig": {
+			"types": "./types/modules/AppConfig/index.d.ts",
+			"import": "./src/modules/AppConfig/index.ts"
 		},
 		"./modules/Flow": {
 			"types": "./types/modules/Flow/index.d.ts",
