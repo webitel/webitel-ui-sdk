@@ -8,16 +8,17 @@ import { useCardRouting } from './useCardRouting';
  * Composable for nested (popup) card components.
  *
  * Wraps `useCardComponent` with `manualSetup: true` and delegates
- * routing to `useCardRouting` with `nested: true`, which:
- * - Reads the item ID from `route.params[routeParamName]`
- * - Reads the parent ID from `route.params.id`
- * - Updates the URL only when a new item receives its server-assigned ID
+ * routing to `useCardRouting`. Pass `parentId` from the component —
+ * its presence indicates a nested card context.
  *
  * @example
  * ```ts
+ * const parentId = computed(() => route.params.id ?? null);
+ *
  * const { isNew, hasValidationErrors, save } = useNestedCardComponent({
  *   useCardStore: useSomeCardStore,
  *   routeParamName: 'conditionId',
+ *   parentId,
  * });
  * ```
  */
@@ -25,12 +26,14 @@ export const useNestedCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
 	routeParamName,
+	parentId,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
 	routeParamName: string;
+	parentId?: string;
 }) => {
-	const result = useCardComponent<CardEntity>({
+	const cardSetup = useCardComponent<CardEntity>({
 		useCardStore,
 		onLoadErrorHandler,
 		manualSetup: true,
@@ -40,10 +43,10 @@ export const useNestedCardComponent = <CardEntity>({
 	const { itemId } = storeToRefs(cardStore);
 	const { initialize, $reset } = cardStore;
 
-	const { routeId, parentId } = useCardRouting({
+	const { routeId } = useCardRouting({
 		itemId,
 		routeParamName,
-		nested: true,
+		parentId,
 	});
 
 	watch(
@@ -52,7 +55,7 @@ export const useNestedCardComponent = <CardEntity>({
 			if (value) {
 				initialize({
 					itemId: value === 'new' ? null : value,
-					parentId: parentId.value,
+					parentId,
 				});
 			} else {
 				$reset();
@@ -63,5 +66,5 @@ export const useNestedCardComponent = <CardEntity>({
 		},
 	);
 
-	return result;
+	return cardSetup;
 };
