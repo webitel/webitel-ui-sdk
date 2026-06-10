@@ -59,5 +59,5 @@ export function createAppConfig<T>(
 	};
 }
 
-export { fetchConfig };
 export type { PartialDeep };
+export { fetchConfig };

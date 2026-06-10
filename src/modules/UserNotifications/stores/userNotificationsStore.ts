@@ -83,22 +83,18 @@ export const createUserNotificationsStore = () => {
 		};
 
 		const showNotifications = async (userId: string) => {
-			try {
-				if (isShownUserNotifications(userId)) return;
+			if (isShownUserNotifications(userId)) return;
 
-				const apiNotifications = await fetchNotifications();
-				notifications.value = mapNotifications(apiNotifications);
+			const apiNotifications = await fetchNotifications();
+			notifications.value = mapNotifications(apiNotifications);
 
-				if (!notifications.value?.length) return;
+			if (!notifications.value?.length) return;
 
-				notifications.value.forEach((notification) => {
-					emitNotification(notification);
-				});
+			notifications.value.forEach((notification) => {
+				emitNotification(notification);
+			});
 
-				setShownUserNotifications(userId);
-			} catch (err) {
-				throw err;
-			}
+			setShownUserNotifications(userId);
 		};
 
 		return {

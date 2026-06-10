@@ -23,7 +23,8 @@
 
 <script setup lang="ts">
 import type { PopoverEmitsOptions, PopoverProps } from 'primevue';
-import { defineExpose, useAttrs, useTemplateRef } from 'vue';
+import { useAttrs, useTemplateRef } from 'vue';
+import { usePopoverOverlayFix } from './_internals/composables/usePopoverOverlayFix';
 
 interface Props extends PopoverProps {
 	disabled?: boolean;
@@ -44,6 +45,8 @@ const props = withDefaults(defineProps<Props>(), {
 	disabled: false,
 });
 defineEmits<PopoverEmitsOptions>();
+
+usePopoverOverlayFix(innerPopover);
 
 const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
 	if (props.disabled) return;
