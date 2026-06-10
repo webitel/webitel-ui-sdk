@@ -1,4 +1,4 @@
-import { type Ref, onBeforeUnmount, onMounted } from 'vue';
+import { onBeforeUnmount, onMounted, type Ref } from 'vue';
 
 // When a select/multiselect overlay closes before the click event fires (single select),
 // the click retargets to body and PrimeVue's outside-click closes the popover.
