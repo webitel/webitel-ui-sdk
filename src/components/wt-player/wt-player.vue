@@ -1,81 +1,72 @@
 <template>
-	<media-player
-		class="wt-player"
-		:class="`wt-player--position-${props.position}`"
-		:src="normalizedSrcObject"
-		:loop="props.loop"
-		:autoplay="autoplay"
-    :playback-rate="playbackRate"
+  <media-player
+    class="wt-player"
+    :class="`wt-player--position-${props.position}`"
+    :src="normalizedSrcObject"
+    :loop="props.loop"
+    :autoplay="autoplay"
+    :playback-rate="playerSettings.playbackRate"
     @ended="handleEnded"
-	>
+  >
 
-		<media-provider />
+    <media-provider />
 
-		<media-controls-group class="controls-group">
+    <media-controls-group class="controls-group">
 
-			<play-button />
-			<time-slider />
-			<time-group :countdown="props.countdownTimeMode" />
-			<mute-button v-if="!props.hideMuteButton" />
-			<volume-slider v-if="!props.hideVolumeSlider" />
+      <play-button />
+      <time-slider />
+      <time-group :countdown="props.countdownTimeMode" />
+      <mute-button v-if="!props.hideMuteButton" />
+      <volume-slider v-if="!props.hideVolumeSlider" />
 
-			<wt-popover v-if="!props.hideSettings" class="settings-popover">
-				<template #activator="{ toggle }">
-					<media-button class="settings-button" @click="toggle">
-						<wt-icon-btn
-							icon="plyr-settings"
-							:size="ComponentSize.SM"
-						/>
-					</media-button>
-				</template>
+      <settings-panel
+        v-if="!props.hideSettings"
+        v-model:model-value="playerSettings"
+      />
 
-				<speed-settings
-					v-model:model-value="playbackRate"
-				/>
-			</wt-popover>
+      <media-button
+        v-if="props.download"
+        class="download-button"
+        @click="downloadMedia"
+      >
+        <wt-icon-btn
+          icon="plyr-download"
+          :size="ComponentSize.SM"
+        />
+      </media-button>
 
-			<media-button
-				v-if="props.download"
-				class="download-button"
-				@click="downloadMedia"
-			>
-				<wt-icon-btn
-					icon="plyr-download"
-					:size="ComponentSize.SM"
-				/>
-			</media-button>
+      <media-button
+        v-if="props.closable"
+        class="close-button"
+        @click="$emit('close')"
+      >
+        <wt-icon-btn
+          icon="close"
+          :size="ComponentSize.SM"
+        />
+      </media-button>
 
-			<media-button
-				v-if="props.closable"
-				class="close-button"
-				@click="$emit('close')"
-			>
-				<wt-icon-btn
-					icon="close"
-					:size="ComponentSize.SM"
-				/>
-			</media-button>
-
-		</media-controls-group>
-	</media-player>
+    </media-controls-group>
+  </media-player>
 </template>
 
 <script
-	setup
-	lang="ts"
+  setup
+  lang="ts"
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
 import { ref, toRefs, watch } from 'vue';
 import { ComponentSize } from '../../enums';
-import WtPopover from '../wt-popover/wt-popover.vue';
+import SettingsPanel, {
+	type MediaSettings,
+} from '../_shared/settings-panel/settings-panel.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
 import VolumeSlider from './src/components/sliders/volume-slider.vue';
-import SpeedSettings from './src/components/speed-settings/speed-settings.vue';
 
 interface Props {
 	/**
@@ -176,7 +167,9 @@ const emit = defineEmits<{
 	close: [];
 }>();
 
-const playbackRate = ref(1);
+const playerSettings = ref<MediaSettings>({
+	playbackRate: 1,
+});
 
 const { src: srcRef } = toRefs(props);
 
@@ -225,49 +218,44 @@ watch(
 
 <style scoped>
 .wt-player {
-	width: 100%;
-	max-width: 100%;
-	box-shadow: var(--elevation-10);
-	border-radius: var(--border-radius);
-	background: var(--wt-popup-background-color);
-	z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  background: var(--wt-popup-background-color);
+  z-index: 2;
 }
 
 .controls-group {
-	padding: var(--spacing-sm);
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-self: center;
-	gap: var(--spacing-sm);
-}
-
-.settings-popover {
+  padding: var(--spacing-sm);
+  width: 100%;
   display: flex;
+  justify-content: center;
+  align-self: center;
+  gap: var(--spacing-sm);
 }
 
 .close-button,
-.download-button,
-.settings-button {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
+.download-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .wt-player--position-fixed {
   width: auto;
-	position: fixed;
+  position: fixed;
 }
 
 .wt-player--position-sticky {
-	position: sticky;
+  position: sticky;
 }
 
 .wt-player--position-relative {
-	position: relative;
+  position: relative;
 }
 
 .wt-player--position-static {
-	position: static;
+  position: static;
 }
 </style>
