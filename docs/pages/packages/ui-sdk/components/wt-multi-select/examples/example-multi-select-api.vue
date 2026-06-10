@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import { allApiOptions } from '../../wt-select/examples/_internals/select-example-options.js';
+import { allApiOptions } from '../_internals/select-example-options.js';
 
 const PAGE_SIZE = 10;
 

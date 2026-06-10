@@ -2,7 +2,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { computed, ref } from 'vue';
 
-import { frameworkOptions as options } from '../../wt-select/examples/_internals/select-example-options.js';
+import { frameworkOptions as options } from '../_internals/select-example-options.js';
 
 const value = ref(options[0]);
 const empty = ref('');
