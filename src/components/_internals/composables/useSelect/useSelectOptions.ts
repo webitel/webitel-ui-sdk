@@ -183,6 +183,15 @@ export const useSelectOptions = ({
 		},
 	);
 
+	watch(
+		() => options.value,
+		(newOptions) => {
+			if (!searchMethod.value) {
+				filteredOptions.value = sortOptions(newOptions);
+			}
+		},
+	);
+
 	return {
 		filterText,
 		filteredOptions,
