@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { CreateStatusBody } from '../../gen';
+import { WebitelCasesStatus } from '@webitel/api-services/gen/models';
+import type { ZodShape } from '../types';
 
-export const caseStatusSchema = CreateStatusBody.extend({
-	name: CreateStatusBody.shape.name.pipe(z.string().min(1)),
+export const caseStatusSchema = z.object<ZodShape<WebitelCasesStatus>>({
+	name: z.string().min(1),
 });
