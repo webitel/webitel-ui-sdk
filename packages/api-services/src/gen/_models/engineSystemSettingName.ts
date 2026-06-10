@@ -44,4 +44,5 @@ export const EngineSystemSettingName = {
 	PasswordWarningDays: 'password_warning_days',
 	DefaultPassword: 'default_password',
 	ExpandContactTabs: 'expand_contact_tabs',
+	DefaultWorkspaceTab: 'default_workspace_tab',
 } as const;
