@@ -1,5 +1,6 @@
 <template>
   <p
+    v-if="text"
     class="chat-message-text typo-body-1"
     v-html="text"
   />
@@ -13,7 +14,7 @@ import Autolinker from 'autolinker';
 import { computed, defineProps } from 'vue';
 
 const props = defineProps<{
-	text: string;
+	text?: string;
 }>();
 
 const text = computed(() => {
