@@ -4,7 +4,11 @@ import { onBeforeUnmount, onMounted, type Ref } from 'vue';
 // the click retargets to body and PrimeVue's outside-click closes the popover.
 // Fix: on pointerdown inside a teleported overlay, suppress the popover's outside-click
 // listener for one click cycle so it doesn't fire on the retargeted body click.
-export const usePopoverOverlayFix = (innerPopover: Ref<any>) => {
+export const usePopoverOverlayFix = (
+	innerPopover: Ref<{
+		outsideClickListener?: EventListener;
+	} | null>,
+) => {
 	const onDocumentPointerdown = (event: PointerEvent) => {
 		const target = event.target as Element;
 		if (!target?.closest('.p-select-overlay, .p-multiselect-overlay')) return;
