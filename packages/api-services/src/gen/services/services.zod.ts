@@ -58,26 +58,25 @@ export const ListServicesResponse = zod.object({
 					.optional(),
 				defaultPriority: zod
 					.object({
-						color: zod.string().optional(),
-						createdAt: zod.string().optional(),
-						createdBy: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
+						color: zod.string(),
+						createdAt: zod.string(),
+						createdBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
 						description: zod.string().optional(),
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-						updatedAt: zod.string().optional(),
-						updatedBy: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
+						id: zod.string(),
+						name: zod.string(),
+						updatedAt: zod.string(),
+						updatedBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
 					})
-					.optional(),
+					.optional()
+					.describe(
+						'Priority message represents a priority entity with metadata.',
+					),
 				description: zod.string().optional(),
 				group: zod
 					.object({
@@ -171,26 +170,23 @@ export const CreateServiceResponse = zod.object({
 		.optional(),
 	defaultPriority: zod
 		.object({
-			color: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			color: zod.string(),
+			createdAt: zod.string(),
+			createdBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 			description: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			id: zod.string(),
+			name: zod.string(),
+			updatedAt: zod.string(),
+			updatedBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 		})
-		.optional(),
+		.optional()
+		.describe('Priority message represents a priority entity with metadata.'),
 	description: zod.string().optional(),
 	group: zod
 		.object({
@@ -252,26 +248,25 @@ export const DeleteServiceResponse = zod.object({
 					.optional(),
 				defaultPriority: zod
 					.object({
-						color: zod.string().optional(),
-						createdAt: zod.string().optional(),
-						createdBy: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
+						color: zod.string(),
+						createdAt: zod.string(),
+						createdBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
 						description: zod.string().optional(),
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-						updatedAt: zod.string().optional(),
-						updatedBy: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
+						id: zod.string(),
+						name: zod.string(),
+						updatedAt: zod.string(),
+						updatedBy: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
 					})
-					.optional(),
+					.optional()
+					.describe(
+						'Priority message represents a priority entity with metadata.',
+					),
 				description: zod.string().optional(),
 				group: zod
 					.object({
@@ -340,26 +335,25 @@ export const LocateServiceResponse = zod.object({
 				.optional(),
 			defaultPriority: zod
 				.object({
-					color: zod.string().optional(),
-					createdAt: zod.string().optional(),
-					createdBy: zod
-						.object({
-							id: zod.string().optional(),
-							name: zod.string().optional(),
-						})
-						.optional(),
+					color: zod.string(),
+					createdAt: zod.string(),
+					createdBy: zod.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					}),
 					description: zod.string().optional(),
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-					updatedAt: zod.string().optional(),
-					updatedBy: zod
-						.object({
-							id: zod.string().optional(),
-							name: zod.string().optional(),
-						})
-						.optional(),
+					id: zod.string(),
+					name: zod.string(),
+					updatedAt: zod.string(),
+					updatedBy: zod.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					}),
 				})
-				.optional(),
+				.optional()
+				.describe(
+					'Priority message represents a priority entity with metadata.',
+				),
 			description: zod.string().optional(),
 			group: zod
 				.object({
@@ -454,26 +448,23 @@ export const UpdateService2Response = zod.object({
 		.optional(),
 	defaultPriority: zod
 		.object({
-			color: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			color: zod.string(),
+			createdAt: zod.string(),
+			createdBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 			description: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			id: zod.string(),
+			name: zod.string(),
+			updatedAt: zod.string(),
+			updatedBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 		})
-		.optional(),
+		.optional()
+		.describe('Priority message represents a priority entity with metadata.'),
 	description: zod.string().optional(),
 	group: zod
 		.object({
@@ -566,26 +557,23 @@ export const UpdateServiceResponse = zod.object({
 		.optional(),
 	defaultPriority: zod
 		.object({
-			color: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			color: zod.string(),
+			createdAt: zod.string(),
+			createdBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 			description: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			id: zod.string(),
+			name: zod.string(),
+			updatedAt: zod.string(),
+			updatedBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 		})
-		.optional(),
+		.optional()
+		.describe('Priority message represents a priority entity with metadata.'),
 	description: zod.string().optional(),
 	group: zod
 		.object({

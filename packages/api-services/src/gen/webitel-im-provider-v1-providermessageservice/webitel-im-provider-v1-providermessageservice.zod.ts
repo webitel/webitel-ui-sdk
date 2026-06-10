@@ -27,6 +27,7 @@ export const ProviderMessageServiceSendDocumentBody = zod
 					.describe('ProviderFile represents a generic file attachment.'),
 			)
 			.optional(),
+		domainId: zod.number().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
 		type: zod
@@ -66,6 +67,7 @@ export const providerMessageServiceSendImageBodyTypeDefault = `PROVIDER_TYPE_UNS
 export const ProviderMessageServiceSendImageBody = zod
 	.object({
 		caption: zod.string().optional(),
+		domainId: zod.number().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
 		images: zod
@@ -117,6 +119,7 @@ export const providerMessageServiceSendTextBodyTypeDefault = `PROVIDER_TYPE_UNSP
 
 export const ProviderMessageServiceSendTextBody = zod
 	.object({
+		domainId: zod.number().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
 		metadata: zod.record(zod.string(), zod.string()).optional(),

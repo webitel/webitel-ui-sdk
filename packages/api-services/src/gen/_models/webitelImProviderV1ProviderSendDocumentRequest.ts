@@ -13,6 +13,7 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
 export interface WebitelImProviderV1ProviderSendDocumentRequest {
 	caption?: string;
 	documents?: WebitelImProviderV1ProviderFile[];
+	domainId?: number;
 	externalUserId?: string;
 	gateId?: string;
 	type?: WebitelImProviderV1ProviderType;

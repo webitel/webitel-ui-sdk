@@ -6,6 +6,7 @@
  */
 import type { WebitelImApiGatewayV1DocumentInput } from './webitelImApiGatewayV1DocumentInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
+import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 
 /**
  * Represents a request to send a message with document.
@@ -13,6 +14,7 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 export interface WebitelImApiGatewayV1SendDocumentRequest {
 	body?: string;
 	documents?: WebitelImApiGatewayV1DocumentInput[];
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
 }

@@ -10,6 +10,7 @@ import type { ApiObjectId } from './apiObjectId';
 import type { ApiPermission } from './apiPermission';
 
 export interface ApiUserinfo {
+	chatName?: string;
 	dc?: string;
 	domain?: string;
 	expiresAt?: string;

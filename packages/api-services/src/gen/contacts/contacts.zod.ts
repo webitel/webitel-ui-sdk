@@ -3000,6 +3000,2089 @@ export const CreateContactResponse = zod
 	.describe('The Contact principal source.\nOUTPUT purpose only.');
 
 /**
+ * @summary Bulk create of Contacts.
+ */
+export const CreateContactsQueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Fields to be retrieved into result of changes.'),
+});
+
+export const createContactsBodyVariablesItemKeyRegExp = /^\w+$/;
+
+export const CreateContactsBodyItem = zod
+	.object({
+		about: zod
+			.string()
+			.optional()
+			.describe(
+				'BIO. Short description about the Contact person.\nOPTIONAL. Multi-lined text.',
+			),
+		comments: zod
+			.array(
+				zod.object({
+					etag: zod
+						.string()
+						.optional()
+						.describe(
+							'Unique ID of the latest version of an existing resorce.',
+						),
+					format: zod
+						.array(
+							zod.object({
+								bold: zod.looseObject({}).optional(),
+								codeblock: zod
+									.object({
+										language: zod.string().optional(),
+									})
+									.optional(),
+								italic: zod.looseObject({}).optional(),
+								length: zod
+									.number()
+									.optional()
+									.describe('Length text runes count.'),
+								link: zod
+									.object({
+										url: zod.string().optional(),
+									})
+									.optional(),
+								monospace: zod.looseObject({}).optional(),
+								offset: zod
+									.number()
+									.optional()
+									.describe('Offset text runes count.'),
+								strikethrough: zod.looseObject({}).optional(),
+								underline: zod.looseObject({}).optional(),
+							}),
+						)
+						.optional()
+						.describe('NEW Text components styling format.'),
+					text: zod.string().describe('NEW Text of the comment.'),
+				}),
+			)
+			.optional()
+			.describe('Publish NEW comment(s) for this Contact.'),
+		emails: zod
+			.array(
+				zod
+					.object({
+						email: zod.string().describe('The email address.'),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of an existing resorce.',
+							),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this phone number is default within other channels of the same type(phone).',
+							),
+						type: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						verified: zod.boolean().optional(),
+					})
+					.describe("Input of the Contact's email address."),
+			)
+			.optional()
+			.describe("The Contact's email address(es)."),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Unique ID of the latest version of an existing resorce.'),
+		groups: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.describe(
+								'Unique ID of the latest version of an existing resource.',
+							),
+						group: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe('Group of contacts associated.'),
+					})
+					.describe("An input of the Contact's groups."),
+			)
+			.optional()
+			.describe("The Contact's associated group(s)."),
+		imclients: zod
+			.array(
+				zod
+					.object({
+						createdBy: zod
+							.string()
+							.optional()
+							.describe('Id of Agent created this IM client.'),
+						externalUser: zod.string().optional(),
+						gatewayId: zod
+							.string()
+							.optional()
+							.describe('App (Text-Gateway) used to connect the IM client.'),
+						protocol: zod.string().optional(),
+						via: zod
+							.string()
+							.optional()
+							.describe(
+								'[Via] App(-specific) peer(-id) to connect[from] the IM client.',
+							),
+					})
+					.describe('Input of the contact IM client.'),
+			)
+			.optional()
+			.describe("The contact's [I]nstant[M]essaging clients."),
+		labels: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of an existing resorce.',
+							),
+						label: zod
+							.string()
+							.optional()
+							.describe(
+								'REQUIRED. Hashtag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.',
+							),
+					})
+					.describe("A Contact's associated Tag.\nOutput purpose only."),
+			)
+			.optional()
+			.describe("The Contact's associated label(s)."),
+		languages: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.describe(
+								'Unique ID of the latest version of an existing association.',
+							),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association must be default\namong others of the same type.',
+							),
+						tag: zod.string().optional(),
+					})
+					.describe("An input of the Contact's language."),
+			)
+			.optional()
+			.describe("A Contact's locale preference(s)."),
+		managers: zod
+			.array(
+				zod.object({
+					etag: zod
+						.string()
+						.describe(
+							'Unique ID of the latest version of an existing resource.',
+						),
+					primary: zod
+						.boolean()
+						.optional()
+						.describe(
+							'Indicates whether this association must be default among others.',
+						),
+					user: zod
+						.object({
+							id: zod
+								.string()
+								.optional()
+								.describe('Reference Object unique ID.'),
+							name: zod
+								.string()
+								.optional()
+								.describe('Reference Object display name.'),
+							type: zod
+								.string()
+								.optional()
+								.describe('Reference Object well-known type.'),
+						})
+						.optional()
+						.describe('Responsible User.'),
+				}),
+			)
+			.optional()
+			.describe("The Contact's internal manager(s)."),
+		name: zod
+			.object({
+				commonName: zod
+					.string()
+					.optional()
+					.describe(
+						"REQUIRED. End-User's full name in displayable form\nincluding all name parts, possibly including titles and suffixes,\nordered according to the End-User's locale and preferences.",
+					),
+				familyName: zod.string().optional(),
+				givenName: zod.string().optional(),
+				middleName: zod
+					.string()
+					.optional()
+					.describe(
+						'OPTIONAL. Middle name(s) of the End-User.\nNote that in some cultures, people can have multiple middle names;\nall can be present, with the names being separated by space characters.\nAlso note that in some cultures, middle names are not used.',
+					),
+				verified: zod
+					.boolean()
+					.optional()
+					.describe(
+						'Indicate whether Contact, as a Person, realy owns this associated name.',
+					),
+			})
+			.optional(),
+		phones: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of an existing resorce.',
+							),
+						number: zod.string().describe('The phone number.'),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this phone number is default within other channels of the same type(phone).',
+							),
+						type: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						verified: zod.boolean().optional(),
+					})
+					.describe('Input of the contact phone number.'),
+			)
+			.optional()
+			.describe("The Contact's phone numbers."),
+		timezones: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.describe(
+								'Unique ID of the latest version of an existing resource.',
+							),
+						primary: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Indicates whether this association must be default among others.',
+							),
+						timezone: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe('Timezone dictionary reference value associated.'),
+					})
+					.describe("An input of the Contact's timezones."),
+			)
+			.optional()
+			.describe("The Contact's timezone preference(s)."),
+		variables: zod
+			.array(
+				zod
+					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of an existing resorce.',
+							),
+						key: zod
+							.string()
+							.regex(createContactsBodyVariablesItemKeyRegExp)
+							.describe('NEW Key.'),
+						value: zod.unknown().optional().describe('NEW Value.'),
+					})
+					.describe("Input of the Contact's variable."),
+			)
+			.optional()
+			.describe('Arbitrary client data that is populated by clients.'),
+	})
+	.describe('The Contact principal input.');
+export const CreateContactsBody = zod.array(CreateContactsBodyItem);
+
+export const createContactsResponseFailuresItemInputVariablesItemKeyRegExp =
+	/^\w+$/;
+
+export const CreateContactsResponse = zod
+	.object({
+		data: zod
+			.array(
+				zod
+					.object({
+						about: zod
+							.string()
+							.optional()
+							.describe(
+								'BIO. Short description about the Contact person.\nOPTIONAL. Multi-lined text.',
+							),
+						comments: zod
+							.object({
+								data: zod
+									.array(
+										zod.object({
+											createdAt: zod
+												.string()
+												.optional()
+												.describe('The user who created this Field.'),
+											createdBy: zod
+												.object({
+													id: zod
+														.string()
+														.optional()
+														.describe('Reference Object unique ID.'),
+													name: zod
+														.string()
+														.optional()
+														.describe('Reference Object display name.'),
+													type: zod
+														.string()
+														.optional()
+														.describe('Reference Object well-known type.'),
+												})
+												.optional()
+												.describe('Timestamp(milli) of the Field creation.'),
+											etag: zod
+												.string()
+												.optional()
+												.describe(
+													'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+												),
+											format: zod
+												.array(
+													zod.object({
+														bold: zod.looseObject({}).optional(),
+														codeblock: zod
+															.object({
+																language: zod.string().optional(),
+															})
+															.optional(),
+														italic: zod.looseObject({}).optional(),
+														length: zod
+															.number()
+															.optional()
+															.describe('Length text runes count.'),
+														link: zod
+															.object({
+																url: zod.string().optional(),
+															})
+															.optional(),
+														monospace: zod.looseObject({}).optional(),
+														offset: zod
+															.number()
+															.optional()
+															.describe('Offset text runes count.'),
+														strikethrough: zod.looseObject({}).optional(),
+														underline: zod.looseObject({}).optional(),
+													}),
+												)
+												.optional()
+												.describe('Styles of the text components.'),
+											id: zod
+												.string()
+												.optional()
+												.describe(
+													'The unique ID of the Comment. Never changes.',
+												),
+											text: zod
+												.string()
+												.optional()
+												.describe('Rich Text, multi-line[d] string value.'),
+											updatedAt: zod
+												.string()
+												.optional()
+												.describe(
+													'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+												),
+											updatedBy: zod
+												.object({
+													id: zod
+														.string()
+														.optional()
+														.describe('Reference Object unique ID.'),
+													name: zod
+														.string()
+														.optional()
+														.describe('Reference Object display name.'),
+													type: zod
+														.string()
+														.optional()
+														.describe('Reference Object well-known type.'),
+												})
+												.optional()
+												.describe('The user who performed last Update.'),
+											ver: zod
+												.number()
+												.optional()
+												.describe(
+													'Version of the latest update. Numeric sequence.',
+												),
+										}),
+									)
+									.optional()
+									.describe('Comment dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's internal comment(s)."),
+						createdAt: zod.string().optional(),
+						createdBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						domain: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe("READONLY. The contact's metadata."),
+						emails: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												email: zod
+													.string()
+													.optional()
+													.describe('The email address.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this phone number is default within other channels of the same type(phone).',
+													),
+												type: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+												verified: zod.boolean().optional(),
+											})
+											.describe("The Contact's email address."),
+									)
+									.optional()
+									.describe('EmailAddress dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's email address(es)."),
+						etag: zod
+							.string()
+							.optional()
+							.describe(
+								'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+							),
+						groups: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												group: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Group of contacts associated.'),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe("The Contact's Group association."),
+									)
+									.optional()
+									.describe('Group dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's associated group(s)."),
+						id: zod
+							.string()
+							.optional()
+							.describe('The unique ID of the association. Never changes.'),
+						imclients: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												app: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'App (Text-Gateway) used to connect the IM client.\nId will be internal id of gateway.\nName will be name of the gateway.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												externalId: zod
+													.string()
+													.optional()
+													.describe('External user id.'),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												protocol: zod
+													.string()
+													.optional()
+													.describe('Protocol used to connect the IM client.'),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												user: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'External user which contacted to us.\nId will be from external service.\nName will be from external service.',
+													),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+												via: zod
+													.string()
+													.optional()
+													.describe(
+														'[Via] App(-specific) peer(-id) to connect[from] the IM client.',
+													),
+											})
+											.describe("A contact's [I]nstant[M]essaging client."),
+									)
+									.optional()
+									.describe('IMClient dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The contact's [I]nstant[M]essaging clients."),
+						labels: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												label: zod
+													.string()
+													.optional()
+													.describe(
+														'REQUIRED. Tag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe(
+												"A Contact's associated Tag.\nOutput purpose only.",
+											),
+									)
+									.optional()
+									.describe('Label(s) dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('Page number of partial result.'),
+							})
+							.optional()
+							.describe("The Contact's associated tag(s)."),
+						languages: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												code: zod.string().optional(),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												lang: zod.string().optional(),
+												name: zod.string().optional(),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this association is the default\namong others of the same type.',
+													),
+												region: zod.string().optional(),
+												script: zod.string().optional(),
+												tag: zod.string().optional(),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe(
+												"A Contact's locale preference.\nOutput purpose only.",
+											),
+									)
+									.optional()
+									.describe("Page of the Contact's Language(s) dataset."),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('Page number of partial result dataset records.'),
+							})
+							.optional()
+							.describe("A Contact's locale preference(s)."),
+						managers: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this association is the default\namong others of the same type.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												user: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Responsible User.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe("Manager. The Contact's responsible User."),
+									)
+									.optional()
+									.describe('Manager dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's internal manager(s)."),
+						mode: zod
+							.string()
+							.optional()
+							.describe('[R]ecord[b]ased[A]ccess[C]ontrol mode granted.'),
+						name: zod
+							.object({
+								commonName: zod
+									.string()
+									.optional()
+									.describe(
+										"REQUIRED. End-User's full name in displayable form\nincluding all name parts, possibly including titles and suffixes,\nordered according to the End-User's locale and preferences.",
+									),
+								familyName: zod.string().optional(),
+								givenName: zod.string().optional(),
+								middleName: zod
+									.string()
+									.optional()
+									.describe(
+										'OPTIONAL. Middle name(s) of the End-User.\nNote that in some cultures, people can have multiple middle names;\nall can be present, with the names being separated by space characters.\nAlso note that in some cultures, middle names are not used.',
+									),
+								verified: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Indicate whether Contact, as a Person, realy owns this associated name.',
+									),
+							})
+							.optional()
+							.describe(
+								"The Contact's name.\nThis field is a singleton for Contact sources.",
+							),
+						phones: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												number: zod
+													.string()
+													.optional()
+													.describe('The phone number.'),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this phone number is default within other channels of the same type(phone).',
+													),
+												type: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+												verified: zod.boolean().optional(),
+											})
+											.describe("The Contact's phone number."),
+									)
+									.optional()
+									.describe('PhoneNumber dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's phone numbers."),
+						photos: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												photoId: zod.string().optional(),
+												photoUrl: zod.string().optional(),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'True if the photo is a default photo; false if the photo is a user-provided photo.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe(
+												"A contact's photo.\nA picture shown next to the contact's name\nto help others recognize the contact.",
+											),
+									)
+									.optional()
+									.describe('Photo dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("Output only. The Contact's photo(s)."),
+						timezones: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this association is the default\namong others of the same type.',
+													),
+												timezone: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Timezone dictionary reference value associated.',
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe("A Contact's timezone preference."),
+									)
+									.optional()
+									.describe('Timezone dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe("The Contact's timezone preference(s)."),
+						updatedAt: zod.string().optional(),
+						updatedBy: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						user: zod
+							.object({
+								id: zod
+									.string()
+									.optional()
+									.describe('Reference Object unique ID.'),
+								name: zod
+									.string()
+									.optional()
+									.describe('Reference Object display name.'),
+								type: zod
+									.string()
+									.optional()
+									.describe('Reference Object well-known type.'),
+							})
+							.optional()
+							.describe(
+								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+							),
+						variables: zod
+							.object({
+								data: zod
+									.array(
+										zod
+											.object({
+												createdAt: zod
+													.string()
+													.optional()
+													.describe('The user who created this Field.'),
+												createdBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Timestamp(milli) of the Field creation.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe(
+														'The unique ID of the association. Never changes.',
+													),
+												key: zod
+													.string()
+													.optional()
+													.describe('Key name of the variable.'),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+													),
+												updatedBy: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('The user who performed last Update.'),
+												value: zod
+													.unknown()
+													.optional()
+													.describe('JSON value of the variable.'),
+												ver: zod
+													.number()
+													.optional()
+													.describe(
+														'Version of the latest update. Numeric sequence.',
+													),
+											})
+											.describe(
+												"The Contact's variable.\nArbitrary data that is populated by users or clients.\nDuplicate keys and values are allowed.",
+											),
+									)
+									.optional()
+									.describe('Variable dataset page.'),
+								next: zod.boolean().optional(),
+								page: zod
+									.number()
+									.optional()
+									.describe('The page number of the partial result.'),
+							})
+							.optional()
+							.describe(
+								'Arbitrary client data that is populated by clients.\nDuplicate keys and values are allowed.',
+							),
+						ver: zod
+							.number()
+							.optional()
+							.describe(
+								'READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.',
+							),
+					})
+					.describe('The Contact principal source.\nOUTPUT purpose only.'),
+			)
+			.optional()
+			.describe(
+				'Successfully created Contacts. Position matches the corresponding\nInputContact position in CreateContactsRequest.input, skipping\nfailures.',
+			),
+		failures: zod
+			.array(
+				zod
+					.object({
+						error: zod
+							.object({
+								code: zod.number().optional(),
+								details: zod
+									.array(
+										zod.object({
+											'@type': zod.string().optional(),
+										}),
+									)
+									.optional(),
+								message: zod.string().optional(),
+							})
+							.optional()
+							.describe('Standardized error (code, message, details).'),
+						index: zod
+							.number()
+							.optional()
+							.describe('0-based position in CreateContactsRequest.input.'),
+						input: zod
+							.object({
+								about: zod
+									.string()
+									.optional()
+									.describe(
+										'BIO. Short description about the Contact person.\nOPTIONAL. Multi-lined text.',
+									),
+								comments: zod
+									.array(
+										zod.object({
+											etag: zod
+												.string()
+												.optional()
+												.describe(
+													'Unique ID of the latest version of an existing resorce.',
+												),
+											format: zod
+												.array(
+													zod.object({
+														bold: zod.looseObject({}).optional(),
+														codeblock: zod
+															.object({
+																language: zod.string().optional(),
+															})
+															.optional(),
+														italic: zod.looseObject({}).optional(),
+														length: zod
+															.number()
+															.optional()
+															.describe('Length text runes count.'),
+														link: zod
+															.object({
+																url: zod.string().optional(),
+															})
+															.optional(),
+														monospace: zod.looseObject({}).optional(),
+														offset: zod
+															.number()
+															.optional()
+															.describe('Offset text runes count.'),
+														strikethrough: zod.looseObject({}).optional(),
+														underline: zod.looseObject({}).optional(),
+													}),
+												)
+												.optional()
+												.describe('NEW Text components styling format.'),
+											text: zod.string().describe('NEW Text of the comment.'),
+										}),
+									)
+									.optional()
+									.describe('Publish NEW comment(s) for this Contact.'),
+								emails: zod
+									.array(
+										zod
+											.object({
+												email: zod.string().describe('The email address.'),
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of an existing resorce.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this phone number is default within other channels of the same type(phone).',
+													),
+												type: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+													),
+												verified: zod.boolean().optional(),
+											})
+											.describe("Input of the Contact's email address."),
+									)
+									.optional()
+									.describe("The Contact's email address(es)."),
+								etag: zod
+									.string()
+									.optional()
+									.describe(
+										'Unique ID of the latest version of an existing resorce.',
+									),
+								groups: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.describe(
+														'Unique ID of the latest version of an existing resource.',
+													),
+												group: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe('Group of contacts associated.'),
+											})
+											.describe("An input of the Contact's groups."),
+									)
+									.optional()
+									.describe("The Contact's associated group(s)."),
+								imclients: zod
+									.array(
+										zod
+											.object({
+												createdBy: zod
+													.string()
+													.optional()
+													.describe('Id of Agent created this IM client.'),
+												externalUser: zod.string().optional(),
+												gatewayId: zod
+													.string()
+													.optional()
+													.describe(
+														'App (Text-Gateway) used to connect the IM client.',
+													),
+												protocol: zod.string().optional(),
+												via: zod
+													.string()
+													.optional()
+													.describe(
+														'[Via] App(-specific) peer(-id) to connect[from] the IM client.',
+													),
+											})
+											.describe('Input of the contact IM client.'),
+									)
+									.optional()
+									.describe("The contact's [I]nstant[M]essaging clients."),
+								labels: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of an existing resorce.',
+													),
+												label: zod
+													.string()
+													.optional()
+													.describe(
+														'REQUIRED. Hashtag value;\nNOTE: Keep in mind, hashtags are not case-sensitive,\nbut adding capital letters does make them easier to read:\n#MakeAWish vs. #makeawish.',
+													),
+											})
+											.describe(
+												"A Contact's associated Tag.\nOutput purpose only.",
+											),
+									)
+									.optional()
+									.describe("The Contact's associated label(s)."),
+								languages: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.describe(
+														'Unique ID of the latest version of an existing association.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this association must be default\namong others of the same type.',
+													),
+												tag: zod.string().optional(),
+											})
+											.describe("An input of the Contact's language."),
+									)
+									.optional()
+									.describe("A Contact's locale preference(s)."),
+								managers: zod
+									.array(
+										zod.object({
+											etag: zod
+												.string()
+												.describe(
+													'Unique ID of the latest version of an existing resource.',
+												),
+											primary: zod
+												.boolean()
+												.optional()
+												.describe(
+													'Indicates whether this association must be default among others.',
+												),
+											user: zod
+												.object({
+													id: zod
+														.string()
+														.optional()
+														.describe('Reference Object unique ID.'),
+													name: zod
+														.string()
+														.optional()
+														.describe('Reference Object display name.'),
+													type: zod
+														.string()
+														.optional()
+														.describe('Reference Object well-known type.'),
+												})
+												.optional()
+												.describe('Responsible User.'),
+										}),
+									)
+									.optional()
+									.describe("The Contact's internal manager(s)."),
+								name: zod
+									.object({
+										commonName: zod
+											.string()
+											.optional()
+											.describe(
+												"REQUIRED. End-User's full name in displayable form\nincluding all name parts, possibly including titles and suffixes,\nordered according to the End-User's locale and preferences.",
+											),
+										familyName: zod.string().optional(),
+										givenName: zod.string().optional(),
+										middleName: zod
+											.string()
+											.optional()
+											.describe(
+												'OPTIONAL. Middle name(s) of the End-User.\nNote that in some cultures, people can have multiple middle names;\nall can be present, with the names being separated by space characters.\nAlso note that in some cultures, middle names are not used.',
+											),
+										verified: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Indicate whether Contact, as a Person, realy owns this associated name.',
+											),
+									})
+									.optional(),
+								phones: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of an existing resorce.',
+													),
+												number: zod.string().describe('The phone number.'),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this phone number is default within other channels of the same type(phone).',
+													),
+												type: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+													),
+												verified: zod.boolean().optional(),
+											})
+											.describe('Input of the contact phone number.'),
+									)
+									.optional()
+									.describe("The Contact's phone numbers."),
+								photos: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of an existing association.',
+													),
+												photoId: zod.string().optional(),
+												photoUrl: zod.string().optional(),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'True if the photo is a default photo; false if the photo is a user-provided photo.',
+													),
+											})
+											.describe('Input of the photo.'),
+									)
+									.optional()
+									.describe("Output only. The Contact's photo(s)."),
+								timezones: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.describe(
+														'Unique ID of the latest version of an existing resource.',
+													),
+												primary: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Indicates whether this association must be default among others.',
+													),
+												timezone: zod
+													.object({
+														id: zod
+															.string()
+															.optional()
+															.describe('Reference Object unique ID.'),
+														name: zod
+															.string()
+															.optional()
+															.describe('Reference Object display name.'),
+														type: zod
+															.string()
+															.optional()
+															.describe('Reference Object well-known type.'),
+													})
+													.optional()
+													.describe(
+														'Timezone dictionary reference value associated.',
+													),
+											})
+											.describe("An input of the Contact's timezones."),
+									)
+									.optional()
+									.describe("The Contact's timezone preference(s)."),
+								variables: zod
+									.array(
+										zod
+											.object({
+												etag: zod
+													.string()
+													.optional()
+													.describe(
+														'Unique ID of the latest version of an existing resorce.',
+													),
+												key: zod
+													.string()
+													.regex(
+														createContactsResponseFailuresItemInputVariablesItemKeyRegExp,
+													)
+													.describe('NEW Key.'),
+												value: zod.unknown().optional().describe('NEW Value.'),
+											})
+											.describe("Input of the Contact's variable."),
+									)
+									.optional()
+									.describe(
+										'Arbitrary client data that is populated by clients.',
+									),
+							})
+							.optional()
+							.describe('The InputContact that failed.'),
+					})
+					.describe('Per-item failure of a bulk Contact create.'),
+			)
+			.optional()
+			.describe('Per-item failures with original index and error details.'),
+	})
+	.describe(
+		'Bulk Create result: successfully created Contacts plus per-item failures.',
+	);
+
+/**
  * @summary Remove Contact source
  */
 export const DeleteContactParams = zod.object({

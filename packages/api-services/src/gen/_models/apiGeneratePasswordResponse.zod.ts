@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type UpdateUserBodyProfile = {
-	[key: string]: string;
-};
+export interface ApiGeneratePasswordResponse {
+	password?: string;
+}

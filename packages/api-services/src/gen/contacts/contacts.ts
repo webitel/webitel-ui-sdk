@@ -10,8 +10,10 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ContactsContactList,
+	ContactsCreateContactsBulkResponse,
 	ContactsInputContact,
 	CreateContactParams,
+	CreateContactsParams,
 	DeleteContactParams,
 	LocateContactParams,
 	SearchContactsParams,
@@ -118,6 +120,22 @@ export const // --- title start
 				});
 			};
 			/**
+			 * @summary Bulk create of Contacts.
+			 */
+			const createContacts = (
+				contactsInputContact: NonReadonly<ContactsInputContact[]>,
+				params?: CreateContactsParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ContactsCreateContactsBulkResponse>> => {
+				return axiosInstance.post(`/contacts/bulk`, contactsInputContact, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
 			 * @summary Remove Contact source
 			 */
 			const deleteContact = (
@@ -171,6 +189,7 @@ export const // --- title start
 			return {
 				searchContacts,
 				createContact,
+				createContacts,
 				deleteContact,
 				locateContact,
 				updateContact,
@@ -178,6 +197,8 @@ export const // --- title start
 		};
 export type SearchContactsResult = AxiosResponse<ContactsContactList>;
 export type CreateContactResult = AxiosResponse<WebitelContactsContact>;
+export type CreateContactsResult =
+	AxiosResponse<ContactsCreateContactsBulkResponse>;
 export type DeleteContactResult = AxiosResponse<WebitelContactsContact>;
 export type LocateContactResult = AxiosResponse<WebitelContactsContact>;
 export type UpdateContactResult = AxiosResponse<WebitelContactsContact>;

@@ -50,6 +50,8 @@ export const SearchSystemSettingQueryParams = zod.object({
 				'password_warning_days',
 				'default_password',
 				'expand_contact_tabs',
+				'default_workspace_tab',
+				'block_all_member_numbers_from_list',
 			]),
 		)
 		.optional()
@@ -100,6 +102,8 @@ export const SearchSystemSettingResponse = zod.object({
 						'password_warning_days',
 						'default_password',
 						'expand_contact_tabs',
+						'default_workspace_tab',
+						'block_all_member_numbers_from_list',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -148,6 +152,8 @@ export const CreateSystemSettingBody = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -193,6 +199,8 @@ export const CreateSystemSettingResponse = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -261,6 +269,8 @@ export const DeleteSystemSettingResponse = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -310,6 +320,8 @@ export const ReadSystemSettingResponse = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -363,6 +375,8 @@ export const PatchSystemSettingResponse = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -414,6 +428,8 @@ export const UpdateSystemSettingResponse = zod.object({
 			'password_warning_days',
 			'default_password',
 			'expand_contact_tabs',
+			'default_workspace_tab',
+			'block_all_member_numbers_from_list',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

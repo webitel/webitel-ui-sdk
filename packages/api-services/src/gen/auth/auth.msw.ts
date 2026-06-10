@@ -64,6 +64,15 @@ export const getSignupResponseMock = (
 export const getUserInfo2ResponseMock = (
 	overrideResponse: Partial<Extract<ApiUserinfo, object>> = {},
 ): ApiUserinfo => ({
+	chatName: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	dc: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -383,6 +392,15 @@ export const getUserInfo2ResponseMock = (
 export const getUserInfoResponseMock = (
 	overrideResponse: Partial<Extract<ApiUserinfo, object>> = {},
 ): ApiUserinfo => ({
+	chatName: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	dc: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {

@@ -6,13 +6,16 @@
  */
 import type { GeneralLookup } from './generalLookup';
 
+/**
+ * Priority message represents a priority entity with metadata.
+ */
 export interface WebitelCasesPriority {
-	color?: string;
-	createdAt?: string;
-	createdBy?: GeneralLookup;
+	color: string;
+	createdAt: string;
+	createdBy: GeneralLookup;
 	description?: string;
-	id?: string;
-	name?: string;
-	updatedAt?: string;
-	updatedBy?: GeneralLookup;
+	id: string;
+	name: string;
+	updatedAt: string;
+	updatedBy: GeneralLookup;
 }

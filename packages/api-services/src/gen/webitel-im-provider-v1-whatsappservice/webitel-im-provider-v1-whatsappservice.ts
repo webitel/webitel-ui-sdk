@@ -9,8 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	WebitelImProviderV1ProviderCreateWhatsAppGateRequest,
-	WebitelImProviderV1ProviderCreateWhatsAppGateResponse,
+	WebitelImProviderV1CreateGateRequest,
+	WebitelImProviderV1GateResponse,
 	WebitelImProviderV1ProviderDeleteWhatsAppGateResponse,
 	WebitelImProviderV1ProviderGetWhatsAppGateResponse,
 	WebitelImProviderV1ProviderUpdateWhatsAppGateResponse,
@@ -29,14 +29,12 @@ export const // --- title start
 			 * @summary / CreateWhatsAppGate registers a WhatsApp Business Account (WABA) gateway.
 			 */
 			const whatsAppServiceCreateWhatsAppGate = (
-				webitelImProviderV1ProviderCreateWhatsAppGateRequest: WebitelImProviderV1ProviderCreateWhatsAppGateRequest,
+				webitelImProviderV1CreateGateRequest: WebitelImProviderV1CreateGateRequest,
 				options?: AxiosRequestConfig,
-			): Promise<
-				AxiosResponse<WebitelImProviderV1ProviderCreateWhatsAppGateResponse>
-			> => {
+			): Promise<AxiosResponse<WebitelImProviderV1GateResponse>> => {
 				return axiosInstance.post(
 					`/im/gates/whatsapp`,
-					webitelImProviderV1ProviderCreateWhatsAppGateRequest,
+					webitelImProviderV1CreateGateRequest,
 					options,
 				);
 			};
@@ -88,7 +86,7 @@ export const // --- title start
 			};
 		};
 export type WhatsAppServiceCreateWhatsAppGateResult =
-	AxiosResponse<WebitelImProviderV1ProviderCreateWhatsAppGateResponse>;
+	AxiosResponse<WebitelImProviderV1GateResponse>;
 export type WhatsAppServiceDeleteWhatsAppGateResult =
 	AxiosResponse<WebitelImProviderV1ProviderDeleteWhatsAppGateResponse>;
 export type WhatsAppServiceGetWhatsAppGateResult =

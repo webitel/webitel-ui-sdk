@@ -19,6 +19,11 @@ export type SignupParams = {
 	 */
 	password?: string;
 	/**
+ * OPTIONAL. SIP (phone) number i.e. extension.
+SIP Device will be auto-assigned ONLY if [number] specified.
+ */
+	extension?: string;
+	/**
 	 * scope request control
 	 */
 	scope?: string[];
