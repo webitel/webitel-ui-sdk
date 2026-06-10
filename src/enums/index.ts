@@ -1,5 +1,11 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
+import { BroadcastChannelName } from './BroadcastChannelName/BroadcastChannelName';
+import type {
+	UserSettingsBroadcastMessage,
+	WebphoneBroadcastMessage,
+	WebphoneBroadcastPayload,
+} from './BroadcastChannelName/UserSettingsBroadcastMessage';
 import { ButtonColor } from './ButtonColor/ButtonColor';
 import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
@@ -28,11 +34,18 @@ import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
+export type {
+	UserSettingsBroadcastMessage,
+	WebphoneBroadcastMessage,
+	WebphoneBroadcastPayload,
+};
+
 export {
 	AbstractUserStatus,
 	AdminSections,
 	AgentStatus,
 	AuditorSections,
+	BroadcastChannelName,
 	ButtonColor,
 	ButtonVariant,
 	ChatGatewayProvider,
