@@ -13,9 +13,18 @@ import { useItemCardSaveText } from './useItemCardSaveText';
 export const useCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
+	manualSetup = false,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
+	/**
+	 * When `true` — the composable skips automatic initialization and
+	 * `onUnmounted` reset. Use this when you need manual control over
+	 * the card lifecycle (e.g. inside `useNestedCardComponent`).
+	 *
+	 * @default false
+	 */
+	manualSetup?: boolean;
 }) => {
 	const cardStore = useCardStore();
 
@@ -29,10 +38,6 @@ export const useCardComponent = <CardEntity>({
 	} = storeToRefs(cardStore);
 
 	const { initialize, saveItem, $reset } = cardStore;
-
-	const { routeId } = useCardRouting({
-		itemId,
-	});
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
 		useCardValidation<CardEntity>({
@@ -60,11 +65,16 @@ export const useCardComponent = <CardEntity>({
 		saveItem,
 	});
 
-	initialize({
-		itemId: routeId.value,
+	const { routeId } = useCardRouting({
+		itemId,
 	});
 
-	onUnmounted($reset);
+	if (!manualSetup) {
+		initialize({
+			itemId: routeId.value,
+		});
+		onUnmounted($reset);
+	}
 
 	watch(error, (err) => {
 		if (onLoadErrorHandler) onLoadErrorHandler(err);
