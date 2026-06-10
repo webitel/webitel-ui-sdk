@@ -2,6 +2,8 @@
 
 На прикладі карточки розділу в crm'ці.
 
+> Для **вкладеної карточки** див. [Nested Card Usage](./nested/Readme.md).
+
 ## Creating a store
 
 [`crm/../caseSourcesCardStore.ts`](https://github.com/webitel/crm/blob/master/src/modules/configuration/modules/lookups/modules/sources/stores/card/caseSourcesCardStore.ts)

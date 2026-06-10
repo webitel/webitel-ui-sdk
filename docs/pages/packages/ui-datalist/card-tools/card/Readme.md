@@ -14,6 +14,7 @@
 Ідея модуля без змін. у `@webite/ui-datalist/card` маємо:
 * store factory для карточки – `createCardStore()`
 * composables для роботи з ним на рівні компонентів – `useCardComponent()`
+* composable для вкладених карточок – `useNestedCardComponent()`
 
 **І ще під капотом:**
 
