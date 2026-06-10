@@ -45,7 +45,7 @@
 		"zod": "^4.x"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.10",
+		"@biomejs/biome": "2.4.16",
 		"@standard-schema/spec": "^1.x",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/node": "^24.x",
