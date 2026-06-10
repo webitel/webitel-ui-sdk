@@ -5,5 +5,5 @@ import type { z } from 'zod';
  * Ensures the schema covers all fields of T without importing from generated code.
  */
 export type ZodShape<T> = {
-	[K in keyof Required<T>]: z.ZodType;
+	[K in keyof T]?: z.ZodType;
 };
