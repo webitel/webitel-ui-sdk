@@ -23,13 +23,8 @@
 
 <script setup lang="ts">
 import type { PopoverEmitsOptions, PopoverProps } from 'primevue';
-import {
-	defineExpose,
-	onBeforeUnmount,
-	onMounted,
-	useAttrs,
-	useTemplateRef,
-} from 'vue';
+import { useAttrs, useTemplateRef } from 'vue';
+import { usePopoverOverlayFix } from './_internals/composables/usePopoverOverlayFix';
 
 interface Props extends PopoverProps {
 	disabled?: boolean;
@@ -51,34 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 defineEmits<PopoverEmitsOptions>();
 
-// When a select/multiselect overlay closes before the click event fires (single select),
-// the click retargets to body and PrimeVue's outside-click closes the popover.
-// Fix: on pointerdown inside a teleported overlay, suppress the next outside-click check.
-const onDocumentPointerdown = (event: PointerEvent) => {
-	const target = event.target as Element;
-	if (!target?.closest('.p-select-overlay, .p-multiselect-overlay')) return;
-	const listener = innerPopover.value?.outsideClickListener;
-	if (!listener) return;
-	// temporarily replace the listener with a no-op for this click cycle
-	document.removeEventListener('click', listener);
-	document.addEventListener(
-		'click',
-		() => {
-			document.addEventListener('click', listener);
-		},
-		{
-			once: true,
-			capture: false,
-		},
-	);
-};
-
-onMounted(() =>
-	document.addEventListener('pointerdown', onDocumentPointerdown, true),
-);
-onBeforeUnmount(() =>
-	document.removeEventListener('pointerdown', onDocumentPointerdown, true),
-);
+usePopoverOverlayFix(innerPopover);
 
 const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
 	if (props.disabled) return;
