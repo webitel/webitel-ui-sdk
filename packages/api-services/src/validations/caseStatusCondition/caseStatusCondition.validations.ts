@@ -6,4 +6,5 @@ export const caseStatusConditionSchema = z.object<
 	ZodShape<WebitelCasesStatusCondition>
 >({
 	name: z.string().min(1),
+	description: z.string().optional(),
 });

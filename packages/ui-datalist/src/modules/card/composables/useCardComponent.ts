@@ -65,11 +65,11 @@ export const useCardComponent = <CardEntity>({
 		saveItem,
 	});
 
-	const { routeId } = useCardRouting({
-		itemId,
-	});
-
 	if (!manualSetup) {
+		const { routeId } = useCardRouting({
+			itemId,
+		});
+
 		initialize({
 			itemId: routeId.value,
 		});
