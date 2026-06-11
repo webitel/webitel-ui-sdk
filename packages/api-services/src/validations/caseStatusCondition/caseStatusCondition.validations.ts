@@ -1,6 +1,6 @@
+import type { WebitelCasesStatusCondition } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 import type { ZodShape } from '../types';
-import type { WebitelCasesStatusCondition } from '@webitel/api-services/gen/models';
 
 export const caseStatusConditionSchema = z.object<
 	ZodShape<WebitelCasesStatusCondition>
