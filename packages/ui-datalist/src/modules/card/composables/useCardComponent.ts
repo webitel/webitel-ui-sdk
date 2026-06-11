@@ -66,6 +66,8 @@ export const useCardComponent = <CardEntity>({
 	});
 
 	if (!manualSetup) {
+		// @author @Lera24
+		// Top-level only — nested cards call 'useCardRouting' on their own.
 		const { routeId } = useCardRouting({
 			itemId,
 		});
