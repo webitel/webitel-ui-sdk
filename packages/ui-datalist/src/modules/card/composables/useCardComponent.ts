@@ -1,7 +1,7 @@
+import type { RegleSchema } from '@regle/schemas';
 import { refDebounced } from '@vueuse/core';
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { type Ref, onUnmounted, watch } from 'vue';
-import type { RegleSchema } from '@regle/schemas';
+import { onUnmounted, type Ref, watch } from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
