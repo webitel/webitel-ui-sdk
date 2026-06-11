@@ -31,6 +31,11 @@
       :max-selected-labels="MAX_SELECTED_LABELS"
       :selectedItemsLabel="`${model.length} ${t('webitelUI.select.selectedItemsLabel')}`"
       :data-key="dataKey"
+      :pt="{
+        label: {
+          class: 'typo-body-1',
+        }
+      }"
       v-bind="$attrs"
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
