@@ -14,29 +14,33 @@ export const useCardRouting = ({
 	itemId,
 	routeParamName = 'id',
 	parentId,
+	manualSetup = false,
 }: {
 	itemId: Ref<CardItemId>;
 	routeParamName?: string;
 	parentId?: string;
+	manualSetup?: boolean;
 }) => {
 	const router = useRouter();
 	const route = useRoute();
 
 	const routeId = computed(() => route.params[routeParamName]);
 
-	const unwatch = watch(itemId, async (next, prev) => {
-		if (next && !prev) {
-			if (!parentId || routeId.value === 'new') {
-				await router.replace({
-					params: {
-						...route.params,
-						[routeParamName]: next,
-					},
-				});
+	if (!manualSetup) {
+		const unwatch = watch(itemId, async (next, prev) => {
+			if (next && !prev) {
+				if (!parentId || routeId.value === 'new') {
+					await router.replace({
+						params: {
+							...route.params,
+							[routeParamName]: next,
+						},
+					});
+				}
+				unwatch();
 			}
-			unwatch();
-		}
-	});
+		});
+	}
 
 	return {
 		routeId,
