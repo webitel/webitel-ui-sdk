@@ -1,4 +1,11 @@
-import { computed, onUnmounted, ref } from 'vue';
+import {
+	computed,
+	type MaybeRefOrGetter,
+	onBeforeUnmount,
+	onUnmounted,
+	ref,
+	toValue,
+} from 'vue';
 
 import type { DocumentPiPWindow, MediaSnapshot } from '../../types/types';
 
@@ -10,16 +17,29 @@ import { restoreMedia, restoreStreams, snapshotMedia } from './mediaSnapshot';
 import { createPlaybackRetry } from './playbackRetry';
 import { usePiPResizeObserver } from './usePiPResizeObserver';
 
+interface UseDocumentPiPOptions {
+	/**
+	 * CSS selector for the element that `movedEl` should be restored into
+	 * after the PiP window closes.  Use this when a parent `<Teleport>` or
+	 * router navigation can change `el.parentNode` between PiP sessions,
+	 * causing the captured parent to be stale.
+	 *
+	 * Example: `'main'` always resolves to the page's main container,
+	 * regardless of what Teleport may have done to the component tree.
+	 */
+	containerSelector?: string;
+}
+
 export function useDocumentPiP(
-	getElement: () => HTMLElement | null | undefined,
+	element: MaybeRefOrGetter<HTMLElement | null | undefined>,
+	options?: UseDocumentPiPOptions,
 ) {
 	const isPiP = ref(false);
 	const isSupported = computed(() => 'documentPictureInPicture' in window);
 
 	let pipWindow: Window | null = null;
 	let movedEl: HTMLElement | null = null;
-	let originalParent: Node | null = null;
-	let originalNextSibling: Node | null = null;
+	let domAnchor: Comment | null = null;
 
 	const mediaSnapshot: MediaSnapshot[] = [];
 	const { retryPlayback, stopPlaybackRetry } =
@@ -41,28 +61,35 @@ export function useDocumentPiP(
 		target.document.addEventListener('keydown', kick, true);
 	};
 
+	const clearData = () => {
+		mediaSnapshot.splice(0);
+		movedEl = null;
+		domAnchor = null;
+	};
+
 	const restoreElement = () => {
-		if (!movedEl || !originalParent) {
-			mediaSnapshot.splice(0);
-			movedEl = null;
-			originalParent = null;
-			originalNextSibling = null;
+		if (!movedEl) {
+			clearData();
 			return;
 		}
 
-		if (
-			originalNextSibling &&
-			originalNextSibling.parentNode === originalParent
-		) {
-			originalParent.insertBefore(movedEl, originalNextSibling);
+		const explicitContainer = options?.containerSelector
+			? document.querySelector(options.containerSelector)
+			: null;
+
+		if (explicitContainer) {
+			explicitContainer.appendChild(movedEl);
+		} else if (domAnchor?.parentNode) {
+			domAnchor.parentNode.insertBefore(movedEl, domAnchor);
 		}
+
+		domAnchor?.remove();
 
 		restoreMedia(mediaSnapshot);
 		resumePlayback(movedEl, mediaSnapshot);
 
 		movedEl = null;
-		originalParent = null;
-		originalNextSibling = null;
+		domAnchor = null;
 	};
 
 	const onPiPWindowClose = () => {
@@ -76,7 +103,7 @@ export function useDocumentPiP(
 	const enterPiP = async (width = 480, height = 320) => {
 		if (!isSupported.value || isPiP.value) return;
 
-		const el = getElement();
+		const el = toValue(element);
 		if (!el) return;
 
 		const api = (window as DocumentPiPWindow).documentPictureInPicture;
@@ -97,8 +124,19 @@ export function useDocumentPiP(
 			'margin:0;overflow:hidden;width:100%;height:100%;';
 		bridgeCustomElements(el, win);
 
-		originalParent = el.parentNode;
-		originalNextSibling = el.nextSibling;
+		/**
+		 * @author @Oleksandr Palonnyi
+		 *
+		 * A comment node placed before `el` acts as a live position bookmark.
+		 * It travels with its DOM subtree, so if a `<Teleport>` or route
+		 * navigation re-parents the tree while PiP is open, `domAnchor.parentNode`
+		 * still points to the correct restore target — unlike a static
+		 * `parentNode + nextSibling` snapshot which becomes stale.
+		 *
+		 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
+		 */
+		domAnchor = document.createComment('document-pip-anchor');
+		el.parentNode!.insertBefore(domAnchor, el);
 		movedEl = el;
 
 		snapshotMedia(el, mediaSnapshot);
@@ -131,8 +169,8 @@ export function useDocumentPiP(
 		isPiP.value = false;
 	};
 
-	onUnmounted(() => {
-		if (isPiP.value) exitPiP();
+	onBeforeUnmount(() => {
+		exitPiP();
 	});
 
 	return {
