@@ -8,6 +8,7 @@
       :size="ComponentSize.SM"
       :src="mediaSrc"
       :title="file.name"
+      countdown-time-mode
       static
       hide-expand
       stretch
