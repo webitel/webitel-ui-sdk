@@ -1,7 +1,7 @@
 export const toArray = (value) =>
 	Array.isArray(value)
 		? value
-		: value != null
+		: !!value
 			? [
 					value,
 				]

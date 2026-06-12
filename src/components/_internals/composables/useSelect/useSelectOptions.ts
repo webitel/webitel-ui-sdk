@@ -114,8 +114,10 @@ export const useSelectOptions = ({
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...toArray(selected.value).filter(Boolean),
 							...selectedOptionsCache.value,
+							...toArray(selected.value).filter(
+								(s) => s != null && typeof s === 'object',
+							),
 							...items,
 						],
 						dataKey.value,
