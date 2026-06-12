@@ -25,7 +25,6 @@
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
-      :loading="isLoading"
       :data-key="dataKey"
       v-bind="$attrs"
       @before-show="onDropdownBeforeShow"
@@ -79,6 +78,11 @@
       <template #loadingicon>
         <wt-loader :size="ComponentSize.SM" />
       </template>
+      <template #footer v-if="showFooterLoader">
+        <div class="wt-single-select__footer">
+          <wt-loader :size="ComponentSize.SM" />
+        </div>
+      </template>
     </p-select>
     <wt-message
       v-if="isValidation && validationText"
@@ -93,7 +97,15 @@
 
 <script setup lang="ts">
 import type { SelectProps } from 'primevue';
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	onMounted,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+	watch,
+} from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
@@ -193,6 +205,19 @@ const {
 	emit,
 });
 
+const showFooterLoader = ref(false);
+let loaderTimer: ReturnType<typeof setTimeout> | null = null;
+watch(isLoading, (val) => {
+	if (val) {
+		if (loaderTimer) clearTimeout(loaderTimer);
+		showFooterLoader.value = true;
+	} else {
+		loaderTimer = setTimeout(() => {
+			showFooterLoader.value = false;
+		}, 500);
+	}
+});
+
 const slots = useSlots();
 
 const { v, customValidators, regleValidation } = toRefs(props);
@@ -225,5 +250,17 @@ onMounted(() => {
 
 .wt-single-select__option-label {
   user-select: none;
+}
+
+.wt-single-select__footer {
+  position: absolute;
+  width: 100%;
+  transform: translateY(-100%);
+  background: var(--p-select-overlay-background);
+  border-bottom-left-radius: var(--p-select-overlay-border-radius);
+  border-bottom-right-radius: var(--p-select-overlay-border-radius);
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-xs) 0;
 }
 </style>
