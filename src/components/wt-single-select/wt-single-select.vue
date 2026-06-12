@@ -25,7 +25,6 @@
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
-      :loading="isLoading"
       :data-key="dataKey"
       v-bind="$attrs"
       @before-show="onDropdownBeforeShow"
@@ -78,6 +77,11 @@
       </template>
       <template #loadingicon>
         <wt-loader :size="ComponentSize.SM" />
+      </template>
+      <template #footer v-if="showFooterLoader">
+        <div class="wt-single-select__footer">
+          <wt-loader :size="ComponentSize.SM" />
+        </div>
       </template>
     </p-select>
     <wt-message
@@ -165,7 +169,7 @@ const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
 const {
-	isLoading,
+	showFooterLoader,
 	isDropdownOpen,
 	filterText,
 	filteredOptions,
@@ -225,5 +229,17 @@ onMounted(() => {
 
 .wt-single-select__option-label {
   user-select: none;
+}
+
+.wt-single-select__footer {
+  position: absolute;
+  width: 100%;
+  transform: translateY(-100%);
+  background: var(--p-select-overlay-background);
+  border-bottom-left-radius: var(--p-select-overlay-border-radius);
+  border-bottom-right-radius: var(--p-select-overlay-border-radius);
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-xs) 0;
 }
 </style>
