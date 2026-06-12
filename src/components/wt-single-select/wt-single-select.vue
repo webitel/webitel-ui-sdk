@@ -97,15 +97,7 @@
 
 <script setup lang="ts">
 import type { SelectProps } from 'primevue';
-import {
-	computed,
-	onMounted,
-	ref,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-	watch,
-} from 'vue';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
@@ -177,7 +169,7 @@ const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
 const {
-	isLoading,
+	showFooterLoader,
 	isDropdownOpen,
 	filterText,
 	filteredOptions,
@@ -203,19 +195,6 @@ const {
 	selectId: computed(() => selectId),
 	isSingle: true,
 	emit,
-});
-
-const showFooterLoader = ref(false);
-let loaderTimer: ReturnType<typeof setTimeout> | null = null;
-watch(isLoading, (val) => {
-	if (val) {
-		if (loaderTimer) clearTimeout(loaderTimer);
-		showFooterLoader.value = true;
-	} else {
-		loaderTimer = setTimeout(() => {
-			showFooterLoader.value = false;
-		}, 500);
-	}
 });
 
 const slots = useSlots();

@@ -91,7 +91,7 @@
           {{ getOptionLabel(value) }}
         </wt-chip>
       </template>
-      <template #footer v-if="isLoading">
+      <template #footer v-if="showFooterLoader">
         <div class="wt-multi-select__footer">
           <wt-loader :size="ComponentSize.SM" />
         </div>
@@ -194,7 +194,7 @@ const emit = defineEmits<{
 }>();
 
 const {
-	isLoading,
+	showFooterLoader,
 	isDropdownOpen,
 	filterText,
 	filteredOptions,
