@@ -212,6 +212,7 @@ const props = withDefaults(
 
 		actions: VideoCallAction[];
 		username?: string;
+		containerSelector?: string;
 
 		'actions:settings:pressed'?: boolean;
 		'actions:settings:disabled'?: boolean;
@@ -281,9 +282,13 @@ const { t } = useI18n();
 const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
 
 /**
+ * @author @Oleksandr Palionnyi
+ *
  * `defineExpose({ rootEl })` on `WtVidstackPlayer` passes a Ref.
  * DOM is ready after stream + Vidstack web-component upgrade, so we use a
  * computed that re-evaluates whenever `playerRef` changes.
+ *
+ * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
  */
 const videoCallPlayerElement = computed<HTMLElement | null>(() => {
 	const inst = playerRef.value as unknown as {
@@ -298,7 +303,7 @@ const videoCallPlayerElement = computed<HTMLElement | null>(() => {
 const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
 	videoCallPlayerElement,
 	{
-		containerSelector: 'main',
+		containerSelector: props.containerSelector,
 	},
 );
 

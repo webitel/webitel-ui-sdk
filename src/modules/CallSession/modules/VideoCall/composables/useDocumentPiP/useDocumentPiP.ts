@@ -19,13 +19,12 @@ import { usePiPResizeObserver } from './usePiPResizeObserver';
 
 interface UseDocumentPiPOptions {
 	/**
-	 * CSS selector for the element that `movedEl` should be restored into
-	 * after the PiP window closes.  Use this when a parent `<Teleport>` or
-	 * router navigation can change `el.parentNode` between PiP sessions,
-	 * causing the captured parent to be stale.
+	 * @author @Oleksandr Palonnyi
+	 * CSS selector for the container to restore `movedEl` into after PiP closes.
+	 * Use when a `<Teleport>` or route navigation can change `el.parentNode`
+	 * between sessions, making the captured parent stale.
 	 *
-	 * Example: `'main'` always resolves to the page's main container,
-	 * regardless of what Teleport may have done to the component tree.
+	 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
 	 */
 	containerSelector?: string;
 }
