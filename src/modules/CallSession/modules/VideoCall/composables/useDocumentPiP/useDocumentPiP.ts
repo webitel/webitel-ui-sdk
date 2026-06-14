@@ -2,7 +2,6 @@ import {
 	computed,
 	type MaybeRefOrGetter,
 	onBeforeUnmount,
-	onUnmounted,
 	ref,
 	toValue,
 } from 'vue';
@@ -135,7 +134,7 @@ export function useDocumentPiP(
 		 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
 		 */
 		domAnchor = document.createComment('document-pip-anchor');
-		el.parentNode!.insertBefore(domAnchor, el);
+		el.parentNode.insertBefore(domAnchor, el);
 		movedEl = el;
 
 		snapshotMedia(el, mediaSnapshot);
