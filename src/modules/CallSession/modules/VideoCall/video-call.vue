@@ -212,6 +212,7 @@ const props = withDefaults(
 
 		actions: VideoCallAction[];
 		username?: string;
+		containerSelector?: string;
 
 		'actions:settings:pressed'?: boolean;
 		'actions:settings:disabled'?: boolean;
@@ -280,20 +281,30 @@ const { t } = useI18n();
 
 const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
 
-/** `defineExpose({ rootEl })` on `WtVidstackPlayer` passes a Ref — DOM is ready after stream + Vidstack upgrade. */
-const getVideoCallPlayerHostElement = (): HTMLElement | null => {
+/**
+ * @author @Oleksandr Palionnyi
+ *
+ * `defineExpose({ rootEl })` on `WtVidstackPlayer` passes a Ref.
+ * DOM is ready after stream + Vidstack web-component upgrade, so we use a
+ * computed that re-evaluates whenever `playerRef` changes.
+ *
+ * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
+ */
+const videoCallPlayerElement = computed<HTMLElement | null>(() => {
 	const inst = playerRef.value as unknown as {
 		rootEl?: HTMLElement | Ref<HTMLElement | null> | null;
 		$el?: HTMLElement | null;
 	} | null;
 	if (!inst) return null;
 	const rootEl = inst.rootEl;
-	const exposedElement = isRef(rootEl) ? rootEl.value : (rootEl ?? null);
-	return exposedElement ?? inst.$el ?? null;
-};
+	return (isRef(rootEl) ? rootEl.value : rootEl) ?? inst.$el ?? null;
+});
 
 const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
-	getVideoCallPlayerHostElement,
+	videoCallPlayerElement,
+	{
+		containerSelector: props.containerSelector,
+	},
 );
 
 /**
@@ -467,12 +478,12 @@ watch(
 const stopAutoDocumentPiP = watch(
 	[
 		mainStream,
-		playerRef,
+		videoCallPlayerElement,
 	],
 	async () => {
 		if (!props.isPipMode) return;
-		if (!mainStream.value || !playerRef.value || isPiP.value) return;
-		if (!getVideoCallPlayerHostElement()) return;
+		if (!mainStream.value || !videoCallPlayerElement.value || isPiP.value)
+			return;
 		await enterPiP();
 		if (isPiP.value) stopAutoDocumentPiP();
 	},
