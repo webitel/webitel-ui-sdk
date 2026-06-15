@@ -19,6 +19,7 @@
       :invalid="invalid"
       :id="selectId"
       :show-clear="showClear"
+      :focus-on-hover="false"
       :disabled="disabled"
       :placeholder="placeholder || label"
       :option-disabled="() => disabledOptions"
@@ -36,7 +37,9 @@
         <wt-input-text
           v-if="filterable"
           ref="filterInput"
+          class="wt-single-select__input"
           :model-value="filterText"
+          :size="ComponentSize.SM"
           @update:model-value="filterOptions($event)"
           @keydown.enter.stop="onInputKeydown"
         >
@@ -229,6 +232,10 @@ onMounted(() => {
 
 .wt-single-select__option-label {
   user-select: none;
+}
+
+.wt-single-select__input {
+  padding: var(--spacing-xs);
 }
 
 .wt-single-select__footer {
