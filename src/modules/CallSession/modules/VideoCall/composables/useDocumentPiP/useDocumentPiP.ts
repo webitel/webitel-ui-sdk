@@ -32,6 +32,14 @@ export function useDocumentPiP(
 	 */
 	let isRequestWindowPending = false;
 
+	/**
+	 * Set in `onBeforeUnmount`. Used as the abort sentinel for the
+	 * post-`requestWindow` guard instead of checking `!originalParent`,
+	 * because a legitimately detached-but-in-document element also has
+	 * `parentNode === null` and must not be treated as an unmount signal.
+	 */
+	let isUnmounting = false;
+
 	const mediaSnapshot: MediaSnapshot[] = [];
 	const { retryPlayback, stopPlaybackRetry } =
 		createPlaybackRetry(mediaSnapshot);
@@ -59,7 +67,7 @@ export function useDocumentPiP(
 		}
 
 		if (originalParent) {
-			originalParent.appendChild(movedEl);
+			originalParent.insertBefore(movedEl, originalNextSibling);
 		}
 
 		restoreMedia(mediaSnapshot);
@@ -123,11 +131,13 @@ export function useDocumentPiP(
 		 *
 		 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
 		 *
-		 * `onBeforeUnmount` can fire while `requestWindow` is awaited above,
-		 * clearing `originalParent`. Abort if that happened so we don't open a
-		 * PiP window that can never restore its element.
+		 * `onBeforeUnmount` can fire while `requestWindow` is awaited above.
+		 * Abort if that happened so we don't open a PiP window that can never
+		 * restore its element. We use `isUnmounting` rather than `!originalParent`
+		 * because a legitimately detached element also has `parentNode === null`
+		 * and must not be treated as an unmount signal.
 		 */
-		if (!originalParent) {
+		if (isUnmounting) {
 			win.close();
 			return;
 		}
@@ -171,7 +181,7 @@ export function useDocumentPiP(
 	};
 
 	onBeforeUnmount(() => {
-		isRequestWindowPending = false;
+		isUnmounting = true;
 		if (isPiP.value) exitPiP();
 		originalParent = null;
 		originalNextSibling = null;
