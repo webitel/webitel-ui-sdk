@@ -27,13 +27,37 @@ const inputGroup = {
                   box-shadow ${dt('inputtext.transition.duration')};
     }
 
+    .p-inputgroup:has(.p-inputtext-sm) .p-inputgroupaddon {
+      font-size: var(--p-inputtext-sm-font-size);
+      padding-top: var(--p-inputtext-sm-padding-y);
+      padding-bottom: var(--p-inputtext-sm-padding-y);
+      padding-left: var(--p-inputtext-sm-padding-x);
+      padding-right: var(--p-inputtext-sm-padding-x);
+    }
+
+    .p-inputgroup:has(.p-inputtext-lg) .p-inputgroupaddon {
+      font-size: var(--p-inputtext-lg-font-size);
+      padding-top: var(--p-inputtext-lg-padding-y);
+      padding-bottom: var(--p-inputtext-lg-padding-y);
+      padding-left: var(--p-inputtext-lg-padding-x);
+      padding-right: var(--p-inputtext-lg-padding-x);
+    }
+
     .p-inputtext ~ .p-inputgroupaddon,
-    *:has(.p-inputtext) ~ .p-inputgroupaddon {
+    *:has(.p-inputtext) ~ .p-inputgroupaddon,
+    .p-inputgroup:has(.p-inputtext-sm) .p-inputtext ~ .p-inputgroupaddon,
+    .p-inputgroup:has(.p-inputtext-sm) *:has(.p-inputtext) ~ .p-inputgroupaddon,
+    .p-inputgroup:has(.p-inputtext-lg) .p-inputtext ~ .p-inputgroupaddon,
+    .p-inputgroup:has(.p-inputtext-lg) *:has(.p-inputtext) ~ .p-inputgroupaddon {
       padding-left: 0;
     }
 
     .p-inputgroupaddon:has(~ .p-inputtext),
-    .p-inputgroupaddon:has(~ * .p-inputtext) {
+    .p-inputgroupaddon:has(~ * .p-inputtext),
+    .p-inputgroup:has(.p-inputtext-sm) .p-inputgroupaddon:has(~ .p-inputtext),
+    .p-inputgroup:has(.p-inputtext-sm) .p-inputgroupaddon:has(~ * .p-inputtext),
+    .p-inputgroup:has(.p-inputtext-lg) .p-inputgroupaddon:has(~ .p-inputtext),
+    .p-inputgroup:has(.p-inputtext-lg) .p-inputgroupaddon:has(~ * .p-inputtext) {
       padding-right: 0;
     }
 
