@@ -13,6 +13,7 @@ import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
+import { DefaultWorkspaceTab } from './DefaultWorkspaceTab/DefaultWorkspaceTab';
 import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
@@ -53,6 +54,7 @@ export {
 	ComponentSize,
 	CrmSections,
 	CrudAction,
+	DefaultWorkspaceTab,
 	EmptyCause,
 	FormatDateMode,
 	IconAction,
