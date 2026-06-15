@@ -57,6 +57,7 @@ const iconSvg = computed(() => {
 
 .wt-icon svg {
   width: 100%;
+  height: 100%;
 }
 
 .wt-icon--size-xs {
