@@ -13,7 +13,7 @@ import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
-import { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTab/DefaultWorkspaceTabSettings.js';
+import { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTabSettings/DefaultWorkspaceTabSettings';
 import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
