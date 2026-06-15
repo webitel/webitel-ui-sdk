@@ -1,4 +1,4 @@
-export const DefaultWorkspaceTab = {
+export const DefaultWorkspaceTabSettings = {
 	GeneralInfo: 'general_info',
 	ClientInfo: 'client_info',
 	KnowledgeBase: 'knowledge_base',
@@ -7,5 +7,5 @@ export const DefaultWorkspaceTab = {
 	Screenshots: 'screenshots',
 } as const;
 
-export type DefaultWorkspaceTab =
-	(typeof DefaultWorkspaceTab)[keyof typeof DefaultWorkspaceTab];
+export type DefaultWorkspaceTabSettings =
+	(typeof DefaultWorkspaceTabSettings)[keyof typeof DefaultWorkspaceTabSettings];
