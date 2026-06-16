@@ -1,5 +1,12 @@
 import eventBus from '../../../scripts/eventBus.js';
 
+const typeToSeverityMap = {
+	success: 'success',
+	info: 'info',
+	error: 'error',
+	warning: 'warn',
+};
+
 const notifyTransformer = (notificationObject) => {
 	/*
   if passed arg is function, then this notification - static content,
@@ -11,8 +18,8 @@ const notifyTransformer = (notificationObject) => {
      */
 		const callback = ({ type, text }) =>
 			eventBus.$emit('notification', {
-				type,
-				text,
+				severity: typeToSeverityMap[type] ?? type,
+				detail: text,
 			});
 
 		/*
@@ -28,8 +35,8 @@ const notifyTransformer = (notificationObject) => {
 	}
 	if (notificationObject instanceof Error) {
 		eventBus.$emit('notification', {
-			type: 'error',
-			text:
+			severity: 'error',
+			detail:
 				notificationObject.response?.data?.detail ||
 				notificationObject.response?.data?.message ||
 				notificationObject,
