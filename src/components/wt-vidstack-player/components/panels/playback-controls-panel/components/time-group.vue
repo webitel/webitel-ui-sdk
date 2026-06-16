@@ -1,18 +1,28 @@
 <template>
-  <div class="time-group">
-    <media-time v-if="props.countdown" type="current" remainder />
+  <div ref="rootEl" class="time-group">
+    <template v-if="props.countdown">
+      {{ remainingTimeFormatted }}
+    </template>
 
     <template v-else>
       <media-time type="current" />
       /
       <media-time type="duration" />
     </template>
-
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
+import {
+	computed,
+	defineProps,
+	onMounted,
+	onUnmounted,
+	ref,
+	useTemplateRef,
+	withDefaults,
+} from 'vue';
+import { formatTime } from 'vidstack';
 
 const props = withDefaults(
 	defineProps<{
@@ -22,6 +32,37 @@ const props = withDefaults(
 		countdown: false,
 	},
 );
+
+const rootEl = useTemplateRef<HTMLElement>('rootEl');
+const currentTime = ref(0);
+const mediaDuration = ref(0);
+
+let playerElement: Element | null = null;
+
+const remainingTimeFormatted = computed(() =>
+	formatTime(Math.max(0, mediaDuration.value - currentTime.value), {
+		showHrs: mediaDuration.value >= 3600,
+	}),
+);
+
+const syncPlayerState = () => {
+	const player = playerElement as any;
+	currentTime.value = player.currentTime ?? 0;
+	mediaDuration.value = player.duration ?? 0;
+};
+
+onMounted(() => {
+	playerElement = rootEl.value?.closest('media-player') ?? null;
+	if (!playerElement) return;
+
+	playerElement.addEventListener('can-play', syncPlayerState);
+	playerElement.addEventListener('time-update', syncPlayerState);
+});
+
+onUnmounted(() => {
+	playerElement?.removeEventListener('can-play', syncPlayerState);
+	playerElement?.removeEventListener('time-update', syncPlayerState);
+});
 </script>
 
 <style  scoped>
