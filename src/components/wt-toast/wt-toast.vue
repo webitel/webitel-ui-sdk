@@ -42,3 +42,12 @@ const severityToIconColorMap: Record<string, string> = {
 	secondary: MessageColor.SECONDARY,
 };
 </script>
+
+<style>
+.p-toast-close-button:hover {
+  background: transparent;
+}
+.p-toast-close-button:focus-visible {
+  outline: none;
+}
+</style>

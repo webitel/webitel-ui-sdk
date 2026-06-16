@@ -1,11 +1,5 @@
+import { TypeToSeverityMap } from '../../../components/wt-toast/types/index.ts';
 import eventBus from '../../../scripts/eventBus.js';
-
-const typeToSeverityMap = {
-	success: 'success',
-	info: 'info',
-	error: 'error',
-	warning: 'warn',
-};
 
 const notifyTransformer = (notificationObject) => {
 	/*
@@ -18,7 +12,7 @@ const notifyTransformer = (notificationObject) => {
      */
 		const callback = ({ type, text }) =>
 			eventBus.$emit('notification', {
-				severity: typeToSeverityMap[type] ?? type,
+				severity: TypeToSeverityMap[type] ?? type,
 				detail: text,
 			});
 
