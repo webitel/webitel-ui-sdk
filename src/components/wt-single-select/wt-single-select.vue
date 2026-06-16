@@ -245,7 +245,7 @@ onMounted(() => {
 
 .wt-single-select__footer {
   position: absolute;
-  width: 100%;
+  width: calc(100% - var(--scrollbar-width));
   transform: translateY(-100%);
   background: var(--p-select-overlay-background);
   border-bottom-left-radius: var(--p-select-overlay-border-radius);

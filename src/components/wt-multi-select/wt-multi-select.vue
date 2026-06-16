@@ -273,7 +273,7 @@ onMounted(() => {
 
 .wt-multi-select__footer {
   position: absolute;
-  width: 100%;
+  width: calc(100% - var(--scrollbar-width));
   transform: translateY(-100%);
   background: var(--p-multiselect-overlay-background);
   border-bottom-left-radius: var(--p-multiselect-overlay-border-radius);

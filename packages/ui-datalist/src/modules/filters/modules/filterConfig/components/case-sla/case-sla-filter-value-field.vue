@@ -5,7 +5,7 @@
     :v="v$.model"
     :model-value="model"
     option-value="id"
-    @input="handleInput"
+    @update:model-value="handleInput"
   />
 </template>
 
