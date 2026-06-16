@@ -34,6 +34,9 @@
       :pt="{
         label: {
           class: 'typo-body-1',
+        },
+        listContainer: {
+          class: 'wt-scrollbar',
         }
       }"
       v-bind="$attrs"
