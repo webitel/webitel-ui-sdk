@@ -18,6 +18,10 @@ const singleSelect = {
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+
+		.p-select.p-invalid:not(.p-disabled):hover {
+			border-color: ${dt('select.invalidHoverBorderColor')};
+		}
 	`,
 };
 

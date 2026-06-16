@@ -28,6 +28,11 @@
       :option-value="optionValue"
       :data-key="dataKey"
       v-bind="$attrs"
+      :pt="{
+        listContainer: {
+          class: 'wt-scrollbar',
+        }
+      }"
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
