@@ -22,6 +22,11 @@ const singleSelect = {
 		.p-select.p-invalid:not(.p-disabled):hover {
 			border-color: ${dt('select.invalidHoverBorderColor')};
 		}
+
+		.p-select-option.p-select-option-selected:not(.p-disabled):hover {
+				background: ${dt('select.option.selectedFocusBackground')};
+				color: ${dt('select.option.selectedFocusColor')};
+		}
 	`,
 };
 
