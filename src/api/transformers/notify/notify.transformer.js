@@ -1,4 +1,4 @@
-import { TypeToSeverityMap } from '../../../components/wt-toast/types/index.ts';
+import { TypeToSeverityMap } from '../../../components/wt-toast/types';
 import eventBus from '../../../scripts/eventBus.js';
 
 const notifyTransformer = (notificationObject) => {

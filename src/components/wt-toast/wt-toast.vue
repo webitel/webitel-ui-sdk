@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize, IconColor, MessageColor } from '../../enums';
+import { ComponentSize, MessageColor } from '../../enums';
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 defineOptions({

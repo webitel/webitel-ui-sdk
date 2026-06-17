@@ -1,14 +1,13 @@
 <template>
-  <WtToast position="top-right" />
+  <wt-toast position="top-right" />
 </template>
 
 <script setup>
-import { inject, onUnmounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import { TypeToSeverityMap } from '../wt-toast/types/index.ts';
-import WtToast from '../wt-toast/wt-toast.vue';
+import { inject, onUnmounted } from 'vue';
 import defaultEventBus from '../../scripts/eventBus.js';
-import { _wtUiLog as loggr } from '../../scripts/logger.js';
+import { TypeToSeverityMap } from '../wt-toast/types';
+import WtToast from '../wt-toast/wt-toast.vue';
 
 defineOptions({
 	name: 'WtNotificationsBar',
@@ -17,13 +16,6 @@ defineOptions({
 const DEFAULT_NOTIFICATION_LIFE_MS = 4000;
 
 const injectedEventBus = inject('$eventBus', null);
-
-if (!injectedEventBus) {
-	loggr.warn({
-		entity: 'component',
-		module: 'wt-notification-bar',
-	})('no globally provided $eventBus found, using default webitel-ui eventBus');
-}
 
 const activeEventBus = injectedEventBus ?? defaultEventBus;
 

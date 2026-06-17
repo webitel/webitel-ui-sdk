@@ -85,6 +85,7 @@
 * [wt-textarea](components/wt-textarea/Readme.md)
 * [wt-time-input](components/wt-time-input/Readme.md)
 * [wt-timepicker](components/wt-timepicker/Readme.md)
+* [wt-toast](components/wt-toast/Readme.md)
 * [wt-tooltip](components/wt-tooltip/Readme.md)
 * [wt-tree](components/wt-tree/Readme.md)
 * [wt-tree-table](components/wt-tree-table/Readme.md)
