@@ -1,4 +1,6 @@
 export * from './casePriority/casePriority.validations';
+export * from './contactGroup/contactGroup.validations';
+export * from './contactGroupCondition/contactGroupCondition.validations';
 export * from './caseSource/caseSource.validations';
 export * from './caseStatus/caseStatus.validations';
 export * from './caseStatusCondition/caseStatusCondition.validations';

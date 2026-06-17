@@ -14,6 +14,8 @@ export const useCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
 	manualSetup = false,
+	initialData,
+	customSaveItem,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
@@ -25,6 +27,8 @@ export const useCardComponent = <CardEntity>({
 	 * @default false
 	 */
 	manualSetup?: boolean;
+	initialData?: Partial<CardEntity>;
+	customSaveItem?: (data: CardEntity) => Promise<CardEntity | null>;
 }) => {
 	const cardStore = useCardStore();
 
@@ -37,7 +41,7 @@ export const useCardComponent = <CardEntity>({
 		error,
 	} = storeToRefs(cardStore);
 
-	const { initialize, saveItem, $reset } = cardStore;
+	const { initialize, saveItem, $reset, setItemValue } = cardStore;
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
 		useCardValidation<CardEntity>({
@@ -62,7 +66,15 @@ export const useCardComponent = <CardEntity>({
 	const { save } = useCardSaveAction<CardEntity>({
 		// @ts-expect-error
 		validate, // fixme: type
-		saveItem,
+		saveItem: async (data) => {
+			if (customSaveItem) {
+				const result = await customSaveItem(data);
+				if (result !== null) {
+					return setItemValue(result);
+				}
+			}
+			return saveItem(data);
+		},
 	});
 
 	const { routeId } = useCardRouting({
@@ -73,6 +85,7 @@ export const useCardComponent = <CardEntity>({
 	if (!manualSetup) {
 		initialize({
 			itemId: routeId.value,
+			initialData,
 		});
 		onUnmounted($reset);
 	}
