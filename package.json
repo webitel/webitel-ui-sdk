@@ -341,6 +341,10 @@
 			"types": "./types/modules/Userinfo/index.d.ts",
 			"import": "./src/modules/Userinfo/index.ts"
 		},
+		"./modules/ObjectPermissions": {
+			"types": "./types/modules/ObjectPermissions/index.d.ts",
+			"import": "./src/modules/ObjectPermissions/index.ts"
+		},
 		"./plugins*": {
 			"types": "./types/plugins*",
 			"import": "./src/plugins*"
