@@ -1,1 +1,1 @@
-export { createObjectPermissionsStoreModule } from './store/index.js';
+export { createObjectPermissionsStoreModule } from './store';
