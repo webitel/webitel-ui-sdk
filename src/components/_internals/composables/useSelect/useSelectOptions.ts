@@ -114,7 +114,7 @@ export const useSelectOptions = ({
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...selectedOptionsCache.value,
+							...(!allowCustomValues.value ? selectedOptionsCache.value : []),
 							...toArray(selected.value).filter(
 								(s) => s != null && typeof s === 'object',
 							),
@@ -146,7 +146,7 @@ export const useSelectOptions = ({
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...selectedOptionsCache.value,
+						...(!allowCustomValues.value ? selectedOptionsCache.value : []),
 						...matchingOptions,
 					],
 					dataKey.value,
