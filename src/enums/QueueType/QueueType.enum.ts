@@ -8,7 +8,7 @@ export const QueueType = {
 	CHAT_INBOUND_QUEUE: 6,
 	INBOUND_JOB_QUEUE: 7,
 	OUTBOUND_JOB_QUEUE: 8,
-	INBOUND_IM_CHAT_QUEUE: 9,
+	IM_CHAT_QUEUE: 9,
 } as const;
 
 export type QueueType = (typeof QueueType)[keyof typeof QueueType];
@@ -24,7 +24,7 @@ export const QueueTypeName = {
 	INBOUND_JOB_QUEUE: 'task',
 	OUTBOUND_JOB_QUEUE: 'outbound_task',
 	OUTBOUND_CALL: 'outbound_call',
-	INBOUND_IM_CHAT_QUEUE: 'inbound_im_chat',
+	IM_CHAT_QUEUE: 'im_chat',
 	NOT_IMPLEMENT: 'NOT_IMPLEMENT',
 } as const;
 

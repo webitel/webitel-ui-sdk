@@ -217,7 +217,7 @@ export default deepmerge(
 					[QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
 					[QueueType.INBOUND_JOB_QUEUE]: 'Inbound task queue',
 					[QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound task queue',
-					[QueueType.INBOUND_IM_CHAT_QUEUE]: 'im queue',
+					[QueueType.IM_CHAT_QUEUE]: 'im queue',
 				},
 			},
 			agent: {
