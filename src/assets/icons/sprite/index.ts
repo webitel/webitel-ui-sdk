@@ -200,6 +200,7 @@ import selectCustomValueEnter from './select-custom-value-enter.svg?raw';
 import sendArrow from './send-arrow.svg?raw';
 import settings from './settings.svg?raw';
 import sharingEnd from './sharing-end.svg?raw';
+import shieldCheck from './shield-check.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
@@ -270,6 +271,7 @@ export default objCamelToKebab({
 	calendar,
 	dislike,
 	darkMode,
+	shieldCheck,
 
 	call,
 	'call--filled': callFilled,
