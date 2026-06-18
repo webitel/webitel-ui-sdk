@@ -22,6 +22,7 @@
       :id="selectId"
       :show-clear="showClear"
       :focus-on-hover="false"
+      :auto-option-focus="true"
       :disabled="disabled"
       :placeholder="placeholder || label"
       :option-disabled="() => disabledOptions"
@@ -45,6 +46,17 @@
       @show="onDropdownShow"
       @hide="onDropdownHide"
     >
+      <template v-if="!chipsView" #value="{ value, placeholder }">
+        <span v-if="value && value.length">
+          <template v-if="value.length > MAX_SELECTED_LABELS">
+            {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
+          </template>
+          <template v-else>
+            {{ value.map((v) => getOptionLabel(v)).join(', ') }}
+          </template>
+        </span>
+        <span v-else class="p-placeholder">{{ placeholder }}</span>
+      </template>
       <template #header>
         <wt-input-text
           v-if="filterable"
