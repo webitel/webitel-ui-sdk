@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
+import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 import type { WebitelImApiGatewayV1SendLocationRequestMetadata } from './webitelImApiGatewayV1SendLocationRequestMetadata';
 
 /**
@@ -21,6 +22,7 @@ export interface WebitelImApiGatewayV1SendLocationRequest {
 	metadata?: WebitelImApiGatewayV1SendLocationRequestMetadata;
 	/** Optional location name (e.g., "Central Park"). */
 	name?: string;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional send ID for idempotency. */
 	sendId?: string;
 	/** Recipient of the message. */

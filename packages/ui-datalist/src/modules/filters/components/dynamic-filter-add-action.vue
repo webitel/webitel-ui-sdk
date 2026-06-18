@@ -81,7 +81,9 @@ onClickOutside(
 		ignore: [
 			'.wt-chip',
 			'.p-popover',
-		], // Exclude activator and popover
+			'.p-select-overlay',
+			'.p-multiselect-overlay',
+		], // Exclude activator, popover content, and teleported select/multiselect panels
 	},
 );
 </script>

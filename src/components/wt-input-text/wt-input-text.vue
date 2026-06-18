@@ -31,6 +31,7 @@
         :placeholder="placeholder || label"
         class="wt-input-text__input typo-body-1"
         :inputmode="type"
+        :size="primevueSizeMap[size]"
         v-bind="$attrs"
         v-on="$listeners"   
         @update:model-value="inputHandler"
@@ -66,6 +67,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	type?: string;
+	size?: string | null;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -80,6 +82,7 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	label: '',
 	labelProps: () => ({}),
 	type: 'text',
+	size: null,
 	placeholder: '',
 	disabled: false,
 	required: false,
@@ -89,6 +92,11 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	customValidators: () => [],
 	hideInputInfo: false,
 });
+
+const primevueSizeMap = {
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.LG]: 'large',
+};
 
 const model = defineModel<string>({
 	default: '',

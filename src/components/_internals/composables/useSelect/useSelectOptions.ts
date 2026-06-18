@@ -114,8 +114,10 @@ export const useSelectOptions = ({
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...toArray(selected.value).filter(Boolean),
-							...selectedOptionsCache.value,
+							...(!allowCustomValues.value ? selectedOptionsCache.value : []),
+							...toArray(selected.value).filter(
+								(s) => s != null && typeof s === 'object',
+							),
 							...items,
 						],
 						dataKey.value,
@@ -144,7 +146,7 @@ export const useSelectOptions = ({
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...selectedOptionsCache.value,
+						...(!allowCustomValues.value ? selectedOptionsCache.value : []),
 						...matchingOptions,
 					],
 					dataKey.value,
@@ -180,6 +182,15 @@ export const useSelectOptions = ({
 		(newVal) => {
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
+		},
+	);
+
+	watch(
+		() => options.value,
+		(newOptions) => {
+			if (!searchMethod.value) {
+				filteredOptions.value = sortOptions(newOptions);
+			}
 		},
 	);
 

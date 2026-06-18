@@ -19,15 +19,20 @@
       :invalid="invalid"
       :id="selectId"
       :show-clear="showClear"
+      :focus-on-hover="false"
       :disabled="disabled"
       :placeholder="placeholder || label"
       :option-disabled="() => disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
-      :loading="isLoading"
       :data-key="dataKey"
       v-bind="$attrs"
+      :pt="{
+        listContainer: {
+          class: 'wt-scrollbar',
+        }
+      }"
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
@@ -37,7 +42,9 @@
         <wt-input-text
           v-if="filterable"
           ref="filterInput"
+          class="wt-single-select__input"
           :model-value="filterText"
+          :size="ComponentSize.SM"
           @update:model-value="filterOptions($event)"
           @keydown.enter.stop="onInputKeydown"
         >
@@ -78,6 +85,11 @@
       </template>
       <template #loadingicon>
         <wt-loader :size="ComponentSize.SM" />
+      </template>
+      <template #footer v-if="showFooterLoader">
+        <div class="wt-single-select__footer">
+          <wt-loader :size="ComponentSize.SM" />
+        </div>
       </template>
     </p-select>
     <wt-message
@@ -165,7 +177,7 @@ const filterInput = useTemplateRef('filterInput');
 const selectRef = useTemplateRef('selectRef');
 
 const {
-	isLoading,
+	showFooterLoader,
 	isDropdownOpen,
 	filterText,
 	filteredOptions,
@@ -225,5 +237,21 @@ onMounted(() => {
 
 .wt-single-select__option-label {
   user-select: none;
+}
+
+.wt-single-select__input {
+  padding: var(--spacing-xs);
+}
+
+.wt-single-select__footer {
+  position: absolute;
+  width: calc(100% - var(--scrollbar-width));
+  transform: translateY(-100%);
+  background: var(--p-select-overlay-background);
+  border-bottom-left-radius: var(--p-select-overlay-border-radius);
+  border-bottom-right-radius: var(--p-select-overlay-border-radius);
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-xs) 0;
 }
 </style>

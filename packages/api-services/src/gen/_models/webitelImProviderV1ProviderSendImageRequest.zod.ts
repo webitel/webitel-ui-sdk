@@ -12,6 +12,7 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
  */
 export interface WebitelImProviderV1ProviderSendImageRequest {
 	caption?: string;
+	domainId?: number;
 	externalUserId?: string;
 	gateId?: string;
 	images?: WebitelImProviderV1ProviderFile[];

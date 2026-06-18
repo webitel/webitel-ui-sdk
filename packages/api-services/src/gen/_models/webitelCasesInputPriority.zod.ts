@@ -5,8 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * InputPriority message for creating a new priority
+ */
 export interface WebitelCasesInputPriority {
-	color?: string;
+	color: string;
 	description?: string;
-	name?: string;
+	name: string;
 }

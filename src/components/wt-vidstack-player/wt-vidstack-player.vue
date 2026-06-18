@@ -140,6 +140,7 @@ const rootClasses = computed(() => [
 	props.stretch && 'wt-vidstack-player--stretch',
 	props.static && 'wt-vidstack-player--static',
 	props.hideBackground && 'wt-vidstack-player--hide-background',
+	props.hideControlsPanel && 'wt-vidstack-player--hide-controls-panel',
 ]);
 
 /**
@@ -353,8 +354,7 @@ const onCanPlay = (ev: Event) => {
   max-height: 100%;
 }
 
-.wt-vidstack-player--static .wt-vidstack-player__provider,
-.wt-vidstack-player--stretch .wt-vidstack-player__provider {
+.wt-vidstack-player--hide-controls-panel .wt-vidstack-player__provider {
   padding: 0;
 }
 

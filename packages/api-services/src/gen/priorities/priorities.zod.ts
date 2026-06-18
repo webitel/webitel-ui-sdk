@@ -48,26 +48,26 @@ export const ListPrioritiesQueryParams = zod.object({
 export const ListPrioritiesResponse = zod.object({
 	items: zod
 		.array(
-			zod.object({
-				color: zod.string().optional(),
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
+			zod
+				.object({
+					color: zod.string(),
+					createdAt: zod.string(),
+					createdBy: zod.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
-					})
-					.optional(),
-				description: zod.string().optional(),
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
+					}),
+					description: zod.string().optional(),
+					id: zod.string(),
+					name: zod.string(),
+					updatedAt: zod.string(),
+					updatedBy: zod.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
-					})
-					.optional(),
-			}),
+					}),
+				})
+				.describe(
+					'Priority message represents a priority entity with metadata.',
+				),
 		)
 		.optional(),
 	next: zod.boolean().optional(),
@@ -84,32 +84,32 @@ export const CreatePriorityQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const CreatePriorityBody = zod.object({
-	color: zod.string().optional(),
-	description: zod.string().optional(),
-	name: zod.string().optional(),
-});
+export const CreatePriorityBody = zod
+	.object({
+		color: zod.string(),
+		description: zod.string().optional(),
+		name: zod.string(),
+	})
+	.describe('InputPriority message for creating a new priority');
 
-export const CreatePriorityResponse = zod.object({
-	color: zod.string().optional(),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
+export const CreatePriorityResponse = zod
+	.object({
+		color: zod.string(),
+		createdAt: zod.string(),
+		createdBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-	description: zod.string().optional(),
-	id: zod.string().optional(),
-	name: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
+		}),
+		description: zod.string().optional(),
+		id: zod.string(),
+		name: zod.string(),
+		updatedAt: zod.string(),
+		updatedBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-});
+		}),
+	})
+	.describe('Priority message represents a priority entity with metadata.');
 
 /**
  * @summary Delete a priority
@@ -118,26 +118,24 @@ export const DeletePriorityParams = zod.object({
 	id: zod.string(),
 });
 
-export const DeletePriorityResponse = zod.object({
-	color: zod.string().optional(),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
+export const DeletePriorityResponse = zod
+	.object({
+		color: zod.string(),
+		createdAt: zod.string(),
+		createdBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-	description: zod.string().optional(),
-	id: zod.string().optional(),
-	name: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
+		}),
+		description: zod.string().optional(),
+		id: zod.string(),
+		name: zod.string(),
+		updatedAt: zod.string(),
+		updatedBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-});
+		}),
+	})
+	.describe('Priority message represents a priority entity with metadata.');
 
 /**
  * @summary Locate a priority by ID
@@ -156,26 +154,23 @@ export const LocatePriorityQueryParams = zod.object({
 export const LocatePriorityResponse = zod.object({
 	priority: zod
 		.object({
-			color: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			color: zod.string(),
+			createdAt: zod.string(),
+			createdBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 			description: zod.string().optional(),
-			id: zod.string().optional(),
-			name: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
+			id: zod.string(),
+			name: zod.string(),
+			updatedAt: zod.string(),
+			updatedBy: zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
 		})
-		.optional(),
+		.optional()
+		.describe('Priority message represents a priority entity with metadata.'),
 });
 
 /**
@@ -192,32 +187,32 @@ export const UpdatePriority2QueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const UpdatePriority2Body = zod.object({
-	color: zod.string().optional(),
-	description: zod.string().optional(),
-	name: zod.string().optional(),
-});
+export const UpdatePriority2Body = zod
+	.object({
+		color: zod.string(),
+		description: zod.string().optional(),
+		name: zod.string(),
+	})
+	.describe('InputPriority message for creating a new priority');
 
-export const UpdatePriority2Response = zod.object({
-	color: zod.string().optional(),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
+export const UpdatePriority2Response = zod
+	.object({
+		color: zod.string(),
+		createdAt: zod.string(),
+		createdBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-	description: zod.string().optional(),
-	id: zod.string().optional(),
-	name: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
+		}),
+		description: zod.string().optional(),
+		id: zod.string(),
+		name: zod.string(),
+		updatedAt: zod.string(),
+		updatedBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-});
+		}),
+	})
+	.describe('Priority message represents a priority entity with metadata.');
 
 /**
  * @summary Update an existing priority
@@ -233,29 +228,29 @@ export const UpdatePriorityQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const UpdatePriorityBody = zod.object({
-	color: zod.string().optional(),
-	description: zod.string().optional(),
-	name: zod.string().optional(),
-});
+export const UpdatePriorityBody = zod
+	.object({
+		color: zod.string(),
+		description: zod.string().optional(),
+		name: zod.string(),
+	})
+	.describe('InputPriority message for creating a new priority');
 
-export const UpdatePriorityResponse = zod.object({
-	color: zod.string().optional(),
-	createdAt: zod.string().optional(),
-	createdBy: zod
-		.object({
+export const UpdatePriorityResponse = zod
+	.object({
+		color: zod.string(),
+		createdAt: zod.string(),
+		createdBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-	description: zod.string().optional(),
-	id: zod.string().optional(),
-	name: zod.string().optional(),
-	updatedAt: zod.string().optional(),
-	updatedBy: zod
-		.object({
+		}),
+		description: zod.string().optional(),
+		id: zod.string(),
+		name: zod.string(),
+		updatedAt: zod.string(),
+		updatedBy: zod.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
-		})
-		.optional(),
-});
+		}),
+	})
+	.describe('Priority message represents a priority entity with metadata.');

@@ -76,7 +76,7 @@ const actions = {
 		apiContext,
 		{ context: callerContext = {}, params = {} },
 	) => {
-		if (!apiContext.state.api.getList)
+		if (!apiContext.state.api.getPermissionsList)
 			throw Error('No API "getPermissionsList" method provided');
 		return apiContext.state.api.getPermissionsList({
 			...callerContext.state,
@@ -89,7 +89,7 @@ const actions = {
 		apiContext,
 		{ context: callerContext = {}, id, changes, ...rest },
 	) => {
-		if (!apiContext.state.api.patch)
+		if (!apiContext.state.api.patchPermissions)
 			throw Error('No API "patchPermissions" method provided');
 		return apiContext.state.api.patchPermissions({
 			...callerContext.state,

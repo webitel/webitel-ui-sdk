@@ -5,12 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
+import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 
 /**
  * Represents a request to send a text message.
  */
 export interface WebitelImApiGatewayV1SendTextRequest {
 	body?: string;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
 }

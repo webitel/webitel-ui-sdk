@@ -1,5 +1,11 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
+import { BroadcastChannelName } from './BroadcastChannelName/BroadcastChannelName';
+import type {
+	UserSettingsBroadcastMessage,
+	WebphoneBroadcastMessage,
+	WebphoneBroadcastPayload,
+} from './BroadcastChannelName/UserSettingsBroadcastMessage';
 import { ButtonColor } from './ButtonColor/ButtonColor';
 import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
@@ -7,6 +13,7 @@ import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
+import { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTabSettings/DefaultWorkspaceTabSettings';
 import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
@@ -28,11 +35,18 @@ import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
+export type {
+	UserSettingsBroadcastMessage,
+	WebphoneBroadcastMessage,
+	WebphoneBroadcastPayload,
+};
+
 export {
 	AbstractUserStatus,
 	AdminSections,
 	AgentStatus,
 	AuditorSections,
+	BroadcastChannelName,
 	ButtonColor,
 	ButtonVariant,
 	ChatGatewayProvider,
@@ -40,6 +54,7 @@ export {
 	ComponentSize,
 	CrmSections,
 	CrudAction,
+	DefaultWorkspaceTabSettings,
 	EmptyCause,
 	FormatDateMode,
 	IconAction,

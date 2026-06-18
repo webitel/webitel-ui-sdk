@@ -1,4 +1,4 @@
-import { computed, onUnmounted, ref } from 'vue';
+import { computed, onBeforeUnmount, ref } from 'vue';
 
 import type { DocumentPiPWindow, MediaSnapshot } from '../../types/types';
 
@@ -21,6 +21,25 @@ export function useDocumentPiP(
 	let originalParent: Node | null = null;
 	let originalNextSibling: Node | null = null;
 
+	/**
+	 * @author @Oleksandr Palonnyi
+	 *
+	 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
+	 *
+	 * True while `api.requestWindow()` is in flight.
+	 * Prevents a second `enterPiP` from starting while the first async
+	 * request is still pending.
+	 */
+	let isRequestWindowPending = false;
+
+	/**
+	 * Set in `onBeforeUnmount`. Used as the abort sentinel for the
+	 * post-`requestWindow` guard instead of checking `!originalParent`,
+	 * because a legitimately detached-but-in-document element also has
+	 * `parentNode === null` and must not be treated as an unmount signal.
+	 */
+	let isUnmounting = false;
+
 	const mediaSnapshot: MediaSnapshot[] = [];
 	const { retryPlayback, stopPlaybackRetry } =
 		createPlaybackRetry(mediaSnapshot);
@@ -42,18 +61,12 @@ export function useDocumentPiP(
 	};
 
 	const restoreElement = () => {
-		if (!movedEl || !originalParent) {
+		if (!movedEl) {
 			mediaSnapshot.splice(0);
-			movedEl = null;
-			originalParent = null;
-			originalNextSibling = null;
 			return;
 		}
 
-		if (
-			originalNextSibling &&
-			originalNextSibling.parentNode === originalParent
-		) {
+		if (originalParent) {
 			originalParent.insertBefore(movedEl, originalNextSibling);
 		}
 
@@ -61,8 +74,6 @@ export function useDocumentPiP(
 		resumePlayback(movedEl, mediaSnapshot);
 
 		movedEl = null;
-		originalParent = null;
-		originalNextSibling = null;
 	};
 
 	const onPiPWindowClose = () => {
@@ -74,19 +85,60 @@ export function useDocumentPiP(
 	};
 
 	const enterPiP = async (width = 480, height = 320) => {
-		if (!isSupported.value || isPiP.value) return;
+		if (!isSupported.value || isPiP.value || isRequestWindowPending) return;
 
 		const el = getElement();
 		if (!el) return;
 
+		/**
+		 * @author @Oleksandr Palonnyi
+		 *
+		 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
+		 *
+		 * If the element is stranded inside a closed Document PiP window (e.g. when
+		 * the consuming app renders the component into a PiP context), rescue it back
+		 * to the main document before proceeding. Using `document.body` as a temporary
+		 * parent is safe: the element is `position:fixed` so its visual position is
+		 * viewport-relative regardless of where it sits in the DOM tree, and Vue will
+		 * remove it from `document.body` when the component eventually unmounts.
+		 */
+		if (el.ownerDocument !== document) {
+			document.body.appendChild(el);
+		}
+
+		if (!originalParent) {
+			originalParent = el.parentNode;
+			originalNextSibling = el.nextSibling;
+		}
+
 		const api = (window as DocumentPiPWindow).documentPictureInPicture;
 		let win: Window;
+
+		isRequestWindowPending = true;
 		try {
 			win = await api.requestWindow({
 				width,
 				height,
 			});
 		} catch {
+			return;
+		} finally {
+			isRequestWindowPending = false;
+		}
+
+		/**
+		 * @author @Oleksandr Palonnyi
+		 *
+		 * [WTEL-9774](https://webitel.atlassian.net/browse/WTEL-9774)
+		 *
+		 * `onBeforeUnmount` can fire while `requestWindow` is awaited above.
+		 * Abort if that happened so we don't open a PiP window that can never
+		 * restore its element. We use `isUnmounting` rather than `!originalParent`
+		 * because a legitimately detached element also has `parentNode === null`
+		 * and must not be treated as an unmount signal.
+		 */
+		if (isUnmounting) {
+			win.close();
 			return;
 		}
 
@@ -97,10 +149,7 @@ export function useDocumentPiP(
 			'margin:0;overflow:hidden;width:100%;height:100%;';
 		bridgeCustomElements(el, win);
 
-		originalParent = el.parentNode;
-		originalNextSibling = el.nextSibling;
 		movedEl = el;
-
 		snapshotMedia(el, mediaSnapshot);
 		win.document.body.appendChild(el);
 
@@ -131,8 +180,11 @@ export function useDocumentPiP(
 		isPiP.value = false;
 	};
 
-	onUnmounted(() => {
+	onBeforeUnmount(() => {
+		isUnmounting = true;
 		if (isPiP.value) exitPiP();
+		originalParent = null;
+		originalNextSibling = null;
 	});
 
 	return {

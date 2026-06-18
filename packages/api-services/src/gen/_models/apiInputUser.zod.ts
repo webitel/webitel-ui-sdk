@@ -4,25 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { ApiInputUserProfile } from './apiInputUserProfile';
 import type { ApiLicenseUser } from './apiLicenseUser';
 import type { ApiObjectId } from './apiObjectId';
 import type { ApiPermission } from './apiPermission';
-import type { ApiUserId } from './apiUserId';
 import type { ApiUserPresence } from './apiUserPresence';
-import type { UpdateUserBodyProfile } from './updateUserBodyProfile';
 
-export type UpdateUserBody = {
+/**
+ * Input of the User profile for Create/Update operations.
+Mirrors `User` field numbers 1:1 (wire-compatible), but excludes
+system-managed read-only fields (id, audit metadata).
+ */
+export interface ApiInputUser {
 	/** The "chat_name" field is used to store the name displayed externally on the platform.
 For example, "chat_name" is shown when an agent connects to chats with clients. */
 	chatName?: string;
-	/** [optional] contact connected to this user */
 	contact?: ApiObjectId;
-	readonly createdAt?: string;
-	readonly createdBy?: ApiUserId;
-	readonly deletedAt?: string;
-	readonly deletedBy?: ApiUserId;
 	device?: ApiObjectId;
-	/** [editable] list of unique `regular` devices, attached to this user */
 	devices?: ApiObjectId[];
 	email?: string;
 	extension?: string;
@@ -33,13 +31,9 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	name?: string;
 	password?: string;
 	permissions?: ApiPermission[];
-	/** string presence = 7; // unique set of <user> presentity <status:basic> tuples open[ed]
- string status = 8; // short display status (short description) */
 	presence?: ApiUserPresence;
-	profile?: UpdateUserBodyProfile;
+	profile?: ApiInputUserProfile;
 	roles?: ApiObjectId[];
 	totpUrl?: string;
-	readonly updatedAt?: string;
-	readonly updatedBy?: ApiUserId;
 	username?: string;
-};
+}

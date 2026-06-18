@@ -6,6 +6,7 @@
  */
 import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
+import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 import type { WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata } from './webitelImApiGatewayV1SendInteractiveMessageRequestMetadata';
 
 /**
@@ -18,6 +19,7 @@ export interface WebitelImApiGatewayV1SendInteractiveMessageRequest {
 	interactive?: WebitelImApiGatewayV1Interactive;
 	/** Arbitrary metadata. */
 	metadata?: WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional idempotency key for deduplication. */
 	sendId?: string;
 	/** Recipient of the message. */

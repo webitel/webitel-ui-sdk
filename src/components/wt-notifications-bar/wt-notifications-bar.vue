@@ -81,6 +81,7 @@ export default {
   flex-direction: column;
   gap: var(--spacing-xs);
   min-height: 0;
+		align-items: flex-end;
 }
 
 .wt-notifications-transition-enter-active,

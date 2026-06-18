@@ -6,6 +6,7 @@
  */
 import type { WebitelImApiGatewayV1ImageInput } from './webitelImApiGatewayV1ImageInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
+import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 
 /**
  * Represents a request to send an message with image.
@@ -13,6 +14,7 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 export interface WebitelImApiGatewayV1SendImageRequest {
 	body?: string;
 	images?: WebitelImApiGatewayV1ImageInput[];
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
 }

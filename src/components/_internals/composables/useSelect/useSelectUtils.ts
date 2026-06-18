@@ -1,9 +1,11 @@
 export const toArray = (value) =>
 	Array.isArray(value)
 		? value
-		: [
-				value,
-			];
+		: value
+			? [
+					value,
+				]
+			: [];
 
 // Handles mixed comparisons: when optionValue is used, selected array contains
 // primitives while filteredOptions contains full objects, so we compare by dataKey

@@ -13,6 +13,12 @@ export const SignupQueryParams = zod.object({
 	domain: zod.string().optional().describe('domain name'),
 	username: zod.string().optional().describe('username'),
 	password: zod.string().optional().describe('user password'),
+	extension: zod
+		.string()
+		.optional()
+		.describe(
+			'OPTIONAL. SIP (phone) number i.e. extension.\nSIP Device will be auto-assigned ONLY if [number] specified.',
+		),
 	scope: zod.array(zod.string()).optional().describe('scope request control'),
 	certificate: zod.string().optional().describe('license/certificate'),
 	mobile: zod
@@ -64,6 +70,7 @@ export const UserInfo2QueryParams = zod.object({
 });
 
 export const UserInfo2Response = zod.object({
+	chatName: zod.string().optional(),
 	dc: zod.string().optional(),
 	domain: zod.string().optional(),
 	expiresAt: zod.string().optional(),
@@ -140,6 +147,7 @@ export const UserInfoQueryParams = zod.object({
 });
 
 export const UserInfoResponse = zod.object({
+	chatName: zod.string().optional(),
 	dc: zod.string().optional(),
 	domain: zod.string().optional(),
 	expiresAt: zod.string().optional(),

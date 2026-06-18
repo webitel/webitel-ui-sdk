@@ -102,47 +102,38 @@ export const getListServicesResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -152,56 +143,44 @@ export const getListServicesResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),
@@ -432,47 +411,38 @@ export const getCreateServiceResponseMock = (
 	]),
 	defaultPriority: faker.helpers.arrayElement([
 		{
-			color: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			color: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			createdAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			createdBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 			description: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -482,56 +452,44 @@ export const getCreateServiceResponseMock = (
 				}),
 				undefined,
 			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			id: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			name: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 		},
 		undefined,
 	]),
@@ -692,47 +650,38 @@ export const getCreateServiceResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -742,56 +691,44 @@ export const getCreateServiceResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),
@@ -1083,47 +1020,38 @@ export const getDeleteServiceResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1133,56 +1061,44 @@ export const getDeleteServiceResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),
@@ -1417,47 +1333,38 @@ export const getLocateServiceResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -1467,56 +1374,44 @@ export const getLocateServiceResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),
@@ -1739,47 +1634,38 @@ export const getUpdateService2ResponseMock = (
 	]),
 	defaultPriority: faker.helpers.arrayElement([
 		{
-			color: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			color: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			createdAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			createdBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 			description: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -1789,56 +1675,44 @@ export const getUpdateService2ResponseMock = (
 				}),
 				undefined,
 			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			id: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			name: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 		},
 		undefined,
 	]),
@@ -1999,47 +1873,38 @@ export const getUpdateService2ResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -2049,56 +1914,44 @@ export const getUpdateService2ResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),
@@ -2380,47 +2233,38 @@ export const getUpdateServiceResponseMock = (
 	]),
 	defaultPriority: faker.helpers.arrayElement([
 		{
-			color: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			color: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			createdAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			createdBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 			description: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -2430,56 +2274,44 @@ export const getUpdateServiceResponseMock = (
 				}),
 				undefined,
 			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({
-					length: {
-						min: 10,
-						max: 20,
-					},
-				}),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
+			id: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
 				},
-				undefined,
-			]),
+			}),
+			name: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedAt: faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+			updatedBy: {
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					undefined,
+				]),
+			},
 		},
 		undefined,
 	]),
@@ -2640,47 +2472,38 @@ export const getUpdateServiceResponseMock = (
 			]),
 			defaultPriority: faker.helpers.arrayElement([
 				{
-					color: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					createdBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					color: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					createdAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					createdBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 					description: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -2690,56 +2513,44 @@ export const getUpdateServiceResponseMock = (
 						}),
 						undefined,
 					]),
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedAt: faker.helpers.arrayElement([
-						faker.string.alpha({
-							length: {
-								min: 10,
-								max: 20,
-							},
-						}),
-						undefined,
-					]),
-					updatedBy: faker.helpers.arrayElement([
-						{
-							id: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
-							name: faker.helpers.arrayElement([
-								faker.string.alpha({
-									length: {
-										min: 10,
-										max: 20,
-									},
-								}),
-								undefined,
-							]),
+					id: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
 						},
-						undefined,
-					]),
+					}),
+					name: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedAt: faker.string.alpha({
+						length: {
+							min: 10,
+							max: 20,
+						},
+					}),
+					updatedBy: {
+						id: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+						name: faker.helpers.arrayElement([
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+							undefined,
+						]),
+					},
 				},
 				undefined,
 			]),

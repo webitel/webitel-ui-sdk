@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type UpdateUser2BodyProfile = {
+export type ApiInputUserProfile = {
 	[key: string]: string;
 };
