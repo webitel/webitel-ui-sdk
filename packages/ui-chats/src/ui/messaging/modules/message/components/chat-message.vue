@@ -193,18 +193,14 @@ function handlePlayerInitialize(player) {
   place-self: flex-start;
 }
 
-.chat-message-text-wrapper {
-  --chat-message-timestamp-spacer-width: 44px;
-}
-
 .chat-message-time {
   margin-top: var(--p-player-chat-message-gap);
 }
 
 .chat-message-text-wrapper .chat-message-time {
   position: absolute;
-  bottom: var(--spacing-xs);
   right: var(--spacing-xs);
+  bottom: var(--chat-message-timestamp-bottom-offset);
   pointer-events: none;
 }
 

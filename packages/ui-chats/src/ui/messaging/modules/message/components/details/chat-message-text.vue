@@ -1,8 +1,12 @@
 <template>
-  <p
-    class="chat-message-text typo-body-1"
-    v-html="text"
-  />
+  <p class="chat-message-text typo-body-1">
+    <span v-html="linkedText" />
+    <span
+      v-if="withTimestampSpacer"
+      class="chat-message-text__timestamp-spacer"
+      aria-hidden="true"
+    />
+  </p>
 </template>
 
 <script
@@ -10,7 +14,7 @@
   lang="ts"
 >
 import Autolinker from 'autolinker';
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
 	text: string;
@@ -25,14 +29,6 @@ const linkedText = computed(() => {
 		sanitizeHtml: true, // DONT FORGET TO SANITIZE, OR USE DOM PURIFY
 		className: 'chat-message-new-text__link',
 	});
-});
-
-const text = computed(() => {
-	if (!props.withTimestampSpacer) return linkedText.value;
-	return (
-		linkedText.value +
-		'<span class="chat-message-text__timestamp-spacer" aria-hidden="true"></span>'
-	);
 });
 </script>
 
@@ -49,8 +45,8 @@ const text = computed(() => {
 
   :deep(.chat-message-text__timestamp-spacer) {
     display: inline-block;
-    width: var(--chat-message-timestamp-spacer-width, 44px);
-    height: 1em;
+    width: var(--chat-message-timestamp-spacer-width);
+    height: var(--chat-message-timestamp-spacer-height);
     vertical-align: bottom;
   }
 }
