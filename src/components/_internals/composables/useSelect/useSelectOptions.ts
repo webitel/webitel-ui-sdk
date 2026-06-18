@@ -110,14 +110,16 @@ export const useSelectOptions = ({
 			search,
 			page,
 		});
+		const matchingCached = search
+			? selectedOptionsCache.value.filter((option) =>
+					getOptionLabel(option).toLowerCase().includes(search.toLowerCase()),
+				)
+			: selectedOptionsCache.value;
 		const baseOptions =
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...(!allowCustomValues.value ? selectedOptionsCache.value : []),
-							...toArray(selected.value).filter(
-								(s) => s != null && typeof s === 'object',
-							),
+							...matchingCached,
 							...items,
 						],
 						dataKey.value,
@@ -146,7 +148,6 @@ export const useSelectOptions = ({
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...(!allowCustomValues.value ? selectedOptionsCache.value : []),
 						...matchingOptions,
 					],
 					dataKey.value,
