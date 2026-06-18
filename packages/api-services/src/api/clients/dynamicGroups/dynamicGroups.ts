@@ -1,50 +1,78 @@
+import {
+	CreateDynamicGroupBody,
+	getDynamicGroups,
+	ListDynamicGroupsQueryParams,
+	UpdateDynamicGroup2Body,
+	UpdateDynamicGroupBody,
+} from '@webitel/api-services/gen';
 import { ContactsGroupType } from '@webitel/api-services/gen/models';
-import { DynamicGroupsApiFactory } from 'webitel-sdk';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
-import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
+	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const dynamicContactGroupsService = DynamicGroupsApiFactory(
-	configuration,
-	'',
-	instance,
+const dynamicGroupFieldsToSend = getShallowFieldsToSendFromZodSchema(
+	UpdateDynamicGroupBody,
 );
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'enabled',
-	'type',
-	'default_group',
-];
+const appendDynamicType = (item: Record<string, unknown>) => ({
+	...item,
+	type: ContactsGroupType.Dynamic,
+});
 
-const addDynamicContactGroup = async ({
-	itemInstance,
-}: {
-	itemInstance: Record<string, unknown>;
-}) => {
-	const item = applyTransform(itemInstance, [
+const getDynamicGroupsList = async (params: Record<string, unknown>) => {
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListDynamicGroupsQueryParams,
+	);
+
+	const { page, size, fields, sort, id, q, name } = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(listFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await dynamicContactGroupsService.createDynamicGroup(item);
+		const response = await getDynamicGroups().listDynamicGroups({
+			page,
+			size,
+			fields,
+			sort,
+			id,
+			q: q || params.search,
+			name,
+		});
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, []),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const getDynamicGroup = async ({ itemId: id }: { itemId: string }) => {
+	const itemResponseHandler = (item: { group: unknown }) => item.group;
+
+	try {
+		const response = await getDynamicGroups().locateDynamicGroup(id, {
+			fields: dynamicGroupFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			(item: Record<string, unknown>) => ({
-				...item,
-				type: ContactsGroupType.Dynamic,
-			}),
+			itemResponseHandler,
+			appendDynamicType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -53,7 +81,34 @@ const addDynamicContactGroup = async ({
 	}
 };
 
-const updateDynamicContactGroup = async ({
+const addDynamicGroup = async ({
+	itemInstance,
+}: {
+	itemInstance: Record<string, unknown>;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		CreateDynamicGroupBody,
+	);
+
+	const item = applyTransform(itemInstance, [
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getDynamicGroups().createDynamicGroup(item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			appendDynamicType,
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const updateDynamicGroup = async ({
 	itemInstance,
 	itemId: id,
 }: {
@@ -61,21 +116,15 @@ const updateDynamicContactGroup = async ({
 	itemId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(dynamicGroupFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await dynamicContactGroupsService.updateDynamicGroup(
-			id,
-			item,
-		);
+		const response = await getDynamicGroups().updateDynamicGroup(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			(item: Record<string, unknown>) => ({
-				...item,
-				type: ContactsGroupType.Dynamic,
-			}),
+			appendDynamicType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -84,7 +133,61 @@ const updateDynamicContactGroup = async ({
 	}
 };
 
+const patchDynamicGroup = async ({
+	changes,
+	itemId: id,
+}: {
+	changes: Record<string, unknown>;
+	itemId: string;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		UpdateDynamicGroup2Body,
+	);
+
+	const item = applyTransform(changes, [
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getDynamicGroups().updateDynamicGroup2(id, item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+			appendDynamicType,
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const deleteDynamicGroup = async ({ id }: { id: string }) => {
+	try {
+		const response = await getDynamicGroups().deleteDynamicGroup(id);
+		return applyTransform(response.data, []);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const getLookup = (params: Record<string, unknown>) =>
+	getDynamicGroupsList({
+		...params,
+		fields: params.fields || [
+			'id',
+			'name',
+		],
+	});
+
 export const DynamicGroupsAPI = {
-	add: addDynamicContactGroup,
-	update: updateDynamicContactGroup,
+	getList: getDynamicGroupsList,
+	get: getDynamicGroup,
+	add: addDynamicGroup,
+	update: updateDynamicGroup,
+	patch: patchDynamicGroup,
+	delete: deleteDynamicGroup,
+	getLookup,
 };

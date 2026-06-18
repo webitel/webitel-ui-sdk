@@ -1,11 +1,13 @@
-import { DynamicConditionsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateConditionBody,
+	getDynamicConditions,
+	ListConditionsQueryParams,
+	UpdateCondition2Body,
+	UpdateConditionBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,64 +17,40 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const dynamicGroupConditionsService = DynamicConditionsApiFactory(
-	configuration,
-	'',
-	instance,
-);
-
-const fieldsToSend = [
-	'assignee',
-	'expression',
-	'group',
-];
+const conditionFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(CreateConditionBody);
 
 const getConditionsList = async ({
 	parentId,
-	...rest
+	...params
 }: {
 	parentId: string;
 	[key: string]: unknown;
 }) => {
-	const listFieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListConditionsQueryParams,
+	);
 
-	const { page, size, fields, sort, id, q } = applyTransform(rest, [
+	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params: Record<string, unknown>) => ({
-			...params,
-			q: params.search,
-		}),
 		sanitize(listFieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await dynamicGroupConditionsService.listConditions(
-			parentId,
+		const response = await getDynamicConditions().listConditions(parentId, {
 			page,
 			size,
 			fields,
 			sort,
 			id,
-			q,
-		);
+			q: q || params.search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				snakeToCamel(),
-			]),
+			items: applyTransform(items, []),
 			next,
 		};
 	} catch (err) {
@@ -86,40 +64,12 @@ const getCondition = async ({ itemId: id }: { itemId: string }) => {
 	const itemResponseHandler = (item: { condition: unknown }) => item.condition;
 
 	try {
-		const response = await dynamicGroupConditionsService.locateCondition(
-			id,
-			fieldsToSend,
-		);
+		const response = await getDynamicConditions().locateCondition(id, {
+			fields: conditionFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
-		]);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-
-const updateCondition = async ({
-	itemInstance,
-	itemId: id,
-}: {
-	itemInstance: Record<string, unknown>;
-	itemId: string;
-}) => {
-	const item = applyTransform(itemInstance, [
-		camelToSnake(),
-		sanitize(fieldsToSend),
-	]);
-
-	try {
-		const response = await dynamicGroupConditionsService.updateCondition(
-			id,
-			item,
-		);
-		return applyTransform(response.data, [
-			snakeToCamel(),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -136,12 +86,12 @@ const addCondition = async ({
 	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(conditionFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await dynamicGroupConditionsService.createCondition(
+		const response = await getDynamicConditions().createCondition(
 			parentId,
 			item,
 		);
@@ -155,23 +105,52 @@ const addCondition = async ({
 	}
 };
 
-const patchCondition = async ({
-	parentId,
-	changes,
+const updateCondition = async ({
+	itemInstance,
+	itemId: id,
 }: {
-	parentId: string;
-	changes: Record<string, unknown>;
+	itemInstance: Record<string, unknown>;
+	itemId: string;
 }) => {
-	const item = applyTransform(changes, [
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateConditionBody);
+
+	const item = applyTransform(itemInstance, [
+		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await dynamicGroupConditionsService.updateCondition2(
-			parentId,
-			item,
-		);
-		return applyTransform(response.data, []);
+		const response = await getDynamicConditions().updateCondition(id, item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const patchCondition = async ({
+	changes,
+	itemId: id,
+}: {
+	changes: Record<string, unknown>;
+	itemId: string;
+}) => {
+	const fieldsToSend =
+		getShallowFieldsToSendFromZodSchema(UpdateCondition2Body);
+
+	const item = applyTransform(changes, [
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getDynamicConditions().updateCondition2(id, item);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -181,7 +160,7 @@ const patchCondition = async ({
 
 const deleteCondition = async ({ id }: { id: string }) => {
 	try {
-		const response = await dynamicGroupConditionsService.deleteCondition(id);
+		const response = await getDynamicConditions().deleteCondition(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -193,8 +172,8 @@ const deleteCondition = async ({ id }: { id: string }) => {
 export const DynamicConditionsAPI = {
 	getList: getConditionsList,
 	get: getCondition,
+	add: addCondition,
 	update: updateCondition,
 	patch: patchCondition,
 	delete: deleteCondition,
-	add: addCondition,
 };

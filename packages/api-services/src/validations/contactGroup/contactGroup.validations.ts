@@ -1,6 +1,10 @@
 import type { ContactsGroup } from '@webitel/api-services/gen/models';
 import { ContactsGroupType } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
+import {
+	lookupSchema,
+	requiredLookupSchema,
+} from '../_shared/lookup.validations';
 import type { ZodShape } from '../types';
 
 const baseSchema = {
@@ -12,20 +16,12 @@ const baseSchema = {
 
 const staticSchema = z.object<ZodShape<ContactsGroup>>({
 	...baseSchema,
-	defaultGroup: z
-		.object({
-			id: z.string().optional(),
-			name: z.string().optional(),
-		})
-		.optional(),
+	defaultGroup: lookupSchema.optional(),
 });
 
 const dynamicSchema = z.object<ZodShape<ContactsGroup>>({
 	...baseSchema,
-	defaultGroup: z.object({
-		id: z.string().min(1),
-		name: z.string().optional(),
-	}),
+	defaultGroup: requiredLookupSchema,
 });
 
 export const contactGroupSchema = z.discriminatedUnion('type', [
