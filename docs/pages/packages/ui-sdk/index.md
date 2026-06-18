@@ -59,7 +59,6 @@
 * [wt-logo](components/wt-logo/Readme.md)
 * [wt-message](components/wt-message/Readme.md)
 * [wt-navigation-bar](components/wt-navigation-bar/Readme.md)
-* [wt-notification](components/wt-notification/Readme.md)
 * [wt-notifications-bar](components/wt-notifications-bar/Readme.md)
 * [wt-page-header](components/wt-page-header/Readme.md)
 * [wt-page-wrapper](components/wt-page-wrapper/Readme.md)

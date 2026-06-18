@@ -21,12 +21,11 @@ const activeEventBus = injectedEventBus ?? defaultEventBus;
 
 const toast = useToast();
 
-function showNotification({ severity, type, detail, text, life, timeout }) {
+function showNotification({ type, text, timeout }) {
 	toast.add({
-		severity: severity ?? TypeToSeverityMap[type] ?? type,
-		detail: detail ?? text,
-		life:
-			life ?? (timeout != null ? timeout * 1000 : DEFAULT_NOTIFICATION_LIFE_MS),
+		severity: TypeToSeverityMap[type],
+		detail: text,
+		life: timeout != null ? timeout * 1000 : DEFAULT_NOTIFICATION_LIFE_MS,
 	});
 }
 
