@@ -1,7 +1,12 @@
 import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
-import { dedupeByKey, isOptionSelected, toArray } from './useSelectUtils';
+import {
+	dedupeByKey,
+	filterOptionsBySearchValue,
+	isOptionSelected,
+	toArray,
+} from './useSelectUtils';
 
 export const useSelectOptions = ({
 	selected,
@@ -62,7 +67,10 @@ export const useSelectOptions = ({
 		// when optionValue is used PrimeVue passes the extracted primitive instead of the full object
 		if (optionValue?.value && typeof option !== 'object') {
 			const foundOption = (
-				filteredOptions.value as Record<string, unknown>[]
+				[
+					...filteredOptions.value,
+					...selectedOptionsCache.value,
+				] as Record<string, unknown>[]
 			).find((o) => o[optionValue.value] === option);
 			return foundOption ? getOptionLabel(foundOption) : String(option);
 		}
@@ -75,6 +83,9 @@ export const useSelectOptions = ({
 		}
 		return option[defaultOptionLabel] || option;
 	};
+
+	const filterBySearch = (opts, value) =>
+		filterOptionsBySearchValue(opts, value, getOptionLabel);
 
 	// Cache of full option objects for currently selected values,
 	// so they can be preserved in filteredOptions after filtering
@@ -111,9 +122,7 @@ export const useSelectOptions = ({
 			page,
 		});
 		const matchingCached = search
-			? selectedOptionsCache.value.filter((option) =>
-					getOptionLabel(option).toLowerCase().includes(search.toLowerCase()),
-				)
+			? filterBySearch(selectedOptionsCache.value, search)
 			: selectedOptionsCache.value;
 		const baseOptions =
 			searchParams.page === 1
@@ -142,9 +151,7 @@ export const useSelectOptions = ({
 	const filterOptions = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
-			const matchingOptions = options.value.filter((option) =>
-				getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
-			);
+			const matchingOptions = filterBySearch(options.value, value);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
@@ -169,7 +176,7 @@ export const useSelectOptions = ({
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...missingSelected,
+						...filterBySearch(missingSelected, filterText.value),
 						...filteredOptions.value,
 					],
 					dataKey.value,
