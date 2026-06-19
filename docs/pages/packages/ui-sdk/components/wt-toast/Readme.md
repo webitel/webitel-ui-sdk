@@ -1,14 +1,9 @@
 <script setup>
-import Specs from './component-specs.vue';
 import ExampleToast from './examples/example-toast.vue';
 import ExamplePrimevueToastMigration from './examples/example-primevue-toast-migration.vue';
 </script>
 
 # `wt-toast.vue`
-
-## Specs
-
-<Specs />
 
 A thin wrapper over [PrimeVue `Toast`](https://primevue.org/toast/) that injects Webitel icons for each severity. All PrimeVue `Toast` props are forwarded via `v-bind="$attrs"` ([full props reference](https://primevue.org/toast/#api.Toast.props)).
 
