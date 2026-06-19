@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
-import { computed, inject } from 'vue';
+import { computed, inject, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
 
 import { EmptyCause } from '../../../enums/index';
 import { isEmpty } from '../../../scripts/index.js';
@@ -14,7 +13,6 @@ export const useTableEmpty = (
 	{ dataList, filters, error, isLoading },
 	overrides = {},
 ) => {
-	const store = useStore();
 	const { t } = useI18n();
 
 	// use computed, so that at locale change, texts will be updated too
@@ -62,17 +60,7 @@ export const useTableEmpty = (
 
 	const merged = computed(() => deepmerge(defaults.value, overrides));
 
-	let darkMode = computed(() => false);
-
-	try {
-		darkMode = inject('darkMode');
-	} catch {
-		try {
-			darkMode = computed(() => store.getters['appearance/DARK_MODE']);
-		} catch {
-			console.warn('"darkMode" value not found, using "false" as default');
-		}
-	}
+	const darkMode = toRef(inject('darkMode'));
 
 	const emptyState = computed(() => {
 		return !isLoading?.value && !error?.value && !dataList?.value?.length;

@@ -659,6 +659,10 @@ const senderVideoMutedIconSizes = {
   padding-bottom: calc(var(--p-player-control-bar-sm-height) + 24px);
 }
 
+.video-call--pip .video-call-receiver--sm.video-call-receiver__fallback-screen {
+  justify-content: center;
+}
+
 .video-call-sender {
   flex: 0 0 auto;
 }

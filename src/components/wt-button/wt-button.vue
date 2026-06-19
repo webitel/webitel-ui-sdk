@@ -53,8 +53,7 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import { computed, inject, ref, useAttrs, watch } from 'vue';
-import { useStore } from 'vuex';
+import { computed, inject, toRef, ref, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
 import WtBadge from '../wt-badge-new/wt-badge.vue';
@@ -111,28 +110,7 @@ const badgeClass = computed(() => ({
 	'wt-badge--absolute': props.badgeAbsolutePosition,
 }));
 
-// @Ler24
-// Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
-let store = null;
-try {
-	store = useStore();
-} catch {
-	store = null;
-}
-
-const injectDarkMode = inject('darkMode');
-
-const darkMode = computed(() => {
-	if (injectDarkMode?.value) {
-		return injectDarkMode.value;
-	}
-
-	if (store?.getters) {
-		return store.getters['appearance/DARK_MODE'] ?? false;
-	}
-
-	return false;
-});
+const darkMode = toRef(inject<boolean>('darkMode'));
 
 /**
  * @author: @Opelsandr Palonnyi
