@@ -16,6 +16,7 @@ export const useSelectDropdown = ({
 }) => {
 	const isDropdownOpen = ref(false);
 	let overlayResizeObserver: ResizeObserver | null = null;
+	let positionRafId: number | null = null;
 
 	const getListContainer = (): HTMLElement | null => {
 		return document.querySelector(`#${selectId.value}_list`)
@@ -54,6 +55,31 @@ export const useSelectDropdown = ({
 			});
 			overlayResizeObserver.observe(overlay);
 		}
+
+		/*
+		  @author @HlukhovYe
+
+			https://webitel.atlassian.net/browse/WTEL-9800
+
+		  ResizeObserver only fires when the element's dimensions change, not when it moves.
+		  A rAF loop detects position changes (e.g. modal resize, parent reflow) and realigns
+		  the overlay accordingly. Cancelled on dropdown hide to avoid leaking frames.
+		*/
+		const triggerEl = selectRef?.value?.$el;
+		if (triggerEl) {
+			let lastTop = triggerEl.getBoundingClientRect().top;
+			let lastLeft = triggerEl.getBoundingClientRect().left;
+			const poll = () => {
+				const rect = triggerEl.getBoundingClientRect();
+				if (rect.top !== lastTop || rect.left !== lastLeft) {
+					lastTop = rect.top;
+					lastLeft = rect.left;
+					selectRef.value?.alignOverlay();
+				}
+				positionRafId = requestAnimationFrame(poll);
+			};
+			positionRafId = requestAnimationFrame(poll);
+		}
 	};
 
 	const onDropdownBeforeHide = () => {
@@ -70,6 +96,10 @@ export const useSelectDropdown = ({
 		isDropdownOpen.value = false;
 		overlayResizeObserver?.disconnect();
 		overlayResizeObserver = null;
+		if (positionRafId !== null) {
+			cancelAnimationFrame(positionRafId);
+			positionRafId = null;
+		}
 		if (searchMethod.value) {
 			/*
 			  @author @HlukhovYe
