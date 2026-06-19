@@ -43,6 +43,9 @@ const linkedText = computed(() => {
     text-decoration: revert;
   }
 
+  /* @author @Oleksandr Palonnyi */
+  /* https://webitel.atlassian.net/browse/WTEL-9588?focusedCommentId=763440 */
+  /* [WTEL-9588](https://webitel.atlassian.net/browse/WTEL-9588) */
   :deep(.chat-message-text__timestamp-spacer) {
     display: inline-block;
     width: var(--chat-message-timestamp-spacer-width);
