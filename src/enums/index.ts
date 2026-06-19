@@ -34,6 +34,7 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
+import { LoginOptions } from './LoginOptions/LoginOptions';
 
 export type {
 	UserSettingsBroadcastMessage,
@@ -74,4 +75,5 @@ export {
 	WtApplication,
 	WtObject,
 	WtTypeExtensionFieldKind,
+	LoginOptions,
 };
