@@ -33,7 +33,6 @@ import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
-import WtNotification from './wt-notification/wt-notification.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPassword from './wt-password/wt-password.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -44,6 +43,7 @@ import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
+import WtToast from './wt-toast/wt-toast.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
 // Async components - heavy or rarely used components
@@ -199,7 +199,6 @@ const Components = {
 	WtPassword,
 	WtIntersectionObserver,
 	WtHint,
-	WtNotification,
 	WtPopup,
 	WtProgressBar,
 	WtRadio,
@@ -211,6 +210,7 @@ const Components = {
 	WtTimeInput,
 	WtTimepicker,
 	WtTextarea,
+	WtToast,
 	WtAppHeader,
 	WtHeadline,
 	WtBreadcrumb,
@@ -308,7 +308,6 @@ export {
 	WtMultiSelect,
 	WtNavigationBar,
 	WtNavigationMenu,
-	WtNotification,
 	WtNotificationsBar,
 	WtPageHeader,
 	WtPageWrapper,
@@ -339,6 +338,7 @@ export {
 	WtTextarea,
 	WtTimeInput,
 	WtTimepicker,
+	WtToast,
 	WtTooltip,
 	WtTree,
 	WtTreeTable,
