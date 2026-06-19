@@ -18,6 +18,7 @@ import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { LoginOptions } from './LoginOptions/LoginOptions';
 import { MessageColor } from './MessageColor/MessageColor';
 import { MessageVariant } from './MessageVariant/MessageVariant';
 import { MimeTypes } from './MimeTypes/MimeTypes.enum';
@@ -34,7 +35,6 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
-import { LoginOptions } from './LoginOptions/LoginOptions';
 
 export type {
 	UserSettingsBroadcastMessage,
@@ -60,6 +60,7 @@ export {
 	FormatDateMode,
 	IconAction,
 	IconColor,
+	LoginOptions,
 	MessageColor,
 	MessageVariant,
 	MimeTypes,
@@ -75,5 +76,4 @@ export {
 	WtApplication,
 	WtObject,
 	WtTypeExtensionFieldKind,
-	LoginOptions,
 };
