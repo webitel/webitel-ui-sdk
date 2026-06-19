@@ -53,7 +53,7 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import { computed, inject, toRef, ref, useAttrs, watch } from 'vue';
+import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
 import WtBadge from '../wt-badge-new/wt-badge.vue';
