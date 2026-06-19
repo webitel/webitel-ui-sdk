@@ -1,5 +1,6 @@
 import { useSelectCustomValues } from './useSelectCustomValues';
 import { useSelectDropdown } from './useSelectDropdown';
+import { useSelectLoader } from './useSelectLoader';
 import { useSelectOptions } from './useSelectOptions';
 
 export const useSelect = ({
@@ -59,6 +60,8 @@ export const useSelect = ({
 		searchHasNext,
 	});
 
+	const { showFooterLoader } = useSelectLoader(isLoading);
+
 	const { onInputKeydown } = useSelectCustomValues({
 		selected,
 		filteredOptions,
@@ -85,6 +88,7 @@ export const useSelect = ({
 
 	return {
 		isLoading,
+		showFooterLoader,
 		isDropdownOpen,
 		filterText,
 		filteredOptions,

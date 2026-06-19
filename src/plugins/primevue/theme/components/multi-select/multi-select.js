@@ -26,6 +26,10 @@ const multiSelect = {
 		.p-multiselect-chip-item {
 			display: flex;
 		}
+
+		.p-multiselect.p-invalid:not(.p-disabled):hover {
+			border-color: ${dt('multiselect.invalidHoverBorderColor')};
+		}
 	`,
 };
 

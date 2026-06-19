@@ -1,14 +1,24 @@
 export const toArray = (value) =>
 	Array.isArray(value)
 		? value
-		: [
-				value,
-			];
+		: value
+			? [
+					value,
+				]
+			: [];
 
+// Handles mixed comparisons: when optionValue is used, selected array contains
+// primitives while filteredOptions contains full objects, so we compare by dataKey
+// against the primitive directly instead of trying to read dataKey from both sides.
 export const isOptionSelected = (option, selectedArray, dataKey) => {
-	return dataKey
-		? selectedArray.some((s) => s != null && s[dataKey] === option[dataKey])
-		: selectedArray.some((s) => s === option);
+	const isObj = (v) => v != null && typeof v === 'object';
+	return selectedArray.some((s) => {
+		if (!dataKey) return s === option;
+		if (isObj(s) && isObj(option)) return s[dataKey] === option[dataKey]; // both objects
+		if (!isObj(s) && isObj(option)) return s === option[dataKey]; // s is primitive (optionValue)
+		if (isObj(s) && !isObj(option)) return s[dataKey] === option; // option is primitive
+		return s === option; // both primitives
+	});
 };
 
 export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
@@ -29,4 +39,10 @@ export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
 	return [
 		...seen.values(),
 	];
+};
+
+export const filterOptionsBySearchValue = (options, value, getOptionLabel) => {
+	return options.filter((option) =>
+		getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
+	);
 };

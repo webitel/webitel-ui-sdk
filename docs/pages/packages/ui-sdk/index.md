@@ -71,7 +71,6 @@
 * [wt-radio](components/wt-radio/Readme.md)
 * [wt-rounded-action](components/wt-rounded-action/Readme.md)
 * [wt-search-bar](components/wt-search-bar/Readme.md)
-* [wt-select](components/wt-select/Readme.md)
 * [wt-slider](components/wt-slider/Readme.md)
 * [wt-status-select](components/wt-status-select/Readme.md)
 * [wt-stepper](components/wt-stepper/Readme.md)

@@ -1,0 +1,1 @@
+export { createObjectPermissionsStoreModule } from './store';

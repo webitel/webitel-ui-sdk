@@ -1,15 +1,15 @@
 <template>
   <form class="dynamic-filter-config-form">
-    <wt-select
-      :clearable="false"
+    <wt-single-select
+      :show-clear="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
       :options="filterConfigOptions"
       option-label="label"
-      :value="filterName"
-      track-by="name"
-      use-value-from-options-by-prop="name"
-      @input="onFilterNameUpdate($event)"
+      :model-value="filterName"
+      data-key="name"
+      option-value="name"
+      @update:model-value="onFilterNameUpdate($event)"
     />
 
     <slot
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { WtButton, WtSelect } from '@webitel/ui-sdk/components';
+import { WtButton, WtSingleSelect } from '@webitel/ui-sdk/components';
 import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';

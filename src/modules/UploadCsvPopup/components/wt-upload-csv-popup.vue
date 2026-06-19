@@ -26,9 +26,9 @@
         />
 
         <form class="wt-upload-csv-popup-form__form">
-          <wt-select
-            v-model="charset"
-            :clearable="false"
+          <wt-single-select
+            v-model:model-value="charset"
+            :show-clear="false"
             :label="t('objects.CSV.charSet')"
             :options="charsetOptions"
             disabled
@@ -83,18 +83,18 @@
               {{ t(field.locale) }}<span v-if="field.required">*</span>
             </p>
 
-            <wt-select
+            <wt-single-select
               v-if="!field.multiple"
-              v-model="field.csv"
-              :clearable="!field.required"
+              v-model:model-value="field.csv"
+              :show-clear="!field.required"
               :options="csvColumns"
               :placeholder="t(field.locale)"
-              :track-by="null"
+              :data-key="null"
               class="wt-upload-csv-popup-mapping-item__select"
             />
-            <wt-tags-input
+            <wt-multi-select
               v-else
-              v-model="field.csv"
+              v-model:model-value="field.csv"
               :options="csvColumns"
               :placeholder="t(field.locale)"
               class="wt-upload-csv-popup-mapping-item__select"

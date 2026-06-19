@@ -1,4 +1,4 @@
-export const QueueType = Object.freeze({
+export const QueueType = {
 	OFFLINE_QUEUE: 0,
 	INBOUND_QUEUE: 1,
 	OUTBOUND_IVR_QUEUE: 2,
@@ -8,7 +8,10 @@ export const QueueType = Object.freeze({
 	CHAT_INBOUND_QUEUE: 6,
 	INBOUND_JOB_QUEUE: 7,
 	OUTBOUND_JOB_QUEUE: 8,
-});
+	IM_CHAT_QUEUE: 9,
+} as const;
+
+export type QueueType = (typeof QueueType)[keyof typeof QueueType];
 
 export const QueueTypeName = {
 	OFFLINE_QUEUE: 'offline',
@@ -21,7 +24,8 @@ export const QueueTypeName = {
 	INBOUND_JOB_QUEUE: 'task',
 	OUTBOUND_JOB_QUEUE: 'outbound_task',
 	OUTBOUND_CALL: 'outbound_call',
+	IM_CHAT_QUEUE: 'im_chat',
 	NOT_IMPLEMENT: 'NOT_IMPLEMENT',
-};
+} as const;
 
 export type QueueTypeName = (typeof QueueTypeName)[keyof typeof QueueTypeName];

@@ -15,12 +15,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import { ContactsSearchMode } from './enums/ContactsSearchMode';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const contactService = ContactsApiFactory(configuration, '', instance);
+
+const baseUrl = '/contacts';
 
 const formatAccessMode = (item) => ({
 	...item,
@@ -447,4 +450,6 @@ export const ContactsAPI = {
 	update,
 	delete: deleteContact,
 	getLookup: getContactsLookup,
+
+	...generatePermissionsApi(baseUrl),
 };

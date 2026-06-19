@@ -21,27 +21,49 @@
       :invalid="invalid"
       :id="selectId"
       :show-clear="showClear"
+      :focus-on-hover="false"
+      :auto-option-focus="true"
       :disabled="disabled"
       :placeholder="placeholder || label"
       :option-disabled="() => disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
-      :loading="isLoading"
       :max-selected-labels="MAX_SELECTED_LABELS"
       :selectedItemsLabel="`${model.length} ${t('webitelUI.select.selectedItemsLabel')}`"
       :data-key="dataKey"
+      :pt="{
+        label: {
+          class: 'typo-body-1',
+        },
+        listContainer: {
+          class: 'wt-scrollbar',
+        }
+      }"
       v-bind="$attrs"
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
       @hide="onDropdownHide"
     >
+      <template v-if="!chipsView" #value="{ value, placeholder }">
+        <span v-if="value && value.length">
+          <template v-if="value.length > MAX_SELECTED_LABELS">
+            {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
+          </template>
+          <template v-else>
+            {{ value.map((v) => getOptionLabel(v)).join(', ') }}
+          </template>
+        </span>
+        <span v-else class="p-placeholder">{{ placeholder }}</span>
+      </template>
       <template #header>
         <wt-input-text
           v-if="filterable"
           ref="filterInput"
+          class="wt-multi-select__input"
           :model-value="filterText"
+          :size="ComponentSize.SM"
           @update:model-value="filterOptions($event)"
           @keydown.enter.stop="onInputKeydown"
         >
@@ -86,6 +108,11 @@
         > 
           {{ getOptionLabel(value) }}
         </wt-chip>
+      </template>
+      <template #footer v-if="showFooterLoader">
+        <div class="wt-multi-select__footer">
+          <wt-loader :size="ComponentSize.SM" />
+        </div>
       </template>
     </p-multi-select>
     <wt-message
@@ -185,7 +212,7 @@ const emit = defineEmits<{
 }>();
 
 const {
-	isLoading,
+	showFooterLoader,
 	isDropdownOpen,
 	filterText,
 	filteredOptions,
@@ -250,5 +277,21 @@ onMounted(() => {
 
 .wt-multi-select__option-checkbox {
   pointer-events: none;
+}
+
+.wt-multi-select__input {
+  padding: var(--spacing-xs);
+}
+
+.wt-multi-select__footer {
+  position: absolute;
+  width: calc(100% - var(--scrollbar-width));
+  transform: translateY(-100%);
+  background: var(--p-multiselect-overlay-background);
+  border-bottom-left-radius: var(--p-multiselect-overlay-border-radius);
+  border-bottom-right-radius: var(--p-multiselect-overlay-border-radius);
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-xs) 0;
 }
 </style>

@@ -10,10 +10,10 @@
       <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="model"/>
     </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
-      <wt-select
+      <wt-single-select
         v-bind="defaultProps"
         :v="v$.model"
-        :value="
+        :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
@@ -21,15 +21,15 @@
           (...params) => props.filterConfig.searchRecords(...params)
         "
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
-        use-value-from-options-by-prop="id"
-        @input="model = $event"
+        option-value="id"
+        @update:model-value="model = $event"
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
-      <wt-select
+      <wt-single-select
         v-bind="defaultProps"
         :v="v$.model"
-        :value="
+        :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
@@ -38,8 +38,8 @@
         "
 
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */""
-        use-value-from-options-by-prop="id"
-        @input="model = $event"
+        option-value="id"
+        @update:model-value="model = $event"
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
@@ -52,7 +52,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import {
-	WtSelect,
+	WtSingleSelect,
 	WtTypeExtensionValueInput,
 } from '@webitel/ui-sdk/components';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation

@@ -1,21 +1,20 @@
 <template>
-  <wt-select
+  <wt-multi-select
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
     :v="!disableValidation && v$?.model"
-    :value="model"
-    multiple
+    :model-value="model"
     option-label="label"
-    track-by="label"
+    data-key="label"
     v-bind="$attrs"
-    @input="handleInput"
+    @update:model-value="handleInput"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
