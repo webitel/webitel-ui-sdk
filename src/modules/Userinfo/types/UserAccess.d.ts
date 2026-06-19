@@ -9,13 +9,13 @@ import type {
 	WtApplication,
 	WtObject,
 } from '../../../../enums';
+import type { ApplicationsAccessSchema } from '../classes/ApplicationsAccess';
 import type {
 	CrudGlobalAction,
 	ScopeClass,
 	SpecialGlobalAction,
 	WebitelLicense,
 } from '../enums';
-import type { ApplicationsAccessSchema } from '../classes/ApplicationsAccess';
 
 /**
  * @description

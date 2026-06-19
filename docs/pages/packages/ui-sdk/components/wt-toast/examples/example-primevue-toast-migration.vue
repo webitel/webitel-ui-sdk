@@ -22,6 +22,11 @@ const showWtLike = (type) => {
 			summary: 'Warning',
 			detail: 'Please review this warning',
 		},
+		error: {
+			severity: 'error',
+			summary: 'Error',
+			detail: 'Some error occurred',
+		},
 		contrast: {
 			severity: 'contrast',
 			summary: 'Contrast',

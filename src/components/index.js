@@ -33,7 +33,6 @@ import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
-import WtNotification from './wt-notification/wt-notification.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPassword from './wt-password/wt-password.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -203,7 +202,6 @@ const Components = {
 	WtPassword,
 	WtIntersectionObserver,
 	WtHint,
-	WtNotification,
 	WtPopup,
 	WtProgressBar,
 	WtRadio,
@@ -314,7 +312,6 @@ export {
 	WtMultiSelect,
 	WtNavigationBar,
 	WtNavigationMenu,
-	WtNotification,
 	WtNotificationsBar,
 	WtPageHeader,
 	WtPageWrapper,

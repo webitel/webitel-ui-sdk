@@ -4,10 +4,6 @@ import ExampleNotificationsBar from './examples/example-notifications-bar.vue';
 
 # WtNotificationsBar
 
-## Code
-
-&lt;wt-notifications-bar&gt;&lt;/wt-notifications-bar&gt;
-
 ## Specification
 
 Notification bar listens to <b>eventBus 'notification' event</b> and represents sent

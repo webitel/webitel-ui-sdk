@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize, IconColor, MessageColor } from '../../enums';
+import { ComponentSize, MessageColor } from '../../enums';
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 defineOptions({
@@ -42,3 +42,12 @@ const severityToIconColorMap: Record<string, string> = {
 	secondary: MessageColor.SECONDARY,
 };
 </script>
+
+<style>
+.p-toast-close-button:hover {
+  background: transparent;
+}
+.p-toast-close-button:focus-visible {
+  outline: none;
+}
+</style>
