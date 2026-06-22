@@ -66,6 +66,7 @@ export const useSelect = ({
 		selected,
 		filteredOptions,
 		options,
+		optionValue,
 		dataKey,
 		filterText,
 		filterOptions,

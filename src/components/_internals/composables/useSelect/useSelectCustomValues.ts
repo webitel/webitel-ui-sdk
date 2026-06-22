@@ -5,6 +5,7 @@ export const useSelectCustomValues = ({
 	selected,
 	filteredOptions,
 	options,
+	optionValue,
 	dataKey,
 	filterText,
 	filterOptions,
@@ -27,9 +28,9 @@ export const useSelectCustomValues = ({
 				]),
 			);
 		}
-		if (dataKey.value) {
+		if (optionValue.value) {
 			return {
-				[dataKey.value]: text,
+				[optionValue.value]: text,
 			};
 		}
 		return text;
