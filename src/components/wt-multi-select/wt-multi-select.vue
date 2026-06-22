@@ -69,7 +69,7 @@
         >
           <template #suffix>
             <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
-            <wt-icon icon="search" />
+            <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>
       </template>
@@ -103,7 +103,7 @@
       <template #chip="{ value, removeCallback }">
         <wt-chip
           removable
-          :color="ChipColor.SECONDARY"
+          :color="ChipColor.MAIN"
           @remove="removeCallback($event)"
         > 
           {{ getOptionLabel(value) }}
