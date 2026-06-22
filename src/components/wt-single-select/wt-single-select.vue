@@ -50,7 +50,7 @@
         >
           <template #suffix>
             <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
-            <wt-icon icon="search" />
+            <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>
       </template>
