@@ -40,7 +40,7 @@ import WtPopup from './wt-popup/wt-popup.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
-import WtSectionCard from './wt-section-card/wt-section-card.vue';
+import WtCard from './wt-card/wt-card.vue';
 import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
@@ -251,7 +251,7 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
-	WtSectionCard,
+	WtCard,
 	WtSingleSelect,
 	WtMultiSelect,
 	WtScreenRecordingsAction,
@@ -325,7 +325,7 @@ export {
 	WtRoundedAction,
 	WtScreenRecordingsAction,
 	WtSearchBar,
-	WtSectionCard,
+	WtCard,
 	WtSelect,
 	WtSelectionPopup,
 	WtSendMessagePopup,

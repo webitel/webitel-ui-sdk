@@ -1,0 +1,4 @@
+:root {
+	--wt-card-border-radius: var(--p-content-border-radius);
+	--wt-card-padding: var(--spacing-sm);
+}
