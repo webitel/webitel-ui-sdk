@@ -68,7 +68,7 @@
           @keydown.enter.stop="onInputKeydown"
         >
           <template #suffix>
-            <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
+            <wt-icon v-if="allowCustomValues && filterText" disabled icon="select-custom-value-enter" />
             <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>

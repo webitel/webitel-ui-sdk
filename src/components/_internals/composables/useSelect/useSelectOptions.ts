@@ -151,10 +151,12 @@ export const useSelectOptions = ({
 	const filterOptions = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
+			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
 			const matchingOptions = filterBySearch(options.value, value);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
+						...matchingCached,
 						...matchingOptions,
 					],
 					dataKey.value,
