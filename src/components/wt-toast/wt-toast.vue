@@ -25,7 +25,6 @@ import { ComponentSize, MessageColor } from '../../enums';
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 const attrs = useAttrs();
-console.log(attrs, ' attrs');
 
 defineOptions({
 	name: 'WtToast',
