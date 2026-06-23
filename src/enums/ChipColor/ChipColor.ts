@@ -1,6 +1,7 @@
 export const ChipColor = {
 	MAIN: 'main',
 	PRIMARY: 'primary',
+	ON_PRIMARY: 'on-primary',
 	SECONDARY: 'secondary',
 	SUCCESS: 'success',
 	WARNING: 'warning',
