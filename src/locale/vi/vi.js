@@ -862,4 +862,9 @@ export default {
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
 	},
+	connectionQuality: {
+		high: 'Chất lượng mạng tuyệt vời.',
+		medium: 'Có thể có độ trễ, vui lòng kiểm tra mạng.',
+		low: 'Chất lượng mạng kém, vui lòng kiểm tra mạng.',
+	},
 };
