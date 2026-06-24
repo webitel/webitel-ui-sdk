@@ -859,4 +859,9 @@ export default {
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
 	},
+	connectionQuality: {
+		high: 'Doskonała jakość sieci.',
+		medium: 'Możliwe opóźnienia, sprawdź sieć.',
+		low: 'Słaba jakość sieci, sprawdź sieć.',
+	},
 };

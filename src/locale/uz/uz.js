@@ -863,4 +863,9 @@ export default {
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
 	},
+	connectionQuality: {
+		high: "A'lo tarmoq sifati.",
+		medium: "Kechikishlar bo'lishi mumkin, tarmoqni tekshiring.",
+		low: 'Tarmoq sifati past, tarmoqni tekshiring.',
+	},
 };

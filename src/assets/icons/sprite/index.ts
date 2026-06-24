@@ -241,6 +241,9 @@ import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
 import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsSignalHigh from './ws-signal-high.svg?raw';
+import wsSignalLow from './ws-signal-low.svg?raw';
+import wsSignalMedium from './ws-signal-medium.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
 
@@ -453,6 +456,10 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsSignalHigh,
+	wsSignalMedium,
+	wsSignalLow,
 
 	portal,
 

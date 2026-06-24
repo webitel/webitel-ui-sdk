@@ -873,6 +873,11 @@ export default deepmerge(
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
 		},
+		connectionQuality: {
+			high: 'Excellent network quality.',
+			medium: 'There might be some delay, please check your network.',
+			low: 'Network quality is poor, please check your network.',
+		},
 	},
 	notTranslatable,
 );
