@@ -39,7 +39,6 @@ import WtPopup from './wt-popup/wt-popup.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
-import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
@@ -203,7 +202,6 @@ const Components = {
 	WtProgressBar,
 	WtRadio,
 	WtSearchBar,
-	WtSelect,
 	WtSlider,
 	WtSwitcher,
 	WtTabs,
@@ -322,7 +320,6 @@ export {
 	WtRoundedAction,
 	WtScreenRecordingsAction,
 	WtSearchBar,
-	WtSelect,
 	WtSelectionPopup,
 	WtSendMessagePopup,
 	WtSingleSelect,

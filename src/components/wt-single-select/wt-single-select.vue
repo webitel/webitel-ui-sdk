@@ -27,6 +27,7 @@
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
       :data-key="dataKey"
+      :size="primevueSizeMap[size]"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -115,6 +116,7 @@ interface Props extends SelectProps {
 	placeholder?: string;
 	required?: boolean;
 	disabled?: boolean;
+	size?: string | null;
 	/**
 	 * true disables all options but keeps dropdown visible
 	 */
@@ -157,6 +159,11 @@ const props = withDefaults(defineProps<Props>(), {
 	labelProps: () => ({}),
 	customValidators: () => [],
 });
+
+const primevueSizeMap = {
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.LG]: 'large',
+};
 
 const model = defineModel<string>({
 	default: '',

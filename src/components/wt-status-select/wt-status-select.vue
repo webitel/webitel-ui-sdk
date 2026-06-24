@@ -1,17 +1,18 @@
 <template>
-  <wt-select
-    :clearable="false"
+  <wt-single-select
+    :show-clear="false"
     :options="availableOptions"
-    :searchable="false"
-    :value="selectedOption"
+    :filterable="false"
+    :model-value="selectedOption"
     class="wt-status-select"
-    track-by="value"
+    data-key="value"
+		:size="ComponentSize.SM"
     @closed="closedHandler"
-    @input="inputHandler"
+    @update:model-value="inputHandler"
   >
-    <template #singleLabel="{ option }">
+    <template #value="{ value }">
       <wt-indicator
-        :color="option.color"
+        :color="value.color"
         :text="duration"
       />
     </template>
@@ -21,151 +22,91 @@
         :text="option.text"
       />
     </template>
-  </wt-select>
+  </wt-single-select>
 </template>
 
-<script>
-import AgentStatus from '../../enums/AgentStatus/AgentStatus.enum.js';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { AgentStatus, ComponentSize } from '../../enums';
 import convertDuration from '../../scripts/convertDuration.js';
 import StatusOptions from './_internals/StatusOptions.lookup.js';
 
-export default {
-	name: 'WtStatusSelect',
-	model: {
-		prop: 'status',
-		event: 'change',
-	},
-	/**
-	 * @emits {string} change - Fires when status changes. Emits changed status value
-	 * @emits {Event} closed - Fires when dropdown is closed
-	 */
-	props: {
-		/**
-		 * Component is looking for value from AgentStatus enum
-		 * @type {string}
-		 * @default AgentStatus.OFFLINE
-		 */
-		status: {
-			type: String,
-			default: AgentStatus.OFFLINE,
-		},
-		/**
-		 * If seconds number, converts to hh:mm:ss format
-		 * @type {string | number}
-		 * @default 0
-		 */
-		statusDuration: {
-			type: [
-				String,
-				Number,
-			],
-			default: 0,
-		},
-		/**
-		 * If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"
-		 * @type {Array}
-		 */
-		options: {
-			type: Array,
-		},
-		// size: {
-		//   type: String,
-		//   default: 'md',
-		//   options: ['sm', 'md'],
-		// },
-	},
-	emits: [
-		'change',
-		'closed',
-	],
-	computed: {
-		selectedOption() {
-			return this.statusOptions.find((option) => option.value === this.status);
-		},
-		statusOptions() {
-			return this.options
-				? this.options
-				: StatusOptions.map((opt) => ({
-						...opt,
-						text: this.$t(opt.locale),
-					}));
-		},
-		availableOptions() {
-			return this.statusOptions.reduce((options, opt) => {
-				// PAUSE option is always passed
-				if (
-					(this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
-					opt.value === AgentStatus.BREAK_OUT
-				) {
-					// skip breakout option
-					return options;
-				}
-				options.push(opt);
-				return options;
-			}, []);
-		},
-		duration() {
-			/* The check commented below limits the display of time in the status to 8 characters.
-      Accordingly, if the agent is in the status of 100 hours (100: 00: 00),
-      then this time will be displayed as NaN:NaN:NaN */
+interface StatusOption {
+	color: string;
+	text: string;
+	value: string;
+	locale?: string;
+}
 
-			// if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
-			if (typeof this.statusDuration === 'string') return this.statusDuration;
-			if (this.statusDuration !== undefined) {
-				return convertDuration(this.statusDuration);
-			}
-			return this.selectedOption.text;
-		},
+const props = withDefaults(
+	defineProps<{
+		status?: string;
+		statusDuration?: string | number;
+		options?: StatusOption[];
+	}>(),
+	{
+		status: AgentStatus.OFFLINE,
+		statusDuration: 0,
 	},
-	methods: {
-		inputHandler(value) {
-			this.$emit('change', value.value);
-		},
-		closedHandler(event) {
-			this.$emit('closed', event);
-		},
-	},
-};
+);
+
+const emit = defineEmits<{
+	change: [
+		value: string,
+	];
+	closed: [
+		event: Event,
+	];
+}>();
+
+const { t } = useI18n();
+
+const statusOptions = computed<StatusOption[]>(() =>
+	props.options
+		? props.options
+		: StatusOptions.map((opt) => ({
+				...opt,
+				text: t(opt.locale),
+			})),
+);
+
+const selectedOption = computed<StatusOption | undefined>(() =>
+	statusOptions.value.find((option) => option.value === props.status),
+);
+
+const availableOptions = computed<StatusOption[]>(() =>
+	statusOptions.value.reduce<StatusOption[]>((options, opt) => {
+		// PAUSE option is always passed
+		if (
+			(props.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
+			opt.value === AgentStatus.BREAK_OUT
+		) {
+			// skip breakout option
+			return options;
+		}
+		options.push(opt);
+		return options;
+	}, []),
+);
+
+const duration = computed<string>(() => {
+	/* The check commented below limits the display of time in the status to 8 characters.
+  Accordingly, if the agent is in the status of 100 hours (100: 00: 00),
+  then this time will be displayed as NaN:NaN:NaN */
+
+	// if (typeof props.statusDuration === 'string' && props.statusDuration.length === 8) return props.statusDuration;
+	if (typeof props.statusDuration === 'string') return props.statusDuration;
+	if (props.statusDuration !== undefined)
+		return convertDuration(props.statusDuration);
+	return selectedOption.value?.text ?? '';
+});
+
+function inputHandler(value: StatusOption) {
+	emit('change', value.value);
+}
+
+function closedHandler(event: Event) {
+	emit('closed', event);
+}
 </script>
-
-<style scoped>
-.wt-status-select.wt-select {
-  box-shadow: var(--elevation-5);
-}
-
-.wt-status-select.wt-select :deep(.multiselect) {
-  min-height: 0;
-}
-
-.wt-status-select.wt-select :deep(.multiselect__tags) {
-  border: none;
-  background: var(--wt-status-select-background-color);
-  padding: var(--wt-status-select-padding);
-  min-height: 0;
-}
-
-.wt-status-select.wt-select :deep(.multiselect__select) {
-  top: 0;
-  right: 0;
-}
-
-.wt-status-select.wt-select :deep(.multiselect__content-wrapper) {
-  border: none;
-  background: transparent;
-}
-
-.wt-status-select.wt-select :deep(.multiselect__option) {
-  background: var(--wt-status-select-option-background-color);
-  padding: 0;
-  min-height: 0;
-  color: var(--wt-status-select-option-text-color);
-}
-
-.wt-status-select.wt-select :deep(.multiselect__option--highlight) {
-  background: var(--wt-status-select-option-background-hover-color);
-}
-
-.wt-status-select.wt-select :deep(.multiselect__option--selected) {
-  /* background: var(--wt-status-select-option-background-selected-color); */
-}
-</style>
