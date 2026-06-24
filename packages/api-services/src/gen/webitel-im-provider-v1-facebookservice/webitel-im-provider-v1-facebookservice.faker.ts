@@ -8,7 +8,11 @@ import { faker } from '@faker-js/faker';
 import type {
 	WebitelImProviderV1ProviderCreateFacebookGateResponse,
 	WebitelImProviderV1ProviderDeleteFacebookGateResponse,
+	WebitelImProviderV1ProviderDeleteGetStartedResponse,
+	WebitelImProviderV1ProviderDeletePersistentMenuResponse,
 	WebitelImProviderV1ProviderGetFacebookGateResponse,
+	WebitelImProviderV1ProviderSetGetStartedResponse,
+	WebitelImProviderV1ProviderSetPersistentMenuResponse,
 	WebitelImProviderV1ProviderUpdateFacebookGateResponse,
 } from '../_models';
 import { WebitelImProviderV1ProviderStatus } from '../_models';
@@ -98,6 +102,18 @@ export const getFacebookServiceCreateFacebookGateResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getFacebookServiceDeleteGetStartedResponseMock =
+	(): WebitelImProviderV1ProviderDeleteGetStartedResponse => ({});
+
+export const getFacebookServiceSetGetStartedResponseMock =
+	(): WebitelImProviderV1ProviderSetGetStartedResponse => ({});
+
+export const getFacebookServiceDeletePersistentMenuResponseMock =
+	(): WebitelImProviderV1ProviderDeletePersistentMenuResponse => ({});
+
+export const getFacebookServiceSetPersistentMenuResponseMock =
+	(): WebitelImProviderV1ProviderSetPersistentMenuResponse => ({});
 
 export const getFacebookServiceDeleteFacebookGateResponseMock = (
 	overrideResponse: Partial<

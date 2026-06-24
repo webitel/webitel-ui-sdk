@@ -543,6 +543,27 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 							})
 							.optional()
 							.describe('Sender user aggregated information.'),
+						system: zod
+							.object({
+								messageId: zod
+									.string()
+									.optional()
+									.describe(
+										'ID of message for which system messages is binded.',
+									),
+								metadata: zod
+									.looseObject({})
+									.optional()
+									.describe(
+										'Represents additional metadata binded into system  message.',
+									),
+								type: zod
+									.string()
+									.optional()
+									.describe('Represents type of the message.'),
+							})
+							.optional()
+							.describe('System message content.'),
 						threadId: zod
 							.string()
 							.optional()
@@ -1109,6 +1130,27 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 							})
 							.optional()
 							.describe('Sender user aggregated information.'),
+						system: zod
+							.object({
+								messageId: zod
+									.string()
+									.optional()
+									.describe(
+										'ID of message for which system messages is binded.',
+									),
+								metadata: zod
+									.looseObject({})
+									.optional()
+									.describe(
+										'Represents additional metadata binded into system  message.',
+									),
+								type: zod
+									.string()
+									.optional()
+									.describe('Represents type of the message.'),
+							})
+							.optional()
+							.describe('System message content.'),
 						threadId: zod
 							.string()
 							.optional()

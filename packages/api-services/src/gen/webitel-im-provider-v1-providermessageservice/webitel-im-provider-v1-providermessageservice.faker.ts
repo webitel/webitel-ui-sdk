@@ -60,6 +60,32 @@ export const getProviderMessageServiceSendImageResponseMock = (
 	...overrideResponse,
 });
 
+export const getProviderMessageServiceSendInteractiveResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
+	> = {},
+): WebitelImProviderV1ProviderSendMessageResponse => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	externalId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getProviderMessageServiceSendTextResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>

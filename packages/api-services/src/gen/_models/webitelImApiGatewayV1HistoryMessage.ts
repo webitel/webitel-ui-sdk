@@ -10,6 +10,7 @@ import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
 import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive';
 import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact';
 import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation';
+import type { WebitelImApiGatewayV1System } from './webitelImApiGatewayV1System';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 /**
@@ -39,6 +40,8 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
 	/** Sender user aggregated information. */
 	sender?: WebitelImApiGatewayV1ThreadMember;
+	/** System message content. */
+	system?: WebitelImApiGatewayV1System;
 	/** Identifier of the thread the message belongs to. */
 	threadId?: string;
 	/** Message type identifier. */

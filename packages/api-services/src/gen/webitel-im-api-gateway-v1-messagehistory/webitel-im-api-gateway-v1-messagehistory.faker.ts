@@ -863,6 +863,33 @@ export const getMessageHistorySearchLeftThreadsMessagesHistoryResponseMock = (
 				},
 				undefined,
 			]),
+			system: faker.helpers.arrayElement([
+				{
+					messageId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{},
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			threadId: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -1760,6 +1787,33 @@ export const getMessageHistorySearchThreadMessagesHistoryResponseMock = (
 						faker.helpers.arrayElement(
 							Object.values(WebitelImApiGatewayV1ThreadRole),
 						),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			system: faker.helpers.arrayElement([
+				{
+					messageId: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					metadata: faker.helpers.arrayElement([
+						{},
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
 						undefined,
 					]),
 				},

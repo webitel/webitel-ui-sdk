@@ -10,7 +10,11 @@ import { HttpResponse, http } from 'msw';
 import type {
 	WebitelImProviderV1ProviderCreateFacebookGateResponse,
 	WebitelImProviderV1ProviderDeleteFacebookGateResponse,
+	WebitelImProviderV1ProviderDeleteGetStartedResponse,
+	WebitelImProviderV1ProviderDeletePersistentMenuResponse,
 	WebitelImProviderV1ProviderGetFacebookGateResponse,
+	WebitelImProviderV1ProviderSetGetStartedResponse,
+	WebitelImProviderV1ProviderSetPersistentMenuResponse,
 	WebitelImProviderV1ProviderUpdateFacebookGateResponse,
 } from '../_models';
 import { WebitelImProviderV1ProviderStatus } from '../_models';
@@ -100,6 +104,18 @@ export const getFacebookServiceCreateFacebookGateResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getFacebookServiceDeleteGetStartedResponseMock =
+	(): WebitelImProviderV1ProviderDeleteGetStartedResponse => ({});
+
+export const getFacebookServiceSetGetStartedResponseMock =
+	(): WebitelImProviderV1ProviderSetGetStartedResponse => ({});
+
+export const getFacebookServiceDeletePersistentMenuResponseMock =
+	(): WebitelImProviderV1ProviderDeletePersistentMenuResponse => ({});
+
+export const getFacebookServiceSetPersistentMenuResponseMock =
+	(): WebitelImProviderV1ProviderSetPersistentMenuResponse => ({});
 
 export const getFacebookServiceDeleteFacebookGateResponseMock = (
 	overrideResponse: Partial<
@@ -387,6 +403,118 @@ export const getFacebookServiceCreateFacebookGateMockHandler = (
 	);
 };
 
+export const getFacebookServiceDeleteGetStartedMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderDeleteGetStartedResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderDeleteGetStartedResponse>
+				| WebitelImProviderV1ProviderDeleteGetStartedResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/im/gates/facebook/:gateId1/get-started',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFacebookServiceDeleteGetStartedResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getFacebookServiceSetGetStartedMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSetGetStartedResponse
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSetGetStartedResponse>
+				| WebitelImProviderV1ProviderSetGetStartedResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/im/gates/facebook/:gateId1/get-started',
+		async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFacebookServiceSetGetStartedResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getFacebookServiceDeletePersistentMenuMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderDeletePersistentMenuResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderDeletePersistentMenuResponse>
+				| WebitelImProviderV1ProviderDeletePersistentMenuResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/im/gates/facebook/:gateId1/menu',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFacebookServiceDeletePersistentMenuResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getFacebookServiceSetPersistentMenuMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSetPersistentMenuResponse
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSetPersistentMenuResponse>
+				| WebitelImProviderV1ProviderSetPersistentMenuResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/im/gates/facebook/:gateId1/menu',
+		async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFacebookServiceSetPersistentMenuResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getFacebookServiceDeleteFacebookGateMockHandler = (
 	overrideResponse?:
 		| WebitelImProviderV1ProviderDeleteFacebookGateResponse
@@ -472,6 +600,10 @@ export const getFacebookServiceUpdateFacebookGateMockHandler = (
 };
 export const getWebitelImProviderV1FacebookserviceMock = () => [
 	getFacebookServiceCreateFacebookGateMockHandler(),
+	getFacebookServiceDeleteGetStartedMockHandler(),
+	getFacebookServiceSetGetStartedMockHandler(),
+	getFacebookServiceDeletePersistentMenuMockHandler(),
+	getFacebookServiceSetPersistentMenuMockHandler(),
 	getFacebookServiceDeleteFacebookGateMockHandler(),
 	getFacebookServiceGetFacebookGateMockHandler(),
 	getFacebookServiceUpdateFacebookGateMockHandler(),

@@ -11,6 +11,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	WebitelImProviderV1ProviderSendDocumentRequest,
 	WebitelImProviderV1ProviderSendImageRequest,
+	WebitelImProviderV1ProviderSendInteractiveRequest,
 	WebitelImProviderV1ProviderSendMessageResponse,
 	WebitelImProviderV1ProviderSendTextRequest,
 } from '../_models';
@@ -54,6 +55,21 @@ export const // --- title start
 				);
 			};
 			/**
+			 * @summary SendInteractive delivers a message with interactive UI elements (buttons, menus).
+			 */
+			const providerMessageServiceSendInteractive = (
+				webitelImProviderV1ProviderSendInteractiveRequest: WebitelImProviderV1ProviderSendInteractiveRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>
+			> => {
+				return axiosInstance.post(
+					`/im/provider/send/interactive`,
+					webitelImProviderV1ProviderSendInteractiveRequest,
+					options,
+				);
+			};
+			/**
 			 * @summary SendText delivers a plain text message to the external chat partner.
 			 */
 			const providerMessageServiceSendText = (
@@ -73,12 +89,15 @@ export const // --- title start
 			return {
 				providerMessageServiceSendDocument,
 				providerMessageServiceSendImage,
+				providerMessageServiceSendInteractive,
 				providerMessageServiceSendText,
 			};
 		};
 export type ProviderMessageServiceSendDocumentResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendImageResult =
+	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
+export type ProviderMessageServiceSendInteractiveResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendTextResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
