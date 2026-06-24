@@ -28,9 +28,9 @@ export const useSelectCustomValues = ({
 				]),
 			);
 		}
-		if (optionValue.value) {
+		if (dataKey.value) {
 			return {
-				[optionValue.value]: text,
+				[dataKey.value]: text,
 			};
 		}
 		return text;
