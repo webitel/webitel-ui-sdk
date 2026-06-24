@@ -144,7 +144,6 @@ watch(
 
 <style>
 .wt-button {
-  background: red !important;
   position: relative;
 }
 
