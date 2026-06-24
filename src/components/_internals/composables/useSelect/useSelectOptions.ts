@@ -51,11 +51,7 @@ export const useSelectOptions = ({
 			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
 
-		const topOptions =
-			dataKey.value || selectedOptions.length
-				? selectedOptions
-				: selectedAsArray;
-		return topOptions.concat(otherOptions);
+		return selectedOptions.concat(otherOptions);
 	};
 
 	const getOptionLabel = (option) => {
