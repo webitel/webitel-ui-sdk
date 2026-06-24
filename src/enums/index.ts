@@ -41,10 +41,10 @@ import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
 export type {
+	ConnectionQualityLevelsType,
 	UserSettingsBroadcastMessage,
 	WebphoneBroadcastMessage,
 	WebphoneBroadcastPayload,
-	ConnectionQualityLevelsType,
 };
 
 export {
