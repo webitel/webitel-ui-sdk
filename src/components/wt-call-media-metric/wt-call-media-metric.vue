@@ -11,18 +11,19 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { type ConnectionQualityLevelsType } from '../../enums/ConnectionQualityLevel/ConnectionQualityLevel.enum';
-import { getConnectionQuality } from '../../scripts/getConnectionQuality';
+import { type ConnectionQualityLevelsType } from '../../enums';
+import { ComponentSize } from '../../enums';
+import { getConnectionQuality } from '../../scripts';
 
 const props = withDefaults(
 	defineProps<{
 		quality?: ConnectionQualityLevelsType | null;
 		mosAvg?: number | null;
-		size?: string;
+		size?: (typeof ComponentSize)[keyof typeof ComponentSize];
 		showTooltip?: boolean;
 	}>(),
 	{
-		size: 'sm',
+		size: ComponentSize.MD,
 		showTooltip: false,
 	},
 );
