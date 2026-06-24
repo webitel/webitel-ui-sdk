@@ -110,11 +110,6 @@ export const createCardStore = <Entity = object>({
 			});
 		};
 
-		const setItemValue = (item: Entity) => {
-			originalItemInstance.value = item;
-			itemId.value = item.id;
-		};
-
 		const saveItem = async (draft: Entity) => {
 			let responseItem: Entity; // use response after add/update instead of sending "get" request
 
@@ -131,7 +126,8 @@ export const createCardStore = <Entity = object>({
 				});
 			}
 
-			setItemValue(responseItem);
+			originalItemInstance.value = responseItem;
+			itemId.value = responseItem.id;
 		};
 
 		const initializeItemInstance = async () => {
@@ -150,11 +146,9 @@ export const createCardStore = <Entity = object>({
 		const initialize = ({
 			itemId: initialItemId,
 			parentId: initialParentId,
-			initialData,
 		}: {
 			itemId?: string | number;
 			parentId?: string | number;
-			initialData?: Partial<Entity>;
 		} = {}) => {
 			if (initialParentId) {
 				parentId.value = initialParentId;
@@ -162,13 +156,6 @@ export const createCardStore = <Entity = object>({
 
 			if (initialItemId && initialItemId !== 'new') {
 				itemId.value = initialItemId;
-			}
-
-			if (initialData) {
-				draftItemInstance.value = {
-					...draftItemInstance.value,
-					...initialData,
-				};
 			}
 
 			return initializeItemInstance();
@@ -201,7 +188,6 @@ export const createCardStore = <Entity = object>({
 
 			initialize,
 			saveItem,
-			setItemValue,
 			$reset,
 		};
 	});
