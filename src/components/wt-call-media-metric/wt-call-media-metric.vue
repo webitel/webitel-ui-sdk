@@ -10,9 +10,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { type ConnectionQualityLevelsType } from '../../enums';
-import { ComponentSize } from '../../enums';
+import { ComponentSize, type ConnectionQualityLevelsType } from '../../enums';
 import { getConnectionQuality } from '../../scripts';
 
 const props = withDefaults(
