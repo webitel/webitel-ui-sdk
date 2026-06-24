@@ -76,6 +76,7 @@ import conference from './conference.svg?raw';
 import consultativeTransfer from './consultative-transfer.svg?raw';
 import contacts from './contacts.svg?raw';
 import copy from './copy.svg?raw';
+import customProvider from './custom-provider.svg?raw';
 import customChatGateway from './custom-chat-gateway.svg?raw';
 import darkMode from './dark-mode.svg?raw';
 import dislike from './dislike.svg?raw';
@@ -294,6 +295,7 @@ export default objCamelToKebab({
 	'call-transfer--filled': callTransferFilled,
 	consultativeTransfer,
 	updateCalls,
+	customProvider,
 
 	caseAuthor,
 	cases,

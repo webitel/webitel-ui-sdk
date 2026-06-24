@@ -55,21 +55,23 @@ export const // --- title start
 				return axiosInstance.post(`/oauth/apps`, apiOAuthService, options);
 			};
 			const updateOAuthService2 = (
+				id: string,
 				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiOAuthService>> => {
 				return axiosInstance.patch(
-					`/oauth/apps/changes.id}`,
+					`/oauth/apps/${id}`,
 					oAuth2FederationUpdateOAuthServiceBody,
 					options,
 				);
 			};
 			const updateOAuthService = (
+				id: string,
 				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiOAuthService>> => {
 				return axiosInstance.put(
-					`/oauth/apps/changes.id}`,
+					`/oauth/apps/${id}`,
 					oAuth2FederationUpdateOAuthServiceBody,
 					options,
 				);

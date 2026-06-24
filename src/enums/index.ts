@@ -35,6 +35,7 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
+import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 
 export type {
 	UserSettingsBroadcastMessage,
@@ -76,4 +77,5 @@ export {
 	WtApplication,
 	WtObject,
 	WtTypeExtensionFieldKind,
+	SingleSignOnProvider,
 };
