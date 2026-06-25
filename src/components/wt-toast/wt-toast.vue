@@ -1,5 +1,5 @@
 <template>
-  <PToast v-bind="attrs">
+  <p-toast v-bind="attrs">
     <template #message="{ message }">
       <template v-if="message">
         <wt-icon
@@ -16,7 +16,7 @@
     <template #closeicon>
       <wt-icon icon="close" :size="ComponentSize.SM" />
     </template>
-  </PToast>
+  </p-toast>
 </template>
 
 <script setup lang="ts">
