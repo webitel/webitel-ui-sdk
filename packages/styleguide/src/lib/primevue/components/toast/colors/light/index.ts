@@ -5,11 +5,11 @@ const lightColors = {
 	info: {
 		background: '{info.highlightColor}',
 		borderColor: '{info.highlightColor}',
-		color: '{info.color}',
-		detailColor: '{info.color}',
+		color: '{info.onHighlightColor}',
+		detailColor: '{info.onHighlightColor}',
 		shadow: '0px 4px 8px 0px color-mix(in srgb, {info.color}, transparent 96%)',
 		closeButton: {
-			hoverBackground: '{info.color}',
+			hoverBackground: '{info.onHighlightColor}',
 			focusRing: {
 				color: '{info.color}',
 				shadow: 'none',
@@ -19,12 +19,12 @@ const lightColors = {
 	success: {
 		background: '{success.highlightColor}',
 		borderColor: '{success.highlightColor}',
-		color: '{success.color}',
-		detailColor: '{success.color}',
+		color: '{success.onHighlightColor}',
+		detailColor: '{success.onHighlightColor}',
 		shadow:
 			'0px 4px 8px 0px color-mix(in srgb, {success.color}, transparent 96%)',
 		closeButton: {
-			hoverBackground: '{success.color}',
+			hoverBackground: '{success.onHighlightColor}',
 			focusRing: {
 				color: '{success.color}',
 				shadow: 'none',
@@ -34,11 +34,11 @@ const lightColors = {
 	warn: {
 		background: '{warn.highlightColor}',
 		borderColor: '{warn.highlightColor}',
-		color: '{warn.color}',
-		detailColor: '{warn.color}',
+		color: '{warn.onHighlightColor}',
+		detailColor: '{warn.onHighlightColor}',
 		shadow: '0px 4px 8px 0px color-mix(in srgb, {warn.color}, transparent 96%)',
 		closeButton: {
-			hoverBackground: '{warn.color}',
+			hoverBackground: '{warn.onHighlightColor}',
 			focusRing: {
 				color: '{warn.color}',
 				shadow: 'none',
@@ -48,12 +48,12 @@ const lightColors = {
 	error: {
 		background: '{error.highlightColor}',
 		borderColor: '{error.highlightColor}',
-		color: '{error.color}',
-		detailColor: '{error.color}',
+		color: '{error.onHighlightColor}',
+		detailColor: '{error.onHighlightColor}',
 		shadow:
 			'0px 4px 8px 0px color-mix(in srgb, {error.color}, transparent 96%)',
 		closeButton: {
-			hoverBackground: '{error.color}',
+			hoverBackground: '{error.onHighlightColor}',
 			focusRing: {
 				color: '{error.color}',
 				shadow: 'none',
@@ -63,12 +63,12 @@ const lightColors = {
 	secondary: {
 		background: '{secondary.highlightColor}',
 		borderColor: '{secondary.highlightColor}',
-		color: '{secondary.foreground}',
-		detailColor: '{secondary.foreground}',
+		color: '{secondary.onHighlightColor}',
+		detailColor: '{secondary.onHighlightColor}',
 		shadow:
 			'0px 4px 8px 0px color-mix(in srgb, {secondary.color}, transparent 96%)',
 		closeButton: {
-			hoverBackground: '{secondary.foreground}',
+			hoverBackground: '{secondary.onHighlightColor}',
 			focusRing: {
 				color: '{secondary.color}',
 				shadow: 'none',
