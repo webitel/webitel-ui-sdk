@@ -40,6 +40,8 @@ const props = defineProps({
 				IconAction.DOWNLOAD_PDF,
 				IconAction.CHAT,
 				IconAction.SORT,
+				IconAction.UPLOAD,
+				IconAction.LOGOUT,
 			]).includes(v),
 	},
 	disabled: {
