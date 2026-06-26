@@ -50,8 +50,8 @@ const sizes = {
 		fontWeight: '500',
 	},
 	date: {
-		width: '2rem',
-		height: '2rem',
+		width: '1.5rem',
+		height: '1.5rem',
 		borderRadius: '50%',
 		padding: '0.125rem',
 		focusRing: {
