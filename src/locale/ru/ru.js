@@ -559,6 +559,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Сортировка по убыванию';
 					return 'Сортировка';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

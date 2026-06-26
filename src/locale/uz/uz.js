@@ -568,6 +568,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Kamayish tartibida saralash';
 					return 'Saralash';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

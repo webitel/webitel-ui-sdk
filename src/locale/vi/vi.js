@@ -567,6 +567,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Sắp xếp giảm dần';
 					return 'Sắp xếp';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {
