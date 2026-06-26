@@ -9,8 +9,8 @@ import WtBadge from './wt-badge/wt-badge.vue';
 import WtBadgeNew from './wt-badge-new/wt-badge.vue';
 import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
-import WtCard from './wt-card/wt-card.vue';
 import WtCallMediaMetric from './wt-call-media-metric/wt-call-media-metric.vue';
+import WtCard from './wt-card/wt-card.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
 import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
@@ -271,8 +271,8 @@ export {
 	WtButton,
 	WtButtonSelect,
 	WtCallMediaAction,
-	WtCard,
 	WtCallMediaMetric,
+	WtCard,
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
