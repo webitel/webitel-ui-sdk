@@ -6,6 +6,7 @@ import {
 	getDefaultInstance,
 } from '../../defaults/index.js';
 import applyTransform, {
+	addQueryParamsToUrl,
 	camelToSnake,
 	generateUrl,
 	merge,
@@ -91,6 +92,7 @@ const getUser = async ({ itemId: id }) => {
 		license: [],
 		devices: [],
 		device: {},
+		generateDevice: false,
 		variables: [
 			{
 				key: '',
@@ -177,8 +179,20 @@ const addUser = async ({ itemInstance }) => {
 			'profile',
 		]),
 	]);
+	// WTEL-9735 Підзадача 0: за прапорцем itemInstance.generateDevice додаємо
+	// query ?generate_device=true. Прапорець не входить у fieldsToSend, тож у
+	// тіло не потрапляє — лише в query. Без прапорця URL не змінюється.
+	const url = applyTransform(baseUrl, [
+		addQueryParamsToUrl(
+			itemInstance.generateDevice
+				? [
+						'generate_device=true',
+					]
+				: [],
+		),
+	]);
 	try {
-		const response = await instance.post(baseUrl, item);
+		const response = await instance.post(url, item);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'profile',
@@ -200,7 +214,17 @@ const updateUser = async ({ itemInstance, itemId: id }) => {
 		]),
 	]);
 
-	const url = `${baseUrl}/${id}`;
+	// WTEL-9735 Підзадача 0: генерація пристрою і на edit (PUT) — той самий
+	// прапорець itemInstance.generateDevice; query додається лише коли він true
+	const url = applyTransform(`${baseUrl}/${id}`, [
+		addQueryParamsToUrl(
+			itemInstance.generateDevice
+				? [
+						'generate_device=true',
+					]
+				: [],
+		),
+	]);
 	try {
 		const response = await instance.put(url, item);
 		return applyTransform(response.data, [

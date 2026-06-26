@@ -26,6 +26,7 @@
 * [wt-badge](components/wt-badge/Readme.md)
 * [wt-button](components/wt-button/Readme.md)
 * [wt-button-select](components/wt-button-select/Readme.md)
+* [wt-card](components/wt-card/Readme.md)
 
 * wt-cc-agent-status-timers
 * [wt-checkbox](components/wt-checkbox/Readme.md)
