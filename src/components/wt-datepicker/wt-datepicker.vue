@@ -34,10 +34,10 @@
 					class: 'typo-body-2'
 				},
 				hour: {
-					class: 'typo-subtitle-1'
+					class: 'typo-body-2'
 				},
 				minute: {
-					class: 'typo-subtitle-1'
+					class: 'typo-body-2'
 				}
 			}"
 			@show="onPanelShow"
