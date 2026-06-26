@@ -60,6 +60,8 @@ export default {
 		generate: 'Згенерувати',
 		from: 'Від',
 		to: 'До',
+		today: 'Сьогодні',
+		clear: 'Очистити',
 		tts: 'Text-to-Speech',
 		state: 'Стан',
 		status: 'Статус',

@@ -82,7 +82,7 @@ const sizes = {
 	timePicker: {
 		padding: '0.5rem 0 0 0',
 		gap: '0.5rem',
-		buttonGap: '0.25rem',
+		buttonGap: '0',
 	},
 };
 

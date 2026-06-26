@@ -64,6 +64,8 @@ export default {
 		generate: 'Generatsiya',
 		from: 'Dan',
 		to: 'Gacha',
+		today: 'Bugun',
+		clear: 'Tozalash',
 		tts: 'Matnni ovozga aylantirish',
 		state: 'Holat',
 		status: 'Holat',

@@ -64,6 +64,8 @@ export default {
 		generate: 'Tạo',
 		from: 'Từ',
 		to: 'Đến',
+		today: 'Hôm nay',
+		clear: 'Xóa',
 		tts: 'Chuyển văn bản thành giọng nói',
 		state: 'Trạng thái',
 		status: 'Trạng thái',

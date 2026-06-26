@@ -18,9 +18,52 @@
 			:max-date="maxDate"
 			:placeholder="placholder"
 			:show-clear="clearable && modelValue"
+			show-button-bar
       fluid
-      :manual-input="false"
+			:pt="{
+				selectMonth: {
+					class: 'typo-subtitle-1'
+				},
+				selectYear: {
+					class: 'typo-subtitle-1'
+				},
+				tableHeaderCell: {
+					class: 'typo-subtitle-2'
+				},
+				day: {
+					class: 'typo-body-2'
+				},
+				hour: {
+					class: 'typo-subtitle-1'
+				},
+				minute: {
+					class: 'typo-subtitle-1'
+				}
+			}"
+			@show="onPanelShow"
     >
+			<template #buttonbar="{ todayCallback, clearCallback }">
+				<div class="wt-datepicker__button-bar">
+					<wt-button 
+						:color="ButtonColor.SECONDARY"
+						:variant="ButtonVariant.OUTLINED"
+						:size="ComponentSize.SM"
+						@click="todayCallback"
+					>
+						{{ t('reusable.today') }}
+					</wt-button>
+					<wt-button 
+						v-show="clearable && modelValue"
+						:color="ButtonColor.SECONDARY"
+						:variant="ButtonVariant.OUTLINED"
+						:size="ComponentSize.SM"
+						@click="clearCallback"
+					>
+						{{ t('reusable.clear') }}
+					</wt-button>
+				</div>
+			</template>
+
 			<template #prevbutton="{ actionCallback }">
 				<wt-icon-btn 
 					icon="arrow-left"
@@ -84,8 +127,22 @@ import PDatepicker, {
 	DatePickerEmitsOptions,
 	DatePickerProps,
 } from 'primevue/datepicker';
-import { computed, defineModel, defineProps, ref, toRefs, watch } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import {
+	computed,
+	defineModel,
+	defineProps,
+	nextTick,
+	ref,
+	toRefs,
+	watch,
+} from 'vue';
+import {
+	ButtonColor,
+	ButtonVariant,
+	ComponentSize,
+	MessageVariant,
+} from '../../enums';
+import { useI18n } from 'vue-i18n';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface Props extends DatePickerProps {
@@ -114,10 +171,12 @@ const model = defineModel<number | null>({
 	default: null,
 });
 
+const { t } = useI18n();
+
 const modelValue = computed({
 	get() {
 		if (!model.value) return null;
-		const date = new Date(model.value);
+		const date = new Date(+model.value);
 		return props.timezone ? toZonedTime(date, props.timezone) : date;
 	},
 	set(value) {
@@ -131,6 +190,16 @@ const modelValue = computed({
 });
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
+
+// PrimeVue initializes its internal currentHour/currentMinute from new Date() when the
+// overlay opens, ignoring the model value. Re-assigning the same value forces a re-sync.
+function onPanelShow() {
+	if (!props.showTime || !modelValue.value) return;
+	const current = modelValue.value as Date;
+	nextTick(() => {
+		modelValue.value = new Date(current.getTime());
+	});
+}
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
@@ -153,5 +222,11 @@ const { isValidation, invalid, validationText, validationTextColor } =
   transform: translateY(-50%);
   inset-inline-end: var(--p-form-field-padding-x);
   cursor: pointer;
+}
+
+.wt-datepicker__button-bar {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 </style>

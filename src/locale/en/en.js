@@ -67,6 +67,8 @@ export default deepmerge(
 			generate: 'Generate',
 			from: 'From',
 			to: 'To',
+			today: 'Today',
+			clear: 'Clear',
 			tts: 'Text-to-Speech',
 			state: 'State',
 			status: 'Status',

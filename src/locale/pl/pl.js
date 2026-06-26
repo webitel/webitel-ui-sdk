@@ -64,6 +64,8 @@ export default {
 		generate: 'Generuj',
 		from: 'Od',
 		to: 'Do',
+		today: 'Dzisiaj',
+		clear: 'Wyczyść',
 		tts: 'Tekst na mowę',
 		state: 'Stan',
 		status: 'Status',
