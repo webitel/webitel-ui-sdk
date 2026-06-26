@@ -12,7 +12,7 @@
   >
     <template #value="{ value }">
       <wt-indicator
-        :color="value.color"
+        :color="selectedOption.color"
         :text="duration"
       />
     </template>
