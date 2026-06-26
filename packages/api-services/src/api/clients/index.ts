@@ -38,6 +38,7 @@ export * from './quickReplies/quickReplies';
 export * from './regions/regions';
 // export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
+export * from './slaConditions/slaConditions';
 export * from './slas/slas';
 export * from './teams/teams';
 export * from './userSettings/userSettings';

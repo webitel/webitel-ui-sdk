@@ -1,4 +1,6 @@
 export * from './casePriority/casePriority.validations';
+export * from './caseSla/caseSla.validations';
+export * from './caseSlaCondition/caseSlaCondition.validations';
 export * from './_shared/lookup.validations';
 export * from './contactGroup/contactGroup.validations';
 export * from './contactGroupCondition/contactGroupCondition.validations';

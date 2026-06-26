@@ -17,6 +17,7 @@ const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
 	syncState: {
 		onValidate: true, // make zod defaults fill state
 	},
+	mode: 'all',
 };
 
 export const createCardStore = <Entity = object>({
