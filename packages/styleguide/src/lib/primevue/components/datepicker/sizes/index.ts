@@ -53,7 +53,7 @@ const sizes = {
 		width: '2rem',
 		height: '2rem',
 		borderRadius: '50%',
-		padding: '0.25rem',
+		padding: '0.125rem',
 		focusRing: {
 			width: '{focus.ring.width}',
 			style: '{focus.ring.style}',
