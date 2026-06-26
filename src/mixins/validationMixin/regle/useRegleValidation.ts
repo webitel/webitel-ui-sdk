@@ -14,11 +14,23 @@ export const useFieldValidation = ({
 	field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
 	const invalid = computed(() => {
-		return fieldRef.value.$error;
+		return fieldRef.value.$error ?? false;
 	});
 
 	const validationText = computed(() => {
-		return fieldRef.value?.$errors?.at(0);
+		const errors = fieldRef.value?.$errors;
+		if (!errors) return '';
+
+		if (Array.isArray(errors)) {
+			return errors.at(0) ?? '';
+		}
+
+		if (typeof errors === 'object') {
+			const selfErrors = fieldRef.value?.$self?.$errors;
+			if (Array.isArray(selfErrors)) return selfErrors.at(0) ?? '';
+		}
+
+		return '';
 	});
 
 	return {
