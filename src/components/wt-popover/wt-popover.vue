@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="wrapper">
     <slot name="activator" v-bind="{ show, toggle, hide }" />
 
     <p-popover
@@ -32,6 +32,7 @@ interface Props extends PopoverProps {
 
 const attrs = useAttrs();
 const innerPopover = useTemplateRef('innerPopover');
+const wrapper = useTemplateRef('wrapper');
 const props = withDefaults(defineProps<Props>(), {
 	appendTo: 'body',
 	baseZIndex: 0,
@@ -46,7 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 defineEmits<PopoverEmitsOptions>();
 
-usePopoverOverlayFix(innerPopover);
+usePopoverOverlayFix(innerPopover, wrapper);
 
 const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
 	if (props.disabled) return;

@@ -14,7 +14,6 @@
     <wt-multi-select
       v-if="model?.selection"
       :key="model.selection"
-      :show-clear="false"
       :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"

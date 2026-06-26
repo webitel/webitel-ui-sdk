@@ -10,6 +10,7 @@
 				class="wt-chip__close-icon" 
 				icon="close--filled" 
 				:size="ComponentSize.SM"
+				:color="ChipColor.ON_PRIMARY"
 				@click="emit('remove', $event)"
 			/>
     </template>

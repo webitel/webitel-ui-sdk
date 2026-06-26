@@ -29,7 +29,6 @@
 @import "../components/wt-loader/_variables.css";
 @import "../components/wt-logo/_variables.css";
 @import "../components/wt-navigation-bar/_variables.css";
-@import "../components/wt-notification/_variables.css";
 @import "../components/wt-notifications-bar/_variables.css";
 @import "../components/wt-page-wrapper/_variables.css";
 @import "../components/wt-pagination/_variables.css";
@@ -39,7 +38,6 @@
 @import "../components/wt-radio/_variables.css";
 @import "../components/wt-rounded-action/_variables.css";
 @import "../components/wt-search-bar/_variables.css";
-@import "../components/wt-select/_variables.css";
 @import "../components/wt-slider/_variables.css";
 @import "../components/wt-status-select/_variables.css";
 @import "../components/wt-stepper/_variables.css";

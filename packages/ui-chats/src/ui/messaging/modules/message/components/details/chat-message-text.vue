@@ -1,8 +1,12 @@
 <template>
-  <p
-    class="chat-message-text typo-body-1"
-    v-html="text"
-  />
+  <p class="chat-message-text typo-body-1">
+    <span v-html="linkedText" />
+    <span
+      v-if="withTimestampSpacer"
+      class="chat-message-text__timestamp-spacer"
+      aria-hidden="true"
+    />
+  </p>
 </template>
 
 <script
@@ -10,13 +14,14 @@
   lang="ts"
 >
 import Autolinker from 'autolinker';
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
 	text: string;
+	withTimestampSpacer?: boolean;
 }>();
 
-const text = computed(() => {
+const linkedText = computed(() => {
 	// ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
 	// https://my.webitel.com/browse/DEV-2848
 	return Autolinker.link(props.text, {
@@ -32,18 +37,20 @@ const text = computed(() => {
   scoped
 >
 .chat-message-text {
-  overflow-wrap: anywhere;
-  white-space: pre-line; // read \n as "new line"
-  padding: var(--spacing-xs);
-  border-radius: var(--border-radius);
-  background: var(--primary-light-color);
-  color: var(--primary-on-color);
-  place-self: flex-start;
-
   // reset links inside text
   :deep(.chat-message-text__link) {
     color: revert;
     text-decoration: revert;
+  }
+
+  /* @author @Oleksandr Palonnyi */
+  /* https://webitel.atlassian.net/browse/WTEL-9588?focusedCommentId=763440 */
+  /* [WTEL-9588](https://webitel.atlassian.net/browse/WTEL-9588) */
+  :deep(.chat-message-text__timestamp-spacer) {
+    display: inline-block;
+    width: var(--chat-message-timestamp-spacer-width);
+    height: var(--chat-message-timestamp-spacer-height);
+    vertical-align: bottom;
   }
 }
 </style>

@@ -1,7 +1,12 @@
 import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
-import { dedupeByKey, isOptionSelected, toArray } from './useSelectUtils';
+import {
+	dedupeByKey,
+	filterOptionsBySearchValue,
+	isOptionSelected,
+	toArray,
+} from './useSelectUtils';
 
 export const useSelectOptions = ({
 	selected,
@@ -46,11 +51,7 @@ export const useSelectOptions = ({
 			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
 
-		const topOptions =
-			dataKey.value || selectedOptions.length
-				? selectedOptions
-				: selectedAsArray;
-		return topOptions.concat(otherOptions);
+		return selectedOptions.concat(otherOptions);
 	};
 
 	const getOptionLabel = (option) => {
@@ -62,7 +63,10 @@ export const useSelectOptions = ({
 		// when optionValue is used PrimeVue passes the extracted primitive instead of the full object
 		if (optionValue?.value && typeof option !== 'object') {
 			const foundOption = (
-				filteredOptions.value as Record<string, unknown>[]
+				[
+					...filteredOptions.value,
+					...selectedOptionsCache.value,
+				] as Record<string, unknown>[]
 			).find((o) => o[optionValue.value] === option);
 			return foundOption ? getOptionLabel(foundOption) : String(option);
 		}
@@ -75,6 +79,9 @@ export const useSelectOptions = ({
 		}
 		return option[defaultOptionLabel] || option;
 	};
+
+	const filterBySearch = (opts, value) =>
+		filterOptionsBySearchValue(opts, value, getOptionLabel);
 
 	// Cache of full option objects for currently selected values,
 	// so they can be preserved in filteredOptions after filtering
@@ -110,14 +117,14 @@ export const useSelectOptions = ({
 			search,
 			page,
 		});
+		const matchingCached = search
+			? filterBySearch(selectedOptionsCache.value, search)
+			: selectedOptionsCache.value;
 		const baseOptions =
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...(!allowCustomValues.value ? selectedOptionsCache.value : []),
-							...toArray(selected.value).filter(
-								(s) => s != null && typeof s === 'object',
-							),
+							...matchingCached,
 							...items,
 						],
 						dataKey.value,
@@ -140,13 +147,12 @@ export const useSelectOptions = ({
 	const filterOptions = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
-			const matchingOptions = options.value.filter((option) =>
-				getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
-			);
+			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
+			const matchingOptions = filterBySearch(options.value, value);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...(!allowCustomValues.value ? selectedOptionsCache.value : []),
+						...matchingCached,
 						...matchingOptions,
 					],
 					dataKey.value,
@@ -168,7 +174,7 @@ export const useSelectOptions = ({
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...missingSelected,
+						...filterBySearch(missingSelected, filterText.value),
 						...filteredOptions.value,
 					],
 					dataKey.value,

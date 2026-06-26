@@ -5,6 +5,7 @@ export const useSelectCustomValues = ({
 	selected,
 	filteredOptions,
 	options,
+	optionValue,
 	dataKey,
 	filterText,
 	filterOptions,

@@ -89,6 +89,7 @@ import elevenlabs from './elevenlabs.svg?raw';
 import email from './email.svg?raw';
 import emailInbound from './email-inbound.svg?raw';
 import emailOutbound from './email-outbound.svg?raw';
+import error from './error.svg?raw';
 import expand from './expand.svg?raw';
 import exportExel from './export-exel.svg?raw';
 import eyeClosed from './eye--closed.svg?raw';
@@ -239,7 +240,11 @@ import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
+import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsSignalHigh from './ws-signal-high.svg?raw';
+import wsSignalLow from './ws-signal-low.svg?raw';
+import wsSignalMedium from './ws-signal-medium.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
 
@@ -420,6 +425,8 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	error,
+	warning,
 	union,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
@@ -451,6 +458,10 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsSignalHigh,
+	wsSignalMedium,
+	wsSignalLow,
 
 	portal,
 

@@ -4,4 +4,7 @@
 	--chat-audio-player-min-width: 250px;
 	--chat-video-player-height: 201px;
 	--chat-video-player-width: 256px;
+	--chat-message-timestamp-spacer-width: 2rem;
+	--chat-message-timestamp-spacer-height: 1.5rem;
+	--chat-message-timestamp-bottom-offset: 0.75rem;
 }

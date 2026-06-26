@@ -1,5 +1,5 @@
 <template>
-  <div class="wt-single-select">
+  <div class="wt-single-select" :class="{ 'wt-single-select--has-value': model }">
     <wt-label 
       v-if="hasLabel" 
       :disabled="disabled" 
@@ -27,6 +27,7 @@
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
       :data-key="dataKey"
+      :size="primevueSizeMap[size]"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -49,8 +50,8 @@
           @keydown.enter.stop="onInputKeydown"
         >
           <template #suffix>
-            <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
-            <wt-icon icon="search" />
+            <wt-icon v-if="allowCustomValues && filterText" disabled icon="select-custom-value-enter" />
+            <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>
       </template>
@@ -115,6 +116,7 @@ interface Props extends SelectProps {
 	placeholder?: string;
 	required?: boolean;
 	disabled?: boolean;
+	size?: string | null;
 	/**
 	 * true disables all options but keeps dropdown visible
 	 */
@@ -157,6 +159,11 @@ const props = withDefaults(defineProps<Props>(), {
 	labelProps: () => ({}),
 	customValidators: () => [],
 });
+
+const primevueSizeMap = {
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.LG]: 'large',
+};
 
 const model = defineModel<string>({
 	default: '',
@@ -233,6 +240,17 @@ onMounted(() => {
 .wt-single-select {
   width: 100%;
   min-width: 0;
+}
+
+/*
+  @author @HlukhovYe
+
+  PrimeVue applies data-p="placeholder" to the label span when the selected item
+  is not found in visibleOptions (e.g. during search). Override the placeholder
+  color since our #value slot renders the correct label from the model directly.
+*/
+.wt-single-select--has-value :deep(.p-select-label[data-p~='placeholder']) {
+  color: inherit;
 }
 
 .wt-single-select__option-label {
