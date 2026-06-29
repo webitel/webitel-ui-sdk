@@ -9,9 +9,11 @@
       </slot>
     </wt-label>
     <p-datepicker
+			ref="datepicker"
 			:id="datepickerId"
 			v-model="modelValue"
 			date-format="dd/mm/yy"
+			:required="required"
 			:disabled="disabled"
 			:show-time="showTime"
 			:min-date="minDate"
@@ -28,7 +30,7 @@
 					class: 'typo-subtitle-1'
 				},
 				tableHeaderCell: {
-					class: 'typo-subtitle-2'
+					class: 'typo-body-2-bold'
 				},
 				day: {
 					class: 'typo-body-2'
@@ -132,9 +134,8 @@ import {
 	defineModel,
 	defineProps,
 	nextTick,
-	ref,
 	toRefs,
-	watch,
+	useTemplateRef,
 } from 'vue';
 import {
 	ButtonColor,
@@ -189,17 +190,25 @@ const modelValue = computed({
 	},
 });
 
+const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
+
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 // PrimeVue initializes its internal currentHour/currentMinute from new Date() when the
 // overlay opens, ignoring the model value. Re-assigning the same value forces a re-sync.
-function onPanelShow() {
-	if (!props.showTime || !modelValue.value) return;
-	const current = modelValue.value as Date;
-	nextTick(() => {
-		modelValue.value = new Date(current.getTime());
-	});
-}
+const onPanelShow = () => {
+	if (props.showTime && modelValue.value) {
+		const currentDate = modelValue.value as Date;
+		nextTick(() => {
+			modelValue.value = new Date(currentDate.getTime());
+		});
+	}
+
+	// align overlay, because on first render it is not aligned correctly
+	setTimeout(() => {
+		datepicker.value?.alignOverlay();
+	}, 0);
+};
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;

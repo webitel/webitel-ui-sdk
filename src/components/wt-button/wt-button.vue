@@ -7,13 +7,14 @@
         'p-button--loading': showLoader,
         'p-button--icon': icon,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
+				[ `typo-button--${size}` ]: size,
       }"
     :disabled="disabled"
     :loading="showLoader"
     :severity="color"
     :size="primevueSizeMap[size]"
     :variant="variant"
-    class="wt-button typo-button typo-button"
+    class="wt-button typo-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
   >
