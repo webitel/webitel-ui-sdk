@@ -10,7 +10,7 @@
 
 .table-page .wt-page-wrapper__main,
 /* coz .table-section can exist without .table-page (in tabs, for instance)*/
-.wt-page-wrapper__main:has(.table-section) {
+	.wt-page-wrapper__main:has(.table-section) {
 	min-height: 0;
 }
 

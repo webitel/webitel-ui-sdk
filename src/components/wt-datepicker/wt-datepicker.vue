@@ -137,13 +137,13 @@ import {
 	toRefs,
 	useTemplateRef,
 } from 'vue';
+import { useI18n } from 'vue-i18n';
 import {
 	ButtonColor,
 	ButtonVariant,
 	ComponentSize,
 	MessageVariant,
 } from '../../enums';
-import { useI18n } from 'vue-i18n';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface Props extends DatePickerProps {
