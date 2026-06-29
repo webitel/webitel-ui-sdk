@@ -255,6 +255,9 @@ onMounted(() => {
 
 .wt-single-select__option-label {
   user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .wt-single-select__input {
