@@ -864,4 +864,9 @@ export default {
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
 	},
+	connectionQuality: {
+		high: 'Calitate excelentă a rețelei.',
+		medium: 'Pot exista întârzieri, verificați rețeaua.',
+		low: 'Calitatea rețelei este slabă, verificați rețeaua.',
+	},
 };

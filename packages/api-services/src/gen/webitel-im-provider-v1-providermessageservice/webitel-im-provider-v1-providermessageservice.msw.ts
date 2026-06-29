@@ -62,6 +62,32 @@ export const getProviderMessageServiceSendImageResponseMock = (
 	...overrideResponse,
 });
 
+export const getProviderMessageServiceSendInteractiveResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
+	> = {},
+): WebitelImProviderV1ProviderSendMessageResponse => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	externalId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getProviderMessageServiceSendTextResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
@@ -144,6 +170,34 @@ export const getProviderMessageServiceSendImageMockHandler = (
 	);
 };
 
+export const getProviderMessageServiceSendInteractiveMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/im/provider/send/interactive',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getProviderMessageServiceSendInteractiveResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getProviderMessageServiceSendTextMockHandler = (
 	overrideResponse?:
 		| WebitelImProviderV1ProviderSendMessageResponse
@@ -174,5 +228,6 @@ export const getProviderMessageServiceSendTextMockHandler = (
 export const getWebitelImProviderV1ProvidermessageserviceMock = () => [
 	getProviderMessageServiceSendDocumentMockHandler(),
 	getProviderMessageServiceSendImageMockHandler(),
+	getProviderMessageServiceSendInteractiveMockHandler(),
 	getProviderMessageServiceSendTextMockHandler(),
 ];

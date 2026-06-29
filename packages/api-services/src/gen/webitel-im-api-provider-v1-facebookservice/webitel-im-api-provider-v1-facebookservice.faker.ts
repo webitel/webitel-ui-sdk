@@ -7,10 +7,26 @@
 import { faker } from '@faker-js/faker';
 import type {
 	WebitelImApiProviderV1ProviderDeleteFacebookGateResponse,
+	WebitelImApiProviderV1ProviderDeleteGetStartedResponse,
+	WebitelImApiProviderV1ProviderDeletePersistentMenuResponse,
 	WebitelImApiProviderV1ProviderGetFacebookGateResponse,
+	WebitelImApiProviderV1ProviderSetGetStartedResponse,
+	WebitelImApiProviderV1ProviderSetPersistentMenuResponse,
 	WebitelImApiProviderV1ProviderUpdateFacebookGateResponse,
 } from '../_models';
 import { WebitelImApiProviderV1ProviderStatus } from '../_models';
+
+export const getFacebookServiceDeleteGetStartedWebitelImApiProviderV1FacebookServiceResponseMock =
+	(): WebitelImApiProviderV1ProviderDeleteGetStartedResponse => ({});
+
+export const getFacebookServiceSetGetStartedWebitelImApiProviderV1FacebookServiceResponseMock =
+	(): WebitelImApiProviderV1ProviderSetGetStartedResponse => ({});
+
+export const getFacebookServiceDeletePersistentMenuWebitelImApiProviderV1FacebookServiceResponseMock =
+	(): WebitelImApiProviderV1ProviderDeletePersistentMenuResponse => ({});
+
+export const getFacebookServiceSetPersistentMenuWebitelImApiProviderV1FacebookServiceResponseMock =
+	(): WebitelImApiProviderV1ProviderSetPersistentMenuResponse => ({});
 
 export const getFacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceResponseMock =
 	(

@@ -95,6 +95,7 @@ describe('UsersAPI', () => {
 			id: 1,
 			device: {},
 			devices: [],
+			generateDevice: false,
 			license: [],
 			roles: [],
 			variables: [

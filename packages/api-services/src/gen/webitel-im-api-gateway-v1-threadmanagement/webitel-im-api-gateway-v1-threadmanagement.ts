@@ -20,6 +20,8 @@ import type {
 	WebitelImApiGatewayV1SearchVariablesResponse,
 	WebitelImApiGatewayV1Thread,
 	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
+	WebitelImApiGatewayV1ThreadManagementCreateRequest,
+	WebitelImApiGatewayV1ThreadManagementCreateResponse,
 	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementTransferBody,
@@ -49,6 +51,18 @@ export const // --- title start
 						...options?.params,
 					},
 				});
+			};
+			const threadManagementCreate = (
+				webitelImApiGatewayV1ThreadManagementCreateRequest: WebitelImApiGatewayV1ThreadManagementCreateRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1ThreadManagementCreateResponse>
+			> => {
+				return axiosInstance.post(
+					`/v1/threads`,
+					webitelImApiGatewayV1ThreadManagementCreateRequest,
+					options,
+				);
 			};
 			/**
 			 * @summary Search threads that the caller has left from
@@ -185,6 +199,7 @@ Supports pagination and field projection.
 			// --- footer start
 			return {
 				threadManagementSearch,
+				threadManagementCreate,
 				threadManagementSearchLeft,
 				threadManagementGet,
 				threadManagementAddMember,
@@ -198,6 +213,8 @@ Supports pagination and field projection.
 		};
 export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
+export type ThreadManagementCreateResult =
+	AxiosResponse<WebitelImApiGatewayV1ThreadManagementCreateResponse>;
 export type ThreadManagementSearchLeftResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>;
 export type ThreadManagementGetResult =

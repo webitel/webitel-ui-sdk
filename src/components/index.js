@@ -9,6 +9,8 @@ import WtBadge from './wt-badge/wt-badge.vue';
 import WtBadgeNew from './wt-badge-new/wt-badge.vue';
 import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
+import WtCallMediaMetric from './wt-call-media-metric/wt-call-media-metric.vue';
+import WtCard from './wt-card/wt-card.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
 import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
@@ -39,7 +41,6 @@ import WtPopup from './wt-popup/wt-popup.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
-import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
@@ -203,7 +204,6 @@ const Components = {
 	WtProgressBar,
 	WtRadio,
 	WtSearchBar,
-	WtSelect,
 	WtSlider,
 	WtSwitcher,
 	WtTabs,
@@ -250,11 +250,13 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtCard,
 	WtSingleSelect,
 	WtMultiSelect,
 	WtScreenRecordingsAction,
 	WtInlineAddPanel,
 	WtCallMediaAction,
+	WtCallMediaMetric,
 	WtSendMessagePopup,
 };
 
@@ -269,6 +271,8 @@ export {
 	WtButton,
 	WtButtonSelect,
 	WtCallMediaAction,
+	WtCallMediaMetric,
+	WtCard,
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
@@ -322,7 +326,6 @@ export {
 	WtRoundedAction,
 	WtScreenRecordingsAction,
 	WtSearchBar,
-	WtSelect,
 	WtSelectionPopup,
 	WtSendMessagePopup,
 	WtSingleSelect,

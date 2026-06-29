@@ -202,6 +202,7 @@ import selectCustomValueEnter from './select-custom-value-enter.svg?raw';
 import sendArrow from './send-arrow.svg?raw';
 import settings from './settings.svg?raw';
 import sharingEnd from './sharing-end.svg?raw';
+import shieldCheck from './shield-check.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
@@ -242,6 +243,9 @@ import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
 import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsSignalHigh from './ws-signal-high.svg?raw';
+import wsSignalLow from './ws-signal-low.svg?raw';
+import wsSignalMedium from './ws-signal-medium.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
 
@@ -273,6 +277,7 @@ export default objCamelToKebab({
 	calendar,
 	dislike,
 	darkMode,
+	shieldCheck,
 
 	call,
 	'call--filled': callFilled,
@@ -455,6 +460,10 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsSignalHigh,
+	wsSignalMedium,
+	wsSignalLow,
 
 	portal,
 

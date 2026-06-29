@@ -60,6 +60,64 @@ export const FacebookServiceCreateFacebookGateResponse = zod
 	);
 
 /**
+ * @summary / DeleteGetStarted removes the Get Started button for a Facebook gate.
+ */
+export const FacebookServiceDeleteGetStartedParams = zod.object({
+	gate_id_1: zod.string(),
+});
+
+export const FacebookServiceDeleteGetStartedResponse = zod.looseObject({});
+
+/**
+ * @summary / SetGetStarted sets the Get Started button payload for a Facebook gate.
+ */
+export const FacebookServiceSetGetStartedParams = zod.object({
+	gate_id_1: zod.string(),
+});
+
+export const FacebookServiceSetGetStartedBody = zod.object({
+	payload: zod.string().optional(),
+});
+
+export const FacebookServiceSetGetStartedResponse = zod.looseObject({});
+
+/**
+ * @summary / DeletePersistentMenu removes the Messenger persistent menu for a Facebook gate.
+ */
+export const FacebookServiceDeletePersistentMenuParams = zod.object({
+	gate_id_1: zod.string(),
+});
+
+export const FacebookServiceDeletePersistentMenuResponse = zod.looseObject({});
+
+/**
+ * @summary / SetPersistentMenu sets the Messenger persistent menu for a Facebook gate.
+ */
+export const FacebookServiceSetPersistentMenuParams = zod.object({
+	gate_id_1: zod.string(),
+});
+
+export const FacebookServiceSetPersistentMenuBody = zod.object({
+	composerInputDisabled: zod.boolean().optional(),
+	items: zod
+		.array(
+			zod.object({
+				nested: zod
+					.object({
+						items: zod.array(zod.unknown()).optional(),
+					})
+					.optional(),
+				payload: zod.string().optional(),
+				title: zod.string().optional(),
+				url: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});
+
+export const FacebookServiceSetPersistentMenuResponse = zod.looseObject({});
+
+/**
  * @summary / DeleteFacebookGate deactivates the gateway.
  */
 export const FacebookServiceDeleteFacebookGateParams = zod.object({

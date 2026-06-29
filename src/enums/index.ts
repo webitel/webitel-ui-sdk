@@ -12,6 +12,10 @@ import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.
 import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
+import {
+	ConnectionQualityLevels,
+	type ConnectionQualityLevelsType,
+} from './ConnectionQualityLevel/ConnectionQualityLevel.enum';
 import { CrudAction } from './CrudAction/CrudAction';
 import { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTabSettings/DefaultWorkspaceTabSettings';
 import { EmptyCause } from './EmptyCause/EmptyCause';
@@ -38,6 +42,7 @@ import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExten
 import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 
 export type {
+	ConnectionQualityLevelsType,
 	UserSettingsBroadcastMessage,
 	WebphoneBroadcastMessage,
 	WebphoneBroadcastPayload,
@@ -54,6 +59,7 @@ export {
 	ChatGatewayProvider,
 	ChipColor,
 	ComponentSize,
+	ConnectionQualityLevels,
 	CrmSections,
 	CrudAction,
 	DefaultWorkspaceTabSettings,

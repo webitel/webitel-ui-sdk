@@ -6,6 +6,62 @@
  */
 import * as zod from 'zod';
 
+export const FacebookServiceDeleteGetStartedWebitelImApiProviderV1FacebookServiceParams =
+	zod.object({
+		gate_id: zod.string(),
+	});
+
+export const FacebookServiceDeleteGetStartedWebitelImApiProviderV1FacebookServiceResponse =
+	zod.looseObject({});
+
+export const FacebookServiceSetGetStartedWebitelImApiProviderV1FacebookServiceParams =
+	zod.object({
+		gate_id: zod.string(),
+	});
+
+export const FacebookServiceSetGetStartedWebitelImApiProviderV1FacebookServiceBody =
+	zod.object({
+		payload: zod.string().optional(),
+	});
+
+export const FacebookServiceSetGetStartedWebitelImApiProviderV1FacebookServiceResponse =
+	zod.looseObject({});
+
+export const FacebookServiceDeletePersistentMenuWebitelImApiProviderV1FacebookServiceParams =
+	zod.object({
+		gate_id: zod.string(),
+	});
+
+export const FacebookServiceDeletePersistentMenuWebitelImApiProviderV1FacebookServiceResponse =
+	zod.looseObject({});
+
+export const FacebookServiceSetPersistentMenuWebitelImApiProviderV1FacebookServiceParams =
+	zod.object({
+		gate_id: zod.string(),
+	});
+
+export const FacebookServiceSetPersistentMenuWebitelImApiProviderV1FacebookServiceBody =
+	zod.object({
+		composerInputDisabled: zod.boolean().optional(),
+		items: zod
+			.array(
+				zod.object({
+					nested: zod
+						.object({
+							items: zod.array(zod.unknown()).optional(),
+						})
+						.optional(),
+					payload: zod.string().optional(),
+					title: zod.string().optional(),
+					url: zod.string().optional(),
+				}),
+			)
+			.optional(),
+	});
+
+export const FacebookServiceSetPersistentMenuWebitelImApiProviderV1FacebookServiceResponse =
+	zod.looseObject({});
+
 export const FacebookServiceDeleteFacebookGateWebitelImApiProviderV1FacebookServiceParams =
 	zod.object({
 		id: zod.string(),
