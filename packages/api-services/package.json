@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/api-services",
-	"version": "0.1.38",
+	"version": "0.1.46",
 	"private": false,
 	"repository": {
 		"type": "git",
@@ -43,10 +43,10 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.10",
+		"@biomejs/biome": "2.4.16",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/node": "^22.13.10",
-		"axios": "1.13.2",
+		"axios": "^1.15.2",
 		"change-case": "^5.4.4",
 		"globby": "^14.1.0",
 		"husky": "^9.1.7",

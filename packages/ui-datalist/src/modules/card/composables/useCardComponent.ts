@@ -1,6 +1,7 @@
+import type { RegleSchema } from '@regle/schemas';
 import { refDebounced } from '@vueuse/core';
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { onUnmounted, watch } from 'vue';
+import { onUnmounted, type Ref, watch } from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
@@ -12,9 +13,18 @@ import { useItemCardSaveText } from './useItemCardSaveText';
 export const useCardComponent = <CardEntity>({
 	useCardStore,
 	onLoadErrorHandler,
+	manualSetup = false,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
+	/**
+	 * When `true` — the composable skips automatic initialization and
+	 * `onUnmounted` reset. Use this when you need manual control over
+	 * the card lifecycle (e.g. inside `useNestedCardComponent`).
+	 *
+	 * @default false
+	 */
+	manualSetup?: boolean;
 }) => {
 	const cardStore = useCardStore();
 
@@ -29,13 +39,9 @@ export const useCardComponent = <CardEntity>({
 
 	const { initialize, saveItem, $reset } = cardStore;
 
-	const { routeId } = useCardRouting({
-		itemId,
-	});
-
 	const { modelValue, validationFields, hasValidationErrors, validate } =
-		useCardValidation({
-			validationSchema,
+		useCardValidation<CardEntity>({
+			validationSchema: validationSchema as Ref<RegleSchema<CardEntity>>,
 		});
 
 	const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({
@@ -59,11 +65,17 @@ export const useCardComponent = <CardEntity>({
 		saveItem,
 	});
 
-	initialize({
-		itemId: routeId.value,
+	const { routeId } = useCardRouting({
+		itemId,
+		manualSetup,
 	});
 
-	onUnmounted($reset);
+	if (!manualSetup) {
+		initialize({
+			itemId: routeId.value,
+		});
+		onUnmounted($reset);
+	}
 
 	watch(error, (err) => {
 		if (onLoadErrorHandler) onLoadErrorHandler(err);

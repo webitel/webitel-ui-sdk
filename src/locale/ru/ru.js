@@ -832,6 +832,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'элементов выбрано',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity')} был обновлён`,
@@ -853,5 +856,10 @@ export default {
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
+	},
+	connectionQuality: {
+		high: 'Отличное качество сети.',
+		medium: 'Возможны задержки, проверьте сеть.',
+		low: 'Плохое качество сети, проверьте сеть.',
 	},
 };

@@ -1,21 +1,18 @@
 <template>
-  <wt-select
-    :clearable="false"
+  <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :options="CallHistoryTagFilterOptions"
-    :value="model"
+    v-model:model-value="model"
     :v="v$.model"
-    multiple
-    track-by="value"
-    use-value-from-options-by-prop="value"
-    @input="model = $event"
+    data-key="value"
+    option-value="value"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 

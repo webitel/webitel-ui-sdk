@@ -1,72 +1,75 @@
 import { shallowMount } from '@vue/test-utils';
+import { useToast } from 'primevue/usetoast';
 
 import eventBus from '../../../scripts/eventBus.js';
-import WtNotification from '../../wt-notification/wt-notification.vue';
+import { TypeToSeverityMap } from '../../wt-toast/types';
+import WtToast from '../../wt-toast/wt-toast.vue';
 import WtNotificationsBar from '../wt-notifications-bar.vue';
 
+vi.mock('primevue/usetoast');
+
 describe('WtNotificationsBar', () => {
-	it('renders a component', () => {
-		const wrapper = shallowMount(WtNotificationsBar, {
-			global: {
-				provide: {
-					$eventBus: eventBus,
-				},
-			},
+	let toastAdd;
+
+	beforeEach(() => {
+		toastAdd = vi.fn();
+		useToast.mockReturnValue({
+			add: toastAdd,
 		});
-		expect(wrapper.classes('wt-notifications-bar')).toBe(true);
 	});
 
-	it('shows notification at event bus event', async () => {
-		const wrapper = shallowMount(WtNotificationsBar, {
+	function mountComponent() {
+		return shallowMount(WtNotificationsBar, {
 			global: {
 				provide: {
 					$eventBus: eventBus,
 				},
 			},
 		});
-		eventBus.$emit('notification', {
-			type: 'error',
-			text: 'error',
-		});
-		await wrapper.vm.$nextTick();
-		expect(wrapper.findAllComponents(WtNotification).length).toBe(1);
+	}
+
+	it('renders WtToast with position top-right', () => {
+		const wrapper = mountComponent();
+		const wtToast = wrapper.findComponent(WtToast);
+		expect(wtToast.exists()).toBe(true);
+		expect(wtToast.attributes('position')).toBe('top-right');
+		wrapper.unmount();
 	});
 
-	it('closes notification manually', async () => {
-		const wrapper = shallowMount(WtNotificationsBar, {
-			global: {
-				provide: {
-					$eventBus: eventBus,
-				},
-			},
-		});
+	it('calls toast.add with mapped severity and detail on notification event', () => {
+		const wrapper = mountComponent();
 		eventBus.$emit('notification', {
 			type: 'error',
-			text: 'error',
+			text: 'Something went wrong',
 		});
-		await wrapper.vm.$nextTick();
-		wrapper.findComponent(WtNotification).vm.$emit('close');
-		await wrapper.vm.$nextTick();
-		expect(wrapper.findAllComponents(WtNotification).length).toBe(0);
+		expect(toastAdd).toHaveBeenCalledWith({
+			severity: TypeToSeverityMap.error,
+			detail: 'Something went wrong',
+			life: 4000,
+		});
+		wrapper.unmount();
 	});
 
-	it('closes notification automatically', async () => {
-		const wrapper = shallowMount(WtNotificationsBar, {
-			global: {
-				provide: {
-					$eventBus: eventBus,
-				},
-			},
-			data: () => ({
-				notificationDuration: 100,
-			}),
-		});
+	it('converts timeout from seconds to milliseconds as toast life', () => {
+		const wrapper = mountComponent();
 		eventBus.$emit('notification', {
-			type: 'error',
-			text: 'error',
+			type: 'success',
+			text: 'Done',
+			timeout: 10,
 		});
-		setTimeout(() => {
-			expect(wrapper.findAllComponents(WtNotification).length).toBe(0);
-		}, 101);
+		expect(toastAdd).toHaveBeenCalledWith({
+			severity: TypeToSeverityMap.success,
+			detail: 'Done',
+			life: 10000,
+		});
+		wrapper.unmount();
+	});
+
+	it('unregisters event bus listener on unmount', () => {
+		const offSpy = vi.spyOn(eventBus, '$off');
+		const wrapper = mountComponent();
+		wrapper.unmount();
+		expect(offSpy).toHaveBeenCalledWith('notification', expect.any(Function));
+		offSpy.mockRestore();
 	});
 });

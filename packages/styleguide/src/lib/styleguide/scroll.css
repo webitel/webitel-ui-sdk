@@ -1,7 +1,7 @@
 :root {
-	--scrollbar-width: 5px;
-	--scrollbar-height: 5px;
-	--scrollbar-thumb-width: 5px;
+	--scrollbar-width: 4px;
+	--scrollbar-height: 4px;
+	--scrollbar-thumb-width: 4px;
 	--scrollbar-bg-color: var(--p-surface-50);
 	--scrollbar-thumb-color: var(--p-surface-150);
 	--scrollbar-hover-thumb-color: var(--p-surface-250);

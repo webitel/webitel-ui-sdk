@@ -20,4 +20,4 @@ export const messages = {
 	vi,
 };
 
-export { en, uk, ru, es, pl, ro, kz, uz, vi };
+export { en, es, kz, pl, ro, ru, uk, uz, vi };

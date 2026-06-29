@@ -834,6 +834,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'elementos seleccionados',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) =>
@@ -856,5 +859,10 @@ export default {
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
+	},
+	connectionQuality: {
+		high: 'Excelente calidad de red.',
+		medium: 'Puede haber retrasos, compruebe su red.',
+		low: 'La calidad de red es deficiente, compruebe su red.',
 	},
 };

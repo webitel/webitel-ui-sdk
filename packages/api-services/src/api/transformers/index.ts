@@ -18,7 +18,6 @@ export {
 	camelToSnake,
 	generateUrl,
 	log,
-	translateError,
 	merge,
 	mergeEach,
 	notify,
@@ -26,4 +25,5 @@ export {
 	skipIf,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 };

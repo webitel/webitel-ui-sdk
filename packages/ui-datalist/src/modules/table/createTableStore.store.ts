@@ -10,6 +10,7 @@ import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import type {
+	LoadDataListOptions,
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
@@ -112,8 +113,13 @@ export const tableStoreBody = <
 		parentId: parentId.value,
 	});
 
-	const loadDataList = async () => {
-		isLoading.value = true;
+	const loadDataList = async ({
+		withLoading = true,
+	}: LoadDataListOptions = {}) => {
+		if (withLoading) {
+			isLoading.value = true;
+		}
+
 		$patchPaginationStore({
 			next: false,
 		});
@@ -141,7 +147,9 @@ export const tableStoreBody = <
 			error.value = err;
 			throw err;
 		} finally {
-			isLoading.value = false;
+			if (withLoading) {
+				isLoading.value = false;
+			}
 		}
 	};
 

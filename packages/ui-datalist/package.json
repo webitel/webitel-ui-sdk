@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-datalist",
-	"version": "1.1.28",
+	"version": "1.1.38",
 	"description": "Toolkit for building data lists in webitel ui system",
 	"scripts": {
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
@@ -38,14 +38,14 @@
 		"@webitel/api-services": "^0.1.0",
 		"@webitel/styleguide": "~26.2",
 		"@webitel/ui-sdk": ">=26.2",
-		"axios": "1.13.2",
+		"axios": "^1.15.2",
 		"date-fns": "^4",
 		"pinia": "^3.x",
 		"vue": "^3.5",
 		"zod": "^4.x"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.10",
+		"@biomejs/biome": "2.4.16",
 		"@standard-schema/spec": "^1.x",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/node": "^24.x",

@@ -14,13 +14,16 @@ import inputNumber from './input-number/input-number.js';
 import inputText from './input-text/input-text.js';
 import menubar from './menubar/menubar.js';
 import message from './message/message.js';
+import multiSelect from './multi-select/multi-select.js';
 import password from './password/password.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
+import singleSelect from './single-select/single-select.js';
 import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
 import textarea from './textarea/textarea.js';
+import toast from './toast/toast.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -34,6 +37,7 @@ const components = {
 	checkbox,
 	datepicker,
 	textarea,
+	toast,
 	toggleswitch: switcher,
 	divider,
 	image,
@@ -50,6 +54,8 @@ const components = {
 	datatable: table,
 	toolbar,
 	galleria,
+	multiselect: multiSelect,
+	select: singleSelect,
 };
 
 export default components;

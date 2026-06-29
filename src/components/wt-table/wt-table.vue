@@ -228,9 +228,8 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { useTableColumnDrag } from '../_internals/composables';
 import type { WtTableHeader } from './types/WtTable';
 
 /**
@@ -537,7 +536,6 @@ const virtualScroll = computed(() => {
 		numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
 		totalRecords: props.data.length,
 		autoSize: true, // Enable auto height recalculation
-		appendOnly: true, // Prevent scroll position jumps
 	};
 });
 

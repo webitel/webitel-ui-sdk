@@ -6,6 +6,7 @@ const darkColor = {
 		foreground: '{amber.950}',
 		foregroundHover: '{amber.900}',
 		highlightColor: '{amber.850}',
+		onHighlightColor: '{amber.450}',
 	},
 
 	secondary: {
@@ -15,6 +16,7 @@ const darkColor = {
 		foreground: '{gray.350}',
 		foregroundHover: '{gray.300}',
 		highlightColor: '{gray.850}',
+		onHighlightColor: '{gray.300}',
 	},
 
 	success: {
@@ -24,6 +26,7 @@ const darkColor = {
 		foreground: '{green.950}',
 		foregroundHover: '{green.900}',
 		highlightColor: '{green.850}',
+		onHighlightColor: '{green.450}',
 	},
 
 	warn: {
@@ -33,6 +36,7 @@ const darkColor = {
 		foreground: '{orange.950}',
 		foregroundHover: '{orange.900}',
 		highlightColor: '{orange.850}',
+		onHighlightColor: '{orange.350}',
 	},
 
 	error: {
@@ -42,6 +46,7 @@ const darkColor = {
 		foreground: '{red.950}',
 		foregroundHover: '{red.900}',
 		highlightColor: '{red.850}',
+		onHighlightColor: '{red.300}',
 	},
 
 	info: {
@@ -51,6 +56,7 @@ const darkColor = {
 		foreground: '{light-blue.950}',
 		foregroundHover: '{light-blue.900}',
 		highlightColor: '{light-blue.850}',
+		onHighlightColor: '{light-blue.350}',
 	},
 
 	task: {
@@ -60,6 +66,7 @@ const darkColor = {
 		foreground: '{blue.950}',
 		foregroundHover: '{blue.900}',
 		highlightColor: '{blue.850}',
+		onHighlightColor: '{blue.350}',
 	},
 
 	transfer: {
@@ -69,6 +76,7 @@ const darkColor = {
 		foreground: '{indigo.950}',
 		foregroundHover: '{indigo.900}',
 		highlightColor: '{indigo.850}',
+		onHighlightColor: '{indigo.350}',
 	},
 
 	chat: {
@@ -78,6 +86,7 @@ const darkColor = {
 		foreground: '{cyan.950}',
 		foregroundHover: '{cyan.900}',
 		highlightColor: '{cyan.850}',
+		onHighlightColor: '{cyan.350}',
 	},
 
 	email: {
@@ -87,13 +96,14 @@ const darkColor = {
 		foreground: '{blue.950}',
 		foregroundHover: '{blue.900}',
 		highlightColor: '{blue.850}',
+		onHighlightColor: '{blue.350}',
 	},
 
 	highlight: {
-		background: 'color-mix(in srgb, {primary.400}, transparent 84%)',
-		focusBackground: 'color-mix(in srgb, {primary.400}, transparent 76%)',
-		color: 'rgba(255,255,255,.87)',
-		focusColor: 'rgba(255,255,255,.87)',
+		background: '{amber.800}',
+		focusBackground: '{amber.700}',
+		color: '{amber.300}',
+		focusColor: '{amber.200}',
 	},
 	mask: {
 		background: 'rgba(0,0,0,0.6)',

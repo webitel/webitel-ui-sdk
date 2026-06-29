@@ -1,96 +1,37 @@
 <template>
-  <aside class="wt-notifications-bar wt-scrollbar">
-    <transition-group
-	class="wt-notifications-bar__wrapper"
-      name="wt-notifications-transition"
-      tag="div"
-    >
-      <wt-notification
-        v-for="(notification, key) of notifications"
-        :key="key + notification.text"
-        :type="notification.type"
-        @close="closeNotification(notification)"
-      >
-        {{ notification.text }}
-      </wt-notification>
-    </transition-group>
-  </aside>
+  <wt-toast position="top-right" />
 </template>
 
-<script>
+<script setup>
+import { useToast } from 'primevue/usetoast';
+import { inject, onUnmounted } from 'vue';
 import defaultEventBus from '../../scripts/eventBus.js';
-import { _wtUiLog as loggr } from '../../scripts/logger.js';
+import { TypeToSeverityMap } from '../wt-toast/types';
+import WtToast from '../wt-toast/wt-toast.vue';
 
-export default {
+defineOptions({
 	name: 'WtNotificationsBar',
-	inject: [
-		'$eventBus',
-	],
-	data: () => ({
-		notificationDuration: 4000,
-		notifications: [],
+});
 
-		eventBus: defaultEventBus,
-	}),
-	created() {
-		if (this.$eventBus) {
-			this.eventBus = this.$eventBus;
-		} else {
-			loggr.warn({
-				entity: 'component',
-				module: 'wt-notification-bar',
-			})(
-				'no globally provided $eventBus found, using default webitel-ui eventBus',
-			);
-		}
+const DEFAULT_NOTIFICATION_LIFE_MS = 4000;
 
-		this.eventBus.$on('notification', this.showNotification);
-	},
-	unmounted() {
-		this.eventBus.$off('notification', this.showNotification);
-	},
-	methods: {
-		showNotification(notification) {
-			this.notifications.unshift(notification);
-			setTimeout(
-				() => this.closeNotification(notification),
-				notification.timeout * 1000 || this.notificationDuration,
-			);
-		},
-		closeNotification(notification) {
-			const index = this.notifications.indexOf(notification);
-			this.notifications.splice(index, 1);
-		},
-	},
-};
+const injectedEventBus = inject('$eventBus', null);
+
+const activeEventBus = injectedEventBus ?? defaultEventBus;
+
+const toast = useToast();
+
+function showNotification({ type, text, timeout }) {
+	toast.add({
+		severity: TypeToSeverityMap[type],
+		detail: text,
+		life: timeout != null ? timeout * 1000 : DEFAULT_NOTIFICATION_LIFE_MS,
+	});
+}
+
+activeEventBus.$on('notification', showNotification);
+
+onUnmounted(() => {
+	activeEventBus.$off('notification', showNotification);
+});
 </script>
-
-<style scoped>
-.wt-notifications-bar {
-  position: fixed;
-  top: var(--notifications-bar-corner-margin);
-  right: var(--notifications-bar-corner-margin);
-  z-index: var(--notifications-bar-z-index);
-  max-height: var(--notifications-bar-max-height);
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.wt-notifications-bar__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  min-height: 0;
-}
-
-.wt-notifications-transition-enter-active,
-.wt-notifications-transition-leave-active {
-  transition: all var(--transition);
-}
-
-.wt-notifications-transition-enter,
-.wt-notifications-transition-leave-to {
-  transform: translateX(60px);
-  opacity: 0;
-}
-</style>

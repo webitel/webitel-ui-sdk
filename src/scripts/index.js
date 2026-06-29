@@ -20,6 +20,7 @@ import convertDuration from './convertDuration.js';
 import debounce from './debounce.js';
 import downloadFile from './downloadFile/downloadFile';
 import eventBus from './eventBus.js';
+import { getConnectionQuality } from './getConnectionQuality.ts';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate.js';
 import isEmpty from './isEmpty.js';
 import { wtlog } from './logger.js';
@@ -46,6 +47,7 @@ export {
 	debounce,
 	downloadFile,
 	eventBus,
+	getConnectionQuality,
 	getEndOfDay,
 	getNextSortOrder,
 	getStartOfDay,

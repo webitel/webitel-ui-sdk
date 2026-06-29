@@ -5,6 +5,7 @@
 		:src="normalizedSrcObject"
 		:loop="props.loop"
 		:autoplay="autoplay"
+    :playback-rate="playerSettings.playbackRate"
     @ended="handleEnded"
 	>
 
@@ -18,6 +19,11 @@
 			<mute-button v-if="!props.hideMuteButton" />
 			<volume-slider v-if="!props.hideVolumeSlider" />
 
+			<settings-panel
+				v-if="!props.hideSettings"
+				v-model:model-value="playerSettings"
+			/>
+
 			<media-button
 				v-if="props.download"
 				class="download-button"
@@ -25,7 +31,7 @@
 			>
 				<wt-icon-btn
 					icon="plyr-download"
-					size="sm"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -36,7 +42,7 @@
 			>
 				<wt-icon-btn
 					icon="close"
-					size="sm"
+					:size="ComponentSize.SM"
 				/>
 			</media-button>
 
@@ -50,8 +56,11 @@
 >
 import 'vidstack/bundle';
 import type { MediaSrc } from 'vidstack';
-import { computed, toRefs } from 'vue';
-
+import { ref, toRefs, watch } from 'vue';
+import { ComponentSize } from '../../enums';
+import SettingsPanel, {
+	type MediaSettings,
+} from '../_shared/settings-panel/settings-panel.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
 import MuteButton from './src/components/buttons/mute-button.vue';
@@ -118,6 +127,12 @@ interface Props {
 	 */
 	hideMuteButton?: boolean;
 	/**
+	 * Hide settings button
+	 * @type {boolean}
+	 * @default false
+	 */
+	hideSettings?: boolean;
+	/**
 	 * Shows close button
 	 * @type {boolean}
 	 * @default true
@@ -141,6 +156,7 @@ const props = withDefaults(defineProps<Props>(), {
 	invertTime: true,
 	hideVolumeSlider: false,
 	hideMuteButton: false,
+	hideSettings: false,
 	resetVolume: false,
 	closable: true,
 	position: 'sticky',
@@ -150,6 +166,10 @@ const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
 }>();
+
+const playerSettings = ref<MediaSettings>({
+	playbackRate: 1,
+});
 
 const { src: srcRef } = toRefs(props);
 
@@ -183,10 +203,22 @@ function handleEnded(event: Event) {
 	const player = event.target as HTMLMediaElement;
 	player.currentTime = 0;
 }
+
+function resetPlayerSettings() {
+	playerSettings.value.playbackRate = 1;
+}
+
+watch(
+	() => props.src,
+	() => {
+		resetPlayerSettings();
+	},
+);
 </script>
 
 <style scoped>
 .wt-player {
+  display: block;
 	width: 100%;
 	max-width: 100%;
 	box-shadow: var(--elevation-10);

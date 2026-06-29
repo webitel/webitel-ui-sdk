@@ -837,6 +837,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'элемент таңдалды',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,
@@ -857,5 +860,10 @@ export default {
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
+	},
+	connectionQuality: {
+		high: 'Желі сапасы отличная.',
+		medium: 'Кідіріс болуы мүмкін, желіні тексеріңіз.',
+		low: 'Желі сапасы нашар, желіні тексеріңіз.',
 	},
 };

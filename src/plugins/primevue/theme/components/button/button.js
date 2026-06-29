@@ -163,8 +163,13 @@ const button = {
             transform: translate(-50%, -50%);
         }
         .p-button {
-            min-width: 90px;
+            min-width: var(--btn-min-width);
             border: none !important;
+        }
+        .p-button--size-${ComponentSize.XS},
+        .p-button--size-${ComponentSize.SM},
+        .p-button.p-button-sm {
+            min-width: var(--btn-min-width--size-sm);
         }
         .p-button:hover {
             border: none !important;

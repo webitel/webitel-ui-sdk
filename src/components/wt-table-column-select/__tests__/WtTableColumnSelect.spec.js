@@ -12,12 +12,12 @@ describe('WtTableColumnSelect', () => {
 		expect(wrapper.classes('wt-table-column-select')).toBe(true);
 	});
 	it('column select popup is invisible by default', () => {
-		const wrapper = shallowMount(WtTableColumnSelect, {
+		const wrapper = mount(WtTableColumnSelect, {
 			props: {
 				headers: [],
 			},
 		});
-		expect(wrapper.find('wt-table-column-select__popup').exists()).toBe(false);
+		expect(wrapper.find('.wt-popup__popup').exists()).toBe(false);
 	});
 	it('column select popup is opening by icon-btn click', async () => {
 		const wrapper = mount(WtTableColumnSelect, {
@@ -31,6 +31,6 @@ describe('WtTableColumnSelect', () => {
 			})
 			.vm.$emit('click');
 		await wrapper.vm.$nextTick();
-		expect(wrapper.find('.wt-popup').exists()).toBe(true);
+		expect(wrapper.find('.wt-popup__popup').exists()).toBe(true);
 	});
 });

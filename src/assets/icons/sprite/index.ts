@@ -89,6 +89,7 @@ import elevenlabs from './elevenlabs.svg?raw';
 import email from './email.svg?raw';
 import emailInbound from './email-inbound.svg?raw';
 import emailOutbound from './email-outbound.svg?raw';
+import error from './error.svg?raw';
 import expand from './expand.svg?raw';
 import exportExel from './export-exel.svg?raw';
 import eyeClosed from './eye--closed.svg?raw';
@@ -144,6 +145,11 @@ import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
 import pin from './pin.svg?raw';
 import play from './play.svg?raw';
+import playback050 from './playback-0.50.svg?raw';
+import playback075 from './playback-0.75.svg?raw';
+import playback100 from './playback-1.00.svg?raw';
+import playback150 from './playback-1.50.svg?raw';
+import playback175 from './playback-1.75.svg?raw';
 import playerEnterFullscreen from './player-enter-fullscreen.svg?raw';
 import playerExitFullscreen from './player-exit-fullscreen.svg?raw';
 import plus from './plus.svg?raw';
@@ -195,6 +201,7 @@ import selectCustomValueEnter from './select-custom-value-enter.svg?raw';
 import sendArrow from './send-arrow.svg?raw';
 import settings from './settings.svg?raw';
 import sharingEnd from './sharing-end.svg?raw';
+import shieldCheck from './shield-check.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
@@ -233,7 +240,11 @@ import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
+import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsSignalHigh from './ws-signal-high.svg?raw';
+import wsSignalLow from './ws-signal-low.svg?raw';
+import wsSignalMedium from './ws-signal-medium.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
 
@@ -265,6 +276,7 @@ export default objCamelToKebab({
 	calendar,
 	dislike,
 	darkMode,
+	shieldCheck,
 
 	call,
 	'call--filled': callFilled,
@@ -378,6 +390,11 @@ export default objCamelToKebab({
 	pause,
 	'pause--filled': pauseFilled,
 	play,
+	'playback-0.50': playback050,
+	'playback-0.75': playback075,
+	'playback-1.00': playback100,
+	'playback-1.50': playback150,
+	'playback-1.75': playback175,
 	table,
 	treeExpand,
 	prompter,
@@ -408,6 +425,8 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	error,
+	warning,
 	union,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
@@ -439,6 +458,10 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsSignalHigh,
+	wsSignalMedium,
+	wsSignalLow,
 
 	portal,
 

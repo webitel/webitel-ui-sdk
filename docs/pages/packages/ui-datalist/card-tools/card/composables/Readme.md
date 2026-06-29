@@ -31,6 +31,30 @@
 > **Зверніть увагу!** саме `useCardValidation` в результаті вертає на клієнтський компонент
 > `modelValue`, до якого потім через `v-model` вʼяжуться інпути форми.
 
+### `useNestedCardComponent` – вкладена карточка
+
+Для карточок, які живуть **всередині** іншої карточки — popup або child-route.
+
+* **Імпортується в вкладений компонент
+
+* **Обгортка над** [`useCardComponent`](#usecardcomponent-all-in-one-на-рівні-клієнта) з `manualSetup: true`.
+
+* **Параметр** `routeParamName` — ім'я ключа в `route.params` для ID вкладеного запису (напр. `'statusConditionId'`).
+  Якщо відрізняється від дефолтного `'id'` — карточка вважається вкладеною.
+
+* **`parentId`** читається автоматично з `route.params.id` — передавати з компонента не потрібно.
+
+* **Повертає той самий набір значень **, що й `useCardComponent`: `isNew`, `hasValidationErrors`, `save`, `modelValue`
+
+Детальний приклад: [Nested Card Usage](../usage/nested/Readme.md).
+
+### `useCardRouting`
+
+Внутрішній composable для синхронізації store `itemId` з URL.
+
+* Для звичайної карточки: `routeParamName = 'id'` (default).
+* Для вкладеної: custom `routeParamName` — URL оновлюється лише після створення нового запису (`'new'` → server ID).
+
 ### Інші composables
 
 **1 composable => 1 ui фіча для типового компонента карточки.**

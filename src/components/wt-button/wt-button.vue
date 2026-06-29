@@ -6,6 +6,7 @@
         'p-button--with-badge': props.badge,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
+        [`p-button--size-${size}`]: true,
         [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
 				[ `typo-button--${size}` ]: size,
       }"
@@ -42,7 +43,7 @@
 
       <wt-icon
         v-if="icon"
-        :class="{ 'wt-button__icon--hidden': showLoader }"  
+        :class="{ 'wt-button__icon--hidden': showLoader }"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -53,8 +54,7 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import { computed, inject, ref, useAttrs, watch } from 'vue';
-import { useStore } from 'vuex';
+import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
 import WtBadge from '../wt-badge-new/wt-badge.vue';
@@ -111,28 +111,7 @@ const badgeClass = computed(() => ({
 	'wt-badge--absolute': props.badgeAbsolutePosition,
 }));
 
-// @Ler24
-// Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
-let store = null;
-try {
-	store = useStore();
-} catch {
-	store = null;
-}
-
-const injectDarkMode = inject('darkMode');
-
-const darkMode = computed(() => {
-	if (injectDarkMode?.value) {
-		return injectDarkMode.value;
-	}
-
-	if (store?.getters) {
-		return store.getters['appearance/DARK_MODE'] ?? false;
-	}
-
-	return false;
-});
+const darkMode = toRef(inject<boolean>('darkMode'));
 
 /**
  * @author: @Opelsandr Palonnyi
@@ -166,7 +145,7 @@ watch(
 
 <style>
 .wt-button {
-	position: relative;
+  position: relative;
 }
 
 .p-button--with-badge {
@@ -177,9 +156,9 @@ watch(
   display: contents;
 }
 
-/* 
+/*
 	@author HlukhovYe
-	Hides the icon instantly when the loader is shown. 
+	Hides the icon instantly when the loader is shown.
 */
 .wt-button__icon--hidden {
   opacity: 0;

@@ -1,11 +1,10 @@
 <template>
-  <wt-select
+  <wt-single-select
     :options="['sm', 'md', 'lg', 'xl', '2xl']"
-    :track-by="null"
-    :value="size"
+    :data-key="null"
+    v-model:model-value="size"
     label="Size"
     style="width: 400px; margin-bottom: var(--spacing-md)"
-    @input="size = $event"
   />
 
   <div style="position: relative;">

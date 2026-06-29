@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="wrapper">
     <slot name="activator" v-bind="{ show, toggle, hide }" />
 
     <p-popover
@@ -23,7 +23,8 @@
 
 <script setup lang="ts">
 import type { PopoverEmitsOptions, PopoverProps } from 'primevue';
-import { defineExpose, useAttrs, useTemplateRef } from 'vue';
+import { useAttrs, useTemplateRef } from 'vue';
+import { usePopoverOverlayFix } from './_internals/composables/usePopoverOverlayFix';
 
 interface Props extends PopoverProps {
 	disabled?: boolean;
@@ -31,6 +32,7 @@ interface Props extends PopoverProps {
 
 const attrs = useAttrs();
 const innerPopover = useTemplateRef('innerPopover');
+const wrapper = useTemplateRef('wrapper');
 const props = withDefaults(defineProps<Props>(), {
 	appendTo: 'body',
 	baseZIndex: 0,
@@ -44,6 +46,8 @@ const props = withDefaults(defineProps<Props>(), {
 	disabled: false,
 });
 defineEmits<PopoverEmitsOptions>();
+
+usePopoverOverlayFix(innerPopover, wrapper);
 
 const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
 	if (props.disabled) return;
@@ -71,3 +75,9 @@ defineExpose({
 	hide,
 });
 </script>
+
+<style>
+.p-popover {
+  box-shadow: var(--elevation-5);
+}
+</style>

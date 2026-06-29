@@ -21,6 +21,7 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
+      <!-- $listeners is because of compat using in applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -30,7 +31,9 @@
         :placeholder="placeholder || label"
         class="wt-input-text__input typo-body-1"
         :inputmode="type"
+        :size="primevueSizeMap[size]"
         v-bind="$attrs"
+        v-on="$listeners"   
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
@@ -56,15 +59,15 @@
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
-
-import { useInputControl } from '../../composables';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useInputControl } from '../_internals/composables';
 
 interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	type?: string;
+	size?: string | null;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
@@ -79,6 +82,7 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	label: '',
 	labelProps: () => ({}),
 	type: 'text',
+	size: null,
 	placeholder: '',
 	disabled: false,
 	required: false,
@@ -88,6 +92,11 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	customValidators: () => [],
 	hideInputInfo: false,
 });
+
+const primevueSizeMap = {
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.LG]: 'large',
+};
 
 const model = defineModel<string>({
 	default: '',

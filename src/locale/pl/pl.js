@@ -836,6 +836,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'elementów wybranych',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) =>
@@ -857,5 +860,10 @@ export default {
 			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
+	},
+	connectionQuality: {
+		high: 'Doskonała jakość sieci.',
+		medium: 'Możliwe opóźnienia, sprawdź sieć.',
+		low: 'Słaba jakość sieci, sprawdź sieć.',
 	},
 };

@@ -6,7 +6,13 @@
   >
     <slot />
     <template #removeicon>
-      <wt-icon class="wt-chip__close-icon" icon="close--filled" />
+      <wt-icon-btn
+				class="wt-chip__close-icon" 
+				icon="close--filled" 
+				:size="ComponentSize.SM"
+				:color="ChipColor.ON_PRIMARY"
+				@click="emit('remove', $event)"
+			/>
     </template>
   </p-chip>
 </template>
@@ -14,7 +20,7 @@
 <script setup lang="ts">
 import type { ChipProps } from 'primevue/chip';
 
-import { ChipColor } from '../../enums';
+import { ChipColor, ComponentSize } from '../../enums';
 
 interface WtProps extends ChipProps {
 	/**
@@ -36,6 +42,10 @@ withDefaults(defineProps<WtProps>(), {
 	color: ChipColor.MAIN,
 	removable: false,
 });
+
+const emit = defineEmits<{
+	remove: [];
+}>();
 </script>
 
 <style scoped>

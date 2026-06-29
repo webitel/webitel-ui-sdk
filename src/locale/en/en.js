@@ -219,6 +219,7 @@ export default deepmerge(
 					[QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
 					[QueueType.INBOUND_JOB_QUEUE]: 'Inbound task queue',
 					[QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound task queue',
+					[QueueType.IM_CHAT_QUEUE]: 'im queue',
 				},
 			},
 			agent: {
@@ -847,6 +848,9 @@ export default deepmerge(
 					},
 				},
 			},
+			select: {
+				selectedItemsLabel: 'items selected',
+			},
 		},
 		systemNotifications: {
 			success: {
@@ -870,6 +874,11 @@ export default deepmerge(
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
+		},
+		connectionQuality: {
+			high: 'Excellent network quality.',
+			medium: 'There might be some delay, please check your network.',
+			low: 'Network quality is poor, please check your network.',
 		},
 	},
 	notTranslatable,

@@ -41,6 +41,7 @@ yarn-error.log*
 *.sw?
 .cursor
 CLAUDE.md
+.claude
 
 vite.config.*.timestamp*
 .eslintcache

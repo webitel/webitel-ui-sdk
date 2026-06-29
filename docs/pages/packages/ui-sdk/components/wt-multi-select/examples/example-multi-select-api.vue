@@ -1,0 +1,39 @@
+<script setup>
+import { ref } from 'vue';
+
+import { allApiOptions } from '../_internals/select-example-options.js';
+
+const PAGE_SIZE = 10;
+
+const searchMethod = async ({ search, page }) => {
+	// simulate network delay
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
+	const filtered = allApiOptions.filter(({ name }) =>
+		name.toLowerCase().includes(search.toLowerCase()),
+	);
+
+	const offset = (page - 1) * PAGE_SIZE;
+	const items = filtered.slice(offset, offset + PAGE_SIZE);
+	const next = offset + PAGE_SIZE < filtered.length;
+
+	return {
+		items,
+		next,
+	};
+};
+
+const value = ref([]);
+</script>
+
+<template>
+  <wt-multi-select
+    v-model="value"
+    :search-method="searchMethod"
+    label="Multi Select (API)"
+    option-label="name"
+		data-key="language"
+  />
+</template>
+
+<style scoped lang="scss"></style>

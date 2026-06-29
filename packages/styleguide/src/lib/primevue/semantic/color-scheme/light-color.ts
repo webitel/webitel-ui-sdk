@@ -6,6 +6,7 @@ const lightColor = {
 		foreground: '{amber.900}',
 		foregroundHover: '{amber.850}',
 		highlightColor: '{amber.100}',
+		onHighlightColor: '{amber.750}',
 	},
 
 	secondary: {
@@ -15,6 +16,7 @@ const lightColor = {
 		foreground: '{gray.750}',
 		foregroundHover: '{gray.700}',
 		highlightColor: '{gray.50}',
+		onHighlightColor: '{gray.700}',
 	},
 
 	success: {
@@ -24,6 +26,7 @@ const lightColor = {
 		foreground: '{green.50}',
 		foregroundHover: '{green.100}',
 		highlightColor: '{green.100}',
+		onHighlightColor: '{green.750}',
 	},
 
 	warn: {
@@ -33,6 +36,7 @@ const lightColor = {
 		foreground: '{orange.50}',
 		foregroundHover: '{orange.100}',
 		highlightColor: '{orange.100}',
+		onHighlightColor: '{orange.650}',
 	},
 
 	error: {
@@ -42,6 +46,7 @@ const lightColor = {
 		foreground: '{red.50}',
 		foregroundHover: '{red.100}',
 		highlightColor: '{red.100}',
+		onHighlightColor: '{red.600}',
 	},
 
 	info: {
@@ -51,6 +56,7 @@ const lightColor = {
 		foreground: '{light-blue.50}',
 		foregroundHover: '{light-blue.100}',
 		highlightColor: '{light-blue.100}',
+		onHighlightColor: '{light-blue.700}',
 	},
 
 	task: {
@@ -60,6 +66,7 @@ const lightColor = {
 		foreground: '{blue.50}',
 		foregroundHover: '{blue.100}',
 		highlightColor: '{blue.100}',
+		onHighlightColor: '{blue.700}',
 	},
 
 	transfer: {
@@ -69,6 +76,7 @@ const lightColor = {
 		foreground: '{indigo.50}',
 		foregroundHover: '{indigo.100}',
 		highlightColor: '{indigo.100}',
+		onHighlightColor: '{indigo.700}',
 	},
 
 	chat: {
@@ -78,6 +86,7 @@ const lightColor = {
 		foreground: '{cyan.50}',
 		foregroundHover: '{cyan.100}',
 		highlightColor: '{cyan.100}',
+		onHighlightColor: '{cyan.700}',
 	},
 
 	email: {
@@ -87,13 +96,14 @@ const lightColor = {
 		foreground: '{blue.50}',
 		foregroundHover: '{blue.100}',
 		highlightColor: '{blue.100}',
+		onHighlightColor: '{blue.700}',
 	},
 
 	highlight: {
-		background: '{primary.50}',
-		focusBackground: '{primary.100}',
-		color: '{primary.700}',
-		focusColor: '{primary.800}',
+		background: '{amber.100}',
+		focusBackground: '{amber.200}',
+		color: '{amber.700}',
+		focusColor: '{amber.800}',
 	},
 
 	mask: {

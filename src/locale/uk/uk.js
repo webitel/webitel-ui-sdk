@@ -831,6 +831,9 @@ export default {
 			},
 		},
 	},
+	select: {
+		selectedItemsLabel: 'елементів вибрано',
+	},
 	systemNotifications: {
 		success: {
 			update: ({ named }) => `${named('entity')} було оновлено`,
@@ -851,5 +854,10 @@ export default {
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',
 		markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
+	},
+	connectionQuality: {
+		high: 'Відмінна якість мережі.',
+		medium: 'Можливі затримки, перевірте мережу.',
+		low: 'Погана якість мережі, перевірте мережу.',
 	},
 };

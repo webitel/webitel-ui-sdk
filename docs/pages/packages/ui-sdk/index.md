@@ -26,6 +26,7 @@
 * [wt-badge](components/wt-badge/Readme.md)
 * [wt-button](components/wt-button/Readme.md)
 * [wt-button-select](components/wt-button-select/Readme.md)
+* [wt-card](components/wt-card/Readme.md)
 
 * wt-cc-agent-status-timers
 * [wt-checkbox](components/wt-checkbox/Readme.md)
@@ -59,7 +60,6 @@
 * [wt-logo](components/wt-logo/Readme.md)
 * [wt-message](components/wt-message/Readme.md)
 * [wt-navigation-bar](components/wt-navigation-bar/Readme.md)
-* [wt-notification](components/wt-notification/Readme.md)
 * [wt-notifications-bar](components/wt-notifications-bar/Readme.md)
 * [wt-page-header](components/wt-page-header/Readme.md)
 * [wt-page-wrapper](components/wt-page-wrapper/Readme.md)
@@ -72,7 +72,6 @@
 * [wt-radio](components/wt-radio/Readme.md)
 * [wt-rounded-action](components/wt-rounded-action/Readme.md)
 * [wt-search-bar](components/wt-search-bar/Readme.md)
-* [wt-select](components/wt-select/Readme.md)
 * [wt-slider](components/wt-slider/Readme.md)
 * [wt-status-select](components/wt-status-select/Readme.md)
 * [wt-stepper](components/wt-stepper/Readme.md)
@@ -85,6 +84,7 @@
 * [wt-textarea](components/wt-textarea/Readme.md)
 * [wt-time-input](components/wt-time-input/Readme.md)
 * [wt-timepicker](components/wt-timepicker/Readme.md)
+* [wt-toast](components/wt-toast/Readme.md)
 * [wt-tooltip](components/wt-tooltip/Readme.md)
 * [wt-tree](components/wt-tree/Readme.md)
 * [wt-tree-table](components/wt-tree-table/Readme.md)

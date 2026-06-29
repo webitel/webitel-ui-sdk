@@ -12,13 +12,16 @@ import InputNumberScheme from './input-number';
 import InputTextScheme from './input-text';
 import MenubarScheme from './menubar';
 import MessageScheme from './message';
+import MultiSelectScheme from './multiselect';
 import PasswordScheme from './password';
 import PopoverScheme from './popover';
 import RadioScheme from './radio';
+import SingleSelectScheme from './single-select';
 import SliderScheme from './slider';
 import SwitcherScheme from './switcher';
 import TableScheme from './table';
 import TextareaScheme from './textarea';
+import ToastScheme from './toast';
 import ToolbarScheme from './toolbar';
 import TooltipScheme from './tooltip';
 
@@ -37,13 +40,16 @@ export {
 	InputTextScheme,
 	MenubarScheme,
 	MessageScheme,
+	MultiSelectScheme,
 	PasswordScheme,
 	PopoverScheme,
 	RadioScheme,
+	SingleSelectScheme,
 	SliderScheme,
 	SwitcherScheme,
 	TableScheme,
 	TextareaScheme,
+	ToastScheme,
 	ToolbarScheme,
 	TooltipScheme,
 };
