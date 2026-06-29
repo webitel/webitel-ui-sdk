@@ -3,7 +3,34 @@ import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
 
-const lifeMs = 4000;
+const lifeMs = 400000;
+
+const toastActions = [
+	{
+		type: 'success',
+		color: 'success',
+	},
+	{
+		type: 'info',
+		color: 'primary',
+	},
+	{
+		type: 'warn',
+		color: 'warn',
+	},
+	{
+		type: 'error',
+		color: 'error',
+	},
+	{
+		type: 'contrast',
+		color: 'job',
+	},
+	{
+		type: 'secondary',
+		color: 'secondary',
+	},
+];
 
 const showWtLike = (type) => {
 	const map = {
@@ -17,7 +44,7 @@ const showWtLike = (type) => {
 			summary: 'Info',
 			detail: 'Informational message',
 		},
-		warning: {
+		warn: {
 			severity: 'warn',
 			summary: 'Warning',
 			detail: 'Please review this warning',
@@ -55,12 +82,17 @@ const showWtLike = (type) => {
       <code>&lt;WtToast /&gt;</code> у корінь і <code>ToastService</code> у плагіні PrimeVue).
     </p>
     <div class="wt-toast-migration-demo__actions">
-      <wt-button color="success" @click="showWtLike('success')"> success </wt-button>
-      <wt-button color="primary" @click="showWtLike('info')"> info </wt-button>
-      <wt-button color="warn" @click="showWtLike('warning')"> warning </wt-button>
-      <wt-button color="error" @click="showWtLike('error')"> error </wt-button>
-      <wt-button color="job" @click="showWtLike('contrast')"> contrast </wt-button>
-      <wt-button color="secondary" @click="showWtLike('secondary')"> secondary </wt-button>
+      <wt-button
+        v-for="action in toastActions"
+        :key="action.type"
+        :style="{
+          background: `var(--p-toast-${action.type}-background)`,
+          color: `var(--p-toast-${action.type}-color)`
+        }"
+        @click="showWtLike(action.type)"
+      >
+        {{ action.type }}
+      </wt-button>
     </div>
   </div>
 </template>
