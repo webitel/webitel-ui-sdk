@@ -561,6 +561,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Orden descendente';
 					return 'Ordenar';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

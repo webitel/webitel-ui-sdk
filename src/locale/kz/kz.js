@@ -563,6 +563,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Кему бойынша сұрыптау';
 					return 'Сұрыптау';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {
