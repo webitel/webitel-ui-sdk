@@ -71,17 +71,9 @@ export const createUserinfoStore = () => {
 		};
 
 		const showUserNotifications = () => showNotifications(userId.value);
-		const clearStorageNotifications = (ids?: string | string[]): void => {
-			const normalizedIds = Array.isArray(ids)
-				? ids
-				: [
-						ids ?? userId.value,
-					];
 
-			normalizedIds.forEach((singleId) => {
-				clearShownUserNotifications(singleId);
-			});
-		};
+		const clearStorageNotifications = (ids?: string | string[]): void =>
+			clearShownUserNotifications(ids ?? userId.value);
 
 		const logoutUser = async () => {
 			const authUrl = import.meta.env.VITE_AUTH_URL;
