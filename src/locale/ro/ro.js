@@ -842,9 +842,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'elemente selectate',
+		select: {
+			selectedItemsLabel: 'elemente selectate',
+		},
 	},
 	systemNotifications: {
 		success: {

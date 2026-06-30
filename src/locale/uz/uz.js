@@ -841,9 +841,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'ta element tanlandi',
+		select: {
+			selectedItemsLabel: 'ta element tanlandi',
+		},
 	},
 	systemNotifications: {
 		success: {
