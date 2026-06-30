@@ -837,9 +837,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'elementów wybranych',
+		select: {
+			selectedItemsLabel: 'elementów wybranych',
+		},
 	},
 	systemNotifications: {
 		success: {
