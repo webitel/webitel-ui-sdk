@@ -838,9 +838,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'элемент таңдалды',
+		select: {
+			selectedItemsLabel: 'элемент таңдалды',
+		},
 	},
 	systemNotifications: {
 		success: {

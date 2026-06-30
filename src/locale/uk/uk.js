@@ -832,9 +832,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'елементів вибрано',
+		select: {
+			selectedItemsLabel: 'елементів вибрано',
+		},
 	},
 	systemNotifications: {
 		success: {

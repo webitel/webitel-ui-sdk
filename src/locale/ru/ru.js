@@ -833,9 +833,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'элементов выбрано',
+		select: {
+			selectedItemsLabel: 'элементов выбрано',
+		},
 	},
 	systemNotifications: {
 		success: {

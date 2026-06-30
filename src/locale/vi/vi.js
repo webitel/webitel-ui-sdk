@@ -840,9 +840,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'mục đã chọn',
+		select: {
+			selectedItemsLabel: 'mục đã chọn',
+		},
 	},
 	systemNotifications: {
 		success: {
