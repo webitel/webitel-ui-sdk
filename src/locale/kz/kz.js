@@ -64,6 +64,8 @@ export default {
 		generate: 'Жасау',
 		from: 'Бастап',
 		to: 'Дейін',
+		today: 'Бүгін',
+		clear: 'Тазарту',
 		tts: 'Мәтін-дауыс',
 		state: 'Күй',
 		status: 'Күй',

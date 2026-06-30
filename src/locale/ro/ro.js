@@ -64,6 +64,8 @@ export default {
 		generate: 'Generează',
 		from: 'De la',
 		to: 'Până la',
+		today: 'Astăzi',
+		clear: 'Șterge',
 		tts: 'Text-to-Speech',
 		state: 'Stare',
 		status: 'Status',

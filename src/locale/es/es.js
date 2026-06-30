@@ -63,6 +63,8 @@ export default {
 		generate: 'Generar',
 		from: 'Desde',
 		to: 'Hasta',
+		today: 'Hoy',
+		clear: 'Borrar',
 		tts: 'Texto a Voz',
 		state: 'Estado',
 		status: 'Estado',

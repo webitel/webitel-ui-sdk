@@ -64,9 +64,9 @@
   >
     <wt-datepicker
       v-bind="sharedChildrenProps"
-      :value="value"
-      mode="datetime"
-      @input="setValue"
+      :model-value="value"
+      show-time
+      @update:model-value="setValue"
     />
   </slot>
 </template>

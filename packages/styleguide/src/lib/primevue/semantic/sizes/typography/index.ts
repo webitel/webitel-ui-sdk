@@ -68,9 +68,17 @@ export default {
 		lineHeight: '16px',
 		textTransform: 'none',
 	},
-	[WtTypography.Button]: {
+	[WtTypography.ButtonMD]: {
 		font: {
 			size: '12px',
+			weight: '500',
+		},
+		lineHeight: '24px',
+		textTransform: 'uppercase',
+	},
+	[WtTypography.ButtonSM]: {
+		font: {
+			size: '10px',
 			weight: '500',
 		},
 		lineHeight: '24px',
