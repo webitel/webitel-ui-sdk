@@ -68,7 +68,7 @@
 		"flat": "^6.0.1",
 		"is-valid-domain": "^0.1.6",
 		"path-browserify": "^1.0.1",
-		"primelocale": "^2.3.2",
+		"primelocale": "^2.4.0",
 		"primevue": "^4.5.4",
 		"qs-esm": "^7.0.3",
 		"sortablejs": "^1.15.3",

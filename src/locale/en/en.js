@@ -410,7 +410,7 @@ export default deepmerge(
 					[AdminSections.StoragePolicies]: 'Storage policies',
 					[AdminSections.CognitiveProfiles]: 'Cognitive profiles',
 					[AdminSections.EmailProfiles]: 'Email profiles',
-					[AdminSections.SingleSignOn]: 'Single Sign-on',
+					[AdminSections.SingleSignOn]: 'SSO',
 					[AdminSections.ImportCsv]: 'Imports of CSV from file',
 					[AdminSections.Triggers]: 'Triggers',
 					[AdminSections.Media]: 'Media files',
