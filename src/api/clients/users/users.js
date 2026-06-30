@@ -317,6 +317,20 @@ const logoutUser = async ({ id }) => {
 	}
 };
 
+const logoutMultipleUsers = async (selection) => {
+	const url = `${baseUrl}/logout`;
+	try {
+		const response = await instance.post(url, {
+			selection,
+		});
+		return applyTransform(response.data, []);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const UsersAPI = {
 	getList: getUsersList,
 	get: getUser,
@@ -327,6 +341,7 @@ const UsersAPI = {
 	getLookup: getUsersLookup,
 	patchUserPresence,
 	logoutUser,
+	logoutMultipleUsers,
 
 	...generatePermissionsApi(baseUrl),
 };
