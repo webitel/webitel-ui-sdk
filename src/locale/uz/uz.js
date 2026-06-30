@@ -64,6 +64,8 @@ export default {
 		generate: 'Generatsiya',
 		from: 'Dan',
 		to: 'Gacha',
+		today: 'Bugun',
+		clear: 'Tozalash',
 		tts: 'Matnni ovozga aylantirish',
 		state: 'Holat',
 		status: 'Holat',
@@ -568,6 +570,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Kamayish tartibida saralash';
 					return 'Saralash';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

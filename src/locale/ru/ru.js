@@ -60,6 +60,8 @@ export default {
 		generate: 'Сгенерировать',
 		from: 'От',
 		to: 'До',
+		today: 'Сегодня',
+		clear: 'Очистить',
 		tts: 'Text-to-Speech',
 		state: 'Состояние',
 		status: 'Статус',
@@ -559,6 +561,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Сортировка по убыванию';
 					return 'Сортировка';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

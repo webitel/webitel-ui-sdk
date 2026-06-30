@@ -10,17 +10,17 @@
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :value="model.from"
+      :model-value="model.from"
       :label="t('reusable.from')"
-      mode="datetime"
-      @input="changeAbsoluteValue($event, 'from')"
+      show-time
+      @update-model:value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :value="model.to"
+      :model-value="model.to"
       :label="t('reusable.to')"
-      mode="datetime"
-      @input="changeAbsoluteValue($event, 'to')"
+      show-time
+      @update-model:value="changeAbsoluteValue($event, 'to')"
     />
   </div>
 </template>

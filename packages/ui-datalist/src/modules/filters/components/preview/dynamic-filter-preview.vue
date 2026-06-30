@@ -118,6 +118,8 @@ const fillLocalValue = async (filter = props.filter) => {
 		const { items } = await valueSearchMethod(
 			{
 				id: filterValue,
+				// -1 returns all records
+				size: -1,
 			},
 			{
 				filterValue,

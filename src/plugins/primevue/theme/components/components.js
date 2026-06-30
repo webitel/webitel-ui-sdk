@@ -5,6 +5,7 @@ import breadcrumb from './breadcrumb/breadcrumb.js';
 import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
+import datepicker from './datepicker/datepicker.js';
 import divider from './divider/divider.js';
 import galleria from './galleria/galleria.js';
 import image from './image/image.js';
@@ -34,6 +35,7 @@ const components = {
 	badge,
 	chip,
 	checkbox,
+	datepicker,
 	textarea,
 	toast,
 	toggleswitch: switcher,

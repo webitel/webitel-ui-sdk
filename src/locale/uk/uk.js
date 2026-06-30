@@ -60,6 +60,8 @@ export default {
 		generate: 'Згенерувати',
 		from: 'Від',
 		to: 'До',
+		today: 'Сьогодні',
+		clear: 'Очистити',
 		tts: 'Text-to-Speech',
 		state: 'Стан',
 		status: 'Статус',
@@ -558,6 +560,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Сортування за спаданням';
 					return 'Сортування';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

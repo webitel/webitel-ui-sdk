@@ -1,5 +1,6 @@
 export const WtTypography = {
-	Button: 'typo-button',
+	ButtonMD: 'typo-button--md',
+	ButtonSM: 'typo-button--sm',
 	Body1: 'typo-body-1',
 	Body2: 'typo-body-2',
 	Subtitle1: 'typo-subtitle-1',

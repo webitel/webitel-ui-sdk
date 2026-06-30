@@ -4,6 +4,7 @@ import BreadcrumbScheme from './breadcrumb';
 import ButtonScheme from './button';
 import CheckboxScheme from './checkbox';
 import ChipScheme from './chip';
+import DatePickerScheme from './datepicker';
 import DividerScheme from './divider';
 import GalleriaScheme from './galleria';
 import InputGroupScheme from './input-group';
@@ -31,6 +32,7 @@ export {
 	ButtonScheme,
 	CheckboxScheme,
 	ChipScheme,
+	DatePickerScheme,
 	DividerScheme,
 	GalleriaScheme,
 	InputGroupScheme,

@@ -2,18 +2,18 @@
   <div class="date-time-filter-value-field">
     <wt-datepicker
       :label="`${t('webitelUI.filters.createdAtFrom')}:`"
-      :value="model?.from"
+      :model-value="model?.from"
       class="date-time-filter-value-field__picker"
-      mode="datetime"
-      @input="handleInput('from', $event)"
+      show-time
+      @update:model-value="handleInput('from', $event)"
     />
 
     <wt-datepicker
       :label="`${t('webitelUI.filters.createdAtTo')}:`"
-      :value="model?.to"
+      :model-value="model?.to"
       class="date-time-filter-value-field__picker"
-      mode="datetime"
-      @input="handleInput('to', $event)"
+      show-time
+      @update:model-value="handleInput('to', $event)"
     />
   </div>
 </template>

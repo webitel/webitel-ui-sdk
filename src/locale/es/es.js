@@ -63,6 +63,8 @@ export default {
 		generate: 'Generar',
 		from: 'Desde',
 		to: 'Hasta',
+		today: 'Hoy',
+		clear: 'Borrar',
 		tts: 'Texto a Voz',
 		state: 'Estado',
 		status: 'Estado',
@@ -561,6 +563,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Orden descendente';
 					return 'Ordenar';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

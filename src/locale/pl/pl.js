@@ -64,6 +64,8 @@ export default {
 		generate: 'Generuj',
 		from: 'Od',
 		to: 'Do',
+		today: 'Dzisiaj',
+		clear: 'Wyczyść',
 		tts: 'Tekst na mowę',
 		state: 'Stan',
 		status: 'Status',
@@ -564,6 +566,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Sortowanie malejąco';
 					return 'Sortowanie';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {

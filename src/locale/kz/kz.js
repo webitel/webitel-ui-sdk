@@ -64,6 +64,8 @@ export default {
 		generate: 'Жасау',
 		from: 'Бастап',
 		to: 'Дейін',
+		today: 'Бүгін',
+		clear: 'Тазарту',
 		tts: 'Мәтін-дауыс',
 		state: 'Күй',
 		status: 'Күй',
@@ -563,6 +565,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Кему бойынша сұрыптау';
 					return 'Сұрыптау';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {
