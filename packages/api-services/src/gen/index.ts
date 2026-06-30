@@ -253,6 +253,8 @@ export * from './webitel-im-provider-v1-facebookservice/webitel-im-provider-v1-f
 export * from './webitel-im-provider-v1-facebookservice/webitel-im-provider-v1-facebookservice.zod';
 export * from './webitel-im-provider-v1-gateservice/webitel-im-provider-v1-gateservice';
 export * from './webitel-im-provider-v1-gateservice/webitel-im-provider-v1-gateservice.zod';
+export * from './webitel-im-provider-v1-gatetemplateservice/webitel-im-provider-v1-gatetemplateservice';
+export * from './webitel-im-provider-v1-gatetemplateservice/webitel-im-provider-v1-gatetemplateservice.zod';
 export * from './webitel-im-provider-v1-metaappservice/webitel-im-provider-v1-metaappservice';
 export * from './webitel-im-provider-v1-metaappservice/webitel-im-provider-v1-metaappservice.zod';
 export * from './webitel-im-provider-v1-metaoauthservice/webitel-im-provider-v1-metaoauthservice';

@@ -131,6 +131,7 @@ export const useSelectOptions = ({
 					)
 				: filteredOptions.value.concat(items);
 		filteredOptions.value = sortOptions(baseOptions);
+		addSelectedValueToList(selected.value);
 		searchHasNext.value = next;
 		searchParams.page += 1;
 		isLoading.value = false;

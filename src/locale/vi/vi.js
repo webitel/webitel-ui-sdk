@@ -64,6 +64,8 @@ export default {
 		generate: 'Tạo',
 		from: 'Từ',
 		to: 'Đến',
+		today: 'Hôm nay',
+		clear: 'Xóa',
 		tts: 'Chuyển văn bản thành giọng nói',
 		state: 'Trạng thái',
 		status: 'Trạng thái',
@@ -567,6 +569,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Sắp xếp giảm dần';
 					return 'Sắp xếp';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 			},
 		},
 		errorPages: {
@@ -836,9 +840,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'mục đã chọn',
+		select: {
+			selectedItemsLabel: 'mục đã chọn',
+		},
 	},
 	systemNotifications: {
 		success: {

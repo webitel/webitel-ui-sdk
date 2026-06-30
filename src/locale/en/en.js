@@ -67,6 +67,8 @@ export default deepmerge(
 			generate: 'Generate',
 			from: 'From',
 			to: 'To',
+			today: 'Today',
+			clear: 'Clear',
 			tts: 'Text-to-Speech',
 			state: 'State',
 			status: 'Status',
@@ -575,6 +577,8 @@ export default deepmerge(
 						if (order === SortSymbols.DESC) return 'Sort descending';
 						return 'Sort';
 					},
+					[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+					[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
 				},
 			},
 			errorPages: {
