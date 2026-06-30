@@ -3,7 +3,7 @@ import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
 
-const lifeMs = 400000;
+const lifeMs = 4000;
 
 const toastActions = [
 	{
