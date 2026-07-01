@@ -48,7 +48,7 @@ const severityToIconColorMap: Record<string, string> = {
 };
 
 const getIconColor = (message) =>
-	`fill: var(--p-toast-${severityToIconColorMap[message.severity]}-close-button-hover-background)`;
+	`fill: var(--p-toast-${severityToIconColorMap[message.severity]}-icon-color)`;
 </script>
 
 <style>
@@ -57,8 +57,5 @@ const getIconColor = (message) =>
 }
 .p-toast-close-button:focus-visible {
   outline: none;
-}
-.p-toast-message-error .wt-icon {
-  fill: var(--p-toast-error-close-button-hover-background);
 }
 </style>
