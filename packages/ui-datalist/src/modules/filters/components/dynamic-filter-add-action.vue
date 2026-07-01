@@ -83,6 +83,7 @@ onClickOutside(
 			'.p-popover',
 			'.p-select-overlay',
 			'.p-multiselect-overlay',
+			'.p-datepicker-panel',
 		], // Exclude activator, popover content, and teleported select/multiselect panels
 	},
 );
