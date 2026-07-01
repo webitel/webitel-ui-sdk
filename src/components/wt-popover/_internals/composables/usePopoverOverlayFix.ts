@@ -29,7 +29,11 @@ export const usePopoverOverlayFix = (
 	const onDocumentPointerdown = (event: PointerEvent) => {
 		const target = event.target as Element;
 
-		if (target?.closest('.p-select-overlay, .p-multiselect-overlay')) {
+		if (
+			target?.closest(
+				'.p-select-overlay, .p-multiselect-overlay, .p-datepicker-panel',
+			)
+		) {
 			const outsideClickListener = innerPopover.value?.outsideClickListener;
 			if (!outsideClickListener) return;
 			document.removeEventListener('click', outsideClickListener);

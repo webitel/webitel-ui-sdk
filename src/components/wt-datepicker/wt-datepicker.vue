@@ -40,6 +40,11 @@
 				},
 				minute: {
 					class: 'typo-body-2'
+				},
+				panel: {
+					style: {
+						maxWidth: '380px',
+					}
 				}
 			}"
 			@show="onPanelShow"
@@ -207,6 +212,8 @@ const onPanelShow = () => {
 	// align overlay, because on first render it is not aligned correctly
 	setTimeout(() => {
 		datepicker.value?.alignOverlay();
+		const panel = datepicker.value?.overlay;
+		if (panel) panel.style.minWidth = '';
 	}, 0);
 };
 
