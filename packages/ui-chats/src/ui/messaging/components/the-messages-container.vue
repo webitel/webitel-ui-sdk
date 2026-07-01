@@ -57,6 +57,7 @@ import {
 import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 import type { UiChatsEmitterEvents } from '../../utils/emitter';
 import { useChatScroll } from '../composables/useChatScroll';
+import { useMediaScroll } from '../composables/useMediaScroll';
 import ChatMessage from '../modules/message/components/chat-message.vue';
 import { useChatMessages } from '../modules/message/composables/useChatMessage';
 import { MessageAction } from '../modules/message/enums/MessageAction.enum';
@@ -103,6 +104,10 @@ const {
 	computed(() => props.isLoading),
 );
 
+const { startObserving } = useMediaScroll(messagesContainer, () =>
+	scrollToBottom('smooth'),
+);
+
 function handleLoadNextMessages() {
 	loadNextMessages(props.next, () => emit(ChatAction.LoadNextMessages));
 }
@@ -121,6 +126,7 @@ onMounted(async () => {
 	setTimeout(() => {
 		scrollToBottom();
 	}, 500);
+	startObserving();
 });
 </script>
 
