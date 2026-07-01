@@ -18,7 +18,7 @@
 			:show-time="showTime"
 			:min-date="minDate"
 			:max-date="maxDate"
-			:placeholder="placholder"
+			:placeholder="getPlaceholder"
 			:show-clear="clearable && modelValue"
 			show-button-bar
       fluid
@@ -198,6 +198,10 @@ const modelValue = computed({
 const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
+
+const getPlaceholder = computed(() => {
+	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
+});
 
 // PrimeVue initializes its internal currentHour/currentMinute from new Date() when the
 // overlay opens, ignoring the model value. Re-assigning the same value forces a re-sync.
