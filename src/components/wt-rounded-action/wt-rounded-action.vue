@@ -11,7 +11,7 @@
     class="wt-rounded-action"
     type="button"
     v-tooltip="tooltip"
-    @click="emit('click', $event)"
+    @click="!showLoader && emit('click', $event)"
   >
     <wt-loader v-if="showLoader" color="main" :size="loaderSize" />
     <wt-icon v-else :color="iColor" :icon="icon" :icon-prefix="iconPrefix" :size="size" />
