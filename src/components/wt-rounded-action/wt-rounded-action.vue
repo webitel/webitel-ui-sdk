@@ -6,6 +6,7 @@
       { 'wt-rounded-action--disabled': disabled },
       { 'wt-rounded-action--rounded': rounded },
       { 'wt-rounded-action--wide': wide },
+      { 'wt-rounded-action--loading': showLoader },
       { 'wt-button--loading': showLoader },
     ]"
     class="wt-rounded-action"
