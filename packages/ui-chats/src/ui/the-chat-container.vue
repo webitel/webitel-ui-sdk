@@ -17,6 +17,7 @@
         :is-loading="props.isNextMessagesLoading"
         :without-avatars="props.withoutAvatars"
         :agent-name="props.agentName"
+        :contact="props.contact"
         @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
       />
     </slot>
@@ -70,6 +71,7 @@ import type {
 } from './messaging/types/ChatMessage.types';
 import { createUiChatsEmitter } from './utils/emitter';
 import type { ResultCallbacks } from './utils/ResultCallbacks.types';
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 
 const props = withDefaults(
 	defineProps<{
@@ -81,6 +83,7 @@ const props = withDefaults(
 		withoutAvatars?: boolean;
 		readonly?: boolean; // hide chat footer with textarea and action-buttons
 		agentName?: string;
+		contact?: WebitelContactsContact;
 	}>(),
 	{
 		size: ComponentSize.MD,

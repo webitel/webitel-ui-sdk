@@ -22,6 +22,7 @@
         :agent-name="props.agentName"
         :show-avatar="showAvatar(index)"
         :without-avatars="props.withoutAvatars"
+        :username="props.contact?.name"
         @[MessageAction.ClickOnImage]="clickOnImage(message)"
       >
         <template #before-message>
@@ -64,6 +65,7 @@ import type { ChatMessageType } from '../types/ChatMessage.types';
 import ChatDateDivider from './chat-date-divider.vue';
 import ChatObserver from './chat-observer.vue';
 import ScrollToBottomBtn from './scroll-to-bottom-btn.vue';
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
 
@@ -74,6 +76,7 @@ const props = withDefaults(
 		isLoading?: boolean;
 		withoutAvatars?: boolean;
 		agentName?: string;
+		contact?: WebitelContactsContact;
 	}>(),
 	{
 		next: false,
