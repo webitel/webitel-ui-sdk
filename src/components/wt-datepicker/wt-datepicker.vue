@@ -143,7 +143,6 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 import {
 	ButtonColor,
 	ButtonVariant,
@@ -151,6 +150,7 @@ import {
 	MessageVariant,
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 
 interface Props extends DatePickerProps {
 	showTime?: boolean;
