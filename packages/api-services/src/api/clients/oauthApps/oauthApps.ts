@@ -48,7 +48,7 @@ const getOAuthAppsList = async (params: Record<string, unknown>) => {
 			],
 			sort,
 			id,
-			q: q || params.search,
+			q,
 			name,
 			access,
 			enabled,
@@ -112,12 +112,8 @@ const updateOAuthApp = async ({
 	itemInstance: Record<string, unknown>;
 	itemId: string;
 }) => {
-	const putFieldsToSend = getShallowFieldsToSendFromZodSchema(
-		UpdateOAuthServiceBody.shape.changes.unwrap(),
-	);
-
 	const changes = applyTransform(itemInstance, [
-		sanitize(putFieldsToSend),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthServiceBody)),
 		camelToSnake(),
 	]);
 
@@ -142,12 +138,8 @@ const patchOAuthApp = async ({
 	changes: Record<string, unknown>;
 	id: string;
 }) => {
-	const patchFieldsToSend = getShallowFieldsToSendFromZodSchema(
-		UpdateOAuthService2Body.shape.changes.unwrap(),
-	);
-
 	const changesBody = applyTransform(changes, [
-		sanitize(patchFieldsToSend),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthService2Body)),
 		camelToSnake(),
 	]);
 
