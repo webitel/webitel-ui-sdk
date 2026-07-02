@@ -98,6 +98,8 @@ const iconColor = computed(() => {
 
 .wt-checkbox__checkmark {
   display: inline-flex;
+  width: 100%;
+  padding-inline: 2px;
 }
 
 .wt-checkbox__label {
