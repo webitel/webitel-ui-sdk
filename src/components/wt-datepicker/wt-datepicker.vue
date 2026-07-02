@@ -143,6 +143,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 import {
 	ButtonColor,
 	ButtonVariant,
@@ -198,6 +199,8 @@ const modelValue = computed({
 const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
+
+usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
 
 const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
