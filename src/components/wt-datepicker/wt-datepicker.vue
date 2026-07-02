@@ -150,6 +150,7 @@ import {
 	MessageVariant,
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 
 interface Props extends DatePickerProps {
 	showTime?: boolean;
@@ -198,6 +199,8 @@ const modelValue = computed({
 const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
+
+usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
 
 const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
