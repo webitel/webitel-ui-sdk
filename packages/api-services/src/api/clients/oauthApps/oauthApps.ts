@@ -8,8 +8,6 @@ import {
 	UpdateOAuthServiceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -20,6 +18,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 
 const oauthAppFieldsToSend = getShallowFieldsToSendFromZodSchema(
 	CreateOAuthServiceBody,
