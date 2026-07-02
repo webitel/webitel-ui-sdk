@@ -6,12 +6,13 @@
       { 'wt-rounded-action--disabled': disabled },
       { 'wt-rounded-action--rounded': rounded },
       { 'wt-rounded-action--wide': wide },
+      { 'wt-rounded-action--loading': showLoader },
       { 'wt-button--loading': showLoader },
     ]"
     class="wt-rounded-action"
     type="button"
     v-tooltip="tooltip"
-    @click="!showLoader && emit('click', $event)"
+    @click="emit('click', $event)"
   >
     <wt-loader v-if="showLoader" color="main" :size="loaderSize" />
     <wt-icon v-else :color="iColor" :icon="icon" :icon-prefix="iconPrefix" :size="size" />
