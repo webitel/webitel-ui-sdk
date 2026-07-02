@@ -402,7 +402,7 @@ export default {
 				[AdminSections.StoragePolicies]: 'Політики збереження файлів',
 				[AdminSections.CognitiveProfiles]: 'Голосові профілі',
 				[AdminSections.EmailProfiles]: 'Email профілі',
-				[AdminSections.SingleSignOn]: 'Single Sign-on',
+				[AdminSections.SingleSignOn]: 'SSO',
 				[AdminSections.ImportCsv]: 'Імпорт даних з CSV файлів',
 				[AdminSections.Triggers]: 'Тригери',
 				[AdminSections.Roles]: 'Ролі',

@@ -29,6 +29,7 @@ export * from './lists/blacklists';
 export * from './media/media';
 export * from './messageService/messageService';
 export * from './object/object';
+export * from './oauthApps/oauthApps';
 export * from './pdfServices/pdfServices';
 export * from './phones/phones';
 export * from './queues/queues';

@@ -39,6 +39,8 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
+import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
+import { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 
 export type {
 	ConnectionQualityLevelsType,
@@ -82,4 +84,6 @@ export {
 	WtApplication,
 	WtObject,
 	WtTypeExtensionFieldKind,
+	SingleSignOnProvider,
+	SingleSignOnProviderIconMappings,
 };

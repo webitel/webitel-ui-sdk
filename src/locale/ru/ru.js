@@ -403,7 +403,7 @@ export default {
 				[AdminSections.StoragePolicies]: 'Политики хранения файлов',
 				[AdminSections.CognitiveProfiles]: 'Голосовые профили',
 				[AdminSections.EmailProfiles]: 'Email профили',
-				[AdminSections.SingleSignOn]: 'Single Sign-on',
+				[AdminSections.SingleSignOn]: 'SSO',
 				[AdminSections.ImportCsv]: 'Импорт данных из CSV файлов',
 				[AdminSections.Triggers]: 'Триггеры',
 				[AdminSections.Roles]: 'Роли',

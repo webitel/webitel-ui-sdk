@@ -28,7 +28,6 @@ export const ScopeClass = {
 	Resource: 'cc_resource',
 	StorageProfile: 'storage_profile',
 	CognitiveProfile: 'cognitive_profile',
-	SingleSignOn: 'single_sign_on',
 	ImportTemplate: 'import_template',
 	Trigger: 'trigger',
 	Schema: 'schema',
@@ -53,6 +52,7 @@ export const ScopeClass = {
 	FilesPolicy: 'files_policy',
 	PortalUsers: 'portal_users',
 	Custom: 'custom',
+	SingleSignOn: 'sso',
 } as const;
 
 export type ScopeClass = (typeof ScopeClass)[keyof typeof ScopeClass];
