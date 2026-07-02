@@ -13,14 +13,14 @@
       :model-value="model.from"
       :label="t('reusable.from')"
       show-time
-      @update-model:value="changeAbsoluteValue($event, 'from')"
+      @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
       v-if="showDatepickers"
       :model-value="model.to"
       :label="t('reusable.to')"
       show-time
-      @update-model:value="changeAbsoluteValue($event, 'to')"
+      @update:model-value="changeAbsoluteValue($event, 'to')"
     />
   </div>
 </template>
