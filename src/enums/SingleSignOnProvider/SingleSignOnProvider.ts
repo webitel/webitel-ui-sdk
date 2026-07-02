@@ -1,8 +1,8 @@
 export const SingleSignOnProvider = {
-	MICROSOFT: 'microsoft',
-	GOOGLE: 'google',
-	FACEBOOK: 'facebook',
-	CUSTOM: 'custom',
+	Microsoft: 'microsoft',
+	Google: 'google',
+	Facebook: 'facebook',
+	Custom: 'custom',
 } as const;
 
 export type SingleSignOnProvider =

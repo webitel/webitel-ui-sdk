@@ -4,10 +4,10 @@ export const SingleSignOnProviderIconMappings: Record<
 	SingleSignOnProvider,
 	string
 > = {
-	[SingleSignOnProvider.MICROSOFT]: 'microsoft',
-	[SingleSignOnProvider.GOOGLE]: 'google',
-	[SingleSignOnProvider.FACEBOOK]: 'messenger',
-	[SingleSignOnProvider.CUSTOM]: 'custom-provider',
+	[SingleSignOnProvider.Microsoft]: 'microsoft',
+	[SingleSignOnProvider.Google]: 'google',
+	[SingleSignOnProvider.Facebook]: 'messenger',
+	[SingleSignOnProvider.Custom]: 'custom-provider',
 };
 
 export type SingleSignOnProviderIconMappings =
