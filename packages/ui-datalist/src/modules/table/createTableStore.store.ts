@@ -1,5 +1,5 @@
 import deepEqual from 'deep-equal';
-import set from 'lodash/fp/set';
+import set from 'lodash/set';
 import { type Ref, ref, toRaw, watch } from 'vue';
 
 import {
@@ -192,7 +192,7 @@ export const tableStoreBody = <
 	}: PatchItemPropertyParams) => {
 		const item = dataList.value[index];
 		const changes = {};
-		set(path, value, changes);
+		set(changes, path, value);
 
 		try {
 			await apiModule.patch({
@@ -201,10 +201,11 @@ export const tableStoreBody = <
 				id: item.id,
 				etag: item.etag,
 			});
-			set(path, value, item);
+			set(item, path, value);
 		} catch (err) {
-			await loadDataList();
 			throw err;
+		} finally {
+			await loadDataList();
 		}
 	};
 
