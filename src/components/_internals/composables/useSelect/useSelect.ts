@@ -1,3 +1,4 @@
+import { onMounted } from 'vue';
 import { useSelectCustomValues } from './useSelectCustomValues';
 import { useSelectDropdown } from './useSelectDropdown';
 import { useSelectLoader } from './useSelectLoader';
@@ -26,6 +27,7 @@ export const useSelect = ({
 		sortOptions,
 		getOptionLabel,
 		fetchOptions,
+		fetchSelectedByIds,
 		resetAndFetch,
 		filterOptions,
 		updateSelectedOptionsCache,
@@ -76,6 +78,10 @@ export const useSelect = ({
 		manualCustomValues,
 		isSingle,
 		emit,
+	});
+
+	onMounted(() => {
+		fetchSelectedByIds();
 	});
 
 	const clearValue = () => {
