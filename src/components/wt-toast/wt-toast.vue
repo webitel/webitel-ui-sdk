@@ -4,7 +4,7 @@
       <template v-if="message">
         <wt-icon
           :icon="severityToIconNameMap[message.severity] ?? ''"
-          :color="severityToIconColorMap[message.severity] ?? MessageColor.CONTRAST"
+          :style="getIconColor(message)"
           class="p-toast-message-icon"
         />
         <div class="p-toast-message-text">
@@ -46,6 +46,9 @@ const severityToIconColorMap: Record<string, string> = {
 	contrast: MessageColor.CONTRAST,
 	secondary: MessageColor.SECONDARY,
 };
+
+const getIconColor = (message) =>
+	`fill: var(--p-toast-${severityToIconColorMap[message.severity]}-icon-color)`;
 </script>
 
 <style>

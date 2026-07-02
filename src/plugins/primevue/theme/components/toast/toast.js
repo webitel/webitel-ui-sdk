@@ -4,7 +4,7 @@ import { MessageColor } from '../../../../../enums';
 
 const generateCloseIconCss = ({ colorName, dt }) => `
   .p-toast-message-${colorName} .p-toast-close-button svg {
-    fill: ${dt(`toast.${colorName}.color`)};
+    fill: ${dt(`toast.${colorName}.icon-color`)};
   }
 `;
 
