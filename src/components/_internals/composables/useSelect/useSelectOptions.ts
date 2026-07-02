@@ -109,6 +109,25 @@ export const useSelectOptions = ({
 		selectedOptionsCache.value = mergedOptions.filter(isSelected);
 	};
 
+	const fetchSelectedByIds = async () => {
+		if (!searchMethod.value || !optionValue?.value || !selected.value) return;
+		const ids = toArray(selected.value);
+		if (!ids.length) return;
+		isLoading.value = true;
+		const { items } = await searchMethod.value({
+			[dataKey.value]: ids,
+			size: ids.length,
+		});
+		selectedOptionsCache.value = dedupeByKey(
+			[
+				...selectedOptionsCache.value,
+				...items,
+			],
+			dataKey.value,
+		);
+		isLoading.value = false;
+	};
+
 	const fetchOptions = async () => {
 		if (!searchMethod.value) return;
 		const { search, page } = searchParams;
@@ -209,6 +228,7 @@ export const useSelectOptions = ({
 		sortOptions,
 		getOptionLabel,
 		fetchOptions,
+		fetchSelectedByIds,
 		resetAndFetch,
 		filterOptions,
 		updateSelectedOptionsCache,
