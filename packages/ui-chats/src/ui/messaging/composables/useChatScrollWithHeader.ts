@@ -1,5 +1,5 @@
 import { onUnmounted } from 'vue';
-import { useChatScroll, type UseChatScrollOptions } from './useChatScroll';
+import { type UseChatScrollOptions, useChatScroll } from './useChatScroll';
 
 /**
  * @author PolinaSukhorukova-webitel

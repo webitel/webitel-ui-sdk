@@ -1,9 +1,9 @@
 import { useScroll } from '@vueuse/core';
 import {
+	type ComputedRef,
 	computed,
 	nextTick,
 	onUnmounted,
-	type ComputedRef,
 	type Ref,
 	watch,
 } from 'vue';
