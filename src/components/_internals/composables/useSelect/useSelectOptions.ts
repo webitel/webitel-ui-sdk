@@ -205,7 +205,13 @@ export const useSelectOptions = ({
 
 	watch(
 		() => selected.value,
-		(newVal) => {
+		(newVal, oldVal) => {
+			if (oldVal && searchMethod.value) {
+				const oldAsArray = toArray(oldVal);
+				filteredOptions.value = filteredOptions.value.filter(
+					(option) => !isOptionSelected(option, oldAsArray, dataKey.value),
+				);
+			}
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
 		},
