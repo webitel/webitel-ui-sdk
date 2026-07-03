@@ -19,7 +19,6 @@ export const useChatScrollWithHeader = ({
 	isChatClosed,
 	isLoading,
 }: UseChatScrollOptions) => {
-
 	let containerResizeObserver: ResizeObserver | null = null;
 
 	const stopContainerObserving = () => {
@@ -27,14 +26,16 @@ export const useChatScrollWithHeader = ({
 		containerResizeObserver = null;
 	};
 
-/**
- * @author PolinaSukhorukova-webitel
- *
- * Observes the container until its clientHeight stops changing
- * (async sibling is rendered), re-scrolling to the bottom on
- * every resize so the chat stays pinned while the layout settles.
- */
-	const observeContainerUntilStable = (scrollToBottom: (behavior?: ScrollBehavior) => void) => {
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * Observes the container until its clientHeight stops changing
+	 * (async sibling is rendered), re-scrolling to the bottom on
+	 * every resize so the chat stays pinned while the layout settles.
+	 */
+	const observeContainerUntilStable = (
+		scrollToBottom: (behavior?: ScrollBehavior) => void,
+	) => {
 		if (!element.value) return;
 
 		let lastClientHeight = element.value.clientHeight;
@@ -60,12 +61,12 @@ export const useChatScrollWithHeader = ({
 	};
 
 	const scroll = useChatScroll({
-		element, 
-		contentElement, 
-		messages, 
-		chatId, 
+		element,
+		contentElement,
+		messages,
+		chatId,
 		isChatClosed,
-		isLoading, 
+		isLoading,
 		onBeforeStart: ({ scrollToBottom }) => {
 			stopContainerObserving();
 			observeContainerUntilStable(scrollToBottom);

@@ -1,7 +1,10 @@
 import type { UseScrollReturn } from '@vueuse/core';
 import { type Ref, ref } from 'vue';
 
-export const useScrollButton = (element: Ref<HTMLElement | null>, arrivedState: UseScrollReturn['arrivedState']) => {
+export const useScrollButton = (
+	element: Ref<HTMLElement | null>,
+	arrivedState: UseScrollReturn['arrivedState'],
+) => {
 	const newUnseenMessagesCount = ref(0);
 	const showScrollToBottomBtn = ref(false);
 	/* @author ye.pohranichna

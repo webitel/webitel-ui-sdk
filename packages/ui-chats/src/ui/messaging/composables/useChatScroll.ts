@@ -1,11 +1,11 @@
 import { useScroll } from '@vueuse/core';
 import {
+	computed,
 	nextTick,
 	onUnmounted,
 	type ComputedRef,
 	type Ref,
 	watch,
-	computed,
 } from 'vue';
 
 import type { ChatMessageType } from '../types/ChatMessage.types';
@@ -35,7 +35,6 @@ export const useChatScroll = ({
 		options.scrollToBottom();
 	},
 }: UseChatScrollOptions) => {
-
 	const { arrivedState } = useScroll(element);
 
 	const {
@@ -47,7 +46,7 @@ export const useChatScroll = ({
 		handleChatScroll,
 	} = useScrollButton(element, arrivedState);
 
-		/* @author ye.pohranichna
+	/* @author ye.pohranichna
 		why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
 	const defaultThreshold = 136;
 	let isLoadingNextMessages = false;
@@ -55,11 +54,10 @@ export const useChatScroll = ({
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
 
-		const isLastMessageIsMy = computed<boolean>(
+	const isLastMessageIsMy = computed<boolean>(
 		() => lastMessage.value?.member?.self,
 	);
 	const lastMessage = computed<ChatMessageType>(() => messages.value?.at(-1));
-
 
 	const handleBtnAfterNewMessage = () => {
 		if (isLastMessageIsMy.value) {
@@ -69,7 +67,7 @@ export const useChatScroll = ({
 		}
 	};
 
-		const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
+	const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
 		element.value?.scrollTo({
 			top: element.value?.scrollHeight,
 			behavior,
@@ -81,10 +79,15 @@ export const useChatScroll = ({
 		// help to fix chat viewing position when new messages was loaded
 		if (!element.value?.children) return;
 		lastVisibleMessageEl =
-			element.value?.getElementsByClassName('chat-message')[0] as HTMLElement ?? null;
+			(element.value?.getElementsByClassName(
+				'chat-message',
+			)[0] as HTMLElement) ?? null;
 	};
 
-	const loadNextMessages = (canLoadMore: boolean, onLoadNextMessages: () => void) => {
+	const loadNextMessages = (
+		canLoadMore: boolean,
+		onLoadNextMessages: () => void,
+	) => {
 		if (isLoadingNextMessages || isLoading?.value || !canLoadMore) return;
 
 		isLoadingNextMessages = true;
@@ -94,11 +97,11 @@ export const useChatScroll = ({
 	};
 
 	/**
-	* @author PolinaSukhorukova-webitel
-	*
-	* Keeps the chat pinned to the bottom when content height grows
-	* asynchronously (media load).
-	*/
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * Keeps the chat pinned to the bottom when content height grows
+	 * asynchronously (media load).
+	 */
 	const startObserving = () => {
 		if (!contentElement.value) return;
 
@@ -113,13 +116,13 @@ export const useChatScroll = ({
 			threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
 
 			/*
-	* @author PolinaSukhorukova-webitel
-	*
-	* `arrivedState.bottom` lags after programmatic scrollTo and may
-	* read `false` while the user is actually at the bottom, so the
-	* distance is calculated manually as a fallback.
-	* 48px is the height of a message + gap
-	*/
+			 * @author PolinaSukhorukova-webitel
+			 *
+			 * `arrivedState.bottom` lags after programmatic scrollTo and may
+			 * read `false` while the user is actually at the bottom, so the
+			 * distance is calculated manually as a fallback.
+			 * 48px is the height of a message + gap
+			 */
 			const wasNearBottom =
 				prevScrollHeight - (el.scrollTop + el.clientHeight) <= 48;
 
@@ -183,11 +186,15 @@ export const useChatScroll = ({
 
 			await nextTick();
 
-			onBeforeStart?.({ scrollToBottom });
+			onBeforeStart?.({
+				scrollToBottom,
+			});
 
 			startObserving();
 		},
-		{ immediate: true },
+		{
+			immediate: true,
+		},
 	);
 
 	onUnmounted(() => {
