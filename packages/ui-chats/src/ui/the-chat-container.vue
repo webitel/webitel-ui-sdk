@@ -51,9 +51,9 @@
 </template>
 
 <script setup lang="ts">
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { computed, provide, ref } from 'vue';
-
 import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
 import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
@@ -71,7 +71,6 @@ import type {
 } from './messaging/types/ChatMessage.types';
 import { createUiChatsEmitter } from './utils/emitter';
 import type { ResultCallbacks } from './utils/ResultCallbacks.types';
-import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 
 const props = withDefaults(
 	defineProps<{

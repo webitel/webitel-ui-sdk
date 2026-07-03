@@ -30,6 +30,8 @@ import { ProcessingTableColumnType } from './ProcessingTableColumnType/Processin
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { RingtoneType } from './RingtoneType/RingtoneType.js';
+import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
+import { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
 import { AuditorSections } from './WebitelApplications/AuditorSections';
@@ -39,8 +41,6 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
-import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
-import { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 
 export type {
 	ConnectionQualityLevelsType,
@@ -78,12 +78,12 @@ export {
 	QueueTypeName,
 	RelativeDatetimeValue,
 	RingtoneType,
+	SingleSignOnProvider,
+	SingleSignOnProviderIconMappings,
 	SupervisorSections,
 	TypesExportedSettings,
 	WfmSections,
 	WtApplication,
 	WtObject,
 	WtTypeExtensionFieldKind,
-	SingleSignOnProvider,
-	SingleSignOnProviderIconMappings,
 };

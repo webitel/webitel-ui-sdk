@@ -45,6 +45,7 @@
   setup
   lang="ts"
 >
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import type { Emitter } from 'mitt';
 import {
 	computed,
@@ -54,7 +55,6 @@ import {
 	onMounted,
 	useTemplateRef,
 } from 'vue';
-
 import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 import type { UiChatsEmitterEvents } from '../../utils/emitter';
 import { useChatScroll } from '../composables/useChatScroll';
@@ -65,7 +65,6 @@ import type { ChatMessageType } from '../types/ChatMessage.types';
 import ChatDateDivider from './chat-date-divider.vue';
 import ChatObserver from './chat-observer.vue';
 import ScrollToBottomBtn from './scroll-to-bottom-btn.vue';
-import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
 
