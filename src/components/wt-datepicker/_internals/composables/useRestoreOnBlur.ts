@@ -1,4 +1,5 @@
-import { nextTick, type WritableComputedRef, watch } from 'vue';
+import { nextTick } from 'vue';
+import type { Ref } from 'vue';
 
 /**
  * @author @HlukhovYe
@@ -14,32 +15,20 @@ import { nextTick, type WritableComputedRef, watch } from 'vue';
  * redraws the input.
  */
 export function useRestoreOnBlur(
-	modelValue: WritableComputedRef<Date | null>,
+	lastValid: Ref<Date | null>,
 	getDatepicker: () => {
 		rawValue: Date | null;
 		updateModel: (v: Date) => void;
 	} | null,
 	isClearable: () => boolean,
 ) {
-	let lastValid: Date | null = null;
-
-	watch(
-		modelValue,
-		(value) => {
-			if (value !== null) lastValid = value;
-		},
-		{
-			immediate: true,
-		},
-	);
-
 	function onBlur() {
 		if (isClearable()) return;
 		const datePickerEl = getDatepicker();
 		if (!datePickerEl) return;
-		if (datePickerEl.rawValue === null && lastValid !== null) {
+		if (datePickerEl.rawValue === null && lastValid.value !== null) {
 			nextTick(() => {
-				datePickerEl.updateModel(new Date(lastValid.getTime()));
+				datePickerEl.updateModel(new Date(lastValid.value.getTime()));
 			});
 		}
 	}

@@ -141,8 +141,10 @@ import {
 	defineModel,
 	defineProps,
 	nextTick,
+	ref,
 	toRefs,
 	useTemplateRef,
+	watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {
@@ -208,8 +210,10 @@ const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
 
+const lastValid = ref<Date | null>(null);
+
 const { onBlur } = useRestoreOnBlur(
-	modelValue,
+	lastValid,
 	() => datepicker.value,
 	() => !!props.clearable,
 );
@@ -248,6 +252,16 @@ const { isValidation, invalid, validationText, validationTextColor } =
 		v,
 		customValidators,
 	});
+
+watch(
+	modelValue,
+	(value) => {
+		if (value !== null) lastValid.value = value;
+	},
+	{
+		immediate: true,
+	},
+);
 </script>
 
 <style scoped>
