@@ -208,13 +208,13 @@ const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
 
-const { onBlur, watchModelValue } = useRestoreOnBlur(
+const { onBlur, watchRestoreOnBlurLastValidValue } = useRestoreOnBlur(
 	modelValue,
 	() => datepicker.value,
 	() => !!props.clearable,
 );
 
-watchModelValue();
+watchRestoreOnBlurLastValidValue();
 
 const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;

@@ -23,7 +23,7 @@ export function useRestoreOnBlur(
 ) {
 	let lastValid: Date | null = null;
 
-	function watchModelValue() {
+	function watchRestoreOnBlurLastValidValue() {
 		watch(
 			modelValue,
 			(value) => {
@@ -48,6 +48,6 @@ export function useRestoreOnBlur(
 
 	return {
 		onBlur,
-		watchModelValue,
+		watchRestoreOnBlurLastValidValue,
 	};
 }
