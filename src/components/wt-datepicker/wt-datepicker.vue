@@ -13,6 +13,7 @@
 			:id="datepickerId"
 			v-model="modelValue"
 			date-format="dd/mm/yy"
+			input-class="typo-body-1"
 			:required="required"
 			:disabled="disabled"
 			:show-time="showTime"
@@ -48,6 +49,7 @@
 				}
 			}"
 			@show="onPanelShow"
+			@blur="onBlur"
     >
 			<template #buttonbar="{ todayCallback, clearCallback }">
 				<div class="wt-datepicker__button-bar">
@@ -151,6 +153,7 @@ import {
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
+import { useRestoreOnBlur } from './_internals/composables/useRestoreOnBlur';
 
 interface Props extends DatePickerProps {
 	showTime?: boolean;
@@ -188,6 +191,9 @@ const modelValue = computed({
 	},
 	set(value) {
 		if (!value) {
+			// When not clearable, don't propagate null to the parent while the user
+			// is typing — the blur handler will restore the last valid value instead.
+			if (!props.clearable) return;
 			model.value = null;
 			return;
 		}
@@ -201,6 +207,12 @@ const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
+
+const { onBlur } = useRestoreOnBlur(
+	modelValue,
+	() => datepicker.value,
+	() => !!props.clearable,
+);
 
 const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
