@@ -4,14 +4,11 @@ import { type UseChatScrollOptions, useChatScroll } from './useChatScroll';
 /**
  * @author PolinaSukhorukova-webitel
  *
- * Extends useChatScroll for layouts where a sibling block
- * (e.g. chat header) renders asynchronously and changes the
- * container height after mount. Without this, the initial
- * scrollToBottom fires before the layout settles, so the chat
- * ends up scrolled not quite to the bottom.
+ * For layouts where a sibling block (e.g. chat header) renders
+ * asynchronously and changes the container height after mount.
  */
 
-export const useChatScrollWithHeader = ({
+export const useStableChatScroll = ({
 	element,
 	contentElement,
 	messages,
@@ -29,9 +26,7 @@ export const useChatScrollWithHeader = ({
 	/**
 	 * @author PolinaSukhorukova-webitel
 	 *
-	 * Observes the container until its clientHeight stops changing
-	 * (async sibling is rendered), re-scrolling to the bottom on
-	 * every resize so the chat stays pinned while the layout settles.
+	 * Observes the container until its clientHeight stops changing.
 	 */
 	const observeContainerUntilStable = (
 		scrollToBottom: (behavior?: ScrollBehavior) => void,
@@ -48,7 +43,7 @@ export const useChatScrollWithHeader = ({
 			if (currentClientHeight === lastClientHeight) {
 				stableCount++;
 				if (stableCount >= 2) {
-					/// height is stable twice in a row — the layout has settled
+					// height is stable twice in a row — the layout has settled
 					stopContainerObserving();
 				}
 			} else {
@@ -60,7 +55,13 @@ export const useChatScrollWithHeader = ({
 		containerResizeObserver.observe(element.value);
 	};
 
-	const scroll = useChatScroll({
+	const {
+		showScrollToBottomBtn,
+		newUnseenMessagesCount,
+		scrollToBottom,
+		loadNextMessages,
+		handleChatScroll,
+	} = useChatScroll({
 		element,
 		contentElement,
 		messages,
@@ -77,5 +78,11 @@ export const useChatScrollWithHeader = ({
 		stopContainerObserving();
 	});
 
-	return scroll;
+	return {
+		showScrollToBottomBtn,
+		newUnseenMessagesCount,
+		scrollToBottom,
+		loadNextMessages,
+		handleChatScroll,
+	};
 };

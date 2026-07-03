@@ -10,7 +10,7 @@ import {
 
 import type { ChatMessageType } from '../types/ChatMessage.types';
 
-import { useScrollButton } from './useScrollButton';
+import { useScrollToBottomBtn } from './useScrollToBottomBtn';
 
 export interface UseChatScrollOptions {
 	element: Ref<HTMLElement | null>;
@@ -44,20 +44,20 @@ export const useChatScroll = ({
 		resetScrollToBottomBtn,
 		handleShowScrollToBottomBtn,
 		handleChatScroll,
-	} = useScrollButton(element, arrivedState);
+	} = useScrollToBottomBtn(element, arrivedState);
 
 	/* @author ye.pohranichna
 		why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
 	const defaultThreshold = 136;
+	/* height of a message + gap */
+	const nearBottomOffset = 48;
 	let isLoadingNextMessages = false;
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
 
-	const isLastMessageIsMy = computed<boolean>(
-		() => lastMessage.value?.member?.self,
-	);
-	const lastMessage = computed<ChatMessageType>(() => messages.value?.at(-1));
+	const isLastMessageIsMy = computed(() => !!lastMessage.value?.member?.self);
+	const lastMessage = computed(() => messages.value?.at(-1));
 
 	const handleBtnAfterNewMessage = () => {
 		if (isLastMessageIsMy.value) {
@@ -115,21 +115,22 @@ export const useChatScroll = ({
 
 			threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
 
-			/*
+			/**
 			 * @author PolinaSukhorukova-webitel
 			 *
-			 * `arrivedState.bottom` lags after programmatic scrollTo and may
-			 * read `false` while the user is actually at the bottom, so the
-			 * distance is calculated manually as a fallback.
-			 * 48px is the height of a message + gap
+			 * arrivedState.bottom lags after programmatic scrollTo,
+			 * so the distance is also checked manually.
 			 */
-			const wasNearBottom =
-				prevScrollHeight - (el.scrollTop + el.clientHeight) <= 48;
 
-			if (
-				newScrollHeight > prevScrollHeight &&
-				(arrivedState.bottom || wasNearBottom)
-			) {
+			const distanceFromBottom =
+				prevScrollHeight - (el.scrollTop + el.clientHeight);
+			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
+
+			const contentGrown = newScrollHeight > prevScrollHeight;
+			const shouldStayAtBottom =
+				contentGrown && (arrivedState.bottom || wasNearBottom);
+
+			if (shouldStayAtBottom) {
 				scrollToBottom('instant');
 			}
 
@@ -143,6 +144,12 @@ export const useChatScroll = ({
 	const stopObserving = () => {
 		resizeObserver?.disconnect();
 		resizeObserver = null;
+	};
+
+	const resetScrollState = () => {
+		stopObserving();
+		prevScrollHeight = 0;
+		resetScrollToBottomBtn();
 	};
 
 	watch(
@@ -177,10 +184,7 @@ export const useChatScroll = ({
 	watch(
 		() => chatId.value,
 		async () => {
-			stopObserving();
-
-			prevScrollHeight = 0;
-			resetScrollToBottomBtn();
+			resetScrollState();
 
 			if (isChatClosed.value) return;
 

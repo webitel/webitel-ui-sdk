@@ -1,7 +1,7 @@
 import type { UseScrollReturn } from '@vueuse/core';
 import { type Ref, ref } from 'vue';
 
-export const useScrollButton = (
+export const useScrollToBottomBtn = (
 	element: Ref<HTMLElement | null>,
 	arrivedState: UseScrollReturn['arrivedState'],
 ) => {
