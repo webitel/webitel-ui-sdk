@@ -17,6 +17,7 @@
         :is-loading="props.isNextMessagesLoading"
         :without-avatars="props.withoutAvatars"
         :agent-name="props.agentName"
+        :contact="props.contact"
         @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
       />
     </slot>
@@ -50,9 +51,9 @@
 </template>
 
 <script setup lang="ts">
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { computed, provide, ref } from 'vue';
-
 import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
 import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
@@ -81,6 +82,7 @@ const props = withDefaults(
 		withoutAvatars?: boolean;
 		readonly?: boolean; // hide chat footer with textarea and action-buttons
 		agentName?: string;
+		contact?: WebitelContactsContact;
 	}>(),
 	{
 		size: ComponentSize.MD,

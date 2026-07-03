@@ -22,6 +22,7 @@
         :agent-name="props.agentName"
         :show-avatar="showAvatar(index)"
         :without-avatars="props.withoutAvatars"
+        :username="props.contact?.name"
         @[MessageAction.ClickOnImage]="clickOnImage(message)"
       >
         <template #before-message>
@@ -44,6 +45,7 @@
   setup
   lang="ts"
 >
+import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import type { Emitter } from 'mitt';
 import {
 	computed,
@@ -53,7 +55,6 @@ import {
 	onMounted,
 	useTemplateRef,
 } from 'vue';
-
 import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 import type { UiChatsEmitterEvents } from '../../utils/emitter';
 import { useChatScroll } from '../composables/useChatScroll';
@@ -74,6 +75,7 @@ const props = withDefaults(
 		isLoading?: boolean;
 		withoutAvatars?: boolean;
 		agentName?: string;
+		contact?: WebitelContactsContact;
 	}>(),
 	{
 		next: false,
