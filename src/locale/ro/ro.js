@@ -571,7 +571,7 @@ export default {
 					return 'Sortare';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Închide sesiunile',
 			},
 		},
 		errorPages: {

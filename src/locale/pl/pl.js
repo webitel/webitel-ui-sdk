@@ -567,7 +567,7 @@ export default {
 					return 'Sortowanie';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Zakończ sesje',
 			},
 		},
 		errorPages: {

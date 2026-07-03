@@ -564,7 +564,7 @@ export default {
 					return 'Ordenar';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Finalizar sesiones',
 			},
 		},
 		errorPages: {

@@ -570,7 +570,7 @@ export default {
 					return 'Sắp xếp';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Kết thúc phiên',
 			},
 		},
 		errorPages: {
