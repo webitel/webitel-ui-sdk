@@ -11,7 +11,6 @@
         {{ requiredLabel }}
       </slot>
     </wt-label>
-    {{model}}
     <p-multi-select
       ref="selectRef"
       v-model="model"
@@ -259,6 +258,10 @@ const hasLabel = computed(() => {
 
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
+});
+
+onMounted(() => {
+	if (props.searchMethod) fetchOptions();
 });
 </script>
 
