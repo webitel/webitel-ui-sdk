@@ -17,6 +17,7 @@ export const useSelect = ({
 	searchMethod,
 	selectId,
 	isSingle,
+	disabledOptions = undefined,
 	emit = () => {},
 }) => {
 	const {
@@ -31,6 +32,7 @@ export const useSelect = ({
 		resetAndFetch,
 		filterOptions,
 		updateSelectedOptionsCache,
+		isOptionDisabled,
 	} = useSelectOptions({
 		selected,
 		options,
@@ -39,6 +41,7 @@ export const useSelect = ({
 		dataKey,
 		allowCustomValues,
 		searchMethod,
+		disabledOptions,
 	});
 
 	const {
@@ -110,5 +113,6 @@ export const useSelect = ({
 		onDropdownHide,
 		onInputKeydown,
 		clearValue,
+		isOptionDisabled,
 	};
 };
