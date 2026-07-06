@@ -259,10 +259,6 @@ const hasLabel = computed(() => {
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
 });
-
-onMounted(() => {
-	if (props.searchMethod) fetchOptions();
-});
 </script>
 
 <style scoped>
