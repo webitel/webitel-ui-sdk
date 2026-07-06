@@ -1,5 +1,5 @@
-import { onUnmounted } from 'vue';
 import { type UseChatScrollOptions, useChatScroll } from './useChatScroll';
+import { useResizeUntilStable } from './useResizeUntilStable';
 
 /**
  * @author PolinaSukhorukova-webitel
@@ -7,7 +7,6 @@ import { type UseChatScrollOptions, useChatScroll } from './useChatScroll';
  * For layouts where a sibling block (e.g. chat header) renders
  * asynchronously and changes the container height after mount.
  */
-
 export const useStableChatScroll = ({
 	element,
 	contentElement,
@@ -16,44 +15,10 @@ export const useStableChatScroll = ({
 	isChatClosed,
 	isLoading,
 }: UseChatScrollOptions) => {
-	let containerResizeObserver: ResizeObserver | null = null;
-
-	const stopContainerObserving = () => {
-		containerResizeObserver?.disconnect();
-		containerResizeObserver = null;
-	};
-
-	/**
-	 * @author PolinaSukhorukova-webitel
-	 *
-	 * Observes the container until its clientHeight stops changing.
-	 */
-	const observeContainerUntilStable = (
-		scrollToBottom: (behavior?: ScrollBehavior) => void,
-	) => {
-		if (!element.value) return;
-
-		let lastClientHeight = element.value.clientHeight;
-		let stableCount = 0;
-
-		containerResizeObserver = new ResizeObserver(() => {
-			const currentClientHeight = element.value?.clientHeight;
+	const { start: startStabilizing, stop: stopStabilizing } =
+		useResizeUntilStable(element, () => {
 			scrollToBottom('instant');
-
-			if (currentClientHeight === lastClientHeight) {
-				stableCount++;
-				if (stableCount >= 2) {
-					// height is stable twice in a row — the layout has settled
-					stopContainerObserving();
-				}
-			} else {
-				stableCount = 0;
-				lastClientHeight = currentClientHeight;
-			}
 		});
-
-		containerResizeObserver.observe(element.value);
-	};
 
 	const {
 		showScrollToBottomBtn,
@@ -68,14 +33,10 @@ export const useStableChatScroll = ({
 		chatId,
 		isChatClosed,
 		isLoading,
-		onBeforeStart: ({ scrollToBottom }) => {
-			stopContainerObserving();
-			observeContainerUntilStable(scrollToBottom);
+		onBeforeStart: () => {
+			stopStabilizing();
+			startStabilizing();
 		},
-	});
-
-	onUnmounted(() => {
-		stopContainerObserving();
 	});
 
 	return {
