@@ -80,8 +80,10 @@ export const useSelect = ({
 		emit,
 	});
 
-	onMounted(() => {
-		fetchSelectedByIds();
+	onMounted(async () => {
+		await fetchSelectedByIds();
+		if (!searchMethod.value) return;
+		fetchOptions();
 	});
 
 	const clearValue = () => {

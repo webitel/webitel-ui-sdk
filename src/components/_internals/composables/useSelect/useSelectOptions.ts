@@ -191,10 +191,17 @@ export const useSelectOptions = ({
 			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
 		);
 		if (missingSelected.length) {
+			// resolve primitives to full objects from cache so PrimeVue can checkmark them
+			const resolved = missingSelected.map(
+				(s) =>
+					(selectedOptionsCache.value as Record<string, unknown>[]).find(
+						(o) => o[dataKey.value] === s,
+					) ?? s,
+			);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...filterBySearch(missingSelected, filterText.value),
+						...filterBySearch(resolved, filterText.value),
 						...filteredOptions.value,
 					],
 					dataKey.value,
@@ -206,12 +213,6 @@ export const useSelectOptions = ({
 	watch(
 		() => selected.value,
 		(newVal, oldVal) => {
-			if (oldVal && searchMethod.value) {
-				const oldAsArray = toArray(oldVal);
-				filteredOptions.value = filteredOptions.value.filter(
-					(option) => !isOptionSelected(option, oldAsArray, dataKey.value),
-				);
-			}
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
 		},
