@@ -16,6 +16,7 @@ export const useSelectOptions = ({
 	dataKey,
 	allowCustomValues,
 	searchMethod,
+	disabledOptions,
 }) => {
 	const { t } = useI18n();
 	const defaultOptionLabel = 'name';
@@ -227,6 +228,21 @@ export const useSelectOptions = ({
 		},
 	);
 
+	const isOptionDisabled = (option: unknown): boolean => {
+		if (!disabledOptions?.value) return false;
+		return Array.isArray(disabledOptions.value)
+			? (disabledOptions.value as unknown[]).some(
+					(d) =>
+						d != null &&
+						typeof d === 'object' &&
+						option != null &&
+						typeof option === 'object' &&
+						(d as Record<string, unknown>)[dataKey.value] ===
+							(option as Record<string, unknown>)[dataKey.value],
+				)
+			: Boolean(disabledOptions.value);
+	};
+
 	return {
 		filterText,
 		filteredOptions,
@@ -239,5 +255,6 @@ export const useSelectOptions = ({
 		resetAndFetch,
 		filterOptions,
 		updateSelectedOptionsCache,
+		isOptionDisabled,
 	};
 };

@@ -22,7 +22,7 @@
       :focus-on-hover="false"
       :disabled="disabled"
       :placeholder="placeholder || label"
-      :option-disabled="() => disabledOptions"
+      :option-disabled="isOptionDisabled"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
@@ -118,9 +118,9 @@ interface Props extends SelectProps {
 	disabled?: boolean;
 	size?: string | null;
 	/**
-	 * true disables all options but keeps dropdown visible
+	 * true disables all options but keeps dropdown visible; an array disables specific options by dataKey
 	 */
-	disabledOptions?: boolean;
+	disabledOptions?: boolean | unknown[];
 	/**
 	 * false disables options search
 	 */
@@ -197,6 +197,7 @@ const {
 	filterOptions,
 	onInputKeydown,
 	clearValue,
+	isOptionDisabled,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),
@@ -209,6 +210,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: true,
+	disabledOptions: computed(() => props.disabledOptions),
 	emit,
 });
 
