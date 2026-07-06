@@ -55,7 +55,7 @@
             {{ value.map((v) => getOptionLabel(v)).join(', ') }}
           </template>
         </span>
-        <span v-else class="p-placeholder">{{ placeholder }}</span>
+        <span v-else class="p-placeholder">{{ placeholder }}&nbsp;</span>
       </template>
       <template #header>
         <wt-input-text

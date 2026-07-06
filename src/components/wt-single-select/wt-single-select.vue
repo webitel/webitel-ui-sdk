@@ -60,7 +60,7 @@
           <span
             v-tooltip="getOptionLabel(value)"
           >
-            {{ getOptionLabel(value) || placeholder }}
+            {{ getOptionLabel(value) || placeholder }}&nbsp;
           </span>
         </slot>
       </template>
