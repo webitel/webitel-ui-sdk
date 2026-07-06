@@ -578,7 +578,7 @@ export default deepmerge(
 						return 'Sort';
 					},
 					[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-					[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+					[IconAction.LOGOUT]: 'End sessions',
 				},
 			},
 			errorPages: {

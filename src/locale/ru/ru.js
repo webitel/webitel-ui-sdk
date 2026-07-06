@@ -562,7 +562,7 @@ export default {
 					return 'Сортировка';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Завершить сеансы',
 			},
 		},
 		errorPages: {
