@@ -74,7 +74,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<string>;
 	customValidators?: unknown[];
-	autocomplete: string | null;
+	autocomplete?: string;
 }
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {
@@ -87,7 +87,6 @@ const props = withDefaults(defineProps<WtPasswordProps>(), {
 	v: null,
 	regleValidation: null,
 	customValidators: () => [],
-	autocomplete: null,
 });
 
 const model = defineModel<string>({
