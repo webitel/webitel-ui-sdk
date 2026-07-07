@@ -286,55 +286,56 @@ export const UpdateOAuthService2Params = zod.object({
 	id: zod.string().describe('Unique identifier of the OAuthService to update.'),
 });
 
-export const UpdateOAuthService2Body = zod.object({
-	changes: zod
-		.object({
-			authUrl: zod.string().optional(),
-			claims: zod
-				.array(
-					zod.object({
-						type: zod.string().optional(),
-						value: zod.string().optional(),
-					}),
-				)
-				.optional()
-				.describe('google.protobuf.Struct claims = 7;'),
-			clientId: zod.string().optional(),
-			clientSecret: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			discoveryUrl: zod.string().optional(),
-			domain: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			enabled: zod.boolean().optional(),
-			id: zod.string().optional(),
-			logo: zod.string().optional(),
-			metadata: zod.looseObject({}).optional(),
-			name: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			tokenUrl: zod.string().optional(),
-			type: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			userinfoUrl: zod.string().optional(),
-		})
+export const UpdateOAuthService2QueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
 		.optional()
-		.describe('Configuration changes.'),
-	fields: zod.array(zod.string()).optional(),
+		.describe('Fields for partial update. PATCH'),
+});
+
+export const UpdateOAuthService2Body = zod.object({
+	authUrl: zod.string().optional(),
+	claims: zod
+		.array(
+			zod.object({
+				type: zod.string().optional(),
+				value: zod.string().optional(),
+			}),
+		)
+		.optional()
+		.describe('google.protobuf.Struct claims = 7;'),
+	clientId: zod.string().optional(),
+	clientSecret: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	discoveryUrl: zod.string().optional(),
+	domain: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	logo: zod.string().optional(),
+	metadata: zod.looseObject({}).optional(),
+	name: zod.string().optional(),
+	scopes: zod.array(zod.string()).optional(),
+	tokenUrl: zod.string().optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	userinfoUrl: zod.string().optional(),
 });
 
 export const UpdateOAuthService2Response = zod.object({
@@ -386,55 +387,56 @@ export const UpdateOAuthServiceParams = zod.object({
 	id: zod.string().describe('Unique identifier of the OAuthService to update.'),
 });
 
-export const UpdateOAuthServiceBody = zod.object({
-	changes: zod
-		.object({
-			authUrl: zod.string().optional(),
-			claims: zod
-				.array(
-					zod.object({
-						type: zod.string().optional(),
-						value: zod.string().optional(),
-					}),
-				)
-				.optional()
-				.describe('google.protobuf.Struct claims = 7;'),
-			clientId: zod.string().optional(),
-			clientSecret: zod.string().optional(),
-			createdAt: zod.string().optional(),
-			createdBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			discoveryUrl: zod.string().optional(),
-			domain: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			enabled: zod.boolean().optional(),
-			id: zod.string().optional(),
-			logo: zod.string().optional(),
-			metadata: zod.looseObject({}).optional(),
-			name: zod.string().optional(),
-			scopes: zod.array(zod.string()).optional(),
-			tokenUrl: zod.string().optional(),
-			type: zod.string().optional(),
-			updatedAt: zod.string().optional(),
-			updatedBy: zod
-				.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				})
-				.optional(),
-			userinfoUrl: zod.string().optional(),
-		})
+export const UpdateOAuthServiceQueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
 		.optional()
-		.describe('Configuration changes.'),
-	fields: zod.array(zod.string()).optional(),
+		.describe('Fields for partial update. PATCH'),
+});
+
+export const UpdateOAuthServiceBody = zod.object({
+	authUrl: zod.string().optional(),
+	claims: zod
+		.array(
+			zod.object({
+				type: zod.string().optional(),
+				value: zod.string().optional(),
+			}),
+		)
+		.optional()
+		.describe('google.protobuf.Struct claims = 7;'),
+	clientId: zod.string().optional(),
+	clientSecret: zod.string().optional(),
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	discoveryUrl: zod.string().optional(),
+	domain: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	logo: zod.string().optional(),
+	metadata: zod.looseObject({}).optional(),
+	name: zod.string().optional(),
+	scopes: zod.array(zod.string()).optional(),
+	tokenUrl: zod.string().optional(),
+	type: zod.string().optional(),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	userinfoUrl: zod.string().optional(),
 });
 
 export const UpdateOAuthServiceResponse = zod.object({

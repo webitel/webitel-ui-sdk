@@ -6,8 +6,7 @@
  */
 import type { ApiOAuthService } from './apiOAuthService';
 
-export interface OAuth2FederationUpdateOAuthServiceBody {
-	/** Configuration changes. */
-	changes?: ApiOAuthService;
-	fields?: string[];
-}
+/**
+ * Configuration changes.
+ */
+export type ApiOAuthServiceBody = ApiOAuthService;
