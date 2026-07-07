@@ -9,6 +9,6 @@
   min-width: 0;
   border-radius: var(--wt-card-border-radius);
   padding: var(--wt-card-padding);
-  box-shadow: var(--elevation-5);
+  box-shadow: var(--elevation-3);
 }
 </style>
