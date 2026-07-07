@@ -49,6 +49,7 @@
 				}
 			}"
 			@show="onPanelShow"
+			@hide="onPanelHide"
 			@blur="onBlur"
     >
 			<template #buttonbar="{ todayCallback, clearCallback }">
@@ -152,6 +153,7 @@ import {
 	MessageVariant,
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useOverlayAnchor } from './_internals/composables/useOverlayAnchor';
 import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 import { useRestoreOnBlur } from './_internals/composables/useRestoreOnBlur';
 
@@ -220,6 +222,8 @@ const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
 });
 
+const { lock: lockOverlay, unlock: unlockOverlay } = useOverlayAnchor();
+
 // PrimeVue initializes its internal currentHour/currentMinute from new Date() when the
 // overlay opens, ignoring the model value. Re-assigning the same value forces a re-sync.
 const onPanelShow = () => {
@@ -234,8 +238,14 @@ const onPanelShow = () => {
 	setTimeout(() => {
 		datepicker.value?.alignOverlay();
 		const panel = datepicker.value?.overlay;
-		if (panel) panel.style.minWidth = '';
+		if (!panel) return;
+		panel.style.minWidth = '';
+		lockOverlay(panel);
 	}, 0);
+};
+
+const onPanelHide = () => {
+	unlockOverlay();
 };
 
 const requiredLabel = computed(() => {
