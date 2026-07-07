@@ -5,7 +5,7 @@ import { nextTick, type WritableComputedRef, watch } from 'vue';
  *
  * https://webitel.atlassian.net/browse/WTEL-9880
  *
- * When the datepicker is not clearable, restores the last valid value on blur
+ * When the datepicker is not clearable, set current date value on blur
  * if the user left the field empty or typed an invalid date.
  *
  * Since the parent model never becomes null (null writes are blocked in the
@@ -14,40 +14,24 @@ import { nextTick, type WritableComputedRef, watch } from 'vue';
  * redraws the input.
  */
 export function useRestoreOnBlur(
-	modelValue: WritableComputedRef<Date | null>,
 	getDatepicker: () => {
 		rawValue: Date | null;
 		updateModel: (v: Date) => void;
 	} | null,
 	isClearable: () => boolean,
 ) {
-	let lastValid: Date | null = null;
-
-	function watchRestoreOnBlurLastValidValue() {
-		watch(
-			modelValue,
-			(value) => {
-				if (value !== null) lastValid = value;
-			},
-			{
-				immediate: true,
-			},
-		);
-	}
-
 	function onBlur() {
 		if (isClearable()) return;
 		const datePickerEl = getDatepicker();
 		if (!datePickerEl) return;
-		if (datePickerEl.rawValue === null && lastValid !== null) {
+		if (datePickerEl.rawValue === null) {
 			nextTick(() => {
-				datePickerEl.updateModel(new Date(lastValid.getTime()));
+				datePickerEl.updateModel(new Date());
 			});
 		}
 	}
 
 	return {
 		onBlur,
-		watchRestoreOnBlurLastValidValue,
 	};
 }
