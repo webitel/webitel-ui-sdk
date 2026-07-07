@@ -203,9 +203,8 @@ export const tableStoreBody = <
 			});
 			set(item, path, value);
 		} catch (err) {
-			throw err;
-		} finally {
 			await loadDataList();
+			throw err;
 		}
 	};
 
