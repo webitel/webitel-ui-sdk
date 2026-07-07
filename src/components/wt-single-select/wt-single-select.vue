@@ -37,7 +37,7 @@
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
-      @hide="onDropdownHide"
+      @hide="handleDropdownHide"
     >
       <template #header>
         <wt-input-text
@@ -176,6 +176,7 @@ const model = defineModel<string>({
 
 const emit = defineEmits<{
 	reset: [];
+	hide: [];
 }>();
 
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
@@ -232,6 +233,11 @@ const hasLabel = computed(() => {
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
 });
+
+const handleDropdownHide = () => {
+	onDropdownHide();
+	emit('hide');
+};
 </script>
 
 <style scoped>

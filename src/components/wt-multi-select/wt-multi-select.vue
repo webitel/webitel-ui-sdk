@@ -44,7 +44,7 @@
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
-      @hide="onDropdownHide"
+      @hide="handleDropdownHide"
     >
       <template v-if="!chipsView" #value="{ value, placeholder }">
         <span v-if="value && value.length">
@@ -209,6 +209,7 @@ const emit = defineEmits<{
 		value: string,
 	];
 	reset: [];
+	hide: [];
 }>();
 
 const {
@@ -261,6 +262,11 @@ const hasLabel = computed(() => {
 const requiredLabel = computed(() => {
 	return props.required ? `${props.label}*` : props.label;
 });
+
+const handleDropdownHide = () => {
+	onDropdownHide();
+	emit('hide');
+};
 </script>
 
 <style scoped>
