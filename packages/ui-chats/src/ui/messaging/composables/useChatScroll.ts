@@ -96,13 +96,7 @@ export const useChatScroll = ({
 		onLoadNextMessages();
 	};
 
-	/**
-	 * @author PolinaSukhorukova-webitel
-	 *
-	 * Keeps the chat pinned to the bottom when content height grows
-	 * asynchronously (media load).
-	 */
-	const startObserving = () => {
+	const startContentGrowthObserving = () => {
 		if (!contentElement.value) return;
 
 		prevScrollHeight = element.value?.scrollHeight ?? 0;
@@ -127,10 +121,10 @@ export const useChatScroll = ({
 			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
 
 			const contentGrown = newScrollHeight > prevScrollHeight;
-			const shouldStayAtBottom =
+			const shouldScrollToBottom =
 				contentGrown && (arrivedState.bottom || wasNearBottom);
 
-			if (shouldStayAtBottom) {
+			if (shouldScrollToBottom) {
 				scrollToBottom('instant');
 			}
 
@@ -141,13 +135,13 @@ export const useChatScroll = ({
 		resizeObserver.observe(contentElement.value);
 	};
 
-	const stopObserving = () => {
+	const stopContentGrowthObserving = () => {
 		resizeObserver?.disconnect();
 		resizeObserver = null;
 	};
 
 	const resetScrollState = () => {
-		stopObserving();
+		stopContentGrowthObserving();
 		prevScrollHeight = 0;
 		resetScrollToBottomBtn();
 	};
@@ -194,7 +188,7 @@ export const useChatScroll = ({
 				scrollToBottom,
 			});
 
-			startObserving();
+			startContentGrowthObserving();
 		},
 		{
 			immediate: true,
@@ -202,7 +196,7 @@ export const useChatScroll = ({
 	);
 
 	onUnmounted(() => {
-		stopObserving();
+		stopContentGrowthObserving();
 	});
 
 	return {

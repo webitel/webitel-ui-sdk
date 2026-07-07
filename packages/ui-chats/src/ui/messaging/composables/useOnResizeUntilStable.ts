@@ -1,6 +1,13 @@
+/**
+ * @author PolinaSukhorukova-webitel
+ *
+ * Fires the callback on every resize and disconnects itself
+ * once clientHeight is unchanged twice in a row.
+ */
+
 import { onUnmounted, type Ref } from 'vue';
 
-export const useResizeUntilStable = (
+export const useOnResizeUntilStable = (
 	element: Ref<HTMLElement | null>,
 	onResize: () => void,
 ) => {
@@ -23,7 +30,6 @@ export const useResizeUntilStable = (
 
 			if (currentClientHeight === lastClientHeight) {
 				stableCount++;
-				// height is stable twice in a row — the layout has settled
 				if (stableCount >= 2) stop();
 			} else {
 				stableCount = 0;

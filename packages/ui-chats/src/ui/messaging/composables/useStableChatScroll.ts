@@ -1,5 +1,5 @@
 import { type UseChatScrollOptions, useChatScroll } from './useChatScroll';
-import { useResizeUntilStable } from './useResizeUntilStable';
+import { useOnResizeUntilStable } from './useOnResizeUntilStable';
 
 /**
  * @author PolinaSukhorukova-webitel
@@ -16,7 +16,7 @@ export const useStableChatScroll = ({
 	isLoading,
 }: UseChatScrollOptions) => {
 	const { start: startStabilizing, stop: stopStabilizing } =
-		useResizeUntilStable(element, () => {
+		useOnResizeUntilStable(element, () => {
 			scrollToBottom('instant');
 		});
 
