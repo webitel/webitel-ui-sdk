@@ -7,43 +7,43 @@
 
 import { onUnmounted, type Ref } from 'vue';
 
-export const useOnResizeUntilStable = (
-	element: Ref<HTMLElement | null>,
+export const useObserveHeigthUntilStable = (
+	chatContainer: Ref<HTMLElement | null>,
 	onResize: () => void,
 ) => {
 	let observer: ResizeObserver | null = null;
 
-	const stop = () => {
+	const stopObserve = () => {
 		observer?.disconnect();
 		observer = null;
 	};
 
-	const start = () => {
-		if (!element.value) return;
+	const startObserve = () => {
+		if (!chatContainer.value) return;
 
-		let lastClientHeight = element.value.clientHeight;
+		let lastClientHeight = chatContainer.value.clientHeight;
 		let stableCount = 0;
 
 		observer = new ResizeObserver(() => {
-			const currentClientHeight = element.value?.clientHeight;
+			const currentClientHeight = chatContainer.value?.clientHeight;
 			onResize();
 
 			if (currentClientHeight === lastClientHeight) {
 				stableCount++;
-				if (stableCount >= 2) stop();
+				if (stableCount >= 2) stopObserve();
 			} else {
 				stableCount = 0;
 				lastClientHeight = currentClientHeight;
 			}
 		});
 
-		observer.observe(element.value);
+		observer.observe(chatContainer.value);
 	};
 
-	onUnmounted(stop);
+	onUnmounted(stopObserve);
 
 	return {
-		start,
-		stop,
+		startObserve,
+		stopObserve,
 	};
 };

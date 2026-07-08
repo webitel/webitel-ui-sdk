@@ -2,17 +2,20 @@ import type { UseScrollReturn } from '@vueuse/core';
 import { type Ref, ref } from 'vue';
 
 export const useScrollToBottomBtn = (
-	element: Ref<HTMLElement | null>,
+	chatContainer: Ref<HTMLElement | null>,
 	arrivedState: UseScrollReturn['arrivedState'],
 ) => {
 	const newUnseenMessagesCount = ref(0);
 	const showScrollToBottomBtn = ref(false);
 	/* @author ye.pohranichna
+	why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
+	const defaultThreshold = 136;
+	/* @author ye.pohranichna
 	the distance where the scrollToBottomBtn must be shown/hide. */
 	const threshold = ref(136);
 
 	const handleChatScroll = () => {
-		const wrapper = element.value;
+		const wrapper = chatContainer.value;
 		if (!wrapper) return;
 
 		handleShowScrollToBottomBtn(wrapper);
@@ -36,12 +39,16 @@ export const useScrollToBottomBtn = (
 		showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
 	};
 
+	const updateThreshold = (clientHeight: number) => {
+		threshold.value = Math.max(defaultThreshold, clientHeight * 0.3);
+	};
+
 	return {
 		newUnseenMessagesCount,
 		showScrollToBottomBtn,
-		threshold,
 		handleChatScroll,
 		resetScrollToBottomBtn,
 		handleShowScrollToBottomBtn,
+		updateThreshold,
 	};
 };

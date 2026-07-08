@@ -13,8 +13,8 @@ import type { ChatMessageType } from '../types/ChatMessage.types';
 import { useScrollToBottomBtn } from './useScrollToBottomBtn';
 
 export interface UseChatScrollOptions {
-	element: Ref<HTMLElement | null>;
-	contentElement: Ref<HTMLElement | null>;
+	chatContainer: Ref<HTMLElement | null>;
+	chatContent: Ref<HTMLElement | null>;
 	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>;
 	chatId: ComputedRef<string>;
 	isChatClosed: ComputedRef<boolean>;
@@ -25,8 +25,8 @@ export interface UseChatScrollOptions {
 }
 
 export const useChatScroll = ({
-	element,
-	contentElement,
+	chatContainer,
+	chatContent,
 	messages,
 	chatId,
 	isChatClosed,
@@ -35,20 +35,17 @@ export const useChatScroll = ({
 		options.scrollToBottom();
 	},
 }: UseChatScrollOptions) => {
-	const { arrivedState } = useScroll(element);
+	const { arrivedState } = useScroll(chatContainer);
 
 	const {
 		newUnseenMessagesCount,
 		showScrollToBottomBtn,
-		threshold,
+		handleChatScroll,
 		resetScrollToBottomBtn,
 		handleShowScrollToBottomBtn,
-		handleChatScroll,
-	} = useScrollToBottomBtn(element, arrivedState);
+		updateThreshold,
+	} = useScrollToBottomBtn(chatContainer, arrivedState);
 
-	/* @author ye.pohranichna
-		why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
-	const defaultThreshold = 136;
 	/* height of a message + gap */
 	const nearBottomOffset = 48;
 	let isLoadingNextMessages = false;
@@ -68,8 +65,8 @@ export const useChatScroll = ({
 	};
 
 	const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
-		element.value?.scrollTo({
-			top: element.value?.scrollHeight,
+		chatContainer.value?.scrollTo({
+			top: chatContainer.value?.scrollHeight,
 			behavior,
 		});
 
@@ -77,9 +74,9 @@ export const useChatScroll = ({
 	};
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
-		if (!element.value?.children) return;
+		if (!chatContainer.value?.children) return;
 		lastVisibleMessageEl =
-			(element.value?.getElementsByClassName(
+			(chatContainer.value?.getElementsByClassName(
 				'chat-message',
 			)[0] as HTMLElement) ?? null;
 	};
@@ -97,17 +94,22 @@ export const useChatScroll = ({
 	};
 
 	const startContentGrowthObserving = () => {
-		if (!contentElement.value) return;
+		if (!chatContent.value) return;
 
-		prevScrollHeight = element.value?.scrollHeight ?? 0;
+		prevScrollHeight = chatContainer.value?.scrollHeight ?? 0;
 
 		resizeObserver = new ResizeObserver(() => {
-			const el = element.value;
+			const el = chatContainer.value;
 			if (!el) return;
 
 			const newScrollHeight = el.scrollHeight;
 
-			threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
+			updateThreshold(el.clientHeight);
+
+			const distanceFromBottom =
+				prevScrollHeight - (el.scrollTop + el.clientHeight);
+			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
+			const contentGrown = newScrollHeight > prevScrollHeight;
 
 			/**
 			 * @author PolinaSukhorukova-webitel
@@ -115,12 +117,6 @@ export const useChatScroll = ({
 			 * arrivedState.bottom lags after programmatic scrollTo,
 			 * so the distance is also checked manually.
 			 */
-
-			const distanceFromBottom =
-				prevScrollHeight - (el.scrollTop + el.clientHeight);
-			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
-
-			const contentGrown = newScrollHeight > prevScrollHeight;
 			const shouldScrollToBottom =
 				contentGrown && (arrivedState.bottom || wasNearBottom);
 
@@ -132,7 +128,7 @@ export const useChatScroll = ({
 			handleShowScrollToBottomBtn(el);
 		});
 
-		resizeObserver.observe(contentElement.value);
+		resizeObserver.observe(chatContent.value);
 	};
 
 	const stopContentGrowthObserving = () => {
@@ -166,7 +162,7 @@ export const useChatScroll = ({
 
 			await nextTick();
 
-			element.value?.scrollTo({
+			chatContainer.value?.scrollTo({
 				top: lastVisibleMessageEl?.offsetTop,
 				behavior: 'auto',
 			});
