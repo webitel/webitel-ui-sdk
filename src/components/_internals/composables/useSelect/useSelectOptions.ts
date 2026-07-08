@@ -165,7 +165,7 @@ export const useSelectOptions = ({
 
 	const debouncedFetch = debounce((value) => resetAndFetch(value));
 
-	const filterOptions = (value) => {
+	const filterOptionsBase = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
 			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
@@ -253,7 +253,7 @@ export const useSelectOptions = ({
 		fetchOptions,
 		fetchSelectedByIds,
 		resetAndFetch,
-		filterOptions,
+		filterOptionsBase,
 		updateSelectedOptionsCache,
 		isOptionDisabled,
 	};
