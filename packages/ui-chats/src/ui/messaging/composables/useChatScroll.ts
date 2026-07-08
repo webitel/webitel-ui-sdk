@@ -93,7 +93,7 @@ export const useChatScroll = ({
 		onLoadNextMessages();
 	};
 
-	const startContentGrowthObserving = () => {
+	const startStickToBottomObserving = () => {
 		if (!chatContent.value) return;
 
 		prevScrollHeight = chatContainer.value?.scrollHeight ?? 0;
@@ -131,13 +131,13 @@ export const useChatScroll = ({
 		resizeObserver.observe(chatContent.value);
 	};
 
-	const stopContentGrowthObserving = () => {
+	const stoptStickToBottomObserving = () => {
 		resizeObserver?.disconnect();
 		resizeObserver = null;
 	};
 
 	const resetScrollState = () => {
-		stopContentGrowthObserving();
+		stoptStickToBottomObserving();
 		prevScrollHeight = 0;
 		resetScrollToBottomBtn();
 	};
@@ -184,7 +184,7 @@ export const useChatScroll = ({
 				scrollToBottom,
 			});
 
-			startContentGrowthObserving();
+			startStickToBottomObserving();
 		},
 		{
 			immediate: true,
@@ -192,7 +192,7 @@ export const useChatScroll = ({
 	);
 
 	onUnmounted(() => {
-		stopContentGrowthObserving();
+		stoptStickToBottomObserving();
 	});
 
 	return {

@@ -9,7 +9,7 @@ import { onUnmounted, type Ref } from 'vue';
 
 export const useObserveHeigthUntilStable = (
 	chatContainer: Ref<HTMLElement | null>,
-	onResize: () => void,
+	callback: () => void,
 ) => {
 	let observer: ResizeObserver | null = null;
 
@@ -26,7 +26,7 @@ export const useObserveHeigthUntilStable = (
 
 		observer = new ResizeObserver(() => {
 			const currentClientHeight = chatContainer.value?.clientHeight;
-			onResize();
+			callback();
 
 			if (currentClientHeight === lastClientHeight) {
 				stableCount++;
