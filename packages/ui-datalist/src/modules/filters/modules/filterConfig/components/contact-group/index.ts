@@ -42,7 +42,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		// This endpoint uses `limit = size + 1`, so the preview's `size: -1`
 		// becomes `limit: 0` and returns nothing. Request as many records as
 		// there are ids instead.
-		const idsCount = Array.isArray(id) ? id.length : 0;
+		const idsCount = Array.isArray(id) ? id.length : 10;
 		const size = idsCount || params.size;
 
 		return contactGroups.getLookup({
