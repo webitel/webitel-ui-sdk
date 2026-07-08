@@ -101,6 +101,7 @@ export default {
 			return 'Editat';
 		},
 		check: 'Verifică',
+		progressiveCount: 'Număr apeluri progresive',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {

@@ -104,6 +104,7 @@ export default deepmerge(
 				return 'Edited';
 			},
 			check: 'Check',
+			progressiveCount: 'Progressive call count',
 		},
 		// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 		vocabulary: {

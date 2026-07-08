@@ -97,6 +97,7 @@ export default {
 			return 'Редактировано';
 		},
 		check: 'Проверить',
+		progressiveCount: 'Количество одновременных звонков',
 	},
 	vocabulary: {
 		apply: 'Применить',

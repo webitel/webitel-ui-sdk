@@ -101,6 +101,7 @@ export default {
 			return 'Edytowane';
 		},
 		check: 'Sprawdź',
+		progressiveCount: 'Liczba rozmów progresywnych',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {

@@ -101,6 +101,7 @@ export default {
 			return 'Đã sửa';
 		},
 		check: 'Kiểm tra',
+		progressiveCount: 'Số cuộc gọi tiến trình',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {

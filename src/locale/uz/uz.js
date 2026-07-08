@@ -101,6 +101,7 @@ export default {
 			return 'Tahrirlangan';
 		},
 		check: 'Tekshirish',
+		progressiveCount: 'Progressiv qo‘ng‘iroqlar soni',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {

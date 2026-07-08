@@ -101,6 +101,7 @@ export default {
 			return 'Өңделген';
 		},
 		check: 'Тексеру',
+		progressiveCount: 'Прогрессивті қоңырау саны',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {

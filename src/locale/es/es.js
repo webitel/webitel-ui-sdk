@@ -100,6 +100,7 @@ export default {
 			return 'Editado';
 		},
 		check: 'Comprobar',
+		progressiveCount: 'Contador de llamadas progresivas',
 	},
 	vocabulary: {
 		apply: 'Aplicar',
