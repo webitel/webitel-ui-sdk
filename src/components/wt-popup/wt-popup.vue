@@ -39,6 +39,7 @@ v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--over
 
 <script lang="ts" setup>
 import { TransitionSlide } from '@morev/vue-transitions';
+import { useScrollLock } from '@vueuse/core';
 import { computed, defineEmits, defineProps, ref, watch } from 'vue';
 
 import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
@@ -122,6 +123,19 @@ const closePopup = () => {
 const showPopupComponent = computed(() => {
 	return wrapperShown.value || isCloseAnimationPlaying.value;
 });
+
+// lock page (body) scroll while the popup overlay is visible
+const isBodyScrollLocked = useScrollLock(document.body);
+
+watch(
+	showPopupComponent,
+	(isVisible) => {
+		isBodyScrollLocked.value = isVisible;
+	},
+	{
+		immediate: true,
+	},
+);
 
 // overlay should be shown before popup to show animation properly
 watch(
