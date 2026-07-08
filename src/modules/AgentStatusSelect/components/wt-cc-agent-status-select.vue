@@ -1,6 +1,7 @@
 <template>
   <article class="wt-cc-agent-status-select">
     <wt-status-select
+			:key="status"
       :status="status"
       :status-duration="statusDuration"
       @closed="handleClosed"
