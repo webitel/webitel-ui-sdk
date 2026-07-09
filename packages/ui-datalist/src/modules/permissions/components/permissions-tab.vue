@@ -24,12 +24,10 @@ import { useRoute } from 'vue-router';
 const props = withDefaults(
 	defineProps<{
 		store?: (() => any) | null;
-		usePermissionsStore?: (() => any) | null;
 		access?: UserAccessFlags;
 	}>(),
 	{
 		store: null,
-		usePermissionsStore: null,
 		access: () => ({
 			read: true,
 			add: true,
@@ -41,8 +39,7 @@ const props = withDefaults(
 
 const route = useRoute();
 
-const storeFactory = props.store || props.usePermissionsStore;
-const permissionsStore = storeFactory();
+const permissionsStore = props.store();
 
 const { dataList, isLoading, headers, page, size, next, error } =
 	storeToRefs(permissionsStore);
