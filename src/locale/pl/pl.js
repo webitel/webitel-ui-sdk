@@ -472,7 +472,7 @@ export default {
 			'Kod musi zawierać tylko litery (A-Z, a-z) i cyfry (0-9) oraz musi zaczynać się od litery',
 		integer: 'Pole powinno zawierać tylko liczby całkowite',
 		nameAlreadyInUse: 'Ta nazwa jest już używana',
-		phoneNumberValidator:
+		phoneNumberSymbolsValidator:
 			"Numer może zawierać wyłącznie litery (a-z, A-Z), cyfry (0-9) oraz symbole: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {

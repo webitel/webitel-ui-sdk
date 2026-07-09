@@ -78,8 +78,8 @@ export const useFieldValidation = ({
 					`${t('validation.isRegExpMatched')} ${v.value.regex?.$params?.regex}`;
 			else if (v.value.nameAlreadyInUse?.$invalid) {
 				validationText = t('validation.nameAlreadyInUse');
-			} else if (v.value.phoneNumberValidator?.$invalid) {
-				validationText = t('validation.phoneNumberValidator');
+			} else if (v.value.phoneNumberSymbolsValidator?.$invalid) {
+				validationText = t('validation.phoneNumberSymbolsValidator');
 			}
 		}
 

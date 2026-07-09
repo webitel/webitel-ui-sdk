@@ -475,7 +475,7 @@ export default {
 			'Mã phải chỉ chứa chữ cái (A-Z, a-z) và số (0-9), và phải bắt đầu bằng chữ cái',
 		integer: 'Trường này chỉ được chứa số nguyên',
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
-		phoneNumberValidator:
+		phoneNumberSymbolsValidator:
 			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {

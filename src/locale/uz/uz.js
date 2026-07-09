@@ -476,7 +476,7 @@ export default {
 			"Kod faqat harflar (A-Z, a-z) va raqamlar (0-9) dan iborat bo'lishi va harf bilan boshlanishi kerak",
 		integer: "Maydon faqat butun sonlardan iborat bo'lishi kerak",
 		nameAlreadyInUse: 'Ushbu nom allaqachon mavjud',
-		phoneNumberValidator:
+		phoneNumberSymbolsValidator:
 			"Raqamda faqat harflar (a-z, A-Z), raqamlar (0-9) va quyidagi belgilar bo'lishi mumkin: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
