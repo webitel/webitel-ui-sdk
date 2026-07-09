@@ -90,6 +90,10 @@
 		"./card": {
 			"types": "./types/modules/card/index.d.ts",
 			"import": "./src/modules/card/index.ts"
+		},
+		"./permissions": {
+			"types": "./types/modules/permissions/index.d.ts",
+			"import": "./src/modules/permissions/index.ts"
 		}
 	}
 }

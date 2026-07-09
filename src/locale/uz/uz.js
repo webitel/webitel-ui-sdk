@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -159,9 +159,9 @@ export default {
 		operations: 'Operatsiyalar',
 		rbacDefault: 'Standart yozuvga asoslangan kirish',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Taqiqlangan',
-			[AccessMode.ALLOW]: 'Ruxsat etilgan',
-			[AccessMode.MANAGE]: 'Delegatsiya bilan ruxsat etilgan',
+			[AccessMode.Forbidden]: 'Taqiqlangan',
+			[AccessMode.Allow]: 'Ruxsat etilgan',
+			[AccessMode.Manage]: 'Delegatsiya bilan ruxsat etilgan',
 		},
 	},
 	// describes Webitel system entities

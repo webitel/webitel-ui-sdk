@@ -4,6 +4,7 @@ import { CrudAction, type WtObject } from '../../../enums';
 import { _wtUiLog } from '../../../scripts/logger';
 import type { createUserAccessStore } from '../stores/accessStore';
 import type { UserAccessStore } from '../types/UserAccess.d.ts';
+import type { UserAccessFlags } from './types/CreateUserAccessControl.d';
 
 export type UseUserAccessControlComposableOptions =
 	| WtObject
@@ -14,6 +15,7 @@ export type UseUserAccessControlComposableOptions =
 	  };
 
 export interface UseAccessControlReturn {
+	userAccess: Ref<UserAccessFlags>;
 	hasReadAccess: Ref<boolean>;
 	hasCreateAccess: Ref<boolean>;
 	hasUpdateAccess: Ref<boolean>;
@@ -89,6 +91,15 @@ export const createUserAccessControlComposable = (
 			return userinfoStore.hasDeleteAccess(object);
 		});
 
+		const userAccess = computed(
+			(): UserAccessFlags => ({
+				read: hasReadAccess.value,
+				add: hasCreateAccess.value,
+				edit: hasUpdateAccess.value,
+				delete: hasDeleteAccess.value,
+			}),
+		);
+
 		const hasSaveActionAccess = computed(() => {
 			if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
 
@@ -105,6 +116,7 @@ export const createUserAccessControlComposable = (
 		});
 
 		return {
+			userAccess,
 			hasReadAccess,
 			hasCreateAccess,
 			hasUpdateAccess,

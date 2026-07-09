@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -159,9 +159,9 @@ export default {
 		operations: 'Operațiuni',
 		rbacDefault: 'Acces implicit bazat pe înregistrări',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Interzis',
-			[AccessMode.ALLOW]: 'Permite',
-			[AccessMode.MANAGE]: 'Permite cu delegare',
+			[AccessMode.Forbidden]: 'Interzis',
+			[AccessMode.Allow]: 'Permite',
+			[AccessMode.Manage]: 'Permite cu delegare',
 		},
 	},
 	// describes Webitel system entities

@@ -22,7 +22,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import notTranslatable from './notTranslatable.en';
@@ -162,9 +162,9 @@ export default deepmerge(
 			operations: 'Operations',
 			rbacDefault: 'Default Record based Access',
 			accessMode: {
-				[AccessMode.FORBIDDEN]: 'Forbidden',
-				[AccessMode.ALLOW]: 'Allow',
-				[AccessMode.MANAGE]: 'Allow with delegation',
+				[AccessMode.Forbidden]: 'Forbidden',
+				[AccessMode.Allow]: 'Allow',
+				[AccessMode.Manage]: 'Allow with delegation',
 			},
 		},
 		// describes Webitel system entities
