@@ -5,7 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1Contact } from './webitelImApiGatewayV1Contact';
-import type { WebitelImApiGatewayV1VariableEntryValue } from './webitelImApiGatewayV1VariableEntryValue';
 
 /**
  * VariableEntry represents a single variable value
@@ -20,5 +19,5 @@ export interface WebitelImApiGatewayV1VariableEntry {
 	 * Arbitrary structured value of the variable.
 	 * Supports dynamic JSON-like content.
 	 */
-	value?: WebitelImApiGatewayV1VariableEntryValue;
+	value?: unknown;
 }

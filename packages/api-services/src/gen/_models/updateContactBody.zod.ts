@@ -9,7 +9,6 @@ import type { ContactsInputContactGroup } from './contactsInputContactGroup.zod'
 import type { ContactsInputEmailAddress } from './contactsInputEmailAddress.zod';
 import type { ContactsInputIMClient } from './contactsInputIMClient.zod';
 import type { ContactsInputLabel } from './contactsInputLabel.zod';
-import type { ContactsInputLanguage } from './contactsInputLanguage.zod';
 import type { ContactsInputManager } from './contactsInputManager.zod';
 import type { ContactsInputName } from './contactsInputName.zod';
 import type { ContactsInputPhoneNumber } from './contactsInputPhoneNumber.zod';
@@ -33,8 +32,6 @@ export type UpdateContactBody = {
 	imclients?: ContactsInputIMClient[];
 	/** The Contact's associated label(s). */
 	labels?: ContactsInputLabel[];
-	/** A Contact's locale preference(s). */
-	languages?: ContactsInputLanguage[];
 	/** The Contact's internal manager(s). */
 	managers?: ContactsInputManager[];
 	name?: ContactsInputName;

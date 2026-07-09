@@ -785,6 +785,52 @@ export const CreateDataBody = zod.looseObject({});
 export const CreateDataResponse = zod.looseObject({});
 
 /**
+ * @summary Batch create dictionary records, resolving Select/Multiselect
+lookup columns by display name (case-insensitive) instead of id.
+ */
+export const BatchCreateDataParams = zod.object({
+	repo: zod.string().describe('`types.repo`'),
+});
+
+export const BatchCreateDataBody = zod.object({
+	rows: zod
+		.array(zod.looseObject({}))
+		.optional()
+		.describe(
+			'Parsed records to create. For Select(lookup) columns each row carries\nthe related record display name (string); for Multiselect(list of lookup)\ncolumns - an array of display names. Backend resolves name -> id\n(case-insensitive).',
+		),
+});
+
+export const BatchCreateDataResponse = zod.object({
+	errors: zod
+		.array(
+			zod.object({
+				code: zod.string().optional(),
+				field: zod
+					.string()
+					.optional()
+					.describe('Code (id) of the problematic column.'),
+				row: zod
+					.number()
+					.optional()
+					.describe('0-based index of the row within the input `rows` array.'),
+				value: zod
+					.string()
+					.optional()
+					.describe('Original input value that could not be processed.'),
+			}),
+		)
+		.optional()
+		.describe('Per-row errors (rows processed independently).'),
+	failed: zod.number().optional().describe('Number of failed rows.'),
+	imported: zod
+		.number()
+		.optional()
+		.describe('Number of successfully imported rows.'),
+	total: zod.number().optional().describe('Total number of input rows.'),
+});
+
+/**
  * @summary Import dataset from CSV file.
  */
 export const ImportCSVParams = zod.object({

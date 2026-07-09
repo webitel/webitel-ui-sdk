@@ -7,6 +7,7 @@
 import { faker } from '@faker-js/faker';
 
 import type {
+	EngineAssignAttemptResponse,
 	EngineAttemptRenewalResultResponse,
 	EngineAttemptResultResponse,
 	EngineCreateAttemptResponse,
@@ -1649,6 +1650,9 @@ export const getSearchAttemptsHistoryResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getAssignAttemptResponseMock =
+	(): EngineAssignAttemptResponse => ({});
 
 export const getAttemptsRenewalResultResponseMock =
 	(): EngineAttemptRenewalResultResponse => ({});

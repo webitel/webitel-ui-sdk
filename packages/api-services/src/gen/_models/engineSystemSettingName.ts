@@ -47,4 +47,5 @@ export const EngineSystemSettingName = {
 	DefaultWorkspaceTab: 'default_workspace_tab',
 	BlockAllMemberNumbersFromList: 'block_all_member_numbers_from_list',
 	LoginOptions: 'login_options',
+	DefaultMembersFilter: 'default_members_filter',
 } as const;

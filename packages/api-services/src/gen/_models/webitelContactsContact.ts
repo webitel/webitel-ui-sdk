@@ -9,7 +9,6 @@ import type { ContactsContactGroupList } from './contactsContactGroupList';
 import type { ContactsEmailList } from './contactsEmailList';
 import type { ContactsIMClientList } from './contactsIMClientList';
 import type { ContactsLabelList } from './contactsLabelList';
-import type { ContactsLanguageList } from './contactsLanguageList';
 import type { ContactsManagerList } from './contactsManagerList';
 import type { ContactsName } from './contactsName';
 import type { ContactsPhoneList } from './contactsPhoneList';
@@ -49,8 +48,6 @@ export interface WebitelContactsContact {
 	imclients?: ContactsIMClientList;
 	/** The Contact's associated tag(s). */
 	labels?: ContactsLabelList;
-	/** A Contact's locale preference(s). */
-	languages?: ContactsLanguageList;
 	/** The Contact's internal manager(s). */
 	managers?: ContactsManagerList;
 	/** [R]ecord[b]ased[A]ccess[C]ontrol mode granted. */

@@ -411,6 +411,10 @@ export const getSearchQueueResponseMock = (
 			]),
 			taskProcessing: faker.helpers.arrayElement([
 				{
+					autosave: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
 					enabled: faker.helpers.arrayElement([
 						faker.datatype.boolean(),
 						undefined,
@@ -944,6 +948,10 @@ export const getCreateQueueResponseMock = (
 	]),
 	taskProcessing: faker.helpers.arrayElement([
 		{
+			autosave: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			enabled: faker.helpers.arrayElement([
 				faker.datatype.boolean(),
 				undefined,
@@ -1738,6 +1746,10 @@ export const getDeleteQueueResponseMock = (
 	]),
 	taskProcessing: faker.helpers.arrayElement([
 		{
+			autosave: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			enabled: faker.helpers.arrayElement([
 				faker.datatype.boolean(),
 				undefined,
@@ -2264,6 +2276,10 @@ export const getReadQueueResponseMock = (
 	]),
 	taskProcessing: faker.helpers.arrayElement([
 		{
+			autosave: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			enabled: faker.helpers.arrayElement([
 				faker.datatype.boolean(),
 				undefined,
@@ -2790,6 +2806,10 @@ export const getPatchQueueResponseMock = (
 	]),
 	taskProcessing: faker.helpers.arrayElement([
 		{
+			autosave: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			enabled: faker.helpers.arrayElement([
 				faker.datatype.boolean(),
 				undefined,
@@ -3316,6 +3336,10 @@ export const getUpdateQueueResponseMock = (
 	]),
 	taskProcessing: faker.helpers.arrayElement([
 		{
+			autosave: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			enabled: faker.helpers.arrayElement([
 				faker.datatype.boolean(),
 				undefined,

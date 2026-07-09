@@ -7,6 +7,7 @@
 import { faker } from '@faker-js/faker';
 import type {
 	CreateData200,
+	DataBatchCreateDatasetResponse,
 	DataDataset,
 	DataStructList,
 	LocateData200,
@@ -1675,6 +1676,70 @@ export const getSearchDataResponseMock = (
 });
 
 export const getCreateDataResponseMock = (): CreateData200 => ({});
+
+export const getBatchCreateDataResponseMock = (
+	overrideResponse: Partial<
+		Extract<DataBatchCreateDatasetResponse, object>
+	> = {},
+): DataBatchCreateDatasetResponse => ({
+	errors: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			code: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			field: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			row: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			value: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	failed: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
+	imported: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
+	total: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
 export const getImportCSVResponseMock = (
 	overrideResponse: Partial<Extract<DataDataset, object>> = {},

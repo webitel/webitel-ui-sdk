@@ -16,7 +16,7 @@ import type {
 	KnowledgebaseAttachmentList,
 } from '../_models';
 
-export const getListArticlesResponseMock = (
+export const getListArticlesArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
@@ -214,7 +214,7 @@ export const getListArticlesResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateArticleResponseMock = (
+export const getCreateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
@@ -944,7 +944,7 @@ export const getLocateArticleVersionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteArticleResponseMock = (
+export const getDeleteArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticle, object>> = {},
 ): KnowledgebaseArticle => ({
 	tags: faker.helpers.arrayElement([
@@ -1121,7 +1121,7 @@ export const getDeleteArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateArticleResponseMock = (
+export const getLocateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticle, object>> = {},
 ): KnowledgebaseArticle => ({
 	tags: faker.helpers.arrayElement([
@@ -1298,7 +1298,7 @@ export const getLocateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateArticleResponseMock = (
+export const getUpdateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
@@ -1496,7 +1496,7 @@ export const getUpdateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getListArticlesMockHandler = (
+export const getListArticlesArticlesMockHandler = (
 	overrideResponse?:
 		| KnowledgebaseArticleList
 		| ((
@@ -1512,7 +1512,7 @@ export const getListArticlesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getListArticlesResponseMock(),
+					: getListArticlesArticlesResponseMock(),
 				{
 					status: 200,
 				},
@@ -1522,7 +1522,7 @@ export const getListArticlesMockHandler = (
 	);
 };
 
-export const getCreateArticleMockHandler = (
+export const getCreateArticleArticlesMockHandler = (
 	overrideResponse?:
 		| KnowledgebaseArticleList
 		| ((
@@ -1538,7 +1538,7 @@ export const getCreateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCreateArticleResponseMock(),
+					: getCreateArticleArticlesResponseMock(),
 				{
 					status: 200,
 				},
@@ -1654,7 +1654,7 @@ export const getLocateArticleVersionMockHandler = (
 	);
 };
 
-export const getDeleteArticleMockHandler = (
+export const getDeleteArticleArticlesMockHandler = (
 	overrideResponse?:
 		| KnowledgebaseArticle
 		| ((
@@ -1670,7 +1670,7 @@ export const getDeleteArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteArticleResponseMock(),
+					: getDeleteArticleArticlesResponseMock(),
 				{
 					status: 200,
 				},
@@ -1680,7 +1680,7 @@ export const getDeleteArticleMockHandler = (
 	);
 };
 
-export const getLocateArticleMockHandler = (
+export const getLocateArticleArticlesMockHandler = (
 	overrideResponse?:
 		| KnowledgebaseArticle
 		| ((
@@ -1696,7 +1696,7 @@ export const getLocateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateArticleResponseMock(),
+					: getLocateArticleArticlesResponseMock(),
 				{
 					status: 200,
 				},
@@ -1706,7 +1706,7 @@ export const getLocateArticleMockHandler = (
 	);
 };
 
-export const getUpdateArticleMockHandler = (
+export const getUpdateArticleArticlesMockHandler = (
 	overrideResponse?:
 		| KnowledgebaseArticleList
 		| ((
@@ -1722,7 +1722,7 @@ export const getUpdateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateArticleResponseMock(),
+					: getUpdateArticleArticlesResponseMock(),
 				{
 					status: 200,
 				},
@@ -1732,13 +1732,13 @@ export const getUpdateArticleMockHandler = (
 	);
 };
 export const getArticlesMock = () => [
-	getListArticlesMockHandler(),
-	getCreateArticleMockHandler(),
+	getListArticlesArticlesMockHandler(),
+	getCreateArticleArticlesMockHandler(),
 	getArticlesAttachmentListMockHandler(),
 	getListArticles2MockHandler(),
 	getArticleVersionsListMockHandler(),
 	getLocateArticleVersionMockHandler(),
-	getDeleteArticleMockHandler(),
-	getLocateArticleMockHandler(),
-	getUpdateArticleMockHandler(),
+	getDeleteArticleArticlesMockHandler(),
+	getLocateArticleArticlesMockHandler(),
+	getUpdateArticleArticlesMockHandler(),
 ];
