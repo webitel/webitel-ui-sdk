@@ -1,3 +1,5 @@
+import { onUnmounted, type Ref } from 'vue';
+
 /**
  * @author PolinaSukhorukova-webitel
  *
@@ -5,9 +7,7 @@
  * once clientHeight is unchanged twice in a row.
  */
 
-import { onUnmounted, type Ref } from 'vue';
-
-export const useObserveHeigthUntilStable = (
+export const useObserveHeightUntilStable = (
 	chatContainer: Ref<HTMLElement | null>,
 	callback: () => void,
 ) => {

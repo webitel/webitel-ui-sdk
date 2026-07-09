@@ -1,10 +1,11 @@
-import { useScroll } from '@vueuse/core';
+import { useResizeObserver, useScroll } from '@vueuse/core';
 import {
 	type ComputedRef,
 	computed,
 	nextTick,
 	onUnmounted,
 	type Ref,
+	ref,
 	watch,
 } from 'vue';
 
@@ -38,11 +39,10 @@ export const useChatScroll = ({
 	const { arrivedState } = useScroll(chatContainer);
 
 	const {
-		newUnseenMessagesCount,
 		showScrollToBottomBtn,
 		handleChatScroll,
 		resetScrollToBottomBtn,
-		handleShowScrollToBottomBtn,
+		updateScrollToBottomBtnVisibility,
 		updateThreshold,
 	} = useScrollToBottomBtn(chatContainer, arrivedState);
 
@@ -53,11 +53,13 @@ export const useChatScroll = ({
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
 
-	const isLastMessageIsMy = computed(() => !!lastMessage.value?.member?.self);
+	const newUnseenMessagesCount = ref(0);
+
 	const lastMessage = computed(() => messages.value?.at(-1));
+	const isLastMessageMy = computed(() => !!lastMessage.value?.member?.self);
 
 	const handleBtnAfterNewMessage = () => {
-		if (isLastMessageIsMy.value) {
+		if (isLastMessageMy.value) {
 			scrollToBottom('instant');
 		} else if (!arrivedState.bottom) {
 			newUnseenMessagesCount.value += 1;
@@ -69,6 +71,8 @@ export const useChatScroll = ({
 			top: chatContainer.value?.scrollHeight,
 			behavior,
 		});
+
+		newUnseenMessagesCount.value = 0;
 
 		resetScrollToBottomBtn();
 	};
@@ -104,8 +108,6 @@ export const useChatScroll = ({
 
 			const newScrollHeight = el.scrollHeight;
 
-			updateThreshold(el.clientHeight);
-
 			const distanceFromBottom =
 				prevScrollHeight - (el.scrollTop + el.clientHeight);
 			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
@@ -125,20 +127,29 @@ export const useChatScroll = ({
 			}
 
 			prevScrollHeight = newScrollHeight;
-			handleShowScrollToBottomBtn(el);
+			updateScrollToBottomBtnVisibility(el);
 		});
 
 		resizeObserver.observe(chatContent.value);
 	};
 
-	const stoptStickToBottomObserving = () => {
+	const stopStickToBottomObserving = () => {
 		resizeObserver?.disconnect();
 		resizeObserver = null;
 	};
 
+	useResizeObserver(chatContainer, () => {
+		const el = chatContainer.value;
+		if (!el) return;
+
+		updateThreshold(el.clientHeight);
+		updateScrollToBottomBtnVisibility(el);
+	});
+
 	const resetScrollState = () => {
-		stoptStickToBottomObserving();
+		stopStickToBottomObserving();
 		prevScrollHeight = 0;
+		newUnseenMessagesCount.value = 0;
 		resetScrollToBottomBtn();
 	};
 
@@ -192,7 +203,7 @@ export const useChatScroll = ({
 	);
 
 	onUnmounted(() => {
-		stoptStickToBottomObserving();
+		stopStickToBottomObserving();
 	});
 
 	return {

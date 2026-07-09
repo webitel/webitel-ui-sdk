@@ -5,28 +5,26 @@ export const useScrollToBottomBtn = (
 	chatContainer: Ref<HTMLElement | null>,
 	arrivedState: UseScrollReturn['arrivedState'],
 ) => {
-	const newUnseenMessagesCount = ref(0);
 	const showScrollToBottomBtn = ref(false);
 	/* @author ye.pohranichna
 	why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
 	const defaultThreshold = 136;
 	/* @author ye.pohranichna
 	the distance where the scrollToBottomBtn must be shown/hide. */
-	const threshold = ref(136);
+	const threshold = ref(defaultThreshold);
 
 	const handleChatScroll = () => {
 		const wrapper = chatContainer.value;
 		if (!wrapper) return;
 
-		handleShowScrollToBottomBtn(wrapper);
+		updateScrollToBottomBtnVisibility(wrapper);
 	};
 
 	const resetScrollToBottomBtn = () => {
-		newUnseenMessagesCount.value = 0;
 		showScrollToBottomBtn.value = false;
 	};
 
-	const handleShowScrollToBottomBtn = (el: HTMLElement) => {
+	const updateScrollToBottomBtnVisibility = (el: HTMLElement) => {
 		if (arrivedState.bottom) {
 			resetScrollToBottomBtn();
 			return;
@@ -44,11 +42,10 @@ export const useScrollToBottomBtn = (
 	};
 
 	return {
-		newUnseenMessagesCount,
 		showScrollToBottomBtn,
 		handleChatScroll,
 		resetScrollToBottomBtn,
-		handleShowScrollToBottomBtn,
+		updateScrollToBottomBtnVisibility,
 		updateThreshold,
 	};
 };
