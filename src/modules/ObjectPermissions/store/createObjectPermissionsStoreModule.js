@@ -1,8 +1,8 @@
 import {
 	createBaseStoreModule,
 	createTableStoreModule,
-} from '../../../../../store/new/index.js';
-import objectPermissionsStoreModule from '../modules/objectPermissionsStoreModule.js';
+} from '../../../store/new';
+import objectPermissionsStoreModule from './objectPermissionsStoreModule';
 
 export const createObjectPermissionsStoreModule = (modules) => {
 	const modulesArr = Array.isArray(modules)

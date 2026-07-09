@@ -38,33 +38,29 @@
 </template>
 
 <script setup>
-import { computed, ref, useAttrs } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 
 import RolesAPI from '../../../../api/clients/roles/roles';
-import getNamespacedState from '../../../../store/helpers/getNamespacedState.js';
 import PermissionsRoleSelect from './permissions-role-select.vue';
 
 const props = defineProps({
-	namespace: {
-		type: String,
+	existingGranteeIds: {
+		type: Array,
+		default: () => [],
+	},
+	addRolePermissions: {
+		type: Function,
 		required: true,
 	},
 });
 
-const attrs = useAttrs();
-const store = useStore();
 const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 
 const grantee = ref(null);
-
-const existingGranteesList = computed(
-	() => getNamespacedState(store.state, props.namespace).dataList,
-);
 
 const shown = computed(() => !!route.params.permissionId);
 
@@ -108,22 +104,16 @@ const loadGrantees = (params) => {
 	});
 };
 
-// filter already existing roles
 const getAvailableGrantees = async (params) => {
 	const { items, ...rest } = await loadGrantees(params);
 	return {
-		items: items.filter(
-			(role) =>
-				!existingGranteesList.value.some(
-					(usedRoles) => role.id === usedRoles.grantee.id,
-				),
-		),
+		items: items.filter((role) => !props.existingGranteeIds.includes(role.id)),
 		...rest,
 	};
 };
 
-const save = async (grantee) => {
-	await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, grantee);
+const save = async (newGrantee) => {
+	await props.addRolePermissions(newGrantee);
 	return close();
 };
 </script>

@@ -23,7 +23,7 @@ import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 const oauthAppFieldsToSend = getShallowFieldsToSendFromZodSchema(
 	CreateOAuthServiceBody,
 );
-const baseUrl = '/oauth';
+const baseUrl = '/oauth/apps';
 
 const getOAuthAppsList = async (params: Record<string, unknown>) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(

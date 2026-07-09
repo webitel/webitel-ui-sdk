@@ -1,2 +1,6 @@
-/** Ambient declarations for create-user-access-control can be added here. */
-export {};
+export interface UserAccessFlags {
+	read: boolean;
+	add: boolean;
+	edit: boolean;
+	delete: boolean;
+}
