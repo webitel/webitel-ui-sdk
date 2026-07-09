@@ -96,10 +96,10 @@
 </template>
 
 <script setup>
-import IconAction from '../../../../enums/IconAction/IconAction.enum';
-import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import IconAction from '../../../../enums/IconAction/IconAction.enum';
+import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
 import { AccessMode, AccessRuleName } from '../../enums';
 import PermissionsRoleRow from './permissions-role-row.vue';
 import PermissionsTabRolePopup from './permissions-tab-role-popup.vue';
