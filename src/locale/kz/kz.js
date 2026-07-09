@@ -101,7 +101,6 @@ export default {
 			return 'Өңделген';
 		},
 		check: 'Тексеру',
-		progressiveCount: 'Прогрессивті қоңырау саны',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {
@@ -205,6 +204,7 @@ export default {
 			draftPlaceholder: 'Хабарлама жазыңыз...',
 		},
 		queue: {
+			progressiveCount: 'Прогрессивті қоңырау саны',
 			queue: 'Кезек | Кезектер',
 			queueType: 'Кезек түрі | Кезек түрлері',
 			type: {

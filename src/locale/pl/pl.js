@@ -101,7 +101,6 @@ export default {
 			return 'Edytowane';
 		},
 		check: 'Sprawdź',
-		progressiveCount: 'Liczba rozmów progresywnych',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {
@@ -205,6 +204,7 @@ export default {
 			draftPlaceholder: 'Napisz wiadomość...',
 		},
 		queue: {
+			progressiveCount: 'Liczba rozmów progresywnych',
 			queue: 'Kolejka | Kolejki',
 			queueType: 'Typ kolejki | Typy kolejek',
 			type: {

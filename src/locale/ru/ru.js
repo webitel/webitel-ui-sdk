@@ -97,7 +97,6 @@ export default {
 			return 'Редактировано';
 		},
 		check: 'Проверить',
-		progressiveCount: 'Количество одновременных звонков',
 	},
 	vocabulary: {
 		apply: 'Применить',
@@ -201,6 +200,7 @@ export default {
 			draftPlaceholder: 'Напишите сообщение...',
 		},
 		queue: {
+			progressiveCount: 'Количество одновременных звонков',
 			queue: 'Очередь | Очереди',
 			queueType: 'Тип очереди | Типы очередей',
 			type: {

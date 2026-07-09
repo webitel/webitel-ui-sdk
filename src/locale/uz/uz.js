@@ -101,7 +101,6 @@ export default {
 			return 'Tahrirlangan';
 		},
 		check: 'Tekshirish',
-		progressiveCount: 'Progressiv qo‘ng‘iroqlar soni',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {
@@ -205,6 +204,7 @@ export default {
 			draftPlaceholder: 'Xabar yozing...',
 		},
 		queue: {
+			progressiveCount: 'Progressiv qo‘ng‘iroqlar soni',
 			queue: 'Navbat | Navbatlar',
 			queueType: 'Navbat turi | Navbat turlari',
 			type: {

@@ -104,7 +104,6 @@ export default deepmerge(
 				return 'Edited';
 			},
 			check: 'Check',
-			progressiveCount: 'Progressive call count',
 		},
 		// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 		vocabulary: {
@@ -208,6 +207,7 @@ export default deepmerge(
 				draftPlaceholder: 'Write a message...',
 			},
 			queue: {
+				progressiveCount: 'Progressive call count',
 				queue: 'Queue | Queues',
 				queueType: 'Queue type | Queue types',
 				type: {

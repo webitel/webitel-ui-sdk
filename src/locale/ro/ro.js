@@ -101,7 +101,6 @@ export default {
 			return 'Editat';
 		},
 		check: 'Verifică',
-		progressiveCount: 'Număr apeluri progresive',
 	},
 	// yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
 	vocabulary: {
@@ -205,6 +204,7 @@ export default {
 			draftPlaceholder: 'Scrie un mesaj...',
 		},
 		queue: {
+			progressiveCount: 'Număr apeluri progresive',
 			queue: 'Coadă | Cozi',
 			queueType: 'Tip de coadă | Tipuri de cozi',
 			type: {
