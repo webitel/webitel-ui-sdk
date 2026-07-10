@@ -153,9 +153,11 @@ import {
 	MessageVariant,
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useAutoSeparator } from './_internals/composables/useAutoSeparator';
 import { useOverlayAnchor } from './_internals/composables/useOverlayAnchor';
 import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
 import { useRestoreOnBlur } from './_internals/composables/useRestoreOnBlur';
+import { useStrictInput } from './_internals/composables/useStrictInput';
 
 interface Props extends DatePickerProps {
 	showTime?: boolean;
@@ -209,6 +211,16 @@ const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
+
+useAutoSeparator(
+	() => datepicker.value?.$el?.querySelector('input'),
+	() => !!props.showTime,
+);
+
+useStrictInput(
+	() => datepicker.value?.$el?.querySelector('input'),
+	() => !!props.showTime,
+);
 
 const { onBlur } = useRestoreOnBlur(
 	() => datepicker.value,
