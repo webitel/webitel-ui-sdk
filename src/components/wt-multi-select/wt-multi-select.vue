@@ -263,7 +263,8 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
 const handleDropdownHide = () => {
