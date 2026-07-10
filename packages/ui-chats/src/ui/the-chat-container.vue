@@ -18,6 +18,8 @@
         :without-avatars="props.withoutAvatars"
         :agent-name="props.agentName"
         :contact="props.contact"
+        :chat-id="props.chatId"
+        :is-chat-closed="props.isChatClosed"
         @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
       />
     </slot>
@@ -83,6 +85,8 @@ const props = withDefaults(
 		readonly?: boolean; // hide chat footer with textarea and action-buttons
 		agentName?: string;
 		contact?: WebitelContactsContact;
+		chatId?: string;
+		isChatClosed?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
@@ -91,6 +95,8 @@ const props = withDefaults(
 		canLoadNextMessages: false,
 		isNextMessagesLoading: false,
 		readonly: false,
+		chatId: '',
+		isChatClosed: false,
 	},
 );
 
@@ -163,5 +169,6 @@ function sendFile(files: File[]) {
   flex-direction: column;
   height: 100%;
   width: 100%;
+  gap: var(--spacing-2xs);
 }
 </style>
