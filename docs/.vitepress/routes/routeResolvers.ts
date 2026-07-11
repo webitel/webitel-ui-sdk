@@ -5,36 +5,47 @@ const baseUrl = 'pages';
 const basePkgUrl = 'packages';
 const baseKnowledgeBaseUrl = 'knowledge-base';
 
-export type DocPkg = 'ui-sdk' | 'api-services' | 'ui-datalist';
+export type DocPkg = 'ui-sdk' | 'api-services' | 'ui-datalist' | 'ui-chats';
 
 const resolveByPattern = (patterns: string | string[]) => {
-    return globbySync(patterns, { cwd: path.resolve(__dirname, `../../${baseUrl}/`) });
+	return globbySync(patterns, {
+		cwd: path.resolve(__dirname, `../../${baseUrl}/`),
+	});
 };
 
 export const resolvePkgLinkDoc = (pkg: DocPkg) => (path: string) => {
-    return `${baseUrl}/${basePkgUrl}/${pkg}/${path}`;
+	return `${baseUrl}/${basePkgUrl}/${pkg}/${path}`;
 };
 
 export const resolveKnowledgeBaseLinkDoc = (path: string) => {
-    return `${baseUrl}/${baseKnowledgeBaseUrl}/${path}`;
+	return `${baseUrl}/${baseKnowledgeBaseUrl}/${path}`;
 };
 
-export const resolvePkgDocItems = (pkg: DocPkg) => (patterns: string | string[]) => {
-    const patternsArr = Array.isArray(patterns) ? patterns : [patterns];
+export const resolvePkgDocItems =
+	(pkg: DocPkg) => (patterns: string | string[]) => {
+		const patternsArr = Array.isArray(patterns)
+			? patterns
+			: [
+					patterns,
+				];
 
-    const pkgPatterns = patternsArr.map((pattern) => {
-        return `${basePkgUrl}/${pkg}/${pattern}`;
-    });
+		const pkgPatterns = patternsArr.map((pattern) => {
+			return `${basePkgUrl}/${pkg}/${pattern}`;
+		});
 
-    return resolveByPattern(pkgPatterns);
-};
+		return resolveByPattern(pkgPatterns);
+	};
 
 export const resolveKnowledgeBaseDocItems = (patterns: string | string[]) => {
-    const patternsArr = Array.isArray(patterns) ? patterns : [patterns];
+	const patternsArr = Array.isArray(patterns)
+		? patterns
+		: [
+				patterns,
+			];
 
-    const knowledgeBasePatterns = patternsArr.map((pattern) => {
-        return `${baseKnowledgeBaseUrl}/${pattern}`;
-    });
+	const knowledgeBasePatterns = patternsArr.map((pattern) => {
+		return `${baseKnowledgeBaseUrl}/${pattern}`;
+	});
 
-    return resolveByPattern(knowledgeBasePatterns);
+	return resolveByPattern(knowledgeBasePatterns);
 };
