@@ -204,6 +204,7 @@ export default {
 			draftPlaceholder: 'Viết tin nhắn...',
 		},
 		queue: {
+			progressiveCount: 'Số cuộc gọi tiến trình',
 			queue: 'Hàng chờ | Hàng chờ',
 			queueType: 'Loại hàng đợi | Các loại hàng đợi',
 			type: {

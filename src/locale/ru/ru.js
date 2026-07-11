@@ -200,6 +200,7 @@ export default {
 			draftPlaceholder: 'Напишите сообщение...',
 		},
 		queue: {
+			progressiveCount: 'Количество одновременных звонков',
 			queue: 'Очередь | Очереди',
 			queueType: 'Тип очереди | Типы очередей',
 			type: {

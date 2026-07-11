@@ -204,6 +204,7 @@ export default {
 			draftPlaceholder: 'Napisz wiadomość...',
 		},
 		queue: {
+			progressiveCount: 'Liczba rozmów progresywnych',
 			queue: 'Kolejka | Kolejki',
 			queueType: 'Typ kolejki | Typy kolejek',
 			type: {

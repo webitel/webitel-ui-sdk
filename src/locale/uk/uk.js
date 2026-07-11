@@ -199,6 +199,7 @@ export default {
 			draftPlaceholder: 'Напишіть повідомлення...',
 		},
 		queue: {
+			progressiveCount: 'Кількість одночасних дзвінків',
 			queue: 'Черга | Черги',
 			queueType: 'Тип черги | Типи черг',
 			type: {

@@ -204,6 +204,7 @@ export default {
 			draftPlaceholder: 'Xabar yozing...',
 		},
 		queue: {
+			progressiveCount: 'Progressiv qo‘ng‘iroqlar soni',
 			queue: 'Navbat | Navbatlar',
 			queueType: 'Navbat turi | Navbat turlari',
 			type: {
