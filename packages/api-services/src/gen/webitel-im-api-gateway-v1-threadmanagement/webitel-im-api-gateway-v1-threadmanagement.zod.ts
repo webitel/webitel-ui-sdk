@@ -972,7 +972,7 @@ export const ThreadManagementSearchResponse = zod
 													.optional()
 													.describe('Contact who set the variable.'),
 												value: zod
-													.looseObject({})
+													.unknown()
 													.optional()
 													.describe(
 														'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -1920,7 +1920,7 @@ export const ThreadManagementCreateResponse = zod
 											.optional()
 											.describe('Contact who set the variable.'),
 										value: zod
-											.looseObject({})
+											.unknown()
 											.optional()
 											.describe(
 												'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -2885,7 +2885,7 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.optional()
 												.describe('Contact who set the variable.'),
 											value: zod
-												.looseObject({})
+												.unknown()
 												.optional()
 												.describe(
 													'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -3769,7 +3769,7 @@ export const ThreadManagementGetResponse = zod
 									.optional()
 									.describe('Contact who set the variable.'),
 								value: zod
-									.looseObject({})
+									.unknown()
 									.optional()
 									.describe(
 										'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -4151,7 +4151,7 @@ export const ThreadManagementLocateVariablesResponse = zod
 							.optional()
 							.describe('Contact who set the variable.'),
 						value: zod
-							.looseObject({})
+							.unknown()
 							.optional()
 							.describe(
 								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -4184,7 +4184,7 @@ export const ThreadManagementSetVariablesBody = zod
 				zod
 					.object({
 						key: zod.string().optional().describe('Variable key.'),
-						value: zod.looseObject({}).optional().describe('Variable value.'),
+						value: zod.unknown().optional().describe('Variable value.'),
 					})
 					.describe(
 						'VariableEntryRequest represents a variable update operation.',
@@ -4285,7 +4285,7 @@ export const ThreadManagementSetVariablesResponse = zod
 							.optional()
 							.describe('Contact who set the variable.'),
 						value: zod
-							.looseObject({})
+							.unknown()
 							.optional()
 							.describe(
 								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -4408,7 +4408,7 @@ export const ThreadManagementFlushVariablesResponse = zod
 							.optional()
 							.describe('Contact who set the variable.'),
 						value: zod
-							.looseObject({})
+							.unknown()
 							.optional()
 							.describe(
 								'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',
@@ -4541,7 +4541,7 @@ export const ThreadManagementSearchVariablesResponse = zod
 											.optional()
 											.describe('Contact who set the variable.'),
 										value: zod
-											.looseObject({})
+											.unknown()
 											.optional()
 											.describe(
 												'Arbitrary structured value of the variable.\nSupports dynamic JSON-like content.',

@@ -469,6 +469,8 @@ export default {
 			'El código debe contener solo letras (A-Z, a-z) y números (0-9), y debe comenzar con una letra',
 		integer: 'El campo debe contener solo números enteros',
 		nameAlreadyInUse: 'Este nombre ya está en uso',
+		phoneNumberSymbolsValidator:
+			"El número solo puede contener letras (a-z, A-Z), números (0-9) y los símbolos: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {
@@ -564,7 +566,7 @@ export default {
 					return 'Ordenar';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Finalizar sesiones',
 			},
 		},
 		errorPages: {

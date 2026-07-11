@@ -475,6 +475,8 @@ export default {
 			'Mã phải chỉ chứa chữ cái (A-Z, a-z) và số (0-9), và phải bắt đầu bằng chữ cái',
 		integer: 'Trường này chỉ được chứa số nguyên',
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
+		phoneNumberSymbolsValidator:
+			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {
@@ -570,7 +572,7 @@ export default {
 					return 'Sắp xếp';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Kết thúc phiên',
 			},
 		},
 		errorPages: {

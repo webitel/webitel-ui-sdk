@@ -483,6 +483,8 @@ export default deepmerge(
 				'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
 			integer: 'The field should contain only whole numbers',
 			nameAlreadyInUse: 'This name is already in use',
+			phoneNumberSymbolsValidator:
+				"Number must contain letters (a-z, A-Z), numbers (0-9), and special characters: +, -, _, ., !, ~, *, ', (,)",
 		},
 		webitelUI: {
 			searchBar: {
@@ -578,7 +580,7 @@ export default deepmerge(
 						return 'Sort';
 					},
 					[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-					[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+					[IconAction.LOGOUT]: 'End sessions',
 				},
 			},
 			errorPages: {

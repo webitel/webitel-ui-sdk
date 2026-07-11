@@ -16,6 +16,8 @@ export const MimeTypes = {
 	APPLICATION_MSWORD: 'application/msword',
 	APPLICATION_DOCX:
 		'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	APPLICATION_XLSX:
+		'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 } as const;
 
 export type MimeTypes = (typeof MimeTypes)[keyof typeof MimeTypes];

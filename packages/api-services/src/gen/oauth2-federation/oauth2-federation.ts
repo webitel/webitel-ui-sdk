@@ -15,8 +15,9 @@ import type {
 	ApiSearchOAuthServiceResponse,
 	LocateOAuthServiceParams,
 	OAuth2FederationDeleteOAuthServiceBody,
-	OAuth2FederationUpdateOAuthServiceBody,
 	SearchOAuthServiceParams,
+	UpdateOAuthService2Params,
+	UpdateOAuthServiceParams,
 } from '../_models';
 
 // --- header start
@@ -79,25 +80,31 @@ export const // --- title start
 			};
 			const updateOAuthService2 = (
 				id: string,
-				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
+				apiOAuthService: ApiOAuthService,
+				params?: UpdateOAuthService2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiOAuthService>> => {
-				return axiosInstance.patch(
-					`/oauth/apps/${id}`,
-					oAuth2FederationUpdateOAuthServiceBody,
-					options,
-				);
+				return axiosInstance.patch(`/oauth/apps/${id}`, apiOAuthService, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			const updateOAuthService = (
 				id: string,
-				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
+				apiOAuthService: ApiOAuthService,
+				params?: UpdateOAuthServiceParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<ApiOAuthService>> => {
-				return axiosInstance.put(
-					`/oauth/apps/${id}`,
-					oAuth2FederationUpdateOAuthServiceBody,
-					options,
-				);
+				return axiosInstance.put(`/oauth/apps/${id}`, apiOAuthService, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 
 			// --- footer start

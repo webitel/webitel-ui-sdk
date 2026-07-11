@@ -24,7 +24,7 @@
         :placeholder="placeholder || label"
         :toggle-mask="false"
         :feedback="false"
-        :input-props="{ type: inputType }"
+        :input-props="{ type: inputType, autocomplete }"
         input-class="wt-password__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
@@ -74,6 +74,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	v?: Record<string, unknown>;
 	regleValidation?: RegleFieldStatus<string>;
 	customValidators?: unknown[];
+	autocomplete?: string;
 }
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {

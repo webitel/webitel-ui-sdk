@@ -1,5 +1,5 @@
 <template>
-  <form class="dynamic-filter-config-form">
+  <form class="dynamic-filter-config-form" @submit.prevent>
     <wt-single-select
       :show-clear="false"
       :disabled="editMode"

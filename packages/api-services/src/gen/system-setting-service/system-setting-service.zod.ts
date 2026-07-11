@@ -53,6 +53,7 @@ export const SearchSystemSettingQueryParams = zod.object({
 				'default_workspace_tab',
 				'block_all_member_numbers_from_list',
 				'login_options',
+				'default_members_filter',
 			]),
 		)
 		.optional()
@@ -106,6 +107,7 @@ export const SearchSystemSettingResponse = zod.object({
 						'default_workspace_tab',
 						'block_all_member_numbers_from_list',
 						'login_options',
+						'default_members_filter',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -157,6 +159,7 @@ export const CreateSystemSettingBody = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -205,6 +208,7 @@ export const CreateSystemSettingResponse = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -276,6 +280,7 @@ export const DeleteSystemSettingResponse = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -328,6 +333,7 @@ export const ReadSystemSettingResponse = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -384,6 +390,7 @@ export const PatchSystemSettingResponse = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -438,6 +445,7 @@ export const UpdateSystemSettingResponse = zod.object({
 			'default_workspace_tab',
 			'block_all_member_numbers_from_list',
 			'login_options',
+			'default_members_filter',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

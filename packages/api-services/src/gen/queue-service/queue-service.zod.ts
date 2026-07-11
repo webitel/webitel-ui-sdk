@@ -120,6 +120,7 @@ export const SearchQueueResponse = zod.object({
 				strategy: zod.string().optional(),
 				taskProcessing: zod
 					.object({
+						autosave: zod.boolean().optional(),
 						enabled: zod.boolean().optional(),
 						formSchema: zod
 							.object({
@@ -234,6 +235,7 @@ export const CreateQueueBody = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -359,6 +361,7 @@ export const CreateQueueResponse = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -621,6 +624,7 @@ export const DeleteQueueResponse = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -765,6 +769,7 @@ export const ReadQueueResponse = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -880,6 +885,7 @@ export const PatchQueueBody = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -1005,6 +1011,7 @@ export const PatchQueueResponse = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -1119,6 +1126,7 @@ export const UpdateQueueBody = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({
@@ -1244,6 +1252,7 @@ export const UpdateQueueResponse = zod.object({
 	strategy: zod.string().optional(),
 	taskProcessing: zod
 		.object({
+			autosave: zod.boolean().optional(),
 			enabled: zod.boolean().optional(),
 			formSchema: zod
 				.object({

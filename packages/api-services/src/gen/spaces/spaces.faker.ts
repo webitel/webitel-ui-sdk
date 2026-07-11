@@ -8,7 +8,7 @@ import { faker } from '@faker-js/faker';
 
 import type { KnowledgebaseSpace, KnowledgebaseSpaceList } from '../_models';
 
-export const getListSpacesResponseMock = (
+export const getListSpacesSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpaceList, object>> = {},
 ): KnowledgebaseSpaceList => ({
 	data: faker.helpers.arrayElement([
@@ -206,7 +206,7 @@ export const getListSpacesResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateSpaceResponseMock = (
+export const getCreateSpaceSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpace, object>> = {},
 ): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
@@ -383,7 +383,7 @@ export const getCreateSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteSpaceResponseMock = (
+export const getDeleteSpaceSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpace, object>> = {},
 ): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
@@ -560,7 +560,7 @@ export const getDeleteSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateSpaceResponseMock = (
+export const getLocateSpaceSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpace, object>> = {},
 ): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
@@ -737,7 +737,7 @@ export const getLocateSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateSpaceResponseMock = (
+export const getUpdateSpaceSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpace, object>> = {},
 ): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([

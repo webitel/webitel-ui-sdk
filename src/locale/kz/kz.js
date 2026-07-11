@@ -471,6 +471,8 @@ export default {
 			'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
 		integer: 'Өріс тек бүтін сандарды қамтуы керек',
 		nameAlreadyInUse: 'Бұл атау қолданыста',
+		phoneNumberSymbolsValidator:
+			"Нөмірде тек әріптер (a-z, A-Z), сандар (0-9) және мына таңбалар болуы мүмкін: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {
@@ -566,7 +568,7 @@ export default {
 					return 'Сұрыптау';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Сеанстарды аяқтау',
 			},
 		},
 		errorPages: {

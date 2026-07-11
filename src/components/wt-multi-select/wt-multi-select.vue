@@ -25,7 +25,7 @@
       :auto-option-focus="true"
       :disabled="disabled"
       :placeholder="placeholder || label"
-      :option-disabled="() => disabledOptions"
+      :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
@@ -44,7 +44,7 @@
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
-      @hide="onDropdownHide"
+      @hide="handleDropdownHide"
     >
       <template v-if="!chipsView" #value="{ value, placeholder }">
         <span v-if="value && value.length">
@@ -55,7 +55,7 @@
             {{ value.map((v) => getOptionLabel(v)).join(', ') }}
           </template>
         </span>
-        <span v-else class="p-placeholder">{{ placeholder }}</span>
+        <span v-else class="p-placeholder">{{ placeholder }}&nbsp;</span>
       </template>
       <template #header>
         <wt-input-text
@@ -145,6 +145,10 @@ interface Props extends SelectProps {
 	 */
 	disabledOptions?: boolean;
 	/**
+	 * true — the select will only show options returned by the API, never prepending the current model value if it is missing from the list
+	 */
+	strictApiOptions?: boolean;
+	/**
 	 * false disables options search
 	 */
 	filterable?: boolean;
@@ -209,6 +213,7 @@ const emit = defineEmits<{
 		value: string,
 	];
 	reset: [];
+	hide: [];
 }>();
 
 const {
@@ -238,6 +243,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: false,
+	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });
 
@@ -257,12 +263,14 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
-onMounted(() => {
-	if (props.searchMethod) fetchOptions();
-});
+const handleDropdownHide = () => {
+	onDropdownHide();
+	emit('hide');
+};
 </script>
 
 <style scoped>

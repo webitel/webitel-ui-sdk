@@ -17,6 +17,7 @@ export const useSelect = ({
 	searchMethod,
 	selectId,
 	isSingle,
+	strictApiOptions = undefined,
 	emit = () => {},
 }) => {
 	const {
@@ -29,7 +30,7 @@ export const useSelect = ({
 		fetchOptions,
 		fetchSelectedByIds,
 		resetAndFetch,
-		filterOptions,
+		filterOptionsBase,
 		updateSelectedOptionsCache,
 	} = useSelectOptions({
 		selected,
@@ -39,6 +40,7 @@ export const useSelect = ({
 		dataKey,
 		allowCustomValues,
 		searchMethod,
+		strictApiOptions,
 	});
 
 	const {
@@ -47,6 +49,7 @@ export const useSelect = ({
 		onDropdownBeforeHide,
 		onDropdownShow,
 		onDropdownHide,
+		filterOptionsAndScrollToTop,
 	} = useSelectDropdown({
 		selectId,
 		selectRef,
@@ -54,7 +57,7 @@ export const useSelect = ({
 		searchMethod,
 		filteredOptions,
 		filterText,
-		filterOptions,
+		filterOptions: filterOptionsBase,
 		resetAndFetch,
 		sortOptions,
 		fetchOptions,
@@ -71,7 +74,7 @@ export const useSelect = ({
 		optionValue,
 		dataKey,
 		filterText,
-		filterOptions,
+		filterOptions: filterOptionsAndScrollToTop,
 		updateSelectedOptionsCache,
 		selectRef,
 		allowCustomValues,
@@ -80,8 +83,10 @@ export const useSelect = ({
 		emit,
 	});
 
-	onMounted(() => {
-		fetchSelectedByIds();
+	onMounted(async () => {
+		await fetchSelectedByIds();
+		if (!searchMethod.value) return;
+		fetchOptions();
 	});
 
 	const clearValue = () => {
@@ -101,7 +106,7 @@ export const useSelect = ({
 		filteredOptions,
 		getOptionLabel,
 		fetchOptions,
-		filterOptions,
+		filterOptions: filterOptionsAndScrollToTop,
 		onDropdownBeforeShow,
 		onDropdownBeforeHide,
 		onDropdownShow,

@@ -117,9 +117,10 @@ const updateOAuthApp = async ({
 	]);
 
 	try {
-		const response = await getOauth2Federation().updateOAuthService(id, {
+		const response = await getOauth2Federation().updateOAuthService(
+			id,
 			changes,
-		});
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

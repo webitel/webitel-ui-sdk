@@ -8,6 +8,7 @@ import type { EngineLookup } from './engineLookup';
 import type { EngineTaskProcessingProlongationOptions } from './engineTaskProcessingProlongationOptions';
 
 export interface EngineTaskProcessing {
+	autosave?: boolean;
 	enabled?: boolean;
 	formSchema?: EngineLookup;
 	prolongationOptions?: EngineTaskProcessingProlongationOptions;

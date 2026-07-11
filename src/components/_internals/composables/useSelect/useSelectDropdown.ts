@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 
 export const useSelectDropdown = ({
 	selectId,
@@ -82,6 +82,29 @@ export const useSelectDropdown = ({
 		}
 	};
 
+	/*
+	  @author @HlukhovYe
+
+		https://webitel.atlassian.net/browse/WTEL-9798
+
+	  Scroll the list to top after filtering. A plain nextTick() after filterOptions() is not
+	  enough when searchMethod is used — filteredOptions only updates after the async fetch
+	  resolves. The flag ensures the scroll fires on the first filteredOptions change after a
+	  search input, but not on subsequent changes (e.g. infinite-scroll page appends).
+	*/
+	let scrollOnNextOptionsUpdate = false;
+
+	watch(filteredOptions, () => {
+		if (!scrollOnNextOptionsUpdate) return;
+		scrollOnNextOptionsUpdate = false;
+		nextTick(() => getListContainer()?.scrollTo(0, 0));
+	});
+
+	const filterOptionsAndScrollToTop = (value: string) => {
+		scrollOnNextOptionsUpdate = true;
+		filterOptions(value);
+	};
+
 	const onDropdownBeforeHide = () => {
 		/**
 		 * @author @HlukhovYe
@@ -119,5 +142,6 @@ export const useSelectDropdown = ({
 		onDropdownBeforeHide,
 		onDropdownShow,
 		onDropdownHide,
+		filterOptionsAndScrollToTop,
 	};
 };

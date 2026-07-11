@@ -16,6 +16,7 @@ export const useSelectOptions = ({
 	dataKey,
 	allowCustomValues,
 	searchMethod,
+	strictApiOptions,
 }) => {
 	const { t } = useI18n();
 	const defaultOptionLabel = 'name';
@@ -164,7 +165,7 @@ export const useSelectOptions = ({
 
 	const debouncedFetch = debounce((value) => resetAndFetch(value));
 
-	const filterOptions = (value) => {
+	const filterOptionsBase = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
 			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
@@ -185,16 +186,23 @@ export const useSelectOptions = ({
 
 	const addSelectedValueToList = (newVal) => {
 		// If the selected value is not in the list, add it
-		if (!newVal || !searchMethod.value) return;
+		if (!newVal || !searchMethod.value || strictApiOptions?.value) return;
 		const selectedAsArray = toArray(newVal);
 		const missingSelected = selectedAsArray.filter(
 			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
 		);
 		if (missingSelected.length) {
+			// resolve primitives to full objects from cache so PrimeVue can checkmark them
+			const resolved = missingSelected.map(
+				(s) =>
+					(selectedOptionsCache.value as Record<string, unknown>[]).find(
+						(o) => o[dataKey.value] === s,
+					) ?? s,
+			);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...filterBySearch(missingSelected, filterText.value),
+						...filterBySearch(resolved, filterText.value),
 						...filteredOptions.value,
 					],
 					dataKey.value,
@@ -205,7 +213,7 @@ export const useSelectOptions = ({
 
 	watch(
 		() => selected.value,
-		(newVal) => {
+		(newVal, oldVal) => {
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
 		},
@@ -230,7 +238,7 @@ export const useSelectOptions = ({
 		fetchOptions,
 		fetchSelectedByIds,
 		resetAndFetch,
-		filterOptions,
+		filterOptionsBase,
 		updateSelectedOptionsCache,
 	};
 };

@@ -84,7 +84,6 @@ export const // --- title start
 			 * | `managers`  | list[manager!]
 			 * | `comments`  | list[comment!]
 			 * | `addresses` | list[address!]
-			 * | `languages` | list[language!]
 			 * | `timezones` | list[timezone!]
 			 * | `variables` | list[variable!]
 			 * | `imclients` | list[imClient!]

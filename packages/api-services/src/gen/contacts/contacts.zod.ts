@@ -28,7 +28,6 @@ import * as zod from 'zod';
  * | `managers`  | list[manager!]
  * | `comments`  | list[comment!]
  * | `addresses` | list[address!]
- * | `languages` | list[language!]
  * | `timezones` | list[timezone!]
  * | `variables` | list[variable!]
  * | `imclients` | list[imClient!]
@@ -730,101 +729,6 @@ export const SearchContactsResponse = zod
 							})
 							.optional()
 							.describe("The Contact's associated tag(s)."),
-						languages: zod
-							.object({
-								data: zod
-									.array(
-										zod
-											.object({
-												code: zod.string().optional(),
-												createdAt: zod
-													.string()
-													.optional()
-													.describe('The user who created this Field.'),
-												createdBy: zod
-													.object({
-														id: zod
-															.string()
-															.optional()
-															.describe('Reference Object unique ID.'),
-														name: zod
-															.string()
-															.optional()
-															.describe('Reference Object display name.'),
-														type: zod
-															.string()
-															.optional()
-															.describe('Reference Object well-known type.'),
-													})
-													.optional()
-													.describe('Timestamp(milli) of the Field creation.'),
-												etag: zod
-													.string()
-													.optional()
-													.describe(
-														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-													),
-												id: zod
-													.string()
-													.optional()
-													.describe(
-														'The unique ID of the association. Never changes.',
-													),
-												lang: zod.string().optional(),
-												name: zod.string().optional(),
-												primary: zod
-													.boolean()
-													.optional()
-													.describe(
-														'Indicates whether this association is the default\namong others of the same type.',
-													),
-												region: zod.string().optional(),
-												script: zod.string().optional(),
-												tag: zod.string().optional(),
-												updatedAt: zod
-													.string()
-													.optional()
-													.describe(
-														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-													),
-												updatedBy: zod
-													.object({
-														id: zod
-															.string()
-															.optional()
-															.describe('Reference Object unique ID.'),
-														name: zod
-															.string()
-															.optional()
-															.describe('Reference Object display name.'),
-														type: zod
-															.string()
-															.optional()
-															.describe('Reference Object well-known type.'),
-													})
-													.optional()
-													.describe('The user who performed last Update.'),
-												ver: zod
-													.number()
-													.optional()
-													.describe(
-														'Version of the latest update. Numeric sequence.',
-													),
-											})
-											.describe(
-												"A Contact's locale preference.\nOutput purpose only.",
-											),
-									)
-									.optional()
-									.describe("Page of the Contact's Language(s) dataset."),
-								next: zod.boolean().optional(),
-								page: zod
-									.number()
-									.optional()
-									.describe('Page number of partial result dataset records.'),
-							})
-							.optional()
-							.describe("A Contact's locale preference(s)."),
 						managers: zod
 							.object({
 								data: zod
@@ -1606,27 +1510,6 @@ export const CreateContactBody = zod
 			)
 			.optional()
 			.describe("The Contact's associated label(s)."),
-		languages: zod
-			.array(
-				zod
-					.object({
-						etag: zod
-							.string()
-							.describe(
-								'Unique ID of the latest version of an existing association.',
-							),
-						primary: zod
-							.boolean()
-							.optional()
-							.describe(
-								'Indicates whether this association must be default\namong others of the same type.',
-							),
-						tag: zod.string().optional(),
-					})
-					.describe("An input of the Contact's language."),
-			)
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.array(
 				zod.object({
@@ -2356,95 +2239,6 @@ export const CreateContactResponse = zod
 			})
 			.optional()
 			.describe("The Contact's associated tag(s)."),
-		languages: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								code: zod.string().optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('The user who created this Field.'),
-								createdBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('Timestamp(milli) of the Field creation.'),
-								etag: zod
-									.string()
-									.optional()
-									.describe(
-										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-									),
-								id: zod
-									.string()
-									.optional()
-									.describe('The unique ID of the association. Never changes.'),
-								lang: zod.string().optional(),
-								name: zod.string().optional(),
-								primary: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates whether this association is the default\namong others of the same type.',
-									),
-								region: zod.string().optional(),
-								script: zod.string().optional(),
-								tag: zod.string().optional(),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-									),
-								updatedBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('The user who performed last Update.'),
-								ver: zod
-									.number()
-									.optional()
-									.describe('Version of the latest update. Numeric sequence.'),
-							})
-							.describe("A Contact's locale preference.\nOutput purpose only."),
-					)
-					.optional()
-					.describe("Page of the Contact's Language(s) dataset."),
-				next: zod.boolean().optional(),
-				page: zod
-					.number()
-					.optional()
-					.describe('Page number of partial result dataset records.'),
-			})
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.object({
 				data: zod
@@ -3185,27 +2979,6 @@ export const CreateContactsBodyItem = zod
 			)
 			.optional()
 			.describe("The Contact's associated label(s)."),
-		languages: zod
-			.array(
-				zod
-					.object({
-						etag: zod
-							.string()
-							.describe(
-								'Unique ID of the latest version of an existing association.',
-							),
-						primary: zod
-							.boolean()
-							.optional()
-							.describe(
-								'Indicates whether this association must be default\namong others of the same type.',
-							),
-						tag: zod.string().optional(),
-					})
-					.describe("An input of the Contact's language."),
-			)
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.array(
 				zod.object({
@@ -3974,101 +3747,6 @@ export const CreateContactsResponse = zod
 							})
 							.optional()
 							.describe("The Contact's associated tag(s)."),
-						languages: zod
-							.object({
-								data: zod
-									.array(
-										zod
-											.object({
-												code: zod.string().optional(),
-												createdAt: zod
-													.string()
-													.optional()
-													.describe('The user who created this Field.'),
-												createdBy: zod
-													.object({
-														id: zod
-															.string()
-															.optional()
-															.describe('Reference Object unique ID.'),
-														name: zod
-															.string()
-															.optional()
-															.describe('Reference Object display name.'),
-														type: zod
-															.string()
-															.optional()
-															.describe('Reference Object well-known type.'),
-													})
-													.optional()
-													.describe('Timestamp(milli) of the Field creation.'),
-												etag: zod
-													.string()
-													.optional()
-													.describe(
-														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-													),
-												id: zod
-													.string()
-													.optional()
-													.describe(
-														'The unique ID of the association. Never changes.',
-													),
-												lang: zod.string().optional(),
-												name: zod.string().optional(),
-												primary: zod
-													.boolean()
-													.optional()
-													.describe(
-														'Indicates whether this association is the default\namong others of the same type.',
-													),
-												region: zod.string().optional(),
-												script: zod.string().optional(),
-												tag: zod.string().optional(),
-												updatedAt: zod
-													.string()
-													.optional()
-													.describe(
-														'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-													),
-												updatedBy: zod
-													.object({
-														id: zod
-															.string()
-															.optional()
-															.describe('Reference Object unique ID.'),
-														name: zod
-															.string()
-															.optional()
-															.describe('Reference Object display name.'),
-														type: zod
-															.string()
-															.optional()
-															.describe('Reference Object well-known type.'),
-													})
-													.optional()
-													.describe('The user who performed last Update.'),
-												ver: zod
-													.number()
-													.optional()
-													.describe(
-														'Version of the latest update. Numeric sequence.',
-													),
-											})
-											.describe(
-												"A Contact's locale preference.\nOutput purpose only.",
-											),
-									)
-									.optional()
-									.describe("Page of the Contact's Language(s) dataset."),
-								next: zod.boolean().optional(),
-								page: zod
-									.number()
-									.optional()
-									.describe('Page number of partial result dataset records.'),
-							})
-							.optional()
-							.describe("A Contact's locale preference(s)."),
 						managers: zod
 							.object({
 								data: zod
@@ -4860,27 +4538,6 @@ export const CreateContactsResponse = zod
 									)
 									.optional()
 									.describe("The Contact's associated label(s)."),
-								languages: zod
-									.array(
-										zod
-											.object({
-												etag: zod
-													.string()
-													.describe(
-														'Unique ID of the latest version of an existing association.',
-													),
-												primary: zod
-													.boolean()
-													.optional()
-													.describe(
-														'Indicates whether this association must be default\namong others of the same type.',
-													),
-												tag: zod.string().optional(),
-											})
-											.describe("An input of the Contact's language."),
-									)
-									.optional()
-									.describe("A Contact's locale preference(s)."),
 								managers: zod
 									.array(
 										zod.object({
@@ -5663,95 +5320,6 @@ export const DeleteContactResponse = zod
 			})
 			.optional()
 			.describe("The Contact's associated tag(s)."),
-		languages: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								code: zod.string().optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('The user who created this Field.'),
-								createdBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('Timestamp(milli) of the Field creation.'),
-								etag: zod
-									.string()
-									.optional()
-									.describe(
-										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-									),
-								id: zod
-									.string()
-									.optional()
-									.describe('The unique ID of the association. Never changes.'),
-								lang: zod.string().optional(),
-								name: zod.string().optional(),
-								primary: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates whether this association is the default\namong others of the same type.',
-									),
-								region: zod.string().optional(),
-								script: zod.string().optional(),
-								tag: zod.string().optional(),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-									),
-								updatedBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('The user who performed last Update.'),
-								ver: zod
-									.number()
-									.optional()
-									.describe('Version of the latest update. Numeric sequence.'),
-							})
-							.describe("A Contact's locale preference.\nOutput purpose only."),
-					)
-					.optional()
-					.describe("Page of the Contact's Language(s) dataset."),
-				next: zod.boolean().optional(),
-				page: zod
-					.number()
-					.optional()
-					.describe('Page number of partial result dataset records.'),
-			})
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.object({
 				data: zod
@@ -6903,95 +6471,6 @@ export const LocateContactResponse = zod
 			})
 			.optional()
 			.describe("The Contact's associated tag(s)."),
-		languages: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								code: zod.string().optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('The user who created this Field.'),
-								createdBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('Timestamp(milli) of the Field creation.'),
-								etag: zod
-									.string()
-									.optional()
-									.describe(
-										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-									),
-								id: zod
-									.string()
-									.optional()
-									.describe('The unique ID of the association. Never changes.'),
-								lang: zod.string().optional(),
-								name: zod.string().optional(),
-								primary: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates whether this association is the default\namong others of the same type.',
-									),
-								region: zod.string().optional(),
-								script: zod.string().optional(),
-								tag: zod.string().optional(),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-									),
-								updatedBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('The user who performed last Update.'),
-								ver: zod
-									.number()
-									.optional()
-									.describe('Version of the latest update. Numeric sequence.'),
-							})
-							.describe("A Contact's locale preference.\nOutput purpose only."),
-					)
-					.optional()
-					.describe("Page of the Contact's Language(s) dataset."),
-				next: zod.boolean().optional(),
-				page: zod
-					.number()
-					.optional()
-					.describe('Page number of partial result dataset records.'),
-			})
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.object({
 				data: zod
@@ -7731,27 +7210,6 @@ export const UpdateContactBody = zod.object({
 		)
 		.optional()
 		.describe("The Contact's associated label(s)."),
-	languages: zod
-		.array(
-			zod
-				.object({
-					etag: zod
-						.string()
-						.describe(
-							'Unique ID of the latest version of an existing association.',
-						),
-					primary: zod
-						.boolean()
-						.optional()
-						.describe(
-							'Indicates whether this association must be default\namong others of the same type.',
-						),
-					tag: zod.string().optional(),
-				})
-				.describe("An input of the Contact's language."),
-		)
-		.optional()
-		.describe("A Contact's locale preference(s)."),
 	managers: zod
 		.array(
 			zod.object({
@@ -8475,95 +7933,6 @@ export const UpdateContactResponse = zod
 			})
 			.optional()
 			.describe("The Contact's associated tag(s)."),
-		languages: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								code: zod.string().optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('The user who created this Field.'),
-								createdBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('Timestamp(milli) of the Field creation.'),
-								etag: zod
-									.string()
-									.optional()
-									.describe(
-										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
-									),
-								id: zod
-									.string()
-									.optional()
-									.describe('The unique ID of the association. Never changes.'),
-								lang: zod.string().optional(),
-								name: zod.string().optional(),
-								primary: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates whether this association is the default\namong others of the same type.',
-									),
-								region: zod.string().optional(),
-								script: zod.string().optional(),
-								tag: zod.string().optional(),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
-									),
-								updatedBy: zod
-									.object({
-										id: zod
-											.string()
-											.optional()
-											.describe('Reference Object unique ID.'),
-										name: zod
-											.string()
-											.optional()
-											.describe('Reference Object display name.'),
-										type: zod
-											.string()
-											.optional()
-											.describe('Reference Object well-known type.'),
-									})
-									.optional()
-									.describe('The user who performed last Update.'),
-								ver: zod
-									.number()
-									.optional()
-									.describe('Version of the latest update. Numeric sequence.'),
-							})
-							.describe("A Contact's locale preference.\nOutput purpose only."),
-					)
-					.optional()
-					.describe("Page of the Contact's Language(s) dataset."),
-				next: zod.boolean().optional(),
-				page: zod
-					.number()
-					.optional()
-					.describe('Page number of partial result dataset records.'),
-			})
-			.optional()
-			.describe("A Contact's locale preference(s)."),
 		managers: zod
 			.object({
 				data: zod

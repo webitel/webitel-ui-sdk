@@ -471,6 +471,8 @@ export default {
 			'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9) и начинатся с буквы',
 		integer: 'Поле должно содержать только целые числа',
 		nameAlreadyInUse: 'Это название уже используется',
+		phoneNumberSymbolsValidator:
+			"Номер может содержать только буквы (a-z, A-Z), цифры (0-9) и символы: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {
@@ -562,7 +564,7 @@ export default {
 					return 'Сортировка';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Завершить сеансы',
 			},
 		},
 		errorPages: {

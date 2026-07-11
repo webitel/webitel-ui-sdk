@@ -476,6 +476,8 @@ export default {
 			'Codul trebuie să conțină doar litere (A-Z, a-z) și cifre (0-9), și trebuie să înceapă cu o literă',
 		integer: 'Câmpul trebuie să conțină doar numere întregi',
 		nameAlreadyInUse: 'Acest nume este deja folosit',
+		phoneNumberSymbolsValidator:
+			"Numărul poate conține doar litere (a-z, A-Z), cifre (0-9) și simbolurile: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {
@@ -571,7 +573,7 @@ export default {
 					return 'Sortare';
 				},
 				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
-				[IconAction.LOGOUT]: ({ linked }) => linked('vocabulary.logout'),
+				[IconAction.LOGOUT]: 'Închide sesiunile',
 			},
 		},
 		errorPages: {
