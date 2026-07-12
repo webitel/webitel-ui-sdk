@@ -20,6 +20,72 @@
 			"vidstack/vue"
 		],
 		"moduleResolution": "Bundler",
+		"paths": {
+			"@aliasedDeps/api-services/axios": [
+				"./node_modules/axios",
+				"./packages/api-services/node_modules/axios"
+			],
+			"zod": [
+				"./node_modules/zod"
+			],
+			"zod/v4": [
+				"./node_modules/zod/v4"
+			],
+			"vue": [
+				"./node_modules/vue"
+			],
+			"@vueuse/core": [
+				"./node_modules/@vueuse/core"
+			],
+			"@vueuse/shared": [
+				"./node_modules/@vueuse/shared"
+			],
+			"@webitel/api-services": [
+				"./packages/api-services/src/index.ts"
+			],
+			"@webitel/api-services/gen": [
+				"./packages/api-services/src/gen/index.ts"
+			],
+			"@webitel/api-services/gen/models": [
+				"./packages/api-services/src/gen/_models/index.ts"
+			],
+			"@webitel/api-services/gen/utils": [
+				"./packages/api-services/src/utils/gen/index.ts"
+			],
+			"@webitel/api-services/api": [
+				"./packages/api-services/src/api/clients/index.ts"
+			],
+			"@webitel/api-services/api/*": [
+				"./packages/api-services/src/api/*"
+			],
+			"@webitel/api-services/enums": [
+				"./packages/api-services/src/enums/index.ts"
+			],
+			"@webitel/api-services/utils": [
+				"./packages/api-services/src/utils/index.ts"
+			],
+			"@webitel/api-services/scripts": [
+				"./packages/api-services/src/scripts/index.ts"
+			],
+			"@webitel/api-services/validations": [
+				"./packages/api-services/src/validations/index.ts"
+			],
+			"@webitel/api-services/locale": [
+				"./packages/api-services/src/locale/locale.ts"
+			],
+			"@webitel/ui-sdk/src/*": [
+				"./src/*",
+				"./types/*"
+			],
+			"@webitel/ui-sdk/validators/*": [
+				"./src/validations/vuelidate/validators/*",
+				"./types/validations/vuelidate/validators/*"
+			],
+			"@webitel/ui-sdk/*": [
+				"./src/*",
+				"./types/*"
+			]
+		},
 		"isolatedModules": true,
 		"moduleDetection": "force",
 		"noEmit": true,
