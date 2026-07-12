@@ -44,4 +44,8 @@ jobs:
           node-version-file: package.json
           cache: npm
       - run: npm ci
+      # ui-datalist and ui-chats are not npm workspaces — they carry their own
+      # lockfiles, and the repo-wide typecheck needs their dependencies too
+      - run: npm ci --prefix packages/ui-datalist
+      - run: npm ci --prefix packages/ui-chats
       - run: npm run typecheck:ci
