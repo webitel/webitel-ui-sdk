@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { FormatDateMode, RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
-import { isRelativeDatetimeValue } from '@webitel/ui-sdk/scripts';
+import { isEmpty, isRelativeDatetimeValue } from '@webitel/ui-sdk/scripts';
 import { formatDate } from '@webitel/ui-sdk/utils';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -47,7 +47,7 @@ const isRelativeValue = computed(() => {
 });
 
 const absoluteValue = computed(() => {
-	return typeof props.value === 'object' && props.value !== null
+	return !isEmpty(props.value) && typeof props.value === 'object'
 		? props.value
 		: null;
 });
