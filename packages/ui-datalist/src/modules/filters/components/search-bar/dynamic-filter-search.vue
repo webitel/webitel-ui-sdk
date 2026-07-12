@@ -68,7 +68,9 @@ const deleteFilter = ({ name }: { name: FilterName }) => {
 };
 
 const restoreLocalSearchValue = (searchMode: string) => {
-	localSearchValue.value = props.filtersManager.filters.get(searchMode)?.value;
+	const restoredValue = props.filtersManager.filters.get(searchMode)?.value;
+	localSearchValue.value =
+		typeof restoredValue === 'string' ? restoredValue : '';
 	return localSearchValue.value;
 };
 

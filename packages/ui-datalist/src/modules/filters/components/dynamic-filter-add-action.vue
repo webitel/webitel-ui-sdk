@@ -61,7 +61,9 @@ const submit = (payload: FilterInitParams, { hide }) => {
 };
 
 const popoverContentRef = ref<HTMLElement | null>(null);
-const dynamicFilterAddAction = ref<null>(null);
+const dynamicFilterAddAction = ref<{
+	hidePopover: () => void;
+} | null>(null);
 
 /**
  * @author @Oleksandr Palonnyi
@@ -75,7 +77,7 @@ const dynamicFilterAddAction = ref<null>(null);
  * */
 onClickOutside(
 	popoverContentRef,
-	() => dynamicFilterAddAction.value?.hidePopover(),
+	() => dynamicFilterAddAction?.value?.hidePopover(),
 	{
 		capture: true, // Fix for PrimeVue stopPropagation bug
 		ignore: [

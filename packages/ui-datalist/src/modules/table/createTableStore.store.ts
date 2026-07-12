@@ -9,18 +9,14 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
+import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
 	LoadDataListOptions,
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
 
-export const tableStoreBody = <
-	Entity extends {
-		id: string;
-		etag?: string;
-	},
->(
+export const tableStoreBody = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 ) => {
@@ -360,12 +356,7 @@ export const tableStoreBody = <
 	};
 };
 
-export const createTableStore = <
-	Entity extends {
-		id: string;
-		etag?: string;
-	},
->(
+export const createTableStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 ) => {

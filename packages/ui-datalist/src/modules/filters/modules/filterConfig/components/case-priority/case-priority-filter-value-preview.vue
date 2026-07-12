@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { CasesPriority } from 'webitel-sdk';
+import { WebitelCasesPriority } from 'webitel-sdk';
 
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
-	value: CasesPriority[];
+	value: WebitelCasesPriority[];
 }>();
 </script>
 

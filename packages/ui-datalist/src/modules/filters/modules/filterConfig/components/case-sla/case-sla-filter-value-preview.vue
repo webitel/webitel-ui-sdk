@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { CasesSLA } from 'webitel-sdk';
+import { WebitelCasesSLA } from 'webitel-sdk';
 
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
-	value: CasesSLA[];
+	value: WebitelCasesSLA[];
 }>();
 </script>
 

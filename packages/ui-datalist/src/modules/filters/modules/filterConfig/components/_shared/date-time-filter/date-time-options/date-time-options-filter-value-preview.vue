@@ -46,16 +46,22 @@ const isRelativeValue = computed(() => {
 	return isRelativeDatetimeValue(props.value);
 });
 
+const absoluteValue = computed(() => {
+	return typeof props.value === 'object' && props.value !== null
+		? props.value
+		: null;
+});
+
 const from = computed(() => {
-	return isRelativeDatetimeValue.value
-		? false
-		: formatDate(props.value.from, FormatDateMode.DATETIME);
+	return absoluteValue.value
+		? formatDate(absoluteValue.value.from, FormatDateMode.DATETIME)
+		: false;
 });
 
 const to = computed(() => {
-	return isRelativeDatetimeValue.value
-		? false
-		: formatDate(props.value.to, FormatDateMode.DATETIME);
+	return absoluteValue.value
+		? formatDate(absoluteValue.value.to, FormatDateMode.DATETIME)
+		: false;
 });
 </script>
 

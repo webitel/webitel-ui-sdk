@@ -17,9 +17,7 @@
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="
-          (...params) => props.filterConfig.searchRecords(...params)
-        "
+        :search-method="searchRecords"
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
         @update:model-value="model = $event"
@@ -33,9 +31,7 @@
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="
-          (...params) => props.filterConfig.searchRecords(...params)
-        "
+        :search-method="searchRecords"
 
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */""
         option-value="id"
@@ -43,7 +39,7 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
-      <date-time-options-filter-value-field v-model:model-value="model" />
+      <date-time-options-filter-value-field v-model:model-value="dateTimeModel" />
     </template>
   </wt-type-extension-value-input>
 </template>
@@ -55,10 +51,13 @@ import {
 	WtSingleSelect,
 	WtTypeExtensionValueInput,
 } from '@webitel/ui-sdk/components';
-import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import { computed, onMounted, useAttrs, watch } from 'vue';
-import { WebitelProtoDataTypeKind } from 'webitel-sdk';
+import {
+	type RelativeDatetimeValue,
+	WtTypeExtensionFieldKind,
+} from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
+import { computed, useAttrs, watch } from 'vue';
 
+import type { FilterConfigSearchMethodParams } from '../../classes/FilterConfig';
 import DateTimeOptionsFilterValueField from '../_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 import { ITypeExtensionFilterConfig } from './index';
@@ -76,6 +75,24 @@ const emit = defineEmits<{
 }>();
 
 const attrs = useAttrs();
+
+const searchRecords = (...params: FilterConfigSearchMethodParams) =>
+	props.filterConfig.searchRecords?.(...params);
+
+/* the filter value is dynamically shaped by field kind;
+   the Calendar branch always stores a datetime value */
+const dateTimeModel = computed({
+	get: () =>
+		model.value as
+			| RelativeDatetimeValue
+			| {
+					from: number;
+					to: number;
+			  },
+	set: (value) => {
+		model.value = value;
+	},
+});
 
 const v$ = useVuelidate(
 	computed(() => ({

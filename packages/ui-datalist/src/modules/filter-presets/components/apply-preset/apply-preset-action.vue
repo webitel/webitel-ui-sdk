@@ -80,13 +80,13 @@ import {
 } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
-import { type Store, storeToRefs } from 'pinia';
+import { type StoreGeneric, storeToRefs } from 'pinia';
 import { computed, inject, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
-import PresetQueryAPI from '../../api/PresetQuery.ts';
+import PresetQueryAPI from '../../api/PresetQuery';
 import PresetPreview from './preset-preview.vue';
 
 const props = defineProps<{
@@ -94,7 +94,7 @@ const props = defineProps<{
 	 * presets "section" namespace
 	 */
 	namespace: string;
-	presetsStore: () => Store;
+	presetsStore: StoreGeneric;
 	filterConfigs: AnyFilterConfig[];
 }>();
 
@@ -104,7 +104,9 @@ const emit = defineEmits<{
 	];
 }>();
 
-const eventBus = inject('$eventBus');
+const eventBus = inject<{
+	$emit: (event: string, payload?: unknown) => void;
+}>('$eventBus');
 
 const { t } = useI18n();
 
@@ -214,7 +216,7 @@ const updatePreset = async ({ preset, onSuccess, onFailure }) => {
 			id: preset.id,
 			namespace: preset.preset?.namespace,
 		});
-		eventBus.$emit('notification', {
+		eventBus?.$emit('notification', {
 			type: 'success',
 			text: t('systemNotifications.success.update', {
 				entity: t('webitelUI.filters.presets.preset'),

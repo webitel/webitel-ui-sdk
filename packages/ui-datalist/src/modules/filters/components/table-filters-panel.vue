@@ -68,7 +68,7 @@
 
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
-import { Store } from 'pinia';
+import { StoreGeneric } from 'pinia';
 import { computed } from 'vue';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
@@ -124,7 +124,7 @@ type Props = {
 	 *
 	 * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
 	 */
-	usePresetsStore?: Store;
+	usePresetsStore?: () => StoreGeneric;
 
 	/**
 	 * @author @Lera24

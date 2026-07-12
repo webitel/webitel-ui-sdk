@@ -10,14 +10,14 @@
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :model-value="model.from"
+      :model-value="absoluteModel?.from"
       :label="t('reusable.from')"
       show-time
       @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :model-value="model.to"
+      :model-value="absoluteModel?.to"
       :label="t('reusable.to')"
       show-time
       @update:model-value="changeAbsoluteValue($event, 'to')"
@@ -69,6 +69,12 @@ initialize();
 
 const showDatepickers = computed(() => {
 	return selectedRadioValue.value === RelativeDatetimeValue.Custom;
+});
+
+const absoluteModel = computed(() => {
+	return typeof model.value === 'object' && model.value !== null
+		? model.value
+		: undefined;
 });
 
 const handleRadioChange = (value: RelativeDatetimeValue) => {

@@ -2,6 +2,7 @@ import { ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
+import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
 
 export const tablePaginationStoreBody = () => {
@@ -63,7 +64,7 @@ export const tablePaginationStoreBody = () => {
 	};
 };
 
-export const createTablePaginationStore = <Entity>(
+export const createTablePaginationStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 ) => {

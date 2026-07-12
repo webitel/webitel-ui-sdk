@@ -1,6 +1,6 @@
-import type { WtTableHeader } from 'src/components/wt-table/types/WtTable.d.ts';
+import type { DatalistTableHeader } from '../../../types/tableStore.types';
 
-export const headers: WtTableHeader[] = [
+export const headers: DatalistTableHeader[] = [
 	{
 		value: 'id',
 		field: 'id',

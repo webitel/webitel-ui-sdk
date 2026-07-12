@@ -66,7 +66,9 @@ const props = defineProps<{
 	filterConfigs: AnyFilterConfig[];
 }>();
 
-const eventBus = inject('$eventBus');
+const eventBus = inject<{
+	$emit: (event: string, payload?: unknown) => void;
+}>('$eventBus');
 
 const localFiltersManager = reactive(createFiltersManager());
 
@@ -114,7 +116,7 @@ const handlePresetSubmit = async (
 			namespace: props.namespace,
 		});
 
-		eventBus.$emit('notification', {
+		eventBus?.$emit('notification', {
 			type: 'success',
 			text: t('systemNotifications.success.create', {
 				entity: t('webitelUI.filters.presets.preset'),
@@ -156,7 +158,7 @@ const handlePresetOverwriteConfirmation = async ({
 			namespace: props.namespace,
 		});
 
-		eventBus.$emit('notification', {
+		eventBus?.$emit('notification', {
 			type: 'success',
 			text: t('systemNotifications.success.update', {
 				entity: t('webitelUI.filters.presets.preset'),
