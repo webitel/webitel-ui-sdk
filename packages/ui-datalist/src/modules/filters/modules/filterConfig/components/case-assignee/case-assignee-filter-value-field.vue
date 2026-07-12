@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
-    :v="v_list"
+    :v="vList"
     v-model:model-value="model.list"
     data-key="id"
     option-value="id"
@@ -10,7 +10,7 @@
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="v_unassigned"
+    :v="vUnassigned"
     @update:selected="model.unassigned = $event"
   />
 </template>
@@ -75,12 +75,12 @@ const v$ = useVuelidate<{
 );
 v$.value.$touch();
 
-const v_list = computed(() => {
+const vList = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.list;
 });
-const v_unassigned = computed(() => {
+const vUnassigned = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.unassigned;

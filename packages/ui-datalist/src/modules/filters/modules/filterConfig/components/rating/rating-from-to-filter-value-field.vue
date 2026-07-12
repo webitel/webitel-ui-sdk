@@ -4,7 +4,7 @@
       v-if="model"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
-      :v="v_from"
+      :v="vFrom"
       :model-value="model.from"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('from', $event)"
@@ -14,7 +14,7 @@
       v-if="model"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
-      :v="v_to"
+      :v="vTo"
       :model-value="model.to"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('to', $event)"
@@ -75,12 +75,12 @@ const v$ = useVuelidate<{
 );
 v$.value.$touch();
 
-const v_from = computed(() => {
+const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.from;
 });
-const v_to = computed(() => {
+const vTo = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.to;

@@ -4,7 +4,7 @@
       v-if="model"
       :label="t('reusable.from')"
       :model-value="model.from"
-      :v="v_from"
+      :v="vFrom"
       format="mm:ss"
       @update:model-value="handleInput('from', $event)"
     />
@@ -12,7 +12,7 @@
       v-if="model"
       :label="t('reusable.to')"
       :model-value="model.to"
-      :v="v_to"
+      :v="vTo"
       format="mm:ss"
       @update:model-value="handleInput('to', $event)"
     />
@@ -72,12 +72,12 @@ const v$ = useVuelidate<{
 );
 v$.value.$touch();
 
-const v_from = computed(() => {
+const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.from;
 });
-const v_to = computed(() => {
+const vTo = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.to;

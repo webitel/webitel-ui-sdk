@@ -4,7 +4,7 @@
       :show-clear="false"
       :label="t('cases.reason')"
       :search-method="caseCloseReasonsGroupsSearchMethod"
-      :v="v_selection"
+      :v="vSelection"
       :model-value="model?.selection"
       data-key="id"
       option-value="id"
@@ -18,7 +18,7 @@
       :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"
-      :v="v_conditions"
+      :v="vConditions"
       v-model:model-value="model.conditions"
       data-key="id"
       option-value="id"
@@ -90,12 +90,12 @@ const v$ = useVuelidate<{
 
 v$.value.$touch();
 
-const v_selection = computed(() => {
+const vSelection = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.selection;
 });
-const v_conditions = computed(() => {
+const vConditions = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.conditions;

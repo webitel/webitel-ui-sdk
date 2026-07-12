@@ -5,7 +5,7 @@
       :model-value="model.from"
       :max="props.numberMax"
       :min="0"
-      :v="v_from"
+      :v="vFrom"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -18,7 +18,7 @@
       :model-value="model.to"
       :max="props.numberMax"
       :min="0"
-      :v="v_to"
+      :v="vTo"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -85,12 +85,12 @@ const v$ = useVuelidate<{
 );
 v$.value.$touch();
 
-const v_from = computed(() => {
+const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.from;
 });
-const v_to = computed(() => {
+const vTo = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.to;

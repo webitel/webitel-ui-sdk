@@ -42,20 +42,28 @@ const getFilesList = async (params: { search?: string }) => {
 	]);
 
 	try {
-		const response = await getFileService().searchFiles({
-			page,
-			size,
-			q: q || params.search,
-			sort,
-			fields,
-			id,
-			uploadedAtFrom,
-			uploadedAtTo,
-			uploadedBy,
-			referenceId,
-			retentionUntilFrom,
-			retentionUntilTo,
-		});
+		const response = await getFileService().searchFiles(
+			{
+				page,
+				size,
+				q: q || params.search,
+				sort,
+				fields,
+				id,
+				uploadedBy,
+				referenceId,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -126,13 +134,19 @@ const getScreenRecordingsByUser = async (params: {
 					...fields,
 				],
 				id,
-				uploadedAtFrom,
-				uploadedAtTo,
 				referenceId,
-				retentionUntilFrom,
-				retentionUntilTo,
 				type,
 				channel,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -209,13 +223,19 @@ const getScreenRecordingsByAgent = async (params: {
 					...fields,
 				],
 				id,
-				uploadedAtFrom,
-				uploadedAtTo,
 				referenceId,
-				retentionUntilFrom,
-				retentionUntilTo,
 				type,
 				channel,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [

@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="!disableValidation && v_list"
+    :v="!disableValidation && vList"
     :model-value="model?.list"
     data-key="id"
     option-value="id"
@@ -13,7 +13,7 @@
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="!disableValidation && v_unassigned"
+    :v="!disableValidation && vUnassigned"
     @update:selected="model.unassigned = $event"
   />
 </template>
@@ -84,12 +84,12 @@ const v$ = useVuelidate<{
 	},
 );
 
-const v_list = computed(() => {
+const vList = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.list;
 });
-const v_unassigned = computed(() => {
+const vUnassigned = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
 	return modelValidation.unassigned;
