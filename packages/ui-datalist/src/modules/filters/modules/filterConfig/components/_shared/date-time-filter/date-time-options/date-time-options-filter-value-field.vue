@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { WtRadio } from '@webitel/ui-sdk/components';
 import { RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { endOfToday, startOfToday } from 'date-fns';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -72,7 +73,7 @@ const showDatepickers = computed(() => {
 });
 
 const absoluteModel = computed(() => {
-	return typeof model.value === 'object' && model.value !== null
+	return !isEmpty(model.value) && typeof model.value === 'object'
 		? model.value
 		: undefined;
 });
