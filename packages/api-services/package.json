@@ -12,7 +12,8 @@
 	],
 	"author": "webitel",
 	"scripts": {
-		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
+		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:dedupe-index && npm run gen:api:typedoc && npm run gen:api:cleanup",
+		"gen:api:dedupe-index": "node ./dedupe-gen-index.mjs",
 		"publish-lib": "npm publish --access public --tag latest",
 		"gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
 		"gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
