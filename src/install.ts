@@ -6,8 +6,8 @@ import './css/tailwind.css';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
 import { fillIconsRepository } from './assets/icons';
-import { EVENT_BUS_INJECTION_KEY } from './composables/useEventBus/useEventBus';
 import Components from './components'; // init all components
+import { EVENT_BUS_INJECTION_KEY } from './composables/useEventBus/useEventBus';
 import Directives from './directives'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin';
 
