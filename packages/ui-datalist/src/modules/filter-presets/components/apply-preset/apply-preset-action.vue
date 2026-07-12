@@ -78,10 +78,11 @@ import {
 	WtPopup,
 	WtSearchBar,
 } from '@webitel/ui-sdk/components';
+import { useEventBus } from '@webitel/ui-sdk/composables';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
 import { type StoreGeneric, storeToRefs } from 'pinia';
-import { computed, inject, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
@@ -104,9 +105,7 @@ const emit = defineEmits<{
 	];
 }>();
 
-const eventBus = inject<{
-	$emit: (event: string, payload?: unknown) => void;
-}>('$eventBus');
+const eventBus = useEventBus();
 
 const { t } = useI18n();
 

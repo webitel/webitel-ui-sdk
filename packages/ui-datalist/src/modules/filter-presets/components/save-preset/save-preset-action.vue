@@ -32,8 +32,9 @@
 
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
+import { useEventBus } from '@webitel/ui-sdk/composables';
 import { IconAction } from '@webitel/ui-sdk/enums';
-import { computed, inject, type Ref, reactive, ref, watch } from 'vue';
+import { computed, type Ref, reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
@@ -66,9 +67,7 @@ const props = defineProps<{
 	filterConfigs: AnyFilterConfig[];
 }>();
 
-const eventBus = inject<{
-	$emit: (event: string, payload?: unknown) => void;
-}>('$eventBus');
+const eventBus = useEventBus();
 
 const localFiltersManager = reactive(createFiltersManager());
 
