@@ -10,14 +10,14 @@
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :model-value="model.from"
+      :model-value="absoluteModel?.from"
       :label="t('reusable.from')"
       show-time
       @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :model-value="model.to"
+      :model-value="absoluteModel?.to"
       :label="t('reusable.to')"
       show-time
       @update:model-value="changeAbsoluteValue($event, 'to')"
@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { WtRadio } from '@webitel/ui-sdk/components';
 import { RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { endOfToday, startOfToday } from 'date-fns';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -69,6 +70,12 @@ initialize();
 
 const showDatepickers = computed(() => {
 	return selectedRadioValue.value === RelativeDatetimeValue.Custom;
+});
+
+const absoluteModel = computed(() => {
+	return !isEmpty(model.value) && typeof model.value === 'object'
+		? model.value
+		: undefined;
 });
 
 const handleRadioChange = (value: RelativeDatetimeValue) => {

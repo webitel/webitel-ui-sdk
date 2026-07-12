@@ -7,14 +7,14 @@
       props.filterConfig.field.kind === WtTypeExtensionFieldKind.Boolean
     "
   >
-    <has-option-filter-value-preview :value="props.value" />
+    <has-option-filter-value-preview :value="!!props.value" />
   </template>
   <template
     v-else-if="
       props.filterConfig.field.kind === WtTypeExtensionFieldKind.Calendar
     "
   >
-    <date-time-options-filter-value-preview :value="props.value" />
+    <date-time-options-filter-value-preview :value="dateTimeValue" />
   </template>
   <template v-else>
     {{ props.value }}
@@ -22,7 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
+import {
+	type RelativeDatetimeValue,
+	WtTypeExtensionFieldKind,
+} from '@webitel/ui-sdk/enums';
 import { computed } from 'vue';
 
 import { DynamicFilterPreviewComponentProps } from '../../types/DynamicFilterPreviewComponent';
@@ -37,11 +40,24 @@ const props = defineProps<
 	}
 >();
 
+/* the filter value is dynamically shaped by field kind;
+   the Calendar branch always stores a datetime value */
+const dateTimeValue = computed(
+	() =>
+		props.value as
+			| RelativeDatetimeValue
+			| {
+					from: number;
+					to: number;
+			  },
+);
+
 const showLookupValuePreview = computed(() => {
-	return [
+	const lookupKinds: string[] = [
 		WtTypeExtensionFieldKind.Multiselect,
 		WtTypeExtensionFieldKind.Select,
-	].includes(props.filterConfig.field.kind);
+	];
+	return lookupKinds.includes(props.filterConfig.field.kind);
 });
 </script>
 

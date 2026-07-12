@@ -17,3 +17,8 @@ declare module '*.svg?raw' {
 	const content: string;
 	export default content;
 }
+
+interface Window {
+	/** webitel-sdk websocket client instance, exposed globally at runtime. */
+	cli?: import('webitel-sdk').Client | null;
+}

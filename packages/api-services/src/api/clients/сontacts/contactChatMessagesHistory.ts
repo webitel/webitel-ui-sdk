@@ -80,7 +80,7 @@ const getAllMessages = async (params) => {
 			undefined,
 			undefined,
 			size,
-			`${page || 1}`,
+			page || 1,
 		);
 		const { messages, peers, chats, next } = applyTransform(response.data, [
 			snakeToCamel(),

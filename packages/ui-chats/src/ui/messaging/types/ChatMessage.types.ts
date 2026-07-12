@@ -24,6 +24,7 @@ export type ChatMessageFile = {
 	mime?: string;
 	url?: string;
 	streamUrl?: string;
+	malware?: boolean;
 };
 
 export type ChatMember = {

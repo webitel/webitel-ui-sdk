@@ -34,8 +34,7 @@
 
 <script setup lang="ts">
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
-import { defineEmits, useAttrs } from 'vue';
-
+import { useAttrs } from 'vue';
 import {
 	RecordingIndicator,
 	ScreenSharingControlsPanel,

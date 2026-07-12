@@ -274,7 +274,7 @@ const emitKeys = {
 	[VideoCallAction.Settings]: `action:${VideoCallAction.Settings}`,
 	[VideoCallAction.Chat]: `action:${VideoCallAction.Chat}`,
 	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
-};
+} as const;
 
 const { t } = useI18n();
 

@@ -23,7 +23,10 @@ import { format } from 'date-fns';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
-	value: number[];
+	value: {
+		from: number | null;
+		to: number | null;
+	};
 }>();
 
 const { t } = useI18n();

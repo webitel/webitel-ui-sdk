@@ -111,10 +111,6 @@ const v$ = useVuelidate(
 );
 v$.value.$touch();
 
-const appliedFilters = computed(() => {
-	return props.filtersManager.getFiltersList();
-});
-
 const save = () => {
 	isSaving.value = true;
 

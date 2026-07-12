@@ -16,11 +16,12 @@ export type FilterConfigBaseParams = {
 	valueInputComponent?: Component;
 	valuePreviewComponent?: Component;
 	notDeletable?: boolean;
-	showFilterName: boolean;
+	showFilterName?: boolean;
+	staticView?: boolean;
 };
 
 export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
-	searchRecords: (params: FilterConfigSearchMethodParams) => Promise<{
+	searchRecords: (...params: FilterConfigSearchMethodParams) => Promise<{
 		items: unknown[];
 		next?: boolean;
 	}>;
@@ -37,13 +38,40 @@ export type FilterConfigSearchMethodParams = [
 	 * filter-related data
 	 */
 	{
-		filterName: FilterName;
-		filterValue: FilterValue;
-		filterConfig: BaseFilterConfig;
-	},
+		filterName?: FilterName;
+		filterValue?: FilterValue;
+		filterConfig?: BaseFilterConfig;
+	}?,
 ];
 
 export type AnyFilterConfig = IWtSysTypeFilterConfig | BaseFilterConfig;
+
+/**
+ * Loose shapes forwarded into filter-config lookup calls by
+ * dynamic-filter-preview.vue and wt-select options loading. The callers pass
+ * heterogeneous request params, so these stay permissive on purpose.
+ */
+// TODO(types): model per-filter search params and filter values precisely
+export type FilterConfigSearchRequestParams = {
+	/** arrives as a scalar id, a list of ids, or a `{ list }` wrapper */
+	id?: any;
+	size?: number;
+} & Record<string, any>;
+
+export type FilterConfigListFilterValue = {
+	list?: Array<
+		{
+			id?: string | number;
+		} & Record<string, any>
+	>;
+	unassigned?: boolean;
+};
+
+export type FilterConfigSearchFilterContext = {
+	filterName?: FilterName;
+	filterValue?: FilterConfigListFilterValue;
+	filterConfig?: BaseFilterConfig;
+};
 
 export class FilterConfig implements BaseFilterConfig {
 	name: FilterName;
@@ -83,6 +111,9 @@ export abstract class WtSysTypeFilterConfig
 	extends FilterConfig
 	implements IWtSysTypeFilterConfig
 {
-	abstract name;
-	abstract searchRecords;
+	abstract name: FilterName;
+	abstract searchRecords(...args: unknown[]): Promise<{
+		items: unknown[];
+		next?: boolean;
+	}>;
 }

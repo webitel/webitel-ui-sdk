@@ -4,7 +4,7 @@
       :show-clear="false"
       :label="t('cases.appliedSLA')"
       :search-method="slasSearchMethod"
-      :v="v$.model.selection"
+      :v="vSelection"
       :model-value="model?.selection"
       data-key="id"
       option-value="id"
@@ -17,7 +17,7 @@
       :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"
-      :v="v$.model.conditions"
+      :v="vConditions"
       :model-value="model?.conditions"
       data-key="id"
       option-value="id"
@@ -63,7 +63,9 @@ const initModel = () => {
 	}
 };
 onMounted(() => initModel());
-const v$ = useVuelidate(
+const v$ = useVuelidate<{
+	model: ModelValue;
+}>(
 	computed(() => ({
 		model: {
 			selection: {
@@ -83,6 +85,17 @@ const v$ = useVuelidate(
 );
 
 v$.value.$touch();
+
+const vSelection = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.selection;
+});
+const vConditions = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.conditions;
+});
 
 const emit = defineEmits<{
 	'update:invalid': [

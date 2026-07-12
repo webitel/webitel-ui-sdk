@@ -7,6 +7,7 @@ import './css/tailwind.css';
 import { generateInstance } from '@webitel/api-services/api/axios';
 import { fillIconsRepository } from './assets/icons';
 import Components from './components'; // init all components
+import { EVENT_BUS_INJECTION_KEY } from './composables/useEventBus/useEventBus';
 import Directives from './directives'; // init all directives
 import initPrimevue from './plugins/primevue/primevue.plugin';
 
@@ -23,7 +24,7 @@ export default {
 		Object.keys(globals).forEach((globalKey) => {
 			app.provide(globalKey, globals[globalKey]);
 		});
-		app.provide('$eventBus', eventBus);
+		app.provide(EVENT_BUS_INJECTION_KEY, eventBus);
 		initPrimevue(app);
 	},
 	generateInstance,

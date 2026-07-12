@@ -41,7 +41,7 @@ export function useCSVExport({ selected }: { selected: Ref<number[]> }) {
 
 	async function exportCSV(exportParams?: Record<string, unknown>) {
 		const routeQuery = route.query;
-		const params = {
+		const params: Record<string, unknown> = {
 			...(exportParams || routeQuery),
 			size: CSV_EXPORT_BATCH_SIZE,
 		};

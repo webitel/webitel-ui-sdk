@@ -5,7 +5,7 @@
       :model-value="model.from"
       :max="props.numberMax"
       :min="0"
-      :v="v$.model?.from"
+      :v="vFrom"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -18,7 +18,7 @@
       :model-value="model.to"
       :max="props.numberMax"
       :min="0"
-      :v="v$.model?.to"
+      :v="vTo"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -63,7 +63,9 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const v$ = useVuelidate(
+const v$ = useVuelidate<{
+	model: ModelValue;
+}>(
 	computed(() => ({
 		model: {
 			from: {
@@ -82,6 +84,17 @@ const v$ = useVuelidate(
 	},
 );
 v$.value.$touch();
+
+const vFrom = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.from;
+});
+const vTo = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.to;
+});
 
 const handleInput = (key: keyof ModelValue, value: number) => {
 	const newValue = {

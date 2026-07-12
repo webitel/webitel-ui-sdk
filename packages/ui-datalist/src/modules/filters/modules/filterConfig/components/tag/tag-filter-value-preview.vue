@@ -24,7 +24,7 @@ const { t } = useI18n();
 const tags = computed(() => {
 	const tagLocaleMap = CallHistoryTagFilterOptions.reduce(
 		(acc, option) => {
-			acc[option.value] = option.locale;
+			acc[String(option.value)] = option.locale;
 			return acc;
 		},
 		{} as Record<string, string>,

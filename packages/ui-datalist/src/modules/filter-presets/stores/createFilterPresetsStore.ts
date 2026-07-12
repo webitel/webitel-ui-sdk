@@ -41,7 +41,13 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 	};
 
 	const tableStore = tableStoreBody<EnginePresetQuery>(presetsNamespace, {
-		apiModule: PresetQueryAPI,
+		/* PresetQueryAPI's add/update take preset-specific params, so only the
+		   ApiModule-conforming methods the table store actually calls go in */
+		apiModule: {
+			getList: PresetQueryAPI.getList,
+			get: PresetQueryAPI.get,
+			delete: PresetQueryAPI.delete,
+		},
 		headers,
 		disablePersistence: true,
 	});

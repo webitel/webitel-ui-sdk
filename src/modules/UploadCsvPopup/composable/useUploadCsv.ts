@@ -20,7 +20,7 @@ const useUploadCsv = ({ props, emit, skipHeaders, separator }) => {
 	const parsedFile = ref(null);
 	const isParsingPreview = ref(false);
 	const parseErrorStackTrace = ref('');
-	const csvPreview = ref([
+	const csvPreview = ref<unknown[]>([
 		[],
 	]);
 

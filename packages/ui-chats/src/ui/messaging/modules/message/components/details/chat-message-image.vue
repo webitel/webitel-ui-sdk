@@ -17,8 +17,6 @@
   setup
   lang="ts"
 >
-import { defineEmits, defineProps } from 'vue';
-
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{

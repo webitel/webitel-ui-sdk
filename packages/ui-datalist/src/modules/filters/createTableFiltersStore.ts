@@ -3,6 +3,7 @@ import { computed, reactive, ref } from 'vue';
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
+import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
 import {
 	createFiltersManager,
@@ -12,7 +13,7 @@ import {
 export const tableFiltersStoreBody = (
 	namespace,
 	config?: {
-		filtersManagerConfig: FiltersManagerConfig;
+		filtersManagerConfig?: FiltersManagerConfig;
 	},
 ) => {
 	const filtersManager = reactive(
@@ -118,7 +119,7 @@ export const tableFiltersStoreBody = (
 	};
 };
 
-export const createTableFiltersStore = <Entity>(
+export const createTableFiltersStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity> & {
 		filtersManagerConfig?: FiltersManagerConfig;

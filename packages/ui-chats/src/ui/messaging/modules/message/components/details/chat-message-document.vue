@@ -20,8 +20,7 @@
 
 <script setup lang="ts">
 import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
-import { computed, defineProps } from 'vue';
-
+import { computed } from 'vue';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = withDefaults(

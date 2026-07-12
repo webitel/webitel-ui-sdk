@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 
-import { FilterOption, type FilterOptionName } from '../enums/FilterOption';
+import type { FilterConfigSearchMethodParams } from '../classes/FilterConfig';
+import { FilterOption } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
@@ -222,60 +223,59 @@ export {
 	VariableFilterPreview,
 };
 
-export const FilterOptionToValueComponentMap: Record<
-	FilterOptionName,
-	Component
-> = {
-	[FilterOption.Agent]: AgentFilter,
-	[FilterOption.AgentStatus]: AgentStatusFilter,
-	[FilterOption.UtilizationProgress]: UtilizationProgressFilter,
-	[FilterOption.Skill]: SkillFilter,
-	[FilterOption.Region]: RegionFilter,
-	[FilterOption.Auditor]: AuditorFilter,
-	[FilterOption.Supervisor]: SupervisorFilter,
-	[FilterOption.AmdResult]: AmdResultFilter,
-	[FilterOption.Contact]: ContactFilter,
-	[FilterOption.CallDirection]: CallDirectionFilterValueField,
-	[FilterOption.Rated]: HasRatingFilterValueField,
-	[FilterOption.Gateway]: GatewayFilter,
-	[FilterOption.Grantee]: GranteeFilter,
-	[FilterOption.HangupCause]: HangupCauseFilterValueField,
-	[FilterOption.Queue]: QueueFilter,
-	[FilterOption.QueueType]: QueueTypeFilter,
-	[FilterOption.QueuePeriod]: QueuePeriodFilter,
-	[FilterOption.RatedBy]: RatedByFilter,
-	[FilterOption.HasFile]: HasFileFilter,
-	[FilterOption.Score]: ScoreFilter,
-	[FilterOption.Tag]: TagFilter,
-	[FilterOption.TalkDuration]: TalkDurationFilter,
-	[FilterOption.Team]: TeamFilter,
-	[FilterOption.TotalDuration]: TotalDurationFilter,
-	[FilterOption.HasTranscription]: HasTranscriptionFilter,
-	[FilterOption.HasUser]: HasUserFilter,
-	[FilterOption.User]: UserFilter,
-	[FilterOption.Variable]: VariableFilter,
-	[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
-	[FilterOption.CaseStatus]: CaseStatusFilterValueField,
-	[FilterOption.CaseSource]: CaseSourceFilterValueField,
-	[FilterOption.CaseService]: CaseServiceFilterValueField,
-	[FilterOption.CaseAuthor]: CaseAuthorFilterValueField,
-	[FilterOption.CaseReporter]: CaseReporterFilterValueField,
-	[FilterOption.CaseImpacted]: CaseImpactedFilterValueField,
-	[FilterOption.CasePriority]: CasePriorityFilterValueField,
-	[FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValueField,
-	[FilterOption.Rating]: RatingFromToFilter,
-	[FilterOption.CaseSla]: CaseSlaFilterValueField,
-	[FilterOption.CaseSlaCondition]: CaseSlaConditionFilterValueField,
-	[FilterOption.CaseReactionTime]: CaseReactionTimeFilterValueField,
-	[FilterOption.CaseResolutionTime]: CaseResolutionTimeFilterValueField,
-	[FilterOption.CaseActualReactionTime]: CaseActualReactionTimeFilterValueField,
-	[FilterOption.CaseActualResolutionTime]:
-		CaseActualResolutionTimeFilterValueField,
-	[FilterOption.HasAttachment]: HasAttachmentFilter,
-};
+export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
+	{
+		[FilterOption.Agent]: AgentFilter,
+		[FilterOption.AgentStatus]: AgentStatusFilter,
+		[FilterOption.UtilizationProgress]: UtilizationProgressFilter,
+		[FilterOption.Skill]: SkillFilter,
+		[FilterOption.Region]: RegionFilter,
+		[FilterOption.Auditor]: AuditorFilter,
+		[FilterOption.Supervisor]: SupervisorFilter,
+		[FilterOption.AmdResult]: AmdResultFilter,
+		[FilterOption.Contact]: ContactFilter,
+		[FilterOption.CallDirection]: CallDirectionFilterValueField,
+		[FilterOption.Rated]: HasRatingFilterValueField,
+		[FilterOption.Gateway]: GatewayFilter,
+		[FilterOption.Grantee]: GranteeFilter,
+		[FilterOption.HangupCause]: HangupCauseFilterValueField,
+		[FilterOption.Queue]: QueueFilter,
+		[FilterOption.QueueType]: QueueTypeFilter,
+		[FilterOption.QueuePeriod]: QueuePeriodFilter,
+		[FilterOption.RatedBy]: RatedByFilter,
+		[FilterOption.HasFile]: HasFileFilter,
+		[FilterOption.Score]: ScoreFilter,
+		[FilterOption.Tag]: TagFilter,
+		[FilterOption.TalkDuration]: TalkDurationFilter,
+		[FilterOption.Team]: TeamFilter,
+		[FilterOption.TotalDuration]: TotalDurationFilter,
+		[FilterOption.HasTranscription]: HasTranscriptionFilter,
+		[FilterOption.HasUser]: HasUserFilter,
+		[FilterOption.User]: UserFilter,
+		[FilterOption.Variable]: VariableFilter,
+		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
+		[FilterOption.CaseSource]: CaseSourceFilterValueField,
+		[FilterOption.CaseService]: CaseServiceFilterValueField,
+		[FilterOption.CaseAuthor]: CaseAuthorFilterValueField,
+		[FilterOption.CaseReporter]: CaseReporterFilterValueField,
+		[FilterOption.CaseImpacted]: CaseImpactedFilterValueField,
+		[FilterOption.CasePriority]: CasePriorityFilterValueField,
+		[FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValueField,
+		[FilterOption.Rating]: RatingFromToFilter,
+		[FilterOption.CaseSla]: CaseSlaFilterValueField,
+		[FilterOption.CaseSlaCondition]: CaseSlaConditionFilterValueField,
+		[FilterOption.CaseReactionTime]: CaseReactionTimeFilterValueField,
+		[FilterOption.CaseResolutionTime]: CaseResolutionTimeFilterValueField,
+		[FilterOption.CaseActualReactionTime]:
+			CaseActualReactionTimeFilterValueField,
+		[FilterOption.CaseActualResolutionTime]:
+			CaseActualResolutionTimeFilterValueField,
+		[FilterOption.HasAttachment]: HasAttachmentFilter,
+	};
 
 export const FilterOptionToPreviewComponentMap: Record<
-	FilterOptionName,
+	FilterOption,
 	Component
 > = {
 	[FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
@@ -328,10 +328,11 @@ export const FilterOptionToPreviewComponentMap: Record<
 };
 
 export const FilterOptionToPreviewApiSearchMethodMap: Record<
-	FilterOptionName,
-	(unknown) => {
-		items;
-	}
+	FilterOption,
+	(...params: FilterConfigSearchMethodParams) => Promise<{
+		items: unknown[];
+		next?: boolean;
+	}>
 > = {
 	[FilterOption.Agent]: agentSearchMethod,
 	[FilterOption.Gateway]: gatewaySearchMethod,
