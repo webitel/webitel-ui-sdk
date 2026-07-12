@@ -75,7 +75,12 @@ export const useSelectOptions = ({
 		if (optionLabel.value && option[optionLabel.value])
 			return option[optionLabel.value];
 		if (option.locale) {
-			if (Array.isArray(option.locale)) return t(...option.locale);
+			if (Array.isArray(option.locale))
+				return t(
+					...(option.locale as [
+						string,
+					]),
+				);
 			return t(option.locale);
 		}
 		return option[defaultOptionLabel] || option;
@@ -213,7 +218,7 @@ export const useSelectOptions = ({
 
 	watch(
 		() => selected.value,
-		(newVal, oldVal) => {
+		(newVal) => {
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
 		},

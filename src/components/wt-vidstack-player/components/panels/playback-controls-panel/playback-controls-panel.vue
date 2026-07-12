@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
 import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
 import PlayButton from './components/buttons/play-button.vue';
 import TimeSlider from './components/sliders/time-slider.vue';

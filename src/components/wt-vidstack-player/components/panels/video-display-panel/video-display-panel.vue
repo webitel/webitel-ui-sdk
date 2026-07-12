@@ -42,15 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-	computed,
-	defineEmits,
-	defineProps,
-	inject,
-	onBeforeUnmount,
-	onMounted,
-} from 'vue';
-
+import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
 import { ComponentSize } from '../../../../../enums';
 import WtAvatar from '../../../../wt-avatar/wt-avatar.vue';
 import WtIconBtn from '../../../../wt-icon-btn/wt-icon-btn.vue';

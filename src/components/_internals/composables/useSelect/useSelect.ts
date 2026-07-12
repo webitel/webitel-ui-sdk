@@ -11,14 +11,15 @@ export const useSelect = ({
 	optionValue,
 	dataKey,
 	allowCustomValues,
-	manualCustomValues = false,
+	// accepted for API compatibility; custom-value manual handling is currently disabled
+	manualCustomValues: _manualCustomValues = false,
 	filterInput,
 	selectRef,
 	searchMethod,
 	selectId,
 	isSingle,
 	strictApiOptions = undefined,
-	emit = () => {},
+	emit = (_event: string, ..._args: unknown[]) => {},
 }) => {
 	const {
 		filterText,
@@ -71,16 +72,13 @@ export const useSelect = ({
 		selected,
 		filteredOptions,
 		options,
-		optionValue,
 		dataKey,
 		filterText,
 		filterOptions: filterOptionsAndScrollToTop,
 		updateSelectedOptionsCache,
 		selectRef,
 		allowCustomValues,
-		manualCustomValues,
 		isSingle,
-		emit,
 	});
 
 	onMounted(async () => {

@@ -10,15 +10,34 @@ export interface ApiModule<Entity> {
 		items?: Entity[];
 		next?: boolean;
 	}>;
-	get?: ({ itemId }: { itemId: Id }) => Promise<Entity>;
-	add?: ({ itemInstance }: { itemInstance?: Entity }) => Promise<Entity>;
-	update?: ({
-		itemId,
-		itemInstance,
-	}: {
-		itemId: Id;
-		itemInstance?: Entity;
+	get?: (params: {
+		itemId?: Id;
+		/** preferred over itemId */
+		id?: Id;
+		parentId?: Id | null;
 	}) => Promise<Entity>;
-	patch?: ({ id, changes }: { id?: Id; changes?: Entity }) => Promise<Entity>;
-	delete?: ({ itemId }: { itemId: Id }) => Promise<void>;
+	add?: (params: {
+		itemInstance?: Entity;
+		parentId?: Id | null;
+	}) => Promise<Entity>;
+	update?: (params: {
+		itemId?: Id | null;
+		id?: Id;
+		itemInstance?: Entity;
+		parentId?: Id | null;
+		etag?: string;
+	}) => Promise<Entity>;
+	patch?: (params: {
+		id?: Id;
+		itemId?: Id | null;
+		changes?: Partial<Entity>;
+		parentId?: Id | null;
+		etag?: string;
+	}) => Promise<Entity>;
+	delete?: (params: {
+		itemId?: Id;
+		id?: Id;
+		parentId?: Id | null;
+		etag?: string;
+	}) => Promise<void>;
 }

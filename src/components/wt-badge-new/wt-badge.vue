@@ -13,21 +13,11 @@
 
 <script setup lang="ts">
 import { ComponentSize } from '../../enums';
+import type { BadgeSeverity } from './types/WtBadge';
 
 interface Props {
 	value: string | number;
-	severity?:
-		| 'secondary'
-		| 'info'
-		| 'success'
-		| 'warn'
-		| 'error'
-		| 'online'
-		| 'dnd'
-		| 'busy'
-		| 'pause'
-		| 'onlineCc'
-		| 'offline';
+	severity?: BadgeSeverity;
 	size?: ComponentSize;
 }
 
