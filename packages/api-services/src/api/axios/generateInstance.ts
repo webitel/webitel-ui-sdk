@@ -1,4 +1,15 @@
-import axios from 'axios';
+import axios, { type CreateAxiosDefaults } from 'axios';
+
+interface GenerateInstanceOptions extends CreateAxiosDefaults {
+	interceptors?: {
+		request?: Parameters<
+			ReturnType<typeof axios.create>['interceptors']['request']['use']
+		>[];
+		response?: Parameters<
+			ReturnType<typeof axios.create>['interceptors']['response']['use']
+		>[];
+	};
+}
 
 /**
  * Generates an Axios instance with custom configuration
@@ -8,7 +19,11 @@ import axios from 'axios';
  * @param options.rest - Additional Axios configuration options
  * @returns Configured Axios instance
  */
-export const generateInstance = ({ interceptors, baseURL, ...rest } = {}) => {
+export const generateInstance = ({
+	interceptors,
+	baseURL,
+	...rest
+}: GenerateInstanceOptions = {}) => {
 	const instance = axios.create({
 		baseURL,
 		headers: {

@@ -17,7 +17,7 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const getFilesList = async (params: SearchFilesByCallParams) => {
+const getFilesList = async (params: { search?: string }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchFilesQueryParams,
 	);
@@ -33,7 +33,6 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 		uploaded_at_to: uploadedAtTo,
 		uploadedBy,
 		referenceId,
-		type,
 		retentionUntilFrom,
 		retentionUntilTo,
 	} = applyTransform(params, [
@@ -50,11 +49,10 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 			sort,
 			fields,
 			id,
-			'uploaded_at.from': uploadedAtFrom,
-			'uploaded_at.to': uploadedAtTo,
+			uploadedAtFrom,
+			uploadedAtTo,
 			uploadedBy,
 			referenceId,
-			type,
 			retentionUntilFrom,
 			retentionUntilTo,
 		});
@@ -87,7 +85,10 @@ const deleteFiles = async (id) => {
 	}
 };
 
-const getScreenRecordingsByUser = async (params: unknown) => {
+const getScreenRecordingsByUser = async (params: {
+	userId: string;
+	search?: string;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsQueryParams,
 	);
@@ -125,8 +126,8 @@ const getScreenRecordingsByUser = async (params: unknown) => {
 					...fields,
 				],
 				id,
-				'uploaded_at.from': uploadedAtFrom,
-				'uploaded_at.to': uploadedAtTo,
+				uploadedAtFrom,
+				uploadedAtTo,
 				referenceId,
 				retentionUntilFrom,
 				retentionUntilTo,
@@ -165,7 +166,10 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 	}
 };
 
-const getScreenRecordingsByAgent = async (params: unknown) => {
+const getScreenRecordingsByAgent = async (params: {
+	agentId: string;
+	search?: string;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsByAgentQueryParams,
 	);
@@ -205,8 +209,8 @@ const getScreenRecordingsByAgent = async (params: unknown) => {
 					...fields,
 				],
 				id,
-				'uploaded_at.from': uploadedAtFrom,
-				'uploaded_at.to': uploadedAtTo,
+				uploadedAtFrom,
+				uploadedAtTo,
 				referenceId,
 				retentionUntilFrom,
 				retentionUntilTo,

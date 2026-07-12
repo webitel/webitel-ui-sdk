@@ -1,8 +1,8 @@
+import { getAgentAbsenceService } from '@webitel/api-services/gen';
 import type {
 	AgentAbsenceServiceCreateAgentAbsenceBody,
 	AgentAbsenceServiceSearchAgentsAbsencesParams,
-} from '@webitel/api-services/gen';
-import { getAgentAbsenceService } from '@webitel/api-services/gen';
+} from '@webitel/api-services/gen/models';
 
 import { getDefaultGetParams } from '../../defaults';
 import {

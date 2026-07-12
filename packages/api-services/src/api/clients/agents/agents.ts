@@ -207,9 +207,13 @@ const getAgentHistory = async (params) => {
 		const response = await getAgentService().searchAgentStateHistory({
 			page,
 			size,
-			from,
-			to,
-			parentId,
+			joinedAtFrom: from,
+			joinedAtTo: to,
+			agentId: parentId
+				? [
+						parentId,
+					]
+				: undefined,
 			sort,
 		});
 		const { items, next } = applyTransform(response.data, [
@@ -228,7 +232,7 @@ const getAgentHistory = async (params) => {
 };
 
 const getAgentUsersOptions = async (params) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const { page, size, search } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
 	]);
