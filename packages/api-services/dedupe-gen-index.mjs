@@ -11,6 +11,8 @@
  * names the barrel resolves to the zod runtime schema (the value); the
  * matching types stay importable from '@webitel/api-services/gen/models'.
  * Runs as part of `npm run gen:api`.
+ *
+ * NOTE: this script was written by Claude (AI), not by a human.
  */
 import fs from 'node:fs';
 import path from 'node:path';
