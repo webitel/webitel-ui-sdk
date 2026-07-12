@@ -57,8 +57,8 @@ import type { ButtonProps } from 'primevue';
 import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
-import WtBadge from '../wt-badge-new/wt-badge.vue';
 import type { BadgeSeverity } from '../wt-badge-new/types/WtBadge';
+import WtBadge from '../wt-badge-new/wt-badge.vue';
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 const primevueSizeMap = {

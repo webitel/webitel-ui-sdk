@@ -25,6 +25,7 @@
  */
 import { WtPopover } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
+
 interface Props {
 	disabled?: boolean;
 	disableClickAway?: boolean;

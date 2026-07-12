@@ -1,7 +1,7 @@
 import type { Validation } from '@vuelidate/core';
 import {
-	computed,
 	type ComputedRef,
+	computed,
 	isReactive,
 	isRef,
 	type Ref,
