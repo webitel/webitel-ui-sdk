@@ -202,6 +202,13 @@ export const useChatScroll = ({
 		},
 	);
 
+	watch(
+		() => arrivedState.bottom,
+		(bottom) => {
+			if (bottom) newUnseenMessagesCount.value = 0;
+		},
+	);
+
 	onUnmounted(() => {
 		stopStickToBottomObserving();
 	});
