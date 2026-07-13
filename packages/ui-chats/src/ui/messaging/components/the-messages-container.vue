@@ -25,7 +25,7 @@
           :agent-name="props.agentName"
           :show-avatar="showAvatar(index)"
           :without-avatars="props.withoutAvatars"
-          :username="props.contact?.commonName"
+          :username="props.contact?.name?.commonName"
           @[MessageAction.ClickOnImage]="clickOnImage(message)"
         >
           <template #before-message>
