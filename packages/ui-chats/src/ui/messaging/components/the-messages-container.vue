@@ -51,7 +51,7 @@
 >
 import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import type { Emitter } from 'mitt';
-import { computed, defineProps, inject, nextTick, onMounted, useTemplateRef } from 'vue';
+import { computed, inject, useTemplateRef } from 'vue';
 import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 import type { UiChatsEmitterEvents } from '../../utils/emitter';
 import { useChatScroll } from '../composables/useChatScroll';
