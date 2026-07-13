@@ -14,7 +14,7 @@ import type {
 	KnowledgebaseAttachmentList,
 } from '../_models';
 
-export const getListArticlesResponseMock = (
+export const getListArticlesArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
@@ -212,7 +212,7 @@ export const getListArticlesResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateArticleResponseMock = (
+export const getCreateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
@@ -942,7 +942,7 @@ export const getLocateArticleVersionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteArticleResponseMock = (
+export const getDeleteArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticle, object>> = {},
 ): KnowledgebaseArticle => ({
 	tags: faker.helpers.arrayElement([
@@ -1119,7 +1119,7 @@ export const getDeleteArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateArticleResponseMock = (
+export const getLocateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticle, object>> = {},
 ): KnowledgebaseArticle => ({
 	tags: faker.helpers.arrayElement([
@@ -1296,7 +1296,7 @@ export const getLocateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateArticleResponseMock = (
+export const getUpdateArticleArticlesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseArticleList, object>> = {},
 ): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([

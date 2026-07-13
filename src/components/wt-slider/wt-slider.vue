@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import type { SliderProps } from 'primevue/slider';
-import { computed, defineModel } from 'vue';
+import { computed } from 'vue';
 
 /**
  * @emits {number} update:modelValue - Fires when slider value changes. Emits selected value

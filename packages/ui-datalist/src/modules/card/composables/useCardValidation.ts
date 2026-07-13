@@ -1,7 +1,7 @@
 import type { RegleSchema } from '@regle/schemas';
 import { computed, type Ref } from 'vue';
 
-export const useCardValidation = <TState, TSchema>({
+export const useCardValidation = <TState, TSchema = {}>({
 	validationSchema,
 }: {
 	validationSchema: Ref<RegleSchema<TState, TSchema>>;

@@ -93,8 +93,10 @@ export const useChatScroll = (
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
 		if (!element.value?.children) return;
+		const topMessageEl =
+			element.value?.getElementsByClassName('chat-message')[0];
 		lastVisibleMessageEl.value =
-			element.value?.getElementsByClassName('chat-message')[0] ?? null;
+			topMessageEl instanceof HTMLElement ? topMessageEl : null;
 	};
 
 	const loadNextMessages = (

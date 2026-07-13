@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.6.90",
+	"version": "26.6.96",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -22,7 +22,8 @@
 		"utils:i": "npm install",
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
-		"typecheck:ci": "true"
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.json",
+		"typecheck:ci": "npm run typecheck"
 	},
 	"workspaces": [
 		"./packages/api-services",

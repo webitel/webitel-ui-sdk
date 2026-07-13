@@ -5,11 +5,11 @@ import { useI18n } from 'vue-i18n';
 export function useQueueTypeOptions() {
 	const { t } = useI18n();
 
-	const mapQueueTypeToLabel = (value: string) =>
+	const mapQueueTypeToLabel = (value: string | number) =>
 		t(`objects.queue.type.${value}`);
 
 	const options = computed(() =>
-		Object.entries(QueueType).map(([key, value]) => ({
+		Object.entries(QueueType).map(([, value]) => ({
 			value,
 			label: mapQueueTypeToLabel(value),
 		})),

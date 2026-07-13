@@ -9,7 +9,6 @@ import type { ContactsInputContactGroup } from './contactsInputContactGroup';
 import type { ContactsInputEmailAddress } from './contactsInputEmailAddress';
 import type { ContactsInputIMClient } from './contactsInputIMClient';
 import type { ContactsInputLabel } from './contactsInputLabel';
-import type { ContactsInputLanguage } from './contactsInputLanguage';
 import type { ContactsInputManager } from './contactsInputManager';
 import type { ContactsInputName } from './contactsInputName';
 import type { ContactsInputPhoneNumber } from './contactsInputPhoneNumber';
@@ -38,8 +37,6 @@ export interface ContactsInputContact {
 	imclients?: ContactsInputIMClient[];
 	/** The Contact's associated label(s). */
 	labels?: ContactsInputLabel[];
-	/** A Contact's locale preference(s). */
-	languages?: ContactsInputLanguage[];
 	/** The Contact's internal manager(s). */
 	managers?: ContactsInputManager[];
 	name?: ContactsInputName;

@@ -204,14 +204,26 @@ const getAgentHistory = async (params) => {
 	]);
 
 	try {
-		const response = await getAgentService().searchAgentStateHistory({
-			page,
-			size,
-			from,
-			to,
-			parentId,
-			sort,
-		});
+		const response = await getAgentService().searchAgentStateHistory(
+			{
+				page,
+				size,
+				agentId: parentId
+					? [
+							parentId,
+						]
+					: undefined,
+				sort,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'joined_at.from': from,
+					'joined_at.to': to,
+				},
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -228,7 +240,7 @@ const getAgentHistory = async (params) => {
 };
 
 const getAgentUsersOptions = async (params) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const { page, size, search } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
 	]);

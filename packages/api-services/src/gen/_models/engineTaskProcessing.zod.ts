@@ -8,6 +8,7 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { EngineTaskProcessingProlongationOptions } from './engineTaskProcessingProlongationOptions.zod';
 
 export interface EngineTaskProcessing {
+	autosave?: boolean;
 	enabled?: boolean;
 	formSchema?: EngineLookup;
 	prolongationOptions?: EngineTaskProcessingProlongationOptions;

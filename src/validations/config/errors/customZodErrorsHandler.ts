@@ -4,7 +4,7 @@ import type { z } from 'zod/v4';
 import { isEmpty } from '../../../scripts';
 
 export const customZodErrorsHandler =
-	(t: I18nComposerTranslation) => (issue: z.core.$ZodIssue) => {
+	(t: I18nComposerTranslation) => (issue: z.core.$ZodRawIssue) => {
 		switch (issue.code) {
 			case 'too_small':
 				return handleTooSmall(issue);
@@ -17,7 +17,9 @@ export const customZodErrorsHandler =
 				return issue.code;
 		}
 
-		function handleTooSmall(issue: z.core.$ZodIssueTooSmall) {
+		function handleTooSmall(
+			issue: z.core.$ZodRawIssue<z.core.$ZodIssueTooSmall>,
+		) {
 			const showRequiredMsg = () => {
 				return t('validation.required');
 			};
@@ -40,7 +42,7 @@ export const customZodErrorsHandler =
 			});
 		}
 
-		function handleTooBig(issue: z.core.$ZodIssueTooBig) {
+		function handleTooBig(issue: z.core.$ZodRawIssue<z.core.$ZodIssueTooBig>) {
 			// if string, show "length" error
 			if (issue.origin === 'string') {
 				return t('validation.maxLength', {
@@ -55,7 +57,9 @@ export const customZodErrorsHandler =
 		}
 
 		function handleInvalid(
-			issue: z.core.$ZodIssueInvalidType | z.core.$ZodIssueInvalidValue,
+			issue:
+				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidType>
+				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidValue>,
 		) {
 			if (isEmpty(issue.input)) {
 				return t('validation.required');

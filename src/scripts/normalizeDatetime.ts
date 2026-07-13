@@ -24,8 +24,10 @@ export type NormalizeDatetimeOptions = {
 	round?: RelativeDatetimeRoundOption;
 };
 
-export const isRelativeDatetimeValue = (value: string): boolean => {
-	return Object.values(RelativeDatetimeValue).includes(value);
+export const isRelativeDatetimeValue = (
+	value: string,
+): value is RelativeDatetimeValue => {
+	return (Object.values(RelativeDatetimeValue) as string[]).includes(value);
 };
 
 const convertRelativeDatetimeToTimestamp = (

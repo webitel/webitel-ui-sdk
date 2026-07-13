@@ -5,16 +5,13 @@ export const useSelectCustomValues = ({
 	selected,
 	filteredOptions,
 	options,
-	optionValue,
 	dataKey,
 	filterText,
 	filterOptions,
 	updateSelectedOptionsCache,
 	selectRef,
 	allowCustomValues,
-	manualCustomValues,
 	isSingle,
-	emit,
 }) => {
 	const makeCustomOption = (text: string) => {
 		const sample = options.value.length

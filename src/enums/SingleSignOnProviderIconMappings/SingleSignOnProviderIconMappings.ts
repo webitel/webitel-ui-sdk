@@ -6,7 +6,7 @@ export const SingleSignOnProviderIconMappings: Record<
 > = {
 	[SingleSignOnProvider.Microsoft]: 'microsoft',
 	[SingleSignOnProvider.Google]: 'google',
-	[SingleSignOnProvider.Facebook]: 'messenger',
+	[SingleSignOnProvider.Facebook]: 'messenger-facebook',
 	[SingleSignOnProvider.Custom]: 'custom-provider',
 };
 

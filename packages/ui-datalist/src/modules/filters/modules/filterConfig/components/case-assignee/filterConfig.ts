@@ -1,6 +1,10 @@
 import { contacts as ContactsAPI } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import {
+	type FilterConfigSearchFilterContext,
+	type FilterConfigSearchRequestParams,
+	WtSysTypeFilterConfig,
+} from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import CaseAssigneeFilterValueField from './case-assignee-filter-value-field.vue';
 import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview.vue';
@@ -11,16 +15,16 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 	valuePreviewComponent = CaseAssigneeFilterValuePreview;
 
 	searchRecords(
-		params: object,
-		{ filterValue } = {},
+		params: FilterConfigSearchRequestParams,
+		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (filterValue?.unassigned && !filterValue.list.length)
-			return {
+			return Promise.resolve({
 				items: [],
-			};
+			});
 		const id =
 			params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
 			params.id /* wt-select options loadings */ ||

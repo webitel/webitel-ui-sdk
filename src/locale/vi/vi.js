@@ -204,6 +204,7 @@ export default {
 			draftPlaceholder: 'Viết tin nhắn...',
 		},
 		queue: {
+			progressiveCount: 'Số cuộc gọi tiến trình',
 			queue: 'Hàng chờ | Hàng chờ',
 			queueType: 'Loại hàng đợi | Các loại hàng đợi',
 			type: {
@@ -475,6 +476,8 @@ export default {
 			'Mã phải chỉ chứa chữ cái (A-Z, a-z) và số (0-9), và phải bắt đầu bằng chữ cái',
 		integer: 'Trường này chỉ được chứa số nguyên',
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
+		phoneNumberSymbolsValidator:
+			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {

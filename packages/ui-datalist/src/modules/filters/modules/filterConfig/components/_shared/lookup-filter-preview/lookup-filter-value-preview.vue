@@ -1,7 +1,7 @@
 <template>
   <ul v-if="value">
     <li
-      v-for="({ name, id }, index) of value"
+      v-for="({ name, id }, index) of items"
       :key="id || index"
     >
       {{ name }}
@@ -10,12 +10,20 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-	/**
-	 * would be great to use a type for this
-	 * */
-	value: Record<string, unknown>[];
+import { computed } from 'vue';
+
+const props = defineProps<{
+	value: unknown;
 }>();
+
+const items = computed<
+	Array<{
+		id?: PropertyKey;
+		name?: unknown;
+	}>
+>(() => {
+	return Array.isArray(props.value) ? props.value : [];
+});
 </script>
 
 <style scoped></style>

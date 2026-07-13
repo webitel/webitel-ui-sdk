@@ -60,7 +60,6 @@ export const useCardComponent = <CardEntity>({
 	});
 
 	const { save } = useCardSaveAction<CardEntity>({
-		// @ts-expect-error
 		validate, // fixme: type
 		saveItem,
 	});

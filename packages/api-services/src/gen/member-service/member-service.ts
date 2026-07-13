@@ -6,10 +6,11 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	DeleteMemberParams,
+	EngineAssignAttemptResponse,
 	EngineAttemptRenewalResultResponse,
 	EngineAttemptResultResponse,
 	EngineCreateAttemptResponse,
@@ -20,6 +21,7 @@ import type {
 	EngineListMemberAttempt,
 	EngineMemberBulkResponse,
 	EngineMemberInQueue,
+	EngineMemberServiceAssignAttemptBody,
 	EngineMemberServiceAttemptCallbackBody,
 	EngineMemberServiceAttemptResultBody,
 	EngineMemberServiceAttemptsRenewalResultBody,
@@ -126,6 +128,17 @@ export const // --- title start
 						...options?.params,
 					},
 				});
+			};
+			const assignAttempt = (
+				attemptId: string,
+				engineMemberServiceAssignAttemptBody: EngineMemberServiceAssignAttemptBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EngineAssignAttemptResponse>> => {
+				return axiosInstance.patch(
+					`/call_center/queues/attempts/${attemptId}/assign`,
+					engineMemberServiceAssignAttemptBody,
+					options,
+				);
 			};
 			const attemptsRenewalResult = (
 				attemptId: string,
@@ -348,6 +361,7 @@ export const // --- title start
 				searchAttempts,
 				resetActiveAttempts,
 				searchAttemptsHistory,
+				assignAttempt,
 				attemptsRenewalResult,
 				deleteAllMembers,
 				deleteMembers,
@@ -372,6 +386,7 @@ export type ResetActiveAttemptsResult =
 	AxiosResponse<EngineResetActiveAttemptsResponse>;
 export type SearchAttemptsHistoryResult =
 	AxiosResponse<EngineListHistoryAttempt>;
+export type AssignAttemptResult = AxiosResponse<EngineAssignAttemptResponse>;
 export type AttemptsRenewalResultResult =
 	AxiosResponse<EngineAttemptRenewalResultResponse>;
 export type DeleteAllMembersResult = AxiosResponse<EngineListMember>;

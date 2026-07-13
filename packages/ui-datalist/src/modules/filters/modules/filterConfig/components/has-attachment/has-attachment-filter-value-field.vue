@@ -13,7 +13,7 @@ import { computed, watch } from 'vue';
 
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
-const model = defineModel<string>();
+const model = defineModel<boolean | null>();
 
 const v$ = useVuelidate(
 	computed(() => ({

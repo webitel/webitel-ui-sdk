@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { Validation } from '@vuelidate/core';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = string;
@@ -16,7 +15,7 @@ type ModelValue = string;
 const model = defineModel<ModelValue>();
 
 type Props = {
-	v: Validation;
+	v: Record<string, unknown>;
 };
 
 const props = defineProps<Props>();

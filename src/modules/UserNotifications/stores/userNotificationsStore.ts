@@ -59,6 +59,7 @@ export const createUserNotificationsStore = () => {
 		const mapNotifications = (array: ApiUserWarning[]) => {
 			return array
 				.map((warning) => {
+					if (!warning.id) return null;
 					const map = USER_NOTIFICATION_CONFIGS_MAP.get(warning.id);
 					if (!map) return null;
 					return map(warning);

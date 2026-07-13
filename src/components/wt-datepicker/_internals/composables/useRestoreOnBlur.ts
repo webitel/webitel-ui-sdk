@@ -1,4 +1,4 @@
-import { nextTick, type WritableComputedRef, watch } from 'vue';
+import { nextTick } from 'vue';
 
 /**
  * @author @HlukhovYe

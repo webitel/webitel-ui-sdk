@@ -1,5 +1,5 @@
 export interface ChatMessageType {
-	id: number;
+	id: number | string;
 	date?: number;
 	file?: ChatMessageFile;
 	member: ChatMember;
@@ -24,7 +24,7 @@ export type ChatMessageFile = {
 	streamUrl?: string;
 };
 export type ChatMember = {
-	id: number;
+	id: number | string;
 	name: string;
 	type: string;
 	userId?: number;

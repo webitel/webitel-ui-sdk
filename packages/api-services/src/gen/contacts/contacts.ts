@@ -6,7 +6,7 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ContactsContactList,
@@ -84,7 +84,6 @@ export const // --- title start
 			 * | `managers`  | list[manager!]
 			 * | `comments`  | list[comment!]
 			 * | `addresses` | list[address!]
-			 * | `languages` | list[language!]
 			 * | `timezones` | list[timezone!]
 			 * | `variables` | list[variable!]
 			 * | `imclients` | list[imClient!]

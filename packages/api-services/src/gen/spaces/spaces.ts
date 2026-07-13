@@ -6,18 +6,18 @@
  */
 import axios from '@aliasedDeps/api-services/axios';
 
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CreateSpaceParams,
-	DeleteSpaceParams,
+	CreateSpaceSpacesParams,
+	DeleteSpaceSpacesParams,
 	KnowledgebaseInputSpace,
 	KnowledgebaseSpace,
 	KnowledgebaseSpaceList,
-	ListSpacesParams,
-	LocateSpaceParams,
-	UpdateSpaceBody,
-	UpdateSpaceParams,
+	ListSpacesSpacesParams,
+	LocateSpaceSpacesParams,
+	UpdateSpaceSpacesBody,
+	UpdateSpaceSpacesParams,
 } from '../_models';
 
 // --- header start
@@ -46,8 +46,8 @@ export const // --- title start
 			 * | `state`       | bool
 			 * | `has_children`| bool
 			 */
-			const listSpaces = (
-				params?: ListSpacesParams,
+			const listSpacesSpaces = (
+				params?: ListSpacesSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<KnowledgebaseSpaceList>> => {
 				return axiosInstance.get(`/spaces`, {
@@ -61,9 +61,9 @@ export const // --- title start
 			/**
 			 * @summary Create NEW Space
 			 */
-			const createSpace = (
+			const createSpaceSpaces = (
 				knowledgebaseInputSpace: KnowledgebaseInputSpace[],
-				params?: CreateSpaceParams,
+				params?: CreateSpaceSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<KnowledgebaseSpace>> => {
 				return axiosInstance.post(`/spaces`, knowledgebaseInputSpace, {
@@ -77,9 +77,9 @@ export const // --- title start
 			/**
 			 * @summary Remove Space source
 			 */
-			const deleteSpace = (
+			const deleteSpaceSpaces = (
 				etag: string,
-				params?: DeleteSpaceParams,
+				params?: DeleteSpaceSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<KnowledgebaseSpace>> => {
 				return axiosInstance.delete(`/spaces/${etag}`, {
@@ -93,9 +93,9 @@ export const // --- title start
 			/**
 			 * @summary Locate spaces source
 			 */
-			const locateSpace = (
+			const locateSpaceSpaces = (
 				etag: string,
-				params?: LocateSpaceParams,
+				params?: LocateSpaceSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<KnowledgebaseSpace>> => {
 				return axiosInstance.get(`/spaces/${etag}`, {
@@ -109,13 +109,13 @@ export const // --- title start
 			/**
 			 * @summary NEW Update of the Space source
 			 */
-			const updateSpace = (
+			const updateSpaceSpaces = (
 				etag: string,
-				updateSpaceBody: UpdateSpaceBody,
-				params?: UpdateSpaceParams,
+				updateSpaceSpacesBody: UpdateSpaceSpacesBody,
+				params?: UpdateSpaceSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<KnowledgebaseSpace>> => {
-				return axiosInstance.patch(`/spaces/${etag}`, updateSpaceBody, {
+				return axiosInstance.patch(`/spaces/${etag}`, updateSpaceSpacesBody, {
 					...options,
 					params: {
 						...params,
@@ -126,17 +126,17 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				listSpaces,
-				createSpace,
-				deleteSpace,
-				locateSpace,
-				updateSpace,
+				listSpacesSpaces,
+				createSpaceSpaces,
+				deleteSpaceSpaces,
+				locateSpaceSpaces,
+				updateSpaceSpaces,
 			};
 		};
-export type ListSpacesResult = AxiosResponse<KnowledgebaseSpaceList>;
-export type CreateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
-export type DeleteSpaceResult = AxiosResponse<KnowledgebaseSpace>;
-export type LocateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
-export type UpdateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
+export type ListSpacesSpacesResult = AxiosResponse<KnowledgebaseSpaceList>;
+export type CreateSpaceSpacesResult = AxiosResponse<KnowledgebaseSpace>;
+export type DeleteSpaceSpacesResult = AxiosResponse<KnowledgebaseSpace>;
+export type LocateSpaceSpacesResult = AxiosResponse<KnowledgebaseSpace>;
+export type UpdateSpaceSpacesResult = AxiosResponse<KnowledgebaseSpace>;
 
 // --- footer end

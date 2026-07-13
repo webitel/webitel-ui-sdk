@@ -1,0 +1,9 @@
+export declare const snakeToCamel: (str: any) => any;
+export declare const camelToSnake: (str: any) => any;
+export declare const kebabToCamel: (str: any) => any;
+export declare const camelToKebab: (str: any) => any;
+export declare const kebabToSnake: (str: any) => any;
+export declare const snakeToKebab: (str: any) => any;
+export declare const objSnakeToCamel: (obj: any, skipKeys?: any[]) => any;
+export declare const objCamelToSnake: (obj: any, skipKeys?: any[]) => any;
+export declare const objCamelToKebab: (obj: any, skipKeys?: any[]) => any;

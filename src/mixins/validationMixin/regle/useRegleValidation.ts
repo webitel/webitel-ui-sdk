@@ -2,23 +2,23 @@ import type { RegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field: Ref<RegleFieldStatus<string>>;
+	field?: Ref<RegleFieldStatus<string>>;
 };
 
 export type UseFieldValidationReturn = {
 	invalid: ComputedRef<boolean | null>; // null if is not validated
-	validationText?: ComputedRef<string>;
+	validationText?: ComputedRef<string | undefined>;
 };
 
 export const useFieldValidation = ({
 	field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
 	const invalid = computed(() => {
-		return fieldRef.value.$error;
+		return fieldRef?.value.$error ?? null;
 	});
 
 	const validationText = computed(() => {
-		return fieldRef.value?.$errors?.at(0);
+		return fieldRef?.value?.$errors?.at(0);
 	});
 
 	return {

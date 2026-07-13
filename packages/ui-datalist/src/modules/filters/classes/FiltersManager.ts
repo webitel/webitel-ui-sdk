@@ -34,12 +34,15 @@ export interface IFiltersManager {
 		value?: FilterValue;
 		label?: FilterLabel;
 	}) => IFilter;
-	deleteFilter: (name: FilterName) => IFilter;
+	deleteFilter: ({ name }: { name: FilterName }) => IFilter;
 
 	/**
 	 * Converts filters data to String, that can be stored
 	 */
-	toString: () => string;
+	toString: (options?: {
+		include?: FilterName[];
+		exclude?: FilterName[];
+	}) => string;
 
 	/**
 	 * Restores filters from string

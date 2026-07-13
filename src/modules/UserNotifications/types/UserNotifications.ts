@@ -1,5 +1,6 @@
 interface UserNotificationsConfigsParams {
-	amount?: number;
+	/** generated API types serialize int64 counters as strings */
+	amount?: number | string;
 	name?: string;
 }
 

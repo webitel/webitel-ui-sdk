@@ -1,0 +1,53 @@
+name: Webitel UI typecheck
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  workflow_dispatch:
+
+concurrency:
+  group: typecheck-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            code:
+              - "src/**"
+              - "docs/pages/**"
+              - "packages/**"
+              - "package.json"
+              - "package-lock.json"
+              - "tsconfig*.json"
+              - "env.d.ts"
+              - ".github/workflows/**"
+
+  typecheck:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      # ui-datalist and ui-chats are not npm workspaces — they carry their own
+      # lockfiles, and the repo-wide typecheck needs their dependencies too
+      - run: npm ci
+        working-directory: packages/ui-datalist
+      - run: npm ci
+        working-directory: packages/ui-chats
+      - run: npm ci
+      - run: npm run typecheck:ci

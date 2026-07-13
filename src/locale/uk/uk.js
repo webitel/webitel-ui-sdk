@@ -199,6 +199,7 @@ export default {
 			draftPlaceholder: 'Напишіть повідомлення...',
 		},
 		queue: {
+			progressiveCount: 'Кількість одночасних дзвінків',
 			queue: 'Черга | Черги',
 			queueType: 'Тип черги | Типи черг',
 			type: {
@@ -470,6 +471,8 @@ export default {
 			'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
 		integer: 'Поле повинно містити лише цілі числа',
 		nameAlreadyInUse: 'Така назва вже використовується',
+		phoneNumberSymbolsValidator:
+			"Номер може містити лише літери (a-z, A-Z), цифри (0-9) та символи: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {

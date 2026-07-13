@@ -9,7 +9,6 @@ import type { ContactsContactGroupList } from './contactsContactGroupList.zod';
 import type { ContactsEmailList } from './contactsEmailList.zod';
 import type { ContactsIMClientList } from './contactsIMClientList.zod';
 import type { ContactsLabelList } from './contactsLabelList.zod';
-import type { ContactsLanguageList } from './contactsLanguageList.zod';
 import type { ContactsManagerList } from './contactsManagerList.zod';
 import type { ContactsName } from './contactsName.zod';
 import type { ContactsPhoneList } from './contactsPhoneList.zod';
@@ -49,8 +48,6 @@ export interface WebitelContactsContact {
 	imclients?: ContactsIMClientList;
 	/** The Contact's associated tag(s). */
 	labels?: ContactsLabelList;
-	/** A Contact's locale preference(s). */
-	languages?: ContactsLanguageList;
 	/** The Contact's internal manager(s). */
 	managers?: ContactsManagerList;
 	/** [R]ecord[b]ased[A]ccess[C]ontrol mode granted. */

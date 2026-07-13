@@ -31,18 +31,17 @@ const getList = async (params) => {
 		starToSearch('q'),
 	]);
 	try {
-		const response = await getEmails().listEmails(
-			parentId,
+		const response = await getEmails().listEmails(parentId, {
 			page,
 			size,
 			q,
 			sort,
-			[
+			fields: [
 				'etag',
 				...fields,
 			],
 			id,
-		);
+		});
 		const { data, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -68,7 +67,9 @@ const get = async ({ itemId, parentId }) => {
 		'type',
 	];
 	try {
-		const response = await getEmails().locateEmail(parentId, itemId, fields);
+		const response = await getEmails().locateEmail(parentId, itemId, {
+			fields,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -141,7 +142,7 @@ const patch = async ({ parentId, changes, etag }) => {
 	}
 };
 
-const deleteItem = async ({ id, etag, parentId }) => {
+const deleteItem = async ({ etag, parentId }) => {
 	try {
 		const response = await getEmails().deleteEmail(parentId, etag);
 		return applyTransform(response.data, []);

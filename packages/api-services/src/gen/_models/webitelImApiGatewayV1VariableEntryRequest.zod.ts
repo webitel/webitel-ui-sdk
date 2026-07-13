@@ -4,7 +4,6 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1VariableEntryRequestValue } from './webitelImApiGatewayV1VariableEntryRequestValue.zod';
 
 /**
  * VariableEntryRequest represents a variable update operation.
@@ -13,5 +12,5 @@ export interface WebitelImApiGatewayV1VariableEntryRequest {
 	/** Variable key. */
 	key?: string;
 	/** Variable value. */
-	value?: WebitelImApiGatewayV1VariableEntryRequestValue;
+	value?: unknown;
 }

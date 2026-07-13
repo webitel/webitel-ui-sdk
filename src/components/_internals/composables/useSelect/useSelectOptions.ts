@@ -16,7 +16,7 @@ export const useSelectOptions = ({
 	dataKey,
 	allowCustomValues,
 	searchMethod,
-	disabledOptions,
+	strictApiOptions,
 }) => {
 	const { t } = useI18n();
 	const defaultOptionLabel = 'name';
@@ -75,7 +75,12 @@ export const useSelectOptions = ({
 		if (optionLabel.value && option[optionLabel.value])
 			return option[optionLabel.value];
 		if (option.locale) {
-			if (Array.isArray(option.locale)) return t(...option.locale);
+			if (Array.isArray(option.locale))
+				return t(
+					...(option.locale as [
+						string,
+					]),
+				);
 			return t(option.locale);
 		}
 		return option[defaultOptionLabel] || option;
@@ -186,7 +191,7 @@ export const useSelectOptions = ({
 
 	const addSelectedValueToList = (newVal) => {
 		// If the selected value is not in the list, add it
-		if (!newVal || !searchMethod.value) return;
+		if (!newVal || !searchMethod.value || strictApiOptions?.value) return;
 		const selectedAsArray = toArray(newVal);
 		const missingSelected = selectedAsArray.filter(
 			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
@@ -213,7 +218,7 @@ export const useSelectOptions = ({
 
 	watch(
 		() => selected.value,
-		(newVal, oldVal) => {
+		(newVal) => {
 			updateSelectedOptionsCache();
 			addSelectedValueToList(newVal);
 		},
@@ -228,21 +233,6 @@ export const useSelectOptions = ({
 		},
 	);
 
-	const isOptionDisabled = (option: unknown): boolean => {
-		if (!disabledOptions?.value) return false;
-		return Array.isArray(disabledOptions.value)
-			? (disabledOptions.value as unknown[]).some(
-					(d) =>
-						d != null &&
-						typeof d === 'object' &&
-						option != null &&
-						typeof option === 'object' &&
-						(d as Record<string, unknown>)[dataKey.value] ===
-							(option as Record<string, unknown>)[dataKey.value],
-				)
-			: Boolean(disabledOptions.value);
-	};
-
 	return {
 		filterText,
 		filteredOptions,
@@ -255,6 +245,5 @@ export const useSelectOptions = ({
 		resetAndFetch,
 		filterOptionsBase,
 		updateSelectedOptionsCache,
-		isOptionDisabled,
 	};
 };

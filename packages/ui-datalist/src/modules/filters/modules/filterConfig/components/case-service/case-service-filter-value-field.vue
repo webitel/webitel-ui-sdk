@@ -21,7 +21,7 @@ import { searchMethod } from './config.js';
 
 type ModelValue = string[];
 const model = defineModel<ModelValue>({
-	default: [],
+	default: (): ModelValue => [],
 });
 
 const catalogData = ref([]);

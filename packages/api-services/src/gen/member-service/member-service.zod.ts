@@ -516,6 +516,21 @@ export const SearchAttemptsHistoryResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+export const AssignAttemptParams = zod.object({
+	attempt_id: zod.string(),
+});
+
+export const AssignAttemptBody = zod.object({
+	agentId: zod
+		.string()
+		.optional()
+		.describe(
+			"Optional. If omitted (0), the attempt is assigned to the calling user's own agent.",
+		),
+});
+
+export const AssignAttemptResponse = zod.looseObject({});
+
 export const AttemptsRenewalResultParams = zod.object({
 	attempt_id: zod.string(),
 });

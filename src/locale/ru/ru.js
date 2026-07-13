@@ -200,6 +200,7 @@ export default {
 			draftPlaceholder: 'Напишите сообщение...',
 		},
 		queue: {
+			progressiveCount: 'Количество одновременных звонков',
 			queue: 'Очередь | Очереди',
 			queueType: 'Тип очереди | Типы очередей',
 			type: {
@@ -471,6 +472,8 @@ export default {
 			'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9) и начинатся с буквы',
 		integer: 'Поле должно содержать только целые числа',
 		nameAlreadyInUse: 'Это название уже используется',
+		phoneNumberSymbolsValidator:
+			"Номер может содержать только буквы (a-z, A-Z), цифры (0-9) и символы: +, -, _, ., !, ~, *, ', (, )",
 	},
 	webitelUI: {
 		searchBar: {

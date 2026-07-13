@@ -11,14 +11,15 @@ export const useSelect = ({
 	optionValue,
 	dataKey,
 	allowCustomValues,
-	manualCustomValues = false,
+	// accepted for API compatibility; custom-value manual handling is currently disabled
+	manualCustomValues: _manualCustomValues = false,
 	filterInput,
 	selectRef,
 	searchMethod,
 	selectId,
 	isSingle,
-	disabledOptions = undefined,
-	emit = () => {},
+	strictApiOptions = undefined,
+	emit = (_event: string, ..._args: unknown[]) => {},
 }) => {
 	const {
 		filterText,
@@ -32,7 +33,6 @@ export const useSelect = ({
 		resetAndFetch,
 		filterOptionsBase,
 		updateSelectedOptionsCache,
-		isOptionDisabled,
 	} = useSelectOptions({
 		selected,
 		options,
@@ -41,7 +41,7 @@ export const useSelect = ({
 		dataKey,
 		allowCustomValues,
 		searchMethod,
-		disabledOptions,
+		strictApiOptions,
 	});
 
 	const {
@@ -72,16 +72,13 @@ export const useSelect = ({
 		selected,
 		filteredOptions,
 		options,
-		optionValue,
 		dataKey,
 		filterText,
 		filterOptions: filterOptionsAndScrollToTop,
 		updateSelectedOptionsCache,
 		selectRef,
 		allowCustomValues,
-		manualCustomValues,
 		isSingle,
-		emit,
 	});
 
 	onMounted(async () => {
@@ -114,6 +111,5 @@ export const useSelect = ({
 		onDropdownHide,
 		onInputKeydown,
 		clearValue,
-		isOptionDisabled,
 	};
 };

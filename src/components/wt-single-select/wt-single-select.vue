@@ -22,7 +22,7 @@
       :focus-on-hover="false"
       :disabled="disabled"
       :placeholder="placeholder || label"
-      :option-disabled="isOptionDisabled"
+      :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
@@ -118,9 +118,13 @@ interface Props extends SelectProps {
 	disabled?: boolean;
 	size?: string | null;
 	/**
-	 * true disables all options but keeps dropdown visible; an array disables specific options by dataKey
+	 * true disables all options but keeps dropdown visible
 	 */
-	disabledOptions?: boolean | unknown[];
+	disabledOptions?: boolean;
+	/**
+	 * true — the select will only show options returned by the API, never prepending the current model value if it is missing from the list
+	 */
+	strictApiOptions?: boolean;
 	/**
 	 * false disables options search
 	 */
@@ -198,7 +202,6 @@ const {
 	filterOptions,
 	onInputKeydown,
 	clearValue,
-	isOptionDisabled,
 } = useSelect({
 	selected: model,
 	options: computed(() => props.options),
@@ -211,7 +214,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: true,
-	disabledOptions: computed(() => props.disabledOptions),
+	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });
 
@@ -231,7 +234,8 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
 const handleDropdownHide = () => {
