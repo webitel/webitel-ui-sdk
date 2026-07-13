@@ -1,4 +1,3 @@
-import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
@@ -6,10 +5,14 @@ import { computed, nextTick, ref } from 'vue';
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
-import type { useTableStoreConfig } from '../types/tableStore.types';
+import type { Identifiable } from '../types/createDatalistStore.types';
+import type {
+	DatalistTableHeader,
+	useTableStoreConfig,
+} from '../types/tableStore.types';
 
 interface TableHeadersStoreBodyParams {
-	rawHeaders: WtTableHeader[];
+	rawHeaders: DatalistTableHeader[];
 	id: string;
 }
 
@@ -17,7 +20,7 @@ export const tableHeadersStoreBody = ({
 	rawHeaders,
 	id,
 }: TableHeadersStoreBodyParams) => {
-	const headers = ref<WtTableHeader[]>(rawHeaders);
+	const headers = ref<DatalistTableHeader[]>(rawHeaders);
 	const isReorderingColumn = ref(false);
 
 	const shownHeaders = computed(() => {
@@ -104,7 +107,7 @@ export const tableHeadersStoreBody = ({
 		const fieldsSet = new Set(fields);
 		const mainFieldNames = new Set(headers.value.map((header) => header.field));
 
-		const mainHeaders = headers.value.map((header: WtTableHeader) => ({
+		const mainHeaders = headers.value.map((header: DatalistTableHeader) => ({
 			...header,
 			show: fieldsSet.has(header.field),
 		}));
@@ -311,7 +314,7 @@ export const tableHeadersStoreBody = ({
 	};
 };
 
-export const createTableHeadersStore = <Entity>(
+export const createTableHeadersStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 	{ headers: rawHeaders },

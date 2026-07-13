@@ -16,12 +16,14 @@ export const listSourcesQuerySortDefault = `name:desc`;
 export const ListSourcesQueryParams = zod.object({
 	page: zod
 		.number()
+		// @ts-expect-error upstream OpenAPI spec declares a string default ('1') for this numeric field; fix belongs in webitel/protos swagger
 		.default(listSourcesQueryPageDefault)
 		.describe(
 			'Page number of result dataset records. offset = (page * size)\nDefault: 0',
 		),
 	size: zod
 		.number()
+		// @ts-expect-error upstream OpenAPI spec declares a string default ('20') for this numeric field; fix belongs in webitel/protos swagger
 		.default(listSourcesQuerySizeDefault)
 		.describe(
 			'Size count of records on result page. limit = (size++)\nDefault: 25',

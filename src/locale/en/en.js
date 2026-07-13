@@ -207,6 +207,7 @@ export default deepmerge(
 				draftPlaceholder: 'Write a message...',
 			},
 			queue: {
+				progressiveCount: 'Progressive call count',
 				queue: 'Queue | Queues',
 				queueType: 'Queue type | Queue types',
 				type: {

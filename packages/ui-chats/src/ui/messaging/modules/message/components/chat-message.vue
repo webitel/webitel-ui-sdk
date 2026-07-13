@@ -72,8 +72,7 @@
 
   <script setup lang="ts">
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { computed, defineEmits, defineProps, inject } from 'vue';
-
+import { computed, inject } from 'vue';
 import type { ChatMessageType } from '../../../types/ChatMessage.types';
 import { useChatMessageFile } from '../composables/useChatMessageFile';
 import { MessageAction } from '../enums/MessageAction.enum';

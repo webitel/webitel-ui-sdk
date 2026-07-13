@@ -1,3 +1,5 @@
+import type { AxiosError } from 'axios';
+
 import { config as apiServicesConfig } from '../../../config/config';
 
 const notifyTransformer = (notificationObject) => {
@@ -27,10 +29,15 @@ const notifyTransformer = (notificationObject) => {
 		};
 	}
 	if (notificationObject instanceof Error) {
+		const { response } = notificationObject as AxiosError<{
+			translation?: string;
+			detail?: string;
+			message?: string;
+		}>;
 		const errorText =
-			notificationObject.response?.data?.translation ||
-			notificationObject.response?.data?.detail ||
-			notificationObject.response?.data?.message ||
+			response?.data?.translation ||
+			response?.data?.detail ||
+			response?.data?.message ||
 			notificationObject;
 
 		apiServicesConfig.eventBus?.$emit('notification', {

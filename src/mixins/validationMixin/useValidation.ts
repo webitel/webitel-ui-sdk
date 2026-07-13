@@ -10,15 +10,20 @@ import {
 	useFieldValidation as useVuelidateValidation,
 } from './vuelidate/useVuelidateValidation';
 
-type CompatVuelidateParams = {
-	v: UseVuelidateFieldValidationParams['field'];
+type UseValidationParams = {
+	/** vuelidate field validation (compat) */
+	v?: UseVuelidateFieldValidationParams['field'];
+	/** vuelidate custom validations (compat) */
+	customValidators?: UseVuelidateFieldValidationParams['customValidators'];
+	/** regle field validation */
+	regleValidation?: UseRegleFieldValidationParams['field'];
 };
 
 export const useValidation = ({
 	v: vuelidateValidation,
 	customValidators: inputCustomValidators, // vuelidate custom validations, compat
 	regleValidation,
-}: UseRegleFieldValidationParams | CompatVuelidateParams) => {
+}: UseValidationParams) => {
 	const {
 		isValidation: isVuelidateValidation,
 		invalid: vuelidateInvalid,

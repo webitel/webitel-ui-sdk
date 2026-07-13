@@ -2,19 +2,18 @@ import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import { get } from 'lodash';
 import type { WebitelProtoDataField } from 'webitel-sdk';
-
-import { FilterConfig } from '../../classes/FilterConfig';
-import type { CustomFilterOption } from '../../enums/FilterOption';
 import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
 	IWtSysTypeFilterConfig,
-} from '../../types/FilterConfig';
+} from '../../classes/FilterConfig';
+import { FilterConfig } from '../../classes/FilterConfig';
 import TypeExtensionFilterValueField from './type-extension-filter-value-field.vue';
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
 export interface ITypeExtensionFilterConfig extends BaseFilterConfig {
 	readonly field: WebitelProtoDataField;
+	searchRecords?: IWtSysTypeFilterConfig['searchRecords'];
 }
 
 class TypeExtensionFilterConfig
@@ -92,7 +91,7 @@ export type {
 };
 
 export const createTypeExtensionFilterConfig = (
-	name: CustomFilterOption,
+	params: FilterConfigBaseParams,
 	{
 		field,
 	}: {
@@ -101,15 +100,15 @@ export const createTypeExtensionFilterConfig = (
 ) => {
 	switch (field.kind) {
 		case WtTypeExtensionFieldKind.Select:
-			return new TypeExtensionWtSysTypeFieldFilterConfig(name, {
+			return new TypeExtensionWtSysTypeFieldFilterConfig(params, {
 				field,
 			});
 		case WtTypeExtensionFieldKind.Multiselect:
-			return new TypeExtensionWtSysTypeFieldFilterConfig(name, {
+			return new TypeExtensionWtSysTypeFieldFilterConfig(params, {
 				field,
 			});
 		default:
-			return new TypeExtensionFilterConfig(name, {
+			return new TypeExtensionFilterConfig(params, {
 				field,
 			});
 	}

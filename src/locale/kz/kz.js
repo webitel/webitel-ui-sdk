@@ -204,6 +204,7 @@ export default {
 			draftPlaceholder: 'Хабарлама жазыңыз...',
 		},
 		queue: {
+			progressiveCount: 'Прогрессивті қоңырау саны',
 			queue: 'Кезек | Кезектер',
 			queueType: 'Кезек түрі | Кезек түрлері',
 			type: {

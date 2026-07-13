@@ -22,7 +22,7 @@ import downloadFile from './downloadFile/downloadFile';
 import eventBus from './eventBus.js';
 import { getConnectionQuality } from './getConnectionQuality.ts';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate.js';
-import isEmpty from './isEmpty.js';
+import isEmpty from './isEmpty';
 import { wtlog } from './logger.js';
 import {
 	isRelativeDatetimeValue,

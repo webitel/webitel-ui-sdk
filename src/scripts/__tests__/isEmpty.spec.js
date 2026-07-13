@@ -1,4 +1,4 @@
-import isEmpty from '../isEmpty.js';
+import isEmpty from '../isEmpty';
 
 describe('isEmpty', () => {
 	it('falsy cases (not empty)', () => {

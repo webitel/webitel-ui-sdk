@@ -9,7 +9,7 @@ import type { useTableStoreConfig } from './tableStore.types';
 export type Patch = Record<string, unknown> | Ref<unknown>;
 
 export type Identifiable = {
-	id: string;
+	id?: string | number;
 	etag?: string;
 };
 

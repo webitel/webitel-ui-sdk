@@ -1,6 +1,6 @@
 import mitt from 'mitt';
 
-import type { ChatMessageType } from '../../../types/ui';
+import type { ChatMessageType } from '../messaging/types/ChatMessage.types';
 
 export type UiChatsEmitterEvents = {
 	insertAtCursor: {

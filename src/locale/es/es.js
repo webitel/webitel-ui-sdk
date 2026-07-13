@@ -199,6 +199,7 @@ export default {
 			draftPlaceholder: 'Escribe un mensaje...',
 		},
 		queue: {
+			progressiveCount: 'Contador de llamadas progresivas',
 			queue: 'Cola | Colas',
 			queueType: 'Tipo de cola | Tipos de colas',
 			type: {

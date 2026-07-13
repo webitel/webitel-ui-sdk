@@ -11,7 +11,7 @@ import {
 
 export const createFilterConfig = (
 	params: FilterConfigBaseParams &
-		Required<BaseFilterConfig, 'name'> &
+		Required<Pick<BaseFilterConfig, 'name'>> &
 		Record<string, unknown>,
 ): BaseFilterConfig => {
 	const { name } = params;

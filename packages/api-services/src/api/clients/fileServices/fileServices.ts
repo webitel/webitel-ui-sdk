@@ -17,7 +17,7 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const getFilesList = async (params: SearchFilesByCallParams) => {
+const getFilesList = async (params: { search?: string }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchFilesQueryParams,
 	);
@@ -33,7 +33,6 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 		uploaded_at_to: uploadedAtTo,
 		uploadedBy,
 		referenceId,
-		type,
 		retentionUntilFrom,
 		retentionUntilTo,
 	} = applyTransform(params, [
@@ -43,21 +42,28 @@ const getFilesList = async (params: SearchFilesByCallParams) => {
 	]);
 
 	try {
-		const response = await getFileService().searchFiles({
-			page,
-			size,
-			q: q || params.search,
-			sort,
-			fields,
-			id,
-			'uploaded_at.from': uploadedAtFrom,
-			'uploaded_at.to': uploadedAtTo,
-			uploadedBy,
-			referenceId,
-			type,
-			retentionUntilFrom,
-			retentionUntilTo,
-		});
+		const response = await getFileService().searchFiles(
+			{
+				page,
+				size,
+				q: q || params.search,
+				sort,
+				fields,
+				id,
+				uploadedBy,
+				referenceId,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -87,7 +93,10 @@ const deleteFiles = async (id) => {
 	}
 };
 
-const getScreenRecordingsByUser = async (params: unknown) => {
+const getScreenRecordingsByUser = async (params: {
+	userId: string;
+	search?: string;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsQueryParams,
 	);
@@ -125,13 +134,19 @@ const getScreenRecordingsByUser = async (params: unknown) => {
 					...fields,
 				],
 				id,
-				'uploaded_at.from': uploadedAtFrom,
-				'uploaded_at.to': uploadedAtTo,
 				referenceId,
-				retentionUntilFrom,
-				retentionUntilTo,
 				type,
 				channel,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -165,7 +180,10 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 	}
 };
 
-const getScreenRecordingsByAgent = async (params: unknown) => {
+const getScreenRecordingsByAgent = async (params: {
+	agentId: string;
+	search?: string;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsByAgentQueryParams,
 	);
@@ -205,13 +223,19 @@ const getScreenRecordingsByAgent = async (params: unknown) => {
 					...fields,
 				],
 				id,
-				'uploaded_at.from': uploadedAtFrom,
-				'uploaded_at.to': uploadedAtTo,
 				referenceId,
-				retentionUntilFrom,
-				retentionUntilTo,
 				type,
 				channel,
+			},
+			{
+				params: {
+					/* grpc-gateway matches nested range filters only by their
+					   dotted wire names, which the generated params type flattens */
+					'uploaded_at.from': uploadedAtFrom,
+					'uploaded_at.to': uploadedAtTo,
+					'retention_until.from': retentionUntilFrom,
+					'retention_until.to': retentionUntilTo,
+				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [

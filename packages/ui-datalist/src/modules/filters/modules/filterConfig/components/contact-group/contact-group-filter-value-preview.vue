@@ -5,20 +5,24 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WebitelContactsContact } from 'webitel-sdk';
 
 import { IFilter } from '../../../../classes/Filter';
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
-	value: WebitelContactsContact[];
+	value: Array<{
+		id?: string | number;
+		name?: string;
+	}>;
 	filter: IFilter;
 }>();
 
 const { t } = useI18n();
 
 const rawValue = computed(() => {
-	return props.filter.value;
+	return props.filter.value as {
+		unassigned?: boolean;
+	};
 });
 
 const shownValue = computed(() => {

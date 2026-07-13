@@ -4,5 +4,6 @@ export * from './useCard/useCardComponent';
 export * from './useCard/useCardTabs';
 export * from './useClose/useClose';
 export * from './useDestroyableSortable/useDestroyableSortable';
+export * from './useEventBus/useEventBus';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
 export * from './useValidate/useValidate';

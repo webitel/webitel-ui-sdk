@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="!disableValidation && v$?.model?.list"
+    :v="!disableValidation && vList"
     :model-value="model?.list"
     data-key="id"
     option-value="id"
@@ -13,7 +13,7 @@
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="!disableValidation && v$?.model?.unassigned"
+    :v="!disableValidation && vUnassigned"
     @update:selected="model.unassigned = $event"
   />
 </template>
@@ -34,8 +34,8 @@ const props = defineProps<{
 }>();
 
 type ModelValue = {
-	list: string[];
-	unassigned: boolean;
+	list?: string[];
+	unassigned?: boolean | null;
 };
 
 const model = defineModel<ModelValue>();
@@ -61,7 +61,9 @@ const changeListValue = (event) => {
 		list: event,
 	};
 };
-const v$ = useVuelidate(
+const v$ = useVuelidate<{
+	model: ModelValue;
+}>(
 	computed(() => ({
 		model: {
 			list: {
@@ -69,7 +71,7 @@ const v$ = useVuelidate(
 			},
 			unassigned: {
 				required: requiredIf(
-					() => props.filterConfig?.hideUnassigned && !model.value.list.length,
+					() => props.filterConfig?.hideUnassigned && !model.value.list?.length,
 				),
 			},
 		},
@@ -81,6 +83,17 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
+
+const vList = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.list;
+});
+const vUnassigned = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.unassigned;
+});
 
 const initModel = () => {
 	if (!model.value) {

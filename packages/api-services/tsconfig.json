@@ -1,11 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "@aliasedDeps/api-services/axios": ["./node_modules/axios"]
-    }
-  },
-  "include": [
-    "src/**/*.ts"
-  ]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"paths": {
+			"@aliasedDeps/api-services/axios": [
+				"./node_modules/axios",
+				"../../node_modules/axios"
+			]
+		}
+	},
+	"include": [
+		"src/**/*.ts"
+	]
 }
