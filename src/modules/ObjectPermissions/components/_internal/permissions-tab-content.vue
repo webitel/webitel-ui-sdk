@@ -144,10 +144,10 @@ const props = defineProps({
 	access: {
 		type: Object,
 		default: () => ({
-			read: true,
-			add: true,
-			edit: true,
-			delete: true,
+			read: false,
+			add: false,
+			edit: false,
+			delete: false,
 		}),
 	},
 });

@@ -59,66 +59,61 @@ export const permissionsStoreBody = (
 	} = tableStore;
 
 	/*
-	 * tableStoreBody keeps its own parentId internally (used for loadDataList),
-	 * it isn't exposed on the returned object — permissions patches need it too,
-	 * so it's tracked here as well and kept in sync via `initialize`.
+	 * `tableStoreBody` keeps its own `parentId` internally (for `loadDataList`),
+	 * but does not expose it in the `tableStore` API. Permissions patches need
+	 * the same `parentId`, so this store keeps a local copy and syncs it in
+	 * `initialize`.
 	 */
 	const parentId = ref<Id>();
 
-	const initialize: typeof tableStoreInitialize = (options = {}) => {
-		if (options.parentId) {
-			parentId.value = options.parentId;
-		}
+	const initialize: typeof tableStoreInitialize = (options) => {
+		parentId.value = options.parentId;
 		return tableStoreInitialize(options);
+	};
+
+	const patchPermissions = async (
+		changes: {
+			grantee: number;
+			grants: string;
+		}[],
+	) => {
+		try {
+			await config.apiModule.patch({
+				id: parentId.value,
+				changes,
+			});
+		} finally {
+			await loadDataList();
+		}
 	};
 
 	const changeAccessMode = async (payload: ChangeAccessModePayload) => {
 		const grants = resolveGrants(payload);
-		if (grants === null) return;
+		if (!grants) return;
 
-		try {
-			await config.apiModule.patch({
-				id: parentId.value,
-				changes: [
-					{
-						grantee: +payload.item.grantee.id,
-						grants,
-					},
-				],
-			} as never);
-		} finally {
-			await loadDataList();
-		}
+		return patchPermissions([
+			{
+				grantee: +payload.item.grantee.id,
+				grants,
+			},
+		]);
 	};
 
 	const addRolePermissions = async (role: { id: Id }) => {
-		try {
-			await config.apiModule.patch({
-				id: parentId.value,
-				changes: [
-					{
-						grantee: +role.id,
-						grants: AccessRuleName.R,
-					},
-				],
-			} as never);
-		} finally {
-			await loadDataList();
-		}
+		return patchPermissions([
+			{
+				grantee: +role.id,
+				grants: AccessRuleName.R,
+			},
+		]);
 	};
-
-	/*
-	 * Unlike a dynamically registered Vuex module, this Pinia store is a
-	 * singleton — it has to be reset by hand when the tab unmounts, otherwise
-	 * the next parent entity's permissions tab would briefly show stale data.
-	 */
 	const $reset = () => {
 		dataList.value = [];
 		selected.value = [];
 		error.value = null;
 		isLoading.value = false;
 		resetInfiniteScrollTableParamsToDefaults();
-		parentId.value = undefined;
+		parentId.value = null;
 	};
 
 	return {
@@ -140,21 +135,13 @@ export const createPermissionsStore = (
 		useTableStoreConfig<PermissionEntity>,
 		'apiModule' | 'headers'
 	> & {
-		apiModule:
-			| useTableStoreConfig<PermissionEntity>['apiModule']
-			| RawPermissionsApiModule;
+		apiModule: RawPermissionsApiModule;
 		headers?: useTableStoreConfig<PermissionEntity>['headers'];
 	},
 ) => {
-	const normalizedApiModule =
-		'getPermissionsList' in config.apiModule &&
-		'patchPermissions' in config.apiModule
-			? PermissionsApiModule(config.apiModule)
-			: config.apiModule;
-
 	const normalizedConfig: useTableStoreConfig<PermissionEntity> = {
 		...config,
-		apiModule: normalizedApiModule,
+		apiModule: PermissionsApiModule(config.apiModule),
 		headers: config.headers || headers,
 	};
 

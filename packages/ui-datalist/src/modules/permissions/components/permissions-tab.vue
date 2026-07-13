@@ -18,21 +18,20 @@
 import { PermissionsTabContent } from '@webitel/ui-sdk/modules/ObjectPermissions';
 import type { UserAccessFlags } from '@webitel/ui-sdk/modules/Userinfo';
 import { storeToRefs } from 'pinia';
-import { computed, onUnmounted } from 'vue';
+import { computed, onUnmounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = withDefaults(
 	defineProps<{
-		store?: (() => any) | null;
-		access?: UserAccessFlags;
+		store: () => any;
+		access: UserAccessFlags;
 	}>(),
 	{
-		store: null,
 		access: () => ({
-			read: true,
-			add: true,
-			edit: true,
-			delete: true,
+			read: false,
+			add: false,
+			edit: false,
+			delete: false,
 		}),
 	},
 );
