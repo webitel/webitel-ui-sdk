@@ -24,14 +24,14 @@ const props = withDefaults(
 		/** Namespace of the parent card store */
 		namespace: string;
 		/** Access to the component actions, related to permissions */
-		access?: UserAccessFlags;
+		access: UserAccessFlags;
 	}>(),
 	{
 		access: () => ({
-			read: true,
-			add: true,
-			edit: true,
-			delete: true,
+			read: false,
+			add: false,
+			edit: false,
+			delete: false,
 		}),
 	},
 );

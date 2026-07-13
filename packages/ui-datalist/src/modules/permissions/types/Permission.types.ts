@@ -16,9 +16,7 @@ export interface PermissionEntity {
 	id: string;
 	etag?: string;
 	grantee: PermissionGrantee;
-	access: {
-		AccessRuleName: PermissionAccessRule;
-	};
+	access: Record<AccessRuleName, PermissionAccessRule>;
 }
 
 export interface PermissionsChange {
