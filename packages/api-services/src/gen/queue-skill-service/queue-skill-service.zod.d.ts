@@ -1,0 +1,16 @@
+export declare const SearchQueueSkillParams: any;
+export declare const SearchQueueSkillQueryParams: any;
+export declare const SearchQueueSkillResponse: any;
+export declare const CreateQueueSkillParams: any;
+export declare const CreateQueueSkillBody: any;
+export declare const CreateQueueSkillResponse: any;
+export declare const DeleteQueueSkillParams: any;
+export declare const DeleteQueueSkillResponse: any;
+export declare const ReadQueueSkillParams: any;
+export declare const ReadQueueSkillResponse: any;
+export declare const PatchQueueSkillParams: any;
+export declare const PatchQueueSkillBody: any;
+export declare const PatchQueueSkillResponse: any;
+export declare const UpdateQueueSkillParams: any;
+export declare const UpdateQueueSkillBody: any;
+export declare const UpdateQueueSkillResponse: any;

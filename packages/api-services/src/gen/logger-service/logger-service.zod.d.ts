@@ -1,0 +1,9 @@
+export declare const LoggerServiceSearchLogByConfigIdParams: any;
+export declare const LoggerServiceSearchLogByConfigIdQueryParams: any;
+export declare const LoggerServiceSearchLogByConfigIdResponse: any;
+export declare const LoggerServiceSearchLogByUserIdParams: any;
+export declare const LoggerServiceSearchLogByUserIdQueryParams: any;
+export declare const LoggerServiceSearchLogByUserIdResponse: any;
+export declare const LoggerServiceSearchLogByRecordIdParams: any;
+export declare const LoggerServiceSearchLogByRecordIdQueryParams: any;
+export declare const LoggerServiceSearchLogByRecordIdResponse: any;

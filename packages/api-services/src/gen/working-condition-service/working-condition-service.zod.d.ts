@@ -1,0 +1,12 @@
+export declare const WorkingConditionServiceSearchWorkingConditionQueryParams: any;
+export declare const WorkingConditionServiceSearchWorkingConditionResponse: any;
+export declare const WorkingConditionServiceCreateWorkingConditionBody: any;
+export declare const WorkingConditionServiceCreateWorkingConditionResponse: any;
+export declare const WorkingConditionServiceDeleteWorkingConditionParams: any;
+export declare const WorkingConditionServiceDeleteWorkingConditionResponse: any;
+export declare const WorkingConditionServiceReadWorkingConditionParams: any;
+export declare const WorkingConditionServiceReadWorkingConditionQueryParams: any;
+export declare const WorkingConditionServiceReadWorkingConditionResponse: any;
+export declare const WorkingConditionServiceUpdateWorkingConditionParams: any;
+export declare const WorkingConditionServiceUpdateWorkingConditionBody: any;
+export declare const WorkingConditionServiceUpdateWorkingConditionResponse: any;

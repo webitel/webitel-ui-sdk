@@ -1,0 +1,16 @@
+export declare const SearchQueueHookParams: any;
+export declare const SearchQueueHookQueryParams: any;
+export declare const SearchQueueHookResponse: any;
+export declare const CreateQueueHookParams: any;
+export declare const CreateQueueHookBody: any;
+export declare const CreateQueueHookResponse: any;
+export declare const DeleteQueueHookParams: any;
+export declare const DeleteQueueHookResponse: any;
+export declare const ReadQueueHookParams: any;
+export declare const ReadQueueHookResponse: any;
+export declare const PatchQueueHookParams: any;
+export declare const PatchQueueHookBody: any;
+export declare const PatchQueueHookResponse: any;
+export declare const UpdateQueueHookParams: any;
+export declare const UpdateQueueHookBody: any;
+export declare const UpdateQueueHookResponse: any;

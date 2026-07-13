@@ -1,0 +1,14 @@
+export declare const SearchChatPlanQueryParams: any;
+export declare const SearchChatPlanResponse: any;
+export declare const CreateChatPlanBody: any;
+export declare const CreateChatPlanResponse: any;
+export declare const DeleteChatPlanParams: any;
+export declare const DeleteChatPlanResponse: any;
+export declare const ReadChatPlanParams: any;
+export declare const ReadChatPlanResponse: any;
+export declare const PatchChatPlanParams: any;
+export declare const PatchChatPlanBody: any;
+export declare const PatchChatPlanResponse: any;
+export declare const UpdateChatPlanParams: any;
+export declare const UpdateChatPlanBody: any;
+export declare const UpdateChatPlanResponse: any;

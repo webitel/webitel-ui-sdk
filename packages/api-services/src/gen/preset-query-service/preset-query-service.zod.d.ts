@@ -1,0 +1,14 @@
+export declare const SearchPresetQueryQueryParams: any;
+export declare const SearchPresetQueryResponse: any;
+export declare const CreatePresetQueryBody: any;
+export declare const CreatePresetQueryResponse: any;
+export declare const DeletePresetQueryParams: any;
+export declare const DeletePresetQueryResponse: any;
+export declare const ReadPresetQueryParams: any;
+export declare const ReadPresetQueryResponse: any;
+export declare const PatchPresetQueryParams: any;
+export declare const PatchPresetQueryBody: any;
+export declare const PatchPresetQueryResponse: any;
+export declare const UpdatePresetQueryParams: any;
+export declare const UpdatePresetQueryBody: any;
+export declare const UpdatePresetQueryResponse: any;

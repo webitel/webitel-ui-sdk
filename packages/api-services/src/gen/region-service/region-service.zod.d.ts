@@ -1,0 +1,14 @@
+export declare const SearchRegionQueryParams: any;
+export declare const SearchRegionResponse: any;
+export declare const CreateRegionBody: any;
+export declare const CreateRegionResponse: any;
+export declare const DeleteRegionParams: any;
+export declare const DeleteRegionResponse: any;
+export declare const ReadRegionParams: any;
+export declare const ReadRegionResponse: any;
+export declare const PatchRegionParams: any;
+export declare const PatchRegionBody: any;
+export declare const PatchRegionResponse: any;
+export declare const UpdateRegionParams: any;
+export declare const UpdateRegionBody: any;
+export declare const UpdateRegionResponse: any;

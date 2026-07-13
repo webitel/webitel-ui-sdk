@@ -1,0 +1,9 @@
+export declare const DeleteFileTranscriptBody: any;
+export declare const DeleteFileTranscriptResponse: any;
+export declare const CreateFileTranscriptBody: any;
+export declare const CreateFileTranscriptResponse: any;
+export declare const PutFileTranscriptBody: any;
+export declare const PutFileTranscriptResponse: any;
+export declare const GetFileTranscriptPhrasesParams: any;
+export declare const GetFileTranscriptPhrasesQueryParams: any;
+export declare const GetFileTranscriptPhrasesResponse: any;
