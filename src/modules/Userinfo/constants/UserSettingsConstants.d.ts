@@ -1,1 +1,1 @@
-export declare const TIMEZONE_STORAGE_KEY = "user-timezone-setting";
+export declare const TIMEZONE_STORAGE_KEY = 'user-timezone-setting';
