@@ -101,8 +101,10 @@ jobs:
         with:
           node-version-file: package.json
           cache: npm
-      # Root install provides path aliases + shared types (e.g. vidstack)
+      # Root: path aliases + shared types (e.g. vidstack). Package: own lockfile deps.
       - run: npm ci
+      - run: npm ci
+        working-directory: packages/ui-datalist
       - run: npm run --prefix packages/ui-datalist typecheck
 
   typecheck-ui-chats:
@@ -118,4 +120,6 @@ jobs:
           node-version-file: package.json
           cache: npm
       - run: npm ci
+      - run: npm ci
+        working-directory: packages/ui-chats
       - run: npm run --prefix packages/ui-chats typecheck
