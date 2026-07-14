@@ -3,8 +3,8 @@ import PermissionsTab from './components/permissions-tab.vue';
 export {
 	AccessMode,
 	AccessRuleName,
-	PermissionsRolePopup,
 	headers,
+	PermissionsRolePopup,
 } from '@webitel/ui-sdk/modules/ObjectPermissions';
 
 export { PermissionsApiModule } from './scripts/PermissionsApiModule';
