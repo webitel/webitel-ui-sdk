@@ -19,19 +19,14 @@ import { PermissionsTabContent } from '@webitel/ui-sdk/modules/ObjectPermissions
 import type { UserAccessFlags } from '@webitel/ui-sdk/modules/Userinfo';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { storeToRefs } from 'pinia';
-import type { Ref } from 'vue';
 import { computed, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
-import type { DatalistTableHeader } from '../../types/tableStore.types';
-import type {
-	ChangeAccessModePayload,
-	PermissionEntity,
-} from '../types/Permission.types';
+import type { PermissionsPiniaStore } from '../stores/createPermissionsStore';
 
 const props = withDefaults(
 	defineProps<{
-		store: () => any;
+		store: () => PermissionsPiniaStore;
 		access: UserAccessFlags;
+		parentId?: Id;
 	}>(),
 	{
 		access: () => ({
@@ -43,26 +38,10 @@ const props = withDefaults(
 	},
 );
 
-const route = useRoute();
-const routeParentId = Array.isArray(route.params.id)
-	? route.params.id[0]
-	: route.params.id;
-
 const permissionsStore = props.store();
 
-type PermissionsStoreRefs = {
-	dataList: Ref<PermissionEntity[]>;
-	isLoading: Ref<boolean>;
-	headers: Ref<DatalistTableHeader[]>;
-	page: Ref<number>;
-	size: Ref<number>;
-	next: Ref<boolean>;
-	error: Ref<unknown>;
-};
-
-const { dataList, isLoading, headers, page, size, next, error } = storeToRefs(
-	permissionsStore,
-) as PermissionsStoreRefs;
+const { dataList, isLoading, headers, page, size, next, error } =
+	storeToRefs(permissionsStore);
 
 const {
 	initialize,
@@ -73,19 +52,10 @@ const {
 	changeAccessMode,
 	addRolePermissions,
 	$reset,
-}: {
-	initialize: (payload?: { parentId?: Id }) => Promise<unknown>;
-	loadDataList: () => Promise<unknown>;
-	updatePage: (page: number) => void;
-	updateSize: (size: number) => void;
-	updateSort: (column: object) => void;
-	changeAccessMode: (payload: ChangeAccessModePayload) => Promise<unknown>;
-	addRolePermissions: (role: { id: Id }) => Promise<unknown>;
-	$reset: () => void;
 } = permissionsStore;
 
 initialize({
-	parentId: routeParentId,
+	parentId: props.parentId,
 });
 
 onUnmounted(() => {

@@ -12,6 +12,7 @@ export {
 	createPermissionsStore,
 	permissionsStoreBody,
 } from './stores/createPermissionsStore';
+export type { PermissionsPiniaStore } from './stores/createPermissionsStore';
 export type {
 	PermissionEntity,
 	PermissionGrantee,

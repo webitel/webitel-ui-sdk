@@ -1,6 +1,7 @@
 import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
 import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
+import type { StoreGeneric } from 'pinia';
 import { ref } from 'vue';
 import {
 	createDatalistStore,
@@ -156,3 +157,6 @@ export const createPermissionsStore = (
 		config: normalizedConfig,
 	});
 };
+
+export type PermissionsPiniaStore = StoreGeneric &
+	ReturnType<ReturnType<typeof createPermissionsStore>>;
