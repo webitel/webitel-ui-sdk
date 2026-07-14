@@ -110,7 +110,8 @@ export const useChatScroll = ({
 
 			const distanceFromBottom =
 				prevScrollHeight - (el.scrollTop + el.clientHeight);
-			const wasNearBottom = distanceFromBottom <= nearBottomOffset;
+			const wasNearBottom =
+				distanceFromBottom >= 0 && distanceFromBottom <= nearBottomOffset;
 			const contentGrown = newScrollHeight > prevScrollHeight;
 
 			/**
@@ -199,6 +200,13 @@ export const useChatScroll = ({
 		},
 		{
 			immediate: true,
+		},
+	);
+
+	watch(
+		() => arrivedState.bottom,
+		(bottom) => {
+			if (bottom) newUnseenMessagesCount.value = 0;
 		},
 	);
 
