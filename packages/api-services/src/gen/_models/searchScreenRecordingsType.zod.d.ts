@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchScreenRecordingsType = (typeof SearchScreenRecordingsType)[keyof typeof SearchScreenRecordingsType];
+export type SearchScreenRecordingsType =
+	(typeof SearchScreenRecordingsType)[keyof typeof SearchScreenRecordingsType];
 export declare const SearchScreenRecordingsType: {
-    readonly Pdf: "PDF";
-    readonly Screenshot: "SCREENSHOT";
-    readonly Screensharing: "SCREENSHARING";
+	readonly Pdf: 'PDF';
+	readonly Screenshot: 'SCREENSHOT';
+	readonly Screensharing: 'SCREENSHARING';
 };

@@ -8,57 +8,83 @@ import * as zod from 'zod';
 /**
  * @summary / ListGates returns a collection of all registered gateways within the current domain.
  */
-export declare const gateServiceListGatesQueryStatusDefault = "PROVIDER_STATUS_UNSPECIFIED";
-export declare const GateServiceListGatesQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    types: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        PROVIDER_TYPE_UNSPECIFIED: "PROVIDER_TYPE_UNSPECIFIED";
-        PROVIDER_TYPE_VIBER: "PROVIDER_TYPE_VIBER";
-        PROVIDER_TYPE_TELEGRAM_BOT: "PROVIDER_TYPE_TELEGRAM_BOT";
-        PROVIDER_TYPE_TELEGRAM_APP: "PROVIDER_TYPE_TELEGRAM_APP";
-        PROVIDER_TYPE_META_APP: "PROVIDER_TYPE_META_APP";
-        PROVIDER_TYPE_FACEBOOK: "PROVIDER_TYPE_FACEBOOK";
-        PROVIDER_TYPE_INSTAGRAM: "PROVIDER_TYPE_INSTAGRAM";
-        PROVIDER_TYPE_WHATSAPP: "PROVIDER_TYPE_WHATSAPP";
-    }>>>;
-    status: zod.ZodDefault<zod.ZodEnum<{
-        PROVIDER_STATUS_UNSPECIFIED: "PROVIDER_STATUS_UNSPECIFIED";
-        PROVIDER_STATUS_ACTIVE: "PROVIDER_STATUS_ACTIVE";
-        PROVIDER_STATUS_INACTIVE: "PROVIDER_STATUS_INACTIVE";
-        PROVIDER_STATUS_ERROR: "PROVIDER_STATUS_ERROR";
-    }>>;
-    q: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const gateServiceListGatesResponseItemsItemStatusDefault = "PROVIDER_STATUS_UNSPECIFIED";
-export declare const gateServiceListGatesResponseItemsItemTypeDefault = "PROVIDER_TYPE_UNSPECIFIED";
-export declare const GateServiceListGatesResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        contact: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        providerAppId: zod.ZodOptional<zod.ZodString>;
-        status: zod.ZodDefault<zod.ZodEnum<{
-            PROVIDER_STATUS_UNSPECIFIED: "PROVIDER_STATUS_UNSPECIFIED";
-            PROVIDER_STATUS_ACTIVE: "PROVIDER_STATUS_ACTIVE";
-            PROVIDER_STATUS_INACTIVE: "PROVIDER_STATUS_INACTIVE";
-            PROVIDER_STATUS_ERROR: "PROVIDER_STATUS_ERROR";
-        }>>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            PROVIDER_TYPE_UNSPECIFIED: "PROVIDER_TYPE_UNSPECIFIED";
-            PROVIDER_TYPE_VIBER: "PROVIDER_TYPE_VIBER";
-            PROVIDER_TYPE_TELEGRAM_BOT: "PROVIDER_TYPE_TELEGRAM_BOT";
-            PROVIDER_TYPE_TELEGRAM_APP: "PROVIDER_TYPE_TELEGRAM_APP";
-            PROVIDER_TYPE_META_APP: "PROVIDER_TYPE_META_APP";
-            PROVIDER_TYPE_FACEBOOK: "PROVIDER_TYPE_FACEBOOK";
-            PROVIDER_TYPE_INSTAGRAM: "PROVIDER_TYPE_INSTAGRAM";
-            PROVIDER_TYPE_WHATSAPP: "PROVIDER_TYPE_WHATSAPP";
-        }>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        webhookUrl: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const gateServiceListGatesQueryStatusDefault =
+	'PROVIDER_STATUS_UNSPECIFIED';
+export declare const GateServiceListGatesQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		types: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					PROVIDER_TYPE_UNSPECIFIED: 'PROVIDER_TYPE_UNSPECIFIED';
+					PROVIDER_TYPE_VIBER: 'PROVIDER_TYPE_VIBER';
+					PROVIDER_TYPE_TELEGRAM_BOT: 'PROVIDER_TYPE_TELEGRAM_BOT';
+					PROVIDER_TYPE_TELEGRAM_APP: 'PROVIDER_TYPE_TELEGRAM_APP';
+					PROVIDER_TYPE_META_APP: 'PROVIDER_TYPE_META_APP';
+					PROVIDER_TYPE_FACEBOOK: 'PROVIDER_TYPE_FACEBOOK';
+					PROVIDER_TYPE_INSTAGRAM: 'PROVIDER_TYPE_INSTAGRAM';
+					PROVIDER_TYPE_WHATSAPP: 'PROVIDER_TYPE_WHATSAPP';
+				}>
+			>
+		>;
+		status: zod.ZodDefault<
+			zod.ZodEnum<{
+				PROVIDER_STATUS_UNSPECIFIED: 'PROVIDER_STATUS_UNSPECIFIED';
+				PROVIDER_STATUS_ACTIVE: 'PROVIDER_STATUS_ACTIVE';
+				PROVIDER_STATUS_INACTIVE: 'PROVIDER_STATUS_INACTIVE';
+				PROVIDER_STATUS_ERROR: 'PROVIDER_STATUS_ERROR';
+			}>
+		>;
+		q: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const gateServiceListGatesResponseItemsItemStatusDefault =
+	'PROVIDER_STATUS_UNSPECIFIED';
+export declare const gateServiceListGatesResponseItemsItemTypeDefault =
+	'PROVIDER_TYPE_UNSPECIFIED';
+export declare const GateServiceListGatesResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						contact: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						providerAppId: zod.ZodOptional<zod.ZodString>;
+						status: zod.ZodDefault<
+							zod.ZodEnum<{
+								PROVIDER_STATUS_UNSPECIFIED: 'PROVIDER_STATUS_UNSPECIFIED';
+								PROVIDER_STATUS_ACTIVE: 'PROVIDER_STATUS_ACTIVE';
+								PROVIDER_STATUS_INACTIVE: 'PROVIDER_STATUS_INACTIVE';
+								PROVIDER_STATUS_ERROR: 'PROVIDER_STATUS_ERROR';
+							}>
+						>;
+						type: zod.ZodDefault<
+							zod.ZodEnum<{
+								PROVIDER_TYPE_UNSPECIFIED: 'PROVIDER_TYPE_UNSPECIFIED';
+								PROVIDER_TYPE_VIBER: 'PROVIDER_TYPE_VIBER';
+								PROVIDER_TYPE_TELEGRAM_BOT: 'PROVIDER_TYPE_TELEGRAM_BOT';
+								PROVIDER_TYPE_TELEGRAM_APP: 'PROVIDER_TYPE_TELEGRAM_APP';
+								PROVIDER_TYPE_META_APP: 'PROVIDER_TYPE_META_APP';
+								PROVIDER_TYPE_FACEBOOK: 'PROVIDER_TYPE_FACEBOOK';
+								PROVIDER_TYPE_INSTAGRAM: 'PROVIDER_TYPE_INSTAGRAM';
+								PROVIDER_TYPE_WHATSAPP: 'PROVIDER_TYPE_WHATSAPP';
+							}>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						webhookUrl: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

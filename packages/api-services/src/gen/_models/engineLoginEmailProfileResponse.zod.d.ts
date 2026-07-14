@@ -7,7 +7,7 @@
 import type { EngineEmailAuthType } from './engineEmailAuthType.zod';
 import type { EngineLoginEmailProfileResponseCookie } from './engineLoginEmailProfileResponseCookie.zod';
 export interface EngineLoginEmailProfileResponse {
-    authType?: EngineEmailAuthType;
-    cookie?: EngineLoginEmailProfileResponseCookie;
-    redirectUrl?: string;
+	authType?: EngineEmailAuthType;
+	cookie?: EngineLoginEmailProfileResponseCookie;
+	redirectUrl?: string;
 }

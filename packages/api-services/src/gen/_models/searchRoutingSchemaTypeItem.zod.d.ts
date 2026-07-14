@@ -4,11 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchRoutingSchemaTypeItem = (typeof SearchRoutingSchemaTypeItem)[keyof typeof SearchRoutingSchemaTypeItem];
+export type SearchRoutingSchemaTypeItem =
+	(typeof SearchRoutingSchemaTypeItem)[keyof typeof SearchRoutingSchemaTypeItem];
 export declare const SearchRoutingSchemaTypeItem: {
-    readonly Default: "default";
-    readonly Voice: "voice";
-    readonly Chat: "chat";
-    readonly Processing: "processing";
-    readonly Service: "service";
+	readonly Default: 'default';
+	readonly Voice: 'voice';
+	readonly Chat: 'chat';
+	readonly Processing: 'processing';
+	readonly Service: 'service';
 };

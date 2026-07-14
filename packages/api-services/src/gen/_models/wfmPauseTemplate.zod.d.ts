@@ -7,13 +7,13 @@
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 import type { WfmPauseTemplateCause } from './wfmPauseTemplateCause.zod';
 export interface WfmPauseTemplate {
-    causes?: WfmPauseTemplateCause[];
-    createdAt?: string;
-    createdBy?: WfmLookupEntity;
-    description?: string;
-    domainId?: string;
-    id?: string;
-    name?: string;
-    updatedAt?: string;
-    updatedBy?: WfmLookupEntity;
+	causes?: WfmPauseTemplateCause[];
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	description?: string;
+	domainId?: string;
+	id?: string;
+	name?: string;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 }

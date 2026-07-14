@@ -8,15 +8,15 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { StorageProviderType } from './storageProviderType.zod';
 import type { StorageServiceType } from './storageServiceType.zod';
 export interface StorageCognitiveProfile {
-    createdAt?: string;
-    createdBy?: EngineLookup;
-    default?: boolean;
-    description?: string;
-    enabled?: boolean;
-    id?: string;
-    name?: string;
-    provider?: StorageProviderType;
-    service?: StorageServiceType;
-    updatedAt?: string;
-    updatedBy?: EngineLookup;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	default?: boolean;
+	description?: string;
+	enabled?: boolean;
+	id?: string;
+	name?: string;
+	provider?: StorageProviderType;
+	service?: StorageServiceType;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

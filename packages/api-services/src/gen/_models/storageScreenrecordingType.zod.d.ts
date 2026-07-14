@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type StorageScreenrecordingType = (typeof StorageScreenrecordingType)[keyof typeof StorageScreenrecordingType];
+export type StorageScreenrecordingType =
+	(typeof StorageScreenrecordingType)[keyof typeof StorageScreenrecordingType];
 export declare const StorageScreenrecordingType: {
-    readonly Pdf: "PDF";
-    readonly Screenshot: "SCREENSHOT";
-    readonly Screensharing: "SCREENSHARING";
+	readonly Pdf: 'PDF';
+	readonly Screenshot: 'SCREENSHOT';
+	readonly Screensharing: 'SCREENSHARING';
 };

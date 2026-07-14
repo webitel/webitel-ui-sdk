@@ -7,15 +7,15 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineQuestion } from './engineQuestion.zod';
 export interface EngineAuditForm {
-    createdAt?: string;
-    createdBy?: EngineLookup;
-    description?: string;
-    editable?: boolean;
-    enabled?: boolean;
-    id?: number;
-    name?: string;
-    questions?: EngineQuestion[];
-    teams?: EngineLookup[];
-    updatedAt?: string;
-    updatedBy?: EngineLookup;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	description?: string;
+	editable?: boolean;
+	enabled?: boolean;
+	id?: number;
+	name?: string;
+	questions?: EngineQuestion[];
+	teams?: EngineLookup[];
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

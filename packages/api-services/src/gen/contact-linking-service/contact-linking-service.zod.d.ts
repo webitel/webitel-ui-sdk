@@ -8,29 +8,47 @@ import * as zod from 'zod';
 /**
  * @summary CreateContactFromConversation creates new contact from the data existing in the conversation and after that links this contact to the external user.
  */
-export declare const ContactLinkingServiceCreateContactFromConversationParams: zod.ZodObject<{
-    conversation_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ContactLinkingServiceCreateContactFromConversationQueryParams: zod.ZodObject<{
-    timezoneId: zod.ZodOptional<zod.ZodString>;
-    timezoneName: zod.ZodOptional<zod.ZodString>;
-    ownerId: zod.ZodOptional<zod.ZodString>;
-    ownerName: zod.ZodOptional<zod.ZodString>;
-    label: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    description: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ContactLinkingServiceCreateContactFromConversationResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const ContactLinkingServiceCreateContactFromConversationParams: zod.ZodObject<
+	{
+		conversation_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ContactLinkingServiceCreateContactFromConversationQueryParams: zod.ZodObject<
+	{
+		timezoneId: zod.ZodOptional<zod.ZodString>;
+		timezoneName: zod.ZodOptional<zod.ZodString>;
+		ownerId: zod.ZodOptional<zod.ZodString>;
+		ownerName: zod.ZodOptional<zod.ZodString>;
+		label: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		name: zod.ZodOptional<zod.ZodString>;
+		description: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ContactLinkingServiceCreateContactFromConversationResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary LinkContactToClient creates connection between existing internal contact and external client.
  */
-export declare const ContactLinkingServiceLinkContactToClientParams: zod.ZodObject<{
-    conversation_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ContactLinkingServiceLinkContactToClientQueryParams: zod.ZodObject<{
-    contactId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ContactLinkingServiceLinkContactToClientResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const ContactLinkingServiceLinkContactToClientParams: zod.ZodObject<
+	{
+		conversation_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ContactLinkingServiceLinkContactToClientQueryParams: zod.ZodObject<
+	{
+		contactId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ContactLinkingServiceLinkContactToClientResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;

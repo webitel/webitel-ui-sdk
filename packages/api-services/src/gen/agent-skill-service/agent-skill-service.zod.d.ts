@@ -5,306 +5,576 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const DeleteAgentSkillsParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentSkillsQueryParams: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentSkillsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        capacity: zod.ZodOptional<zod.ZodNumber>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodString>;
-        skill: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const DeleteAgentSkillsParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentSkillsQueryParams: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentSkillsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						capacity: zod.ZodOptional<zod.ZodNumber>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						id: zod.ZodOptional<zod.ZodString>;
+						skill: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary List of AgentSkill
  */
-export declare const SearchAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchAgentSkillQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentSkillResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        capacity: zod.ZodOptional<zod.ZodNumber>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodString>;
-        skill: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillsParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillsBody: zod.ZodObject<{
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        capacity: zod.ZodOptional<zod.ZodNumber>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodString>;
-        skill: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentSkillQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentSkillResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						capacity: zod.ZodOptional<zod.ZodNumber>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						id: zod.ZodOptional<zod.ZodString>;
+						skill: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillsParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillsBody: zod.ZodObject<
+	{
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						capacity: zod.ZodOptional<zod.ZodNumber>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						id: zod.ZodOptional<zod.ZodString>;
+						skill: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create AgentSkill
  */
-export declare const CreateAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CreateAgentSkillBody: zod.ZodObject<{
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateAgentSkillResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodString>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateAgentSkillsParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CreateAgentSkillsBody: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        capacity: zod.ZodOptional<zod.ZodNumber>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        skill: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const CreateAgentSkillsResponse: zod.ZodObject<{
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const CreateAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentSkillBody: zod.ZodObject<
+	{
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentSkillResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodString>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentSkillsParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentSkillsBody: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						capacity: zod.ZodOptional<zod.ZodNumber>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						skill: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentSkillsResponse: zod.ZodObject<
+	{
+		ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove AgentSkill
  */
-export declare const DeleteAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentSkillQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentSkillResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodString>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const DeleteAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentSkillQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentSkillResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodString>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary AgentSkill item
  */
-export declare const ReadAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadAgentSkillQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadAgentSkillResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodString>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillBody: zod.ZodObject<{
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const PatchAgentSkillResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodString>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ReadAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadAgentSkillQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadAgentSkillResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodString>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillBody: zod.ZodObject<
+	{
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentSkillResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodString>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update AgentSkill
  */
-export declare const UpdateAgentSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentSkillBody: zod.ZodObject<{
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentSkillResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    capacity: zod.ZodOptional<zod.ZodNumber>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodString>;
-    skill: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateAgentSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentSkillBody: zod.ZodObject<
+	{
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentSkillResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		capacity: zod.ZodOptional<zod.ZodNumber>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodString>;
+		skill: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SearchLookupAgentNotExistsSkill
  */
-export declare const SearchLookupAgentNotExistsSkillParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchLookupAgentNotExistsSkillQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchLookupAgentNotExistsSkillResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        activeAgents: zod.ZodOptional<zod.ZodNumber>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        totalAgents: zod.ZodOptional<zod.ZodNumber>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchLookupAgentNotExistsSkillParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchLookupAgentNotExistsSkillQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchLookupAgentNotExistsSkillResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						activeAgents: zod.ZodOptional<zod.ZodNumber>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						totalAgents: zod.ZodOptional<zod.ZodNumber>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;

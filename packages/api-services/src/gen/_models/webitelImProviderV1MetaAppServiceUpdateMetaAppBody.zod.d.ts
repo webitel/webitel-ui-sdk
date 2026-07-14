@@ -8,9 +8,9 @@
  * / ProviderUpdateMetaAppRequest updates the settings for an existing Meta application.
  */
 export interface WebitelImProviderV1MetaAppServiceUpdateMetaAppBody {
-    appSecret?: string;
-    name?: string;
-    oauthRedirectUri?: string;
-    scopes?: string[];
-    verifyToken?: string;
+	appSecret?: string;
+	name?: string;
+	oauthRedirectUri?: string;
+	scopes?: string[];
+	verifyToken?: string;
 }

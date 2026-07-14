@@ -10,16 +10,16 @@ import type { EngineTriggerObjectType } from './engineTriggerObjectType.zod';
 import type { EngineTriggerServicePatchTriggerBodyVariables } from './engineTriggerServicePatchTriggerBodyVariables.zod';
 import type { EngineTriggerType } from './engineTriggerType.zod';
 export interface EngineTriggerServicePatchTriggerBody {
-    description?: string;
-    enabled?: boolean;
-    event?: EngineTriggerEventType;
-    expression?: string;
-    fields?: string[];
-    name?: string;
-    object?: EngineTriggerObjectType;
-    schema?: EngineLookup;
-    timeout?: number;
-    timezone?: EngineLookup;
-    type?: EngineTriggerType;
-    variables?: EngineTriggerServicePatchTriggerBodyVariables;
+	description?: string;
+	enabled?: boolean;
+	event?: EngineTriggerEventType;
+	expression?: string;
+	fields?: string[];
+	name?: string;
+	object?: EngineTriggerObjectType;
+	schema?: EngineLookup;
+	timeout?: number;
+	timezone?: EngineLookup;
+	type?: EngineTriggerType;
+	variables?: EngineTriggerServicePatchTriggerBodyVariables;
 }

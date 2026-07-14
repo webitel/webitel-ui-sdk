@@ -7,12 +7,12 @@
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 import type { WfmShiftTemplateTime } from './wfmShiftTemplateTime.zod';
 export type ShiftTemplateServiceUpdateShiftTemplateBodyItem = {
-    createdAt?: string;
-    createdBy?: WfmLookupEntity;
-    description?: string;
-    domainId?: string;
-    name?: string;
-    times?: WfmShiftTemplateTime[];
-    updatedAt?: string;
-    updatedBy?: WfmLookupEntity;
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	description?: string;
+	domainId?: string;
+	name?: string;
+	times?: WfmShiftTemplateTime[];
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 };

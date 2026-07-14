@@ -8,8 +8,8 @@
  * Response containing the created meeting details.
  */
 export interface WebMeetingBackendCreateMeetingResponse {
-    /** Unique identifier of the created meeting. */
-    id?: string;
-    /** Full URL to access the meeting. */
-    url?: string;
+	/** Unique identifier of the created meeting. */
+	id?: string;
+	/** Full URL to access the meeting. */
+	url?: string;
 }

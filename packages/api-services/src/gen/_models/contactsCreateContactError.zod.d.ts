@@ -10,10 +10,10 @@ import type { RpcStatus } from './rpcStatus.zod';
  * Per-item failure of a bulk Contact create.
  */
 export interface ContactsCreateContactError {
-    /** Standardized error (code, message, details). */
-    error?: RpcStatus;
-    /** 0-based position in CreateContactsRequest.input. */
-    index?: number;
-    /** The InputContact that failed. */
-    input?: ContactsInputContact;
+	/** Standardized error (code, message, details). */
+	error?: RpcStatus;
+	/** 0-based position in CreateContactsRequest.input. */
+	index?: number;
+	/** The InputContact that failed. */
+	input?: ContactsInputContact;
 }

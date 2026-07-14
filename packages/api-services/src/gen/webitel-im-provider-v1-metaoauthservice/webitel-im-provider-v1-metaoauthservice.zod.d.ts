@@ -8,32 +8,57 @@ import * as zod from 'zod';
 /**
  * @summary / MetaOAuthCallback processes the authorization code returned by Facebook.
  */
-export declare const MetaOAuthServiceMetaOAuthCallbackParams: zod.ZodObject<{
-    meta_app_id_1: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const MetaOAuthServiceMetaOAuthCallbackBody: zod.ZodObject<{
-    code: zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const MetaOAuthServiceMetaOAuthCallbackResponse: zod.ZodObject<{
-    pages: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        accessToken: zod.ZodOptional<zod.ZodString>;
-        pageId: zod.ZodOptional<zod.ZodString>;
-        pageName: zod.ZodOptional<zod.ZodString>;
-        platform: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    userAccessToken: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const MetaOAuthServiceMetaOAuthCallbackParams: zod.ZodObject<
+	{
+		meta_app_id_1: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const MetaOAuthServiceMetaOAuthCallbackBody: zod.ZodObject<
+	{
+		code: zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MetaOAuthServiceMetaOAuthCallbackResponse: zod.ZodObject<
+	{
+		pages: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						accessToken: zod.ZodOptional<zod.ZodString>;
+						pageId: zod.ZodOptional<zod.ZodString>;
+						pageName: zod.ZodOptional<zod.ZodString>;
+						platform: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		userAccessToken: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary / StartMetaOAuth generates a secure Facebook Authorization URL.
  */
-export declare const MetaOAuthServiceStartMetaOAuthParams: zod.ZodObject<{
-    meta_app_id_1: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const MetaOAuthServiceStartMetaOAuthBody: zod.ZodObject<{
-    extraScopes: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const MetaOAuthServiceStartMetaOAuthResponse: zod.ZodObject<{
-    authUrl: zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const MetaOAuthServiceStartMetaOAuthParams: zod.ZodObject<
+	{
+		meta_app_id_1: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const MetaOAuthServiceStartMetaOAuthBody: zod.ZodObject<
+	{
+		extraScopes: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MetaOAuthServiceStartMetaOAuthResponse: zod.ZodObject<
+	{
+		authUrl: zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;

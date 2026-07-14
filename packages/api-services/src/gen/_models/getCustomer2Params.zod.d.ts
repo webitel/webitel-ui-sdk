@@ -5,23 +5,23 @@
  * OpenAPI spec version: 24.04.0
  */
 export type GetCustomer2Params = {
-    /**
-     * show if valid only!
-     */
-    valid?: boolean;
-    /**
-     * identifier
-     */
-    domainId?: string;
-    /**
-     * display name
-     */
-    domainName?: string;
-    /**
-     * Request Controls
-     *
-     * serial,
-     */
-    fields?: string[];
-    sort?: string[];
+	/**
+	 * show if valid only!
+	 */
+	valid?: boolean;
+	/**
+	 * identifier
+	 */
+	domainId?: string;
+	/**
+	 * display name
+	 */
+	domainName?: string;
+	/**
+	 * Request Controls
+	 *
+	 * serial,
+	 */
+	fields?: string[];
+	sort?: string[];
 };

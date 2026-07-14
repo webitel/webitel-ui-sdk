@@ -6,14 +6,14 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineAgentState {
-    agent?: EngineLookup;
-    channel?: string;
-    duration?: string;
-    id?: string;
-    joinedAt?: string;
-    leavedAt?: string;
-    pauseCause?: string;
-    payload?: string;
-    queue?: EngineLookup;
-    state?: string;
+	agent?: EngineLookup;
+	channel?: string;
+	duration?: string;
+	id?: string;
+	joinedAt?: string;
+	leavedAt?: string;
+	pauseCause?: string;
+	payload?: string;
+	queue?: EngineLookup;
+	state?: string;
 }

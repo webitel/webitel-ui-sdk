@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type LocateContactMode = (typeof LocateContactMode)[keyof typeof LocateContactMode];
+export type LocateContactMode =
+	(typeof LocateContactMode)[keyof typeof LocateContactMode];
 export declare const LocateContactMode: {
-    readonly Read: "READ";
-    readonly Write: "WRITE";
-    readonly Delete: "DELETE";
+	readonly Read: 'READ';
+	readonly Write: 'WRITE';
+	readonly Delete: 'DELETE';
 };

@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type GetTimelineTypeItem = (typeof GetTimelineTypeItem)[keyof typeof GetTimelineTypeItem];
+export type GetTimelineTypeItem =
+	(typeof GetTimelineTypeItem)[keyof typeof GetTimelineTypeItem];
 export declare const GetTimelineTypeItem: {
-    readonly Chat: "chat";
-    readonly Call: "call";
-    readonly Email: "email";
+	readonly Chat: 'chat';
+	readonly Call: 'call';
+	readonly Email: 'email';
 };

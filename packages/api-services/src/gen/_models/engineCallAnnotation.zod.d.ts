@@ -6,14 +6,14 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineCallAnnotation {
-    callId?: string;
-    createdAt?: string;
-    createdBy?: EngineLookup;
-    endSec?: number;
-    fileId?: string;
-    id?: string;
-    note?: string;
-    startSec?: number;
-    updatedAt?: string;
-    updatedBy?: EngineLookup;
+	callId?: string;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	endSec?: number;
+	fileId?: string;
+	id?: string;
+	note?: string;
+	startSec?: number;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

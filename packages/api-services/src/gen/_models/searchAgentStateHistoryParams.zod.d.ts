@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentStateHistoryParams = {
-    page?: number;
-    size?: number;
-    joinedAtFrom?: string;
-    joinedAtTo?: string;
-    agentId?: string[];
-    sort?: string;
-    domainId?: string;
-    fromId?: string;
+	page?: number;
+	size?: number;
+	joinedAtFrom?: string;
+	joinedAtTo?: string;
+	agentId?: string[];
+	sort?: string;
+	domainId?: string;
+	fromId?: string;
 };

@@ -9,8 +9,8 @@ import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer.zod';
  * / ProviderUpdateFacebookGateRequest updates the operational settings of a Facebook provider.
  */
 export interface WebitelImProviderV1FacebookServiceUpdateFacebookGateBody {
-    enabled?: boolean;
-    name?: string;
-    pageToken?: string;
-    peer?: WebitelImProviderV1Peer;
+	enabled?: boolean;
+	name?: string;
+	pageToken?: string;
+	peer?: WebitelImProviderV1Peer;
 }

@@ -10,8 +10,8 @@ import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1P
  * Represents a request to send a text message.
  */
 export interface WebitelImApiGatewayV1SendTextRequest {
-    body?: string;
-    sendAs?: WebitelImApiGatewayV1PeerIdentity;
-    sendId?: string;
-    to?: WebitelImApiGatewayV1Peer;
+	body?: string;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
+	sendId?: string;
+	to?: WebitelImApiGatewayV1Peer;
 }

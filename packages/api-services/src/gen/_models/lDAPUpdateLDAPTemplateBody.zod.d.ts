@@ -6,7 +6,7 @@
  */
 import type { LDAPUpdateLDAPTemplateBodyTemplate } from './lDAPUpdateLDAPTemplateBodyTemplate.zod';
 export interface LDAPUpdateLDAPTemplateBody {
-    fields?: string[];
-    /** Template changes. */
-    template?: LDAPUpdateLDAPTemplateBodyTemplate;
+	fields?: string[];
+	/** Template changes. */
+	template?: LDAPUpdateLDAPTemplateBodyTemplate;
 }

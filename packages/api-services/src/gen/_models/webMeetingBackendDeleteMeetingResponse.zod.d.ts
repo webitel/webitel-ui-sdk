@@ -8,5 +8,5 @@
  * Empty response for meeting deletion.
  */
 export interface WebMeetingBackendDeleteMeetingResponse {
-    [key: string]: unknown;
+	[key: string]: unknown;
 }

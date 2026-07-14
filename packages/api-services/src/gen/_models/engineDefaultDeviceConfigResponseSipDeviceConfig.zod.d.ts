@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineDefaultDeviceConfigResponseSipDeviceConfig {
-    auth?: string;
-    domain?: string;
-    extension?: string;
-    password?: string;
-    proxy?: string;
+	auth?: string;
+	domain?: string;
+	extension?: string;
+	password?: string;
+	proxy?: string;
 }

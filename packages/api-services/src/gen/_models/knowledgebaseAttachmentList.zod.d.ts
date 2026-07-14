@@ -6,9 +6,9 @@
  */
 import type { WebitelKnowledgebaseAttachment } from './webitelKnowledgebaseAttachment.zod';
 export interface KnowledgebaseAttachmentList {
-    /** Attachment dataset page. */
-    data?: WebitelKnowledgebaseAttachment[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	/** Attachment dataset page. */
+	data?: WebitelKnowledgebaseAttachment[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

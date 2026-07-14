@@ -5,19 +5,32 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const SearchQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    objectName: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        objectName: zod.ZodOptional<zod.ZodString>;
-        text: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		objectName: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						objectName: zod.ZodOptional<zod.ZodString>;
+						text: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;

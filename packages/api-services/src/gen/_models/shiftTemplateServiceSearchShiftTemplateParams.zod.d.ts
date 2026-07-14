@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ShiftTemplateServiceSearchShiftTemplateParams = {
-    q?: string;
-    page?: number;
-    size?: number;
-    sort?: string;
-    fields?: string[];
+	q?: string;
+	page?: number;
+	size?: number;
+	sort?: string;
+	fields?: string[];
 };

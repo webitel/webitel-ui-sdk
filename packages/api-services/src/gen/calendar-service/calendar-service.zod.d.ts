@@ -8,339 +8,630 @@ import * as zod from 'zod';
 /**
  * @summary List of calendar
  */
-export declare const SearchCalendarQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-}, zod.z.core.$strip>;
-export declare const SearchCalendarResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            day: zod.ZodOptional<zod.ZodNumber>;
-            disabled: zod.ZodOptional<zod.ZodBoolean>;
-            endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-            startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        endAt: zod.ZodOptional<zod.ZodString>;
-        excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            date: zod.ZodOptional<zod.ZodString>;
-            disabled: zod.ZodOptional<zod.ZodBoolean>;
-            name: zod.ZodOptional<zod.ZodString>;
-            repeat: zod.ZodOptional<zod.ZodBoolean>;
-            workStart: zod.ZodOptional<zod.ZodNumber>;
-            workStop: zod.ZodOptional<zod.ZodNumber>;
-            working: zod.ZodOptional<zod.ZodBoolean>;
-        }, zod.z.core.$strip>>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            day: zod.ZodOptional<zod.ZodNumber>;
-            disabled: zod.ZodOptional<zod.ZodBoolean>;
-            endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-            startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        startAt: zod.ZodOptional<zod.ZodString>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchCalendarQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchCalendarResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						accepts: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										day: zod.ZodOptional<zod.ZodNumber>;
+										disabled: zod.ZodOptional<zod.ZodBoolean>;
+										endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+										startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						endAt: zod.ZodOptional<zod.ZodString>;
+						excepts: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										date: zod.ZodOptional<zod.ZodString>;
+										disabled: zod.ZodOptional<zod.ZodBoolean>;
+										name: zod.ZodOptional<zod.ZodString>;
+										repeat: zod.ZodOptional<zod.ZodBoolean>;
+										workStart: zod.ZodOptional<zod.ZodNumber>;
+										workStop: zod.ZodOptional<zod.ZodNumber>;
+										working: zod.ZodOptional<zod.ZodBoolean>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						specials: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										day: zod.ZodOptional<zod.ZodNumber>;
+										disabled: zod.ZodOptional<zod.ZodBoolean>;
+										endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+										startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						startAt: zod.ZodOptional<zod.ZodString>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create calendar
  */
-export declare const CreateCalendarBody: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateCalendarResponse: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const CreateCalendarBody: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateCalendarResponse: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary List timezones
  */
-export declare const SearchTimezonesQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-}, zod.z.core.$strip>;
-export declare const SearchTimezonesResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        offset: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchTimezonesQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchTimezonesResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						offset: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove calendar
  */
-export declare const DeleteCalendarParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteCalendarQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteCalendarResponse: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const DeleteCalendarParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteCalendarQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteCalendarResponse: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Calendar item
  */
-export declare const ReadCalendarParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadCalendarQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadCalendarResponse: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ReadCalendarParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadCalendarQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadCalendarResponse: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update calendar
  */
-export declare const UpdateCalendarParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateCalendarBody: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateCalendarResponse: zod.ZodObject<{
-    accepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    endAt: zod.ZodOptional<zod.ZodString>;
-    excepts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        date: zod.ZodOptional<zod.ZodString>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        repeat: zod.ZodOptional<zod.ZodBoolean>;
-        workStart: zod.ZodOptional<zod.ZodNumber>;
-        workStop: zod.ZodOptional<zod.ZodNumber>;
-        working: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    specials: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        day: zod.ZodOptional<zod.ZodNumber>;
-        disabled: zod.ZodOptional<zod.ZodBoolean>;
-        endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-        startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    startAt: zod.ZodOptional<zod.ZodString>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateCalendarParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateCalendarBody: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateCalendarResponse: zod.ZodObject<
+	{
+		accepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		endAt: zod.ZodOptional<zod.ZodString>;
+		excepts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						date: zod.ZodOptional<zod.ZodString>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						name: zod.ZodOptional<zod.ZodString>;
+						repeat: zod.ZodOptional<zod.ZodBoolean>;
+						workStart: zod.ZodOptional<zod.ZodNumber>;
+						workStop: zod.ZodOptional<zod.ZodNumber>;
+						working: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		specials: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						day: zod.ZodOptional<zod.ZodNumber>;
+						disabled: zod.ZodOptional<zod.ZodBoolean>;
+						endTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+						startTimeOfDay: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		startAt: zod.ZodOptional<zod.ZodString>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

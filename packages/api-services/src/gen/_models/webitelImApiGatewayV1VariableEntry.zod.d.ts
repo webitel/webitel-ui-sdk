@@ -10,13 +10,13 @@ import type { WebitelImApiGatewayV1Contact } from './webitelImApiGatewayV1Contac
  * along with metadata about who and when it was set.
  */
 export interface WebitelImApiGatewayV1VariableEntry {
-    /** Timestamp when the variable was set (Unix time, milliseconds). */
-    setAt?: string;
-    /** Contact who set the variable. */
-    setBy?: WebitelImApiGatewayV1Contact;
-    /**
-     * Arbitrary structured value of the variable.
-     * Supports dynamic JSON-like content.
-     */
-    value?: unknown;
+	/** Timestamp when the variable was set (Unix time, milliseconds). */
+	setAt?: string;
+	/** Contact who set the variable. */
+	setBy?: WebitelImApiGatewayV1Contact;
+	/**
+	 * Arbitrary structured value of the variable.
+	 * Supports dynamic JSON-like content.
+	 */
+	value?: unknown;
 }

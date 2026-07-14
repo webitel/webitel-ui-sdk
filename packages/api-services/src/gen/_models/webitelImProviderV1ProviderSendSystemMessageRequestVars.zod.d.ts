@@ -9,5 +9,5 @@
  * Injected into the template via Go text/template syntax (e.g. {{.new_member_role}}).
  */
 export type WebitelImProviderV1ProviderSendSystemMessageRequestVars = {
-    [key: string]: string;
+	[key: string]: string;
 };

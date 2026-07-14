@@ -5,157 +5,262 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const LoggerServiceSearchLogByConfigIdParams: zod.ZodObject<{
-    config_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByConfigIdQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    action: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        delete: "delete";
-        read: "read";
-        create: "create";
-        update: "update";
-        default_no_action: "default_no_action";
-    }>>>;
-    userIp: zod.ZodOptional<zod.ZodString>;
-    dateFrom: zod.ZodOptional<zod.ZodString>;
-    dateTo: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByConfigIdResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        action: zod.ZodOptional<zod.ZodString>;
-        configId: zod.ZodOptional<zod.ZodNumber>;
-        date: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        newState: zod.ZodOptional<zod.ZodString>;
-        object: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        record: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        userIp: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByUserIdParams: zod.ZodObject<{
-    user_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByUserIdQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    objectId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    action: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        delete: "delete";
-        read: "read";
-        create: "create";
-        update: "update";
-        default_no_action: "default_no_action";
-    }>>>;
-    userIp: zod.ZodOptional<zod.ZodString>;
-    dateFrom: zod.ZodOptional<zod.ZodString>;
-    dateTo: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByUserIdResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        action: zod.ZodOptional<zod.ZodString>;
-        configId: zod.ZodOptional<zod.ZodNumber>;
-        date: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        newState: zod.ZodOptional<zod.ZodString>;
-        object: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        record: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        userIp: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByRecordIdParams: zod.ZodObject<{
-    object: zod.ZodEnum<{
-        calendars: "calendars";
-        devices: "devices";
-        users: "users";
-        contacts: "contacts";
-        cases: "cases";
-        cc_list: "cc_list";
-        cc_agent: "cc_agent";
-        cc_team: "cc_team";
-        cc_resource: "cc_resource";
-        cc_resource_group: "cc_resource_group";
-        cc_queue: "cc_queue";
-        schema: "schema";
-        chat_bots: "chat_bots";
-        cc_list_number: "cc_list_number";
-        case_comments: "case_comments";
-        record_file: "record_file";
-        sso: "sso";
-    }>;
-    record_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByRecordIdQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    action: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        delete: "delete";
-        read: "read";
-        create: "create";
-        update: "update";
-        default_no_action: "default_no_action";
-    }>>>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    userIp: zod.ZodOptional<zod.ZodString>;
-    dateFrom: zod.ZodOptional<zod.ZodString>;
-    dateTo: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const LoggerServiceSearchLogByRecordIdResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        action: zod.ZodOptional<zod.ZodString>;
-        configId: zod.ZodOptional<zod.ZodNumber>;
-        date: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        newState: zod.ZodOptional<zod.ZodString>;
-        object: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        record: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodNumber>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        userIp: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const LoggerServiceSearchLogByConfigIdParams: zod.ZodObject<
+	{
+		config_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByConfigIdQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		action: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					delete: 'delete';
+					read: 'read';
+					create: 'create';
+					update: 'update';
+					default_no_action: 'default_no_action';
+				}>
+			>
+		>;
+		userIp: zod.ZodOptional<zod.ZodString>;
+		dateFrom: zod.ZodOptional<zod.ZodString>;
+		dateTo: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByConfigIdResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						action: zod.ZodOptional<zod.ZodString>;
+						configId: zod.ZodOptional<zod.ZodNumber>;
+						date: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						newState: zod.ZodOptional<zod.ZodString>;
+						object: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						record: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						userIp: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByUserIdParams: zod.ZodObject<
+	{
+		user_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByUserIdQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		objectId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		action: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					delete: 'delete';
+					read: 'read';
+					create: 'create';
+					update: 'update';
+					default_no_action: 'default_no_action';
+				}>
+			>
+		>;
+		userIp: zod.ZodOptional<zod.ZodString>;
+		dateFrom: zod.ZodOptional<zod.ZodString>;
+		dateTo: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByUserIdResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						action: zod.ZodOptional<zod.ZodString>;
+						configId: zod.ZodOptional<zod.ZodNumber>;
+						date: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						newState: zod.ZodOptional<zod.ZodString>;
+						object: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						record: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						userIp: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByRecordIdParams: zod.ZodObject<
+	{
+		object: zod.ZodEnum<{
+			calendars: 'calendars';
+			devices: 'devices';
+			users: 'users';
+			contacts: 'contacts';
+			cases: 'cases';
+			cc_list: 'cc_list';
+			cc_agent: 'cc_agent';
+			cc_team: 'cc_team';
+			cc_resource: 'cc_resource';
+			cc_resource_group: 'cc_resource_group';
+			cc_queue: 'cc_queue';
+			schema: 'schema';
+			chat_bots: 'chat_bots';
+			cc_list_number: 'cc_list_number';
+			case_comments: 'case_comments';
+			record_file: 'record_file';
+			sso: 'sso';
+		}>;
+		record_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByRecordIdQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		action: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					delete: 'delete';
+					read: 'read';
+					create: 'create';
+					update: 'update';
+					default_no_action: 'default_no_action';
+				}>
+			>
+		>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		userIp: zod.ZodOptional<zod.ZodString>;
+		dateFrom: zod.ZodOptional<zod.ZodString>;
+		dateTo: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LoggerServiceSearchLogByRecordIdResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						action: zod.ZodOptional<zod.ZodString>;
+						configId: zod.ZodOptional<zod.ZodNumber>;
+						date: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						newState: zod.ZodOptional<zod.ZodString>;
+						object: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						record: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodNumber>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						userIp: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

@@ -9,13 +9,13 @@ import type { WebitelImProviderV1ProviderInteractive } from './webitelImProvider
  * ProviderSendInteractiveRequest sends a message with interactive UI elements.
  */
 export interface WebitelImProviderV1ProviderSendInteractiveRequest {
-    /** Optional text body displayed above the interactive element. */
-    body?: string;
-    domainId?: number;
-    externalUserId?: string;
-    gateId?: string;
-    /** Interactive payload — exactly one kind must be set. */
-    interactive?: WebitelImProviderV1ProviderInteractive;
-    /** Optional idempotency key to prevent duplicate delivery. */
-    sendId?: string;
+	/** Optional text body displayed above the interactive element. */
+	body?: string;
+	domainId?: number;
+	externalUserId?: string;
+	gateId?: string;
+	/** Interactive payload — exactly one kind must be set. */
+	interactive?: WebitelImProviderV1ProviderInteractive;
+	/** Optional idempotency key to prevent duplicate delivery. */
+	sendId?: string;
 }

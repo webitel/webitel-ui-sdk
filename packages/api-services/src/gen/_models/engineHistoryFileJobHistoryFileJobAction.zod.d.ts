@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineHistoryFileJobHistoryFileJobAction = (typeof EngineHistoryFileJobHistoryFileJobAction)[keyof typeof EngineHistoryFileJobHistoryFileJobAction];
+export type EngineHistoryFileJobHistoryFileJobAction =
+	(typeof EngineHistoryFileJobHistoryFileJobAction)[keyof typeof EngineHistoryFileJobHistoryFileJobAction];
 export declare const EngineHistoryFileJobHistoryFileJobAction: {
-    readonly Undefined: "undefined";
-    readonly Stt: "STT";
-    readonly Delete: "delete";
+	readonly Undefined: 'undefined';
+	readonly Stt: 'STT';
+	readonly Delete: 'delete';
 };

@@ -10,25 +10,25 @@ import type { WebitelImApiGatewayV1Via } from './webitelImApiGatewayV1Via.zod';
  * Contact represents an external messaging identity.
  */
 export interface WebitelImApiGatewayV1Contact {
-    /** Identifier of the specific integration app or bot. */
-    appId?: string;
-    /** Record creation timestamp (Unix Epoch in milliseconds). */
-    createdAt?: string;
-    /** Represents if usere is real person or automatic script. */
-    isBot?: boolean;
-    /** Provider-specific unique identifier (Issuer ID). */
-    iss?: string;
-    /** Additional dynamic attributes provided by the messenger. */
-    metadata?: WebitelImApiGatewayV1ContactMetadata;
-    /** Display name of the contact. */
-    name?: string;
-    /** Associated internal system subject/identifier. */
-    sub?: string;
-    /** Channel type (e.g., 'webchat', 'telegram'). */
-    type?: string;
-    /** Last record update timestamp (Unix Epoch in milliseconds). */
-    updatedAt?: string;
-    /** Technical username or handle. */
-    username?: string;
-    vias?: WebitelImApiGatewayV1Via[];
+	/** Identifier of the specific integration app or bot. */
+	appId?: string;
+	/** Record creation timestamp (Unix Epoch in milliseconds). */
+	createdAt?: string;
+	/** Represents if usere is real person or automatic script. */
+	isBot?: boolean;
+	/** Provider-specific unique identifier (Issuer ID). */
+	iss?: string;
+	/** Additional dynamic attributes provided by the messenger. */
+	metadata?: WebitelImApiGatewayV1ContactMetadata;
+	/** Display name of the contact. */
+	name?: string;
+	/** Associated internal system subject/identifier. */
+	sub?: string;
+	/** Channel type (e.g., 'webchat', 'telegram'). */
+	type?: string;
+	/** Last record update timestamp (Unix Epoch in milliseconds). */
+	updatedAt?: string;
+	/** Technical username or handle. */
+	username?: string;
+	vias?: WebitelImApiGatewayV1Via[];
 }

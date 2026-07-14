@@ -9,8 +9,8 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * An input of the Contact's groups.
  */
 export interface ContactsInputContactGroup {
-    /** Unique ID of the latest version of an existing resource. */
-    etag: string;
-    /** Group of contacts associated. */
-    group?: WebitelContactsLookup;
+	/** Unique ID of the latest version of an existing resource. */
+	etag: string;
+	/** Group of contacts associated. */
+	group?: WebitelContactsLookup;
 }

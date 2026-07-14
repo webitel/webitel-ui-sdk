@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type GetQueuesGlobalStateParams = {
-    q?: string;
-    type?: number[];
-    teamId?: number[];
-    tags?: string[];
+	q?: string;
+	type?: number[];
+	teamId?: number[];
+	tags?: string[];
 };

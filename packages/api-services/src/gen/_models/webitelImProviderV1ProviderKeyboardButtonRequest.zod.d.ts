@@ -8,5 +8,5 @@
  * ProviderKeyboardButtonRequest prompts the user for device data (location, phone, email).
  */
 export interface WebitelImProviderV1ProviderKeyboardButtonRequest {
-    action?: string;
+	action?: string;
 }

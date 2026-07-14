@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type StorageServiceType = (typeof StorageServiceType)[keyof typeof StorageServiceType];
+export type StorageServiceType =
+	(typeof StorageServiceType)[keyof typeof StorageServiceType];
 export declare const StorageServiceType: {
-    readonly DefaultService: "DefaultService";
-    readonly Stt: "STT";
-    readonly Tts: "TTS";
+	readonly DefaultService: 'DefaultService';
+	readonly Stt: 'STT';
+	readonly Tts: 'TTS';
 };

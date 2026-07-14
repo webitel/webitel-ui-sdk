@@ -7,7 +7,14 @@
  * @param options.withContext - Context to pass to transformers
  * @returns The transformed object
  */
-export declare const applyTransform: (target: any, transformers: any, { debug, withContext }?: {
-    debug?: boolean;
-    withContext?: any;
-}) => any;
+export declare const applyTransform: (
+	target: any,
+	transformers: any,
+	{
+		debug,
+		withContext,
+	}?: {
+		debug?: boolean;
+		withContext?: any;
+	},
+) => any;

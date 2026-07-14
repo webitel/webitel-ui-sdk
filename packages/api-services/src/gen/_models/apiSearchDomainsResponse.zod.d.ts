@@ -6,5 +6,5 @@
  */
 import type { ApiOrganization } from './apiOrganization.zod';
 export interface ApiSearchDomainsResponse {
-    domains?: ApiOrganization[];
+	domains?: ApiOrganization[];
 }

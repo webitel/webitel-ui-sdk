@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiLDAPCatalogTLSConfig {
-    ca?: string;
-    /** PEM: base64 */
-    cert?: string;
-    key?: string;
+	ca?: string;
+	/** PEM: base64 */
+	cert?: string;
+	key?: string;
 }

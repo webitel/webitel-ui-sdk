@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineForAgentPauseCause {
-    durationMin?: number;
-    id?: number;
-    limitMin?: number;
-    name?: string;
+	durationMin?: number;
+	id?: number;
+	limitMin?: number;
+	name?: string;
 }

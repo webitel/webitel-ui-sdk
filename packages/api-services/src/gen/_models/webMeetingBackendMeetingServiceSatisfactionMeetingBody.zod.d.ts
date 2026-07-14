@@ -8,6 +8,6 @@
  * Request to submit meeting satisfaction feedback.
  */
 export interface WebMeetingBackendMeetingServiceSatisfactionMeetingBody {
-    /** The satisfaction value or score. */
-    satisfaction?: string;
+	/** The satisfaction value or score. */
+	satisfaction?: string;
 }

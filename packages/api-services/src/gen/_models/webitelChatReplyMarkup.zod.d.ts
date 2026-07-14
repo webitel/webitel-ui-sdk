@@ -6,10 +6,10 @@
  */
 import type { WebitelChatButtonRow } from './webitelChatButtonRow.zod';
 export interface WebitelChatReplyMarkup {
-    buttons?: WebitelChatButtonRow[];
-    /**
-     * An option used to block input to force
-     * the user to respond with one of the buttons.
-     */
-    noInput?: boolean;
+	buttons?: WebitelChatButtonRow[];
+	/**
+	 * An option used to block input to force
+	 * the user to respond with one of the buttons.
+	 */
+	noInput?: boolean;
 }

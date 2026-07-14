@@ -6,5 +6,5 @@
  */
 import type { ApiCustomer } from './apiCustomer.zod';
 export interface ApiUpdateCustomerResponse {
-    customer?: ApiCustomer;
+	customer?: ApiCustomer;
 }

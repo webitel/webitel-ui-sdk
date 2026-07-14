@@ -6,17 +6,17 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineAgentTeamServiceUpdateAgentTeamBody {
-    admin?: EngineLookup[];
-    callTimeout?: number;
-    description?: string;
-    domainId?: string;
-    forecastCalculation?: EngineLookup;
-    inviteChatTimeout?: number;
-    maxNoAnswer?: number;
-    name?: string;
-    noAnswerDelayTime?: number;
-    screenControl?: boolean;
-    strategy?: string;
-    taskAcceptTimeout?: number;
-    wrapUpTime?: number;
+	admin?: EngineLookup[];
+	callTimeout?: number;
+	description?: string;
+	domainId?: string;
+	forecastCalculation?: EngineLookup;
+	inviteChatTimeout?: number;
+	maxNoAnswer?: number;
+	name?: string;
+	noAnswerDelayTime?: number;
+	screenControl?: boolean;
+	strategy?: string;
+	taskAcceptTimeout?: number;
+	wrapUpTime?: number;
 }

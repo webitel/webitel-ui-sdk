@@ -9,9 +9,9 @@ import type { WebitelImApiGatewayV1ImageInput } from './webitelImApiGatewayV1Ima
  * Media container for images attachments.
  */
 export interface WebitelImApiGatewayV1Images {
-    /**
-     * Images to be attached to the header of interactive message.
-     * Max allowed images: 10.
-     */
-    images?: WebitelImApiGatewayV1ImageInput[];
+	/**
+	 * Images to be attached to the header of interactive message.
+	 * Max allowed images: 10.
+	 */
+	images?: WebitelImApiGatewayV1ImageInput[];
 }

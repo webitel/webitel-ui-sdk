@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreateRelatedCaseParams = {
-    /**
-     * Fields to include in the response.
-     */
-    fields?: string[];
+	/**
+	 * Fields to include in the response.
+	 */
+	fields?: string[];
 };

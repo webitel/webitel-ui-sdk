@@ -11,10 +11,11 @@
  *  - PROVIDER_STATUS_INACTIVE: Manually disabled by user
  *  - PROVIDER_STATUS_ERROR: Connection or authentication failed
  */
-export type WebitelImProviderV1ProviderStatus = (typeof WebitelImProviderV1ProviderStatus)[keyof typeof WebitelImProviderV1ProviderStatus];
+export type WebitelImProviderV1ProviderStatus =
+	(typeof WebitelImProviderV1ProviderStatus)[keyof typeof WebitelImProviderV1ProviderStatus];
 export declare const WebitelImProviderV1ProviderStatus: {
-    readonly ProviderStatusUnspecified: "PROVIDER_STATUS_UNSPECIFIED";
-    readonly ProviderStatusActive: "PROVIDER_STATUS_ACTIVE";
-    readonly ProviderStatusInactive: "PROVIDER_STATUS_INACTIVE";
-    readonly ProviderStatusError: "PROVIDER_STATUS_ERROR";
+	readonly ProviderStatusUnspecified: 'PROVIDER_STATUS_UNSPECIFIED';
+	readonly ProviderStatusActive: 'PROVIDER_STATUS_ACTIVE';
+	readonly ProviderStatusInactive: 'PROVIDER_STATUS_INACTIVE';
+	readonly ProviderStatusError: 'PROVIDER_STATUS_ERROR';
 };

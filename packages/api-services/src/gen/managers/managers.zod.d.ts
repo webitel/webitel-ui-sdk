@@ -8,361 +8,660 @@ import * as zod from 'zod';
 /**
  * @summary Remove Contact Managers associations.
  */
-export declare const DeleteManagersParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteManagersQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    etag: zod.ZodArray<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteManagersResponseItem: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const DeleteManagersResponse: zod.ZodArray<zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>>;
+export declare const DeleteManagersParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteManagersQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		etag: zod.ZodArray<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteManagersResponseItem: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteManagersResponse: zod.ZodArray<
+	zod.ZodObject<
+		{
+			createdAt: zod.ZodOptional<zod.ZodString>;
+			createdBy: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+			etag: zod.ZodOptional<zod.ZodString>;
+			id: zod.ZodOptional<zod.ZodString>;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			updatedAt: zod.ZodOptional<zod.ZodString>;
+			updatedBy: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+			user: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+			ver: zod.ZodOptional<zod.ZodNumber>;
+		},
+		zod.z.core.$strip
+	>
+>;
 /**
  * @summary Search the Contact's Managers.
  */
-export declare const ListManagersParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ListManagersQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ListManagersResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ListManagersParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListManagersQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListManagersResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Associate new Managers to the Contact.
  */
-export declare const MergeManagersParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const MergeManagersQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const MergeManagersBodyItem: zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const MergeManagersBody: zod.ZodArray<zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>>;
-export declare const MergeManagersResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const MergeManagersParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeManagersQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeManagersBodyItem: zod.ZodObject<
+	{
+		etag: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeManagersBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			etag: zod.ZodString;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			user: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const MergeManagersResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Reset Managers to fit the specified final set.
  */
-export declare const ResetManagersParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ResetManagersQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ResetManagersBodyItem: zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ResetManagersBody: zod.ZodArray<zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>>;
-export declare const ResetManagersResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ResetManagersParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetManagersQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetManagersBodyItem: zod.ZodObject<
+	{
+		etag: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetManagersBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			etag: zod.ZodString;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			user: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const ResetManagersResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove the contact's manager address link
  */
-export declare const DeleteManagerParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteManagerQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteManagerResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteManagerParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteManagerQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteManagerResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Locate the manager address link.
  */
-export declare const LocateManagerParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const LocateManagerQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const LocateManagerResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const LocateManagerParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateManagerQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateManagerResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the contact's manager address link details
  */
-export declare const UpdateManager2Params: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateManager2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateManager2Body: zod.ZodObject<{
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateManager2Response: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateManager2Params: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManager2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManager2Body: zod.ZodObject<
+	{
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManager2Response: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the contact's manager address link details
  */
-export declare const UpdateManagerParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateManagerQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateManagerBody: zod.ZodObject<{
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateManagerResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateManagerParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManagerQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManagerBody: zod.ZodObject<
+	{
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateManagerResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

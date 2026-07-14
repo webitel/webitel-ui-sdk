@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1ProviderGateTemplate {
-    eventType?: string;
-    gateId?: string;
-    template?: string;
+	eventType?: string;
+	gateId?: string;
+	template?: string;
 }

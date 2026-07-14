@@ -7,6 +7,6 @@
 import type { ApiLicenseExpiryWarning } from './apiLicenseExpiryWarning.zod';
 import type { ApiPasswordExpiryWarning } from './apiPasswordExpiryWarning.zod';
 export interface ApiWarningData {
-    licenseExpiry?: ApiLicenseExpiryWarning;
-    passwordExpiry?: ApiPasswordExpiryWarning;
+	licenseExpiry?: ApiLicenseExpiryWarning;
+	passwordExpiry?: ApiPasswordExpiryWarning;
 }

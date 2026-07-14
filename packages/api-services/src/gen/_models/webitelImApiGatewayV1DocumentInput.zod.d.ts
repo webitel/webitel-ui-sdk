@@ -10,9 +10,9 @@
  * entity in messaging systems.
  */
 export interface WebitelImApiGatewayV1DocumentInput {
-    fileName?: string;
-    id?: string;
-    mimeType?: string;
-    sizeBytes?: string;
-    url?: string;
+	fileName?: string;
+	id?: string;
+	mimeType?: string;
+	sizeBytes?: string;
+	url?: string;
 }

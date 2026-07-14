@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderKeyboardButton } from './webitelImProvi
  * ProviderKeyboardRow is a horizontal row of buttons.
  */
 export interface WebitelImProviderV1ProviderKeyboardRow {
-    buttons?: WebitelImProviderV1ProviderKeyboardButton[];
+	buttons?: WebitelImProviderV1ProviderKeyboardButton[];
 }

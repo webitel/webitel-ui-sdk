@@ -10,9 +10,9 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * LabelTags dataset list of label's info.
  */
 export interface ContactsLabelTags {
-    labels?: ContactsLabelInfo[];
-    next?: boolean;
-    /** Page number of partial result. */
-    page?: number;
-    sources?: WebitelContactsLookup[];
+	labels?: ContactsLabelInfo[];
+	next?: boolean;
+	/** Page number of partial result. */
+	page?: number;
+	sources?: WebitelContactsLookup[];
 }

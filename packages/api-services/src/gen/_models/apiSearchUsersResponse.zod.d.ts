@@ -6,8 +6,8 @@
  */
 import type { ApiUser } from './apiUser.zod';
 export interface ApiSearchUsersResponse {
-    items?: ApiUser[];
-    next?: boolean;
-    page?: number;
-    size?: number;
+	items?: ApiUser[];
+	next?: boolean;
+	page?: number;
+	size?: number;
 }

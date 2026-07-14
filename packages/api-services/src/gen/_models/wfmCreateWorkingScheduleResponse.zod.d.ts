@@ -6,5 +6,5 @@
  */
 import type { WfmWorkingSchedule } from './wfmWorkingSchedule.zod';
 export interface WfmCreateWorkingScheduleResponse {
-    item?: WfmWorkingSchedule;
+	item?: WfmWorkingSchedule;
 }

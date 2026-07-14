@@ -5,159 +5,303 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const ForecastCalculationServiceSearchForecastCalculationQueryParams: zod.ZodObject<{
-    q: zod.ZodOptional<zod.ZodString>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceSearchForecastCalculationResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceCreateForecastCalculationBody: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceCreateForecastCalculationResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceDeleteForecastCalculationParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceDeleteForecastCalculationResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceReadForecastCalculationParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceReadForecastCalculationQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceReadForecastCalculationResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceExecuteForecastCalculationParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceExecuteForecastCalculationQueryParams: zod.ZodObject<{
-    teamId: zod.ZodOptional<zod.ZodString>;
-    forecastDataFrom: zod.ZodOptional<zod.ZodString>;
-    forecastDataTo: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceExecuteForecastCalculationResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        agents: zod.ZodOptional<zod.ZodString>;
-        timestamp: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceUpdateForecastCalculationParams: zod.ZodObject<{
-    'item.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceUpdateForecastCalculationBody: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ForecastCalculationServiceUpdateForecastCalculationResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        procedure: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ForecastCalculationServiceSearchForecastCalculationQueryParams: zod.ZodObject<
+	{
+		q: zod.ZodOptional<zod.ZodString>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceSearchForecastCalculationResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						procedure: zod.ZodOptional<zod.ZodString>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceCreateForecastCalculationBody: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					procedure: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceCreateForecastCalculationResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					procedure: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceDeleteForecastCalculationParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceDeleteForecastCalculationResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceReadForecastCalculationParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceReadForecastCalculationQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceReadForecastCalculationResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					procedure: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceExecuteForecastCalculationParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceExecuteForecastCalculationQueryParams: zod.ZodObject<
+	{
+		teamId: zod.ZodOptional<zod.ZodString>;
+		forecastDataFrom: zod.ZodOptional<zod.ZodString>;
+		forecastDataTo: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceExecuteForecastCalculationResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						agents: zod.ZodOptional<zod.ZodString>;
+						timestamp: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceUpdateForecastCalculationParams: zod.ZodObject<
+	{
+		'item.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceUpdateForecastCalculationBody: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					procedure: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ForecastCalculationServiceUpdateForecastCalculationResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					args: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					procedure: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

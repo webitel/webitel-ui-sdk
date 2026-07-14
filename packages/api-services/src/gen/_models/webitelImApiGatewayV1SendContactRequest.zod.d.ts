@@ -11,17 +11,17 @@ import type { WebitelImApiGatewayV1SendContactRequestMetadata } from './webitelI
  * SendContactRequest sends contact information.
  */
 export interface WebitelImApiGatewayV1SendContactRequest {
-    /** Email must be valid if provided. */
-    email?: string;
-    /** Arbitrary metadata. */
-    metadata?: WebitelImApiGatewayV1SendContactRequestMetadata;
-    /** Full name of the contact. */
-    name?: string;
-    /** Phone number in E.164 format recommended. */
-    phoneNumber?: string;
-    sendAs?: WebitelImApiGatewayV1PeerIdentity;
-    /** Optional send ID for idempotency. */
-    sendId?: string;
-    /** Recipient of the message. */
-    to?: WebitelImApiGatewayV1Peer;
+	/** Email must be valid if provided. */
+	email?: string;
+	/** Arbitrary metadata. */
+	metadata?: WebitelImApiGatewayV1SendContactRequestMetadata;
+	/** Full name of the contact. */
+	name?: string;
+	/** Phone number in E.164 format recommended. */
+	phoneNumber?: string;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
+	/** Optional send ID for idempotency. */
+	sendId?: string;
+	/** Recipient of the message. */
+	to?: WebitelImApiGatewayV1Peer;
 }

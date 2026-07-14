@@ -6,6 +6,6 @@
  */
 import type { WfmWorkingCondition } from './wfmWorkingCondition.zod';
 export interface WfmSearchWorkingConditionResponse {
-    items?: WfmWorkingCondition[];
-    next?: boolean;
+	items?: WfmWorkingCondition[];
+	next?: boolean;
 }

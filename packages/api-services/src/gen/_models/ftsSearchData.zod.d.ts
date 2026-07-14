@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface FtsSearchData {
-    id?: string;
-    objectName?: string;
-    text?: string;
+	id?: string;
+	objectName?: string;
+	text?: string;
 }

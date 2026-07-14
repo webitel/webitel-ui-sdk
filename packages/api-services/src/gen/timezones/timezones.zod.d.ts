@@ -8,343 +8,629 @@ import * as zod from 'zod';
 /**
  * @summary Remove the Contact's timezone(s).
  */
-export declare const DeleteTimezonesParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteTimezonesQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    etag: zod.ZodArray<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteTimezonesResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteTimezonesParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteTimezonesQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		etag: zod.ZodArray<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteTimezonesResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary List of the Contact's timezone(s).
  */
-export declare const ListTimezonesParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ListTimezonesQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const ListTimezonesResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ListTimezonesParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListTimezonesQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListTimezonesResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Associate more timezone(s) with the Contact.
  */
-export declare const MergeTimezonesParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const MergeTimezonesQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const MergeTimezonesBodyItem: zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const MergeTimezonesBody: zod.ZodArray<zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>>;
-export declare const MergeTimezonesResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const MergeTimezonesParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeTimezonesQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeTimezonesBodyItem: zod.ZodObject<
+	{
+		etag: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeTimezonesBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			etag: zod.ZodString;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			timezone: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const MergeTimezonesResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Resets all timezones of the contact according to the input dataset.
  */
-export declare const ResetTimezonesParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ResetTimezonesQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ResetTimezonesBodyItem: zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ResetTimezonesBody: zod.ZodArray<zod.ZodObject<{
-    etag: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>>;
-export declare const ResetTimezonesResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ResetTimezonesParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetTimezonesQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetTimezonesBodyItem: zod.ZodObject<
+	{
+		etag: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetTimezonesBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			etag: zod.ZodString;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			timezone: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const ResetTimezonesResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove the Contact's timezone association.
  */
-export declare const DeleteTimezoneParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteTimezoneQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteTimezoneResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteTimezoneParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteTimezoneQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteTimezoneResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Locate the Contact's timezone association.
  */
-export declare const LocateTimezoneParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const LocateTimezoneQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const LocateTimezoneResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const LocateTimezoneParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateTimezoneQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateTimezoneResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the Contact's timezone details.
  */
-export declare const UpdateTimezone2Params: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezone2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezone2Body: zod.ZodObject<{
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezone2Response: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateTimezone2Params: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezone2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezone2Body: zod.ZodObject<
+	{
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezone2Response: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the Contact's timezone details.
  */
-export declare const UpdateTimezoneParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezoneQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezoneBody: zod.ZodObject<{
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateTimezoneResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateTimezoneParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezoneQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezoneBody: zod.ZodObject<
+	{
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateTimezoneResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

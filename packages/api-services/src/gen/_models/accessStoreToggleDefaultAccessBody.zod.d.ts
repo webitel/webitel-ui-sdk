@@ -7,11 +7,11 @@
 import type { AccessStoreToggleDefaultAccessBodyObject } from './accessStoreToggleDefaultAccessBodyObject.zod';
 import type { ApiGrantAccessRequestV1 } from './apiGrantAccessRequestV1.zod';
 export interface AccessStoreToggleDefaultAccessBody {
-    /**
-     * list of changes ...
-     *
-     * [TO] (GRANT/REVOKE)
-     */
-    list?: ApiGrantAccessRequestV1[];
-    object?: AccessStoreToggleDefaultAccessBodyObject;
+	/**
+	 * list of changes ...
+	 *
+	 * [TO] (GRANT/REVOKE)
+	 */
+	list?: ApiGrantAccessRequestV1[];
+	object?: AccessStoreToggleDefaultAccessBodyObject;
 }
