@@ -8,6 +8,7 @@
 	"scripts": {
 		"publish-styleguide": "npm run build && npm publish --access public",
 		"build": "tsc -p ./tsconfig.build.json",
+		"typecheck": "tsc --noEmit -p ./tsconfig.build.json",
 		"lint:fix": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
 		"test:unit": "node -e \"process.exit(0)\"",
