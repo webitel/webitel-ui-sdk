@@ -20,7 +20,7 @@
 		"gen:api:typedoc": "npx typedoc",
 		"gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
 		"build:types": "vue-tsc -p ./tsconfig.build.json",
-		"typecheck": "vue-tsc --noEmit -p ./tsconfig.json",
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"format:all": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
 		"test:unit": "node -e \"process.exit(0)\"",

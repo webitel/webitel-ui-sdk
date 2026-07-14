@@ -101,9 +101,8 @@ jobs:
         with:
           node-version-file: package.json
           cache: npm
-      # ui-datalist is not an npm workspace — own lockfile
+      # Root install provides path aliases + shared types (e.g. vidstack)
       - run: npm ci
-        working-directory: packages/ui-datalist
       - run: npm run --prefix packages/ui-datalist typecheck
 
   typecheck-ui-chats:
@@ -118,7 +117,5 @@ jobs:
         with:
           node-version-file: package.json
           cache: npm
-      # ui-chats is not an npm workspace — own lockfile
       - run: npm ci
-        working-directory: packages/ui-chats
       - run: npm run --prefix packages/ui-chats typecheck

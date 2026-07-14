@@ -1,0 +1,12 @@
+{
+	// Separate from tsconfig.build: needs baseUrl at repo root so monorepo path
+	// aliases resolve; must not inherit emit/rootDir from build.
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "../.."
+	},
+	"include": [
+		"src/**/*.ts",
+		"../../env.d.ts"
+	]
+}
