@@ -12,11 +12,10 @@
 <script setup lang="ts">
 import { computed, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
-
-import type { UserAccessFlags } from '../../Userinfo';
 import { useTableStore } from '../../../store/new';
 import FilterPagination from '../../Filters/components/filter-pagination.vue';
 import { useTableFilters } from '../../Filters/composables/useTableFilters';
+import type { UserAccessFlags } from '../../Userinfo';
 import PermissionsTabContent from './_internal/permissions-tab-content.vue';
 
 const props = withDefaults(
