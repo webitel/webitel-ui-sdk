@@ -108,10 +108,8 @@ export const useChatScroll = ({
 
 			const newScrollHeight = el.scrollHeight;
 
-			const distanceFromBottom =
-				prevScrollHeight - (el.scrollTop + el.clientHeight);
 			const wasNearBottom =
-				distanceFromBottom >= 0 && distanceFromBottom <= nearBottomOffset;
+				el.scrollTop + el.clientHeight >= prevScrollHeight - 2;
 			const contentGrown = newScrollHeight > prevScrollHeight;
 
 			/**
