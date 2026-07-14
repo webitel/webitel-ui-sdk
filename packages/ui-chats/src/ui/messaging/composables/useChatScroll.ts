@@ -20,6 +20,9 @@ export interface UseChatScrollOptions {
 	chatId: ComputedRef<string>;
 	isChatClosed: ComputedRef<boolean>;
 	isLoading?: Ref<boolean> | ComputedRef<boolean>;
+	closedChatMessageId?:
+		| Ref<string | number | null>
+		| ComputedRef<string | number | null>;
 	onBeforeStart?: (options: {
 		scrollToBottom: (behavior?: ScrollBehavior) => void;
 	}) => void;
@@ -32,6 +35,7 @@ export const useChatScroll = ({
 	chatId,
 	isChatClosed,
 	isLoading,
+	closedChatMessageId,
 	onBeforeStart = (options) => {
 		options.scrollToBottom();
 	},
@@ -46,9 +50,8 @@ export const useChatScroll = ({
 		updateThreshold,
 	} = useScrollToBottomBtn(chatContainer, arrivedState);
 
-	/* height of a message + gap */
-	const nearBottomOffset = 48;
 	let isLoadingNextMessages = false;
+	let isInitialClosedScroll = false;
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
@@ -76,6 +79,18 @@ export const useChatScroll = ({
 
 		resetScrollToBottomBtn();
 	};
+
+	const scrollToMessage = (
+		id: string | number,
+		behavior: ScrollBehavior = 'auto',
+	) => {
+		const el = chatContainer.value?.querySelector(`[id="message-${id}"]`);
+		el?.scrollIntoView({
+			block: 'start',
+			behavior,
+		});
+	};
+
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
 		if (!chatContainer.value?.children) return;
@@ -108,10 +123,13 @@ export const useChatScroll = ({
 
 			const newScrollHeight = el.scrollHeight;
 
-			const distanceFromBottom =
-				prevScrollHeight - (el.scrollTop + el.clientHeight);
-			const wasNearBottom =
-				distanceFromBottom >= 0 && distanceFromBottom <= nearBottomOffset;
+			if (isLoadingNextMessages) {
+				isLoadingNextMessages = false;
+				prevScrollHeight = newScrollHeight;
+				updateScrollToBottomBtnVisibility(el);
+				return;
+			}
+
 			const contentGrown = newScrollHeight > prevScrollHeight;
 
 			/**
@@ -120,6 +138,9 @@ export const useChatScroll = ({
 			 * arrivedState.bottom lags after programmatic scrollTo,
 			 * so the distance is also checked manually.
 			 */
+			const wasNearBottom =
+				el.scrollTop + el.clientHeight >= prevScrollHeight - 2;
+
 			const shouldScrollToBottom =
 				contentGrown && (arrivedState.bottom || wasNearBottom);
 
@@ -154,6 +175,14 @@ export const useChatScroll = ({
 		resetScrollToBottomBtn();
 	};
 
+	const restoreScrollPosition = async () => {
+		await nextTick();
+		chatContainer.value?.scrollTo({
+			top: lastVisibleMessageEl?.offsetTop,
+			behavior: 'auto',
+		});
+	};
+
 	watch(
 		() => messages.value?.length,
 		(newValue, oldValue) => {
@@ -168,18 +197,23 @@ export const useChatScroll = ({
 	watch(
 		() => isLoading?.value,
 		async (loading) => {
-			// restore scroll position after older messages are prepended:
-			// scroll to the previously top message so the view doesn't jump
-			if (loading || !isLoadingNextMessages) return;
+			if (loading) return;
 
-			await nextTick();
+			if (isChatClosed.value) {
+				isLoadingNextMessages = false;
 
-			chatContainer.value?.scrollTo({
-				top: lastVisibleMessageEl?.offsetTop,
-				behavior: 'auto',
-			});
+				if (isInitialClosedScroll) {
+					isInitialClosedScroll = false;
+					return;
+				}
 
-			isLoadingNextMessages = false;
+				await restoreScrollPosition();
+				return;
+			}
+
+			if (!isLoadingNextMessages) return;
+
+			await restoreScrollPosition();
 		},
 	);
 
@@ -188,7 +222,10 @@ export const useChatScroll = ({
 		async () => {
 			resetScrollState();
 
-			if (isChatClosed.value) return;
+			if (isChatClosed.value) {
+				isInitialClosedScroll = true;
+				return;
+			}
 
 			await nextTick();
 
@@ -197,6 +234,18 @@ export const useChatScroll = ({
 			});
 
 			startStickToBottomObserving();
+		},
+		{
+			immediate: true,
+		},
+	);
+
+	watch(
+		() => closedChatMessageId?.value,
+		async (id) => {
+			if (!id) return;
+			await nextTick();
+			scrollToMessage(id);
 		},
 		{
 			immediate: true,

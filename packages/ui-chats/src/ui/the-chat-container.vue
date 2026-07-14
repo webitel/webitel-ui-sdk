@@ -20,8 +20,28 @@
         :contact="props.contact"
         :chat-id="props.chatId"
         :is-chat-closed="props.isChatClosed"
+        :closed-chat-first-message-id="props.closedChatFirstMessageId"
         @[ChatAction.LoadNextMessages]="emit(ChatAction.LoadNextMessages)"
-      />
+      >
+        <template
+          v-if="$slots['before-message']"
+          #before-message="slotProps"
+        >
+          <slot
+            name="before-message"
+            v-bind="slotProps"
+          />
+        </template>
+        <template
+          v-if="$slots['after-message']"
+          #after-message="slotProps"
+        >
+          <slot
+            name="after-message"
+            v-bind="slotProps"
+          />
+        </template>
+      </messages-container>
     </slot>
     <slot name="footer">
       <chat-footer-wrapper v-if="!props.readonly">
@@ -87,6 +107,7 @@ const props = withDefaults(
 		contact?: WebitelContactsContact;
 		chatId?: string;
 		isChatClosed?: boolean;
+		closedChatFirstMessageId?: string | number | null;
 	}>(),
 	{
 		size: ComponentSize.MD,
@@ -97,6 +118,7 @@ const props = withDefaults(
 		readonly: false,
 		chatId: '',
 		isChatClosed: false,
+		closedChatFirstMessageId: null,
 	},
 );
 
@@ -118,6 +140,14 @@ const slots = defineSlots<
 	{
 		main: () => unknown;
 		footer: () => unknown;
+		'before-message': (props: {
+			message: ChatMessageType;
+			index: number;
+		}) => unknown;
+		'after-message': (props: {
+			message: ChatMessageType;
+			index: number;
+		}) => unknown;
 	} & SharedActionSlots
 >();
 

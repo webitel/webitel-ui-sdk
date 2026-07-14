@@ -26,7 +26,11 @@ export const useChatMessages = (
 
 	const showAvatar = (index: number): boolean => {
 		const { prevMessage, message } = getMessage(index);
-		return index === 0 || message?.member?.type !== prevMessage?.member?.type;
+		return (
+			index === 0 ||
+			message?.member?.type !== prevMessage?.member?.type ||
+			message?.chat?.id !== prevMessage?.chat?.id
+		);
 	};
 
 	function getMessage(index: number): GetMessageResult {
