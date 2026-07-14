@@ -6,10 +6,10 @@
  */
 import type { CommentFormat } from './commentFormat.zod';
 export interface ContactsInputComment {
-	/** Unique ID of the latest version of an existing resorce. */
-	etag?: string;
-	/** NEW Text components styling format. */
-	format?: CommentFormat[];
-	/** NEW Text of the comment. */
-	text: string;
+    /** Unique ID of the latest version of an existing resorce. */
+    etag?: string;
+    /** NEW Text components styling format. */
+    format?: CommentFormat[];
+    /** NEW Text of the comment. */
+    text: string;
 }

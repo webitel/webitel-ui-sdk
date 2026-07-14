@@ -5,45 +5,45 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CatalogGetCustomersParams = {
-	/**
-	 * Page number to return. **default**: 1.
-	 */
-	page?: number;
-	/**
-	 * Page records limit. **default**: 16.
-	 */
-	size?: number;
-	/**
-	 * Search term: peer{id,name}
-	 */
-	q?: string;
-	/**
-	 * Sort records by { fields } specification.
-	 */
-	sort?: string[];
-	/**
-	 * Fields [Q]uery to build result dataset record.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique contact **ID**entifier(s).
-	 */
-	id?: string[];
-	/**
-	 * The type of contact to filter.
-	 */
-	type?: string;
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	viaId?: string;
-	/**
-	 * Contact **type** provider.
-	 */
-	viaType?: string;
-	/**
-	 * Contact display **name**.
-	 */
-	viaName?: string;
+    /**
+     * Page number to return. **default**: 1.
+     */
+    page?: number;
+    /**
+     * Page records limit. **default**: 16.
+     */
+    size?: number;
+    /**
+     * Search term: peer{id,name}
+     */
+    q?: string;
+    /**
+     * Sort records by { fields } specification.
+     */
+    sort?: string[];
+    /**
+     * Fields [Q]uery to build result dataset record.
+     */
+    fields?: string[];
+    /**
+     * Set of unique contact **ID**entifier(s).
+     */
+    id?: string[];
+    /**
+     * The type of contact to filter.
+     */
+    type?: string;
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    viaId?: string;
+    /**
+     * Contact **type** provider.
+     */
+    viaType?: string;
+    /**
+     * Contact display **name**.
+     */
+    viaName?: string;
 };

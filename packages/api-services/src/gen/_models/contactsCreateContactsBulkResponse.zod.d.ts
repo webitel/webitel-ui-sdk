@@ -10,12 +10,12 @@ import type { WebitelContactsContact } from './webitelContactsContact.zod';
  * Bulk Create result: successfully created Contacts plus per-item failures.
  */
 export interface ContactsCreateContactsBulkResponse {
-	/**
-	 * Successfully created Contacts. Position matches the corresponding
-	 * InputContact position in CreateContactsRequest.input, skipping
-	 * failures.
-	 */
-	data?: WebitelContactsContact[];
-	/** Per-item failures with original index and error details. */
-	failures?: ContactsCreateContactError[];
+    /**
+     * Successfully created Contacts. Position matches the corresponding
+     * InputContact position in CreateContactsRequest.input, skipping
+     * failures.
+     */
+    data?: WebitelContactsContact[];
+    /** Per-item failures with original index and error details. */
+    failures?: ContactsCreateContactError[];
 }

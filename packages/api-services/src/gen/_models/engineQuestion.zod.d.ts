@@ -7,12 +7,12 @@
 import type { EngineAuditQuestionType } from './engineAuditQuestionType.zod';
 import type { EngineQuestionOption } from './engineQuestionOption.zod';
 export interface EngineQuestion {
-	criticalViolation?: boolean;
-	description?: string;
-	max?: number;
-	min?: number;
-	options?: EngineQuestionOption[];
-	question?: string;
-	required?: boolean;
-	type?: EngineAuditQuestionType;
+    criticalViolation?: boolean;
+    description?: string;
+    max?: number;
+    min?: number;
+    options?: EngineQuestionOption[];
+    question?: string;
+    required?: boolean;
+    type?: EngineAuditQuestionType;
 }

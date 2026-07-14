@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAgentChannel {
-	channel?: string;
-	joinedAt?: string;
-	state?: string;
-	timeout?: string;
+    channel?: string;
+    joinedAt?: string;
+    state?: string;
+    timeout?: string;
 }

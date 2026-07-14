@@ -6,12 +6,12 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesCloseReason {
-	closeReasonGroupId?: string;
-	createdAt?: string;
-	createdBy?: GeneralLookup;
-	description?: string;
-	id?: string;
-	name?: string;
-	updatedAt?: string;
-	updatedBy?: GeneralLookup;
+    closeReasonGroupId?: string;
+    createdAt?: string;
+    createdBy?: GeneralLookup;
+    description?: string;
+    id?: string;
+    name?: string;
+    updatedAt?: string;
+    updatedBy?: GeneralLookup;
 }

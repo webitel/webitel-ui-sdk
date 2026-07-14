@@ -7,27 +7,27 @@
 import type { ApiUserId } from './apiUserId.zod';
 import type { UpdateDevice2BodyProvision } from './updateDevice2BodyProvision.zod';
 export type UpdateDevice2Body = {
-	/** username */
-	account?: string;
-	/** vendor brand name */
-	brand?: string;
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
-	/** act as a hotdesk */
-	hotdesk?: boolean;
-	hotdesks?: string[];
-	ip?: string;
-	loggedIn?: string;
-	mac?: string;
-	model?: string;
-	/** display name */
-	name?: string;
-	password?: string;
-	provision?: UpdateDevice2BodyProvision;
-	reged?: boolean;
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: ApiUserId;
+    /** username */
+    account?: string;
+    /** vendor brand name */
+    brand?: string;
+    createdAt?: string;
+    createdBy?: ApiUserId;
+    deletedAt?: string;
+    deletedBy?: ApiUserId;
+    /** act as a hotdesk */
+    hotdesk?: boolean;
+    hotdesks?: string[];
+    ip?: string;
+    loggedIn?: string;
+    mac?: string;
+    model?: string;
+    /** display name */
+    name?: string;
+    password?: string;
+    provision?: UpdateDevice2BodyProvision;
+    reged?: boolean;
+    updatedAt?: string;
+    updatedBy?: ApiUserId;
+    user?: ApiUserId;
 };

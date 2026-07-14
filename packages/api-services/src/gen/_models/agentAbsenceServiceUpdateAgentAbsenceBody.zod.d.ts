@@ -6,5 +6,5 @@
  */
 import type { AgentAbsenceServiceUpdateAgentAbsenceBodyItem } from './agentAbsenceServiceUpdateAgentAbsenceBodyItem.zod';
 export type AgentAbsenceServiceUpdateAgentAbsenceBody = {
-	item?: AgentAbsenceServiceUpdateAgentAbsenceBodyItem;
+    item?: AgentAbsenceServiceUpdateAgentAbsenceBodyItem;
 };

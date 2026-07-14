@@ -5,48 +5,48 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ListSpacesSpacesParams = {
-	page?: number;
-	/**
-	 * Limit of result page records count.   _default(16); limit=(size<=0?-1:size+1);_
-	 *
-	 * ```javascript
-	 * const
-	 *     default = 16
-	 *   , maximum = 32
-	 * ;
-	 *
-	 * ```
-	 */
-	size?: number;
-	/**
-	 * Search term:
-	 * `?` - matches any character
-	 * `*` - matches 0 or more characters
-	 * Used to query records within a set of `qin` fields, eg: name, etc...
-	 */
-	q?: string;
-	/**
-	 * Sort result dataset of records by fields.
-	 * ```
-	 * sort ::= *( ORDER name )
-	 *
-	 * ORDER  = ASC / DESC
-	 * DESC   = "-" / "!"
-	 * ASC    = [ "+" ]   ; Default
-	 * ```
-	 *
-	 * Fields available
-	 *
-	 * - `id`(seq)
-	 * - `domain`{name}
-	 * - `state`
-	 * @items.pattern ^[+|-|!]?\w+$
-	 */
-	sort?: string[];
-	fields?: string[];
-	/**
-	 * Records with unique IDentifier(s).
-	 * Accept: `id` -or- `etag`.
-	 */
-	id?: string[];
+    page?: number;
+    /**
+     * Limit of result page records count.   _default(16); limit=(size<=0?-1:size+1);_
+     *
+     * ```javascript
+     * const
+     *     default = 16
+     *   , maximum = 32
+     * ;
+     *
+     * ```
+     */
+    size?: number;
+    /**
+     * Search term:
+     * `?` - matches any character
+     * `*` - matches 0 or more characters
+     * Used to query records within a set of `qin` fields, eg: name, etc...
+     */
+    q?: string;
+    /**
+     * Sort result dataset of records by fields.
+     * ```
+     * sort ::= *( ORDER name )
+     *
+     * ORDER  = ASC / DESC
+     * DESC   = "-" / "!"
+     * ASC    = [ "+" ]   ; Default
+     * ```
+     *
+     * Fields available
+     *
+     * - `id`(seq)
+     * - `domain`{name}
+     * - `state`
+     * @items.pattern ^[+|-|!]?\w+$
+     */
+    sort?: string[];
+    fields?: string[];
+    /**
+     * Records with unique IDentifier(s).
+     * Accept: `id` -or- `etag`.
+     */
+    id?: string[];
 };

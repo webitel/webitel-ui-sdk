@@ -8,13 +8,13 @@ import type { EngineAcceptOfDay } from './engineAcceptOfDay.zod';
 import type { EngineExceptDate } from './engineExceptDate.zod';
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineCalendarServiceUpdateCalendarBody {
-	accepts?: EngineAcceptOfDay[];
-	description?: string;
-	domainId?: string;
-	endAt?: string;
-	excepts?: EngineExceptDate[];
-	name?: string;
-	specials?: EngineAcceptOfDay[];
-	startAt?: string;
-	timezone?: EngineLookup;
+    accepts?: EngineAcceptOfDay[];
+    description?: string;
+    domainId?: string;
+    endAt?: string;
+    excepts?: EngineExceptDate[];
+    name?: string;
+    specials?: EngineAcceptOfDay[];
+    startAt?: string;
+    timezone?: EngineLookup;
 }

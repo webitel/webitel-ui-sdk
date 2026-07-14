@@ -6,8 +6,8 @@
  */
 import type { WebitelImApiProviderV1ProviderSummary } from './webitelImApiProviderV1ProviderSummary.zod';
 export interface WebitelImApiProviderV1ProviderListGatesResponse {
-	items?: WebitelImApiProviderV1ProviderSummary[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+    items?: WebitelImApiProviderV1ProviderSummary[];
+    next?: boolean;
+    page?: number;
+    size?: number;
 }

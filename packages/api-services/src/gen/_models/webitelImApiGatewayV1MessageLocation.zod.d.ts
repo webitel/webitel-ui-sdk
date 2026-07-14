@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiGatewayV1MessageLocation {
-	address?: string;
-	latitude?: number;
-	longitude?: number;
-	name?: string;
+    address?: string;
+    latitude?: number;
+    longitude?: number;
+    name?: string;
 }

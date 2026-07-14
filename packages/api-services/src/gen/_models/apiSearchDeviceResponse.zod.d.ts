@@ -6,8 +6,8 @@
  */
 import type { ApiDevice } from './apiDevice.zod';
 export interface ApiSearchDeviceResponse {
-	items?: ApiDevice[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+    items?: ApiDevice[];
+    next?: boolean;
+    page?: number;
+    size?: number;
 }

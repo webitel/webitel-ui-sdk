@@ -6,7 +6,7 @@
  */
 import type { ApiLDAProcess } from './apiLDAProcess.zod';
 export interface ApiLDAProcessResponse {
-	items?: ApiLDAProcess[];
-	next?: boolean;
-	page?: number;
+    items?: ApiLDAProcess[];
+    next?: boolean;
+    page?: number;
 }

@@ -7,20 +7,20 @@
 import type { ApiLDAPControl } from './apiLDAPControl.zod';
 import type { ApiLDAPSearchRequestTLSConfig } from './apiLDAPSearchRequestTLSConfig.zod';
 export interface LDAPLDAPSearchBody {
-	attributes?: string[];
-	baseObject?: string;
-	/** authorization method e.g.: SIMPLE, SAML, NTLM, etc. */
-	bind?: string;
-	controls?: ApiLDAPControl[];
-	derefAliases?: number;
-	filter?: string;
-	password?: string;
-	scope?: number;
-	sizeLimit?: string;
-	timeLimit?: string;
-	tls?: ApiLDAPSearchRequestTLSConfig;
-	typesOnly?: boolean;
-	/** URL e.g.: [(ldap|ldapi|ldaps)://]host[:port] */
-	url?: string;
-	username?: string;
+    attributes?: string[];
+    baseObject?: string;
+    /** authorization method e.g.: SIMPLE, SAML, NTLM, etc. */
+    bind?: string;
+    controls?: ApiLDAPControl[];
+    derefAliases?: number;
+    filter?: string;
+    password?: string;
+    scope?: number;
+    sizeLimit?: string;
+    timeLimit?: string;
+    tls?: ApiLDAPSearchRequestTLSConfig;
+    typesOnly?: boolean;
+    /** URL e.g.: [(ldap|ldapi|ldaps)://]host[:port] */
+    url?: string;
+    username?: string;
 }

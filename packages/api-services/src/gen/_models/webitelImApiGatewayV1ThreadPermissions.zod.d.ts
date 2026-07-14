@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiGatewayV1ThreadPermissions {
-	canAddMembers?: boolean;
-	canChangeMembersPermissions?: boolean;
-	canChangeThreadInfo?: boolean;
-	canRemoveMembers?: boolean;
-	canSendMessages?: boolean;
-	createdAt?: string;
-	id?: string;
-	memberId?: string;
-	updatedAt?: string;
+    canAddMembers?: boolean;
+    canChangeMembersPermissions?: boolean;
+    canChangeThreadInfo?: boolean;
+    canRemoveMembers?: boolean;
+    canSendMessages?: boolean;
+    createdAt?: string;
+    id?: string;
+    memberId?: string;
+    updatedAt?: string;
 }

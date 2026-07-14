@@ -7,13 +7,13 @@
 import type { LoggerLookup } from './loggerLookup.zod';
 import type { LoggerRecord } from './loggerRecord.zod';
 export interface LoggerLog {
-	action?: string;
-	configId?: number;
-	date?: string;
-	id?: number;
-	newState?: string;
-	object?: LoggerLookup;
-	record?: LoggerRecord;
-	user?: LoggerLookup;
-	userIp?: string;
+    action?: string;
+    configId?: number;
+    date?: string;
+    id?: number;
+    newState?: string;
+    object?: LoggerLookup;
+    record?: LoggerRecord;
+    user?: LoggerLookup;
+    userIp?: string;
 }

@@ -4,9 +4,9 @@
  * WebchatAlternativeChannel - front-end only "simple" channel naming
  */
 export declare const WebchatAlternativeChannel: Readonly<{
-	VIBER: 'viber';
-	WHATSAPP: 'whatsapp';
-	TELEGRAM: 'telegram';
-	MESSENGER: 'messenger';
-	EMAIL: 'email';
+    VIBER: "viber";
+    WHATSAPP: "whatsapp";
+    TELEGRAM: "telegram";
+    MESSENGER: "messenger";
+    EMAIL: "email";
 }>;

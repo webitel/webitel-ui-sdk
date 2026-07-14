@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteUsersParams = {
-	/**
-	 * MANY /users .ids=[id,...]
-	 */
-	selection?: string[];
-	permanent?: boolean;
+    /**
+     * MANY /users .ids=[id,...]
+     */
+    selection?: string[];
+    permanent?: boolean;
 };

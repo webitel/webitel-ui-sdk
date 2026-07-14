@@ -4,9 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type StorageImportSourceType =
-	(typeof StorageImportSourceType)[keyof typeof StorageImportSourceType];
+export type StorageImportSourceType = (typeof StorageImportSourceType)[keyof typeof StorageImportSourceType];
 export declare const StorageImportSourceType: {
-	readonly DefaultSourceType: 'DefaultSourceType';
-	readonly Dialer: 'Dialer';
+    readonly DefaultSourceType: "DefaultSourceType";
+    readonly Dialer: "Dialer";
 };

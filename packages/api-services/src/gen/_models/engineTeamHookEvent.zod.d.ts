@@ -4,9 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineTeamHookEvent =
-	(typeof EngineTeamHookEvent)[keyof typeof EngineTeamHookEvent];
+export type EngineTeamHookEvent = (typeof EngineTeamHookEvent)[keyof typeof EngineTeamHookEvent];
 export declare const EngineTeamHookEvent: {
-	readonly TeamHookEventUndefined: 'teamHookEventUndefined';
-	readonly AgentStatus: 'agent_status';
+    readonly TeamHookEventUndefined: "teamHookEventUndefined";
+    readonly AgentStatus: "agent_status";
 };

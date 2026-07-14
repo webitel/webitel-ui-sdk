@@ -13,21 +13,21 @@
  * https://developers.google.com/people/api/rest/v1/people#name
  */
 export interface ContactsName {
-	/**
-	 * REQUIRED. End-User's full name in displayable form
-	 * including all name parts, possibly including titles and suffixes,
-	 * ordered according to the End-User's locale and preferences.
-	 */
-	commonName?: string;
-	familyName?: string;
-	givenName?: string;
-	/**
-	 * OPTIONAL. Middle name(s) of the End-User.
-	 * Note that in some cultures, people can have multiple middle names;
-	 * all can be present, with the names being separated by space characters.
-	 * Also note that in some cultures, middle names are not used.
-	 */
-	middleName?: string;
-	/** Indicate whether Contact, as a Person, realy owns this associated name. */
-	verified?: boolean;
+    /**
+     * REQUIRED. End-User's full name in displayable form
+     * including all name parts, possibly including titles and suffixes,
+     * ordered according to the End-User's locale and preferences.
+     */
+    commonName?: string;
+    familyName?: string;
+    givenName?: string;
+    /**
+     * OPTIONAL. Middle name(s) of the End-User.
+     * Note that in some cultures, people can have multiple middle names;
+     * all can be present, with the names being separated by space characters.
+     * Also note that in some cultures, middle names are not used.
+     */
+    middleName?: string;
+    /** Indicate whether Contact, as a Person, realy owns this associated name. */
+    verified?: boolean;
 }

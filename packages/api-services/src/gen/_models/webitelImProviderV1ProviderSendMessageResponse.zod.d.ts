@@ -8,6 +8,6 @@
  * ProviderSendMessageResponse returns the delivery status and external message ID.
  */
 export interface WebitelImProviderV1ProviderSendMessageResponse {
-	createdAt?: string;
-	externalId?: string;
+    createdAt?: string;
+    externalId?: string;
 }

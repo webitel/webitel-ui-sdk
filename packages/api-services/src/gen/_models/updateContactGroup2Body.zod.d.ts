@@ -6,6 +6,6 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export type UpdateContactGroup2Body = {
-	/** Group of contacts associated. */
-	group?: WebitelContactsLookup;
+    /** Group of contacts associated. */
+    group?: WebitelContactsLookup;
 };

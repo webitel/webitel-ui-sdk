@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface DataBatchCreateError {
-	code?: string;
-	/** Code (id) of the problematic column. */
-	field?: string;
-	/** 0-based index of the row within the input `rows` array. */
-	row?: number;
-	/** Original input value that could not be processed. */
-	value?: string;
+    code?: string;
+    /** Code (id) of the problematic column. */
+    field?: string;
+    /** 0-based index of the row within the input `rows` array. */
+    row?: number;
+    /** Original input value that could not be processed. */
+    value?: string;
 }

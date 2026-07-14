@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAgentSkillServicePatchAgentSkillsBody {
-	capacity?: number;
-	enabled?: boolean;
-	fields?: string[];
-	id?: string[];
-	skillId?: string[];
+    capacity?: number;
+    enabled?: boolean;
+    fields?: string[];
+    id?: string[];
+    skillId?: string[];
 }

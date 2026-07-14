@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentStatusStatisticItemParams = {
-	timeFrom?: string;
-	timeTo?: string;
+    timeFrom?: string;
+    timeTo?: string;
 };

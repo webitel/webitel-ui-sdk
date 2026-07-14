@@ -9,11 +9,11 @@
  * / This configuration is the foundation for all subsequent OAuth-based integrations.
  */
 export interface WebitelImProviderV1ProviderCreateMetaAppRequest {
-	appId?: string;
-	appSecret?: string;
-	name?: string;
-	oauthRedirectUri?: string;
-	scopes?: string[];
-	uri?: string;
-	verifyToken?: string;
+    appId?: string;
+    appSecret?: string;
+    name?: string;
+    oauthRedirectUri?: string;
+    scopes?: string[];
+    uri?: string;
+    verifyToken?: string;
 }

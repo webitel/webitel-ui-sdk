@@ -6,9 +6,9 @@
  */
 import type { ApiObjectId } from './apiObjectId.zod';
 export interface ApiProductUser {
-	domain?: ApiObjectId;
-	expiresAt?: string;
-	issuedAt?: string;
-	sessions?: number;
-	user?: ApiObjectId;
+    domain?: ApiObjectId;
+    expiresAt?: string;
+    issuedAt?: string;
+    sessions?: number;
+    user?: ApiObjectId;
 }

@@ -6,10 +6,10 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineWebHookServiceUpdateWebHookBody {
-	authorization?: string;
-	description?: string;
-	enabled?: boolean;
-	name?: string;
-	origin?: string[];
-	schema?: EngineLookup;
+    authorization?: string;
+    description?: string;
+    enabled?: boolean;
+    name?: string;
+    origin?: string[];
+    schema?: EngineLookup;
 }

@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type GetFileTranscriptPhrasesParams = {
-	page?: number;
-	size?: number;
+    page?: number;
+    size?: number;
 };

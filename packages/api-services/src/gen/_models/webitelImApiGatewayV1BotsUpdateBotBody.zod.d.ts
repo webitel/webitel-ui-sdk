@@ -6,9 +6,9 @@
  */
 import type { WebitelImApiGatewayV1BotsUpdateBotBodyMetadata } from './webitelImApiGatewayV1BotsUpdateBotBodyMetadata.zod';
 export interface WebitelImApiGatewayV1BotsUpdateBotBody {
-	fieldMask?: string;
-	metadata?: WebitelImApiGatewayV1BotsUpdateBotBodyMetadata;
-	name?: string;
-	schemaId?: string;
-	username?: string;
+    fieldMask?: string;
+    metadata?: WebitelImApiGatewayV1BotsUpdateBotBodyMetadata;
+    name?: string;
+    schemaId?: string;
+    username?: string;
 }

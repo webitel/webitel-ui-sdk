@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreateLinkParams = {
-	/**
-	 * result fields needed on the front-end for each comment
-	 */
-	fields?: string[];
-	inputEtag?: string;
-	inputUrl?: string;
-	inputName?: string;
-	inputUserIdId?: string;
-	inputUserIdName?: string;
+    /**
+     * result fields needed on the front-end for each comment
+     */
+    fields?: string[];
+    inputEtag?: string;
+    inputUrl?: string;
+    inputName?: string;
+    inputUserIdId?: string;
+    inputUserIdName?: string;
 };

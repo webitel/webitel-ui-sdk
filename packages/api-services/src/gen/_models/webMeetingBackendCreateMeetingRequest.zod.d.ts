@@ -9,14 +9,14 @@ import type { WebMeetingBackendCreateMeetingRequestVariables } from './webMeetin
  * Request to create a new meeting.
  */
 export interface WebMeetingBackendCreateMeetingRequest {
-	/** Base path for the generated meeting URL. */
-	basePath?: string;
-	/** Identifier of the domain owning the meeting. */
-	domainId?: string;
-	/** Expiration time in seconds from the moment of creation. */
-	expireSec?: string;
-	/** Title or topic of the meeting. */
-	title?: string;
-	/** Custom metadata or configuration variables. */
-	variables?: WebMeetingBackendCreateMeetingRequestVariables;
+    /** Base path for the generated meeting URL. */
+    basePath?: string;
+    /** Identifier of the domain owning the meeting. */
+    domainId?: string;
+    /** Expiration time in seconds from the moment of creation. */
+    expireSec?: string;
+    /** Title or topic of the meeting. */
+    title?: string;
+    /** Custom metadata or configuration variables. */
+    variables?: WebMeetingBackendCreateMeetingRequestVariables;
 }

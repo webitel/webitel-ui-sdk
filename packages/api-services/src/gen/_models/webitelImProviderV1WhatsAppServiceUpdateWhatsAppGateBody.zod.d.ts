@@ -8,6 +8,6 @@
  * / ProviderUpdateWhatsAppGateRequest updates WhatsApp-specific tokens or names.
  */
 export interface WebitelImProviderV1WhatsAppServiceUpdateWhatsAppGateBody {
-	accessToken?: string;
-	name?: string;
+    accessToken?: string;
+    name?: string;
 }

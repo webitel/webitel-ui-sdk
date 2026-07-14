@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineListSkillAgentListSkillAgg {
-	enabled?: boolean;
-	potentialRows?: number;
+    enabled?: boolean;
+    potentialRows?: number;
 }

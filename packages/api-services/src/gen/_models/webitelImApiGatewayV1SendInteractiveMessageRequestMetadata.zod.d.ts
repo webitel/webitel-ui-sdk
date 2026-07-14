@@ -8,5 +8,5 @@
  * Arbitrary metadata.
  */
 export type WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata = {
-	[key: string]: unknown;
+    [key: string]: unknown;
 };

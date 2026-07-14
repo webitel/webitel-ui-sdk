@@ -8,7 +8,6 @@ import type { WfmAgentScheduleShift } from './wfmAgentScheduleShift.zod';
 /**
  * Map key is a day of week: 0 - Sunday, ..., 6 - Saturday.
  */
-export type AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBodyItems =
-	{
-		[key: string]: WfmAgentScheduleShift;
-	};
+export type AgentWorkingScheduleServiceCreateAgentsWorkingScheduleShiftsBodyItems = {
+    [key: string]: WfmAgentScheduleShift;
+};

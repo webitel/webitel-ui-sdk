@@ -7,7 +7,7 @@
 import type { WebitelImApiProviderV1ProviderKeyboardListReply } from './webitelImApiProviderV1ProviderKeyboardListReply.zod';
 import type { WebitelImApiProviderV1ProviderKeyboardMarkup } from './webitelImApiProviderV1ProviderKeyboardMarkup.zod';
 export interface WebitelImApiProviderV1ProviderInteractive {
-	listReply?: WebitelImApiProviderV1ProviderKeyboardListReply;
-	markup?: WebitelImApiProviderV1ProviderKeyboardMarkup;
-	singleUse?: boolean;
+    listReply?: WebitelImApiProviderV1ProviderKeyboardListReply;
+    markup?: WebitelImApiProviderV1ProviderKeyboardMarkup;
+    singleUse?: boolean;
 }

@@ -6,5 +6,5 @@
  */
 import type { WebitelCasesSLACondition } from './webitelCasesSLACondition.zod';
 export interface WebitelCasesLocateSLAConditionResponse {
-	slaCondition?: WebitelCasesSLACondition;
+    slaCondition?: WebitelCasesSLACondition;
 }

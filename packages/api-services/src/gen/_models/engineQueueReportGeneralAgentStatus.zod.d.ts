@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineQueueReportGeneralAgentStatus {
-	busy?: number;
-	free?: number;
-	offline?: number;
-	online?: number;
-	pause?: number;
-	total?: number;
+    busy?: number;
+    free?: number;
+    offline?: number;
+    online?: number;
+    pause?: number;
+    total?: number;
 }

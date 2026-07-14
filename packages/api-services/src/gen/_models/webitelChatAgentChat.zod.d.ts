@@ -7,14 +7,14 @@
 import type { WebitelChatMessage } from './webitelChatMessage.zod';
 import type { WebitelChatPeer } from './webitelChatPeer.zod';
 export interface WebitelChatAgentChat {
-	closeReason?: string;
-	closedAt?: string;
-	contact?: WebitelChatPeer;
-	gateway?: WebitelChatPeer;
-	id?: string;
-	lastMessage?: WebitelChatMessage;
-	queue?: WebitelChatPeer;
-	startedAt?: string;
-	title?: string;
-	unprocessedClose?: boolean;
+    closeReason?: string;
+    closedAt?: string;
+    contact?: WebitelChatPeer;
+    gateway?: WebitelChatPeer;
+    id?: string;
+    lastMessage?: WebitelChatMessage;
+    queue?: WebitelChatPeer;
+    startedAt?: string;
+    title?: string;
+    unprocessedClose?: boolean;
 }

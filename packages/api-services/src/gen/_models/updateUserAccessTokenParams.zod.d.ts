@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateUserAccessTokenParams = {
-	/**
-	 * [optional] PATCH implementation
-	 */
-	fields?: string[];
-	enable?: boolean;
+    /**
+     * [optional] PATCH implementation
+     */
+    fields?: string[];
+    enable?: boolean;
 };

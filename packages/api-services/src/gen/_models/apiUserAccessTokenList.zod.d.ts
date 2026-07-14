@@ -6,8 +6,8 @@
  */
 import type { ApiUserAccessToken } from './apiUserAccessToken.zod';
 export interface ApiUserAccessTokenList {
-	items?: ApiUserAccessToken[];
-	next?: boolean;
-	page?: number;
-	size?: string;
+    items?: ApiUserAccessToken[];
+    next?: boolean;
+    page?: number;
+    size?: string;
 }

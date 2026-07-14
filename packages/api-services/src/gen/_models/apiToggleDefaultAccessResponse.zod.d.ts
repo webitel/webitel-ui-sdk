@@ -6,6 +6,6 @@
  */
 import type { ApiAccessRule } from './apiAccessRule.zod';
 export interface ApiToggleDefaultAccessResponse {
-	granted?: ApiAccessRule[];
-	revoked?: ApiAccessRule[];
+    granted?: ApiAccessRule[];
+    revoked?: ApiAccessRule[];
 }

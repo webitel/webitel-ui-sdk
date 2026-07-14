@@ -7,21 +7,21 @@
 import type { EngineFilterBetween } from './engineFilterBetween.zod';
 import type { EngineMemberServiceDeleteMembersBodyVariables } from './engineMemberServiceDeleteMembersBodyVariables.zod';
 export interface EngineMemberServiceDeleteMembersBody {
-	agentId?: number[];
-	attempts?: EngineFilterBetween;
-	bucketId?: number[];
-	createdAt?: EngineFilterBetween;
-	destination?: string;
-	id?: string[];
-	ids?: string[];
-	name?: string;
-	numbers?: string[];
-	offeringAt?: EngineFilterBetween;
-	priority?: EngineFilterBetween;
-	q?: string;
-	size?: number;
-	sort?: string;
-	stopCause?: string[];
-	variables?: EngineMemberServiceDeleteMembersBodyVariables;
-	withoutMembers?: boolean;
+    agentId?: number[];
+    attempts?: EngineFilterBetween;
+    bucketId?: number[];
+    createdAt?: EngineFilterBetween;
+    destination?: string;
+    id?: string[];
+    ids?: string[];
+    name?: string;
+    numbers?: string[];
+    offeringAt?: EngineFilterBetween;
+    priority?: EngineFilterBetween;
+    q?: string;
+    size?: number;
+    sort?: string;
+    stopCause?: string[];
+    variables?: EngineMemberServiceDeleteMembersBodyVariables;
+    withoutMembers?: boolean;
 }

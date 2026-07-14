@@ -6,8 +6,8 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineRoutingChatPlanServiceUpdateChatPlanBody {
-	description?: string;
-	enabled?: boolean;
-	name?: string;
-	schema?: EngineLookup;
+    description?: string;
+    enabled?: boolean;
+    name?: string;
+    schema?: EngineLookup;
 }

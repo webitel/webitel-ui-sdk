@@ -6,10 +6,10 @@
  */
 import type { WebitelImApiProviderV1Peer } from './webitelImApiProviderV1Peer.zod';
 export interface WebitelImApiProviderV1ProviderCreateFacebookGateRequest {
-	enabled?: boolean;
-	metaAppId?: string;
-	name?: string;
-	pageId?: string;
-	pageToken?: string;
-	peer?: WebitelImApiProviderV1Peer;
+    enabled?: boolean;
+    metaAppId?: string;
+    name?: string;
+    pageId?: string;
+    pageToken?: string;
+    peer?: WebitelImApiProviderV1Peer;
 }

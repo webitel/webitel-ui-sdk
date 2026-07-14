@@ -7,15 +7,15 @@
 import type { StorageCustomFileProperties } from './storageCustomFileProperties.zod';
 import type { StorageUploadFileChannel } from './storageUploadFileChannel.zod';
 export interface StorageUploadFileRequestMetadata {
-	channel?: StorageUploadFileChannel;
-	createdAt?: string;
-	domainId?: string;
-	generateThumbnail?: boolean;
-	mimeType?: string;
-	name?: string;
-	profileId?: string;
-	properties?: StorageCustomFileProperties;
-	streamResponse?: boolean;
-	uploadedBy?: string;
-	uuid?: string;
+    channel?: StorageUploadFileChannel;
+    createdAt?: string;
+    domainId?: string;
+    generateThumbnail?: boolean;
+    mimeType?: string;
+    name?: string;
+    profileId?: string;
+    properties?: StorageCustomFileProperties;
+    streamResponse?: boolean;
+    uploadedBy?: string;
+    uuid?: string;
 }

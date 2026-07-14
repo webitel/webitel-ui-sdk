@@ -6,5 +6,5 @@
  */
 import type { ApiGetPasswordSettingsResponseSettings } from './apiGetPasswordSettingsResponseSettings.zod';
 export interface ApiGetPasswordSettingsResponse {
-	settings?: ApiGetPasswordSettingsResponseSettings;
+    settings?: ApiGetPasswordSettingsResponseSettings;
 }

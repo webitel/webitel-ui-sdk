@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchTriggerParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	schemaId?: number[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    schemaId?: number[];
 };

@@ -10,8 +10,8 @@ import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGateway
  * and pagination metadata.
  */
 export interface WebitelImApiGatewayV1SearchVariablesResponse {
-	/** List of thread variables grouped by thread. */
-	items?: WebitelImApiGatewayV1ThreadVariables[];
-	/** Indicates if there are more results to fetch. */
-	next?: boolean;
+    /** List of thread variables grouped by thread. */
+    items?: WebitelImApiGatewayV1ThreadVariables[];
+    /** Indicates if there are more results to fetch. */
+    next?: boolean;
 }

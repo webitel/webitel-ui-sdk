@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteBackendProfileParams = {
-	domainId?: string;
+    domainId?: string;
 };

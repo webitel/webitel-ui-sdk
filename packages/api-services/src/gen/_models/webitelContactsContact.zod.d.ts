@@ -21,58 +21,58 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * OUTPUT purpose only.
  */
 export interface WebitelContactsContact {
-	/**
-	 * BIO. Short description about the Contact person.
-	 * OPTIONAL. Multi-lined text.
-	 */
-	about?: string;
-	/** The Contact's internal comment(s). */
-	comments?: ContactsCommentList;
-	createdAt?: string;
-	createdBy?: WebitelContactsLookup;
-	/** READONLY. The contact's metadata. */
-	domain?: WebitelContactsLookup;
-	/** The Contact's email address(es). */
-	emails?: ContactsEmailList;
-	/**
-	 * Unique ID of the latest version of the update.
-	 * This ID changes after any update to the underlying value(s).
-	 */
-	etag?: string;
-	/** The Contact's associated group(s). */
-	groups?: ContactsContactGroupList;
-	/** The unique ID of the association. Never changes. */
-	id?: string;
-	/** The contact's [I]nstant[M]essaging clients. */
-	imclients?: ContactsIMClientList;
-	/** The Contact's associated tag(s). */
-	labels?: ContactsLabelList;
-	/** The Contact's internal manager(s). */
-	managers?: ContactsManagerList;
-	/** [R]ecord[b]ased[A]ccess[C]ontrol mode granted. */
-	mode?: string;
-	/**
-	 * The Contact's name.
-	 * This field is a singleton for Contact sources.
-	 */
-	name?: ContactsName;
-	/** The Contact's phone numbers. */
-	phones?: ContactsPhoneList;
-	/** Output only. The Contact's photo(s). */
-	readonly photos?: ContactsPhotoList;
-	/** The Contact's timezone preference(s). */
-	timezones?: ContactsTimezoneList;
-	updatedAt?: string;
-	updatedBy?: WebitelContactsLookup;
-	user?: WebitelContactsLookup;
-	/**
-	 * Arbitrary client data that is populated by clients.
-	 * Duplicate keys and values are allowed.
-	 */
-	variables?: ContactsVariableList;
-	/**
-	 * READONLY. Operational attributes
-	 * Version of the latest update. Numeric sequence.
-	 */
-	ver?: number;
+    /**
+     * BIO. Short description about the Contact person.
+     * OPTIONAL. Multi-lined text.
+     */
+    about?: string;
+    /** The Contact's internal comment(s). */
+    comments?: ContactsCommentList;
+    createdAt?: string;
+    createdBy?: WebitelContactsLookup;
+    /** READONLY. The contact's metadata. */
+    domain?: WebitelContactsLookup;
+    /** The Contact's email address(es). */
+    emails?: ContactsEmailList;
+    /**
+     * Unique ID of the latest version of the update.
+     * This ID changes after any update to the underlying value(s).
+     */
+    etag?: string;
+    /** The Contact's associated group(s). */
+    groups?: ContactsContactGroupList;
+    /** The unique ID of the association. Never changes. */
+    id?: string;
+    /** The contact's [I]nstant[M]essaging clients. */
+    imclients?: ContactsIMClientList;
+    /** The Contact's associated tag(s). */
+    labels?: ContactsLabelList;
+    /** The Contact's internal manager(s). */
+    managers?: ContactsManagerList;
+    /** [R]ecord[b]ased[A]ccess[C]ontrol mode granted. */
+    mode?: string;
+    /**
+     * The Contact's name.
+     * This field is a singleton for Contact sources.
+     */
+    name?: ContactsName;
+    /** The Contact's phone numbers. */
+    phones?: ContactsPhoneList;
+    /** Output only. The Contact's photo(s). */
+    readonly photos?: ContactsPhotoList;
+    /** The Contact's timezone preference(s). */
+    timezones?: ContactsTimezoneList;
+    updatedAt?: string;
+    updatedBy?: WebitelContactsLookup;
+    user?: WebitelContactsLookup;
+    /**
+     * Arbitrary client data that is populated by clients.
+     * Duplicate keys and values are allowed.
+     */
+    variables?: ContactsVariableList;
+    /**
+     * READONLY. Operational attributes
+     * Version of the latest update. Numeric sequence.
+     */
+    ver?: number;
 }

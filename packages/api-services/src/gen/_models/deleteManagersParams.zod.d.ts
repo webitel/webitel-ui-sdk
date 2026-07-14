@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteManagersParams = {
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique ID(s) to remove.
-	 */
-	etag: string[];
+    /**
+     * Fields to be retrieved as a result.
+     */
+    fields?: string[];
+    /**
+     * Set of unique ID(s) to remove.
+     */
+    etag: string[];
 };

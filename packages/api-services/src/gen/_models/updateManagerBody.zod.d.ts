@@ -6,8 +6,8 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export type UpdateManagerBody = {
-	/** Indicates whether this association must be default among others. */
-	primary?: boolean;
-	/** Responsible User. */
-	user?: WebitelContactsLookup;
+    /** Indicates whether this association must be default among others. */
+    primary?: boolean;
+    /** Responsible User. */
+    user?: WebitelContactsLookup;
 };

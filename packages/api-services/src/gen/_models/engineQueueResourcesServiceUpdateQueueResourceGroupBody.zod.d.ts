@@ -6,6 +6,6 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQueueResourcesServiceUpdateQueueResourceGroupBody {
-	domainId?: string;
-	resourceGroup?: EngineLookup;
+    domainId?: string;
+    resourceGroup?: EngineLookup;
 }

@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineGetQueuesGlobalStateResponse {
-	isAllEnabled?: boolean;
-	potentialRows?: number;
+    isAllEnabled?: boolean;
+    potentialRows?: number;
 }

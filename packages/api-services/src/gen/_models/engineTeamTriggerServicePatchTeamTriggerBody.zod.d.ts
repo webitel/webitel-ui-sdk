@@ -6,9 +6,9 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineTeamTriggerServicePatchTeamTriggerBody {
-	description?: string;
-	enabled?: boolean;
-	fields?: string[];
-	name?: string;
-	schema?: EngineLookup;
+    description?: string;
+    enabled?: boolean;
+    fields?: string[];
+    name?: string;
+    schema?: EngineLookup;
 }

@@ -8,5 +8,5 @@
  * Represents additional metadata binded into system  message.
  */
 export type WebitelImApiGatewayV1SystemMetadata = {
-	[key: string]: unknown;
+    [key: string]: unknown;
 };

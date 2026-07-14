@@ -7,14 +7,14 @@
 import type { GeneralExtendedLookup } from './generalExtendedLookup.zod';
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesChatEvent {
-	closedAt?: string;
-	duration?: string;
-	flowScheme?: GeneralLookup;
-	gateway?: GeneralExtendedLookup;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	isMissed?: boolean;
-	participants?: GeneralLookup[];
-	queue?: GeneralLookup;
+    closedAt?: string;
+    duration?: string;
+    flowScheme?: GeneralLookup;
+    gateway?: GeneralExtendedLookup;
+    id?: string;
+    isDetailed?: boolean;
+    isInbound?: boolean;
+    isMissed?: boolean;
+    participants?: GeneralLookup[];
+    queue?: GeneralLookup;
 }

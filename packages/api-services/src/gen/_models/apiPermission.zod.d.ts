@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiPermission {
-	/** [required] e.g.: 'read', 'playback_record_file', ... */
-	id?: string;
-	name?: string;
-	usage?: string;
+    /** [required] e.g.: 'read', 'playback_record_file', ... */
+    id?: string;
+    name?: string;
+    usage?: string;
 }

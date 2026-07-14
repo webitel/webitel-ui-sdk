@@ -6,5 +6,5 @@
  */
 import type { WebitelCasesCatalog } from './webitelCasesCatalog.zod';
 export interface WebitelCasesLocateCatalogResponse {
-	catalog?: WebitelCasesCatalog;
+    catalog?: WebitelCasesCatalog;
 }

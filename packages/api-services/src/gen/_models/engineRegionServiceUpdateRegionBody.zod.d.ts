@@ -6,7 +6,7 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineRegionServiceUpdateRegionBody {
-	description?: string;
-	name?: string;
-	timezone?: EngineLookup;
+    description?: string;
+    name?: string;
+    timezone?: EngineLookup;
 }

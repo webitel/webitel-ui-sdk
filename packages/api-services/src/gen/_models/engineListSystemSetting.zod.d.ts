@@ -6,6 +6,6 @@
  */
 import type { EngineSystemSetting } from './engineSystemSetting.zod';
 export interface EngineListSystemSetting {
-	items?: EngineSystemSetting[];
-	next?: boolean;
+    items?: EngineSystemSetting[];
+    next?: boolean;
 }

@@ -11,10 +11,10 @@ import type { WebitelImApiGatewayV1HistoryMessageCursorResponse } from './webite
  * message history search results and pagination metadata.
  */
 export interface WebitelImApiGatewayV1SearchMessageHistoryResponse {
-	/** List of messages matching the search criteria. */
-	items?: WebitelImApiGatewayV1HistoryMessage[];
-	/** Cursor that represents position to get older messages (used without 'before' param). */
-	nextCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
-	/** Cursor that represents position to get newest messages (used with 'before' param). */
-	prevCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
+    /** List of messages matching the search criteria. */
+    items?: WebitelImApiGatewayV1HistoryMessage[];
+    /** Cursor that represents position to get older messages (used without 'before' param). */
+    nextCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
+    /** Cursor that represents position to get newest messages (used with 'before' param). */
+    prevCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
 }

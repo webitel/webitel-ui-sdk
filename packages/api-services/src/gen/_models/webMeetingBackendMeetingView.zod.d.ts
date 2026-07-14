@@ -8,14 +8,14 @@
  * Public view of the meeting (limited fields).
  */
 export interface WebMeetingBackendMeetingView {
-	/** Flag indicating if satisfaction feedback is allowed. */
-	allowSatisfaction?: boolean;
-	/** Timestamp when the meeting was created (Unix). */
-	createdAt?: string;
-	/** Timestamp when the meeting link expires (Unix). */
-	expiresAt?: string;
-	/** Current satisfaction rating. */
-	satisfaction?: string;
-	/** Title or topic of the meeting. */
-	title?: string;
+    /** Flag indicating if satisfaction feedback is allowed. */
+    allowSatisfaction?: boolean;
+    /** Timestamp when the meeting was created (Unix). */
+    createdAt?: string;
+    /** Timestamp when the meeting link expires (Unix). */
+    expiresAt?: string;
+    /** Current satisfaction rating. */
+    satisfaction?: string;
+    /** Title or topic of the meeting. */
+    title?: string;
 }

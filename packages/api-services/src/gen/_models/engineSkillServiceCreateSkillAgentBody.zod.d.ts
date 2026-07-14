@@ -6,7 +6,7 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineSkillServiceCreateSkillAgentBody {
-	agent?: EngineLookup[];
-	capacity?: number;
-	enabled?: boolean;
+    agent?: EngineLookup[];
+    capacity?: number;
+    enabled?: boolean;
 }

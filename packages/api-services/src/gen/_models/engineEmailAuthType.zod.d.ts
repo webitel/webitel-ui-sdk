@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineEmailAuthType =
-	(typeof EngineEmailAuthType)[keyof typeof EngineEmailAuthType];
+export type EngineEmailAuthType = (typeof EngineEmailAuthType)[keyof typeof EngineEmailAuthType];
 export declare const EngineEmailAuthType: {
-	readonly EmailAuthTypeUndefined: 'EmailAuthTypeUndefined';
-	readonly Plain: 'Plain';
-	readonly OAuth2: 'OAuth2';
+    readonly EmailAuthTypeUndefined: "EmailAuthTypeUndefined";
+    readonly Plain: "Plain";
+    readonly OAuth2: "OAuth2";
 };

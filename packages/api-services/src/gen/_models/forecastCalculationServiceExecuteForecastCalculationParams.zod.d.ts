@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ForecastCalculationServiceExecuteForecastCalculationParams = {
-	teamId?: string;
-	forecastDataFrom?: string;
-	forecastDataTo?: string;
+    teamId?: string;
+    forecastDataFrom?: string;
+    forecastDataTo?: string;
 };

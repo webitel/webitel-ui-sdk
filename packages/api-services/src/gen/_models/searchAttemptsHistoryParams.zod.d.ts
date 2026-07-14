@@ -5,24 +5,24 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAttemptsHistoryParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	joinedAtFrom?: string;
-	joinedAtTo?: string;
-	id?: string[];
-	queueId?: string[];
-	bucketId?: string[];
-	memberId?: string[];
-	agentId?: string[];
-	result?: string[];
-	leavingAtFrom?: string;
-	leavingAtTo?: string;
-	offeringAtFrom?: string;
-	offeringAtTo?: string;
-	durationFrom?: string;
-	durationTo?: string;
-	offeredAgentId?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    joinedAtFrom?: string;
+    joinedAtTo?: string;
+    id?: string[];
+    queueId?: string[];
+    bucketId?: string[];
+    memberId?: string[];
+    agentId?: string[];
+    result?: string[];
+    leavingAtFrom?: string;
+    leavingAtTo?: string;
+    offeringAtFrom?: string;
+    offeringAtTo?: string;
+    durationFrom?: string;
+    durationTo?: string;
+    offeredAgentId?: string[];
 };

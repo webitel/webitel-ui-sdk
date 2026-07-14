@@ -6,5 +6,5 @@
  */
 import type { WebitelCasesPriority } from './webitelCasesPriority.zod';
 export interface WebitelCasesLocatePriorityResponse {
-	priority?: WebitelCasesPriority;
+    priority?: WebitelCasesPriority;
 }

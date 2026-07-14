@@ -12,8 +12,7 @@
  *
  *  - NULL_VALUE: Null value.
  */
-export type GoogleProtobufNullValue =
-	(typeof GoogleProtobufNullValue)[keyof typeof GoogleProtobufNullValue];
+export type GoogleProtobufNullValue = (typeof GoogleProtobufNullValue)[keyof typeof GoogleProtobufNullValue];
 export declare const GoogleProtobufNullValue: {
-	readonly NullValue: 'NULL_VALUE';
+    readonly NullValue: "NULL_VALUE";
 };

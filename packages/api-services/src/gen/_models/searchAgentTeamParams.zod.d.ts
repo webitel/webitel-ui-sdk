@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentTeamParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	strategy?: string[];
-	adminId?: number[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    strategy?: string[];
+    adminId?: number[];
 };

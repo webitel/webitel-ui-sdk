@@ -6,5 +6,5 @@
  */
 import type { ApiDevice } from './apiDevice.zod';
 export interface ApiDeleteDeviceResponse {
-	deleted?: ApiDevice[];
+    deleted?: ApiDevice[];
 }

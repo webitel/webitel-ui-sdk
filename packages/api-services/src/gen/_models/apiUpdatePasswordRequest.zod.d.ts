@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiUpdatePasswordRequest {
-	confirmPassword?: string;
-	domain?: string;
-	id?: string;
-	oldPassword?: string;
-	userPassword?: string;
-	username?: string;
+    confirmPassword?: string;
+    domain?: string;
+    id?: string;
+    oldPassword?: string;
+    userPassword?: string;
+    username?: string;
 }

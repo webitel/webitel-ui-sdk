@@ -6,8 +6,8 @@
  */
 import type { KnowledgebaseCombined } from './knowledgebaseCombined.zod';
 export interface KnowledgebaseCombinedList {
-	data?: KnowledgebaseCombined[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+    data?: KnowledgebaseCombined[];
+    next?: boolean;
+    /** The page number of the partial result. */
+    page?: number;
 }

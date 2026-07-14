@@ -6,7 +6,7 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineOutboundResourceGroupServiceUpdateOutboundResourceInGroupBody {
-	priority?: number;
-	reserveResource?: EngineLookup;
-	resource?: EngineLookup;
+    priority?: number;
+    reserveResource?: EngineLookup;
+    resource?: EngineLookup;
 }

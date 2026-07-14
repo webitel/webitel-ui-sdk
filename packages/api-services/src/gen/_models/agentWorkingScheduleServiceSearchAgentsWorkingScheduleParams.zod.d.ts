@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type AgentWorkingScheduleServiceSearchAgentsWorkingScheduleParams = {
-	dateFrom?: string;
-	dateTo?: string;
-	supervisorId?: string[];
-	teamId?: string[];
-	skillId?: string[];
-	q?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    supervisorId?: string[];
+    teamId?: string[];
+    skillId?: string[];
+    q?: string;
 };

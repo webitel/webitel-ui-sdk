@@ -6,5 +6,5 @@
  */
 import type { ForecastCalculationServiceUpdateForecastCalculationBodyItem } from './forecastCalculationServiceUpdateForecastCalculationBodyItem.zod';
 export type ForecastCalculationServiceUpdateForecastCalculationBody = {
-	item?: ForecastCalculationServiceUpdateForecastCalculationBodyItem;
+    item?: ForecastCalculationServiceUpdateForecastCalculationBodyItem;
 };

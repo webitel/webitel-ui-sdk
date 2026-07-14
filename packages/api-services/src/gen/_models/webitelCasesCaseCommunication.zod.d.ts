@@ -9,14 +9,14 @@ import type { GeneralLookup } from './generalLookup.zod';
  * Represents a single case communication.
  */
 export interface WebitelCasesCaseCommunication {
-	/** External communication ID. */
-	communicationId?: string;
-	/** Type of the communication (e.g., Chat, Call). */
-	communicationType?: GeneralLookup;
-	/** Version of the communication record. */
-	etag?: string;
-	/** Database ID of the communication. */
-	id?: string;
-	/** Version of the communication record. */
-	ver?: number;
+    /** External communication ID. */
+    communicationId?: string;
+    /** Type of the communication (e.g., Chat, Call). */
+    communicationType?: GeneralLookup;
+    /** Version of the communication record. */
+    etag?: string;
+    /** Database ID of the communication. */
+    id?: string;
+    /** Version of the communication record. */
+    ver?: number;
 }

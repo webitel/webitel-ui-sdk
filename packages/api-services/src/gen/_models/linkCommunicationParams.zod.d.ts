@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LinkCommunicationParams = {
-	/**
-	 * List of fields to include in the response.
-	 */
-	fields?: string[];
+    /**
+     * List of fields to include in the response.
+     */
+    fields?: string[];
 };

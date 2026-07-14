@@ -6,7 +6,7 @@
  */
 import type { LoggerConfig } from './loggerConfig.zod';
 export interface LoggerConfigs {
-	items?: LoggerConfig[];
-	next?: boolean;
-	page?: number;
+    items?: LoggerConfig[];
+    next?: boolean;
+    page?: number;
 }

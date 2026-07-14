@@ -4,12 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineTriggerEventType =
-	(typeof EngineTriggerEventType)[keyof typeof EngineTriggerEventType];
+export type EngineTriggerEventType = (typeof EngineTriggerEventType)[keyof typeof EngineTriggerEventType];
 export declare const EngineTriggerEventType: {
-	readonly EmptyTriggerEvent: 'empty_trigger_event';
-	readonly Create: 'create';
-	readonly Update: 'update';
-	readonly Remove: 'remove';
-	readonly ResolutionTime: 'resolution_time';
+    readonly EmptyTriggerEvent: "empty_trigger_event";
+    readonly Create: "create";
+    readonly Update: "update";
+    readonly Remove: "remove";
+    readonly ResolutionTime: "resolution_time";
 };

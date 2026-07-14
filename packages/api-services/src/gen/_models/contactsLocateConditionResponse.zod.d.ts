@@ -9,5 +9,5 @@ import type { ContactsCondition } from './contactsCondition.zod';
  * Response message for locating a condition by ID.
  */
 export interface ContactsLocateConditionResponse {
-	condition?: ContactsCondition;
+    condition?: ContactsCondition;
 }

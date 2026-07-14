@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelChatServerUser {
-	connection?: string;
-	internal?: boolean;
-	type?: string;
-	userId?: string;
+    connection?: string;
+    internal?: boolean;
+    type?: string;
+    userId?: string;
 }

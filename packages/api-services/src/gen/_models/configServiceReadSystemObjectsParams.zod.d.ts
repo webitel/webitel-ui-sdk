@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ConfigServiceReadSystemObjectsParams = {
-	includeExisting?: boolean;
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
+    includeExisting?: boolean;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
 };

@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineSchemaVariablesServiceUpdateSchemaVariableBody {
-	encrypt?: boolean;
-	name?: string;
+    encrypt?: boolean;
+    name?: string;
 }

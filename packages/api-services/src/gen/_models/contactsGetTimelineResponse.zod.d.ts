@@ -6,7 +6,7 @@
  */
 import type { ContactsDayTimeline } from './contactsDayTimeline.zod';
 export interface ContactsGetTimelineResponse {
-	days?: ContactsDayTimeline[];
-	next?: boolean;
-	page?: string;
+    days?: ContactsDayTimeline[];
+    next?: boolean;
+    page?: string;
 }

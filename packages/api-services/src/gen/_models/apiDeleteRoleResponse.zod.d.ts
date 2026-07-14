@@ -6,5 +6,5 @@
  */
 import type { ApiRole } from './apiRole.zod';
 export interface ApiDeleteRoleResponse {
-	deleted?: ApiRole;
+    deleted?: ApiRole;
 }

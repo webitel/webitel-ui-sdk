@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineOutboundResourceTimeRange {
-	endTimeOfDay?: number;
-	startTimeOfDay?: number;
+    endTimeOfDay?: number;
+    startTimeOfDay?: number;
 }

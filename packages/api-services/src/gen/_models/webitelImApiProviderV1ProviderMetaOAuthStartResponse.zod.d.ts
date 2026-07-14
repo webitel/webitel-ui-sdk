@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiProviderV1ProviderMetaOAuthStartResponse {
-	authUrl?: string;
-	state?: string;
+    authUrl?: string;
+    state?: string;
 }

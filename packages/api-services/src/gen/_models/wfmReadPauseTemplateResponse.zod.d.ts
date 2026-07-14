@@ -6,5 +6,5 @@
  */
 import type { WfmPauseTemplate } from './wfmPauseTemplate.zod';
 export interface WfmReadPauseTemplateResponse {
-	item?: WfmPauseTemplate;
+    item?: WfmPauseTemplate;
 }

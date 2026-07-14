@@ -6,6 +6,6 @@
  */
 import type { EngineSchemaVariable } from './engineSchemaVariable.zod';
 export interface EngineListSchemaVariable {
-	items?: EngineSchemaVariable[];
-	next?: boolean;
+    items?: EngineSchemaVariable[];
+    next?: boolean;
 }

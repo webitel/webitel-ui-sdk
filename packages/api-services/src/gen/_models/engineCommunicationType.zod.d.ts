@@ -6,11 +6,11 @@
  */
 import type { EngineCommunicationChannels } from './engineCommunicationChannels.zod';
 export interface EngineCommunicationType {
-	channel?: EngineCommunicationChannels;
-	code?: string;
-	default?: boolean;
-	description?: string;
-	domainId?: string;
-	id?: string;
-	name?: string;
+    channel?: EngineCommunicationChannels;
+    code?: string;
+    default?: boolean;
+    description?: string;
+    domainId?: string;
+    id?: string;
+    name?: string;
 }

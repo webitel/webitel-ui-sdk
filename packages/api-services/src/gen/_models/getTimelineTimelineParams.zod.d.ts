@@ -6,13 +6,13 @@
  */
 import type { GetTimelineTimelineTypeItem } from './getTimelineTimelineTypeItem.zod';
 export type GetTimelineTimelineParams = {
-	page?: string;
-	size?: string;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	ids?: string[];
-	dateFrom?: string;
-	dateTo?: string;
-	type?: GetTimelineTimelineTypeItem[];
+    page?: string;
+    size?: string;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    ids?: string[];
+    dateFrom?: string;
+    dateTo?: string;
+    type?: GetTimelineTimelineTypeItem[];
 };

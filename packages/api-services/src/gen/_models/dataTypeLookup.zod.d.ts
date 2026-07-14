@@ -11,24 +11,24 @@ import type { DataTypeLookupViolation } from './dataTypeLookupViolation.zod';
  * Simplified [webitel.custom.Struct] options.
  */
 export interface DataTypeLookup {
-	/**
-	 * [Readonly]. Display dataset field.
-	 * (lookup).{`name`} value relation.
-	 */
-	display?: string;
-	/** [Readonly]. Dataset title. */
-	name?: string;
-	/**
-	 * [Required]. Reference dataset relative path
-	 * e.g.: "contacts", "dictionaries/cities".
-	 * (lookup).{`type`} value relation.
-	 */
-	path?: string;
-	/**
-	 * [Readonly]. Primary dataset field.
-	 * (lookup).{`id`} value relation.
-	 */
-	primary?: string;
-	query?: DataTypeLookupQuery;
-	violation?: DataTypeLookupViolation;
+    /**
+     * [Readonly]. Display dataset field.
+     * (lookup).{`name`} value relation.
+     */
+    display?: string;
+    /** [Readonly]. Dataset title. */
+    name?: string;
+    /**
+     * [Required]. Reference dataset relative path
+     * e.g.: "contacts", "dictionaries/cities".
+     * (lookup).{`type`} value relation.
+     */
+    path?: string;
+    /**
+     * [Readonly]. Primary dataset field.
+     * (lookup).{`id`} value relation.
+     */
+    primary?: string;
+    query?: DataTypeLookupQuery;
+    violation?: DataTypeLookupViolation;
 }

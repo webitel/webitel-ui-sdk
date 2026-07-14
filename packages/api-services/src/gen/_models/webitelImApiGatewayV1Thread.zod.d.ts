@@ -13,24 +13,24 @@ import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGateway
  * Thread represents a thread (aka chat or conversation) entity.
  */
 export interface WebitelImApiGatewayV1Thread {
-	/** Thread creation timestamp (Unix time, milliseconds). */
-	createdAt?: string;
-	/** Optional thread description. */
-	description?: string;
-	/** Unique thread identifier. */
-	id?: string;
-	/** Last message of the linked thread. */
-	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
-	/** Detailed member information. */
-	members?: WebitelImApiGatewayV1ThreadMember[];
-	/** User-specific settings for this thread. */
-	settings?: WebitelImApiGatewayV1ThreadSettings;
-	/** Thread subject or title. */
-	subject?: string;
-	/** Type of the thread. */
-	type?: WebitelImApiGatewayV1ThreadKind;
-	/** Last update timestamp (Unix time, milliseconds). */
-	updatedAt?: string;
-	/** Optional variables associated with the thread. */
-	variables?: WebitelImApiGatewayV1ThreadVariables;
+    /** Thread creation timestamp (Unix time, milliseconds). */
+    createdAt?: string;
+    /** Optional thread description. */
+    description?: string;
+    /** Unique thread identifier. */
+    id?: string;
+    /** Last message of the linked thread. */
+    lastMsg?: WebitelImApiGatewayV1HistoryMessage;
+    /** Detailed member information. */
+    members?: WebitelImApiGatewayV1ThreadMember[];
+    /** User-specific settings for this thread. */
+    settings?: WebitelImApiGatewayV1ThreadSettings;
+    /** Thread subject or title. */
+    subject?: string;
+    /** Type of the thread. */
+    type?: WebitelImApiGatewayV1ThreadKind;
+    /** Last update timestamp (Unix time, milliseconds). */
+    updatedAt?: string;
+    /** Optional variables associated with the thread. */
+    variables?: WebitelImApiGatewayV1ThreadVariables;
 }

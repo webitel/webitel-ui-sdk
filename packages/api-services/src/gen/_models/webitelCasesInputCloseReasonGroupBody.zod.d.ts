@@ -5,5 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelCasesInputCloseReasonGroup } from './webitelCasesInputCloseReasonGroup.zod';
-export type WebitelCasesInputCloseReasonGroupBody =
-	WebitelCasesInputCloseReasonGroup;
+export type WebitelCasesInputCloseReasonGroupBody = WebitelCasesInputCloseReasonGroup;

@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCreateRoutingVariableRequest {
-	domainId?: string;
-	key?: string;
-	value?: string;
+    domainId?: string;
+    key?: string;
+    value?: string;
 }

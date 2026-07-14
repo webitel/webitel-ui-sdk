@@ -8,5 +8,5 @@
  * End-User's extra attributes (claims) metadata.
  */
 export type WebitelImApiGatewayV1AuthContactMetadata = {
-	[key: string]: unknown;
+    [key: string]: unknown;
 };
