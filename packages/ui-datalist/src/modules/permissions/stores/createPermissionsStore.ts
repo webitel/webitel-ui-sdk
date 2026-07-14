@@ -2,8 +2,10 @@ import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
 import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { ref } from 'vue';
-import { makeThisToRefs } from '../../_shared/createDatalistStore';
-import { createDatalistStore } from '../../_shared/createDatalistStore';
+import {
+	createDatalistStore,
+	makeThisToRefs,
+} from '../../_shared/createDatalistStore';
 import { tableStoreBody } from '../../table/createTableStore.store';
 import type { useTableStoreConfig } from '../../types/tableStore.types';
 import { PermissionsApiModule } from '../scripts/PermissionsApiModule';
