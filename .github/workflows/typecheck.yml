@@ -101,10 +101,11 @@ jobs:
         with:
           node-version-file: package.json
           cache: npm
-      # Root: path aliases + shared types (e.g. vidstack). Package: own lockfile deps.
-      - run: npm ci
+      # Package first (own lockfile), then root (path aliases / shared libs).
+      # Reverse order: package workspace install can disrupt root node_modules.
       - run: npm ci
         working-directory: packages/ui-datalist
+      - run: npm ci
       - run: npm run --prefix packages/ui-datalist typecheck
 
   typecheck-ui-chats:
@@ -120,6 +121,6 @@ jobs:
           node-version-file: package.json
           cache: npm
       - run: npm ci
-      - run: npm ci
         working-directory: packages/ui-chats
+      - run: npm ci
       - run: npm run --prefix packages/ui-chats typecheck
