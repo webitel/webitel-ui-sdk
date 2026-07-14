@@ -1,4 +1,5 @@
 export { ChatAction } from './chat-footer/modules/user-input/enums/ChatAction.enum';
+export { useMediaScroll } from './messaging/composables/useMediaScroll';
 export { useChatMessageFile } from './messaging/modules/message/composables/useChatMessageFile';
 export { MessageAction } from './messaging/modules/message/enums/MessageAction.enum';
 export type {
