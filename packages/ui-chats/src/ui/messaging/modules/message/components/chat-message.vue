@@ -1,7 +1,8 @@
 <template>
   <div
+    :id="`message-${props.message.id}`"
     :class="{
-       'chat-message--right' : isSelfSide,
+       'chat-message--right' : isAgentSide,
        'chat-message--md': size === ComponentSize.MD
       }"
     class="chat-message"
@@ -24,7 +25,7 @@
       <message-blocked-error v-if="message.file?.malware" @click.stop />
       <message-size-exceeded-error
         v-else-if="isFileSizeExceeded"
-        :self-side="isSelfSide"
+        :self-side="isAgentSide"
         @click.stop
       />
       <div class="chat-message__body" v-else @click.stop>
@@ -43,7 +44,7 @@
         <message-document
           v-else-if="document"
           :file="document"
-          :self-side="isSelfSide"
+          :self-side="isAgentSide"
         />
         <div
           v-if="props.message?.text"
@@ -124,7 +125,13 @@ const isTransferAgent = computed(
 	() => !props.message.member?.self && isInternalMember.value,
 );
 
-const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
+const isBot = computed<boolean>(
+	() =>
+		props.message.member?.type === 'bot' ||
+		(!props.message.member?.type && !props.message.channelId),
+);
+
+const isAgentSide = computed<boolean>(() => isSelfSide.value || isBot.value);
 
 const getClientUsername = computed<string>(() => {
 	if (isTransferAgent.value) return props.message.member?.name;

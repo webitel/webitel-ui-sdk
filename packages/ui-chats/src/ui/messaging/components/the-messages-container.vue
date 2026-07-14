@@ -29,9 +29,22 @@
           @[MessageAction.ClickOnImage]="clickOnImage(message)"
         >
           <template #before-message>
-            <chat-date-divider
-              v-if="showChatDate(index)"
-              :date="message.createdAt"
+            <slot
+              name="before-message"
+              :message="message"
+              :index="index"
+            >
+              <chat-date-divider
+                v-if="showChatDate(index)"
+                :date="message.createdAt"
+              />
+            </slot>
+          </template>
+          <template #after-message>
+            <slot
+              name="after-message"
+              :message="message"
+              :index="index"
             />
           </template>
         </chat-message>
@@ -76,6 +89,7 @@ const props = withDefaults(
 		contact?: WebitelContactsContact;
 		chatId?: string;
 		isChatClosed?: boolean;
+		closedChatFirstMessageId?: string | number | null;
 	}>(),
 	{
 		next: false,
@@ -83,10 +97,22 @@ const props = withDefaults(
 		withoutAvatars: false,
 		chatId: '',
 		isChatClosed: false,
+		closedChatFirstMessageId: null,
 	},
 );
 
 const emit = defineEmits<(e: typeof ChatAction.LoadNextMessages) => void>();
+
+defineSlots<{
+	'before-message': (props: {
+		message: ChatMessageType;
+		index: number;
+	}) => unknown;
+	'after-message': (props: {
+		message: ChatMessageType;
+		index: number;
+	}) => unknown;
+}>();
 
 const chatContainer = useTemplateRef('messages-container');
 const chatContent = useTemplateRef('chat-content');
@@ -108,6 +134,7 @@ const {
 	chatId: computed(() => props.chatId),
 	isChatClosed: computed(() => props.isChatClosed),
 	isLoading: computed(() => props.isLoading),
+	closedChatMessageId: computed(() => props.closedChatFirstMessageId),
 	onBeforeStart: ({ scrollToBottom }) => {
 		scrollToBottom();
 		startObserve();
