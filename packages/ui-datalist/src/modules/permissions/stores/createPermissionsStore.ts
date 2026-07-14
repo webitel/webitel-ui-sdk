@@ -1,8 +1,8 @@
 import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
 import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
-import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { makeThisToRefs } from '../../_shared/createDatalistStore';
 import { createDatalistStore } from '../../_shared/createDatalistStore';
 import { tableStoreBody } from '../../table/createTableStore.store';
 import type { useTableStoreConfig } from '../../types/tableStore.types';
@@ -10,6 +10,7 @@ import { PermissionsApiModule } from '../scripts/PermissionsApiModule';
 import type {
 	ChangeAccessModePayload,
 	PermissionEntity,
+	PermissionsChange,
 	RawPermissionsApiModule,
 } from '../types/Permission.types';
 
@@ -50,7 +51,10 @@ export const permissionsStoreBody = (
 	config: useTableStoreConfig<PermissionEntity>,
 ) => {
 	const tableStore = tableStoreBody<PermissionEntity>(namespace, config);
-	const { dataList, selected, error, isLoading } = storeToRefs(tableStore);
+	const { dataList, selected, error, isLoading } = makeThisToRefs(
+		tableStore,
+		config.storeType,
+	);
 	const {
 		initialize: tableStoreInitialize,
 		loadDataList,
@@ -70,14 +74,14 @@ export const permissionsStoreBody = (
 		return tableStoreInitialize(options);
 	};
 
-	const patchPermissions = async (
-		changes: {
-			grantee: number;
-			grants: string;
-		}[],
-	) => {
+	const patchPermissions = async (changes: PermissionsChange[]) => {
 		try {
-			await config.apiModule.patch({
+			await (
+				config.apiModule.patch as unknown as (payload: {
+					id: Id;
+					changes: PermissionsChange[];
+				}) => Promise<unknown>
+			)({
 				id: parentId.value,
 				changes,
 			});
