@@ -1,5 +1,5 @@
+import type { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { ApiModule, Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
-import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 
 export interface PermissionGrantee {
 	id: Id;

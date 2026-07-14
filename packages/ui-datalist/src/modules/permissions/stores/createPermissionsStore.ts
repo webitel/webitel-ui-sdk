@@ -1,7 +1,8 @@
 import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
+import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-
 import { createDatalistStore } from '../../_shared/createDatalistStore';
 import { tableStoreBody } from '../../table/createTableStore.store';
 import type { useTableStoreConfig } from '../../types/tableStore.types';
@@ -11,8 +12,6 @@ import type {
 	PermissionEntity,
 	RawPermissionsApiModule,
 } from '../types/Permission.types';
-import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
-import { storeToRefs } from 'pinia';
 
 const resolveModeId = (mode: ChangeAccessModePayload['mode']) =>
 	typeof mode === 'number' ? mode : mode?.id;
