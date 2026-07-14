@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiObjclass {
-    /** [A]ttribute-[b]ased;  not implemented; next releases ... */
-    abac?: boolean;
-    /** flags: [ CREATE | SELECT | UPDATE | DELETE ] */
-    access?: string;
-    class?: string;
-    /** class: object id */
-    id?: string;
-    name?: string;
-    obac?: boolean;
-    rbac?: boolean;
+	/** [A]ttribute-[b]ased;  not implemented; next releases ... */
+	abac?: boolean;
+	/** flags: [ CREATE | SELECT | UPDATE | DELETE ] */
+	access?: string;
+	class?: string;
+	/** class: object id */
+	id?: string;
+	name?: string;
+	obac?: boolean;
+	rbac?: boolean;
 }

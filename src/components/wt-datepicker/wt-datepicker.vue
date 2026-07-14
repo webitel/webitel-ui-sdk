@@ -153,9 +153,7 @@ import {
 	MessageVariant,
 } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
-import { useOverlayAnchor } from './_internals/composables/useOverlayAnchor';
-import { usePreventZeroPad } from './_internals/composables/usePreventZeroPad';
-import { useRestoreOnBlur } from './_internals/composables/useRestoreOnBlur';
+import { useDatepicker } from './_internals/composables/useDatepicker';
 
 interface Props extends DatePickerProps {
 	showTime?: boolean;
@@ -208,18 +206,16 @@ const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
-usePreventZeroPad(() => datepicker.value?.$el?.querySelector('input'));
-
-const { onBlur } = useRestoreOnBlur(
+const { onBlur, lockOverlay, unlockOverlay } = useDatepicker(
+	() => datepicker.value?.$el?.querySelector('input'),
 	() => datepicker.value,
+	() => !!props.showTime,
 	() => !!props.clearable,
 );
 
 const getPlaceholder = computed(() => {
 	return props.placholder || `dd/mm/yyyy ${props.showTime ? 'hh:mm' : ''}`;
 });
-
-const { lock: lockOverlay, unlock: unlockOverlay } = useOverlayAnchor();
 
 // PrimeVue initializes its internal currentHour/currentMinute from new Date() when the
 // overlay opens, ignoring the model value. Re-assigning the same value forces a re-sync.

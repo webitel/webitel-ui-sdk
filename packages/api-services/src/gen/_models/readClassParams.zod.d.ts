@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ReadClassParams = {
-    domain?: string;
-    /**
-     * [filter]: like '%class%'
-     */
-    class?: string;
+	domain?: string;
+	/**
+	 * [filter]: like '%class%'
+	 */
+	class?: string;
 };

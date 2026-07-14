@@ -6,5 +6,5 @@
  */
 import type { WfmShiftTemplate } from './wfmShiftTemplate.zod';
 export interface WfmCreateShiftTemplateResponse {
-    item?: WfmShiftTemplate;
+	item?: WfmShiftTemplate;
 }

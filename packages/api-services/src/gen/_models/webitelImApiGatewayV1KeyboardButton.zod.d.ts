@@ -13,22 +13,22 @@ import type { WebitelImApiGatewayV1KeyboardButtonURL } from './webitelImApiGatew
  * Each button must have a unique identifier and a specific action type.
  */
 export interface WebitelImApiGatewayV1KeyboardButton {
-    /** Triggers a backend event (callback) with associated metadata. */
-    callback?: WebitelImApiGatewayV1KeyboardButtonCallback;
-    /**
-     * Unique idempotent identifier for the button.
-     * Used by the frontend to track state and prevent duplicate interactions.
-     */
-    id?: string;
-    /** The human-readable label displayed on the button. */
-    label?: string;
-    /**
-     * Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").
-     * Usage: Allows for future-proofing without breaking schema changes.
-     */
-    metadata?: WebitelImApiGatewayV1KeyboardButtonMetadata;
-    /** Requests sensitive information from the client (e.g., location or contact). */
-    request?: WebitelImApiGatewayV1KeyboardButtonRequest;
-    /** Directs the user to an external web resource. */
-    url?: WebitelImApiGatewayV1KeyboardButtonURL;
+	/** Triggers a backend event (callback) with associated metadata. */
+	callback?: WebitelImApiGatewayV1KeyboardButtonCallback;
+	/**
+	 * Unique idempotent identifier for the button.
+	 * Used by the frontend to track state and prevent duplicate interactions.
+	 */
+	id?: string;
+	/** The human-readable label displayed on the button. */
+	label?: string;
+	/**
+	 * Extensible metadata for UI/UX styling (e.g., "color", "theme", "size").
+	 * Usage: Allows for future-proofing without breaking schema changes.
+	 */
+	metadata?: WebitelImApiGatewayV1KeyboardButtonMetadata;
+	/** Requests sensitive information from the client (e.g., location or contact). */
+	request?: WebitelImApiGatewayV1KeyboardButtonRequest;
+	/** Directs the user to an external web resource. */
+	url?: WebitelImApiGatewayV1KeyboardButtonURL;
 }

@@ -8,437 +8,786 @@ import * as zod from 'zod';
 /**
  * @summary Retrieve a list of services or search services within a catalog
  */
-export declare const ListServicesQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    q: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ListServicesResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        assignee: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        catalogId: zod.ZodOptional<zod.ZodString>;
-        code: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        defaultPriority: zod.ZodOptional<zod.ZodObject<{
-            color: zod.ZodString;
-            createdAt: zod.ZodString;
-            createdBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-            description: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodString;
-            name: zod.ZodString;
-            updatedAt: zod.ZodString;
-            updatedBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        group: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        rootId: zod.ZodOptional<zod.ZodString>;
-        searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-        sla: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        state: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ListServicesQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		q: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListServicesResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						assignee: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						catalogId: zod.ZodOptional<zod.ZodString>;
+						code: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						defaultPriority: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									color: zod.ZodString;
+									createdAt: zod.ZodString;
+									createdBy: zod.ZodObject<
+										{
+											id: zod.ZodOptional<zod.ZodString>;
+											name: zod.ZodOptional<zod.ZodString>;
+										},
+										zod.z.core.$strip
+									>;
+									description: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodString;
+									name: zod.ZodString;
+									updatedAt: zod.ZodString;
+									updatedBy: zod.ZodObject<
+										{
+											id: zod.ZodOptional<zod.ZodString>;
+											name: zod.ZodOptional<zod.ZodString>;
+										},
+										zod.z.core.$strip
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						group: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						rootId: zod.ZodOptional<zod.ZodString>;
+						searched: zod.ZodOptional<zod.ZodBoolean>;
+						service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+						sla: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						state: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create a new service within a catalog
  */
-export declare const CreateServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const CreateServiceBody: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const CreateServiceResponse: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        color: zod.ZodString;
-        createdAt: zod.ZodString;
-        createdBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-        description: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodString;
-        name: zod.ZodString;
-        updatedAt: zod.ZodString;
-        updatedBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const CreateServiceQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateServiceBody: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateServiceResponse: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					color: zod.ZodString;
+					createdAt: zod.ZodString;
+					createdBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodString;
+					name: zod.ZodString;
+					updatedAt: zod.ZodString;
+					updatedBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		searched: zod.ZodOptional<zod.ZodBoolean>;
+		service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Delete a service
  */
-export declare const DeleteServiceParams: zod.ZodObject<{
-    id: zod.ZodArray<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteServiceResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        assignee: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        catalogId: zod.ZodOptional<zod.ZodString>;
-        code: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        defaultPriority: zod.ZodOptional<zod.ZodObject<{
-            color: zod.ZodString;
-            createdAt: zod.ZodString;
-            createdBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-            description: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodString;
-            name: zod.ZodString;
-            updatedAt: zod.ZodString;
-            updatedBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        group: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        rootId: zod.ZodOptional<zod.ZodString>;
-        searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-        sla: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        state: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteServiceParams: zod.ZodObject<
+	{
+		id: zod.ZodArray<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteServiceResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						assignee: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						catalogId: zod.ZodOptional<zod.ZodString>;
+						code: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						defaultPriority: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									color: zod.ZodString;
+									createdAt: zod.ZodString;
+									createdBy: zod.ZodObject<
+										{
+											id: zod.ZodOptional<zod.ZodString>;
+											name: zod.ZodOptional<zod.ZodString>;
+										},
+										zod.z.core.$strip
+									>;
+									description: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodString;
+									name: zod.ZodString;
+									updatedAt: zod.ZodString;
+									updatedBy: zod.ZodObject<
+										{
+											id: zod.ZodOptional<zod.ZodString>;
+											name: zod.ZodOptional<zod.ZodString>;
+										},
+										zod.z.core.$strip
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						group: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						rootId: zod.ZodOptional<zod.ZodString>;
+						searched: zod.ZodOptional<zod.ZodBoolean>;
+						service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+						sla: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						state: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Locate a service by ID
  */
-export declare const LocateServiceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const LocateServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const LocateServiceResponse: zod.ZodObject<{
-    service: zod.ZodOptional<zod.ZodObject<{
-        assignee: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        catalogId: zod.ZodOptional<zod.ZodString>;
-        code: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        defaultPriority: zod.ZodOptional<zod.ZodObject<{
-            color: zod.ZodString;
-            createdAt: zod.ZodString;
-            createdBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-            description: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodString;
-            name: zod.ZodString;
-            updatedAt: zod.ZodString;
-            updatedBy: zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        group: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        rootId: zod.ZodOptional<zod.ZodString>;
-        searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-        sla: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        state: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const LocateServiceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateServiceQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateServiceResponse: zod.ZodObject<
+	{
+		service: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					assignee: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					catalogId: zod.ZodOptional<zod.ZodString>;
+					code: zod.ZodOptional<zod.ZodString>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					defaultPriority: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								color: zod.ZodString;
+								createdAt: zod.ZodString;
+								createdBy: zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>;
+								description: zod.ZodOptional<zod.ZodString>;
+								id: zod.ZodString;
+								name: zod.ZodString;
+								updatedAt: zod.ZodString;
+								updatedBy: zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					group: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+								type: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					rootId: zod.ZodOptional<zod.ZodString>;
+					searched: zod.ZodOptional<zod.ZodBoolean>;
+					service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+					sla: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					state: zod.ZodOptional<zod.ZodBoolean>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update an existing service
  */
-export declare const UpdateService2Params: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateService2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateService2Body: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const UpdateService2Response: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        color: zod.ZodString;
-        createdAt: zod.ZodString;
-        createdBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-        description: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodString;
-        name: zod.ZodString;
-        updatedAt: zod.ZodString;
-        updatedBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateService2Params: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateService2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateService2Body: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateService2Response: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					color: zod.ZodString;
+					createdAt: zod.ZodString;
+					createdBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodString;
+					name: zod.ZodString;
+					updatedAt: zod.ZodString;
+					updatedBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		searched: zod.ZodOptional<zod.ZodBoolean>;
+		service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update an existing service
  */
-export declare const UpdateServiceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateServiceBody: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const UpdateServiceResponse: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    catalogId: zod.ZodOptional<zod.ZodString>;
-    code: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    defaultPriority: zod.ZodOptional<zod.ZodObject<{
-        color: zod.ZodString;
-        createdAt: zod.ZodString;
-        createdBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-        description: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodString;
-        name: zod.ZodString;
-        updatedAt: zod.ZodString;
-        updatedBy: zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    rootId: zod.ZodOptional<zod.ZodString>;
-    searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateServiceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateServiceQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateServiceBody: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateServiceResponse: zod.ZodObject<
+	{
+		assignee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		catalogId: zod.ZodOptional<zod.ZodString>;
+		code: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		defaultPriority: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					color: zod.ZodString;
+					createdAt: zod.ZodString;
+					createdBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodString;
+					name: zod.ZodString;
+					updatedAt: zod.ZodString;
+					updatedBy: zod.ZodObject<
+						{
+							id: zod.ZodOptional<zod.ZodString>;
+							name: zod.ZodOptional<zod.ZodString>;
+						},
+						zod.z.core.$strip
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		group: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		rootId: zod.ZodOptional<zod.ZodString>;
+		searched: zod.ZodOptional<zod.ZodBoolean>;
+		service: zod.ZodOptional<zod.ZodArray<zod.ZodUnknown>>;
+		sla: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

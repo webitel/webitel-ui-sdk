@@ -7,28 +7,28 @@
 import type { CommentFormat } from './commentFormat.zod';
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsComment {
-    /** The user who created this Field. */
-    createdAt?: string;
-    /** Timestamp(milli) of the Field creation. */
-    createdBy?: WebitelContactsLookup;
-    /**
-     * Unique ID of the latest version of the update.
-     * This ID changes after any update to the underlying value(s).
-     */
-    etag?: string;
-    /** Styles of the text components. */
-    format?: CommentFormat[];
-    /** The unique ID of the Comment. Never changes. */
-    id?: string;
-    /** Rich Text, multi-line[d] string value. */
-    text?: string;
-    /**
-     * Timestamp(milli) of the last Field update.
-     * Take part in Etag generation.
-     */
-    updatedAt?: string;
-    /** The user who performed last Update. */
-    updatedBy?: WebitelContactsLookup;
-    /** Version of the latest update. Numeric sequence. */
-    ver?: number;
+	/** The user who created this Field. */
+	createdAt?: string;
+	/** Timestamp(milli) of the Field creation. */
+	createdBy?: WebitelContactsLookup;
+	/**
+	 * Unique ID of the latest version of the update.
+	 * This ID changes after any update to the underlying value(s).
+	 */
+	etag?: string;
+	/** Styles of the text components. */
+	format?: CommentFormat[];
+	/** The unique ID of the Comment. Never changes. */
+	id?: string;
+	/** Rich Text, multi-line[d] string value. */
+	text?: string;
+	/**
+	 * Timestamp(milli) of the last Field update.
+	 * Take part in Etag generation.
+	 */
+	updatedAt?: string;
+	/** The user who performed last Update. */
+	updatedBy?: WebitelContactsLookup;
+	/** Version of the latest update. Numeric sequence. */
+	ver?: number;
 }

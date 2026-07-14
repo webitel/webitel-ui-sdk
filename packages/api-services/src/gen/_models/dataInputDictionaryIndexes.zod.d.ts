@@ -9,5 +9,5 @@ import type { DataIndex } from './dataIndex.zod';
  * INDEX fields.
  */
 export type DataInputDictionaryIndexes = {
-    [key: string]: DataIndex;
+	[key: string]: DataIndex;
 };

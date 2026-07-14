@@ -6,10 +6,10 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsInputManager {
-    /** Unique ID of the latest version of an existing resource. */
-    etag: string;
-    /** Indicates whether this association must be default among others. */
-    primary?: boolean;
-    /** Responsible User. */
-    user?: WebitelContactsLookup;
+	/** Unique ID of the latest version of an existing resource. */
+	etag: string;
+	/** Indicates whether this association must be default among others. */
+	primary?: boolean;
+	/** Responsible User. */
+	user?: WebitelContactsLookup;
 }

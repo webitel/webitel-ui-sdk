@@ -8,1295 +8,2148 @@ import * as zod from 'zod';
 /**
  * @summary CreateCall initiates a new outbound call with specified parameters.
  */
-export declare const CreateCallBody: zod.ZodObject<{
-    destination: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    from: zod.ZodOptional<zod.ZodObject<{
-        appId: zod.ZodOptional<zod.ZodString>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    params: zod.ZodOptional<zod.ZodObject<{
-        cancelDistribute: zod.ZodOptional<zod.ZodBoolean>;
-        contactId: zod.ZodOptional<zod.ZodString>;
-        disableAutoAnswer: zod.ZodOptional<zod.ZodBoolean>;
-        disableStun: zod.ZodOptional<zod.ZodBoolean>;
-        display: zod.ZodOptional<zod.ZodString>;
-        hideNumber: zod.ZodOptional<zod.ZodBoolean>;
-        isOnline: zod.ZodOptional<zod.ZodBoolean>;
-        timeout: zod.ZodOptional<zod.ZodNumber>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    }, zod.z.core.$strip>>;
-    to: zod.ZodOptional<zod.ZodObject<{
-        appId: zod.ZodOptional<zod.ZodString>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateCallResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const CreateCallBody: zod.ZodObject<
+	{
+		destination: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		from: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					appId: zod.ZodOptional<zod.ZodString>;
+					extension: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		params: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cancelDistribute: zod.ZodOptional<zod.ZodBoolean>;
+					contactId: zod.ZodOptional<zod.ZodString>;
+					disableAutoAnswer: zod.ZodOptional<zod.ZodBoolean>;
+					disableStun: zod.ZodOptional<zod.ZodBoolean>;
+					display: zod.ZodOptional<zod.ZodString>;
+					hideNumber: zod.ZodOptional<zod.ZodBoolean>;
+					isOnline: zod.ZodOptional<zod.ZodBoolean>;
+					timeout: zod.ZodOptional<zod.ZodNumber>;
+					variables: zod.ZodOptional<
+						zod.ZodRecord<zod.ZodString, zod.ZodString>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		to: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					appId: zod.ZodOptional<zod.ZodString>;
+					extension: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateCallResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SearchActiveCall returns a list of all calls currently in progress.
  */
-export declare const SearchActiveCallQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    createdAtFrom: zod.ZodOptional<zod.ZodString>;
-    createdAtTo: zod.ZodOptional<zod.ZodString>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    durationFrom: zod.ZodOptional<zod.ZodString>;
-    durationTo: zod.ZodOptional<zod.ZodString>;
-    skipParent: zod.ZodOptional<zod.ZodBoolean>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    existsFile: zod.ZodOptional<zod.ZodBoolean>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    answeredAtFrom: zod.ZodOptional<zod.ZodString>;
-    answeredAtTo: zod.ZodOptional<zod.ZodString>;
-    missed: zod.ZodOptional<zod.ZodBoolean>;
-    storedAtFrom: zod.ZodOptional<zod.ZodString>;
-    storedAtTo: zod.ZodOptional<zod.ZodString>;
-    supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    state: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchActiveCallResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        answeredAt: zod.ZodOptional<zod.ZodString>;
-        appId: zod.ZodOptional<zod.ZodString>;
-        billSec: zod.ZodOptional<zod.ZodNumber>;
-        blindTransfer: zod.ZodOptional<zod.ZodString>;
-        bridgedAt: zod.ZodOptional<zod.ZodString>;
-        bridgedId: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        destination: zod.ZodOptional<zod.ZodString>;
-        direction: zod.ZodOptional<zod.ZodString>;
-        display: zod.ZodOptional<zod.ZodString>;
-        duration: zod.ZodOptional<zod.ZodNumber>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        from: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        gateway: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        holdSec: zod.ZodOptional<zod.ZodNumber>;
-        id: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        leavingAt: zod.ZodOptional<zod.ZodString>;
-        member: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        parentId: zod.ZodOptional<zod.ZodString>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queueBridgedAt: zod.ZodOptional<zod.ZodString>;
-        queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
-        queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
-        reportingAt: zod.ZodOptional<zod.ZodString>;
-        reportingSec: zod.ZodOptional<zod.ZodNumber>;
-        state: zod.ZodOptional<zod.ZodString>;
-        supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        timestamp: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        type: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        waitSec: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchActiveCallQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		createdAtFrom: zod.ZodOptional<zod.ZodString>;
+		createdAtTo: zod.ZodOptional<zod.ZodString>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		durationFrom: zod.ZodOptional<zod.ZodString>;
+		durationTo: zod.ZodOptional<zod.ZodString>;
+		skipParent: zod.ZodOptional<zod.ZodBoolean>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		existsFile: zod.ZodOptional<zod.ZodBoolean>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		answeredAtFrom: zod.ZodOptional<zod.ZodString>;
+		answeredAtTo: zod.ZodOptional<zod.ZodString>;
+		missed: zod.ZodOptional<zod.ZodBoolean>;
+		storedAtFrom: zod.ZodOptional<zod.ZodString>;
+		storedAtTo: zod.ZodOptional<zod.ZodString>;
+		supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		state: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchActiveCallResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						answeredAt: zod.ZodOptional<zod.ZodString>;
+						appId: zod.ZodOptional<zod.ZodString>;
+						billSec: zod.ZodOptional<zod.ZodNumber>;
+						blindTransfer: zod.ZodOptional<zod.ZodString>;
+						bridgedAt: zod.ZodOptional<zod.ZodString>;
+						bridgedId: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						destination: zod.ZodOptional<zod.ZodString>;
+						direction: zod.ZodOptional<zod.ZodString>;
+						display: zod.ZodOptional<zod.ZodString>;
+						duration: zod.ZodOptional<zod.ZodNumber>;
+						extension: zod.ZodOptional<zod.ZodString>;
+						from: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						gateway: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						holdSec: zod.ZodOptional<zod.ZodNumber>;
+						id: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						leavingAt: zod.ZodOptional<zod.ZodString>;
+						member: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						parentId: zod.ZodOptional<zod.ZodString>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queueBridgedAt: zod.ZodOptional<zod.ZodString>;
+						queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
+						queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
+						reportingAt: zod.ZodOptional<zod.ZodString>;
+						reportingSec: zod.ZodOptional<zod.ZodNumber>;
+						state: zod.ZodOptional<zod.ZodString>;
+						supervisor: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						timestamp: zod.ZodOptional<zod.ZodString>;
+						to: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						type: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						variables: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						waitSec: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary HangupCall terminates an active call session.
  */
-export declare const HangupCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const HangupCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    cause: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const HangupCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const HangupCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		cause: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 export declare const HangupCallResponse: zod.ZodObject<{}, zod.z.core.$loose>;
 /**
  * @summary ReadCall returns detailed real-time information for a specific active call.
  */
-export declare const ReadCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadCallQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadCallResponse: zod.ZodObject<{
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    answeredAt: zod.ZodOptional<zod.ZodString>;
-    appId: zod.ZodOptional<zod.ZodString>;
-    billSec: zod.ZodOptional<zod.ZodNumber>;
-    blindTransfer: zod.ZodOptional<zod.ZodString>;
-    bridgedAt: zod.ZodOptional<zod.ZodString>;
-    bridgedId: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    destination: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodString>;
-    display: zod.ZodOptional<zod.ZodString>;
-    duration: zod.ZodOptional<zod.ZodNumber>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    from: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        number: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    holdSec: zod.ZodOptional<zod.ZodNumber>;
-    id: zod.ZodOptional<zod.ZodString>;
-    joinedAt: zod.ZodOptional<zod.ZodString>;
-    leavingAt: zod.ZodOptional<zod.ZodString>;
-    member: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    queue: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    queueBridgedAt: zod.ZodOptional<zod.ZodString>;
-    queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
-    queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
-    reportingAt: zod.ZodOptional<zod.ZodString>;
-    reportingSec: zod.ZodOptional<zod.ZodNumber>;
-    state: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timestamp: zod.ZodOptional<zod.ZodString>;
-    to: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        number: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodOptional<zod.ZodString>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    waitSec: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ReadCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadCallQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadCallResponse: zod.ZodObject<
+	{
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		answeredAt: zod.ZodOptional<zod.ZodString>;
+		appId: zod.ZodOptional<zod.ZodString>;
+		billSec: zod.ZodOptional<zod.ZodNumber>;
+		blindTransfer: zod.ZodOptional<zod.ZodString>;
+		bridgedAt: zod.ZodOptional<zod.ZodString>;
+		bridgedId: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		destination: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodString>;
+		display: zod.ZodOptional<zod.ZodString>;
+		duration: zod.ZodOptional<zod.ZodNumber>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		from: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					number: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		holdSec: zod.ZodOptional<zod.ZodNumber>;
+		id: zod.ZodOptional<zod.ZodString>;
+		joinedAt: zod.ZodOptional<zod.ZodString>;
+		leavingAt: zod.ZodOptional<zod.ZodString>;
+		member: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		queue: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		queueBridgedAt: zod.ZodOptional<zod.ZodString>;
+		queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
+		queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
+		reportingAt: zod.ZodOptional<zod.ZodString>;
+		reportingSec: zod.ZodOptional<zod.ZodNumber>;
+		state: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timestamp: zod.ZodOptional<zod.ZodString>;
+		to: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					number: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodOptional<zod.ZodString>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+		waitSec: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary ConfirmPush confirms receipt of a push notification for synchronization.
  */
-export declare const ConfirmPushParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
+export declare const ConfirmPushParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
 export declare const ConfirmPushResponse: zod.ZodObject<{}, zod.z.core.$loose>;
 /**
  * @summary DtmfCall sends DTMF digits to an active call.
  */
-export declare const DtmfCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DtmfCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    digit: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const DtmfCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DtmfCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		digit: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 export declare const DtmfCallResponse: zod.ZodObject<{}, zod.z.core.$loose>;
 /**
  * @summary EavesdropCall allows a supervisor to listen, whisper, or join an active call.
  */
-export declare const EavesdropCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const EavesdropCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    control: zod.ZodOptional<zod.ZodBoolean>;
-    from: zod.ZodOptional<zod.ZodObject<{
-        appId: zod.ZodOptional<zod.ZodString>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    listenA: zod.ZodOptional<zod.ZodBoolean>;
-    listenB: zod.ZodOptional<zod.ZodBoolean>;
-    whisperA: zod.ZodOptional<zod.ZodBoolean>;
-    whisperB: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const EavesdropCallResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const EavesdropCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const EavesdropCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		control: zod.ZodOptional<zod.ZodBoolean>;
+		from: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					appId: zod.ZodOptional<zod.ZodString>;
+					extension: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		listenA: zod.ZodOptional<zod.ZodBoolean>;
+		listenB: zod.ZodOptional<zod.ZodBoolean>;
+		whisperA: zod.ZodOptional<zod.ZodBoolean>;
+		whisperB: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const EavesdropCallResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary HoldCall puts an active call on hold.
  */
-export declare const HoldCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const HoldCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const HoldCallResponse: zod.ZodObject<{
-    state: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const HoldCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const HoldCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const HoldCallResponse: zod.ZodObject<
+	{
+		state: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary BlindTransferCall redirects an active call to another destination.
  */
-export declare const BlindTransferCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const BlindTransferCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    destination: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const BlindTransferCallResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const BlindTransferCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const BlindTransferCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		destination: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const BlindTransferCallResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;
 /**
  * @summary UnHoldCall resumes a call from hold state.
  */
-export declare const UnHoldCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UnHoldCallBody: zod.ZodObject<{
-    appId: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UnHoldCallResponse: zod.ZodObject<{
-    state: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const UnHoldCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UnHoldCallBody: zod.ZodObject<
+	{
+		appId: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UnHoldCallResponse: zod.ZodObject<
+	{
+		state: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SetVariablesCall updates call channel variables in real-time.
  */
-export declare const SetVariablesCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SetVariablesCallBody: zod.ZodObject<{
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SetVariablesCallResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const SetVariablesCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SetVariablesCallBody: zod.ZodObject<
+	{
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SetVariablesCallResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;
 /**
  * @summary SearchHistoryCall retrieves a list of completed calls using filters (GET).
 Supports advanced filtering by participants, duration, causes, and custom variables.
  */
-export declare const SearchHistoryCallQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    createdAtFrom: zod.ZodOptional<zod.ZodString>;
-    createdAtTo: zod.ZodOptional<zod.ZodString>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    durationFrom: zod.ZodOptional<zod.ZodString>;
-    durationTo: zod.ZodOptional<zod.ZodString>;
-    skipParent: zod.ZodOptional<zod.ZodBoolean>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    hasFile: zod.ZodOptional<zod.ZodBoolean>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodString>;
-    answeredAtFrom: zod.ZodOptional<zod.ZodString>;
-    answeredAtTo: zod.ZodOptional<zod.ZodString>;
-    missed: zod.ZodOptional<zod.ZodBoolean>;
-    storedAtFrom: zod.ZodOptional<zod.ZodString>;
-    storedAtTo: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    dependencyId: zod.ZodOptional<zod.ZodString>;
-    tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    variablesString: zod.ZodOptional<zod.ZodString>;
-    amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fts: zod.ZodOptional<zod.ZodString>;
-    directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
-    agentDescription: zod.ZodOptional<zod.ZodString>;
-    ownerId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    granteeId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    amdAiResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    talkFrom: zod.ZodOptional<zod.ZodString>;
-    talkTo: zod.ZodOptional<zod.ZodString>;
-    rated: zod.ZodOptional<zod.ZodBoolean>;
-    ratedBy: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    scoreRequiredFrom: zod.ZodOptional<zod.ZodString>;
-    scoreRequiredTo: zod.ZodOptional<zod.ZodString>;
-    scoreOptionalFrom: zod.ZodOptional<zod.ZodString>;
-    scoreOptionalTo: zod.ZodOptional<zod.ZodString>;
-    ratedUser: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    hasTransfer: zod.ZodOptional<zod.ZodBoolean>;
-    timeline: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const searchHistoryCallResponseItemsItemFilesItemTypeDefault = "file_type_empty";
-export declare const searchHistoryCallResponseItemsItemFilesJobItemActionDefault = "undefined";
-export declare const searchHistoryCallResponseItemsItemFilesJobItemStateDefault = "idle";
-export declare const SearchHistoryCallResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        agentDescription: zod.ZodOptional<zod.ZodString>;
-        allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
-        amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        amdAiResult: zod.ZodOptional<zod.ZodString>;
-        amdResult: zod.ZodOptional<zod.ZodString>;
-        annotations: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            callId: zod.ZodOptional<zod.ZodString>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            endSec: zod.ZodOptional<zod.ZodNumber>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            note: zod.ZodOptional<zod.ZodString>;
-            startSec: zod.ZodOptional<zod.ZodNumber>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        answeredAt: zod.ZodOptional<zod.ZodString>;
-        appId: zod.ZodOptional<zod.ZodString>;
-        attemptId: zod.ZodOptional<zod.ZodString>;
-        billSec: zod.ZodOptional<zod.ZodNumber>;
-        blindTransfer: zod.ZodOptional<zod.ZodString>;
-        blindTransfers: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            number: zod.ZodOptional<zod.ZodString>;
-            time: zod.ZodOptional<zod.ZodString>;
-            user: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        bridgedAt: zod.ZodOptional<zod.ZodString>;
-        bridgedId: zod.ZodOptional<zod.ZodString>;
-        cause: zod.ZodOptional<zod.ZodString>;
-        contact: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        conversationId: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        destination: zod.ZodOptional<zod.ZodString>;
-        destinationName: zod.ZodOptional<zod.ZodString>;
-        direction: zod.ZodOptional<zod.ZodString>;
-        display: zod.ZodOptional<zod.ZodString>;
-        duration: zod.ZodOptional<zod.ZodNumber>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        files: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            channel: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            mimeType: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            size: zod.ZodOptional<zod.ZodString>;
-            startAt: zod.ZodOptional<zod.ZodString>;
-            startRecord: zod.ZodOptional<zod.ZodString>;
-            stopAt: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodDefault<zod.ZodEnum<{
-                file_type_empty: "file_type_empty";
-                file_type_screenshot: "file_type_screenshot";
-                file_type_screensharing: "file_type_screensharing";
-                file_type_audio: "file_type_audio";
-                file_type_video: "file_type_video";
-                file_type_pdf: "file_type_pdf";
-            }>>;
-        }, zod.z.core.$strip>>>;
-        filesJob: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            action: zod.ZodDefault<zod.ZodEnum<{
-                undefined: "undefined";
-                delete: "delete";
-                STT: "STT";
-            }>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            errorDetail: zod.ZodOptional<zod.ZodString>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            state: zod.ZodDefault<zod.ZodEnum<{
-                error: "error";
-                active: "active";
-                idle: "idle";
-                finished: "finished";
-            }>>;
-        }, zod.z.core.$strip>>>;
-        forms: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            agent: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            reportingAt: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        from: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        fromNumber: zod.ZodOptional<zod.ZodString>;
-        gateway: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        grantee: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hangupAt: zod.ZodOptional<zod.ZodString>;
-        hangupBy: zod.ZodOptional<zod.ZodString>;
-        hangupDisposition: zod.ZodOptional<zod.ZodString>;
-        hangupPhrase: zod.ZodOptional<zod.ZodString>;
-        hasChildren: zod.ZodOptional<zod.ZodBoolean>;
-        hold: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            sec: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodString>;
-            stop: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        holdSec: zod.ZodOptional<zod.ZodNumber>;
-        id: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        leavingAt: zod.ZodOptional<zod.ZodString>;
-        meetingId: zod.ZodOptional<zod.ZodString>;
-        member: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        memberId: zod.ZodOptional<zod.ZodString>;
-        parentId: zod.ZodOptional<zod.ZodString>;
-        qualityMetrics: zod.ZodOptional<zod.ZodObject<{
-            jitterAvg: zod.ZodOptional<zod.ZodNumber>;
-            jitterMax: zod.ZodOptional<zod.ZodNumber>;
-            jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            jitterMin: zod.ZodOptional<zod.ZodNumber>;
-            jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
-            mosAvg: zod.ZodOptional<zod.ZodNumber>;
-            mosMax: zod.ZodOptional<zod.ZodNumber>;
-            mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            mosMin: zod.ZodOptional<zod.ZodNumber>;
-            mosMinAt: zod.ZodOptional<zod.ZodNumber>;
-            packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMax: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMin: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
-            roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMax: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMin: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
-            sipId: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queueBridgedAt: zod.ZodOptional<zod.ZodString>;
-        queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
-        queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
-        rateId: zod.ZodOptional<zod.ZodString>;
-        ratedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ratedUser: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        reportingAt: zod.ZodOptional<zod.ZodString>;
-        reportingSec: zod.ZodOptional<zod.ZodNumber>;
-        result: zod.ZodOptional<zod.ZodString>;
-        schemas: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        scoreOptional: zod.ZodOptional<zod.ZodNumber>;
-        scoreRequired: zod.ZodOptional<zod.ZodNumber>;
-        sipCode: zod.ZodOptional<zod.ZodNumber>;
-        storedAt: zod.ZodOptional<zod.ZodString>;
-        talkSec: zod.ZodOptional<zod.ZodNumber>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        to: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        toNumber: zod.ZodOptional<zod.ZodString>;
-        transcripts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            file: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            locale: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        transferFrom: zod.ZodOptional<zod.ZodString>;
-        transferTo: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        waitSec: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchHistoryCallQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		createdAtFrom: zod.ZodOptional<zod.ZodString>;
+		createdAtTo: zod.ZodOptional<zod.ZodString>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		durationFrom: zod.ZodOptional<zod.ZodString>;
+		durationTo: zod.ZodOptional<zod.ZodString>;
+		skipParent: zod.ZodOptional<zod.ZodBoolean>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		hasFile: zod.ZodOptional<zod.ZodBoolean>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodString>;
+		answeredAtFrom: zod.ZodOptional<zod.ZodString>;
+		answeredAtTo: zod.ZodOptional<zod.ZodString>;
+		missed: zod.ZodOptional<zod.ZodBoolean>;
+		storedAtFrom: zod.ZodOptional<zod.ZodString>;
+		storedAtTo: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		dependencyId: zod.ZodOptional<zod.ZodString>;
+		tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		variablesString: zod.ZodOptional<zod.ZodString>;
+		amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		fts: zod.ZodOptional<zod.ZodString>;
+		directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
+		agentDescription: zod.ZodOptional<zod.ZodString>;
+		ownerId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		granteeId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		amdAiResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		talkFrom: zod.ZodOptional<zod.ZodString>;
+		talkTo: zod.ZodOptional<zod.ZodString>;
+		rated: zod.ZodOptional<zod.ZodBoolean>;
+		ratedBy: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		scoreRequiredFrom: zod.ZodOptional<zod.ZodString>;
+		scoreRequiredTo: zod.ZodOptional<zod.ZodString>;
+		scoreOptionalFrom: zod.ZodOptional<zod.ZodString>;
+		scoreOptionalTo: zod.ZodOptional<zod.ZodString>;
+		ratedUser: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		hasTransfer: zod.ZodOptional<zod.ZodBoolean>;
+		timeline: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchHistoryCallResponseItemsItemFilesItemTypeDefault =
+	'file_type_empty';
+export declare const searchHistoryCallResponseItemsItemFilesJobItemActionDefault =
+	'undefined';
+export declare const searchHistoryCallResponseItemsItemFilesJobItemStateDefault =
+	'idle';
+export declare const SearchHistoryCallResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						agentDescription: zod.ZodOptional<zod.ZodString>;
+						allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
+						amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						amdAiResult: zod.ZodOptional<zod.ZodString>;
+						amdResult: zod.ZodOptional<zod.ZodString>;
+						annotations: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										callId: zod.ZodOptional<zod.ZodString>;
+										createdAt: zod.ZodOptional<zod.ZodString>;
+										createdBy: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										endSec: zod.ZodOptional<zod.ZodNumber>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										note: zod.ZodOptional<zod.ZodString>;
+										startSec: zod.ZodOptional<zod.ZodNumber>;
+										updatedAt: zod.ZodOptional<zod.ZodString>;
+										updatedBy: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						answeredAt: zod.ZodOptional<zod.ZodString>;
+						appId: zod.ZodOptional<zod.ZodString>;
+						attemptId: zod.ZodOptional<zod.ZodString>;
+						billSec: zod.ZodOptional<zod.ZodNumber>;
+						blindTransfer: zod.ZodOptional<zod.ZodString>;
+						blindTransfers: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										number: zod.ZodOptional<zod.ZodString>;
+										time: zod.ZodOptional<zod.ZodString>;
+										user: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						bridgedAt: zod.ZodOptional<zod.ZodString>;
+						bridgedId: zod.ZodOptional<zod.ZodString>;
+						cause: zod.ZodOptional<zod.ZodString>;
+						contact: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						conversationId: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						destination: zod.ZodOptional<zod.ZodString>;
+						destinationName: zod.ZodOptional<zod.ZodString>;
+						direction: zod.ZodOptional<zod.ZodString>;
+						display: zod.ZodOptional<zod.ZodString>;
+						duration: zod.ZodOptional<zod.ZodNumber>;
+						extension: zod.ZodOptional<zod.ZodString>;
+						files: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										channel: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										mimeType: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+										size: zod.ZodOptional<zod.ZodString>;
+										startAt: zod.ZodOptional<zod.ZodString>;
+										startRecord: zod.ZodOptional<zod.ZodString>;
+										stopAt: zod.ZodOptional<zod.ZodString>;
+										type: zod.ZodDefault<
+											zod.ZodEnum<{
+												file_type_empty: 'file_type_empty';
+												file_type_screenshot: 'file_type_screenshot';
+												file_type_screensharing: 'file_type_screensharing';
+												file_type_audio: 'file_type_audio';
+												file_type_video: 'file_type_video';
+												file_type_pdf: 'file_type_pdf';
+											}>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						filesJob: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										action: zod.ZodDefault<
+											zod.ZodEnum<{
+												undefined: 'undefined';
+												delete: 'delete';
+												STT: 'STT';
+											}>
+										>;
+										createdAt: zod.ZodOptional<zod.ZodString>;
+										errorDetail: zod.ZodOptional<zod.ZodString>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										state: zod.ZodDefault<
+											zod.ZodEnum<{
+												error: 'error';
+												active: 'active';
+												idle: 'idle';
+												finished: 'finished';
+											}>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						forms: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										agent: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										reportingAt: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						from: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						fromNumber: zod.ZodOptional<zod.ZodString>;
+						gateway: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						grantee: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hangupAt: zod.ZodOptional<zod.ZodString>;
+						hangupBy: zod.ZodOptional<zod.ZodString>;
+						hangupDisposition: zod.ZodOptional<zod.ZodString>;
+						hangupPhrase: zod.ZodOptional<zod.ZodString>;
+						hasChildren: zod.ZodOptional<zod.ZodBoolean>;
+						hold: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										sec: zod.ZodOptional<zod.ZodNumber>;
+										start: zod.ZodOptional<zod.ZodString>;
+										stop: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						holdSec: zod.ZodOptional<zod.ZodNumber>;
+						id: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						leavingAt: zod.ZodOptional<zod.ZodString>;
+						meetingId: zod.ZodOptional<zod.ZodString>;
+						member: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						memberId: zod.ZodOptional<zod.ZodString>;
+						parentId: zod.ZodOptional<zod.ZodString>;
+						qualityMetrics: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									jitterAvg: zod.ZodOptional<zod.ZodNumber>;
+									jitterMax: zod.ZodOptional<zod.ZodNumber>;
+									jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									jitterMin: zod.ZodOptional<zod.ZodNumber>;
+									jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
+									mosAvg: zod.ZodOptional<zod.ZodNumber>;
+									mosMax: zod.ZodOptional<zod.ZodNumber>;
+									mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									mosMin: zod.ZodOptional<zod.ZodNumber>;
+									mosMinAt: zod.ZodOptional<zod.ZodNumber>;
+									packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMax: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMin: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
+									roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMax: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMin: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
+									sipId: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queueBridgedAt: zod.ZodOptional<zod.ZodString>;
+						queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
+						queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
+						rateId: zod.ZodOptional<zod.ZodString>;
+						ratedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ratedUser: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						reportingAt: zod.ZodOptional<zod.ZodString>;
+						reportingSec: zod.ZodOptional<zod.ZodNumber>;
+						result: zod.ZodOptional<zod.ZodString>;
+						schemas: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						scoreOptional: zod.ZodOptional<zod.ZodNumber>;
+						scoreRequired: zod.ZodOptional<zod.ZodNumber>;
+						sipCode: zod.ZodOptional<zod.ZodNumber>;
+						storedAt: zod.ZodOptional<zod.ZodString>;
+						talkSec: zod.ZodOptional<zod.ZodNumber>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						to: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						toNumber: zod.ZodOptional<zod.ZodString>;
+						transcripts: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										file: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										locale: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						transferFrom: zod.ZodOptional<zod.ZodString>;
+						transferTo: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						variables: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						waitSec: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SearchHistoryCallPost retrieves a list of completed calls using a complex filter body (POST).
 Ideal for large filter sets that exceed URL length limits.
  */
-export declare const SearchHistoryCallPostBody: zod.ZodObject<{
-    tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agentDescription: zod.ZodOptional<zod.ZodString>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    amdAiResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    answeredAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    createdAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    dependencyId: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodString>;
-    directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    duration: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fts: zod.ZodOptional<zod.ZodString>;
-    gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    granteeId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    hasFile: zod.ZodOptional<zod.ZodBoolean>;
-    hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
-    hasTransfer: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    missed: zod.ZodOptional<zod.ZodBoolean>;
-    number: zod.ZodOptional<zod.ZodString>;
-    ownerId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    q: zod.ZodOptional<zod.ZodString>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    rated: zod.ZodOptional<zod.ZodBoolean>;
-    ratedBy: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ratedUser: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    scoreOptional: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    scoreRequired: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    skipParent: zod.ZodOptional<zod.ZodBoolean>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    storedAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    talk: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    timeline: zod.ZodOptional<zod.ZodBoolean>;
-    transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    variablesString: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const searchHistoryCallPostResponseItemsItemFilesItemTypeDefault = "file_type_empty";
-export declare const searchHistoryCallPostResponseItemsItemFilesJobItemActionDefault = "undefined";
-export declare const searchHistoryCallPostResponseItemsItemFilesJobItemStateDefault = "idle";
-export declare const SearchHistoryCallPostResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        agentDescription: zod.ZodOptional<zod.ZodString>;
-        allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
-        amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        amdAiResult: zod.ZodOptional<zod.ZodString>;
-        amdResult: zod.ZodOptional<zod.ZodString>;
-        annotations: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            callId: zod.ZodOptional<zod.ZodString>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            endSec: zod.ZodOptional<zod.ZodNumber>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            note: zod.ZodOptional<zod.ZodString>;
-            startSec: zod.ZodOptional<zod.ZodNumber>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        answeredAt: zod.ZodOptional<zod.ZodString>;
-        appId: zod.ZodOptional<zod.ZodString>;
-        attemptId: zod.ZodOptional<zod.ZodString>;
-        billSec: zod.ZodOptional<zod.ZodNumber>;
-        blindTransfer: zod.ZodOptional<zod.ZodString>;
-        blindTransfers: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            number: zod.ZodOptional<zod.ZodString>;
-            time: zod.ZodOptional<zod.ZodString>;
-            user: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        bridgedAt: zod.ZodOptional<zod.ZodString>;
-        bridgedId: zod.ZodOptional<zod.ZodString>;
-        cause: zod.ZodOptional<zod.ZodString>;
-        contact: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        conversationId: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        destination: zod.ZodOptional<zod.ZodString>;
-        destinationName: zod.ZodOptional<zod.ZodString>;
-        direction: zod.ZodOptional<zod.ZodString>;
-        display: zod.ZodOptional<zod.ZodString>;
-        duration: zod.ZodOptional<zod.ZodNumber>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        files: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            channel: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            mimeType: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            size: zod.ZodOptional<zod.ZodString>;
-            startAt: zod.ZodOptional<zod.ZodString>;
-            startRecord: zod.ZodOptional<zod.ZodString>;
-            stopAt: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodDefault<zod.ZodEnum<{
-                file_type_empty: "file_type_empty";
-                file_type_screenshot: "file_type_screenshot";
-                file_type_screensharing: "file_type_screensharing";
-                file_type_audio: "file_type_audio";
-                file_type_video: "file_type_video";
-                file_type_pdf: "file_type_pdf";
-            }>>;
-        }, zod.z.core.$strip>>>;
-        filesJob: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            action: zod.ZodDefault<zod.ZodEnum<{
-                undefined: "undefined";
-                delete: "delete";
-                STT: "STT";
-            }>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            errorDetail: zod.ZodOptional<zod.ZodString>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            state: zod.ZodDefault<zod.ZodEnum<{
-                error: "error";
-                active: "active";
-                idle: "idle";
-                finished: "finished";
-            }>>;
-        }, zod.z.core.$strip>>>;
-        forms: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            agent: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            reportingAt: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        from: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        fromNumber: zod.ZodOptional<zod.ZodString>;
-        gateway: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        grantee: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hangupAt: zod.ZodOptional<zod.ZodString>;
-        hangupBy: zod.ZodOptional<zod.ZodString>;
-        hangupDisposition: zod.ZodOptional<zod.ZodString>;
-        hangupPhrase: zod.ZodOptional<zod.ZodString>;
-        hasChildren: zod.ZodOptional<zod.ZodBoolean>;
-        hold: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            sec: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodString>;
-            stop: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        holdSec: zod.ZodOptional<zod.ZodNumber>;
-        id: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        leavingAt: zod.ZodOptional<zod.ZodString>;
-        meetingId: zod.ZodOptional<zod.ZodString>;
-        member: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        memberId: zod.ZodOptional<zod.ZodString>;
-        parentId: zod.ZodOptional<zod.ZodString>;
-        qualityMetrics: zod.ZodOptional<zod.ZodObject<{
-            jitterAvg: zod.ZodOptional<zod.ZodNumber>;
-            jitterMax: zod.ZodOptional<zod.ZodNumber>;
-            jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            jitterMin: zod.ZodOptional<zod.ZodNumber>;
-            jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
-            mosAvg: zod.ZodOptional<zod.ZodNumber>;
-            mosMax: zod.ZodOptional<zod.ZodNumber>;
-            mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            mosMin: zod.ZodOptional<zod.ZodNumber>;
-            mosMinAt: zod.ZodOptional<zod.ZodNumber>;
-            packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMax: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMin: zod.ZodOptional<zod.ZodNumber>;
-            packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
-            roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMax: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMin: zod.ZodOptional<zod.ZodNumber>;
-            roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
-            sipId: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queueBridgedAt: zod.ZodOptional<zod.ZodString>;
-        queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
-        queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
-        rateId: zod.ZodOptional<zod.ZodString>;
-        ratedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ratedUser: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        reportingAt: zod.ZodOptional<zod.ZodString>;
-        reportingSec: zod.ZodOptional<zod.ZodNumber>;
-        result: zod.ZodOptional<zod.ZodString>;
-        schemas: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        scoreOptional: zod.ZodOptional<zod.ZodNumber>;
-        scoreRequired: zod.ZodOptional<zod.ZodNumber>;
-        sipCode: zod.ZodOptional<zod.ZodNumber>;
-        storedAt: zod.ZodOptional<zod.ZodString>;
-        talkSec: zod.ZodOptional<zod.ZodNumber>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        to: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            number: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        toNumber: zod.ZodOptional<zod.ZodString>;
-        transcripts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            file: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            fileId: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            locale: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        transferFrom: zod.ZodOptional<zod.ZodString>;
-        transferTo: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        waitSec: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchHistoryCallPostBody: zod.ZodObject<
+	{
+		tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agentDescription: zod.ZodOptional<zod.ZodString>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		amdAiResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		answeredAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		createdAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		dependencyId: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodString>;
+		directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		duration: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		fts: zod.ZodOptional<zod.ZodString>;
+		gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		granteeId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		hasFile: zod.ZodOptional<zod.ZodBoolean>;
+		hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
+		hasTransfer: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		missed: zod.ZodOptional<zod.ZodBoolean>;
+		number: zod.ZodOptional<zod.ZodString>;
+		ownerId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		q: zod.ZodOptional<zod.ZodString>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		rated: zod.ZodOptional<zod.ZodBoolean>;
+		ratedBy: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		ratedUser: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		scoreOptional: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		scoreRequired: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		skipParent: zod.ZodOptional<zod.ZodBoolean>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		storedAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		talk: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		timeline: zod.ZodOptional<zod.ZodBoolean>;
+		transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		variablesString: zod.ZodOptional<
+			zod.ZodRecord<zod.ZodString, zod.ZodString>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchHistoryCallPostResponseItemsItemFilesItemTypeDefault =
+	'file_type_empty';
+export declare const searchHistoryCallPostResponseItemsItemFilesJobItemActionDefault =
+	'undefined';
+export declare const searchHistoryCallPostResponseItemsItemFilesJobItemStateDefault =
+	'idle';
+export declare const SearchHistoryCallPostResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						agentDescription: zod.ZodOptional<zod.ZodString>;
+						allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
+						amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						amdAiResult: zod.ZodOptional<zod.ZodString>;
+						amdResult: zod.ZodOptional<zod.ZodString>;
+						annotations: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										callId: zod.ZodOptional<zod.ZodString>;
+										createdAt: zod.ZodOptional<zod.ZodString>;
+										createdBy: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										endSec: zod.ZodOptional<zod.ZodNumber>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										note: zod.ZodOptional<zod.ZodString>;
+										startSec: zod.ZodOptional<zod.ZodNumber>;
+										updatedAt: zod.ZodOptional<zod.ZodString>;
+										updatedBy: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						answeredAt: zod.ZodOptional<zod.ZodString>;
+						appId: zod.ZodOptional<zod.ZodString>;
+						attemptId: zod.ZodOptional<zod.ZodString>;
+						billSec: zod.ZodOptional<zod.ZodNumber>;
+						blindTransfer: zod.ZodOptional<zod.ZodString>;
+						blindTransfers: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										number: zod.ZodOptional<zod.ZodString>;
+										time: zod.ZodOptional<zod.ZodString>;
+										user: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						bridgedAt: zod.ZodOptional<zod.ZodString>;
+						bridgedId: zod.ZodOptional<zod.ZodString>;
+						cause: zod.ZodOptional<zod.ZodString>;
+						contact: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						conversationId: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						destination: zod.ZodOptional<zod.ZodString>;
+						destinationName: zod.ZodOptional<zod.ZodString>;
+						direction: zod.ZodOptional<zod.ZodString>;
+						display: zod.ZodOptional<zod.ZodString>;
+						duration: zod.ZodOptional<zod.ZodNumber>;
+						extension: zod.ZodOptional<zod.ZodString>;
+						files: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										channel: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										mimeType: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+										size: zod.ZodOptional<zod.ZodString>;
+										startAt: zod.ZodOptional<zod.ZodString>;
+										startRecord: zod.ZodOptional<zod.ZodString>;
+										stopAt: zod.ZodOptional<zod.ZodString>;
+										type: zod.ZodDefault<
+											zod.ZodEnum<{
+												file_type_empty: 'file_type_empty';
+												file_type_screenshot: 'file_type_screenshot';
+												file_type_screensharing: 'file_type_screensharing';
+												file_type_audio: 'file_type_audio';
+												file_type_video: 'file_type_video';
+												file_type_pdf: 'file_type_pdf';
+											}>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						filesJob: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										action: zod.ZodDefault<
+											zod.ZodEnum<{
+												undefined: 'undefined';
+												delete: 'delete';
+												STT: 'STT';
+											}>
+										>;
+										createdAt: zod.ZodOptional<zod.ZodString>;
+										errorDetail: zod.ZodOptional<zod.ZodString>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										state: zod.ZodDefault<
+											zod.ZodEnum<{
+												error: 'error';
+												active: 'active';
+												idle: 'idle';
+												finished: 'finished';
+											}>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						forms: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										agent: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										reportingAt: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						from: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						fromNumber: zod.ZodOptional<zod.ZodString>;
+						gateway: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						grantee: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hangupAt: zod.ZodOptional<zod.ZodString>;
+						hangupBy: zod.ZodOptional<zod.ZodString>;
+						hangupDisposition: zod.ZodOptional<zod.ZodString>;
+						hangupPhrase: zod.ZodOptional<zod.ZodString>;
+						hasChildren: zod.ZodOptional<zod.ZodBoolean>;
+						hold: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										sec: zod.ZodOptional<zod.ZodNumber>;
+										start: zod.ZodOptional<zod.ZodString>;
+										stop: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						holdSec: zod.ZodOptional<zod.ZodNumber>;
+						id: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						leavingAt: zod.ZodOptional<zod.ZodString>;
+						meetingId: zod.ZodOptional<zod.ZodString>;
+						member: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						memberId: zod.ZodOptional<zod.ZodString>;
+						parentId: zod.ZodOptional<zod.ZodString>;
+						qualityMetrics: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									jitterAvg: zod.ZodOptional<zod.ZodNumber>;
+									jitterMax: zod.ZodOptional<zod.ZodNumber>;
+									jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									jitterMin: zod.ZodOptional<zod.ZodNumber>;
+									jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
+									mosAvg: zod.ZodOptional<zod.ZodNumber>;
+									mosMax: zod.ZodOptional<zod.ZodNumber>;
+									mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									mosMin: zod.ZodOptional<zod.ZodNumber>;
+									mosMinAt: zod.ZodOptional<zod.ZodNumber>;
+									packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMax: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMin: zod.ZodOptional<zod.ZodNumber>;
+									packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
+									roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMax: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMin: zod.ZodOptional<zod.ZodNumber>;
+									roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
+									sipId: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queueBridgedAt: zod.ZodOptional<zod.ZodString>;
+						queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
+						queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
+						rateId: zod.ZodOptional<zod.ZodString>;
+						ratedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ratedUser: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						reportingAt: zod.ZodOptional<zod.ZodString>;
+						reportingSec: zod.ZodOptional<zod.ZodNumber>;
+						result: zod.ZodOptional<zod.ZodString>;
+						schemas: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						scoreOptional: zod.ZodOptional<zod.ZodNumber>;
+						scoreRequired: zod.ZodOptional<zod.ZodNumber>;
+						sipCode: zod.ZodOptional<zod.ZodNumber>;
+						storedAt: zod.ZodOptional<zod.ZodString>;
+						talkSec: zod.ZodOptional<zod.ZodNumber>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						to: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									number: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						toNumber: zod.ZodOptional<zod.ZodString>;
+						transcripts: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										file: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										fileId: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										locale: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						transferFrom: zod.ZodOptional<zod.ZodString>;
+						transferTo: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						variables: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						waitSec: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary AggregateHistoryCall performs statistical analysis on historical data.
 Group and aggregate metrics like average duration, call counts, or peak hours.
  */
-export declare const AggregateHistoryCallBody: zod.ZodObject<{
-    tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agentDescription: zod.ZodOptional<zod.ZodString>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    aggs: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        avg: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        count: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        group: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            aggregate: zod.ZodOptional<zod.ZodString>;
-            desc: zod.ZodOptional<zod.ZodBoolean>;
-            field: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            interval: zod.ZodOptional<zod.ZodString>;
-            top: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        limit: zod.ZodOptional<zod.ZodNumber>;
-        max: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        min: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        name: zod.ZodOptional<zod.ZodString>;
-        sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        sum: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    }, zod.z.core.$strip>>>;
-    amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    answeredAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    createdAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    dependencyId: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodString>;
-    directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    duration: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    fts: zod.ZodOptional<zod.ZodString>;
-    gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    hasFile: zod.ZodOptional<zod.ZodBoolean>;
-    hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    missed: zod.ZodOptional<zod.ZodBoolean>;
-    number: zod.ZodOptional<zod.ZodString>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    q: zod.ZodOptional<zod.ZodString>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    skipParent: zod.ZodOptional<zod.ZodBoolean>;
-    storedAt: zod.ZodOptional<zod.ZodObject<{
-        from: zod.ZodOptional<zod.ZodString>;
-        to: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const AggregateHistoryCallResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
+export declare const AggregateHistoryCallBody: zod.ZodObject<
+	{
+		tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agentDescription: zod.ZodOptional<zod.ZodString>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		aggs: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						avg: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						count: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						group: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										aggregate: zod.ZodOptional<zod.ZodString>;
+										desc: zod.ZodOptional<zod.ZodBoolean>;
+										field: zod.ZodOptional<zod.ZodString>;
+										id: zod.ZodOptional<zod.ZodString>;
+										interval: zod.ZodOptional<zod.ZodString>;
+										top: zod.ZodOptional<zod.ZodNumber>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						limit: zod.ZodOptional<zod.ZodNumber>;
+						max: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						min: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						name: zod.ZodOptional<zod.ZodString>;
+						sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						sum: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		amdResult: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		answeredAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		cause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		contactId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		createdAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		dependencyId: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodString>;
+		directions: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		duration: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		fts: zod.ZodOptional<zod.ZodString>;
+		gatewayId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		hasFile: zod.ZodOptional<zod.ZodBoolean>;
+		hasTranscript: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		missed: zod.ZodOptional<zod.ZodBoolean>;
+		number: zod.ZodOptional<zod.ZodString>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		q: zod.ZodOptional<zod.ZodString>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		skipParent: zod.ZodOptional<zod.ZodBoolean>;
+		storedAt: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					from: zod.ZodOptional<zod.ZodString>;
+					to: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		transferFrom: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		transferTo: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AggregateHistoryCallResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary CreateCallAnnotation adds a text note to a specific timeframe of a historical call.
  */
-export declare const CreateCallAnnotationParams: zod.ZodObject<{
-    call_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CreateCallAnnotationBody: zod.ZodObject<{
-    endSec: zod.ZodOptional<zod.ZodNumber>;
-    fileId: zod.ZodOptional<zod.ZodString>;
-    note: zod.ZodOptional<zod.ZodString>;
-    startSec: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const CreateCallAnnotationResponse: zod.ZodObject<{
-    callId: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    endSec: zod.ZodOptional<zod.ZodNumber>;
-    fileId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    note: zod.ZodOptional<zod.ZodString>;
-    startSec: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const CreateCallAnnotationParams: zod.ZodObject<
+	{
+		call_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateCallAnnotationBody: zod.ZodObject<
+	{
+		endSec: zod.ZodOptional<zod.ZodNumber>;
+		fileId: zod.ZodOptional<zod.ZodString>;
+		note: zod.ZodOptional<zod.ZodString>;
+		startSec: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateCallAnnotationResponse: zod.ZodObject<
+	{
+		callId: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		endSec: zod.ZodOptional<zod.ZodNumber>;
+		fileId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		note: zod.ZodOptional<zod.ZodString>;
+		startSec: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary DeleteCallAnnotation removes an annotation from a historical call.
  */
-export declare const DeleteCallAnnotationParams: zod.ZodObject<{
-    call_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteCallAnnotationResponse: zod.ZodObject<{
-    callId: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    endSec: zod.ZodOptional<zod.ZodNumber>;
-    fileId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    note: zod.ZodOptional<zod.ZodString>;
-    startSec: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const DeleteCallAnnotationParams: zod.ZodObject<
+	{
+		call_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteCallAnnotationResponse: zod.ZodObject<
+	{
+		callId: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		endSec: zod.ZodOptional<zod.ZodNumber>;
+		fileId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		note: zod.ZodOptional<zod.ZodString>;
+		startSec: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary UpdateCallAnnotation modifies an existing call note.
  */
-export declare const UpdateCallAnnotationParams: zod.ZodObject<{
-    call_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateCallAnnotationBody: zod.ZodObject<{
-    endSec: zod.ZodOptional<zod.ZodNumber>;
-    note: zod.ZodOptional<zod.ZodString>;
-    startSec: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const UpdateCallAnnotationResponse: zod.ZodObject<{
-    callId: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    endSec: zod.ZodOptional<zod.ZodNumber>;
-    fileId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    note: zod.ZodOptional<zod.ZodString>;
-    startSec: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateCallAnnotationParams: zod.ZodObject<
+	{
+		call_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateCallAnnotationBody: zod.ZodObject<
+	{
+		endSec: zod.ZodOptional<zod.ZodNumber>;
+		note: zod.ZodOptional<zod.ZodString>;
+		startSec: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateCallAnnotationResponse: zod.ZodObject<
+	{
+		callId: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		endSec: zod.ZodOptional<zod.ZodNumber>;
+		fileId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		note: zod.ZodOptional<zod.ZodString>;
+		startSec: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary RedialCall quickly initiates a new call using data from a previous history record.
  */
-export declare const RedialCallParams: zod.ZodObject<{
-    call_id: zod.ZodString;
-}, zod.z.core.$strip>;
+export declare const RedialCallParams: zod.ZodObject<
+	{
+		call_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
 export declare const RedialCallBody: zod.ZodObject<{}, zod.z.core.$loose>;
-export declare const RedialCallResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const RedialCallResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary PatchHistoryCall updates metadata for a completed call (e.g., variables or visibility).
  */
-export declare const PatchHistoryCallParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const PatchHistoryCallBody: zod.ZodObject<{
-    hideMissed: zod.ZodOptional<zod.ZodBoolean>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const patchHistoryCallResponseFilesItemTypeDefault = "file_type_empty";
-export declare const patchHistoryCallResponseFilesJobItemActionDefault = "undefined";
-export declare const patchHistoryCallResponseFilesJobItemStateDefault = "idle";
-export declare const PatchHistoryCallResponse: zod.ZodObject<{
-    tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agent: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    agentDescription: zod.ZodOptional<zod.ZodString>;
-    allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
-    amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    amdAiResult: zod.ZodOptional<zod.ZodString>;
-    amdResult: zod.ZodOptional<zod.ZodString>;
-    annotations: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        callId: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        endSec: zod.ZodOptional<zod.ZodNumber>;
-        fileId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        note: zod.ZodOptional<zod.ZodString>;
-        startSec: zod.ZodOptional<zod.ZodNumber>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    answeredAt: zod.ZodOptional<zod.ZodString>;
-    appId: zod.ZodOptional<zod.ZodString>;
-    attemptId: zod.ZodOptional<zod.ZodString>;
-    billSec: zod.ZodOptional<zod.ZodNumber>;
-    blindTransfer: zod.ZodOptional<zod.ZodString>;
-    blindTransfers: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        number: zod.ZodOptional<zod.ZodString>;
-        time: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    bridgedAt: zod.ZodOptional<zod.ZodString>;
-    bridgedId: zod.ZodOptional<zod.ZodString>;
-    cause: zod.ZodOptional<zod.ZodString>;
-    contact: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    conversationId: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    destination: zod.ZodOptional<zod.ZodString>;
-    destinationName: zod.ZodOptional<zod.ZodString>;
-    direction: zod.ZodOptional<zod.ZodString>;
-    display: zod.ZodOptional<zod.ZodString>;
-    duration: zod.ZodOptional<zod.ZodNumber>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    files: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        mimeType: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        size: zod.ZodOptional<zod.ZodString>;
-        startAt: zod.ZodOptional<zod.ZodString>;
-        startRecord: zod.ZodOptional<zod.ZodString>;
-        stopAt: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            file_type_empty: "file_type_empty";
-            file_type_screenshot: "file_type_screenshot";
-            file_type_screensharing: "file_type_screensharing";
-            file_type_audio: "file_type_audio";
-            file_type_video: "file_type_video";
-            file_type_pdf: "file_type_pdf";
-        }>>;
-    }, zod.z.core.$strip>>>;
-    filesJob: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        action: zod.ZodDefault<zod.ZodEnum<{
-            undefined: "undefined";
-            delete: "delete";
-            STT: "STT";
-        }>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        errorDetail: zod.ZodOptional<zod.ZodString>;
-        fileId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodDefault<zod.ZodEnum<{
-            error: "error";
-            active: "active";
-            idle: "idle";
-            finished: "finished";
-        }>>;
-    }, zod.z.core.$strip>>>;
-    forms: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        reportingAt: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    from: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        number: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    fromNumber: zod.ZodOptional<zod.ZodString>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    grantee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    hangupAt: zod.ZodOptional<zod.ZodString>;
-    hangupBy: zod.ZodOptional<zod.ZodString>;
-    hangupDisposition: zod.ZodOptional<zod.ZodString>;
-    hangupPhrase: zod.ZodOptional<zod.ZodString>;
-    hasChildren: zod.ZodOptional<zod.ZodBoolean>;
-    hold: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        sec: zod.ZodOptional<zod.ZodNumber>;
-        start: zod.ZodOptional<zod.ZodString>;
-        stop: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    holdSec: zod.ZodOptional<zod.ZodNumber>;
-    id: zod.ZodOptional<zod.ZodString>;
-    joinedAt: zod.ZodOptional<zod.ZodString>;
-    leavingAt: zod.ZodOptional<zod.ZodString>;
-    meetingId: zod.ZodOptional<zod.ZodString>;
-    member: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    memberId: zod.ZodOptional<zod.ZodString>;
-    parentId: zod.ZodOptional<zod.ZodString>;
-    qualityMetrics: zod.ZodOptional<zod.ZodObject<{
-        jitterAvg: zod.ZodOptional<zod.ZodNumber>;
-        jitterMax: zod.ZodOptional<zod.ZodNumber>;
-        jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
-        jitterMin: zod.ZodOptional<zod.ZodNumber>;
-        jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
-        mosAvg: zod.ZodOptional<zod.ZodNumber>;
-        mosMax: zod.ZodOptional<zod.ZodNumber>;
-        mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
-        mosMin: zod.ZodOptional<zod.ZodNumber>;
-        mosMinAt: zod.ZodOptional<zod.ZodNumber>;
-        packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
-        packetlossMax: zod.ZodOptional<zod.ZodNumber>;
-        packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
-        packetlossMin: zod.ZodOptional<zod.ZodNumber>;
-        packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
-        roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
-        roundtripMax: zod.ZodOptional<zod.ZodNumber>;
-        roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
-        roundtripMin: zod.ZodOptional<zod.ZodNumber>;
-        roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
-        sipId: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    queue: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    queueBridgedAt: zod.ZodOptional<zod.ZodString>;
-    queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
-    queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
-    rateId: zod.ZodOptional<zod.ZodString>;
-    ratedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ratedUser: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    reportingAt: zod.ZodOptional<zod.ZodString>;
-    reportingSec: zod.ZodOptional<zod.ZodNumber>;
-    result: zod.ZodOptional<zod.ZodString>;
-    schemas: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    scoreOptional: zod.ZodOptional<zod.ZodNumber>;
-    scoreRequired: zod.ZodOptional<zod.ZodNumber>;
-    sipCode: zod.ZodOptional<zod.ZodNumber>;
-    storedAt: zod.ZodOptional<zod.ZodString>;
-    talkSec: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    to: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        number: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    toNumber: zod.ZodOptional<zod.ZodString>;
-    transcripts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        file: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        fileId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        locale: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    transferFrom: zod.ZodOptional<zod.ZodString>;
-    transferTo: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodOptional<zod.ZodString>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    waitSec: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const PatchHistoryCallParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchHistoryCallBody: zod.ZodObject<
+	{
+		hideMissed: zod.ZodOptional<zod.ZodBoolean>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const patchHistoryCallResponseFilesItemTypeDefault =
+	'file_type_empty';
+export declare const patchHistoryCallResponseFilesJobItemActionDefault =
+	'undefined';
+export declare const patchHistoryCallResponseFilesJobItemStateDefault = 'idle';
+export declare const PatchHistoryCallResponse: zod.ZodObject<
+	{
+		tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agent: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		agentDescription: zod.ZodOptional<zod.ZodString>;
+		allowEvaluation: zod.ZodOptional<zod.ZodBoolean>;
+		amdAiLogs: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		amdAiResult: zod.ZodOptional<zod.ZodString>;
+		amdResult: zod.ZodOptional<zod.ZodString>;
+		annotations: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						callId: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						endSec: zod.ZodOptional<zod.ZodNumber>;
+						fileId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						note: zod.ZodOptional<zod.ZodString>;
+						startSec: zod.ZodOptional<zod.ZodNumber>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		answeredAt: zod.ZodOptional<zod.ZodString>;
+		appId: zod.ZodOptional<zod.ZodString>;
+		attemptId: zod.ZodOptional<zod.ZodString>;
+		billSec: zod.ZodOptional<zod.ZodNumber>;
+		blindTransfer: zod.ZodOptional<zod.ZodString>;
+		blindTransfers: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						number: zod.ZodOptional<zod.ZodString>;
+						time: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		bridgedAt: zod.ZodOptional<zod.ZodString>;
+		bridgedId: zod.ZodOptional<zod.ZodString>;
+		cause: zod.ZodOptional<zod.ZodString>;
+		contact: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		conversationId: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		destination: zod.ZodOptional<zod.ZodString>;
+		destinationName: zod.ZodOptional<zod.ZodString>;
+		direction: zod.ZodOptional<zod.ZodString>;
+		display: zod.ZodOptional<zod.ZodString>;
+		duration: zod.ZodOptional<zod.ZodNumber>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		files: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						mimeType: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						size: zod.ZodOptional<zod.ZodString>;
+						startAt: zod.ZodOptional<zod.ZodString>;
+						startRecord: zod.ZodOptional<zod.ZodString>;
+						stopAt: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodDefault<
+							zod.ZodEnum<{
+								file_type_empty: 'file_type_empty';
+								file_type_screenshot: 'file_type_screenshot';
+								file_type_screensharing: 'file_type_screensharing';
+								file_type_audio: 'file_type_audio';
+								file_type_video: 'file_type_video';
+								file_type_pdf: 'file_type_pdf';
+							}>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		filesJob: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						action: zod.ZodDefault<
+							zod.ZodEnum<{
+								undefined: 'undefined';
+								delete: 'delete';
+								STT: 'STT';
+							}>
+						>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						errorDetail: zod.ZodOptional<zod.ZodString>;
+						fileId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodDefault<
+							zod.ZodEnum<{
+								error: 'error';
+								active: 'active';
+								idle: 'idle';
+								finished: 'finished';
+							}>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		forms: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						reportingAt: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		from: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					number: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		fromNumber: zod.ZodOptional<zod.ZodString>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		grantee: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		hangupAt: zod.ZodOptional<zod.ZodString>;
+		hangupBy: zod.ZodOptional<zod.ZodString>;
+		hangupDisposition: zod.ZodOptional<zod.ZodString>;
+		hangupPhrase: zod.ZodOptional<zod.ZodString>;
+		hasChildren: zod.ZodOptional<zod.ZodBoolean>;
+		hold: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						sec: zod.ZodOptional<zod.ZodNumber>;
+						start: zod.ZodOptional<zod.ZodString>;
+						stop: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		holdSec: zod.ZodOptional<zod.ZodNumber>;
+		id: zod.ZodOptional<zod.ZodString>;
+		joinedAt: zod.ZodOptional<zod.ZodString>;
+		leavingAt: zod.ZodOptional<zod.ZodString>;
+		meetingId: zod.ZodOptional<zod.ZodString>;
+		member: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		memberId: zod.ZodOptional<zod.ZodString>;
+		parentId: zod.ZodOptional<zod.ZodString>;
+		qualityMetrics: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					jitterAvg: zod.ZodOptional<zod.ZodNumber>;
+					jitterMax: zod.ZodOptional<zod.ZodNumber>;
+					jitterMaxAt: zod.ZodOptional<zod.ZodNumber>;
+					jitterMin: zod.ZodOptional<zod.ZodNumber>;
+					jitterMinAt: zod.ZodOptional<zod.ZodNumber>;
+					mosAvg: zod.ZodOptional<zod.ZodNumber>;
+					mosMax: zod.ZodOptional<zod.ZodNumber>;
+					mosMaxAt: zod.ZodOptional<zod.ZodNumber>;
+					mosMin: zod.ZodOptional<zod.ZodNumber>;
+					mosMinAt: zod.ZodOptional<zod.ZodNumber>;
+					packetlossAvg: zod.ZodOptional<zod.ZodNumber>;
+					packetlossMax: zod.ZodOptional<zod.ZodNumber>;
+					packetlossMaxAt: zod.ZodOptional<zod.ZodNumber>;
+					packetlossMin: zod.ZodOptional<zod.ZodNumber>;
+					packetlossMinAt: zod.ZodOptional<zod.ZodNumber>;
+					roundtripAvg: zod.ZodOptional<zod.ZodNumber>;
+					roundtripMax: zod.ZodOptional<zod.ZodNumber>;
+					roundtripMaxAt: zod.ZodOptional<zod.ZodNumber>;
+					roundtripMin: zod.ZodOptional<zod.ZodNumber>;
+					roundtripMinAt: zod.ZodOptional<zod.ZodNumber>;
+					sipId: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		queue: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		queueBridgedAt: zod.ZodOptional<zod.ZodString>;
+		queueDurationSec: zod.ZodOptional<zod.ZodNumber>;
+		queueWaitSec: zod.ZodOptional<zod.ZodNumber>;
+		rateId: zod.ZodOptional<zod.ZodString>;
+		ratedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ratedUser: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		reportingAt: zod.ZodOptional<zod.ZodString>;
+		reportingSec: zod.ZodOptional<zod.ZodNumber>;
+		result: zod.ZodOptional<zod.ZodString>;
+		schemas: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		scoreOptional: zod.ZodOptional<zod.ZodNumber>;
+		scoreRequired: zod.ZodOptional<zod.ZodNumber>;
+		sipCode: zod.ZodOptional<zod.ZodNumber>;
+		storedAt: zod.ZodOptional<zod.ZodString>;
+		talkSec: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		to: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					number: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		toNumber: zod.ZodOptional<zod.ZodString>;
+		transcripts: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						file: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						fileId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						locale: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		transferFrom: zod.ZodOptional<zod.ZodString>;
+		transferTo: zod.ZodOptional<zod.ZodString>;
+		type: zod.ZodOptional<zod.ZodString>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+		waitSec: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

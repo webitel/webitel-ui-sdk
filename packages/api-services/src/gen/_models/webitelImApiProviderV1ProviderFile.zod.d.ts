@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiProviderV1ProviderFile {
-    id?: string;
-    mimeType?: string;
-    name?: string;
-    size?: string;
-    url?: string;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	size?: string;
+	url?: string;
 }

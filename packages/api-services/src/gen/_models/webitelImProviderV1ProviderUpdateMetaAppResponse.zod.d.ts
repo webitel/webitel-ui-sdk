@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderMetaApp } from './webitelImProviderV1Pr
  * / ProviderUpdateMetaAppResponse returns the Meta application after modifications.
  */
 export interface WebitelImProviderV1ProviderUpdateMetaAppResponse {
-    item?: WebitelImProviderV1ProviderMetaApp;
+	item?: WebitelImProviderV1ProviderMetaApp;
 }

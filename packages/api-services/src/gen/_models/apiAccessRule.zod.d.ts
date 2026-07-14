@@ -6,8 +6,8 @@
  */
 import type { ApiRoleId } from './apiRoleId.zod';
 export interface ApiAccessRule {
-    granted?: string;
-    grantee?: ApiRoleId;
-    /** [WHO]: operational; current user NEED to be rechecked !!! */
-    grantor?: ApiRoleId;
+	granted?: string;
+	grantee?: ApiRoleId;
+	/** [WHO]: operational; current user NEED to be rechecked !!! */
+	grantor?: ApiRoleId;
 }

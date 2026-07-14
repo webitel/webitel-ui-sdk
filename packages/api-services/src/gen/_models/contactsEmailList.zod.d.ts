@@ -9,9 +9,9 @@ import type { ContactsEmailAddress } from './contactsEmailAddress.zod';
  * Email dataset.
  */
 export interface ContactsEmailList {
-    /** EmailAddress dataset page. */
-    data?: ContactsEmailAddress[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	/** EmailAddress dataset page. */
+	data?: ContactsEmailAddress[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

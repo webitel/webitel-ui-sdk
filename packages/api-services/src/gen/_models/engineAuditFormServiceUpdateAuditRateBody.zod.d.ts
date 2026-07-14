@@ -6,6 +6,6 @@
  */
 import type { EngineUpdateQuestionAnswerRequest } from './engineUpdateQuestionAnswerRequest.zod';
 export interface EngineAuditFormServiceUpdateAuditRateBody {
-    answers?: EngineUpdateQuestionAnswerRequest[];
-    comment?: string;
+	answers?: EngineUpdateQuestionAnswerRequest[];
+	comment?: string;
 }

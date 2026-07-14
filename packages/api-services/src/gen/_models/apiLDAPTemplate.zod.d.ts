@@ -11,19 +11,19 @@ import type { ApiLDAPTemplateUser } from './apiLDAPTemplateUser.zod';
 import type { ApiObjectId } from './apiObjectId.zod';
 import type { ApiUserId } from './apiUserId.zod';
 export interface ApiLDAPTemplate {
-    agent?: ApiLDAPTemplateAgent;
-    baseDn?: string;
-    catalog?: ApiObjectId;
-    /** unix */
-    createdAt?: string;
-    createdBy?: ApiUserId;
-    device?: ApiLDAPTemplateDevice;
-    enabled?: boolean;
-    id?: string;
-    name?: string;
-    role?: ApiLDAPTemplateRole;
-    search?: string;
-    updatedAt?: string;
-    updatedBy?: ApiUserId;
-    user?: ApiLDAPTemplateUser;
+	agent?: ApiLDAPTemplateAgent;
+	baseDn?: string;
+	catalog?: ApiObjectId;
+	/** unix */
+	createdAt?: string;
+	createdBy?: ApiUserId;
+	device?: ApiLDAPTemplateDevice;
+	enabled?: boolean;
+	id?: string;
+	name?: string;
+	role?: ApiLDAPTemplateRole;
+	search?: string;
+	updatedAt?: string;
+	updatedBy?: ApiUserId;
+	user?: ApiLDAPTemplateUser;
 }

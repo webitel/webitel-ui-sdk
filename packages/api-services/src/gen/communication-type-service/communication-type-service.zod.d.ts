@@ -8,181 +8,262 @@ import * as zod from 'zod';
 /**
  * @summary List of CommunicationType
  */
-export declare const SearchCommunicationTypeQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const searchCommunicationTypeResponseItemsItemChannelDefault = "Undefined";
-export declare const SearchCommunicationTypeResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodDefault<zod.ZodEnum<{
-            Email: "Email";
-            Undefined: "Undefined";
-            Phone: "Phone";
-            Messaging: "Messaging";
-        }>>;
-        code: zod.ZodOptional<zod.ZodString>;
-        default: zod.ZodOptional<zod.ZodBoolean>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchCommunicationTypeQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					Email: 'Email';
+					Undefined: 'Undefined';
+					Phone: 'Phone';
+					Messaging: 'Messaging';
+				}>
+			>
+		>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchCommunicationTypeResponseItemsItemChannelDefault =
+	'Undefined';
+export declare const SearchCommunicationTypeResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodDefault<
+							zod.ZodEnum<{
+								Email: 'Email';
+								Undefined: 'Undefined';
+								Phone: 'Phone';
+								Messaging: 'Messaging';
+							}>
+						>;
+						code: zod.ZodOptional<zod.ZodString>;
+						default: zod.ZodOptional<zod.ZodBoolean>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create CommunicationType
  */
-export declare const createCommunicationTypeBodyChannelDefault = "Undefined";
-export declare const CreateCommunicationTypeBody: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const createCommunicationTypeResponseChannelDefault = "Undefined";
-export declare const CreateCommunicationTypeResponse: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const createCommunicationTypeBodyChannelDefault = 'Undefined';
+export declare const CreateCommunicationTypeBody: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const createCommunicationTypeResponseChannelDefault =
+	'Undefined';
+export declare const CreateCommunicationTypeResponse: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove CommunicationType
  */
-export declare const DeleteCommunicationTypeParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteCommunicationTypeQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const deleteCommunicationTypeResponseChannelDefault = "Undefined";
-export declare const DeleteCommunicationTypeResponse: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const DeleteCommunicationTypeParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteCommunicationTypeQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const deleteCommunicationTypeResponseChannelDefault =
+	'Undefined';
+export declare const DeleteCommunicationTypeResponse: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary CommunicationType item
  */
-export declare const ReadCommunicationTypeParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadCommunicationTypeQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const readCommunicationTypeResponseChannelDefault = "Undefined";
-export declare const ReadCommunicationTypeResponse: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const PatchCommunicationTypeParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const patchCommunicationTypeBodyChannelDefault = "Undefined";
-export declare const PatchCommunicationTypeBody: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const patchCommunicationTypeResponseChannelDefault = "Undefined";
-export declare const PatchCommunicationTypeResponse: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const ReadCommunicationTypeParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadCommunicationTypeQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const readCommunicationTypeResponseChannelDefault = 'Undefined';
+export declare const ReadCommunicationTypeResponse: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchCommunicationTypeParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const patchCommunicationTypeBodyChannelDefault = 'Undefined';
+export declare const PatchCommunicationTypeBody: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const patchCommunicationTypeResponseChannelDefault = 'Undefined';
+export declare const PatchCommunicationTypeResponse: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update CommunicationType
  */
-export declare const UpdateCommunicationTypeParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const updateCommunicationTypeBodyChannelDefault = "Undefined";
-export declare const UpdateCommunicationTypeBody: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const updateCommunicationTypeResponseChannelDefault = "Undefined";
-export declare const UpdateCommunicationTypeResponse: zod.ZodObject<{
-    channel: zod.ZodDefault<zod.ZodEnum<{
-        Email: "Email";
-        Undefined: "Undefined";
-        Phone: "Phone";
-        Messaging: "Messaging";
-    }>>;
-    code: zod.ZodOptional<zod.ZodString>;
-    default: zod.ZodOptional<zod.ZodBoolean>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const UpdateCommunicationTypeParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const updateCommunicationTypeBodyChannelDefault = 'Undefined';
+export declare const UpdateCommunicationTypeBody: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const updateCommunicationTypeResponseChannelDefault =
+	'Undefined';
+export declare const UpdateCommunicationTypeResponse: zod.ZodObject<
+	{
+		channel: zod.ZodDefault<
+			zod.ZodEnum<{
+				Email: 'Email';
+				Undefined: 'Undefined';
+				Phone: 'Phone';
+				Messaging: 'Messaging';
+			}>
+		>;
+		code: zod.ZodOptional<zod.ZodString>;
+		default: zod.ZodOptional<zod.ZodBoolean>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;

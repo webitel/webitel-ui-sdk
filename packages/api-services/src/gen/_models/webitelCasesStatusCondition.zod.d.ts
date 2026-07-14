@@ -6,14 +6,14 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesStatusCondition {
-    createdAt?: string;
-    createdBy?: GeneralLookup;
-    description?: string;
-    final?: boolean;
-    id?: string;
-    initial?: boolean;
-    name?: string;
-    statusId?: string;
-    updatedAt?: string;
-    updatedBy?: GeneralLookup;
+	createdAt?: string;
+	createdBy?: GeneralLookup;
+	description?: string;
+	final?: boolean;
+	id?: string;
+	initial?: boolean;
+	name?: string;
+	statusId?: string;
+	updatedAt?: string;
+	updatedBy?: GeneralLookup;
 }

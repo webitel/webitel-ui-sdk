@@ -6,9 +6,9 @@
  */
 import type { WebitelImApiGatewayV1BotMetadata } from './webitelImApiGatewayV1BotMetadata.zod';
 export interface WebitelImApiGatewayV1Bot {
-    id?: string;
-    metadata?: WebitelImApiGatewayV1BotMetadata;
-    name?: string;
-    schemaId?: string;
-    username?: string;
+	id?: string;
+	metadata?: WebitelImApiGatewayV1BotMetadata;
+	name?: string;
+	schemaId?: string;
+	username?: string;
 }

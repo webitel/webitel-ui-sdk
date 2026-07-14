@@ -6,22 +6,22 @@
  */
 import type { SearchUsersRequestPresence } from './searchUsersRequestPresence.zod';
 export interface ApiSearchUsersRequest {
-    /** filter: include 'deleted' ALSO ! (inactive) */
-    any?: boolean;
-    deleted?: boolean;
-    extension?: string;
-    /** select: output (fields,...) */
-    fields?: string[];
-    /** filter: .id = any({id}...) */
-    id?: string[];
-    name?: string;
-    notId?: string[];
-    page?: number;
-    presence?: SearchUsersRequestPresence;
-    /** filter: (.name|.username|.extension|.status) ILIKE '{q}' */
-    q?: string;
-    size?: number;
-    sort?: string[];
-    status?: string;
-    username?: string;
+	/** filter: include 'deleted' ALSO ! (inactive) */
+	any?: boolean;
+	deleted?: boolean;
+	extension?: string;
+	/** select: output (fields,...) */
+	fields?: string[];
+	/** filter: .id = any({id}...) */
+	id?: string[];
+	name?: string;
+	notId?: string[];
+	page?: number;
+	presence?: SearchUsersRequestPresence;
+	/** filter: (.name|.username|.extension|.status) ILIKE '{q}' */
+	q?: string;
+	size?: number;
+	sort?: string[];
+	status?: string;
+	username?: string;
 }

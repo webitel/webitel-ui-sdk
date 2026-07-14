@@ -8,889 +8,1671 @@ import * as zod from 'zod';
 /**
  * @summary List of Agent
  */
-export declare const SearchAgentQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    regionId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    auditorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    skillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    notSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    extension: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    notTeamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    notSkillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    notUserId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-        auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            channel: zod.ZodOptional<zod.ZodString>;
-            joinedAt: zod.ZodOptional<zod.ZodString>;
-            state: zod.ZodOptional<zod.ZodString>;
-            timeout: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        chatCount: zod.ZodOptional<zod.ZodNumber>;
-        description: zod.ZodOptional<zod.ZodString>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        greetingMedia: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-        lastStatusChange: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-        region: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        screenControl: zod.ZodOptional<zod.ZodBoolean>;
-        skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        status: zod.ZodOptional<zod.ZodString>;
-        statusDuration: zod.ZodOptional<zod.ZodString>;
-        supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        taskCount: zod.ZodOptional<zod.ZodNumber>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-            status: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchAgentQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		regionId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		auditorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		notSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		userId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		extension: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		notTeamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		notSkillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		notUserId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+						auditor: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						channel: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										channel: zod.ZodOptional<zod.ZodString>;
+										joinedAt: zod.ZodOptional<zod.ZodString>;
+										state: zod.ZodOptional<zod.ZodString>;
+										timeout: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						chatCount: zod.ZodOptional<zod.ZodNumber>;
+						description: zod.ZodOptional<zod.ZodString>;
+						extension: zod.ZodOptional<zod.ZodString>;
+						greetingMedia: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+						lastStatusChange: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+						region: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						screenControl: zod.ZodOptional<zod.ZodBoolean>;
+						skills: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						status: zod.ZodOptional<zod.ZodString>;
+						statusDuration: zod.ZodOptional<zod.ZodString>;
+						supervisor: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						taskCount: zod.ZodOptional<zod.ZodNumber>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						userPresenceStatus: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									status: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create Agent
  */
-export declare const CreateAgentBody: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateAgentResponse: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-        timeout: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    lastStatusChange: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentCallStatisticsQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    timeFrom: zod.ZodOptional<zod.ZodString>;
-    timeTo: zod.ZodOptional<zod.ZodString>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    q: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    sort: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentCallStatisticsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        abandoned: zod.ZodOptional<zod.ZodNumber>;
-        avgHoldSec: zod.ZodOptional<zod.ZodNumber>;
-        avgTalkSec: zod.ZodOptional<zod.ZodNumber>;
-        chatAccepts: zod.ZodOptional<zod.ZodNumber>;
-        chatAht: zod.ZodOptional<zod.ZodNumber>;
-        count: zod.ZodOptional<zod.ZodNumber>;
-        handles: zod.ZodOptional<zod.ZodNumber>;
-        maxHoldSec: zod.ZodOptional<zod.ZodNumber>;
-        maxTalkSec: zod.ZodOptional<zod.ZodNumber>;
-        minHoldSec: zod.ZodOptional<zod.ZodNumber>;
-        minTalkSec: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-        occupancy: zod.ZodOptional<zod.ZodNumber>;
-        sumHoldSec: zod.ZodOptional<zod.ZodNumber>;
-        sumTalkSec: zod.ZodOptional<zod.ZodNumber>;
-        utilization: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStatusStatisticQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    timeFrom: zod.ZodOptional<zod.ZodString>;
-    timeTo: zod.ZodOptional<zod.ZodString>;
-    status: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    teamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    utilizationFrom: zod.ZodOptional<zod.ZodString>;
-    utilizationTo: zod.ZodOptional<zod.ZodString>;
-    hasCall: zod.ZodOptional<zod.ZodBoolean>;
-    skillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    regionId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    auditorId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStatusStatisticResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        activeCallId: zod.ZodOptional<zod.ZodString>;
-        agentId: zod.ZodOptional<zod.ZodNumber>;
-        auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        callTime: zod.ZodOptional<zod.ZodString>;
-        chatCount: zod.ZodOptional<zod.ZodNumber>;
-        chatTime: zod.ZodOptional<zod.ZodString>;
-        descTrack: zod.ZodOptional<zod.ZodBoolean>;
-        extension: zod.ZodOptional<zod.ZodString>;
-        handles: zod.ZodOptional<zod.ZodNumber>;
-        maxBridgedAt: zod.ZodOptional<zod.ZodString>;
-        maxOfferingAt: zod.ZodOptional<zod.ZodString>;
-        missed: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-        occupancy: zod.ZodOptional<zod.ZodNumber>;
-        offline: zod.ZodOptional<zod.ZodString>;
-        online: zod.ZodOptional<zod.ZodString>;
-        pause: zod.ZodOptional<zod.ZodString>;
-        pauseCause: zod.ZodOptional<zod.ZodString>;
-        queues: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        screenControl: zod.ZodOptional<zod.ZodBoolean>;
-        skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        status: zod.ZodOptional<zod.ZodString>;
-        statusComment: zod.ZodOptional<zod.ZodString>;
-        statusDuration: zod.ZodOptional<zod.ZodString>;
-        supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        transferred: zod.ZodOptional<zod.ZodNumber>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        utilization: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStatusStatisticItemParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStatusStatisticItemQueryParams: zod.ZodObject<{
-    timeFrom: zod.ZodOptional<zod.ZodString>;
-    timeTo: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStatusStatisticItemResponse: zod.ZodObject<{
-    agentId: zod.ZodOptional<zod.ZodNumber>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    descTrack: zod.ZodOptional<zod.ZodBoolean>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    offline: zod.ZodOptional<zod.ZodString>;
-    online: zod.ZodOptional<zod.ZodString>;
-    pause: zod.ZodOptional<zod.ZodString>;
-    pauseCause: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    scoreCount: zod.ZodOptional<zod.ZodString>;
-    scoreOptionalAvg: zod.ZodOptional<zod.ZodNumber>;
-    scoreRequiredAvg: zod.ZodOptional<zod.ZodNumber>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusComment: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStateHistoryQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    joinedAtFrom: zod.ZodOptional<zod.ZodString>;
-    joinedAtTo: zod.ZodOptional<zod.ZodString>;
-    agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    fromId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentStateHistoryResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        channel: zod.ZodOptional<zod.ZodString>;
-        duration: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        leavedAt: zod.ZodOptional<zod.ZodString>;
-        pauseCause: zod.ZodOptional<zod.ZodString>;
-        payload: zod.ZodOptional<zod.ZodString>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        state: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const SearchPauseCauseForAgentParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchPauseCauseForAgentQueryParams: zod.ZodObject<{
-    allowChange: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const SearchPauseCauseForAgentResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        durationMin: zod.ZodOptional<zod.ZodNumber>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        limitMin: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const AgentStateHistoryParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const AgentStateHistoryQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    timeFrom: zod.ZodOptional<zod.ZodString>;
-    timeTo: zod.ZodOptional<zod.ZodString>;
-    q: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const AgentStateHistoryResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        agent: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        channel: zod.ZodOptional<zod.ZodString>;
-        duration: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        leavedAt: zod.ZodOptional<zod.ZodString>;
-        pauseCause: zod.ZodOptional<zod.ZodString>;
-        payload: zod.ZodOptional<zod.ZodString>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        state: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const AgentSetStateParams: zod.ZodObject<{
-    agent_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
+export declare const CreateAgentBody: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateAgentResponse: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+						timeout: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		lastStatusChange: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		skills: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		userPresenceStatus: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					status: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentCallStatisticsQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		timeFrom: zod.ZodOptional<zod.ZodString>;
+		timeTo: zod.ZodOptional<zod.ZodString>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		q: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		sort: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentCallStatisticsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						abandoned: zod.ZodOptional<zod.ZodNumber>;
+						avgHoldSec: zod.ZodOptional<zod.ZodNumber>;
+						avgTalkSec: zod.ZodOptional<zod.ZodNumber>;
+						chatAccepts: zod.ZodOptional<zod.ZodNumber>;
+						chatAht: zod.ZodOptional<zod.ZodNumber>;
+						count: zod.ZodOptional<zod.ZodNumber>;
+						handles: zod.ZodOptional<zod.ZodNumber>;
+						maxHoldSec: zod.ZodOptional<zod.ZodNumber>;
+						maxTalkSec: zod.ZodOptional<zod.ZodNumber>;
+						minHoldSec: zod.ZodOptional<zod.ZodNumber>;
+						minTalkSec: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+						occupancy: zod.ZodOptional<zod.ZodNumber>;
+						sumHoldSec: zod.ZodOptional<zod.ZodNumber>;
+						sumTalkSec: zod.ZodOptional<zod.ZodNumber>;
+						utilization: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStatusStatisticQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		timeFrom: zod.ZodOptional<zod.ZodString>;
+		timeTo: zod.ZodOptional<zod.ZodString>;
+		status: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		utilizationFrom: zod.ZodOptional<zod.ZodString>;
+		utilizationTo: zod.ZodOptional<zod.ZodString>;
+		hasCall: zod.ZodOptional<zod.ZodBoolean>;
+		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		regionId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		auditorId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStatusStatisticResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						activeCallId: zod.ZodOptional<zod.ZodString>;
+						agentId: zod.ZodOptional<zod.ZodNumber>;
+						auditor: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						callTime: zod.ZodOptional<zod.ZodString>;
+						chatCount: zod.ZodOptional<zod.ZodNumber>;
+						chatTime: zod.ZodOptional<zod.ZodString>;
+						descTrack: zod.ZodOptional<zod.ZodBoolean>;
+						extension: zod.ZodOptional<zod.ZodString>;
+						handles: zod.ZodOptional<zod.ZodNumber>;
+						maxBridgedAt: zod.ZodOptional<zod.ZodString>;
+						maxOfferingAt: zod.ZodOptional<zod.ZodString>;
+						missed: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+						occupancy: zod.ZodOptional<zod.ZodNumber>;
+						offline: zod.ZodOptional<zod.ZodString>;
+						online: zod.ZodOptional<zod.ZodString>;
+						pause: zod.ZodOptional<zod.ZodString>;
+						pauseCause: zod.ZodOptional<zod.ZodString>;
+						queues: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						screenControl: zod.ZodOptional<zod.ZodBoolean>;
+						skills: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						status: zod.ZodOptional<zod.ZodString>;
+						statusComment: zod.ZodOptional<zod.ZodString>;
+						statusDuration: zod.ZodOptional<zod.ZodString>;
+						supervisor: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										id: zod.ZodOptional<zod.ZodString>;
+										name: zod.ZodOptional<zod.ZodString>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						transferred: zod.ZodOptional<zod.ZodNumber>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						utilization: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStatusStatisticItemParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStatusStatisticItemQueryParams: zod.ZodObject<
+	{
+		timeFrom: zod.ZodOptional<zod.ZodString>;
+		timeTo: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStatusStatisticItemResponse: zod.ZodObject<
+	{
+		agentId: zod.ZodOptional<zod.ZodNumber>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		descTrack: zod.ZodOptional<zod.ZodBoolean>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		offline: zod.ZodOptional<zod.ZodString>;
+		online: zod.ZodOptional<zod.ZodString>;
+		pause: zod.ZodOptional<zod.ZodString>;
+		pauseCause: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		scoreCount: zod.ZodOptional<zod.ZodString>;
+		scoreOptionalAvg: zod.ZodOptional<zod.ZodNumber>;
+		scoreRequiredAvg: zod.ZodOptional<zod.ZodNumber>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusComment: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStateHistoryQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		joinedAtFrom: zod.ZodOptional<zod.ZodString>;
+		joinedAtTo: zod.ZodOptional<zod.ZodString>;
+		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		fromId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentStateHistoryResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						channel: zod.ZodOptional<zod.ZodString>;
+						duration: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						leavedAt: zod.ZodOptional<zod.ZodString>;
+						pauseCause: zod.ZodOptional<zod.ZodString>;
+						payload: zod.ZodOptional<zod.ZodString>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						state: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchPauseCauseForAgentParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchPauseCauseForAgentQueryParams: zod.ZodObject<
+	{
+		allowChange: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchPauseCauseForAgentResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						durationMin: zod.ZodOptional<zod.ZodNumber>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						limitMin: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentStateHistoryParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentStateHistoryQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		timeFrom: zod.ZodOptional<zod.ZodString>;
+		timeTo: zod.ZodOptional<zod.ZodString>;
+		q: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentStateHistoryResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						agent: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						channel: zod.ZodOptional<zod.ZodString>;
+						duration: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						leavedAt: zod.ZodOptional<zod.ZodString>;
+						pauseCause: zod.ZodOptional<zod.ZodString>;
+						payload: zod.ZodOptional<zod.ZodString>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						state: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentSetStateParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
 export declare const AgentSetStateBody: zod.ZodObject<{}, zod.z.core.$loose>;
-export declare const AgentSetStateResponse: zod.ZodObject<{}, zod.z.core.$loose>;
-export declare const SearchAgentInQueueStatisticsParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInQueueStatisticsQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInQueueStatisticsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        statistics: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            bucket: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            memberWaiting: zod.ZodOptional<zod.ZodNumber>;
-            skill: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const AgentTodayStatisticsParams: zod.ZodObject<{
-    agent_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const AgentTodayStatisticsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const AgentTodayStatisticsResponse: zod.ZodObject<{
-    available: zod.ZodOptional<zod.ZodNumber>;
-    avgHoldSec: zod.ZodOptional<zod.ZodNumber>;
-    avgTalkSec: zod.ZodOptional<zod.ZodNumber>;
-    callAbandoned: zod.ZodOptional<zod.ZodNumber>;
-    callDialerQueue: zod.ZodOptional<zod.ZodNumber>;
-    callHandled: zod.ZodOptional<zod.ZodNumber>;
-    callInbound: zod.ZodOptional<zod.ZodNumber>;
-    callInboundQueue: zod.ZodOptional<zod.ZodNumber>;
-    callManual: zod.ZodOptional<zod.ZodNumber>;
-    callMissed: zod.ZodOptional<zod.ZodNumber>;
-    callQueueMissed: zod.ZodOptional<zod.ZodNumber>;
-    chatAccepts: zod.ZodOptional<zod.ZodNumber>;
-    chatAht: zod.ZodOptional<zod.ZodNumber>;
-    occupancy: zod.ZodOptional<zod.ZodNumber>;
-    online: zod.ZodOptional<zod.ZodNumber>;
-    processing: zod.ZodOptional<zod.ZodNumber>;
-    queueTalkSec: zod.ZodOptional<zod.ZodNumber>;
-    scoreCount: zod.ZodOptional<zod.ZodString>;
-    scoreOptionalAvg: zod.ZodOptional<zod.ZodNumber>;
-    scoreOptionalSum: zod.ZodOptional<zod.ZodNumber>;
-    scoreRequiredAvg: zod.ZodOptional<zod.ZodNumber>;
-    scoreRequiredSum: zod.ZodOptional<zod.ZodNumber>;
-    sumTalkSec: zod.ZodOptional<zod.ZodString>;
-    taskAccepts: zod.ZodOptional<zod.ZodNumber>;
-    utilization: zod.ZodOptional<zod.ZodNumber>;
-    voiceMail: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const AgentSetStateResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;
+export declare const SearchAgentInQueueStatisticsParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInQueueStatisticsQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInQueueStatisticsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						statistics: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										bucket: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+										memberWaiting: zod.ZodOptional<zod.ZodNumber>;
+										skill: zod.ZodOptional<
+											zod.ZodObject<
+												{
+													id: zod.ZodOptional<zod.ZodString>;
+													name: zod.ZodOptional<zod.ZodString>;
+												},
+												zod.z.core.$strip
+											>
+										>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentTodayStatisticsParams: zod.ZodObject<
+	{
+		agent_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentTodayStatisticsQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const AgentTodayStatisticsResponse: zod.ZodObject<
+	{
+		available: zod.ZodOptional<zod.ZodNumber>;
+		avgHoldSec: zod.ZodOptional<zod.ZodNumber>;
+		avgTalkSec: zod.ZodOptional<zod.ZodNumber>;
+		callAbandoned: zod.ZodOptional<zod.ZodNumber>;
+		callDialerQueue: zod.ZodOptional<zod.ZodNumber>;
+		callHandled: zod.ZodOptional<zod.ZodNumber>;
+		callInbound: zod.ZodOptional<zod.ZodNumber>;
+		callInboundQueue: zod.ZodOptional<zod.ZodNumber>;
+		callManual: zod.ZodOptional<zod.ZodNumber>;
+		callMissed: zod.ZodOptional<zod.ZodNumber>;
+		callQueueMissed: zod.ZodOptional<zod.ZodNumber>;
+		chatAccepts: zod.ZodOptional<zod.ZodNumber>;
+		chatAht: zod.ZodOptional<zod.ZodNumber>;
+		occupancy: zod.ZodOptional<zod.ZodNumber>;
+		online: zod.ZodOptional<zod.ZodNumber>;
+		processing: zod.ZodOptional<zod.ZodNumber>;
+		queueTalkSec: zod.ZodOptional<zod.ZodNumber>;
+		scoreCount: zod.ZodOptional<zod.ZodString>;
+		scoreOptionalAvg: zod.ZodOptional<zod.ZodNumber>;
+		scoreOptionalSum: zod.ZodOptional<zod.ZodNumber>;
+		scoreRequiredAvg: zod.ZodOptional<zod.ZodNumber>;
+		scoreRequiredSum: zod.ZodOptional<zod.ZodNumber>;
+		sumTalkSec: zod.ZodOptional<zod.ZodString>;
+		taskAccepts: zod.ZodOptional<zod.ZodNumber>;
+		utilization: zod.ZodOptional<zod.ZodNumber>;
+		voiceMail: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove Agent
  */
-export declare const DeleteAgentParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteAgentResponse: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-        timeout: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    lastStatusChange: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const DeleteAgentParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteAgentResponse: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+						timeout: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		lastStatusChange: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		skills: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		userPresenceStatus: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					status: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Agent item
  */
-export declare const ReadAgentParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadAgentQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadAgentResponse: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-        timeout: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    lastStatusChange: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ReadAgentParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadAgentQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadAgentResponse: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+						timeout: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		lastStatusChange: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		skills: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		userPresenceStatus: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					status: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update Agent
  */
-export declare const PatchAgentParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const PatchAgentBody: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const PatchAgentResponse: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-        timeout: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    lastStatusChange: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const PatchAgentParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentBody: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchAgentResponse: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+						timeout: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		lastStatusChange: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		skills: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		userPresenceStatus: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					status: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update Agent
  */
-export declare const UpdateAgentParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentBody: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentResponse: zod.ZodObject<{
-    allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
-    auditor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    channel: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodString>;
-        joinedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-        timeout: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    chatCount: zod.ZodOptional<zod.ZodNumber>;
-    description: zod.ZodOptional<zod.ZodString>;
-    extension: zod.ZodOptional<zod.ZodString>;
-    greetingMedia: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
-    lastStatusChange: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    progressiveCount: zod.ZodOptional<zod.ZodNumber>;
-    region: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    screenControl: zod.ZodOptional<zod.ZodBoolean>;
-    skills: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusDuration: zod.ZodOptional<zod.ZodString>;
-    supervisor: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    taskCount: zod.ZodOptional<zod.ZodNumber>;
-    team: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    userPresenceStatus: zod.ZodOptional<zod.ZodObject<{
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateAgentParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentBody: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentResponse: zod.ZodObject<
+	{
+		allowChannels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		allowSetScreenControl: zod.ZodOptional<zod.ZodBoolean>;
+		auditor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		channel: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodString>;
+						joinedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+						timeout: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		chatCount: zod.ZodOptional<zod.ZodNumber>;
+		description: zod.ZodOptional<zod.ZodString>;
+		extension: zod.ZodOptional<zod.ZodString>;
+		greetingMedia: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		isSupervisor: zod.ZodOptional<zod.ZodBoolean>;
+		lastStatusChange: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		progressiveCount: zod.ZodOptional<zod.ZodNumber>;
+		region: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		screenControl: zod.ZodOptional<zod.ZodBoolean>;
+		skills: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusDuration: zod.ZodOptional<zod.ZodString>;
+		supervisor: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		taskCount: zod.ZodOptional<zod.ZodNumber>;
+		team: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		userPresenceStatus: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					status: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Searches queues where the specified agent is assigned.
 Supports pagination, sorting and free-text search.
  */
-export declare const SearchAgentInQueueParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInQueueQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInQueueResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        activeMembers: zod.ZodOptional<zod.ZodNumber>;
-        agents: zod.ZodOptional<zod.ZodObject<{
-            allowPause: zod.ZodOptional<zod.ZodNumber>;
-            busy: zod.ZodOptional<zod.ZodNumber>;
-            free: zod.ZodOptional<zod.ZodNumber>;
-            offline: zod.ZodOptional<zod.ZodNumber>;
-            online: zod.ZodOptional<zod.ZodNumber>;
-            pause: zod.ZodOptional<zod.ZodNumber>;
-            total: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>;
-        countMembers: zod.ZodOptional<zod.ZodNumber>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        maxMemberLimit: zod.ZodOptional<zod.ZodNumber>;
-        priority: zod.ZodOptional<zod.ZodNumber>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        strategy: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodNumber>;
-        waitingMembers: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchAgentInQueueParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInQueueQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInQueueResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						activeMembers: zod.ZodOptional<zod.ZodNumber>;
+						agents: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									allowPause: zod.ZodOptional<zod.ZodNumber>;
+									busy: zod.ZodOptional<zod.ZodNumber>;
+									free: zod.ZodOptional<zod.ZodNumber>;
+									offline: zod.ZodOptional<zod.ZodNumber>;
+									online: zod.ZodOptional<zod.ZodNumber>;
+									pause: zod.ZodOptional<zod.ZodNumber>;
+									total: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						countMembers: zod.ZodOptional<zod.ZodNumber>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						maxMemberLimit: zod.ZodOptional<zod.ZodNumber>;
+						priority: zod.ZodOptional<zod.ZodNumber>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						strategy: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodNumber>;
+						waitingMembers: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Change agent status
  */
-export declare const UpdateAgentStatusParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentStatusBody: zod.ZodObject<{
-    channels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    onDemand: zod.ZodOptional<zod.ZodBoolean>;
-    payload: zod.ZodOptional<zod.ZodString>;
-    status: zod.ZodOptional<zod.ZodString>;
-    statusComment: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UpdateAgentStatusResponse: zod.ZodObject<{
-    status: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const UpdateAgentStatusParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentStatusBody: zod.ZodObject<
+	{
+		channels: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		onDemand: zod.ZodOptional<zod.ZodBoolean>;
+		payload: zod.ZodOptional<zod.ZodString>;
+		status: zod.ZodOptional<zod.ZodString>;
+		statusComment: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateAgentStatusResponse: zod.ZodObject<
+	{
+		status: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary todo deprecated ?
  */
-export declare const SearchAgentInTeamParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInTeamQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchAgentInTeamResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        strategy: zod.ZodOptional<zod.ZodString>;
-        team: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchAgentInTeamParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInTeamQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchAgentInTeamResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						strategy: zod.ZodOptional<zod.ZodString>;
+						team: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SearchLookupAgentNotExistsUser
  */
-export declare const SearchLookupUsersAgentNotExistsQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchLookupUsersAgentNotExistsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchLookupUsersAgentNotExistsQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchLookupUsersAgentNotExistsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary List of UserStatus
  */
-export declare const SearchUserStatusQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    notUserId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchUserStatusResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        extension: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        presence: zod.ZodOptional<zod.ZodObject<{
-            status: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        status: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchUserStatusQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		notUserId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchUserStatusResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						extension: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						presence: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									status: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						status: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;

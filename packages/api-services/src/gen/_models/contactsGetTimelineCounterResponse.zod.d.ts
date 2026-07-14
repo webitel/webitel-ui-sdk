@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ContactsGetTimelineCounterResponse {
-    callsCount?: string;
-    chatsCount?: string;
-    dateFrom?: string;
-    dateTo?: string;
-    emailsCount?: string;
+	callsCount?: string;
+	chatsCount?: string;
+	dateFrom?: string;
+	dateTo?: string;
+	emailsCount?: string;
 }

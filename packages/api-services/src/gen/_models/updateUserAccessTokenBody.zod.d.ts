@@ -7,13 +7,13 @@
 import type { ApiObjectId } from './apiObjectId.zod';
 import type { UpdateUserAccessTokenBodyUser } from './updateUserAccessTokenBodyUser.zod';
 export type UpdateUserAccessTokenBody = {
-    createdAt?: string;
-    createdBy?: ApiObjectId;
-    deletedAt?: string;
-    deletedBy?: ApiObjectId;
-    token?: string;
-    updatedAt?: string;
-    updatedBy?: ApiObjectId;
-    usage?: string;
-    user?: UpdateUserAccessTokenBodyUser;
+	createdAt?: string;
+	createdBy?: ApiObjectId;
+	deletedAt?: string;
+	deletedBy?: ApiObjectId;
+	token?: string;
+	updatedAt?: string;
+	updatedBy?: ApiObjectId;
+	usage?: string;
+	user?: UpdateUserAccessTokenBodyUser;
 };

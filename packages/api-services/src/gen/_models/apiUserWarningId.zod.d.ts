@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ApiUserWarningId = (typeof ApiUserWarningId)[keyof typeof ApiUserWarningId];
+export type ApiUserWarningId =
+	(typeof ApiUserWarningId)[keyof typeof ApiUserWarningId];
 export declare const ApiUserWarningId: {
-    readonly UserWarningIdUnspecified: "user_warning_id_unspecified";
-    readonly PasswordExpiresSoon: "password_expires_soon";
-    readonly LicenseExpiresSoon: "license_expires_soon";
-    readonly LicenseExpired: "license_expired";
+	readonly UserWarningIdUnspecified: 'user_warning_id_unspecified';
+	readonly PasswordExpiresSoon: 'password_expires_soon';
+	readonly LicenseExpiresSoon: 'license_expires_soon';
+	readonly LicenseExpired: 'license_expired';
 };

@@ -6,5 +6,5 @@
  */
 import type { ApiTfaUrl } from './apiTfaUrl.zod';
 export interface ApiGetUserTfaKeyResponse {
-    totp?: ApiTfaUrl;
+	totp?: ApiTfaUrl;
 }

@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCallHold {
-    sec?: number;
-    start?: string;
-    stop?: string;
+	sec?: number;
+	start?: string;
+	stop?: string;
 }

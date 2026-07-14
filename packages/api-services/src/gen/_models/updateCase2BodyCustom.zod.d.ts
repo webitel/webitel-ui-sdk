@@ -8,5 +8,5 @@
  * Custom data extension fields ..
  */
 export type UpdateCase2BodyCustom = {
-    [key: string]: unknown;
+	[key: string]: unknown;
 };

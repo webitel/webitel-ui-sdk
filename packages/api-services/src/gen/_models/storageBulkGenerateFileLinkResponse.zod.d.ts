@@ -6,5 +6,5 @@
  */
 import type { StorageGenerateFileLinkResponse } from './storageGenerateFileLinkResponse.zod';
 export interface StorageBulkGenerateFileLinkResponse {
-    links?: StorageGenerateFileLinkResponse[];
+	links?: StorageGenerateFileLinkResponse[];
 }

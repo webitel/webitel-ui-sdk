@@ -8,15 +8,15 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommunicationCreateRequest.zod';
 import type { EngineMemberServiceCreateMemberBodyVariables } from './engineMemberServiceCreateMemberBodyVariables.zod';
 export interface EngineMemberServiceCreateMemberBody {
-    agent?: EngineLookup;
-    bucket?: EngineLookup;
-    communications?: EngineMemberCommunicationCreateRequest[];
-    domainId?: string;
-    expireAt?: string;
-    minOfferingAt?: string;
-    name?: string;
-    priority?: number;
-    skill?: EngineLookup;
-    timezone?: EngineLookup;
-    variables?: EngineMemberServiceCreateMemberBodyVariables;
+	agent?: EngineLookup;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	domainId?: string;
+	expireAt?: string;
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	timezone?: EngineLookup;
+	variables?: EngineMemberServiceCreateMemberBodyVariables;
 }

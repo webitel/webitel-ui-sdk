@@ -9,5 +9,5 @@ import type { WebitelImApiGatewayV1DirectConfig } from './webitelImApiGatewayV1D
  * ThreadManagementCreateRequest defines parameters for creating a specific thread type.
  */
 export interface WebitelImApiGatewayV1ThreadManagementCreateRequest {
-    direct?: WebitelImApiGatewayV1DirectConfig;
+	direct?: WebitelImApiGatewayV1DirectConfig;
 }

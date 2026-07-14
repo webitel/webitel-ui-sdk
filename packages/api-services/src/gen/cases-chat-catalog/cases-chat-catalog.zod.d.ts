@@ -5,148 +5,293 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const CasesChatCatalogGetCaseChatHistoryParams: zod.ZodObject<{
-    case_id: zod.ZodString;
-    chat_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CasesChatCatalogGetCaseChatHistoryQueryParams: zod.ZodObject<{
-    offsetId: zod.ZodOptional<zod.ZodString>;
-    offsetDate: zod.ZodOptional<zod.ZodString>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    groupString: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const casesChatCatalogGetCaseChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = "phone";
-export declare const CasesChatCatalogGetCaseChatHistoryResponse: zod.ZodObject<{
-    chats: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        context: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        dc: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        invite: zod.ZodOptional<zod.ZodObject<{
-            date: zod.ZodOptional<zod.ZodString>;
-            from: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        join: zod.ZodOptional<zod.ZodString>;
-        left: zod.ZodOptional<zod.ZodString>;
-        peer: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        queue: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        title: zod.ZodOptional<zod.ZodString>;
-        via: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    messages: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        chat: zod.ZodOptional<zod.ZodObject<{
-            context: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            dc: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            invite: zod.ZodOptional<zod.ZodObject<{
-                date: zod.ZodOptional<zod.ZodString>;
-                from: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            join: zod.ZodOptional<zod.ZodString>;
-            left: zod.ZodOptional<zod.ZodString>;
-            peer: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            queue: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            title: zod.ZodOptional<zod.ZodString>;
-            via: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>;
-        context: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        date: zod.ZodOptional<zod.ZodString>;
-        edit: zod.ZodOptional<zod.ZodString>;
-        file: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            size: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-            url: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        from: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        keyboard: zod.ZodOptional<zod.ZodObject<{
-            buttons: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-                row: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-                    code: zod.ZodOptional<zod.ZodString>;
-                    share: zod.ZodDefault<zod.ZodEnum<{
-                        contact: "contact";
-                        email: "email";
-                        location: "location";
-                        phone: "phone";
-                    }>>;
-                    text: zod.ZodOptional<zod.ZodString>;
-                    url: zod.ZodOptional<zod.ZodString>;
-                }, zod.z.core.$strip>>>;
-            }, zod.z.core.$strip>>>;
-            noInput: zod.ZodOptional<zod.ZodBoolean>;
-        }, zod.z.core.$strip>>;
-        kind: zod.ZodOptional<zod.ZodString>;
-        postback: zod.ZodOptional<zod.ZodObject<{
-            code: zod.ZodOptional<zod.ZodString>;
-            mid: zod.ZodOptional<zod.ZodString>;
-            text: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        sender: zod.ZodOptional<zod.ZodObject<{
-            context: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            dc: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            invite: zod.ZodOptional<zod.ZodObject<{
-                date: zod.ZodOptional<zod.ZodString>;
-                from: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            join: zod.ZodOptional<zod.ZodString>;
-            left: zod.ZodOptional<zod.ZodString>;
-            peer: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            queue: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            title: zod.ZodOptional<zod.ZodString>;
-            via: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                type: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>;
-        text: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    peers: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
+export declare const CasesChatCatalogGetCaseChatHistoryParams: zod.ZodObject<
+	{
+		case_id: zod.ZodString;
+		chat_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CasesChatCatalogGetCaseChatHistoryQueryParams: zod.ZodObject<
+	{
+		offsetId: zod.ZodOptional<zod.ZodString>;
+		offsetDate: zod.ZodOptional<zod.ZodString>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		groupString: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const casesChatCatalogGetCaseChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault =
+	'phone';
+export declare const CasesChatCatalogGetCaseChatHistoryResponse: zod.ZodObject<
+	{
+		chats: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						context: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						dc: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						invite: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									date: zod.ZodOptional<zod.ZodString>;
+									from: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						join: zod.ZodOptional<zod.ZodString>;
+						left: zod.ZodOptional<zod.ZodString>;
+						peer: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						queue: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						title: zod.ZodOptional<zod.ZodString>;
+						via: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		messages: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						chat: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									context: zod.ZodOptional<
+										zod.ZodRecord<zod.ZodString, zod.ZodString>
+									>;
+									dc: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodOptional<zod.ZodString>;
+									invite: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												date: zod.ZodOptional<zod.ZodString>;
+												from: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									join: zod.ZodOptional<zod.ZodString>;
+									left: zod.ZodOptional<zod.ZodString>;
+									peer: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									queue: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									title: zod.ZodOptional<zod.ZodString>;
+									via: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						context: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						date: zod.ZodOptional<zod.ZodString>;
+						edit: zod.ZodOptional<zod.ZodString>;
+						file: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									size: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+									url: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						from: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						keyboard: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									buttons: zod.ZodOptional<
+										zod.ZodArray<
+											zod.ZodObject<
+												{
+													row: zod.ZodOptional<
+														zod.ZodArray<
+															zod.ZodObject<
+																{
+																	code: zod.ZodOptional<zod.ZodString>;
+																	share: zod.ZodDefault<
+																		zod.ZodEnum<{
+																			contact: 'contact';
+																			email: 'email';
+																			location: 'location';
+																			phone: 'phone';
+																		}>
+																	>;
+																	text: zod.ZodOptional<zod.ZodString>;
+																	url: zod.ZodOptional<zod.ZodString>;
+																},
+																zod.z.core.$strip
+															>
+														>
+													>;
+												},
+												zod.z.core.$strip
+											>
+										>
+									>;
+									noInput: zod.ZodOptional<zod.ZodBoolean>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						kind: zod.ZodOptional<zod.ZodString>;
+						postback: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									code: zod.ZodOptional<zod.ZodString>;
+									mid: zod.ZodOptional<zod.ZodString>;
+									text: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						sender: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									context: zod.ZodOptional<
+										zod.ZodRecord<zod.ZodString, zod.ZodString>
+									>;
+									dc: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodOptional<zod.ZodString>;
+									invite: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												date: zod.ZodOptional<zod.ZodString>;
+												from: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									join: zod.ZodOptional<zod.ZodString>;
+									left: zod.ZodOptional<zod.ZodString>;
+									peer: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									queue: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									title: zod.ZodOptional<zod.ZodString>;
+									via: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												id: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												type: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						text: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		peers: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

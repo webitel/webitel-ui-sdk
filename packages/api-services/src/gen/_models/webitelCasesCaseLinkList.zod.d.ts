@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesCaseLink } from './webitelCasesCaseLink.zod';
 export interface WebitelCasesCaseLinkList {
-    items?: WebitelCasesCaseLink[];
-    next?: boolean;
-    page?: string;
+	items?: WebitelCasesCaseLink[];
+	next?: boolean;
+	page?: string;
 }

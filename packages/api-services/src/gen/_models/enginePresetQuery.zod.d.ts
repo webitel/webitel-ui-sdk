@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EnginePresetQuery {
-    createdAt?: string;
-    description?: string;
-    id?: number;
-    name?: string;
-    section?: string;
-    updatedAt?: string;
+	createdAt?: string;
+	description?: string;
+	id?: number;
+	name?: string;
+	section?: string;
+	updatedAt?: string;
 }

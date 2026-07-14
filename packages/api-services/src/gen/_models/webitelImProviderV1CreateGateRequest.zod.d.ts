@@ -8,9 +8,9 @@ import type { WebitelImProviderV1CreateWABAGateRequest } from './webitelImProvid
 import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer.zod';
 import type { WebitelImProviderV1ProviderCreateFacebookGateRequest } from './webitelImProviderV1ProviderCreateFacebookGateRequest.zod';
 export interface WebitelImProviderV1CreateGateRequest {
-    bot?: WebitelImProviderV1Peer;
-    enabled?: boolean;
-    fb?: WebitelImProviderV1ProviderCreateFacebookGateRequest;
-    name?: string;
-    waba?: WebitelImProviderV1CreateWABAGateRequest;
+	bot?: WebitelImProviderV1Peer;
+	enabled?: boolean;
+	fb?: WebitelImProviderV1ProviderCreateFacebookGateRequest;
+	name?: string;
+	waba?: WebitelImProviderV1CreateWABAGateRequest;
 }

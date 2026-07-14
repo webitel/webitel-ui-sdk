@@ -6,9 +6,9 @@
  */
 import type { WebitelCasesEvent } from './webitelCasesEvent.zod';
 export interface WebitelCasesDayTimeline {
-    callsCount?: string;
-    chatsCount?: string;
-    dayTimestamp?: string;
-    emailsCount?: string;
-    items?: WebitelCasesEvent[];
+	callsCount?: string;
+	chatsCount?: string;
+	dayTimestamp?: string;
+	emailsCount?: string;
+	items?: WebitelCasesEvent[];
 }

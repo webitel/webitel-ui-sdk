@@ -6,7 +6,7 @@
  */
 import type { ApiLDAPCatalog } from './apiLDAPCatalog.zod';
 export interface ApiSearchLDAPResponse {
-    items?: ApiLDAPCatalog[];
-    next?: boolean;
-    page?: number;
+	items?: ApiLDAPCatalog[];
+	next?: boolean;
+	page?: number;
 }

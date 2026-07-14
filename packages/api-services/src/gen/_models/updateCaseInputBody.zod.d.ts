@@ -8,24 +8,24 @@ import type { GeneralLookup } from './generalLookup.zod';
 import type { UpdateCaseInputBodyCustom } from './updateCaseInputBodyCustom.zod';
 import type { WebitelCasesStatusCondition } from './webitelCasesStatusCondition.zod';
 export type UpdateCaseInputBody = {
-    assignee?: GeneralLookup;
-    close_reason?: GeneralLookup;
-    close_result?: string;
-    contact_info?: string;
-    /** Custom data extension fields .. */
-    custom?: UpdateCaseInputBodyCustom;
-    description?: string;
-    group?: GeneralLookup;
-    impacted?: GeneralLookup;
-    priority?: GeneralLookup;
-    rating?: string;
-    rating_comment?: string;
-    reporter?: GeneralLookup;
-    service?: GeneralLookup;
-    source?: GeneralLookup;
-    status?: GeneralLookup;
-    status_condition?: WebitelCasesStatusCondition;
-    subject?: string;
-    /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-    userID?: GeneralLookup;
+	assignee?: GeneralLookup;
+	close_reason?: GeneralLookup;
+	close_result?: string;
+	contact_info?: string;
+	/** Custom data extension fields .. */
+	custom?: UpdateCaseInputBodyCustom;
+	description?: string;
+	group?: GeneralLookup;
+	impacted?: GeneralLookup;
+	priority?: GeneralLookup;
+	rating?: string;
+	rating_comment?: string;
+	reporter?: GeneralLookup;
+	service?: GeneralLookup;
+	source?: GeneralLookup;
+	status?: GeneralLookup;
+	status_condition?: WebitelCasesStatusCondition;
+	subject?: string;
+	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+	userID?: GeneralLookup;
 };

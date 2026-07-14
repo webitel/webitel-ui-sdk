@@ -6,5 +6,5 @@
  */
 import type { EngineSystemSettingName } from './engineSystemSettingName.zod';
 export interface EngineCreateSystemSettingRequest {
-    name?: EngineSystemSettingName;
+	name?: EngineSystemSettingName;
 }

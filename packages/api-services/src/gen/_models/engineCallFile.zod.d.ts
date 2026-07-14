@@ -6,13 +6,13 @@
  */
 import type { EngineCallFileType } from './engineCallFileType.zod';
 export interface EngineCallFile {
-    channel?: string;
-    id?: string;
-    mimeType?: string;
-    name?: string;
-    size?: string;
-    startAt?: string;
-    startRecord?: string;
-    stopAt?: string;
-    type?: EngineCallFileType;
+	channel?: string;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	size?: string;
+	startAt?: string;
+	startRecord?: string;
+	stopAt?: string;
+	type?: EngineCallFileType;
 }

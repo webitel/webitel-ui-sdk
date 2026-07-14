@@ -10,5 +10,5 @@ import type { WebitelImApiGatewayV1VariableEntry } from './webitelImApiGatewayV1
  * Key is the variable name, value contains data and metadata.
  */
 export type WebitelImApiGatewayV1ThreadVariablesVariables = {
-    [key: string]: WebitelImApiGatewayV1VariableEntry;
+	[key: string]: WebitelImApiGatewayV1VariableEntry;
 };

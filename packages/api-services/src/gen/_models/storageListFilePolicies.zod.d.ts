@@ -6,6 +6,6 @@
  */
 import type { StorageFilePolicy } from './storageFilePolicy.zod';
 export interface StorageListFilePolicies {
-    items?: StorageFilePolicy[];
-    next?: boolean;
+	items?: StorageFilePolicy[];
+	next?: boolean;
 }

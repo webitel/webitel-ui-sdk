@@ -6,5 +6,5 @@
  */
 import type { StorageCognitiveProfileVoice } from './storageCognitiveProfileVoice.zod';
 export interface StorageListCognitiveProfileVoices {
-    items?: StorageCognitiveProfileVoice[];
+	items?: StorageCognitiveProfileVoice[];
 }

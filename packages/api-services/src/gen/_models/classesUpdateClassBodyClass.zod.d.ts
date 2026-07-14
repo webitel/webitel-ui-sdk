@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ClassesUpdateClassBodyClass = {
-    abac?: boolean;
-    class?: string;
-    obac?: boolean;
-    rbac?: boolean;
+	abac?: boolean;
+	class?: string;
+	obac?: boolean;
+	rbac?: boolean;
 };

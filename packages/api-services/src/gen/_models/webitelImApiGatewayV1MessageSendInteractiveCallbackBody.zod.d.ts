@@ -8,8 +8,8 @@
  * Client sends callback event when user clicks a button.
  */
 export interface WebitelImApiGatewayV1MessageSendInteractiveCallbackBody {
-    /** Button identifier. */
-    buttonCode?: string;
-    /** Optional callback payload. */
-    callbackData?: string;
+	/** Button identifier. */
+	buttonCode?: string;
+	/** Optional callback payload. */
+	callbackData?: string;
 }

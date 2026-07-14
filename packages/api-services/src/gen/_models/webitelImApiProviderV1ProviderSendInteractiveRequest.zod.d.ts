@@ -6,10 +6,10 @@
  */
 import type { WebitelImApiProviderV1ProviderInteractive } from './webitelImApiProviderV1ProviderInteractive.zod';
 export interface WebitelImApiProviderV1ProviderSendInteractiveRequest {
-    body?: string;
-    domainId?: number;
-    externalUserId?: string;
-    gateId?: string;
-    interactive?: WebitelImApiProviderV1ProviderInteractive;
-    sendId?: string;
+	body?: string;
+	domainId?: number;
+	externalUserId?: string;
+	gateId?: string;
+	interactive?: WebitelImApiProviderV1ProviderInteractive;
+	sendId?: string;
 }

@@ -6,7 +6,7 @@
  */
 import type { WebitelChatAgentChat } from './webitelChatAgentChat.zod';
 export interface WebitelChatGetAgentChatsResponse {
-    items?: WebitelChatAgentChat[];
-    next?: boolean;
-    page?: number;
+	items?: WebitelChatAgentChat[];
+	next?: boolean;
+	page?: number;
 }

@@ -6,6 +6,6 @@
  */
 import type { EngineSkill } from './engineSkill.zod';
 export interface EngineListSkill {
-    items?: EngineSkill[];
-    next?: boolean;
+	items?: EngineSkill[];
+	next?: boolean;
 }

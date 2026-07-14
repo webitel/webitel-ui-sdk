@@ -6,8 +6,8 @@
  */
 import type { WebitelImApiProviderV1Peer } from './webitelImApiProviderV1Peer.zod';
 export interface WebitelImApiProviderV1FacebookServiceUpdateFacebookGateBody {
-    enabled?: boolean;
-    name?: string;
-    pageToken?: string;
-    peer?: WebitelImApiProviderV1Peer;
+	enabled?: boolean;
+	name?: string;
+	pageToken?: string;
+	peer?: WebitelImApiProviderV1Peer;
 }

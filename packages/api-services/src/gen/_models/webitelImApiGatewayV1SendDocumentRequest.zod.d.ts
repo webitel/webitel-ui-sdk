@@ -11,9 +11,9 @@ import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1P
  * Represents a request to send a message with document.
  */
 export interface WebitelImApiGatewayV1SendDocumentRequest {
-    body?: string;
-    documents?: WebitelImApiGatewayV1DocumentInput[];
-    sendAs?: WebitelImApiGatewayV1PeerIdentity;
-    sendId?: string;
-    to?: WebitelImApiGatewayV1Peer;
+	body?: string;
+	documents?: WebitelImApiGatewayV1DocumentInput[];
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
+	sendId?: string;
+	to?: WebitelImApiGatewayV1Peer;
 }

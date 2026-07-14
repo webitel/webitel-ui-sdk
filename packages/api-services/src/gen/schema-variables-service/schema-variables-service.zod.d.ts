@@ -5,68 +5,117 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const SearchSchemaVariableQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchSchemaVariableResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        encrypt: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const CreateSchemaVariableBody: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const CreateSchemaVariableResponse: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteSchemaVariableParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const DeleteSchemaVariableResponse: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadSchemaVariableParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const ReadSchemaVariableResponse: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const PatchSchemaVariableParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const PatchSchemaVariableBody: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const PatchSchemaVariableResponse: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UpdateSchemaVariableParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const UpdateSchemaVariableBody: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UpdateSchemaVariableResponse: zod.ZodObject<{
-    encrypt: zod.ZodOptional<zod.ZodBoolean>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const SearchSchemaVariableQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchSchemaVariableResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						encrypt: zod.ZodOptional<zod.ZodBoolean>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateSchemaVariableBody: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateSchemaVariableResponse: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteSchemaVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteSchemaVariableResponse: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadSchemaVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadSchemaVariableResponse: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchSchemaVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchSchemaVariableBody: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchSchemaVariableResponse: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateSchemaVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateSchemaVariableBody: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateSchemaVariableResponse: zod.ZodObject<
+	{
+		encrypt: zod.ZodOptional<zod.ZodBoolean>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;

@@ -6,14 +6,14 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsChatEvent {
-    closedAt?: string;
-    duration?: string;
-    flowScheme?: WebitelContactsLookup;
-    gateway?: WebitelContactsLookup;
-    id?: string;
-    isDetailed?: boolean;
-    isInbound?: boolean;
-    isMissed?: boolean;
-    participants?: WebitelContactsLookup[];
-    queue?: WebitelContactsLookup;
+	closedAt?: string;
+	duration?: string;
+	flowScheme?: WebitelContactsLookup;
+	gateway?: WebitelContactsLookup;
+	id?: string;
+	isDetailed?: boolean;
+	isInbound?: boolean;
+	isMissed?: boolean;
+	participants?: WebitelContactsLookup[];
+	queue?: WebitelContactsLookup;
 }

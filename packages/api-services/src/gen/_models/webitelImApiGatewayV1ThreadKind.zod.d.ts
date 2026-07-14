@@ -14,10 +14,11 @@
  *  - GROUP: Group thread with multiple members.
  *  - CHANNEL: Channel-style thread (broadcast or topic based communication).
  */
-export type WebitelImApiGatewayV1ThreadKind = (typeof WebitelImApiGatewayV1ThreadKind)[keyof typeof WebitelImApiGatewayV1ThreadKind];
+export type WebitelImApiGatewayV1ThreadKind =
+	(typeof WebitelImApiGatewayV1ThreadKind)[keyof typeof WebitelImApiGatewayV1ThreadKind];
 export declare const WebitelImApiGatewayV1ThreadKind: {
-    readonly Unknown: "UNKNOWN";
-    readonly Direct: "DIRECT";
-    readonly Group: "GROUP";
-    readonly Channel: "CHANNEL";
+	readonly Unknown: 'UNKNOWN';
+	readonly Direct: 'DIRECT';
+	readonly Group: 'GROUP';
+	readonly Channel: 'CHANNEL';
 };

@@ -7,13 +7,13 @@
 import type { WebitelImApiProviderV1ProviderStatus } from './webitelImApiProviderV1ProviderStatus.zod';
 import type { WebitelImApiProviderV1ProviderType } from './webitelImApiProviderV1ProviderType.zod';
 export interface WebitelImApiProviderV1ProviderSummary {
-    contact?: string;
-    createdAt?: string;
-    id?: string;
-    name?: string;
-    providerAppId?: string;
-    status?: WebitelImApiProviderV1ProviderStatus;
-    type?: WebitelImApiProviderV1ProviderType;
-    updatedAt?: string;
-    webhookUrl?: string;
+	contact?: string;
+	createdAt?: string;
+	id?: string;
+	name?: string;
+	providerAppId?: string;
+	status?: WebitelImApiProviderV1ProviderStatus;
+	type?: WebitelImApiProviderV1ProviderType;
+	updatedAt?: string;
+	webhookUrl?: string;
 }

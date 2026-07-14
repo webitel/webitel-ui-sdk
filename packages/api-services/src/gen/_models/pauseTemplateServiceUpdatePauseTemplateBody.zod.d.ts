@@ -6,5 +6,5 @@
  */
 import type { PauseTemplateServiceUpdatePauseTemplateBodyItem } from './pauseTemplateServiceUpdatePauseTemplateBodyItem.zod';
 export type PauseTemplateServiceUpdatePauseTemplateBody = {
-    item?: PauseTemplateServiceUpdatePauseTemplateBodyItem;
+	item?: PauseTemplateServiceUpdatePauseTemplateBodyItem;
 };

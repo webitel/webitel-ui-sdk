@@ -8,5 +8,5 @@
  * Empty response for satisfaction submission.
  */
 export interface WebMeetingBackendSatisfactionMeetingResponse {
-    [key: string]: unknown;
+	[key: string]: unknown;
 }

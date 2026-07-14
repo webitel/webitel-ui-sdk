@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineSchemaVariable {
-    encrypt?: boolean;
-    id?: number;
-    name?: string;
+	encrypt?: boolean;
+	id?: number;
+	name?: string;
 }

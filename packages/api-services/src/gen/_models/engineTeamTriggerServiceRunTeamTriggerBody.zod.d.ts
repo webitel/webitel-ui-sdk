@@ -6,5 +6,5 @@
  */
 import type { EngineTeamTriggerServiceRunTeamTriggerBodyVariables } from './engineTeamTriggerServiceRunTeamTriggerBodyVariables.zod';
 export interface EngineTeamTriggerServiceRunTeamTriggerBody {
-    variables?: EngineTeamTriggerServiceRunTeamTriggerBodyVariables;
+	variables?: EngineTeamTriggerServiceRunTeamTriggerBodyVariables;
 }

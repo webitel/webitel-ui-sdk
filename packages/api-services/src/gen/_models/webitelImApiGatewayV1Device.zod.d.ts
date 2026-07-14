@@ -6,7 +6,7 @@
  */
 import type { WebitelImApiGatewayV1UserAgent } from './webitelImApiGatewayV1UserAgent.zod';
 export interface WebitelImApiGatewayV1Device {
-    app?: WebitelImApiGatewayV1UserAgent;
-    ip?: string;
-    push?: string;
+	app?: WebitelImApiGatewayV1UserAgent;
+	ip?: string;
+	push?: string;
 }
