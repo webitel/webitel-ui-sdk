@@ -4,11 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineRoutingSchemaType = (typeof EngineRoutingSchemaType)[keyof typeof EngineRoutingSchemaType];
+export type EngineRoutingSchemaType =
+	(typeof EngineRoutingSchemaType)[keyof typeof EngineRoutingSchemaType];
 export declare const EngineRoutingSchemaType: {
-    readonly Default: "default";
-    readonly Voice: "voice";
-    readonly Chat: "chat";
-    readonly Processing: "processing";
-    readonly Service: "service";
+	readonly Default: 'default';
+	readonly Voice: 'voice';
+	readonly Chat: 'chat';
+	readonly Processing: 'processing';
+	readonly Service: 'service';
 };

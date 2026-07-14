@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineQuestion } from './engineQuestion.zod';
 export interface EngineAuditFormServicePatchAuditFormBody {
-    description?: string;
-    enabled?: boolean;
-    fields?: string[];
-    name?: string;
-    questions?: EngineQuestion[];
-    teams?: EngineLookup[];
+	description?: string;
+	enabled?: boolean;
+	fields?: string[];
+	name?: string;
+	questions?: EngineQuestion[];
+	teams?: EngineLookup[];
 }

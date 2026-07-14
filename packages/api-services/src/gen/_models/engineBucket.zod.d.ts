@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineBucket {
-    description?: string;
-    id?: string;
-    name?: string;
+	description?: string;
+	id?: string;
+	name?: string;
 }

@@ -5,472 +5,839 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const DeleteDevice2QueryParams: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-    permanent: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const DeleteDevice2QueryParams: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+		permanent: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 export declare const DeleteDevice2BodyItem: zod.ZodString;
 export declare const DeleteDevice2Body: zod.ZodArray<zod.ZodString>;
-export declare const DeleteDevice2Response: zod.ZodObject<{
-    deleted: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const SearchDeviceQueryParams: zod.ZodObject<{
-    size: zod.ZodOptional<zod.ZodNumber>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    q: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    access: zod.ZodOptional<zod.ZodString>;
-    account: zod.ZodOptional<zod.ZodString>;
-    hotdesk: zod.ZodOptional<zod.ZodString>;
-    userId: zod.ZodOptional<zod.ZodString>;
-    userName: zod.ZodOptional<zod.ZodString>;
-    mac: zod.ZodOptional<zod.ZodString>;
-    ip: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchDeviceResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const CreateDeviceBody: zod.ZodObject<{
-    account: zod.ZodOptional<zod.ZodString>;
-    brand: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    deletedAt: zod.ZodOptional<zod.ZodString>;
-    deletedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-    hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    ip: zod.ZodOptional<zod.ZodString>;
-    loggedIn: zod.ZodOptional<zod.ZodString>;
-    mac: zod.ZodOptional<zod.ZodString>;
-    model: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    password: zod.ZodOptional<zod.ZodString>;
-    provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    reged: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const CreateDeviceResponse: zod.ZodObject<{
-    device: zod.ZodOptional<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDevice2Params: zod.ZodObject<{
-    'device.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateDevice2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDevice2Body: zod.ZodObject<{
-    account: zod.ZodOptional<zod.ZodString>;
-    brand: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    deletedAt: zod.ZodOptional<zod.ZodString>;
-    deletedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-    hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ip: zod.ZodOptional<zod.ZodString>;
-    loggedIn: zod.ZodOptional<zod.ZodString>;
-    mac: zod.ZodOptional<zod.ZodString>;
-    model: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    password: zod.ZodOptional<zod.ZodString>;
-    provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    reged: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDevice2Response: zod.ZodObject<{
-    device: zod.ZodOptional<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDeviceParams: zod.ZodObject<{
-    'device.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateDeviceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDeviceBody: zod.ZodObject<{
-    account: zod.ZodOptional<zod.ZodString>;
-    brand: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    deletedAt: zod.ZodOptional<zod.ZodString>;
-    deletedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-    hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ip: zod.ZodOptional<zod.ZodString>;
-    loggedIn: zod.ZodOptional<zod.ZodString>;
-    mac: zod.ZodOptional<zod.ZodString>;
-    model: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    password: zod.ZodOptional<zod.ZodString>;
-    provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    reged: zod.ZodOptional<zod.ZodBoolean>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    user: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const UpdateDeviceResponse: zod.ZodObject<{
-    device: zod.ZodOptional<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ListRegistrationsParams: zod.ZodObject<{
-    'device.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ListRegistrationsQueryParams: zod.ZodObject<{
-    userId: zod.ZodOptional<zod.ZodString>;
-    userName: zod.ZodOptional<zod.ZodString>;
-    deviceName: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ListRegistrationsResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        callid: zod.ZodOptional<zod.ZodString>;
-        contact: zod.ZodOptional<zod.ZodString>;
-        device: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        expiresAt: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        instance: zod.ZodOptional<zod.ZodString>;
-        received: zod.ZodOptional<zod.ZodString>;
-        registerAt: zod.ZodOptional<zod.ZodString>;
-        socket: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        userAgent: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteDevice2Response: zod.ZodObject<
+	{
+		deleted: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						account: zod.ZodOptional<zod.ZodString>;
+						brand: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						deletedAt: zod.ZodOptional<zod.ZodString>;
+						deletedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+						hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						id: zod.ZodOptional<zod.ZodString>;
+						ip: zod.ZodOptional<zod.ZodString>;
+						loggedIn: zod.ZodOptional<zod.ZodString>;
+						mac: zod.ZodOptional<zod.ZodString>;
+						model: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						password: zod.ZodOptional<zod.ZodString>;
+						provision: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						reged: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchDeviceQueryParams: zod.ZodObject<
+	{
+		size: zod.ZodOptional<zod.ZodNumber>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		q: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		access: zod.ZodOptional<zod.ZodString>;
+		account: zod.ZodOptional<zod.ZodString>;
+		hotdesk: zod.ZodOptional<zod.ZodString>;
+		userId: zod.ZodOptional<zod.ZodString>;
+		userName: zod.ZodOptional<zod.ZodString>;
+		mac: zod.ZodOptional<zod.ZodString>;
+		ip: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchDeviceResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						account: zod.ZodOptional<zod.ZodString>;
+						brand: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						deletedAt: zod.ZodOptional<zod.ZodString>;
+						deletedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+						hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						id: zod.ZodOptional<zod.ZodString>;
+						ip: zod.ZodOptional<zod.ZodString>;
+						loggedIn: zod.ZodOptional<zod.ZodString>;
+						mac: zod.ZodOptional<zod.ZodString>;
+						model: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						password: zod.ZodOptional<zod.ZodString>;
+						provision: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						reged: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateDeviceBody: zod.ZodObject<
+	{
+		account: zod.ZodOptional<zod.ZodString>;
+		brand: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		deletedAt: zod.ZodOptional<zod.ZodString>;
+		deletedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+		hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodString>;
+		ip: zod.ZodOptional<zod.ZodString>;
+		loggedIn: zod.ZodOptional<zod.ZodString>;
+		mac: zod.ZodOptional<zod.ZodString>;
+		model: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		password: zod.ZodOptional<zod.ZodString>;
+		provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+		reged: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateDeviceResponse: zod.ZodObject<
+	{
+		device: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					account: zod.ZodOptional<zod.ZodString>;
+					brand: zod.ZodOptional<zod.ZodString>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					deletedAt: zod.ZodOptional<zod.ZodString>;
+					deletedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+					hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					id: zod.ZodOptional<zod.ZodString>;
+					ip: zod.ZodOptional<zod.ZodString>;
+					loggedIn: zod.ZodOptional<zod.ZodString>;
+					mac: zod.ZodOptional<zod.ZodString>;
+					model: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					password: zod.ZodOptional<zod.ZodString>;
+					provision: zod.ZodOptional<
+						zod.ZodRecord<zod.ZodString, zod.ZodString>
+					>;
+					reged: zod.ZodOptional<zod.ZodBoolean>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					user: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDevice2Params: zod.ZodObject<
+	{
+		'device.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDevice2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDevice2Body: zod.ZodObject<
+	{
+		account: zod.ZodOptional<zod.ZodString>;
+		brand: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		deletedAt: zod.ZodOptional<zod.ZodString>;
+		deletedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+		hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		ip: zod.ZodOptional<zod.ZodString>;
+		loggedIn: zod.ZodOptional<zod.ZodString>;
+		mac: zod.ZodOptional<zod.ZodString>;
+		model: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		password: zod.ZodOptional<zod.ZodString>;
+		provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+		reged: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDevice2Response: zod.ZodObject<
+	{
+		device: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					account: zod.ZodOptional<zod.ZodString>;
+					brand: zod.ZodOptional<zod.ZodString>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					deletedAt: zod.ZodOptional<zod.ZodString>;
+					deletedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+					hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					id: zod.ZodOptional<zod.ZodString>;
+					ip: zod.ZodOptional<zod.ZodString>;
+					loggedIn: zod.ZodOptional<zod.ZodString>;
+					mac: zod.ZodOptional<zod.ZodString>;
+					model: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					password: zod.ZodOptional<zod.ZodString>;
+					provision: zod.ZodOptional<
+						zod.ZodRecord<zod.ZodString, zod.ZodString>
+					>;
+					reged: zod.ZodOptional<zod.ZodBoolean>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					user: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDeviceParams: zod.ZodObject<
+	{
+		'device.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDeviceQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDeviceBody: zod.ZodObject<
+	{
+		account: zod.ZodOptional<zod.ZodString>;
+		brand: zod.ZodOptional<zod.ZodString>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		deletedAt: zod.ZodOptional<zod.ZodString>;
+		deletedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+		hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		ip: zod.ZodOptional<zod.ZodString>;
+		loggedIn: zod.ZodOptional<zod.ZodString>;
+		mac: zod.ZodOptional<zod.ZodString>;
+		model: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		password: zod.ZodOptional<zod.ZodString>;
+		provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+		reged: zod.ZodOptional<zod.ZodBoolean>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		user: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateDeviceResponse: zod.ZodObject<
+	{
+		device: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					account: zod.ZodOptional<zod.ZodString>;
+					brand: zod.ZodOptional<zod.ZodString>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					deletedAt: zod.ZodOptional<zod.ZodString>;
+					deletedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+					hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					id: zod.ZodOptional<zod.ZodString>;
+					ip: zod.ZodOptional<zod.ZodString>;
+					loggedIn: zod.ZodOptional<zod.ZodString>;
+					mac: zod.ZodOptional<zod.ZodString>;
+					model: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					password: zod.ZodOptional<zod.ZodString>;
+					provision: zod.ZodOptional<
+						zod.ZodRecord<zod.ZodString, zod.ZodString>
+					>;
+					reged: zod.ZodOptional<zod.ZodBoolean>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					user: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListRegistrationsParams: zod.ZodObject<
+	{
+		'device.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListRegistrationsQueryParams: zod.ZodObject<
+	{
+		userId: zod.ZodOptional<zod.ZodString>;
+		userName: zod.ZodOptional<zod.ZodString>;
+		deviceName: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListRegistrationsResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						callid: zod.ZodOptional<zod.ZodString>;
+						contact: zod.ZodOptional<zod.ZodString>;
+						device: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						expiresAt: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						instance: zod.ZodOptional<zod.ZodString>;
+						received: zod.ZodOptional<zod.ZodString>;
+						registerAt: zod.ZodOptional<zod.ZodString>;
+						socket: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						userAgent: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary ----- Details (1:M) ----------------------------------------------
  */
-export declare const SearchDeviceAuditParams: zod.ZodObject<{
-    'device.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchDeviceAuditQueryParams: zod.ZodObject<{
-    userId: zod.ZodOptional<zod.ZodString>;
-    userName: zod.ZodOptional<zod.ZodString>;
-    deviceName: zod.ZodOptional<zod.ZodString>;
-    timeFrom: zod.ZodOptional<zod.ZodString>;
-    timeTill: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const SearchDeviceAuditResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        device: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        loggedOut: zod.ZodOptional<zod.ZodString>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const DeleteDeviceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteDeviceQueryParams: zod.ZodObject<{
-    permanent: zod.ZodOptional<zod.ZodBoolean>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteDeviceResponse: zod.ZodObject<{
-    deleted: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const ReadDeviceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadDeviceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ReadDeviceResponse: zod.ZodObject<{
-    device: zod.ZodOptional<zod.ZodObject<{
-        account: zod.ZodOptional<zod.ZodString>;
-        brand: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        deletedAt: zod.ZodOptional<zod.ZodString>;
-        deletedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        hotdesk: zod.ZodOptional<zod.ZodBoolean>;
-        hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        ip: zod.ZodOptional<zod.ZodString>;
-        loggedIn: zod.ZodOptional<zod.ZodString>;
-        mac: zod.ZodOptional<zod.ZodString>;
-        model: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        password: zod.ZodOptional<zod.ZodString>;
-        provision: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-        reged: zod.ZodOptional<zod.ZodBoolean>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        user: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const SearchDeviceAuditParams: zod.ZodObject<
+	{
+		'device.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchDeviceAuditQueryParams: zod.ZodObject<
+	{
+		userId: zod.ZodOptional<zod.ZodString>;
+		userName: zod.ZodOptional<zod.ZodString>;
+		deviceName: zod.ZodOptional<zod.ZodString>;
+		timeFrom: zod.ZodOptional<zod.ZodString>;
+		timeTill: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchDeviceAuditResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						device: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hotdesk: zod.ZodOptional<zod.ZodString>;
+						loggedIn: zod.ZodOptional<zod.ZodString>;
+						loggedOut: zod.ZodOptional<zod.ZodString>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteDeviceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteDeviceQueryParams: zod.ZodObject<
+	{
+		permanent: zod.ZodOptional<zod.ZodBoolean>;
+		ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteDeviceResponse: zod.ZodObject<
+	{
+		deleted: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						account: zod.ZodOptional<zod.ZodString>;
+						brand: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						deletedAt: zod.ZodOptional<zod.ZodString>;
+						deletedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+						hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						id: zod.ZodOptional<zod.ZodString>;
+						ip: zod.ZodOptional<zod.ZodString>;
+						loggedIn: zod.ZodOptional<zod.ZodString>;
+						mac: zod.ZodOptional<zod.ZodString>;
+						model: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						password: zod.ZodOptional<zod.ZodString>;
+						provision: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+						reged: zod.ZodOptional<zod.ZodBoolean>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						user: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadDeviceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadDeviceQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadDeviceResponse: zod.ZodObject<
+	{
+		device: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					account: zod.ZodOptional<zod.ZodString>;
+					brand: zod.ZodOptional<zod.ZodString>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					deletedAt: zod.ZodOptional<zod.ZodString>;
+					deletedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					hotdesk: zod.ZodOptional<zod.ZodBoolean>;
+					hotdesks: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+					id: zod.ZodOptional<zod.ZodString>;
+					ip: zod.ZodOptional<zod.ZodString>;
+					loggedIn: zod.ZodOptional<zod.ZodString>;
+					mac: zod.ZodOptional<zod.ZodString>;
+					model: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					password: zod.ZodOptional<zod.ZodString>;
+					provision: zod.ZodOptional<
+						zod.ZodRecord<zod.ZodString, zod.ZodString>
+					>;
+					reged: zod.ZodOptional<zod.ZodBoolean>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					user: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

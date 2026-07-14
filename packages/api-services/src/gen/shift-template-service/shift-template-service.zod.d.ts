@@ -5,161 +5,331 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const ShiftTemplateServiceSearchShiftTemplateQueryParams: zod.ZodObject<{
-    q: zod.ZodOptional<zod.ZodString>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceSearchShiftTemplateResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceCreateShiftTemplateBody: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceCreateShiftTemplateResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceDeleteShiftTemplateParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceDeleteShiftTemplateResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceReadShiftTemplateParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceReadShiftTemplateQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceReadShiftTemplateResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ShiftTemplateServiceSearchShiftTemplateQueryParams: zod.ZodObject<
+	{
+		q: zod.ZodOptional<zod.ZodString>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceSearchShiftTemplateResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						times: zod.ZodOptional<
+							zod.ZodArray<
+								zod.ZodObject<
+									{
+										end: zod.ZodOptional<zod.ZodNumber>;
+										start: zod.ZodOptional<zod.ZodNumber>;
+									},
+									zod.z.core.$strip
+								>
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceCreateShiftTemplateBody: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					times: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									end: zod.ZodOptional<zod.ZodNumber>;
+									start: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceCreateShiftTemplateResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					times: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									end: zod.ZodOptional<zod.ZodNumber>;
+									start: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceDeleteShiftTemplateParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceDeleteShiftTemplateResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceReadShiftTemplateParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceReadShiftTemplateQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceReadShiftTemplateResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					times: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									end: zod.ZodOptional<zod.ZodNumber>;
+									start: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary UpdateShiftTemplate updates a shift template with a list times.
 Update existing time, create that not exists in database and delete that not exists in the list.
  */
-export declare const ShiftTemplateServiceUpdateShiftTemplateParams: zod.ZodObject<{
-    'item.id': zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceUpdateShiftTemplateBody: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
-export declare const ShiftTemplateServiceUpdateShiftTemplateResponse: zod.ZodObject<{
-    item: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        times: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            end: zod.ZodOptional<zod.ZodNumber>;
-            start: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.z.core.$strip>>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const ShiftTemplateServiceUpdateShiftTemplateParams: zod.ZodObject<
+	{
+		'item.id': zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceUpdateShiftTemplateBody: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					times: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									end: zod.ZodOptional<zod.ZodNumber>;
+									start: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ShiftTemplateServiceUpdateShiftTemplateResponse: zod.ZodObject<
+	{
+		item: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					description: zod.ZodOptional<zod.ZodString>;
+					domainId: zod.ZodOptional<zod.ZodString>;
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					times: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									end: zod.ZodOptional<zod.ZodNumber>;
+									start: zod.ZodOptional<zod.ZodNumber>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

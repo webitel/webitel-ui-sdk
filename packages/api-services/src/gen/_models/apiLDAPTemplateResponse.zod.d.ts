@@ -6,7 +6,7 @@
  */
 import type { ApiLDAPTemplate } from './apiLDAPTemplate.zod';
 export interface ApiLDAPTemplateResponse {
-    items?: ApiLDAPTemplate[];
-    next?: boolean;
-    page?: number;
+	items?: ApiLDAPTemplate[];
+	next?: boolean;
+	page?: number;
 }

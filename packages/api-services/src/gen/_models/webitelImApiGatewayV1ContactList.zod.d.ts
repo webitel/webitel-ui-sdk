@@ -9,12 +9,12 @@ import type { WebitelImApiGatewayV1Contact } from './webitelImApiGatewayV1Contac
  * SearchList represents a paginated collection of Contact entities.
  */
 export interface WebitelImApiGatewayV1ContactList {
-    /** List of contacts found. */
-    items?: WebitelImApiGatewayV1Contact[];
-    /** Indicates if there are more pages available. */
-    next?: boolean;
-    /** Current page number. */
-    page?: number;
-    /** Number of items returned in this batch. */
-    size?: number;
+	/** List of contacts found. */
+	items?: WebitelImApiGatewayV1Contact[];
+	/** Indicates if there are more pages available. */
+	next?: boolean;
+	/** Current page number. */
+	page?: number;
+	/** Number of items returned in this batch. */
+	size?: number;
 }

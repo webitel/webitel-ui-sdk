@@ -9,9 +9,9 @@ import type { WebitelImApiGatewayV1DocumentInput } from './webitelImApiGatewayV1
  * Media container for documents attachments.
  */
 export interface WebitelImApiGatewayV1Documents {
-    /**
-     * Documents to be attached to the header of interactive message.
-     * Max allowed documents: 10.
-     */
-    documents?: WebitelImApiGatewayV1DocumentInput[];
+	/**
+	 * Documents to be attached to the header of interactive message.
+	 * Max allowed documents: 10.
+	 */
+	documents?: WebitelImApiGatewayV1DocumentInput[];
 }

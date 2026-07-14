@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchCommentsMode = (typeof SearchCommentsMode)[keyof typeof SearchCommentsMode];
+export type SearchCommentsMode =
+	(typeof SearchCommentsMode)[keyof typeof SearchCommentsMode];
 export declare const SearchCommentsMode: {
-    readonly Read: "READ";
-    readonly Write: "WRITE";
-    readonly Delete: "DELETE";
+	readonly Read: 'READ';
+	readonly Write: 'WRITE';
+	readonly Delete: 'DELETE';
 };

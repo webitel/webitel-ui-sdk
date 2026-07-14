@@ -8,14 +8,27 @@ import * as zod from 'zod';
 /**
  * @summary List of the all Articles's Tag(s).
  */
-export declare const ListTagsQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const ListTagsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ListTagsQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListTagsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						name: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

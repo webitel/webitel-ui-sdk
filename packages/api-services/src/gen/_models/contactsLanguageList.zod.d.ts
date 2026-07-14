@@ -11,9 +11,9 @@ import type { ContactsLanguage } from './contactsLanguage.zod';
  * So this ContactLabels.data are always subordinate to some contact.id.
  */
 export interface ContactsLanguageList {
-    /** Page of the Contact's Language(s) dataset. */
-    data?: ContactsLanguage[];
-    next?: boolean;
-    /** Page number of partial result dataset records. */
-    page?: number;
+	/** Page of the Contact's Language(s) dataset. */
+	data?: ContactsLanguage[];
+	next?: boolean;
+	/** Page number of partial result dataset records. */
+	page?: number;
 }

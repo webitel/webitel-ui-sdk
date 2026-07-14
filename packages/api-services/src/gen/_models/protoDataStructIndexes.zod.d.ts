@@ -11,5 +11,5 @@ import type { DataIndex } from './dataIndex.zod';
  * Extension extension = 15;
  */
 export type ProtoDataStructIndexes = {
-    [key: string]: DataIndex;
+	[key: string]: DataIndex;
 };

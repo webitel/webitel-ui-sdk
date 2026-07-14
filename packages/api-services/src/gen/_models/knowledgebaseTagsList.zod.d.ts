@@ -6,7 +6,7 @@
  */
 import type { WebitelKnowledgebaseTag } from './webitelKnowledgebaseTag.zod';
 export interface KnowledgebaseTagsList {
-    data?: WebitelKnowledgebaseTag[];
-    next?: boolean;
-    page?: number;
+	data?: WebitelKnowledgebaseTag[];
+	next?: boolean;
+	page?: number;
 }

@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdatePhotoInputBody = {
-    photo_id?: string;
-    photo_url?: string;
-    /** True if the photo is a default photo; false if the photo is a user-provided photo. */
-    primary?: boolean;
+	photo_id?: string;
+	photo_url?: string;
+	/** True if the photo is a default photo; false if the photo is a user-provided photo. */
+	primary?: boolean;
 };

@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteUserAccessTokenParams = {
-    /**
-     * display name
-     */
-    userName?: string;
+	/**
+	 * display name
+	 */
+	userName?: string;
 };

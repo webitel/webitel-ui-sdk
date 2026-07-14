@@ -6,5 +6,5 @@
  */
 import type { LoggerLookup } from './loggerLookup.zod';
 export interface LoggerSystemObjects {
-    items?: LoggerLookup[];
+	items?: LoggerLookup[];
 }

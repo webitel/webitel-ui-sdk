@@ -6,6 +6,6 @@
  */
 import type { EngineListCommunication } from './engineListCommunication.zod';
 export interface EngineListOfListCommunication {
-    items?: EngineListCommunication[];
-    next?: boolean;
+	items?: EngineListCommunication[];
+	next?: boolean;
 }

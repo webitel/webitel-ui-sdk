@@ -6,8 +6,8 @@
  */
 import type { ApiRegistration } from './apiRegistration.zod';
 export interface ApiListRegistrationsResponse {
-    items?: ApiRegistration[];
-    next?: boolean;
-    page?: number;
-    size?: number;
+	items?: ApiRegistration[];
+	next?: boolean;
+	page?: number;
+	size?: number;
 }

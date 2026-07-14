@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineOutboundResourceServiceUpdateOutboundResourceDisplayBody {
-    display?: string;
-    domainId?: string;
+	display?: string;
+	domainId?: string;
 }

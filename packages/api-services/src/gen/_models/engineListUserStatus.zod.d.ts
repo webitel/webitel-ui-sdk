@@ -6,6 +6,6 @@
  */
 import type { EngineUserStatus } from './engineUserStatus.zod';
 export interface EngineListUserStatus {
-    items?: EngineUserStatus[];
-    next?: boolean;
+	items?: EngineUserStatus[];
+	next?: boolean;
 }

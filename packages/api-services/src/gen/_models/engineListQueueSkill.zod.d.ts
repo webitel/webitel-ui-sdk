@@ -6,6 +6,6 @@
  */
 import type { EngineQueueSkill } from './engineQueueSkill.zod';
 export interface EngineListQueueSkill {
-    items?: EngineQueueSkill[];
-    next?: boolean;
+	items?: EngineQueueSkill[];
+	next?: boolean;
 }

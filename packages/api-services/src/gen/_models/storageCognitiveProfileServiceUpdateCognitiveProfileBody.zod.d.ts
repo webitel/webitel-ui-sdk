@@ -7,10 +7,10 @@
 import type { StorageProviderType } from './storageProviderType.zod';
 import type { StorageServiceType } from './storageServiceType.zod';
 export interface StorageCognitiveProfileServiceUpdateCognitiveProfileBody {
-    default?: boolean;
-    description?: string;
-    enabled?: boolean;
-    name?: string;
-    provider?: StorageProviderType;
-    service?: StorageServiceType;
+	default?: boolean;
+	description?: string;
+	enabled?: boolean;
+	name?: string;
+	provider?: StorageProviderType;
+	service?: StorageServiceType;
 }

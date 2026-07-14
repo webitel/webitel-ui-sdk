@@ -6,11 +6,11 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQueueSkillServicePatchQueueSkillBody {
-    buckets?: EngineLookup[];
-    enabled?: boolean;
-    fields?: string[];
-    lvl?: number;
-    maxCapacity?: number;
-    minCapacity?: number;
-    skill?: EngineLookup;
+	buckets?: EngineLookup[];
+	enabled?: boolean;
+	fields?: string[];
+	lvl?: number;
+	maxCapacity?: number;
+	minCapacity?: number;
+	skill?: EngineLookup;
 }

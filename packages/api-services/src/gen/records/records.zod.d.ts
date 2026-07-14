@@ -8,378 +8,694 @@ import * as zod from 'zod';
 /**
  * @summary Delete dataset records
  */
-export declare const _DeleteParams: zod.ZodObject<{
-    repo: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const _DeleteQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodArray<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const _deleteResponseTypeFieldsItemKindDefault = "none";
-export declare const _DeleteResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{}, zod.z.core.$loose>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        about: zod.ZodOptional<zod.ZodString>;
-        administered: zod.ZodOptional<zod.ZodBoolean>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        display: zod.ZodOptional<zod.ZodString>;
-        extendable: zod.ZodOptional<zod.ZodBoolean>;
-        fields: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            always: zod.ZodOptional<zod.ZodUnknown>;
-            binary: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            bool: zod.ZodOptional<zod.ZodObject<{}, zod.z.core.$loose>>;
-            datetime: zod.ZodOptional<zod.ZodObject<{
-                epoch: zod.ZodOptional<zod.ZodNumber>;
-                format: zod.ZodOptional<zod.ZodString>;
-                zone: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            default: zod.ZodOptional<zod.ZodUnknown>;
-            disabled: zod.ZodOptional<zod.ZodBoolean>;
-            duration: zod.ZodOptional<zod.ZodObject<{
-                format: zod.ZodOptional<zod.ZodString>;
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float32: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float64: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            hidden: zod.ZodOptional<zod.ZodBoolean>;
-            hint: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            int: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            int32: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            int64: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            kind: zod.ZodDefault<zod.ZodEnum<{
-                string: "string";
-                lookup: "lookup";
-                duration: "duration";
-                datetime: "datetime";
-                bool: "bool";
-                int32: "int32";
-                list: "list";
-                none: "none";
-                binary: "binary";
-                int: "int";
-                int64: "int64";
-                uint: "uint";
-                uint32: "uint32";
-                uint64: "uint64";
-                float: "float";
-                float32: "float32";
-                float64: "float64";
-                richtext: "richtext";
-            }>>;
-            lookup: zod.ZodOptional<zod.ZodObject<{
-                display: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                path: zod.ZodOptional<zod.ZodString>;
-                primary: zod.ZodOptional<zod.ZodString>;
-                query: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            name: zod.ZodOptional<zod.ZodString>;
-            readonly: zod.ZodOptional<zod.ZodBoolean>;
-            required: zod.ZodOptional<zod.ZodBoolean>;
-            richtext: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                maxChars: zod.ZodOptional<zod.ZodNumber>;
-                multiline: zod.ZodOptional<zod.ZodBoolean>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            string: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                maxChars: zod.ZodOptional<zod.ZodNumber>;
-                multiline: zod.ZodOptional<zod.ZodBoolean>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint32: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint64: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        indexes: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodObject<{
-            fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            include: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            unique: zod.ZodOptional<zod.ZodBoolean>;
-        }, zod.z.core.$strip>>>;
-        name: zod.ZodOptional<zod.ZodString>;
-        objclass: zod.ZodOptional<zod.ZodString>;
-        path: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodString>;
-        readonly: zod.ZodOptional<zod.ZodBoolean>;
-        repo: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const _DeleteParams: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const _DeleteQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodArray<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const _deleteResponseTypeFieldsItemKindDefault = 'none';
+export declare const _DeleteResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{}, zod.z.core.$loose>>>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					about: zod.ZodOptional<zod.ZodString>;
+					administered: zod.ZodOptional<zod.ZodBoolean>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+								type: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					display: zod.ZodOptional<zod.ZodString>;
+					extendable: zod.ZodOptional<zod.ZodBoolean>;
+					fields: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									always: zod.ZodOptional<zod.ZodUnknown>;
+									binary: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									bool: zod.ZodOptional<zod.ZodObject<{}, zod.z.core.$loose>>;
+									datetime: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												epoch: zod.ZodOptional<zod.ZodNumber>;
+												format: zod.ZodOptional<zod.ZodString>;
+												zone: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									default: zod.ZodOptional<zod.ZodUnknown>;
+									disabled: zod.ZodOptional<zod.ZodBoolean>;
+									duration: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												format: zod.ZodOptional<zod.ZodString>;
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									hidden: zod.ZodOptional<zod.ZodBoolean>;
+									hint: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodOptional<zod.ZodString>;
+									int: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									int32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									int64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									kind: zod.ZodDefault<
+										zod.ZodEnum<{
+											string: 'string';
+											lookup: 'lookup';
+											duration: 'duration';
+											datetime: 'datetime';
+											bool: 'bool';
+											int32: 'int32';
+											list: 'list';
+											none: 'none';
+											binary: 'binary';
+											int: 'int';
+											int64: 'int64';
+											uint: 'uint';
+											uint32: 'uint32';
+											uint64: 'uint64';
+											float: 'float';
+											float32: 'float32';
+											float64: 'float64';
+											richtext: 'richtext';
+										}>
+									>;
+									lookup: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												display: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												path: zod.ZodOptional<zod.ZodString>;
+												primary: zod.ZodOptional<zod.ZodString>;
+												query: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									name: zod.ZodOptional<zod.ZodString>;
+									readonly: zod.ZodOptional<zod.ZodBoolean>;
+									required: zod.ZodOptional<zod.ZodBoolean>;
+									richtext: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												maxChars: zod.ZodOptional<zod.ZodNumber>;
+												multiline: zod.ZodOptional<zod.ZodBoolean>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									string: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												maxChars: zod.ZodOptional<zod.ZodNumber>;
+												multiline: zod.ZodOptional<zod.ZodBoolean>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					id: zod.ZodOptional<zod.ZodString>;
+					indexes: zod.ZodOptional<
+						zod.ZodRecord<
+							zod.ZodString,
+							zod.ZodObject<
+								{
+									fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+									include: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+									unique: zod.ZodOptional<zod.ZodBoolean>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					name: zod.ZodOptional<zod.ZodString>;
+					objclass: zod.ZodOptional<zod.ZodString>;
+					path: zod.ZodOptional<zod.ZodString>;
+					primary: zod.ZodOptional<zod.ZodString>;
+					readonly: zod.ZodOptional<zod.ZodBoolean>;
+					repo: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+								type: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Search dataset records
  */
-export declare const SearchRecordsParams: zod.ZodObject<{
-    repo: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const searchRecordsQuerySortItemDefault = "*";
+export declare const SearchRecordsParams: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchRecordsQuerySortItemDefault = '*';
 export declare const searchRecordsQuerySortItemRegExp: RegExp;
-export declare const searchRecordsQueryFieldsItemDefault = "*";
-export declare const SearchRecordsQueryParams: zod.ZodObject<{
-    size: zod.ZodOptional<zod.ZodNumber>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
-    q: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    filters: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const searchRecordsResponseTypeFieldsItemKindDefault = "none";
-export declare const SearchRecordsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{}, zod.z.core.$loose>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        about: zod.ZodOptional<zod.ZodString>;
-        administered: zod.ZodOptional<zod.ZodBoolean>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        display: zod.ZodOptional<zod.ZodString>;
-        extendable: zod.ZodOptional<zod.ZodBoolean>;
-        fields: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            always: zod.ZodOptional<zod.ZodUnknown>;
-            binary: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            bool: zod.ZodOptional<zod.ZodObject<{}, zod.z.core.$loose>>;
-            datetime: zod.ZodOptional<zod.ZodObject<{
-                epoch: zod.ZodOptional<zod.ZodNumber>;
-                format: zod.ZodOptional<zod.ZodString>;
-                zone: zod.ZodOptional<zod.ZodString>;
-            }, zod.z.core.$strip>>;
-            default: zod.ZodOptional<zod.ZodUnknown>;
-            disabled: zod.ZodOptional<zod.ZodBoolean>;
-            duration: zod.ZodOptional<zod.ZodObject<{
-                format: zod.ZodOptional<zod.ZodString>;
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float32: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            float64: zod.ZodOptional<zod.ZodObject<{
-                frac: zod.ZodOptional<zod.ZodNumber>;
-                max: zod.ZodOptional<zod.ZodNumber>;
-                min: zod.ZodOptional<zod.ZodNumber>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            hidden: zod.ZodOptional<zod.ZodBoolean>;
-            hint: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            int: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            int32: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            int64: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            kind: zod.ZodDefault<zod.ZodEnum<{
-                string: "string";
-                lookup: "lookup";
-                duration: "duration";
-                datetime: "datetime";
-                bool: "bool";
-                int32: "int32";
-                list: "list";
-                none: "none";
-                binary: "binary";
-                int: "int";
-                int64: "int64";
-                uint: "uint";
-                uint32: "uint32";
-                uint64: "uint64";
-                float: "float";
-                float32: "float32";
-                float64: "float64";
-                richtext: "richtext";
-            }>>;
-            lookup: zod.ZodOptional<zod.ZodObject<{
-                display: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                path: zod.ZodOptional<zod.ZodString>;
-                primary: zod.ZodOptional<zod.ZodString>;
-                query: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            name: zod.ZodOptional<zod.ZodString>;
-            readonly: zod.ZodOptional<zod.ZodBoolean>;
-            required: zod.ZodOptional<zod.ZodBoolean>;
-            richtext: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                maxChars: zod.ZodOptional<zod.ZodNumber>;
-                multiline: zod.ZodOptional<zod.ZodBoolean>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            string: zod.ZodOptional<zod.ZodObject<{
-                maxBytes: zod.ZodOptional<zod.ZodNumber>;
-                maxChars: zod.ZodOptional<zod.ZodNumber>;
-                multiline: zod.ZodOptional<zod.ZodBoolean>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint32: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-            uint64: zod.ZodOptional<zod.ZodObject<{
-                max: zod.ZodOptional<zod.ZodString>;
-                min: zod.ZodOptional<zod.ZodString>;
-                violation: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-            }, zod.z.core.$strip>>;
-        }, zod.z.core.$strip>>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        indexes: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodObject<{
-            fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            include: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            unique: zod.ZodOptional<zod.ZodBoolean>;
-        }, zod.z.core.$strip>>>;
-        name: zod.ZodOptional<zod.ZodString>;
-        objclass: zod.ZodOptional<zod.ZodString>;
-        path: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodString>;
-        readonly: zod.ZodOptional<zod.ZodBoolean>;
-        repo: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const searchRecordsQueryFieldsItemDefault = '*';
+export declare const SearchRecordsQueryParams: zod.ZodObject<
+	{
+		size: zod.ZodOptional<zod.ZodNumber>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
+		q: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		filters: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchRecordsResponseTypeFieldsItemKindDefault = 'none';
+export declare const SearchRecordsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{}, zod.z.core.$loose>>>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					about: zod.ZodOptional<zod.ZodString>;
+					administered: zod.ZodOptional<zod.ZodBoolean>;
+					createdAt: zod.ZodOptional<zod.ZodString>;
+					createdBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+								type: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+					display: zod.ZodOptional<zod.ZodString>;
+					extendable: zod.ZodOptional<zod.ZodBoolean>;
+					fields: zod.ZodOptional<
+						zod.ZodArray<
+							zod.ZodObject<
+								{
+									always: zod.ZodOptional<zod.ZodUnknown>;
+									binary: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									bool: zod.ZodOptional<zod.ZodObject<{}, zod.z.core.$loose>>;
+									datetime: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												epoch: zod.ZodOptional<zod.ZodNumber>;
+												format: zod.ZodOptional<zod.ZodString>;
+												zone: zod.ZodOptional<zod.ZodString>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									default: zod.ZodOptional<zod.ZodUnknown>;
+									disabled: zod.ZodOptional<zod.ZodBoolean>;
+									duration: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												format: zod.ZodOptional<zod.ZodString>;
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									float64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												frac: zod.ZodOptional<zod.ZodNumber>;
+												max: zod.ZodOptional<zod.ZodNumber>;
+												min: zod.ZodOptional<zod.ZodNumber>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									hidden: zod.ZodOptional<zod.ZodBoolean>;
+									hint: zod.ZodOptional<zod.ZodString>;
+									id: zod.ZodOptional<zod.ZodString>;
+									int: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									int32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									int64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									kind: zod.ZodDefault<
+										zod.ZodEnum<{
+											string: 'string';
+											lookup: 'lookup';
+											duration: 'duration';
+											datetime: 'datetime';
+											bool: 'bool';
+											int32: 'int32';
+											list: 'list';
+											none: 'none';
+											binary: 'binary';
+											int: 'int';
+											int64: 'int64';
+											uint: 'uint';
+											uint32: 'uint32';
+											uint64: 'uint64';
+											float: 'float';
+											float32: 'float32';
+											float64: 'float64';
+											richtext: 'richtext';
+										}>
+									>;
+									lookup: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												display: zod.ZodOptional<zod.ZodString>;
+												name: zod.ZodOptional<zod.ZodString>;
+												path: zod.ZodOptional<zod.ZodString>;
+												primary: zod.ZodOptional<zod.ZodString>;
+												query: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									name: zod.ZodOptional<zod.ZodString>;
+									readonly: zod.ZodOptional<zod.ZodBoolean>;
+									required: zod.ZodOptional<zod.ZodBoolean>;
+									richtext: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												maxChars: zod.ZodOptional<zod.ZodNumber>;
+												multiline: zod.ZodOptional<zod.ZodBoolean>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									string: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												maxBytes: zod.ZodOptional<zod.ZodNumber>;
+												maxChars: zod.ZodOptional<zod.ZodNumber>;
+												multiline: zod.ZodOptional<zod.ZodBoolean>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint32: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+									uint64: zod.ZodOptional<
+										zod.ZodObject<
+											{
+												max: zod.ZodOptional<zod.ZodString>;
+												min: zod.ZodOptional<zod.ZodString>;
+												violation: zod.ZodOptional<
+													zod.ZodRecord<zod.ZodString, zod.ZodString>
+												>;
+											},
+											zod.z.core.$strip
+										>
+									>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					id: zod.ZodOptional<zod.ZodString>;
+					indexes: zod.ZodOptional<
+						zod.ZodRecord<
+							zod.ZodString,
+							zod.ZodObject<
+								{
+									fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+									include: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+									unique: zod.ZodOptional<zod.ZodBoolean>;
+								},
+								zod.z.core.$strip
+							>
+						>
+					>;
+					name: zod.ZodOptional<zod.ZodString>;
+					objclass: zod.ZodOptional<zod.ZodString>;
+					path: zod.ZodOptional<zod.ZodString>;
+					primary: zod.ZodOptional<zod.ZodString>;
+					readonly: zod.ZodOptional<zod.ZodBoolean>;
+					repo: zod.ZodOptional<zod.ZodString>;
+					updatedAt: zod.ZodOptional<zod.ZodString>;
+					updatedBy: zod.ZodOptional<
+						zod.ZodObject<
+							{
+								id: zod.ZodOptional<zod.ZodString>;
+								name: zod.ZodOptional<zod.ZodString>;
+								type: zod.ZodOptional<zod.ZodString>;
+							},
+							zod.z.core.$strip
+						>
+					>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * (Record) {
  * @summary Create dataset record
  */
-export declare const CreateParams: zod.ZodObject<{
-    repo: zod.ZodString;
-}, zod.z.core.$strip>;
+export declare const CreateParams: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
 export declare const CreateBody: zod.ZodObject<{}, zod.z.core.$loose>;
 export declare const CreateResponse: zod.ZodObject<{}, zod.z.core.$loose>;
 /**
  * (Record) {
  * @summary Locate dataset record
  */
-export declare const LocateRecordsParams: zod.ZodObject<{
-    repo: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const locateRecordsQueryFieldsItemDefault = "*";
-export declare const LocateRecordsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
-}, zod.z.core.$strip>;
-export declare const LocateRecordsResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const LocateRecordsParams: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const locateRecordsQueryFieldsItemDefault = '*';
+export declare const LocateRecordsQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodDefault<zod.ZodString>>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateRecordsResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;
 /**
  * (Record) {
  * @summary Update dataset record
  */
-export declare const UpdateParams: zod.ZodObject<{
-    repo: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const UpdateParams: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 export declare const UpdateBody: zod.ZodObject<{}, zod.z.core.$loose>;
 export declare const UpdateResponse: zod.ZodObject<{}, zod.z.core.$loose>;
 /**
  * (Record) {
  * @summary Update dataset record
  */
-export declare const Update2Params: zod.ZodObject<{
-    repo: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const Update2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const Update2Params: zod.ZodObject<
+	{
+		repo: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const Update2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 export declare const Update2Body: zod.ZodObject<{}, zod.z.core.$loose>;
 export declare const Update2Response: zod.ZodObject<{}, zod.z.core.$loose>;

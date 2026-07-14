@@ -8,4 +8,5 @@ import type { WebitelImApiGatewayV1PUSHSubscription } from './webitelImApiGatewa
 /**
  * PUSH Notification subscription
  */
-export type WebitelImApiGatewayV1PUSHSubscriptionBody = WebitelImApiGatewayV1PUSHSubscription;
+export type WebitelImApiGatewayV1PUSHSubscriptionBody =
+	WebitelImApiGatewayV1PUSHSubscription;

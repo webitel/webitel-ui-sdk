@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAggregateRequestGroup {
-    aggregate?: string;
-    desc?: boolean;
-    field?: string;
-    id?: string;
-    interval?: string;
-    top?: number;
+	aggregate?: string;
+	desc?: boolean;
+	field?: string;
+	id?: string;
+	interval?: string;
+	top?: number;
 }

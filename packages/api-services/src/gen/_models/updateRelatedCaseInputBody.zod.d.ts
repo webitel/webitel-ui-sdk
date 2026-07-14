@@ -8,12 +8,12 @@ import type { GeneralLookup } from './generalLookup.zod';
 import type { UpdateRelatedCaseInputBodyPrimaryCase } from './updateRelatedCaseInputBodyPrimaryCase.zod';
 import type { WebitelCasesRelationType } from './webitelCasesRelationType.zod';
 export type UpdateRelatedCaseInputBody = {
-    /** Primary case details. */
-    primary_case?: UpdateRelatedCaseInputBodyPrimaryCase;
-    /** Related case details. */
-    related_case?: GeneralLookup;
-    /** Relation type. */
-    relation_type?: WebitelCasesRelationType;
-    /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-    userID?: GeneralLookup;
+	/** Primary case details. */
+	primary_case?: UpdateRelatedCaseInputBodyPrimaryCase;
+	/** Related case details. */
+	related_case?: GeneralLookup;
+	/** Relation type. */
+	relation_type?: WebitelCasesRelationType;
+	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+	userID?: GeneralLookup;
 };

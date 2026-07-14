@@ -7,6 +7,6 @@
 import type { WfmAgentSchedule } from './wfmAgentSchedule.zod';
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 export interface WfmAgentWorkingSchedule {
-    agent?: WfmLookupEntity;
-    schedule?: WfmAgentSchedule[];
+	agent?: WfmLookupEntity;
+	schedule?: WfmAgentSchedule[];
 }

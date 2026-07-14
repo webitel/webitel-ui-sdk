@@ -5,24 +5,24 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchMembersParams = {
-    page?: number;
-    size?: number;
-    q?: string;
-    sort?: string;
-    fields?: string[];
-    id?: string[];
-    queueId?: number[];
-    bucketId?: number[];
-    destination?: string;
-    createdAtFrom?: string;
-    createdAtTo?: string;
-    offeringAtFrom?: string;
-    offeringAtTo?: string;
-    stopCause?: string[];
-    priorityFrom?: string;
-    priorityTo?: string;
-    name?: string;
-    attemptsFrom?: string;
-    attemptsTo?: string;
-    agentId?: number[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	id?: string[];
+	queueId?: number[];
+	bucketId?: number[];
+	destination?: string;
+	createdAtFrom?: string;
+	createdAtTo?: string;
+	offeringAtFrom?: string;
+	offeringAtTo?: string;
+	stopCause?: string[];
+	priorityFrom?: string;
+	priorityTo?: string;
+	name?: string;
+	attemptsFrom?: string;
+	attemptsTo?: string;
+	agentId?: number[];
 };

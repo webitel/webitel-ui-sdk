@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EnginePresetQueryServicePatchPresetQueryBody {
-    description?: string;
-    fields?: string[];
-    name?: string;
-    section?: string;
+	description?: string;
+	fields?: string[];
+	name?: string;
+	section?: string;
 }

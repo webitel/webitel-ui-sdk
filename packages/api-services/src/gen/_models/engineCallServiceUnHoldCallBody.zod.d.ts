@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCallServiceUnHoldCallBody {
-    appId?: string;
-    domainId?: string;
+	appId?: string;
+	domainId?: string;
 }

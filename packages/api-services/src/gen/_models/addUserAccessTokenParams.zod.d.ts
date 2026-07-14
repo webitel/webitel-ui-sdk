@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type AddUserAccessTokenParams = {
-    /**
-     * ObjectId user = 1; // [required]
-     *  string usage = 2;  // [optional] usage description
-     *  bool enable = 3;
-     */
-    enable?: boolean;
+	/**
+	 * ObjectId user = 1; // [required]
+	 *  string usage = 2;  // [optional] usage description
+	 *  bool enable = 3;
+	 */
+	enable?: boolean;
 };

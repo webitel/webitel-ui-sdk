@@ -6,6 +6,6 @@
  */
 import type { EngineQueueResourceGroup } from './engineQueueResourceGroup.zod';
 export interface EngineListQueueResourceGroup {
-    items?: EngineQueueResourceGroup[];
-    next?: boolean;
+	items?: EngineQueueResourceGroup[];
+	next?: boolean;
 }

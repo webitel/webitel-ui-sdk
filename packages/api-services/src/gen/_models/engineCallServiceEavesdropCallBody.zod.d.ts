@@ -6,11 +6,11 @@
  */
 import type { EngineEavesdropCallRequestEndpointRequest } from './engineEavesdropCallRequestEndpointRequest.zod';
 export interface EngineCallServiceEavesdropCallBody {
-    appId?: string;
-    control?: boolean;
-    from?: EngineEavesdropCallRequestEndpointRequest;
-    listenA?: boolean;
-    listenB?: boolean;
-    whisperA?: boolean;
-    whisperB?: boolean;
+	appId?: string;
+	control?: boolean;
+	from?: EngineEavesdropCallRequestEndpointRequest;
+	listenA?: boolean;
+	listenB?: boolean;
+	whisperA?: boolean;
+	whisperB?: boolean;
 }

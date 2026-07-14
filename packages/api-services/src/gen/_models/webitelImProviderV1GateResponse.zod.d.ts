@@ -7,14 +7,14 @@
 import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer.zod';
 import type { WebitelImProviderV1WhatsAppBusinessAccount } from './webitelImProviderV1WhatsAppBusinessAccount.zod';
 export interface WebitelImProviderV1GateResponse {
-    bot?: WebitelImProviderV1Peer;
-    createdAt?: string;
-    createdBy?: string;
-    enabled?: boolean;
-    id?: string;
-    name?: string;
-    type?: string;
-    updatedAt?: string;
-    updatedBy?: string;
-    waba?: WebitelImProviderV1WhatsAppBusinessAccount;
+	bot?: WebitelImProviderV1Peer;
+	createdAt?: string;
+	createdBy?: string;
+	enabled?: boolean;
+	id?: string;
+	name?: string;
+	type?: string;
+	updatedAt?: string;
+	updatedBy?: string;
+	waba?: WebitelImProviderV1WhatsAppBusinessAccount;
 }

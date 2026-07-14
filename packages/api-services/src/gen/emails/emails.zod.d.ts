@@ -8,376 +8,662 @@ import * as zod from 'zod';
 /**
  * @summary Remove email address(es) of the contact.
  */
-export declare const DeleteEmailsParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
+export declare const DeleteEmailsParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
 export declare const deleteEmailsQueryEtagItemRegExp: RegExp;
-export declare const DeleteEmailsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    etag: zod.ZodArray<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteEmailsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const DeleteEmailsQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		etag: zod.ZodArray<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteEmailsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Locates email address(es) of the contact.
  */
-export declare const ListEmailsParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ListEmailsQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-    typeId: zod.ZodOptional<zod.ZodString>;
-    typeType: zod.ZodOptional<zod.ZodString>;
-    typeName: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ListEmailsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ListEmailsParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListEmailsQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+		typeId: zod.ZodOptional<zod.ZodString>;
+		typeType: zod.ZodOptional<zod.ZodString>;
+		typeName: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ListEmailsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update or append email address(es) of the contact.
  */
-export declare const MergeEmailsParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const MergeEmailsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const MergeEmailsBodyItem: zod.ZodObject<{
-    email: zod.ZodString;
-    etag: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const MergeEmailsBody: zod.ZodArray<zod.ZodObject<{
-    email: zod.ZodString;
-    etag: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>>;
-export declare const MergeEmailsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const MergeEmailsParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeEmailsQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeEmailsBodyItem: zod.ZodObject<
+	{
+		email: zod.ZodString;
+		etag: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const MergeEmailsBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			email: zod.ZodString;
+			etag: zod.ZodOptional<zod.ZodString>;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			type: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+			verified: zod.ZodOptional<zod.ZodBoolean>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const MergeEmailsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Resets all emails of the contact according to the input dataset.
  */
-export declare const ResetEmailsParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ResetEmailsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const ResetEmailsBodyItem: zod.ZodObject<{
-    email: zod.ZodString;
-    etag: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const ResetEmailsBody: zod.ZodArray<zod.ZodObject<{
-    email: zod.ZodString;
-    etag: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>>;
-export declare const ResetEmailsResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const ResetEmailsParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetEmailsQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetEmailsBodyItem: zod.ZodObject<
+	{
+		email: zod.ZodString;
+		etag: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ResetEmailsBody: zod.ZodArray<
+	zod.ZodObject<
+		{
+			email: zod.ZodString;
+			etag: zod.ZodOptional<zod.ZodString>;
+			primary: zod.ZodOptional<zod.ZodBoolean>;
+			type: zod.ZodOptional<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>;
+			verified: zod.ZodOptional<zod.ZodBoolean>;
+		},
+		zod.z.core.$strip
+	>
+>;
+export declare const ResetEmailsResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove the contact's email address link
  */
-export declare const DeleteEmailParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteEmailQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteEmailResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    email: zod.ZodOptional<zod.ZodString>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const DeleteEmailParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteEmailQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteEmailResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		email: zod.ZodOptional<zod.ZodString>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Locate the email address link.
  */
-export declare const LocateEmailParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const LocateEmailQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const LocateEmailResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    email: zod.ZodOptional<zod.ZodString>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const LocateEmailParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateEmailQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const LocateEmailResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		email: zod.ZodOptional<zod.ZodString>;
+		etag: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		ver: zod.ZodOptional<zod.ZodNumber>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the contact's email address link details
  */
-export declare const UpdateEmail2Params: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateEmail2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateEmail2Body: zod.ZodObject<{
-    email: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const UpdateEmail2Response: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateEmail2Params: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmail2QueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmail2Body: zod.ZodObject<
+	{
+		email: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmail2Response: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update the contact's email address link details
  */
-export declare const UpdateEmailParams: zod.ZodObject<{
-    contact_id: zod.ZodString;
-    etag: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateEmailQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateEmailBody: zod.ZodObject<{
-    email: zod.ZodString;
-    primary: zod.ZodOptional<zod.ZodBoolean>;
-    type: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    verified: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const UpdateEmailResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        email: zod.ZodOptional<zod.ZodString>;
-        etag: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        primary: zod.ZodOptional<zod.ZodBoolean>;
-        type: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        ver: zod.ZodOptional<zod.ZodNumber>;
-        verified: zod.ZodOptional<zod.ZodBoolean>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const UpdateEmailParams: zod.ZodObject<
+	{
+		contact_id: zod.ZodString;
+		etag: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmailQueryParams: zod.ZodObject<
+	{
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmailBody: zod.ZodObject<
+	{
+		email: zod.ZodString;
+		primary: zod.ZodOptional<zod.ZodBoolean>;
+		type: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+					type: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		verified: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateEmailResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						email: zod.ZodOptional<zod.ZodString>;
+						etag: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						primary: zod.ZodOptional<zod.ZodBoolean>;
+						type: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+									type: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						ver: zod.ZodOptional<zod.ZodNumber>;
+						verified: zod.ZodOptional<zod.ZodBoolean>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

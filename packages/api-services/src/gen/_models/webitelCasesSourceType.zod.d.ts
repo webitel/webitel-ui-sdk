@@ -15,13 +15,14 @@
  *  - API: API source type.
  *  - MANUAL: Manual source type.
  */
-export type WebitelCasesSourceType = (typeof WebitelCasesSourceType)[keyof typeof WebitelCasesSourceType];
+export type WebitelCasesSourceType =
+	(typeof WebitelCasesSourceType)[keyof typeof WebitelCasesSourceType];
 export declare const WebitelCasesSourceType: {
-    readonly TypeUnspecified: "TYPE_UNSPECIFIED";
-    readonly Call: "CALL";
-    readonly Chat: "CHAT";
-    readonly SocialMedia: "SOCIAL_MEDIA";
-    readonly Email: "EMAIL";
-    readonly Api: "API";
-    readonly Manual: "MANUAL";
+	readonly TypeUnspecified: 'TYPE_UNSPECIFIED';
+	readonly Call: 'CALL';
+	readonly Chat: 'CHAT';
+	readonly SocialMedia: 'SOCIAL_MEDIA';
+	readonly Email: 'EMAIL';
+	readonly Api: 'API';
+	readonly Manual: 'MANUAL';
 };

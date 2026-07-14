@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type StorageProviderType = (typeof StorageProviderType)[keyof typeof StorageProviderType];
+export type StorageProviderType =
+	(typeof StorageProviderType)[keyof typeof StorageProviderType];
 export declare const StorageProviderType: {
-    readonly DefaultProvider: "DefaultProvider";
-    readonly Microsoft: "Microsoft";
-    readonly Google: "Google";
-    readonly ElevenLabs: "ElevenLabs";
+	readonly DefaultProvider: 'DefaultProvider';
+	readonly Microsoft: 'Microsoft';
+	readonly Google: 'Google';
+	readonly ElevenLabs: 'ElevenLabs';
 };

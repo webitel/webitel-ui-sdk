@@ -8,5 +8,5 @@
  * Additional dynamic attributes provided by the messenger.
  */
 export type WebitelImApiGatewayV1ContactMetadata = {
-    [key: string]: string;
+	[key: string]: string;
 };

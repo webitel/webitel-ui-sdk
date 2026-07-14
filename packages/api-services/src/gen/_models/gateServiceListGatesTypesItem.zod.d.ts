@@ -4,14 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type GateServiceListGatesTypesItem = (typeof GateServiceListGatesTypesItem)[keyof typeof GateServiceListGatesTypesItem];
+export type GateServiceListGatesTypesItem =
+	(typeof GateServiceListGatesTypesItem)[keyof typeof GateServiceListGatesTypesItem];
 export declare const GateServiceListGatesTypesItem: {
-    readonly ProviderTypeUnspecified: "PROVIDER_TYPE_UNSPECIFIED";
-    readonly ProviderTypeViber: "PROVIDER_TYPE_VIBER";
-    readonly ProviderTypeTelegramBot: "PROVIDER_TYPE_TELEGRAM_BOT";
-    readonly ProviderTypeTelegramApp: "PROVIDER_TYPE_TELEGRAM_APP";
-    readonly ProviderTypeMetaApp: "PROVIDER_TYPE_META_APP";
-    readonly ProviderTypeFacebook: "PROVIDER_TYPE_FACEBOOK";
-    readonly ProviderTypeInstagram: "PROVIDER_TYPE_INSTAGRAM";
-    readonly ProviderTypeWhatsapp: "PROVIDER_TYPE_WHATSAPP";
+	readonly ProviderTypeUnspecified: 'PROVIDER_TYPE_UNSPECIFIED';
+	readonly ProviderTypeViber: 'PROVIDER_TYPE_VIBER';
+	readonly ProviderTypeTelegramBot: 'PROVIDER_TYPE_TELEGRAM_BOT';
+	readonly ProviderTypeTelegramApp: 'PROVIDER_TYPE_TELEGRAM_APP';
+	readonly ProviderTypeMetaApp: 'PROVIDER_TYPE_META_APP';
+	readonly ProviderTypeFacebook: 'PROVIDER_TYPE_FACEBOOK';
+	readonly ProviderTypeInstagram: 'PROVIDER_TYPE_INSTAGRAM';
+	readonly ProviderTypeWhatsapp: 'PROVIDER_TYPE_WHATSAPP';
 };

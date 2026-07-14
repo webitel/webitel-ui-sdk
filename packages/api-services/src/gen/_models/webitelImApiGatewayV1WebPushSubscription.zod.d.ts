@@ -6,6 +6,6 @@
  */
 import type { WebitelImApiGatewayV1WebPushSubscriptionKey } from './webitelImApiGatewayV1WebPushSubscriptionKey.zod';
 export interface WebitelImApiGatewayV1WebPushSubscription {
-    endpoint?: string;
-    key?: WebitelImApiGatewayV1WebPushSubscriptionKey;
+	endpoint?: string;
+	key?: WebitelImApiGatewayV1WebPushSubscriptionKey;
 }
