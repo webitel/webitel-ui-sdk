@@ -46,8 +46,6 @@ export const useChatScroll = ({
 		updateThreshold,
 	} = useScrollToBottomBtn(chatContainer, arrivedState);
 
-	/* height of a message + gap */
-	const nearBottomOffset = 48;
 	let isLoadingNextMessages = false;
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
