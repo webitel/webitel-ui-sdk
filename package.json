@@ -23,7 +23,7 @@
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
 		"typecheck": "vue-tsc --noEmit -p ./tsconfig.json",
-		"typecheck:ci": "npm run typecheck"
+		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
 	},
 	"workspaces": [
 		"./packages/api-services",
