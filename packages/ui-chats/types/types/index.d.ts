@@ -5,11 +5,4 @@
  * External data sources (e.g. `@webitel/chat-web-sdk`) must be mapped into
  * them — see `@webitel/ui-chats/adapters`.
  */
-export type {
-	ChatMember,
-	ChatMessageChatInfo,
-	ChatMessageFile,
-	ChatMessageType,
-	ChatVia,
-	ContactInfo,
-} from '../ui/messaging/types/ChatMessage.types';
+export type { ChatMember, ChatMessageChatInfo, ChatMessageFile, ChatMessageType, ChatVia, ContactInfo, } from '../ui/messaging/types/ChatMessage.types';

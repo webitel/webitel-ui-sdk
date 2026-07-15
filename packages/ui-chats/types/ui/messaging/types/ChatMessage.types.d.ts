@@ -1,44 +1,45 @@
 export interface ChatMessageType {
-	id: number | string;
-	date?: number;
-	file?: ChatMessageFile;
-	member: ChatMember;
-	peer?: ChatMember;
-	chat?: ChatMessageChatInfo;
-	createdAt: number;
-	channelId?: string;
-	updatedAt?: number;
-	contact?: null | ContactInfo;
-	text?: string;
+    id: number | string;
+    date?: number;
+    file?: ChatMessageFile;
+    member: ChatMember;
+    peer?: ChatMember;
+    chat?: ChatMessageChatInfo;
+    createdAt: number;
+    channelId?: string;
+    updatedAt?: number;
+    contact?: null | ContactInfo;
+    text?: string;
 }
 export type ContactInfo = {
-	id: string;
-	name?: string;
+    id: string;
+    name?: string;
 };
 export type ChatMessageFile = {
-	id?: string;
-	name?: string;
-	size?: string;
-	mime?: string;
-	url?: string;
-	streamUrl?: string;
+    id?: string;
+    name?: string;
+    size?: string;
+    mime?: string;
+    url?: string;
+    streamUrl?: string;
+    malware?: boolean;
 };
 export type ChatMember = {
-	id: number | string;
-	name: string;
-	type: string;
-	userId?: number;
-	externalId?: string;
-	via?: ChatVia;
-	self?: boolean;
+    id: number | string;
+    name: string;
+    type: string;
+    userId?: number;
+    externalId?: string;
+    via?: ChatVia;
+    self?: boolean;
 };
 export type ChatMessageChatInfo = {
-	id: string;
-	via: ChatVia;
+    id: string;
+    via: ChatVia;
 };
 export type ChatVia = {
-	id: number;
-	name: string;
-	type: string;
-	messenger?: string;
+    id: number;
+    name: string;
+    type: string;
+    messenger?: string;
 };
