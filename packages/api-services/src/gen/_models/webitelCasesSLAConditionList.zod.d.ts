@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesSLACondition } from './webitelCasesSLACondition.zod';
 export interface WebitelCasesSLAConditionList {
-	items?: WebitelCasesSLACondition[];
-	next?: boolean;
-	page?: number;
+    items?: WebitelCasesSLACondition[];
+    next?: boolean;
+    page?: number;
 }

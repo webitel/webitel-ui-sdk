@@ -9,10 +9,10 @@
  * The first element will become `primary` one.
  */
 export type SetContactLanguageInputBody = {
-	/**
-	 * Indicates whether this association must be default
-	 * among others of the same type.
-	 */
-	primary?: boolean;
-	tag?: string;
+    /**
+     * Indicates whether this association must be default
+     * among others of the same type.
+     */
+    primary?: boolean;
+    tag?: string;
 };

@@ -6,19 +6,19 @@
  */
 import type { SearchFilesByCallChannelItem } from './searchFilesByCallChannelItem.zod';
 export type SearchFilesByCallParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	uploadedAtFrom?: string;
-	uploadedAtTo?: string;
-	referenceId?: string[];
-	retentionUntilFrom?: string;
-	retentionUntilTo?: string;
-	/**
-	 *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
-	 */
-	channel?: SearchFilesByCallChannelItem[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: string[];
+    'uploadedAt.from'?: string;
+    'uploadedAt.to'?: string;
+    referenceId?: string[];
+    'retentionUntil.from'?: string;
+    'retentionUntil.to'?: string;
+    /**
+     *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
+     */
+    channel?: SearchFilesByCallChannelItem[];
 };

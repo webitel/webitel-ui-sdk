@@ -10,8 +10,8 @@ import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1P
  * It can be a user, chat, or channel.
  */
 export interface WebitelImApiGatewayV1Peer {
-	channelId?: string;
-	contact?: WebitelImApiGatewayV1PeerIdentity;
-	groupId?: string;
-	threadId?: string;
+    channelId?: string;
+    contact?: WebitelImApiGatewayV1PeerIdentity;
+    groupId?: string;
+    threadId?: string;
 }

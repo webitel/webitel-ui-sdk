@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateSpaceSpacesBody = {
-	/**
-	 * BIO. Short description about the space.
-	 * OPTIONAL. Multi-lined text.
-	 */
-	homePage?: string;
-	/** Represents the name of the knowledge base space. */
-	name?: string;
-	/** The state of the space. */
-	state?: boolean;
+    /**
+     * BIO. Short description about the space.
+     * OPTIONAL. Multi-lined text.
+     */
+    homePage?: string;
+    /** Represents the name of the knowledge base space. */
+    name?: string;
+    /** The state of the space. */
+    state?: boolean;
 };

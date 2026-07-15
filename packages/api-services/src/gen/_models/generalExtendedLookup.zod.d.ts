@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface GeneralExtendedLookup {
-	id?: string;
-	name?: string;
-	type?: string;
+    id?: string;
+    name?: string;
+    type?: string;
 }

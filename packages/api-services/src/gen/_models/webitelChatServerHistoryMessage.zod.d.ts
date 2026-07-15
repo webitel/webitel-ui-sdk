@@ -6,12 +6,12 @@
  */
 import type { WebitelChatServerFile } from './webitelChatServerFile.zod';
 export interface WebitelChatServerHistoryMessage {
-	channelId?: string;
-	createdAt?: string;
-	file?: WebitelChatServerFile;
-	id?: string;
-	kind?: string;
-	text?: string;
-	type?: string;
-	updatedAt?: string;
+    channelId?: string;
+    createdAt?: string;
+    file?: WebitelChatServerFile;
+    id?: string;
+    kind?: string;
+    text?: string;
+    type?: string;
+    updatedAt?: string;
 }

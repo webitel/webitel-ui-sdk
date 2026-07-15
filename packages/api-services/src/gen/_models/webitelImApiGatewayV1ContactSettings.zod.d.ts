@@ -6,7 +6,7 @@
  */
 import type { WebitelImApiGatewayV1UserFilter } from './webitelImApiGatewayV1UserFilter.zod';
 export interface WebitelImApiGatewayV1ContactSettings {
-	allowInvitesFrom?: WebitelImApiGatewayV1UserFilter;
-	contactId?: string;
-	updatedAt?: string;
+    allowInvitesFrom?: WebitelImApiGatewayV1UserFilter;
+    contactId?: string;
+    updatedAt?: string;
 }

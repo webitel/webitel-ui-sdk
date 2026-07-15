@@ -7,11 +7,11 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineTriggerJobState } from './engineTriggerJobState.zod';
 export interface EngineTriggerJob {
-	createdAt?: string;
-	error?: string;
-	id?: string;
-	startedAt?: string;
-	state?: EngineTriggerJobState;
-	stoppedAt?: string;
-	trigger?: EngineLookup;
+    createdAt?: string;
+    error?: string;
+    id?: string;
+    startedAt?: string;
+    state?: EngineTriggerJobState;
+    stoppedAt?: string;
+    trigger?: EngineLookup;
 }

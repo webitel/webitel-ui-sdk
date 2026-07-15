@@ -6,8 +6,8 @@
  */
 import type { WebitelImApiGatewayV1Thread } from './webitelImApiGatewayV1Thread.zod';
 export interface WebitelImApiGatewayV1SearchLeftResponse {
-	/** Threads in which the caller was previously a member, but has left. */
-	items?: WebitelImApiGatewayV1Thread[];
-	/** Indicates whether there is a next page available. */
-	next?: boolean;
+    /** Threads in which the caller was previously a member, but has left. */
+    items?: WebitelImApiGatewayV1Thread[];
+    /** Indicates whether there is a next page available. */
+    next?: boolean;
 }

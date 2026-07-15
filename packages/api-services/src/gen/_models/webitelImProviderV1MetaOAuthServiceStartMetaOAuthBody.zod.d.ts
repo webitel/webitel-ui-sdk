@@ -8,5 +8,5 @@
  * / ProviderMetaOAuthStartRequest initiates the handshake with Meta.
  */
 export interface WebitelImProviderV1MetaOAuthServiceStartMetaOAuthBody {
-	extraScopes?: string[];
+    extraScopes?: string[];
 }

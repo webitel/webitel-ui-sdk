@@ -9,10 +9,10 @@ import type { WebitelCasesSource } from './webitelCasesSource.zod';
  * A list of sources.
  */
 export interface WebitelCasesSourceList {
-	/** List of sources. */
-	items?: WebitelCasesSource[];
-	/** Have more records. */
-	next?: boolean;
-	/** Page number of the partial result. */
-	page?: number;
+    /** List of sources. */
+    items?: WebitelCasesSource[];
+    /** Have more records. */
+    next?: boolean;
+    /** Page number of the partial result. */
+    page?: number;
 }

@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiProviderV1ProviderWhatsAppGate } from './webitelImApiProviderV1ProviderWhatsAppGate.zod';
 export interface WebitelImApiProviderV1ProviderCreateWhatsAppGateResponse {
-	item?: WebitelImApiProviderV1ProviderWhatsAppGate;
+    item?: WebitelImApiProviderV1ProviderWhatsAppGate;
 }

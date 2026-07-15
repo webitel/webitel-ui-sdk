@@ -11,9 +11,9 @@ import type { ContactsContactGroup } from './contactsContactGroup.zod';
  * So this ContactGroupList.data are always subordinate to some contact.id.
  */
 export interface ContactsContactGroupList {
-	/** Group dataset page. */
-	data?: ContactsContactGroup[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+    /** Group dataset page. */
+    data?: ContactsContactGroup[];
+    next?: boolean;
+    /** The page number of the partial result. */
+    page?: number;
 }

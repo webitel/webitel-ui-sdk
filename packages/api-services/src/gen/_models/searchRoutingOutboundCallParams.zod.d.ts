@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchRoutingOutboundCallParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	name?: string;
-	schemaId?: number[];
-	pattern?: string;
-	description?: string;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    name?: string;
+    schemaId?: number[];
+    pattern?: string;
+    description?: string;
 };

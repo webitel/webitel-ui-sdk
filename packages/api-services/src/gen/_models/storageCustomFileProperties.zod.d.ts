@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface StorageCustomFileProperties {
-	endTime?: string;
-	height?: string;
-	startTime?: string;
-	width?: string;
+    endTime?: string;
+    height?: string;
+    startTime?: string;
+    width?: string;
 }

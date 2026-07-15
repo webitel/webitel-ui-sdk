@@ -12,14 +12,14 @@ import type { WebitelImApiGatewayV1KeyboardMarkup } from './webitelImApiGatewayV
  * Interactive represents a rich message with UI elements.
  */
 export interface WebitelImApiGatewayV1Interactive {
-	/** Document attachments header. */
-	documents?: WebitelImApiGatewayV1Documents;
-	/** Images attachment header. */
-	images?: WebitelImApiGatewayV1Images;
-	/** List reply with main list button text and sections with buttons. */
-	listReply?: WebitelImApiGatewayV1KeyboardListReply;
-	/** Markup matrix with buttons. */
-	markup?: WebitelImApiGatewayV1KeyboardMarkup;
-	/** Force to block user keyboard. */
-	singleUse?: boolean;
+    /** Document attachments header. */
+    documents?: WebitelImApiGatewayV1Documents;
+    /** Images attachment header. */
+    images?: WebitelImApiGatewayV1Images;
+    /** List reply with main list button text and sections with buttons. */
+    listReply?: WebitelImApiGatewayV1KeyboardListReply;
+    /** Markup matrix with buttons. */
+    markup?: WebitelImApiGatewayV1KeyboardMarkup;
+    /** Force to block user keyboard. */
+    singleUse?: boolean;
 }

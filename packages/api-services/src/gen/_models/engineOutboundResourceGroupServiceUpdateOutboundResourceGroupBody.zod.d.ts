@@ -7,10 +7,10 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineOutboundResourceTimeRange } from './engineOutboundResourceTimeRange.zod';
 export interface EngineOutboundResourceGroupServiceUpdateOutboundResourceGroupBody {
-	communication?: EngineLookup;
-	description?: string;
-	domainId?: string;
-	name?: string;
-	strategy?: string;
-	time?: EngineOutboundResourceTimeRange[];
+    communication?: EngineLookup;
+    description?: string;
+    domainId?: string;
+    name?: string;
+    strategy?: string;
+    time?: EngineOutboundResourceTimeRange[];
 }

@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderWhatsAppGate } from './webitelImProvide
  * / ProviderUpdateWhatsAppGateResponse returns the updated WhatsApp provider.
  */
 export interface WebitelImProviderV1ProviderUpdateWhatsAppGateResponse {
-	item?: WebitelImProviderV1ProviderWhatsAppGate;
+    item?: WebitelImProviderV1ProviderWhatsAppGate;
 }

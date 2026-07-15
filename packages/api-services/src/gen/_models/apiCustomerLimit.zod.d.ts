@@ -8,5 +8,5 @@
  * defines map[class]limit usage
  */
 export type ApiCustomerLimit = {
-	[key: string]: number;
+    [key: string]: number;
 };

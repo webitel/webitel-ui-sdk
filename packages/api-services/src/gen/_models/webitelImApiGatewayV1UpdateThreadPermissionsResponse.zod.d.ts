@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiGatewayV1ThreadPermissions } from './webitelImApiGatewayV1ThreadPermissions.zod';
 export interface WebitelImApiGatewayV1UpdateThreadPermissionsResponse {
-	permissions?: WebitelImApiGatewayV1ThreadPermissions;
+    permissions?: WebitelImApiGatewayV1ThreadPermissions;
 }

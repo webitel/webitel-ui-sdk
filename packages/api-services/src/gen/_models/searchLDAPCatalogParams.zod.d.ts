@@ -5,40 +5,40 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchLDAPCatalogParams = {
-	/**
-	 * ----- Select Options -------------------------
-	 *
-	 * default: 1
-	 */
-	page?: number;
-	/**
-	 * default: 16
-	 */
-	size?: number;
-	/**
-	 * attributes list
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * ----- Search Basic Filters ---------------------------
-	 *
-	 * selection: by unique identifier
-	 */
-	id?: string[];
-	/**
-	 * term-of-search: lookup[name]
-	 */
-	q?: string;
-	/**
-	 * case-ignore substring match: ILIKE '*' - any; '?' - one
-	 */
-	name?: string;
-	/**
-	 * [M]andatory[A]ccess[C]ontrol: with access mode (action) granted!
-	 */
-	access?: string;
+    /**
+     * ----- Select Options -------------------------
+     *
+     * default: 1
+     */
+    page?: number;
+    /**
+     * default: 16
+     */
+    size?: number;
+    /**
+     * attributes list
+     */
+    fields?: string[];
+    /**
+     * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+     */
+    sort?: string[];
+    /**
+     * ----- Search Basic Filters ---------------------------
+     *
+     * selection: by unique identifier
+     */
+    id?: string[];
+    /**
+     * term-of-search: lookup[name]
+     */
+    q?: string;
+    /**
+     * case-ignore substring match: ILIKE '*' - any; '?' - one
+     */
+    name?: string;
+    /**
+     * [M]andatory[A]ccess[C]ontrol: with access mode (action) granted!
+     */
+    access?: string;
 };

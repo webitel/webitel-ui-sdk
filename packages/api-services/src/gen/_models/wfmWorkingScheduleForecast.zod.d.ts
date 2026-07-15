@@ -6,5 +6,5 @@
  */
 import type { WfmWorkingScheduleForecastForecast } from './wfmWorkingScheduleForecastForecast.zod';
 export interface WfmWorkingScheduleForecast {
-	forecast?: WfmWorkingScheduleForecastForecast[];
+    forecast?: WfmWorkingScheduleForecastForecast[];
 }

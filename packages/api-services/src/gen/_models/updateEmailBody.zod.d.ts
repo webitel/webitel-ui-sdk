@@ -6,10 +6,10 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export type UpdateEmailBody = {
-	/** The email address. */
-	email: string;
-	/** Indicates whether this phone number is default within other channels of the same type(phone). */
-	primary?: boolean;
-	type?: WebitelContactsLookup;
-	verified?: boolean;
+    /** The email address. */
+    email: string;
+    /** Indicates whether this phone number is default within other channels of the same type(phone). */
+    primary?: boolean;
+    type?: WebitelContactsLookup;
+    verified?: boolean;
 };

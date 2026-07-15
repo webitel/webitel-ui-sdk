@@ -10,15 +10,15 @@ import type { EngineTriggerObjectType } from './engineTriggerObjectType.zod';
 import type { EngineTriggerServiceUpdateTriggerBodyVariables } from './engineTriggerServiceUpdateTriggerBodyVariables.zod';
 import type { EngineTriggerType } from './engineTriggerType.zod';
 export interface EngineTriggerServiceUpdateTriggerBody {
-	description?: string;
-	enabled?: boolean;
-	event?: EngineTriggerEventType;
-	expression?: string;
-	name?: string;
-	object?: EngineTriggerObjectType;
-	schema?: EngineLookup;
-	timeout?: number;
-	timezone?: EngineLookup;
-	type?: EngineTriggerType;
-	variables?: EngineTriggerServiceUpdateTriggerBodyVariables;
+    description?: string;
+    enabled?: boolean;
+    event?: EngineTriggerEventType;
+    expression?: string;
+    name?: string;
+    object?: EngineTriggerObjectType;
+    schema?: EngineLookup;
+    timeout?: number;
+    timezone?: EngineLookup;
+    type?: EngineTriggerType;
+    variables?: EngineTriggerServiceUpdateTriggerBodyVariables;
 }

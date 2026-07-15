@@ -6,5 +6,5 @@
  */
 import type { WfmAgentWorkingConditions } from './wfmAgentWorkingConditions.zod';
 export interface WfmReadAgentWorkingConditionsResponse {
-	item?: WfmAgentWorkingConditions;
+    item?: WfmAgentWorkingConditions;
 }

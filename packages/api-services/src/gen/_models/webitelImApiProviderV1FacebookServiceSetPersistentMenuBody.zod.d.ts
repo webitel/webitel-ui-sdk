@@ -6,6 +6,6 @@
  */
 import type { WebitelImApiProviderV1ProviderMenuItem } from './webitelImApiProviderV1ProviderMenuItem.zod';
 export interface WebitelImApiProviderV1FacebookServiceSetPersistentMenuBody {
-	composerInputDisabled?: boolean;
-	items?: WebitelImApiProviderV1ProviderMenuItem[];
+    composerInputDisabled?: boolean;
+    items?: WebitelImApiProviderV1ProviderMenuItem[];
 }

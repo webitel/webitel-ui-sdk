@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ContactSettingsManagementUpdateAllowInvitesFrom =
-	(typeof ContactSettingsManagementUpdateAllowInvitesFrom)[keyof typeof ContactSettingsManagementUpdateAllowInvitesFrom];
+export type ContactSettingsManagementUpdateAllowInvitesFrom = (typeof ContactSettingsManagementUpdateAllowInvitesFrom)[keyof typeof ContactSettingsManagementUpdateAllowInvitesFrom];
 export declare const ContactSettingsManagementUpdateAllowInvitesFrom: {
-	readonly All: 'ALL';
-	readonly Nobody: 'NOBODY';
-	readonly SameIssuer: 'SAME_ISSUER';
+    readonly All: "ALL";
+    readonly Nobody: "NOBODY";
+    readonly SameIssuer: "SAME_ISSUER";
 };

@@ -6,5 +6,5 @@
  */
 import type { WorkingConditionServiceUpdateWorkingConditionBodyItem } from './workingConditionServiceUpdateWorkingConditionBodyItem.zod';
 export type WorkingConditionServiceUpdateWorkingConditionBody = {
-	item?: WorkingConditionServiceUpdateWorkingConditionBodyItem;
+    item?: WorkingConditionServiceUpdateWorkingConditionBodyItem;
 };

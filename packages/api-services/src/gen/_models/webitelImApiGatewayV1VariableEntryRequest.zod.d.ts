@@ -8,8 +8,8 @@
  * VariableEntryRequest represents a variable update operation.
  */
 export interface WebitelImApiGatewayV1VariableEntryRequest {
-	/** Variable key. */
-	key?: string;
-	/** Variable value. */
-	value?: unknown;
+    /** Variable key. */
+    key?: string;
+    /** Variable value. */
+    value?: unknown;
 }

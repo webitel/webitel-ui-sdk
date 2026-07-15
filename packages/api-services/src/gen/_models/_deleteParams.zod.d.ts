@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type _DeleteParams = {
-	/**
-	 * Fields to be retrieved into result dataset.
-	 */
-	fields?: string[];
-	/**
-	 * [`record.id`]
-	 */
-	id: string[];
+    /**
+     * Fields to be retrieved into result dataset.
+     */
+    fields?: string[];
+    /**
+     * [`record.id`]
+     */
+    id: string[];
 };

@@ -7,20 +7,20 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { StorageUploadFileChannel } from './storageUploadFileChannel.zod';
 export interface StorageFilePolicy {
-	channels?: StorageUploadFileChannel[];
-	createdAt?: string;
-	createdBy?: EngineLookup;
-	description?: string;
-	enabled?: boolean;
-	encrypt?: boolean;
-	id?: number;
-	maxUploadSize?: string;
-	mimeTypes?: string[];
-	name?: string;
-	position?: number;
-	retentionDays?: number;
-	speedDownload?: string;
-	speedUpload?: string;
-	updatedAt?: string;
-	updatedBy?: EngineLookup;
+    channels?: StorageUploadFileChannel[];
+    createdAt?: string;
+    createdBy?: EngineLookup;
+    description?: string;
+    enabled?: boolean;
+    encrypt?: boolean;
+    id?: number;
+    maxUploadSize?: string;
+    mimeTypes?: string[];
+    name?: string;
+    position?: number;
+    retentionDays?: number;
+    speedDownload?: string;
+    speedUpload?: string;
+    updatedAt?: string;
+    updatedBy?: EngineLookup;
 }

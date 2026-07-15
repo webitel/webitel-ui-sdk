@@ -3,6 +3,6 @@
  * @returns Default list response object with empty items array and next=false
  */
 export declare const getDefaultGetListResponse: () => {
-	items: any[];
-	next: boolean;
+    items: any[];
+    next: boolean;
 };

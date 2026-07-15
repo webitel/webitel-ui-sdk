@@ -9,6 +9,6 @@
  * for flushing thread variables by thread ID.
  */
 export interface WebitelImApiGatewayV1ThreadManagementFlushVariablesBody {
-	/** List of variable keys to flush. */
-	keys?: string[];
+    /** List of variable keys to flush. */
+    keys?: string[];
 }

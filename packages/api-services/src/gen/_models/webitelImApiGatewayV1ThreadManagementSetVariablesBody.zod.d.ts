@@ -10,9 +10,9 @@ import type { WebitelImApiGatewayV1VariableEntryRequest } from './webitelImApiGa
  * for setting or updating thread variables.
  */
 export interface WebitelImApiGatewayV1ThreadManagementSetVariablesBody {
-	/**
-	 * List of variables to set or update.
-	 * Existing variables with the same keys will be overwritten.
-	 */
-	variables?: WebitelImApiGatewayV1VariableEntryRequest[];
+    /**
+     * List of variables to set or update.
+     * Existing variables with the same keys will be overwritten.
+     */
+    variables?: WebitelImApiGatewayV1VariableEntryRequest[];
 }

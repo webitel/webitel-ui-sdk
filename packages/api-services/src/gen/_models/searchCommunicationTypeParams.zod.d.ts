@@ -6,12 +6,12 @@
  */
 import type { SearchCommunicationTypeChannelItem } from './searchCommunicationTypeChannelItem.zod';
 export type SearchCommunicationTypeParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	channel?: SearchCommunicationTypeChannelItem[];
-	default?: boolean;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    channel?: SearchCommunicationTypeChannelItem[];
+    default?: boolean;
 };

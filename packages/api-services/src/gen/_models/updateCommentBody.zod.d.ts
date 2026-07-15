@@ -6,8 +6,8 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export type UpdateCommentBody = {
-	/** Content of the comment. */
-	text?: string;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userId?: GeneralLookup;
+    /** Content of the comment. */
+    text?: string;
+    /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+    userId?: GeneralLookup;
 };

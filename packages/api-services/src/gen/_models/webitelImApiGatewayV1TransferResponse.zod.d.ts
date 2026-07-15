@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember.zod';
 export interface WebitelImApiGatewayV1TransferResponse {
-	member?: WebitelImApiGatewayV1ThreadMember;
+    member?: WebitelImApiGatewayV1ThreadMember;
 }

@@ -6,13 +6,13 @@
  */
 import type { WebitelImApiProviderV1ProviderStatus } from './webitelImApiProviderV1ProviderStatus.zod';
 export interface WebitelImApiProviderV1ProviderFacebookGate {
-	createdAt?: string;
-	enabled?: boolean;
-	id?: string;
-	metaAppId?: string;
-	name?: string;
-	pageId?: string;
-	pageName?: string;
-	status?: WebitelImApiProviderV1ProviderStatus;
-	updatedAt?: string;
+    createdAt?: string;
+    enabled?: boolean;
+    id?: string;
+    metaAppId?: string;
+    name?: string;
+    pageId?: string;
+    pageName?: string;
+    status?: WebitelImApiProviderV1ProviderStatus;
+    updatedAt?: string;
 }

@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export type PauseTemplateServiceReadPauseTemplateParams = {
-	fields?: string[];
+    fields?: string[];
 };

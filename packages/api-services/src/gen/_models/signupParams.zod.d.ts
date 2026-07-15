@@ -5,33 +5,33 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SignupParams = {
-	/**
-	 * domain name
-	 */
-	domain?: string;
-	/**
-	 * username
-	 */
-	username?: string;
-	/**
-	 * user password
-	 */
-	password?: string;
-	/**
-	 * OPTIONAL. SIP (phone) number i.e. extension.
-	 * SIP Device will be auto-assigned ONLY if [number] specified.
-	 */
-	extension?: string;
-	/**
-	 * scope request control
-	 */
-	scope?: string[];
-	/**
-	 * license/certificate
-	 */
-	certificate?: string;
-	/**
-	 * OPTIONAL. Mobile device /login request ?
-	 */
-	mobile?: boolean;
+    /**
+     * domain name
+     */
+    domain?: string;
+    /**
+     * username
+     */
+    username?: string;
+    /**
+     * user password
+     */
+    password?: string;
+    /**
+     * OPTIONAL. SIP (phone) number i.e. extension.
+     * SIP Device will be auto-assigned ONLY if [number] specified.
+     */
+    extension?: string;
+    /**
+     * scope request control
+     */
+    scope?: string[];
+    /**
+     * license/certificate
+     */
+    certificate?: string;
+    /**
+     * OPTIONAL. Mobile device /login request ?
+     */
+    mobile?: boolean;
 };

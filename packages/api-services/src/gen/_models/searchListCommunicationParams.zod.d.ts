@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchListCommunicationParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	expireAtFrom?: string;
-	expireAtTo?: string;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    'expireAt.from'?: string;
+    'expireAt.to'?: string;
 };

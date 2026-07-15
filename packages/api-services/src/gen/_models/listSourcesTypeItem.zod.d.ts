@@ -4,14 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ListSourcesTypeItem =
-	(typeof ListSourcesTypeItem)[keyof typeof ListSourcesTypeItem];
+export type ListSourcesTypeItem = (typeof ListSourcesTypeItem)[keyof typeof ListSourcesTypeItem];
 export declare const ListSourcesTypeItem: {
-	readonly TypeUnspecified: 'TYPE_UNSPECIFIED';
-	readonly Call: 'CALL';
-	readonly Chat: 'CHAT';
-	readonly SocialMedia: 'SOCIAL_MEDIA';
-	readonly Email: 'EMAIL';
-	readonly Api: 'API';
-	readonly Manual: 'MANUAL';
+    readonly TypeUnspecified: "TYPE_UNSPECIFIED";
+    readonly Call: "CALL";
+    readonly Chat: "CHAT";
+    readonly SocialMedia: "SOCIAL_MEDIA";
+    readonly Email: "EMAIL";
+    readonly Api: "API";
+    readonly Manual: "MANUAL";
 };

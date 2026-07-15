@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelChatContactChatInvite {
-	date?: string;
-	from?: string;
+    date?: string;
+    from?: string;
 }

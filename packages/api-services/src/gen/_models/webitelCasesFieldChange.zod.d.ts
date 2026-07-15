@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelCasesFieldChange {
-	field?: string;
-	newValue?: unknown;
-	oldValue?: unknown;
+    field?: string;
+    newValue?: unknown;
+    oldValue?: unknown;
 }

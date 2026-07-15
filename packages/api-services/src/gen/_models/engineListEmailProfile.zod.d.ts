@@ -6,6 +6,6 @@
  */
 import type { EngineEmailProfile } from './engineEmailProfile.zod';
 export interface EngineListEmailProfile {
-	items?: EngineEmailProfile[];
-	next?: boolean;
+    items?: EngineEmailProfile[];
+    next?: boolean;
 }

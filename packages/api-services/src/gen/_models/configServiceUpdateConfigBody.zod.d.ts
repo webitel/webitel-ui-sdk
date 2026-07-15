@@ -6,9 +6,9 @@
  */
 import type { LoggerLookup } from './loggerLookup.zod';
 export type ConfigServiceUpdateConfigBody = {
-	daysToStore?: number;
-	description?: string;
-	enabled?: boolean;
-	period?: number;
-	storage?: LoggerLookup;
+    daysToStore?: number;
+    description?: string;
+    enabled?: boolean;
+    period?: number;
+    storage?: LoggerLookup;
 };

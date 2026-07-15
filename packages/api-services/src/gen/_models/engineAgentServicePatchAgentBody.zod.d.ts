@@ -6,17 +6,18 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineAgentServicePatchAgentBody {
-	allowChannels?: string[];
-	auditor?: EngineLookup[];
-	chatCount?: number;
-	description?: string;
-	fields?: string[];
-	greetingMedia?: EngineLookup;
-	isSupervisor?: boolean;
-	progressiveCount?: number;
-	region?: EngineLookup;
-	screenControl?: boolean;
-	supervisor?: EngineLookup[];
-	team?: EngineLookup;
-	user?: EngineLookup;
+    allowChannels?: string[];
+    auditor?: EngineLookup[];
+    chatCount?: number;
+    description?: string;
+    extraChatCount?: number;
+    fields?: string[];
+    greetingMedia?: EngineLookup;
+    isSupervisor?: boolean;
+    progressiveCount?: number;
+    region?: EngineLookup;
+    screenControl?: boolean;
+    supervisor?: EngineLookup[];
+    team?: EngineLookup;
+    user?: EngineLookup;
 }

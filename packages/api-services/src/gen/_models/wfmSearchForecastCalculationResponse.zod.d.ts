@@ -6,6 +6,6 @@
  */
 import type { WfmForecastCalculation } from './wfmForecastCalculation.zod';
 export interface WfmSearchForecastCalculationResponse {
-	items?: WfmForecastCalculation[];
-	next?: boolean;
+    items?: WfmForecastCalculation[];
+    next?: boolean;
 }

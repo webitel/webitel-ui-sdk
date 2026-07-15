@@ -6,7 +6,7 @@
  */
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 export interface WfmAgentScheduleShiftSkill {
-	capacity?: string;
-	enabled?: boolean;
-	skill?: WfmLookupEntity;
+    capacity?: string;
+    enabled?: boolean;
+    skill?: WfmLookupEntity;
 }

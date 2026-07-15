@@ -6,5 +6,5 @@
  */
 import type { StorageStartFileTranscriptResponseTranscriptJob } from './storageStartFileTranscriptResponseTranscriptJob.zod';
 export interface StorageStartFileTranscriptResponse {
-	items?: StorageStartFileTranscriptResponseTranscriptJob[];
+    items?: StorageStartFileTranscriptResponseTranscriptJob[];
 }

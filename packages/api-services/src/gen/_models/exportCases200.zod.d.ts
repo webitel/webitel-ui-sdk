@@ -7,6 +7,6 @@
 import type { GoogleRpcStatus } from './googleRpcStatus.zod';
 import type { WebitelCasesExportCasesResponse } from './webitelCasesExportCasesResponse.zod';
 export type ExportCases200 = {
-	error?: GoogleRpcStatus;
-	result?: WebitelCasesExportCasesResponse;
+    error?: GoogleRpcStatus;
+    result?: WebitelCasesExportCasesResponse;
 };

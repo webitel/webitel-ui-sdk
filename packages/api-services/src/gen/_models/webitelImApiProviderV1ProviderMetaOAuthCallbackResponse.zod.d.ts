@@ -6,6 +6,6 @@
  */
 import type { WebitelImApiProviderV1ProviderMetaLinkedPage } from './webitelImApiProviderV1ProviderMetaLinkedPage.zod';
 export interface WebitelImApiProviderV1ProviderMetaOAuthCallbackResponse {
-	pages?: WebitelImApiProviderV1ProviderMetaLinkedPage[];
-	userAccessToken?: string;
+    pages?: WebitelImApiProviderV1ProviderMetaLinkedPage[];
+    userAccessToken?: string;
 }

@@ -6,14 +6,14 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesSLACondition {
-	createdAt?: string;
-	createdBy?: GeneralLookup;
-	id?: string;
-	name?: string;
-	priorities?: GeneralLookup[];
-	reactionTime?: string;
-	resolutionTime?: string;
-	slaId?: string;
-	updatedAt?: string;
-	updatedBy?: GeneralLookup;
+    createdAt?: string;
+    createdBy?: GeneralLookup;
+    id?: string;
+    name?: string;
+    priorities?: GeneralLookup[];
+    reactionTime?: string;
+    resolutionTime?: string;
+    slaId?: string;
+    updatedAt?: string;
+    updatedBy?: GeneralLookup;
 }

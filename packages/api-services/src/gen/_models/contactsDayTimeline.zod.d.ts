@@ -6,9 +6,9 @@
  */
 import type { ContactsEvent } from './contactsEvent.zod';
 export interface ContactsDayTimeline {
-	callsCount?: string;
-	chatsCount?: string;
-	dayTimestamp?: string;
-	emailsCount?: string;
-	items?: ContactsEvent[];
+    callsCount?: string;
+    chatsCount?: string;
+    dayTimestamp?: string;
+    emailsCount?: string;
+    items?: ContactsEvent[];
 }

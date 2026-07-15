@@ -6,7 +6,7 @@
  */
 import type { ApiOAuthService } from './apiOAuthService.zod';
 export interface ApiSearchOAuthServiceResponse {
-	items?: ApiOAuthService[];
-	next?: boolean;
-	page?: number;
+    items?: ApiOAuthService[];
+    next?: boolean;
+    page?: number;
 }

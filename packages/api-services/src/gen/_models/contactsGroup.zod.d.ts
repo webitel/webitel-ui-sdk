@@ -8,25 +8,25 @@ import type { ContactsDynamicCondition } from './contactsDynamicCondition.zod';
 import type { ContactsGroupType } from './contactsGroupType.zod';
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsGroup {
-	/** List of dynamic conditions associated with the group. */
-	conditions?: ContactsDynamicCondition[];
-	contactsSize?: string;
-	/** Timestamp(milli) of the group's creation. */
-	createdAt?: string;
-	/** The user who created this group. */
-	createdBy?: WebitelContactsLookup;
-	/** Default static group to be assigned if no conditions are met. */
-	defaultGroup?: WebitelContactsLookup;
-	/** The description of the group. */
-	description?: string;
-	enabled?: boolean;
-	/** The unique ID of the group. Never changes. */
-	id?: string;
-	/** The name of the group. */
-	name?: string;
-	type?: ContactsGroupType;
-	/** Timestamp(milli) of the last group update. */
-	updatedAt?: string;
-	/** The user who performed the last update. */
-	updatedBy?: WebitelContactsLookup;
+    /** List of dynamic conditions associated with the group. */
+    conditions?: ContactsDynamicCondition[];
+    contactsSize?: string;
+    /** Timestamp(milli) of the group's creation. */
+    createdAt?: string;
+    /** The user who created this group. */
+    createdBy?: WebitelContactsLookup;
+    /** Default static group to be assigned if no conditions are met. */
+    defaultGroup?: WebitelContactsLookup;
+    /** The description of the group. */
+    description?: string;
+    enabled?: boolean;
+    /** The unique ID of the group. Never changes. */
+    id?: string;
+    /** The name of the group. */
+    name?: string;
+    type?: ContactsGroupType;
+    /** Timestamp(milli) of the last group update. */
+    updatedAt?: string;
+    /** The user who performed the last update. */
+    updatedBy?: WebitelContactsLookup;
 }

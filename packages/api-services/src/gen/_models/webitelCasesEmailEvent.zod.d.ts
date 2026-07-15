@@ -7,17 +7,17 @@
 import type { GeneralLookup } from './generalLookup.zod';
 import type { WebitelCasesAttachment } from './webitelCasesAttachment.zod';
 export interface WebitelCasesEmailEvent {
-	attachments?: WebitelCasesAttachment[];
-	body?: string;
-	cc?: string[];
-	from?: string[];
-	html?: string;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	owner?: GeneralLookup;
-	profile?: GeneralLookup;
-	sender?: string[];
-	subject?: string;
-	to?: string[];
+    attachments?: WebitelCasesAttachment[];
+    body?: string;
+    cc?: string[];
+    from?: string[];
+    html?: string;
+    id?: string;
+    isDetailed?: boolean;
+    isInbound?: boolean;
+    owner?: GeneralLookup;
+    profile?: GeneralLookup;
+    sender?: string[];
+    subject?: string;
+    to?: string[];
 }

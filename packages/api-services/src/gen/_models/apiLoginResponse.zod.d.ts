@@ -6,5 +6,5 @@
  */
 import type { ApiAccessToken } from './apiAccessToken.zod';
 export interface ApiLoginResponse {
-	authorization?: ApiAccessToken;
+    authorization?: ApiAccessToken;
 }

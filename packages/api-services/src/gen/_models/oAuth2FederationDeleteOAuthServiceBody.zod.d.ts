@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface OAuth2FederationDeleteOAuthServiceBody {
-	permanent?: boolean;
+    permanent?: boolean;
 }

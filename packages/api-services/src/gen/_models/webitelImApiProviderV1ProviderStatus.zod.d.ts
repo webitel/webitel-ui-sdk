@@ -7,11 +7,10 @@
 /**
  * / ProviderStatus represents the operational state of a provider gateway.
  */
-export type WebitelImApiProviderV1ProviderStatus =
-	(typeof WebitelImApiProviderV1ProviderStatus)[keyof typeof WebitelImApiProviderV1ProviderStatus];
+export type WebitelImApiProviderV1ProviderStatus = (typeof WebitelImApiProviderV1ProviderStatus)[keyof typeof WebitelImApiProviderV1ProviderStatus];
 export declare const WebitelImApiProviderV1ProviderStatus: {
-	readonly ProviderStatusUnspecified: 'PROVIDER_STATUS_UNSPECIFIED';
-	readonly ProviderStatusActive: 'PROVIDER_STATUS_ACTIVE';
-	readonly ProviderStatusInactive: 'PROVIDER_STATUS_INACTIVE';
-	readonly ProviderStatusError: 'PROVIDER_STATUS_ERROR';
+    readonly ProviderStatusUnspecified: "PROVIDER_STATUS_UNSPECIFIED";
+    readonly ProviderStatusActive: "PROVIDER_STATUS_ACTIVE";
+    readonly ProviderStatusInactive: "PROVIDER_STATUS_INACTIVE";
+    readonly ProviderStatusError: "PROVIDER_STATUS_ERROR";
 };

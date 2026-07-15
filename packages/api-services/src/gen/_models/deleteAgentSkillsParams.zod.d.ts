@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteAgentSkillsParams = {
-	id?: string[];
-	skillId?: string[];
+    id?: string[];
+    skillId?: string[];
 };

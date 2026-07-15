@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiProviderV1ProviderSendMessageResponse {
-	createdAt?: string;
-	externalId?: string;
+    createdAt?: string;
+    externalId?: string;
 }

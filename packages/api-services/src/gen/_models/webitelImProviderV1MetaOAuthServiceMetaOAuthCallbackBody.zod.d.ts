@@ -8,6 +8,6 @@
  * / ProviderMetaOAuthCallbackRequest handles the verification and exchange of the auth code.
  */
 export interface WebitelImProviderV1MetaOAuthServiceMetaOAuthCallbackBody {
-	code?: string;
-	state?: string;
+    code?: string;
+    state?: string;
 }

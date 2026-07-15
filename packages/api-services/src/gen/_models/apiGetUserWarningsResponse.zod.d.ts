@@ -6,5 +6,5 @@
  */
 import type { ApiUserWarning } from './apiUserWarning.zod';
 export interface ApiGetUserWarningsResponse {
-	warnings?: ApiUserWarning[];
+    warnings?: ApiUserWarning[];
 }

@@ -7,6 +7,6 @@
 import type { EngineAgentInQueueStatisticsAgentInQueueStatisticsItem } from './engineAgentInQueueStatisticsAgentInQueueStatisticsItem.zod';
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineAgentInQueueStatistics {
-	queue?: EngineLookup;
-	statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
+    queue?: EngineLookup;
+    statistics?: EngineAgentInQueueStatisticsAgentInQueueStatisticsItem[];
 }

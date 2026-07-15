@@ -4,12 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WebitelImApiGatewayV1ThreadRole =
-	(typeof WebitelImApiGatewayV1ThreadRole)[keyof typeof WebitelImApiGatewayV1ThreadRole];
+export type WebitelImApiGatewayV1ThreadRole = (typeof WebitelImApiGatewayV1ThreadRole)[keyof typeof WebitelImApiGatewayV1ThreadRole];
 export declare const WebitelImApiGatewayV1ThreadRole: {
-	readonly RoleUnspecified: 'ROLE_UNSPECIFIED';
-	readonly RoleMember: 'ROLE_MEMBER';
-	readonly RoleAdmin: 'ROLE_ADMIN';
-	readonly RoleOwner: 'ROLE_OWNER';
-	readonly RoleSupervisor: 'ROLE_SUPERVISOR';
+    readonly RoleUnspecified: "ROLE_UNSPECIFIED";
+    readonly RoleMember: "ROLE_MEMBER";
+    readonly RoleAdmin: "ROLE_ADMIN";
+    readonly RoleOwner: "ROLE_OWNER";
+    readonly RoleSupervisor: "ROLE_SUPERVISOR";
 };

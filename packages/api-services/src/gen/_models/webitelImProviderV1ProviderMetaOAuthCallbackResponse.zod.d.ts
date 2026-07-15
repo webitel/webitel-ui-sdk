@@ -9,6 +9,6 @@ import type { WebitelImProviderV1ProviderMetaLinkedPage } from './webitelImProvi
  * / ProviderMetaOAuthCallbackResponse provides the user token and discovered assets.
  */
 export interface WebitelImProviderV1ProviderMetaOAuthCallbackResponse {
-	pages?: WebitelImProviderV1ProviderMetaLinkedPage[];
-	userAccessToken?: string;
+    pages?: WebitelImProviderV1ProviderMetaLinkedPage[];
+    userAccessToken?: string;
 }

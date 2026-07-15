@@ -4,24 +4,23 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type LoggerAvailableSystemObjects =
-	(typeof LoggerAvailableSystemObjects)[keyof typeof LoggerAvailableSystemObjects];
+export type LoggerAvailableSystemObjects = (typeof LoggerAvailableSystemObjects)[keyof typeof LoggerAvailableSystemObjects];
 export declare const LoggerAvailableSystemObjects: {
-	readonly CcQueue: 'cc_queue';
-	readonly Schema: 'schema';
-	readonly Users: 'users';
-	readonly Devices: 'devices';
-	readonly Calendars: 'calendars';
-	readonly CcList: 'cc_list';
-	readonly CcTeam: 'cc_team';
-	readonly CcAgent: 'cc_agent';
-	readonly CcResource: 'cc_resource';
-	readonly CcResourceGroup: 'cc_resource_group';
-	readonly ChatBots: 'chat_bots';
-	readonly Cases: 'cases';
-	readonly Contacts: 'contacts';
-	readonly CcListNumber: 'cc_list_number';
-	readonly CaseComments: 'case_comments';
-	readonly RecordFile: 'record_file';
-	readonly Sso: 'sso';
+    readonly CcQueue: "cc_queue";
+    readonly Schema: "schema";
+    readonly Users: "users";
+    readonly Devices: "devices";
+    readonly Calendars: "calendars";
+    readonly CcList: "cc_list";
+    readonly CcTeam: "cc_team";
+    readonly CcAgent: "cc_agent";
+    readonly CcResource: "cc_resource";
+    readonly CcResourceGroup: "cc_resource_group";
+    readonly ChatBots: "chat_bots";
+    readonly Cases: "cases";
+    readonly Contacts: "contacts";
+    readonly CcListNumber: "cc_list_number";
+    readonly CaseComments: "case_comments";
+    readonly RecordFile: "record_file";
+    readonly Sso: "sso";
 };

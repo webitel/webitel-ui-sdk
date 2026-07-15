@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentTriggerParams = {
-	teamId?: string;
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	enabled?: boolean;
-	id?: number[];
-	schemaId?: number[];
+    teamId?: string;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    enabled?: boolean;
+    id?: number[];
+    schemaId?: number[];
 };

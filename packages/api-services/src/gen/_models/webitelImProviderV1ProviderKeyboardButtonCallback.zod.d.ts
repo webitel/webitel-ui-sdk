@@ -8,5 +8,5 @@
  * ProviderKeyboardButtonCallback sends a backend event when clicked.
  */
 export interface WebitelImProviderV1ProviderKeyboardButtonCallback {
-	data?: string;
+    data?: string;
 }

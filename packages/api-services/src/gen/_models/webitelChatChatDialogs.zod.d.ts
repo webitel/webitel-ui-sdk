@@ -6,9 +6,9 @@
  */
 import type { WebitelChatDialog } from './webitelChatDialog.zod';
 export interface WebitelChatChatDialogs {
-	/** Dataset page of Dialog(s). */
-	data?: WebitelChatDialog[];
-	next?: boolean;
-	/** Page number of results. */
-	page?: number;
+    /** Dataset page of Dialog(s). */
+    data?: WebitelChatDialog[];
+    next?: boolean;
+    /** Page number of results. */
+    page?: number;
 }

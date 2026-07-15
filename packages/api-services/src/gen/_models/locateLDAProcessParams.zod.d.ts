@@ -5,40 +5,40 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateLDAProcessParams = {
-	/**
-	 * ----- Select Options -------------------------
-	 *
-	 * default: 1
-	 */
-	page?: number;
-	/**
-	 * default: 16
-	 */
-	size?: number;
-	/**
-	 * attributes list
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * OPTIONAL. Filter(s) SET
-	 */
-	q?: string;
-	template?: string;
-	objclass?: string[];
-	/**
-	 * WITH .errs
-	 */
-	failed?: boolean;
-	/**
-	 * created|updated
-	 */
-	enabled?: boolean;
-	/**
-	 * deleted
-	 */
-	disabled?: boolean;
+    /**
+     * ----- Select Options -------------------------
+     *
+     * default: 1
+     */
+    page?: number;
+    /**
+     * default: 16
+     */
+    size?: number;
+    /**
+     * attributes list
+     */
+    fields?: string[];
+    /**
+     * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+     */
+    sort?: string[];
+    /**
+     * OPTIONAL. Filter(s) SET
+     */
+    q?: string;
+    template?: string;
+    objclass?: string[];
+    /**
+     * WITH .errs
+     */
+    failed?: boolean;
+    /**
+     * created|updated
+     */
+    enabled?: boolean;
+    /**
+     * deleted
+     */
+    disabled?: boolean;
 };

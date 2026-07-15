@@ -6,6 +6,6 @@
  */
 import type { WebitelChatServerMessage } from './webitelChatServerMessage.zod';
 export interface WebitelChatServerWaitMessageResponse {
-	messages?: WebitelChatServerMessage[];
-	timeoutSec?: string;
+    messages?: WebitelChatServerMessage[];
+    timeoutSec?: string;
 }

@@ -6,47 +6,47 @@
  */
 import type { ListSourcesTypeItem } from './listSourcesTypeItem.zod';
 export type ListSourcesParams = {
-	/**
-	 * Page number of result dataset records. offset = (page * size)
-	 * Default: 0
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 * Default: 25
-	 */
-	size?: number;
-	/**
-	 * Fields to be retrieved as a result.
-	 * Default: [] (all fields)
-	 */
-	fields?: string[];
-	/**
-	 * Sort the result according to fields.
-	 * Default: "id:desc"
-	 */
-	sort?: string;
-	/**
-	 * Filter by unique IDs.
-	 */
-	id?: string[];
-	/**
-	 * Search query string for filtering by name. Supports:
-	 * - Wildcards (*)
-	 * - Placeholder (?)
-	 * - Exact match
-	 */
-	q?: string;
-	/**
-	 * Filter by source type.
-	 *
-	 *  - TYPE_UNSPECIFIED: Unspecified source type.
-	 *  - CALL: Phone call source type.
-	 *  - CHAT: Chat source type.
-	 *  - SOCIAL_MEDIA: Social media source type.
-	 *  - EMAIL: Email source type.
-	 *  - API: API source type.
-	 *  - MANUAL: Manual source type.
-	 */
-	type?: ListSourcesTypeItem[];
+    /**
+     * Page number of result dataset records. offset = (page * size)
+     * Default: 0
+     */
+    page?: number;
+    /**
+     * Size count of records on result page. limit = (size++)
+     * Default: 25
+     */
+    size?: number;
+    /**
+     * Fields to be retrieved as a result.
+     * Default: [] (all fields)
+     */
+    fields?: string[];
+    /**
+     * Sort the result according to fields.
+     * Default: "id:desc"
+     */
+    sort?: string;
+    /**
+     * Filter by unique IDs.
+     */
+    id?: string[];
+    /**
+     * Search query string for filtering by name. Supports:
+     * - Wildcards (*)
+     * - Placeholder (?)
+     * - Exact match
+     */
+    q?: string;
+    /**
+     * Filter by source type.
+     *
+     *  - TYPE_UNSPECIFIED: Unspecified source type.
+     *  - CALL: Phone call source type.
+     *  - CHAT: Chat source type.
+     *  - SOCIAL_MEDIA: Social media source type.
+     *  - EMAIL: Email source type.
+     *  - API: API source type.
+     *  - MANUAL: Manual source type.
+     */
+    type?: ListSourcesTypeItem[];
 };

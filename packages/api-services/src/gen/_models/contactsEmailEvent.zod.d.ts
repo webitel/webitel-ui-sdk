@@ -7,17 +7,17 @@
 import type { WebitelContactsAttachment } from './webitelContactsAttachment.zod';
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsEmailEvent {
-	attachments?: WebitelContactsAttachment[];
-	body?: string;
-	cc?: string[];
-	from?: string[];
-	html?: string;
-	id?: string;
-	isDetailed?: boolean;
-	isInbound?: boolean;
-	owner?: WebitelContactsLookup;
-	profile?: WebitelContactsLookup;
-	sender?: string[];
-	subject?: string;
-	to?: string[];
+    attachments?: WebitelContactsAttachment[];
+    body?: string;
+    cc?: string[];
+    from?: string[];
+    html?: string;
+    id?: string;
+    isDetailed?: boolean;
+    isInbound?: boolean;
+    owner?: WebitelContactsLookup;
+    profile?: WebitelContactsLookup;
+    sender?: string[];
+    subject?: string;
+    to?: string[];
 }

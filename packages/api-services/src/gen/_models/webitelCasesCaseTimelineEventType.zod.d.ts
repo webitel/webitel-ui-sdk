@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WebitelCasesCaseTimelineEventType =
-	(typeof WebitelCasesCaseTimelineEventType)[keyof typeof WebitelCasesCaseTimelineEventType];
+export type WebitelCasesCaseTimelineEventType = (typeof WebitelCasesCaseTimelineEventType)[keyof typeof WebitelCasesCaseTimelineEventType];
 export declare const WebitelCasesCaseTimelineEventType: {
-	readonly Chat: 'chat';
-	readonly Call: 'call';
-	readonly Email: 'email';
+    readonly Chat: "chat";
+    readonly Call: "call";
+    readonly Email: "email";
 };

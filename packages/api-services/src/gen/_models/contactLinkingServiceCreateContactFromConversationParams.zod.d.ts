@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ContactLinkingServiceCreateContactFromConversationParams = {
-	timezoneId?: string;
-	timezoneName?: string;
-	ownerId?: string;
-	ownerName?: string;
-	label?: string[];
-	name?: string;
-	description?: string;
+    'timezone.id'?: string;
+    'timezone.name'?: string;
+    'owner.id'?: string;
+    'owner.name'?: string;
+    label?: string[];
+    name?: string;
+    description?: string;
 };

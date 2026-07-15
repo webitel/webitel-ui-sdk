@@ -6,5 +6,5 @@
  */
 import type { WfmWorkingCondition } from './wfmWorkingCondition.zod';
 export interface WfmCreateWorkingConditionRequest {
-	item?: WfmWorkingCondition;
+    item?: WfmWorkingCondition;
 }

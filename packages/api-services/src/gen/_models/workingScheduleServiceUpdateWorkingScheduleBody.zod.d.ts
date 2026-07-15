@@ -6,5 +6,5 @@
  */
 import type { WorkingScheduleServiceUpdateWorkingScheduleBodyItem } from './workingScheduleServiceUpdateWorkingScheduleBodyItem.zod';
 export type WorkingScheduleServiceUpdateWorkingScheduleBody = {
-	item?: WorkingScheduleServiceUpdateWorkingScheduleBodyItem;
+    item?: WorkingScheduleServiceUpdateWorkingScheduleBodyItem;
 };

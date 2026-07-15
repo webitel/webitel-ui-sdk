@@ -6,9 +6,9 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQueueHook {
-	enabled?: boolean;
-	event?: string;
-	id?: number;
-	properties?: string[];
-	schema?: EngineLookup;
+    enabled?: boolean;
+    event?: string;
+    id?: number;
+    properties?: string[];
+    schema?: EngineLookup;
 }

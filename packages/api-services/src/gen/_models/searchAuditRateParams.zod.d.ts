@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAuditRateParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	createdAtFrom?: string;
-	createdAtTo?: string;
-	id?: number[];
-	callId?: string[];
-	ratedUser?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    'createdAt.from'?: string;
+    'createdAt.to'?: string;
+    id?: number[];
+    callId?: string[];
+    ratedUser?: string[];
 };

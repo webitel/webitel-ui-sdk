@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiVerification {
-	errors?: string[];
-	notify?: string[];
+    errors?: string[];
+    notify?: string[];
 }

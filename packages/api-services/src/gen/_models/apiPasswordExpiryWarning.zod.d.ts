@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiPasswordExpiryWarning {
-	daysRemaining?: string;
-	expiresAt?: string;
+    daysRemaining?: string;
+    expiresAt?: string;
 }

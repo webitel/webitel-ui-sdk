@@ -10,35 +10,35 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * Output purpose only.
  */
 export interface ContactsLanguage {
-	code?: string;
-	/** The user who created this Field. */
-	createdAt?: string;
-	/** Timestamp(milli) of the Field creation. */
-	createdBy?: WebitelContactsLookup;
-	/**
-	 * Unique ID of the latest version of the update.
-	 * This ID changes after any update to the underlying value(s).
-	 */
-	etag?: string;
-	/** The unique ID of the association. Never changes. */
-	id?: string;
-	lang?: string;
-	name?: string;
-	/**
-	 * Indicates whether this association is the default
-	 * among others of the same type.
-	 */
-	primary?: boolean;
-	region?: string;
-	script?: string;
-	tag?: string;
-	/**
-	 * Timestamp(milli) of the last Field update.
-	 * Take part in Etag generation.
-	 */
-	updatedAt?: string;
-	/** The user who performed last Update. */
-	updatedBy?: WebitelContactsLookup;
-	/** Version of the latest update. Numeric sequence. */
-	ver?: number;
+    code?: string;
+    /** The user who created this Field. */
+    createdAt?: string;
+    /** Timestamp(milli) of the Field creation. */
+    createdBy?: WebitelContactsLookup;
+    /**
+     * Unique ID of the latest version of the update.
+     * This ID changes after any update to the underlying value(s).
+     */
+    etag?: string;
+    /** The unique ID of the association. Never changes. */
+    id?: string;
+    lang?: string;
+    name?: string;
+    /**
+     * Indicates whether this association is the default
+     * among others of the same type.
+     */
+    primary?: boolean;
+    region?: string;
+    script?: string;
+    tag?: string;
+    /**
+     * Timestamp(milli) of the last Field update.
+     * Take part in Etag generation.
+     */
+    updatedAt?: string;
+    /** The user who performed last Update. */
+    updatedBy?: WebitelContactsLookup;
+    /** Version of the latest update. Numeric sequence. */
+    ver?: number;
 }

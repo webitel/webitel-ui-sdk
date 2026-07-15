@@ -5,56 +5,56 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LicenseUsageParams = {
-	/**
-	 * ----- Search Options ----- //
-	 *
-	 * default: 16
-	 */
-	size?: number;
-	/**
-	 * default: 1
-	 */
-	page?: number;
-	/**
-	 * set of output fields
-	 */
-	fields?: string[];
-	/**
-	 * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
-	 */
-	sort?: string[];
-	/**
-	 * identifier
-	 */
-	userId?: string;
-	/**
-	 * display name
-	 */
-	userName?: string;
-	/**
-	 * identifier
-	 */
-	domainId?: string;
-	/**
-	 * display name
-	 */
-	domainName?: string;
-	/**
-	 * by serial number(s)
-	 */
-	id?: string[];
-	/**
-	 * by product name(s)
-	 */
-	product?: string[];
-	/**
-	 * view: all|valid|grantable
-	 *
-	 * show: available to be granted
-	 */
-	valid?: boolean;
-	/**
-	 * filter: term of search
-	 */
-	q?: string;
+    /**
+     * ----- Search Options ----- //
+     *
+     * default: 16
+     */
+    size?: number;
+    /**
+     * default: 1
+     */
+    page?: number;
+    /**
+     * set of output fields
+     */
+    fields?: string[];
+    /**
+     * e.g.: "updated_at" - ASC; "!updated_at" - DESC;
+     */
+    sort?: string[];
+    /**
+     * identifier
+     */
+    'user.id'?: string;
+    /**
+     * display name
+     */
+    'user.name'?: string;
+    /**
+     * identifier
+     */
+    'domain.id'?: string;
+    /**
+     * display name
+     */
+    'domain.name'?: string;
+    /**
+     * by serial number(s)
+     */
+    id?: string[];
+    /**
+     * by product name(s)
+     */
+    product?: string[];
+    /**
+     * view: all|valid|grantable
+     *
+     * show: available to be granted
+     */
+    valid?: boolean;
+    /**
+     * filter: term of search
+     */
+    q?: string;
 };

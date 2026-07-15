@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UserInfo2Params = {
-	/**
-	 * string id_token = 2;
-	 */
-	accessToken?: string;
+    /**
+     * string id_token = 2;
+     */
+    accessToken?: string;
 };

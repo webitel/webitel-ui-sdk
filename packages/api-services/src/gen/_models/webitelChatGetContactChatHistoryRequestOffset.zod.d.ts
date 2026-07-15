@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelChatGetContactChatHistoryRequestOffset {
-	/** Messages ONLY been sent before the specified epochtime(milli). */
-	date?: string;
-	id?: string;
+    /** Messages ONLY been sent before the specified epochtime(milli). */
+    date?: string;
+    id?: string;
 }

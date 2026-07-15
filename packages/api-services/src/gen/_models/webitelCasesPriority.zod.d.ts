@@ -9,12 +9,12 @@ import type { GeneralLookup } from './generalLookup.zod';
  * Priority message represents a priority entity with metadata.
  */
 export interface WebitelCasesPriority {
-	color: string;
-	createdAt: string;
-	createdBy: GeneralLookup;
-	description?: string;
-	id: string;
-	name: string;
-	updatedAt: string;
-	updatedBy: GeneralLookup;
+    color: string;
+    createdAt: string;
+    createdBy: GeneralLookup;
+    description?: string;
+    id: string;
+    name: string;
+    updatedAt: string;
+    updatedBy: GeneralLookup;
 }

@@ -6,6 +6,6 @@
  */
 import type { StorageCognitiveProfile } from './storageCognitiveProfile.zod';
 export interface StorageListCognitiveProfile {
-	items?: StorageCognitiveProfile[];
-	next?: boolean;
+    items?: StorageCognitiveProfile[];
+    next?: boolean;
 }

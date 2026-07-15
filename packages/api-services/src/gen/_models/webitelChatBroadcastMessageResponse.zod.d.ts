@@ -7,6 +7,6 @@
 import type { WebitelChatBroadcastError } from './webitelChatBroadcastError.zod';
 import type { WebitelChatBroadcastMessageResponseVariables } from './webitelChatBroadcastMessageResponseVariables.zod';
 export interface WebitelChatBroadcastMessageResponse {
-	failure?: WebitelChatBroadcastError[];
-	variables?: WebitelChatBroadcastMessageResponseVariables;
+    failure?: WebitelChatBroadcastError[];
+    variables?: WebitelChatBroadcastMessageResponseVariables;
 }

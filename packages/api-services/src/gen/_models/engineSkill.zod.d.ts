@@ -6,14 +6,14 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineSkill {
-	activeAgents?: number;
-	createdAt?: string;
-	createdBy?: EngineLookup;
-	description?: string;
-	domainId?: string;
-	id?: string;
-	name?: string;
-	totalAgents?: number;
-	updatedAt?: string;
-	updatedBy?: EngineLookup;
+    activeAgents?: number;
+    createdAt?: string;
+    createdBy?: EngineLookup;
+    description?: string;
+    domainId?: string;
+    id?: string;
+    name?: string;
+    totalAgents?: number;
+    updatedAt?: string;
+    updatedBy?: EngineLookup;
 }

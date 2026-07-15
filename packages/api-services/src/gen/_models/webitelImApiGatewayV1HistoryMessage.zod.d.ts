@@ -18,34 +18,34 @@ import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1T
  * in thread history.
  */
 export interface WebitelImApiGatewayV1HistoryMessage {
-	/** Message body content. */
-	body?: string;
-	contact?: WebitelImApiGatewayV1MessageContact;
-	/** Message creation timestamp (Unix time, milliseconds). */
-	createdAt?: string;
-	/** List of document attachments. */
-	documents?: WebitelImApiGatewayV1Document[];
-	/** Message last update timestamp (Unix time, milliseconds). */
-	editedAt?: string;
-	/** Unique message identifier. */
-	id?: string;
-	/** List of image attachments. */
-	images?: WebitelImApiGatewayV1Image[];
-	interactive?: WebitelImApiGatewayV1Interactive;
-	location?: WebitelImApiGatewayV1MessageLocation;
-	/**
-	 * Arbitrary message metadata.
-	 * Can contain structured data depending on message type.
-	 */
-	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
-	/** Metadata for button reaction for interactive message. */
-	reactedMetadata?: WebitelImApiGatewayV1InteractiveCallback;
-	/** Sender user aggregated information. */
-	sender?: WebitelImApiGatewayV1ThreadMember;
-	/** System message content. */
-	system?: WebitelImApiGatewayV1System;
-	/** Identifier of the thread the message belongs to. */
-	threadId?: string;
-	/** Message type identifier. */
-	type?: number;
+    /** Message body content. */
+    body?: string;
+    contact?: WebitelImApiGatewayV1MessageContact;
+    /** Message creation timestamp (Unix time, milliseconds). */
+    createdAt?: string;
+    /** List of document attachments. */
+    documents?: WebitelImApiGatewayV1Document[];
+    /** Message last update timestamp (Unix time, milliseconds). */
+    editedAt?: string;
+    /** Unique message identifier. */
+    id?: string;
+    /** List of image attachments. */
+    images?: WebitelImApiGatewayV1Image[];
+    interactive?: WebitelImApiGatewayV1Interactive;
+    location?: WebitelImApiGatewayV1MessageLocation;
+    /**
+     * Arbitrary message metadata.
+     * Can contain structured data depending on message type.
+     */
+    metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
+    /** Metadata for button reaction for interactive message. */
+    reactedMetadata?: WebitelImApiGatewayV1InteractiveCallback;
+    /** Sender user aggregated information. */
+    sender?: WebitelImApiGatewayV1ThreadMember;
+    /** System message content. */
+    system?: WebitelImApiGatewayV1System;
+    /** Identifier of the thread the message belongs to. */
+    threadId?: string;
+    /** Message type identifier. */
+    type?: number;
 }

@@ -9,9 +9,9 @@ import type { ProtoDataStruct } from './protoDataStruct.zod';
  * Dataset of structured types.
  */
 export interface DataStructList {
-	/** List of `Struct` types. */
-	data?: ProtoDataStruct[];
-	next?: boolean;
-	/** Page number of results. */
-	page?: number;
+    /** List of `Struct` types. */
+    data?: ProtoDataStruct[];
+    next?: boolean;
+    /** Page number of results. */
+    page?: number;
 }

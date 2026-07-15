@@ -5,26 +5,26 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreateUserParams = {
-	userPassword?: string;
-	confirmPassword?: string;
-	/**
-	 * Generate credentials & assign SIP [device] for NEW [user]
-	 */
-	generateDevice?: boolean;
-	/**
-	 * SIP display name
-	 */
-	deviceName?: string;
-	/**
-	 * SIP auth-id
-	 */
-	deviceAccount?: string;
-	/**
-	 * SIP password
-	 */
-	devicePassword?: string;
-	/**
-	 * [re]generate SIP password ?
-	 */
-	deviceGeneratePassword?: boolean;
+    userPassword?: string;
+    confirmPassword?: string;
+    /**
+     * Generate credentials & assign SIP [device] for NEW [user]
+     */
+    generateDevice?: boolean;
+    /**
+     * SIP display name
+     */
+    'device.name'?: string;
+    /**
+     * SIP auth-id
+     */
+    'device.account'?: string;
+    /**
+     * SIP password
+     */
+    'device.password'?: string;
+    /**
+     * [re]generate SIP password ?
+     */
+    'device.generatePassword'?: boolean;
 };
