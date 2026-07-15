@@ -479,7 +479,7 @@ export default {
 		nameAlreadyInUse: 'Ushbu nom allaqachon mavjud',
 		phoneNumberSymbolsValidator:
 			"Raqamda faqat harflar (a-z, A-Z), raqamlar (0-9) va quyidagi belgilar bo'lishi mumkin: +, -, _, ., !, ~, *, ', (, )",
-		loginValidator: 'Loginni ism@domen formatida kiriting',
+		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
 	},
 	webitelUI: {
 		searchBar: {
