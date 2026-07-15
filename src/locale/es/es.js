@@ -472,8 +472,8 @@ export default {
 		nameAlreadyInUse: 'Este nombre ya está en uso',
 		phoneNumberSymbolsValidator:
 			"El número solo puede contener letras (a-z, A-Z), números (0-9) y los símbolos: +, -, _, ., !, ~, *, ', (, )",
-		loginValidator:
-			'Introduzca el inicio de sesión en el formato nombre@dominio',
+		loginValidator: () =>
+			`Introduzca el inicio de sesión en el formato nombre${'@'}dominio`,
 	},
 	webitelUI: {
 		searchBar: {
