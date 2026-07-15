@@ -41,7 +41,6 @@ import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
-
 export type {
 	ConnectionQualityLevelsType,
 	UserSettingsBroadcastMessage,

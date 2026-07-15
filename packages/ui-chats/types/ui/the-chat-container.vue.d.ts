@@ -16,6 +16,8 @@ type __VLS_Props = {
 	readonly?: boolean;
 	agentName?: string;
 	contact?: WebitelContactsContact;
+	chatId?: string;
+	isChatClosed?: boolean;
 };
 type __VLS_Slots = {
 	main: () => unknown;
@@ -43,6 +45,8 @@ declare const __VLS_base: import('vue').DefineComponent<
 			'onAction:attachFiles'?: (files: File[], options: ResultCallbacks) => any;
 		}>,
 	{
+		chatId: string;
+		isChatClosed: boolean;
 		size: ComponentSize;
 		withoutAvatars: boolean;
 		chatActions: ChatAction[];
