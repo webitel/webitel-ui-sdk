@@ -15,8 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { PermissionsTabContent } from '@webitel/ui-sdk/modules/ObjectPermissions';
-import type { UserAccessFlags } from '@webitel/ui-sdk/modules/Userinfo';
+import {
+	DEFAULT_PERMISSIONS_USER_ACCESS,
+	PermissionsTabContent,
+	type PermissionsUserAccess,
+} from '@webitel/ui-sdk/modules/ObjectPermissions';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { storeToRefs } from 'pinia';
 import { computed, onUnmounted } from 'vue';
@@ -25,16 +28,11 @@ import type { PermissionsPiniaStore } from '../stores/createPermissionsStore';
 const props = withDefaults(
 	defineProps<{
 		store: () => PermissionsPiniaStore;
-		access: UserAccessFlags;
+		access: PermissionsUserAccess;
 		parentId?: Id;
 	}>(),
 	{
-		access: () => ({
-			read: false,
-			add: false,
-			edit: false,
-			delete: false,
-		}),
+		access: () => DEFAULT_PERMISSIONS_USER_ACCESS,
 	},
 );
 

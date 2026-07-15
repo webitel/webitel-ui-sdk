@@ -9,7 +9,7 @@
       </h3>
       <div class="table-title__actions-wrap">
         <permissions-tab-role-popup
-          v-if="access.add"
+          v-if="access.create"
           :existing-grantee-ids="existingGranteeIds"
           :add-role-permissions="addRolePermissions"
         />
@@ -35,7 +35,7 @@
       >
         <wt-table
           :data="localizedDataList"
-          :grid-actions="access.edit"
+          :grid-actions="access.update"
           :headers="headers"
           :selectable="false"
           sortable
@@ -48,7 +48,7 @@
           <template #read="{ item }">
             <wt-single-select
               :show-clear="false"
-              :disabled="!access.edit"
+              :disabled="!access.update"
               :options="accessOptions"
               :model-value="item.access.r"
               @update:model-value="changeAccessMode({ item, ruleName: AccessRuleName.R, mode: $event })"
@@ -58,7 +58,7 @@
           <template #edit="{ item }">
             <wt-single-select
               :show-clear="false"
-              :disabled="!access.edit"
+              :disabled="!access.update"
               :options="accessOptions"
               :model-value="item.access.w"
               @update:model-value="changeAccessMode({ item, ruleName: AccessRuleName.W, mode: $event })"
@@ -68,7 +68,7 @@
           <template #delete="{ item }">
             <wt-single-select
               :show-clear="false"
-              :disabled="!access.edit"
+              :disabled="!access.update"
               :options="accessOptions"
               :model-value="item.access.d"
               @update:model-value="changeAccessMode({ item, ruleName: AccessRuleName.D, mode: $event })"
@@ -100,6 +100,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import IconAction from '../../../../enums/IconAction/IconAction.enum';
 import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
+import { DEFAULT_PERMISSIONS_USER_ACCESS } from '../../composables/usePermissionsTabAccess';
 import { AccessMode, AccessRuleName } from '../../enums';
 import PermissionsRoleRow from './permissions-role-row.vue';
 import PermissionsTabRolePopup from './permissions-tab-role-popup.vue';
@@ -143,12 +144,7 @@ const props = defineProps({
 	},
 	access: {
 		type: Object,
-		default: () => ({
-			read: false,
-			add: false,
-			edit: false,
-			delete: false,
-		}),
+		default: () => DEFAULT_PERMISSIONS_USER_ACCESS,
 	},
 });
 

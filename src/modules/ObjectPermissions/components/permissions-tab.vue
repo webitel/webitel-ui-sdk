@@ -15,7 +15,10 @@ import { useStore } from 'vuex';
 import { useTableStore } from '../../../store/new';
 import FilterPagination from '../../Filters/components/filter-pagination.vue';
 import { useTableFilters } from '../../Filters/composables/useTableFilters';
-import type { UserAccessFlags } from '../../Userinfo';
+import {
+	DEFAULT_PERMISSIONS_USER_ACCESS,
+	type PermissionsUserAccess,
+} from '../composables/usePermissionsTabAccess';
 import PermissionsTabContent from './_internal/permissions-tab-content.vue';
 
 const props = withDefaults(
@@ -23,15 +26,10 @@ const props = withDefaults(
 		/** Namespace of the parent card store */
 		namespace: string;
 		/** Access to the component actions, related to permissions */
-		access: UserAccessFlags;
+		access: PermissionsUserAccess;
 	}>(),
 	{
-		access: () => ({
-			read: false,
-			add: false,
-			edit: false,
-			delete: false,
-		}),
+		access: () => DEFAULT_PERMISSIONS_USER_ACCESS,
 	},
 );
 
