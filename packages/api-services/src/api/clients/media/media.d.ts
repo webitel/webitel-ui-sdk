@@ -1,4 +1,4 @@
-export declare const downloadMedia: (id: any) => Promise<import("axios").AxiosResponse<any, any, {}>>;
+export declare const downloadMedia: (id: any) => Promise<any>;
 export declare const downloadFile: (id: any) => void;
 export declare const getCallMediaUrl: (id: any, { download }?: {
     download?: boolean;
@@ -11,8 +11,8 @@ export declare const MediaAPI: {
     }>;
     get: ({ itemId }: {
         itemId: any;
-    }) => Promise<import("axios").AxiosResponse<any, any, {}>>;
-    add: (params: any) => Promise<import("axios").AxiosResponse<any, any, {}>>;
+    }) => Promise<any>;
+    add: (params: any) => Promise<any>;
     delete: ({ id }: {
         id: any;
     }) => Promise<any>;
