@@ -1,0 +1,11 @@
+export declare const SearchClassesQueryParams: any;
+export declare const SearchClassesResponse: any;
+export declare const UpdateClass2Params: any;
+export declare const UpdateClass2Body: any;
+export declare const UpdateClass2Response: any;
+export declare const UpdateClassParams: any;
+export declare const UpdateClassBody: any;
+export declare const UpdateClassResponse: any;
+export declare const ReadClassParams: any;
+export declare const ReadClassQueryParams: any;
+export declare const ReadClassResponse: any;

@@ -9,6 +9,7 @@ export const OAuthSchema = z.object<ZodShape<ApiOAuthService>>({
 	clientSecret: z.string().min(1),
 	discoveryUrl: z.string().min(1),
 	scopes: z.array(z.string()).optional(),
+	enabled: z.boolean().optional(),
 	claims: z
 		.array(
 			z.object({

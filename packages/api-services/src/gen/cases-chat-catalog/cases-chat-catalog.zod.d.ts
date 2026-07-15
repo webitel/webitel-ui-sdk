@@ -1,0 +1,4 @@
+export declare const CasesChatCatalogGetCaseChatHistoryParams: any;
+export declare const CasesChatCatalogGetCaseChatHistoryQueryParams: any;
+export declare const casesChatCatalogGetCaseChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = "phone";
+export declare const CasesChatCatalogGetCaseChatHistoryResponse: any;

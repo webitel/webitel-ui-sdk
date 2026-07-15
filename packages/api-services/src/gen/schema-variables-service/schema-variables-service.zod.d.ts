@@ -1,0 +1,14 @@
+export declare const SearchSchemaVariableQueryParams: any;
+export declare const SearchSchemaVariableResponse: any;
+export declare const CreateSchemaVariableBody: any;
+export declare const CreateSchemaVariableResponse: any;
+export declare const DeleteSchemaVariableParams: any;
+export declare const DeleteSchemaVariableResponse: any;
+export declare const ReadSchemaVariableParams: any;
+export declare const ReadSchemaVariableResponse: any;
+export declare const PatchSchemaVariableParams: any;
+export declare const PatchSchemaVariableBody: any;
+export declare const PatchSchemaVariableResponse: any;
+export declare const UpdateSchemaVariableParams: any;
+export declare const UpdateSchemaVariableBody: any;
+export declare const UpdateSchemaVariableResponse: any;

@@ -1,5 +1,3 @@
-import { onMounted, onUnmounted } from 'vue';
-
 /**
  * @author @HlukhovYe
  *
@@ -9,12 +7,13 @@ import { onMounted, onUnmounted } from 'vue';
  * is mid-typing. Without this, typing "2" into a cleared two-digit slot immediately
  * reformats to "02", forcing the user to delete the leading zero before the second digit.
  *
- * Works by registering two listeners on the same input event:
- * - capture phase (before PrimeVue): snapshots the partial single-digit value
- * - bubble phase (after PrimeVue): if PrimeVue zero-padded the value, restores the
- *   snapshot and cancels further propagation so the model is not updated yet
+ * Capture handler (before PrimeVue): snapshots the partial single-digit value.
+ * Bubble handler (after PrimeVue): if PrimeVue zero-padded the value, restores the
+ * snapshot and cancels further propagation so the model is not updated yet.
+ *
+ * Listener registration is handled by useDatepicker.
  */
-export function usePreventZeroPad(getInput: () => HTMLInputElement | null) {
+export function createPreventZeroPadHandlers() {
 	let pendingPartial: {
 		value: string;
 		cursor: number;
@@ -52,21 +51,8 @@ export function usePreventZeroPad(getInput: () => HTMLInputElement | null) {
 		}
 	}
 
-	onMounted(() => {
-		const input = getInput();
-		if (!input) return;
-		input.addEventListener('input', onInputCapture, {
-			capture: true,
-		});
-		input.addEventListener('input', onInputBubble);
-	});
-
-	onUnmounted(() => {
-		const input = getInput();
-		if (!input) return;
-		input.removeEventListener('input', onInputCapture, {
-			capture: true,
-		});
-		input.removeEventListener('input', onInputBubble);
-	});
+	return {
+		onInputCapture,
+		onInputBubble,
+	};
 }

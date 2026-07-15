@@ -1,0 +1,7 @@
+export declare const AgentChatServiceGetAgentChatsQueryParams: any;
+export declare const agentChatServiceGetAgentChatsResponseItemsItemLastMessageKeyboardButtonsItemRowItemShareDefault = "phone";
+export declare const AgentChatServiceGetAgentChatsResponse: any;
+export declare const AgentChatServiceGetAgentChatsCounterQueryParams: any;
+export declare const AgentChatServiceGetAgentChatsCounterResponse: any;
+export declare const AgentChatServiceMarkChatProcessedParams: any;
+export declare const AgentChatServiceMarkChatProcessedResponse: any;

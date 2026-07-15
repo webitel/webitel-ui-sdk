@@ -1,0 +1,16 @@
+export declare const ConfigServiceReadSystemObjectsQueryParams: any;
+export declare const ConfigServiceReadSystemObjectsResponse: any;
+export declare const ConfigServiceSearchConfigQueryParams: any;
+export declare const ConfigServiceSearchConfigResponse: any;
+export declare const ConfigServiceCreateConfigBody: any;
+export declare const ConfigServiceCreateConfigResponse: any;
+export declare const ConfigServiceDeleteConfigParams: any;
+export declare const ConfigServiceDeleteConfigResponse: any;
+export declare const ConfigServiceReadConfigParams: any;
+export declare const ConfigServiceReadConfigResponse: any;
+export declare const ConfigServicePatchConfigParams: any;
+export declare const ConfigServicePatchConfigBody: any;
+export declare const ConfigServicePatchConfigResponse: any;
+export declare const ConfigServiceUpdateConfigParams: any;
+export declare const ConfigServiceUpdateConfigBody: any;
+export declare const ConfigServiceUpdateConfigResponse: any;

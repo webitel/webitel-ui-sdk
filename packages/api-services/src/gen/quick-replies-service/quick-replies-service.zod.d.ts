@@ -1,0 +1,14 @@
+export declare const SearchQuickRepliesQueryParams: any;
+export declare const SearchQuickRepliesResponse: any;
+export declare const CreateQuickReplyBody: any;
+export declare const CreateQuickReplyResponse: any;
+export declare const DeleteQuickReplyParams: any;
+export declare const DeleteQuickReplyResponse: any;
+export declare const ReadQuickReplyParams: any;
+export declare const ReadQuickReplyResponse: any;
+export declare const PatchQuickReplyParams: any;
+export declare const PatchQuickReplyBody: any;
+export declare const PatchQuickReplyResponse: any;
+export declare const UpdateQuickReplyParams: any;
+export declare const UpdateQuickReplyBody: any;
+export declare const UpdateQuickReplyResponse: any;

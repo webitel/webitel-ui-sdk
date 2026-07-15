@@ -1,0 +1,5 @@
+export declare const AgentWorkingConditionsServiceReadAgentWorkingConditionsParams: any;
+export declare const AgentWorkingConditionsServiceReadAgentWorkingConditionsResponse: any;
+export declare const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsParams: any;
+export declare const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody: any;
+export declare const AgentWorkingConditionsServiceUpdateAgentWorkingConditionsResponse: any;

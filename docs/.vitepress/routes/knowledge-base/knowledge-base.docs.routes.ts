@@ -16,8 +16,17 @@ export const knowledgeBaseRoutes = [
 			knowledgeBaseIndexRoute,
 			{
 				text: 'FAQ',
-				link: resolveKnowledgeBaseLinkDoc('faq/Readme.md'),
 				collapsed: true,
+				items: [
+					{
+						text: 'index',
+						link: resolveKnowledgeBaseLinkDoc('faq/Readme.md'),
+					},
+					{
+						text: 'Have my commits been deployed?',
+						link: resolveKnowledgeBaseLinkDoc('faq/commit-deploy/Readme.md'),
+					},
+				],
 			},
 			{
 				text: 'Sections',

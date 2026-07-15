@@ -1,0 +1,14 @@
+export declare const SearchAgentPauseCauseQueryParams: any;
+export declare const SearchAgentPauseCauseResponse: any;
+export declare const CreateAgentPauseCauseBody: any;
+export declare const CreateAgentPauseCauseResponse: any;
+export declare const DeleteAgentPauseCauseParams: any;
+export declare const DeleteAgentPauseCauseResponse: any;
+export declare const ReadAgentPauseCauseParams: any;
+export declare const ReadAgentPauseCauseResponse: any;
+export declare const PatchAgentPauseCauseParams: any;
+export declare const PatchAgentPauseCauseBody: any;
+export declare const PatchAgentPauseCauseResponse: any;
+export declare const UpdateAgentPauseCauseParams: any;
+export declare const UpdateAgentPauseCauseBody: any;
+export declare const UpdateAgentPauseCauseResponse: any;
