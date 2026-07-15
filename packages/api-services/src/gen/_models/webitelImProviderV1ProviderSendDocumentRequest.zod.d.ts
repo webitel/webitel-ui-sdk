@@ -10,10 +10,10 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
  * ProviderSendDocumentRequest sends a document with an optional caption.
  */
 export interface WebitelImProviderV1ProviderSendDocumentRequest {
-    caption?: string;
-    documents?: WebitelImProviderV1ProviderFile[];
-    domainId?: number;
-    externalUserId?: string;
-    gateId?: string;
-    type?: WebitelImProviderV1ProviderType;
+	caption?: string;
+	documents?: WebitelImProviderV1ProviderFile[];
+	domainId?: number;
+	externalUserId?: string;
+	gateId?: string;
+	type?: WebitelImProviderV1ProviderType;
 }

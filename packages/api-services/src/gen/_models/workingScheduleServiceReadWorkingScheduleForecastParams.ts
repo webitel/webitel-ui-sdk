@@ -6,6 +6,6 @@
  */
 
 export type WorkingScheduleServiceReadWorkingScheduleForecastParams = {
-	dateFrom?: string;
-	dateTo?: string;
+	'date.from'?: string;
+	'date.to'?: string;
 };

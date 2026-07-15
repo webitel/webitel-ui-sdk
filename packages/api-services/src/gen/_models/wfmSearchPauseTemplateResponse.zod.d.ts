@@ -6,6 +6,6 @@
  */
 import type { WfmPauseTemplate } from './wfmPauseTemplate.zod';
 export interface WfmSearchPauseTemplateResponse {
-    items?: WfmPauseTemplate[];
-    next?: boolean;
+	items?: WfmPauseTemplate[];
+	next?: boolean;
 }

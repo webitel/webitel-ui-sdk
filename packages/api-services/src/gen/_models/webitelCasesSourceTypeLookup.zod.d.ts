@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesSourceType } from './webitelCasesSourceType.zod';
 export interface WebitelCasesSourceTypeLookup {
-    id?: string;
-    name?: string;
-    type?: WebitelCasesSourceType;
+	id?: string;
+	name?: string;
+	type?: WebitelCasesSourceType;
 }

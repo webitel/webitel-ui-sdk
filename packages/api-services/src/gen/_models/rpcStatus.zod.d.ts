@@ -6,7 +6,7 @@
  */
 import type { ProtobufAny } from './protobufAny.zod';
 export interface RpcStatus {
-    code?: number;
-    details?: ProtobufAny[];
-    message?: string;
+	code?: number;
+	details?: ProtobufAny[];
+	message?: string;
 }

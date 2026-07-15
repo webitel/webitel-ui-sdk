@@ -6,18 +6,18 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineEmailProfileServicePatchEmailProfileBody {
-    description?: string;
-    enabled?: boolean;
-    fetchInterval?: number;
-    fields?: string[];
-    imapHost?: string;
-    imapPort?: number;
-    listen?: boolean;
-    login?: string;
-    mailbox?: string;
-    name?: string;
-    password?: string;
-    schema?: EngineLookup;
-    smtpHost?: string;
-    smtpPort?: number;
+	description?: string;
+	enabled?: boolean;
+	fetchInterval?: number;
+	fields?: string[];
+	imapHost?: string;
+	imapPort?: number;
+	listen?: boolean;
+	login?: string;
+	mailbox?: string;
+	name?: string;
+	password?: string;
+	schema?: EngineLookup;
+	smtpHost?: string;
+	smtpPort?: number;
 }

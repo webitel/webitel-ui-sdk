@@ -16,9 +16,9 @@
  * | `state`       | bool
  * | `has_children`| bool
  */
-export declare const listSpacesSpacesQuerySortItemDefault = "id";
+export declare const listSpacesSpacesQuerySortItemDefault = 'id';
 export declare const listSpacesSpacesQuerySortItemRegExp: RegExp;
-export declare const listSpacesSpacesQueryFieldsItemDefault = "*";
+export declare const listSpacesSpacesQueryFieldsItemDefault = '*';
 export declare const ListSpacesSpacesQueryParams: any;
 export declare const ListSpacesSpacesResponse: any;
 /**

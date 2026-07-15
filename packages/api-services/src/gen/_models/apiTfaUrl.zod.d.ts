@@ -6,6 +6,6 @@
  */
 import type { ApiUserId } from './apiUserId.zod';
 export interface ApiTfaUrl {
-    url?: string;
-    user?: ApiUserId;
+	url?: string;
+	user?: ApiUserId;
 }

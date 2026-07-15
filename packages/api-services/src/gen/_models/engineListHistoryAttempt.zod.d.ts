@@ -6,6 +6,6 @@
  */
 import type { EngineAttemptHistory } from './engineAttemptHistory.zod';
 export interface EngineListHistoryAttempt {
-    items?: EngineAttemptHistory[];
-    next?: boolean;
+	items?: EngineAttemptHistory[];
+	next?: boolean;
 }

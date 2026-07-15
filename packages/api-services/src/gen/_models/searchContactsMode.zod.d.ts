@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchContactsMode = (typeof SearchContactsMode)[keyof typeof SearchContactsMode];
+export type SearchContactsMode =
+	(typeof SearchContactsMode)[keyof typeof SearchContactsMode];
 export declare const SearchContactsMode: {
-    readonly Read: "READ";
-    readonly Write: "WRITE";
-    readonly Delete: "DELETE";
+	readonly Read: 'READ';
+	readonly Write: 'WRITE';
+	readonly Delete: 'DELETE';
 };

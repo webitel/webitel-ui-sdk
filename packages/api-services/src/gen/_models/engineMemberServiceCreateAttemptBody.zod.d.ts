@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineMemberServiceCreateAttemptBody {
-    agentId?: string;
-    domainId?: string;
+	agentId?: string;
+	domainId?: string;
 }

@@ -6,6 +6,6 @@
  */
 import type { EngineAgentStatsStatistic } from './engineAgentStatsStatistic.zod';
 export interface EngineListAgentStatsStatistic {
-    items?: EngineAgentStatsStatistic[];
-    next?: boolean;
+	items?: EngineAgentStatsStatistic[];
+	next?: boolean;
 }

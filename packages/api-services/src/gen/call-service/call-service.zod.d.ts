@@ -66,18 +66,24 @@ export declare const SetVariablesCallResponse: any;
 Supports advanced filtering by participants, duration, causes, and custom variables.
  */
 export declare const SearchHistoryCallQueryParams: any;
-export declare const searchHistoryCallResponseItemsItemFilesItemTypeDefault = "file_type_empty";
-export declare const searchHistoryCallResponseItemsItemFilesJobItemActionDefault = "undefined";
-export declare const searchHistoryCallResponseItemsItemFilesJobItemStateDefault = "idle";
+export declare const searchHistoryCallResponseItemsItemFilesItemTypeDefault =
+	'file_type_empty';
+export declare const searchHistoryCallResponseItemsItemFilesJobItemActionDefault =
+	'undefined';
+export declare const searchHistoryCallResponseItemsItemFilesJobItemStateDefault =
+	'idle';
 export declare const SearchHistoryCallResponse: any;
 /**
  * @summary SearchHistoryCallPost retrieves a list of completed calls using a complex filter body (POST).
 Ideal for large filter sets that exceed URL length limits.
  */
 export declare const SearchHistoryCallPostBody: any;
-export declare const searchHistoryCallPostResponseItemsItemFilesItemTypeDefault = "file_type_empty";
-export declare const searchHistoryCallPostResponseItemsItemFilesJobItemActionDefault = "undefined";
-export declare const searchHistoryCallPostResponseItemsItemFilesJobItemStateDefault = "idle";
+export declare const searchHistoryCallPostResponseItemsItemFilesItemTypeDefault =
+	'file_type_empty';
+export declare const searchHistoryCallPostResponseItemsItemFilesJobItemActionDefault =
+	'undefined';
+export declare const searchHistoryCallPostResponseItemsItemFilesJobItemStateDefault =
+	'idle';
 export declare const SearchHistoryCallPostResponse: any;
 /**
  * @summary AggregateHistoryCall performs statistical analysis on historical data.
@@ -113,7 +119,9 @@ export declare const RedialCallResponse: any;
  */
 export declare const PatchHistoryCallParams: any;
 export declare const PatchHistoryCallBody: any;
-export declare const patchHistoryCallResponseFilesItemTypeDefault = "file_type_empty";
-export declare const patchHistoryCallResponseFilesJobItemActionDefault = "undefined";
-export declare const patchHistoryCallResponseFilesJobItemStateDefault = "idle";
+export declare const patchHistoryCallResponseFilesItemTypeDefault =
+	'file_type_empty';
+export declare const patchHistoryCallResponseFilesJobItemActionDefault =
+	'undefined';
+export declare const patchHistoryCallResponseFilesJobItemStateDefault = 'idle';
 export declare const PatchHistoryCallResponse: any;

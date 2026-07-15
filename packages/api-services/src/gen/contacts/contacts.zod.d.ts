@@ -25,10 +25,10 @@
  * | `imclients` | list[imClient!]
  * @summary Search for Contact(s)
  */
-export declare const searchContactsQuerySortItemDefault = "id";
+export declare const searchContactsQuerySortItemDefault = 'id';
 export declare const searchContactsQuerySortItemRegExp: RegExp;
-export declare const searchContactsQueryFieldsItemDefault = "*";
-export declare const searchContactsQueryModeDefault = "READ";
+export declare const searchContactsQueryFieldsItemDefault = '*';
+export declare const searchContactsQueryModeDefault = 'READ';
 export declare const SearchContactsQueryParams: any;
 export declare const SearchContactsResponse: any;
 /**
@@ -57,7 +57,7 @@ export declare const DeleteContactResponse: any;
  * @summary Locate Contact source
  */
 export declare const LocateContactParams: any;
-export declare const locateContactQueryModeDefault = "READ";
+export declare const locateContactQueryModeDefault = 'READ';
 export declare const LocateContactQueryParams: any;
 export declare const LocateContactResponse: any;
 /**

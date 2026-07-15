@@ -67,11 +67,11 @@ export const CreateLinkQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('result fields needed on the front-end for each comment'),
-	inputEtag: zod.string().optional(),
-	inputUrl: zod.string().optional(),
-	inputName: zod.string().optional(),
-	inputUserIdId: zod.string().optional(),
-	inputUserIdName: zod.string().optional(),
+	'input.etag': zod.string().optional(),
+	'input.url': zod.string().optional(),
+	'input.name': zod.string().optional(),
+	'input.userId.id': zod.string().optional(),
+	'input.userId.name': zod.string().optional(),
 });
 
 export const CreateLinkResponse = zod.object({

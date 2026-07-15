@@ -10,10 +10,10 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
  * ProviderSendTextRequest sends a simple text message.
  */
 export interface WebitelImProviderV1ProviderSendTextRequest {
-    domainId?: number;
-    externalUserId?: string;
-    gateId?: string;
-    metadata?: WebitelImProviderV1ProviderSendTextRequestMetadata;
-    text?: string;
-    type?: WebitelImProviderV1ProviderType;
+	domainId?: number;
+	externalUserId?: string;
+	gateId?: string;
+	metadata?: WebitelImProviderV1ProviderSendTextRequestMetadata;
+	text?: string;
+	type?: WebitelImProviderV1ProviderType;
 }

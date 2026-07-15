@@ -13,14 +13,14 @@ import type { ApiObjectId } from './apiObjectId.zod';
  * token.usage   // [optional] short description
  */
 export type AddUserAccessTokenBody = {
-    createdAt?: string;
-    createdBy?: ApiObjectId;
-    deletedAt?: string;
-    deletedBy?: ApiObjectId;
-    id?: string;
-    token?: string;
-    updatedAt?: string;
-    updatedBy?: ApiObjectId;
-    usage?: string;
-    user?: AddUserAccessTokenBodyUser;
+	createdAt?: string;
+	createdBy?: ApiObjectId;
+	deletedAt?: string;
+	deletedBy?: ApiObjectId;
+	id?: string;
+	token?: string;
+	updatedAt?: string;
+	updatedBy?: ApiObjectId;
+	usage?: string;
+	user?: AddUserAccessTokenBodyUser;
 };

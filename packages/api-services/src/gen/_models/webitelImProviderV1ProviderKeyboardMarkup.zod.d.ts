@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderKeyboardRow } from './webitelImProvider
  * ProviderKeyboardMarkup is a grid of button rows.
  */
 export interface WebitelImProviderV1ProviderKeyboardMarkup {
-    rows?: WebitelImProviderV1ProviderKeyboardRow[];
+	rows?: WebitelImProviderV1ProviderKeyboardRow[];
 }

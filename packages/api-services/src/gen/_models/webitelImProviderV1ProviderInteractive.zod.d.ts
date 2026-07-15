@@ -10,8 +10,8 @@ import type { WebitelImProviderV1ProviderKeyboardMarkup } from './webitelImProvi
  * ProviderInteractive carries the interactive UI definition.
  */
 export interface WebitelImProviderV1ProviderInteractive {
-    listReply?: WebitelImProviderV1ProviderKeyboardListReply;
-    markup?: WebitelImProviderV1ProviderKeyboardMarkup;
-    /** When true the keyboard is hidden after the user interacts once. */
-    singleUse?: boolean;
+	listReply?: WebitelImProviderV1ProviderKeyboardListReply;
+	markup?: WebitelImProviderV1ProviderKeyboardMarkup;
+	/** When true the keyboard is hidden after the user interacts once. */
+	singleUse?: boolean;
 }

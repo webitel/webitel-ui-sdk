@@ -9,13 +9,13 @@ export type ListRegistrationsParams = {
 	/**
 	 * Object ID
 	 */
-	userId?: string;
+	'user.id'?: string;
 	/**
 	 * Display Name
 	 */
-	userName?: string;
+	'user.name'?: string;
 	/**
 	 * Display Name
 	 */
-	deviceName?: string;
+	'device.name'?: string;
 };

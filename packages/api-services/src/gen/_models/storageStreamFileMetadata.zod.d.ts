@@ -6,11 +6,11 @@
  */
 import type { StorageThumbnail } from './storageThumbnail.zod';
 export interface StorageStreamFileMetadata {
-    id?: string;
-    mimeType?: string;
-    name?: string;
-    sha256Sum?: string;
-    size?: string;
-    thumbnail?: StorageThumbnail;
-    uuid?: string;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	sha256Sum?: string;
+	size?: string;
+	thumbnail?: StorageThumbnail;
+	uuid?: string;
 }

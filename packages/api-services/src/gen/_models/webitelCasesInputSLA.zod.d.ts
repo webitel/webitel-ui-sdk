@@ -6,11 +6,11 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesInputSLA {
-    calendar?: GeneralLookup;
-    description?: string;
-    name?: string;
-    reactionTime?: string;
-    resolutionTime?: string;
-    validFrom?: string;
-    validTo?: string;
+	calendar?: GeneralLookup;
+	description?: string;
+	name?: string;
+	reactionTime?: string;
+	resolutionTime?: string;
+	validFrom?: string;
+	validTo?: string;
 }

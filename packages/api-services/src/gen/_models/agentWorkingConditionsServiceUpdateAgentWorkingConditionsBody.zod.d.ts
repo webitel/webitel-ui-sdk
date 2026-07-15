@@ -6,5 +6,5 @@
  */
 import type { WfmAgentWorkingConditions } from './wfmAgentWorkingConditions.zod';
 export type AgentWorkingConditionsServiceUpdateAgentWorkingConditionsBody = {
-    item?: WfmAgentWorkingConditions;
+	item?: WfmAgentWorkingConditions;
 };

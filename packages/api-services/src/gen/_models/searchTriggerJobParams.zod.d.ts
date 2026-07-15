@@ -6,16 +6,16 @@
  */
 import type { SearchTriggerJobStateItem } from './searchTriggerJobStateItem.zod';
 export type SearchTriggerJobParams = {
-    page?: number;
-    size?: number;
-    q?: string;
-    sort?: string;
-    fields?: string[];
-    createdAtFrom?: string;
-    createdAtTo?: string;
-    startedAtFrom?: string;
-    startedAtTo?: string;
-    durationFrom?: string;
-    durationTo?: string;
-    state?: SearchTriggerJobStateItem[];
+	page?: number;
+	size?: number;
+	q?: string;
+	sort?: string;
+	fields?: string[];
+	createdAtFrom?: string;
+	createdAtTo?: string;
+	startedAtFrom?: string;
+	startedAtTo?: string;
+	durationFrom?: string;
+	durationTo?: string;
+	state?: SearchTriggerJobStateItem[];
 };

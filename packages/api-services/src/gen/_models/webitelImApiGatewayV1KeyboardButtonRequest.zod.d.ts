@@ -8,6 +8,6 @@
  * Action: Prompts the client to share specific device data.
  */
 export interface WebitelImApiGatewayV1KeyboardButtonRequest {
-    /** The specific action to be performed by the client application. */
-    action?: string;
+	/** The specific action to be performed by the client application. */
+	action?: string;
 }

@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCallServiceHangupCallBody {
-    appId?: string;
-    cause?: string;
-    domainId?: string;
+	appId?: string;
+	cause?: string;
+	domainId?: string;
 }

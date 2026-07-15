@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAgentServiceUpdateAgentStatusBody {
-    channels?: string[];
-    domainId?: string;
-    onDemand?: boolean;
-    payload?: string;
-    status?: string;
-    statusComment?: string;
+	channels?: string[];
+	domainId?: string;
+	onDemand?: boolean;
+	payload?: string;
+	status?: string;
+	statusComment?: string;
 }

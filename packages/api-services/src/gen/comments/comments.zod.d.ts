@@ -2,7 +2,7 @@
  * @summary Search for Contact Comment(s) ...
  */
 export declare const SearchCommentsParams: any;
-export declare const searchCommentsQueryModeDefault = "READ";
+export declare const searchCommentsQueryModeDefault = 'READ';
 export declare const SearchCommentsQueryParams: any;
 export declare const SearchCommentsResponse: any;
 /**

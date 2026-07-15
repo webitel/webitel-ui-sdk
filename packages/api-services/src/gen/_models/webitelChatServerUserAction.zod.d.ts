@@ -12,8 +12,9 @@
  *  - Cancel: Invalidate all previous action updates.
  * E.g. when user deletes entered text or aborts a video upload.
  */
-export type WebitelChatServerUserAction = (typeof WebitelChatServerUserAction)[keyof typeof WebitelChatServerUserAction];
+export type WebitelChatServerUserAction =
+	(typeof WebitelChatServerUserAction)[keyof typeof WebitelChatServerUserAction];
 export declare const WebitelChatServerUserAction: {
-    readonly Typing: "Typing";
-    readonly Cancel: "Cancel";
+	readonly Typing: 'Typing';
+	readonly Cancel: 'Cancel';
 };

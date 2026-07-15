@@ -19,7 +19,8 @@ export declare const ReadPasswordSettingsQueryParams: any;
 export declare const ReadPasswordSettingsResponse: any;
 export declare const SearchUsers2Body: any;
 export declare const SearchUsers2Response: any;
-export declare const getUserWarningsResponseWarningsItemIdDefault = "user_warning_id_unspecified";
+export declare const getUserWarningsResponseWarningsItemIdDefault =
+	'user_warning_id_unspecified';
 export declare const GetUserWarningsResponse: any;
 export declare const DeleteUsersParams: any;
 export declare const DeleteUsersQueryParams: any;

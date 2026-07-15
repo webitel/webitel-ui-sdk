@@ -1,21 +1,28 @@
 export declare const SearchImportTemplateQueryParams: any;
-export declare const searchImportTemplateResponseItemsItemSourceTypeDefault = "DefaultSourceType";
+export declare const searchImportTemplateResponseItemsItemSourceTypeDefault =
+	'DefaultSourceType';
 export declare const SearchImportTemplateResponse: any;
-export declare const createImportTemplateBodySourceTypeDefault = "DefaultSourceType";
+export declare const createImportTemplateBodySourceTypeDefault =
+	'DefaultSourceType';
 export declare const CreateImportTemplateBody: any;
-export declare const createImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
+export declare const createImportTemplateResponseSourceTypeDefault =
+	'DefaultSourceType';
 export declare const CreateImportTemplateResponse: any;
 export declare const DeleteImportTemplateParams: any;
-export declare const deleteImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
+export declare const deleteImportTemplateResponseSourceTypeDefault =
+	'DefaultSourceType';
 export declare const DeleteImportTemplateResponse: any;
 export declare const ReadImportTemplateParams: any;
-export declare const readImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
+export declare const readImportTemplateResponseSourceTypeDefault =
+	'DefaultSourceType';
 export declare const ReadImportTemplateResponse: any;
 export declare const PatchImportTemplateParams: any;
 export declare const PatchImportTemplateBody: any;
-export declare const patchImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
+export declare const patchImportTemplateResponseSourceTypeDefault =
+	'DefaultSourceType';
 export declare const PatchImportTemplateResponse: any;
 export declare const UpdateImportTemplateParams: any;
 export declare const UpdateImportTemplateBody: any;
-export declare const updateImportTemplateResponseSourceTypeDefault = "DefaultSourceType";
+export declare const updateImportTemplateResponseSourceTypeDefault =
+	'DefaultSourceType';
 export declare const UpdateImportTemplateResponse: any;

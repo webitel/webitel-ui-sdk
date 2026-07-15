@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface StorageDeleteFileTranscriptRequest {
-    id?: string[];
-    uuid?: string[];
+	id?: string[];
+	uuid?: string[];
 }

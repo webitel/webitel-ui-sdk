@@ -8,8 +8,8 @@ import type { WebitelChatBroadcastMessageRequestVariables } from './webitelChatB
 import type { WebitelChatInputMessage } from './webitelChatInputMessage.zod';
 import type { WebitelChatInputPeer } from './webitelChatInputPeer.zod';
 export interface WebitelChatBroadcastMessageRequest {
-    message?: WebitelChatInputMessage;
-    peers?: WebitelChatInputPeer[];
-    timeout?: string;
-    variables?: WebitelChatBroadcastMessageRequestVariables;
+	message?: WebitelChatInputMessage;
+	peers?: WebitelChatInputPeer[];
+	timeout?: string;
+	variables?: WebitelChatBroadcastMessageRequestVariables;
 }

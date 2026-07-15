@@ -49,8 +49,8 @@ export type SearchUsersParams = {
 	 * filter: .deleted_at NOTNULL (view: RECYCLE)
 	 */
 	deleted?: boolean;
-	presenceStatus?: string;
-	presenceNote?: string;
+	'presence.status'?: string;
+	'presence.note'?: string;
 	/**
 	 * // navigation filter
 	 * repeated int64 roles = 7;

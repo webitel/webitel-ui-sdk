@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ListGroupsType = (typeof ListGroupsType)[keyof typeof ListGroupsType];
+export type ListGroupsType =
+	(typeof ListGroupsType)[keyof typeof ListGroupsType];
 export declare const ListGroupsType: {
-    readonly GroupTypeUnspecified: "GROUP_TYPE_UNSPECIFIED";
-    readonly Static: "STATIC";
-    readonly Dynamic: "DYNAMIC";
+	readonly GroupTypeUnspecified: 'GROUP_TYPE_UNSPECIFIED';
+	readonly Static: 'STATIC';
+	readonly Dynamic: 'DYNAMIC';
 };

@@ -8,12 +8,12 @@ import type { WebitelImApiGatewayV1AccessToken } from './webitelImApiGatewayV1Ac
 import type { WebitelImApiGatewayV1AuthContact } from './webitelImApiGatewayV1AuthContact.zod';
 import type { WebitelImApiGatewayV1Device } from './webitelImApiGatewayV1Device.zod';
 export interface WebitelImApiGatewayV1Authorization {
-    appId?: string;
-    contact?: WebitelImApiGatewayV1AuthContact;
-    current?: boolean;
-    date?: string;
-    device?: WebitelImApiGatewayV1Device;
-    /** Session (device) display name. */
-    name?: string;
-    token?: WebitelImApiGatewayV1AccessToken;
+	appId?: string;
+	contact?: WebitelImApiGatewayV1AuthContact;
+	current?: boolean;
+	date?: string;
+	device?: WebitelImApiGatewayV1Device;
+	/** Session (device) display name. */
+	name?: string;
+	token?: WebitelImApiGatewayV1AccessToken;
 }

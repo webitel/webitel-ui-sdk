@@ -6,14 +6,14 @@
  */
 import type { EngineMemberServiceAttemptCallbackBodyVariables } from './engineMemberServiceAttemptCallbackBodyVariables.zod';
 export interface EngineMemberServiceAttemptCallbackBody {
-    agentId?: number;
-    description?: string;
-    display?: boolean;
-    excludeCurrentCommunication?: boolean;
-    expireAt?: string;
-    minOfferingAt?: string;
-    onlyCurrentCommunication?: boolean;
-    status?: string;
-    variables?: EngineMemberServiceAttemptCallbackBodyVariables;
-    waitBetweenRetries?: number;
+	agentId?: number;
+	description?: string;
+	display?: boolean;
+	excludeCurrentCommunication?: boolean;
+	expireAt?: string;
+	minOfferingAt?: string;
+	onlyCurrentCommunication?: boolean;
+	status?: string;
+	variables?: EngineMemberServiceAttemptCallbackBodyVariables;
+	waitBetweenRetries?: number;
 }

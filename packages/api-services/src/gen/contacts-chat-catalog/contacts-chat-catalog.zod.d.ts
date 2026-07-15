@@ -1,8 +1,10 @@
 export declare const ContactsChatCatalogGetContactChatHistory2Params: any;
 export declare const ContactsChatCatalogGetContactChatHistory2QueryParams: any;
-export declare const contactsChatCatalogGetContactChatHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = "phone";
+export declare const contactsChatCatalogGetContactChatHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault =
+	'phone';
 export declare const ContactsChatCatalogGetContactChatHistory2Response: any;
 export declare const ContactsChatCatalogGetContactChatHistoryParams: any;
 export declare const ContactsChatCatalogGetContactChatHistoryQueryParams: any;
-export declare const contactsChatCatalogGetContactChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = "phone";
+export declare const contactsChatCatalogGetContactChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault =
+	'phone';
 export declare const ContactsChatCatalogGetContactChatHistoryResponse: any;

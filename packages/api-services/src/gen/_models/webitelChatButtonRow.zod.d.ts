@@ -6,5 +6,5 @@
  */
 import type { WebitelChatButton } from './webitelChatButton.zod';
 export interface WebitelChatButtonRow {
-    row?: WebitelChatButton[];
+	row?: WebitelChatButton[];
 }

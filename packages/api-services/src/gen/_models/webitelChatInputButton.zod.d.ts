@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelChatInputButton {
-    caption?: string;
-    code?: string;
-    text?: string;
-    type?: string;
-    url?: string;
+	caption?: string;
+	code?: string;
+	text?: string;
+	type?: string;
+	url?: string;
 }

@@ -3,17 +3,17 @@
  */
 export declare const _DeleteParams: any;
 export declare const _DeleteQueryParams: any;
-export declare const _deleteResponseTypeFieldsItemKindDefault = "none";
+export declare const _deleteResponseTypeFieldsItemKindDefault = 'none';
 export declare const _DeleteResponse: any;
 /**
  * @summary Search dataset records
  */
 export declare const SearchRecordsParams: any;
-export declare const searchRecordsQuerySortItemDefault = "*";
+export declare const searchRecordsQuerySortItemDefault = '*';
 export declare const searchRecordsQuerySortItemRegExp: RegExp;
-export declare const searchRecordsQueryFieldsItemDefault = "*";
+export declare const searchRecordsQueryFieldsItemDefault = '*';
 export declare const SearchRecordsQueryParams: any;
-export declare const searchRecordsResponseTypeFieldsItemKindDefault = "none";
+export declare const searchRecordsResponseTypeFieldsItemKindDefault = 'none';
 export declare const SearchRecordsResponse: any;
 /**
  * (Record) {
@@ -27,7 +27,7 @@ export declare const CreateResponse: any;
  * @summary Locate dataset record
  */
 export declare const LocateRecordsParams: any;
-export declare const locateRecordsQueryFieldsItemDefault = "*";
+export declare const locateRecordsQueryFieldsItemDefault = '*';
 export declare const LocateRecordsQueryParams: any;
 export declare const LocateRecordsResponse: any;
 /**

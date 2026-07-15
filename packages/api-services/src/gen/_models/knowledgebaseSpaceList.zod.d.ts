@@ -6,9 +6,9 @@
  */
 import type { KnowledgebaseSpace } from './knowledgebaseSpace.zod';
 export interface KnowledgebaseSpaceList {
-    /** Space(s) dataset page. */
-    data?: KnowledgebaseSpace[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	/** Space(s) dataset page. */
+	data?: KnowledgebaseSpace[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

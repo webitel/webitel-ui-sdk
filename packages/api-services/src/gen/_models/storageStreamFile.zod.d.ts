@@ -6,6 +6,6 @@
  */
 import type { StorageStreamFileMetadata } from './storageStreamFileMetadata.zod';
 export interface StorageStreamFile {
-    chunk?: string;
-    metadata?: StorageStreamFileMetadata;
+	chunk?: string;
+	metadata?: StorageStreamFileMetadata;
 }

@@ -9,5 +9,5 @@ export type DeleteUserAccessTokenParams = {
 	/**
 	 * display name
 	 */
-	userName?: string;
+	'user.name'?: string;
 };

@@ -19,11 +19,11 @@ export type GetCustomerParams = {
 	/**
 	 * identifier
 	 */
-	domainId?: string;
+	'domain.id'?: string;
 	/**
 	 * display name
 	 */
-	domainName?: string;
+	'domain.name'?: string;
 	/**
 	 * Request Controls
 	 *

@@ -1,13 +1,15 @@
 /**
  * @summary SendDocument delivers file attachments to the external chat partner.
  */
-export declare const providerMessageServiceSendDocumentBodyTypeDefault = "PROVIDER_TYPE_UNSPECIFIED";
+export declare const providerMessageServiceSendDocumentBodyTypeDefault =
+	'PROVIDER_TYPE_UNSPECIFIED';
 export declare const ProviderMessageServiceSendDocumentBody: any;
 export declare const ProviderMessageServiceSendDocumentResponse: any;
 /**
  * @summary SendImage delivers images to the external chat partner.
  */
-export declare const providerMessageServiceSendImageBodyTypeDefault = "PROVIDER_TYPE_UNSPECIFIED";
+export declare const providerMessageServiceSendImageBodyTypeDefault =
+	'PROVIDER_TYPE_UNSPECIFIED';
 export declare const ProviderMessageServiceSendImageBody: any;
 export declare const ProviderMessageServiceSendImageResponse: any;
 /**
@@ -25,6 +27,7 @@ export declare const ProviderMessageServiceSendSystemMessageResponse: any;
 /**
  * @summary SendText delivers a plain text message to the external chat partner.
  */
-export declare const providerMessageServiceSendTextBodyTypeDefault = "PROVIDER_TYPE_UNSPECIFIED";
+export declare const providerMessageServiceSendTextBodyTypeDefault =
+	'PROVIDER_TYPE_UNSPECIFIED';
 export declare const ProviderMessageServiceSendTextBody: any;
 export declare const ProviderMessageServiceSendTextResponse: any;
