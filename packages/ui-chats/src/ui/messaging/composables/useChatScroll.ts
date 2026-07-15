@@ -50,6 +50,13 @@ export const useChatScroll = ({
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * 2 tolerates subpixel scrollTop/clientHeight rounding that can leave
+	 * their sum a fraction short of scrollHeight at the very bottom.
+	 */
+	const bottomThreshold = 2;
 
 	const newUnseenMessagesCount = ref(0);
 
@@ -107,7 +114,7 @@ export const useChatScroll = ({
 			const newScrollHeight = el.scrollHeight;
 
 			const wasNearBottom =
-				el.scrollTop + el.clientHeight >= prevScrollHeight - 2;
+				el.scrollTop + el.clientHeight >= prevScrollHeight - bottomThreshold;
 			const contentGrown = newScrollHeight > prevScrollHeight;
 
 			/**
