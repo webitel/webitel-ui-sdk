@@ -18,7 +18,7 @@ import { useTableFilters } from '../../Filters/composables/useTableFilters';
 import {
 	DEFAULT_PERMISSIONS_USER_ACCESS,
 	type PermissionsUserAccess,
-} from '../composables/usePermissionsTabAccess';
+} from '../types/PermissionsUserAccess';
 import PermissionsTabContent from './_internal/permissions-tab-content.vue';
 
 const props = withDefaults(
