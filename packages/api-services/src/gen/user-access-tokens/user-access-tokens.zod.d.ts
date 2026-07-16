@@ -330,7 +330,7 @@ export declare const ListUserAccessTokenParams: zod.ZodObject<
 >;
 export declare const ListUserAccessTokenQueryParams: zod.ZodObject<
 	{
-		userName: zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
 		q: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
@@ -407,7 +407,7 @@ export declare const DeleteUserAccessTokenParams: zod.ZodObject<
 >;
 export declare const DeleteUserAccessTokenQueryParams: zod.ZodObject<
 	{
-		userName: zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
@@ -467,7 +467,7 @@ export declare const GetUserAccessTokenParams: zod.ZodObject<
 >;
 export declare const GetUserAccessTokenQueryParams: zod.ZodObject<
 	{
-		userName: zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

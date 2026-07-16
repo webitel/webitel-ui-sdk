@@ -469,8 +469,8 @@ export declare const WorkingScheduleServiceReadWorkingScheduleForecastParams: zo
 >;
 export declare const WorkingScheduleServiceReadWorkingScheduleForecastQueryParams: zod.ZodObject<
 	{
-		dateFrom: zod.ZodOptional<zod.ZodString>;
-		dateTo: zod.ZodOptional<zod.ZodString>;
+		'date.from': zod.ZodOptional<zod.ZodString>;
+		'date.to': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

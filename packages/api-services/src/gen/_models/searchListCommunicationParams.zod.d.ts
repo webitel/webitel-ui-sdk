@@ -11,6 +11,6 @@ export type SearchListCommunicationParams = {
 	sort?: string;
 	fields?: string[];
 	id?: number[];
-	expireAtFrom?: string;
-	expireAtTo?: string;
+	'expireAt.from'?: string;
+	'expireAt.to'?: string;
 };

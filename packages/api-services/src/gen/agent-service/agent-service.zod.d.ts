@@ -68,6 +68,7 @@ export declare const SearchAgentResponse: zod.ZodObject<
 						chatCount: zod.ZodOptional<zod.ZodNumber>;
 						description: zod.ZodOptional<zod.ZodString>;
 						extension: zod.ZodOptional<zod.ZodString>;
+						extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 						greetingMedia: zod.ZodOptional<
 							zod.ZodObject<
 								{
@@ -172,6 +173,7 @@ export declare const CreateAgentBody: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		domainId: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -257,6 +259,7 @@ export declare const CreateAgentResponse: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		extension: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -339,8 +342,8 @@ export declare const SearchAgentCallStatisticsQueryParams: zod.ZodObject<
 	{
 		page: zod.ZodOptional<zod.ZodNumber>;
 		size: zod.ZodOptional<zod.ZodNumber>;
-		timeFrom: zod.ZodOptional<zod.ZodString>;
-		timeTo: zod.ZodOptional<zod.ZodString>;
+		'time.from': zod.ZodOptional<zod.ZodString>;
+		'time.to': zod.ZodOptional<zod.ZodString>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		domainId: zod.ZodOptional<zod.ZodString>;
 		q: zod.ZodOptional<zod.ZodString>;
@@ -388,13 +391,13 @@ export declare const SearchAgentStatusStatisticQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		timeFrom: zod.ZodOptional<zod.ZodString>;
-		timeTo: zod.ZodOptional<zod.ZodString>;
+		'time.from': zod.ZodOptional<zod.ZodString>;
+		'time.to': zod.ZodOptional<zod.ZodString>;
 		status: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-		utilizationFrom: zod.ZodOptional<zod.ZodString>;
-		utilizationTo: zod.ZodOptional<zod.ZodString>;
+		'utilization.from': zod.ZodOptional<zod.ZodString>;
+		'utilization.to': zod.ZodOptional<zod.ZodString>;
 		hasCall: zod.ZodOptional<zod.ZodBoolean>;
 		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		regionId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
@@ -511,8 +514,8 @@ export declare const SearchAgentStatusStatisticItemParams: zod.ZodObject<
 >;
 export declare const SearchAgentStatusStatisticItemQueryParams: zod.ZodObject<
 	{
-		timeFrom: zod.ZodOptional<zod.ZodString>;
-		timeTo: zod.ZodOptional<zod.ZodString>;
+		'time.from': zod.ZodOptional<zod.ZodString>;
+		'time.to': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
@@ -591,8 +594,8 @@ export declare const SearchAgentStateHistoryQueryParams: zod.ZodObject<
 	{
 		page: zod.ZodOptional<zod.ZodNumber>;
 		size: zod.ZodOptional<zod.ZodNumber>;
-		joinedAtFrom: zod.ZodOptional<zod.ZodString>;
-		joinedAtTo: zod.ZodOptional<zod.ZodString>;
+		'joinedAt.from': zod.ZodOptional<zod.ZodString>;
+		'joinedAt.to': zod.ZodOptional<zod.ZodString>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodString>;
 		domainId: zod.ZodOptional<zod.ZodString>;
@@ -892,6 +895,7 @@ export declare const DeleteAgentResponse: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		extension: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -1016,6 +1020,7 @@ export declare const ReadAgentResponse: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		extension: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -1119,6 +1124,7 @@ export declare const PatchAgentBody: zod.ZodObject<
 		>;
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
@@ -1204,6 +1210,7 @@ export declare const PatchAgentResponse: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		extension: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -1308,6 +1315,7 @@ export declare const UpdateAgentBody: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		domainId: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{
@@ -1393,6 +1401,7 @@ export declare const UpdateAgentResponse: zod.ZodObject<
 		chatCount: zod.ZodOptional<zod.ZodNumber>;
 		description: zod.ZodOptional<zod.ZodString>;
 		extension: zod.ZodOptional<zod.ZodString>;
+		extraChatCount: zod.ZodOptional<zod.ZodNumber>;
 		greetingMedia: zod.ZodOptional<
 			zod.ZodObject<
 				{

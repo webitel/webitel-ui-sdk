@@ -6,6 +6,6 @@
  */
 
 export type SearchAgentStatusStatisticItemParams = {
-	timeFrom?: string;
-	timeTo?: string;
+	'time.from'?: string;
+	'time.to'?: string;
 };

@@ -11,13 +11,13 @@ export type SearchAgentStatusStatisticParams = {
 	sort?: string;
 	fields?: string[];
 	agentId?: string[];
-	timeFrom?: string;
-	timeTo?: string;
+	'time.from'?: string;
+	'time.to'?: string;
 	status?: string[];
 	queueId?: number[];
 	teamId?: number[];
-	utilizationFrom?: string;
-	utilizationTo?: string;
+	'utilization.from'?: string;
+	'utilization.to'?: string;
 	hasCall?: boolean;
 	skillId?: number[];
 	regionId?: number[];

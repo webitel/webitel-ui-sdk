@@ -13,8 +13,8 @@ export declare const AgentWorkingScheduleServiceSearchAgentsWorkingScheduleParam
 >;
 export declare const AgentWorkingScheduleServiceSearchAgentsWorkingScheduleQueryParams: zod.ZodObject<
 	{
-		dateFrom: zod.ZodOptional<zod.ZodString>;
-		dateTo: zod.ZodOptional<zod.ZodString>;
+		'date.from': zod.ZodOptional<zod.ZodString>;
+		'date.to': zod.ZodOptional<zod.ZodString>;
 		supervisorId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		teamId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		skillId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;

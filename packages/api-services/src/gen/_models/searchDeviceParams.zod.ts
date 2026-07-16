@@ -55,11 +55,11 @@ export type SearchDeviceParams = {
 	/**
 	 * Object ID
 	 */
-	userId?: string;
+	'user.id'?: string;
 	/**
 	 * Display Name
 	 */
-	userName?: string;
+	'user.name'?: string;
 	/**
 	 * filter: by MAC address
 	 */

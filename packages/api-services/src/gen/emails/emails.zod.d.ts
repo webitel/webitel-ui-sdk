@@ -95,9 +95,9 @@ export declare const ListEmailsQueryParams: zod.ZodObject<
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		primary: zod.ZodOptional<zod.ZodBoolean>;
 		verified: zod.ZodOptional<zod.ZodBoolean>;
-		typeId: zod.ZodOptional<zod.ZodString>;
-		typeType: zod.ZodOptional<zod.ZodString>;
-		typeName: zod.ZodOptional<zod.ZodString>;
+		'type.id': zod.ZodOptional<zod.ZodString>;
+		'type.type': zod.ZodOptional<zod.ZodString>;
+		'type.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

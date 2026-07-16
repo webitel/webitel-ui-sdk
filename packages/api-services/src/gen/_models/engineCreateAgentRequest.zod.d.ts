@@ -11,6 +11,7 @@ export interface EngineCreateAgentRequest {
 	chatCount?: number;
 	description?: string;
 	domainId?: string;
+	extraChatCount?: number;
 	greetingMedia?: EngineLookup;
 	isSupervisor?: boolean;
 	progressiveCount?: number;

@@ -254,8 +254,8 @@ export declare const SearchListCommunicationQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-		expireAtFrom: zod.ZodOptional<zod.ZodString>;
-		expireAtTo: zod.ZodOptional<zod.ZodString>;
+		'expireAt.from': zod.ZodOptional<zod.ZodString>;
+		'expireAt.to': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

@@ -11,11 +11,11 @@ export const ContactsChatCatalogGetContactChatHistory2Params = zod.object({
 });
 
 export const ContactsChatCatalogGetContactChatHistory2QueryParams = zod.object({
-	offsetId: zod
+	'offset.id': zod
 		.string()
 		.optional()
 		.describe('Messages ONLY starting from the specified message ID'),
-	offsetDate: zod
+	'offset.date': zod
 		.string()
 		.optional()
 		.describe('Messages ONLY been sent before the specified epochtime(milli).'),
@@ -405,11 +405,11 @@ export const ContactsChatCatalogGetContactChatHistoryParams = zod.object({
 });
 
 export const ContactsChatCatalogGetContactChatHistoryQueryParams = zod.object({
-	offsetId: zod
+	'offset.id': zod
 		.string()
 		.optional()
 		.describe('Messages ONLY starting from the specified message ID'),
-	offsetDate: zod
+	'offset.date': zod
 		.string()
 		.optional()
 		.describe('Messages ONLY been sent before the specified epochtime(milli).'),

@@ -6,8 +6,8 @@
  */
 
 export type AgentWorkingScheduleServiceSearchAgentsWorkingScheduleParams = {
-	dateFrom?: string;
-	dateTo?: string;
+	'date.from'?: string;
+	'date.to'?: string;
 	supervisorId?: string[];
 	teamId?: string[];
 	skillId?: string[];

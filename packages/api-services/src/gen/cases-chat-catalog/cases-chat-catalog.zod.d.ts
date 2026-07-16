@@ -14,8 +14,8 @@ export declare const CasesChatCatalogGetCaseChatHistoryParams: zod.ZodObject<
 >;
 export declare const CasesChatCatalogGetCaseChatHistoryQueryParams: zod.ZodObject<
 	{
-		offsetId: zod.ZodOptional<zod.ZodString>;
-		offsetDate: zod.ZodOptional<zod.ZodString>;
+		'offset.id': zod.ZodOptional<zod.ZodString>;
+		'offset.date': zod.ZodOptional<zod.ZodString>;
 		size: zod.ZodOptional<zod.ZodNumber>;
 		page: zod.ZodOptional<zod.ZodNumber>;
 		q: zod.ZodOptional<zod.ZodString>;

@@ -12,8 +12,8 @@ export declare const GetCustomerQueryParams: zod.ZodObject<
 	{
 		id: zod.ZodOptional<zod.ZodString>;
 		valid: zod.ZodOptional<zod.ZodBoolean>;
-		domainId: zod.ZodOptional<zod.ZodString>;
-		domainName: zod.ZodOptional<zod.ZodString>;
+		'domain.id': zod.ZodOptional<zod.ZodString>;
+		'domain.name': zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 	},
@@ -228,10 +228,10 @@ export declare const LicenseUsageQueryParams: zod.ZodObject<
 		page: zod.ZodOptional<zod.ZodNumber>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
-		domainId: zod.ZodOptional<zod.ZodString>;
-		domainName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
+		'domain.id': zod.ZodOptional<zod.ZodString>;
+		'domain.name': zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		product: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		valid: zod.ZodOptional<zod.ZodBoolean>;
@@ -309,8 +309,8 @@ export declare const GetCustomer2Params: zod.ZodObject<
 export declare const GetCustomer2QueryParams: zod.ZodObject<
 	{
 		valid: zod.ZodOptional<zod.ZodBoolean>;
-		domainId: zod.ZodOptional<zod.ZodString>;
-		domainName: zod.ZodOptional<zod.ZodString>;
+		'domain.id': zod.ZodOptional<zod.ZodString>;
+		'domain.name': zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 	},
@@ -416,10 +416,10 @@ export declare const LicenseUsage2QueryParams: zod.ZodObject<
 		page: zod.ZodOptional<zod.ZodNumber>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
-		domainId: zod.ZodOptional<zod.ZodString>;
-		domainName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
+		'domain.id': zod.ZodOptional<zod.ZodString>;
+		'domain.name': zod.ZodOptional<zod.ZodString>;
 		customerId: zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		product: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
@@ -492,10 +492,10 @@ export declare const LicenseUsage3QueryParams: zod.ZodObject<
 		page: zod.ZodOptional<zod.ZodNumber>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
-		domainId: zod.ZodOptional<zod.ZodString>;
-		domainName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
+		'domain.id': zod.ZodOptional<zod.ZodString>;
+		'domain.name': zod.ZodOptional<zod.ZodString>;
 		customerId: zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		product: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;

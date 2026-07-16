@@ -16,10 +16,10 @@ export declare const ContactLinkingServiceCreateContactFromConversationParams: z
 >;
 export declare const ContactLinkingServiceCreateContactFromConversationQueryParams: zod.ZodObject<
 	{
-		timezoneId: zod.ZodOptional<zod.ZodString>;
-		timezoneName: zod.ZodOptional<zod.ZodString>;
-		ownerId: zod.ZodOptional<zod.ZodString>;
-		ownerName: zod.ZodOptional<zod.ZodString>;
+		'timezone.id': zod.ZodOptional<zod.ZodString>;
+		'timezone.name': zod.ZodOptional<zod.ZodString>;
+		'owner.id': zod.ZodOptional<zod.ZodString>;
+		'owner.name': zod.ZodOptional<zod.ZodString>;
 		label: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		name: zod.ZodOptional<zod.ZodString>;
 		description: zod.ZodOptional<zod.ZodString>;

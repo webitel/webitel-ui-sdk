@@ -122,9 +122,9 @@ export declare const CatalogGetCustomersQueryParams: zod.ZodObject<
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		type: zod.ZodOptional<zod.ZodString>;
-		viaId: zod.ZodOptional<zod.ZodString>;
-		viaType: zod.ZodOptional<zod.ZodString>;
-		viaName: zod.ZodOptional<zod.ZodString>;
+		'via.id': zod.ZodOptional<zod.ZodString>;
+		'via.type': zod.ZodOptional<zod.ZodString>;
+		'via.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
@@ -182,14 +182,14 @@ export declare const CatalogGetDialogsQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		viaId: zod.ZodOptional<zod.ZodString>;
-		viaType: zod.ZodOptional<zod.ZodString>;
-		viaName: zod.ZodOptional<zod.ZodString>;
-		peerId: zod.ZodOptional<zod.ZodString>;
-		peerType: zod.ZodOptional<zod.ZodString>;
-		peerName: zod.ZodOptional<zod.ZodString>;
-		dateSince: zod.ZodOptional<zod.ZodString>;
-		dateUntil: zod.ZodOptional<zod.ZodString>;
+		'via.id': zod.ZodOptional<zod.ZodString>;
+		'via.type': zod.ZodOptional<zod.ZodString>;
+		'via.name': zod.ZodOptional<zod.ZodString>;
+		'peer.id': zod.ZodOptional<zod.ZodString>;
+		'peer.type': zod.ZodOptional<zod.ZodString>;
+		'peer.name': zod.ZodOptional<zod.ZodString>;
+		'date.since': zod.ZodOptional<zod.ZodString>;
+		'date.until': zod.ZodOptional<zod.ZodString>;
 		online: zod.ZodOptional<zod.ZodBoolean>;
 		groupString: zod.ZodOptional<zod.ZodString>;
 	},
@@ -518,14 +518,14 @@ export declare const CatalogGetMembersQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		viaId: zod.ZodOptional<zod.ZodString>;
-		viaType: zod.ZodOptional<zod.ZodString>;
-		viaName: zod.ZodOptional<zod.ZodString>;
-		peerId: zod.ZodOptional<zod.ZodString>;
-		peerType: zod.ZodOptional<zod.ZodString>;
-		peerName: zod.ZodOptional<zod.ZodString>;
-		dateSince: zod.ZodOptional<zod.ZodString>;
-		dateUntil: zod.ZodOptional<zod.ZodString>;
+		'via.id': zod.ZodOptional<zod.ZodString>;
+		'via.type': zod.ZodOptional<zod.ZodString>;
+		'via.name': zod.ZodOptional<zod.ZodString>;
+		'peer.id': zod.ZodOptional<zod.ZodString>;
+		'peer.type': zod.ZodOptional<zod.ZodString>;
+		'peer.name': zod.ZodOptional<zod.ZodString>;
+		'date.since': zod.ZodOptional<zod.ZodString>;
+		'date.until': zod.ZodOptional<zod.ZodString>;
 		online: zod.ZodOptional<zod.ZodBoolean>;
 		joined: zod.ZodOptional<zod.ZodBoolean>;
 	},
@@ -605,14 +605,14 @@ export declare const CatalogGetHistoryParams: zod.ZodObject<
 >;
 export declare const CatalogGetHistoryQueryParams: zod.ZodObject<
 	{
-		offsetId: zod.ZodOptional<zod.ZodString>;
-		offsetDate: zod.ZodOptional<zod.ZodString>;
+		'offset.id': zod.ZodOptional<zod.ZodString>;
+		'offset.date': zod.ZodOptional<zod.ZodString>;
 		limit: zod.ZodOptional<zod.ZodNumber>;
 		q: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		peerId: zod.ZodOptional<zod.ZodString>;
-		peerType: zod.ZodOptional<zod.ZodString>;
-		peerName: zod.ZodOptional<zod.ZodString>;
+		'peer.id': zod.ZodOptional<zod.ZodString>;
+		'peer.type': zod.ZodOptional<zod.ZodString>;
+		'peer.name': zod.ZodOptional<zod.ZodString>;
 		groupString: zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
@@ -900,13 +900,13 @@ export declare const CatalogGetHistory2Params: zod.ZodObject<
 >;
 export declare const CatalogGetHistory2QueryParams: zod.ZodObject<
 	{
-		offsetId: zod.ZodOptional<zod.ZodString>;
-		offsetDate: zod.ZodOptional<zod.ZodString>;
+		'offset.id': zod.ZodOptional<zod.ZodString>;
+		'offset.date': zod.ZodOptional<zod.ZodString>;
 		limit: zod.ZodOptional<zod.ZodNumber>;
 		q: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		chatId: zod.ZodOptional<zod.ZodString>;
-		peerName: zod.ZodOptional<zod.ZodString>;
+		'peer.name': zod.ZodOptional<zod.ZodString>;
 		groupStringString: zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip

@@ -253,8 +253,8 @@ export declare const SearchAuditRateQueryParams: zod.ZodObject<
 		q: zod.ZodOptional<zod.ZodString>;
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		createdAtFrom: zod.ZodOptional<zod.ZodString>;
-		createdAtTo: zod.ZodOptional<zod.ZodString>;
+		'createdAt.from': zod.ZodOptional<zod.ZodString>;
+		'createdAt.to': zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		callId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		ratedUser: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;

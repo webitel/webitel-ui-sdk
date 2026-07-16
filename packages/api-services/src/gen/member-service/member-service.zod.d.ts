@@ -46,16 +46,16 @@ export declare const SearchMembersQueryParams: zod.ZodObject<
 		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		bucketId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		destination: zod.ZodOptional<zod.ZodString>;
-		createdAtFrom: zod.ZodOptional<zod.ZodString>;
-		createdAtTo: zod.ZodOptional<zod.ZodString>;
-		offeringAtFrom: zod.ZodOptional<zod.ZodString>;
-		offeringAtTo: zod.ZodOptional<zod.ZodString>;
+		'createdAt.from': zod.ZodOptional<zod.ZodString>;
+		'createdAt.to': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.from': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.to': zod.ZodOptional<zod.ZodString>;
 		stopCause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		priorityFrom: zod.ZodOptional<zod.ZodString>;
-		priorityTo: zod.ZodOptional<zod.ZodString>;
+		'priority.from': zod.ZodOptional<zod.ZodString>;
+		'priority.to': zod.ZodOptional<zod.ZodString>;
 		name: zod.ZodOptional<zod.ZodString>;
-		attemptsFrom: zod.ZodOptional<zod.ZodString>;
-		attemptsTo: zod.ZodOptional<zod.ZodString>;
+		'attempts.from': zod.ZodOptional<zod.ZodString>;
+		'attempts.to': zod.ZodOptional<zod.ZodString>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 	},
 	zod.z.core.$strip
@@ -369,20 +369,20 @@ export declare const SearchAttemptsQueryParams: zod.ZodObject<
 		q: zod.ZodOptional<zod.ZodString>;
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		joinedAtFrom: zod.ZodOptional<zod.ZodString>;
-		joinedAtTo: zod.ZodOptional<zod.ZodString>;
+		'joinedAt.from': zod.ZodOptional<zod.ZodString>;
+		'joinedAt.to': zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		bucketId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		result: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		leavingAtFrom: zod.ZodOptional<zod.ZodString>;
-		leavingAtTo: zod.ZodOptional<zod.ZodString>;
-		offeringAtFrom: zod.ZodOptional<zod.ZodString>;
-		offeringAtTo: zod.ZodOptional<zod.ZodString>;
-		durationFrom: zod.ZodOptional<zod.ZodString>;
-		durationTo: zod.ZodOptional<zod.ZodString>;
+		'leavingAt.from': zod.ZodOptional<zod.ZodString>;
+		'leavingAt.to': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.from': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.to': zod.ZodOptional<zod.ZodString>;
+		'duration.from': zod.ZodOptional<zod.ZodString>;
+		'duration.to': zod.ZodOptional<zod.ZodString>;
 		offeredAgentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 	},
 	zod.z.core.$strip
@@ -533,20 +533,20 @@ export declare const SearchAttemptsHistoryQueryParams: zod.ZodObject<
 		q: zod.ZodOptional<zod.ZodString>;
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		joinedAtFrom: zod.ZodOptional<zod.ZodString>;
-		joinedAtTo: zod.ZodOptional<zod.ZodString>;
+		'joinedAt.from': zod.ZodOptional<zod.ZodString>;
+		'joinedAt.to': zod.ZodOptional<zod.ZodString>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		queueId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		bucketId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		memberId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		result: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		leavingAtFrom: zod.ZodOptional<zod.ZodString>;
-		leavingAtTo: zod.ZodOptional<zod.ZodString>;
-		offeringAtFrom: zod.ZodOptional<zod.ZodString>;
-		offeringAtTo: zod.ZodOptional<zod.ZodString>;
-		durationFrom: zod.ZodOptional<zod.ZodString>;
-		durationTo: zod.ZodOptional<zod.ZodString>;
+		'leavingAt.from': zod.ZodOptional<zod.ZodString>;
+		'leavingAt.to': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.from': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.to': zod.ZodOptional<zod.ZodString>;
+		'duration.from': zod.ZodOptional<zod.ZodString>;
+		'duration.to': zod.ZodOptional<zod.ZodString>;
 		offeredAgentId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 	},
 	zod.z.core.$strip
@@ -1077,16 +1077,16 @@ export declare const SearchMemberInQueueQueryParams: zod.ZodObject<
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		bucketId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		destination: zod.ZodOptional<zod.ZodString>;
-		createdAtFrom: zod.ZodOptional<zod.ZodString>;
-		createdAtTo: zod.ZodOptional<zod.ZodString>;
-		offeringAtFrom: zod.ZodOptional<zod.ZodString>;
-		offeringAtTo: zod.ZodOptional<zod.ZodString>;
+		'createdAt.from': zod.ZodOptional<zod.ZodString>;
+		'createdAt.to': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.from': zod.ZodOptional<zod.ZodString>;
+		'offeringAt.to': zod.ZodOptional<zod.ZodString>;
 		stopCause: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		priorityFrom: zod.ZodOptional<zod.ZodString>;
-		priorityTo: zod.ZodOptional<zod.ZodString>;
+		'priority.from': zod.ZodOptional<zod.ZodString>;
+		'priority.to': zod.ZodOptional<zod.ZodString>;
 		name: zod.ZodOptional<zod.ZodString>;
-		attemptsFrom: zod.ZodOptional<zod.ZodString>;
-		attemptsTo: zod.ZodOptional<zod.ZodString>;
+		'attempts.from': zod.ZodOptional<zod.ZodString>;
+		'attempts.to': zod.ZodOptional<zod.ZodString>;
 		agentId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		variablesString: zod.ZodOptional<zod.ZodString>;
 	},

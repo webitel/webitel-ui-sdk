@@ -37,13 +37,13 @@ export type CatalogGetCustomersParams = {
 	 * Contact unique **ID**entifier.
 	 * Contact **type**-specific string.
 	 */
-	viaId?: string;
+	'via.id'?: string;
 	/**
 	 * Contact **type** provider.
 	 */
-	viaType?: string;
+	'via.type'?: string;
 	/**
 	 * Contact display **name**.
 	 */
-	viaName?: string;
+	'via.name'?: string;
 };

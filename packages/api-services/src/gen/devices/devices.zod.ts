@@ -110,8 +110,8 @@ export const SearchDeviceQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('filter: has hotdesk (=pattern); is hotdesk (=*)'),
-	userId: zod.string().optional().describe('Object ID'),
-	userName: zod.string().optional().describe('Display Name'),
+	'user.id': zod.string().optional().describe('Object ID'),
+	'user.name': zod.string().optional().describe('Display Name'),
 	mac: zod.string().optional().describe('filter: by MAC address'),
 	ip: zod.string().optional().describe('filter: by IP address'),
 });
@@ -485,9 +485,9 @@ export const ListRegistrationsParams = zod.object({
 });
 
 export const ListRegistrationsQueryParams = zod.object({
-	userId: zod.string().optional().describe('Object ID'),
-	userName: zod.string().optional().describe('Display Name'),
-	deviceName: zod.string().optional().describe('Display Name'),
+	'user.id': zod.string().optional().describe('Object ID'),
+	'user.name': zod.string().optional().describe('Display Name'),
+	'device.name': zod.string().optional().describe('Display Name'),
 });
 
 export const ListRegistrationsResponse = zod.object({
@@ -532,9 +532,9 @@ export const SearchDeviceAuditParams = zod.object({
 });
 
 export const SearchDeviceAuditQueryParams = zod.object({
-	userId: zod.string().optional().describe('Object ID'),
-	userName: zod.string().optional().describe('Display Name'),
-	deviceName: zod.string().optional().describe('Display Name'),
+	'user.id': zod.string().optional().describe('Object ID'),
+	'user.name': zod.string().optional().describe('Display Name'),
+	'device.name': zod.string().optional().describe('Display Name'),
 	timeFrom: zod
 		.string()
 		.optional()

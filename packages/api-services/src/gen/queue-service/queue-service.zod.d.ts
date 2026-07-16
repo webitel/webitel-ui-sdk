@@ -557,8 +557,8 @@ export declare const SearchQueueReportGeneralQueryParams: zod.ZodObject<
 	{
 		page: zod.ZodOptional<zod.ZodNumber>;
 		size: zod.ZodOptional<zod.ZodNumber>;
-		joinedAtFrom: zod.ZodOptional<zod.ZodString>;
-		joinedAtTo: zod.ZodOptional<zod.ZodString>;
+		'joinedAt.from': zod.ZodOptional<zod.ZodString>;
+		'joinedAt.to': zod.ZodOptional<zod.ZodString>;
 		domainId: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodString>;

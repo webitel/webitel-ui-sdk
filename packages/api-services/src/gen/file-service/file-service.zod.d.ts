@@ -35,11 +35,11 @@ export declare const SearchFilesByCallQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		uploadedAtFrom: zod.ZodOptional<zod.ZodString>;
-		uploadedAtTo: zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.from': zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.to': zod.ZodOptional<zod.ZodString>;
 		referenceId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		retentionUntilFrom: zod.ZodOptional<zod.ZodString>;
-		retentionUntilTo: zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.from': zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.to': zod.ZodOptional<zod.ZodString>;
 		channel: zod.ZodOptional<
 			zod.ZodArray<
 				zod.ZodEnum<{
@@ -145,11 +145,11 @@ export declare const SearchScreenRecordingsByAgentQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		uploadedAtFrom: zod.ZodOptional<zod.ZodString>;
-		uploadedAtTo: zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.from': zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.to': zod.ZodOptional<zod.ZodString>;
 		referenceId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		retentionUntilFrom: zod.ZodOptional<zod.ZodString>;
-		retentionUntilTo: zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.from': zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.to': zod.ZodOptional<zod.ZodString>;
 		type: zod.ZodDefault<
 			zod.ZodEnum<{
 				PDF: 'PDF';
@@ -266,8 +266,8 @@ export declare const SearchFilesQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		uploadedAtFrom: zod.ZodOptional<zod.ZodString>;
-		uploadedAtTo: zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.from': zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.to': zod.ZodOptional<zod.ZodString>;
 		uploadedBy: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		referenceId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		channel: zod.ZodOptional<
@@ -285,8 +285,8 @@ export declare const SearchFilesQueryParams: zod.ZodObject<
 				}>
 			>
 		>;
-		retentionUntilFrom: zod.ZodOptional<zod.ZodString>;
-		retentionUntilTo: zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.from': zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.to': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
@@ -394,11 +394,11 @@ export declare const SearchScreenRecordingsQueryParams: zod.ZodObject<
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		uploadedAtFrom: zod.ZodOptional<zod.ZodString>;
-		uploadedAtTo: zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.from': zod.ZodOptional<zod.ZodString>;
+		'uploadedAt.to': zod.ZodOptional<zod.ZodString>;
 		referenceId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		retentionUntilFrom: zod.ZodOptional<zod.ZodString>;
-		retentionUntilTo: zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.from': zod.ZodOptional<zod.ZodString>;
+		'retentionUntil.to': zod.ZodOptional<zod.ZodString>;
 		type: zod.ZodDefault<
 			zod.ZodEnum<{
 				PDF: 'PDF';

@@ -45,33 +45,33 @@ export type SearchCommentsParams = {
 	/**
 	 * Since timestamp(milli). Not before.
 	 */
-	dateSince?: string;
+	'date.since'?: string;
 	/**
 	 * Until timestamp(milli). Not after.
 	 */
-	dateUntil?: string;
+	'date.until'?: string;
 	/**
 	 * Reference Object unique ID.
 	 */
-	authorId?: string;
+	'author.id'?: string;
 	/**
 	 * Reference Object well-known type.
 	 */
-	authorType?: string;
+	'author.type'?: string;
 	/**
 	 * Reference Object display name.
 	 */
-	authorName?: string;
+	'author.name'?: string;
 	/**
 	 * Reference Object unique ID.
 	 */
-	editorId?: string;
+	'editor.id'?: string;
 	/**
 	 * Reference Object well-known type.
 	 */
-	editorType?: string;
+	'editor.type'?: string;
 	/**
 	 * Reference Object display name.
 	 */
-	editorName?: string;
+	'editor.name'?: string;
 };

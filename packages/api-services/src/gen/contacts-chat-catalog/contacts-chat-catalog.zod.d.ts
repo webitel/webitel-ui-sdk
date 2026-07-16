@@ -13,8 +13,8 @@ export declare const ContactsChatCatalogGetContactChatHistory2Params: zod.ZodObj
 >;
 export declare const ContactsChatCatalogGetContactChatHistory2QueryParams: zod.ZodObject<
 	{
-		offsetId: zod.ZodOptional<zod.ZodString>;
-		offsetDate: zod.ZodOptional<zod.ZodString>;
+		'offset.id': zod.ZodOptional<zod.ZodString>;
+		'offset.date': zod.ZodOptional<zod.ZodString>;
 		size: zod.ZodOptional<zod.ZodNumber>;
 		page: zod.ZodOptional<zod.ZodNumber>;
 		q: zod.ZodOptional<zod.ZodString>;
@@ -273,8 +273,8 @@ export declare const ContactsChatCatalogGetContactChatHistoryParams: zod.ZodObje
 >;
 export declare const ContactsChatCatalogGetContactChatHistoryQueryParams: zod.ZodObject<
 	{
-		offsetId: zod.ZodOptional<zod.ZodString>;
-		offsetDate: zod.ZodOptional<zod.ZodString>;
+		'offset.id': zod.ZodOptional<zod.ZodString>;
+		'offset.date': zod.ZodOptional<zod.ZodString>;
 		size: zod.ZodOptional<zod.ZodNumber>;
 		page: zod.ZodOptional<zod.ZodNumber>;
 		q: zod.ZodOptional<zod.ZodString>;

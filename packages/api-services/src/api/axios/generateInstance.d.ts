@@ -1,5 +1,4 @@
 import axios, { type CreateAxiosDefaults } from 'axios';
-
 interface GenerateInstanceOptions extends CreateAxiosDefaults {
 	interceptors?: {
 		request?: Parameters<
@@ -23,3 +22,4 @@ export declare const generateInstance: ({
 	baseURL,
 	...rest
 }?: GenerateInstanceOptions) => import('axios').AxiosInstance;
+export {};

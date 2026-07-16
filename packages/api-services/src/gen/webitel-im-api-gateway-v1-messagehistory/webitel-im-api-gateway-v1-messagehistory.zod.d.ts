@@ -23,8 +23,8 @@ export declare const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams: 
 		types: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
 		periodFrom: zod.ZodOptional<zod.ZodString>;
 		periodTo: zod.ZodOptional<zod.ZodString>;
-		cursorId: zod.ZodOptional<zod.ZodString>;
-		cursorBefore: zod.ZodOptional<zod.ZodBoolean>;
+		'cursor.id': zod.ZodOptional<zod.ZodString>;
+		'cursor.before': zod.ZodOptional<zod.ZodBoolean>;
 		size: zod.ZodOptional<zod.ZodNumber>;
 	},
 	zod.z.core.$strip
@@ -463,8 +463,8 @@ export declare const MessageHistorySearchThreadMessagesHistoryQueryParams: zod.Z
 		ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		senderIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		types: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-		cursorId: zod.ZodOptional<zod.ZodString>;
-		cursorBefore: zod.ZodOptional<zod.ZodBoolean>;
+		'cursor.id': zod.ZodOptional<zod.ZodString>;
+		'cursor.before': zod.ZodOptional<zod.ZodBoolean>;
 		size: zod.ZodOptional<zod.ZodNumber>;
 	},
 	zod.z.core.$strip

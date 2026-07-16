@@ -16,17 +16,17 @@ export type UpdateUserParams = {
 	/**
 	 * SIP display name
 	 */
-	deviceName?: string;
+	'device.name'?: string;
 	/**
 	 * SIP auth-id
 	 */
-	deviceAccount?: string;
+	'device.account'?: string;
 	/**
 	 * SIP password
 	 */
-	devicePassword?: string;
+	'device.password'?: string;
 	/**
 	 * [re]generate SIP password ?
 	 */
-	deviceGeneratePassword?: boolean;
+	'device.generatePassword'?: boolean;
 };

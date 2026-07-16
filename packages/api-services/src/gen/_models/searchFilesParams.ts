@@ -13,14 +13,14 @@ export type SearchFilesParams = {
 	sort?: string;
 	fields?: string[];
 	id?: string[];
-	uploadedAtFrom?: string;
-	uploadedAtTo?: string;
+	'uploadedAt.from'?: string;
+	'uploadedAt.to'?: string;
 	uploadedBy?: string[];
 	referenceId?: string[];
 	/**
 	 *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
 	 */
 	channel?: SearchFilesChannelItem[];
-	retentionUntilFrom?: string;
-	retentionUntilTo?: string;
+	'retentionUntil.from'?: string;
+	'retentionUntil.to'?: string;
 };

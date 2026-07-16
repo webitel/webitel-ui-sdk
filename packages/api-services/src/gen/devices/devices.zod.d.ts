@@ -94,8 +94,8 @@ export declare const SearchDeviceQueryParams: zod.ZodObject<
 		access: zod.ZodOptional<zod.ZodString>;
 		account: zod.ZodOptional<zod.ZodString>;
 		hotdesk: zod.ZodOptional<zod.ZodString>;
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
 		mac: zod.ZodOptional<zod.ZodString>;
 		ip: zod.ZodOptional<zod.ZodString>;
 	},
@@ -571,9 +571,9 @@ export declare const ListRegistrationsParams: zod.ZodObject<
 >;
 export declare const ListRegistrationsQueryParams: zod.ZodObject<
 	{
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
-		deviceName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
+		'device.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
@@ -632,9 +632,9 @@ export declare const SearchDeviceAuditParams: zod.ZodObject<
 >;
 export declare const SearchDeviceAuditQueryParams: zod.ZodObject<
 	{
-		userId: zod.ZodOptional<zod.ZodString>;
-		userName: zod.ZodOptional<zod.ZodString>;
-		deviceName: zod.ZodOptional<zod.ZodString>;
+		'user.id': zod.ZodOptional<zod.ZodString>;
+		'user.name': zod.ZodOptional<zod.ZodString>;
+		'device.name': zod.ZodOptional<zod.ZodString>;
 		timeFrom: zod.ZodOptional<zod.ZodString>;
 		timeTill: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;

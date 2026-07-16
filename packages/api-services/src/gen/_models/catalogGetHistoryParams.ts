@@ -9,11 +9,11 @@ export type CatalogGetHistoryParams = {
 	/**
 	 * Messages ONLY starting from the specified message ID
 	 */
-	offsetId?: string;
+	'offset.id'?: string;
 	/**
 	 * Messages ONLY been sent before the specified epochtime(milli).
 	 */
-	offsetDate?: string;
+	'offset.date'?: string;
 	/**
 	 * Number of messages to return.
 	 */
@@ -30,15 +30,15 @@ export type CatalogGetHistoryParams = {
 	 * Contact unique **ID**entifier.
 	 * Contact **type**-specific string.
 	 */
-	peerId?: string;
+	'peer.id'?: string;
 	/**
 	 * Contact **type** provider.
 	 */
-	peerType?: string;
+	'peer.type'?: string;
 	/**
 	 * Contact display **name**.
 	 */
-	peerName?: string;
+	'peer.name'?: string;
 	/**
 	 * Includes the history of ONLY those dialogs
 	 * whose member channel(s) contain

@@ -473,6 +473,7 @@ export default {
 		nameAlreadyInUse: 'Така назва вже використовується',
 		phoneNumberSymbolsValidator:
 			"Номер може містити лише літери (a-z, A-Z), цифри (0-9) та символи: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
 	},
 	webitelUI: {
 		searchBar: {

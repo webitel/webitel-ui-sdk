@@ -616,12 +616,12 @@ export declare const SearchTriggerJobQueryParams: zod.ZodObject<
 		q: zod.ZodOptional<zod.ZodString>;
 		sort: zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		createdAtFrom: zod.ZodOptional<zod.ZodString>;
-		createdAtTo: zod.ZodOptional<zod.ZodString>;
-		startedAtFrom: zod.ZodOptional<zod.ZodString>;
-		startedAtTo: zod.ZodOptional<zod.ZodString>;
-		durationFrom: zod.ZodOptional<zod.ZodString>;
-		durationTo: zod.ZodOptional<zod.ZodString>;
+		'createdAt.from': zod.ZodOptional<zod.ZodString>;
+		'createdAt.to': zod.ZodOptional<zod.ZodString>;
+		'startedAt.from': zod.ZodOptional<zod.ZodString>;
+		'startedAt.to': zod.ZodOptional<zod.ZodString>;
+		'duration.from': zod.ZodOptional<zod.ZodString>;
+		'duration.to': zod.ZodOptional<zod.ZodString>;
 		state: zod.ZodOptional<
 			zod.ZodArray<
 				zod.ZodEnum<{

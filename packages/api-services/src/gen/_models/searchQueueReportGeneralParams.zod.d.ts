@@ -7,8 +7,8 @@
 export type SearchQueueReportGeneralParams = {
 	page?: number;
 	size?: number;
-	joinedAtFrom?: string;
-	joinedAtTo?: string;
+	'joinedAt.from'?: string;
+	'joinedAt.to'?: string;
 	domainId?: string;
 	fields?: string[];
 	sort?: string;

@@ -42,13 +42,13 @@ export type ListEmailsParams = {
 	/**
 	 * Reference Object unique ID.
 	 */
-	typeId?: string;
+	'type.id'?: string;
 	/**
 	 * Reference Object well-known type.
 	 */
-	typeType?: string;
+	'type.type'?: string;
 	/**
 	 * Reference Object display name.
 	 */
-	typeName?: string;
+	'type.name'?: string;
 };

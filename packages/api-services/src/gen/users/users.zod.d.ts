@@ -338,8 +338,8 @@ export declare const SearchUsersQueryParams: zod.ZodObject<
 		extension: zod.ZodOptional<zod.ZodString>;
 		any: zod.ZodOptional<zod.ZodBoolean>;
 		deleted: zod.ZodOptional<zod.ZodBoolean>;
-		presenceStatus: zod.ZodOptional<zod.ZodString>;
-		presenceNote: zod.ZodOptional<zod.ZodString>;
+		'presence.status': zod.ZodOptional<zod.ZodString>;
+		'presence.note': zod.ZodOptional<zod.ZodString>;
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		page: zod.ZodOptional<zod.ZodNumber>;
@@ -510,10 +510,10 @@ export declare const CreateUserQueryParams: zod.ZodObject<
 		userPassword: zod.ZodOptional<zod.ZodString>;
 		confirmPassword: zod.ZodOptional<zod.ZodString>;
 		generateDevice: zod.ZodOptional<zod.ZodBoolean>;
-		deviceName: zod.ZodOptional<zod.ZodString>;
-		deviceAccount: zod.ZodOptional<zod.ZodString>;
-		devicePassword: zod.ZodOptional<zod.ZodString>;
-		deviceGeneratePassword: zod.ZodOptional<zod.ZodBoolean>;
+		'device.name': zod.ZodOptional<zod.ZodString>;
+		'device.account': zod.ZodOptional<zod.ZodString>;
+		'device.password': zod.ZodOptional<zod.ZodString>;
+		'device.generatePassword': zod.ZodOptional<zod.ZodBoolean>;
 	},
 	zod.z.core.$strip
 >;
@@ -1402,10 +1402,10 @@ export declare const UpdateUser2QueryParams: zod.ZodObject<
 	{
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		generateDevice: zod.ZodOptional<zod.ZodBoolean>;
-		deviceName: zod.ZodOptional<zod.ZodString>;
-		deviceAccount: zod.ZodOptional<zod.ZodString>;
-		devicePassword: zod.ZodOptional<zod.ZodString>;
-		deviceGeneratePassword: zod.ZodOptional<zod.ZodBoolean>;
+		'device.name': zod.ZodOptional<zod.ZodString>;
+		'device.account': zod.ZodOptional<zod.ZodString>;
+		'device.password': zod.ZodOptional<zod.ZodString>;
+		'device.generatePassword': zod.ZodOptional<zod.ZodBoolean>;
 	},
 	zod.z.core.$strip
 >;
@@ -1676,10 +1676,10 @@ export declare const UpdateUserQueryParams: zod.ZodObject<
 	{
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
 		generateDevice: zod.ZodOptional<zod.ZodBoolean>;
-		deviceName: zod.ZodOptional<zod.ZodString>;
-		deviceAccount: zod.ZodOptional<zod.ZodString>;
-		devicePassword: zod.ZodOptional<zod.ZodString>;
-		deviceGeneratePassword: zod.ZodOptional<zod.ZodBoolean>;
+		'device.name': zod.ZodOptional<zod.ZodString>;
+		'device.account': zod.ZodOptional<zod.ZodString>;
+		'device.password': zod.ZodOptional<zod.ZodString>;
+		'device.generatePassword': zod.ZodOptional<zod.ZodBoolean>;
 	},
 	zod.z.core.$strip
 >;

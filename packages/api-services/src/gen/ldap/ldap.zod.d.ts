@@ -660,7 +660,7 @@ export declare const LDAPSearch4QueryParams: zod.ZodObject<
 	{
 		catalogId: zod.ZodOptional<zod.ZodString>;
 		url: zod.ZodOptional<zod.ZodString>;
-		tlsPem: zod.ZodOptional<zod.ZodString>;
+		'tls.pem': zod.ZodOptional<zod.ZodString>;
 		bind: zod.ZodOptional<zod.ZodString>;
 		username: zod.ZodOptional<zod.ZodString>;
 		password: zod.ZodOptional<zod.ZodString>;
@@ -1733,7 +1733,7 @@ export declare const LDAPSearch2Params: zod.ZodObject<
 export declare const LDAPSearch2QueryParams: zod.ZodObject<
 	{
 		url: zod.ZodOptional<zod.ZodString>;
-		tlsPem: zod.ZodOptional<zod.ZodString>;
+		'tls.pem': zod.ZodOptional<zod.ZodString>;
 		bind: zod.ZodOptional<zod.ZodString>;
 		username: zod.ZodOptional<zod.ZodString>;
 		password: zod.ZodOptional<zod.ZodString>;

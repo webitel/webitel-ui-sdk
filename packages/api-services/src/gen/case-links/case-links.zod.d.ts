@@ -84,11 +84,11 @@ export declare const CreateLinkParams: zod.ZodObject<
 export declare const CreateLinkQueryParams: zod.ZodObject<
 	{
 		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-		inputEtag: zod.ZodOptional<zod.ZodString>;
-		inputUrl: zod.ZodOptional<zod.ZodString>;
-		inputName: zod.ZodOptional<zod.ZodString>;
-		inputUserIdId: zod.ZodOptional<zod.ZodString>;
-		inputUserIdName: zod.ZodOptional<zod.ZodString>;
+		'input.etag': zod.ZodOptional<zod.ZodString>;
+		'input.url': zod.ZodOptional<zod.ZodString>;
+		'input.name': zod.ZodOptional<zod.ZodString>;
+		'input.userId.id': zod.ZodOptional<zod.ZodString>;
+		'input.userId.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

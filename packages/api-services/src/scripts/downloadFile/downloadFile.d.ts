@@ -1,5 +1,4 @@
 import type { DownloadFileOptions } from './types/downloadFile.types';
-
 declare const downloadFile: ({
 	response,
 	fileFormat,

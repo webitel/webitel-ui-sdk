@@ -15,6 +15,7 @@ export interface EngineAgent {
 	chatCount?: number;
 	description?: string;
 	extension?: string;
+	extraChatCount?: number;
 	greetingMedia?: EngineLookup;
 	id?: string;
 	isSupervisor?: boolean;

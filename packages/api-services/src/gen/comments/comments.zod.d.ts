@@ -30,14 +30,14 @@ export declare const SearchCommentsQueryParams: zod.ZodObject<
 				WRITE: 'WRITE';
 			}>
 		>;
-		dateSince: zod.ZodOptional<zod.ZodString>;
-		dateUntil: zod.ZodOptional<zod.ZodString>;
-		authorId: zod.ZodOptional<zod.ZodString>;
-		authorType: zod.ZodOptional<zod.ZodString>;
-		authorName: zod.ZodOptional<zod.ZodString>;
-		editorId: zod.ZodOptional<zod.ZodString>;
-		editorType: zod.ZodOptional<zod.ZodString>;
-		editorName: zod.ZodOptional<zod.ZodString>;
+		'date.since': zod.ZodOptional<zod.ZodString>;
+		'date.until': zod.ZodOptional<zod.ZodString>;
+		'author.id': zod.ZodOptional<zod.ZodString>;
+		'author.type': zod.ZodOptional<zod.ZodString>;
+		'author.name': zod.ZodOptional<zod.ZodString>;
+		'editor.id': zod.ZodOptional<zod.ZodString>;
+		'editor.type': zod.ZodOptional<zod.ZodString>;
+		'editor.name': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;

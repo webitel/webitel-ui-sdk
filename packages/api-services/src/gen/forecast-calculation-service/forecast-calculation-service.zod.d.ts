@@ -203,8 +203,8 @@ export declare const ForecastCalculationServiceExecuteForecastCalculationParams:
 export declare const ForecastCalculationServiceExecuteForecastCalculationQueryParams: zod.ZodObject<
 	{
 		teamId: zod.ZodOptional<zod.ZodString>;
-		forecastDataFrom: zod.ZodOptional<zod.ZodString>;
-		forecastDataTo: zod.ZodOptional<zod.ZodString>;
+		'forecastData.from': zod.ZodOptional<zod.ZodString>;
+		'forecastData.to': zod.ZodOptional<zod.ZodString>;
 	},
 	zod.z.core.$strip
 >;
