@@ -19,6 +19,7 @@ export * from './chatGateways/chatGateways';
 export * from './communications/communications';
 export * from './configurations/configurations';
 export * from './contactGroups/contactGroups';
+export * from './dictionaries/dictionaries';
 export * from './emails/emails';
 export * from './fileServices/fileServices';
 export * from './flows/flow';
