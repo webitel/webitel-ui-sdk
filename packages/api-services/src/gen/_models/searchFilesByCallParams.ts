@@ -13,11 +13,11 @@ export type SearchFilesByCallParams = {
 	sort?: string;
 	fields?: string[];
 	id?: string[];
-	uploadedAtFrom?: string;
-	uploadedAtTo?: string;
+	'uploadedAt.from'?: string;
+	'uploadedAt.to'?: string;
 	referenceId?: string[];
-	retentionUntilFrom?: string;
-	retentionUntilTo?: string;
+	'retentionUntil.from'?: string;
+	'retentionUntil.to'?: string;
 	/**
 	 *  - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated
 	 */

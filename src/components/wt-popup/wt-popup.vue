@@ -24,7 +24,7 @@ v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--over
               <slot name="title" />
             </h3>
           </slot>
-          <wt-icon-btn v-if="closable" class="wt-popup__close-btn" icon="close" @click="emit('close')" />
+          <wt-icon-btn v-if="closable" :disabled="closeDisabled" class="wt-popup__close-btn" icon="close" @click="emit('close')" />
         </header>
         <section v-if="$slots.main" class="wt-popup__main wt-scrollbar typo-body-1">
           <slot name="main" />
@@ -63,6 +63,7 @@ interface Props {
 	 */
 	disabled?: boolean;
 	closable?: boolean;
+	closeDisabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -71,6 +72,7 @@ const props = withDefaults(defineProps<Props>(), {
 	overflow: false,
 	disabled: false,
 	closable: true,
+	closeDisabled: false,
 });
 
 const emit = defineEmits<{

@@ -158,8 +158,8 @@ export const ForecastCalculationServiceExecuteForecastCalculationParams =
 export const ForecastCalculationServiceExecuteForecastCalculationQueryParams =
 	zod.object({
 		teamId: zod.string().optional(),
-		forecastDataFrom: zod.string().optional(),
-		forecastDataTo: zod.string().optional(),
+		'forecastData.from': zod.string().optional(),
+		'forecastData.to': zod.string().optional(),
 	});
 
 export const ForecastCalculationServiceExecuteForecastCalculationResponse =

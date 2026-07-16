@@ -1,0 +1,9 @@
+{
+	// Root-only CI typecheck — excludes packages/* (each package has its own job).
+	"extends": "./tsconfig.json",
+	"include": [
+		"src/**/*.ts",
+		"docs/pages/**/*.ts",
+		"env.d.ts"
+	]
+}

@@ -11,6 +11,7 @@ export interface EngineAgentServicePatchAgentBody {
 	auditor?: EngineLookup[];
 	chatCount?: number;
 	description?: string;
+	extraChatCount?: number;
 	fields?: string[];
 	greetingMedia?: EngineLookup;
 	isSupervisor?: boolean;

@@ -9,6 +9,8 @@
       :model-value="filterName"
       data-key="name"
       option-value="name"
+      required
+      :v="v$.filterName"
       @update:model-value="onFilterNameUpdate($event)"
     />
 
@@ -41,7 +43,7 @@
 
     <footer class="dynamic-filter-config-form-footer">
       <wt-button
-        :disabled="invalid"
+        :disabled="invalid || v$.$invalid"
         wide
         @click="submit"
       >
@@ -60,6 +62,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 import { WtButton, WtSingleSelect } from '@webitel/ui-sdk/components';
 import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
@@ -102,6 +106,21 @@ const filterLabel = ref('');
 const filterValue = ref();
 
 const editMode = !!props.filter;
+
+const v$ = useVuelidate(
+	computed(() => ({
+		filterName: {
+			required,
+		},
+	})),
+	{
+		filterName,
+	},
+	{
+		$autoDirty: true,
+	},
+);
+v$.value.$touch();
 
 const invalid = ref(false);
 

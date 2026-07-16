@@ -24,7 +24,7 @@ interface IChatMessageSizeExceededErrorProps {
 	selfSide?: boolean;
 }
 
-const props = withDefaults(defineProps<IChatMessageSizeExceededErrorProps>(), {
+withDefaults(defineProps<IChatMessageSizeExceededErrorProps>(), {
 	selfSide: false,
 });
 </script>

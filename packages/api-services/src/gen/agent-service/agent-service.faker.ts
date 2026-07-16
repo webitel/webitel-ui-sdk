@@ -162,6 +162,10 @@ export const getSearchAgentResponseMock = (
 				}),
 				undefined,
 			]),
+			extraChatCount: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
 			greetingMedia: faker.helpers.arrayElement([
 				{
 					id: faker.helpers.arrayElement([
@@ -527,6 +531,10 @@ export const getCreateAgentResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	extraChatCount: faker.helpers.arrayElement([
+		faker.number.int(),
 		undefined,
 	]),
 	greetingMedia: faker.helpers.arrayElement([
@@ -2197,6 +2205,10 @@ export const getDeleteAgentResponseMock = (
 		}),
 		undefined,
 	]),
+	extraChatCount: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
 	greetingMedia: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -2555,6 +2567,10 @@ export const getReadAgentResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	extraChatCount: faker.helpers.arrayElement([
+		faker.number.int(),
 		undefined,
 	]),
 	greetingMedia: faker.helpers.arrayElement([
@@ -2917,6 +2933,10 @@ export const getPatchAgentResponseMock = (
 		}),
 		undefined,
 	]),
+	extraChatCount: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
 	greetingMedia: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -3275,6 +3295,10 @@ export const getUpdateAgentResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	extraChatCount: faker.helpers.arrayElement([
+		faker.number.int(),
 		undefined,
 	]),
 	greetingMedia: faker.helpers.arrayElement([

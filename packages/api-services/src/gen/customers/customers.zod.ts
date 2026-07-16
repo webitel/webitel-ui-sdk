@@ -15,8 +15,8 @@ export const GetCustomerQueryParams = zod.object({
 		.optional()
 		.describe('Available Filters\n\nshow by customer id; serial number (uuid)'),
 	valid: zod.boolean().optional().describe('show if valid only!'),
-	domainId: zod.string().optional().describe('identifier'),
-	domainName: zod.string().optional().describe('display name'),
+	'domain.id': zod.string().optional().describe('identifier'),
+	'domain.name': zod.string().optional().describe('display name'),
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -228,10 +228,10 @@ export const LicenseUsageQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
-	userId: zod.string().optional().describe('identifier'),
-	userName: zod.string().optional().describe('display name'),
-	domainId: zod.string().optional().describe('identifier'),
-	domainName: zod.string().optional().describe('display name'),
+	'user.id': zod.string().optional().describe('identifier'),
+	'user.name': zod.string().optional().describe('display name'),
+	'domain.id': zod.string().optional().describe('identifier'),
+	'domain.name': zod.string().optional().describe('display name'),
 	id: zod.array(zod.string()).optional().describe('by serial number(s)'),
 	product: zod.array(zod.string()).optional().describe('by product name(s)'),
 	valid: zod
@@ -301,8 +301,8 @@ export const GetCustomer2Params = zod.object({
 
 export const GetCustomer2QueryParams = zod.object({
 	valid: zod.boolean().optional().describe('show if valid only!'),
-	domainId: zod.string().optional().describe('identifier'),
-	domainName: zod.string().optional().describe('display name'),
+	'domain.id': zod.string().optional().describe('identifier'),
+	'domain.name': zod.string().optional().describe('display name'),
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -408,10 +408,10 @@ export const LicenseUsage2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
-	userId: zod.string().optional().describe('identifier'),
-	userName: zod.string().optional().describe('display name'),
-	domainId: zod.string().optional().describe('identifier'),
-	domainName: zod.string().optional().describe('display name'),
+	'user.id': zod.string().optional().describe('identifier'),
+	'user.name': zod.string().optional().describe('display name'),
+	'domain.id': zod.string().optional().describe('identifier'),
+	'domain.name': zod.string().optional().describe('display name'),
 	customerId: zod.string().optional(),
 	id: zod.array(zod.string()).optional().describe('by serial number(s)'),
 	product: zod.array(zod.string()).optional().describe('by product name(s)'),
@@ -482,10 +482,10 @@ export const LicenseUsage3QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
-	userId: zod.string().optional().describe('identifier'),
-	userName: zod.string().optional().describe('display name'),
-	domainId: zod.string().optional().describe('identifier'),
-	domainName: zod.string().optional().describe('display name'),
+	'user.id': zod.string().optional().describe('identifier'),
+	'user.name': zod.string().optional().describe('display name'),
+	'domain.id': zod.string().optional().describe('identifier'),
+	'domain.name': zod.string().optional().describe('display name'),
 	customerId: zod.string().optional(),
 	id: zod.array(zod.string()).optional().describe('by serial number(s)'),
 	product: zod.array(zod.string()).optional().describe('by product name(s)'),

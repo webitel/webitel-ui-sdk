@@ -10,9 +10,9 @@ export type CreateLinkParams = {
 	 * result fields needed on the front-end for each comment
 	 */
 	fields?: string[];
-	inputEtag?: string;
-	inputUrl?: string;
-	inputName?: string;
-	inputUserIdId?: string;
-	inputUserIdName?: string;
+	'input.etag'?: string;
+	'input.url'?: string;
+	'input.name'?: string;
+	'input.userId.id'?: string;
+	'input.userId.name'?: string;
 };

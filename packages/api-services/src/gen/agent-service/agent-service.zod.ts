@@ -59,6 +59,7 @@ export const SearchAgentResponse = zod.object({
 				chatCount: zod.number().optional(),
 				description: zod.string().optional(),
 				extension: zod.string().optional(),
+				extraChatCount: zod.number().optional(),
 				greetingMedia: zod
 					.object({
 						id: zod.string().optional(),
@@ -135,6 +136,7 @@ export const CreateAgentBody = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	domainId: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -197,6 +199,7 @@ export const CreateAgentResponse = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	extension: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -256,8 +259,8 @@ export const CreateAgentResponse = zod.object({
 export const SearchAgentCallStatisticsQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
-	timeFrom: zod.string().optional(),
-	timeTo: zod.string().optional(),
+	'time.from': zod.string().optional(),
+	'time.to': zod.string().optional(),
 	agentId: zod.array(zod.number()).optional(),
 	domainId: zod.string().optional(),
 	q: zod.string().optional(),
@@ -298,13 +301,13 @@ export const SearchAgentStatusStatisticQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	agentId: zod.array(zod.string()).optional(),
-	timeFrom: zod.string().optional(),
-	timeTo: zod.string().optional(),
+	'time.from': zod.string().optional(),
+	'time.to': zod.string().optional(),
 	status: zod.array(zod.string()).optional(),
 	queueId: zod.array(zod.number()).optional(),
 	teamId: zod.array(zod.number()).optional(),
-	utilizationFrom: zod.string().optional(),
-	utilizationTo: zod.string().optional(),
+	'utilization.from': zod.string().optional(),
+	'utilization.to': zod.string().optional(),
 	hasCall: zod.boolean().optional(),
 	skillId: zod.array(zod.number()).optional(),
 	regionId: zod.array(zod.number()).optional(),
@@ -394,8 +397,8 @@ export const SearchAgentStatusStatisticItemParams = zod.object({
 });
 
 export const SearchAgentStatusStatisticItemQueryParams = zod.object({
-	timeFrom: zod.string().optional(),
-	timeTo: zod.string().optional(),
+	'time.from': zod.string().optional(),
+	'time.to': zod.string().optional(),
 });
 
 export const SearchAgentStatusStatisticItemResponse = zod.object({
@@ -455,8 +458,8 @@ export const SearchAgentStatusStatisticItemResponse = zod.object({
 export const SearchAgentStateHistoryQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
-	joinedAtFrom: zod.string().optional(),
-	joinedAtTo: zod.string().optional(),
+	'joinedAt.from': zod.string().optional(),
+	'joinedAt.to': zod.string().optional(),
 	agentId: zod.array(zod.string()).optional(),
 	sort: zod.string().optional(),
 	domainId: zod.string().optional(),
@@ -679,6 +682,7 @@ export const DeleteAgentResponse = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	extension: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -770,6 +774,7 @@ export const ReadAgentResponse = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	extension: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -845,6 +850,7 @@ export const PatchAgentBody = zod.object({
 		.optional(),
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	fields: zod.array(zod.string()).optional(),
 	greetingMedia: zod
 		.object({
@@ -907,6 +913,7 @@ export const PatchAgentResponse = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	extension: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -983,6 +990,7 @@ export const UpdateAgentBody = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	domainId: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),
@@ -1045,6 +1053,7 @@ export const UpdateAgentResponse = zod.object({
 	chatCount: zod.number().optional(),
 	description: zod.string().optional(),
 	extension: zod.string().optional(),
+	extraChatCount: zod.number().optional(),
 	greetingMedia: zod
 		.object({
 			id: zod.string().optional(),

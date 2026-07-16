@@ -530,12 +530,12 @@ export const SearchTriggerJobQueryParams = zod.object({
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
-	createdAtFrom: zod.string().optional(),
-	createdAtTo: zod.string().optional(),
-	startedAtFrom: zod.string().optional(),
-	startedAtTo: zod.string().optional(),
-	durationFrom: zod.string().optional(),
-	durationTo: zod.string().optional(),
+	'createdAt.from': zod.string().optional(),
+	'createdAt.to': zod.string().optional(),
+	'startedAt.from': zod.string().optional(),
+	'startedAt.to': zod.string().optional(),
+	'duration.from': zod.string().optional(),
+	'duration.to': zod.string().optional(),
 	state: zod
 		.array(
 			zod.enum([
