@@ -12,7 +12,6 @@ import type {
 	UpdateContactParams,
 	WebitelContactsContact,
 } from '../_models';
-
 type IfEquals<X, Y, A = X, B = never> =
 	(<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 type WritableKeys<T> = {
@@ -84,3 +83,4 @@ export type CreateContactsResult =
 export type DeleteContactResult = AxiosResponse<WebitelContactsContact>;
 export type LocateContactResult = AxiosResponse<WebitelContactsContact>;
 export type UpdateContactResult = AxiosResponse<WebitelContactsContact>;
+export {};
