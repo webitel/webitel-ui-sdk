@@ -100,8 +100,8 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import IconAction from '../../../../enums/IconAction/IconAction.enum';
 import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
-import { DEFAULT_PERMISSIONS_USER_ACCESS } from '../../types/PermissionsUserAccess';
 import { AccessMode, AccessRuleName } from '../../enums';
+import { DEFAULT_PERMISSIONS_USER_ACCESS } from '../../types/PermissionsUserAccess';
 import PermissionsRoleRow from './permissions-role-row.vue';
 import PermissionsTabRolePopup from './permissions-tab-role-popup.vue';
 

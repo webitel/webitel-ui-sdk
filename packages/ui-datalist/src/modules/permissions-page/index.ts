@@ -8,11 +8,11 @@ export {
 } from '@webitel/ui-sdk/modules/ObjectPermissions';
 
 export { PermissionsApiModule } from './scripts/PermissionsApiModule';
+export type { PermissionsPiniaStore } from './stores/createPermissionsStore';
 export {
 	createPermissionsStore,
 	permissionsStoreBody,
 } from './stores/createPermissionsStore';
-export type { PermissionsPiniaStore } from './stores/createPermissionsStore';
 export type {
 	PermissionEntity,
 	PermissionGrantee,
