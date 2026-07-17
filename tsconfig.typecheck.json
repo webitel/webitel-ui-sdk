@@ -1,6 +1,6 @@
 {
-	// Root-only CI typecheck — excludes packages/* (each package has its own job).
-	"extends": "./tsconfig.json",
+	// Root-only CI / local typecheck — excludes packages/* (each package has its own job).
+	"extends": "./tsconfig.base.json",
 	"include": [
 		"src/**/*.ts",
 		"docs/pages/**/*.ts",

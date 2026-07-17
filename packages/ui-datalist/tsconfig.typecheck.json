@@ -3,7 +3,7 @@
 	// aliases resolve; must not inherit emit/rootDir from build.
 	// Clear root `types: [vidstack/vue]` — these packages do not need it, and
 	// package-local installs do not guarantee vidstack in resolution roots.
-	"extends": "../../tsconfig.json",
+	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": "../..",
 		"types": []

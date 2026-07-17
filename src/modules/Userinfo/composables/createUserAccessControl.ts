@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import { CrudAction, type WtObject } from '../../../enums';
 import { _wtUiLog } from '../../../scripts/logger';
 import type { createUserAccessStore } from '../stores/accessStore';
-import type { UserAccessStore } from '../types/UserAccess.d.ts';
+import type { UserAccessStore } from '../types/UserAccess';
 
 export type UseUserAccessControlComposableOptions =
 	| WtObject
@@ -40,7 +40,7 @@ export const createUserAccessControlComposable = (
 				: false;
 
 		const route = useRoute();
-		const object = resource || route?.meta?.WtObject;
+		const object = (resource || route?.meta?.WtObject) as WtObject | undefined;
 
 		const userinfoStore = useUserinfoStore() as UserAccessStore;
 

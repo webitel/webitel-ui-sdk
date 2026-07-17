@@ -10,7 +10,7 @@
 		"test:coverage": "vitest run --coverage",
 		"biome:format:all": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
-		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"build:types": "vue-tsc -b tsconfig.build.json",
 		"publish-lib": " npm publish --access public --tag latest",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
@@ -22,7 +22,7 @@
 		"utils:i": "npm install",
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
-		"typecheck": "vue-tsc --noEmit -p ./tsconfig.json",
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
 	},
 	"workspaces": [

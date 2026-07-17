@@ -5,6 +5,9 @@
 # ui-datalist pckg
 /packages/ui-datalist/types
 
+# ui-chats pckg
+/packages/ui-chats/types
+
 # api-services pckg
 /packages/api-services/types
 /packages/api-services/src/gen/_docs
@@ -13,6 +16,17 @@
 /packages/styleguide/types
 
 /types
+
+# Declaration emit belongs in types/ (see declarationDir). Never commit beside sources.
+# Keep ambient module shims at package src roots (e.g. src/declaration.d.ts).
+src/**/*.d.ts
+!src/*.d.ts
+packages/*/src/**/*.d.ts
+!packages/*/src/*.d.ts
+
+# Project references build cache
+**/.tsbuildinfo
+**/*.d.ts.map
 
 # misc
 .DS_Store

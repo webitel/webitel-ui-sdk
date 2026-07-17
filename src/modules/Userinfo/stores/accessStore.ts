@@ -25,7 +25,7 @@ import type {
 	UiSection,
 	UserAccessStore,
 	WebitelLicenseInfo,
-} from '../types/UserAccess.d';
+} from '../types/UserAccess';
 
 export const createUserAccessStore = ({
 	namespace = 'userinfo',

@@ -1,10 +1,15 @@
 {
-  "extends": "./tsconfig.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationDir": "types",
-    "noEmit": false,
-  }
+	"extends": "./tsconfig.json",
+	"include": [
+		"src"
+	],
+	"compilerOptions": {
+		"composite": true,
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"declarationDir": "types",
+		"tsBuildInfoFile": "types/.tsbuildinfo",
+		"rootDir": "./src",
+		"noEmit": false
+	}
 }

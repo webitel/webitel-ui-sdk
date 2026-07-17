@@ -1,7 +1,7 @@
 import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
-import type { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTable';
 import type { IFiltersManager } from '../filters';
 import type { DatalistStoreProviderType } from './StoreProvider';
 

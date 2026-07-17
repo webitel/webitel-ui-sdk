@@ -119,7 +119,7 @@ import {
 	useGalleriaFullscreen,
 	useGalleriaMaskClick,
 } from '../_internals/composables';
-import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
+import type { WtGalleriaItem } from './types/WtGalleria';
 
 /**
  * @emits {number} download - Fires when download button is clicked. Emits index of the image to download

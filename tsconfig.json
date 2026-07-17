@@ -1,110 +1,20 @@
 {
-	"compilerOptions": {
-		"target": "esnext",
-		"module": "esnext",
-		"lib": [
-			"esnext",
-			"dom"
-		],
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"allowJs": false,
-		"skipLibCheck": true,
-		"listEmittedFiles": true,
-		"plugins": [
-			{
-				"name": "typescript-plugin-css-modules"
-			}
-		],
-		"types": [
-			"vidstack/vue"
-		],
-		"moduleResolution": "Bundler",
-		"paths": {
-			"@aliasedDeps/api-services/axios": [
-				"./node_modules/axios",
-				"./packages/api-services/node_modules/axios"
-			],
-			"zod": [
-				"./node_modules/zod"
-			],
-			"zod/v4": [
-				"./node_modules/zod/v4"
-			],
-			"vue": [
-				"./node_modules/vue"
-			],
-			"@vueuse/core": [
-				"./node_modules/@vueuse/core"
-			],
-			"@vueuse/shared": [
-				"./node_modules/@vueuse/shared"
-			],
-			"@webitel/api-services": [
-				"./packages/api-services/src/index.ts"
-			],
-			"@webitel/api-services/gen": [
-				"./packages/api-services/src/gen/index.ts"
-			],
-			"@webitel/api-services/gen/models": [
-				"./packages/api-services/src/gen/_models/index.ts"
-			],
-			"@webitel/api-services/gen/utils": [
-				"./packages/api-services/src/utils/gen/index.ts"
-			],
-			"@webitel/api-services/api": [
-				"./packages/api-services/src/api/clients/index.ts"
-			],
-			"@webitel/api-services/api/*": [
-				"./packages/api-services/src/api/*"
-			],
-			"@webitel/api-services/enums": [
-				"./packages/api-services/src/enums/index.ts"
-			],
-			"@webitel/api-services/utils": [
-				"./packages/api-services/src/utils/index.ts"
-			],
-			"@webitel/api-services/scripts": [
-				"./packages/api-services/src/scripts/index.ts"
-			],
-			"@webitel/api-services/validations": [
-				"./packages/api-services/src/validations/index.ts"
-			],
-			"@webitel/api-services/locale": [
-				"./packages/api-services/src/locale/locale.ts"
-			],
-			"@webitel/ui-sdk/src/*": [
-				"./src/*",
-				"./types/*"
-			],
-			"@webitel/ui-sdk/validators/*": [
-				"./src/validations/vuelidate/validators/*",
-				"./types/validations/vuelidate/validators/*"
-			],
-			"@webitel/ui-sdk/*": [
-				"./src/*",
-				"./types/*"
-			]
+	"files": [],
+	"references": [
+		{
+			"path": "./packages/api-services/tsconfig.build.json"
 		},
-		"isolatedModules": true,
-		"moduleDetection": "force",
-		"noEmit": true,
-		"noEmitOnError": false,
-		"strict": false,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUncheckedSideEffectImports": true
-	},
-	"include": [
-		"src/**/*.ts",
-		"docs/pages/**/*.ts",
-		"env.d.ts",
-		"packages/*/src/**/*.ts",
-		"packages/*/src/**/*.vue"
-	],
-	"exclude": [
-		"**/*.spec.ts",
-		"**/*.test.ts"
+		{
+			"path": "./packages/styleguide/tsconfig.build.json"
+		},
+		{
+			"path": "./tsconfig.build.json"
+		},
+		{
+			"path": "./packages/ui-datalist/tsconfig.build.json"
+		},
+		{
+			"path": "./packages/ui-chats/tsconfig.build.json"
+		}
 	]
 }
