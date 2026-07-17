@@ -13,5 +13,5 @@ interface GenerateInstanceOptions extends CreateAxiosDefaults {
  * @param options.rest - Additional Axios configuration options
  * @returns Configured Axios instance
  */
-export declare const generateInstance: ({ interceptors, baseURL, ...rest }?: GenerateInstanceOptions) => any;
+export declare const generateInstance: ({ interceptors, baseURL, ...rest }?: GenerateInstanceOptions) => import("axios").AxiosInstance;
 export {};

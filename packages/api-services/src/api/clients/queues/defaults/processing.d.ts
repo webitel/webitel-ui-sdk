@@ -1,2 +1,7 @@
-declare const processing: (processing?: {}) => any;
+declare const processing: (processing?: {}) => {
+    enabled: boolean;
+    formSchema: {};
+    sec: number;
+    renewalSec: number;
+};
 export default processing;
