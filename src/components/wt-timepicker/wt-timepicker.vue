@@ -35,7 +35,6 @@
         v-model:model-value="hour"
         :disabled="disabled"
         :label="labelHours"
-        :max-value="getHoursMaxValue"
         :v="v"
         hide-input-info
         @blur="onHoursBlurEvent"
@@ -45,7 +44,8 @@
         v-model:model-value="min"
         :disabled="disabled"
         :label="labelMin"
-        :max-value="59"
+        :min-value="-1"
+        :max-value="60"
         :v="v"
         hide-input-info
       />
@@ -54,7 +54,8 @@
         v-model:model-value="sec"
         :disabled="disabled"
         :label="labelSec"
-        :max-value="59"
+        :min-value="-1"
+        :max-value="60"
         :v="v"
         hide-input-info
       />
@@ -127,16 +128,11 @@ interface WtTimepickerProps {
 	 * Custom validators for vuelidate
 	 */
 	customValidators?: unknown[];
-	/**
-	 * remove max hour restriction
-	 */
-	noMaxHours?: boolean;
 }
 
 const props = withDefaults(defineProps<WtTimepickerProps>(), {
 	modelValue: 0,
 	dateMode: false,
-	noMaxHours: false,
 	label: '',
 	format: 'hh:mm:ss',
 	disabled: false,
@@ -171,11 +167,6 @@ const { isValidation, invalid, validationText, validationTextColor } =
 const isHour = computed(() => props.format.includes('hh'));
 const isMin = computed(() => props.format.includes('mm'));
 const isSec = computed(() => props.format.includes('ss'));
-
-const getHoursMaxValue = computed(() => {
-	if (props.noMaxHours || props.dateMode) return null;
-	return 23;
-});
 
 // labelDays() {
 //   if (this.noLabel) return null;
@@ -223,7 +214,10 @@ const hour = computed({
 	set(value: number) {
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setHours(value)
-			: +props.modelValue - hour.value * SEC_IN_HOUR + value * SEC_IN_HOUR;
+			: Math.max(
+					0,
+					+props.modelValue - hour.value * SEC_IN_HOUR + value * SEC_IN_HOUR,
+				);
 		emit('update:modelValue', newValue);
 	},
 });
@@ -237,7 +231,10 @@ const min = computed({
 	set(value: number) {
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setMinutes(value)
-			: +props.modelValue - min.value * SEC_IN_MIN + value * SEC_IN_MIN;
+			: Math.max(
+					0,
+					+props.modelValue - min.value * SEC_IN_MIN + value * SEC_IN_MIN,
+				);
 		emit('update:modelValue', newValue);
 	},
 });
@@ -251,7 +248,7 @@ const sec = computed({
 	set(value: number) {
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setSeconds(value)
-			: +props.modelValue - sec.value + +value;
+			: Math.max(0, +props.modelValue - sec.value + +value);
 		emit('update:modelValue', newValue);
 	},
 });
