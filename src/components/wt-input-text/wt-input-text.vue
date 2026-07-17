@@ -68,10 +68,10 @@ import type { InputTextProps } from 'primevue';
 import {
 	computed,
 	defineModel,
+	ref,
 	toRefs,
 	useSlots,
 	useTemplateRef,
-	ref,
 } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';

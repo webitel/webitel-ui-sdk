@@ -1,4 +1,5 @@
 export declare const BroadcastChannelName: {
-    readonly UserSettings: "WtUserSettings";
+	readonly UserSettings: 'WtUserSettings';
 };
-export type BroadcastChannelName = (typeof BroadcastChannelName)[keyof typeof BroadcastChannelName];
+export type BroadcastChannelName =
+	(typeof BroadcastChannelName)[keyof typeof BroadcastChannelName];
