@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface LoggerLookup {
-    id?: number;
-    name?: string;
+	id?: number;
+	name?: string;
 }

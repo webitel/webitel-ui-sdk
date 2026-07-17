@@ -6,9 +6,9 @@
  */
 import type { WebitelChatChat } from './webitelChatChat.zod';
 export interface WebitelChatChatMembers {
-    /** Page of the chat participants. */
-    data?: WebitelChatChat[];
-    next?: boolean;
-    /** Page number of results. */
-    page?: number;
+	/** Page of the chat participants. */
+	data?: WebitelChatChat[];
+	next?: boolean;
+	/** Page number of results. */
+	page?: number;
 }

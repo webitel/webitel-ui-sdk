@@ -9,6 +9,6 @@ import type { WebitelImApiGatewayV1KeyboardRow } from './webitelImApiGatewayV1Ke
  * Grid-style buttons.
  */
 export interface WebitelImApiGatewayV1KeyboardMarkup {
-    /** Rows of buttons matrix. */
-    rows?: WebitelImApiGatewayV1KeyboardRow[];
+	/** Rows of buttons matrix. */
+	rows?: WebitelImApiGatewayV1KeyboardRow[];
 }

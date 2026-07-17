@@ -6,6 +6,6 @@
  */
 import type { EngineSchemaVersion } from './engineSchemaVersion.zod';
 export interface EngineSearchSchemaVersionResponse {
-    items?: EngineSchemaVersion[];
-    next?: boolean;
+	items?: EngineSchemaVersion[];
+	next?: boolean;
 }

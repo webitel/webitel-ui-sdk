@@ -7,16 +7,17 @@
 /**
  * Enum for relation types between cases.
  */
-export type WebitelCasesRelationType = (typeof WebitelCasesRelationType)[keyof typeof WebitelCasesRelationType];
+export type WebitelCasesRelationType =
+	(typeof WebitelCasesRelationType)[keyof typeof WebitelCasesRelationType];
 export declare const WebitelCasesRelationType: {
-    readonly RelationTypeUnspecified: "RELATION_TYPE_UNSPECIFIED";
-    readonly Duplicates: "DUPLICATES";
-    readonly IsDuplicatedBy: "IS_DUPLICATED_BY";
-    readonly Blocks: "BLOCKS";
-    readonly IsBlockedBy: "IS_BLOCKED_BY";
-    readonly Causes: "CAUSES";
-    readonly IsCausedBy: "IS_CAUSED_BY";
-    readonly IsChildOf: "IS_CHILD_OF";
-    readonly IsParentOf: "IS_PARENT_OF";
-    readonly RelatesTo: "RELATES_TO";
+	readonly RelationTypeUnspecified: 'RELATION_TYPE_UNSPECIFIED';
+	readonly Duplicates: 'DUPLICATES';
+	readonly IsDuplicatedBy: 'IS_DUPLICATED_BY';
+	readonly Blocks: 'BLOCKS';
+	readonly IsBlockedBy: 'IS_BLOCKED_BY';
+	readonly Causes: 'CAUSES';
+	readonly IsCausedBy: 'IS_CAUSED_BY';
+	readonly IsChildOf: 'IS_CHILD_OF';
+	readonly IsParentOf: 'IS_PARENT_OF';
+	readonly RelatesTo: 'RELATES_TO';
 };

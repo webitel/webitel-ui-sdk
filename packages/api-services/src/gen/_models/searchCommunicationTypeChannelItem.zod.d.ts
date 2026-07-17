@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchCommunicationTypeChannelItem = (typeof SearchCommunicationTypeChannelItem)[keyof typeof SearchCommunicationTypeChannelItem];
+export type SearchCommunicationTypeChannelItem =
+	(typeof SearchCommunicationTypeChannelItem)[keyof typeof SearchCommunicationTypeChannelItem];
 export declare const SearchCommunicationTypeChannelItem: {
-    readonly Undefined: "Undefined";
-    readonly Phone: "Phone";
-    readonly Email: "Email";
-    readonly Messaging: "Messaging";
+	readonly Undefined: 'Undefined';
+	readonly Phone: 'Phone';
+	readonly Email: 'Email';
+	readonly Messaging: 'Messaging';
 };

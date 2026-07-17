@@ -6,6 +6,6 @@
  */
 import type { EngineWebHook } from './engineWebHook.zod';
 export interface EngineListWebHook {
-    items?: EngineWebHook[];
-    next?: boolean;
+	items?: EngineWebHook[];
+	next?: boolean;
 }

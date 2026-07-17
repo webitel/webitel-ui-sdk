@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type WorkingScheduleServiceReadWorkingScheduleForecastParams = {
-    'date.from'?: string;
-    'date.to'?: string;
+	'date.from'?: string;
+	'date.to'?: string;
 };

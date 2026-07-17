@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1ProviderMetaApp {
-    appId?: string;
-    createdAt?: string;
-    id?: string;
-    name?: string;
-    oauthRedirectUri?: string;
-    scopes?: string[];
-    updatedAt?: string;
-    verifyToken?: string;
+	appId?: string;
+	createdAt?: string;
+	id?: string;
+	name?: string;
+	oauthRedirectUri?: string;
+	scopes?: string[];
+	updatedAt?: string;
+	verifyToken?: string;
 }

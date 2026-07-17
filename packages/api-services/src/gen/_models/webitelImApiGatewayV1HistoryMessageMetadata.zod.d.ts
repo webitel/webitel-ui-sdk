@@ -9,5 +9,5 @@
  * Can contain structured data depending on message type.
  */
 export type WebitelImApiGatewayV1HistoryMessageMetadata = {
-    [key: string]: unknown;
+	[key: string]: unknown;
 };

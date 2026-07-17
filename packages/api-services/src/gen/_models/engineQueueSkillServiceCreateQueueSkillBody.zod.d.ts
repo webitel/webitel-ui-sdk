@@ -6,10 +6,10 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQueueSkillServiceCreateQueueSkillBody {
-    buckets?: EngineLookup[];
-    enabled?: boolean;
-    lvl?: number;
-    maxCapacity?: number;
-    minCapacity?: number;
-    skill?: EngineLookup;
+	buckets?: EngineLookup[];
+	enabled?: boolean;
+	lvl?: number;
+	maxCapacity?: number;
+	minCapacity?: number;
+	skill?: EngineLookup;
 }

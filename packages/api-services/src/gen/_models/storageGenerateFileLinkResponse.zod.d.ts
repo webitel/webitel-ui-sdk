@@ -6,7 +6,7 @@
  */
 import type { StorageGenerateFileLinkResponseMetadata } from './storageGenerateFileLinkResponseMetadata.zod';
 export interface StorageGenerateFileLinkResponse {
-    baseUrl?: string;
-    metadata?: StorageGenerateFileLinkResponseMetadata;
-    url?: string;
+	baseUrl?: string;
+	metadata?: StorageGenerateFileLinkResponseMetadata;
+	url?: string;
 }

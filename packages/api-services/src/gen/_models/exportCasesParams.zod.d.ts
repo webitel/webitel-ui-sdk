@@ -5,14 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ExportCasesParams = {
-    q?: string;
-    ids?: string[];
-    sort?: string;
-    fields?: string[];
-    filters?: string[];
-    contactId?: string;
-    qin?: string;
-    filtersV1?: string;
-    format?: string;
-    separator?: string;
+	q?: string;
+	ids?: string[];
+	sort?: string;
+	fields?: string[];
+	filters?: string[];
+	contactId?: string;
+	qin?: string;
+	filtersV1?: string;
+	format?: string;
+	separator?: string;
 };

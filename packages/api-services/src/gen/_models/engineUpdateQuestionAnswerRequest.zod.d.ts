@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineUpdateQuestionAnswerRequest {
-    comment?: string;
-    score?: number;
+	comment?: string;
+	score?: number;
 }

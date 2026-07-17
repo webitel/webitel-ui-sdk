@@ -8,15 +8,15 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { EngineRoutingSchemaType } from './engineRoutingSchemaType.zod';
 import type { EngineSchemaTag } from './engineSchemaTag.zod';
 export interface EngineRoutingSchema {
-    tags?: EngineSchemaTag[];
-    createdAt?: string;
-    createdBy?: EngineLookup;
-    debug?: boolean;
-    description?: string;
-    editor?: boolean;
-    id?: string;
-    name?: string;
-    type?: EngineRoutingSchemaType;
-    updatedAt?: string;
-    updatedBy?: EngineLookup;
+	tags?: EngineSchemaTag[];
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	debug?: boolean;
+	description?: string;
+	editor?: boolean;
+	id?: string;
+	name?: string;
+	type?: EngineRoutingSchemaType;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

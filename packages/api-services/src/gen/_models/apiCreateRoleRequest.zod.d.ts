@@ -6,6 +6,6 @@
  */
 import type { ApiRole } from './apiRole.zod';
 export interface ApiCreateRoleRequest {
-    copyId?: string;
-    role?: ApiRole;
+	copyId?: string;
+	role?: ApiRole;
 }

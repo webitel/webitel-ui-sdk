@@ -7,7 +7,7 @@
 import type { EngineListSkillAgentListSkillAgg } from './engineListSkillAgentListSkillAgg.zod';
 import type { EngineSkillAgentItem } from './engineSkillAgentItem.zod';
 export interface EngineListSkillAgent {
-    aggs?: EngineListSkillAgentListSkillAgg;
-    items?: EngineSkillAgentItem[];
-    next?: boolean;
+	aggs?: EngineListSkillAgentListSkillAgg;
+	items?: EngineSkillAgentItem[];
+	next?: boolean;
 }

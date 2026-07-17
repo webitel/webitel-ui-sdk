@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesPriority } from './webitelCasesPriority.zod';
 export interface WebitelCasesPriorityList {
-    items?: WebitelCasesPriority[];
-    next?: boolean;
-    page?: number;
+	items?: WebitelCasesPriority[];
+	next?: boolean;
+	page?: number;
 }

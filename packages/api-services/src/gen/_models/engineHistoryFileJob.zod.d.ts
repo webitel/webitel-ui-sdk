@@ -7,10 +7,10 @@
 import type { EngineHistoryFileJobHistoryFileJobAction } from './engineHistoryFileJobHistoryFileJobAction.zod';
 import type { EngineHistoryFileJobHistoryFileJobState } from './engineHistoryFileJobHistoryFileJobState.zod';
 export interface EngineHistoryFileJob {
-    action?: EngineHistoryFileJobHistoryFileJobAction;
-    createdAt?: string;
-    errorDetail?: string;
-    fileId?: string;
-    id?: string;
-    state?: EngineHistoryFileJobHistoryFileJobState;
+	action?: EngineHistoryFileJobHistoryFileJobAction;
+	createdAt?: string;
+	errorDetail?: string;
+	fileId?: string;
+	id?: string;
+	state?: EngineHistoryFileJobHistoryFileJobState;
 }

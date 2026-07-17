@@ -6,6 +6,6 @@
  */
 import type { RolesUpdateRoleBodyRole } from './rolesUpdateRoleBodyRole.zod';
 export interface RolesUpdateRoleBody {
-    fields?: string[];
-    role?: RolesUpdateRoleBodyRole;
+	fields?: string[];
+	role?: RolesUpdateRoleBodyRole;
 }

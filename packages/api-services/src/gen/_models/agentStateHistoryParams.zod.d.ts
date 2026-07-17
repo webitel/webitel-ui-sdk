@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type AgentStateHistoryParams = {
-    page?: number;
-    size?: number;
-    timeFrom?: string;
-    timeTo?: string;
-    q?: string;
-    domainId?: string;
+	page?: number;
+	size?: number;
+	timeFrom?: string;
+	timeTo?: string;
+	q?: string;
+	domainId?: string;
 };

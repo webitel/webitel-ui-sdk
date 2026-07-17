@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchRoutingVariableParams = {
-    page?: number;
-    size?: number;
-    domainId?: string;
+	page?: number;
+	size?: number;
+	domainId?: string;
 };

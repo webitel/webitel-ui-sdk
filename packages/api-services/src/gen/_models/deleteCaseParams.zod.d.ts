@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteCaseParams = {
-    /**
-     * List of fields to include in the deleted case response.
-     */
-    fields?: string[];
+	/**
+	 * List of fields to include in the deleted case response.
+	 */
+	fields?: string[];
 };

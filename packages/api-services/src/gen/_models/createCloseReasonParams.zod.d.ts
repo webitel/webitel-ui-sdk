@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreateCloseReasonParams = {
-    /**
-     * Fields to be retrieved as a result.
-     */
-    fields?: string[];
+	/**
+	 * Fields to be retrieved as a result.
+	 */
+	fields?: string[];
 };

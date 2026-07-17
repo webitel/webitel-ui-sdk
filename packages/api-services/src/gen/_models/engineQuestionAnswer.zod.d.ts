@@ -6,8 +6,8 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQuestionAnswer {
-    comment?: string;
-    score?: number;
-    updatedAt?: string;
-    updatedBy?: EngineLookup;
+	comment?: string;
+	score?: number;
+	updatedAt?: string;
+	updatedBy?: EngineLookup;
 }

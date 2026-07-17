@@ -8,5 +8,5 @@
  * Result Chat Channel's Variables SET.
  */
 export type WebitelChatServerChatVariablesResponseVariables = {
-    [key: string]: string;
+	[key: string]: string;
 };

@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ContactsCallFile {
-    id?: string;
-    mimeType?: string;
-    name?: string;
-    size?: string;
-    startAt?: string;
-    stopAt?: string;
+	id?: string;
+	mimeType?: string;
+	name?: string;
+	size?: string;
+	startAt?: string;
+	stopAt?: string;
 }

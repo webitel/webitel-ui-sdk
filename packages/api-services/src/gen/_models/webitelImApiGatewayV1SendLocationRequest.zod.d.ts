@@ -11,19 +11,19 @@ import type { WebitelImApiGatewayV1SendLocationRequestMetadata } from './webitel
  * SendLocationRequest sends a geographic location message.
  */
 export interface WebitelImApiGatewayV1SendLocationRequest {
-    /** Optional human-readable address. */
-    address?: string;
-    /** Latitude in degrees. Must be between -90 and +90. */
-    latitude?: number;
-    /** Longitude in degrees. Must be between -180 and +180. */
-    longitude?: number;
-    /** Arbitrary metadata. */
-    metadata?: WebitelImApiGatewayV1SendLocationRequestMetadata;
-    /** Optional location name (e.g., "Central Park"). */
-    name?: string;
-    sendAs?: WebitelImApiGatewayV1PeerIdentity;
-    /** Optional send ID for idempotency. */
-    sendId?: string;
-    /** Recipient of the message. */
-    to?: WebitelImApiGatewayV1Peer;
+	/** Optional human-readable address. */
+	address?: string;
+	/** Latitude in degrees. Must be between -90 and +90. */
+	latitude?: number;
+	/** Longitude in degrees. Must be between -180 and +180. */
+	longitude?: number;
+	/** Arbitrary metadata. */
+	metadata?: WebitelImApiGatewayV1SendLocationRequestMetadata;
+	/** Optional location name (e.g., "Central Park"). */
+	name?: string;
+	sendAs?: WebitelImApiGatewayV1PeerIdentity;
+	/** Optional send ID for idempotency. */
+	sendId?: string;
+	/** Recipient of the message. */
+	to?: WebitelImApiGatewayV1Peer;
 }

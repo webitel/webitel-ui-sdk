@@ -9,10 +9,10 @@ import type { WebitelImProviderV1Peer } from './webitelImProviderV1Peer.zod';
  * / ProviderCreateFacebookGateRequest links a specific Facebook Page as a messaging gateway.
  */
 export interface WebitelImProviderV1ProviderCreateFacebookGateRequest {
-    enabled?: boolean;
-    metaAppId?: string;
-    name?: string;
-    pageId?: string;
-    pageToken?: string;
-    peer?: WebitelImProviderV1Peer;
+	enabled?: boolean;
+	metaAppId?: string;
+	name?: string;
+	pageId?: string;
+	pageToken?: string;
+	peer?: WebitelImProviderV1Peer;
 }

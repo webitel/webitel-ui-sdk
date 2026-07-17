@@ -4,15 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type StorageUploadFileChannel = (typeof StorageUploadFileChannel)[keyof typeof StorageUploadFileChannel];
+export type StorageUploadFileChannel =
+	(typeof StorageUploadFileChannel)[keyof typeof StorageUploadFileChannel];
 export declare const StorageUploadFileChannel: {
-    readonly UnknownChannel: "UnknownChannel";
-    readonly ChatChannel: "ChatChannel";
-    readonly MailChannel: "MailChannel";
-    readonly CallChannel: "CallChannel";
-    readonly LogChannel: "LogChannel";
-    readonly MediaChannel: "MediaChannel";
-    readonly KnowledgebaseChannel: "KnowledgebaseChannel";
-    readonly CasesChannel: "CasesChannel";
-    readonly ScreenRecordingChannel: "ScreenRecordingChannel";
+	readonly UnknownChannel: 'UnknownChannel';
+	readonly ChatChannel: 'ChatChannel';
+	readonly MailChannel: 'MailChannel';
+	readonly CallChannel: 'CallChannel';
+	readonly LogChannel: 'LogChannel';
+	readonly MediaChannel: 'MediaChannel';
+	readonly KnowledgebaseChannel: 'KnowledgebaseChannel';
+	readonly CasesChannel: 'CasesChannel';
+	readonly ScreenRecordingChannel: 'ScreenRecordingChannel';
 };

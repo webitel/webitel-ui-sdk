@@ -8,14 +8,14 @@ import type { EngineCreateMemberBulkItemVariables } from './engineCreateMemberBu
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommunicationCreateRequest.zod';
 export interface EngineCreateMemberBulkItem {
-    agent?: EngineLookup;
-    bucket?: EngineLookup;
-    communications?: EngineMemberCommunicationCreateRequest[];
-    expireAt?: string;
-    minOfferingAt?: string;
-    name?: string;
-    priority?: number;
-    skill?: EngineLookup;
-    timezone?: EngineLookup;
-    variables?: EngineCreateMemberBulkItemVariables;
+	agent?: EngineLookup;
+	bucket?: EngineLookup;
+	communications?: EngineMemberCommunicationCreateRequest[];
+	expireAt?: string;
+	minOfferingAt?: string;
+	name?: string;
+	priority?: number;
+	skill?: EngineLookup;
+	timezone?: EngineLookup;
+	variables?: EngineCreateMemberBulkItemVariables;
 }

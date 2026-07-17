@@ -4,11 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type LoggerServiceSearchLogByConfigIdActionItem = (typeof LoggerServiceSearchLogByConfigIdActionItem)[keyof typeof LoggerServiceSearchLogByConfigIdActionItem];
+export type LoggerServiceSearchLogByConfigIdActionItem =
+	(typeof LoggerServiceSearchLogByConfigIdActionItem)[keyof typeof LoggerServiceSearchLogByConfigIdActionItem];
 export declare const LoggerServiceSearchLogByConfigIdActionItem: {
-    readonly DefaultNoAction: "default_no_action";
-    readonly Create: "create";
-    readonly Update: "update";
-    readonly Read: "read";
-    readonly Delete: "delete";
+	readonly DefaultNoAction: 'default_no_action';
+	readonly Create: 'create';
+	readonly Update: 'update';
+	readonly Read: 'read';
+	readonly Delete: 'delete';
 };

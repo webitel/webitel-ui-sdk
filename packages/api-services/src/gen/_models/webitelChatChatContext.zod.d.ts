@@ -8,5 +8,5 @@
  * Context. Variables.
  */
 export type WebitelChatChatContext = {
-    [key: string]: string;
+	[key: string]: string;
 };

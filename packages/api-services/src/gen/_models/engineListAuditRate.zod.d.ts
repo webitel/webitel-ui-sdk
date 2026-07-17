@@ -6,6 +6,6 @@
  */
 import type { EngineAuditRate } from './engineAuditRate.zod';
 export interface EngineListAuditRate {
-    items?: EngineAuditRate[];
-    next?: boolean;
+	items?: EngineAuditRate[];
+	next?: boolean;
 }

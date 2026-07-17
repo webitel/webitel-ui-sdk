@@ -6,6 +6,6 @@
  */
 import type { EngineHistoryCall } from './engineHistoryCall.zod';
 export interface EngineListHistoryCall {
-    items?: EngineHistoryCall[];
-    next?: boolean;
+	items?: EngineHistoryCall[];
+	next?: boolean;
 }

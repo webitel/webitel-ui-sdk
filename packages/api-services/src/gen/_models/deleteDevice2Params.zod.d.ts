@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteDevice2Params = {
-    id?: string;
-    permanent?: boolean;
+	id?: string;
+	permanent?: boolean;
 };

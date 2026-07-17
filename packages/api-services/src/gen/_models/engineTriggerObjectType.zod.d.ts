@@ -4,12 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineTriggerObjectType = (typeof EngineTriggerObjectType)[keyof typeof EngineTriggerObjectType];
+export type EngineTriggerObjectType =
+	(typeof EngineTriggerObjectType)[keyof typeof EngineTriggerObjectType];
 export declare const EngineTriggerObjectType: {
-    readonly EmptyTriggerObject: "empty_trigger_object";
-    readonly Cases: "cases";
-    readonly CaseFiles: "case_files";
-    readonly CaseComments: "case_comments";
-    readonly CaseLinks: "case_links";
-    readonly RelatedCases: "related_cases";
+	readonly EmptyTriggerObject: 'empty_trigger_object';
+	readonly Cases: 'cases';
+	readonly CaseFiles: 'case_files';
+	readonly CaseComments: 'case_comments';
+	readonly CaseLinks: 'case_links';
+	readonly RelatedCases: 'related_cases';
 };

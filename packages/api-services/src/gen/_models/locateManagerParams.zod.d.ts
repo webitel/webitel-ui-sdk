@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateManagerParams = {
-    /**
-     * Fields to be retrieved into result.
-     */
-    fields?: string[];
+	/**
+	 * Fields to be retrieved into result.
+	 */
+	fields?: string[];
 };

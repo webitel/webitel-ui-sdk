@@ -6,6 +6,6 @@
  */
 import type { EnginePresetQuery } from './enginePresetQuery.zod';
 export interface EngineListPresetQuery {
-    items?: EnginePresetQuery[];
-    next?: boolean;
+	items?: EnginePresetQuery[];
+	next?: boolean;
 }

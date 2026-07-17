@@ -6,5 +6,5 @@
  */
 import type { EngineCreateOutboundResourceDisplayRequest } from './engineCreateOutboundResourceDisplayRequest.zod';
 export interface EngineOutboundResourceServiceCreateOutboundResourceDisplayBulkBody {
-    items?: EngineCreateOutboundResourceDisplayRequest[];
+	items?: EngineCreateOutboundResourceDisplayRequest[];
 }

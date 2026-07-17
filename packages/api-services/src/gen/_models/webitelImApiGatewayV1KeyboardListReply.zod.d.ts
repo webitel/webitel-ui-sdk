@@ -9,8 +9,8 @@ import type { WebitelImApiGatewayV1KeyboardRowWithSection } from './webitelImApi
  * List-style interactive menu.
  */
 export interface WebitelImApiGatewayV1KeyboardListReply {
-    /** Title of the main button, that on-click show up list. */
-    mainButtonTitle?: string;
-    /** List with sections with buttons. */
-    sections?: WebitelImApiGatewayV1KeyboardRowWithSection[];
+	/** Title of the main button, that on-click show up list. */
+	mainButtonTitle?: string;
+	/** List with sections with buttons. */
+	sections?: WebitelImApiGatewayV1KeyboardRowWithSection[];
 }

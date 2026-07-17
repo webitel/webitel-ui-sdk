@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1GateTemplateServiceSetGateTemplateBody {
-    /**
-     * Go text/template string. Variables from im-thread-service are accessed
-     * as {{.var_name}}. Missing keys produce an empty string (missingkey=zero).
-     */
-    template?: string;
+	/**
+	 * Go text/template string. Variables from im-thread-service are accessed
+	 * as {{.var_name}}. Missing keys produce an empty string (missingkey=zero).
+	 */
+	template?: string;
 }

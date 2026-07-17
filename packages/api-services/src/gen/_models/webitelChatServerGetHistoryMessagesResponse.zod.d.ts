@@ -6,7 +6,7 @@
  */
 import type { WebitelChatServerHistoryMessage } from './webitelChatServerHistoryMessage.zod';
 export interface WebitelChatServerGetHistoryMessagesResponse {
-    items?: WebitelChatServerHistoryMessage[];
-    next?: boolean;
-    page?: number;
+	items?: WebitelChatServerHistoryMessage[];
+	next?: boolean;
+	page?: number;
 }

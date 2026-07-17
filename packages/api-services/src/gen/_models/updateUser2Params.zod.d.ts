@@ -5,28 +5,28 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateUser2Params = {
-    /**
-     * PATCH: partial update
-     */
-    fields?: string[];
-    /**
-     * Generate SIP credentials & assign NEW [device] for [user]
-     */
-    generateDevice?: boolean;
-    /**
-     * SIP display name
-     */
-    'device.name'?: string;
-    /**
-     * SIP auth-id
-     */
-    'device.account'?: string;
-    /**
-     * SIP password
-     */
-    'device.password'?: string;
-    /**
-     * [re]generate SIP password ?
-     */
-    'device.generatePassword'?: boolean;
+	/**
+	 * PATCH: partial update
+	 */
+	fields?: string[];
+	/**
+	 * Generate SIP credentials & assign NEW [device] for [user]
+	 */
+	generateDevice?: boolean;
+	/**
+	 * SIP display name
+	 */
+	'device.name'?: string;
+	/**
+	 * SIP auth-id
+	 */
+	'device.account'?: string;
+	/**
+	 * SIP password
+	 */
+	'device.password'?: string;
+	/**
+	 * [re]generate SIP password ?
+	 */
+	'device.generatePassword'?: boolean;
 };

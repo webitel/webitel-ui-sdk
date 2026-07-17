@@ -6,10 +6,10 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineSkillAgentItem {
-    agent?: EngineLookup;
-    capacity?: number;
-    enabled?: boolean;
-    id?: string;
-    skill?: EngineLookup;
-    team?: EngineLookup;
+	agent?: EngineLookup;
+	capacity?: number;
+	enabled?: boolean;
+	id?: string;
+	skill?: EngineLookup;
+	team?: EngineLookup;
 }

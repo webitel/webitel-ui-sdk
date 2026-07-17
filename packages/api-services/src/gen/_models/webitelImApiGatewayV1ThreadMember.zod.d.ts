@@ -12,8 +12,8 @@ import type { WebitelImApiGatewayV1ThreadRole } from './webitelImApiGatewayV1Thr
  * with optional type-specific settings.
  */
 export interface WebitelImApiGatewayV1ThreadMember {
-    contact?: WebitelImApiGatewayV1Contact;
-    id?: string;
-    permissions?: WebitelImApiGatewayV1ThreadPermissions;
-    role?: WebitelImApiGatewayV1ThreadRole;
+	contact?: WebitelImApiGatewayV1Contact;
+	id?: string;
+	permissions?: WebitelImApiGatewayV1ThreadPermissions;
+	role?: WebitelImApiGatewayV1ThreadRole;
 }

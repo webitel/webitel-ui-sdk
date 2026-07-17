@@ -15,26 +15,26 @@ import type { ApiUserPresence } from './apiUserPresence.zod';
  * system-managed read-only fields (id, audit metadata).
  */
 export interface ApiInputUser {
-    /**
-     * The "chat_name" field is used to store the name displayed externally on the platform.
-     * For example, "chat_name" is shown when an agent connects to chats with clients.
-     */
-    chatName?: string;
-    contact?: ApiObjectId;
-    device?: ApiObjectId;
-    devices?: ApiObjectId[];
-    email?: string;
-    extension?: string;
-    /** When set to true, the user will be required to change their password on next login. */
-    forcePasswordChange?: boolean;
-    hotdesks?: ApiObjectId[];
-    license?: ApiLicenseUser[];
-    name?: string;
-    password?: string;
-    permissions?: ApiPermission[];
-    presence?: ApiUserPresence;
-    profile?: ApiInputUserProfile;
-    roles?: ApiObjectId[];
-    totpUrl?: string;
-    username?: string;
+	/**
+	 * The "chat_name" field is used to store the name displayed externally on the platform.
+	 * For example, "chat_name" is shown when an agent connects to chats with clients.
+	 */
+	chatName?: string;
+	contact?: ApiObjectId;
+	device?: ApiObjectId;
+	devices?: ApiObjectId[];
+	email?: string;
+	extension?: string;
+	/** When set to true, the user will be required to change their password on next login. */
+	forcePasswordChange?: boolean;
+	hotdesks?: ApiObjectId[];
+	license?: ApiLicenseUser[];
+	name?: string;
+	password?: string;
+	permissions?: ApiPermission[];
+	presence?: ApiUserPresence;
+	profile?: ApiInputUserProfile;
+	roles?: ApiObjectId[];
+	totpUrl?: string;
+	username?: string;
 }

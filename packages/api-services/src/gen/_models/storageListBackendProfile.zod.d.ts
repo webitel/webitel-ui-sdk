@@ -6,6 +6,6 @@
  */
 import type { StorageBackendProfile } from './storageBackendProfile.zod';
 export interface StorageListBackendProfile {
-    items?: StorageBackendProfile[];
-    next?: boolean;
+	items?: StorageBackendProfile[];
+	next?: boolean;
 }

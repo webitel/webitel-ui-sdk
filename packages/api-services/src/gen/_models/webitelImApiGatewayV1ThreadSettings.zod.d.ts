@@ -9,17 +9,17 @@
  * specific to direct (one-to-one) threads.
  */
 export interface WebitelImApiGatewayV1ThreadSettings {
-    /** Creation timestamp (Unix time, milliseconds). */
-    createdAt?: string;
-    /** Domain identifier. */
-    domainId?: number;
-    /** Settings identifier. */
-    id?: string;
-    /**
-     * Custom title for the direct thread.
-     * Usually represents the display name of the conversation.
-     */
-    title?: string;
-    /** Last update timestamp (Unix time, milliseconds). */
-    updatedAt?: string;
+	/** Creation timestamp (Unix time, milliseconds). */
+	createdAt?: string;
+	/** Domain identifier. */
+	domainId?: number;
+	/** Settings identifier. */
+	id?: string;
+	/**
+	 * Custom title for the direct thread.
+	 * Usually represents the display name of the conversation.
+	 */
+	title?: string;
+	/** Last update timestamp (Unix time, milliseconds). */
+	updatedAt?: string;
 }

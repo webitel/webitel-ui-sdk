@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteData2Params = {
-    /**
-     * Fields to be retrieved into result dataset.
-     */
-    fields?: string[];
+	/**
+	 * Fields to be retrieved into result dataset.
+	 */
+	fields?: string[];
 };

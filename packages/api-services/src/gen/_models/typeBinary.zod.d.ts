@@ -6,6 +6,6 @@
  */
 import type { TypeBinaryViolation } from './typeBinaryViolation.zod';
 export interface TypeBinary {
-    maxBytes?: number;
-    violation?: TypeBinaryViolation;
+	maxBytes?: number;
+	violation?: TypeBinaryViolation;
 }

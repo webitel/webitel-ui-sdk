@@ -7,6 +7,6 @@
 import type { WebitelCasesCase } from './webitelCasesCase.zod';
 import type { WebitelCasesFieldChange } from './webitelCasesFieldChange.zod';
 export interface WebitelCasesUpdateCaseResponse {
-    case?: WebitelCasesCase;
-    changes?: WebitelCasesFieldChange[];
+	case?: WebitelCasesCase;
+	changes?: WebitelCasesFieldChange[];
 }

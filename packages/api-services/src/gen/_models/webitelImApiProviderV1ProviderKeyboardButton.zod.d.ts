@@ -8,9 +8,9 @@ import type { WebitelImApiProviderV1ProviderKeyboardButtonCallback } from './web
 import type { WebitelImApiProviderV1ProviderKeyboardButtonRequest } from './webitelImApiProviderV1ProviderKeyboardButtonRequest.zod';
 import type { WebitelImApiProviderV1ProviderKeyboardButtonURL } from './webitelImApiProviderV1ProviderKeyboardButtonURL.zod';
 export interface WebitelImApiProviderV1ProviderKeyboardButton {
-    callback?: WebitelImApiProviderV1ProviderKeyboardButtonCallback;
-    id?: string;
-    label?: string;
-    request?: WebitelImApiProviderV1ProviderKeyboardButtonRequest;
-    url?: WebitelImApiProviderV1ProviderKeyboardButtonURL;
+	callback?: WebitelImApiProviderV1ProviderKeyboardButtonCallback;
+	id?: string;
+	label?: string;
+	request?: WebitelImApiProviderV1ProviderKeyboardButtonRequest;
+	url?: WebitelImApiProviderV1ProviderKeyboardButtonURL;
 }
