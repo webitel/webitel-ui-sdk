@@ -534,6 +534,15 @@ export const getSearchAuditRateResponseMock = (
 				}),
 				undefined,
 			]),
+			conversationId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			createdAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -1684,6 +1693,15 @@ export const getCreateAuditFormRateResponseMock = (
 		}),
 		undefined,
 	]),
+	conversationId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -1979,6 +1997,15 @@ export const getDeleteAuditRateResponseMock = (
 		undefined,
 	]),
 	comment: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	conversationId: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
 				min: 10,
@@ -2290,6 +2317,15 @@ export const getReadAuditRateResponseMock = (
 		}),
 		undefined,
 	]),
+	conversationId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
@@ -2585,6 +2621,15 @@ export const getUpdateAuditRateResponseMock = (
 		undefined,
 	]),
 	comment: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	conversationId: faker.helpers.arrayElement([
 		faker.string.alpha({
 			length: {
 				min: 10,
