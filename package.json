@@ -10,7 +10,7 @@
 		"test:coverage": "vitest run --coverage",
 		"biome:format:all": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
-		"build:types": "npm run build:types -w @webitel/api-services; vue-tsc -p ./tsconfig.build.json",
+		"build:types": "vue-tsc -b tsconfig.build.json",
 		"publish-lib": " npm publish --access public --tag latest",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",

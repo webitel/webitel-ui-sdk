@@ -1,17 +1,56 @@
 {
-	"extends": [
-		"./tsconfig.json",
-		"./tsconfig.paths.emit.json"
-	],
+	"extends": "./tsconfig.json",
 	"include": [
 		"src"
 	],
 	"compilerOptions": {
+		"composite": true,
 		"emitDeclarationOnly": true,
 		"declaration": true,
+		"declarationMap": true,
 		"declarationDir": "./types",
+		"tsBuildInfoFile": "./types/.tsbuildinfo",
 		"noEmit": false,
 		"allowJs": true,
-		"rootDir": "./src"
-	}
+		"rootDir": "./src",
+		"disableSourceOfProjectReferenceRedirect": true,
+		"paths": {
+			"@aliasedDeps/api-services/axios": [
+				"./node_modules/axios",
+				"./packages/api-services/node_modules/axios"
+			],
+			"zod": [
+				"./node_modules/zod"
+			],
+			"zod/v4": [
+				"./node_modules/zod/v4"
+			],
+			"vue": [
+				"./node_modules/vue"
+			],
+			"@vueuse/core": [
+				"./node_modules/@vueuse/core"
+			],
+			"@vueuse/shared": [
+				"./node_modules/@vueuse/shared"
+			],
+			"@webitel/ui-sdk/src/*": [
+				"./src/*"
+			],
+			"@webitel/ui-sdk/validators/*": [
+				"./src/validations/vuelidate/validators/*"
+			],
+			"@webitel/ui-sdk/*": [
+				"./src/*"
+			]
+		}
+	},
+	"references": [
+		{
+			"path": "./packages/api-services/tsconfig.build.json"
+		},
+		{
+			"path": "./packages/styleguide/tsconfig.build.json"
+		}
+	]
 }

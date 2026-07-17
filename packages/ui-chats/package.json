@@ -9,7 +9,7 @@
 	],
 	"scripts": {
 		"dev": "vite",
-		"build:types": "npm run build:types --prefix ../..; vue-tsc -p ./tsconfig.build.json",
+		"build:types": "vue-tsc -b tsconfig.build.json",
 		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"lint:fix": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",

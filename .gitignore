@@ -21,6 +21,9 @@ src/**/*.d.ts
 packages/*/src/**/*.d.ts
 !packages/*/src/*.d.ts
 
+# Project references build cache
+**/.tsbuildinfo
+
 # misc
 .DS_Store
 node_modules

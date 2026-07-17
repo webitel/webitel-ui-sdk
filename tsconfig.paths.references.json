@@ -22,37 +22,37 @@
 				"./node_modules/@vueuse/shared"
 			],
 			"@webitel/api-services": [
-				"./packages/api-services/types/index"
+				"./packages/api-services/src/index.ts"
 			],
 			"@webitel/api-services/gen": [
-				"./packages/api-services/types/gen/index"
+				"./packages/api-services/src/gen/index.ts"
 			],
 			"@webitel/api-services/gen/models": [
-				"./packages/api-services/types/gen/_models/index"
+				"./packages/api-services/src/gen/_models/index.ts"
 			],
 			"@webitel/api-services/gen/utils": [
-				"./packages/api-services/types/utils/gen/index"
+				"./packages/api-services/src/utils/gen/index.ts"
 			],
 			"@webitel/api-services/api": [
-				"./packages/api-services/types/api/clients/index"
+				"./packages/api-services/src/api/clients/index.ts"
 			],
 			"@webitel/api-services/api/*": [
-				"./packages/api-services/types/api/*"
+				"./packages/api-services/src/api/*"
 			],
 			"@webitel/api-services/enums": [
-				"./packages/api-services/types/enums/index"
+				"./packages/api-services/src/enums/index.ts"
 			],
 			"@webitel/api-services/utils": [
-				"./packages/api-services/types/utils/index"
+				"./packages/api-services/src/utils/index.ts"
 			],
 			"@webitel/api-services/scripts": [
-				"./packages/api-services/types/scripts/index"
+				"./packages/api-services/src/scripts/index.ts"
 			],
 			"@webitel/api-services/validations": [
-				"./packages/api-services/types/validations/index"
+				"./packages/api-services/src/validations/index.ts"
 			],
 			"@webitel/api-services/locale": [
-				"./packages/api-services/types/locale/locale"
+				"./packages/api-services/src/locale/locale.ts"
 			],
 			"@webitel/ui-sdk/src/*": [
 				"./src/*"

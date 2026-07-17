@@ -4,9 +4,12 @@
 		"src"
 	],
 	"compilerOptions": {
+		"composite": true,
 		"emitDeclarationOnly": true,
 		"declaration": true,
+		"declarationMap": true,
 		"declarationDir": "types",
+		"tsBuildInfoFile": "types/.tsbuildinfo",
 		"rootDir": "./src",
 		"noEmit": false
 	}

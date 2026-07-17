@@ -1,16 +1,32 @@
 {
 	"extends": [
 		"../../tsconfig.json",
-		"../tsconfig.paths.emit.json"
+		"../../tsconfig.paths.references.json"
 	],
 	"include": [
 		"src"
 	],
 	"compilerOptions": {
+		"baseUrl": "../..",
+		"composite": true,
 		"emitDeclarationOnly": true,
 		"declaration": true,
+		"declarationMap": true,
 		"declarationDir": "types",
+		"tsBuildInfoFile": "types/.tsbuildinfo",
 		"rootDir": "./src",
-		"noEmit": false
-	}
+		"noEmit": false,
+		"disableSourceOfProjectReferenceRedirect": true
+	},
+	"references": [
+		{
+			"path": "../api-services/tsconfig.build.json"
+		},
+		{
+			"path": "../styleguide/tsconfig.build.json"
+		},
+		{
+			"path": "../../tsconfig.build.json"
+		}
+	]
 }
