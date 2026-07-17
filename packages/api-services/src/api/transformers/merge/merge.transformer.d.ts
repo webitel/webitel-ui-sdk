@@ -1,2 +1,2 @@
-declare const mergeTransformer: (...args: any[]) => (main: any) => any;
+declare const mergeTransformer: (...args: any[]) => (main: any) => object;
 export default mergeTransformer;
