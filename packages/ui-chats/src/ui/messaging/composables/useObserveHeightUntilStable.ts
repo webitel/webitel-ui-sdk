@@ -54,6 +54,12 @@ export const useObserveHeightUntilStable = (
 		observer.observe(chatContainer.value);
 	};
 
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * WTEL-9968 (https://webitel.atlassian.net/browse/WTEL-9968)
+	 * to avoid extra bottom scroll when chat is in fullscreen
+	 */
 	document.addEventListener('fullscreenchange', onFullscreenChange);
 
 	onUnmounted(() => {

@@ -176,6 +176,13 @@ export const useChatScroll = ({
 		}, 500);
 	};
 
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * WTEL-9968 (https://webitel.atlassian.net/browse/WTEL-9968)
+	 * to avoid extra bottom scroll when chat is in fullscreen
+	 */
+
 	document.addEventListener('fullscreenchange', onFullscreenChange);
 
 	watch(
