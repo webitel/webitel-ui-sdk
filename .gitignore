@@ -5,6 +5,9 @@
 # ui-datalist pckg
 /packages/ui-datalist/types
 
+# ui-chats pckg
+/packages/ui-chats/types
+
 # api-services pckg
 /packages/api-services/types
 /packages/api-services/src/gen/_docs
