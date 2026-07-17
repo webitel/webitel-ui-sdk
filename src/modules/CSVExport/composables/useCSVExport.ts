@@ -18,7 +18,11 @@ interface CSVExportOptions {
 
 const CSV_EXPORT_BATCH_SIZE = 5000;
 
-export function useCSVExport({ selected }: { selected: Ref<number[]> }) {
+export function useCSVExport({
+	selected,
+}: {
+	selected: Ref<Array<string | number>>;
+}) {
 	const CSVExportInstance = ref<null | InstanceType<typeof CSVExport>>(null);
 	const route = useRoute();
 

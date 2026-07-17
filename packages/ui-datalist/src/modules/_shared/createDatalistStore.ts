@@ -61,10 +61,8 @@ export const createDatalistStore = <
 	}
 
 	if (thisStoreType === DatalistStoreProvider.Pinia) {
-		// TODO(types): a Pinia StoreDefinition is a valid store factory (callable,
-		// returns a store exposing `$patch`), but its generic-extracted shape does
-		// not structurally match PatchableStoreFactory. Reconcile the two factory
-		// types instead of asserting here.
+		// Pinia StoreDefinition is a valid PatchableStoreFactory at runtime;
+		// PatchableStore includes StoreGeneric so consumers can use storeToRefs.
 		return definePiniaStore(namespace, () =>
 			storeBody({
 				...config,

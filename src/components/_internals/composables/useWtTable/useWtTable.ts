@@ -13,12 +13,16 @@ export const useWtTable = ({ headers }) => {
 			)
 			.map((header: WtTableHeader) => {
 				if (!header.text && header.locale) {
+					const translate = t as (key: string, ...args: unknown[]) => string;
 					return {
 						...header,
 						text:
 							typeof header.locale === 'string'
-								? t(header.locale)
-								: t(...header.locale),
+								? translate(header.locale)
+								: translate(
+										String(header.locale[0]),
+										...header.locale.slice(1),
+									),
 					};
 				}
 				return header;
