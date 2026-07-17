@@ -40,7 +40,7 @@ export const createUserAccessControlComposable = (
 				: false;
 
 		const route = useRoute();
-		const object = resource || route?.meta?.WtObject;
+		const object = (resource || route?.meta?.WtObject) as WtObject | undefined;
 
 		const userinfoStore = useUserinfoStore() as UserAccessStore;
 

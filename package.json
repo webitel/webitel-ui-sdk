@@ -22,7 +22,7 @@
 		"utils:i": "npm install",
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
-		"typecheck": "vue-tsc --noEmit -p ./tsconfig.json",
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
 	},
 	"workspaces": [

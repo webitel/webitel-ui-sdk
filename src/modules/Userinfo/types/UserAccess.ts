@@ -8,7 +8,7 @@ import type {
 	SupervisorSections,
 	WtApplication,
 	WtObject,
-} from '../../../../enums';
+} from '../../../enums';
 import type { ApplicationsAccessSchema } from '../classes/ApplicationsAccess';
 import type {
 	CrudGlobalAction,
@@ -123,10 +123,10 @@ export interface UserAccessStore {
 	hasLicense: (license: WebitelLicense) => boolean;
 
 	hasApplicationVisibility: (app: WtApplication) => boolean;
-	hasSectionVisibility: ({
-		section: UiSection,
-		object: WtObject,
-		app: WtApplication,
+	hasSectionVisibility: (params: {
+		section: UiSection;
+		object: WtObject;
+		app: WtApplication;
 	}) => boolean;
 
 	/**
