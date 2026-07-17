@@ -23,6 +23,7 @@ packages/*/src/**/*.d.ts
 
 # Project references build cache
 **/.tsbuildinfo
+**/*.d.ts.map
 
 # misc
 .DS_Store
