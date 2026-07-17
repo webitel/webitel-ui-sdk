@@ -12,6 +12,19 @@ export const useObserveHeightUntilStable = (
 	callback: () => void,
 ) => {
 	let observer: ResizeObserver | null = null;
+	let isViewportTransition = false;
+	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
+
+	const onFullscreenChange = () => {
+		isViewportTransition = true;
+
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
+
+		viewportTransitionTimer = setTimeout(() => {
+			isViewportTransition = false;
+			viewportTransitionTimer = null;
+		}, 500);
+	};
 
 	const stopObserve = () => {
 		observer?.disconnect();
@@ -26,7 +39,8 @@ export const useObserveHeightUntilStable = (
 
 		observer = new ResizeObserver(() => {
 			const currentClientHeight = chatContainer.value?.clientHeight;
-			callback();
+
+			if (!isViewportTransition) callback();
 
 			if (currentClientHeight === lastClientHeight) {
 				stableCount++;
@@ -40,7 +54,19 @@ export const useObserveHeightUntilStable = (
 		observer.observe(chatContainer.value);
 	};
 
-	onUnmounted(stopObserve);
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * WTEL-9968 (https://webitel.atlassian.net/browse/WTEL-9968)
+	 * to avoid extra bottom scroll when chat is in fullscreen
+	 */
+	document.addEventListener('fullscreenchange', onFullscreenChange);
+
+	onUnmounted(() => {
+		stopObserve();
+		document.removeEventListener('fullscreenchange', onFullscreenChange);
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
+	});
 
 	return {
 		startObserve,

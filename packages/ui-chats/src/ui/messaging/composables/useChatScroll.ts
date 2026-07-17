@@ -50,6 +50,8 @@ export const useChatScroll = ({
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
 	let resizeObserver: ResizeObserver | null = null;
+	let isViewportTransition = false;
+	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
 	/**
 	 * @author PolinaSukhorukova-webitel
 	 *
@@ -113,6 +115,12 @@ export const useChatScroll = ({
 
 			const newScrollHeight = el.scrollHeight;
 
+			if (isViewportTransition) {
+				prevScrollHeight = newScrollHeight;
+				updateScrollToBottomBtnVisibility(el);
+				return;
+			}
+
 			const wasNearBottom =
 				el.scrollTop + el.clientHeight >= prevScrollHeight - bottomThreshold;
 			const contentGrown = newScrollHeight > prevScrollHeight;
@@ -156,6 +164,26 @@ export const useChatScroll = ({
 		newUnseenMessagesCount.value = 0;
 		resetScrollToBottomBtn();
 	};
+
+	const onFullscreenChange = () => {
+		isViewportTransition = true;
+
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
+
+		viewportTransitionTimer = setTimeout(() => {
+			isViewportTransition = false;
+			viewportTransitionTimer = null;
+		}, 500);
+	};
+
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * WTEL-9968 (https://webitel.atlassian.net/browse/WTEL-9968)
+	 * to avoid extra bottom scroll when chat is in fullscreen
+	 */
+
+	document.addEventListener('fullscreenchange', onFullscreenChange);
 
 	watch(
 		() => messages.value?.length,
@@ -215,6 +243,8 @@ export const useChatScroll = ({
 
 	onUnmounted(() => {
 		stopStickToBottomObserving();
+		document.removeEventListener('fullscreenchange', onFullscreenChange);
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
 	});
 
 	return {

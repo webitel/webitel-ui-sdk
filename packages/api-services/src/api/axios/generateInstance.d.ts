@@ -21,5 +21,5 @@ export declare const generateInstance: ({
 	interceptors,
 	baseURL,
 	...rest
-}?: GenerateInstanceOptions) => any;
+}?: GenerateInstanceOptions) => import('axios').AxiosInstance;
 export {};
