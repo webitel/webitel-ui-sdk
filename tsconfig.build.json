@@ -1,12 +1,17 @@
 {
-  "extends": "./tsconfig.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationDir": "./types",
-    "noEmit": false,
-    "allowJs": true,
-    "rootDir": "./src"
-  }
+	"extends": [
+		"./tsconfig.json",
+		"./tsconfig.paths.emit.json"
+	],
+	"include": [
+		"src"
+	],
+	"compilerOptions": {
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"declarationDir": "./types",
+		"noEmit": false,
+		"allowJs": true,
+		"rootDir": "./src"
+	}
 }

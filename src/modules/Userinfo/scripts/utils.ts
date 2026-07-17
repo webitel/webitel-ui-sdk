@@ -21,7 +21,7 @@ import type {
 	UiSection,
 	VisibilityAccess,
 	WebitelLicenseInfo,
-} from '../types/UserAccess.d';
+} from '../types/UserAccess';
 
 /**
  * @internal

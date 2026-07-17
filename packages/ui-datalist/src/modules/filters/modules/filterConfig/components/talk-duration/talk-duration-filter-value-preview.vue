@@ -25,7 +25,7 @@
 import { useI18n } from 'vue-i18n';
 
 import { useFromToSecToPreviewTime } from '../../composables/useFromToSecToPreviewTime';
-import type { TalkDurationFilterModelValue } from './TalkDurationFilter.d.ts';
+import type { TalkDurationFilterModelValue } from './TalkDurationFilter';
 
 const props = defineProps<{
 	value: TalkDurationFilterModelValue;
