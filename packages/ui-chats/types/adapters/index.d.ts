@@ -5,8 +5,4 @@
  * Consuming this entry pulls `@webitel/chat-web-sdk` (declared as an optional
  * peerDependency). The core `@webitel/ui-chats/ui` entry stays free of it.
  */
-export {
-	mapMessagesToChatMessages,
-	mapMessageToChatMessage,
-	type ToChatMessageOptions,
-} from './chat-web-sdk/toChatMessage';
+export { mapMessagesToChatMessages, mapMessageToChatMessage, type ToChatMessageOptions, } from './chat-web-sdk/toChatMessage';
