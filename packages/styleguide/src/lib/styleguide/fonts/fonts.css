@@ -163,3 +163,11 @@
 	font-style: italic;
 	font-display: swap;
 }
+
+@font-face {
+	font-family: "text-security-disc";
+	src: url("../../../assets/fonts/text-security-disc/text-security-disc.woff2")
+		format("woff2");
+	font-weight: 100;
+	font-style: normal;
+}
