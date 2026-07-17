@@ -8,6 +8,6 @@
  * HistoryMessageCursorResponse defines next/prev id for keyset-pagination.
  */
 export interface WebitelImApiGatewayV1HistoryMessageCursorResponse {
-    /** Unique identifier last message where cursor stopped. */
-    id?: string;
+	/** Unique identifier last message where cursor stopped. */
+	id?: string;
 }

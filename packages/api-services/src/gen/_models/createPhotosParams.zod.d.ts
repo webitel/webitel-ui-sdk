@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreatePhotosParams = {
-    /**
-     * Fields to be retrieved into result of changes.
-     */
-    fields?: string[];
+	/**
+	 * Fields to be retrieved into result of changes.
+	 */
+	fields?: string[];
 };

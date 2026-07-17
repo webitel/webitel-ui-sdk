@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export type WebitelImApiProviderV1ProviderSendTextRequestMetadata = {
-    [key: string]: string;
+	[key: string]: string;
 };

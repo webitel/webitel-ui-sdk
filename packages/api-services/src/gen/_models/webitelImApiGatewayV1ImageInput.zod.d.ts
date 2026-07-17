@@ -9,8 +9,8 @@
  * necessary fields.
  */
 export interface WebitelImApiGatewayV1ImageInput {
-    id?: string;
-    link?: string;
-    mimeType?: string;
-    name?: string;
+	id?: string;
+	link?: string;
+	mimeType?: string;
+	name?: string;
 }

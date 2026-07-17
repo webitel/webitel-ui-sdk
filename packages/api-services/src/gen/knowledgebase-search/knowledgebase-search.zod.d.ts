@@ -5,20 +5,33 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const SpacesArticlesSearchQueryParams: zod.ZodObject<{
-    size: zod.ZodOptional<zod.ZodNumber>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-    sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    q: zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodOptional<zod.ZodBoolean>;
-    tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SpacesArticlesSearchResponse: zod.ZodObject<{
-    data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-    page: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
+export declare const SpacesArticlesSearchQueryParams: zod.ZodObject<
+	{
+		size: zod.ZodOptional<zod.ZodNumber>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+		sort: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		q: zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodOptional<zod.ZodBoolean>;
+		tags: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SpacesArticlesSearchResponse: zod.ZodObject<
+	{
+		data: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						id: zod.ZodOptional<zod.ZodString>;
+						name: zod.ZodOptional<zod.ZodString>;
+						type: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+		page: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;

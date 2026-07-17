@@ -9,10 +9,10 @@ import type { ContactsGroup } from './contactsGroup.zod';
  * A list of Groups.
  */
 export interface ContactsGroupList {
-    /** List of groups. */
-    items?: ContactsGroup[];
-    /** Have more records. */
-    next?: boolean;
-    /** Page number of the partial result. */
-    page?: number;
+	/** List of groups. */
+	items?: ContactsGroup[];
+	/** Have more records. */
+	next?: boolean;
+	/** Page number of the partial result. */
+	page?: number;
 }

@@ -6,6 +6,6 @@
  */
 import type { FtsSearchData } from './ftsSearchData.zod';
 export interface FtsSearchResponse {
-    items?: FtsSearchData[];
-    next?: boolean;
+	items?: FtsSearchData[];
+	next?: boolean;
 }

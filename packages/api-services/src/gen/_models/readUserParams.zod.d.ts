@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ReadUserParams = {
-    /**
-     * partial output
-     */
-    fields?: string[];
+	/**
+	 * partial output
+	 */
+	fields?: string[];
 };

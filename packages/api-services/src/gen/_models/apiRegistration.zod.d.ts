@@ -7,15 +7,15 @@
 import type { ApiDeviceId } from './apiDeviceId.zod';
 import type { ApiUserId } from './apiUserId.zod';
 export interface ApiRegistration {
-    callid?: string;
-    contact?: string;
-    device?: ApiDeviceId;
-    expiresAt?: string;
-    id?: string;
-    instance?: string;
-    received?: string;
-    registerAt?: string;
-    socket?: string;
-    user?: ApiUserId;
-    userAgent?: string;
+	callid?: string;
+	contact?: string;
+	device?: ApiDeviceId;
+	expiresAt?: string;
+	id?: string;
+	instance?: string;
+	received?: string;
+	registerAt?: string;
+	socket?: string;
+	user?: ApiUserId;
+	userAgent?: string;
 }

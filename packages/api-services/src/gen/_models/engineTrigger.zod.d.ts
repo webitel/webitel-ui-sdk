@@ -10,16 +10,16 @@ import type { EngineTriggerObjectType } from './engineTriggerObjectType.zod';
 import type { EngineTriggerType } from './engineTriggerType.zod';
 import type { EngineTriggerVariables } from './engineTriggerVariables.zod';
 export interface EngineTrigger {
-    description?: string;
-    enabled?: boolean;
-    event?: EngineTriggerEventType;
-    expression?: string;
-    id?: number;
-    name?: string;
-    object?: EngineTriggerObjectType;
-    schema?: EngineLookup;
-    timeout?: number;
-    timezone?: EngineLookup;
-    type?: EngineTriggerType;
-    variables?: EngineTriggerVariables;
+	description?: string;
+	enabled?: boolean;
+	event?: EngineTriggerEventType;
+	expression?: string;
+	id?: number;
+	name?: string;
+	object?: EngineTriggerObjectType;
+	schema?: EngineLookup;
+	timeout?: number;
+	timezone?: EngineLookup;
+	type?: EngineTriggerType;
+	variables?: EngineTriggerVariables;
 }

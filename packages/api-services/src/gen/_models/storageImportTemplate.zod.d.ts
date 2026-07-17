@@ -8,11 +8,11 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { StorageImportSourceType } from './storageImportSourceType.zod';
 import type { StorageImportTemplateParameters } from './storageImportTemplateParameters.zod';
 export interface StorageImportTemplate {
-    parameters?: StorageImportTemplateParameters;
-    description?: string;
-    id?: number;
-    name?: string;
-    source?: EngineLookup;
-    sourceId?: string;
-    sourceType?: StorageImportSourceType;
+	parameters?: StorageImportTemplateParameters;
+	description?: string;
+	id?: number;
+	name?: string;
+	source?: EngineLookup;
+	sourceId?: string;
+	sourceType?: StorageImportSourceType;
 }

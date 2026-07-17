@@ -8,15 +8,15 @@
  * The Space principal input.
  */
 export interface KnowledgebaseInputSpace {
-    /** Unique ID of the latest version of an existing resorce. */
-    etag?: string;
-    /**
-     * BIO. Short description about the space.
-     * OPTIONAL. Multi-lined text.
-     */
-    homePage?: string;
-    /** Represents the name of the knowledge base space. */
-    name?: string;
-    /** The state of the space. */
-    state?: boolean;
+	/** Unique ID of the latest version of an existing resorce. */
+	etag?: string;
+	/**
+	 * BIO. Short description about the space.
+	 * OPTIONAL. Multi-lined text.
+	 */
+	homePage?: string;
+	/** Represents the name of the knowledge base space. */
+	name?: string;
+	/** The state of the space. */
+	state?: boolean;
 }

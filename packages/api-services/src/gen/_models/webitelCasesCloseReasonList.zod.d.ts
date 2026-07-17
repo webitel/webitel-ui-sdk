@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesCloseReason } from './webitelCasesCloseReason.zod';
 export interface WebitelCasesCloseReasonList {
-    items?: WebitelCasesCloseReason[];
-    next?: boolean;
-    page?: number;
+	items?: WebitelCasesCloseReason[];
+	next?: boolean;
+	page?: number;
 }

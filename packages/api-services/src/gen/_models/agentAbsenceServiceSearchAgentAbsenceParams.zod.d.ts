@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type AgentAbsenceServiceSearchAgentAbsenceParams = {
-    page?: number;
-    size?: number;
-    sort?: string;
-    fields?: string[];
-    filters?: string[];
+	page?: number;
+	size?: number;
+	sort?: string;
+	fields?: string[];
+	filters?: string[];
 };

@@ -6,7 +6,7 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineAgentInQueueStatisticsAgentInQueueStatisticsItem {
-    bucket?: EngineLookup;
-    memberWaiting?: number;
-    skill?: EngineLookup;
+	bucket?: EngineLookup;
+	memberWaiting?: number;
+	skill?: EngineLookup;
 }

@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocatePhoneParams = {
-    /**
-     * Fields [Q]uery to build result record.
-     */
-    fields?: string[];
+	/**
+	 * Fields [Q]uery to build result record.
+	 */
+	fields?: string[];
 };

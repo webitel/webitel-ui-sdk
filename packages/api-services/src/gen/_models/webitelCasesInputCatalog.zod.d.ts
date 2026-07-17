@@ -6,15 +6,15 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesInputCatalog {
-    closeReasonGroup?: GeneralLookup;
-    code?: string;
-    defaultPriority?: GeneralLookup;
-    description?: string;
-    name?: string;
-    prefix?: string;
-    skills?: GeneralLookup[];
-    sla?: GeneralLookup;
-    state?: boolean;
-    status?: GeneralLookup;
-    teams?: GeneralLookup[];
+	closeReasonGroup?: GeneralLookup;
+	code?: string;
+	defaultPriority?: GeneralLookup;
+	description?: string;
+	name?: string;
+	prefix?: string;
+	skills?: GeneralLookup[];
+	sla?: GeneralLookup;
+	state?: boolean;
+	status?: GeneralLookup;
+	teams?: GeneralLookup[];
 }

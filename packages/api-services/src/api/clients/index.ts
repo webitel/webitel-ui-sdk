@@ -41,6 +41,7 @@ export * from './slas/slas';
 export * from './teams/teams';
 export * from './userSettings/userSettings';
 export * from './users/users';
+export * from './wtTypes/adjunctTypeRecords/adjunctTypeRecords';
 export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';

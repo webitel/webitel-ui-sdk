@@ -6,8 +6,8 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface StorageStartFileTranscriptRequest {
-    fileId?: string[];
-    locale?: string;
-    profile?: EngineLookup;
-    uuid?: string[];
+	fileId?: string[];
+	locale?: string;
+	profile?: EngineLookup;
+	uuid?: string[];
 }

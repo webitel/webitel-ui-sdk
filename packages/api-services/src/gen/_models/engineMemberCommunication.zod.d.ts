@@ -6,17 +6,17 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineMemberCommunication {
-    attempts?: number;
-    description?: string;
-    destination?: string;
-    display?: string;
-    dtmf?: string;
-    id?: string;
-    lastActivityAt?: string;
-    lastCause?: string;
-    priority?: number;
-    resource?: EngineLookup;
-    state?: number;
-    stopAt?: string;
-    type?: EngineLookup;
+	attempts?: number;
+	description?: string;
+	destination?: string;
+	display?: string;
+	dtmf?: string;
+	id?: string;
+	lastActivityAt?: string;
+	lastCause?: string;
+	priority?: number;
+	resource?: EngineLookup;
+	state?: number;
+	stopAt?: string;
+	type?: EngineLookup;
 }

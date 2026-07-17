@@ -7,6 +7,6 @@
 import type { DataField } from './dataField.zod';
 import type { DataInputExtensionIndices } from './dataInputExtensionIndices.zod';
 export interface DataInputExtension {
-    fields?: DataField[];
-    indices?: DataInputExtensionIndices;
+	fields?: DataField[];
+	indices?: DataInputExtensionIndices;
 }

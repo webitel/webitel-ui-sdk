@@ -6,5 +6,5 @@
  */
 import type { WebitelChatServerConversation } from './webitelChatServerConversation.zod';
 export interface WebitelChatServerGetConversationByIDResponse {
-    item?: WebitelChatServerConversation;
+	item?: WebitelChatServerConversation;
 }

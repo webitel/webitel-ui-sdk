@@ -6,5 +6,5 @@
  */
 import type { WebitelCasesStatus } from './webitelCasesStatus.zod';
 export interface WebitelCasesLocateStatusResponse {
-    status?: WebitelCasesStatus;
+	status?: WebitelCasesStatus;
 }

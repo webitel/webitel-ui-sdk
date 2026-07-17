@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiProviderV1ProviderKeyboardButton } from './webitelImApiProviderV1ProviderKeyboardButton.zod';
 export interface WebitelImApiProviderV1ProviderKeyboardRow {
-    buttons?: WebitelImApiProviderV1ProviderKeyboardButton[];
+	buttons?: WebitelImApiProviderV1ProviderKeyboardButton[];
 }

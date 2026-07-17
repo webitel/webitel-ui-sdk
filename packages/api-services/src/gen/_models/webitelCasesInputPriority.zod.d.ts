@@ -8,7 +8,7 @@
  * InputPriority message for creating a new priority
  */
 export interface WebitelCasesInputPriority {
-    color: string;
-    description?: string;
-    name: string;
+	color: string;
+	description?: string;
+	name: string;
 }

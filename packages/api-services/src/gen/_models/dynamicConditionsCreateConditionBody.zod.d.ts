@@ -9,10 +9,10 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * Request message for creating a new condition.
  */
 export interface DynamicConditionsCreateConditionBody {
-    /** The ID of the assignee that should be assigned if the condition is met (optional). */
-    assignee?: WebitelContactsLookup;
-    /** The query or condition expression used to evaluate the group. */
-    expression?: string;
-    /** The ID of the static group that should be assigned if the condition is met. */
-    group?: WebitelContactsLookup;
+	/** The ID of the assignee that should be assigned if the condition is met (optional). */
+	assignee?: WebitelContactsLookup;
+	/** The query or condition expression used to evaluate the group. */
+	expression?: string;
+	/** The ID of the static group that should be assigned if the condition is met. */
+	group?: WebitelContactsLookup;
 }

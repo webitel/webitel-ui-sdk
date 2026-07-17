@@ -9,6 +9,6 @@ import type { WebitelImApiGatewayV1Thread } from './webitelImApiGatewayV1Thread.
  * ThreadManagementCreateResponse represents information enabled after thread creation.
  */
 export interface WebitelImApiGatewayV1ThreadManagementCreateResponse {
-    /** Represents main entity for thread. */
-    thread?: WebitelImApiGatewayV1Thread;
+	/** Represents main entity for thread. */
+	thread?: WebitelImApiGatewayV1Thread;
 }

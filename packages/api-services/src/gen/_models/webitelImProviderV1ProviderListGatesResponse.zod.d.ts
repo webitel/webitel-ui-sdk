@@ -9,11 +9,11 @@ import type { WebitelImProviderV1ProviderSummary } from './webitelImProviderV1Pr
  * / ProviderListGatesResponse returns a paginated list of provider summaries.
  */
 export interface WebitelImProviderV1ProviderListGatesResponse {
-    items?: WebitelImProviderV1ProviderSummary[];
-    /** Indicates if there are more pages available. */
-    next?: boolean;
-    /** Current page number. */
-    page?: number;
-    /** Number of items returned in this batch. */
-    size?: number;
+	items?: WebitelImProviderV1ProviderSummary[];
+	/** Indicates if there are more pages available. */
+	next?: boolean;
+	/** Current page number. */
+	page?: number;
+	/** Number of items returned in this batch. */
+	size?: number;
 }

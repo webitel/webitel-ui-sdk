@@ -5,20 +5,20 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateRecordsParams = {
-    /**
-     * Fields [Q]uery to build result dataset record.
-     * ```
-     * fields ::= field [ *( "," field ) ]
-     * field  ::= name [ *( func ) ] [ inner ]
-     * inner  ::= "{" fields "}"
-     * funcs  ::= *( func )
-     * func   ::= "." name "(" [ args ] ")"
-     * name   ::= ALPHA / DIGIT / USCORE
-     *
-     * ALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"
-     * DIGIT    = %x30-39            ; "0"-"9"
-     * USCORE   = %x5F ; underscore  ; "_"
-     * ```
-     */
-    fields?: string[];
+	/**
+	 * Fields [Q]uery to build result dataset record.
+	 * ```
+	 * fields ::= field [ *( "," field ) ]
+	 * field  ::= name [ *( func ) ] [ inner ]
+	 * inner  ::= "{" fields "}"
+	 * funcs  ::= *( func )
+	 * func   ::= "." name "(" [ args ] ")"
+	 * name   ::= ALPHA / DIGIT / USCORE
+	 *
+	 * ALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"
+	 * DIGIT    = %x30-39            ; "0"-"9"
+	 * USCORE   = %x5F ; underscore  ; "_"
+	 * ```
+	 */
+	fields?: string[];
 };

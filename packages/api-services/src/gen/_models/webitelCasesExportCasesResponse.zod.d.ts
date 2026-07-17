@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelCasesExportCasesResponse {
-    data?: string;
+	data?: string;
 }

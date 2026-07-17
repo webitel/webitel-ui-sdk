@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type RemoveContactsFromGroupParams = {
-    /**
-     * List of contact IDs to remove from the group.
-     */
-    contactIds?: string[];
+	/**
+	 * List of contact IDs to remove from the group.
+	 */
+	contactIds?: string[];
 };

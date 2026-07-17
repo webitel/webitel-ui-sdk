@@ -6,7 +6,7 @@
  */
 import type { ClassesUpdateClassBodyClass } from './classesUpdateClassBodyClass.zod';
 export interface ClassesUpdateClassBody {
-    class?: ClassesUpdateClassBodyClass;
-    domain?: string;
-    fields?: string[];
+	class?: ClassesUpdateClassBodyClass;
+	domain?: string;
+	fields?: string[];
 }

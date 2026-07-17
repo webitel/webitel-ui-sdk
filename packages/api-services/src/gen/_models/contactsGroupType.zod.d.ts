@@ -9,9 +9,10 @@
  *  - STATIC: Static group
  *  - DYNAMIC: Dynamic group
  */
-export type ContactsGroupType = (typeof ContactsGroupType)[keyof typeof ContactsGroupType];
+export type ContactsGroupType =
+	(typeof ContactsGroupType)[keyof typeof ContactsGroupType];
 export declare const ContactsGroupType: {
-    readonly GroupTypeUnspecified: "GROUP_TYPE_UNSPECIFIED";
-    readonly Static: "STATIC";
-    readonly Dynamic: "DYNAMIC";
+	readonly GroupTypeUnspecified: 'GROUP_TYPE_UNSPECIFIED';
+	readonly Static: 'STATIC';
+	readonly Dynamic: 'DYNAMIC';
 };

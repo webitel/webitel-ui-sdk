@@ -5,33 +5,33 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchDeviceAuditParams = {
-    /**
-     * Object ID
-     */
-    'user.id'?: string;
-    /**
-     * Display Name
-     */
-    'user.name'?: string;
-    /**
-     * Display Name
-     */
-    'device.name'?: string;
-    /**
-     * Filter: timing range (optional)
-     *
-     * unix milliseconds
-     */
-    timeFrom?: string;
-    /**
-     * unix milliseconds
-     */
-    timeTill?: string;
-    /**
-     * Search Options
-     */
-    fields?: string[];
-    sort?: string[];
-    size?: number;
-    page?: number;
+	/**
+	 * Object ID
+	 */
+	'user.id'?: string;
+	/**
+	 * Display Name
+	 */
+	'user.name'?: string;
+	/**
+	 * Display Name
+	 */
+	'device.name'?: string;
+	/**
+	 * Filter: timing range (optional)
+	 *
+	 * unix milliseconds
+	 */
+	timeFrom?: string;
+	/**
+	 * unix milliseconds
+	 */
+	timeTill?: string;
+	/**
+	 * Search Options
+	 */
+	fields?: string[];
+	sort?: string[];
+	size?: number;
+	page?: number;
 };

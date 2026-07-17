@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiRoleMetadataResponse {
-    key?: string;
-    value?: unknown;
+	key?: string;
+	value?: unknown;
 }

@@ -6,5 +6,5 @@
  */
 import type { WebitelCasesService } from './webitelCasesService.zod';
 export interface WebitelCasesLocateServiceResponse {
-    service?: WebitelCasesService;
+	service?: WebitelCasesService;
 }

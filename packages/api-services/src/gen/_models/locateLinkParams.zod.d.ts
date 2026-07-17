@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateLinkParams = {
-    fields?: string[];
+	fields?: string[];
 };

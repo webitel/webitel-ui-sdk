@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiLicenseExpiryWarning {
-    daysRemaining?: string;
-    expiresAt?: string;
-    licenseName?: string;
+	daysRemaining?: string;
+	expiresAt?: string;
+	licenseName?: string;
 }

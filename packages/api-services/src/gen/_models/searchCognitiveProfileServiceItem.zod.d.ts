@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchCognitiveProfileServiceItem = (typeof SearchCognitiveProfileServiceItem)[keyof typeof SearchCognitiveProfileServiceItem];
+export type SearchCognitiveProfileServiceItem =
+	(typeof SearchCognitiveProfileServiceItem)[keyof typeof SearchCognitiveProfileServiceItem];
 export declare const SearchCognitiveProfileServiceItem: {
-    readonly DefaultService: "DefaultService";
-    readonly Stt: "STT";
-    readonly Tts: "TTS";
+	readonly DefaultService: 'DefaultService';
+	readonly Stt: 'STT';
+	readonly Tts: 'TTS';
 };

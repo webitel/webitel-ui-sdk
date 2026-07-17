@@ -6,14 +6,14 @@
  */
 import type { StorageUploadFileChannel } from './storageUploadFileChannel.zod';
 export interface StorageFilePoliciesServiceUpdateFilePolicyBody {
-    channels?: StorageUploadFileChannel[];
-    description?: string;
-    enabled?: boolean;
-    encrypt?: boolean;
-    maxUploadSize?: string;
-    mimeTypes?: string[];
-    name?: string;
-    retentionDays?: number;
-    speedDownload?: string;
-    speedUpload?: string;
+	channels?: StorageUploadFileChannel[];
+	description?: string;
+	enabled?: boolean;
+	encrypt?: boolean;
+	maxUploadSize?: string;
+	mimeTypes?: string[];
+	name?: string;
+	retentionDays?: number;
+	speedDownload?: string;
+	speedUpload?: string;
 }

@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteLDAPCatalogParams = {
-    /**
-     * WITH objects bound to ?
-     */
-    relatedObjects?: boolean;
+	/**
+	 * WITH objects bound to ?
+	 */
+	relatedObjects?: boolean;
 };

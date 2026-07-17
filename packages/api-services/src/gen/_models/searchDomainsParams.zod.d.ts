@@ -5,15 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchDomainsParams = {
-    /**
-     * like
-     */
-    domain?: string;
-    /**
-     * attrs
-     */
-    fields?: string[];
-    sort?: string[];
-    page?: string;
-    size?: string;
+	/**
+	 * like
+	 */
+	domain?: string;
+	/**
+	 * attrs
+	 */
+	fields?: string[];
+	sort?: string[];
+	page?: string;
+	size?: string;
 };

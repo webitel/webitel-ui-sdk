@@ -6,6 +6,6 @@
  */
 import type { EngineTriggerJob } from './engineTriggerJob.zod';
 export interface EngineListTriggerJob {
-    items?: EngineTriggerJob[];
-    next?: boolean;
+	items?: EngineTriggerJob[];
+	next?: boolean;
 }
