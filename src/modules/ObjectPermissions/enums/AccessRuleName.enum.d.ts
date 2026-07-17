@@ -1,7 +1,8 @@
 export declare const AccessRuleName: {
-    X: string;
-    R: string;
-    W: string;
-    D: string;
+	X: string;
+	R: string;
+	W: string;
+	D: string;
 };
-export type AccessRuleName = (typeof AccessRuleName)[keyof typeof AccessRuleName];
+export type AccessRuleName =
+	(typeof AccessRuleName)[keyof typeof AccessRuleName];

@@ -163,3 +163,17 @@
 	font-style: italic;
 	font-display: swap;
 }
+
+/*
+This font was added for use in wt-input-text in case we need to hide the input value,like in a password input,
+but without type="password" on input. It was added because not all brawsers are support 'text-security: disc' property,
+So this font changes text to discs in these cases
+*/
+
+@font-face {
+	font-family: "text-security-disc";
+	src: url("../../../assets/fonts/text-security-disc/text-security-disc.woff2")
+		format("woff2");
+	font-weight: 100;
+	font-style: normal;
+}
