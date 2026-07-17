@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiProviderV1WhatsAppServiceUpdateWhatsAppGateBody {
-	accessToken?: string;
-	name?: string;
+    accessToken?: string;
+    name?: string;
 }

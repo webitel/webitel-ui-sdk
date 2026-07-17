@@ -6,14 +6,14 @@
  */
 import type { SearchRoutingSchemaTypeItem } from './searchRoutingSchemaTypeItem.zod';
 export type SearchRoutingSchemaParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	name?: string;
-	type?: SearchRoutingSchemaTypeItem[];
-	editor?: boolean;
-	tags?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    name?: string;
+    type?: SearchRoutingSchemaTypeItem[];
+    editor?: boolean;
+    tags?: string[];
 };

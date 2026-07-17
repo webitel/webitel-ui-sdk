@@ -5,34 +5,34 @@
  * OpenAPI spec version: 24.04.0
  */
 export type GetPermissionsParams = {
-	/**
-	 * TermOfSearch
-	 */
-	q?: string;
-	/**
-	 * = ANY(id)
-	 */
-	id?: string[];
-	/**
-	 * <> ANY(not)
-	 */
-	not?: string[];
-	/**
-	 * controls
-	 *
-	 * output
-	 */
-	fields?: string[];
-	/**
-	 * sort: "field" asc; "!field" desc
-	 */
-	sort?: string[];
-	/**
-	 * page number
-	 */
-	page?: number;
-	/**
-	 * page size
-	 */
-	size?: number;
+    /**
+     * TermOfSearch
+     */
+    q?: string;
+    /**
+     * = ANY(id)
+     */
+    id?: string[];
+    /**
+     * <> ANY(not)
+     */
+    not?: string[];
+    /**
+     * controls
+     *
+     * output
+     */
+    fields?: string[];
+    /**
+     * sort: "field" asc; "!field" desc
+     */
+    sort?: string[];
+    /**
+     * page number
+     */
+    page?: number;
+    /**
+     * page size
+     */
+    size?: number;
 };

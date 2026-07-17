@@ -6,5 +6,5 @@
  */
 import type { WebitelImProviderV1ProviderGateTemplate } from './webitelImProviderV1ProviderGateTemplate.zod';
 export interface WebitelImProviderV1ProviderListGateTemplatesResponse {
-	items?: WebitelImProviderV1ProviderGateTemplate[];
+    items?: WebitelImProviderV1ProviderGateTemplate[];
 }

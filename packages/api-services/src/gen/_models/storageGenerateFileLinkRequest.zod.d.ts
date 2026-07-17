@@ -6,10 +6,10 @@
  */
 import type { StorageGenerateFileLinkRequestQuery } from './storageGenerateFileLinkRequestQuery.zod';
 export interface StorageGenerateFileLinkRequest {
-	action?: string;
-	domainId?: string;
-	fileId?: string;
-	metadata?: boolean;
-	query?: StorageGenerateFileLinkRequestQuery;
-	source?: string;
+    action?: string;
+    domainId?: string;
+    fileId?: string;
+    metadata?: boolean;
+    query?: StorageGenerateFileLinkRequestQuery;
+    source?: string;
 }

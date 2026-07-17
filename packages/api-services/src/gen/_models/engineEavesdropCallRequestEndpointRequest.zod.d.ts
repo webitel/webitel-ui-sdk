@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineEavesdropCallRequestEndpointRequest {
-	appId?: string;
-	extension?: string;
-	id?: string;
-	type?: string;
+    appId?: string;
+    extension?: string;
+    id?: string;
+    type?: string;
 }

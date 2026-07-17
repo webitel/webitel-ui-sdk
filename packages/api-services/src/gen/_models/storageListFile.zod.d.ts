@@ -6,6 +6,6 @@
  */
 import type { StorageFile } from './storageFile.zod';
 export interface StorageListFile {
-	items?: StorageFile[];
-	next?: boolean;
+    items?: StorageFile[];
+    next?: boolean;
 }

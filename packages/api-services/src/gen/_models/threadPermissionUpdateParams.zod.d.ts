@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ThreadPermissionUpdateParams = {
-	canSendMessages?: boolean;
-	canAddMembers?: boolean;
-	canRemoveMembers?: boolean;
-	canChangeMembersPermissions?: boolean;
-	canChangeThreadInfo?: boolean;
+    canSendMessages?: boolean;
+    canAddMembers?: boolean;
+    canRemoveMembers?: boolean;
+    canChangeMembersPermissions?: boolean;
+    canChangeThreadInfo?: boolean;
 };

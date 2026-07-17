@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ContactsLabelInfo {
-	/**
-	 * Label tag.
-	 *
-	 * Count of sources.
-	 * int32 count = 2;
-	 *  Sources of Contacts assigned.
-	 * repeated string sources = 3;
-	 */
-	label?: string;
+    /**
+     * Label tag.
+     *
+     * Count of sources.
+     * int32 count = 2;
+     *  Sources of Contacts assigned.
+     * repeated string sources = 3;
+     */
+    label?: string;
 }

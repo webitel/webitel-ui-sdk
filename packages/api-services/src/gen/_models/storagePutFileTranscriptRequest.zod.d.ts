@@ -6,9 +6,9 @@
  */
 import type { StorageTranscriptPhrase } from './storageTranscriptPhrase.zod';
 export interface StoragePutFileTranscriptRequest {
-	fileId?: string;
-	locale?: string;
-	phrases?: StorageTranscriptPhrase[];
-	text?: string;
-	uuid?: string;
+    fileId?: string;
+    locale?: string;
+    phrases?: StorageTranscriptPhrase[];
+    text?: string;
+    uuid?: string;
 }

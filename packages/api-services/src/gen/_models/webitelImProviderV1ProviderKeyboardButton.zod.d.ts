@@ -11,11 +11,11 @@ import type { WebitelImProviderV1ProviderKeyboardButtonURL } from './webitelImPr
  * ProviderKeyboardButton is a single interactive element.
  */
 export interface WebitelImProviderV1ProviderKeyboardButton {
-	callback?: WebitelImProviderV1ProviderKeyboardButtonCallback;
-	/** Unique identifier returned in SendInteractiveCallback. */
-	id?: string;
-	/** Display label on the button. */
-	label?: string;
-	request?: WebitelImProviderV1ProviderKeyboardButtonRequest;
-	url?: WebitelImProviderV1ProviderKeyboardButtonURL;
+    callback?: WebitelImProviderV1ProviderKeyboardButtonCallback;
+    /** Unique identifier returned in SendInteractiveCallback. */
+    id?: string;
+    /** Display label on the button. */
+    label?: string;
+    request?: WebitelImProviderV1ProviderKeyboardButtonRequest;
+    url?: WebitelImProviderV1ProviderKeyboardButtonURL;
 }

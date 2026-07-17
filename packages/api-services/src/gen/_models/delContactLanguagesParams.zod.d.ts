@@ -5,12 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DelContactLanguagesParams = {
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique language{etag} association(s) to remove.
-	 */
-	etag: string[];
+    /**
+     * Fields to be retrieved as a result.
+     */
+    fields?: string[];
+    /**
+     * Set of unique language{etag} association(s) to remove.
+     */
+    etag: string[];
 };

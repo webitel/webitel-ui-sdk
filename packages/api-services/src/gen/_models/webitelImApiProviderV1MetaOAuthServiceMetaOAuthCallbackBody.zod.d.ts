@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiProviderV1MetaOAuthServiceMetaOAuthCallbackBody {
-	code?: string;
-	state?: string;
+    code?: string;
+    state?: string;
 }

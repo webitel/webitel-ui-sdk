@@ -6,12 +6,12 @@
  */
 import type { WebitelKnowledgebaseLookup } from './webitelKnowledgebaseLookup.zod';
 export interface WebitelKnowledgebaseAttachment {
-	/** The unique ID of the association. Never changes. */
-	id?: string;
-	/** The size of the attachment. */
-	size?: number;
-	/** The title of the article. */
-	title?: string;
-	/** The user who loaded this attachment. */
-	uploadedBy?: WebitelKnowledgebaseLookup;
+    /** The unique ID of the association. Never changes. */
+    id?: string;
+    /** The size of the attachment. */
+    size?: number;
+    /** The title of the article. */
+    title?: string;
+    /** The user who loaded this attachment. */
+    uploadedBy?: WebitelKnowledgebaseLookup;
 }

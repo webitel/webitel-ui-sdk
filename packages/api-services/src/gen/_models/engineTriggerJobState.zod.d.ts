@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineTriggerJobState =
-	(typeof EngineTriggerJobState)[keyof typeof EngineTriggerJobState];
+export type EngineTriggerJobState = (typeof EngineTriggerJobState)[keyof typeof EngineTriggerJobState];
 export declare const EngineTriggerJobState: {
-	readonly Idle: 'idle';
-	readonly Active: 'active';
-	readonly Done: 'done';
-	readonly Error: 'error';
+    readonly Idle: "idle";
+    readonly Active: "active";
+    readonly Done: "done";
+    readonly Error: "error";
 };

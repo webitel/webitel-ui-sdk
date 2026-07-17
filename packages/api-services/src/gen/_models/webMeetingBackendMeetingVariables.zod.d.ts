@@ -8,5 +8,5 @@
  * Custom metadata or configuration variables.
  */
 export type WebMeetingBackendMeetingVariables = {
-	[key: string]: string;
+    [key: string]: string;
 };

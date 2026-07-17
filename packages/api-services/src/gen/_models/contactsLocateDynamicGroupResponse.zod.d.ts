@@ -9,5 +9,5 @@ import type { ContactsDynamicGroup } from './contactsDynamicGroup.zod';
  * Response message for locating a dynamic group by ID.
  */
 export interface ContactsLocateDynamicGroupResponse {
-	group?: ContactsDynamicGroup;
+    group?: ContactsDynamicGroup;
 }

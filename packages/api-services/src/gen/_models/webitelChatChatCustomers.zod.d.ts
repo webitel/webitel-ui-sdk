@@ -7,10 +7,10 @@
 import type { WebitelChatCustomer } from './webitelChatCustomer.zod';
 import type { WebitelChatPeer } from './webitelChatPeer.zod';
 export interface WebitelChatChatCustomers {
-	next?: boolean;
-	/** Page number of results. */
-	page?: number;
-	/** Dataset page of Customer(s). */
-	peers?: WebitelChatCustomer[];
-	vias?: WebitelChatPeer[];
+    next?: boolean;
+    /** Page number of results. */
+    page?: number;
+    /** Dataset page of Customer(s). */
+    peers?: WebitelChatCustomer[];
+    vias?: WebitelChatPeer[];
 }

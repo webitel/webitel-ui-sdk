@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelChatInputFile {
-	id?: string;
-	source?: string;
-	url?: string;
+    id?: string;
+    source?: string;
+    url?: string;
 }

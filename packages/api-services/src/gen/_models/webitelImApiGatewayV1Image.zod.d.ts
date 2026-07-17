@@ -9,20 +9,20 @@
  * associated with a message.
  */
 export interface WebitelImApiGatewayV1Image {
-	/** Creation timestamp (Unix time, milliseconds). */
-	createdAt?: string;
-	/** File storage identifier. */
-	fileId?: string;
-	/** Image height in pixels. */
-	height?: number;
-	/** Image identifier. */
-	id?: string;
-	/** Identifier of the message this message belongs to. */
-	messageId?: string;
-	/** MIME type of the image. */
-	mime?: string;
-	/** Public signed URL for accessing the image. */
-	url?: string;
-	/** Image width in pixels. */
-	width?: number;
+    /** Creation timestamp (Unix time, milliseconds). */
+    createdAt?: string;
+    /** File storage identifier. */
+    fileId?: string;
+    /** Image height in pixels. */
+    height?: number;
+    /** Image identifier. */
+    id?: string;
+    /** Identifier of the message this message belongs to. */
+    messageId?: string;
+    /** MIME type of the image. */
+    mime?: string;
+    /** Public signed URL for accessing the image. */
+    url?: string;
+    /** Image width in pixels. */
+    width?: number;
 }

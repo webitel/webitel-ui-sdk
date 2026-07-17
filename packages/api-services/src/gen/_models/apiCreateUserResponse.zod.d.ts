@@ -6,5 +6,5 @@
  */
 import type { ApiUser } from './apiUser.zod';
 export interface ApiCreateUserResponse {
-	user?: ApiUser;
+    user?: ApiUser;
 }

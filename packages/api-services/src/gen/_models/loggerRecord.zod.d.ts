@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface LoggerRecord {
-	id?: string;
-	name?: string;
+    id?: string;
+    name?: string;
 }

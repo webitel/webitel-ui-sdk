@@ -7,6 +7,6 @@
 import type { WfmAbsence } from './wfmAbsence.zod';
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 export interface WfmAgentAbsences {
-	absences?: WfmAbsence[];
-	agent?: WfmLookupEntity;
+    absences?: WfmAbsence[];
+    agent?: WfmLookupEntity;
 }

@@ -7,9 +7,9 @@
 import type { WebitelImApiProviderV1ProviderSendTextRequestMetadata } from './webitelImApiProviderV1ProviderSendTextRequestMetadata.zod';
 import type { WebitelImApiProviderV1ProviderType } from './webitelImApiProviderV1ProviderType.zod';
 export interface WebitelImApiProviderV1ProviderSendTextRequest {
-	externalUserId?: string;
-	gateId?: string;
-	metadata?: WebitelImApiProviderV1ProviderSendTextRequestMetadata;
-	text?: string;
-	type?: WebitelImApiProviderV1ProviderType;
+    externalUserId?: string;
+    gateId?: string;
+    metadata?: WebitelImApiProviderV1ProviderSendTextRequestMetadata;
+    text?: string;
+    type?: WebitelImApiProviderV1ProviderType;
 }

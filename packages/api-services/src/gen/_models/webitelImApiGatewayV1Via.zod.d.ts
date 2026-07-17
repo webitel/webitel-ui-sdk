@@ -6,11 +6,11 @@
  */
 import type { WebitelImApiGatewayV1ViaMetadata } from './webitelImApiGatewayV1ViaMetadata.zod';
 export interface WebitelImApiGatewayV1Via {
-	contactId?: string;
-	createdAt?: string;
-	disable?: boolean;
-	disableReason?: string;
-	metadata?: WebitelImApiGatewayV1ViaMetadata;
-	updatedAt?: string;
-	via?: string;
+    contactId?: string;
+    createdAt?: string;
+    disable?: boolean;
+    disableReason?: string;
+    metadata?: WebitelImApiGatewayV1ViaMetadata;
+    updatedAt?: string;
+    via?: string;
 }

@@ -7,14 +7,14 @@
 import type { GeneralExtendedLookup } from './generalExtendedLookup.zod';
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesInputCreateService {
-	assignee?: GeneralLookup;
-	catalogId?: string;
-	code?: string;
-	defaultPriority?: GeneralLookup;
-	description?: string;
-	group?: GeneralExtendedLookup;
-	name?: string;
-	rootId?: string;
-	sla?: GeneralLookup;
-	state?: boolean;
+    assignee?: GeneralLookup;
+    catalogId?: string;
+    code?: string;
+    defaultPriority?: GeneralLookup;
+    description?: string;
+    group?: GeneralExtendedLookup;
+    name?: string;
+    rootId?: string;
+    sla?: GeneralLookup;
+    state?: boolean;
 }

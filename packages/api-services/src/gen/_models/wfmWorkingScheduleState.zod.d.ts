@@ -4,12 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WfmWorkingScheduleState =
-	(typeof WfmWorkingScheduleState)[keyof typeof WfmWorkingScheduleState];
+export type WfmWorkingScheduleState = (typeof WfmWorkingScheduleState)[keyof typeof WfmWorkingScheduleState];
 export declare const WfmWorkingScheduleState: {
-	readonly WorkingScheduleStateUnspecified: 'WORKING_SCHEDULE_STATE_UNSPECIFIED';
-	readonly WorkingScheduleStateActive: 'WORKING_SCHEDULE_STATE_ACTIVE';
-	readonly WorkingScheduleStatePending: 'WORKING_SCHEDULE_STATE_PENDING';
-	readonly WorkingScheduleStateDraft: 'WORKING_SCHEDULE_STATE_DRAFT';
-	readonly WorkingScheduleStateArchived: 'WORKING_SCHEDULE_STATE_ARCHIVED';
+    readonly WorkingScheduleStateUnspecified: "WORKING_SCHEDULE_STATE_UNSPECIFIED";
+    readonly WorkingScheduleStateActive: "WORKING_SCHEDULE_STATE_ACTIVE";
+    readonly WorkingScheduleStatePending: "WORKING_SCHEDULE_STATE_PENDING";
+    readonly WorkingScheduleStateDraft: "WORKING_SCHEDULE_STATE_DRAFT";
+    readonly WorkingScheduleStateArchived: "WORKING_SCHEDULE_STATE_ARCHIVED";
 };

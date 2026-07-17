@@ -6,6 +6,6 @@
  */
 import type { EngineAgentUser } from './engineAgentUser.zod';
 export interface EngineListAgentUser {
-	items?: EngineAgentUser[];
-	next?: boolean;
+    items?: EngineAgentUser[];
+    next?: boolean;
 }

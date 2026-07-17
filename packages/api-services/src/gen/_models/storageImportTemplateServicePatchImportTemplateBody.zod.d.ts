@@ -9,8 +9,8 @@ import type { StorageImportTemplateServicePatchImportTemplateBodyParameters } fr
  * Patch import template for CSV
  */
 export interface StorageImportTemplateServicePatchImportTemplateBody {
-	parameters?: StorageImportTemplateServicePatchImportTemplateBodyParameters;
-	description?: string;
-	fields?: string[];
-	name?: string;
+    parameters?: StorageImportTemplateServicePatchImportTemplateBodyParameters;
+    description?: string;
+    fields?: string[];
+    name?: string;
 }

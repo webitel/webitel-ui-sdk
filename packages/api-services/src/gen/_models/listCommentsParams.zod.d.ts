@@ -5,28 +5,28 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ListCommentsParams = {
-	/**
-	 * Page number for pagination.
-	 */
-	page?: number;
-	/**
-	 * Number of comments per page.
-	 */
-	size?: number;
-	/**
-	 * Query string for search.
-	 */
-	q?: string;
-	/**
-	 * Array of requested id.
-	 */
-	ids?: string[];
-	/**
-	 * Sorting order.
-	 */
-	sort?: string;
-	/**
-	 * Fields to return for each comment.
-	 */
-	fields?: string[];
+    /**
+     * Page number for pagination.
+     */
+    page?: number;
+    /**
+     * Number of comments per page.
+     */
+    size?: number;
+    /**
+     * Query string for search.
+     */
+    q?: string;
+    /**
+     * Array of requested id.
+     */
+    ids?: string[];
+    /**
+     * Sorting order.
+     */
+    sort?: string;
+    /**
+     * Fields to return for each comment.
+     */
+    fields?: string[];
 };

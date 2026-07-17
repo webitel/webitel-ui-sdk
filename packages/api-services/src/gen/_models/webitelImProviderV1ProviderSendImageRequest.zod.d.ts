@@ -10,10 +10,10 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
  * ProviderSendImageRequest sends an image with an optional caption.
  */
 export interface WebitelImProviderV1ProviderSendImageRequest {
-	caption?: string;
-	domainId?: number;
-	externalUserId?: string;
-	gateId?: string;
-	images?: WebitelImProviderV1ProviderFile[];
-	type?: WebitelImProviderV1ProviderType;
+    caption?: string;
+    domainId?: number;
+    externalUserId?: string;
+    gateId?: string;
+    images?: WebitelImProviderV1ProviderFile[];
+    type?: WebitelImProviderV1ProviderType;
 }

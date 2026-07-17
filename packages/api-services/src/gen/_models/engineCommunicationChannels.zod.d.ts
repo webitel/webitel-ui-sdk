@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineCommunicationChannels =
-	(typeof EngineCommunicationChannels)[keyof typeof EngineCommunicationChannels];
+export type EngineCommunicationChannels = (typeof EngineCommunicationChannels)[keyof typeof EngineCommunicationChannels];
 export declare const EngineCommunicationChannels: {
-	readonly Undefined: 'Undefined';
-	readonly Phone: 'Phone';
-	readonly Email: 'Email';
-	readonly Messaging: 'Messaging';
+    readonly Undefined: "Undefined";
+    readonly Phone: "Phone";
+    readonly Email: "Email";
+    readonly Messaging: "Messaging";
 };

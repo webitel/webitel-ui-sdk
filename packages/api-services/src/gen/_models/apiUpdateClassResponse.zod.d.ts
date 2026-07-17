@@ -6,5 +6,5 @@
  */
 import type { ApiObjectClass } from './apiObjectClass.zod';
 export interface ApiUpdateClassResponse {
-	class?: ApiObjectClass;
+    class?: ApiObjectClass;
 }

@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchOutboundResourceInGroupParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
 };

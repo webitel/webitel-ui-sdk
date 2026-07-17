@@ -9,9 +9,9 @@ import type { WebitelContactsContact } from './webitelContactsContact.zod';
  * Contact dataset.
  */
 export interface ContactsContactList {
-	/** Contact(s) dataset page. */
-	data?: WebitelContactsContact[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+    /** Contact(s) dataset page. */
+    data?: WebitelContactsContact[];
+    next?: boolean;
+    /** The page number of the partial result. */
+    page?: number;
 }

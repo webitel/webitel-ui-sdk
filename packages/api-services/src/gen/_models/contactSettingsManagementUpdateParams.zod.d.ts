@@ -6,6 +6,6 @@
  */
 import type { ContactSettingsManagementUpdateAllowInvitesFrom } from './contactSettingsManagementUpdateAllowInvitesFrom.zod';
 export type ContactSettingsManagementUpdateParams = {
-	contactId?: string;
-	allowInvitesFrom?: ContactSettingsManagementUpdateAllowInvitesFrom;
+    contactId?: string;
+    allowInvitesFrom?: ContactSettingsManagementUpdateAllowInvitesFrom;
 };

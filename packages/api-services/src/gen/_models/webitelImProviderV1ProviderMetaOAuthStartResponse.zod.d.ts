@@ -8,6 +8,6 @@
  * / ProviderMetaOAuthStartResponse provides the entry point for the user authorization.
  */
 export interface WebitelImProviderV1ProviderMetaOAuthStartResponse {
-	authUrl?: string;
-	state?: string;
+    authUrl?: string;
+    state?: string;
 }

@@ -6,9 +6,9 @@
  */
 import type { ApiRole } from './apiRole.zod';
 export interface ApiSearchRolesResponse {
-	items?: ApiRole[];
-	next?: boolean;
-	/** select: offset {page} */
-	page?: number;
-	size?: number;
+    items?: ApiRole[];
+    next?: boolean;
+    /** select: offset {page} */
+    page?: number;
+    size?: number;
 }

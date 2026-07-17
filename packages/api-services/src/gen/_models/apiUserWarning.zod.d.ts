@@ -7,7 +7,7 @@
 import type { ApiUserWarningId } from './apiUserWarningId.zod';
 import type { ApiWarningData } from './apiWarningData.zod';
 export interface ApiUserWarning {
-	detail?: string;
-	id?: ApiUserWarningId;
-	warningData?: ApiWarningData;
+    detail?: string;
+    id?: ApiUserWarningId;
+    warningData?: ApiWarningData;
 }

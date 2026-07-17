@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ListTagsParams = {
-	page?: number;
-	size?: number;
+    page?: number;
+    size?: number;
 };

@@ -8,13 +8,13 @@
  * Input of the Contact's variable.
  */
 export interface ContactsInputVariable {
-	/** Unique ID of the latest version of an existing resorce. */
-	etag?: string;
-	/**
-	 * NEW Key.
-	 * @pattern ^\w+$
-	 */
-	key: string;
-	/** NEW Value. */
-	value?: unknown;
+    /** Unique ID of the latest version of an existing resorce. */
+    etag?: string;
+    /**
+     * NEW Key.
+     * @pattern ^\w+$
+     */
+    key: string;
+    /** NEW Value. */
+    value?: unknown;
 }

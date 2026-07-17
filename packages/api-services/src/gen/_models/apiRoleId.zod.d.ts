@@ -8,7 +8,7 @@
  * RoleId lookup value.
  */
 export interface ApiRoleId {
-	id?: string;
-	name?: string;
-	user?: boolean;
+    id?: string;
+    name?: string;
+    user?: boolean;
 }

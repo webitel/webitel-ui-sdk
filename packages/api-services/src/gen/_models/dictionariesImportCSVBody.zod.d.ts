@@ -7,10 +7,10 @@
 import type { DictionariesImportCSVBodyFields } from './dictionariesImportCSVBodyFields.zod';
 import type { ImportCSVRequestAction } from './importCSVRequestAction.zod';
 export interface DictionariesImportCSVBody {
-	data?: string;
-	fields?: DictionariesImportCSVBodyFields;
-	lineBegin?: number;
-	lineEnd?: number;
-	onDataError?: ImportCSVRequestAction;
-	onEmptyLine?: ImportCSVRequestAction;
+    data?: string;
+    fields?: DictionariesImportCSVBodyFields;
+    lineBegin?: number;
+    lineEnd?: number;
+    onDataError?: ImportCSVRequestAction;
+    onEmptyLine?: ImportCSVRequestAction;
 }

@@ -7,15 +7,14 @@
 /**
  * / ProviderType defines the specific provider or protocol used for messaging.
  */
-export type WebitelImApiProviderV1ProviderType =
-	(typeof WebitelImApiProviderV1ProviderType)[keyof typeof WebitelImApiProviderV1ProviderType];
+export type WebitelImApiProviderV1ProviderType = (typeof WebitelImApiProviderV1ProviderType)[keyof typeof WebitelImApiProviderV1ProviderType];
 export declare const WebitelImApiProviderV1ProviderType: {
-	readonly ProviderTypeUnspecified: 'PROVIDER_TYPE_UNSPECIFIED';
-	readonly ProviderTypeViber: 'PROVIDER_TYPE_VIBER';
-	readonly ProviderTypeTelegramBot: 'PROVIDER_TYPE_TELEGRAM_BOT';
-	readonly ProviderTypeTelegramApp: 'PROVIDER_TYPE_TELEGRAM_APP';
-	readonly ProviderTypeMetaApp: 'PROVIDER_TYPE_META_APP';
-	readonly ProviderTypeFacebook: 'PROVIDER_TYPE_FACEBOOK';
-	readonly ProviderTypeInstagram: 'PROVIDER_TYPE_INSTAGRAM';
-	readonly ProviderTypeWhatsapp: 'PROVIDER_TYPE_WHATSAPP';
+    readonly ProviderTypeUnspecified: "PROVIDER_TYPE_UNSPECIFIED";
+    readonly ProviderTypeViber: "PROVIDER_TYPE_VIBER";
+    readonly ProviderTypeTelegramBot: "PROVIDER_TYPE_TELEGRAM_BOT";
+    readonly ProviderTypeTelegramApp: "PROVIDER_TYPE_TELEGRAM_APP";
+    readonly ProviderTypeMetaApp: "PROVIDER_TYPE_META_APP";
+    readonly ProviderTypeFacebook: "PROVIDER_TYPE_FACEBOOK";
+    readonly ProviderTypeInstagram: "PROVIDER_TYPE_INSTAGRAM";
+    readonly ProviderTypeWhatsapp: "PROVIDER_TYPE_WHATSAPP";
 };

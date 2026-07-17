@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ReadPasswordSettingsParams = {
-	password?: string;
-	username?: string;
-	domain?: string;
+    password?: string;
+    username?: string;
+    domain?: string;
 };

@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiLogoutUserRequest {
-	id?: string;
-	selection?: string[];
+    id?: string;
+    selection?: string[];
 }

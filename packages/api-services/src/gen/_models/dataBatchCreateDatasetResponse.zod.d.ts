@@ -6,12 +6,12 @@
  */
 import type { DataBatchCreateError } from './dataBatchCreateError.zod';
 export interface DataBatchCreateDatasetResponse {
-	/** Per-row errors (rows processed independently). */
-	errors?: DataBatchCreateError[];
-	/** Number of failed rows. */
-	failed?: number;
-	/** Number of successfully imported rows. */
-	imported?: number;
-	/** Total number of input rows. */
-	total?: number;
+    /** Per-row errors (rows processed independently). */
+    errors?: DataBatchCreateError[];
+    /** Number of failed rows. */
+    failed?: number;
+    /** Number of successfully imported rows. */
+    imported?: number;
+    /** Total number of input rows. */
+    total?: number;
 }

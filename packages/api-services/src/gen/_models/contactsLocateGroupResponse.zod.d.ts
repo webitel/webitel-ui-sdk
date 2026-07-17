@@ -9,6 +9,6 @@ import type { ContactsGroup } from './contactsGroup.zod';
  * Response message for locating a group.
  */
 export interface ContactsLocateGroupResponse {
-	/** The located group. */
-	group?: ContactsGroup;
+    /** The located group. */
+    group?: ContactsGroup;
 }

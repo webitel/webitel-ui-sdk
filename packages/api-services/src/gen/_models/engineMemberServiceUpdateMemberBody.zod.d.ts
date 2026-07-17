@@ -8,16 +8,16 @@ import type { EngineLookup } from './engineLookup.zod';
 import type { EngineMemberCommunicationCreateRequest } from './engineMemberCommunicationCreateRequest.zod';
 import type { EngineMemberServiceUpdateMemberBodyVariables } from './engineMemberServiceUpdateMemberBodyVariables.zod';
 export interface EngineMemberServiceUpdateMemberBody {
-	agent?: EngineLookup;
-	bucket?: EngineLookup;
-	communications?: EngineMemberCommunicationCreateRequest[];
-	domainId?: string;
-	expireAt?: string;
-	minOfferingAt?: string;
-	name?: string;
-	priority?: number;
-	skill?: EngineLookup;
-	stopCause?: string;
-	timezone?: EngineLookup;
-	variables?: EngineMemberServiceUpdateMemberBodyVariables;
+    agent?: EngineLookup;
+    bucket?: EngineLookup;
+    communications?: EngineMemberCommunicationCreateRequest[];
+    domainId?: string;
+    expireAt?: string;
+    minOfferingAt?: string;
+    name?: string;
+    priority?: number;
+    skill?: EngineLookup;
+    stopCause?: string;
+    timezone?: EngineLookup;
+    variables?: EngineMemberServiceUpdateMemberBodyVariables;
 }

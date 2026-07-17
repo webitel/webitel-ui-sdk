@@ -6,6 +6,6 @@
  */
 import type { CreateAgentsAbsencesRequestabsentType } from './createAgentsAbsencesRequestabsentType.zod';
 export interface WfmCreateAgentsAbsencesRequest {
-	agentIds?: string[];
-	items?: CreateAgentsAbsencesRequestabsentType[];
+    agentIds?: string[];
+    items?: CreateAgentsAbsencesRequestabsentType[];
 }

@@ -8,7 +8,7 @@ import type { StorageSafeUploadFileResponseMetadata } from './storageSafeUploadF
 import type { StorageSafeUploadFileResponsePart } from './storageSafeUploadFileResponsePart.zod';
 import type { StorageSafeUploadFileResponseProgress } from './storageSafeUploadFileResponseProgress.zod';
 export interface StorageSafeUploadFileResponse {
-	metadata?: StorageSafeUploadFileResponseMetadata;
-	part?: StorageSafeUploadFileResponsePart;
-	progress?: StorageSafeUploadFileResponseProgress;
+    metadata?: StorageSafeUploadFileResponseMetadata;
+    part?: StorageSafeUploadFileResponsePart;
+    progress?: StorageSafeUploadFileResponseProgress;
 }

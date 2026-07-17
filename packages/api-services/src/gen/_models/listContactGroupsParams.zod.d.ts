@@ -5,30 +5,30 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ListContactGroupsParams = {
-	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
-	page?: number;
-	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
-	size?: number;
-	/**
-	 * Search term: group name;
-	 * `?` - matches any one character
-	 * `*` - matches 0 or more characters
-	 */
-	query?: string;
-	/**
-	 * Sort the result according to fields.
-	 */
-	sort?: string[];
-	/**
-	 * Fields to be retrieved as a result.
-	 */
-	fields?: string[];
-	/**
-	 * Record(s) with unique ID only.
-	 */
-	id?: string[];
+    /**
+     * Page number of result dataset records. offset = (page*size)
+     */
+    page?: number;
+    /**
+     * Size count of records on result page. limit = (size++)
+     */
+    size?: number;
+    /**
+     * Search term: group name;
+     * `?` - matches any one character
+     * `*` - matches 0 or more characters
+     */
+    query?: string;
+    /**
+     * Sort the result according to fields.
+     */
+    sort?: string[];
+    /**
+     * Fields to be retrieved as a result.
+     */
+    fields?: string[];
+    /**
+     * Record(s) with unique ID only.
+     */
+    id?: string[];
 };

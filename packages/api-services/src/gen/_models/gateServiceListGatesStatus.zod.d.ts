@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type GateServiceListGatesStatus =
-	(typeof GateServiceListGatesStatus)[keyof typeof GateServiceListGatesStatus];
+export type GateServiceListGatesStatus = (typeof GateServiceListGatesStatus)[keyof typeof GateServiceListGatesStatus];
 export declare const GateServiceListGatesStatus: {
-	readonly ProviderStatusUnspecified: 'PROVIDER_STATUS_UNSPECIFIED';
-	readonly ProviderStatusActive: 'PROVIDER_STATUS_ACTIVE';
-	readonly ProviderStatusInactive: 'PROVIDER_STATUS_INACTIVE';
-	readonly ProviderStatusError: 'PROVIDER_STATUS_ERROR';
+    readonly ProviderStatusUnspecified: "PROVIDER_STATUS_UNSPECIFIED";
+    readonly ProviderStatusActive: "PROVIDER_STATUS_ACTIVE";
+    readonly ProviderStatusInactive: "PROVIDER_STATUS_INACTIVE";
+    readonly ProviderStatusError: "PROVIDER_STATUS_ERROR";
 };

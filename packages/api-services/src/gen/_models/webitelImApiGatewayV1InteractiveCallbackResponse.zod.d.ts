@@ -9,14 +9,14 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer.zod'
  * Response sent back to the client after a button click.
  */
 export interface WebitelImApiGatewayV1InteractiveCallbackResponse {
-	/** Button identifier. */
-	buttonCode?: string;
-	/** Optional callback payload. */
-	callbackData?: string;
-	/** Original message ID. */
-	inReplyTo?: string;
-	/** Unix time in milliseconds when callback button was clicked. */
-	reactedAt?: string;
-	/** User who clicked the button. */
-	reactedBy?: WebitelImApiGatewayV1Peer;
+    /** Button identifier. */
+    buttonCode?: string;
+    /** Optional callback payload. */
+    callbackData?: string;
+    /** Original message ID. */
+    inReplyTo?: string;
+    /** Unix time in milliseconds when callback button was clicked. */
+    reactedAt?: string;
+    /** User who clicked the button. */
+    reactedBy?: WebitelImApiGatewayV1Peer;
 }

@@ -6,5 +6,5 @@
  */
 import type { DomainsUpdateDomainBodyDomain } from './domainsUpdateDomainBodyDomain.zod';
 export interface DomainsUpdateDomainBody {
-	domain?: DomainsUpdateDomainBodyDomain;
+    domain?: DomainsUpdateDomainBodyDomain;
 }

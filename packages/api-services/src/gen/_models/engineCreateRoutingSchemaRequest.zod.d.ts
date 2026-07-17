@@ -7,10 +7,10 @@
 import type { EngineRoutingSchemaType } from './engineRoutingSchemaType.zod';
 import type { EngineSchemaTag } from './engineSchemaTag.zod';
 export interface EngineCreateRoutingSchemaRequest {
-	tags?: EngineSchemaTag[];
-	debug?: boolean;
-	description?: string;
-	editor?: boolean;
-	name?: string;
-	type?: EngineRoutingSchemaType;
+    tags?: EngineSchemaTag[];
+    debug?: boolean;
+    description?: string;
+    editor?: boolean;
+    name?: string;
+    type?: EngineRoutingSchemaType;
 }

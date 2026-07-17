@@ -7,9 +7,9 @@
 import type { WebitelImApiProviderV1ProviderFile } from './webitelImApiProviderV1ProviderFile.zod';
 import type { WebitelImApiProviderV1ProviderType } from './webitelImApiProviderV1ProviderType.zod';
 export interface WebitelImApiProviderV1ProviderSendDocumentRequest {
-	caption?: string;
-	documents?: WebitelImApiProviderV1ProviderFile[];
-	externalUserId?: string;
-	gateId?: string;
-	type?: WebitelImApiProviderV1ProviderType;
+    caption?: string;
+    documents?: WebitelImApiProviderV1ProviderFile[];
+    externalUserId?: string;
+    gateId?: string;
+    type?: WebitelImApiProviderV1ProviderType;
 }

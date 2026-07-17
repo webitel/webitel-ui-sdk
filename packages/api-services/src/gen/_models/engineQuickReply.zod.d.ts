@@ -6,14 +6,14 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQuickReply {
-	article?: EngineLookup;
-	createdAt?: string;
-	createdBy?: EngineLookup;
-	id?: number;
-	name?: string;
-	queues?: EngineLookup[];
-	teams?: EngineLookup[];
-	text?: string;
-	updatedAt?: string;
-	updatedBy?: EngineLookup;
+    article?: EngineLookup;
+    createdAt?: string;
+    createdBy?: EngineLookup;
+    id?: number;
+    name?: string;
+    queues?: EngineLookup[];
+    teams?: EngineLookup[];
+    text?: string;
+    updatedAt?: string;
+    updatedBy?: EngineLookup;
 }

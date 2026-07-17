@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelCasesInputCloseReason {
-	description?: string;
-	name?: string;
+    description?: string;
+    name?: string;
 }

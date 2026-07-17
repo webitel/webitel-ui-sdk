@@ -6,8 +6,8 @@
  */
 import type { TypeDurationViolation } from './typeDurationViolation.zod';
 export interface TypeDuration {
-	format?: string;
-	max?: string;
-	min?: string;
-	violation?: TypeDurationViolation;
+    format?: string;
+    max?: string;
+    min?: string;
+    violation?: TypeDurationViolation;
 }

@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WfmExecuteForecastCalculationResponseForecast {
-	agents?: string;
-	timestamp?: string;
+    agents?: string;
+    timestamp?: string;
 }

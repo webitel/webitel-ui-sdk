@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateVariableBody = {
-	/**
-	 * NEW Key.
-	 * @pattern ^\w+$
-	 */
-	key: string;
-	/** NEW Value. */
-	value?: unknown;
+    /**
+     * NEW Key.
+     * @pattern ^\w+$
+     */
+    key: string;
+    /** NEW Value. */
+    value?: unknown;
 };

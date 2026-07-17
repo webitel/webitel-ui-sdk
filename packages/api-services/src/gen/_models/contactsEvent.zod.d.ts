@@ -9,9 +9,9 @@ import type { ContactsChatEvent } from './contactsChatEvent.zod';
 import type { ContactsEmailEvent } from './contactsEmailEvent.zod';
 import type { ContactsTimelineEventType } from './contactsTimelineEventType.zod';
 export interface ContactsEvent {
-	call?: ContactsCallEvent;
-	chat?: ContactsChatEvent;
-	createdAt?: string;
-	email?: ContactsEmailEvent;
-	type?: ContactsTimelineEventType;
+    call?: ContactsCallEvent;
+    chat?: ContactsChatEvent;
+    createdAt?: string;
+    email?: ContactsEmailEvent;
+    type?: ContactsTimelineEventType;
 }

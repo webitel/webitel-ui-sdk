@@ -7,7 +7,7 @@
 import type { EngineQueueReportGeneral } from './engineQueueReportGeneral.zod';
 import type { EngineQueueReportGeneralAgentStatus } from './engineQueueReportGeneralAgentStatus.zod';
 export interface EngineListReportGeneral {
-	aggs?: EngineQueueReportGeneralAgentStatus;
-	items?: EngineQueueReportGeneral[];
-	next?: boolean;
+    aggs?: EngineQueueReportGeneralAgentStatus;
+    items?: EngineQueueReportGeneral[];
+    next?: boolean;
 }

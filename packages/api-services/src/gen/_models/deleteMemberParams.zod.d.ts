@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteMemberParams = {
-	domainId?: string;
-	force?: boolean;
+    domainId?: string;
+    force?: boolean;
 };

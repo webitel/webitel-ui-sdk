@@ -4,9 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchScreenRecordingsByAgentChannel =
-	(typeof SearchScreenRecordingsByAgentChannel)[keyof typeof SearchScreenRecordingsByAgentChannel];
+export type SearchScreenRecordingsByAgentChannel = (typeof SearchScreenRecordingsByAgentChannel)[keyof typeof SearchScreenRecordingsByAgentChannel];
 export declare const SearchScreenRecordingsByAgentChannel: {
-	readonly Screenrecording: 'SCREENRECORDING';
-	readonly Call: 'CALL';
+    readonly Screenrecording: "SCREENRECORDING";
+    readonly Call: "CALL";
 };

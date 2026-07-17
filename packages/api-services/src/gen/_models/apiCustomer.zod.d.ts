@@ -9,24 +9,24 @@ import type { ApiLicenseV1 } from './apiLicenseV1.zod';
 import type { ApiObjectId } from './apiObjectId.zod';
 import type { ApiVerification } from './apiVerification.zod';
 export interface ApiCustomer {
-	/** local created ms */
-	createdAt?: string;
-	dnsrv?: ApiObjectId[];
-	id?: string;
-	/** [required] issuer(CA) created at */
-	issuedAt?: string;
-	/** grants issued */
-	license?: ApiLicenseV1[];
-	/** defines map[class]limit usage */
-	limit?: ApiCustomerLimit;
-	nextUpdate?: string;
-	notAfter?: string;
-	notBefore?: string;
-	organization?: string;
-	revokedAt?: string;
-	/** [optional]: issuer(CA) signed at */
-	thisUpdate?: string;
-	updatedAt?: string;
-	/** [optional] validation results */
-	verify?: ApiVerification;
+    /** local created ms */
+    createdAt?: string;
+    dnsrv?: ApiObjectId[];
+    id?: string;
+    /** [required] issuer(CA) created at */
+    issuedAt?: string;
+    /** grants issued */
+    license?: ApiLicenseV1[];
+    /** defines map[class]limit usage */
+    limit?: ApiCustomerLimit;
+    nextUpdate?: string;
+    notAfter?: string;
+    notBefore?: string;
+    organization?: string;
+    revokedAt?: string;
+    /** [optional]: issuer(CA) signed at */
+    thisUpdate?: string;
+    updatedAt?: string;
+    /** [optional] validation results */
+    verify?: ApiVerification;
 }

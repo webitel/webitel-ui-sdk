@@ -10,12 +10,12 @@ import type { WebitelCasesRelationType } from './webitelCasesRelationType.zod';
  * Input for creating or updating a related case.
  */
 export interface WebitelCasesInputRelatedCase {
-	/** Primary case details. */
-	primaryCase?: GeneralLookup;
-	/** Related case details. */
-	relatedCase?: GeneralLookup;
-	/** Relation type. */
-	relationType?: WebitelCasesRelationType;
-	/** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
-	userId?: GeneralLookup;
+    /** Primary case details. */
+    primaryCase?: GeneralLookup;
+    /** Related case details. */
+    relatedCase?: GeneralLookup;
+    /** Relation type. */
+    relationType?: WebitelCasesRelationType;
+    /** Optional creator / updater ID. Use this to explicitly set the case creator / updater instead of deriving it from the auth token. */
+    userId?: GeneralLookup;
 }

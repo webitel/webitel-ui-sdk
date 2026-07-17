@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiProviderV1ProviderMetaApp } from './webitelImApiProviderV1ProviderMetaApp.zod';
 export interface WebitelImApiProviderV1ProviderDeleteMetaAppResponse {
-	item?: WebitelImApiProviderV1ProviderMetaApp;
+    item?: WebitelImApiProviderV1ProviderMetaApp;
 }

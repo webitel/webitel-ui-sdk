@@ -8,10 +8,10 @@
  * INDEX [struct.fields].
  */
 export interface DataIndex {
-	/** A set of [struct.fields.id] to INDEX within [type] dataset. */
-	fields?: string[];
-	/** A set of [struct.fields.id] to INCLUDE beside the [fields] index. */
-	include?: string[];
-	/** Indicates whether set of [fields] MUST be UNIQUE within [type]. */
-	unique?: boolean;
+    /** A set of [struct.fields.id] to INDEX within [type] dataset. */
+    fields?: string[];
+    /** A set of [struct.fields.id] to INCLUDE beside the [fields] index. */
+    include?: string[];
+    /** Indicates whether set of [fields] MUST be UNIQUE within [type]. */
+    unique?: boolean;
 }

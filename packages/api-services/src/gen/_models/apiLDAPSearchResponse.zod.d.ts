@@ -7,10 +7,10 @@
 import type { ApiLDAPControl } from './apiLDAPControl.zod';
 import type { ApiLDAPSearchResponseEntriesItem } from './apiLDAPSearchResponseEntriesItem.zod';
 export interface ApiLDAPSearchResponse {
-	controls?: ApiLDAPControl[];
-	diagnosticMessage?: string;
-	entries?: ApiLDAPSearchResponseEntriesItem[];
-	matchedDn?: string;
-	referral?: string[];
-	resultCode?: number;
+    controls?: ApiLDAPControl[];
+    diagnosticMessage?: string;
+    entries?: ApiLDAPSearchResponseEntriesItem[];
+    matchedDn?: string;
+    referral?: string[];
+    resultCode?: number;
 }

@@ -1,4 +1,4 @@
 export declare enum FileFormat {
-	CSV = 'csv',
-	XLSX = 'xlsx',
+    CSV = "csv",
+    XLSX = "xlsx"
 }

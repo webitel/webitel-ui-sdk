@@ -6,8 +6,8 @@
  */
 import type { WebitelImApiGatewayV1WebPushSubscription } from './webitelImApiGatewayV1WebPushSubscription.zod';
 export interface WebitelImApiGatewayV1PUSHSubscription {
-	apn?: string;
-	fcm?: string;
-	secret?: string;
-	web?: WebitelImApiGatewayV1WebPushSubscription;
+    apn?: string;
+    fcm?: string;
+    secret?: string;
+    web?: WebitelImApiGatewayV1WebPushSubscription;
 }

@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface StorageThumbnail {
-	mimeType?: string;
-	scale?: string;
-	size?: string;
+    mimeType?: string;
+    scale?: string;
+    size?: string;
 }

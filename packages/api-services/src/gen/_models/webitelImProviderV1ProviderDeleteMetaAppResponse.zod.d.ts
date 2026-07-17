@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderMetaApp } from './webitelImProviderV1Pr
  * / ProviderDeleteMetaAppResponse returns the details of the deleted application.
  */
 export interface WebitelImProviderV1ProviderDeleteMetaAppResponse {
-	item?: WebitelImProviderV1ProviderMetaApp;
+    item?: WebitelImProviderV1ProviderMetaApp;
 }

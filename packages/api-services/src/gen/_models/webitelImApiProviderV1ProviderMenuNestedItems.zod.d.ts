@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiProviderV1ProviderMenuItem } from './webitelImApiProviderV1ProviderMenuItem.zod';
 export interface WebitelImApiProviderV1ProviderMenuNestedItems {
-	items?: WebitelImApiProviderV1ProviderMenuItem[];
+    items?: WebitelImApiProviderV1ProviderMenuItem[];
 }

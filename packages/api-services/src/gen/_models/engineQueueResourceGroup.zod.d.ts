@@ -6,7 +6,7 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineQueueResourceGroup {
-	communication?: EngineLookup;
-	id?: string;
-	resourceGroup?: EngineLookup;
+    communication?: EngineLookup;
+    id?: string;
+    resourceGroup?: EngineLookup;
 }

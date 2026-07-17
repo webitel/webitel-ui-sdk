@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiGatewayV1WebPushSubscriptionKey {
-	auth?: string;
-	p256Dh?: string;
+    auth?: string;
+    p256Dh?: string;
 }

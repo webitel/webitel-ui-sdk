@@ -5,17 +5,17 @@
  * OpenAPI spec version: 24.04.0
  */
 export type AgentChatServiceGetAgentChatsParams = {
-	/**
-	 * default
-	 */
-	size?: number;
-	page?: number;
-	q?: string;
-	fields?: string[];
-	sort?: string;
-	/**
-	 * filter
-	 */
-	onlyClosed?: boolean;
-	onlyUnprocessed?: boolean;
+    /**
+     * default
+     */
+    size?: number;
+    page?: number;
+    q?: string;
+    fields?: string[];
+    sort?: string;
+    /**
+     * filter
+     */
+    onlyClosed?: boolean;
+    onlyUnprocessed?: boolean;
 };

@@ -6,8 +6,8 @@
  */
 import type { ApiPermission } from './apiPermission.zod';
 export interface ApiSearchPermissionResponse {
-	items?: ApiPermission[];
-	next?: boolean;
-	page?: number;
-	size?: number;
+    items?: ApiPermission[];
+    next?: boolean;
+    page?: number;
+    size?: number;
 }

@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ContactsTimelineEventType =
-	(typeof ContactsTimelineEventType)[keyof typeof ContactsTimelineEventType];
+export type ContactsTimelineEventType = (typeof ContactsTimelineEventType)[keyof typeof ContactsTimelineEventType];
 export declare const ContactsTimelineEventType: {
-	readonly Chat: 'chat';
-	readonly Call: 'call';
-	readonly Email: 'email';
+    readonly Chat: "chat";
+    readonly Call: "call";
+    readonly Email: "email";
 };

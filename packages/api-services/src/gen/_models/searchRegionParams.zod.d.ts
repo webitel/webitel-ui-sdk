@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchRegionParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	name?: string;
-	description?: string;
-	timezoneId?: number[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: string[];
+    name?: string;
+    description?: string;
+    timezoneId?: number[];
 };

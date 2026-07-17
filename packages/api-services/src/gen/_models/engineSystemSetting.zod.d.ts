@@ -6,6 +6,6 @@
  */
 import type { EngineSystemSettingName } from './engineSystemSettingName.zod';
 export interface EngineSystemSetting {
-	id?: number;
-	name?: EngineSystemSettingName;
+    id?: number;
+    name?: EngineSystemSettingName;
 }

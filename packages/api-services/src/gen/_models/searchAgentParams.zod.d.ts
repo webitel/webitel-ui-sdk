@@ -5,24 +5,24 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	allowChannels?: string[];
-	supervisorId?: number[];
-	teamId?: number[];
-	regionId?: number[];
-	auditorId?: number[];
-	isSupervisor?: boolean;
-	skillId?: number[];
-	queueId?: number[];
-	notSupervisor?: boolean;
-	userId?: string[];
-	extension?: string[];
-	notTeamId?: number[];
-	notSkillId?: number[];
-	notUserId?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: string[];
+    allowChannels?: string[];
+    supervisorId?: number[];
+    teamId?: number[];
+    regionId?: number[];
+    auditorId?: number[];
+    isSupervisor?: boolean;
+    skillId?: number[];
+    queueId?: number[];
+    notSupervisor?: boolean;
+    userId?: string[];
+    extension?: string[];
+    notTeamId?: number[];
+    notSkillId?: number[];
+    notUserId?: string[];
 };

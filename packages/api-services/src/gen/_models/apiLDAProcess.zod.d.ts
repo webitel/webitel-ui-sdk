@@ -8,12 +8,12 @@ import type { ApiLDAPObjentry } from './apiLDAPObjentry.zod';
 import type { ApiLDAProcessOptions } from './apiLDAProcessOptions.zod';
 import type { ApiRoleId } from './apiRoleId.zod';
 export interface ApiLDAProcess {
-	/** Optional. If not <zero> indicates that this process is completed. */
-	completeAt?: string;
-	executeAt?: string;
-	executeBy?: ApiRoleId;
-	id?: string;
-	options?: ApiLDAProcessOptions;
-	progress?: ApiLDAPObjentry[];
-	status?: string;
+    /** Optional. If not <zero> indicates that this process is completed. */
+    completeAt?: string;
+    executeAt?: string;
+    executeBy?: ApiRoleId;
+    id?: string;
+    options?: ApiLDAProcessOptions;
+    progress?: ApiLDAPObjentry[];
+    status?: string;
 }

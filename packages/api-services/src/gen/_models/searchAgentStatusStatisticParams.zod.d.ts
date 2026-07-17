@@ -5,22 +5,22 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchAgentStatusStatisticParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	agentId?: string[];
-	'time.from'?: string;
-	'time.to'?: string;
-	status?: string[];
-	queueId?: number[];
-	teamId?: number[];
-	'utilization.from'?: string;
-	'utilization.to'?: string;
-	hasCall?: boolean;
-	skillId?: number[];
-	regionId?: number[];
-	supervisorId?: number[];
-	auditorId?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    agentId?: string[];
+    'time.from'?: string;
+    'time.to'?: string;
+    status?: string[];
+    queueId?: number[];
+    teamId?: number[];
+    'utilization.from'?: string;
+    'utilization.to'?: string;
+    hasCall?: boolean;
+    skillId?: number[];
+    regionId?: number[];
+    supervisorId?: number[];
+    auditorId?: string[];
 };

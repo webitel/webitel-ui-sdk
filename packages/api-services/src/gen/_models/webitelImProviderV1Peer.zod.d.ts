@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1Peer {
-	iss?: string;
-	sub?: string;
+    iss?: string;
+    sub?: string;
 }

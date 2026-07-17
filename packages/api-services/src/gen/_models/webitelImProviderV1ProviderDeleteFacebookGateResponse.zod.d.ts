@@ -6,5 +6,5 @@
  */
 import type { WebitelImProviderV1ProviderFacebookGate } from './webitelImProviderV1ProviderFacebookGate.zod';
 export interface WebitelImProviderV1ProviderDeleteFacebookGateResponse {
-	item?: WebitelImProviderV1ProviderFacebookGate;
+    item?: WebitelImProviderV1ProviderFacebookGate;
 }

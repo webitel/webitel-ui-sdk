@@ -5,13 +5,13 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineOpenedWebSocket {
-	applicationName?: string;
-	createdAt?: string;
-	duration?: string;
-	id?: string;
-	ip?: string;
-	pong?: string;
-	updatedAt?: string;
-	userAgent?: string;
-	ver?: string;
+    applicationName?: string;
+    createdAt?: string;
+    duration?: string;
+    id?: string;
+    ip?: string;
+    pong?: string;
+    updatedAt?: string;
+    userAgent?: string;
+    ver?: string;
 }

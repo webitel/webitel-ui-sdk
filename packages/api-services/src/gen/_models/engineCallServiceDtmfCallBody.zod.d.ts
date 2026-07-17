@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCallServiceDtmfCallBody {
-	appId?: string;
-	digit?: string;
-	domainId?: string;
+    appId?: string;
+    digit?: string;
+    domainId?: string;
 }

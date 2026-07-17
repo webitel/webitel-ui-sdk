@@ -8,18 +8,18 @@ import type { EngineCreateOutboundResourceRequestVariables } from './engineCreat
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineOutboundResourceParameters } from './engineOutboundResourceParameters.zod';
 export interface EngineCreateOutboundResourceRequest {
-	parameters?: EngineOutboundResourceParameters;
-	description?: string;
-	enabled?: boolean;
-	errorIds?: string[];
-	failureDialDelay?: number;
-	gateway?: EngineLookup;
-	limit?: number;
-	maxSuccessivelyErrors?: number;
-	name?: string;
-	number?: string;
-	patterns?: string[];
-	reserve?: boolean;
-	rps?: number;
-	variables?: EngineCreateOutboundResourceRequestVariables;
+    parameters?: EngineOutboundResourceParameters;
+    description?: string;
+    enabled?: boolean;
+    errorIds?: string[];
+    failureDialDelay?: number;
+    gateway?: EngineLookup;
+    limit?: number;
+    maxSuccessivelyErrors?: number;
+    name?: string;
+    number?: string;
+    patterns?: string[];
+    reserve?: boolean;
+    rps?: number;
+    variables?: EngineCreateOutboundResourceRequestVariables;
 }

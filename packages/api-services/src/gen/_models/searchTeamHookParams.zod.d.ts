@@ -6,12 +6,12 @@
  */
 import type { SearchTeamHookEventItem } from './searchTeamHookEventItem.zod';
 export type SearchTeamHookParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: number[];
-	schemaId?: number[];
-	event?: SearchTeamHookEventItem[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: number[];
+    schemaId?: number[];
+    event?: SearchTeamHookEventItem[];
 };
