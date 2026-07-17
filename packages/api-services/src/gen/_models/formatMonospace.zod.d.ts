@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface FormatMonospace {
-	[key: string]: unknown;
+    [key: string]: unknown;
 }

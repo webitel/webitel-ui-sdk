@@ -6,7 +6,7 @@
  */
 import type { ApiObjectId } from './apiObjectId.zod';
 export interface ApiGrantAccessRequestV1 {
-	grantee?: string;
-	grants?: string;
-	object?: ApiObjectId;
+    grantee?: string;
+    grants?: string;
+    object?: ApiObjectId;
 }

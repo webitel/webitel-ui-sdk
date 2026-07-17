@@ -10,14 +10,14 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * Request message for creating a new dynamic group.
  */
 export interface ContactsCreateDynamicGroupRequest {
-	/** Input details for the dynamic group. */
-	condition?: ContactsInputDynamicCondition[];
-	/** Default static group to assign if no conditions are met. */
-	defaultGroup?: WebitelContactsLookup;
-	/** The description of the dynamic group. */
-	description?: string;
-	/** Enabled status of the dynamic group: active/inactive. */
-	enabled?: boolean;
-	/** The name of the dynamic group. */
-	name: string;
+    /** Input details for the dynamic group. */
+    condition?: ContactsInputDynamicCondition[];
+    /** Default static group to assign if no conditions are met. */
+    defaultGroup?: WebitelContactsLookup;
+    /** The description of the dynamic group. */
+    description?: string;
+    /** Enabled status of the dynamic group: active/inactive. */
+    enabled?: boolean;
+    /** The name of the dynamic group. */
+    name: string;
 }

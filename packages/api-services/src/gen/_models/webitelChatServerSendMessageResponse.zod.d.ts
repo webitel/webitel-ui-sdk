@@ -6,5 +6,5 @@
  */
 import type { WebitelChatServerMessage } from './webitelChatServerMessage.zod';
 export interface WebitelChatServerSendMessageResponse {
-	message?: WebitelChatServerMessage;
+    message?: WebitelChatServerMessage;
 }

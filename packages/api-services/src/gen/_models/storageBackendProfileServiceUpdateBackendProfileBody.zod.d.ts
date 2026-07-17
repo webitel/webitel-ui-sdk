@@ -6,12 +6,12 @@
  */
 import type { StorageBackendProfileServiceUpdateBackendProfileBodyProperties } from './storageBackendProfileServiceUpdateBackendProfileBodyProperties.zod';
 export interface StorageBackendProfileServiceUpdateBackendProfileBody {
-	description?: string;
-	disabled?: boolean;
-	domainId?: string;
-	expireDays?: number;
-	maxSize?: string;
-	name?: string;
-	priority?: number;
-	properties?: StorageBackendProfileServiceUpdateBackendProfileBodyProperties;
+    description?: string;
+    disabled?: boolean;
+    domainId?: string;
+    expireDays?: number;
+    maxSize?: string;
+    name?: string;
+    priority?: number;
+    properties?: StorageBackendProfileServiceUpdateBackendProfileBodyProperties;
 }

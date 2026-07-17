@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchUserStatusParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	notUserId?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    notUserId?: string[];
 };

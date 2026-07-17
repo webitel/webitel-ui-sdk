@@ -9,12 +9,12 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * Input of the Contact's email address.
  */
 export interface ContactsInputEmailAddress {
-	/** The email address. */
-	email: string;
-	/** Unique ID of the latest version of an existing resorce. */
-	etag?: string;
-	/** Indicates whether this phone number is default within other channels of the same type(phone). */
-	primary?: boolean;
-	type?: WebitelContactsLookup;
-	verified?: boolean;
+    /** The email address. */
+    email: string;
+    /** Unique ID of the latest version of an existing resorce. */
+    etag?: string;
+    /** Indicates whether this phone number is default within other channels of the same type(phone). */
+    primary?: boolean;
+    type?: WebitelContactsLookup;
+    verified?: boolean;
 }

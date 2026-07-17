@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface StorageGenerateFileLinkResponseMetadata {
-	id?: string;
-	mimeType?: string;
-	name?: string;
-	size?: string;
-	uuid?: string;
+    id?: string;
+    mimeType?: string;
+    name?: string;
+    size?: string;
+    uuid?: string;
 }

@@ -9,6 +9,6 @@ import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1P
  * DirectConfig defines settings required to establish a 1:1 thread.
  */
 export interface WebitelImApiGatewayV1DirectConfig {
-	/** IM contact that will be added to the created thread as second member. */
-	member?: WebitelImApiGatewayV1PeerIdentity;
+    /** IM contact that will be added to the created thread as second member. */
+    member?: WebitelImApiGatewayV1PeerIdentity;
 }

@@ -9,5 +9,5 @@
  * Usage: Allows for future-proofing without breaking schema changes.
  */
 export type WebitelImApiGatewayV1KeyboardButtonMetadata = {
-	[key: string]: unknown;
+    [key: string]: unknown;
 };

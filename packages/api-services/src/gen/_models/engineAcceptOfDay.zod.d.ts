@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAcceptOfDay {
-	day?: number;
-	disabled?: boolean;
-	endTimeOfDay?: number;
-	startTimeOfDay?: number;
+    day?: number;
+    disabled?: boolean;
+    endTimeOfDay?: number;
+    startTimeOfDay?: number;
 }

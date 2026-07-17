@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	objectName?: string[];
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    objectName?: string[];
 };

@@ -8,5 +8,5 @@
  * ProviderKeyboardButtonURL opens a web page when clicked.
  */
 export interface WebitelImProviderV1ProviderKeyboardButtonURL {
-	url?: string;
+    url?: string;
 }

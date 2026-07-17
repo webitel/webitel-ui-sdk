@@ -11,9 +11,9 @@ import type { ContactsTimezone } from './contactsTimezone.zod';
  * So this ContactTimezones.data are always subordinate to some contact.id.
  */
 export interface ContactsTimezoneList {
-	/** Timezone dataset page. */
-	data?: ContactsTimezone[];
-	next?: boolean;
-	/** The page number of the partial result. */
-	page?: number;
+    /** Timezone dataset page. */
+    data?: ContactsTimezone[];
+    next?: boolean;
+    /** The page number of the partial result. */
+    page?: number;
 }

@@ -9,17 +9,17 @@ import type { ApiPermission } from './apiPermission.zod';
 import type { ApiUserId } from './apiUserId.zod';
 import type { RolesUpdateRoleBodyRoleMetadata } from './rolesUpdateRoleBodyRoleMetadata.zod';
 export type RolesUpdateRoleBodyRole = {
-	createdAt?: string;
-	createdBy?: ApiUserId;
-	deletedAt?: string;
-	deletedBy?: ApiUserId;
-	description?: string;
-	/** users/roles */
-	members?: ApiObjectId[];
-	metadata?: RolesUpdateRoleBodyRoleMetadata;
-	name?: string;
-	permissions?: ApiPermission[];
-	updatedAt?: string;
-	updatedBy?: ApiUserId;
-	user?: boolean;
+    createdAt?: string;
+    createdBy?: ApiUserId;
+    deletedAt?: string;
+    deletedBy?: ApiUserId;
+    description?: string;
+    /** users/roles */
+    members?: ApiObjectId[];
+    metadata?: RolesUpdateRoleBodyRoleMetadata;
+    name?: string;
+    permissions?: ApiPermission[];
+    updatedAt?: string;
+    updatedBy?: ApiUserId;
+    user?: boolean;
 };

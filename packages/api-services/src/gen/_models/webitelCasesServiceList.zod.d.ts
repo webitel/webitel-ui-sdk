@@ -6,7 +6,7 @@
  */
 import type { WebitelCasesService } from './webitelCasesService.zod';
 export interface WebitelCasesServiceList {
-	items?: WebitelCasesService[];
-	next?: boolean;
-	page?: number;
+    items?: WebitelCasesService[];
+    next?: boolean;
+    page?: number;
 }

@@ -6,5 +6,5 @@
  */
 import type { WfmForecastCalculation } from './wfmForecastCalculation.zod';
 export interface WfmReadForecastCalculationResponse {
-	item?: WfmForecastCalculation;
+    item?: WfmForecastCalculation;
 }

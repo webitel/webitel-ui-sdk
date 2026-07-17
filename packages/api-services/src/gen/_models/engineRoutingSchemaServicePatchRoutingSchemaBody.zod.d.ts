@@ -7,12 +7,12 @@
 import type { EngineRoutingSchemaType } from './engineRoutingSchemaType.zod';
 import type { EngineSchemaTag } from './engineSchemaTag.zod';
 export interface EngineRoutingSchemaServicePatchRoutingSchemaBody {
-	tags?: EngineSchemaTag[];
-	debug?: boolean;
-	description?: string;
-	editor?: boolean;
-	fields?: string[];
-	name?: string;
-	note?: string;
-	type?: EngineRoutingSchemaType;
+    tags?: EngineSchemaTag[];
+    debug?: boolean;
+    description?: string;
+    editor?: boolean;
+    fields?: string[];
+    name?: string;
+    note?: string;
+    type?: EngineRoutingSchemaType;
 }

@@ -10,8 +10,8 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer.zod'
  * Contains the generated message ID and list of recipients.
  */
 export interface WebitelImApiGatewayV1SendMessageResponse {
-	/** Unique message identifier. */
-	id?: string;
-	/** Recipient of the message. */
-	to?: WebitelImApiGatewayV1Peer;
+    /** Unique message identifier. */
+    id?: string;
+    /** Recipient of the message. */
+    to?: WebitelImApiGatewayV1Peer;
 }

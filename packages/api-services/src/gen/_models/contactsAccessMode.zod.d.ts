@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ContactsAccessMode =
-	(typeof ContactsAccessMode)[keyof typeof ContactsAccessMode];
+export type ContactsAccessMode = (typeof ContactsAccessMode)[keyof typeof ContactsAccessMode];
 export declare const ContactsAccessMode: {
-	readonly Read: 'READ';
-	readonly Write: 'WRITE';
-	readonly Delete: 'DELETE';
+    readonly Read: "READ";
+    readonly Write: "WRITE";
+    readonly Delete: "DELETE";
 };

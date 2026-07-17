@@ -6,8 +6,8 @@
  */
 import type { WebitelImApiProviderV1ProviderMenuNestedItems } from './webitelImApiProviderV1ProviderMenuNestedItems.zod';
 export interface WebitelImApiProviderV1ProviderMenuItem {
-	nested?: WebitelImApiProviderV1ProviderMenuNestedItems;
-	payload?: string;
-	title?: string;
-	url?: string;
+    nested?: WebitelImApiProviderV1ProviderMenuNestedItems;
+    payload?: string;
+    title?: string;
+    url?: string;
 }

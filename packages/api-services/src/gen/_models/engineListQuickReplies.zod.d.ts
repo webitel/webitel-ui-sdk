@@ -6,6 +6,6 @@
  */
 import type { EngineQuickReply } from './engineQuickReply.zod';
 export interface EngineListQuickReplies {
-	items?: EngineQuickReply[];
-	next?: boolean;
+    items?: EngineQuickReply[];
+    next?: boolean;
 }

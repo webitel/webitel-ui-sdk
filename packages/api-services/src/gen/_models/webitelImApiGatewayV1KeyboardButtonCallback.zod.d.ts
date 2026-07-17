@@ -8,6 +8,6 @@
  * Action: Sends an asynchronous signal to the backend service.
  */
 export interface WebitelImApiGatewayV1KeyboardButtonCallback {
-	/** Opaque data payload passed back to the server upon interaction. */
-	data?: string;
+    /** Opaque data payload passed back to the server upon interaction. */
+    data?: string;
 }

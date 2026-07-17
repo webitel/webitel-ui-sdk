@@ -6,8 +6,8 @@
  */
 import type { ApiProductUser } from './apiProductUser.zod';
 export interface ApiLicenseUsersResponse {
-	items?: ApiProductUser[];
-	next?: boolean;
-	/** this page number ! */
-	page?: number;
+    items?: ApiProductUser[];
+    next?: boolean;
+    /** this page number ! */
+    page?: number;
 }

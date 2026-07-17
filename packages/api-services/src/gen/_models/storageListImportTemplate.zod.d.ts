@@ -6,6 +6,6 @@
  */
 import type { StorageImportTemplate } from './storageImportTemplate.zod';
 export interface StorageListImportTemplate {
-	items?: StorageImportTemplate[];
-	next?: boolean;
+    items?: StorageImportTemplate[];
+    next?: boolean;
 }

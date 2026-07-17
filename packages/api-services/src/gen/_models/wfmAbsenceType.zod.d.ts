@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WfmAbsenceType =
-	(typeof WfmAbsenceType)[keyof typeof WfmAbsenceType];
+export type WfmAbsenceType = (typeof WfmAbsenceType)[keyof typeof WfmAbsenceType];
 export declare const WfmAbsenceType: {
-	readonly AbsenceTypeUnspecified: 'ABSENCE_TYPE_UNSPECIFIED';
-	readonly AbsenceTypeDayoff: 'ABSENCE_TYPE_DAYOFF';
-	readonly AbsenceTypeVacation: 'ABSENCE_TYPE_VACATION';
-	readonly AbsenceTypeSickday: 'ABSENCE_TYPE_SICKDAY';
+    readonly AbsenceTypeUnspecified: "ABSENCE_TYPE_UNSPECIFIED";
+    readonly AbsenceTypeDayoff: "ABSENCE_TYPE_DAYOFF";
+    readonly AbsenceTypeVacation: "ABSENCE_TYPE_VACATION";
+    readonly AbsenceTypeSickday: "ABSENCE_TYPE_SICKDAY";
 };

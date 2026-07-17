@@ -6,14 +6,14 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesCaseLink {
-	author?: GeneralLookup;
-	createdAt?: string;
-	createdBy?: GeneralLookup;
-	etag?: string;
-	id?: string;
-	name?: string;
-	updatedAt?: string;
-	updatedBy?: GeneralLookup;
-	url?: string;
-	ver?: number;
+    author?: GeneralLookup;
+    createdAt?: string;
+    createdBy?: GeneralLookup;
+    etag?: string;
+    id?: string;
+    name?: string;
+    updatedAt?: string;
+    updatedBy?: GeneralLookup;
+    url?: string;
+    ver?: number;
 }

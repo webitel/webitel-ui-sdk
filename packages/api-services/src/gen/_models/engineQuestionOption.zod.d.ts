@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineQuestionOption {
-	name?: string;
-	score?: number;
+    name?: string;
+    score?: number;
 }

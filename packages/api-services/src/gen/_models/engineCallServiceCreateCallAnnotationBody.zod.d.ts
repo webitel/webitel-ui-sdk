@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCallServiceCreateCallAnnotationBody {
-	endSec?: number;
-	fileId?: string;
-	note?: string;
-	startSec?: number;
+    endSec?: number;
+    fileId?: string;
+    note?: string;
+    startSec?: number;
 }

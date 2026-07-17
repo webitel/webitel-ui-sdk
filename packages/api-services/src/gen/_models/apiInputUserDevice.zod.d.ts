@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiInputUserDevice {
-	account?: string;
-	generatePassword?: boolean;
-	name?: string;
-	password?: string;
+    account?: string;
+    generatePassword?: boolean;
+    name?: string;
+    password?: string;
 }

@@ -6,13 +6,13 @@
  */
 import type { EngineAggregateRequestGroup } from './engineAggregateRequestGroup.zod';
 export interface EngineAggregateRequest {
-	avg?: string[];
-	count?: string[];
-	group?: EngineAggregateRequestGroup[];
-	limit?: number;
-	max?: string[];
-	min?: string[];
-	name?: string;
-	sort?: string[];
-	sum?: string[];
+    avg?: string[];
+    count?: string[];
+    group?: EngineAggregateRequestGroup[];
+    limit?: number;
+    max?: string[];
+    min?: string[];
+    name?: string;
+    sort?: string[];
+    sum?: string[];
 }

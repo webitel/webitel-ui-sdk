@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface StorageTranscriptPhrase {
-	channel?: number;
-	endSec?: number;
-	phrase?: string;
-	startSec?: number;
+    channel?: number;
+    endSec?: number;
+    phrase?: string;
+    startSec?: number;
 }

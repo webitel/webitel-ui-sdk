@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiLDAProcessOptions {
-	linkExistingObjects?: boolean;
-	reassignDeviceUsers?: boolean;
-	test?: boolean;
-	timeout?: string;
+    linkExistingObjects?: boolean;
+    reassignDeviceUsers?: boolean;
+    test?: boolean;
+    timeout?: string;
 }

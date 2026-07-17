@@ -25,15 +25,15 @@
  *  string zone = 3; // ??? [ Europe/Kyiv | +03:00 ]
  */
 export interface TypeDatetime {
-	/**
-	 * Epoch timestamp.
-	 * If zero - UNIX epoch (1970-01-01 00:00:00) will be used.
-	 */
-	epoch?: number;
-	format?: string;
-	/**
-	 * Timezone associated.
-	 * Default: `UTC`.
-	 */
-	zone?: string;
+    /**
+     * Epoch timestamp.
+     * If zero - UNIX epoch (1970-01-01 00:00:00) will be used.
+     */
+    epoch?: number;
+    format?: string;
+    /**
+     * Timezone associated.
+     * Default: `UTC`.
+     */
+    zone?: string;
 }

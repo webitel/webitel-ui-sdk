@@ -6,7 +6,7 @@
  */
 import type { WebitelChatServerMessage } from './webitelChatServerMessage.zod';
 export interface WebitelChatServerStartConversationResponse {
-	channelId?: string;
-	conversationId?: string;
-	message?: WebitelChatServerMessage;
+    channelId?: string;
+    conversationId?: string;
+    message?: WebitelChatServerMessage;
 }

@@ -8,12 +8,12 @@ import type { StorageFileMalwareScan } from './storageFileMalwareScan.zod';
 import type { StorageThumbnail } from './storageThumbnail.zod';
 import type { StorageUploadStatusCode } from './storageUploadStatusCode.zod';
 export interface StorageUploadFileResponse {
-	code?: StorageUploadStatusCode;
-	fileId?: string;
-	fileUrl?: string;
-	malware?: StorageFileMalwareScan;
-	server?: string;
-	sha256Sum?: string;
-	size?: string;
-	thumbnail?: StorageThumbnail;
+    code?: StorageUploadStatusCode;
+    fileId?: string;
+    fileUrl?: string;
+    malware?: StorageFileMalwareScan;
+    server?: string;
+    sha256Sum?: string;
+    size?: string;
+    thumbnail?: StorageThumbnail;
 }

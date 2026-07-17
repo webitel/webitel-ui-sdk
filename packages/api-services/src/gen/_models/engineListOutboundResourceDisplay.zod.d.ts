@@ -6,6 +6,6 @@
  */
 import type { EngineResourceDisplay } from './engineResourceDisplay.zod';
 export interface EngineListOutboundResourceDisplay {
-	items?: EngineResourceDisplay[];
-	next?: boolean;
+    items?: EngineResourceDisplay[];
+    next?: boolean;
 }

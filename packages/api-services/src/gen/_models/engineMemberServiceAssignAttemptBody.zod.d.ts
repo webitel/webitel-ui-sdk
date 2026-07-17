@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineMemberServiceAssignAttemptBody {
-	/** Optional. If omitted (0), the attempt is assigned to the calling user's own agent. */
-	agentId?: string;
+    /** Optional. If omitted (0), the attempt is assigned to the calling user's own agent. */
+    agentId?: string;
 }

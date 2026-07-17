@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiGatewayV1ContactSettings } from './webitelImApiGatewayV1ContactSettings.zod';
 export interface WebitelImApiGatewayV1UpdateContactSettingsResponse {
-	settings?: WebitelImApiGatewayV1ContactSettings;
+    settings?: WebitelImApiGatewayV1ContactSettings;
 }

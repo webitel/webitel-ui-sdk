@@ -8,9 +8,9 @@
  * ProviderFile represents a generic file attachment.
  */
 export interface WebitelImProviderV1ProviderFile {
-	id?: string;
-	mimeType?: string;
-	name?: string;
-	size?: string;
-	url?: string;
+    id?: string;
+    mimeType?: string;
+    name?: string;
+    size?: string;
+    url?: string;
 }

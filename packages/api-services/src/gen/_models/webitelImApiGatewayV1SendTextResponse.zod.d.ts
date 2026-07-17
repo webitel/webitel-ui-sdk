@@ -9,6 +9,6 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer.zod'
  * Represents a response to send a text message.
  */
 export interface WebitelImApiGatewayV1SendTextResponse {
-	id?: string;
-	to?: WebitelImApiGatewayV1Peer;
+    id?: string;
+    to?: WebitelImApiGatewayV1Peer;
 }

@@ -9,18 +9,18 @@ import type { StorageCustomFileProperties } from './storageCustomFileProperties.
 import type { StorageThumbnail } from './storageThumbnail.zod';
 import type { StorageUploadFileChannel } from './storageUploadFileChannel.zod';
 export interface StorageFile {
-	channel?: StorageUploadFileChannel;
-	id?: string;
-	mimeType?: string;
-	name?: string;
-	properties?: StorageCustomFileProperties;
-	referenceId?: string;
-	retentionUntil?: string;
-	sha256Sum?: string;
-	size?: string;
-	thumbnail?: StorageThumbnail;
-	uploadedAt?: string;
-	uploadedBy?: EngineLookup;
-	uuid?: string;
-	viewName?: string;
+    channel?: StorageUploadFileChannel;
+    id?: string;
+    mimeType?: string;
+    name?: string;
+    properties?: StorageCustomFileProperties;
+    referenceId?: string;
+    retentionUntil?: string;
+    sha256Sum?: string;
+    size?: string;
+    thumbnail?: StorageThumbnail;
+    uploadedAt?: string;
+    uploadedBy?: EngineLookup;
+    uuid?: string;
+    viewName?: string;
 }

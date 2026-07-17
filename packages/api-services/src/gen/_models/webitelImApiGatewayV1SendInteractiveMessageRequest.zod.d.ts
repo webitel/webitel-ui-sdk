@@ -12,15 +12,15 @@ import type { WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata } from 
  * SendInteractiveMessageRequest sends a structured interactive message.
  */
 export interface WebitelImApiGatewayV1SendInteractiveMessageRequest {
-	/** Body text for the message. */
-	body?: string;
-	/** Interactive payload. */
-	interactive?: WebitelImApiGatewayV1Interactive;
-	/** Arbitrary metadata. */
-	metadata?: WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata;
-	sendAs?: WebitelImApiGatewayV1PeerIdentity;
-	/** Optional idempotency key for deduplication. */
-	sendId?: string;
-	/** Recipient of the message. */
-	to?: WebitelImApiGatewayV1Peer;
+    /** Body text for the message. */
+    body?: string;
+    /** Interactive payload. */
+    interactive?: WebitelImApiGatewayV1Interactive;
+    /** Arbitrary metadata. */
+    metadata?: WebitelImApiGatewayV1SendInteractiveMessageRequestMetadata;
+    sendAs?: WebitelImApiGatewayV1PeerIdentity;
+    /** Optional idempotency key for deduplication. */
+    sendId?: string;
+    /** Recipient of the message. */
+    to?: WebitelImApiGatewayV1Peer;
 }

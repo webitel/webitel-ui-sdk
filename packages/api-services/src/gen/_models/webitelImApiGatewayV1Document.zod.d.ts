@@ -9,20 +9,20 @@
  * associated with a message.
  */
 export interface WebitelImApiGatewayV1Document {
-	/** Creation timestamp (Unix time, milliseconds). */
-	createdAt?: string;
-	/** File storage identifier. */
-	fileId?: string;
-	/** Document identifier. */
-	id?: string;
-	/** Identifier of the message this document belongs to. */
-	messageId?: string;
-	/** MIME type of the document. */
-	mime?: string;
-	/** Original file name. */
-	name?: string;
-	/** File size in bytes. */
-	size?: string;
-	/** Public signed URL for downloading the document. */
-	url?: string;
+    /** Creation timestamp (Unix time, milliseconds). */
+    createdAt?: string;
+    /** File storage identifier. */
+    fileId?: string;
+    /** Document identifier. */
+    id?: string;
+    /** Identifier of the message this document belongs to. */
+    messageId?: string;
+    /** MIME type of the document. */
+    mime?: string;
+    /** Original file name. */
+    name?: string;
+    /** File size in bytes. */
+    size?: string;
+    /** Public signed URL for downloading the document. */
+    url?: string;
 }

@@ -6,5 +6,5 @@
  */
 import type { EngineCreateAgentSkillBulkItem } from './engineCreateAgentSkillBulkItem.zod';
 export interface EngineAgentSkillServiceCreateAgentSkillsBody {
-	items?: EngineCreateAgentSkillBulkItem[];
+    items?: EngineCreateAgentSkillBulkItem[];
 }

@@ -5,29 +5,29 @@
  * OpenAPI spec version: 24.04.0
  */
 export type GetCustomerParams = {
-	/**
-	 * Available Filters
-	 *
-	 * show by customer id; serial number (uuid)
-	 */
-	id?: string;
-	/**
-	 * show if valid only!
-	 */
-	valid?: boolean;
-	/**
-	 * identifier
-	 */
-	'domain.id'?: string;
-	/**
-	 * display name
-	 */
-	'domain.name'?: string;
-	/**
-	 * Request Controls
-	 *
-	 * serial,
-	 */
-	fields?: string[];
-	sort?: string[];
+    /**
+     * Available Filters
+     *
+     * show by customer id; serial number (uuid)
+     */
+    id?: string;
+    /**
+     * show if valid only!
+     */
+    valid?: boolean;
+    /**
+     * identifier
+     */
+    'domain.id'?: string;
+    /**
+     * display name
+     */
+    'domain.name'?: string;
+    /**
+     * Request Controls
+     *
+     * serial,
+     */
+    fields?: string[];
+    sort?: string[];
 };

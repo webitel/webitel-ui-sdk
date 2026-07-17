@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelCasesInputStatusCondition {
-	description?: string;
-	final?: boolean;
-	initial?: boolean;
-	name?: string;
+    description?: string;
+    final?: boolean;
+    initial?: boolean;
+    name?: string;
 }

@@ -6,8 +6,8 @@
  */
 import type { TypeFloatViolation } from './typeFloatViolation.zod';
 export interface TypeFloat {
-	frac?: number;
-	max?: number;
-	min?: number;
-	violation?: TypeFloatViolation;
+    frac?: number;
+    max?: number;
+    min?: number;
+    violation?: TypeFloatViolation;
 }

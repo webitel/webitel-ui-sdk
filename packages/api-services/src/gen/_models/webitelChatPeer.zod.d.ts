@@ -8,13 +8,13 @@
  * Peer contact.
  */
 export interface WebitelChatPeer {
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	id?: string;
-	/** Contact display **name**. */
-	name?: string;
-	/** Contact **type** provider. */
-	type?: string;
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    id?: string;
+    /** Contact display **name**. */
+    name?: string;
+    /** Contact **type** provider. */
+    type?: string;
 }

@@ -5,27 +5,27 @@
  * OpenAPI spec version: 24.04.0
  */
 export type SearchMemberInQueueParams = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
-	fields?: string[];
-	id?: string[];
-	bucketId?: number[];
-	destination?: string;
-	'createdAt.from'?: string;
-	'createdAt.to'?: string;
-	'offeringAt.from'?: string;
-	'offeringAt.to'?: string;
-	stopCause?: string[];
-	'priority.from'?: string;
-	'priority.to'?: string;
-	name?: string;
-	'attempts.from'?: string;
-	'attempts.to'?: string;
-	agentId?: number[];
-	/**
-	 * This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18
-	 */
-	variablesString?: string;
+    page?: number;
+    size?: number;
+    q?: string;
+    sort?: string;
+    fields?: string[];
+    id?: string[];
+    bucketId?: number[];
+    destination?: string;
+    'createdAt.from'?: string;
+    'createdAt.to'?: string;
+    'offeringAt.from'?: string;
+    'offeringAt.to'?: string;
+    stopCause?: string[];
+    'priority.from'?: string;
+    'priority.to'?: string;
+    name?: string;
+    'attempts.from'?: string;
+    'attempts.to'?: string;
+    agentId?: number[];
+    /**
+     * This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18
+     */
+    variablesString?: string;
 };

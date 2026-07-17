@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiGatewayV1UnregisterDeviceResponse {
-	[key: string]: unknown;
+    [key: string]: unknown;
 }

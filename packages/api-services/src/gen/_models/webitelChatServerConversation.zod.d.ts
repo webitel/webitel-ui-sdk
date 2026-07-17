@@ -7,12 +7,12 @@
 import type { WebitelChatServerHistoryMessage } from './webitelChatServerHistoryMessage.zod';
 import type { WebitelChatServerMember } from './webitelChatServerMember.zod';
 export interface WebitelChatServerConversation {
-	closedAt?: string;
-	createdAt?: string;
-	domainId?: string;
-	id?: string;
-	members?: WebitelChatServerMember[];
-	messages?: WebitelChatServerHistoryMessage[];
-	title?: string;
-	updatedAt?: string;
+    closedAt?: string;
+    createdAt?: string;
+    domainId?: string;
+    id?: string;
+    members?: WebitelChatServerMember[];
+    messages?: WebitelChatServerHistoryMessage[];
+    title?: string;
+    updatedAt?: string;
 }

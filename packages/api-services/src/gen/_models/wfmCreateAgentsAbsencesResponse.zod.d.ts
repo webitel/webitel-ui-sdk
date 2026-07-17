@@ -6,5 +6,5 @@
  */
 import type { WfmAgentAbsences } from './wfmAgentAbsences.zod';
 export interface WfmCreateAgentsAbsencesResponse {
-	items?: WfmAgentAbsences[];
+    items?: WfmAgentAbsences[];
 }

@@ -9,10 +9,10 @@ import type { WebitelImApiGatewayV1SystemMetadata } from './webitelImApiGatewayV
  * System represents domain structure for system event messages.
  */
 export interface WebitelImApiGatewayV1System {
-	/** ID of message for which system messages is binded. */
-	messageId?: string;
-	/** Represents additional metadata binded into system  message. */
-	metadata?: WebitelImApiGatewayV1SystemMetadata;
-	/** Represents type of the message. */
-	type?: string;
+    /** ID of message for which system messages is binded. */
+    messageId?: string;
+    /** Represents additional metadata binded into system  message. */
+    metadata?: WebitelImApiGatewayV1SystemMetadata;
+    /** Represents type of the message. */
+    type?: string;
 }

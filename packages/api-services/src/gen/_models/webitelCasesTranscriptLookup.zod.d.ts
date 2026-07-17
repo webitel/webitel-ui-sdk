@@ -6,7 +6,7 @@
  */
 import type { GeneralLookup } from './generalLookup.zod';
 export interface WebitelCasesTranscriptLookup {
-	file?: GeneralLookup;
-	id?: string;
-	locale?: string;
+    file?: GeneralLookup;
+    id?: string;
+    locale?: string;
 }

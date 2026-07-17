@@ -5,74 +5,74 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CatalogGetMembersParams = {
-	/**
-	 * Page number to return. **default**: 1.
-	 */
-	page?: number;
-	/**
-	 * Page records limit. **default**: 16.
-	 */
-	size?: number;
-	/**
-	 * Search term: peer(type;name)
-	 */
-	q?: string;
-	/**
-	 * Sort records by { fields } specification.
-	 */
-	sort?: string[];
-	/**
-	 * Fields [Q]uery to build result dataset record.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique chat member ID.
-	 */
-	id?: string[];
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	'via.id'?: string;
-	/**
-	 * Contact **type** provider.
-	 */
-	'via.type'?: string;
-	/**
-	 * Contact display **name**.
-	 */
-	'via.name'?: string;
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	'peer.id'?: string;
-	/**
-	 * Contact **type** provider.
-	 */
-	'peer.type'?: string;
-	/**
-	 * Contact display **name**.
-	 */
-	'peer.name'?: string;
-	/**
-	 * Since epochtime (milli).
-	 * **Match**: greater than ..
-	 */
-	'date.since'?: string;
-	/**
-	 * Until epochtime (milli).
-	 * **Match**: less or equal ..
-	 */
-	'date.until'?: string;
-	/**
-	 * Participants ONLY who are currently [not] connected to the chat.
-	 * ( left: ( 0 ? online : offline ) )
-	 */
-	online?: boolean;
-	/**
-	 * Participants ONLY who have [not] been connected to the chat.
-	 * ( join: ( 0 ? [request|abandoned] : connected ) )
-	 */
-	joined?: boolean;
+    /**
+     * Page number to return. **default**: 1.
+     */
+    page?: number;
+    /**
+     * Page records limit. **default**: 16.
+     */
+    size?: number;
+    /**
+     * Search term: peer(type;name)
+     */
+    q?: string;
+    /**
+     * Sort records by { fields } specification.
+     */
+    sort?: string[];
+    /**
+     * Fields [Q]uery to build result dataset record.
+     */
+    fields?: string[];
+    /**
+     * Set of unique chat member ID.
+     */
+    id?: string[];
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    'via.id'?: string;
+    /**
+     * Contact **type** provider.
+     */
+    'via.type'?: string;
+    /**
+     * Contact display **name**.
+     */
+    'via.name'?: string;
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    'peer.id'?: string;
+    /**
+     * Contact **type** provider.
+     */
+    'peer.type'?: string;
+    /**
+     * Contact display **name**.
+     */
+    'peer.name'?: string;
+    /**
+     * Since epochtime (milli).
+     * **Match**: greater than ..
+     */
+    'date.since'?: string;
+    /**
+     * Until epochtime (milli).
+     * **Match**: less or equal ..
+     */
+    'date.until'?: string;
+    /**
+     * Participants ONLY who are currently [not] connected to the chat.
+     * ( left: ( 0 ? online : offline ) )
+     */
+    online?: boolean;
+    /**
+     * Participants ONLY who have [not] been connected to the chat.
+     * ( join: ( 0 ? [request|abandoned] : connected ) )
+     */
+    joined?: boolean;
 };

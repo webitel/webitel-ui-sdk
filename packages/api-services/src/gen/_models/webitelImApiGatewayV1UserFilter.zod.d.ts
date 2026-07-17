@@ -4,10 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WebitelImApiGatewayV1UserFilter =
-	(typeof WebitelImApiGatewayV1UserFilter)[keyof typeof WebitelImApiGatewayV1UserFilter];
+export type WebitelImApiGatewayV1UserFilter = (typeof WebitelImApiGatewayV1UserFilter)[keyof typeof WebitelImApiGatewayV1UserFilter];
 export declare const WebitelImApiGatewayV1UserFilter: {
-	readonly All: 'ALL';
-	readonly Nobody: 'NOBODY';
-	readonly SameIssuer: 'SAME_ISSUER';
+    readonly All: "ALL";
+    readonly Nobody: "NOBODY";
+    readonly SameIssuer: "SAME_ISSUER";
 };

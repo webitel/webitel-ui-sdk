@@ -8,14 +8,14 @@
  * Timerange filter value.
  */
 export interface WebitelChatTimerange {
-	/**
-	 * Since epochtime (milli).
-	 * **Match**: greater than ..
-	 */
-	since?: string;
-	/**
-	 * Until epochtime (milli).
-	 * **Match**: less or equal ..
-	 */
-	until?: string;
+    /**
+     * Since epochtime (milli).
+     * **Match**: greater than ..
+     */
+    since?: string;
+    /**
+     * Until epochtime (milli).
+     * **Match**: less or equal ..
+     */
+    until?: string;
 }

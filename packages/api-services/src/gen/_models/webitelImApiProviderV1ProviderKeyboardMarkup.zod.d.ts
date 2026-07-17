@@ -6,5 +6,5 @@
  */
 import type { WebitelImApiProviderV1ProviderKeyboardRow } from './webitelImApiProviderV1ProviderKeyboardRow.zod';
 export interface WebitelImApiProviderV1ProviderKeyboardMarkup {
-	rows?: WebitelImApiProviderV1ProviderKeyboardRow[];
+    rows?: WebitelImApiProviderV1ProviderKeyboardRow[];
 }

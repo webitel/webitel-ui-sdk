@@ -9,10 +9,10 @@ import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
  * An input of the Contact's timezones.
  */
 export interface ContactsInputTimezone {
-	/** Unique ID of the latest version of an existing resource. */
-	etag: string;
-	/** Indicates whether this association must be default among others. */
-	primary?: boolean;
-	/** Timezone dictionary reference value associated. */
-	timezone?: WebitelContactsLookup;
+    /** Unique ID of the latest version of an existing resource. */
+    etag: string;
+    /** Indicates whether this association must be default among others. */
+    primary?: boolean;
+    /** Timezone dictionary reference value associated. */
+    timezone?: WebitelContactsLookup;
 }

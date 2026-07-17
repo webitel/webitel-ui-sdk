@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type Update2Params = {
-	/**
-	 * Source Fields to return into result.
-	 */
-	fields?: string[];
+    /**
+     * Source Fields to return into result.
+     */
+    fields?: string[];
 };

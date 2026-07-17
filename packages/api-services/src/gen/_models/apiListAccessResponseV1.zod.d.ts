@@ -6,7 +6,7 @@
  */
 import type { ApiAccessRule } from './apiAccessRule.zod';
 export interface ApiListAccessResponseV1 {
-	items?: ApiAccessRule[];
-	next?: boolean;
-	page?: number;
+    items?: ApiAccessRule[];
+    next?: boolean;
+    page?: number;
 }

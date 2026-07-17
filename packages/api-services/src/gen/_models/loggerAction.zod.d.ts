@@ -6,9 +6,9 @@
  */
 export type LoggerAction = (typeof LoggerAction)[keyof typeof LoggerAction];
 export declare const LoggerAction: {
-	readonly DefaultNoAction: 'default_no_action';
-	readonly Create: 'create';
-	readonly Update: 'update';
-	readonly Read: 'read';
-	readonly Delete: 'delete';
+    readonly DefaultNoAction: "default_no_action";
+    readonly Create: "create";
+    readonly Update: "update";
+    readonly Read: "read";
+    readonly Delete: "delete";
 };

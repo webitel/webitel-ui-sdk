@@ -6,7 +6,7 @@
  */
 import type { GoogleProtobufAny } from './googleProtobufAny.zod';
 export interface GoogleRpcStatus {
-	code?: number;
-	details?: GoogleProtobufAny[];
-	message?: string;
+    code?: number;
+    details?: GoogleProtobufAny[];
+    message?: string;
 }

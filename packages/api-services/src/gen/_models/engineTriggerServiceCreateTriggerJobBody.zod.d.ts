@@ -6,5 +6,5 @@
  */
 import type { EngineTriggerServiceCreateTriggerJobBodyVariables } from './engineTriggerServiceCreateTriggerJobBodyVariables.zod';
 export interface EngineTriggerServiceCreateTriggerJobBody {
-	variables?: EngineTriggerServiceCreateTriggerJobBodyVariables;
+    variables?: EngineTriggerServiceCreateTriggerJobBodyVariables;
 }

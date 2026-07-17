@@ -6,6 +6,6 @@
  */
 import type { EngineOutboundResourceViewGroup } from './engineOutboundResourceViewGroup.zod';
 export interface EngineListOutboundResourceGroup {
-	items?: EngineOutboundResourceViewGroup[];
-	next?: boolean;
+    items?: EngineOutboundResourceViewGroup[];
+    next?: boolean;
 }

@@ -4,11 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineHistoryFileJobHistoryFileJobState =
-	(typeof EngineHistoryFileJobHistoryFileJobState)[keyof typeof EngineHistoryFileJobHistoryFileJobState];
+export type EngineHistoryFileJobHistoryFileJobState = (typeof EngineHistoryFileJobHistoryFileJobState)[keyof typeof EngineHistoryFileJobHistoryFileJobState];
 export declare const EngineHistoryFileJobHistoryFileJobState: {
-	readonly Idle: 'idle';
-	readonly Active: 'active';
-	readonly Finished: 'finished';
-	readonly Error: 'error';
+    readonly Idle: "idle";
+    readonly Active: "active";
+    readonly Finished: "finished";
+    readonly Error: "error";
 };

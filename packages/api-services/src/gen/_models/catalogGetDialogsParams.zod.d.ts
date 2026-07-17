@@ -5,77 +5,77 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CatalogGetDialogsParams = {
-	/**
-	 * Page number to return. **default**: 1.
-	 */
-	page?: number;
-	/**
-	 * Page records limit. **default**: 16.
-	 */
-	size?: number;
-	/**
-	 * Search term: peer.name
-	 */
-	q?: string;
-	/**
-	 * Sort records by { fields } specification.
-	 */
-	sort?: string[];
-	/**
-	 * Fields [Q]uery to build result dataset record.
-	 */
-	fields?: string[];
-	/**
-	 * Set of unique chat IDentifier(s).
-	 * Accept: dialog -or- member ID.
-	 */
-	id?: string[];
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	'via.id'?: string;
-	/**
-	 * Contact **type** provider.
-	 */
-	'via.type'?: string;
-	/**
-	 * Contact display **name**.
-	 */
-	'via.name'?: string;
-	/**
-	 * Contact unique **ID**entifier.
-	 * Contact **type**-specific string.
-	 */
-	'peer.id'?: string;
-	/**
-	 * Contact **type** provider.
-	 */
-	'peer.type'?: string;
-	/**
-	 * Contact display **name**.
-	 */
-	'peer.name'?: string;
-	/**
-	 * Since epochtime (milli).
-	 * **Match**: greater than ..
-	 */
-	'date.since'?: string;
-	/**
-	 * Until epochtime (milli).
-	 * **Match**: less or equal ..
-	 */
-	'date.until'?: string;
-	/**
-	 * Dialogs ONLY that are currently [not] active( closed: ? ).
-	 */
-	online?: boolean;
-	/**
-	 * Includes ONLY those chat dialogs
-	 * whose member channel(s) contain
-	 * a specified set of variables.
-	 *
-	 * 10
-	 */
-	groupString?: string;
+    /**
+     * Page number to return. **default**: 1.
+     */
+    page?: number;
+    /**
+     * Page records limit. **default**: 16.
+     */
+    size?: number;
+    /**
+     * Search term: peer.name
+     */
+    q?: string;
+    /**
+     * Sort records by { fields } specification.
+     */
+    sort?: string[];
+    /**
+     * Fields [Q]uery to build result dataset record.
+     */
+    fields?: string[];
+    /**
+     * Set of unique chat IDentifier(s).
+     * Accept: dialog -or- member ID.
+     */
+    id?: string[];
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    'via.id'?: string;
+    /**
+     * Contact **type** provider.
+     */
+    'via.type'?: string;
+    /**
+     * Contact display **name**.
+     */
+    'via.name'?: string;
+    /**
+     * Contact unique **ID**entifier.
+     * Contact **type**-specific string.
+     */
+    'peer.id'?: string;
+    /**
+     * Contact **type** provider.
+     */
+    'peer.type'?: string;
+    /**
+     * Contact display **name**.
+     */
+    'peer.name'?: string;
+    /**
+     * Since epochtime (milli).
+     * **Match**: greater than ..
+     */
+    'date.since'?: string;
+    /**
+     * Until epochtime (milli).
+     * **Match**: less or equal ..
+     */
+    'date.until'?: string;
+    /**
+     * Dialogs ONLY that are currently [not] active( closed: ? ).
+     */
+    online?: boolean;
+    /**
+     * Includes ONLY those chat dialogs
+     * whose member channel(s) contain
+     * a specified set of variables.
+     *
+     * 10
+     */
+    groupString?: string;
 };
