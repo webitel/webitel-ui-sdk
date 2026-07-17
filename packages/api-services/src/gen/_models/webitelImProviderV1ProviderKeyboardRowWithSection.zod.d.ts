@@ -9,6 +9,6 @@ import type { WebitelImProviderV1ProviderKeyboardButton } from './webitelImProvi
  * ProviderKeyboardRowWithSection is a titled group of buttons.
  */
 export interface WebitelImProviderV1ProviderKeyboardRowWithSection {
-    buttons?: WebitelImProviderV1ProviderKeyboardButton[];
-    section?: string;
+	buttons?: WebitelImProviderV1ProviderKeyboardButton[];
+	section?: string;
 }

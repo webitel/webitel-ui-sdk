@@ -6,9 +6,9 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineChatPlan {
-    description?: string;
-    enabled?: boolean;
-    id?: number;
-    name?: string;
-    schema?: EngineLookup;
+	description?: string;
+	enabled?: boolean;
+	id?: number;
+	name?: string;
+	schema?: EngineLookup;
 }

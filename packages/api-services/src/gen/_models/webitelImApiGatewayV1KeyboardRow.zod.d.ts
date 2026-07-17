@@ -9,9 +9,9 @@ import type { WebitelImApiGatewayV1KeyboardButton } from './webitelImApiGatewayV
  * A standard horizontal row of interactive buttons without a section header.
  */
 export interface WebitelImApiGatewayV1KeyboardRow {
-    /**
-     * Horizontal collection of buttons.
-     * Capped at 10 to ensure UI responsiveness and prevent overflow.
-     */
-    buttons?: WebitelImApiGatewayV1KeyboardButton[];
+	/**
+	 * Horizontal collection of buttons.
+	 * Capped at 10 to ensure UI responsiveness and prevent overflow.
+	 */
+	buttons?: WebitelImApiGatewayV1KeyboardButton[];
 }

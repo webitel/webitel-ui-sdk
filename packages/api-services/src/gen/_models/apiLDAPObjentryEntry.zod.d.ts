@@ -8,5 +8,5 @@
  * map<string, string> entry = 1;
  */
 export type ApiLDAPObjentryEntry = {
-    [key: string]: unknown;
+	[key: string]: unknown;
 };

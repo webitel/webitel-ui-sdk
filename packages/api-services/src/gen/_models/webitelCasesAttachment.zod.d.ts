@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelCasesAttachment {
-    id?: string;
-    mime?: string;
-    name?: string;
-    size?: string;
-    url?: string;
+	id?: string;
+	mime?: string;
+	name?: string;
+	size?: string;
+	url?: string;
 }

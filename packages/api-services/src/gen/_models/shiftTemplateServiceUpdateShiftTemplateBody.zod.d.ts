@@ -6,5 +6,5 @@
  */
 import type { ShiftTemplateServiceUpdateShiftTemplateBodyItem } from './shiftTemplateServiceUpdateShiftTemplateBodyItem.zod';
 export type ShiftTemplateServiceUpdateShiftTemplateBody = {
-    item?: ShiftTemplateServiceUpdateShiftTemplateBodyItem;
+	item?: ShiftTemplateServiceUpdateShiftTemplateBodyItem;
 };

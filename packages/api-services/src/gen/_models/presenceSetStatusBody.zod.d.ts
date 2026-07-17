@@ -6,7 +6,7 @@
  */
 import type { PresenceSetStatusBodyPublish } from './presenceSetStatusBodyPublish.zod';
 export interface PresenceSetStatusBody {
-    fields?: string[];
-    /** BODY: partial modifications */
-    publish?: PresenceSetStatusBodyPublish;
+	fields?: string[];
+	/** BODY: partial modifications */
+	publish?: PresenceSetStatusBodyPublish;
 }

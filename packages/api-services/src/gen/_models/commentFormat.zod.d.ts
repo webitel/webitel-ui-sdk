@@ -12,15 +12,15 @@ import type { FormatMonospace } from './formatMonospace.zod';
 import type { FormatStrikethrough } from './formatStrikethrough.zod';
 import type { FormatUnderline } from './formatUnderline.zod';
 export interface CommentFormat {
-    bold?: FormatBold;
-    codeblock?: FormatCodeblock;
-    italic?: FormatItalic;
-    /** Length text runes count. */
-    length?: number;
-    link?: FormatLink;
-    monospace?: FormatMonospace;
-    /** Offset text runes count. */
-    offset?: number;
-    strikethrough?: FormatStrikethrough;
-    underline?: FormatUnderline;
+	bold?: FormatBold;
+	codeblock?: FormatCodeblock;
+	italic?: FormatItalic;
+	/** Length text runes count. */
+	length?: number;
+	link?: FormatLink;
+	monospace?: FormatMonospace;
+	/** Offset text runes count. */
+	offset?: number;
+	strikethrough?: FormatStrikethrough;
+	underline?: FormatUnderline;
 }

@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -155,9 +155,9 @@ export default {
 		operations: 'Operaciones',
 		rbacDefault: 'Acceso basado en registros predeterminado',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Prohibido',
-			[AccessMode.ALLOW]: 'Permitir',
-			[AccessMode.MANAGE]: 'Permitir con delegación',
+			[AccessMode.Forbidden]: 'Prohibido',
+			[AccessMode.Allow]: 'Permitir',
+			[AccessMode.Manage]: 'Permitir con delegación',
 		},
 	},
 	objects: {

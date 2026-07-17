@@ -7,6 +7,6 @@
 import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity.zod';
 import type { WebitelImApiGatewayV1ThreadRole } from './webitelImApiGatewayV1ThreadRole.zod';
 export interface WebitelImApiGatewayV1ThreadManagementTransferBody {
-    contact?: WebitelImApiGatewayV1PeerIdentity;
-    role?: WebitelImApiGatewayV1ThreadRole;
+	contact?: WebitelImApiGatewayV1PeerIdentity;
+	role?: WebitelImApiGatewayV1ThreadRole;
 }

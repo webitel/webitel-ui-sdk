@@ -6,6 +6,6 @@
  */
 import type { GoogleRpcStatus } from './googleRpcStatus.zod';
 export interface WebitelChatBroadcastError {
-    error?: GoogleRpcStatus;
-    peerId?: string;
+	error?: GoogleRpcStatus;
+	peerId?: string;
 }

@@ -6,5 +6,5 @@
  */
 import type { DataIndex } from './dataIndex.zod';
 export type DataInputExtensionIndices = {
-    [key: string]: DataIndex;
+	[key: string]: DataIndex;
 };

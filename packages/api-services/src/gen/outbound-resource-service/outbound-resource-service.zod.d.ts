@@ -8,440 +8,724 @@ import * as zod from 'zod';
 /**
  * @summary List of OutboundResource
  */
-export declare const SearchOutboundResourceQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-}, zod.z.core.$strip>;
-export declare const SearchOutboundResourceResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        parameters: zod.ZodOptional<zod.ZodObject<{
-            cidType: zod.ZodOptional<zod.ZodString>;
-            ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-        gateway: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        id: zod.ZodOptional<zod.ZodString>;
-        lastErrorAt: zod.ZodOptional<zod.ZodString>;
-        lastErrorId: zod.ZodOptional<zod.ZodString>;
-        limit: zod.ZodOptional<zod.ZodNumber>;
-        maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-        number: zod.ZodOptional<zod.ZodString>;
-        patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-        reserve: zod.ZodOptional<zod.ZodBoolean>;
-        rps: zod.ZodOptional<zod.ZodNumber>;
-        successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchOutboundResourceQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchOutboundResourceResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						parameters: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									cidType: zod.ZodOptional<zod.ZodString>;
+									ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						createdBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						description: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+						gateway: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						id: zod.ZodOptional<zod.ZodString>;
+						lastErrorAt: zod.ZodOptional<zod.ZodString>;
+						lastErrorId: zod.ZodOptional<zod.ZodString>;
+						limit: zod.ZodOptional<zod.ZodNumber>;
+						maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+						number: zod.ZodOptional<zod.ZodString>;
+						patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+						reserve: zod.ZodOptional<zod.ZodBoolean>;
+						rps: zod.ZodOptional<zod.ZodNumber>;
+						successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+						updatedAt: zod.ZodOptional<zod.ZodString>;
+						updatedBy: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						variables: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create OutboundResource
  */
-export declare const CreateOutboundResourceBody: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const CreateOutboundResourceResponse: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    lastErrorAt: zod.ZodOptional<zod.ZodString>;
-    lastErrorId: zod.ZodOptional<zod.ZodString>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const CreateOutboundResourceBody: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateOutboundResourceResponse: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		lastErrorAt: zod.ZodOptional<zod.ZodString>;
+		lastErrorId: zod.ZodOptional<zod.ZodString>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove OutboundResource
  */
-export declare const DeleteOutboundResourceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceResponse: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    lastErrorAt: zod.ZodOptional<zod.ZodString>;
-    lastErrorId: zod.ZodOptional<zod.ZodString>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const DeleteOutboundResourceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceResponse: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		lastErrorAt: zod.ZodOptional<zod.ZodString>;
+		lastErrorId: zod.ZodOptional<zod.ZodString>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary OutboundResource item
  */
-export declare const ReadOutboundResourceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadOutboundResourceQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadOutboundResourceResponse: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    lastErrorAt: zod.ZodOptional<zod.ZodString>;
-    lastErrorId: zod.ZodOptional<zod.ZodString>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const ReadOutboundResourceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadOutboundResourceQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadOutboundResourceResponse: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		lastErrorAt: zod.ZodOptional<zod.ZodString>;
+		lastErrorId: zod.ZodOptional<zod.ZodString>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Patch OutboundResource
  */
-export declare const PatchOutboundResourceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const PatchOutboundResourceBody: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const PatchOutboundResourceResponse: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    lastErrorAt: zod.ZodOptional<zod.ZodString>;
-    lastErrorId: zod.ZodOptional<zod.ZodString>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const PatchOutboundResourceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchOutboundResourceBody: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchOutboundResourceResponse: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		lastErrorAt: zod.ZodOptional<zod.ZodString>;
+		lastErrorId: zod.ZodOptional<zod.ZodString>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update OutboundResource
  */
-export declare const UpdateOutboundResourceParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateOutboundResourceBody: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const UpdateOutboundResourceResponse: zod.ZodObject<{
-    parameters: zod.ZodOptional<zod.ZodObject<{
-        cidType: zod.ZodOptional<zod.ZodString>;
-        ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    description: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
-    gateway: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    lastErrorAt: zod.ZodOptional<zod.ZodString>;
-    lastErrorId: zod.ZodOptional<zod.ZodString>;
-    limit: zod.ZodOptional<zod.ZodNumber>;
-    maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    number: zod.ZodOptional<zod.ZodString>;
-    patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    reserve: zod.ZodOptional<zod.ZodBoolean>;
-    rps: zod.ZodOptional<zod.ZodNumber>;
-    successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const UpdateOutboundResourceParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateOutboundResourceBody: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateOutboundResourceResponse: zod.ZodObject<
+	{
+		parameters: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					cidType: zod.ZodOptional<zod.ZodString>;
+					ignoreEarlyMedia: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		createdBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		description: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		errorIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		failureDialDelay: zod.ZodOptional<zod.ZodNumber>;
+		gateway: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		id: zod.ZodOptional<zod.ZodString>;
+		lastErrorAt: zod.ZodOptional<zod.ZodString>;
+		lastErrorId: zod.ZodOptional<zod.ZodString>;
+		limit: zod.ZodOptional<zod.ZodNumber>;
+		maxSuccessivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		number: zod.ZodOptional<zod.ZodString>;
+		patterns: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		reserve: zod.ZodOptional<zod.ZodBoolean>;
+		rps: zod.ZodOptional<zod.ZodNumber>;
+		successivelyErrors: zod.ZodOptional<zod.ZodNumber>;
+		updatedAt: zod.ZodOptional<zod.ZodString>;
+		updatedBy: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove ResourceDisplays
  */
-export declare const DeleteOutboundResourceDisplaysParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceDisplaysQueryParams: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceDisplaysResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const DeleteOutboundResourceDisplaysParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceDisplaysQueryParams: zod.ZodObject<
+	{
+		items: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceDisplaysResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;
 /**
  * @summary List of ResourceDisplay
  */
-export declare const SearchOutboundResourceDisplayParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SearchOutboundResourceDisplayQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-}, zod.z.core.$strip>;
-export declare const SearchOutboundResourceDisplayResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        display: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchOutboundResourceDisplayParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchOutboundResourceDisplayQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchOutboundResourceDisplayResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						display: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create CreateOutboundResourceDisplay
  */
-export declare const CreateOutboundResourceDisplayParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CreateOutboundResourceDisplayBody: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const CreateOutboundResourceDisplayResponse: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const CreateOutboundResourceDisplayParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateOutboundResourceDisplayBody: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateOutboundResourceDisplayResponse: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create CreateOutboundResourceDisplay
  */
-export declare const CreateOutboundResourceDisplayBulkParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const CreateOutboundResourceDisplayBulkBody: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        display: zod.ZodOptional<zod.ZodString>;
-        domainId: zod.ZodOptional<zod.ZodString>;
-        resourceId: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const CreateOutboundResourceDisplayBulkResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const CreateOutboundResourceDisplayBulkParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateOutboundResourceDisplayBulkBody: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						display: zod.ZodOptional<zod.ZodString>;
+						domainId: zod.ZodOptional<zod.ZodString>;
+						resourceId: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateOutboundResourceDisplayBulkResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove ResourceDisplay
  */
-export declare const DeleteOutboundResourceDisplayParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceDisplayQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteOutboundResourceDisplayResponse: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const DeleteOutboundResourceDisplayParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceDisplayQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteOutboundResourceDisplayResponse: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary ResourceDisplay item
  */
-export declare const ReadOutboundResourceDisplayParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadOutboundResourceDisplayQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadOutboundResourceDisplayResponse: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const ReadOutboundResourceDisplayParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadOutboundResourceDisplayQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadOutboundResourceDisplayResponse: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update ResourceDisplay
  */
-export declare const UpdateOutboundResourceDisplayParams: zod.ZodObject<{
-    resource_id: zod.ZodString;
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateOutboundResourceDisplayBody: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UpdateOutboundResourceDisplayResponse: zod.ZodObject<{
-    display: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const UpdateOutboundResourceDisplayParams: zod.ZodObject<
+	{
+		resource_id: zod.ZodString;
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateOutboundResourceDisplayBody: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateOutboundResourceDisplayResponse: zod.ZodObject<
+	{
+		display: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;

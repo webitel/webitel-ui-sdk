@@ -6,6 +6,6 @@
  */
 import type { EngineCreateMemberBulkItem } from './engineCreateMemberBulkItem.zod';
 export interface EngineMemberServiceCreateMemberBulkBody {
-    fileName?: string;
-    items?: EngineCreateMemberBulkItem[];
+	fileName?: string;
+	items?: EngineCreateMemberBulkItem[];
 }

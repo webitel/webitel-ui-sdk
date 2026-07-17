@@ -4,11 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WebitelChatServerCloseConversationCause = (typeof WebitelChatServerCloseConversationCause)[keyof typeof WebitelChatServerCloseConversationCause];
+export type WebitelChatServerCloseConversationCause =
+	(typeof WebitelChatServerCloseConversationCause)[keyof typeof WebitelChatServerCloseConversationCause];
 export declare const WebitelChatServerCloseConversationCause: {
-    readonly NoCause: "no_cause";
-    readonly FlowEnd: "flow_end";
-    readonly ClientLeave: "client_leave";
-    readonly FlowErr: "flow_err";
-    readonly BroadcastEnd: "broadcast_end";
+	readonly NoCause: 'no_cause';
+	readonly FlowEnd: 'flow_end';
+	readonly ClientLeave: 'client_leave';
+	readonly FlowErr: 'flow_err';
+	readonly BroadcastEnd: 'broadcast_end';
 };

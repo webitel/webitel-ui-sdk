@@ -8,11 +8,11 @@ import type { WebitelChatChatMessage } from './webitelChatChatMessage.zod';
 import type { WebitelChatChatPeer } from './webitelChatChatPeer.zod';
 import type { WebitelChatContactChat } from './webitelChatContactChat.zod';
 export interface WebitelChatGetContactChatHistoryResponse {
-    chats?: WebitelChatContactChat[];
-    /** Dataset page of messages. */
-    messages?: WebitelChatChatMessage[];
-    next?: boolean;
-    /** Dataset page number. */
-    page?: number;
-    peers?: WebitelChatChatPeer[];
+	chats?: WebitelChatContactChat[];
+	/** Dataset page of messages. */
+	messages?: WebitelChatChatMessage[];
+	next?: boolean;
+	/** Dataset page number. */
+	page?: number;
+	peers?: WebitelChatChatPeer[];
 }

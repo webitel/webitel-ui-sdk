@@ -6,6 +6,6 @@
  */
 import type { EngineRoutingSchemaTag } from './engineRoutingSchemaTag.zod';
 export interface EngineListRoutingSchemaTags {
-    items?: EngineRoutingSchemaTag[];
-    next?: boolean;
+	items?: EngineRoutingSchemaTag[];
+	next?: boolean;
 }

@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -159,9 +159,9 @@ export default {
 		operations: 'Các thao tác',
 		rbacDefault: 'Mặc định truy cập dựa trên bản ghi',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Cấm',
-			[AccessMode.ALLOW]: 'Cho phép',
-			[AccessMode.MANAGE]: 'Cho phép với ủy quyền',
+			[AccessMode.Forbidden]: 'Cấm',
+			[AccessMode.Allow]: 'Cho phép',
+			[AccessMode.Manage]: 'Cho phép với ủy quyền',
 		},
 	},
 	// describes Webitel system entities

@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCreateOutboundResourceDisplayRequest {
-    display?: string;
-    domainId?: string;
-    resourceId?: string;
+	display?: string;
+	domainId?: string;
+	resourceId?: string;
 }

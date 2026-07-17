@@ -8,14 +8,14 @@ import type { WfmAgentScheduleShiftPause } from './wfmAgentScheduleShiftPause.zo
 import type { WfmAgentScheduleShiftSkill } from './wfmAgentScheduleShiftSkill.zod';
 import type { WfmLookupEntity } from './wfmLookupEntity.zod';
 export interface WfmAgentScheduleShift {
-    createdAt?: string;
-    createdBy?: WfmLookupEntity;
-    domainId?: string;
-    end?: string;
-    id?: string;
-    pauses?: WfmAgentScheduleShiftPause[];
-    skills?: WfmAgentScheduleShiftSkill[];
-    start?: string;
-    updatedAt?: string;
-    updatedBy?: WfmLookupEntity;
+	createdAt?: string;
+	createdBy?: WfmLookupEntity;
+	domainId?: string;
+	end?: string;
+	id?: string;
+	pauses?: WfmAgentScheduleShiftPause[];
+	skills?: WfmAgentScheduleShiftSkill[];
+	start?: string;
+	updatedAt?: string;
+	updatedBy?: WfmLookupEntity;
 }

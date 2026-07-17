@@ -6,8 +6,8 @@
  */
 import type { WebitelChatServerChatVariablesResponseVariables } from './webitelChatServerChatVariablesResponseVariables.zod';
 export interface WebitelChatServerChatVariablesResponse {
-    /** Unique Chat Channel IDentifier. */
-    channelId?: string;
-    /** Result Chat Channel's Variables SET. */
-    variables?: WebitelChatServerChatVariablesResponseVariables;
+	/** Unique Chat Channel IDentifier. */
+	channelId?: string;
+	/** Result Chat Channel's Variables SET. */
+	variables?: WebitelChatServerChatVariablesResponseVariables;
 }

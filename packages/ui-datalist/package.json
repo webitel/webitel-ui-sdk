@@ -91,6 +91,10 @@
 		"./card": {
 			"types": "./types/modules/card/index.d.ts",
 			"import": "./src/modules/card/index.ts"
+		},
+		"./permissions-page": {
+			"types": "./types/modules/permissions-page/index.d.ts",
+			"import": "./src/modules/permissions-page/index.ts"
 		}
 	}
 }

@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1CreateWABAGateRequest {
-    accessToken?: string;
-    businessId?: string;
-    metaAppId?: string;
-    phoneNumber?: string;
-    phoneNumberId?: string;
+	accessToken?: string;
+	businessId?: string;
+	metaAppId?: string;
+	phoneNumber?: string;
+	phoneNumberId?: string;
 }

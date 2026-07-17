@@ -5,35 +5,35 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ContactsChatCatalogGetContactChatHistory2Params = {
-    /**
-     * Messages ONLY starting from the specified message ID
-     */
-    'offset.id'?: string;
-    /**
-     * Messages ONLY been sent before the specified epochtime(milli).
-     */
-    'offset.date'?: string;
-    /**
-     * Number of messages to return.
-     */
-    size?: number;
-    page?: number;
-    /**
-     * Search term: message.text
-     */
-    q?: string;
-    /**
-     * Fields to return into result.
-     */
-    fields?: string[];
-    /**
-     * Unique chat dialog
-     */
-    chatId?: string;
-    /**
-     * Includes the history of ONLY those dialogs
-     * whose member channel(s) contain
-     * a specified set of variables.
-     */
-    groupStringString?: string;
+	/**
+	 * Messages ONLY starting from the specified message ID
+	 */
+	'offset.id'?: string;
+	/**
+	 * Messages ONLY been sent before the specified epochtime(milli).
+	 */
+	'offset.date'?: string;
+	/**
+	 * Number of messages to return.
+	 */
+	size?: number;
+	page?: number;
+	/**
+	 * Search term: message.text
+	 */
+	q?: string;
+	/**
+	 * Fields to return into result.
+	 */
+	fields?: string[];
+	/**
+	 * Unique chat dialog
+	 */
+	chatId?: string;
+	/**
+	 * Includes the history of ONLY those dialogs
+	 * whose member channel(s) contain
+	 * a specified set of variables.
+	 */
+	groupStringString?: string;
 };

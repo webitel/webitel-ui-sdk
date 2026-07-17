@@ -4,8 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ImportCSVRequestAction = (typeof ImportCSVRequestAction)[keyof typeof ImportCSVRequestAction];
+export type ImportCSVRequestAction =
+	(typeof ImportCSVRequestAction)[keyof typeof ImportCSVRequestAction];
 export declare const ImportCSVRequestAction: {
-    readonly Continue: "continue";
-    readonly Break: "break";
+	readonly Continue: 'continue';
+	readonly Break: 'break';
 };

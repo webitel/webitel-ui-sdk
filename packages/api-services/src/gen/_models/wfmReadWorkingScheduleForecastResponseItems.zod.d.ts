@@ -6,5 +6,5 @@
  */
 import type { WfmWorkingScheduleForecast } from './wfmWorkingScheduleForecast.zod';
 export type WfmReadWorkingScheduleForecastResponseItems = {
-    [key: string]: WfmWorkingScheduleForecast;
+	[key: string]: WfmWorkingScheduleForecast;
 };

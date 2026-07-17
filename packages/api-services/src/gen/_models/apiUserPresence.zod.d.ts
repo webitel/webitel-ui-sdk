@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiUserPresence {
-    expires?: number;
-    id?: string;
-    note?: string;
-    status?: string;
-    timestamp?: string;
+	expires?: number;
+	id?: string;
+	note?: string;
+	status?: string;
+	timestamp?: string;
 }

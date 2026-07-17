@@ -6,7 +6,7 @@
  */
 import type { ApiOrganization } from './apiOrganization.zod';
 export interface ApiCreateDomainRequest {
-    organization?: ApiOrganization;
-    password?: string;
-    superuser?: string;
+	organization?: ApiOrganization;
+	password?: string;
+	superuser?: string;
 }

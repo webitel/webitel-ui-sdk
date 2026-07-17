@@ -1,137 +1,38 @@
 <template>
-  <section
-    v-if="access.read"
-    class="table-page"
-  >
-    <header class="table-title">
-      <h3 class="table-title__title">
-        {{ t('access.operations') }}
-      </h3>
-      <div class="table-title__actions-wrap">
-        <role-popup
-          v-if="props.access.add"
-          :namespace="tableNamespace"
-        />
-        <wt-action-bar
-          :include="[IconAction.REFRESH]"
-          @click:refresh="loadData"
-        />
-      </div>
-    </header>
-
-    <div class="table-section__table-wrapper">
-      <wt-empty
-        v-show="showEmpty"
-        :image="imageEmpty"
-        :text="textEmpty"
-      />
-
-      <wt-loader v-show="isLoading" />
-
-      <div
-        v-show="dataList.length && !isLoading"
-        class="table-section__visible-scroll-wrapper"
-      >
-        <wt-table
-          :data="localizedDataList"
-          :grid-actions="access.edit"
-          :headers="headers"
-          :selectable="false"
-          sortable
-          @sort="sort"
-        >
-          <template #grantee="{ item }">
-            <role-column :role="item.grantee" />
-          </template>
-
-          <template #read="{ item }">
-            <wt-single-select
-              :show-clear="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :model-value="item.access.r"
-              @update:model-value="changeAccessMode({ item, ruleName: 'r', mode: $event })"
-            />
-          </template>
-
-          <template #edit="{ item }">
-            <wt-single-select
-              :show-clear="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :model-value="item.access.w"
-              @update:model-value="changeAccessMode({ item, ruleName: 'w', mode: $event })"
-            />
-          </template>
-
-          <template #delete="{ item }">
-            <wt-single-select
-              :show-clear="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :model-value="item.access.d"
-              @update:model-value="changeAccessMode({ item, ruleName: 'd', mode: $event })"
-            />
-          </template>
-          <template #actions="{ item }">
-            <wt-icon-action
-              action="delete"
-              @click="
-                changeAccessMode({
-                  item,
-                  ruleName: 'r',
-                  mode: { id: AccessMode.FORBIDDEN },
-                })
-              "
-            />
-          </template>
-        </wt-table>
-      </div>
+  <permissions-tab-content v-bind="tabContentProps">
+    <template #pagination>
       <filter-pagination
         :namespace="filtersNamespace"
         :next="isNext"
       />
-    </div>
-  </section>
+    </template>
+  </permissions-tab-content>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onUnmounted } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
-
-import IconAction from '../../../enums/IconAction/IconAction.enum.js';
-import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
-import { useTableStore } from '../../../store/new/index.js';
+import { useTableStore } from '../../../store/new';
 import FilterPagination from '../../Filters/components/filter-pagination.vue';
-import { useTableFilters } from '../../Filters/composables/useTableFilters.js';
-import RoleColumn from '../_internals/components/permissions-role-row.vue';
-import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
-import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
+import { useTableFilters } from '../../Filters/composables/useTableFilters';
+import {
+	DEFAULT_PERMISSIONS_USER_ACCESS,
+	type PermissionsUserAccess,
+} from '../types/PermissionsUserAccess';
+import PermissionsTabContent from './_internal/permissions-tab-content.vue';
 
-const props = defineProps({
-	/**
-	 * Namespace of the parent card store
-	 */
-	namespace: {
-		type: String,
-		required: true,
+const props = withDefaults(
+	defineProps<{
+		/** Namespace of the parent card store */
+		namespace: string;
+		/** Access to the component actions, related to permissions */
+		access: PermissionsUserAccess;
+	}>(),
+	{
+		access: () => DEFAULT_PERMISSIONS_USER_ACCESS,
 	},
-	/**
-	 * Access to the component actions, related to permissions
-	 */
-	access: {
-		type: Object,
-		default: () => ({
-			read: true,
-			add: true,
-			edit: true,
-			delete: true,
-		}),
-	},
-});
+);
 
-const { t } = useI18n();
 const store = useStore();
 
 const {
@@ -147,23 +48,6 @@ const {
 	sort,
 	onFilterEvent,
 } = useTableStore(`${props.namespace}/permissions`);
-
-const localizedDataList = computed(() => {
-	return dataList.value.map((item) => {
-		const access = Object.keys(item.access).reduce((acc, rule) => {
-			acc[rule] = {
-				...item.access[rule],
-				name: t(`access.accessMode.${item.access[rule].id}`),
-			};
-			return acc;
-		}, {});
-
-		return {
-			...item,
-			access,
-		};
-	});
-});
 
 const {
 	namespace: filtersNamespace,
@@ -186,27 +70,26 @@ onUnmounted(() => {
 	resetFilters();
 });
 
-const {
-	showEmpty,
-	image: imageEmpty,
-	text: textEmpty,
-} = useTableEmpty({
-	dataList,
-	error,
-	isLoading,
-});
-
-const accessOptions = computed(() => {
-	return Object.values(AccessMode).map((mode) => ({
-		id: mode,
-		name: t(`access.accessMode.${mode}`),
-	}));
-});
-
 const changeAccessMode = (payload) =>
 	store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
-</script>
 
-<style lang="scss" scoped>
-@use '../../../css/pages/table-page';
-</style>
+const addRolePermissions = (role) =>
+	store.dispatch(`${tableNamespace}/ADD_ROLE_PERMISSIONS`, role);
+
+const existingGranteeIds = computed(() =>
+	dataList.value.map((item) => item.grantee.id),
+);
+
+const tabContentProps = computed(() => ({
+	dataList: dataList.value,
+	isLoading: isLoading.value,
+	headers: headers.value,
+	error: error.value,
+	refresh: loadData,
+	sort,
+	changeAccessMode,
+	existingGranteeIds: existingGranteeIds.value,
+	addRolePermissions,
+	access: props.access,
+}));
+</script>

@@ -1,3 +1,3 @@
-import { createObjectPermissionsStoreModule } from '../_internals/store/helpers/createObjectPermissionsStoreModule.js';
+import { createObjectPermissionsStoreModule } from './createObjectPermissionsStoreModule';
 
 export { createObjectPermissionsStoreModule };

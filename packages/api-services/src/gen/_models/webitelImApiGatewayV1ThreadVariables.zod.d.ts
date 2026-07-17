@@ -9,11 +9,11 @@ import type { WebitelImApiGatewayV1ThreadVariablesVariables } from './webitelImA
  * ThreadVariables contains all variables associated with a thread.
  */
 export interface WebitelImApiGatewayV1ThreadVariables {
-    /** Unique identifier for the thread. */
-    threadId?: string;
-    /**
-     * Key-value map of variables.
-     * Key is the variable name, value contains data and metadata.
-     */
-    variables?: WebitelImApiGatewayV1ThreadVariablesVariables;
+	/** Unique identifier for the thread. */
+	threadId?: string;
+	/**
+	 * Key-value map of variables.
+	 * Key is the variable name, value contains data and metadata.
+	 */
+	variables?: WebitelImApiGatewayV1ThreadVariablesVariables;
 }

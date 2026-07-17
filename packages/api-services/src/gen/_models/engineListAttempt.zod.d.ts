@@ -6,6 +6,6 @@
  */
 import type { EngineAttempt } from './engineAttempt.zod';
 export interface EngineListAttempt {
-    items?: EngineAttempt[];
-    next?: boolean;
+	items?: EngineAttempt[];
+	next?: boolean;
 }

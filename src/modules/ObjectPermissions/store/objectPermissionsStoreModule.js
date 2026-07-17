@@ -1,8 +1,8 @@
 import deepCopy from 'deep-copy';
 
-import { AccessMode } from '../../enums/AccessMode.enum.js';
-import generateFilters from '../../modules/filters/store/filters.store.js';
-import headers from './headers.js';
+import { AccessMode } from '../enums/AccessMode.enum';
+import { headers } from '../headers/headers';
+import generateFilters from '../modules/filters/store/filters.store';
 
 const state = {
 	headers,
@@ -27,13 +27,13 @@ const actions = {
           ww |  w    | -
      */
 		switch (mode.id) {
-			case AccessMode.FORBIDDEN:
+			case AccessMode.Forbidden:
 				want = ruleName;
 				break;
-			case AccessMode.ALLOW:
+			case AccessMode.Allow:
 				want = have.rule || ruleName;
 				break;
-			case AccessMode.MANAGE:
+			case AccessMode.Manage:
 				want = `${ruleName}${ruleName}`;
 				break;
 			default:
@@ -55,7 +55,6 @@ const actions = {
 		}
 	},
 	ADD_ROLE_PERMISSIONS: async (context, role) => {
-		console.info(role);
 		const changes = [
 			{
 				grantee: +role.id,

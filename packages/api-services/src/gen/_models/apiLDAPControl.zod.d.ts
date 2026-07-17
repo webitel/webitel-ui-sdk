@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiLDAPControl {
-    controlType?: string;
-    controlValue?: string;
-    criticality?: boolean;
+	controlType?: string;
+	controlValue?: string;
+	criticality?: boolean;
 }

@@ -6,13 +6,13 @@
  */
 import type { EngineCreateCallRequestCallSettingsVariables } from './engineCreateCallRequestCallSettingsVariables.zod';
 export interface EngineCreateCallRequestCallSettings {
-    cancelDistribute?: boolean;
-    contactId?: string;
-    disableAutoAnswer?: boolean;
-    disableStun?: boolean;
-    display?: string;
-    hideNumber?: boolean;
-    isOnline?: boolean;
-    timeout?: number;
-    variables?: EngineCreateCallRequestCallSettingsVariables;
+	cancelDistribute?: boolean;
+	contactId?: string;
+	disableAutoAnswer?: boolean;
+	disableStun?: boolean;
+	display?: string;
+	hideNumber?: boolean;
+	isOnline?: boolean;
+	timeout?: number;
+	variables?: EngineCreateCallRequestCallSettingsVariables;
 }

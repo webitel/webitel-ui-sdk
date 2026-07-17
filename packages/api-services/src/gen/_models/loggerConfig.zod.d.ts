@@ -6,13 +6,13 @@
  */
 import type { LoggerLookup } from './loggerLookup.zod';
 export interface LoggerConfig {
-    daysToStore?: number;
-    description?: string;
-    enabled?: boolean;
-    id?: number;
-    logsCount?: string;
-    logsSize?: string;
-    object?: LoggerLookup;
-    period?: number;
-    storage?: LoggerLookup;
+	daysToStore?: number;
+	description?: string;
+	enabled?: boolean;
+	id?: number;
+	logsCount?: string;
+	logsSize?: string;
+	object?: LoggerLookup;
+	period?: number;
+	storage?: LoggerLookup;
 }

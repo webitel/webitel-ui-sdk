@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WfmWorkingScheduleForecastForecast {
-    agents?: string;
-    hour?: string;
+	agents?: string;
+	hour?: string;
 }

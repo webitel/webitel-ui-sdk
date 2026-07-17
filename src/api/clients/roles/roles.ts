@@ -63,9 +63,11 @@ const getRoleList = async (params) => {
 
 	try {
 		const response = await rolesApiFactory.searchRoles(
-			[
-				id,
-			],
+			id
+				? [
+						id,
+					]
+				: null,
 			name,
 			userId,
 			userName,

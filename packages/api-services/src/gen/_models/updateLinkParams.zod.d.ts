@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateLinkParams = {
-    /**
-     * on return
-     */
-    fields?: string[];
+	/**
+	 * on return
+	 */
+	fields?: string[];
 };

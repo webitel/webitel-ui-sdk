@@ -7,9 +7,9 @@
 import type { EngineLookup } from './engineLookup.zod';
 import type { EngineTeamHookEvent } from './engineTeamHookEvent.zod';
 export interface EngineTeamHook {
-    enabled?: boolean;
-    event?: EngineTeamHookEvent;
-    id?: number;
-    properties?: string[];
-    schema?: EngineLookup;
+	enabled?: boolean;
+	event?: EngineTeamHookEvent;
+	id?: number;
+	properties?: string[];
+	schema?: EngineLookup;
 }

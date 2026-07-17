@@ -8,8 +8,8 @@
  * / ProviderMetaLinkedPage represents a single Meta asset (Page/Account) found during OAuth.
  */
 export interface WebitelImProviderV1ProviderMetaLinkedPage {
-    accessToken?: string;
-    pageId?: string;
-    pageName?: string;
-    platform?: string;
+	accessToken?: string;
+	pageId?: string;
+	pageName?: string;
+	platform?: string;
 }

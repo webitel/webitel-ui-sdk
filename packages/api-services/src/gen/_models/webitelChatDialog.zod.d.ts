@@ -12,33 +12,33 @@ import type { WebitelChatPeer } from './webitelChatPeer.zod';
  * Chat Dialog. Conversation info.
  */
 export interface WebitelChatDialog {
-    closed?: string;
-    closedCause?: string;
-    /** Context. Variables. Environment. */
-    context?: WebitelChatDialogContext;
-    /** Timestamp of the latest activity. */
-    date?: string;
-    /** [D]omain[C]omponent primary ID. */
-    dc?: string;
-    /**
-     * [FROM]: Originator.
-     * Leg[A]. Contact / User.
-     */
-    from?: WebitelChatPeer;
-    /** The Conversation thread unique ID. */
-    id?: string;
-    /**
-     * [TO]: Participants.
-     * Leg[A+]. Schema / Agent.
-     */
-    members?: WebitelChatChat[];
-    /** The latest (top) message. */
-    message?: WebitelChatMessage;
-    queue?: WebitelChatPeer;
-    /** Timestamp when dialog started. */
-    started?: string;
-    /** Title of the dialog. */
-    title?: string;
-    /** [VIA] Text gateway [FROM] originated thru ... */
-    via?: WebitelChatPeer;
+	closed?: string;
+	closedCause?: string;
+	/** Context. Variables. Environment. */
+	context?: WebitelChatDialogContext;
+	/** Timestamp of the latest activity. */
+	date?: string;
+	/** [D]omain[C]omponent primary ID. */
+	dc?: string;
+	/**
+	 * [FROM]: Originator.
+	 * Leg[A]. Contact / User.
+	 */
+	from?: WebitelChatPeer;
+	/** The Conversation thread unique ID. */
+	id?: string;
+	/**
+	 * [TO]: Participants.
+	 * Leg[A+]. Schema / Agent.
+	 */
+	members?: WebitelChatChat[];
+	/** The latest (top) message. */
+	message?: WebitelChatMessage;
+	queue?: WebitelChatPeer;
+	/** Timestamp when dialog started. */
+	started?: string;
+	/** Title of the dialog. */
+	title?: string;
+	/** [VIA] Text gateway [FROM] originated thru ... */
+	via?: WebitelChatPeer;
 }

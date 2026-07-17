@@ -5,59 +5,112 @@
  * OpenAPI spec version: 24.04.0
  */
 import * as zod from 'zod';
-export declare const DeleteFileTranscriptBody: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    uuid: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const DeleteFileTranscriptResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const CreateFileTranscriptBody: zod.ZodObject<{
-    fileId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    locale: zod.ZodOptional<zod.ZodString>;
-    profile: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    uuid: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const CreateFileTranscriptResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        action: zod.ZodOptional<zod.ZodString>;
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        fileId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
-export declare const PutFileTranscriptBody: zod.ZodObject<{
-    fileId: zod.ZodOptional<zod.ZodString>;
-    locale: zod.ZodOptional<zod.ZodString>;
-    phrases: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodNumber>;
-        endSec: zod.ZodOptional<zod.ZodNumber>;
-        phrase: zod.ZodOptional<zod.ZodString>;
-        startSec: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    text: zod.ZodOptional<zod.ZodString>;
-    uuid: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const PutFileTranscriptResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const GetFileTranscriptPhrasesParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const GetFileTranscriptPhrasesQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-}, zod.z.core.$strip>;
-export declare const GetFileTranscriptPhrasesResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        channel: zod.ZodOptional<zod.ZodNumber>;
-        endSec: zod.ZodOptional<zod.ZodNumber>;
-        phrase: zod.ZodOptional<zod.ZodString>;
-        startSec: zod.ZodOptional<zod.ZodNumber>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const DeleteFileTranscriptBody: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		uuid: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteFileTranscriptResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateFileTranscriptBody: zod.ZodObject<
+	{
+		fileId: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		locale: zod.ZodOptional<zod.ZodString>;
+		profile: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		uuid: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateFileTranscriptResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						action: zod.ZodOptional<zod.ZodString>;
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						fileId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PutFileTranscriptBody: zod.ZodObject<
+	{
+		fileId: zod.ZodOptional<zod.ZodString>;
+		locale: zod.ZodOptional<zod.ZodString>;
+		phrases: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodNumber>;
+						endSec: zod.ZodOptional<zod.ZodNumber>;
+						phrase: zod.ZodOptional<zod.ZodString>;
+						startSec: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		text: zod.ZodOptional<zod.ZodString>;
+		uuid: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PutFileTranscriptResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const GetFileTranscriptPhrasesParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const GetFileTranscriptPhrasesQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+	},
+	zod.z.core.$strip
+>;
+export declare const GetFileTranscriptPhrasesResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						channel: zod.ZodOptional<zod.ZodNumber>;
+						endSec: zod.ZodOptional<zod.ZodNumber>;
+						phrase: zod.ZodOptional<zod.ZodString>;
+						startSec: zod.ZodOptional<zod.ZodNumber>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;

@@ -5,20 +5,20 @@
  * OpenAPI spec version: 24.04.0
  */
 export type ThreadManagementSearchVariablesParams = {
-    /**
-     * Number of results to return per page.
-     */
-    size?: number;
-    /**
-     * Page number (1-based).
-     */
-    page?: number;
-    /**
-     * List of fields to include in the response.
-     */
-    fields?: string[];
-    /**
-     * List of thread IDs to filter by.
-     */
-    threadIds?: string[];
+	/**
+	 * Number of results to return per page.
+	 */
+	size?: number;
+	/**
+	 * Page number (1-based).
+	 */
+	page?: number;
+	/**
+	 * List of fields to include in the response.
+	 */
+	fields?: string[];
+	/**
+	 * List of thread IDs to filter by.
+	 */
+	threadIds?: string[];
 };

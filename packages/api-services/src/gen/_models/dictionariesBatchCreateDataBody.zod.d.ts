@@ -6,11 +6,11 @@
  */
 import type { DictionariesBatchCreateDataBodyRowsItem } from './dictionariesBatchCreateDataBodyRowsItem.zod';
 export interface DictionariesBatchCreateDataBody {
-    /**
-     * Parsed records to create. For Select(lookup) columns each row carries
-     * the related record display name (string); for Multiselect(list of lookup)
-     * columns - an array of display names. Backend resolves name -> id
-     * (case-insensitive).
-     */
-    rows?: DictionariesBatchCreateDataBodyRowsItem[];
+	/**
+	 * Parsed records to create. For Select(lookup) columns each row carries
+	 * the related record display name (string); for Multiselect(list of lookup)
+	 * columns - an array of display names. Backend resolves name -> id
+	 * (case-insensitive).
+	 */
+	rows?: DictionariesBatchCreateDataBodyRowsItem[];
 }

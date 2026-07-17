@@ -5,10 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineCreateAgentPauseCauseRequest {
-    allowAdmin?: boolean;
-    allowAgent?: boolean;
-    allowSupervisor?: boolean;
-    description?: string;
-    limitMin?: number;
-    name?: string;
+	allowAdmin?: boolean;
+	allowAgent?: boolean;
+	allowSupervisor?: boolean;
+	description?: string;
+	limitMin?: number;
+	name?: string;
 }

@@ -4,12 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type WebitelChatServerLeaveConversationCause = (typeof WebitelChatServerLeaveConversationCause)[keyof typeof WebitelChatServerLeaveConversationCause];
+export type WebitelChatServerLeaveConversationCause =
+	(typeof WebitelChatServerLeaveConversationCause)[keyof typeof WebitelChatServerLeaveConversationCause];
 export declare const WebitelChatServerLeaveConversationCause: {
-    readonly DefaultCause: "default_cause";
-    readonly AgentTimeout: "agent_timeout";
-    readonly ClientTimeout: "client_timeout";
-    readonly AgentLeave: "agent_leave";
-    readonly Transfer: "transfer";
-    readonly SilenceTimeout: "silence_timeout";
+	readonly DefaultCause: 'default_cause';
+	readonly AgentTimeout: 'agent_timeout';
+	readonly ClientTimeout: 'client_timeout';
+	readonly AgentLeave: 'agent_leave';
+	readonly Transfer: 'transfer';
+	readonly SilenceTimeout: 'silence_timeout';
 };

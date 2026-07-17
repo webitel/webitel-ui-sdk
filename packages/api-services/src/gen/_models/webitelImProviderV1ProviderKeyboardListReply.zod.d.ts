@@ -9,7 +9,7 @@ import type { WebitelImProviderV1ProviderKeyboardRowWithSection } from './webite
  * ProviderKeyboardListReply is a dropdown-style menu with labeled sections.
  */
 export interface WebitelImProviderV1ProviderKeyboardListReply {
-    /** Label of the main button that expands the list. */
-    mainButtonTitle?: string;
-    sections?: WebitelImProviderV1ProviderKeyboardRowWithSection[];
+	/** Label of the main button that expands the list. */
+	mainButtonTitle?: string;
+	sections?: WebitelImProviderV1ProviderKeyboardRowWithSection[];
 }

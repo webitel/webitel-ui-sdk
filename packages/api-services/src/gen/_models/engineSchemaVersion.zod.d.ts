@@ -6,10 +6,10 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineSchemaVersion {
-    createdAt?: string;
-    createdBy?: EngineLookup;
-    id?: string;
-    note?: string;
-    schemaId?: string;
-    version?: string;
+	createdAt?: string;
+	createdBy?: EngineLookup;
+	id?: string;
+	note?: string;
+	schemaId?: string;
+	version?: string;
 }

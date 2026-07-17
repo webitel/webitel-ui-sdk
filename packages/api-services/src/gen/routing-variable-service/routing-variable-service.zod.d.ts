@@ -8,77 +8,123 @@ import * as zod from 'zod';
 /**
  * @summary List of RoutingVariable
  */
-export declare const SearchRoutingVariableQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SearchRoutingVariableResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        domainId: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        key: zod.ZodOptional<zod.ZodString>;
-        value: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>>;
-}, zod.z.core.$strip>;
+export declare const SearchRoutingVariableQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchRoutingVariableResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						domainId: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						key: zod.ZodOptional<zod.ZodString>;
+						value: zod.ZodOptional<zod.ZodString>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create RoutingVariable
  */
-export declare const CreateRoutingVariableBody: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const CreateRoutingVariableResponse: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const CreateRoutingVariableBody: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateRoutingVariableResponse: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove RoutingVariable
  */
-export declare const DeleteRoutingVariableParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const DeleteRoutingVariableQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const DeleteRoutingVariableResponse: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const DeleteRoutingVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteRoutingVariableQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const DeleteRoutingVariableResponse: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary RoutingVariable item
  */
-export declare const ReadRoutingVariableParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const ReadRoutingVariableQueryParams: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const ReadRoutingVariableResponse: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const ReadRoutingVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadRoutingVariableQueryParams: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const ReadRoutingVariableResponse: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update RoutingVariable
  */
-export declare const UpdateRoutingVariableParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const UpdateRoutingVariableBody: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const UpdateRoutingVariableResponse: zod.ZodObject<{
-    domainId: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    key: zod.ZodOptional<zod.ZodString>;
-    value: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const UpdateRoutingVariableParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateRoutingVariableBody: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const UpdateRoutingVariableResponse: zod.ZodObject<
+	{
+		domainId: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		key: zod.ZodOptional<zod.ZodString>;
+		value: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
