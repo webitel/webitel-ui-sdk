@@ -5,15 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteTypeParams = {
-    /**
-     * Fields to retrive into result dataset.
-     */
-    fields?: string[];
-    /**
-     * `types.repo`
-     *
-     * // `record.pk`
-     *  repeated string id = 3;
-     */
-    repo: string[];
+	/**
+	 * Fields to retrive into result dataset.
+	 */
+	fields?: string[];
+	/**
+	 * `types.repo`
+	 *
+	 * // `record.pk`
+	 *  repeated string id = 3;
+	 */
+	repo: string[];
 };

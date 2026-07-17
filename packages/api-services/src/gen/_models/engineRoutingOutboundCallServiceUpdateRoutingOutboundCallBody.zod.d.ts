@@ -6,10 +6,10 @@
  */
 import type { EngineLookup } from './engineLookup.zod';
 export interface EngineRoutingOutboundCallServiceUpdateRoutingOutboundCallBody {
-    description?: string;
-    disabled?: boolean;
-    domainId?: string;
-    name?: string;
-    pattern?: string;
-    schema?: EngineLookup;
+	description?: string;
+	disabled?: boolean;
+	domainId?: string;
+	name?: string;
+	pattern?: string;
+	schema?: EngineLookup;
 }

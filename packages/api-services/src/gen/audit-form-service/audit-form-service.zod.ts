@@ -214,6 +214,7 @@ export const SearchAuditRateQueryParams = zod.object({
 	id: zod.array(zod.number()).optional(),
 	callId: zod.array(zod.string()).optional(),
 	ratedUser: zod.array(zod.string()).optional(),
+	conversationId: zod.array(zod.string()).optional(),
 });
 
 export const searchAuditRateResponseItemsItemQuestionsItemTypeDefault = `question_default`;
@@ -238,6 +239,7 @@ export const SearchAuditRateResponse = zod.object({
 					)
 					.optional(),
 				comment: zod.string().optional(),
+				conversationId: zod.string().optional(),
 				createdAt: zod.string().optional(),
 				createdBy: zod
 					.object({
@@ -660,6 +662,7 @@ export const CreateAuditFormRateBody = zod.object({
 		.optional(),
 	callId: zod.string().optional(),
 	comment: zod.string().optional(),
+	conversationId: zod.string().optional(),
 	form: zod
 		.object({
 			id: zod.string().optional(),
@@ -687,6 +690,7 @@ export const CreateAuditFormRateResponse = zod.object({
 		)
 		.optional(),
 	comment: zod.string().optional(),
+	conversationId: zod.string().optional(),
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -771,6 +775,7 @@ export const DeleteAuditRateResponse = zod.object({
 		)
 		.optional(),
 	comment: zod.string().optional(),
+	conversationId: zod.string().optional(),
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -855,6 +860,7 @@ export const ReadAuditRateResponse = zod.object({
 		)
 		.optional(),
 	comment: zod.string().optional(),
+	conversationId: zod.string().optional(),
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -951,6 +957,7 @@ export const UpdateAuditRateResponse = zod.object({
 		)
 		.optional(),
 	comment: zod.string().optional(),
+	conversationId: zod.string().optional(),
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({

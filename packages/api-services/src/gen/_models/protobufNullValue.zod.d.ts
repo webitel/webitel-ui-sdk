@@ -12,7 +12,8 @@
  *
  *  - NULL_VALUE: Null value.
  */
-export type ProtobufNullValue = (typeof ProtobufNullValue)[keyof typeof ProtobufNullValue];
+export type ProtobufNullValue =
+	(typeof ProtobufNullValue)[keyof typeof ProtobufNullValue];
 export declare const ProtobufNullValue: {
-    readonly NullValue: "NULL_VALUE";
+	readonly NullValue: 'NULL_VALUE';
 };

@@ -6,13 +6,13 @@
  */
 import type { WebitelImProviderV1ProviderStatus } from './webitelImProviderV1ProviderStatus.zod';
 export interface WebitelImProviderV1ProviderWhatsAppGate {
-    createdAt?: string;
-    id?: string;
-    metaAppId?: string;
-    name?: string;
-    phoneDisplay?: string;
-    phoneNumberId?: string;
-    status?: WebitelImProviderV1ProviderStatus;
-    updatedAt?: string;
-    wabaId?: string;
+	createdAt?: string;
+	id?: string;
+	metaAppId?: string;
+	name?: string;
+	phoneDisplay?: string;
+	phoneNumberId?: string;
+	status?: WebitelImProviderV1ProviderStatus;
+	updatedAt?: string;
+	wabaId?: string;
 }

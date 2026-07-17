@@ -6,5 +6,5 @@
  */
 import type { ApiDevice } from './apiDevice.zod';
 export interface ApiReadDeviceResponse {
-    device?: ApiDevice;
+	device?: ApiDevice;
 }

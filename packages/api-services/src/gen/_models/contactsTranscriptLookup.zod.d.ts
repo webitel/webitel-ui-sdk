@@ -6,7 +6,7 @@
  */
 import type { WebitelContactsLookup } from './webitelContactsLookup.zod';
 export interface ContactsTranscriptLookup {
-    file?: WebitelContactsLookup;
-    id?: string;
-    locale?: string;
+	file?: WebitelContactsLookup;
+	id?: string;
+	locale?: string;
 }

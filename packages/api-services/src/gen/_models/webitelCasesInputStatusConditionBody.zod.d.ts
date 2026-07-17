@@ -5,4 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelCasesInputStatusCondition } from './webitelCasesInputStatusCondition.zod';
-export type WebitelCasesInputStatusConditionBody = WebitelCasesInputStatusCondition;
+export type WebitelCasesInputStatusConditionBody =
+	WebitelCasesInputStatusCondition;

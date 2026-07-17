@@ -10,11 +10,11 @@ import type { WebitelImApiGatewayV1KeyboardButton } from './webitelImApiGatewayV
  * Useful for creating categorized menus or structured interactive interfaces.
  */
 export interface WebitelImApiGatewayV1KeyboardRowWithSection {
-    /**
-     * Collection of buttons within this section.
-     * Minimum of 1 button is required to prevent empty sections.
-     */
-    buttons?: WebitelImApiGatewayV1KeyboardButton[];
-    /** The header text for this section. Must be concise and descriptive. */
-    section?: string;
+	/**
+	 * Collection of buttons within this section.
+	 * Minimum of 1 button is required to prevent empty sections.
+	 */
+	buttons?: WebitelImApiGatewayV1KeyboardButton[];
+	/** The header text for this section. Must be concise and descriptive. */
+	section?: string;
 }

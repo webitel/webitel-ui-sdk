@@ -10,10 +10,11 @@
  *  - contact: General Form
  *  - location: Current Location
  */
-export type WebitelChatButtonRequest = (typeof WebitelChatButtonRequest)[keyof typeof WebitelChatButtonRequest];
+export type WebitelChatButtonRequest =
+	(typeof WebitelChatButtonRequest)[keyof typeof WebitelChatButtonRequest];
 export declare const WebitelChatButtonRequest: {
-    readonly Phone: "phone";
-    readonly Email: "email";
-    readonly Contact: "contact";
-    readonly Location: "location";
+	readonly Phone: 'phone';
+	readonly Email: 'email';
+	readonly Contact: 'contact';
+	readonly Location: 'location';
 };

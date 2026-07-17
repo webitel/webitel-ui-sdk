@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateRelatedCaseParams = {
-    /**
-     * Fields to return in the response.
-     */
-    fields?: string[];
+	/**
+	 * Fields to return in the response.
+	 */
+	fields?: string[];
 };

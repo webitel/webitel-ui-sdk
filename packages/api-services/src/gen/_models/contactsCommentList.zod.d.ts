@@ -9,9 +9,9 @@ import type { ContactsComment } from './contactsComment.zod';
  * Comment dataset.
  */
 export interface ContactsCommentList {
-    /** Comment dataset page. */
-    data?: ContactsComment[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	/** Comment dataset page. */
+	data?: ContactsComment[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

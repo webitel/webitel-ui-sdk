@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type UpdateOAuthServiceParams = {
-    /**
-     * Fields for partial update. PATCH
-     */
-    fields?: string[];
+	/**
+	 * Fields for partial update. PATCH
+	 */
+	fields?: string[];
 };

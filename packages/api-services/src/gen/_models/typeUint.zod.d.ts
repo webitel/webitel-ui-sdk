@@ -6,7 +6,7 @@
  */
 import type { TypeUintViolation } from './typeUintViolation.zod';
 export interface TypeUint {
-    max?: string;
-    min?: string;
-    violation?: TypeUintViolation;
+	max?: string;
+	min?: string;
+	violation?: TypeUintViolation;
 }

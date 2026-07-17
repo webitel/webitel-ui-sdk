@@ -11,9 +11,9 @@ import type { KnowledgebaseArticle } from './knowledgebaseArticle.zod';
  * So this spaceArticles.data are always subordinate to some space.id.
  */
 export interface KnowledgebaseArticleList {
-    /** Article dataset page. */
-    data?: KnowledgebaseArticle[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	/** Article dataset page. */
+	data?: KnowledgebaseArticle[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

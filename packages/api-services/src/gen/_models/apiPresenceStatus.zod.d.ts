@@ -5,24 +5,24 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ApiPresenceStatus {
-    app?: string;
-    closed?: boolean;
-    contact?: string;
-    domainId?: string;
-    expires?: string;
-    /** [required] tuple unique id; <track> */
-    id?: string;
-    note?: string;
-    open?: number;
-    /**
-     * // FIXME: well-known types ?
-     *  repeated Dialog  call = 9;
-     *  repeated Sipreg  sip = 9;
-     *  repeated Websock wss = 9;
-     */
-    presence?: ApiPresenceStatus[];
-    priority?: number;
-    sequence?: string;
-    status?: string;
-    timestamp?: string;
+	app?: string;
+	closed?: boolean;
+	contact?: string;
+	domainId?: string;
+	expires?: string;
+	/** [required] tuple unique id; <track> */
+	id?: string;
+	note?: string;
+	open?: number;
+	/**
+	 * // FIXME: well-known types ?
+	 *  repeated Dialog  call = 9;
+	 *  repeated Sipreg  sip = 9;
+	 *  repeated Websock wss = 9;
+	 */
+	presence?: ApiPresenceStatus[];
+	priority?: number;
+	sequence?: string;
+	status?: string;
+	timestamp?: string;
 }

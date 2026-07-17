@@ -33,17 +33,17 @@
  *   - The number of returned messages is controlled separately (e.g., via limit).
  */
 export interface WebitelImApiGatewayV1HistoryMessageCursorRequest {
-    /**
-     * Pagination direction flag.
-     *
-     * true  -> fetch newer messages (back before history)
-     * false -> fetch older messages (back to older history)
-     */
-    before?: boolean;
-    /**
-     * Cursor identifier.
-     * Must be a valid UUID referencing an existing message.
-     * Defines the starting point for pagination.
-     */
-    id?: string;
+	/**
+	 * Pagination direction flag.
+	 *
+	 * true  -> fetch newer messages (back before history)
+	 * false -> fetch older messages (back to older history)
+	 */
+	before?: boolean;
+	/**
+	 * Cursor identifier.
+	 * Must be a valid UUID referencing an existing message.
+	 * Defines the starting point for pagination.
+	 */
+	id?: string;
 }

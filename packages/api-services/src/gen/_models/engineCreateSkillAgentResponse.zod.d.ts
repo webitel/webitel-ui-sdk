@@ -6,5 +6,5 @@
  */
 import type { EngineSkillAgentItem } from './engineSkillAgentItem.zod';
 export interface EngineCreateSkillAgentResponse {
-    items?: EngineSkillAgentItem[];
+	items?: EngineSkillAgentItem[];
 }

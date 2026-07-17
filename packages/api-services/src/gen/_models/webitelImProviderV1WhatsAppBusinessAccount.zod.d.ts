@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImProviderV1WhatsAppBusinessAccount {
-    accessToken?: string;
-    accessTokenExpiresAt?: string;
-    businessId?: string;
-    id?: string;
-    metaAppId?: string;
-    phoneNumber?: string;
-    phoneNumberId?: string;
+	accessToken?: string;
+	accessTokenExpiresAt?: string;
+	businessId?: string;
+	id?: string;
+	metaAppId?: string;
+	phoneNumber?: string;
+	phoneNumberId?: string;
 }

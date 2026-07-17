@@ -7,9 +7,9 @@
 import type { ApiDeviceId } from './apiDeviceId.zod';
 import type { ApiUserId } from './apiUserId.zod';
 export interface ApiDeviceAudit {
-    device?: ApiDeviceId;
-    hotdesk?: string;
-    loggedIn?: string;
-    loggedOut?: string;
-    user?: ApiUserId;
+	device?: ApiDeviceId;
+	hotdesk?: string;
+	loggedIn?: string;
+	loggedOut?: string;
+	user?: ApiUserId;
 }

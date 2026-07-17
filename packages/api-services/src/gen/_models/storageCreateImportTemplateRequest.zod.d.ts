@@ -11,10 +11,10 @@ import type { StorageImportSourceType } from './storageImportSourceType.zod';
  * Create import template for CSV
  */
 export interface StorageCreateImportTemplateRequest {
-    parameters: StorageCreateImportTemplateRequestParameters;
-    description?: string;
-    name: string;
-    source?: EngineLookup;
-    sourceId: string;
-    sourceType?: StorageImportSourceType;
+	parameters: StorageCreateImportTemplateRequestParameters;
+	description?: string;
+	name: string;
+	source?: EngineLookup;
+	sourceId: string;
+	sourceType?: StorageImportSourceType;
 }

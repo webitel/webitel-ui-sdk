@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export type DeleteDomainParams = {
-    domain?: string;
-    dc?: string;
+	domain?: string;
+	dc?: string;
 };

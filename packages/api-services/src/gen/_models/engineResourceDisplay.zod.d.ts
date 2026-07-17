@@ -5,6 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineResourceDisplay {
-    display?: string;
-    id?: string;
+	display?: string;
+	id?: string;
 }

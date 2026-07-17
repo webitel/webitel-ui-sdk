@@ -8,37 +8,58 @@ import * as zod from 'zod';
 /**
  * @summary CreateMeeting creates a new meeting session with specific parameters and returns its URL.
  */
-export declare const CreateMeetingBody: zod.ZodObject<{
-    basePath: zod.ZodOptional<zod.ZodString>;
-    domainId: zod.ZodOptional<zod.ZodString>;
-    expireSec: zod.ZodOptional<zod.ZodString>;
-    title: zod.ZodOptional<zod.ZodString>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const CreateMeetingResponse: zod.ZodObject<{
-    id: zod.ZodOptional<zod.ZodString>;
-    url: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const CreateMeetingBody: zod.ZodObject<
+	{
+		basePath: zod.ZodOptional<zod.ZodString>;
+		domainId: zod.ZodOptional<zod.ZodString>;
+		expireSec: zod.ZodOptional<zod.ZodString>;
+		title: zod.ZodOptional<zod.ZodString>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateMeetingResponse: zod.ZodObject<
+	{
+		id: zod.ZodOptional<zod.ZodString>;
+		url: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary GetMeetingView retrieves public-facing information about a meeting.
  */
-export declare const GetMeetingViewParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const GetMeetingViewResponse: zod.ZodObject<{
-    allowSatisfaction: zod.ZodOptional<zod.ZodBoolean>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    expiresAt: zod.ZodOptional<zod.ZodString>;
-    satisfaction: zod.ZodOptional<zod.ZodString>;
-    title: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
+export declare const GetMeetingViewParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const GetMeetingViewResponse: zod.ZodObject<
+	{
+		allowSatisfaction: zod.ZodOptional<zod.ZodBoolean>;
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		expiresAt: zod.ZodOptional<zod.ZodString>;
+		satisfaction: zod.ZodOptional<zod.ZodString>;
+		title: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary SatisfactionMeeting submits feedback or a satisfaction rating for a completed meeting.
  */
-export declare const SatisfactionMeetingParams: zod.ZodObject<{
-    id: zod.ZodString;
-}, zod.z.core.$strip>;
-export declare const SatisfactionMeetingBody: zod.ZodObject<{
-    satisfaction: zod.ZodOptional<zod.ZodString>;
-}, zod.z.core.$strip>;
-export declare const SatisfactionMeetingResponse: zod.ZodObject<{}, zod.z.core.$loose>;
+export declare const SatisfactionMeetingParams: zod.ZodObject<
+	{
+		id: zod.ZodString;
+	},
+	zod.z.core.$strip
+>;
+export declare const SatisfactionMeetingBody: zod.ZodObject<
+	{
+		satisfaction: zod.ZodOptional<zod.ZodString>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SatisfactionMeetingResponse: zod.ZodObject<
+	{},
+	zod.z.core.$loose
+>;

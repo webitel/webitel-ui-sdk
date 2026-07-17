@@ -8,6 +8,6 @@
  * Action: Navigates the user to a specific URI.
  */
 export interface WebitelImApiGatewayV1KeyboardButtonURL {
-    /** Must be a valid absolute URI (e.g., https://example.com). */
-    url?: string;
+	/** Must be a valid absolute URI (e.g., https://example.com). */
+	url?: string;
 }

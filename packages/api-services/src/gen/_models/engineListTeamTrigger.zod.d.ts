@@ -6,6 +6,6 @@
  */
 import type { EngineTeamTrigger } from './engineTeamTrigger.zod';
 export interface EngineListTeamTrigger {
-    items?: EngineTeamTrigger[];
-    next?: boolean;
+	items?: EngineTeamTrigger[];
+	next?: boolean;
 }

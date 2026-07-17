@@ -16,4 +16,5 @@ export type SearchAuditRateParams = {
 	id?: number[];
 	callId?: string[];
 	ratedUser?: string[];
+	conversationId?: string[];
 };

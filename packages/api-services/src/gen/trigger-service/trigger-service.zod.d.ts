@@ -8,464 +8,708 @@ import * as zod from 'zod';
 /**
  * @summary List of Trigger
  */
-export declare const SearchTriggerQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-    schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
-}, zod.z.core.$strip>;
-export declare const searchTriggerResponseItemsItemEventDefault = "empty_trigger_event";
-export declare const searchTriggerResponseItemsItemObjectDefault = "empty_trigger_object";
-export declare const searchTriggerResponseItemsItemTypeDefault = "default_trigger_type";
-export declare const SearchTriggerResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        description: zod.ZodOptional<zod.ZodString>;
-        enabled: zod.ZodOptional<zod.ZodBoolean>;
-        event: zod.ZodDefault<zod.ZodEnum<{
-            remove: "remove";
-            create: "create";
-            update: "update";
-            empty_trigger_event: "empty_trigger_event";
-            resolution_time: "resolution_time";
-        }>>;
-        expression: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodNumber>;
-        name: zod.ZodOptional<zod.ZodString>;
-        object: zod.ZodDefault<zod.ZodEnum<{
-            cases: "cases";
-            case_comments: "case_comments";
-            empty_trigger_object: "empty_trigger_object";
-            case_files: "case_files";
-            case_links: "case_links";
-            related_cases: "related_cases";
-        }>>;
-        schema: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        timeout: zod.ZodOptional<zod.ZodNumber>;
-        timezone: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            event: "event";
-            default_trigger_type: "default_trigger_type";
-            cron: "cron";
-        }>>;
-        variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
+export declare const SearchTriggerQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		id: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+		schemaId: zod.ZodOptional<zod.ZodArray<zod.ZodNumber>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchTriggerResponseItemsItemEventDefault =
+	'empty_trigger_event';
+export declare const searchTriggerResponseItemsItemObjectDefault =
+	'empty_trigger_object';
+export declare const searchTriggerResponseItemsItemTypeDefault =
+	'default_trigger_type';
+export declare const SearchTriggerResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						description: zod.ZodOptional<zod.ZodString>;
+						enabled: zod.ZodOptional<zod.ZodBoolean>;
+						event: zod.ZodDefault<
+							zod.ZodEnum<{
+								remove: 'remove';
+								create: 'create';
+								update: 'update';
+								empty_trigger_event: 'empty_trigger_event';
+								resolution_time: 'resolution_time';
+							}>
+						>;
+						expression: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodNumber>;
+						name: zod.ZodOptional<zod.ZodString>;
+						object: zod.ZodDefault<
+							zod.ZodEnum<{
+								cases: 'cases';
+								case_comments: 'case_comments';
+								empty_trigger_object: 'empty_trigger_object';
+								case_files: 'case_files';
+								case_links: 'case_links';
+								related_cases: 'related_cases';
+							}>
+						>;
+						schema: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						timeout: zod.ZodOptional<zod.ZodNumber>;
+						timezone: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+						type: zod.ZodDefault<
+							zod.ZodEnum<{
+								event: 'event';
+								default_trigger_type: 'default_trigger_type';
+								cron: 'cron';
+							}>
+						>;
+						variables: zod.ZodOptional<
+							zod.ZodRecord<zod.ZodString, zod.ZodString>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Create Trigger
  */
-export declare const createTriggerBodyEventDefault = "empty_trigger_event";
-export declare const createTriggerBodyObjectDefault = "empty_trigger_object";
-export declare const createTriggerBodyTypeDefault = "default_trigger_type";
-export declare const CreateTriggerBody: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const createTriggerResponseEventDefault = "empty_trigger_event";
-export declare const createTriggerResponseObjectDefault = "empty_trigger_object";
-export declare const createTriggerResponseTypeDefault = "default_trigger_type";
-export declare const CreateTriggerResponse: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const createTriggerBodyEventDefault = 'empty_trigger_event';
+export declare const createTriggerBodyObjectDefault = 'empty_trigger_object';
+export declare const createTriggerBodyTypeDefault = 'default_trigger_type';
+export declare const CreateTriggerBody: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const createTriggerResponseEventDefault = 'empty_trigger_event';
+export declare const createTriggerResponseObjectDefault =
+	'empty_trigger_object';
+export declare const createTriggerResponseTypeDefault = 'default_trigger_type';
+export declare const CreateTriggerResponse: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Remove Trigger
  */
-export declare const DeleteTriggerParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const deleteTriggerResponseEventDefault = "empty_trigger_event";
-export declare const deleteTriggerResponseObjectDefault = "empty_trigger_object";
-export declare const deleteTriggerResponseTypeDefault = "default_trigger_type";
-export declare const DeleteTriggerResponse: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const DeleteTriggerParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const deleteTriggerResponseEventDefault = 'empty_trigger_event';
+export declare const deleteTriggerResponseObjectDefault =
+	'empty_trigger_object';
+export declare const deleteTriggerResponseTypeDefault = 'default_trigger_type';
+export declare const DeleteTriggerResponse: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Trigger item
  */
-export declare const ReadTriggerParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const readTriggerResponseEventDefault = "empty_trigger_event";
-export declare const readTriggerResponseObjectDefault = "empty_trigger_object";
-export declare const readTriggerResponseTypeDefault = "default_trigger_type";
-export declare const ReadTriggerResponse: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const PatchTriggerParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const patchTriggerBodyEventDefault = "empty_trigger_event";
-export declare const patchTriggerBodyObjectDefault = "empty_trigger_object";
-export declare const patchTriggerBodyTypeDefault = "default_trigger_type";
-export declare const PatchTriggerBody: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const patchTriggerResponseEventDefault = "empty_trigger_event";
-export declare const patchTriggerResponseObjectDefault = "empty_trigger_object";
-export declare const patchTriggerResponseTypeDefault = "default_trigger_type";
-export declare const PatchTriggerResponse: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
+export declare const ReadTriggerParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const readTriggerResponseEventDefault = 'empty_trigger_event';
+export declare const readTriggerResponseObjectDefault = 'empty_trigger_object';
+export declare const readTriggerResponseTypeDefault = 'default_trigger_type';
+export declare const ReadTriggerResponse: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const PatchTriggerParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const patchTriggerBodyEventDefault = 'empty_trigger_event';
+export declare const patchTriggerBodyObjectDefault = 'empty_trigger_object';
+export declare const patchTriggerBodyTypeDefault = 'default_trigger_type';
+export declare const PatchTriggerBody: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const patchTriggerResponseEventDefault = 'empty_trigger_event';
+export declare const patchTriggerResponseObjectDefault = 'empty_trigger_object';
+export declare const patchTriggerResponseTypeDefault = 'default_trigger_type';
+export declare const PatchTriggerResponse: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
 /**
  * @summary Update Trigger
  */
-export declare const UpdateTriggerParams: zod.ZodObject<{
-    id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const updateTriggerBodyEventDefault = "empty_trigger_event";
-export declare const updateTriggerBodyObjectDefault = "empty_trigger_object";
-export declare const updateTriggerBodyTypeDefault = "default_trigger_type";
-export declare const UpdateTriggerBody: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const updateTriggerResponseEventDefault = "empty_trigger_event";
-export declare const updateTriggerResponseObjectDefault = "empty_trigger_object";
-export declare const updateTriggerResponseTypeDefault = "default_trigger_type";
-export declare const UpdateTriggerResponse: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    enabled: zod.ZodOptional<zod.ZodBoolean>;
-    event: zod.ZodDefault<zod.ZodEnum<{
-        remove: "remove";
-        create: "create";
-        update: "update";
-        empty_trigger_event: "empty_trigger_event";
-        resolution_time: "resolution_time";
-    }>>;
-    expression: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodNumber>;
-    name: zod.ZodOptional<zod.ZodString>;
-    object: zod.ZodDefault<zod.ZodEnum<{
-        cases: "cases";
-        case_comments: "case_comments";
-        empty_trigger_object: "empty_trigger_object";
-        case_files: "case_files";
-        case_links: "case_links";
-        related_cases: "related_cases";
-    }>>;
-    schema: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    timeout: zod.ZodOptional<zod.ZodNumber>;
-    timezone: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        event: "event";
-        default_trigger_type: "default_trigger_type";
-        cron: "cron";
-    }>>;
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const SearchTriggerJobParams: zod.ZodObject<{
-    trigger_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const SearchTriggerJobQueryParams: zod.ZodObject<{
-    page: zod.ZodOptional<zod.ZodNumber>;
-    size: zod.ZodOptional<zod.ZodNumber>;
-    q: zod.ZodOptional<zod.ZodString>;
-    sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    'createdAt.from': zod.ZodOptional<zod.ZodString>;
-    'createdAt.to': zod.ZodOptional<zod.ZodString>;
-    'startedAt.from': zod.ZodOptional<zod.ZodString>;
-    'startedAt.to': zod.ZodOptional<zod.ZodString>;
-    'duration.from': zod.ZodOptional<zod.ZodString>;
-    'duration.to': zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        error: "error";
-        done: "done";
-        active: "active";
-        idle: "idle";
-    }>>>;
-}, zod.z.core.$strip>;
-export declare const searchTriggerJobResponseItemsItemStateDefault = "idle";
-export declare const SearchTriggerJobResponse: zod.ZodObject<{
-    items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        error: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        startedAt: zod.ZodOptional<zod.ZodString>;
-        state: zod.ZodDefault<zod.ZodEnum<{
-            error: "error";
-            done: "done";
-            active: "active";
-            idle: "idle";
-        }>>;
-        stoppedAt: zod.ZodOptional<zod.ZodString>;
-        trigger: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-        }, zod.z.core.$strip>>;
-    }, zod.z.core.$strip>>>;
-    next: zod.ZodOptional<zod.ZodBoolean>;
-}, zod.z.core.$strip>;
-export declare const CreateTriggerJobParams: zod.ZodObject<{
-    trigger_id: zod.ZodNumber;
-}, zod.z.core.$strip>;
-export declare const CreateTriggerJobBody: zod.ZodObject<{
-    variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
-}, zod.z.core.$strip>;
-export declare const createTriggerJobResponseStateDefault = "idle";
-export declare const CreateTriggerJobResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    error: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    startedAt: zod.ZodOptional<zod.ZodString>;
-    state: zod.ZodDefault<zod.ZodEnum<{
-        error: "error";
-        done: "done";
-        active: "active";
-        idle: "idle";
-    }>>;
-    stoppedAt: zod.ZodOptional<zod.ZodString>;
-    trigger: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.z.core.$strip>>;
-}, zod.z.core.$strip>;
+export declare const UpdateTriggerParams: zod.ZodObject<
+	{
+		id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const updateTriggerBodyEventDefault = 'empty_trigger_event';
+export declare const updateTriggerBodyObjectDefault = 'empty_trigger_object';
+export declare const updateTriggerBodyTypeDefault = 'default_trigger_type';
+export declare const UpdateTriggerBody: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const updateTriggerResponseEventDefault = 'empty_trigger_event';
+export declare const updateTriggerResponseObjectDefault =
+	'empty_trigger_object';
+export declare const updateTriggerResponseTypeDefault = 'default_trigger_type';
+export declare const UpdateTriggerResponse: zod.ZodObject<
+	{
+		description: zod.ZodOptional<zod.ZodString>;
+		enabled: zod.ZodOptional<zod.ZodBoolean>;
+		event: zod.ZodDefault<
+			zod.ZodEnum<{
+				remove: 'remove';
+				create: 'create';
+				update: 'update';
+				empty_trigger_event: 'empty_trigger_event';
+				resolution_time: 'resolution_time';
+			}>
+		>;
+		expression: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodNumber>;
+		name: zod.ZodOptional<zod.ZodString>;
+		object: zod.ZodDefault<
+			zod.ZodEnum<{
+				cases: 'cases';
+				case_comments: 'case_comments';
+				empty_trigger_object: 'empty_trigger_object';
+				case_files: 'case_files';
+				case_links: 'case_links';
+				related_cases: 'related_cases';
+			}>
+		>;
+		schema: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		timeout: zod.ZodOptional<zod.ZodNumber>;
+		timezone: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+		type: zod.ZodDefault<
+			zod.ZodEnum<{
+				event: 'event';
+				default_trigger_type: 'default_trigger_type';
+				cron: 'cron';
+			}>
+		>;
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchTriggerJobParams: zod.ZodObject<
+	{
+		trigger_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const SearchTriggerJobQueryParams: zod.ZodObject<
+	{
+		page: zod.ZodOptional<zod.ZodNumber>;
+		size: zod.ZodOptional<zod.ZodNumber>;
+		q: zod.ZodOptional<zod.ZodString>;
+		sort: zod.ZodOptional<zod.ZodString>;
+		fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+		'createdAt.from': zod.ZodOptional<zod.ZodString>;
+		'createdAt.to': zod.ZodOptional<zod.ZodString>;
+		'startedAt.from': zod.ZodOptional<zod.ZodString>;
+		'startedAt.to': zod.ZodOptional<zod.ZodString>;
+		'duration.from': zod.ZodOptional<zod.ZodString>;
+		'duration.to': zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodEnum<{
+					error: 'error';
+					done: 'done';
+					active: 'active';
+					idle: 'idle';
+				}>
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;
+export declare const searchTriggerJobResponseItemsItemStateDefault = 'idle';
+export declare const SearchTriggerJobResponse: zod.ZodObject<
+	{
+		items: zod.ZodOptional<
+			zod.ZodArray<
+				zod.ZodObject<
+					{
+						createdAt: zod.ZodOptional<zod.ZodString>;
+						error: zod.ZodOptional<zod.ZodString>;
+						id: zod.ZodOptional<zod.ZodString>;
+						startedAt: zod.ZodOptional<zod.ZodString>;
+						state: zod.ZodDefault<
+							zod.ZodEnum<{
+								error: 'error';
+								done: 'done';
+								active: 'active';
+								idle: 'idle';
+							}>
+						>;
+						stoppedAt: zod.ZodOptional<zod.ZodString>;
+						trigger: zod.ZodOptional<
+							zod.ZodObject<
+								{
+									id: zod.ZodOptional<zod.ZodString>;
+									name: zod.ZodOptional<zod.ZodString>;
+								},
+								zod.z.core.$strip
+							>
+						>;
+					},
+					zod.z.core.$strip
+				>
+			>
+		>;
+		next: zod.ZodOptional<zod.ZodBoolean>;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateTriggerJobParams: zod.ZodObject<
+	{
+		trigger_id: zod.ZodNumber;
+	},
+	zod.z.core.$strip
+>;
+export declare const CreateTriggerJobBody: zod.ZodObject<
+	{
+		variables: zod.ZodOptional<zod.ZodRecord<zod.ZodString, zod.ZodString>>;
+	},
+	zod.z.core.$strip
+>;
+export declare const createTriggerJobResponseStateDefault = 'idle';
+export declare const CreateTriggerJobResponse: zod.ZodObject<
+	{
+		createdAt: zod.ZodOptional<zod.ZodString>;
+		error: zod.ZodOptional<zod.ZodString>;
+		id: zod.ZodOptional<zod.ZodString>;
+		startedAt: zod.ZodOptional<zod.ZodString>;
+		state: zod.ZodDefault<
+			zod.ZodEnum<{
+				error: 'error';
+				done: 'done';
+				active: 'active';
+				idle: 'idle';
+			}>
+		>;
+		stoppedAt: zod.ZodOptional<zod.ZodString>;
+		trigger: zod.ZodOptional<
+			zod.ZodObject<
+				{
+					id: zod.ZodOptional<zod.ZodString>;
+					name: zod.ZodOptional<zod.ZodString>;
+				},
+				zod.z.core.$strip
+			>
+		>;
+	},
+	zod.z.core.$strip
+>;

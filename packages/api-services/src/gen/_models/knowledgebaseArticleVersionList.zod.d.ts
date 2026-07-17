@@ -6,8 +6,8 @@
  */
 import type { KnowledgebaseArticleVersion } from './knowledgebaseArticleVersion.zod';
 export interface KnowledgebaseArticleVersionList {
-    data?: KnowledgebaseArticleVersion[];
-    next?: boolean;
-    /** The page number of the partial result. */
-    page?: number;
+	data?: KnowledgebaseArticleVersion[];
+	next?: boolean;
+	/** The page number of the partial result. */
+	page?: number;
 }

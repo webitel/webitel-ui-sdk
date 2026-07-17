@@ -9,5 +9,5 @@ import type { WebitelImProviderV1ProviderFacebookGate } from './webitelImProvide
  * / ProviderUpdateFacebookGateResponse returns the updated Facebook provider.
  */
 export interface WebitelImProviderV1ProviderUpdateFacebookGateResponse {
-    item?: WebitelImProviderV1ProviderFacebookGate;
+	item?: WebitelImProviderV1ProviderFacebookGate;
 }

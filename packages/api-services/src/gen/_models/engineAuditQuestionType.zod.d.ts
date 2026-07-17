@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineAuditQuestionType = (typeof EngineAuditQuestionType)[keyof typeof EngineAuditQuestionType];
+export type EngineAuditQuestionType =
+	(typeof EngineAuditQuestionType)[keyof typeof EngineAuditQuestionType];
 export declare const EngineAuditQuestionType: {
-    readonly QuestionDefault: "question_default";
-    readonly QuestionScore: "question_score";
-    readonly QuestionOption: "question_option";
-    readonly QuestionYes: "question_yes";
+	readonly QuestionDefault: 'question_default';
+	readonly QuestionScore: 'question_score';
+	readonly QuestionOption: 'question_option';
+	readonly QuestionYes: 'question_yes';
 };

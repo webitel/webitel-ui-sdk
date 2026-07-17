@@ -5,5 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface EngineAgentUserPresence {
-    status?: string;
+	status?: string;
 }

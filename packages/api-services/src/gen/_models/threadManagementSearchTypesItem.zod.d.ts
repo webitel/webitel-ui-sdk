@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type ThreadManagementSearchTypesItem = (typeof ThreadManagementSearchTypesItem)[keyof typeof ThreadManagementSearchTypesItem];
+export type ThreadManagementSearchTypesItem =
+	(typeof ThreadManagementSearchTypesItem)[keyof typeof ThreadManagementSearchTypesItem];
 export declare const ThreadManagementSearchTypesItem: {
-    readonly Unknown: "UNKNOWN";
-    readonly Direct: "DIRECT";
-    readonly Group: "GROUP";
-    readonly Channel: "CHANNEL";
+	readonly Unknown: 'UNKNOWN';
+	readonly Direct: 'DIRECT';
+	readonly Group: 'GROUP';
+	readonly Channel: 'CHANNEL';
 };

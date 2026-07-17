@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface WebitelImApiGatewayV1PeerIdentity {
-    iss?: string;
-    sub?: string;
-    via?: string;
+	iss?: string;
+	sub?: string;
+	via?: string;
 }

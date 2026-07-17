@@ -5,8 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 export type LocateCommentParams = {
-    /**
-     * Specific fields to return for the comment.
-     */
-    fields?: string[];
+	/**
+	 * Specific fields to return for the comment.
+	 */
+	fields?: string[];
 };

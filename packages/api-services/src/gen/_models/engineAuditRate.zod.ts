@@ -11,6 +11,7 @@ import type { EngineQuestionAnswer } from './engineQuestionAnswer.zod';
 export interface EngineAuditRate {
 	answers?: EngineQuestionAnswer[];
 	comment?: string;
+	conversationId?: string;
 	createdAt?: string;
 	createdBy?: EngineLookup;
 	criticalCount?: string;

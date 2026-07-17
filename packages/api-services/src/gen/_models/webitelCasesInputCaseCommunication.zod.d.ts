@@ -9,8 +9,8 @@ import type { GeneralLookup } from './generalLookup.zod';
  * Represents input data for creating or linking a communication.
  */
 export interface WebitelCasesInputCaseCommunication {
-    /** External communication ID. */
-    communicationId?: string;
-    /** Type of the communication. */
-    communicationType?: GeneralLookup;
+	/** External communication ID. */
+	communicationId?: string;
+	/** Type of the communication. */
+	communicationType?: GeneralLookup;
 }

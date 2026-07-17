@@ -11,5 +11,6 @@ export interface EngineCreateAuditFormRateRequest {
 	answers?: EngineCreateQuestionAnswerRequest[];
 	callId?: string;
 	comment?: string;
+	conversationId?: string;
 	form?: EngineLookup;
 }

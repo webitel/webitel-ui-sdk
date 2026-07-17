@@ -4,9 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type EngineTriggerType = (typeof EngineTriggerType)[keyof typeof EngineTriggerType];
+export type EngineTriggerType =
+	(typeof EngineTriggerType)[keyof typeof EngineTriggerType];
 export declare const EngineTriggerType: {
-    readonly DefaultTriggerType: "default_trigger_type";
-    readonly Cron: "cron";
-    readonly Event: "event";
+	readonly DefaultTriggerType: 'default_trigger_type';
+	readonly Cron: 'cron';
+	readonly Event: 'event';
 };

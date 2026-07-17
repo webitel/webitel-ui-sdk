@@ -4,10 +4,11 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-export type SearchTriggerJobStateItem = (typeof SearchTriggerJobStateItem)[keyof typeof SearchTriggerJobStateItem];
+export type SearchTriggerJobStateItem =
+	(typeof SearchTriggerJobStateItem)[keyof typeof SearchTriggerJobStateItem];
 export declare const SearchTriggerJobStateItem: {
-    readonly Idle: "idle";
-    readonly Active: "active";
-    readonly Done: "done";
-    readonly Error: "error";
+	readonly Idle: 'idle';
+	readonly Active: 'active';
+	readonly Done: 'done';
+	readonly Error: 'error';
 };

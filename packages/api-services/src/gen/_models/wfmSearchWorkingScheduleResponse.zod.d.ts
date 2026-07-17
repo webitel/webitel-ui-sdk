@@ -6,6 +6,6 @@
  */
 import type { WfmWorkingSchedule } from './wfmWorkingSchedule.zod';
 export interface WfmSearchWorkingScheduleResponse {
-    items?: WfmWorkingSchedule[];
-    next?: boolean;
+	items?: WfmWorkingSchedule[];
+	next?: boolean;
 }
