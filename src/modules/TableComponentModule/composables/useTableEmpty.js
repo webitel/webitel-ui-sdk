@@ -9,8 +9,12 @@ import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 
+/**
+ * @param {{ dataList?: unknown; filters?: unknown; error?: unknown; isLoading?: unknown }} [source]
+ * @param {object} [overrides]
+ */
 export const useTableEmpty = (
-	{ dataList, filters, error, isLoading },
+	{ dataList, filters, error, isLoading } = {},
 	overrides = {},
 ) => {
 	const { t } = useI18n();
