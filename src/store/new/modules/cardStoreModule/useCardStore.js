@@ -17,6 +17,7 @@ export const useCardStore = (namespace) => {
 		() => getNamespacedState(store.state, cardNamespace).itemInstance,
 	);
 
+	/** @param {unknown} [payload] */
 	function loadItem(payload) {
 		return store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
 	}
