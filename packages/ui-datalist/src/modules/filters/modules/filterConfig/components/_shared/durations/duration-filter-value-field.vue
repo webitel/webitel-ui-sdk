@@ -5,7 +5,7 @@
       :label="t('reusable.from')"
       :model-value="model.from"
       :v="vFrom"
-      format="mm:ss"
+      format="hh:mm:ss"
       @update:model-value="handleInput('from', $event)"
     />
     <wt-timepicker
@@ -13,7 +13,7 @@
       :label="t('reusable.to')"
       :model-value="model.to"
       :v="vTo"
-      format="mm:ss"
+      format="hh:mm:ss"
       @update:model-value="handleInput('to', $event)"
     />
   </div>

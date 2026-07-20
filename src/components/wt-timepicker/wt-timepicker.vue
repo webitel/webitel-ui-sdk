@@ -44,7 +44,7 @@
         v-model:model-value="min"
         :disabled="disabled"
         :label="labelMin"
-        :min-value="-1"
+        :min-value="hour ? -1 : 0"
         :max-value="60"
         :v="v"
         hide-input-info
@@ -54,7 +54,7 @@
         v-model:model-value="sec"
         :disabled="disabled"
         :label="labelSec"
-        :min-value="-1"
+        :min-value="min ? -1 : 0"
         :max-value="60"
         :v="v"
         hide-input-info
@@ -212,6 +212,7 @@ const hour = computed({
 		//      : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
 	},
 	set(value: number) {
+		if (!Number.isFinite(+value)) return;
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setHours(value)
 			: Math.max(
@@ -229,6 +230,7 @@ const min = computed({
 			: Math.floor((+props.modelValue / SEC_IN_MIN) % 60);
 	},
 	set(value: number) {
+		if (!Number.isFinite(+value)) return;
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setMinutes(value)
 			: Math.max(
@@ -246,6 +248,7 @@ const sec = computed({
 			: Math.floor(+props.modelValue % 60);
 	},
 	set(value: number) {
+		if (!Number.isFinite(+value)) return;
 		const newValue = props.dateMode
 			? new Date(+props.modelValue).setSeconds(value)
 			: Math.max(0, +props.modelValue - sec.value + +value);
