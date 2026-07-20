@@ -17,6 +17,7 @@ export const useCardStore = (namespace, { onLoadErrorHandler } = {}) => {
 		() => getNamespacedState(store.state, cardNamespace).itemInstance,
 	);
 
+	/** @param {unknown} [payload] */
 	async function loadItem(payload) {
 		try {
 			return await store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
