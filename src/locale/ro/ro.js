@@ -301,9 +301,9 @@ export default {
 			[CallDirection.Outbound]: 'Ieșire',
 		},
 		connectionQuality: {
-			high: 'Calitate excelentă a rețelei.',
-			medium: 'Calitate instabilă a rețelei.',
-			low: 'Calitate slabă a rețelei.',
+			high: 'Calitate excelentă a rețelei',
+			medium: 'Calitate instabilă a rețelei',
+			low: 'Calitate slabă a rețelei',
 		},
 	},
 	cases: {

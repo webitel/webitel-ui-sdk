@@ -301,9 +301,9 @@ export default {
 			[CallDirection.Outbound]: 'Шығыс',
 		},
 		connectionQuality: {
-			high: 'Желі сапасы өте жақсы.',
-			medium: 'Желі сапасы тұрақсыз.',
-			low: 'Желі сапасы нашар.',
+			high: 'Желі сапасы өте жақсы',
+			medium: 'Желі сапасы тұрақсыз',
+			low: 'Желі сапасы нашар',
 		},
 	},
 	cases: {

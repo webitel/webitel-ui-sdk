@@ -302,9 +302,9 @@ export default {
 			[CallDirection.Outbound]: 'Chiquvchi',
 		},
 		connectionQuality: {
-			high: 'Tarmoq sifati aʼlo.',
-			medium: 'Tarmoq sifati barqaror emas.',
-			low: 'Tarmoq sifati past.',
+			high: 'Tarmoq sifati aʼlo',
+			medium: 'Tarmoq sifati barqaror emas',
+			low: 'Tarmoq sifati past',
 		},
 	},
 	cases: {

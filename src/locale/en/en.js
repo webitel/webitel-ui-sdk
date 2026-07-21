@@ -305,9 +305,9 @@ export default deepmerge(
 				[CallDirection.Outbound]: 'Outbound',
 			},
 			connectionQuality: {
-				high: 'Excellent network quality.',
-				medium: 'Unstable network quality.',
-				low: 'Poor network quality.',
+				high: 'Excellent network quality',
+				medium: 'Unstable network quality',
+				low: 'Poor network quality',
 			},
 		},
 		cases: {
