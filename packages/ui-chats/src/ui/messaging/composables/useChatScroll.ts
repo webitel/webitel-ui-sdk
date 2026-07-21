@@ -23,6 +23,12 @@ export interface UseChatScrollOptions {
 	onBeforeStart?: (options: {
 		scrollToBottom: (behavior?: ScrollBehavior) => void;
 	}) => void;
+	/**
+	 * @author ye-pohranichna
+	 * Fired when the viewer is at the bottom and has therefore seen the
+	 * latest messages
+	 */
+	onSeen?: () => void;
 }
 
 export const useChatScroll = ({
@@ -35,6 +41,7 @@ export const useChatScroll = ({
 	onBeforeStart = (options) => {
 		options.scrollToBottom();
 	},
+	onSeen,
 }: UseChatScrollOptions) => {
 	const { arrivedState } = useScroll(chatContainer);
 
@@ -82,6 +89,7 @@ export const useChatScroll = ({
 		newUnseenMessagesCount.value = 0;
 
 		resetScrollToBottomBtn();
+		onSeen?.();
 	};
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
@@ -237,7 +245,10 @@ export const useChatScroll = ({
 	watch(
 		() => arrivedState.bottom,
 		(bottom) => {
-			if (bottom) newUnseenMessagesCount.value = 0;
+			if (bottom) {
+				newUnseenMessagesCount.value = 0;
+				onSeen?.();
+			}
 		},
 	);
 
