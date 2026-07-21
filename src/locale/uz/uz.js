@@ -301,6 +301,11 @@ export default {
 			[CallDirection.Inbound]: 'Kiruvchi',
 			[CallDirection.Outbound]: 'Chiquvchi',
 		},
+		connectionQuality: {
+			high: 'Tarmoq sifati aʼlo.',
+			medium: 'Tarmoq sifati barqaror emas.',
+			low: 'Tarmoq sifati past.',
+		},
 	},
 	cases: {
 		status: 'Holat',

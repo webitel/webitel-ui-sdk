@@ -300,6 +300,11 @@ export default {
 			[CallDirection.Inbound]: 'Gọi vào',
 			[CallDirection.Outbound]: 'Gọi ra',
 		},
+		connectionQuality: {
+			high: 'Chất lượng mạng tuyệt vời.',
+			medium: 'Chất lượng mạng không ổn định.',
+			low: 'Chất lượng mạng kém.',
+		},
 	},
 	cases: {
 		status: 'Trạng thái',

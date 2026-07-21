@@ -300,6 +300,11 @@ export default {
 			[CallDirection.Inbound]: 'Кіріс',
 			[CallDirection.Outbound]: 'Шығыс',
 		},
+		connectionQuality: {
+			high: 'Желі сапасы өте жақсы.',
+			medium: 'Желі сапасы тұрақсыз.',
+			low: 'Желі сапасы нашар.',
+		},
 	},
 	cases: {
 		status: 'Мәртебе',

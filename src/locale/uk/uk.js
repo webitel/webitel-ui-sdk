@@ -295,6 +295,11 @@ export default {
 			[CallDirection.Inbound]: 'Вхідний | Вхідні',
 			[CallDirection.Outbound]: 'Вихідний | Вихідні',
 		},
+		connectionQuality: {
+			high: 'Чудова якість мережі.',
+			medium: 'Нестабільна якість мережі.',
+			low: 'Погана якість мережі.',
+		},
 	},
 	cases: {
 		status: 'Статус',

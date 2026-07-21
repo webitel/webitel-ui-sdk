@@ -295,6 +295,11 @@ export default {
 			[CallDirection.Inbound]: 'Entrante',
 			[CallDirection.Outbound]: 'Saliente',
 		},
+		connectionQuality: {
+			high: 'Excelente calidad de red.',
+			medium: 'Calidad de red inestable.',
+			low: 'Mala calidad de red.',
+		},
 	},
 	cases: {
 		status: 'Estado',
