@@ -37,8 +37,17 @@ export const createUserNotificationsStore = () => {
 			);
 		};
 
-		const clearShownUserNotifications = (userId: string) => {
-			const shown = getStoredUsers().filter((id: string) => id !== userId);
+		const clearShownUserNotifications = (userIds: string | string[]) => {
+			const idsToRemove = Array.isArray(userIds)
+				? userIds
+				: [
+						userIds,
+					];
+
+			const shown = getStoredUsers().filter(
+				(id: string) => !idsToRemove.includes(id),
+			);
+
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(shown));
 		};
 
@@ -50,6 +59,7 @@ export const createUserNotificationsStore = () => {
 		const mapNotifications = (array: ApiUserWarning[]) => {
 			return array
 				.map((warning) => {
+					if (!warning.id) return null;
 					const map = USER_NOTIFICATION_CONFIGS_MAP.get(warning.id);
 					if (!map) return null;
 					return map(warning);

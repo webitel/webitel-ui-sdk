@@ -107,6 +107,9 @@ function axiosClient() {
 				{
 					exports: [
 						{
+							name: 'AxiosInstance',
+						},
+						{
 							name: 'AxiosRequestConfig',
 						},
 						{

@@ -24,7 +24,7 @@
  * and their styling
  */
 import { WtPopover } from '@webitel/ui-sdk/components';
-import { defineExpose, ref } from 'vue';
+import { ref } from 'vue';
 
 interface Props {
 	disabled?: boolean;

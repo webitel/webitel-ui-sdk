@@ -5,14 +5,20 @@ import { useI18n } from 'vue-i18n';
 export function useQueueTypeOptions() {
 	const { t } = useI18n();
 
-	const mapQueueTypeToLabel = (value: string) =>
+	const mapQueueTypeToLabel = (value: string | number) =>
 		t(`objects.queue.type.${value}`);
 
 	const options = computed(() =>
-		Object.entries(QueueType).map(([key, value]) => ({
-			value,
-			label: mapQueueTypeToLabel(value),
-		})),
+		Object.entries(QueueType)
+			// staging only https://webitel.atlassian.net/browse/WS-2
+			.filter(
+				([, value]) =>
+					import.meta.env.VITE_STAGING_ENV || value !== QueueType.IM_CHAT_QUEUE,
+			)
+			.map(([, value]) => ({
+				value,
+				label: mapQueueTypeToLabel(value),
+			})),
 	);
 
 	return {

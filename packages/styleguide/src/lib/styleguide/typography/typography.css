@@ -108,9 +108,19 @@ NOTE:   text-transform: none; is set explicitly cause t-t is inherited from pare
 		/* 0.01em */
 	}
 
-	.typo-button {
+	.typo-button--md {
 		font-family: "Montserrat", monospace;
 		font-size: 12px;
+		font-weight: 500;
+		line-height: 24px;
+		text-transform: uppercase;
+		/* letter-spacing: 0.96px; */
+		/* 0.06em */
+	}
+
+	.typo-button--sm {
+		font-family: "Montserrat", monospace;
+		font-size: 10px;
 		font-weight: 500;
 		line-height: 24px;
 		text-transform: uppercase;

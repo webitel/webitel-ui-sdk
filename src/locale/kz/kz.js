@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -64,6 +64,8 @@ export default {
 		generate: 'Жасау',
 		from: 'Бастап',
 		to: 'Дейін',
+		today: 'Бүгін',
+		clear: 'Тазарту',
 		tts: 'Мәтін-дауыс',
 		state: 'Күй',
 		status: 'Күй',
@@ -157,9 +159,9 @@ export default {
 		operations: 'Операциялар',
 		rbacDefault: 'Жазбаға негізделген рұқсаттың әдепкі баптауы',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Тыйым салынған',
-			[AccessMode.ALLOW]: 'Рұқсат ету',
-			[AccessMode.MANAGE]: 'Тапсырумен рұқсат ету',
+			[AccessMode.Forbidden]: 'Тыйым салынған',
+			[AccessMode.Allow]: 'Рұқсат ету',
+			[AccessMode.Manage]: 'Тапсырумен рұқсат ету',
 		},
 	},
 	// describes Webitel system entities
@@ -202,6 +204,7 @@ export default {
 			draftPlaceholder: 'Хабарлама жазыңыз...',
 		},
 		queue: {
+			progressiveCount: 'Прогрессивті қоңырау саны',
 			queue: 'Кезек | Кезектер',
 			queueType: 'Кезек түрі | Кезек түрлері',
 			type: {
@@ -296,6 +299,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Кіріс',
 			[CallDirection.Outbound]: 'Шығыс',
+		},
+		connectionQuality: {
+			high: 'Желі сапасы өте жақсы.',
+			medium: 'Желі сапасы тұрақсыз.',
+			low: 'Желі сапасы нашар.',
 		},
 	},
 	cases: {
@@ -469,6 +477,9 @@ export default {
 			'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
 		integer: 'Өріс тек бүтін сандарды қамтуы керек',
 		nameAlreadyInUse: 'Бұл атау қолданыста',
+		phoneNumberSymbolsValidator:
+			"Нөмірде тек әріптер (a-z, A-Z), сандар (0-9) және мына таңбалар болуы мүмкін: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Логинді есім${'@'}домен форматында енгізіңіз`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -563,6 +574,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Кему бойынша сұрыптау';
 					return 'Сұрыптау';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Сеанстарды аяқтау',
 			},
 		},
 		errorPages: {
@@ -834,9 +847,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'элемент таңдалды',
+		select: {
+			selectedItemsLabel: 'элемент таңдалды',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -858,5 +871,10 @@ export default {
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
+	},
+	connectionQuality: {
+		high: 'Желі сапасы отличная.',
+		medium: 'Кідіріс болуы мүмкін, желіні тексеріңіз.',
+		low: 'Желі сапасы нашар, желіні тексеріңіз.',
 	},
 };

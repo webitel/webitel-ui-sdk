@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -60,6 +60,8 @@ export default {
 		generate: 'Сгенерировать',
 		from: 'От',
 		to: 'До',
+		today: 'Сегодня',
+		clear: 'Очистить',
 		tts: 'Text-to-Speech',
 		state: 'Состояние',
 		status: 'Статус',
@@ -152,9 +154,9 @@ export default {
 		operations: 'Действия',
 		rbacDefault: 'Права доступа по записям по умолчанию',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Запрещено',
-			[AccessMode.ALLOW]: 'Разрешено',
-			[AccessMode.MANAGE]: 'Управление',
+			[AccessMode.Forbidden]: 'Запрещено',
+			[AccessMode.Allow]: 'Разрешено',
+			[AccessMode.Manage]: 'Управление',
 		},
 	},
 	// describes Webitel system entities
@@ -198,6 +200,7 @@ export default {
 			draftPlaceholder: 'Напишите сообщение...',
 		},
 		queue: {
+			progressiveCount: 'Количество одновременных звонков',
 			queue: 'Очередь | Очереди',
 			queueType: 'Тип очереди | Типы очередей',
 			type: {
@@ -312,6 +315,11 @@ export default {
 			[CallDirection.Inbound]: 'Входящий | Входящие',
 			[CallDirection.Outbound]: 'Исходящий | Исходящие',
 		},
+		connectionQuality: {
+			high: 'Отличное качество сети.',
+			medium: 'Нестабильное качество сети.',
+			low: 'Плохое качество сети.',
+		},
 	},
 	// describes Webitel FRONTEND applications + their navs
 	WtApplication: {
@@ -401,7 +409,7 @@ export default {
 				[AdminSections.StoragePolicies]: 'Политики хранения файлов',
 				[AdminSections.CognitiveProfiles]: 'Голосовые профили',
 				[AdminSections.EmailProfiles]: 'Email профили',
-				[AdminSections.SingleSignOn]: 'Single Sign-on',
+				[AdminSections.SingleSignOn]: 'SSO',
 				[AdminSections.ImportCsv]: 'Импорт данных из CSV файлов',
 				[AdminSections.Triggers]: 'Триггеры',
 				[AdminSections.Roles]: 'Роли',
@@ -469,6 +477,9 @@ export default {
 			'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9) и начинатся с буквы',
 		integer: 'Поле должно содержать только целые числа',
 		nameAlreadyInUse: 'Это название уже используется',
+		phoneNumberSymbolsValidator:
+			"Номер может содержать только буквы (a-z, A-Z), цифры (0-9) и символы: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Введите логин в формате имя${'@'}домен`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -559,6 +570,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Сортировка по убыванию';
 					return 'Сортировка';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Завершить сеансы',
 			},
 		},
 		errorPages: {
@@ -829,9 +842,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'элементов выбрано',
+		select: {
+			selectedItemsLabel: 'элементов выбрано',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -854,5 +867,10 @@ export default {
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
+	},
+	connectionQuality: {
+		high: 'Отличное качество сети.',
+		medium: 'Возможны задержки, проверьте сеть.',
+		low: 'Плохое качество сети, проверьте сеть.',
 	},
 };

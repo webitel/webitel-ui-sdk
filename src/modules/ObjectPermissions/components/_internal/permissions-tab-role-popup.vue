@@ -1,0 +1,121 @@
+<template>
+  <div class="permissions-tab-role-popup">
+    <wt-icon-btn
+      icon="plus"
+      @click="add"
+    />
+
+    <wt-popup
+      :shown="shown"
+      overflow
+      size="sm"
+      @close="close"
+    >
+      <template #title>
+        {{ `${t('reusable.new')} ${t('objects.grantee', 1).toLowerCase()}` }}
+      </template>
+      <template #main>
+        <permissions-role-select
+          v-model:model-value="grantee"
+          :clearable="false"
+          :placeholder="t('objects.role', 1)"
+          :search-method="getAvailableGrantees"
+        />
+      </template>
+      <template #actions>
+        <wt-button @click="save(grantee)">
+          {{ t('reusable.add') }}
+        </wt-button>
+        <wt-button
+          color="secondary"
+          @click="close"
+        >
+          {{ t('reusable.close') }}
+        </wt-button>
+      </template>
+    </wt-popup>
+  </div>
+</template>
+
+<script setup>
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from 'vue-router';
+
+import RolesAPI from '../../../../api/clients/roles/roles';
+import PermissionsRoleSelect from './permissions-role-select.vue';
+
+const props = defineProps({
+	existingGranteeIds: {
+		type: Array,
+		default: () => [],
+	},
+	addRolePermissions: {
+		type: Function,
+		required: true,
+	},
+});
+
+const { t } = useI18n();
+const router = useRouter();
+const route = useRoute();
+
+const grantee = ref(null);
+
+const shown = computed(() => !!route.params.permissionId);
+
+const add = () => {
+	const { params, query, hash, name } = route;
+
+	router.push({
+		query,
+		hash,
+		name,
+		params: {
+			...params,
+			permissionId: 'new',
+		},
+	});
+};
+
+const close = () => {
+	const { query, hash, name } = route;
+	const { permissionId, ...params } = route.params;
+
+	grantee.value = null;
+
+	return router.push({
+		query,
+		hash,
+		name,
+		params,
+	});
+};
+
+const loadGrantees = (params) => {
+	const fields = [
+		'name',
+		'id',
+		'user',
+	];
+	return RolesAPI.getList({
+		...params,
+		fields,
+	});
+};
+
+const getAvailableGrantees = async (params) => {
+	const { items, ...rest } = await loadGrantees(params);
+	return {
+		items: items.filter((role) => !props.existingGranteeIds.includes(role.id)),
+		...rest,
+	};
+};
+
+const save = async (newGrantee) => {
+	await props.addRolePermissions(newGrantee);
+	return close();
+};
+</script>
+
+<style lang="scss" scoped></style>

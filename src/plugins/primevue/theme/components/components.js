@@ -5,6 +5,7 @@ import breadcrumb from './breadcrumb/breadcrumb.js';
 import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
+import datepicker from './datepicker/datepicker.js';
 import divider from './divider/divider.js';
 import galleria from './galleria/galleria.js';
 import image from './image/image.js';
@@ -22,6 +23,7 @@ import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
 import textarea from './textarea/textarea.js';
+import toast from './toast/toast.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -33,7 +35,9 @@ const components = {
 	badge,
 	chip,
 	checkbox,
+	datepicker,
 	textarea,
+	toast,
 	toggleswitch: switcher,
 	divider,
 	image,

@@ -75,7 +75,8 @@ import {
 } from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
 
-import { IFilter } from '../../classes/Filter';
+import { FilterInitParams } from '../../classes/Filter';
+import type { FilterConfigSearchMethodParams } from '../../modules/filterConfig/classes/FilterConfig';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
@@ -107,17 +108,21 @@ const fillLocalValue = async (filter = props.filter) => {
 	const filterName = props.filter.name;
 	const filterValue = filter.value;
 
-	const valueSearchMethod = props.filterConfig.searchRecords
-		? (...params) => {
-				/* arrow fn here preserves filterConfig class "this" */
-				return props.filterConfig.searchRecords(...params);
-			}
-		: FilterOptionToPreviewApiSearchMethodMap[filterName];
+	const { filterConfig } = props;
+	const valueSearchMethod =
+		'searchRecords' in filterConfig
+			? (...params: FilterConfigSearchMethodParams) => {
+					/* arrow fn here preserves filterConfig class "this" */
+					return filterConfig.searchRecords(...params);
+				}
+			: FilterOptionToPreviewApiSearchMethodMap[filterName];
 
 	if (valueSearchMethod) {
 		const { items } = await valueSearchMethod(
 			{
 				id: filterValue,
+				// -1 returns all records
+				size: -1,
 			},
 			{
 				filterValue,
@@ -147,7 +152,7 @@ const isRenderPreview = computed(
 	() => localValue.value === false || localValue.value,
 );
 
-const submit = (filter: IFilter, { hide }) => {
+const submit = (filter: FilterInitParams, { hide }) => {
 	emit('update:filter', filter);
 	hide();
 };

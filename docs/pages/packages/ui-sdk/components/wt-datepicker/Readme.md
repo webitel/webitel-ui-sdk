@@ -11,9 +11,9 @@ import ExampleDatepickerDatetimeMode from './examples/example-datepicker-datetim
 
 <Specs />
 
-## PLUS ALL VUE DATEPICKER NATIVE PROPS
+## Primevue docs
 
-All passed but not declared props are passed to `<vue-datepicker>` component as attributes
+[PrimevueDatepicker](https://primevue.org/datepicker/)
 
 ## Example Datepicker
 

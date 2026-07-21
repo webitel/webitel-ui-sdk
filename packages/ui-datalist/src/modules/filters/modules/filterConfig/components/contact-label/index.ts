@@ -1,6 +1,10 @@
 import { labels as contactLabels } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import {
+	type FilterConfigSearchFilterContext,
+	type FilterConfigSearchRequestParams,
+	WtSysTypeFilterConfig,
+} from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactLabelFilterValueField from './contact-label-filter-value-field.vue';
 import ContactLabelFilterValuePreview from './contact-label-filter-value-preview.vue';
@@ -11,8 +15,13 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 	valuePreviewComponent = ContactLabelFilterValuePreview;
 
 	searchRecords(
-		params: object,
-		{ filterValue } = {},
+		params: FilterConfigSearchRequestParams,
+		{
+			filterValue,
+		}: Omit<FilterConfigSearchFilterContext, 'filterValue'> & {
+			/* label filter stores the selected labels list itself */
+			filterValue?: unknown[];
+		} = {},
 	): Promise<{
 		items: unknown[];
 		next?: boolean;
@@ -22,9 +31,9 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 		//   For label preview component no need to call the API, so we return filterValue back to the searchRecords method and display it
 
 		if (filterValue)
-			return {
+			return Promise.resolve({
 				items: filterValue,
-			};
+			});
 
 		return contactLabels.getLookup(params);
 	}

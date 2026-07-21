@@ -8,8 +8,8 @@
 
 	--wt-indicator-text-color: var(--text-main-color);
 	--wt-indicator-primary-color: var(--primary-color);
-	--wt-indicator-secondary-color: var(--dp-1-surface-color);
-	--wt-indicator-disabled-color: var(--dp-10-surface-color);
+	--wt-indicator-secondary-color: var(--grey-lighten-3);
+	--wt-indicator-disabled-color: var(--grey-lighten-4);
 	--wt-indicator-success-color: var(--success-color);
 	--wt-indicator-error-color: var(--error-color);
 	--wt-indicator-transfer-color: var(--transfer-color);
@@ -18,4 +18,9 @@
 	--wt-indicator-final-status-color: var(--green-accent-4);
 	--wt-indicator-initial-status-color: var(--red-accent-2);
 	--wt-indicator-other-status-color: var(--orange-accent-2);
+}
+
+:root.theme--dark {
+	--wt-indicator-secondary-color: var(--grey-darken-1);
+	--wt-indicator-disabled-color: var(--grey-darken-2);
 }

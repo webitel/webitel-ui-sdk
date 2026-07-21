@@ -24,6 +24,7 @@ const IconAction = Object.freeze({
 	DOWNLOAD_PDF: 'download-pdf',
 	CHAT: 'chat',
 	SORT: 'sort',
+	LOGOUT: 'logout',
 });
 
 export default IconAction;

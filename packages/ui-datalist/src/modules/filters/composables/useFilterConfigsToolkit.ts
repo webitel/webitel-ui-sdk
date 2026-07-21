@@ -32,12 +32,18 @@ export type FilterConfigToolkit = {
 			filter: IFilter;
 		}>
 	>;
+	staticViewFilterToFilterConfigMappings: ComputedRef<
+		Array<{
+			filterConfig: BaseFilterConfig;
+			filter: IFilter;
+		}>
+	>;
 };
 
 export type FilterConfigToolkitParams = {
 	filterOptions: (FilterOption | BaseFilterConfig)[];
 	filtersManager: IFiltersManager;
-	filterableExtensionFields: WebitelProtoDataField[];
+	filterableExtensionFields?: WebitelProtoDataField[];
 	staticMode?: boolean;
 };
 
@@ -45,7 +51,6 @@ export const useFilterConfigsToolkit = ({
 	filterOptions,
 	filtersManager,
 	filterableExtensionFields = [],
-	staticMode = false,
 }: FilterConfigToolkitParams): FilterConfigToolkit => {
 	const { t } = useI18n();
 

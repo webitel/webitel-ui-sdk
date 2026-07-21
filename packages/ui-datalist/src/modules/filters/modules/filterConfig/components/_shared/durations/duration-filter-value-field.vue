@@ -4,16 +4,16 @@
       v-if="model"
       :label="t('reusable.from')"
       :model-value="model.from"
-      :v="v$.model?.from"
-      format="mm:ss"
+      :v="vFrom"
+      format="hh:mm:ss"
       @update:model-value="handleInput('from', $event)"
     />
     <wt-timepicker
       v-if="model"
       :label="t('reusable.to')"
       :model-value="model.to"
-      :v="v$.model?.to"
-      format="mm:ss"
+      :v="vTo"
+      format="hh:mm:ss"
       @update:model-value="handleInput('to', $event)"
     />
   </div>
@@ -50,7 +50,9 @@ const isValueEmpty = () => {
 	return !!model?.value?.to || !!model?.value?.from;
 };
 
-const v$ = useVuelidate(
+const v$ = useVuelidate<{
+	model: ModelValue;
+}>(
 	computed(() => ({
 		model: {
 			from: {
@@ -69,6 +71,17 @@ const v$ = useVuelidate(
 	},
 );
 v$.value.$touch();
+
+const vFrom = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.from;
+});
+const vTo = computed(() => {
+	const modelValidation = v$.value.model;
+	if (!modelValidation) return undefined;
+	return modelValidation.to;
+});
 
 const handleInput = (key: keyof ModelValue, value: number) => {
 	const newValue = {

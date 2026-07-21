@@ -11,6 +11,10 @@ import ExampleTooltipRoundedAction from './examples/example-tooltip-rounded-acti
 
 # `wt-rounded-action.vue`
 
+> [!CAUTION]
+> Увага, **Застаріле!** Як робитимете шось нове (або перероблятимете старе),
+> то викиньте той `wt-rounded-action`, і заюзайте [`wt-button`](../wt-button/Readme.md).
+
 ## Specs
 
 <Specs />

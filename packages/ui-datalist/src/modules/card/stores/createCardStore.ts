@@ -20,7 +20,13 @@ const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
 	mode: 'all',
 };
 
-export const createCardStore = <Entity = object>({
+export const createCardStore = <
+	Entity extends {
+		id?: string | number;
+	} = {
+		id?: string | number;
+	},
+>({
 	namespace,
 	apiModule,
 	standardValidationSchema,

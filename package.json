@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.6.38",
+	"version": "26.6.111",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -10,7 +10,7 @@
 		"test:coverage": "vitest run --coverage",
 		"biome:format:all": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
-		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"build:types": "vue-tsc -b tsconfig.build.json",
 		"publish-lib": " npm publish --access public --tag latest",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
@@ -22,7 +22,8 @@
 		"utils:i": "npm install",
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
-		"typecheck:ci": "true"
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
+		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
 	},
 	"workspaces": [
 		"./packages/api-services",
@@ -68,6 +69,7 @@
 		"flat": "^6.0.1",
 		"is-valid-domain": "^0.1.6",
 		"path-browserify": "^1.0.1",
+		"primelocale": "^2.4.0",
 		"primevue": "^4.5.4",
 		"qs-esm": "^7.0.3",
 		"sortablejs": "^1.15.3",
@@ -81,7 +83,7 @@
 		"@vuelidate/validators": "^2.0.4",
 		"@webitel/api-services": ">=0.0.105",
 		"@webitel/styleguide": "~26.2",
-		"axios": "^1.15.2",
+		"axios": "^1.18.1",
 		"date-fns": "^4.1.0",
 		"deep-copy": "^1.4.2",
 		"deep-equal": "^2.2.3",
@@ -340,6 +342,10 @@
 		"./modules/Userinfo": {
 			"types": "./types/modules/Userinfo/index.d.ts",
 			"import": "./src/modules/Userinfo/index.ts"
+		},
+		"./modules/ObjectPermissions": {
+			"types": "./types/modules/ObjectPermissions/index.d.ts",
+			"import": "./src/modules/ObjectPermissions/index.ts"
 		},
 		"./plugins*": {
 			"types": "./types/plugins*",

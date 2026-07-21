@@ -9,6 +9,8 @@ import WtBadge from './wt-badge/wt-badge.vue';
 import WtBadgeNew from './wt-badge-new/wt-badge.vue';
 import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
+import WtCallMediaMetric from './wt-call-media-metric/wt-call-media-metric.vue';
+import WtCard from './wt-card/wt-card.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
 import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
@@ -33,17 +35,16 @@ import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
-import WtNotification from './wt-notification/wt-notification.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPassword from './wt-password/wt-password.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
 import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
-import WtSelect from './wt-select/wt-select.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
+import WtToast from './wt-toast/wt-toast.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
 // Async components - heavy or rarely used components
@@ -199,18 +200,17 @@ const Components = {
 	WtPassword,
 	WtIntersectionObserver,
 	WtHint,
-	WtNotification,
 	WtPopup,
 	WtProgressBar,
 	WtRadio,
 	WtSearchBar,
-	WtSelect,
 	WtSlider,
 	WtSwitcher,
 	WtTabs,
 	WtTimeInput,
 	WtTimepicker,
 	WtTextarea,
+	WtToast,
 	WtAppHeader,
 	WtHeadline,
 	WtBreadcrumb,
@@ -250,11 +250,13 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtCard,
 	WtSingleSelect,
 	WtMultiSelect,
 	WtScreenRecordingsAction,
 	WtInlineAddPanel,
 	WtCallMediaAction,
+	WtCallMediaMetric,
 	WtSendMessagePopup,
 };
 
@@ -269,6 +271,8 @@ export {
 	WtButton,
 	WtButtonSelect,
 	WtCallMediaAction,
+	WtCallMediaMetric,
+	WtCard,
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
@@ -308,7 +312,6 @@ export {
 	WtMultiSelect,
 	WtNavigationBar,
 	WtNavigationMenu,
-	WtNotification,
 	WtNotificationsBar,
 	WtPageHeader,
 	WtPageWrapper,
@@ -323,7 +326,6 @@ export {
 	WtRoundedAction,
 	WtScreenRecordingsAction,
 	WtSearchBar,
-	WtSelect,
 	WtSelectionPopup,
 	WtSendMessagePopup,
 	WtSingleSelect,
@@ -339,6 +341,7 @@ export {
 	WtTextarea,
 	WtTimeInput,
 	WtTimepicker,
+	WtToast,
 	WtTooltip,
 	WtTree,
 	WtTreeTable,

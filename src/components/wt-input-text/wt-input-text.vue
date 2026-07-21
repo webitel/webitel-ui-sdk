@@ -30,6 +30,7 @@
         :invalid="invalid"
         :placeholder="placeholder || label"
         class="wt-input-text__input typo-body-1"
+        :class="{ 'wt-input-text__input--masked': isInputMasked }"
         :inputmode="type"
         :size="primevueSizeMap[size]"
         v-bind="$attrs"
@@ -37,10 +38,16 @@
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
-      <p-input-group-addon 
-        v-if="$slots.suffix"
+      <p-input-group-addon
+        v-if="hasSuffixAddon"
         class="wt-input-text__addon typo-body-1"
       >
+        <wt-icon-btn
+          v-if="hideInputValue"
+          :icon="eyeIconName"
+          :disabled="disabled"
+          @click="isValueHidden = !isValueHidden"
+        />
         <slot name="suffix" />
       </p-input-group-addon>
     </p-input-group>
@@ -58,7 +65,14 @@
 <script setup lang="ts">
 import type { RegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
-import { computed, defineModel, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	defineModel,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
@@ -76,6 +90,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	regleValidation?: RegleFieldStatus<string>;
 	customValidators?: unknown[];
 	hideInputInfo?: boolean;
+	hideInputValue?: boolean;
 }
 
 const props = withDefaults(defineProps<WtInputTextProps>(), {
@@ -91,6 +106,7 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	regleValidation: null,
 	customValidators: () => [],
 	hideInputInfo: false,
+	hideInputValue: false,
 });
 
 const primevueSizeMap = {
@@ -128,7 +144,8 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
 const inputHandler = (value) => {
@@ -136,11 +153,23 @@ const inputHandler = (value) => {
 	emit('update:modelValue', handledValue);
 };
 
+const isValueHidden = ref(props.hideInputValue);
+
+const isInputMasked = computed(() => model.value.length && isValueHidden.value);
+const hasSuffixAddon = computed(() => props.hideInputValue || slots.suffix);
+
+const eyeIconName = computed(() =>
+	isValueHidden.value ? 'eye--opened' : 'eye--closed',
+);
+
 defineExpose({
 	focus,
 });
 </script>
 
 <style scoped>
-
+.wt-input-text__input--masked {
+  font-family: 'text-security-disc', sans-serif;
+  -webkit-text-security: disc;
+}
 </style>

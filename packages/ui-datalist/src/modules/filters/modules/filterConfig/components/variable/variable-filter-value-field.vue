@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import variableSearchValidator from '@webitel/ui-sdk/validators/variableSearchValidator/variableSearchValidator';
+import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -24,7 +24,7 @@ const { t } = useI18n();
 const v$ = useVuelidate(
 	computed(() => ({
 		model: {
-			required: variableSearchValidator(),
+			required,
 		},
 	})),
 	{

@@ -1,0 +1,16 @@
+{
+	// Separate from tsconfig.build: needs baseUrl at repo root so monorepo path
+	// aliases resolve; must not inherit emit/rootDir from build.
+	// Clear root `types: [vidstack/vue]` — these packages do not need it, and
+	// package-local installs do not guarantee vidstack in resolution roots.
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"baseUrl": "../..",
+		"types": []
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.vue",
+		"../../env.d.ts"
+	]
+}

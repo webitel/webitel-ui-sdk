@@ -1,5 +1,5 @@
 import deepEqual from 'deep-equal';
-import set from 'lodash/fp/set';
+import set from 'lodash/set';
 import { type Ref, ref, toRaw, watch } from 'vue';
 
 import {
@@ -9,18 +9,14 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
+import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
 	LoadDataListOptions,
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
 
-export const tableStoreBody = <
-	Entity extends {
-		id: string;
-		etag?: string;
-	},
->(
+export const tableStoreBody = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 ) => {
@@ -192,7 +188,7 @@ export const tableStoreBody = <
 	}: PatchItemPropertyParams) => {
 		const item = dataList.value[index];
 		const changes = {};
-		set(path, value, changes);
+		set(changes, path, value);
 
 		try {
 			await apiModule.patch({
@@ -201,7 +197,7 @@ export const tableStoreBody = <
 				id: item.id,
 				etag: item.etag,
 			});
-			set(path, value, item);
+			set(item, path, value);
 		} catch (err) {
 			await loadDataList();
 			throw err;
@@ -360,12 +356,7 @@ export const tableStoreBody = <
 	};
 };
 
-export const createTableStore = <
-	Entity extends {
-		id: string;
-		etag?: string;
-	},
->(
+export const createTableStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
 ) => {

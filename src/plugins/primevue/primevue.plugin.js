@@ -1,3 +1,5 @@
+import { all } from 'primelocale';
+
 import PAutoComplete from 'primevue/autocomplete';
 import PAvatar from 'primevue/avatar';
 import PBadge from 'primevue/badge';
@@ -8,6 +10,7 @@ import PChip from 'primevue/chip';
 import PColumn from 'primevue/column';
 import PrimeVue from 'primevue/config';
 import PTable from 'primevue/datatable';
+import PDatepicker from 'primevue/datepicker';
 import PDivider from 'primevue/divider';
 import PGalleria from 'primevue/galleria';
 import PImage from 'primevue/image';
@@ -24,13 +27,20 @@ import PRadio from 'primevue/radiobutton';
 import PSelect from 'primevue/select';
 import PSlider from 'primevue/slider';
 import PTextarea from 'primevue/textarea';
+import PToast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 import PToggleSwitch from 'primevue/toggleswitch';
 import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
-
+import { computed } from 'vue';
 import WebitelTheme from './theme/webitel-theme.js';
 
 import './primevue.css';
+
+const currentLocale = computed(() => {
+	const locale = localStorage.getItem('lang');
+	return locale === 'kz' ? 'kk' : locale;
+});
 
 const changeComponentCompatMode = (component) => {
 	component.compatConfig = {
@@ -41,6 +51,7 @@ const changeComponentCompatMode = (component) => {
 };
 
 const initPrimevue = (app) => {
+	app.use(ToastService);
 	app.use(PrimeVue, {
 		theme: {
 			preset: WebitelTheme,
@@ -52,6 +63,7 @@ const initPrimevue = (app) => {
 				},
 			},
 		},
+		locale: all[currentLocale.value] || all.en,
 	});
 
 	app.component('PButton', changeComponentCompatMode(PButton));
@@ -82,6 +94,8 @@ const initPrimevue = (app) => {
 		changeComponentCompatMode(PInputGroupAddon),
 	);
 	app.component('PMessage', changeComponentCompatMode(PMessage));
+	app.component('PDatepicker', changeComponentCompatMode(PDatepicker));
+	app.component('PToast', changeComponentCompatMode(PToast));
 	app.component('PMultiSelect', changeComponentCompatMode(PMultiSelect));
 	app.component('PSelect', changeComponentCompatMode(PSelect));
 

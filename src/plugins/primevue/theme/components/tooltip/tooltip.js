@@ -14,7 +14,7 @@ const tooltip = {
 					typo: WtTypography.Body2,
 				})}
           white-space: pre-line;
-          word-break: normal;
+          word-break: break-word;
           background: ${dt('tooltip.background')};
           color: ${dt('tooltip.color')};
           padding: ${dt('tooltip.padding')};

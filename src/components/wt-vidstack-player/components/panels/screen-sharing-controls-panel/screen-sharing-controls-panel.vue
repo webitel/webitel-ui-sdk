@@ -36,8 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, inject } from 'vue';
-
+import { computed, inject } from 'vue';
 import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
 import { ComponentSize } from '../../../../../enums';
 import type {

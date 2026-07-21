@@ -22,7 +22,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import notTranslatable from './notTranslatable.en';
@@ -67,6 +67,8 @@ export default deepmerge(
 			generate: 'Generate',
 			from: 'From',
 			to: 'To',
+			today: 'Today',
+			clear: 'Clear',
 			tts: 'Text-to-Speech',
 			state: 'State',
 			status: 'Status',
@@ -160,9 +162,9 @@ export default deepmerge(
 			operations: 'Operations',
 			rbacDefault: 'Default Record based Access',
 			accessMode: {
-				[AccessMode.FORBIDDEN]: 'Forbidden',
-				[AccessMode.ALLOW]: 'Allow',
-				[AccessMode.MANAGE]: 'Allow with delegation',
+				[AccessMode.Forbidden]: 'Forbidden',
+				[AccessMode.Allow]: 'Allow',
+				[AccessMode.Manage]: 'Allow with delegation',
 			},
 		},
 		// describes Webitel system entities
@@ -205,6 +207,7 @@ export default deepmerge(
 				draftPlaceholder: 'Write a message...',
 			},
 			queue: {
+				progressiveCount: 'Progressive call count',
 				queue: 'Queue | Queues',
 				queueType: 'Queue type | Queue types',
 				type: {
@@ -217,7 +220,7 @@ export default deepmerge(
 					[QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
 					[QueueType.INBOUND_JOB_QUEUE]: 'Inbound task queue',
 					[QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound task queue',
-					[QueueType.INBOUND_IM_CHAT_QUEUE]: 'im queue',
+					[QueueType.IM_CHAT_QUEUE]: 'im queue',
 				},
 			},
 			agent: {
@@ -300,6 +303,11 @@ export default deepmerge(
 			direction: {
 				[CallDirection.Inbound]: 'Inbound',
 				[CallDirection.Outbound]: 'Outbound',
+			},
+			connectionQuality: {
+				high: 'Excellent network quality.',
+				medium: 'Unstable network quality.',
+				low: 'Poor network quality.',
 			},
 		},
 		cases: {
@@ -408,7 +416,7 @@ export default deepmerge(
 					[AdminSections.StoragePolicies]: 'Storage policies',
 					[AdminSections.CognitiveProfiles]: 'Cognitive profiles',
 					[AdminSections.EmailProfiles]: 'Email profiles',
-					[AdminSections.SingleSignOn]: 'Single Sign-on',
+					[AdminSections.SingleSignOn]: 'SSO',
 					[AdminSections.ImportCsv]: 'Imports of CSV from file',
 					[AdminSections.Triggers]: 'Triggers',
 					[AdminSections.Media]: 'Media files',
@@ -481,6 +489,9 @@ export default deepmerge(
 				'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
 			integer: 'The field should contain only whole numbers',
 			nameAlreadyInUse: 'This name is already in use',
+			phoneNumberSymbolsValidator:
+				"Number must contain letters (a-z, A-Z), numbers (0-9), and special characters: +, -, _, ., !, ~, *, ', (,)",
+			loginValidator: () => `Enter login in the format name${'@'}domain`,
 		},
 		webitelUI: {
 			searchBar: {
@@ -575,6 +586,8 @@ export default deepmerge(
 						if (order === SortSymbols.DESC) return 'Sort descending';
 						return 'Sort';
 					},
+					[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+					[IconAction.LOGOUT]: 'End sessions',
 				},
 			},
 			errorPages: {
@@ -872,6 +885,11 @@ export default deepmerge(
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
+		},
+		connectionQuality: {
+			high: 'Excellent network quality.',
+			medium: 'There might be some delay, please check your network.',
+			low: 'Network quality is poor, please check your network.',
 		},
 	},
 	notTranslatable,

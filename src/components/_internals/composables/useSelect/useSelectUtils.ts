@@ -40,3 +40,9 @@ export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
 		...seen.values(),
 	];
 };
+
+export const filterOptionsBySearchValue = (options, value, getOptionLabel) => {
+	return options.filter((option) =>
+		getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
+	);
+};

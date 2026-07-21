@@ -2,7 +2,7 @@ import type { RegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field: Ref<RegleFieldStatus<string>>;
+	field?: Ref<RegleFieldStatus<string>>;
 };
 
 export type UseFieldValidationReturn = {
@@ -14,7 +14,7 @@ export const useFieldValidation = ({
 	field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
 	const invalid = computed(() => {
-		return fieldRef.value.$error ?? false;
+		return fieldRef?.value.$error ?? null;
 	});
 
 	const validationText = computed(() => {
@@ -26,8 +26,8 @@ export const useFieldValidation = ({
 		}
 
 		if (typeof errors === 'object') {
-			const selfErrors = fieldRef.value?.$self?.$errors;
-			if (Array.isArray(selfErrors)) return selfErrors.at(0) ?? '';
+			const selfErrors = fieldRef?.value?.$self?.$errors;
+			if (Array.isArray(selfErrors)) return selfErrors?.at(0) ?? '';
 		}
 
 		return '';

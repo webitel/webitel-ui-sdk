@@ -2,9 +2,8 @@
   <wt-datepicker
     v-if="model"
     :label="`${t('webitelUI.filters.filterValue')}`"
-    :value="model"
-    mode="datetime"
-    @input="model = $event"
+    v-model:model-value="model"
+    show-time
   />
 </template>
 

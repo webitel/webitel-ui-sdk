@@ -77,6 +77,7 @@ import consultativeTransfer from './consultative-transfer.svg?raw';
 import contacts from './contacts.svg?raw';
 import copy from './copy.svg?raw';
 import customChatGateway from './custom-chat-gateway.svg?raw';
+import customProvider from './custom-provider.svg?raw';
 import darkMode from './dark-mode.svg?raw';
 import dislike from './dislike.svg?raw';
 import docs from './docs.svg?raw';
@@ -89,6 +90,7 @@ import elevenlabs from './elevenlabs.svg?raw';
 import email from './email.svg?raw';
 import emailInbound from './email-inbound.svg?raw';
 import emailOutbound from './email-outbound.svg?raw';
+import error from './error.svg?raw';
 import expand from './expand.svg?raw';
 import exportExel from './export-exel.svg?raw';
 import eyeClosed from './eye--closed.svg?raw';
@@ -200,6 +202,7 @@ import selectCustomValueEnter from './select-custom-value-enter.svg?raw';
 import sendArrow from './send-arrow.svg?raw';
 import settings from './settings.svg?raw';
 import sharingEnd from './sharing-end.svg?raw';
+import shieldCheck from './shield-check.svg?raw';
 import socialMedia from './social-media.svg?raw';
 import sortArrowDown from './sort-arrow-down.svg?raw';
 import sortArrowUp from './sort-arrow-up.svg?raw';
@@ -238,7 +241,11 @@ import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
 import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
+import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsSignalHigh from './ws-signal-high.svg?raw';
+import wsSignalLow from './ws-signal-low.svg?raw';
+import wsSignalMedium from './ws-signal-medium.svg?raw';
 import zoomIn from './zoom-in.svg?raw';
 import zoomOut from './zoom-out.svg?raw';
 
@@ -270,6 +277,7 @@ export default objCamelToKebab({
 	calendar,
 	dislike,
 	darkMode,
+	shieldCheck,
 
 	call,
 	'call--filled': callFilled,
@@ -292,6 +300,7 @@ export default objCamelToKebab({
 	'call-transfer--filled': callTransferFilled,
 	consultativeTransfer,
 	updateCalls,
+	customProvider,
 
 	caseAuthor,
 	cases,
@@ -418,6 +427,8 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	error,
+	warning,
 	union,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
@@ -449,6 +460,10 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsSignalHigh,
+	wsSignalMedium,
+	wsSignalLow,
 
 	portal,
 

@@ -11,9 +11,7 @@ export const useSelectCustomValues = ({
 	updateSelectedOptionsCache,
 	selectRef,
 	allowCustomValues,
-	manualCustomValues,
 	isSingle,
-	emit,
 }) => {
 	const makeCustomOption = (text: string) => {
 		const sample = options.value.length

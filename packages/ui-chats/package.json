@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-chats",
-	"version": "0.1.37",
+	"version": "0.1.42",
 	"description": "Reusable Webitel Frontend Code for Chats UI",
 	"workspaces": [
 		"../../",
@@ -9,7 +9,8 @@
 	],
 	"scripts": {
 		"dev": "vite",
-		"build:types": "vue-tsc -p ./tsconfig.build.json",
+		"build:types": "vue-tsc -b tsconfig.build.json",
+		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"lint:fix": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
 		"test:unit": "node -e \"process.exit(0)\"",
@@ -26,6 +27,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.4.16",
 		"@types/node": "^24.10.0",
+		"@webitel/chat-web-sdk": "^0.0.19",
 		"@vitejs/plugin-vue": "^6.0.1",
 		"@vue/tsconfig": "^0.8.1",
 		"mitt": "^3",
@@ -37,10 +39,16 @@
 	},
 	"peerDependencies": {
 		"@webitel/api-services": "^0.1.0",
+		"@webitel/chat-web-sdk": "^0.0.19",
 		"@webitel/styleguide": "~26.2",
 		"@webitel/ui-sdk": "~26.6",
 		"mitt": "^3",
 		"vue": "^3.5"
+	},
+	"peerDependenciesMeta": {
+		"@webitel/chat-web-sdk": {
+			"optional": true
+		}
 	},
 	"type": "module",
 	"main": "index.ts",
@@ -59,6 +67,14 @@
 		"./ui": {
 			"types": "./types/ui/index.d.ts",
 			"import": "./src/ui/index.ts"
+		},
+		"./types": {
+			"types": "./types/types/index.d.ts",
+			"import": "./src/types/index.ts"
+		},
+		"./adapters": {
+			"types": "./types/adapters/index.d.ts",
+			"import": "./src/adapters/index.ts"
 		}
 	},
 	"author": "webitel",

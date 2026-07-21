@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -64,6 +64,8 @@ export default {
 		generate: 'Tạo',
 		from: 'Từ',
 		to: 'Đến',
+		today: 'Hôm nay',
+		clear: 'Xóa',
 		tts: 'Chuyển văn bản thành giọng nói',
 		state: 'Trạng thái',
 		status: 'Trạng thái',
@@ -157,9 +159,9 @@ export default {
 		operations: 'Các thao tác',
 		rbacDefault: 'Mặc định truy cập dựa trên bản ghi',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Cấm',
-			[AccessMode.ALLOW]: 'Cho phép',
-			[AccessMode.MANAGE]: 'Cho phép với ủy quyền',
+			[AccessMode.Forbidden]: 'Cấm',
+			[AccessMode.Allow]: 'Cho phép',
+			[AccessMode.Manage]: 'Cho phép với ủy quyền',
 		},
 	},
 	// describes Webitel system entities
@@ -202,6 +204,7 @@ export default {
 			draftPlaceholder: 'Viết tin nhắn...',
 		},
 		queue: {
+			progressiveCount: 'Số cuộc gọi tiến trình',
 			queue: 'Hàng chờ | Hàng chờ',
 			queueType: 'Loại hàng đợi | Các loại hàng đợi',
 			type: {
@@ -296,6 +299,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Gọi vào',
 			[CallDirection.Outbound]: 'Gọi ra',
+		},
+		connectionQuality: {
+			high: 'Chất lượng mạng tuyệt vời.',
+			medium: 'Chất lượng mạng không ổn định.',
+			low: 'Chất lượng mạng kém.',
 		},
 	},
 	cases: {
@@ -473,6 +481,9 @@ export default {
 			'Mã phải chỉ chứa chữ cái (A-Z, a-z) và số (0-9), và phải bắt đầu bằng chữ cái',
 		integer: 'Trường này chỉ được chứa số nguyên',
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
+		phoneNumberSymbolsValidator:
+			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Nhập tên đăng nhập theo định dạng tên${'@'}miền`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -567,6 +578,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Sắp xếp giảm dần';
 					return 'Sắp xếp';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Kết thúc phiên',
 			},
 		},
 		errorPages: {
@@ -836,9 +849,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'mục đã chọn',
+		select: {
+			selectedItemsLabel: 'mục đã chọn',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -861,5 +874,10 @@ export default {
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
+	},
+	connectionQuality: {
+		high: 'Chất lượng mạng tuyệt vời.',
+		medium: 'Có thể có độ trễ, vui lòng kiểm tra mạng.',
+		low: 'Chất lượng mạng kém, vui lòng kiểm tra mạng.',
 	},
 };

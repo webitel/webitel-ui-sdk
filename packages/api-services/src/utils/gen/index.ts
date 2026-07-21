@@ -16,8 +16,8 @@ export const getShallowFieldsToSendFromZodSchema = (
  */
 
 // get zod object keys recursively
-export const getFieldsToSendFromZodSchema = <T extends z.ZodObject>(
-	schema: T,
+export const getFieldsToSendFromZodSchema = (
+	schema: z.core.$ZodType,
 ): string[] => {
 	// make sure schema is not null or undefined
 	if (schema === null || schema === undefined) return [];

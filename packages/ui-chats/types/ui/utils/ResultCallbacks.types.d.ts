@@ -1,1 +1,0 @@
-export { ResultCallbacks } from "@webitel/ui-sdk/src/types";

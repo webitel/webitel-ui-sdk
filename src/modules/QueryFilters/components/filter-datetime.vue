@@ -1,9 +1,9 @@
 <template>
   <wt-datepicker
     :label="label"
-    :value="filterSchema.value"
-    mode="datetime"
-    @input="handleChange"
+    :model-value="filterSchema.value"
+    show-time
+    @update:model-value="handleChange"
   />
 </template>
 

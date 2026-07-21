@@ -1,7 +1,12 @@
 import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
-import { dedupeByKey, isOptionSelected, toArray } from './useSelectUtils';
+import {
+	dedupeByKey,
+	filterOptionsBySearchValue,
+	isOptionSelected,
+	toArray,
+} from './useSelectUtils';
 
 export const useSelectOptions = ({
 	selected,
@@ -11,6 +16,7 @@ export const useSelectOptions = ({
 	dataKey,
 	allowCustomValues,
 	searchMethod,
+	strictApiOptions,
 }) => {
 	const { t } = useI18n();
 	const defaultOptionLabel = 'name';
@@ -46,11 +52,7 @@ export const useSelectOptions = ({
 			(isSelected ? selectedOptions : otherOptions).push(option);
 		}
 
-		const topOptions =
-			dataKey.value || selectedOptions.length
-				? selectedOptions
-				: selectedAsArray;
-		return topOptions.concat(otherOptions);
+		return selectedOptions.concat(otherOptions);
 	};
 
 	const getOptionLabel = (option) => {
@@ -62,7 +64,10 @@ export const useSelectOptions = ({
 		// when optionValue is used PrimeVue passes the extracted primitive instead of the full object
 		if (optionValue?.value && typeof option !== 'object') {
 			const foundOption = (
-				filteredOptions.value as Record<string, unknown>[]
+				[
+					...filteredOptions.value,
+					...selectedOptionsCache.value,
+				] as Record<string, unknown>[]
 			).find((o) => o[optionValue.value] === option);
 			return foundOption ? getOptionLabel(foundOption) : String(option);
 		}
@@ -70,11 +75,19 @@ export const useSelectOptions = ({
 		if (optionLabel.value && option[optionLabel.value])
 			return option[optionLabel.value];
 		if (option.locale) {
-			if (Array.isArray(option.locale)) return t(...option.locale);
+			if (Array.isArray(option.locale))
+				return t(
+					...(option.locale as [
+						string,
+					]),
+				);
 			return t(option.locale);
 		}
 		return option[defaultOptionLabel] || option;
 	};
+
+	const filterBySearch = (opts, value) =>
+		filterOptionsBySearchValue(opts, value, getOptionLabel);
 
 	// Cache of full option objects for currently selected values,
 	// so they can be preserved in filteredOptions after filtering
@@ -102,6 +115,25 @@ export const useSelectOptions = ({
 		selectedOptionsCache.value = mergedOptions.filter(isSelected);
 	};
 
+	const fetchSelectedByIds = async () => {
+		if (!searchMethod.value || !optionValue?.value || !selected.value) return;
+		const ids = toArray(selected.value);
+		if (!ids.length) return;
+		isLoading.value = true;
+		const { items } = await searchMethod.value({
+			[dataKey.value]: ids,
+			size: ids.length,
+		});
+		selectedOptionsCache.value = dedupeByKey(
+			[
+				...selectedOptionsCache.value,
+				...items,
+			],
+			dataKey.value,
+		);
+		isLoading.value = false;
+	};
+
 	const fetchOptions = async () => {
 		if (!searchMethod.value) return;
 		const { search, page } = searchParams;
@@ -110,20 +142,21 @@ export const useSelectOptions = ({
 			search,
 			page,
 		});
+		const matchingCached = search
+			? filterBySearch(selectedOptionsCache.value, search)
+			: selectedOptionsCache.value;
 		const baseOptions =
 			searchParams.page === 1
 				? dedupeByKey(
 						[
-							...selectedOptionsCache.value,
-							...toArray(selected.value).filter(
-								(s) => s != null && typeof s === 'object',
-							),
+							...matchingCached,
 							...items,
 						],
 						dataKey.value,
 					)
 				: filteredOptions.value.concat(items);
 		filteredOptions.value = sortOptions(baseOptions);
+		addSelectedValueToList(selected.value);
 		searchHasNext.value = next;
 		searchParams.page += 1;
 		isLoading.value = false;
@@ -137,16 +170,15 @@ export const useSelectOptions = ({
 
 	const debouncedFetch = debounce((value) => resetAndFetch(value));
 
-	const filterOptions = (value) => {
+	const filterOptionsBase = (value) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
-			const matchingOptions = options.value.filter((option) =>
-				getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
-			);
+			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
+			const matchingOptions = filterBySearch(options.value, value);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...selectedOptionsCache.value,
+						...matchingCached,
 						...matchingOptions,
 					],
 					dataKey.value,
@@ -159,16 +191,23 @@ export const useSelectOptions = ({
 
 	const addSelectedValueToList = (newVal) => {
 		// If the selected value is not in the list, add it
-		if (!newVal || !searchMethod.value) return;
+		if (!newVal || !searchMethod.value || strictApiOptions?.value) return;
 		const selectedAsArray = toArray(newVal);
 		const missingSelected = selectedAsArray.filter(
 			(s) => !isOptionSelected(s, filteredOptions.value, dataKey.value),
 		);
 		if (missingSelected.length) {
+			// resolve primitives to full objects from cache so PrimeVue can checkmark them
+			const resolved = missingSelected.map(
+				(s) =>
+					(selectedOptionsCache.value as Record<string, unknown>[]).find(
+						(o) => o[dataKey.value] === s,
+					) ?? s,
+			);
 			filteredOptions.value = sortOptions(
 				dedupeByKey(
 					[
-						...missingSelected,
+						...filterBySearch(resolved, filterText.value),
 						...filteredOptions.value,
 					],
 					dataKey.value,
@@ -202,8 +241,9 @@ export const useSelectOptions = ({
 		sortOptions,
 		getOptionLabel,
 		fetchOptions,
+		fetchSelectedByIds,
 		resetAndFetch,
-		filterOptions,
+		filterOptionsBase,
 		updateSelectedOptionsCache,
 	};
 };

@@ -1,3 +1,4 @@
+import { onMounted } from 'vue';
 import { useSelectCustomValues } from './useSelectCustomValues';
 import { useSelectDropdown } from './useSelectDropdown';
 import { useSelectLoader } from './useSelectLoader';
@@ -10,13 +11,15 @@ export const useSelect = ({
 	optionValue,
 	dataKey,
 	allowCustomValues,
-	manualCustomValues = false,
+	// accepted for API compatibility; custom-value manual handling is currently disabled
+	manualCustomValues: _manualCustomValues = false,
 	filterInput,
 	selectRef,
 	searchMethod,
 	selectId,
 	isSingle,
-	emit = () => {},
+	strictApiOptions = undefined,
+	emit = (_event: string, ..._args: unknown[]) => {},
 }) => {
 	const {
 		filterText,
@@ -26,8 +29,9 @@ export const useSelect = ({
 		sortOptions,
 		getOptionLabel,
 		fetchOptions,
+		fetchSelectedByIds,
 		resetAndFetch,
-		filterOptions,
+		filterOptionsBase,
 		updateSelectedOptionsCache,
 	} = useSelectOptions({
 		selected,
@@ -37,6 +41,7 @@ export const useSelect = ({
 		dataKey,
 		allowCustomValues,
 		searchMethod,
+		strictApiOptions,
 	});
 
 	const {
@@ -45,6 +50,7 @@ export const useSelect = ({
 		onDropdownBeforeHide,
 		onDropdownShow,
 		onDropdownHide,
+		filterOptionsAndScrollToTop,
 	} = useSelectDropdown({
 		selectId,
 		selectRef,
@@ -52,7 +58,7 @@ export const useSelect = ({
 		searchMethod,
 		filteredOptions,
 		filterText,
-		filterOptions,
+		filterOptions: filterOptionsBase,
 		resetAndFetch,
 		sortOptions,
 		fetchOptions,
@@ -68,13 +74,17 @@ export const useSelect = ({
 		options,
 		dataKey,
 		filterText,
-		filterOptions,
+		filterOptions: filterOptionsAndScrollToTop,
 		updateSelectedOptionsCache,
 		selectRef,
 		allowCustomValues,
-		manualCustomValues,
 		isSingle,
-		emit,
+	});
+
+	onMounted(async () => {
+		await fetchSelectedByIds();
+		if (!searchMethod.value) return;
+		fetchOptions();
 	});
 
 	const clearValue = () => {
@@ -94,7 +104,7 @@ export const useSelect = ({
 		filteredOptions,
 		getOptionLabel,
 		fetchOptions,
-		filterOptions,
+		filterOptions: filterOptionsAndScrollToTop,
 		onDropdownBeforeShow,
 		onDropdownBeforeHide,
 		onDropdownShow,

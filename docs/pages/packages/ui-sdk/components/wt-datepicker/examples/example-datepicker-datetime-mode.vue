@@ -6,10 +6,9 @@ const value = ref(Date.now());
 
 <template>
   <wt-datepicker
-    :value="value"
+    v-model="value"
     label="Date Time picker"
-    mode="datetime"
-    @input="value = $event"
+    show-time
   />
 </template>
 

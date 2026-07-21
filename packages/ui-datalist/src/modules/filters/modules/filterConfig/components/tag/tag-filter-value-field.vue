@@ -1,6 +1,5 @@
 <template>
   <wt-multi-select
-    :show-clear="false"
     :label="t('webitelUI.filters.filterValue')"
     :options="CallHistoryTagFilterOptions"
     v-model:model-value="model"

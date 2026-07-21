@@ -1,15 +1,25 @@
-import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
+import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
-import type { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTable';
 import type { IFiltersManager } from '../filters';
 import type { DatalistStoreProviderType } from './StoreProvider';
+
+/**
+ * Table header shape used inside the datalist stores. In addition to the
+ * base {@link WtTableHeader} shape, datalist stores key columns by `field`
+ * and may flag dynamically-appended headers for lazy initialization.
+ */
+export type DatalistTableHeader = WtTableHeader & {
+	field: string;
+	shouldBeInitialized?: boolean;
+};
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
 
 export interface useTableStoreConfig<Entity> {
 	apiModule: ApiModule<Entity>;
-	headers: WtTableHeader[];
+	headers: DatalistTableHeader[];
 	disablePersistence?: boolean | [];
 	storeType?: DatalistStoreProviderType;
 	isAppendDataList?: boolean;

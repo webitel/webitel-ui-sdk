@@ -17,8 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue';
-
 const props = withDefaults(
 	defineProps<{
 		newMessageCount?: number;

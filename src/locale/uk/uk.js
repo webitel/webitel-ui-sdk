@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -60,6 +60,8 @@ export default {
 		generate: 'Згенерувати',
 		from: 'Від',
 		to: 'До',
+		today: 'Сьогодні',
+		clear: 'Очистити',
 		tts: 'Text-to-Speech',
 		state: 'Стан',
 		status: 'Статус',
@@ -152,9 +154,9 @@ export default {
 		operations: 'Дії',
 		rbacDefault: 'Права доступу на записи за замовчуванням',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Заборонено',
-			[AccessMode.ALLOW]: 'Дозволено',
-			[AccessMode.MANAGE]: 'Управління',
+			[AccessMode.Forbidden]: 'Заборонено',
+			[AccessMode.Allow]: 'Дозволено',
+			[AccessMode.Manage]: 'Управління',
 		},
 	},
 	// describes Webitel system entities
@@ -197,6 +199,7 @@ export default {
 			draftPlaceholder: 'Напишіть повідомлення...',
 		},
 		queue: {
+			progressiveCount: 'Кількість одночасних дзвінків',
 			queue: 'Черга | Черги',
 			queueType: 'Тип черги | Типи черг',
 			type: {
@@ -291,6 +294,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Вхідний | Вхідні',
 			[CallDirection.Outbound]: 'Вихідний | Вихідні',
+		},
+		connectionQuality: {
+			high: 'Чудова якість мережі.',
+			medium: 'Нестабільна якість мережі.',
+			low: 'Погана якість мережі.',
 		},
 	},
 	cases: {
@@ -400,7 +408,7 @@ export default {
 				[AdminSections.StoragePolicies]: 'Політики збереження файлів',
 				[AdminSections.CognitiveProfiles]: 'Голосові профілі',
 				[AdminSections.EmailProfiles]: 'Email профілі',
-				[AdminSections.SingleSignOn]: 'Single Sign-on',
+				[AdminSections.SingleSignOn]: 'SSO',
 				[AdminSections.ImportCsv]: 'Імпорт даних з CSV файлів',
 				[AdminSections.Triggers]: 'Тригери',
 				[AdminSections.Roles]: 'Ролі',
@@ -468,6 +476,9 @@ export default {
 			'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
 		integer: 'Поле повинно містити лише цілі числа',
 		nameAlreadyInUse: 'Така назва вже використовується',
+		phoneNumberSymbolsValidator:
+			"Номер може містити лише літери (a-z, A-Z), цифри (0-9) та символи: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -558,6 +569,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Сортування за спаданням';
 					return 'Сортування';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Завершити сеанси',
 			},
 		},
 		errorPages: {
@@ -828,9 +841,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'елементів вибрано',
+		select: {
+			selectedItemsLabel: 'елементів вибрано',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -852,5 +865,10 @@ export default {
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',
 		markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
+	},
+	connectionQuality: {
+		high: 'Відмінна якість мережі.',
+		medium: 'Можливі затримки, перевірте мережу.',
+		low: 'Погана якість мережі, перевірте мережу.',
 	},
 };

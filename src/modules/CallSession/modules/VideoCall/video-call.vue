@@ -274,7 +274,7 @@ const emitKeys = {
 	[VideoCallAction.Settings]: `action:${VideoCallAction.Settings}`,
 	[VideoCallAction.Chat]: `action:${VideoCallAction.Chat}`,
 	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
-};
+} as const;
 
 const { t } = useI18n();
 
@@ -657,6 +657,10 @@ const senderVideoMutedIconSizes = {
 .video-call-receiver--sm.video-call-receiver__fallback-screen {
   justify-content: flex-end;
   padding-bottom: calc(var(--p-player-control-bar-sm-height) + 24px);
+}
+
+.video-call--pip .video-call-receiver--sm.video-call-receiver__fallback-screen {
+  justify-content: center;
 }
 
 .video-call-sender {

@@ -12,12 +12,17 @@ import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.
 import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
+import {
+	ConnectionQualityLevels,
+	type ConnectionQualityLevelsType,
+} from './ConnectionQualityLevel/ConnectionQualityLevel.enum';
 import { CrudAction } from './CrudAction/CrudAction';
 import { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTabSettings/DefaultWorkspaceTabSettings';
 import { EmptyCause } from './EmptyCause/EmptyCause';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { LoginOptions } from './LoginOptions/LoginOptions';
 import { MessageColor } from './MessageColor/MessageColor';
 import { MessageVariant } from './MessageVariant/MessageVariant';
 import { MimeTypes } from './MimeTypes/MimeTypes.enum';
@@ -25,6 +30,8 @@ import { ProcessingTableColumnType } from './ProcessingTableColumnType/Processin
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { RingtoneType } from './RingtoneType/RingtoneType.js';
+import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
+import { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
 import { AuditorSections } from './WebitelApplications/AuditorSections';
@@ -36,6 +43,7 @@ import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
 export type {
+	ConnectionQualityLevelsType,
 	UserSettingsBroadcastMessage,
 	WebphoneBroadcastMessage,
 	WebphoneBroadcastPayload,
@@ -52,6 +60,7 @@ export {
 	ChatGatewayProvider,
 	ChipColor,
 	ComponentSize,
+	ConnectionQualityLevels,
 	CrmSections,
 	CrudAction,
 	DefaultWorkspaceTabSettings,
@@ -59,6 +68,7 @@ export {
 	FormatDateMode,
 	IconAction,
 	IconColor,
+	LoginOptions,
 	MessageColor,
 	MessageVariant,
 	MimeTypes,
@@ -68,6 +78,8 @@ export {
 	QueueTypeName,
 	RelativeDatetimeValue,
 	RingtoneType,
+	SingleSignOnProvider,
+	SingleSignOnProviderIconMappings,
 	SupervisorSections,
 	TypesExportedSettings,
 	WfmSections,

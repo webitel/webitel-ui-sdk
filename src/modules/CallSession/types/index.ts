@@ -1,4 +1,4 @@
-import { ScreenSharingSession } from './ScreenSharingSession';
-import { ScreenshotStatus } from './ScreenshotStatus';
+import type { ScreenSharingSession } from './ScreenSharingSession';
+import type { ScreenshotStatus } from './ScreenshotStatus';
 
-export { ScreenSharingSession, ScreenshotStatus };
+export type { ScreenSharingSession, ScreenshotStatus };

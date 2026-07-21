@@ -52,7 +52,7 @@ const getQuickRepliesList = async (params) => {
 			sort,
 			id,
 			q,
-			restrict_to_agent,
+			restrictToAgent: restrict_to_agent,
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),

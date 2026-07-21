@@ -1,6 +1,9 @@
 import { contactGroups } from '@webitel/ui-sdk/api/clients/index';
 
 import {
+	type FilterConfigBaseParams,
+	type FilterConfigSearchFilterContext,
+	type FilterConfigSearchRequestParams,
 	type IWtSysTypeFilterConfig,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
@@ -15,7 +18,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 	hideUnassigned?: boolean;
 
 	constructor(
-		params: {
+		params: FilterConfigBaseParams & {
 			hideUnassigned?: boolean;
 		} = {},
 	) {
@@ -26,8 +29,8 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 	}
 
 	searchRecords(
-		params: object,
-		{ filterValue } = {},
+		params: FilterConfigSearchRequestParams,
+		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
 		items: unknown[];
 		next?: boolean;
@@ -39,9 +42,16 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		// params.id /* wt-select options loadings */
 		// filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
 
+		// This endpoint uses `limit = size + 1`, so the preview's `size: -1`
+		// becomes `limit: 0` and returns nothing. Request as many records as
+		// there are ids instead.
+		const idsCount = Array.isArray(id) ? id.length : 10;
+		const size = idsCount || params.size;
+
 		return contactGroups.getLookup({
 			...params,
 			id,
+			size,
 			type: 'STATIC',
 		});
 	}

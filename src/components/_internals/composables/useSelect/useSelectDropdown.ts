@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 
 export const useSelectDropdown = ({
 	selectId,
@@ -16,6 +16,7 @@ export const useSelectDropdown = ({
 }) => {
 	const isDropdownOpen = ref(false);
 	let overlayResizeObserver: ResizeObserver | null = null;
+	let positionRafId: number | null = null;
 
 	const getListContainer = (): HTMLElement | null => {
 		return document.querySelector(`#${selectId.value}_list`)
@@ -54,6 +55,54 @@ export const useSelectDropdown = ({
 			});
 			overlayResizeObserver.observe(overlay);
 		}
+
+		/*
+		  @author @HlukhovYe
+
+			https://webitel.atlassian.net/browse/WTEL-9800
+
+		  ResizeObserver only fires when the element's dimensions change, not when it moves.
+		  A rAF loop detects position changes (e.g. modal resize, parent reflow) and realigns
+		  the overlay accordingly. Cancelled on dropdown hide to avoid leaking frames.
+		*/
+		const triggerEl = selectRef?.value?.$el;
+		if (triggerEl) {
+			let lastTop = triggerEl.getBoundingClientRect().top;
+			let lastLeft = triggerEl.getBoundingClientRect().left;
+			const poll = () => {
+				const rect = triggerEl.getBoundingClientRect();
+				if (rect.top !== lastTop || rect.left !== lastLeft) {
+					lastTop = rect.top;
+					lastLeft = rect.left;
+					selectRef.value?.alignOverlay();
+				}
+				positionRafId = requestAnimationFrame(poll);
+			};
+			positionRafId = requestAnimationFrame(poll);
+		}
+	};
+
+	/*
+	  @author @HlukhovYe
+
+		https://webitel.atlassian.net/browse/WTEL-9798
+
+	  Scroll the list to top after filtering. A plain nextTick() after filterOptions() is not
+	  enough when searchMethod is used — filteredOptions only updates after the async fetch
+	  resolves. The flag ensures the scroll fires on the first filteredOptions change after a
+	  search input, but not on subsequent changes (e.g. infinite-scroll page appends).
+	*/
+	let scrollOnNextOptionsUpdate = false;
+
+	watch(filteredOptions, () => {
+		if (!scrollOnNextOptionsUpdate) return;
+		scrollOnNextOptionsUpdate = false;
+		nextTick(() => getListContainer()?.scrollTo(0, 0));
+	});
+
+	const filterOptionsAndScrollToTop = (value: string) => {
+		scrollOnNextOptionsUpdate = true;
+		filterOptions(value);
 	};
 
 	const onDropdownBeforeHide = () => {
@@ -70,6 +119,10 @@ export const useSelectDropdown = ({
 		isDropdownOpen.value = false;
 		overlayResizeObserver?.disconnect();
 		overlayResizeObserver = null;
+		if (positionRafId !== null) {
+			cancelAnimationFrame(positionRafId);
+			positionRafId = null;
+		}
 		if (searchMethod.value) {
 			/*
 			  @author @HlukhovYe
@@ -89,5 +142,6 @@ export const useSelectDropdown = ({
 		onDropdownBeforeHide,
 		onDropdownShow,
 		onDropdownHide,
+		filterOptionsAndScrollToTop,
 	};
 };

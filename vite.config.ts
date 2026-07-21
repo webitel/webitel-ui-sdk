@@ -25,6 +25,7 @@ export default (/*{ mode }*/) => {
 				external: [
 					'vue',
 					'primevue',
+					/^primevue\//,
 					'@aliasedDeps/api-services/axios',
 					'lodash-es',
 					'zod',

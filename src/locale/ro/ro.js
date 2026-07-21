@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -64,6 +64,8 @@ export default {
 		generate: 'Generează',
 		from: 'De la',
 		to: 'Până la',
+		today: 'Astăzi',
+		clear: 'Șterge',
 		tts: 'Text-to-Speech',
 		state: 'Stare',
 		status: 'Status',
@@ -157,9 +159,9 @@ export default {
 		operations: 'Operațiuni',
 		rbacDefault: 'Acces implicit bazat pe înregistrări',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Interzis',
-			[AccessMode.ALLOW]: 'Permite',
-			[AccessMode.MANAGE]: 'Permite cu delegare',
+			[AccessMode.Forbidden]: 'Interzis',
+			[AccessMode.Allow]: 'Permite',
+			[AccessMode.Manage]: 'Permite cu delegare',
 		},
 	},
 	// describes Webitel system entities
@@ -202,6 +204,7 @@ export default {
 			draftPlaceholder: 'Scrie un mesaj...',
 		},
 		queue: {
+			progressiveCount: 'Număr apeluri progresive',
 			queue: 'Coadă | Cozi',
 			queueType: 'Tip de coadă | Tipuri de cozi',
 			type: {
@@ -296,6 +299,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Intrare',
 			[CallDirection.Outbound]: 'Ieșire',
+		},
+		connectionQuality: {
+			high: 'Calitate excelentă a rețelei.',
+			medium: 'Calitate instabilă a rețelei.',
+			low: 'Calitate slabă a rețelei.',
 		},
 	},
 	cases: {
@@ -474,6 +482,9 @@ export default {
 			'Codul trebuie să conțină doar litere (A-Z, a-z) și cifre (0-9), și trebuie să înceapă cu o literă',
 		integer: 'Câmpul trebuie să conțină doar numere întregi',
 		nameAlreadyInUse: 'Acest nume este deja folosit',
+		phoneNumberSymbolsValidator:
+			"Numărul poate conține doar litere (a-z, A-Z), cifre (0-9) și simbolurile: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -568,6 +579,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Sortare descrescătoare';
 					return 'Sortare';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Închide sesiunile',
 			},
 		},
 		errorPages: {
@@ -838,9 +851,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'elemente selectate',
+		select: {
+			selectedItemsLabel: 'elemente selectate',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -863,5 +876,10 @@ export default {
 			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
+	},
+	connectionQuality: {
+		high: 'Calitate excelentă a rețelei.',
+		medium: 'Pot exista întârzieri, verificați rețeaua.',
+		low: 'Calitatea rețelei este slabă, verificați rețeaua.',
 	},
 };

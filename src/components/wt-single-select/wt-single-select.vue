@@ -1,5 +1,5 @@
 <template>
-  <div class="wt-single-select">
+  <div class="wt-single-select" :class="{ 'wt-single-select--has-value': model }">
     <wt-label 
       v-if="hasLabel" 
       :disabled="disabled" 
@@ -22,11 +22,12 @@
       :focus-on-hover="false"
       :disabled="disabled"
       :placeholder="placeholder || label"
-      :option-disabled="() => disabledOptions"
+      :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
       :data-key="dataKey"
+      :size="primevueSizeMap[size]"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -36,7 +37,7 @@
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
-      @hide="onDropdownHide"
+      @hide="handleDropdownHide"
     >
       <template #header>
         <wt-input-text
@@ -49,8 +50,8 @@
           @keydown.enter.stop="onInputKeydown"
         >
           <template #suffix>
-            <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
-            <wt-icon icon="search" />
+            <wt-icon v-if="allowCustomValues && filterText" disabled icon="select-custom-value-enter" />
+            <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>
       </template>
@@ -58,8 +59,10 @@
         <slot name="value" v-bind="{ value, getOptionLabel, placeholder }">
           <span
             v-tooltip="getOptionLabel(value)"
+            class="wt-single-select__value"
+            @mousedown.stop
           >
-            {{ getOptionLabel(value) || placeholder }}
+            {{ getOptionLabel(value) || placeholder }}&nbsp;
           </span>
         </slot>
       </template>
@@ -115,10 +118,15 @@ interface Props extends SelectProps {
 	placeholder?: string;
 	required?: boolean;
 	disabled?: boolean;
+	size?: string | null;
 	/**
 	 * true disables all options but keeps dropdown visible
 	 */
 	disabledOptions?: boolean;
+	/**
+	 * true — the select will only show options returned by the API, never prepending the current model value if it is missing from the list
+	 */
+	strictApiOptions?: boolean;
 	/**
 	 * false disables options search
 	 */
@@ -158,6 +166,11 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
+const primevueSizeMap = {
+	[ComponentSize.SM]: 'small',
+	[ComponentSize.LG]: 'large',
+};
+
 const model = defineModel<string>({
 	default: '',
 	get: (value) => {
@@ -169,6 +182,7 @@ const model = defineModel<string>({
 
 const emit = defineEmits<{
 	reset: [];
+	hide: [];
 }>();
 
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
@@ -202,6 +216,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: true,
+	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });
 
@@ -221,12 +236,14 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
-onMounted(() => {
-	if (props.searchMethod) fetchOptions();
-});
+const handleDropdownHide = () => {
+	onDropdownHide();
+	emit('hide');
+};
 </script>
 
 <style scoped>
@@ -235,8 +252,27 @@ onMounted(() => {
   min-width: 0;
 }
 
+/*
+  @author @HlukhovYe
+
+  PrimeVue applies data-p="placeholder" to the label span when the selected item
+  is not found in visibleOptions (e.g. during search). Override the placeholder
+  color since our #value slot renders the correct label from the model directly.
+*/
+.wt-single-select--has-value :deep(.p-select-label[data-p~='placeholder']) {
+  color: inherit;
+}
+
 .wt-single-select__option-label {
   user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wt-single-select__value {
+  cursor: text;
+  user-select: text;
 }
 
 .wt-single-select__input {

@@ -6,9 +6,8 @@ const value = ref(Date.now());
 
 <template>
   <wt-datepicker
-    :value="value"
+    v-model="value"
     label="Datepicker"
-    @input="value = $event"
   />
 </template>
 

@@ -8,6 +8,7 @@
       :size="ComponentSize.SM"
       :src="mediaSrc"
       :title="file.name"
+      countdown-time-mode
       static
       hide-expand
       stretch
@@ -17,6 +18,7 @@
       :src="mediaSrc"
       :autoplay="false"
       :closable="false"
+      countdown-time-mode
       hide-volume-slider
       hide-mute-button
       class="chat-message-player__audio"
@@ -28,8 +30,7 @@
 <script setup lang="ts">
 import { WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { computed, defineEmits, defineProps } from 'vue';
-
+import { computed } from 'vue';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{

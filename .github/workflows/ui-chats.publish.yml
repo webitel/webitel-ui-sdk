@@ -3,6 +3,16 @@ name: webitel ui-chats pkg publish
 on:
 #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
   workflow_dispatch:
+    inputs:
+      version_tag:
+        description: Version tag
+        required: false
+        default: latest
+        type: choice
+        options:
+          - latest
+          - next
+          - ws2
 
 jobs:
   publish:
@@ -29,7 +39,7 @@ jobs:
           npm run lint:fix || true
           (npm run build:types || true)
           npm run lint:package || true
-          npm run utils:publish
+          npm run utils:publish -- --tag ${{ inputs.version_tag }}
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v7

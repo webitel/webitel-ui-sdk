@@ -103,7 +103,7 @@ import { computed, toRef } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import { useWtTable } from '../_internals/composables/useWtTable/useWtTable';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
-import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
+import type { WtTableHeader } from '../wt-table/types/WtTable';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(

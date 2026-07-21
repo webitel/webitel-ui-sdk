@@ -61,12 +61,14 @@ export const createDatalistStore = <
 	}
 
 	if (thisStoreType === DatalistStoreProvider.Pinia) {
+		// Pinia StoreDefinition is a valid PatchableStoreFactory at runtime;
+		// PatchableStore includes StoreGeneric so consumers can use storeToRefs.
 		return definePiniaStore(namespace, () =>
 			storeBody({
 				...config,
 				storeType: thisStoreType,
 			}),
-		);
+		) as PatchableStoreFactory<StoreBody>;
 	}
 
 	throw new Error(`Unsupported store type: ${thisStoreType}`);

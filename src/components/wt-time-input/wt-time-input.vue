@@ -5,7 +5,7 @@
     :label-props="labelProps"
     :name="name"
     :max="maxValue"
-    :min="0"
+    :min="minValue"
 		:v="v"
     :required="required"
     :disabled="disabled"
@@ -29,6 +29,10 @@ interface WtTimeInputProps {
 	 * Time type: day, minute, second
 	 */
 	maxValue?: number;
+	/**
+	 * Minimum selectable value
+	 */
+	minValue?: number;
 	/**
 	 * Native input required attribute
 	 */
@@ -63,6 +67,7 @@ const props = withDefaults(defineProps<WtTimeInputProps>(), {
 	label: '',
 	name: '',
 	maxValue: undefined,
+	minValue: 0,
 	required: false,
 	disabled: false,
 	labelProps: () => ({}),

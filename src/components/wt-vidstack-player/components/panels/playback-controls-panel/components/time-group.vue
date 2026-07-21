@@ -12,8 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
-
 const props = withDefaults(
 	defineProps<{
 		countdown?: boolean;
@@ -35,5 +33,6 @@ const props = withDefaults(
   align-items: center;
   gap: var(--spacing-2xs);
   color: var(--wt-player-video-control-bar-color);
+  white-space: nowrap;
 }
 </style>

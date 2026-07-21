@@ -15,12 +15,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import { ContactsSearchMode } from './enums/ContactsSearchMode';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const contactService = ContactsApiFactory(configuration, '', instance);
+
+const baseUrl = '/contacts';
 
 const formatAccessMode = (item) => ({
 	...item,
@@ -99,7 +102,7 @@ const getList = async (params) => {
 				: [],
 		}));
 
-	let changedParams = {};
+	let changedParams: Record<string, unknown> = {};
 
 	if (params?.search) {
 		changedParams = {
@@ -180,7 +183,6 @@ const getList = async (params) => {
 		id,
 		qin,
 		mode,
-		group_id,
 		group,
 		not_id_group,
 		owner,
@@ -323,7 +325,13 @@ const fieldsToSend = [
 const sanitizeManagers = (itemInstance) => {
 	// handle many managers and even no managers field cases
 	const managers = (itemInstance.managers || []).filter(
-		({ user } = {}) => user.id,
+		({
+			user,
+		}: {
+			user?: {
+				id?: unknown;
+			};
+		} = {}) => user?.id,
 	);
 	return {
 		...itemInstance,
@@ -334,7 +342,13 @@ const sanitizeManagers = (itemInstance) => {
 const sanitizeTimezones = (itemInstance) => {
 	// handle many timezones and even no timezones field cases
 	const timezones = (itemInstance.timezones || []).filter(
-		({ timezone } = {}) => timezone.id,
+		({
+			timezone,
+		}: {
+			timezone?: {
+				id?: unknown;
+			};
+		} = {}) => timezone?.id,
 	);
 	return {
 		...itemInstance,
@@ -447,4 +461,6 @@ export const ContactsAPI = {
 	update,
 	delete: deleteContact,
 	getLookup: getContactsLookup,
+
+	...generatePermissionsApi(baseUrl),
 };

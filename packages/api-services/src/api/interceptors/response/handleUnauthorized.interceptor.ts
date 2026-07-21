@@ -1,8 +1,12 @@
+import type { AxiosInterceptorManager, AxiosResponse } from 'axios';
+
 /**
  * Axios response interceptor that handles 401 Unauthorized responses
  * by removing the access token from localStorage
  */
-export const handleUnauthorizedInterceptor = [
+export const handleUnauthorizedInterceptor: Parameters<
+	AxiosInterceptorManager<AxiosResponse>['use']
+> = [
 	(response) => response,
 	(error) => {
 		if (error.response && error.response.status === 401) {

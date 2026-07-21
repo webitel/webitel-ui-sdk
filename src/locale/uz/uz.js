@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -64,6 +64,8 @@ export default {
 		generate: 'Generatsiya',
 		from: 'Dan',
 		to: 'Gacha',
+		today: 'Bugun',
+		clear: 'Tozalash',
 		tts: 'Matnni ovozga aylantirish',
 		state: 'Holat',
 		status: 'Holat',
@@ -157,9 +159,9 @@ export default {
 		operations: 'Operatsiyalar',
 		rbacDefault: 'Standart yozuvga asoslangan kirish',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Taqiqlangan',
-			[AccessMode.ALLOW]: 'Ruxsat etilgan',
-			[AccessMode.MANAGE]: 'Delegatsiya bilan ruxsat etilgan',
+			[AccessMode.Forbidden]: 'Taqiqlangan',
+			[AccessMode.Allow]: 'Ruxsat etilgan',
+			[AccessMode.Manage]: 'Delegatsiya bilan ruxsat etilgan',
 		},
 	},
 	// describes Webitel system entities
@@ -202,6 +204,7 @@ export default {
 			draftPlaceholder: 'Xabar yozing...',
 		},
 		queue: {
+			progressiveCount: 'Progressiv qo‘ng‘iroqlar soni',
 			queue: 'Navbat | Navbatlar',
 			queueType: 'Navbat turi | Navbat turlari',
 			type: {
@@ -297,6 +300,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Kiruvchi',
 			[CallDirection.Outbound]: 'Chiquvchi',
+		},
+		connectionQuality: {
+			high: 'Tarmoq sifati aʼlo.',
+			medium: 'Tarmoq sifati barqaror emas.',
+			low: 'Tarmoq sifati past.',
 		},
 	},
 	cases: {
@@ -474,6 +482,9 @@ export default {
 			"Kod faqat harflar (A-Z, a-z) va raqamlar (0-9) dan iborat bo'lishi va harf bilan boshlanishi kerak",
 		integer: "Maydon faqat butun sonlardan iborat bo'lishi kerak",
 		nameAlreadyInUse: 'Ushbu nom allaqachon mavjud',
+		phoneNumberSymbolsValidator:
+			"Raqamda faqat harflar (a-z, A-Z), raqamlar (0-9) va quyidagi belgilar bo'lishi mumkin: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -568,6 +579,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Kamayish tartibida saralash';
 					return 'Saralash';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Seanslarni tugatish',
 			},
 		},
 		errorPages: {
@@ -837,9 +850,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'ta element tanlandi',
+		select: {
+			selectedItemsLabel: 'ta element tanlandi',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -862,5 +875,10 @@ export default {
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
+	},
+	connectionQuality: {
+		high: "A'lo tarmoq sifati.",
+		medium: "Kechikishlar bo'lishi mumkin, tarmoqni tekshiring.",
+		low: 'Tarmoq sifati past, tarmoqni tekshiring.',
 	},
 };

@@ -22,9 +22,10 @@
       :id="selectId"
       :show-clear="showClear"
       :focus-on-hover="false"
+      :auto-option-focus="true"
       :disabled="disabled"
       :placeholder="placeholder || label"
-      :option-disabled="() => disabledOptions"
+      :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
       :option-label="(option) => getOptionLabel(option)"
       :option-value="optionValue"
@@ -43,8 +44,23 @@
       @before-show="onDropdownBeforeShow"
       @before-hide="onDropdownBeforeHide"
       @show="onDropdownShow"
-      @hide="onDropdownHide"
+      @hide="handleDropdownHide"
     >
+      <template v-if="!chipsView" #value="{ value, placeholder }">
+        <span 
+          v-if="value && value.length"
+          class="wt-multi-select__value"
+          @mousedown.stop
+        >
+          <template v-if="value.length > MAX_SELECTED_LABELS">
+            {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
+          </template>
+          <template v-else>
+            {{ value.map((v) => getOptionLabel(v)).join(', ') }}
+          </template>
+        </span>
+        <span v-else class="p-placeholder">{{ placeholder }}&nbsp;</span>
+      </template>
       <template #header>
         <wt-input-text
           v-if="filterable"
@@ -56,8 +72,8 @@
           @keydown.enter.stop="onInputKeydown"
         >
           <template #suffix>
-            <wt-icon v-if="allowCustomValues && filterText" icon="select-custom-value-enter" />
-            <wt-icon icon="search" />
+            <wt-icon v-if="allowCustomValues && filterText" disabled icon="select-custom-value-enter" />
+            <wt-icon disabled icon="search" />
           </template>
         </wt-input-text>
       </template>
@@ -91,7 +107,7 @@
       <template #chip="{ value, removeCallback }">
         <wt-chip
           removable
-          :color="ChipColor.SECONDARY"
+          :color="ChipColor.MAIN"
           @remove="removeCallback($event)"
         > 
           {{ getOptionLabel(value) }}
@@ -132,6 +148,10 @@ interface Props extends SelectProps {
 	 * true disables all options but keeps dropdown visible
 	 */
 	disabledOptions?: boolean;
+	/**
+	 * true — the select will only show options returned by the API, never prepending the current model value if it is missing from the list
+	 */
+	strictApiOptions?: boolean;
 	/**
 	 * false disables options search
 	 */
@@ -197,6 +217,7 @@ const emit = defineEmits<{
 		value: string,
 	];
 	reset: [];
+	hide: [];
 }>();
 
 const {
@@ -226,6 +247,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: false,
+	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });
 
@@ -245,18 +267,25 @@ const hasLabel = computed(() => {
 });
 
 const requiredLabel = computed(() => {
-	return props.required ? `${props.label}*` : props.label;
+	const isRequired = props.required || (props.v && 'required' in props.v);
+	return isRequired ? `${props.label}*` : props.label;
 });
 
-onMounted(() => {
-	if (props.searchMethod) fetchOptions();
-});
+const handleDropdownHide = () => {
+	onDropdownHide();
+	emit('hide');
+};
 </script>
 
 <style scoped>
 .wt-multi-select {
   width: 100%;
   min-width: 0;
+}
+
+.wt-multi-select__value {
+  cursor: text;
+  user-select: text;
 }
 
 .wt-multi-select__option-label {

@@ -12,7 +12,7 @@
   lang="ts"
 >
 import { prettifyTime } from '@webitel/ui-sdk/scripts';
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const props = withDefaults(
 	defineProps<{

@@ -29,7 +29,7 @@ type GetPresetListRequestConfig = {
 	};
 };
 
-const getPresetList = async (params, config: GetPresetListRequestConfig) => {
+const getPresetList = async (params, config?: GetPresetListRequestConfig) => {
 	const useStarToSearch = config?.transformers?.useStarToSearch ?? true;
 
 	const { page, size, search, sort, fields, presetNamespace, id } =

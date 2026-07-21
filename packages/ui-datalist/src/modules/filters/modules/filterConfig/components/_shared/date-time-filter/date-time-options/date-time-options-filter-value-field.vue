@@ -10,26 +10,33 @@
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :value="model.from"
+      :model-value="absoluteModel?.from"
       :label="t('reusable.from')"
-      mode="datetime"
-      @input="changeAbsoluteValue($event, 'from')"
+      show-time
+      required
+			:v="v$.from"
+      @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
       v-if="showDatepickers"
-      :value="model.to"
+      :model-value="absoluteModel?.to"
       :label="t('reusable.to')"
-      mode="datetime"
-      @input="changeAbsoluteValue($event, 'to')"
+      show-time
+      required
+			:v="v$.to"
+      @update:model-value="changeAbsoluteValue($event, 'to')"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 import { WtRadio } from '@webitel/ui-sdk/components';
 import { RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { endOfToday, startOfToday } from 'date-fns';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const model = defineModel<
@@ -39,6 +46,12 @@ const model = defineModel<
 			to: number;
 	  }
 >();
+
+const emit = defineEmits<{
+	'update:invalid': [
+		boolean,
+	];
+}>();
 
 const { t } = useI18n();
 
@@ -67,9 +80,52 @@ const initialize = () => {
 
 initialize();
 
+const absoluteModel = computed(() => {
+	return !isEmpty(model.value) && typeof model.value === 'object'
+		? model.value
+		: undefined;
+});
+
 const showDatepickers = computed(() => {
 	return selectedRadioValue.value === RelativeDatetimeValue.Custom;
 });
+
+const from = computed(() => absoluteModel.value?.from);
+const to = computed(() => absoluteModel.value?.to);
+
+const v$ = useVuelidate(
+	computed(() => ({
+		from: showDatepickers.value
+			? {
+					required,
+				}
+			: {},
+		to: showDatepickers.value
+			? {
+					required,
+				}
+			: {},
+	})),
+	{
+		from,
+		to,
+	},
+	{
+		$autoDirty: true,
+	},
+);
+
+v$.value.$touch();
+
+watch(
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
+);
 
 const handleRadioChange = (value: RelativeDatetimeValue) => {
 	selectedRadioValue.value = value;

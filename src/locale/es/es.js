@@ -21,7 +21,7 @@ import {
 	SupervisorSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
@@ -63,6 +63,8 @@ export default {
 		generate: 'Generar',
 		from: 'Desde',
 		to: 'Hasta',
+		today: 'Hoy',
+		clear: 'Borrar',
 		tts: 'Texto a Voz',
 		state: 'Estado',
 		status: 'Estado',
@@ -153,9 +155,9 @@ export default {
 		operations: 'Operaciones',
 		rbacDefault: 'Acceso basado en registros predeterminado',
 		accessMode: {
-			[AccessMode.FORBIDDEN]: 'Prohibido',
-			[AccessMode.ALLOW]: 'Permitir',
-			[AccessMode.MANAGE]: 'Permitir con delegación',
+			[AccessMode.Forbidden]: 'Prohibido',
+			[AccessMode.Allow]: 'Permitir',
+			[AccessMode.Manage]: 'Permitir con delegación',
 		},
 	},
 	objects: {
@@ -197,6 +199,7 @@ export default {
 			draftPlaceholder: 'Escribe un mensaje...',
 		},
 		queue: {
+			progressiveCount: 'Contador de llamadas progresivas',
 			queue: 'Cola | Colas',
 			queueType: 'Tipo de cola | Tipos de colas',
 			type: {
@@ -291,6 +294,11 @@ export default {
 		direction: {
 			[CallDirection.Inbound]: 'Entrante',
 			[CallDirection.Outbound]: 'Saliente',
+		},
+		connectionQuality: {
+			high: 'Excelente calidad de red.',
+			medium: 'Calidad de red inestable.',
+			low: 'Mala calidad de red.',
 		},
 	},
 	cases: {
@@ -467,6 +475,10 @@ export default {
 			'El código debe contener solo letras (A-Z, a-z) y números (0-9), y debe comenzar con una letra',
 		integer: 'El campo debe contener solo números enteros',
 		nameAlreadyInUse: 'Este nombre ya está en uso',
+		phoneNumberSymbolsValidator:
+			"El número solo puede contener letras (a-z, A-Z), números (0-9) y los símbolos: +, -, _, ., !, ~, *, ', (, )",
+		loginValidator: () =>
+			`Introduzca el inicio de sesión en el formato nombre${'@'}dominio`,
 	},
 	webitelUI: {
 		searchBar: {
@@ -561,6 +573,8 @@ export default {
 					if (order === SortSymbols.DESC) return 'Orden descendente';
 					return 'Ordenar';
 				},
+				[IconAction.UPLOAD]: ({ linked }) => linked('reusable.upload'),
+				[IconAction.LOGOUT]: 'Finalizar sesiones',
 			},
 		},
 		errorPages: {
@@ -831,9 +845,9 @@ export default {
 				},
 			},
 		},
-	},
-	select: {
-		selectedItemsLabel: 'elementos seleccionados',
+		select: {
+			selectedItemsLabel: 'elementos seleccionados',
+		},
 	},
 	systemNotifications: {
 		success: {
@@ -857,5 +871,10 @@ export default {
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
+	},
+	connectionQuality: {
+		high: 'Excelente calidad de red.',
+		medium: 'Puede haber retrasos, compruebe su red.',
+		low: 'La calidad de red es deficiente, compruebe su red.',
 	},
 };

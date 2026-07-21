@@ -3,7 +3,7 @@
 :class="{ 'wt-icon-btn--disabled': disabled }" class="wt-icon-btn" type="button"
     @click="emit('click', $event)" @mousedown="emit('mousedown', $event)">
     <!--    prevent icon-btn classes to fall to wt-icon -->
-    <wt-icon :disabled="disabled" v-bind="{ ...$attrs, class: '' }" />
+    <wt-icon :icon="String($attrs.icon ?? '')" :disabled="disabled" v-bind="{ ...$attrs, class: '' }" />
   </button>
 </template>
 

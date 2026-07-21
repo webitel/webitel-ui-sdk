@@ -1,3 +1,4 @@
+import type { StoreGeneric } from 'pinia';
 import type { Ref } from 'vue';
 
 import type { useTableStoreConfig } from './tableStore.types';
@@ -9,7 +10,7 @@ import type { useTableStoreConfig } from './tableStore.types';
 export type Patch = Record<string, unknown> | Ref<unknown>;
 
 export type Identifiable = {
-	id: string;
+	id?: string | number;
 	etag?: string;
 };
 
@@ -32,10 +33,15 @@ export interface CreateDatalistStoreParams<
 }
 
 /**
- * PatchableStore is needed to indicate that the store we are using also has a storePatch method (previously $patch)
- * */
-export type PatchableStore<T extends StoreInstance> = T & {
-	$patch: (val: Patch) => void;
-};
+ * PatchableStore is needed to indicate that the store we are using also has a storePatch method (previously $patch).
+ *
+ * Intersects StoreGeneric so pinia helpers (`storeToRefs`) and props typed as
+ * `() => StoreGeneric` accept the factory result — runtime pinia stores already
+ * satisfy StoreGeneric; the previous plain-record shape forced app-level casts.
+ */
+export type PatchableStore<T extends StoreInstance> = T &
+	StoreGeneric & {
+		$patch: (val: Patch) => void;
+	};
 export type PatchableStoreFactory<T extends StoreInstance> =
 	() => PatchableStore<T>;

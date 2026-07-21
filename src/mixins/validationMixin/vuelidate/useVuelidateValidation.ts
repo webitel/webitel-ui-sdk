@@ -1,10 +1,22 @@
 import type { Validation } from '@vuelidate/core';
-import { computed, isReactive, type Ref } from 'vue';
+import {
+	type ComputedRef,
+	computed,
+	isReactive,
+	isRef,
+	type Ref,
+	unref,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 
+type CompatCustomValidator = {
+	name: string;
+	text: string;
+};
+
 export type UseFieldValidationParams = {
-	field: Ref<Validation>;
-	customValidators?: Array<object>;
+	field?: Ref<Validation>;
+	customValidators?: CompatCustomValidator[];
 };
 
 export const useFieldValidation = ({
@@ -14,11 +26,15 @@ export const useFieldValidation = ({
 	const { t } = useI18n();
 
 	// support vue options api, where v is a reactive, not ref
-	let v = inputV;
-	let customValidators = inputCustomValidators;
+	let v: Ref<Validation> | ComputedRef<Validation | undefined> | undefined =
+		inputV;
+	let customValidators:
+		| CompatCustomValidator[]
+		| ComputedRef<CompatCustomValidator[] | undefined>
+		| undefined = inputCustomValidators;
 
-	if (isReactive(v)) {
-		v = computed(() => inputV);
+	if (isReactive(inputV)) {
+		v = computed(() => unref(inputV));
 		customValidators = computed(() => inputCustomValidators);
 	}
 	// end
@@ -26,64 +42,75 @@ export const useFieldValidation = ({
 	const isValidation = computed(
 		() => !!v && !!v.value && !!Object.keys(v.value).length,
 	);
-	const invalid = computed(() => isValidation.value && v.value.$error);
+	const invalid = computed(() => isValidation.value && v?.value?.$error);
 
 	const validationText = computed(() => {
 		let validationText = '';
-		if (isValidation.value && invalid.value) {
-			if (v.value.required?.$invalid) validationText = t('validation.required');
-			else if (v.value.numeric?.$invalid)
+		const validation = v?.value;
+		if (validation && isValidation.value && invalid.value) {
+			if (validation.required?.$invalid)
+				validationText = t('validation.required');
+			else if (validation.numeric?.$invalid)
 				validationText = t('validation.numeric');
-			else if (v.value.email?.$invalid) validationText = t('validation.email');
-			else if (v.value.gatewayHostValidator?.$invalid)
+			else if (validation.email?.$invalid)
+				validationText = t('validation.email');
+			else if (validation.gatewayHostValidator?.$invalid)
 				validationText = t('validation.gatewayHostValidator');
-			else if (v.value.ipValidator?.$invalid)
+			else if (validation.ipValidator?.$invalid)
 				validationText = t('validation.ipValidator');
-			else if (v.value.macValidator?.$invalid)
+			else if (validation.macValidator?.$invalid)
 				validationText = t('validation.macValidator');
-			else if (v.value.minValue?.$invalid)
+			else if (validation.minValue?.$invalid)
 				validationText = t('validation.minValue', {
-					min: v.value.minValue.$params.min,
+					min: validation.minValue.$params.min,
 				});
-			else if (v.value.maxValue?.$invalid)
+			else if (validation.maxValue?.$invalid)
 				validationText = t('validation.maxValue', {
-					max: v.value.maxValue.$params.max,
+					max: validation.maxValue.$params.max,
 				});
-			else if (v.value.maxLength?.$invalid)
+			else if (validation.maxLength?.$invalid)
 				validationText = t('validation.maxLength', {
-					max: v.value.maxLength.$params.max,
+					max: validation.maxLength.$params.max,
 				});
-			else if (v.value.sipAccountValidator?.$invalid)
+			else if (validation.sipAccountValidator?.$invalid)
 				validationText = t('validation.sipAccountValidator');
-			else if (v.value.minLength?.$invalid)
+			else if (validation.minLength?.$invalid)
 				validationText = t('validation.minLength', {
-					min: v.value.minLength.$params.min,
+					min: validation.minLength.$params.min,
 				});
-			else if (v.value.url?.$invalid) validationText = `${t('validation.url')}`;
-			else if (v.value.regExpValidator?.$invalid)
+			else if (validation.url?.$invalid)
+				validationText = `${t('validation.url')}`;
+			else if (validation.regExpValidator?.$invalid)
 				validationText = `${t('validation.regExpValidator')}`;
-			else if (v.value.sameAs?.$invalid)
+			else if (validation.sameAs?.$invalid)
 				validationText = `${t('validation.sameAs')}`;
-			else if (v.value.domainValidator?.$invalid)
+			else if (validation.domainValidator?.$invalid)
 				validationText = `${t('validation.domainValidator')}`;
-			else if (v.value.decimalValidator?.$invalid)
-				validationText = `${t('validation.decimalValidator')} ${v.value.decimalValidator.$params.count}`;
-			else if (v.value.websocketValidator?.$invalid)
+			else if (validation.decimalValidator?.$invalid)
+				validationText = `${t('validation.decimalValidator')} ${validation.decimalValidator.$params.count}`;
+			else if (validation.websocketValidator?.$invalid)
 				validationText = `${t('validation.websocketValidator')}`;
-			else if (v.value.integer?.$invalid)
+			else if (validation.integer?.$invalid)
 				validationText = `${t('validation.integer')}`;
-			else if (v.value.regex?.$invalid)
+			else if (validation.regex?.$invalid)
 				validationText =
-					v.value.regex?.$message ||
-					`${t('validation.isRegExpMatched')} ${v.value.regex?.$params?.regex}`;
-			else if (v.value.nameAlreadyInUse?.$invalid) {
+					validation.regex?.$message ||
+					`${t('validation.isRegExpMatched')} ${validation.regex?.$params?.regex}`;
+			else if (validation.nameAlreadyInUse?.$invalid) {
 				validationText = t('validation.nameAlreadyInUse');
+			} else if (validation.phoneNumberSymbolsValidator?.$invalid) {
+				validationText = t('validation.phoneNumberSymbolsValidator');
+			} else if (validation.loginValidator?.$invalid) {
+				validationText = t('validation.loginValidator');
 			}
 		}
 
-		if (customValidators?.value) {
-			for (const { name, text } of customValidators.value) {
-				if (v.value[name]?.$invalid) validationText = text;
+		const resolvedCustomValidators = isRef(customValidators)
+			? customValidators.value
+			: undefined;
+		if (resolvedCustomValidators) {
+			for (const { name, text } of resolvedCustomValidators) {
+				if (validation?.[name]?.$invalid) validationText = text;
 			}
 			return validationText;
 		}

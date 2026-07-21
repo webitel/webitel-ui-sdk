@@ -1,8 +1,9 @@
-import { useScroll } from '@vueuse/core';
+import { useResizeObserver, useScroll } from '@vueuse/core';
 import {
 	type ComputedRef,
 	computed,
 	nextTick,
+	onUnmounted,
 	type Ref,
 	ref,
 	watch,
@@ -10,104 +11,179 @@ import {
 
 import type { ChatMessageType } from '../types/ChatMessage.types';
 
-export const useChatScroll = (
-	element: Ref<HTMLElement | null> = null,
-	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>,
-	isLoading?: Ref<boolean> | ComputedRef<boolean>,
-) => {
-	/* @author ye.pohranichna
-  why 136px? because: https://webitel.atlassian.net/browse/WTEL-7136 */
-	const defaultThreshold = 136;
-	const { arrivedState } = useScroll(element);
+import { useScrollToBottomBtn } from './useScrollToBottomBtn';
 
-	const newUnseenMessagesCount = ref<number>(0);
-	const showScrollToBottomBtn = ref<boolean>(false);
-	/* @author ye.pohranichna
-    the distance where the scrollToBottomBtn must be shown/hide. */
-	const threshold = ref<number>(defaultThreshold);
-	const isLoadingNextMessages = ref<boolean>(false);
-	const lastVisibleMessageEl = ref<HTMLElement | null>(null);
+export interface UseChatScrollOptions {
+	chatContainer: Ref<HTMLElement | null>;
+	chatContent: Ref<HTMLElement | null>;
+	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>;
+	chatId: ComputedRef<string>;
+	isChatClosed: ComputedRef<boolean>;
+	isLoading?: Ref<boolean> | ComputedRef<boolean>;
+	onBeforeStart?: (options: {
+		scrollToBottom: (behavior?: ScrollBehavior) => void;
+	}) => void;
+}
 
-	const isLastMessageIsMy = computed<boolean>(
-		() => lastMessage.value?.member?.self,
-	);
-	const lastMessage = computed<ChatMessageType>(() => messages.value?.at(-1));
-	const handleChatScroll = () => {
-		const wrapper = element.value;
-		if (!wrapper) return;
+export const useChatScroll = ({
+	chatContainer,
+	chatContent,
+	messages,
+	chatId,
+	isChatClosed,
+	isLoading,
+	onBeforeStart = (options) => {
+		options.scrollToBottom();
+	},
+}: UseChatScrollOptions) => {
+	const { arrivedState } = useScroll(chatContainer);
 
-		handleShowScrollToBottomBtn(wrapper);
-	};
+	const {
+		showScrollToBottomBtn,
+		handleChatScroll,
+		resetScrollToBottomBtn,
+		updateScrollToBottomBtnVisibility,
+		updateThreshold,
+	} = useScrollToBottomBtn(chatContainer, arrivedState);
 
-	const handleChatResize = () => {
-		const wrapper = element.value;
-		if (!wrapper) return;
+	let isLoadingNextMessages = false;
+	let lastVisibleMessageEl: HTMLElement | null = null;
+	let prevScrollHeight = 0;
+	let resizeObserver: ResizeObserver | null = null;
+	let isViewportTransition = false;
+	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * 2 tolerates subpixel scrollTop/clientHeight rounding that can leave
+	 * their sum a fraction short of scrollHeight at the very bottom.
+	 */
+	const bottomThreshold = 2;
 
-		updateThreshold(wrapper);
-		handleShowScrollToBottomBtn(wrapper);
-	};
+	const newUnseenMessagesCount = ref(0);
 
-	const handleShowScrollToBottomBtn = (el: HTMLElement) => {
-		if (arrivedState.bottom) {
-			resetScrollToBottomBtn();
-			return;
-			/* @author ye.pohranichna
-          quit the function because we are already at the bottom */
-		}
-
-		const { scrollTop, scrollHeight, clientHeight } = el;
-		const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
-		showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
-	};
-
-	const resetScrollToBottomBtn = (): void => {
-		newUnseenMessagesCount.value = 0;
-		showScrollToBottomBtn.value = false;
-	};
-
-	const updateThreshold = (el: HTMLElement) => {
-		/* @author ye.pohranichna
-         need to update if clientHeight was changed
-         https://webitel.atlassian.net/browse/WTEL-7136 */
-		threshold.value = Math.max(defaultThreshold, el.clientHeight * 0.3);
-	};
+	const lastMessage = computed(() => messages.value?.at(-1));
+	const isLastMessageMy = computed(() => !!lastMessage.value?.member?.self);
 
 	const handleBtnAfterNewMessage = () => {
-		if (arrivedState.bottom || isLastMessageIsMy.value) {
-			scrollToBottom('smooth');
-		} else {
+		if (isLastMessageMy.value) {
+			scrollToBottom('instant');
+		} else if (!arrivedState.bottom) {
 			newUnseenMessagesCount.value += 1;
 		}
 	};
 
 	const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
-		element?.value.scrollTo({
-			top: element?.value.scrollHeight,
-			behavior: behavior === 'instant' ? 'auto' : behavior,
+		chatContainer.value?.scrollTo({
+			top: chatContainer.value?.scrollHeight,
+			behavior,
 		});
 
 		newUnseenMessagesCount.value = 0;
-		showScrollToBottomBtn.value = false;
-	};
 
+		resetScrollToBottomBtn();
+	};
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
-		if (!element.value?.children) return;
-		lastVisibleMessageEl.value =
-			element.value?.getElementsByClassName('chat-message')[0] ?? null;
+		if (!chatContainer.value?.children) return;
+		lastVisibleMessageEl =
+			(chatContainer.value?.getElementsByClassName(
+				'chat-message',
+			)[0] as HTMLElement) ?? null;
 	};
 
 	const loadNextMessages = (
-		canLoadMore: boolean | undefined,
+		canLoadMore: boolean,
 		onLoadNextMessages: () => void,
 	) => {
-		if (isLoadingNextMessages.value || isLoading?.value || !canLoadMore) return;
+		if (isLoadingNextMessages || isLoading?.value || !canLoadMore) return;
 
-		isLoadingNextMessages.value = true;
+		isLoadingNextMessages = true;
 		getTopMessageEl();
 
 		onLoadNextMessages();
 	};
+
+	const startStickToBottomObserving = () => {
+		if (!chatContent.value) return;
+
+		prevScrollHeight = chatContainer.value?.scrollHeight ?? 0;
+
+		resizeObserver = new ResizeObserver(() => {
+			const el = chatContainer.value;
+			if (!el) return;
+
+			const newScrollHeight = el.scrollHeight;
+
+			if (isViewportTransition) {
+				prevScrollHeight = newScrollHeight;
+				updateScrollToBottomBtnVisibility(el);
+				return;
+			}
+
+			const wasNearBottom =
+				el.scrollTop + el.clientHeight >= prevScrollHeight - bottomThreshold;
+			const contentGrown = newScrollHeight > prevScrollHeight;
+
+			/**
+			 * @author PolinaSukhorukova-webitel
+			 *
+			 * arrivedState.bottom lags after programmatic scrollTo,
+			 * so the distance is also checked manually.
+			 */
+			const shouldScrollToBottom =
+				contentGrown && (arrivedState.bottom || wasNearBottom);
+
+			if (shouldScrollToBottom) {
+				scrollToBottom('instant');
+			}
+
+			prevScrollHeight = newScrollHeight;
+			updateScrollToBottomBtnVisibility(el);
+		});
+
+		resizeObserver.observe(chatContent.value);
+	};
+
+	const stopStickToBottomObserving = () => {
+		resizeObserver?.disconnect();
+		resizeObserver = null;
+	};
+
+	useResizeObserver(chatContainer, () => {
+		const el = chatContainer.value;
+		if (!el) return;
+
+		updateThreshold(el.clientHeight);
+		updateScrollToBottomBtnVisibility(el);
+	});
+
+	const resetScrollState = () => {
+		stopStickToBottomObserving();
+		prevScrollHeight = 0;
+		newUnseenMessagesCount.value = 0;
+		resetScrollToBottomBtn();
+	};
+
+	const onFullscreenChange = () => {
+		isViewportTransition = true;
+
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
+
+		viewportTransitionTimer = setTimeout(() => {
+			isViewportTransition = false;
+			viewportTransitionTimer = null;
+		}, 500);
+	};
+
+	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * WTEL-9968 (https://webitel.atlassian.net/browse/WTEL-9968)
+	 * to avoid extra bottom scroll when chat is in fullscreen
+	 */
+
+	document.addEventListener('fullscreenchange', onFullscreenChange);
 
 	watch(
 		() => messages.value?.length,
@@ -123,18 +199,53 @@ export const useChatScroll = (
 	watch(
 		() => isLoading?.value,
 		async (loading) => {
-			if (loading || !isLoadingNextMessages.value) return;
+			// restore scroll position after older messages are prepended:
+			// scroll to the previously top message so the view doesn't jump
+			if (loading || !isLoadingNextMessages) return;
 
 			await nextTick();
 
-			element.value?.scrollTo({
-				top: lastVisibleMessageEl.value?.offsetTop,
+			chatContainer.value?.scrollTo({
+				top: lastVisibleMessageEl?.offsetTop,
 				behavior: 'auto',
 			});
 
-			isLoadingNextMessages.value = false;
+			isLoadingNextMessages = false;
 		},
 	);
+
+	watch(
+		() => chatId.value,
+		async () => {
+			resetScrollState();
+
+			if (isChatClosed.value) return;
+
+			await nextTick();
+
+			onBeforeStart?.({
+				scrollToBottom,
+			});
+
+			startStickToBottomObserving();
+		},
+		{
+			immediate: true,
+		},
+	);
+
+	watch(
+		() => arrivedState.bottom,
+		(bottom) => {
+			if (bottom) newUnseenMessagesCount.value = 0;
+		},
+	);
+
+	onUnmounted(() => {
+		stopStickToBottomObserving();
+		document.removeEventListener('fullscreenchange', onFullscreenChange);
+		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
+	});
 
 	return {
 		showScrollToBottomBtn,
@@ -142,6 +253,5 @@ export const useChatScroll = (
 		scrollToBottom,
 		loadNextMessages,
 		handleChatScroll,
-		handleChatResize,
 	};
 };
