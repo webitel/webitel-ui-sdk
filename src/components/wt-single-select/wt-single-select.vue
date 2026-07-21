@@ -59,6 +59,8 @@
         <slot name="value" v-bind="{ value, getOptionLabel, placeholder }">
           <span
             v-tooltip="getOptionLabel(value)"
+            class="wt-single-select__value"
+            @mousedown.stop
           >
             {{ getOptionLabel(value) || placeholder }}&nbsp;
           </span>
@@ -266,6 +268,11 @@ const handleDropdownHide = () => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.wt-single-select__value {
+  cursor: text;
+  user-select: text;
 }
 
 .wt-single-select__input {

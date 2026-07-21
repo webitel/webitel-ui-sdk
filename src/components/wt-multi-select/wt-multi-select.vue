@@ -47,7 +47,11 @@
       @hide="handleDropdownHide"
     >
       <template v-if="!chipsView" #value="{ value, placeholder }">
-        <span v-if="value && value.length">
+        <span 
+          v-if="value && value.length"
+          class="wt-multi-select__value"
+          @mousedown.stop
+        >
           <template v-if="value.length > MAX_SELECTED_LABELS">
             {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
           </template>
@@ -277,6 +281,11 @@ const handleDropdownHide = () => {
 .wt-multi-select {
   width: 100%;
   min-width: 0;
+}
+
+.wt-multi-select__value {
+  cursor: text;
+  user-select: text;
 }
 
 .wt-multi-select__option-label {
