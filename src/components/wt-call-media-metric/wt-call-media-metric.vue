@@ -19,10 +19,12 @@ const props = withDefaults(
 		mosAvg?: number | null;
 		size?: (typeof ComponentSize)[keyof typeof ComponentSize];
 		showTooltip?: boolean;
+		tooltipTextPrefix?: string;
 	}>(),
 	{
 		size: ComponentSize.MD,
 		showTooltip: false,
+		tooltipTextPrefix: 'connectionQuality',
 	},
 );
 
@@ -35,7 +37,7 @@ const resolvedQuality = computed(() => {
 
 const tooltip = computed(() =>
 	resolvedQuality.value
-		? t(`connectionQuality.${resolvedQuality.value}`)
+		? t(`${props.tooltipTextPrefix}.${resolvedQuality.value}`)
 		: undefined,
 );
 </script>

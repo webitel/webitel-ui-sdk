@@ -315,6 +315,11 @@ export default {
 			[CallDirection.Inbound]: 'Входящий | Входящие',
 			[CallDirection.Outbound]: 'Исходящий | Исходящие',
 		},
+		connectionQuality: {
+			high: 'Отличное качество сети.',
+			medium: 'Нестабильное качество сети.',
+			low: 'Плохое качество сети.',
+		},
 	},
 	// describes Webitel FRONTEND applications + their navs
 	WtApplication: {
