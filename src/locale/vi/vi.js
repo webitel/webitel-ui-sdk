@@ -770,7 +770,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
-			showEmpty: 'Hiển thị trống',
+			showEmptyAmdResult: 'Hiển thị trống',
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},

@@ -8,8 +8,8 @@
     option-value="value"
   />
   <wt-checkbox
-    :label="t('webitelUI.filters.showEmpty')"
-    :value="AmdResultEmptyValue"
+    :label="t('webitelUI.filters.showEmptyAmdResult')"
+    :value="AMD_RESULT_EMPTY_VALUE"
     v-model:selected="isEmptySelected"
   />
 </template>
@@ -23,7 +23,7 @@ import { useI18n } from 'vue-i18n';
 
 import { AmdResultOptions } from '../../enums/options/AMDResultOptions';
 
-const AmdResultEmptyValue = 'EMPTY';
+const AMD_RESULT_EMPTY_VALUE = 'EMPTY';
 
 const model = defineModel<string[]>();
 const { t } = useI18n();
@@ -31,9 +31,9 @@ const { t } = useI18n();
 // keeps the select's own model limited to real AmdResultOptions values,
 // so it never treats EMPTY as a missing/custom option to reconcile
 const selectValue = ref(
-	(model.value || []).filter((value) => value !== AmdResultEmptyValue),
+	(model.value || []).filter((value) => value !== AMD_RESULT_EMPTY_VALUE),
 );
-const isEmptySelected = ref(!!model.value?.includes(AmdResultEmptyValue));
+const isEmptySelected = ref(!!model.value?.includes(AMD_RESULT_EMPTY_VALUE));
 
 watch(
 	[
@@ -44,7 +44,7 @@ watch(
 		model.value = isEmpty
 			? [
 					...select,
-					AmdResultEmptyValue,
+					AMD_RESULT_EMPTY_VALUE,
 				]
 			: select;
 	},

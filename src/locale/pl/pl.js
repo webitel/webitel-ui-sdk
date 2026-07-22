@@ -767,7 +767,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
-			showEmpty: 'Pokaż puste',
+			showEmptyAmdResult: 'Pokaż puste',
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},

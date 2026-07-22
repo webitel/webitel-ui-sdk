@@ -772,7 +772,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
-			showEmpty: 'Arată goale',
+			showEmptyAmdResult: 'Arată goale',
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},
