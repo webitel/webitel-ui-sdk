@@ -113,7 +113,7 @@ const getCondition = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const updateCondition = async ({ itemInstance, itemId: id }) => {
+const updateCondition = async ({ itemInstance, itemId: id, parentId }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -121,7 +121,7 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await slaConditionsService.updateSLACondition(
-			itemInstance.slaId,
+			parentId ?? itemInstance.slaId,
 			id,
 			item,
 		);
