@@ -1,5 +1,7 @@
 import { GroupsApiFactory } from 'webitel-sdk';
 
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -31,6 +33,11 @@ const fieldsToSend = [
 	'type',
 	'default_group',
 ];
+
+const appendStaticType = (item) => ({
+	...item,
+	type: item.type ?? ContactsGroupType.Static,
+});
 
 const getContactGroupsList = async (params) => {
 	const fieldsToSend = [
@@ -112,6 +119,7 @@ const addStaticContactGroup = async ({ itemInstance }) => {
 		const response = await contactGroupsService.createGroup(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -160,6 +168,7 @@ const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
 		const response = await contactGroupsService.updateGroup(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -178,6 +187,7 @@ const patchStaticContactGroup = async ({ id, changes }) => {
 		const response = await contactGroupsService.updateGroup2(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
