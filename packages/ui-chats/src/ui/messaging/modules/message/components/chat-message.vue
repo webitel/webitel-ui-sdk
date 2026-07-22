@@ -21,49 +21,53 @@
         />
       </div>
       <!--    click.stop prevents focus on textarea and allows to select the message-new text -->
-      <message-blocked-error v-if="message.file?.malware" @click.stop />
-      <message-size-exceeded-error
-        v-else-if="isFileSizeExceeded"
-        :self-side="isSelfSide"
+      <div
+        class="chat-message__body"
+        :class="{ 'chat-message__body--malware': isMalware }"
         @click.stop
-      />
-      <div class="chat-message__body" v-else @click.stop>
-        <message-player
-          v-if="media"
-          :file="media"
-          :type="media.mime"
-          :size="size"
-          @initialized="handlePlayerInitialize"
-        />
-        <message-image
-          v-else-if="image"
-          :file="image"
-          @open="emit(MessageAction.ClickOnImage)"
-        />
-        <message-document
-          v-else-if="document"
-          :file="document"
-          :self-side="isSelfSide"
-        />
-        <div
-          v-if="props.message?.text"
-          class="chat-message-text-wrapper"
-        >
-          <message-text
-            :text="props.message.text"
-            :with-timestamp-spacer="true"
+      >
+        <template v-if="hasFileError">
+          <message-blocked-error v-if="isMalware" />
+          <message-size-exceeded-error
+            v-else-if="isFileSizeExceeded"
+            :self-side="isSelfSide"
           />
           <message-time :date="props.message.createdAt" />
-        </div>
-        <message-time
-          v-else
-          :date="props.message.createdAt"
-        />
+        </template>
+        <template v-else>
+          <message-player
+            v-if="media"
+            :file="media"
+            :type="media.mime"
+            :size="size"
+            @initialized="handlePlayerInitialize"
+          />
+          <message-image
+            v-else-if="image"
+            :file="image"
+            @open="emit(MessageAction.ClickOnImage)"
+          />
+          <message-document
+            v-else-if="document"
+            :file="document"
+            :self-side="isSelfSide"
+          />
+          <div
+            v-if="props.message?.text"
+            class="chat-message-text-wrapper"
+          >
+            <message-text
+              :text="props.message.text"
+              :with-timestamp-spacer="true"
+            />
+            <message-time :date="props.message.createdAt" />
+          </div>
+          <message-time
+            v-else
+            :date="props.message.createdAt"
+          />
+        </template>
       </div>
-      <message-time
-        v-if="message.file?.malware || isFileSizeExceeded"
-        :date="props.message.createdAt"
-      />
     </div>
 
     <slot name="after-message" />
@@ -110,6 +114,12 @@ const { image, media, document } = useChatMessageFile(props.message.file);
 
 const isFileSizeExceeded = computed<boolean>(
 	() => !!props.message.file && !props.message.file?.size,
+);
+
+const isMalware = computed<boolean>(() => !!props.message.file?.malware);
+
+const hasFileError = computed<boolean>(
+	() => isMalware.value || isFileSizeExceeded.value,
 );
 
 const isInternalMember = computed(
@@ -190,6 +200,11 @@ function handlePlayerInitialize(player) {
   background: var(--primary-light-color);
   color: var(--primary-on-color);
   place-self: flex-start;
+}
+
+.chat-message__body--malware,
+.chat-message--right .chat-message__body--malware {
+  background: var(--p-error-highlight-color);
 }
 
 .chat-message-time {
