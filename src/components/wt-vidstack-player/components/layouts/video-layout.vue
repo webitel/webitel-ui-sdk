@@ -12,6 +12,10 @@
         <template v-if="$slots['avatar']" #avatar>
           <slot name="avatar" />
         </template>
+
+        <template v-if="$slots['display-panel-actions']" #actions>
+          <slot name="display-panel-actions" />
+        </template>
       </video-display-panel>
     </div>
 

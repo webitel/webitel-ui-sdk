@@ -32,6 +32,10 @@
           <slot name="avatar" />
         </template>
 
+        <template v-if="$slots['display-panel-actions']" #display-panel-actions>
+          <slot name="display-panel-actions" />
+        </template>
+
         <template #controls-panel>
           <slot :size="size" name="controls-panel" />
         </template>

@@ -22,6 +22,8 @@
     </div>
 
     <div class="video-display-panel__controls">
+      <slot name="actions" />
+
       <fullscreen-button
         @toggle="handleFullscreen"
       />

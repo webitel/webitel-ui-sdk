@@ -17,6 +17,14 @@
     hide-background
     @change-size="(payload) => emit('change-size', payload)"
   >
+    <template v-if="isPiPSupported && isPipMode" #display-panel-actions>
+      <wt-icon-btn
+        color="on-dark"
+        icon="open-pip"
+        @click="enterPiP()"
+      />
+    </template>
+
     <template v-if="props['receiver:mic:enabled'] === false || props.hideAvatar" #avatar>
       <wt-icon
         v-if="props['receiver:mic:enabled'] === false"
@@ -163,7 +171,7 @@
 import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { computed, isRef, onBeforeUnmount, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WtIcon } from '../../../../components';
+import { WtIcon, WtIconBtn } from '../../../../components';
 import {
 	RecordingIndicator,
 	ScreenshotBox,
@@ -292,7 +300,7 @@ const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 	return exposedElement ?? inst.$el ?? null;
 };
 
-const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
+const { isPiP, isPiPSupported, enterPiP, onPiPResize } = useDocumentPiP(
 	getVideoCallPlayerHostElement,
 );
 
@@ -455,36 +463,8 @@ watch(
 	},
 );
 
-/**
- * @author @Oleksandr Palionnyi
- *
- * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
- *
- * Document PiP: call `requestWindow()` only when `mainStream` and a usable player host exist.
- * `flush: 'post'` runs after DOM updates so Vidstack / WC upgrade can finish before we read `rootEl`.
- * Stop the watcher only once `enterPiP` succeeds (`isPiP`), so gesture/API failures can retry on later ticks.
- */
-const stopAutoDocumentPiP = watch(
-	[
-		mainStream,
-		playerRef,
-	],
-	async () => {
-		if (!props.isPipMode) return;
-		if (!mainStream.value || !playerRef.value || isPiP.value) return;
-		if (!getVideoCallPlayerHostElement()) return;
-		await enterPiP();
-		if (isPiP.value) stopAutoDocumentPiP();
-	},
-	{
-		flush: 'post',
-		immediate: true,
-	},
-);
-
 onBeforeUnmount(() => {
 	stopHoldTimer();
-	stopAutoDocumentPiP();
 });
 
 const receiverVideoMutedIconSizes = {
