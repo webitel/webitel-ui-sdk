@@ -15,8 +15,8 @@
       </slot>
     </wt-label>
     <p-input-group>
-      <p-input-group-addon 
-        v-if="$slots.prefix" 
+      <p-input-group-addon
+        v-if="$slots.prefix"
         class="wt-input-text__addon typo-body-1"
       >
         <slot name="prefix" />
@@ -34,7 +34,7 @@
         :inputmode="type"
         :size="primevueSizeMap[size]"
         v-bind="$attrs"
-        v-on="$listeners"   
+        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
@@ -155,7 +155,9 @@ const inputHandler = (value) => {
 
 const isValueHidden = ref(props.hideInputValue);
 
-const isInputMasked = computed(() => model.value.length && isValueHidden.value);
+const isInputMasked = computed(
+	() => !!model.value?.length && isValueHidden.value,
+);
 const hasSuffixAddon = computed(() => props.hideInputValue || slots.suffix);
 
 const eyeIconName = computed(() =>
