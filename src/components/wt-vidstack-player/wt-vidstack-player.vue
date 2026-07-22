@@ -296,7 +296,7 @@ const onCanPlay = (ev: Event) => {
   gap: var(--popup-sections-gap);
   z-index: 1;
   box-shadow: var(--elevation-10);
-  background: var(--wt-popup-background-color);
+  background: var(--p-player-wrapper-background);
   position: relative;
   display: block;
   padding: 0;
