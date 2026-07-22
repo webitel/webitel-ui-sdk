@@ -447,7 +447,7 @@ export default deepmerge(
 			sameAs: 'Incorrect password',
 			requiredArrayValue: 'Array should not be empty',
 			minValue: ({ named }) => {
-				let text = 'Value should be not less than';
+				let text = 'Value cannot be less than';
 				if (named('min')) {
 					text += ` ${named('min')}`;
 				}
@@ -455,7 +455,7 @@ export default deepmerge(
 				return text;
 			},
 			maxValue: ({ named }) => {
-				let text = 'Value should be not greater than';
+				let text = 'Value cannot be greater than';
 				if (named('max')) {
 					text += ` ${named('max')}`;
 				}
