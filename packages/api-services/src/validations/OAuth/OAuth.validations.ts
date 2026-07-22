@@ -17,5 +17,5 @@ export const OAuthSchema = z.object<ZodShape<ApiOAuthService>>({
 				value: z.string().optional(),
 			}),
 		)
-		.min(1),
+		.optional(),
 });
