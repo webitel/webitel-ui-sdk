@@ -56,7 +56,7 @@ export const useSelectOptions = ({
 	};
 
 	const getOptionLabel = (option) => {
-		if (!option) return '';
+		if (option === null || option === undefined) return '';
 		// https://webitel.atlassian.net/browse/WTEL-3181
 		// if allowCustomValue select mode, return label as is
 		if (allowCustomValues.value && option.isTag) return option.label;
