@@ -39,4 +39,12 @@ export const AmdResultOptions: Array<FilterInitParams> = [
 		name: 'TIMEOUT',
 		value: 'TIMEOUT',
 	},
+	{
+		name: 'UNDEFINED',
+		value: 'UNDEFINED',
+	},
+	{
+		name: 'NO ANSWER',
+		value: 'NO ANSWER',
+	},
 ] as const;

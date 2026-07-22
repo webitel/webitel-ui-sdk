@@ -779,6 +779,7 @@ export default deepmerge(
 				service: ({ linked }) => {
 					return linked('cases.service');
 				},
+				showEmpty: 'Show empty',
 				sla: ({ linked }) => {
 					return linked('cases.appliedSLA');
 				},
