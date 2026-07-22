@@ -31,9 +31,6 @@ withDefaults(defineProps<IChatMessageSizeExceededErrorProps>(), {
 
 <style scoped lang="scss">
 .chat-message-size-exceeded-error {
-  background: var(--primary-light-color);
-  border-radius: var(--spacing-xs);
-  padding: var(--spacing-xs);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +39,6 @@ withDefaults(defineProps<IChatMessageSizeExceededErrorProps>(), {
   text-align: center;
 
   &--right {
-    background: var(--secondary-light-color);
     color: var(--secondary-on-color);
     place-self: flex-end;
   }

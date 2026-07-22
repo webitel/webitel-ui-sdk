@@ -19,9 +19,6 @@ const { t } = useI18n();
 </script>
 <style scoped lang="scss">
 .chat-message-blocked-error {
-  background: var(--p-error-highlight-color);
-  border-radius: var(--spacing-xs);
-  padding: var(--spacing-xs);
   display: flex;
   flex-direction: column;
   align-items: center;
