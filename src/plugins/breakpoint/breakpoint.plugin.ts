@@ -1,13 +1,46 @@
-import { reactive } from 'vue';
+import { type App, reactive } from 'vue';
 
-import debounce from '../../scripts/debounce.js';
+import debounce from '../../scripts/debounce';
 
 // https://stackoverflow.com/questions/41791193/vuejs-reactive-binding-for-a-plugin-how-to/41801107#41801107
 // https://stackoverflow.com/questions/50111231/vue-prototype-not-reactive-when-data-changes
 
 // https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/services/breakpoint/index.ts
 
-const breakpoint = reactive({
+/** Reactive viewport state exposed app-wide as `$breakpoint`. */
+export interface Breakpoint {
+	// Breakpoints
+	xs: boolean;
+	sm: boolean;
+	md: boolean;
+	lg: boolean;
+	xl: boolean;
+
+	// Conditionals
+	xsOnly: boolean;
+	smOnly: boolean;
+	smAndDown: boolean;
+	smAndUp: boolean;
+	mdOnly: boolean;
+	mdAndDown: boolean;
+	mdAndUp: boolean;
+	lgOnly: boolean;
+	lgAndDown: boolean;
+	lgAndUp: boolean;
+	xlOnly: boolean;
+
+	/** true if screen width < mobileBreakpoint */
+	mobile: boolean;
+
+	/** Current breakpoint name (e.g. 'md') */
+	name: string;
+
+	// Dimensions
+	height: number;
+	width: number;
+}
+
+const breakpoint = reactive<Breakpoint>({
 	// Breakpoints
 	xs: false,
 	sm: false,
@@ -122,7 +155,7 @@ const onResize = () => {
 	breakpoint.mobile = current <= max;
 };
 
-const install = (app) => {
+const install = (app: App) => {
 	window.addEventListener('resize', debounce(onResize), {
 		passive: true,
 	});
@@ -133,3 +166,9 @@ const install = (app) => {
 };
 
 export { install };
+
+declare module 'vue' {
+	interface ComponentCustomProperties {
+		$breakpoint: Breakpoint;
+	}
+}
