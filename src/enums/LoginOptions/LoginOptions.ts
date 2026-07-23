@@ -4,4 +4,4 @@ export const LoginOptions = {
 	SSO_ONLY: 'sso_only',
 } as const;
 
-export type LoginOptions = keyof typeof LoginOptions;
+export type LoginOptions = (typeof LoginOptions)[keyof typeof LoginOptions];
