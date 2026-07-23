@@ -771,6 +771,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
+			showEmptyAmdResult: "Bo'shlarni ko'rsatish",
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},
