@@ -23,6 +23,16 @@ const configuration = getDefaultOpenAPIConfig();
 
 const service = PresetQueryServiceApiFactory(configuration, '', instance);
 
+const isConflictError = (err: unknown): boolean =>
+	typeof err === 'object' &&
+	err !== null &&
+	'status' in err &&
+	(
+		err as {
+			status: unknown;
+		}
+	).status === 409;
+
 type GetPresetListRequestConfig = {
 	transformers: {
 		useStarToSearch?: boolean;
@@ -104,7 +114,7 @@ const addPreset = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			skipIf(notify, (err) => err.status === 409),
+			skipIf(notify, isConflictError),
 		]);
 	}
 };
@@ -125,7 +135,7 @@ const updatePreset = async ({ item: itemInstance, id, namespace }) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			skipIf(notify, (err) => err.status === 409),
+			skipIf(notify, isConflictError),
 		]);
 	}
 };

@@ -11,6 +11,8 @@ import type {
 	useTableStoreConfig,
 } from '../types/tableStore.types';
 
+type SortSymbol = (typeof SortSymbols)[keyof typeof SortSymbols];
+
 interface TableHeadersStoreBodyParams {
 	rawHeaders: DatalistTableHeader[];
 	id: string;
@@ -153,9 +155,9 @@ export const tableHeadersStoreBody = ({
 		column,
 		options:
 			| {
-					order?: SortSymbols;
+					order?: SortSymbol;
 			  }
-			| SortSymbols = {},
+			| SortSymbol = {},
 	) => {
 		const getNextSortOrder = (sort) => {
 			switch (sort) {
@@ -188,7 +190,7 @@ export const tableHeadersStoreBody = ({
 			});
 		};
 
-		let order: SortSymbols;
+		let order: SortSymbol;
 
 		if (typeof options === 'string') {
 			order = options;
