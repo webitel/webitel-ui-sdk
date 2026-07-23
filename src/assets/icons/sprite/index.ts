@@ -141,6 +141,7 @@ import minus from './minus.svg?raw';
 import move from './move.svg?raw';
 import note from './note.svg?raw';
 import numpad from './numpad.svg?raw';
+import openPip from './open-pip.svg?raw';
 import options from './options.svg?raw';
 import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
@@ -452,6 +453,7 @@ export default objCamelToKebab({
 	conference,
 	meta,
 	options,
+	openPip,
 	json,
 	redo,
 	save,
