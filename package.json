@@ -51,7 +51,8 @@
 		"src/store/*",
 		"src/tests/*",
 		"src/install.ts",
-		"CHANGELOG.md"
+		"CHANGELOG.md",
+		"src/types/*"
 	],
 	"dependencies": {
 		"@floating-ui/vue": "^1.1.9",
@@ -218,7 +219,7 @@
 			"import": "./src/enums*"
 		},
 		"./components": {
-			"types": "./types/components/index.d.ts",
+			"types": "./src/components/index.d.ts",
 			"import": "./src/components/index.js"
 		},
 		"./components*": {
@@ -367,7 +368,11 @@
 			"import": "./dist*"
 		},
 		"./src/types": {
-			"types": "./types/index.d.ts",
+			"types": "./types/types/index.d.ts",
+			"import": "./src/types/index.ts"
+		},
+		"./types": {
+			"types": "./types/types/index.d.ts",
 			"import": "./src/types/index.ts"
 		}
 	}

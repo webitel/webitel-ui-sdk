@@ -19,8 +19,10 @@
 
 # Declaration emit belongs in types/ (see declarationDir). Never commit beside sources.
 # Keep ambient module shims at package src roots (e.g. src/declaration.d.ts).
+# Exception: components barrel — JS entry cannot emit declarations reliably; hand-maintained.
 src/**/*.d.ts
 !src/*.d.ts
+!src/components/index.d.ts
 packages/*/src/**/*.d.ts
 !packages/*/src/*.d.ts
 
