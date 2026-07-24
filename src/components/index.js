@@ -48,126 +48,167 @@ import WtToast from './wt-toast/wt-toast.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
 // Async components - heavy or rarely used components
+/** @type {typeof import('./wt-action-bar/wt-action-bar.vue').default} */
 const WtActionBar = defineAsyncComponent(
 	() => import('./wt-action-bar/wt-action-bar.vue'),
 );
+/** @type {typeof import('./wt-button-select/wt-button-select.vue').default} */
 const WtButtonSelect = defineAsyncComponent(
 	() => import('./wt-button-select/wt-button-select.vue'),
 );
+/** @type {typeof import('./wt-confirm-dialog/wt-confirm-dialog.vue').default} */
 const WtConfirmDialog = defineAsyncComponent(
 	() => import('./wt-confirm-dialog/wt-confirm-dialog.vue'),
 );
+/** @type {typeof import('./wt-context-menu/wt-context-menu.vue').default} */
 const WtContextMenu = defineAsyncComponent(
 	() => import('./wt-context-menu/wt-context-menu.vue'),
 );
+/** @type {typeof import('./wt-copy-action/wt-copy-action.vue').default} */
 const WtCopyAction = defineAsyncComponent(
 	() => import('./wt-copy-action/wt-copy-action.vue'),
 );
+/** @type {typeof import('./wt-datepicker/wt-datepicker.vue').default} */
 const WtDatepicker = defineAsyncComponent(
 	() => import('./wt-datepicker/wt-datepicker.vue'),
 );
+/** @type {typeof import('./wt-dual-panel/wt-dual-panel.vue').default} */
 const WtDualPanel = defineAsyncComponent(
 	() => import('./wt-dual-panel/wt-dual-panel.vue'),
 );
+/** @type {typeof import('./wt-dummy/wt-dummy.vue').default} */
 const WtDummy = defineAsyncComponent(() => import('./wt-dummy/wt-dummy.vue'));
+/** @type {typeof import('./wt-error-page/wt-error-page.vue').default} */
 const WtErrorPage = defineAsyncComponent(
 	() => import('./wt-error-page/wt-error-page.vue'),
 );
+/** @type {typeof import('./wt-expansion-panel/wt-expansion-panel.vue').default} */
 const WtExpansionPanel = defineAsyncComponent(
 	() => import('./wt-expansion-panel/wt-expansion-panel.vue'),
 );
+/** @type {typeof import('./wt-expansion-card/wt-expansion-card.vue').default} */
 const WtExpansionCard = defineAsyncComponent(
 	() => import('./wt-expansion-card/wt-expansion-card.vue'),
 );
+/** @type {typeof import('./wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue').default} */
 const WtFiltersPanelWrapper = defineAsyncComponent(
 	() => import('./wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue'),
 );
+/** @type {typeof import('./wt-galleria/wt-galleria.vue').default} */
 const WtGalleria = defineAsyncComponent(
 	() => import('./wt-galleria/wt-galleria.vue'),
 );
+/** @type {typeof import('./wt-notifications-bar/wt-notifications-bar.vue').default} */
 const WtNotificationsBar = defineAsyncComponent(
 	() => import('./wt-notifications-bar/wt-notifications-bar.vue'),
 );
+/** @type {typeof import('./wt-page-header/wt-page-header.vue').default} */
 const WtPageHeader = defineAsyncComponent(
 	() => import('./wt-page-header/wt-page-header.vue'),
 );
+/** @type {typeof import('./wt-pagination/wt-pagination.vue').default} */
 const WtPagination = defineAsyncComponent(
 	() => import('./wt-pagination/wt-pagination.vue'),
 );
+/** @type {typeof import('./wt-player/wt-player.vue').default} */
 const WtPlayer = defineAsyncComponent(
 	() => import('./wt-player/wt-player.vue'),
 );
+/** @type {typeof import('./wt-popover/wt-popover.vue').default} */
 const WtPopover = defineAsyncComponent(
 	() => import('./wt-popover/wt-popover.vue'),
 );
+/** @type {typeof import('./wt-search-bar/wt-search-bar.vue').default} */
 const WtSearchBar = defineAsyncComponent(
 	() => import('./wt-search-bar/wt-search-bar.vue'),
 );
+/** @type {typeof import('./wt-slider/wt-slider.vue').default} */
 const WtSlider = defineAsyncComponent(
 	() => import('./wt-slider/wt-slider.vue'),
 );
+/** @type {typeof import('./wt-status-select/wt-status-select.vue').default} */
 const WtStatusSelect = defineAsyncComponent(
 	() => import('./wt-status-select/wt-status-select.vue'),
 );
+/** @type {typeof import('./wt-stepper/wt-stepper.vue').default} */
 const WtStepper = defineAsyncComponent(
 	() => import('./wt-stepper/wt-stepper.vue'),
 );
+/** @type {typeof import('./wt-table/wt-table.vue').default} */
 const WtTable = defineAsyncComponent(() => import('./wt-table/wt-table.vue'));
+/** @type {typeof import('./wt-table-actions/wt-table-actions.vue').default} */
 const WtTableActions = defineAsyncComponent(
 	() => import('./wt-table-actions/wt-table-actions.vue'),
 );
+/** @type {typeof import('./wt-table-column-select/wt-table-column-select.vue').default} */
 const WtTableColumnSelect = defineAsyncComponent(
 	() => import('./wt-table-column-select/wt-table-column-select.vue'),
 );
+/** @type {typeof import('./wt-tabs/wt-tabs.vue').default} */
 const WtTabs = defineAsyncComponent(() => import('./wt-tabs/wt-tabs.vue'));
+/** @type {typeof import('./wt-time-input/wt-time-input.vue').default} */
 const WtTimeInput = defineAsyncComponent(
 	() => import('./wt-time-input/wt-time-input.vue'),
 );
+/** @type {typeof import('./wt-timepicker/wt-timepicker.vue').default} */
 const WtTimepicker = defineAsyncComponent(
 	() => import('./wt-timepicker/wt-timepicker.vue'),
 );
+/** @type {typeof import('./wt-tree/wt-tree.vue').default} */
 const WtTree = defineAsyncComponent(() => import('./wt-tree/wt-tree.vue'));
+/** @type {typeof import('./wt-tree-table/wt-tree-table.vue').default} */
 const WtTreeTable = defineAsyncComponent(
 	() => import('./wt-tree-table/wt-tree-table.vue'),
 );
+/** @type {typeof import('./wt-vidstack-player/wt-vidstack-player.vue').default} */
 const WtVidstackPlayer = defineAsyncComponent(
 	() => import('./wt-vidstack-player/wt-vidstack-player.vue'),
 );
+/** @type {typeof import('./on-demand/wt-call-media-action/wt-call-media-action.vue').default} */
 const WtCallMediaAction = defineAsyncComponent(
 	() => import('./on-demand/wt-call-media-action/wt-call-media-action.vue'),
 );
+/** @type {typeof import('./on-demand/wt-chat-emoji/wt-chat-emoji.vue').default} */
 const WtChatEmoji = defineAsyncComponent(
 	() => import('./on-demand/wt-chat-emoji/wt-chat-emoji.vue'),
 );
+/** @type {typeof import('./on-demand/wt-display-chip-items/wt-display-chip-items.vue').default} */
 const WtDisplayChipItems = defineAsyncComponent(
 	() => import('./on-demand/wt-display-chip-items/wt-display-chip-items.vue'),
 );
+/** @type {typeof import('./on-demand/wt-navigation-menu/components/wt-navigation-menu.vue').default} */
 const WtNavigationMenu = defineAsyncComponent(
 	() =>
 		import('./on-demand/wt-navigation-menu/components/wt-navigation-menu.vue'),
 );
+/** @type {typeof import('./on-demand/wt-selection-popup/wt-selection-popup.vue').default} */
 const WtSelectionPopup = defineAsyncComponent(
 	() => import('./on-demand/wt-selection-popup/wt-selection-popup.vue'),
 );
+/** @type {typeof import('./on-demand/wt-start-page/components/wt-start-page.vue').default} */
 const WtStartPage = defineAsyncComponent(
 	() => import('./on-demand/wt-start-page/components/wt-start-page.vue'),
 );
+/** @type {typeof import('./on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue').default} */
 const WtTypeExtensionValueInput = defineAsyncComponent(
 	() =>
 		import(
 			'./on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue'
 		),
 );
+/** @type {typeof import('./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue').default} */
 const WtScreenRecordingsAction = defineAsyncComponent(
 	() =>
 		import(
 			'./on-demand/wt-screen-recordings-action/wt-screen-recordings-action.vue'
 		),
 );
+/** @type {typeof import('./on-demand/wt-send-message-popup/wt-send-message-popup.vue').default} */
 const WtSendMessagePopup = defineAsyncComponent(
 	() => import('./on-demand/wt-send-message-popup/wt-send-message-popup.vue'),
 );
 
+/** @type {typeof import('./wt-inline-add-panel/wt-inline-add-panel.vue').default} */
 const WtInlineAddPanel = defineAsyncComponent(
 	() => import('./wt-inline-add-panel/wt-inline-add-panel.vue'),
 );

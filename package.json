@@ -219,7 +219,7 @@
 			"import": "./src/enums*"
 		},
 		"./components": {
-			"types": "./src/components/index.d.ts",
+			"types": "./types/components/index.d.ts",
 			"import": "./src/components/index.js"
 		},
 		"./components*": {
