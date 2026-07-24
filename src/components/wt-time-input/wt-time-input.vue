@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 
 interface WtTimeInputProps {
 	/**
@@ -56,7 +56,7 @@ interface WtTimeInputProps {
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: WtRegleFieldValidation;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	/**
 	 * Custom validators for vuelidate
 	 */
