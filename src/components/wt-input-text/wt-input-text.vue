@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { InputTextProps } from 'primevue';
 import {
 	computed,
@@ -87,7 +87,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	required?: boolean;
 	preventTrim?: boolean;
 	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
+	regleValidation?: WtRegleFieldValidation;
 	customValidators?: unknown[];
 	hideInputInfo?: boolean;
 	hideInputValue?: boolean;

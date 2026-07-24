@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { PasswordProps } from 'primevue';
 import {
 	computed,
@@ -72,7 +72,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	required?: boolean;
 	toggleMask?: boolean;
 	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
+	regleValidation?: WtRegleFieldValidation;
 	customValidators?: unknown[];
 }
 

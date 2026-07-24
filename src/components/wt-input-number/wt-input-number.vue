@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { InputNumberProps } from 'primevue';
 import {
 	computed,
@@ -104,7 +104,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	maxFractionDigits?: number;
 	showButtons?: boolean;
 	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<number>;
+	regleValidation?: WtRegleFieldValidation;
 	customValidators?: unknown[];
 	hideInputInfo?: boolean;
 }

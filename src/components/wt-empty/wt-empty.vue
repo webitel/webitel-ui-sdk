@@ -92,8 +92,10 @@ import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize';
 import WtImage from '../wt-image/wt-image.vue';
 
 const props = defineProps({
+	// SVG URL string (vite) or module object — matches wt-image `src`
 	image: {
 		type: [
+			String,
 			Object,
 			null,
 		],

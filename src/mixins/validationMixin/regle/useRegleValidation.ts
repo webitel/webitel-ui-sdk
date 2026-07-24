@@ -1,8 +1,10 @@
-import type { RegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
+import type { WtRegleFieldValidation } from './WtRegleFieldValidation';
+
+export type { WtRegleFieldValidation } from './WtRegleFieldValidation';
 
 export type UseFieldValidationParams = {
-	field?: Ref<RegleFieldStatus<string>>;
+	field?: Ref<WtRegleFieldValidation>;
 };
 
 export type UseFieldValidationReturn = {

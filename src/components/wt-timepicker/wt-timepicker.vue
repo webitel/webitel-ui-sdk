@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import { computed, nextTick, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -123,7 +123,7 @@ interface WtTimepickerProps {
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: RegleFieldStatus<number>;
+	regleValidation?: WtRegleFieldValidation;
 	/**
 	 * Custom validators for vuelidate
 	 */

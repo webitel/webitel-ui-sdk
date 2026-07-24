@@ -131,6 +131,7 @@
 </template>
 
 <script setup lang="ts">
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -182,7 +183,7 @@ interface Props extends SelectProps {
 	chipsView?: boolean;
 	labelProps?: object;
 	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
+	regleValidation?: WtRegleFieldValidation;
 	customValidators?: unknown[];
 }
 
