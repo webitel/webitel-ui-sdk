@@ -39,7 +39,7 @@
         @keyup="handleKeyup"
       />
       <p-input-group-addon
-        v-if="hasSuffixAddon"
+        v-if="hideInputValue || $slots.suffix"
         class="wt-input-text__addon typo-body-1"
       >
         <wt-icon-btn
@@ -158,7 +158,6 @@ const isValueHidden = ref(props.hideInputValue);
 const isInputMasked = computed(
 	() => !!model.value?.length && isValueHidden.value,
 );
-const hasSuffixAddon = computed(() => props.hideInputValue || slots.suffix);
 
 const eyeIconName = computed(() =>
 	isValueHidden.value ? 'eye--opened' : 'eye--closed',

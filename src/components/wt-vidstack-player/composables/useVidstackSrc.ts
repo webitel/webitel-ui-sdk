@@ -1,3 +1,4 @@
+import type { PlayerSrc } from 'vidstack';
 import { computed, toRef } from 'vue';
 
 import { normalizeVidstackMediaSrc } from '../utils/normalizeVidstackMediaSrc';
@@ -24,11 +25,11 @@ export const useVidstackSrc = ({ src, type, stream }) => {
 		return src?.replace('/download', '/stream'); // fixme https://webitel.atlassian.net/browse/WTEL-8723?focusedCommentId=733348
 	});
 
-	const normalizedSrcObject = computed(() => {
+	const normalizedSrcObject = computed<PlayerSrc>(() => {
 		return normalizeVidstackMediaSrc({
 			src: normalizedSrcValue.value,
 			type: normalizedType.value,
-		});
+		}) as PlayerSrc;
 	});
 
 	return {

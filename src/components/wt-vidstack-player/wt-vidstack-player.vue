@@ -100,6 +100,13 @@ const emit = defineEmits<{
 	];
 }>();
 
+defineSlots<{
+	avatar?: () => unknown;
+	'display-panel-actions'?: () => unknown;
+	content?: (scope: { size: ComponentSize }) => unknown;
+	'controls-panel'?: (scope: { size: ComponentSize }) => unknown;
+}>();
+
 const rootEl = useTemplateRef<HTMLElement>('root');
 
 defineExpose({

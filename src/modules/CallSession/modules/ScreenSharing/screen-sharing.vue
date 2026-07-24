@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import WtVidstackPlayer from '@webitel/ui-sdk/src/components/wt-vidstack-player/wt-vidstack-player.vue';
 import { useAttrs } from 'vue';
 import {
 	RecordingIndicator,
