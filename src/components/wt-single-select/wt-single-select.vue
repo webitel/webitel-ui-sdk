@@ -107,10 +107,10 @@
 </template>
 
 <script setup lang="ts">
-import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 

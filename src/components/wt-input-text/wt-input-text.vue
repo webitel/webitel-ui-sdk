@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import type { InputTextProps } from 'primevue';
 import {
 	computed,
@@ -74,6 +73,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
