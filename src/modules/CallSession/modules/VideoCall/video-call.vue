@@ -168,7 +168,7 @@
   setup
   lang="ts"
 >
-import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import WtVidstackPlayer from '@webitel/ui-sdk/src/components/wt-vidstack-player/wt-vidstack-player.vue';
 import { computed, isRef, onBeforeUnmount, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WtIcon, WtIconBtn } from '../../../../components';
