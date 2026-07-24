@@ -1,14 +1,10 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 
 /**
- * Regle field surface consumed by UI inputs (`$error` / `$errors` only).
+ * Regle field status accepted by UI inputs.
  *
- * Derived from Regle's SuperCompatibleRegleFieldStatus so both useRegle
+ * Alias of Regle's SuperCompatibleRegleFieldStatus so both useRegle
  * (RegleFieldStatus) and @regle/schemas (RegleSchemaFieldStatus, which omits
- * `$pending`) are assignable. Picking keeps the prop from requiring members
- * that vary across Regle packages/versions.
+ * `$pending`) are assignable. Prefer this over RegleFieldStatus for props.
  */
-export type WtRegleFieldValidation = Pick<
-	SuperCompatibleRegleFieldStatus,
-	'$error' | '$errors'
->;
+export type WtRegleFieldValidation = SuperCompatibleRegleFieldStatus;
