@@ -1,10 +1,8 @@
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
-import type { WtRegleFieldValidation } from './WtRegleFieldValidation';
-
-export type { WtRegleFieldValidation } from './WtRegleFieldValidation';
 
 export type UseFieldValidationParams = {
-	field?: Ref<WtRegleFieldValidation>;
+	field?: Ref<SuperCompatibleRegleFieldStatus>;
 };
 
 export type UseFieldValidationReturn = {

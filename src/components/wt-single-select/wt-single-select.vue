@@ -107,10 +107,10 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
-import type { WtRegleFieldValidation } from '../../mixins/validationMixin/regle/WtRegleFieldValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
@@ -153,7 +153,7 @@ interface Props extends SelectProps {
 	allowCustomValues?: boolean;
 	labelProps?: object;
 	v?: Record<string, unknown>;
-	regleValidation?: WtRegleFieldValidation;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: unknown[];
 }
 
