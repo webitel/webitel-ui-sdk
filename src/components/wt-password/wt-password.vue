@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
 import {
 	computed,
@@ -60,7 +61,6 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
-import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 

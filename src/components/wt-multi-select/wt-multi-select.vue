@@ -131,11 +131,11 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
-import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';

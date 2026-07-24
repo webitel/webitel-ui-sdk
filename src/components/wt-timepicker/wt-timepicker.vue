@@ -72,10 +72,10 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { computed, nextTick, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ComponentSize, MessageVariant } from '../../enums';
-import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 // const SEC_IN_DAY = 60 * 60 * 24;
