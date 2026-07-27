@@ -30,7 +30,7 @@ export const tablePaginationStoreBody = () => {
 			value: page,
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
-				const numValue = +value;
+				const numValue = Number(value);
 				if (numValue) page.value = numValue;
 			},
 		});
@@ -40,7 +40,7 @@ export const tablePaginationStoreBody = () => {
 			value: size,
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
-				const numValue = +value;
+				const numValue = Number(value);
 				if (numValue) size.value = numValue;
 			},
 		});

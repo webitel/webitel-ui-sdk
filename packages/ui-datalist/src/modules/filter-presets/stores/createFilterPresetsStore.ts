@@ -26,7 +26,7 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 		? namespace
 		: `${namespace}/presets`;
 
-	const presetId = ref(null);
+	const presetId = ref<number | null>(null);
 
 	const setupPresetPersistence = async () => {
 		const { restore: restorePreset, reset } = usePersistedStorage({

@@ -24,7 +24,8 @@ export interface StorageLike {
 
 export interface PersistedPropertyConfig {
 	name: string;
-	value: Ref<PersistableValue>;
+	// `null` while unset; some callers also pass a computed (see createTableHeadersStore)
+	value: Ref<PersistableValue | null>;
 	storages?: PersistedStorageType | PersistedStorageType[];
 	storagePath?: string;
 	startWatchManually?: boolean;

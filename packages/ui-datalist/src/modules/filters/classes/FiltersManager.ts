@@ -211,6 +211,12 @@ class FiltersManager implements IFiltersManager {
 				const name = filterNameFromSnapshotKey(snapshotKey);
 				const valueProp = filterValuePropFromSnapshotKey(snapshotKey);
 
+				// both are undefined for keys that are neither `_lbl` nor `_val`;
+				// previously those produced an "undefined" key in the accumulator
+				if (name === undefined || valueProp === undefined) {
+					return filtersAcc;
+				}
+
 				if (filtersAcc[name]) {
 					filtersAcc[name][valueProp] = snapshotValue;
 				} else {
