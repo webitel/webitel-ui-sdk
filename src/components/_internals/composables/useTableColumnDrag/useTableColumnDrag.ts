@@ -1,7 +1,17 @@
-export const useTableColumnDrag = (table, reorderableColumns) => {
-	let animationFrameId = null;
-	let containerEl = null;
-	let currentMouseX = null;
+import type { Ref } from 'vue';
+
+/** The PrimeVue DataTable instance whose scroll container is driven here. */
+interface DataTableRef {
+	$el?: HTMLElement;
+}
+
+export const useTableColumnDrag = (
+	table: Ref<DataTableRef | undefined>,
+	reorderableColumns: boolean,
+) => {
+	let animationFrameId: number | null = null;
+	let containerEl: HTMLElement | null = null;
+	let currentMouseX: number | null = null;
 	let isDragging = false;
 
 	const autoScroll = () => {
@@ -16,7 +26,7 @@ export const useTableColumnDrag = (table, reorderableColumns) => {
 		const distanceFromRight = rect.right - currentMouseX;
 
 		// Easing function for smooth acceleration (ease-in-out cubic)
-		const easeInOutCubic = (t) => {
+		const easeInOutCubic = (t: number) => {
 			return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
 		};
 
@@ -46,13 +56,15 @@ export const useTableColumnDrag = (table, reorderableColumns) => {
 		}
 	};
 
-	const tableDragHandler = (event) => {
+	const tableDragHandler = (event: DragEvent) => {
+		if (!event.dataTransfer) return;
 		event.dataTransfer.effectAllowed = 'move';
-		const copyEl = event.target.cloneNode(true);
+		const target = event.target as HTMLElement;
+		const copyEl = target.cloneNode(true) as HTMLElement;
 		copyEl.style.position = 'absolute';
 		copyEl.style.top = '-9999px';
 		copyEl.style.background = 'var(--p-datatable-header-cell-drag-background)';
-		copyEl.style.width = `${event.target.offsetWidth}px`;
+		copyEl.style.width = `${target.offsetWidth}px`;
 		document.body.appendChild(copyEl);
 		event.dataTransfer.setDragImage(copyEl, event.offsetX, event.offsetY);
 		// Clean up after drag starts
@@ -63,13 +75,14 @@ export const useTableColumnDrag = (table, reorderableColumns) => {
 		// Initialize dragging state
 		isDragging = true;
 		if (!containerEl) {
-			containerEl = table.value?.$el?.querySelector(
-				'.p-datatable-table-container',
-			);
+			containerEl =
+				table.value?.$el?.querySelector<HTMLElement>(
+					'.p-datatable-table-container',
+				) ?? null;
 		}
 	};
 
-	const tableDragOverHandler = (event) => {
+	const tableDragOverHandler = (event: DragEvent) => {
 		// Update mouse position
 		currentMouseX = event.clientX;
 

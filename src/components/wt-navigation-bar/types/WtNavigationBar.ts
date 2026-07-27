@@ -6,6 +6,10 @@ export interface WtNavigationBarRouteNavItem {
 	route: string;
 }
 
+/**
+ * A nav item is either a route link or an expansion holding `subNav` items;
+ * both fields stay optional so the template can branch on them.
+ */
 export type WtNavigationBarNavItem = {
 	value: string;
 
@@ -14,4 +18,5 @@ export type WtNavigationBarNavItem = {
 	 * @default WtNavigationBarNavItem.value
 	 */
 	name?: string;
-} & (WtNavigationBarRouteNavItem | WtNavigationBarExpansionNavItem);
+} & Partial<WtNavigationBarRouteNavItem> &
+	Partial<WtNavigationBarExpansionNavItem>;

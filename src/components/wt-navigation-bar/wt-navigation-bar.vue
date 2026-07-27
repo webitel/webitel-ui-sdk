@@ -47,7 +47,7 @@
                     'wt-navigation-bar__nav-item-link--active':
                       currentNav.nav === navItem.value,
                   }"
-                  :to="navItem.route"
+                  :to="navItem.route ?? ''"
                   class="wt-navigation-bar__nav-item-link typo-body-1"
                   @click="close"
                 >
@@ -89,7 +89,7 @@
                           'wt-navigation-bar__nav-item-link--active':
                             currentNav.nav === subNavItem.value,
                         }"
-                        :to="nestedRoute(subNavItem, navItem)"
+                        :to="nestedRoute(subNavItem, navItem) ?? ''"
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         @click="close"
                       >
@@ -124,9 +124,16 @@ import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import WfmLight from './assets/light/app-logo-light-wfm.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
-import { WtNavigationBarNavItem } from './types/WtNavigationBar';
+import type { PropType } from 'vue';
+import type { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
-const appLogo = {
+const appLogo: Record<
+	string,
+	{
+		dark: string;
+		light: string;
+	}
+> = {
 	[WtApplication.Supervisor]: {
 		dark: SupervisorDark,
 		light: SupervisorLight,
@@ -182,7 +189,7 @@ export default {
 		 * @default []
 		 */
 		nav: {
-			type: Array,
+			type: Array as PropType<WtNavigationBarNavItem[]>,
 			default: () => [],
 		},
 		/**
@@ -214,27 +221,30 @@ export default {
 		currentNav() {
 			const pathSegments = this.$route.path.split('/').filter(Boolean);
 
-			const flatNav = this.nav.flatMap(
-				(item) =>
+			const flatNav: WtNavigationBarNavItem[] = this.nav.flatMap(
+				(item: WtNavigationBarNavItem) =>
 					item.subNav ?? [
 						item,
 					],
 			);
 
-			const navMap = new Map(
+			const navMap = new Map<string, WtNavigationBarNavItem>(
 				flatNav.map((item) => [
 					item.value,
 					item,
 				]),
 			);
 
-			const matchingSegment = pathSegments.find((segment) =>
+			const matchingSegment = pathSegments.find((segment: string) =>
 				navMap.has(segment),
 			);
-			const currentNav = navMap.get(matchingSegment);
+			const currentNav = matchingSegment
+				? navMap.get(matchingSegment)
+				: undefined;
 
-			const currentExpansion = this.nav.find((nav) =>
-				nav.subNav?.includes(currentNav),
+			const currentExpansion = this.nav.find(
+				(nav: WtNavigationBarNavItem) =>
+					!!currentNav && !!nav.subNav?.includes(currentNav),
 			);
 
 			return {
@@ -244,16 +254,19 @@ export default {
 		},
 	},
 	methods: {
-		nestedRoute(subNavItem, navItem) {
+		nestedRoute(
+			subNavItem: WtNavigationBarNavItem,
+			navItem: WtNavigationBarNavItem,
+		) {
 			return navItem.route
 				? `${navItem.route}/${subNavItem.route}`
 				: subNavItem.route;
 		},
-		expand(navItem) {
+		expand(navItem: WtNavigationBarNavItem) {
 			this.expandedName =
 				this.expandedName !== navItem.value ? navItem.value : '';
 		},
-		isExpanded(navItem) {
+		isExpanded(navItem: WtNavigationBarNavItem) {
 			return this.expandedName === navItem.value;
 		},
 		close() {
