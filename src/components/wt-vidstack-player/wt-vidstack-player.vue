@@ -52,15 +52,18 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
-import type { MediaSrc } from 'vidstack';
 import { computed, provide, ref, toRefs, useTemplateRef } from 'vue';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
-import { useVidstackSrc } from './composables/useVidstackSrc';
+import {
+	useVidstackSrc,
+	type VidstackSrcInput,
+} from './composables/useVidstackSrc';
 
 interface Props {
-	src?: MediaSrc;
+	/** loose on purpose: `useVidstackSrc` normalizes it into a vidstack `MediaSrc` */
+	src?: VidstackSrcInput;
 	mime?: string;
 	autoplay?: boolean;
 	muted?: boolean;

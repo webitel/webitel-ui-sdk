@@ -67,7 +67,7 @@ interface WtTimeInputProps {
 	customValidators?: CompatCustomValidator[];
 }
 
-const props = withDefaults(defineProps<WtTimeInputProps>(), {
+withDefaults(defineProps<WtTimeInputProps>(), {
 	label: '',
 	name: '',
 	maxValue: undefined,
