@@ -38,8 +38,6 @@ const documentSize = computed(() => {
 });
 
 function downloadDocument() {
-	// `url` is optional on ChatMessageFile; without it `a.href` used to be set to
-	// the string "undefined" and the click navigated to a bogus relative URL
 	if (!props.file?.url) return;
 	const a = document.createElement('a');
 	a.href = props.file.url;

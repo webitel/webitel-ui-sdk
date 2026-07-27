@@ -35,7 +35,6 @@ import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
 	file: ChatMessageFile;
-	// mirrors ChatMessageFile.mime, which is optional; already optional-chained below
 	type?: string;
 }>();
 

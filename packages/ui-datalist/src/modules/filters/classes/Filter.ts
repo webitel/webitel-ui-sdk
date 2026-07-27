@@ -53,7 +53,6 @@ export class Filter implements IFilter {
 	constructor(
 		{ name, value, label }: FilterInitParams,
 		public payload: object | undefined,
-		// FiltersManager passes its own optional config through as the fallback
 		public config: FilterInstanceConfig | undefined,
 	) {
 		this.name = name;

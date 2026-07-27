@@ -21,7 +21,6 @@ const props = defineProps<{
 	hideLabel?: boolean;
 }>();
 
-// `null` is what the shared has-option field writes when the selection is cleared.
 const model = defineModel<BooleanFilterModelValue | null>();
 
 let v$: ReturnType<typeof useBooleanFilterValueValidation>['v$'] | null = null;

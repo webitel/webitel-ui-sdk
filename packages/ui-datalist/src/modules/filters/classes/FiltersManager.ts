@@ -131,7 +131,6 @@ class FiltersManager implements IFiltersManager {
 	}): IFilter {
 		const filter = this.filters.get(name);
 		if (!filter) {
-			// previously a TypeError on `filter.set` a line later
 			throw new Error(`FiltersManager: cannot update unknown filter "${name}"`);
 		}
 		filter.set({
@@ -211,8 +210,7 @@ class FiltersManager implements IFiltersManager {
 				const name = filterNameFromSnapshotKey(snapshotKey);
 				const valueProp = filterValuePropFromSnapshotKey(snapshotKey);
 
-				// both are undefined for keys that are neither `_lbl` nor `_val`;
-				// previously those produced an "undefined" key in the accumulator
+				// keys that are neither `_lbl` nor `_val`
 				if (name === undefined || valueProp === undefined) {
 					return filtersAcc;
 				}

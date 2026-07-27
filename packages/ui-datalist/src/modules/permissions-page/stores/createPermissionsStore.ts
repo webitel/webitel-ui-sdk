@@ -81,7 +81,6 @@ export const permissionsStoreBody = (
 		try {
 			await (
 				config.apiModule.patch as unknown as (payload: {
-					// undefined until `initialize` has run
 					id: Id | undefined;
 					changes: PermissionsChange[];
 				}) => Promise<unknown>
@@ -120,7 +119,6 @@ export const permissionsStoreBody = (
 		error.value = null;
 		isLoading.value = false;
 		resetInfiniteScrollTableParamsToDefaults();
-		// undefined, matching the ref type and what `initialize` assigns
 		parentId.value = undefined;
 	};
 

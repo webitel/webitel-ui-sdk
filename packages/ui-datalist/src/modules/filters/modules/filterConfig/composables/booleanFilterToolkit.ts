@@ -23,8 +23,6 @@ export const usePrettifyBooleanValuePreview = (
 export const useBooleanFilterValueValidation = <
 	T extends BooleanFilterModelValue,
 >(
-	// `defineModel<T>()` without a default always widens to `T | undefined`, and the
-	// shared has-option field writes `null` when the selection is cleared.
 	model: ModelRef<T | null | undefined>,
 ) => {
 	const v$ = useVuelidate(

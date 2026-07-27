@@ -34,7 +34,6 @@ import { requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-// both bounds start out unset
 type ModelValue = {
 	from: number | null;
 	to: number | null;

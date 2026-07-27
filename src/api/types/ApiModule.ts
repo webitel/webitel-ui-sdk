@@ -11,8 +11,6 @@ export interface ApiModule<Entity> {
 		next?: boolean;
 	}>;
 	get?: (params: {
-		// `null` for consistency with update/patch below, and because card stores
-		// hold their id as `string | number | null`
 		itemId?: Id | null;
 		/** preferred over itemId */
 		id?: Id | null;

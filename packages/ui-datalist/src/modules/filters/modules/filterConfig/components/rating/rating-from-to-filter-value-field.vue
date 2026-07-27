@@ -28,7 +28,6 @@ import { maxValue, requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-// both bounds start out unset
 type ModelValue = {
 	from: number | null;
 	to: number | null;
@@ -56,7 +55,6 @@ const v$ = useVuelidate<{
 			from: {
 				required: requiredIf(() => !model.value.to),
 				maxValue: maxValue(
-					// `from` unset used to compare as `null > to`, i.e. false -> Infinity
 					model.value.to &&
 						model.value.from !== null &&
 						model.value.from > model.value.to

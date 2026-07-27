@@ -24,7 +24,8 @@ export interface StorageLike {
 
 export interface PersistedPropertyConfig {
 	name: string;
-	// `null` while unset; some callers also pass a computed (see createTableHeadersStore)
+	// note: createTableHeadersStore passes a computed here, which the default
+	// restore path cannot write to
 	value: Ref<PersistableValue | null>;
 	storages?: PersistedStorageType | PersistedStorageType[];
 	storagePath?: string;
