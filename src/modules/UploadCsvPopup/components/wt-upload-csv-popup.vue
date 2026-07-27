@@ -153,7 +153,7 @@ interface CharsetOption {
 
 interface Props {
 	file: File | null;
-	mappingFields: unknown[];
+	mappingFields: CsvMappingField[];
 	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
 	handlingMode?: string;
 	fileUploadHandler?: () => unknown | Promise<unknown>;

@@ -16,7 +16,27 @@ import isEmpty from '../../../scripts/isEmpty';
  * locale: string, // ui
  * }
  */
-const normalizeCSVData = ({ data, mappings }) => {
+export interface CsvMappingField {
+	/** webitel field name */
+	name: string;
+	/** csv column name(s) */
+	csv: string | string[];
+	required?: boolean;
+	/** ui locale key */
+	locale?: string;
+	/** the webitel field maps to several csv columns */
+	multiple?: boolean;
+}
+
+export type CsvDataRow = Record<string, unknown>;
+
+const normalizeCSVData = ({
+	data,
+	mappings,
+}: {
+	data: CsvDataRow[];
+	mappings: CsvMappingField[];
+}) => {
 	const nonEmptyMappingFields = mappings.filter((field) => !isEmpty(field.csv));
 
 	return data.map((dataItem, index) => {
