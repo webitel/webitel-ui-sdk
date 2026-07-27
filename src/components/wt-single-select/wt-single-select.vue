@@ -119,7 +119,7 @@ import type {
 import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
-interface Props extends Omit<SelectProps, 'size'> {
+interface Props extends Omit<SelectProps, 'size' | 'options'> {
 	label?: string;
 	placeholder?: string;
 	required?: boolean;
@@ -141,7 +141,8 @@ interface Props extends Omit<SelectProps, 'size'> {
 	 * true shows the clear button
 	 */
 	showClear?: boolean;
-	options?: unknown[];
+	/** readonly so consumers can pass `as const` option lists */
+	options?: readonly unknown[];
 	optionLabel?: string;
 	optionValue?: string;
 	/**
@@ -211,7 +212,9 @@ const {
 	clearValue,
 } = useSelect({
 	selected: model,
-	options: computed(() => props.options),
+	options: computed(() => [
+		...props.options,
+	]),
 	optionLabel: computed(() => props.optionLabel),
 	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),

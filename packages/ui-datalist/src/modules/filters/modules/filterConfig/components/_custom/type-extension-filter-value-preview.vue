@@ -57,7 +57,7 @@ const showLookupValuePreview = computed(() => {
 		WtTypeExtensionFieldKind.Multiselect,
 		WtTypeExtensionFieldKind.Select,
 	];
-	return lookupKinds.includes(props.filterConfig.field.kind);
+	return lookupKinds.includes(props.filterConfig.field.kind ?? '');
 });
 </script>
 

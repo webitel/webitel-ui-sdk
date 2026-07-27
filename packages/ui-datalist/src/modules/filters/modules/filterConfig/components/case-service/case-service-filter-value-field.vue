@@ -8,7 +8,7 @@
     class="service-case-filter-value-field"
     multiple
     allow-parent
-    @update:model-value="model = $event"
+    @update:model-value="model = $event as ModelValue"
   />
 </template>
 

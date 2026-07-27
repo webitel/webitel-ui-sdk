@@ -148,7 +148,7 @@ import type {
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
-interface Props extends SelectProps {
+interface Props extends Omit<SelectProps, 'options'> {
 	label?: string;
 	placeholder?: string;
 	required?: boolean;
@@ -169,7 +169,8 @@ interface Props extends SelectProps {
 	 * true shows the clear button
 	 */
 	showClear?: boolean;
-	options?: unknown[];
+	/** readonly so consumers can pass `as const` option lists */
+	options?: readonly unknown[];
 	optionLabel?: string;
 	optionValue?: string;
 	/**
@@ -244,7 +245,9 @@ const {
 	clearValue,
 } = useSelect({
 	selected: model,
-	options: computed(() => props.options),
+	options: computed(() => [
+		...props.options,
+	]),
 	optionLabel: computed(() => props.optionLabel),
 	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),

@@ -11,7 +11,7 @@
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
     :v="vUnassigned"
-    @update:selected="model.unassigned = $event"
+    @update:selected="model.unassigned = !!$event"
   />
 </template>
 

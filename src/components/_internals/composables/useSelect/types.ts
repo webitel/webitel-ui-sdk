@@ -15,8 +15,8 @@ export interface SelectSearchResponse {
 	next?: boolean;
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: consumers declare their own param shapes
 export type SelectSearchMethod = (
+	// biome-ignore lint/suspicious/noExplicitAny: consumers declare their own param shapes
 	...params: any[]
 ) => Promise<SelectSearchResponse>;
 
