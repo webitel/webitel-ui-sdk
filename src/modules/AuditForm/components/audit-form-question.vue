@@ -3,7 +3,7 @@
     :is="component"
     v-model:question="questionModel"
     v-model:answer="answerModel"
-    v-clickaway="saveQuestion"
+    v-clickaway="saveQuestionClickawayOptions"
     :class="[
       `audit-form-question--mode-${mode}`,
       {
@@ -120,6 +120,15 @@ const isAnswer = computed(() => !isEmpty(answerModel.value));
 function saveQuestion() {
 	state.value = QuestionState.SAVED;
 }
+
+const saveQuestionClickawayOptions = [
+	saveQuestion,
+	{
+		ignore: [
+			'.p-select-overlay',
+		],
+	},
+];
 
 function activateQuestion() {
 	if (mode !== 'create') return;
