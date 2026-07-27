@@ -1,8 +1,8 @@
-import type { RegleFieldStatus } from '@regle/core';
+import type { RegleCollectionStatus, RegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field?: Ref<RegleFieldStatus<string>>;
+	field?: Ref<RegleFieldStatus<string> | RegleCollectionStatus>;
 };
 
 export type UseFieldValidationReturn = {
@@ -18,15 +18,16 @@ export const useFieldValidation = ({
 	});
 
 	const validationText = computed(() => {
-		const errors = fieldRef?.value?.$errors;
+		const status = fieldRef?.value;
+		const errors = status?.$errors;
 		if (!errors) return '';
 
 		if (Array.isArray(errors)) {
 			return errors.at(0) ?? '';
 		}
 
-		if (typeof errors === 'object') {
-			const selfErrors = fieldRef?.value?.$self?.$errors;
+		if (status && '$self' in status) {
+			const selfErrors = status.$self?.$errors;
 			if (Array.isArray(selfErrors)) return selfErrors?.at(0) ?? '';
 		}
 
