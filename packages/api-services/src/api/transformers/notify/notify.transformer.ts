@@ -12,7 +12,7 @@ const notifyTransformer = (notificationObject) => {
     so, create a callback which will send notification with params, passed to it
      */
 		const callback = ({ type, text }) =>
-			apiServicesConfig.eventBus.$emit('notification', {
+			apiServicesConfig.eventBus?.$emit('notification', {
 				type,
 				text,
 			});
