@@ -36,8 +36,9 @@
     <template #actions>
       <template v-if="enablePresets">
         <apply-preset-action
+          v-if="presetStore"
           :filter-configs="filterConfigs"
-          :namespace="props.presetNamespace"
+          :namespace="props.presetNamespace ?? ''"
           :presets-store="presetStore"
           @apply="emit('preset:apply', $event)"
         />
@@ -46,7 +47,7 @@
           :filter-configs="filterConfigs"
           :filters-included="filtersIncluded"
           :filters-manager="props.filtersManager"
-          :namespace="props.presetNamespace"
+          :namespace="props.presetNamespace ?? ''"
         />
       </template>
 

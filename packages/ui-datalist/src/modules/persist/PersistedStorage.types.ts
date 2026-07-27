@@ -39,7 +39,10 @@ export interface PersistedPropertyConfig {
 			name: string;
 			value: PersistableValue;
 		}) => Promise<void>,
-		{ value, name },
+		context: {
+			name: string;
+			value: PersistableValue;
+		},
 	) => Promise<void>;
 	onRestore?: (
 		// resolves `undefined` when no storage held a value for `name`

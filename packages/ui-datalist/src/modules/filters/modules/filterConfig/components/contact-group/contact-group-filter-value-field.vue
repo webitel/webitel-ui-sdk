@@ -12,9 +12,9 @@
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
-    :selected="model?.unassigned"
+    :selected="!!model?.unassigned"
     :v="!disableValidation && vUnassigned"
-    @update:selected="model.unassigned = $event"
+    @update:selected="model.unassigned = !!$event"
   />
 </template>
 
@@ -53,10 +53,10 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const labelValue = computed(() =>
-	props?.hideLabel ? null : t('webitelUI.filters.filterValue'),
+	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),
 );
 
-const changeListValue = (event) => {
+const changeListValue = (event: string[]) => {
 	if (!event.length && !model.value.unassigned) {
 		model.value = {};
 		return;
@@ -76,7 +76,8 @@ const v$ = useVuelidate<{
 			},
 			unassigned: {
 				required: requiredIf(
-					() => props.filterConfig?.hideUnassigned && !model.value.list?.length,
+					() =>
+						!!props.filterConfig?.hideUnassigned && !model.value.list?.length,
 				),
 			},
 		},

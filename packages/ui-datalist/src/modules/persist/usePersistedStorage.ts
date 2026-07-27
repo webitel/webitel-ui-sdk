@@ -85,20 +85,26 @@ export const usePersistedStorage = ({
          wrap all setItemFns in one callback
           so that onStore is called only once on each value change
          */
-					const save = async ({ name, value: storedValue }) => {
+					const save = async ({
+						name,
+						value: storedValue,
+					}: {
+						name: string;
+						value: PersistableValue;
+					}) => {
 						setItemFns.forEach((setter) => {
 							setter(name, storedValue);
 						});
 					};
 					await onStore(save, {
 						name,
-						value,
+						value: value.value ?? '',
 					});
 				} else {
 					/*
        else, perform default storing logic
        */
-					const storedValue = value.value;
+					const storedValue = value.value ?? '';
 					setItemFns.forEach((setter) => {
 						setter(name, storedValue);
 					});
