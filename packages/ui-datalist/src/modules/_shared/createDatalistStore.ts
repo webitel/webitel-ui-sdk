@@ -27,7 +27,9 @@ const defaultStoreType = DatalistStoreProvider.Pinia;
  * */
 export const makeThisToRefs = <StoreBody extends object>(
 	store: StoreBody,
-	storeType: DatalistStoreProviderType,
+	// optional: falls back to `defaultStoreType` below, and every store config
+	// declares `storeType` as optional
+	storeType?: DatalistStoreProviderType,
 ): ToRefs<StoreBody> => {
 	const thisStoreType = storeType || defaultStoreType;
 

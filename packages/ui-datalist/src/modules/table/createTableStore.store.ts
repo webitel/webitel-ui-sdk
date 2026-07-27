@@ -93,7 +93,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 	const dataList: Ref<Entity[]> = ref([]);
 	const selected: Ref<Entity[]> = ref([]);
-	const error = ref(null);
+	const error = ref<unknown>(null);
 	const isLoading = ref(false);
 
 	const updateSelected = (value: Entity[]) => {
@@ -125,7 +125,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		try {
 			const { items, next } = await apiModule.getList(params);
 
-			dataList.value = items;
+			dataList.value = items ?? [];
 
 			/**
 			 * @author: @Oleksandr Palonnyi
@@ -134,7 +134,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			 *
 			 * link to refactor task - https://webitel.atlassian.net/browse/WTEL-8599
 			 * */
-			updateSelected(filterSelected(items));
+			updateSelected(filterSelected(items ?? []));
 
 			$patchPaginationStore({
 				next,
@@ -169,7 +169,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		try {
 			const { items, next } = await apiModule.getList(params);
 
-			dataList.value.push(...items);
+			dataList.value.push(...(items ?? []));
 			$patchPaginationStore({
 				next,
 			});
@@ -191,7 +191,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		set(changes, path, value);
 
 		try {
-			await apiModule.patch({
+			await apiModule.patch?.({
 				changes,
 				parentId: parentId.value,
 				id: item.id,
@@ -211,7 +211,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 					_els,
 				];
 		const deleteEl = (el: Entity) => {
-			return apiModule.delete({
+			return apiModule.delete?.({
 				id: el.id,
 				etag: el.etag,
 				parentId: parentId.value,

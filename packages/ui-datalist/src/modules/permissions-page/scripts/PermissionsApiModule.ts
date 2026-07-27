@@ -1,5 +1,4 @@
-import type { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
-
+import type { TableApiModule } from '../../types/tableStore.types';
 import type {
 	PermissionEntity,
 	RawPermissionsApiModule,
@@ -13,9 +12,9 @@ import type {
  */
 export const PermissionsApiModule = (
 	rawApiModule: RawPermissionsApiModule,
-): ApiModule<PermissionEntity> => {
+): TableApiModule<PermissionEntity> => {
 	return {
 		getList: rawApiModule.getPermissionsList,
 		patch: rawApiModule.patchPermissions,
-	} as unknown as ApiModule<PermissionEntity>;
+	} as unknown as TableApiModule<PermissionEntity>;
 };

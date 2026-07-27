@@ -1,10 +1,11 @@
-import { watch } from 'vue';
+import { type WatchHandle, watch } from 'vue';
 
 import {
 	type PersistableValue,
 	type PersistedPropertyConfig,
 	type PersistedStorageController,
 	PersistedStorageType,
+	type StorageLike,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
 import { useRoutePersistedStorage } from './useRoutePersistedStorage';
@@ -20,25 +21,30 @@ export const usePersistedStorage = ({
 	onStore,
 	onRestore,
 }: PersistedPropertyConfig): PersistedStorageController => {
-	let unwatch = null;
+	let unwatch: WatchHandle | null = null;
 
-	const setItemFns = [];
-	const getItemFns: Array<(name: string) => Promise<PersistableValue>> = [];
-	const removeItemFns = [];
+	const setItemFns: StorageLike['setItem'][] = [];
+	const getItemFns: StorageLike['getItem'][] = [];
+	const removeItemFns: StorageLike['removeItem'][] = [];
 
+	// `null` entries are kept: callers below pick the first non-null value, so the
+	// per-storage misses have to stay in the list to preserve priority order.
 	const composedValueGetter = async (
 		name: string,
-	): Promise<PersistableValue[]> => {
+	): Promise<Array<PersistableValue | null>> => {
 		const settledResults = await Promise.allSettled(
 			getItemFns.map((getter) => getter(name)),
 		);
 
-		return settledResults.reduce((acc, result) => {
-			if (result.status === 'fulfilled') {
-				acc.push(result.value);
-			}
-			return acc;
-		}, [] as PersistableValue[]);
+		return settledResults.reduce(
+			(acc, result) => {
+				if (result.status === 'fulfilled') {
+					acc.push(result.value);
+				}
+				return acc;
+			},
+			[] as Array<PersistableValue | null>,
+		);
 	};
 
 	const storages = Array.isArray(configStorages)
