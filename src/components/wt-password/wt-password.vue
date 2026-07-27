@@ -54,7 +54,10 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
 import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
-import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
@@ -65,7 +68,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	disabled?: boolean;
 	required?: boolean;
 	toggleMask?: boolean;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 }

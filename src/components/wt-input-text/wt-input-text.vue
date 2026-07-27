@@ -67,7 +67,10 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
-import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
@@ -80,7 +83,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	disabled?: boolean;
 	required?: boolean;
 	preventTrim?: boolean;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;

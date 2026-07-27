@@ -18,7 +18,7 @@ export type CompatCustomValidator = {
  * Vuelidate exposes each rule as a dynamic key on the field, and components
  * declare the prop loosely so consumers are not forced to import `Validation`.
  */
-export type VuelidateFieldLike = Validation | Record<string, unknown>;
+export type VuelidateFieldLike = Validation | Record<string, unknown> | null;
 
 export type UseFieldValidationParams = {
 	field?: Ref<VuelidateFieldLike | undefined>;

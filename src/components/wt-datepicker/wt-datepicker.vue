@@ -20,7 +20,7 @@
 			:min-date="minDate"
 			:max-date="maxDate"
 			:placeholder="getPlaceholder"
-			:show-clear="clearable && modelValue"
+			:show-clear="!!(clearable && modelValue)"
 			show-button-bar
       fluid
 			:pt="{
@@ -97,25 +97,25 @@
 			</template>
 
 			<template #hourincrementbutton="{ callbacks }">
-				<span @mousedown="callbacks.mousedown" @mouseup="callbacks.mouseup" @mouseleave="callbacks.mouseleave">
+				<span @mousedown="spinnerCallbacks(callbacks).mousedown" @mouseup="spinnerCallbacks(callbacks).mouseup" @mouseleave="spinnerCallbacks(callbacks).mouseleave">
 					<wt-icon-btn icon="arrow-up" />
 				</span>
 			</template>
 
 			<template #hourdecrementbutton="{ callbacks }">
-				<span @mousedown="callbacks.mousedown" @mouseup="callbacks.mouseup" @mouseleave="callbacks.mouseleave">
+				<span @mousedown="spinnerCallbacks(callbacks).mousedown" @mouseup="spinnerCallbacks(callbacks).mouseup" @mouseleave="spinnerCallbacks(callbacks).mouseleave">
 					<wt-icon-btn icon="arrow-down" />
 				</span>
 			</template>
 
 			<template #minuteincrementbutton="{ callbacks }">
-				<span @mousedown="callbacks.mousedown" @mouseup="callbacks.mouseup" @mouseleave="callbacks.mouseleave">
+				<span @mousedown="spinnerCallbacks(callbacks).mousedown" @mouseup="spinnerCallbacks(callbacks).mouseup" @mouseleave="spinnerCallbacks(callbacks).mouseleave">
 					<wt-icon-btn icon="arrow-up" />
 				</span>
 			</template>
 
 			<template #minutedecrementbutton="{ callbacks }">
-				<span @mousedown="callbacks.mousedown" @mouseup="callbacks.mouseup" @mouseleave="callbacks.mouseleave">
+				<span @mousedown="spinnerCallbacks(callbacks).mousedown" @mouseup="spinnerCallbacks(callbacks).mouseup" @mouseleave="spinnerCallbacks(callbacks).mouseleave">
 					<wt-icon-btn icon="arrow-down" />
 				</span>
 			</template>
@@ -145,7 +145,10 @@ import {
 	ComponentSize,
 	MessageVariant,
 } from '../../enums';
-import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useDatepicker } from './_internals/composables/useDatepicker';
 
@@ -160,7 +163,7 @@ interface Props extends DatePickerProps {
 	required?: boolean;
 	clearable?: boolean;
 	timezone?: string;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	customValidators?: CompatCustomValidator[];
 }
 
@@ -196,13 +199,29 @@ const modelValue = computed({
 	},
 });
 
-const datepicker = useTemplateRef<HTMLDivElement>('datepicker');
+/** PrimeVue DatePicker instance: only the internals wt-datepicker drives. */
+interface DatePickerRef {
+	$el?: HTMLElement;
+	overlay?: HTMLElement;
+	alignOverlay?: () => void;
+	rawValue: Date | null;
+	updateModel: (v: Date) => void;
+}
+
+const datepicker = useTemplateRef<DatePickerRef>('datepicker');
+
+/** PrimeVue types the spinner slot's `callbacks` as a bare `object`. */
+const spinnerCallbacks = (callbacks: object) =>
+	callbacks as Record<
+		'mousedown' | 'mouseup' | 'mouseleave',
+		(e: Event) => void
+	>;
 
 const datepickerId = `datepicker-${Math.random().toString(36).slice(2, 11)}`;
 
 const { onBlur, lockOverlay, unlockOverlay } = useDatepicker(
-	() => datepicker.value?.$el?.querySelector('input'),
-	() => datepicker.value,
+	() => datepicker.value?.$el?.querySelector('input') ?? null,
+	() => datepicker.value ?? null,
 	() => !!props.showTime,
 	() => !!props.clearable,
 );
@@ -223,7 +242,7 @@ const onPanelShow = () => {
 
 	// align overlay, because on first render it is not aligned correctly
 	setTimeout(() => {
-		datepicker.value?.alignOverlay();
+		datepicker.value?.alignOverlay?.();
 		const panel = datepicker.value?.overlay;
 		if (!panel) return;
 		panel.style.minWidth = '';

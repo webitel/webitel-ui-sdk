@@ -136,7 +136,10 @@ import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
-import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
@@ -184,7 +187,7 @@ interface Props extends SelectProps {
 	manualCustomValues?: boolean;
 	chipsView?: boolean;
 	labelProps?: object;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 }

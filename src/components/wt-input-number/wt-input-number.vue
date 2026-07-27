@@ -79,7 +79,10 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
-import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
@@ -96,7 +99,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	minFractionDigits?: number;
 	maxFractionDigits?: number;
 	showButtons?: boolean;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
