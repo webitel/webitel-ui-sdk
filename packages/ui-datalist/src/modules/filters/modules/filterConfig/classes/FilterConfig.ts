@@ -74,9 +74,15 @@ export type FilterConfigSearchFilterContext = {
 };
 
 export class FilterConfig implements BaseFilterConfig {
-	name: FilterName;
-	valueInputComponent: Component;
-	valuePreviewComponent: Component;
+	/*
+	 * Definite assignment: concrete configs assign these as field initializers
+	 * (e.g. `readonly name = FilterOption.Skill`), and the constructor below only
+	 * fills them in when the params carry them. `BaseFilterConfig` requires all
+	 * three, so they cannot be declared optional here.
+	 */
+	name!: FilterName;
+	valueInputComponent!: Component;
+	valuePreviewComponent!: Component;
 	label?: ReturnType<MessageResolver> | string;
 	staticView?: boolean;
 	notDeletable: boolean;
@@ -96,7 +102,8 @@ export class FilterConfig implements BaseFilterConfig {
 			this.valuePreviewComponent = valuePreviewComponent;
 		this.notDeletable = !!notDeletable;
 		if (staticView) this.staticView = staticView;
-		if (showFilterName) this.showFilterName = showFilterName;
+		// same shape as notDeletable above; previously left undefined when falsy
+		this.showFilterName = !!showFilterName;
 	}
 }
 

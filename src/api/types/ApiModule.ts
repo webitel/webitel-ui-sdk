@@ -11,9 +11,11 @@ export interface ApiModule<Entity> {
 		next?: boolean;
 	}>;
 	get?: (params: {
-		itemId?: Id;
+		// `null` for consistency with update/patch below, and because card stores
+		// hold their id as `string | number | null`
+		itemId?: Id | null;
 		/** preferred over itemId */
-		id?: Id;
+		id?: Id | null;
 		parentId?: Id | null;
 	}) => Promise<Entity>;
 	add?: (params: {
