@@ -81,6 +81,7 @@ import {
 import { useEventBus } from '@webitel/ui-sdk/composables';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
+import type { AxiosError } from 'axios';
 import { type StoreGeneric, storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -88,6 +89,7 @@ import { EnginePresetQuery } from 'webitel-sdk';
 
 import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 import PresetQueryAPI from '../../api/PresetQuery';
+import type { PresetSnapshot } from '../../types/PresetSnapshot';
 import PresetPreview from './preset-preview.vue';
 
 const props = defineProps<{
@@ -206,14 +208,22 @@ const applySelectedPreset = () => {
 	showPresetsList.value = false;
 };
 
-const updatePreset = async ({ preset, onSuccess, onFailure }) => {
+const updatePreset = async ({
+	preset,
+	onSuccess,
+	onFailure,
+}: {
+	preset: EnginePresetQuery;
+	onSuccess: () => void;
+	onFailure: (err: AxiosError) => void;
+}) => {
 	try {
 		await PresetQueryAPI.update({
 			item: {
 				...preset,
 			},
-			id: preset.id,
-			namespace: preset.preset?.namespace,
+			id: Number(preset.id),
+			namespace: (preset.preset as PresetSnapshot | undefined)?.namespace ?? '',
 		});
 		eventBus?.$emit('notification', {
 			type: 'success',
@@ -224,7 +234,7 @@ const updatePreset = async ({ preset, onSuccess, onFailure }) => {
 		onSuccess();
 		return loadDataList();
 	} catch (err) {
-		onFailure(err);
+		onFailure(err as AxiosError);
 		throw err;
 	}
 };
@@ -233,7 +243,7 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 	await deleteEls([
 		preset,
 	]);
-	eventBus.$emit('notification', {
+	eventBus?.$emit('notification', {
 		type: 'success',
 		text: t('systemNotifications.success.delete', {
 			entity: t('webitelUI.filters.presets.preset'),

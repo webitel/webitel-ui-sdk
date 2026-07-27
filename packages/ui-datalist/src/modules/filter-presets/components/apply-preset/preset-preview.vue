@@ -94,6 +94,7 @@ import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/F
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
+import type { PresetSnapshot } from '../../types/PresetSnapshot';
 
 type Props = {
 	preset: EnginePresetQuery;
@@ -123,7 +124,9 @@ const emit = defineEmits<{
 const filtersManager = computed(() => {
 	const filtersManager = createFiltersManager();
 
-	const snapshot = props.preset?.preset?.['filtersManager.toString'];
+	const snapshot = (props.preset?.preset as PresetSnapshot | undefined)?.[
+		'filtersManager.toString'
+	];
 	if (snapshot) {
 		filtersManager.fromString(snapshot);
 	}
@@ -147,8 +150,8 @@ const editDraft = ref({
 
 const fillDraft = () => {
 	editDraft.value = {
-		name: props.preset.name,
-		description: props.preset.description,
+		name: props.preset.name ?? '',
+		description: props.preset.description ?? '',
 	};
 };
 
@@ -170,7 +173,7 @@ const v$ = useVuelidate(
 );
 v$.value.$touch();
 
-const startEdit = ({ open: openExpansion }) => {
+const startEdit = ({ open: openExpansion }: { open: () => void }) => {
 	openExpansion();
 	editMode.value = true;
 };

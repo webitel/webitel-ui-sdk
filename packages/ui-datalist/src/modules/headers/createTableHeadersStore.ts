@@ -34,8 +34,13 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const sort = computed(() => {
-		const encodeSortQuery = ({ column, order }) =>
-			`${sortToQueryAdapter(order)}${column.field}`;
+		const encodeSortQuery = ({
+			column,
+			order,
+		}: {
+			column: DatalistTableHeader;
+			order: DatalistTableHeader['sort'];
+		}) => `${sortToQueryAdapter(order)}${column.field}`;
 
 		const sortedCol = headers.value.find((header) => header.sort);
 
@@ -48,7 +53,7 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const columnWidths = computed(() => {
-		return headers.value.reduce((acc, header) => {
+		return headers.value.reduce<Record<string, string>>((acc, header) => {
 			if (header.width) {
 				acc[header.field] = header.width;
 			}
@@ -60,7 +65,7 @@ export const tableHeadersStoreBody = ({
 		headers.value = rawHeaders;
 	};
 
-	const updateShownHeaders = (value) => {
+	const updateShownHeaders = (value: DatalistTableHeader[]) => {
 		headers.value = value;
 	};
 
@@ -114,13 +119,19 @@ export const tableHeadersStoreBody = ({
 			show: fieldsSet.has(header.field),
 		}));
 
+		// TODO(types): placeholders for fields restored from persistence — the
+		// consuming app fills in `value`/`text` for anything flagged
+		// `shouldBeInitialized`, so they are not complete headers yet.
 		const customHeaders = fields
 			.filter((field) => !mainFieldNames.has(field))
-			.map((field) => ({
-				show: true,
-				field,
-				shouldBeInitialized: true,
-			}));
+			.map(
+				(field) =>
+					({
+						show: true,
+						field,
+						shouldBeInitialized: true,
+					}) as DatalistTableHeader,
+			);
 
 		const headersByField = new Map(
 			[
@@ -152,14 +163,14 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateSort = (
-		column,
+		column: DatalistTableHeader,
 		options:
 			| {
 					order?: SortSymbol;
 			  }
 			| SortSymbol = {},
 	) => {
-		const getNextSortOrder = (sort) => {
+		const getNextSortOrder = (sort: DatalistTableHeader['sort']) => {
 			switch (sort) {
 				case SortSymbols.NONE:
 					return SortSymbols.ASC;
@@ -172,12 +183,20 @@ export const tableHeadersStoreBody = ({
 			}
 		};
 
-		const changeHeadersSort = ({ headers, sortedHeader, order }) => {
+		const changeHeadersSort = ({
+			headers,
+			sortedHeader,
+			order,
+		}: {
+			headers: DatalistTableHeader[];
+			sortedHeader: DatalistTableHeader;
+			order: SortSymbol;
+		}) => {
 			return headers.map((header) => {
 				if (header.sort === undefined) return header;
 
 				// reset all headers by default
-				let newSort = null;
+				let newSort: SortSymbol = null;
 
 				if (header.field === sortedHeader.field) {
 					newSort = order;
@@ -273,7 +292,13 @@ export const tableHeadersStoreBody = ({
 		return headers.value.find((header) => header.field === field);
 	};
 
-	const columnResize = ({ columnName, columnWidth }) => {
+	const columnResize = ({
+		columnName,
+		columnWidth,
+	}: {
+		columnName: string;
+		columnWidth: string;
+	}) => {
 		const column = getHeaderByField(columnName);
 
 		if (column) {
@@ -319,7 +344,11 @@ export const tableHeadersStoreBody = ({
 export const createTableHeadersStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
-	{ headers: rawHeaders },
+	{
+		headers: rawHeaders,
+	}: {
+		headers: DatalistTableHeader[];
+	},
 ) => {
 	const id = `${namespace}/headers`;
 	return createDatalistStore({
