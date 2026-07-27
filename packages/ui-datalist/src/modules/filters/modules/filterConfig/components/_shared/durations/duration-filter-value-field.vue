@@ -31,20 +31,18 @@ type ModelValue = {
 	to: number;
 };
 
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		from: 0,
+		to: 0,
+	}),
+});
 
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
 	];
 }>();
-
-if (!model.value) {
-	model.value = {
-		from: 0,
-		to: 0,
-	};
-}
 
 const isValueEmpty = () => {
 	return !!model?.value?.to || !!model?.value?.from;

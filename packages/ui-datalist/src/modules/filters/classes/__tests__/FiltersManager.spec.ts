@@ -29,7 +29,7 @@ describe('FiltersManager', () => {
 			name: 'test',
 			value: 'test2',
 		});
-		expect(filtersManager.getFilter('test').value).toBe('test2');
+		expect(filtersManager.getFilter('test')?.value).toBe('test2');
 	});
 
 	it('should be able to getAllValues', () => {
