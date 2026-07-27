@@ -150,8 +150,7 @@ const emit = defineEmits([
 	'expanded-collapse',
 ]);
 
-// typed explicitly: the row renders itself for nested levels, so inferring the
-// slot type from the recursive usage would be circular
+// typed explicitly: the row renders itself, so inference would be circular
 // biome-ignore lint/suspicious/noExplicitAny: slot payloads vary per column
 defineSlots<Record<string, (props: Record<string, any>) => unknown>>();
 

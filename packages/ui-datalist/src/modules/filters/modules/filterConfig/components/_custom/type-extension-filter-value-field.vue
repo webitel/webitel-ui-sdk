@@ -81,7 +81,6 @@ const searchRecords = async (...params: FilterConfigSearchMethodParams) =>
 		items: [],
 	};
 
-/* the Boolean branch stores a plain tri-state flag */
 const booleanModel = computed({
 	get: () => model.value as boolean | null | undefined,
 	set: (value) => {

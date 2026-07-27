@@ -32,10 +32,9 @@ export type FilterConfigSearchMethodParams = [
 	 * @description
 	 * any request-related data
 	 *
-	 * TODO(types): `any` (not `unknown`) so each filter can narrow it in its own
-	 * `searchRecords` signature — see {@link FilterConfigSearchRequestParams}.
+	 * `any`, not `unknown`, so each filter narrows it in its own `searchRecords`
 	 */
-	// biome-ignore lint/suspicious/noExplicitAny: per-filter request payloads differ, see TODO above
+	// biome-ignore lint/suspicious/noExplicitAny: see above
 	any,
 	/**
 	 * @description

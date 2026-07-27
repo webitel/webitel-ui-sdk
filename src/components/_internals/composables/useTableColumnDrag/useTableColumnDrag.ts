@@ -1,6 +1,5 @@
 import type { Ref } from 'vue';
 
-/** The PrimeVue DataTable instance whose scroll container is driven here. */
 interface DataTableRef {
 	$el?: HTMLElement;
 }

@@ -74,8 +74,7 @@ import type {
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useInputControl } from '../_internals/composables';
 
-/** native input attributes are dropped: they reach the input through `$attrs`,
- * and keeping them here overflows prop-type inference (TS2590) */
+/** native attrs are omitted: keeping them overflows prop inference (TS2590) */
 interface WtInputTextProps
 	extends /* @vue-ignore */ Omit<InputTextProps, keyof InputHTMLAttributes> {
 	label?: string;

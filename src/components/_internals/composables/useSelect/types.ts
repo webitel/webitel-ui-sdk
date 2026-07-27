@@ -1,11 +1,7 @@
 import type { Ref } from 'vue';
 
-/**
- * TODO(types): options are supplied by consumers with arbitrary shapes and are
- * indexed by runtime `dataKey` / `optionLabel` / `optionValue` keys, so they
- * cannot be described without making the whole select generic.
- */
-// biome-ignore lint/suspicious/noExplicitAny: consumer-supplied option shape, see TODO above
+/** TODO(types): options are indexed by the runtime `dataKey`/`optionLabel`/`optionValue` keys. */
+// biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type SelectOption = any;
 
 export type SelectValue = SelectOption | SelectOption[] | null | undefined;
@@ -20,7 +16,6 @@ export type SelectSearchMethod = (
 	...params: any[]
 ) => Promise<SelectSearchResponse>;
 
-/** The PrimeVue Select / MultiSelect instance the composables drive directly. */
 export interface SelectComponentRef {
 	$el?: HTMLElement;
 	overlay?: HTMLElement;
@@ -70,7 +65,6 @@ export interface UseSelectCustomValuesParams {
 export interface UseSelectParams
 	extends UseSelectOptionsParams,
 		Pick<UseSelectDropdownParams, 'selectId' | 'selectRef' | 'filterInput'> {
-	/** accepted for API compatibility; custom-value manual handling is disabled */
 	manualCustomValues?: boolean;
 	isSingle: boolean;
 	// biome-ignore lint/suspicious/noExplicitAny: receives the component's typed emit

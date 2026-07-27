@@ -119,9 +119,7 @@ export const tableHeadersStoreBody = ({
 			show: fieldsSet.has(header.field),
 		}));
 
-		// TODO(types): placeholders for fields restored from persistence — the
-		// consuming app fills in `value`/`text` for anything flagged
-		// `shouldBeInitialized`, so they are not complete headers yet.
+		// TODO(types): placeholders — the consuming app fills in `value`/`text`
 		const customHeaders = fields
 			.filter((field) => !mainFieldNames.has(field))
 			.map(

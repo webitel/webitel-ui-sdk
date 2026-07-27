@@ -91,10 +91,10 @@ import { EnginePresetQuery } from 'webitel-sdk';
 
 import { createFiltersManager } from '../../../filters';
 import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
+import type { PresetSnapshot } from '../../types/PresetSnapshot';
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
-import type { PresetSnapshot } from '../../types/PresetSnapshot';
 
 type Props = {
 	preset: EnginePresetQuery;

@@ -1,6 +1,5 @@
 import { computed, type Ref } from 'vue';
 
-/** PrimeVue input component instance wrapping the native element. */
 interface InputComponentRef {
 	$el?: HTMLElement;
 }

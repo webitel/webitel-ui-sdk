@@ -15,15 +15,11 @@ export type CompatCustomValidator = {
 };
 
 /**
- * Vuelidate exposes each rule as a dynamic key on the field, and components
- * declare the prop loosely so consumers are not forced to import `Validation`.
- * Kept structural on purpose: inlining `@vuelidate/core`'s `Validation` here
- * blows up prop-type inference in the components (TS2590).
- *
- * `false` is accepted because callers commonly write
- * `:v="!disableValidation && v$.field"` to opt out of validation.
+ * Structural on purpose: inlining `@vuelidate/core`'s `Validation` blows up
+ * prop-type inference in the components (TS2590). `false` is accepted because
+ * callers write `:v="!disableValidation && v$.field"` to opt out.
  */
-// biome-ignore lint/suspicious/noExplicitAny: dynamic per-rule keys, see comment above
+// biome-ignore lint/suspicious/noExplicitAny: dynamic per-rule keys
 export type VuelidateFieldLike = Record<string, any> | null | false;
 
 export type UseFieldValidationParams = {

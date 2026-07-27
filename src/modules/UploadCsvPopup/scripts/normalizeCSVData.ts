@@ -1,30 +1,13 @@
 import isEmpty from '../../../scripts/isEmpty';
 
-/**
- *
- * @param data
- * @param mappings
- *
- * Data format: {
- * [colName]: [value]
- * }
- *
- * Mappings format: {
- * name: string, // webitel field name
- * csv: string | string[], // csv column name
- * required: boolean, // is this webitel field required?
- * locale: string, // ui
- * }
- */
+/** maps a webitel field to the csv column(s) it is built from */
 export interface CsvMappingField {
-	/** webitel field name */
 	name: string;
-	/** csv column name(s) */
 	csv: string | string[];
 	required?: boolean;
 	/** ui locale key */
 	locale?: string;
-	/** the webitel field maps to several csv columns */
+	/** the field maps to several csv columns */
 	multiple?: boolean;
 }
 

@@ -1,15 +1,11 @@
 /**
- * Request shapes shared by the hand-written API clients.
- *
- * TODO(types): payloads stay loosely typed because every client funnels them
- * through `applyTransform` (case conversion, sanitizing, merging defaults)
- * before they reach a generated client, so the generated request types cannot
- * be applied at this boundary yet.
+ * TODO(types): payloads pass through `applyTransform` before reaching a
+ * generated client, so the generated request types don't apply here yet.
  */
-// biome-ignore lint/suspicious/noExplicitAny: loosely typed request payloads, see TODO above
+// biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type ApiParams = Record<string, any>;
 
-/** Most services take string ids; a few generated clients declare `number`. */
+/** most services take string ids; a few generated clients declare `number` */
 export type ApiId = string;
 
 export interface GetItemParams<Id = ApiId> {

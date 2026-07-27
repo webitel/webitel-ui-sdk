@@ -286,7 +286,7 @@ const emitKeys = {
 
 type VideoCallActionKey = keyof typeof emitKeys;
 
-/** template-side helper: dynamic `@[action]` handlers cannot be annotated inline */
+/** dynamic `@[action]` handlers cannot be annotated inline */
 const forwardAction =
 	(action: VideoCallActionKey) =>
 	(payload?: unknown, options?: ResultCallbacks) =>

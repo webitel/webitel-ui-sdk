@@ -7,8 +7,6 @@ type NotificationCallback = (payload: { type: string; text: unknown }) => void;
 
 type StaticNotification = (payload: { callback: NotificationCallback }) => void;
 
-/** Called with a notification factory it builds a transformer; otherwise it
- * notifies about the payload it received and passes it through. */
 function notifyTransformer(notificationObject: StaticNotification): Transformer;
 function notifyTransformer<T>(notificationObject: T): T;
 function notifyTransformer(notificationObject: unknown): unknown {

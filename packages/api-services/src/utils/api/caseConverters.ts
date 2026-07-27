@@ -27,12 +27,8 @@ export const kebabToSnake = (str: string) =>
 export const snakeToKebab = (str: string) =>
 	str.replace(/([-_][a-z])/g, (group) => group.replace('_', '-'));
 
-/**
- * TODO(types): the converters walk arbitrary API payloads and rename keys, so
- * input and output shapes are unrelated at the type level. Expressing the
- * rename as a mapped type is a separate refactor.
- */
-// biome-ignore lint/suspicious/noExplicitAny: renames keys of arbitrary payloads, see TODO above
+/** TODO(types): the key rename makes input and output shapes unrelated. */
+// biome-ignore lint/suspicious/noExplicitAny: see TODO above
 type ConvertibleValue = any;
 
 const convertObject =

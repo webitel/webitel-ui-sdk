@@ -3,7 +3,6 @@ import { computed, type MaybeRef, toRef } from 'vue';
 
 import { normalizeVidstackMediaSrc } from '../utils/normalizeVidstackMediaSrc';
 
-/** Loose shape accepted from consumers: a url, or an object carrying url + mime type. */
 interface VidstackSrcObject {
 	src?: unknown;
 	type?: string;

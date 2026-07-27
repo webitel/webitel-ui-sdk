@@ -125,8 +125,7 @@ const emit = defineEmits<{
 	(e: 'update:modelValue', value: unknown): void;
 }>();
 
-// typed explicitly: the component renders itself, so inferring the slot type
-// from the recursive usage would be circular
+// typed explicitly: the component renders itself, so inference would be circular
 defineSlots<{
 	'item-prefix'(props: Record<string, unknown>): unknown;
 }>();

@@ -199,7 +199,6 @@ const modelValue = computed({
 	},
 });
 
-/** PrimeVue DatePicker instance: only the internals wt-datepicker drives. */
 interface DatePickerRef {
 	$el?: HTMLElement;
 	overlay?: HTMLElement;

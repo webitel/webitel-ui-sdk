@@ -1,7 +1,4 @@
-/**
- * Payload stored in `EnginePresetQuery.preset`, which the generated SDK types
- * only as `object`.
- */
+/** payload stored in `EnginePresetQuery.preset`, typed as `object` by the SDK */
 export interface PresetSnapshot {
 	/** serialized `FiltersManager`, see `IFiltersManager.toString()` */
 	'filtersManager.toString'?: string;
