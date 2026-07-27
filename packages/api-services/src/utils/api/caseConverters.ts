@@ -62,14 +62,14 @@ const convertObject =
 		return newObj;
 	};
 
-export const objSnakeToCamel = (obj, skipKeys = []) => {
+export const objSnakeToCamel = (obj, skipKeys: string[] = []) => {
 	return convertObject({
 		self: objSnakeToCamel,
 		converter: snakeToCamel,
 	})(obj, skipKeys);
 };
 
-export const objCamelToSnake = (obj, skipKeys = []) => {
+export const objCamelToSnake = (obj, skipKeys: string[] = []) => {
 	return convertObject({
 		self: objCamelToSnake,
 		converter: camelToSnake,

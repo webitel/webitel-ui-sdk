@@ -17,8 +17,16 @@ export type DatalistTableHeader = WtTableHeader & {
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
 
+/**
+ * Every method on {@link ApiModule} is optional, but a table store cannot load
+ * anything without `getList`, so it is required here. `patch`/`delete` stay
+ * optional and are called defensively.
+ */
+export type TableApiModule<Entity> = ApiModule<Entity> &
+	Required<Pick<ApiModule<Entity>, 'getList'>>;
+
 export interface useTableStoreConfig<Entity> {
-	apiModule: ApiModule<Entity>;
+	apiModule: TableApiModule<Entity>;
 	headers: DatalistTableHeader[];
 	disablePersistence?: boolean | [];
 	storeType?: DatalistStoreProviderType;

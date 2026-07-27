@@ -19,7 +19,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { CaseAssigneeFilterConfig } from './index';
@@ -29,7 +29,12 @@ type ModelValue = {
 	unassigned: boolean;
 };
 
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		list: [],
+		unassigned: false,
+	}),
+});
 
 const props = defineProps<{
 	filterConfig: CaseAssigneeFilterConfig;
@@ -42,16 +47,6 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
-
-const initModel = () => {
-	if (!model.value) {
-		model.value = {
-			list: [],
-			unassigned: false,
-		};
-	}
-};
-onMounted(() => initModel());
 
 const v$ = useVuelidate<{
 	model: ModelValue;

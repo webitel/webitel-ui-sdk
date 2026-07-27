@@ -18,14 +18,18 @@ const isLabelSnapshotKey = (snapshotKey: string): boolean =>
 const isValueSnapshotKey = (snapshotKey: string): boolean =>
 	snapshotKey.includes('_val');
 
-export const filterNameFromSnapshotKey = (snapshotKey: string): FilterName => {
+export const filterNameFromSnapshotKey = (
+	snapshotKey: string,
+): FilterName | undefined => {
 	if (isLabelSnapshotKey(snapshotKey))
 		return filterLabelFromSnapshotKey(snapshotKey);
 	if (isValueSnapshotKey(snapshotKey))
 		return filterValueFromSnapshotKey(snapshotKey);
 };
 
-export const filterValuePropFromSnapshotKey = (snapshotKey: string): string => {
+export const filterValuePropFromSnapshotKey = (
+	snapshotKey: string,
+): string | undefined => {
 	if (isLabelSnapshotKey(snapshotKey)) return 'label';
 	if (isValueSnapshotKey(snapshotKey)) return 'value';
 };

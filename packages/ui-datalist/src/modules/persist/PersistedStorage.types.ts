@@ -24,7 +24,9 @@ export interface StorageLike {
 
 export interface PersistedPropertyConfig {
 	name: string;
-	value: Ref<PersistableValue>;
+	// note: createTableHeadersStore passes a computed here, which the default
+	// restore path cannot write to
+	value: Ref<PersistableValue | null>;
 	storages?: PersistedStorageType | PersistedStorageType[];
 	storagePath?: string;
 	startWatchManually?: boolean;
@@ -40,7 +42,8 @@ export interface PersistedPropertyConfig {
 		{ value, name },
 	) => Promise<void>;
 	onRestore?: (
-		restore: (name: string) => Promise<PersistableValue>,
+		// resolves `undefined` when no storage held a value for `name`
+		restore: (name: string) => Promise<PersistableValue | undefined>,
 		name: string,
 	) => Promise<void>;
 }

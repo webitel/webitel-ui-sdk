@@ -23,12 +23,12 @@ export const usePrettifyBooleanValuePreview = (
 export const useBooleanFilterValueValidation = <
 	T extends BooleanFilterModelValue,
 >(
-	model: ModelRef<T>,
+	model: ModelRef<T | null | undefined>,
 ) => {
 	const v$ = useVuelidate(
 		computed(() => ({
 			model: {
-				required: (v: T) => !(!v && v !== false),
+				required: (v: T | null | undefined) => !(!v && v !== false),
 			},
 		})),
 		{

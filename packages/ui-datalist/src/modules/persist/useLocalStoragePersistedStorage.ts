@@ -7,15 +7,12 @@ const makePath = (storagePath: string, key: string) => `${storagePath}/${key}`;
 export const useLocalStoragePersistedStorage = ({
 	storagePath = '',
 }: {
-	storagePath: string;
+	storagePath?: string;
 }): StorageLike => {
 	const getItem = async (key: string) => {
 		const value = localStorage.getItem(makePath(storagePath, key));
-		try {
-			return value.split(separator).join();
-		} catch {
-			return value;
-		}
+		if (value === null) return null;
+		return value.split(separator).join();
 	};
 
 	const setItem = async (key: string, inputValue: string | string[]) => {

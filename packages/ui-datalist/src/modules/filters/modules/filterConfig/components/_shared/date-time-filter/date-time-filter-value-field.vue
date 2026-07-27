@@ -26,7 +26,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { endOfToday, startOfToday } from 'date-fns';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
@@ -40,7 +40,12 @@ const emit = defineEmits<{
 	];
 }>();
 
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		from: startOfToday().getTime(),
+		to: endOfToday().getTime(),
+	}),
+});
 const { t } = useI18n();
 
 const from = computed(() => model.value?.from);
@@ -82,17 +87,6 @@ const handleInput = (key: keyof ModelValue, value: number) => {
 		[key]: value,
 	};
 };
-
-const initModel = () => {
-	if (!model.value) {
-		model.value = {
-			from: startOfToday().getTime(),
-			to: endOfToday().getTime(),
-		};
-	}
-};
-
-onMounted(() => initModel());
 </script>
 
 <style lang="scss" scoped>

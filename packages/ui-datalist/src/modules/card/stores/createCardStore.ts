@@ -33,7 +33,12 @@ export const createCardStore = <
 }: {
 	namespace: string;
 	standardValidationSchema: z.ZodType;
-	apiModule: ApiModule<Entity>;
+	/**
+	 * Every method on {@link ApiModule} is optional, but a card store reads and
+	 * writes one item, so these three are required here.
+	 */
+	apiModule: ApiModule<Entity> &
+		Required<Pick<ApiModule<Entity>, 'get' | 'add' | 'update'>>;
 	validationSchemaOptions?: RegleSchemaBehaviourOptions;
 }) => {
 	return defineStore(namespace, () => {
@@ -61,7 +66,7 @@ export const createCardStore = <
 		// processing progress vars
 		const isLoading = ref(false);
 		const isSaving = ref(false);
-		const error = ref(null); // if needed
+		const error = ref<unknown>(null); // if needed
 
 		validationSchema.value = useRegleSchema(
 			draftItemInstance,

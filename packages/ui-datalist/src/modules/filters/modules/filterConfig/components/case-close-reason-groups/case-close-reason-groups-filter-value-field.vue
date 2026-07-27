@@ -30,7 +30,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {
@@ -42,7 +42,12 @@ type ModelValue = {
 	selection: string;
 	conditions: string;
 };
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		selection: '',
+		conditions: '',
+	}),
+});
 const { t } = useI18n();
 
 const updateSelected = (value) => {
@@ -56,16 +61,6 @@ const getConditionList = (params) => {
 		...params,
 	});
 };
-
-const initModel = () => {
-	if (!model.value) {
-		model.value = {
-			selection: '',
-			conditions: '',
-		};
-	}
-};
-onMounted(() => initModel());
 
 const v$ = useVuelidate<{
 	model: ModelValue;

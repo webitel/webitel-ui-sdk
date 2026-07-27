@@ -21,7 +21,7 @@ const props = defineProps<{
 	hideLabel?: boolean;
 }>();
 
-const model = defineModel<BooleanFilterModelValue>();
+const model = defineModel<BooleanFilterModelValue | null>();
 
 let v$: ReturnType<typeof useBooleanFilterValueValidation>['v$'] | null = null;
 if (!props.disableValidation) {

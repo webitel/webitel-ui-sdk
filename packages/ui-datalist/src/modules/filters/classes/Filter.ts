@@ -53,7 +53,7 @@ export class Filter implements IFilter {
 	constructor(
 		{ name, value, label }: FilterInitParams,
 		public payload: object | undefined,
-		public config: FilterInstanceConfig,
+		public config: FilterInstanceConfig | undefined,
 	) {
 		this.name = name;
 		this.value = value;

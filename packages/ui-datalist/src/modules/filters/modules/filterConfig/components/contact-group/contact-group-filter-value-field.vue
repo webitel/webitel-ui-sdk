@@ -38,7 +38,12 @@ type ModelValue = {
 	unassigned?: boolean | null;
 };
 
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		list: [],
+		unassigned: null,
+	}),
+});
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -95,19 +100,8 @@ const vUnassigned = computed(() => {
 	return modelValidation.unassigned;
 });
 
-const initModel = () => {
-	if (!model.value) {
-		model.value = {
-			list: [],
-			unassigned: null,
-		};
-	}
-};
-
 onMounted(() => {
 	if (!props?.disableValidation) v$.value.$touch();
-
-	initModel();
 });
 
 watch(

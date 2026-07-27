@@ -3,7 +3,7 @@ import { computed, type Ref, toRef } from 'vue';
 import type { ChatMessageFile } from '../../../types/ChatMessage.types';
 
 export function useChatMessageFile(
-	file: ChatMessageFile | Ref<ChatMessageFile>,
+	file: ChatMessageFile | Ref<ChatMessageFile | undefined> | undefined,
 ) {
 	const fileRef = toRef(file);
 
@@ -30,7 +30,7 @@ export function useChatMessageFile(
 		);
 	});
 
-	const isMediaType = (value: string) => {
+	const isMediaType = (value: string | undefined) => {
 		return !!(value?.includes('audio') || value?.includes('video'));
 	};
 

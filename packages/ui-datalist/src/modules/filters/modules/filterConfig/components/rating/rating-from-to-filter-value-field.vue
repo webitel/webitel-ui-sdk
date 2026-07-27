@@ -29,16 +29,15 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
-	from: number;
-	to: number;
+	from: number | null;
+	to: number | null;
 };
-const model = defineModel<ModelValue>();
-if (!model.value) {
-	model.value = {
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
 		from: null,
 		to: null,
-	};
-}
+	}),
+});
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -56,7 +55,9 @@ const v$ = useVuelidate<{
 			from: {
 				required: requiredIf(() => !model.value.to),
 				maxValue: maxValue(
-					model?.value?.to && model.value.from > model.value.to
+					model.value.to &&
+						model.value.from !== null &&
+						model.value.from > model.value.to
 						? model.value.to
 						: Infinity,
 				),

@@ -35,7 +35,7 @@ import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
 	file: ChatMessageFile;
-	type: string;
+	type?: string;
 }>();
 
 const emit = defineEmits<{

@@ -13,7 +13,7 @@ import { useBooleanFilterValueValidation } from '../../composables/booleanFilter
 import { BooleanFilterModelValue } from '../../enums/options/BooleanFilterOptions';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
-const model = defineModel<BooleanFilterModelValue>();
+const model = defineModel<BooleanFilterModelValue | null>();
 
 const { v$ } = useBooleanFilterValueValidation<BooleanFilterModelValue>(model);
 
