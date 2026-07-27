@@ -1,7 +1,6 @@
 import deepCopy from 'deep-copy';
 import { isEmpty } from 'lodash-es';
 import { QueueServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -18,6 +17,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 import processing from './defaults/processing';
 
 const instance = getDefaultInstance();
@@ -54,17 +61,20 @@ const fieldsToSend = [
 	'tags',
 ];
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.variables = copy.variables.reduce((variables, variable) => {
-		if (!variable.key) return variables;
-		variables[variable.key] = variable.value;
-		return variables;
-	}, {});
+	copy.variables = copy.variables.reduce(
+		(variables: ApiParams, variable: ApiParams) => {
+			if (!variable.key) return variables;
+			variables[variable.key] = variable.value;
+			return variables;
+		},
+		{},
+	);
 	return copy;
 };
 
-const getQueuesList = async (params) => {
+const getQueuesList = async (params: ApiParams) => {
 	const defaultObject = {
 		type: 0,
 		enabled: false,
@@ -108,14 +118,14 @@ const getQueuesList = async (params) => {
 	}
 };
 
-const getQueue = async ({ itemId: id }) => {
+const getQueue = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		tags: [],
 		type: 0,
 		formSchema: {},
 		taskProcessing: {},
 	};
-	const responseHandler = (item) => {
+	const responseHandler = (item: ApiParams) => {
 		const copy = deepCopy(item);
 		if (copy.variables) {
 			copy.variables = Object.keys(copy.variables).map((key) => ({
@@ -147,7 +157,7 @@ const getQueue = async ({ itemId: id }) => {
 	}
 };
 
-const addQueue = async ({ itemInstance }) => {
+const addQueue = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -165,7 +175,7 @@ const addQueue = async ({ itemInstance }) => {
 	}
 };
 
-const updateQueue = async ({ itemInstance, itemId: id }) => {
+const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -183,7 +193,7 @@ const updateQueue = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchQueue = async ({ id, changes }) => {
+const patchQueue = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
@@ -200,7 +210,7 @@ const patchQueue = async ({ id, changes }) => {
 	}
 };
 
-const deleteQueue = async ({ id }) => {
+const deleteQueue = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await queueService.deleteQueue(id);
 		return applyTransform(response.data, []);
@@ -211,7 +221,7 @@ const deleteQueue = async ({ id }) => {
 	}
 };
 
-const getQueuesLookup = (params) =>
+const getQueuesLookup = (params: Parameters<typeof getQueuesList>[0]) =>
 	getQueuesList({
 		...params,
 		fields: params.fields || [
@@ -221,7 +231,7 @@ const getQueuesLookup = (params) =>
 		],
 	});
 
-const getQueuesTags = async (params) => {
+const getQueuesTags = async (params: ApiParams) => {
 	const { page, size, search, sort, fields } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch(),

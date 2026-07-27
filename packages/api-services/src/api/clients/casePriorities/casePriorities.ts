@@ -1,5 +1,4 @@
 import { PrioritiesApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,13 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -26,7 +32,7 @@ const fieldsToSend = [
 	'color',
 ];
 
-const getPrioritiesList = async (params) => {
+const getPrioritiesList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -81,8 +87,8 @@ const getPrioritiesList = async (params) => {
 	}
 };
 
-const getPriority = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getPriority = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.priority;
 	};
 
@@ -99,7 +105,7 @@ const getPriority = async ({ itemId: id }) => {
 	}
 };
 
-const addPriority = async ({ itemInstance }) => {
+const addPriority = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -117,7 +123,10 @@ const addPriority = async ({ itemInstance }) => {
 	}
 };
 
-const updatePriority = async ({ itemInstance, itemId: id }) => {
+const updatePriority = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -135,7 +144,7 @@ const updatePriority = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deletePriority = async ({ id }) => {
+const deletePriority = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await priorityService.deletePriority(id);
 		return applyTransform(response.data, []);
@@ -146,7 +155,7 @@ const deletePriority = async ({ id }) => {
 	}
 };
 
-const getConditionsLookup = (params) =>
+const getConditionsLookup = (params: Parameters<typeof getPrioritiesList>[0]) =>
 	getPrioritiesList({
 		...params,
 		fields: params.fields || [

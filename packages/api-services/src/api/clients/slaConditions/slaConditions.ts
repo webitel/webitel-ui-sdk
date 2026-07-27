@@ -1,5 +1,4 @@
 import { SLAConditionsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams, UpdateItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -32,7 +32,12 @@ const fieldsToSend = [
 	'resolution_time',
 ];
 
-const getConditionsList = async ({ parentId, ...rest }) => {
+const getConditionsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -91,8 +96,14 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const getCondition = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCondition = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: string;
+	itemId: string;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.slaCondition;
 	};
 
@@ -113,7 +124,10 @@ const getCondition = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const updateCondition = async ({ itemInstance, itemId: id }) => {
+const updateCondition = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -135,7 +149,13 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const addCondition = async ({ itemInstance, parentId }) => {
+const addCondition = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -156,7 +176,13 @@ const addCondition = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const deleteCondition = async ({ id, parentId }) => {
+const deleteCondition = async ({
+	id,
+	parentId,
+}: {
+	id: string;
+	parentId: string;
+}) => {
 	try {
 		const response = await slaConditionsService.deleteSLACondition(
 			parentId,
@@ -170,7 +196,7 @@ const deleteCondition = async ({ id, parentId }) => {
 	}
 };
 
-const getLookup = async (params) =>
+const getLookup = async (params: Parameters<typeof getConditionsList>[0]) =>
 	getConditionsList({
 		...params,
 		fields: params.fields || [

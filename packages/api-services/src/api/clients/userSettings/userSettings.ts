@@ -8,7 +8,7 @@ const configuration = getDefaultOpenAPIConfig();
 
 const service = UserSettingsApiFactory(configuration, '', instance);
 
-const getUserSettings = async ({ key }) => {
+const getUserSettings = async ({ key }: { key: string }) => {
 	try {
 		const response = await service.getUserSettings(key);
 		return response.data;
@@ -19,7 +19,13 @@ const getUserSettings = async ({ key }) => {
 	}
 };
 
-const setUserSettings = async ({ key, value }) => {
+const setUserSettings = async ({
+	key,
+	value,
+}: {
+	key: string;
+	value: object;
+}) => {
 	try {
 		const response = await service.setUserSettings(key, value);
 		return response.data;

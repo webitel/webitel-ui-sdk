@@ -1,5 +1,4 @@
 import { StatusConditionsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -29,7 +29,14 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
+const getStatusConditionsList = async ({
+	statusId,
+	parentId,
+	...rest
+}: {
+	statusId: string;
+	parentId: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -75,8 +82,14 @@ const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
 	}
 };
 
-const getStatusCondition = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getStatusCondition = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: string;
+	itemId: string;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.status;
 	};
 
@@ -101,6 +114,10 @@ const updateStatusCondition = async ({
 	itemInstance,
 	itemId: id,
 	parentId,
+}: {
+	itemInstance: ApiParams;
+	itemId: string;
+	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -123,7 +140,13 @@ const updateStatusCondition = async ({
 	}
 };
 
-const addStatusCondition = async ({ itemInstance, parentId }) => {
+const addStatusCondition = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -144,7 +167,15 @@ const addStatusCondition = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const patchStatusCondition = async ({ id, parentId, changes }) => {
+const patchStatusCondition = async ({
+	id,
+	parentId,
+	changes,
+}: {
+	id: string;
+	parentId: string;
+	changes: ApiParams;
+}) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -170,7 +201,13 @@ const patchStatusCondition = async ({ id, parentId, changes }) => {
 	}
 };
 
-const deleteStatusCondition = async ({ id, parentId }) => {
+const deleteStatusCondition = async ({
+	id,
+	parentId,
+}: {
+	id: string;
+	parentId: string;
+}) => {
 	try {
 		const response = await statusConditionsService.deleteStatusCondition(
 			parentId,
@@ -184,7 +221,9 @@ const deleteStatusCondition = async ({ id, parentId }) => {
 	}
 };
 
-const getStatusesLookup = (params) =>
+const getStatusesLookup = (
+	params: Parameters<typeof getStatusConditionsList>[0],
+) =>
 	getStatusConditionsList({
 		...params,
 		parentId: params.parentId,

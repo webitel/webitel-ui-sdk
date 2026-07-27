@@ -1,5 +1,4 @@
 import { SystemSettingServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,7 +31,7 @@ const configurationService = SystemSettingServiceApiFactory(
 	instance,
 );
 
-const getList = async (params) => {
+const getList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, name } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -55,7 +61,7 @@ const getList = async (params) => {
 	}
 };
 
-const get = async ({ itemId: id }) => {
+const get = async ({ itemId: id }: GetItemParams<number>) => {
 	try {
 		const response = await configurationService.readSystemSetting(id);
 		return applyTransform(response.data, [
@@ -74,7 +80,7 @@ const fieldsToSend = [
 	'value',
 ];
 
-const add = async ({ itemInstance }) => {
+const add = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -91,7 +97,10 @@ const add = async ({ itemInstance }) => {
 	}
 };
 
-const update = async ({ itemInstance, itemId: id }) => {
+const update = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams<number>) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -108,7 +117,7 @@ const update = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getList>[0]) =>
 	getList({
 		...params,
 		fields: params.fields || [
@@ -116,7 +125,7 @@ const getLookup = (params) =>
 		],
 	});
 
-const deleteItem = async ({ id }) => {
+const deleteItem = async ({ id }: DeleteItemParams<number>) => {
 	try {
 		const response = await configurationService.deleteSystemSetting(id);
 		return applyTransform(response.data, []);
@@ -127,7 +136,7 @@ const deleteItem = async ({ id }) => {
 	}
 };
 
-const getObjectsList = async (params) => {
+const getObjectsList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),

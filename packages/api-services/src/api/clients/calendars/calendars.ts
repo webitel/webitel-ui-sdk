@@ -1,6 +1,5 @@
 import deepCopy from 'deep-copy';
 import { CalendarServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,13 +15,20 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const calendarService = CalendarServiceApiFactory(configuration, '', instance);
 
-const getCalendarList = async (params) => {
+const getCalendarList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -52,8 +58,8 @@ const getCalendarList = async (params) => {
 	}
 };
 
-const getCalendar = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCalendar = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		const copy = deepCopy(item);
 		const defaultSingleObject = {
 			name: '',
@@ -66,14 +72,14 @@ const getCalendar = async ({ itemId: id }) => {
 			excepts: [],
 		};
 
-		copy.accepts = copy.accepts.map((accept) => ({
+		copy.accepts = copy.accepts.map((accept: ApiParams) => ({
 			day: accept.day || 0,
 			disabled: accept.disabled || false,
 			start: accept.startTimeOfDay || 0,
 			end: accept.endTimeOfDay || 0,
 		}));
 		if (copy.excepts) {
-			copy.excepts = copy.excepts.map((except) => ({
+			copy.excepts = copy.excepts.map((except: ApiParams) => ({
 				name: except.name || '',
 				date: except.date || 0,
 				repeat: except.repeat || false,
@@ -120,7 +126,7 @@ const fieldsToSend = [
 	'workStop',
 ];
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	copy.timezone.offset = undefined;
 	if (!copy.expires) {
@@ -128,7 +134,7 @@ const preRequestHandler = (item) => {
 		copy.endAt = undefined;
 	}
 
-	copy.accepts = copy.accepts.map((accept) => ({
+	copy.accepts = copy.accepts.map((accept: ApiParams) => ({
 		day: accept.day,
 		disabled: accept.disabled,
 		startTimeOfDay: accept.start,
@@ -137,7 +143,7 @@ const preRequestHandler = (item) => {
 	return copy;
 };
 
-const addCalendar = async ({ itemInstance }) => {
+const addCalendar = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -155,7 +161,10 @@ const addCalendar = async ({ itemInstance }) => {
 	}
 };
 
-const updateCalendar = async ({ itemInstance, itemId: id }) => {
+const updateCalendar = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -173,7 +182,7 @@ const updateCalendar = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCalendar = async ({ id }) => {
+const deleteCalendar = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await calendarService.deleteCalendar(id);
 		return applyTransform(response.data, []);
@@ -184,7 +193,7 @@ const deleteCalendar = async ({ id }) => {
 	}
 };
 
-const getCalendarsLookup = (params) =>
+const getCalendarsLookup = (params: Parameters<typeof getCalendarList>[0]) =>
 	getCalendarList({
 		...params,
 		fields: params.fields || [
@@ -193,7 +202,7 @@ const getCalendarsLookup = (params) =>
 		],
 	});
 
-const getTimezonesLookup = async (params) => {
+const getTimezonesLookup = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),

@@ -1,8 +1,17 @@
 import type { AxiosError } from 'axios';
 
 import { config as apiServicesConfig } from '../../../config/config';
+import type { Transformer } from '../applyTransform';
 
-const notifyTransformer = (notificationObject) => {
+type NotificationCallback = (payload: { type: string; text: unknown }) => void;
+
+type StaticNotification = (payload: { callback: NotificationCallback }) => void;
+
+/** Called with a notification factory it builds a transformer; otherwise it
+ * notifies about the payload it received and passes it through. */
+function notifyTransformer(notificationObject: StaticNotification): Transformer;
+function notifyTransformer<T>(notificationObject: T): T;
+function notifyTransformer(notificationObject: unknown): unknown {
 	/*
   if passed arg is function, then this notification - static content,
   predefined before actual transformer is called in applyTransform flow
@@ -11,7 +20,7 @@ const notifyTransformer = (notificationObject) => {
 		/*
     so, create a callback which will send notification with params, passed to it
      */
-		const callback = ({ type, text }) =>
+		const callback: NotificationCallback = ({ type, text }) =>
 			apiServicesConfig.eventBus?.$emit('notification', {
 				type,
 				text,
@@ -21,8 +30,8 @@ const notifyTransformer = (notificationObject) => {
     and, then, return a function, which will be called in main applyTransform flow,
     calling passed arg function with callback, and returning actual notify payload
      */
-		return (payload) => {
-			notificationObject({
+		return (payload: unknown) => {
+			(notificationObject as StaticNotification)({
 				callback,
 			});
 			return payload;
@@ -46,6 +55,6 @@ const notifyTransformer = (notificationObject) => {
 		});
 	}
 	return notificationObject;
-};
+}
 
 export default notifyTransformer;

@@ -1,5 +1,4 @@
 import { CloseReasonsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams, UpdateItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,7 +25,12 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getCloseReasonsList = async ({ parentId, ...rest }) => {
+const getCloseReasonsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -70,8 +75,14 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const getCloseReason = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCloseReason = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: string;
+	itemId: string;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.closeReason;
 	};
 
@@ -88,7 +99,13 @@ const getCloseReason = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const addCloseReason = async ({ itemInstance, parentId }) => {
+const addCloseReason = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -109,7 +126,10 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const updateCloseReason = async ({ itemInstance, itemId: id }) => {
+const updateCloseReason = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 	]);
@@ -130,7 +150,13 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReason = async ({ id, parentId }) => {
+const deleteCloseReason = async ({
+	id,
+	parentId,
+}: {
+	id: string;
+	parentId: string;
+}) => {
 	try {
 		const response = await closeReasonsService.deleteCloseReason(parentId, id);
 		return applyTransform(response.data, []);
@@ -141,7 +167,9 @@ const deleteCloseReason = async ({ id, parentId }) => {
 	}
 };
 
-const getCloseReasonLookup = async (params) =>
+const getCloseReasonLookup = async (
+	params: Parameters<typeof getCloseReasonsList>[0],
+) =>
 	getCloseReasonsList({
 		...params,
 		fields: params.fields || [

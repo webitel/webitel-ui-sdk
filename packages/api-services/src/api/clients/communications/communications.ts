@@ -1,5 +1,4 @@
 import { CommunicationTypeServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,6 +15,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -26,7 +33,7 @@ const communicationService = CommunicationTypeServiceApiFactory(
 	instance,
 );
 
-const getCommunicationsList = async (params) => {
+const getCommunicationsList = async (params: ApiParams) => {
 	const defaultObject = {
 		default: false,
 	};
@@ -66,7 +73,7 @@ const getCommunicationsList = async (params) => {
 	}
 };
 
-const getCommunication = async ({ itemId: id }) => {
+const getCommunication = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await communicationService.readCommunicationType(id);
 		return applyTransform(response.data, [
@@ -87,7 +94,7 @@ const fieldsToSend = [
 	'default',
 ];
 
-const addCommunication = async ({ itemInstance }) => {
+const addCommunication = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -104,7 +111,7 @@ const addCommunication = async ({ itemInstance }) => {
 	}
 };
 
-const patchCommunication = async ({ changes, id }) => {
+const patchCommunication = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -124,7 +131,10 @@ const patchCommunication = async ({ changes, id }) => {
 	}
 };
 
-const updateCommunication = async ({ itemInstance, itemId: id }) => {
+const updateCommunication = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -144,7 +154,7 @@ const updateCommunication = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCommunication = async ({ id }) => {
+const deleteCommunication = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await communicationService.deleteCommunicationType(id);
 		return applyTransform(response.data, []);
@@ -155,7 +165,9 @@ const deleteCommunication = async ({ id }) => {
 	}
 };
 
-const getCommunicationsLookup = (params) =>
+const getCommunicationsLookup = (
+	params: Parameters<typeof getCommunicationsList>[0],
+) =>
 	getCommunicationsList({
 		...params,
 		fields: params.fields || [

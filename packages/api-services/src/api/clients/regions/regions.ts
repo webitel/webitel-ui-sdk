@@ -1,5 +1,4 @@
 import { RegionServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,13 +14,20 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const regionService = RegionServiceApiFactory(configuration, '', instance);
 
-const getRegionsList = async (params) => {
+const getRegionsList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -51,7 +57,7 @@ const getRegionsList = async (params) => {
 	}
 };
 
-const getRegion = async ({ itemId: id }) => {
+const getRegion = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await regionService.readRegion(id);
 		return applyTransform(response.data, [
@@ -70,7 +76,7 @@ const fieldsToSend = [
 	'description',
 ];
 
-const addRegion = async ({ itemInstance }) => {
+const addRegion = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -87,7 +93,7 @@ const addRegion = async ({ itemInstance }) => {
 	}
 };
 
-const updateRegion = async ({ itemInstance, itemId: id }) => {
+const updateRegion = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -104,7 +110,7 @@ const updateRegion = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteRegion = async ({ id }) => {
+const deleteRegion = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await regionService.deleteRegion(id);
 		return applyTransform(response.data, []);
@@ -115,7 +121,7 @@ const deleteRegion = async ({ id }) => {
 	}
 };
 
-const getRegionsLookup = (params) =>
+const getRegionsLookup = (params: Parameters<typeof getRegionsList>[0]) =>
 	getRegionsList({
 		...params,
 		fields: params.fields || [

@@ -8,8 +8,9 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const getChatsList = async (params) => {
+const getChatsList = async (params: ApiParams) => {
 	const { size, page, onlyClosed, onlyUnprocessed } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 	]);
@@ -35,7 +36,7 @@ const getChatsList = async (params) => {
 	}
 };
 
-const getChatCount = async (params) => {
+const getChatCount = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'only_closed',
 		'only_unprocessed',
@@ -62,7 +63,7 @@ const getChatCount = async (params) => {
 	}
 };
 
-const markChatProcessed = async (chatId) => {
+const markChatProcessed = async (chatId: string) => {
 	// add to chat unprocessedClose: true
 	try {
 		const response =

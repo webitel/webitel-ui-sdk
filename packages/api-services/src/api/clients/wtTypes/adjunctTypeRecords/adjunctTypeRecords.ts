@@ -1,6 +1,5 @@
 import { getDictionaries } from '@webitel/api-services/gen';
 import { get } from 'lodash-es';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,10 +15,16 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../../transformers';
+import type { ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 
-const getAdjunctTypeRecordsList = async ({ repo, ...params }) => {
+const getAdjunctTypeRecordsList = async ({
+	repo,
+	...params
+}: {
+	repo: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -62,7 +67,13 @@ const getAdjunctTypeRecordsList = async ({ repo, ...params }) => {
 	}
 };
 
-const getAdjunctTypeRecord = async ({ itemId: id, repo }) => {
+const getAdjunctTypeRecord = async ({
+	itemId: id,
+	repo,
+}: {
+	itemId: string;
+	repo: string;
+}) => {
 	try {
 		const response = await getDictionaries().locateData(repo, id);
 		return response.data;
@@ -73,7 +84,15 @@ const getAdjunctTypeRecord = async ({ itemId: id, repo }) => {
 	}
 };
 
-const addAdjunctTypeRecord = async ({ itemInstance, fieldsToSend, repo }) => {
+const addAdjunctTypeRecord = async ({
+	itemInstance,
+	fieldsToSend,
+	repo,
+}: {
+	itemInstance: ApiParams;
+	fieldsToSend: string[];
+	repo: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -95,6 +114,11 @@ const updateAdjunctTypeRecord = async ({
 	fieldsToSend,
 	itemId: id,
 	repo,
+}: {
+	itemInstance: ApiParams;
+	fieldsToSend: string[];
+	itemId: string;
+	repo: string;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -112,7 +136,13 @@ const updateAdjunctTypeRecord = async ({
 	}
 };
 
-const deleteAdjunctTypeRecord = async ({ repo, id }) => {
+const deleteAdjunctTypeRecord = async ({
+	repo,
+	id,
+}: {
+	repo: string;
+	id: string;
+}) => {
 	const ids = Array.isArray(id)
 		? id
 		: [
@@ -129,8 +159,8 @@ const deleteAdjunctTypeRecord = async ({ repo, id }) => {
 };
 
 const transformItemsForSelect =
-	({ primary, display }) =>
-	(items) => {
+	({ primary, display }: { primary: string; display: string }) =>
+	(items: ApiParams[]) => {
 		return items.map((item) => ({
 			id: item[primary],
 			name: get(item, display.split('.')),
@@ -144,7 +174,11 @@ const getAdjunctTypeRecordsLookup = async ({
 	display,
 	primary,
 	...params
-}) => {
+}: {
+	path: string;
+	display: string;
+	primary: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -188,7 +222,13 @@ const getAdjunctTypeRecordsLookup = async ({
 	}
 };
 
-const batchCreateAdjunctTypeRecords = async ({ repo, rows }) => {
+const batchCreateAdjunctTypeRecords = async ({
+	repo,
+	rows,
+}: {
+	repo: string;
+	rows: ApiParams[];
+}) => {
 	const preparedRows = (rows || []).map((row) =>
 		applyTransform(row, [
 			camelToSnake(),

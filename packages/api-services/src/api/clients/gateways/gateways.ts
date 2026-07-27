@@ -14,6 +14,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 import registerGateway from './defaults/registerGateway';
 import trunkingGateway from './defaults/trunkingGateway';
 
@@ -21,7 +29,7 @@ const instance = getDefaultInstance();
 
 const baseUrl = '/sip/gateways';
 
-const getGatewayList = async (params) => {
+const getGatewayList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -69,8 +77,8 @@ const getGatewayList = async (params) => {
 	}
 };
 
-const getGateway = async ({ itemId: id }) => {
-	const coerceTrunkingResponse = (response) => {
+const getGateway = async ({ itemId: id }: GetItemParams) => {
+	const coerceTrunkingResponse = (response: ApiParams) => {
 		const defaultIPacl = {
 			ip: '',
 			proto: 'any',
@@ -88,7 +96,7 @@ const getGateway = async ({ itemId: id }) => {
 		return result;
 	};
 
-	const coerceRegisterResponse = (response) => {
+	const coerceRegisterResponse = (response: ApiParams) => {
 		const result = {
 			...registerGateway(),
 			...response,
@@ -96,7 +104,7 @@ const getGateway = async ({ itemId: id }) => {
 		return result;
 	};
 
-	const itemResponseHandler = (response) => {
+	const itemResponseHandler = (response: ApiParams) => {
 		if (response.register) return coerceRegisterResponse(response);
 		return coerceTrunkingResponse(response);
 	};
@@ -135,7 +143,7 @@ const fieldsToSend = [
 	'enable',
 ];
 
-const addGateway = async ({ itemInstance }) => {
+const addGateway = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -151,7 +159,10 @@ const addGateway = async ({ itemInstance }) => {
 		]);
 	}
 };
-const updateGateway = async ({ itemInstance, itemId: id }) => {
+const updateGateway = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -170,7 +181,7 @@ const updateGateway = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchGateway = async ({ changes, id }) => {
+const patchGateway = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -188,7 +199,7 @@ const patchGateway = async ({ changes, id }) => {
 	}
 };
 
-const deleteGateway = async ({ id }) => {
+const deleteGateway = async ({ id }: DeleteItemParams) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.delete(url);
@@ -200,7 +211,7 @@ const deleteGateway = async ({ id }) => {
 	}
 };
 
-const getGatewaysLookup = (params) =>
+const getGatewaysLookup = (params: Parameters<typeof getGatewayList>[0]) =>
 	getGatewayList({
 		...params,
 		fields: params.fields || [

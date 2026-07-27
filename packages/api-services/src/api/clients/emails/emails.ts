@@ -10,8 +10,9 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const getList = async (params) => {
+const getList = async (params: ApiParams) => {
 	const defaultObject = {
 		primary: false,
 	};
@@ -59,7 +60,13 @@ const getList = async (params) => {
 	}
 };
 
-const get = async ({ itemId, parentId }) => {
+const get = async ({
+	itemId,
+	parentId,
+}: {
+	itemId: string;
+	parentId: string;
+}) => {
 	const fields = [
 		'email',
 		'primary',
@@ -86,7 +93,17 @@ const fieldsToSend = [
 	'primary',
 ];
 
-const add = async ({ contactId, emails, params, options }) => {
+const add = async ({
+	contactId,
+	emails,
+	params,
+	options,
+}: {
+	contactId: string;
+	emails: ApiParams[];
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	const item = applyTransform(emails, [
 		camelToSnake(),
 	]);
@@ -108,7 +125,15 @@ const add = async ({ contactId, emails, params, options }) => {
 		]);
 	}
 };
-const update = async ({ itemInstance, etag: id, parentId }) => {
+const update = async ({
+	itemInstance,
+	etag: id,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	etag: string;
+	parentId: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -125,7 +150,15 @@ const update = async ({ itemInstance, etag: id, parentId }) => {
 	}
 };
 
-const patch = async ({ parentId, changes, etag }) => {
+const patch = async ({
+	parentId,
+	changes,
+	etag,
+}: {
+	parentId: string;
+	changes: ApiParams;
+	etag: string;
+}) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -142,7 +175,13 @@ const patch = async ({ parentId, changes, etag }) => {
 	}
 };
 
-const deleteItem = async ({ etag, parentId }) => {
+const deleteItem = async ({
+	etag,
+	parentId,
+}: {
+	etag: string;
+	parentId: string;
+}) => {
 	try {
 		const response = await getEmails().deleteEmail(parentId, etag);
 		return applyTransform(response.data, []);

@@ -1,5 +1,4 @@
 import { ServicesApiFactory, WebitelContactsGroupType } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,12 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -35,7 +40,12 @@ const fieldsToSend = [
 	'catalog_id',
 ];
 
-const getServicesList = async ({ rootId, ...rest }) => {
+const getServicesList = async ({
+	rootId,
+	...rest
+}: {
+	rootId: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -80,7 +90,7 @@ const getServicesList = async ({ rootId, ...rest }) => {
 	}
 };
 
-const getService = async ({ itemId: id }) => {
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'code',
@@ -94,7 +104,7 @@ const getService = async ({ itemId: id }) => {
 		'root_id',
 	];
 
-	const itemResponseHandler = (item) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.service;
 	};
 
@@ -111,8 +121,14 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = ({ rootId, catalogId }) => {
-	return (item) => ({
+const preRequestHandler = ({
+	rootId,
+	catalogId,
+}: {
+	rootId: string;
+	catalogId: string;
+}) => {
+	return (item: ApiParams) => ({
 		...item,
 		assignee:
 			item.group?.type === WebitelContactsGroupType.DYNAMIC
@@ -123,7 +139,15 @@ const preRequestHandler = ({ rootId, catalogId }) => {
 	});
 };
 
-const addService = async ({ itemInstance, rootId, catalogId }) => {
+const addService = async ({
+	itemInstance,
+	rootId,
+	catalogId,
+}: {
+	itemInstance: ApiParams;
+	rootId: string;
+	catalogId: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
@@ -150,6 +174,11 @@ const updateService = async ({
 	itemId: id,
 	rootId,
 	catalogId,
+}: {
+	itemInstance: ApiParams;
+	itemId: string;
+	rootId: string;
+	catalogId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
@@ -172,7 +201,7 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }) => {
+const patchService = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -189,9 +218,11 @@ const patchService = async ({ changes, id }) => {
 	}
 };
 
-const deleteService = async ({ id }) => {
+const deleteService = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await servicesService.deleteService(id);
+		const response = await servicesService.deleteService([
+			id,
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -200,7 +231,9 @@ const deleteService = async ({ id }) => {
 	}
 };
 
-const getServicesLookup = async (params) =>
+const getServicesLookup = async (
+	params: Parameters<typeof getServicesList>[0],
+) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

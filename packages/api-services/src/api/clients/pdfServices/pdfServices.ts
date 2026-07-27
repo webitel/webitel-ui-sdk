@@ -6,7 +6,6 @@ import {
 	ListScreenrecordingExportsQueryParams,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -16,8 +15,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const createScreenrecordingExport = async ({ agentId, itemInstance }) => {
+const createScreenrecordingExport = async ({
+	agentId,
+	itemInstance,
+}: {
+	agentId: string;
+	itemInstance: ApiParams;
+}) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(
 			getShallowFieldsToSendFromZodSchema(CreateScreenrecordingExportBody),
@@ -76,7 +82,13 @@ const listScreenrecordingExports = async (params: { agentId: string }) => {
 	}
 };
 
-const createCallExport = async ({ callId, itemInstance }) => {
+const createCallExport = async ({
+	callId,
+	itemInstance,
+}: {
+	callId: string;
+	itemInstance: ApiParams;
+}) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(getShallowFieldsToSendFromZodSchema(CreateCallExportBody)),
 		camelToSnake(),

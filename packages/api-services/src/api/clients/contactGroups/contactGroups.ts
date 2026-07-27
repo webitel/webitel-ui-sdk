@@ -1,5 +1,4 @@
 import { GroupsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,6 +15,14 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -32,7 +39,7 @@ const fieldsToSend = [
 	'default_group',
 ];
 
-const getContactGroupsList = async (params) => {
+const getContactGroupsList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -87,8 +94,8 @@ const getContactGroupsList = async (params) => {
 	}
 };
 
-const getContactGroup = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.group;
+const getContactGroup = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.group;
 
 	try {
 		const response = await contactGroupsService.locateGroup(id, fieldsToSend);
@@ -103,7 +110,7 @@ const getContactGroup = async ({ itemId: id }) => {
 	}
 };
 
-const addStaticContactGroup = async ({ itemInstance }) => {
+const addStaticContactGroup = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -120,7 +127,13 @@ const addStaticContactGroup = async ({ itemInstance }) => {
 	}
 };
 
-const addContactsToGroups = async ({ contactIds, groupIds }) => {
+const addContactsToGroups = async ({
+	contactIds,
+	groupIds,
+}: {
+	contactIds: string[];
+	groupIds: string[];
+}) => {
 	try {
 		const response = await contactGroupsService.addContactsToGroups({
 			groupIds,
@@ -136,7 +149,13 @@ const addContactsToGroups = async ({ contactIds, groupIds }) => {
 	}
 };
 
-const removeContactsFromGroup = async ({ id, contactIds }) => {
+const removeContactsFromGroup = async ({
+	id,
+	contactIds,
+}: {
+	id: string;
+	contactIds: string[];
+}) => {
 	try {
 		const response = await contactGroupsService.removeContactsFromGroup(
 			id,
@@ -150,7 +169,10 @@ const removeContactsFromGroup = async ({ id, contactIds }) => {
 	}
 };
 
-const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
+const updateStaticContactGroup = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -168,7 +190,7 @@ const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchStaticContactGroup = async ({ id, changes }) => {
+const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -186,7 +208,7 @@ const patchStaticContactGroup = async ({ id, changes }) => {
 	}
 };
 
-const deleteStaticContactGroup = async ({ id }) => {
+const deleteStaticContactGroup = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await contactGroupsService.deleteGroup(id);
 		return applyTransform(response.data, []);
@@ -197,7 +219,7 @@ const deleteStaticContactGroup = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getContactGroupsList>[0]) =>
 	getContactGroupsList({
 		...params,
 		fields: params.fields || [

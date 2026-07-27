@@ -1,5 +1,4 @@
 import { AgentTeamServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -34,7 +40,7 @@ const fieldsToSend = [
 	'inviteChatTimeout',
 ];
 
-const getTeamsList = async (params) => {
+const getTeamsList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id, strategy, adminId } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
@@ -67,7 +73,7 @@ const getTeamsList = async (params) => {
 	}
 };
 
-const getTeam = async ({ itemId: id }) => {
+const getTeam = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		name: '',
 		strategy: {},
@@ -96,7 +102,7 @@ const getTeam = async ({ itemId: id }) => {
 	}
 };
 
-const addTeam = async ({ itemInstance }) => {
+const addTeam = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -113,7 +119,7 @@ const addTeam = async ({ itemInstance }) => {
 	}
 };
 
-const updateTeam = async ({ itemInstance, itemId: id }) => {
+const updateTeam = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -130,7 +136,7 @@ const updateTeam = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteTeam = async ({ id }) => {
+const deleteTeam = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await teamService.deleteAgentTeam(id);
 		return applyTransform(response.data, []);
@@ -141,7 +147,7 @@ const deleteTeam = async ({ id }) => {
 	}
 };
 
-const getTeamsLookup = (params) =>
+const getTeamsLookup = (params: Parameters<typeof getTeamsList>[0]) =>
 	getTeamsList({
 		...params,
 		fields: params.fields || [

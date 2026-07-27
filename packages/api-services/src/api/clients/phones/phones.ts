@@ -1,4 +1,5 @@
 import { getPhones } from '@webitel/api-services/gen';
+import type { DeletePhonesParams } from '@webitel/api-services/gen/models';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -8,8 +9,16 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const getPhonesList = async ({ contactId, options, ...params }) => {
+const getPhonesList = async ({
+	contactId,
+	options,
+	...params
+}: {
+	contactId: string;
+	options: ApiParams;
+} & ApiParams) => {
 	const listParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -35,7 +44,17 @@ const getPhonesList = async ({ contactId, options, ...params }) => {
 	}
 };
 
-const getPhone = async ({ contactId, etag, params, options }) => {
+const getPhone = async ({
+	contactId,
+	etag,
+	params,
+	options,
+}: {
+	contactId: string;
+	etag: string;
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	try {
 		const response = await getPhones().locatePhone(
 			contactId,
@@ -53,7 +72,17 @@ const getPhone = async ({ contactId, etag, params, options }) => {
 	}
 };
 
-const mergePhones = async ({ contactId, phones, params, options }) => {
+const mergePhones = async ({
+	contactId,
+	phones,
+	params,
+	options,
+}: {
+	contactId: string;
+	phones: ApiParams[];
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	const body = applyTransform(phones, [
 		camelToSnake(),
 	]);
@@ -74,7 +103,17 @@ const mergePhones = async ({ contactId, phones, params, options }) => {
 	}
 };
 
-const resetPhones = async ({ contactId, phones, params, options }) => {
+const resetPhones = async ({
+	contactId,
+	phones,
+	params,
+	options,
+}: {
+	contactId: string;
+	phones: ApiParams[];
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	const body = applyTransform(phones, [
 		camelToSnake(),
 	]);
@@ -95,7 +134,19 @@ const resetPhones = async ({ contactId, phones, params, options }) => {
 	}
 };
 
-const updatePhone = async ({ contactId, etag, data, params, options }) => {
+const updatePhone = async ({
+	contactId,
+	etag,
+	data,
+	params,
+	options,
+}: {
+	contactId: string;
+	etag: string;
+	data: ApiParams;
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	const body = applyTransform(data, [
 		camelToSnake(),
 	]);
@@ -117,7 +168,19 @@ const updatePhone = async ({ contactId, etag, data, params, options }) => {
 	}
 };
 
-const patchPhone = async ({ contactId, etag, changes, params, options }) => {
+const patchPhone = async ({
+	contactId,
+	etag,
+	changes,
+	params,
+	options,
+}: {
+	contactId: string;
+	etag: string;
+	changes: ApiParams;
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	const body = applyTransform(changes, [
 		camelToSnake(),
 	]);
@@ -139,7 +202,17 @@ const patchPhone = async ({ contactId, etag, changes, params, options }) => {
 	}
 };
 
-const deletePhone = async ({ contactId, etag, params, options }) => {
+const deletePhone = async ({
+	contactId,
+	etag,
+	params,
+	options,
+}: {
+	contactId: string;
+	etag: string;
+	params: ApiParams;
+	options: ApiParams;
+}) => {
 	try {
 		const response = await getPhones().deletePhone(
 			contactId,
@@ -157,7 +230,15 @@ const deletePhone = async ({ contactId, etag, params, options }) => {
 	}
 };
 
-const deletePhones = async ({ contactId, params, options }) => {
+const deletePhones = async ({
+	contactId,
+	params,
+	options,
+}: {
+	contactId: string;
+	params: DeletePhonesParams;
+	options: ApiParams;
+}) => {
 	try {
 		const response = await getPhones().deletePhones(contactId, params, options);
 		return applyTransform(response.data, [
@@ -170,7 +251,7 @@ const deletePhones = async ({ contactId, params, options }) => {
 	}
 };
 
-const getPhonesLookup = (params) =>
+const getPhonesLookup = (params: Parameters<typeof getPhonesList>[0]) =>
 	getPhonesList({
 		...params,
 		fields: params?.fields || [

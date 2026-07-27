@@ -1,5 +1,4 @@
 import { getQuickRepliesService } from '@webitel/api-services/gen';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -10,6 +9,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const fieldsToSend = [
 	'name',
@@ -19,7 +25,7 @@ const fieldsToSend = [
 	'text',
 ];
 
-const getQuickRepliesList = async (params) => {
+const getQuickRepliesList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -70,7 +76,7 @@ const getQuickRepliesList = async (params) => {
 	}
 };
 
-const getQuickReply = async ({ itemId: id }) => {
+const getQuickReply = async ({ itemId: id }: GetItemParams<number>) => {
 	try {
 		const response = await getQuickRepliesService().readQuickReply(id);
 		return applyTransform(response.data, [
@@ -83,7 +89,7 @@ const getQuickReply = async ({ itemId: id }) => {
 	}
 };
 
-const addQuickReply = async ({ itemInstance }) => {
+const addQuickReply = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -100,7 +106,10 @@ const addQuickReply = async ({ itemInstance }) => {
 	}
 };
 
-const updateQuickReply = async ({ itemInstance, itemId: id }) => {
+const updateQuickReply = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams<number>) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -118,7 +127,7 @@ const updateQuickReply = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteQuickReply = async ({ id }) => {
+const deleteQuickReply = async ({ id }: DeleteItemParams<number>) => {
 	try {
 		const response = await getQuickRepliesService().deleteQuickReply(id);
 		return applyTransform(response.data, []);
@@ -129,7 +138,7 @@ const deleteQuickReply = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getQuickRepliesList>[0]) =>
 	getQuickRepliesList({
 		...params,
 		fields: params.fields || [

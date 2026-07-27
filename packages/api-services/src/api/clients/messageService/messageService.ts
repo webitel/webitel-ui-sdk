@@ -7,8 +7,9 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const patchMessagesService = async (changes) => {
+const patchMessagesService = async (changes: ApiParams) => {
 	const body = applyTransform(changes, [
 		camelToSnake(),
 	]);
@@ -25,7 +26,12 @@ const patchMessagesService = async (changes) => {
 	}
 };
 
-const getChatHistory = async ({ chatId, ...params }) => {
+const getChatHistory = async ({
+	chatId,
+	...params
+}: {
+	chatId: string;
+} & ApiParams) => {
 	const listParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		camelToSnake(),

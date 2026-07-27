@@ -78,7 +78,7 @@ const getFilesList = async (params: { search?: string }) => {
 	}
 };
 
-const deleteFiles = async (id) => {
+const deleteFiles = async (id: string[]) => {
 	try {
 		const response = await getFileService().deleteFiles({
 			id,
@@ -163,7 +163,13 @@ const getScreenRecordingsByUser = async (params: {
 	}
 };
 
-const deleteScreenRecordingsByUser = async ({ userId, id }) => {
+const deleteScreenRecordingsByUser = async ({
+	userId,
+	id,
+}: {
+	userId: string;
+	id: string[];
+}) => {
 	try {
 		const response = await getFileService().deleteScreenRecordings(
 			userId,
@@ -252,7 +258,13 @@ const getScreenRecordingsByAgent = async (params: {
 	}
 };
 
-const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
+const deleteScreenRecordingsByAgent = async ({
+	agentId,
+	id,
+}: {
+	agentId: string;
+	id: string[];
+}) => {
 	try {
 		const response = await getFileService().deleteScreenRecordingsByAgent(
 			agentId,

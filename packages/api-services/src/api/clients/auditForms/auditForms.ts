@@ -7,7 +7,6 @@ import {
 } from '@webitel/api-services/gen';
 import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -19,11 +18,19 @@ import {
 	starToSearch,
 	translateError,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const itemResponseHandler = (response) => ({
+const itemResponseHandler = (response: ApiParams) => ({
 	...response,
 	questions:
-		response.questions?.map((question) => {
+		response.questions?.map((question: ApiParams) => {
 			if (question.type === EngineAuditQuestionType.QuestionScore) {
 				return {
 					...question,
@@ -37,7 +44,7 @@ const itemResponseHandler = (response) => ({
 				return {
 					...question,
 					options:
-						question.options?.map((option) => ({
+						question.options?.map((option: ApiParams) => ({
 							...option,
 							name: option.name || '',
 							score: option.score || 0,
@@ -48,7 +55,7 @@ const itemResponseHandler = (response) => ({
 		}) || [],
 });
 
-const getAuditFormsList = async (params) => {
+const getAuditFormsList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchAuditFormQueryParams,
 	);
@@ -92,7 +99,7 @@ const getAuditFormsList = async (params) => {
 	}
 };
 
-const getAuditForm = async ({ itemId: id }) => {
+const getAuditForm = async ({ itemId: id }: GetItemParams<number>) => {
 	try {
 		const response = await getAuditFormService().readAuditForm(id);
 		return applyTransform(response.data, [
@@ -107,7 +114,7 @@ const getAuditForm = async ({ itemId: id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getAuditFormsList>[0]) =>
 	getAuditFormsList({
 		...params,
 		fields: params.fields || [
@@ -116,7 +123,7 @@ const getLookup = (params) =>
 		],
 	});
 
-const createAuditForm = async ({ itemInstance }) => {
+const createAuditForm = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
@@ -137,7 +144,10 @@ const createAuditForm = async ({ itemInstance }) => {
 	}
 };
 
-const updateAuditForm = async ({ itemInstance, itemId: id }) => {
+const updateAuditForm = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams<number>) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
@@ -158,7 +168,7 @@ const updateAuditForm = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchAuditForm = async ({ changes, id }) => {
+const patchAuditForm = async ({ changes, id }: PatchItemParams<number>) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(PatchAuditFormBody);
 
 	const body = applyTransform(changes, [
@@ -179,7 +189,7 @@ const patchAuditForm = async ({ changes, id }) => {
 	}
 };
 
-const deleteAuditForm = async ({ id }) => {
+const deleteAuditForm = async ({ id }: DeleteItemParams<number>) => {
 	try {
 		const response = await getAuditFormService().deleteAuditForm(id);
 		return applyTransform(response.data, []);

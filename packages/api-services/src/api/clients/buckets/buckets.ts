@@ -1,5 +1,4 @@
 import { BucketServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,13 +14,20 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const bucketService = BucketServiceApiFactory(configuration, '', instance);
 
-const getBucketsList = async (params) => {
+const getBucketsList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -51,7 +57,7 @@ const getBucketsList = async (params) => {
 	}
 };
 
-const getBucket = async ({ itemId: id }) => {
+const getBucket = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await bucketService.readBucket(id);
 		return applyTransform(response.data, [
@@ -69,7 +75,7 @@ const fieldsToSend = [
 	'description',
 ];
 
-const addBucket = async ({ itemInstance }) => {
+const addBucket = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -86,7 +92,7 @@ const addBucket = async ({ itemInstance }) => {
 	}
 };
 
-const updateBucket = async ({ itemInstance, itemId: id }) => {
+const updateBucket = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -103,7 +109,7 @@ const updateBucket = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteBucket = async ({ id }) => {
+const deleteBucket = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await bucketService.deleteBucket(id);
 		return applyTransform(response.data, []);
@@ -114,7 +120,7 @@ const deleteBucket = async ({ id }) => {
 	}
 };
 
-const getBucketsLookup = (params) =>
+const getBucketsLookup = (params: Parameters<typeof getBucketsList>[0]) =>
 	getBucketsList({
 		...params,
 		fields: params.fields || [
