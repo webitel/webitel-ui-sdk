@@ -181,7 +181,7 @@ export const useChatScroll = ({
 		viewportTransitionTimer = setTimeout(() => {
 			isViewportTransition = false;
 			viewportTransitionTimer = null;
-		}, 500);
+		}, 1000);
 	};
 
 	/**

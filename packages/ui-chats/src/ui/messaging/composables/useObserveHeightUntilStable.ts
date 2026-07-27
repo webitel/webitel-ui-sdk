@@ -23,7 +23,7 @@ export const useObserveHeightUntilStable = (
 		viewportTransitionTimer = setTimeout(() => {
 			isViewportTransition = false;
 			viewportTransitionTimer = null;
-		}, 500);
+		}, 1000);
 	};
 
 	const stopObserve = () => {
