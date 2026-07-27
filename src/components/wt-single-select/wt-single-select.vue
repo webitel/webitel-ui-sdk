@@ -111,15 +111,15 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
 import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
-interface Props extends SelectProps {
+interface Props extends Omit<SelectProps, 'size'> {
 	label?: string;
 	placeholder?: string;
 	required?: boolean;
@@ -158,7 +158,7 @@ interface Props extends SelectProps {
 	allowCustomValues?: boolean;
 	labelProps?: object;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus | null;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 }
 

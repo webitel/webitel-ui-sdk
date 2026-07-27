@@ -60,7 +60,7 @@ const width = computed(() => {
 	const width = props.size ? sizeToUnits[props.size] : props.width;
 
 	// if converted to Number without an error, it has no units in it
-	if (+width) {
+	if (width && +width) {
 		return `${width}px`;
 	}
 
@@ -73,7 +73,7 @@ const height = computed(() => {
 	const height = props.size ? sizeToUnits[props.size] : props.height;
 
 	// if converted to Number without an error, it has no units in it
-	if (+height) {
+	if (height && +height) {
 		return `${height}px`;
 	}
 

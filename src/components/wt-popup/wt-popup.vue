@@ -95,6 +95,10 @@ interface ActivatorSlotScope {
 
 const slots = defineSlots<{
 	activator?: ActivatorSlotScope;
+	header?: () => unknown;
+	title?: () => unknown;
+	main?: () => unknown;
+	actions?: () => unknown;
 }>();
 const activatorMode = !!slots.activator;
 

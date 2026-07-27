@@ -74,7 +74,9 @@ const isChecked = computed(() => {
 	if (isSingle.value) {
 		return model.value;
 	}
-	return model.value.includes(props.value);
+	return Array.isArray(model.value)
+		? model.value.includes(String(props.value))
+		: false;
 });
 
 const checkboxIcon = computed(() => {

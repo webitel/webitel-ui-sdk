@@ -177,7 +177,6 @@ const onImageLoad = () => {
 const handleDelete = () => {
 	if (fullScreen.value) toggleFullScreen();
 	askDeleteConfirmation({
-		deleteCount: 1,
 		callback: () => emit('delete', activeIndex),
 	});
 };

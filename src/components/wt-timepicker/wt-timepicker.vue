@@ -76,11 +76,11 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { computed, nextTick, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 // const SEC_IN_DAY = 60 * 60 * 24;
 const SEC_IN_HOUR = 60 * 60;
@@ -126,7 +126,7 @@ interface WtTimepickerProps {
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: SuperCompatibleRegleFieldStatus | null;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	/**
 	 * Custom validators for vuelidate
 	 */
@@ -143,7 +143,6 @@ const props = withDefaults(defineProps<WtTimepickerProps>(), {
 	noLabel: false,
 	required: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 });
 

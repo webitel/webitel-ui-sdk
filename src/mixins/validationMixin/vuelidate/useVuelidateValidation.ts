@@ -17,8 +17,11 @@ export type CompatCustomValidator = {
 /**
  * Vuelidate exposes each rule as a dynamic key on the field, and components
  * declare the prop loosely so consumers are not forced to import `Validation`.
+ * Kept structural on purpose: inlining `@vuelidate/core`'s `Validation` here
+ * blows up prop-type inference in the components (TS2590).
  */
-export type VuelidateFieldLike = Validation | Record<string, unknown> | null;
+// biome-ignore lint/suspicious/noExplicitAny: dynamic per-rule keys, see comment above
+export type VuelidateFieldLike = Record<string, any> | null;
 
 export type UseFieldValidationParams = {
 	field?: Ref<VuelidateFieldLike | undefined>;

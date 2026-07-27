@@ -56,7 +56,7 @@
             {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
           </template>
           <template v-else>
-            {{ value.map((v) => getOptionLabel(v)).join(', ') }}
+            {{ value.map((v: SelectOption) => getOptionLabel(v)).join(', ') }}
           </template>
         </span>
         <span v-else class="p-placeholder">{{ placeholder }}&nbsp;</span>
@@ -136,12 +136,15 @@ import type { SelectProps } from 'primevue';
 import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
+import type {
+	SelectOption,
+	SelectSearchMethod,
+} from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
@@ -188,7 +191,7 @@ interface Props extends SelectProps {
 	chipsView?: boolean;
 	labelProps?: object;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus | null;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 }
 
@@ -202,7 +205,7 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
-const model = defineModel({
+const model = defineModel<SelectOption>({
 	default: [],
 	get(value) {
 		return toArray(value);
@@ -246,7 +249,7 @@ const {
 	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),
 	allowCustomValues: computed(() => props.allowCustomValues),
-	manualCustomValues: computed(() => props.manualCustomValues),
+	manualCustomValues: props.manualCustomValues,
 	filterInput,
 	selectRef,
 	searchMethod: computed(() => props.searchMethod),

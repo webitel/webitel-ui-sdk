@@ -32,9 +32,8 @@
         class="wt-input-text__input typo-body-1"
         :class="{ 'wt-input-text__input--masked': isInputMasked }"
         :inputmode="type"
-        :size="primevueSizeMap[size]"
+        :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
-        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
@@ -65,16 +64,20 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
+import type { InputHTMLAttributes } from 'vue';
 import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
-interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
+/** native input attributes are dropped: they reach the input through `$attrs`,
+ * and keeping them here overflows prop-type inference (TS2590) */
+interface WtInputTextProps
+	extends /* @vue-ignore */ Omit<InputTextProps, keyof InputHTMLAttributes> {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	type?: string;
@@ -84,7 +87,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	required?: boolean;
 	preventTrim?: boolean;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus | null;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 	hideInputValue?: boolean;
@@ -100,7 +103,6 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	required: false,
 	preventTrim: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 	hideInputInfo: false,
 	hideInputValue: false,
@@ -145,7 +147,7 @@ const requiredLabel = computed(() => {
 	return isRequired ? `${props.label}*` : props.label;
 });
 
-const inputHandler = (value) => {
+const inputHandler = (value: string) => {
 	const handledValue = props.preventTrim ? value : value.trim();
 	emit('update:modelValue', handledValue);
 };

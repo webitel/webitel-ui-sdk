@@ -60,7 +60,7 @@ interface WtTimeInputProps {
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: SuperCompatibleRegleFieldStatus | null;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	/**
 	 * Custom validators for vuelidate
 	 */
@@ -77,7 +77,6 @@ const props = withDefaults(defineProps<WtTimeInputProps>(), {
 	labelProps: () => ({}),
 	hideInputInfo: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 });
 

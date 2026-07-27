@@ -54,11 +54,11 @@
 import type { TextareaProps } from 'primevue/textarea';
 import { computed, onMounted, ref, toRef, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /**
  * @emits {string} input - Fires when textarea value changes. Emits value

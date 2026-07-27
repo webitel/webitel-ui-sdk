@@ -145,11 +145,11 @@ import {
 	ComponentSize,
 	MessageVariant,
 } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useDatepicker } from './_internals/composables/useDatepicker';
 
 interface Props extends DatePickerProps {

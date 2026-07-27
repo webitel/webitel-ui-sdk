@@ -108,6 +108,7 @@
 </template>
 
 <script lang="ts">
+import type { PropType } from 'vue';
 import { WtApplication } from '../../enums';
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
 import AdminDark from './assets/dark/app-logo-dark-admin.svg';
@@ -124,7 +125,6 @@ import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import WfmLight from './assets/light/app-logo-light-wfm.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
-import type { PropType } from 'vue';
 import type { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo: Record<

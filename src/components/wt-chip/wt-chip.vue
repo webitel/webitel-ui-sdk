@@ -11,7 +11,7 @@
 				icon="close--filled" 
 				:size="ComponentSize.SM"
 				:color="ChipColor.ON_PRIMARY"
-				@click="emit('remove', $event)"
+				@click="emit('remove')"
 			/>
     </template>
   </p-chip>

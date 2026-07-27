@@ -1,17 +1,17 @@
 import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
+import type {
+	SelectOption,
+	SelectValue,
+	UseSelectOptionsParams,
+} from './types';
 import {
 	dedupeByKey,
 	filterOptionsBySearchValue,
 	isOptionSelected,
 	toArray,
 } from './useSelectUtils';
-import type {
-	SelectOption,
-	SelectValue,
-	UseSelectOptionsParams,
-} from './types';
 
 export const useSelectOptions = ({
 	selected,
