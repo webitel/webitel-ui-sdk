@@ -45,7 +45,7 @@ const getDynamicGroupsList = async (params: Record<string, unknown>) => {
 			fields,
 			sort,
 			id,
-			q: q || params.search,
+			q,
 			name,
 		});
 		const { items, next } = applyTransform(response.data, [
@@ -66,9 +66,7 @@ const getDynamicGroup = async ({ itemId: id }: { itemId: string }) => {
 	const itemResponseHandler = (item: { group: unknown }) => item.group;
 
 	try {
-		const response = await getDynamicGroups().locateDynamicGroup(id, {
-			fields: dynamicGroupFieldsToSend,
-		});
+		const response = await getDynamicGroups().locateDynamicGroup(id);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,

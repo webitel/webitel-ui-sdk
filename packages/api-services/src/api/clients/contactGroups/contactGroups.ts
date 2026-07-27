@@ -1,13 +1,14 @@
-import { GroupsApiFactory } from 'webitel-sdk';
-
-import { ContactsGroupType } from '@webitel/api-services/gen/models';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	AddContactsToGroupsBody,
+	CreateGroupBody,
+	getGroups,
+	ListGroupsQueryParams,
+	UpdateGroupBody,
+} from '@webitel/api-services/gen';
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -19,20 +20,9 @@ import {
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const contactGroupsService = GroupsApiFactory(configuration, '', instance);
-
 const baseUrl = '/contacts/groups';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'enabled',
-	'type',
-	'default_group',
-];
+const groupFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateGroupBody);
 
 const appendStaticType = (item) => ({
 	...item,
@@ -40,16 +30,9 @@ const appendStaticType = (item) => ({
 });
 
 const getContactGroupsList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'type',
-		'enabled',
-		'id',
-	];
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListGroupsQueryParams,
+	);
 	const defaultObject = {
 		enabled: false,
 	};
@@ -57,26 +40,22 @@ const getContactGroupsList = async (params) => {
 	const { page, size, fields, sort, id, q, name, type, enabled } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
-			(params) => ({
-				...params,
-				q: params.search,
-			}),
-			sanitize(fieldsToSend),
+			sanitize(listFieldsToSend),
 			camelToSnake(),
 		]);
 
 	try {
-		const response = await contactGroupsService.listGroups(
+		const response = await getGroups().listGroups({
 			page,
 			size,
 			fields,
 			sort,
 			id,
-			q,
+			q: q || params.search,
 			name,
 			type,
 			enabled,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -98,7 +77,7 @@ const getContactGroup = async ({ itemId: id }) => {
 	const itemResponseHandler = (item) => item.group;
 
 	try {
-		const response = await contactGroupsService.locateGroup(id, fieldsToSend);
+		const response = await getGroups().locateGroup(id);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -111,12 +90,14 @@ const getContactGroup = async ({ itemId: id }) => {
 };
 
 const addStaticContactGroup = async ({ itemInstance }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateGroupBody);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response = await contactGroupsService.createGroup(item);
+		const response = await getGroups().createGroup(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			appendStaticType,
@@ -129,11 +110,22 @@ const addStaticContactGroup = async ({ itemInstance }) => {
 };
 
 const addContactsToGroups = async ({ contactIds, groupIds }) => {
-	try {
-		const response = await contactGroupsService.addContactsToGroups({
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		AddContactsToGroupsBody,
+	);
+
+	const item = applyTransform(
+		{
 			groupIds,
 			contactIds,
-		});
+		},
+		[
+			sanitize(fieldsToSend),
+		],
+	);
+
+	try {
+		const response = await getGroups().addContactsToGroups(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -146,10 +138,9 @@ const addContactsToGroups = async ({ contactIds, groupIds }) => {
 
 const removeContactsFromGroup = async ({ id, contactIds }) => {
 	try {
-		const response = await contactGroupsService.removeContactsFromGroup(
-			id,
+		const response = await getGroups().removeContactsFromGroup(id, {
 			contactIds,
-		);
+		});
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -160,12 +151,12 @@ const removeContactsFromGroup = async ({ id, contactIds }) => {
 
 const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(groupFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup(id, item);
+		const response = await getGroups().updateGroup(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			appendStaticType,
@@ -179,12 +170,12 @@ const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
 
 const patchStaticContactGroup = async ({ id, changes }) => {
 	const item = applyTransform(changes, [
+		sanitize(groupFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup2(id, item);
+		const response = await getGroups().updateGroup2(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			appendStaticType,
@@ -198,7 +189,7 @@ const patchStaticContactGroup = async ({ id, changes }) => {
 
 const deleteStaticContactGroup = async ({ id }) => {
 	try {
-		const response = await contactGroupsService.deleteGroup(id);
+		const response = await getGroups().deleteGroup(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
