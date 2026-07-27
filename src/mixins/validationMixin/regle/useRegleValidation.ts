@@ -2,7 +2,7 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field?: Ref<SuperCompatibleRegleFieldStatus | undefined>;
+	field?: Ref<SuperCompatibleRegleFieldStatus | undefined | null>;
 };
 
 export type UseFieldValidationReturn = {

@@ -109,8 +109,8 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
@@ -158,7 +158,7 @@ interface Props extends SelectProps {
 	allowCustomValues?: boolean;
 	labelProps?: object;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus;
+	regleValidation?: SuperCompatibleRegleFieldStatus | null;
 	customValidators?: CompatCustomValidator[];
 }
 
@@ -172,7 +172,7 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.LG]: 'large',
 };
@@ -202,7 +202,6 @@ const {
 	filterText,
 	filteredOptions,
 	getOptionLabel,
-	fetchOptions,
 	onDropdownBeforeShow,
 	onDropdownBeforeHide,
 	onDropdownShow,

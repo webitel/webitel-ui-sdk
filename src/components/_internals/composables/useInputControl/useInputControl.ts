@@ -1,6 +1,11 @@
-import { computed } from 'vue';
+import { computed, type Ref } from 'vue';
 
-export const useInputControl = (input) => {
+/** PrimeVue input component instance wrapping the native element. */
+interface InputComponentRef {
+	$el?: HTMLElement;
+}
+
+export const useInputControl = (input: Ref<InputComponentRef | undefined>) => {
 	// inputnumber has span wrapper while inputtext hasnt
 	const inputEl = computed(() => {
 		if (input.value?.$el instanceof HTMLInputElement) {
@@ -19,7 +24,7 @@ export const useInputControl = (input) => {
 	};
 
 	// prevent double triggering
-	const handleKeyup = (e) => e.stopPropagation();
+	const handleKeyup = (e: Event) => e.stopPropagation();
 
 	return {
 		focus,

@@ -66,7 +66,7 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageVariant } from '../../enums';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
@@ -84,7 +84,7 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	required?: boolean;
 	preventTrim?: boolean;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus;
+	regleValidation?: SuperCompatibleRegleFieldStatus | null;
 	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 	hideInputValue?: boolean;
@@ -106,7 +106,7 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	hideInputValue: false,
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.LG]: 'large',
 };

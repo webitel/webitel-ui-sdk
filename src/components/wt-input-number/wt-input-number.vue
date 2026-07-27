@@ -78,7 +78,7 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageVariant } from '../../enums';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
@@ -100,7 +100,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	maxFractionDigits?: number;
 	showButtons?: boolean;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus;
+	regleValidation?: SuperCompatibleRegleFieldStatus | null;
 	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 }

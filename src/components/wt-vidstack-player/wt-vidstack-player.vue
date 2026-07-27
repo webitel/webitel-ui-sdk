@@ -116,7 +116,7 @@ defineExpose({
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 
-const changeSize = (value) => {
+const changeSize = (value: ComponentSize) => {
 	size.value = value;
 	emit('change-size', value);
 };

@@ -7,4 +7,4 @@ export const MessageColor = {
 	CONTRAST: 'contrast',
 } as const;
 
-export type MessageColor = keyof typeof MessageColor;
+export type MessageColor = (typeof MessageColor)[keyof typeof MessageColor];

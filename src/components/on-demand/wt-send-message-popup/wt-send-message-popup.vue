@@ -65,10 +65,21 @@ const props = defineProps<{
 const emit = defineEmits([
 	'close',
 ]);
-const eventBus = inject('$eventBus');
+const eventBus = inject<{
+	$emit: (event: string, payload: unknown) => void;
+}>('$eventBus');
 const { t } = useI18n();
 
-const generateNewDraft = () => {
+interface MessageDraft {
+	gateway: {
+		id?: string;
+	};
+	provider: string;
+	message: string;
+	agentId: string | null;
+}
+
+const generateNewDraft = (): MessageDraft => {
 	return {
 		gateway: props.chatItem?.app || {},
 		provider: props.chatItem?.protocol || '',
@@ -79,7 +90,7 @@ const generateNewDraft = () => {
 
 const draft = ref(generateNewDraft());
 
-async function getAgentId(params) {
+async function getAgentId(params: Record<string, unknown> = {}) {
 	const { items } = await AgentsAPI.getList({
 		...params,
 		userId: props.userId,
@@ -104,7 +115,7 @@ const sendMessage = async () => {
 		},
 	});
 	if (response.failure) {
-		eventBus.$emit('notification', {
+		eventBus?.$emit('notification', {
 			type: 'error',
 			text: response.failure[0].error.message,
 		});
@@ -112,9 +123,9 @@ const sendMessage = async () => {
 	emit('close');
 };
 
-const insertEmoji = (emoji) => {
+const insertEmoji = (emoji: string) => {
 	draft.value.message += emoji;
-	document.querySelector('textarea').focus();
+	document.querySelector('textarea')?.focus();
 };
 
 onMounted(async () => await getAgentId());

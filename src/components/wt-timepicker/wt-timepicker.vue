@@ -126,7 +126,7 @@ interface WtTimepickerProps {
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: SuperCompatibleRegleFieldStatus;
+	regleValidation?: SuperCompatibleRegleFieldStatus | null;
 	/**
 	 * Custom validators for vuelidate
 	 */

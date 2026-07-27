@@ -53,7 +53,7 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
 import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { ComponentSize, MessageVariant } from '../../enums';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
@@ -69,7 +69,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	required?: boolean;
 	toggleMask?: boolean;
 	v?: VuelidateFieldLike;
-	regleValidation?: SuperCompatibleRegleFieldStatus;
+	regleValidation?: SuperCompatibleRegleFieldStatus | null;
 	customValidators?: CompatCustomValidator[];
 }
 

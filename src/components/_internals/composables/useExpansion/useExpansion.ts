@@ -1,6 +1,9 @@
 import { type Ref, ref, watch } from 'vue';
 
-export function useExpansion(collapsed: Ref<boolean>, emit?) {
+export function useExpansion(
+	collapsed: Ref<boolean>,
+	emit?: (event: 'opened' | 'closed') => void,
+) {
 	const opened = ref<boolean>(!collapsed.value);
 
 	function open(): void {
