@@ -52,15 +52,9 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
-import {
-	computed,
-	defineModel,
-	ref,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useInputControl } from '../_internals/composables';
 
@@ -73,7 +67,7 @@ interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
 	toggleMask?: boolean;
 	v?: Record<string, unknown>;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {

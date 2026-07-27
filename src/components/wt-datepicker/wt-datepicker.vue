@@ -137,14 +137,7 @@ import PDatepicker, {
 	DatePickerEmitsOptions,
 	DatePickerProps,
 } from 'primevue/datepicker';
-import {
-	computed,
-	defineModel,
-	defineProps,
-	nextTick,
-	toRefs,
-	useTemplateRef,
-} from 'vue';
+import { computed, nextTick, toRefs, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {
 	ButtonColor,
@@ -152,6 +145,7 @@ import {
 	ComponentSize,
 	MessageVariant,
 } from '../../enums';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import { useDatepicker } from './_internals/composables/useDatepicker';
 
@@ -167,7 +161,7 @@ interface Props extends DatePickerProps {
 	clearable?: boolean;
 	timezone?: string;
 	v?: Record<string, unknown>;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {

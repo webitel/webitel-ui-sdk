@@ -27,7 +27,7 @@
       :placeholder="placeholder || label"
       :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
-      :option-label="(option) => getOptionLabel(option)"
+      :option-label="getOptionLabel"
       :option-value="optionValue"
       :max-selected-labels="MAX_SELECTED_LABELS"
       :selectedItemsLabel="`${model.length} ${t('webitelUI.select.selectedItemsLabel')}`"
@@ -136,7 +136,9 @@ import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
@@ -171,7 +173,7 @@ interface Props extends SelectProps {
 	/**
 	 * Function that returns filtered options for server-side search
 	 */
-	searchMethod?: () => void;
+	searchMethod?: SelectSearchMethod;
 	/**
 	 * true allows adding custom values through the filter input
 	 */
@@ -184,7 +186,7 @@ interface Props extends SelectProps {
 	labelProps?: object;
 	v?: Record<string, unknown>;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {

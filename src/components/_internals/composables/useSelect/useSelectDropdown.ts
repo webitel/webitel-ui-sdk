@@ -1,4 +1,5 @@
 import { nextTick, ref, watch } from 'vue';
+import type { UseSelectDropdownParams } from './types';
 
 export const useSelectDropdown = ({
 	selectId,
@@ -13,7 +14,7 @@ export const useSelectDropdown = ({
 	fetchOptions,
 	isLoading,
 	searchHasNext,
-}) => {
+}: UseSelectDropdownParams) => {
 	const isDropdownOpen = ref(false);
 	let overlayResizeObserver: ResizeObserver | null = null;
 	let positionRafId: number | null = null;
@@ -51,7 +52,7 @@ export const useSelectDropdown = ({
 		const overlay = selectRef?.value?.overlay;
 		if (overlay) {
 			overlayResizeObserver = new ResizeObserver(() => {
-				selectRef.value?.alignOverlay();
+				selectRef.value?.alignOverlay?.();
 			});
 			overlayResizeObserver.observe(overlay);
 		}
@@ -74,7 +75,7 @@ export const useSelectDropdown = ({
 				if (rect.top !== lastTop || rect.left !== lastLeft) {
 					lastTop = rect.top;
 					lastLeft = rect.left;
-					selectRef.value?.alignOverlay();
+					selectRef.value?.alignOverlay?.();
 				}
 				positionRafId = requestAnimationFrame(poll);
 			};

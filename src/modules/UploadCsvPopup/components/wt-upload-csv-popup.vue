@@ -140,7 +140,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, ref, toRefs, withDefaults } from 'vue';
+import { ref, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import useUploadCsv from '../composable/useUploadCsv';

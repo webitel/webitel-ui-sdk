@@ -24,10 +24,10 @@
       :placeholder="placeholder || label"
       :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
-      :option-label="(option) => getOptionLabel(option)"
+      :option-label="getOptionLabel"
       :option-value="optionValue"
       :data-key="dataKey"
-      :size="primevueSizeMap[size]"
+      :size="size ? primevueSizeMap[size] : undefined"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -111,7 +111,9 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
 import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
 interface Props extends SelectProps {
@@ -146,7 +148,7 @@ interface Props extends SelectProps {
 	/**
 	 * Function that returns filtered options for server-side search
 	 */
-	searchMethod?: () => void;
+	searchMethod?: SelectSearchMethod;
 	/**
 	 * true allows adding custom values through the filter input
 	 */
@@ -154,7 +156,7 @@ interface Props extends SelectProps {
 	labelProps?: object;
 	v?: Record<string, unknown>;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {

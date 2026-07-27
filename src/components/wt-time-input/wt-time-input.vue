@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 
 interface WtTimeInputProps {
 	/**
@@ -60,7 +61,7 @@ interface WtTimeInputProps {
 	/**
 	 * Custom validators for vuelidate
 	 */
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<WtTimeInputProps>(), {

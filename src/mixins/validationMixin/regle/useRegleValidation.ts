@@ -2,7 +2,7 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field?: Ref<SuperCompatibleRegleFieldStatus>;
+	field?: Ref<SuperCompatibleRegleFieldStatus | undefined>;
 };
 
 export type UseFieldValidationReturn = {
@@ -14,7 +14,7 @@ export const useFieldValidation = ({
 	field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
 	const invalid = computed(() => {
-		return fieldRef?.value.$error ?? null;
+		return fieldRef?.value?.$error ?? null;
 	});
 
 	const validationText = computed(() => {

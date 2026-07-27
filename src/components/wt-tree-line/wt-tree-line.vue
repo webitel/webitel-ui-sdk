@@ -13,7 +13,7 @@
         :icon="lastChild ? 'tree-corner' : 'tree-cross'"
       />
       <wt-icon-btn
-        v-if="data[childrenProp] && data[childrenProp].length"
+        v-if="children.length"
         :icon="collapsed ? 'plus' : 'minus'"
         @click="collapsed = !collapsed"
       />
@@ -25,7 +25,7 @@
       :root-data="rootData || data"
       :nested-level="nestedLevel"
       :active="displayActiveState"
-      :has-children="!!(data[childrenProp] && data[childrenProp].length)"
+      :has-children="!!children.length"
       :selected-parent="selectedParent"
     />
     <div
@@ -48,7 +48,7 @@
   <wt-expand-transition v-show="!collapsed">
     <div>
       <wt-tree-line
-        v-for="(child, index) in data[childrenProp]"
+        v-for="(child, index) in children"
         :key="index"
         :model-value="modelValue"
         :data="child"
@@ -57,9 +57,9 @@
         :item-data="itemData"
         :nested-level="nestedLevel + 1"
         :selected-parent="isSelected || selectedParent"
-        :next-element="!!data[childrenProp][index + 1]"
+        :next-element="!!children[index + 1]"
         :nested-icons="displayIcons"
-        :last-child="index === data[childrenProp].length - 1"
+        :last-child="index === children.length - 1"
         :multiple="multiple"
         :allow-parent="allowParent"
         :root-data="rootData || data"
@@ -86,11 +86,12 @@ import { computed, onMounted, ref, watch } from 'vue';
 
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 import type { WtTreeNestedIcons } from './types/wt-tree-nested-icons.ts';
+import type { WtTreeNode } from './types/wt-tree-node.ts';
 
 const props = withDefaults(
 	defineProps<{
-		modelValue: null | unknown | unknown[];
-		data: unknown;
+		modelValue: WtTreeNode | WtTreeNode[] | null;
+		data: WtTreeNode;
 		itemLabel?: string | undefined;
 		itemData?: string | undefined;
 		childrenProp?: string;
@@ -105,7 +106,7 @@ const props = withDefaults(
 		 * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
 		 */
 		searchedProp?: string;
-		rootData?: unknown;
+		rootData?: WtTreeNode;
 	}>(),
 	{
 		nestedLevel: 0,
@@ -123,6 +124,16 @@ const emit = defineEmits<{
 	(e: 'openParent'): void;
 	(e: 'update:modelValue', value: unknown): void;
 }>();
+
+// typed explicitly: the component renders itself, so inferring the slot type
+// from the recursive usage would be circular
+defineSlots<{
+	'item-prefix'(props: Record<string, unknown>): unknown;
+}>();
+
+const children = computed<WtTreeNode[]>(
+	() => props.data?.[props.childrenProp] ?? [],
+);
 
 const label = computed(() =>
 	props.itemLabel ? props.data[props.itemLabel] : props.data,
@@ -181,9 +192,9 @@ const displayActiveState = computed(() => {
 });
 
 const toggleSelectionWithChildren = (
-	node: unknown,
+	node: WtTreeNode,
 	select: boolean,
-	result: unknown[],
+	result: WtTreeNode[],
 ) => {
 	const value = props.itemData ? node[props.itemData] : node;
 
@@ -208,10 +219,14 @@ const toggleSelectionWithChildren = (
 		}
 };
 
-const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
+const deselectParents = (
+	node: WtTreeNode,
+	root: WtTreeNode,
+	result: WtTreeNode[],
+) => {
 	const findAndDeselect = (
-		current: unknown,
-		parent: unknown | null,
+		current: WtTreeNode,
+		parent: WtTreeNode | null,
 	): boolean => {
 		if (current === node) {
 			if (parent) {
@@ -265,7 +280,7 @@ const setMultipleModelValue = () => {
 	if (props.itemData) {
 		existingIndex = props.modelValue.indexOf(props.data[props.itemData]);
 	} else {
-		existingIndex = props.modelValue.findIndex((item) =>
+		existingIndex = props.modelValue.findIndex((item: WtTreeNode) =>
 			deepEqual(item, props.data),
 		);
 	}
@@ -325,7 +340,7 @@ const onOpenParent = () => {
 	openParent();
 };
 
-const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
+const hasSearchedElement = (data: WtTreeNode, nestedLevel = 0) => {
 	// Check if the object itself has searched
 	if (data[props.searchedProp] && nestedLevel) return true;
 

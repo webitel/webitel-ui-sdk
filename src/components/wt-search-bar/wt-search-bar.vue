@@ -70,8 +70,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, toRefs } from 'vue';
+import { computed, type PropType, toRefs } from 'vue';
 
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import debounce from '../../scripts/debounce.js';
 
@@ -80,7 +81,7 @@ const props = defineProps({
 		type: Object,
 	},
 	customValidators: {
-		type: Array,
+		type: Array as PropType<CompatCustomValidator[]>,
 		default: () => [],
 	},
 	/**

@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import type { CheckboxProps } from 'primevue/checkbox';
-import { computed, defineModel, defineProps, useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
 
 /**
  * @emits {boolean | string[]} change - Fires when checkbox value changes. Emits selected value (Boolean or Array)

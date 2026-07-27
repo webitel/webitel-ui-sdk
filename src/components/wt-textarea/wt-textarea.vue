@@ -52,14 +52,7 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import {
-	computed,
-	defineModel,
-	onMounted,
-	ref,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
+import { computed, onMounted, ref, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 

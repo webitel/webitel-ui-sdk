@@ -9,14 +9,22 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-type CompatCustomValidator = {
+export type CompatCustomValidator = {
 	name: string;
 	text: string;
 };
 
+/**
+ * Vuelidate exposes each rule as a dynamic key on the field, and components
+ * declare the prop loosely so consumers are not forced to import `Validation`.
+ */
+export type VuelidateFieldLike = Validation | Record<string, unknown>;
+
 export type UseFieldValidationParams = {
-	field?: Ref<Validation>;
-	customValidators?: CompatCustomValidator[];
+	field?: Ref<VuelidateFieldLike | undefined>;
+	customValidators?:
+		| CompatCustomValidator[]
+		| Ref<CompatCustomValidator[] | undefined>;
 };
 
 export const useFieldValidation = ({
@@ -26,27 +34,32 @@ export const useFieldValidation = ({
 	const { t } = useI18n();
 
 	// support vue options api, where v is a reactive, not ref
-	let v: Ref<Validation> | ComputedRef<Validation | undefined> | undefined =
-		inputV;
+	let v:
+		| Ref<VuelidateFieldLike | undefined>
+		| ComputedRef<VuelidateFieldLike | undefined>
+		| undefined = inputV;
 	let customValidators:
 		| CompatCustomValidator[]
+		| Ref<CompatCustomValidator[] | undefined>
 		| ComputedRef<CompatCustomValidator[] | undefined>
 		| undefined = inputCustomValidators;
 
 	if (isReactive(inputV)) {
 		v = computed(() => unref(inputV));
-		customValidators = computed(() => inputCustomValidators);
+		customValidators = computed(() => unref(inputCustomValidators));
 	}
 	// end
 
 	const isValidation = computed(
 		() => !!v && !!v.value && !!Object.keys(v.value).length,
 	);
-	const invalid = computed(() => isValidation.value && v?.value?.$error);
+	const invalid = computed(
+		() => isValidation.value && !!(v?.value as Validation | undefined)?.$error,
+	);
 
 	const validationText = computed(() => {
 		let validationText = '';
-		const validation = v?.value;
+		const validation = v?.value as Validation | undefined;
 		if (validation && isValidation.value && invalid.value) {
 			if (validation.required?.$invalid)
 				validationText = t('validation.required');

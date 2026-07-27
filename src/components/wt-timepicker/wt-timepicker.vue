@@ -76,6 +76,7 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { computed, nextTick, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ComponentSize, MessageVariant } from '../../enums';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 // const SEC_IN_DAY = 60 * 60 * 24;
@@ -126,7 +127,7 @@ interface WtTimepickerProps {
 	/**
 	 * Custom validators for vuelidate
 	 */
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<WtTimepickerProps>(), {

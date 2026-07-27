@@ -14,7 +14,7 @@
             ]"
             :style="col.width ? `min-width:${col.width}` : ''"
             class="wt-tree-table-th typo-body-1"
-            @click="sort(col, key)"
+            @click="sort(col)"
           >
             <div
               class="wt-tree-table-th__content"
@@ -77,8 +77,8 @@
             />
           </template>
           <template
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
+            v-for="col of dataHeaders"
+            :key="col.value"
             #[col.value]="{ item }"
           >
             <slot
@@ -104,6 +104,7 @@ import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import { useWtTable } from '../_internals/composables/useWtTable/useWtTable';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable';
+import type { WtTreeNode } from '../wt-tree-line/types/wt-tree-node';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(
@@ -151,14 +152,14 @@ const emit = defineEmits([
 	'update:selected',
 ]);
 
-const checkHasChildItems = (item: Record<string, unknown>) => {
+const checkHasChildItems = (item: WtTreeNode) => {
 	return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
 };
 
-const getSelectedValue = (items: Record<string, unknown>[]) => {
-	const selected = [];
+const getSelectedValue = (items: WtTreeNode[]) => {
+	const selected: WtTreeNode[] = [];
 
-	const pushSelectedElement = (item: Record<string, unknown>) => {
+	const pushSelectedElement = (item: WtTreeNode) => {
 		if (item._isSelected) {
 			return [
 				item,
@@ -175,10 +176,10 @@ const getSelectedValue = (items: Record<string, unknown>[]) => {
 	return selected;
 };
 
-const getAllNestedElements = (item: Record<string, unknown>) => {
-	const nested = [];
+const getAllNestedElements = (items: WtTreeNode[]) => {
+	const nested: WtTreeNode[] = [];
 
-	const pushElement = (item: Record<string, unknown>) => {
+	const pushElement = (item: WtTreeNode) => {
 		nested.push(item);
 
 		if (checkHasChildItems(item)) {
@@ -186,12 +187,12 @@ const getAllNestedElements = (item: Record<string, unknown>) => {
 		}
 	};
 
-	item.forEach(pushElement);
+	items.forEach(pushElement);
 
 	return nested;
 };
 
-const selectedElements = computed<Record<string, unknown>[]>(() => {
+const selectedElements = computed<WtTreeNode[]>(() => {
 	// _isSelected for backwards compatibility
 	return props.selected || getSelectedValue(props.data);
 });
@@ -222,11 +223,8 @@ const sort = (col: WtTableHeader) => {
 	emit('sort', col, nextSort);
 };
 
-const changeSelectItem = (
-	items: Record<string, unknown>[],
-	selected: boolean,
-) => {
-	items.forEach((item) => {
+const changeSelectItem = (items: WtTreeNode[], selected: boolean) => {
+	items.forEach((item: WtTreeNode) => {
 		item._isSelected = selected;
 
 		if (checkHasChildItems(item)) {
@@ -261,7 +259,7 @@ const selectAll = () => {
 	}
 };
 
-const handleSelection = (row, select) => {
+const handleSelection = (row: WtTreeNode, select: boolean) => {
 	if (props.selected) {
 		if (select) {
 			emit('update:selected', [
