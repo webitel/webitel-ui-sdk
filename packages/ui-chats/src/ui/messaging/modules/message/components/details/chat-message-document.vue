@@ -38,11 +38,14 @@ const documentSize = computed(() => {
 });
 
 function downloadDocument() {
-	if (!props.file) return;
+	// `url` is optional on ChatMessageFile; without it `a.href` used to be set to
+	// the string "undefined" and the click navigated to a bogus relative URL
+	if (!props.file?.url) return;
 	const a = document.createElement('a');
 	a.href = props.file.url;
 	a.target = '_blank';
-	a.download = props.file.name;
+	// empty `download` lets the browser derive the filename from the URL
+	a.download = props.file.name ?? '';
 	a.click();
 }
 </script>

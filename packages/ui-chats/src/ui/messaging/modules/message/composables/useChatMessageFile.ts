@@ -3,7 +3,8 @@ import { computed, type Ref, toRef } from 'vue';
 import type { ChatMessageFile } from '../../../types/ChatMessage.types';
 
 export function useChatMessageFile(
-	file: ChatMessageFile | Ref<ChatMessageFile>,
+	// `ChatMessageType.file` is optional, and every read below is optional-chained
+	file: ChatMessageFile | Ref<ChatMessageFile | undefined> | undefined,
 ) {
 	const fileRef = toRef(file);
 
@@ -30,7 +31,8 @@ export function useChatMessageFile(
 		);
 	});
 
-	const isMediaType = (value: string) => {
+	// callers pass `fileType`/`fileSrc`, both of which are optional on the file
+	const isMediaType = (value: string | undefined) => {
 		return !!(value?.includes('audio') || value?.includes('video'));
 	};
 

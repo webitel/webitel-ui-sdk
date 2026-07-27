@@ -34,7 +34,8 @@ export const useObserveHeightUntilStable = (
 	const startObserve = () => {
 		if (!chatContainer.value) return;
 
-		let lastClientHeight = chatContainer.value.clientHeight;
+		// undefined once the container unmounts mid-observation
+		let lastClientHeight: number | undefined = chatContainer.value.clientHeight;
 		let stableCount = 0;
 
 		observer = new ResizeObserver(() => {

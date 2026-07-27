@@ -15,8 +15,10 @@ export const useChatMessages = (
 ) => {
 	function showChatDate(index: number): boolean {
 		const { prevMessage, message } = getMessage(index);
-		const prevDate = +prevMessage?.createdAt || 0;
-		const currentDate = +message?.createdAt || 0;
+		// `Number(undefined)` is NaN, so the `|| 0` fallback already covered the
+		// missing-createdAt case — this just states it in a way the checker accepts
+		const prevDate = Number(prevMessage?.createdAt) || 0;
+		const currentDate = Number(message?.createdAt) || 0;
 		return (
 			!!prevMessage &&
 			formatDate(prevDate, FormatDateMode.DATE) !==
