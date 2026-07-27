@@ -32,10 +32,11 @@ export type FilterConfigToolkit = {
 			filter: IFilter;
 		}>
 	>;
+	/** every config is listed, so `filter` is absent until a value is applied */
 	staticViewFilterToFilterConfigMappings: ComputedRef<
 		Array<{
 			filterConfig: BaseFilterConfig;
-			filter: IFilter;
+			filter?: IFilter;
 		}>
 	>;
 };

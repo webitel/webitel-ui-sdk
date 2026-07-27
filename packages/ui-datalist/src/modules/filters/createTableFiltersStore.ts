@@ -11,7 +11,7 @@ import {
 } from './classes/FiltersManager';
 
 export const tableFiltersStoreBody = (
-	namespace,
+	namespace: string,
 	config?: {
 		filtersManagerConfig?: FiltersManagerConfig;
 	},

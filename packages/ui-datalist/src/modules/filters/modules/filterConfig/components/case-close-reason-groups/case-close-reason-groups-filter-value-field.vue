@@ -50,12 +50,12 @@ const model = defineModel<ModelValue>({
 });
 const { t } = useI18n();
 
-const updateSelected = (value) => {
+const updateSelected = (value: string) => {
 	model.value.selection = value;
 	model.value.conditions = '';
 };
 
-const getConditionList = (params) => {
+const getConditionList = (params: Record<string, unknown>) => {
 	return caseCloseReasonsSearchMethod({
 		parentId: model.value.selection,
 		...params,

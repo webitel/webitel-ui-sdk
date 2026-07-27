@@ -19,9 +19,12 @@ export type CompatCustomValidator = {
  * declare the prop loosely so consumers are not forced to import `Validation`.
  * Kept structural on purpose: inlining `@vuelidate/core`'s `Validation` here
  * blows up prop-type inference in the components (TS2590).
+ *
+ * `false` is accepted because callers commonly write
+ * `:v="!disableValidation && v$.field"` to opt out of validation.
  */
 // biome-ignore lint/suspicious/noExplicitAny: dynamic per-rule keys, see comment above
-export type VuelidateFieldLike = Record<string, any> | null;
+export type VuelidateFieldLike = Record<string, any> | null | false;
 
 export type UseFieldValidationParams = {
 	field?: Ref<VuelidateFieldLike | undefined>;

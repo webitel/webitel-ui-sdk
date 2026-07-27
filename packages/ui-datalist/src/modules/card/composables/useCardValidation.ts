@@ -1,7 +1,12 @@
+import type { RegleShortcutDefinition } from '@regle/core';
 import type { RegleSchema } from '@regle/schemas';
 import { computed, type Ref } from 'vue';
 
-export const useCardValidation = <TState, TSchema = {}>({
+export const useCardValidation = <
+	// biome-ignore lint/suspicious/noExplicitAny: matches RegleSchema's own state constraint
+	TState extends Record<string, any>,
+	TSchema extends RegleShortcutDefinition = {},
+>({
 	validationSchema,
 }: {
 	validationSchema: Ref<RegleSchema<TState, TSchema>>;

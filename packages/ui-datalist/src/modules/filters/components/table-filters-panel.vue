@@ -10,7 +10,7 @@
           :filter-config="filterConfig"
           @add:filter="emit('filter:add', $event)"
           @update:filter="emit('filter:update', $event)"
-          @delete:filter="emit('filter:delete', filter)"
+          @delete:filter="filter && emit('filter:delete', filter)"
         />
       </div>
 

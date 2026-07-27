@@ -27,7 +27,10 @@ export interface FilterProps {
 	filterConfig: AnyFilterConfig;
 }
 
-export interface StaticFilterProps extends FilterProps {}
+/** the static view lists every config, so the filter is absent until applied */
+export interface StaticFilterProps extends Omit<FilterProps, 'filter'> {
+	filter?: IFilter;
+}
 
 export interface DynamicFilterProps extends FilterProps {
 	readonly?: boolean;

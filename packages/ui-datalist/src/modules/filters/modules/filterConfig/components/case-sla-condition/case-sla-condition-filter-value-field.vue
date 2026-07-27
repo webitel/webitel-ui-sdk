@@ -47,12 +47,12 @@ const model = defineModel<ModelValue>({
 });
 const { t } = useI18n();
 
-const updateSelected = (value) => {
+const updateSelected = (value: string) => {
 	model.value.selection = value;
 	model.value.conditions = '';
 };
 
-const getConditionList = async (params) => {
+const getConditionList = async (params: Record<string, unknown>) => {
 	return await slasConditionsSearchMethod({
 		parentId: model.value.selection,
 		...params,
