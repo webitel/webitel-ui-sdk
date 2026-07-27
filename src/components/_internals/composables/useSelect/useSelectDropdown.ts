@@ -32,11 +32,34 @@ export const useSelectDropdown = ({
 		}
 	};
 
+	/*
+	  @author @HlukhovYe
+
+		https://webitel.atlassian.net/browse/WTEL-10023
+
+	  primevue's onOverlayEnter scrolls the selected option into view using the
+	  index it had before this reorder is reflected in the DOM (Vue batches the
+	  prop update, so primevue's synchronous findSelectedOptionIndex() /
+	  scrollIntoView still act on the stale order). Since our reorder always
+	  puts the selected option at index 0, the list must always open scrolled to
+	  the top -- anywhere else is leftover from that stale index.
+
+	  requestAnimationFrame runs after the browser has applied this frame's
+	  layout (so primevue's own scrollIntoView has already landed) but before
+	  that frame is presented, so snapping scrollTop back to 0 here is invisible
+	  -- no jump.
+	*/
+	let scrollResetRafId: number | null = null;
+
 	const onDropdownBeforeShow = () => {
 		isDropdownOpen.value = true;
 		// @author @HlukhovYe
 		// when user previously selected items, they should be on top only after reopening dropdown
 		filteredOptions.value = sortOptions(filteredOptions.value);
+		scrollResetRafId = requestAnimationFrame(() => {
+			scrollResetRafId = null;
+			getListContainer()?.scrollTo(0, 0);
+		});
 	};
 
 	const onDropdownShow = () => {
@@ -118,6 +141,10 @@ export const useSelectDropdown = ({
 
 	const onDropdownHide = () => {
 		isDropdownOpen.value = false;
+		if (scrollResetRafId !== null) {
+			cancelAnimationFrame(scrollResetRafId);
+			scrollResetRafId = null;
+		}
 		overlayResizeObserver?.disconnect();
 		overlayResizeObserver = null;
 		if (positionRafId !== null) {
