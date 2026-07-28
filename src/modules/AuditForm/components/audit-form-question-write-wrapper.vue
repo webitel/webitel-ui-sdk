@@ -97,6 +97,7 @@ const props = defineProps({
 const emit = defineEmits([
 	'copy',
 	'delete',
+	'answer-type:change',
 ]);
 
 const { t } = useI18n();
@@ -142,6 +143,7 @@ function updateQuestion({ path, value }) {
 
 function handleQuestionTypeChange(type) {
 	if (readonly) return;
+	emit('answer-type:change');
 	const commonFields = {
 		question: questionModel.value.question,
 		required: questionModel.value.required,
