@@ -301,7 +301,7 @@ const get = async ({ itemId: id }: GetItemParams) => {
 		};
 	};
 	try {
-		const response = await contactService.locateContact(id, fields);
+		const response = await contactService.locateContact(String(id), fields);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -443,7 +443,7 @@ const update = async ({ itemInstance }: AddItemParams) => {
 
 const deleteContact = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await contactService.deleteContact(id);
+		const response = await contactService.deleteContact(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

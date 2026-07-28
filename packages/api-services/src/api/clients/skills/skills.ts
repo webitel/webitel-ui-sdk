@@ -59,7 +59,7 @@ const getSkillsList = async (params: ApiParams) => {
 
 const getSkill = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await skillService.readSkill(id);
+		const response = await skillService.readSkill(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,7 +98,7 @@ const updateSkill = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await skillService.updateSkill(id, item);
+		const response = await skillService.updateSkill(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -111,7 +111,7 @@ const updateSkill = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteSkill = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await skillService.deleteSkill(id);
+		const response = await skillService.deleteSkill(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

@@ -101,7 +101,7 @@ const getAgent = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await getAgentService().readAgent(id);
+		const response = await getAgentService().readAgent(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
@@ -149,7 +149,7 @@ const patchAgent = async ({ changes, id }: PatchItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getAgentService().patchAgent(id, body);
+		const response = await getAgentService().patchAgent(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -166,7 +166,7 @@ const updateAgent = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getAgentService().updateAgent(id, item);
+		const response = await getAgentService().updateAgent(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -179,7 +179,7 @@ const updateAgent = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteAgent = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getAgentService().deleteAgent(id);
+		const response = await getAgentService().deleteAgent(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

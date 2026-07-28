@@ -93,7 +93,10 @@ const getPriority = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await priorityService.locatePriority(id, fieldsToSend);
+		const response = await priorityService.locatePriority(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -133,7 +136,7 @@ const updatePriority = async ({
 	]);
 
 	try {
-		const response = await priorityService.updatePriority(id, item);
+		const response = await priorityService.updatePriority(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -146,7 +149,7 @@ const updatePriority = async ({
 
 const deletePriority = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await priorityService.deletePriority(id);
+		const response = await priorityService.deletePriority(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

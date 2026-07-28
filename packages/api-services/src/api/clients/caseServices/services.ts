@@ -109,7 +109,10 @@ const getService = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await servicesService.locateService(id, fieldsToSend);
+		const response = await servicesService.locateService(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -207,7 +210,7 @@ const patchService = async ({ changes, id }: PatchItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await servicesService.updateService2(id, body);
+		const response = await servicesService.updateService2(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -221,7 +224,7 @@ const patchService = async ({ changes, id }: PatchItemParams) => {
 const deleteService = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await servicesService.deleteService([
-			id,
+			String(id),
 		]);
 		return applyTransform(response.data, []);
 	} catch (err) {

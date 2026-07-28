@@ -98,7 +98,10 @@ const getContactGroup = async ({ itemId: id }: GetItemParams) => {
 	const itemResponseHandler = (item: ApiParams) => item.group;
 
 	try {
-		const response = await contactGroupsService.locateGroup(id, fieldsToSend);
+		const response = await contactGroupsService.locateGroup(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -179,7 +182,7 @@ const updateStaticContactGroup = async ({
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup(id, item);
+		const response = await contactGroupsService.updateGroup(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -197,7 +200,7 @@ const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup2(id, item);
+		const response = await contactGroupsService.updateGroup2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -210,7 +213,7 @@ const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 
 const deleteStaticContactGroup = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await contactGroupsService.deleteGroup(id);
+		const response = await contactGroupsService.deleteGroup(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

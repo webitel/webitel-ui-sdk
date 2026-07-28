@@ -77,7 +77,7 @@ const getSla = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await slaService.locateSLA(id, fieldsToSend);
+		const response = await slaService.locateSLA(String(id), fieldsToSend);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -112,7 +112,7 @@ const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await slaService.updateSLA(id, item);
+		const response = await slaService.updateSLA(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -125,7 +125,7 @@ const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteSla = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await slaService.deleteSLA(id);
+		const response = await slaService.deleteSLA(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

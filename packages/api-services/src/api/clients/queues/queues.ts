@@ -144,7 +144,7 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 		return copy;
 	};
 	try {
-		const response = await queueService.readQueue(id);
+		const response = await queueService.readQueue(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(defaultObject),
@@ -182,7 +182,7 @@ const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.updateQueue(id, item);
+		const response = await queueService.updateQueue(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -199,7 +199,7 @@ const patchQueue = async ({ id, changes }: PatchItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.patchQueue(id, item);
+		const response = await queueService.patchQueue(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -212,7 +212,7 @@ const patchQueue = async ({ id, changes }: PatchItemParams) => {
 
 const deleteQueue = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await queueService.deleteQueue(id);
+		const response = await queueService.deleteQueue(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

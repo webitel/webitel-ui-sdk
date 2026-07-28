@@ -99,9 +99,9 @@ const getAuditFormsList = async (params: ApiParams) => {
 	}
 };
 
-const getAuditForm = async ({ itemId: id }: GetItemParams<number>) => {
+const getAuditForm = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await getAuditFormService().readAuditForm(id);
+		const response = await getAuditFormService().readAuditForm(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -147,7 +147,7 @@ const createAuditForm = async ({ itemInstance }: AddItemParams) => {
 const updateAuditForm = async ({
 	itemInstance,
 	itemId: id,
-}: UpdateItemParams<number>) => {
+}: UpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
@@ -156,7 +156,10 @@ const updateAuditForm = async ({
 	]);
 
 	try {
-		const response = await getAuditFormService().updateAuditForm(id, item);
+		const response = await getAuditFormService().updateAuditForm(
+			Number(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -168,7 +171,7 @@ const updateAuditForm = async ({
 	}
 };
 
-const patchAuditForm = async ({ changes, id }: PatchItemParams<number>) => {
+const patchAuditForm = async ({ changes, id }: PatchItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(PatchAuditFormBody);
 
 	const body = applyTransform(changes, [
@@ -177,7 +180,10 @@ const patchAuditForm = async ({ changes, id }: PatchItemParams<number>) => {
 	]);
 
 	try {
-		const response = await getAuditFormService().patchAuditForm(id, body);
+		const response = await getAuditFormService().patchAuditForm(
+			Number(id),
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -189,9 +195,9 @@ const patchAuditForm = async ({ changes, id }: PatchItemParams<number>) => {
 	}
 };
 
-const deleteAuditForm = async ({ id }: DeleteItemParams<number>) => {
+const deleteAuditForm = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getAuditFormService().deleteAuditForm(id);
+		const response = await getAuditFormService().deleteAuditForm(Number(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

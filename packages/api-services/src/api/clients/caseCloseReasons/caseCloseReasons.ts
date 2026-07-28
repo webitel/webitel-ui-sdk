@@ -137,7 +137,7 @@ const updateCloseReason = async ({
 	try {
 		const response = await closeReasonsService.updateCloseReason(
 			itemInstance.id,
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [

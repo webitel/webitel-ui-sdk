@@ -14,8 +14,8 @@ import {
 } from '../../../transformers';
 import type {
 	AddItemParams,
+	ApiId,
 	ApiParams,
-	DeleteItemParams,
 	UpdateItemParams,
 } from '../../_shared/types';
 
@@ -138,7 +138,7 @@ const updateAdjunctType = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().updateType(id, item);
+		const response = await getDictionaries().updateType(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -150,12 +150,14 @@ const updateAdjunctType = async ({
 	}
 };
 
-const deleteAdjunctType = async ({ id }: DeleteItemParams) => {
-	const repo = Array.isArray(id)
-		? id
-		: [
-				id,
-			];
+const deleteAdjunctType = async ({ id }: { id: ApiId | ApiId[] }) => {
+	const repo = (
+		Array.isArray(id)
+			? id
+			: [
+					id,
+				]
+	).map(String);
 	try {
 		const response = await getDictionaries().deleteType({
 			repo,

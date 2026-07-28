@@ -61,9 +61,9 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const get = async ({ itemId: id }: GetItemParams<number>) => {
+const get = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await configurationService.readSystemSetting(id);
+		const response = await configurationService.readSystemSetting(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -97,16 +97,16 @@ const add = async ({ itemInstance }: AddItemParams) => {
 	}
 };
 
-const update = async ({
-	itemInstance,
-	itemId: id,
-}: UpdateItemParams<number>) => {
+const update = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await configurationService.updateSystemSetting(id, item);
+		const response = await configurationService.updateSystemSetting(
+			Number(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -125,9 +125,9 @@ const getLookup = (params: Parameters<typeof getList>[0]) =>
 		],
 	});
 
-const deleteItem = async ({ id }: DeleteItemParams<number>) => {
+const deleteItem = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await configurationService.deleteSystemSetting(id);
+		const response = await configurationService.deleteSystemSetting(Number(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

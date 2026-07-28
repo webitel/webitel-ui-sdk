@@ -95,7 +95,7 @@ const getCalendar = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await calendarService.readCalendar(id);
+		const response = await calendarService.readCalendar(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -171,7 +171,7 @@ const updateCalendar = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await calendarService.updateCalendar(id, item);
+		const response = await calendarService.updateCalendar(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -184,7 +184,7 @@ const updateCalendar = async ({
 
 const deleteCalendar = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await calendarService.deleteCalendar(id);
+		const response = await calendarService.deleteCalendar(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

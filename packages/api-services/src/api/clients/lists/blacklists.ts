@@ -68,7 +68,7 @@ const getBlacklistList = async (params: ApiParams) => {
 
 const getBlacklist = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await listService.readList(id);
+		const response = await listService.readList(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -110,7 +110,7 @@ const updateBlacklist = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await listService.updateList(id, item);
+		const response = await listService.updateList(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -123,7 +123,7 @@ const updateBlacklist = async ({
 
 const deleteBlacklist = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await listService.deleteList(id);
+		const response = await listService.deleteList(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

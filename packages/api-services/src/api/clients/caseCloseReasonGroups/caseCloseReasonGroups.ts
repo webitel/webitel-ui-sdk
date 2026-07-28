@@ -84,7 +84,7 @@ const getCloseReasonGroups = async ({ itemId: id }: GetItemParams) => {
 
 	try {
 		const response = await closeReasonGroupsService.locateCloseReasonGroup(
-			id,
+			String(id),
 			fieldsToSend,
 		);
 		return applyTransform(response.data, [
@@ -126,7 +126,7 @@ const updateCloseReasonGroups = async ({
 	]);
 	try {
 		const response = await closeReasonGroupsService.updateCloseReasonGroup(
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -141,7 +141,9 @@ const updateCloseReasonGroups = async ({
 
 const deleteCloseReasonGroups = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await closeReasonGroupsService.deleteCloseReasonGroup(id);
+		const response = await closeReasonGroupsService.deleteCloseReasonGroup(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

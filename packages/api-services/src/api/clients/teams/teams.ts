@@ -90,7 +90,7 @@ const getTeam = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await teamService.readAgentTeam(id);
+		const response = await teamService.readAgentTeam(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
@@ -125,7 +125,7 @@ const updateTeam = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await teamService.updateAgentTeam(id, item);
+		const response = await teamService.updateAgentTeam(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -138,7 +138,7 @@ const updateTeam = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteTeam = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await teamService.deleteAgentTeam(id);
+		const response = await teamService.deleteAgentTeam(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

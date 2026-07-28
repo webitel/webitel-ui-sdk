@@ -121,7 +121,7 @@ const getCatalog = async ({ itemId: id }: GetItemParams) => {
 
 	try {
 		const response = await catalogsService.locateCatalog(
-			id,
+			String(id),
 			fieldsToSend,
 			servicesFieldsToSend,
 		);
@@ -188,7 +188,7 @@ const updateCatalog = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog(id, item);
+		const response = await catalogsService.updateCatalog(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -210,7 +210,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog2(id, item);
+		const response = await catalogsService.updateCatalog2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -224,7 +224,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 const deleteCatalog = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await catalogsService.deleteCatalog([
-			id,
+			String(id),
 		]);
 		return applyTransform(response.data, []);
 	} catch (err) {

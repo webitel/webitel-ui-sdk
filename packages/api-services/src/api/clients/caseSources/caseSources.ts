@@ -61,7 +61,7 @@ const getSource = async ({ itemId: id }: GetItemParams) => {
 	const itemResponseHandler = (item: ApiParams) => item.source; // TODO wtf??
 
 	try {
-		const response = await getSources().locateSource(id);
+		const response = await getSources().locateSource(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -97,7 +97,7 @@ const updateSource = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	]);
 
 	try {
-		const response = await getSources().updateSource(id, item);
+		const response = await getSources().updateSource(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -110,7 +110,7 @@ const updateSource = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteSource = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getSources().deleteSource(id);
+		const response = await getSources().deleteSource(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

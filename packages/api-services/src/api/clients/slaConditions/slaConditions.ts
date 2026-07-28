@@ -136,7 +136,7 @@ const updateCondition = async ({
 	try {
 		const response = await slaConditionsService.updateSLACondition(
 			itemInstance.slaId,
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [

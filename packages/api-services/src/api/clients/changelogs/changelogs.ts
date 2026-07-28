@@ -57,9 +57,11 @@ const getChangelogsList = async (params: ApiParams) => {
 	}
 };
 
-const getChangelog = async ({ itemId: id }: GetItemParams<number>) => {
+const getChangelog = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await getConfigService().configServiceReadConfig(id);
+		const response = await getConfigService().configServiceReadConfig(
+			Number(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -92,7 +94,7 @@ const addChangelog = async ({ itemInstance }: AddItemParams) => {
 const updateChangelog = async ({
 	itemInstance,
 	itemId: id,
-}: UpdateItemParams<number>) => {
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(
@@ -102,7 +104,7 @@ const updateChangelog = async ({
 
 	try {
 		const response = await getConfigService().configServiceUpdateConfig(
-			id,
+			Number(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -115,14 +117,14 @@ const updateChangelog = async ({
 	}
 };
 
-const patchChangelog = async ({ id, changes }: PatchItemParams<number>) => {
+const patchChangelog = async ({ id, changes }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(getShallowFieldsToSendFromZodSchema(ConfigServicePatchConfigBody)),
 		camelToSnake(),
 	]);
 	try {
 		const response = await getConfigService().configServicePatchConfig(
-			id,
+			Number(id),
 			body,
 		);
 		return applyTransform(response.data, [
@@ -135,9 +137,11 @@ const patchChangelog = async ({ id, changes }: PatchItemParams<number>) => {
 	}
 };
 
-const deleteChangelog = async ({ id }: DeleteItemParams<number>) => {
+const deleteChangelog = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getConfigService().configServiceDeleteConfig(id);
+		const response = await getConfigService().configServiceDeleteConfig(
+			Number(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

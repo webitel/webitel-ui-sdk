@@ -117,7 +117,7 @@ const getFlow = async ({ itemId: id }: GetItemParams) => {
 	});
 
 	try {
-		const response = await flowService.readRoutingSchema(id);
+		const response = await flowService.readRoutingSchema(String(id));
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -176,7 +176,7 @@ const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		}),
 	]);
 	try {
-		const response = await flowService.updateRoutingSchema(id, item);
+		const response = await flowService.updateRoutingSchema(String(id), item);
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -193,7 +193,7 @@ const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteFlow = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await flowService.deleteRoutingSchema(id);
+		const response = await flowService.deleteRoutingSchema(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

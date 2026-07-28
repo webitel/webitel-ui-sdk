@@ -76,9 +76,9 @@ const getQuickRepliesList = async (params: ApiParams) => {
 	}
 };
 
-const getQuickReply = async ({ itemId: id }: GetItemParams<number>) => {
+const getQuickReply = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await getQuickRepliesService().readQuickReply(id);
+		const response = await getQuickRepliesService().readQuickReply(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -109,14 +109,17 @@ const addQuickReply = async ({ itemInstance }: AddItemParams) => {
 const updateQuickReply = async ({
 	itemInstance,
 	itemId: id,
-}: UpdateItemParams<number>) => {
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await getQuickRepliesService().updateQuickReply(id, item);
+		const response = await getQuickRepliesService().updateQuickReply(
+			Number(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -127,9 +130,11 @@ const updateQuickReply = async ({
 	}
 };
 
-const deleteQuickReply = async ({ id }: DeleteItemParams<number>) => {
+const deleteQuickReply = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getQuickRepliesService().deleteQuickReply(id);
+		const response = await getQuickRepliesService().deleteQuickReply(
+			Number(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

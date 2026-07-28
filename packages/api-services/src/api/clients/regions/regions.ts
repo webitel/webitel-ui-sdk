@@ -59,7 +59,7 @@ const getRegionsList = async (params: ApiParams) => {
 
 const getRegion = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await regionService.readRegion(id);
+		const response = await regionService.readRegion(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -99,7 +99,7 @@ const updateRegion = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await regionService.updateRegion(id, item);
+		const response = await regionService.updateRegion(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -112,7 +112,7 @@ const updateRegion = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteRegion = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await regionService.deleteRegion(id);
+		const response = await regionService.deleteRegion(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

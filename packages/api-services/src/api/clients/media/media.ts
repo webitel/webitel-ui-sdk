@@ -136,7 +136,7 @@ const addMedia = async (params: ApiParams) => {
 
 const deleteMedia = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await mediaService.deleteMediaFile(id);
+		const response = await mediaService.deleteMediaFile(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

@@ -59,7 +59,7 @@ const getBucketsList = async (params: ApiParams) => {
 
 const getBucket = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await bucketService.readBucket(id);
+		const response = await bucketService.readBucket(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,7 +98,7 @@ const updateBucket = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await bucketService.updateBucket(id, item);
+		const response = await bucketService.updateBucket(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -111,7 +111,7 @@ const updateBucket = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteBucket = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await bucketService.deleteBucket(id);
+		const response = await bucketService.deleteBucket(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

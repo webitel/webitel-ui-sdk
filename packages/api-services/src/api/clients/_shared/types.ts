@@ -5,27 +5,27 @@
 // biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type ApiParams = Record<string, any>;
 
-/** most services take string ids; a few generated clients declare `number` */
-export type ApiId = string;
+/** ids reach the clients as route params or as numbers, depending on the caller */
+export type ApiId = string | number;
 
-export interface GetItemParams<Id = ApiId> {
-	itemId: Id;
+export interface GetItemParams {
+	itemId: ApiId;
 }
 
 export interface AddItemParams {
 	itemInstance: ApiParams;
 }
 
-export interface UpdateItemParams<Id = ApiId> {
+export interface UpdateItemParams {
 	itemInstance: ApiParams;
-	itemId: Id;
+	itemId: ApiId;
 }
 
-export interface PatchItemParams<Id = ApiId> {
+export interface PatchItemParams {
 	changes: ApiParams;
-	id: Id;
+	id: ApiId;
 }
 
-export interface DeleteItemParams<Id = ApiId> {
-	id: Id;
+export interface DeleteItemParams {
+	id: ApiId;
 }

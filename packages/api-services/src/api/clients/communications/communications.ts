@@ -75,7 +75,9 @@ const getCommunicationsList = async (params: ApiParams) => {
 
 const getCommunication = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await communicationService.readCommunicationType(id);
+		const response = await communicationService.readCommunicationType(
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -118,7 +120,7 @@ const patchCommunication = async ({ changes, id }: PatchItemParams) => {
 	]);
 	try {
 		const response = await communicationService.patchCommunicationType(
-			id,
+			String(id),
 			body,
 		);
 		return applyTransform(response.data, [
@@ -141,7 +143,7 @@ const updateCommunication = async ({
 	]);
 	try {
 		const response = await communicationService.updateCommunicationType(
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -156,7 +158,9 @@ const updateCommunication = async ({
 
 const deleteCommunication = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await communicationService.deleteCommunicationType(id);
+		const response = await communicationService.deleteCommunicationType(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

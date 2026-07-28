@@ -79,7 +79,10 @@ const getStatus = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await statusesService.locateStatus(id, fieldsToSend);
+		const response = await statusesService.locateStatus(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -116,7 +119,7 @@ const updateStatus = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	]);
 
 	try {
-		const response = await statusesService.updateStatus(id, item);
+		const response = await statusesService.updateStatus(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -129,7 +132,7 @@ const updateStatus = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteStatus = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await statusesService.deleteStatus(id);
+		const response = await statusesService.deleteStatus(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
