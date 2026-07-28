@@ -10,7 +10,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getList = async (params: ApiParams) => {
 	const defaultObject = {
@@ -64,8 +64,8 @@ const get = async ({
 	itemId,
 	parentId,
 }: {
-	itemId: string;
-	parentId: string;
+	itemId: ApiId;
+	parentId: ApiId;
 }) => {
 	const fields = [
 		'email',
@@ -74,9 +74,13 @@ const get = async ({
 		'type',
 	];
 	try {
-		const response = await getEmails().locateEmail(parentId, itemId, {
-			fields,
-		});
+		const response = await getEmails().locateEmail(
+			String(parentId),
+			String(itemId),
+			{
+				fields,
+			},
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -99,7 +103,7 @@ const add = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	emails: ApiParams[];
 	params: ApiParams;
 	options: ApiParams;
@@ -111,7 +115,7 @@ const add = async ({
 
 	try {
 		const response = await getEmails().mergeEmails(
-			contactId,
+			String(contactId),
 			item,
 			params,
 			options,
@@ -132,14 +136,14 @@ const update = async ({
 }: {
 	itemInstance: ApiParams;
 	etag: string;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().updateEmail(parentId, id, item);
+		const response = await getEmails().updateEmail(String(parentId), id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -155,7 +159,7 @@ const patch = async ({
 	changes,
 	etag,
 }: {
-	parentId: string;
+	parentId: ApiId;
 	changes: ApiParams;
 	etag: string;
 }) => {
@@ -164,7 +168,11 @@ const patch = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().updateEmail(parentId, etag, body);
+		const response = await getEmails().updateEmail(
+			String(parentId),
+			etag,
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -180,10 +188,10 @@ const deleteItem = async ({
 	parentId,
 }: {
 	etag: string;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	try {
-		const response = await getEmails().deleteEmail(parentId, etag);
+		const response = await getEmails().deleteEmail(String(parentId), etag);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

@@ -19,6 +19,7 @@ import {
 	starToSearch,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type { ApiId } from '../_shared/types';
 
 const oauthAppFieldsToSend = getShallowFieldsToSendFromZodSchema(
 	CreateOAuthServiceBody,
@@ -109,7 +110,7 @@ const updateOAuthApp = async ({
 	itemId: id,
 }: {
 	itemInstance: Record<string, unknown>;
-	itemId: string;
+	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
 		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthServiceBody)),
@@ -118,7 +119,7 @@ const updateOAuthApp = async ({
 
 	try {
 		const response = await getOauth2Federation().updateOAuthService(
-			id,
+			String(id),
 			changes,
 		);
 		return applyTransform(response.data, [
@@ -136,7 +137,7 @@ const patchOAuthApp = async ({
 	id,
 }: {
 	changes: Record<string, unknown>;
-	id: string;
+	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
 		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthService2Body)),
@@ -145,7 +146,7 @@ const patchOAuthApp = async ({
 
 	try {
 		const response = await getOauth2Federation().updateOAuthService2(
-			id,
+			String(id),
 			changesBody,
 		);
 		return applyTransform(response.data, [
@@ -183,7 +184,7 @@ const deleteOAuthApps = async ({
 	id,
 	permanent,
 }: {
-	id: string[];
+	id: ApiId[];
 	permanent?: boolean;
 }) => {
 	const body = applyTransform(

@@ -14,6 +14,7 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type {
+	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
@@ -90,7 +91,7 @@ export const downloadFile = (id: string) => {
 };
 
 export const getCallMediaUrl = (
-	id: string,
+	id: ApiId,
 	{
 		download = false,
 	}: {
@@ -101,7 +102,7 @@ export const getCallMediaUrl = (
 	return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
 };
 
-export const getMediaUrl = (id: string, isThumb: boolean = false) => {
+export const getMediaUrl = (id: ApiId, isThumb: boolean = false) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${accessToken}&fetch_thumbnail=${isThumb}`;
 	return url;

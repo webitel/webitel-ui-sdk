@@ -17,6 +17,7 @@ import {
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
+	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
@@ -156,12 +157,12 @@ const removeContactsFromGroup = async ({
 	id,
 	contactIds,
 }: {
-	id: string;
+	id: ApiId;
 	contactIds: string[];
 }) => {
 	try {
 		const response = await contactGroupsService.removeContactsFromGroup(
-			id,
+			String(id),
 			contactIds,
 		);
 		return applyTransform(response.data, []);

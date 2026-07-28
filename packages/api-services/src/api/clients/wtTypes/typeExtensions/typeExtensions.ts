@@ -7,7 +7,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../../transformers';
-import type { ApiParams } from '../../_shared/types';
+import type { ApiId, ApiParams } from '../../_shared/types';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const instance = getDefaultInstance();
@@ -63,7 +63,7 @@ const addTypeExtension = async ({
 	itemId: typeRepo,
 }: {
 	itemInstance: ApiParams;
-	itemId: string;
+	itemId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
@@ -71,7 +71,10 @@ const addTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.createType(typeRepo, item);
+		const response = await typeExtensionsService.createType(
+			String(typeRepo),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
@@ -83,14 +86,10 @@ const addTypeExtension = async ({
 	}
 };
 
-const deleteTypeExtension = async ({
-	itemId: typeRepo,
-}: {
-	itemId: string;
-}) => {
+const deleteTypeExtension = async ({ itemId: typeRepo }: { itemId: ApiId }) => {
 	try {
 		await typeExtensionsService.deleteType([
-			typeRepo,
+			String(typeRepo),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -104,7 +103,7 @@ const updateTypeExtension = async ({
 	itemId: typeRepo,
 }: {
 	itemInstance: ApiParams;
-	itemId: string;
+	itemId: ApiId;
 }) => {
 	if (!itemInstance.fields.length && itemInstance.isNew) {
 		return itemInstance;
@@ -128,7 +127,10 @@ const updateTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.updateType(typeRepo, item);
+		const response = await typeExtensionsService.updateType(
+			String(typeRepo),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,

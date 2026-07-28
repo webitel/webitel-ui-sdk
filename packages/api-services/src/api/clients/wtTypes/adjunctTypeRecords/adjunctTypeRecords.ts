@@ -15,7 +15,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../../transformers';
-import type { ApiParams } from '../../_shared/types';
+import type { ApiId, ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 
@@ -71,11 +71,11 @@ const getAdjunctTypeRecord = async ({
 	itemId: id,
 	repo,
 }: {
-	itemId: string;
+	itemId: ApiId;
 	repo: string;
 }) => {
 	try {
-		const response = await getDictionaries().locateData(repo, id);
+		const response = await getDictionaries().locateData(repo, String(id));
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
@@ -117,7 +117,7 @@ const updateAdjunctTypeRecord = async ({
 }: {
 	itemInstance: ApiParams;
 	fieldsToSend: string[];
-	itemId: string;
+	itemId: ApiId;
 	repo: string;
 }) => {
 	const item = applyTransform(itemInstance, [
@@ -125,7 +125,7 @@ const updateAdjunctTypeRecord = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().updateData(repo, id, item);
+		const response = await getDictionaries().updateData(repo, String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -141,13 +141,15 @@ const deleteAdjunctTypeRecord = async ({
 	id,
 }: {
 	repo: string;
-	id: string;
+	id: ApiId | ApiId[];
 }) => {
-	const ids = Array.isArray(id)
-		? id
-		: [
-				id,
-			];
+	const ids = (
+		Array.isArray(id)
+			? id
+			: [
+					id,
+				]
+	).map(String);
 	try {
 		const response = await getDictionaries().deleteData2(repo, ids);
 		return response.data;

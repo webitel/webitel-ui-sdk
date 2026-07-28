@@ -10,7 +10,7 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,8 +25,8 @@ const getChat = async ({
 	contactId,
 	chatId,
 }: {
-	contactId: string;
-	chatId: string;
+	contactId: ApiId;
+	chatId: ApiId;
 }) => {
 	const mergeChatMessagesData = ({
 		messages,
@@ -46,8 +46,8 @@ const getChat = async ({
 
 	try {
 		const response = await contactChatService.getContactChatHistory(
-			contactId,
-			chatId,
+			String(contactId),
+			String(chatId),
 		);
 		const { messages, peers } = applyTransform(response.data, [
 			snakeToCamel(),

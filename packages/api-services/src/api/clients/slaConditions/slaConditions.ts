@@ -13,7 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams, UpdateItemParams } from '../_shared/types';
+import type { ApiId, ApiParams, UpdateItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -36,7 +36,7 @@ const getConditionsList = async ({
 	parentId,
 	...rest
 }: {
-	parentId: string;
+	parentId: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -70,7 +70,7 @@ const getConditionsList = async ({
 
 	try {
 		const response = await slaConditionsService.listSLAConditions(
-			parentId,
+			String(parentId),
 			page,
 			size,
 			fields,
@@ -100,8 +100,8 @@ const getCondition = async ({
 	parentId,
 	itemId: id,
 }: {
-	parentId: string;
-	itemId: string;
+	parentId: ApiId;
+	itemId: ApiId;
 }) => {
 	const itemResponseHandler = (item: ApiParams) => {
 		return item.slaCondition;
@@ -109,8 +109,8 @@ const getCondition = async ({
 
 	try {
 		const response = await slaConditionsService.locateSLACondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			fieldsToSend,
 		);
 		return applyTransform(response.data, [
@@ -154,7 +154,7 @@ const addCondition = async ({
 	parentId,
 }: {
 	itemInstance: ApiParams;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -163,7 +163,7 @@ const addCondition = async ({
 
 	try {
 		const response = await slaConditionsService.createSLACondition(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -180,13 +180,13 @@ const deleteCondition = async ({
 	id,
 	parentId,
 }: {
-	id: string;
-	parentId: string;
+	id: ApiId;
+	parentId: ApiId;
 }) => {
 	try {
 		const response = await slaConditionsService.deleteSLACondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {

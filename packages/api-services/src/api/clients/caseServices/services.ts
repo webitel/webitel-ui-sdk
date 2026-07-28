@@ -15,6 +15,7 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type {
+	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
@@ -44,7 +45,7 @@ const getServicesList = async ({
 	rootId,
 	...rest
 }: {
-	rootId: string;
+	rootId: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -72,7 +73,7 @@ const getServicesList = async ({
 			sort,
 			id,
 			q,
-			rootId,
+			String(rootId),
 			undefined,
 			fields,
 		);
@@ -128,8 +129,8 @@ const preRequestHandler = ({
 	rootId,
 	catalogId,
 }: {
-	rootId: string;
-	catalogId: string;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
 	return (item: ApiParams) => ({
 		...item,
@@ -148,8 +149,8 @@ const addService = async ({
 	catalogId,
 }: {
 	itemInstance: ApiParams;
-	rootId: string;
-	catalogId: string;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
@@ -179,9 +180,9 @@ const updateService = async ({
 	catalogId,
 }: {
 	itemInstance: ApiParams;
-	itemId: string;
-	rootId: string;
-	catalogId: string;
+	itemId: ApiId;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
@@ -193,7 +194,7 @@ const updateService = async ({
 	]);
 
 	try {
-		const response = await servicesService.updateService(id, item);
+		const response = await servicesService.updateService(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

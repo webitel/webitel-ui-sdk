@@ -11,7 +11,7 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../../transformers';
-import type { ApiParams } from '../../_shared/types';
+import type { ApiId, ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -27,13 +27,13 @@ const getTranscript = async ({
 	page = 1,
 	size = 10000,
 }: {
-	id: string;
+	id: ApiId;
 	page?: number;
 	size?: number;
 }) => {
 	try {
 		const response = await transcriptService.getFileTranscriptPhrases(
-			id,
+			String(id),
 			page,
 			size,
 		);
@@ -82,8 +82,8 @@ const deleteTranscript = async (item: ApiParams) => {
 		fileId,
 		callId,
 	}: {
-		fileId: string;
-		callId: string;
+		fileId: ApiId;
+		callId: ApiId;
 	}) => {
 		if (fileId) {
 			return {

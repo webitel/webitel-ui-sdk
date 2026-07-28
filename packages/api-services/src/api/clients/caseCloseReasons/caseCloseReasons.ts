@@ -13,7 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams, UpdateItemParams } from '../_shared/types';
+import type { ApiId, ApiParams, UpdateItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -29,7 +29,7 @@ const getCloseReasonsList = async ({
 	parentId,
 	...rest
 }: {
-	parentId: string;
+	parentId: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -51,7 +51,7 @@ const getCloseReasonsList = async ({
 	]);
 	try {
 		const response = await closeReasonsService.listCloseReasons(
-			parentId,
+			String(parentId),
 			page,
 			size,
 			fields,
@@ -79,15 +79,18 @@ const getCloseReason = async ({
 	parentId,
 	itemId: id,
 }: {
-	parentId: string;
-	itemId: string;
+	parentId: ApiId;
+	itemId: ApiId;
 }) => {
 	const itemResponseHandler = (item: ApiParams) => {
 		return item.closeReason;
 	};
 
 	try {
-		const response = await closeReasonsService.locateCloseReason(parentId, id);
+		const response = await closeReasonsService.locateCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -104,7 +107,7 @@ const addCloseReason = async ({
 	parentId,
 }: {
 	itemInstance: ApiParams;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -113,7 +116,7 @@ const addCloseReason = async ({
 
 	try {
 		const response = await closeReasonsService.createCloseReason(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -154,11 +157,14 @@ const deleteCloseReason = async ({
 	id,
 	parentId,
 }: {
-	id: string;
-	parentId: string;
+	id: ApiId;
+	parentId: ApiId;
 }) => {
 	try {
-		const response = await closeReasonsService.deleteCloseReason(parentId, id);
+		const response = await closeReasonsService.deleteCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

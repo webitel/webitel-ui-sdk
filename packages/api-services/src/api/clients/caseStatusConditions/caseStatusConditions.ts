@@ -13,7 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -34,8 +34,8 @@ const getStatusConditionsList = async ({
 	parentId,
 	...rest
 }: {
-	statusId: string;
-	parentId: string;
+	statusId: ApiId;
+	parentId: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -58,7 +58,7 @@ const getStatusConditionsList = async ({
 
 	try {
 		const response = await statusConditionsService.listStatusConditions(
-			statusId || parentId,
+			String(statusId || parentId),
 			page,
 			size,
 			fields,
@@ -86,8 +86,8 @@ const getStatusCondition = async ({
 	parentId,
 	itemId: id,
 }: {
-	parentId: string;
-	itemId: string;
+	parentId: ApiId;
+	itemId: ApiId;
 }) => {
 	const itemResponseHandler = (item: ApiParams) => {
 		return item.status;
@@ -95,8 +95,8 @@ const getStatusCondition = async ({
 
 	try {
 		const response = await statusConditionsService.locateStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			fieldsToSend,
 		);
 		return applyTransform(response.data, [
@@ -116,8 +116,8 @@ const updateStatusCondition = async ({
 	parentId,
 }: {
 	itemInstance: ApiParams;
-	itemId: string;
-	parentId: string;
+	itemId: ApiId;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -126,8 +126,8 @@ const updateStatusCondition = async ({
 
 	try {
 		const response = await statusConditionsService.updateStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -145,7 +145,7 @@ const addStatusCondition = async ({
 	parentId,
 }: {
 	itemInstance: ApiParams;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -154,7 +154,7 @@ const addStatusCondition = async ({
 
 	try {
 		const response = await statusConditionsService.createStatusCondition(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -172,8 +172,8 @@ const patchStatusCondition = async ({
 	parentId,
 	changes,
 }: {
-	id: string;
-	parentId: string;
+	id: ApiId;
+	parentId: ApiId;
 	changes: ApiParams;
 }) => {
 	const fieldsToSend = [
@@ -189,8 +189,8 @@ const patchStatusCondition = async ({
 
 	try {
 		const response = await statusConditionsService.updateStatusCondition2(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			input,
 		);
 		return applyTransform(response.data, []);
@@ -205,13 +205,13 @@ const deleteStatusCondition = async ({
 	id,
 	parentId,
 }: {
-	id: string;
-	parentId: string;
+	id: ApiId;
+	parentId: ApiId;
 }) => {
 	try {
 		const response = await statusConditionsService.deleteStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {

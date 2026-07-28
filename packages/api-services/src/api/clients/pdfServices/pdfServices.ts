@@ -15,13 +15,13 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const createScreenrecordingExport = async ({
 	agentId,
 	itemInstance,
 }: {
-	agentId: string;
+	agentId: ApiId;
 	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
@@ -33,7 +33,7 @@ const createScreenrecordingExport = async ({
 
 	try {
 		const response = await getPdfService().createScreenrecordingExport(
-			agentId,
+			String(agentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -86,7 +86,7 @@ const createCallExport = async ({
 	callId,
 	itemInstance,
 }: {
-	callId: string;
+	callId: ApiId;
 	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
@@ -95,7 +95,10 @@ const createCallExport = async ({
 	]);
 
 	try {
-		const response = await getPdfService().createCallExport(callId, item);
+		const response = await getPdfService().createCallExport(
+			String(callId),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

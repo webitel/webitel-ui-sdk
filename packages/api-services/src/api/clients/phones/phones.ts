@@ -9,14 +9,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getPhonesList = async ({
 	contactId,
 	options,
 	...params
 }: {
-	contactId: string;
+	contactId: ApiId;
 	options: ApiParams;
 } & ApiParams) => {
 	const listParams = applyTransform(params, [
@@ -25,7 +25,7 @@ const getPhonesList = async ({
 	]);
 	try {
 		const response = await getPhones().listPhones(
-			contactId,
+			String(contactId),
 			listParams,
 			options,
 		);
@@ -50,14 +50,14 @@ const getPhone = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	etag: string;
 	params: ApiParams;
 	options: ApiParams;
 }) => {
 	try {
 		const response = await getPhones().locatePhone(
-			contactId,
+			String(contactId),
 			etag,
 			params,
 			options,
@@ -78,7 +78,7 @@ const mergePhones = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	phones: ApiParams[];
 	params: ApiParams;
 	options: ApiParams;
@@ -88,7 +88,7 @@ const mergePhones = async ({
 	]);
 	try {
 		const response = await getPhones().mergePhones(
-			contactId,
+			String(contactId),
 			body,
 			params,
 			options,
@@ -109,7 +109,7 @@ const resetPhones = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	phones: ApiParams[];
 	params: ApiParams;
 	options: ApiParams;
@@ -119,7 +119,7 @@ const resetPhones = async ({
 	]);
 	try {
 		const response = await getPhones().resetPhones(
-			contactId,
+			String(contactId),
 			body,
 			params,
 			options,
@@ -141,7 +141,7 @@ const updatePhone = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	etag: string;
 	data: ApiParams;
 	params: ApiParams;
@@ -152,7 +152,7 @@ const updatePhone = async ({
 	]);
 	try {
 		const response = await getPhones().updatePhone(
-			contactId,
+			String(contactId),
 			etag,
 			body,
 			params,
@@ -175,7 +175,7 @@ const patchPhone = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	etag: string;
 	changes: ApiParams;
 	params: ApiParams;
@@ -186,7 +186,7 @@ const patchPhone = async ({
 	]);
 	try {
 		const response = await getPhones().updatePhone2(
-			contactId,
+			String(contactId),
 			etag,
 			body,
 			params,
@@ -208,14 +208,14 @@ const deletePhone = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	etag: string;
 	params: ApiParams;
 	options: ApiParams;
 }) => {
 	try {
 		const response = await getPhones().deletePhone(
-			contactId,
+			String(contactId),
 			etag,
 			params,
 			options,
@@ -235,12 +235,16 @@ const deletePhones = async ({
 	params,
 	options,
 }: {
-	contactId: string;
+	contactId: ApiId;
 	params: DeletePhonesParams;
 	options: ApiParams;
 }) => {
 	try {
-		const response = await getPhones().deletePhones(contactId, params, options);
+		const response = await getPhones().deletePhones(
+			String(contactId),
+			params,
+			options,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

@@ -14,7 +14,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams, PatchItemParams } from './types';
+import type { ApiId, ApiParams, PatchItemParams } from './types';
 
 const permissionsUrl = 'acl';
 
@@ -49,7 +49,7 @@ export const generatePermissionsApi = (baseUrl: string) => {
 		parentId,
 		...params
 	}: {
-		parentId: string;
+		parentId: ApiId;
 	} & ApiParams) => {
 		const fieldsToSend = [
 			'page',
