@@ -19,6 +19,7 @@
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
+    @answer-type:change="handleAnswerTypeChange"
     @copy="emit('copy')"
     @delete="emit('delete')"
   />
@@ -116,9 +117,18 @@ const component = computed(() => {
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
+const skipNextClickaway = ref(false);
 
 function saveQuestion() {
+	if (skipNextClickaway.value) {
+		skipNextClickaway.value = false;
+		return;
+	}
 	state.value = QuestionState.SAVED;
+}
+
+function handleAnswerTypeChange() {
+	skipNextClickaway.value = true;
 }
 
 function activateQuestion() {
