@@ -22,7 +22,7 @@
           >
             <img
               :alt="currentApp"
-              :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
+              :src="darkMode ? appLogo[currentApp]?.dark : appLogo[currentApp]?.light
                 "
               class="wt-navigation-bar__app-pic"
             />
@@ -127,12 +127,15 @@ import WfmLight from './assets/light/app-logo-light-wfm.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import type { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
-const appLogo: Record<
-	string,
-	{
-		dark: string;
-		light: string;
-	}
+/** partial: `Analytics` and `Meet` ship no logo */
+const appLogo: Partial<
+	Record<
+		WtApplication,
+		{
+			dark: string;
+			light: string;
+		}
+	>
 > = {
 	[WtApplication.Supervisor]: {
 		dark: SupervisorDark,
@@ -176,8 +179,8 @@ export default {
 		 * @default 'admin'
 		 */
 		currentApp: {
-			type: String,
-			default: 'admin',
+			type: String as PropType<WtApplication>,
+			default: WtApplication.Admin,
 		},
 		/**
 		 * Should receive array of nav objects. All objects should have following properties:
