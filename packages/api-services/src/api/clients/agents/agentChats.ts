@@ -8,7 +8,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getChatsList = async (params: ApiParams) => {
 	const { size, page, onlyClosed, onlyUnprocessed } = applyTransform(params, [
@@ -63,11 +63,13 @@ const getChatCount = async (params: ApiParams) => {
 	}
 };
 
-const markChatProcessed = async (chatId: string) => {
+const markChatProcessed = async (chatId: ApiId) => {
 	// add to chat unprocessedClose: true
 	try {
 		const response =
-			await getAgentChatService().agentChatServiceMarkChatProcessed(chatId);
+			await getAgentChatService().agentChatServiceMarkChatProcessed(
+				String(chatId),
+			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

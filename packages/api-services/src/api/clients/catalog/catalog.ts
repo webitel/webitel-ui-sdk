@@ -1,14 +1,14 @@
 import { CatalogApiFactory } from 'webitel-sdk';
 import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../defaults';
 import { applyTransform, notify, snakeToCamel } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const catalogService = CatalogApiFactory(configuration, '', instance);
 
-const getChatMessagesList = async ({ chatId }: { chatId: string }) => {
+const getChatMessagesList = async ({ chatId }: { chatId: ApiId }) => {
 	const mergeMessagesData = ({
 		messages,
 		peers,
@@ -26,7 +26,7 @@ const getChatMessagesList = async ({ chatId }: { chatId: string }) => {
 	};
 
 	try {
-		const response = await catalogService.getHistory(chatId);
+		const response = await catalogService.getHistory(String(chatId));
 		const { messages, peers } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);

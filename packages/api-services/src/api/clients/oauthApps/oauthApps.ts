@@ -68,10 +68,10 @@ const getOAuthAppsList = async (params: Record<string, unknown>) => {
 	}
 };
 
-const getOAuthApp = async ({ itemId: id }: { itemId: string }) => {
+const getOAuthApp = async ({ itemId: id }: { itemId: ApiId }) => {
 	try {
 		const response = await getOauth2Federation().locateOAuthService([
-			id,
+			String(id),
 		]);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -159,7 +159,7 @@ const patchOAuthApp = async ({
 	}
 };
 
-const deleteOAuthApp = async ({ id }: { id: string }) => {
+const deleteOAuthApp = async ({ id }: { id: ApiId }) => {
 	const body = applyTransform({}, [
 		sanitize(getShallowFieldsToSendFromZodSchema(DeleteOAuthService2Body)),
 		camelToSnake(),
@@ -168,7 +168,7 @@ const deleteOAuthApp = async ({ id }: { id: string }) => {
 	try {
 		const response = await getOauth2Federation().deleteOAuthService2(
 			[
-				id,
+				String(id),
 			],
 			body,
 		);

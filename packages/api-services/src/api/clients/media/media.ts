@@ -69,7 +69,7 @@ const getMedia = async ({ itemId }: GetItemParams) => {
 	}
 };
 
-export const downloadMedia = async (id: string) => {
+export const downloadMedia = async (id: ApiId) => {
 	const url = `${baseUrl}/storage/media/${id}/download?access_token=${token}`;
 	try {
 		return await instance.get(url);
@@ -80,7 +80,7 @@ export const downloadMedia = async (id: string) => {
 	}
 };
 
-export const downloadFile = (id: string) => {
+export const downloadFile = (id: ApiId) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/download?access_token=${accessToken}`;
 	const link = document.createElement('a');

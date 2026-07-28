@@ -46,7 +46,7 @@ const createScreenrecordingExport = async ({
 	}
 };
 
-const listScreenrecordingExports = async (params: { agentId: string }) => {
+const listScreenrecordingExports = async (params: { agentId: ApiId }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListScreenrecordingExportsQueryParams,
 	);
@@ -59,7 +59,7 @@ const listScreenrecordingExports = async (params: { agentId: string }) => {
 
 	try {
 		const response = await getPdfService().listScreenrecordingExports(
-			params.agentId,
+			String(params.agentId),
 			{
 				page,
 				size,
@@ -109,7 +109,7 @@ const createCallExport = async ({
 	}
 };
 
-const listCallExports = async (params: { callId: string }) => {
+const listCallExports = async (params: { callId: ApiId }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCallExportsQueryParams,
 	);
@@ -121,11 +121,14 @@ const listCallExports = async (params: { callId: string }) => {
 	]);
 
 	try {
-		const response = await getPdfService().listCallExports(params.callId, {
-			page,
-			size,
-			sort,
-		});
+		const response = await getPdfService().listCallExports(
+			String(params.callId),
+			{
+				page,
+				size,
+				sort,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -142,9 +145,9 @@ const listCallExports = async (params: { callId: string }) => {
 	}
 };
 
-const deleteExport = async (id: string) => {
+const deleteExport = async (id: ApiId) => {
 	try {
-		const response = await getPdfService().deleteExport(id);
+		const response = await getPdfService().deleteExport(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
