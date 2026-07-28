@@ -89,6 +89,7 @@ export default {
 		create: 'Создать',
 		update: 'Обновить',
 		draggable: 'Перетащить',
+		empty: 'Пустые',
 		unassigned: 'Неназначенные',
 		showUnassigned: 'Показать неназначенные',
 		group: 'Группа',
