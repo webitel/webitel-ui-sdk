@@ -51,9 +51,10 @@ const getRoleList = async (params) => {
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
 			(params) => {
-				params.ids = params.ids || params.id; // accept either ids or id as param
+				const rawId = params.id ?? params.ids;
 				return {
 					...params,
+					id: rawId ? [].concat(rawId) : undefined,
 					q: params.search,
 				};
 			},
@@ -63,11 +64,7 @@ const getRoleList = async (params) => {
 
 	try {
 		const response = await rolesApiFactory.searchRoles(
-			id
-				? [
-						id,
-					]
-				: null,
+			id,
 			name,
 			userId,
 			userName,
