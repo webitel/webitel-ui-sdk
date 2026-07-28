@@ -3,7 +3,7 @@
     :is="component"
     v-model:question="questionModel"
     v-model:answer="answerModel"
-    v-clickaway="saveQuestionClickawayOptions"
+    v-clickaway="saveQuestion"
     :class="[
       `audit-form-question--mode-${mode}`,
       {
@@ -19,6 +19,7 @@
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
+    @answer-type:change="handleAnswerTypeChange"
     @copy="emit('copy')"
     @delete="emit('delete')"
   />
@@ -116,19 +117,19 @@ const component = computed(() => {
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
+const skipNextClickaway = ref(false);
 
 function saveQuestion() {
+	if (skipNextClickaway.value) {
+		skipNextClickaway.value = false;
+		return;
+	}
 	state.value = QuestionState.SAVED;
 }
 
-const saveQuestionClickawayOptions = [
-	saveQuestion,
-	{
-		ignore: [
-			'.p-select-overlay',
-		],
-	},
-];
+function handleAnswerTypeChange() {
+	skipNextClickaway.value = true;
+}
 
 function activateQuestion() {
 	if (mode !== 'create') return;
