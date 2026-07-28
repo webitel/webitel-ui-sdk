@@ -96,6 +96,7 @@ export default deepmerge(
 			create: 'Create',
 			update: 'Update',
 			draggable: 'Draggable',
+			empty: 'Empty',
 			unassigned: 'Unassigned',
 			showUnassigned: 'Show unassigned',
 			group: 'Group',

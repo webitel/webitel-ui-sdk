@@ -93,6 +93,7 @@ export default {
 		create: 'Құру',
 		update: 'Жаңарту',
 		draggable: 'Сүйретілетін',
+		empty: 'Бос',
 		unassigned: 'Тағайындалмаған',
 		showUnassigned: 'Тағайындалмағандарды көрсету',
 		group: 'Топ',

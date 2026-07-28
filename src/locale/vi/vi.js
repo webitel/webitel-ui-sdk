@@ -93,6 +93,7 @@ export default {
 		create: 'Tạo mới',
 		update: 'Cập nhật',
 		draggable: 'Có thể kéo thả',
+		empty: 'Trống',
 		unassigned: 'Chưa được gán',
 		showUnassigned: 'Hiển thị chưa được gán',
 		group: 'Nhóm',
