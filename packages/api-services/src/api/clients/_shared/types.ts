@@ -5,7 +5,10 @@
 // biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type ApiParams = Record<string, any>;
 
-/** ids reach the clients as route params or as numbers, depending on the caller */
+/**
+ * Mirrors ui-sdk's `ApiModule.Id`, redeclared because this package sits below
+ * ui-sdk and cannot import from it. tsc catches drift where the two meet.
+ */
 export type ApiId = string | number;
 
 export interface GetItemParams {
