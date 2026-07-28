@@ -93,6 +93,7 @@ export default {
 		create: 'Creează',
 		update: 'Actualizează',
 		draggable: 'Tragabil',
+		empty: 'Gol',
 		unassigned: 'Neatribuit',
 		showUnassigned: 'Arată neatribuite',
 		group: 'Grup',

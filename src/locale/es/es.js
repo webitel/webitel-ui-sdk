@@ -92,6 +92,7 @@ export default {
 		create: 'Crear',
 		update: 'Actualizar',
 		draggable: 'Arrastrable',
+		empty: 'Vacío',
 		unassigned: 'Sin asignar',
 		showUnassigned: 'Mostrar sin asignar',
 		group: 'Grupo',

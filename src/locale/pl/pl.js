@@ -93,6 +93,7 @@ export default {
 		create: 'Utwórz',
 		update: 'Aktualizuj',
 		draggable: 'Przeciągalne',
+		empty: 'Puste',
 		unassigned: 'Nieprzypisane',
 		showUnassigned: 'Pokaż nieprzypisane',
 		group: 'Grupa',

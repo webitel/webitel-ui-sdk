@@ -93,6 +93,7 @@ export default {
 		create: 'Yaratish',
 		update: 'Yangilash',
 		draggable: 'Sudraluvchi',
+		empty: "Bo'sh",
 		unassigned: 'Tayinlanmagan',
 		showUnassigned: "Tayinlanmaganlarni ko'rsatish",
 		group: 'Guruh',
