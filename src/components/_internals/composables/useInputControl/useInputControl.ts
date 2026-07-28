@@ -1,10 +1,8 @@
 import { computed, type Ref } from 'vue';
 
-interface InputComponentRef {
-	$el?: HTMLElement;
-}
+import type { PrimevueInstance } from '../../types/PrimevueInstance';
 
-export const useInputControl = (input: Ref<InputComponentRef | undefined>) => {
+export const useInputControl = (input: Ref<PrimevueInstance | undefined>) => {
 	// inputnumber has span wrapper while inputtext hasnt
 	const inputEl = computed(() => {
 		if (input.value?.$el instanceof HTMLInputElement) {

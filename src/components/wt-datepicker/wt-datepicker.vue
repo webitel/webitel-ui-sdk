@@ -150,6 +150,7 @@ import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type { PrimevueOverlayInstance } from '../_internals/types/PrimevueInstance';
 import { useDatepicker } from './_internals/composables/useDatepicker';
 
 interface Props extends DatePickerProps {
@@ -199,10 +200,7 @@ const modelValue = computed({
 	},
 });
 
-interface DatePickerRef {
-	$el?: HTMLElement;
-	overlay?: HTMLElement;
-	alignOverlay?: () => void;
+interface DatePickerRef extends PrimevueOverlayInstance {
 	rawValue: Date | null;
 	updateModel: (v: Date) => void;
 }

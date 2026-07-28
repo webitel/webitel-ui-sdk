@@ -37,8 +37,9 @@
 
 <script setup lang="ts">
 import { AgentsAPI, MessagesServiceAPI } from '@webitel/api-services/api';
-import { inject, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useEventBus } from '../../../composables';
 import { WtChatEmoji } from '../..';
 
 interface ChatItem {
@@ -65,9 +66,7 @@ const props = defineProps<{
 const emit = defineEmits([
 	'close',
 ]);
-const eventBus = inject<{
-	$emit: (event: string, payload: unknown) => void;
-}>('$eventBus');
+const eventBus = useEventBus();
 const { t } = useI18n();
 
 interface MessageDraft {

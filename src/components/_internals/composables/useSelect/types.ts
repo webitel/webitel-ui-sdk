@@ -1,5 +1,7 @@
 import type { Ref } from 'vue';
 
+import type { PrimevueOverlayInstance } from '../../types/PrimevueInstance';
+
 /** TODO(types): options are indexed by the runtime `dataKey`/`optionLabel`/`optionValue` keys. */
 // biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type SelectOption = any;
@@ -16,12 +18,7 @@ export type SelectSearchMethod = (
 	...params: any[]
 ) => Promise<SelectSearchResponse>;
 
-export interface SelectComponentRef {
-	$el?: HTMLElement;
-	overlay?: HTMLElement;
-	alignOverlay?: () => void;
-	hide?: () => void;
-}
+export type SelectComponentRef = PrimevueOverlayInstance;
 
 export interface UseSelectOptionsParams {
 	selected: Ref<SelectValue>;

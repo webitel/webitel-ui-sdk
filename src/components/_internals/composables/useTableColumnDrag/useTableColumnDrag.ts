@@ -1,11 +1,9 @@
 import type { Ref } from 'vue';
 
-interface DataTableRef {
-	$el?: HTMLElement;
-}
+import type { PrimevueInstance } from '../../types/PrimevueInstance';
 
 export const useTableColumnDrag = (
-	table: Ref<DataTableRef | undefined>,
+	table: Ref<PrimevueInstance | undefined>,
 	reorderableColumns: boolean,
 ) => {
 	let animationFrameId: number | null = null;
