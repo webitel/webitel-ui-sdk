@@ -1,4 +1,7 @@
-export type WtTableSortOrder = 'asc' | 'desc' | null;
+import type { SortSymbols } from '../../../scripts/sortQueryAdapters';
+
+/** derived so adding a symbol to `SortSymbols` widens this automatically */
+export type WtTableSortOrder = (typeof SortSymbols)[keyof typeof SortSymbols];
 
 export type WtTableHeader = {
 	value: string;

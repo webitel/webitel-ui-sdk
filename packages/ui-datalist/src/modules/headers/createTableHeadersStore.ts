@@ -1,3 +1,4 @@
+import type { WtTableSortOrder } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
@@ -10,8 +11,6 @@ import type {
 	DatalistTableHeader,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
-
-type SortSymbol = (typeof SortSymbols)[keyof typeof SortSymbols];
 
 interface TableHeadersStoreBodyParams {
 	rawHeaders: DatalistTableHeader[];
@@ -164,9 +163,9 @@ export const tableHeadersStoreBody = ({
 		column: DatalistTableHeader,
 		options:
 			| {
-					order?: SortSymbol;
+					order?: WtTableSortOrder;
 			  }
-			| SortSymbol = {},
+			| WtTableSortOrder = {},
 	) => {
 		const getNextSortOrder = (sort: DatalistTableHeader['sort']) => {
 			switch (sort) {
@@ -188,13 +187,13 @@ export const tableHeadersStoreBody = ({
 		}: {
 			headers: DatalistTableHeader[];
 			sortedHeader: DatalistTableHeader;
-			order: SortSymbol;
+			order: WtTableSortOrder;
 		}) => {
 			return headers.map((header) => {
 				if (header.sort === undefined) return header;
 
 				// reset all headers by default
-				let newSort: SortSymbol = null;
+				let newSort: WtTableSortOrder = null;
 
 				if (header.field === sortedHeader.field) {
 					newSort = order;
@@ -207,7 +206,7 @@ export const tableHeadersStoreBody = ({
 			});
 		};
 
-		let order: SortSymbol;
+		let order: WtTableSortOrder;
 
 		if (typeof options === 'string') {
 			order = options;
