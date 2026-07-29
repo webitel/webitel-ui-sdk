@@ -440,14 +440,14 @@ export default {
 		macValidator: 'Powinno wyglądać jak MAC',
 		minValue: ({ named }) => {
 			let text = 'Wartość nie powinna być mniejsza niż';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Wartość nie powinna być większa niż';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
