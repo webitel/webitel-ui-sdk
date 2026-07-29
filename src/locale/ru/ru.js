@@ -439,14 +439,14 @@ export default {
 		macValidator: 'Необходимо ввести MAC-адрес',
 		minValue: ({ named }) => {
 			let text = 'Значение должно быть не меньше';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Значение должно быть не больше';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
