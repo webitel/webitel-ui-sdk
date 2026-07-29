@@ -89,6 +89,7 @@ export default {
 		create: 'Створити',
 		update: 'Оновити',
 		draggable: 'Перетягнути',
+		empty: 'Порожні',
 		unassigned: 'Непризначені',
 		showUnassigned: 'Показати непризначені',
 		group: 'Група',
@@ -437,14 +438,14 @@ export default {
 		macValidator: 'Необхідно ввести MAC-адрес',
 		minValue: ({ named }) => {
 			let text = 'Значення повинно бути не менше';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Значення повинно бути не більше';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;

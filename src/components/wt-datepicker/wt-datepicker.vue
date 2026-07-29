@@ -16,6 +16,7 @@
 			input-class="typo-body-1"
 			:required="required"
 			:disabled="disabled"
+			:invalid="invalid"
 			:show-time="showTime"
 			:min-date="minDate"
 			:max-date="maxDate"
