@@ -3,3 +3,4 @@
 * [CSS](css/index.md)
 * [Inspiration Sources](inspirations/index.md)
 * [Linting and Reformatting](linting-and-reformatting/index.md)
+* [TypeScript: strict mode](typescript/index.md)
