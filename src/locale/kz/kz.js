@@ -442,14 +442,14 @@ export default {
 		requiredArrayValue: 'Массив бос болмауы керек',
 		minValue: ({ named }) => {
 			let text = 'Мәні кем болмауы керек';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Мәні артық болмауы керек';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
