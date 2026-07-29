@@ -1,8 +1,8 @@
-import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
+import type { RegleCollectionStatus, RegleFieldStatus } from '@regle/core';
 import { type ComputedRef, computed, type Ref } from 'vue';
 
 export type UseFieldValidationParams = {
-	field?: Ref<SuperCompatibleRegleFieldStatus>;
+	field?: Ref<RegleFieldStatus<string> | RegleCollectionStatus>;
 };
 
 export type UseFieldValidationReturn = {
@@ -18,7 +18,20 @@ export const useFieldValidation = ({
 	});
 
 	const validationText = computed(() => {
-		return fieldRef?.value?.$errors?.at(0);
+		const status = fieldRef?.value;
+		const errors = status?.$errors;
+		if (!errors) return '';
+
+		if (Array.isArray(errors)) {
+			return errors.at(0) ?? '';
+		}
+
+		if (status && '$self' in status) {
+			const selfErrors = status.$self?.$errors;
+			if (Array.isArray(selfErrors)) return selfErrors?.at(0) ?? '';
+		}
+
+		return '';
 	});
 
 	return {

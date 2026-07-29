@@ -133,6 +133,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import PDatepicker, {
 	DatePickerEmitsOptions,
@@ -169,11 +170,13 @@ interface Props extends DatePickerProps {
 	timezone?: string;
 	v?: Record<string, unknown>;
 	customValidators?: unknown[];
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 }
 
 const props = withDefaults(defineProps<Props>(), {
 	labelProps: () => ({}),
 	customValidators: () => [],
+	regleValidation: null,
 });
 
 const emit = defineEmits<DatePickerEmitsOptions>();
@@ -247,12 +250,13 @@ const requiredLabel = computed(() => {
 });
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-const { v, customValidators } = toRefs(props);
+const { v, customValidators, regleValidation } = toRefs(props);
 
 const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
 		v,
 		customValidators,
+		regleValidation,
 	});
 </script>
 
