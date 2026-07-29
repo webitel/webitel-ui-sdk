@@ -449,7 +449,7 @@ export default deepmerge(
 			requiredArrayValue: 'Array should not be empty',
 			minValue: ({ named }) => {
 				let text = 'Value cannot be less than';
-				if (named('min')) {
+				if (named('min') != null) {
 					text += ` ${named('min')}`;
 				}
 
@@ -457,7 +457,7 @@ export default deepmerge(
 			},
 			maxValue: ({ named }) => {
 				let text = 'Value cannot be greater than';
-				if (named('max')) {
+				if (named('max') != null) {
 					text += ` ${named('max')}`;
 				}
 				return text;

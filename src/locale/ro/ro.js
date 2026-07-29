@@ -444,14 +444,14 @@ export default {
 		macValidator: 'Trebuie să arate ca un MAC',
 		minValue: ({ named }) => {
 			let text = 'Valoarea nu trebuie să fie mai mică decât';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Valoarea nu trebuie să fie mai mare decât';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
