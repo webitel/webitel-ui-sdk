@@ -1,11 +1,14 @@
-import { ServicesApiFactory, WebitelContactsGroupType } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateServiceBody,
+	getServices,
+	ListServicesQueryParams,
+	UpdateService2Body,
+	UpdateServiceBody,
+} from '@webitel/api-services/gen';
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -16,34 +19,10 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const servicesService = ServicesApiFactory(configuration, '', instance);
-
-const fieldsToSend = [
-	'name',
-	'code',
-	'sla',
-	'status',
-	'state',
-	'description',
-	'group',
-	'assignee',
-	'services',
-	'root_id',
-	'catalog_id',
-];
-
-const getServicesList = async ({ rootId, ...rest }) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+const getServicesList = async ({ parentId, rootId, ...rest }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListServicesQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
@@ -55,22 +34,24 @@ const getServicesList = async ({ rootId, ...rest }) => {
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await servicesService.listServices(
+		const response = await getServices().listServices({
 			page,
 			size,
+			fields,
 			sort,
 			id,
 			q,
-			rootId,
-			undefined,
-			fields,
-		);
+			rootId: rootId ?? parentId,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, []),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
@@ -90,16 +71,17 @@ const getService = async ({ itemId: id }) => {
 		'group',
 		'assignee',
 		'description',
+		'default_priority',
 		'catalog_id',
 		'root_id',
 	];
 
-	const itemResponseHandler = (item) => {
-		return item.service;
-	};
+	const itemResponseHandler = (item) => item.service;
 
 	try {
-		const response = await servicesService.locateService(id, fieldsToSend);
+		const response = await getServices().locateService(id, {
+			fields: fieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -115,26 +97,26 @@ const preRequestHandler = ({ rootId, catalogId }) => {
 	return (item) => ({
 		...item,
 		assignee:
-			item.group?.type === WebitelContactsGroupType.DYNAMIC
-				? {}
-				: item.assignee,
-		rootId,
-		catalogId,
+			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
+		rootId: rootId ?? item.rootId,
+		catalogId: catalogId ?? item.catalogId,
 	});
 };
 
 const addService = async ({ itemInstance, rootId, catalogId }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
+
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
 			catalogId,
 		}),
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await servicesService.createService(item);
+		const response = await getServices().createService(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -151,17 +133,19 @@ const updateService = async ({
 	rootId,
 	catalogId,
 }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
+
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
 			catalogId,
 		}),
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await servicesService.updateService(id, item);
+		const response = await getServices().updateService(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -173,12 +157,14 @@ const updateService = async ({
 };
 
 const patchService = async ({ changes, id }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateService2Body);
+
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await servicesService.updateService2(id, body);
+		const response = await getServices().updateService2(id, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -191,7 +177,7 @@ const patchService = async ({ changes, id }) => {
 
 const deleteService = async ({ id }) => {
 	try {
-		const response = await servicesService.deleteService(id);
+		const response = await getServices().deleteService(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
