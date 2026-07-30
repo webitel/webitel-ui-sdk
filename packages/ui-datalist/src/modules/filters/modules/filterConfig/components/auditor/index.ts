@@ -1,6 +1,9 @@
 import { UsersAPI } from '@webitel/api-services/api';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import {
+	type FilterConfigBaseParams,
+	WtSysTypeFilterConfig,
+} from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import AuditorFilterValueField from './auditor-filter-value-field.vue';
 import AuditorFilterValuePreview from './auditor-filter-value-preview.vue';
@@ -18,5 +21,5 @@ class AuditorFilterConfig extends WtSysTypeFilterConfig {
 	}
 }
 
-export const createAuditorFilterConfig = (params) =>
+export const createAuditorFilterConfig = (params?: FilterConfigBaseParams) =>
 	new AuditorFilterConfig(params);

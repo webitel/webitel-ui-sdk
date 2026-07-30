@@ -1,5 +1,4 @@
 import { SLAsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,13 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -30,7 +36,7 @@ const fieldsToSend = [
 	'resolution_time',
 ];
 
-const getSlasList = async (params) => {
+const getSlasList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -65,13 +71,13 @@ const getSlasList = async (params) => {
 	}
 };
 
-const getSla = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getSla = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.sla;
 	};
 
 	try {
-		const response = await slaService.locateSLA(id, fieldsToSend);
+		const response = await slaService.locateSLA(String(id), fieldsToSend);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -83,7 +89,7 @@ const getSla = async ({ itemId: id }) => {
 	}
 };
 
-const addSla = async ({ itemInstance }) => {
+const addSla = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -100,13 +106,13 @@ const addSla = async ({ itemInstance }) => {
 	}
 };
 
-const updateSla = async ({ itemInstance, itemId: id }) => {
+const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await slaService.updateSLA(id, item);
+		const response = await slaService.updateSLA(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -117,9 +123,9 @@ const updateSla = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteSla = async ({ id }) => {
+const deleteSla = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await slaService.deleteSLA(id);
+		const response = await slaService.deleteSLA(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -128,7 +134,7 @@ const deleteSla = async ({ id }) => {
 	}
 };
 
-const getSlasLookup = (params) =>
+const getSlasLookup = (params: Parameters<typeof getSlasList>[0]) =>
 	getSlasList({
 		...params,
 		fields: params.fields || [

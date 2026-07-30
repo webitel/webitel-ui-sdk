@@ -52,16 +52,13 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import {
-	computed,
-	defineModel,
-	onMounted,
-	ref,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
+import { computed, onMounted, ref, toRef, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 
 /**
  * @emits {string} input - Fires when textarea value changes. Emits value
@@ -128,16 +125,13 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	/**
 	 * Validation rules
 	 */
-	v?: unknown;
+	v?: VuelidateFieldLike;
 	/**
 	 * Custom validators array
 	 * @type {Array<{name: string, text: string}>}
 	 * @default []
 	 */
-	customValidators?: Array<{
-		name: string;
-		text: string;
-	}>;
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -179,8 +173,8 @@ const hasLabel = computed(() => {
 
 const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
-		v: props.v,
-		customValidators: props.customValidators,
+		v: toRef(props, 'v'),
+		customValidators: toRef(props, 'customValidators'),
 	});
 
 const handleKeypress = (event: KeyboardEvent) => {

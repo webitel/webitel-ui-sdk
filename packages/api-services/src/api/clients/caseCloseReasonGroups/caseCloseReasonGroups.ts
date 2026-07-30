@@ -1,5 +1,4 @@
 import { CloseReasonGroupsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,13 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -29,7 +35,7 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getCloseReasonGroupsList = async (params) => {
+const getCloseReasonGroupsList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -71,14 +77,14 @@ const getCloseReasonGroupsList = async (params) => {
 	}
 };
 
-const getCloseReasonGroups = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCloseReasonGroups = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.closeReasonGroup;
 	};
 
 	try {
 		const response = await closeReasonGroupsService.locateCloseReasonGroup(
-			id,
+			String(id),
 			fieldsToSend,
 		);
 		return applyTransform(response.data, [
@@ -92,7 +98,7 @@ const getCloseReasonGroups = async ({ itemId: id }) => {
 	}
 };
 
-const addCloseReasonGroups = async ({ itemInstance }) => {
+const addCloseReasonGroups = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -110,14 +116,17 @@ const addCloseReasonGroups = async ({ itemInstance }) => {
 	}
 };
 
-const updateCloseReasonGroups = async ({ itemInstance, itemId: id }) => {
+const updateCloseReasonGroups = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await closeReasonGroupsService.updateCloseReasonGroup(
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -130,9 +139,11 @@ const updateCloseReasonGroups = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReasonGroups = async ({ id }) => {
+const deleteCloseReasonGroups = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await closeReasonGroupsService.deleteCloseReasonGroup(id);
+		const response = await closeReasonGroupsService.deleteCloseReasonGroup(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -141,7 +152,9 @@ const deleteCloseReasonGroups = async ({ id }) => {
 	}
 };
 
-const getCloseReasonGroupsLookup = async (params) =>
+const getCloseReasonGroupsLookup = async (
+	params: Parameters<typeof getCloseReasonGroupsList>[0],
+) =>
 	getCloseReasonGroupsList({
 		...params,
 		fields: params.fields || [

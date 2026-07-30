@@ -37,11 +37,16 @@ import { computed } from 'vue';
 
 import { displayText, EMPTY_SYMBOL } from '../../../utils';
 
+interface ChipItem {
+	id?: string;
+	name?: string;
+}
+
 interface Props {
 	hideFirstItem?: boolean;
 	useEmptySymbol?: boolean;
 	title?: string;
-	items: unknown[];
+	items: ChipItem[];
 }
 const props = defineProps<Props>();
 

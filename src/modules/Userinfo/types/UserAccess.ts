@@ -109,7 +109,7 @@ export type AppVisibilityMap = Map<WtApplication, boolean>;
 export type SectionVisibilityMap = Map<FullUiSectionName, boolean>;
 
 export interface UserAccessStore {
-	initialize: (CreateUserAccessStoreRawAccess) => void;
+	initialize: (rawAccess: CreateUserAccessStoreRawAccess) => void;
 
 	hasReadAccess: (object?: WtObject) => boolean;
 	hasCreateAccess: (object?: WtObject) => boolean;

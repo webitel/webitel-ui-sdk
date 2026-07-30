@@ -38,7 +38,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const labelValue = computed(() =>
-	props?.hideLabel ? null : t('webitelUI.filters.filterValue'),
+	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),
 );
 
 const v$ = useVuelidate(

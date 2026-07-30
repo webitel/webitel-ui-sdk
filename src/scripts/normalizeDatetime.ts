@@ -82,7 +82,7 @@ export const normalizeToTimestamp = (
 		if (+value) {
 			return +value;
 		}
-	} else {
-		return Date.now();
+		return 0;
 	}
+	return Date.now();
 };

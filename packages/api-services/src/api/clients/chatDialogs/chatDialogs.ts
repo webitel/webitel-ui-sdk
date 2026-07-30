@@ -13,15 +13,16 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const getDialogsList = async (params) => {
+const getDialogsList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		CatalogGetDialogsQueryParams,
 	);
 
 	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({
+		(params: ApiParams) => ({
 			...params,
 			q: params.search,
 		}),
@@ -47,7 +48,7 @@ const getDialogsList = async (params) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: ApiParams) =>
 	getDialogsList({
 		...params,
 		fields: params.fields || [

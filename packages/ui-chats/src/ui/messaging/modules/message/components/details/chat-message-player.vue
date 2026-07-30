@@ -52,13 +52,14 @@ const isVideo = computed(() => {
 });
 const mediaSrc = computed(() => {
 	return {
-		src: props.file.streamUrl || props.file.url,
-		type: props.type,
+		src: props.file.streamUrl || props.file.url || '',
+		type: props.type ?? '',
 	};
 });
 
-function handlePlayerInitialize(player) {
-	emit('initialized', player);
+// `initialized` currently carries no payload, so the argument stays optional
+function handlePlayerInitialize(player?: object) {
+	emit('initialized', player ?? {});
 }
 </script>
 

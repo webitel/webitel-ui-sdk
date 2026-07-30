@@ -1,6 +1,9 @@
 import { queues as QueuesAPI } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import {
+	type FilterConfigBaseParams,
+	WtSysTypeFilterConfig,
+} from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import QueueFilterValueField from './queue-filter-value-field.vue';
 import QueueFilterValuePreview from './queue-filter-value-preview.vue';
@@ -18,5 +21,5 @@ class QueueFilterConfig extends WtSysTypeFilterConfig {
 	}
 }
 
-export const createQueueFilterConfig = (params) =>
+export const createQueueFilterConfig = (params?: FilterConfigBaseParams) =>
 	new QueueFilterConfig(params);

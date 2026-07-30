@@ -1,4 +1,4 @@
-import type { FilterName } from '../classes/Filter';
+import type { FilterData, FilterName } from '../classes/Filter';
 
 export const filterLabelToSnapshotKey = (name: FilterName): string =>
 	`${name}_lbl`;
@@ -29,7 +29,7 @@ export const filterNameFromSnapshotKey = (
 
 export const filterValuePropFromSnapshotKey = (
 	snapshotKey: string,
-): string | undefined => {
+): keyof FilterData | undefined => {
 	if (isLabelSnapshotKey(snapshotKey)) return 'label';
 	if (isValueSnapshotKey(snapshotKey)) return 'value';
 };

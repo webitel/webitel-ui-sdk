@@ -63,7 +63,7 @@ export const useFilesExport = ({
 	getFileURL,
 	getFileBlob,
 	fetch,
-	filename,
+	filename = 'export',
 	skipFilesWithError,
 }: UseFilesExportOptions): UseFilesExportReturn => {
 	const {

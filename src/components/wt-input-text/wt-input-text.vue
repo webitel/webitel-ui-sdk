@@ -32,9 +32,8 @@
         class="wt-input-text__input typo-body-1"
         :class="{ 'wt-input-text__input--masked': isInputMasked }"
         :inputmode="type"
-        :size="primevueSizeMap[size]"
+        :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
-        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
       />
@@ -65,19 +64,19 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
-import {
-	computed,
-	defineModel,
-	ref,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { InputHTMLAttributes } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useInputControl } from '../_internals/composables';
 
-interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
+/** native attrs are omitted: keeping them overflows prop inference (TS2590) */
+interface WtInputTextProps
+	extends /* @vue-ignore */ Omit<InputTextProps, keyof InputHTMLAttributes> {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	type?: string;
@@ -86,9 +85,9 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	disabled?: boolean;
 	required?: boolean;
 	preventTrim?: boolean;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 	hideInputValue?: boolean;
 }
@@ -103,13 +102,12 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	required: false,
 	preventTrim: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 	hideInputInfo: false,
 	hideInputValue: false,
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.LG]: 'large',
 };
@@ -148,7 +146,7 @@ const requiredLabel = computed(() => {
 	return isRequired ? `${props.label}*` : props.label;
 });
 
-const inputHandler = (value) => {
+const inputHandler = (value: string) => {
 	const handledValue = props.preventTrim ? value : value.trim();
 	emit('update:modelValue', handledValue);
 };

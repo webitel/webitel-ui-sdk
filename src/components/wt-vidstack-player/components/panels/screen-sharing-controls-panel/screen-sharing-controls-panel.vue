@@ -36,14 +36,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import { ControlsGroup } from '../../../../../components/wt-vidstack-player/components';
 import { ComponentSize } from '../../../../../enums';
 import type {
 	ScreenSharingSession,
 	ScreenshotStatus,
 } from '../../../../../modules/CallSession/types';
-import type { WtVidstackPlayerSizeProvider } from '../../../types/WtVidstackPlayerSizeProvider';
+import { useVidstackPlayerSize } from '../../../composables/useVidstackPlayerSize';
 
 interface Props {
 	session: ScreenSharingSession;
@@ -60,7 +60,7 @@ const emit = defineEmits<{
 	'toggle-record': [];
 }>();
 
-const { size } = inject<WtVidstackPlayerSizeProvider>('size');
+const { size } = useVidstackPlayerSize();
 
 const recordIcon = computed(() =>
 	props.session.recordings ? 'record-stop' : 'record-start',
@@ -85,7 +85,7 @@ const makeScreenshot = () => {
 	emit('make-screenshot');
 };
 
-const buttonSizeMap = {
+const buttonSizeMap: Record<string, ComponentSize> = {
 	[ComponentSize.SM]: ComponentSize.SM,
 	[ComponentSize.MD]: ComponentSize.MD,
 	[ComponentSize.LG]: ComponentSize.MD,

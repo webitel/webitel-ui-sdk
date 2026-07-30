@@ -1,3 +1,4 @@
+import type { WtTableSortOrder } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
@@ -10,8 +11,6 @@ import type {
 	DatalistTableHeader,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
-
-type SortSymbol = (typeof SortSymbols)[keyof typeof SortSymbols];
 
 interface TableHeadersStoreBodyParams {
 	rawHeaders: DatalistTableHeader[];
@@ -34,8 +33,13 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const sort = computed(() => {
-		const encodeSortQuery = ({ column, order }) =>
-			`${sortToQueryAdapter(order)}${column.field}`;
+		const encodeSortQuery = ({
+			column,
+			order,
+		}: {
+			column: DatalistTableHeader;
+			order: DatalistTableHeader['sort'];
+		}) => `${sortToQueryAdapter(order)}${column.field}`;
 
 		const sortedCol = headers.value.find((header) => header.sort);
 
@@ -48,7 +52,7 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const columnWidths = computed(() => {
-		return headers.value.reduce((acc, header) => {
+		return headers.value.reduce<Record<string, string>>((acc, header) => {
 			if (header.width) {
 				acc[header.field] = header.width;
 			}
@@ -60,7 +64,7 @@ export const tableHeadersStoreBody = ({
 		headers.value = rawHeaders;
 	};
 
-	const updateShownHeaders = (value) => {
+	const updateShownHeaders = (value: DatalistTableHeader[]) => {
 		headers.value = value;
 	};
 
@@ -114,13 +118,17 @@ export const tableHeadersStoreBody = ({
 			show: fieldsSet.has(header.field),
 		}));
 
+		// TODO(types): placeholders — the consuming app fills in `value`/`text`
 		const customHeaders = fields
 			.filter((field) => !mainFieldNames.has(field))
-			.map((field) => ({
-				show: true,
-				field,
-				shouldBeInitialized: true,
-			}));
+			.map(
+				(field) =>
+					({
+						show: true,
+						field,
+						shouldBeInitialized: true,
+					}) as DatalistTableHeader,
+			);
 
 		const headersByField = new Map(
 			[
@@ -152,14 +160,14 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateSort = (
-		column,
+		column: DatalistTableHeader,
 		options:
 			| {
-					order?: SortSymbol;
+					order?: WtTableSortOrder;
 			  }
-			| SortSymbol = {},
+			| WtTableSortOrder = {},
 	) => {
-		const getNextSortOrder = (sort) => {
+		const getNextSortOrder = (sort: DatalistTableHeader['sort']) => {
 			switch (sort) {
 				case SortSymbols.NONE:
 					return SortSymbols.ASC;
@@ -172,12 +180,20 @@ export const tableHeadersStoreBody = ({
 			}
 		};
 
-		const changeHeadersSort = ({ headers, sortedHeader, order }) => {
+		const changeHeadersSort = ({
+			headers,
+			sortedHeader,
+			order,
+		}: {
+			headers: DatalistTableHeader[];
+			sortedHeader: DatalistTableHeader;
+			order: WtTableSortOrder;
+		}) => {
 			return headers.map((header) => {
 				if (header.sort === undefined) return header;
 
 				// reset all headers by default
-				let newSort = null;
+				let newSort: WtTableSortOrder = null;
 
 				if (header.field === sortedHeader.field) {
 					newSort = order;
@@ -190,7 +206,7 @@ export const tableHeadersStoreBody = ({
 			});
 		};
 
-		let order: SortSymbol;
+		let order: WtTableSortOrder;
 
 		if (typeof options === 'string') {
 			order = options;
@@ -273,7 +289,13 @@ export const tableHeadersStoreBody = ({
 		return headers.value.find((header) => header.field === field);
 	};
 
-	const columnResize = ({ columnName, columnWidth }) => {
+	const columnResize = ({
+		columnName,
+		columnWidth,
+	}: {
+		columnName: string;
+		columnWidth: string;
+	}) => {
 		const column = getHeaderByField(columnName);
 
 		if (column) {
@@ -319,7 +341,11 @@ export const tableHeadersStoreBody = ({
 export const createTableHeadersStore = <Entity extends Identifiable>(
 	namespace: string,
 	config: useTableStoreConfig<Entity>,
-	{ headers: rawHeaders },
+	{
+		headers: rawHeaders,
+	}: {
+		headers: DatalistTableHeader[];
+	},
 ) => {
 	const id = `${namespace}/headers`;
 	return createDatalistStore({

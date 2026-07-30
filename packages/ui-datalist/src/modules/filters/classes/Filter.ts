@@ -47,7 +47,7 @@ export interface IFilter {
 
 export class Filter implements IFilter {
 	readonly name: FilterName;
-	label: FilterLabel;
+	label?: FilterLabel;
 	value: FilterValue;
 
 	constructor(

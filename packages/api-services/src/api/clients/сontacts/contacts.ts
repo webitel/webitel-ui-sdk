@@ -1,6 +1,5 @@
 import deepCopy from 'deep-copy';
 import { ContactsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,6 +15,12 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+} from '../_shared/types';
 import { ContactsSearchMode } from './enums/ContactsSearchMode';
 
 const instance = getDefaultInstance();
@@ -25,7 +30,7 @@ const contactService = ContactsApiFactory(configuration, '', instance);
 
 const baseUrl = '/contacts';
 
-const formatAccessMode = (item) => ({
+const formatAccessMode = (item: ApiParams) => ({
 	...item,
 	access: {
 		edit: item.mode.includes('w'),
@@ -33,7 +38,7 @@ const formatAccessMode = (item) => ({
 	},
 });
 
-const getList = async (params) => {
+const getList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -65,7 +70,7 @@ const getList = async (params) => {
 		];
 	}
 
-	const listResponseHandler = (items) =>
+	const listResponseHandler = (items: ApiParams[]) =>
 		items?.map((item) => ({
 			...item,
 			name: item.name.commonName,
@@ -156,7 +161,9 @@ const getList = async (params) => {
 		];
 	}
 	if (params.contactLabel) {
-		changedParams.label = params.contactLabel.map((item) => item.label);
+		changedParams.label = params.contactLabel.map(
+			(item: ApiParams) => item.label,
+		);
 	}
 	if (params.contactOwner) {
 		changedParams.owner = params.contactOwner;
@@ -225,7 +232,7 @@ const getList = async (params) => {
 
 		return {
 			items: applyTransform(items, [
-				(items) => items?.map((item) => formatAccessMode(item)),
+				(items: ApiParams[]) => items?.map((item) => formatAccessMode(item)),
 				listResponseHandler,
 			]),
 			next,
@@ -237,7 +244,7 @@ const getList = async (params) => {
 	}
 };
 
-const get = async ({ itemId: id }) => {
+const get = async ({ itemId: id }: GetItemParams) => {
 	const fields = [
 		'name',
 		'about',
@@ -256,7 +263,7 @@ const get = async ({ itemId: id }) => {
 	];
 
 	const defaultObject = {};
-	const itemResponseHandler = (item) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return {
 			...item,
 			name: item.name.commonName,
@@ -294,7 +301,7 @@ const get = async ({ itemId: id }) => {
 		};
 	};
 	try {
-		const response = await contactService.locateContact(id, fields);
+		const response = await contactService.locateContact(String(id), fields);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -322,7 +329,7 @@ const fieldsToSend = [
 	'phones',
 ];
 
-const sanitizeManagers = (itemInstance) => {
+const sanitizeManagers = (itemInstance: ApiParams) => {
 	// handle many managers and even no managers field cases
 	const managers = (itemInstance.managers || []).filter(
 		({
@@ -339,7 +346,7 @@ const sanitizeManagers = (itemInstance) => {
 	};
 };
 
-const sanitizeTimezones = (itemInstance) => {
+const sanitizeTimezones = (itemInstance: ApiParams) => {
 	// handle many timezones and even no timezones field cases
 	const timezones = (itemInstance.timezones || []).filter(
 		({
@@ -356,9 +363,9 @@ const sanitizeTimezones = (itemInstance) => {
 	};
 };
 
-const sanitizeGroups = (itemInstance) => {
+const sanitizeGroups = (itemInstance: ApiParams) => {
 	// handle many groups and even no groups field cases
-	const groups = (itemInstance.groups || []).map((item) => ({
+	const groups = (itemInstance.groups || []).map((item: ApiParams) => ({
 		group: item,
 	}));
 	return {
@@ -367,7 +374,7 @@ const sanitizeGroups = (itemInstance) => {
 	};
 };
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	copy.name = {
 		commonName: copy.name,
@@ -375,15 +382,15 @@ const preRequestHandler = (item) => {
 	return copy;
 };
 
-const getGroupsFromResponse = (item) => {
+const getGroupsFromResponse = (item: ApiParams) => {
 	return item.groups
 		? [
-				...item.groups.data.map((el) => el.group),
+				...item.groups.data.map((el: ApiParams) => el.group),
 			]
 		: [];
 };
 
-const add = async ({ itemInstance }) => {
+const add = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitizeManagers,
@@ -408,7 +415,7 @@ const add = async ({ itemInstance }) => {
 	}
 };
 
-const update = async ({ itemInstance }) => {
+const update = async ({ itemInstance }: AddItemParams) => {
 	const { etag } = itemInstance;
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
@@ -434,9 +441,9 @@ const update = async ({ itemInstance }) => {
 	}
 };
 
-const deleteContact = async ({ id }) => {
+const deleteContact = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await contactService.deleteContact(id);
+		const response = await contactService.deleteContact(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -445,7 +452,7 @@ const deleteContact = async ({ id }) => {
 	}
 };
 
-const getContactsLookup = (params) =>
+const getContactsLookup = (params: Parameters<typeof getList>[0]) =>
 	getList({
 		...params,
 		fields: params.fields || [

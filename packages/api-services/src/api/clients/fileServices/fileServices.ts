@@ -6,7 +6,6 @@ import {
 } from '@webitel/api-services/gen';
 import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -16,6 +15,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId } from '../_shared/types';
 
 const getFilesList = async (params: { search?: string }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -78,7 +78,7 @@ const getFilesList = async (params: { search?: string }) => {
 	}
 };
 
-const deleteFiles = async (id) => {
+const deleteFiles = async (id: string[]) => {
 	try {
 		const response = await getFileService().deleteFiles({
 			id,
@@ -94,7 +94,7 @@ const deleteFiles = async (id) => {
 };
 
 const getScreenRecordingsByUser = async (params: {
-	userId: string;
+	userId: ApiId;
 	search?: string;
 }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -123,7 +123,7 @@ const getScreenRecordingsByUser = async (params: {
 
 	try {
 		const response = await getFileService().searchScreenRecordings(
-			params.userId,
+			String(params.userId),
 			{
 				page,
 				size,
@@ -163,11 +163,17 @@ const getScreenRecordingsByUser = async (params: {
 	}
 };
 
-const deleteScreenRecordingsByUser = async ({ userId, id }) => {
+const deleteScreenRecordingsByUser = async ({
+	userId,
+	id,
+}: {
+	userId: ApiId;
+	id: ApiId[];
+}) => {
 	try {
 		const response = await getFileService().deleteScreenRecordings(
-			userId,
-			id,
+			String(userId),
+			id.map(String),
 			{},
 		);
 		return applyTransform(response.data, [
@@ -181,7 +187,7 @@ const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 };
 
 const getScreenRecordingsByAgent = async (params: {
-	agentId: string;
+	agentId: ApiId;
 	search?: string;
 }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -210,7 +216,7 @@ const getScreenRecordingsByAgent = async (params: {
 
 	try {
 		const response = await getFileService().searchScreenRecordingsByAgent(
-			params.agentId,
+			String(params.agentId),
 			{
 				page,
 				size,
@@ -252,11 +258,17 @@ const getScreenRecordingsByAgent = async (params: {
 	}
 };
 
-const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
+const deleteScreenRecordingsByAgent = async ({
+	agentId,
+	id,
+}: {
+	agentId: ApiId;
+	id: ApiId[];
+}) => {
 	try {
 		const response = await getFileService().deleteScreenRecordingsByAgent(
-			agentId,
-			id,
+			String(agentId),
+			id.map(String),
 			{},
 		);
 		return applyTransform(response.data, [
@@ -271,7 +283,7 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 
 const getFilesListByCall = async (
 	params: SearchFilesByCallParams & {
-		callId: string;
+		callId: ApiId;
 	},
 ) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -292,7 +304,7 @@ const getFilesListByCall = async (
 
 	try {
 		const response = await getFileService().searchFilesByCall(
-			params.callId,
+			String(params.callId),
 			requestParams,
 		);
 

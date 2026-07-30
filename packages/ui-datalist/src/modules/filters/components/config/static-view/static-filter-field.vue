@@ -16,6 +16,7 @@
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
 
+import type { FilterValue } from '../../../classes/Filter';
 import { StaticFilterEmits, StaticFilterProps } from '../../types/Filter.types';
 
 /* Author @Lera24
@@ -29,8 +30,9 @@ const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 
-const onValueChange = (value) => {
+const onValueChange = (value: FilterValue) => {
 	if (isEmpty(value) && typeof value !== 'boolean') {
+		if (!props.filter) return;
 		return emit('delete:filter', props.filter);
 	}
 

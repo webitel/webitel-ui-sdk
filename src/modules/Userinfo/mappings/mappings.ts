@@ -10,8 +10,11 @@ import {
 	WtObject,
 } from '../../../enums';
 import { CrudGlobalAction, ScopeClass, SpecialGlobalAction } from '../enums';
+import type { GlobalAction } from '../types/UserAccess';
 
-export const mapGlobalActionToCrudAction = {
+export const mapGlobalActionToCrudAction: Partial<
+	Record<GlobalAction, CrudAction>
+> = {
 	[CrudGlobalAction.Add]: CrudAction.Create,
 	[CrudGlobalAction.Read]: CrudAction.Read,
 	[CrudGlobalAction.Write]: CrudAction.Update,
@@ -161,7 +164,9 @@ export const mapScopeClassToWtObjects: Partial<Record<ScopeClass, WtObject[]>> =
 		],
 	};
 
-export const wtObjectsWithGlobalCrudActionAccessAsChecksSource = {
+export const wtObjectsWithGlobalCrudActionAccessAsChecksSource: Partial<
+	Record<WtObject, boolean>
+> = {
 	[WtObject.License]: true,
 	[WtObject.Object]: true,
 };
@@ -173,7 +178,9 @@ export const wtObjectsWithGlobalSpecialActionAccessAsChecksSource: Partial<
 	[WtObject.GlobalVariable]: SpecialGlobalAction.SchemeVariables,
 };
 
-export const mapScopeClassAccessTokenToCrudAction = {
+export const mapScopeClassAccessTokenToCrudAction: Partial<
+	Record<string, CrudAction>
+> = {
 	r: CrudAction.Read,
 	w: CrudAction.Update,
 	d: CrudAction.Delete,

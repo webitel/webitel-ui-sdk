@@ -60,6 +60,7 @@
 import deepEqual from 'deep-equal';
 import { computed } from 'vue';
 
+import type { WtTreeNode } from '../wt-tree-line/types/wt-tree-node';
 import WtTreeLine from '../wt-tree-line/wt-tree-line.vue';
 import { WtTreeMode } from './types/WtTreeMode';
 
@@ -106,13 +107,13 @@ const emit = defineEmits<{
 }>();
 
 const allData = computed(() => {
-	const result = [];
+	const result: WtTreeNode[] = [];
 
-	const getNestedItems = (item: unknown) => {
+	const getNestedItems = (item: WtTreeNode) => {
 		result.push(item);
 
 		if (item[props.childrenProp]) {
-			item[props.childrenProp].forEach((child: unknown) => {
+			item[props.childrenProp].forEach((child: WtTreeNode) => {
 				getNestedItems(child);
 			});
 		}
@@ -125,11 +126,11 @@ const allData = computed(() => {
 	return result;
 });
 
-const selectElement = (item: unknown) => {
+const selectElement = (item: WtTreeNode) => {
 	emit('update:modelValue', props.itemData ? item[props.itemData] : item);
 };
 
-const compareSelectElement = (item: unknown) => {
+const compareSelectElement = (item: WtTreeNode) => {
 	if (props.itemData) {
 		return item[props.itemData] === props.modelValue;
 	}
