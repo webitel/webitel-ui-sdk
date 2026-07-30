@@ -1,11 +1,12 @@
-import { SLAConditionsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateSLAConditionBody,
+	getSlaconditions,
+	ListSLAConditionsQueryParams,
+	UpdateSLAConditionBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,34 +16,10 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const slaConditionsService = SLAConditionsApiFactory(
-	configuration,
-	'',
-	instance,
-);
-
-const fieldsToSend = [
-	'name',
-	'priorities',
-	'sla_id',
-	'reaction_time',
-	'resolution_time',
-];
-
 const getConditionsList = async ({ parentId, ...rest }) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'slaConditionId',
-		'priorityId',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListSLAConditionsQueryParams,
+	);
 
 	const {
 		page,
@@ -55,17 +32,12 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 		priority_id: priorityId,
 	} = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await slaConditionsService.listSLAConditions(
-			parentId,
+		const response = await getSlaconditions().listSLAConditions(parentId, {
 			page,
 			size,
 			fields,
@@ -74,7 +46,7 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 			q,
 			slaConditionId,
 			priorityId,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -92,16 +64,10 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 };
 
 const getCondition = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
-		return item.slaCondition;
-	};
+	const itemResponseHandler = (item) => item.slaCondition;
 
 	try {
-		const response = await slaConditionsService.locateSLACondition(
-			parentId,
-			id,
-			fieldsToSend,
-		);
+		const response = await getSlaconditions().locateSLACondition(parentId, id);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -113,14 +79,43 @@ const getCondition = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const updateCondition = async ({ itemInstance, itemId: id }) => {
+const addCondition = async ({ itemInstance, parentId }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		CreateSLAConditionBody,
+	);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await slaConditionsService.updateSLACondition(
+		const response = await getSlaconditions().createSLACondition(
+			parentId,
+			item,
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const updateCondition = async ({ itemInstance, itemId: id }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		UpdateSLAConditionBody,
+	);
+
+	const item = applyTransform(itemInstance, [
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getSlaconditions().updateSLACondition(
 			itemInstance.slaId,
 			id,
 			item,
@@ -135,33 +130,9 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const addCondition = async ({ itemInstance, parentId }) => {
-	const item = applyTransform(itemInstance, [
-		camelToSnake(),
-		sanitize(fieldsToSend),
-	]);
-
-	try {
-		const response = await slaConditionsService.createSLACondition(
-			parentId,
-			item,
-		);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-
 const deleteCondition = async ({ id, parentId }) => {
 	try {
-		const response = await slaConditionsService.deleteSLACondition(
-			parentId,
-			id,
-		);
+		const response = await getSlaconditions().deleteSLACondition(parentId, id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
