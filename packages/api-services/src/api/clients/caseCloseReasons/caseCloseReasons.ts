@@ -1,11 +1,12 @@
-import { CloseReasonsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateCloseReasonBody,
+	getCloseReasons,
+	ListCloseReasonsQueryParams,
+	UpdateCloseReasonBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,45 +16,26 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const closeReasonsService = CloseReasonsApiFactory(configuration, '', instance);
-
-const fieldsToSend = [
-	'name',
-	'description',
-];
-
 const getCloseReasonsList = async ({ parentId, ...rest }) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListCloseReasonsQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await closeReasonsService.listCloseReasons(
-			parentId,
+		const response = await getCloseReasons().listCloseReasons(parentId, {
 			page,
 			size,
 			fields,
 			sort,
 			id,
-			q,
-		);
+			q: q || rest.search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -71,12 +53,10 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 };
 
 const getCloseReason = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
-		return item.closeReason;
-	};
+	const itemResponseHandler = (item) => item.closeReason;
 
 	try {
-		const response = await closeReasonsService.locateCloseReason(parentId, id);
+		const response = await getCloseReasons().locateCloseReason(parentId, id);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -89,16 +69,17 @@ const getCloseReason = async ({ parentId, itemId: id }) => {
 };
 
 const addCloseReason = async ({ itemInstance, parentId }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		CreateCloseReasonBody,
+	);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await closeReasonsService.createCloseReason(
-			parentId,
-			item,
-		);
+		const response = await getCloseReasons().createCloseReason(parentId, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -110,13 +91,18 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 };
 
 const updateCloseReason = async ({ itemInstance, itemId: id }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		UpdateCloseReasonBody,
+	);
+
 	const item = applyTransform(itemInstance, [
+		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await closeReasonsService.updateCloseReason(
-			itemInstance.id,
+		const response = await getCloseReasons().updateCloseReason(
+			itemInstance.closeReasonGroupId,
 			id,
 			item,
 		);
@@ -132,7 +118,7 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 
 const deleteCloseReason = async ({ id, parentId }) => {
 	try {
-		const response = await closeReasonsService.deleteCloseReason(parentId, id);
+		const response = await getCloseReasons().deleteCloseReason(parentId, id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
