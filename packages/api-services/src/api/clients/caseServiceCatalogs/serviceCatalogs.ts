@@ -1,11 +1,12 @@
-import { CatalogsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateCatalogBody,
+	getCatalogs,
+	ListCatalogsQueryParams,
+	UpdateCatalogBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,11 +16,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const catalogsService = CatalogsApiFactory(configuration, '', instance);
 
 const fieldsToSend = [
 	'id',
@@ -54,44 +50,38 @@ const servicesFieldsToSend = [
 ];
 
 const getCatalogsList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'state',
-		'hasSubservices',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListCatalogsQueryParams,
+	);
 
-	const { page, size, fields, sort, id, q, state, has_subservices } =
+	const { page, size, fields, sort, id, query, state, has_subservices } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
 			(params) => ({
 				...params,
-				q: params.search,
+				query: params.search,
 			}),
 			sanitize(fieldsToSend),
 			camelToSnake(),
 		]);
+
 	try {
-		const response = await catalogsService.listCatalogs(
+		const response = await getCatalogs().listCatalogs({
 			page,
 			size,
-			[
+			fields: [
 				...fields,
 				'services',
 			],
 			sort,
 			id,
-			q,
+			query,
 			state,
-			'100', // Implemented depth 100 for load all subservices in one request
-			servicesFieldsToSend,
-			has_subservices,
-		);
+			depth: '100', // Implemented depth 100 for load all subservices in one request
+			subFields: servicesFieldsToSend,
+			hasSubservices: has_subservices,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -109,16 +99,13 @@ const getCatalogsList = async (params) => {
 };
 
 const getCatalog = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
-		return item.catalog;
-	};
+	const itemResponseHandler = (item) => item.catalog;
 
 	try {
-		const response = await catalogsService.locateCatalog(
-			id,
-			fieldsToSend,
-			servicesFieldsToSend,
-		);
+		const response = await getCatalogs().locateCatalog(id, {
+			fields: fieldsToSend,
+			subFields: servicesFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -131,25 +118,14 @@ const getCatalog = async ({ itemId: id }) => {
 };
 
 const addCatalog = async ({ itemInstance }) => {
-	const fieldsToSend = [
-		'name',
-		'description',
-		'prefix',
-		'code',
-		'state',
-		'sla',
-		'status',
-		'close_reason_group',
-		'default_priority',
-		'teams',
-		'skills',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCatalogBody);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response = await catalogsService.createCatalog(item);
+		const response = await getCatalogs().createCatalog(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -161,25 +137,14 @@ const addCatalog = async ({ itemInstance }) => {
 };
 
 const updateCatalog = async ({ itemInstance, itemId: id }) => {
-	const fieldsToSend = [
-		'name',
-		'description',
-		'prefix',
-		'code',
-		'state',
-		'sla',
-		'status',
-		'close_reason_group',
-		'default_priority',
-		'teams',
-		'skills',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCatalogBody);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog(id, item);
+		const response = await getCatalogs().updateCatalog(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -197,11 +162,11 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 		'state',
 	];
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog2(id, item);
+		const response = await getCatalogs().updateCatalog2(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -214,7 +179,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 
 const deleteCatalog = async ({ id }) => {
 	try {
-		const response = await catalogsService.deleteCatalog(id);
+		const response = await getCatalogs().deleteCatalog(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
