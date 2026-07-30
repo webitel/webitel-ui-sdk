@@ -33,6 +33,13 @@
 	--content-wrapper-color: var(--p-content-background);
 	--content-wrapper-hover-color: var(--p-content-hover-background);
 
+	/* context menu */
+	--context-menu-background-color: var(--content-wrapper-color);
+	--context-menu-option-hover-color: var(--p-surface-50);
+	--context-menu-option-disabled-color: var(--p-surface-100);
+	--context-menu-option-text-color: var(--text-main-color);
+	--context-menu-option-text-disabled-color: var(--text-disabled-color);
+
 	/* success colors */
 	--success-color: var(--green-darken-4);
 	--success-hover-color: var(--green-darken-3);
@@ -203,4 +210,8 @@
 	--text-link-color: var(--info-color);
 	/* typography on colors */
 	--text-on-brand-color: var(--white);
+
+	/* context menu */
+	--context-menu-option-hover-color: var(--p-surface-900);
+	--context-menu-option-disabled-color: var(--p-surface-850);
 }
