@@ -92,6 +92,7 @@ export default {
 		create: 'Crear',
 		update: 'Actualizar',
 		draggable: 'Arrastrable',
+		empty: 'Vacío',
 		unassigned: 'Sin asignar',
 		showUnassigned: 'Mostrar sin asignar',
 		group: 'Grupo',
@@ -436,14 +437,14 @@ export default {
 		macValidator: 'Debe parecer una MAC',
 		minValue: ({ named }) => {
 			let text = 'El valor no debe ser menor que';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'El valor no debe ser mayor que';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;

@@ -93,6 +93,7 @@ export default {
 		create: 'Yaratish',
 		update: 'Yangilash',
 		draggable: 'Sudraluvchi',
+		empty: "Bo'sh",
 		unassigned: 'Tayinlanmagan',
 		showUnassigned: "Tayinlanmaganlarni ko'rsatish",
 		group: 'Guruh',
@@ -443,14 +444,14 @@ export default {
 		macValidator: "MAC ko'rinishida bo'lishi kerak",
 		minValue: ({ named }) => {
 			let text = "Qiymat dan kam bo'lmasligi kerak";
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = "Qiymat dan ko'p bo'lmasligi kerak";
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;

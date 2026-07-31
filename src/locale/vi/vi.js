@@ -93,6 +93,7 @@ export default {
 		create: 'Tạo mới',
 		update: 'Cập nhật',
 		draggable: 'Có thể kéo thả',
+		empty: 'Trống',
 		unassigned: 'Chưa được gán',
 		showUnassigned: 'Hiển thị chưa được gán',
 		group: 'Nhóm',
@@ -443,14 +444,14 @@ export default {
 		macValidator: 'Phải là MAC',
 		minValue: ({ named }) => {
 			let text = 'Giá trị không được nhỏ hơn';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Giá trị không được lớn hơn';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;

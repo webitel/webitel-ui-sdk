@@ -3,15 +3,17 @@ import { onUnmounted, type Ref } from 'vue';
 /**
  * @author PolinaSukhorukova-webitel
  *
- * Fires the callback on every resize and disconnects itself
- * once clientHeight is unchanged twice in a row.
+ * Fires the callback on every resize of the target element and stops
+ * either after the given timeout or on unmount.
  */
 
 export const useObserveHeightUntilStable = (
-	chatContainer: Ref<HTMLElement | null>,
+	target: Ref<HTMLElement | null>,
 	callback: () => void,
+	timeout?: number,
 ) => {
 	let observer: ResizeObserver | null = null;
+	let stopTimer: ReturnType<typeof setTimeout> | null = null;
 	let isViewportTransition = false;
 	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -29,29 +31,25 @@ export const useObserveHeightUntilStable = (
 	const stopObserve = () => {
 		observer?.disconnect();
 		observer = null;
+
+		if (stopTimer) {
+			clearTimeout(stopTimer);
+			stopTimer = null;
+		}
 	};
 
 	const startObserve = () => {
-		if (!chatContainer.value) return;
-
-		let lastClientHeight = chatContainer.value.clientHeight;
-		let stableCount = 0;
+		if (!target.value) return;
 
 		observer = new ResizeObserver(() => {
-			const currentClientHeight = chatContainer.value?.clientHeight;
-
 			if (!isViewportTransition) callback();
-
-			if (currentClientHeight === lastClientHeight) {
-				stableCount++;
-				if (stableCount >= 2) stopObserve();
-			} else {
-				stableCount = 0;
-				lastClientHeight = currentClientHeight;
-			}
 		});
 
-		observer.observe(chatContainer.value);
+		observer.observe(target.value);
+
+		if (timeout !== undefined) {
+			stopTimer = setTimeout(stopObserve, timeout);
+		}
 	};
 
 	/**
