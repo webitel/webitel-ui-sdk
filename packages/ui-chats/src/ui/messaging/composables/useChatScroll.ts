@@ -56,6 +56,7 @@ export const useChatScroll = ({
 	let isLoadingNextMessages = false;
 	let lastVisibleMessageEl: HTMLElement | null = null;
 	let prevScrollHeight = 0;
+	let prevScrollTop = 0;
 	let resizeObserver: ResizeObserver | null = null;
 	let isViewportTransition = false;
 	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
@@ -71,6 +72,15 @@ export const useChatScroll = ({
 
 	const lastMessage = computed(() => messages.value?.at(-1));
 	const isLastMessageMy = computed(() => !!lastMessage.value?.member?.self);
+
+	const isViewingBottom = (el: HTMLElement) =>
+		el.clientHeight > 0 &&
+		el.scrollHeight - (el.scrollTop + el.clientHeight) <= bottomThreshold;
+
+	const markSeenIfAtBottom = () => {
+		const el = chatContainer.value;
+		if (el && isViewingBottom(el)) onSeen?.();
+	};
 
 	const handleBtnAfterNewMessage = () => {
 		if (isLastMessageMy.value) {
@@ -89,8 +99,14 @@ export const useChatScroll = ({
 		newUnseenMessagesCount.value = 0;
 
 		resetScrollToBottomBtn();
-		onSeen?.();
+		markSeenIfAtBottom();
 	};
+
+	const handleChatScrollWithSeen = () => {
+		handleChatScroll();
+		markSeenIfAtBottom();
+	};
+
 	const getTopMessageEl = () => {
 		// help to fix chat viewing position when new messages was loaded
 		if (!chatContainer.value?.children) return;
@@ -116,6 +132,7 @@ export const useChatScroll = ({
 		if (!chatContent.value) return;
 
 		prevScrollHeight = chatContainer.value?.scrollHeight ?? 0;
+		prevScrollTop = chatContainer.value?.scrollTop ?? 0;
 
 		resizeObserver = new ResizeObserver(() => {
 			const el = chatContainer.value;
@@ -125,11 +142,23 @@ export const useChatScroll = ({
 
 			if (isViewportTransition) {
 				prevScrollHeight = newScrollHeight;
+				prevScrollTop = el.scrollTop;
 				updateScrollToBottomBtnVisibility(el);
 				return;
 			}
 
+			const heightDelta = newScrollHeight - prevScrollHeight;
+			const scrollTopDelta = el.scrollTop - prevScrollTop;
+			/**
+			 * @author PolinaSukhorukova-webitel
+			 *
+			 * Prepend after pagination shifts scrollTop by the height it adds on top; bottom
+			 * growth leaves scrollTop still. Matching deltas = prepend - skip scroll.
+			 */
+			const isPrepend =
+				Math.abs(scrollTopDelta - heightDelta) <= bottomThreshold;
 			const wasNearBottom =
+				!isPrepend &&
 				el.scrollTop + el.clientHeight >= prevScrollHeight - bottomThreshold;
 			const contentGrown = newScrollHeight > prevScrollHeight;
 
@@ -147,6 +176,7 @@ export const useChatScroll = ({
 			}
 
 			prevScrollHeight = newScrollHeight;
+			prevScrollTop = el.scrollTop;
 			updateScrollToBottomBtnVisibility(el);
 		});
 
@@ -247,7 +277,7 @@ export const useChatScroll = ({
 		(bottom) => {
 			if (bottom) {
 				newUnseenMessagesCount.value = 0;
-				onSeen?.();
+				markSeenIfAtBottom();
 			}
 		},
 	);
@@ -262,7 +292,8 @@ export const useChatScroll = ({
 		showScrollToBottomBtn,
 		newUnseenMessagesCount,
 		scrollToBottom,
+		markSeenIfAtBottom,
 		loadNextMessages,
-		handleChatScroll,
+		handleChatScroll: handleChatScrollWithSeen,
 	};
 };
