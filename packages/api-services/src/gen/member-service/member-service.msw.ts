@@ -20,6 +20,7 @@ import type {
 	EngineMemberBulkResponse,
 	EngineMemberInQueue,
 	EngineResetActiveAttemptsResponse,
+	EngineResetMembersCountResponse,
 	EngineResetMembersResponse,
 } from '../_models';
 
@@ -3150,6 +3151,23 @@ export const getResetMembersResponseMock = (
 	...overrideResponse,
 });
 
+export const getResetMembersCountResponseMock = (
+	overrideResponse: Partial<
+		Extract<EngineResetMembersCountResponse, object>
+	> = {},
+): EngineResetMembersCountResponse => ({
+	count: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getDeleteMemberResponseMock = (
 	overrideResponse: Partial<Extract<EngineMemberInQueue, object>> = {},
 ): EngineMemberInQueue => ({
@@ -5174,6 +5192,34 @@ export const getResetMembersMockHandler = (
 	);
 };
 
+export const getResetMembersCountMockHandler = (
+	overrideResponse?:
+		| EngineResetMembersCountResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<EngineResetMembersCountResponse>
+				| EngineResetMembersCountResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/queues/:queueId/members/reset/count',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getResetMembersCountResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getDeleteMemberMockHandler = (
 	overrideResponse?:
 		| EngineMemberInQueue
@@ -5370,6 +5416,7 @@ export const getMemberServiceMock = () => [
 	getCreateMemberMockHandler(),
 	getCreateMemberBulkMockHandler(),
 	getResetMembersMockHandler(),
+	getResetMembersCountMockHandler(),
 	getDeleteMemberMockHandler(),
 	getReadMemberMockHandler(),
 	getPatchMemberMockHandler(),

@@ -72,6 +72,10 @@ export type CatalogGetDialogsParams = {
 	 */
 	online?: boolean;
 	/**
+	 * Dialogs ONLY that have [not] been rated.
+	 */
+	rated?: boolean;
+	/**
 	 * Includes ONLY those chat dialogs
 	 * whose member channel(s) contain
 	 * a specified set of variables.

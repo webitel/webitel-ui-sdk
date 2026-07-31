@@ -12,6 +12,9 @@ import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1P
  */
 export interface WebitelImApiGatewayV1SendTextRequest {
 	body?: string;
+	externalId?: string;
+	replyToExternalId?: string;
+	replyToMessageId?: string;
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;

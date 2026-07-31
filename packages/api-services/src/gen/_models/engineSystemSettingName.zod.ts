@@ -48,4 +48,5 @@ export const EngineSystemSettingName = {
 	BlockAllMemberNumbersFromList: 'block_all_member_numbers_from_list',
 	LoginOptions: 'login_options',
 	DefaultMembersFilter: 'default_members_filter',
+	SelfAssignedCallSoundNotification: 'self_assigned_call_sound_notification',
 } as const;

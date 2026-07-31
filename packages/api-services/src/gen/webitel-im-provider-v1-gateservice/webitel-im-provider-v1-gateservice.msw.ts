@@ -28,6 +28,27 @@ export const getGateServiceListGatesResponseMock = (
 			},
 			(_, i) => i + 1,
 		).map(() => ({
+			capabilities: faker.helpers.arrayElement([
+				{
+					delivered: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					failed: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					read: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					typing: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			contact: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {

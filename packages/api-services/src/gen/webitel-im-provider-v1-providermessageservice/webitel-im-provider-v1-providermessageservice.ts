@@ -15,6 +15,8 @@ import type {
 	WebitelImProviderV1ProviderSendMessageResponse,
 	WebitelImProviderV1ProviderSendSystemMessageRequest,
 	WebitelImProviderV1ProviderSendTextRequest,
+	WebitelImProviderV1ProviderSendTypingRequest,
+	WebitelImProviderV1ProviderSendTypingResponse,
 } from '../_models';
 
 // --- header start
@@ -102,6 +104,24 @@ before forwarding to the underlying provider (Facebook, WhatsApp, etc.).
 					options,
 				);
 			};
+			/**
+ * @summary SendTyping forwards an ephemeral "typing…" action to the external chat
+partner (e.g. Telegram sendChatAction, Meta sender_action). It is
+fire-and-forget and best-effort: channels whose provider does not support
+typing are a silent no-op. Nothing is persisted.
+ */
+			const providerMessageServiceSendTyping = (
+				webitelImProviderV1ProviderSendTypingRequest: WebitelImProviderV1ProviderSendTypingRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImProviderV1ProviderSendTypingResponse>
+			> => {
+				return axiosInstance.post(
+					`/im/provider/send/typing`,
+					webitelImProviderV1ProviderSendTypingRequest,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
@@ -110,6 +130,7 @@ before forwarding to the underlying provider (Facebook, WhatsApp, etc.).
 				providerMessageServiceSendInteractive,
 				providerMessageServiceSendSystemMessage,
 				providerMessageServiceSendText,
+				providerMessageServiceSendTyping,
 			};
 		};
 export type ProviderMessageServiceSendDocumentResult =
@@ -122,5 +143,7 @@ export type ProviderMessageServiceSendSystemMessageResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendTextResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
+export type ProviderMessageServiceSendTypingResult =
+	AxiosResponse<WebitelImProviderV1ProviderSendTypingResponse>;
 
 // --- footer end

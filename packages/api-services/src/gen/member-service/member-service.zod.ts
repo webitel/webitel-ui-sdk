@@ -1142,6 +1142,7 @@ export const ResetMembersBody = zod.object({
 			to: zod.string().optional(),
 		})
 		.optional(),
+	q: zod.string().optional(),
 	stopCause: zod.array(zod.string()).optional(),
 	variables: zod.record(zod.string(), zod.string()).optional(),
 });
@@ -1149,6 +1150,69 @@ export const ResetMembersBody = zod.object({
 export const ResetMembersResponse = zod.object({
 	count: zod.string().optional(),
 });
+
+/**
+ * @summary Returns the number of queue members that match the specified
+reset criteria without performing the reset operation.
+Can be used to preview the impact of a reset request.
+ */
+export const ResetMembersCountParams = zod.object({
+	queue_id: zod.string().describe('Identifier of the queue.'),
+});
+
+export const ResetMembersCountQueryParams = zod.object({
+	ids: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by specific queue member identifiers.'),
+	bucketId: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by bucket identifiers.'),
+	stopCause: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by stop causes.'),
+	agentId: zod
+		.array(zod.number())
+		.optional()
+		.describe('Filter by assigned agent identifiers.'),
+	numbers: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by member phone numbers.'),
+	variablesString: zod
+		.string()
+		.optional()
+		.describe(
+			'This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18',
+		),
+	id: zod
+		.array(zod.string())
+		.optional()
+		.describe('Filter by related entity identifiers.'),
+	'createdAt.from': zod.string().optional(),
+	'createdAt.to': zod.string().optional(),
+	'priority.from': zod.string().optional(),
+	'priority.to': zod.string().optional(),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			"Search pattern used to filter queue members.\nThe value is matched against the member name\nand against the member's searchable destination values.",
+		),
+});
+
+export const ResetMembersCountResponse = zod
+	.object({
+		count: zod
+			.string()
+			.optional()
+			.describe('Total number of matching queue members.'),
+	})
+	.describe(
+		'ResetMembersCountResponse contains the total number\nof queue members matching the specified criteria.',
+	);
 
 /**
  * @summary DeleteMember

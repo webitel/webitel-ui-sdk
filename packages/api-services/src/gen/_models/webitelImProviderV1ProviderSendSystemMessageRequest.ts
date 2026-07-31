@@ -23,6 +23,13 @@ export interface WebitelImProviderV1ProviderSendSystemMessageRequest {
 	/** Internal ID of the configured gateway. */
 	gateId?: string;
 	/**
+	 * Internal message context for per-recipient delivery status tracking.
+	 *
+	 * Internal message UUID
+	 */
+	messageId?: string;
+	threadId?: string;
+	/**
 	 * Template variables sourced from the system message metadata.
 	 * Injected into the template via Go text/template syntax (e.g. {{.new_member_role}}).
 	 */

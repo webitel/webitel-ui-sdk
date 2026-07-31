@@ -30,6 +30,12 @@ export interface WebitelImApiGatewayV1Thread {
 	subject?: string;
 	/** Type of the thread. */
 	type?: WebitelImApiGatewayV1ThreadKind;
+	/**
+	 * Number of unread messages in this thread for the calling participant.
+	 * Counts content messages not yet read; the caller's own messages and
+	 * system messages are excluded.
+	 */
+	unreadCount?: number;
 	/** Last update timestamp (Unix time, milliseconds). */
 	updatedAt?: string;
 	/** Optional variables associated with the thread. */

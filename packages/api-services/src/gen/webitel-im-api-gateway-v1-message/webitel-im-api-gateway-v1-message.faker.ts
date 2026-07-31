@@ -7,6 +7,8 @@
 import { faker } from '@faker-js/faker';
 
 import type {
+	WebitelImApiGatewayV1DeleteMessagesResponse,
+	WebitelImApiGatewayV1EditMessageResponse,
 	WebitelImApiGatewayV1InteractiveCallbackResponse,
 	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendDocumentResponse,
@@ -90,6 +92,61 @@ export const getMessageSendContactResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageDeleteMessagesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1DeleteMessagesResponse, object>
+	> = {},
+): WebitelImApiGatewayV1DeleteMessagesResponse => ({
+	deletedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	deletedIds: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	skippedIds: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
 		undefined,
 	]),
 	...overrideResponse,
@@ -522,6 +579,32 @@ export const getMessageSendTextResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageEditMessageResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1EditMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1EditMessageResponse => ({
+	editedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
 		undefined,
 	]),
 	...overrideResponse,

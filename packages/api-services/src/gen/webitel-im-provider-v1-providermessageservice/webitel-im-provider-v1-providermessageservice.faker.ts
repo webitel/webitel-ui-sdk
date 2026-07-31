@@ -6,7 +6,10 @@
  */
 import { faker } from '@faker-js/faker';
 
-import type { WebitelImProviderV1ProviderSendMessageResponse } from '../_models';
+import type {
+	WebitelImProviderV1ProviderSendMessageResponse,
+	WebitelImProviderV1ProviderSendTypingResponse,
+} from '../_models';
 
 export const getProviderMessageServiceSendDocumentResponseMock = (
 	overrideResponse: Partial<
@@ -137,3 +140,6 @@ export const getProviderMessageServiceSendTextResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getProviderMessageServiceSendTypingResponseMock =
+	(): WebitelImProviderV1ProviderSendTypingResponse => ({});

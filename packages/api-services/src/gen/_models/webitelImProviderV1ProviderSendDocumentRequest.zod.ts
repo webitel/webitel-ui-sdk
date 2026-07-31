@@ -16,5 +16,13 @@ export interface WebitelImProviderV1ProviderSendDocumentRequest {
 	domainId?: number;
 	externalUserId?: string;
 	gateId?: string;
+	/**
+	 * Internal message context for per-recipient delivery status tracking.
+	 *
+	 * Internal message UUID
+	 */
+	messageId?: string;
+	replyToExternalId?: string;
+	threadId?: string;
 	type?: WebitelImProviderV1ProviderType;
 }

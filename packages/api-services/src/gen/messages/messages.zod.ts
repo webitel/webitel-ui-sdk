@@ -234,6 +234,10 @@ export const CatalogGetDialogsQueryParams = zod.object({
 		.boolean()
 		.optional()
 		.describe('Dialogs ONLY that are currently [not] active( closed: ? ).'),
+	rated: zod
+		.boolean()
+		.optional()
+		.describe('Dialogs ONLY that have [not] been rated.'),
 	groupString: zod
 		.string()
 		.optional()
@@ -701,6 +705,10 @@ export const CatalogGetDialogsResponse = zod.object({
 						})
 						.optional()
 						.describe('Peer contact.'),
+					rateId: zod
+						.string()
+						.optional()
+						.describe('Zero value means - NOT rated yet.'),
 					started: zod
 						.string()
 						.optional()

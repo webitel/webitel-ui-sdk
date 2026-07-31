@@ -30,6 +30,14 @@ export const ProviderMessageServiceSendDocumentBody = zod
 		domainId: zod.number().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
+		messageId: zod
+			.string()
+			.optional()
+			.describe(
+				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
+			),
+		replyToExternalId: zod.string().optional(),
+		threadId: zod.string().optional(),
 		type: zod
 			.enum([
 				'PROVIDER_TYPE_UNSPECIFIED',
@@ -83,6 +91,14 @@ export const ProviderMessageServiceSendImageBody = zod
 					.describe('ProviderFile represents a generic file attachment.'),
 			)
 			.optional(),
+		messageId: zod
+			.string()
+			.optional()
+			.describe(
+				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
+			),
+		replyToExternalId: zod.string().optional(),
+		threadId: zod.string().optional(),
 		type: zod
 			.enum([
 				'PROVIDER_TYPE_UNSPECIFIED',
@@ -260,10 +276,18 @@ export const ProviderMessageServiceSendInteractiveBody = zod
 			})
 			.optional()
 			.describe('Interactive payload — exactly one kind must be set.'),
+		messageId: zod
+			.string()
+			.optional()
+			.describe(
+				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
+			),
+		replyToExternalId: zod.string().optional(),
 		sendId: zod
 			.string()
 			.optional()
 			.describe('Optional idempotency key to prevent duplicate delivery.'),
+		threadId: zod.string().optional(),
 	})
 	.describe(
 		'ProviderSendInteractiveRequest sends a message with interactive UI elements.',
@@ -300,6 +324,13 @@ export const ProviderMessageServiceSendSystemMessageBody = zod
 			.string()
 			.optional()
 			.describe('Internal ID of the configured gateway.'),
+		messageId: zod
+			.string()
+			.optional()
+			.describe(
+				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
+			),
+		threadId: zod.string().optional(),
 		vars: zod
 			.record(zod.string(), zod.string())
 			.optional()
@@ -330,8 +361,16 @@ export const ProviderMessageServiceSendTextBody = zod
 		domainId: zod.number().optional(),
 		externalUserId: zod.string().optional(),
 		gateId: zod.string().optional(),
+		messageId: zod
+			.string()
+			.optional()
+			.describe(
+				'Internal message context for per-recipient delivery status tracking:\nthe provider service persists the provider_message_id mapping on send\nand reports MarkDelivered/MarkRead/MarkFailed receipts back to im-thread.\n\nInternal message UUID',
+			),
 		metadata: zod.record(zod.string(), zod.string()).optional(),
+		replyToExternalId: zod.string().optional(),
 		text: zod.string().optional(),
+		threadId: zod.string().optional(),
 		type: zod
 			.enum([
 				'PROVIDER_TYPE_UNSPECIFIED',
@@ -357,4 +396,45 @@ export const ProviderMessageServiceSendTextResponse = zod
 	})
 	.describe(
 		'ProviderSendMessageResponse returns the delivery status and external message ID.',
+	);
+
+/**
+ * @summary SendTyping forwards an ephemeral "typing…" action to the external chat
+partner (e.g. Telegram sendChatAction, Meta sender_action). It is
+fire-and-forget and best-effort: channels whose provider does not support
+typing are a silent no-op. Nothing is persisted.
+ */
+export const providerMessageServiceSendTypingBodyTypeDefault = `PROVIDER_TYPE_UNSPECIFIED`;
+
+export const ProviderMessageServiceSendTypingBody = zod
+	.object({
+		domainId: zod.number().optional(),
+		externalUserId: zod.string().optional(),
+		gateId: zod.string().optional(),
+		threadId: zod.string().optional(),
+		type: zod
+			.enum([
+				'PROVIDER_TYPE_UNSPECIFIED',
+				'PROVIDER_TYPE_VIBER',
+				'PROVIDER_TYPE_TELEGRAM_BOT',
+				'PROVIDER_TYPE_TELEGRAM_APP',
+				'PROVIDER_TYPE_META_APP',
+				'PROVIDER_TYPE_FACEBOOK',
+				'PROVIDER_TYPE_INSTAGRAM',
+				'PROVIDER_TYPE_WHATSAPP',
+			])
+			.default(providerMessageServiceSendTypingBodyTypeDefault)
+			.describe(
+				'/ ProviderType defines the specific provider or protocol used for messaging.',
+			),
+		typingOn: zod.boolean().optional(),
+	})
+	.describe(
+		'ProviderSendTypingRequest asks a provider to show/hide a typing indicator\nto the external chat partner.',
+	);
+
+export const ProviderMessageServiceSendTypingResponse = zod
+	.looseObject({})
+	.describe(
+		'ProviderSendTypingResponse is intentionally empty: typing is fire-and-forget.',
 	);

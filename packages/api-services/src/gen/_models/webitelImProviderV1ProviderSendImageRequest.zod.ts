@@ -16,5 +16,13 @@ export interface WebitelImProviderV1ProviderSendImageRequest {
 	externalUserId?: string;
 	gateId?: string;
 	images?: WebitelImProviderV1ProviderFile[];
+	/**
+	 * Internal message context for per-recipient delivery status tracking.
+	 *
+	 * Internal message UUID
+	 */
+	messageId?: string;
+	replyToExternalId?: string;
+	threadId?: string;
 	type?: WebitelImProviderV1ProviderType;
 }

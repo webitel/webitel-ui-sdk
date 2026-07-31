@@ -8,7 +8,10 @@ import { faker } from '@faker-js/faker';
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
-import type { WebitelImProviderV1ProviderSendMessageResponse } from '../_models';
+import type {
+	WebitelImProviderV1ProviderSendMessageResponse,
+	WebitelImProviderV1ProviderSendTypingResponse,
+} from '../_models';
 
 export const getProviderMessageServiceSendDocumentResponseMock = (
 	overrideResponse: Partial<
@@ -139,6 +142,9 @@ export const getProviderMessageServiceSendTextResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getProviderMessageServiceSendTypingResponseMock =
+	(): WebitelImProviderV1ProviderSendTypingResponse => ({});
 
 export const getProviderMessageServiceSendDocumentMockHandler = (
 	overrideResponse?:
@@ -279,10 +285,39 @@ export const getProviderMessageServiceSendTextMockHandler = (
 		options,
 	);
 };
+
+export const getProviderMessageServiceSendTypingMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSendTypingResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSendTypingResponse>
+				| WebitelImProviderV1ProviderSendTypingResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/im/provider/send/typing',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getProviderMessageServiceSendTypingResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getWebitelImProviderV1ProvidermessageserviceMock = () => [
 	getProviderMessageServiceSendDocumentMockHandler(),
 	getProviderMessageServiceSendImageMockHandler(),
 	getProviderMessageServiceSendInteractiveMockHandler(),
 	getProviderMessageServiceSendSystemMessageMockHandler(),
 	getProviderMessageServiceSendTextMockHandler(),
+	getProviderMessageServiceSendTypingMockHandler(),
 ];

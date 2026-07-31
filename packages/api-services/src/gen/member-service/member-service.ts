@@ -35,8 +35,10 @@ import type {
 	EngineMemberServiceUpdateMemberBody,
 	EngineResetActiveAttemptsRequest,
 	EngineResetActiveAttemptsResponse,
+	EngineResetMembersCountResponse,
 	EngineResetMembersResponse,
 	ReadMemberParams,
+	ResetMembersCountParams,
 	SearchAttemptsHistoryParams,
 	SearchAttemptsParams,
 	SearchMemberAttemptsParams,
@@ -235,6 +237,27 @@ export const // --- title start
 				);
 			};
 			/**
+ * @summary Returns the number of queue members that match the specified
+reset criteria without performing the reset operation.
+Can be used to preview the impact of a reset request.
+ */
+			const resetMembersCount = (
+				queueId: string,
+				params?: ResetMembersCountParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EngineResetMembersCountResponse>> => {
+				return axiosInstance.get(
+					`/call_center/queues/${queueId}/members/reset/count`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
 			 * @summary DeleteMember
 			 */
 			const deleteMember = (
@@ -369,6 +392,7 @@ export const // --- title start
 				createMember,
 				createMemberBulk,
 				resetMembers,
+				resetMembersCount,
 				deleteMember,
 				readMember,
 				patchMember,
@@ -395,6 +419,8 @@ export type SearchMemberInQueueResult = AxiosResponse<EngineListMember>;
 export type CreateMemberResult = AxiosResponse<EngineMemberInQueue>;
 export type CreateMemberBulkResult = AxiosResponse<EngineMemberBulkResponse>;
 export type ResetMembersResult = AxiosResponse<EngineResetMembersResponse>;
+export type ResetMembersCountResult =
+	AxiosResponse<EngineResetMembersCountResponse>;
 export type DeleteMemberResult = AxiosResponse<EngineMemberInQueue>;
 export type ReadMemberResult = AxiosResponse<EngineMemberInQueue>;
 export type PatchMemberResult = AxiosResponse<EngineMemberInQueue>;

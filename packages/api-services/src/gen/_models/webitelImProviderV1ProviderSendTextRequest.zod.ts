@@ -14,7 +14,17 @@ export interface WebitelImProviderV1ProviderSendTextRequest {
 	domainId?: number;
 	externalUserId?: string;
 	gateId?: string;
+	/**
+	 * Internal message context for per-recipient delivery status tracking:
+	 * the provider service persists the provider_message_id mapping on send
+	 * and reports MarkDelivered/MarkRead/MarkFailed receipts back to im-thread.
+	 *
+	 * Internal message UUID
+	 */
+	messageId?: string;
 	metadata?: WebitelImProviderV1ProviderSendTextRequestMetadata;
+	replyToExternalId?: string;
 	text?: string;
+	threadId?: string;
 	type?: WebitelImProviderV1ProviderType;
 }

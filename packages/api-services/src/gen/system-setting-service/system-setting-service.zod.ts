@@ -54,6 +54,7 @@ export const SearchSystemSettingQueryParams = zod.object({
 				'block_all_member_numbers_from_list',
 				'login_options',
 				'default_members_filter',
+				'self_assigned_call_sound_notification',
 			]),
 		)
 		.optional()
@@ -108,6 +109,7 @@ export const SearchSystemSettingResponse = zod.object({
 						'block_all_member_numbers_from_list',
 						'login_options',
 						'default_members_filter',
+						'self_assigned_call_sound_notification',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -160,6 +162,7 @@ export const CreateSystemSettingBody = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -209,6 +212,7 @@ export const CreateSystemSettingResponse = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -281,6 +285,7 @@ export const DeleteSystemSettingResponse = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -334,6 +339,7 @@ export const ReadSystemSettingResponse = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -391,6 +397,7 @@ export const PatchSystemSettingResponse = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -446,6 +453,7 @@ export const UpdateSystemSettingResponse = zod.object({
 			'block_all_member_numbers_from_list',
 			'login_options',
 			'default_members_filter',
+			'self_assigned_call_sound_notification',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

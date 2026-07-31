@@ -141,6 +141,45 @@ export const CreateScreenrecordingExportResponse = zod
 	.describe('Metadata about an export task immediately after creation.');
 
 /**
+ * @summary Streams a ZIP archive bundling the given, already-uploaded call files (e.g. PDFs).
+Synchronous: the archive is assembled on the fly and streamed back chunk by chunk,
+so the caller does not need to poll for completion.
+ */
+export const DownloadCallArchiveParams = zod.object({
+	call_id: zod.string().describe('Unique identifier of the call.'),
+});
+
+export const DownloadCallArchiveQueryParams = zod.object({
+	fileIds: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'IDs of already-uploaded files (e.g. PDFs) to bundle into one ZIP archive.',
+		),
+});
+
+export const DownloadCallArchiveResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.number().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional(),
+});
+
+/**
  * @summary Lists the history of PDF exports for a specific call ID.
  */
 export const ListCallExportsParams = zod.object({

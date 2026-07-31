@@ -15,6 +15,7 @@ export interface EngineMemberServiceResetMembersBody {
 	ids?: string[];
 	numbers?: string[];
 	priority?: EngineFilterBetween;
+	q?: string;
 	stopCause?: string[];
 	variables?: EngineMemberServiceResetMembersBodyVariables;
 }

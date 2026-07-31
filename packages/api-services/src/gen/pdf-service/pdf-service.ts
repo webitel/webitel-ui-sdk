@@ -9,6 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	DownloadCallArchive200,
+	DownloadCallArchiveParams,
 	ListCallExportsParams,
 	ListScreenrecordingExportsParams,
 	WebitelMediaExporterDeleteExportResponse,
@@ -61,6 +63,24 @@ This operation is asynchronous and returns a task metadata.
 				);
 			};
 			/**
+ * @summary Streams a ZIP archive bundling the given, already-uploaded call files (e.g. PDFs).
+Synchronous: the archive is assembled on the fly and streamed back chunk by chunk,
+so the caller does not need to poll for completion.
+ */
+			const downloadCallArchive = (
+				callId: string,
+				params?: DownloadCallArchiveParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<DownloadCallArchive200>> => {
+				return axiosInstance.get(`/calls/${callId}/exports/archive`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
 			 * @summary Lists the history of PDF exports for a specific call ID.
 			 */
 			const listCallExports = (
@@ -105,6 +125,7 @@ Useful for documenting call transcripts or associated media.
 			return {
 				listScreenrecordingExports,
 				createScreenrecordingExport,
+				downloadCallArchive,
 				listCallExports,
 				createCallExport,
 				deleteExport,
@@ -114,6 +135,7 @@ export type ListScreenrecordingExportsResult =
 	AxiosResponse<WebitelMediaExporterListExportsResponse>;
 export type CreateScreenrecordingExportResult =
 	AxiosResponse<WebitelMediaExporterExportTask>;
+export type DownloadCallArchiveResult = AxiosResponse<DownloadCallArchive200>;
 export type ListCallExportsResult =
 	AxiosResponse<WebitelMediaExporterListExportsResponse>;
 export type CreateCallExportResult =

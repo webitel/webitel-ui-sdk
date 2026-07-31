@@ -9,6 +9,8 @@ import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
 import type {
+	WebitelImApiGatewayV1DeleteMessagesResponse,
+	WebitelImApiGatewayV1EditMessageResponse,
 	WebitelImApiGatewayV1InteractiveCallbackResponse,
 	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendDocumentResponse,
@@ -92,6 +94,61 @@ export const getMessageSendContactResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageDeleteMessagesResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1DeleteMessagesResponse, object>
+	> = {},
+): WebitelImApiGatewayV1DeleteMessagesResponse => ({
+	deletedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	deletedIds: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
+		undefined,
+	]),
+	skippedIds: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
 		undefined,
 	]),
 	...overrideResponse,
@@ -529,6 +586,32 @@ export const getMessageSendTextResponseMock = (
 	...overrideResponse,
 });
 
+export const getMessageEditMessageResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1EditMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1EditMessageResponse => ({
+	editedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getMessageReadResponseMock =
 	(): WebitelImApiGatewayV1ReadMessageResponse => ({});
 
@@ -551,6 +634,34 @@ export const getMessageSendContactMockHandler = (
 						? await overrideResponse(info)
 						: overrideResponse
 					: getMessageSendContactResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageDeleteMessagesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1DeleteMessagesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1DeleteMessagesResponse>
+				| WebitelImApiGatewayV1DeleteMessagesResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/delete',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageDeleteMessagesResponseMock(),
 				{
 					status: 200,
 				},
@@ -700,6 +811,34 @@ export const getMessageSendTextMockHandler = (
 	);
 };
 
+export const getMessageEditMessageMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1EditMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1EditMessageResponse>
+				| WebitelImApiGatewayV1EditMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/v1/messages/:id',
+		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageEditMessageResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getMessageReadMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1ReadMessageResponse
@@ -729,10 +868,12 @@ export const getMessageReadMockHandler = (
 };
 export const getWebitelImApiGatewayV1MessageMock = () => [
 	getMessageSendContactMockHandler(),
+	getMessageDeleteMessagesMockHandler(),
 	getMessageSendDocumentMockHandler(),
 	getMessageSendInteractiveMockHandler(),
 	getMessageSendInteractiveCallbackMockHandler(),
 	getMessageSendLocationMockHandler(),
 	getMessageSendTextMockHandler(),
+	getMessageEditMessageMockHandler(),
 	getMessageReadMockHandler(),
 ];

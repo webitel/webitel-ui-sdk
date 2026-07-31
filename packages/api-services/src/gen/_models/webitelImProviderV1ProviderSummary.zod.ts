@@ -5,9 +5,15 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImProviderV1ProviderStatus } from './webitelImProviderV1ProviderStatus.zod';
+import type { WebitelImProviderV1ProviderStatusCapabilities } from './webitelImProviderV1ProviderStatusCapabilities.zod';
 import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1ProviderType.zod';
 
 export interface WebitelImProviderV1ProviderSummary {
+	/**
+	 * Delivery-status receipts the channel is able to produce; unset when no
+	 * provider adapter is registered for the channel type.
+	 */
+	capabilities?: WebitelImProviderV1ProviderStatusCapabilities;
 	contact?: string;
 	createdAt?: string;
 	id?: string;

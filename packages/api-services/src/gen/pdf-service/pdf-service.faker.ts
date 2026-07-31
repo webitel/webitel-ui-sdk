@@ -6,6 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 import type {
+	DownloadCallArchive200,
 	WebitelMediaExporterDeleteExportResponse,
 	WebitelMediaExporterExportTask,
 	WebitelMediaExporterListExportsResponse,
@@ -162,6 +163,66 @@ export const getCreateScreenrecordingExportResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getDownloadCallArchiveResponseMock = (
+	overrideResponse: Partial<Extract<DownloadCallArchive200, object>> = {},
+): DownloadCallArchive200 => ({
+	error: faker.helpers.arrayElement([
+		{
+			code: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
+			details: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					'@type': faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			message: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	result: faker.helpers.arrayElement([
+		{
+			data: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
 		undefined,
 	]),
 	...overrideResponse,

@@ -17,6 +17,14 @@ export interface WebitelImProviderV1ProviderSendInteractiveRequest {
 	gateId?: string;
 	/** Interactive payload — exactly one kind must be set. */
 	interactive?: WebitelImProviderV1ProviderInteractive;
+	/**
+	 * Internal message context for per-recipient delivery status tracking.
+	 *
+	 * Internal message UUID
+	 */
+	messageId?: string;
+	replyToExternalId?: string;
 	/** Optional idempotency key to prevent duplicate delivery. */
 	sendId?: string;
+	threadId?: string;
 }

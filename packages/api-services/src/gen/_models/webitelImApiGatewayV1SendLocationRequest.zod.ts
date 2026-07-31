@@ -22,6 +22,7 @@ export interface WebitelImApiGatewayV1SendLocationRequest {
 	metadata?: WebitelImApiGatewayV1SendLocationRequestMetadata;
 	/** Optional location name (e.g., "Central Park"). */
 	name?: string;
+	replyToMessageId?: string;
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional send ID for idempotency. */
 	sendId?: string;

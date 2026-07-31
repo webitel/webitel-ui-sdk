@@ -14,6 +14,7 @@ import type {
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1GetUnreadSummaryResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchLeftResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
@@ -78,6 +79,17 @@ export const // --- title start
 						...options?.params,
 					},
 				});
+			};
+			/**
+ * @summary Returns the unread summary for the calling participant: the number of
+chats with unread messages and the total number of unread messages.
+ */
+			const threadManagementGetUnreadSummary = (
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1GetUnreadSummaryResponse>
+			> => {
+				return axiosInstance.get(`/v1/threads/unread`, options);
 			};
 			/**
 			 * @summary Returns a single thread by its identifier.
@@ -201,6 +213,7 @@ Supports pagination and field projection.
 				threadManagementSearch,
 				threadManagementCreate,
 				threadManagementSearchLeft,
+				threadManagementGetUnreadSummary,
 				threadManagementGet,
 				threadManagementAddMember,
 				threadManagementRemoveMember,
@@ -217,6 +230,8 @@ export type ThreadManagementCreateResult =
 	AxiosResponse<WebitelImApiGatewayV1ThreadManagementCreateResponse>;
 export type ThreadManagementSearchLeftResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>;
+export type ThreadManagementGetUnreadSummaryResult =
+	AxiosResponse<WebitelImApiGatewayV1GetUnreadSummaryResponse>;
 export type ThreadManagementGetResult =
 	AxiosResponse<WebitelImApiGatewayV1Thread>;
 export type ThreadManagementAddMemberResult =

@@ -51,6 +51,31 @@ export const GateServiceListGatesResponse = zod
 		items: zod
 			.array(
 				zod.object({
+					capabilities: zod
+						.object({
+							delivered: zod
+								.boolean()
+								.optional()
+								.describe('The channel emits delivery receipts.'),
+							failed: zod
+								.boolean()
+								.optional()
+								.describe('The channel reports failed deliveries.'),
+							read: zod
+								.boolean()
+								.optional()
+								.describe('The channel emits read/seen receipts.'),
+							typing: zod
+								.boolean()
+								.optional()
+								.describe(
+									'The channel can forward a native "typing…" indicator to the chat partner.',
+								),
+						})
+						.optional()
+						.describe(
+							'Delivery-status receipts the channel is able to produce; unset when no\nprovider adapter is registered for the channel type.',
+						),
 					contact: zod.string().optional(),
 					createdAt: zod.string().optional(),
 					id: zod.string().optional(),

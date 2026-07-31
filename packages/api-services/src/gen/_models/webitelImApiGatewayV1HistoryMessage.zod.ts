@@ -10,7 +10,10 @@ import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image.zo
 import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive.zod';
 import type { WebitelImApiGatewayV1InteractiveCallback } from './webitelImApiGatewayV1InteractiveCallback.zod';
 import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact.zod';
+import type { WebitelImApiGatewayV1MessageDeliveryStatus } from './webitelImApiGatewayV1MessageDeliveryStatus.zod';
 import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation.zod';
+import type { WebitelImApiGatewayV1MessageRecipientStatus } from './webitelImApiGatewayV1MessageRecipientStatus.zod';
+import type { WebitelImApiGatewayV1ReplyToMessage } from './webitelImApiGatewayV1ReplyToMessage.zod';
 import type { WebitelImApiGatewayV1System } from './webitelImApiGatewayV1System.zod';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember.zod';
 
@@ -24,6 +27,20 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	contact?: WebitelImApiGatewayV1MessageContact;
 	/** Message creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
+	/**
+	 * True when the message was deleted by its author. Content fields
+	 * (body, attachments, contact, location, interactive, metadata) are
+	 * cleared for deleted messages; clients should render a tombstone.
+	 */
+	deleted?: boolean;
+	/** Unix time in milliseconds when the message was deleted. */
+	deletedAt?: string;
+	/**
+	 * Aggregated delivery status across recipients: FAILED when every
+	 * recipient failed, otherwise the minimal status among non-failed ones.
+	 * UNSPECIFIED for messages without per-recipient tracking (historical).
+	 */
+	deliveryStatus?: WebitelImApiGatewayV1MessageDeliveryStatus;
 	/** List of document attachments. */
 	documents?: WebitelImApiGatewayV1Document[];
 	/** Message last update timestamp (Unix time, milliseconds). */
@@ -41,8 +58,11 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
 	/** Metadata for button reaction for interactive message. */
 	reactedMetadata?: WebitelImApiGatewayV1InteractiveCallback;
+	replyTo?: WebitelImApiGatewayV1ReplyToMessage;
 	/** Sender user aggregated information. */
 	sender?: WebitelImApiGatewayV1ThreadMember;
+	/** Per-recipient delivery details. */
+	statuses?: WebitelImApiGatewayV1MessageRecipientStatus[];
 	/** System message content. */
 	system?: WebitelImApiGatewayV1System;
 	/** Identifier of the thread the message belongs to. */

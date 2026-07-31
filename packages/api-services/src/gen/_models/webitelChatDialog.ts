@@ -36,6 +36,8 @@ export interface WebitelChatDialog {
 	/** The latest (top) message. */
 	message?: WebitelChatMessage;
 	queue?: WebitelChatPeer;
+	/** Zero value means - NOT rated yet. */
+	rateId?: string;
 	/** Timestamp when dialog started. */
 	started?: string;
 	/** Title of the dialog. */

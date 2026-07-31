@@ -10,7 +10,11 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	MessageReadParams,
+	WebitelImApiGatewayV1DeleteMessagesRequest,
+	WebitelImApiGatewayV1DeleteMessagesResponse,
+	WebitelImApiGatewayV1EditMessageResponse,
 	WebitelImApiGatewayV1InteractiveCallbackResponse,
+	WebitelImApiGatewayV1MessageEditMessageBody,
 	WebitelImApiGatewayV1MessageSendInteractiveCallbackBody,
 	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendContactRequest,
@@ -41,6 +45,24 @@ export const // --- title start
 				return axiosInstance.post(
 					`/v1/messages/contact`,
 					webitelImApiGatewayV1SendContactRequest,
+					options,
+				);
+			};
+			/**
+ * @summary Deletes one or more messages authored by the caller in an active chat.
+The messages disappear for every participant; their content is retained
+in storage marked as deleted. Best-effort: the response reports which ids
+were actually deleted and which ones were skipped.
+ */
+			const messageDeleteMessages = (
+				webitelImApiGatewayV1DeleteMessagesRequest: WebitelImApiGatewayV1DeleteMessagesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1DeleteMessagesResponse>
+			> => {
+				return axiosInstance.post(
+					`/v1/messages/delete`,
+					webitelImApiGatewayV1DeleteMessagesRequest,
 					options,
 				);
 			};
@@ -116,8 +138,23 @@ We use the shared Request/Response types directly to avoid duplication.
 				);
 			};
 			/**
-			 * @summary Mark message as read by id.
+			 * @summary Edits an existing message by ID. Only the sender or authorized users can edit messages.
 			 */
+			const messageEditMessage = (
+				id: string,
+				webitelImApiGatewayV1MessageEditMessageBody: WebitelImApiGatewayV1MessageEditMessageBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1EditMessageResponse>> => {
+				return axiosInstance.patch(
+					`/v1/messages/${id}`,
+					webitelImApiGatewayV1MessageEditMessageBody,
+					options,
+				);
+			};
+			/**
+ * @summary Marks the thread as read up to the given message (inclusive):
+every earlier unread message of the caller in the thread is covered.
+ */
 			const messageRead = (
 				id: string,
 				params?: MessageReadParams,
@@ -135,16 +172,20 @@ We use the shared Request/Response types directly to avoid duplication.
 			// --- footer start
 			return {
 				messageSendContact,
+				messageDeleteMessages,
 				messageSendDocument,
 				messageSendInteractive,
 				messageSendInteractiveCallback,
 				messageSendLocation,
 				messageSendText,
+				messageEditMessage,
 				messageRead,
 			};
 		};
 export type MessageSendContactResult =
 	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
+export type MessageDeleteMessagesResult =
+	AxiosResponse<WebitelImApiGatewayV1DeleteMessagesResponse>;
 export type MessageSendDocumentResult =
 	AxiosResponse<WebitelImApiGatewayV1SendDocumentResponse>;
 export type MessageSendInteractiveResult =
@@ -155,6 +196,8 @@ export type MessageSendLocationResult =
 	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
 export type MessageSendTextResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTextResponse>;
+export type MessageEditMessageResult =
+	AxiosResponse<WebitelImApiGatewayV1EditMessageResponse>;
 export type MessageReadResult =
 	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 

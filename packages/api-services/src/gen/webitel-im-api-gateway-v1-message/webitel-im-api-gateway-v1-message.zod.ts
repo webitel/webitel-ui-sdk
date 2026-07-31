@@ -18,6 +18,7 @@ export const MessageSendContactBody = zod
 			.string()
 			.optional()
 			.describe('Phone number in E.164 format recommended.'),
+		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
 				iss: zod.string().optional(),
@@ -71,6 +72,38 @@ export const MessageSendContactResponse = zod
 	);
 
 /**
+ * @summary Deletes one or more messages authored by the caller in an active chat.
+The messages disappear for every participant; their content is retained
+in storage marked as deleted. Best-effort: the response reports which ids
+were actually deleted and which ones were skipped.
+ */
+export const MessageDeleteMessagesBody = zod.object({
+	ids: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Messages to delete. Only messages authored by the caller are removed.',
+		),
+});
+
+export const MessageDeleteMessagesResponse = zod.object({
+	deletedAt: zod
+		.string()
+		.optional()
+		.describe('Unix time in milliseconds when the messages were deleted.'),
+	deletedIds: zod
+		.array(zod.string())
+		.optional()
+		.describe('Messages that were actually deleted by this call.'),
+	skippedIds: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Requested messages left untouched: not found, already deleted,\nnot authored by the caller, or the chat is closed.',
+		),
+});
+
+/**
  * @summary SendDocument delivers a document message.
  */
 export const MessageSendDocumentBody = zod
@@ -91,6 +124,9 @@ export const MessageSendDocumentBody = zod
 					),
 			)
 			.optional(),
+		externalId: zod.string().optional(),
+		replyToExternalId: zod.string().optional(),
+		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
 				iss: zod.string().optional(),
@@ -514,6 +550,7 @@ export const MessageSendLocationBody = zod
 			.string()
 			.optional()
 			.describe('Optional location name (e.g., "Central Park").'),
+		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
 				iss: zod.string().optional(),
@@ -573,6 +610,9 @@ We use the shared Request/Response types directly to avoid duplication.
 export const MessageSendTextBody = zod
 	.object({
 		body: zod.string().optional(),
+		externalId: zod.string().optional(),
+		replyToExternalId: zod.string().optional(),
+		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
 				iss: zod.string().optional(),
@@ -625,7 +665,30 @@ export const MessageSendTextResponse = zod
 	.describe('Represents a response to send a text message.');
 
 /**
- * @summary Mark message as read by id.
+ * @summary Edits an existing message by ID. Only the sender or authorized users can edit messages.
+ */
+export const MessageEditMessageParams = zod.object({
+	id: zod.string().describe('Original message ID to be edited.'),
+});
+
+export const MessageEditMessageBody = zod.object({
+	body: zod
+		.string()
+		.optional()
+		.describe('New content for the message. Must not be empty.'),
+});
+
+export const MessageEditMessageResponse = zod.object({
+	editedAt: zod
+		.string()
+		.optional()
+		.describe('Unix time in milliseconds when the message was edited.'),
+	id: zod.string().optional(),
+});
+
+/**
+ * @summary Marks the thread as read up to the given message (inclusive):
+every earlier unread message of the caller in the thread is covered.
  */
 export const MessageReadParams = zod.object({
 	id: zod.string(),

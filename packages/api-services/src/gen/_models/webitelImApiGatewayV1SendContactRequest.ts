@@ -20,6 +20,7 @@ export interface WebitelImApiGatewayV1SendContactRequest {
 	name?: string;
 	/** Phone number in E.164 format recommended. */
 	phoneNumber?: string;
+	replyToMessageId?: string;
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional send ID for idempotency. */
 	sendId?: string;

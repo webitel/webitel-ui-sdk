@@ -56,8 +56,11 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		.describe('Filter threads by participant contact IDs.'),
 });
 
+export const threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemLastMsgStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemTypeDefault = `UNKNOWN`;
 
@@ -91,6 +94,32 @@ export const ThreadManagementSearchResponse = zod
 									.optional()
 									.describe(
 										'Message creation timestamp (Unix time, milliseconds).',
+									),
+								deleted: zod
+									.boolean()
+									.optional()
+									.describe(
+										'True when the message was deleted by its author. Content fields\n(body, attachments, contact, location, interactive, metadata) are\ncleared for deleted messages; clients should render a tombstone.',
+									),
+								deletedAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Unix time in milliseconds when the message was deleted.',
+									),
+								deliveryStatus: zod
+									.enum([
+										'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+										'MESSAGE_DELIVERY_STATUS_SENT',
+										'MESSAGE_DELIVERY_STATUS_DELIVERED',
+										'MESSAGE_DELIVERY_STATUS_READ',
+										'MESSAGE_DELIVERY_STATUS_FAILED',
+									])
+									.default(
+										threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault,
+									)
+									.describe(
+										'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 									),
 								documents: zod
 									.array(
@@ -589,6 +618,128 @@ export const ThreadManagementSearchResponse = zod
 									.describe(
 										'Metadata for button reaction for interactive message.',
 									),
+								replyTo: zod
+									.object({
+										attachmentKind: zod.string().optional(),
+										attachmentMime: zod.string().optional(),
+										attachmentName: zod.string().optional(),
+										body: zod.string().optional(),
+										createdAt: zod.string().optional(),
+										id: zod.string().optional(),
+										sender: zod
+											.object({
+												contact: zod
+													.object({
+														appId: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														createdAt: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														isBot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updatedAt: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contactId: zod.string().optional(),
+																	createdAt: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disableReason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updatedAt: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe(
+														'Contact represents an external messaging identity.',
+													),
+												id: zod.string().optional(),
+												permissions: zod
+													.object({
+														canAddMembers: zod.boolean().optional(),
+														canChangeMembersPermissions: zod
+															.boolean()
+															.optional(),
+														canChangeThreadInfo: zod.boolean().optional(),
+														canRemoveMembers: zod.boolean().optional(),
+														canSendMessages: zod.boolean().optional(),
+														createdAt: zod.string().optional(),
+														id: zod.string().optional(),
+														memberId: zod.string().optional(),
+														updatedAt: zod.string().optional(),
+													})
+													.optional(),
+												role: zod
+													.enum([
+														'ROLE_UNSPECIFIED',
+														'ROLE_MEMBER',
+														'ROLE_ADMIN',
+														'ROLE_OWNER',
+														'ROLE_SUPERVISOR',
+													])
+													.default(
+														threadManagementSearchResponseItemsItemLastMsgReplyToSenderRoleDefault,
+													),
+											})
+											.optional()
+											.describe(
+												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+											),
+										senderId: zod.string().optional(),
+										type: zod.number().optional(),
+									})
+									.optional(),
 								sender: zod
 									.object({
 										contact: zod
@@ -695,6 +846,55 @@ export const ThreadManagementSearchResponse = zod
 									})
 									.optional()
 									.describe('Sender user aggregated information.'),
+								statuses: zod
+									.array(
+										zod
+											.object({
+												deliveredAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Unix time in milliseconds; zero when not reached.',
+													),
+												error: zod
+													.string()
+													.optional()
+													.describe(
+														'JSON-encoded provider error details for FAILED.',
+													),
+												failedAt: zod.string().optional(),
+												memberId: zod
+													.string()
+													.optional()
+													.describe('Recipient contact id.'),
+												readAt: zod.string().optional(),
+												status: zod
+													.enum([
+														'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+														'MESSAGE_DELIVERY_STATUS_SENT',
+														'MESSAGE_DELIVERY_STATUS_DELIVERED',
+														'MESSAGE_DELIVERY_STATUS_READ',
+														'MESSAGE_DELIVERY_STATUS_FAILED',
+													])
+													.default(
+														threadManagementSearchResponseItemsItemLastMsgStatusesItemStatusDefault,
+													)
+													.describe(
+														'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
+													),
+												via: zod
+													.string()
+													.optional()
+													.describe(
+														'Confirmation source: ws|push|provider|bot.',
+													),
+											})
+											.describe(
+												'MessageRecipientStatus is a per-recipient delivery state of a message.',
+											),
+									)
+									.optional()
+									.describe('Per-recipient delivery details.'),
 								system: zod
 									.object({
 										messageId: zod
@@ -876,6 +1076,12 @@ export const ThreadManagementSearchResponse = zod
 							])
 							.default(threadManagementSearchResponseItemsItemTypeDefault)
 							.describe('Type of the thread.'),
+						unreadCount: zod
+							.number()
+							.optional()
+							.describe(
+								"Number of unread messages in this thread for the calling participant.\nCounts content messages not yet read; the caller's own messages and\nsystem messages are excluded.",
+							),
 						updatedAt: zod
 							.string()
 							.optional()
@@ -1029,8 +1235,11 @@ export const ThreadManagementCreateBody = zod
 		'ThreadManagementCreateRequest defines parameters for creating a specific thread type.',
 	);
 
+export const threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementCreateResponseThreadLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementCreateResponseThreadLastMsgStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadTypeDefault = `UNKNOWN`;
 
@@ -1062,6 +1271,32 @@ export const ThreadManagementCreateResponse = zod
 							.optional()
 							.describe(
 								'Message creation timestamp (Unix time, milliseconds).',
+							),
+						deleted: zod
+							.boolean()
+							.optional()
+							.describe(
+								'True when the message was deleted by its author. Content fields\n(body, attachments, contact, location, interactive, metadata) are\ncleared for deleted messages; clients should render a tombstone.',
+							),
+						deletedAt: zod
+							.string()
+							.optional()
+							.describe(
+								'Unix time in milliseconds when the message was deleted.',
+							),
+						deliveryStatus: zod
+							.enum([
+								'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+								'MESSAGE_DELIVERY_STATUS_SENT',
+								'MESSAGE_DELIVERY_STATUS_DELIVERED',
+								'MESSAGE_DELIVERY_STATUS_READ',
+								'MESSAGE_DELIVERY_STATUS_FAILED',
+							])
+							.default(
+								threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault,
+							)
+							.describe(
+								'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 							),
 						documents: zod
 							.array(
@@ -1550,6 +1785,126 @@ export const ThreadManagementCreateResponse = zod
 							.describe(
 								'Metadata for button reaction for interactive message.',
 							),
+						replyTo: zod
+							.object({
+								attachmentKind: zod.string().optional(),
+								attachmentMime: zod.string().optional(),
+								attachmentName: zod.string().optional(),
+								body: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								id: zod.string().optional(),
+								sender: zod
+									.object({
+										contact: zod
+											.object({
+												appId: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												createdAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												isBot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updatedAt: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contactId: zod.string().optional(),
+															createdAt: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disableReason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updatedAt: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
+											})
+											.optional()
+											.describe(
+												'Contact represents an external messaging identity.',
+											),
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												canAddMembers: zod.boolean().optional(),
+												canChangeMembersPermissions: zod.boolean().optional(),
+												canChangeThreadInfo: zod.boolean().optional(),
+												canRemoveMembers: zod.boolean().optional(),
+												canSendMessages: zod.boolean().optional(),
+												createdAt: zod.string().optional(),
+												id: zod.string().optional(),
+												memberId: zod.string().optional(),
+												updatedAt: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementCreateResponseThreadLastMsgReplyToSenderRoleDefault,
+											),
+									})
+									.optional()
+									.describe(
+										'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+									),
+								senderId: zod.string().optional(),
+								type: zod.number().optional(),
+							})
+							.optional(),
 						sender: zod
 							.object({
 								contact: zod
@@ -1654,6 +2009,53 @@ export const ThreadManagementCreateResponse = zod
 							})
 							.optional()
 							.describe('Sender user aggregated information.'),
+						statuses: zod
+							.array(
+								zod
+									.object({
+										deliveredAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Unix time in milliseconds; zero when not reached.',
+											),
+										error: zod
+											.string()
+											.optional()
+											.describe(
+												'JSON-encoded provider error details for FAILED.',
+											),
+										failedAt: zod.string().optional(),
+										memberId: zod
+											.string()
+											.optional()
+											.describe('Recipient contact id.'),
+										readAt: zod.string().optional(),
+										status: zod
+											.enum([
+												'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+												'MESSAGE_DELIVERY_STATUS_SENT',
+												'MESSAGE_DELIVERY_STATUS_DELIVERED',
+												'MESSAGE_DELIVERY_STATUS_READ',
+												'MESSAGE_DELIVERY_STATUS_FAILED',
+											])
+											.default(
+												threadManagementCreateResponseThreadLastMsgStatusesItemStatusDefault,
+											)
+											.describe(
+												'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
+											),
+										via: zod
+											.string()
+											.optional()
+											.describe('Confirmation source: ws|push|provider|bot.'),
+									})
+									.describe(
+										'MessageRecipientStatus is a per-recipient delivery state of a message.',
+									),
+							)
+							.optional()
+							.describe('Per-recipient delivery details.'),
 						system: zod
 							.object({
 								messageId: zod
@@ -1824,6 +2226,12 @@ export const ThreadManagementCreateResponse = zod
 					])
 					.default(threadManagementCreateResponseThreadTypeDefault)
 					.describe('Type of the thread.'),
+				unreadCount: zod
+					.number()
+					.optional()
+					.describe(
+						"Number of unread messages in this thread for the calling participant.\nCounts content messages not yet read; the caller's own messages and\nsystem messages are excluded.",
+					),
 				updatedAt: zod
 					.string()
 					.optional()
@@ -1983,8 +2391,11 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number (1-based).'),
 });
 
+export const threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchLeftResponseItemsItemLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementSearchLeftResponseItemsItemLastMsgStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemTypeDefault = `UNKNOWN`;
 
@@ -2017,6 +2428,32 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								.optional()
 								.describe(
 									'Message creation timestamp (Unix time, milliseconds).',
+								),
+							deleted: zod
+								.boolean()
+								.optional()
+								.describe(
+									'True when the message was deleted by its author. Content fields\n(body, attachments, contact, location, interactive, metadata) are\ncleared for deleted messages; clients should render a tombstone.',
+								),
+							deletedAt: zod
+								.string()
+								.optional()
+								.describe(
+									'Unix time in milliseconds when the message was deleted.',
+								),
+							deliveryStatus: zod
+								.enum([
+									'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+									'MESSAGE_DELIVERY_STATUS_SENT',
+									'MESSAGE_DELIVERY_STATUS_DELIVERED',
+									'MESSAGE_DELIVERY_STATUS_READ',
+									'MESSAGE_DELIVERY_STATUS_FAILED',
+								])
+								.default(
+									threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault,
+								)
+								.describe(
+									'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 								),
 							documents: zod
 								.array(
@@ -2508,6 +2945,126 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								.describe(
 									'Metadata for button reaction for interactive message.',
 								),
+							replyTo: zod
+								.object({
+									attachmentKind: zod.string().optional(),
+									attachmentMime: zod.string().optional(),
+									attachmentName: zod.string().optional(),
+									body: zod.string().optional(),
+									createdAt: zod.string().optional(),
+									id: zod.string().optional(),
+									sender: zod
+										.object({
+											contact: zod
+												.object({
+													appId: zod
+														.string()
+														.optional()
+														.describe(
+															'Identifier of the specific integration app or bot.',
+														),
+													createdAt: zod
+														.string()
+														.optional()
+														.describe(
+															'Record creation timestamp (Unix Epoch in milliseconds).',
+														),
+													isBot: zod
+														.boolean()
+														.optional()
+														.describe(
+															'Represents if usere is real person or automatic script.',
+														),
+													iss: zod
+														.string()
+														.optional()
+														.describe(
+															'Provider-specific unique identifier (Issuer ID).',
+														),
+													metadata: zod
+														.record(zod.string(), zod.string())
+														.optional()
+														.describe(
+															'Additional dynamic attributes provided by the messenger.',
+														),
+													name: zod
+														.string()
+														.optional()
+														.describe('Display name of the contact.'),
+													sub: zod
+														.string()
+														.optional()
+														.describe(
+															'Associated internal system subject/identifier.',
+														),
+													type: zod
+														.string()
+														.optional()
+														.describe(
+															"Channel type (e.g., 'webchat', 'telegram').",
+														),
+													updatedAt: zod
+														.string()
+														.optional()
+														.describe(
+															'Last record update timestamp (Unix Epoch in milliseconds).',
+														),
+													username: zod
+														.string()
+														.optional()
+														.describe('Technical username or handle.'),
+													vias: zod
+														.array(
+															zod.object({
+																contactId: zod.string().optional(),
+																createdAt: zod.string().optional(),
+																disable: zod.boolean().optional(),
+																disableReason: zod.string().optional(),
+																metadata: zod.looseObject({}).optional(),
+																updatedAt: zod.string().optional(),
+																via: zod.string().optional(),
+															}),
+														)
+														.optional(),
+												})
+												.optional()
+												.describe(
+													'Contact represents an external messaging identity.',
+												),
+											id: zod.string().optional(),
+											permissions: zod
+												.object({
+													canAddMembers: zod.boolean().optional(),
+													canChangeMembersPermissions: zod.boolean().optional(),
+													canChangeThreadInfo: zod.boolean().optional(),
+													canRemoveMembers: zod.boolean().optional(),
+													canSendMessages: zod.boolean().optional(),
+													createdAt: zod.string().optional(),
+													id: zod.string().optional(),
+													memberId: zod.string().optional(),
+													updatedAt: zod.string().optional(),
+												})
+												.optional(),
+											role: zod
+												.enum([
+													'ROLE_UNSPECIFIED',
+													'ROLE_MEMBER',
+													'ROLE_ADMIN',
+													'ROLE_OWNER',
+													'ROLE_SUPERVISOR',
+												])
+												.default(
+													threadManagementSearchLeftResponseItemsItemLastMsgReplyToSenderRoleDefault,
+												),
+										})
+										.optional()
+										.describe(
+											'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+										),
+									senderId: zod.string().optional(),
+									type: zod.number().optional(),
+								})
+								.optional(),
 							sender: zod
 								.object({
 									contact: zod
@@ -2614,6 +3171,53 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								})
 								.optional()
 								.describe('Sender user aggregated information.'),
+							statuses: zod
+								.array(
+									zod
+										.object({
+											deliveredAt: zod
+												.string()
+												.optional()
+												.describe(
+													'Unix time in milliseconds; zero when not reached.',
+												),
+											error: zod
+												.string()
+												.optional()
+												.describe(
+													'JSON-encoded provider error details for FAILED.',
+												),
+											failedAt: zod.string().optional(),
+											memberId: zod
+												.string()
+												.optional()
+												.describe('Recipient contact id.'),
+											readAt: zod.string().optional(),
+											status: zod
+												.enum([
+													'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+													'MESSAGE_DELIVERY_STATUS_SENT',
+													'MESSAGE_DELIVERY_STATUS_DELIVERED',
+													'MESSAGE_DELIVERY_STATUS_READ',
+													'MESSAGE_DELIVERY_STATUS_FAILED',
+												])
+												.default(
+													threadManagementSearchLeftResponseItemsItemLastMsgStatusesItemStatusDefault,
+												)
+												.describe(
+													'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
+												),
+											via: zod
+												.string()
+												.optional()
+												.describe('Confirmation source: ws|push|provider|bot.'),
+										})
+										.describe(
+											'MessageRecipientStatus is a per-recipient delivery state of a message.',
+										),
+								)
+								.optional()
+								.describe('Per-recipient delivery details.'),
 							system: zod
 								.object({
 									messageId: zod
@@ -2789,6 +3393,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 						])
 						.default(threadManagementSearchLeftResponseItemsItemTypeDefault)
 						.describe('Type of the thread.'),
+					unreadCount: zod
+						.number()
+						.optional()
+						.describe(
+							"Number of unread messages in this thread for the calling participant.\nCounts content messages not yet read; the caller's own messages and\nsystem messages are excluded.",
+						),
 					updatedAt: zod
 						.string()
 						.optional()
@@ -2918,6 +3528,25 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 });
 
 /**
+ * @summary Returns the unread summary for the calling participant: the number of
+chats with unread messages and the total number of unread messages.
+ */
+export const ThreadManagementGetUnreadSummaryResponse = zod
+	.object({
+		unreadChats: zod
+			.number()
+			.optional()
+			.describe(
+				'Number of chats (threads) that have at least one unread message.',
+			),
+		unreadMessages: zod
+			.string()
+			.optional()
+			.describe('Total number of unread messages across all chats.'),
+	})
+	.describe("GetUnreadSummaryResponse carries the caller's unread totals.");
+
+/**
  * @summary Returns a single thread by its identifier.
  */
 export const ThreadManagementGetParams = zod.object({
@@ -2931,8 +3560,11 @@ export const ThreadManagementGetQueryParams = zod.object({
 		.describe('List of fields to include in the response.'),
 });
 
+export const threadManagementGetResponseLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementGetResponseLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
+export const threadManagementGetResponseLastMsgStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementGetResponseMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseTypeDefault = `UNKNOWN`;
 
@@ -2961,6 +3593,28 @@ export const ThreadManagementGetResponse = zod
 					.string()
 					.optional()
 					.describe('Message creation timestamp (Unix time, milliseconds).'),
+				deleted: zod
+					.boolean()
+					.optional()
+					.describe(
+						'True when the message was deleted by its author. Content fields\n(body, attachments, contact, location, interactive, metadata) are\ncleared for deleted messages; clients should render a tombstone.',
+					),
+				deletedAt: zod
+					.string()
+					.optional()
+					.describe('Unix time in milliseconds when the message was deleted.'),
+				deliveryStatus: zod
+					.enum([
+						'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+						'MESSAGE_DELIVERY_STATUS_SENT',
+						'MESSAGE_DELIVERY_STATUS_DELIVERED',
+						'MESSAGE_DELIVERY_STATUS_READ',
+						'MESSAGE_DELIVERY_STATUS_FAILED',
+					])
+					.default(threadManagementGetResponseLastMsgDeliveryStatusDefault)
+					.describe(
+						'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
+					),
 				documents: zod
 					.array(
 						zod
@@ -3419,6 +4073,124 @@ export const ThreadManagementGetResponse = zod
 					})
 					.optional()
 					.describe('Metadata for button reaction for interactive message.'),
+				replyTo: zod
+					.object({
+						attachmentKind: zod.string().optional(),
+						attachmentMime: zod.string().optional(),
+						attachmentName: zod.string().optional(),
+						body: zod.string().optional(),
+						createdAt: zod.string().optional(),
+						id: zod.string().optional(),
+						sender: zod
+							.object({
+								contact: zod
+									.object({
+										appId: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the specific integration app or bot.',
+											),
+										createdAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Record creation timestamp (Unix Epoch in milliseconds).',
+											),
+										isBot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if usere is real person or automatic script.',
+											),
+										iss: zod
+											.string()
+											.optional()
+											.describe(
+												'Provider-specific unique identifier (Issuer ID).',
+											),
+										metadata: zod
+											.record(zod.string(), zod.string())
+											.optional()
+											.describe(
+												'Additional dynamic attributes provided by the messenger.',
+											),
+										name: zod
+											.string()
+											.optional()
+											.describe('Display name of the contact.'),
+										sub: zod
+											.string()
+											.optional()
+											.describe(
+												'Associated internal system subject/identifier.',
+											),
+										type: zod
+											.string()
+											.optional()
+											.describe("Channel type (e.g., 'webchat', 'telegram')."),
+										updatedAt: zod
+											.string()
+											.optional()
+											.describe(
+												'Last record update timestamp (Unix Epoch in milliseconds).',
+											),
+										username: zod
+											.string()
+											.optional()
+											.describe('Technical username or handle.'),
+										vias: zod
+											.array(
+												zod.object({
+													contactId: zod.string().optional(),
+													createdAt: zod.string().optional(),
+													disable: zod.boolean().optional(),
+													disableReason: zod.string().optional(),
+													metadata: zod.looseObject({}).optional(),
+													updatedAt: zod.string().optional(),
+													via: zod.string().optional(),
+												}),
+											)
+											.optional(),
+									})
+									.optional()
+									.describe(
+										'Contact represents an external messaging identity.',
+									),
+								id: zod.string().optional(),
+								permissions: zod
+									.object({
+										canAddMembers: zod.boolean().optional(),
+										canChangeMembersPermissions: zod.boolean().optional(),
+										canChangeThreadInfo: zod.boolean().optional(),
+										canRemoveMembers: zod.boolean().optional(),
+										canSendMessages: zod.boolean().optional(),
+										createdAt: zod.string().optional(),
+										id: zod.string().optional(),
+										memberId: zod.string().optional(),
+										updatedAt: zod.string().optional(),
+									})
+									.optional(),
+								role: zod
+									.enum([
+										'ROLE_UNSPECIFIED',
+										'ROLE_MEMBER',
+										'ROLE_ADMIN',
+										'ROLE_OWNER',
+										'ROLE_SUPERVISOR',
+									])
+									.default(
+										threadManagementGetResponseLastMsgReplyToSenderRoleDefault,
+									),
+							})
+							.optional()
+							.describe(
+								'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+							),
+						senderId: zod.string().optional(),
+						type: zod.number().optional(),
+					})
+					.optional(),
 				sender: zod
 					.object({
 						contact: zod
@@ -3515,6 +4287,51 @@ export const ThreadManagementGetResponse = zod
 					})
 					.optional()
 					.describe('Sender user aggregated information.'),
+				statuses: zod
+					.array(
+						zod
+							.object({
+								deliveredAt: zod
+									.string()
+									.optional()
+									.describe(
+										'Unix time in milliseconds; zero when not reached.',
+									),
+								error: zod
+									.string()
+									.optional()
+									.describe('JSON-encoded provider error details for FAILED.'),
+								failedAt: zod.string().optional(),
+								memberId: zod
+									.string()
+									.optional()
+									.describe('Recipient contact id.'),
+								readAt: zod.string().optional(),
+								status: zod
+									.enum([
+										'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
+										'MESSAGE_DELIVERY_STATUS_SENT',
+										'MESSAGE_DELIVERY_STATUS_DELIVERED',
+										'MESSAGE_DELIVERY_STATUS_READ',
+										'MESSAGE_DELIVERY_STATUS_FAILED',
+									])
+									.default(
+										threadManagementGetResponseLastMsgStatusesItemStatusDefault,
+									)
+									.describe(
+										'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
+									),
+								via: zod
+									.string()
+									.optional()
+									.describe('Confirmation source: ws|push|provider|bot.'),
+							})
+							.describe(
+								'MessageRecipientStatus is a per-recipient delivery state of a message.',
+							),
+					)
+					.optional()
+					.describe('Per-recipient delivery details.'),
 				system: zod
 					.object({
 						messageId: zod
@@ -3675,6 +4492,12 @@ export const ThreadManagementGetResponse = zod
 			])
 			.default(threadManagementGetResponseTypeDefault)
 			.describe('Type of the thread.'),
+		unreadCount: zod
+			.number()
+			.optional()
+			.describe(
+				"Number of unread messages in this thread for the calling participant.\nCounts content messages not yet read; the caller's own messages and\nsystem messages are excluded.",
+			),
 		updatedAt: zod
 			.string()
 			.optional()
