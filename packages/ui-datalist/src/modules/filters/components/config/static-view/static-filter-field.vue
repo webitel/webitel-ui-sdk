@@ -44,8 +44,9 @@ const onValueChange = (value: FilterValue) => {
 	}
 
 	emit('update:filter', {
-		...props.filter,
+		name: props.filterConfig.name,
 		value,
+		label: props.filter?.label,
 	});
 };
 </script>

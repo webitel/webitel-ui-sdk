@@ -76,7 +76,7 @@ import { computed } from 'vue';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
-import { FilterData, IFilter } from '../classes/Filter';
+import { FilterInitParams, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
@@ -151,10 +151,10 @@ const props = defineProps<Props>();
  */
 const emit = defineEmits<{
 	'filter:add': [
-		FilterData,
+		FilterInitParams,
 	];
 	'filter:update': [
-		FilterData,
+		FilterInitParams,
 	];
 	'filter:delete': [
 		IFilter,
