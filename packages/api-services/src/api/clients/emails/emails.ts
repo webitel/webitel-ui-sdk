@@ -1,4 +1,9 @@
-import { getEmails } from '@webitel/api-services/gen';
+import {
+	getEmails,
+	MergeEmailsBodyItem,
+	UpdateEmailBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -11,12 +16,16 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const getList = async (params) => {
+const addFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
+
+const getList = async (params: Record<string, unknown>) => {
 	const defaultObject = {
 		primary: false,
 	};
 
-	const fieldsToSend = [
+	const listFieldsToSend = [
 		'parentId',
 		'page',
 		'size',
@@ -26,7 +35,7 @@ const getList = async (params) => {
 		'id',
 	];
 	const { parentId, page, size, q, sort, fields, id } = applyTransform(params, [
-		sanitize(fieldsToSend),
+		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
@@ -59,7 +68,13 @@ const getList = async (params) => {
 	}
 };
 
-const get = async ({ itemId, parentId }) => {
+const get = async ({
+	itemId,
+	parentId,
+}: {
+	itemId: string;
+	parentId: string;
+}) => {
 	const fields = [
 		'email',
 		'primary',
@@ -80,44 +95,25 @@ const get = async ({ itemId, parentId }) => {
 	}
 };
 
-const fieldsToSend = [
-	'email',
-	'type',
-	'primary',
-];
-
-const add = async ({ contactId, emails, params, options }) => {
-	const item = applyTransform(emails, [
-		camelToSnake(),
-	]);
-	console.log(item);
-
-	try {
-		const response = await getEmails().mergeEmails(
-			contactId,
-			item,
-			params,
-			options,
-		);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-const update = async ({ itemInstance, etag: id, parentId }) => {
+const add = async ({
+	parentId,
+	itemInstance,
+}: {
+	parentId: string;
+	itemInstance: Record<string, unknown>;
+}) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitize(addFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().updateEmail(parentId, id, item);
-		return applyTransform(response.data, [
+		const response = await getEmails().mergeEmails(parentId, [
+			item,
+		]);
+		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
+		return data[0];
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -125,16 +121,55 @@ const update = async ({ itemInstance, etag: id, parentId }) => {
 	}
 };
 
-const patch = async ({ parentId, changes, etag }) => {
+const update = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: Record<string, unknown> & {
+		etag: string;
+	};
+	parentId: string;
+}) => {
+	const item = applyTransform(itemInstance, [
+		sanitize(updateFieldsToSend),
+		camelToSnake(),
+	]);
+	try {
+		const response = await getEmails().updateEmail(
+			parentId,
+			itemInstance.etag,
+			item,
+		);
+		const { data } = applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+		return data[0];
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const patch = async ({
+	parentId,
+	changes,
+	etag,
+}: {
+	parentId: string;
+	changes: Record<string, unknown>;
+	etag: string;
+}) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitize(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
 		const response = await getEmails().updateEmail(parentId, etag, body);
-		return applyTransform(response.data, [
+		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
+		return data[0];
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -142,7 +177,13 @@ const patch = async ({ parentId, changes, etag }) => {
 	}
 };
 
-const deleteItem = async ({ etag, parentId }) => {
+const deleteItem = async ({
+	etag,
+	parentId,
+}: {
+	etag: string;
+	parentId: string;
+}) => {
 	try {
 		const response = await getEmails().deleteEmail(parentId, etag);
 		return applyTransform(response.data, []);
