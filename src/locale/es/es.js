@@ -417,6 +417,7 @@ export default {
 				[AdminSections.Configuration]: 'Configuración',
 				[AdminSections.GlobalVariables]: 'Variables globales',
 				[AdminSections.QuickReplies]: 'Respuestas rápidas',
+				[AdminSections.ActivityTypes]: 'Tipos de actividad',
 			},
 		},
 		[WtApplication.Wfm]: {
