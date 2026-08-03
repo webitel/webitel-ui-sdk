@@ -653,6 +653,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Ten miesiąc',
 				[RelativeDatetimeValue.Custom]: 'Niestandardowy zakres dat',
 			},
+			andMore: 'i jeszcze {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',

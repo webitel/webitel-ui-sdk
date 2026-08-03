@@ -652,6 +652,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Este mes',
 				[RelativeDatetimeValue.Custom]: 'Rango de fechas personalizado',
 			},
+			andMore: 'y {count} más',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} un ${linked(
 					'reusable.filter',
