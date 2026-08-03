@@ -43,6 +43,7 @@ export * from './slas/slas';
 export * from './teams/teams';
 export * from './userSettings/userSettings';
 export * from './users/users';
+export * from './variables/variables';
 export * from './wtTypes/adjunctTypeRecords/adjunctTypeRecords';
 export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
