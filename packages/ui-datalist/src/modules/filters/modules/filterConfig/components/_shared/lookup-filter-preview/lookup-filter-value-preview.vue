@@ -16,7 +16,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const PREVIEW_LIMIT = 10;
+const PREVIEW_LIMIT = 30;
 
 const props = defineProps<{
 	value: unknown;
