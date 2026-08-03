@@ -99,10 +99,25 @@ const props = defineProps<{
 	namespace: string;
 	presetsStore: StoreGeneric;
 	filterConfigs: AnyFilterConfig[];
+	/**
+	 * @description
+	 * Filters the user has applied themselves. A cached preset is not restored
+	 * over them – the filters they arrived with win.
+	 */
+	hasAnyFilters?: boolean;
 }>();
 
 const emit = defineEmits<{
+	/**
+	 * user picked a preset in the popup – consumer resets filters first
+	 */
 	apply: [
+		string,
+	];
+	/**
+	 * cached preset re-applied on mount – consumer MUST NOT reset filters
+	 */
+	restore: [
 		string,
 	];
 }>();
@@ -253,12 +268,18 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 
 const restorePresetById = async (id: number | null) => {
 	if (!id) return;
+	if (props.hasAnyFilters) return;
+
 	const presetData = await PresetQueryAPI.get({
 		id,
 	});
 	const filters = presetData?.preset?.['filtersManager.toString'];
 
-	if (filters) emit('apply', filters);
+	/* filters may have been restored from the route while the preset was being
+	   fetched, so re-check before overriding them */
+	if (props.hasAnyFilters) return;
+
+	if (filters) emit('restore', filters);
 };
 
 onMounted(async () => {
