@@ -268,6 +268,7 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 
 const restorePresetById = async (id: number | null) => {
 	if (!id) return;
+	/* cheap exit – skips the request entirely */
 	if (props.hasAnyFilters) return;
 
 	const presetData = await PresetQueryAPI.get({
