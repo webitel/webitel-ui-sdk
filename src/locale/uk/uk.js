@@ -418,6 +418,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфігурація',
 				[AdminSections.GlobalVariables]: 'Глобальні змінні',
 				[AdminSections.QuickReplies]: 'Швидкі відповіді',
+				[AdminSections.ActivityTypes]: 'Типи активності',
 			},
 		},
 		[WtApplication.Wfm]: {

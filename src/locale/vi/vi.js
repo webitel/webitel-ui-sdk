@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Cấu hình',
 				[AdminSections.GlobalVariables]: 'Biến toàn cục',
 				[AdminSections.QuickReplies]: 'Trả lời nhanh',
+				[AdminSections.ActivityTypes]: 'Loại hoạt động',
 			},
 		},
 		[WtApplication.Wfm]: {

@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Konfiguratsiya',
 				[AdminSections.GlobalVariables]: "Global o'zgaruvchilar",
 				[AdminSections.QuickReplies]: 'Tezkor javoblar',
+				[AdminSections.ActivityTypes]: 'Faoliyat turlari',
 			},
 		},
 		[WtApplication.Wfm]: {
