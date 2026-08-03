@@ -25,6 +25,7 @@ export * from './fileServices/fileServices';
 export * from './flows/flow';
 export * from './gateways/gateways';
 export * from './history/transcript/callTranscript';
+export * from './imClients/imClients';
 export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
