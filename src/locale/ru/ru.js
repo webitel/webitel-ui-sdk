@@ -480,6 +480,8 @@ export default {
 		nameAlreadyInUse: 'Это название уже используется',
 		phoneNumberSymbolsValidator:
 			"Номер может содержать только буквы (a-z, A-Z), цифры (0-9) и символы: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Пароль не может содержать спецсимволы и пробелы',
 		loginValidator: () => `Введите логин в формате имя${'@'}домен`,
 	},
 	webitelUI: {

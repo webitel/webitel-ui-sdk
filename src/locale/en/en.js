@@ -492,6 +492,8 @@ export default deepmerge(
 			nameAlreadyInUse: 'This name is already in use',
 			phoneNumberSymbolsValidator:
 				"Number must contain letters (a-z, A-Z), numbers (0-9), and special characters: +, -, _, ., !, ~, *, ', (,)",
+			sipPasswordSymbolsValidator:
+				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
 		},
 		webitelUI: {
