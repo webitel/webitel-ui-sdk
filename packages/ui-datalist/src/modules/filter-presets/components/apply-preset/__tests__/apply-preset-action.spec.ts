@@ -1,5 +1,6 @@
+import { createTestingPinia } from '@pinia/testing';
 import { flushPromises, shallowMount } from '@vue/test-utils';
-import { createPinia, defineStore, setActivePinia } from 'pinia';
+import { defineStore } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
 
@@ -18,39 +19,56 @@ vi.mock('../../../api/PresetQuery', () => ({
 
 const SNAPSHOT = '{"createdAt_val":"today"}';
 const CACHED_PRESET_ID = 7;
+const STORE_ID = 'test/presets';
 
 /*
-Minimal stand-in for createFilterPresetsStore: apply-preset-action only needs
-these refs/actions, and this avoids dragging in the whole table store.
+Only what apply-preset-action reads from the presets store – createTestingPinia
+stubs the actions, so none of them need bodies.
  */
-const useTestPresetsStore = defineStore('test/presets', () => ({
+const useTestPresetsStore = defineStore(STORE_ID, () => ({
 	dataList: ref([]),
 	error: ref(null),
 	isLoading: ref(false),
 	filtersManager: ref(createFiltersManager()),
-	presetId: ref<number | null>(CACHED_PRESET_ID),
+	presetId: ref<number | null>(null),
 
-	loadDataList: vi.fn(),
-	initialize: vi.fn(),
-	updateSize: vi.fn(),
-	deleteEls: vi.fn(),
-	setupPresetPersistence: vi.fn(),
+	loadDataList: () => {},
+	initialize: () => {},
+	updateSize: () => {},
+	deleteEls: () => {},
+	setupPresetPersistence: () => {},
 }));
 
-const mountAction = ({ hasAnyFilters = false } = {}) =>
-	shallowMount(ApplyPresetAction, {
+const mountAction = ({
+	hasAnyFilters = false,
+	presetId = CACHED_PRESET_ID,
+} = {}) => {
+	const pinia = createTestingPinia({
+		initialState: {
+			[STORE_ID]: {
+				presetId,
+			},
+		},
+	});
+
+	return shallowMount(ApplyPresetAction, {
 		props: {
 			namespace: 'test',
-			presetsStore: useTestPresetsStore(),
+			presetsStore: useTestPresetsStore(pinia),
 			filterConfigs: [],
 			hasAnyFilters,
 		},
+		global: {
+			plugins: [
+				pinia,
+			],
+		},
 	});
+};
 
 describe('ApplyPresetAction', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		setActivePinia(createPinia());
 
 		vi.mocked(PresetQueryAPI.get).mockResolvedValue({
 			id: CACHED_PRESET_ID,
@@ -87,5 +105,15 @@ describe('ApplyPresetAction', () => {
 		expect(PresetQueryAPI.get).not.toHaveBeenCalled();
 		expect(wrapper.emitted('restore')).toBeUndefined();
 		expect(wrapper.emitted('apply')).toBeUndefined();
+	});
+
+	it('does nothing when no preset is cached', async () => {
+		const wrapper = mountAction({
+			presetId: null,
+		});
+		await flushPromises();
+
+		expect(PresetQueryAPI.get).not.toHaveBeenCalled();
+		expect(wrapper.emitted('restore')).toBeUndefined();
 	});
 });

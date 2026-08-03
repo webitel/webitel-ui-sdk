@@ -124,6 +124,11 @@ export default (/*{ mode }*/) => {
 					__dirname,
 					'node_modules/axios',
 				),
+				/* packages/* carry their own pinia copy, but @pinia/testing is
+				   installed here. Pin every import to one ESM instance, otherwise
+				   createTestingPinia() sets the active pinia on a module the
+				   components under test don't read from */
+				pinia: resolve(__dirname, 'node_modules/pinia/dist/pinia.mjs'),
 			},
 			globals: true,
 			environment: 'happy-dom',

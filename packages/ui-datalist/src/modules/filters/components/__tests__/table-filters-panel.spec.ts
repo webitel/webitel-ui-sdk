@@ -1,6 +1,7 @@
+import { createTestingPinia } from '@pinia/testing';
 import { shallowMount } from '@vue/test-utils';
-import { createPinia, defineStore, setActivePinia } from 'pinia';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { defineStore } from 'pinia';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import ApplyPresetAction from '../../../filter-presets/components/apply-preset/apply-preset-action.vue';
 import {
@@ -11,8 +12,9 @@ import { createFilterConfig } from '../../modules/filterConfig/classes/createFil
 import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 import TableFiltersPanel from '../table-filters-panel.vue';
 
+/* the panel only ever calls resetPreset – createTestingPinia stubs it */
 const useTestPresetsStore = defineStore('test/presets', () => ({
-	resetPreset: vi.fn(),
+	resetPreset: () => {},
 }));
 
 /*
@@ -32,8 +34,10 @@ const filterOptions = [
 	FilterOption.Agent,
 ];
 
-const mountPanel = (filtersManager: IFiltersManager) =>
-	shallowMount(TableFiltersPanel, {
+const mountPanel = (filtersManager: IFiltersManager) => {
+	const pinia = createTestingPinia();
+
+	return shallowMount(TableFiltersPanel, {
 		props: {
 			filterOptions,
 			filtersManager,
@@ -41,11 +45,15 @@ const mountPanel = (filtersManager: IFiltersManager) =>
 			usePresetsStore: useTestPresetsStore,
 		},
 		global: {
+			plugins: [
+				pinia,
+			],
 			stubs: {
 				DynamicFilterPanelWrapper: DynamicFilterPanelWrapperStub,
 			},
 		},
 	});
+};
 
 const hasAnyFiltersOf = (filtersManager: IFiltersManager) =>
 	mountPanel(filtersManager)
@@ -56,7 +64,6 @@ describe('TableFiltersPanel preset restore gate', () => {
 	let filtersManager: IFiltersManager;
 
 	beforeEach(() => {
-		setActivePinia(createPinia());
 		filtersManager = createFiltersManager();
 	});
 
