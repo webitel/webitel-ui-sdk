@@ -55,6 +55,12 @@ export default (/*{ mode }*/) => {
 			alias: {
 				// vue: '@vue/compat',
 			},
+			/* packages/ui-datalist installs its own copy of the same pinia version.
+			   Two instances mean two "active pinia" registries, so a store created
+			   through one is invisible to components resolved through the other */
+			dedupe: [
+				'pinia',
+			],
 		},
 		plugins: [
 			tailwindcss(),
@@ -124,11 +130,6 @@ export default (/*{ mode }*/) => {
 					__dirname,
 					'node_modules/axios',
 				),
-				/* packages/* carry their own pinia copy, but @pinia/testing is
-				   installed here. Pin every import to one ESM instance, otherwise
-				   createTestingPinia() sets the active pinia on a module the
-				   components under test don't read from */
-				pinia: resolve(__dirname, 'node_modules/pinia/dist/pinia.mjs'),
 			},
 			globals: true,
 			environment: 'happy-dom',
