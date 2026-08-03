@@ -653,6 +653,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Осы ай',
 				[RelativeDatetimeValue.Custom]: 'Жеке күн аралығы',
 			},
+			andMore: 'және тағы {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',
