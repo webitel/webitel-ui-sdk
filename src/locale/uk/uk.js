@@ -479,6 +479,8 @@ export default {
 		nameAlreadyInUse: 'Така назва вже використовується',
 		phoneNumberSymbolsValidator:
 			"Номер може містити лише літери (a-z, A-Z), цифри (0-9) та символи: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Пароль не може містити спецсимволи та пробіли',
 		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
 	},
 	webitelUI: {

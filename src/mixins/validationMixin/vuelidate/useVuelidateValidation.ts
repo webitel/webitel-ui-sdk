@@ -115,6 +115,8 @@ export const useFieldValidation = ({
 				validationText = t('validation.nameAlreadyInUse');
 			} else if (validation.phoneNumberSymbolsValidator?.$invalid) {
 				validationText = t('validation.phoneNumberSymbolsValidator');
+			} else if (validation.sipPasswordSymbolsValidator?.$invalid) {
+				validationText = t('validation.sipPasswordSymbolsValidator');
 			} else if (validation.loginValidator?.$invalid) {
 				validationText = t('validation.loginValidator');
 			}

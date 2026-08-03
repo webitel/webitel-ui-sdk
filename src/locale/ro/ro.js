@@ -485,6 +485,8 @@ export default {
 		nameAlreadyInUse: 'Acest nume este deja folosit',
 		phoneNumberSymbolsValidator:
 			"Numărul poate conține doar litere (a-z, A-Z), cifre (0-9) și simbolurile: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Parola nu poate conține simboluri speciale sau spații',
 		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
 	},
 	webitelUI: {

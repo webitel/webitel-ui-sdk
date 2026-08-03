@@ -484,6 +484,8 @@ export default {
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
 		phoneNumberSymbolsValidator:
 			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Mật khẩu không được chứa ký tự đặc biệt và khoảng trắng',
 		loginValidator: () => `Nhập tên đăng nhập theo định dạng tên${'@'}miền`,
 	},
 	webitelUI: {

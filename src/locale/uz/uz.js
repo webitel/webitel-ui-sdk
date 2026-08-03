@@ -485,6 +485,8 @@ export default {
 		nameAlreadyInUse: 'Ushbu nom allaqachon mavjud',
 		phoneNumberSymbolsValidator:
 			"Raqamda faqat harflar (a-z, A-Z), raqamlar (0-9) va quyidagi belgilar bo'lishi mumkin: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			"Parol maxsus belgilar va bo'sh joylarni o'z ichiga olishi mumkin emas",
 		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
 	},
 	webitelUI: {
