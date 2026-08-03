@@ -647,6 +647,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Цей місяць',
 				[RelativeDatetimeValue.Custom]: 'Власний діапазон дат',
 			},
+			andMore: 'та ще {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',

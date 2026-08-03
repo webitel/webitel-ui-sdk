@@ -657,6 +657,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Ushbu oy',
 				[RelativeDatetimeValue.Custom]: "Boshqa sana oralig'i",
 			},
+			andMore: 'va yana {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',
