@@ -656,6 +656,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Tháng này',
 				[RelativeDatetimeValue.Custom]: 'Phạm vi ngày tùy chỉnh',
 			},
+			andMore: 'và {count} nữa',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} một ${linked(
 					'reusable.filter',

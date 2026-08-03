@@ -664,6 +664,7 @@ export default deepmerge(
 					[RelativeDatetimeValue.ThisMonth]: 'This month',
 					[RelativeDatetimeValue.Custom]: 'Custom date range',
 				},
+				andMore: 'and {count} more',
 				addFilter: ({ linked }) => {
 					return `${linked('reusable.add')} a ${linked(
 						'reusable.filter',

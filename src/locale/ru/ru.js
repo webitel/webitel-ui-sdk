@@ -648,6 +648,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Этот месяц',
 				[RelativeDatetimeValue.Custom]: 'Выбранный диапазон дат',
 			},
+			andMore: 'и ещё {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',

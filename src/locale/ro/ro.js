@@ -658,6 +658,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Această lună',
 				[RelativeDatetimeValue.Custom]: 'Interval personalizat',
 			},
+			andMore: 'și încă {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} un ${linked(
 					'reusable.filter',
