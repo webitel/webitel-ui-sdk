@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Configurație',
 				[AdminSections.GlobalVariables]: 'Variabile globale',
 				[AdminSections.QuickReplies]: 'Răspunsuri rapide',
+				[AdminSections.ActivityTypes]: 'Tipuri de activitate',
 			},
 		},
 		[WtApplication.Wfm]: {
