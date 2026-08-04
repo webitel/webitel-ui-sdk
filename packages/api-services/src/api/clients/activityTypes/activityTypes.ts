@@ -1,7 +1,8 @@
 import {
 	getSkillPresets,
-	SearchPresetQueryQueryParams,
-	UpdatePresetQueryBody,
+	PatchSkillPresetBody,
+	SearchSkillPresetQueryParams,
+	UpdateSkillPresetBody,
 } from '../../../gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
@@ -11,31 +12,36 @@ import {
 	notify,
 	sanitize,
 	snakeToCamel,
-	starToSearch,
 } from '../../transformers';
-import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
-import { ApiId } from '../_shared/types';
+import { getDefaultGetListResponse } from '../../defaults';
+import { ApiId, ApiParams } from '../_shared/types';
+
+const itemResponseHandler = (item: ApiParams) => {
+	return item.item;
+};
 
 const getActivityTypesList = async (params: Record<string, unknown>) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
-		SearchPresetQueryQueryParams,
+		SearchSkillPresetQueryParams,
 	);
 
-	const { page, size, sort, id, q } = applyTransform(params, [
-		merge(getDefaultGetParams()),
+	const transformedParams = applyTransform(params, [
 		sanitize(listFieldsToSend),
 		camelToSnake(),
-		starToSearch('q'),
+		(params) => ({
+			...params,
+			fields: [
+				'id',
+				...(params.fields || [
+					'name',
+				]),
+			],
+		}),
 	]);
 
 	try {
-		const response = await getSkillPresets().searchSkillPreset({
-			page,
-			size,
-			sort,
-			id,
-			q,
-		});
+		const response =
+			await getSkillPresets().searchSkillPreset(transformedParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -53,9 +59,10 @@ const getActivityTypesList = async (params: Record<string, unknown>) => {
 
 const getActivityType = async ({ itemId: id }: { itemId: ApiId }) => {
 	try {
-		const response = await getSkillPresets().getSkillPreset(id);
+		const response = await getSkillPresets().getSkillPreset(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -76,6 +83,7 @@ const addActivityType = async ({
 		const response = await getSkillPresets().createSkillPreset(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -92,14 +100,18 @@ const updateActivityType = async ({
 	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdatePresetQueryBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSkillPresetBody)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getSkillPresets().updateSkillPreset(id, changes);
+		const response = await getSkillPresets().updateSkillPreset(
+			String(id),
+			changes,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -116,14 +128,18 @@ const patchActivityType = async ({
 	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdatePresetQueryBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(PatchSkillPresetBody)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getSkillPresets().patchSkillPreset(id, changesBody);
+		const response = await getSkillPresets().patchSkillPreset(
+			String(id),
+			changesBody,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -134,7 +150,11 @@ const patchActivityType = async ({
 
 const deleteActivityType = async ({ id }: { id: ApiId }) => {
 	try {
-		const response = await getSkillPresets().deleteSkillPreset(id);
+		const response = await getSkillPresets().deleteSkillPreset({
+			ids: [
+				String(id),
+			],
+		});
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
