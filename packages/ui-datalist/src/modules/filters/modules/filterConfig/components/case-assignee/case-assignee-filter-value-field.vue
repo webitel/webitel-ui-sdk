@@ -3,15 +3,16 @@
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
     :v="vList"
-    v-model:model-value="model.list"
+    :model-value="value.list"
     data-key="id"
     option-value="id"
+    @update:model-value="handleInput('list', $event)"
   />
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
-    :selected="model?.unassigned"
+    :selected="value.unassigned"
     :v="vUnassigned"
-    @update:selected="model.unassigned = !!$event"
+    @update:selected="handleInput('unassigned', !!$event)"
   />
 </template>
 
@@ -36,6 +37,24 @@ const model = defineModel<ModelValue>({
 	}),
 });
 
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			list: [],
+			unassigned: false,
+		},
+);
+
+const handleInput = <K extends keyof ModelValue>(
+	key: K,
+	newFieldValue: ModelValue[K],
+) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
+	};
+};
+
 const props = defineProps<{
 	filterConfig: CaseAssigneeFilterConfig;
 }>();
@@ -54,10 +73,10 @@ const v$ = useVuelidate<{
 	computed(() => ({
 		model: {
 			list: {
-				required: requiredIf(() => !model.value.unassigned),
+				required: requiredIf(() => !value.value.unassigned),
 			},
 			unassigned: {
-				required: requiredIf(() => !model.value.list.length),
+				required: requiredIf(() => !value.value.list.length),
 			},
 		},
 	})),
