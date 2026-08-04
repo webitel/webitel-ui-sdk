@@ -9,12 +9,6 @@ import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 
-type DeepPartial<T> = T extends object
-	? {
-			[K in keyof T]?: DeepPartial<T[K]>;
-		}
-	: T;
-
 interface EmptyImageSet {
 	dark: string;
 	light: string;
@@ -47,29 +41,9 @@ export interface UseTableEmptySource {
 	isLoading?: Readable<boolean | undefined>;
 }
 
-type MaybeOverridesGetter =
-	| DeepPartial<EmptyStateConfig>
-	| Readable<DeepPartial<EmptyStateConfig>>
-	| (() => DeepPartial<EmptyStateConfig>);
-
-const resolveOverrides = (
-	source: MaybeOverridesGetter,
-): DeepPartial<EmptyStateConfig> => {
-	if (typeof source === 'function') return source();
-	if (source && typeof source === 'object' && 'value' in source) {
-		return source.value;
-	}
-	return source;
-};
-
-/**
- * @param overrides plain object, ref, computed, or getter — use a reactive
- *   source (not a plain object literal) if any value inside depends on
- *   locale/dark mode, so it re-evaluates instead of freezing at first render
- */
 export const useTableEmpty = (
 	{ dataList, filters, error, isLoading }: UseTableEmptySource = {},
-	overrides: MaybeOverridesGetter = {},
+	overrides = {},
 ) => {
 	const { t } = useI18n();
 
@@ -116,13 +90,7 @@ export const useTableEmpty = (
 		},
 	}));
 
-	const merged = computed<EmptyStateConfig>(
-		() =>
-			deepmerge(
-				defaults.value,
-				resolveOverrides(overrides),
-			) as EmptyStateConfig,
-	);
+	const merged = computed(() => deepmerge(defaults.value, overrides));
 
 	const darkMode = toRef(inject<boolean>('darkMode'));
 
