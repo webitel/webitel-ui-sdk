@@ -38,9 +38,11 @@
         <apply-preset-action
           v-if="presetStore"
           :filter-configs="filterConfigs"
+          :has-any-filters="hasAnyFilters"
           :namespace="props.presetNamespace ?? ''"
           :presets-store="presetStore"
           @apply="emit('preset:apply', $event)"
+          @restore="emit('preset:restore', $event)"
         />
 
         <save-preset-action
@@ -74,7 +76,7 @@ import { computed } from 'vue';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
-import { FilterData, IFilter } from '../classes/Filter';
+import { FilterInitParams, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
@@ -149,10 +151,10 @@ const props = defineProps<Props>();
  */
 const emit = defineEmits<{
 	'filter:add': [
-		FilterData,
+		FilterInitParams,
 	];
 	'filter:update': [
-		FilterData,
+		FilterInitParams,
 	];
 	'filter:delete': [
 		IFilter,
@@ -162,6 +164,13 @@ const emit = defineEmits<{
 	 * string == filtersManager.toString() snapshot
 	 */
 	'preset:apply': [
+		string,
+	];
+	/**
+	 * string == filtersManager.toString() snapshot of the preset cached in
+	 * localStorage. Handler must apply it WITHOUT resetting filters
+	 */
+	'preset:restore': [
 		string,
 	];
 	hide: [];
@@ -201,6 +210,22 @@ const listSelectedFilters = computed(() => {
 		].filter(([key]) => allowedKeys.has(key)),
 	);
 });
+
+/**
+ * @description
+ * Filters applied by the user. `notDeletable` configs are skipped – they are
+ * seeded defaults, not a user choice, so they must not block preset restore.
+ */
+const hasAnyFilters = computed(() =>
+	[
+		...listSelectedFilters.value.keys(),
+	].some((name) => {
+		const filterConfig = filterConfigs.value.find(
+			(config) => String(config.name) === String(name),
+		);
+		return !filterConfig?.notDeletable;
+	}),
+);
 
 const presetStore = props.usePresetsStore ? props.usePresetsStore() : null;
 

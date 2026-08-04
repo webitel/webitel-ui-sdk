@@ -482,6 +482,8 @@ export default {
 		nameAlreadyInUse: 'Ta nazwa jest już używana',
 		phoneNumberSymbolsValidator:
 			"Numer może zawierać wyłącznie litery (a-z, A-Z), cyfry (0-9) oraz symbole: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Hasło nie może zawierać znaków specjalnych ani spacji',
 		loginValidator: () => `Wprowadź login w formacie nazwa${'@'}domena`,
 	},
 	webitelUI: {

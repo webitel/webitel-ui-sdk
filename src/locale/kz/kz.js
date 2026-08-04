@@ -481,6 +481,8 @@ export default {
 		nameAlreadyInUse: 'Бұл атау қолданыста',
 		phoneNumberSymbolsValidator:
 			"Нөмірде тек әріптер (a-z, A-Z), сандар (0-9) және мына таңбалар болуы мүмкін: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Құпия сөзде арнайы таңбалар мен бос орындар болмауы керек',
 		loginValidator: () => `Логинді есім${'@'}домен форматында енгізіңіз`,
 	},
 	webitelUI: {
