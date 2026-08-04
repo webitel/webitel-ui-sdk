@@ -5,23 +5,23 @@
       :label="t('cases.appliedSLA')"
       :search-method="slasSearchMethod"
       :v="vSelection"
-      :model-value="model?.selection"
+      :model-value="value.selection"
       data-key="id"
       option-value="id"
       @update:model-value="updateSelected"
     />
 
     <wt-multi-select
-      v-if="model?.selection"
-      :key="model.selection"
-      :disabled="!model.selection"
+      v-if="value.selection"
+      :key="value.selection"
+      :disabled="!value.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"
       :v="vConditions"
-      :model-value="model?.conditions"
+      :model-value="value.conditions"
       data-key="id"
       option-value="id"
-      @update:model-value="model.conditions = $event"
+      @update:model-value="handleInput('conditions', $event)"
     />
   </div>
 </template>
@@ -47,14 +47,34 @@ const model = defineModel<ModelValue>({
 });
 const { t } = useI18n();
 
-const updateSelected = (value: string) => {
-	model.value.selection = value;
-	model.value.conditions = '';
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			selection: '',
+			conditions: '',
+		},
+);
+
+const handleInput = <K extends keyof ModelValue>(
+	key: K,
+	newFieldValue: ModelValue[K],
+) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
+	};
+};
+
+const updateSelected = (selection: string) => {
+	model.value = {
+		selection,
+		conditions: '',
+	};
 };
 
 const getConditionList = async (params: Record<string, unknown>) => {
 	return await slasConditionsSearchMethod({
-		parentId: model.value.selection,
+		parentId: value.value.selection,
 		...params,
 	});
 };
