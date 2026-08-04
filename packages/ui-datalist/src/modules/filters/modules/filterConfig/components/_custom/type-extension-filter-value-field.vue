@@ -24,7 +24,7 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
-      <wt-single-select
+      <wt-multi-select
         v-bind="defaultProps"
         :v="v$.model"
         :model-value="
