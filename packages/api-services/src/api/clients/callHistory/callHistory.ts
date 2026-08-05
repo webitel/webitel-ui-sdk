@@ -34,7 +34,7 @@ const getCallHistoryList = async ({ options, ...params }) => {
 	}
 };
 
-const getCallHistoryListPost = async ({ data, options = undefined }) => {
+const getCallHistoryListPost = async ({ data, options }) => {
 	const body = applyTransform(data, [
 		camelToSnake(),
 	]);

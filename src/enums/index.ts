@@ -32,7 +32,6 @@ import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeV
 import { RingtoneType } from './RingtoneType/RingtoneType.js';
 import { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 import { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
-import { TimelineMode } from './TimelineMode/TimelineMode';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
 import { AuditorSections } from './WebitelApplications/AuditorSections';
@@ -82,7 +81,6 @@ export {
 	SingleSignOnProvider,
 	SingleSignOnProviderIconMappings,
 	SupervisorSections,
-	TimelineMode,
 	TypesExportedSettings,
 	WfmSections,
 	WtApplication,
