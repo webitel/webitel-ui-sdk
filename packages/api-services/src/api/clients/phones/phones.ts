@@ -1,5 +1,5 @@
-import { getPhones } from '@webitel/api-services/gen';
 import type { DeletePhonesParams } from '@webitel/api-services/gen/models';
+import { getPhones } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,

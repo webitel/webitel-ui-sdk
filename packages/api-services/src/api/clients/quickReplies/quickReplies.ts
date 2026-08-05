@@ -1,4 +1,4 @@
-import { getQuickRepliesService } from '@webitel/api-services/gen';
+import { getQuickRepliesService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -58,7 +58,7 @@ const getQuickRepliesList = async (params: ApiParams) => {
 			sort,
 			id,
 			q,
-			restrictToAgent: restrict_to_agent,
+			restrict_to_agent,
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
