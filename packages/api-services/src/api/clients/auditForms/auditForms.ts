@@ -1,19 +1,19 @@
+import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateAuditFormBody,
 	getAuditFormService,
 	PatchAuditFormBody,
 	SearchAuditFormQueryParams,
 	UpdateAuditFormBody,
-} from '@webitel/api-services/gen';
-import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 	translateError,
@@ -76,7 +76,7 @@ const getAuditFormsList = async (params: ApiParams) => {
 				...(params?.fields || []),
 			],
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -127,7 +127,7 @@ const createAuditForm = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -151,7 +151,7 @@ const updateAuditForm = async ({
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -175,7 +175,7 @@ const patchAuditForm = async ({ changes, id }: PatchItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(PatchAuditFormBody);
 
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

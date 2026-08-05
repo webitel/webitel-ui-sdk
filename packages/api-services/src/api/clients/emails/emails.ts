@@ -1,4 +1,4 @@
-import { getEmails } from '@webitel/api-services/gen';
+import { getEmails } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
