@@ -1101,6 +1101,8 @@ export {
 	updateGroup2ResponseTypeDefault,
 	updateGroupResponseTypeDefault,
 } from './groups/groups.zod';
+export * from './im-service-provider-v1-telegrambotservice/im-service-provider-v1-telegrambotservice';
+export * from './im-service-provider-v1-telegrambotservice/im-service-provider-v1-telegrambotservice.zod';
 export * from './imclients/imclients';
 export {
 	DeleteIMClientParams,
@@ -1424,6 +1426,8 @@ export {
 	UpdateOAuthServiceQueryParams,
 	UpdateOAuthServiceResponse,
 } from './oauth2-federation/oauth2-federation.zod';
+export * from './online-skills/online-skills';
+export * from './online-skills/online-skills.zod';
 export * from './outbound-resource-group-service/outbound-resource-group-service';
 export {
 	CreateOutboundResourceGroupBody,
@@ -1908,8 +1912,6 @@ export {
 	ShiftTemplateServiceUpdateShiftTemplateParams,
 	ShiftTemplateServiceUpdateShiftTemplateResponse,
 } from './shift-template-service/shift-template-service.zod';
-export * from './skill-presets/skill-presets';
-export * from './skill-presets/skill-presets.zod';
 export * from './skill-service/skill-service';
 export {
 	CreateSkillAgentBody,
@@ -2388,6 +2390,8 @@ export {
 	MessageEditMessageBody,
 	MessageEditMessageParams,
 	MessageEditMessageResponse,
+	MessageForwardMessagesBody,
+	MessageForwardMessagesResponse,
 	MessageReadParams,
 	MessageReadQueryParams,
 	MessageReadResponse,
@@ -2404,6 +2408,13 @@ export {
 	MessageSendLocationResponse,
 	MessageSendTextBody,
 	MessageSendTextResponse,
+	MessageSetReactionBody,
+	MessageSetReactionParams,
+	MessageSetReactionResponse,
+	messageSendContactBodyForwardOriginKindDefault,
+	messageSendDocumentBodyForwardOriginKindDefault,
+	messageSendLocationBodyForwardOriginKindDefault,
+	messageSendTextBodyForwardOriginKindDefault,
 } from './webitel-im-api-gateway-v1-message/webitel-im-api-gateway-v1-message.zod';
 export * from './webitel-im-api-gateway-v1-messagehistory/webitel-im-api-gateway-v1-messagehistory';
 export {
@@ -2414,11 +2425,13 @@ export {
 	MessageHistorySearchThreadMessagesHistoryQueryParams,
 	MessageHistorySearchThreadMessagesHistoryResponse,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeliveryStatusDefault,
+	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemForwardOriginKindDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemSenderRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemStatusesItemStatusDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemDeliveryStatusDefault,
+	messageHistorySearchThreadMessagesHistoryResponseItemsItemForwardOriginKindDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemSenderRoleDefault,
@@ -2457,6 +2470,7 @@ export {
 	threadManagementAddMemberBodyRoleDefault,
 	threadManagementAddMemberResponseMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault,
+	threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault,
 	threadManagementCreateResponseThreadLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementCreateResponseThreadLastMsgReplyToSenderRoleDefault,
 	threadManagementCreateResponseThreadLastMsgSenderRoleDefault,
@@ -2464,6 +2478,7 @@ export {
 	threadManagementCreateResponseThreadMembersItemRoleDefault,
 	threadManagementCreateResponseThreadTypeDefault,
 	threadManagementGetResponseLastMsgDeliveryStatusDefault,
+	threadManagementGetResponseLastMsgForwardOriginKindDefault,
 	threadManagementGetResponseLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementGetResponseLastMsgReplyToSenderRoleDefault,
 	threadManagementGetResponseLastMsgSenderRoleDefault,
@@ -2471,6 +2486,7 @@ export {
 	threadManagementGetResponseMembersItemRoleDefault,
 	threadManagementGetResponseTypeDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault,
+	threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgReplyToSenderRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgSenderRoleDefault,
@@ -2478,6 +2494,7 @@ export {
 	threadManagementSearchLeftResponseItemsItemMembersItemRoleDefault,
 	threadManagementSearchLeftResponseItemsItemTypeDefault,
 	threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault,
+	threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault,
 	threadManagementSearchResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgReplyToSenderRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault,
