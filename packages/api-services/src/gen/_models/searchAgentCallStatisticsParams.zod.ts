@@ -8,8 +8,8 @@
 export type SearchAgentCallStatisticsParams = {
 	page?: number;
 	size?: number;
-	'time.from'?: string;
-	'time.to'?: string;
+	timeFrom?: string;
+	timeTo?: string;
 	agentId?: number[];
 	domainId?: string;
 	q?: string;

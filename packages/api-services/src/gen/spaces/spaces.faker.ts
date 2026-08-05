@@ -6,7 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import type { KnowledgebaseSpace, KnowledgebaseSpaceList } from '../_models';
+import type {
+	KnowledgebaseSpace,
+	KnowledgebaseSpaceList,
+	WebitelKbSpace,
+	WebitelKbSpaceList,
+} from '../_models';
 
 export const getListSpacesSpacesResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseSpaceList, object>> = {},
@@ -909,6 +914,1217 @@ export const getUpdateSpaceSpacesResponseMock = (
 	]),
 	ver: faker.helpers.arrayElement([
 		faker.number.int(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getListSpacesResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpaceList, object>> = {},
+): WebitelKbSpaceList => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			chunkingStrategy: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			createdBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			description: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			domainId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			embeddingModelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			homeArticleId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			language: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			rerankEnabled: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
+			rerankerModelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			targetEmbeddingModelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			teams: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			updatedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			vectorSearchEnabled: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getCreateSpaceResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpace, object>> = {},
+): WebitelKbSpace => ({
+	chunkingStrategy: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	domainId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	embeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	homeArticleId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	language: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	rerankEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	rerankerModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	targetEmbeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	teams: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	vectorSearchEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getDeleteSpaceResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpace, object>> = {},
+): WebitelKbSpace => ({
+	chunkingStrategy: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	domainId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	embeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	homeArticleId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	language: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	rerankEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	rerankerModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	targetEmbeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	teams: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	vectorSearchEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getLocateSpaceResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpace, object>> = {},
+): WebitelKbSpace => ({
+	chunkingStrategy: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	domainId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	embeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	homeArticleId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	language: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	rerankEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	rerankerModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	targetEmbeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	teams: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	vectorSearchEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getUpdateSpace2ResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpace, object>> = {},
+): WebitelKbSpace => ({
+	chunkingStrategy: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	domainId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	embeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	homeArticleId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	language: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	rerankEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	rerankerModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	targetEmbeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	teams: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	vectorSearchEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getUpdateSpaceResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSpace, object>> = {},
+): WebitelKbSpace => ({
+	chunkingStrategy: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	description: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	domainId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	embeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	homeArticleId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	language: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	name: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	rerankEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	rerankerModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	targetEmbeddingModelId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	teams: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	vectorSearchEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	...overrideResponse,

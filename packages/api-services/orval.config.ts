@@ -9,12 +9,21 @@ import { defineConfig } from 'orval';
 const outputWorkspace = './src/gen';
 const outputTarget = '';
 const inputTarget = './formatted-openapi.yaml';
+/*
+  The wire pass runs over the spec WITHOUT the camelCase casingSet, so its types
+  carry the real grpc-gateway field names (`uploaded_at.from`, `leg_a_id`).
+  src/gen holds the camelCase shapes apps consume; src/gen-wire holds the http
+  layer src/api/clients talks to. Not exported from package.json — internal.
+*/
+const wireOutputWorkspace = './src/gen-wire';
+const wireInputTarget = './formatted-openapi.wire.yaml';
 // const inputTarget = 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json';
 const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand =
 	// 'true';
 	'npx biome check --write ./src/gen'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
+const runWireFormatterCLICommand = 'npx biome check --write ./src/gen-wire';
 
 export default defineConfig({
 	main: {
@@ -87,6 +96,61 @@ export default defineConfig({
 
 		hooks: {
 			afterAllFilesWrite: runFormatterCLICommand,
+		},
+	},
+	wire: {
+		input: {
+			target: wireInputTarget,
+		},
+		output: {
+			workspace: wireOutputWorkspace,
+			target: outputTarget,
+			client: axiosClient,
+			mode: 'tags-split',
+			clean: true,
+			indexFiles: true,
+			schemas: './_models',
+			override: {
+				namingConvention: {
+					enum: 'PascalCase',
+				},
+			},
+		},
+
+		hooks: {
+			afterAllFilesWrite: runWireFormatterCLICommand,
+		},
+	},
+	wireZod: {
+		input: {
+			target: wireInputTarget,
+		},
+		output: {
+			workspace: wireOutputWorkspace,
+			target: outputTarget,
+			fileExtension: '.zod.ts',
+			client: 'zod',
+			mode: 'tags-split',
+			indexFiles: true,
+			schemas: './_models',
+			override: {
+				namingConvention: {
+					enum: 'PascalCase',
+				},
+				zod: {
+					generate: {
+						response: true,
+						query: true,
+						header: true,
+						param: true,
+						body: true,
+					},
+				},
+			},
+		},
+
+		hooks: {
+			afterAllFilesWrite: runWireFormatterCLICommand,
 		},
 	},
 });

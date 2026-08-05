@@ -102,14 +102,14 @@ export const CatalogGetCustomersQueryParams = zod.object({
 		.optional()
 		.describe('Set of unique contact **ID**entifier(s).'),
 	type: zod.string().optional().describe('The type of contact to filter.'),
-	'via.id': zod
+	viaId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'via.type': zod.string().optional().describe('Contact **type** provider.'),
-	'via.name': zod.string().optional().describe('Contact display **name**.'),
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
 });
 
 export const CatalogGetCustomersResponse = zod.object({
@@ -194,27 +194,27 @@ export const CatalogGetDialogsQueryParams = zod.object({
 		.describe(
 			'Set of unique chat IDentifier(s).\nAccept: dialog -or- member ID.',
 		),
-	'via.id': zod
+	viaId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'via.type': zod.string().optional().describe('Contact **type** provider.'),
-	'via.name': zod.string().optional().describe('Contact display **name**.'),
-	'peer.id': zod
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
+	peerId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'peer.type': zod.string().optional().describe('Contact **type** provider.'),
-	'peer.name': zod.string().optional().describe('Contact display **name**.'),
-	'date.since': zod
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	dateSince: zod
 		.string()
 		.optional()
 		.describe('Since epochtime (milli).\n**Match**: greater than ..'),
-	'date.until': zod
+	dateUntil: zod
 		.string()
 		.optional()
 		.describe('Until epochtime (milli).\n**Match**: less or equal ..'),
@@ -753,27 +753,27 @@ export const CatalogGetMembersQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Set of unique chat member ID.'),
-	'via.id': zod
+	viaId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'via.type': zod.string().optional().describe('Contact **type** provider.'),
-	'via.name': zod.string().optional().describe('Contact display **name**.'),
-	'peer.id': zod
+	viaType: zod.string().optional().describe('Contact **type** provider.'),
+	viaName: zod.string().optional().describe('Contact display **name**.'),
+	peerId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'peer.type': zod.string().optional().describe('Contact **type** provider.'),
-	'peer.name': zod.string().optional().describe('Contact display **name**.'),
-	'date.since': zod
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
+	dateSince: zod
 		.string()
 		.optional()
 		.describe('Since epochtime (milli).\n**Match**: greater than ..'),
-	'date.until': zod
+	dateUntil: zod
 		.string()
 		.optional()
 		.describe('Until epochtime (milli).\n**Match**: less or equal ..'),
@@ -901,11 +901,11 @@ export const CatalogGetHistoryParams = zod.object({
 });
 
 export const CatalogGetHistoryQueryParams = zod.object({
-	'offset.id': zod
+	offsetId: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY starting from the specified message ID'),
-	'offset.date': zod
+	offsetDate: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY been sent before the specified epochtime(milli).'),
@@ -915,14 +915,14 @@ export const CatalogGetHistoryQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Fields to return into result.'),
-	'peer.id': zod
+	peerId: zod
 		.string()
 		.optional()
 		.describe(
 			'Contact unique **ID**entifier.\nContact **type**-specific string.',
 		),
-	'peer.type': zod.string().optional().describe('Contact **type** provider.'),
-	'peer.name': zod.string().optional().describe('Contact display **name**.'),
+	peerType: zod.string().optional().describe('Contact **type** provider.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
 	groupString: zod
 		.string()
 		.optional()
@@ -1366,11 +1366,11 @@ export const CatalogGetHistory2Params = zod.object({
 });
 
 export const CatalogGetHistory2QueryParams = zod.object({
-	'offset.id': zod
+	offsetId: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY starting from the specified message ID'),
-	'offset.date': zod
+	offsetDate: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY been sent before the specified epochtime(milli).'),
@@ -1381,7 +1381,7 @@ export const CatalogGetHistory2QueryParams = zod.object({
 		.optional()
 		.describe('Fields to return into result.'),
 	chatId: zod.string().optional().describe('Unique chat dialog'),
-	'peer.name': zod.string().optional().describe('Contact display **name**.'),
+	peerName: zod.string().optional().describe('Contact display **name**.'),
 	groupStringString: zod
 		.string()
 		.optional()

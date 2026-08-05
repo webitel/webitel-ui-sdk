@@ -9,15 +9,15 @@ export type SearchDeviceAuditParams = {
 	/**
 	 * Object ID
 	 */
-	'user.id'?: string;
+	userId?: string;
 	/**
 	 * Display Name
 	 */
-	'user.name'?: string;
+	userName?: string;
 	/**
 	 * Display Name
 	 */
-	'device.name'?: string;
+	deviceName?: string;
 	/**
 	 * Filter: timing range (optional)
 	 *

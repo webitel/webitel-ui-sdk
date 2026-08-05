@@ -6,7 +6,10 @@
  */
 import { faker } from '@faker-js/faker';
 
-import type { KnowledgebaseTagsList } from '../_models';
+import type {
+	KnowledgebaseTagsList,
+	WebitelKbSuggestTagsResponse,
+} from '../_models';
 
 export const getListTagsResponseMock = (
 	overrideResponse: Partial<Extract<KnowledgebaseTagsList, object>> = {},
@@ -39,6 +42,31 @@ export const getListTagsResponseMock = (
 	]),
 	page: faker.helpers.arrayElement([
 		faker.number.int(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getSuggestTagsResponseMock = (
+	overrideResponse: Partial<Extract<WebitelKbSuggestTagsResponse, object>> = {},
+): WebitelKbSuggestTagsResponse => ({
+	tags: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() =>
+			faker.string.alpha({
+				length: {
+					min: 10,
+					max: 20,
+				},
+			}),
+		),
 		undefined,
 	]),
 	...overrideResponse,

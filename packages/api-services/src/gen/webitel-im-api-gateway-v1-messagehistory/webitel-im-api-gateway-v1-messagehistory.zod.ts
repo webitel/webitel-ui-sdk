@@ -43,13 +43,13 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams =
 			.describe(
 				'Inclusive upper bound on the dialog interval (Unix time, milliseconds).\nZero means unbounded.',
 			),
-		'cursor.id': zod
+		cursorId: zod
 			.string()
 			.optional()
 			.describe(
 				'Cursor identifier.\nMust be a valid UUID referencing an existing message.\nDefines the starting point for pagination.',
 			),
-		'cursor.before': zod
+		cursorBefore: zod
 			.boolean()
 			.optional()
 			.describe(
@@ -1007,13 +1007,13 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 		.array(zod.int())
 		.optional()
 		.describe('Filter messages by message types.'),
-	'cursor.id': zod
+	cursorId: zod
 		.string()
 		.optional()
 		.describe(
 			'Cursor identifier.\nMust be a valid UUID referencing an existing message.\nDefines the starting point for pagination.',
 		),
-	'cursor.before': zod
+	cursorBefore: zod
 		.boolean()
 		.optional()
 		.describe(

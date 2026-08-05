@@ -1,5 +1,6 @@
 /**
- * Post-processes src/gen/index.ts after orval generation.
+ * Post-processes the index.ts of each orval output dir passed as an argument
+ * (defaults to src/gen), e.g. `node ./dedupe-gen-index.mjs src/gen src/gen-wire`.
  *
  * Orval emits the same schema names twice: as types in ./_models and as zod
  * runtime schemas in each service's *.zod.ts file. The generated barrel
@@ -17,8 +18,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const genDir = path.join(import.meta.dirname, 'src', 'gen');
-const indexPath = path.join(genDir, 'index.ts');
+const genDirs = process.argv.slice(2);
+if (genDirs.length === 0) genDirs.push(path.join('src', 'gen'));
 
 // Tolerates orval's title comment splitting the declaration across lines:
 // `export const // --- title start\n\tgetAccessStore = ...`
@@ -58,41 +59,50 @@ const collectStarExportedNames = (entryFile, seen = new Set()) => {
 	return names;
 };
 
-const modelNames = new Set(
-	collectStarExportedNames(path.join(genDir, '_models', 'index.ts')),
-);
+const dedupeGenDir = (genDirRelative) => {
+	const genDir = path.join(import.meta.dirname, genDirRelative);
+	const indexPath = path.join(genDir, 'index.ts');
 
-const indexSource = fs.readFileSync(indexPath, 'utf8');
-// Names already re-exported explicitly by an earlier rewritten line; a name
-// may only have one explicit re-export in the barrel (first module wins).
-const explicitlyExported = new Set();
-let deduped = 0;
+	const modelNames = new Set(
+		collectStarExportedNames(path.join(genDir, '_models', 'index.ts')),
+	);
 
-const rewritten = indexSource.replace(
-	/^export \* from '(\.\/(?!_models(?:\/|')).+)';$/gm,
-	(line, specifier) => {
-		const moduleFile = resolveModuleFile(genDir, specifier);
-		const exported = readExportedNames(moduleFile);
-		const conflicts = exported.filter(
-			(name) => modelNames.has(name) || explicitlyExported.has(name),
-		);
-		if (conflicts.length === 0) return line;
+	const indexSource = fs.readFileSync(indexPath, 'utf8');
+	// Names already re-exported explicitly by an earlier rewritten line; a name
+	// may only have one explicit re-export in the barrel (first module wins).
+	const explicitlyExported = new Set();
+	let deduped = 0;
 
-		deduped += conflicts.length;
-		const kept = exported.filter((name) => !explicitlyExported.has(name));
-		for (const name of kept) {
-			if (modelNames.has(name)) explicitlyExported.add(name);
-		}
-		if (kept.length === 0) {
-			return `// export * from '${specifier}'; // all exports already re-exported above`;
-		}
-		return `export {\n\t${kept.join(',\n\t')},\n} from '${specifier}';`;
-	},
-);
+	const rewritten = indexSource.replace(
+		/^export \* from '(\.\/(?!_models(?:\/|')).+)';$/gm,
+		(line, specifier) => {
+			const moduleFile = resolveModuleFile(genDir, specifier);
+			const exported = readExportedNames(moduleFile);
+			const conflicts = exported.filter(
+				(name) => modelNames.has(name) || explicitlyExported.has(name),
+			);
+			if (conflicts.length === 0) return line;
 
-if (rewritten !== indexSource) {
-	fs.writeFileSync(indexPath, rewritten);
+			deduped += conflicts.length;
+			const kept = exported.filter((name) => !explicitlyExported.has(name));
+			for (const name of kept) {
+				if (modelNames.has(name)) explicitlyExported.add(name);
+			}
+			if (kept.length === 0) {
+				return `// export * from '${specifier}'; // all exports already re-exported above`;
+			}
+			return `export {\n\t${kept.join(',\n\t')},\n} from '${specifier}';`;
+		},
+	);
+
+	if (rewritten !== indexSource) {
+		fs.writeFileSync(indexPath, rewritten);
+	}
+	console.info(
+		`dedupe-gen-index: resolved ${deduped} ambiguous re-exports in ${genDirRelative}/index.ts`,
+	);
+};
+
+for (const genDirRelative of genDirs) {
+	dedupeGenDir(genDirRelative);
 }
-console.info(
-	`dedupe-gen-index: resolved ${deduped} ambiguous re-exports in src/gen/index.ts`,
-);

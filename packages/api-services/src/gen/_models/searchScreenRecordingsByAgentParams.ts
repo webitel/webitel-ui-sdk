@@ -14,11 +14,11 @@ export type SearchScreenRecordingsByAgentParams = {
 	sort?: string;
 	fields?: string[];
 	id?: string[];
-	'uploadedAt.from'?: string;
-	'uploadedAt.to'?: string;
+	uploadedAtFrom?: string;
+	uploadedAtTo?: string;
 	referenceId?: string[];
-	'retentionUntil.from'?: string;
-	'retentionUntil.to'?: string;
+	retentionUntilFrom?: string;
+	retentionUntilTo?: string;
 	type?: SearchScreenRecordingsByAgentType;
 	channel?: SearchScreenRecordingsByAgentChannel;
 };

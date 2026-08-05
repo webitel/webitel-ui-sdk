@@ -9,7 +9,7 @@ export type ListUserAccessTokenParams = {
 	/**
 	 * display name
 	 */
-	'user.name'?: string;
+	userName?: string;
 	/**
 	 * int32 page = 2;
 	 * int64 size = 3;

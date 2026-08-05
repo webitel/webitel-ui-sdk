@@ -403,8 +403,8 @@ export const CreateQueueResponse = zod.object({
 export const SearchQueueReportGeneralQueryParams = zod.object({
 	page: zod.int().optional(),
 	size: zod.int().optional(),
-	'joinedAt.from': zod.string().optional(),
-	'joinedAt.to': zod.string().optional(),
+	joinedAtFrom: zod.string().optional(),
+	joinedAtTo: zod.string().optional(),
 	domainId: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	sort: zod.string().optional(),

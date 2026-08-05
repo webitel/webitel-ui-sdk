@@ -11,8 +11,8 @@ export type SearchAuditRateParams = {
 	q?: string;
 	sort?: string;
 	fields?: string[];
-	'createdAt.from'?: string;
-	'createdAt.to'?: string;
+	createdAtFrom?: string;
+	createdAtTo?: string;
 	id?: number[];
 	callId?: string[];
 	ratedUser?: string[];

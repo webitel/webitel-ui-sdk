@@ -161,15 +161,12 @@ export const ListPhonesQueryParams = zod.object({
 		.describe('Link(s) with unique ID only.'),
 	primary: zod.boolean().optional().describe('Primary phone  only.'),
 	verified: zod.boolean().optional().describe('Verified phone only.'),
-	'type.id': zod.string().optional().describe('Reference Object unique ID.'),
-	'type.type': zod
+	typeId: zod.string().optional().describe('Reference Object unique ID.'),
+	typeType: zod
 		.string()
 		.optional()
 		.describe('Reference Object well-known type.'),
-	'type.name': zod
-		.string()
-		.optional()
-		.describe('Reference Object display name.'),
+	typeName: zod.string().optional().describe('Reference Object display name.'),
 });
 
 export const ListPhonesResponse = zod

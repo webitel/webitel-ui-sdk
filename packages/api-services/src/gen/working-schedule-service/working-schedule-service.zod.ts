@@ -365,8 +365,8 @@ export const WorkingScheduleServiceReadWorkingScheduleForecastParams =
 
 export const WorkingScheduleServiceReadWorkingScheduleForecastQueryParams =
 	zod.object({
-		'date.from': zod.string().optional(),
-		'date.to': zod.string().optional(),
+		dateFrom: zod.string().optional(),
+		dateTo: zod.string().optional(),
 	});
 
 export const WorkingScheduleServiceReadWorkingScheduleForecastResponse =
