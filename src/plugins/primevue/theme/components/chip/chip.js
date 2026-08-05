@@ -62,11 +62,11 @@ const chip = {
             height: ${dt('chip.removeIcon.size')};
         }
         
-        .p-chip--constrained {
+        .p-chip--width-constrained {
         	max-width: ${dt('chip.maxWidth')};
         }
         
-        .p-chip--constrained .wt-chip__label {
+        .p-chip--width-constrained .wt-chip__label {
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;

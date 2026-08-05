@@ -4,7 +4,7 @@
     :class="[
       `p-chip-${color}`,
       {
-        'p-chip--constrained': constrained
+        'p-chip--width-constrained': constrainedByWidth
       }
     ]"
     :removable="removable"
@@ -43,13 +43,13 @@ interface WtProps extends ChipProps {
 	 * @default false
 	 */
 	removable?: boolean;
-	constrained?: boolean;
+	constrainedByWidth?: boolean;
 }
 
 withDefaults(defineProps<WtProps>(), {
 	color: ChipColor.MAIN,
 	removable: false,
-	constrained: false,
+	constrainedByWidth: false,
 });
 
 const emit = defineEmits<{
