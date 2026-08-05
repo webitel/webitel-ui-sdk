@@ -12,6 +12,7 @@ import {
 	notify,
 	sanitize,
 	snakeToCamel,
+	starToSearch,
 } from '../../transformers';
 import { getDefaultGetListResponse } from '../../defaults';
 import { ApiId, ApiParams } from '../_shared/types';
@@ -38,6 +39,7 @@ const getActivityTypesList = async (params: Record<string, unknown>) => {
 			],
 		}),
 		camelToSnake(),
+		starToSearch('q'),
 	]);
 
 	try {
