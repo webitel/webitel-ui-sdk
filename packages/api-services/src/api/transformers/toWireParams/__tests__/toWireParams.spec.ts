@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import toWireParams from '../toWireParams.transformer';
 
-/* the field lists below are verbatim from src/gen-wire zod schemas */
 const FILE_FIELDS = [
 	'page',
 	'size',
@@ -105,7 +104,6 @@ describe('toWireParams', () => {
 		});
 	});
 
-	/* names a derived camel spelling gets wrong; see the transformer doc */
 	it('matches names that camelisation cannot round-trip', () => {
 		const fields = [
 			'sha256sum',

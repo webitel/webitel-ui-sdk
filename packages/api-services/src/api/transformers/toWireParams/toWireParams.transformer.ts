@@ -1,23 +1,12 @@
 /**
- * Renames camelCase caller params to the wire names the gateway matches.
+ * Renames caller params to the wire names the gateway matches, e.g.
+ * `uploadedAtFrom` -> `uploaded_at.from`, `viaId` -> `via.id`.
  *
- * Both spellings come from the same OpenAPI document — src/gen carries the
- * camelised pass apps consume, src/gen-wire the raw one — so the two differ
- * only in separators and letter case. Matching on that (strip non-alphanumeric,
- * lowercase) pairs them exactly: `uploadedAtFrom` -> `uploaded_at.from`,
- * `viaId` -> `via.id`, `groupString` -> `group[string]`, `sha256Sum` ->
- * `sha256sum`.
+ * Both spellings come from the same OpenAPI document, so they differ only in
+ * separators and letter case — matching on that is exact, where deriving the
+ * camel spelling is not (`tls.PEM`, `input.userID.id`, `sha256sum`, `@type`).
  *
- * Deriving the camel spelling instead — by hand or via change-case — is close
- * but not exact: both get `tls.PEM` and `input.userID.id` wrong, and
- * change-case additionally misses `sha256sum` and `@type`. Those keys would be
- * dropped by the sanitize() that follows. Verified against the two generated
- * specs: 7289 param/property pairs, no mismatches and no two names in one list
- * normalising alike.
- *
- * Pass the generated field list (getShallowFieldsToSendFromZodSchema on a
- * src/gen-wire zod schema) and run this before sanitize(), which then drops
- * whatever did not map.
+ * Takes a src/gen-wire field list; run it before sanitize().
  */
 const normalize = (key: string) =>
 	key.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
