@@ -105,6 +105,30 @@ describe('toWireParams', () => {
 		});
 	});
 
+	/* names a derived camel spelling gets wrong; see the transformer doc */
+	it('matches names that camelisation cannot round-trip', () => {
+		const fields = [
+			'sha256sum',
+			'@type',
+			'tls.PEM',
+			'input.userID.id',
+		];
+
+		expect(
+			toWireParams(fields)({
+				sha256Sum: 'a',
+				'@type': 'b',
+				tlsPem: 'c',
+				inputUserIdId: 'd',
+			}),
+		).toEqual({
+			sha256sum: 'a',
+			'@type': 'b',
+			'tls.PEM': 'c',
+			'input.userID.id': 'd',
+		});
+	});
+
 	it('does not invent keys the caller omitted', () => {
 		expect(
 			Object.keys(
