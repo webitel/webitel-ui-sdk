@@ -9,12 +9,7 @@ import { defineConfig } from 'orval';
 const outputWorkspace = './src/gen';
 const outputTarget = '';
 const inputTarget = './formatted-openapi.yaml';
-/*
-  The wire pass runs over the spec WITHOUT the camelCase casingSet, so its types
-  carry the real grpc-gateway field names (`uploaded_at.from`, `leg_a_id`).
-  src/gen holds the camelCase shapes apps consume; src/gen-wire holds the http
-  layer src/api/clients talks to. Not exported from package.json — internal.
-*/
+/* internal: consumed by src/api/clients, not exported from package.json */
 const wireOutputWorkspace = './src/gen-wire';
 const wireInputTarget = './formatted-openapi.wire.yaml';
 // const inputTarget = 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json';

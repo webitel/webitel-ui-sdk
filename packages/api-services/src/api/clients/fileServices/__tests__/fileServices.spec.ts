@@ -4,11 +4,6 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { FileServicesAPI } from '../fileServices';
 
-/*
-  Request-level tests: the generated client is typed against src/gen-wire, so
-  these assert the literal names that leave the process. camelCase spellings
-  reaching the gateway are silently ignored, which no type check can catch.
-*/
 const captured: InternalAxiosRequestConfig[] = [];
 let originalAdapter: AxiosAdapter | undefined;
 

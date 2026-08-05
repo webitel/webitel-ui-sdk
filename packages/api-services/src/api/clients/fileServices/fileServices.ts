@@ -1,7 +1,3 @@
-/*
-  Two generated type sets meet here: the camelCase models describe what callers
-  pass in, the src/gen-wire ones describe what actually goes on the wire.
-*/
 import type {
 	SearchFilesByCallParams,
 	SearchFilesParams,
@@ -242,7 +238,6 @@ const getFilesListByCall = async (
 		search?: string;
 	},
 ) => {
-	/* the by-call endpoint takes a narrower param set than searchFiles */
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchFilesByCallQueryParams,
 	);
