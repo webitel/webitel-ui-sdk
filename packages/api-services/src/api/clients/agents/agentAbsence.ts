@@ -93,17 +93,20 @@ const addAgentAbsence = async ({
 };
 
 export interface UpdateAgentAbsenceParams {
+	agentId: ApiId;
 	itemId: ApiId;
 	itemInstance: AgentAbsenceServiceCreateAgentAbsenceBody;
 }
 
 const updateAgentAbsence = async ({
+	agentId,
 	itemInstance,
 	itemId,
 }: UpdateAgentAbsenceParams) => {
 	try {
 		const response =
 			await getAgentAbsenceService().agentAbsenceServiceUpdateAgentAbsence(
+				String(agentId),
 				String(itemId),
 				itemInstance,
 			);
