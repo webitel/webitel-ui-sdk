@@ -151,13 +151,13 @@
         :screenshot:status="props['screenshot:status'] ?? null"
         :video:accessed="props['sender:video:accessed']"
         :video:enabled="props['sender:video:enabled']"
-        @[VideoCallAction.Recordings]="forwardAction(VideoCallAction.Recordings)"
-        @[VideoCallAction.Screenshot]="forwardAction(VideoCallAction.Screenshot)"
-        @[VideoCallAction.Mic]="forwardAction(VideoCallAction.Mic)"
-        @[VideoCallAction.Video]="forwardAction(VideoCallAction.Video)"
-        @[VideoCallAction.Settings]="forwardAction(VideoCallAction.Settings)"
-        @[VideoCallAction.Chat]="forwardAction(VideoCallAction.Chat)"
-        @[VideoCallAction.Hangup]="forwardAction(VideoCallAction.Hangup)"
+        @[VideoCallAction.Recordings]="forwardedActionHandlers[VideoCallAction.Recordings]"
+        @[VideoCallAction.Screenshot]="forwardedActionHandlers[VideoCallAction.Screenshot]"
+        @[VideoCallAction.Mic]="forwardedActionHandlers[VideoCallAction.Mic]"
+        @[VideoCallAction.Video]="forwardedActionHandlers[VideoCallAction.Video]"
+        @[VideoCallAction.Settings]="forwardedActionHandlers[VideoCallAction.Settings]"
+        @[VideoCallAction.Chat]="forwardedActionHandlers[VideoCallAction.Chat]"
+        @[VideoCallAction.Hangup]="forwardedActionHandlers[VideoCallAction.Hangup]"
 
       />
     </template>
@@ -298,6 +298,21 @@ const forwardAction =
 				options?: ResultCallbacks,
 			) => void
 		)(emitKeys[action], payload, options);
+
+/**
+ * pre-built once, not called inline in the template: `@click="forwardAction(x)"`
+ * compiles to an inline-statement handler that invokes `forwardAction` but discards
+ * the closure it returns, so the actual `emit` never fires.
+ */
+const forwardedActionHandlers = {
+	[VideoCallAction.Screenshot]: forwardAction(VideoCallAction.Screenshot),
+	[VideoCallAction.Recordings]: forwardAction(VideoCallAction.Recordings),
+	[VideoCallAction.Mic]: forwardAction(VideoCallAction.Mic),
+	[VideoCallAction.Video]: forwardAction(VideoCallAction.Video),
+	[VideoCallAction.Settings]: forwardAction(VideoCallAction.Settings),
+	[VideoCallAction.Chat]: forwardAction(VideoCallAction.Chat),
+	[VideoCallAction.Hangup]: forwardAction(VideoCallAction.Hangup),
+} as const;
 
 const { t } = useI18n();
 
