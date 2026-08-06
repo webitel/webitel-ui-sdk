@@ -27,19 +27,19 @@ export type LicenseUsageParams = {
 	/**
 	 * identifier
 	 */
-	'user.id'?: string;
+	userId?: string;
 	/**
 	 * display name
 	 */
-	'user.name'?: string;
+	userName?: string;
 	/**
 	 * identifier
 	 */
-	'domain.id'?: string;
+	domainId?: string;
 	/**
 	 * display name
 	 */
-	'domain.name'?: string;
+	domainName?: string;
 	/**
 	 * by serial number(s)
 	 */

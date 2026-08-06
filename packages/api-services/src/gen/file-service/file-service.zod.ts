@@ -27,11 +27,11 @@ export const SearchFilesByCallQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.string()).optional(),
-	'uploadedAt.from': zod.string().optional(),
-	'uploadedAt.to': zod.string().optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
 	referenceId: zod.array(zod.string()).optional(),
-	'retentionUntil.from': zod.string().optional(),
-	'retentionUntil.to': zod.string().optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
 	channel: zod
 		.array(
 			zod.enum([
@@ -122,11 +122,11 @@ export const SearchScreenRecordingsByAgentQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.string()).optional(),
-	'uploadedAt.from': zod.string().optional(),
-	'uploadedAt.to': zod.string().optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
 	referenceId: zod.array(zod.string()).optional(),
-	'retentionUntil.from': zod.string().optional(),
-	'retentionUntil.to': zod.string().optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
 	type: zod
 		.enum([
 			'PDF',
@@ -222,8 +222,8 @@ export const SearchFilesQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.string()).optional(),
-	'uploadedAt.from': zod.string().optional(),
-	'uploadedAt.to': zod.string().optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
 	uploadedBy: zod.array(zod.string()).optional(),
 	referenceId: zod.array(zod.string()).optional(),
 	channel: zod
@@ -244,8 +244,8 @@ export const SearchFilesQueryParams = zod.object({
 		.describe(
 			' - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated',
 		),
-	'retentionUntil.from': zod.string().optional(),
-	'retentionUntil.to': zod.string().optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
 });
 
 export const searchFilesResponseItemsItemChannelDefault = `UnknownChannel`;
@@ -330,11 +330,11 @@ export const SearchScreenRecordingsQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.string()).optional(),
-	'uploadedAt.from': zod.string().optional(),
-	'uploadedAt.to': zod.string().optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
 	referenceId: zod.array(zod.string()).optional(),
-	'retentionUntil.from': zod.string().optional(),
-	'retentionUntil.to': zod.string().optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
 	type: zod
 		.enum([
 			'PDF',

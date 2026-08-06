@@ -12,11 +12,11 @@ export type SearchTriggerJobParams = {
 	q?: string;
 	sort?: string;
 	fields?: string[];
-	'createdAt.from'?: string;
-	'createdAt.to'?: string;
-	'startedAt.from'?: string;
-	'startedAt.to'?: string;
-	'duration.from'?: string;
-	'duration.to'?: string;
+	createdAtFrom?: string;
+	createdAtTo?: string;
+	startedAtFrom?: string;
+	startedAtTo?: string;
+	durationFrom?: string;
+	durationTo?: string;
 	state?: SearchTriggerJobStateItem[];
 };

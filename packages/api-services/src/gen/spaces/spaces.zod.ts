@@ -544,3 +544,650 @@ export const UpdateSpaceSpacesResponse = zod.object({
 			'READONLY. Operational attributes\nVersion of the latest update. Numeric sequence.',
 		),
 });
+
+/**
+ * @summary ListSpaces returns spaces in the caller's domain.
+ */
+export const ListSpacesQueryParams = zod.object({
+	size: zod.int().optional().describe('Page size.'),
+	page: zod.int().optional().describe('Page number (1-based).'),
+	q: zod.string().optional().describe('Optional name search.'),
+	sort: zod.string().optional().describe('Sorting criteria (e.g. field:asc).'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Set of fields to return.'),
+});
+
+export const ListSpacesResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						chunkingStrategy: zod
+							.string()
+							.optional()
+							.describe('Chunking strategy identifier.'),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('CreatedAt timestamp (epoch ms).'),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who created the space.'),
+						description: zod
+							.string()
+							.optional()
+							.describe('Free-text description.'),
+						domainId: zod.string().optional().describe('Owning domain id.'),
+						embeddingModelId: zod
+							.string()
+							.optional()
+							.describe('Active embedding model id (type=embedding).'),
+						homeArticleId: zod
+							.string()
+							.optional()
+							.describe('Article used as the space home page; 0 if unset.'),
+						id: zod
+							.string()
+							.optional()
+							.describe('Unique identifier of the space.'),
+						language: zod
+							.string()
+							.optional()
+							.describe(
+								'Space language; immutable, drives full-text config and retrieval.',
+							),
+						name: zod.string().optional().describe('Human-readable name.'),
+						rerankEnabled: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Whether reranking is applied (default off, on for suggest).',
+							),
+						rerankerModelId: zod
+							.string()
+							.optional()
+							.describe('Reranker model id (type=reranker).'),
+						targetEmbeddingModelId: zod
+							.string()
+							.optional()
+							.describe(
+								'Target embedding model id for a pending model migration.',
+							),
+						teams: zod
+							.array(
+								zod.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								}),
+							)
+							.optional()
+							.describe(
+								'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+							),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe('UpdatedAt timestamp (epoch ms).'),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who last updated the space.'),
+						vectorSearchEnabled: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Whether articles in this space are embedded for vector search.',
+							),
+					})
+					.describe('Space is a knowledge-base space read model.'),
+			)
+			.optional()
+			.describe('Spaces on this page.'),
+		next: zod.boolean().optional().describe('Whether a next page exists.'),
+	})
+	.describe('SpaceList is a page of spaces.');
+
+/**
+ * @summary CreateSpace creates a space; language is immutable after creation.
+ */
+export const CreateSpaceBody = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id.'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page.'),
+		language: zod
+			.string()
+			.optional()
+			.describe('Space language; immutable after creation.'),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied.'),
+		rerankerModelId: zod.string().optional().describe('Reranker model id.'),
+		teamIds: zod
+			.array(zod.string())
+			.optional()
+			.describe(
+				'Team ids the space is bound to as default operator visibility;\nthe set replaces the current binding, empty removes it.',
+			),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether articles are embedded for vector search.'),
+	})
+	.describe('InputSpace carries the writable fields of a space.');
+
+export const CreateSpaceResponse = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the space.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id (type=embedding).'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page; 0 if unset.'),
+		id: zod.string().optional().describe('Unique identifier of the space.'),
+		language: zod
+			.string()
+			.optional()
+			.describe(
+				'Space language; immutable, drives full-text config and retrieval.',
+			),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied (default off, on for suggest).'),
+		rerankerModelId: zod
+			.string()
+			.optional()
+			.describe('Reranker model id (type=reranker).'),
+		targetEmbeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Target embedding model id for a pending model migration.'),
+		teams: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the space.'),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether articles in this space are embedded for vector search.',
+			),
+	})
+	.describe('Space is a knowledge-base space read model.');
+
+/**
+ * @summary DeleteSpace deletes a space; a space with active articles cannot be deleted.
+ */
+export const DeleteSpaceParams = zod.object({
+	id: zod.string().describe('Space id.'),
+});
+
+export const DeleteSpaceResponse = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the space.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id (type=embedding).'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page; 0 if unset.'),
+		id: zod.string().optional().describe('Unique identifier of the space.'),
+		language: zod
+			.string()
+			.optional()
+			.describe(
+				'Space language; immutable, drives full-text config and retrieval.',
+			),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied (default off, on for suggest).'),
+		rerankerModelId: zod
+			.string()
+			.optional()
+			.describe('Reranker model id (type=reranker).'),
+		targetEmbeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Target embedding model id for a pending model migration.'),
+		teams: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the space.'),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether articles in this space are embedded for vector search.',
+			),
+	})
+	.describe('Space is a knowledge-base space read model.');
+
+/**
+ * @summary LocateSpace returns a single space by id.
+ */
+export const LocateSpaceParams = zod.object({
+	id: zod.string().describe('Space id.'),
+});
+
+export const LocateSpaceResponse = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the space.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id (type=embedding).'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page; 0 if unset.'),
+		id: zod.string().optional().describe('Unique identifier of the space.'),
+		language: zod
+			.string()
+			.optional()
+			.describe(
+				'Space language; immutable, drives full-text config and retrieval.',
+			),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied (default off, on for suggest).'),
+		rerankerModelId: zod
+			.string()
+			.optional()
+			.describe('Reranker model id (type=reranker).'),
+		targetEmbeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Target embedding model id for a pending model migration.'),
+		teams: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the space.'),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether articles in this space are embedded for vector search.',
+			),
+	})
+	.describe('Space is a knowledge-base space read model.');
+
+/**
+ * @summary UpdateSpace updates a space (language cannot be changed).
+ */
+export const UpdateSpace2Params = zod.object({
+	id: zod.string().describe('Space id.'),
+});
+
+export const UpdateSpace2Body = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id.'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page.'),
+		language: zod
+			.string()
+			.optional()
+			.describe('Space language; immutable after creation.'),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied.'),
+		rerankerModelId: zod.string().optional().describe('Reranker model id.'),
+		teamIds: zod
+			.array(zod.string())
+			.optional()
+			.describe(
+				'Team ids the space is bound to as default operator visibility;\nthe set replaces the current binding, empty removes it.',
+			),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether articles are embedded for vector search.'),
+	})
+	.describe('InputSpace carries the writable fields of a space.');
+
+export const UpdateSpace2Response = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the space.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id (type=embedding).'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page; 0 if unset.'),
+		id: zod.string().optional().describe('Unique identifier of the space.'),
+		language: zod
+			.string()
+			.optional()
+			.describe(
+				'Space language; immutable, drives full-text config and retrieval.',
+			),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied (default off, on for suggest).'),
+		rerankerModelId: zod
+			.string()
+			.optional()
+			.describe('Reranker model id (type=reranker).'),
+		targetEmbeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Target embedding model id for a pending model migration.'),
+		teams: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the space.'),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether articles in this space are embedded for vector search.',
+			),
+	})
+	.describe('Space is a knowledge-base space read model.');
+
+/**
+ * @summary UpdateSpace updates a space (language cannot be changed).
+ */
+export const UpdateSpaceParams = zod.object({
+	id: zod.string().describe('Space id.'),
+});
+
+export const UpdateSpaceBody = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id.'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page.'),
+		language: zod
+			.string()
+			.optional()
+			.describe('Space language; immutable after creation.'),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied.'),
+		rerankerModelId: zod.string().optional().describe('Reranker model id.'),
+		teamIds: zod
+			.array(zod.string())
+			.optional()
+			.describe(
+				'Team ids the space is bound to as default operator visibility;\nthe set replaces the current binding, empty removes it.',
+			),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether articles are embedded for vector search.'),
+	})
+	.describe('InputSpace carries the writable fields of a space.');
+
+export const UpdateSpaceResponse = zod
+	.object({
+		chunkingStrategy: zod
+			.string()
+			.optional()
+			.describe('Chunking strategy identifier.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the space.'),
+		description: zod.string().optional().describe('Free-text description.'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		embeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Active embedding model id (type=embedding).'),
+		homeArticleId: zod
+			.string()
+			.optional()
+			.describe('Article used as the space home page; 0 if unset.'),
+		id: zod.string().optional().describe('Unique identifier of the space.'),
+		language: zod
+			.string()
+			.optional()
+			.describe(
+				'Space language; immutable, drives full-text config and retrieval.',
+			),
+		name: zod.string().optional().describe('Human-readable name.'),
+		rerankEnabled: zod
+			.boolean()
+			.optional()
+			.describe('Whether reranking is applied (default off, on for suggest).'),
+		rerankerModelId: zod
+			.string()
+			.optional()
+			.describe('Reranker model id (type=reranker).'),
+		targetEmbeddingModelId: zod
+			.string()
+			.optional()
+			.describe('Target embedding model id for a pending model migration.'),
+		teams: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				'Teams the space is bound to as default operator visibility;\nempty when no binding is configured.',
+			),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the space.'),
+		vectorSearchEnabled: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether articles in this space are embedded for vector search.',
+			),
+	})
+	.describe('Space is a knowledge-base space read model.');

@@ -13,8 +13,8 @@ export const AgentWorkingScheduleServiceSearchAgentsWorkingScheduleParams =
 
 export const AgentWorkingScheduleServiceSearchAgentsWorkingScheduleQueryParams =
 	zod.object({
-		'date.from': zod.string().optional(),
-		'date.to': zod.string().optional(),
+		dateFrom: zod.string().optional(),
+		dateTo: zod.string().optional(),
 		supervisorId: zod.array(zod.string()).optional(),
 		teamId: zod.array(zod.string()).optional(),
 		skillId: zod.array(zod.string()).optional(),

@@ -622,7 +622,7 @@ export const LDAPSearch4QueryParams = zod.object({
 		.describe(
 			'Optional. URL to establish connection to LDAP catalog\n\nURL e.g.: [(ldap|ldapi|ldaps)://]host[:port]',
 		),
-	'tls.pem': zod.string().optional().describe('TODO: (!)\n\nbase64'),
+	tlsPem: zod.string().optional().describe('TODO: (!)\n\nbase64'),
 	bind: zod
 		.string()
 		.optional()
@@ -1611,7 +1611,7 @@ export const LDAPSearch2QueryParams = zod.object({
 		.describe(
 			'Optional. URL to establish connection to LDAP catalog\n\nURL e.g.: [(ldap|ldapi|ldaps)://]host[:port]',
 		),
-	'tls.pem': zod.string().optional().describe('TODO: (!)\n\nbase64'),
+	tlsPem: zod.string().optional().describe('TODO: (!)\n\nbase64'),
 	bind: zod
 		.string()
 		.optional()

@@ -193,8 +193,8 @@ export const SearchListCommunicationQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.int()).optional(),
-	'expireAt.from': zod.string().optional(),
-	'expireAt.to': zod.string().optional(),
+	expireAtFrom: zod.string().optional(),
+	expireAtTo: zod.string().optional(),
 });
 
 export const SearchListCommunicationResponse = zod.object({

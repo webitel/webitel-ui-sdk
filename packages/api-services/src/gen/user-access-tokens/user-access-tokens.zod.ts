@@ -253,7 +253,7 @@ export const ListUserAccessTokenParams = zod.object({
 });
 
 export const ListUserAccessTokenQueryParams = zod.object({
-	'user.name': zod.string().optional().describe('display name'),
+	userName: zod.string().optional().describe('display name'),
 	q: zod
 		.string()
 		.optional()
@@ -322,7 +322,7 @@ export const DeleteUserAccessTokenParams = zod.object({
 });
 
 export const DeleteUserAccessTokenQueryParams = zod.object({
-	'user.name': zod.string().optional().describe('display name'),
+	userName: zod.string().optional().describe('display name'),
 });
 
 export const DeleteUserAccessTokenResponse = zod
@@ -366,7 +366,7 @@ export const GetUserAccessTokenParams = zod.object({
 });
 
 export const GetUserAccessTokenQueryParams = zod.object({
-	'user.name': zod.string().optional().describe('display name'),
+	userName: zod.string().optional().describe('display name'),
 });
 
 export const GetUserAccessTokenResponse = zod

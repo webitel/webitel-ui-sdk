@@ -9,5 +9,5 @@ export type GetUserAccessTokenParams = {
 	/**
 	 * display name
 	 */
-	'user.name'?: string;
+	userName?: string;
 };

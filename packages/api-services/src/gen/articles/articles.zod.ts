@@ -941,3 +941,1071 @@ export const UpdateArticleArticlesResponse = zod
 	.describe(
 		'Article dataset.\nNOTE: Edge represents connection between two nodes.\nSo this spaceArticles.data are always subordinate to some space.id.',
 	);
+
+/**
+ * @summary ListArticles lists articles within a space with optional filters.
+ */
+export const listArticlesQueryStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const listArticlesQueryTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const ListArticlesQueryParams = zod.object({
+	size: zod.int().optional().describe('Page size.'),
+	page: zod.int().optional().describe('Page number (1-based).'),
+	q: zod.string().optional().describe('Optional subject search.'),
+	spaceId: zod.string().optional().describe('Space to list within.'),
+	tags: zod.array(zod.string()).optional().describe('Optional tag filter.'),
+	state: zod
+		.enum([
+			'ARTICLE_STATE_UNSPECIFIED',
+			'DRAFT',
+			'ACTIVE',
+			'INACTIVE',
+		])
+		.default(listArticlesQueryStateDefault)
+		.describe('Optional state filter.'),
+	type: zod
+		.enum([
+			'ARTICLE_TYPE_UNSPECIFIED',
+			'ARTICLE',
+			'FAQ',
+		])
+		.default(listArticlesQueryTypeDefault)
+		.describe('Optional type filter.'),
+	sort: zod.string().optional().describe('Sorting criteria (e.g. field:asc).'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Set of fields to return.'),
+});
+
+export const listArticlesResponseItemsItemIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const listArticlesResponseItemsItemStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const listArticlesResponseItemsItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const ListArticlesResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						tags: zod.array(zod.string()).optional().describe('Article tags.'),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('CreatedAt timestamp (epoch ms).'),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who created the article.'),
+						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+						domainId: zod.string().optional().describe('Owning domain id.'),
+						etag: zod
+							.string()
+							.optional()
+							.describe('Concurrency token encoding id and ver.'),
+						id: zod
+							.string()
+							.optional()
+							.describe('Unique identifier of the article.'),
+						indexState: zod
+							.enum([
+								'INDEX_STATE_UNSPECIFIED',
+								'PENDING',
+								'INDEXING',
+								'INDEXED',
+								'FAILED',
+							])
+							.default(listArticlesResponseItemsItemIndexStateDefault)
+							.describe('Indexing state.'),
+						parentId: zod
+							.string()
+							.optional()
+							.describe('Parent article id; 0 for a top-level article.'),
+						publishedVersionId: zod
+							.string()
+							.optional()
+							.describe('Published version id; 0 if not yet published.'),
+						space: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('Space the article belongs to.'),
+						state: zod
+							.enum([
+								'ARTICLE_STATE_UNSPECIFIED',
+								'DRAFT',
+								'ACTIVE',
+								'INACTIVE',
+							])
+							.default(listArticlesResponseItemsItemStateDefault)
+							.describe('Lifecycle state.'),
+						subject: zod
+							.string()
+							.optional()
+							.describe('Current subject (mirrors the published version).'),
+						type: zod
+							.enum([
+								'ARTICLE_TYPE_UNSPECIFIED',
+								'ARTICLE',
+								'FAQ',
+							])
+							.default(listArticlesResponseItemsItemTypeDefault)
+							.describe('Article type.'),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe('UpdatedAt timestamp (epoch ms).'),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who last updated the article.'),
+						ver: zod.int().optional().describe('Optimistic-lock counter.'),
+					})
+					.describe('Article is the article read model.'),
+			)
+			.optional()
+			.describe('Articles on this page.'),
+		next: zod.boolean().optional().describe('Whether a next page exists.'),
+	})
+	.describe('ArticleList is a page of articles.');
+
+/**
+ * @summary CreateArticle creates an article and its first version.
+ */
+export const createArticleBodyStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const createArticleBodyTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const CreateArticleBody = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		bodyRichText: zod
+			.looseObject({})
+			.optional()
+			.describe(
+				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
+			),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		spaceId: zod.string().optional().describe('Target space.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(createArticleBodyStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod.string().optional().describe('Article subject.'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(createArticleBodyTypeDefault)
+			.describe('Article type.'),
+	})
+	.describe(
+		'InputArticle carries the writable fields of an article and its body.',
+	);
+
+export const createArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const createArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const createArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const CreateArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(createArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(createArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(createArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary DeleteArticle soft-deletes an article.
+ */
+export const DeleteArticleParams = zod.object({
+	etag: zod.string().describe('Concurrency token of the article to delete.'),
+});
+
+export const deleteArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const deleteArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const deleteArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const DeleteArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(deleteArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(deleteArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(deleteArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary LocateArticle returns a single article by etag.
+ */
+export const LocateArticleParams = zod.object({
+	etag: zod.string().describe('Concurrency token / locator.'),
+});
+
+export const locateArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const locateArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const locateArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const LocateArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(locateArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(locateArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(locateArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary UpdateArticle updates an article, creating a new version (optimistic lock via etag).
+ */
+export const UpdateArticle2Params = zod.object({
+	etag: zod.string().describe('Concurrency token of the article to update.'),
+});
+
+export const updateArticle2BodyStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const updateArticle2BodyTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const UpdateArticle2Body = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		bodyRichText: zod
+			.looseObject({})
+			.optional()
+			.describe(
+				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
+			),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		spaceId: zod.string().optional().describe('Target space.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(updateArticle2BodyStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod.string().optional().describe('Article subject.'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(updateArticle2BodyTypeDefault)
+			.describe('Article type.'),
+	})
+	.describe(
+		'InputArticle carries the writable fields of an article and its body.',
+	);
+
+export const updateArticle2ResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const updateArticle2ResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const updateArticle2ResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const UpdateArticle2Response = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(updateArticle2ResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(updateArticle2ResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(updateArticle2ResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary UpdateArticle updates an article, creating a new version (optimistic lock via etag).
+ */
+export const UpdateArticleParams = zod.object({
+	etag: zod.string().describe('Concurrency token of the article to update.'),
+});
+
+export const updateArticleBodyStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const updateArticleBodyTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const UpdateArticleBody = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		bodyRichText: zod
+			.looseObject({})
+			.optional()
+			.describe(
+				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
+			),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		spaceId: zod.string().optional().describe('Target space.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(updateArticleBodyStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod.string().optional().describe('Article subject.'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(updateArticleBodyTypeDefault)
+			.describe('Article type.'),
+	})
+	.describe(
+		'InputArticle carries the writable fields of an article and its body.',
+	);
+
+export const updateArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const updateArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const updateArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const UpdateArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(updateArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(updateArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(updateArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary MoveArticle reparents an article, validating cycles and max depth.
+ */
+export const MoveArticleParams = zod.object({
+	etag: zod.string().describe('Concurrency token of the article to move.'),
+});
+
+export const MoveArticleBody = zod
+	.object({
+		newParentId: zod
+			.string()
+			.optional()
+			.describe('New parent id; 0 to move to top level.'),
+	})
+	.describe('MoveArticleRequest reparents an article.');
+
+export const moveArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const moveArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const moveArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const MoveArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		createdAt: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		createdBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domainId: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		indexState: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(moveArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parentId: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		publishedVersionId: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(moveArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(moveArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updatedAt: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updatedBy: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary ListAncestors returns the ancestor chain (root first), serving breadcrumbs.
+ */
+export const ListAncestorsParams = zod.object({
+	id: zod.string().describe('Article id.'),
+});
+
+export const listAncestorsResponseItemsItemIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const listAncestorsResponseItemsItemStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const listAncestorsResponseItemsItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const ListAncestorsResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						tags: zod.array(zod.string()).optional().describe('Article tags.'),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('CreatedAt timestamp (epoch ms).'),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who created the article.'),
+						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+						domainId: zod.string().optional().describe('Owning domain id.'),
+						etag: zod
+							.string()
+							.optional()
+							.describe('Concurrency token encoding id and ver.'),
+						id: zod
+							.string()
+							.optional()
+							.describe('Unique identifier of the article.'),
+						indexState: zod
+							.enum([
+								'INDEX_STATE_UNSPECIFIED',
+								'PENDING',
+								'INDEXING',
+								'INDEXED',
+								'FAILED',
+							])
+							.default(listAncestorsResponseItemsItemIndexStateDefault)
+							.describe('Indexing state.'),
+						parentId: zod
+							.string()
+							.optional()
+							.describe('Parent article id; 0 for a top-level article.'),
+						publishedVersionId: zod
+							.string()
+							.optional()
+							.describe('Published version id; 0 if not yet published.'),
+						space: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('Space the article belongs to.'),
+						state: zod
+							.enum([
+								'ARTICLE_STATE_UNSPECIFIED',
+								'DRAFT',
+								'ACTIVE',
+								'INACTIVE',
+							])
+							.default(listAncestorsResponseItemsItemStateDefault)
+							.describe('Lifecycle state.'),
+						subject: zod
+							.string()
+							.optional()
+							.describe('Current subject (mirrors the published version).'),
+						type: zod
+							.enum([
+								'ARTICLE_TYPE_UNSPECIFIED',
+								'ARTICLE',
+								'FAQ',
+							])
+							.default(listAncestorsResponseItemsItemTypeDefault)
+							.describe('Article type.'),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe('UpdatedAt timestamp (epoch ms).'),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who last updated the article.'),
+						ver: zod.int().optional().describe('Optimistic-lock counter.'),
+					})
+					.describe('Article is the article read model.'),
+			)
+			.optional()
+			.describe('Articles on this page.'),
+		next: zod.boolean().optional().describe('Whether a next page exists.'),
+	})
+	.describe('ArticleList is a page of articles.');
+
+/**
+ * @summary ListChildren returns the direct children of an article.
+ */
+export const ListChildrenParams = zod.object({
+	id: zod.string().describe('Parent article id.'),
+});
+
+export const listChildrenResponseItemsItemIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const listChildrenResponseItemsItemStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const listChildrenResponseItemsItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const ListChildrenResponse = zod
+	.object({
+		items: zod
+			.array(
+				zod
+					.object({
+						tags: zod.array(zod.string()).optional().describe('Article tags.'),
+						createdAt: zod
+							.string()
+							.optional()
+							.describe('CreatedAt timestamp (epoch ms).'),
+						createdBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who created the article.'),
+						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+						domainId: zod.string().optional().describe('Owning domain id.'),
+						etag: zod
+							.string()
+							.optional()
+							.describe('Concurrency token encoding id and ver.'),
+						id: zod
+							.string()
+							.optional()
+							.describe('Unique identifier of the article.'),
+						indexState: zod
+							.enum([
+								'INDEX_STATE_UNSPECIFIED',
+								'PENDING',
+								'INDEXING',
+								'INDEXED',
+								'FAILED',
+							])
+							.default(listChildrenResponseItemsItemIndexStateDefault)
+							.describe('Indexing state.'),
+						parentId: zod
+							.string()
+							.optional()
+							.describe('Parent article id; 0 for a top-level article.'),
+						publishedVersionId: zod
+							.string()
+							.optional()
+							.describe('Published version id; 0 if not yet published.'),
+						space: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('Space the article belongs to.'),
+						state: zod
+							.enum([
+								'ARTICLE_STATE_UNSPECIFIED',
+								'DRAFT',
+								'ACTIVE',
+								'INACTIVE',
+							])
+							.default(listChildrenResponseItemsItemStateDefault)
+							.describe('Lifecycle state.'),
+						subject: zod
+							.string()
+							.optional()
+							.describe('Current subject (mirrors the published version).'),
+						type: zod
+							.enum([
+								'ARTICLE_TYPE_UNSPECIFIED',
+								'ARTICLE',
+								'FAQ',
+							])
+							.default(listChildrenResponseItemsItemTypeDefault)
+							.describe('Article type.'),
+						updatedAt: zod
+							.string()
+							.optional()
+							.describe('UpdatedAt timestamp (epoch ms).'),
+						updatedBy: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe('User who last updated the article.'),
+						ver: zod.int().optional().describe('Optimistic-lock counter.'),
+					})
+					.describe('Article is the article read model.'),
+			)
+			.optional()
+			.describe('Articles on this page.'),
+		next: zod.boolean().optional().describe('Whether a next page exists.'),
+	})
+	.describe('ArticleList is a page of articles.');
+
+/**
+ * @summary GetTree returns the article hierarchy of a space, RBAC filtered.
+ */
+export const GetTreeParams = zod.object({
+	space_id: zod.string().describe('Space id.'),
+});
+
+export const getTreeResponseNodesItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const GetTreeResponse = zod
+	.object({
+		nodes: zod
+			.array(
+				zod
+					.object({
+						children: zod
+							.array(zod.unknown())
+							.optional()
+							.describe('Child nodes.'),
+						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+						id: zod.string().optional().describe('Article id.'),
+						subject: zod.string().optional().describe('Article subject.'),
+						type: zod
+							.enum([
+								'ARTICLE_TYPE_UNSPECIFIED',
+								'ARTICLE',
+								'FAQ',
+							])
+							.default(getTreeResponseNodesItemTypeDefault)
+							.describe('Article type.'),
+					})
+					.describe('TreeNode is a single node of an article hierarchy tree.'),
+			)
+			.optional()
+			.describe('Root-level tree nodes.'),
+	})
+	.describe('GetTreeResponse returns the root nodes of the space tree.');

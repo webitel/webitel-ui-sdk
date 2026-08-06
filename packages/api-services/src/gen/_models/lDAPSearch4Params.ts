@@ -22,7 +22,7 @@ export type LDAPSearch4Params = {
 	 *
 	 * base64
 	 */
-	'tls.pem'?: string;
+	tlsPem?: string;
 	/**
 	 * ----- BIND: Authorization -----
 	 *

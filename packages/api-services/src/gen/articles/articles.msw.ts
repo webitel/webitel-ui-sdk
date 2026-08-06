@@ -14,30 +14,53 @@ import type {
 	KnowledgebaseArticleVersion,
 	KnowledgebaseArticleVersionList,
 	KnowledgebaseAttachmentList,
+	WebitelKbArticle,
+	WebitelKbArticleList,
+	WebitelKbGetTreeResponse,
 } from '../_models';
 
 import {
 	getArticlesAttachmentListResponseMock,
 	getArticleVersionsListResponseMock,
 	getCreateArticleArticlesResponseMock,
+	getCreateArticleResponseMock,
 	getDeleteArticleArticlesResponseMock,
+	getDeleteArticleResponseMock,
+	getGetTreeResponseMock,
+	getListAncestorsResponseMock,
 	getListArticles2ResponseMock,
 	getListArticlesArticlesResponseMock,
+	getListArticlesResponseMock,
+	getListChildrenResponseMock,
 	getLocateArticleArticlesResponseMock,
+	getLocateArticleResponseMock,
 	getLocateArticleVersionResponseMock,
+	getMoveArticleResponseMock,
+	getUpdateArticle2ResponseMock,
 	getUpdateArticleArticlesResponseMock,
+	getUpdateArticleResponseMock,
 } from './articles.faker';
 
 export {
 	getArticlesAttachmentListResponseMock,
 	getArticleVersionsListResponseMock,
 	getCreateArticleArticlesResponseMock,
+	getCreateArticleResponseMock,
 	getDeleteArticleArticlesResponseMock,
+	getDeleteArticleResponseMock,
+	getGetTreeResponseMock,
+	getListAncestorsResponseMock,
 	getListArticles2ResponseMock,
 	getListArticlesArticlesResponseMock,
+	getListArticlesResponseMock,
+	getListChildrenResponseMock,
 	getLocateArticleArticlesResponseMock,
+	getLocateArticleResponseMock,
 	getLocateArticleVersionResponseMock,
+	getMoveArticleResponseMock,
+	getUpdateArticle2ResponseMock,
 	getUpdateArticleArticlesResponseMock,
+	getUpdateArticleResponseMock,
 } from './articles.faker';
 
 export const getListArticlesArticlesMockHandler = (
@@ -275,6 +298,266 @@ export const getUpdateArticleArticlesMockHandler = (
 		options,
 	);
 };
+
+export const getListArticlesMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticleList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbArticleList> | WebitelKbArticleList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/articles',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getListArticlesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getCreateArticleMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/kb/articles',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getCreateArticleResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getDeleteArticleMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/v1/kb/articles/:etag',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDeleteArticleResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getLocateArticleMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/articles/:etag',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getLocateArticleResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateArticle2MockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/v1/kb/articles/:etag',
+		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getUpdateArticle2ResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateArticleMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/v1/kb/articles/:etag',
+		async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getUpdateArticleResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMoveArticleMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticle
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<WebitelKbArticle> | WebitelKbArticle),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/kb/articles/:etag/move',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMoveArticleResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getListAncestorsMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticleList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbArticleList> | WebitelKbArticleList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/articles/:id/ancestors',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getListAncestorsResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getListChildrenMockHandler = (
+	overrideResponse?:
+		| WebitelKbArticleList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbArticleList> | WebitelKbArticleList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/articles/:id/children',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getListChildrenResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getGetTreeMockHandler = (
+	overrideResponse?:
+		| WebitelKbGetTreeResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbGetTreeResponse> | WebitelKbGetTreeResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/spaces/:spaceId/tree',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGetTreeResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getArticlesMock = () => [
 	getListArticlesArticlesMockHandler(),
 	getCreateArticleArticlesMockHandler(),
@@ -285,4 +568,14 @@ export const getArticlesMock = () => [
 	getDeleteArticleArticlesMockHandler(),
 	getLocateArticleArticlesMockHandler(),
 	getUpdateArticleArticlesMockHandler(),
+	getListArticlesMockHandler(),
+	getCreateArticleMockHandler(),
+	getDeleteArticleMockHandler(),
+	getLocateArticleMockHandler(),
+	getUpdateArticle2MockHandler(),
+	getUpdateArticleMockHandler(),
+	getMoveArticleMockHandler(),
+	getListAncestorsMockHandler(),
+	getListChildrenMockHandler(),
+	getGetTreeMockHandler(),
 ];

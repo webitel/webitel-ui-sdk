@@ -8,8 +8,8 @@
 export type SearchAgentStateHistoryParams = {
 	page?: number;
 	size?: number;
-	'joinedAt.from'?: string;
-	'joinedAt.to'?: string;
+	joinedAtFrom?: string;
+	joinedAtTo?: string;
 	agentId?: string[];
 	sort?: string;
 	domainId?: string;
