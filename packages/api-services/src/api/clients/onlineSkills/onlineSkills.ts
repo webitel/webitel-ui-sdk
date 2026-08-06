@@ -1,10 +1,11 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getOnlineSkills,
 	PatchOnlineSkillsBody,
 	SearchOnlineSkillsQueryParams,
 	UpdateOnlineSkillsBody,
 } from '../../../gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { getDefaultGetListResponse } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -14,8 +15,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import { getDefaultGetListResponse } from '../../defaults';
-import { ApiId, ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const itemResponseHandler = (item: ApiParams) => {
 	return item.item;
