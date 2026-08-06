@@ -77,10 +77,7 @@ export const usePersistedStorage = ({
 		});
 	}
 
-	/*
-   single storing path, shared by the watcher and by sync():
-    the watcher writes to every storage, sync() writes only to the empty ones
-   */
+	/* the watcher writes to every storage, sync() only to the empty ones */
 	const store = async ({
 		targets,
 		skipEmpty = false,
@@ -104,23 +101,13 @@ export const usePersistedStorage = ({
 			);
 		};
 
-		/*
-     if onStore callback is provided,
-      call custom logic for storing value
-     */
 		if (onStore) {
-			/*
-       save is wrapped in one callback,
-        so that onStore is called only once on each value change
-       */
+			/* save is wrapped in one callback, so that onStore is called only once */
 			await onStore(save, {
 				name,
 				value: value.value ?? '',
 			});
 		} else {
-			/*
-       else, perform default storing logic
-       */
 			await save({
 				name,
 				value: value.value ?? '',
@@ -143,15 +130,8 @@ export const usePersistedStorage = ({
 	};
 
 	const restore = async () => {
-		/*
-       if onRestore callback is provided,
-        call custom logic for restoring value
-       */
 		if (onRestore) {
-			/*
-         wrap all getItemFns in one callback
-          so that onRestore is called only once on each value change
-         */
+			/* every getter is wrapped in one callback, so that onRestore is called only once */
 			const restore = async (name: string) => {
 				const restoredValues = await composedValueGetter(name);
 				/*
@@ -164,9 +144,6 @@ export const usePersistedStorage = ({
 			};
 			await onRestore(restore, name);
 		} else {
-			/*
-       else, perform default restoring logic
-       */
 			const restoredValues = await composedValueGetter(name);
 			/*
        loose check on purpose: useRoutePersistedStorage resolves `undefined`

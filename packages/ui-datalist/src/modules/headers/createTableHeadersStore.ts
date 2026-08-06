@@ -226,10 +226,6 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
-	/*
-   kept to republish state into the route query on registry re-mount,
-    see syncPersistence()
-   */
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
 	const setupPersistence = async () => {
@@ -302,10 +298,7 @@ export const tableHeadersStoreBody = ({
 		]);
 	};
 
-	/*
-   sequentially, because every route storage write is a router.replace()
-    built on top of the current route query
-   */
+	/* sequentially: every route write is a router.replace() on top of the current query */
 	const syncPersistence = async () => {
 		for (const controller of persistedStorageControllers) {
 			await controller.sync();

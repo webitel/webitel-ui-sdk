@@ -299,11 +299,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	 * it, or reaching it from the menu) used to render filtered data behind a
 	 * bare url, losing filters on reload or on copying the link.
 	 *
-	 * Storages that already hold a value are left untouched, so an explicit query
-	 * always wins over in-memory state.
-	 *
-	 * Sequentially, because every route storage write is a router.replace()
-	 * built on top of the current route query.
+	 * [WTEL-10093](https://webitel.atlassian.net/browse/WTEL-10093)
 	 */
 	const syncPersistence = async () => {
 		await syncPaginationPersistence();
@@ -324,10 +320,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		await setupStore();
 
-		/*
-     on the first setup the restore path is authoritative,
-      so publishing is needed on re-mounts only
-     */
+		/* on the first setup the restore path is authoritative */
 		if (isStoreAlreadySetUp && !disablePersistence) {
 			await syncPersistence();
 		}
