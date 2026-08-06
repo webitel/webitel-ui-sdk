@@ -1,5 +1,5 @@
 import type { WtTableSortOrder } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
-import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
+import { isEmpty, sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
 
@@ -269,7 +269,7 @@ export const tableHeadersStoreBody = ({
 			],
 			storagePath: id,
 			/* empty widths serialize to "{}" – not worth publishing */
-			isEmptyValue: (value) => !value || value === '{}',
+			isEmptyValue: (value) => isEmpty(value) || value === '{}',
 			onStore: (save, { name }) => {
 				const value = JSON.stringify(columnWidths.value);
 				return save({

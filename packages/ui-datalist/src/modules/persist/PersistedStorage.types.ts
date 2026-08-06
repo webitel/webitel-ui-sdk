@@ -37,7 +37,9 @@ export interface PersistedPropertyConfig {
 	watchConfig?: WatchOptions;
 	/**
 	 * Used by `sync()` to decide whether the current value is worth publishing.
-	 * Defaults to treating `null`/`undefined`/`''` as empty.
+	 * Receives the value already serialized for storing, so a store keeping its
+	 * state in a serialized object has to check for its own empty snapshot
+	 * (`"{}"`) on top of the default `isEmpty`.
 	 */
 	isEmptyValue?: (value: PersistStorableValue) => boolean;
 	onStore?: (

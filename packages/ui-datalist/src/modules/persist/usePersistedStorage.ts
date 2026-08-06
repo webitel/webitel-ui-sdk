@@ -1,3 +1,4 @@
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { type WatchHandle, watch } from 'vue';
 
 import {
@@ -15,10 +16,6 @@ const toStorableValue = (value: PersistableValue): PersistStorableValue => {
 	return typeof value === 'string' ? value : (value?.toString() ?? '');
 };
 
-const isEmptyValueByDefault = (value: PersistStorableValue) => {
-	return value == null || value === '';
-};
-
 export const usePersistedStorage = ({
 	name,
 	value,
@@ -27,7 +24,7 @@ export const usePersistedStorage = ({
 	],
 	storagePath,
 	startWatchManually = false,
-	isEmptyValue = isEmptyValueByDefault,
+	isEmptyValue = isEmpty,
 	onStore,
 	onRestore,
 }: PersistedPropertyConfig): PersistedStorageController => {
