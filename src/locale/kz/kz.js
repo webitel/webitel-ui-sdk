@@ -420,6 +420,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфигурация',
 				[AdminSections.GlobalVariables]: 'Жалпы айнымалылар',
 				[AdminSections.QuickReplies]: 'Жылдам жауаптар',
+				[AdminSections.ActivityTypes]: 'Әрекет түрлері',
 			},
 		},
 		[WtApplication.Wfm]: {

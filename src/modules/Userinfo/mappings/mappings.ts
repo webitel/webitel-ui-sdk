@@ -56,6 +56,7 @@ export const mapScopeClassToWtObjects: Partial<Record<ScopeClass, WtObject[]>> =
 		],
 		[ScopeClass.Skills]: [
 			WtObject.Skill,
+			WtObject.ActivityType,
 		],
 		[ScopeClass.Calendars]: [
 			WtObject.Calendar,
@@ -237,6 +238,7 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.WorkingCondition]: AdminSections.WorkingConditions,
 		[WtObject.Member]: AdminSections.Members,
 		[WtObject.QuickReply]: AdminSections.QuickReplies,
+		[WtObject.ActivityType]: AdminSections.ActivityTypes,
 	},
 
 	// Auditor sections

@@ -127,6 +127,10 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseCause}`,
 		},
+		[AdminSections.ActivityTypes]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ActivityTypes}`,
+		},
 		[AdminSections.Media]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,

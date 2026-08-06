@@ -420,6 +420,7 @@ export default {
 				[AdminSections.Configuration]: 'Konfiguracja',
 				[AdminSections.GlobalVariables]: 'Zmienne globalne',
 				[AdminSections.QuickReplies]: 'Szybkie odpowiedzi',
+				[AdminSections.ActivityTypes]: 'Typy aktywności',
 			},
 		},
 		[WtApplication.Wfm]: {

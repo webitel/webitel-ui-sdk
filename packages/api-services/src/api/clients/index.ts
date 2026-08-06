@@ -31,6 +31,7 @@ export * from './media/media';
 export * from './messageService/messageService';
 export * from './oauthApps/oauthApps';
 export * from './object/object';
+export * from './onlineSkills/onlineSkills';
 export * from './pdfServices/pdfServices';
 export * from './phones/phones';
 export * from './queues/queues';
