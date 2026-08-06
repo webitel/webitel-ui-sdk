@@ -24,11 +24,11 @@ export const usePersistedStorage = ({
 	],
 	storagePath,
 	startWatchManually = false,
-	isEmptyValue = isEmpty,
 	onStore,
 	onRestore,
 }: PersistedPropertyConfig): PersistedStorageController => {
 	let unwatch: WatchHandle | null = null;
+	let defaultSnapshot: PersistStorableValue | undefined;
 
 	const adapters: PersistedStorageAdapter[] = [];
 
@@ -77,51 +77,52 @@ export const usePersistedStorage = ({
 		});
 	}
 
-	/* the watcher writes to every storage, sync() only to the empty ones */
-	const store = async ({
-		targets,
-		skipEmpty = false,
-	}: {
-		targets: PersistedStorageAdapter[];
-		skipEmpty?: boolean;
-	}) => {
-		if (!targets.length) return;
-
-		const save = async ({
-			name,
-			value: storedValue,
-		}: {
-			name: string;
-			value: PersistableValue;
-		}) => {
-			if (skipEmpty && isEmptyValue(toStorableValue(storedValue))) return;
-
-			await Promise.all(
-				targets.map((adapter) => adapter.setItem(name, storedValue)),
-			);
-		};
-
+	/*
+   runs the storing path with a `save` doing whatever the caller needs:
+    writing to the storages, or merely capturing the serialized value
+   */
+	const runStoringPath = async (
+		save: (params: { name: string; value: PersistableValue }) => Promise<void>,
+	) => {
 		if (onStore) {
 			/* save is wrapped in one callback, so that onStore is called only once */
-			await onStore(save, {
-				name,
-				value: value.value ?? '',
-			});
-		} else {
-			await save({
+			return onStore(save, {
 				name,
 				value: value.value ?? '',
 			});
 		}
+
+		return save({
+			name,
+			value: value.value ?? '',
+		});
+	};
+
+	const serialize = async () => {
+		let serializedValue: PersistStorableValue = '';
+
+		await runStoringPath(async ({ value: storedValue }) => {
+			serializedValue = toStorableValue(storedValue);
+		});
+
+		return serializedValue;
+	};
+
+	const store = (targets: PersistedStorageAdapter[]) => {
+		if (!targets.length) return Promise.resolve();
+
+		return runStoringPath(async ({ name, value: storedValue }) => {
+			await Promise.all(
+				targets.map((adapter) => adapter.setItem(name, storedValue)),
+			);
+		});
 	};
 
 	const startWatch = () => {
 		unwatch = watch(
 			value,
 			() => {
-				store({
-					targets: adapters,
-				});
+				store(adapters);
 			},
 			{
 				deep: true,
@@ -130,6 +131,12 @@ export const usePersistedStorage = ({
 	};
 
 	const restore = async () => {
+		/*
+     nothing has mutated the value yet, so this is what a freshly created store
+      serializes – sync() uses it to tell untouched state from a real one
+     */
+		defaultSnapshot = await serialize();
+
 		if (onRestore) {
 			/* every getter is wrapped in one callback, so that onRestore is called only once */
 			const restore = async (name: string) => {
@@ -166,6 +173,10 @@ export const usePersistedStorage = ({
 	};
 
 	const sync = async () => {
+		const serializedValue = await serialize();
+
+		if (isEmpty(serializedValue) || serializedValue === defaultSnapshot) return;
+
 		const settledResults = await Promise.allSettled(
 			adapters.map(({ getItem }) => getItem(name)),
 		);
@@ -175,10 +186,7 @@ export const usePersistedStorage = ({
 			return result.status === 'fulfilled' && result.value == null;
 		});
 
-		return store({
-			targets: emptyStorages,
-			skipEmpty: true,
-		});
+		return store(emptyStorages);
 	};
 
 	const reset = async () => {

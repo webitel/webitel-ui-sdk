@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { ref } from 'vue';
+import { type Ref, ref } from 'vue';
 
 import {
+	type PersistableValue,
 	PersistedStorageType,
 	type StorageLike,
 } from '../PersistedStorage.types';
@@ -108,13 +109,67 @@ describe('usePersistedStorage', () => {
 			expect(routeStorage.value).toBeNull();
 		});
 
-		it('skips values considered empty by isEmptyValue', async () => {
-			const value = ref('{}');
+		it('skips a value still equal to the default captured by restore', async () => {
+			const value = ref('default-page');
+
+			const storage = usePersistedStorage({
+				name: 'page',
+				value,
+			});
+			await storage.restore();
+			await storage.sync();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+			expect(routeStorage.value).toBeNull();
+		});
+
+		it('publishes a value changed after restore', async () => {
+			const value = ref('default-page');
+
+			const storage = usePersistedStorage({
+				name: 'page',
+				value,
+			});
+			await storage.restore();
+			storage.unwatch();
+			value.value = '3';
+			await storage.sync();
+
+			expect(routeStorage.value).toBe('3');
+		});
+
+		it('captures the default through onStore serialization', async () => {
+			const filters = ref<Record<string, string>>({});
+
+			const storage = usePersistedStorage({
+				name: 'filters',
+				value: filters as unknown as Ref<PersistableValue>,
+				onStore: (save, { name }) =>
+					save({
+						name,
+						value: JSON.stringify(filters.value),
+					}),
+			});
+			await storage.restore();
+			storage.unwatch();
+
+			/* an empty snapshot serializes to "{}" – the default, nothing to publish */
+			await storage.sync();
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+
+			filters.value = {
+				name: 'test',
+			};
+			await storage.sync();
+			expect(routeStorage.value).toBe('{"name":"test"}');
+		});
+
+		it('skips empty values when restore never ran', async () => {
+			const value = ref('');
 
 			await usePersistedStorage({
 				name: 'filters',
 				value,
-				isEmptyValue: (storedValue) => !storedValue || storedValue === '{}',
 			}).sync();
 
 			expect(routeStorage.setItem).not.toHaveBeenCalled();

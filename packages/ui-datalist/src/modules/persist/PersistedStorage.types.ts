@@ -35,13 +35,6 @@ export interface PersistedPropertyConfig {
 	storagePath?: string;
 	startWatchManually?: boolean;
 	watchConfig?: WatchOptions;
-	/**
-	 * Used by `sync()` to decide whether the current value is worth publishing.
-	 * Receives the value already serialized for storing, so a store keeping its
-	 * state in a serialized object has to check for its own empty snapshot
-	 * (`"{}"`) on top of the default `isEmpty`.
-	 */
-	isEmptyValue?: (value: PersistStorableValue) => boolean;
 	onStore?: (
 		save: ({
 			name,
@@ -70,6 +63,10 @@ export interface PersistedStorageController {
 	 * Publishes the current value to every storage that holds nothing for `name`.
 	 * Storages that already hold a value are left untouched, so an explicit route
 	 * query always wins over in-memory state.
+	 *
+	 * A no-op for state still equal to the defaults: `restore()` captures the
+	 * snapshot a freshly created store serializes, and a controller that never
+	 * restored can only tell empty values apart.
 	 */
 	sync: () => Promise<void>;
 	reset: () => Promise<void>;

@@ -1,4 +1,3 @@
-import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed, reactive, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
@@ -57,9 +56,6 @@ export const tableFiltersStoreBody = (
 			storages: [
 				PersistedStorageType.Route,
 			],
-
-			/* an empty FiltersManager serializes to "{}" – not worth publishing */
-			isEmptyValue: (value) => isEmpty(value) || value === '{}',
 
 			/* use custom .toString() logic, provided by FiltersManager */
 			onStore: async (save, { name }) => {
