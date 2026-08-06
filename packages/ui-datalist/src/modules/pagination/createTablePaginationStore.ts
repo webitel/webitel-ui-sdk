@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
+import type { PersistedStorageController } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
@@ -24,10 +25,22 @@ export const tablePaginationStoreBody = () => {
 		next.value = false;
 	};
 
+	/*
+   kept to republish state into the route query on registry re-mount,
+    see syncPersistence()
+   */
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = () => {
-		const { restore: restorePage } = usePersistedStorage({
+		const pageStorage = usePersistedStorage({
 			name: 'page',
 			value: page,
+			onStore: (save, { name }) => {
+				return save({
+					name,
+					value: `${page.value}`,
+				});
+			},
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
 				const numValue = Number(value);
@@ -35,9 +48,15 @@ export const tablePaginationStoreBody = () => {
 			},
 		});
 
-		const { restore: restoreSize } = usePersistedStorage({
+		const sizeStorage = usePersistedStorage({
 			name: 'size',
 			value: size,
+			onStore: (save, { name }) => {
+				return save({
+					name,
+					value: `${size.value}`,
+				});
+			},
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
 				const numValue = Number(value);
@@ -45,10 +64,25 @@ export const tablePaginationStoreBody = () => {
 			},
 		});
 
+		persistedStorageControllers = [
+			pageStorage,
+			sizeStorage,
+		];
+
 		return Promise.allSettled([
-			restorePage(),
-			restoreSize(),
+			pageStorage.restore(),
+			sizeStorage.restore(),
 		]);
+	};
+
+	/*
+   sequentially, because every route storage write is a router.replace()
+    built on top of the current route query
+   */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	return {
@@ -60,6 +94,7 @@ export const tablePaginationStoreBody = () => {
 		updateSize,
 
 		setupPersistence,
+		syncPersistence,
 		$reset,
 	};
 };

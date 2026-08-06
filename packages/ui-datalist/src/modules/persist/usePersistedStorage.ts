@@ -3,12 +3,21 @@ import { type WatchHandle, watch } from 'vue';
 import {
 	type PersistableValue,
 	type PersistedPropertyConfig,
+	type PersistedStorageAdapter,
 	type PersistedStorageController,
 	PersistedStorageType,
-	type StorageLike,
+	type PersistStorableValue,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
 import { useRoutePersistedStorage } from './useRoutePersistedStorage';
+
+const toStorableValue = (value: PersistableValue): PersistStorableValue => {
+	return typeof value === 'string' ? value : (value?.toString() ?? '');
+};
+
+const isEmptyValueByDefault = (value: PersistStorableValue) => {
+	return value == null || value === '';
+};
 
 export const usePersistedStorage = ({
 	name,
@@ -18,14 +27,13 @@ export const usePersistedStorage = ({
 	],
 	storagePath,
 	startWatchManually = false,
+	isEmptyValue = isEmptyValueByDefault,
 	onStore,
 	onRestore,
 }: PersistedPropertyConfig): PersistedStorageController => {
 	let unwatch: WatchHandle | null = null;
 
-	const setItemFns: StorageLike['setItem'][] = [];
-	const getItemFns: StorageLike['getItem'][] = [];
-	const removeItemFns: StorageLike['removeItem'][] = [];
+	const adapters: PersistedStorageAdapter[] = [];
 
 	// `null` entries are kept: callers below pick the first non-null value, so the
 	// per-storage misses have to stay in the list to preserve priority order.
@@ -33,7 +41,7 @@ export const usePersistedStorage = ({
 		name: string,
 	): Promise<Array<PersistableValue | null>> => {
 		const settledResults = await Promise.allSettled(
-			getItemFns.map((getter) => getter(name)),
+			adapters.map(({ getItem }) => getItem(name)),
 		);
 
 		return settledResults.reduce(
@@ -57,58 +65,79 @@ export const usePersistedStorage = ({
   order matters, as the first storage in the list has the highest priority
    */
 	if (storages.includes(PersistedStorageType.Route)) {
-		const { setItem, getItem, removeItem } = useRoutePersistedStorage();
-		setItemFns.push(setItem);
-		getItemFns.push(getItem);
-		removeItemFns.push(removeItem);
+		adapters.push({
+			type: PersistedStorageType.Route,
+			...useRoutePersistedStorage(),
+		});
 	}
 
 	if (storages.includes(PersistedStorageType.LocalStorage)) {
-		const { setItem, getItem, removeItem } = useLocalStoragePersistedStorage({
-			storagePath,
+		adapters.push({
+			type: PersistedStorageType.LocalStorage,
+			...useLocalStoragePersistedStorage({
+				storagePath,
+			}),
 		});
-		setItemFns.push(setItem);
-		getItemFns.push(getItem);
-		removeItemFns.push(removeItem);
 	}
+
+	/*
+   single storing path, shared by the watcher and by sync():
+    the watcher writes to every storage, sync() writes only to the empty ones
+   */
+	const store = async ({
+		targets,
+		skipEmpty = false,
+	}: {
+		targets: PersistedStorageAdapter[];
+		skipEmpty?: boolean;
+	}) => {
+		if (!targets.length) return;
+
+		const save = async ({
+			name,
+			value: storedValue,
+		}: {
+			name: string;
+			value: PersistableValue;
+		}) => {
+			if (skipEmpty && isEmptyValue(toStorableValue(storedValue))) return;
+
+			await Promise.all(
+				targets.map((adapter) => adapter.setItem(name, storedValue)),
+			);
+		};
+
+		/*
+     if onStore callback is provided,
+      call custom logic for storing value
+     */
+		if (onStore) {
+			/*
+       save is wrapped in one callback,
+        so that onStore is called only once on each value change
+       */
+			await onStore(save, {
+				name,
+				value: value.value ?? '',
+			});
+		} else {
+			/*
+       else, perform default storing logic
+       */
+			await save({
+				name,
+				value: value.value ?? '',
+			});
+		}
+	};
 
 	const startWatch = () => {
 		unwatch = watch(
 			value,
-			async () => {
-				/*
-       if onStore callback is provided,
-        call custom logic for storing value
-       */
-				if (onStore) {
-					/*
-         wrap all setItemFns in one callback
-          so that onStore is called only once on each value change
-         */
-					const save = async ({
-						name,
-						value: storedValue,
-					}: {
-						name: string;
-						value: PersistableValue;
-					}) => {
-						setItemFns.forEach((setter) => {
-							setter(name, storedValue);
-						});
-					};
-					await onStore(save, {
-						name,
-						value: value.value ?? '',
-					});
-				} else {
-					/*
-       else, perform default storing logic
-       */
-					const storedValue = value.value ?? '';
-					setItemFns.forEach((setter) => {
-						setter(name, storedValue);
-					});
-				}
+			() => {
+				store({
+					targets: adapters,
+				});
 			},
 			{
 				deep: true,
@@ -142,9 +171,14 @@ export const usePersistedStorage = ({
        else, perform default restoring logic
        */
 			const restoredValues = await composedValueGetter(name);
-			const restoredValue = restoredValues.find((value) => value !== null);
+			/*
+       loose check on purpose: useRoutePersistedStorage resolves `undefined`
+        for a missing query param, so a storage listed after the route one
+        would never win with a strict `!== null`
+       */
+			const restoredValue = restoredValues.find((value) => value != null);
 
-			if (restoredValue !== undefined) {
+			if (restoredValue != null) {
 				value.value = restoredValue;
 			}
 		}
@@ -157,8 +191,24 @@ export const usePersistedStorage = ({
 		}
 	};
 
+	const sync = async () => {
+		const settledResults = await Promise.allSettled(
+			adapters.map(({ getItem }) => getItem(name)),
+		);
+
+		const emptyStorages = adapters.filter((_, index) => {
+			const result = settledResults[index];
+			return result.status === 'fulfilled' && result.value == null;
+		});
+
+		return store({
+			targets: emptyStorages,
+			skipEmpty: true,
+		});
+	};
+
 	const reset = async () => {
-		await Promise.all(removeItemFns.map((removeItem) => removeItem(name)));
+		await Promise.all(adapters.map(({ removeItem }) => removeItem(name)));
 	};
 
 	const endWatch = () => unwatch?.();
@@ -167,6 +217,7 @@ export const usePersistedStorage = ({
 		watch: startWatch,
 		unwatch: endWatch,
 		restore,
+		sync,
 		reset,
 	};
 };

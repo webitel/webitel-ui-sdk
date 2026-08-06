@@ -4,7 +4,10 @@ import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { computed, nextTick, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
-import { PersistedStorageType } from '../persist/PersistedStorage.types';
+import {
+	type PersistedStorageController,
+	PersistedStorageType,
+} from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
@@ -223,8 +226,14 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
+	/*
+   kept to republish state into the route query on registry re-mount,
+    see syncPersistence()
+   */
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = async () => {
-		const { restore: restoreFields } = usePersistedStorage({
+		const fieldsStorage = usePersistedStorage({
 			name: 'fields',
 			value: fields,
 			storages: [
@@ -247,18 +256,20 @@ export const tableHeadersStoreBody = ({
 			},
 		});
 
-		const { restore: restoreSort } = usePersistedStorage({
+		const sortStorage = usePersistedStorage({
 			name: 'sort',
 			value: sort,
 		});
 
-		const { restore: restoreColumnWidths } = usePersistedStorage({
+		const columnWidthsStorage = usePersistedStorage({
 			name: 'columnWidths',
 			value: columnWidths,
 			storages: [
 				PersistedStorageType.LocalStorage,
 			],
 			storagePath: id,
+			/* empty widths serialize to "{}" – not worth publishing */
+			isEmptyValue: (value) => !value || value === '{}',
 			onStore: (save, { name }) => {
 				const value = JSON.stringify(columnWidths.value);
 				return save({
@@ -278,11 +289,27 @@ export const tableHeadersStoreBody = ({
 			},
 		});
 
+		persistedStorageControllers = [
+			fieldsStorage,
+			sortStorage,
+			columnWidthsStorage,
+		];
+
 		return Promise.allSettled([
-			restoreFields(),
-			restoreSort(),
-			restoreColumnWidths(),
+			fieldsStorage.restore(),
+			sortStorage.restore(),
+			columnWidthsStorage.restore(),
 		]);
+	};
+
+	/*
+   sequentially, because every route storage write is a router.replace()
+    built on top of the current route query
+   */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	const getHeaderByField = (field: string) => {
@@ -334,6 +361,7 @@ export const tableHeadersStoreBody = ({
 		columnReorder,
 
 		setupPersistence,
+		syncPersistence,
 		$reset,
 	};
 };

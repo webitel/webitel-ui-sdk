@@ -46,6 +46,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		// $reset: $resetPaginationStore,
 		$patch: $patchPaginationStore,
 		setupPersistence: setupPaginationPersistence,
+		syncPersistence: syncPaginationPersistence,
 	} = paginationStore;
 
 	const headersStore = useHeadersStore();
@@ -63,6 +64,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		columnReorder,
 		updateShownHeaders,
 		setupPersistence: setupHeadersPersistence,
+		syncPersistence: syncHeadersPersistence,
 	} = headersStore;
 
 	const filtersStore = useFiltersStore();
@@ -77,6 +79,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		updateFilter,
 		deleteFilter,
 		setupPersistence: setupFiltersPersistence,
+		syncPersistence: syncFiltersPersistence,
 		updateSearchMode,
 	} = filtersStore;
 
@@ -285,6 +288,29 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		isStoreSetUp.value = true;
 	};
 
+	/**
+	 * @description
+	 * Republishes the current store state into the storages that hold nothing
+	 * for it – in practice, into the route query.
+	 *
+	 * Persistence is restored only once per app lifetime (see `setupStore`),
+	 * and afterwards the query is written by watchers only, i.e. on change.
+	 * So a registry re-opened with state still in memory (closing a card back to
+	 * it, or reaching it from the menu) used to render filtered data behind a
+	 * bare url, losing filters on reload or on copying the link.
+	 *
+	 * Storages that already hold a value are left untouched, so an explicit query
+	 * always wins over in-memory state.
+	 *
+	 * Sequentially, because every route storage write is a router.replace()
+	 * built on top of the current route query.
+	 */
+	const syncPersistence = async () => {
+		await syncPaginationPersistence();
+		await syncFiltersPersistence();
+		await syncHeadersPersistence();
+	};
+
 	const initialize = async ({
 		parentId: storeParentId,
 	}: {
@@ -294,7 +320,17 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			parentId.value = storeParentId;
 		}
 
+		const isStoreAlreadySetUp = isStoreSetUp.value;
+
 		await setupStore();
+
+		/*
+     on the first setup the restore path is authoritative,
+      so publishing is needed on re-mounts only
+     */
+		if (isStoreAlreadySetUp && !disablePersistence) {
+			await syncPersistence();
+		}
 
 		return loadDataList();
 	};
@@ -329,6 +365,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		setupStore, // only setup, no data loading
 		initialize, // setup + load data
+		syncPersistence, // republish store state into the route query
 
 		loadDataList,
 		appendToDataList,

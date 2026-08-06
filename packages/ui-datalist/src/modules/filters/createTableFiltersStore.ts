@@ -1,7 +1,10 @@
 import { computed, reactive, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
-import { PersistedStorageType } from '../persist/PersistedStorage.types';
+import {
+	type PersistedStorageController,
+	PersistedStorageType,
+} from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
@@ -40,8 +43,14 @@ export const tableFiltersStoreBody = (
 
 	const filtersList = computed(() => filtersManager.getFiltersList());
 
+	/*
+   kept to republish state into the route query on registry re-mount,
+    see syncPersistence()
+   */
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = () => {
-		const { restore: restoreFilters } = usePersistedStorage({
+		const filtersStorage = usePersistedStorage({
 			name: 'filters',
 
 			value: computed(
@@ -51,6 +60,9 @@ export const tableFiltersStoreBody = (
 			storages: [
 				PersistedStorageType.Route,
 			],
+
+			/* an empty FiltersManager serializes to "{}" – not worth publishing */
+			isEmptyValue: (value) => !value || value === '{}',
 
 			/* use custom .toString() logic, provided by FiltersManager */
 			onStore: async (save, { name }) => {
@@ -75,7 +87,7 @@ export const tableFiltersStoreBody = (
 			},
 		});
 
-		const { restore: restoreSearchMode } = usePersistedStorage({
+		const searchModeStorage = usePersistedStorage({
 			name: 'searchMode',
 			value: searchMode,
 			storages: [
@@ -95,10 +107,25 @@ export const tableFiltersStoreBody = (
 			},
 		});
 
+		persistedStorageControllers = [
+			filtersStorage,
+			searchModeStorage,
+		];
+
 		return Promise.all([
-			restoreFilters(),
-			restoreSearchMode(),
+			filtersStorage.restore(),
+			searchModeStorage.restore(),
 		]);
+	};
+
+	/*
+   sequentially, because every route storage write is a router.replace()
+    built on top of the current route query
+   */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	return {
@@ -116,6 +143,7 @@ export const tableFiltersStoreBody = (
 		updateSearchMode,
 
 		setupPersistence,
+		syncPersistence,
 	};
 };
 
