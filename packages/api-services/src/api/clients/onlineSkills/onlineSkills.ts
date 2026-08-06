@@ -21,7 +21,7 @@ const itemResponseHandler = (item: ApiParams) => {
 	return item.item;
 };
 
-const getActivityTypesList = async (params: Record<string, unknown>) => {
+const getOnlineSkillsList = async (params: ApiParams) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchOnlineSkillsQueryParams,
 	);
@@ -60,7 +60,7 @@ const getActivityTypesList = async (params: Record<string, unknown>) => {
 	}
 };
 
-const getActivityType = async ({ itemId: id }: { itemId: ApiId }) => {
+const getOnlineSkill = async ({ itemId: id }: { itemId: ApiId }) => {
 	try {
 		const response = await getOnlineSkills().getOnlineSkills(String(id));
 		return applyTransform(response.data, [
@@ -74,10 +74,10 @@ const getActivityType = async ({ itemId: id }: { itemId: ApiId }) => {
 	}
 };
 
-const addActivityType = async ({
+const addOnlineSkill = async ({
 	itemInstance,
 }: {
-	itemInstance: Record<string, unknown>;
+	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -95,11 +95,11 @@ const addActivityType = async ({
 	}
 };
 
-const updateActivityType = async ({
+const updateOnlineSkill = async ({
 	itemInstance,
 	itemId: id,
 }: {
-	itemInstance: Record<string, unknown>;
+	itemInstance: ApiParams;
 	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
@@ -123,11 +123,11 @@ const updateActivityType = async ({
 	}
 };
 
-const patchActivityType = async ({
+const patchOnlineSkill = async ({
 	changes,
 	id,
 }: {
-	changes: Record<string, unknown>;
+	changes: ApiParams;
 	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
@@ -151,7 +151,7 @@ const patchActivityType = async ({
 	}
 };
 
-const deleteActivityType = async ({ id }: { id: ApiId }) => {
+const deleteOnlineSkill = async ({ id }: { id: ApiId }) => {
 	try {
 		const response = await getOnlineSkills().deleteOnlineSkills(String(id));
 		return applyTransform(response.data, []);
@@ -162,11 +162,11 @@ const deleteActivityType = async ({ id }: { id: ApiId }) => {
 	}
 };
 
-export const ActivityTypesAPI = {
-	getList: getActivityTypesList,
-	get: getActivityType,
-	add: addActivityType,
-	update: updateActivityType,
-	patch: patchActivityType,
-	delete: deleteActivityType,
+export const OnlineSkillsAPI = {
+	getList: getOnlineSkillsList,
+	get: getOnlineSkill,
+	add: addOnlineSkill,
+	update: updateOnlineSkill,
+	patch: patchOnlineSkill,
+	delete: deleteOnlineSkill,
 };
