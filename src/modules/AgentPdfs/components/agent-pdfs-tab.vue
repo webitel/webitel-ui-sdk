@@ -6,6 +6,8 @@
 			:load-data-list="loadDataList"
 			:ask-delete-confirmation="askDeleteConfirmation"
 			:handle-delete="handleDelete"
+			:download-archive="downloadArchive"
+			:is-downloading-archive="isDownloadingArchive"
 		/>
 
 		<delete-confirmation-popup
@@ -110,13 +112,17 @@ import {
 	type WebitelMediaExporterExportRecord,
 	WebitelMediaExporterExportStatus,
 } from '@webitel/api-services/gen/models';
+import {
+	downloadFile as downloadArchiveFile,
+	FileFormat,
+} from '@webitel/api-services/scripts';
 import { WtEmpty } from '@webitel/ui-sdk/components';
 import { getEndOfDay, getStartOfDay } from '@webitel/ui-sdk/scripts';
 import DeleteConfirmationPopup from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { DatetimeFormat } from 'vue-i18n';
 
 import { CrudAction } from '../../../enums';
@@ -269,6 +275,34 @@ const handleDelete = async (items: []) => {
 
 const downloadPdf = async (id: string) => {
 	await downloadFile(id);
+};
+
+const isDownloadingArchive = ref(false);
+
+const downloadArchive = async () => {
+	if (!props.entityIdValue) return;
+
+	isDownloadingArchive.value = true;
+	try {
+		const fileIds = selected.value.length
+			? selected.value.map(
+					(item: WebitelMediaExporterExportRecord) => item.fileId,
+				)
+			: undefined;
+
+		const response = await PdfServicesAPI.downloadCallArchive({
+			callId: props.entityIdValue,
+			fileIds,
+		});
+
+		downloadArchiveFile({
+			response,
+			fileFormat: FileFormat.ZIP,
+			filename: `pdfs-${props.entityIdValue}`,
+		});
+	} finally {
+		isDownloadingArchive.value = false;
+	}
 };
 
 const openPdfInNewWindow = (fileId: string) => {
