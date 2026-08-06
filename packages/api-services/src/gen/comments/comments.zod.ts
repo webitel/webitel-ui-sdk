@@ -49,29 +49,29 @@ export const SearchCommentsQueryParams = zod.object({
 		.describe(
 			'The requirement of [M]andatory [A]ccess [C]ontrol.\n\n - READ: Can `fetch` record. [GET]\n - WRITE: Can `update` record. [PUT|PATCH]\n - DELETE: Can `delete` record. [DELETE]',
 		),
-	'date.since': zod
+	dateSince: zod
 		.string()
 		.optional()
 		.describe('Since timestamp(milli). Not before.'),
-	'date.until': zod
+	dateUntil: zod
 		.string()
 		.optional()
 		.describe('Until timestamp(milli). Not after.'),
-	'author.id': zod.string().optional().describe('Reference Object unique ID.'),
-	'author.type': zod
+	authorId: zod.string().optional().describe('Reference Object unique ID.'),
+	authorType: zod
 		.string()
 		.optional()
 		.describe('Reference Object well-known type.'),
-	'author.name': zod
+	authorName: zod
 		.string()
 		.optional()
 		.describe('Reference Object display name.'),
-	'editor.id': zod.string().optional().describe('Reference Object unique ID.'),
-	'editor.type': zod
+	editorId: zod.string().optional().describe('Reference Object unique ID.'),
+	editorType: zod
 		.string()
 		.optional()
 		.describe('Reference Object well-known type.'),
-	'editor.name': zod
+	editorName: zod
 		.string()
 		.optional()
 		.describe('Reference Object display name.'),

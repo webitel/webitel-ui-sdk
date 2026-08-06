@@ -34,10 +34,10 @@ export type ResetMembersCountParams = {
 	 * Filter by related entity identifiers.
 	 */
 	id?: string[];
-	'createdAt.from'?: string;
-	'createdAt.to'?: string;
-	'priority.from'?: string;
-	'priority.to'?: string;
+	createdAtFrom?: string;
+	createdAtTo?: string;
+	priorityFrom?: string;
+	priorityTo?: string;
 	/**
 	 * Search pattern used to filter queue members.
 	 * The value is matched against the member name

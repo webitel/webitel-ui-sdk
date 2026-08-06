@@ -8,11 +8,20 @@
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
-import type { KnowledgebaseTagsList } from '../_models';
+import type {
+	KnowledgebaseTagsList,
+	WebitelKbSuggestTagsResponse,
+} from '../_models';
 
-import { getListTagsResponseMock } from './tags.faker';
+import {
+	getListTagsResponseMock,
+	getSuggestTagsResponseMock,
+} from './tags.faker';
 
-export { getListTagsResponseMock } from './tags.faker';
+export {
+	getListTagsResponseMock,
+	getSuggestTagsResponseMock,
+} from './tags.faker';
 
 export const getListTagsMockHandler = (
 	overrideResponse?:
@@ -39,6 +48,35 @@ export const getListTagsMockHandler = (
 		options,
 	);
 };
+
+export const getSuggestTagsMockHandler = (
+	overrideResponse?:
+		| WebitelKbSuggestTagsResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelKbSuggestTagsResponse>
+				| WebitelKbSuggestTagsResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/spaces/:spaceId/tags',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getSuggestTagsResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getTagsMock = () => [
 	getListTagsMockHandler(),
+	getSuggestTagsMockHandler(),
 ];

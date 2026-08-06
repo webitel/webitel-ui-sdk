@@ -12,11 +12,11 @@ export const CasesChatCatalogGetCaseChatHistoryParams = zod.object({
 });
 
 export const CasesChatCatalogGetCaseChatHistoryQueryParams = zod.object({
-	'offset.id': zod
+	offsetId: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY starting from the specified message ID'),
-	'offset.date': zod
+	offsetDate: zod
 		.string()
 		.optional()
 		.describe('Messages ONLY been sent before the specified epochtime(milli).'),

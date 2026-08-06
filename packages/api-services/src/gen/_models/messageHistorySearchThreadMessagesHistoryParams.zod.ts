@@ -28,14 +28,14 @@ export type MessageHistorySearchThreadMessagesHistoryParams = {
 	 * Must be a valid UUID referencing an existing message.
 	 * Defines the starting point for pagination.
 	 */
-	'cursor.id'?: string;
+	cursorId?: string;
 	/**
 	 * Pagination direction flag.
 	 *
 	 * true  -> fetch newer messages (back before history)
 	 * false -> fetch older messages (back to older history)
 	 */
-	'cursor.before'?: boolean;
+	cursorBefore?: boolean;
 	/**
 	 * Maximum number of messages to return.
 	 */

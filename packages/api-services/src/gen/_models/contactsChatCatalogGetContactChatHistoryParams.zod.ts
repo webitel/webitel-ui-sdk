@@ -9,11 +9,11 @@ export type ContactsChatCatalogGetContactChatHistoryParams = {
 	/**
 	 * Messages ONLY starting from the specified message ID
 	 */
-	'offset.id'?: string;
+	offsetId?: string;
 	/**
 	 * Messages ONLY been sent before the specified epochtime(milli).
 	 */
-	'offset.date'?: string;
+	offsetDate?: string;
 	/**
 	 * Number of messages to return.
 	 */

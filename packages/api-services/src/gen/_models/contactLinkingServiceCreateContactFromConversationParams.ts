@@ -6,10 +6,10 @@
  */
 
 export type ContactLinkingServiceCreateContactFromConversationParams = {
-	'timezone.id'?: string;
-	'timezone.name'?: string;
-	'owner.id'?: string;
-	'owner.name'?: string;
+	timezoneId?: string;
+	timezoneName?: string;
+	ownerId?: string;
+	ownerName?: string;
 	label?: string[];
 	name?: string;
 	description?: string;

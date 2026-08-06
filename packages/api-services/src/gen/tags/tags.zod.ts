@@ -25,3 +25,21 @@ export const ListTagsResponse = zod.object({
 	next: zod.boolean().optional(),
 	page: zod.int().optional(),
 });
+
+/**
+ * @summary SuggestTags returns existing tags in a space matching a prefix.
+ */
+export const SuggestTagsParams = zod.object({
+	space_id: zod.string().describe('Space to read tags from.'),
+});
+
+export const SuggestTagsQueryParams = zod.object({
+	q: zod.string().optional().describe('Prefix to match.'),
+	size: zod.int().optional().describe('Maximum number of suggestions.'),
+});
+
+export const SuggestTagsResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Matching tags.'),
+	})
+	.describe('SuggestTagsResponse returns matching tags.');

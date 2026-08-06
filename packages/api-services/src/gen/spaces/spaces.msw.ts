@@ -8,21 +8,38 @@
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
-import type { KnowledgebaseSpace, KnowledgebaseSpaceList } from '../_models';
+import type {
+	KnowledgebaseSpace,
+	KnowledgebaseSpaceList,
+	WebitelKbSpace,
+	WebitelKbSpaceList,
+} from '../_models';
 
 import {
+	getCreateSpaceResponseMock,
 	getCreateSpaceSpacesResponseMock,
+	getDeleteSpaceResponseMock,
 	getDeleteSpaceSpacesResponseMock,
+	getListSpacesResponseMock,
 	getListSpacesSpacesResponseMock,
+	getLocateSpaceResponseMock,
 	getLocateSpaceSpacesResponseMock,
+	getUpdateSpace2ResponseMock,
+	getUpdateSpaceResponseMock,
 	getUpdateSpaceSpacesResponseMock,
 } from './spaces.faker';
 
 export {
+	getCreateSpaceResponseMock,
 	getCreateSpaceSpacesResponseMock,
+	getDeleteSpaceResponseMock,
 	getDeleteSpaceSpacesResponseMock,
+	getListSpacesResponseMock,
 	getListSpacesSpacesResponseMock,
+	getLocateSpaceResponseMock,
 	getLocateSpaceSpacesResponseMock,
+	getUpdateSpace2ResponseMock,
+	getUpdateSpaceResponseMock,
 	getUpdateSpaceSpacesResponseMock,
 } from './spaces.faker';
 
@@ -155,10 +172,172 @@ export const getUpdateSpaceSpacesMockHandler = (
 		options,
 	);
 };
+
+export const getListSpacesMockHandler = (
+	overrideResponse?:
+		| WebitelKbSpaceList
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbSpaceList> | WebitelKbSpaceList),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/spaces',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getListSpacesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getCreateSpaceMockHandler = (
+	overrideResponse?:
+		| WebitelKbSpace
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<WebitelKbSpace> | WebitelKbSpace),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/kb/spaces',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getCreateSpaceResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getDeleteSpaceMockHandler = (
+	overrideResponse?:
+		| WebitelKbSpace
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<WebitelKbSpace> | WebitelKbSpace),
+	options?: RequestHandlerOptions,
+) => {
+	return http.delete(
+		'*/v1/kb/spaces/:id',
+		async (info: Parameters<Parameters<typeof http.delete>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDeleteSpaceResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getLocateSpaceMockHandler = (
+	overrideResponse?:
+		| WebitelKbSpace
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<WebitelKbSpace> | WebitelKbSpace),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/kb/spaces/:id',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getLocateSpaceResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateSpace2MockHandler = (
+	overrideResponse?:
+		| WebitelKbSpace
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<WebitelKbSpace> | WebitelKbSpace),
+	options?: RequestHandlerOptions,
+) => {
+	return http.patch(
+		'*/v1/kb/spaces/:id',
+		async (info: Parameters<Parameters<typeof http.patch>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getUpdateSpace2ResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getUpdateSpaceMockHandler = (
+	overrideResponse?:
+		| WebitelKbSpace
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) => Promise<WebitelKbSpace> | WebitelKbSpace),
+	options?: RequestHandlerOptions,
+) => {
+	return http.put(
+		'*/v1/kb/spaces/:id',
+		async (info: Parameters<Parameters<typeof http.put>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getUpdateSpaceResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getSpacesMock = () => [
 	getListSpacesSpacesMockHandler(),
 	getCreateSpaceSpacesMockHandler(),
 	getDeleteSpaceSpacesMockHandler(),
 	getLocateSpaceSpacesMockHandler(),
 	getUpdateSpaceSpacesMockHandler(),
+	getListSpacesMockHandler(),
+	getCreateSpaceMockHandler(),
+	getDeleteSpaceMockHandler(),
+	getLocateSpaceMockHandler(),
+	getUpdateSpace2MockHandler(),
+	getUpdateSpaceMockHandler(),
 ];

@@ -184,25 +184,92 @@ export {
 	CreateArticleArticlesParams,
 	CreateArticleArticlesQueryParams,
 	CreateArticleArticlesResponse,
+	CreateArticleBody,
+	CreateArticleResponse,
+	createArticleBodyStateDefault,
+	createArticleBodyTypeDefault,
+	createArticleResponseIndexStateDefault,
+	createArticleResponseStateDefault,
+	createArticleResponseTypeDefault,
 	DeleteArticleArticlesParams,
 	DeleteArticleArticlesQueryParams,
 	DeleteArticleArticlesResponse,
+	DeleteArticleParams,
+	DeleteArticleResponse,
+	deleteArticleResponseIndexStateDefault,
+	deleteArticleResponseStateDefault,
+	deleteArticleResponseTypeDefault,
+	GetTreeParams,
+	GetTreeResponse,
+	getTreeResponseNodesItemTypeDefault,
+	ListAncestorsParams,
+	ListAncestorsResponse,
 	ListArticles2Params,
 	ListArticles2QueryParams,
 	ListArticles2Response,
 	ListArticlesArticlesParams,
 	ListArticlesArticlesQueryParams,
 	ListArticlesArticlesResponse,
+	ListArticlesQueryParams,
+	ListArticlesResponse,
+	ListChildrenParams,
+	ListChildrenResponse,
 	LocateArticleArticlesParams,
 	LocateArticleArticlesQueryParams,
 	LocateArticleArticlesResponse,
+	LocateArticleParams,
+	LocateArticleResponse,
 	LocateArticleVersionParams,
 	LocateArticleVersionResponse,
+	listAncestorsResponseItemsItemIndexStateDefault,
+	listAncestorsResponseItemsItemStateDefault,
+	listAncestorsResponseItemsItemTypeDefault,
+	listArticlesQueryStateDefault,
+	listArticlesQueryTypeDefault,
+	listArticlesResponseItemsItemIndexStateDefault,
+	listArticlesResponseItemsItemStateDefault,
+	listArticlesResponseItemsItemTypeDefault,
+	listChildrenResponseItemsItemIndexStateDefault,
+	listChildrenResponseItemsItemStateDefault,
+	listChildrenResponseItemsItemTypeDefault,
+	locateArticleResponseIndexStateDefault,
+	locateArticleResponseStateDefault,
+	locateArticleResponseTypeDefault,
+	MoveArticleBody,
+	MoveArticleParams,
+	MoveArticleResponse,
+	moveArticleResponseIndexStateDefault,
+	moveArticleResponseStateDefault,
+	moveArticleResponseTypeDefault,
+	UpdateArticle2Body,
+	UpdateArticle2Params,
+	UpdateArticle2Response,
 	UpdateArticleArticlesBody,
 	UpdateArticleArticlesParams,
 	UpdateArticleArticlesQueryParams,
 	UpdateArticleArticlesResponse,
+	UpdateArticleBody,
+	UpdateArticleParams,
+	UpdateArticleResponse,
+	updateArticle2BodyStateDefault,
+	updateArticle2BodyTypeDefault,
+	updateArticle2ResponseIndexStateDefault,
+	updateArticle2ResponseStateDefault,
+	updateArticle2ResponseTypeDefault,
+	updateArticleBodyStateDefault,
+	updateArticleBodyTypeDefault,
+	updateArticleResponseIndexStateDefault,
+	updateArticleResponseStateDefault,
+	updateArticleResponseTypeDefault,
 } from './articles/articles.zod';
+export * from './attachments/attachments';
+export {
+	DeleteFileAttachmentsParams,
+	DeleteFileAttachmentsResponse,
+	ListFilesAttachmentsParams,
+	ListFilesAttachmentsQueryParams,
+	ListFilesAttachmentsResponse,
+} from './attachments/attachments.zod';
 export * from './audit-form-service/audit-form-service';
 export {
 	CreateAuditFormBody,
@@ -755,6 +822,8 @@ export {
 	contactsChatCatalogGetContactChatHistory2ResponseMessagesItemKeyboardButtonsItemRowItemShareDefault,
 	contactsChatCatalogGetContactChatHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault,
 } from './contacts-chat-catalog/contacts-chat-catalog.zod';
+export * from './customer/customer';
+export * from './customer/customer.zod';
 export * from './customers/customers';
 export {
 	GetCustomer2Params,
@@ -969,6 +1038,8 @@ export {
 	UpdateEmailQueryParams,
 	UpdateEmailResponse,
 } from './emails/emails.zod';
+export * from './embedding-models/embedding-models';
+export * from './embedding-models/embedding-models.zod';
 export * from './extensions/extensions';
 export {
 	CreateTypeExtensionsBody,
@@ -1798,6 +1869,30 @@ export {
 	updateRelatedCaseBodyRelationTypeDefault,
 	updateRelatedCaseResponseRelationTypeDefault,
 } from './related-cases/related-cases.zod';
+export * from './retrieval/retrieval';
+export {
+	MenuParams,
+	MenuQueryParams,
+	MenuResponse,
+	menuResponseItemsItemStateDefault,
+	menuResponseItemsItemTypeDefault,
+	ResolveBody,
+	ResolveResponse,
+	resolveResponseItemsItemStateDefault,
+	resolveResponseItemsItemTypeDefault,
+	SearchRetrievalQueryParams,
+	SearchRetrievalResponse,
+	SemanticSearchBody,
+	SemanticSearchResponse,
+	SuggestBody,
+	SuggestResponse,
+	searchRetrievalQueryTagMatchDefault,
+	searchRetrievalResponseItemsItemStateDefault,
+	searchRetrievalResponseItemsItemTypeDefault,
+	semanticSearchBodyTagMatchDefault,
+	suggestResponseArticlesItemStateDefault,
+	suggestResponseArticlesItemTypeDefault,
+} from './retrieval/retrieval.zod';
 export * from './routing-chat-plan-service/routing-chat-plan-service';
 export * from './routing-chat-plan-service/routing-chat-plan-service.zod';
 export * from './routing-outbound-call-service/routing-outbound-call-service';
@@ -2043,21 +2138,35 @@ export {
 } from './sources/sources.zod';
 export * from './spaces/spaces';
 export {
+	CreateSpaceBody,
+	CreateSpaceResponse,
 	CreateSpaceSpacesBody,
 	CreateSpaceSpacesBodyItem,
 	CreateSpaceSpacesQueryParams,
 	CreateSpaceSpacesResponse,
+	DeleteSpaceParams,
+	DeleteSpaceResponse,
 	DeleteSpaceSpacesParams,
 	DeleteSpaceSpacesQueryParams,
 	DeleteSpaceSpacesResponse,
+	ListSpacesQueryParams,
+	ListSpacesResponse,
 	ListSpacesSpacesQueryParams,
 	ListSpacesSpacesResponse,
+	LocateSpaceParams,
+	LocateSpaceResponse,
 	LocateSpaceSpacesParams,
 	LocateSpaceSpacesQueryParams,
 	LocateSpaceSpacesResponse,
 	listSpacesSpacesQueryFieldsItemDefault,
 	listSpacesSpacesQuerySortItemDefault,
 	listSpacesSpacesQuerySortItemRegExp,
+	UpdateSpace2Body,
+	UpdateSpace2Params,
+	UpdateSpace2Response,
+	UpdateSpaceBody,
+	UpdateSpaceParams,
+	UpdateSpaceResponse,
 	UpdateSpaceSpacesBody,
 	UpdateSpaceSpacesParams,
 	UpdateSpaceSpacesQueryParams,
@@ -2110,7 +2219,13 @@ export {
 export * from './system-setting-service/system-setting-service';
 export * from './system-setting-service/system-setting-service.zod';
 export * from './tags/tags';
-export * from './tags/tags.zod';
+export {
+	ListTagsQueryParams,
+	ListTagsResponse,
+	SuggestTagsParams,
+	SuggestTagsQueryParams,
+	SuggestTagsResponse,
+} from './tags/tags.zod';
 export * from './team-hook-service/team-hook-service';
 export {
 	CreateTeamHookBody,
@@ -2373,6 +2488,17 @@ export {
 	updateVariable2BodyKeyRegExp,
 	updateVariableBodyKeyRegExp,
 } from './variables/variables.zod';
+export * from './versions/versions';
+export {
+	GetVersionParams,
+	GetVersionResponse,
+	ListVersionsParams,
+	ListVersionsQueryParams,
+	ListVersionsResponse,
+	RestoreVersionBody,
+	RestoreVersionParams,
+	RestoreVersionResponse,
+} from './versions/versions.zod';
 export * from './web-hook-service/web-hook-service';
 export * from './web-hook-service/web-hook-service.zod';
 export * from './webitel-im-api-gateway-v1-account/webitel-im-api-gateway-v1-account';

@@ -8,7 +8,12 @@ import axios from '@aliasedDeps/api-services/axios';
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type { KnowledgebaseTagsList, ListTagsParams } from '../_models';
+import type {
+	KnowledgebaseTagsList,
+	ListTagsParams,
+	SuggestTagsParams,
+	WebitelKbSuggestTagsResponse,
+} from '../_models';
 
 // --- header start
 //
@@ -33,12 +38,30 @@ export const // --- title start
 					},
 				});
 			};
+			/**
+			 * @summary SuggestTags returns existing tags in a space matching a prefix.
+			 */
+			const suggestTags = (
+				spaceId: string,
+				params?: SuggestTagsParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelKbSuggestTagsResponse>> => {
+				return axiosInstance.get(`/v1/kb/spaces/${spaceId}/tags`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
 
 			// --- footer start
 			return {
 				listTags,
+				suggestTags,
 			};
 		};
 export type ListTagsResult = AxiosResponse<KnowledgebaseTagsList>;
+export type SuggestTagsResult = AxiosResponse<WebitelKbSuggestTagsResponse>;
 
 // --- footer end

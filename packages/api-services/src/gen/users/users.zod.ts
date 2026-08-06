@@ -329,8 +329,8 @@ export const SearchUsersQueryParams = zod.object({
 		.boolean()
 		.optional()
 		.describe('filter: .deleted_at NOTNULL (view: RECYCLE)'),
-	'presence.status': zod.string().optional(),
-	'presence.note': zod.string().optional(),
+	presenceStatus: zod.string().optional(),
+	presenceNote: zod.string().optional(),
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -494,10 +494,10 @@ export const CreateUserQueryParams = zod.object({
 		.boolean()
 		.optional()
 		.describe('Generate credentials & assign SIP [device] for NEW [user]'),
-	'device.name': zod.string().optional().describe('SIP display name'),
-	'device.account': zod.string().optional().describe('SIP auth-id'),
-	'device.password': zod.string().optional().describe('SIP password'),
-	'device.generatePassword': zod
+	deviceName: zod.string().optional().describe('SIP display name'),
+	deviceAccount: zod.string().optional().describe('SIP auth-id'),
+	devicePassword: zod.string().optional().describe('SIP password'),
+	deviceGeneratePassword: zod
 		.boolean()
 		.optional()
 		.describe('[re]generate SIP password ?'),
@@ -1286,10 +1286,10 @@ export const UpdateUser2QueryParams = zod.object({
 		.boolean()
 		.optional()
 		.describe('Generate SIP credentials & assign NEW [device] for [user]'),
-	'device.name': zod.string().optional().describe('SIP display name'),
-	'device.account': zod.string().optional().describe('SIP auth-id'),
-	'device.password': zod.string().optional().describe('SIP password'),
-	'device.generatePassword': zod
+	deviceName: zod.string().optional().describe('SIP display name'),
+	deviceAccount: zod.string().optional().describe('SIP auth-id'),
+	devicePassword: zod.string().optional().describe('SIP password'),
+	deviceGeneratePassword: zod
 		.boolean()
 		.optional()
 		.describe('[re]generate SIP password ?'),
@@ -1537,10 +1537,10 @@ export const UpdateUserQueryParams = zod.object({
 		.boolean()
 		.optional()
 		.describe('Generate SIP credentials & assign NEW [device] for [user]'),
-	'device.name': zod.string().optional().describe('SIP display name'),
-	'device.account': zod.string().optional().describe('SIP auth-id'),
-	'device.password': zod.string().optional().describe('SIP password'),
-	'device.generatePassword': zod
+	deviceName: zod.string().optional().describe('SIP display name'),
+	deviceAccount: zod.string().optional().describe('SIP auth-id'),
+	devicePassword: zod.string().optional().describe('SIP password'),
+	deviceGeneratePassword: zod
 		.boolean()
 		.optional()
 		.describe('[re]generate SIP password ?'),

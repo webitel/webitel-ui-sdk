@@ -34,38 +34,38 @@ export type CatalogGetMembersParams = {
 	 * Contact unique **ID**entifier.
 	 * Contact **type**-specific string.
 	 */
-	'via.id'?: string;
+	viaId?: string;
 	/**
 	 * Contact **type** provider.
 	 */
-	'via.type'?: string;
+	viaType?: string;
 	/**
 	 * Contact display **name**.
 	 */
-	'via.name'?: string;
+	viaName?: string;
 	/**
 	 * Contact unique **ID**entifier.
 	 * Contact **type**-specific string.
 	 */
-	'peer.id'?: string;
+	peerId?: string;
 	/**
 	 * Contact **type** provider.
 	 */
-	'peer.type'?: string;
+	peerType?: string;
 	/**
 	 * Contact display **name**.
 	 */
-	'peer.name'?: string;
+	peerName?: string;
 	/**
 	 * Since epochtime (milli).
 	 * **Match**: greater than ..
 	 */
-	'date.since'?: string;
+	dateSince?: string;
 	/**
 	 * Until epochtime (milli).
 	 * **Match**: less or equal ..
 	 */
-	'date.until'?: string;
+	dateUntil?: string;
 	/**
 	 * Participants ONLY who are currently [not] connected to the chat.
 	 * ( left: ( 0 ? online : offline ) )

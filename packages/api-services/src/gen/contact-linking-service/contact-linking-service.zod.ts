@@ -16,10 +16,10 @@ export const ContactLinkingServiceCreateContactFromConversationParams =
 
 export const ContactLinkingServiceCreateContactFromConversationQueryParams =
 	zod.object({
-		'timezone.id': zod.string().optional(),
-		'timezone.name': zod.string().optional(),
-		'owner.id': zod.string().optional(),
-		'owner.name': zod.string().optional(),
+		timezoneId: zod.string().optional(),
+		timezoneName: zod.string().optional(),
+		ownerId: zod.string().optional(),
+		ownerName: zod.string().optional(),
 		label: zod.array(zod.string()).optional(),
 		name: zod.string().optional(),
 		description: zod.string().optional(),

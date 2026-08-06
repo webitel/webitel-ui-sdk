@@ -259,8 +259,8 @@ export const CreateAgentResponse = zod.object({
 export const SearchAgentCallStatisticsQueryParams = zod.object({
 	page: zod.int().optional(),
 	size: zod.int().optional(),
-	'time.from': zod.string().optional(),
-	'time.to': zod.string().optional(),
+	timeFrom: zod.string().optional(),
+	timeTo: zod.string().optional(),
 	agentId: zod.array(zod.int()).optional(),
 	domainId: zod.string().optional(),
 	q: zod.string().optional(),
@@ -301,13 +301,13 @@ export const SearchAgentStatusStatisticQueryParams = zod.object({
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
 	agentId: zod.array(zod.string()).optional(),
-	'time.from': zod.string().optional(),
-	'time.to': zod.string().optional(),
+	timeFrom: zod.string().optional(),
+	timeTo: zod.string().optional(),
 	status: zod.array(zod.string()).optional(),
 	queueId: zod.array(zod.int()).optional(),
 	teamId: zod.array(zod.int()).optional(),
-	'utilization.from': zod.string().optional(),
-	'utilization.to': zod.string().optional(),
+	utilizationFrom: zod.string().optional(),
+	utilizationTo: zod.string().optional(),
 	hasCall: zod.boolean().optional(),
 	skillId: zod.array(zod.int()).optional(),
 	regionId: zod.array(zod.int()).optional(),
@@ -397,8 +397,8 @@ export const SearchAgentStatusStatisticItemParams = zod.object({
 });
 
 export const SearchAgentStatusStatisticItemQueryParams = zod.object({
-	'time.from': zod.string().optional(),
-	'time.to': zod.string().optional(),
+	timeFrom: zod.string().optional(),
+	timeTo: zod.string().optional(),
 });
 
 export const SearchAgentStatusStatisticItemResponse = zod.object({
@@ -458,8 +458,8 @@ export const SearchAgentStatusStatisticItemResponse = zod.object({
 export const SearchAgentStateHistoryQueryParams = zod.object({
 	page: zod.int().optional(),
 	size: zod.int().optional(),
-	'joinedAt.from': zod.string().optional(),
-	'joinedAt.to': zod.string().optional(),
+	joinedAtFrom: zod.string().optional(),
+	joinedAtTo: zod.string().optional(),
 	agentId: zod.array(zod.string()).optional(),
 	sort: zod.string().optional(),
 	domainId: zod.string().optional(),
