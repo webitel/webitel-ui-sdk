@@ -320,8 +320,15 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		await setupStore();
 
-		/* on the first setup the restore path is authoritative */
-		if (isStoreAlreadySetUp && !disablePersistence) {
+		/*
+     on the first setup the restore path is authoritative.
+
+     a store initialized with a parentId is a list nested in a card page, not a
+      registry: it shares the query param names with the registry stores, and
+      the url it would publish into is the card one – so it keeps writing on
+      change only, and syncs merely on demand
+     */
+		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
 			await syncPersistence();
 		}
 
