@@ -3,7 +3,7 @@
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
     :v="!disableValidation && vList"
-    :model-value="model?.list"
+    :model-value="value.list"
     data-key="id"
     option-value="id"
     v-bind="$attrs"
@@ -12,9 +12,9 @@
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
-    :selected="!!model?.unassigned"
+    :selected="!!value.unassigned"
     :v="!disableValidation && vUnassigned"
-    @update:selected="model.unassigned = !!$event"
+    @update:selected="handleInput('unassigned', !!$event)"
   />
 </template>
 
@@ -26,12 +26,6 @@ import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { IContactGroupFilterConfig } from './index';
-
-const props = defineProps<{
-	filterConfig: IContactGroupFilterConfig;
-	disableValidation?: boolean;
-	hideLabel?: boolean;
-}>();
 
 type ModelValue = {
 	list?: string[];
@@ -45,39 +39,62 @@ const model = defineModel<ModelValue>({
 	}),
 });
 
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			list: [],
+			unassigned: null,
+		},
+);
+
+const handleInput = <K extends keyof ModelValue>(
+	key: K,
+	newFieldValue: ModelValue[K],
+) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
+	};
+};
+
+const changeListValue = (event: string[]) => {
+	if (!event.length && !value.value.unassigned) {
+		model.value = {};
+		return;
+	}
+	handleInput('list', event);
+};
+
+const props = defineProps<{
+	filterConfig: IContactGroupFilterConfig;
+	disableValidation?: boolean;
+	hideLabel?: boolean;
+}>();
+
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
 	];
 }>();
+
 const { t } = useI18n();
 
 const labelValue = computed(() =>
 	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),
 );
 
-const changeListValue = (event: string[]) => {
-	if (!event.length && !model.value.unassigned) {
-		model.value = {};
-		return;
-	}
-	model.value = {
-		...model.value,
-		list: event,
-	};
-};
 const v$ = useVuelidate<{
 	model: ModelValue;
 }>(
 	computed(() => ({
 		model: {
 			list: {
-				required: requiredIf(() => !model.value.unassigned),
+				required: requiredIf(() => !value.value.unassigned),
 			},
 			unassigned: {
 				required: requiredIf(
 					() =>
-						!!props.filterConfig?.hideUnassigned && !model.value.list?.length,
+						!!props.filterConfig?.hideUnassigned && !value.value.list?.length,
 				),
 			},
 		},
@@ -106,11 +123,9 @@ onMounted(() => {
 });
 
 watch(
-	() => v$?.value?.$invalid,
+	() => v$.value.$invalid,
 	(invalid) => {
-		if (v$?.value) {
-			emit('update:invalid', invalid);
-		}
+		emit('update:invalid', invalid);
 	},
 	{
 		immediate: true,
