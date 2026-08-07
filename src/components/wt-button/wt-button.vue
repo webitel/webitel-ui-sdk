@@ -44,6 +44,7 @@
       <wt-icon
         v-if="icon"
         :class="{ 'wt-button__icon--hidden': showLoader }"
+        :color="iconColor"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -56,7 +57,12 @@
 import type { ButtonProps } from 'primevue';
 import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
-import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
+import {
+	ButtonColor,
+	ButtonVariant,
+	ComponentSize,
+	type IconColor,
+} from '../../enums';
 import type { BadgeSeverity } from '../wt-badge-new/types/WtBadge';
 import WtBadge from '../wt-badge-new/wt-badge.vue';
 import WtIcon from '../wt-icon/wt-icon.vue';
@@ -82,6 +88,7 @@ interface WtButtonProps extends /* @vue-ignore */ ButtonProps {
 	widthByContent?: boolean;
 	icon?: string;
 	iconPrefix?: string;
+	iconColor?: IconColor;
 	badge?: string;
 	badgeSeverity?: BadgeSeverity;
 	badgeAbsolutePosition?: boolean;
