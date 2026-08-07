@@ -1,11 +1,10 @@
-import { ServicesApiFactory, WebitelContactsGroupType } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	getServices,
+	ListServicesQueryParams,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -16,34 +15,36 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const servicesService = ServicesApiFactory(configuration, '', instance);
-
 const fieldsToSend = [
+	'id',
 	'name',
-	'code',
-	'sla',
-	'status',
-	'state',
 	'description',
-	'group',
-	'assignee',
-	'services',
-	'root_id',
-	'catalog_id',
+	'prefix',
+	'code',
+	'state',
+	'sla_id',
+	'status_id',
+	'close_reason_id',
+	'team_ids',
+	'skill_ids',
 ];
 
+const preRequestHandler = (item) => {
+	return {
+		...item,
+		state: item.state ?? true,
+		sla_id: item.sla?.id,
+		status_id: item.status?.id,
+		close_reason_id: item.closeReason?.id,
+		team_ids: item.teams?.map((team) => team.id),
+		skill_ids: item.skills?.map((skill) => skill.id),
+	};
+};
+
 const getServicesList = async ({ rootId, ...rest }) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListServicesQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
@@ -52,20 +53,19 @@ const getServicesList = async ({ rootId, ...rest }) => {
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitize(listFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await servicesService.listServices(
+		const response = await getServices().listServices({
 			page,
 			size,
 			sort,
 			id,
 			q,
 			rootId,
-			undefined,
 			fields,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -81,17 +81,23 @@ const getServicesList = async ({ rootId, ...rest }) => {
 };
 
 const getService = async ({ itemId: id }) => {
-	const fieldsToSend = [
+	const serviceFieldsToSend = [
 		'name',
 		'code',
 		'sla',
+		'teams',
+		'skills',
+		'status',
 		'state',
-		'prefix',
-		'group',
-		'assignee',
+		'close_reason',
+		'default_priority',
+		'reason',
 		'description',
-		'catalog_id',
+		'services',
+		'assignee',
 		'root_id',
+		'catalog_id',
+		'group',
 	];
 
 	const itemResponseHandler = (item) => {
@@ -99,7 +105,9 @@ const getService = async ({ itemId: id }) => {
 	};
 
 	try {
-		const response = await servicesService.locateService(id, fieldsToSend);
+		const response = await getServices().locateService(id, {
+			fields: serviceFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -111,30 +119,14 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = ({ rootId, catalogId }) => {
-	return (item) => ({
-		...item,
-		assignee:
-			item.group?.type === WebitelContactsGroupType.DYNAMIC
-				? {}
-				: item.assignee,
-		rootId,
-		catalogId,
-	});
-};
-
-const addService = async ({ itemInstance, rootId, catalogId }) => {
+const addService = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({
-			rootId,
-			catalogId,
-		}),
+		preRequestHandler,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
-
 	try {
-		const response = await servicesService.createService(item);
+		const response = await getServices().createService(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -145,23 +137,14 @@ const addService = async ({ itemInstance, rootId, catalogId }) => {
 	}
 };
 
-const updateService = async ({
-	itemInstance,
-	itemId: id,
-	rootId,
-	catalogId,
-}) => {
+const updateService = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({
-			rootId,
-			catalogId,
-		}),
+		preRequestHandler,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
-
 	try {
-		const response = await servicesService.updateService(id, item);
+		const response = await getServices().updateService(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -172,13 +155,14 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }) => {
-	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+const patchService = async ({ itemInstance, itemId: id }) => {
+	const item = applyTransform(itemInstance, [
+		preRequestHandler,
 		camelToSnake(),
+		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await servicesService.updateService2(id, body);
+		const response = await getServices().updateService2(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -191,7 +175,7 @@ const patchService = async ({ changes, id }) => {
 
 const deleteService = async ({ id }) => {
 	try {
-		const response = await servicesService.deleteService(id);
+		const response = await getServices().deleteService(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -200,7 +184,7 @@ const deleteService = async ({ id }) => {
 	}
 };
 
-const getServicesLookup = async (params) =>
+const getServicesLookup = (params) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

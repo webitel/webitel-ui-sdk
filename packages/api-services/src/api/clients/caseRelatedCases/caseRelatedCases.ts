@@ -1,0 +1,100 @@
+import {
+	getRelatedCases,
+	ListRelatedCasesQueryParams,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
+import {
+	applyTransform,
+	camelToSnake,
+	merge,
+	notify,
+	sanitize,
+	snakeToCamel,
+	starToSearch,
+} from '../../transformers';
+
+const getRelatedCasesList = async ({ parentId, ...rest }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListRelatedCasesQueryParams,
+	);
+
+	const { page, size, q, ids, sort, fields } = applyTransform(rest, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params) => ({
+			...params,
+			q: params.search,
+			fields: [
+				...(params.fields || []),
+				'primary_case',
+				'id',
+			],
+		}),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getRelatedCases().listRelatedCases(parentId, {
+			page,
+			size,
+			q,
+			sort,
+			fields,
+			ids,
+		});
+
+		const { items, next } = applyTransform(
+			{
+				...response.data,
+				items: response.data?.data || [],
+			},
+			[
+				merge(getDefaultGetListResponse()),
+			],
+		);
+
+		return {
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const addRelatedCase = async ({ parentId, input }) => {
+	try {
+		const response = await getRelatedCases().createRelatedCase(parentId, input);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const deleteRelatedCase = async ({ parentId, id }) => {
+	try {
+		const response = await getRelatedCases().deleteRelatedCase(parentId, id);
+		return applyTransform(response.data, []);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+export const RelatedCasesAPI = {
+	getList: getRelatedCasesList,
+	delete: deleteRelatedCase,
+	add: addRelatedCase,
+};
