@@ -1,7 +1,10 @@
 import { computed, reactive, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
-import { PersistedStorageType } from '../persist/PersistedStorage.types';
+import {
+	type PersistedStorageController,
+	PersistedStorageType,
+} from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
@@ -40,8 +43,10 @@ export const tableFiltersStoreBody = (
 
 	const filtersList = computed(() => filtersManager.getFiltersList());
 
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = () => {
-		const { restore: restoreFilters } = usePersistedStorage({
+		const filtersStorage = usePersistedStorage({
 			name: 'filters',
 
 			value: computed(
@@ -75,7 +80,7 @@ export const tableFiltersStoreBody = (
 			},
 		});
 
-		const { restore: restoreSearchMode } = usePersistedStorage({
+		const searchModeStorage = usePersistedStorage({
 			name: 'searchMode',
 			value: searchMode,
 			storages: [
@@ -95,10 +100,22 @@ export const tableFiltersStoreBody = (
 			},
 		});
 
+		persistedStorageControllers = [
+			filtersStorage,
+			searchModeStorage,
+		];
+
 		return Promise.all([
-			restoreFilters(),
-			restoreSearchMode(),
+			filtersStorage.restore(),
+			searchModeStorage.restore(),
 		]);
+	};
+
+	/* sequentially: every route write is a router.replace() on top of the current query */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	return {
@@ -116,6 +133,7 @@ export const tableFiltersStoreBody = (
 		updateSearchMode,
 
 		setupPersistence,
+		syncPersistence,
 	};
 };
 

@@ -46,6 +46,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		// $reset: $resetPaginationStore,
 		$patch: $patchPaginationStore,
 		setupPersistence: setupPaginationPersistence,
+		syncPersistence: syncPaginationPersistence,
 	} = paginationStore;
 
 	const headersStore = useHeadersStore();
@@ -63,6 +64,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		columnReorder,
 		updateShownHeaders,
 		setupPersistence: setupHeadersPersistence,
+		syncPersistence: syncHeadersPersistence,
 	} = headersStore;
 
 	const filtersStore = useFiltersStore();
@@ -77,6 +79,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		updateFilter,
 		deleteFilter,
 		setupPersistence: setupFiltersPersistence,
+		syncPersistence: syncFiltersPersistence,
 		updateSearchMode,
 	} = filtersStore;
 
@@ -285,6 +288,25 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		isStoreSetUp.value = true;
 	};
 
+	/**
+	 * @description
+	 * Republishes the current store state into the storages that hold nothing
+	 * for it – in practice, into the route query.
+	 *
+	 * Persistence is restored only once per app lifetime (see `setupStore`),
+	 * and afterwards the query is written by watchers only, i.e. on change.
+	 * So a registry re-opened with state still in memory (closing a card back to
+	 * it, or reaching it from the menu) used to render filtered data behind a
+	 * bare url, losing filters on reload or on copying the link.
+	 *
+	 * [WTEL-10093](https://webitel.atlassian.net/browse/WTEL-10093)
+	 */
+	const syncPersistence = async () => {
+		await syncPaginationPersistence();
+		await syncFiltersPersistence();
+		await syncHeadersPersistence();
+	};
+
 	const initialize = async ({
 		parentId: storeParentId,
 	}: {
@@ -294,7 +316,21 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			parentId.value = storeParentId;
 		}
 
+		const isStoreAlreadySetUp = isStoreSetUp.value;
+
 		await setupStore();
+
+		/*
+     on the first setup the restore path is authoritative.
+
+     a store initialized with a parentId is a list nested in a card page, not a
+      registry: it shares the query param names with the registry stores, and
+      the url it would publish into is the card one – so it keeps writing on
+      change only, and syncs merely on demand
+     */
+		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
+			await syncPersistence();
+		}
 
 		return loadDataList();
 	};
@@ -329,6 +365,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		setupStore, // only setup, no data loading
 		initialize, // setup + load data
+		syncPersistence, // republish store state into the route query
 
 		loadDataList,
 		appendToDataList,
