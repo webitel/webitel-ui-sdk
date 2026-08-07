@@ -1,6 +1,7 @@
 <script setup>
 import Docs from './wt-password-docs.vue';
 import ExamplePassword from './examples/example-password.vue';
+import ExamplePasswordSizes from './examples/example-password-sizes.vue';
 </script>
 
 # WtPassword
@@ -17,4 +18,13 @@ import ExamplePassword from './examples/example-password.vue';
 
 ::: details Code
 <<< ./examples/example-password.vue{vue}
+:::
+
+## Password Sizes
+::: raw
+<ExamplePasswordSizes />
+:::
+
+::: details Code
+<<< ./examples/example-password-sizes.vue{vue}
 :::

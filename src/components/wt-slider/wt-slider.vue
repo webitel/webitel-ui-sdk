@@ -5,13 +5,14 @@
     :max="max"
     :min="min"
     :step="step"
+    :range="range"
     :orientation="orientation"
-    :style="{ 
+    :style="{
       height: vertical ? `${height}px` : '',
       width: !vertical && width ? `${width}px` : '',
      }"
   />
-  
+
 </template>
 
 <script setup lang="ts">
@@ -63,6 +64,12 @@ interface Props extends SliderProps {
 	 * @type {number}
 	 */
 	width?: number;
+	/**
+	 * Enables selecting a range with two handles. Requires modelValue to be a [min, max] array
+	 * @type {boolean}
+	 * @default false
+	 */
+	range?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,13 +80,14 @@ const props = withDefaults(defineProps<Props>(), {
 	step: 1,
 	height: 100,
 	width: undefined,
+	range: false,
 });
 
 /**
- * [V-MODEL] Actual slider value
+ * [V-MODEL] Actual slider value. Use a [min, max] array when "range" is enabled
  * @model modelValue
  */
-const model = defineModel<number>();
+const model = defineModel<number | number[]>();
 
 const orientation = computed(() =>
 	props.vertical ? 'vertical' : 'horizontal',

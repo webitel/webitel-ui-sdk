@@ -35,6 +35,7 @@
         :max-fraction-digits="maxFractionDigits"
         :placeholder="placeholder || label"
         :show-buttons="showButtons"
+        :size="PrimevueSizeMap[size]"
         input-class="wt-input-number__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
@@ -77,8 +78,21 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import {
+	computed,
+	defineEmits,
+	defineModel,
+	onMounted,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+	PrimevueSizeMap,
+} from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -90,6 +104,7 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	placeholder?: string;
+	size?: string | null;
 	disabled?: boolean;
 	required?: boolean;
 	min?: number;
@@ -109,6 +124,7 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 	label: '',
 	labelProps: () => ({}),
 	placeholder: '',
+	size: null,
 	disabled: false,
 	required: false,
 	min: undefined,

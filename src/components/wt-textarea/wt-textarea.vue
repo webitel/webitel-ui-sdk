@@ -32,6 +32,8 @@
         :rows="rows"
         :auto-resize="autoresize"
         :readonly="readonly"
+        :size="PrimevueSizeMap[size]"
+        :variant="variant"
         class="wt-textarea__textarea"
         @paste="emit('paste', $event)"
         @keydown="handleKeypress"
@@ -52,8 +54,15 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-import { computed, onMounted, ref, toRef, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import {
+	computed,
+	defineModel,
+	onMounted,
+	ref,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
+import { ComponentSize, MessageVariant, PrimevueSizeMap } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -123,6 +132,18 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	 */
 	autoresize?: boolean;
 	/**
+	 * Textarea size. Supports "sm" and "lg"
+	 * @type {string}
+	 * @default null
+	 */
+	size?: string | null;
+	/**
+	 * Textarea variant. Supports "outlined" and "filled"
+	 * @type {string}
+	 * @default outlined
+	 */
+	variant?: 'outlined' | 'filled';
+	/**
 	 * Validation rules
 	 */
 	v?: VuelidateFieldLike;
@@ -144,6 +165,8 @@ const props = withDefaults(defineProps<Props>(), {
 	rows: 1,
 	labelProps: undefined,
 	autoresize: false,
+	size: null,
+	variant: 'outlined',
 	v: undefined,
 	customValidators: () => [],
 });

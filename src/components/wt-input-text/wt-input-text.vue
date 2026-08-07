@@ -32,7 +32,7 @@
         class="wt-input-text__input typo-body-1"
         :class="{ 'wt-input-text__input--masked': isInputMasked }"
         :inputmode="type"
-        :size="size ? primevueSizeMap[size] : undefined"
+        :size="size ? PrimevueSizeMap[size] : undefined"
         v-bind="$attrs"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
@@ -65,8 +65,20 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import type { InputHTMLAttributes } from 'vue';
-import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import {
+	computed,
+	defineModel,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+	PrimevueSizeMap,
+} from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -106,11 +118,6 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	hideInputInfo: false,
 	hideInputValue: false,
 });
-
-const primevueSizeMap: Record<string, string> = {
-	[ComponentSize.SM]: 'small',
-	[ComponentSize.LG]: 'large',
-};
 
 const model = defineModel<string>({
 	default: '',

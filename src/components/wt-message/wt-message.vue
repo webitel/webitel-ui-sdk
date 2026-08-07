@@ -5,6 +5,9 @@
     :size="primevueSizeMap[size]"
     v-bind="$attrs"
   >
+    <template #icon>
+      <slot name="icon" />
+    </template>
     <slot />
     <template #closeicon>
       <wt-icon 

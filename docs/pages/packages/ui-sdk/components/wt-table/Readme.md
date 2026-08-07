@@ -1,5 +1,13 @@
 <script setup>
 import ExampleTable from './examples/example-table.vue';
+import ExampleTableSizes from './examples/example-table-sizes.vue';
+import ExampleTableGridlines from './examples/example-table-gridlines.vue';
+import ExampleTableStripedRows from './examples/example-table-striped-rows.vue';
+import ExampleTableRowExpansion from './examples/example-table-row-expansion.vue';
+import ExampleTableFrozenColumn from './examples/example-table-frozen-column.vue';
+import ExampleTableFrozenRow from './examples/example-table-frozen-row.vue';
+import ExampleTableRowGroup from './examples/example-table-row-group.vue';
+import ExampleTableRowGroupRowspan from './examples/example-table-row-group-rowspan.vue';
 import ExampleTableWithCustomHeaders from './examples/example-table-with-custom-headers.vue';
 import ExampleTableWithVerticalScroll from './examples/example-table-with-virtual-scroll.vue';
 import Specs from './component-specs.vue';
@@ -19,6 +27,88 @@ import Specs from './component-specs.vue';
 
 ::: details Code
 <<< ./examples/example-table.vue
+:::
+
+## Table Sizes
+
+::: raw
+<ExampleTableSizes/>
+:::
+
+::: details Code
+<<< ./examples/example-table-sizes.vue
+:::
+
+## Table with Gridlines
+
+::: raw
+<ExampleTableGridlines/>
+:::
+
+::: details Code
+<<< ./examples/example-table-gridlines.vue
+:::
+
+## Table with Striped Rows
+
+::: raw
+<ExampleTableStripedRows/>
+:::
+
+::: details Code
+<<< ./examples/example-table-striped-rows.vue
+:::
+
+## Table with Row Expansion
+
+::: raw
+<ExampleTableRowExpansion/>
+:::
+
+::: details Code
+<<< ./examples/example-table-row-expansion.vue
+:::
+
+## Table with Frozen Column
+
+::: raw
+<ExampleTableFrozenColumn/>
+:::
+
+::: details Code
+<<< ./examples/example-table-frozen-column.vue
+:::
+
+## Table with Frozen Row
+
+::: raw
+<ExampleTableFrozenRow/>
+:::
+
+::: details Code
+<<< ./examples/example-table-frozen-row.vue
+:::
+
+## Table with Row Group
+
+::: raw
+<ExampleTableRowGroup/>
+:::
+
+::: details Code
+<<< ./examples/example-table-row-group.vue
+:::
+
+## Table with Row Group (RowSpan)
+
+When `rowGroupMode` is configured to be `rowspan`, the grouping column spans multiple rows.
+
+::: raw
+<ExampleTableRowGroupRowspan/>
+:::
+
+::: details Code
+<<< ./examples/example-table-row-group-rowspan.vue
 :::
 
 ## Table with Vertical Scroll

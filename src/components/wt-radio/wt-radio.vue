@@ -6,12 +6,15 @@
       v-model="model"
       :input-id="radioId"
       :disabled="disabled"
+      :invalid="invalid"
+      :size="PrimevueSizeMap[size]"
       :value="value"
     />
-    <wt-label 
+    <wt-label
       v-if="hasLabel"
       :for="radioId"
       :disabled="disabled"
+      :invalid="invalid"
     >
       <!-- @slot Custom label markup -->
       <slot
@@ -30,8 +33,11 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { RadioButtonProps } from 'primevue/radiobutton';
-import { computed, useSlots } from 'vue';
+import { computed, defineModel, defineProps, toRefs, useSlots } from 'vue';
+import { PrimevueSizeMap } from '../../enums';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /**
  * @emits {string | number | boolean | object} input - Fires when radio is selected. Emits the "value" prop
@@ -66,6 +72,15 @@ interface Props extends RadioButtonProps {
 	 * @default false
 	 */
 	outline?: boolean;
+	/**
+	 * Radio size
+	 * @type {string}
+	 * @options ['sm', 'lg']
+	 */
+	size?: string | null;
+	v?: Record<string, unknown>;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,6 +88,10 @@ const props = withDefaults(defineProps<Props>(), {
 	required: false,
 	disabled: false,
 	outline: false,
+	size: null,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
 /**
@@ -86,6 +105,14 @@ const model = defineModel<string | number | boolean | object>('selected', {
 const radioId = `radio-${Math.random().toString(36).slice(2, 11)}`;
 
 const slots = useSlots();
+
+const { v, customValidators, regleValidation } = toRefs(props);
+
+const { invalid } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
+});
 
 const hasLabel = computed(() => {
 	return props.label || slots.label;

@@ -8,7 +8,12 @@
       }
     ]"
     :removable="removable"
+		:image="image"
+		:label="label"
   >
+		<template #icon>
+			<slot name="icon" />
+		</template>
     <div class="wt-chip__label">
       <slot />
     </div>
@@ -43,6 +48,8 @@ interface WtProps extends ChipProps {
 	 * @default false
 	 */
 	removable?: boolean;
+	image?: string;
+	label?: string;
 	constrainedByWidth?: boolean;
 }
 

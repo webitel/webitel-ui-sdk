@@ -26,6 +26,7 @@ import { LoginOptions } from './LoginOptions/LoginOptions';
 import { MessageColor } from './MessageColor/MessageColor';
 import { MessageVariant } from './MessageVariant/MessageVariant';
 import { MimeTypes } from './MimeTypes/MimeTypes.enum';
+import { PrimevueSizeMap } from './PrimevueSizeMap/PrimevueSizeMap';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
@@ -72,6 +73,7 @@ export {
 	MessageColor,
 	MessageVariant,
 	MimeTypes,
+	PrimevueSizeMap,
 	ProcessingTableColumnType,
 	ProviderIconType,
 	QueueType,

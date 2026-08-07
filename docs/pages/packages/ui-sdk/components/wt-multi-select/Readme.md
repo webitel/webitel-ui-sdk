@@ -1,6 +1,7 @@
 <script setup>
 import Specs from './component-specs.vue'
 import ExampleMultiSelectBasic from './examples/example-multi-select-basic.vue';
+import ExampleMultiSelectSizes from './examples/example-multi-select-sizes.vue';
 import ExampleMultiSelectChip from './examples/example-multi-select-chip.vue';
 import ExampleMultiSelectClear from './examples/example-multi-select-clear.vue';
 import ExampleMultiSelectApi from './examples/example-multi-select-api.vue';
@@ -28,6 +29,16 @@ import ExampleCustomValuesMultiSelect from './examples/example-custom-values-mul
 
 ::: details Code
 <<< ./examples/example-multi-select-basic.vue
+:::
+
+## Example Multi Select Sizes
+
+::: raw
+<ExampleMultiSelectSizes/>
+:::
+
+::: details Code
+<<< ./examples/example-multi-select-sizes.vue
 :::
 
 ## Example Multi Select (Chip display)

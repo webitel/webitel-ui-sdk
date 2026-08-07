@@ -5,6 +5,8 @@ import ExampleButtonsDifferentColor from './examples/example-buttons-different-c
 import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
 import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
+import ExampleButtonsRaised from './examples/example-buttons-raised.vue';
+import ExampleIconButtonsRaised from './examples/example-icon-buttons-raised.vue';
 import ExampleIconButton from './examples/example-icon-button.vue'
 import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.vue'
 </script>
@@ -69,6 +71,16 @@ import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.v
 <<< ./examples/example-buttons-different-color-loaders.vue{js}
 :::
 
+## Raised buttons
+
+::: raw
+<ExampleButtonsRaised />
+:::
+
+::: details Code
+<<< ./examples/example-buttons-raised.vue{js}
+:::
+
 ## Icon button
 
 ::: raw
@@ -77,6 +89,16 @@ import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.v
 
 ::: details Code
 <<< ./examples/example-icon-button.vue{js}
+:::
+
+## Raised icon buttons
+
+::: raw
+<ExampleIconButtonsRaised />
+:::
+
+::: details Code
+<<< ./examples/example-icon-buttons-raised.vue{js}
 :::
 
 ## Icon button disabled

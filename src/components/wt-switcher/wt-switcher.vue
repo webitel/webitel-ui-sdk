@@ -8,11 +8,13 @@
       :model-value="model"
       :input-id="switcherId"
       :disabled="disabled"
+      :invalid="invalid"
       @update:model-value="handleSwitcherClick"
     />
     <wt-label
       v-if="hasLabel"
       :disabled="disabled"
+      :invalid="invalid"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
@@ -32,8 +34,10 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { ToggleSwitchProps } from 'primevue/toggleswitch';
-import { computed, nextTick, ref, useSlots } from 'vue';
+import { computed, nextTick, ref, toRefs, useSlots } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 interface LabelProps {
 	[key: string]: unknown;
@@ -73,6 +77,9 @@ interface Props extends ToggleSwitchProps {
 	 * @default false
 	 */
 	controlled?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -81,6 +88,9 @@ const props = withDefaults(defineProps<Props>(), {
 	disabled: false,
 	labelProps: () => ({}),
 	controlled: false,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
 const model = defineModel<boolean>();
@@ -91,6 +101,14 @@ const emit = defineEmits([
 ]);
 
 const slots = useSlots();
+
+const { v, customValidators, regleValidation } = toRefs(props);
+
+const { invalid } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
+});
 
 const hasLabel = computed(() => {
 	return props.label || slots.label;

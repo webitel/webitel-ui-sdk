@@ -3,6 +3,7 @@ import Docs from './wt-input-number-docs.vue';
 import ExampleInputNumber from './examples/example-input-number.vue';
 import ExampleInputNumberWithButtons from './examples/example-input-number-with-buttons.vue';
 import ExampleInputNumberWithCurrency from './examples/example-input-number-with-currency.vue';
+import ExampleInputNumberSizes from './examples/example-input-number-sizes.vue';
 </script>
 
 # WtInputNumber
@@ -37,4 +38,13 @@ import ExampleInputNumberWithCurrency from './examples/example-input-number-with
 
 ::: details Code
 <<< ./examples/example-input-number-with-currency.vue{vue}
+:::
+
+## Input Number Sizes
+::: raw
+<ExampleInputNumberSizes />
+:::
+
+::: details Code
+<<< ./examples/example-input-number-sizes.vue{vue}
 :::

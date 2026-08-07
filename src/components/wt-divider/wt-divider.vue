@@ -1,5 +1,11 @@
 <template>
-  <p-divider :layout="variant" />
+  <p-divider
+    :layout="variant"
+    :type="type"
+    :align="align"
+  >
+    <slot />
+  </p-divider>
 </template>
 
 <script setup lang="ts">
@@ -7,10 +13,14 @@ import type { DividerProps } from 'primevue';
 
 interface Props extends DividerProps {
 	variant?: 'horizontal' | 'vertical';
+	type?: 'solid' | 'dashed' | 'dotted';
+	align?: 'left' | 'center' | 'right' | 'top' | 'bottom';
 }
 
 withDefaults(defineProps<Props>(), {
 	variant: 'horizontal',
+	type: 'solid',
+	align: 'center',
 });
 </script>
 

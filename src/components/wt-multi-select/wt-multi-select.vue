@@ -32,6 +32,7 @@
       :max-selected-labels="MAX_SELECTED_LABELS"
       :selectedItemsLabel="`${model.length} ${t('webitelUI.select.selectedItemsLabel')}`"
       :data-key="dataKey"
+      :size="PrimevueSizeMap[size]"
       :pt="{
         label: {
           class: 'typo-body-1',
@@ -135,7 +136,12 @@ import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
 import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
+import {
+	ChipColor,
+	ComponentSize,
+	MessageVariant,
+	PrimevueSizeMap,
+} from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -153,6 +159,7 @@ interface Props extends Omit<SelectProps, 'options'> {
 	placeholder?: string;
 	required?: boolean;
 	disabled?: boolean;
+	size?: string | null;
 	/**
 	 * true disables all options but keeps dropdown visible
 	 */
@@ -204,6 +211,7 @@ const props = withDefaults(defineProps<Props>(), {
 	dataKey: 'id',
 	labelProps: () => ({}),
 	customValidators: () => [],
+	size: null,
 });
 
 const model = defineModel<SelectOption>({

@@ -3,6 +3,7 @@ import Specs from './component-specs.vue';
 import ExampleSwitcher from './examples/example-switcher.vue';
 import ExampleDisabledSwitcher from './examples/example-disabled-switcher.vue';
 import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue';
+import ExampleInvalidSwitcher from './examples/example-invalid-switcher.vue';
 </script>
 
 # `wt-switcher.vue`
@@ -49,4 +50,14 @@ In `cc-history`, `cc-quality-auditor`, `cc-supervisor`, `cc-workspaces`, `client
 
 ::: details Code
 <<< ./examples/example-switcher-label-left.vue
+:::
+
+## Example Invalid Switcher
+
+::: raw
+<ExampleInvalidSwitcher/>
+:::
+
+::: details Code
+<<< ./examples/example-invalid-switcher.vue
 :::

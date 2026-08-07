@@ -1,6 +1,7 @@
 <script setup>
 import Specs from './component-specs.vue';
 import ExampleTextarea from './examples/example-textarea.vue';
+import ExampleTextareaSizes from './examples/example-textarea-sizes.vue';
 import ExampleDisabledTextarea from './examples/example-disabled-textarea.vue';
 import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 </script>
@@ -19,6 +20,16 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 
 ::: details Code
 <<< ./examples/example-textarea.vue{js-vue}
+:::
+
+## Example Textarea Sizes
+
+:::raw
+<ExampleTextareaSizes />
+:::
+
+::: details Code
+<<< ./examples/example-textarea-sizes.vue{js-vue}
 :::
 
 ## Example Disabled Textarea

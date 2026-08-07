@@ -1,6 +1,7 @@
 <script setup>
 import Specs from './component-specs.vue'
 import ExampleSingleSelectBasic from './examples/example-single-select-basic.vue';
+import ExampleSingleSelectSizes from './examples/example-single-select-sizes.vue';
 import ExampleSingleSelectClear from './examples/example-single-select-clear.vue';
 import ExampleSingleSelectApi from './examples/example-single-select-api.vue';
 import ExampleDisabledSingleSelect from './examples/example-disabled-single-select.vue';
@@ -27,6 +28,16 @@ import ExampleCustomValuesSingleSelect from './examples/example-custom-values-si
 
 ::: details Code
 <<< ./examples/example-single-select-basic.vue
+:::
+
+## Example Single Select Sizes
+
+::: raw
+<ExampleSingleSelectSizes/>
+:::
+
+::: details Code
+<<< ./examples/example-single-select-sizes.vue
 :::
 
 ## Example Single Select (Clear)

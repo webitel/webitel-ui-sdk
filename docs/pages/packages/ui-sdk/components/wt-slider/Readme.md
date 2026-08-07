@@ -3,6 +3,7 @@ import Specs from './component-specs.vue';
 import ExampleSlider from './examples/example-slider.vue';
 import ExampleDisabledSlider from './examples/example-disabled-slider.vue';
 import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
+import ExampleRangeSlider from './examples/example-range-slider.vue';
 </script>
 
 # `wt-slider.vue`
@@ -39,4 +40,14 @@ import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
 
 ::: details Code
 <<< ./examples/example-vertical-slider.vue
+:::
+
+## Example Range Slider
+
+::: raw
+<ExampleRangeSlider/>
+:::
+
+::: details Code
+<<< ./examples/example-range-slider.vue
 :::

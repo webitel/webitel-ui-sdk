@@ -17,6 +17,10 @@ export type WtTableHeader = {
 	/** `undefined` means the column is not sortable; `boolean` is back-compat */
 	sort?: WtTableSortOrder | boolean;
 	show?: boolean;
+	/** Pins the column so it stays visible during horizontal scroll */
+	frozen?: boolean;
+	/** Position of a frozen column. Defaults to "left" */
+	alignFrozen?: 'left' | 'right';
 };
 
 /** TODO(types): every cell is read through a header-driven runtime `field` key. */

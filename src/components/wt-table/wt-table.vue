@@ -11,6 +11,12 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
+    :size="PrimevueSizeMap[size]"
+    :show-gridlines="showGridlines"
+    :striped-rows="stripedRows"
+    :frozen-value="frozenData"
+    :row-group-mode="rowGroupMode"
+    :group-rows-by="groupRowsBy"
     class="wt-table"
     column-resize-mode="expand"
     lazy
@@ -105,6 +111,8 @@
       :column-key="col.field"
       :field="col.field"
       :hidden="isColumnHidden(col)"
+      :frozen="col.frozen"
+      :align-frozen="col.alignFrozen"
       :pt="{
         root: {
           'data-column-field': col.field      // required for column-resizer to get column field
@@ -206,6 +214,15 @@
       </div>
     </template>
     <template
+      v-if="rowGroupMode"
+      #groupheader="{ data: row }"
+    >
+      <slot
+        :item="row"
+        name="groupheader"
+      ></slot>
+    </template>
+    <template
       v-if="isTableFooter"
       #footer
     >
@@ -228,6 +245,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { PrimevueSizeMap } from '../../enums';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useTableColumnDrag } from '../_internals/composables';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
@@ -296,6 +314,39 @@ interface Props extends DataTableProps {
 	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<unknown>;
 	loading?: boolean;
 	itemSize?: number | undefined;
+	/**
+	 * Table size. Supports "sm" and "lg"
+	 * @type {string}
+	 * @default null
+	 */
+	size?: string | null;
+	/**
+	 * Shows borders between cells
+	 * @type {boolean}
+	 * @default false
+	 */
+	showGridlines?: boolean;
+	/**
+	 * Displays alternating row backgrounds
+	 * @type {boolean}
+	 * @default false
+	 */
+	stripedRows?: boolean;
+	/**
+	 * List of rows to pin at the top of the table, so they stay visible during vertical scroll
+	 */
+	frozenData?: Array<unknown>;
+	/**
+	 * Enables row grouping. Requires "groupRowsBy" to be set
+	 * @type {string}
+	 * @options ['subheader', 'rowspan']
+	 */
+	rowGroupMode?: 'subheader' | 'rowspan';
+	/**
+	 * Field(s) to group rows by
+	 * @type {string | string[]}
+	 */
+	groupRowsBy?: string | string[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -317,6 +368,10 @@ const props = withDefaults(defineProps<Props>(), {
 	lazy: false,
 	itemSize: DEFAULT_ITEM_SIZE,
 	dataKey: '',
+	size: null,
+	showGridlines: false,
+	stripedRows: false,
+	frozenData: () => [],
 });
 
 const { t } = useI18n();

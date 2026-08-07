@@ -25,6 +25,7 @@
         :toggle-mask="false"
         :feedback="false"
         :input-props="{ type: inputType }"
+        :size="PrimevueSizeMap[size]"
         input-class="wt-password__input typo-body-1"
         v-bind="$attrs"
         @keyup="handleKeyup"
@@ -53,8 +54,20 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
 import type { InputHTMLAttributes } from 'vue';
-import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import {
+	computed,
+	defineModel,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+	PrimevueSizeMap,
+} from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -68,6 +81,7 @@ interface WtPasswordProps
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	placeholder?: string;
+	size?: string | null;
 	disabled?: boolean;
 	required?: boolean;
 	toggleMask?: boolean;
@@ -80,6 +94,7 @@ const props = withDefaults(defineProps<WtPasswordProps>(), {
 	label: '',
 	labelProps: () => ({}),
 	placeholder: '',
+	size: null,
 	disabled: false,
 	required: false,
 	toggleMask: true,

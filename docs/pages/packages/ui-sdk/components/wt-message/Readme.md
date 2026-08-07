@@ -2,6 +2,7 @@
 import Docs from './wt-message-docs.vue';
 import ExampleMessage from './examples/example-message.vue';
 import ExampleMessageSizes from './examples/example-message-sizes.vue';
+import ExampleMessageWithIcon from './examples/example-message-with-icon.vue';
 </script>
 
 # WtMessage
@@ -27,4 +28,13 @@ import ExampleMessageSizes from './examples/example-message-sizes.vue';
 
 ::: details Code
 <<< ./examples/example-message-sizes.vue{vue}
+:::
+
+## Message with Icon
+::: raw
+<ExampleMessageWithIcon />
+:::
+
+::: details Code
+<<< ./examples/example-message-with-icon.vue{vue}
 :::

@@ -1,6 +1,7 @@
 <script setup>
 import ExampleToast from './examples/example-toast.vue';
 import ExamplePrimevueToastMigration from './examples/example-primevue-toast-migration.vue';
+import ExampleToastPositions from './examples/example-toast-positions.vue';
 </script>
 
 # `wt-toast.vue`
@@ -65,4 +66,16 @@ See the [PrimeVue Toast docs](https://primevue.org/toast/) for the full props re
 
 ::: details Code
 <<< ./examples/example-primevue-toast-migration.vue
+:::
+
+## Different positions
+
+Each position needs its own `WtToast` instance with a matching `group`, since `position` is set per instance, not per message.
+
+::: raw
+<ExampleToastPositions/>
+:::
+
+::: details Code
+<<< ./examples/example-toast-positions.vue
 :::

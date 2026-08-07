@@ -1,13 +1,13 @@
 <template>
   <div class="wt-checkbox">
-    <p-checkbox v-model="model" :binary="isSingle" :disabled="disabled" :input-id="checkboxId" :value="value">
+    <p-checkbox v-model="model" :invalid="invalid" :binary="isSingle" :disabled="disabled" :input-id="checkboxId" :value="value">
       <template #icon>
         <span class="wt-checkbox__checkmark">
           <wt-icon :color="iconColor" :icon="checkboxIcon" />
         </span>
       </template>
     </p-checkbox>
-    <wt-label v-if="hasLabel" :disabled="disabled">
+    <wt-label v-if="hasLabel" :disabled="disabled" :invalid="invalid">
       <!-- @slot Custom label markup -->
       <slot name="label" v-bind="{ label, isChecked, disabled }">
         <div v-if="label" class="wt-checkbox__label">
@@ -19,8 +19,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { CheckboxProps } from 'primevue/checkbox';
-import { computed, useSlots } from 'vue';
+import { computed, defineModel, defineProps, toRefs, useSlots } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /**
  * @emits {boolean | string[]} change - Fires when checkbox value changes. Emits selected value (Boolean or Array)
@@ -44,12 +46,18 @@ interface WtCheckboxProps extends CheckboxProps {
 	 * @default false
 	 */
 	disabled?: boolean;
+	v?: Record<string, unknown>;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: unknown[];
 }
 
 const props = withDefaults(defineProps<WtCheckboxProps>(), {
 	value: '',
 	label: '',
 	disabled: false,
+	v: null,
+	regleValidation: null,
+	customValidators: () => [],
 });
 
 /**
@@ -63,6 +71,14 @@ const model = defineModel<boolean | string[]>('selected', {
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
 const slots = useSlots();
+
+const { v, customValidators, regleValidation } = toRefs(props);
+
+const { invalid } = useValidation({
+	v,
+	customValidators,
+	regleValidation,
+});
 
 const hasLabel = computed(() => {
 	return props.label || slots.label;

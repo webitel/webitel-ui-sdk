@@ -27,7 +27,7 @@
       :option-label="getOptionLabel"
       :option-value="optionValue"
       :data-key="dataKey"
-      :size="size ? primevueSizeMap[size] : undefined"
+      :size="size ? PrimevueSizeMap[size] : undefined"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -109,8 +109,13 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageVariant } from '../../enums';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+	PrimevueSizeMap,
+} from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
@@ -172,11 +177,6 @@ const props = withDefaults(defineProps<Props>(), {
 	labelProps: () => ({}),
 	customValidators: () => [],
 });
-
-const primevueSizeMap: Record<string, string> = {
-	[ComponentSize.SM]: 'small',
-	[ComponentSize.LG]: 'large',
-};
 
 const model = defineModel<string>({
 	default: '',
