@@ -128,6 +128,7 @@ import { DatetimeFormat } from 'vue-i18n';
 import { CrudAction } from '../../../enums';
 import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode';
 import { formatDate } from '../../../utils/formatDate';
+import type { AskDeleteConfirmationParams } from '../../DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import PdfStatus from './pdf-status.vue';
 import PdfStatusPreview from './pdf-status-preview.vue';
 
@@ -138,6 +139,17 @@ const props = defineProps<{
 	isCreatedAtFilter: boolean;
 	onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
 	access?: Partial<Record<CrudAction, boolean>>;
+}>();
+
+defineSlots<{
+	header(props: {
+		selected: WebitelMediaExporterExportRecord[];
+		loadDataList: () => Promise<void>;
+		askDeleteConfirmation: (params: AskDeleteConfirmationParams) => void;
+		handleDelete: (items: WebitelMediaExporterExportRecord[]) => Promise<void>;
+		downloadArchive: () => Promise<void>;
+		isDownloadingArchive: boolean;
+	}): unknown;
 }>();
 
 const tableStore = props.store;
@@ -244,10 +256,10 @@ const {
 	isLoading,
 });
 
-const handleDelete = async (items: []) => {
-	const deleteEl = (el) => {
+const handleDelete = async (items: WebitelMediaExporterExportRecord[]) => {
+	const deleteEl = (el: WebitelMediaExporterExportRecord) => {
 		// If status is failed, use deletePdfExportRecord with the export id
-		if (el.status === WebitelMediaExporterExportStatus.Failed) {
+		if (el.status === WebitelMediaExporterExportStatus.Failed && el.id) {
 			return PdfServicesAPI.delete(el.id);
 		}
 		// Otherwise, use custom delete function if provided
@@ -255,8 +267,11 @@ const handleDelete = async (items: []) => {
 			return props.onDeleteItem(el);
 		}
 		// Fallback to default implementation
+		if (!el.fileId) return Promise.resolve();
 		return FileServicesAPI.deleteScreenRecordingsByAgent({
-			id: el.fileId,
+			id: [
+				el.fileId,
+			],
 			agentId: props.entityIdValue,
 		});
 	};
