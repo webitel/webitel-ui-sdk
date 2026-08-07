@@ -14,7 +14,10 @@
 		<template #icon>
 			<slot name="icon" />
 		</template>
-    <div class="wt-chip__label">
+    <div
+      v-if="slots.default"
+      class="wt-chip__label"
+    >
       <slot />
     </div>
     <template #removeicon>
@@ -31,6 +34,7 @@
 
 <script setup lang="ts">
 import type { ChipProps } from 'primevue/chip';
+import { useSlots } from 'vue';
 
 import { ChipColor, ComponentSize } from '../../enums';
 
@@ -62,6 +66,8 @@ withDefaults(defineProps<WtProps>(), {
 const emit = defineEmits<{
 	remove: [];
 }>();
+
+const slots = useSlots();
 </script>
 
 <style scoped>
