@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { type Ref, ref } from 'vue';
+import { nextTick, type Ref, ref } from 'vue';
 
 import {
 	type PersistableValue,
@@ -239,6 +239,119 @@ describe('usePersistedStorage', () => {
 			}).restore();
 
 			expect(value.value).toBe('from-url');
+		});
+
+		it('leaves the value untouched when no storage holds anything', async () => {
+			const value = ref('in-memory');
+
+			await usePersistedStorage({
+				name: 'fields',
+				value,
+			}).restore();
+
+			expect(value.value).toBe('in-memory');
+		});
+
+		it('hands the first non-null value to onRestore', async () => {
+			localStorage.value = 'from-local-storage';
+			const onRestore = vi.fn();
+
+			await usePersistedStorage({
+				name: 'fields',
+				value: ref(''),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.LocalStorage,
+				],
+				onRestore: async (restore, name) => {
+					onRestore(await restore(name));
+				},
+			}).restore();
+
+			expect(onRestore).toHaveBeenCalledWith('from-local-storage');
+		});
+	});
+
+	describe('watch', () => {
+		it('writes a changed value to every storage', async () => {
+			const value = ref('initial');
+
+			await usePersistedStorage({
+				name: 'fields',
+				value,
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.LocalStorage,
+				],
+			}).restore();
+
+			value.value = 'changed';
+			await nextTick();
+
+			expect(routeStorage.value).toBe('changed');
+			expect(localStorage.value).toBe('changed');
+		});
+
+		it('does not write the value restored from a storage back', async () => {
+			routeStorage.value = 'from-url';
+
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref(''),
+			}).restore();
+			await nextTick();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+		});
+
+		it('does not start watching when startWatchManually is set', async () => {
+			const value = ref('initial');
+
+			await usePersistedStorage({
+				name: 'filters',
+				value,
+				startWatchManually: true,
+			}).restore();
+
+			value.value = 'changed';
+			await nextTick();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+		});
+
+		it('stops writing after unwatch', async () => {
+			const value = ref('initial');
+
+			const storage = usePersistedStorage({
+				name: 'filters',
+				value,
+			});
+			await storage.restore();
+			storage.unwatch();
+
+			value.value = 'changed';
+			await nextTick();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+		});
+	});
+
+	describe('reset', () => {
+		it('removes the value from every storage', async () => {
+			routeStorage.value = 'from-url';
+			localStorage.value = 'from-local-storage';
+
+			await usePersistedStorage({
+				name: 'fields',
+				value: ref('in-memory'),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.LocalStorage,
+				],
+			}).reset();
+
+			expect(routeStorage.value).toBeNull();
+			expect(localStorage.value).toBeNull();
 		});
 	});
 });
