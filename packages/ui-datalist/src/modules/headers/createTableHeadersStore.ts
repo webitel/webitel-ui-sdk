@@ -1,7 +1,7 @@
 import type { WtTableSortOrder } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, ref, unref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import {
@@ -24,7 +24,21 @@ export const tableHeadersStoreBody = ({
 	rawHeaders,
 	id,
 }: TableHeadersStoreBodyParams) => {
-	const headers = ref<DatalistTableHeader[]>(rawHeaders);
+	const isAllowed = (header: DatalistTableHeader) =>
+		!header.access || !!unref(header.access());
+
+	const allowedHeaders = rawHeaders.filter(isAllowed);
+
+	/* headers may share a `field`, so it stays allowed while any of them is */
+	const allowedFields = new Set(allowedHeaders.map((header) => header.field));
+	const deniedFields = new Set(
+		rawHeaders
+			.filter((header) => !isAllowed(header))
+			.map((header) => header.field)
+			.filter((field) => !allowedFields.has(field)),
+	);
+
+	const headers = ref<DatalistTableHeader[]>(allowedHeaders);
 	const isReorderingColumn = ref(false);
 
 	const shownHeaders = computed(() => {
@@ -64,7 +78,7 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const $reset = () => {
-		headers.value = rawHeaders;
+		headers.value = allowedHeaders;
 	};
 
 	const updateShownHeaders = (value: DatalistTableHeader[]) => {
@@ -112,7 +126,10 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
-	const updateFields = (fields: string[]) => {
+	const updateFields = (persistedFields: string[]) => {
+		/* persisted state predates the gate, and unknown fields are revived below */
+		const fields = persistedFields.filter((field) => !deniedFields.has(field));
+
 		const fieldsSet = new Set(fields);
 		const mainFieldNames = new Set(headers.value.map((header) => header.field));
 

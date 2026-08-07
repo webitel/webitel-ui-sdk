@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createApp } from 'vue';
+import { createApp, ref } from 'vue';
 import { createMemoryHistory, createRouter, type Router } from 'vue-router';
 
 import type { DatalistTableHeader } from '../../types/tableStore.types';
@@ -138,6 +138,149 @@ describe('tableHeadersStoreBody', () => {
 			await flushWrites();
 
 			expect(router.currentRoute.value.query.sort).toBe('+name');
+		});
+	});
+
+	describe('access', () => {
+		const createGatedStore = (gated: DatalistTableHeader[]) =>
+			tableHeadersStoreBody({
+				rawHeaders: [
+					...rawHeaders.map((header) => ({
+						...header,
+					})),
+					...gated,
+				],
+				id,
+			});
+
+		it('drops a denied header from headers, shownHeaders and fields', () => {
+			const store = createGatedStore([
+				{
+					field: 'agent',
+					show: true,
+					sort: null,
+					access: () => false,
+				} as DatalistTableHeader,
+			]);
+
+			expect(store.headers.value.map(({ field }) => field)).not.toContain(
+				'agent',
+			);
+			expect(store.shownHeaders.value.map(({ field }) => field)).not.toContain(
+				'agent',
+			);
+			expect(store.fields.value).not.toContain('agent');
+		});
+
+		it('keeps a granted header and leaves ungated headers untouched', () => {
+			const store = createGatedStore([
+				{
+					field: 'agent',
+					show: true,
+					sort: null,
+					access: () => true,
+				} as DatalistTableHeader,
+			]);
+
+			expect(store.fields.value).toEqual([
+				'name',
+				'subject',
+				'agent',
+			]);
+		});
+
+		it('unwraps a ref returned by the access gate', () => {
+			const store = createGatedStore([
+				{
+					field: 'agent',
+					show: true,
+					sort: null,
+					access: () => ref(false),
+				} as DatalistTableHeader,
+			]);
+
+			expect(store.fields.value).toEqual([
+				'name',
+				'subject',
+			]);
+		});
+
+		it('does not resurrect a denied header from the persisted fields', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					fields: 'agent,createdAt',
+				},
+			});
+
+			const store = createGatedStore([
+				{
+					field: 'agent',
+					show: true,
+					sort: null,
+					access: () => false,
+				} as DatalistTableHeader,
+			]);
+			await runWithRouter(() => store.setupPersistence());
+
+			expect(store.fields.value).toEqual([
+				'createdAt',
+			]);
+			expect(store.headers.value.map(({ field }) => field)).not.toContain(
+				'agent',
+			);
+		});
+
+		it('does not resurrect a denied header on reset', () => {
+			const store = createGatedStore([
+				{
+					field: 'agent',
+					show: true,
+					sort: null,
+					access: () => false,
+				} as DatalistTableHeader,
+			]);
+
+			store.$reset();
+
+			expect(store.headers.value.map(({ field }) => field)).not.toContain(
+				'agent',
+			);
+		});
+
+		it('keeps a field alive while another allowed header still claims it', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					fields: 'member',
+				},
+			});
+
+			/* `member` and `memberId` share one API field — only one is gated */
+			const store = createGatedStore([
+				{
+					value: 'member',
+					field: 'member',
+					show: true,
+					sort: null,
+				} as DatalistTableHeader,
+				{
+					value: 'memberId',
+					field: 'member',
+					show: false,
+					sort: null,
+					access: () => false,
+				} as DatalistTableHeader,
+			]);
+			await runWithRouter(() => store.setupPersistence());
+
+			expect(store.headers.value.map(({ value }) => value)).toContain('member');
+			expect(store.headers.value.map(({ value }) => value)).not.toContain(
+				'memberId',
+			);
+			expect(store.fields.value).toEqual([
+				'member',
+			]);
 		});
 	});
 

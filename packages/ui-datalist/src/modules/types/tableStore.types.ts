@@ -13,6 +13,13 @@ import type { DatalistStoreProviderType } from './StoreProvider';
 export type DatalistTableHeader = WtTableHeader & {
 	field: string;
 	shouldBeInitialized?: boolean;
+	/**
+	 * Access gate supplied by the consuming app, evaluated once when the headers
+	 * store is created. Returning `false` drops the column completely: absent
+	 * from the column picker, never rendered, never requested, and not
+	 * restorable from persisted state. Omitted means allowed.
+	 */
+	access?: () => boolean | Ref<boolean>;
 };
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
