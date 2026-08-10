@@ -55,7 +55,7 @@ export const tableFiltersStoreBody = (
 
 			storages: [
 				PersistedStorageType.Route,
-				PersistedStorageType.LocalStorage,
+				PersistedStorageType.SessionStorage,
 			],
 			storagePath: namespace,
 

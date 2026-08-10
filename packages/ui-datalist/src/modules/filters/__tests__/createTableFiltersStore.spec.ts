@@ -22,6 +22,7 @@ describe('tableFiltersStoreBody', () => {
 
 	beforeEach(async () => {
 		localStorage.clear();
+		sessionStorage.clear();
 
 		router = createRouter({
 			history: createMemoryHistory(),
@@ -115,8 +116,8 @@ describe('tableFiltersStoreBody', () => {
 			});
 			await new Promise((resolve) => setTimeout(resolve));
 
-			expect(localStorage.getItem(`${namespace}/filters`)).toContain('open');
-			expect(localStorage.getItem('/filters')).toBeNull();
+			expect(sessionStorage.getItem(`${namespace}/filters`)).toContain('open');
+			expect(sessionStorage.getItem('/filters')).toBeNull();
 		});
 
 		it('keeps searchMode out of the route query', async () => {

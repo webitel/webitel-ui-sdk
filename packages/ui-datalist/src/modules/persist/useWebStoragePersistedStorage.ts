@@ -4,11 +4,7 @@ const separator = ';';
 
 const makePath = (storagePath: string, key: string) => `${storagePath}/${key}`;
 
-/**
- * Shared body of the Storage-api backed adapters (localStorage, sessionStorage).
- * The storage object is read through a getter, so the global is touched at call
- * time rather than at module load.
- */
+/* `storage` is a getter, so the global is touched at call time, not at module load */
 export const useWebStoragePersistedStorage = ({
 	storage,
 	storagePath = '',

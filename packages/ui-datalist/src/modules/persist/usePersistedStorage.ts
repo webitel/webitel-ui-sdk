@@ -60,10 +60,7 @@ export const usePersistedStorage = ({
 				configStorages,
 			];
 
-	/*
-   keyed by the enum on purpose: a storage kind added without an adapter
-    becomes a type error, instead of silently taking part in nothing
-   */
+	/* keyed by the enum, so a kind without an adapter is a type error */
 	const adapterFactories: Record<PersistedStorageType, () => StorageLike> = {
 		[PersistedStorageType.Route]: () => useRoutePersistedStorage(),
 		[PersistedStorageType.LocalStorage]: () =>

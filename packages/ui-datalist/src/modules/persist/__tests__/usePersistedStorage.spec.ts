@@ -70,11 +70,7 @@ describe('usePersistedStorage', () => {
 		vi.clearAllMocks();
 	});
 
-	/*
-   every storage kind has to take part in all of it, so the cases below run
-    against each member of PersistedStorageType – a new kind that is not wired
-    fails here instead of silently persisting nothing
-   */
+	/* every kind has to take part in all of it, so every enum member is run */
 	describe.each(storageKinds)('$type storage', ({ type, storage }) => {
 		it('is restored from', async () => {
 			storage.value = 'stored';
