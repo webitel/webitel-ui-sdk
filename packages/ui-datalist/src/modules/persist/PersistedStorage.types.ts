@@ -36,6 +36,10 @@ export interface PersistedPropertyConfig {
 	storagePath?: string;
 	startWatchManually?: boolean;
 	watchConfig?: WatchOptions;
+	// must be side-effect free apart from the `save` it is handed: serialize()
+	// runs this path with a `save` that only captures, so touching the storages
+	// from here mutates them at snapshot time – including before restore() has
+	// read them
 	onStore?: (
 		save: ({
 			name,
