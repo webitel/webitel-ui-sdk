@@ -249,9 +249,10 @@ export const tableHeadersStoreBody = ({
 		const fieldsStorage = usePersistedStorage({
 			name: 'fields',
 			value: fields,
+			/* order is the restore priority: a shared link wins over local columns */
 			storages: [
-				PersistedStorageType.LocalStorage,
 				PersistedStorageType.Route,
+				PersistedStorageType.LocalStorage,
 			],
 			storagePath: id,
 			onStore: (save, { name }) => {

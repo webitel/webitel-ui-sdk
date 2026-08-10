@@ -55,7 +55,9 @@ export const tableFiltersStoreBody = (
 
 			storages: [
 				PersistedStorageType.Route,
+				PersistedStorageType.LocalStorage,
 			],
+			storagePath: namespace,
 
 			/* use custom .toString() logic, provided by FiltersManager */
 			onStore: async (save, { name }) => {
