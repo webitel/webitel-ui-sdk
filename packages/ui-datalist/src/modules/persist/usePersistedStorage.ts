@@ -8,9 +8,11 @@ import {
 	type PersistedStorageController,
 	PersistedStorageType,
 	type PersistStorableValue,
+	type StorageLike,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
 import { useRoutePersistedStorage } from './useRoutePersistedStorage';
+import { useSessionStoragePersistedStorage } from './useSessionStoragePersistedStorage';
 
 const toStorableValue = (value: PersistableValue): PersistStorableValue => {
 	return typeof value === 'string' ? value : (value?.toString() ?? '');
@@ -58,24 +60,30 @@ export const usePersistedStorage = ({
 				configStorages,
 			];
 
+	/* keyed by the enum, so a kind without an adapter is a type error */
+	const adapterFactories: Record<PersistedStorageType, () => StorageLike> = {
+		[PersistedStorageType.Route]: () => useRoutePersistedStorage(),
+		[PersistedStorageType.LocalStorage]: () =>
+			useLocalStoragePersistedStorage({
+				storagePath,
+			}),
+		[PersistedStorageType.SessionStorage]: () =>
+			useSessionStoragePersistedStorage({
+				storagePath,
+			}),
+	};
+
 	/*
   order matters, as the first storage in the list has the highest priority
    */
-	if (storages.includes(PersistedStorageType.Route)) {
-		adapters.push({
-			type: PersistedStorageType.Route,
-			...useRoutePersistedStorage(),
-		});
-	}
+	storages.forEach((type) => {
+		if (adapters.some((adapter) => adapter.type === type)) return;
 
-	if (storages.includes(PersistedStorageType.LocalStorage)) {
 		adapters.push({
-			type: PersistedStorageType.LocalStorage,
-			...useLocalStoragePersistedStorage({
-				storagePath,
-			}),
+			type,
+			...adapterFactories[type](),
 		});
-	}
+	});
 
 	/*
    runs the storing path with a `save` doing whatever the caller needs:
@@ -163,6 +171,13 @@ export const usePersistedStorage = ({
 				value.value = restoredValue;
 			}
 		}
+		/*
+     the restored value comes from one storage, and the others may hold nothing
+      – seed them, so every storage mirrors the state right away instead of
+      waiting for the next sync()
+     */
+		await sync();
+
 		/*
       start watching after restoring value to prevent restored value
        from storing again

@@ -22,6 +22,7 @@ describe('tableFiltersStoreBody', () => {
 
 	beforeEach(async () => {
 		localStorage.clear();
+		sessionStorage.clear();
 
 		router = createRouter({
 			history: createMemoryHistory(),
@@ -104,6 +105,19 @@ describe('tableFiltersStoreBody', () => {
 			await new Promise((resolve) => setTimeout(resolve));
 
 			expect(router.currentRoute.value.query.filters).toContain('open');
+		});
+
+		it('stores filters under the store namespace, not a shared key', async () => {
+			const store = await setUpStore();
+
+			store.addFilter({
+				name: 'status',
+				value: 'open',
+			});
+			await new Promise((resolve) => setTimeout(resolve));
+
+			expect(sessionStorage.getItem(`${namespace}/filters`)).toContain('open');
+			expect(sessionStorage.getItem('/filters')).toBeNull();
 		});
 
 		it('keeps searchMode out of the route query', async () => {

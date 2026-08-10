@@ -3,6 +3,7 @@ import type { Ref, WatchOptions } from 'vue';
 export enum PersistedStorageType {
 	LocalStorage = 'localStorage',
 	Route = 'route',
+	SessionStorage = 'sessionStorage',
 }
 
 // in route query, or in localStorage

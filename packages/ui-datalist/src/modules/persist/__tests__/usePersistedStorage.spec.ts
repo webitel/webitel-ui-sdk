@@ -26,10 +26,11 @@ const createStorageMock = (): StorageLike & {
 
 const routeStorage = createStorageMock();
 const localStorage = createStorageMock();
+const sessionStorage = createStorageMock();
 
 /*
  route storage resolves `undefined` for a missing query param,
-  local storage resolves `null` – both are mocked to keep that difference
+  the web ones resolve `null` – all are mocked to keep that difference
  */
 vi.mock('../useRoutePersistedStorage', () => ({
 	useRoutePersistedStorage: () => ({
@@ -44,13 +45,107 @@ vi.mock('../useLocalStoragePersistedStorage', () => ({
 	useLocalStoragePersistedStorage: () => localStorage,
 }));
 
+vi.mock('../useSessionStoragePersistedStorage', () => ({
+	useSessionStoragePersistedStorage: () => sessionStorage,
+}));
+
 const { usePersistedStorage } = await import('../usePersistedStorage');
+
+const storageMocks = {
+	[PersistedStorageType.Route]: routeStorage,
+	[PersistedStorageType.LocalStorage]: localStorage,
+	[PersistedStorageType.SessionStorage]: sessionStorage,
+};
+
+const storageKinds = Object.values(PersistedStorageType).map((type) => ({
+	type,
+	storage: storageMocks[type],
+}));
 
 describe('usePersistedStorage', () => {
 	beforeEach(() => {
-		routeStorage.value = null;
-		localStorage.value = null;
+		Object.values(storageMocks).forEach((storage) => {
+			storage.value = null;
+		});
 		vi.clearAllMocks();
+	});
+
+	/* every kind has to take part in all of it, so every enum member is run */
+	describe.each(storageKinds)('$type storage', ({ type, storage }) => {
+		it('is restored from', async () => {
+			storage.value = 'stored';
+			const value = ref('');
+
+			await usePersistedStorage({
+				name: 'filters',
+				value,
+				storages: [
+					type,
+				],
+			}).restore();
+
+			expect(value.value).toBe('stored');
+		});
+
+		it('is written to by the watcher', async () => {
+			const value = ref('initial');
+
+			await usePersistedStorage({
+				name: 'filters',
+				value,
+				storages: [
+					type,
+				],
+			}).restore();
+
+			value.value = 'changed';
+			await nextTick();
+
+			expect(storage.value).toBe('changed');
+		});
+
+		it('is published into by sync when it holds nothing', async () => {
+			const value = ref('filtered');
+
+			await usePersistedStorage({
+				name: 'filters',
+				value,
+				storages: [
+					type,
+				],
+			}).sync();
+
+			expect(storage.value).toBe('filtered');
+		});
+
+		it('is left untouched by sync when it already holds a value', async () => {
+			storage.value = 'stored';
+
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref('from-memory'),
+				storages: [
+					type,
+				],
+			}).sync();
+
+			expect(storage.setItem).not.toHaveBeenCalled();
+			expect(storage.value).toBe('stored');
+		});
+
+		it('is cleared by reset', async () => {
+			storage.value = 'stored';
+
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref('from-memory'),
+				storages: [
+					type,
+				],
+			}).reset();
+
+			expect(storage.value).toBeNull();
+		});
 	});
 
 	describe('sync', () => {
@@ -224,6 +319,40 @@ describe('usePersistedStorage', () => {
 			expect(value.value).toBe('from-local-storage');
 		});
 
+		it('follows the declared order, not the order the kinds are defined in', async () => {
+			routeStorage.value = 'from-url';
+			localStorage.value = 'from-local-storage';
+			const value = ref('');
+
+			await usePersistedStorage({
+				name: 'fields',
+				value,
+				storages: [
+					PersistedStorageType.LocalStorage,
+					PersistedStorageType.Route,
+				],
+			}).restore();
+
+			expect(value.value).toBe('from-local-storage');
+		});
+
+		it('restores from the third storage when the first two hold nothing', async () => {
+			sessionStorage.value = 'from-session-storage';
+			const value = ref('');
+
+			await usePersistedStorage({
+				name: 'fields',
+				value,
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.LocalStorage,
+					PersistedStorageType.SessionStorage,
+				],
+			}).restore();
+
+			expect(value.value).toBe('from-session-storage');
+		});
+
 		it('prefers the route value over the next storages', async () => {
 			routeStorage.value = 'from-url';
 			localStorage.value = 'from-local-storage';
@@ -239,6 +368,36 @@ describe('usePersistedStorage', () => {
 			}).restore();
 
 			expect(value.value).toBe('from-url');
+		});
+
+		it('seeds the storages that held nothing with the restored value', async () => {
+			sessionStorage.value = 'from-session-storage';
+
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref(''),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.SessionStorage,
+				],
+			}).restore();
+
+			expect(routeStorage.value).toBe('from-session-storage');
+			expect(sessionStorage.setItem).not.toHaveBeenCalled();
+		});
+
+		it('seeds nothing when the state is still default', async () => {
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref(''),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.SessionStorage,
+				],
+			}).restore();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+			expect(sessionStorage.setItem).not.toHaveBeenCalled();
 		});
 
 		it('leaves the value untouched when no storage holds anything', async () => {
