@@ -8,9 +8,11 @@ import {
 	type PersistedStorageController,
 	PersistedStorageType,
 	type PersistStorableValue,
+	type StorageLike,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
 import { useRoutePersistedStorage } from './useRoutePersistedStorage';
+import { useSessionStoragePersistedStorage } from './useSessionStoragePersistedStorage';
 
 const toStorableValue = (value: PersistableValue): PersistStorableValue => {
 	return typeof value === 'string' ? value : (value?.toString() ?? '');
@@ -59,23 +61,32 @@ export const usePersistedStorage = ({
 			];
 
 	/*
-  order matters, as the first storage in the list has the highest priority
+   keyed by the enum on purpose: a storage kind added without an adapter
+    becomes a type error, instead of silently taking part in nothing
    */
-	if (storages.includes(PersistedStorageType.Route)) {
-		adapters.push({
-			type: PersistedStorageType.Route,
-			...useRoutePersistedStorage(),
-		});
-	}
-
-	if (storages.includes(PersistedStorageType.LocalStorage)) {
-		adapters.push({
-			type: PersistedStorageType.LocalStorage,
-			...useLocalStoragePersistedStorage({
+	const adapterFactories: Record<PersistedStorageType, () => StorageLike> = {
+		[PersistedStorageType.Route]: () => useRoutePersistedStorage(),
+		[PersistedStorageType.LocalStorage]: () =>
+			useLocalStoragePersistedStorage({
 				storagePath,
 			}),
+		[PersistedStorageType.SessionStorage]: () =>
+			useSessionStoragePersistedStorage({
+				storagePath,
+			}),
+	};
+
+	/*
+  order matters, as the first storage in the list has the highest priority
+   */
+	storages.forEach((type) => {
+		if (adapters.some((adapter) => adapter.type === type)) return;
+
+		adapters.push({
+			type,
+			...adapterFactories[type](),
 		});
-	}
+	});
 
 	/*
    runs the storing path with a `save` doing whatever the caller needs:

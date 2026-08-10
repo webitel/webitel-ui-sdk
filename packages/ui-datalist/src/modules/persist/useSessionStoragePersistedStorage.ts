@@ -1,13 +1,13 @@
 import type { StorageLike } from './PersistedStorage.types.ts';
 import { useWebStoragePersistedStorage } from './useWebStoragePersistedStorage';
 
-export const useLocalStoragePersistedStorage = ({
+export const useSessionStoragePersistedStorage = ({
 	storagePath = '',
 }: {
 	storagePath?: string;
 }): StorageLike => {
 	return useWebStoragePersistedStorage({
-		storage: () => localStorage,
+		storage: () => sessionStorage,
 		storagePath,
 	});
 };
