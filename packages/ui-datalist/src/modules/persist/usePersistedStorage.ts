@@ -172,6 +172,13 @@ export const usePersistedStorage = ({
 			}
 		}
 		/*
+     the restored value comes from one storage, and the others may hold nothing
+      – seed them, so every storage mirrors the state right away instead of
+      waiting for the next sync()
+     */
+		await sync();
+
+		/*
       start watching after restoring value to prevent restored value
        from storing again
      */

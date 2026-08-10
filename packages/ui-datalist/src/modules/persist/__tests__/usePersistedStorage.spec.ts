@@ -370,6 +370,36 @@ describe('usePersistedStorage', () => {
 			expect(value.value).toBe('from-url');
 		});
 
+		it('seeds the storages that held nothing with the restored value', async () => {
+			sessionStorage.value = 'from-session-storage';
+
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref(''),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.SessionStorage,
+				],
+			}).restore();
+
+			expect(routeStorage.value).toBe('from-session-storage');
+			expect(sessionStorage.setItem).not.toHaveBeenCalled();
+		});
+
+		it('seeds nothing when the state is still default', async () => {
+			await usePersistedStorage({
+				name: 'filters',
+				value: ref(''),
+				storages: [
+					PersistedStorageType.Route,
+					PersistedStorageType.SessionStorage,
+				],
+			}).restore();
+
+			expect(routeStorage.setItem).not.toHaveBeenCalled();
+			expect(sessionStorage.setItem).not.toHaveBeenCalled();
+		});
+
 		it('leaves the value untouched when no storage holds anything', async () => {
 			const value = ref('in-memory');
 
