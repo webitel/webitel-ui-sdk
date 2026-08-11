@@ -1,11 +1,6 @@
+import { getCalendarService } from '@webitel/api-services/gen';
 import deepCopy from 'deep-copy';
-import { CalendarServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,6 +10,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -23,26 +19,27 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const calendarService = CalendarServiceApiFactory(configuration, '', instance);
+const baseUrl = '/calendars';
 
 const getCalendarList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const { page, size, q, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
+		(params) => ({
+			...params,
+			q: params?.q || params?.search,
+		}),
+		starToSearch('q'),
 	]);
 
 	try {
-		const response = await calendarService.searchCalendar(
+		const response = await getCalendarService().searchCalendar({
 			page,
 			size,
-			search,
+			q,
 			sort,
 			fields,
 			id,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -70,14 +67,23 @@ const getCalendar = async ({ itemId: id }: GetItemParams) => {
 			expires: !!(copy.startAt || copy.endAt),
 			accepts: [],
 			excepts: [],
+			specials: [],
 		};
 
-		copy.accepts = copy.accepts.map((accept: ApiParams) => ({
+		copy.accepts = (copy.accepts || []).map((accept: ApiParams) => ({
 			day: accept.day || 0,
 			disabled: accept.disabled || false,
 			start: accept.startTimeOfDay || 0,
 			end: accept.endTimeOfDay || 0,
 		}));
+		if (copy.specials) {
+			copy.specials = copy.specials.map((special: ApiParams) => ({
+				day: special.day || 0,
+				disabled: special.disabled || false,
+				start: special.startTimeOfDay || 0,
+				end: special.endTimeOfDay || 0,
+			}));
+		}
 		if (copy.excepts) {
 			copy.excepts = copy.excepts.map((except: ApiParams) => ({
 				name: except.name || '',
@@ -95,7 +101,7 @@ const getCalendar = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await calendarService.readCalendar(String(id));
+		const response = await getCalendarService().readCalendar(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -116,6 +122,7 @@ const fieldsToSend = [
 	'day',
 	'accepts',
 	'excepts',
+	'specials',
 	'startTimeOfDay',
 	'endTimeOfDay',
 	'disabled',
@@ -128,17 +135,26 @@ const fieldsToSend = [
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.timezone.offset = undefined;
+	if (copy.timezone) {
+		copy.timezone.offset = undefined;
+	}
 	if (!copy.expires) {
 		copy.startAt = undefined;
 		copy.endAt = undefined;
 	}
 
-	copy.accepts = copy.accepts.map((accept: ApiParams) => ({
+	copy.accepts = (copy.accepts || []).map((accept: ApiParams) => ({
 		day: accept.day,
 		disabled: accept.disabled,
 		startTimeOfDay: accept.start,
 		endTimeOfDay: accept.end,
+	}));
+
+	copy.specials = (copy.specials || []).map((special: ApiParams) => ({
+		day: special.day,
+		disabled: special.disabled,
+		startTimeOfDay: special.start,
+		endTimeOfDay: special.end,
 	}));
 	return copy;
 };
@@ -150,7 +166,7 @@ const addCalendar = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await calendarService.createCalendar(item);
+		const response = await getCalendarService().createCalendar(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -171,7 +187,10 @@ const updateCalendar = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await calendarService.updateCalendar(String(id), item);
+		const response = await getCalendarService().updateCalendar(
+			String(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -184,7 +203,7 @@ const updateCalendar = async ({
 
 const deleteCalendar = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await calendarService.deleteCalendar(String(id));
+		const response = await getCalendarService().deleteCalendar(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -203,20 +222,24 @@ const getCalendarsLookup = (params: Parameters<typeof getCalendarList>[0]) =>
 	});
 
 const getTimezonesLookup = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const { page, size, q, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
+		(params) => ({
+			...params,
+			q: params?.q || params?.search,
+		}),
+		starToSearch('q'),
 	]);
 
 	try {
-		const response = await calendarService.searchTimezones(
+		const response = await getCalendarService().searchTimezones({
 			page,
 			size,
-			search,
+			q,
 			sort,
 			fields,
 			id,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -240,4 +263,6 @@ export const CalendarsAPI = {
 	delete: deleteCalendar,
 	getLookup: getCalendarsLookup,
 	getTimezonesLookup,
+
+	...generatePermissionsApi(baseUrl),
 };
