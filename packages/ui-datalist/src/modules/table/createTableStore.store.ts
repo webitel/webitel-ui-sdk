@@ -103,12 +103,16 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		selected.value = value;
 	};
 
+	// Always request `id` (Vuex REQUIRED_FIELDS default) — needed for select/delete/open
 	const getLoadDataParams = () => ({
 		...filtersManager.value.getAllValues(),
 		page: page.value,
 		size: size.value,
 		sort: sort.value,
-		fields: fields.value,
+		fields: [
+			'id',
+			...fields.value.filter((field) => field !== 'id'),
+		],
 		parentId: parentId.value,
 	});
 
