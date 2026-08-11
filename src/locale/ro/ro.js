@@ -645,6 +645,10 @@ export default {
 				message:
 					'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
 			},
+			activityTypePopup: {
+				title: 'Selectați tipul de activitate',
+				defaultOption: 'Standard Online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Fișierul dvs. PDF este în curs de creare…',

@@ -640,6 +640,10 @@ export default {
 				message:
 					'Przekroczono limit agentów mogących wziąć pauzę. Pauza jest w tej chwili niedostępna.',
 			},
+			activityTypePopup: {
+				title: 'Wybierz typ aktywności',
+				defaultOption: 'Standardowy online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Twój plik PDF jest tworzony…',

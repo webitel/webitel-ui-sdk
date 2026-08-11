@@ -639,6 +639,10 @@ export default {
 				message:
 					'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
 			},
+			activityTypePopup: {
+				title: 'Selecciona el tipo de actividad',
+				defaultOption: 'Estándar en línea',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Su archivo PDF se está creando…',
