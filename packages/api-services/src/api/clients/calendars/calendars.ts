@@ -15,6 +15,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -26,6 +27,7 @@ import type {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
+const baseUrl = '/calendars';
 const calendarService = CalendarServiceApiFactory(configuration, '', instance);
 
 const getCalendarList = async (params: ApiParams) => {
@@ -70,14 +72,23 @@ const getCalendar = async ({ itemId: id }: GetItemParams) => {
 			expires: !!(copy.startAt || copy.endAt),
 			accepts: [],
 			excepts: [],
+			specials: [],
 		};
 
-		copy.accepts = copy.accepts.map((accept: ApiParams) => ({
+		copy.accepts = (copy.accepts || []).map((accept: ApiParams) => ({
 			day: accept.day || 0,
 			disabled: accept.disabled || false,
 			start: accept.startTimeOfDay || 0,
 			end: accept.endTimeOfDay || 0,
 		}));
+		if (copy.specials) {
+			copy.specials = copy.specials.map((special: ApiParams) => ({
+				day: special.day || 0,
+				disabled: special.disabled || false,
+				start: special.startTimeOfDay || 0,
+				end: special.endTimeOfDay || 0,
+			}));
+		}
 		if (copy.excepts) {
 			copy.excepts = copy.excepts.map((except: ApiParams) => ({
 				name: except.name || '',
@@ -116,6 +127,7 @@ const fieldsToSend = [
 	'day',
 	'accepts',
 	'excepts',
+	'specials',
 	'startTimeOfDay',
 	'endTimeOfDay',
 	'disabled',
@@ -128,17 +140,26 @@ const fieldsToSend = [
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.timezone.offset = undefined;
+	if (copy.timezone) {
+		copy.timezone.offset = undefined;
+	}
 	if (!copy.expires) {
 		copy.startAt = undefined;
 		copy.endAt = undefined;
 	}
 
-	copy.accepts = copy.accepts.map((accept: ApiParams) => ({
+	copy.accepts = (copy.accepts || []).map((accept: ApiParams) => ({
 		day: accept.day,
 		disabled: accept.disabled,
 		startTimeOfDay: accept.start,
 		endTimeOfDay: accept.end,
+	}));
+
+	copy.specials = (copy.specials || []).map((special: ApiParams) => ({
+		day: special.day,
+		disabled: special.disabled,
+		startTimeOfDay: special.start,
+		endTimeOfDay: special.end,
 	}));
 	return copy;
 };
@@ -240,4 +261,6 @@ export const CalendarsAPI = {
 	delete: deleteCalendar,
 	getLookup: getCalendarsLookup,
 	getTimezonesLookup,
+
+	...generatePermissionsApi(baseUrl),
 };
