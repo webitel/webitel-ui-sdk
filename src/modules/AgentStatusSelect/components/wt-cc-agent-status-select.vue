@@ -1,11 +1,26 @@
 <template>
   <article class="wt-cc-agent-status-select">
+    <wt-switcher
+      v-if="isWorkspace"
+      :label="t('agentStatus.callCenter')"
+      :model-value="isCallCenterOn"
+      @update:model-value="toggleCallCenterMode"
+      controlled
+      class="wt-cc-agent-status-select__call-center-switcher"
+    />
     <wt-status-select
 			:key="status"
       :status="status"
       :status-duration="statusDuration"
       @closed="handleClosed"
       @change="handleSelectInput"
+      class="wt-cc-agent-status-select__status-select"
+    />
+    <activity-type-popup
+      v-if="isActivityTypePopup"
+      :options="activityTypes"
+      @change="handleActivityTypeInput"
+      @close="closeActivityTypePopup"
     />
     <pause-cause-popup
       v-if="isPauseCausePopup"
@@ -23,12 +38,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { PauseNotAllowedError } from 'webitel-sdk';
-
+import { OnlineSkillsAPI } from '../../../../packages/api-services/src/api/clients/onlineSkills/onlineSkills';
+import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum.js';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
+import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
 import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup.vue';
 
@@ -51,20 +69,31 @@ const props = defineProps({
 		],
 		default: 0,
 	},
+	isWorkspace: Boolean,
+	isCallCenterOn: Boolean,
 });
 
 const emit = defineEmits([
 	'changed',
+	'changed-call-center-mode',
 ]);
 
 const { api } = useStore().state;
 const AgentStatusAPI = AgentStatusAPIFactory(api);
 const PauseCauseAPI = PauseCauseAPIFactory(api);
+const { t } = useI18n();
 
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref([]);
 const error = ref(null);
 const chosenStatus = ref('');
+
+const isActivityTypePopup = ref(false);
+const activityTypes = ref([]);
+
+const defaultActivityTypeOption = ref(null);
+
+const callCenterModeChanging = ref(false);
 
 function openPauseCausePopup() {
 	isPauseCausePopup.value = true;
@@ -81,22 +110,59 @@ async function loadPauseCauses() {
 	pauseCauses.value = response.items;
 }
 
-async function updateStatus({ agentId, status, pauseCause, statusComment }) {
+function openActivityTypePopup() {
+	isActivityTypePopup.value = true;
+}
+
+function closeActivityTypePopup() {
+	isActivityTypePopup.value = false;
+}
+
+async function loadActivityTypes() {
+	const response = await OnlineSkillsAPI.getList({
+		skipDefault: false,
+	});
+	defaultActivityTypeOption.value = response.items[0];
+	activityTypes.value = [
+		{
+			id: defaultActivityTypeOption.value?.id,
+			name: t('webitelUI.agentStatusSelect.activityTypePopup.defaultOption'),
+		},
+		...response.items.slice(1),
+	];
+}
+
+async function updateStatus({
+	agentId,
+	status,
+	pauseCause,
+	statusComment,
+	onlineSkill,
+}) {
 	return AgentStatusAPI.patch({
 		agentId,
 		status,
 		pauseCause,
 		statusComment,
+		onlineSkill,
 	});
 }
 
-async function changeStatus({ status, pauseCause, statusComment }) {
+async function changeStatus({
+	status,
+	pauseCause,
+	statusComment,
+	onlineSkill,
+}) {
 	try {
 		const statusPayload = {
 			agentId: props.agentId,
 			status,
 			pauseCause,
 			statusComment,
+			...(status === AgentStatus.ONLINE && {
+				onlineSkill,
+			}),
 		};
 		await updateStatus(statusPayload);
 		emit('changed', statusPayload);
@@ -107,7 +173,13 @@ async function changeStatus({ status, pauseCause, statusComment }) {
 }
 
 async function handleStatus(status) {
-	if (status === AgentStatus.PAUSE) {
+	if (status === AgentStatus.ONLINE) {
+		await loadActivityTypes();
+		if (activityTypes.value.length > 1) {
+			openActivityTypePopup();
+			return;
+		}
+	} else if (status === AgentStatus.PAUSE) {
 		await loadPauseCauses();
 		if (pauseCauses.value.length) {
 			openPauseCausePopup();
@@ -140,6 +212,43 @@ function handleClosed(event) {
 	}
 }
 
+function handleActivityTypeInput(activityType) {
+	const payload =
+		activityType.id === defaultActivityTypeOption.value.id
+			? defaultActivityTypeOption.value
+			: activityType;
+	if (callCenterModeChanging.value) {
+		emit('changed-call-center-mode', payload);
+		callCenterModeChanging.value = false;
+	} else {
+		changeStatus({
+			status: AgentStatus.ONLINE,
+			onlineSkill: payload,
+		});
+	}
+}
+
+function changedCallCenterModeHandler() {
+	emit('changed-call-center-mode');
+	callCenterModeChanging.value = false;
+}
+
+async function toggleCallCenterMode(value) {
+	callCenterModeChanging.value = true;
+	if (value) {
+		if (activityTypes.value.length <= 1) {
+			await loadActivityTypes();
+		}
+		if (activityTypes.value.length > 1) {
+			openActivityTypePopup();
+		} else {
+			changedCallCenterModeHandler();
+		}
+	} else {
+		changedCallCenterModeHandler();
+	}
+}
+
 function handlePauseCauseInput({ pauseCause, statusComment }) {
 	const status = AgentStatus.PAUSE;
 	return changeStatus({
@@ -151,7 +260,14 @@ function handlePauseCauseInput({ pauseCause, statusComment }) {
 </script>
 
 <style lang="scss" scoped>
-.wt-cc-agent-status-select .wt-status-select {
-  width: 150px;
+.wt-cc-agent-status-select {
+  display: flex;
+  &__call-center-switcher{
+    margin-right: var(--wt-app-header-content-gap);
+  }
+  &__status-select {
+    max-width: 200px;
+    width: 150px;
+  }
 }
 </style>
