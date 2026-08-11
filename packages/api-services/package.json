@@ -39,6 +39,7 @@
 		"CHANGELOG.md"
 	],
 	"peerDependencies": {
+		"axios": "^1.15.2",
 		"deep-copy": "^1.4.2",
 		"deep-equal": "^2.2.3",
 		"deepmerge": "^4.3.1",

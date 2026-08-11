@@ -130,7 +130,12 @@ function axiosClient() {
 							syntheticDefaultImport: true,
 						},
 					],
-					dependency: '@aliasedDeps/api-services/axios',
+					/*
+					  internal module, so the package needs no consumer-side alias.
+					  consumers swap the default instance via setDefaultAxiosInstance(),
+					  or pass one per service factory: getAgentService(myInstance).
+					*/
+					dependency: '../../api/axios/genClient',
 				},
 			];
 		},
