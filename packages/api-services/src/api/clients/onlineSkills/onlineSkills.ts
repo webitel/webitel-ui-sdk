@@ -30,7 +30,7 @@ const getOnlineSkillsList = async (params: ApiParams) => {
 		sanitize(listFieldsToSend),
 		(params) => ({
 			...params,
-			skipDefault: params.skipDefault || true,
+			skipDefault: params.skipDefault ?? true,
 			fields: [
 				'id',
 				...(params.fields || [
