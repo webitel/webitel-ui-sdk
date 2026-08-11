@@ -1,4 +1,5 @@
 export * from './auditForm/auditForm.validations';
+export * from './bucket/bucket.validations';
 export * from './casePriority/casePriority.validations';
 export * from './caseSource/caseSource.validations';
 export * from './caseStatus/caseStatus.validations';
