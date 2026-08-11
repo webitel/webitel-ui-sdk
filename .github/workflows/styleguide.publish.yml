@@ -9,6 +9,10 @@ jobs:
     permissions:
       id-token: write  # Required for OIDC, https://docs.npmjs.com/trusted-publishers#github-actions-configuration
       contents: write
+
+    outputs:
+      version: ${{ steps.publish_release.outputs.version }}
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -26,12 +30,14 @@ jobs:
         run: |
           cd packages/styleguide
           npm ci
-          npm version patch --git-tag-version false
+          VERSION="$(npm version patch --git-tag-version false)"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "version=${VERSION#v}" >> "$GITHUB_OUTPUT"
           npm run build
           npm publish --access public
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: 'ci: publish styleguide'
+          commit_message: 'ci: publish @webitel/styleguide ${{ env.VERSION }}'
           commit_options: '--no-verify'
