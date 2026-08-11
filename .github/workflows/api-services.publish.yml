@@ -31,9 +31,14 @@ jobs:
         run: |
           cd packages/api-services
           npm ci
-          VERSION="$(npm version patch --git-tag-version false)"
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-          echo "version=${VERSION#v}" >> "$GITHUB_OUTPUT"
+          # Read the bumped version out of package.json rather than off npm's
+          # stdout: that output is not reliably a bare version (a leading blank
+          # line turned `VERSION=$VERSION` into two lines and GitHub rejected the
+          # second one with "Invalid format").
+          npm version patch --git-tag-version false >/dev/null
+          version="$(jq -r .version package.json)"
+          echo "VERSION=v$version" >> "$GITHUB_ENV"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
           (npm run build:types || true)
           (npm run format:all || true)
           npm run publish-lib
