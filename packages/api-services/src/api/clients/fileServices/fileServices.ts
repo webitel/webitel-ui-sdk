@@ -1,11 +1,23 @@
+import type {
+	SearchFilesByCallParams,
+	SearchFilesParams,
+	SearchScreenRecordingsByAgentParams,
+	SearchScreenRecordingsParams,
+} from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getFileService,
+	SearchFilesByCallQueryParams,
 	SearchFilesQueryParams,
 	SearchScreenRecordingsByAgentQueryParams,
 	SearchScreenRecordingsQueryParams,
-} from '@webitel/api-services/gen';
-import type { SearchFilesByCallParams } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
+import type {
+	SearchFilesByCallParams as SearchFilesByCallWireParams,
+	SearchFilesParams as SearchFilesWireParams,
+	SearchScreenRecordingsByAgentParams as SearchScreenRecordingsByAgentWireParams,
+	SearchScreenRecordingsParams as SearchScreenRecordingsWireParams,
+} from '../../../gen-wire/_models';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -17,53 +29,40 @@ import {
 } from '../../transformers';
 import type { ApiId } from '../_shared/types';
 
-const getFilesList = async (params: { search?: string }) => {
+/*
+  The gateway matches nested range filters only by their dotted wire names,
+  while callers pass them flat (`uploadedAtFrom`). Runs before sanitize(), which
+  then drops the flat leftovers — they are not in the generated field list.
+*/
+const toWireRangeFilters = (params: Record<string, unknown>) => ({
+	...params,
+	'uploaded_at.from': params.uploaded_at_from,
+	'uploaded_at.to': params.uploaded_at_to,
+	'retention_until.from': params.retention_until_from,
+	'retention_until.to': params.retention_until_to,
+});
+
+const getFilesList = async (
+	params: SearchFilesParams & {
+		search?: string;
+	},
+) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchFilesQueryParams,
 	);
 
-	const {
-		page,
-		size,
-		q,
-		sort,
-		fields,
-		id,
-		uploaded_at_from: uploadedAtFrom,
-		uploaded_at_to: uploadedAtTo,
-		uploadedBy,
-		referenceId,
-		retentionUntilFrom,
-		retentionUntilTo,
-	} = applyTransform(params, [
+	const requestParams = applyTransform<SearchFilesWireParams>(params, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
 		camelToSnake(),
+		toWireRangeFilters,
+		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await getFileService().searchFiles(
-			{
-				page,
-				size,
-				q: q || params.search,
-				sort,
-				fields,
-				id,
-				uploadedBy,
-				referenceId,
-			},
-			{
-				params: {
-					/* grpc-gateway matches nested range filters only by their
-					   dotted wire names, which the generated params type flattens */
-					'uploaded_at.from': uploadedAtFrom,
-					'uploaded_at.to': uploadedAtTo,
-					'retention_until.from': retentionUntilFrom,
-					'retention_until.to': retentionUntilTo,
-				},
-			},
-		);
+		const response = await getFileService().searchFiles({
+			...requestParams,
+			q: requestParams.q || params.search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -93,60 +92,36 @@ const deleteFiles = async (id: string[]) => {
 	}
 };
 
-const getScreenRecordingsByUser = async (params: {
-	userId: ApiId;
-	search?: string;
-}) => {
+const getScreenRecordingsByUser = async (
+	params: SearchScreenRecordingsParams & {
+		userId: ApiId;
+		search?: string;
+	},
+) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsQueryParams,
 	);
 
-	const {
-		page,
-		size,
-		q,
-		sort,
-		fields,
-		id,
-		uploaded_at_from: uploadedAtFrom,
-		uploaded_at_to: uploadedAtTo,
-		referenceId,
-		retentionUntilFrom,
-		retentionUntilTo,
-		type,
-		channel,
-	} = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
+	const requestParams = applyTransform<SearchScreenRecordingsWireParams>(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			camelToSnake(),
+			toWireRangeFilters,
+			sanitize(fieldsToSend),
+		],
+	);
 
 	try {
 		const response = await getFileService().searchScreenRecordings(
 			String(params.userId),
 			{
-				page,
-				size,
-				q: q || params.search,
-				sort,
+				...requestParams,
+				q: requestParams.q || params.search,
 				fields: [
 					'id',
-					...fields,
+					...(requestParams.fields ?? []),
 				],
-				id,
-				referenceId,
-				type,
-				channel,
-			},
-			{
-				params: {
-					/* grpc-gateway matches nested range filters only by their
-					   dotted wire names, which the generated params type flattens */
-					'uploaded_at.from': uploadedAtFrom,
-					'uploaded_at.to': uploadedAtTo,
-					'retention_until.from': retentionUntilFrom,
-					'retention_until.to': retentionUntilTo,
-				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -190,62 +165,38 @@ const deleteScreenRecordingsByUser = async ({
 	}
 };
 
-const getScreenRecordingsByAgent = async (params: {
-	agentId: ApiId;
-	search?: string;
-}) => {
+const getScreenRecordingsByAgent = async (
+	params: SearchScreenRecordingsByAgentParams & {
+		agentId: ApiId;
+		search?: string;
+	},
+) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsByAgentQueryParams,
 	);
 
-	const {
-		page,
-		size,
-		q,
-		sort,
-		fields,
-		id,
-		uploaded_at_from: uploadedAtFrom,
-		uploaded_at_to: uploadedAtTo,
-		referenceId,
-		retentionUntilFrom,
-		retentionUntilTo,
-		type,
-		channel,
-	} = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
+	const requestParams = applyTransform<SearchScreenRecordingsByAgentWireParams>(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			camelToSnake(),
+			toWireRangeFilters,
+			sanitize(fieldsToSend),
+		],
+	);
 
 	try {
 		const response = await getFileService().searchScreenRecordingsByAgent(
 			String(params.agentId),
 			{
-				page,
-				size,
-				q: q || params.search,
-				sort,
+				...requestParams,
+				q: requestParams.q || params.search,
 				fields: [
 					'id',
 					'view_name',
 					'mime_type',
-					...fields,
+					...(requestParams.fields ?? []),
 				],
-				id,
-				referenceId,
-				type,
-				channel,
-			},
-			{
-				params: {
-					/* grpc-gateway matches nested range filters only by their
-					   dotted wire names, which the generated params type flattens */
-					'uploaded_at.from': uploadedAtFrom,
-					'uploaded_at.to': uploadedAtTo,
-					'retention_until.from': retentionUntilFrom,
-					'retention_until.to': retentionUntilTo,
-				},
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -292,28 +243,27 @@ const deleteScreenRecordingsByAgent = async ({
 const getFilesListByCall = async (
 	params: SearchFilesByCallParams & {
 		callId: ApiId;
+		search?: string;
 	},
 ) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		SearchFilesQueryParams,
+		SearchFilesByCallQueryParams,
 	);
 
-	const requestParams = applyTransform(params, [
+	const requestParams = applyTransform<SearchFilesByCallWireParams>(params, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
 		camelToSnake(),
-		(param) => ({
-			...param,
-			q: param.q ?? param.search,
-			'uploaded_at.from': param.uploaded_at_from,
-			'uploaded_at.to': param.uploaded_at_to,
-		}),
+		toWireRangeFilters,
+		sanitize(fieldsToSend),
 	]);
 
 	try {
 		const response = await getFileService().searchFilesByCall(
 			String(params.callId),
-			requestParams,
+			{
+				...requestParams,
+				q: requestParams.q ?? params.search,
+			},
 		);
 
 		const { items, next } = applyTransform(response.data, [
