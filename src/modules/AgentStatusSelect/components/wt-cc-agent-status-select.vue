@@ -116,6 +116,7 @@ function openActivityTypePopup() {
 
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
+	callCenterModeChanging.value = false;
 }
 
 async function loadActivityTypes() {
@@ -221,7 +222,7 @@ function handleActivityTypeInput(activityType) {
 		emit('changed-call-center-mode', payload);
 		callCenterModeChanging.value = false;
 	} else {
-		changeStatus({
+		return changeStatus({
 			status: AgentStatus.ONLINE,
 			onlineSkill: payload,
 		});
