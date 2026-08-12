@@ -5,7 +5,7 @@
     @close="close"
   >
     <template #title>
-      {{ $t('webitelUI.agentStatusSelect.activityTypePopup.title') }}
+      {{ t('webitelUI.agentStatusSelect.activityTypePopup.title') }}
     </template>
     <template #main>
       <form @submit.prevent="setActivityType">
@@ -43,27 +43,32 @@
   </wt-popup>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import type { LookupOption } from '../../../../types';
 
-const props = defineProps({
-	options: {
-		type: Array,
-		default: () => [],
+const props = withDefaults(
+	defineProps<{
+		options?: LookupOption[];
+	}>(),
+	{
+		options: () => [],
 	},
-});
+);
 
-const emit = defineEmits([
-	'change',
-	'close',
-]);
+const emit = defineEmits<{
+	change: [
+		option: LookupOption,
+	];
+	close: [];
+}>();
 
 const { t } = useI18n();
 
-const selected = ref(props.options[0]);
+const selected = ref<LookupOption | undefined>(props.options[0]);
 
-function select(option) {
+function select(option: LookupOption) {
 	selected.value = option;
 }
 
@@ -78,8 +83,6 @@ function setActivityType() {
 </script>
 
 <style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
-
 .wt-cc-activity-type-popup {
   :deep(.wt-popup__popup) {
     max-height: 500px;
