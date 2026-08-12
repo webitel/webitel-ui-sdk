@@ -37,6 +37,7 @@
         v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
+        @focus="emit('focus', $event)"
       />
       <p-input-group-addon
         v-if="hideInputValue || $slots.suffix"
@@ -122,9 +123,20 @@ const inputText = useTemplateRef('inputText');
 
 const inputId = `input-text-${Math.random().toString(36).slice(2, 11)}`;
 
-const emit = defineEmits([
-	'update:modelValue',
-]);
+const emit = defineEmits<{
+	/**
+	 * @param value - updated value
+	 */
+	'update:model-value': [
+		string,
+	];
+	/**
+	 * @param event - native focus event from the underlying input
+	 */
+	focus: [
+		FocusEvent,
+	];
+}>();
 
 const slots = useSlots();
 
