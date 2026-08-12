@@ -1,10 +1,11 @@
 import { getQueueHookService } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueHookSchema } from '@webitel/api-services/validations';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -23,10 +24,9 @@ import type {
 const service = getQueueHookService();
 
 const fieldsToSend = [
-	'event',
-	'properties',
-	'schema',
-	'enabled',
+	...getShallowFieldsToSendFromZodSchema(queueHookSchema),
+	// injected by preRequestHandler; not part of the form, so not in the schema
+	'queueId',
 ];
 
 const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
@@ -35,10 +35,6 @@ const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 });
 
 const getQueueHooksList = async (params: ApiParams) => {
-	const defaultObject = {
-		enabled: false,
-	};
-
 	const { page, size, search, sort, fields, id, parentId } = applyTransform(
 		params,
 		[
@@ -62,9 +58,7 @@ const getQueueHooksList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				mergeEach(defaultObject),
-			]),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -75,18 +69,10 @@ const getQueueHooksList = async (params: ApiParams) => {
 };
 
 const getQueueHook = async ({ parentId, itemId: id }: NestedGetItemParams) => {
-	const defaultObject = {
-		event: '',
-		properties: [],
-		schema: {},
-		enabled: false,
-	};
-
 	try {
 		const response = await service.readQueueHook(Number(parentId), Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			merge(defaultObject),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

@@ -1,4 +1,4 @@
-const amd = () => ({
+export const amd = () => ({
 	enabled: false,
 	ai: false,
 	positive: [],
@@ -15,5 +15,3 @@ const amd = () => ({
 	greeting: 1500,
 	initialSilence: 2500,
 });
-
-export default amd;

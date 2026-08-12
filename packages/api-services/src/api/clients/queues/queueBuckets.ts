@@ -1,10 +1,11 @@
 import { getQueueBucketService } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueBucketSchema } from '@webitel/api-services/validations';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -23,16 +24,10 @@ import type {
 const service = getQueueBucketService();
 
 const fieldsToSend = [
-	'bucket',
-	'priority',
+	...getShallowFieldsToSendFromZodSchema(queueBucketSchema),
+	// injected by preRequestHandler; not part of the form, so not in the schema
 	'queueId',
-	'disabled',
 ];
-
-const defaultObject = {
-	priority: 0,
-	disabled: false,
-};
 
 const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 	...item,
@@ -74,9 +69,7 @@ const getQueueBucketsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				mergeEach(defaultObject),
-			]),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -97,7 +90,6 @@ const getQueueBucket = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			merge(defaultObject),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

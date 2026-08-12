@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { QueueType } from '../../../../../enums';
-import processing from '../processing';
+import { processing } from '../processing';
 import {
 	getQueueDefaults,
 	hasQueueTypeDefaults,

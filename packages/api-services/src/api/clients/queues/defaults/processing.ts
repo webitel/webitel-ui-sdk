@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-const processing = (processing = {}) =>
+export const processing = (overrides = {}) =>
 	deepmerge(
 		{
 			enabled: false,
@@ -14,7 +14,5 @@ const processing = (processing = {}) =>
 				repeatsNumber: 1,
 			},
 		},
-		processing,
+		overrides,
 	);
-
-export default processing;

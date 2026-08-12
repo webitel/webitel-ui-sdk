@@ -1,4 +1,6 @@
 import { getQueueResourcesService } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueResGroupSchema } from '@webitel/api-services/validations';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -22,9 +24,9 @@ const service = getQueueResourcesService();
 
 /** No `patch` — the service exposes none, and the tab never offered one. */
 const fieldsToSend = [
-	'resourceGroup',
+	...getShallowFieldsToSendFromZodSchema(queueResGroupSchema),
+	// injected by preRequestHandler; not part of the form, so not in the schema
 	'queueId',
-	'communication',
 ];
 
 const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({

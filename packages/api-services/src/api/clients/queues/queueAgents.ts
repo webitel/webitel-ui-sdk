@@ -3,7 +3,6 @@ import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -24,13 +23,6 @@ const fields = [
 	'supervisor',
 	'skills',
 ];
-
-const defaultObject = {
-	name: '',
-	status: '',
-	supervisor: {},
-	skills: [],
-};
 
 const getQueueAgentsList = async (params: ApiParams) => {
 	const paramsToSend = [
@@ -65,9 +57,7 @@ const getQueueAgentsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				mergeEach(defaultObject),
-			]),
+			items,
 			next,
 		};
 	} catch (err) {

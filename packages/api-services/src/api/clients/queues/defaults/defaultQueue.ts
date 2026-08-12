@@ -1,4 +1,4 @@
-const queue = () => ({
+export const defaultQueue = () => ({
 	name: '',
 	description: '',
 	priority: 0,
@@ -7,5 +7,3 @@ const queue = () => ({
 	calendar: {},
 	variables: [],
 });
-
-export default queue;

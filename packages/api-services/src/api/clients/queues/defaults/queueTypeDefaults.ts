@@ -4,9 +4,9 @@ import {
 	TimeBaseScore,
 	TypesResourceStrategy,
 } from '../../../../enums';
-import amd from './amd';
-import queue from './defaultQueue';
-import processing from './processing';
+import { amd } from './amd';
+import { defaultQueue } from './defaultQueue';
+import { processing } from './processing';
 
 /**
  * @description
@@ -31,7 +31,7 @@ export interface QueueDefaults {
 }
 
 const offlineQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.OFFLINE_QUEUE,
 	team: {},
 	strategy: QueueStrategy.FIFO,
@@ -52,7 +52,7 @@ const offlineQueue = (): QueueDefaults => ({
 });
 
 const inboundQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.INBOUND_QUEUE,
 	team: {},
 	ringtone: {},
@@ -77,7 +77,7 @@ const inboundQueue = (): QueueDefaults => ({
 
 /** NB: no `taskProcessing` — matches the legacy schema exactly. */
 const outboundIVRQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.OUTBOUND_IVR_QUEUE,
 	strategy: QueueStrategy.FIFO,
 	schema: {},
@@ -102,7 +102,7 @@ const outboundIVRQueue = (): QueueDefaults => ({
 });
 
 const previewDialer = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.PREVIEW_DIALER,
 	team: {},
 	strategy: QueueStrategy.FIFO,
@@ -130,7 +130,7 @@ const previewDialer = (): QueueDefaults => ({
 });
 
 const progressiveDialer = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.PROGRESSIVE_DIALER,
 	team: {},
 	strategy: QueueStrategy.FIFO,
@@ -162,7 +162,7 @@ const progressiveDialer = (): QueueDefaults => ({
 });
 
 const predictiveDialer = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.PREDICTIVE_DIALER,
 	strategy: QueueStrategy.FIFO,
 	team: {},
@@ -207,7 +207,7 @@ const predictiveDialer = (): QueueDefaults => ({
 });
 
 const chatInboundQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.CHAT_INBOUND_QUEUE,
 	team: {},
 	strategy: QueueStrategy.FIFO,
@@ -239,7 +239,7 @@ const imChatQueue = (): QueueDefaults => ({
 });
 
 const inboundJobQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.INBOUND_JOB_QUEUE,
 	team: {},
 	strategy: QueueStrategy.FIFO,
@@ -259,7 +259,7 @@ const inboundJobQueue = (): QueueDefaults => ({
 
 /** NB: no `taskProcessing` — matches the legacy schema exactly. */
 const outboundJobQueue = (): QueueDefaults => ({
-	...queue(),
+	...defaultQueue(),
 	type: QueueType.OUTBOUND_JOB_QUEUE,
 	strategy: QueueStrategy.FIFO,
 	schema: {},
@@ -301,4 +301,5 @@ export const hasQueueTypeDefaults = (type: number | string | undefined) =>
  */
 export const getQueueDefaults = (
 	type: number | string | undefined,
-): Partial<QueueDefaults> => QueueTypeDefaults[Number(type)]?.() ?? queue();
+): Partial<QueueDefaults> =>
+	QueueTypeDefaults[Number(type)]?.() ?? defaultQueue();

@@ -1,10 +1,11 @@
 import { getQueueSkillService } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueSkillSchema } from '@webitel/api-services/validations';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -23,23 +24,10 @@ import type {
 const service = getQueueSkillService();
 
 const fieldsToSend = [
-	'maxCapacity',
-	'minCapacity',
+	...getShallowFieldsToSendFromZodSchema(queueSkillSchema),
+	// injected by preRequestHandler; not part of the form, so not in the schema
 	'queueId',
-	'lvl',
-	'buckets',
-	'skill',
-	'enabled',
 ];
-
-const defaultObject = {
-	agent: {},
-	minCapacity: 0,
-	maxCapacity: 0,
-	buckets: [],
-	lvl: 0,
-	enabled: false,
-};
 
 const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 	...item,
@@ -81,9 +69,7 @@ const getQueueSkillsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				mergeEach(defaultObject),
-			]),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -98,7 +84,6 @@ const getQueueSkill = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 		const response = await service.readQueueSkill(Number(parentId), Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			merge(defaultObject),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

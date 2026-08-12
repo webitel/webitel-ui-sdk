@@ -1,3 +1,5 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
@@ -12,7 +14,6 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -27,7 +28,7 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-import processing from './defaults/processing';
+import { processing } from './defaults/processing';
 import { getQueueDefaults } from './defaults/queueTypeDefaults';
 
 const instance = getDefaultInstance();
@@ -42,37 +43,12 @@ const doNotConvertKeys = [
 ];
 
 /**
- * Deliberately an explicit list rather than
- * `getShallowFieldsToSendFromZodSchema(queueSchema)`. The schema also declares
- * `formSchema`, which this whitelist has never sent, so deriving it would start
- * writing a field the backend has not been receiving — a behaviour change that
- * does not belong in a refactor.
+ * Derived from the schema, so the form and the request cannot drift apart.
  *
- * `maxOfRetry`, `timeout` and `secBetweenRetries` are gone: they appeared
- * nowhere in the workspace except this list and its two copies, so nothing ever
- * populated them.
+ * Note this sends top-level `formSchema`, which the previous hand-written list
+ * omitted even though chat queues seed it and the service accepts it.
  */
-const fieldsToSend = [
-	'name',
-	'type',
-	'strategy',
-	'team',
-	'priority',
-	'dncList',
-	'schema',
-	'payload',
-	'taskProcessing',
-	'variables',
-	'calendar',
-	'description',
-	'enabled',
-	'ringtone',
-	'doSchema',
-	'afterSchema',
-	'stickyAgent',
-	'grantee',
-	'tags',
-];
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(queueSchema);
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
@@ -88,14 +64,6 @@ const preRequestHandler = (item: ApiParams) => {
 };
 
 const getQueuesList = async (params: ApiParams) => {
-	const defaultObject = {
-		type: 0,
-		enabled: false,
-		active: 0,
-		waiting: 0,
-		priority: '0',
-	};
-
 	const { page, size, search, sort, fields, id, queueType, team, tags } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
@@ -119,9 +87,7 @@ const getQueuesList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [
-				mergeEach(defaultObject),
-			]),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -132,12 +98,6 @@ const getQueuesList = async (params: ApiParams) => {
 };
 
 const getQueue = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		tags: [],
-		type: 0,
-		formSchema: {},
-		taskProcessing: {},
-	};
 	const responseHandler = (item: ApiParams) => {
 		const copy = deepCopy(item);
 		if (copy.variables) {
@@ -173,7 +133,6 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 		const response = await queueService.readQueue(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
-			merge(defaultObject),
 			responseHandler,
 			mergeTypeDefaults,
 		]);

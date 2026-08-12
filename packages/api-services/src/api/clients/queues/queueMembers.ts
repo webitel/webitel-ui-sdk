@@ -1,3 +1,5 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import { MemberServiceApiFactory } from 'webitel-sdk';
 import {
@@ -10,7 +12,6 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
-	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -46,17 +47,9 @@ const doNotConvertKeys = [
 ];
 
 const fieldsToSend = [
+	...getShallowFieldsToSendFromZodSchema(queueMemberSchema),
+	// injected by preRequestHandler; not part of the form, so not in the schema
 	'queueId',
-	'name',
-	'priority',
-	'bucket',
-	'timezone',
-	'communications',
-	'variables',
-	'expireAt',
-	'minOfferingAt',
-	'agent',
-	'stopCause',
 ];
 
 const defaultSingleObjectCommunication = {
@@ -119,11 +112,6 @@ const range = (
 });
 
 const getMembersList = async (params: ApiParams) => {
-	const defaultObject = {
-		createdAt: 'unknown',
-		priority: 0,
-	};
-
 	const listHandler = (items: ApiParams[]) => {
 		const copy = deepCopy(items);
 		return copy.map((item: ApiParams) => ({
@@ -190,7 +178,6 @@ const getMembersList = async (params: ApiParams) => {
 		]);
 		return {
 			items: applyTransform(items, [
-				mergeEach(defaultObject),
 				listHandler,
 			]),
 			next,
@@ -203,18 +190,6 @@ const getMembersList = async (params: ApiParams) => {
 };
 
 const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
-	const defaultObject = {
-		createdAt: 'unknown',
-		priority: '0',
-		name: 'member',
-		expireAt: 0,
-		bucket: {},
-		timezone: {},
-		agent: {},
-		communications: [],
-		variables: [],
-	};
-
 	const responseHandler = (response: ApiParams) => {
 		const copy = deepCopy(response);
 		let variables: ApiParams[] = [];
@@ -236,7 +211,6 @@ const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 		const response = await service.readMember(String(parentId), String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
-			merge(defaultObject),
 			responseHandler,
 		]);
 	} catch (err) {
