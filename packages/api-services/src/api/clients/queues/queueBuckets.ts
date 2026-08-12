@@ -21,8 +21,6 @@ import type {
 	NestedUpdateItemParams,
 } from '../_shared/types';
 
-const service = getQueueBucketService();
-
 const fieldsToSend = [
 	...getShallowFieldsToSendFromZodSchema(queueBucketSchema),
 	// injected by preRequestHandler; not part of the form, so not in the schema
@@ -55,15 +53,18 @@ const getQueueBucketsList = async (params: ApiParams) => {
 	);
 
 	try {
-		const response = await service.searchQueueBucket(String(parentId), {
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-		});
+		const response = await getQueueBucketService().searchQueueBucket(
+			String(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+				id,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -84,7 +85,7 @@ const getQueueBucket = async ({
 	itemId: id,
 }: NestedGetItemParams) => {
 	try {
-		const response = await service.readQueueBucket(
+		const response = await getQueueBucketService().readQueueBucket(
 			String(parentId),
 			String(id),
 		);
@@ -108,7 +109,10 @@ const addQueueBucket = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.createQueueBucket(String(parentId), item);
+		const response = await getQueueBucketService().createQueueBucket(
+			String(parentId),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -130,7 +134,7 @@ const updateQueueBucket = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.updateQueueBucket(
+		const response = await getQueueBucketService().updateQueueBucket(
 			String(parentId),
 			String(id),
 			item,
@@ -155,7 +159,7 @@ const patchQueueBucket = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.patchQueueBucket(
+		const response = await getQueueBucketService().patchQueueBucket(
 			String(parentId),
 			String(id),
 			body,
@@ -172,7 +176,7 @@ const patchQueueBucket = async ({
 
 const deleteQueueBucket = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await service.deleteQueueBucket(
+		const response = await getQueueBucketService().deleteQueueBucket(
 			String(parentId),
 			String(id),
 		);

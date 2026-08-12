@@ -21,8 +21,6 @@ import type {
 	NestedUpdateItemParams,
 } from '../_shared/types';
 
-const service = getQueueSkillService();
-
 const fieldsToSend = [
 	...getShallowFieldsToSendFromZodSchema(queueSkillSchema),
 	// injected by preRequestHandler; not part of the form, so not in the schema
@@ -54,16 +52,19 @@ const getQueueSkillsList = async (params: ApiParams) => {
 		]);
 
 	try {
-		const response = await service.searchQueueSkill(Number(parentId), {
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-			skillId,
-		});
+		const response = await getQueueSkillService().searchQueueSkill(
+			Number(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+				id,
+				skillId,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -81,7 +82,10 @@ const getQueueSkillsList = async (params: ApiParams) => {
 
 const getQueueSkill = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 	try {
-		const response = await service.readQueueSkill(Number(parentId), Number(id));
+		const response = await getQueueSkillService().readQueueSkill(
+			Number(parentId),
+			Number(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -102,7 +106,10 @@ const addQueueSkill = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.createQueueSkill(Number(parentId), item);
+		const response = await getQueueSkillService().createQueueSkill(
+			Number(parentId),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -124,7 +131,7 @@ const updateQueueSkill = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.updateQueueSkill(
+		const response = await getQueueSkillService().updateQueueSkill(
 			Number(parentId),
 			Number(id),
 			item,
@@ -149,7 +156,7 @@ const patchQueueSkill = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.patchQueueSkill(
+		const response = await getQueueSkillService().patchQueueSkill(
 			Number(parentId),
 			Number(id),
 			body,
@@ -166,7 +173,7 @@ const patchQueueSkill = async ({
 
 const deleteQueueSkill = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await service.deleteQueueSkill(
+		const response = await getQueueSkillService().deleteQueueSkill(
 			Number(parentId),
 			Number(id),
 		);

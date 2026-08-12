@@ -21,8 +21,6 @@ import type {
 	NestedUpdateItemParams,
 } from '../_shared/types';
 
-const service = getQueueHookService();
-
 const fieldsToSend = [
 	...getShallowFieldsToSendFromZodSchema(queueHookSchema),
 	// injected by preRequestHandler; not part of the form, so not in the schema
@@ -44,15 +42,18 @@ const getQueueHooksList = async (params: ApiParams) => {
 	);
 
 	try {
-		const response = await service.searchQueueHook(Number(parentId), {
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-		});
+		const response = await getQueueHookService().searchQueueHook(
+			Number(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+				id,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -70,7 +71,10 @@ const getQueueHooksList = async (params: ApiParams) => {
 
 const getQueueHook = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 	try {
-		const response = await service.readQueueHook(Number(parentId), Number(id));
+		const response = await getQueueHookService().readQueueHook(
+			Number(parentId),
+			Number(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -91,7 +95,10 @@ const addQueueHook = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.createQueueHook(Number(parentId), item);
+		const response = await getQueueHookService().createQueueHook(
+			Number(parentId),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -113,7 +120,7 @@ const updateQueueHook = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.updateQueueHook(
+		const response = await getQueueHookService().updateQueueHook(
 			Number(parentId),
 			Number(id),
 			item,
@@ -138,7 +145,7 @@ const patchQueueHook = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.patchQueueHook(
+		const response = await getQueueHookService().patchQueueHook(
 			Number(parentId),
 			Number(id),
 			body,
@@ -155,7 +162,7 @@ const patchQueueHook = async ({
 
 const deleteQueueHook = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await service.deleteQueueHook(
+		const response = await getQueueHookService().deleteQueueHook(
 			Number(parentId),
 			Number(id),
 		);

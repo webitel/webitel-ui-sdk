@@ -20,8 +20,6 @@ import type {
 	NestedUpdateItemParams,
 } from '../_shared/types';
 
-const service = getQueueResourcesService();
-
 /** No `patch` — the service exposes none, and the tab never offered one. */
 const fieldsToSend = [
 	...getShallowFieldsToSendFromZodSchema(queueResGroupSchema),
@@ -44,15 +42,18 @@ const getQueueResGroupsList = async (params: ApiParams) => {
 	);
 
 	try {
-		const response = await service.searchQueueResourceGroup(String(parentId), {
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-		});
+		const response = await getQueueResourcesService().searchQueueResourceGroup(
+			String(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+				id,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -76,7 +77,7 @@ const getQueueResGroup = async ({
 	domainId?: string;
 }) => {
 	try {
-		const response = await service.readQueueResourceGroup(
+		const response = await getQueueResourcesService().readQueueResourceGroup(
 			String(parentId),
 			String(id),
 			{
@@ -103,7 +104,7 @@ const addQueueResGroup = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.createQueueResourceGroup(
+		const response = await getQueueResourcesService().createQueueResourceGroup(
 			String(parentId),
 			item,
 		);
@@ -128,7 +129,7 @@ const updateQueueResGroup = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.updateQueueResourceGroup(
+		const response = await getQueueResourcesService().updateQueueResourceGroup(
 			String(parentId),
 			String(id),
 			item,
@@ -151,7 +152,7 @@ const deleteQueueResGroup = async ({
 	domainId?: string;
 }) => {
 	try {
-		const response = await service.deleteQueueResourceGroup(
+		const response = await getQueueResourcesService().deleteQueueResourceGroup(
 			String(parentId),
 			String(id),
 			{

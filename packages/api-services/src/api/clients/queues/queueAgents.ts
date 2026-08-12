@@ -9,8 +9,6 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-const service = getAgentService();
-
 /**
  * Read-only: the queue card's Agents tab lists the agents serving a queue, and
  * membership is edited from the agent side, not here. There is deliberately no
@@ -41,7 +39,7 @@ const getQueueAgentsList = async (params: ApiParams) => {
 	]);
 
 	try {
-		const response = await service.searchAgent({
+		const response = await getAgentService().searchAgent({
 			page,
 			size,
 			// the generated param is `q`; `search` is what the datalist store sends
