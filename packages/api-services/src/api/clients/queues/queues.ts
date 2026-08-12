@@ -41,6 +41,17 @@ const doNotConvertKeys = [
 	'variables',
 ];
 
+/**
+ * Deliberately an explicit list rather than
+ * `getShallowFieldsToSendFromZodSchema(queueSchema)`. The schema also declares
+ * `formSchema`, which this whitelist has never sent, so deriving it would start
+ * writing a field the backend has not been receiving — a behaviour change that
+ * does not belong in a refactor.
+ *
+ * `maxOfRetry`, `timeout` and `secBetweenRetries` are gone: they appeared
+ * nowhere in the workspace except this list and its two copies, so nothing ever
+ * populated them.
+ */
 const fieldsToSend = [
 	'name',
 	'type',
@@ -51,9 +62,6 @@ const fieldsToSend = [
 	'schema',
 	'payload',
 	'taskProcessing',
-	'maxOfRetry',
-	'timeout',
-	'secBetweenRetries',
 	'variables',
 	'calendar',
 	'description',
