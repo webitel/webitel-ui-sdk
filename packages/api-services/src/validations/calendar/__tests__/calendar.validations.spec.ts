@@ -225,6 +225,215 @@ describe('calendarSchema', () => {
 
 			expect(result.success).toBe(false);
 		});
+
+		it('rejects an accept entry with start equal to end', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 0,
+						disabled: false,
+						start: 600,
+						end: 600,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				expect(
+					result.error.issues.some(
+						(issue) =>
+							issue.message === 'timerangeStartLessThanEnd' &&
+							issue.path.join('.') === 'accepts.0.start',
+					),
+				).toBe(true);
+				expect(
+					result.error.issues.some(
+						(issue) =>
+							issue.message === 'timerangeStartLessThanEnd' &&
+							issue.path.join('.') === 'accepts.0.end',
+					),
+				).toBe(true);
+			}
+		});
+
+		it('rejects an accept entry with start greater than end', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 0,
+						disabled: false,
+						start: 600,
+						end: 540,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				expect(
+					result.error.issues.some(
+						(issue) =>
+							issue.message === 'timerangeStartLessThanEnd' &&
+							issue.path.join('.') === 'accepts.0.start',
+					),
+				).toBe(true);
+			}
+		});
+
+		it('rejects overlapping accept intervals on the same day', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 1,
+						disabled: false,
+						start: 540,
+						end: 720,
+					},
+					{
+						day: 1,
+						disabled: false,
+						start: 600,
+						end: 780,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				const intersectIssues = result.error.issues.filter(
+					(issue) => issue.message === 'timerangeNotIntersect',
+				);
+				expect(intersectIssues.length).toBeGreaterThan(0);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'accepts.0.start',
+					),
+				).toBe(true);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'accepts.0.end',
+					),
+				).toBe(true);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'accepts.1.start',
+					),
+				).toBe(true);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'accepts.1.end',
+					),
+				).toBe(true);
+			}
+		});
+
+		it('rejects overlapping accept intervals on the same day regardless of array order', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 0,
+						disabled: false,
+						start: 540,
+						end: 600,
+					},
+					{
+						day: 1,
+						disabled: false,
+						start: 540,
+						end: 600,
+					},
+					{
+						day: 0,
+						disabled: false,
+						start: 550,
+						end: 650,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				expect(
+					result.error.issues.some(
+						(issue) => issue.message === 'timerangeNotIntersect',
+					),
+				).toBe(true);
+			}
+		});
+
+		it('accepts non-overlapping accept intervals on the same day', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 1,
+						disabled: false,
+						start: 540,
+						end: 600,
+					},
+					{
+						day: 1,
+						disabled: false,
+						start: 660,
+						end: 720,
+					},
+				],
+			});
+
+			expect(result.success).toBe(true);
+		});
+
+		it('does not treat accept intervals on different days as overlapping', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 0,
+						disabled: false,
+						start: 540,
+						end: 720,
+					},
+					{
+						day: 2,
+						disabled: false,
+						start: 540,
+						end: 720,
+					},
+				],
+			});
+
+			expect(result.success).toBe(true);
+		});
+
+		it('rejects accept start/end minutes outside 0-1439', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 0,
+						disabled: false,
+						start: 0,
+						end: 24 * 60,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				expect(
+					result.error.issues.some(
+						(issue) =>
+							issue.message === 'hourRange' &&
+							issue.path.join('.') === 'accepts.0.end',
+					),
+				).toBe(true);
+			}
+		});
 	});
 
 	describe('excepts', () => {

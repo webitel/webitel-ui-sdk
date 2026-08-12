@@ -3,19 +3,124 @@ import { z } from 'zod';
 import { requiredLookupSchema } from '../_shared/lookup.validations';
 import type { ZodShape } from '../types';
 
+const HOUR_RANGE_MESSAGE = 'hourRange';
+const TIMERANGE_START_LESS_THAN_END_MESSAGE = 'timerangeStartLessThanEnd';
+const TIMERANGE_NOT_INTERSECT_MESSAGE = 'timerangeNotIntersect';
+
+/** Legacy hourRange: value >= 0 && value < 1440 */
 const dayMinuteSchema = z
 	.number()
 	.int()
-	.min(0)
-	.max(24 * 60);
+	.min(0, {
+		message: HOUR_RANGE_MESSAGE,
+	})
+	.max(24 * 60 - 1, {
+		message: HOUR_RANGE_MESSAGE,
+	});
+
+type AcceptOfDayUi = {
+	day: number;
+	start: number;
+	end: number;
+};
+
+export type CalendarAcceptOfDayUiForValidation = AcceptOfDayUi;
+
+export const getCalendarAcceptsIntersectingIndices = (
+	items: CalendarAcceptOfDayUiForValidation[],
+) => getIntersectingIndices(items);
+
+const getIntersectingIndices = (items: AcceptOfDayUi[]) => {
+	const indices = new Set<number>();
+	const indicesByDay = new Map<number, number[]>();
+
+	items.forEach((item, index) => {
+		const dayIndices = indicesByDay.get(item.day) ?? [];
+		dayIndices.push(index);
+		indicesByDay.set(item.day, dayIndices);
+	});
+
+	indicesByDay.forEach((dayIndices) => {
+		const ranges: Array<{
+			start: number;
+			end: number;
+			index: number;
+		}> = [];
+
+		dayIndices.forEach((index) => {
+			const current = items[index];
+
+			ranges.forEach((range) => {
+				if (
+					(current.start >= range.start && current.end <= range.end) ||
+					(current.start <= range.start && current.end >= range.start) ||
+					(current.start <= range.end && current.end >= range.end)
+				) {
+					indices.add(index);
+					indices.add(range.index);
+				}
+			});
+
+			ranges.push({
+				start: current.start,
+				end: current.end,
+				index,
+			});
+		});
+	});
+
+	return indices;
+};
 
 /** UI shape: minutes as `start`/`end` (API maps to startTimeOfDay/endTimeOfDay). */
-const acceptOfDayUiSchema = z.object({
-	day: z.number().int().min(0).max(6),
-	disabled: z.boolean().default(false),
-	start: dayMinuteSchema,
-	end: dayMinuteSchema,
-});
+const acceptOfDayUiSchema = z
+	.object({
+		day: z.number().int().min(0).max(6),
+		disabled: z.boolean().default(false),
+		start: dayMinuteSchema,
+		end: dayMinuteSchema,
+	})
+	.superRefine((item, ctx) => {
+		if (item.start >= item.end) {
+			ctx.addIssue({
+				code: 'custom',
+				message: TIMERANGE_START_LESS_THAN_END_MESSAGE,
+				path: [
+					'start',
+				],
+			});
+			ctx.addIssue({
+				code: 'custom',
+				message: TIMERANGE_START_LESS_THAN_END_MESSAGE,
+				path: [
+					'end',
+				],
+			});
+		}
+	});
+
+const acceptsOfDayUiArraySchema = z
+	.array(acceptOfDayUiSchema)
+	.superRefine((items, ctx) => {
+		getIntersectingIndices(items).forEach((index) => {
+			ctx.addIssue({
+				code: 'custom',
+				message: TIMERANGE_NOT_INTERSECT_MESSAGE,
+				path: [
+					index,
+					'start',
+				],
+			});
+			ctx.addIssue({
+				code: 'custom',
+				message: TIMERANGE_NOT_INTERSECT_MESSAGE,
+				path: [
+					index,
+					'end',
+				],
+			});
+		});
+	});
 
 const exceptUiSchema = z.object({
 	name: z.string().optional(),
@@ -70,7 +175,7 @@ export const calendarSchema = z.object<
 	startAt: z.any().optional(),
 	endAt: z.any().optional(),
 	expires: z.boolean().optional().default(false),
-	accepts: z.array(acceptOfDayUiSchema).default(defaultAccepts),
+	accepts: acceptsOfDayUiArraySchema.default(defaultAccepts),
 	specials: z.array(acceptOfDayUiSchema).default(defaultSpecials),
 	excepts: z.array(exceptUiSchema).optional().default([]),
 });
