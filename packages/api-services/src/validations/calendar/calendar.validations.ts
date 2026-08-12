@@ -1,34 +1,24 @@
 import type { EngineCalendar } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
+import { i18nIssue } from '../_shared/i18nIssue';
 import { requiredLookupSchema } from '../_shared/lookup.validations';
 import type { ZodShape } from '../types';
 
-const HOUR_RANGE_MESSAGE = 'hourRange';
-const TIMERANGE_START_LESS_THAN_END_MESSAGE = 'timerangeStartLessThanEnd';
-const TIMERANGE_NOT_INTERSECT_MESSAGE = 'timerangeNotIntersect';
+const HOUR_RANGE_KEY = 'hourRange';
+const TIMERANGE_START_LESS_THAN_END_KEY = 'timerangeStartLessThanEnd';
+const TIMERANGE_NOT_INTERSECT_KEY = 'timerangeNotIntersect';
 
 /** Legacy hourRange: value >= 0 && value < 1440 */
 const dayMinuteSchema = z
 	.number()
 	.int()
-	.min(0, {
-		message: HOUR_RANGE_MESSAGE,
-	})
-	.max(24 * 60 - 1, {
-		message: HOUR_RANGE_MESSAGE,
-	});
+	.refine((value) => value >= 0 && value < 24 * 60, i18nIssue(HOUR_RANGE_KEY));
 
 type AcceptOfDayUi = {
 	day: number;
 	start: number;
 	end: number;
 };
-
-export type CalendarAcceptOfDayUiForValidation = AcceptOfDayUi;
-
-export const getCalendarAcceptsIntersectingIndices = (
-	items: CalendarAcceptOfDayUiForValidation[],
-) => getIntersectingIndices(items);
 
 const getIntersectingIndices = (items: AcceptOfDayUi[]) => {
 	const indices = new Set<number>();
@@ -84,17 +74,17 @@ const acceptOfDayUiSchema = z
 		if (item.start >= item.end) {
 			ctx.addIssue({
 				code: 'custom',
-				message: TIMERANGE_START_LESS_THAN_END_MESSAGE,
 				path: [
 					'start',
 				],
+				...i18nIssue(TIMERANGE_START_LESS_THAN_END_KEY),
 			});
 			ctx.addIssue({
 				code: 'custom',
-				message: TIMERANGE_START_LESS_THAN_END_MESSAGE,
 				path: [
 					'end',
 				],
+				...i18nIssue(TIMERANGE_START_LESS_THAN_END_KEY),
 			});
 		}
 	});
@@ -105,19 +95,19 @@ const acceptsOfDayUiArraySchema = z
 		getIntersectingIndices(items).forEach((index) => {
 			ctx.addIssue({
 				code: 'custom',
-				message: TIMERANGE_NOT_INTERSECT_MESSAGE,
 				path: [
 					index,
 					'start',
 				],
+				...i18nIssue(TIMERANGE_NOT_INTERSECT_KEY),
 			});
 			ctx.addIssue({
 				code: 'custom',
-				message: TIMERANGE_NOT_INTERSECT_MESSAGE,
 				path: [
 					index,
 					'end',
 				],
+				...i18nIssue(TIMERANGE_NOT_INTERSECT_KEY),
 			});
 		});
 	});

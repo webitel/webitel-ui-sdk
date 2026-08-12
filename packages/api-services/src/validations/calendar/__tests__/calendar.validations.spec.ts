@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import type { z } from 'zod';
 import { calendarSchema } from '../calendar.validations';
+
+/** custom rules carry their message key in params, see `i18nIssue` */
+const issueKey = (issue: z.core.$ZodIssue) =>
+	issue.code === 'custom' ? issue.params?.i18nKey : undefined;
 
 const validTimezone = {
 	id: 'tz-1',
@@ -255,14 +260,14 @@ describe('calendarSchema', () => {
 				expect(
 					result.error.issues.some(
 						(issue) =>
-							issue.message === 'timerangeStartLessThanEnd' &&
+							issueKey(issue) === 'timerangeStartLessThanEnd' &&
 							issue.path.join('.') === 'accepts.0.start',
 					),
 				).toBe(true);
 				expect(
 					result.error.issues.some(
 						(issue) =>
-							issue.message === 'timerangeStartLessThanEnd' &&
+							issueKey(issue) === 'timerangeStartLessThanEnd' &&
 							issue.path.join('.') === 'accepts.0.end',
 					),
 				).toBe(true);
@@ -287,7 +292,7 @@ describe('calendarSchema', () => {
 				expect(
 					result.error.issues.some(
 						(issue) =>
-							issue.message === 'timerangeStartLessThanEnd' &&
+							issueKey(issue) === 'timerangeStartLessThanEnd' &&
 							issue.path.join('.') === 'accepts.0.start',
 					),
 				).toBe(true);
@@ -316,7 +321,7 @@ describe('calendarSchema', () => {
 			expect(result.success).toBe(false);
 			if (!result.success) {
 				const intersectIssues = result.error.issues.filter(
-					(issue) => issue.message === 'timerangeNotIntersect',
+					(issue) => issueKey(issue) === 'timerangeNotIntersect',
 				);
 				expect(intersectIssues.length).toBeGreaterThan(0);
 				expect(
@@ -371,7 +376,7 @@ describe('calendarSchema', () => {
 			if (!result.success) {
 				expect(
 					result.error.issues.some(
-						(issue) => issue.message === 'timerangeNotIntersect',
+						(issue) => issueKey(issue) === 'timerangeNotIntersect',
 					),
 				).toBe(true);
 			}
@@ -439,7 +444,7 @@ describe('calendarSchema', () => {
 				expect(
 					result.error.issues.some(
 						(issue) =>
-							issue.message === 'hourRange' &&
+							issueKey(issue) === 'hourRange' &&
 							issue.path.join('.') === 'accepts.0.end',
 					),
 				).toBe(true);
