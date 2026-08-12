@@ -3,12 +3,32 @@ import { z } from 'zod';
 import { requiredLookupSchema } from '../_shared/lookup.validations';
 import type { ZodShape } from '../types';
 
+const dayMinuteSchema = z
+	.number()
+	.int()
+	.min(0)
+	.max(24 * 60);
+
 /** UI shape: minutes as `start`/`end` (API maps to startTimeOfDay/endTimeOfDay). */
 const acceptOfDayUiSchema = z.object({
-	day: z.number(),
+	day: z.number().int().min(0).max(6),
 	disabled: z.boolean().default(false),
-	start: z.number(),
-	end: z.number(),
+	start: dayMinuteSchema,
+	end: dayMinuteSchema,
+});
+
+const exceptUiSchema = z.object({
+	name: z.string().optional(),
+	date: z
+		.union([
+			z.number(),
+			z.string(),
+		])
+		.optional(),
+	repeat: z.boolean().optional(),
+	working: z.boolean().optional(),
+	workStart: dayMinuteSchema.nullish(),
+	workStop: dayMinuteSchema.nullish(),
 });
 
 const defaultAccepts = () =>
@@ -50,7 +70,7 @@ export const calendarSchema = z.object<
 	startAt: z.any().optional(),
 	endAt: z.any().optional(),
 	expires: z.boolean().optional().default(false),
-	accepts: z.array(acceptOfDayUiSchema).default(defaultAccepts()),
-	specials: z.array(acceptOfDayUiSchema).default(defaultSpecials()),
-	excepts: z.array(z.any()).optional().default([]),
+	accepts: z.array(acceptOfDayUiSchema).default(defaultAccepts),
+	specials: z.array(acceptOfDayUiSchema).default(defaultSpecials),
+	excepts: z.array(exceptUiSchema).optional().default([]),
 });

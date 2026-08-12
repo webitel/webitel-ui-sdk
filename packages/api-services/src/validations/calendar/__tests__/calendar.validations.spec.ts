@@ -67,12 +67,16 @@ describe('calendarSchema', () => {
 			expect(result.expires).toBe(true);
 		});
 
-		it('produces equivalent default accepts/specials across independent parses', () => {
+		it('produces fresh default accepts/specials across independent parses', () => {
 			const first = calendarSchema.parse(minimalValidInput);
 			const second = calendarSchema.parse(minimalValidInput);
 
 			expect(first.accepts).toEqual(second.accepts);
 			expect(first.specials).toEqual(second.specials);
+			expect(first.accepts).not.toBe(second.accepts);
+			expect(first.accepts?.[0]).not.toBe(second.accepts?.[0]);
+			expect(first.specials).not.toBe(second.specials);
+			expect(first.specials?.[0]).not.toBe(second.specials?.[0]);
 		});
 	});
 
@@ -206,15 +210,32 @@ describe('calendarSchema', () => {
 
 			expect(result.success).toBe(false);
 		});
+
+		it('rejects an accept entry with day outside 0-6', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				accepts: [
+					{
+						day: 7,
+						start: 0,
+						end: 100,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+		});
 	});
 
 	describe('excepts', () => {
-		it('accepts arbitrary except shapes and passes them through unchanged', () => {
+		it('accepts valid except objects', () => {
 			const excepts = [
 				{
 					name: 'holiday',
 					date: 123,
-					working: false,
+					working: true,
+					workStart: 0,
+					workStop: 9 * 60,
 				},
 			];
 
@@ -224,6 +245,17 @@ describe('calendarSchema', () => {
 			});
 
 			expect(result.excepts).toEqual(excepts);
+		});
+
+		it('rejects invalid except array entries', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				excepts: [
+					null,
+				],
+			});
+
+			expect(result.success).toBe(false);
 		});
 	});
 
