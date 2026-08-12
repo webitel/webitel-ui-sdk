@@ -7,8 +7,8 @@ import {
 } from '../../../api/clients/queues/defaults/queueTypeDefaults';
 import { QueueType } from '../../../enums';
 import { getByPath } from '../../_shared/getByPath';
-import { queueSchema, queueSchemaBase } from '../queue.validations';
 import { queueTypeRules, sharedQueueRules } from '../queue.rules';
+import { queueSchema, queueSchemaBase } from '../queue.validations';
 
 type AnyRecord = Record<string, unknown>;
 

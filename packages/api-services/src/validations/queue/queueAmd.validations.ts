@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
-import { lookupSchema } from '../_shared/lookup.validations';
+import { flexibleLookupSchema } from '../_shared/lookup.validations';
 
 /** Answering-machine detection, on the outbound IVR and the two auto-dialers. */
 export const queueAmdSchema = z.object({
 	enabled: z.boolean().optional(),
 	ai: z.boolean().optional(),
 	positive: z.array(z.string()).optional(),
-	playback: lookupSchema.optional(),
+	playback: flexibleLookupSchema.optional(),
 	allowNotSure: z.boolean().optional(),
 	silenceNotSure: z.boolean().optional(),
 	maxWordLength: z.number().optional(),

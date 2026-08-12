@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { getByPath } from '../_shared/getByPath';
 import { isFilled } from '../_shared/isFilled';
-import { lookupSchema } from '../_shared/lookup.validations';
+import { flexibleLookupSchema } from '../_shared/lookup.validations';
 import { variablePairSchema } from '../_shared/variablePair.validations';
 import { queueTypeRules, sharedQueueRules } from './queue.rules';
 import { queuePayloadSchema } from './queuePayload.validations';
@@ -39,15 +39,15 @@ export const queueSchemaBase = z.object({
 		.optional(),
 
 	// lookups
-	calendar: lookupSchema.optional(),
-	team: lookupSchema.optional(),
-	dncList: lookupSchema.optional(),
-	grantee: lookupSchema.optional(),
-	ringtone: lookupSchema.optional(),
-	schema: lookupSchema.optional(),
-	doSchema: lookupSchema.optional(),
-	afterSchema: lookupSchema.optional(),
-	formSchema: lookupSchema.optional(),
+	calendar: flexibleLookupSchema.optional(),
+	team: flexibleLookupSchema.optional(),
+	dncList: flexibleLookupSchema.optional(),
+	grantee: flexibleLookupSchema.optional(),
+	ringtone: flexibleLookupSchema.optional(),
+	schema: flexibleLookupSchema.optional(),
+	doSchema: flexibleLookupSchema.optional(),
+	afterSchema: flexibleLookupSchema.optional(),
+	formSchema: flexibleLookupSchema.optional(),
 
 	// behaviour
 	strategy: z.string().optional(),
