@@ -432,6 +432,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Godziny muszą być od 00 do 23',
+		timerangeStartLessThanEnd: 'Czas "Od" nie może być późniejszy niż "Do"',
+		timerangeNotIntersect:
+			'Interwały czasowe w tym samym dniu nie mogą się nakładać',
 		required: 'Pole jest wymagane',
 		numeric: 'Powinno być numeryczne',
 		email: 'Powinno wyglądać jak email',

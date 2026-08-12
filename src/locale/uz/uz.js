@@ -436,6 +436,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: "Soatlar 00 dan 23 gacha bo'lishi kerak",
+		timerangeStartLessThanEnd:
+			'"Dan" vaqti "Gacha" vaqtidan kech bo\'lishi mumkin emas',
+		timerangeNotIntersect:
+			"Bir kundagi vaqt oralig'lari bir-biriga kesilib o'tmasligi kerak",
 		required: "Maydon to'ldirilishi shart",
 		numeric: "Raqam bo'lishi kerak",
 		email: "Email ko'rinishida bo'lishi kerak",
