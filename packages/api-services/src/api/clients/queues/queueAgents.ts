@@ -4,7 +4,6 @@ import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
@@ -23,19 +22,8 @@ const fields = [
 ];
 
 const getQueueAgentsList = async (params: ApiParams) => {
-	const paramsToSend = [
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'id',
-		'parentId',
-	];
-
 	const { parentId, page, size, search, sort } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(paramsToSend),
 	]);
 
 	try {

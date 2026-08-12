@@ -33,22 +33,11 @@ const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 });
 
 const getQueueBucketsList = async (params: ApiParams) => {
-	const paramsToSend = [
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'id',
-		'parentId',
-	];
-
 	const { page, size, search, sort, fields, id, parentId } = applyTransform(
 		params,
 		[
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
-			sanitize(paramsToSend),
 		],
 	);
 

@@ -1,10 +1,5 @@
-import { MemberServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getMemberService } from '@webitel/api-services/gen';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
@@ -14,23 +9,10 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
 /**
- * Stays on the `webitel-sdk` factory rather than the generated client: the
- * range filters here are protobuf nested messages on the wire
- * (`joined_at.from`, `duration.from`), and orval flattens them to
- * `joinedAtFrom`/`durationFrom`, which `camelToSnake()` would turn into
- * `joined_at_from` — silently dropping every range filter.
- */
-const service = MemberServiceApiFactory(configuration, '', instance);
-
-/**
- * The filters panel holds ranges as a single `{ from, to }` value, while the
- * service takes them as two positional arguments. Bounds cross the wire as
- * int64, which `webitel-sdk` types as string while the panel holds timestamps —
- * hence the loose bound type.
+ * The filters panel holds a range as one `{ from, to }` value; the request
+ * carries it as two keys. Bounds are int64 on the wire and timestamps in the
+ * panel, hence the loose bound type.
  */
 const range = (
 	value?: ApiParams,
@@ -41,6 +23,24 @@ const range = (
 ) => ({
 	from: value?.from ?? from,
 	to: value?.to ?? to,
+});
+
+/**
+ * Range bounds are protobuf nested messages, so they bind as `joined_at.from`
+ * rather than the flattened `joinedAtFrom` the generated params type declares.
+ * Orval spreads whatever it is given straight into the request, so the dotted
+ * keys reach the backend intact — they just have to be spelled out here, since
+ * the generated type cannot describe them.
+ */
+const rangeParams = (
+	name: string,
+	bounds: {
+		from?: unknown;
+		to?: unknown;
+	},
+) => ({
+	[`${name}.from`]: bounds.from,
+	[`${name}.to`]: bounds.to,
 });
 
 const getQueueLogs = async (params: ApiParams) => {
@@ -70,36 +70,31 @@ const getQueueLogs = async (params: ApiParams) => {
 		starToSearch('search'),
 	]);
 
-	const joined = range(joinedAt, joinedAtFrom, joinedAtTo);
-	const leaving = range(leavingAt, leavingAtFrom, leavingAtTo);
-	const offering = range(offeringAt, offeringAtFrom, offeringAtTo);
-	const dur = range(duration, durationFrom, durationTo);
-
 	try {
-		const response = await service.searchAttemptsHistory(
+		const response = await getMemberService().searchAttemptsHistory({
 			page,
 			size,
-			search,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
 			sort,
 			fields,
-			joined.from,
-			joined.to,
-			undefined,
-			// the service takes queueId as a repeated param
-			[
+			// repeated params, even for the single queue this tab shows
+			queueId: [
 				String(parentId),
 			],
-			undefined,
-			undefined,
-			agent,
+			agentId: agent,
 			result,
-			leaving.from,
-			leaving.to,
-			offering.from,
-			offering.to,
-			dur.from,
-			dur.to,
-		);
+			...rangeParams('joined_at', range(joinedAt, joinedAtFrom, joinedAtTo)),
+			...rangeParams(
+				'leaving_at',
+				range(leavingAt, leavingAtFrom, leavingAtTo),
+			),
+			...rangeParams(
+				'offering_at',
+				range(offeringAt, offeringAtFrom, offeringAtTo),
+			),
+			...rangeParams('duration', range(duration, durationFrom, durationTo)),
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

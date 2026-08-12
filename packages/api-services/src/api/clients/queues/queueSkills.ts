@@ -33,22 +33,10 @@ const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 });
 
 const getQueueSkillsList = async (params: ApiParams) => {
-	const paramsToSend = [
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'id',
-		'parentId',
-		'skillId',
-	];
-
 	const { page, size, search, sort, fields, id, parentId, skillId } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
-			sanitize(paramsToSend),
 		]);
 
 	try {
