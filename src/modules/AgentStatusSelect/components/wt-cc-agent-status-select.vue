@@ -1,7 +1,7 @@
 <template>
   <article class="wt-cc-agent-status-select">
     <wt-switcher
-      v-if="isWorkspace"
+      v-if="useCallCenterSwitcher"
       :label="t('agentStatus.callCenter')"
       :model-value="isCallCenterOn"
       @update:model-value="toggleCallCenterMode"
@@ -69,7 +69,7 @@ const props = defineProps({
 		],
 		default: 0,
 	},
-	isWorkspace: Boolean,
+	useCallCenterSwitcher: Boolean,
 	isCallCenterOn: Boolean,
 });
 
@@ -129,7 +129,7 @@ async function loadActivityTypes() {
 			id: defaultActivityTypeOption.value?.id,
 			name: t('webitelUI.agentStatusSelect.activityTypePopup.defaultOption'),
 		},
-		...response.items.slice(1),
+		// ...response.items.slice(1),
 	];
 }
 
