@@ -1,4 +1,5 @@
 import deepCopy from 'deep-copy';
+import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
 import { QueueServiceApiFactory } from 'webitel-sdk';
 import {
@@ -17,6 +18,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -26,11 +28,14 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 import processing from './defaults/processing';
+import { getQueueDefaults } from './defaults/queueTypeDefaults';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const queueService = QueueServiceApiFactory(configuration, '', instance);
+
+const baseUrl = '/call_center/queues';
 
 const doNotConvertKeys = [
 	'variables',
@@ -143,12 +148,26 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 		}
 		return copy;
 	};
+	/**
+	 * Seeds every field the queue's type can use, so the card form has a
+	 * complete draft. Regle derives its nested `$fields` from state keys, not
+	 * from the Zod schema, so a key the backend omitted would otherwise have no
+	 * validation entry — no required marker, no error text, silently.
+	 *
+	 * Runs AFTER `responseHandler` on purpose: the handler back-fills
+	 * `taskProcessing` from the legacy flat fields only while it `isEmpty`, and
+	 * seeding the defaults first would suppress that. The item stays last in
+	 * the merge, so real values always win over defaults.
+	 */
+	const mergeTypeDefaults = (item: ApiParams) =>
+		deepmerge(getQueueDefaults(item.type), item);
 	try {
 		const response = await queueService.readQueue(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(defaultObject),
 			responseHandler,
+			mergeTypeDefaults,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -260,6 +279,13 @@ const getQueuesTags = async (params: ApiParams) => {
 	}
 };
 
+export type { QueueDefaults } from './defaults/queueTypeDefaults';
+export {
+	getQueueDefaults,
+	hasQueueTypeDefaults,
+	QueueTypeDefaults,
+} from './defaults/queueTypeDefaults';
+
 export const QueuesAPI = {
 	getList: getQueuesList,
 	get: getQueue,
@@ -269,4 +295,7 @@ export const QueuesAPI = {
 	delete: deleteQueue,
 	getLookup: getQueuesLookup,
 	getQueuesTags,
+	// `getPermissionsList` + `patchPermissions`, the pair PermissionsApiModule
+	// adapts for ui-datalist's permissions page.
+	...generatePermissionsApi(baseUrl),
 };
