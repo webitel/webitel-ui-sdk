@@ -96,4 +96,9 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 	}
 });
 
-export type Queue = z.infer<typeof queueSchemaBase>;
+/**
+ * The queue as the *form* holds it. Not an entity type — it has no `id`, and
+ * `variables` is the editable pair list rather than the wire-format map. Apps
+ * pair this with `EngineQueue` for the parts the form does not own.
+ */
+export type QueueFormShape = z.infer<typeof queueSchemaBase>;
