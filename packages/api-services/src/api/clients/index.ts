@@ -41,6 +41,7 @@ export * from './queues/queueLogs';
 export * from './queues/queueMembers';
 export * from './queues/queueResGroups';
 export * from './queues/queueSkills';
+export * from './queues/queueState';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 export * from './regions/regions';
