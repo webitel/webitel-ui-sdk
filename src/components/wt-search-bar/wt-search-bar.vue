@@ -9,6 +9,7 @@
 		:custom-validators="customValidators"
     @update:model-value="handleInput"
     @keyup="handleKeyup"
+    @focus="emit('focus', $event)"
   >
     <template #prefix>
       <wt-icon
@@ -157,6 +158,12 @@ const emit = defineEmits<{
 	 */
 	'change:search-mode': [
 		string | object,
+	];
+	/**
+	 * @param event - native focus event from the underlying input
+	 */
+	focus: [
+		FocusEvent,
 	];
 }>();
 
