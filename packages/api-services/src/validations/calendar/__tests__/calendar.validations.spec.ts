@@ -125,6 +125,17 @@ describe('calendarSchema', () => {
 			expect(result.success).toBe(false);
 		});
 
+		it('rejects a timezone without id', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				timezone: {
+					name: 'UTC',
+				},
+			});
+
+			expect(result.success).toBe(false);
+		});
+
 		it('accepts a timezone with just a valid id', () => {
 			const result = calendarSchema.safeParse({
 				...minimalValidInput,
