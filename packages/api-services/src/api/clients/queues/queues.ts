@@ -1,15 +1,10 @@
+import { getQueueService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
-import { QueueServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -30,11 +25,6 @@ import type {
 } from '../_shared/types';
 import { processing } from './defaults/processing';
 import { getQueueDefaults } from './defaults/queueTypeDefaults';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const queueService = QueueServiceApiFactory(configuration, '', instance);
 
 const baseUrl = '/call_center/queues';
 
@@ -71,17 +61,19 @@ const getQueuesList = async (params: ApiParams) => {
 		]);
 
 	try {
-		const response = await queueService.searchQueue(
+		const response = await getQueueService().searchQueue({
 			page,
 			size,
-			search,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
 			sort,
 			fields,
 			id,
-			queueType,
-			team,
+			// the service names these after the fields, not after the filters
+			type: queueType,
+			teamId: team,
 			tags,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),
@@ -130,7 +122,7 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 	const mergeTypeDefaults = (item: ApiParams) =>
 		deepmerge(getQueueDefaults(item.type), item);
 	try {
-		const response = await queueService.readQueue(String(id));
+		const response = await getQueueService().readQueue(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			responseHandler,
@@ -150,7 +142,7 @@ const addQueue = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.createQueue(item);
+		const response = await getQueueService().createQueue(item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -168,7 +160,7 @@ const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.updateQueue(String(id), item);
+		const response = await getQueueService().updateQueue(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -185,7 +177,7 @@ const patchQueue = async ({ id, changes }: PatchItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.patchQueue(String(id), item);
+		const response = await getQueueService().patchQueue(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -198,7 +190,7 @@ const patchQueue = async ({ id, changes }: PatchItemParams) => {
 
 const deleteQueue = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await queueService.deleteQueue(String(id));
+		const response = await getQueueService().deleteQueue(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -224,13 +216,13 @@ const getQueuesTags = async (params: ApiParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.searchQueueTags(
+		const response = await getQueueService().searchQueueTags({
 			page,
 			size,
-			search,
+			q: search,
 			sort,
 			fields,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),

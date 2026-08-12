@@ -1,13 +1,8 @@
+import { getMemberService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
-import { MemberServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -29,17 +24,6 @@ import {
 	mapResetMembersFilters,
 	mapResetMembersQuantityFilters,
 } from './scripts/mapResetMembersFilters';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-/**
- * Stays on the `webitel-sdk` factory rather than the generated client: the
- * `created_at` and `priority` filters are protobuf nested messages on the wire,
- * and orval's flattened `createdAtFrom`/`priorityFrom` names do not round-trip
- * through `camelToSnake()` — every range filter would be silently dropped.
- */
-const service = MemberServiceApiFactory(configuration, '', instance);
 
 /** `variables` is a user-keyed map; its keys must survive case conversion. */
 const doNotConvertKeys = [
@@ -97,8 +81,9 @@ const preRequestHandler = (item: ApiParams) => {
 };
 
 /**
- * Range bounds cross the wire as int64, which `webitel-sdk` types as string
- * while the filter panel holds them as timestamps — hence the loose bound type.
+ * The filters panel holds a range as one `{ from, to }` value; the flat pair is
+ * still accepted. Bounds are int64 on the wire and timestamps in the panel,
+ * hence the loose bound type.
  */
 const range = (
 	value?: ApiParams,
@@ -109,6 +94,23 @@ const range = (
 ) => ({
 	from: value?.from ?? from,
 	to: value?.to ?? to,
+});
+
+/**
+ * Range bounds are protobuf nested messages, so they bind as `created_at.from`
+ * rather than the flattened `createdAtFrom` the generated params type declares.
+ * Orval spreads what it is given straight into the request, so the dotted keys
+ * reach the backend intact — they just cannot be expressed in that type.
+ */
+const rangeParams = (
+	name: string,
+	bounds: {
+		from?: unknown;
+		to?: unknown;
+	},
+) => ({
+	[`${name}.from`]: bounds.from,
+	[`${name}.to`]: bounds.to,
 });
 
 const getMembersList = async (params: ApiParams) => {
@@ -150,27 +152,22 @@ const getMembersList = async (params: ApiParams) => {
 	const prio = range(memberPriority ?? priority, priorityFrom, priorityTo);
 
 	try {
-		const response = await service.searchMemberInQueue(
+		const response = await getMemberService().searchMemberInQueue(
 			Number(parentId),
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			bucket,
-			undefined,
-			created.from,
-			created.to,
-			undefined,
-			undefined,
-			stopCause ?? cause,
-			prio.from,
-			prio.to,
-			undefined,
-			undefined,
-			undefined,
-			agent,
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+				id,
+				bucketId: bucket,
+				stopCause: stopCause ?? cause,
+				agentId: agent,
+				...rangeParams('created_at', created),
+				...rangeParams('priority', prio),
+			},
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
@@ -208,7 +205,10 @@ const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 	};
 
 	try {
-		const response = await service.readMember(String(parentId), String(id));
+		const response = await getMemberService().readMember(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			responseHandler,
@@ -227,7 +227,10 @@ const addMember = async ({ parentId, itemInstance }: NestedAddItemParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await service.createMember(String(parentId), item);
+		const response = await getMemberService().createMember(
+			String(parentId),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -249,7 +252,7 @@ const updateMember = async ({
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await service.updateMember(
+		const response = await getMemberService().updateMember(
 			String(parentId),
 			String(id),
 			body,
@@ -266,7 +269,10 @@ const updateMember = async ({
 
 const deleteMember = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await service.deleteMember(String(parentId), String(id));
+		const response = await getMemberService().deleteMember(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -286,18 +292,18 @@ const getMembersQuantity = async ({
 	parentId: ApiId;
 	filters?: ApiParams;
 }) => {
-	const url = `/call_center/queues/${parentId}/members/reset/count`;
-
 	const params = applyTransform(filters, [
 		mapResetMembersQuantityFilters,
 		starToSearch('q'),
 	]);
 
 	try {
-		const response = await instance.get(url, {
+		const response = await getMemberService().resetMembersCount(
+			String(parentId),
 			params,
-		});
-		return response?.data?.count || 0;
+		);
+		// int64, so the service types it as a string
+		return Number(response?.data?.count ?? 0);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -318,7 +324,10 @@ const resetMembers = async ({
 	]);
 
 	try {
-		const response = await service.resetMembers(String(parentId), body);
+		const response = await getMemberService().resetMembers(
+			String(parentId),
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -331,7 +340,7 @@ const resetMembers = async ({
 
 const resetActiveAttempts = async (body: ApiParams) => {
 	try {
-		const response = await service.resetActiveAttempts(body);
+		const response = await getMemberService().resetActiveAttempts(body);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -356,7 +365,10 @@ const addMembersBulk = async ({
 		items,
 	};
 	try {
-		const response = await service.createMemberBulk(String(parentId), body);
+		const response = await getMemberService().createMemberBulk(
+			String(parentId),
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			notify(({ callback }: ApiParams) =>
@@ -403,7 +415,10 @@ const deleteMembersBulk = async ({
 	]);
 
 	try {
-		const response = await service.deleteMembers(String(parentId), body);
+		const response = await getMemberService().deleteMembers(
+			String(parentId),
+			body,
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
