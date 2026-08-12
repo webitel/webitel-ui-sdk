@@ -123,12 +123,6 @@ const inputId = `input-text-${Math.random().toString(36).slice(2, 11)}`;
 
 const emit = defineEmits<{
 	/**
-	 * @param value - updated value
-	 */
-	'update:model-value': [
-		string,
-	];
-	/**
 	 * @param event - native focus event from the underlying input
 	 */
 	focus: [
@@ -160,7 +154,7 @@ const requiredLabel = computed(() => {
 
 const inputHandler = (value: string) => {
 	const handledValue = props.preventTrim ? value : value.trim();
-	emit('update:modelValue', handledValue);
+	model.value = handledValue;
 };
 
 const isValueHidden = ref(props.hideInputValue);
