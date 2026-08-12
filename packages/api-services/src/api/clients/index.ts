@@ -37,6 +37,8 @@ export * from './phones/phones';
 export * from './queues/queueAgents';
 export * from './queues/queueBuckets';
 export * from './queues/queueHooks';
+export * from './queues/queueLogs';
+export * from './queues/queueMembers';
 export * from './queues/queueResGroups';
 export * from './queues/queueSkills';
 export * from './queues/queues';
