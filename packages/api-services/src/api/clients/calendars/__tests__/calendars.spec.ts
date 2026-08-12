@@ -489,10 +489,39 @@ describe('CalendarsAPI', () => {
 				itemInstance: baseItem,
 			});
 
-			expect(result).toEqual({
+			expect(result).toMatchObject({
 				id: 'cal-1',
 				displayName: 'Created',
 			});
+		});
+
+		it('maps wire schedule fields to UI start/end on create response', async () => {
+			mockCalendarService.createCalendar.mockResolvedValueOnce({
+				data: {
+					id: 'cal-1',
+					accepts: [
+						{
+							day: 0,
+							disabled: false,
+							start_time_of_day: 540,
+							end_time_of_day: 1200,
+						},
+					],
+				},
+			});
+
+			const result = await CalendarsAPI.add({
+				itemInstance: baseItem,
+			});
+
+			expect(result.accepts).toEqual([
+				{
+					day: 0,
+					disabled: false,
+					start: 540,
+					end: 1200,
+				},
+			]);
 		});
 	});
 
@@ -537,9 +566,53 @@ describe('CalendarsAPI', () => {
 				},
 			});
 
-			expect(result).toEqual({
+			expect(result).toMatchObject({
 				updatedAt: 123,
 			});
+		});
+
+		it('maps wire schedule fields to UI start/end on update response', async () => {
+			mockCalendarService.updateCalendar.mockResolvedValueOnce({
+				data: {
+					id: '7',
+					accepts: [
+						{
+							day: 2,
+							disabled: false,
+							start_time_of_day: 600,
+							end_time_of_day: 1080,
+						},
+					],
+				},
+			});
+
+			const result = await CalendarsAPI.update({
+				itemId: 7,
+				itemInstance: {
+					name: 'Updated Calendar',
+					timezone: {
+						id: 'tz-1',
+					},
+					expires: false,
+					accepts: [
+						{
+							day: 2,
+							disabled: false,
+							start: 600,
+							end: 1080,
+						},
+					],
+				},
+			});
+
+			expect(result.accepts).toEqual([
+				{
+					day: 2,
+					disabled: false,
+					start: 600,
+					end: 1080,
+				},
+			]);
 		});
 	});
 
@@ -707,14 +780,16 @@ describe('CalendarsAPI', () => {
 			},
 		];
 
-		it.each(cases)(
-			'$name propagates the original error when the service call rejects',
-			async ({ serviceFn, call }) => {
-				const error = new Error('service failure');
-				serviceFn().mockRejectedValueOnce(error);
+		it.each(
+			cases,
+		)('$name propagates the original error when the service call rejects', async ({
+			serviceFn,
+			call,
+		}) => {
+			const error = new Error('service failure');
+			serviceFn().mockRejectedValueOnce(error);
 
-				await expect(call()).rejects.toBe(error);
-			},
-		);
+			await expect(call()).rejects.toBe(error);
+		});
 	});
 });
