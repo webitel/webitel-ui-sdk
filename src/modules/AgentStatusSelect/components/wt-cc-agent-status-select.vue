@@ -2,11 +2,11 @@
   <article class="wt-cc-agent-status-select">
     <wt-switcher
       v-if="showCallCenterSwitcher"
+      controlled
       :label="t('agentStatus.callCenter')"
       :model-value="isCallCenterOn"
-      @update:model-value="toggleCallCenterMode"
-      controlled
       class="wt-cc-agent-status-select__call-center-switcher"
+      @update:model-value="toggleCallCenterMode"
     />
     <wt-status-select
 			:key="status"
@@ -54,6 +54,8 @@ import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
 import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup.vue';
 
+type ActivityType = LookupOption;
+
 const props = withDefaults(
 	defineProps<{
 		agentId: string | number;
@@ -75,7 +77,7 @@ const emit = defineEmits<{
 		payload: StatusChangePayload,
 	];
 	'changed-call-center-mode': [
-		payload?: LookupOption,
+		payload?: ActivityType,
 	];
 }>();
 
@@ -90,9 +92,9 @@ const error = ref(null);
 const chosenStatus = ref('');
 
 const isActivityTypePopup = ref(false);
-const activityTypes = ref<LookupOption[]>([]);
+const activityTypes = ref<ActivityType[]>([]);
 
-const defaultActivityTypeOption = ref<LookupOption | null>(null);
+const defaultActivityTypeOption = ref<ActivityType | null>(null);
 
 const { callCenterModeChanging, toggleCallCenterMode } = useCCenterModeSwitcher(
 	{
@@ -221,7 +223,7 @@ function handleClosed(event: { value: string }) {
 	}
 }
 
-function handleActivityTypeInput(activityType: LookupOption) {
+function handleActivityTypeInput(activityType: ActivityType) {
 	const payload =
 		activityType.id === defaultActivityTypeOption.value?.id
 			? defaultActivityTypeOption.value
