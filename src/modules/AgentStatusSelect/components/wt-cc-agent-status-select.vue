@@ -260,7 +260,6 @@ function handlePauseCauseInput({
     margin-right: var(--wt-app-header-content-gap);
   }
   &__status-select {
-    max-width: 200px;
     width: 150px;
   }
 }
