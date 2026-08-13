@@ -8,21 +8,8 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-/**
- * Read-only: the queue card's Agents tab lists the agents serving a queue, and
- * membership is edited from the agent side, not here. There is deliberately no
- * `get`/`add`/`update`/`delete` — `createTableStore` only requires `getList`.
- */
-const fields = [
-	'id',
-	'name',
-	'status',
-	'supervisor',
-	'skills',
-];
-
 const getQueueAgentsList = async (params: ApiParams) => {
-	const { parentId, page, size, search, sort } = applyTransform(params, [
+	const { parentId, page, size, search, fields, sort } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 	]);
 
