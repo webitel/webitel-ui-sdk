@@ -637,6 +637,10 @@ export default {
 				message:
 					'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
 			},
+			activityTypePopup: {
+				title: 'Будь ласка, виберіть тип статусу',
+				defaultOption: 'Звичайний онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Ваш PDF-файл генерується…',

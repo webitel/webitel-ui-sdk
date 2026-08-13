@@ -645,6 +645,10 @@ export default {
 				message:
 					'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
 			},
+			activityTypePopup: {
+				title: 'Әрекет түрін таңдаңыз',
+				defaultOption: 'Стандартты онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Сіздің PDF файлыңыз жасалуда…',

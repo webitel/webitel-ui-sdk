@@ -654,6 +654,10 @@ export default deepmerge(
 					message:
 						'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
 				},
+				activityTypePopup: {
+					title: 'Please select activity type',
+					defaultOption: 'Standard Online',
+				},
 			},
 			pdfGeneration: {
 				generationStarted: 'Your PDF file is being created…',

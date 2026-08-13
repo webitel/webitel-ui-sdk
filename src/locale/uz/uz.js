@@ -649,6 +649,10 @@ export default {
 				message:
 					'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
 			},
+			activityTypePopup: {
+				title: 'Faoliyat turini tanlang',
+				defaultOption: 'Standart onlayn',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Sizning PDF faylingiz yaratilmoqda…',

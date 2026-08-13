@@ -647,6 +647,10 @@ export default {
 				message:
 					'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
 			},
+			activityTypePopup: {
+				title: 'Vui lòng chọn loại hoạt động',
+				defaultOption: 'Trực tuyến tiêu chuẩn',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Tệp PDF của bạn đang được tạo…',
