@@ -48,6 +48,9 @@ export const FilterOption = {
 	Auditor: 'auditor',
 	Region: 'region',
 	UtilizationProgress: 'utilizationProgress',
+	Bucket: 'bucket',
+	LeavingAt: 'leavingAt',
+	OfferingAt: 'offeringAt',
 } as const;
 
 /**

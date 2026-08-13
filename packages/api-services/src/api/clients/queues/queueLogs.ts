@@ -9,40 +9,6 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-/**
- * The filters panel holds a range as one `{ from, to }` value; the request
- * carries it as two keys. Bounds are int64 on the wire and timestamps in the
- * panel, hence the loose bound type.
- */
-const range = (
-	value?: ApiParams,
-	// biome-ignore lint/suspicious/noExplicitAny: see above
-	from?: any,
-	// biome-ignore lint/suspicious/noExplicitAny: see above
-	to?: any,
-) => ({
-	from: value?.from ?? from,
-	to: value?.to ?? to,
-});
-
-/**
- * Range bounds are protobuf nested messages, so they bind as `joined_at.from`
- * rather than the flattened `joinedAtFrom` the generated params type declares.
- * Orval spreads whatever it is given straight into the request, so the dotted
- * keys reach the backend intact — they just have to be spelled out here, since
- * the generated type cannot describe them.
- */
-const rangeParams = (
-	name: string,
-	bounds: {
-		from?: unknown;
-		to?: unknown;
-	},
-) => ({
-	[`${name}.from`]: bounds.from,
-	[`${name}.to`]: bounds.to,
-});
-
 const getQueueLogs = async (params: ApiParams) => {
 	const {
 		parentId,
@@ -52,19 +18,12 @@ const getQueueLogs = async (params: ApiParams) => {
 		sort = '+joined_at',
 		fields,
 		joinedAt,
-		joinedAtFrom,
-		joinedAtTo,
 		leavingAt,
-		leavingAtFrom,
-		leavingAtTo,
 		offeringAt,
-		offeringAtFrom,
-		offeringAtTo,
 		duration,
-		durationFrom,
-		durationTo,
 		result,
 		agent,
+		bucket,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -83,28 +42,16 @@ const getQueueLogs = async (params: ApiParams) => {
 				String(parentId),
 			],
 			agentId: agent,
+			bucketId: bucket,
 			result,
-			...rangeParams('joined_at', range(joinedAt, joinedAtFrom, joinedAtTo)),
-			...rangeParams(
-				'leaving_at',
-				range(leavingAt, leavingAtFrom, leavingAtTo),
-			),
-			...rangeParams(
-				'offering_at',
-				range(offeringAt, offeringAtFrom, offeringAtTo),
-			),
-			/**
-			 * NB: verified against the live backend — `duration.from`/`.to` are
-			 * accepted and then ignored, exactly like an unknown param, while
-			 * every other range here (`joined_at`, `leaving_at`, `offering_at`)
-			 * filters correctly. The wire format below is the right one and
-			 * matches the generated `durationFrom`/`durationTo`, so it starts
-			 * working the moment the backend implements it — but today the
-			 * duration filter is inert. It was inert before this migration too
-			 * (the old module destructured `durationFrom` while the filter key
-			 * was `duration`), so this is not a regression, just not a fix.
-			 */
-			...rangeParams('duration', range(duration, durationFrom, durationTo)),
+			'joined_at.from': joinedAt?.from,
+			'joined_at.to': joinedAt?.to,
+			'leaving_at.from': leavingAt?.from,
+			'leaving_at.to': leavingAt?.to,
+			'offering_at.from': offeringAt?.from,
+			'offering_at.to': offeringAt?.to,
+			'duration.from': duration?.from,
+			'duration.to': duration?.to,
 		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),

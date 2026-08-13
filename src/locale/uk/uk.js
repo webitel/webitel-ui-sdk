@@ -224,6 +224,9 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Примусова перерва',
 			},
 		},
+		bucket: 'Кошик | Кошики',
+		leavingAt: 'Кінець',
+		offeringAt: 'Розподілення',
 		flow: {
 			name: 'Схема | Схеми',
 			type: {
@@ -688,6 +691,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -729,6 +735,12 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

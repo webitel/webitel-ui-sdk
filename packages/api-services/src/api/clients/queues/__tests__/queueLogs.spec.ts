@@ -82,6 +82,39 @@ describe('QueueLogsAPI.getList', () => {
 		});
 	});
 
+	it('maps the filter names onto the service params', async () => {
+		await QueueLogsAPI.getList({
+			parentId: '7',
+			bucket: [
+				1,
+			],
+			agent: [
+				2,
+			],
+			leavingAt: {
+				from: 10,
+				to: 20,
+			},
+			offeringAt: {
+				from: 30,
+				to: 40,
+			},
+		});
+
+		expect(paramsSent()).toMatchObject({
+			bucketId: [
+				1,
+			],
+			agentId: [
+				2,
+			],
+			'leaving_at.from': 10,
+			'leaving_at.to': 20,
+			'offering_at.from': 30,
+			'offering_at.to': 40,
+		});
+	});
+
 	it('scopes the query to its queue and maps search onto q', async () => {
 		await QueueLogsAPI.getList({
 			parentId: '7',

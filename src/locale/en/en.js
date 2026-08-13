@@ -233,6 +233,9 @@ export default deepmerge(
 					[snakeToCamel(AgentStatus.BreakOut)]: 'Break out',
 				},
 			},
+			bucket: 'Bucket | Buckets',
+			leavingAt: 'End',
+			offeringAt: 'Offering',
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -705,6 +708,9 @@ export default deepmerge(
 				author: ({ linked }) => {
 					return linked('cases.author');
 				},
+				bucket: ({ linked }) => {
+					return linked('objects.bucket');
+				},
 				cause: ({ linked }) => {
 					return linked('objects.hangupCause');
 				},
@@ -746,6 +752,12 @@ export default deepmerge(
 				},
 				hasUser: ({ linked }) => {
 					return linked('objects.user');
+				},
+				leavingAt: ({ linked }) => {
+					return linked('objects.leavingAt');
+				},
+				offeringAt: ({ linked }) => {
+					return linked('objects.offeringAt');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');

@@ -14,6 +14,9 @@ import AmdResultFilterPreview from './amd-result/amd-result-filter-value-preview
 import { createAuditorFilterConfig } from './auditor';
 import AuditorFilter from './auditor/auditor-filter-value-field.vue';
 import AuditorFilterPreview from './auditor/auditor-filter-value-preview.vue';
+import { createBucketFilterConfig } from './bucket';
+import BucketFilter from './bucket/bucket-filter-value-field.vue';
+import BucketFilterPreview from './bucket/bucket-filter-value-preview.vue';
 import CallDirectionFilterValueField from './call-direction/call-direction-filter-value-field.vue';
 import CallDirectionFilterValuePreview from './call-direction/call-direction-filter-value-preview.vue';
 import CaseActualReactionTimeFilterValueField from './case-actual-reaction-time/case-actual-reaction-time-filter-value-field.vue';
@@ -134,6 +137,8 @@ export {
 	AmdResultFilterPreview,
 	AuditorFilter,
 	AuditorFilterPreview,
+	BucketFilter,
+	BucketFilterPreview,
 	CallDirectionFilterValueField,
 	CallDirectionFilterValuePreview,
 	CaseActualReactionTimeFilterValueField,
@@ -254,6 +259,9 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.User]: UserFilter,
 		[FilterOption.Variable]: VariableFilter,
 		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.Bucket]: BucketFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -279,6 +287,9 @@ export const FilterOptionToPreviewComponentMap: Record<
 	Component
 > = {
 	[FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.Bucket]: BucketFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,
@@ -379,4 +390,5 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.Supervisor]: createSupervisorFilterConfig,
 	[FilterOption.Auditor]: createAuditorFilterConfig,
 	[FilterOption.Region]: createRegionFilterConfig,
+	[FilterOption.Bucket]: createBucketFilterConfig,
 };
