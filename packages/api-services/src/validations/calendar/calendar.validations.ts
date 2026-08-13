@@ -112,6 +112,49 @@ const acceptsOfDayUiArraySchema = z
 		});
 	});
 
+export type CalendarDayRangeIssue = {
+	index: number;
+	prop: string;
+	/** message key, resolve as `validation.<key>` */
+	key: string;
+};
+
+/**
+ * The same rules as the card schema, reported per row so a form can mark the
+ * offending inputs while the user types.
+ *
+ * A regle field status cannot serve that: with a standard schema, cross-row
+ * verdicts (overlapping ranges) are only re-derived by a full `$validate()`,
+ * so a row the user has not touched keeps a message that is no longer true.
+ */
+export const getCalendarDayRangeIssues = (
+	items: unknown,
+): CalendarDayRangeIssue[] => {
+	const result = acceptsOfDayUiArraySchema.safeParse(items);
+
+	if (result.success) return [];
+
+	return result.error.issues.flatMap((issue) => {
+		const [index, prop] = issue.path;
+		const key =
+			issue.code === 'custom' && typeof issue.params?.i18nKey === 'string'
+				? issue.params.i18nKey
+				: undefined;
+
+		if (typeof index !== 'number' || typeof prop !== 'string' || !key) {
+			return [];
+		}
+
+		return [
+			{
+				index,
+				prop,
+				key,
+			},
+		];
+	});
+};
+
 const exceptUiSchema = z.object({
 	name: z.string().optional(),
 	date: z

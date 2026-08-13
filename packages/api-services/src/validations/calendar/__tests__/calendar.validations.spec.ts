@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { z } from 'zod';
-import { calendarSchema } from '../calendar.validations';
+import {
+	calendarSchema,
+	getCalendarDayRangeIssues,
+} from '../calendar.validations';
 
 /** custom rules carry their message key in params, see `i18nIssue` */
 const issueKey = (issue: z.core.$ZodIssue) =>
@@ -527,5 +530,83 @@ describe('validations barrel export', () => {
 
 		expect(index.calendarSchema).toBe(calendarSchema);
 		expect(typeof index.calendarSchema.parse).toBe('function');
+	});
+});
+
+describe('getCalendarDayRangeIssues', () => {
+	const row = (day: number, start: number, end: number) => ({
+		day,
+		disabled: false,
+		start,
+		end,
+	});
+
+	it('reports nothing for valid rows', () => {
+		expect(
+			getCalendarDayRangeIssues([
+				row(0, 540, 541),
+				row(0, 600, 660),
+				row(1, 540, 1200),
+			]),
+		).toEqual([]);
+	});
+
+	it('reports both ends of a row whose start is not before its end', () => {
+		expect(
+			getCalendarDayRangeIssues([
+				row(0, 600, 540),
+			]),
+		).toEqual([
+			{
+				index: 0,
+				prop: 'start',
+				key: 'timerangeStartLessThanEnd',
+			},
+			{
+				index: 0,
+				prop: 'end',
+				key: 'timerangeStartLessThanEnd',
+			},
+		]);
+	});
+
+	it('reports every row of an overlap on the same day', () => {
+		const issues = getCalendarDayRangeIssues([
+			row(0, 540, 720),
+			row(0, 600, 780),
+		]);
+
+		expect(issues.every(({ key }) => key === 'timerangeNotIntersect')).toBe(
+			true,
+		);
+		expect(issues.map(({ index, prop }) => `${index}.${prop}`).sort()).toEqual([
+			'0.end',
+			'0.start',
+			'1.end',
+			'1.start',
+		]);
+	});
+
+	it('does not treat the same hours on different days as an overlap', () => {
+		expect(
+			getCalendarDayRangeIssues([
+				row(0, 540, 720),
+				row(2, 540, 720),
+			]),
+		).toEqual([]);
+	});
+
+	it('reports a minute outside the day', () => {
+		expect(
+			getCalendarDayRangeIssues([
+				row(0, 0, 24 * 60),
+			]),
+		).toEqual([
+			{
+				index: 0,
+				prop: 'end',
+				key: 'hourRange',
+			},
+		]);
 	});
 });
