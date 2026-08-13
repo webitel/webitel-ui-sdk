@@ -4,11 +4,13 @@ import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
+import { QueueType } from '../../../enums';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -39,6 +41,32 @@ const doNotConvertKeys = [
  * omitted even though chat queues seed it and the service accepts it.
  */
 const fieldsToSend = getShallowFieldsToSendFromZodSchema(queueSchema);
+
+/**
+ * proto3 omits zero values on the wire, and `OFFLINE_QUEUE` is `0` — so an
+ * offline queue comes back with no `type` key at all.
+ *
+ * This is not cosmetic: everything downstream keys on `type`. Without it
+ * `getQueueDefaults` falls through to the type-agnostic base, the Params tab
+ * renders no type-specific controls, and `queueSchema`'s `superRefine` skips
+ * the per-type branch entirely — all silently. Restore it before any reader
+ * sees the item.
+ */
+const restoreOmittedType = (item: ApiParams) => ({
+	type: QueueType.OFFLINE_QUEUE,
+	...item,
+});
+
+/**
+ * Same proto3 omission, for the columns the table renders directly. Legacy did
+ * this via a `defaultObject`; these are the zero values, not form defaults.
+ */
+const listZeroValues = {
+	enabled: false,
+	active: 0,
+	waiting: 0,
+	priority: 0,
+};
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
@@ -79,7 +107,12 @@ const getQueuesList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				mergeEach({
+					...listZeroValues,
+					type: QueueType.OFFLINE_QUEUE,
+				}),
+			]),
 			next,
 		};
 	} catch (err) {
@@ -125,6 +158,7 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 		const response = await getQueueService().readQueue(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			restoreOmittedType,
 			responseHandler,
 			mergeTypeDefaults,
 		]);

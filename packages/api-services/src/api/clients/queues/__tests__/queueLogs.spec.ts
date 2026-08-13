@@ -28,6 +28,11 @@ describe('QueueLogsAPI.getList', () => {
 	 * which the backend would ignore — the request would succeed and quietly
 	 * return unfiltered rows. That is how the duration filter was broken before
 	 * this migration, so it is worth pinning.
+	 *
+	 * Verified live: `joined_at`, `leaving_at` and `offering_at` all filter with
+	 * this shape. `duration` does not — the backend accepts and ignores it (see
+	 * the note in `queueLogs.ts`), so this pins the wire format only, not that
+	 * the duration filter actually works.
 	 */
 	it('sends range bounds as dotted keys', async () => {
 		await QueueLogsAPI.getList({

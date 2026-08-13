@@ -93,6 +93,17 @@ const getQueueLogs = async (params: ApiParams) => {
 				'offering_at',
 				range(offeringAt, offeringAtFrom, offeringAtTo),
 			),
+			/**
+			 * NB: verified against the live backend — `duration.from`/`.to` are
+			 * accepted and then ignored, exactly like an unknown param, while
+			 * every other range here (`joined_at`, `leaving_at`, `offering_at`)
+			 * filters correctly. The wire format below is the right one and
+			 * matches the generated `durationFrom`/`durationTo`, so it starts
+			 * working the moment the backend implements it — but today the
+			 * duration filter is inert. It was inert before this migration too
+			 * (the old module destructured `durationFrom` while the filter key
+			 * was `duration`), so this is not a regression, just not a fix.
+			 */
 			...rangeParams('duration', range(duration, durationFrom, durationTo)),
 		});
 		const { items, next } = applyTransform(response.data, [
