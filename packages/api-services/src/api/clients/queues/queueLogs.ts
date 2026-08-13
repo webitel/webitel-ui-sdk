@@ -1,4 +1,5 @@
 import { getMemberService } from '@webitel/api-services/gen';
+import { normalizeToTimestamp } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -26,6 +27,12 @@ const getQueueLogs = async (params: ApiParams) => {
 		bucket,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		({ joinedAt, leavingAt, offeringAt, ...rest }) => ({
+			...rest,
+			joinedAt: normalizeToTimestamp(joinedAt),
+			leavingAt: normalizeToTimestamp(leavingAt),
+			offeringAt: normalizeToTimestamp(offeringAt),
+		}),
 		starToSearch('search'),
 	]);
 
