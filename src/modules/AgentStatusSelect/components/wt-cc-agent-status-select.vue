@@ -41,7 +41,7 @@ import type { EngineForAgentPauseCauseList } from '@webitel/api-services/gen';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
-import { BaseError, PauseNotAllowedError } from 'webitel-sdk';
+import { PauseNotAllowedError } from 'webitel-sdk';
 import { OnlineSkillsAPI } from '../../../../packages/api-services/src/api/clients/onlineSkills/onlineSkills';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import { AgentStatus } from '../../../enums';
@@ -49,7 +49,7 @@ import type { LookupOption } from '../../../types';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
 import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
-import { StatusChangePayload } from '../types/StatusChangePayload.types';
+import type { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
 import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup.vue';
@@ -111,7 +111,7 @@ function closePauseCausePopup() {
 	isPauseCausePopup.value = false;
 }
 
-async function loadPauseCauses() {
+async function loadPauseCauses(): Promise<void> {
 	const response = await PauseCauseAPI.getList({
 		agentId: props.agentId,
 	});
@@ -127,7 +127,7 @@ function closeActivityTypePopup() {
 	callCenterModeChanging.value = false;
 }
 
-async function loadActivityTypes() {
+async function loadActivityTypes(): Promise<void> {
 	const response = await OnlineSkillsAPI.getList({
 		skipDefault: false,
 	});
@@ -137,7 +137,7 @@ async function loadActivityTypes() {
 			id: defaultActivityTypeOption.value?.id,
 			name: t('webitelUI.agentStatusSelect.activityTypePopup.defaultOption'),
 		},
-		// ...response.items.slice(1),
+		...response.items.slice(1),
 	];
 }
 
@@ -147,7 +147,7 @@ async function updateStatus({
 	pauseCause,
 	statusComment,
 	onlineSkill,
-}) {
+}: StatusChangePayload) {
 	return AgentStatusAPI.patch({
 		agentId,
 		status,
@@ -162,9 +162,9 @@ async function changeStatus({
 	pauseCause,
 	statusComment,
 	onlineSkill,
-}) {
+}: Omit<StatusChangePayload, 'agentId'>) {
 	try {
-		const statusPayload = {
+		const statusPayload: StatusChangePayload = {
 			agentId: props.agentId,
 			status,
 			pauseCause,
@@ -181,7 +181,7 @@ async function changeStatus({
 	}
 }
 
-async function handleStatus(status) {
+async function handleStatus(status: string) {
 	if (status === AgentStatus.ONLINE) {
 		await loadActivityTypes();
 		if (activityTypes.value.length > 1) {
@@ -201,14 +201,14 @@ async function handleStatus(status) {
 	});
 }
 
-function handleSelectInput(newStatus) {
+function handleSelectInput(newStatus: string) {
 	handleStatus(newStatus);
 	chosenStatus.value = newStatus;
 	// we need to save changes which come from input, because sometimes we want
 	// to choose 'pause' repeatedly and have to check the previous status
 }
 
-function handleClosed(event) {
+function handleClosed(event: { value: string }) {
 	// sometimes we want to choose 'pause' repeatedly
 	// but 'change' event from wt-status-select can't give us the same value,
 	// in this case we have to use value from 'closed' event to choose 'pause' status
@@ -221,9 +221,9 @@ function handleClosed(event) {
 	}
 }
 
-function handleActivityTypeInput(activityType) {
+function handleActivityTypeInput(activityType: LookupOption) {
 	const payload =
-		activityType.id === defaultActivityTypeOption.value.id
+		activityType.id === defaultActivityTypeOption.value?.id
 			? defaultActivityTypeOption.value
 			: activityType;
 	if (callCenterModeChanging.value) {
