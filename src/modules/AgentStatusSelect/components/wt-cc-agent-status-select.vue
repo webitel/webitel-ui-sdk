@@ -37,12 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import type { EngineForAgentPauseCauseList } from '@webitel/api-services/gen';
+import { OnlineSkillsAPI } from '@webitel/api-services/api';
+import type { EngineForAgentPauseCause } from '@webitel/api-services/gen';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { PauseNotAllowedError } from 'webitel-sdk';
-import { OnlineSkillsAPI } from '../../../../packages/api-services/src/api/clients/onlineSkills/onlineSkills';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import { AgentStatus } from '../../../enums';
 import type { LookupOption } from '../../../types';
@@ -87,7 +87,7 @@ const PauseCauseAPI = PauseCauseAPIFactory(api);
 const { t } = useI18n();
 
 const isPauseCausePopup = ref(false);
-const pauseCauses = ref<EngineForAgentPauseCauseList>([]);
+const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
 const error = ref(null);
 const chosenStatus = ref('');
 
