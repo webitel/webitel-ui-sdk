@@ -436,6 +436,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Giờ phải từ 00 đến 23',
+		timerangeStartLessThanEnd: 'Thời gian "Từ" không được muộn hơn "Đến"',
+		timerangeNotIntersect:
+			'Các khoảng thời gian trong cùng một ngày không được chồng chéo',
 		required: 'Trường bắt buộc',
 		numeric: 'Phải là số',
 		email: 'Phải là email',

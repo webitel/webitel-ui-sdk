@@ -439,6 +439,9 @@ export default deepmerge(
 			},
 		},
 		validation: {
+			hourRange: 'Hours must be from 00 to 23',
+			timerangeStartLessThanEnd: 'Time From cannot be greater than To',
+			timerangeNotIntersect: 'Time intervals on the same day cannot overlap',
 			required: 'Field is required',
 			numeric: 'Should be numeric',
 			email: 'Should look like email',

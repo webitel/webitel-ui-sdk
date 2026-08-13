@@ -436,6 +436,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Orele trebuie să fie între 00 și 23',
+		timerangeStartLessThanEnd:
+			'Ora "De la" nu poate fi mai târzie decât "Până la"',
+		timerangeNotIntersect:
+			'Intervalele de timp din aceeași zi nu se pot suprapune',
 		required: 'Câmpul este obligatoriu',
 		numeric: 'Trebuie să fie numeric',
 		email: 'Trebuie să arate ca un email',

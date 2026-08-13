@@ -90,6 +90,34 @@ describe('tableHeadersStoreBody', () => {
 		]);
 	});
 
+	it('asks for a field once when several columns render from it', () => {
+		const store = tableHeadersStoreBody({
+			rawHeaders: [
+				{
+					field: 'grantee',
+					show: true,
+					sort: null,
+				},
+				{
+					field: 'granted',
+					show: true,
+					sort: null,
+				},
+				{
+					field: 'granted',
+					show: true,
+					sort: null,
+				},
+			] as DatalistTableHeader[],
+			id,
+		});
+
+		expect(store.fields.value).toEqual([
+			'grantee',
+			'granted',
+		]);
+	});
+
 	it('has no sort by default', () => {
 		expect(createStore().sort.value).toBeNull();
 	});
