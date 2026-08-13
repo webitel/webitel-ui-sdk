@@ -36,47 +36,48 @@
   </article>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { EngineForAgentPauseCauseList } from '@webitel/api-services/gen';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
-import { PauseNotAllowedError } from 'webitel-sdk';
+import { BaseError, PauseNotAllowedError } from 'webitel-sdk';
 import { OnlineSkillsAPI } from '../../../../packages/api-services/src/api/clients/onlineSkills/onlineSkills';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
-import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum.js';
+import { AgentStatus } from '../../../enums';
+import type { LookupOption } from '../../../types';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
+import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
+import { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
 import StatusSelectErrorPopup from './_internals/wt-cc-status-select-error-popup.vue';
 
-const props = defineProps({
-	agentId: {
-		type: [
-			String,
-			Number,
-		],
-		required: true,
+const props = withDefaults(
+	defineProps<{
+		agentId: string | number;
+		status?: string;
+		statusDuration?: string | number;
+		showCallCenterSwitcher?: boolean;
+		isCallCenterOn?: boolean;
+	}>(),
+	{
+		status: AgentStatus.OFFLINE,
+		statusDuration: 0,
+		showCallCenterSwitcher: false,
+		isCallCenterOn: false,
 	},
-	status: {
-		// can be undefined, is agent wasn't loaded yet
-		default: AgentStatus.OFFLINE,
-	},
-	statusDuration: {
-		type: [
-			Number,
-			String,
-		],
-		default: 0,
-	},
-	useCallCenterSwitcher: Boolean,
-	isCallCenterOn: Boolean,
-});
+);
 
-const emit = defineEmits([
-	'changed',
-	'changed-call-center-mode',
-]);
+const emit = defineEmits<{
+	changed: [
+		payload: StatusChangePayload,
+	];
+	'changed-call-center-mode': [
+		payload?: LookupOption,
+	];
+}>();
 
 const { api } = useStore().state;
 const AgentStatusAPI = AgentStatusAPIFactory(api);
@@ -84,16 +85,23 @@ const PauseCauseAPI = PauseCauseAPIFactory(api);
 const { t } = useI18n();
 
 const isPauseCausePopup = ref(false);
-const pauseCauses = ref([]);
+const pauseCauses = ref<EngineForAgentPauseCauseList>([]);
 const error = ref(null);
 const chosenStatus = ref('');
 
 const isActivityTypePopup = ref(false);
-const activityTypes = ref([]);
+const activityTypes = ref<LookupOption[]>([]);
 
-const defaultActivityTypeOption = ref(null);
+const defaultActivityTypeOption = ref<LookupOption | null>(null);
 
-const callCenterModeChanging = ref(false);
+const { callCenterModeChanging, toggleCallCenterMode } = useCCenterModeSwitcher(
+	{
+		activityTypes,
+		loadActivityTypes,
+		openActivityTypePopup,
+		emit,
+	},
+);
 
 function openPauseCausePopup() {
 	isPauseCausePopup.value = true;
@@ -229,28 +237,13 @@ function handleActivityTypeInput(activityType) {
 	}
 }
 
-function changedCallCenterModeHandler() {
-	emit('changed-call-center-mode');
-	callCenterModeChanging.value = false;
-}
-
-async function toggleCallCenterMode(value) {
-	callCenterModeChanging.value = true;
-	if (value) {
-		if (activityTypes.value.length <= 1) {
-			await loadActivityTypes();
-		}
-		if (activityTypes.value.length > 1) {
-			openActivityTypePopup();
-		} else {
-			changedCallCenterModeHandler();
-		}
-	} else {
-		changedCallCenterModeHandler();
-	}
-}
-
-function handlePauseCauseInput({ pauseCause, statusComment }) {
+function handlePauseCauseInput({
+	pauseCause,
+	statusComment,
+}: {
+	pauseCause: string;
+	statusComment: string;
+}) {
 	const status = AgentStatus.PAUSE;
 	return changeStatus({
 		status,
