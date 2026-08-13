@@ -71,6 +71,12 @@ const chip = {
 					white-space: nowrap;
 					text-overflow: ellipsis;
 				}
+
+        .wt-chip__label {
+					display: flex;
+					align-items: center;
+					gap: var(--spacing-xs);
+				}
         `,
 };
 
