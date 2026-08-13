@@ -230,8 +230,9 @@ export default {
 			},
 		},
 		bucket: 'Бакет | Бакеттер',
-		leavingAt: 'Аяқтау',
-		offeringAt: 'Қосу',
+		joinedAt: 'Қосылған күні',
+		leavingAt: 'Шыққан күні',
+		offeringAt: 'Ұсынылған күні',
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
 			type: {
@@ -741,6 +742,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

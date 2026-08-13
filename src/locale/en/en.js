@@ -234,8 +234,9 @@ export default deepmerge(
 				},
 			},
 			bucket: 'Bucket | Buckets',
-			leavingAt: 'End',
-			offeringAt: 'Offering',
+			joinedAt: 'Joined at',
+			leavingAt: 'Leaving at',
+			offeringAt: 'Offering at',
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -752,6 +753,9 @@ export default deepmerge(
 				},
 				hasUser: ({ linked }) => {
 					return linked('objects.user');
+				},
+				joinedAt: ({ linked }) => {
+					return linked('objects.joinedAt');
 				},
 				leavingAt: ({ linked }) => {
 					return linked('objects.leavingAt');

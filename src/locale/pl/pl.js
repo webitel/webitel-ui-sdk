@@ -230,8 +230,9 @@ export default {
 			},
 		},
 		bucket: 'Kubeł | Kubeły',
-		leavingAt: 'Koniec',
-		offeringAt: 'Oferta',
+		joinedAt: 'Dołączono',
+		leavingAt: 'Opuszczono',
+		offeringAt: 'Zaoferowano',
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
 			type: {
@@ -740,6 +741,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

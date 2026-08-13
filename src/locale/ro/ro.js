@@ -230,8 +230,9 @@ export default {
 			},
 		},
 		bucket: 'Balon | Baloane',
-		leavingAt: 'Se termină',
-		offeringAt: 'Ofertat',
+		joinedAt: 'Alăturat la',
+		leavingAt: 'Părăsit la',
+		offeringAt: 'Ofertat la',
 		flow: {
 			name: 'Schemă flux | Scheme flux',
 			type: {
@@ -745,6 +746,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

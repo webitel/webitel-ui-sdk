@@ -230,8 +230,9 @@ export default {
 			},
 		},
 		bucket: 'Bucket | Buckets',
-		leavingAt: 'Tugash',
-		offeringAt: "Ko'rsatish",
+		joinedAt: "Qo'shilgan sana",
+		leavingAt: 'Chiqilgan sana',
+		offeringAt: 'Taklif qilingan sana',
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
 			type: {
@@ -744,6 +745,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

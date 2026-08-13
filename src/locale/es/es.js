@@ -225,8 +225,9 @@ export default {
 			},
 		},
 		bucket: 'Caja | Cajas',
-		leavingAt: 'Fin',
-		offeringAt: 'Ofrecido',
+		joinedAt: 'Unido el',
+		leavingAt: 'Abandonado el',
+		offeringAt: 'Ofertado el',
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
 			type: {
@@ -739,6 +740,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

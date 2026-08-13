@@ -230,8 +230,9 @@ export default {
 			},
 		},
 		bucket: 'Thùng chứa',
-		leavingAt: 'Kết thúc',
-		offeringAt: 'Đặt lịch',
+		joinedAt: 'Tham gia lúc',
+		leavingAt: 'Rời lúc',
+		offeringAt: 'Đề xuất lúc',
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
 			type: {
@@ -743,6 +744,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

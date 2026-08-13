@@ -226,8 +226,9 @@ export default {
 			},
 		},
 		bucket: 'Корзина | Корзины',
-		leavingAt: 'Конец',
-		offeringAt: 'Распределение',
+		joinedAt: 'Присоединено',
+		leavingAt: 'Покинуто',
+		offeringAt: 'Предложено',
 		flow: {
 			name: 'Схема | Схемы',
 			type: {
@@ -736,6 +737,9 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
 			},
 			leavingAt: ({ linked }) => {
 				return linked('objects.leavingAt');

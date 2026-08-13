@@ -49,6 +49,7 @@ export const FilterOption = {
 	Region: 'region',
 	UtilizationProgress: 'utilizationProgress',
 	Bucket: 'bucket',
+	JoinedAt: 'joinedAt',
 	LeavingAt: 'leavingAt',
 	OfferingAt: 'offeringAt',
 } as const;

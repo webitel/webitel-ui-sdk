@@ -259,6 +259,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.User]: UserFilter,
 		[FilterOption.Variable]: VariableFilter,
 		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.Bucket]: BucketFilter,
@@ -287,6 +288,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	Component
 > = {
 	[FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.JoinedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.Bucket]: BucketFilterPreview,
