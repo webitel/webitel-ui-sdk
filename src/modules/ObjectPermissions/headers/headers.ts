@@ -1,9 +1,9 @@
 import { SortSymbols } from '../../../scripts/sortQueryAdapters';
 
 /**
- * `field` is what goes into the `fields` query of `GET <object>/:id/acl`.
- * The endpoint knows the rule fields by their letter (`r`, `w`, `d`) and answers
- * with a single `granted` string; asking for `granted` itself is a 400.
+ * `field` is what goes into the `fields` query of `GET <object>/:id/acl`, where
+ * the three rule columns all come from one `granted` string — the store asks
+ * for it once. The rule letters (`r`, `w`, `d`) are not attributes there.
  */
 export const headers = [
 	{
@@ -16,21 +16,21 @@ export const headers = [
 	{
 		value: 'read',
 		locale: 'reusable.read',
-		field: 'r',
+		field: 'granted',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
 	{
 		value: 'edit',
 		locale: 'reusable.edit',
-		field: 'w',
+		field: 'granted',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
 	{
 		value: 'delete',
 		locale: 'reusable.delete',
-		field: 'd',
+		field: 'granted',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
