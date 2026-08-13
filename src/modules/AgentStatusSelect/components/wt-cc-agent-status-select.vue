@@ -1,7 +1,7 @@
 <template>
   <article class="wt-cc-agent-status-select">
     <wt-switcher
-      v-if="useCallCenterSwitcher"
+      v-if="showCallCenterSwitcher"
       :label="t('agentStatus.callCenter')"
       :model-value="isCallCenterOn"
       @update:model-value="toggleCallCenterMode"
