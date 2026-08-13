@@ -19,7 +19,12 @@ export const useCCenterModeSwitcher = ({
 		callCenterModeChanging.value = true;
 		if (value) {
 			if (activityTypes.value.length <= 1) {
-				await loadActivityTypes();
+				try {
+					await loadActivityTypes();
+				} catch (err) {
+					callCenterModeChanging.value = false;
+					throw err;
+				}
 			}
 			if (activityTypes.value.length > 1) {
 				openActivityTypePopup();
