@@ -246,6 +246,17 @@ export default {
 		},
 		memberPriority: 'Приоритет',
 		attempts: 'Сынамалар',
+		callReportingResult: {
+			result: 'Нәтиже',
+			abandoned: 'Абандондалды',
+			cancel: 'Болдырмау',
+			success: 'Сәтті',
+			failed: 'Ақау',
+			missed: 'Жоқ',
+			timeout: 'Таймақ',
+			endless: 'Аяқсыз',
+			transferred: 'Ауыстырылды',
+		},
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
 			type: {
@@ -779,6 +790,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

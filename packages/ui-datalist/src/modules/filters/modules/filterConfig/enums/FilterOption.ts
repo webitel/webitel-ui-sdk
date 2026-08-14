@@ -12,9 +12,11 @@ export const FilterOption = {
 	HasFile: 'hasFile',
 	Score: 'score',
 	Tag: 'tag',
+	QueueTags: 'tags',
 	TalkDuration: 'talkDuration',
 	Team: 'team',
 	TotalDuration: 'totalDuration',
+	AttemptDuration: 'duration',
 	HasTranscription: 'hasTranscription',
 	User: 'user',
 	Variable: 'variable',
@@ -54,9 +56,11 @@ export const FilterOption = {
 	OfferingAt: 'offeringAt',
 	StopCause: 'stopCause',
 	MemberPriority: 'memberPriority',
-	Attempts: 'attempts',
-	Name: 'name',
-	Destination: 'destination',
+	MemberAttempts: 'attempts',
+	MemberName: 'name',
+	MemberDestination: 'destination',
+	/** queue attempt CallReportingStatus. Name/param is backend `result`. */
+	CallReportingResult: 'result',
 } as const;
 
 /**

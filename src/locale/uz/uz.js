@@ -246,6 +246,17 @@ export default {
 		},
 		memberPriority: 'Prioritet',
 		attempts: 'Urinishlar',
+		callReportingResult: {
+			result: 'Natija',
+			abandoned: 'Bekor qilindi',
+			cancel: 'Bekor qilindi',
+			success: 'Muvaffaqiyatli',
+			failed: 'Yaroqsiz',
+			missed: 'Bekor qilindi',
+			timeout: 'Vaqt',
+			endless: 'Cheksiz',
+			transferred: 'Uzatilgan',
+		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
 			type: {
@@ -782,6 +793,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

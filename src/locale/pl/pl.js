@@ -246,6 +246,17 @@ export default {
 		},
 		memberPriority: 'Priorytet',
 		attempts: 'Próby',
+		callReportingResult: {
+			result: 'Wynik',
+			abandoned: 'Porzucone',
+			cancel: 'Anulowane',
+			success: 'Sukces',
+			failed: 'Niepowodzenie',
+			missed: 'Przegapione',
+			timeout: 'Przekroczono czas',
+			endless: 'Nieskończony',
+			transferred: 'Przekazane',
+		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
 			type: {
@@ -778,6 +789,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

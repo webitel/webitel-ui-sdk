@@ -105,6 +105,8 @@ import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-prev
 import { createRegionFilterConfig } from './region';
 import RegionFilter from './region/region-filter-value-field.vue';
 import RegionFilterPreview from './region/region-filter-value-preview.vue';
+import CallReportingResultFilter from './call-reporting-result/call-reporting-result-filter-value-field.vue';
+import CallReportingResultFilterPreview from './call-reporting-result/call-reporting-result-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 import { createSkillFilterConfig } from './skill';
@@ -117,6 +119,9 @@ import SupervisorFilter from './supervisor/supervisor-filter-value-field.vue';
 import SupervisorFilterPreview from './supervisor/supervisor-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
+import { createQueueTagsFilterConfig } from './tags';
+import TagsFilter from './tags/tags-filter-value-field.vue';
+import TagsFilterPreview from './tags/tags-filter-value-preview.vue';
 import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
 import TalkDurationFilterPreview from './talk-duration/talk-duration-filter-value-preview.vue';
 import { createTeamFilterConfig } from './team';
@@ -210,6 +215,8 @@ export {
 	RatingFromToFilterPreview,
 	RegionFilter,
 	RegionFilterPreview,
+	CallReportingResultFilter,
+	CallReportingResultFilterPreview,
 	ScoreFilter,
 	ScoreFilterPreview,
 	SkillFilter,
@@ -220,6 +227,8 @@ export {
 	SupervisorFilterPreview,
 	TagFilter,
 	TagFilterPreview,
+	TagsFilter,
+	TagsFilterPreview,
 	TalkDurationFilter,
 	TalkDurationFilterPreview,
 	TeamFilter,
@@ -257,6 +266,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HasFile]: HasFileFilter,
 		[FilterOption.Score]: ScoreFilter,
 		[FilterOption.Tag]: TagFilter,
+		[FilterOption.QueueTags]: TagsFilter,
 		[FilterOption.TalkDuration]: TalkDurationFilter,
 		[FilterOption.Team]: TeamFilter,
 		[FilterOption.TotalDuration]: TotalDurationFilter,
@@ -271,9 +281,11 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.Bucket]: BucketFilter,
 		[FilterOption.StopCause]: StopCauseFilter,
 		[FilterOption.MemberPriority]: RatingFromToFilter,
-		[FilterOption.Attempts]: RatingFromToFilter,
-		[FilterOption.Name]: StringFilterValueField,
-		[FilterOption.Destination]: StringFilterValueField,
+		[FilterOption.MemberAttempts]: RatingFromToFilter,
+		[FilterOption.AttemptDuration]: RatingFromToFilter,
+		[FilterOption.MemberName]: StringFilterValueField,
+		[FilterOption.MemberDestination]: StringFilterValueField,
+		[FilterOption.CallReportingResult]: CallReportingResultFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -305,9 +317,11 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.Bucket]: BucketFilterPreview,
 	[FilterOption.StopCause]: StopCauseFilterPreview,
 	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
-	[FilterOption.Attempts]: RatingFromToFilterPreview,
-	[FilterOption.Name]: StringFilterValuePreview,
-	[FilterOption.Destination]: StringFilterValuePreview,
+	[FilterOption.MemberAttempts]: RatingFromToFilterPreview,
+	[FilterOption.AttemptDuration]: RatingFromToFilterPreview,
+	[FilterOption.MemberName]: StringFilterValuePreview,
+	[FilterOption.MemberDestination]: StringFilterValuePreview,
+	[FilterOption.CallReportingResult]: CallReportingResultFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,
@@ -329,6 +343,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HasFile]: HasFileFilterPreview,
 	[FilterOption.Score]: ScoreFilterPreview,
 	[FilterOption.Tag]: TagFilterPreview,
+	[FilterOption.QueueTags]: TagsFilterPreview,
 	[FilterOption.TalkDuration]: TalkDurationFilterPreview,
 	[FilterOption.Team]: TeamFilterPreview,
 	[FilterOption.TotalDuration]: TotalDurationFilterPreview,
@@ -409,4 +424,5 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.Auditor]: createAuditorFilterConfig,
 	[FilterOption.Region]: createRegionFilterConfig,
 	[FilterOption.Bucket]: createBucketFilterConfig,
+	[FilterOption.QueueTags]: createQueueTagsFilterConfig,
 };

@@ -246,6 +246,17 @@ export default {
 		},
 		memberPriority: 'Prioritate',
 		attempts: 'Încercări',
+		callReportingResult: {
+			result: 'Rezultat',
+			abandoned: 'Abandonat',
+			cancel: 'Anulat',
+			success: 'Succes',
+			failed: 'Eșuat',
+			missed: 'Pierdut',
+			timeout: 'Timp de așteptare',
+			endless: 'Nelimitat',
+			transferred: 'Transferat',
+		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
 			type: {
@@ -783,6 +794,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

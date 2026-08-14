@@ -246,6 +246,17 @@ export default {
 		},
 		memberPriority: 'Ưu tiên',
 		attempts: 'Lần thử',
+		callReportingResult: {
+			result: 'Kết quả',
+			abandoned: 'Bỏ qua',
+			cancel: 'Hủy',
+			success: 'Thành công',
+			failed: 'Thất bại',
+			missed: 'Bỏ qua',
+			timeout: 'Hết thời gian',
+			endless: 'Vô hạn',
+			transferred: 'Chuyển đổi',
+		},
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
 			type: {
@@ -781,6 +792,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

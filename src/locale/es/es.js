@@ -241,6 +241,17 @@ export default {
 		},
 		memberPriority: 'Prioridad',
 		attempts: 'Intentos',
+		callReportingResult: {
+			result: 'Resultado',
+			abandoned: 'Abandonado',
+			cancel: 'Cancelar',
+			success: 'Éxito',
+			failed: 'Fallido',
+			missed: 'Perdido',
+			timeout: 'Tiempo de espera',
+			endless: 'Sin fin',
+			transferred: 'Transferido',
+		},
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
 			type: {
@@ -777,6 +788,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

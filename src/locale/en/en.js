@@ -250,6 +250,17 @@ export default deepmerge(
 			},
 			memberPriority: 'Priority',
 			attempts: 'Attempts',
+			callReportingResult: {
+				result: 'Result',
+				abandoned: 'Abandoned',
+				cancel: 'Cancel',
+				success: 'Success',
+				failed: 'Failed',
+				missed: 'Missed',
+				timeout: 'Timeout',
+				endless: 'Endless',
+				transferred: 'Transferred',
+			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -790,6 +801,15 @@ export default deepmerge(
 				},
 				destination: ({ linked }) => {
 					return linked('vocabulary.destination');
+				},
+				duration: ({ linked }) => {
+					return linked('vocabulary.duration');
+				},
+				result: ({ linked }) => {
+					return linked('objects.callReportingResult.result');
+				},
+				tags: ({ linked }) => {
+					return linked('vocabulary.tag');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');

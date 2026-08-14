@@ -241,6 +241,17 @@ export default {
 		},
 		memberPriority: 'Пріоритет',
 		attempts: 'Спроб',
+		callReportingResult: {
+			result: 'Результат',
+			abandoned: 'Втрачений',
+			cancel: 'Скасований',
+			success: 'Успішний',
+			failed: 'Неуспішний',
+			missed: 'Пропущений',
+			timeout: 'Тайм-аут',
+			endless: 'Нескінченний',
+			transferred: 'Переведений',
+		},
 		flow: {
 			name: 'Схема | Схеми',
 			type: {
@@ -773,6 +784,15 @@ export default {
 			},
 			destination: ({ linked }) => {
 				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
