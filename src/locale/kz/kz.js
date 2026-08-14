@@ -245,6 +245,7 @@ export default {
 			canceledByTimeout: 'Күту уақыты бойынша болдырылмады',
 		},
 		memberPriority: 'Приоритет',
+		attempts: 'Сынамалар',
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
 			type: {
@@ -769,6 +770,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

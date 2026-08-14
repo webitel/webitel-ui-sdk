@@ -2,6 +2,7 @@ import { getMemberService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
+import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -80,39 +81,6 @@ const preRequestHandler = (item: ApiParams) => {
 	};
 };
 
-/**
- * The filters panel holds a range as one `{ from, to }` value; the flat pair is
- * still accepted. Bounds are int64 on the wire and timestamps in the panel,
- * hence the loose bound type.
- */
-const range = (
-	value?: ApiParams,
-	// biome-ignore lint/suspicious/noExplicitAny: see above
-	from?: any,
-	// biome-ignore lint/suspicious/noExplicitAny: see above
-	to?: any,
-) => ({
-	from: value?.from ?? from,
-	to: value?.to ?? to,
-});
-
-/**
- * Range bounds are protobuf nested messages, so they bind as `created_at.from`
- * rather than the flattened `createdAtFrom` the generated params type declares.
- * Orval spreads what it is given straight into the request, so the dotted keys
- * reach the backend intact — they just cannot be expressed in that type.
- */
-const rangeParams = (
-	name: string,
-	bounds: {
-		from?: unknown;
-		to?: unknown;
-	},
-) => ({
-	[`${name}.from`]: bounds.from,
-	[`${name}.to`]: bounds.to,
-});
-
 const getMembersList = async (params: ApiParams) => {
 	const listHandler = (items: ApiParams[]) => {
 		const copy = deepCopy(items);
@@ -133,23 +101,32 @@ const getMembersList = async (params: ApiParams) => {
 		id,
 		parentId,
 		createdAt,
-		from,
-		to,
+		offeringAt,
 		bucket,
 		memberPriority,
-		priority,
-		priorityFrom,
-		priorityTo,
 		stopCause,
-		cause,
 		agent,
+		attempts,
+		name,
+		destination,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		({ createdAt, offeringAt, from, to, cause, stopCause, ...rest }) => ({
+			...rest,
+			createdAt: normalizeDatetimeRange(
+				createdAt ??
+					(from != null || to != null
+						? {
+								from,
+								to,
+							}
+						: undefined),
+			),
+			offeringAt: normalizeDatetimeRange(offeringAt),
+			stopCause: stopCause ?? cause,
+		}),
 		starToSearch('search'),
 	]);
-
-	const created = range(createdAt, from, to);
-	const prio = range(memberPriority ?? priority, priorityFrom, priorityTo);
 
 	try {
 		const response = await getMemberService().searchMemberInQueue(
@@ -163,10 +140,18 @@ const getMembersList = async (params: ApiParams) => {
 				fields,
 				id,
 				bucketId: bucket,
-				stopCause: stopCause ?? cause,
+				stopCause,
 				agentId: agent,
-				...rangeParams('created_at', created),
-				...rangeParams('priority', prio),
+				'created_at.from': createdAt?.from,
+				'created_at.to': createdAt?.to,
+				'offering_at.from': offeringAt?.from,
+				'offering_at.to': offeringAt?.to,
+				'priority.from': memberPriority?.from,
+				'priority.to': memberPriority?.to,
+				'attempts.from': attempts?.from,
+				'attempts.to': attempts?.to,
+				name,
+				destination,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [

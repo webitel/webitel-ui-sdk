@@ -245,6 +245,7 @@ export default {
 			canceledByTimeout: 'Anulat din cauza timpului expirat',
 		},
 		memberPriority: 'Prioritate',
+		attempts: 'Încercări',
 		flow: {
 			name: 'Schemă flux | Scheme flux',
 			type: {
@@ -773,6 +774,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

@@ -54,6 +54,9 @@ export const FilterOption = {
 	OfferingAt: 'offeringAt',
 	StopCause: 'stopCause',
 	MemberPriority: 'memberPriority',
+	Attempts: 'attempts',
+	Name: 'name',
+	Destination: 'destination',
 } as const;
 
 /**

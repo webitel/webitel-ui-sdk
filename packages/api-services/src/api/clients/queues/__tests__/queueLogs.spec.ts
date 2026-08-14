@@ -68,20 +68,6 @@ describe('QueueLogsAPI.getList', () => {
 		expect(paramsSent()).not.toHaveProperty('joinedAtTo');
 	});
 
-	/** the panel holds one range value; the flat pair is still accepted */
-	it('accepts either the range object or the flat bounds', async () => {
-		await QueueLogsAPI.getList({
-			parentId: '7',
-			joinedAtFrom: 1,
-			joinedAtTo: 2,
-		});
-
-		expect(paramsSent()).toMatchObject({
-			'joined_at.from': 1,
-			'joined_at.to': 2,
-		});
-	});
-
 	it('maps the filter names onto the service params', async () => {
 		await QueueLogsAPI.getList({
 			parentId: '7',

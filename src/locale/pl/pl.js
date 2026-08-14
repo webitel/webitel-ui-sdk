@@ -245,6 +245,7 @@ export default {
 			canceledByTimeout: 'Anulowano z powodu przekroczenia czasu',
 		},
 		memberPriority: 'Priorytet',
+		attempts: 'Próby',
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
 			type: {
@@ -768,6 +769,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

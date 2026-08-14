@@ -240,6 +240,7 @@ export default {
 			canceledByTimeout: 'Скасовано по тайм-ауту',
 		},
 		memberPriority: 'Пріоритет',
+		attempts: 'Спроб',
 		flow: {
 			name: 'Схема | Схеми',
 			type: {
@@ -763,6 +764,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

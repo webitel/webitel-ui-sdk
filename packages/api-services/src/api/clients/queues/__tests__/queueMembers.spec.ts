@@ -77,6 +77,16 @@ describe('QueueMembersAPI.getList', () => {
 			stopCause: [
 				'cancel',
 			],
+			offeringAt: {
+				from: 300,
+				to: 400,
+			},
+			attempts: {
+				from: 2,
+				to: 5,
+			},
+			name: 'alice',
+			destination: '380',
 		});
 
 		expect(paramsSent()).toMatchObject({
@@ -90,6 +100,12 @@ describe('QueueMembersAPI.getList', () => {
 			stopCause: [
 				'cancel',
 			],
+			'offering_at.from': 300,
+			'offering_at.to': 400,
+			'attempts.from': 2,
+			'attempts.to': 5,
+			name: 'alice',
+			destination: '380',
 		});
 	});
 

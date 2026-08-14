@@ -86,3 +86,47 @@ export const normalizeToTimestamp = (
 	}
 	return Date.now();
 };
+
+export type DatetimeRangeValue = {
+	from?: NormalizeDatetimeValueParam;
+	to?: NormalizeDatetimeValueParam;
+};
+
+export const isDatetimeRangeValue = (
+	value: unknown,
+): value is DatetimeRangeValue =>
+	typeof value === 'object' &&
+	value !== null &&
+	('from' in value || 'to' in value);
+
+export const normalizeDatetimeRange = (
+	value?: NormalizeDatetimeValueParam | DatetimeRangeValue,
+): DatetimeRangeValue | undefined => {
+	if (value == null || value === '') {
+		return undefined;
+	}
+	if (isDatetimeRangeValue(value)) {
+		return {
+			from:
+				value.from == null || value.from === ''
+					? undefined
+					: normalizeToTimestamp(value.from, {
+							round: 'start',
+						}),
+			to:
+				value.to == null || value.to === ''
+					? undefined
+					: normalizeToTimestamp(value.to, {
+							round: 'end',
+						}),
+		};
+	}
+	return {
+		from: normalizeToTimestamp(value, {
+			round: 'start',
+		}),
+		to: normalizeToTimestamp(value, {
+			round: 'end',
+		}),
+	};
+};

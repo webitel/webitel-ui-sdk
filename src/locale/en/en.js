@@ -249,6 +249,7 @@ export default deepmerge(
 				canceledByTimeout: 'Canceled by timeout',
 			},
 			memberPriority: 'Priority',
+			attempts: 'Attempts',
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -780,6 +781,15 @@ export default deepmerge(
 				},
 				memberPriority: ({ linked }) => {
 					return linked('objects.memberPriority');
+				},
+				attempts: ({ linked }) => {
+					return linked('objects.attempts');
+				},
+				name: ({ linked }) => {
+					return linked('reusable.name');
+				},
+				destination: ({ linked }) => {
+					return linked('vocabulary.destination');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');

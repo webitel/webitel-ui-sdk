@@ -245,6 +245,7 @@ export default {
 			canceledByTimeout: 'Vaqt tugashi sababli bekor qilindi',
 		},
 		memberPriority: 'Prioritet',
+		attempts: 'Urinishlar',
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
 			type: {
@@ -772,6 +773,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

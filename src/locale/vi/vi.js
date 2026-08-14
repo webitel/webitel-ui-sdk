@@ -245,6 +245,7 @@ export default {
 			canceledByTimeout: 'Đã hủy do hết thời gian chờ',
 		},
 		memberPriority: 'Ưu tiên',
+		attempts: 'Lần thử',
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
 			type: {
@@ -771,6 +772,15 @@ export default {
 			},
 			memberPriority: ({ linked }) => {
 				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

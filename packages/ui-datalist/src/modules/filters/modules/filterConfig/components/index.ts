@@ -4,6 +4,8 @@ import type { FilterConfigSearchMethodParams } from '../classes/FilterConfig';
 import { FilterOption } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
+import StringFilterValueField from './_shared/string-filter/string-filter-value-field.vue';
+import StringFilterValuePreview from './_shared/string-filter/string-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
@@ -269,6 +271,9 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.Bucket]: BucketFilter,
 		[FilterOption.StopCause]: StopCauseFilter,
 		[FilterOption.MemberPriority]: RatingFromToFilter,
+		[FilterOption.Attempts]: RatingFromToFilter,
+		[FilterOption.Name]: StringFilterValueField,
+		[FilterOption.Destination]: StringFilterValueField,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -300,6 +305,9 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.Bucket]: BucketFilterPreview,
 	[FilterOption.StopCause]: StopCauseFilterPreview,
 	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
+	[FilterOption.Attempts]: RatingFromToFilterPreview,
+	[FilterOption.Name]: StringFilterValuePreview,
+	[FilterOption.Destination]: StringFilterValuePreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,

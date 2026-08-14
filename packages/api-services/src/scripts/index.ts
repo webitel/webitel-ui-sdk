@@ -3,10 +3,12 @@ import downloadFile from './downloadFile/downloadFile';
 import { FileFormat } from './downloadFile/types/fileFormat.types';
 import {
 	isRelativeDatetimeValue,
+	normalizeDatetimeRange,
 	normalizeToTimestamp,
 } from './normalizeDatetime/normalizeDatetime';
 
 export type {
+	DatetimeRangeValue,
 	NormalizeDatetimeOptions,
 	NormalizeDatetimeValueParam,
 	RelativeDatetimeRoundOption,
@@ -16,5 +18,6 @@ export {
 	downloadFile,
 	FileFormat,
 	isRelativeDatetimeValue,
+	normalizeDatetimeRange,
 	normalizeToTimestamp,
 };
