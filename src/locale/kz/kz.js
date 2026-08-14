@@ -233,6 +233,18 @@ export default {
 		joinedAt: 'Қосылған күні',
 		leavingAt: 'Шыққан күні',
 		offeringAt: 'Ұсынылған күні',
+		stopCause: {
+			stopCause: 'Аяқталу себебі',
+			abandoned: 'Абандондалды',
+			timeout: 'Таймақ',
+			cancel: 'Болдырмау',
+			success: 'Сәтті',
+			failed: 'Ақау',
+			missed: 'Жоқ',
+			expired: 'Төмендеді',
+			canceledByTimeout: 'Күту уақыты бойынша болдырылмады',
+		},
+		memberPriority: 'Приоритет',
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
 			type: {
@@ -751,6 +763,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

@@ -52,6 +52,8 @@ export const FilterOption = {
 	JoinedAt: 'joinedAt',
 	LeavingAt: 'leavingAt',
 	OfferingAt: 'offeringAt',
+	StopCause: 'stopCause',
+	MemberPriority: 'memberPriority',
 } as const;
 
 /**

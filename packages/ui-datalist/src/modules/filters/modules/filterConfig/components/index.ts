@@ -108,6 +108,8 @@ import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 import { createSkillFilterConfig } from './skill';
 import SkillFilter from './skill/skill-filter-value-field.vue';
 import SkillFilterPreview from './skill/skill-filter-value-preview.vue';
+import StopCauseFilter from './stop-cause/stop-cause-filter-value-field.vue';
+import StopCauseFilterPreview from './stop-cause/stop-cause-filter-value-preview.vue';
 import { createSupervisorFilterConfig } from './supervisor';
 import SupervisorFilter from './supervisor/supervisor-filter-value-field.vue';
 import SupervisorFilterPreview from './supervisor/supervisor-filter-value-preview.vue';
@@ -210,6 +212,8 @@ export {
 	ScoreFilterPreview,
 	SkillFilter,
 	SkillFilterPreview,
+	StopCauseFilter,
+	StopCauseFilterPreview,
 	SupervisorFilter,
 	SupervisorFilterPreview,
 	TagFilter,
@@ -263,6 +267,8 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.Bucket]: BucketFilter,
+		[FilterOption.StopCause]: StopCauseFilter,
+		[FilterOption.MemberPriority]: RatingFromToFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -292,6 +298,8 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.Bucket]: BucketFilterPreview,
+	[FilterOption.StopCause]: StopCauseFilterPreview,
+	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,

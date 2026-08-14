@@ -237,6 +237,18 @@ export default deepmerge(
 			joinedAt: 'Joined at',
 			leavingAt: 'Leaving at',
 			offeringAt: 'Offering at',
+			stopCause: {
+				stopCause: 'End cause',
+				abandoned: 'Abandoned',
+				timeout: 'Timeout',
+				cancel: 'Cancel',
+				success: 'Success',
+				failed: 'Failed',
+				missed: 'Missed',
+				expired: 'Expired',
+				canceledByTimeout: 'Canceled by timeout',
+			},
+			memberPriority: 'Priority',
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -762,6 +774,12 @@ export default deepmerge(
 				},
 				offeringAt: ({ linked }) => {
 					return linked('objects.offeringAt');
+				},
+				stopCause: ({ linked }) => {
+					return linked('objects.stopCause.stopCause');
+				},
+				memberPriority: ({ linked }) => {
+					return linked('objects.memberPriority');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');

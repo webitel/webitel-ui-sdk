@@ -233,6 +233,18 @@ export default {
 		joinedAt: 'Tham gia lúc',
 		leavingAt: 'Rời lúc',
 		offeringAt: 'Đề xuất lúc',
+		stopCause: {
+			stopCause: 'Nguyên nhân kết thúc',
+			abandoned: 'Bỏ qua',
+			timeout: 'Hết thời gian',
+			cancel: 'Hủy',
+			success: 'Thành công',
+			failed: 'Thất bại',
+			missed: 'Bỏ qua',
+			expired: 'Hết hạn',
+			canceledByTimeout: 'Đã hủy do hết thời gian chờ',
+		},
+		memberPriority: 'Ưu tiên',
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
 			type: {
@@ -753,6 +765,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

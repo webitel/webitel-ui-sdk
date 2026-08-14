@@ -233,6 +233,18 @@ export default {
 		joinedAt: 'Alăturat la',
 		leavingAt: 'Părăsit la',
 		offeringAt: 'Ofertat la',
+		stopCause: {
+			stopCause: 'Motiv sfârșit',
+			abandoned: 'Abandonat',
+			timeout: 'Timp de așteptare',
+			cancel: 'Anulat',
+			success: 'Succes',
+			failed: 'Eșuat',
+			missed: 'Pierdut',
+			expired: 'Expirat',
+			canceledByTimeout: 'Anulat din cauza timpului expirat',
+		},
+		memberPriority: 'Prioritate',
 		flow: {
 			name: 'Schemă flux | Scheme flux',
 			type: {
@@ -755,6 +767,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

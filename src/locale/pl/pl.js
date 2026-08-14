@@ -233,6 +233,18 @@ export default {
 		joinedAt: 'Dołączono',
 		leavingAt: 'Opuszczono',
 		offeringAt: 'Zaoferowano',
+		stopCause: {
+			stopCause: 'Przyczyna zakończenia',
+			abandoned: 'Porzucone',
+			timeout: 'Przekroczono czas',
+			cancel: 'Anulowane',
+			success: 'Sukces',
+			failed: 'Niepowodzenie',
+			missed: 'Przegapione',
+			expired: 'Wygasło',
+			canceledByTimeout: 'Anulowano z powodu przekroczenia czasu',
+		},
+		memberPriority: 'Priorytet',
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
 			type: {
@@ -750,6 +762,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

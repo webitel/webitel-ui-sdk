@@ -228,6 +228,18 @@ export default {
 		joinedAt: 'Unido el',
 		leavingAt: 'Abandonado el',
 		offeringAt: 'Ofertado el',
+		stopCause: {
+			stopCause: 'Causa de finalización',
+			abandoned: 'Abandonado',
+			timeout: 'Tiempo de espera',
+			cancel: 'Cancelar',
+			success: 'Éxito',
+			failed: 'Fallido',
+			missed: 'Perdido',
+			expired: 'Expirado',
+			canceledByTimeout: 'Cancelado por tiempo de espera',
+		},
+		memberPriority: 'Prioridad',
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
 			type: {
@@ -749,6 +761,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

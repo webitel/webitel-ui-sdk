@@ -229,6 +229,18 @@ export default {
 		joinedAt: 'Присоединено',
 		leavingAt: 'Покинуто',
 		offeringAt: 'Предложено',
+		stopCause: {
+			stopCause: 'Причина прекращения',
+			abandoned: 'Потерянный',
+			timeout: 'Тайм-аут',
+			cancel: 'Отменённый',
+			success: 'Успешный',
+			failed: 'Неудачный',
+			missed: 'Пропущенный',
+			expired: 'Истекший',
+			canceledByTimeout: 'Отменен по тайм-ауту',
+		},
+		memberPriority: 'Приоритет',
 		flow: {
 			name: 'Схема | Схемы',
 			type: {
@@ -746,6 +758,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

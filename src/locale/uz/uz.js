@@ -233,6 +233,18 @@ export default {
 		joinedAt: "Qo'shilgan sana",
 		leavingAt: 'Chiqilgan sana',
 		offeringAt: 'Taklif qilingan sana',
+		stopCause: {
+			stopCause: 'Tugatish sababi',
+			abandoned: 'Abandoned',
+			timeout: 'Vaqt',
+			cancel: 'Bekor qilish',
+			success: 'Muvaffaqiyatli',
+			failed: 'Yaroqsiz',
+			missed: 'Bekor qilindi',
+			expired: 'Yaroqli',
+			canceledByTimeout: 'Vaqt tugashi sababli bekor qilindi',
+		},
+		memberPriority: 'Prioritet',
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
 			type: {
@@ -754,6 +766,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
