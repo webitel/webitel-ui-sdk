@@ -65,17 +65,18 @@ const chip = {
         .p-chip--width-constrained {
         	max-width: ${dt('chip.maxWidth')};
         }
-        
-        .p-chip--width-constrained .wt-chip__label {
-					overflow: hidden;
-					white-space: nowrap;
-					text-overflow: ellipsis;
-				}
 
         .wt-chip__label {
 					display: flex;
 					align-items: center;
 					gap: var(--spacing-xs);
+				}
+
+        .p-chip--width-constrained .wt-chip__label {
+					display: block;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 				}
         `,
 };
