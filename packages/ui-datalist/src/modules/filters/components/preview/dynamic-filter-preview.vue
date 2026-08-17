@@ -64,12 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-	WtChip,
-	WtIconBtn,
-	WtLoader,
-	WtPopover,
-} from '@webitel/ui-sdk/components';
+import { WtChip, WtLoader, WtPopover } from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
 
 import { FilterInitParams } from '../../classes/Filter';
