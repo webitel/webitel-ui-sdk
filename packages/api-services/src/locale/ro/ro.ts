@@ -1,5 +1,4 @@
-const ACTIVITY_TYPE_ALREADY_EXISTS =
-	'Există deja un tip de activitate cu acest nume' as const;
+import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
@@ -14,11 +13,14 @@ export default {
 		},
 		sqlstore: {
 			onlineSkillsStore: {
-				update: {
-					alreadyExists: ACTIVITY_TYPE_ALREADY_EXISTS,
-				},
 				create: {
-					alreadyExists: ACTIVITY_TYPE_ALREADY_EXISTS,
+					alreadyExists: 'Există deja un tip de activitate cu acest nume',
+				},
+				update: {
+					alreadyExists: ({ linked }: MessageContext) =>
+						linked(
+							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
+						),
 				},
 			},
 		},
