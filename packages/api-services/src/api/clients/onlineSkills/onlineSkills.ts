@@ -14,6 +14,7 @@ import {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
@@ -90,6 +91,7 @@ const addOnlineSkill = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -118,6 +120,7 @@ const updateOnlineSkill = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
