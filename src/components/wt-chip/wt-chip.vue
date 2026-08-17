@@ -18,7 +18,7 @@
 				icon="close--filled" 
 				:size="ComponentSize.SM"
 				:color="ChipColor.ON_PRIMARY"
-				@click="emit('remove')"
+				@click="emit('remove', $event)"
 			/>
     </template>
   </p-chip>
@@ -53,7 +53,9 @@ withDefaults(defineProps<WtProps>(), {
 });
 
 const emit = defineEmits<{
-	remove: [];
+	remove: [
+		event: MouseEvent,
+	];
 }>();
 </script>
 
