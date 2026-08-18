@@ -7,7 +7,6 @@
     class="wt-status-select"
     data-key="value"
 		:size="ComponentSize.SM"
-    @closed="closedHandler"
     @update:model-value="inputHandler"
   >
     <template #value>
@@ -55,9 +54,6 @@ const emit = defineEmits<{
 	change: [
 		value: string,
 	];
-	closed: [
-		event: Event,
-	];
 }>();
 
 const { t } = useI18n();
@@ -98,9 +94,5 @@ const duration = computed<string>(() => {
 
 function inputHandler(value: StatusOption) {
 	emit('change', value.value);
-}
-
-function closedHandler(event: Event) {
-	emit('closed', event);
 }
 </script>

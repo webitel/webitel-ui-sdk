@@ -12,8 +12,7 @@
 			:key="status"
       :status="status"
       :status-duration="statusDuration"
-      @closed="handleClosed"
-      @change="handleSelectInput"
+      @change="handleStatus"
       class="wt-cc-agent-status-select__status-select"
     />
     <activity-type-popup
@@ -49,7 +48,6 @@ import type { LookupOption } from '../../../types';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
 import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
-import { REPEATABLE_AGENT_STATUSES } from '../types/RepeatableAgentStatus.enum';
 import type { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
@@ -90,7 +88,6 @@ const { t } = useI18n();
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
 const error = ref(null);
-const chosenStatus = ref('');
 
 const isActivityTypePopup = ref(false);
 const activityTypes = ref<ActivityType[]>([]);
@@ -112,7 +109,6 @@ function openPauseCausePopup() {
 
 function closePauseCausePopup() {
 	isPauseCausePopup.value = false;
-	chosenStatus.value = '';
 }
 
 async function loadPauseCauses(): Promise<void> {
@@ -129,7 +125,6 @@ function openActivityTypePopup() {
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
 	callCenterModeChanging.value = false;
-	chosenStatus.value = '';
 }
 
 async function loadActivityTypes(): Promise<void> {
@@ -204,26 +199,6 @@ async function handleStatus(status: string) {
 	await changeStatus({
 		status,
 	});
-}
-
-function handleSelectInput(newStatus: string) {
-	handleStatus(newStatus);
-	chosenStatus.value = newStatus;
-	// we need to save changes which come from input, because sometimes we want
-	// to choose 'pause/online' repeatedly and have to check the previous status
-}
-
-function handleClosed(event: { value: string }) {
-	// sometimes we want to choose 'pause/online' repeatedly
-	// but 'change' event from wt-status-select can't give us the same value,
-	// in this case we have to use value from 'closed' event to choose the status again
-	if (
-		(event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
-		REPEATABLE_AGENT_STATUSES.includes(event.value)
-	) {
-		// and only for repeatable statuses
-		handleStatus(event.value);
-	}
 }
 
 function handleActivityTypeInput(activityType: ActivityType) {
