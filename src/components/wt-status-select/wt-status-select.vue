@@ -76,18 +76,12 @@ const selectedOption = computed<StatusOption | undefined>(() =>
 );
 
 const availableOptions = computed<StatusOption[]>(() =>
-	statusOptions.value.reduce<StatusOption[]>((options, opt) => {
-		// PAUSE option is always passed
-		if (
-			(props.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
-			opt.value === AgentStatus.BREAK_OUT
-		) {
-			// skip breakout option
-			return options;
-		}
-		options.push(opt);
-		return options;
-	}, []),
+	statusOptions.value.filter(
+		(opt) =>
+			opt.value !== AgentStatus.BREAK_OUT &&
+			(opt.value !== AgentStatus.OFFLINE ||
+				props.status !== AgentStatus.OFFLINE),
+	),
 );
 
 const duration = computed<string>(() => {

@@ -49,6 +49,7 @@ import type { LookupOption } from '../../../types';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
 import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
+import { REPEATABLE_AGENT_STATUSES } from '../types/RepeatableAgentStatus.enum';
 import type { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
@@ -207,18 +208,18 @@ function handleSelectInput(newStatus: string) {
 	handleStatus(newStatus);
 	chosenStatus.value = newStatus;
 	// we need to save changes which come from input, because sometimes we want
-	// to choose 'pause' repeatedly and have to check the previous status
+	// to choose 'pause/online' repeatedly and have to check the previous status
 }
 
 function handleClosed(event: { value: string }) {
-	// sometimes we want to choose 'pause' repeatedly
+	// sometimes we want to choose 'pause/online' repeatedly
 	// but 'change' event from wt-status-select can't give us the same value,
-	// in this case we have to use value from 'closed' event to choose 'pause' status
+	// in this case we have to use value from 'closed' event to choose the status again
 	if (
 		(event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
-		event.value === AgentStatus.PAUSE
+		REPEATABLE_AGENT_STATUSES.includes(event.value)
 	) {
-		// and only for 'pause' status
+		// and only for repeatable statuses
 		handleStatus(event.value);
 	}
 }
