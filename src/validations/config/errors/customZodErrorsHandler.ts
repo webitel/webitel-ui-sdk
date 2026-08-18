@@ -3,7 +3,7 @@ import type { z } from 'zod/v4';
 
 import { isEmpty } from '../../../scripts';
 
-const isMissingValue = (value) => {
+const isMissingValue = (value: unknown) => {
 	if (typeof value === 'number') return false;
 	return isEmpty(value) as boolean;
 };
@@ -21,9 +21,21 @@ export const customZodErrorsHandler =
 			case 'invalid_union':
 				return handleInvalidUnion(issue);
 			case 'custom':
-				return issue.message || t('validation.invalid');
+				return handleCustom(issue);
 			default:
 				return issue.code;
+		}
+
+		/**
+		 * Schemas outside the app (`@webitel/api-services/validations`) cannot
+		 * translate, so a custom rule reports its message key through
+		 * `params.i18nKey` — see the `i18nIssue` helper there. Anything else falls
+		 * back to zod's own message.
+		 */
+		function handleCustom(issue: z.core.$ZodRawIssue<z.core.$ZodIssueCustom>) {
+			const key = issue.params?.i18nKey;
+
+			return typeof key === 'string' ? t(`validation.${key}`) : undefined;
 		}
 
 		function handleTooSmall(
@@ -83,7 +95,7 @@ export const customZodErrorsHandler =
 				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidType>
 				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidValue>,
 		) {
-			if (isEmpty(issue.input)) {
+			if (isMissingValue(issue.input)) {
 				return t('validation.required');
 			}
 

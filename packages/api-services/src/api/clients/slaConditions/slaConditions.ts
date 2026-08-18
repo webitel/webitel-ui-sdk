@@ -15,8 +15,14 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const getConditionsList = async ({ parentId, ...rest }) => {
+const getConditionsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListSLAConditionsQueryParams,
 	);
@@ -37,16 +43,19 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 	]);
 
 	try {
-		const response = await getSlaconditions().listSLAConditions(parentId, {
-			page,
-			size,
-			fields,
-			sort,
-			id,
-			q,
-			slaConditionId,
-			priorityId,
-		});
+		const response = await getSlaconditions().listSLAConditions(
+			String(parentId),
+			{
+				page,
+				size,
+				fields,
+				sort,
+				id,
+				q,
+				slaConditionId,
+				priorityId,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -63,11 +72,20 @@ const getConditionsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const getCondition = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => item.slaCondition;
+const getCondition = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: ApiId;
+	itemId: ApiId;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => item.slaCondition;
 
 	try {
-		const response = await getSlaconditions().locateSLACondition(parentId, id);
+		const response = await getSlaconditions().locateSLACondition(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -79,7 +97,13 @@ const getCondition = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const addCondition = async ({ itemInstance, parentId }) => {
+const addCondition = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: ApiId;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		CreateSLAConditionBody,
 	);
@@ -91,7 +115,7 @@ const addCondition = async ({ itemInstance, parentId }) => {
 
 	try {
 		const response = await getSlaconditions().createSLACondition(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -104,7 +128,13 @@ const addCondition = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const updateCondition = async ({ itemInstance, itemId: id }) => {
+const updateCondition = async ({
+	itemInstance,
+	itemId: id,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		UpdateSLAConditionBody,
 	);
@@ -116,8 +146,8 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await getSlaconditions().updateSLACondition(
-			itemInstance.slaId,
-			id,
+			String(itemInstance.slaId),
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -130,9 +160,18 @@ const updateCondition = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCondition = async ({ id, parentId }) => {
+const deleteCondition = async ({
+	id,
+	parentId,
+}: {
+	id: ApiId;
+	parentId: ApiId;
+}) => {
 	try {
-		const response = await getSlaconditions().deleteSLACondition(parentId, id);
+		const response = await getSlaconditions().deleteSLACondition(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -141,7 +180,7 @@ const deleteCondition = async ({ id, parentId }) => {
 	}
 };
 
-const getLookup = async (params) =>
+const getLookup = async (params: Parameters<typeof getConditionsList>[0]) =>
 	getConditionsList({
 		...params,
 		fields: params.fields || [

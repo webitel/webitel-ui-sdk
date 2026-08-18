@@ -133,12 +133,12 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import PDatepicker, {
 	DatePickerEmitsOptions,
 	DatePickerProps,
 } from 'primevue/datepicker';
-import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { computed, nextTick, toRefs, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {
@@ -174,7 +174,6 @@ interface Props extends DatePickerProps {
 const props = withDefaults(defineProps<Props>(), {
 	labelProps: () => ({}),
 	customValidators: () => [],
-	regleValidation: null,
 });
 
 const emit = defineEmits<DatePickerEmitsOptions>();

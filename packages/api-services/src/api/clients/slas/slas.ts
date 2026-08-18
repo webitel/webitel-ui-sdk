@@ -15,8 +15,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const getSlasList = async (params) => {
+const getSlasList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(ListSLAsQueryParams);
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
@@ -48,11 +55,11 @@ const getSlasList = async (params) => {
 	}
 };
 
-const getSla = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.sla;
+const getSla = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.sla;
 
 	try {
-		const response = await getSlas().locateSLA(id);
+		const response = await getSlas().locateSLA(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -64,7 +71,7 @@ const getSla = async ({ itemId: id }) => {
 	}
 };
 
-const addSla = async ({ itemInstance }) => {
+const addSla = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateSLABody);
 
 	const item = applyTransform(itemInstance, [
@@ -83,7 +90,7 @@ const addSla = async ({ itemInstance }) => {
 	}
 };
 
-const updateSla = async ({ itemInstance, itemId: id }) => {
+const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateSLABody);
 
 	const item = applyTransform(itemInstance, [
@@ -92,7 +99,7 @@ const updateSla = async ({ itemInstance, itemId: id }) => {
 	]);
 
 	try {
-		const response = await getSlas().updateSLA(id, item);
+		const response = await getSlas().updateSLA(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -103,9 +110,9 @@ const updateSla = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteSla = async ({ id }) => {
+const deleteSla = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getSlas().deleteSLA(id);
+		const response = await getSlas().deleteSLA(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -114,7 +121,7 @@ const deleteSla = async ({ id }) => {
 	}
 };
 
-const getSlasLookup = (params) =>
+const getSlasLookup = (params: Parameters<typeof getSlasList>[0]) =>
 	getSlasList({
 		...params,
 		fields: params.fields || [
