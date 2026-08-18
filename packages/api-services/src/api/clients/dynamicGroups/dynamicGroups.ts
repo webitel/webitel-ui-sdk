@@ -22,7 +22,7 @@ const dynamicGroupFieldsToSend = getShallowFieldsToSendFromZodSchema(
 	UpdateDynamicGroupBody,
 );
 
-const appendDynamicType = (item) => ({
+const appendDynamicType = (item: Record<string, unknown>) => ({
 	...item,
 	type: item.type ?? ContactsGroupType.Dynamic,
 });

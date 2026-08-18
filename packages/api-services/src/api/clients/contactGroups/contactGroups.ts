@@ -19,17 +19,26 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type {
+	AddItemParams,
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const baseUrl = '/contacts/groups';
 
 const groupFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateGroupBody);
 
-const appendStaticType = (item) => ({
+const appendStaticType = (item: ApiParams) => ({
 	...item,
 	type: item.type ?? ContactsGroupType.Static,
 });
 
-const getContactGroupsList = async (params) => {
+const getContactGroupsList = async (params: ApiParams) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListGroupsQueryParams,
 	);
@@ -73,11 +82,11 @@ const getContactGroupsList = async (params) => {
 	}
 };
 
-const getContactGroup = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.group;
+const getContactGroup = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: { group: unknown }) => item.group;
 
 	try {
-		const response = await getGroups().locateGroup(id);
+		const response = await getGroups().locateGroup(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -89,7 +98,7 @@ const getContactGroup = async ({ itemId: id }) => {
 	}
 };
 
-const addStaticContactGroup = async ({ itemInstance }) => {
+const addStaticContactGroup = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateGroupBody);
 
 	const item = applyTransform(itemInstance, [
@@ -109,7 +118,13 @@ const addStaticContactGroup = async ({ itemInstance }) => {
 	}
 };
 
-const addContactsToGroups = async ({ contactIds, groupIds }) => {
+const addContactsToGroups = async ({
+	contactIds,
+	groupIds,
+}: {
+	contactIds: ApiId[];
+	groupIds: ApiId[];
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		AddContactsToGroupsBody,
 	);
@@ -136,10 +151,16 @@ const addContactsToGroups = async ({ contactIds, groupIds }) => {
 	}
 };
 
-const removeContactsFromGroup = async ({ id, contactIds }) => {
+const removeContactsFromGroup = async ({
+	id,
+	contactIds,
+}: {
+	id: ApiId;
+	contactIds: ApiId[];
+}) => {
 	try {
-		const response = await getGroups().removeContactsFromGroup(id, {
-			contactIds,
+		const response = await getGroups().removeContactsFromGroup(String(id), {
+			contactIds: contactIds.map(String),
 		});
 		return applyTransform(response.data, []);
 	} catch (err) {
@@ -149,14 +170,17 @@ const removeContactsFromGroup = async ({ id, contactIds }) => {
 	}
 };
 
-const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
+const updateStaticContactGroup = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(groupFieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getGroups().updateGroup(id, item);
+		const response = await getGroups().updateGroup(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			appendStaticType,
@@ -168,14 +192,14 @@ const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchStaticContactGroup = async ({ id, changes }) => {
+const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
 		sanitize(groupFieldsToSend),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getGroups().updateGroup2(id, item);
+		const response = await getGroups().updateGroup2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			appendStaticType,
@@ -187,9 +211,9 @@ const patchStaticContactGroup = async ({ id, changes }) => {
 	}
 };
 
-const deleteStaticContactGroup = async ({ id }) => {
+const deleteStaticContactGroup = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getGroups().deleteGroup(id);
+		const response = await getGroups().deleteGroup(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -198,7 +222,7 @@ const deleteStaticContactGroup = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getContactGroupsList>[0]) =>
 	getContactGroupsList({
 		...params,
 		fields: params.fields || [

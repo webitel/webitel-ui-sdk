@@ -16,7 +16,7 @@ export const customZodErrorsHandler =
 			case 'invalid_union':
 				return t('validation.invalid');
 			case 'custom':
-				return issue.message || t('validation.invalid');
+				return handleCustom(issue);
 			default:
 				return issue.code;
 		}
