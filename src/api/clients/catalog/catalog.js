@@ -14,7 +14,7 @@ const configuration = getDefaultOpenAPIConfig();
 
 const catalogService = new CatalogApiFactory(configuration, '', instance);
 
-const getChatMessagesList = async ({ chatId }) => {
+const getChatMessagesList = async ({ chatId, offsetDate, limit }) => {
 	const mergeMessagesData = ({ messages, peers }) => {
 		if (!messages) return [];
 		return messages.map(({ from, ...message }) => {
@@ -26,8 +26,13 @@ const getChatMessagesList = async ({ chatId }) => {
 	};
 
 	try {
-		const response = await catalogService.getHistory(chatId);
-		const { messages, peers } = applyTransform(response.data, [
+		const response = await catalogService.getHistory(
+			chatId,
+			undefined,
+			offsetDate,
+			limit,
+		);
+		const { messages, peers, next } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
 		return {
@@ -35,12 +40,14 @@ const getChatMessagesList = async ({ chatId }) => {
 				{
 					messages,
 					peers,
+					next,
 				},
 				[
 					mergeMessagesData,
 				],
 			),
 			peers,
+			next,
 		};
 	} catch (err) {
 		throw applyTransform(err, [
