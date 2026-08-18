@@ -13,6 +13,8 @@ export const customZodErrorsHandler =
 			case 'invalid_value':
 			case 'invalid_type':
 				return handleInvalid(issue);
+			case 'invalid_union':
+				return t('validation.invalid');
 			case 'custom':
 				return handleCustom(issue);
 			default:
