@@ -417,6 +417,7 @@ export default {
 				[AdminSections.Configuration]: 'Configuración',
 				[AdminSections.GlobalVariables]: 'Variables globales',
 				[AdminSections.QuickReplies]: 'Respuestas rápidas',
+				[AdminSections.ActivityTypes]: 'Tipos de actividad',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -428,6 +429,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Las horas deben estar entre 00 y 23',
+		timerangeStartLessThanEnd:
+			'La hora "Desde" no puede ser posterior a "Hasta"',
+		timerangeNotIntersect:
+			'Los intervalos de tiempo del mismo día no pueden superponerse',
 		required: 'Campo requerido',
 		numeric: 'Debe ser numérico',
 		email: 'Debe parecer un correo electrónico',
@@ -478,6 +484,8 @@ export default {
 		nameAlreadyInUse: 'Este nombre ya está en uso',
 		phoneNumberSymbolsValidator:
 			"El número solo puede contener letras (a-z, A-Z), números (0-9) y los símbolos: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'La contraseña no puede contener símbolos especiales ni espacios',
 		loginValidator: () =>
 			`Introduzca el inicio de sesión en el formato nombre${'@'}dominio`,
 	},
@@ -636,6 +644,10 @@ export default {
 				message:
 					'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
 			},
+			activityTypePopup: {
+				title: 'Selecciona el tipo de actividad',
+				defaultOption: 'Estándar en línea',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Su archivo PDF se está creando…',
@@ -652,6 +664,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Este mes',
 				[RelativeDatetimeValue.Custom]: 'Rango de fechas personalizado',
 			},
+			andMore: 'y {count} más',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} un ${linked(
 					'reusable.filter',

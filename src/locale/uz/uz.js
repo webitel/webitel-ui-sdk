@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Konfiguratsiya',
 				[AdminSections.GlobalVariables]: "Global o'zgaruvchilar",
 				[AdminSections.QuickReplies]: 'Tezkor javoblar',
+				[AdminSections.ActivityTypes]: 'Faoliyat turlari',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -435,6 +436,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: "Soatlar 00 dan 23 gacha bo'lishi kerak",
+		timerangeStartLessThanEnd:
+			'"Dan" vaqti "Gacha" vaqtidan kech bo\'lishi mumkin emas',
+		timerangeNotIntersect:
+			"Bir kundagi vaqt oralig'lari bir-biriga kesilib o'tmasligi kerak",
 		required: "Maydon to'ldirilishi shart",
 		numeric: "Raqam bo'lishi kerak",
 		email: "Email ko'rinishida bo'lishi kerak",
@@ -485,6 +491,8 @@ export default {
 		nameAlreadyInUse: 'Ushbu nom allaqachon mavjud',
 		phoneNumberSymbolsValidator:
 			"Raqamda faqat harflar (a-z, A-Z), raqamlar (0-9) va quyidagi belgilar bo'lishi mumkin: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			"Parol maxsus belgilar va bo'sh joylarni o'z ichiga olishi mumkin emas",
 		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
 	},
 	webitelUI: {
@@ -641,6 +649,10 @@ export default {
 				message:
 					'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
 			},
+			activityTypePopup: {
+				title: 'Faoliyat turini tanlang',
+				defaultOption: 'Standart onlayn',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Sizning PDF faylingiz yaratilmoqda…',
@@ -657,6 +669,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Ushbu oy',
 				[RelativeDatetimeValue.Custom]: "Boshqa sana oralig'i",
 			},
+			andMore: 'va yana {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',

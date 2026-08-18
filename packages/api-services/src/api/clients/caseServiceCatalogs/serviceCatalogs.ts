@@ -16,6 +16,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const fieldsToSend = [
 	'id',
@@ -49,7 +56,7 @@ const servicesFieldsToSend = [
 	'catalog_id',
 ];
 
-const getCatalogsList = async (params) => {
+const getCatalogsList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCatalogsQueryParams,
 	);
@@ -98,11 +105,11 @@ const getCatalogsList = async (params) => {
 	}
 };
 
-const getCatalog = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.catalog;
+const getCatalog = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.catalog;
 
 	try {
-		const response = await getCatalogs().locateCatalog(id, {
+		const response = await getCatalogs().locateCatalog(String(id), {
 			fields: fieldsToSend,
 			subFields: servicesFieldsToSend,
 		});
@@ -117,7 +124,7 @@ const getCatalog = async ({ itemId: id }) => {
 	}
 };
 
-const addCatalog = async ({ itemInstance }) => {
+const addCatalog = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCatalogBody);
 
 	const item = applyTransform(itemInstance, [
@@ -136,7 +143,10 @@ const addCatalog = async ({ itemInstance }) => {
 	}
 };
 
-const updateCatalog = async ({ itemInstance, itemId: id }) => {
+const updateCatalog = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCatalogBody);
 
 	const item = applyTransform(itemInstance, [
@@ -144,7 +154,7 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getCatalogs().updateCatalog(id, item);
+		const response = await getCatalogs().updateCatalog(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -155,7 +165,7 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchCatalog = async ({ itemInstance, itemId: id }) => {
+const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -166,7 +176,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getCatalogs().updateCatalog2(id, item);
+		const response = await getCatalogs().updateCatalog2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -177,9 +187,11 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCatalog = async ({ id }) => {
+const deleteCatalog = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getCatalogs().deleteCatalog(id);
+		const response = await getCatalogs().deleteCatalog([
+			String(id),
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Configurație',
 				[AdminSections.GlobalVariables]: 'Variabile globale',
 				[AdminSections.QuickReplies]: 'Răspunsuri rapide',
+				[AdminSections.ActivityTypes]: 'Tipuri de activitate',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -435,6 +436,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Orele trebuie să fie între 00 și 23',
+		timerangeStartLessThanEnd:
+			'Ora "De la" nu poate fi mai târzie decât "Până la"',
+		timerangeNotIntersect:
+			'Intervalele de timp din aceeași zi nu se pot suprapune',
 		required: 'Câmpul este obligatoriu',
 		numeric: 'Trebuie să fie numeric',
 		email: 'Trebuie să arate ca un email',
@@ -485,6 +491,8 @@ export default {
 		nameAlreadyInUse: 'Acest nume este deja folosit',
 		phoneNumberSymbolsValidator:
 			"Numărul poate conține doar litere (a-z, A-Z), cifre (0-9) și simbolurile: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Parola nu poate conține simboluri speciale sau spații',
 		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
 	},
 	webitelUI: {
@@ -642,6 +650,10 @@ export default {
 				message:
 					'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
 			},
+			activityTypePopup: {
+				title: 'Selectați tipul de activitate',
+				defaultOption: 'Standard Online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Fișierul dvs. PDF este în curs de creare…',
@@ -658,6 +670,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Această lună',
 				[RelativeDatetimeValue.Custom]: 'Interval personalizat',
 			},
+			andMore: 'și încă {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} un ${linked(
 					'reusable.filter',

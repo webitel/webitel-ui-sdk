@@ -9,11 +9,12 @@
 		:custom-validators="customValidators"
     @update:model-value="handleInput"
     @keyup="handleKeyup"
+    @focus="emit('focus', $event)"
   >
     <template #prefix>
       <wt-icon
         :color="invalidColorProvider"
-        :icon="searchMode?.icon || 'search'"
+        :icon="(typeof searchMode === 'object' && searchMode?.icon) || 'search'"
       />
     </template>
 
@@ -70,9 +71,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, toRefs } from 'vue';
+import { computed, type PropType, toRefs } from 'vue';
+
+export interface SearchMode {
+	value?: string;
+	icon?: string;
+	[key: string]: unknown;
+}
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type { CompatCustomValidator } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({
@@ -80,7 +88,7 @@ const props = defineProps({
 		type: Object,
 	},
 	customValidators: {
-		type: Array,
+		type: Array as PropType<CompatCustomValidator[]>,
 		default: () => [],
 	},
 	/**
@@ -104,10 +112,10 @@ const props = defineProps({
 		type: [
 			String,
 			Object,
-		],
+		] as PropType<string | SearchMode>,
 	},
 	searchModeOptions: {
-		type: Array,
+		type: Array as PropType<SearchMode[]>,
 		default: () => [],
 	},
 	/**
@@ -151,6 +159,12 @@ const emit = defineEmits<{
 	'change:search-mode': [
 		string | object,
 	];
+	/**
+	 * @param event - native focus event from the underlying input
+	 */
+	focus: [
+		FocusEvent,
+	];
 }>();
 
 const { v, customValidators } = toRefs(props);
@@ -168,18 +182,18 @@ const isSuffixShow = computed(
 	() => props.value || props.searchMode || props.hint,
 );
 
-const search = debounce((value) => {
+const search = debounce((value: string) => {
 	emit('search', value);
 }, 1000);
 
-function handleInput(value) {
+function handleInput(value: string) {
 	emit('input', value);
 	search(value);
 }
 
-function handleKeyup(event) {
+function handleKeyup(event: KeyboardEvent) {
 	if (event.key === 'Enter') {
-		search(event.target.value);
+		search((event.target as HTMLInputElement).value);
 		event.preventDefault();
 	} else if (event.key === 'Esc') {
 		handleInput('');
@@ -187,7 +201,7 @@ function handleKeyup(event) {
 	}
 }
 
-function updateSearchMode({ option }) {
+function updateSearchMode({ option }: { option: SearchMode }) {
 	emit('update:search-mode', option);
 	emit('change:search-mode', option);
 }

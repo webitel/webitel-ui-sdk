@@ -127,6 +127,10 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseCause}`,
 		},
+		[AdminSections.ActivityTypes]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ActivityTypes}`,
+		},
 		[AdminSections.Media]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,
@@ -303,14 +307,15 @@ export default class ApplicationsAccess {
 	}
 
 	// minify schema for API sending
-	static minify(access) {
-		const rmEmptyKeys = (obj) => {
+	static minify(access: Record<string, unknown>) {
+		const rmEmptyKeys = (obj: Record<string, unknown>) => {
 			Object.keys(obj).forEach((key) => {
 				if (!obj[key] || key === '_locale') delete obj[key];
 				if (typeof obj[key] === 'object') {
-					rmEmptyKeys(obj[key]);
+					const nested = obj[key] as Record<string, unknown>;
+					rmEmptyKeys(nested);
 
-					if (!Object.keys(obj[key]).length) delete obj[key];
+					if (!Object.keys(nested).length) delete obj[key];
 				}
 			});
 			return obj;
@@ -319,8 +324,13 @@ export default class ApplicationsAccess {
 	}
 
 	// restore minified schema from API response
-	static restore(access) {
-		return deepmerge(applicationsAccess(false), access);
+	static restore(
+		access: PartialDeep<ApplicationsAccessSchema>,
+	): ApplicationsAccessSchema {
+		return deepmerge(
+			applicationsAccess(false),
+			access,
+		) as ApplicationsAccessSchema;
 		// return deepmerge(access, applicationsAccess(false));
 	}
 

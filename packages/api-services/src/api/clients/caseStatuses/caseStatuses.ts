@@ -1,5 +1,4 @@
 import { StatusesApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,13 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,7 +31,7 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getStatusesList = async (params) => {
+const getStatusesList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -67,13 +73,16 @@ const getStatusesList = async (params) => {
 	}
 };
 
-const getStatus = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getStatus = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.status;
 	};
 
 	try {
-		const response = await statusesService.locateStatus(id, fieldsToSend);
+		const response = await statusesService.locateStatus(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -85,7 +94,7 @@ const getStatus = async ({ itemId: id }) => {
 	}
 };
 
-const addStatus = async ({ itemInstance }) => {
+const addStatus = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -103,14 +112,14 @@ const addStatus = async ({ itemInstance }) => {
 	}
 };
 
-const updateStatus = async ({ itemInstance, itemId: id }) => {
+const updateStatus = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await statusesService.updateStatus(id, item);
+		const response = await statusesService.updateStatus(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -121,9 +130,9 @@ const updateStatus = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteStatus = async ({ id }) => {
+const deleteStatus = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await statusesService.deleteStatus(id);
+		const response = await statusesService.deleteStatus(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -132,7 +141,9 @@ const deleteStatus = async ({ id }) => {
 	}
 };
 
-const getStatusesLookup = async (params) =>
+const getStatusesLookup = async (
+	params: Parameters<typeof getStatusesList>[0],
+) =>
 	getStatusesList({
 		...params,
 		fields: params.fields || [

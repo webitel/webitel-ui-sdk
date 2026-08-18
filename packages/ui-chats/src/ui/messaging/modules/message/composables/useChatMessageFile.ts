@@ -15,27 +15,27 @@ export function useChatMessageFile(
 		return fileRef.value?.streamUrl || fileRef.value?.url;
 	});
 
+	const isMediaType = (value: string | undefined) => {
+		return !!(value?.includes('audio') || value?.includes('video'));
+	};
+
 	const image = computed(() => {
 		const isImage = fileType.value?.includes('image');
 		const isHEIC = fileType.value?.includes('heic');
 
 		if (isHEIC) return null;
 
-		return isImage && fileRef.value; //https://webitel.atlassian.net/browse/WTEL-6268
-	});
-	const media = computed(() => {
-		return (
-			(isMediaType(fileType.value) || isMediaType(fileSrc.value)) &&
-			fileRef.value
-		);
+		return isImage ? fileRef.value : null;
 	});
 
-	const isMediaType = (value: string | undefined) => {
-		return !!(value?.includes('audio') || value?.includes('video'));
-	};
+	const media = computed(() => {
+		return isMediaType(fileType.value) || isMediaType(fileSrc.value)
+			? fileRef.value
+			: null;
+	});
 
 	const document = computed(() => {
-		return !media.value && !image.value && fileRef.value;
+		return !media.value && !image.value ? fileRef.value : null;
 	});
 
 	return {

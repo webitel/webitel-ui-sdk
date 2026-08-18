@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { NavigationGuard } from 'vue-router';
+import type { NavigationGuard, RouteLocationNormalized } from 'vue-router';
 
 import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
 import type { SpecialGlobalAction, WebitelLicense } from '../enums';
@@ -12,7 +12,6 @@ import {
 	makeScopeAccessMap,
 	makeSectionVisibilityMap,
 	shouldUseGlobalCrudActionAccessAsChecksSource,
-	shouldUseGlobalSpecialActionAccessAsChecksSource,
 } from '../scripts/utils';
 import type {
 	AppVisibilityMap,
@@ -48,23 +47,22 @@ export const createUserAccessStore = ({
 
 		const hasAccess = (
 			action: CrudAction | SpecialGlobalAction,
-			object: WtObject,
+			object?: WtObject,
 		) => {
 			/* scope exceptions handling */
 
-			if (shouldUseGlobalSpecialActionAccessAsChecksSource(object)) {
-				return hasSpecialGlobalActionAccess(
-					wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object],
-				);
+			const specialAction =
+				object && wtObjectsWithGlobalSpecialActionAccessAsChecksSource[object];
+			if (specialAction) {
+				return hasSpecialGlobalActionAccess(specialAction);
 			}
 
-			if (shouldUseGlobalCrudActionAccessAsChecksSource(object)) {
+			if (object && shouldUseGlobalCrudActionAccessAsChecksSource(object)) {
 				return hasGlobalCrudActionAccess(action as CrudAction);
 			}
 
-			const allowScopeAccess = scopeAccess.value
-				.get(object)
-				?.get(action as CrudAction);
+			const allowScopeAccess =
+				object && scopeAccess.value.get(object)?.get(action as CrudAction);
 			return !!allowScopeAccess;
 		};
 
@@ -85,7 +83,7 @@ export const createUserAccessStore = ({
 		};
 
 		const hasApplicationVisibility = (app: WtApplication) => {
-			return appVisibilityAccess.value.get(app);
+			return !!appVisibilityAccess.value.get(app);
 		};
 
 		const hasSectionVisibility = ({
@@ -102,7 +100,7 @@ export const createUserAccessStore = ({
 			const objectOfSection = object; /*castUiSectionToWtObject(section)*/
 			const hasSectionVisibilityAccess = (section: UiSection) => {
 				const fullSectionName: FullUiSectionName = `${appOfSection}/${section}`;
-				return sectionVisibilityAccess.value.get(fullSectionName);
+				return !!sectionVisibilityAccess.value.get(fullSectionName);
 			};
 
 			const allowAppVisibility = hasApplicationVisibility(appOfSection);
@@ -117,16 +115,18 @@ export const createUserAccessStore = ({
 				.toReversed()
 				.find(({ meta }) => meta.WtApplication)?.meta?.WtApplication as
 				| WtApplication
-				| ((RouteLocationNormalized) => WtApplication);
+				| ((route: RouteLocationNormalized) => WtApplication);
 
 			/* find last because "matched" has top=>bottom routes order */
 			let uiSection = to.matched.toReversed().find(({ meta }) => meta.UiSection)
 				?.meta?.UiSection as
 				| UiSection
-				| ((RouteLocationNormalized) => UiSection);
+				| ((route: RouteLocationNormalized) => UiSection);
 			/* find last because "matched" has top=>bottom routes order */
 			let wtObject = to.matched.toReversed().find(({ meta }) => meta.UiSection)
-				?.meta?.WtObject as WtObject | ((RouteLocationNormalized) => WtObject);
+				?.meta?.WtObject as
+				| WtObject
+				| ((route: RouteLocationNormalized) => WtObject);
 
 			// if, then compute fn
 			if (typeof wtApplication === 'function') {

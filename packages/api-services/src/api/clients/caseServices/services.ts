@@ -18,8 +18,22 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+} from '../_shared/types';
 
-const getServicesList = async ({ parentId, rootId, ...rest }) => {
+const getServicesList = async ({
+	parentId,
+	rootId,
+	...rest
+}: {
+	parentId?: ApiId;
+	rootId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListServicesQueryParams,
 	);
@@ -43,7 +57,7 @@ const getServicesList = async ({ parentId, rootId, ...rest }) => {
 			sort,
 			id,
 			q,
-			rootId: rootId ?? parentId,
+			rootId: String(rootId ?? parentId),
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -61,7 +75,7 @@ const getServicesList = async ({ parentId, rootId, ...rest }) => {
 	}
 };
 
-const getService = async ({ itemId: id }) => {
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'code',
@@ -76,10 +90,10 @@ const getService = async ({ itemId: id }) => {
 		'root_id',
 	];
 
-	const itemResponseHandler = (item) => item.service;
+	const itemResponseHandler = (item: ApiParams) => item.service;
 
 	try {
-		const response = await getServices().locateService(id, {
+		const response = await getServices().locateService(String(id), {
 			fields: fieldsToSend,
 		});
 		return applyTransform(response.data, [
@@ -93,8 +107,14 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = ({ rootId, catalogId }) => {
-	return (item) => ({
+const preRequestHandler = ({
+	rootId,
+	catalogId,
+}: {
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
+	return (item: ApiParams) => ({
 		...item,
 		assignee:
 			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
@@ -103,7 +123,15 @@ const preRequestHandler = ({ rootId, catalogId }) => {
 	});
 };
 
-const addService = async ({ itemInstance, rootId, catalogId }) => {
+const addService = async ({
+	itemInstance,
+	rootId,
+	catalogId,
+}: {
+	itemInstance: ApiParams;
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
 
 	const item = applyTransform(itemInstance, [
@@ -132,6 +160,11 @@ const updateService = async ({
 	itemId: id,
 	rootId,
 	catalogId,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
 
@@ -145,7 +178,7 @@ const updateService = async ({
 	]);
 
 	try {
-		const response = await getServices().updateService(id, item);
+		const response = await getServices().updateService(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -156,7 +189,7 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }) => {
+const patchService = async ({ changes, id }: PatchItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateService2Body);
 
 	const body = applyTransform(changes, [
@@ -164,7 +197,7 @@ const patchService = async ({ changes, id }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getServices().updateService2(id, body);
+		const response = await getServices().updateService2(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -175,9 +208,11 @@ const patchService = async ({ changes, id }) => {
 	}
 };
 
-const deleteService = async ({ id }) => {
+const deleteService = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getServices().deleteService(id);
+		const response = await getServices().deleteService([
+			String(id),
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -186,7 +221,9 @@ const deleteService = async ({ id }) => {
 	}
 };
 
-const getServicesLookup = async (params) =>
+const getServicesLookup = async (
+	params: Parameters<typeof getServicesList>[0],
+) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

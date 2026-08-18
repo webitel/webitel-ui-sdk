@@ -32,13 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
-
-import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
+import { useVidstackPlayerSize } from '../../composables/useVidstackPlayerSize';
 import { PlaybackControlsPanel } from '../index';
 import VideoDisplayPanel from '../panels/video-display-panel/video-display-panel.vue';
 
-const { size } = inject<WtVidstackPlayerSizeProvider>('size');
+const { size } = useVidstackPlayerSize();
 
 const props = defineProps<{
 	title?: string;

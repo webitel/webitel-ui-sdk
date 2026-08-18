@@ -1,7 +1,9 @@
+import type { Ref } from 'vue';
+
 // primevue's galleria doesn't support hiding on mask click so there is a custom solution
-export const useGalleriaMaskClick = (visible) => {
-	const onMaskClick = ({ target }) => {
-		if (target.classList.contains('p-galleria-mask')) {
+export const useGalleriaMaskClick = (visible: Ref<boolean>) => {
+	const onMaskClick = ({ target }: Event) => {
+		if ((target as HTMLElement)?.classList.contains('p-galleria-mask')) {
 			visible.value = false;
 		}
 	};

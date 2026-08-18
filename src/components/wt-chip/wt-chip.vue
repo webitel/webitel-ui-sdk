@@ -1,10 +1,17 @@
 <template>
   <p-chip
-	class="wt-chip typo-body-2"
-    :class="`p-chip-${color}`"
+    class="wt-chip typo-body-2"
+    :class="[
+      `p-chip-${color}`,
+      {
+        'p-chip--width-constrained': constrainedByWidth
+      }
+    ]"
     :removable="removable"
   >
-    <slot />
+    <div class="wt-chip__label">
+      <slot />
+    </div>
     <template #removeicon>
       <wt-icon-btn
 				class="wt-chip__close-icon" 
@@ -36,15 +43,19 @@ interface WtProps extends ChipProps {
 	 * @default false
 	 */
 	removable?: boolean;
+	constrainedByWidth?: boolean;
 }
 
 withDefaults(defineProps<WtProps>(), {
 	color: ChipColor.MAIN,
 	removable: false,
+	constrainedByWidth: false,
 });
 
 const emit = defineEmits<{
-	remove: [];
+	remove: [
+		event: MouseEvent,
+	];
 }>();
 </script>
 

@@ -61,7 +61,7 @@ export const getDefaultsFromZodSchema = (
 		schema
 			/* zod validates passed value and throws err before returning defaults,
         so we should skip error throwing and return value instead */
-			.catch(({ value: validatedValue }) => validatedValue)
+			.catch(({ value: validatedValue }: { value: unknown }) => validatedValue)
 			.parse(value)
 	);
 };

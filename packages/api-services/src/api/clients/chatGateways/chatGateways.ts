@@ -17,6 +17,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 import { webChatGateway } from './defaults/webChatGateway';
 
 const instance = getDefaultInstance();
@@ -32,12 +40,12 @@ const fieldsToSend = [
 	'updates',
 ];
 
-const convertWebchatSeconds = (num) => `${num}s`;
+const convertWebchatSeconds = (num: number) => `${num}s`;
 
-const parseTimeoutSeconds = (item) =>
+const parseTimeoutSeconds = (item: ApiParams) =>
 	item.includes('s') ? Number.parseInt(item.replace('/s', '/'), 10) : +item;
 
-const webchatRequestConverter = (data) => {
+const webchatRequestConverter = (data: ApiParams) => {
 	const copy = deepCopy(data);
 	if (data.metadata.readTimeout) {
 		copy.metadata.readTimeout = convertWebchatSeconds(
@@ -75,14 +83,14 @@ const webchatRequestConverter = (data) => {
 	return copy;
 };
 
-const messengerRequestConverter = (data) => {
+const messengerRequestConverter = (data: ApiParams) => {
 	const copy = deepCopy(data);
 	copy.metadata.instagramComments = data.metadata.instagramComments.toString();
 	copy.metadata.instagramMentions = data.metadata.instagramMentions.toString();
 	return copy;
 };
 
-const viberRequestConverter = (item) => {
+const viberRequestConverter = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	copy.metadata['btn.back.color'] = item.metadata.btnBackColor;
 	copy.metadata.btnBackColor = undefined;
@@ -91,7 +99,7 @@ const viberRequestConverter = (item) => {
 	return copy;
 };
 
-const webChatResponseConverter = (data) => {
+const webChatResponseConverter = (data: ApiParams) => {
 	const copy = deepCopy(data);
 	copy.metadata.allowOrigin = data.metadata.allowOrigin
 		? data.metadata.allowOrigin.split(',')
@@ -134,14 +142,14 @@ const webChatResponseConverter = (data) => {
 	return deepmerge(webChatGateway(), copy);
 };
 
-const messengerResponseConverter = (item) => {
+const messengerResponseConverter = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	copy.metadata.instagramComments = item.metadata.instagramComments === 'true';
 	copy.metadata.instagramMentions = item.metadata.instagramMentions === 'true';
 	return copy;
 };
 
-const viberResponseConverter = (item) => {
+const viberResponseConverter = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	if (item.metadata['btn.back.color'])
 		copy.metadata.btnBackColor = item.metadata['btn.back.color'];
@@ -150,7 +158,7 @@ const viberResponseConverter = (item) => {
 	return copy;
 };
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	switch (item.provider) {
 		case ChatGatewayProvider.WEBCHAT:
 			return webchatRequestConverter(item);
@@ -163,7 +171,7 @@ const preRequestHandler = (item) => {
 	}
 };
 
-const getChatGatewayList = async (params) => {
+const getChatGatewayList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -220,8 +228,8 @@ const getChatGatewayList = async (params) => {
 	}
 };
 
-const getChatGateway = async ({ itemId: id }) => {
-	const itemResponseHandler = (response) => {
+const getChatGateway = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (response: ApiParams) => {
 		switch (response.provider) {
 			case ChatGatewayProvider.WEBCHAT:
 				return webChatResponseConverter(response);
@@ -249,7 +257,7 @@ const getChatGateway = async ({ itemId: id }) => {
 	}
 };
 
-const addChatGateway = async ({ itemInstance }) => {
+const addChatGateway = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -267,7 +275,10 @@ const addChatGateway = async ({ itemInstance }) => {
 	}
 };
 
-const updateChatGateway = async ({ itemInstance, itemId: id }) => {
+const updateChatGateway = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -287,7 +298,7 @@ const updateChatGateway = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchChatGateway = async ({ changes, id }) => {
+const patchChatGateway = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -305,7 +316,7 @@ const patchChatGateway = async ({ changes, id }) => {
 	}
 };
 
-const deleteChatGateway = async ({ id }) => {
+const deleteChatGateway = async ({ id }: DeleteItemParams) => {
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.delete(url);
@@ -317,7 +328,7 @@ const deleteChatGateway = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getChatGatewayList>[0]) =>
 	getChatGatewayList({
 		...params,
 		fields: params.fields || [

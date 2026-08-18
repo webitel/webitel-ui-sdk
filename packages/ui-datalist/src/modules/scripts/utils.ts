@@ -10,9 +10,11 @@ export const applyStorePatch = <StoreBody extends StoreInstance>(
 	store: StoreBody | Store,
 	patch: Patch,
 ) => {
-	for (const key of Object.keys(patch)) {
-		const value = patch[key];
-		const target = store[key];
+	const patchEntries = patch as Record<string, unknown>;
+
+	for (const key of Object.keys(patchEntries)) {
+		const value = patchEntries[key];
+		const target = (store as Record<string, unknown>)[key];
 
 		if (isRef(target)) {
 			(target as Ref<unknown>).value = isRef(value) ? unref(value) : value;

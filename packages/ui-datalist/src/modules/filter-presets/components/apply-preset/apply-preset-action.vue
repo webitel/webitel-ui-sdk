@@ -81,6 +81,7 @@ import {
 import { useEventBus } from '@webitel/ui-sdk/composables';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
+import type { AxiosError } from 'axios';
 import { type StoreGeneric, storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -88,6 +89,7 @@ import { EnginePresetQuery } from 'webitel-sdk';
 
 import { AnyFilterConfig } from '../../../filters/modules/filterConfig/classes/FilterConfig';
 import PresetQueryAPI from '../../api/PresetQuery';
+import type { PresetSnapshot } from '../../types/PresetSnapshot';
 import PresetPreview from './preset-preview.vue';
 
 const props = defineProps<{
@@ -97,10 +99,25 @@ const props = defineProps<{
 	namespace: string;
 	presetsStore: StoreGeneric;
 	filterConfigs: AnyFilterConfig[];
+	/**
+	 * @description
+	 * Filters the user has applied themselves. A cached preset is not restored
+	 * over them – the filters they arrived with win.
+	 */
+	hasAnyFilters?: boolean;
 }>();
 
 const emit = defineEmits<{
+	/**
+	 * user picked a preset in the popup – consumer resets filters first
+	 */
 	apply: [
+		string,
+	];
+	/**
+	 * cached preset re-applied on mount – consumer MUST NOT reset filters
+	 */
+	restore: [
 		string,
 	];
 }>();
@@ -206,14 +223,22 @@ const applySelectedPreset = () => {
 	showPresetsList.value = false;
 };
 
-const updatePreset = async ({ preset, onSuccess, onFailure }) => {
+const updatePreset = async ({
+	preset,
+	onSuccess,
+	onFailure,
+}: {
+	preset: EnginePresetQuery;
+	onSuccess: () => void;
+	onFailure: (err: AxiosError) => void;
+}) => {
 	try {
 		await PresetQueryAPI.update({
 			item: {
 				...preset,
 			},
-			id: preset.id,
-			namespace: preset.preset?.namespace,
+			id: Number(preset.id),
+			namespace: (preset.preset as PresetSnapshot | undefined)?.namespace ?? '',
 		});
 		eventBus?.$emit('notification', {
 			type: 'success',
@@ -224,7 +249,7 @@ const updatePreset = async ({ preset, onSuccess, onFailure }) => {
 		onSuccess();
 		return loadDataList();
 	} catch (err) {
-		onFailure(err);
+		onFailure(err as AxiosError);
 		throw err;
 	}
 };
@@ -233,7 +258,7 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 	await deleteEls([
 		preset,
 	]);
-	eventBus.$emit('notification', {
+	eventBus?.$emit('notification', {
 		type: 'success',
 		text: t('systemNotifications.success.delete', {
 			entity: t('webitelUI.filters.presets.preset'),
@@ -243,12 +268,19 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 
 const restorePresetById = async (id: number | null) => {
 	if (!id) return;
+	/* cheap exit – skips the request entirely */
+	if (props.hasAnyFilters) return;
+
 	const presetData = await PresetQueryAPI.get({
 		id,
 	});
 	const filters = presetData?.preset?.['filtersManager.toString'];
 
-	if (filters) emit('apply', filters);
+	/* filters may have been restored from the route while the preset was being
+	   fetched, so re-check before overriding them */
+	if (props.hasAnyFilters) return;
+
+	if (filters) emit('restore', filters);
 };
 
 onMounted(async () => {

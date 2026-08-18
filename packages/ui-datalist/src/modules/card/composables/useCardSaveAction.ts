@@ -8,6 +8,8 @@ export const useCardSaveAction = <CardEntity>({
 	saveItem: (data: CardEntity) => Promise<unknown /* coz doesnt matter */>;
 }) => {
 	const save = async () => {
+		if (!validate) return;
+
 		const { valid, data } = await validate();
 		if (!valid) return;
 

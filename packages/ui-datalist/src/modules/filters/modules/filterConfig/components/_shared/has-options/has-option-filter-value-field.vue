@@ -28,7 +28,7 @@ const attrs = useAttrs();
 const { t } = useI18n();
 
 const labelValue = computed(() =>
-	props?.hideLabel ? null : t('webitelUI.filters.filterValue'),
+	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),
 );
 
 const strModel = computed({

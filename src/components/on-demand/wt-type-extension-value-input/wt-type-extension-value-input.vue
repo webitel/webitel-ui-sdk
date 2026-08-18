@@ -81,9 +81,13 @@ import {
 } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { WebitelProtoDataField } from 'webitel-sdk';
+import type {
+	WebitelProtoDataField,
+	WebitelProtoDataTypeLookup,
+} from 'webitel-sdk';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
+import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 
 const model = defineModel<unknown>();
 
@@ -94,10 +98,16 @@ const props = defineProps<{
 	/**
 	 * TODO: implement validation
 	 */
-	v?: object;
+	v?: VuelidateFieldLike;
 }>();
 
-props.v?.$touch();
+(
+	props.v as
+		| {
+				$touch?: () => void;
+		  }
+		| undefined
+)?.$touch?.();
 
 const { t } = useI18n();
 
@@ -109,7 +119,8 @@ const isRequired = computed(() => {
 	return props.required ?? props.field.required;
 });
 
-const value = computed(() => {
+// biome-ignore lint/suspicious/noExplicitAny: the value type follows `field.kind` at runtime
+const value = computed<any>(() => {
 	return model.value;
 });
 
@@ -128,20 +139,29 @@ const sharedChildrenProps = computed(() => ({
 const selectProps = computed(() => ({
 	clearable: true,
 	dataKey: 'id',
-	searchMethod: () => loadLookupList(props.field.lookup),
+	searchMethod: loadLookupList(props.field.lookup),
 }));
 
 const multiselectProps = computed(() => ({
 	...selectProps.value,
 }));
 
-const setValue = (value) => {
+interface LookupOption {
+	id?: string;
+	name?: string;
+}
+
+const setValue = (value: unknown) => {
 	model.value = value;
 };
 
-const loadLookupList = ({ path, display, primary }) => {
-	return (params) => {
-		return SysTypesAPI.getSysTypeRecordsLookup({
+const loadLookupList = ({
+	path = '',
+	display = '',
+	primary = '',
+}: WebitelProtoDataTypeLookup = {}) => {
+	return (params: Record<string, unknown>) => {
+		return SysTypesAPI.getLookup({
 			...params,
 			path,
 			display,
@@ -150,20 +170,21 @@ const loadLookupList = ({ path, display, primary }) => {
 	};
 };
 
-const selectElement = (value) => {
-	if (Object.values(value).length === 0) {
+const selectElement = (value: unknown) => {
+	const option = (value ?? {}) as LookupOption;
+	if (Object.values(option).length === 0) {
 		return setValue(null);
 	}
 
 	setValue({
-		id: value.id,
-		name: value.name,
+		id: option.id,
+		name: option.name,
 	});
 };
 
-const selectElements = (value) => {
+const selectElements = (value: unknown) => {
 	setValue(
-		value.map((item) => ({
+		(value as LookupOption[]).map((item) => ({
 			id: item.id,
 			name: item.name,
 		})),

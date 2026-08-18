@@ -1,6 +1,10 @@
-import { ref, watch } from 'vue';
+import { type Ref, ref, watch } from 'vue';
 
-export const useCardAnyFieldEditedWatcher = ({ value }) => {
+export const useCardAnyFieldEditedWatcher = ({
+	value,
+}: {
+	value: Ref<object>;
+}) => {
 	const isAnyFieldEdited = ref(false);
 
 	let prevValue: object;
