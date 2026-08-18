@@ -112,6 +112,7 @@ function openPauseCausePopup() {
 
 function closePauseCausePopup() {
 	isPauseCausePopup.value = false;
+	chosenStatus.value = '';
 }
 
 async function loadPauseCauses(): Promise<void> {
@@ -128,6 +129,7 @@ function openActivityTypePopup() {
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
 	callCenterModeChanging.value = false;
+	chosenStatus.value = '';
 }
 
 async function loadActivityTypes(): Promise<void> {
