@@ -5,6 +5,7 @@ import type { WebitelProtoDataField } from 'webitel-sdk';
 import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
+	FilterConfigSearchRequestParams,
 	IWtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
 import { FilterConfig } from '../../classes/FilterConfig';
@@ -46,7 +47,7 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 	implements IWtSysTypeFilterConfig
 {
 	async searchRecords(
-		{ id: filterValue, ...rest },
+		{ id: filterValue, ...rest }: FilterConfigSearchRequestParams,
 		// {
 		//   filterValue,
 		// }: {
@@ -56,9 +57,12 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 		items: unknown[];
 		next?: boolean;
 	}> {
+		const { display = '', path = '', primary = '' } = this.field.lookup ?? {};
 		const { items, ...restResponse } = await sysTypes.getLookup({
 			...rest,
-			...this.field.lookup,
+			display,
+			path,
+			primary,
 			id: filterValue,
 		});
 
@@ -76,9 +80,9 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 		 * objects=[{ name: { common_name: 'str' } }]
 		 */
 		return {
-			items: items.map((item) => ({
+			items: items.map((item: Record<string, unknown>) => ({
 				...item,
-				name: get(item, this.field.lookup.display),
+				name: get(item, display),
 			})),
 			...restResponse,
 		};

@@ -4,7 +4,7 @@ const downloadFile = ({
 	response,
 	fileFormat,
 	filename,
-	mimetype = null,
+	mimetype = undefined,
 }: DownloadFileOptions) => {
 	const blob = new Blob(
 		[

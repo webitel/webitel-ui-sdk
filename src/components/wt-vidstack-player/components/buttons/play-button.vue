@@ -25,11 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
-
-import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
-
-const { size } = inject<WtVidstackPlayerSizeProvider>('size');
+const { size } = useVidstackPlayerSize();
 </script>
 
 <style scoped>.play-button {

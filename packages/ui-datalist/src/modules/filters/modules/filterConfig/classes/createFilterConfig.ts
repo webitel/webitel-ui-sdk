@@ -16,7 +16,10 @@ export const createFilterConfig = (
 ): BaseFilterConfig => {
 	const { name } = params;
 
-	const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
+	const filterConfigClass =
+		FilterOptionToFilterConfigCreatorMap[
+			name as keyof typeof FilterOptionToFilterConfigCreatorMap
+		];
 
 	if (filterConfigClass) {
 		return filterConfigClass(params);

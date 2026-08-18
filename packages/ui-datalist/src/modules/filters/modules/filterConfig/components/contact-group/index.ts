@@ -57,8 +57,11 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 	}
 }
 
-export const createContactGroupFilterConfig = (params) =>
-	new ContactGroupFilterConfig(params);
+export const createContactGroupFilterConfig = (
+	params?: FilterConfigBaseParams & {
+		hideUnassigned?: boolean;
+	},
+) => new ContactGroupFilterConfig(params);
 
 export interface IContactGroupFilterConfig extends IWtSysTypeFilterConfig {
 	hideUnassigned?: boolean;

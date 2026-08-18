@@ -14,10 +14,11 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiId, ApiParams, PatchItemParams } from './types';
 
 const permissionsUrl = 'acl';
 
-const handlePermissionsList = (items) => {
+const handlePermissionsList = (items: ApiParams[]) => {
 	return items.map((item) => ({
 		...item,
 		access: {
@@ -41,10 +42,15 @@ const handlePermissionsList = (items) => {
 	}));
 };
 
-export const generatePermissionsApi = (baseUrl) => {
+export const generatePermissionsApi = (baseUrl: string) => {
 	const instance = getDefaultInstance();
 
-	const getList = async ({ parentId, ...params }) => {
+	const getList = async ({
+		parentId,
+		...params
+	}: {
+		parentId: ApiId;
+	} & ApiParams) => {
 		const fieldsToSend = [
 			'page',
 			'size',
@@ -89,7 +95,7 @@ export const generatePermissionsApi = (baseUrl) => {
 		}
 	};
 
-	const patch = async ({ changes, id }) => {
+	const patch = async ({ changes, id }: PatchItemParams) => {
 		const body = applyTransform(changes, [
 			camelToSnake(),
 		]);

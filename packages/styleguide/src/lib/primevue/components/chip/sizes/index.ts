@@ -1,4 +1,5 @@
 const sizes = {
+	maxWidth: '150px',
 	borderRadius: '16px',
 	paddingX: '0.5rem',
 	paddingY: '0.25rem',

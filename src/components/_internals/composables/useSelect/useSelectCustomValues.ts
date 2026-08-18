@@ -1,4 +1,5 @@
 import { nextTick } from 'vue';
+import type { UseSelectCustomValuesParams } from './types';
 import { isOptionSelected, toArray } from './useSelectUtils';
 
 export const useSelectCustomValues = ({
@@ -12,7 +13,7 @@ export const useSelectCustomValues = ({
 	selectRef,
 	allowCustomValues,
 	isSingle,
-}) => {
+}: UseSelectCustomValuesParams) => {
 	const makeCustomOption = (text: string) => {
 		const sample = options.value.length
 			? options.value[0]
@@ -67,7 +68,7 @@ export const useSelectCustomValues = ({
 		}
 
 		if (isSingle) {
-			selectRef.value?.hide();
+			selectRef.value?.hide?.();
 			selected.value = customOption;
 		} else {
 			// redefine selected value instead of pushing element is for max-selected-labels prop correct work

@@ -24,7 +24,7 @@
     @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
-    @row-reorder="({ dragIndex, dropIndex }) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
+    @row-reorder="onRowReorder"
   >
     <p-column
       v-if="rowExpansion"
@@ -230,7 +230,7 @@ import {
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useTableColumnDrag } from '../_internals/composables';
-import type { WtTableHeader } from './types/WtTable';
+import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
 const DEFAULT_ITEM_SIZE = 40;
 
@@ -242,7 +242,7 @@ interface Props extends DataTableProps {
 	/**
 	 * 'List of data, represented by table. '
 	 */
-	data?: Array<unknown>;
+	data?: WtTableRow[];
 	/**
 	 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
 	 */
@@ -281,7 +281,7 @@ interface Props extends DataTableProps {
 	/**
 	 * 'If true, restrict sprecific row reorder.'
 	 */
-	isRowReorderDisabled?: (row) => boolean;
+	isRowReorderDisabled?: (row: WtTableRow) => boolean;
 	rowExpansion?: boolean;
 	rowClass?: () => string;
 	rowStyle?: () => {
@@ -331,9 +331,21 @@ const emit = defineEmits([
 	'column-reorder',
 ]);
 
+const onRowReorder = ({
+	dragIndex,
+	dropIndex,
+}: {
+	dragIndex: number;
+	dropIndex: number;
+}) =>
+	emit('reorder:row', {
+		oldIndex: dragIndex,
+		newIndex: dropIndex,
+	});
+
 const table = useTemplateRef('table');
 const tableKey = ref(0);
-const expandedRows = ref([]);
+const expandedRows = ref<WtTableRow[]>([]);
 
 const { addTableDragListener, removeTableDragListener } = useTableColumnDrag(
 	table,
@@ -351,7 +363,8 @@ const excludeColumnsFromReorder = [
 const _selected = computed(() => {
 	// _isSelected for backwards compatibility
 	return props.selectable
-		? props.selected || props.data.filter((item) => item._isSelected)
+		? props.selected ||
+				props.data.filter((item: WtTableRow) => item._isSelected)
 		: [];
 });
 
@@ -363,17 +376,21 @@ const dataHeaders = computed(() => {
 				text:
 					typeof header.locale === 'string'
 						? t(header.locale)
-						: t(...header.locale),
+						: t(
+								...(header.locale as [
+									string,
+								]),
+							),
 			};
 		return header;
 	});
 });
 
-const isColumnHidden = (col) => {
+const isColumnHidden = (col: WtTableHeader) => {
 	return col.show === false;
 };
 
-const columnStyle = (col) => {
+const columnStyle = (col: WtTableHeader) => {
 	const baseWidth = 140;
 
 	return {
@@ -405,14 +422,14 @@ const sortField = computed(() => {
 	return sortedCol?.field ?? null;
 });
 
-const sort = ({ sortField }) => {
+const sort = ({ sortField }: { sortField: string }) => {
 	const col = dataHeaders.value.find((header) => header.field === sortField);
-	if (!isColSortable(col)) return;
+	if (!col || !isColSortable(col)) return;
 	const nextSort = getNextSortOrder(col.sort);
 	emit('sort', col, nextSort);
 };
 
-const isColSortable = ({ sort }) => {
+const isColSortable = ({ sort }: Pick<WtTableHeader, 'sort'>) => {
 	/*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
             strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
             so we need to check if this property is present
@@ -437,18 +454,18 @@ const selectAll = () => {
 		// Because allSelected recomputes after each change
 
 		if (isAllSelected.value) {
-			props.data.forEach((item) => {
+			props.data.forEach((item: WtTableRow) => {
 				item._isSelected = false;
 			});
 		} else {
-			props.data.forEach((item) => {
+			props.data.forEach((item: WtTableRow) => {
 				item._isSelected = true;
 			});
 		}
 	}
 };
 
-const handleSelection = (row, select) => {
+const handleSelection = (row: WtTableRow, select: boolean) => {
 	if (props.selected) {
 		if (select) {
 			emit('update:selected', [
@@ -467,7 +484,7 @@ const handleSelection = (row, select) => {
 	}
 };
 
-const columnResize = ({ element }) => {
+const columnResize = ({ element }: { element: HTMLElement }) => {
 	// getting column name by custom attribute due Primevue does not provide it
 	const field = element.getAttribute('data-column-field');
 
@@ -484,27 +501,29 @@ const columnResize = ({ element }) => {
 };
 
 const columnReorder = () => {
-	const containerEl = table.value.$el.querySelector(
+	const containerEl = table.value?.$el?.querySelector(
 		'.p-datatable-table-container',
 	);
-	const containerElScrollLeft = containerEl.scrollLeft;
-	const newOrder = table.value.d_columnOrder.filter(
-		(col) => !excludeColumnsFromReorder.includes(col),
+	const containerElScrollLeft = containerEl?.scrollLeft;
+	const newOrder = table.value?.d_columnOrder.filter(
+		(col: string) => !excludeColumnsFromReorder.includes(col),
 	);
 	tableKey.value += 1;
 	emit('column-reorder', newOrder);
 	nextTick(() => {
 		addTableDragListener();
-		table.value.$el.querySelector('.p-datatable-table-container').scrollLeft =
-			containerElScrollLeft;
+		const container = table.value?.$el?.querySelector(
+			'.p-datatable-table-container',
+		);
+		if (container) container.scrollLeft = containerElScrollLeft;
 	});
 };
 
-const isRowExpanded = (row) => {
+const isRowExpanded = (row: WtTableRow) => {
 	return expandedRows.value.some((r) => r?.id === row?.id);
 };
 
-const toggleRow = (row) => {
+const toggleRow = (row: WtTableRow) => {
 	const index = expandedRows.value.findIndex((r) => r.id === row.id);
 	if (index !== -1) {
 		expandedRows.value.splice(index, 1);

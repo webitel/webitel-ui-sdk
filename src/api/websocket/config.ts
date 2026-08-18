@@ -1,7 +1,9 @@
-export const getConfig = () => {
-	let cliConfig = {};
+import type { Config } from 'webitel-sdk';
+
+export const getConfig = (): Partial<Config> => {
+	let cliConfig: Partial<Config> = {};
 	try {
-		const CONFIG = JSON.parse(localStorage.getItem('CONFIG'));
+		const CONFIG = JSON.parse(localStorage.getItem('CONFIG') as string);
 		cliConfig = CONFIG.CLI || {};
 	} catch {}
 	return cliConfig;

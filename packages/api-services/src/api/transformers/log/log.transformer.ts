@@ -1,4 +1,4 @@
-const logTransformer = (arg) => {
+const logTransformer = <T>(arg: T): T => {
 	console.log(arg);
 	return arg;
 };

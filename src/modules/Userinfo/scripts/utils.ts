@@ -1,4 +1,4 @@
-import type { CrudAction, WtObject } from '../../../enums';
+import type { CrudAction, WtApplication, WtObject } from '../../../enums';
 import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import {
 	mapGlobalActionToCrudAction,
@@ -128,11 +128,15 @@ export const makeLicenseAccessMap = (
 };
 
 export const castUiSectionToWtObject = (section: UiSection): WtObject => {
-	return mapUiSectionToWtObject[section];
+	// `mapUiSectionToWtObject` is a lodash `invert()` result, so it is untyped
+	return mapUiSectionToWtObject[section] as unknown as WtObject;
 };
 
-export const castWtObjectToUiSection = (object: WtObject): UiSection => {
-	return mapWtObjectToUiSection[object];
+export const castWtObjectToUiSection = (
+	app: WtApplication,
+	object: WtObject,
+): UiSection | undefined => {
+	return mapWtObjectToUiSection[app]?.[object];
 };
 
 export const shouldUseGlobalSpecialActionAccessAsChecksSource = (

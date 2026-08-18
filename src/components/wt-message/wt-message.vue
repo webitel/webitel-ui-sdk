@@ -32,7 +32,7 @@ withDefaults(defineProps<WtMessageProps>(), {
 	size: ComponentSize.MD,
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.MD]: 'normal',
 	[ComponentSize.LG]: 'large',
