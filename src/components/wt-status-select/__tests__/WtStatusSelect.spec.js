@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum.js';
+import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
 import WtSingleSelect from '../../wt-single-select/wt-single-select.vue';
 import WtStatusSelect from '../wt-status-select.vue';
 
