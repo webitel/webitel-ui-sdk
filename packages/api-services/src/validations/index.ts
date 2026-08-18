@@ -1,3 +1,4 @@
+export * from './_shared/duration.validations';
 export * from './_shared/lookup.validations';
 export * from './auditForm/auditForm.validations';
 export * from './bucket/bucket.validations';
@@ -10,4 +11,6 @@ export * from './contactGroup/contactGroup.validations';
 export * from './contactGroupCondition/contactGroupCondition.validations';
 export * from './OAuth/OAuth.validations';
 export * from './onlineSkill/onlineSkill.validations';
+export * from './sla/sla.validations';
+export * from './slaCondition/slaCondition.validations';
 export * from './types';

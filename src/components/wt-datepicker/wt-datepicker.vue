@@ -55,7 +55,7 @@
     >
 			<template #buttonbar="{ todayCallback, clearCallback }">
 				<div class="wt-datepicker__button-bar">
-					<wt-button 
+					<wt-button
 						:color="ButtonColor.SECONDARY"
 						:variant="ButtonVariant.OUTLINED"
 						:size="ComponentSize.SM"
@@ -63,7 +63,7 @@
 					>
 						{{ t('reusable.today') }}
 					</wt-button>
-					<wt-button 
+					<wt-button
 						v-show="clearable && modelValue"
 						:color="ButtonColor.SECONDARY"
 						:variant="ButtonVariant.OUTLINED"
@@ -76,14 +76,14 @@
 			</template>
 
 			<template #prevbutton="{ actionCallback }">
-				<wt-icon-btn 
+				<wt-icon-btn
 					icon="arrow-left"
 					@click="actionCallback"
 				/>
 			</template>
 
 			<template #nextbutton="{ actionCallback }">
-				<wt-icon-btn 
+				<wt-icon-btn
 					icon="arrow-right"
 					@click="actionCallback"
 				/>
@@ -133,6 +133,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import PDatepicker, {
 	DatePickerEmitsOptions,
@@ -167,6 +168,7 @@ interface Props extends DatePickerProps {
 	timezone?: string;
 	v?: VuelidateFieldLike;
 	customValidators?: CompatCustomValidator[];
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -257,12 +259,13 @@ const requiredLabel = computed(() => {
 });
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-const { v, customValidators } = toRefs(props);
+const { v, customValidators, regleValidation } = toRefs(props);
 
 const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
 		v,
 		customValidators,
+		regleValidation,
 	});
 </script>
 
